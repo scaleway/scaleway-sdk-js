@@ -1,0 +1,83 @@
+name: CI
+
+on: push
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3.0.2
+    - uses: pnpm/action-setup@v2.2.2
+    - name: Use Node.js
+      uses: actions/setup-node@v3.3.0
+      with:
+        node-version: 17
+        check-latest: true
+        cache: 'pnpm'
+    - run: pnpm install
+    - run: pnpm run build
+    - run: pnpm tsc --noEmit
+  lint:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3.0.2
+    - uses: pnpm/action-setup@v2.2.2
+    - name: Use Node.js
+      uses: actions/setup-node@v3.3.0
+      with:
+        node-version: 17
+        check-latest: true
+        cache: 'pnpm'
+    - run: pnpm install
+    - run: pnpm run build
+    - run: pnpm run lint
+  test:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node: [ '14', '16', '17' ]
+    steps:
+    - uses: actions/checkout@v3.0.2
+    - uses: pnpm/action-setup@v2.2.2
+    - name: Use Node.js
+      uses: actions/setup-node@v3.3.0
+      with:
+        node-version: ${{ matrix.node }}
+        check-latest: true
+        cache: 'pnpm'
+    - run: pnpm install
+    - run: pnpm run build
+    - run: pnpm run test:coverage
+    - uses: codecov/codecov-action@v3.1.0
+  deploy:
+    runs-on: ubuntu-20.04
+    needs: [test]
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v3.0.2
+      with:
+        fetch-depth: "0"
+        persist-credentials: false
+    - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+    - name: Git Identity
+      run: |
+        git config --global user.name 'Scaleway Bot'
+        git config --global user.email 'github@scaleway.com'
+        git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/$GITHUB_REPOSITORY
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    - uses: pnpm/action-setup@v2.2.2
+    - name: Use Node.js
+      uses: actions/setup-node@v3.3.0
+      with:
+        node-version: 17
+        check-latest: true
+    - run: pnpm install
+    - run: pnpm run build
+    - run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
+      env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - run: pnpm lerna publish -y --create-release github --ignore-scripts --no-verify-access
+      env:
+        HUSKY: 0
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
