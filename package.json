@@ -1,0 +1,113 @@
+{
+  "name": "root",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scaleway/scaleway-sdk-js"
+  },
+  "keywords": [
+    "scaleway",
+    "cloud",
+    "sdk"
+  ],
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=14.13",
+    "pnpm": ">=7.3.0"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "lerna exec --stream -- rollup -c ../../rollup.config.mjs",
+    "build:profile": "cross-env PROFILE=true pnpm run build",
+    "commit": "npx git-cz -a",
+    "doc": "typedoc",
+    "format": "prettier --write '**/*.ts'",
+    "lint": "eslint --cache --ext ts .",
+    "prepare": "husky install",
+    "test:coverage": "pnpm run test --coverage",
+    "test": "jest"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write",
+      "eslint --fix --ext ts"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "packages/*/src/**/*.{ts,tsx}"
+    ],
+    "coverageReporters": [
+      "text",
+      "cobertura"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/examples/",
+      "<rootDir>/dist/",
+      "<rootDir>/packages/clients/src/api/"
+    ],
+    "reporters": [
+      "default",
+      [
+        "jest-junit",
+        {
+          "outputDirectory": ".reports",
+          "outputName": "tests.xml"
+        }
+      ]
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(.*(@scaleway)))"
+    ],
+    "setupFiles": [
+      "./setupTests.ts"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@babel/plugin-transform-runtime": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "@jest/globals": "^28.1.2",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^22.0.1",
+    "@rollup/plugin-inject": "^4.0.4",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@scaleway/eslint-config-react": "^3.4.40",
+    "@types/jest": "^28.1.4",
+    "babel-plugin-annotate-pure-calls": "^0.4.0",
+    "cross-env": "^7.0.3",
+    "cross-fetch": "^3.1.5",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.19.0",
+    "eslint-formatter-gitlab": "^3.0.0",
+    "eslint-plugin-tsdoc": "^0.2.16",
+    "husky": "^8.0.1",
+    "jest": "^28.1.2",
+    "jest-junit": "^13.2.0",
+    "lerna": "^5.1.6",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "read-pkg": "^7.1.0",
+    "rollup": "^2.75.7",
+    "rollup-plugin-dts": "^4.2.2",
+    "rollup-plugin-visualizer": "^5.6.0",
+    "typedoc": "^0.23.5",
+    "typescript": "^4.7.4"
+  },
+  "packageManager": "pnpm@7.3.0"
+}

@@ -1,0 +1,20 @@
+# dependencies
+node_modules/
+yarn.lock
+
+# misc
+.DS_Store
+
+# lint
+.eslintcache
+
+# test & build
+.reports
+docs
+public
+dist
+coverage
+
+# Protobuf definition
+protobuf
+.bufcache
