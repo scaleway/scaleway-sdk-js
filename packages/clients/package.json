@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk",
-  "version": "0.1.0-alpha.21",
+  "version": "0.1.0-beta.0",
   "license": "Apache-2.0",
   "description": "Scaleway SDK.",
   "main": "dist/index.cjs",

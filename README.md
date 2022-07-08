@@ -3,7 +3,7 @@
 This SDK enables you to interact with Scaleway APIs.
 
 **⚠️  Notes:**
-* The project is in alpha, but should be fairly stable.
+* The project is in beta, but should be fairly stable.
 * SDK only works from a node.js runtime, browser calls aren't supported yet.
 
 **🔗  Important links:**
