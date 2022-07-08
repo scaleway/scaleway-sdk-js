@@ -1,4 +1,4 @@
-name: Pull Request
+name: Check Pull Request Title
 on:
   pull_request:
     types: ['opened', 'edited', 'reopened', 'synchronize']
