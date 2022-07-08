@@ -1,0 +1,10 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "name": "Scaleway JS SDK",
+    "entryPoints": ["./packages/clients/src/index.ts", "./packages/configuration-loader/src/index.ts"],
+    "exclude": ["**/examples/**", "**/dist/**"],
+    "out": "docs",
+    "excludeInternal": true,
+    "excludePrivate": true,
+    "excludeProtected": true
+}

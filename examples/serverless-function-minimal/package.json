@@ -1,0 +1,20 @@
+{
+  "name": "scaleway-serverless-function",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@scaleway/configuration-loader": "^0.1.0-alpha",
+    "@scaleway/sdk": "^0.1.0-alpha"
+  },
+  "devDependencies": {
+    "serverless-scaleway-functions": "^0.4.0",
+    "typescript": "^4.7.4"
+  },
+  "description": "Minimal Typescript template to run Scaleway SDK-JS in a Function."
+}

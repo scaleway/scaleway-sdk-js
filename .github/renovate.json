@@ -1,0 +1,82 @@
+{
+  "extends": [
+    ":combinePatchMinorReleases",
+    ":separateMultipleMajorReleases",
+    "group:monorepos",
+    "group:recommended",
+    "helpers:disableTypesNodeMajor"
+  ],
+  "assignees": ["team:devtools"],
+  "assigneesSampleSize": 1,
+  "reviewers": ["team:devtools", "team:console"],
+  "reviewersSampleSize": 2,
+  "updateNotScheduled": true,
+  "lockFileMaintenance": { "enabled": false },
+  "enabledManagers": ["github-actions", "npm"],
+  "prCreation": "not-pending",
+  "prHourlyLimit": 5,
+  "prConcurrentLimit": 10,
+  "automerge": false,
+  "rangeStrategy": "bump",
+  "rebaseWhen": "auto",
+  "dependencyDashboard": true,
+  "packageRules": [
+    {
+      "automerge": false,
+      "matchPackagePatterns": ["^@scaleway/"],
+      "stabilityDays": 0,
+      "matchUpdateTypes": ["major", "minor", "patch"]
+    },
+    {
+      "labels": ["UPDATE-MAJOR"],
+      "stabilityDays": 14,
+      "matchUpdateTypes": ["major"]
+    },
+    {
+      "labels": ["UPDATE-MINOR"],
+      "stabilityDays": 5,
+      "matchUpdateTypes": ["minor"]
+    },
+    {
+      "labels": ["UPDATE-PATCH"],
+      "stabilityDays": 1,
+      "matchUpdateTypes": ["patch"]
+    },
+    {
+      "matchPackagePatterns": [
+        "^@babel/",
+        "^@commitlint/",
+        "^babel-",
+        "cz-conventional-changelog",
+        "eslint",
+        "husky",
+        "jest",
+        "lint-staged"
+      ],
+      "automerge": true,
+      "automergeType": "branch",
+      "semanticCommitScope": "minor-deps",
+      "stabilityDays": 3,
+      "matchUpdateTypes": ["minor"]
+    },
+    {
+      "matchPackagePatterns": [
+        "^@babel/",
+        "^@commitlint/",
+        "^@semantic-release/",
+        "^@types/",
+        "^babel-",
+        "^eslint",
+        "cz-conventional-changelog",
+        "husky",
+        "jest",
+        "lint-staged"
+      ],
+      "automerge": true,
+      "automergeType": "branch",
+      "semanticCommitScope": "patch-deps",
+      "stabilityDays": 1,
+      "matchUpdateTypes": ["patch"]
+    }
+  ]
+}

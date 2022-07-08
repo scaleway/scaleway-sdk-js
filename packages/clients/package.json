@@ -1,0 +1,36 @@
+{
+  "name": "@scaleway/sdk",
+  "version": "0.1.0-beta.0",
+  "license": "Apache-2.0",
+  "description": "Scaleway SDK.",
+  "keywords": [
+    "scaleway",
+    "cloud",
+    "sdk"
+  ],
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scaleway/scaleway-sdk-js",
+    "directory": "packages/clients"
+  },
+  "engines": {
+    "node": ">=14.13"
+  },
+  "type": "module",
+  "dependencies": {
+    "@scaleway/random-name": "^3.0.2",
+    "cross-fetch": "^3.1.5"
+  },
+  "bundledDependencies": [
+    "@scaleway/random-name"
+  ]
+}

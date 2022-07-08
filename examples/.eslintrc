@@ -1,0 +1,6 @@
+{
+  "root": false,
+  "rules": {
+    "no-console": "off",
+  }
+}

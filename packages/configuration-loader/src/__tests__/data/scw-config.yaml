@@ -1,0 +1,10 @@
+dKey1: value1
+dKey2: value2
+#dKey3: value3
+dKey4: value4
+
+profiles:
+  dev:
+    devKey1: value5
+  prod:
+    prodKey1: value6

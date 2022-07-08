@@ -1,0 +1,18 @@
+{
+  "name": "nodejs-minimal",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json",
+    "start": "node ./dist/index"
+  },
+  "dependencies": {
+    "@scaleway/configuration-loader": "^0.1.0-alpha",
+    "@scaleway/sdk": "^0.1.0-alpha"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.45",
+    "typescript": "^4.7.4"
+  }
+}
