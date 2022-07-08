@@ -101,7 +101,7 @@ node -r cross-fetch/polyfill ./script-using-sdk.mjs
 ## Development
 
 This repository is at its early stage and is still in active development.
-If you are looking for a way to contribute please read [CONTRIBUTING.md](../../CONTRIBUTING.md).
+If you are looking for a way to contribute please read [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Reach us
 
