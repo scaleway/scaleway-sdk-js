@@ -1,15 +1,6 @@
 {
   "name": "root",
   "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/scaleway/scaleway-sdk-js"
-  },
-  "keywords": [
-    "scaleway",
-    "cloud",
-    "sdk"
-  ],
   "workspaces": [
     "packages/*"
   ],

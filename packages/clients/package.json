@@ -3,6 +3,11 @@
   "version": "0.1.0-beta.0",
   "license": "Apache-2.0",
   "description": "Scaleway SDK.",
+  "keywords": [
+    "scaleway",
+    "cloud",
+    "sdk"
+  ],
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,6 +19,7 @@
   },
   "repository": {
     "type": "git",
+    "url": "https://github.com/scaleway/scaleway-sdk-js",
     "directory": "packages/clients"
   },
   "engines": {
