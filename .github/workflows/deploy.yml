@@ -20,7 +20,7 @@ jobs:
     - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
     - name: Git Identity
       run: |
-        git config --global user.name 'Scaleway Bot'
+        git config --global user.name 'scaleway-bot'
         git config --global user.email 'github@scaleway.com'
         git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/$GITHUB_REPOSITORY
       env:
