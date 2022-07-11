@@ -500,12 +500,14 @@ export type AddEndpointsRequest = {
 export type DeleteEndpointRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
+  /** UUID of the endpoint you want to delete */
   endpointId: string
 }
 
 export type GetEndpointRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
+  /** UUID of the endpoint you want to get */
   endpointId: string
 }
 

@@ -1433,21 +1433,21 @@ export type UpdatePlacementGroupServersRequest = {
 export type ListIpsRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
+  /** The project ID the IPs are reserved in */
+  project?: string
   /** The organization ID the IPs are reserved in */
   organization?: string
+  /**
+   * Filter IPs with these exact tags (to filter with several tags, use commas
+   * to separate them)
+   */
+  tags?: Array<string>
   /** Filter on the IP address (Works as a LIKE operation on the IP address) */
   name?: string
   /** A positive integer lower or equal to 100 to select the number of items to return */
   perPage?: number
   /** A positive integer to choose the page to return */
   page?: number
-  /** The project ID the IPs are reserved in */
-  project?: string
-  /**
-   * Filter IPs with these exact tags (to filter with several tags, use commas
-   * to separate them)
-   */
-  tags?: Array<string>
 }
 
 export type CreateIpRequest = {

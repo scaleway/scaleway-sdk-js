@@ -167,8 +167,18 @@ export interface DeviceMessageFilters {
   subscribe?: DeviceMessageFiltersRule
 }
 
+/** Device. message filters. rule */
 export interface DeviceMessageFiltersRule {
+  /**
+   * If accept, the set will accept all topics in the topics list, but no other.
+   * If reject, the set will deny all topics in the topics list, but all others
+   * will be allowed.
+   */
   policy: DeviceMessageFiltersRulePolicy
+  /**
+   * List of topics to accept or reject. It must be valid MQTT topics and up to
+   * 65535 characters
+   */
   topics?: Array<string>
 }
 

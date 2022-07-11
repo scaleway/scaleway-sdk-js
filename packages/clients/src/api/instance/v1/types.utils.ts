@@ -54,13 +54,13 @@ export type UpdateSecurityGroupRuleRequest = {
   ipRange?: string
   position?: number
   /**
-   * If set to 0, DestPortFrom will be removed.
-   * See SecurityGroupRule.DestPortFrom for more information
+   * If set to 0, DestPortFrom will be removed. See
+   * SecurityGroupRule.DestPortFrom for more information
    */
   destPortFrom?: number
   /**
-   * If set to 0, DestPortTo will be removed.
-   * See SecurityGroupRule.DestPortTo for more information
+   * If set to 0, DestPortTo will be removed. See SecurityGroupRule.DestPortTo
+   * for more information
    */
   destPortTo?: number
 }

@@ -875,20 +875,47 @@ export type GetBackendRequest = {
 export type UpdateBackendRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
+  /** Backend ID to update */
   backendId: string
+  /** Resource name */
   name: string
+  /** Backend protocol. TCP or HTTP */
   forwardProtocol: Protocol
+  /** User sessions will be forwarded to this port of backend servers */
   forwardPort: number
+  /** Load balancing algorithm */
   forwardPortAlgorithm: ForwardPortAlgorithm
+  /** Enable cookie-based session persistence */
   stickySessions: StickySessionsType
+  /** Cookie name for for sticky sessions */
   stickySessionsCookieName: string
-  /** @deprecated */
+  /** @deprecated Deprecated in favor of proxy_protocol field! */
   sendProxyV2?: boolean
+  /** Maximum server connection inactivity time */
   timeoutServer?: string
+  /** Maximum initial server connection establishment time */
   timeoutConnect?: string
+  /** Maximum tunnel inactivity time */
   timeoutTunnel?: string
+  /** Modify what occurs when a backend server is marked down */
   onMarkedDownAction: OnMarkedDownAction
+  /**
+   * The PROXY protocol informs the other end about the incoming connection, so
+   * that it can know the client's address or the public address it accessed to,
+   * whatever the upper layer protocol is.
+   *
+   * `proxy_protocol_none` Disable proxy protocol. `proxy_protocol_v1` Version
+   * one (text format). `proxy_protocol_v2` Version two (binary format).
+   * `proxy_protocol_v2_ssl` Version two with SSL connection.
+   * `proxy_protocol_v2_ssl_cn` Version two with SSL connection and common name
+   * information.
+   */
   proxyProtocol: ProxyProtocol
+  /**
+   * Only the host part of the Scaleway S3 bucket website is expected. Example:
+   * `failover-website.s3-website.fr-par.scw.cloud` if your bucket website URL
+   * is `https://failover-website.s3-website.fr-par.scw.cloud/`.
+   */
   failoverHost?: string
 }
 
@@ -1642,20 +1669,47 @@ export type ZonedApiGetBackendRequest = {
 export type ZonedApiUpdateBackendRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
+  /** Backend ID to update */
   backendId: string
+  /** Resource name */
   name: string
+  /** Backend protocol. TCP or HTTP */
   forwardProtocol: Protocol
+  /** User sessions will be forwarded to this port of backend servers */
   forwardPort: number
+  /** Load balancing algorithm */
   forwardPortAlgorithm: ForwardPortAlgorithm
+  /** Enable cookie-based session persistence */
   stickySessions: StickySessionsType
+  /** Cookie name for for sticky sessions */
   stickySessionsCookieName: string
-  /** @deprecated */
+  /** @deprecated Deprecated in favor of proxy_protocol field! */
   sendProxyV2?: boolean
+  /** Maximum server connection inactivity time */
   timeoutServer?: string
+  /** Maximum initial server connection establishment time */
   timeoutConnect?: string
+  /** Maximum tunnel inactivity time */
   timeoutTunnel?: string
+  /** Modify what occurs when a backend server is marked down */
   onMarkedDownAction: OnMarkedDownAction
+  /**
+   * The PROXY protocol informs the other end about the incoming connection, so
+   * that it can know the client's address or the public address it accessed to,
+   * whatever the upper layer protocol is.
+   *
+   * `proxy_protocol_none` Disable proxy protocol. `proxy_protocol_v1` Version
+   * one (text format). `proxy_protocol_v2` Version two (binary format).
+   * `proxy_protocol_v2_ssl` Version two with SSL connection.
+   * `proxy_protocol_v2_ssl_cn` Version two with SSL connection and common name
+   * information.
+   */
   proxyProtocol: ProxyProtocol
+  /**
+   * Only the host part of the Scaleway S3 bucket website is expected. Example:
+   * `failover-website.s3-website.fr-par.scw.cloud` if your bucket website URL
+   * is `https://failover-website.s3-website.fr-par.scw.cloud/`.
+   */
   failoverHost?: string
 }
 

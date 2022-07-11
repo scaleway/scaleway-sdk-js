@@ -83,6 +83,7 @@ export interface CPU {
   coreCount: number
   /** Number of threads of the CPU */
   threadCount: number
+  /** Frequency of the CPU in MHz */
   frequency: number
 }
 

@@ -722,7 +722,7 @@ export type CreateClusterRequest = {
    */
   autoscalerConfig?: CreateClusterRequestAutoscalerConfig
   /**
-   * This configuratiom enables to set a speicific 2-hour time window in which
+   * This configuration enables to set a specific 2-hour time window in which
    * the cluster can be automatically updated to the latest patch version in the
    * current minor one.
    */
@@ -774,8 +774,8 @@ export type UpdateClusterRequest = {
   /** @deprecated The new Ingress Controller for the cluster */
   ingress?: Ingress
   /**
-   * The new auo upgrade configuration of the cluster. Note that all the fields
-   * needs to be set.
+   * The new auto upgrade configuration of the cluster. Note that all fields
+   * need to be set.
    */
   autoUpgrade?: UpdateClusterRequestAutoUpgrade
   /** List of feature gates to enable */

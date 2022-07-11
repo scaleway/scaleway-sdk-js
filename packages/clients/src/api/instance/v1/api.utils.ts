@@ -339,7 +339,8 @@ export class InstanceV1UtilsAPI extends InstanceV1GenAPI {
     this._createServer(request)
 
   /**
-   * Starts an action and wait for the server to be in the correct "terminal state" expected by this action.
+   * Starts an action and wait for the server to be in the correct "terminal
+   * state" expected by this action.
    *
    * @param request - The request {@link ServerActionRequest}
    * @returns A Promise of Server
