@@ -26,7 +26,7 @@ importers:
       eslint-plugin-tsdoc: ^0.2.16
       husky: ^8.0.1
       jest: ^28.1.2
-      jest-junit: ^13.2.0
+      jest-junit: ^14.0.0
       lerna: ^5.1.6
       lint-staged: ^13.0.3
       prettier: ^2.7.1
@@ -59,7 +59,7 @@ importers:
       eslint-plugin-tsdoc: 0.2.16
       husky: 8.0.1
       jest: 28.1.2
-      jest-junit: 13.2.0
+      jest-junit: 14.0.0
       lerna: 5.1.8
       lint-staged: 13.0.3
       prettier: 2.7.1
@@ -6124,8 +6124,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /jest-junit/13.2.0:
-    resolution: {integrity: sha512-B0XNlotl1rdsvFZkFfoa19mc634+rrd8E4Sskb92Bb8MmSXeWV9XJGUyctunZS1W410uAxcyYuPUGVnbcOH8cg==}
+  /jest-junit/14.0.0:
+    resolution: {integrity: sha512-kALvBDegstTROfDGXH71UGD7k5g7593Y1wuX1wpWT+QTYcBbmtuGOA8UlAt56zo/B2eMIOcaOVEON3j0VXVa4g==}
     engines: {node: '>=10.12.0'}
     dependencies:
       mkdirp: 1.0.4
