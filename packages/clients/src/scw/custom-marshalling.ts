@@ -92,7 +92,7 @@ export const unmarshalTimeSeriesPoint = (data: unknown) => {
 export const unmarshalTimeSeries = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'ServeTimeSeriesrOption' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'TimeSeries' failed as data isn't a dictionary.`,
     )
   }
 
