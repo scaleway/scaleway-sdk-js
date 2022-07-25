@@ -11,7 +11,9 @@ import type {
 /** Unmarshals {@link Money} */
 export const unmarshalMoney = (data: unknown) => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Expected input isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Money' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -28,7 +30,9 @@ export const unmarshalMoney = (data: unknown) => {
  */
 export const unmarshalServiceInfo = (data: unknown) => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Expected input isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ServiceInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -46,7 +50,9 @@ export const unmarshalServiceInfo = (data: unknown) => {
  */
 export const unmarshalScwFile = (data: unknown) => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Expected input isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ScwFile' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -59,16 +65,22 @@ export const unmarshalScwFile = (data: unknown) => {
 /**
  * Unmarshals {@link TimeSeriesPoint}
  *
+ * @remarks To optimize the size of this message,
+ * the JSON is compressed in an array instead of a dictionary.
+ * Example: `["2019-08-08T15:00:00Z", 0.2]`.
+ *
  * @internal
  */
 export const unmarshalTimeSeriesPoint = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(`Expected input isn't a dictionary.`)
+  if (!Array.isArray(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TimeSeriesPoint' failed as data isn't an array.`,
+    )
   }
 
   return {
-    timestamp: unmarshalDate(data.timestamp),
-    value: data.value,
+    timestamp: unmarshalDate(data[0]),
+    value: data[1] as number,
   } as TimeSeriesPoint
 }
 
@@ -79,7 +91,9 @@ export const unmarshalTimeSeriesPoint = (data: unknown) => {
  */
 export const unmarshalTimeSeries = (data: unknown) => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Expected input isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ServeTimeSeriesrOption' failed as data isn't a dictionary.`,
+    )
   }
 
   return {

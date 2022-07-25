@@ -82,10 +82,7 @@ describe('unmarshalScwFile', () => {
 describe('unmarshalTimeSeriesPoint', () => {
   it('returns the proper object', () => {
     expect(
-      unmarshalTimeSeriesPoint({
-        timestamp: '2019-08-08T15:00:00.000Z',
-        value: 42,
-      }),
+      unmarshalTimeSeriesPoint(['2019-08-08T15:00:00.000Z', 42]),
     ).toStrictEqual({
       timestamp: new Date('2019-08-08T15:00:00.000Z'),
       value: 42,
@@ -105,12 +102,7 @@ describe('unmarshalTimeSeries', () => {
       unmarshalTimeSeries({
         metadata: { mattress: 'cloud' },
         name: 'sleep',
-        points: [
-          {
-            timestamp: '2019-08-08T15:00:00.000Z',
-            value: 8,
-          },
-        ],
+        points: [['2019-08-08T15:00:00.000Z', 8]],
       }),
     ).toStrictEqual({
       metadata: { mattress: 'cloud' },
