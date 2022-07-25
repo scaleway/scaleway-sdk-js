@@ -10,9 +10,11 @@ import type {
   CreateCredentialRequest,
   CreateNamespaceRequest,
   Credential,
+  CredentialAMQPCreds,
   CredentialNATSCredsFile,
   CredentialSQSSNSCreds,
   CredentialSummary,
+  CredentialSummaryAMQPCreds,
   CredentialSummarySQSSNSCreds,
   ListCredentialsResponse,
   ListNamespacesResponse,
@@ -36,6 +38,21 @@ const unmarshalPermissions = (data: unknown) => {
   } as Permissions
 }
 
+const unmarshalCredentialSummaryAMQPCreds = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CredentialSummaryAMQPCreds' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    permissions: data.permissions
+      ? unmarshalPermissions(data.permissions)
+      : undefined,
+    username: data.username,
+  } as CredentialSummaryAMQPCreds
+}
+
 const unmarshalCredentialSummarySQSSNSCreds = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -49,6 +66,22 @@ const unmarshalCredentialSummarySQSSNSCreds = (data: unknown) => {
       ? unmarshalPermissions(data.permissions)
       : undefined,
   } as CredentialSummarySQSSNSCreds
+}
+
+const unmarshalCredentialAMQPCreds = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CredentialAMQPCreds' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    password: data.password,
+    permissions: data.permissions
+      ? unmarshalPermissions(data.permissions)
+      : undefined,
+    username: data.username,
+  } as CredentialAMQPCreds
 }
 
 const unmarshalCredentialNATSCredsFile = (data: unknown) => {
@@ -85,6 +118,9 @@ const unmarshalCredentialSummary = (data: unknown) => {
   }
 
   return {
+    amqpCredentials: data.amqp_credentials
+      ? unmarshalCredentialSummaryAMQPCreds(data.amqp_credentials)
+      : undefined,
     id: data.id,
     name: data.name,
     namespaceId: data.namespace_id,
@@ -120,6 +156,9 @@ export const unmarshalCredential = (data: unknown) => {
   }
 
   return {
+    amqpCredentials: data.amqp_credentials
+      ? unmarshalCredentialAMQPCreds(data.amqp_credentials)
+      : undefined,
     id: data.id,
     name: data.name,
     namespaceId: data.namespace_id,
