@@ -25,14 +25,25 @@ export interface Credential {
   protocol: NamespaceProtocol
   /**
    * One-of ('credentialType'): at most one of 'natsCredentials',
-   * 'sqsSnsCredentials' could be set.
+   * 'sqsSnsCredentials', 'amqpCredentials' could be set.
    */
   natsCredentials?: CredentialNATSCredsFile
   /**
    * One-of ('credentialType'): at most one of 'natsCredentials',
-   * 'sqsSnsCredentials' could be set.
+   * 'sqsSnsCredentials', 'amqpCredentials' could be set.
    */
   sqsSnsCredentials?: CredentialSQSSNSCreds
+  /**
+   * One-of ('credentialType'): at most one of 'natsCredentials',
+   * 'sqsSnsCredentials', 'amqpCredentials' could be set.
+   */
+  amqpCredentials?: CredentialAMQPCreds
+}
+
+export interface CredentialAMQPCreds {
+  username: string
+  password?: string
+  permissions?: Permissions
 }
 
 export interface CredentialNATSCredsFile {
@@ -50,8 +61,21 @@ export interface CredentialSummary {
   name: string
   namespaceId: string
   protocol: NamespaceProtocol
-  /** One-of ('credentialType'): at most one of 'sqsSnsCredentials' could be set. */
+  /**
+   * One-of ('credentialType'): at most one of 'sqsSnsCredentials',
+   * 'amqpCredentials' could be set.
+   */
   sqsSnsCredentials?: CredentialSummarySQSSNSCreds
+  /**
+   * One-of ('credentialType'): at most one of 'sqsSnsCredentials',
+   * 'amqpCredentials' could be set.
+   */
+  amqpCredentials?: CredentialSummaryAMQPCreds
+}
+
+export interface CredentialSummaryAMQPCreds {
+  username: string
+  permissions?: Permissions
 }
 
 export interface CredentialSummarySQSSNSCreds {
