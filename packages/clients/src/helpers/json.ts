@@ -22,6 +22,11 @@ export const isJSON = (obj: unknown): obj is JSON => {
   )
 }
 
+/**
+ * Validates an unknown object is a JSON Object.
+ *
+ * @internal
+ */
 export const isJSONObject = (obj: unknown): obj is JSONObject => {
   const objT: string = typeof obj
 
