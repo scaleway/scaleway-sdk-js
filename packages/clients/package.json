@@ -23,7 +23,7 @@
     "directory": "packages/clients"
   },
   "engines": {
-    "node": ">=14.13"
+    "node": ">=v16.16.0"
   },
   "type": "module",
   "dependencies": {
