@@ -36,7 +36,7 @@ jobs:
     - run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
       env:
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-    - run: pnpm lerna publish -y --create-release github --ignore-scripts --no-verify-access
+    - run: pnpm lerna publish -y --create-release github
       env:
         HUSKY: 0
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
