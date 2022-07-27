@@ -550,6 +550,7 @@ export class K8SV1GenAPI extends API {
    * pods (in a one node cluster for instance), you may experience some
    * disruption of your applications.
    *
+   * @deprecated
    * @param request - The request {@link ReplaceNodeRequest}
    * @returns A Promise of Node
    */
@@ -592,6 +593,14 @@ export class K8SV1GenAPI extends API {
       unmarshalNode,
     )
 
+  /**
+   * This method allows to delete a specific node. Note that when there is not
+   * enough space to reschedule all the pods (in a one node cluster for
+   * instance), you may experience some disruption of your applications.
+   *
+   * @param request - The request {@link DeleteNodeRequest}
+   * @returns A Promise of Node
+   */
   deleteNode = (request: Readonly<DeleteNodeRequest>) =>
     this.client.fetch<Node>(
       {
