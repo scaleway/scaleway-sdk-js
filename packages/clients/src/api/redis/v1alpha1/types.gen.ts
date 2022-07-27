@@ -89,7 +89,7 @@ export interface Cluster {
   projectId: string
   /** Status of the cluster */
   status: ClusterStatus
-  /** Redis version of the cluster */
+  /** Redis™ engine version of the cluster */
   version: string
   /** List of cluster endpoints */
   endpoints: Array<Endpoint>
@@ -135,15 +135,15 @@ export interface ClusterSettingsResponse {
 
 /** Cluster version */
 export interface ClusterVersion {
-  /** Redis version */
+  /** Redis™ engine version */
   version: string
   /** End of life date */
   eolDate?: Date
   /** Cluster settings available to be set */
   availableSettings: Array<AvailableClusterSetting>
-  /** Redis logo url */
+  /** Redis™ logo url */
   logoUrl: string
-  /** Zone of the Redis version */
+  /** Zone of the Managed Database for Redis™ */
   zone: Zone
 }
 
@@ -221,9 +221,9 @@ export interface ListNodeTypesResponse {
 
 /** List versions response */
 export interface ListVersionsResponse {
-  /** List of the available Redis versions */
+  /** List of the available Redis™ engine versions */
   versions: Array<ClusterVersion>
-  /** Total count of Redis versions available */
+  /** Total count of available Redis™ engine versions */
   totalCount: number
 }
 
@@ -272,7 +272,7 @@ export type CreateClusterRequest = {
   projectId?: string
   /** Name of the cluster */
   name?: string
-  /** Redis version of the cluster */
+  /** Redis™ engine version of the cluster */
   version: string
   /** Tags to apply to the cluster */
   tags?: Array<string>
@@ -343,7 +343,7 @@ export type MigrateClusterRequest = {
   /** UUID of the cluster to update */
   clusterId: string
   /**
-   * Redis version of the cluster.
+   * Redis™ engine version of the cluster.
    *
    * One-of ('action'): at most one of 'version', 'nodeType', 'clusterSize' could be set.
    */
@@ -394,13 +394,13 @@ export type ListNodeTypesRequest = {
 export type ListVersionsRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
-  /** Whether or not to include disabled Redis versions */
+  /** Whether or not to include disabled Redis™ engine versions */
   includeDisabled: boolean
-  /** Whether or not to include beta Redis versions */
+  /** Whether or not to include beta Redis™ engine versions */
   includeBeta: boolean
-  /** Whether or not to include deprecated Redis versions */
+  /** Whether or not to include deprecated Redis™ engine versions */
   includeDeprecated: boolean
-  /** List Redis versions that match a given name pattern */
+  /** List Redis™ engine versions that match a given name pattern */
   versionName?: string
   page?: number
   pageSize?: number
