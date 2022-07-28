@@ -33,7 +33,7 @@ importers:
       read-pkg: ^7.1.0
       rollup: ^2.76.0
       rollup-plugin-dts: ^4.2.2
-      rollup-plugin-visualizer: ^5.6.0
+      rollup-plugin-visualizer: ^5.7.1
       typedoc: ^0.23.9
       typescript: ^4.7.4
     devDependencies:
@@ -66,7 +66,7 @@ importers:
       read-pkg: 7.1.0
       rollup: 2.76.0
       rollup-plugin-dts: 4.2.2_sk2p66houzdp4ognhkknlnus3i
-      rollup-plugin-visualizer: 5.6.0_rollup@2.76.0
+      rollup-plugin-visualizer: 5.7.1_rollup@2.76.0
       typedoc: 0.23.9_typescript@4.7.4
       typescript: 4.7.4
 
@@ -8189,9 +8189,9 @@ packages:
       '@babel/code-frame': 7.18.6
     dev: true
 
-  /rollup-plugin-visualizer/5.6.0_rollup@2.76.0:
-    resolution: {integrity: sha512-CKcc8GTUZjC+LsMytU8ocRr/cGZIfMR7+mdy4YnlyetlmIl/dM8BMnOEpD4JPIGt+ZVW7Db9ZtSsbgyeBH3uTA==}
-    engines: {node: '>=12'}
+  /rollup-plugin-visualizer/5.7.1_rollup@2.76.0:
+    resolution: {integrity: sha512-E/IgOMnmXKlc6ICyf53ok1b6DxPeNVUs3R0kYYPuDpGfofT4bkiG+KtSMlGjMACFmfwbbqTVDZBIF7sMZVKJbA==}
+    engines: {node: '>=14'}
     hasBin: true
     peerDependencies:
       rollup: ^2.0.0
