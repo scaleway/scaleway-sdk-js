@@ -75,7 +75,7 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/** Database Redis API. */
+/** Managed Database for Redis™ API. */
 export class RedisV1Alpha1GenAPI extends API {
   /** Lists the available zones of the API. */
   public static readonly LOCALITIES: Zone[] = [
@@ -331,7 +331,7 @@ export class RedisV1Alpha1GenAPI extends API {
     )
 
   /**
-   * List available Redis versions
+   * List available Redis™ versions
    *
    * @param request - The request {@link ListVersionsRequest}
    * @returns A Promise of ListVersionsResponse
