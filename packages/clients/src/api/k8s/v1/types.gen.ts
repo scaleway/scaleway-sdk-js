@@ -84,6 +84,7 @@ export type NodeStatus =
   | 'rebooting'
   | 'creation_error'
   | 'upgrading'
+  | 'starting'
 
 export type PoolStatus =
   | 'unknown'
@@ -461,12 +462,14 @@ export interface Node {
   /** The public IPv6 address of the node */
   publicIpV6?: string
   /**
-   * These conditions contains the Node Problem Detector conditions, as well as
-   * some in house conditions.
+   * @deprecated These conditions contains the Node Problem Detector conditions,
+   *   as well as some in house conditions.
    */
-  conditions: Record<string, string>
+  conditions?: Record<string, string>
   /** The status of the node */
   status: NodeStatus
+  /** Details of the error, if any occured when managing the node */
+  errorMessage?: string
   /** The date at which the node was created */
   createdAt?: Date
   /** The date at which the node was last updated */
