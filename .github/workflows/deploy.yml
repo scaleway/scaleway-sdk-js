@@ -2,11 +2,8 @@ name: Deploy
 
 on:
   workflow_dispatch:
-    inputs:
-      perform_deploy:
-        required: true
-        description: Confirm Deploy
-        type: boolean
+  schedule:
+    - cron: "0 14 * * MON"
 
 jobs:
   deploy:
