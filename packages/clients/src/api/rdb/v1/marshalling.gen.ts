@@ -23,6 +23,8 @@ import type {
   CreateEndpointRequest,
   CreateInstanceFromSnapshotRequest,
   CreateInstanceRequest,
+  CreateReadReplicaEndpointRequest,
+  CreateReadReplicaRequest,
   CreateSnapshotRequest,
   CreateUserRequest,
   Database,
@@ -66,6 +68,10 @@ import type {
   PrepareInstanceLogsResponse,
   Privilege,
   PurgeInstanceLogsRequest,
+  ReadReplica,
+  ReadReplicaEndpointSpec,
+  ReadReplicaEndpointSpecDirectAccess,
+  ReadReplicaEndpointSpecPrivateNetwork,
   RestoreDatabaseBackupRequest,
   SetInstanceACLRulesRequest,
   SetInstanceACLRulesResponse,
@@ -116,6 +122,31 @@ const unmarshalEndpointPrivateNetworkDetails = (data: unknown) => {
   } as EndpointPrivateNetworkDetails
 }
 
+export const unmarshalEndpoint = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Endpoint' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    directAccess: data.direct_access
+      ? unmarshalEndpointDirectAccessDetails(data.direct_access)
+      : undefined,
+    hostname: data.hostname,
+    id: data.id,
+    ip: data.ip,
+    loadBalancer: data.load_balancer
+      ? unmarshalEndpointLoadBalancerDetails(data.load_balancer)
+      : undefined,
+    name: data.name,
+    port: data.port,
+    privateNetwork: data.private_network
+      ? unmarshalEndpointPrivateNetworkDetails(data.private_network)
+      : undefined,
+  } as Endpoint
+}
+
 const unmarshalEngineSetting = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -150,31 +181,6 @@ const unmarshalBackupSchedule = (data: unknown) => {
     frequency: data.frequency,
     retention: data.retention,
   } as BackupSchedule
-}
-
-export const unmarshalEndpoint = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Endpoint' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    directAccess: data.direct_access
-      ? unmarshalEndpointDirectAccessDetails(data.direct_access)
-      : undefined,
-    hostname: data.hostname,
-    id: data.id,
-    ip: data.ip,
-    loadBalancer: data.load_balancer
-      ? unmarshalEndpointLoadBalancerDetails(data.load_balancer)
-      : undefined,
-    name: data.name,
-    port: data.port,
-    privateNetwork: data.private_network
-      ? unmarshalEndpointPrivateNetworkDetails(data.private_network)
-      : undefined,
-  } as Endpoint
 }
 
 const unmarshalEngineVersion = (data: unknown) => {
@@ -267,6 +273,21 @@ const unmarshalNodeTypeVolumeType = (data: unknown) => {
     minSize: data.min_size,
     type: data.type,
   } as NodeTypeVolumeType
+}
+
+export const unmarshalReadReplica = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ReadReplica' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
+    id: data.id,
+    region: data.region,
+    status: data.status,
+  } as ReadReplica
 }
 
 const unmarshalVolume = (data: unknown) => {
@@ -384,6 +405,10 @@ export const unmarshalInstance = (data: unknown) => {
     nodeType: data.node_type,
     organizationId: data.organization_id,
     projectId: data.project_id,
+    readReplicas: unmarshalArrayOfObject(
+      data.read_replicas,
+      unmarshalReadReplica,
+    ),
     region: data.region,
     settings: unmarshalArrayOfObject(data.settings, unmarshalInstanceSetting),
     status: data.status,
@@ -760,6 +785,19 @@ const marshalEndpointSpecPrivateNetwork = (
   service_ip: request.serviceIp,
 })
 
+const marshalReadReplicaEndpointSpecDirectAccess = (
+  request: ReadReplicaEndpointSpecDirectAccess,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({})
+
+const marshalReadReplicaEndpointSpecPrivateNetwork = (
+  request: ReadReplicaEndpointSpecPrivateNetwork,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_network_id: request.privateNetworkId,
+  service_ip: request.serviceIp,
+})
+
 const marshalACLRuleRequest = (
   request: ACLRuleRequest,
   defaults: DefaultValues,
@@ -802,6 +840,32 @@ const marshalLogsPolicy = (
 ): Record<string, unknown> => ({
   max_age_retention: request.maxAgeRetention,
   total_disk_retention: request.totalDiskRetention,
+})
+
+const marshalReadReplicaEndpointSpec = (
+  request: ReadReplicaEndpointSpec,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ...resolveOneOf<unknown>([
+    {
+      param: 'direct_access',
+      value: request.directAccess
+        ? marshalReadReplicaEndpointSpecDirectAccess(
+            request.directAccess,
+            defaults,
+          )
+        : undefined,
+    },
+    {
+      param: 'private_network',
+      value: request.privateNetwork
+        ? marshalReadReplicaEndpointSpecPrivateNetwork(
+            request.privateNetwork,
+            defaults,
+          )
+        : undefined,
+    },
+  ]),
 })
 
 export const marshalAddInstanceACLRulesRequest = (
@@ -894,6 +958,27 @@ export const marshalCreateInstanceRequest = (
       value: request.organizationId,
     },
   ]),
+})
+
+export const marshalCreateReadReplicaEndpointRequest = (
+  request: CreateReadReplicaEndpointRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  endpoint_spec: request.endpointSpec.map(elt =>
+    marshalReadReplicaEndpointSpec(elt, defaults),
+  ),
+})
+
+export const marshalCreateReadReplicaRequest = (
+  request: CreateReadReplicaRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  endpoint_spec: request.endpointSpec
+    ? request.endpointSpec.map(elt =>
+        marshalReadReplicaEndpointSpec(elt, defaults),
+      )
+    : undefined,
+  instance_id: request.instanceId,
 })
 
 export const marshalCreateSnapshotRequest = (
