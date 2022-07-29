@@ -23,6 +23,8 @@ import {
   marshalCreateEndpointRequest,
   marshalCreateInstanceFromSnapshotRequest,
   marshalCreateInstanceRequest,
+  marshalCreateReadReplicaEndpointRequest,
+  marshalCreateReadReplicaRequest,
   marshalCreateSnapshotRequest,
   marshalCreateUserRequest,
   marshalDeleteInstanceACLRulesRequest,
@@ -61,6 +63,7 @@ import {
   unmarshalListUsersResponse,
   unmarshalPrepareInstanceLogsResponse,
   unmarshalPrivilege,
+  unmarshalReadReplica,
   unmarshalSetInstanceACLRulesResponse,
   unmarshalSetInstanceSettingsResponse,
   unmarshalSnapshot,
@@ -77,6 +80,8 @@ import type {
   CreateEndpointRequest,
   CreateInstanceFromSnapshotRequest,
   CreateInstanceRequest,
+  CreateReadReplicaEndpointRequest,
+  CreateReadReplicaRequest,
   CreateSnapshotRequest,
   CreateUserRequest,
   Database,
@@ -89,6 +94,7 @@ import type {
   DeleteInstanceRequest,
   DeleteInstanceSettingsRequest,
   DeleteInstanceSettingsResponse,
+  DeleteReadReplicaRequest,
   DeleteSnapshotRequest,
   DeleteUserRequest,
   Endpoint,
@@ -99,6 +105,7 @@ import type {
   GetInstanceLogRequest,
   GetInstanceMetricsRequest,
   GetInstanceRequest,
+  GetReadReplicaRequest,
   GetSnapshotRequest,
   Instance,
   InstanceLog,
@@ -129,7 +136,9 @@ import type {
   PrepareInstanceLogsResponse,
   Privilege,
   PurgeInstanceLogsRequest,
+  ReadReplica,
   RenewInstanceCertificateRequest,
+  ResetReadReplicaRequest,
   RestartInstanceRequest,
   RestoreDatabaseBackupRequest,
   SetInstanceACLRulesRequest,
@@ -701,6 +710,123 @@ export class RdbV1GenAPI extends API {
         ),
       },
       unmarshalInstanceMetrics,
+    )
+
+  /**
+   * Create a read replica
+   *
+   * @param request - The request {@link CreateReadReplicaRequest}
+   * @returns A Promise of ReadReplica
+   */
+  createReadReplica = (request: Readonly<CreateReadReplicaRequest>) =>
+    this.client.fetch<ReadReplica>(
+      {
+        body: JSON.stringify(
+          marshalCreateReadReplicaRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/rdb/v1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/read-replicas`,
+      },
+      unmarshalReadReplica,
+    )
+
+  /**
+   * Get a read replica
+   *
+   * @param request - The request {@link GetReadReplicaRequest}
+   * @returns A Promise of ReadReplica
+   */
+  getReadReplica = (request: Readonly<GetReadReplicaRequest>) =>
+    this.client.fetch<ReadReplica>(
+      {
+        method: 'GET',
+        path: `/rdb/v1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/read-replicas/${validatePathParam(
+          'readReplicaId',
+          request.readReplicaId,
+        )}`,
+      },
+      unmarshalReadReplica,
+    )
+
+  /**
+   * Delete a read replica
+   *
+   * @param request - The request {@link DeleteReadReplicaRequest}
+   * @returns A Promise of ReadReplica
+   */
+  deleteReadReplica = (request: Readonly<DeleteReadReplicaRequest>) =>
+    this.client.fetch<ReadReplica>(
+      {
+        method: 'DELETE',
+        path: `/rdb/v1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/read-replicas/${validatePathParam(
+          'readReplicaId',
+          request.readReplicaId,
+        )}`,
+      },
+      unmarshalReadReplica,
+    )
+
+  /**
+   * Reset a read replica
+   *
+   * @param request - The request {@link ResetReadReplicaRequest}
+   * @returns A Promise of ReadReplica
+   */
+  resetReadReplica = (request: Readonly<ResetReadReplicaRequest>) =>
+    this.client.fetch<ReadReplica>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/rdb/v1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/read-replicas/${validatePathParam(
+          'readReplicaId',
+          request.readReplicaId,
+        )}/reset`,
+      },
+      unmarshalReadReplica,
+    )
+
+  /**
+   * Create a new endpoint for a given read replica
+   *
+   * @param request - The request {@link CreateReadReplicaEndpointRequest}
+   * @returns A Promise of ReadReplica
+   */
+  createReadReplicaEndpoint = (
+    request: Readonly<CreateReadReplicaEndpointRequest>,
+  ) =>
+    this.client.fetch<ReadReplica>(
+      {
+        body: JSON.stringify(
+          marshalCreateReadReplicaEndpointRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/rdb/v1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/read-replicas/${validatePathParam(
+          'readReplicaId',
+          request.readReplicaId,
+        )}/endpoints`,
+      },
+      unmarshalReadReplica,
     )
 
   /**

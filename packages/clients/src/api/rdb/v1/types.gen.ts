@@ -376,6 +376,8 @@ export interface Instance {
   backupSchedule?: BackupSchedule
   /** Whether or not High-Availability is enabled */
   isHaCluster: boolean
+  /** Read replicas of the instance */
+  readReplicas: Array<ReadReplica>
   /** Node type of the instance */
   nodeType: string
   /** List of engine settings to be set at database initialisation */
@@ -592,6 +594,47 @@ export interface Privilege {
   databaseName: string
   /** Name of the user */
   userName: string
+}
+
+/** Read replica */
+export interface ReadReplica {
+  /** UUID of the read replica */
+  id: string
+  /** Display read replica connection information */
+  endpoints: Array<Endpoint>
+  /** Read replica status */
+  status: ReadReplicaStatus
+  /** Region the read replica is in */
+  region: Region
+}
+
+/** Read replica endpoint spec */
+export interface ReadReplicaEndpointSpec {
+  /**
+   * Direct access endpoint specifications.
+   *
+   * One-of ('spec'): at most one of 'directAccess', 'privateNetwork' could be set.
+   */
+  directAccess?: ReadReplicaEndpointSpecDirectAccess
+  /**
+   * Private network endpoint specifications.
+   *
+   * One-of ('spec'): at most one of 'directAccess', 'privateNetwork' could be set.
+   */
+  privateNetwork?: ReadReplicaEndpointSpecPrivateNetwork
+}
+
+export interface ReadReplicaEndpointSpecDirectAccess {}
+
+/** Read replica endpoint spec. private network */
+export interface ReadReplicaEndpointSpecPrivateNetwork {
+  /** UUID of the private network to be connected to the read replica */
+  privateNetworkId: string
+  /**
+   * Endpoint IPv4 adress with a CIDR notation. Check documentation about IP and
+   * subnet limitations.
+   */
+  serviceIp: string
 }
 
 /** Set instance acl rules response */
@@ -916,6 +959,45 @@ export type GetInstanceMetricsRequest = {
   endDate?: Date
   /** Name of the metric to gather */
   metricName?: string
+}
+
+export type CreateReadReplicaRequest = {
+  /** Region to target. If none is passed will use default region from the config */
+  region?: Region
+  /** UUID of the instance you want a read replica of */
+  instanceId: string
+  /** Specification of the endpoint you want to create */
+  endpointSpec?: Array<ReadReplicaEndpointSpec>
+}
+
+export type GetReadReplicaRequest = {
+  /** Region to target. If none is passed will use default region from the config */
+  region?: Region
+  /** UUID of the read replica */
+  readReplicaId: string
+}
+
+export type DeleteReadReplicaRequest = {
+  /** Region to target. If none is passed will use default region from the config */
+  region?: Region
+  /** UUID of the read replica */
+  readReplicaId: string
+}
+
+export type ResetReadReplicaRequest = {
+  /** Region to target. If none is passed will use default region from the config */
+  region?: Region
+  /** UUID of the read replica */
+  readReplicaId: string
+}
+
+export type CreateReadReplicaEndpointRequest = {
+  /** Region to target. If none is passed will use default region from the config */
+  region?: Region
+  /** UUID of the read replica */
+  readReplicaId: string
+  /** Specification of the endpoint you want to create */
+  endpointSpec: Array<ReadReplicaEndpointSpec>
 }
 
 export type PrepareInstanceLogsRequest = {
