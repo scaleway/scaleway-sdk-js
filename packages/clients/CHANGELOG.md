@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.4](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.3...@scaleway/sdk@0.1.0-beta.4) (2022-08-01)
+
+
+### Features
+
+* **k8s:** deprecate ReplaceNode (use DeleteNode instead) ([#34](https://github.com/scaleway/scaleway-sdk-js/issues/34)) ([e6342ec](https://github.com/scaleway/scaleway-sdk-js/commit/e6342ecae48ac585bb14c40c6cc55b9d51473dae))
+* **rdb:** add read replica ([#36](https://github.com/scaleway/scaleway-sdk-js/issues/36)) ([8002709](https://github.com/scaleway/scaleway-sdk-js/commit/80027094da1bf78b337307cc994e1622cf9882f8))
+
+
+
 ## [0.1.0-beta.3](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.2...@scaleway/sdk@0.1.0-beta.3) (2022-07-26)
 
 
