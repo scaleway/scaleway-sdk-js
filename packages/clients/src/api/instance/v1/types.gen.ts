@@ -811,7 +811,7 @@ export interface VolumeServerTemplate {
   boot: boolean
   /** Name of the volume */
   name: string
-  /** Disk size of the volume */
+  /** Disk size of the volume, must be a multiple of 512 */
   size: number
   /** Type of the volume */
   volumeType: VolumeVolumeType
@@ -836,7 +836,7 @@ export interface VolumeTemplate {
   id: string
   /** Name of the volume */
   name: string
-  /** Disk size of the volume */
+  /** Disk size of the volume, must be a multiple of 512 */
   size: number
   /** Type of the volume */
   volumeType: VolumeVolumeType
@@ -1134,7 +1134,7 @@ export type CreateVolumeRequest = {
   /** The volume type */
   volumeType: VolumeVolumeType
   /**
-   * The volume disk size.
+   * The volume disk size, must be a multiple of 512.
    *
    * One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could be set.
    */
@@ -1169,7 +1169,7 @@ export type UpdateVolumeRequest = {
   name?: string
   /** The tags of the volume */
   tags?: Array<string>
-  /** The volume disk size */
+  /** The volume disk size, must be a multiple of 512 */
   size?: number
 }
 
