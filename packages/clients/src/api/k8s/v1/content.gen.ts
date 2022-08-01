@@ -16,6 +16,7 @@ export const NODE_TRANSIENT_STATUSES: NodeStatus[] = [
   'rebooting',
   'upgrading',
   'starting',
+  'registering',
 ]
 
 /** Lists transient statutes of the enum {@link PoolStatus}. */
