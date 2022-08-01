@@ -85,6 +85,7 @@ export type NodeStatus =
   | 'creation_error'
   | 'upgrading'
   | 'starting'
+  | 'registering'
 
 export type PoolStatus =
   | 'unknown'
