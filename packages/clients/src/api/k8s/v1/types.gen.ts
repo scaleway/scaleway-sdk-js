@@ -1004,7 +1004,12 @@ export type RebootNodeRequest = {
 export type DeleteNodeRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
+  /** The ID of the node to replace */
   nodeId: string
+  /** Skip draining node from its workload */
+  skipDrain: boolean
+  /** Add a new node after the deletion of this node */
+  replace: boolean
 }
 
 export type ListVersionsRequest = {

@@ -609,6 +609,10 @@ export class K8SV1GenAPI extends API {
           'region',
           request.region ?? this.client.settings.defaultRegion,
         )}/nodes/${validatePathParam('nodeId', request.nodeId)}`,
+        urlParams: urlParams(
+          ['replace', request.replace],
+          ['skip_drain', request.skipDrain],
+        ),
       },
       unmarshalNode,
     )
