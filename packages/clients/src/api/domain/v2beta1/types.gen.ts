@@ -216,7 +216,8 @@ export interface Contact {
   companyIdentificationCode: string
   lang: LanguageCode
   resale: boolean
-  questions: Array<ContactQuestion>
+  /** @deprecated */
+  questions?: Array<ContactQuestion>
   extensionFr?: ContactExtensionFR
   extensionEu?: ContactExtensionEU
   whoisOptIn: boolean
@@ -616,7 +617,8 @@ export interface NewContact {
   companyIdentificationCode?: string
   lang: LanguageCode
   resale: boolean
-  questions: Array<ContactQuestion>
+  /** @deprecated */
+  questions?: Array<ContactQuestion>
   extensionFr?: ContactExtensionFR
   extensionEu?: ContactExtensionEU
   whoisOptIn: boolean
@@ -1099,6 +1101,7 @@ export type RegistrarApiUpdateContactRequest = {
   companyIdentificationCode?: string
   lang: LanguageCode
   resale?: boolean
+  /** @deprecated */
   questions?: Array<UpdateContactRequestQuestion>
   extensionFr?: ContactExtensionFR
   extensionEu?: ContactExtensionEU

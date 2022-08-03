@@ -444,7 +444,11 @@ export const unmarshalContact = (data: unknown) => {
     lastname: data.lastname,
     legalForm: data.legal_form,
     phoneNumber: data.phone_number,
-    questions: unmarshalArrayOfObject(data.questions, unmarshalContactQuestion),
+    questions: unmarshalArrayOfObject(
+      data.questions,
+      unmarshalContactQuestion,
+      false,
+    ),
     resale: data.resale,
     state: data.state,
     vatIdentificationCode: data.vat_identification_code,
@@ -1517,9 +1521,9 @@ const marshalNewContact = (
   lastname: request.lastname,
   legal_form: request.legalForm,
   phone_number: request.phoneNumber,
-  questions: request.questions.map(elt =>
-    marshalContactQuestion(elt, defaults),
-  ),
+  questions: request.questions
+    ? request.questions.map(elt => marshalContactQuestion(elt, defaults))
+    : undefined,
   resale: request.resale,
   state: request.state,
   vat_identification_code: request.vatIdentificationCode,
