@@ -763,8 +763,8 @@ export interface Volume {
   id: string
   /** The volume name */
   name: string
-  /** Show the volume NBD export URI */
-  exportUri: string
+  /** @deprecated Show the volume NBD export URI */
+  exportUri?: string
   /** The volume disk size */
   size: number
   /** The volume type */
