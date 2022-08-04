@@ -1,7 +1,7 @@
 import type { Client } from './client'
 
 /**
- * Abstract class to instanciate API from a {@link Client}.
+ * Abstract class to instantiate API from a {@link Client}.
  *
  * @internal
  */
