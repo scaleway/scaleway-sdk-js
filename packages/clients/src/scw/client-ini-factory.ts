@@ -11,7 +11,7 @@ import { Settings } from './client-settings'
 export type ClientConfig = (obj: Settings) => Settings
 
 /**
- * Instanciates the SDK from a configuration {@link Profile}.
+ * Instantiates the SDK from a configuration {@link Profile}.
  *
  * @param profile - The profile
  * @returns A factory {@link ClientConfig}
@@ -41,7 +41,7 @@ export const withProfile =
   }
 
 /**
- * Instanciates the SDK with a different HTTP client.
+ * Instantiates the SDK with a different HTTP client.
  *
  * @param httpClient - A fetch compatible HTTP client
  * @returns A factory {@link ClientConfig}
@@ -55,7 +55,7 @@ export const withHTTPClient =
   (settings: Readonly<Settings>): Settings => ({ ...settings, httpClient })
 
 /**
- * Instanciates the SDK with a default page size.
+ * Instantiates the SDK with a default page size.
  *
  * @param defaultPageSize - The default page size
  * @returns A factory {@link ClientConfig}
@@ -69,7 +69,7 @@ export const withDefaultPageSize =
   (settings: Readonly<Settings>): Settings => ({ ...settings, defaultPageSize })
 
 /**
- * Instanciates the SDK with a different default user agent.
+ * Instantiates the SDK with a different default user agent.
  *
  * @param userAgent - The default user agent
  * @returns A factory {@link ClientConfig}
@@ -83,7 +83,7 @@ export const withUserAgent =
   (settings: Readonly<Settings>): Settings => ({ ...settings, userAgent })
 
 /**
- * Instanciates the SDK with an additional user agent.
+ * Instantiates the SDK with an additional user agent.
  *
  * @param userAgent - The suffix to append to default user agent
  * @returns A factory {@link ClientConfig}

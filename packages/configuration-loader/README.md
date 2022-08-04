@@ -20,7 +20,7 @@ const profile = {
 }
 ```
 
-And then use this profile to instanciate the SDK client with `const client = createClient(profile)`.
+And then use this profile to instantiate the SDK client with `const client = createClient(profile)`.
 
 However, you might prefer to store these variables in either a configuration file (e.g. local testing) or environment variables (e.g. serverless).
 
