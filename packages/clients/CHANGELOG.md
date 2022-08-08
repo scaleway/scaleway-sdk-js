@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.5](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.4...@scaleway/sdk@0.1.0-beta.5) (2022-08-08)
+
+
+### Features
+
+* **domain:** deprecate contact questions ([#45](https://github.com/scaleway/scaleway-sdk-js/issues/45)) ([11cdb4b](https://github.com/scaleway/scaleway-sdk-js/commit/11cdb4bf840eebca76340bbe3733f889b1e25d94))
+* **instance:** deprecate exportUri on volumes ([#44](https://github.com/scaleway/scaleway-sdk-js/issues/44)) ([b7fefb8](https://github.com/scaleway/scaleway-sdk-js/commit/b7fefb8d018af1116cb8e5c57f27edaa1db60bef))
+* **k8s:** add registering case to NodeStatus ([#39](https://github.com/scaleway/scaleway-sdk-js/issues/39)) ([f20d171](https://github.com/scaleway/scaleway-sdk-js/commit/f20d171a0404ebf8775cd8e4effc9484155ae493))
+* **k8s:** add replace and skipDrain options when deleting a node ([#40](https://github.com/scaleway/scaleway-sdk-js/issues/40)) ([7d7a849](https://github.com/scaleway/scaleway-sdk-js/commit/7d7a849915d2e8e24afd31c7735f8b9e68157678))
+
+
+
 ## [0.1.0-beta.4](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.3...@scaleway/sdk@0.1.0-beta.4) (2022-08-01)
 
 
