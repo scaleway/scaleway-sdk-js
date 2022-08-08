@@ -334,7 +334,10 @@ export interface CreateClusterRequestOpenIDConnectConfig {
 export interface CreateClusterRequestPoolConfig {
   /** The name of the pool */
   name: string
-  /** The node type is the type of Scaleway Instance wanted for the pool */
+  /**
+   * The node type is the type of Scaleway Instance wanted for the pool, nodes
+   * with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST)
+   */
   nodeType: string
   /** The placement group ID in which all the nodes of the pool will be created */
   placementGroupId?: string
@@ -493,7 +496,10 @@ export interface Pool {
   status: PoolStatus
   /** The version of the pool */
   version: string
-  /** The node type is the type of Scaleway Instance wanted for the pool */
+  /**
+   * The node type is the type of Scaleway Instance wanted for the pool, nodes
+   * with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST)
+   */
   nodeType: string
   /** The enablement of the autoscaling feature for the pool */
   autoscaling: boolean
@@ -862,7 +868,10 @@ export type CreatePoolRequest = {
   clusterId: string
   /** The name of the pool */
   name?: string
-  /** The node type is the type of Scaleway Instance wanted for the pool */
+  /**
+   * The node type is the type of Scaleway Instance wanted for the pool, nodes
+   * with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST)
+   */
   nodeType: string
   /** The placement group ID in which all the nodes of the pool will be created */
   placementGroupId?: string
