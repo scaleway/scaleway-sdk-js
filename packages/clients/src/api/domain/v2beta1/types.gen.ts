@@ -193,6 +193,19 @@ export interface AvailableDomain {
   tld?: Tld
 }
 
+/** Check contacts compatibility response */
+export interface CheckContactsCompatibilityResponse {
+  compatible: boolean
+  ownerCheckResult?: CheckContactsCompatibilityResponseContactCheckResult
+  administrativeCheckResult?: CheckContactsCompatibilityResponseContactCheckResult
+  technicalCheckResult?: CheckContactsCompatibilityResponseContactCheckResult
+}
+
+export interface CheckContactsCompatibilityResponseContactCheckResult {
+  compatible: boolean
+  errorMessage?: string
+}
+
 /** Clear dns zone records response */
 export interface ClearDNSZoneRecordsResponse {}
 
@@ -1072,6 +1085,43 @@ export type RegistrarApiRegisterExternalDomainRequest = {
 
 export type RegistrarApiDeleteExternalDomainRequest = {
   domain: string
+}
+
+export type RegistrarApiCheckContactsCompatibilityRequest = {
+  /** One-of ('parameter'): at most one of 'domain', 'tld' could be set. */
+  domain?: string
+  /** One-of ('parameter'): at most one of 'domain', 'tld' could be set. */
+  tld?: string
+  /**
+   * One-of ('ownerContactType'): at most one of 'ownerContactId',
+   * 'ownerContact' could be set.
+   */
+  ownerContactId?: string
+  /**
+   * One-of ('ownerContactType'): at most one of 'ownerContactId',
+   * 'ownerContact' could be set.
+   */
+  ownerContact?: NewContact
+  /**
+   * One-of ('administrativeContactType'): at most one of
+   * 'administrativeContactId', 'administrativeContact' could be set.
+   */
+  administrativeContactId?: string
+  /**
+   * One-of ('administrativeContactType'): at most one of
+   * 'administrativeContactId', 'administrativeContact' could be set.
+   */
+  administrativeContact?: NewContact
+  /**
+   * One-of ('technicalContactType'): at most one of 'technicalContactId',
+   * 'technicalContact' could be set.
+   */
+  technicalContactId?: string
+  /**
+   * One-of ('technicalContactType'): at most one of 'technicalContactId',
+   * 'technicalContact' could be set.
+   */
+  technicalContact?: NewContact
 }
 
 export type RegistrarApiListContactsRequest = {
