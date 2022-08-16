@@ -22,6 +22,9 @@ const buildMessage = (precondition: string, helpMessage: string): string => {
     case 'attribute_must_be_set':
       message = 'attribute must be set'
       break
+    case 'resource_not_usable':
+      message = 'resource is not usable'
+      break
     default:
       message = ''
   }
