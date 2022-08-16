@@ -16,6 +16,7 @@ import {
   marshalImportRawDNSZoneRequest,
   marshalRefreshDNSZoneRequest,
   marshalRegistrarApiBuyDomainsRequest,
+  marshalRegistrarApiCheckContactsCompatibilityRequest,
   marshalRegistrarApiEnableDomainDNSSECRequest,
   marshalRegistrarApiRegisterExternalDomainRequest,
   marshalRegistrarApiRenewDomainsRequest,
@@ -26,6 +27,7 @@ import {
   marshalUpdateDNSZoneNameserversRequest,
   marshalUpdateDNSZoneRecordsRequest,
   marshalUpdateDNSZoneRequest,
+  unmarshalCheckContactsCompatibilityResponse,
   unmarshalClearDNSZoneRecordsResponse,
   unmarshalContact,
   unmarshalDNSZone,
@@ -58,6 +60,7 @@ import {
   unmarshalUpdateDNSZoneRecordsResponse,
 } from './marshalling.gen'
 import type {
+  CheckContactsCompatibilityResponse,
   ClearDNSZoneRecordsRequest,
   ClearDNSZoneRecordsResponse,
   CloneDNSZoneRequest,
@@ -104,6 +107,7 @@ import type {
   RefreshDNSZoneResponse,
   RegisterExternalDomainResponse,
   RegistrarApiBuyDomainsRequest,
+  RegistrarApiCheckContactsCompatibilityRequest,
   RegistrarApiDeleteExternalDomainRequest,
   RegistrarApiDisableDomainAutoRenewRequest,
   RegistrarApiDisableDomainDNSSECRequest,
@@ -894,6 +898,31 @@ export class DomainRegistrarV2Beta1GenAPI extends API {
         )}`,
       },
       unmarshalDeleteExternalDomainResponse,
+    )
+
+  /**
+   * Check if contacts are compatible against a domain or a tld. If not, it will
+   * return the information requiring a correction.
+   *
+   * @param request - The request {@link RegistrarApiCheckContactsCompatibilityRequest}
+   * @returns A Promise of CheckContactsCompatibilityResponse
+   */
+  checkContactsCompatibility = (
+    request: Readonly<RegistrarApiCheckContactsCompatibilityRequest> = {},
+  ) =>
+    this.client.fetch<CheckContactsCompatibilityResponse>(
+      {
+        body: JSON.stringify(
+          marshalRegistrarApiCheckContactsCompatibilityRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/domain/v2beta1/check-contacts-compatibility`,
+      },
+      unmarshalCheckContactsCompatibilityResponse,
     )
 
   protected pageOfListContacts = (

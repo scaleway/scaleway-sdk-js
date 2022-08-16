@@ -11,6 +11,8 @@ import {
 import type { DefaultValues } from '../../../bridge'
 import type {
   AvailableDomain,
+  CheckContactsCompatibilityResponse,
+  CheckContactsCompatibilityResponseContactCheckResult,
   ClearDNSZoneRecordsResponse,
   CloneDNSZoneRequest,
   Contact,
@@ -82,6 +84,7 @@ import type {
   RefreshDNSZoneResponse,
   RegisterExternalDomainResponse,
   RegistrarApiBuyDomainsRequest,
+  RegistrarApiCheckContactsCompatibilityRequest,
   RegistrarApiEnableDomainDNSSECRequest,
   RegistrarApiRegisterExternalDomainRequest,
   RegistrarApiRenewDomainsRequest,
@@ -599,6 +602,21 @@ const unmarshalAvailableDomain = (data: unknown) => {
   } as AvailableDomain
 }
 
+const unmarshalCheckContactsCompatibilityResponseContactCheckResult = (
+  data: unknown,
+) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CheckContactsCompatibilityResponseContactCheckResult' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    compatible: data.compatible,
+    errorMessage: data.error_message,
+  } as CheckContactsCompatibilityResponseContactCheckResult
+}
+
 const unmarshalContactRoles = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -768,6 +786,33 @@ const unmarshalTask = (data: unknown) => {
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
   } as Task
+}
+
+export const unmarshalCheckContactsCompatibilityResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CheckContactsCompatibilityResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    administrativeCheckResult: data.administrative_check_result
+      ? unmarshalCheckContactsCompatibilityResponseContactCheckResult(
+          data.administrative_check_result,
+        )
+      : undefined,
+    compatible: data.compatible,
+    ownerCheckResult: data.owner_check_result
+      ? unmarshalCheckContactsCompatibilityResponseContactCheckResult(
+          data.owner_check_result,
+        )
+      : undefined,
+    technicalCheckResult: data.technical_check_result
+      ? unmarshalCheckContactsCompatibilityResponseContactCheckResult(
+          data.technical_check_result,
+        )
+      : undefined,
+  } as CheckContactsCompatibilityResponse
 }
 
 export const unmarshalClearDNSZoneRecordsResponse = (data: unknown) => {
@@ -1682,6 +1727,58 @@ export const marshalRegistrarApiBuyDomainsRequest = (
       value: request.ownerContact
         ? marshalNewContact(request.ownerContact, defaults)
         : undefined,
+    },
+  ]),
+  ...resolveOneOf<unknown>([
+    {
+      param: 'technical_contact_id',
+      value: request.technicalContactId,
+    },
+    {
+      param: 'technical_contact',
+      value: request.technicalContact
+        ? marshalNewContact(request.technicalContact, defaults)
+        : undefined,
+    },
+  ]),
+})
+
+export const marshalRegistrarApiCheckContactsCompatibilityRequest = (
+  request: RegistrarApiCheckContactsCompatibilityRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ...resolveOneOf<unknown>([
+    {
+      param: 'administrative_contact_id',
+      value: request.administrativeContactId,
+    },
+    {
+      param: 'administrative_contact',
+      value: request.administrativeContact
+        ? marshalNewContact(request.administrativeContact, defaults)
+        : undefined,
+    },
+  ]),
+  ...resolveOneOf<unknown>([
+    {
+      param: 'owner_contact_id',
+      value: request.ownerContactId,
+    },
+    {
+      param: 'owner_contact',
+      value: request.ownerContact
+        ? marshalNewContact(request.ownerContact, defaults)
+        : undefined,
+    },
+  ]),
+  ...resolveOneOf([
+    {
+      param: 'domain',
+      value: request.domain,
+    },
+    {
+      param: 'tld',
+      value: request.tld,
     },
   ]),
   ...resolveOneOf<unknown>([
