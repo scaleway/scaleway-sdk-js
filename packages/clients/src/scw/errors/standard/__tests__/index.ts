@@ -279,7 +279,7 @@ describe('PreconditionFailedError', () => {
         precondition: 'unknown_precondition',
         type: 'precondition_failed',
       }).toString(),
-    ).toBe('PreconditionFailedError: precondition failed: unknown precondition')
+    ).toBe('PreconditionFailedError: precondition failed: unknown_precondition')
   })
 
   it(`parses a valid input for precondition precondition_failed`, () => {
@@ -291,7 +291,7 @@ describe('PreconditionFailedError', () => {
         type: 'precondition_failed',
       }).toString(),
     ).toBe(
-      'PreconditionFailedError: precondition failed: resource is still in use, All servers must be removed from the private network before deleting it.',
+      'PreconditionFailedError: precondition failed: resource_still_in_use, All servers must be removed from the private network before deleting it.',
     )
   })
 
@@ -303,7 +303,7 @@ describe('PreconditionFailedError', () => {
         type: 'precondition_failed',
       }).toString(),
     ).toBe(
-      'PreconditionFailedError: precondition failed: attribute must be set',
+      'PreconditionFailedError: precondition failed: attribute_must_be_set',
     )
   })
 
@@ -314,7 +314,9 @@ describe('PreconditionFailedError', () => {
         precondition: 'wrong_precondition_key',
         type: 'precondition_failed',
       }).toString(),
-    ).toBe('PreconditionFailedError: precondition failed: ')
+    ).toBe(
+      'PreconditionFailedError: precondition failed: wrong_precondition_key',
+    )
   })
 
   it(`doesn't parse invalid input`, () => {
