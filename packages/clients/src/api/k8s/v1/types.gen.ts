@@ -335,8 +335,10 @@ export interface CreateClusterRequestPoolConfig {
   /** The name of the pool */
   name: string
   /**
-   * The node type is the type of Scaleway Instance wanted for the pool, nodes
-   * with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST)
+   * The node type is the type of Scaleway Instance wanted for the pool. Nodes
+   * with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST).
+   * 'external' is a special node type used to provision instances from other
+   * cloud providers.
    */
   nodeType: string
   /** The placement group ID in which all the nodes of the pool will be created */
@@ -346,12 +348,12 @@ export interface CreateClusterRequestPoolConfig {
   /** The size (number of nodes) of the pool */
   size: number
   /**
-   * The minimun size of the pool. Note that this fields will be used only when
+   * The minimum size of the pool. Note that this field will be used only when
    * autoscaling is enabled.
    */
   minSize?: number
   /**
-   * The maximum size of the pool. Note that this fields will be used only when
+   * The maximum size of the pool. Note that this field will be used only when
    * autoscaling is enabled.
    */
   maxSize?: number
@@ -497,8 +499,10 @@ export interface Pool {
   /** The version of the pool */
   version: string
   /**
-   * The node type is the type of Scaleway Instance wanted for the pool, nodes
-   * with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST)
+   * The node type is the type of Scaleway Instance wanted for the pool. Nodes
+   * with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST).
+   * 'external' is a special node type used to provision instances from other
+   * cloud providers.
    */
   nodeType: string
   /** The enablement of the autoscaling feature for the pool */
@@ -506,12 +510,12 @@ export interface Pool {
   /** The size (number of nodes) of the pool */
   size: number
   /**
-   * The minimun size of the pool. Note that this fields will be used only when
+   * The minimum size of the pool. Note that this field will be used only when
    * autoscaling is enabled.
    */
   minSize: number
   /**
-   * The maximum size of the pool. Note that this fields will be used only when
+   * The maximum size of the pool. Note that this field will be used only when
    * autoscaling is enabled.
    */
   maxSize: number
@@ -657,8 +661,8 @@ export interface Version {
   region: Region
   /** The supported Container Network Interface (CNI) plugins for this version */
   availableCnis: Array<CNI>
-  /** The supported Ingress Controllers for this version */
-  availableIngresses: Array<Ingress>
+  /** @deprecated The supported Ingress Controllers for this version */
+  availableIngresses?: Array<Ingress>
   /** The supported container runtimes for this version */
   availableContainerRuntimes: Array<Runtime>
   /** The supported feature gates for this version */
@@ -869,8 +873,10 @@ export type CreatePoolRequest = {
   /** The name of the pool */
   name?: string
   /**
-   * The node type is the type of Scaleway Instance wanted for the pool, nodes
-   * with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST)
+   * The node type is the type of Scaleway Instance wanted for the pool. Nodes
+   * with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST).
+   * 'external' is a special node type used to provision instances from other
+   * cloud providers.
    */
   nodeType: string
   /** The placement group ID in which all the nodes of the pool will be created */
@@ -880,12 +886,12 @@ export type CreatePoolRequest = {
   /** The size (number of nodes) of the pool */
   size: number
   /**
-   * The minimun size of the pool. Note that this fields will be used only when
+   * The minimum size of the pool. Note that this field will be used only when
    * autoscaling is enabled.
    */
   minSize?: number
   /**
-   * The maximum size of the pool. Note that this fields will be used only when
+   * The maximum size of the pool. Note that this field will be used only when
    * autoscaling is enabled.
    */
   maxSize?: number
