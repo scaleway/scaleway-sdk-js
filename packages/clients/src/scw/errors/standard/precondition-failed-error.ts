@@ -11,28 +11,12 @@ import { ScalewayError } from '../scw-error'
  * @internal
  */
 const buildMessage = (precondition: string, helpMessage: string): string => {
-  let message: string
-  switch (precondition) {
-    case 'unknown_precondition':
-      message = 'unknown precondition'
-      break
-    case 'resource_still_in_use':
-      message = 'resource is still in use'
-      break
-    case 'attribute_must_be_set':
-      message = 'attribute must be set'
-      break
-    case 'resource_not_usable':
-      message = 'resource is not usable'
-      break
-    default:
-      message = ''
-  }
+  let message = `precondition failed: ${precondition}`
   if (typeof helpMessage === 'string' && helpMessage.length > 0) {
     message = message.concat(', ', helpMessage)
   }
 
-  return `precondition failed: ${message}`
+  return message
 }
 
 /**
