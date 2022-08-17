@@ -22,6 +22,10 @@
   "dependencyDashboard": true,
   "packageRules": [
     {
+      "matchPackageNames": ["@scaleway/sdk", "@scaleway/configuration-loader"],
+      "enabled": false
+    },
+    {
       "automerge": false,
       "matchPackagePatterns": ["^@scaleway/"],
       "stabilityDays": 0,
