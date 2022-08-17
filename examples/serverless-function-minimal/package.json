@@ -2,15 +2,13 @@
   "name": "scaleway-serverless-function",
   "version": "1.0.0",
   "main": "index.js",
+  "license": "Apache-2.0",
   "scripts": {
     "build": "tsc -p ./tsconfig.json"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@scaleway/configuration-loader": "^0.1.0-beta",
-    "@scaleway/sdk": "^0.1.0-beta.6"
+    "@scaleway/sdk": "^0.1.0-beta"
   },
   "devDependencies": {
     "serverless-scaleway-functions": "^0.4.0",
