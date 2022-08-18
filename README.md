@@ -7,7 +7,7 @@ This SDK enables you to interact with Scaleway APIs.
 * SDK only works from a node.js runtime, browser calls aren't supported yet.
 
 **🔗  Important links:**
-* Reference documentation (soon)
+* [Reference documentation](https://scaleway.github.io/scaleway-sdk-js)
 * [Example projects](./examples)
 * [Developers website](https://developers.scaleway.com) (API documentation)
 
@@ -71,13 +71,13 @@ for await (const page of api.listNamespaces()) {
 
 The project is coded with Typescript, so don't hesitate to take advantage of it.
 
-1. All **types of a product** are stored in `Product.version` namespace. For instance, `Image` interface of Registry v1 can be accessed with `Registry.v1.Image`.
+1. All **types of a product** are stored in the `Product.version` namespace. For instance, the `Image` interface of Registry v1 can be accessed with `Registry.v1.Image`.
 
 2. We export **errors** in the namespace `Errors`, allowing you to differentiate the cases (e.g. `Errors.PermissionsDeniedError`).
 
 ## Dependencies
 
-This SDK is based on the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) API and use `Request`, `Response` & `Headers` interfaces. Those interfaces are native in modern browsers, node >=18 & [deno](https://deno.land/) environments.
+This SDK is based on the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) API and uses `Request`, `Response` & `Headers` interfaces. Those interfaces are native in modern browsers, node >=18 & [deno](https://deno.land/) environments.
 
 For `node` < 18 & `React Native` environments, the commonJS build requires [cross-fetch](https://www.npmjs.com/package/cross-fetch) package, it is listed in `dependencies` but not used in esm build.
 
