@@ -133,7 +133,7 @@ export class IamV1Alpha1GenAPI extends API {
     enrichForPagination('sshKeys', this.pageOfListSSHKeys, request)
 
   /**
-   * Add an SSH key
+   * Create an SSH key
    *
    * @param request - The request {@link CreateSSHKeyRequest}
    * @returns A Promise of SSHKey
@@ -192,7 +192,7 @@ export class IamV1Alpha1GenAPI extends API {
     )
 
   /**
-   * Remove an SSH key
+   * Delete an SSH key
    *
    * @param request - The request {@link DeleteSSHKeyRequest}
    */
@@ -400,7 +400,7 @@ export class IamV1Alpha1GenAPI extends API {
     enrichForPagination('groups', this.pageOfListGroups, request)
 
   /**
-   * Add a new group
+   * Create a new group
    *
    * @param request - The request {@link CreateGroupRequest}
    * @returns A Promise of Group
@@ -777,7 +777,7 @@ export class IamV1Alpha1GenAPI extends API {
     enrichForPagination('apiKeys', this.pageOfListAPIKeys, request)
 
   /**
-   * Add an API key
+   * Create an API key
    *
    * @param request - The request {@link CreateAPIKeyRequest}
    * @returns A Promise of APIKey
@@ -836,7 +836,7 @@ export class IamV1Alpha1GenAPI extends API {
     )
 
   /**
-   * Remove an API key
+   * Delete an API key
    *
    * @param request - The request {@link DeleteAPIKeyRequest}
    */
