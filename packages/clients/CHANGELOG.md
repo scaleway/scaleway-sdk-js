@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.7](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.6...@scaleway/sdk@0.1.0-beta.7) (2022-08-22)
+
+
+### Features
+
+* **domain:** check if contacts are compatible with a domain or a tld ([#55](https://github.com/scaleway/scaleway-sdk-js/issues/55)) ([41aa4ca](https://github.com/scaleway/scaleway-sdk-js/commit/41aa4ca35598b266271dbe68634fd72bb9ab4171))
+* **k8s:** disallow setting Ingress or Dashboard ([#63](https://github.com/scaleway/scaleway-sdk-js/issues/63)) ([1a05a42](https://github.com/scaleway/scaleway-sdk-js/commit/1a05a42f719b9a96e7c56e409d6dc5df02459889))
+
+
+
 ## [0.1.0-beta.6](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.5...@scaleway/sdk@0.1.0-beta.6) (2022-08-15)
 
 **Note:** Version bump only for package @scaleway/sdk
