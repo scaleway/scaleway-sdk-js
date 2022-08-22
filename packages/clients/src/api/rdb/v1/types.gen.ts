@@ -1301,7 +1301,7 @@ export type CreateEndpointRequest = {
 export type DeleteEndpointRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
-  /** UUID of the endpoint you want to delete */
+  /** This endpoint can also be used to delete a read replica endpoint. */
   endpointId: string
 }
 

@@ -713,7 +713,7 @@ export class RdbV1GenAPI extends API {
     )
 
   /**
-   * Create a read replica
+   * You can only create a maximum of 3 read replicas for one instance.
    *
    * @param request - The request {@link CreateReadReplicaRequest}
    * @returns A Promise of ReadReplica
@@ -777,7 +777,9 @@ export class RdbV1GenAPI extends API {
     )
 
   /**
-   * Reset a read replica
+   * Resetting a read replica resyncs data from the leader node. This operation
+   * can take some time, depending on the database's size. During this
+   * operation, the read replica will not be available. Endpoints will not change.
    *
    * @param request - The request {@link ResetReadReplicaRequest}
    * @returns A Promise of ReadReplica
@@ -800,7 +802,7 @@ export class RdbV1GenAPI extends API {
     )
 
   /**
-   * Create a new endpoint for a given read replica
+   * A read replica can have at most one direct access and one private network endpoint.
    *
    * @param request - The request {@link CreateReadReplicaEndpointRequest}
    * @returns A Promise of ReadReplica
