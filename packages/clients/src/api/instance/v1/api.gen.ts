@@ -17,6 +17,7 @@ import {
   marshalCreateServerRequest,
   marshalCreateSnapshotRequest,
   marshalCreateVolumeRequest,
+  marshalExportSnapshotRequest,
   marshalServerActionRequest,
   marshalSetImageRequest,
   marshalSetPlacementGroupRequest,
@@ -40,6 +41,7 @@ import {
   unmarshalCreateServerResponse,
   unmarshalCreateSnapshotResponse,
   unmarshalCreateVolumeResponse,
+  unmarshalExportSnapshotResponse,
   unmarshalGetBootscriptResponse,
   unmarshalGetDashboardResponse,
   unmarshalGetImageResponse,
@@ -110,6 +112,8 @@ import type {
   DeleteServerUserDataRequest,
   DeleteSnapshotRequest,
   DeleteVolumeRequest,
+  ExportSnapshotRequest,
+  ExportSnapshotResponse,
   GetBootscriptRequest,
   GetBootscriptResponse,
   GetDashboardRequest,
@@ -627,7 +631,7 @@ export class InstanceV1GenAPI extends API {
     enrichForPagination('snapshots', this.pageOfListSnapshots, request)
 
   /**
-   * Create a snapshot from a given volume
+   * Create a snapshot from a given volume or from a QCOW2 file
    *
    * @param request - The request {@link CreateSnapshotRequest}
    * @returns A Promise of CreateSnapshotResponse
@@ -695,6 +699,31 @@ export class InstanceV1GenAPI extends API {
         request.zone ?? this.client.settings.defaultZone,
       )}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
     })
+
+  /**
+   * Export a snapshot to a given S3 bucket in the same region.
+   *
+   * @param request - The request {@link ExportSnapshotRequest}
+   * @returns A Promise of ExportSnapshotResponse
+   */
+  exportSnapshot = (request: Readonly<ExportSnapshotRequest>) =>
+    this.client.fetch<ExportSnapshotResponse>(
+      {
+        body: JSON.stringify(
+          marshalExportSnapshotRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/instance/v1/zones/${validatePathParam(
+          'zone',
+          request.zone ?? this.client.settings.defaultZone,
+        )}/snapshots/${validatePathParam(
+          'snapshotId',
+          request.snapshotId,
+        )}/export`,
+      },
+      unmarshalExportSnapshotResponse,
+    )
 
   protected pageOfListVolumes = (request: Readonly<ListVolumesRequest> = {}) =>
     this.client.fetch<ListVolumesResponse>(

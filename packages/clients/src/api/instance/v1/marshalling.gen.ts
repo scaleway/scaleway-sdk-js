@@ -29,6 +29,8 @@ import type {
   CreateVolumeRequest,
   CreateVolumeResponse,
   Dashboard,
+  ExportSnapshotRequest,
+  ExportSnapshotResponse,
   GetBootscriptResponse,
   GetDashboardResponse,
   GetImageResponse,
@@ -645,6 +647,7 @@ const unmarshalSnapshot = (data: unknown) => {
       ? unmarshalSnapshotBaseVolume(data.base_volume)
       : undefined,
     creationDate: unmarshalDate(data.creation_date),
+    errorReason: data.error_reason,
     id: data.id,
     modificationDate: unmarshalDate(data.modification_date),
     name: data.name,
@@ -812,6 +815,18 @@ export const unmarshalCreateVolumeResponse = (data: unknown) => {
     location: data.Location,
     volume: data.volume ? unmarshalVolume(data.volume) : undefined,
   } as CreateVolumeResponse
+}
+
+export const unmarshalExportSnapshotResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ExportSnapshotResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    task: data.task ? unmarshalTask(data.task) : undefined,
+  } as ExportSnapshotResponse
 }
 
 export const unmarshalGetBootscriptResponse = (data: unknown) => {
@@ -1753,7 +1768,10 @@ export const marshalCreateSnapshotRequest = (
   request: CreateSnapshotRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  bucket: request.bucket,
+  key: request.key,
   name: request.name || randomName('snp'),
+  size: request.size,
   tags: request.tags,
   volume_id: request.volumeId,
   volume_type: request.volumeType,
@@ -1804,6 +1822,14 @@ export const marshalCreateVolumeRequest = (
       value: request.baseSnapshot,
     },
   ]),
+})
+
+export const marshalExportSnapshotRequest = (
+  request: ExportSnapshotRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  bucket: request.bucket,
+  key: request.key,
 })
 
 export const marshalServerActionRequest = (
