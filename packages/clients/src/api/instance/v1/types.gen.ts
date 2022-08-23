@@ -167,6 +167,10 @@ export interface Dashboard {
   ipsUnused: number
 }
 
+export interface ExportSnapshotResponse {
+  task?: Task
+}
+
 export interface GetBootscriptResponse {
   bootscript?: Bootscript
 }
@@ -707,6 +711,8 @@ export interface Snapshot {
   modificationDate?: Date
   /** The snapshot zone */
   zone: Zone
+  /** The reason for the failed snapshot import */
+  errorReason?: string
 }
 
 /** Snapshot. base volume */
@@ -1074,6 +1080,12 @@ export type CreateSnapshotRequest = {
    * the original volume will be used.
    */
   volumeType: SnapshotVolumeType
+  /** Bucket name for snapshot imports */
+  bucket?: string
+  /** Object key for snapshot imports */
+  key?: string
+  /** Imported snapshot size, must be a multiple of 512 */
+  size?: number
 }
 
 export type GetSnapshotRequest = {
@@ -1088,6 +1100,17 @@ export type DeleteSnapshotRequest = {
   zone?: Zone
   /** UUID of the snapshot you want to delete */
   snapshotId: string
+}
+
+export type ExportSnapshotRequest = {
+  /** Zone to target. If none is passed will use default zone from the config */
+  zone?: Zone
+  /** The snapshot ID */
+  snapshotId: string
+  /** S3 bucket name */
+  bucket: string
+  /** S3 object key */
+  key: string
 }
 
 export type ListVolumesRequest = {
