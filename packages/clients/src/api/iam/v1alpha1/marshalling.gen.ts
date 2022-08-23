@@ -1,5 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+import randomName from '@scaleway/random-name'
 import {
   isJSONObject,
   resolveOneOf,
@@ -381,7 +382,7 @@ export const marshalCreateApplicationRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  name: request.name,
+  name: request.name || randomName('app'),
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
 })
 
@@ -390,7 +391,7 @@ export const marshalCreateGroupRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  name: request.name,
+  name: request.name || randomName('grp'),
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
 })
 
@@ -399,7 +400,7 @@ export const marshalCreatePolicyRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  name: request.name,
+  name: request.name || randomName('pol'),
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
   rules: request.rules
     ? request.rules.map(elt => marshalRuleSpecs(elt, defaults))
@@ -428,7 +429,7 @@ export const marshalCreateSSHKeyRequest = (
   request: CreateSSHKeyRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  name: request.name,
+  name: request.name || randomName('key'),
   project_id: request.projectId ?? defaults.defaultProjectId,
   public_key: request.publicKey,
 })
