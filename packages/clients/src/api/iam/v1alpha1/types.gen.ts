@@ -391,7 +391,7 @@ export type ListSSHKeysRequest = {
 
 export type CreateSSHKeyRequest = {
   /** The name of the SSH key. Max length is 1000 */
-  name: string
+  name?: string
   /**
    * SSH public key. Currently ssh-rsa, ssh-dss (DSA), ssh-ed25519 and ecdsa
    * keys with NIST curves are supported. Max length is 65000
@@ -455,7 +455,7 @@ export type ListApplicationsRequest = {
 
 export type CreateApplicationRequest = {
   /** Name of application to create (max length is 64 chars) */
-  name: string
+  name?: string
   /** ID of organization */
   organizationId?: string
   /** Description of application (max length is 200 chars) */
@@ -507,7 +507,7 @@ export type CreateGroupRequest = {
    * Name of the group to create (max length is 64 chars). MUST be unique inside
    * an organization
    */
-  name: string
+  name?: string
   /** Description of the group to create (max length is 200 chars) */
   description: string
 }
@@ -599,7 +599,7 @@ export type ListPoliciesRequest = {
 
 export type CreatePolicyRequest = {
   /** Name of policy to create (max length is 64 chars) */
-  name: string
+  name?: string
   /** Description of policy to create (max length is 200 chars) */
   description: string
   /** ID of organization */
