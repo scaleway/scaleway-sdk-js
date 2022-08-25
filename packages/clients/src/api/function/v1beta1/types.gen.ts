@@ -92,6 +92,8 @@ export type RuntimeStatus =
   | 'beta'
   | 'available'
   | 'deprecated'
+  | 'end_of_support'
+  | 'end_of_life'
 
 export type TokenStatus =
   | 'unknown'
