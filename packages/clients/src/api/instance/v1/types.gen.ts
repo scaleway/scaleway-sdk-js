@@ -165,6 +165,12 @@ export interface Dashboard {
   ipsCount: number
   securityGroupsCount: number
   ipsUnused: number
+  volumesLSsdCount: number
+  volumesBSsdCount: number
+  volumesLSsdTotalSize: number
+  volumesBSsdTotalSize: number
+  privateNicsCount: number
+  placementGroupsCount: number
 }
 
 export interface ExportSnapshotResponse {

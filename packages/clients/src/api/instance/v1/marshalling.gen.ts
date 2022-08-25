@@ -451,12 +451,18 @@ const unmarshalDashboard = (data: unknown) => {
     imagesCount: data.images_count,
     ipsCount: data.ips_count,
     ipsUnused: data.ips_unused,
+    placementGroupsCount: data.placement_groups_count,
+    privateNicsCount: data.private_nics_count,
     runningServersCount: data.running_servers_count,
     securityGroupsCount: data.security_groups_count,
     serversByTypes: data.servers_by_types,
     serversCount: data.servers_count,
     snapshotsCount: data.snapshots_count,
+    volumesBSsdCount: data.volumes_b_ssd_count,
+    volumesBSsdTotalSize: data.volumes_b_ssd_total_size,
     volumesCount: data.volumes_count,
+    volumesLSsdCount: data.volumes_l_ssd_count,
+    volumesLSsdTotalSize: data.volumes_l_ssd_total_size,
   } as Dashboard
 }
 
