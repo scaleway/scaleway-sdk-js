@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.8](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.7...@scaleway/sdk@0.1.0-beta.8) (2022-08-26)
+
+
+### Features
+
+* **function:** add new runtime statuses ([#79](https://github.com/scaleway/scaleway-sdk-js/issues/79)) ([19b2632](https://github.com/scaleway/scaleway-sdk-js/commit/19b2632391178d006be9184f56d5cc5fbca17981))
+* **iam:** use a random name when creating a resource ([#74](https://github.com/scaleway/scaleway-sdk-js/issues/74)) ([bbbd435](https://github.com/scaleway/scaleway-sdk-js/commit/bbbd435b54c23f9c19d8a39d8088ba28415d68ab))
+* **instance:** add information in Dashboard entity ([#80](https://github.com/scaleway/scaleway-sdk-js/issues/80)) ([1265c70](https://github.com/scaleway/scaleway-sdk-js/commit/1265c7084c04c9c83fc87445a483c7e5c441221a))
+* **instance:** add snapshot export ([#75](https://github.com/scaleway/scaleway-sdk-js/issues/75)) ([24f78bc](https://github.com/scaleway/scaleway-sdk-js/commit/24f78bc7da6fcf136dd75a148542b8a7d66de3ce))
+
+
+
 ## [0.1.0-beta.7](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.6...@scaleway/sdk@0.1.0-beta.7) (2022-08-22)
 
 
