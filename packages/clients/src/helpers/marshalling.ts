@@ -145,7 +145,7 @@ export const unmarshalMapOfObject = <T, B extends boolean>(
       : Record<string, T>
   }
 
-  return Object.entries(data).reduce(
+  return Object.entries(data || {}).reduce(
     (acc, [key, value]) => ({
       ...acc,
       [key]: unmarshaller(value),
