@@ -210,7 +210,9 @@ export class RedisV1Alpha1GenAPI extends API {
     enrichForPagination('clusters', this.pageOfListClusters, request)
 
   /**
-   * Migrate a cluster
+   * Upgrade your Database for Redis® cluster to a new version or scale it
+   * vertically / horizontally. Please note: scaling horizontally your Database
+   * for Redis® cluster will renew its TLS certificate.
    *
    * @param request - The request {@link MigrateClusterRequest}
    * @returns A Promise of Cluster
