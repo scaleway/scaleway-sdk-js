@@ -34,7 +34,7 @@ importers:
       rollup: ^2.78.1
       rollup-plugin-dts: ^4.2.2
       rollup-plugin-visualizer: ^5.8.1
-      typedoc: ^0.23.13
+      typedoc: ^0.23.14
       typescript: ^4.8.2
     devDependencies:
       '@babel/core': 7.18.13
@@ -67,7 +67,7 @@ importers:
       rollup: 2.78.1
       rollup-plugin-dts: 4.2.2_rusrl3yqfuqle4tcyjzane2tmq
       rollup-plugin-visualizer: 5.8.1_rollup@2.78.1
-      typedoc: 0.23.13_typescript@4.8.2
+      typedoc: 0.23.14_typescript@4.8.2
       typescript: 4.8.2
 
   packages/clients:
@@ -8970,8 +8970,8 @@ packages:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
     dev: true
 
-  /typedoc/0.23.13_typescript@4.8.2:
-    resolution: {integrity: sha512-47VgWyZ5Q8g5dtJxjIHvFqX7ZD+YQRLAFRhLjt6v9KW0//feHtLUrbukHkKcvQuua1xQtdvkQ17fCjmF7qLXlg==}
+  /typedoc/0.23.14_typescript@4.8.2:
+    resolution: {integrity: sha512-s2I+ZKBET38EctZvbXp2GooHrNaKjWZkrwGEK/sttnOGiKJqU0vHrsdcwLgKZGuo2aedNL3RRPj1LnAAeYscig==}
     engines: {node: '>= 14.14'}
     hasBin: true
     peerDependencies:
