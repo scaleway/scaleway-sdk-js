@@ -213,6 +213,7 @@ export interface Token {
   id: string
   status: TokenStatus
   expiresAt?: Date
+  description?: string
 }
 
 export type ListNamespacesRequest = {
@@ -434,6 +435,7 @@ export type CreateTokenRequest = {
   /** One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set. */
   namespaceId?: string
   expiresAt?: Date
+  description?: string
 }
 
 export type GetTokenRequest = {
