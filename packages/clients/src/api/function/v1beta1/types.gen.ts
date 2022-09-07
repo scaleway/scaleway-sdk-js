@@ -260,6 +260,7 @@ export interface Token {
   id: string
   status: TokenStatus
   expiresAt?: Date
+  description?: string
 }
 
 /** Upload url */
@@ -501,6 +502,7 @@ export type CreateTokenRequest = {
   /** One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set. */
   namespaceId?: string
   expiresAt?: Date
+  description?: string
 }
 
 export type GetTokenRequest = {

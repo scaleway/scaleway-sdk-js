@@ -163,6 +163,7 @@ export const unmarshalToken = (data: unknown) => {
 
   return {
     containerId: data.container_id,
+    description: data.description,
     expiresAt: unmarshalDate(data.expires_at),
     id: data.id,
     namespaceId: data.namespace_id,
@@ -319,6 +320,7 @@ export const marshalCreateTokenRequest = (
   request: CreateTokenRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  description: request.description,
   expires_at: request.expiresAt,
   ...resolveOneOf([
     {
