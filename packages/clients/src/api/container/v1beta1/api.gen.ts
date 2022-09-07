@@ -691,6 +691,12 @@ export class ContainerV1Beta1GenAPI extends API {
       unmarshalToken,
     )
 
+  /**
+   * Create a new revocable token
+   *
+   * @param request - The request {@link CreateTokenRequest}
+   * @returns A Promise of Token
+   */
   createToken = (request: Readonly<CreateTokenRequest> = {}) =>
     this.client.fetch<Token>(
       {
@@ -707,6 +713,12 @@ export class ContainerV1Beta1GenAPI extends API {
       unmarshalToken,
     )
 
+  /**
+   * Get a token
+   *
+   * @param request - The request {@link GetTokenRequest}
+   * @returns A Promise of Token
+   */
   getToken = (request: Readonly<GetTokenRequest>) =>
     this.client.fetch<Token>(
       {
@@ -761,9 +773,21 @@ export class ContainerV1Beta1GenAPI extends API {
       unmarshalListTokensResponse,
     )
 
+  /**
+   * List all tokens
+   *
+   * @param request - The request {@link ListTokensRequest}
+   * @returns A Promise of ListTokensResponse
+   */
   listTokens = (request: Readonly<ListTokensRequest> = {}) =>
     enrichForPagination('tokens', this.pageOfListTokens, request)
 
+  /**
+   * Delete a token
+   *
+   * @param request - The request {@link DeleteTokenRequest}
+   * @returns A Promise of Token
+   */
   deleteToken = (request: Readonly<DeleteTokenRequest>) =>
     this.client.fetch<Token>(
       {
