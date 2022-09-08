@@ -202,18 +202,19 @@ export interface SecretHashedValue {
   hashedValue: string
 }
 
+/** Token */
 export interface Token {
+  id: string
   token: string
-  /** @deprecated */
-  publicKey?: string
   /** One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set. */
   containerId?: string
   /** One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set. */
   namespaceId?: string
-  id: string
+  /** @deprecated */
+  publicKey?: string
   status: TokenStatus
-  expiresAt?: Date
   description?: string
+  expiresAt?: Date
 }
 
 export type ListNamespacesRequest = {
@@ -434,8 +435,8 @@ export type CreateTokenRequest = {
   containerId?: string
   /** One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set. */
   namespaceId?: string
-  expiresAt?: Date
   description?: string
+  expiresAt?: Date
 }
 
 export type GetTokenRequest = {
