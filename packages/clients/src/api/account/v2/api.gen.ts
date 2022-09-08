@@ -71,6 +71,7 @@ export class AccountV2GenAPI extends API {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
+          ['project_ids', request.projectIds],
         ),
       },
       unmarshalListProjectsResponse,

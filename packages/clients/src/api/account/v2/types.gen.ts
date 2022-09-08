@@ -51,6 +51,8 @@ export type ListProjectsRequest = {
   pageSize?: number
   /** The sort order of the returned projects */
   orderBy?: ListProjectsRequestOrderBy
+  /** Filter out by a list of project ID */
+  projectIds?: Array<string>
 }
 
 export type GetProjectRequest = {
