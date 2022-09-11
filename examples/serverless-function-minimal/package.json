@@ -11,7 +11,7 @@
     "@scaleway/sdk": "^0.1.0-beta"
   },
   "devDependencies": {
-    "serverless-scaleway-functions": "^0.4.1",
+    "serverless-scaleway-functions": "^0.4.2",
     "typescript": "^4.8.2"
   },
   "description": "Minimal Typescript template to run Scaleway SDK-JS in a Function."
