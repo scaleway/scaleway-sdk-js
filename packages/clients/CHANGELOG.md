@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.10](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.9...@scaleway/sdk@0.1.0-beta.10) (2022-09-12)
+
+
+### Features
+
+* **account:** add the possibility to filter projects by id ([#100](https://github.com/scaleway/scaleway-sdk-js/issues/100)) ([1d489f4](https://github.com/scaleway/scaleway-sdk-js/commit/1d489f428ca301673abf0c6b9341785632b1545a))
+* **serverless:** add token description ([#98](https://github.com/scaleway/scaleway-sdk-js/issues/98)) ([f084c8a](https://github.com/scaleway/scaleway-sdk-js/commit/f084c8a187267a3c6289fa6173c6f8dc235277d1))
+
+
+
 ## [0.1.0-beta.9](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.8...@scaleway/sdk@0.1.0-beta.9) (2022-09-05)
 
 **Note:** Version bump only for package @scaleway/sdk
