@@ -15,7 +15,7 @@ importers:
       '@rollup/plugin-commonjs': ^22.0.2
       '@rollup/plugin-inject': ^4.0.4
       '@rollup/plugin-node-resolve': ^13.3.0
-      '@scaleway/eslint-config-react': ^3.5.12
+      '@scaleway/eslint-config-react': ^3.5.13
       '@types/jest': ^28.1.7
       babel-plugin-annotate-pure-calls: ^0.4.0
       cross-env: ^7.0.3
@@ -48,7 +48,7 @@ importers:
       '@rollup/plugin-commonjs': 22.0.2_rollup@2.79.0
       '@rollup/plugin-inject': 4.0.4_rollup@2.79.0
       '@rollup/plugin-node-resolve': 13.3.0_rollup@2.79.0
-      '@scaleway/eslint-config-react': 3.5.12_irgkl5vooow2ydyo6aokmferha
+      '@scaleway/eslint-config-react': 3.5.13_irgkl5vooow2ydyo6aokmferha
       '@types/jest': 28.1.7
       babel-plugin-annotate-pure-calls: 0.4.0_@babel+core@7.19.0
       cross-env: 7.0.3
@@ -2981,8 +2981,8 @@ packages:
       rollup: 2.79.0
     dev: true
 
-  /@scaleway/eslint-config-react/3.5.12_irgkl5vooow2ydyo6aokmferha:
-    resolution: {integrity: sha512-QSjD50n8BjqXJ4I2dLPVVQFRZq8IiuMPtdVQbpeFKGz7L+V2zI7CW8M/oSl/TjH0UquBLaTdeiKWluTXgZ3Z9Q==}
+  /@scaleway/eslint-config-react/3.5.13_irgkl5vooow2ydyo6aokmferha:
+    resolution: {integrity: sha512-abzCja2Ac6Nkd5+EQda9zGulcC82Zab6E2ycJGYncUAZJFDqQYfEPM3AuZu1kilMbdKmjs3wBKWMHgrkgl1yjg==}
     peerDependencies:
       eslint: '>= 8.5'
     dependencies:
