@@ -1169,6 +1169,7 @@ export type RegistrarApiListDomainsRequest = {
   projectId?: string
   organizationId?: string
   isExternal?: boolean
+  domain?: string
 }
 
 export type RegistrarApiListRenewableDomainsRequest = {

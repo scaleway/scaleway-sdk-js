@@ -1014,6 +1014,7 @@ export class DomainRegistrarV2Beta1GenAPI extends API {
         method: 'GET',
         path: `/domain/v2beta1/domains`,
         urlParams: urlParams(
+          ['domain', request.domain],
           ['is_external', request.isExternal],
           ['order_by', request.orderBy ?? 'domain_asc'],
           [
