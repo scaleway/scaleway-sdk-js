@@ -79,6 +79,7 @@ import type {
   ServerMaintenance,
   ServerSummary,
   ServerType,
+  ServerTypeCapabilities,
   ServerTypeNetwork,
   ServerTypeNetworkInterface,
   ServerTypeVolumeConstraintSizes,
@@ -354,6 +355,19 @@ const unmarshalServerMaintenance = (data: unknown) => {
   return {} as ServerMaintenance
 }
 
+const unmarshalServerTypeCapabilities = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeCapabilities' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    blockStorage: data.block_storage,
+    bootTypes: data.boot_types,
+  } as ServerTypeCapabilities
+}
+
 const unmarshalServerTypeNetwork = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -624,6 +638,9 @@ const unmarshalServerType = (data: unknown) => {
     altNames: data.alt_names,
     arch: data.arch,
     baremetal: data.baremetal,
+    capabilities: data.capabilities
+      ? unmarshalServerTypeCapabilities(data.capabilities)
+      : undefined,
     gpu: data.gpu,
     hourlyPrice: data.hourly_price,
     monthlyPrice: data.monthly_price,
