@@ -607,6 +607,16 @@ export interface ServerType {
   baremetal: boolean
   /** Network available for the instance */
   network?: ServerTypeNetwork
+  /** Capabilities */
+  capabilities?: ServerTypeCapabilities
+}
+
+/** Server type. capabilities */
+export interface ServerTypeCapabilities {
+  /** True if server supports block storage */
+  blockStorage?: boolean
+  /** List of supported boot types */
+  bootTypes: Array<BootType>
 }
 
 /** Server type. network */
