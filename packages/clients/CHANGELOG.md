@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.11](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.10...@scaleway/sdk@0.1.0-beta.11) (2022-09-16)
+
+
+### Features
+
+* **domain:** filter domain on listDomains ([#110](https://github.com/scaleway/scaleway-sdk-js/issues/110)) ([175d61c](https://github.com/scaleway/scaleway-sdk-js/commit/175d61c81f64d15dbc29339aa8a0720ae1717137))
+* **instance:** add capabilities for ServerType ([#112](https://github.com/scaleway/scaleway-sdk-js/issues/112)) ([b24a74c](https://github.com/scaleway/scaleway-sdk-js/commit/b24a74c130178aa511ae3795d16a25469e5c11f7))
+
+
+
 ## [0.1.0-beta.10](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.9...@scaleway/sdk@0.1.0-beta.10) (2022-09-12)
 
 
