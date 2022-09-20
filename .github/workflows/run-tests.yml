@@ -48,5 +48,5 @@ jobs:
     - run: pnpm install
     - run: pnpm run build
     - run: pnpm run test:coverage
-    - uses: codecov/codecov-action@v3.1.0
+    - uses: codecov/codecov-action@v3.1.1
  
