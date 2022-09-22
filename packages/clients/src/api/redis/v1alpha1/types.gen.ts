@@ -14,6 +14,7 @@ export type ClusterStatus =
   | 'autohealing'
   | 'locked'
   | 'suspended'
+  | 'initializing'
 
 export type ListClustersRequestOrderBy =
   | 'created_at_asc'
