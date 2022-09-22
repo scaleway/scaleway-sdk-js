@@ -8,4 +8,5 @@ export const CLUSTER_TRANSIENT_STATUSES: ClusterStatus[] = [
   'configuring',
   'destroying',
   'autohealing',
+  'initializing',
 ]
