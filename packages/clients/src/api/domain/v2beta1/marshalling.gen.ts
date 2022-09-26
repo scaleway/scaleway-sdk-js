@@ -53,6 +53,7 @@ import type {
   GetDNSZoneTsigKeyResponse,
   GetDNSZoneVersionDiffResponse,
   GetDomainAuthCodeResponse,
+  Host,
   ImportProviderDNSZoneRequest,
   ImportProviderDNSZoneRequestOnlineV1,
   ImportProviderDNSZoneResponse,
@@ -67,6 +68,7 @@ import type {
   ListDNSZoneVersionRecordsResponse,
   ListDNSZoneVersionsResponse,
   ListDNSZonesResponse,
+  ListDomainHostsResponse,
   ListDomainsResponse,
   ListRenewableDomainsResponse,
   ListSSLCertificatesResponse,
@@ -85,12 +87,14 @@ import type {
   RegisterExternalDomainResponse,
   RegistrarApiBuyDomainsRequest,
   RegistrarApiCheckContactsCompatibilityRequest,
+  RegistrarApiCreateDomainHostRequest,
   RegistrarApiEnableDomainDNSSECRequest,
   RegistrarApiRegisterExternalDomainRequest,
   RegistrarApiRenewDomainsRequest,
   RegistrarApiTradeDomainRequest,
   RegistrarApiTransferInDomainRequest,
   RegistrarApiUpdateContactRequest,
+  RegistrarApiUpdateDomainHostRequest,
   RegistrarApiUpdateDomainRequest,
   RenewableDomain,
   RestoreDNSZoneVersionResponse,
@@ -708,6 +712,21 @@ const unmarshalDomainSummary = (data: unknown) => {
   } as DomainSummary
 }
 
+export const unmarshalHost = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Host' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    domain: data.domain,
+    ips: data.ips,
+    name: data.name,
+    status: data.status,
+  } as Host
+}
+
 const unmarshalNameserver = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -1032,6 +1051,19 @@ export const unmarshalListDNSZonesResponse = (data: unknown) => {
     dnsZones: unmarshalArrayOfObject(data.dns_zones, unmarshalDNSZone),
     totalCount: data.total_count,
   } as ListDNSZonesResponse
+}
+
+export const unmarshalListDomainHostsResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDomainHostsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    hosts: unmarshalArrayOfObject(data.hosts, unmarshalHost),
+    totalCount: data.total_count,
+  } as ListDomainHostsResponse
 }
 
 export const unmarshalListDomainsResponse = (data: unknown) => {
@@ -1795,6 +1827,14 @@ export const marshalRegistrarApiCheckContactsCompatibilityRequest = (
   ]),
 })
 
+export const marshalRegistrarApiCreateDomainHostRequest = (
+  request: RegistrarApiCreateDomainHostRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ips: request.ips,
+  name: request.name,
+})
+
 export const marshalRegistrarApiEnableDomainDNSSECRequest = (
   request: RegistrarApiEnableDomainDNSSECRequest,
   defaults: DefaultValues,
@@ -1919,6 +1959,13 @@ export const marshalRegistrarApiUpdateContactRequest = (
   vat_identification_code: request.vatIdentificationCode,
   whois_opt_in: request.whoisOptIn,
   zip: request.zip,
+})
+
+export const marshalRegistrarApiUpdateDomainHostRequest = (
+  request: RegistrarApiUpdateDomainHostRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ips: request.ips,
 })
 
 export const marshalRegistrarApiUpdateDomainRequest = (

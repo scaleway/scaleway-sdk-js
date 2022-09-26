@@ -17,12 +17,14 @@ import {
   marshalRefreshDNSZoneRequest,
   marshalRegistrarApiBuyDomainsRequest,
   marshalRegistrarApiCheckContactsCompatibilityRequest,
+  marshalRegistrarApiCreateDomainHostRequest,
   marshalRegistrarApiEnableDomainDNSSECRequest,
   marshalRegistrarApiRegisterExternalDomainRequest,
   marshalRegistrarApiRenewDomainsRequest,
   marshalRegistrarApiTradeDomainRequest,
   marshalRegistrarApiTransferInDomainRequest,
   marshalRegistrarApiUpdateContactRequest,
+  marshalRegistrarApiUpdateDomainHostRequest,
   marshalRegistrarApiUpdateDomainRequest,
   marshalUpdateDNSZoneNameserversRequest,
   marshalUpdateDNSZoneRecordsRequest,
@@ -38,6 +40,7 @@ import {
   unmarshalGetDNSZoneTsigKeyResponse,
   unmarshalGetDNSZoneVersionDiffResponse,
   unmarshalGetDomainAuthCodeResponse,
+  unmarshalHost,
   unmarshalImportProviderDNSZoneResponse,
   unmarshalImportRawDNSZoneResponse,
   unmarshalListContactsResponse,
@@ -46,6 +49,7 @@ import {
   unmarshalListDNSZoneVersionRecordsResponse,
   unmarshalListDNSZoneVersionsResponse,
   unmarshalListDNSZonesResponse,
+  unmarshalListDomainHostsResponse,
   unmarshalListDomainsResponse,
   unmarshalListRenewableDomainsResponse,
   unmarshalListSSLCertificatesResponse,
@@ -82,6 +86,7 @@ import type {
   GetDNSZoneVersionDiffResponse,
   GetDomainAuthCodeResponse,
   GetSSLCertificateRequest,
+  Host,
   ImportProviderDNSZoneRequest,
   ImportProviderDNSZoneResponse,
   ImportRawDNSZoneRequest,
@@ -97,6 +102,7 @@ import type {
   ListDNSZoneVersionsResponse,
   ListDNSZonesRequest,
   ListDNSZonesResponse,
+  ListDomainHostsResponse,
   ListDomainsResponse,
   ListRenewableDomainsResponse,
   ListSSLCertificatesRequest,
@@ -108,6 +114,8 @@ import type {
   RegisterExternalDomainResponse,
   RegistrarApiBuyDomainsRequest,
   RegistrarApiCheckContactsCompatibilityRequest,
+  RegistrarApiCreateDomainHostRequest,
+  RegistrarApiDeleteDomainHostRequest,
   RegistrarApiDeleteExternalDomainRequest,
   RegistrarApiDisableDomainAutoRenewRequest,
   RegistrarApiDisableDomainDNSSECRequest,
@@ -117,6 +125,7 @@ import type {
   RegistrarApiGetDomainAuthCodeRequest,
   RegistrarApiGetDomainRequest,
   RegistrarApiListContactsRequest,
+  RegistrarApiListDomainHostsRequest,
   RegistrarApiListDomainsRequest,
   RegistrarApiListRenewableDomainsRequest,
   RegistrarApiListTasksRequest,
@@ -128,6 +137,7 @@ import type {
   RegistrarApiTransferInDomainRequest,
   RegistrarApiUnlockDomainTransferRequest,
   RegistrarApiUpdateContactRequest,
+  RegistrarApiUpdateDomainHostRequest,
   RegistrarApiUpdateDomainRequest,
   RestoreDNSZoneVersionRequest,
   RestoreDNSZoneVersionResponse,
@@ -1331,5 +1341,103 @@ export class DomainRegistrarV2Beta1GenAPI extends API {
         ),
       },
       unmarshalSearchAvailableDomainsResponse,
+    )
+
+  /**
+   * Create domain hostname with glue IPs
+   *
+   * @param request - The request {@link RegistrarApiCreateDomainHostRequest}
+   * @returns A Promise of Host
+   */
+  createDomainHost = (request: Readonly<RegistrarApiCreateDomainHostRequest>) =>
+    this.client.fetch<Host>(
+      {
+        body: JSON.stringify(
+          marshalRegistrarApiCreateDomainHostRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/domain/v2beta1/domains/${validatePathParam(
+          'domain',
+          request.domain,
+        )}/hosts`,
+      },
+      unmarshalHost,
+    )
+
+  protected pageOfListDomainHosts = (
+    request: Readonly<RegistrarApiListDomainHostsRequest>,
+  ) =>
+    this.client.fetch<ListDomainHostsResponse>(
+      {
+        method: 'GET',
+        path: `/domain/v2beta1/domains/${validatePathParam(
+          'domain',
+          request.domain,
+        )}/hosts`,
+        urlParams: urlParams(
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListDomainHostsResponse,
+    )
+
+  /**
+   * List domain hostnames with they glue IPs
+   *
+   * @param request - The request {@link RegistrarApiListDomainHostsRequest}
+   * @returns A Promise of ListDomainHostsResponse
+   */
+  listDomainHosts = (request: Readonly<RegistrarApiListDomainHostsRequest>) =>
+    enrichForPagination('hosts', this.pageOfListDomainHosts, request)
+
+  /**
+   * Update domain hostname with glue IPs
+   *
+   * @param request - The request {@link RegistrarApiUpdateDomainHostRequest}
+   * @returns A Promise of Host
+   */
+  updateDomainHost = (request: Readonly<RegistrarApiUpdateDomainHostRequest>) =>
+    this.client.fetch<Host>(
+      {
+        body: JSON.stringify(
+          marshalRegistrarApiUpdateDomainHostRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/domain/v2beta1/domains/${validatePathParam(
+          'domain',
+          request.domain,
+        )}/hosts/${validatePathParam('name', request.name)}`,
+      },
+      unmarshalHost,
+    )
+
+  /**
+   * Delete domain hostname
+   *
+   * @param request - The request {@link RegistrarApiDeleteDomainHostRequest}
+   * @returns A Promise of Host
+   */
+  deleteDomainHost = (request: Readonly<RegistrarApiDeleteDomainHostRequest>) =>
+    this.client.fetch<Host>(
+      {
+        method: 'DELETE',
+        path: `/domain/v2beta1/domains/${validatePathParam(
+          'domain',
+          request.domain,
+        )}/hosts/${validatePathParam('name', request.name)}`,
+      },
+      unmarshalHost,
     )
 }
