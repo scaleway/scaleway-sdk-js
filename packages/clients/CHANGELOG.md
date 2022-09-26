@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.12](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.11...@scaleway/sdk@0.1.0-beta.12) (2022-09-26)
+
+
+### Features
+
+* **redis:** add initializing status ([#117](https://github.com/scaleway/scaleway-sdk-js/issues/117)) ([537d321](https://github.com/scaleway/scaleway-sdk-js/commit/537d321c610258e15cfc619ea54f87108b90fab2))
+
+
+
 ## [0.1.0-beta.11](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.10...@scaleway/sdk@0.1.0-beta.11) (2022-09-16)
 
 
