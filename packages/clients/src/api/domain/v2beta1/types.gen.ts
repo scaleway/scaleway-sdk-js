@@ -129,6 +129,8 @@ export type DomainStatus =
   | 'locked'
   | 'deleting'
 
+export type HostStatus = 'unknown_status' | 'active' | 'updating' | 'deleting'
+
 export type LanguageCode = 'unknown_language_code' | 'en_US' | 'fr_FR'
 
 export type ListDNSZoneRecordsRequestOrderBy = 'name_asc' | 'name_desc'
@@ -186,6 +188,9 @@ export type TaskType =
   | 'send_message'
   | 'delete_domain_expired'
   | 'delete_external_domain'
+  | 'create_host'
+  | 'update_host'
+  | 'delete_host'
 
 export interface AvailableDomain {
   domain: string
@@ -512,6 +517,13 @@ export interface GetDomainAuthCodeResponse {
   authCode: string
 }
 
+export interface Host {
+  domain: string
+  name: string
+  ips: Array<string>
+  status: HostStatus
+}
+
 export interface ImportProviderDNSZoneRequestOnlineV1 {
   token: string
 }
@@ -581,6 +593,12 @@ export interface ListDNSZonesResponse {
   totalCount: number
   /** The paginated returned DNS zones */
   dnsZones: Array<DNSZone>
+}
+
+/** List domain hosts response */
+export interface ListDomainHostsResponse {
+  totalCount: number
+  hosts: Array<Host>
 }
 
 /** List domains response */
@@ -1252,4 +1270,27 @@ export type RegistrarApiSearchAvailableDomainsRequest = {
   domains: Array<string>
   /** Array of tlds to search on */
   tlds?: Array<string>
+}
+
+export type RegistrarApiCreateDomainHostRequest = {
+  domain: string
+  name: string
+  ips?: Array<string>
+}
+
+export type RegistrarApiListDomainHostsRequest = {
+  domain: string
+  page?: number
+  pageSize?: number
+}
+
+export type RegistrarApiUpdateDomainHostRequest = {
+  domain: string
+  name: string
+  ips?: Array<string>
+}
+
+export type RegistrarApiDeleteDomainHostRequest = {
+  domain: string
+  name: string
 }
