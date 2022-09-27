@@ -6,6 +6,8 @@ import type {
   FunctionStatus,
   NamespaceStatus,
   TokenStatus,
+  TriggerInputStatus,
+  TriggerStatus,
 } from './types.gen'
 
 /** Lists transient statutes of the enum {@link CronStatus}. */
@@ -38,3 +40,17 @@ export const NAMESPACE_TRANSIENT_STATUSES: NamespaceStatus[] = [
 
 /** Lists transient statutes of the enum {@link TokenStatus}. */
 export const TOKEN_TRANSIENT_STATUSES: TokenStatus[] = ['deleting', 'creating']
+
+/** Lists transient statutes of the enum {@link TriggerInputStatus}. */
+export const TRIGGER_INPUT_TRANSIENT_STATUSES: TriggerInputStatus[] = [
+  'deleting',
+  'creating',
+  'pending',
+]
+
+/** Lists transient statutes of the enum {@link TriggerStatus}. */
+export const TRIGGER_TRANSIENT_STATUSES: TriggerStatus[] = [
+  'deleting',
+  'creating',
+  'pending',
+]
