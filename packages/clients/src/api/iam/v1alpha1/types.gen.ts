@@ -436,6 +436,11 @@ export type GetUserRequest = {
   userId: string
 }
 
+export type DeleteUserRequest = {
+  /** ID of user to delete */
+  userId: string
+}
+
 export type ListApplicationsRequest = {
   /** Criteria for sorting results */
   orderBy?: ListApplicationsRequestOrderBy
