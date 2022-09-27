@@ -52,6 +52,7 @@ import type {
   DeleteGroupRequest,
   DeletePolicyRequest,
   DeleteSSHKeyRequest,
+  DeleteUserRequest,
   GetAPIKeyRequest,
   GetApplicationRequest,
   GetGroupRequest,
@@ -254,6 +255,20 @@ export class IamV1Alpha1GenAPI extends API {
       },
       unmarshalUser,
     )
+
+  /**
+   * Delete a user
+   *
+   * @param request - The request {@link DeleteUserRequest}
+   */
+  deleteUser = (request: Readonly<DeleteUserRequest>) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/iam/v1alpha1/users/${validatePathParam(
+        'userId',
+        request.userId,
+      )}`,
+    })
 
   protected pageOfListApplications = (
     request: Readonly<ListApplicationsRequest> = {},
