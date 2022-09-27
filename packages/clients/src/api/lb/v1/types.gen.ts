@@ -222,6 +222,7 @@ export interface Backend {
   createdAt?: Date
   updatedAt?: Date
   failoverHost?: string
+  sslBridging?: boolean
 }
 
 /**
@@ -858,11 +859,13 @@ export type CreateBackendRequest = {
    */
   proxyProtocol: ProxyProtocol
   /**
-   * Only the host part of the Scaleway S3 bucket website is expected e.g.
+   * Only the host part of the Scaleway S3 bucket website is expected. E.g.
    * `failover-website.s3-website.fr-par.scw.cloud` if your bucket website URL
    * is `https://failover-website.s3-website.fr-par.scw.cloud/`.
    */
   failoverHost?: string
+  /** Enable SSL between load balancer and backend servers */
+  sslBridging?: boolean
 }
 
 export type GetBackendRequest = {
@@ -917,6 +920,8 @@ export type UpdateBackendRequest = {
    * is `https://failover-website.s3-website.fr-par.scw.cloud/`.
    */
   failoverHost?: string
+  /** Enable SSL between load balancer and backend servers */
+  sslBridging?: boolean
 }
 
 export type DeleteBackendRequest = {
@@ -1652,11 +1657,13 @@ export type ZonedApiCreateBackendRequest = {
    */
   proxyProtocol: ProxyProtocol
   /**
-   * Only the host part of the Scaleway S3 bucket website is expected e.g.
+   * Only the host part of the Scaleway S3 bucket website is expected. E.g.
    * `failover-website.s3-website.fr-par.scw.cloud` if your bucket website URL
    * is `https://failover-website.s3-website.fr-par.scw.cloud/`.
    */
   failoverHost?: string
+  /** Enable SSL between load balancer and backend servers */
+  sslBridging?: boolean
 }
 
 export type ZonedApiGetBackendRequest = {
@@ -1711,6 +1718,8 @@ export type ZonedApiUpdateBackendRequest = {
    * is `https://failover-website.s3-website.fr-par.scw.cloud/`.
    */
   failoverHost?: string
+  /** Enable SSL between load balancer and backend servers */
+  sslBridging?: boolean
 }
 
 export type ZonedApiDeleteBackendRequest = {
