@@ -4,6 +4,7 @@ import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
+  unmarshalDate,
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
@@ -139,12 +140,14 @@ export const unmarshalNamespace = (data: unknown) => {
   }
 
   return {
+    createdAt: unmarshalDate(data.created_at),
     endpoint: data.endpoint,
     id: data.id,
     name: data.name,
     projectId: data.project_id,
     protocol: data.protocol,
     region: data.region,
+    updatedAt: unmarshalDate(data.updated_at),
   } as Namespace
 }
 

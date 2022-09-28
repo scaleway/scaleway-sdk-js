@@ -99,6 +99,8 @@ export interface Namespace {
   name: string
   endpoint: string
   protocol: NamespaceProtocol
+  createdAt?: Date
+  updatedAt?: Date
   region: Region
 }
 
