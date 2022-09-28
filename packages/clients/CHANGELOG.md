@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.13](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.12...@scaleway/sdk@0.1.0-beta.13) (2022-09-28)
+
+
+### Features
+
+* **domain:** add host management ([#122](https://github.com/scaleway/scaleway-sdk-js/issues/122)) ([41f967f](https://github.com/scaleway/scaleway-sdk-js/commit/41f967fa18d4a39db9ee638f9217c7fc70f0297c))
+* **functions:** add trigger management ([#128](https://github.com/scaleway/scaleway-sdk-js/issues/128)) ([cda0909](https://github.com/scaleway/scaleway-sdk-js/commit/cda0909e3ffbb856723c0154550b83ca5c763a45))
+* **iam:** add deleteUser ([#127](https://github.com/scaleway/scaleway-sdk-js/issues/127)) ([3275d2c](https://github.com/scaleway/scaleway-sdk-js/commit/3275d2ce7aaeac4840a910a7937b6367caf7ab82))
+* **lb:** add ssl bridging ([#126](https://github.com/scaleway/scaleway-sdk-js/issues/126)) ([f49fad3](https://github.com/scaleway/scaleway-sdk-js/commit/f49fad3f84727ae1081c69f49774c400960608ab))
+
+
+
 ## [0.1.0-beta.12](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.11...@scaleway/sdk@0.1.0-beta.12) (2022-09-26)
 
 
