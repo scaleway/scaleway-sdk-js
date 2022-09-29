@@ -1076,7 +1076,7 @@ export type CreateSnapshotRequest = {
   /** Name of the snapshot */
   name?: string
   /** UUID of the volume */
-  volumeId: string
+  volumeId?: string
   /** The tags of the snapshot */
   tags?: Array<string>
   /**
