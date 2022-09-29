@@ -58,7 +58,7 @@ export class MnqV1Alpha1GenAPI extends API {
           request.region ?? this.client.settings.defaultRegion,
         )}/namespaces`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'id_asc'],
+          ['order_by', request.orderBy ?? 'created_at_asc'],
           ['page', request.page],
           [
             'page_size',

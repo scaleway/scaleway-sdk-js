@@ -9,6 +9,10 @@ export type ListCredentialsRequestOrderBy =
   | 'name_desc'
 
 export type ListNamespacesRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'updated_at_asc'
+  | 'updated_at_desc'
   | 'id_asc'
   | 'id_desc'
   | 'name_asc'
