@@ -26,7 +26,11 @@ export const SECURITY_GROUP_TRANSIENT_STATUSES: SecurityGroupState[] = [
 export const SERVER_TRANSIENT_STATUSES: ServerState[] = ['starting', 'stopping']
 
 /** Lists transient statutes of the enum {@link SnapshotState}. */
-export const SNAPSHOT_TRANSIENT_STATUSES: SnapshotState[] = ['snapshotting']
+export const SNAPSHOT_TRANSIENT_STATUSES: SnapshotState[] = [
+  'snapshotting',
+  'importing',
+  'exporting',
+]
 
 /** Lists transient statutes of the enum {@link TaskStatus}. */
 export const TASK_TRANSIENT_STATUSES: TaskStatus[] = [
