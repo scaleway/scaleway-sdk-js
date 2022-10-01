@@ -53,6 +53,8 @@ export type SnapshotState =
   | 'snapshotting'
   | 'error'
   | 'invalid_data'
+  | 'importing'
+  | 'exporting'
 
 export type SnapshotVolumeType =
   | 'unknown_volume_type'
