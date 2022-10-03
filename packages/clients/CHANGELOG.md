@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.14](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.13...@scaleway/sdk@0.1.0-beta.14) (2022-10-03)
+
+
+### Features
+
+* **instance:** add snapshot states for snapshot transfer ([#137](https://github.com/scaleway/scaleway-sdk-js/issues/137)) ([cf2c148](https://github.com/scaleway/scaleway-sdk-js/commit/cf2c14816edacf77e92707dcb02c69346a9bcccc))
+* **mnq:** add created_at and updated_at fields to namespace ([#131](https://github.com/scaleway/scaleway-sdk-js/issues/131)) ([d05dc63](https://github.com/scaleway/scaleway-sdk-js/commit/d05dc63b2d7c4f8d4c00d2011d8097babc59929e))
+* **mnq:** sort namespaces by date ([#135](https://github.com/scaleway/scaleway-sdk-js/issues/135)) ([0f3bbf7](https://github.com/scaleway/scaleway-sdk-js/commit/0f3bbf7262bc3908154397f858ea0f47289da765))
+
+
+### Bug Fixes
+
+* **instance:** make volumeId field optional when creating a snapshot ([#134](https://github.com/scaleway/scaleway-sdk-js/issues/134)) ([428e6c4](https://github.com/scaleway/scaleway-sdk-js/commit/428e6c40cfc6f937870f0bae3decdd760b0f8d00))
+
+
+
 ## [0.1.0-beta.13](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.12...@scaleway/sdk@0.1.0-beta.13) (2022-09-28)
 
 
