@@ -15,4 +15,5 @@ export const SERVER_TRANSIENT_STATUSES: ServerStatus[] = [
   'starting',
   'deleting',
   'ordered',
+  'resetting',
 ]
