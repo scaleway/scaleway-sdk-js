@@ -54,6 +54,7 @@ export type ServerStatus =
   | 'locked'
   | 'out_of_stock'
   | 'ordered'
+  | 'resetting'
 
 export type SettingType = 'unknown' | 'smtp'
 
