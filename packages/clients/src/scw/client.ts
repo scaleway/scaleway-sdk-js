@@ -58,7 +58,7 @@ export const createAdvancedClient = (...configs: ClientConfig[]): Client => {
   getLogger().info(`init Scaleway SDK version ${version}`)
 
   return {
-    fetch: buildFetcher(settings, fetch),
+    fetch: buildFetcher(settings, settings.httpClient),
     settings,
   }
 }
