@@ -65,7 +65,7 @@ export const responseParser =
       } catch (err) {
         throw new ScalewayError(
           response.status,
-          `could not parse ${contentType ?? ''} response${
+          `could not parse '${contentType ?? ''}' response${
             err instanceof Error ? `: ${err.message}` : ''
           }`,
         )
