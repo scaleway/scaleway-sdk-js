@@ -7,6 +7,13 @@ const withApiURL =
   (apiURL: string): ClientConfig =>
   (obj: Settings): Settings => ({ ...obj, apiURL })
 
+const withPassthroughFetch =
+  (res: string): ClientConfig =>
+  (obj: Settings): Settings => ({
+    ...obj,
+    httpClient: () => Promise.resolve(new Response(res)),
+  })
+
 describe('createAdvancedClient', () => {
   it('initializes without throwing', () => {
     expect(() => {
@@ -51,6 +58,14 @@ describe('createAdvancedClient', () => {
     const betaApiRoot = 'https://api-beta.scaleway.com'
     const client = createAdvancedClient(withApiURL(betaApiRoot))
     expect(client.settings.apiURL).toBe(betaApiRoot)
+  })
+
+  it('contains override of httpClient', () => {
+    const client = createAdvancedClient(withPassthroughFetch('hello world'))
+
+    return expect(
+      client.settings.httpClient('any-url').then(obj => obj.text()),
+    ).resolves.toBe('hello world')
   })
 })
 
