@@ -238,6 +238,11 @@ export class TransactionalEmailV1Alpha1GenAPI extends API {
           request.region ?? this.client.settings.defaultRegion,
         )}/domains`,
         urlParams: urlParams(
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
           ['page', request.page],
           [
             'page_size',
