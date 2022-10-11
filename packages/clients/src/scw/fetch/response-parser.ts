@@ -53,25 +53,22 @@ export const responseParser =
     if (response.ok) {
       if (response.status === 204) return unmarshaller(undefined)
       const contentType = response.headers.get('Content-Type')
-      switch (contentType) {
-        case 'application/json':
-          try {
+      try {
+        switch (contentType) {
+          case 'application/json':
             return unmarshaller(
               fixLegacyTotalCount(await response.json(), response.headers),
             )
-          } catch (err) {
-            throw new ScalewayError(
-              response.status,
-              `could not parse ${contentType} response${
-                err instanceof Error ? `: ${err.message}` : ''
-              }`,
-            )
-          }
-        default:
-          throw new ScalewayError(
-            response.status,
-            `invalid content type ${contentType ?? ''}`.trim(),
-          )
+          default:
+            return unmarshaller(await response.text())
+        }
+      } catch (err) {
+        throw new ScalewayError(
+          response.status,
+          `could not parse '${contentType ?? ''}' response${
+            err instanceof Error ? `: ${err.message}` : ''
+          }`,
+        )
       }
     }
 

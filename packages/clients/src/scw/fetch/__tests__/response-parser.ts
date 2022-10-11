@@ -19,13 +19,18 @@ const unmarshalJSON = (obj: unknown) => {
   return obj
 }
 
-const makeValidFetchResponse = (
-  contentType = 'application/json',
+const makeValidJSONResponse = (
   value: JSON | null = SIMPLE_REQ_BODY,
   status = 200,
 ) =>
   new Response(value !== null ? convertObjToBuffer(value) : value, {
-    headers: { 'Content-Type': contentType },
+    headers: { 'Content-Type': 'application/json' },
+    status,
+  })
+
+const makeValidTextResponse = (value: string | null, status = 200) =>
+  new Response(value, {
+    headers: { 'Content-Type': 'plain/text' },
     status,
   })
 
@@ -82,7 +87,7 @@ describe(`responseParser`, () => {
   })
 
   it(`triggers an error for unsuccessful unmarshalling`, async () => {
-    const validResponse = makeValidFetchResponse()
+    const validResponse = makeValidJSONResponse()
 
     await expect(
       responseParser(() => {
@@ -91,7 +96,7 @@ describe(`responseParser`, () => {
     ).rejects.toThrow(
       new ScalewayError(
         validResponse.status,
-        `could not parse application/json response: couldn't unwrap response value`,
+        `could not parse 'application/json' response: couldn't unwrap response value`,
       ),
     )
 
@@ -103,42 +108,25 @@ describe(`responseParser`, () => {
     ).rejects.toThrow(
       new ScalewayError(
         validResponse.status,
-        `could not parse application/json response`,
+        `could not parse 'application/json' response`,
       ),
     )
   })
 
-  it(`triggers an error for invalid content type`, async () => {
-    const cType = 'plain/text'
-    const invalidResponse = makeValidFetchResponse(cType)
+  it(`returns the response as-if for unknown content type`, async () => {
+    const textResponse = makeValidTextResponse('text-body')
 
-    return expect(parseJson(invalidResponse)).rejects.toThrow(
-      new ScalewayError(
-        invalidResponse.status,
-        `invalid content type ${cType}`,
-      ),
-    )
-  })
-
-  it(`triggers an error for undefined content type`, async () => {
-    const invalidResponse = new Response(convertObjToBuffer(SIMPLE_REQ_BODY), {
-      headers: {},
-      status: 200,
-    })
-
-    return expect(parseJson(invalidResponse)).rejects.toThrow(
-      new ScalewayError(invalidResponse.status, `invalid content type`),
-    )
+    return expect(parseAsIs(textResponse)).resolves.toBe('text-body')
   })
 
   it(`returns a simple object for a valid 'Response' object`, async () =>
-    expect(parseJson(makeValidFetchResponse())).resolves.toMatchObject(
+    expect(parseJson(makeValidJSONResponse())).resolves.toMatchObject(
       SIMPLE_REQ_BODY,
     ))
 
   it(`returns undefined for a 204 status code, even if content-type is json`, async () =>
     expect(
-      parseAsIs(makeValidFetchResponse('application/json', null, 204)),
+      parseAsIs(makeValidJSONResponse(null, 204)),
     ).resolves.toBeUndefined())
 })
 
