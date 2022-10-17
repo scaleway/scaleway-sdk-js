@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.16](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.15...@scaleway/sdk@0.1.0-beta.16) (2022-10-17)
+
+### Features
+
+- **redis:** support nl-ams-2 locality ([#155](https://github.com/scaleway/scaleway-sdk-js/issues/155)) ([b82a04a](https://github.com/scaleway/scaleway-sdk-js/commit/b82a04a19d2c10e8f0b449f0898c5cf4867683ed))
+- return the response as-if for unknown content type ([#145](https://github.com/scaleway/scaleway-sdk-js/issues/145)) ([e684403](https://github.com/scaleway/scaleway-sdk-js/commit/e68440339579c3dd79d73ed19bb674e6f62b5ffe))
+- **transactional_email:** add organizationId filter to listDomains ([#151](https://github.com/scaleway/scaleway-sdk-js/issues/151)) ([0c38eea](https://github.com/scaleway/scaleway-sdk-js/commit/0c38eea11509e85016d786aa4fd3d44fe609571a))
+
 ## [0.1.0-beta.15](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.14...@scaleway/sdk@0.1.0-beta.15) (2022-10-10)
 
 ### Features
