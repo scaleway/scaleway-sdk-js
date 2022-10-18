@@ -59,6 +59,8 @@ export const responseParser =
             return unmarshaller(
               fixLegacyTotalCount(await response.json(), response.headers),
             )
+          case 'application/pdf':
+            return unmarshaller(await response.blob())
           default:
             return unmarshaller(await response.text())
         }
