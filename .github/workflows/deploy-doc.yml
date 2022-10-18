@@ -37,7 +37,7 @@ jobs:
       - name: Setup PNPM
         uses: pnpm/action-setup@v2.2.4
       - name: Setup Node
-        uses: actions/setup-node@v3.5.0
+        uses: actions/setup-node@v3.5.1
         with:
           node-version: 17
           check-latest: true
