@@ -695,6 +695,10 @@ export interface Volume {
 export type ListDatabaseEnginesRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
+  /** Name of the Database Engine */
+  name?: string
+  /** Version of the Database Engine */
+  version?: string
   page?: number
   pageSize?: number
 }

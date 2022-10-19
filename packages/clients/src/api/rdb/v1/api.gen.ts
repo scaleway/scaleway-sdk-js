@@ -175,11 +175,13 @@ export class RdbV1GenAPI extends API {
           request.region ?? this.client.settings.defaultRegion,
         )}/database-engines`,
         urlParams: urlParams(
+          ['name', request.name],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
+          ['version', request.version],
         ),
       },
       unmarshalListDatabaseEnginesResponse,
