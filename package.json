@@ -96,7 +96,7 @@
     "read-pkg": "^7.1.0",
     "rollup": "^2.79.1",
     "rollup-plugin-dts": "^4.2.3",
-    "rollup-plugin-visualizer": "^5.8.2",
+    "rollup-plugin-visualizer": "^5.8.3",
     "typedoc": "^0.23.16",
     "typescript": "^4.8.4"
   },
