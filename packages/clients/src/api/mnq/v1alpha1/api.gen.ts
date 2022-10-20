@@ -59,6 +59,11 @@ export class MnqV1Alpha1GenAPI extends API {
         )}/namespaces`,
         urlParams: urlParams(
           ['order_by', request.orderBy ?? 'created_at_asc'],
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
           ['page', request.page],
           [
             'page_size',

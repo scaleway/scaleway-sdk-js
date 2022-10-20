@@ -121,6 +121,7 @@ export type ListNamespacesRequest = {
   page?: number
   pageSize?: number
   orderBy?: ListNamespacesRequestOrderBy
+  organizationId?: string
 }
 
 export type CreateNamespaceRequest = {
