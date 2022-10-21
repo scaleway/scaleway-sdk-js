@@ -118,6 +118,8 @@ export interface Cluster {
   clusterSize: number
   /** Zone of the cluster */
   zone: Zone
+  /** Name of the user associated to the cluster */
+  userName: string
 }
 
 /** Cluster metrics response */
