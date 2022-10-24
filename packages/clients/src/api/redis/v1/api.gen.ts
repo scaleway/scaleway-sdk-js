@@ -197,6 +197,7 @@ export class RedisV1GenAPI extends API {
             request.projectId ?? this.client.settings.defaultProjectId,
           ],
           ['tags', request.tags],
+          ['version', request.version],
         ),
       },
       unmarshalListClustersResponse,

@@ -346,6 +346,8 @@ export type ListClustersRequest = {
   projectId?: string
   /** Organization ID to list the cluster of */
   organizationId?: string
+  /** Version of the clusters to filter upon */
+  version?: string
   page?: number
   pageSize?: number
 }
