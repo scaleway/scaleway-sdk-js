@@ -6,7 +6,7 @@ import { fixLegacyTotalCount, responseParser } from '../response-parser'
 
 const SIMPLE_REQ_BODY = { 'what-is-life': 42 }
 
-const convertObjToBuffer = (obj: JSON): Buffer => {
+const convertObjToBuffer = (obj: unknown): Buffer => {
   const str = JSON.stringify(obj)
   const bytes = new TextEncoder().encode(str)
 
@@ -19,24 +19,35 @@ const unmarshalJSON = (obj: unknown) => {
   return obj
 }
 
-const makeValidJSONResponse = (
-  value: JSON | null = SIMPLE_REQ_BODY,
+const makeResponse = (
+  value: unknown,
   status = 200,
+  contentType: string | undefined = undefined,
 ) =>
   new Response(value !== null ? convertObjToBuffer(value) : value, {
-    headers: { 'Content-Type': 'application/json' },
+    headers: contentType ? { 'Content-Type': contentType } : undefined,
     status,
   })
 
-const makeValidTextResponse = (value: string | null, status = 200) =>
+const makeJSONResponse = (value: JSON = SIMPLE_REQ_BODY, status = 200) =>
+  makeResponse(value, status, 'application/json')
+
+const makeTextResponse = (value: string, status = 200) =>
   new Response(value, {
     headers: { 'Content-Type': 'plain/text' },
     status,
   })
 
 describe(`responseParser`, () => {
-  const parseJson = responseParser(unmarshalJSON)
-  const parseAsIs = responseParser(<T>(response: unknown) => response as T)
+  const parseJson = responseParser(unmarshalJSON, 'JSON')
+  const parseAsIs = responseParser(
+    <T>(response: unknown) => response as T,
+    'JSON',
+  )
+  const parseBlob = responseParser(
+    <T>(response: unknown) => response as T,
+    'BLOB',
+  )
 
   it(`triggers a type error for non 'Response' object`, () =>
     expect(
@@ -87,12 +98,13 @@ describe(`responseParser`, () => {
   })
 
   it(`triggers an error for unsuccessful unmarshalling`, async () => {
-    const validResponse = makeValidJSONResponse()
+    const validResponse = makeJSONResponse()
+    const emptyContentTypeResponse = makeResponse('some-text', 200, '')
 
     await expect(
       responseParser(() => {
         throw new Error(`couldn't unwrap response value`)
-      })(validResponse.clone()),
+      }, 'JSON')(validResponse.clone()),
     ).rejects.toThrow(
       new ScalewayError(
         validResponse.status,
@@ -104,30 +116,42 @@ describe(`responseParser`, () => {
       responseParser(() => {
         // eslint-disable-next-line @typescript-eslint/no-throw-literal
         throw 'not-of-error-type'
-      })(validResponse.clone()),
+      }, 'TEXT')(validResponse.clone()),
     ).rejects.toThrow(
       new ScalewayError(
         validResponse.status,
         `could not parse 'application/json' response`,
       ),
     )
+
+    await expect(
+      responseParser(() => {
+        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        throw 'not-of-error-type'
+      }, 'BLOB')(emptyContentTypeResponse),
+    ).rejects.toThrow(
+      new ScalewayError(
+        emptyContentTypeResponse.status,
+        `could not parse '' response`,
+      ),
+    )
   })
 
-  it(`returns the response as-if for unknown content type`, async () => {
-    const textResponse = makeValidTextResponse('text-body')
+  it(`returns the response as text for unknown content type`, async () =>
+    expect(parseAsIs(makeTextResponse('text-body'))).resolves.toBe('text-body'))
 
-    return expect(parseAsIs(textResponse)).resolves.toBe('text-body')
-  })
-
-  it(`returns a simple object for a valid 'Response' object`, async () =>
-    expect(parseJson(makeValidJSONResponse())).resolves.toMatchObject(
+  it(`returns the proper object for a valid JSON object`, async () =>
+    expect(parseJson(makeJSONResponse())).resolves.toMatchObject(
       SIMPLE_REQ_BODY,
     ))
 
+  it(`returns the proper type for a Blob responseType`, async () =>
+    expect(parseBlob(makeTextResponse('hello world'))).resolves.toBeInstanceOf(
+      Blob,
+    ))
+
   it(`returns undefined for a 204 status code, even if content-type is json`, async () =>
-    expect(
-      parseAsIs(makeValidJSONResponse(null, 204)),
-    ).resolves.toBeUndefined())
+    expect(parseAsIs(makeJSONResponse(null, 204))).resolves.toBeUndefined())
 })
 
 describe('fixLegacyTotalCount', () => {

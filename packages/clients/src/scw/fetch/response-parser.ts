@@ -45,7 +45,10 @@ export const fixLegacyTotalCount = <T>(obj: T, headers: Headers): T => {
  * @internal
  */
 export const responseParser =
-  <T>(unmarshaller: ResponseUnmarshaller<T>) =>
+  <T>(
+    unmarshaller: ResponseUnmarshaller<T>,
+    responseType: 'JSON' | 'TEXT' | 'BLOB',
+  ) =>
   async (response: Response): Promise<T> => {
     if (!(response instanceof Response))
       throw new TypeError('Invalid response object')
@@ -54,16 +57,16 @@ export const responseParser =
       if (response.status === 204) return unmarshaller(undefined)
       const contentType = response.headers.get('Content-Type')
       try {
-        switch (contentType) {
-          case 'application/json':
-            return unmarshaller(
-              fixLegacyTotalCount(await response.json(), response.headers),
-            )
-          case 'application/pdf':
-            return unmarshaller(await response.blob())
-          default:
-            return unmarshaller(await response.text())
+        if (responseType === 'JSON' && contentType === 'application/json') {
+          return unmarshaller(
+            fixLegacyTotalCount(await response.json(), response.headers),
+          )
+        } if (responseType === 'BLOB') {
+          return unmarshaller(await response.blob())
         }
+ 
+          return unmarshaller(await response.text())
+        
       } catch (err) {
         throw new ScalewayError(
           response.status,
