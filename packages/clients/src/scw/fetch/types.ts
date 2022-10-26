@@ -5,6 +5,7 @@ export type ScwRequest = {
   headers?: Record<string, string>
   body?: string
   urlParams?: URLSearchParams
+  responseType?: 'JSON' | 'TEXT' | 'BLOB'
 }
 
 /**

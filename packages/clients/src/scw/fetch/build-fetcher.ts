@@ -78,6 +78,6 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
       .then(prepareRequest(requestId))
       .then(httpClient)
       .then(prepareResponse(requestId))
-      .then(responseParser<T>(unwrapper))
+      .then(responseParser<T>(unwrapper, request.responseType ?? 'JSON'))
   }
 }
