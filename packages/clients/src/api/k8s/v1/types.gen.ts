@@ -463,9 +463,9 @@ export interface Node {
   region: Region
   /** The name of the node */
   name: string
-  /** The public IPv4 address of the node */
+  /** @deprecated The public IPv4 address of the node */
   publicIpV4?: string
-  /** The public IPv6 address of the node */
+  /** @deprecated The public IPv6 address of the node */
   publicIpV6?: string
   /**
    * @deprecated These conditions contains the Node Problem Detector conditions,
