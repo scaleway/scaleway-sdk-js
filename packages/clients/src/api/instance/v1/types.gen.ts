@@ -119,12 +119,10 @@ export interface Bootscript {
 
 export interface CreateImageResponse {
   image?: Image
-  location: string
 }
 
 export interface CreateIpResponse {
   ip?: Ip
-  location: string
 }
 
 export interface CreatePlacementGroupResponse {
@@ -154,7 +152,6 @@ export interface CreateSnapshotResponse {
 
 export interface CreateVolumeResponse {
   volume?: Volume
-  location: string
 }
 
 export interface Dashboard {
@@ -308,9 +305,12 @@ export interface ListSecurityGroupRulesResponse {
   rules: Array<SecurityGroupRule>
 }
 
+/** List security groups response */
 export interface ListSecurityGroupsResponse {
-  securityGroups: Array<SecurityGroup>
+  /** Total number of security groups */
   totalCount: number
+  /** List of security groups */
+  securityGroups: Array<SecurityGroup>
 }
 
 export interface ListServerActionsResponse {

@@ -731,7 +731,6 @@ export const unmarshalCreateImageResponse = (data: unknown) => {
 
   return {
     image: data.image ? unmarshalImage(data.image) : undefined,
-    location: data.Location,
   } as CreateImageResponse
 }
 
@@ -742,10 +741,7 @@ export const unmarshalCreateIpResponse = (data: unknown) => {
     )
   }
 
-  return {
-    ip: data.ip ? unmarshalIp(data.ip) : undefined,
-    location: data.Location,
-  } as CreateIpResponse
+  return { ip: data.ip ? unmarshalIp(data.ip) : undefined } as CreateIpResponse
 }
 
 export const unmarshalCreatePlacementGroupResponse = (data: unknown) => {
@@ -835,7 +831,6 @@ export const unmarshalCreateVolumeResponse = (data: unknown) => {
   }
 
   return {
-    location: data.Location,
     volume: data.volume ? unmarshalVolume(data.volume) : undefined,
   } as CreateVolumeResponse
 }
