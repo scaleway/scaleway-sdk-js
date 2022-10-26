@@ -47,7 +47,7 @@ export const fixLegacyTotalCount = <T>(obj: T, headers: Headers): T => {
 export const responseParser =
   <T>(
     unmarshaller: ResponseUnmarshaller<T>,
-    responseType: 'JSON' | 'TEXT' | 'BLOB',
+    responseType: 'json' | 'text' | 'blob',
   ) =>
   async (response: Response): Promise<T> => {
     if (!(response instanceof Response))
@@ -57,16 +57,16 @@ export const responseParser =
       if (response.status === 204) return unmarshaller(undefined)
       const contentType = response.headers.get('Content-Type')
       try {
-        if (responseType === 'JSON' && contentType === 'application/json') {
+        if (responseType === 'json' && contentType === 'application/json') {
           return unmarshaller(
             fixLegacyTotalCount(await response.json(), response.headers),
           )
-        } if (responseType === 'BLOB') {
+        }
+        if (responseType === 'blob') {
           return unmarshaller(await response.blob())
         }
- 
-          return unmarshaller(await response.text())
-        
+
+        return unmarshaller(await response.text())
       } catch (err) {
         throw new ScalewayError(
           response.status,

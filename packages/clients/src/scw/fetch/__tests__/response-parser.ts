@@ -39,14 +39,14 @@ const makeTextResponse = (value: string, status = 200) =>
   })
 
 describe(`responseParser`, () => {
-  const parseJson = responseParser(unmarshalJSON, 'JSON')
+  const parseJson = responseParser(unmarshalJSON, 'json')
   const parseAsIs = responseParser(
     <T>(response: unknown) => response as T,
-    'JSON',
+    'json',
   )
   const parseBlob = responseParser(
     <T>(response: unknown) => response as T,
-    'BLOB',
+    'blob',
   )
 
   it(`triggers a type error for non 'Response' object`, () =>
@@ -104,7 +104,7 @@ describe(`responseParser`, () => {
     await expect(
       responseParser(() => {
         throw new Error(`couldn't unwrap response value`)
-      }, 'JSON')(validResponse.clone()),
+      }, 'json')(validResponse.clone()),
     ).rejects.toThrow(
       new ScalewayError(
         validResponse.status,
@@ -116,7 +116,7 @@ describe(`responseParser`, () => {
       responseParser(() => {
         // eslint-disable-next-line @typescript-eslint/no-throw-literal
         throw 'not-of-error-type'
-      }, 'TEXT')(validResponse.clone()),
+      }, 'text')(validResponse.clone()),
     ).rejects.toThrow(
       new ScalewayError(
         validResponse.status,
@@ -128,7 +128,7 @@ describe(`responseParser`, () => {
       responseParser(() => {
         // eslint-disable-next-line @typescript-eslint/no-throw-literal
         throw 'not-of-error-type'
-      }, 'BLOB')(emptyContentTypeResponse),
+      }, 'blob')(emptyContentTypeResponse),
     ).rejects.toThrow(
       new ScalewayError(
         emptyContentTypeResponse.status,
