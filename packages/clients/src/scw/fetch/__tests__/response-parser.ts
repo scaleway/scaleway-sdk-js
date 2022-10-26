@@ -146,9 +146,9 @@ describe(`responseParser`, () => {
     ))
 
   it(`returns the proper type for a Blob responseType`, async () =>
-    expect(parseBlob(makeTextResponse('hello world'))).resolves.toBeInstanceOf(
-      Blob,
-    ))
+    expect(
+      parseBlob(makeTextResponse('hello world')).then(obj => typeof obj),
+    ).resolves.toBe('object'))
 
   it(`returns undefined for a 204 status code, even if content-type is json`, async () =>
     expect(parseAsIs(makeJSONResponse(null, 204))).resolves.toBeUndefined())
