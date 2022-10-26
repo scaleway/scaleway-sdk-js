@@ -272,6 +272,7 @@ export type ListDomainsRequest = {
   projectId?: string
   status?: Array<DomainStatus>
   organizationId?: string
+  name?: string
 }
 
 export type RevokeDomainRequest = {

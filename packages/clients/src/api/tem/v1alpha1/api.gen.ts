@@ -238,6 +238,7 @@ export class TemV1Alpha1GenAPI extends API {
           request.region ?? this.client.settings.defaultRegion,
         )}/domains`,
         urlParams: urlParams(
+          ['name', request.name],
           [
             'organization_id',
             request.organizationId ??
