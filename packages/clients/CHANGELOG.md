@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.18](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.17...@scaleway/sdk@0.1.0-beta.18) (2022-10-27)
+
+### Features
+
+- **tem:** rename product from TEM to TransactionalEmail for clarity ([#189](https://github.com/scaleway/scaleway-sdk-js/issues/189)) ([41f8272](https://github.com/scaleway/scaleway-sdk-js/commit/41f82727102b73aaf7926712c4ea2a3f53abc4e9))
+
 ## [0.1.0-beta.17](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.16...@scaleway/sdk@0.1.0-beta.17) (2022-10-27)
 
 ### Features
