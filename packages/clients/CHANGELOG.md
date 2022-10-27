@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.17](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.16...@scaleway/sdk@0.1.0-beta.17) (2022-10-27)
+
+### Features
+
+- allow Blob response thanks to responseType parameter ([#163](https://github.com/scaleway/scaleway-sdk-js/issues/163)) ([1b4bf75](https://github.com/scaleway/scaleway-sdk-js/commit/1b4bf7535eb38c728ea1ddd237574063989a843f))
+- **mnq:** add field to filter by organization ([#166](https://github.com/scaleway/scaleway-sdk-js/issues/166)) ([2cb3572](https://github.com/scaleway/scaleway-sdk-js/commit/2cb35724eb7fe40fabefe20e4a938bc132030de1))
+- **redis:** allow filtering the list of Clusters using version attribute ([#172](https://github.com/scaleway/scaleway-sdk-js/issues/172)) ([eff3a04](https://github.com/scaleway/scaleway-sdk-js/commit/eff3a04680fc52ff6327502d879e4711a76fe849))
+- **redis:** expose user_name field of the Cluster Object ([#167](https://github.com/scaleway/scaleway-sdk-js/issues/167)) ([dfe8a96](https://github.com/scaleway/scaleway-sdk-js/commit/dfe8a962918f02f6f449ca1a47731a3e844dcb03))
+- **tem:** filter by name for listDomains ([#182](https://github.com/scaleway/scaleway-sdk-js/issues/182)) ([e9c8927](https://github.com/scaleway/scaleway-sdk-js/commit/e9c8927c84eccbfe4f58473be3364cded07b2cd7))
+
+### Bug Fixes
+
+- **instance:** remove unused fields ([#181](https://github.com/scaleway/scaleway-sdk-js/issues/181)) ([cb0895a](https://github.com/scaleway/scaleway-sdk-js/commit/cb0895abd2015c87c435b7543586e8eaba1e51c2))
+- **rdb:** add name and version optional fields on ListDatabaseEngineRequest ([#165](https://github.com/scaleway/scaleway-sdk-js/issues/165)) ([d17cc86](https://github.com/scaleway/scaleway-sdk-js/commit/d17cc8600b30bb160ffaf6c0d6ac79d36f9242ce))
+- **tem:** fix devtools generation ([#162](https://github.com/scaleway/scaleway-sdk-js/issues/162)) ([6ecb1f4](https://github.com/scaleway/scaleway-sdk-js/commit/6ecb1f47cb2138321cf23e287d6056fd13d0db05))
+- **tem:** remove duplicate code ([#170](https://github.com/scaleway/scaleway-sdk-js/issues/170)) ([098e518](https://github.com/scaleway/scaleway-sdk-js/commit/098e5189999c4e51d44472d28ba1ad8232a3ee6c))
+
 ## [0.1.0-beta.16](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.15...@scaleway/sdk@0.1.0-beta.16) (2022-10-17)
 
 ### Features
