@@ -78,7 +78,7 @@ describe(`buildFetcher (mock)`, () => {
   })
 
   jest.spyOn(global, 'fetch')
-  const mockedFetch = jest.mocked(fetch, false)
+  const mockedFetch = jest.mocked(fetch)
   const fetcher = buildFetcher(DEFAULT_SETTINGS, global.fetch)
 
   it(`gets a response without error for a simple request with unmarshaller`, async () => {
