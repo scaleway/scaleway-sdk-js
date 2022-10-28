@@ -27,7 +27,7 @@ importers:
       husky: ^8.0.1
       jest: ^29.2.2
       jest-junit: ^14.0.1
-      lerna: ^6.0.0
+      lerna: ^6.0.1
       lint-staged: ^13.0.3
       prettier: ^2.7.1
       read-pkg: ^7.1.0
