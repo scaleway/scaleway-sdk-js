@@ -39,7 +39,7 @@ const jsonContentHeaders = {
 }
 
 /**
- * MnQ API.
+ * MnQ API (beta).
  *
  * This API allows you to manage Messaging or Queueing brokers.
  */
