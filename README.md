@@ -1,4 +1,4 @@
-# Scaleway SDK
+# Scaleway JS SDK
 
 This SDK enables you to interact with Scaleway APIs.
 
