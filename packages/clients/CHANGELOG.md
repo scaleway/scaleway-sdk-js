@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.19](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.18...@scaleway/sdk@0.1.0-beta.19) (2022-10-31)
+
+### Features
+
+- **mnq:** set by default a random name when creating a namespace or credential ([#192](https://github.com/scaleway/scaleway-sdk-js/issues/192)) ([f4ccf51](https://github.com/scaleway/scaleway-sdk-js/commit/f4ccf518cdf1efaa935971f308fb7e8f632e3cd3))
+
 ## [0.1.0-beta.18](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.17...@scaleway/sdk@0.1.0-beta.18) (2022-10-27)
 
 ### Features
