@@ -85,6 +85,7 @@ export class RedisV1GenAPI extends API {
     'nl-ams-1',
     'nl-ams-2',
     'pl-waw-1',
+    'pl-waw-2',
   ]
 
   /**
