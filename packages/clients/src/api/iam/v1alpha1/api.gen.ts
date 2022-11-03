@@ -42,6 +42,7 @@ import type {
   APIKey,
   AddGroupMemberRequest,
   Application,
+  ClonePolicyRequest,
   CreateAPIKeyRequest,
   CreateApplicationRequest,
   CreateGroupRequest,
@@ -664,6 +665,20 @@ export class IamV1Alpha1GenAPI extends API {
         request.policyId,
       )}`,
     })
+
+  clonePolicy = (request: Readonly<ClonePolicyRequest>) =>
+    this.client.fetch<Policy>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/iam/v1alpha1/policies/${validatePathParam(
+          'policyId',
+          request.policyId,
+        )}/clone`,
+      },
+      unmarshalPolicy,
+    )
 
   /**
    * Set rules of an existing policy
