@@ -10,6 +10,12 @@ export type ListServerEventsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
 
+export type ListServerPrivateNetworksRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'updated_at_asc'
+  | 'updated_at_desc'
+
 export type ListServersRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type ListSettingsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
@@ -41,6 +47,14 @@ export type ServerPingStatus =
   | 'ping_status_unknown'
   | 'ping_status_up'
   | 'ping_status_down'
+
+export type ServerPrivateNetworkStatus =
+  | 'unknown'
+  | 'attaching'
+  | 'attached'
+  | 'error'
+  | 'detaching'
+  | 'locked'
 
 export type ServerStatus =
   | 'unknown'
@@ -166,6 +180,11 @@ export interface ListServerEventsResponse {
   totalCount: number
   /** Server events that match filters */
   events: Array<ServerEvent>
+}
+
+export interface ListServerPrivateNetworksResponse {
+  serverPrivateNetworks: Array<ServerPrivateNetwork>
+  totalCount: number
 }
 
 /** List servers response */
@@ -403,12 +422,36 @@ export interface ServerOption {
   expiresAt?: Date
 }
 
+/** Server private network */
+export interface ServerPrivateNetwork {
+  /** The private network ID */
+  id: string
+  /** The private network project ID */
+  projectId: string
+  /** The server ID */
+  serverId: string
+  /** The private network ID */
+  privateNetworkId: string
+  /** The VLAN ID associated to the private network */
+  vlan?: number
+  /** The configuration status of the private network */
+  status: ServerPrivateNetworkStatus
+  /** The private network creation date */
+  createdAt?: Date
+  /** The date the private network was last modified */
+  updatedAt?: Date
+}
+
 /** Server. rescue server */
 export interface ServerRescueServer {
   /** Rescue user name */
   user: string
   /** Rescue password */
   password: string
+}
+
+export interface SetServerPrivateNetworksResponse {
+  serverPrivateNetworks: Array<ServerPrivateNetwork>
 }
 
 /** Setting */
@@ -700,4 +743,50 @@ export type GetOSRequest = {
   zone?: Zone
   /** ID of the OS */
   osId: string
+}
+
+export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config */
+  zone?: Zone
+  /** The ID of the server */
+  serverId: string
+  /** The ID of the private network */
+  privateNetworkId: string
+}
+
+export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
+  /** Zone to target. If none is passed will use default zone from the config */
+  zone?: Zone
+  /** The ID of the server */
+  serverId: string
+  /** The IDs of the private networks */
+  privateNetworkIds: Array<string>
+}
+
+export type PrivateNetworkApiListServerPrivateNetworksRequest = {
+  /** Zone to target. If none is passed will use default zone from the config */
+  zone?: Zone
+  /** The sort order for the returned private networks */
+  orderBy?: ListServerPrivateNetworksRequestOrderBy
+  /** The page number for the returned private networks */
+  page?: number
+  /** The maximum number of private networks per page */
+  pageSize?: number
+  /** Filter private networks by server ID */
+  serverId?: string
+  /** Filter private networks by private network ID */
+  privateNetworkId?: string
+  /** Filter private networks by organization ID */
+  organizationId?: string
+  /** Filter private networks by project ID */
+  projectId?: string
+}
+
+export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config */
+  zone?: Zone
+  /** The ID of the server */
+  serverId: string
+  /** The ID of the private network */
+  privateNetworkId: string
 }
