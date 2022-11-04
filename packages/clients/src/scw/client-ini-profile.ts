@@ -28,7 +28,7 @@ export interface AuthenticationSecrets {
  *
  * @public
  */
-export interface DefaultValues {
+export interface ProfileDefaultValues {
   /**
    * APIURL overrides the API URL of the Scaleway API to the given URL.
    * Change that if you want to direct requests to a different endpoint.
@@ -65,7 +65,7 @@ export interface DefaultValues {
  *
  * @public
  */
-export type Profile = Partial<DefaultValues & AuthenticationSecrets>
+export type Profile = Partial<ProfileDefaultValues & AuthenticationSecrets>
 
 /**
  * Verifies that the payload contains both the accessKey and the secretKey.
