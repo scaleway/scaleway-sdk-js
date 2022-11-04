@@ -688,6 +688,10 @@ export type DeletePolicyRequest = {
   policyId: string
 }
 
+export type ClonePolicyRequest = {
+  policyId: string
+}
+
 export type SetRulesRequest = {
   /** Id of policy to update */
   policyId: string
