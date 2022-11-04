@@ -11,9 +11,11 @@ import type { WaitForOptions, Zone } from '../../../bridge'
 import { SERVER_TRANSIENT_STATUSES } from './content.gen'
 import {
   marshalAddOptionServerRequest,
+  marshalAddServerPrivateNetworkRequest,
   marshalCreateServerRequest,
   marshalInstallServerRequest,
   marshalRebootServerRequest,
+  marshalSetServerPrivateNetworksRequest,
   marshalStartBMCAccessRequest,
   marshalStartServerRequest,
   marshalUpdateIPRequest,
@@ -26,19 +28,24 @@ import {
   unmarshalListOffersResponse,
   unmarshalListOptionsResponse,
   unmarshalListServerEventsResponse,
+  unmarshalListServerPrivateNetworksResponse,
   unmarshalListServersResponse,
   unmarshalListSettingsResponse,
   unmarshalOS,
   unmarshalOffer,
   unmarshalOption,
   unmarshalServer,
+  unmarshalServerPrivateNetwork,
+  unmarshalSetServerPrivateNetworksResponse,
   unmarshalSetting,
 } from './marshalling.gen'
 import type {
   AddOptionServerRequest,
+  AddServerPrivateNetworkRequest,
   BMCAccess,
   CreateServerRequest,
   DeleteOptionServerRequest,
+  DeleteServerPrivateNetworkRequest,
   DeleteServerRequest,
   GetBMCAccessRequest,
   GetOSRequest,
@@ -57,6 +64,8 @@ import type {
   ListOptionsResponse,
   ListServerEventsRequest,
   ListServerEventsResponse,
+  ListServerPrivateNetworksRequest,
+  ListServerPrivateNetworksResponse,
   ListServersRequest,
   ListServersResponse,
   ListSettingsRequest,
@@ -66,6 +75,9 @@ import type {
   Option,
   RebootServerRequest,
   Server,
+  ServerPrivateNetwork,
+  SetServerPrivateNetworksRequest,
+  SetServerPrivateNetworksResponse,
   Setting,
   StartBMCAccessRequest,
   StartServerRequest,
@@ -714,4 +726,128 @@ export class BaremetalV1GenAPI extends API {
       },
       unmarshalOS,
     )
+
+  /**
+   * Add a server to a private network
+   *
+   * @param request - The request {@link AddServerPrivateNetworkRequest}
+   * @returns A Promise of ServerPrivateNetwork
+   */
+  addServerPrivateNetwork = (
+    request: Readonly<AddServerPrivateNetworkRequest>,
+  ) =>
+    this.client.fetch<ServerPrivateNetwork>(
+      {
+        body: JSON.stringify(
+          marshalAddServerPrivateNetworkRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/baremetal/v1/zones/${validatePathParam(
+          'zone',
+          request.zone ?? this.client.settings.defaultZone,
+        )}/servers/${validatePathParam(
+          'serverId',
+          request.serverId,
+        )}/private-networks`,
+      },
+      unmarshalServerPrivateNetwork,
+    )
+
+  /**
+   * Set multiple private networks on a server
+   *
+   * @param request - The request {@link SetServerPrivateNetworksRequest}
+   * @returns A Promise of SetServerPrivateNetworksResponse
+   */
+  setServerPrivateNetworks = (
+    request: Readonly<SetServerPrivateNetworksRequest>,
+  ) =>
+    this.client.fetch<SetServerPrivateNetworksResponse>(
+      {
+        body: JSON.stringify(
+          marshalSetServerPrivateNetworksRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PUT',
+        path: `/baremetal/v1/zones/${validatePathParam(
+          'zone',
+          request.zone ?? this.client.settings.defaultZone,
+        )}/servers/${validatePathParam(
+          'serverId',
+          request.serverId,
+        )}/private-networks`,
+      },
+      unmarshalSetServerPrivateNetworksResponse,
+    )
+
+  protected pageOfListServerPrivateNetworks = (
+    request: Readonly<ListServerPrivateNetworksRequest> = {},
+  ) =>
+    this.client.fetch<ListServerPrivateNetworksResponse>(
+      {
+        method: 'GET',
+        path: `/baremetal/v1/zones/${validatePathParam(
+          'zone',
+          request.zone ?? this.client.settings.defaultZone,
+        )}/server-private-networks`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy ?? 'created_at_asc'],
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['private_network_id', request.privateNetworkId],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
+          ['server_id', request.serverId],
+        ),
+      },
+      unmarshalListServerPrivateNetworksResponse,
+    )
+
+  /**
+   * List the private networks of a server
+   *
+   * @param request - The request {@link ListServerPrivateNetworksRequest}
+   * @returns A Promise of ListServerPrivateNetworksResponse
+   */
+  listServerPrivateNetworks = (
+    request: Readonly<ListServerPrivateNetworksRequest> = {},
+  ) =>
+    enrichForPagination(
+      'serverPrivateNetworks',
+      this.pageOfListServerPrivateNetworks,
+      request,
+    )
+
+  /**
+   * Delete a private network
+   *
+   * @param request - The request {@link DeleteServerPrivateNetworkRequest}
+   */
+  deleteServerPrivateNetwork = (
+    request: Readonly<DeleteServerPrivateNetworkRequest>,
+  ) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/baremetal/v1/zones/${validatePathParam(
+        'zone',
+        request.zone ?? this.client.settings.defaultZone,
+      )}/servers/${validatePathParam(
+        'serverId',
+        request.serverId,
+      )}/private-networks/${validatePathParam(
+        'privateNetworkId',
+        request.privateNetworkId,
+      )}`,
+    })
 }
