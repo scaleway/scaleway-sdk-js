@@ -4,7 +4,7 @@ export type { RequestInterceptor } from './internal/interceptors/request'
 export type { ResponseInterceptor } from './internal/interceptors/response'
 export { API } from './scw/api'
 export { authenticateWithSessionToken } from './scw/auth'
-export type { DefaultValues } from './scw/client-ini-profile'
+export type { DefaultValues } from './scw/client-settings'
 export {
   marshalScwFile,
   marshalMoney,

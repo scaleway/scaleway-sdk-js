@@ -7,7 +7,19 @@ import {
   isURL,
   isZone,
 } from '../internal/validations/string-validation'
-import type { DefaultValues } from './client-ini-profile'
+import type { ProfileDefaultValues } from './client-ini-profile'
+
+/**
+ * Holds default values of settings.
+ *
+ * @public
+ */
+export type DefaultValues = ProfileDefaultValues & {
+  /**
+   * The default number of results when requesting a paginated resource.
+   */
+  defaultPageSize?: number
+}
 
 /**
  * Settings hold the values of all client options.

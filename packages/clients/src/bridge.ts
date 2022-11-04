@@ -3,7 +3,7 @@ export { isJSONObject } from './helpers/json'
 export { waitForResource } from './internal/async/interval-retrier'
 export type { WaitForOptions } from './internal/async/interval-retrier'
 export { API } from './scw/api'
-export type { DefaultValues } from './scw/client-ini-profile'
+export type { DefaultValues } from './scw/client-settings'
 export type {
   Money,
   ServiceInfo,
