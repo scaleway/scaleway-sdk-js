@@ -16,7 +16,7 @@ importers:
       '@rollup/plugin-inject': ^5.0.2
       '@rollup/plugin-node-resolve': ^15.0.1
       '@scaleway/eslint-config-react': ^3.8.1
-      '@types/jest': ^29.2.1
+      '@types/jest': ^29.2.2
       babel-plugin-annotate-pure-calls: ^0.4.0
       cross-env: ^7.0.3
       cross-fetch: ^3.1.5
@@ -49,7 +49,7 @@ importers:
       '@rollup/plugin-inject': 5.0.2_rollup@3.2.5
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.2.5
       '@scaleway/eslint-config-react': 3.8.1_wyqvi574yv7oiwfeinomdzmc3m
-      '@types/jest': 29.2.1
+      '@types/jest': 29.2.2
       babel-plugin-annotate-pure-calls: 0.4.0_@babel+core@7.19.6
       cross-env: 7.0.3
       cross-fetch: 3.1.5
@@ -1428,32 +1428,10 @@ packages:
       '@commitlint/types': 17.0.0
     dev: true
 
-  /@commitlint/load/17.1.2:
-    resolution: {integrity: sha512-sk2p/jFYAWLChIfOIp/MGSIn/WzZ0vkc3afw+l4X8hGEYkvDe4gQUUAVxjl/6xMRn0HgnSLMZ04xXh5pkTsmgg==}
-    engines: {node: '>=v14'}
-    requiresBuild: true
-    dependencies:
-      '@commitlint/config-validator': 17.1.0
-      '@commitlint/execute-rule': 17.0.0
-      '@commitlint/resolve-extends': 17.1.0
-      '@commitlint/types': 17.0.0
-      '@types/node': 14.18.26
-      chalk: 4.1.2
-      cosmiconfig: 7.0.1
-      cosmiconfig-typescript-loader: 4.0.0_3wwxqfcddu25qzu3qtm2wx4mbe
-      lodash: 4.17.21
-      resolve-from: 5.0.0
-      ts-node: 10.8.2_kvex4k72pyqcsdotmwd3oetkri
-      typescript: 4.8.4
-    transitivePeerDependencies:
-      - '@swc/core'
-      - '@swc/wasm'
-    dev: true
-    optional: true
-
   /@commitlint/load/17.2.0:
     resolution: {integrity: sha512-HDD57qSqNrk399R4TIjw31AWBG8dBjNj1MrDKZKmC/wvimtnIFlqzcu1+sxfXIOHj/+M6tcMWDtvknGUd7SU+g==}
     engines: {node: '>=v14'}
+    requiresBuild: true
     dependencies:
       '@commitlint/config-validator': 17.1.0
       '@commitlint/execute-rule': 17.0.0
@@ -3156,8 +3134,8 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jest/29.2.1:
-    resolution: {integrity: sha512-nKixEdnGDqFOZkMTF74avFNr3yRqB1ZJ6sRZv5/28D5x2oLN14KApv7F9mfDT/vUic0L3tRCsh3XWpWjtJisUQ==}
+  /@types/jest/29.2.2:
+    resolution: {integrity: sha512-og1wAmdxKoS71K2ZwSVqWPX6OVn3ihZ6ZT2qvZvZQm90lJVDyXIjYcu4Khx2CNIeaFv12rOU/YObOsI3VOkzog==}
     dependencies:
       expect: 29.2.2
       pretty-format: 29.2.1
@@ -4501,7 +4479,7 @@ packages:
       longest: 2.0.1
       word-wrap: 1.2.3
     optionalDependencies:
-      '@commitlint/load': 17.1.2
+      '@commitlint/load': 17.2.0
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
