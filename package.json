@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "engines": {
-    "node": ">=14.13",
+    "node": ">=v14.21.0",
     "pnpm": ">=7.14.2"
   },
   "type": "module",
