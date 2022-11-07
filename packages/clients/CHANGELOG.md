@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.20](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.19...@scaleway/sdk@0.1.0-beta.20) (2022-11-07)
+
+### Features
+
+- add zone pl-waw-2 ([#202](https://github.com/scaleway/scaleway-sdk-js/issues/202)) ([3a8ec2f](https://github.com/scaleway/scaleway-sdk-js/commit/3a8ec2f83224a87a6a316e011b4c8109077f960c))
+- **baremetal:** add support for private network ([#211](https://github.com/scaleway/scaleway-sdk-js/issues/211)) ([26d25c8](https://github.com/scaleway/scaleway-sdk-js/commit/26d25c858b87a1f1258bdbe943cf24333e50b84e))
+- **iam:** clone a policy ([#204](https://github.com/scaleway/scaleway-sdk-js/issues/204)) ([8a68eca](https://github.com/scaleway/scaleway-sdk-js/commit/8a68eca54ca841a626ef43cf85e2c36879ba13e4))
+- **redis:** specify support of zone pl-waw-2 ([#201](https://github.com/scaleway/scaleway-sdk-js/issues/201)) ([918f54a](https://github.com/scaleway/scaleway-sdk-js/commit/918f54a8fbb05eaafbbd3f6c407f686c6bdb5c41))
+
+### Bug Fixes
+
+- **client:** adjust DefaultValues so it contains defaultPageSize ([#210](https://github.com/scaleway/scaleway-sdk-js/issues/210)) ([252356a](https://github.com/scaleway/scaleway-sdk-js/commit/252356adc18ba2a87ce0b8aaee0ddf9b256716c6))
+
 ## [0.1.0-beta.19](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.18...@scaleway/sdk@0.1.0-beta.19) (2022-10-31)
 
 ### Features
