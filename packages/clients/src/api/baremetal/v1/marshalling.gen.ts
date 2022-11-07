@@ -11,7 +11,6 @@ import {
 import type { DefaultValues } from '../../../bridge'
 import type {
   AddOptionServerRequest,
-  AddServerPrivateNetworkRequest,
   BMCAccess,
   CPU,
   CreateServerRequest,
@@ -34,6 +33,8 @@ import type {
   OfferOptionOffer,
   Option,
   PersistentMemory,
+  PrivateNetworkApiAddServerPrivateNetworkRequest,
+  PrivateNetworkApiSetServerPrivateNetworksRequest,
   RaidController,
   RebootServerRequest,
   Server,
@@ -42,7 +43,6 @@ import type {
   ServerOption,
   ServerPrivateNetwork,
   ServerRescueServer,
-  SetServerPrivateNetworksRequest,
   SetServerPrivateNetworksResponse,
   Setting,
   StartBMCAccessRequest,
@@ -521,13 +521,6 @@ export const marshalAddOptionServerRequest = (
   expires_at: request.expiresAt,
 })
 
-export const marshalAddServerPrivateNetworkRequest = (
-  request: AddServerPrivateNetworkRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  private_network_id: request.privateNetworkId,
-})
-
 export const marshalCreateServerRequest = (
   request: CreateServerRequest,
   defaults: DefaultValues,
@@ -567,18 +560,25 @@ export const marshalInstallServerRequest = (
   user: request.user,
 })
 
+export const marshalPrivateNetworkApiAddServerPrivateNetworkRequest = (
+  request: PrivateNetworkApiAddServerPrivateNetworkRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_network_id: request.privateNetworkId,
+})
+
+export const marshalPrivateNetworkApiSetServerPrivateNetworksRequest = (
+  request: PrivateNetworkApiSetServerPrivateNetworksRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_network_ids: request.privateNetworkIds,
+})
+
 export const marshalRebootServerRequest = (
   request: RebootServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   boot_type: request.bootType,
-})
-
-export const marshalSetServerPrivateNetworksRequest = (
-  request: SetServerPrivateNetworksRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  private_network_ids: request.privateNetworkIds,
 })
 
 export const marshalStartBMCAccessRequest = (

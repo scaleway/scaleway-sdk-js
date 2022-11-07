@@ -11,11 +11,11 @@ import type { WaitForOptions, Zone } from '../../../bridge'
 import { SERVER_TRANSIENT_STATUSES } from './content.gen'
 import {
   marshalAddOptionServerRequest,
-  marshalAddServerPrivateNetworkRequest,
   marshalCreateServerRequest,
   marshalInstallServerRequest,
+  marshalPrivateNetworkApiAddServerPrivateNetworkRequest,
+  marshalPrivateNetworkApiSetServerPrivateNetworksRequest,
   marshalRebootServerRequest,
-  marshalSetServerPrivateNetworksRequest,
   marshalStartBMCAccessRequest,
   marshalStartServerRequest,
   marshalUpdateIPRequest,
@@ -41,11 +41,9 @@ import {
 } from './marshalling.gen'
 import type {
   AddOptionServerRequest,
-  AddServerPrivateNetworkRequest,
   BMCAccess,
   CreateServerRequest,
   DeleteOptionServerRequest,
-  DeleteServerPrivateNetworkRequest,
   DeleteServerRequest,
   GetBMCAccessRequest,
   GetOSRequest,
@@ -64,7 +62,6 @@ import type {
   ListOptionsResponse,
   ListServerEventsRequest,
   ListServerEventsResponse,
-  ListServerPrivateNetworksRequest,
   ListServerPrivateNetworksResponse,
   ListServersRequest,
   ListServersResponse,
@@ -73,10 +70,13 @@ import type {
   OS,
   Offer,
   Option,
+  PrivateNetworkApiAddServerPrivateNetworkRequest,
+  PrivateNetworkApiDeleteServerPrivateNetworkRequest,
+  PrivateNetworkApiListServerPrivateNetworksRequest,
+  PrivateNetworkApiSetServerPrivateNetworksRequest,
   RebootServerRequest,
   Server,
   ServerPrivateNetwork,
-  SetServerPrivateNetworksRequest,
   SetServerPrivateNetworksResponse,
   Setting,
   StartBMCAccessRequest,
@@ -729,20 +729,30 @@ export class BaremetalV1GenAPI extends API {
       },
       unmarshalOS,
     )
+}
+
+/** Elastic Metal Private Network API. */
+export class BaremetalPrivateNetworkV1GenAPI extends API {
+  /** Lists the available zones of the API. */
+  public static readonly LOCALITIES: Zone[] = ['fr-par-2']
 
   /**
    * Add a server to a private network
    *
-   * @param request - The request {@link AddServerPrivateNetworkRequest}
+   * @param request - The request
+   *   {@link PrivateNetworkApiAddServerPrivateNetworkRequest}
    * @returns A Promise of ServerPrivateNetwork
    */
   addServerPrivateNetwork = (
-    request: Readonly<AddServerPrivateNetworkRequest>,
+    request: Readonly<PrivateNetworkApiAddServerPrivateNetworkRequest>,
   ) =>
     this.client.fetch<ServerPrivateNetwork>(
       {
         body: JSON.stringify(
-          marshalAddServerPrivateNetworkRequest(request, this.client.settings),
+          marshalPrivateNetworkApiAddServerPrivateNetworkRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -760,16 +770,20 @@ export class BaremetalV1GenAPI extends API {
   /**
    * Set multiple private networks on a server
    *
-   * @param request - The request {@link SetServerPrivateNetworksRequest}
+   * @param request - The request
+   *   {@link PrivateNetworkApiSetServerPrivateNetworksRequest}
    * @returns A Promise of SetServerPrivateNetworksResponse
    */
   setServerPrivateNetworks = (
-    request: Readonly<SetServerPrivateNetworksRequest>,
+    request: Readonly<PrivateNetworkApiSetServerPrivateNetworksRequest>,
   ) =>
     this.client.fetch<SetServerPrivateNetworksResponse>(
       {
         body: JSON.stringify(
-          marshalSetServerPrivateNetworksRequest(request, this.client.settings),
+          marshalPrivateNetworkApiSetServerPrivateNetworksRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
@@ -785,7 +799,7 @@ export class BaremetalV1GenAPI extends API {
     )
 
   protected pageOfListServerPrivateNetworks = (
-    request: Readonly<ListServerPrivateNetworksRequest> = {},
+    request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {},
   ) =>
     this.client.fetch<ListServerPrivateNetworksResponse>(
       {
@@ -820,11 +834,12 @@ export class BaremetalV1GenAPI extends API {
   /**
    * List the private networks of a server
    *
-   * @param request - The request {@link ListServerPrivateNetworksRequest}
+   * @param request - The request
+   *   {@link PrivateNetworkApiListServerPrivateNetworksRequest}
    * @returns A Promise of ListServerPrivateNetworksResponse
    */
   listServerPrivateNetworks = (
-    request: Readonly<ListServerPrivateNetworksRequest> = {},
+    request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {},
   ) =>
     enrichForPagination(
       'serverPrivateNetworks',
@@ -835,10 +850,11 @@ export class BaremetalV1GenAPI extends API {
   /**
    * Delete a private network
    *
-   * @param request - The request {@link DeleteServerPrivateNetworkRequest}
+   * @param request - The request
+   *   {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}
    */
   deleteServerPrivateNetwork = (
-    request: Readonly<DeleteServerPrivateNetworkRequest>,
+    request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>,
   ) =>
     this.client.fetch<void>({
       method: 'DELETE',

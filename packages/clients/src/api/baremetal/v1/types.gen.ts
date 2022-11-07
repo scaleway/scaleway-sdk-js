@@ -757,7 +757,7 @@ export type GetOSRequest = {
   osId: string
 }
 
-export type AddServerPrivateNetworkRequest = {
+export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
   /** The ID of the server */
@@ -766,7 +766,7 @@ export type AddServerPrivateNetworkRequest = {
   privateNetworkId: string
 }
 
-export type SetServerPrivateNetworksRequest = {
+export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
   /** The ID of the server */
@@ -775,7 +775,7 @@ export type SetServerPrivateNetworksRequest = {
   privateNetworkIds: Array<string>
 }
 
-export type ListServerPrivateNetworksRequest = {
+export type PrivateNetworkApiListServerPrivateNetworksRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
   /** The sort order for the returned private networks */
@@ -794,7 +794,7 @@ export type ListServerPrivateNetworksRequest = {
   projectId?: string
 }
 
-export type DeleteServerPrivateNetworkRequest = {
+export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
   /** The ID of the server */
