@@ -5,6 +5,7 @@
     "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "defaults|request" }],
     "max-classes-per-file": "off",
     "tsdoc/syntax": "off",
-    "no-underscore-dangle": ["error", { "allowAfterThis": true }]
+    "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+    "deprecation/deprecation": "off"
   }
 }

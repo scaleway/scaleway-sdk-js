@@ -101,7 +101,7 @@ export const assertValidSettings = (obj: Readonly<Settings>): void => {
   // API URL.
   if (!isURL(obj.apiURL)) throw new Error(`Invalid URL ${obj.apiURL}`)
 
-  if (obj.apiURL.substr(-1) === '/')
+  if (obj.apiURL.slice(-1) === '/')
     throw new Error(
       `Invalid URL ${obj.apiURL}: it should not have a trailing slash`,
     )
