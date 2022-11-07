@@ -83,13 +83,15 @@ export type CreateServerRequest = {
   /**
    * @deprecated The server organization ID.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project' could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   could be set.
    */
   organization?: string
   /**
    * The server project ID.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project' could be set.
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   project?: string
   /** The server tags */

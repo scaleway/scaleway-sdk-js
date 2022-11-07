@@ -56,7 +56,8 @@ const jsonContentHeaders = {
  * Get set to explore, learn and build on a dedicated Mac mini M1 with more
  * performance and speed than you ever thought possible.
  *
- * _Apple silicon as a Service comes with a minimum allocation period of 24 hours_*.
+ * _Apple silicon as a Service comes with a minimum allocation period of 24
+ * hours_*.
  *
  * Mac mini and macOS are trademarks of Apple Inc., registered in the U.S. and
  * other countries and regions. IOS is a trademark or registered trademark of

@@ -309,13 +309,15 @@ export interface RuleSpecs {
   /**
    * List of project IDs scoped to the rule.
    *
-   * One-of ('scope'): at most one of 'projectIds', 'organizationId' could be set.
+   * One-of ('scope'): at most one of 'projectIds', 'organizationId' could be
+   * set.
    */
   projectIds?: Array<string>
   /**
    * ID of organization scoped to the rule.
    *
-   * One-of ('scope'): at most one of 'projectIds', 'organizationId' could be set.
+   * One-of ('scope'): at most one of 'projectIds', 'organizationId' could be
+   * set.
    */
   organizationId?: string
 }

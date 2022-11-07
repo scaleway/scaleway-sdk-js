@@ -90,9 +90,15 @@ export interface DHCP {
    * private network. It must be part of config's subnet.
    */
   address: string
-  /** Low IP (included) of the dynamic address pool. Must be in the config's subnet */
+  /**
+   * Low IP (included) of the dynamic address pool. Must be in the config's
+   * subnet
+   */
   poolLow: string
-  /** High IP (included) of the dynamic address pool. Must be in the config's subnet */
+  /**
+   * High IP (included) of the dynamic address pool. Must be in the config's
+   * subnet
+   */
   poolHigh: string
   /**
    * Whether to enable dynamic pooling of IPs. By turning the dynamic pool off,
@@ -111,14 +117,20 @@ export interface DHCP {
    * previous renews fail. Must be 30s lower than `valid_lifetime`.
    */
   rebindTimer?: string
-  /** Whether the gateway should push a default route to DHCP clients or only hand out IPs */
+  /**
+   * Whether the gateway should push a default route to DHCP clients or only
+   * hand out IPs
+   */
   pushDefaultRoute: boolean
   /**
    * Whether the gateway should push custom DNS servers to clients. This allows
    * for instance hostname -> IP resolution.
    */
   pushDnsServer: boolean
-  /** Override the DNS server list pushed to DHCP clients, instead of the gateway itself */
+  /**
+   * Override the DNS server list pushed to DHCP clients, instead of the gateway
+   * itself
+   */
   dnsServersOverride: Array<string>
   /** Add search paths to the pushed DNS configuration */
   dnsSearch: Array<string>
@@ -205,7 +217,10 @@ export interface GatewayNetwork {
   gatewayId: string
   /** ID of the connected private network */
   privateNetworkId: string
-  /** MAC address of the gateway in the network (if the gateway is up and running) */
+  /**
+   * MAC address of the gateway in the network (if the gateway is up and
+   * running)
+   */
   macAddress?: string
   /** Whether the gateway masquerades traffic for this network */
   enableMasquerade: boolean
@@ -227,7 +242,8 @@ export interface GatewayType {
   name: string
   /**
    * Bandwidth, in bps, the gateway has. This is the public bandwidth to the
-   * outer internet, and the internal bandwidth to each connected Private Networks.
+   * outer internet, and the internal bandwidth to each connected Private
+   * Networks.
    */
   bandwidth: number
   /** Zone the type is available in */
@@ -415,7 +431,10 @@ export type CreateGatewayRequest = {
   tags?: Array<string>
   /** Gateway type */
   type: string
-  /** Override the gateway's default recursive DNS servers, if DNS features are enabled */
+  /**
+   * Override the gateway's default recursive DNS servers, if DNS features are
+   * enabled
+   */
   upstreamDnsServers?: Array<string>
   /** Attach an existing IP to the gateway */
   ipId?: string
@@ -436,7 +455,10 @@ export type UpdateGatewayRequest = {
   name?: string
   /** Tags for the gateway */
   tags?: Array<string>
-  /** Override the gateway's default recursive DNS servers, if DNS features are enabled */
+  /**
+   * Override the gateway's default recursive DNS servers, if DNS features are
+   * enabled
+   */
   upstreamDnsServers?: Array<string>
   /** Enable SSH bastion on the gateway */
   enableBastion?: boolean
@@ -610,7 +632,10 @@ export type CreateDHCPRequest = {
    * only pre-existing DHCP reservations will be handed out. Defaults to true.
    */
   enableDynamic?: boolean
-  /** For how long, in seconds, will DHCP entries will be valid. Defaults to 1h (3600s). */
+  /**
+   * For how long, in seconds, will DHCP entries will be valid. Defaults to 1h
+   * (3600s).
+   */
   validLifetime?: string
   /**
    * After how long, in seconds, a renew will be attempted. Must be 30s lower
@@ -633,7 +658,10 @@ export type CreateDHCPRequest = {
    * for instance hostname -> IP resolution. Defaults to true.
    */
   pushDnsServer?: boolean
-  /** Override the DNS server list pushed to DHCP clients, instead of the gateway itself */
+  /**
+   * Override the DNS server list pushed to DHCP clients, instead of the gateway
+   * itself
+   */
   dnsServersOverride?: Array<string>
   /** Additional DNS search paths */
   dnsSearch?: Array<string>
@@ -652,7 +680,10 @@ export type UpdateDHCPRequest = {
   dhcpId: string
   /** Subnet for the DHCP server */
   subnet?: string
-  /** Address of the DHCP server. This will be the gateway's address in the private network */
+  /**
+   * Address of the DHCP server. This will be the gateway's address in the
+   * private network
+   */
   address?: string
   /** Low IP (included) of the dynamic address pool */
   poolLow?: string
@@ -675,18 +706,27 @@ export type UpdateDHCPRequest = {
    * previous renews fail. Must be 30s lower than `valid_lifetime`.
    */
   rebindTimer?: string
-  /** Whether the gateway should push a default route to DHCP clients or only hand out IPs */
+  /**
+   * Whether the gateway should push a default route to DHCP clients or only
+   * hand out IPs
+   */
   pushDefaultRoute?: boolean
   /**
    * Whether the gateway should push custom DNS servers to clients. This allows
    * for instance hostname -> IP resolution.
    */
   pushDnsServer?: boolean
-  /** Override the DNS server list pushed to DHCP clients, instead of the gateway itself */
+  /**
+   * Override the DNS server list pushed to DHCP clients, instead of the gateway
+   * itself
+   */
   dnsServersOverride?: Array<string>
   /** Additional DNS search paths */
   dnsSearch?: Array<string>
-  /** TLD given to hostnames in the Private Network. Allowed characters are `a-z0-9-.`. */
+  /**
+   * TLD given to hostnames in the Private Network. Allowed characters are
+   * `a-z0-9-.`.
+   */
   dnsLocalName?: string
 }
 

@@ -384,12 +384,14 @@ export interface Domain {
   administrativeContact?: Contact
   /**
    * One-of ('registrationStatus'): at most one of
-   * 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be set.
+   * 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be
+   * set.
    */
   externalDomainRegistrationStatus?: DomainRegistrationStatusExternalDomain
   /**
    * One-of ('registrationStatus'): at most one of
-   * 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be set.
+   * 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be
+   * set.
    */
   transferRegistrationStatus?: DomainRegistrationStatusTransfer
 }
@@ -489,12 +491,14 @@ export interface DomainSummary {
   status: DomainStatus
   /**
    * One-of ('registrationStatus'): at most one of
-   * 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be set.
+   * 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be
+   * set.
    */
   externalDomainRegistrationStatus?: DomainRegistrationStatusExternalDomain
   /**
    * One-of ('registrationStatus'): at most one of
-   * 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be set.
+   * 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be
+   * set.
    */
   transferRegistrationStatus?: DomainRegistrationStatusTransfer
   organizationId: string
@@ -666,13 +670,25 @@ export interface OrderResponse {
 }
 
 export interface RecordChange {
-  /** One-of ('change'): at most one of 'add', 'set', 'delete', 'clear' could be set. */
+  /**
+   * One-of ('change'): at most one of 'add', 'set', 'delete', 'clear' could be
+   * set.
+   */
   add?: RecordChangeAdd
-  /** One-of ('change'): at most one of 'add', 'set', 'delete', 'clear' could be set. */
+  /**
+   * One-of ('change'): at most one of 'add', 'set', 'delete', 'clear' could be
+   * set.
+   */
   set?: RecordChangeSet
-  /** One-of ('change'): at most one of 'add', 'set', 'delete', 'clear' could be set. */
+  /**
+   * One-of ('change'): at most one of 'add', 'set', 'delete', 'clear' could be
+   * set.
+   */
   delete?: RecordChangeDelete
-  /** One-of ('change'): at most one of 'add', 'set', 'delete', 'clear' could be set. */
+  /**
+   * One-of ('change'): at most one of 'add', 'set', 'delete', 'clear' could be
+   * set.
+   */
   clear?: RecordChangeClear
 }
 
@@ -875,9 +891,15 @@ export type UpdateDNSZoneRecordsRequest = {
   changes: Array<RecordChange>
   /** Whether or not to return all the records */
   returnAllRecords?: boolean
-  /** Forbid the creation of the target zone if not existing (default action is yes) */
+  /**
+   * Forbid the creation of the target zone if not existing (default action is
+   * yes)
+   */
   disallowNewZoneCreation: boolean
-  /** Don't use the autoincremenent serial but the provided one (0 to keep the same) */
+  /**
+   * Don't use the autoincremenent serial but the provided one (0 to keep the
+   * same)
+   */
   serial?: number
 }
 

@@ -189,7 +189,8 @@ export class DomainV2Beta1GenAPI extends API {
     )
 
   /**
-   * Returns a list of manageable DNS zones. You can filter the DNS zones by domain name.
+   * Returns a list of manageable DNS zones. You can filter the DNS zones by
+   * domain name.
    *
    * @param request - The request {@link ListDNSZonesRequest}
    * @returns A Promise of ListDNSZonesResponse
@@ -360,7 +361,8 @@ export class DomainV2Beta1GenAPI extends API {
     )
 
   /**
-   * Returns a list of Nameservers and their optional glue records for a DNS zone.
+   * Returns a list of Nameservers and their optional glue records for a DNS
+   * zone.
    *
    * @param request - The request {@link ListDNSZoneNameserversRequest}
    * @returns A Promise of ListDNSZoneNameserversResponse
@@ -869,7 +871,8 @@ export class DomainRegistrarV2Beta1GenAPI extends API {
   /**
    * Request the registration of an external domain name.
    *
-   * @param request - The request {@link RegistrarApiRegisterExternalDomainRequest}
+   * @param request - The request
+   *   {@link RegistrarApiRegisterExternalDomainRequest}
    * @returns A Promise of RegisterExternalDomainResponse
    */
   registerExternalDomain = (
@@ -914,7 +917,8 @@ export class DomainRegistrarV2Beta1GenAPI extends API {
    * Check if contacts are compatible against a domain or a tld. If not, it will
    * return the information requiring a correction.
    *
-   * @param request - The request {@link RegistrarApiCheckContactsCompatibilityRequest}
+   * @param request - The request
+   *   {@link RegistrarApiCheckContactsCompatibilityRequest}
    * @returns A Promise of CheckContactsCompatibilityResponse
    */
   checkContactsCompatibility = (
@@ -974,7 +978,8 @@ export class DomainRegistrarV2Beta1GenAPI extends API {
     enrichForPagination('contacts', this.pageOfListContacts, request)
 
   /**
-   * Return a contact details retrieved from the registrar using a given contact ID.
+   * Return a contact details retrieved from the registrar using a given contact
+   * ID.
    *
    * @param request - The request {@link RegistrarApiGetContactRequest}
    * @returns A Promise of Contact
@@ -1116,7 +1121,8 @@ export class DomainRegistrarV2Beta1GenAPI extends API {
 
   /**
    * Update the domain contacts or create a new one.<br/> If you add the same
-   * contact for multiple roles. Only one ID will be created and used for all of them.
+   * contact for multiple roles. Only one ID will be created and used for all of
+   * them.
    *
    * @param request - The request {@link RegistrarApiUpdateDomainRequest}
    * @returns A Promise of Domain
@@ -1186,7 +1192,8 @@ export class DomainRegistrarV2Beta1GenAPI extends API {
   /**
    * Enable domain auto renew
    *
-   * @param request - The request {@link RegistrarApiEnableDomainAutoRenewRequest}
+   * @param request - The request
+   *   {@link RegistrarApiEnableDomainAutoRenewRequest}
    * @returns A Promise of Domain
    */
   enableDomainAutoRenew = (
@@ -1208,7 +1215,8 @@ export class DomainRegistrarV2Beta1GenAPI extends API {
   /**
    * Disable domain auto renew
    *
-   * @param request - The request {@link RegistrarApiDisableDomainAutoRenewRequest}
+   * @param request - The request
+   *   {@link RegistrarApiDisableDomainAutoRenewRequest}
    * @returns A Promise of Domain
    */
   disableDomainAutoRenew = (
@@ -1230,7 +1238,8 @@ export class DomainRegistrarV2Beta1GenAPI extends API {
   /**
    * If possible, return the auth code for an unlocked domain transfer, or an
    * error if the domain is locked. Some TLD may have a different procedure to
-   * retrieve the auth code, in that case, the information is given in the message field.
+   * retrieve the auth code, in that case, the information is given in the
+   * message field.
    *
    * @param request - The request {@link RegistrarApiGetDomainAuthCodeRequest}
    * @returns A Promise of GetDomainAuthCodeResponse
@@ -1325,7 +1334,8 @@ export class DomainRegistrarV2Beta1GenAPI extends API {
    * If the TLD list is empty or not set the search returns the results from the
    * most popular TLDs.
    *
-   * @param request - The request {@link RegistrarApiSearchAvailableDomainsRequest}
+   * @param request - The request
+   *   {@link RegistrarApiSearchAvailableDomainsRequest}
    * @returns A Promise of SearchAvailableDomainsResponse
    */
   searchAvailableDomains = (

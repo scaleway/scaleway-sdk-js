@@ -163,13 +163,15 @@ export interface Endpoint {
   /**
    * Private network details.
    *
-   * One-of ('details'): at most one of 'privateNetwork', 'publicNetwork' could be set.
+   * One-of ('details'): at most one of 'privateNetwork', 'publicNetwork' could
+   * be set.
    */
   privateNetwork?: PrivateNetwork
   /**
    * Public network details.
    *
-   * One-of ('details'): at most one of 'privateNetwork', 'publicNetwork' could be set.
+   * One-of ('details'): at most one of 'privateNetwork', 'publicNetwork' could
+   * be set.
    */
   publicNetwork?: PublicNetwork
   /** Lis of IPv4 address of the endpoint */
@@ -360,19 +362,22 @@ export type MigrateClusterRequest = {
   /**
    * Redis™ engine version of the cluster.
    *
-   * One-of ('action'): at most one of 'version', 'nodeType', 'clusterSize' could be set.
+   * One-of ('action'): at most one of 'version', 'nodeType', 'clusterSize'
+   * could be set.
    */
   version?: string
   /**
    * Type of node to use for the cluster.
    *
-   * One-of ('action'): at most one of 'version', 'nodeType', 'clusterSize' could be set.
+   * One-of ('action'): at most one of 'version', 'nodeType', 'clusterSize'
+   * could be set.
    */
   nodeType?: string
   /**
    * Number of nodes for the cluster.
    *
-   * One-of ('action'): at most one of 'version', 'nodeType', 'clusterSize' could be set.
+   * One-of ('action'): at most one of 'version', 'nodeType', 'clusterSize'
+   * could be set.
    */
   clusterSize?: number
 }

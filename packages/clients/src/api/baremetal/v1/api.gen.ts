@@ -289,7 +289,8 @@ export class BaremetalV1GenAPI extends API {
     )
 
   /**
-   * Reboot the server associated with the given ID, use boot param to reboot in rescue.
+   * Reboot the server associated with the given ID, use boot param to reboot in
+   * rescue.
    *
    * @param request - The request {@link RebootServerRequest}
    * @returns A Promise of Server
@@ -419,7 +420,8 @@ export class BaremetalV1GenAPI extends API {
     )
 
   /**
-   * Get the BMC (Baseboard Management Controller) access associated with the given ID.
+   * Get the BMC (Baseboard Management Controller) access associated with the
+   * given ID.
    *
    * @param request - The request {@link GetBMCAccessRequest}
    * @returns A Promise of BMCAccess
@@ -440,7 +442,8 @@ export class BaremetalV1GenAPI extends API {
     )
 
   /**
-   * Stop BMC (Baseboard Management Controller) access associated with the given ID.
+   * Stop BMC (Baseboard Management Controller) access associated with the given
+   * ID.
    *
    * @param request - The request {@link StopBMCAccessRequest}
    */

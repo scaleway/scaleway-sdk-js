@@ -42,7 +42,10 @@ export interface UpdateSecurityGroupResponse {
   securityGroup?: SecurityGroup
 }
 
-/** UpdateSecurityGroupRuleRequest contains the parameters to update a security group rule */
+/**
+ * UpdateSecurityGroupRuleRequest contains the parameters to update a security
+ * group rule
+ */
 export type UpdateSecurityGroupRuleRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone

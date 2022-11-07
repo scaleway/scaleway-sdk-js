@@ -154,7 +154,10 @@ export interface Cluster {
    * of the Kubernetes API server.
    */
   openIdConnectConfig?: ClusterOpenIDConnectConfig
-  /** Additional Subject Alternative Names for the Kubernetes API server certificate */
+  /**
+   * Additional Subject Alternative Names for the Kubernetes API server
+   * certificate
+   */
   apiserverCertSans: Array<string>
 }
 
@@ -176,7 +179,10 @@ export interface ClusterAutoscalerConfig {
   estimator: AutoscalerEstimator
   /** Type of node group expander to be used in scale up */
   expander: AutoscalerExpander
-  /** Ignore DaemonSet pods when calculating resource utilization for scaling down */
+  /**
+   * Ignore DaemonSet pods when calculating resource utilization for scaling
+   * down
+   */
   ignoreDaemonsetsUtilization: boolean
   /** Detect similar node groups and balance the number of nodes between them */
   balanceSimilarNodeGroups: boolean
@@ -239,7 +245,8 @@ export interface ClusterOpenIDConnectConfig {
   groupsPrefix: string
   /**
    * Multiple key=value pairs that describes a required claim in the ID Token.
-   * If set, the claims are verified to be present in the ID Token with a matching value.
+   * If set, the claims are verified to be present in the ID Token with a
+   * matching value.
    */
   requiredClaim: Array<string>
 }
@@ -262,7 +269,10 @@ export interface CreateClusterRequestAutoscalerConfig {
   estimator: AutoscalerEstimator
   /** Type of node group expander to be used in scale up */
   expander: AutoscalerExpander
-  /** Ignore DaemonSet pods when calculating resource utilization for scaling down */
+  /**
+   * Ignore DaemonSet pods when calculating resource utilization for scaling
+   * down
+   */
   ignoreDaemonsetsUtilization?: boolean
   /** Detect similar node groups and balance the number of nodes between them */
   balanceSimilarNodeGroups?: boolean
@@ -325,7 +335,8 @@ export interface CreateClusterRequestOpenIDConnectConfig {
   groupsPrefix?: string
   /**
    * Multiple key=value pairs that describes a required claim in the ID Token.
-   * If set, the claims are verified to be present in the ID Token with a matching value.
+   * If set, the claims are verified to be present in the ID Token with a
+   * matching value.
    */
   requiredClaim?: Array<string>
 }
@@ -578,7 +589,10 @@ export interface UpdateClusterRequestAutoscalerConfig {
   estimator: AutoscalerEstimator
   /** Type of node group expander to be used in scale up */
   expander: AutoscalerExpander
-  /** Ignore DaemonSet pods when calculating resource utilization for scaling down */
+  /**
+   * Ignore DaemonSet pods when calculating resource utilization for scaling
+   * down
+   */
   ignoreDaemonsetsUtilization?: boolean
   /** Detect similar node groups and balance the number of nodes between them */
   balanceSimilarNodeGroups?: boolean
@@ -641,7 +655,8 @@ export interface UpdateClusterRequestOpenIDConnectConfig {
   groupsPrefix?: string
   /**
    * Multiple key=value pairs that describes a required claim in the ID Token.
-   * If set, the claims are verified to be present in the ID Token with a matching value.
+   * If set, the claims are verified to be present in the ID Token with a
+   * matching value.
    */
   requiredClaim?: Array<string>
 }
@@ -752,7 +767,10 @@ export type CreateClusterRequest = {
    * of the Kubernetes API server.
    */
   openIdConnectConfig?: CreateClusterRequestOpenIDConnectConfig
-  /** Additional Subject Alternative Names for the Kubernetes API server certificate */
+  /**
+   * Additional Subject Alternative Names for the Kubernetes API server
+   * certificate
+   */
   apiserverCertSans?: Array<string>
 }
 
@@ -803,7 +821,10 @@ export type UpdateClusterRequest = {
    * of the Kubernetes API server.
    */
   openIdConnectConfig?: UpdateClusterRequestOpenIDConnectConfig
-  /** Additional Subject Alternative Names for the Kubernetes API server certificate */
+  /**
+   * Additional Subject Alternative Names for the Kubernetes API server
+   * certificate
+   */
   apiserverCertSans?: Array<string>
 }
 
@@ -830,14 +851,20 @@ export type UpgradeClusterRequest = {
    * minor version after the current one.
    */
   version: string
-  /** This field makes the upgrade upgrades the pool once the Kubernetes master in upgrade. */
+  /**
+   * This field makes the upgrade upgrades the pool once the Kubernetes master
+   * in upgrade.
+   */
   upgradePools: boolean
 }
 
 export type ListClusterAvailableVersionsRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
-  /** The ID of the cluster which the available Kuberentes versions will be listed from */
+  /**
+   * The ID of the cluster which the available Kuberentes versions will be
+   * listed from
+   */
   clusterId: string
 }
 

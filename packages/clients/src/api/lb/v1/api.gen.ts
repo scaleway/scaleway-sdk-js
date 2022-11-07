@@ -1079,7 +1079,8 @@ export class LbV1GenAPI extends API {
     })
 
   /**
-   * Generate a new TLS certificate using Let's Encrypt or import your certificate.
+   * Generate a new TLS certificate using Let's Encrypt or import your
+   * certificate.
    *
    * @param request - The request {@link CreateCertificateRequest}
    * @returns A Promise of Certificate
@@ -2404,7 +2405,8 @@ export class LbZonedV1GenAPI extends API {
     )
 
   /**
-   * Generate a new TLS certificate using Let's Encrypt or import your certificate.
+   * Generate a new TLS certificate using Let's Encrypt or import your
+   * certificate.
    *
    * @param request - The request {@link ZonedApiCreateCertificateRequest}
    * @returns A Promise of Certificate

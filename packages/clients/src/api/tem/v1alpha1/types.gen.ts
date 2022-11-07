@@ -33,7 +33,10 @@ export interface CreateEmailRequestAddress {
 export interface CreateEmailRequestAttachment {
   /** Filename of the attachment */
   name: string
-  /** MIME type of the attachment (Currently only allow, text files, pdf and html files) */
+  /**
+   * MIME type of the attachment (Currently only allow, text files, pdf and html
+   * files)
+   */
   type: string
   /** Content of the attachment, encoded in base64 */
   content: Array<number>
@@ -161,7 +164,10 @@ export interface Statistics {
    * system with a final error status)
    */
   failedCount: number
-  /** Number of emails in the final `canceled` state (canceled by customer's request) */
+  /**
+   * Number of emails in the final `canceled` state (canceled by customer's
+   * request)
+   */
   canceledCount: number
 }
 

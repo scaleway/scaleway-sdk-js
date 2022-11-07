@@ -805,7 +805,8 @@ export class RdbV1GenAPI extends API {
     )
 
   /**
-   * A read replica can have at most one direct access and one private network endpoint.
+   * A read replica can have at most one direct access and one private network
+   * endpoint.
    *
    * @param request - The request {@link CreateReadReplicaEndpointRequest}
    * @returns A Promise of ReadReplica
@@ -835,7 +836,8 @@ export class RdbV1GenAPI extends API {
     )
 
   /**
-   * Prepare your instance logs. Logs will be grouped on a minimum interval of a day.
+   * Prepare your instance logs. Logs will be grouped on a minimum interval of a
+   * day.
    *
    * @param request - The request {@link PrepareInstanceLogsRequest}
    * @returns A Promise of PrepareInstanceLogsResponse

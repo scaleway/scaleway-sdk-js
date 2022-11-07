@@ -144,7 +144,10 @@ export interface Device {
   isConnected: boolean
   /** Whether to allow device to connect without TLS mutual authentication */
   allowInsecure: boolean
-  /** Whether to allow multiple physical devices to connect with this device's credentials */
+  /**
+   * Whether to allow multiple physical devices to connect with this device's
+   * credentials
+   */
   allowMultipleConnections: boolean
   /** Filter-sets to restrict the topics the device can publish/subscribe to */
   messageFilters?: DeviceMessageFilters
@@ -224,7 +227,8 @@ export interface Hub {
   connectedDeviceCount: number
   /**
    * Devices should be connected to this host, port may be 1883 (MQTT), 8883
-   * (MQTT over TLS), 80 (MQTT over Websocket) or 443 (MQTT over Websocket over TLS).
+   * (MQTT over TLS), 80 (MQTT over Websocket) or 443 (MQTT over Websocket over
+   * TLS).
    */
   endpoint: string
   /** Disable Hub events */
@@ -258,7 +262,8 @@ export interface Hub {
   /**
    * BETA - not implemented yet.
    *
-   * One-of ('twinsDbConfig'): at most one of 'twinsGraphiteConfig' could be set.
+   * One-of ('twinsDbConfig'): at most one of 'twinsGraphiteConfig' could be
+   * set.
    */
   twinsGraphiteConfig?: HubTwinsGraphiteConfig
 }
@@ -357,19 +362,22 @@ export interface Route {
   /**
    * When using S3 Route, S3-specific configuration fields.
    *
-   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   s3Config?: RouteS3Config
   /**
    * When using Database Route, DB-specific configuration fields.
    *
-   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   dbConfig?: RouteDatabaseConfig
   /**
    * When using Rest Route, Rest-specific configuration fields.
    *
-   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   restConfig?: RouteRestConfig
   /** Route last update date */
@@ -418,7 +426,10 @@ export interface RouteS3Config {
   bucketName: string
   /** Optional string to prefix object names with */
   objectPrefix: string
-  /** How the S3 route's objects will be created: one per topic or one per message */
+  /**
+   * How the S3 route's objects will be created: one per topic or one per
+   * message
+   */
   strategy: RouteS3ConfigS3Strategy
 }
 
@@ -516,7 +527,8 @@ export type CreateHubRequest = {
   /**
    * BETA - not implemented yet.
    *
-   * One-of ('twinsDbConfig'): at most one of 'twinsGraphiteConfig' could be set.
+   * One-of ('twinsDbConfig'): at most one of 'twinsGraphiteConfig' could be
+   * set.
    */
   twinsGraphiteConfig?: HubTwinsGraphiteConfig
 }
@@ -546,7 +558,8 @@ export type UpdateHubRequest = {
   /**
    * BETA - not implemented yet.
    *
-   * One-of ('twinsDbConfig'): at most one of 'twinsGraphiteConfig' could be set.
+   * One-of ('twinsDbConfig'): at most one of 'twinsGraphiteConfig' could be
+   * set.
    */
   twinsGraphiteConfig?: HubTwinsGraphiteConfig
 }
@@ -592,7 +605,8 @@ export type SetHubCARequest = {
   caCertPem: string
   /**
    * The challenge is a PEM-encoded certificate to prove the possession of the
-   * CA. It must be signed by the CA, and have a Common Name equal to the Hub ID.
+   * CA. It must be signed by the CA, and have a Common Name equal to the Hub
+   * ID.
    */
   challengeCertPem: string
 }
@@ -636,7 +650,10 @@ export type CreateDeviceRequest = {
   allowInsecure: boolean
   /** Allow multiple physical devices to connect with this device's credentials */
   allowMultipleConnections: boolean
-  /** Filter-sets to authorize or deny the device to publish/subscribe to specific topics */
+  /**
+   * Filter-sets to authorize or deny the device to publish/subscribe to
+   * specific topics
+   */
   messageFilters?: DeviceMessageFilters
   /** Device description */
   description?: string
@@ -752,19 +769,22 @@ export type CreateRouteRequest = {
   /**
    * If creating S3 Route, S3-specific configuration fields.
    *
-   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   s3Config?: CreateRouteRequestS3Config
   /**
    * If creating Database Route, DB-specific configuration fields.
    *
-   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   dbConfig?: CreateRouteRequestDatabaseConfig
   /**
    * If creating Rest Route, Rest-specific configuration fields.
    *
-   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   restConfig?: CreateRouteRequestRestConfig
 }
@@ -784,19 +804,22 @@ export type UpdateRouteRequest = {
   /**
    * When updating S3 Route, S3-specific configuration fields.
    *
-   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   s3Config?: UpdateRouteRequestS3Config
   /**
    * When updating Database Route, DB-specific configuration fields.
    *
-   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   dbConfig?: UpdateRouteRequestDatabaseConfig
   /**
    * When updating Rest Route, Rest-specific configuration fields.
    *
-   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   restConfig?: UpdateRouteRequestRestConfig
 }
