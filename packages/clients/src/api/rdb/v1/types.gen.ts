@@ -278,13 +278,15 @@ export interface EndpointSpec {
   /**
    * Load balancer endpoint specifications.
    *
-   * One-of ('spec'): at most one of 'loadBalancer', 'privateNetwork' could be set.
+   * One-of ('spec'): at most one of 'loadBalancer', 'privateNetwork' could be
+   * set.
    */
   loadBalancer?: EndpointSpecLoadBalancer
   /**
    * Private network endpoint specifications.
    *
-   * One-of ('spec'): at most one of 'loadBalancer', 'privateNetwork' could be set.
+   * One-of ('spec'): at most one of 'loadBalancer', 'privateNetwork' could be
+   * set.
    */
   privateNetwork?: EndpointSpecPrivateNetwork
 }
@@ -613,13 +615,15 @@ export interface ReadReplicaEndpointSpec {
   /**
    * Direct access endpoint specifications.
    *
-   * One-of ('spec'): at most one of 'directAccess', 'privateNetwork' could be set.
+   * One-of ('spec'): at most one of 'directAccess', 'privateNetwork' could be
+   * set.
    */
   directAccess?: ReadReplicaEndpointSpecDirectAccess
   /**
    * Private network endpoint specifications.
    *
-   * One-of ('spec'): at most one of 'directAccess', 'privateNetwork' could be set.
+   * One-of ('spec'): at most one of 'directAccess', 'privateNetwork' could be
+   * set.
    */
   privateNetwork?: ReadReplicaEndpointSpecPrivateNetwork
 }
@@ -683,7 +687,10 @@ export interface User {
    * start with '_rdb', Only a-zA-Z0-9_$- characters are accepted)
    */
   name: string
-  /** Whether or not a user got administrative privileges on the database instance */
+  /**
+   * Whether or not a user got administrative privileges on the database
+   * instance
+   */
   isAdmin: boolean
 }
 
@@ -774,7 +781,8 @@ export type RestoreDatabaseBackupRequest = {
   databaseBackupId: string
   /**
    * Defines the destination database in order to restore into a specified
-   * database, the default destination is set to the origin database of the backup
+   * database, the default destination is set to the origin database of the
+   * backup
    */
   databaseName?: string
   /** Defines the rdb instance where the backup has to be restored */

@@ -646,7 +646,8 @@ export class VpcgwV1GenAPI extends API {
   /**
    * Set the list of DHCP reservations attached to a Gateway Network.
    * Reservations are identified by their MAC address, and will sync the current
-   * DHCP entry list to the given list, creating, updating or deleting DHCP entries.
+   * DHCP entry list to the given list, creating, updating or deleting DHCP
+   * entries.
    *
    * @param request - The request {@link SetDHCPEntriesRequest}
    * @returns A Promise of SetDHCPEntriesResponse

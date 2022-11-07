@@ -133,7 +133,8 @@ export class TemV1Alpha1GenAPI extends API {
     )
 
   /**
-   * List emails sent from a domain and/or for a project and/or for an organization
+   * List emails sent from a domain and/or for a project and/or for an
+   * organization
    *
    * @param request - The request {@link ListEmailsRequest}
    * @returns A Promise of ListEmailsResponse

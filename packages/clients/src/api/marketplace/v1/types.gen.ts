@@ -79,7 +79,10 @@ export interface Version {
 }
 
 export type ListImagesRequest = {
-  /** A positive integer lower or equal to 100 to select the number of items to display */
+  /**
+   * A positive integer lower or equal to 100 to select the number of items to
+   * display
+   */
   perPage?: number
   /** A positive integer to choose the page to display */
   page?: number

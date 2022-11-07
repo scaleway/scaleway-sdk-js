@@ -151,7 +151,10 @@ export type ListServersRequest = {
   organizationId?: string
   /** A positive integer to choose the page to return */
   page?: number
-  /** A positive integer lower or equal to 100 to select the number of items to return */
+  /**
+   * A positive integer lower or equal to 100 to select the number of items to
+   * return
+   */
   pageSize?: number
 }
 
@@ -160,11 +163,17 @@ export type ListOSRequest = {
   zone?: Zone
   /** A positive integer to choose the page to return */
   page?: number
-  /** A positive integer lower or equal to 100 to select the number of items to return */
+  /**
+   * A positive integer lower or equal to 100 to select the number of items to
+   * return
+   */
   pageSize?: number
   /** List of compatible server type */
   serverType?: string
-  /** Filter os by name (for eg. "11.1" will return "11.1.2" and "11.1" but not "12") */
+  /**
+   * Filter os by name (for eg. "11.1" will return "11.1.2" and "11.1" but not
+   * "12")
+   */
   name?: string
 }
 

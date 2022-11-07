@@ -95,7 +95,10 @@ export interface Bootscript {
    * is configured
    */
   default: boolean
-  /** Provide information regarding a Device Tree Binary (dtb) for use with C1 servers */
+  /**
+   * Provide information regarding a Device Tree Binary (dtb) for use with C1
+   * servers
+   */
   dtb: string
   /** The bootscript ID */
   id: string
@@ -434,7 +437,10 @@ export interface SecurityGroup {
   project: string
   /** The security group tags */
   tags: Array<string>
-  /** @deprecated True if it is your default security group for this organization ID */
+  /**
+   * @deprecated True if it is your default security group for this organization
+   *   ID
+   */
   organizationDefault?: boolean
   /** True if it is your default security group for this project ID */
   projectDefault: boolean
@@ -685,7 +691,8 @@ export interface SetSecurityGroupRulesRequestRule {
   destPortFrom?: number
   /**
    * End of the range of ports this rule applies to (inclusive). This value will
-   * be set to null if protocol is ICMP or ANY, or if it is equal to dest_port_from
+   * be set to null if protocol is ICMP or ANY, or if it is equal to
+   * dest_port_from
    */
   destPortTo?: number
   /**
@@ -693,7 +700,10 @@ export interface SetSecurityGroupRulesRequestRule {
    * are passed with the same position, the resulting order is undefined
    */
   position: number
-  /** Indicates if this rule is editable. Rules with the value false will be ignored */
+  /**
+   * Indicates if this rule is editable. Rules with the value false will be
+   * ignored
+   */
   editable?: boolean
   /** Zone of the rule. This field is ignored */
   zone: Zone
@@ -867,13 +877,15 @@ export interface VolumeTemplate {
   /**
    * @deprecated Organization ID of the volume.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project' could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   could be set.
    */
   organization?: string
   /**
    * Project ID of the volume.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project' could be set.
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   project?: string
 }
@@ -917,7 +929,10 @@ export type ListVolumesTypesRequest = {
 export type ListServersRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
-  /** A positive integer lower or equal to 100 to select the number of items to return */
+  /**
+   * A positive integer lower or equal to 100 to select the number of items to
+   * return
+   */
   perPage?: number
   /** A positive integer to choose the page to return */
   page?: number
@@ -1039,13 +1054,15 @@ export type CreateImageRequest = {
   /**
    * @deprecated Organization ID of the image.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project' could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   could be set.
    */
   organization?: string
   /**
    * Project ID of the image.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project' could be set.
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   project?: string
   /** The tags of the image */
@@ -1084,13 +1101,15 @@ export type CreateSnapshotRequest = {
   /**
    * @deprecated Organization ID of the snapshot.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project' could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   could be set.
    */
   organization?: string
   /**
    * Project ID of the snapshot.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project' could be set.
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   project?: string
   /**
@@ -1136,7 +1155,10 @@ export type ListVolumesRequest = {
   zone?: Zone
   /** Filter by volume type */
   volumeType?: VolumeVolumeType
-  /** A positive integer lower or equal to 100 to select the number of items to return */
+  /**
+   * A positive integer lower or equal to 100 to select the number of items to
+   * return
+   */
   perPage?: number
   /** A positive integer to choose the page to return */
   page?: number
@@ -1161,13 +1183,15 @@ export type CreateVolumeRequest = {
   /**
    * @deprecated The volume organization ID.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project' could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   could be set.
    */
   organization?: string
   /**
    * The volume project ID.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project' could be set.
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   project?: string
   /** The volume tags */
@@ -1177,19 +1201,22 @@ export type CreateVolumeRequest = {
   /**
    * The volume disk size, must be a multiple of 512.
    *
-   * One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could be set.
+   * One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could
+   * be set.
    */
   size?: number
   /**
    * The ID of the volume on which this volume will be based.
    *
-   * One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could be set.
+   * One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could
+   * be set.
    */
   baseVolume?: string
   /**
    * The ID of the snapshot on which this volume will be based.
    *
-   * One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could be set.
+   * One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could
+   * be set.
    */
   baseSnapshot?: string
 }
@@ -1237,7 +1264,10 @@ export type ListSecurityGroupsRequest = {
   tags?: Array<string>
   /** Filter security groups with this value for project_default */
   projectDefault?: boolean
-  /** A positive integer lower or equal to 100 to select the number of items to return */
+  /**
+   * A positive integer lower or equal to 100 to select the number of items to
+   * return
+   */
   perPage?: number
   /** A positive integer to choose the page to return */
   page?: number
@@ -1253,13 +1283,15 @@ export type CreateSecurityGroupRequest = {
   /**
    * @deprecated Organization ID the security group belongs to.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project' could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   could be set.
    */
   organization?: string
   /**
    * Project ID the security group belong to.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project' could be set.
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   project?: string
   /** The tags of the security group */
@@ -1273,7 +1305,8 @@ export type CreateSecurityGroupRequest = {
    */
   organizationDefault?: boolean
   /**
-   * Whether this security group becomes the default security group for new instances.
+   * Whether this security group becomes the default security group for new
+   * instances.
    *
    * One-of ('defaultIdentifier'): at most one of 'organizationDefault',
    * 'projectDefault' could be set.
@@ -1313,7 +1346,10 @@ export type ListSecurityGroupRulesRequest = {
   zone?: Zone
   /** UUID of the security group */
   securityGroupId: string
-  /** A positive integer lower or equal to 100 to select the number of items to return */
+  /**
+   * A positive integer lower or equal to 100 to select the number of items to
+   * return
+   */
   perPage?: number
   /** A positive integer to choose the page to return */
   page?: number
@@ -1364,7 +1400,10 @@ export type GetSecurityGroupRuleRequest = {
 export type ListPlacementGroupsRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
-  /** A positive integer lower or equal to 100 to select the number of items to return */
+  /**
+   * A positive integer lower or equal to 100 to select the number of items to
+   * return
+   */
   perPage?: number
   /** A positive integer to choose the page to return */
   page?: number
@@ -1392,13 +1431,15 @@ export type CreatePlacementGroupRequest = {
   /**
    * @deprecated Organization ID of the placement group.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project' could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   could be set.
    */
   organization?: string
   /**
    * Project ID of the placement group.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project' could be set.
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   project?: string
   /** The tags of the placement group */
@@ -1485,7 +1526,10 @@ export type ListIpsRequest = {
   tags?: Array<string>
   /** Filter on the IP address (Works as a LIKE operation on the IP address) */
   name?: string
-  /** A positive integer lower or equal to 100 to select the number of items to return */
+  /**
+   * A positive integer lower or equal to 100 to select the number of items to
+   * return
+   */
   perPage?: number
   /** A positive integer to choose the page to return */
   page?: number
@@ -1497,13 +1541,15 @@ export type CreateIpRequest = {
   /**
    * @deprecated The organization ID the IP is reserved in.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project' could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   could be set.
    */
   organization?: string
   /**
    * The project ID the IP is reserved in.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project' could be set.
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   project?: string
   /** The tags of the IP */

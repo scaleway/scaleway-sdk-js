@@ -86,7 +86,10 @@ export interface BMCAccess {
    * authentification
    */
   password: string
-  /** The date after which the BMC (Baseboard Management Controller) access will be closed */
+  /**
+   * The date after which the BMC (Baseboard Management Controller) access will
+   * be closed
+   */
   expiresAt?: Date
 }
 
@@ -400,9 +403,15 @@ export interface ServerInstall {
   sshKeyIds: Array<string>
   /** Status of the server install */
   status: ServerInstallStatus
-  /** User defined in the server install or the default one if none were specified */
+  /**
+   * User defined in the server install or the default one if none were
+   * specified
+   */
   user: string
-  /** Service user defined in the server install or the default one if none were specified */
+  /**
+   * Service user defined in the server install or the default one if none were
+   * specified
+   */
   serviceUser: string
   /** The address of the installed service */
   serviceUrl: string
@@ -534,7 +543,10 @@ export type UpdateServerRequest = {
   serverId: string
   /** Name of the server (≠hostname), not updated if null */
   name?: string
-  /** Description associated to the server, max 255 characters, not updated if null */
+  /**
+   * Description associated to the server, max 255 characters, not updated if
+   * null
+   */
   description?: string
   /** Tags associated to the server, not updated if null */
   tags?: Array<string>

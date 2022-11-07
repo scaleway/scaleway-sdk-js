@@ -53,7 +53,8 @@ export interface Image {
   statusMessage?: string
   /**
    * A `public` image is pullable from internet without authentication, opposed
-   * to a `private` image. `inherit` will use the namespace `is_public` parameter
+   * to a `private` image. `inherit` will use the namespace `is_public`
+   * parameter
    */
   visibility: ImageVisibility
   /**
@@ -139,7 +140,10 @@ export interface Tag {
   imageId: string
   /** Tag status */
   status: TagStatus
-  /** Hash of the tag actual content. Several tags of a same image may have the same digest */
+  /**
+   * Hash of the tag actual content. Several tags of a same image may have the
+   * same digest
+   */
   digest: string
   /** Creation date */
   createdAt?: Date
@@ -152,7 +156,10 @@ export type ListNamespacesRequest = {
   region?: Region
   /** A positive integer to choose the page to display */
   page?: number
-  /** A positive integer lower or equal to 100 to select the number of items to display */
+  /**
+   * A positive integer lower or equal to 100 to select the number of items to
+   * display
+   */
   pageSize?: number
   /** Field by which to order the display of Images */
   orderBy?: ListNamespacesRequestOrderBy
@@ -219,7 +226,10 @@ export type ListImagesRequest = {
   region?: Region
   /** A positive integer to choose the page to display */
   page?: number
-  /** A positive integer lower or equal to 100 to select the number of items to display */
+  /**
+   * A positive integer lower or equal to 100 to select the number of items to
+   * display
+   */
   pageSize?: number
   /** Field by which to order the display of Images */
   orderBy?: ListImagesRequestOrderBy
@@ -247,7 +257,8 @@ export type UpdateImageRequest = {
   imageId: string
   /**
    * A `public` image is pullable from internet without authentication, opposed
-   * to a `private` image. `inherit` will use the namespace `is_public` parameter
+   * to a `private` image. `inherit` will use the namespace `is_public`
+   * parameter
    */
   visibility: ImageVisibility
 }
@@ -266,7 +277,10 @@ export type ListTagsRequest = {
   imageId: string
   /** A positive integer to choose the page to display */
   page?: number
-  /** A positive integer lower or equal to 100 to select the number of items to display */
+  /**
+   * A positive integer lower or equal to 100 to select the number of items to
+   * display
+   */
   pageSize?: number
   /** Field by which to order the display of Images */
   orderBy?: ListTagsRequestOrderBy

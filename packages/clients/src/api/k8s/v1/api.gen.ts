@@ -109,7 +109,8 @@ export class K8SV1GenAPI extends API {
     )
 
   /**
-   * This method allows to list all the existing Kubernetes clusters in an account.
+   * This method allows to list all the existing Kubernetes clusters in an
+   * account.
    *
    * @param request - The request {@link ListClustersRequest}
    * @returns A Promise of ListClustersResponse
@@ -339,7 +340,8 @@ export class K8SV1GenAPI extends API {
     )
 
   /**
-   * This method allows to list all the existing pools for a specific Kubernetes cluster.
+   * This method allows to list all the existing pools for a specific Kubernetes
+   * cluster.
    *
    * @param request - The request {@link ListPoolsRequest}
    * @returns A Promise of ListPoolsResponse
@@ -496,7 +498,8 @@ export class K8SV1GenAPI extends API {
     )
 
   /**
-   * This method allows to list all the existing nodes for a specific Kubernetes cluster.
+   * This method allows to list all the existing nodes for a specific Kubernetes
+   * cluster.
    *
    * @param request - The request {@link ListNodesRequest}
    * @returns A Promise of ListNodesResponse

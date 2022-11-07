@@ -136,9 +136,15 @@ export interface CreateTriggerInputRequestSqsClientConfigSpec {
 
 export interface CreateTriggerRequestNatsFailureHandlingPolicy {
   retryPolicy?: CreateTriggerRequestNatsFailureHandlingPolicyRetryPolicy
-  /** One-of ('deadLetter'): at most one of 'natsDeadLetter', 'sqsDeadLetter' could be set. */
+  /**
+   * One-of ('deadLetter'): at most one of 'natsDeadLetter', 'sqsDeadLetter'
+   * could be set.
+   */
   natsDeadLetter?: CreateTriggerRequestNatsFailureHandlingPolicyNatsDeadLetter
-  /** One-of ('deadLetter'): at most one of 'natsDeadLetter', 'sqsDeadLetter' could be set. */
+  /**
+   * One-of ('deadLetter'): at most one of 'natsDeadLetter', 'sqsDeadLetter'
+   * could be set.
+   */
   sqsDeadLetter?: CreateTriggerRequestNatsFailureHandlingPolicySqsDeadLetter
 }
 
@@ -389,9 +395,15 @@ export interface TriggerNatsDeadLetter {
 
 export interface TriggerNatsFailureHandlingPolicy {
   retryPolicy?: TriggerRetryPolicy
-  /** One-of ('deadLetter'): at most one of 'natsDeadLetter', 'sqsDeadLetter' could be set. */
+  /**
+   * One-of ('deadLetter'): at most one of 'natsDeadLetter', 'sqsDeadLetter'
+   * could be set.
+   */
   natsDeadLetter?: TriggerNatsDeadLetter
-  /** One-of ('deadLetter'): at most one of 'natsDeadLetter', 'sqsDeadLetter' could be set. */
+  /**
+   * One-of ('deadLetter'): at most one of 'natsDeadLetter', 'sqsDeadLetter'
+   * could be set.
+   */
   sqsDeadLetter?: TriggerSqsDeadLetter
 }
 

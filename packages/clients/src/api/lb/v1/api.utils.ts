@@ -94,7 +94,8 @@ export class LbV1UtilsAPI extends LbV1GenAPI {
 
 export class LbZonedV1UtilsAPI extends LbZonedV1GenAPI {
   /**
-   * Waits for all private networks of a (zoned) load balancer to be in a final state.
+   * Waits for all private networks of a (zoned) load balancer to be in a final
+   * state.
    *
    * @param request - The request {@link ZonedWaitForLbPrivateNetworksRequest}
    * @param options - The waiting options
