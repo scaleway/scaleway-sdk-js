@@ -7,11 +7,26 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  CreateMFAOTPRequest,
   CreateProjectRequest,
+  ListMFAOTPsResponse,
   ListProjectsResponse,
+  MFAOTP,
   Project,
   UpdateProjectRequest,
+  ValidateMFAOTPRequest,
+  ValidateMFAOTPResponse,
 } from './types.gen'
+
+export const unmarshalMFAOTP = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'MFAOTP' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return { id: data.id } as MFAOTP
+}
 
 export const unmarshalProject = (data: unknown) => {
   if (!isJSONObject(data)) {
@@ -30,6 +45,19 @@ export const unmarshalProject = (data: unknown) => {
   } as Project
 }
 
+export const unmarshalListMFAOTPsResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListMFAOTPsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    mfaOtps: unmarshalArrayOfObject(data.mfa_otps, unmarshalMFAOTP),
+    totalCount: data.total_count,
+  } as ListMFAOTPsResponse
+}
+
 export const unmarshalListProjectsResponse = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -42,6 +70,23 @@ export const unmarshalListProjectsResponse = (data: unknown) => {
     totalCount: data.total_count,
   } as ListProjectsResponse
 }
+
+export const unmarshalValidateMFAOTPResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ValidateMFAOTPResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return { backupCodes: data.backup_codes } as ValidateMFAOTPResponse
+}
+
+export const marshalCreateMFAOTPRequest = (
+  request: CreateMFAOTPRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  account_root_user_id: request.accountRootUserId,
+})
 
 export const marshalCreateProjectRequest = (
   request: CreateProjectRequest,
@@ -58,4 +103,11 @@ export const marshalUpdateProjectRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
+})
+
+export const marshalValidateMFAOTPRequest = (
+  request: ValidateMFAOTPRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  otp: request.otp,
 })
