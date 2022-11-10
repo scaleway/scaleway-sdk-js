@@ -431,8 +431,8 @@ export class RdbV1GenAPI extends API {
     )
 
   /**
-   * Upgrade your current `node_type` or enable high availability on your
-   * standalone database instance.
+   * Upgrade your current instance specifications like node type, high
+   * availability, volume, or db engine version.
    *
    * @param request - The request {@link UpgradeInstanceRequest}
    * @returns A Promise of Instance

@@ -368,6 +368,8 @@ export interface Instance {
   status: InstanceStatus
   /** Database engine of the database (PostgreSQL, MySQL, ...) */
   engine: string
+  /** Available database engine versions for upgrade */
+  upgradableVersion: Array<UpgradableVersion>
   /** @deprecated Endpoint of the instance */
   endpoint?: Endpoint
   /** List of tags applied to the instance */
@@ -679,6 +681,13 @@ export interface Snapshot {
   region: Region
 }
 
+export interface UpgradableVersion {
+  id: string
+  name: string
+  version: string
+  minorVersion: string
+}
+
 /** User */
 export interface User {
   /**
@@ -805,30 +814,38 @@ export type UpgradeInstanceRequest = {
    * Node type of the instance you want to upgrade to.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
-   * 'volumeSize', 'volumeType' could be set.
+   * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
    */
   nodeType?: string
   /**
    * Set to true to enable high availability on your instance.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
-   * 'volumeSize', 'volumeType' could be set.
+   * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
    */
   enableHa?: boolean
   /**
    * Increase your block storage volume size.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
-   * 'volumeSize', 'volumeType' could be set.
+   * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
    */
   volumeSize?: number
   /**
    * Change your instance storage type.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
-   * 'volumeSize', 'volumeType' could be set.
+   * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
    */
   volumeType?: VolumeType
+  /**
+   * This will create a new Database Instance with same instance specification
+   * as the current one and perform a Database Engine upgrade.
+   *
+   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
+   * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
+   */
+  upgradableVersionId?: string
 }
 
 export type ListInstancesRequest = {

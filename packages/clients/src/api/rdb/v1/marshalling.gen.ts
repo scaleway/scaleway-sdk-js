@@ -83,6 +83,7 @@ import type {
   UpdateInstanceRequest,
   UpdateSnapshotRequest,
   UpdateUserRequest,
+  UpgradableVersion,
   UpgradeInstanceRequest,
   User,
   Volume,
@@ -290,6 +291,21 @@ export const unmarshalReadReplica = (data: unknown) => {
   } as ReadReplica
 }
 
+const unmarshalUpgradableVersion = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'UpgradableVersion' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    minorVersion: data.minor_version,
+    name: data.name,
+    version: data.version,
+  } as UpgradableVersion
+}
+
 const unmarshalVolume = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -413,6 +429,10 @@ export const unmarshalInstance = (data: unknown) => {
     settings: unmarshalArrayOfObject(data.settings, unmarshalInstanceSetting),
     status: data.status,
     tags: data.tags,
+    upgradableVersion: unmarshalArrayOfObject(
+      data.upgradable_version,
+      unmarshalUpgradableVersion,
+    ),
     volume: data.volume ? unmarshalVolume(data.volume) : undefined,
   } as Instance
 }
@@ -1117,6 +1137,10 @@ export const marshalUpgradeInstanceRequest = (
     {
       param: 'volume_type',
       value: request.volumeType,
+    },
+    {
+      param: 'upgradable_version_id',
+      value: request.upgradableVersionId,
     },
   ]),
 })
