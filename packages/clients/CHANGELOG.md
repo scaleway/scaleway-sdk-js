@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.22](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.21...@scaleway/sdk@0.1.0-beta.22) (2022-11-14)
+
+### Features
+
+- **account:** add MFA OTP ([#224](https://github.com/scaleway/scaleway-sdk-js/issues/224)) ([aeed476](https://github.com/scaleway/scaleway-sdk-js/commit/aeed476d9d2ccdba7e8c963b734dbc8d4cdb3650))
+- **rdb:** database engine upgrade ([#225](https://github.com/scaleway/scaleway-sdk-js/issues/225)) ([3c6c143](https://github.com/scaleway/scaleway-sdk-js/commit/3c6c1435ce1afe7288bdeaf08b5404132359cb33))
+
 ## [0.1.0-beta.21](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.20...@scaleway/sdk@0.1.0-beta.21) (2022-11-07)
 
 **Note:** Version bump only for package @scaleway/sdk
