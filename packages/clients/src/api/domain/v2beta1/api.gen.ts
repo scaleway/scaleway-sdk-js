@@ -6,8 +6,13 @@ import {
   unmarshalScwFile,
   urlParams,
   validatePathParam,
+  waitForResource,
 } from '../../../bridge'
-import type { ScwFile } from '../../../bridge'
+import type { ScwFile, WaitForOptions } from '../../../bridge'
+import {
+  DOMAIN_TRANSIENT_STATUSES,
+  SSL_CERTIFICATE_TRANSIENT_STATUSES,
+} from './content.gen'
 import {
   marshalCloneDNSZoneRequest,
   marshalCreateDNSZoneRequest,
@@ -637,6 +642,28 @@ export class DomainV2Beta1GenAPI extends API {
     )
 
   /**
+   * Waits for {@link SSLCertificate} to be in a final state.
+   *
+   * @param request - The request {@link GetSSLCertificateRequest}
+   * @param options - The waiting options
+   * @returns A Promise of SSLCertificate
+   */
+  waitForSSLCertificate = (
+    request: Readonly<GetSSLCertificateRequest>,
+    options?: Readonly<WaitForOptions<SSLCertificate>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !SSL_CERTIFICATE_TRANSIENT_STATUSES.includes(res.status),
+          )),
+      this.getSSLCertificate,
+      request,
+      options,
+    )
+
+  /**
    * Create or return the zone TLS certificate
    *
    * @param request - The request {@link CreateSSLCertificateRequest}
@@ -1117,6 +1144,26 @@ export class DomainRegistrarV2Beta1GenAPI extends API {
         )}`,
       },
       unmarshalDomain,
+    )
+
+  /**
+   * Waits for {@link Domain} to be in a final state.
+   *
+   * @param request - The request {@link GetDomainRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Domain
+   */
+  waitForDomain = (
+    request: Readonly<RegistrarApiGetDomainRequest>,
+    options?: Readonly<WaitForOptions<Domain>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res =>
+          Promise.resolve(!DOMAIN_TRANSIENT_STATUSES.includes(res.status))),
+      this.getDomain,
+      request,
+      options,
     )
 
   /**
