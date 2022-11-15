@@ -39,6 +39,9 @@ export type FunctionRuntime =
   | 'go117'
   | 'go118'
   | 'node18'
+  | 'rust165'
+  | 'go119'
+  | 'python311'
 
 export type FunctionStatus =
   | 'unknown'
