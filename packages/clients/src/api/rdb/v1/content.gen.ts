@@ -5,6 +5,8 @@ import type {
   InstanceLogStatus,
   InstanceStatus,
   MaintenanceStatus,
+  ReadReplicaStatus,
+  SnapshotStatus,
 } from './types.gen'
 
 /** Lists transient statutes of the enum {@link DatabaseBackupStatus}. */
@@ -32,3 +34,18 @@ export const INSTANCE_TRANSIENT_STATUSES: InstanceStatus[] = [
 
 /** Lists transient statutes of the enum {@link MaintenanceStatus}. */
 export const MAINTENANCE_TRANSIENT_STATUSES: MaintenanceStatus[] = ['pending']
+
+/** Lists transient statutes of the enum {@link ReadReplicaStatus}. */
+export const READ_REPLICA_TRANSIENT_STATUSES: ReadReplicaStatus[] = [
+  'provisioning',
+  'initializing',
+  'deleting',
+  'configuring',
+]
+
+/** Lists transient statutes of the enum {@link SnapshotStatus}. */
+export const SNAPSHOT_TRANSIENT_STATUSES: SnapshotStatus[] = [
+  'creating',
+  'restoring',
+  'deleting',
+]

@@ -13,6 +13,8 @@ import {
   DATABASE_BACKUP_TRANSIENT_STATUSES,
   INSTANCE_LOG_TRANSIENT_STATUSES,
   INSTANCE_TRANSIENT_STATUSES,
+  READ_REPLICA_TRANSIENT_STATUSES,
+  SNAPSHOT_TRANSIENT_STATUSES,
 } from './content.gen'
 import {
   marshalAddInstanceACLRulesRequest,
@@ -758,6 +760,28 @@ export class RdbV1GenAPI extends API {
     )
 
   /**
+   * Waits for {@link ReadReplica} to be in a final state.
+   *
+   * @param request - The request {@link GetReadReplicaRequest}
+   * @param options - The waiting options
+   * @returns A Promise of ReadReplica
+   */
+  waitForReadReplica = (
+    request: Readonly<GetReadReplicaRequest>,
+    options?: Readonly<WaitForOptions<ReadReplica>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !READ_REPLICA_TRANSIENT_STATUSES.includes(res.status),
+          )),
+      this.getReadReplica,
+      request,
+      options,
+    )
+
+  /**
    * Delete a read replica
    *
    * @param request - The request {@link DeleteReadReplicaRequest}
@@ -1444,6 +1468,26 @@ export class RdbV1GenAPI extends API {
         )}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
       },
       unmarshalSnapshot,
+    )
+
+  /**
+   * Waits for {@link Snapshot} to be in a final state.
+   *
+   * @param request - The request {@link GetSnapshotRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Snapshot
+   */
+  waitForSnapshot = (
+    request: Readonly<GetSnapshotRequest>,
+    options?: Readonly<WaitForOptions<Snapshot>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res =>
+          Promise.resolve(!SNAPSHOT_TRANSIENT_STATUSES.includes(res.status))),
+      this.getSnapshot,
+      request,
+      options,
     )
 
   /**
