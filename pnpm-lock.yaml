@@ -16,7 +16,7 @@ importers:
       '@rollup/plugin-inject': ^5.0.2
       '@rollup/plugin-node-resolve': ^15.0.1
       '@scaleway/eslint-config-react': ^3.8.2
-      '@types/jest': ^29.2.2
+      '@types/jest': ^29.2.3
       babel-plugin-annotate-pure-calls: ^0.4.0
       cross-env: ^7.0.3
       cross-fetch: ^3.1.5
@@ -49,7 +49,7 @@ importers:
       '@rollup/plugin-inject': 5.0.2_rollup@3.2.5
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.2.5
       '@scaleway/eslint-config-react': 3.8.2_rmayb2veg2btbq6mbmnyivgasy
-      '@types/jest': 29.2.2
+      '@types/jest': 29.2.3
       babel-plugin-annotate-pure-calls: 0.4.0_@babel+core@7.20.2
       cross-env: 7.0.3
       cross-fetch: 3.1.5
@@ -3148,11 +3148,11 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jest/29.2.2:
-    resolution: {integrity: sha512-og1wAmdxKoS71K2ZwSVqWPX6OVn3ihZ6ZT2qvZvZQm90lJVDyXIjYcu4Khx2CNIeaFv12rOU/YObOsI3VOkzog==}
+  /@types/jest/29.2.3:
+    resolution: {integrity: sha512-6XwoEbmatfyoCjWRX7z0fKMmgYKe9+/HrviJ5k0X/tjJWHGAezZOfYaxqQKuzG/TvQyr+ktjm4jgbk0s4/oF2w==}
     dependencies:
-      expect: 29.2.2
-      pretty-format: 29.2.1
+      expect: 29.3.1
+      pretty-format: 29.3.1
     dev: true
 
   /@types/json-schema/7.0.11:
@@ -5231,17 +5231,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       homedir-polyfill: 1.0.3
-    dev: true
-
-  /expect/29.2.2:
-    resolution: {integrity: sha512-hE09QerxZ5wXiOhqkXy5d2G9ar+EqOyifnCXCpMNu+vZ6DG9TJ6CO2c2kPDSLqERTTWrO7OZj8EkYHQqSd78Yw==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    dependencies:
-      '@jest/expect-utils': 29.3.1
-      jest-get-type: 29.2.0
-      jest-matcher-utils: 29.3.1
-      jest-message-util: 29.3.1
-      jest-util: 29.3.1
     dev: true
 
   /expect/29.3.1:
@@ -8099,15 +8088,6 @@ packages:
     resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
     engines: {node: '>=10.13.0'}
     hasBin: true
-    dev: true
-
-  /pretty-format/29.2.1:
-    resolution: {integrity: sha512-Y41Sa4aLCtKAXvwuIpTvcFBkyeYp2gdFWzXGA+ZNES3VwURIB165XO/z7CjETwzCCS53MjW/rLMyyqEnTtaOfA==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    dependencies:
-      '@jest/schemas': 29.0.0
-      ansi-styles: 5.2.0
-      react-is: 18.2.0
     dev: true
 
   /pretty-format/29.3.1:
