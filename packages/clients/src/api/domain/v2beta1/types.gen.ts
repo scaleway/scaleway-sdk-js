@@ -131,7 +131,7 @@ export type DomainStatus =
 
 export type HostStatus = 'unknown_status' | 'active' | 'updating' | 'deleting'
 
-export type LanguageCode = 'unknown_language_code' | 'en_US' | 'fr_FR'
+export type LanguageCode = 'unknown_language_code' | 'en_US' | 'fr_FR' | 'de_DE'
 
 export type ListDNSZoneRecordsRequestOrderBy = 'name_asc' | 'name_desc'
 
