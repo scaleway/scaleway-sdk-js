@@ -258,7 +258,7 @@ export class IamV1Alpha1GenAPI extends API {
     )
 
   /**
-   * Delete a user
+   * Delete a guest user from an organization
    *
    * @param request - The request {@link DeleteUserRequest}
    */
