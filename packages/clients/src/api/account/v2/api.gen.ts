@@ -7,31 +7,19 @@ import {
   validatePathParam,
 } from '../../../bridge'
 import {
-  marshalCreateMFAOTPRequest,
   marshalCreateProjectRequest,
   marshalUpdateProjectRequest,
-  marshalValidateMFAOTPRequest,
-  unmarshalListMFAOTPsResponse,
   unmarshalListProjectsResponse,
-  unmarshalMFAOTP,
   unmarshalProject,
-  unmarshalValidateMFAOTPResponse,
 } from './marshalling.gen'
 import type {
-  CreateMFAOTPRequest,
   CreateProjectRequest,
-  DeleteMFAOTPRequest,
   DeleteProjectRequest,
   GetProjectRequest,
-  ListMFAOTPsRequest,
-  ListMFAOTPsResponse,
   ListProjectsRequest,
   ListProjectsResponse,
-  MFAOTP,
   Project,
   UpdateProjectRequest,
-  ValidateMFAOTPRequest,
-  ValidateMFAOTPResponse,
 } from './types.gen'
 
 const jsonContentHeaders = {
@@ -151,86 +139,4 @@ export class AccountV2GenAPI extends API {
       },
       unmarshalProject,
     )
-
-  protected pageOfListMFAOTPs = (request: Readonly<ListMFAOTPsRequest>) =>
-    this.client.fetch<ListMFAOTPsResponse>(
-      {
-        method: 'GET',
-        path: `/account/v2/mfa/otps`,
-        urlParams: urlParams(
-          ['account_root_user_id', request.accountRootUserId],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
-          ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
-        ),
-      },
-      unmarshalListMFAOTPsResponse,
-    )
-
-  /**
-   * List MFA OTPs
-   *
-   * @param request - The request {@link ListMFAOTPsRequest}
-   * @returns A Promise of ListMFAOTPsResponse
-   */
-  listMFAOTPs = (request: Readonly<ListMFAOTPsRequest>) =>
-    enrichForPagination('mfaOtps', this.pageOfListMFAOTPs, request)
-
-  /**
-   * Create MFA OTP
-   *
-   * @param request - The request {@link CreateMFAOTPRequest}
-   * @returns A Promise of MFAOTP
-   */
-  createMFAOTP = (request: Readonly<CreateMFAOTPRequest>) =>
-    this.client.fetch<MFAOTP>(
-      {
-        body: JSON.stringify(
-          marshalCreateMFAOTPRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/account/v2/mfa/otps`,
-      },
-      unmarshalMFAOTP,
-    )
-
-  /**
-   * Validate MFA OTP
-   *
-   * @param request - The request {@link ValidateMFAOTPRequest}
-   * @returns A Promise of ValidateMFAOTPResponse
-   */
-  validateMFAOTP = (request: Readonly<ValidateMFAOTPRequest>) =>
-    this.client.fetch<ValidateMFAOTPResponse>(
-      {
-        body: JSON.stringify(
-          marshalValidateMFAOTPRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/account/v2/mfa/otps/${validatePathParam(
-          'mfaOtpId',
-          request.mfaOtpId,
-        )}/validate`,
-      },
-      unmarshalValidateMFAOTPResponse,
-    )
-
-  /**
-   * Delete MFA OTP
-   *
-   * @param request - The request {@link DeleteMFAOTPRequest}
-   */
-  deleteMFAOTP = (request: Readonly<DeleteMFAOTPRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/account/v2/mfa/otps/${validatePathParam(
-        'mfaOtpId',
-        request.mfaOtpId,
-      )}`,
-    })
 }
