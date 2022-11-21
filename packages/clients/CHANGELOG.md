@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.23](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.22...@scaleway/sdk@0.1.0-beta.23) (2022-11-21)
+
+### Features
+
+- **serverless:** add Rust 1.65, Python 3.11 and Go 1.19 ([#233](https://github.com/scaleway/scaleway-sdk-js/issues/233)) ([e3cc123](https://github.com/scaleway/scaleway-sdk-js/commit/e3cc1236e9be34df9cf4b22515174d50a2c47f11))
+
+### Bug Fixes
+
+- **domain:** add SSL certificate and domain waiters ([#232](https://github.com/scaleway/scaleway-sdk-js/issues/232)) ([9ffd698](https://github.com/scaleway/scaleway-sdk-js/commit/9ffd69806ce7364bea4ee79dd0aa3bd839bd57f1))
+- **rdb:** add read replica and snapshot waiters ([#231](https://github.com/scaleway/scaleway-sdk-js/issues/231)) ([7766b91](https://github.com/scaleway/scaleway-sdk-js/commit/7766b91639d7fb77e7de7414b25bfbad143ac0e0))
+
 ## [0.1.0-beta.22](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.21...@scaleway/sdk@0.1.0-beta.22) (2022-11-14)
 
 ### Features
