@@ -116,6 +116,7 @@ export interface Cron {
   schedule: string
   args?: Record<string, unknown>
   status: CronStatus
+  name: string
 }
 
 /** Domain */
@@ -364,6 +365,7 @@ export type CreateCronRequest = {
   containerId: string
   schedule: string
   args?: Record<string, unknown>
+  name?: string
 }
 
 export type UpdateCronRequest = {
@@ -373,6 +375,7 @@ export type UpdateCronRequest = {
   containerId?: string
   schedule?: string
   args?: Record<string, unknown>
+  name?: string
 }
 
 export type DeleteCronRequest = {
