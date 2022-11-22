@@ -219,6 +219,7 @@ export const unmarshalOS = (data: unknown) => {
   return {
     enabled: data.enabled,
     id: data.id,
+    licenseRequired: data.license_required,
     logoUrl: data.logo_url,
     name: data.name,
     password: data.password ? unmarshalOSOSField(data.password) : undefined,
