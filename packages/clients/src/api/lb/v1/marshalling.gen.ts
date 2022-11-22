@@ -130,6 +130,7 @@ const unmarshalHealthCheckHttpConfig = (data: unknown) => {
 
   return {
     code: data.code,
+    hostHeader: data.host_header,
     method: data.method,
     uri: data.uri,
   } as HealthCheckHttpConfig
@@ -144,7 +145,9 @@ const unmarshalHealthCheckHttpsConfig = (data: unknown) => {
 
   return {
     code: data.code,
+    hostHeader: data.host_header,
     method: data.method,
+    sni: data.sni,
     uri: data.uri,
   } as HealthCheckHttpsConfig
 }
@@ -423,6 +426,7 @@ export const unmarshalFrontend = (data: unknown) => {
       : undefined,
     certificateIds: data.certificate_ids,
     createdAt: unmarshalDate(data.created_at),
+    enableHttp3: data.enable_http3,
     id: data.id,
     inboundPort: data.inbound_port,
     lb: data.lb ? unmarshalLb(data.lb) : undefined,
@@ -756,6 +760,7 @@ const marshalHealthCheckHttpConfig = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   code: request.code,
+  host_header: request.hostHeader,
   method: request.method,
   uri: request.uri,
 })
@@ -765,7 +770,9 @@ const marshalHealthCheckHttpsConfig = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   code: request.code,
+  host_header: request.hostHeader,
   method: request.method,
+  sni: request.sni,
   uri: request.uri,
 })
 
@@ -1008,6 +1015,7 @@ export const marshalCreateFrontendRequest = (
   backend_id: request.backendId,
   certificate_id: request.certificateId,
   certificate_ids: request.certificateIds,
+  enable_http3: request.enableHttp3,
   inbound_port: request.inboundPort,
   name: request.name || randomName('lbf'),
   timeout_client: request.timeoutClient,
@@ -1171,6 +1179,7 @@ export const marshalUpdateFrontendRequest = (
   backend_id: request.backendId,
   certificate_id: request.certificateId,
   certificate_ids: request.certificateIds,
+  enable_http3: request.enableHttp3,
   inbound_port: request.inboundPort,
   name: request.name,
   timeout_client: request.timeoutClient,
@@ -1374,6 +1383,7 @@ export const marshalZonedApiCreateFrontendRequest = (
   backend_id: request.backendId,
   certificate_id: request.certificateId,
   certificate_ids: request.certificateIds,
+  enable_http3: request.enableHttp3,
   inbound_port: request.inboundPort,
   name: request.name || randomName('lbf'),
   timeout_client: request.timeoutClient,
@@ -1544,6 +1554,7 @@ export const marshalZonedApiUpdateFrontendRequest = (
   backend_id: request.backendId,
   certificate_id: request.certificateId,
   certificate_ids: request.certificateIds,
+  enable_http3: request.enableHttp3,
   inbound_port: request.inboundPort,
   name: request.name,
   timeout_client: request.timeoutClient,

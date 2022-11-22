@@ -315,6 +315,7 @@ export interface Frontend {
   certificateIds: Array<string>
   createdAt?: Date
   updatedAt?: Date
+  enableHttp3: boolean
 }
 
 /** Health check */
@@ -378,16 +379,36 @@ export interface HealthCheck {
   checkSendProxy: boolean
 }
 
+/** Health check. http config */
 export interface HealthCheckHttpConfig {
+  /** HTTP uri used with the request */
   uri: string
+  /** HTTP method used with the request */
   method: string
+  /**
+   * A health check response will be considered as valid if the response's
+   * status code match
+   */
   code?: number
+  /** HTTP host header used with the request */
+  hostHeader: string
 }
 
+/** Health check. https config */
 export interface HealthCheckHttpsConfig {
+  /** HTTP uri used with the request */
   uri: string
+  /** HTTP method used with the request */
   method: string
+  /**
+   * A health check response will be considered as valid if the response's
+   * status code match
+   */
   code?: number
+  /** HTTP host header used with the request */
+  hostHeader: string
+  /** Specifies the SNI to use to do health checks over SSL */
+  sni: string
 }
 
 export interface HealthCheckLdapConfig {}
@@ -1085,6 +1106,8 @@ export type CreateFrontendRequest = {
   certificateId?: string
   /** List of certificate IDs to bind on the frontend */
   certificateIds?: Array<string>
+  /** Activate HTTP 3 protocol (beta) */
+  enableHttp3: boolean
 }
 
 export type GetFrontendRequest = {
@@ -1111,6 +1134,8 @@ export type UpdateFrontendRequest = {
   certificateId?: string
   /** List of certificate IDs to bind on the frontend */
   certificateIds?: Array<string>
+  /** Activate HTTP 3 protocol (beta) */
+  enableHttp3: boolean
 }
 
 export type DeleteFrontendRequest = {
@@ -1906,6 +1931,8 @@ export type ZonedApiCreateFrontendRequest = {
   certificateId?: string
   /** List of certificate IDs to bind on the frontend */
   certificateIds?: Array<string>
+  /** Activate HTTP 3 protocol (beta) */
+  enableHttp3: boolean
 }
 
 export type ZonedApiGetFrontendRequest = {
@@ -1932,6 +1959,8 @@ export type ZonedApiUpdateFrontendRequest = {
   certificateId?: string
   /** List of certificate IDs to bind on the frontend */
   certificateIds?: Array<string>
+  /** Activate HTTP 3 protocol (beta) */
+  enableHttp3: boolean
 }
 
 export type ZonedApiDeleteFrontendRequest = {
