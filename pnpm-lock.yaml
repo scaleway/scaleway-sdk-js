@@ -22,7 +22,7 @@ importers:
       cross-fetch: ^3.1.5
       cz-conventional-changelog: ^3.3.0
       eslint: ^8.28.0
-      eslint-formatter-gitlab: ^3.0.0
+      eslint-formatter-gitlab: ^4.0.0
       eslint-plugin-tsdoc: ^0.2.17
       husky: ^8.0.2
       jest: ^29.3.1
@@ -55,7 +55,7 @@ importers:
       cross-fetch: 3.1.5
       cz-conventional-changelog: 3.3.0
       eslint: 8.28.0
-      eslint-formatter-gitlab: 3.0.0_eslint@8.28.0
+      eslint-formatter-gitlab: 4.0.0_eslint@8.28.0
       eslint-plugin-tsdoc: 0.2.17
       husky: 8.0.2
       jest: 29.3.1
@@ -4892,14 +4892,15 @@ packages:
       eslint: 8.28.0
     dev: true
 
-  /eslint-formatter-gitlab/3.0.0_eslint@8.28.0:
-    resolution: {integrity: sha512-fqZ2G45rgbrHcFunqmwuG5Qo6QAOlxEsR+KdOP08T1Xegw5tJhHh9KFWMSct8q6x8xCMUyYGHypZd342bLUttA==}
+  /eslint-formatter-gitlab/4.0.0_eslint@8.28.0:
+    resolution: {integrity: sha512-ZUk5hgRmCGkQFpjo4/RRKrErTf2vmLt3ecJMtpzApruB5XK+9esD8t8a4yoG2CjkFljIfihI8sbNg7Utyic2bw==}
+    engines: {node: '>=14.0.0'}
     peerDependencies:
       eslint: ^5 || ^6 || ^7 || ^8
     dependencies:
       chalk: 4.1.2
       eslint: 8.28.0
-      js-yaml: 4.1.0
+      yaml: 2.1.1
     dev: true
 
   /eslint-import-resolver-node/0.3.6:
