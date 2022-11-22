@@ -175,6 +175,7 @@ export const unmarshalCron = (data: unknown) => {
     args: data.args,
     functionId: data.function_id,
     id: data.id,
+    name: data.name,
     schedule: data.schedule,
     status: data.status,
   } as Cron
@@ -635,6 +636,7 @@ export const marshalCreateCronRequest = (
 ): Record<string, unknown> => ({
   args: request.args,
   function_id: request.functionId,
+  name: request.name,
   schedule: request.schedule,
 })
 
@@ -787,6 +789,7 @@ export const marshalUpdateCronRequest = (
 ): Record<string, unknown> => ({
   args: request.args,
   function_id: request.functionId,
+  name: request.name,
   schedule: request.schedule,
 })
 
