@@ -224,6 +224,7 @@ export interface Backend {
   updatedAt?: Date
   failoverHost?: string
   sslBridging?: boolean
+  ignoreSslServerVerify?: boolean
 }
 
 /**
@@ -885,6 +886,8 @@ export type CreateBackendRequest = {
   failoverHost?: string
   /** Enable SSL between load balancer and backend servers */
   sslBridging?: boolean
+  /** Set to true to ignore server certificate verification */
+  ignoreSslServerVerify?: boolean
 }
 
 export type GetBackendRequest = {
@@ -941,6 +944,8 @@ export type UpdateBackendRequest = {
   failoverHost?: string
   /** Enable SSL between load balancer and backend servers */
   sslBridging?: boolean
+  /** Set to true to ignore server certificate verification */
+  ignoreSslServerVerify?: boolean
 }
 
 export type DeleteBackendRequest = {
@@ -1702,6 +1707,8 @@ export type ZonedApiCreateBackendRequest = {
   failoverHost?: string
   /** Enable SSL between load balancer and backend servers */
   sslBridging?: boolean
+  /** Set to true to ignore server certificate verification */
+  ignoreSslServerVerify?: boolean
 }
 
 export type ZonedApiGetBackendRequest = {
@@ -1758,6 +1765,8 @@ export type ZonedApiUpdateBackendRequest = {
   failoverHost?: string
   /** Enable SSL between load balancer and backend servers */
   sslBridging?: boolean
+  /** Set to true to ignore server certificate verification */
+  ignoreSslServerVerify?: boolean
 }
 
 export type ZonedApiDeleteBackendRequest = {
