@@ -27,8 +27,9 @@ export class ResourceExpiredError extends ScalewayError {
       typeof obj.resource !== 'string' ||
       typeof obj.resource_id !== 'string' ||
       typeof obj.expired_since !== 'string'
-    )
+    ) {
       return null
+    }
 
     return new ResourceExpiredError(
       status,

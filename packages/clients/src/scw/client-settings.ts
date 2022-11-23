@@ -91,24 +91,30 @@ export const assertValidSettings = (obj: Readonly<Settings>): void => {
   }
 
   // Default Region.
-  if (obj.defaultRegion && !isRegion(obj.defaultRegion))
+  if (obj.defaultRegion && !isRegion(obj.defaultRegion)) {
     throw new Error(`Invalid default region format '${obj.defaultRegion}'`)
+  }
 
   // Default Zone.
-  if (obj.defaultZone && !isZone(obj.defaultZone))
+  if (obj.defaultZone && !isZone(obj.defaultZone)) {
     throw new Error(`Invalid default zone format '${obj.defaultZone}'`)
+  }
 
   // API URL.
-  if (!isURL(obj.apiURL)) throw new Error(`Invalid URL ${obj.apiURL}`)
+  if (!isURL(obj.apiURL)) {
+    throw new Error(`Invalid URL ${obj.apiURL}`)
+  }
 
-  if (obj.apiURL.slice(-1) === '/')
+  if (obj.apiURL.slice(-1) === '/') {
     throw new Error(
       `Invalid URL ${obj.apiURL}: it should not have a trailing slash`,
     )
+  }
 
   // HTTP Client.
-  if (typeof obj.httpClient !== typeof fetch)
+  if (typeof obj.httpClient !== typeof fetch) {
     throw new Error(`Invalid HTTP Client`)
+  }
 
   // Default Page Size.
   if (
@@ -116,11 +122,14 @@ export const assertValidSettings = (obj: Readonly<Settings>): void => {
     (typeof obj.defaultPageSize !== 'number' ||
       Number.isNaN(obj.defaultPageSize) ||
       obj.defaultPageSize <= 0)
-  )
+  ) {
     throw new Error(
       `Invalid defaultPageSize ${obj.defaultPageSize}: it should be a number above 0`,
     )
+  }
 
   // User Agent.
-  if (typeof obj.userAgent !== 'string') throw new Error(`Invalid User-Agent`)
+  if (typeof obj.userAgent !== 'string') {
+    throw new Error(`Invalid User-Agent`)
+  }
 }

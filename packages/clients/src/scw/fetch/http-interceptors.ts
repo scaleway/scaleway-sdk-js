@@ -62,12 +62,13 @@ export const logRequest =
     obfuscate: RequestInterceptor = identity,
   ): RequestInterceptor =>
   async request => {
-    if (shouldLog(LevelResolver[getLogger().logLevel], 'debug'))
+    if (shouldLog(LevelResolver[getLogger().logLevel], 'debug')) {
       getLogger().debug(
         `--------------- Scaleway SDK REQUEST ${identifier} ---------------
 ${await dumpRequest(await obfuscate(request))}
 ---------------------------------------------------------`,
       )
+    }
 
     return request
   }
@@ -83,12 +84,13 @@ ${await dumpRequest(await obfuscate(request))}
 export const logResponse =
   (identifier: string): ResponseInterceptor =>
   async response => {
-    if (shouldLog(LevelResolver[getLogger().logLevel], 'debug'))
+    if (shouldLog(LevelResolver[getLogger().logLevel], 'debug')) {
       getLogger().debug(
         `--------------- Scaleway SDK RESPONSE ${identifier} ---------------
 ${await dumpResponse(response)}
 ---------------------------------------------------------`,
       )
+    }
 
     return response
   }

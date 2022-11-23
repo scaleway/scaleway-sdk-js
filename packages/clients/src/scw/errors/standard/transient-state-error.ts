@@ -30,8 +30,9 @@ export class TransientStateError extends ScalewayError {
       typeof obj.resource !== 'string' ||
       typeof obj.resource_id !== 'string' ||
       typeof obj.current_state !== 'string'
-    )
+    ) {
       return null
+    }
 
     return new TransientStateError(
       status,

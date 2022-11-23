@@ -56,16 +56,18 @@ describe('fetchPaginated', () => {
       [{ name: 'Claire' }],
     ]
     const twoPagesFetcher = jest.fn(fetchPages(twoPages))
-    for await (const page of fetchPaginated('items', twoPagesFetcher, {}))
+    for await (const page of fetchPaginated('items', twoPagesFetcher, {})) {
       expect(page).toStrictEqual(twoPages.shift())
+    }
     expect(twoPagesFetcher).toHaveBeenCalledTimes(2)
   })
 
   it('iterate without over iteration - 1 page', async () => {
     const onePage = [[{ name: 'Alice' }, { name: 'Bob' }], []]
     const onePagesFetcher = jest.fn(fetchPages(onePage))
-    for await (const page of fetchPaginated('items', onePagesFetcher, {}))
+    for await (const page of fetchPaginated('items', onePagesFetcher, {})) {
       expect(page).toStrictEqual(onePage.shift())
+    }
     expect(onePage).toStrictEqual([[]])
     expect(onePagesFetcher).toHaveBeenCalledTimes(1)
   })
@@ -73,8 +75,9 @@ describe('fetchPaginated', () => {
   it('iterate without over iteration - 1 result', async () => {
     const singleResult = [[{ name: 'Alice' }]]
     const singleResultFetcher = jest.fn(fetchPages(singleResult))
-    for await (const page of fetchPaginated('items', singleResultFetcher, {}))
+    for await (const page of fetchPaginated('items', singleResultFetcher, {})) {
       expect(page).toStrictEqual(singleResult.shift())
+    }
     expect(singleResultFetcher).toHaveBeenCalledTimes(1)
   })
 

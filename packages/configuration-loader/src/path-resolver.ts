@@ -12,8 +12,9 @@ import { EnvironmentKey } from './env'
  */
 export const getScwConfigurationDirectory = () => {
   const xdgConfigPath = env.XDG_CONFIG_HOME
-  if (typeof xdgConfigPath === 'string' && xdgConfigPath.length > 0)
+  if (typeof xdgConfigPath === 'string' && xdgConfigPath.length > 0) {
     return path.join(xdgConfigPath, 'scw')
+  }
 
   return path.join(homedir(), '.config', 'scw')
 }
@@ -28,8 +29,9 @@ export const getScwConfigurationDirectory = () => {
 export const resolveConfigurationFilePath = () => {
   // Try path defined by user in env variables
   const envFilePath = env[EnvironmentKey.ScwConfigPath]
-  if (typeof envFilePath === 'string' && envFilePath.length > 0)
+  if (typeof envFilePath === 'string' && envFilePath.length > 0) {
     return envFilePath
+  }
 
   // or fallback on the default path
   return path.join(getScwConfigurationDirectory(), 'config.yaml')

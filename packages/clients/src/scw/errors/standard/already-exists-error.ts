@@ -27,8 +27,9 @@ export class AlreadyExistsError extends ScalewayError {
       typeof obj.resource !== 'string' ||
       typeof obj.resource_id !== 'string' ||
       typeof obj.help_message !== 'string'
-    )
+    ) {
       return null
+    }
 
     return new AlreadyExistsError(
       status,

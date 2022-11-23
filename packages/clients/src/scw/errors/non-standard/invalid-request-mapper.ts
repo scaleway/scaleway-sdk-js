@@ -17,7 +17,7 @@ export class InvalidRequestMapper {
     if (
       typeof obj.message === 'string' &&
       obj.message.toLowerCase().includes('quota exceeded for this resource')
-    )
+    ) {
       return new QuotasExceededError(status, obj, [
         {
           current: 0,
@@ -25,11 +25,12 @@ export class InvalidRequestMapper {
           resource: typeof obj.resource === 'string' ? obj.resource : '',
         },
       ])
+    }
 
     const fields =
       obj.fields && isRecordOfStringArray(obj.fields) ? obj.fields : {}
     const fieldsMessages = Object.entries(fields)
-    if (fieldsMessages.length)
+    if (fieldsMessages.length) {
       return new InvalidArgumentsError(
         status,
         obj,
@@ -43,6 +44,7 @@ export class InvalidRequestMapper {
           )
           .flat(),
       )
+    }
 
     return new ScalewayError(status, obj)
   }
