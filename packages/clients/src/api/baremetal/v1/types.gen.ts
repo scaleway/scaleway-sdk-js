@@ -240,6 +240,8 @@ export interface OS {
   servicePassword?: OSOSField
   /** State of OS */
   enabled: boolean
+  /** License required (check server options for pricing details) */
+  licenseRequired: boolean
 }
 
 export interface OSOSField {
