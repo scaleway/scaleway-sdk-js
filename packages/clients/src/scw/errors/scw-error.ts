@@ -16,15 +16,19 @@ const buildDefaultMessage = (status: number, body: unknown): string => {
   if (typeof body === 'string') {
     message.push(body)
   } else if (isJSONObject(body)) {
-    if (typeof body.resource === 'string')
+    if (typeof body.resource === 'string') {
       message.push(`resource ${body.resource}`)
-    if (typeof body.message === 'string') message.push(body.message)
-    if (body.fields && isRecordOfStringArray(body.fields))
+    }
+    if (typeof body.message === 'string') {
+      message.push(body.message)
+    }
+    if (body.fields && isRecordOfStringArray(body.fields)) {
       message.push(
         Object.entries(body.fields)
           .map(([name, list]) => `${name} (${list.join(', ')})`)
           .join(', '),
       )
+    }
   }
 
   return message.join(': ')

@@ -17,9 +17,9 @@ export {
 } from './scw/client-ini-factory'
 export type { ClientConfig } from './scw/client-ini-factory'
 export type { Money, ScwFile, TimeSeries } from './scw/custom-types'
+/* eslint-disable import/export,no-restricted-syntax */
 export * as Errors from './scw/errors/standard'
 export type { Region, Zone } from './scw/locality'
-/* eslint-disable import/export */
 export * from './internals'
 export * from './api'
-/* eslint-enable import/export */
+/* eslint-enable import/export,no-restricted-syntax */

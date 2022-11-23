@@ -39,8 +39,9 @@ export class PreconditionFailedError extends ScalewayError {
     if (
       typeof obj.precondition !== 'string' ||
       typeof obj.help_message !== 'string'
-    )
+    ) {
       return null
+    }
 
     return new PreconditionFailedError(
       status,

@@ -24,8 +24,9 @@ export class ConsoleLogger implements Logger {
 
   private makeMethod(method: 'debug' | 'info' | 'warn' | 'error') {
     return (message: string) => {
-      if (shouldLog(this.level, method))
+      if (shouldLog(this.level, method)) {
         this.output[method](this.prefix ? `${this.prefix} ${message}` : message)
+      }
     }
   }
 

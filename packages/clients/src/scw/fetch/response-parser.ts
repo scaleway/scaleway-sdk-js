@@ -50,8 +50,9 @@ export const responseParser =
     responseType: 'json' | 'text' | 'blob',
   ) =>
   async (response: Response): Promise<T> => {
-    if (!(response instanceof Response))
+    if (!(response instanceof Response)) {
       throw new TypeError('Invalid response object')
+    }
 
     if (response.ok) {
       if (response.status === 204) return unmarshaller(undefined)

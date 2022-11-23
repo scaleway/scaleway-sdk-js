@@ -24,18 +24,27 @@ export const withProfile =
   (profile: Readonly<Profile>) =>
   (settings: Readonly<Settings>): Settings => {
     const newSettings = { ...settings }
-    if (profile.apiURL) newSettings.apiURL = profile.apiURL
-    if (profile.defaultOrganizationId)
+    if (profile.apiURL) {
+      newSettings.apiURL = profile.apiURL
+    }
+    if (profile.defaultOrganizationId) {
       newSettings.defaultOrganizationId = profile.defaultOrganizationId
-    if (profile.defaultProjectId)
+    }
+    if (profile.defaultProjectId) {
       newSettings.defaultProjectId = profile.defaultProjectId
-    if (profile.defaultRegion) newSettings.defaultRegion = profile.defaultRegion
-    if (profile.defaultZone) newSettings.defaultZone = profile.defaultZone
-    if (hasAuthenticationSecrets(profile))
+    }
+    if (profile.defaultRegion) {
+      newSettings.defaultRegion = profile.defaultRegion
+    }
+    if (profile.defaultZone) {
+      newSettings.defaultZone = profile.defaultZone
+    }
+    if (hasAuthenticationSecrets(profile)) {
       newSettings.requestInterceptors = [
         authenticateWithSecrets(profile),
         ...settings.requestInterceptors,
       ]
+    }
 
     return newSettings
   }

@@ -6,6 +6,7 @@
     "max-classes-per-file": "off",
     "tsdoc/syntax": "off",
     "no-underscore-dangle": ["error", { "allowAfterThis": true }],
-    "deprecation/deprecation": "off"
+    "deprecation/deprecation": "off",
+    "no-restricted-syntax": "off"
   }
 }

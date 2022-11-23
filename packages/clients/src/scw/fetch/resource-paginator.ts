@@ -34,8 +34,9 @@ function* pages<
   request: R,
   firstPage: T,
 ): Generator<Promise<T[K]>, void, void> {
-  if (!Array.isArray(firstPage[key]))
+  if (!Array.isArray(firstPage[key])) {
     throw new Error(`Property ${key} is not a list in paginated result`)
+  }
   const getList = extract(key)
   let page = request.page || 1
   if (page === 1) {

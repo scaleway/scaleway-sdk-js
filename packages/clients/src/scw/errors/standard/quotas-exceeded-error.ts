@@ -49,10 +49,12 @@ const buildScope = (
   if (
     typeof detail.organization_id === 'string' &&
     detail.organization_id.length
-  )
+  ) {
     return { id: detail.organization_id, kind: 'organization' }
-  if (typeof detail.project_id === 'string' && detail.project_id.length)
+  }
+  if (typeof detail.project_id === 'string' && detail.project_id.length) {
     return { id: detail.project_id, kind: 'project' }
+  }
 
   return undefined
 }

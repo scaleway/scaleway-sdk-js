@@ -46,8 +46,9 @@ export class DeniedAuthenticationError extends ScalewayError {
   }
 
   static fromJSON(status: number, obj: Readonly<JSONObject>) {
-    if (typeof obj.method !== 'string' || typeof obj.reason !== 'string')
+    if (typeof obj.method !== 'string' || typeof obj.reason !== 'string') {
       return null
+    }
 
     return new DeniedAuthenticationError(status, obj, obj.method, obj.reason)
   }
