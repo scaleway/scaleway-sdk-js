@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.24](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.23...@scaleway/sdk@0.1.0-beta.24) (2022-11-23)
+
+### Features
+
+- **account:** remove the MFA endpoints ([#244](https://github.com/scaleway/scaleway-sdk-js/issues/244)) ([39a0dcd](https://github.com/scaleway/scaleway-sdk-js/commit/39a0dcd910a2145643765d4c734699d49989aec5))
+- **baremetal:** expose licence restrictions on OS ([#247](https://github.com/scaleway/scaleway-sdk-js/issues/247)) ([53154fc](https://github.com/scaleway/scaleway-sdk-js/commit/53154fcacbd587facb29a9aaadf7365a1440583c))
+- **lb:** add ignore ssl server verify ([#242](https://github.com/scaleway/scaleway-sdk-js/issues/242)) ([f434a42](https://github.com/scaleway/scaleway-sdk-js/commit/f434a427650135931b86e4ba57c54f16826fb105))
+- **lb:** enable http3 and add host header field in HL ([#246](https://github.com/scaleway/scaleway-sdk-js/issues/246)) ([290a443](https://github.com/scaleway/scaleway-sdk-js/commit/290a443c60d70e6dda106d5ae617e4711bc926f7))
+- **serverless:** add name field to crons ([#243](https://github.com/scaleway/scaleway-sdk-js/issues/243)) ([a1e71a4](https://github.com/scaleway/scaleway-sdk-js/commit/a1e71a45af3d1102155f305341eb489353a4bd18))
+
 ## [0.1.0-beta.23](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.22...@scaleway/sdk@0.1.0-beta.23) (2022-11-21)
 
 ### Features
