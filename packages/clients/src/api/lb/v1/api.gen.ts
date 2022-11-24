@@ -1509,6 +1509,7 @@ export class LbZonedV1GenAPI extends API {
     'nl-ams-1',
     'nl-ams-2',
     'pl-waw-1',
+    'pl-waw-2',
   ]
 
   protected pageOfListLbs = (request: Readonly<ZonedApiListLbsRequest> = {}) =>
