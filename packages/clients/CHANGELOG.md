@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.25](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.24...@scaleway/sdk@0.1.0-beta.25) (2022-11-25)
+
+### Features
+
+- **lb:** add pl-waw-2 zone ([#250](https://github.com/scaleway/scaleway-sdk-js/issues/250)) ([8a9d10d](https://github.com/scaleway/scaleway-sdk-js/commit/8a9d10d919a0dbd84cfb34b733b360aa72d638fd))
+
+### Bug Fixes
+
+- **vpc_gw:** running is not a transient state ([#253](https://github.com/scaleway/scaleway-sdk-js/issues/253)) ([c22d752](https://github.com/scaleway/scaleway-sdk-js/commit/c22d752d1272ecb9942fe728a73ec42a5aeceea5))
+
 ## [0.1.0-beta.24](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.23...@scaleway/sdk@0.1.0-beta.24) (2022-11-23)
 
 ### Features
