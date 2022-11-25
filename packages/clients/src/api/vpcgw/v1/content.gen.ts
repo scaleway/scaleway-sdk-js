@@ -13,7 +13,6 @@ export const GATEWAY_NETWORK_TRANSIENT_STATUSES: GatewayNetworkStatus[] = [
 export const GATEWAY_TRANSIENT_STATUSES: GatewayStatus[] = [
   'allocating',
   'configuring',
-  'running',
   'stopping',
   'deleting',
 ]
