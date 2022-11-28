@@ -28,7 +28,7 @@ importers:
       jest-junit: ^14.0.1
       lerna: ^6.0.3
       lint-staged: ^13.0.4
-      prettier: ^2.7.1
+      prettier: ^2.8.0
       read-pkg: ^7.1.0
       rollup: ^3.4.0
       rollup-plugin-dts: ^5.0.0
@@ -60,7 +60,7 @@ importers:
       jest-junit: 14.0.1
       lerna: 6.0.3
       lint-staged: 13.0.4
-      prettier: 2.7.1
+      prettier: 2.8.0
       read-pkg: 7.1.0
       rollup: 3.4.0
       rollup-plugin-dts: 5.0.0_gxoaovnvpo6lnrm23rwbc2cac4
@@ -8126,8 +8126,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier/2.7.1:
-    resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
+  /prettier/2.8.0:
+    resolution: {integrity: sha512-9Lmg8hTFZKG0Asr/kW9Bp8tJjRVluO8EJQVfY2T7FMw9T5jy4I/Uvx0Rca/XWf50QQ1/SS48+6IJWnrb+2yemA==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
