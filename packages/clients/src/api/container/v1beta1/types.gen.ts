@@ -2,6 +2,11 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Region } from '../../../bridge'
 
+export type ContainerHttpOption =
+  | 'unknown_http_option'
+  | 'enabled'
+  | 'redirected'
+
 export type ContainerPrivacy = 'unknown_privacy' | 'public' | 'private'
 
 export type ContainerProtocol = 'unknown_protocol' | 'http1' | 'h2c'
@@ -99,13 +104,13 @@ export interface Container {
   port: number
   secretEnvironmentVariables: Array<SecretHashedValue>
   /**
-   * @deprecated Possible values:
+   * Possible values:
    *
-   *   - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
-   *       to use HTTPS.
-   *   - Enabled: Serve both HTTP and HTTPS traffic.
+   * - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
+   *   to use HTTPS.
+   * - Enabled: Serve both HTTP and HTTPS traffic.
    */
-  httpOption?: string
+  httpOption: ContainerHttpOption
   region: Region
 }
 
@@ -296,13 +301,13 @@ export type CreateContainerRequest = {
   port?: number
   secretEnvironmentVariables?: Array<Secret>
   /**
-   * @deprecated Possible values:
+   * Possible values:
    *
-   *   - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
-   *       to use HTTPS.
-   *   - Enabled: Serve both HTTP and HTTPS traffic.
+   * - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
+   *   to use HTTPS.
+   * - Enabled: Serve both HTTP and HTTPS traffic.
    */
-  httpOption?: string
+  httpOption: ContainerHttpOption
 }
 
 export type UpdateContainerRequest = {
@@ -323,13 +328,13 @@ export type UpdateContainerRequest = {
   port?: number
   secretEnvironmentVariables?: Array<Secret>
   /**
-   * @deprecated Possible values:
+   * Possible values:
    *
-   *   - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
-   *       to use HTTPS.
-   *   - Enabled: Serve both HTTP and HTTPS traffic.
+   * - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
+   *   to use HTTPS.
+   * - Enabled: Serve both HTTP and HTTPS traffic.
    */
-  httpOption?: string
+  httpOption: ContainerHttpOption
 }
 
 export type DeleteContainerRequest = {
