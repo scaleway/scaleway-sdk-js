@@ -115,6 +115,7 @@ export class TemV1Alpha1GenAPI extends API {
           ['domain_id', request.domainId],
           ['mail_from', request.mailFrom],
           ['mail_to', request.mailTo],
+          ['message_id', request.messageId],
           ['page', request.page],
           [
             'page_size',
