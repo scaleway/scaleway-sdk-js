@@ -19,6 +19,11 @@ export type DomainStatus =
   | 'creating'
   | 'pending'
 
+export type FunctionHttpOption =
+  | 'unknown_http_option'
+  | 'enabled'
+  | 'redirected'
+
 export type FunctionPrivacy = 'unknown_privacy' | 'public' | 'private'
 
 export type FunctionRuntime =
@@ -214,13 +219,13 @@ export interface Function {
   secretEnvironmentVariables: Array<SecretHashedValue>
   region: Region
   /**
-   * @deprecated Possible values:
+   * Possible values:
    *
-   *   - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
-   *       to use HTTPS.
-   *   - Enabled: Serve both HTTP and HTTPS traffic.
+   * - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
+   *   to use HTTPS.
+   * - Enabled: Serve both HTTP and HTTPS traffic.
    */
-  httpOption?: string
+  httpOption: FunctionHttpOption
   runtimeMessage: string
 }
 
@@ -513,13 +518,13 @@ export type CreateFunctionRequest = {
   description?: string
   secretEnvironmentVariables?: Array<Secret>
   /**
-   * @deprecated Possible values:
+   * Possible values:
    *
-   *   - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
-   *       to use HTTPS.
-   *   - Enabled: Serve both HTTP and HTTPS traffic.
+   * - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
+   *   to use HTTPS.
+   * - Enabled: Serve both HTTP and HTTPS traffic.
    */
-  httpOption?: string
+  httpOption: FunctionHttpOption
 }
 
 export type UpdateFunctionRequest = {
@@ -538,13 +543,13 @@ export type UpdateFunctionRequest = {
   description?: string
   secretEnvironmentVariables?: Array<Secret>
   /**
-   * @deprecated Possible values:
+   * Possible values:
    *
-   *   - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
-   *       to use HTTPS.
-   *   - Enabled: Serve both HTTP and HTTPS traffic.
+   * - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
+   *   to use HTTPS.
+   * - Enabled: Serve both HTTP and HTTPS traffic.
    */
-  httpOption?: string
+  httpOption: FunctionHttpOption
 }
 
 export type DeleteFunctionRequest = {
