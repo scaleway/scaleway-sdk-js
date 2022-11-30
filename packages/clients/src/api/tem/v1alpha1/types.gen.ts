@@ -217,6 +217,8 @@ export type ListEmailsRequest = {
   projectId?: string
   /** Optional ID of the domain for which to list the emails */
   domainId?: string
+  /** Optional ID of the message for which to list the emails */
+  messageId?: string
   /** Optional, list emails created after this date */
   since?: Date
   /** Optional, list emails created before this date */
