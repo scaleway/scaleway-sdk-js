@@ -75,8 +75,15 @@ export interface Domain {
   /** DKIM public key, as should be recorded in the DNS zone */
   dkimConfig: string
   /** Domain's statistics */
-  statistics?: Statistics
+  statistics?: DomainStatistics
   region: Region
+}
+
+export interface DomainStatistics {
+  totalCount: number
+  sentCount: number
+  failedCount: number
+  canceledCount: number
 }
 
 /** Email */
