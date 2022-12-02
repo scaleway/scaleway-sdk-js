@@ -13,12 +13,28 @@ import type {
   CreateEmailRequestAttachment,
   CreateEmailResponse,
   Domain,
+  DomainStatistics,
   Email,
   EmailTry,
   ListDomainsResponse,
   ListEmailsResponse,
   Statistics,
 } from './types.gen'
+
+const unmarshalDomainStatistics = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainStatistics' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    canceledCount: data.canceled_count,
+    failedCount: data.failed_count,
+    sentCount: data.sent_count,
+    totalCount: data.total_count,
+  } as DomainStatistics
+}
 
 const unmarshalEmailTry = (data: unknown) => {
   if (!isJSONObject(data)) {
@@ -33,23 +49,6 @@ const unmarshalEmailTry = (data: unknown) => {
     rank: data.rank,
     triedAt: unmarshalDate(data.tried_at),
   } as EmailTry
-}
-
-export const unmarshalStatistics = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Statistics' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    canceledCount: data.canceled_count,
-    failedCount: data.failed_count,
-    newCount: data.new_count,
-    sendingCount: data.sending_count,
-    sentCount: data.sent_count,
-    totalCount: data.total_count,
-  } as Statistics
 }
 
 export const unmarshalDomain = (data: unknown) => {
@@ -73,7 +72,7 @@ export const unmarshalDomain = (data: unknown) => {
     revokedAt: unmarshalDate(data.revoked_at),
     spfConfig: data.spf_config,
     statistics: data.statistics
-      ? unmarshalStatistics(data.statistics)
+      ? unmarshalDomainStatistics(data.statistics)
       : undefined,
     status: data.status,
   } as Domain
@@ -138,6 +137,23 @@ export const unmarshalListEmailsResponse = (data: unknown) => {
     emails: unmarshalArrayOfObject(data.emails, unmarshalEmail),
     totalCount: data.total_count,
   } as ListEmailsResponse
+}
+
+export const unmarshalStatistics = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Statistics' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    canceledCount: data.canceled_count,
+    failedCount: data.failed_count,
+    newCount: data.new_count,
+    sendingCount: data.sending_count,
+    sentCount: data.sent_count,
+    totalCount: data.total_count,
+  } as Statistics
 }
 
 const marshalCreateEmailRequestAddress = (
