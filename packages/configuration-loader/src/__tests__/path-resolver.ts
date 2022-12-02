@@ -30,7 +30,9 @@ describe('getScwConfigurationDirectory', () => {
   })
 
   it(`uses the home directory if any`, () => {
+    const oldXDG: string | undefined = updateEnv('XDG_CONFIG_HOME', '')
     expect(getScwConfigurationDirectory()?.length).toBeGreaterThan(0)
+    setOrDeleteEnv('XDG_CONFIG_HOME', oldXDG)
   })
 })
 
