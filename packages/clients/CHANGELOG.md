@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.26](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.25...@scaleway/sdk@0.1.0-beta.26) (2022-12-05)
+
+### Features
+
+- **baremetal:** add PrivateNetwork API ([#267](https://github.com/scaleway/scaleway-sdk-js/issues/267)) ([dcf8861](https://github.com/scaleway/scaleway-sdk-js/commit/dcf886105666eace8cbe299307ff12d57389cb75))
+- **marketplace:** add v2 ([#265](https://github.com/scaleway/scaleway-sdk-js/issues/265)) ([7a11917](https://github.com/scaleway/scaleway-sdk-js/commit/7a11917702683d98af210029e2fc3c561b2d55c5))
+- **serverless:** https redirection ([#263](https://github.com/scaleway/scaleway-sdk-js/issues/263)) ([574588f](https://github.com/scaleway/scaleway-sdk-js/commit/574588f949b5068331c4e4dc6ec82b4b90367017))
+- **tem:** change domain statistics ([#268](https://github.com/scaleway/scaleway-sdk-js/issues/268)) ([670225d](https://github.com/scaleway/scaleway-sdk-js/commit/670225d142a7e81a18bac95c84a33d26512e46cd))
+- **tem:** filter list emails by messageId ([#264](https://github.com/scaleway/scaleway-sdk-js/issues/264)) ([2d42c92](https://github.com/scaleway/scaleway-sdk-js/commit/2d42c925455471112dc831612c4a75bc22fde15a))
+
 ## [0.1.0-beta.25](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.24...@scaleway/sdk@0.1.0-beta.25) (2022-11-25)
 
 ### Features

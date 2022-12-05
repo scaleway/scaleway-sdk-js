@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/configuration-loader",
-  "version": "0.1.0-beta.4",
+  "version": "0.1.0-beta.5",
   "license": "Apache-2.0",
   "description": "Load configuration via file or environment for NodeJS.",
   "main": "dist/index.cjs",
