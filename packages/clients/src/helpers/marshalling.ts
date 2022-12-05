@@ -139,7 +139,12 @@ export const unmarshalMapOfObject = <T, B extends boolean>(
   unmarshaller: (input: unknown) => T,
   emptyFallback: B = true as B,
 ): B extends true ? Record<string, T> | undefined : Record<string, T> => {
-  if (!data || typeof data !== 'object' || Array.isArray(data)) {
+  if (
+    !data ||
+    typeof data !== 'object' ||
+    !(data instanceof Object) ||
+    Array.isArray(data)
+  ) {
     return (emptyFallback ? {} : undefined) as B extends true
       ? Record<string, T> | undefined
       : Record<string, T>
