@@ -19,6 +19,6 @@
   },
   "type": "module",
   "devDependencies": {
-    "@types/node": "^17.0.45"
+    "@types/node": "^18.11.10"
   }
 }
