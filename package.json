@@ -79,7 +79,7 @@
     "@rollup/plugin-inject": "^5.0.2",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@scaleway/eslint-config-react": "^3.10.3",
-    "@types/jest": "^29.2.3",
+    "@types/jest": "^29.2.4",
     "babel-plugin-annotate-pure-calls": "^0.4.0",
     "cross-env": "^7.0.3",
     "cross-fetch": "^3.1.5",
