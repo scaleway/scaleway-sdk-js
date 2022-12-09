@@ -60,6 +60,7 @@ const unmarshalCPU = (data: unknown) => {
   }
 
   return {
+    benchmark: data.benchmark,
     coreCount: data.core_count,
     frequency: data.frequency,
     name: data.name,

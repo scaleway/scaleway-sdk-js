@@ -103,6 +103,8 @@ export interface CPU {
   threadCount: number
   /** Frequency of the CPU in MHz */
   frequency: number
+  /** Benchmark of the CPU */
+  benchmark: string
 }
 
 /** Create server request. install */
