@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.27](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.26...@scaleway/sdk@0.1.0-beta.27) (2022-12-12)
+
+### Features
+
+- **baremetal:** add CPU benchmark in an offer ([#284](https://github.com/scaleway/scaleway-sdk-js/issues/284)) ([3b3a3af](https://github.com/scaleway/scaleway-sdk-js/commit/3b3a3af9ec0610199758f3b0bcf7dc84ca112471))
+
 ## [0.1.0-beta.26](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.25...@scaleway/sdk@0.1.0-beta.26) (2022-12-05)
 
 ### Features
