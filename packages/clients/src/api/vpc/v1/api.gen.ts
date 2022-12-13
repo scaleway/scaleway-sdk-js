@@ -30,7 +30,15 @@ const jsonContentHeaders = {
 /** VPC API. */
 export class VpcV1GenAPI extends API {
   /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: Zone[] = ['fr-par-1', 'nl-ams-1']
+  public static readonly LOCALITIES: Zone[] = [
+    'fr-par-1',
+    'fr-par-2',
+    'fr-par-3',
+    'nl-ams-1',
+    'nl-ams-2',
+    'pl-waw-1',
+    'pl-waw-2',
+  ]
 
   protected pageOfListPrivateNetworks = (
     request: Readonly<ListPrivateNetworksRequest> = {},
