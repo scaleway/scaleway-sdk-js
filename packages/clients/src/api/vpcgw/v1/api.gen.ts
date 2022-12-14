@@ -107,7 +107,9 @@ export class VpcgwV1GenAPI extends API {
     'fr-par-1',
     'fr-par-2',
     'nl-ams-1',
+    'nl-ams-2',
     'pl-waw-1',
+    'pl-waw-2',
   ]
 
   protected pageOfListGateways = (
