@@ -486,6 +486,7 @@ const unmarshalNodeType = (data: unknown) => {
     description: data.description,
     disabled: data.disabled,
     isBssdCompatible: data.is_bssd_compatible,
+    isHaRequired: data.is_ha_required,
     memory: data.memory,
     name: data.name,
     region: data.region,

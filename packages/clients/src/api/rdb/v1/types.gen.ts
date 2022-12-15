@@ -558,6 +558,8 @@ export interface NodeType {
   beta: boolean
   /** Available storage options for the Node Type */
   availableVolumeTypes: Array<NodeTypeVolumeType>
+  /** The Node Type can be used only with high availability option */
+  isHaRequired: boolean
   /** Region the Node Type is in */
   region: Region
 }
