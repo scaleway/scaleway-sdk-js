@@ -15,10 +15,10 @@
     "directory": "packages/configuration-loader"
   },
   "engines": {
-    "node": ">=14.13"
+    "node": ">=v18.12.1"
   },
   "type": "module",
   "devDependencies": {
-    "@types/node": "^18.11.10"
+    "@types/node": "^18.11.16"
   }
 }
