@@ -13,7 +13,7 @@ importers:
       '@jest/globals': ^29.3.1
       '@rollup/plugin-babel': ^6.0.3
       '@rollup/plugin-commonjs': ^23.0.5
-      '@rollup/plugin-inject': ^5.0.2
+      '@rollup/plugin-inject': ^5.0.3
       '@rollup/plugin-node-resolve': ^15.0.1
       '@scaleway/eslint-config-react': ^3.10.5
       '@types/jest': ^29.2.4
@@ -45,7 +45,7 @@ importers:
       '@jest/globals': 29.3.1
       '@rollup/plugin-babel': 6.0.3_zrxplyvfi52whpdwd6wkjjeo5q
       '@rollup/plugin-commonjs': 23.0.5_rollup@3.7.5
-      '@rollup/plugin-inject': 5.0.2_rollup@3.7.5
+      '@rollup/plugin-inject': 5.0.3_rollup@3.7.5
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.7.5
       '@scaleway/eslint-config-react': 3.10.5_ha6vam6werchizxrnqvarmz2zu
       '@types/jest': 29.2.4
@@ -2993,8 +2993,8 @@ packages:
       rollup: 3.7.5
     dev: true
 
-  /@rollup/plugin-inject/5.0.2_rollup@3.7.5:
-    resolution: {integrity: sha512-zRthPC/sZ2OaQwPh2LvFn0A+3SyMAZR1Vqsp89mWkIuGXKswT8ty1JWj1pf7xdZvft4gHZaCuhdopuiCwjclWg==}
+  /@rollup/plugin-inject/5.0.3_rollup@3.7.5:
+    resolution: {integrity: sha512-411QlbL+z2yXpRWFXSmw/teQRMkXcAAC8aYTemc15gwJRpvEVDQwoe+N/HTFD8RFG8+88Bme9DK2V9CVm7hJdA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^1.20.0||^2.0.0||^3.0.0
@@ -3004,7 +3004,7 @@ packages:
     dependencies:
       '@rollup/pluginutils': 5.0.2_rollup@3.7.5
       estree-walker: 2.0.2
-      magic-string: 0.26.7
+      magic-string: 0.27.0
       rollup: 3.7.5
     dev: true
 
@@ -7187,6 +7187,13 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       sourcemap-codec: 1.4.8
+    dev: true
+
+  /magic-string/0.27.0:
+    resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
+    engines: {node: '>=12'}
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
   /make-dir/2.1.0:
