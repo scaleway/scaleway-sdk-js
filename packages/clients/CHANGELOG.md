@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.28](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.27...@scaleway/sdk@0.1.0-beta.28) (2022-12-19)
+
+### Features
+
+- **rdb:** add isHaRequired flag on node type ([#292](https://github.com/scaleway/scaleway-sdk-js/issues/292)) ([deb3fba](https://github.com/scaleway/scaleway-sdk-js/commit/deb3fba2b05624a524faa183b84529a06ed1327d))
+- **vpc:** add more localities ([#289](https://github.com/scaleway/scaleway-sdk-js/issues/289)) ([76f9b2a](https://github.com/scaleway/scaleway-sdk-js/commit/76f9b2a90b5715b2697a84fe5fb012415d4dd21d))
+
 ## [0.1.0-beta.27](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.26...@scaleway/sdk@0.1.0-beta.27) (2022-12-12)
 
 ### Features
