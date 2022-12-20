@@ -61,7 +61,6 @@ import type {
   ListSnapshotsResponse,
   ListVolumesResponse,
   ListVolumesTypesResponse,
-  NullableStringValue,
   PlacementGroup,
   PlacementGroupServer,
   PrivateNIC,
@@ -1462,14 +1461,6 @@ const marshalImage = (
   zone: request.zone,
 })
 
-const marshalNullableStringValue = (
-  request: NullableStringValue,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  null: request.null,
-  value: request.value,
-})
-
 const marshalPlacementGroup = (
   request: PlacementGroup,
   defaults: DefaultValues,
@@ -2046,12 +2037,8 @@ export const marshalUpdateIpRequest = (
   request: UpdateIpRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  reverse: request.reverse
-    ? marshalNullableStringValue(request.reverse, defaults)
-    : undefined,
-  server: request.server
-    ? marshalNullableStringValue(request.server, defaults)
-    : undefined,
+  reverse: request.reverse,
+  server: request.server,
   tags: request.tags,
 })
 
@@ -2081,9 +2068,7 @@ export const marshalUpdateServerRequest = (
   dynamic_ip_required: request.dynamicIpRequired,
   enable_ipv6: request.enableIpv6,
   name: request.name,
-  placement_group: request.placementGroup
-    ? marshalNullableStringValue(request.placementGroup, defaults)
-    : undefined,
+  placement_group: request.placementGroup,
   private_nics: request.privateNics
     ? request.privateNics.map(elt => marshalPrivateNIC(elt, defaults))
     : undefined,
