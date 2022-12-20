@@ -231,21 +231,25 @@ export interface Endpoint {
   /** Name of the endpoint */
   name?: string
   /**
-   * Private network details.
+   * Private network details. One at the most per RDB instance or read replica
+   * (an RDB instance and its read replica can have different private networks).
+   * Cannot be updated (has to be deleted and recreated).
    *
    * One-of ('details'): at most one of 'privateNetwork', 'loadBalancer',
    * 'directAccess' could be set.
    */
   privateNetwork?: EndpointPrivateNetworkDetails
   /**
-   * Load balancer details.
+   * Load balancer details. Public endpoint for RDB instances which is
+   * systematically present. One per RDB instance.
    *
    * One-of ('details'): at most one of 'privateNetwork', 'loadBalancer',
    * 'directAccess' could be set.
    */
   loadBalancer?: EndpointLoadBalancerDetails
   /**
-   * Direct access details.
+   * Direct access details. Public endpoint reserved for read replicas. One per
+   * read replica.
    *
    * One-of ('details'): at most one of 'privateNetwork', 'loadBalancer',
    * 'directAccess' could be set.
@@ -276,14 +280,17 @@ export interface EndpointPrivateNetworkDetails {
 /** Endpoint spec */
 export interface EndpointSpec {
   /**
-   * Load balancer endpoint specifications.
+   * Load balancer endpoint specifications. Public endpoint for RDB instances
+   * which is systematically present. One per RDB instance.
    *
    * One-of ('spec'): at most one of 'loadBalancer', 'privateNetwork' could be
    * set.
    */
   loadBalancer?: EndpointSpecLoadBalancer
   /**
-   * Private network endpoint specifications.
+   * Private network endpoint specifications. One at the most per RDB instance
+   * or read replica (an RDB instance and its read replica can have different
+   * private networks). Cannot be updated (has to be deleted and recreated).
    *
    * One-of ('spec'): at most one of 'loadBalancer', 'privateNetwork' could be
    * set.
@@ -617,14 +624,16 @@ export interface ReadReplica {
 /** Read replica endpoint spec */
 export interface ReadReplicaEndpointSpec {
   /**
-   * Direct access endpoint specifications.
+   * Direct access endpoint specifications. Public endpoint reserved for read
+   * replicas. One per read replica.
    *
    * One-of ('spec'): at most one of 'directAccess', 'privateNetwork' could be
    * set.
    */
   directAccess?: ReadReplicaEndpointSpecDirectAccess
   /**
-   * Private network endpoint specifications.
+   * Private network endpoint specifications. One at the most per read replica.
+   * Cannot be updated (has to be deleted and recreated).
    *
    * One-of ('spec'): at most one of 'directAccess', 'privateNetwork' could be
    * set.
@@ -913,7 +922,10 @@ export type CreateInstanceRequest = {
   volumeType: VolumeType
   /** Volume size when volume_type is not lssd */
   volumeSize: number
-  /** One or multiple EndpointSpec used to expose your database instance */
+  /**
+   * One or multiple EndpointSpec used to expose your database instance. A
+   * load_balancer public endpoint is systematically created
+   */
   initEndpoints?: Array<EndpointSpec>
   /** Store logical backups in the same region as the database instance */
   backupSameRegion: boolean
