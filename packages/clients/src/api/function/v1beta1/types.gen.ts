@@ -47,6 +47,7 @@ export type FunctionRuntime =
   | 'rust165'
   | 'go119'
   | 'python311'
+  | 'php82'
 
 export type FunctionStatus =
   | 'unknown'
