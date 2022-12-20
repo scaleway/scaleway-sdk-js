@@ -364,11 +364,6 @@ export interface ListVolumesTypesResponse {
   volumes: Record<string, VolumeType>
 }
 
-export interface NullableStringValue {
-  null: boolean
-  value: string
-}
-
 /** Placement group */
 export interface PlacementGroup {
   /** The placement group unique ID */
@@ -1571,10 +1566,10 @@ export type UpdateIpRequest = {
   /** IP ID or IP address */
   ip: string
   /** Reverse domain name */
-  reverse?: NullableStringValue
+  reverse?: string
   /** An array of keywords you want to tag this IP with */
   tags?: Array<string>
-  server?: NullableStringValue
+  server?: string
 }
 
 export type DeleteIpRequest = {

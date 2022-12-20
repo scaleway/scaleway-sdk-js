@@ -7,7 +7,6 @@ import type {
   Bootscript,
   Image,
   ImageState,
-  NullableStringValue,
   PlacementGroup,
   PrivateNIC,
   SecurityGroup,
@@ -180,7 +179,7 @@ export type UpdateServerRequest = {
   protected?: boolean
   securityGroup?: SecurityGroupTemplate
   /** Placement group ID if server must be part of a placement group */
-  placementGroup?: NullableStringValue
+  placementGroup?: string
   /** The server private NICs */
   privateNics?: Array<PrivateNIC>
 }
