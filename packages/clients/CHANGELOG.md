@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.29](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.28...@scaleway/sdk@0.1.0-beta.29) (2022-12-21)
+
+### Features
+
+- **serverless:** add PHP 8.2 runtime ([#303](https://github.com/scaleway/scaleway-sdk-js/issues/303)) ([827645d](https://github.com/scaleway/scaleway-sdk-js/commit/827645d27dd32e736e5c92be2942968876fd9ad8))
+
+### Bug Fixes
+
+- **instance:** remove NullableStringValue type ([#305](https://github.com/scaleway/scaleway-sdk-js/issues/305)) ([b54ed03](https://github.com/scaleway/scaleway-sdk-js/commit/b54ed03f790dd087a0b7f5658dff11f27c233202))
+
 ## [0.1.0-beta.28](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.27...@scaleway/sdk@0.1.0-beta.28) (2022-12-19)
 
 ### Features
