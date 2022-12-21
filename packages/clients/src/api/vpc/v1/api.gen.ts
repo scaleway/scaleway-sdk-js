@@ -63,6 +63,7 @@ export class VpcV1GenAPI extends API {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
+          ['private_network_ids', request.privateNetworkIds],
           [
             'project_id',
             request.projectId ?? this.client.settings.defaultProjectId,

@@ -52,6 +52,8 @@ export type ListPrivateNetworksRequest = {
   organizationId?: string
   /** The project ID on which to filter the returned private networks */
   projectId?: string
+  /** The PrivateNetwork IDs on which to filter the returned private networks */
+  privateNetworkIds?: Array<string>
 }
 
 export type CreatePrivateNetworkRequest = {
