@@ -1,11 +1,10 @@
 import { describe, expect, it } from '@jest/globals'
 import {
-  PaginatedContent,
-  PaginatedFetcher,
   enrichForPagination,
   fetchAll,
   fetchPaginated,
 } from '../resource-paginator'
+import type { PaginatedContent, PaginatedFetcher } from '../resource-paginator'
 
 const fetchPages = <T>(input: T[][] = [], delay = 0) => {
   const totalCount = input.flat().length

@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals'
-import { JSONObject } from '../../../helpers/json'
+import type { JSONObject } from '../../../helpers/json'
 import { ScalewayError } from '../scw-error'
 
 describe('ScalewayError', () => {

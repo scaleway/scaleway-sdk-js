@@ -20,5 +20,16 @@
     "import/no-default-export": "error",
     "no-await-in-loop": "off",
     "@typescript-eslint/no-namespace": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "./packages/clients/src/scw/**/*.ts",
+        "./packages/clients/src/internal/**/*.ts"
+      ],
+      "rules": {
+        "@typescript-eslint/consistent-type-definitions": "off"
+      }
+    }
+  ]
 }

@@ -1,7 +1,7 @@
 import { authenticateWithSecrets } from './auth'
 import { hasAuthenticationSecrets } from './client-ini-profile'
 import type { Profile } from './client-ini-profile'
-import { Settings } from './client-settings'
+import type { Settings } from './client-settings'
 
 /**
  * A factory to build {@link Settings}.

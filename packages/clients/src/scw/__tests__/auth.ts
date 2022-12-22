@@ -6,7 +6,7 @@ import {
   obfuscateToken,
   obfuscateUUID,
 } from '../auth'
-import { AuthenticationSecrets } from '../client-ini-profile'
+import type { AuthenticationSecrets } from '../client-ini-profile'
 
 describe('obfuscateToken', () => {
   it('hides anything after 5 characters', () => {
