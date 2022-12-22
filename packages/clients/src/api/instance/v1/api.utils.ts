@@ -26,7 +26,7 @@ import type {
   Volume,
   VolumeServerTemplate,
 } from './types.gen'
-import { SetSecurityGroupRuleRequest } from './types.private.gen'
+import type { SetSecurityGroupRuleRequest } from './types.private.gen'
 import type {
   AttachVolumeRequest,
   AttachVolumeResponse,

@@ -1,6 +1,7 @@
 /// <reference lib="dom.iterable" />
 // eslint-disable-next-line import/no-extraneous-dependencies
-import nodeFetch, {
+import type nodeFetch from 'cross-fetch'
+import type {
   Headers as NodeFetchHeaders,
   Request as NodeFetchRequest,
   Response as NodeFetchResponse,

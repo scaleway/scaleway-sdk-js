@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals'
-import type { JSON } from '../../../helpers/json'
 import { isJSONObject } from '../../../helpers/json'
+import type { JSONObject } from '../../../helpers/json'
 import { ScalewayError } from '../../errors/scw-error'
 import { fixLegacyTotalCount, responseParser } from '../response-parser'
 
@@ -29,8 +29,10 @@ const makeResponse = (
     status,
   })
 
-const makeJSONResponse = (value: JSON = SIMPLE_REQ_BODY, status = 200) =>
-  makeResponse(value, status, 'application/json')
+const makeJSONResponse = (
+  value: JSONObject | null = SIMPLE_REQ_BODY,
+  status = 200,
+) => makeResponse(value, status, 'application/json')
 
 const makeTextResponse = (value: string, status = 200) =>
   new Response(value, {

@@ -1,6 +1,7 @@
 import { describe, expect, it } from '@jest/globals'
 import { createAdvancedClient, createClient } from '../client'
-import { ClientConfig, withProfile } from '../client-ini-factory'
+import { withProfile } from '../client-ini-factory'
+import type { ClientConfig } from '../client-ini-factory'
 import type { Settings } from '../client-settings'
 
 const withApiURL =
