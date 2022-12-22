@@ -203,36 +203,68 @@ export interface AclSpec {
 
 /** Backend */
 export interface Backend {
+  /** Load balancer Backend ID */
   id: string
+  /** Load balancer Backend name */
   name: string
+  /** Type of backend protocol */
   forwardProtocol: Protocol
+  /** User sessions will be forwarded to this port of backend servers */
   forwardPort: number
+  /** Load balancer algorithm used to select the backend server */
   forwardPortAlgorithm: ForwardPortAlgorithm
+  /** Enables cookie-based session persistence */
   stickySessions: StickySessionsType
+  /** Cookie name for sticky sessions */
   stickySessionsCookieName: string
+  /** Health Check used to verify backend servers status */
   healthCheck?: HealthCheck
+  /** Servers IP addresses attached to the backend */
   pool: Array<string>
+  /** Load balancer the backend is attached to */
   lb?: Lb
-  /** @deprecated */
+  /** @deprecated Deprecated in favor of proxy_protocol field */
   sendProxyV2?: boolean
+  /**
+   * Maximum server connection inactivity time (allowed time the server has to
+   * process the request)
+   */
   timeoutServer?: string
+  /** Maximum initial server connection establishment time */
   timeoutConnect?: string
+  /**
+   * Maximum tunnel inactivity time after Websocket is established (take
+   * precedence over client and server timeout)
+   */
   timeoutTunnel?: string
+  /** Defines what occurs when a backend server is marked down */
   onMarkedDownAction: OnMarkedDownAction
+  /**
+   * PROXY protocol, forward client's address (must be supported by backend
+   * servers software)
+   */
   proxyProtocol: ProxyProtocol
+  /** Date at which the backend was created */
   createdAt?: Date
+  /** Date at which the backend was updated */
   updatedAt?: Date
+  /**
+   * Scaleway S3 bucket website to be served in case all backend servers are
+   * down
+   */
   failoverHost?: string
+  /** Enable SSL between load balancer and backend servers */
   sslBridging?: boolean
+  /** Whether or not the server certificate should be verified */
   ignoreSslServerVerify?: boolean
 }
 
 /**
- * State and statistics of your backend server like last healthcheck status,
+ * State and statistics of your backend server like last health check status,
  * server uptime, result state of your backend server
  */
 export interface BackendServerStats {
-  /** ID of your loadbalancer cluster server */
+  /** ID of your Load balancer cluster server */
   instanceId: string
   /** ID of your Backend */
   backendId: string
@@ -304,17 +336,27 @@ export interface CreateCertificateRequestLetsencryptConfig {
 
 /** Frontend */
 export interface Frontend {
+  /** Load balancer Frontend ID */
   id: string
+  /** Load balancer Frontend name */
   name: string
+  /** TCP port to listen on the front side */
   inboundPort: number
+  /** Backend resource the Frontend is attached to */
   backend?: Backend
+  /** Load balancer the frontend is attached to */
   lb?: Lb
+  /** Maximum inactivity time on the client side */
   timeoutClient?: string
-  /** @deprecated */
+  /** @deprecated Certificate, deprecated in favor of certificate_ids array */
   certificate?: Certificate
+  /** List of certificate IDs to bind on the frontend */
   certificateIds: Array<string>
+  /** Date at which the frontend was created */
   createdAt?: Date
+  /** Date at which the frontend was updated */
   updatedAt?: Date
+  /** Whether or not HTTP3 protocol is enabled */
   enableHttp3: boolean
 }
 
@@ -344,36 +386,51 @@ export interface HealthCheck {
    * could be set.
    */
   redisConfig?: HealthCheckRedisConfig
+  /**
+   * Number of consecutive unsuccessful health checks, after which the server
+   * will be considered dead
+   */
   checkMaxRetries: number
   /**
+   * Basic TCP health check.
+   *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   tcpConfig?: HealthCheckTcpConfig
   /**
+   * PostgreSQL health check.
+   *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   pgsqlConfig?: HealthCheckPgsqlConfig
   /**
+   * HTTP health check.
+   *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   httpConfig?: HealthCheckHttpConfig
   /**
+   * HTTPS health check.
+   *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   httpsConfig?: HealthCheckHttpsConfig
+  /** TCP port to use for the backend server health check */
   port: number
+  /** Maximum time a backend server has to reply to the health check */
   checkTimeout?: string
+  /** Time between two consecutive health checks */
   checkDelay?: string
   /**
-   * It defines whether the healthcheck should be done considering the proxy
+   * It defines whether the health check should be done considering the proxy
    * protocol
    */
   checkSendProxy: boolean
@@ -381,9 +438,9 @@ export interface HealthCheck {
 
 /** Health check. http config */
 export interface HealthCheckHttpConfig {
-  /** HTTP uri used with the request */
+  /** HTTP uri used for Healthcheck to the backend servers */
   uri: string
-  /** HTTP method used with the request */
+  /** HTTP method used for Healthcheck to the backend servers */
   method: string
   /**
    * A health check response will be considered as valid if the response's
@@ -396,9 +453,9 @@ export interface HealthCheckHttpConfig {
 
 /** Health check. https config */
 export interface HealthCheckHttpsConfig {
-  /** HTTP uri used with the request */
+  /** HTTP uri used for Healthcheck to the backend servers */
   uri: string
-  /** HTTP method used with the request */
+  /** HTTP method used for Healthcheck to the backend servers */
   method: string
   /**
    * A health check response will be considered as valid if the response's
@@ -425,58 +482,94 @@ export interface HealthCheckRedisConfig {}
 
 export interface HealthCheckTcpConfig {}
 
+/** Instance */
 export interface Instance {
+  /** Underlying Instance ID */
   id: string
+  /** Instance status */
   status: InstanceStatus
+  /** Instance IP address */
   ipAddress: string
+  /** Date at which the Instance was created */
   createdAt?: Date
+  /** Date at which the Instance was updated */
   updatedAt?: Date
-  /** @deprecated */
+  /** @deprecated The region the instance is in */
   region?: Region
+  /** The zone the instance is in */
   zone: Zone
 }
 
 /** Ip */
 export interface Ip {
+  /** Flexible IP ID */
   id: string
+  /** IP address */
   ipAddress: string
+  /** Organization ID */
   organizationId: string
-  lbId?: string
-  reverse: string
+  /** Project ID */
   projectId: string
-  /** @deprecated */
+  /** Load balancer ID */
+  lbId?: string
+  /** Reverse FQDN */
+  reverse: string
+  /** @deprecated The region the Flexible IP is in */
   region?: Region
+  /** The zone the Flexible IP is in */
   zone: Zone
 }
 
 /** Lb */
 export interface Lb {
+  /** Underlying Instance ID */
   id: string
+  /** Load balancer name */
   name: string
+  /** Load balancer description */
   description: string
+  /** Load balancer status */
   status: LbStatus
+  /** List of underlying instances */
   instances: Array<Instance>
+  /** Organization ID */
   organizationId: string
-  ip: Array<Ip>
-  tags: Array<string>
-  frontendCount: number
-  backendCount: number
-  type: string
-  subscriber?: Subscriber
-  sslCompatibilityLevel: SSLCompatibilityLevel
+  /** Project ID */
   projectId: string
+  /** List of IPs attached to the Load balancer */
+  ip: Array<Ip>
+  /** Load balancer tags */
+  tags: Array<string>
+  /** Number of frontends the Load balancer has */
+  frontendCount: number
+  /** Number of backends the Load balancer has */
+  backendCount: number
+  /** Load balancer offer type */
+  type: string
+  /** Subscriber information */
+  subscriber?: Subscriber
+  /**
+   * Determines the minimal SSL version which needs to be supported on client
+   * side
+   */
+  sslCompatibilityLevel: SSLCompatibilityLevel
+  /** Date at which the Load balancer was created */
   createdAt?: Date
+  /** Date at which the Load balancer was updated */
   updatedAt?: Date
+  /** Number of private networks attached to the Load balancer */
   privateNetworkCount: number
+  /** Number of routes the Load balancer has */
   routeCount: number
-  /** @deprecated */
+  /** @deprecated The region the Load balancer is in */
   region?: Region
+  /** The zone the Load balancer is in */
   zone: Zone
 }
 
 /** Lb stats */
 export interface LbStats {
-  /** List stats object of your loadbalancer */
+  /** List stats object of your Load balancer */
   backendServersStats: Array<BackendServerStats>
 }
 
@@ -499,7 +592,7 @@ export interface ListAclResponse {
 
 /** List backend stats response */
 export interface ListBackendStatsResponse {
-  /** List backend stats object of your loadbalancer */
+  /** List backend stats object of your Load balancer */
   backendServersStats: Array<BackendServerStats>
   /** The total number of items */
   totalCount: number
@@ -513,14 +606,17 @@ export interface ListBackendsResponse {
   totalCount: number
 }
 
+/** List certificates response */
 export interface ListCertificatesResponse {
+  /** List of certificates */
   certificates: Array<Certificate>
+  /** The total number of items */
   totalCount: number
 }
 
 /** List frontends response */
 export interface ListFrontendsResponse {
-  /** List frontends object of your loadbalancer */
+  /** List frontends object of your Load balancer */
   frontends: Array<Frontend>
   /** Total count, wihtout pagination */
   totalCount: number
@@ -534,19 +630,27 @@ export interface ListIpsResponse {
   totalCount: number
 }
 
+/** List lb private networks response */
 export interface ListLbPrivateNetworksResponse {
+  /** Private networks of a given load balancer */
   privateNetwork: Array<PrivateNetwork>
+  /** The total number of items */
   totalCount: number
 }
 
+/** List lb types response */
 export interface ListLbTypesResponse {
+  /** Different types of LB */
   lbTypes: Array<LbType>
+  /** The total number of items */
   totalCount: number
 }
 
-/** List lbs response */
+/** Get list of Load balancers */
 export interface ListLbsResponse {
+  /** List of Load balancer */
   lbs: Array<Lb>
+  /** The total number of items */
   totalCount: number
 }
 
@@ -672,8 +776,11 @@ export type ListLbsRequest = {
   region?: Region
   /** Use this to search by name */
   name?: string
+  /** Response order */
   orderBy?: ListLbsRequestOrderBy
+  /** The number of items to return */
   pageSize?: number
+  /** Page number */
   page?: number
   /** Filter LBs by organization ID */
   organizationId?: string
@@ -848,11 +955,11 @@ export type ListBackendsRequest = {
   lbId: string
   /** Use this to search by name */
   name?: string
-  /** Choose order of response */
+  /** Response order */
   orderBy?: ListBackendsRequestOrderBy
   /** Page number */
   page?: number
-  /** The number of items to returns */
+  /** The number of items to return */
   pageSize?: number
 }
 
@@ -871,7 +978,7 @@ export type CreateBackendRequest = {
   forwardPortAlgorithm: ForwardPortAlgorithm
   /** Enables cookie-based session persistence */
   stickySessions: StickySessionsType
-  /** Cookie name for for sticky sessions */
+  /** Cookie name for sticky sessions */
   stickySessionsCookieName: string
   /** See the Healthcheck object description */
   healthCheck: HealthCheck
@@ -879,11 +986,17 @@ export type CreateBackendRequest = {
   serverIp: Array<string>
   /** @deprecated Deprecated in favor of proxy_protocol field ! */
   sendProxyV2?: boolean
-  /** Maximum server connection inactivity time */
+  /**
+   * Maximum server connection inactivity time (allowed time the server has to
+   * process the request)
+   */
   timeoutServer?: string
-  /** Maximum initical server connection establishment time */
+  /** Maximum initial server connection establishment time */
   timeoutConnect?: string
-  /** Maximum tunnel inactivity time */
+  /**
+   * Maximum tunnel inactivity time after Websocket is established (take
+   * precedence over client and server timeout)
+   */
   timeoutTunnel?: string
   /** Modify what occurs when a backend server is marked down */
   onMarkedDownAction: OnMarkedDownAction
@@ -933,15 +1046,21 @@ export type UpdateBackendRequest = {
   forwardPortAlgorithm: ForwardPortAlgorithm
   /** Enable cookie-based session persistence */
   stickySessions: StickySessionsType
-  /** Cookie name for for sticky sessions */
+  /** Cookie name for sticky sessions */
   stickySessionsCookieName: string
   /** @deprecated Deprecated in favor of proxy_protocol field! */
   sendProxyV2?: boolean
-  /** Maximum server connection inactivity time */
+  /**
+   * Maximum server connection inactivity time (allowed time the server has to
+   * process the request)
+   */
   timeoutServer?: string
   /** Maximum initial server connection establishment time */
   timeoutConnect?: string
-  /** Maximum tunnel inactivity time */
+  /**
+   * Maximum tunnel inactivity time after Websocket is established (take
+   * precedence over client and server timeout)
+   */
   timeoutTunnel?: string
   /** Modify what occurs when a backend server is marked down */
   onMarkedDownAction: OnMarkedDownAction
@@ -1012,10 +1131,10 @@ export type UpdateHealthCheckRequest = {
   port: number
   /** Time between two consecutive health checks */
   checkDelay: string
-  /** Additional check timeout, after the connection has been already established */
+  /** Maximum time a backend server has to reply to the health check */
   checkTimeout: string
   /**
-   * Number of consecutive unsuccessful health checks, after wich the server
+   * Number of consecutive unsuccessful health checks, after which the server
    * will be considered dead
    */
   checkMaxRetries: number
@@ -1044,31 +1163,39 @@ export type UpdateHealthCheckRequest = {
    */
   redisConfig?: HealthCheckRedisConfig
   /**
+   * PostgreSQL health check.
+   *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   pgsqlConfig?: HealthCheckPgsqlConfig
   /**
+   * Basic TCP health check.
+   *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   tcpConfig?: HealthCheckTcpConfig
   /**
+   * HTTP health check.
+   *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   httpConfig?: HealthCheckHttpConfig
   /**
+   * HTTPS health check.
+   *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   httpsConfig?: HealthCheckHttpsConfig
   /**
-   * It defines whether the healthcheck should be done considering the proxy
+   * It defines whether the health check should be done considering the proxy
    * protocol
    */
   checkSendProxy: boolean
@@ -1085,7 +1212,7 @@ export type ListFrontendsRequest = {
   orderBy?: ListFrontendsRequestOrderBy
   /** Page number */
   page?: number
-  /** The number of items to returns */
+  /** The number of items to return */
   pageSize?: number
 }
 
@@ -1148,8 +1275,11 @@ export type DeleteFrontendRequest = {
 export type ListRoutesRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
+  /** Response order */
   orderBy?: ListRoutesRequestOrderBy
+  /** The number of items to return */
   pageSize?: number
+  /** Page number */
   page?: number
   frontendId?: string
 }
@@ -1213,7 +1343,7 @@ export type ListAclsRequest = {
   region?: Region
   /** ID of your frontend */
   frontendId: string
-  /** You can order the response by created_at asc/desc or name asc/desc */
+  /** Response order */
   orderBy?: ListAclRequestOrderBy
   /** Page number */
   page?: number
@@ -1304,7 +1434,7 @@ export type ListCertificatesRequest = {
   region?: Region
   /** Load balancer ID */
   lbId: string
-  /** You can order the response by created_at asc/desc or name asc/desc */
+  /** Response order */
   orderBy?: ListCertificatesRequestOrderBy
   /** Page number */
   page?: number
@@ -1391,7 +1521,7 @@ export type GetSubscriberRequest = {
 export type ListSubscriberRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
-  /** You can order the response by created_at asc/desc or name asc/desc */
+  /** Response order */
   orderBy?: ListSubscriberRequestOrderBy
   /** Page number */
   page?: number
@@ -1454,9 +1584,13 @@ export type UnsubscribeFromLbRequest = {
 export type ListLbPrivateNetworksRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
+  /** Load balancer ID */
   lbId: string
+  /** Response order */
   orderBy?: ListPrivateNetworksRequestOrderBy
+  /** The number of items to return */
   pageSize?: number
+  /** Page number */
   page?: number
 }
 
@@ -1497,8 +1631,11 @@ export type ZonedApiListLbsRequest = {
   zone?: Zone
   /** Use this to search by name */
   name?: string
+  /** Response order */
   orderBy?: ListLbsRequestOrderBy
+  /** The number of items to return */
   pageSize?: number
+  /** Page number */
   page?: number
   /** Filter LBs by organization ID */
   organizationId?: string
@@ -1673,11 +1810,11 @@ export type ZonedApiListBackendsRequest = {
   lbId: string
   /** Use this to search by name */
   name?: string
-  /** Choose order of response */
+  /** Response order */
   orderBy?: ListBackendsRequestOrderBy
   /** Page number */
   page?: number
-  /** The number of items to returns */
+  /** The number of items to return */
   pageSize?: number
 }
 
@@ -1696,7 +1833,7 @@ export type ZonedApiCreateBackendRequest = {
   forwardPortAlgorithm: ForwardPortAlgorithm
   /** Enables cookie-based session persistence */
   stickySessions: StickySessionsType
-  /** Cookie name for for sticky sessions */
+  /** Cookie name for sticky sessions */
   stickySessionsCookieName: string
   /** See the Healthcheck object description */
   healthCheck: HealthCheck
@@ -1704,11 +1841,17 @@ export type ZonedApiCreateBackendRequest = {
   serverIp: Array<string>
   /** @deprecated Deprecated in favor of proxy_protocol field ! */
   sendProxyV2?: boolean
-  /** Maximum server connection inactivity time */
+  /**
+   * Maximum server connection inactivity time (allowed time the server has to
+   * process the request)
+   */
   timeoutServer?: string
-  /** Maximum initical server connection establishment time */
+  /** Maximum initial server connection establishment time */
   timeoutConnect?: string
-  /** Maximum tunnel inactivity time */
+  /**
+   * Maximum tunnel inactivity time after Websocket is established (take
+   * precedence over client and server timeout)
+   */
   timeoutTunnel?: string
   /** Modify what occurs when a backend server is marked down */
   onMarkedDownAction: OnMarkedDownAction
@@ -1758,15 +1901,21 @@ export type ZonedApiUpdateBackendRequest = {
   forwardPortAlgorithm: ForwardPortAlgorithm
   /** Enable cookie-based session persistence */
   stickySessions: StickySessionsType
-  /** Cookie name for for sticky sessions */
+  /** Cookie name for sticky sessions */
   stickySessionsCookieName: string
   /** @deprecated Deprecated in favor of proxy_protocol field! */
   sendProxyV2?: boolean
-  /** Maximum server connection inactivity time */
+  /**
+   * Maximum server connection inactivity time (allowed time the server has to
+   * process the request)
+   */
   timeoutServer?: string
   /** Maximum initial server connection establishment time */
   timeoutConnect?: string
-  /** Maximum tunnel inactivity time */
+  /**
+   * Maximum tunnel inactivity time after Websocket is established (take
+   * precedence over client and server timeout)
+   */
   timeoutTunnel?: string
   /** Modify what occurs when a backend server is marked down */
   onMarkedDownAction: OnMarkedDownAction
@@ -1837,10 +1986,10 @@ export type ZonedApiUpdateHealthCheckRequest = {
   port: number
   /** Time between two consecutive health checks */
   checkDelay: string
-  /** Additional check timeout, after the connection has been already established */
+  /** Maximum time a backend server has to reply to the health check */
   checkTimeout: string
   /**
-   * Number of consecutive unsuccessful health checks, after wich the server
+   * Number of consecutive unsuccessful health checks, after which the server
    * will be considered dead
    */
   checkMaxRetries: number
@@ -1869,31 +2018,39 @@ export type ZonedApiUpdateHealthCheckRequest = {
    */
   redisConfig?: HealthCheckRedisConfig
   /**
+   * PostgreSQL health check.
+   *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   pgsqlConfig?: HealthCheckPgsqlConfig
   /**
+   * Basic TCP health check.
+   *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   tcpConfig?: HealthCheckTcpConfig
   /**
+   * HTTP health check.
+   *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   httpConfig?: HealthCheckHttpConfig
   /**
+   * HTTPS health check.
+   *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   httpsConfig?: HealthCheckHttpsConfig
   /**
-   * It defines whether the healthcheck should be done considering the proxy
+   * It defines whether the health check should be done considering the proxy
    * protocol
    */
   checkSendProxy: boolean
@@ -1910,7 +2067,7 @@ export type ZonedApiListFrontendsRequest = {
   orderBy?: ListFrontendsRequestOrderBy
   /** Page number */
   page?: number
-  /** The number of items to returns */
+  /** The number of items to return */
   pageSize?: number
 }
 
@@ -1973,8 +2130,11 @@ export type ZonedApiDeleteFrontendRequest = {
 export type ZonedApiListRoutesRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
+  /** Response order */
   orderBy?: ListRoutesRequestOrderBy
+  /** The number of items to return */
   pageSize?: number
+  /** Page number */
   page?: number
   frontendId?: string
 }
@@ -2038,7 +2198,7 @@ export type ZonedApiListAclsRequest = {
   zone?: Zone
   /** ID of your frontend */
   frontendId: string
-  /** You can order the response by created_at asc/desc or name asc/desc */
+  /** Response order */
   orderBy?: ListAclRequestOrderBy
   /** Page number */
   page?: number
@@ -2138,7 +2298,7 @@ export type ZonedApiListCertificatesRequest = {
   zone?: Zone
   /** Load balancer ID */
   lbId: string
-  /** You can order the response by created_at asc/desc or name asc/desc */
+  /** Response order */
   orderBy?: ListCertificatesRequestOrderBy
   /** Page number */
   page?: number
@@ -2225,7 +2385,7 @@ export type ZonedApiGetSubscriberRequest = {
 export type ZonedApiListSubscriberRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
-  /** You can order the response by created_at asc/desc or name asc/desc */
+  /** Response order */
   orderBy?: ListSubscriberRequestOrderBy
   /** Page number */
   page?: number
@@ -2288,9 +2448,13 @@ export type ZonedApiUnsubscribeFromLbRequest = {
 export type ZonedApiListLbPrivateNetworksRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
+  /** Load balancer ID */
   lbId: string
+  /** Response order */
   orderBy?: ListPrivateNetworksRequestOrderBy
+  /** The number of items to return */
   pageSize?: number
+  /** Page number */
   page?: number
 }
 
