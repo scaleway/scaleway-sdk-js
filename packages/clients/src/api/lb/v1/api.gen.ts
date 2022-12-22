@@ -683,7 +683,7 @@ export class LbV1GenAPI extends API {
     )
 
   /**
-   * Update an healthcheck for a given backend
+   * Update an health check for a given backend
    *
    * @param request - The request {@link UpdateHealthCheckRequest}
    * @returns A Promise of HealthCheck
