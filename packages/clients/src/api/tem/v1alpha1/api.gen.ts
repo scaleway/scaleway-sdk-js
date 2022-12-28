@@ -6,8 +6,13 @@ import {
   unmarshalServiceInfo,
   urlParams,
   validatePathParam,
+  waitForResource,
 } from '../../../bridge'
-import type { Region, ServiceInfo } from '../../../bridge'
+import type { Region, ServiceInfo, WaitForOptions } from '../../../bridge'
+import {
+  DOMAIN_TRANSIENT_STATUSES,
+  EMAIL_TRANSIENT_STATUSES,
+} from './content.gen'
 import {
   marshalCreateDomainRequest,
   marshalCreateEmailRequest,
@@ -101,6 +106,26 @@ export class TemV1Alpha1GenAPI extends API {
         )}/emails/${validatePathParam('emailId', request.emailId)}`,
       },
       unmarshalEmail,
+    )
+
+  /**
+   * Waits for {@link Email} to be in a final state.
+   *
+   * @param request - The request {@link GetEmailRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Email
+   */
+  waitForEmail = (
+    request: Readonly<GetEmailRequest>,
+    options?: Readonly<WaitForOptions<Email>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res =>
+          Promise.resolve(!EMAIL_TRANSIENT_STATUSES.includes(res.status))),
+      this.getEmail,
+      request,
+      options,
     )
 
   protected pageOfListEmails = (request: Readonly<ListEmailsRequest> = {}) =>
@@ -229,6 +254,26 @@ export class TemV1Alpha1GenAPI extends API {
         )}/domains/${validatePathParam('domainId', request.domainId)}`,
       },
       unmarshalDomain,
+    )
+
+  /**
+   * Waits for {@link Domain} to be in a final state.
+   *
+   * @param request - The request {@link GetDomainRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Domain
+   */
+  waitForDomain = (
+    request: Readonly<GetDomainRequest>,
+    options?: Readonly<WaitForOptions<Domain>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res =>
+          Promise.resolve(!DOMAIN_TRANSIENT_STATUSES.includes(res.status))),
+      this.getDomain,
+      request,
+      options,
     )
 
   protected pageOfListDomains = (request: Readonly<ListDomainsRequest> = {}) =>
