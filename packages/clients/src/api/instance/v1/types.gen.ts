@@ -1582,27 +1582,34 @@ export type DeleteIpRequest = {
 export type ListPrivateNICsRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
+  /** The server the private NIC is attached to */
   serverId: string
 }
 
 export type CreatePrivateNICRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
+  /** UUID of the server the private NIC will be attached to */
   serverId: string
+  /** UUID of the private network where the private NIC will be attached */
   privateNetworkId: string
 }
 
 export type GetPrivateNICRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
+  /** The server the private NIC is attached to */
   serverId: string
+  /** The private NIC unique ID */
   privateNicId: string
 }
 
 export type DeletePrivateNICRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
+  /** The server the private NIC is attached to */
   serverId: string
+  /** The private NIC unique ID */
   privateNicId: string
 }
 
