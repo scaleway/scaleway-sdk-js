@@ -50,9 +50,8 @@ export type ConfigurationType = Record<
   'default' | string,
   Record<string, string>
 >
-
-/** Parameters to load the profile from the configuration file */
-export type ProfileFromFileParams = {
+/** Parameters to load the all the profiles from the configuration file */
+export type AllProfilesFromFileParams = {
   /**
    * The path at which to locate the configuration file.
    *
@@ -60,6 +59,10 @@ export type ProfileFromFileParams = {
    * or `~/.scw/config` otherwise.
    */
   filepath?: string
+}
+
+/** Parameters to load the profile from the configuration file */
+export type ProfileFromFileParams = AllProfilesFromFileParams & {
   /**
    * Name of the profile to load.
    *
