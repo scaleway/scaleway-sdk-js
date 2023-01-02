@@ -1,5 +1,10 @@
 export {
+  loadAllProfilesFromConfigurationFile,
   loadProfileFromConfigurationFile,
   loadProfileFromEnvironmentValues,
 } from './config-loader'
-export type { Profile, ProfileFromFileParams } from './types'
+export type {
+  AllProfilesFromFileParams,
+  Profile,
+  ProfileFromFileParams,
+} from './types'
