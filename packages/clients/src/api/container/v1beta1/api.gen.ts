@@ -88,7 +88,7 @@ const jsonContentHeaders = {
  */
 export class ContainerV1Beta1GenAPI extends API {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par']
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
 
   protected pageOfListNamespaces = (
     request: Readonly<ListNamespacesRequest> = {},

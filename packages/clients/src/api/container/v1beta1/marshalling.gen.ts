@@ -266,7 +266,7 @@ export const marshalCreateContainerRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   environment_variables: request.environmentVariables,
-  http_option: request.httpOption,
+  http_option: request.httpOption ?? 'unknown_http_option',
   max_concurrency: request.maxConcurrency,
   max_scale: request.maxScale,
   memory_limit: request.memoryLimit,
@@ -274,8 +274,8 @@ export const marshalCreateContainerRequest = (
   name: request.name || randomName('ctnr'),
   namespace_id: request.namespaceId,
   port: request.port,
-  privacy: request.privacy,
-  protocol: request.protocol,
+  privacy: request.privacy ?? 'unknown_privacy',
+  protocol: request.protocol ?? 'unknown_protocol',
   registry_image: request.registryImage,
   secret_environment_variables: request.secretEnvironmentVariables
     ? request.secretEnvironmentVariables.map(elt =>
@@ -342,14 +342,14 @@ export const marshalUpdateContainerRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   environment_variables: request.environmentVariables,
-  http_option: request.httpOption,
+  http_option: request.httpOption ?? 'unknown_http_option',
   max_concurrency: request.maxConcurrency,
   max_scale: request.maxScale,
   memory_limit: request.memoryLimit,
   min_scale: request.minScale,
   port: request.port,
-  privacy: request.privacy,
-  protocol: request.protocol,
+  privacy: request.privacy ?? 'unknown_privacy',
+  protocol: request.protocol ?? 'unknown_protocol',
   redeploy: request.redeploy,
   registry_image: request.registryImage,
   secret_environment_variables: request.secretEnvironmentVariables
