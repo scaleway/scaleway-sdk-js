@@ -926,7 +926,7 @@ export type CreatePoolRequest = {
    * The customization of the container runtime is available for each pool. Note
    * that `docker` is deprecated since 1.20 and will be removed in 1.24.
    */
-  containerRuntime: Runtime
+  containerRuntime?: Runtime
   /** The enablement of the autohealing feature for the pool */
   autohealing: boolean
   /** The tags associated with the pool */
@@ -949,7 +949,7 @@ export type CreatePoolRequest = {
    * - `b_ssd` is a remote block storage: your system is stored on a centralised
    *   and resilient cluster.
    */
-  rootVolumeType: PoolVolumeType
+  rootVolumeType?: PoolVolumeType
   /** The system volume disk size */
   rootVolumeSize?: number
 }

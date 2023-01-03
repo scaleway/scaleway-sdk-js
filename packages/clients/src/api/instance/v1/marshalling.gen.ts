@@ -1662,8 +1662,8 @@ export const marshalCreatePlacementGroupRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name || randomName('pg'),
-  policy_mode: request.policyMode,
-  policy_type: request.policyType,
+  policy_mode: request.policyMode ?? 'optional',
+  policy_type: request.policyType ?? 'max_availability',
   tags: request.tags,
   ...resolveOneOf([
     {
@@ -1692,9 +1692,9 @@ export const marshalCreateSecurityGroupRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   enable_default_security: request.enableDefaultSecurity,
-  inbound_default_policy: request.inboundDefaultPolicy,
+  inbound_default_policy: request.inboundDefaultPolicy ?? 'accept',
   name: request.name || randomName('sg'),
-  outbound_default_policy: request.outboundDefaultPolicy,
+  outbound_default_policy: request.outboundDefaultPolicy ?? 'accept',
   stateful: request.stateful,
   tags: request.tags,
   ...resolveOneOf([
@@ -1783,7 +1783,7 @@ export const marshalCreateSnapshotRequest = (
   size: request.size,
   tags: request.tags,
   volume_id: request.volumeId,
-  volume_type: request.volumeType,
+  volume_type: request.volumeType ?? 'unknown_volume_type',
   ...resolveOneOf([
     {
       default: defaults.defaultProjectId,
@@ -1804,7 +1804,7 @@ export const marshalCreateVolumeRequest = (
 ): Record<string, unknown> => ({
   name: request.name || randomName('vol'),
   tags: request.tags,
-  volume_type: request.volumeType,
+  volume_type: request.volumeType ?? 'l_ssd',
   ...resolveOneOf([
     {
       default: defaults.defaultProjectId,
@@ -1845,7 +1845,7 @@ export const marshalServerActionRequest = (
   request: ServerActionRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  action: request.action,
+  action: request.action ?? 'poweron',
   name: request.name,
   volumes: request.volumes
     ? Object.entries(request.volumes).reduce(

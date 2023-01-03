@@ -919,7 +919,7 @@ export type CreateInstanceRequest = {
   /** List of engine settings to be set at database initialisation */
   initSettings?: Array<InstanceSetting>
   /** Type of volume where data are stored (lssd, bssd, ...) */
-  volumeType: VolumeType
+  volumeType?: VolumeType
   /** Volume size when volume_type is not lssd */
   volumeSize: number
   /**
@@ -1066,7 +1066,7 @@ export type ListInstanceLogsRequest = {
   /** UUID of the instance you want logs of */
   instanceId: string
   /** Criteria to use when ordering instance logs listing */
-  orderBy: ListInstanceLogsRequestOrderBy
+  orderBy?: ListInstanceLogsRequestOrderBy
 }
 
 export type GetInstanceLogRequest = {
@@ -1263,7 +1263,7 @@ export type SetPrivilegeRequest = {
   /** Name of the user */
   userName: string
   /** Permission to set (Read, Read/Write, All, Custom) */
-  permission: Permission
+  permission?: Permission
 }
 
 export type ListSnapshotsRequest = {

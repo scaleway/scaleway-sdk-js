@@ -74,7 +74,7 @@ export const marshalCreateHumanRequest = (
 ): Record<string, unknown> => ({
   altitude_in_meter: request.altitudeInMeter,
   altitude_in_millimeter: request.altitudeInMillimeter,
-  eyes_color: request.eyesColor,
+  eyes_color: request.eyesColor ?? 'unknown',
   fingers_count: request.fingersCount,
   hair_count: request.hairCount,
   height: request.height,
@@ -108,7 +108,7 @@ export const marshalUpdateHumanRequest = (
 ): Record<string, unknown> => ({
   altitude_in_meter: request.altitudeInMeter,
   altitude_in_millimeter: request.altitudeInMillimeter,
-  eyes_color: request.eyesColor,
+  eyes_color: request.eyesColor ?? 'unknown',
   fingers_count: request.fingersCount,
   hair_count: request.hairCount,
   height: request.height,

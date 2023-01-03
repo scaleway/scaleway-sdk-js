@@ -685,7 +685,7 @@ export const marshalUpdateHubRequest = (
   enable_device_auto_provisioning: request.enableDeviceAutoProvisioning,
   events_topic_prefix: request.eventsTopicPrefix,
   name: request.name,
-  product_plan: request.productPlan,
+  product_plan: request.productPlan ?? 'plan_unknown',
   ...resolveOneOf([
     {
       param: 'twins_graphite_config',

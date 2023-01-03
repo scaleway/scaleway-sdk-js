@@ -260,7 +260,7 @@ export type UpdateImageRequest = {
    * to a `private` image. `inherit` will use the namespace `is_public`
    * parameter
    */
-  visibility: ImageVisibility
+  visibility?: ImageVisibility
 }
 
 export type DeleteImageRequest = {

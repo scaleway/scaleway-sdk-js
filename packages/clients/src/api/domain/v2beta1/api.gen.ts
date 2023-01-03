@@ -445,7 +445,10 @@ export class DomainV2Beta1GenAPI extends API {
           'dnsZone',
           request.dnsZone,
         )}/raw`,
-        urlParams: urlParams(['format', request.format]),
+        urlParams: urlParams([
+          'format',
+          request.format ?? 'unknown_raw_format',
+        ]),
       },
       unmarshalScwFile,
     )

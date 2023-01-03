@@ -926,7 +926,7 @@ export type ExportRawDNSZoneRequest = {
   /** The DNS zone to export */
   dnsZone: string
   /** Format for DNS zone */
-  format: RawFormat
+  format?: RawFormat
 }
 
 export type ImportRawDNSZoneRequest = {
@@ -1189,7 +1189,7 @@ export type RegistrarApiUpdateContactRequest = {
   country?: string
   vatIdentificationCode?: string
   companyIdentificationCode?: string
-  lang: LanguageCode
+  lang?: LanguageCode
   resale?: boolean
   /** @deprecated */
   questions?: Array<UpdateContactRequestQuestion>

@@ -75,7 +75,7 @@ export type CreateHumanRequest = {
   fingersCount: number
   hairCount: number
   isHappy: boolean
-  eyesColor: EyeColors
+  eyesColor?: EyeColors
   /**
    * @deprecated One-of ('projectIdentifier'): at most one of 'organizationId',
    *   'projectId' could be set.
@@ -99,7 +99,7 @@ export type UpdateHumanRequest = {
   fingersCount?: number
   hairCount?: number
   isHappy?: boolean
-  eyesColor: EyeColors
+  eyesColor?: EyeColors
   name?: string
 }
 

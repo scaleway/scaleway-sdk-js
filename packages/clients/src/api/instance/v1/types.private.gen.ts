@@ -137,7 +137,7 @@ export type SetServerRequest = {
   /** The server modification date */
   modificationDate?: Date
   /** The server state */
-  state: ServerState
+  state?: ServerState
   /** The server location */
   location?: ServerLocation
   /** The server IPv6 address */
@@ -145,7 +145,7 @@ export type SetServerRequest = {
   /** The server bootscript */
   bootscript?: Bootscript
   /** The server boot type */
-  bootType: BootType
+  bootType?: BootType
   /** The server volumes */
   volumes?: Record<string, Volume>
   /** The server security group */
@@ -155,7 +155,7 @@ export type SetServerRequest = {
   /** The server state_detail */
   stateDetail: string
   /** The server arch */
-  arch: Arch
+  arch?: Arch
   /** The server placement group */
   placementGroup?: PlacementGroup
   /** The server private NICs */
@@ -189,7 +189,7 @@ export type SetImageRequest = {
   zone?: Zone
   id: string
   name: string
-  arch: Arch
+  arch?: Arch
   creationDate?: Date
   modificationDate?: Date
   defaultBootscript?: Bootscript
@@ -198,7 +198,7 @@ export type SetImageRequest = {
   organization?: string
   public: boolean
   rootVolume?: VolumeSummary
-  state: ImageState
+  state?: ImageState
   project?: string
   tags?: Array<string>
 }
@@ -210,9 +210,9 @@ export type SetSnapshotRequest = {
   id: string
   name: string
   organization?: string
-  volumeType: VolumeVolumeType
+  volumeType?: VolumeVolumeType
   size: number
-  state: SnapshotState
+  state?: SnapshotState
   baseVolume?: SnapshotBaseVolume
   creationDate?: Date
   modificationDate?: Date
@@ -238,9 +238,9 @@ export type SetSecurityGroupRequest = {
   /** True to block SMTP on IPv4 and IPv6 */
   enableDefaultSecurity: boolean
   /** The default inbound policy */
-  inboundDefaultPolicy: SecurityGroupPolicy
+  inboundDefaultPolicy?: SecurityGroupPolicy
   /** The default outbound policy */
-  outboundDefaultPolicy: SecurityGroupPolicy
+  outboundDefaultPolicy?: SecurityGroupPolicy
   /** The security groups organization ID */
   organization?: string
   /** The security group project ID */
@@ -261,9 +261,9 @@ export type SetSecurityGroupRuleRequest = {
   securityGroupId: string
   securityGroupRuleId: string
   id: string
-  protocol: SecurityGroupRuleProtocol
-  direction: SecurityGroupRuleDirection
-  action: SecurityGroupRuleAction
+  protocol?: SecurityGroupRuleProtocol
+  direction?: SecurityGroupRuleDirection
+  action?: SecurityGroupRuleAction
   ipRange: string
   destPortFrom?: number
   destPortTo?: number

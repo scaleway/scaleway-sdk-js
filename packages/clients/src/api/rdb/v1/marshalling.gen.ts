@@ -966,7 +966,7 @@ export const marshalCreateInstanceRequest = (
   tags: request.tags,
   user_name: request.userName,
   volume_size: request.volumeSize,
-  volume_type: request.volumeType,
+  volume_type: request.volumeType ?? 'lssd',
   ...resolveOneOf([
     {
       default: defaults.defaultProjectId,
@@ -1075,7 +1075,7 @@ export const marshalSetPrivilegeRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   database_name: request.databaseName,
-  permission: request.permission,
+  permission: request.permission ?? 'readonly',
   user_name: request.userName,
 })
 

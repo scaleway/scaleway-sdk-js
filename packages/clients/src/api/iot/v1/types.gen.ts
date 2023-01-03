@@ -548,7 +548,7 @@ export type UpdateHubRequest = {
   /** Hub name (up to 255 characters) */
   name?: string
   /** Hub feature set */
-  productPlan: HubProductPlan
+  productPlan?: HubProductPlan
   /** Disable Hub events */
   disableEvents?: boolean
   /** Hub events topic prefix */

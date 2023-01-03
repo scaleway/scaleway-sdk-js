@@ -966,8 +966,9 @@ export const marshalCreateBackendRequest = (
   health_check: marshalHealthCheck(request.healthCheck, defaults),
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
   name: request.name || randomName('lbb'),
-  on_marked_down_action: request.onMarkedDownAction,
-  proxy_protocol: request.proxyProtocol,
+  on_marked_down_action:
+    request.onMarkedDownAction ?? 'on_marked_down_action_none',
+  proxy_protocol: request.proxyProtocol ?? 'proxy_protocol_unknown',
   send_proxy_v2: request.sendProxyV2,
   server_ip: request.serverIp,
   ssl_bridging: request.sslBridging,
@@ -1047,7 +1048,8 @@ export const marshalCreateLbRequest = (
   description: request.description,
   ip_id: request.ipId,
   name: request.name || randomName('lb'),
-  ssl_compatibility_level: request.sslCompatibilityLevel,
+  ssl_compatibility_level:
+    request.sslCompatibilityLevel ?? 'ssl_compatibility_level_unknown',
   tags: request.tags,
   type: request.type,
   ...resolveOneOf([
@@ -1154,8 +1156,9 @@ export const marshalUpdateBackendRequest = (
   forward_protocol: request.forwardProtocol,
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
   name: request.name,
-  on_marked_down_action: request.onMarkedDownAction,
-  proxy_protocol: request.proxyProtocol,
+  on_marked_down_action:
+    request.onMarkedDownAction ?? 'on_marked_down_action_none',
+  proxy_protocol: request.proxyProtocol ?? 'proxy_protocol_unknown',
   send_proxy_v2: request.sendProxyV2,
   ssl_bridging: request.sslBridging,
   sticky_sessions: request.stickySessions,
@@ -1253,7 +1256,8 @@ export const marshalUpdateLbRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
-  ssl_compatibility_level: request.sslCompatibilityLevel,
+  ssl_compatibility_level:
+    request.sslCompatibilityLevel ?? 'ssl_compatibility_level_unknown',
   tags: request.tags,
 })
 
@@ -1334,8 +1338,9 @@ export const marshalZonedApiCreateBackendRequest = (
   health_check: marshalHealthCheck(request.healthCheck, defaults),
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
   name: request.name || randomName('lbb'),
-  on_marked_down_action: request.onMarkedDownAction,
-  proxy_protocol: request.proxyProtocol,
+  on_marked_down_action:
+    request.onMarkedDownAction ?? 'on_marked_down_action_none',
+  proxy_protocol: request.proxyProtocol ?? 'proxy_protocol_unknown',
   send_proxy_v2: request.sendProxyV2,
   server_ip: request.serverIp,
   ssl_bridging: request.sslBridging,
@@ -1415,7 +1420,8 @@ export const marshalZonedApiCreateLbRequest = (
   description: request.description,
   ip_id: request.ipId,
   name: request.name || randomName('lb'),
-  ssl_compatibility_level: request.sslCompatibilityLevel,
+  ssl_compatibility_level:
+    request.sslCompatibilityLevel ?? 'ssl_compatibility_level_unknown',
   tags: request.tags,
   type: request.type,
   ...resolveOneOf([
@@ -1529,8 +1535,9 @@ export const marshalZonedApiUpdateBackendRequest = (
   forward_protocol: request.forwardProtocol,
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
   name: request.name,
-  on_marked_down_action: request.onMarkedDownAction,
-  proxy_protocol: request.proxyProtocol,
+  on_marked_down_action:
+    request.onMarkedDownAction ?? 'on_marked_down_action_none',
+  proxy_protocol: request.proxyProtocol ?? 'proxy_protocol_unknown',
   send_proxy_v2: request.sendProxyV2,
   ssl_bridging: request.sslBridging,
   sticky_sessions: request.stickySessions,
@@ -1628,7 +1635,8 @@ export const marshalZonedApiUpdateLbRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
-  ssl_compatibility_level: request.sslCompatibilityLevel,
+  ssl_compatibility_level:
+    request.sslCompatibilityLevel ?? 'ssl_compatibility_level_unknown',
   tags: request.tags,
 })
 
