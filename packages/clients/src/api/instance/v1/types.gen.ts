@@ -1566,10 +1566,10 @@ export type UpdateIpRequest = {
   /** IP ID or IP address */
   ip: string
   /** Reverse domain name */
-  reverse?: string
+  reverse?: string | null
   /** An array of keywords you want to tag this IP with */
   tags?: Array<string>
-  server?: string
+  server?: string | null
 }
 
 export type DeleteIpRequest = {
