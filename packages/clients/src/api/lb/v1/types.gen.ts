@@ -833,7 +833,7 @@ export type CreateLbRequest = {
    *   as a last resort (Firefox 1, Android 2.3, Chrome 1, Edge 12, IE8 on
    *   Windows XP, Java 6, OpenSSL 0.9.8, Opera 5, and Safari 1).
    */
-  sslCompatibilityLevel: SSLCompatibilityLevel
+  sslCompatibilityLevel?: SSLCompatibilityLevel
 }
 
 export type GetLbRequest = {
@@ -868,7 +868,7 @@ export type UpdateLbRequest = {
    *   as a last resort (Firefox 1, Android 2.3, Chrome 1, Edge 12, IE8 on
    *   Windows XP, Java 6, OpenSSL 0.9.8, Opera 5, and Safari 1).
    */
-  sslCompatibilityLevel: SSLCompatibilityLevel
+  sslCompatibilityLevel?: SSLCompatibilityLevel
 }
 
 export type DeleteLbRequest = {
@@ -999,7 +999,7 @@ export type CreateBackendRequest = {
    */
   timeoutTunnel?: string
   /** Modify what occurs when a backend server is marked down */
-  onMarkedDownAction: OnMarkedDownAction
+  onMarkedDownAction?: OnMarkedDownAction
   /**
    * The PROXY protocol informs the other end about the incoming connection, so
    * that it can know the client's address or the public address it accessed to,
@@ -1011,7 +1011,7 @@ export type CreateBackendRequest = {
    * `proxy_protocol_v2_ssl_cn` Version two with SSL connection and common name
    * information.
    */
-  proxyProtocol: ProxyProtocol
+  proxyProtocol?: ProxyProtocol
   /**
    * Only the host part of the Scaleway S3 bucket website is expected. E.g.
    * `failover-website.s3-website.fr-par.scw.cloud` if your bucket website URL
@@ -1063,7 +1063,7 @@ export type UpdateBackendRequest = {
    */
   timeoutTunnel?: string
   /** Modify what occurs when a backend server is marked down */
-  onMarkedDownAction: OnMarkedDownAction
+  onMarkedDownAction?: OnMarkedDownAction
   /**
    * The PROXY protocol informs the other end about the incoming connection, so
    * that it can know the client's address or the public address it accessed to,
@@ -1075,7 +1075,7 @@ export type UpdateBackendRequest = {
    * `proxy_protocol_v2_ssl_cn` Version two with SSL connection and common name
    * information.
    */
-  proxyProtocol: ProxyProtocol
+  proxyProtocol?: ProxyProtocol
   /**
    * Only the host part of the Scaleway S3 bucket website is expected. Example:
    * `failover-website.s3-website.fr-par.scw.cloud` if your bucket website URL
@@ -1688,7 +1688,7 @@ export type ZonedApiCreateLbRequest = {
    *   as a last resort (Firefox 1, Android 2.3, Chrome 1, Edge 12, IE8 on
    *   Windows XP, Java 6, OpenSSL 0.9.8, Opera 5, and Safari 1).
    */
-  sslCompatibilityLevel: SSLCompatibilityLevel
+  sslCompatibilityLevel?: SSLCompatibilityLevel
 }
 
 export type ZonedApiGetLbRequest = {
@@ -1723,7 +1723,7 @@ export type ZonedApiUpdateLbRequest = {
    *   as a last resort (Firefox 1, Android 2.3, Chrome 1, Edge 12, IE8 on
    *   Windows XP, Java 6, OpenSSL 0.9.8, Opera 5, and Safari 1).
    */
-  sslCompatibilityLevel: SSLCompatibilityLevel
+  sslCompatibilityLevel?: SSLCompatibilityLevel
 }
 
 export type ZonedApiDeleteLbRequest = {
@@ -1854,7 +1854,7 @@ export type ZonedApiCreateBackendRequest = {
    */
   timeoutTunnel?: string
   /** Modify what occurs when a backend server is marked down */
-  onMarkedDownAction: OnMarkedDownAction
+  onMarkedDownAction?: OnMarkedDownAction
   /**
    * The PROXY protocol informs the other end about the incoming connection, so
    * that it can know the client's address or the public address it accessed to,
@@ -1866,7 +1866,7 @@ export type ZonedApiCreateBackendRequest = {
    * `proxy_protocol_v2_ssl_cn` Version two with SSL connection and common name
    * information.
    */
-  proxyProtocol: ProxyProtocol
+  proxyProtocol?: ProxyProtocol
   /**
    * Only the host part of the Scaleway S3 bucket website is expected. E.g.
    * `failover-website.s3-website.fr-par.scw.cloud` if your bucket website URL
@@ -1918,7 +1918,7 @@ export type ZonedApiUpdateBackendRequest = {
    */
   timeoutTunnel?: string
   /** Modify what occurs when a backend server is marked down */
-  onMarkedDownAction: OnMarkedDownAction
+  onMarkedDownAction?: OnMarkedDownAction
   /**
    * The PROXY protocol informs the other end about the incoming connection, so
    * that it can know the client's address or the public address it accessed to,
@@ -1930,7 +1930,7 @@ export type ZonedApiUpdateBackendRequest = {
    * `proxy_protocol_v2_ssl_cn` Version two with SSL connection and common name
    * information.
    */
-  proxyProtocol: ProxyProtocol
+  proxyProtocol?: ProxyProtocol
   /**
    * Only the host part of the Scaleway S3 bucket website is expected. Example:
    * `failover-website.s3-website.fr-par.scw.cloud` if your bucket website URL

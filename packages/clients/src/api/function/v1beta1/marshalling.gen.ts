@@ -655,14 +655,14 @@ export const marshalCreateFunctionRequest = (
   description: request.description,
   environment_variables: request.environmentVariables,
   handler: request.handler,
-  http_option: request.httpOption,
+  http_option: request.httpOption ?? 'unknown_http_option',
   max_scale: request.maxScale,
   memory_limit: request.memoryLimit,
   min_scale: request.minScale,
   name: request.name || randomName('fn'),
   namespace_id: request.namespaceId,
-  privacy: request.privacy,
-  runtime: request.runtime,
+  privacy: request.privacy ?? 'unknown_privacy',
+  runtime: request.runtime ?? 'unknown_runtime',
   secret_environment_variables: request.secretEnvironmentVariables
     ? request.secretEnvironmentVariables.map(elt =>
         marshalSecret(elt, defaults),
@@ -739,7 +739,7 @@ export const marshalCreateTriggerRequest = (
   description: request.description,
   function_id: request.functionId,
   name: request.name,
-  type: request.type,
+  type: request.type ?? 'unknown_trigger_type',
   ...resolveOneOf<unknown>([
     {
       param: 'nats_failure_handling_policy',
@@ -800,13 +800,13 @@ export const marshalUpdateFunctionRequest = (
   description: request.description,
   environment_variables: request.environmentVariables,
   handler: request.handler,
-  http_option: request.httpOption,
+  http_option: request.httpOption ?? 'unknown_http_option',
   max_scale: request.maxScale,
   memory_limit: request.memoryLimit,
   min_scale: request.minScale,
-  privacy: request.privacy,
+  privacy: request.privacy ?? 'unknown_privacy',
   redeploy: request.redeploy,
-  runtime: request.runtime,
+  runtime: request.runtime ?? 'unknown_runtime',
   secret_environment_variables: request.secretEnvironmentVariables
     ? request.secretEnvironmentVariables.map(elt =>
         marshalSecret(elt, defaults),

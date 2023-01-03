@@ -637,7 +637,7 @@ export class InstanceV1GenAPI extends API {
    * @param request - The request {@link CreateSnapshotRequest}
    * @returns A Promise of CreateSnapshotResponse
    */
-  createSnapshot = (request: Readonly<CreateSnapshotRequest>) =>
+  createSnapshot = (request: Readonly<CreateSnapshotRequest> = {}) =>
     this.client.fetch<CreateSnapshotResponse>(
       {
         body: JSON.stringify(
@@ -770,7 +770,7 @@ export class InstanceV1GenAPI extends API {
    * @param request - The request {@link CreateVolumeRequest}
    * @returns A Promise of CreateVolumeResponse
    */
-  createVolume = (request: Readonly<CreateVolumeRequest>) =>
+  createVolume = (request: Readonly<CreateVolumeRequest> = {}) =>
     this.client.fetch<CreateVolumeResponse>(
       {
         body: JSON.stringify(
@@ -1185,7 +1185,9 @@ export class InstanceV1GenAPI extends API {
    * @param request - The request {@link CreatePlacementGroupRequest}
    * @returns A Promise of CreatePlacementGroupResponse
    */
-  createPlacementGroup = (request: Readonly<CreatePlacementGroupRequest>) =>
+  createPlacementGroup = (
+    request: Readonly<CreatePlacementGroupRequest> = {},
+  ) =>
     this.client.fetch<CreatePlacementGroupResponse>(
       {
         body: JSON.stringify(

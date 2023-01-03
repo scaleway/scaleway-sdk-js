@@ -984,7 +984,7 @@ export type ServerActionRequest = {
   /** UUID of the server */
   serverId: string
   /** The action to perform on the server */
-  action: ServerAction
+  action?: ServerAction
   /**
    * The name of the backup you want to create. This field should only be
    * specified when performing a backup action.
@@ -1111,7 +1111,7 @@ export type CreateSnapshotRequest = {
    * Overrides the volume_type of the snapshot. If omitted, the volume type of
    * the original volume will be used.
    */
-  volumeType: SnapshotVolumeType
+  volumeType?: SnapshotVolumeType
   /** Bucket name for snapshot imports */
   bucket?: string
   /** Object key for snapshot imports */
@@ -1192,7 +1192,7 @@ export type CreateVolumeRequest = {
   /** The volume tags */
   tags?: Array<string>
   /** The volume type */
-  volumeType: VolumeVolumeType
+  volumeType?: VolumeVolumeType
   /**
    * The volume disk size, must be a multiple of 512.
    *
@@ -1310,9 +1310,9 @@ export type CreateSecurityGroupRequest = {
   /** Whether the security group is stateful or not */
   stateful: boolean
   /** Default policy for inbound rules */
-  inboundDefaultPolicy: SecurityGroupPolicy
+  inboundDefaultPolicy?: SecurityGroupPolicy
   /** Default policy for outbound rules */
-  outboundDefaultPolicy: SecurityGroupPolicy
+  outboundDefaultPolicy?: SecurityGroupPolicy
   /** True to block SMTP on IPv4 and IPv6 */
   enableDefaultSecurity?: boolean
 }
@@ -1440,9 +1440,9 @@ export type CreatePlacementGroupRequest = {
   /** The tags of the placement group */
   tags?: Array<string>
   /** The operating mode of the placement group */
-  policyMode: PlacementGroupPolicyMode
+  policyMode?: PlacementGroupPolicyMode
   /** The policy type of the placement group */
-  policyType: PlacementGroupPolicyType
+  policyType?: PlacementGroupPolicyType
 }
 
 export type GetPlacementGroupRequest = {
@@ -1458,8 +1458,8 @@ export type SetPlacementGroupRequest = {
   placementGroupId: string
   name: string
   organization?: string
-  policyMode: PlacementGroupPolicyMode
-  policyType: PlacementGroupPolicyType
+  policyMode?: PlacementGroupPolicyMode
+  policyType?: PlacementGroupPolicyType
   project?: string
   tags?: Array<string>
 }

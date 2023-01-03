@@ -293,11 +293,11 @@ export type CreateContainerRequest = {
   maxScale?: number
   memoryLimit?: number
   timeout?: string
-  privacy: ContainerPrivacy
+  privacy?: ContainerPrivacy
   description?: string
   registryImage?: string
   maxConcurrency?: number
-  protocol: ContainerProtocol
+  protocol?: ContainerProtocol
   port?: number
   secretEnvironmentVariables?: Array<Secret>
   /**
@@ -307,7 +307,7 @@ export type CreateContainerRequest = {
    *   to use HTTPS.
    * - Enabled: Serve both HTTP and HTTPS traffic.
    */
-  httpOption: ContainerHttpOption
+  httpOption?: ContainerHttpOption
 }
 
 export type UpdateContainerRequest = {
@@ -320,11 +320,11 @@ export type UpdateContainerRequest = {
   memoryLimit?: number
   timeout?: string
   redeploy?: boolean
-  privacy: ContainerPrivacy
+  privacy?: ContainerPrivacy
   description?: string
   registryImage?: string
   maxConcurrency?: number
-  protocol: ContainerProtocol
+  protocol?: ContainerProtocol
   port?: number
   secretEnvironmentVariables?: Array<Secret>
   /**
@@ -334,7 +334,7 @@ export type UpdateContainerRequest = {
    *   to use HTTPS.
    * - Enabled: Serve both HTTP and HTTPS traffic.
    */
-  httpOption: ContainerHttpOption
+  httpOption?: ContainerHttpOption
 }
 
 export type DeleteContainerRequest = {

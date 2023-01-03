@@ -597,7 +597,7 @@ export type RebootServerRequest = {
   /** ID of the server to reboot */
   serverId: string
   /** The type of boot */
-  bootType: ServerBootType
+  bootType?: ServerBootType
 }
 
 export type StartServerRequest = {
@@ -606,7 +606,7 @@ export type StartServerRequest = {
   /** ID of the server to start */
   serverId: string
   /** The type of boot */
-  bootType: ServerBootType
+  bootType?: ServerBootType
 }
 
 export type StopServerRequest = {

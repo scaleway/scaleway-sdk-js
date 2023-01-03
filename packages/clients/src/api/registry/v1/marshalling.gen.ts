@@ -148,7 +148,7 @@ export const marshalUpdateImageRequest = (
   request: UpdateImageRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  visibility: request.visibility,
+  visibility: request.visibility ?? 'visibility_unknown',
 })
 
 export const marshalUpdateNamespaceRequest = (

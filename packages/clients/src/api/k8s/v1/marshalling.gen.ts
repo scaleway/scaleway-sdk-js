@@ -494,7 +494,7 @@ export const marshalCreatePoolRequest = (
 ): Record<string, unknown> => ({
   autohealing: request.autohealing,
   autoscaling: request.autoscaling,
-  container_runtime: request.containerRuntime,
+  container_runtime: request.containerRuntime ?? 'unknown_runtime',
   kubelet_args: request.kubeletArgs,
   max_size: request.maxSize,
   min_size: request.minSize,
@@ -502,7 +502,7 @@ export const marshalCreatePoolRequest = (
   node_type: request.nodeType,
   placement_group_id: request.placementGroupId,
   root_volume_size: request.rootVolumeSize,
-  root_volume_type: request.rootVolumeType,
+  root_volume_type: request.rootVolumeType ?? 'default_volume_type',
   size: request.size,
   tags: request.tags,
   upgrade_policy: request.upgradePolicy

@@ -1947,7 +1947,7 @@ export const marshalRegistrarApiUpdateContactRequest = (
     ? marshalContactExtensionNL(request.extensionNl, defaults)
     : undefined,
   fax_number: request.faxNumber,
-  lang: request.lang,
+  lang: request.lang ?? 'unknown_language_code',
   phone_number: request.phoneNumber,
   questions: request.questions
     ? request.questions.map(elt =>

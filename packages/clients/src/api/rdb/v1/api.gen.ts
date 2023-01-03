@@ -902,7 +902,7 @@ export class RdbV1GenAPI extends API {
           'instanceId',
           request.instanceId,
         )}/logs`,
-        urlParams: urlParams(['order_by', request.orderBy]),
+        urlParams: urlParams(['order_by', request.orderBy ?? 'created_at_asc']),
       },
       unmarshalListInstanceLogsResponse,
     )

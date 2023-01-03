@@ -580,7 +580,7 @@ export const marshalRebootServerRequest = (
   request: RebootServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  boot_type: request.bootType,
+  boot_type: request.bootType ?? 'unknown_boot_type',
 })
 
 export const marshalStartBMCAccessRequest = (
@@ -594,7 +594,7 @@ export const marshalStartServerRequest = (
   request: StartServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  boot_type: request.bootType,
+  boot_type: request.bootType ?? 'unknown_boot_type',
 })
 
 export const marshalUpdateIPRequest = (

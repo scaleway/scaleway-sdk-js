@@ -511,11 +511,11 @@ export type CreateFunctionRequest = {
   environmentVariables?: Record<string, string>
   minScale?: number
   maxScale?: number
-  runtime: FunctionRuntime
+  runtime?: FunctionRuntime
   memoryLimit?: number
   timeout?: string
   handler?: string
-  privacy: FunctionPrivacy
+  privacy?: FunctionPrivacy
   description?: string
   secretEnvironmentVariables?: Array<Secret>
   /**
@@ -525,7 +525,7 @@ export type CreateFunctionRequest = {
    *   to use HTTPS.
    * - Enabled: Serve both HTTP and HTTPS traffic.
    */
-  httpOption: FunctionHttpOption
+  httpOption?: FunctionHttpOption
 }
 
 export type UpdateFunctionRequest = {
@@ -535,12 +535,12 @@ export type UpdateFunctionRequest = {
   environmentVariables?: Record<string, string>
   minScale?: number
   maxScale?: number
-  runtime: FunctionRuntime
+  runtime?: FunctionRuntime
   memoryLimit?: number
   timeout?: string
   redeploy?: boolean
   handler?: string
-  privacy: FunctionPrivacy
+  privacy?: FunctionPrivacy
   description?: string
   secretEnvironmentVariables?: Array<Secret>
   /**
@@ -550,7 +550,7 @@ export type UpdateFunctionRequest = {
    *   to use HTTPS.
    * - Enabled: Serve both HTTP and HTTPS traffic.
    */
-  httpOption: FunctionHttpOption
+  httpOption?: FunctionHttpOption
 }
 
 export type DeleteFunctionRequest = {
@@ -709,7 +709,7 @@ export type CreateTriggerRequest = {
   name: string
   description: string
   functionId: string
-  type: TriggerType
+  type?: TriggerType
   /**
    * One-of ('failureHandlingPolicy'): at most one of
    * 'natsFailureHandlingPolicy', 'sqsFailureHandlingPolicy' could be set.

@@ -837,7 +837,7 @@ export type CreatePATRuleRequest = {
   /** Private port to translate to */
   privatePort: number
   /** Protocol the rule should apply to */
-  protocol: PATRuleProtocol
+  protocol?: PATRuleProtocol
 }
 
 export type UpdatePATRuleRequest = {
@@ -852,7 +852,7 @@ export type UpdatePATRuleRequest = {
   /** Private port to translate to */
   privatePort?: number
   /** Protocol the rule should apply to */
-  protocol: PATRuleProtocol
+  protocol?: PATRuleProtocol
 }
 
 export type SetPATRulesRequest = {

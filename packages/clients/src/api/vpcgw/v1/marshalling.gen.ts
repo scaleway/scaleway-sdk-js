@@ -417,7 +417,7 @@ export const marshalCreatePATRuleRequest = (
   gateway_id: request.gatewayId,
   private_ip: request.privateIp,
   private_port: request.privatePort,
-  protocol: request.protocol,
+  protocol: request.protocol ?? 'unknown',
   public_port: request.publicPort,
 })
 
@@ -514,6 +514,6 @@ export const marshalUpdatePATRuleRequest = (
 ): Record<string, unknown> => ({
   private_ip: request.privateIp,
   private_port: request.privatePort,
-  protocol: request.protocol,
+  protocol: request.protocol ?? 'unknown',
   public_port: request.publicPort,
 })
