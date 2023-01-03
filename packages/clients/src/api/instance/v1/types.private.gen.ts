@@ -179,7 +179,7 @@ export type UpdateServerRequest = {
   protected?: boolean
   securityGroup?: SecurityGroupTemplate
   /** Placement group ID if server must be part of a placement group */
-  placementGroup?: string
+  placementGroup?: string | null
   /** The server private NICs */
   privateNics?: Array<PrivateNIC>
 }
