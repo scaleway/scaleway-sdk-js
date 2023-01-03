@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.30](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.29...@scaleway/sdk@0.1.0-beta.30) (2023-01-03)
+
+### Features
+
+- **instance:** add locality pl-waw-2 ([#324](https://github.com/scaleway/scaleway-sdk-js/issues/324)) ([0476c07](https://github.com/scaleway/scaleway-sdk-js/commit/0476c072ed143cac146fffa41c98ed6d1fe0bdf3))
+- **tem:** add transient states and waiters ([#325](https://github.com/scaleway/scaleway-sdk-js/issues/325)) ([808abb3](https://github.com/scaleway/scaleway-sdk-js/commit/808abb3e133d7bad4b44fa7f5318fe14bb5b3243))
+- **vpc:** filter private_networks by ids ([#314](https://github.com/scaleway/scaleway-sdk-js/issues/314)) ([54605fa](https://github.com/scaleway/scaleway-sdk-js/commit/54605fa6860df25c0d0a2a72cc48054606c4f5b3))
+
+### Bug Fixes
+
+- **instance:** accept null for some fields ([#339](https://github.com/scaleway/scaleway-sdk-js/issues/339)) ([c620af7](https://github.com/scaleway/scaleway-sdk-js/commit/c620af7aa6bfcab93863afd8c8b0cbbe789d8752))
+
 ## [0.1.0-beta.29](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.28...@scaleway/sdk@0.1.0-beta.29) (2022-12-21)
 
 ### Features
