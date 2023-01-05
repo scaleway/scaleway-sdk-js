@@ -8,6 +8,7 @@
     "no-underscore-dangle": ["error", { "allowAfterThis": true }],
     "deprecation/deprecation": "off",
     "no-restricted-syntax": "off",
-    "@typescript-eslint/consistent-type-definitions": "off"
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "no-useless-escape": "off"
   }
 }
