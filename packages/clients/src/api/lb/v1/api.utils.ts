@@ -3,7 +3,7 @@ import {
   tryAtIntervals,
 } from '../../../internal/async/interval-retrier'
 import type { WaitForOptions } from '../../../internal/async/interval-retrier'
-import { LbV1GenAPI, LbZonedV1GenAPI } from './api.gen'
+import { API, ZonedAPI } from './api.gen'
 import {
   INSTANCE_TRANSIENT_STATUSES,
   LB_TRANSIENT_STATUSES,
@@ -20,7 +20,7 @@ import type {
   ZonedWaitForLbPrivateNetworksRequest,
 } from './types.utils'
 
-export class LbV1UtilsAPI extends LbV1GenAPI {
+export class LbV1UtilsAPI extends API {
   /**
    * Waits for all private networks of a load balancer to be in a final state.
    *
@@ -92,7 +92,7 @@ export class LbV1UtilsAPI extends LbV1GenAPI {
     )
 }
 
-export class LbZonedV1UtilsAPI extends LbZonedV1GenAPI {
+export class LbZonedV1UtilsAPI extends ZonedAPI {
   /**
    * Waits for all private networks of a (zoned) load balancer to be in a final
    * state.
