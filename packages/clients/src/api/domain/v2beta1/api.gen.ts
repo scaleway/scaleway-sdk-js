@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import {
-  API,
+  API as ParentAPI,
   enrichForPagination,
   unmarshalScwFile,
   urlParams,
@@ -164,7 +164,7 @@ const jsonContentHeaders = {
  *
  * Manage your DNS zones and records.
  */
-export class DomainV2Beta1GenAPI extends API {
+export class API extends ParentAPI {
   protected pageOfListDNSZones = (request: Readonly<ListDNSZonesRequest>) =>
     this.client.fetch<ListDNSZonesResponse>(
       {
@@ -773,7 +773,7 @@ export class DomainV2Beta1GenAPI extends API {
  *
  * Manage your domains and contacts.
  */
-export class DomainRegistrarV2Beta1GenAPI extends API {
+export class RegistrarAPI extends ParentAPI {
   protected pageOfListTasks = (
     request: Readonly<RegistrarApiListTasksRequest>,
   ) =>

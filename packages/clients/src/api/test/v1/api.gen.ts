@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import {
-  API,
+  API as ParentAPI,
   enrichForPagination,
   urlParams,
   validatePathParam,
@@ -49,7 +49,7 @@ const jsonContentHeaders = {
  * access-key. Then, you can use other test commands by setting the
  * SCW_SECRET_KEY env variable.
  */
-export class TestV1GenAPI extends API {
+export class API extends ParentAPI {
   /**
    * Register a human and return a access-key and a secret-key that must be used
    * in all other commands.

@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import {
-  API,
+  API as ParentAPI,
   enrichForPagination,
   unmarshalScwFile,
   urlParams,
@@ -162,7 +162,7 @@ const jsonContentHeaders = {
 }
 
 /** Database RDB API. */
-export class RdbV1GenAPI extends API {
+export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
 
