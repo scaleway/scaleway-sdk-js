@@ -29,7 +29,7 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v3.6.0
       with:
-        node-version: 17
+        node-version: 18
         check-latest: true
         cache: 'pnpm'
     - run: pnpm install
@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        node: [ '14', '16', '17' ]
+        node: [ '18' ]
     steps:
     - uses: actions/checkout@v3.3.0
     - uses: pnpm/action-setup@v2.2.4
@@ -53,4 +53,3 @@ jobs:
     - run: pnpm run build
     - run: pnpm run test:coverage
     - uses: codecov/codecov-action@v3.1.1
- 

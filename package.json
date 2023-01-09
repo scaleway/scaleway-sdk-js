@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "engines": {
-    "node": ">=14.13",
+    "node": ">=18.0",
     "pnpm": ">=7.25.1"
   },
   "type": "module",
@@ -61,9 +61,6 @@
     ],
     "transformIgnorePatterns": [
       "node_modules/(?!(.*(@scaleway)))"
-    ],
-    "setupFiles": [
-      "./setupTests.ts"
     ]
   },
   "devDependencies": {
@@ -76,13 +73,11 @@
     "@jest/globals": "^29.3.1",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^24.0.1",
-    "@rollup/plugin-inject": "^5.0.3",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@scaleway/eslint-config-react": "^3.14.1",
     "@types/jest": "^29.2.6",
     "babel-plugin-annotate-pure-calls": "^0.4.0",
     "cross-env": "^7.0.3",
-    "cross-fetch": "^3.1.5",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.32.0",
     "eslint-plugin-tsdoc": "^0.2.17",

@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "noEmit": true,
-    "lib": ["es2021"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "target": "es6",
+    "target": "ES2022",
     "strict": true,
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": true,
