@@ -5,7 +5,7 @@ import {
   enrichForPagination,
   urlParams,
   validatePathParam,
-} from '../../../bri
+} from '../../../bridge'
 import {
   marshalCreateProjectRequest,
   marshalUpdateProjectRequest,
