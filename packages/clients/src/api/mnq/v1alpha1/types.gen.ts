@@ -20,7 +20,7 @@ export type ListNamespacesRequestOrderBy =
   | 'project_id_asc'
   | 'project_id_desc'
 
-export type NamespaceProtocol = 'unknown' | 'nats' | 'sqs_sns' | 'amqp'
+export type NamespaceProtocol = 'unknown' | 'nats' | 'sqs_sns'
 
 /** Credential */
 export interface Credential {
@@ -36,33 +36,16 @@ export interface Credential {
    * Credentials file used to connect to the NATS service.
    *
    * One-of ('credentialType'): at most one of 'natsCredentials',
-   * 'sqsSnsCredentials', 'amqpCredentials' could be set.
+   * 'sqsSnsCredentials' could be set.
    */
   natsCredentials?: CredentialNATSCredsFile
   /**
    * Credential used to connect to the SQS/SNS service.
    *
    * One-of ('credentialType'): at most one of 'natsCredentials',
-   * 'sqsSnsCredentials', 'amqpCredentials' could be set.
+   * 'sqsSnsCredentials' could be set.
    */
   sqsSnsCredentials?: CredentialSQSSNSCreds
-  /**
-   * Credential used to connect to the AMQP service.
-   *
-   * One-of ('credentialType'): at most one of 'natsCredentials',
-   * 'sqsSnsCredentials', 'amqpCredentials' could be set.
-   */
-  amqpCredentials?: CredentialAMQPCreds
-}
-
-/** Credential.amqp creds */
-export interface CredentialAMQPCreds {
-  /** Username used to connect to the AMQP service */
-  username: string
-  /** Password used to connect to the AMQP service */
-  password?: string
-  /** List of permissions associated to this Credential */
-  permissions?: Permissions
 }
 
 /** Credential.nats creds file */
@@ -94,25 +77,9 @@ export interface CredentialSummary {
   /**
    * Credential used to connect to the SQS/SNS service.
    *
-   * One-of ('credentialType'): at most one of 'sqsSnsCredentials',
-   * 'amqpCredentials' could be set.
+   * One-of ('credentialType'): at most one of 'sqsSnsCredentials' could be set.
    */
   sqsSnsCredentials?: CredentialSummarySQSSNSCreds
-  /**
-   * Credential used to connect to the AMQP service.
-   *
-   * One-of ('credentialType'): at most one of 'sqsSnsCredentials',
-   * 'amqpCredentials' could be set.
-   */
-  amqpCredentials?: CredentialSummaryAMQPCreds
-}
-
-/** Credential summary.amqp creds */
-export interface CredentialSummaryAMQPCreds {
-  /** Username used to connect to the AMQP service */
-  username: string
-  /** List of permissions associated to this Credential */
-  permissions?: Permissions
 }
 
 /** Credential summary.sqssns creds */
