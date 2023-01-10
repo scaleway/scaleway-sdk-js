@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.31](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.30...@scaleway/sdk@0.1.0-beta.31) (2023-01-10)
+
+### Features
+
+- add validation rules ([#345](https://github.com/scaleway/scaleway-sdk-js/issues/345)) ([26d62aa](https://github.com/scaleway/scaleway-sdk-js/commit/26d62aadba15d2575909259a8524310bac132a02))
+- **serverless:** add missing localities ([#341](https://github.com/scaleway/scaleway-sdk-js/issues/341)) ([157c4ac](https://github.com/scaleway/scaleway-sdk-js/commit/157c4ac720374344f0f1edd62539741dddc6ae88))
+
+### Bug Fixes
+
+- set most enums as optional ([#340](https://github.com/scaleway/scaleway-sdk-js/issues/340)) ([872df25](https://github.com/scaleway/scaleway-sdk-js/commit/872df253e47b7c99b76688e29c4c7a36e976df3f))
+
 ## [0.1.0-beta.30](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.29...@scaleway/sdk@0.1.0-beta.30) (2023-01-03)
 
 ### Features
