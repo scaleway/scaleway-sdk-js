@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import {
-  API,
+  API as ParentAPI,
   enrichForPagination,
   urlParams,
   validatePathParam,
@@ -226,7 +226,7 @@ const jsonContentHeaders = {
  *
  * This API allows you to manage your load balancer service.
  */
-export class LbV1GenAPI extends API {
+export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
 
@@ -1501,7 +1501,7 @@ export class LbV1GenAPI extends API {
  *
  * This API allows you to manage your load balancer service.
  */
-export class LbZonedV1GenAPI extends API {
+export class ZonedAPI extends ParentAPI {
   /** Lists the available zones of the API. */
   public static readonly LOCALITIES: Zone[] = [
     'fr-par-1',

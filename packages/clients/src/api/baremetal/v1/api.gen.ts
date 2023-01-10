@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import {
-  API,
+  API as ParentAPI,
   enrichForPagination,
   urlParams,
   validatePathParam,
@@ -97,7 +97,7 @@ const jsonContentHeaders = {
  *
  * This API allows to manage your Bare metal server.
  */
-export class BaremetalV1GenAPI extends API {
+export class API extends ParentAPI {
   /** Lists the available zones of the API. */
   public static readonly LOCALITIES: Zone[] = [
     'fr-par-1',
@@ -732,7 +732,7 @@ export class BaremetalV1GenAPI extends API {
 }
 
 /** Elastic Metal Private Network API. */
-export class BaremetalPrivateNetworkV1GenAPI extends API {
+export class PrivateNetworkAPI extends ParentAPI {
   /** Lists the available zones of the API. */
   public static readonly LOCALITIES: Zone[] = ['fr-par-2']
 

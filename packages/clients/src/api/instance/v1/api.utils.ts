@@ -3,7 +3,7 @@ import {
   tryAtIntervals,
 } from '../../../internal/async/interval-retrier'
 import type { WaitForOptions } from '../../../internal/async/interval-retrier'
-import { InstanceV1GenAPI } from './api.gen'
+import { API } from './api.gen'
 import {
   IMAGE_TRANSIENT_STATUSES,
   PRIVATE_NIC_TRANSIENT_STATUSES,
@@ -48,7 +48,7 @@ const validateNotUndefined = <T>(obj: T | undefined): T => {
   return obj
 }
 
-export class InstanceV1UtilsAPI extends InstanceV1GenAPI {
+export class InstanceV1UtilsAPI extends API {
   /**
    * Waits for {@link Image} to be in a final state.
    *

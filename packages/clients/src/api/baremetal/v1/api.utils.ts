@@ -3,11 +3,11 @@ import {
   tryAtIntervals,
 } from '../../../internal/async/interval-retrier'
 import type { WaitForOptions } from '../../../internal/async/interval-retrier'
-import { BaremetalV1GenAPI } from './api.gen'
+import { API } from './api.gen'
 import { SERVER_INSTALL_TRANSIENT_STATUSES } from './content.gen'
 import type { GetServerRequest, ServerInstall } from './types.gen'
 
-export class BaremetalV1UtilsAPI extends BaremetalV1GenAPI {
+export class BaremetalV1UtilsAPI extends API {
   /**
    * Waits for {@link ServerInstall} to be in a final state.
    *
