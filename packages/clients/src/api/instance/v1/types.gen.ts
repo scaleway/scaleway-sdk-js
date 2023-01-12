@@ -1043,7 +1043,7 @@ export type CreateImageRequest = {
   /** Architecture of the image */
   arch: Arch
   /** Default bootscript of the image */
-  defaultBootscript: string
+  defaultBootscript?: string
   /** Additional volumes of the image */
   extraVolumes?: Record<string, VolumeTemplate>
   /**
@@ -1063,7 +1063,7 @@ export type CreateImageRequest = {
   /** The tags of the image */
   tags?: Array<string>
   /** True to create a public image */
-  public: boolean
+  public?: boolean
 }
 
 export type DeleteImageRequest = {
