@@ -487,12 +487,11 @@ export class InstanceV1UtilsAPI extends API {
   updateImage = (
     request: Readonly<UpdateImageRequest>,
   ): Promise<UpdateImageResponse> =>
-    this.getImage(request)
+    this.getImage({ zone: request.zone, imageId: request.imageId })
       .then(res => validateNotUndefined(res.image))
       .then(image => ({
         ...image,
         name: request.name ?? image.name,
-        public: request.public ?? image.public,
         tags: request.tags ?? image.tags,
         id: image.id,
       }))

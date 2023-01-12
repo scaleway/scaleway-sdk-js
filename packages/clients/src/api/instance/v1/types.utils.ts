@@ -99,7 +99,6 @@ export type UpdateImageRequest = {
   zone?: Zone
   imageId: string
   name?: string
-  public?: boolean
   tags?: string[]
 }
 
