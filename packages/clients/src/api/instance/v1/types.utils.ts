@@ -1,5 +1,6 @@
 import type { Zone } from '../../../scw/locality'
 import type {
+  Image,
   SecurityGroup,
   SecurityGroupPolicy,
   SecurityGroupRule,
@@ -91,6 +92,18 @@ export type DetachVolumeRequest = {
 /** Contains the updated server after detaching a volume. */
 export interface DetachVolumeResponse {
   server?: Server
+}
+
+export type UpdateImageRequest = {
+  /** Zone to target. If none is passed will use default zone from the config */
+  zone?: Zone
+  imageId: string
+  name?: string
+  tags?: string[]
+}
+
+export interface UpdateImageResponse {
+  image?: Image
 }
 
 export type {
