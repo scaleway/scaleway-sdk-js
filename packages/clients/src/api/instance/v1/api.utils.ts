@@ -1,3 +1,4 @@
+import { validatePathParam } from '../../../bridge'
 import {
   createExponentialBackoffStrategy,
   tryAtIntervals,
@@ -11,6 +12,10 @@ import {
   SNAPSHOT_TRANSIENT_STATUSES,
   VOLUME_TRANSIENT_STATUSES,
 } from './content.gen'
+import {
+  marshalSetImageRequest,
+  unmarshalSetImageResponse,
+} from './marshalling.gen'
 import type {
   GetImageRequest,
   GetPrivateNICRequest,
@@ -26,13 +31,18 @@ import type {
   Volume,
   VolumeServerTemplate,
 } from './types.gen'
-import type { SetSecurityGroupRuleRequest } from './types.private.gen'
+import type {
+  SetImageResponse,
+  SetSecurityGroupRuleRequest,
+} from './types.private.gen'
 import type {
   AttachVolumeRequest,
   AttachVolumeResponse,
   CreateServerRequest,
   DetachVolumeRequest,
   DetachVolumeResponse,
+  UpdateImageRequest,
+  UpdateImageResponse,
   UpdateSecurityGroupRequest,
   UpdateSecurityGroupResponse,
   UpdateSecurityGroupRuleRequest,
@@ -467,4 +477,40 @@ export class InstanceV1UtilsAPI extends API {
       zone: request.zone,
     } as UpdateServerRequest).then(obj => obj as DetachVolumeResponse)
   }
+
+  /**
+   * Updates an image.
+   *
+   * @param request - The request {@link UpdateImageRequest}
+   * @returns A Promise of UpdateImageResponse
+   */
+  updateImage = (
+    request: Readonly<UpdateImageRequest>,
+  ): Promise<UpdateImageResponse> =>
+    this.getImage(request)
+      .then(res => validateNotUndefined(res.image))
+      .then(image => ({
+        ...image,
+        name: request.name ?? image.name,
+        public: request.public ?? image.public,
+        tags: request.tags ?? image.tags,
+        id: image.id,
+      }))
+      .then(imageReq =>
+        this.client.fetch<SetImageResponse>(
+          {
+            body: JSON.stringify(
+              marshalSetImageRequest(imageReq, this.client.settings),
+            ),
+            headers: { 'Content-Type': 'application/json; charset=utf-8' },
+            method: 'PUT',
+            path: `/instance/v1/zones/${validatePathParam(
+              'zone',
+              imageReq.zone ?? this.client.settings.defaultZone,
+            )}/images/${validatePathParam('id', imageReq.id)}`,
+          },
+          unmarshalSetImageResponse,
+        ),
+      )
+      .then(res => ({ image: res.image }))
 }
