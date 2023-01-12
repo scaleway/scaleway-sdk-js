@@ -12,10 +12,8 @@ import {
   SNAPSHOT_TRANSIENT_STATUSES,
   VOLUME_TRANSIENT_STATUSES,
 } from './content.gen'
-import {
-  marshalSetImageRequest,
-  unmarshalSetImageResponse,
-} from './marshalling.gen'
+import { unmarshalSetImageResponse } from './marshalling.gen'
+import { marshalSetImageRequestWithID } from './marshalling.utils'
 import type {
   GetImageRequest,
   GetPrivateNICRequest,
@@ -499,7 +497,7 @@ export class InstanceV1UtilsAPI extends API {
         this.client.fetch<SetImageResponse>(
           {
             body: JSON.stringify(
-              marshalSetImageRequest(imageReq, this.client.settings),
+              marshalSetImageRequestWithID(imageReq, this.client.settings),
             ),
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
             method: 'PUT',
