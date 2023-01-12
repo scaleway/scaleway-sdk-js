@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.32](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.31...@scaleway/sdk@0.1.0-beta.32) (2023-01-12)
+
+### Features
+
+- **instance:** add util to update an image ([#365](https://github.com/scaleway/scaleway-sdk-js/issues/365)) ([3fa36e6](https://github.com/scaleway/scaleway-sdk-js/commit/3fa36e6de0084f95386aab1ea14bfd7db55d5c28))
+
+### Bug Fixes
+
+- **instance:** switch some types of CreateImageRequest to optional ([#364](https://github.com/scaleway/scaleway-sdk-js/issues/364)) ([aa22929](https://github.com/scaleway/scaleway-sdk-js/commit/aa2292928920bfac99bf451755989bddfd6f6b7d))
+- **mnq:** clean unused code ([#359](https://github.com/scaleway/scaleway-sdk-js/issues/359)) ([21e02a5](https://github.com/scaleway/scaleway-sdk-js/commit/21e02a51ce22529ff9b995818a0698af2d451f95))
+
 ## [0.1.0-beta.31](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.30...@scaleway/sdk@0.1.0-beta.31) (2023-01-10)
 
 ### Features
