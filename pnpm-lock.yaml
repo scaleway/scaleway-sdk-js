@@ -28,7 +28,7 @@ importers:
       jest-junit: ^15.0.0
       lerna: ^6.4.1
       lint-staged: ^13.1.0
-      prettier: ^2.8.2
+      prettier: ^2.8.3
       read-pkg: ^7.1.0
       rollup: ^3.9.1
       rollup-plugin-dts: ^5.1.1
@@ -60,7 +60,7 @@ importers:
       jest-junit: 15.0.0
       lerna: 6.4.1
       lint-staged: 13.1.0
-      prettier: 2.8.2
+      prettier: 2.8.3
       read-pkg: 7.1.0
       rollup: 3.9.1
       rollup-plugin-dts: 5.1.1_esmavzhadgk2idmxtiodxm33ma
@@ -1478,34 +1478,10 @@ packages:
       '@commitlint/types': 17.4.0
     dev: true
 
-  /@commitlint/load/17.4.1:
-    resolution: {integrity: sha512-6A7/LhIaQpL4ieciIDcVvK2d5z/UI1GBrtDaHm6sQSCL0265clB2/F7XKQNTJHXv9yG4LByT2r+QCpM4GugIfw==}
-    engines: {node: '>=v14'}
-    requiresBuild: true
-    dependencies:
-      '@commitlint/config-validator': 17.4.0
-      '@commitlint/execute-rule': 17.4.0
-      '@commitlint/resolve-extends': 17.4.0
-      '@commitlint/types': 17.4.0
-      '@types/node': 18.11.10
-      chalk: 4.1.2
-      cosmiconfig: 8.0.0
-      cosmiconfig-typescript-loader: 4.0.0_wsd4eoobbv6xsudeowz64yznaa
-      lodash.isplainobject: 4.0.6
-      lodash.merge: 4.6.2
-      lodash.uniq: 4.5.0
-      resolve-from: 5.0.0
-      ts-node: 10.8.2_pdhdgy3lb7m4vyjxkl5qaywlx4
-      typescript: 4.9.4
-    transitivePeerDependencies:
-      - '@swc/core'
-      - '@swc/wasm'
-    dev: true
-    optional: true
-
   /@commitlint/load/17.4.2:
     resolution: {integrity: sha512-Si++F85rJ9t4hw6JcOw1i2h0fdpdFQt0YKwjuK4bk9KhFjyFkRxvR3SB2dPaMs+EwWlDrDBGL+ygip1QD6gmPw==}
     engines: {node: '>=v14'}
+    requiresBuild: true
     dependencies:
       '@commitlint/config-validator': 17.4.0
       '@commitlint/execute-rule': 17.4.0
@@ -4584,7 +4560,7 @@ packages:
       longest: 2.0.1
       word-wrap: 1.2.3
     optionalDependencies:
-      '@commitlint/load': 17.4.1
+      '@commitlint/load': 17.4.2
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
@@ -8221,8 +8197,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier/2.8.2:
-    resolution: {integrity: sha512-BtRV9BcncDyI2tsuS19zzhzoxD8Dh8LiCx7j7tHzrkz8GFXAexeWFdi22mjE1d16dftH2qNaytVxqiRTGlMfpw==}
+  /prettier/2.8.3:
+    resolution: {integrity: sha512-tJ/oJ4amDihPoufT5sM0Z1SKEuKay8LfVAMlbbhnnkvt6BUserZylqo2PN+p9KeljLr0OHa2rXHU1T8reeoTrw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
