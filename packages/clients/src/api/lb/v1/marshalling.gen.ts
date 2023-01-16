@@ -476,6 +476,7 @@ export const unmarshalAcl = (data: unknown) => {
   return {
     action: data.action ? unmarshalAclAction(data.action) : undefined,
     createdAt: unmarshalDate(data.created_at),
+    description: data.description,
     frontend: data.frontend ? unmarshalFrontend(data.frontend) : undefined,
     id: data.id,
     index: data.index,
@@ -810,6 +811,7 @@ const marshalAclSpec = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   action: marshalAclAction(request.action, defaults),
+  description: request.description,
   index: request.index,
   match: marshalAclMatch(request.match, defaults),
   name: request.name,
@@ -950,6 +952,7 @@ export const marshalCreateAclRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   action: marshalAclAction(request.action, defaults),
+  description: request.description,
   index: request.index,
   match: marshalAclMatch(request.match, defaults),
   name: request.name || randomName('acl'),
@@ -1141,6 +1144,7 @@ export const marshalUpdateAclRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   action: marshalAclAction(request.action, defaults),
+  description: request.description,
   index: request.index,
   match: marshalAclMatch(request.match, defaults),
   name: request.name,
@@ -1322,6 +1326,7 @@ export const marshalZonedApiCreateAclRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   action: marshalAclAction(request.action, defaults),
+  description: request.description,
   index: request.index,
   match: marshalAclMatch(request.match, defaults),
   name: request.name || randomName('acl'),
@@ -1520,6 +1525,7 @@ export const marshalZonedApiUpdateAclRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   action: marshalAclAction(request.action, defaults),
+  description: request.description,
   index: request.index,
   match: marshalAclMatch(request.match, defaults),
   name: request.name,

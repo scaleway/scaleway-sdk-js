@@ -156,6 +156,8 @@ export interface Acl {
   createdAt?: Date
   /** Date at which the ACL was last updated */
   updatedAt?: Date
+  /** Description of your ACL ressource */
+  description: string
 }
 
 /** Acl action */
@@ -199,6 +201,8 @@ export interface AclSpec {
   match: AclMatch
   /** Order between your Acls (ascending order, 0 is first acl executed) */
   index: number
+  /** Description of your ACL ressource */
+  description: string
 }
 
 /** Backend */
@@ -1372,6 +1376,8 @@ export type CreateAclRequest = {
   match: AclMatch
   /** Order between your Acls (ascending order, 0 is first acl executed) */
   index: number
+  /** Description of your ACL ressource */
+  description: string
 }
 
 export type GetAclRequest = {
@@ -1397,6 +1403,8 @@ export type UpdateAclRequest = {
   match: AclMatch
   /** Order between your Acls (ascending order, 0 is first acl executed) */
   index: number
+  /** Description of your ACL ressource */
+  description?: string
 }
 
 export type DeleteAclRequest = {
@@ -2227,6 +2235,8 @@ export type ZonedApiCreateAclRequest = {
   match: AclMatch
   /** Order between your Acls (ascending order, 0 is first acl executed) */
   index: number
+  /** Description of your ACL ressource */
+  description: string
 }
 
 export type ZonedApiGetAclRequest = {
@@ -2252,6 +2262,8 @@ export type ZonedApiUpdateAclRequest = {
   match: AclMatch
   /** Order between your Acls (ascending order, 0 is first acl executed) */
   index: number
+  /** Description of your ACL ressource */
+  description?: string
 }
 
 export type ZonedApiDeleteAclRequest = {
