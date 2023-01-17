@@ -728,9 +728,18 @@ export interface Route {
 export interface RouteMatch {
   /**
    * Server Name Indication TLS extension (SNI) field from an incoming
-   * connection made via an SSL/TLS transport layer
+   * connection made via an SSL/TLS transport layer.
+   *
+   * One-of ('matchType'): at most one of 'sni', 'hostHeader' could be set.
    */
   sni?: string
+  /**
+   * The Host request header specifies the host of the server to which the
+   * request is being sent.
+   *
+   * One-of ('matchType'): at most one of 'sni', 'hostHeader' could be set.
+   */
+  hostHeader?: string
 }
 
 /** Set acls response */
