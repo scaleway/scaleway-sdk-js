@@ -288,6 +288,7 @@ export class API extends ParentAPI {
   /**
    * Get a hub's metrics
    *
+   * @deprecated
    * @param request - The request {@link GetHubMetricsRequest}
    * @returns A Promise of GetHubMetricsResponse
    */
@@ -565,6 +566,7 @@ export class API extends ParentAPI {
   /**
    * Get a device's metrics
    *
+   * @deprecated
    * @param request - The request {@link GetDeviceMetricsRequest}
    * @returns A Promise of GetDeviceMetricsResponse
    */
