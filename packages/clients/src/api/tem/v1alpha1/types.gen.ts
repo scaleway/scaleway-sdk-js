@@ -39,7 +39,7 @@ export interface CreateEmailRequestAttachment {
    */
   type: string
   /** Content of the attachment, encoded in base64 */
-  content: Array<number>
+  content: string
 }
 
 /** Create email response */
