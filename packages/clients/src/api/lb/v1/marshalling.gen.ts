@@ -463,7 +463,7 @@ const unmarshalRouteMatch = (data: unknown) => {
     )
   }
 
-  return { sni: data.sni } as RouteMatch
+  return { hostHeader: data.host_header, sni: data.sni } as RouteMatch
 }
 
 export const unmarshalAcl = (data: unknown) => {
@@ -903,7 +903,16 @@ const marshalRouteMatch = (
   request: RouteMatch,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  sni: request.sni,
+  ...resolveOneOf([
+    {
+      param: 'sni',
+      value: request.sni,
+    },
+    {
+      param: 'host_header',
+      value: request.hostHeader,
+    },
+  ]),
 })
 
 const marshalSubscriberEmailConfig = (
