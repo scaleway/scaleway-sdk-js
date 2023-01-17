@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.33](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.32...@scaleway/sdk@0.1.0-beta.33) (2023-01-17)
+
+### Features
+
+- **lb:** add description field to acls ([#372](https://github.com/scaleway/scaleway-sdk-js/issues/372)) ([13359b9](https://github.com/scaleway/scaleway-sdk-js/commit/13359b96460f6916c2d4646bd7f81a07b813badb))
+- **secret:** add v1alpha1 ([#374](https://github.com/scaleway/scaleway-sdk-js/issues/374)) ([9b922e5](https://github.com/scaleway/scaleway-sdk-js/commit/9b922e56bda6d3cca6e1236dfd594fb68ac0365e))
+
+### Bug Fixes
+
+- **tem:** adjust type of content field in CreateEmailRequestAttachment ([#373](https://github.com/scaleway/scaleway-sdk-js/issues/373)) ([2920308](https://github.com/scaleway/scaleway-sdk-js/commit/2920308f310a67fdbd389b1fd80ef8fa0583bc37))
+
 ## [0.1.0-beta.32](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.31...@scaleway/sdk@0.1.0-beta.32) (2023-01-12)
 
 ### Features
