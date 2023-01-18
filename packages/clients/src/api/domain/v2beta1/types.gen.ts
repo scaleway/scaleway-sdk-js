@@ -1292,6 +1292,8 @@ export type RegistrarApiSearchAvailableDomainsRequest = {
   domains: Array<string>
   /** Array of tlds to search on */
   tlds?: Array<string>
+  /** Search exact match */
+  strictSearch: boolean
 }
 
 export type RegistrarApiCreateDomainHostRequest = {

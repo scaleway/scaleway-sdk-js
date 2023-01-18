@@ -1397,6 +1397,7 @@ export class RegistrarAPI extends ParentAPI {
         path: `/domain/v2beta1/search-domains`,
         urlParams: urlParams(
           ['domains', request.domains],
+          ['strict_search', request.strictSearch],
           ['tlds', request.tlds],
         ),
       },
