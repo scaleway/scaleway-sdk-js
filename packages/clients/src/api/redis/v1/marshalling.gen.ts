@@ -155,6 +155,7 @@ export const unmarshalCluster = (data: unknown) => {
     tags: data.tags,
     tlsEnabled: data.tls_enabled,
     updatedAt: unmarshalDate(data.updated_at),
+    upgradableVersions: data.upgradable_versions,
     userName: data.user_name,
     version: data.version,
     zone: data.zone,

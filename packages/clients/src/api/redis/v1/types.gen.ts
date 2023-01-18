@@ -120,6 +120,8 @@ export interface Cluster {
   zone: Zone
   /** Name of the user associated to the cluster */
   userName: string
+  /** List of versions the cluster can be migrated to */
+  upgradableVersions: Array<string>
 }
 
 /** Cluster metrics response */
