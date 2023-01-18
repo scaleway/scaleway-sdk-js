@@ -149,6 +149,12 @@ export class API extends ParentAPI {
       unmarshalListLocalImagesResponse,
     )
 
+  /**
+   * List local images from a specific image or version
+   *
+   * @param request - The request {@link ListLocalImagesRequest}
+   * @returns A Promise of ListLocalImagesResponse
+   */
   listLocalImages = (request: Readonly<ListLocalImagesRequest> = {}) =>
     enrichForPagination('localImages', this.pageOfListLocalImages, request)
 
