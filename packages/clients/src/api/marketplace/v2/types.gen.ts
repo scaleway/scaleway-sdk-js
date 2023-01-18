@@ -72,6 +72,8 @@ export interface LocalImage {
   arch: string
   /** Availability Zone where this local image is available */
   zone: Zone
+  /** Image label this image belongs to */
+  label: string
 }
 
 /** Version */
@@ -123,13 +125,25 @@ export type GetVersionRequest = {
 }
 
 export type ListLocalImagesRequest = {
-  /** One-of ('scope'): at most one of 'imageId', 'versionId' could be set. */
+  /**
+   * One-of ('scope'): at most one of 'imageId', 'versionId', 'imageLabel' could
+   * be set.
+   */
   imageId?: string
-  /** One-of ('scope'): at most one of 'imageId', 'versionId' could be set. */
+  /**
+   * One-of ('scope'): at most one of 'imageId', 'versionId', 'imageLabel' could
+   * be set.
+   */
   versionId?: string
   pageSize?: number
   page?: number
   orderBy?: ListLocalImagesRequestOrderBy
+  /**
+   * One-of ('scope'): at most one of 'imageId', 'versionId', 'imageLabel' could
+   * be set.
+   */
+  imageLabel?: string
+  zone?: Zone
 }
 
 export type GetLocalImageRequest = {
