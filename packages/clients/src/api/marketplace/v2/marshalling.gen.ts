@@ -61,6 +61,7 @@ export const unmarshalLocalImage = (data: unknown) => {
     arch: data.arch,
     compatibleCommercialTypes: data.compatible_commercial_types,
     id: data.id,
+    label: data.label,
     zone: data.zone,
   } as LocalImage
 }

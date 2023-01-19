@@ -132,6 +132,7 @@ export class API extends ParentAPI {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
+          ['zone', request.zone ?? this.client.settings.defaultZone],
           ...Object.entries(
             resolveOneOf([
               {
@@ -141,6 +142,10 @@ export class API extends ParentAPI {
               {
                 param: 'version_id',
                 value: request.versionId,
+              },
+              {
+                param: 'image_label',
+                value: request.imageLabel,
               },
             ]),
           ),
