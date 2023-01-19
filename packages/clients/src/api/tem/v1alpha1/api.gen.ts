@@ -3,12 +3,11 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '../../../bridge'
-import type { Region, ServiceInfo, WaitForOptions } from '../../../bridge'
+import type { Region, WaitForOptions } from '../../../bridge'
 import {
   DOMAIN_TRANSIENT_STATUSES,
   EMAIL_TRANSIENT_STATUSES,
@@ -33,7 +32,6 @@ import type {
   Email,
   GetDomainRequest,
   GetEmailRequest,
-  GetServiceInfoRequest,
   GetStatisticsRequest,
   ListDomainsRequest,
   ListDomainsResponse,
@@ -55,18 +53,6 @@ const jsonContentHeaders = {
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par']
-
-  getServiceInfo = (request: Readonly<GetServiceInfoRequest> = {}) =>
-    this.client.fetch<ServiceInfo>(
-      {
-        method: 'GET',
-        path: `/transactional-email/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}`,
-      },
-      unmarshalServiceInfo,
-    )
 
   /**
    * Send an email

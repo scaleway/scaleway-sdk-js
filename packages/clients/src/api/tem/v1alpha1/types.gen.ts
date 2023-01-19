@@ -178,11 +178,6 @@ export interface Statistics {
   canceledCount: number
 }
 
-export type GetServiceInfoRequest = {
-  /** Region to target. If none is passed will use default region from the config */
-  region?: Region
-}
-
 export type CreateEmailRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
