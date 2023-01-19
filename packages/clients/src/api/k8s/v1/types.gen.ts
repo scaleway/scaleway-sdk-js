@@ -726,7 +726,7 @@ export type CreateClusterRequest = {
    * could be set.
    */
   projectId?: string
-  /** The type of the cluster */
+  /** The type of the cluster (possible values are kapsule, multicloud). */
   type: string
   /** The name of the cluster */
   name?: string
