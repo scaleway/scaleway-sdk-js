@@ -106,6 +106,16 @@ export interface UpdateImageResponse {
   image?: Image
 }
 
+export type SetServerUserDataRequest = {
+  /** Zone to target. If none is passed will use default zone from the config */
+  zone?: Zone
+  serverId: string
+  /** The user data key to set */
+  key: string
+  /** The data encoded in base64 */
+  content: string
+}
+
 export type {
   CreateServerRequest,
   UpdateServerRequest,
