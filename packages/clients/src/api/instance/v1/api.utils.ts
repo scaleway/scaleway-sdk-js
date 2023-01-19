@@ -39,6 +39,7 @@ import type {
   CreateServerRequest,
   DetachVolumeRequest,
   DetachVolumeResponse,
+  SetServerUserDataRequest,
   UpdateImageRequest,
   UpdateImageResponse,
   UpdateSecurityGroupRequest,
@@ -510,4 +511,23 @@ export class InstanceV1UtilsAPI extends API {
         ),
       )
       .then(res => ({ image: res.image }))
+
+  /**
+   * Sets the content of a user data on a server for the given key.
+   *
+   * @param request - The request {@link SetServerUserDataRequest}
+   */
+  setServerUserData = (request: Readonly<SetServerUserDataRequest>) =>
+    this.client.fetch<void>({
+      body: request.content,
+      headers: { 'Content-Type': 'text/plain' },
+      method: 'PATCH',
+      path: `/instance/v1/zones/${validatePathParam(
+        'zone',
+        request.zone ?? this.client.settings.defaultZone,
+      )}/servers/${validatePathParam(
+        'serverId',
+        request.serverId,
+      )}/user_data/${validatePathParam('key', request.key)}`,
+    })
 }
