@@ -19,7 +19,6 @@ export type {
   EmailTry,
   GetDomainRequest,
   GetEmailRequest,
-  GetServiceInfoRequest,
   GetStatisticsRequest,
   ListDomainsRequest,
   ListDomainsResponse,
