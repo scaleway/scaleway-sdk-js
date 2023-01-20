@@ -16,7 +16,7 @@ importers:
       '@rollup/plugin-inject': ^5.0.3
       '@rollup/plugin-node-resolve': ^15.0.1
       '@scaleway/eslint-config-react': ^3.13.7
-      '@types/jest': ^29.2.5
+      '@types/jest': ^29.2.6
       babel-plugin-annotate-pure-calls: ^0.4.0
       cross-env: ^7.0.3
       cross-fetch: ^3.1.5
@@ -48,7 +48,7 @@ importers:
       '@rollup/plugin-inject': 5.0.3_rollup@3.10.0
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.10.0
       '@scaleway/eslint-config-react': 3.13.7_7uibuqfxkfaozanbtbziikiqje
-      '@types/jest': 29.2.5
+      '@types/jest': 29.2.6
       babel-plugin-annotate-pure-calls: 0.4.0_@babel+core@7.20.12
       cross-env: 7.0.3
       cross-fetch: 3.1.5
@@ -3195,8 +3195,8 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jest/29.2.5:
-    resolution: {integrity: sha512-H2cSxkKgVmqNHXP7TC2L/WUorrZu8ZigyRywfVzv6EyBlxj39n4C00hjXYQWsbwqgElaj/CiAeSRmk5GoaKTgw==}
+  /@types/jest/29.2.6:
+    resolution: {integrity: sha512-XEUC/Tgw3uMh6Ho8GkUtQ2lPhY5Fmgyp3TdlkTJs1W9VgNxs+Ow/x3Elh8lHQKqCbZL0AubQuqWjHVT033Hhrw==}
     dependencies:
       expect: 29.3.1
       pretty-format: 29.3.1
