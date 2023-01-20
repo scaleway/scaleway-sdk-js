@@ -351,7 +351,7 @@ const unmarshalServerMaintenance = (data: unknown) => {
     )
   }
 
-  return {} as ServerMaintenance
+  return { reason: data.reason } as ServerMaintenance
 }
 
 const unmarshalServerTypeCapabilities = (data: unknown) => {
@@ -1542,7 +1542,9 @@ const marshalServerLocation = (
 const marshalServerMaintenance = (
   request: ServerMaintenance,
   defaults: DefaultValues,
-): Record<string, unknown> => ({})
+): Record<string, unknown> => ({
+  reason: request.reason,
+})
 
 const marshalSetSecurityGroupRulesRequestRule = (
   request: SetSecurityGroupRulesRequestRule,

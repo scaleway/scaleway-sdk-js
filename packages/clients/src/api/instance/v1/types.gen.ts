@@ -579,7 +579,9 @@ export interface ServerLocation {
   zoneId: string
 }
 
-export interface ServerMaintenance {}
+export interface ServerMaintenance {
+  reason: string
+}
 
 export interface ServerSummary {
   id: string
