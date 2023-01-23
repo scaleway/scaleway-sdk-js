@@ -70,10 +70,10 @@ importers:
 
   packages/clients:
     specifiers:
-      '@scaleway/random-name': ^3.0.3
+      '@scaleway/random-name': ^4.0.0
       cross-fetch: ^3.1.5
     dependencies:
-      '@scaleway/random-name': 3.0.3
+      '@scaleway/random-name': 4.0.1
       cross-fetch: 3.1.5
 
   packages/configuration-loader:
@@ -3099,8 +3099,9 @@ packages:
       - typescript
     dev: true
 
-  /@scaleway/random-name/3.0.3:
-    resolution: {integrity: sha512-Td1t/Un1LSJZruA0XlpRpZr5X5M2OqfxEf9wUJnNLHbQsZz8VFP5Ae2pn1XQstVU6NzDtsLJ8kNPSh5m+q+17w==}
+  /@scaleway/random-name/4.0.1:
+    resolution: {integrity: sha512-gj7mCDm3RU4ZUoBTUPkKj7hKUYGVw2aLZ+AGkj6ZzSgRHxM0N57vG1BL5XaVvD30gae1i+trVheEBmzmcNlbGQ==}
+    engines: {node: '>=14.x'}
     dev: false
 
   /@sinclair/typebox/0.24.20:
