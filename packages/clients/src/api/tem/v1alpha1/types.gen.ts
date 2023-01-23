@@ -45,7 +45,7 @@ export interface CreateEmailRequestAttachment {
 /** Create email response */
 export interface CreateEmailResponse {
   /** Single page of emails matching the requested criteria */
-  emails: Array<Email>
+  emails: Email[]
 }
 
 /** Domain */
@@ -111,7 +111,7 @@ export interface Email {
   /** Total number of attempts to send the email */
   tryCount: number
   /** Informations about the latest three attempts to send the email */
-  lastTries: Array<EmailTry>
+  lastTries: EmailTry[]
 }
 
 /** Email. try */
@@ -136,7 +136,7 @@ export interface EmailTry {
 export interface ListDomainsResponse {
   /** Total number of domains matching the request (without pagination) */
   totalCount: number
-  domains: Array<Domain>
+  domains: Domain[]
 }
 
 /** List emails response */
@@ -144,7 +144,7 @@ export interface ListEmailsResponse {
   /** Count of all emails matching the requested criteria */
   totalCount: number
   /** Single page of emails matching the requested criteria */
-  emails: Array<Email>
+  emails: Email[]
 }
 
 /** Statistics */
@@ -184,11 +184,11 @@ export type CreateEmailRequest = {
   /** Sender information (must be from a checked domain declared in the project) */
   from?: CreateEmailRequestAddress
   /** Array of recipient information (limited to 1 recipient) */
-  to?: Array<CreateEmailRequestAddress>
+  to?: CreateEmailRequestAddress[]
   /** Array of recipient information (unimplemented) */
-  cc?: Array<CreateEmailRequestAddress>
+  cc?: CreateEmailRequestAddress[]
   /** Array of recipient information (unimplemented) */
-  bcc?: Array<CreateEmailRequestAddress>
+  bcc?: CreateEmailRequestAddress[]
   /** Message subject */
   subject: string
   /** Text content */
@@ -198,7 +198,7 @@ export type CreateEmailRequest = {
   /** ID of the project in which to create the email */
   projectId?: string
   /** Array of attachments */
-  attachments?: Array<CreateEmailRequestAttachment>
+  attachments?: CreateEmailRequestAttachment[]
   /** Maximum date to deliver mail */
   sendBefore?: Date
 }
@@ -230,7 +230,7 @@ export type ListEmailsRequest = {
   /** Optional, list emails sent with this `mail_to` recipient's address */
   mailTo?: string
   /** Optional, list emails having any of this status */
-  statuses?: Array<EmailStatus>
+  statuses?: EmailStatus[]
 }
 
 export type GetStatisticsRequest = {
@@ -280,7 +280,7 @@ export type ListDomainsRequest = {
   /** Page size */
   pageSize?: number
   projectId?: string
-  status?: Array<DomainStatus>
+  status?: DomainStatus[]
   organizationId?: string
   name?: string
 }

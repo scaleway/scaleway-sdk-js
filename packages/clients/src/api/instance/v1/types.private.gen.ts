@@ -94,7 +94,7 @@ export type CreateServerRequest = {
    */
   project?: string
   /** The server tags */
-  tags?: Array<string>
+  tags?: string[]
   /** The security group ID */
   securityGroup?: string
   /** Placement group ID if server must be part of a placement group */
@@ -113,9 +113,9 @@ export type SetServerRequest = {
   /** The server project ID */
   project?: string
   /** Provide as list of allowed actions on the server */
-  allowedActions?: Array<ServerAction>
+  allowedActions?: ServerAction[]
   /** The server associated tags */
-  tags?: Array<string>
+  tags?: string[]
   /** The server commercial type (eg. GP1-M) */
   commercialType: string
   /** The server creation date */
@@ -151,7 +151,7 @@ export type SetServerRequest = {
   /** The server security group */
   securityGroup?: SecurityGroupSummary
   /** The server planned maintenances */
-  maintenances?: Array<ServerMaintenance>
+  maintenances?: ServerMaintenance[]
   /** The server state_detail */
   stateDetail: string
   /** The server arch */
@@ -159,7 +159,7 @@ export type SetServerRequest = {
   /** The server placement group */
   placementGroup?: PlacementGroup
   /** The server private NICs */
-  privateNics?: Array<PrivateNIC>
+  privateNics?: PrivateNIC[]
 }
 
 export type UpdateServerRequest = {
@@ -171,7 +171,7 @@ export type UpdateServerRequest = {
   name?: string
   bootType?: BootType
   /** Tags of the server */
-  tags?: Array<string>
+  tags?: string[]
   volumes?: Record<string, VolumeServerTemplate>
   bootscript?: string
   dynamicIpRequired?: boolean
@@ -181,7 +181,7 @@ export type UpdateServerRequest = {
   /** Placement group ID if server must be part of a placement group */
   placementGroup?: string | null
   /** The server private NICs */
-  privateNics?: Array<PrivateNIC>
+  privateNics?: PrivateNIC[]
 }
 
 export type SetImageRequest = {
@@ -200,7 +200,7 @@ export type SetImageRequest = {
   rootVolume?: VolumeSummary
   state?: ImageState
   project?: string
-  tags?: Array<string>
+  tags?: string[]
 }
 
 export type SetSnapshotRequest = {
@@ -217,7 +217,7 @@ export type SetSnapshotRequest = {
   creationDate?: Date
   modificationDate?: Date
   project?: string
-  tags?: Array<string>
+  tags?: string[]
 }
 
 export type SetSecurityGroupRequest = {
@@ -228,7 +228,7 @@ export type SetSecurityGroupRequest = {
   /** The name of the security group */
   name: string
   /** The tags of the security group */
-  tags?: Array<string>
+  tags?: string[]
   /** The creation date of the security group (will be ignored) */
   creationDate?: Date
   /** The modification date of the security group (will be ignored) */
@@ -250,7 +250,7 @@ export type SetSecurityGroupRequest = {
   /** True use this security group for future instances created in this project */
   projectDefault: boolean
   /** The servers attached to this security group */
-  servers?: Array<ServerSummary>
+  servers?: ServerSummary[]
   /** True to set the security group as stateful */
   stateful: boolean
 }

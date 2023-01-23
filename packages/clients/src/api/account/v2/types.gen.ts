@@ -12,7 +12,7 @@ export interface ListProjectsResponse {
   /** The total number of projects */
   totalCount: number
   /** The paginated returned projects */
-  projects: Array<Project>
+  projects: Project[]
 }
 
 /** Project */
@@ -52,7 +52,7 @@ export type ListProjectsRequest = {
   /** The sort order of the returned projects */
   orderBy?: ListProjectsRequestOrderBy
   /** Filter out by a list of project ID */
-  projectIds?: Array<string>
+  projectIds?: string[]
 }
 
 export type GetProjectRequest = {

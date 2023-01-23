@@ -33,7 +33,7 @@ export interface ListSecretVersionsResponse {
   /** Count of all SecretVersions */
   totalCount: number
   /** Single page of SecretVersions */
-  versions: Array<SecretVersion>
+  versions: SecretVersion[]
 }
 
 /** List secrets response */
@@ -41,7 +41,7 @@ export interface ListSecretsResponse {
   /** Count of all Secrets matching the requested criteria */
   totalCount: number
   /** Single page of Secrets matching the requested criteria */
-  secrets: Array<Secret>
+  secrets: Secret[]
 }
 
 /** Secret */
@@ -59,7 +59,7 @@ export interface Secret {
   /** The time at which the Secret was updated */
   updatedAt?: Date
   /** List of tags associated to this Secret */
-  tags: Array<string>
+  tags: string[]
   /** Region of the Secret */
   region: Region
   /** The number of versions for this Secret */
@@ -97,7 +97,7 @@ export type CreateSecretRequest = {
   /** Name of the Secret */
   name: string
   /** List of tags associated to this Secret */
-  tags?: Array<string>
+  tags?: string[]
   /** Description of the Secret */
   description?: string
 }
@@ -117,7 +117,7 @@ export type UpdateSecretRequest = {
   /** New name of the Secret (optional) */
   name?: string
   /** New list of tags associated to this Secret (optional) */
-  tags?: Array<string>
+  tags?: string[]
   /** Description of the Secret */
   description?: string
 }
@@ -130,7 +130,7 @@ export type ListSecretsRequest = {
   /** ID of a project to filter on (optional) */
   projectId?: string
   /** List of tags to filter on (optional) */
-  tags?: Array<string>
+  tags?: string[]
   orderBy?: ListSecretsRequestOrderBy
   page?: number
   pageSize?: number

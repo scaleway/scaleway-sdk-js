@@ -131,9 +131,9 @@ export interface DHCP {
    * Override the DNS server list pushed to DHCP clients, instead of the gateway
    * itself
    */
-  dnsServersOverride: Array<string>
+  dnsServersOverride: string[]
   /** Add search paths to the pushed DNS configuration */
-  dnsSearch: Array<string>
+  dnsSearch: string[]
   /**
    * TLD given to hostnames in the Private Network. If an instance with hostname
    * `foo` gets a lease, and this is set to `bar`, `foo.bar` will resolve.
@@ -184,13 +184,13 @@ export interface Gateway {
   /** Name of the gateway */
   name: string
   /** Tags of the gateway */
-  tags: Array<string>
+  tags: string[]
   /** Public IP of the gateway */
   ip?: IP
   /** GatewayNetworks attached to the gateway */
-  gatewayNetworks: Array<GatewayNetwork>
+  gatewayNetworks: GatewayNetwork[]
   /** Override the gateway's default recursive DNS servers */
-  upstreamDnsServers: Array<string>
+  upstreamDnsServers: string[]
   /** Version of the running gateway software */
   version?: string
   /** Newly available gateway software version that can be updated to */
@@ -263,7 +263,7 @@ export interface IP {
   /** Configuration last modification date */
   updatedAt?: Date
   /** Tags associated with the IP */
-  tags: Array<string>
+  tags: string[]
   /** The IP itself */
   address: string
   /** Reverse domain name for the IP address */
@@ -277,7 +277,7 @@ export interface IP {
 /** List dhcp entries response */
 export interface ListDHCPEntriesResponse {
   /** DHCP entries in this page */
-  dhcpEntries: Array<DHCPEntry>
+  dhcpEntries: DHCPEntry[]
   /** Total DHCP entries matching the filter */
   totalCount: number
 }
@@ -285,7 +285,7 @@ export interface ListDHCPEntriesResponse {
 /** List dhc ps response */
 export interface ListDHCPsResponse {
   /** First page of DHCP configs */
-  dhcps: Array<DHCP>
+  dhcps: DHCP[]
   /** Total DHCP configs matching the filter */
   totalCount: number
 }
@@ -293,7 +293,7 @@ export interface ListDHCPsResponse {
 /** List gateway networks response */
 export interface ListGatewayNetworksResponse {
   /** GatewayNetworks in this page */
-  gatewayNetworks: Array<GatewayNetwork>
+  gatewayNetworks: GatewayNetwork[]
   /** Total GatewayNetworks count matching the filter */
   totalCount: number
 }
@@ -301,13 +301,13 @@ export interface ListGatewayNetworksResponse {
 /** List gateway types response */
 export interface ListGatewayTypesResponse {
   /** Available types of gateway */
-  types: Array<GatewayType>
+  types: GatewayType[]
 }
 
 /** List gateways response */
 export interface ListGatewaysResponse {
   /** Gateways in this page */
-  gateways: Array<Gateway>
+  gateways: Gateway[]
   /** Total count of gateways matching the filter */
   totalCount: number
 }
@@ -315,7 +315,7 @@ export interface ListGatewaysResponse {
 /** List i ps response */
 export interface ListIPsResponse {
   /** IPs in this page */
-  ips: Array<IP>
+  ips: IP[]
   /** Total IP count matching the filter */
   totalCount: number
 }
@@ -323,7 +323,7 @@ export interface ListIPsResponse {
 /** List pat rules response */
 export interface ListPATRulesResponse {
   /** This page of PAT rules matching the filter */
-  patRules: Array<PATRule>
+  patRules: PATRule[]
   /** Total PAT rules matching the filter */
   totalCount: number
 }
@@ -364,7 +364,7 @@ export interface SetDHCPEntriesRequestEntry {
 /** Set dhcp entries response */
 export interface SetDHCPEntriesResponse {
   /** List of DHCP entries */
-  dhcpEntries: Array<DHCPEntry>
+  dhcpEntries: DHCPEntry[]
 }
 
 /** Set pat rules request. rule */
@@ -385,7 +385,7 @@ export interface SetPATRulesRequestRule {
 /** Set pat rules response */
 export interface SetPATRulesResponse {
   /** List of PAT rules */
-  patRules: Array<PATRule>
+  patRules: PATRule[]
 }
 
 export type ListGatewaysRequest = {
@@ -404,7 +404,7 @@ export type ListGatewaysRequest = {
   /** Filter gateways including this name */
   name?: string
   /** Filter gateways with these tags */
-  tags?: Array<string>
+  tags?: string[]
   /** Filter gateways of this type */
   type?: string
   /** Filter gateways in this status (unknown for any) */
@@ -428,14 +428,14 @@ export type CreateGatewayRequest = {
   /** Name of the gateway */
   name?: string
   /** Tags for the gateway */
-  tags?: Array<string>
+  tags?: string[]
   /** Gateway type */
   type: string
   /**
    * Override the gateway's default recursive DNS servers, if DNS features are
    * enabled
    */
-  upstreamDnsServers?: Array<string>
+  upstreamDnsServers?: string[]
   /** Attach an existing IP to the gateway */
   ipId?: string
   /** Allow SMTP traffic to pass through the gateway */
@@ -454,12 +454,12 @@ export type UpdateGatewayRequest = {
   /** Name fo the gateway */
   name?: string
   /** Tags for the gateway */
-  tags?: Array<string>
+  tags?: string[]
   /**
    * Override the gateway's default recursive DNS servers, if DNS features are
    * enabled
    */
-  upstreamDnsServers?: Array<string>
+  upstreamDnsServers?: string[]
   /** Enable SSH bastion on the gateway */
   enableBastion?: boolean
   /** Port of the SSH bastion */
@@ -662,9 +662,9 @@ export type CreateDHCPRequest = {
    * Override the DNS server list pushed to DHCP clients, instead of the gateway
    * itself
    */
-  dnsServersOverride?: Array<string>
+  dnsServersOverride?: string[]
   /** Additional DNS search paths */
-  dnsSearch?: Array<string>
+  dnsSearch?: string[]
   /**
    * TLD given to hostnames in the Private Network. Allowed characters are
    * `a-z0-9-.`. Defaults to the slugified Private Network name if created along
@@ -720,9 +720,9 @@ export type UpdateDHCPRequest = {
    * Override the DNS server list pushed to DHCP clients, instead of the gateway
    * itself
    */
-  dnsServersOverride?: Array<string>
+  dnsServersOverride?: string[]
   /** Additional DNS search paths */
-  dnsSearch?: Array<string>
+  dnsSearch?: string[]
   /**
    * TLD given to hostnames in the Private Network. Allowed characters are
    * `a-z0-9-.`.
@@ -791,7 +791,7 @@ export type SetDHCPEntriesRequest = {
   /** Gateway Network on which to set DHCP reservation list */
   gatewayNetworkId: string
   /** New list of DHCP reservations */
-  dhcpEntries?: Array<SetDHCPEntriesRequestEntry>
+  dhcpEntries?: SetDHCPEntriesRequestEntry[]
 }
 
 export type DeleteDHCPEntryRequest = {
@@ -861,7 +861,7 @@ export type SetPATRulesRequest = {
   /** Gateway on which to set the PAT rules */
   gatewayId: string
   /** New list of PAT rules */
-  patRules: Array<SetPATRulesRequestRule>
+  patRules: SetPATRulesRequestRule[]
 }
 
 export type DeletePATRuleRequest = {
@@ -890,7 +890,7 @@ export type ListIPsRequest = {
   /** Include only IPs in this project */
   projectId?: string
   /** Filter IPs with these tags */
-  tags?: Array<string>
+  tags?: string[]
   /** Filter by reverse containing this string */
   reverse?: string
   /** Filter whether the IP is attached to a gateway or not */
@@ -910,7 +910,7 @@ export type CreateIPRequest = {
   /** Project to create the IP into */
   projectId?: string
   /** Tags to give to the IP */
-  tags?: Array<string>
+  tags?: string[]
 }
 
 export type UpdateIPRequest = {
@@ -919,7 +919,7 @@ export type UpdateIPRequest = {
   /** ID of the IP to update */
   ipId: string
   /** Tags to give to the IP */
-  tags?: Array<string>
+  tags?: string[]
   /** Reverse to set on the IP. Empty string to unset */
   reverse?: string
   /** Gateway to attach the IP to. Empty string to detach */

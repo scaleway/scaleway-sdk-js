@@ -9,7 +9,7 @@ export type ListPrivateNetworksRequestOrderBy =
   | 'name_desc'
 
 export interface ListPrivateNetworksResponse {
-  privateNetworks: Array<PrivateNetwork>
+  privateNetworks: PrivateNetwork[]
   totalCount: number
 }
 
@@ -26,13 +26,13 @@ export interface PrivateNetwork {
   /** The zone in which the private network is available */
   zone: Zone
   /** The private network tags */
-  tags: Array<string>
+  tags: string[]
   /** The private network creation date */
   createdAt?: Date
   /** The last private network modification date */
   updatedAt?: Date
   /** Private network subnets CIDR */
-  subnets: Array<string>
+  subnets: string[]
 }
 
 export type ListPrivateNetworksRequest = {
@@ -47,13 +47,13 @@ export type ListPrivateNetworksRequest = {
   /** Filter private networks with names containing this string */
   name?: string
   /** Filter private networks with one or more matching tags */
-  tags?: Array<string>
+  tags?: string[]
   /** The organization ID on which to filter the returned private networks */
   organizationId?: string
   /** The project ID on which to filter the returned private networks */
   projectId?: string
   /** The PrivateNetwork IDs on which to filter the returned private networks */
-  privateNetworkIds?: Array<string>
+  privateNetworkIds?: string[]
 }
 
 export type CreatePrivateNetworkRequest = {
@@ -64,9 +64,9 @@ export type CreatePrivateNetworkRequest = {
   /** The project ID of the private network */
   projectId?: string
   /** The private networks tags */
-  tags?: Array<string>
+  tags?: string[]
   /** Private network subnets CIDR */
-  subnets?: Array<string>
+  subnets?: string[]
 }
 
 export type GetPrivateNetworkRequest = {
@@ -84,9 +84,9 @@ export type UpdatePrivateNetworkRequest = {
   /** The name of the private network */
   name?: string
   /** The private networks tags */
-  tags?: Array<string>
+  tags?: string[]
   /** Private network subnets CIDR */
-  subnets?: Array<string>
+  subnets?: string[]
 }
 
 export type DeletePrivateNetworkRequest = {

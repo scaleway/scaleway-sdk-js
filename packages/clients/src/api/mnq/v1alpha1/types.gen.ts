@@ -95,7 +95,7 @@ export interface ListCredentialsResponse {
   /** Total number of existing Credentials */
   totalCount: number
   /** A page of Credentials */
-  credentials: Array<CredentialSummary>
+  credentials: CredentialSummary[]
 }
 
 /** List namespaces response */
@@ -103,7 +103,7 @@ export interface ListNamespacesResponse {
   /** Total number of existing Namespaces */
   totalCount: number
   /** A page of Namespaces */
-  namespaces: Array<Namespace>
+  namespaces: Namespace[]
 }
 
 /** Namespace */

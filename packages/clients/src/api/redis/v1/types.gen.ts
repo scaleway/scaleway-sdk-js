@@ -53,7 +53,7 @@ export interface ACLRuleSpec {
 /** Add acl rules response */
 export interface AddAclRulesResponse {
   /** ACL Rules enabled on the cluster */
-  aclRules: Array<ACLRule>
+  aclRules: ACLRule[]
   /** Total count of acl rules of the cluster */
   totalCount: number
 }
@@ -61,7 +61,7 @@ export interface AddAclRulesResponse {
 /** Add endpoints response */
 export interface AddEndpointsResponse {
   /** Endpoints defined on the cluster */
-  endpoints: Array<Endpoint>
+  endpoints: Endpoint[]
   /** Total count of endpoints of the cluster */
   totalCount: number
 }
@@ -99,9 +99,9 @@ export interface Cluster {
   /** Redis™ engine version of the cluster */
   version: string
   /** List of cluster endpoints */
-  endpoints: Array<Endpoint>
+  endpoints: Endpoint[]
   /** List of tags applied to the cluster */
-  tags: Array<string>
+  tags: string[]
   /** Node type of the cluster */
   nodeType: string
   /** Creation date (Format ISO 8601) */
@@ -111,9 +111,9 @@ export interface Cluster {
   /** Whether or not TLS is enabled */
   tlsEnabled: boolean
   /** List of cluster settings */
-  clusterSettings: Array<ClusterSetting>
+  clusterSettings: ClusterSetting[]
   /** List of acl rules */
-  aclRules: Array<ACLRule>
+  aclRules: ACLRule[]
   /** Number of nodes of the cluster */
   clusterSize: number
   /** Zone of the cluster */
@@ -121,13 +121,13 @@ export interface Cluster {
   /** Name of the user associated to the cluster */
   userName: string
   /** List of versions the cluster can be migrated to */
-  upgradableVersions: Array<string>
+  upgradableVersions: string[]
 }
 
 /** Cluster metrics response */
 export interface ClusterMetricsResponse {
   /** Time series of metrics of a given cluster */
-  timeseries: Array<TimeSeries>
+  timeseries: TimeSeries[]
 }
 
 /** Cluster setting */
@@ -141,7 +141,7 @@ export interface ClusterSetting {
 /** Cluster settings response */
 export interface ClusterSettingsResponse {
   /** Settings configured for a given cluster */
-  settings: Array<ClusterSetting>
+  settings: ClusterSetting[]
 }
 
 /** Cluster version */
@@ -151,7 +151,7 @@ export interface ClusterVersion {
   /** End of life date */
   endOfLifeAt?: Date
   /** Cluster settings available to be set */
-  availableSettings: Array<AvailableClusterSetting>
+  availableSettings: AvailableClusterSetting[]
   /** Redis™ logo url */
   logoUrl: string
   /** Zone of the Managed Database for Redis™ */
@@ -177,7 +177,7 @@ export interface Endpoint {
    */
   publicNetwork?: PublicNetwork
   /** Lis of IPv4 address of the endpoint */
-  ips: Array<string>
+  ips: string[]
   /** UUID of the endpoint */
   id: string
 }
@@ -208,7 +208,7 @@ export interface EndpointSpecPrivateNetworkSpec {
    * Endpoint IPv4 adress with a CIDR notation. You must provide at least one
    * IPv4 per node. Check documentation about IP and subnet limitation.
    */
-  serviceIps: Array<string>
+  serviceIps: string[]
 }
 
 /** Endpoint spec. public network spec */
@@ -217,7 +217,7 @@ export interface EndpointSpecPublicNetworkSpec {}
 /** List cluster versions response */
 export interface ListClusterVersionsResponse {
   /** List of the available Redis™ engine versions */
-  versions: Array<ClusterVersion>
+  versions: ClusterVersion[]
   /** Total count of available Redis™ engine versions */
   totalCount: number
 }
@@ -225,7 +225,7 @@ export interface ListClusterVersionsResponse {
 /** List clusters response */
 export interface ListClustersResponse {
   /** List all clusters */
-  clusters: Array<Cluster>
+  clusters: Cluster[]
   /** Total count of clusters */
   totalCount: number
 }
@@ -233,7 +233,7 @@ export interface ListClustersResponse {
 /** List node types response */
 export interface ListNodeTypesResponse {
   /** Types of the node */
-  nodeTypes: Array<NodeType>
+  nodeTypes: NodeType[]
   /** Total count of node-types available */
   totalCount: number
 }
@@ -263,7 +263,7 @@ export interface PrivateNetwork {
   /** UUID of the private network */
   id: string
   /** List of IPv4 CIDR notation addresses of the endpoint */
-  serviceIps: Array<string>
+  serviceIps: string[]
   /** Private network zone */
   zone: Zone
 }
@@ -273,13 +273,13 @@ export interface PublicNetwork {}
 /** Set acl rules response */
 export interface SetAclRulesResponse {
   /** ACL Rules enabled on the cluster */
-  aclRules: Array<ACLRule>
+  aclRules: ACLRule[]
 }
 
 /** Set endpoints response */
 export interface SetEndpointsResponse {
   /** Endpoints defined on the cluster */
-  endpoints: Array<Endpoint>
+  endpoints: Endpoint[]
 }
 
 export type CreateClusterRequest = {
@@ -292,7 +292,7 @@ export type CreateClusterRequest = {
   /** Redis™ engine version of the cluster */
   version: string
   /** Tags to apply to the cluster */
-  tags?: Array<string>
+  tags?: string[]
   /** Type of node to use for the cluster */
   nodeType: string
   /** Name of the user created when the cluster is created */
@@ -302,17 +302,17 @@ export type CreateClusterRequest = {
   /** Number of nodes for the cluster */
   clusterSize?: number
   /** List of ACLRuleSpec used to secure your publicly exposed cluster */
-  aclRules?: Array<ACLRuleSpec>
+  aclRules?: ACLRuleSpec[]
   /**
    * Zero or multiple EndpointSpec used to expose your cluster publicly and
    * inside private networks. If no EndpoindSpec is given the cluster will be
    * publicly exposed by default.
    */
-  endpoints?: Array<EndpointSpec>
+  endpoints?: EndpointSpec[]
   /** Whether or not TLS is enabled */
   tlsEnabled: boolean
   /** List of cluster settings to be set at cluster initialisation */
-  clusterSettings?: Array<ClusterSetting>
+  clusterSettings?: ClusterSetting[]
 }
 
 export type UpdateClusterRequest = {
@@ -323,7 +323,7 @@ export type UpdateClusterRequest = {
   /** Name of the cluster */
   name?: string
   /** Tags of a given cluster */
-  tags?: Array<string>
+  tags?: string[]
   /** Name of the cluster user */
   userName?: string
   /** Password of the cluster user */
@@ -341,7 +341,7 @@ export type ListClustersRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
   /** Tags of the clusters to filter upon */
-  tags?: Array<string>
+  tags?: string[]
   /** Name of the clusters to filter upon */
   name?: string
   /** Criteria to use when ordering cluster listing */
@@ -448,7 +448,7 @@ export type AddClusterSettingsRequest = {
   /** UUID of the cluster you want to add settings to */
   clusterId: string
   /** Settings to add on the cluster */
-  settings: Array<ClusterSetting>
+  settings: ClusterSetting[]
 }
 
 export type DeleteClusterSettingRequest = {
@@ -466,7 +466,7 @@ export type SetClusterSettingsRequest = {
   /** UUID of the cluster where the settings has to be set */
   clusterId: string
   /** Settings to define for the cluster */
-  settings: Array<ClusterSetting>
+  settings: ClusterSetting[]
 }
 
 export type SetAclRulesRequest = {
@@ -475,7 +475,7 @@ export type SetAclRulesRequest = {
   /** UUID of the cluster where the ACL rules has to be set */
   clusterId: string
   /** ACLs rules to define for the cluster */
-  aclRules: Array<ACLRuleSpec>
+  aclRules: ACLRuleSpec[]
 }
 
 export type AddAclRulesRequest = {
@@ -484,7 +484,7 @@ export type AddAclRulesRequest = {
   /** UUID of the cluster you want to add acl rules to */
   clusterId: string
   /** ACLs rules to add to the cluster */
-  aclRules: Array<ACLRuleSpec>
+  aclRules: ACLRuleSpec[]
 }
 
 export type DeleteAclRuleRequest = {
@@ -507,7 +507,7 @@ export type SetEndpointsRequest = {
   /** UUID of the cluster where the endpoints has to be set */
   clusterId: string
   /** Endpoints to define for the cluster */
-  endpoints: Array<EndpointSpec>
+  endpoints: EndpointSpec[]
 }
 
 export type AddEndpointsRequest = {
@@ -516,7 +516,7 @@ export type AddEndpointsRequest = {
   /** UUID of the cluster you want to add endpoints to */
   clusterId: string
   /** Endpoints to add to the cluster */
-  endpoints: Array<EndpointSpec>
+  endpoints: EndpointSpec[]
 }
 
 export type DeleteEndpointRequest = {

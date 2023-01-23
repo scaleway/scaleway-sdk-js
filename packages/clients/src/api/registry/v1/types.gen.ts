@@ -68,13 +68,13 @@ export interface Image {
   /** Last modification date, from the user or the service */
   updatedAt?: Date
   /** List of docker tags of the image */
-  tags: Array<string>
+  tags: string[]
 }
 
 /** List images response */
 export interface ListImagesResponse {
   /** Paginated list of images matching filters */
-  images: Array<Image>
+  images: Image[]
   /** Total number of images matching filters */
   totalCount: number
 }
@@ -82,7 +82,7 @@ export interface ListImagesResponse {
 /** List namespaces response */
 export interface ListNamespacesResponse {
   /** Paginated list of namespaces matching filters */
-  namespaces: Array<Namespace>
+  namespaces: Namespace[]
   /** Total number of namespaces matching filters */
   totalCount: number
 }
@@ -90,7 +90,7 @@ export interface ListNamespacesResponse {
 /** List tags response */
 export interface ListTagsResponse {
   /** Paginated list of tags matching filters */
-  tags: Array<Tag>
+  tags: Tag[]
   /** Total number of tags matching filters */
   totalCount: number
 }

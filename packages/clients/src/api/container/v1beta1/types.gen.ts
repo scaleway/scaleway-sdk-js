@@ -102,7 +102,7 @@ export interface Container {
   domainName: string
   protocol: ContainerProtocol
   port: number
-  secretEnvironmentVariables: Array<SecretHashedValue>
+  secretEnvironmentVariables: SecretHashedValue[]
   /**
    * Possible values:
    *
@@ -136,36 +136,36 @@ export interface Domain {
 
 /** List containers response */
 export interface ListContainersResponse {
-  containers: Array<Container>
+  containers: Container[]
   totalCount: number
 }
 
 /** List crons response */
 export interface ListCronsResponse {
-  crons: Array<Cron>
+  crons: Cron[]
   totalCount: number
 }
 
 /** List domains response */
 export interface ListDomainsResponse {
-  domains: Array<Domain>
+  domains: Domain[]
   totalCount: number
 }
 
 /** List logs response */
 export interface ListLogsResponse {
-  logs: Array<Log>
+  logs: Log[]
   totalCount: number
 }
 
 /** List namespaces response */
 export interface ListNamespacesResponse {
-  namespaces: Array<Namespace>
+  namespaces: Namespace[]
   totalCount: number
 }
 
 export interface ListTokensResponse {
-  tokens: Array<Token>
+  tokens: Token[]
   totalCount: number
 }
 
@@ -194,7 +194,7 @@ export interface Namespace {
   errorMessage?: string
   registryEndpoint: string
   description?: string
-  secretEnvironmentVariables: Array<SecretHashedValue>
+  secretEnvironmentVariables: SecretHashedValue[]
   region: Region
 }
 
@@ -247,7 +247,7 @@ export type CreateNamespaceRequest = {
   environmentVariables?: Record<string, string>
   projectId?: string
   description?: string
-  secretEnvironmentVariables?: Array<Secret>
+  secretEnvironmentVariables?: Secret[]
 }
 
 export type UpdateNamespaceRequest = {
@@ -256,7 +256,7 @@ export type UpdateNamespaceRequest = {
   namespaceId: string
   environmentVariables?: Record<string, string>
   description?: string
-  secretEnvironmentVariables?: Array<Secret>
+  secretEnvironmentVariables?: Secret[]
 }
 
 export type DeleteNamespaceRequest = {
@@ -299,7 +299,7 @@ export type CreateContainerRequest = {
   maxConcurrency?: number
   protocol?: ContainerProtocol
   port?: number
-  secretEnvironmentVariables?: Array<Secret>
+  secretEnvironmentVariables?: Secret[]
   /**
    * Possible values:
    *
@@ -326,7 +326,7 @@ export type UpdateContainerRequest = {
   maxConcurrency?: number
   protocol?: ContainerProtocol
   port?: number
-  secretEnvironmentVariables?: Array<Secret>
+  secretEnvironmentVariables?: Secret[]
   /**
    * Possible values:
    *

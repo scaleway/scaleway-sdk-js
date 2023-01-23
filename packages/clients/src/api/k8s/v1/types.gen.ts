@@ -120,7 +120,7 @@ export interface Cluster {
   /** The ID of the project owning the cluster */
   projectId: string
   /** The tags associated with the cluster */
-  tags: Array<string>
+  tags: string[]
   /** The Container Network Interface (CNI) plugin running in the cluster */
   cni: CNI
   /** The description of the cluster */
@@ -144,9 +144,9 @@ export interface Cluster {
   /** True if a new Kubernetes version is available */
   upgradeAvailable: boolean
   /** List of enabled feature gates */
-  featureGates: Array<string>
+  featureGates: string[]
   /** List of enabled admission plugins */
-  admissionPlugins: Array<string>
+  admissionPlugins: string[]
   /**
    * This feature is in ALPHA state, it may be deleted or modified. This
    * configuration is the [OpenID Connect
@@ -158,7 +158,7 @@ export interface Cluster {
    * Additional Subject Alternative Names for the Kubernetes API server
    * certificate
    */
-  apiserverCertSans: Array<string>
+  apiserverCertSans: string[]
 }
 
 /** Cluster. auto upgrade */
@@ -236,7 +236,7 @@ export interface ClusterOpenIDConnectConfig {
    */
   usernamePrefix: string
   /** JWT claim to use as the user's group */
-  groupsClaim: Array<string>
+  groupsClaim: string[]
   /**
    * Prefix prepended to group claims to prevent clashes with existing names
    * (such as `system:` groups). For example, the value `oidc:` will create
@@ -248,7 +248,7 @@ export interface ClusterOpenIDConnectConfig {
    * If set, the claims are verified to be present in the ID Token with a
    * matching value.
    */
-  requiredClaim: Array<string>
+  requiredClaim: string[]
 }
 
 /** Create cluster request. auto upgrade */
@@ -326,7 +326,7 @@ export interface CreateClusterRequestOpenIDConnectConfig {
    */
   usernamePrefix?: string
   /** JWT claim to use as the user's group */
-  groupsClaim?: Array<string>
+  groupsClaim?: string[]
   /**
    * Prefix prepended to group claims to prevent clashes with existing names
    * (such as `system:` groups). For example, the value `oidc:` will create
@@ -338,7 +338,7 @@ export interface CreateClusterRequestOpenIDConnectConfig {
    * If set, the claims are verified to be present in the ID Token with a
    * matching value.
    */
-  requiredClaim?: Array<string>
+  requiredClaim?: string[]
 }
 
 /** Create cluster request. pool config */
@@ -376,7 +376,7 @@ export interface CreateClusterRequestPoolConfig {
   /** The enablement of the autohealing feature for the pool */
   autohealing: boolean
   /** The tags associated with the pool */
-  tags: Array<string>
+  tags: string[]
   /**
    * The Kubelet arguments to be used by this pool. Note that this feature is to
    * be considered as experimental
@@ -416,7 +416,7 @@ export interface CreatePoolRequestUpgradePolicy {
 /** List cluster available versions response */
 export interface ListClusterAvailableVersionsResponse {
   /** The available Kubernetes version for the cluster */
-  versions: Array<Version>
+  versions: Version[]
 }
 
 /** List clusters response */
@@ -424,7 +424,7 @@ export interface ListClustersResponse {
   /** The total number of clusters */
   totalCount: number
   /** The paginated returned clusters */
-  clusters: Array<Cluster>
+  clusters: Cluster[]
 }
 
 /** List nodes response */
@@ -432,7 +432,7 @@ export interface ListNodesResponse {
   /** The total number of nodes */
   totalCount: number
   /** The paginated returned nodes */
-  nodes: Array<Node>
+  nodes: Node[]
 }
 
 /** List pools response */
@@ -440,13 +440,13 @@ export interface ListPoolsResponse {
   /** The total number of pools that exists for the cluster */
   totalCount: number
   /** The paginated returned pools */
-  pools: Array<Pool>
+  pools: Pool[]
 }
 
 /** List versions response */
 export interface ListVersionsResponse {
   /** The available Kubernetes versions */
-  versions: Array<Version>
+  versions: Version[]
 }
 
 /** Maintenance window */
@@ -538,7 +538,7 @@ export interface Pool {
   /** The enablement of the autohealing feature for the pool */
   autohealing: boolean
   /** The tags associated with the pool */
-  tags: Array<string>
+  tags: string[]
   /** The placement group ID in which all the nodes of the pool will be created */
   placementGroupId?: string
   /**
@@ -646,7 +646,7 @@ export interface UpdateClusterRequestOpenIDConnectConfig {
    */
   usernamePrefix?: string
   /** JWT claim to use as the user's group */
-  groupsClaim?: Array<string>
+  groupsClaim?: string[]
   /**
    * Prefix prepended to group claims to prevent clashes with existing names
    * (such as `system:` groups). For example, the value `oidc:` will create
@@ -658,7 +658,7 @@ export interface UpdateClusterRequestOpenIDConnectConfig {
    * If set, the claims are verified to be present in the ID Token with a
    * matching value.
    */
-  requiredClaim?: Array<string>
+  requiredClaim?: string[]
 }
 
 export interface UpdatePoolRequestUpgradePolicy {
@@ -675,15 +675,15 @@ export interface Version {
   /** The region in which this version is available */
   region: Region
   /** The supported Container Network Interface (CNI) plugins for this version */
-  availableCnis: Array<CNI>
+  availableCnis: CNI[]
   /** @deprecated The supported Ingress Controllers for this version */
-  availableIngresses?: Array<Ingress>
+  availableIngresses?: Ingress[]
   /** The supported container runtimes for this version */
-  availableContainerRuntimes: Array<Runtime>
+  availableContainerRuntimes: Runtime[]
   /** The supported feature gates for this version */
-  availableFeatureGates: Array<string>
+  availableFeatureGates: string[]
   /** The supported admission plugins for this version */
-  availableAdmissionPlugins: Array<string>
+  availableAdmissionPlugins: string[]
   /** The supported kubelet arguments for this version */
   availableKubeletArgs: Record<string, string>
 }
@@ -733,7 +733,7 @@ export type CreateClusterRequest = {
   /** The description of the cluster */
   description: string
   /** The tags associated with the cluster */
-  tags?: Array<string>
+  tags?: string[]
   /** The Kubernetes version of the cluster */
   version: string
   /** The Container Network Interface (CNI) plugin that will run in the cluster */
@@ -743,7 +743,7 @@ export type CreateClusterRequest = {
   /** @deprecated The Ingress Controller that will run in the cluster */
   ingress?: Ingress
   /** The pools to be created along with the cluster */
-  pools?: Array<CreateClusterRequestPoolConfig>
+  pools?: CreateClusterRequestPoolConfig[]
   /**
    * This field allows to specify some configuration for the autoscaler, which
    * is an implementation of the
@@ -757,9 +757,9 @@ export type CreateClusterRequest = {
    */
   autoUpgrade?: CreateClusterRequestAutoUpgrade
   /** List of feature gates to enable */
-  featureGates?: Array<string>
+  featureGates?: string[]
   /** List of admission plugins to enable */
-  admissionPlugins?: Array<string>
+  admissionPlugins?: string[]
   /**
    * This feature is in ALPHA state, it may be deleted or modified. This
    * configuration enables to set the [OpenID Connect
@@ -771,7 +771,7 @@ export type CreateClusterRequest = {
    * Additional Subject Alternative Names for the Kubernetes API server
    * certificate
    */
-  apiserverCertSans?: Array<string>
+  apiserverCertSans?: string[]
 }
 
 export type GetClusterRequest = {
@@ -794,7 +794,7 @@ export type UpdateClusterRequest = {
   /** The new description of the cluster */
   description?: string
   /** The new tags associated with the cluster */
-  tags?: Array<string>
+  tags?: string[]
   /**
    * This field allows to update some configuration for the autoscaler, which is
    * an implementation of the
@@ -811,9 +811,9 @@ export type UpdateClusterRequest = {
    */
   autoUpgrade?: UpdateClusterRequestAutoUpgrade
   /** List of feature gates to enable */
-  featureGates?: Array<string>
+  featureGates?: string[]
   /** List of admission plugins to enable */
-  admissionPlugins?: Array<string>
+  admissionPlugins?: string[]
   /**
    * This feature is in ALPHA state, it may be deleted or modified. This
    * configuration enables to update the [OpenID Connect
@@ -825,7 +825,7 @@ export type UpdateClusterRequest = {
    * Additional Subject Alternative Names for the Kubernetes API server
    * certificate
    */
-  apiserverCertSans?: Array<string>
+  apiserverCertSans?: string[]
 }
 
 export type DeleteClusterRequest = {
@@ -930,7 +930,7 @@ export type CreatePoolRequest = {
   /** The enablement of the autohealing feature for the pool */
   autohealing: boolean
   /** The tags associated with the pool */
-  tags?: Array<string>
+  tags?: string[]
   /**
    * The Kubelet arguments to be used by this pool. Note that this feature is to
    * be considered as experimental
@@ -986,7 +986,7 @@ export type UpdatePoolRequest = {
   /** The new value for the enablement of autohealing for the pool */
   autohealing?: boolean
   /** The new tags associated with the pool */
-  tags?: Array<string>
+  tags?: string[]
   /**
    * The new Kubelet arguments to be used by this pool. Note that this feature
    * is to be considered as experimental

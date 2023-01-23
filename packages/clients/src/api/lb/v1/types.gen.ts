@@ -169,7 +169,7 @@ export interface AclAction {
 /** Acl match */
 export interface AclMatch {
   /** A list of IPs or CIDR v4/v6 addresses of the client of the session to match */
-  ipSubnet: Array<string>
+  ipSubnet: string[]
   /**
    * The HTTP filter to match. This filter is supported only if your backend
    * supports HTTP forwarding. It extracts the request's URL path, which starts
@@ -178,7 +178,7 @@ export interface AclMatch {
    */
   httpFilter: AclHttpFilter
   /** A list of possible values to match for the given HTTP filter */
-  httpFilterValue: Array<string>
+  httpFilterValue: string[]
   /**
    * A exra parameter. You can use this field with http_header_match acl type to
    * set the header name to filter
@@ -224,7 +224,7 @@ export interface Backend {
   /** Health Check used to verify backend servers status */
   healthCheck?: HealthCheck
   /** Servers IP addresses attached to the backend */
-  pool: Array<string>
+  pool: string[]
   /** Load balancer the backend is attached to */
   lb?: Lb
   /** @deprecated Deprecated in favor of proxy_protocol field */
@@ -291,7 +291,7 @@ export interface Certificate {
   /** Main domain name of certificate */
   commonName: string
   /** Alternative domain names */
-  subjectAlternativeName: Array<string>
+  subjectAlternativeName: string[]
   /** Identifier (SHA-1) of the certificate */
   fingerprint: string
   /** Validity bounds */
@@ -335,7 +335,7 @@ export interface CreateCertificateRequestLetsencryptConfig {
    * Alternative domain names (make sure all domain names exists and resolves to
    * your load balancer HA IP)
    */
-  subjectAlternativeName: Array<string>
+  subjectAlternativeName: string[]
 }
 
 /** Frontend */
@@ -355,7 +355,7 @@ export interface Frontend {
   /** @deprecated Certificate, deprecated in favor of certificate_ids array */
   certificate?: Certificate
   /** List of certificate IDs to bind on the frontend */
-  certificateIds: Array<string>
+  certificateIds: string[]
   /** Date at which the frontend was created */
   createdAt?: Date
   /** Date at which the frontend was updated */
@@ -535,15 +535,15 @@ export interface Lb {
   /** Load balancer status */
   status: LbStatus
   /** List of underlying instances */
-  instances: Array<Instance>
+  instances: Instance[]
   /** Organization ID */
   organizationId: string
   /** Project ID */
   projectId: string
   /** List of IPs attached to the Load balancer */
-  ip: Array<Ip>
+  ip: Ip[]
   /** Load balancer tags */
-  tags: Array<string>
+  tags: string[]
   /** Number of frontends the Load balancer has */
   frontendCount: number
   /** Number of backends the Load balancer has */
@@ -574,7 +574,7 @@ export interface Lb {
 /** Lb stats */
 export interface LbStats {
   /** List stats object of your Load balancer */
-  backendServersStats: Array<BackendServerStats>
+  backendServersStats: BackendServerStats[]
 }
 
 export interface LbType {
@@ -589,7 +589,7 @@ export interface LbType {
 /** List acl response */
 export interface ListAclResponse {
   /** List of Acl object (see Acl object description) */
-  acls: Array<Acl>
+  acls: Acl[]
   /** The total number of items */
   totalCount: number
 }
@@ -597,7 +597,7 @@ export interface ListAclResponse {
 /** List backend stats response */
 export interface ListBackendStatsResponse {
   /** List backend stats object of your Load balancer */
-  backendServersStats: Array<BackendServerStats>
+  backendServersStats: BackendServerStats[]
   /** The total number of items */
   totalCount: number
 }
@@ -605,7 +605,7 @@ export interface ListBackendStatsResponse {
 /** List backends response */
 export interface ListBackendsResponse {
   /** List Backend objects of a load balancer */
-  backends: Array<Backend>
+  backends: Backend[]
   /** Total count, wihtout pagination */
   totalCount: number
 }
@@ -613,7 +613,7 @@ export interface ListBackendsResponse {
 /** List certificates response */
 export interface ListCertificatesResponse {
   /** List of certificates */
-  certificates: Array<Certificate>
+  certificates: Certificate[]
   /** The total number of items */
   totalCount: number
 }
@@ -621,7 +621,7 @@ export interface ListCertificatesResponse {
 /** List frontends response */
 export interface ListFrontendsResponse {
   /** List frontends object of your Load balancer */
-  frontends: Array<Frontend>
+  frontends: Frontend[]
   /** Total count, wihtout pagination */
   totalCount: number
 }
@@ -629,7 +629,7 @@ export interface ListFrontendsResponse {
 /** List ips response */
 export interface ListIpsResponse {
   /** List IP address object */
-  ips: Array<Ip>
+  ips: Ip[]
   /** Total count, wihtout pagination */
   totalCount: number
 }
@@ -637,7 +637,7 @@ export interface ListIpsResponse {
 /** List lb private networks response */
 export interface ListLbPrivateNetworksResponse {
   /** Private networks of a given load balancer */
-  privateNetwork: Array<PrivateNetwork>
+  privateNetwork: PrivateNetwork[]
   /** The total number of items */
   totalCount: number
 }
@@ -645,7 +645,7 @@ export interface ListLbPrivateNetworksResponse {
 /** List lb types response */
 export interface ListLbTypesResponse {
   /** Different types of LB */
-  lbTypes: Array<LbType>
+  lbTypes: LbType[]
   /** The total number of items */
   totalCount: number
 }
@@ -653,7 +653,7 @@ export interface ListLbTypesResponse {
 /** Get list of Load balancers */
 export interface ListLbsResponse {
   /** List of Load balancer */
-  lbs: Array<Lb>
+  lbs: Lb[]
   /** The total number of items */
   totalCount: number
 }
@@ -661,7 +661,7 @@ export interface ListLbsResponse {
 /** List routes response */
 export interface ListRoutesResponse {
   /** List of Routes object */
-  routes: Array<Route>
+  routes: Route[]
   /** The total number of items */
   totalCount: number
 }
@@ -669,7 +669,7 @@ export interface ListRoutesResponse {
 /** List subscriber response */
 export interface ListSubscriberResponse {
   /** List of Subscribers object */
-  subscribers: Array<Subscriber>
+  subscribers: Subscriber[]
   /** The total number of items */
   totalCount: number
 }
@@ -705,7 +705,7 @@ export interface PrivateNetwork {
 export interface PrivateNetworkDHCPConfig {}
 
 export interface PrivateNetworkStaticConfig {
-  ipAddress: Array<string>
+  ipAddress: string[]
 }
 
 /** Route */
@@ -745,7 +745,7 @@ export interface RouteMatch {
 /** Set acls response */
 export interface SetAclsResponse {
   /** List of ACLs object (see ACL object description) */
-  acls: Array<Acl>
+  acls: Acl[]
   /** The total number of items */
   totalCount: number
 }
@@ -829,7 +829,7 @@ export type CreateLbRequest = {
    */
   ipId?: string
   /** List of keyword */
-  tags?: Array<string>
+  tags?: string[]
   /** Load balancer offer type */
   type: string
   /**
@@ -866,7 +866,7 @@ export type UpdateLbRequest = {
   /** Resource description */
   description: string
   /** List of keywords */
-  tags?: Array<string>
+  tags?: string[]
   /**
    * Enforces minimal SSL version (in SSL/TLS offloading context).
    *
@@ -996,7 +996,7 @@ export type CreateBackendRequest = {
   /** See the Healthcheck object description */
   healthCheck: HealthCheck
   /** Backend server IP addresses list (IPv4 or IPv6) */
-  serverIp: Array<string>
+  serverIp: string[]
   /** @deprecated Deprecated in favor of proxy_protocol field ! */
   sendProxyV2?: boolean
   /**
@@ -1114,7 +1114,7 @@ export type AddBackendServersRequest = {
   /** Backend ID */
   backendId: string
   /** Set all IPs to add on your backend */
-  serverIp: Array<string>
+  serverIp: string[]
 }
 
 export type RemoveBackendServersRequest = {
@@ -1123,7 +1123,7 @@ export type RemoveBackendServersRequest = {
   /** Backend ID */
   backendId: string
   /** Set all IPs to remove of your backend */
-  serverIp: Array<string>
+  serverIp: string[]
 }
 
 export type SetBackendServersRequest = {
@@ -1132,7 +1132,7 @@ export type SetBackendServersRequest = {
   /** Backend ID */
   backendId: string
   /** Set all IPs to add on your backend and remove all other */
-  serverIp: Array<string>
+  serverIp: string[]
 }
 
 export type UpdateHealthCheckRequest = {
@@ -1245,7 +1245,7 @@ export type CreateFrontendRequest = {
   /** @deprecated Certificate ID, deprecated in favor of certificate_ids array ! */
   certificateId?: string
   /** List of certificate IDs to bind on the frontend */
-  certificateIds?: Array<string>
+  certificateIds?: string[]
   /** Activate HTTP 3 protocol (beta) */
   enableHttp3: boolean
 }
@@ -1273,7 +1273,7 @@ export type UpdateFrontendRequest = {
   /** @deprecated Certificate ID, deprecated in favor of `certificate_ids` array! */
   certificateId?: string
   /** List of certificate IDs to bind on the frontend */
-  certificateIds?: Array<string>
+  certificateIds?: string[]
   /** Activate HTTP 3 protocol (beta) */
   enableHttp3: boolean
 }
@@ -1688,7 +1688,7 @@ export type ZonedApiCreateLbRequest = {
    */
   ipId?: string
   /** List of keyword */
-  tags?: Array<string>
+  tags?: string[]
   /** Load balancer offer type */
   type: string
   /**
@@ -1725,7 +1725,7 @@ export type ZonedApiUpdateLbRequest = {
   /** Resource description */
   description: string
   /** List of keywords */
-  tags?: Array<string>
+  tags?: string[]
   /**
    * Enforces minimal SSL version (in SSL/TLS offloading context).
    *
@@ -1855,7 +1855,7 @@ export type ZonedApiCreateBackendRequest = {
   /** See the Healthcheck object description */
   healthCheck: HealthCheck
   /** Backend server IP addresses list (IPv4 or IPv6) */
-  serverIp: Array<string>
+  serverIp: string[]
   /** @deprecated Deprecated in favor of proxy_protocol field ! */
   sendProxyV2?: boolean
   /**
@@ -1973,7 +1973,7 @@ export type ZonedApiAddBackendServersRequest = {
   /** Backend ID */
   backendId: string
   /** Set all IPs to add on your backend */
-  serverIp: Array<string>
+  serverIp: string[]
 }
 
 export type ZonedApiRemoveBackendServersRequest = {
@@ -1982,7 +1982,7 @@ export type ZonedApiRemoveBackendServersRequest = {
   /** Backend ID */
   backendId: string
   /** Set all IPs to remove of your backend */
-  serverIp: Array<string>
+  serverIp: string[]
 }
 
 export type ZonedApiSetBackendServersRequest = {
@@ -1991,7 +1991,7 @@ export type ZonedApiSetBackendServersRequest = {
   /** Backend ID */
   backendId: string
   /** Set all IPs to add on your backend and remove all other */
-  serverIp: Array<string>
+  serverIp: string[]
 }
 
 export type ZonedApiUpdateHealthCheckRequest = {
@@ -2104,7 +2104,7 @@ export type ZonedApiCreateFrontendRequest = {
   /** @deprecated Certificate ID, deprecated in favor of certificate_ids array ! */
   certificateId?: string
   /** List of certificate IDs to bind on the frontend */
-  certificateIds?: Array<string>
+  certificateIds?: string[]
   /** Activate HTTP 3 protocol (beta) */
   enableHttp3: boolean
 }
@@ -2132,7 +2132,7 @@ export type ZonedApiUpdateFrontendRequest = {
   /** @deprecated Certificate ID, deprecated in favor of `certificate_ids` array! */
   certificateId?: string
   /** List of certificate IDs to bind on the frontend */
-  certificateIds?: Array<string>
+  certificateIds?: string[]
   /** Activate HTTP 3 protocol (beta) */
   enableHttp3: boolean
 }
@@ -2288,7 +2288,7 @@ export type ZonedApiSetAclsRequest = {
   /** The Frontend to change ACL to */
   frontendId: string
   /** Array of ACLs to erease the existing ACLs */
-  acls: Array<AclSpec>
+  acls: AclSpec[]
 }
 
 export type ZonedApiCreateCertificateRequest = {
