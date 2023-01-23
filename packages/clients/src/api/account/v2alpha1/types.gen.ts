@@ -11,7 +11,7 @@ export type ListSSHKeysRequestOrderBy =
 
 /** List ssh keys response */
 export interface ListSSHKeysResponse {
-  sshKeys: Array<SSHKey>
+  sshKeys: SSHKey[]
   totalCount: number
 }
 

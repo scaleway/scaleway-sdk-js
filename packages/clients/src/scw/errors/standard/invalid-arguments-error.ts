@@ -21,7 +21,7 @@ export type InvalidArgumentsErrorDetails = {
  *
  * @internal
  */
-const buildMessage = (list: Array<InvalidArgumentsErrorDetails>): string => {
+const buildMessage = (list: InvalidArgumentsErrorDetails[]): string => {
   const invalidArgs: string[] = list.reduce<string[]>((acc, details) => {
     let readableReason = ''
     switch (details.reason) {
@@ -58,7 +58,7 @@ export class InvalidArgumentsError extends ScalewayError {
   constructor(
     readonly status: number,
     readonly body: JSONObject,
-    readonly details: Array<InvalidArgumentsErrorDetails>,
+    readonly details: InvalidArgumentsErrorDetails[],
   ) {
     super(status, body, buildMessage(details))
     this.name = 'InvalidArgumentsError'

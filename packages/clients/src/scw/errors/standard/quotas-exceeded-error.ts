@@ -32,7 +32,7 @@ export type QuotasExceededErrorDetails = {
  *
  * @internal
  */
-const buildMessage = (list: Array<QuotasExceededErrorDetails>): string =>
+const buildMessage = (list: QuotasExceededErrorDetails[]): string =>
   `quota exceeded(s): ${list
     .map(details => {
       const message = `${details.resource} has reached its quota (${details.current}/${details.quota})`
@@ -68,7 +68,7 @@ export class QuotasExceededError extends ScalewayError {
   constructor(
     readonly status: number,
     readonly body: JSONObject,
-    readonly list: Array<QuotasExceededErrorDetails>,
+    readonly list: QuotasExceededErrorDetails[],
   ) {
     super(status, body, buildMessage(list))
     this.name = 'QuotasExceededError'
