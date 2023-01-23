@@ -20,7 +20,7 @@ export type PermissionsDeniedErrorDetails = {
  *
  * @internal
  */
-const buildMessage = (list: Array<PermissionsDeniedErrorDetails>): string =>
+const buildMessage = (list: PermissionsDeniedErrorDetails[]): string =>
   `insufficient permissions: ${list
     .map(({ action, resource }) => `${action} ${resource}`)
     .join('; ')}`
@@ -34,7 +34,7 @@ export class PermissionsDeniedError extends ScalewayError {
   constructor(
     readonly status: number,
     readonly body: JSONObject,
-    readonly list: Array<PermissionsDeniedErrorDetails>,
+    readonly list: PermissionsDeniedErrorDetails[],
   ) {
     super(status, body, buildMessage(list))
     this.name = 'PermissionsDeniedError'

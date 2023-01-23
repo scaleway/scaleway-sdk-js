@@ -119,11 +119,11 @@ export const unmarshalArrayOfObject = <T, B extends boolean>(
   data: unknown,
   unmarshaller: (input: unknown) => T,
   emptyFallback: B = true as B,
-): B extends true ? Array<T> | undefined : Array<T> => {
+): B extends true ? T[] | undefined : T[] => {
   if (!Array.isArray(data)) {
     return (emptyFallback ? [] : undefined) as B extends true
-      ? Array<T> | undefined
-      : Array<T>
+      ? T[] | undefined
+      : T[]
   }
 
   return data.map(elt => unmarshaller(elt))

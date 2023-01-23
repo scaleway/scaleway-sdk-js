@@ -53,7 +53,7 @@ export interface TimeSeries {
   /** Name of the metric. */
   name: string
   /** Points contains all the points that composed the series. */
-  points: Array<TimeSeriesPoint>
+  points: TimeSeriesPoint[]
   /** Metadata contains some string metadata related to a metric. */
   metadata: Record<string, string>
 }
