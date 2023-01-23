@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.34](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.33...@scaleway/sdk@0.1.0-beta.34) (2023-01-23)
+
+### Features
+
+- **domain:** add strictSearch filter to search API ([#383](https://github.com/scaleway/scaleway-sdk-js/issues/383)) ([f1b2253](https://github.com/scaleway/scaleway-sdk-js/commit/f1b2253791776c15895c3fa699f7f756c8917d1d))
+- **instance:** add reason field in ServerMaintenance ([#391](https://github.com/scaleway/scaleway-sdk-js/issues/391)) ([4d94855](https://github.com/scaleway/scaleway-sdk-js/commit/4d948553ddfbf21f8ffc2347e5964e44a2f42d73))
+- **instance:** add setServerUserData method ([#387](https://github.com/scaleway/scaleway-sdk-js/issues/387)) ([54b98a0](https://github.com/scaleway/scaleway-sdk-js/commit/54b98a0e9239d5be11a3623289f7679dca6dba10))
+- **iot:** deprecate GetHubMetrics and GetDeviceMetrics ([#376](https://github.com/scaleway/scaleway-sdk-js/issues/376)) ([9e02d3c](https://github.com/scaleway/scaleway-sdk-js/commit/9e02d3cdca8fb97e08607f10208b119d8c7420fd))
+- **lb:** add header host in match route ([#377](https://github.com/scaleway/scaleway-sdk-js/issues/377)) ([6425574](https://github.com/scaleway/scaleway-sdk-js/commit/6425574a427a0d8458ac1be4ad0bd5cbf2fea2d6))
+- **marketplace:** add label listing and extra information to listLocalImages ([#382](https://github.com/scaleway/scaleway-sdk-js/issues/382)) ([ef438cd](https://github.com/scaleway/scaleway-sdk-js/commit/ef438cd5786d578aaa6d33f7d8bbf4a77294eac7))
+- **redis:** add field upgradableVersions ([#384](https://github.com/scaleway/scaleway-sdk-js/issues/384)) ([7e7f641](https://github.com/scaleway/scaleway-sdk-js/commit/7e7f6413c792d2523445c252585a38f6726e752b))
+
+### Bug Fixes
+
+- **tem:** remove GetServiceInfo ([#389](https://github.com/scaleway/scaleway-sdk-js/issues/389)) ([350e122](https://github.com/scaleway/scaleway-sdk-js/commit/350e1222d47ca1ed143e2f24c0966f4af06c498f))
+
 ## [0.1.0-beta.33](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.32...@scaleway/sdk@0.1.0-beta.33) (2023-01-17)
 
 ### Features
