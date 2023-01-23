@@ -28,7 +28,7 @@ export interface AttachFlexibleIPsResponse {
   /** Total count of Flexible IPs being updated */
   totalCount: number
   /** Listing of Flexible IPs in updating state */
-  flexibleIps: Array<FlexibleIP>
+  flexibleIps: FlexibleIP[]
 }
 
 /** Detach flexible i ps response */
@@ -36,7 +36,7 @@ export interface DetachFlexibleIPsResponse {
   /** Total count of Flexible IPs being detached */
   totalCount: number
   /** Listing of Flexible IPs in detaching state */
-  flexibleIps: Array<FlexibleIP>
+  flexibleIps: FlexibleIP[]
 }
 
 /** Flexible ip */
@@ -50,7 +50,7 @@ export interface FlexibleIP {
   /** Description of the Flexible IP */
   description: string
   /** Tags associated with the Flexible IP */
-  tags: Array<string>
+  tags: string[]
   /** Date of last update of the Flexible IP */
   updatedAt?: Date
   /** Date of creation of the Flexible IP */
@@ -83,7 +83,7 @@ export interface ListFlexibleIPsResponse {
   /** Total count of matching Flexible IPs */
   totalCount: number
   /** Listing of Flexible IPs */
-  flexibleIps: Array<FlexibleIP>
+  flexibleIps: FlexibleIP[]
 }
 
 /** Mac address */
@@ -112,7 +112,7 @@ export type CreateFlexibleIPRequest = {
   /** Description to associate with the Flexible IP, max 255 characters */
   description: string
   /** Tags to associate to the Flexible IP */
-  tags?: Array<string>
+  tags?: string[]
   /** Server ID on which to attach the created Flexible IP */
   serverId?: string
   /** Reverse DNS value */
@@ -138,11 +138,11 @@ export type ListFlexibleIPsRequest = {
   /** The maximum number of Flexible IPs per page */
   pageSize?: number
   /** Filter Flexible IPs with one or more matching tags */
-  tags?: Array<string>
+  tags?: string[]
   /** Filter Flexible IPs by status */
-  status?: Array<FlexibleIPStatus>
+  status?: FlexibleIPStatus[]
   /** Filter Flexible IPs by server IDs */
-  serverIds?: Array<string>
+  serverIds?: string[]
   /** Filter Flexible IPs by organization ID */
   organizationId?: string
   /** Filter Flexible IPs by project ID */
@@ -157,7 +157,7 @@ export type UpdateFlexibleIPRequest = {
   /** Description to associate with the Flexible IP, max 255 characters */
   description?: string
   /** Tags to associate with the Flexible IP */
-  tags?: Array<string>
+  tags?: string[]
   /** Reverse DNS value */
   reverse?: string
 }
@@ -176,7 +176,7 @@ export type AttachFlexibleIPRequest = {
    * Multiple IDs can be provided as long as Flexible IPs belong to the same MAC
    * groups (see details about MAC groups).
    */
-  fipsIds: Array<string>
+  fipsIds: string[]
   /** A server ID on which to attach the Flexible IPs */
   serverId: string
 }
@@ -188,7 +188,7 @@ export type DetachFlexibleIPRequest = {
    * Multiple IDs can be provided as long as Flexible IPs belong to the same MAC
    * groups (see details about MAC groups).
    */
-  fipsIds: Array<string>
+  fipsIds: string[]
 }
 
 export type GenerateMACAddrRequest = {

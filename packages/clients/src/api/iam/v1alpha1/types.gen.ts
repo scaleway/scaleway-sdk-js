@@ -136,15 +136,15 @@ export interface Group {
   /** Description of the group */
   description: string
   /** IDs of users attached to this group */
-  userIds: Array<string>
+  userIds: string[]
   /** IDs of applications attached to this group */
-  applicationIds: Array<string>
+  applicationIds: string[]
 }
 
 /** List api keys response */
 export interface ListAPIKeysResponse {
   /** List of API keys */
-  apiKeys: Array<APIKey>
+  apiKeys: APIKey[]
   /** Total count of API Keys */
   totalCount: number
 }
@@ -152,7 +152,7 @@ export interface ListAPIKeysResponse {
 /** List applications response */
 export interface ListApplicationsResponse {
   /** List of applications */
-  applications: Array<Application>
+  applications: Application[]
   /** Total count of applications */
   totalCount: number
 }
@@ -160,7 +160,7 @@ export interface ListApplicationsResponse {
 /** List groups response */
 export interface ListGroupsResponse {
   /** List of groups */
-  groups: Array<Group>
+  groups: Group[]
   /** Total count of groups */
   totalCount: number
 }
@@ -168,7 +168,7 @@ export interface ListGroupsResponse {
 /** List permission sets response */
 export interface ListPermissionSetsResponse {
   /** List of permission sets */
-  permissionSets: Array<PermissionSet>
+  permissionSets: PermissionSet[]
   /** Total count of permission sets */
   totalCount: number
 }
@@ -176,7 +176,7 @@ export interface ListPermissionSetsResponse {
 /** List policies response */
 export interface ListPoliciesResponse {
   /** List of policies */
-  policies: Array<Policy>
+  policies: Policy[]
   /** Total count of policies */
   totalCount: number
 }
@@ -184,7 +184,7 @@ export interface ListPoliciesResponse {
 /** List rules response */
 export interface ListRulesResponse {
   /** Rules of the policy */
-  rules: Array<Rule>
+  rules: Rule[]
   /** Total count of rules */
   totalCount: number
 }
@@ -192,7 +192,7 @@ export interface ListRulesResponse {
 /** List ssh keys response */
 export interface ListSSHKeysResponse {
   /** List of SSH keys */
-  sshKeys: Array<SSHKey>
+  sshKeys: SSHKey[]
   /** Total count of SSH keys */
   totalCount: number
 }
@@ -200,7 +200,7 @@ export interface ListSSHKeysResponse {
 /** List users response */
 export interface ListUsersResponse {
   /** List of users */
-  users: Array<User>
+  users: User[]
   /** Total count of users */
   totalCount: number
 }
@@ -216,7 +216,7 @@ export interface PermissionSet {
   /** Description of permission set */
   description: string
   /** Categories of permission set */
-  categories?: Array<string>
+  categories?: string[]
 }
 
 /** Policy */
@@ -276,7 +276,7 @@ export interface Rule {
   /** Id of rule */
   id: string
   /** Names of permission sets bound to the rule */
-  permissionSetNames?: Array<string>
+  permissionSetNames?: string[]
   /** Permission_set_names have the same scope_type */
   permissionSetsScopeType: PermissionSetScopeType
   /**
@@ -285,7 +285,7 @@ export interface Rule {
    * One-of ('scope'): at most one of 'projectIds', 'organizationId',
    * 'accountRootUserId' could be set.
    */
-  projectIds?: Array<string>
+  projectIds?: string[]
   /**
    * ID of organization scoped to the rule.
    *
@@ -305,14 +305,14 @@ export interface Rule {
 /** Rule specs */
 export interface RuleSpecs {
   /** Names of permission sets bound to the rule */
-  permissionSetNames?: Array<string>
+  permissionSetNames?: string[]
   /**
    * List of project IDs scoped to the rule.
    *
    * One-of ('scope'): at most one of 'projectIds', 'organizationId' could be
    * set.
    */
-  projectIds?: Array<string>
+  projectIds?: string[]
   /**
    * ID of organization scoped to the rule.
    *
@@ -347,7 +347,7 @@ export interface SSHKey {
 /** Set rules response */
 export interface SetRulesResponse {
   /** Rules of policy */
-  rules: Array<Rule>
+  rules: Rule[]
 }
 
 /** User */
@@ -430,7 +430,7 @@ export type ListUsersRequest = {
   /** ID of organization to filter */
   organizationId?: string
   /** Filter out by a list of ID */
-  userIds?: Array<string>
+  userIds?: string[]
 }
 
 export type GetUserRequest = {
@@ -457,7 +457,7 @@ export type ListApplicationsRequest = {
   /** Filter out editable applications or not */
   editable?: boolean
   /** Filter out by a list of ID */
-  applicationIds?: Array<string>
+  applicationIds?: string[]
 }
 
 export type CreateApplicationRequest = {
@@ -500,11 +500,11 @@ export type ListGroupsRequest = {
   /** Name of group to find */
   name?: string
   /** Filter out by a list of application ID */
-  applicationIds?: Array<string>
+  applicationIds?: string[]
   /** Filter out by a list of user ID */
-  userIds?: Array<string>
+  userIds?: string[]
   /** Filter out by a list of group ID */
-  groupIds?: Array<string>
+  groupIds?: string[]
 }
 
 export type CreateGroupRequest = {
@@ -538,8 +538,8 @@ export type UpdateGroupRequest = {
 
 export type SetGroupMembersRequest = {
   groupId: string
-  userIds: Array<string>
-  applicationIds: Array<string>
+  userIds: string[]
+  applicationIds: string[]
 }
 
 export type AddGroupMemberRequest = {
@@ -593,11 +593,11 @@ export type ListPoliciesRequest = {
   /** Filter out editable policies or not */
   editable?: boolean
   /** Filter out by a list of user ID */
-  userIds?: Array<string>
+  userIds?: string[]
   /** Filter out by a list of group ID */
-  groupIds?: Array<string>
+  groupIds?: string[]
   /** Filter out by a list of application ID */
-  applicationIds?: Array<string>
+  applicationIds?: string[]
   /** True when the policy do not belong to any principal */
   noPrincipal?: boolean
   /** Name of policy to fetch */
@@ -612,7 +612,7 @@ export type CreatePolicyRequest = {
   /** ID of organization */
   organizationId?: string
   /** Rules of the policy to create */
-  rules?: Array<RuleSpecs>
+  rules?: RuleSpecs[]
   /**
    * ID of user, owner of the policy.
    *
@@ -698,7 +698,7 @@ export type SetRulesRequest = {
   /** Id of policy to update */
   policyId: string
   /** Rules of the policy to set */
-  rules: Array<RuleSpecs>
+  rules: RuleSpecs[]
 }
 
 export type ListRulesRequest = {

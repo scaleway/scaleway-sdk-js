@@ -200,7 +200,7 @@ export interface GetPlacementGroupResponse {
 }
 
 export interface GetPlacementGroupServersResponse {
-  servers: Array<PlacementGroupServer>
+  servers: PlacementGroupServer[]
 }
 
 export interface GetPrivateNICResponse {
@@ -249,7 +249,7 @@ export interface Image {
   rootVolume?: VolumeSummary
   state: ImageState
   project: string
-  tags: Array<string>
+  tags: string[]
   zone: Zone
 }
 
@@ -259,7 +259,7 @@ export interface Ip {
   reverse?: string
   server?: ServerSummary
   organization: string
-  tags: Array<string>
+  tags: string[]
   project: string
   zone: Zone
 }
@@ -269,7 +269,7 @@ export interface ListBootscriptsResponse {
   /** Total number of bootscripts */
   totalCount: number
   /** List of bootscripts */
-  bootscripts: Array<Bootscript>
+  bootscripts: Bootscript[]
 }
 
 /** List images response */
@@ -277,7 +277,7 @@ export interface ListImagesResponse {
   /** Total number of images */
   totalCount: number
   /** List of images */
-  images: Array<Image>
+  images: Image[]
 }
 
 /** List ips response */
@@ -285,7 +285,7 @@ export interface ListIpsResponse {
   /** Total number of ips */
   totalCount: number
   /** List of ips */
-  ips: Array<Ip>
+  ips: Ip[]
 }
 
 /** List placement groups response */
@@ -293,11 +293,11 @@ export interface ListPlacementGroupsResponse {
   /** Total number of placement groups */
   totalCount: number
   /** List of placement groups */
-  placementGroups: Array<PlacementGroup>
+  placementGroups: PlacementGroup[]
 }
 
 export interface ListPrivateNICsResponse {
-  privateNics: Array<PrivateNIC>
+  privateNics: PrivateNIC[]
 }
 
 /** List security group rules response */
@@ -305,7 +305,7 @@ export interface ListSecurityGroupRulesResponse {
   /** Total number of security groups */
   totalCount: number
   /** List of security rules */
-  rules: Array<SecurityGroupRule>
+  rules: SecurityGroupRule[]
 }
 
 /** List security groups response */
@@ -313,15 +313,15 @@ export interface ListSecurityGroupsResponse {
   /** Total number of security groups */
   totalCount: number
   /** List of security groups */
-  securityGroups: Array<SecurityGroup>
+  securityGroups: SecurityGroup[]
 }
 
 export interface ListServerActionsResponse {
-  actions: Array<ServerAction>
+  actions: ServerAction[]
 }
 
 export interface ListServerUserDataResponse {
-  userData: Array<string>
+  userData: string[]
 }
 
 /** List servers response */
@@ -329,7 +329,7 @@ export interface ListServersResponse {
   /** Total number of servers */
   totalCount: number
   /** List of servers */
-  servers: Array<Server>
+  servers: Server[]
 }
 
 /** List servers types response */
@@ -345,7 +345,7 @@ export interface ListSnapshotsResponse {
   /** Total number of snapshots */
   totalCount: number
   /** List of snapshots */
-  snapshots: Array<Snapshot>
+  snapshots: Snapshot[]
 }
 
 /** List volumes response */
@@ -353,7 +353,7 @@ export interface ListVolumesResponse {
   /** Total number of volumes */
   totalCount: number
   /** List of volumes */
-  volumes: Array<Volume>
+  volumes: Volume[]
 }
 
 /** List volumes types response */
@@ -375,7 +375,7 @@ export interface PlacementGroup {
   /** The placement group project ID */
   project: string
   /** The placement group tags */
-  tags: Array<string>
+  tags: string[]
   /**
    * Select the failling mode when the placement cannot be respected, either
    * optional or enforced
@@ -431,7 +431,7 @@ export interface SecurityGroup {
   /** The security group project ID */
   project: string
   /** The security group tags */
-  tags: Array<string>
+  tags: string[]
   /**
    * @deprecated True if it is your default security group for this organization
    *   ID
@@ -444,7 +444,7 @@ export interface SecurityGroup {
   /** The security group modification date */
   modificationDate?: Date
   /** List of servers attached to this security group */
-  servers: Array<ServerSummary>
+  servers: ServerSummary[]
   /** True if the security group is stateful */
   stateful: boolean
   /** Security group state */
@@ -487,9 +487,9 @@ export interface Server {
   /** The server project ID */
   project: string
   /** Provide as list of allowed actions on the server */
-  allowedActions: Array<ServerAction>
+  allowedActions: ServerAction[]
   /** The server associated tags */
-  tags: Array<string>
+  tags: string[]
   /** The server commercial type (eg. GP1-M) */
   commercialType: string
   /** The server creation date */
@@ -525,7 +525,7 @@ export interface Server {
   /** The server security group */
   securityGroup?: SecurityGroupSummary
   /** The server planned maintenances */
-  maintenances: Array<ServerMaintenance>
+  maintenances: ServerMaintenance[]
   /** The server state_detail */
   stateDetail: string
   /** The server arch */
@@ -533,7 +533,7 @@ export interface Server {
   /** The server placement group */
   placementGroup?: PlacementGroup
   /** The server private NICs */
-  privateNics: Array<PrivateNIC>
+  privateNics: PrivateNIC[]
   /** The zone in which is the server */
   zone: Zone
 }
@@ -595,7 +595,7 @@ export interface ServerType {
   /** Hourly price in Euro */
   hourlyPrice: number
   /** Alternative instance name if any */
-  altNames: Array<string>
+  altNames: string[]
   /** Additional volume constraints */
   perVolumeConstraint?: ServerTypeVolumeConstraintsByType
   /** Initial volume constraints */
@@ -621,13 +621,13 @@ export interface ServerTypeCapabilities {
   /** True if server supports block storage */
   blockStorage?: boolean
   /** List of supported boot types */
-  bootTypes: Array<BootType>
+  bootTypes: BootType[]
 }
 
 /** Server type. network */
 export interface ServerTypeNetwork {
   /** List of available network interfaces */
-  interfaces: Array<ServerTypeNetworkInterface>
+  interfaces: ServerTypeNetworkInterface[]
   /** Total maximum internal bandwidth in bits per seconds */
   sumInternalBandwidth?: number
   /** Total maximum internet bandwidth in bits per seconds */
@@ -663,7 +663,7 @@ export interface SetPlacementGroupResponse {
 }
 
 export interface SetPlacementGroupServersResponse {
-  servers: Array<PlacementGroupServer>
+  servers: PlacementGroupServer[]
 }
 
 /** Set security group rules request. rule */
@@ -707,7 +707,7 @@ export interface SetSecurityGroupRulesRequestRule {
 }
 
 export interface SetSecurityGroupRulesResponse {
-  rules: Array<SecurityGroupRule>
+  rules: SecurityGroupRule[]
 }
 
 /** Snapshot */
@@ -721,7 +721,7 @@ export interface Snapshot {
   /** The snapshot project ID */
   project: string
   /** The snapshot tags */
-  tags: Array<string>
+  tags: string[]
   /** The snapshot volume type */
   volumeType: VolumeVolumeType
   /** The snapshot size */
@@ -777,7 +777,7 @@ export interface UpdatePlacementGroupResponse {
 }
 
 export interface UpdatePlacementGroupServersResponse {
-  servers: Array<PlacementGroupServer>
+  servers: PlacementGroupServer[]
 }
 
 export interface UpdateServerResponse {
@@ -809,7 +809,7 @@ export interface Volume {
   /** The volume project ID */
   project: string
   /** The volume tags */
-  tags: Array<string>
+  tags: string[]
   /** The server attached to the volume */
   server?: ServerSummary
   /** The volume state */
@@ -954,7 +954,7 @@ export type ListServersRequest = {
    * List servers with these exact tags (to filter with several tags, use commas
    * to separate them)
    */
-  tags?: Array<string>
+  tags?: string[]
   /** List servers in this Private Network */
   privateNetwork?: string
   /** Define the order of the returned servers */
@@ -1063,7 +1063,7 @@ export type CreateImageRequest = {
    */
   project?: string
   /** The tags of the image */
-  tags?: Array<string>
+  tags?: string[]
   /** True to create a public image */
   public?: boolean
 }
@@ -1094,7 +1094,7 @@ export type CreateSnapshotRequest = {
   /** UUID of the volume */
   volumeId?: string
   /** The tags of the snapshot */
-  tags?: Array<string>
+  tags?: string[]
   /**
    * @deprecated Organization ID of the snapshot.
    *
@@ -1167,7 +1167,7 @@ export type ListVolumesRequest = {
    * Filter volumes with these exact tags (to filter with several tags, use
    * commas to separate them)
    */
-  tags?: Array<string>
+  tags?: string[]
   /** Filter volume by name (for eg. "vol" will return "myvolume" but not "data") */
   name?: string
 }
@@ -1192,7 +1192,7 @@ export type CreateVolumeRequest = {
    */
   project?: string
   /** The volume tags */
-  tags?: Array<string>
+  tags?: string[]
   /** The volume type */
   volumeType?: VolumeVolumeType
   /**
@@ -1233,7 +1233,7 @@ export type UpdateVolumeRequest = {
   /** The volume name */
   name?: string
   /** The tags of the volume */
-  tags?: Array<string>
+  tags?: string[]
   /** The volume disk size, must be a multiple of 512 */
   size?: number
 }
@@ -1258,7 +1258,7 @@ export type ListSecurityGroupsRequest = {
    * List security groups with these exact tags (to filter with several tags,
    * use commas to separate them)
    */
-  tags?: Array<string>
+  tags?: string[]
   /** Filter security groups with this value for project_default */
   projectDefault?: boolean
   /**
@@ -1292,7 +1292,7 @@ export type CreateSecurityGroupRequest = {
    */
   project?: string
   /** The tags of the security group */
-  tags?: Array<string>
+  tags?: string[]
   /**
    * @deprecated Whether this security group becomes the default security group
    *   for new instances.
@@ -1377,7 +1377,7 @@ export type SetSecurityGroupRulesRequest = {
   /** UUID of the security group to update the rules on */
   securityGroupId: string
   /** List of rules to update in the security group */
-  rules?: Array<SetSecurityGroupRulesRequestRule>
+  rules?: SetSecurityGroupRulesRequestRule[]
 }
 
 export type DeleteSecurityGroupRuleRequest = {
@@ -1412,7 +1412,7 @@ export type ListPlacementGroupsRequest = {
    * List placement groups with these exact tags (to filter with several tags,
    * use commas to separate them)
    */
-  tags?: Array<string>
+  tags?: string[]
   /**
    * Filter placement groups by name (for eg. "cluster1" will return
    * "cluster100" and "cluster1" but not "foo")
@@ -1440,7 +1440,7 @@ export type CreatePlacementGroupRequest = {
    */
   project?: string
   /** The tags of the placement group */
-  tags?: Array<string>
+  tags?: string[]
   /** The operating mode of the placement group */
   policyMode?: PlacementGroupPolicyMode
   /** The policy type of the placement group */
@@ -1463,7 +1463,7 @@ export type SetPlacementGroupRequest = {
   policyMode?: PlacementGroupPolicyMode
   policyType?: PlacementGroupPolicyType
   project?: string
-  tags?: Array<string>
+  tags?: string[]
 }
 
 export type UpdatePlacementGroupRequest = {
@@ -1474,7 +1474,7 @@ export type UpdatePlacementGroupRequest = {
   /** Name of the placement group */
   name?: string
   /** The tags of the placement group */
-  tags?: Array<string>
+  tags?: string[]
   /** The operating mode of the placement group */
   policyMode?: PlacementGroupPolicyMode
   /** The policy type of the placement group */
@@ -1498,7 +1498,7 @@ export type SetPlacementGroupServersRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
   placementGroupId: string
-  servers?: Array<string>
+  servers?: string[]
 }
 
 export type UpdatePlacementGroupServersRequest = {
@@ -1506,7 +1506,7 @@ export type UpdatePlacementGroupServersRequest = {
   zone?: Zone
   /** UUID of the placement group */
   placementGroupId: string
-  servers: Array<string>
+  servers: string[]
 }
 
 export type ListIpsRequest = {
@@ -1520,7 +1520,7 @@ export type ListIpsRequest = {
    * Filter IPs with these exact tags (to filter with several tags, use commas
    * to separate them)
    */
-  tags?: Array<string>
+  tags?: string[]
   /** Filter on the IP address (Works as a LIKE operation on the IP address) */
   name?: string
   /**
@@ -1550,7 +1550,7 @@ export type CreateIpRequest = {
    */
   project?: string
   /** The tags of the IP */
-  tags?: Array<string>
+  tags?: string[]
   /** UUID of the server you want to attach the IP to */
   server?: string
 }
@@ -1570,7 +1570,7 @@ export type UpdateIpRequest = {
   /** Reverse domain name */
   reverse?: string | null
   /** An array of keywords you want to tag this IP with */
-  tags?: Array<string>
+  tags?: string[]
   server?: string | null
 }
 

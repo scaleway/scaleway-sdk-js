@@ -27,13 +27,13 @@ export interface ListOSResponse {
   /** Total number of os */
   totalCount: number
   /** List of OS */
-  os: Array<OS>
+  os: OS[]
 }
 
 /** List server types response */
 export interface ListServerTypesResponse {
   /** The available server types */
-  serverTypes: Array<ServerType>
+  serverTypes: ServerType[]
 }
 
 /** List servers response */
@@ -41,7 +41,7 @@ export interface ListServersResponse {
   /** The total number of servers */
   totalCount: number
   /** The paginated returned servers */
-  servers: Array<Server>
+  servers: Server[]
 }
 
 /** Os */
@@ -55,7 +55,7 @@ export interface OS {
   /** URL of the image */
   imageUrl: string
   /** List of compatible server types */
-  compatibleServerTypes: Array<string>
+  compatibleServerTypes: string[]
 }
 
 /** Server */

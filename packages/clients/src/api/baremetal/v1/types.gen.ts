@@ -114,7 +114,7 @@ export interface CreateServerRequestInstall {
   /** Hostname of the server */
   hostname: string
   /** SSH key IDs authorized on the server */
-  sshKeyIds: Array<string>
+  sshKeyIds: string[]
   /** User used for the installation */
   user?: string
   /** Password used for the installation */
@@ -160,7 +160,7 @@ export interface ListOSResponse {
   /** Total count of matching OS */
   totalCount: number
   /** OS that match filters */
-  os: Array<OS>
+  os: OS[]
 }
 
 /** List offers response */
@@ -168,7 +168,7 @@ export interface ListOffersResponse {
   /** Total count of matching offers */
   totalCount: number
   /** Offers that match filters */
-  offers: Array<Offer>
+  offers: Offer[]
 }
 
 /** List options response */
@@ -176,7 +176,7 @@ export interface ListOptionsResponse {
   /** Total count of matching options */
   totalCount: number
   /** Options that match filters */
-  options: Array<Option>
+  options: Option[]
 }
 
 /** List server events response */
@@ -184,11 +184,11 @@ export interface ListServerEventsResponse {
   /** Total count of matching events */
   totalCount: number
   /** Server events that match filters */
-  events: Array<ServerEvent>
+  events: ServerEvent[]
 }
 
 export interface ListServerPrivateNetworksResponse {
-  serverPrivateNetworks: Array<ServerPrivateNetwork>
+  serverPrivateNetworks: ServerPrivateNetwork[]
   totalCount: number
 }
 
@@ -197,7 +197,7 @@ export interface ListServersResponse {
   /** Total count of matching servers */
   totalCount: number
   /** Servers that match filters */
-  servers: Array<Server>
+  servers: Server[]
 }
 
 /** List settings response */
@@ -205,7 +205,7 @@ export interface ListSettingsResponse {
   /** Total count of matching sttings */
   totalCount: number
   /** Settings that match filters */
-  settings: Array<Setting>
+  settings: Setting[]
 }
 
 /** Memory */
@@ -272,21 +272,21 @@ export interface Offer {
   /** Price of the offer per months */
   pricePerMonth?: Money
   /** Disks specifications of the offer */
-  disks: Array<Disk>
+  disks: Disk[]
   /** True if the offer is currently available */
   enable: boolean
   /** CPU specifications of the offer */
-  cpus: Array<CPU>
+  cpus: CPU[]
   /** Memory specifications of the offer */
-  memories: Array<Memory>
+  memories: Memory[]
   /** Name of the quota associated to the offer */
   quotaName: string
   /** Persistent memory specifications of the offer */
-  persistentMemories: Array<PersistentMemory>
+  persistentMemories: PersistentMemory[]
   /** Raid controller specifications of the offer */
-  raidControllers: Array<RaidController>
+  raidControllers: RaidController[]
   /** Array of incompatible OS ids */
-  incompatibleOsIds: Array<string>
+  incompatibleOsIds: string[]
   /** Period of subscription for the offer */
   subscriptionPeriod: OfferSubscriptionPeriod
   /** Operation path of the service */
@@ -294,7 +294,7 @@ export interface Offer {
   /** Fee to pay on order */
   fee?: Money
   /** Options available on offer */
-  options: Array<OfferOptionOffer>
+  options: OfferOptionOffer[]
 }
 
 /** Offer. option offer */
@@ -340,7 +340,7 @@ export interface PersistentMemory {
 
 export interface RaidController {
   model: string
-  raidLevel: Array<string>
+  raidLevel: string[]
 }
 
 /** Server */
@@ -366,9 +366,9 @@ export interface Server {
   /** Offer name of the server */
   offerName: string
   /** Array of customs tags attached to the server */
-  tags: Array<string>
+  tags: string[]
   /** Array of IPs attached to the server */
-  ips: Array<IP>
+  ips: IP[]
   /** Domain of the server */
   domain: string
   /** Boot type of the server */
@@ -380,7 +380,7 @@ export interface Server {
   /** Server status of ping */
   pingStatus: ServerPingStatus
   /** Options enabled on server */
-  options: Array<ServerOption>
+  options: ServerOption[]
   /** Configuration of rescue boot */
   rescueServer?: ServerRescueServer
 }
@@ -404,7 +404,7 @@ export interface ServerInstall {
   /** Host defined in the server install */
   hostname: string
   /** SSH public key IDs defined in the server install */
-  sshKeyIds: Array<string>
+  sshKeyIds: string[]
   /** Status of the server install */
   status: ServerInstallStatus
   /**
@@ -464,7 +464,7 @@ export interface ServerRescueServer {
 }
 
 export interface SetServerPrivateNetworksResponse {
-  serverPrivateNetworks: Array<ServerPrivateNetwork>
+  serverPrivateNetworks: ServerPrivateNetwork[]
 }
 
 /** Setting */
@@ -489,9 +489,9 @@ export type ListServersRequest = {
   /** Order of the servers */
   orderBy?: ListServersRequestOrderBy
   /** Filter by tags */
-  tags?: Array<string>
+  tags?: string[]
   /** Filter by status */
-  status?: Array<string>
+  status?: string[]
   /** Filter by name */
   name?: string
   /** Filter by organization ID */
@@ -533,11 +533,11 @@ export type CreateServerRequest = {
   /** Description associated to the server, max 255 characters */
   description: string
   /** Tags to associate to the server */
-  tags?: Array<string>
+  tags?: string[]
   /** Configuration of installation */
   install?: CreateServerRequestInstall
   /** IDs of options to enable on server */
-  optionIds?: Array<string>
+  optionIds?: string[]
 }
 
 export type UpdateServerRequest = {
@@ -553,7 +553,7 @@ export type UpdateServerRequest = {
    */
   description?: string
   /** Tags associated to the server, not updated if null */
-  tags?: Array<string>
+  tags?: string[]
 }
 
 export type InstallServerRequest = {
@@ -566,7 +566,7 @@ export type InstallServerRequest = {
   /** Hostname of the server */
   hostname: string
   /** SSH key IDs authorized on the server */
-  sshKeyIds: Array<string>
+  sshKeyIds: string[]
   /** User used for the installation */
   user?: string
   /** Password used for the installation */
@@ -776,7 +776,7 @@ export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
   /** The ID of the server */
   serverId: string
   /** The IDs of the private networks */
-  privateNetworkIds: Array<string>
+  privateNetworkIds: string[]
 }
 
 export type PrivateNetworkApiListServerPrivateNetworksRequest = {

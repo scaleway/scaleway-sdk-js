@@ -31,7 +31,7 @@ export interface Image {
   /** URL of this image's logo */
   logo: string
   /** List of categories this image belongs to */
-  categories: Array<string>
+  categories: string[]
   /** Creation date of this image */
   createdAt?: Date
   /** Date of the last modification of this image */
@@ -43,22 +43,22 @@ export interface Image {
 }
 
 export interface ListCategoriesResponse {
-  categories: Array<Category>
+  categories: Category[]
   totalCount: number
 }
 
 export interface ListImagesResponse {
-  images: Array<Image>
+  images: Image[]
   totalCount: number
 }
 
 export interface ListLocalImagesResponse {
-  localImages: Array<LocalImage>
+  localImages: LocalImage[]
   totalCount: number
 }
 
 export interface ListVersionsResponse {
-  versions: Array<Version>
+  versions: Version[]
   totalCount: number
 }
 
@@ -67,7 +67,7 @@ export interface LocalImage {
   /** Version you will typically use to define an image in an API call. */
   id: string
   /** List of all commercial types that are compatible with this local image */
-  compatibleCommercialTypes: Array<string>
+  compatibleCommercialTypes: string[]
   /** Supported architecture for this local image */
   arch: string
   /** Availability Zone where this local image is available */

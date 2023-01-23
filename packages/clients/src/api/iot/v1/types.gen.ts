@@ -182,7 +182,7 @@ export interface DeviceMessageFiltersRule {
    * List of topics to accept or reject. It must be valid MQTT topics and up to
    * 65535 characters
    */
-  topics?: Array<string>
+  topics?: string[]
 }
 
 /** Get device certificate response */
@@ -196,7 +196,7 @@ export interface GetDeviceCertificateResponse {
 /** Get device metrics response */
 export interface GetDeviceMetricsResponse {
   /** Metrics for a device over the requested period */
-  metrics: Array<TimeSeries>
+  metrics: TimeSeries[]
 }
 
 export interface GetHubCAResponse {
@@ -206,7 +206,7 @@ export interface GetHubCAResponse {
 /** Get hub metrics response */
 export interface GetHubMetricsResponse {
   /** Metrics for a hub over the requested period */
-  metrics: Array<TimeSeries>
+  metrics: TimeSeries[]
 }
 
 /** Hub */
@@ -277,7 +277,7 @@ export interface ListDevicesResponse {
   /** Total number of devices */
   totalCount: number
   /** A page of devices */
-  devices: Array<Device>
+  devices: Device[]
 }
 
 /** List hubs response */
@@ -285,7 +285,7 @@ export interface ListHubsResponse {
   /** Total number of hubs */
   totalCount: number
   /** A page of hubs */
-  hubs: Array<Hub>
+  hubs: Hub[]
 }
 
 /** List networks response */
@@ -293,7 +293,7 @@ export interface ListNetworksResponse {
   /** Total number of Networks */
   totalCount: number
   /** A page of networks */
-  networks: Array<Network>
+  networks: Network[]
 }
 
 /** List routes response */
@@ -301,13 +301,13 @@ export interface ListRoutesResponse {
   /** Total number of routes */
   totalCount: number
   /** A page of routes */
-  routes: Array<RouteSummary>
+  routes: RouteSummary[]
 }
 
 /** List twin documents response */
 export interface ListTwinDocumentsResponse {
   /** Twin's document list */
-  documents: Array<ListTwinDocumentsResponseDocumentSummary>
+  documents: ListTwinDocumentsResponseDocumentSummary[]
 }
 
 /** List twin documents response. document summary */

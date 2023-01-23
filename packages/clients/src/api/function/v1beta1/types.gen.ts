@@ -196,7 +196,7 @@ export interface Domain {
 
 export interface DownloadURL {
   url: string
-  headers: Record<string, Array<string>>
+  headers: Record<string, string[]>
 }
 
 /** Function */
@@ -217,7 +217,7 @@ export interface Function {
   privacy: FunctionPrivacy
   description?: string
   domainName: string
-  secretEnvironmentVariables: Array<SecretHashedValue>
+  secretEnvironmentVariables: SecretHashedValue[]
   region: Region
   /**
    * Possible values:
@@ -232,52 +232,52 @@ export interface Function {
 
 /** List crons response */
 export interface ListCronsResponse {
-  crons: Array<Cron>
+  crons: Cron[]
   totalCount: number
 }
 
 /** List domains response */
 export interface ListDomainsResponse {
-  domains: Array<Domain>
+  domains: Domain[]
   totalCount: number
 }
 
 /** List function runtimes response */
 export interface ListFunctionRuntimesResponse {
-  runtimes: Array<Runtime>
+  runtimes: Runtime[]
   totalCount: number
 }
 
 /** List functions response */
 export interface ListFunctionsResponse {
-  functions: Array<Function>
+  functions: Function[]
   totalCount: number
 }
 
 /** List logs response */
 export interface ListLogsResponse {
-  logs: Array<Log>
+  logs: Log[]
   totalCount: number
 }
 
 /** List namespaces response */
 export interface ListNamespacesResponse {
-  namespaces: Array<Namespace>
+  namespaces: Namespace[]
   totalCount: number
 }
 
 export interface ListTokensResponse {
-  tokens: Array<Token>
+  tokens: Token[]
   totalCount: number
 }
 
 export interface ListTriggerInputsResponse {
-  inputs: Array<TriggerInput>
+  inputs: TriggerInput[]
   totalCount: number
 }
 
 export interface ListTriggersResponse {
-  triggers: Array<Trigger>
+  triggers: Trigger[]
   totalCount: number
 }
 
@@ -306,7 +306,7 @@ export interface Namespace {
   errorMessage?: string
   registryEndpoint: string
   description?: string
-  secretEnvironmentVariables: Array<SecretHashedValue>
+  secretEnvironmentVariables: SecretHashedValue[]
   region: Region
 }
 
@@ -333,15 +333,15 @@ export interface SecretHashedValue {
 }
 
 export interface SetTriggerInputsRequestNatsConfigs {
-  configs: Array<CreateTriggerInputRequestNatsClientConfigSpec>
+  configs: CreateTriggerInputRequestNatsClientConfigSpec[]
 }
 
 export interface SetTriggerInputsRequestSqsConfigs {
-  configs: Array<CreateTriggerInputRequestSqsClientConfigSpec>
+  configs: CreateTriggerInputRequestSqsClientConfigSpec[]
 }
 
 export interface SetTriggerInputsResponse {
-  triggerInputs: Array<TriggerInput>
+  triggerInputs: TriggerInput[]
 }
 
 /** Token */
@@ -440,7 +440,7 @@ export interface UpdateTriggerInputRequestSqsClientConfigSpec {
 /** Upload url */
 export interface UploadURL {
   url: string
-  headers: Record<string, Array<string>>
+  headers: Record<string, string[]>
 }
 
 export type ListNamespacesRequest = {
@@ -467,7 +467,7 @@ export type CreateNamespaceRequest = {
   environmentVariables?: Record<string, string>
   projectId?: string
   description?: string
-  secretEnvironmentVariables?: Array<Secret>
+  secretEnvironmentVariables?: Secret[]
 }
 
 export type UpdateNamespaceRequest = {
@@ -476,7 +476,7 @@ export type UpdateNamespaceRequest = {
   namespaceId: string
   environmentVariables?: Record<string, string>
   description?: string
-  secretEnvironmentVariables?: Array<Secret>
+  secretEnvironmentVariables?: Secret[]
 }
 
 export type DeleteNamespaceRequest = {
@@ -517,7 +517,7 @@ export type CreateFunctionRequest = {
   handler?: string
   privacy?: FunctionPrivacy
   description?: string
-  secretEnvironmentVariables?: Array<Secret>
+  secretEnvironmentVariables?: Secret[]
   /**
    * Possible values:
    *
@@ -542,7 +542,7 @@ export type UpdateFunctionRequest = {
   handler?: string
   privacy?: FunctionPrivacy
   description?: string
-  secretEnvironmentVariables?: Array<Secret>
+  secretEnvironmentVariables?: Secret[]
   /**
    * Possible values:
    *

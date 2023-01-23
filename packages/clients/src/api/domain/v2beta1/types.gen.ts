@@ -235,7 +235,7 @@ export interface Contact {
   lang: LanguageCode
   resale: boolean
   /** @deprecated */
-  questions?: Array<ContactQuestion>
+  questions?: ContactQuestion[]
   extensionFr?: ContactExtensionFR
   extensionEu?: ContactExtensionEU
   whoisOptIn: boolean
@@ -323,9 +323,9 @@ export interface ContactRolesRoles {
 export interface DNSZone {
   domain: string
   subdomain: string
-  ns: Array<string>
-  nsDefault: Array<string>
-  nsMaster: Array<string>
+  ns: string[]
+  nsDefault: string[]
+  nsMaster: string[]
   status: DNSZoneStatus
   message?: string
   updatedAt?: Date
@@ -372,13 +372,13 @@ export interface Domain {
   projectId: string
   autoRenewStatus: DomainFeatureStatus
   dnssec?: DomainDNSSEC
-  eppCode: Array<string>
+  eppCode: string[]
   expiredAt?: Date
   updatedAt?: Date
   registrar: string
   isExternal: boolean
   status: DomainStatus
-  dnsZones: Array<DNSZone>
+  dnsZones: DNSZone[]
   ownerContact?: Contact
   technicalContact?: Contact
   administrativeContact?: Contact
@@ -398,7 +398,7 @@ export interface Domain {
 
 export interface DomainDNSSEC {
   status: DomainFeatureStatus
-  dsRecords: Array<DSRecord>
+  dsRecords: DSRecord[]
 }
 
 export interface DomainRecord {
@@ -432,18 +432,18 @@ export interface DomainRecord {
 }
 
 export interface DomainRecordGeoIPConfig {
-  matches: Array<DomainRecordGeoIPConfigMatch>
+  matches: DomainRecordGeoIPConfigMatch[]
   default: string
 }
 
 export interface DomainRecordGeoIPConfigMatch {
-  countries: Array<string>
-  continents: Array<string>
+  countries: string[]
+  continents: string[]
   data: string
 }
 
 export interface DomainRecordHTTPServiceConfig {
-  ips: Array<string>
+  ips: string[]
   mustContain?: string
   url: string
   userAgent?: string
@@ -451,7 +451,7 @@ export interface DomainRecordHTTPServiceConfig {
 }
 
 export interface DomainRecordViewConfig {
-  views: Array<DomainRecordViewConfigView>
+  views: DomainRecordViewConfigView[]
 }
 
 export interface DomainRecordViewConfigView {
@@ -460,7 +460,7 @@ export interface DomainRecordViewConfigView {
 }
 
 export interface DomainRecordWeightedConfig {
-  weightedIps: Array<DomainRecordWeightedConfigWeightedIP>
+  weightedIps: DomainRecordWeightedConfigWeightedIP[]
 }
 
 export interface DomainRecordWeightedConfigWeightedIP {
@@ -483,7 +483,7 @@ export interface DomainSummary {
   projectId: string
   autoRenewStatus: DomainFeatureStatus
   dnssecStatus: DomainFeatureStatus
-  eppCode: Array<string>
+  eppCode: string[]
   expiredAt?: Date
   updatedAt?: Date
   registrar: string
@@ -513,7 +513,7 @@ export interface GetDNSZoneTsigKeyResponse {
 
 /** Get dns zone version diff response */
 export interface GetDNSZoneVersionDiffResponse {
-  changes: Array<RecordChange>
+  changes: RecordChange[]
 }
 
 /** Get domain auth code response */
@@ -524,7 +524,7 @@ export interface GetDomainAuthCodeResponse {
 export interface Host {
   domain: string
   name: string
-  ips: Array<string>
+  ips: string[]
   status: HostStatus
 }
 
@@ -534,7 +534,7 @@ export interface ImportProviderDNSZoneRequestOnlineV1 {
 
 /** Import provider dns zone response */
 export interface ImportProviderDNSZoneResponse {
-  records: Array<DomainRecord>
+  records: DomainRecord[]
 }
 
 export interface ImportRawDNSZoneRequestAXFRSource {
@@ -554,19 +554,19 @@ export interface ImportRawDNSZoneRequestTsigKey {
 
 /** Import raw dns zone response */
 export interface ImportRawDNSZoneResponse {
-  records: Array<DomainRecord>
+  records: DomainRecord[]
 }
 
 /** List contacts response */
 export interface ListContactsResponse {
   totalCount: number
-  contacts: Array<ContactRoles>
+  contacts: ContactRoles[]
 }
 
 /** List dns zone nameservers response */
 export interface ListDNSZoneNameserversResponse {
   /** The returned DNS zone nameservers */
-  ns: Array<Nameserver>
+  ns: Nameserver[]
 }
 
 /** List dns zone records response */
@@ -574,21 +574,21 @@ export interface ListDNSZoneRecordsResponse {
   /** The total number of DNS zone records */
   totalCount: number
   /** The paginated returned DNS zone records */
-  records: Array<DomainRecord>
+  records: DomainRecord[]
 }
 
 /** List dns zone version records response */
 export interface ListDNSZoneVersionRecordsResponse {
   /** The total number of DNS zones versions records */
   totalCount: number
-  records: Array<DomainRecord>
+  records: DomainRecord[]
 }
 
 /** List dns zone versions response */
 export interface ListDNSZoneVersionsResponse {
   /** The total number of DNS zones versions */
   totalCount: number
-  versions: Array<DNSZoneVersion>
+  versions: DNSZoneVersion[]
 }
 
 /** List dns zones response */
@@ -596,42 +596,42 @@ export interface ListDNSZonesResponse {
   /** The total number of DNS zones */
   totalCount: number
   /** The paginated returned DNS zones */
-  dnsZones: Array<DNSZone>
+  dnsZones: DNSZone[]
 }
 
 /** List domain hosts response */
 export interface ListDomainHostsResponse {
   totalCount: number
-  hosts: Array<Host>
+  hosts: Host[]
 }
 
 /** List domains response */
 export interface ListDomainsResponse {
   totalCount: number
-  domains: Array<DomainSummary>
+  domains: DomainSummary[]
 }
 
 /** List renewable domains response */
 export interface ListRenewableDomainsResponse {
   totalCount: number
-  domains: Array<RenewableDomain>
+  domains: RenewableDomain[]
 }
 
 /** List ssl certificates response */
 export interface ListSSLCertificatesResponse {
   totalCount: number
-  certificates: Array<SSLCertificate>
+  certificates: SSLCertificate[]
 }
 
 /** List tasks response */
 export interface ListTasksResponse {
   totalCount: number
-  tasks: Array<Task>
+  tasks: Task[]
 }
 
 export interface Nameserver {
   name: string
-  ip: Array<string>
+  ip: string[]
 }
 
 export interface NewContact {
@@ -653,7 +653,7 @@ export interface NewContact {
   lang: LanguageCode
   resale: boolean
   /** @deprecated */
-  questions?: Array<ContactQuestion>
+  questions?: ContactQuestion[]
   extensionFr?: ContactExtensionFR
   extensionEu?: ContactExtensionEU
   whoisOptIn: boolean
@@ -662,7 +662,7 @@ export interface NewContact {
 }
 
 export interface OrderResponse {
-  domains: Array<string>
+  domains: string[]
   organizationId: string
   projectId: string
   taskId: string
@@ -693,7 +693,7 @@ export interface RecordChange {
 }
 
 export interface RecordChangeAdd {
-  records: Array<DomainRecord>
+  records: DomainRecord[]
 }
 
 export interface RecordChangeClear {}
@@ -710,7 +710,7 @@ export interface RecordChangeSet {
   id?: string
   /** One-of ('identifier'): at most one of 'id', 'idFields' could be set. */
   idFields?: RecordIdentifier
-  records: Array<DomainRecord>
+  records: DomainRecord[]
 }
 
 export interface RecordIdentifier {
@@ -723,7 +723,7 @@ export interface RecordIdentifier {
 /** Refresh dns zone response */
 export interface RefreshDNSZoneResponse {
   /** The returned DNS zones */
-  dnsZones: Array<DNSZone>
+  dnsZones: DNSZone[]
 }
 
 export interface RegisterExternalDomainResponse {
@@ -748,7 +748,7 @@ export interface RestoreDNSZoneVersionResponse {}
 
 export interface SSLCertificate {
   dnsZone: string
-  alternativeDnsZones: Array<string>
+  alternativeDnsZones: string[]
   status: SSLCertificateStatus
   privateKey: string
   certificateChain: string
@@ -759,7 +759,7 @@ export interface SSLCertificate {
 /** Search available domains response */
 export interface SearchAvailableDomainsResponse {
   /** Array of available domains */
-  availableDomains: Array<AvailableDomain>
+  availableDomains: AvailableDomain[]
 }
 
 export interface Task {
@@ -803,13 +803,13 @@ export interface UpdateContactRequestQuestion {
 /** Update dns zone nameservers response */
 export interface UpdateDNSZoneNameserversResponse {
   /** The returned DNS zone nameservers */
-  ns: Array<Nameserver>
+  ns: Nameserver[]
 }
 
 /** Update dns zone records response */
 export interface UpdateDNSZoneRecordsResponse {
   /** The returned DNS zone records */
-  records: Array<DomainRecord>
+  records: DomainRecord[]
 }
 
 export type ListDNSZonesRequest = {
@@ -888,7 +888,7 @@ export type UpdateDNSZoneRecordsRequest = {
   /** The DNS zone where the DNS zone records will be updated */
   dnsZone: string
   /** The changes made to the records */
-  changes: Array<RecordChange>
+  changes: RecordChange[]
   /** Whether or not to return all the records */
   returnAllRecords?: boolean
   /**
@@ -914,7 +914,7 @@ export type UpdateDNSZoneNameserversRequest = {
   /** The DNS zone where the DNS zone nameservers will be updated */
   dnsZone: string
   /** The new DNS zone nameservers */
-  ns: Array<Nameserver>
+  ns: Nameserver[]
 }
 
 export type ClearDNSZoneRecordsRequest = {
@@ -996,7 +996,7 @@ export type GetSSLCertificateRequest = {
 
 export type CreateSSLCertificateRequest = {
   dnsZone: string
-  alternativeDnsZones?: Array<string>
+  alternativeDnsZones?: string[]
 }
 
 export type ListSSLCertificatesRequest = {
@@ -1027,7 +1027,7 @@ export type RegistrarApiListTasksRequest = {
 }
 
 export type RegistrarApiBuyDomainsRequest = {
-  domains: Array<string>
+  domains: string[]
   durationInYears: number
   projectId?: string
   /**
@@ -1063,13 +1063,13 @@ export type RegistrarApiBuyDomainsRequest = {
 }
 
 export type RegistrarApiRenewDomainsRequest = {
-  domains: Array<string>
+  domains: string[]
   durationInYears: number
   forceLateRenewal?: boolean
 }
 
 export type RegistrarApiTransferInDomainRequest = {
-  domains: Array<TransferInDomainRequestTransferRequest>
+  domains: TransferInDomainRequestTransferRequest[]
   projectId?: string
   /**
    * One-of ('ownerContactType'): at most one of 'ownerContactId',
@@ -1192,7 +1192,7 @@ export type RegistrarApiUpdateContactRequest = {
   lang?: LanguageCode
   resale?: boolean
   /** @deprecated */
-  questions?: Array<UpdateContactRequestQuestion>
+  questions?: UpdateContactRequestQuestion[]
   extensionFr?: ContactExtensionFR
   extensionEu?: ContactExtensionEU
   whoisOptIn?: boolean
@@ -1289,9 +1289,9 @@ export type RegistrarApiDisableDomainDNSSECRequest = {
 
 export type RegistrarApiSearchAvailableDomainsRequest = {
   /** A list of domain to search, TLD is optional */
-  domains: Array<string>
+  domains: string[]
   /** Array of tlds to search on */
-  tlds?: Array<string>
+  tlds?: string[]
   /** Search exact match */
   strictSearch: boolean
 }
@@ -1299,7 +1299,7 @@ export type RegistrarApiSearchAvailableDomainsRequest = {
 export type RegistrarApiCreateDomainHostRequest = {
   domain: string
   name: string
-  ips?: Array<string>
+  ips?: string[]
 }
 
 export type RegistrarApiListDomainHostsRequest = {
@@ -1311,7 +1311,7 @@ export type RegistrarApiListDomainHostsRequest = {
 export type RegistrarApiUpdateDomainHostRequest = {
   domain: string
   name: string
-  ips?: Array<string>
+  ips?: string[]
 }
 
 export type RegistrarApiDeleteDomainHostRequest = {

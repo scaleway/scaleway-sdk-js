@@ -133,13 +133,13 @@ export interface ACLRuleRequest {
 /** Add instance acl rules response */
 export interface AddInstanceACLRulesResponse {
   /** Rules enabled on the instance */
-  rules: Array<ACLRule>
+  rules: ACLRule[]
 }
 
 /** Add instance settings response */
 export interface AddInstanceSettingsResponse {
   /** Settings available on the instance */
-  settings: Array<InstanceSetting>
+  settings: InstanceSetting[]
 }
 
 export interface BackupSchedule {
@@ -199,7 +199,7 @@ export interface DatabaseEngine {
   /** Engine logo URL */
   logoUrl: string
   /** Available versions */
-  versions: Array<EngineVersion>
+  versions: EngineVersion[]
   /** Region of this database engine */
   region: Region
 }
@@ -207,13 +207,13 @@ export interface DatabaseEngine {
 /** Delete instance acl rules response */
 export interface DeleteInstanceACLRulesResponse {
   /** ACL rules present on the instance */
-  rules: Array<ACLRule>
+  rules: ACLRule[]
 }
 
 /** Delete instance settings response */
 export interface DeleteInstanceSettingsResponse {
   /** Settings names to delete from the instance */
-  settings: Array<InstanceSetting>
+  settings: InstanceSetting[]
 }
 
 /** Endpoint */
@@ -346,13 +346,13 @@ export interface EngineVersion {
   /** End of life date */
   endOfLife?: Date
   /** Engine settings available to be set */
-  availableSettings: Array<EngineSetting>
+  availableSettings: EngineSetting[]
   /** Disabled versions cannot be created */
   disabled: boolean
   /** Beta status of engine version */
   beta: boolean
   /** Engine settings available to be set at database initialisation */
-  availableInitSettings: Array<EngineSetting>
+  availableInitSettings: EngineSetting[]
 }
 
 /** Instance */
@@ -376,31 +376,31 @@ export interface Instance {
   /** Database engine of the database (PostgreSQL, MySQL, ...) */
   engine: string
   /** Available database engine versions for upgrade */
-  upgradableVersion: Array<UpgradableVersion>
+  upgradableVersion: UpgradableVersion[]
   /** @deprecated Endpoint of the instance */
   endpoint?: Endpoint
   /** List of tags applied to the instance */
-  tags: Array<string>
+  tags: string[]
   /** Advanced settings of the instance */
-  settings: Array<InstanceSetting>
+  settings: InstanceSetting[]
   /** Backup schedule of the instance */
   backupSchedule?: BackupSchedule
   /** Whether or not High-Availability is enabled */
   isHaCluster: boolean
   /** Read replicas of the instance */
-  readReplicas: Array<ReadReplica>
+  readReplicas: ReadReplica[]
   /** Node type of the instance */
   nodeType: string
   /** List of engine settings to be set at database initialisation */
-  initSettings: Array<InstanceSetting>
+  initSettings: InstanceSetting[]
   /** List of instance endpoints */
-  endpoints: Array<Endpoint>
+  endpoints: Endpoint[]
   /** Logs policy of the instance */
   logsPolicy?: LogsPolicy
   /** Store logical backups in the same region as the database instance */
   backupSameRegion: boolean
   /** List of instance maintenances */
-  maintenances: Array<Maintenance>
+  maintenances: Maintenance[]
 }
 
 /** Instance log */
@@ -424,7 +424,7 @@ export interface InstanceLog {
 /** Instance metrics */
 export interface InstanceMetrics {
   /** Time series of metrics of a given instance */
-  timeseries: Array<TimeSeries>
+  timeseries: TimeSeries[]
 }
 
 export interface InstanceSetting {
@@ -435,7 +435,7 @@ export interface InstanceSetting {
 /** List database backups response */
 export interface ListDatabaseBackupsResponse {
   /** List of database backups */
-  databaseBackups: Array<DatabaseBackup>
+  databaseBackups: DatabaseBackup[]
   /** Total count of database backups available */
   totalCount: number
 }
@@ -443,7 +443,7 @@ export interface ListDatabaseBackupsResponse {
 /** List database engines response */
 export interface ListDatabaseEnginesResponse {
   /** List of the available database engines */
-  engines: Array<DatabaseEngine>
+  engines: DatabaseEngine[]
   /** Total count of database engines available */
   totalCount: number
 }
@@ -451,7 +451,7 @@ export interface ListDatabaseEnginesResponse {
 /** List databases response */
 export interface ListDatabasesResponse {
   /** List of the databases */
-  databases: Array<Database>
+  databases: Database[]
   /** Total count of databases present on a given instance */
   totalCount: number
 }
@@ -459,7 +459,7 @@ export interface ListDatabasesResponse {
 /** List instance acl rules response */
 export interface ListInstanceACLRulesResponse {
   /** List of the ACL rules present on a given instance */
-  rules: Array<ACLRule>
+  rules: ACLRule[]
   /** Total count of ACL rules present on a given instance */
   totalCount: number
 }
@@ -467,7 +467,7 @@ export interface ListInstanceACLRulesResponse {
 /** List instance logs details response */
 export interface ListInstanceLogsDetailsResponse {
   /** Remote instance logs details */
-  details: Array<ListInstanceLogsDetailsResponseInstanceLogDetail>
+  details: ListInstanceLogsDetailsResponseInstanceLogDetail[]
 }
 
 export interface ListInstanceLogsDetailsResponseInstanceLogDetail {
@@ -478,13 +478,13 @@ export interface ListInstanceLogsDetailsResponseInstanceLogDetail {
 /** List instance logs response */
 export interface ListInstanceLogsResponse {
   /** Available logs in a given instance */
-  instanceLogs: Array<InstanceLog>
+  instanceLogs: InstanceLog[]
 }
 
 /** List instances response */
 export interface ListInstancesResponse {
   /** List all instances available in a given organization/project */
-  instances: Array<Instance>
+  instances: Instance[]
   /** Total count of instances available in a given organization/project */
   totalCount: number
 }
@@ -492,7 +492,7 @@ export interface ListInstancesResponse {
 /** List node types response */
 export interface ListNodeTypesResponse {
   /** Types of the node */
-  nodeTypes: Array<NodeType>
+  nodeTypes: NodeType[]
   /** Total count of node-types available */
   totalCount: number
 }
@@ -500,7 +500,7 @@ export interface ListNodeTypesResponse {
 /** List privileges response */
 export interface ListPrivilegesResponse {
   /** Privileges of a given user in a given database in a given instance */
-  privileges: Array<Privilege>
+  privileges: Privilege[]
   /** Total count of privileges present on a given database */
   totalCount: number
 }
@@ -508,7 +508,7 @@ export interface ListPrivilegesResponse {
 /** List snapshots response */
 export interface ListSnapshotsResponse {
   /** List of snapshots */
-  snapshots: Array<Snapshot>
+  snapshots: Snapshot[]
   /** Total count of snapshots available */
   totalCount: number
 }
@@ -516,7 +516,7 @@ export interface ListSnapshotsResponse {
 /** List users response */
 export interface ListUsersResponse {
   /** List of users in a given instance */
-  users: Array<User>
+  users: User[]
   /** Total count of users present on a given instance */
   totalCount: number
 }
@@ -564,7 +564,7 @@ export interface NodeType {
   /** The Node Type is currently in beta */
   beta: boolean
   /** Available storage options for the Node Type */
-  availableVolumeTypes: Array<NodeTypeVolumeType>
+  availableVolumeTypes: NodeTypeVolumeType[]
   /** The Node Type can be used only with high availability option */
   isHaRequired: boolean
   /** Region the Node Type is in */
@@ -596,7 +596,7 @@ export interface NodeTypeVolumeType {
 /** Prepare instance logs response */
 export interface PrepareInstanceLogsResponse {
   /** Instance logs for a given instance between a start and an end date */
-  instanceLogs: Array<InstanceLog>
+  instanceLogs: InstanceLog[]
 }
 
 /** Privilege */
@@ -614,7 +614,7 @@ export interface ReadReplica {
   /** UUID of the read replica */
   id: string
   /** Display read replica connection information */
-  endpoints: Array<Endpoint>
+  endpoints: Endpoint[]
   /** Read replica status */
   status: ReadReplicaStatus
   /** Region the read replica is in */
@@ -657,13 +657,13 @@ export interface ReadReplicaEndpointSpecPrivateNetwork {
 /** Set instance acl rules response */
 export interface SetInstanceACLRulesResponse {
   /** ACLs rules configured for an instance */
-  rules: Array<ACLRule>
+  rules: ACLRule[]
 }
 
 /** Set instance settings response */
 export interface SetInstanceSettingsResponse {
   /** Settings configured for a given instance */
-  settings: Array<InstanceSetting>
+  settings: InstanceSetting[]
 }
 
 /** Snapshot */
@@ -863,7 +863,7 @@ export type ListInstancesRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
   /** List instance that have a given tags */
-  tags?: Array<string>
+  tags?: string[]
   /** List instance that match a given name pattern */
   name?: string
   /** Criteria to use when ordering instance listing */
@@ -915,9 +915,9 @@ export type CreateInstanceRequest = {
   /** Whether or not backups are disabled */
   disableBackup: boolean
   /** Tags to apply to the instance */
-  tags?: Array<string>
+  tags?: string[]
   /** List of engine settings to be set at database initialisation */
-  initSettings?: Array<InstanceSetting>
+  initSettings?: InstanceSetting[]
   /** Type of volume where data are stored (lssd, bssd, ...) */
   volumeType?: VolumeType
   /** Volume size when volume_type is not lssd */
@@ -926,7 +926,7 @@ export type CreateInstanceRequest = {
    * One or multiple EndpointSpec used to expose your database instance. A
    * load_balancer public endpoint is systematically created
    */
-  initEndpoints?: Array<EndpointSpec>
+  initEndpoints?: EndpointSpec[]
   /** Store logical backups in the same region as the database instance */
   backupSameRegion: boolean
 }
@@ -945,7 +945,7 @@ export type UpdateInstanceRequest = {
   /** Name of the instance */
   name?: string
   /** Tags of a given instance */
-  tags?: Array<string>
+  tags?: string[]
   /** Logs policy of the instance */
   logsPolicy?: LogsPolicy
   /** Store logical backups in the same region as the database instance */
@@ -1010,7 +1010,7 @@ export type CreateReadReplicaRequest = {
   /** UUID of the instance you want a read replica of */
   instanceId: string
   /** Specification of the endpoint you want to create */
-  endpointSpec?: Array<ReadReplicaEndpointSpec>
+  endpointSpec?: ReadReplicaEndpointSpec[]
 }
 
 export type GetReadReplicaRequest = {
@@ -1040,7 +1040,7 @@ export type CreateReadReplicaEndpointRequest = {
   /** UUID of the read replica */
   readReplicaId: string
   /** Specification of the endpoint you want to create */
-  endpointSpec: Array<ReadReplicaEndpointSpec>
+  endpointSpec: ReadReplicaEndpointSpec[]
 }
 
 export type PrepareInstanceLogsRequest = {
@@ -1098,7 +1098,7 @@ export type AddInstanceSettingsRequest = {
   /** UUID of the instance you want to add settings to */
   instanceId: string
   /** Settings to add on the instance */
-  settings: Array<InstanceSetting>
+  settings: InstanceSetting[]
 }
 
 export type DeleteInstanceSettingsRequest = {
@@ -1107,7 +1107,7 @@ export type DeleteInstanceSettingsRequest = {
   /** UUID of the instance to delete settings from */
   instanceId: string
   /** Settings names to delete */
-  settingNames: Array<string>
+  settingNames: string[]
 }
 
 export type SetInstanceSettingsRequest = {
@@ -1116,7 +1116,7 @@ export type SetInstanceSettingsRequest = {
   /** UUID of the instance where the settings has to be set */
   instanceId: string
   /** Settings to define for the instance */
-  settings: Array<InstanceSetting>
+  settings: InstanceSetting[]
 }
 
 export type ListInstanceACLRulesRequest = {
@@ -1134,7 +1134,7 @@ export type AddInstanceACLRulesRequest = {
   /** UUID of the instance you want to add acl rules to */
   instanceId: string
   /** ACLs rules to add to the instance */
-  rules: Array<ACLRuleRequest>
+  rules: ACLRuleRequest[]
 }
 
 export type SetInstanceACLRulesRequest = {
@@ -1143,7 +1143,7 @@ export type SetInstanceACLRulesRequest = {
   /** UUID of the instance where the ACL rules has to be set */
   instanceId: string
   /** ACL rules to define for the instance */
-  rules: Array<ACLRuleRequest>
+  rules: ACLRuleRequest[]
 }
 
 export type DeleteInstanceACLRulesRequest = {
@@ -1152,7 +1152,7 @@ export type DeleteInstanceACLRulesRequest = {
   /** UUID of the instance you want to delete an ACL rules from */
   instanceId: string
   /** ACL rules IP present on the instance */
-  aclRuleIps: Array<string>
+  aclRuleIps: string[]
 }
 
 export type ListUsersRequest = {

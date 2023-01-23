@@ -42,7 +42,7 @@ export interface Human {
 
 export interface ListHumansResponse {
   totalCount: number
-  humans: Array<Human>
+  humans: Human[]
 }
 
 export interface RegisterResponse {

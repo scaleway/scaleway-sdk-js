@@ -21,7 +21,7 @@ export interface Image {
   /** URL of this image's logo */
   logo: string
   /** List of categories this image belongs to */
-  categories: Array<string>
+  categories: string[]
   /** Creation date of this image */
   creationDate?: Date
   /** Date of the last modification of this image */
@@ -31,19 +31,19 @@ export interface Image {
   /** Typically an identifier for a distribution (ex. "ubuntu_focal"). */
   label: string
   /** List of versions of this image */
-  versions: Array<Version>
+  versions: Version[]
   /** Organization this image belongs to */
   organization?: Organization
   currentPublicVersion: string
 }
 
 export interface ListImagesResponse {
-  images: Array<Image>
+  images: Image[]
   totalCount: number
 }
 
 export interface ListVersionsResponse {
-  versions: Array<Version>
+  versions: Version[]
   totalCount: number
 }
 
@@ -52,7 +52,7 @@ export interface LocalImage {
   /** Version you will typically use to define an image in an API call. */
   id: string
   /** List of all commercial types that are compatible with this local image */
-  compatibleCommercialTypes: Array<string>
+  compatibleCommercialTypes: string[]
   /** Supported architecture for this local image */
   arch: string
   /** Availability Zone where this local image is available */
@@ -75,7 +75,7 @@ export interface Version {
   /** Date of the last modification of this version */
   modificationDate?: Date
   /** List of local images available in this version */
-  localImages: Array<LocalImage>
+  localImages: LocalImage[]
 }
 
 export type ListImagesRequest = {
