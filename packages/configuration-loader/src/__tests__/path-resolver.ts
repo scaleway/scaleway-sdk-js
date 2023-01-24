@@ -31,7 +31,7 @@ describe('getScwConfigurationDirectory', () => {
 
   it(`uses the home directory if any`, () => {
     const oldXDG: string | undefined = updateEnv('XDG_CONFIG_HOME', '')
-    expect(getScwConfigurationDirectory()?.length).toBeGreaterThan(0)
+    expect(getScwConfigurationDirectory().length).toBeGreaterThan(0)
     setOrDeleteEnv('XDG_CONFIG_HOME', oldXDG)
   })
 })
@@ -42,9 +42,9 @@ describe('resolveConfigurationFilePath', () => {
   })
 
   it('is defined and not be empty', () => {
-    const filePath: string | null = resolveConfigurationFilePath()
+    const filePath: string = resolveConfigurationFilePath()
     expect(filePath).not.toBeNull()
-    expect(filePath?.length).toBeGreaterThan(0)
+    expect(filePath.length).toBeGreaterThan(0)
   })
 
   it(`is the user's defined path`, () => {

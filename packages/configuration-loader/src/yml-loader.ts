@@ -31,7 +31,7 @@ export const convertYamlToConfiguration = (
       currentSection = undefined
       if (newSection[1] === 'profiles') {
         foundProfilesKey = true
-      } else if (foundProfilesKey === true) {
+      } else if (foundProfilesKey) {
         ;[, currentSection] = newSection
       }
     }

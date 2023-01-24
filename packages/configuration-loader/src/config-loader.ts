@@ -55,12 +55,12 @@ export const loadAllProfilesFromConfigurationFile = (
   }
   const configs = loadConfigurationFromFile(filePath)
 
-  return Object.keys(configs).reduce(
+  return Object.keys(configs).reduce<Record<string, Profile>>(
     (prev, pKey) => ({
       ...prev,
       [pKey]: convertFileConfigToSDK(configs[pKey]),
     }),
-    {} as Record<string, Profile>,
+    {},
   )
 }
 

@@ -7,12 +7,10 @@ describe('isBrowser', () => {
   })
 
   it('returns true after defining a window', () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore Fake window/document for the test
+    // @ts-expect-error Fake window/document for the test
     global.window = { document: 'not-undefined' }
     expect(isBrowser()).toBe(true)
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore Reset the global variable
+    // @ts-expect-error Reset the global variable
     delete global.window
   })
 })

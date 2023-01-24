@@ -15,5 +15,7 @@ export const composeInterceptors =
   async (instance: T): Promise<T> =>
     interceptors.reduce(
       async (asyncResult, interceptor) => interceptor(await asyncResult),
-      Promise.resolve(instance) as Promise<T>,
+      new Promise<T>(resolve => {
+        resolve(instance)
+      }),
     )

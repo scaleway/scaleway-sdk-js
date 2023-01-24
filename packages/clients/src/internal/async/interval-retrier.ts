@@ -34,6 +34,7 @@ type IntervalStrategy = Generator<number, never | number, number>
 export function* createFixedIntervalStrategy(
   interval: number,
 ): IntervalStrategy {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   while (true) yield interval
 }
 
@@ -51,6 +52,7 @@ export function* createFibonacciIntervalStrategy(
   factor = 1,
 ): IntervalStrategy {
   let [prev, current] = [0, 1]
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   while (true) {
     yield current * base
     ;[prev, current] = [current, prev + current * factor]
@@ -79,6 +81,7 @@ export function* createExponentialBackoffStrategy(
   const ceiling = Math.log(maxDelay / minDelay) / Math.log(2) + 1
   const randomInRange = (min: number, max: number) =>
     min + Math.random() * (max - min)
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   while (true) {
     if (attempt > ceiling) {
       yield maxDelay

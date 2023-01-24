@@ -36,7 +36,7 @@ export const isJSONObject = (obj: unknown): obj is JSONObject => {
     objT !== 'string' &&
     objT !== 'number' &&
     objT !== 'boolean' &&
-    Array.isArray(obj) === false &&
+    !Array.isArray(obj) &&
     objT === 'object'
   )
 }
