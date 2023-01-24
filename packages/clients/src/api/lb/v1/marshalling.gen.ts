@@ -11,6 +11,7 @@ import type { DefaultValues } from '../../../bridge'
 import type {
   Acl,
   AclAction,
+  AclActionRedirect,
   AclMatch,
   AclSpec,
   AddBackendServersRequest,
@@ -328,6 +329,20 @@ export const unmarshalLb = (data: unknown) => {
   } as Lb
 }
 
+const unmarshalAclActionRedirect = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AclActionRedirect' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    code: data.code,
+    target: data.target,
+    type: data.type,
+  } as AclActionRedirect
+}
+
 export const unmarshalBackend = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -393,7 +408,12 @@ const unmarshalAclAction = (data: unknown) => {
     )
   }
 
-  return { type: data.type } as AclAction
+  return {
+    redirect: data.redirect
+      ? unmarshalAclActionRedirect(data.redirect)
+      : undefined,
+    type: data.type,
+  } as AclAction
 }
 
 const unmarshalAclMatch = (data: unknown) => {
@@ -738,10 +758,22 @@ export const unmarshalSetAclsResponse = (data: unknown) => {
   } as SetAclsResponse
 }
 
+const marshalAclActionRedirect = (
+  request: AclActionRedirect,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  code: request.code,
+  target: request.target,
+  type: request.type,
+})
+
 const marshalAclAction = (
   request: AclAction,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  redirect: request.redirect
+    ? marshalAclActionRedirect(request.redirect, defaults)
+    : undefined,
   type: request.type,
 })
 
