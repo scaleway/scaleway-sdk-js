@@ -19,13 +19,10 @@ const VALID_SETTINGS: Settings = {
 const INVALID_SETTINGS_LIST: Partial<Settings>[] = [
   { apiURL: 'https://api.scaleway.com/' },
   { apiURL: 'ftp://api.scaleway.com' },
-  // @ts-ignore Unknown zone
   { defaultZone: 'fr-par-0' },
-  // @ts-ignore Unknown zone
   { defaultZone: 'fr-par' },
-  // @ts-ignore Unknown region
   { defaultRegion: 'fr-par-1' },
-  // @ts-ignore Unknown client type
+  // @ts-expect-error Unknown client type
   { httpClient: 'str-client' },
   { defaultOrganizationId: '' },
   { defaultOrganizationId: 'not-a-uuid-v4' },
@@ -33,9 +30,9 @@ const INVALID_SETTINGS_LIST: Partial<Settings>[] = [
   { defaultProjectId: 'not-a-uuid-v4' },
   { defaultPageSize: 0 },
   { defaultPageSize: -1 },
-  // @ts-ignore
+  // @ts-expect-error Wrong type
   { defaultPageSize: '42' },
-  // @ts-ignore Unknown user agent type
+  // @ts-expect-error Unknown user agent type
   { userAgent: null },
 ]
 /* eslint-enable @typescript-eslint/ban-ts-comment */

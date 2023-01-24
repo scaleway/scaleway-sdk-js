@@ -17,7 +17,7 @@ export const fixLegacyTotalCount = <T>(obj: T, headers: Headers): T => {
     return obj
   }
   const totalCount = parseInt(headerVal, 10)
-  if (Number.isNaN(totalCount) === true) {
+  if (Number.isNaN(totalCount)) {
     return obj
   }
   if (isJSONObject(obj) && !(TOTAL_COUNT_RES_KEY in obj)) {

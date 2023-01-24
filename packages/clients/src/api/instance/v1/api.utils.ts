@@ -504,7 +504,7 @@ export class InstanceV1UtilsAPI extends API {
             method: 'PUT',
             path: `/instance/v1/zones/${validatePathParam(
               'zone',
-              imageReq.zone ?? this.client.settings.defaultZone,
+              imageReq.zone,
             )}/images/${validatePathParam('id', imageReq.id)}`,
           },
           unmarshalSetImageResponse,

@@ -68,7 +68,7 @@ export const assertValidSettings = (obj: Readonly<Settings>): void => {
     ) {
       throw new Error('Default organization ID cannot be empty')
     }
-    if (isOrganizationId(obj.defaultOrganizationId) !== true) {
+    if (!isOrganizationId(obj.defaultOrganizationId)) {
       throw new Error(
         `Invalid organization ID format '${obj.defaultOrganizationId}', expected a UUID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`,
       )
@@ -83,7 +83,7 @@ export const assertValidSettings = (obj: Readonly<Settings>): void => {
     ) {
       throw new Error('Default project ID cannot be empty')
     }
-    if (isProjectId(obj.defaultProjectId) !== true) {
+    if (!isProjectId(obj.defaultProjectId)) {
       throw new Error(
         `Invalid project ID format '${obj.defaultProjectId}', expected a UUID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`,
       )
@@ -105,7 +105,7 @@ export const assertValidSettings = (obj: Readonly<Settings>): void => {
     throw new Error(`Invalid URL ${obj.apiURL}`)
   }
 
-  if (obj.apiURL.slice(-1) === '/') {
+  if (obj.apiURL.endsWith('/')) {
     throw new Error(
       `Invalid URL ${obj.apiURL}: it should not have a trailing slash`,
     )

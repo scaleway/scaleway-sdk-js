@@ -66,4 +66,8 @@ export class ScalewayError extends Error {
   ): ScalewayError | null {
     return new ScalewayError(status, obj)
   }
+
+  toString(): string {
+    return `${this.name}: ${this.message}`
+  }
 }

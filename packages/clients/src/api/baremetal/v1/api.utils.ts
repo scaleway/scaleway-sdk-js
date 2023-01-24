@@ -31,12 +31,6 @@ export class BaremetalV1UtilsAPI extends API {
           return server.install
         })
 
-        if (!value) {
-          throw new Error(
-            `Server creation has not begun for server ${request.serverId}`,
-          )
-        }
-
         return {
           done: !SERVER_INSTALL_TRANSIENT_STATUSES.includes(value.status),
           value,
