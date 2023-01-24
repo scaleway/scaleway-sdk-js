@@ -10,31 +10,31 @@ jobs:
   typecheck:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3.3.0
-    - uses: pnpm/action-setup@v2.2.4
-    - name: Use Node.js
-      uses: actions/setup-node@v3.6.0
-      with:
-        node-version: 17
-        check-latest: true
-        cache: 'pnpm'
-    - run: pnpm install
-    - run: pnpm run build
-    - run: pnpm tsc --noEmit
+      - uses: actions/checkout@v3.3.0
+      - uses: pnpm/action-setup@v2.2.4
+      - name: Use Node.js
+        uses: actions/setup-node@v3.6.0
+        with:
+          node-version: 17
+          check-latest: true
+          cache: "pnpm"
+      - run: pnpm install
+      - run: pnpm run build
+      - run: pnpm tsc --noEmit
   lint:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3.3.0
-    - uses: pnpm/action-setup@v2.2.4
-    - name: Use Node.js
-      uses: actions/setup-node@v3.6.0
-      with:
-        node-version: 18
-        check-latest: true
-        cache: 'pnpm'
-    - run: pnpm install
-    - run: pnpm run build
-    - run: pnpm run lint
+      - uses: actions/checkout@v3.3.0
+      - uses: pnpm/action-setup@v2.2.4
+      - name: Use Node.js
+        uses: actions/setup-node@v3.6.0
+        with:
+          node-version: 18
+          check-latest: true
+          cache: "pnpm"
+      - run: pnpm install
+      - run: pnpm run build
+      - run: pnpm run lint
   test:
     runs-on: ubuntu-20.04
     strategy:
@@ -46,15 +46,15 @@ jobs:
           - "18"
           - "19"
     steps:
-    - uses: actions/checkout@v3.3.0
-    - uses: pnpm/action-setup@v2.2.4
-    - name: Use Node.js
-      uses: actions/setup-node@v3.6.0
-      with:
-        node-version: ${{ matrix.node }}
-        check-latest: true
-        cache: 'pnpm'
-    - run: pnpm install
-    - run: pnpm run build
-    - run: pnpm run test:coverage --testEnvironment ${{ matrix.test-environment }}
-    - uses: codecov/codecov-action@v3.1.1
+      - uses: actions/checkout@v3.3.0
+      - uses: pnpm/action-setup@v2.2.4
+      - name: Use Node.js
+        uses: actions/setup-node@v3.6.0
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
+          cache: "pnpm"
+      - run: pnpm install
+      - run: pnpm run build
+      - run: pnpm run test:coverage --testEnvironment ${{ matrix.test-environment }}
+      - uses: codecov/codecov-action@v3.1.1
