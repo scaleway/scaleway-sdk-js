@@ -42,7 +42,9 @@ jobs:
         test-environment:
           - node
           - jsdom
-        node: [ '18' ]
+        node:
+          - "18"
+          - "19"
     steps:
     - uses: actions/checkout@v3.3.0
     - uses: pnpm/action-setup@v2.2.4
