@@ -2,7 +2,9 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Region, Zone } from '../../../bridge'
 
-export type AclActionType = 'allow' | 'deny'
+export type AclActionRedirectRedirectType = 'location' | 'scheme'
+
+export type AclActionType = 'allow' | 'deny' | 'redirect'
 
 export type AclHttpFilter =
   | 'acl_http_filter_none'
@@ -164,6 +166,33 @@ export interface Acl {
 export interface AclAction {
   /** The action type */
   type: AclActionType
+  /** Redirect parameters when using an ACL with `redirect` action */
+  redirect?: AclActionRedirect
+}
+
+/** Acl action redirect */
+export interface AclActionRedirect {
+  /** Redirect type */
+  type: AclActionRedirectRedirectType
+  /**
+   * An URL can be used in case of a location redirect (e.g.
+   * `https://scaleway.com` will redirect to this same URL). A scheme name (e.g.
+   * `https`, `http`, `ftp`, `git`) will replace the request's original scheme.
+   * This can be useful to implement HTTP to HTTPS redirects. Placeholders can
+   * be used when using a `location` redirect in order to insert original
+   * request's parts, these are:
+   *
+   * - `{{ host }}` for the current request's Host header
+   * - `{{ query }}` for the current request's query string
+   * - `{{ path }}` for the current request's URL path
+   * - `{{ scheme }}` for the current request's scheme
+   */
+  target: string
+  /**
+   * HTTP redirect code to use. Valid values are 301, 302, 303, 307 and 308.
+   * Default value is 302
+   */
+  code?: number
 }
 
 /** Acl match */

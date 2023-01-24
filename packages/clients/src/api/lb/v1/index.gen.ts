@@ -5,6 +5,8 @@ export * from './content.gen'
 export type {
   Acl,
   AclAction,
+  AclActionRedirect,
+  AclActionRedirectRedirectType,
   AclActionType,
   AclHttpFilter,
   AclMatch,
