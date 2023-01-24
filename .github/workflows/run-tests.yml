@@ -39,6 +39,9 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
+        test-environment:
+          - node
+          - jsdom
         node: [ '18' ]
     steps:
     - uses: actions/checkout@v3.3.0
@@ -51,5 +54,5 @@ jobs:
         cache: 'pnpm'
     - run: pnpm install
     - run: pnpm run build
-    - run: pnpm run test:coverage
+    - run: pnpm run test:coverage --testEnvironment ${{ matrix.test-environment }}
     - uses: codecov/codecov-action@v3.1.1
