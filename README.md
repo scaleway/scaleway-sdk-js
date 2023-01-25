@@ -77,12 +77,6 @@ The project is coded with Typescript, so don't hesitate to take advantage of it.
 
 ## Notes
 
-### Build outputs
-
-We only output ESM modules. Please [read this](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
-
-Compiled modules supports Node > 14, the last two versions of any browsers and any browsers with more than 1% of marketshare at the time of release.
-
 ## Contributing Guidelines
 
 This repository is at its early stage and is still in active development.
