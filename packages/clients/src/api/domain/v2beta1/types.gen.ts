@@ -741,6 +741,9 @@ export interface RenewableDomain {
   status: RenewableDomainStatus
   renewableDurationInYears?: number
   expiredAt?: Date
+  limitRenewAt?: Date
+  limitRedemptionAt?: Date
+  estimatedDeleteAt?: Date
 }
 
 /** Restore dns zone version response */
