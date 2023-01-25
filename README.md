@@ -77,7 +77,7 @@ The project is coded with Typescript, so don't hesitate to take advantage of it.
 
 ## Notes
 
-## Contributing Guidelines
+### Contributing Guidelines
 
 This repository is at its early stage and is still in active development.
 If you are looking for a way to contribute please read [CONTRIBUTING.md](./CONTRIBUTING.md).
