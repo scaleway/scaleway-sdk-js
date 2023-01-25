@@ -761,7 +761,10 @@ const unmarshalRenewableDomain = (data: unknown) => {
 
   return {
     domain: data.domain,
+    estimatedDeleteAt: unmarshalDate(data.estimated_delete_at),
     expiredAt: unmarshalDate(data.expired_at),
+    limitRedemptionAt: unmarshalDate(data.limit_redemption_at),
+    limitRenewAt: unmarshalDate(data.limit_renew_at),
     organizationId: data.organization_id,
     projectId: data.project_id,
     renewableDurationInYears: data.renewable_duration_in_years,
