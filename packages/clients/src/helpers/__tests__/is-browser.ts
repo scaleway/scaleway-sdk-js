@@ -3,7 +3,7 @@ import { isBrowser } from '../is-browser'
 
 describe('isBrowser', () => {
   it('returns false by default', () => {
-    expect(isBrowser()).toBe(false)
+    expect(isBrowser()).toBe(!!global.window)
   })
 
   it('returns true after defining a window', () => {

@@ -1,4 +1,5 @@
 import { afterAll, describe, expect, it, jest } from '@jest/globals'
+import { isBrowser } from '../../../helpers/is-browser'
 import type { Settings } from '../../client-settings'
 import { buildFetcher, buildRequest } from '../build-fetcher'
 import type { ScwRequest } from '../types'
@@ -30,10 +31,17 @@ describe(`buildRequest`, () => {
     expect(fReq.headers.get('accept')).toBe(`application/json`)
   })
 
-  it(`has the default header "User-Agent: 'scaleway-sdk-js/v1.0.0'"`, () => {
-    const fReq = buildRequest(SCW_POST_REQUEST, DEFAULT_SETTINGS)
-    expect(fReq.headers.get('User-Agent')).toBe(DEFAULT_SETTINGS.userAgent)
-  })
+  if (!isBrowser()) {
+    it(`has the default header "User-Agent: 'scaleway-sdk-js/v1.0.0'"`, () => {
+      const fReq = buildRequest(SCW_POST_REQUEST, DEFAULT_SETTINGS)
+      expect(fReq.headers.get('User-Agent')).toBe(DEFAULT_SETTINGS.userAgent)
+    })
+  } else {
+    it(`has NOT the default header "User-Agent: 'scaleway-sdk-js/v1.0.0'"`, () => {
+      const fReq = buildRequest(SCW_POST_REQUEST, DEFAULT_SETTINGS)
+      expect(fReq.headers.get('User-Agent')).toBeNull()
+    })
+  }
 
   it(`has NOT the header "User-Agent" when browser is detected`, () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

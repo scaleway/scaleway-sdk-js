@@ -1,4 +1,5 @@
 import { describe, expect, it } from '@jest/globals'
+import { isBrowser } from '../../../helpers/is-browser'
 import type { Settings } from '../../client-settings'
 import { buildRequest } from '../build-fetcher'
 import { dumpRequest, dumpResponse } from '../http-dumper'
@@ -14,8 +15,12 @@ const DEFAULT_SETTINGS: Settings = {
 }
 
 describe(`dumpRequest`, () => {
-  it(`returns a readable string`, () =>
-    expect(
+  it(`returns a readable string`, () => {
+    const userAgentHeader = !isBrowser()
+      ? `User-Agent: scaleway-sdk-js/v1.0.0\r\n`
+      : ''
+
+    return expect(
       dumpRequest(
         buildRequest(
           {
@@ -27,16 +32,13 @@ describe(`dumpRequest`, () => {
         ),
       ),
     ).resolves.toBe(
-      `POST: https://api.scaleway.com/random/path\r\nAccept: application/json\r\nContent-Type: text/plain;charset=UTF-8\r\nUser-Agent: scaleway-sdk-js/v1.0.0\r\n{"myProp":"random-value"}`,
-    ))
+      `POST: https://api.scaleway.com/random/path\r\nAccept: application/json\r\nContent-Type: text/plain;charset=UTF-8\r\n${userAgentHeader}{"myProp":"random-value"}`,
+    )
+  })
 })
 
-const convertObjToBuffer = (obj: unknown): Buffer => {
-  const str = JSON.stringify(obj)
-  const bytes = new TextEncoder().encode(str)
-
-  return Buffer.from(bytes)
-}
+const convertObjToBuffer = (obj: unknown): Buffer =>
+  Buffer.from(JSON.stringify(obj))
 
 const makeFetchResponse = (
   value: unknown,

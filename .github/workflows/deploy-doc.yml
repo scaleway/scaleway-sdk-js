@@ -4,7 +4,7 @@ on:
   # Runs on tags
   push:
     tags:
-      - '**'
+      - "**"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -39,9 +39,9 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3.6.0
         with:
-          node-version: 17
+          node-version: 18
           check-latest: true
-          cache: 'pnpm'
+          cache: "pnpm"
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v2

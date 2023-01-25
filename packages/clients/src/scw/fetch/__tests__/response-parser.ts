@@ -6,12 +6,8 @@ import { fixLegacyTotalCount, responseParser } from '../response-parser'
 
 const SIMPLE_REQ_BODY = { 'what-is-life': 42 }
 
-const convertObjToBuffer = (obj: unknown): Buffer => {
-  const str = JSON.stringify(obj)
-  const bytes = new TextEncoder().encode(str)
-
-  return Buffer.from(bytes)
-}
+const convertObjToBuffer = (obj: unknown): Buffer =>
+  Buffer.from(JSON.stringify(obj))
 
 const unmarshalJSON = (obj: unknown) => {
   if (!isJSONObject(obj)) throw new Error(`couldn't unwrap response value`)

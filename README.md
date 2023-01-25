@@ -45,7 +45,7 @@ const client = createClient(profile)
 
 **For more advanced needs**, please check the examples.
 
-## Pagination
+### Pagination
 
 We included some pagination helpers for the methods supporting the feature. Let's take `listNamespaces()` (Registry product) as an example:
 
@@ -67,7 +67,7 @@ for await (const page of api.listNamespaces()) {
 }
 ```
 
-## Types
+### Types
 
 The project is coded with Typescript, so don't hesitate to take advantage of it.
 
@@ -75,34 +75,13 @@ The project is coded with Typescript, so don't hesitate to take advantage of it.
 
 2. We export **errors** in the namespace `Errors`, allowing you to differentiate the cases (e.g. `Errors.PermissionsDeniedError`).
 
-## Dependencies
+## Notes
 
-This SDK is based on the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) API and uses `Request`, `Response` & `Headers` interfaces. Those interfaces are native in modern browsers, node >=18 & [deno](https://deno.land/) environments.
-
-For `node` < 18 & `React Native` environments, the commonJS build requires [cross-fetch](https://www.npmjs.com/package/cross-fetch) package, it is listed in `dependencies` but not used in esm build.
-
-**Troubleshooting**
-
-In node environment, the commonJS module defined in `dist/index.cjs` entry file is used by default, thanks to the "main" `package.json` field.
-
-If you want to use the ES module from `dist/index.js` with node < 18 & `React Native` environments, we recommend you to explicitly import [cross-fetch](https://www.npmjs.com/package/cross-fetch) polyfill:
-
-```ts
-import 'cross-fetch/polyfill'
-import {...} from '@scaleway/sdk'
-```
-
-or
-
-```bash
-node -r cross-fetch/polyfill ./script-using-sdk.mjs
-```
-
-## Development
+### Contributing Guidelines
 
 This repository is at its early stage and is still in active development.
 If you are looking for a way to contribute please read [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-## Reach us
+### Reach us
 
 We love feedback. Feel free to reach us on [Scaleway Slack community](https://slack.scaleway.com/), we are waiting for you on [#opensource](https://scaleway-community.slack.com/app_redirect?channel=opensource).

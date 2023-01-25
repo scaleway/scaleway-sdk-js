@@ -1,6 +1,5 @@
 import { babel } from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
-import inject from '@rollup/plugin-inject'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import { dirname } from 'path'
 import { readPackage } from 'read-pkg'
@@ -12,7 +11,7 @@ const PROFILE = !!process.env.PROFILE
 const pkg = await readPackage()
 
 const targets = node => node ? `
-  node > 14
+  node > 18
 ` : `
   > 1%,
   last 2 versions,
@@ -48,12 +47,6 @@ const plugins = ({node}) => [
       ['@babel/env', { loose: true, modules: false, targets: targets(node) }],
     ],
   }),
-  node && inject({
-    fetch: 'cross-fetch',
-    Request: ['cross-fetch', 'Request'],
-    Response: ['cross-fetch', 'Response'],
-    Headers: ['cross-fetch', 'Headers'],
-  }),
   commonjs(),
   nodeResolve({
     extensions: ['.mjs', '.js', '.json', '.ts', '.tsx'],
@@ -80,7 +73,7 @@ export default [
     },
     plugins: plugins({ node: false })
   },
-  // specific build for node (inject cross-fetch & use cjs bundle)
+  // specific build for node (use cjs bundle)
   pkg.main !== pkg.module && {
     external,
     input: './src/index.ts',
