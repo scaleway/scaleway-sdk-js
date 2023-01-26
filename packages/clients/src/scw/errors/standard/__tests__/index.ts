@@ -94,7 +94,7 @@ describe('QuotasExceededError', () => {
 
   it(`parses a valid input`, () => {
     expect(parseScalewayError(403, body).toString()).toBe(
-      `QuotasExceededError: quota exceeded(s): instance_volume has reached its quota (10/10) for project 'b7a1cf21-1e90-464c-a9f6-375c4d1f4b64'; instance_volumes_l_ssd_total_gb has reached its quota (80/100) for organization '72dd6741-d748-42e7-ba65-acd07447d3e9'; instance_volumes_l_ssd_total_gb has reached its quota (70/100)`,
+      `QuotasExceededError: quota(s) exceeded: instance_volume has reached its quota (10/10) for project 'b7a1cf21-1e90-464c-a9f6-375c4d1f4b64'; instance_volumes_l_ssd_total_gb has reached its quota (80/100) for organization '72dd6741-d748-42e7-ba65-acd07447d3e9'; instance_volumes_l_ssd_total_gb has reached its quota (70/100)`,
     )
   })
 
