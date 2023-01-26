@@ -33,7 +33,7 @@ export type QuotasExceededErrorDetails = {
  * @internal
  */
 const buildMessage = (list: QuotasExceededErrorDetails[]): string =>
-  `quota exceeded(s): ${list
+  `quota(s) exceeded: ${list
     .map(details => {
       const message = `${details.resource} has reached its quota (${details.current}/${details.quota})`
 
