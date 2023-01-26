@@ -517,6 +517,7 @@ export class InstanceV1UtilsAPI extends API {
    * Get the content of a user data on a server for the given key.
    *
    * @param request - The request {@link GetServerUserDataRequest}
+   * @returns The content of the key
    */
   getServerUserData = (request: Readonly<GetServerUserDataRequest>) =>
     this.client.fetch<string>({
