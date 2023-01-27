@@ -222,7 +222,7 @@ export interface Function {
   /**
    * Possible values:
    *
-   * - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
+   * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.
    * - Enabled: Serve both HTTP and HTTPS traffic.
    */
@@ -521,7 +521,7 @@ export type CreateFunctionRequest = {
   /**
    * Possible values:
    *
-   * - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
+   * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.
    * - Enabled: Serve both HTTP and HTTPS traffic.
    */
@@ -546,7 +546,7 @@ export type UpdateFunctionRequest = {
   /**
    * Possible values:
    *
-   * - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
+   * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.
    * - Enabled: Serve both HTTP and HTTPS traffic.
    */

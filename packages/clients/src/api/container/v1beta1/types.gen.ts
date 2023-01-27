@@ -106,7 +106,7 @@ export interface Container {
   /**
    * Possible values:
    *
-   * - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
+   * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.
    * - Enabled: Serve both HTTP and HTTPS traffic.
    */
@@ -303,7 +303,7 @@ export type CreateContainerRequest = {
   /**
    * Possible values:
    *
-   * - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
+   * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.
    * - Enabled: Serve both HTTP and HTTPS traffic.
    */
@@ -330,7 +330,7 @@ export type UpdateContainerRequest = {
   /**
    * Possible values:
    *
-   * - Redirected: Responds to HTTP request with a 302 redirect to ask the clients
+   * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.
    * - Enabled: Serve both HTTP and HTTPS traffic.
    */
