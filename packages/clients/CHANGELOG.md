@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.35](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.34...@scaleway/sdk@0.1.0-beta.35) (2023-01-27)
+
+### Features
+
+- **domain:** add additional dates to RenewableDomain ([#403](https://github.com/scaleway/scaleway-sdk-js/issues/403)) ([9b3ea74](https://github.com/scaleway/scaleway-sdk-js/commit/9b3ea744eea6b4055a28f8f1d1d6e45080b7fe07))
+- **instance:** add getServerUserData method ([#405](https://github.com/scaleway/scaleway-sdk-js/issues/405)) ([ff030cf](https://github.com/scaleway/scaleway-sdk-js/commit/ff030cf5509ae9154f118bd6266ae21a6acaa57e))
+- **lb:** add redirect acl ([#400](https://github.com/scaleway/scaleway-sdk-js/issues/400)) ([e60bb9e](https://github.com/scaleway/scaleway-sdk-js/commit/e60bb9efca9768db7f78db4f14b6133812b09b81))
+- **redis:** remove v1alpha1 ([#398](https://github.com/scaleway/scaleway-sdk-js/issues/398)) ([a301de7](https://github.com/scaleway/scaleway-sdk-js/commit/a301de78ed69b92e5ea524235471d04fa413b345))
+- update to Node18, remove cross-fetch, and run tests on node+jsdom ([#386](https://github.com/scaleway/scaleway-sdk-js/issues/386)) ([4e1fe02](https://github.com/scaleway/scaleway-sdk-js/commit/4e1fe02b54939d2d4008b9c53d56ea2553c796fb))
+- use `T[]` array style ([#397](https://github.com/scaleway/scaleway-sdk-js/issues/397)) ([8573336](https://github.com/scaleway/scaleway-sdk-js/commit/85733366cc38edfa69e6635a08f978b846b5ccdb))
+
+### Bug Fixes
+
+- **errors:** adjust message of QuotasExceededError ([#404](https://github.com/scaleway/scaleway-sdk-js/issues/404)) ([01b33a7](https://github.com/scaleway/scaleway-sdk-js/commit/01b33a70af963da080e576f375f767caabf5a78d))
+
 ## [0.1.0-beta.34](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.33...@scaleway/sdk@0.1.0-beta.34) (2023-01-23)
 
 ### Features

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.0-beta.7 (2023-01-27)
+
+### Features
+
+- update to Node18, remove cross-fetch, and run tests on node+jsdom ([#386](https://github.com/scaleway/scaleway-sdk-js/issues/386)) ([4e1fe02](https://github.com/scaleway/scaleway-sdk-js/commit/4e1fe02b54939d2d4008b9c53d56ea2553c796fb))
+
 ## 0.1.0-beta.6 (2023-01-03)
 
 ### Features
