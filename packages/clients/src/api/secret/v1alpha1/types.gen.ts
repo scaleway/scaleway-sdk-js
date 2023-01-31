@@ -181,6 +181,8 @@ export type ListSecretVersionsRequest = {
   secretId: string
   page?: number
   pageSize?: number
+  /** Filter results by status */
+  status?: SecretVersionStatus[]
 }
 
 export type DestroySecretVersionRequest = {
