@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.36](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.35...@scaleway/sdk@0.1.0-beta.36) (2023-02-01)
+
+### Features
+
+- **dom:** add information on domain actions/prices ([#416](https://github.com/scaleway/scaleway-sdk-js/issues/416)) ([7f0356c](https://github.com/scaleway/scaleway-sdk-js/commit/7f0356c007349e7ac5ac1633eb835e7c9dc48903))
+- **secret:** add filter on status for listSecretVersions ([#411](https://github.com/scaleway/scaleway-sdk-js/issues/411)) ([6a655c4](https://github.com/scaleway/scaleway-sdk-js/commit/6a655c417d522234015b6434537f31fd4e5259b9))
+
 ## [0.1.0-beta.35](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.34...@scaleway/sdk@0.1.0-beta.35) (2023-01-27)
 
 ### Features
