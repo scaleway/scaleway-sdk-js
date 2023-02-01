@@ -394,6 +394,7 @@ export interface Domain {
    * set.
    */
   transferRegistrationStatus?: DomainRegistrationStatusTransfer
+  tld?: Tld
 }
 
 export interface DomainDNSSEC {
@@ -744,6 +745,7 @@ export interface RenewableDomain {
   limitRenewAt?: Date
   limitRedemptionAt?: Date
   estimatedDeleteAt?: Date
+  tld?: Tld
 }
 
 /** Restore dns zone version response */
