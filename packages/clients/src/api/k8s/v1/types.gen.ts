@@ -139,7 +139,7 @@ export interface Cluster {
   dashboardEnabled?: boolean
   /** @deprecated The ingress controller used in the cluster */
   ingress?: Ingress
-  /** The auo upgrade configuration of the cluster */
+  /** The auto upgrade configuration of the cluster */
   autoUpgrade?: ClusterAutoUpgrade
   /** True if a new Kubernetes version is available */
   upgradeAvailable: boolean
