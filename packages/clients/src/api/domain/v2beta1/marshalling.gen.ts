@@ -769,6 +769,7 @@ const unmarshalRenewableDomain = (data: unknown) => {
     projectId: data.project_id,
     renewableDurationInYears: data.renewable_duration_in_years,
     status: data.status,
+    tld: data.tld ? unmarshalTld(data.tld) : undefined,
   } as RenewableDomain
 }
 
@@ -910,6 +911,7 @@ export const unmarshalDomain = (data: unknown) => {
     technicalContact: data.technical_contact
       ? unmarshalContact(data.technical_contact)
       : undefined,
+    tld: data.tld ? unmarshalTld(data.tld) : undefined,
     transferRegistrationStatus: data.transfer_registration_status
       ? unmarshalDomainRegistrationStatusTransfer(
           data.transfer_registration_status,
