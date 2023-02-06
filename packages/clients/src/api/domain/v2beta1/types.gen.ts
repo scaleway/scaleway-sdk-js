@@ -145,6 +145,16 @@ export type ListDomainsRequestOrderBy = 'domain_asc' | 'domain_desc'
 
 export type ListRenewableDomainsRequestOrderBy = 'domain_asc' | 'domain_desc'
 
+export type ListTasksRequestOrderBy =
+  | 'domain_desc'
+  | 'domain_asc'
+  | 'type_asc'
+  | 'type_desc'
+  | 'status_asc'
+  | 'status_desc'
+  | 'updated_at_asc'
+  | 'updated_at_desc'
+
 export type RawFormat = 'unknown_raw_format' | 'bind'
 
 export type RenewableDomainStatus =
@@ -1026,9 +1036,12 @@ export type DeleteDNSZoneTsigKeyRequest = {
 export type RegistrarApiListTasksRequest = {
   page?: number
   pageSize?: number
-  domain: string
   projectId?: string
   organizationId?: string
+  domain?: string
+  types?: TaskType[]
+  statuses?: TaskStatus[]
+  orderBy?: ListTasksRequestOrderBy
 }
 
 export type RegistrarApiBuyDomainsRequest = {

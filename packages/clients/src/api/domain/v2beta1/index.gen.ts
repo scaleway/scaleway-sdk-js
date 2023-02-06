@@ -97,6 +97,7 @@ export type {
   ListRenewableDomainsResponse,
   ListSSLCertificatesRequest,
   ListSSLCertificatesResponse,
+  ListTasksRequestOrderBy,
   ListTasksResponse,
   Nameserver,
   NewContact,

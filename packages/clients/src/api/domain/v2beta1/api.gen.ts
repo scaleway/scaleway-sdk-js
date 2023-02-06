@@ -775,7 +775,7 @@ export class API extends ParentAPI {
  */
 export class RegistrarAPI extends ParentAPI {
   protected pageOfListTasks = (
-    request: Readonly<RegistrarApiListTasksRequest>,
+    request: Readonly<RegistrarApiListTasksRequest> = {},
   ) =>
     this.client.fetch<ListTasksResponse>(
       {
@@ -783,6 +783,7 @@ export class RegistrarAPI extends ParentAPI {
         path: `/domain/v2beta1/tasks`,
         urlParams: urlParams(
           ['domain', request.domain],
+          ['order_by', request.orderBy ?? 'domain_desc'],
           [
             'organization_id',
             request.organizationId ??
@@ -797,6 +798,8 @@ export class RegistrarAPI extends ParentAPI {
             'project_id',
             request.projectId ?? this.client.settings.defaultProjectId,
           ],
+          ['statuses', request.statuses],
+          ['types', request.types],
         ),
       },
       unmarshalListTasksResponse,
@@ -808,7 +811,7 @@ export class RegistrarAPI extends ParentAPI {
    * @param request - The request {@link RegistrarApiListTasksRequest}
    * @returns A Promise of ListTasksResponse
    */
-  listTasks = (request: Readonly<RegistrarApiListTasksRequest>) =>
+  listTasks = (request: Readonly<RegistrarApiListTasksRequest> = {}) =>
     enrichForPagination('tasks', this.pageOfListTasks, request)
 
   /**
