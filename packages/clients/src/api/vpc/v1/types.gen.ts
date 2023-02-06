@@ -85,7 +85,7 @@ export type UpdatePrivateNetworkRequest = {
   name?: string
   /** The private networks tags */
   tags?: string[]
-  /** Private network subnets CIDR */
+  /** @deprecated Private network subnets CIDR (deprecated) */
   subnets?: string[]
 }
 
