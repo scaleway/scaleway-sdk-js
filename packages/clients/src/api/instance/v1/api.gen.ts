@@ -1599,6 +1599,7 @@ export class API extends ParentAPI {
   /**
    * List bootscripts
    *
+   * @deprecated
    * @param request - The request {@link ListBootscriptsRequest}
    * @returns A Promise of ListBootscriptsResponse
    */
@@ -1608,6 +1609,7 @@ export class API extends ParentAPI {
   /**
    * Get details of a bootscript with the given ID.
    *
+   * @deprecated
    * @param request - The request {@link GetBootscriptRequest}
    * @returns A Promise of GetBootscriptResponse
    */
