@@ -77,7 +77,10 @@ export type CreateServerRequest = {
   publicIp?: string
   /** The boot type to use */
   bootType?: BootType
-  /** The bootscript ID to use when `boot_type` is set to `bootscript` */
+  /**
+   * @deprecated The bootscript ID to use when `boot_type` is set to
+   *   `bootscript`
+   */
   bootscript?: string
   /**
    * @deprecated The server organization ID.
@@ -142,7 +145,7 @@ export type SetServerRequest = {
   location?: ServerLocation
   /** The server IPv6 address */
   ipv6?: ServerIpv6
-  /** The server bootscript */
+  /** @deprecated The server bootscript */
   bootscript?: Bootscript
   /** The server boot type */
   bootType?: BootType
@@ -173,6 +176,7 @@ export type UpdateServerRequest = {
   /** Tags of the server */
   tags?: string[]
   volumes?: Record<string, VolumeServerTemplate>
+  /** @deprecated */
   bootscript?: string
   dynamicIpRequired?: boolean
   enableIpv6?: boolean
@@ -192,6 +196,7 @@ export type SetImageRequest = {
   arch?: Arch
   creationDate?: Date
   modificationDate?: Date
+  /** @deprecated */
   defaultBootscript?: Bootscript
   extraVolumes?: Record<string, Volume>
   fromServer: string

@@ -241,6 +241,7 @@ export interface Image {
   arch: Arch
   creationDate?: Date
   modificationDate?: Date
+  /** @deprecated */
   defaultBootscript?: Bootscript
   extraVolumes: Record<string, Volume>
   fromServer: string
@@ -516,7 +517,7 @@ export interface Server {
   location?: ServerLocation
   /** The server IPv6 address */
   ipv6?: ServerIpv6
-  /** The server bootscript */
+  /** @deprecated The server bootscript */
   bootscript?: Bootscript
   /** The server boot type */
   bootType: BootType
@@ -1044,7 +1045,7 @@ export type CreateImageRequest = {
   rootVolume: string
   /** Architecture of the image */
   arch: Arch
-  /** Default bootscript of the image */
+  /** @deprecated Default bootscript of the image */
   defaultBootscript?: string
   /** Additional volumes of the image */
   extraVolumes?: Record<string, VolumeTemplate>
