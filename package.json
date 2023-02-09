@@ -91,7 +91,7 @@
     "jest-junit": "^15.0.0",
     "lerna": "^6.4.1",
     "lint-staged": "^13.1.1",
-    "prettier": "^2.8.3",
+    "prettier": "^2.8.4",
     "read-pkg": "^7.1.0",
     "rollup": "^3.12.1",
     "rollup-plugin-dts": "^5.1.1",
