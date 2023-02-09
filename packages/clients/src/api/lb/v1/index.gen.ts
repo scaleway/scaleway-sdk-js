@@ -99,6 +99,7 @@ export type {
   OnMarkedDownAction,
   PrivateNetwork,
   PrivateNetworkDHCPConfig,
+  PrivateNetworkIpamConfig,
   PrivateNetworkStaticConfig,
   PrivateNetworkStatus,
   Protocol,

@@ -733,6 +733,8 @@ export interface PrivateNetwork {
 
 export interface PrivateNetworkDHCPConfig {}
 
+export interface PrivateNetworkIpamConfig {}
+
 export interface PrivateNetworkStaticConfig {
   ipAddress: string[]
 }
