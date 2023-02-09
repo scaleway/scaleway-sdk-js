@@ -48,6 +48,7 @@ export type FunctionRuntime =
   | 'go119'
   | 'python311'
   | 'php82'
+  | 'node19'
 
 export type FunctionStatus =
   | 'unknown'
