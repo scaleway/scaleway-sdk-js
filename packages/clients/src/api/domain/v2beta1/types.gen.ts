@@ -1146,10 +1146,8 @@ export type RegistrarApiDeleteExternalDomainRequest = {
 }
 
 export type RegistrarApiCheckContactsCompatibilityRequest = {
-  /** One-of ('parameter'): at most one of 'domain', 'tld' could be set. */
-  domain?: string
-  /** One-of ('parameter'): at most one of 'domain', 'tld' could be set. */
-  tld?: string
+  domains?: string[]
+  tlds?: string[]
   /**
    * One-of ('ownerContactType'): at most one of 'ownerContactId',
    * 'ownerContact' could be set.
