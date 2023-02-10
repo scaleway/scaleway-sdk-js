@@ -1784,6 +1784,8 @@ export const marshalRegistrarApiCheckContactsCompatibilityRequest = (
   request: RegistrarApiCheckContactsCompatibilityRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  domains: request.domains,
+  tlds: request.tlds,
   ...resolveOneOf<unknown>([
     {
       param: 'administrative_contact_id',
@@ -1806,16 +1808,6 @@ export const marshalRegistrarApiCheckContactsCompatibilityRequest = (
       value: request.ownerContact
         ? marshalNewContact(request.ownerContact, defaults)
         : undefined,
-    },
-  ]),
-  ...resolveOneOf([
-    {
-      param: 'domain',
-      value: request.domain,
-    },
-    {
-      param: 'tld',
-      value: request.tld,
     },
   ]),
   ...resolveOneOf<unknown>([
