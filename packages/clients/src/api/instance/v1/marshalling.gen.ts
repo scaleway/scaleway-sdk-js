@@ -1594,12 +1594,10 @@ const marshalVolumeTemplate = (
   volume_type: request.volumeType,
   ...resolveOneOf([
     {
-      default: defaults.defaultProjectId,
       param: 'project',
       value: request.project,
     },
     {
-      default: defaults.defaultOrganizationId,
       param: 'organization',
       value: request.organization,
     },

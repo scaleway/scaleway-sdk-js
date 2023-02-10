@@ -335,7 +335,6 @@ const marshalRuleSpecs = (
       value: request.projectIds,
     },
     {
-      default: defaults.defaultOrganizationId,
       param: 'organization_id',
       value: request.organizationId,
     },
