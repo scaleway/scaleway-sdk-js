@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.37](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.36...@scaleway/sdk@0.1.0-beta.37) (2023-02-13)
+
+### Features
+
+- **domain:** add more filtering options to list tasks ([#424](https://github.com/scaleway/scaleway-sdk-js/issues/424)) ([f5a022d](https://github.com/scaleway/scaleway-sdk-js/commit/f5a022d57bdae78d19adbccbd59707d099bd8dca))
+- **instance:** deprecate bootscript ([#425](https://github.com/scaleway/scaleway-sdk-js/issues/425)) ([b1a793b](https://github.com/scaleway/scaleway-sdk-js/commit/b1a793b4bab298e51efcc8c47100678bc0c83454))
+- **serverless:** add node19 runtime ([#432](https://github.com/scaleway/scaleway-sdk-js/issues/432)) ([02c1a71](https://github.com/scaleway/scaleway-sdk-js/commit/02c1a713beea8c3e89fc4b97dc62d858055221ad))
+- **vpc:** deprecate update PN subnets ([#423](https://github.com/scaleway/scaleway-sdk-js/issues/423)) ([ec29a86](https://github.com/scaleway/scaleway-sdk-js/commit/ec29a86e46ed52115ee27474b55d84064d09c22c))
+
+### Bug Fixes
+
+- avoid defaultValue for standard fields in nested marshallers ([#434](https://github.com/scaleway/scaleway-sdk-js/issues/434)) ([40198be](https://github.com/scaleway/scaleway-sdk-js/commit/40198bee45e504ac7ec7adacbaf19e9026bf6349))
+- **domain:** remove one-of for checkContactsCompatibility ([#435](https://github.com/scaleway/scaleway-sdk-js/issues/435)) ([8928956](https://github.com/scaleway/scaleway-sdk-js/commit/892895613061858c5f26bb565a9eb1a11f44d2d9))
+
 ## [0.1.0-beta.36](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.35...@scaleway/sdk@0.1.0-beta.36) (2023-02-01)
 
 ### Features
