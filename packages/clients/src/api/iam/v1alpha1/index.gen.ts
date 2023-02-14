@@ -25,6 +25,7 @@ export type {
   GetUserRequest,
   Group,
   ListAPIKeysRequest,
+  ListAPIKeysRequestBearerType,
   ListAPIKeysRequestOrderBy,
   ListAPIKeysResponse,
   ListApplicationsRequest,

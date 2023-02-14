@@ -56,6 +56,9 @@ export const CreateSSHKeyRequest = {
 }
 
 export const ListAPIKeysRequest = {
+  description: {
+    maxLength: 200,
+  },
   page: {
     greaterThanOrEqual: 1,
   },

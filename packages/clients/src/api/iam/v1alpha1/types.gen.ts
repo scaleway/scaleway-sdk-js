@@ -1,6 +1,11 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
+export type ListAPIKeysRequestBearerType =
+  | 'unknown_bearer_type'
+  | 'user'
+  | 'application'
+
 export type ListAPIKeysRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -731,19 +736,29 @@ export type ListAPIKeysRequest = {
   /** ID of organization */
   organizationId?: string
   /**
-   * ID of an application bearer.
+   * @deprecated ID of an application bearer.
    *
-   * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
+   *   One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
   applicationId?: string
   /**
-   * ID of a user bearer.
+   * @deprecated ID of a user bearer.
    *
-   * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
+   *   One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
   userId?: string
   /** Filter out editable API keys or not */
   editable?: boolean
+  /** Filter out expirable API keys or not */
+  expirable?: boolean
+  /** Filter out by access key */
+  accessKey?: string
+  /** Filter out by description */
+  description?: string
+  /** Filter out by bearer ID */
+  bearerId?: string
+  /** Filter out by type of bearer */
+  bearerType?: ListAPIKeysRequestBearerType
 }
 
 export type CreateAPIKeyRequest = {
