@@ -3,12 +3,11 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  unmarshalScwFile,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '../../../bridge'
-import type { ScwFile, WaitForOptions, Zone } from '../../../bridge'
+import type { WaitForOptions, Zone } from '../../../bridge'
 import { CLUSTER_TRANSIENT_STATUSES } from './content.gen'
 import {
   marshalAddAclRulesRequest,
@@ -352,22 +351,21 @@ export class API extends ParentAPI {
    * Get the TLS certificate of a cluster
    *
    * @param request - The request {@link GetClusterCertificateRequest}
-   * @returns A Promise of ScwFile
+   * @returns A Promise of Blob
    */
   getClusterCertificate = (request: Readonly<GetClusterCertificateRequest>) =>
-    this.client.fetch<ScwFile>(
-      {
-        method: 'GET',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/clusters/${validatePathParam(
-          'clusterId',
-          request.clusterId,
-        )}/certificate`,
-      },
-      unmarshalScwFile,
-    )
+    this.client.fetch<Blob>({
+      method: 'GET',
+      path: `/redis/v1/zones/${validatePathParam(
+        'zone',
+        request.zone ?? this.client.settings.defaultZone,
+      )}/clusters/${validatePathParam(
+        'clusterId',
+        request.clusterId,
+      )}/certificate`,
+      urlParams: urlParams(['dl', 1]),
+      responseType: 'blob',
+    })
 
   /**
    * Renew the TLS certificate of a cluster
