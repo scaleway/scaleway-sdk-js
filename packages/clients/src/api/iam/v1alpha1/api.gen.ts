@@ -768,7 +768,12 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/iam/v1alpha1/api-keys`,
         urlParams: urlParams(
+          ['access_key', request.accessKey],
+          ['bearer_id', request.bearerId],
+          ['bearer_type', request.bearerType ?? 'unknown_bearer_type'],
+          ['description', request.description],
           ['editable', request.editable],
+          ['expirable', request.expirable],
           ['order_by', request.orderBy ?? 'created_at_asc'],
           [
             'organization_id',
