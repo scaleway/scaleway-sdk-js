@@ -3,12 +3,11 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  unmarshalScwFile,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '../../../bridge'
-import type { ScwFile, WaitForOptions } from '../../../bridge'
+import type { WaitForOptions } from '../../../bridge'
 import {
   DOMAIN_TRANSIENT_STATUSES,
   SSL_CERTIFICATE_TRANSIENT_STATUSES,
@@ -435,23 +434,21 @@ export class API extends ParentAPI {
    * Get a DNS zone in a given format with default NS.
    *
    * @param request - The request {@link ExportRawDNSZoneRequest}
-   * @returns A Promise of ScwFile
+   * @returns A Promise of Blob
    */
   exportRawDNSZone = (request: Readonly<ExportRawDNSZoneRequest>) =>
-    this.client.fetch<ScwFile>(
-      {
-        method: 'GET',
-        path: `/domain/v2beta1/dns-zones/${validatePathParam(
-          'dnsZone',
-          request.dnsZone,
-        )}/raw`,
-        urlParams: urlParams([
-          'format',
-          request.format ?? 'unknown_raw_format',
-        ]),
-      },
-      unmarshalScwFile,
-    )
+    this.client.fetch<Blob>({
+      method: 'GET',
+      path: `/domain/v2beta1/dns-zones/${validatePathParam(
+        'dnsZone',
+        request.dnsZone,
+      )}/raw`,
+      urlParams: urlParams(
+        ['dl', 1],
+        ['format', request.format ?? 'unknown_raw_format'],
+      ),
+      responseType: 'blob',
+    })
 
   /**
    * Import and replace records from a given provider format with default NS.

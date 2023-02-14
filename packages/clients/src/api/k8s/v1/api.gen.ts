@@ -3,12 +3,11 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  unmarshalScwFile,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '../../../bridge'
-import type { Region, ScwFile, WaitForOptions } from '../../../bridge'
+import type { Region, WaitForOptions } from '../../../bridge'
 import {
   CLUSTER_TRANSIENT_STATUSES,
   NODE_TRANSIENT_STATUSES,
@@ -280,19 +279,18 @@ export class API extends ParentAPI {
   protected _getClusterKubeConfig = (
     request: Readonly<GetClusterKubeConfigRequest>,
   ) =>
-    this.client.fetch<ScwFile>(
-      {
-        method: 'GET',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/clusters/${validatePathParam(
-          'clusterId',
-          request.clusterId,
-        )}/kubeconfig`,
-      },
-      unmarshalScwFile,
-    )
+    this.client.fetch<Blob>({
+      method: 'GET',
+      path: `/k8s/v1/regions/${validatePathParam(
+        'region',
+        request.region ?? this.client.settings.defaultRegion,
+      )}/clusters/${validatePathParam(
+        'clusterId',
+        request.clusterId,
+      )}/kubeconfig`,
+      urlParams: urlParams(['dl', 1]),
+      responseType: 'blob',
+    })
 
   /**
    * This method allows to reset the admin token for a specific Kubernetes

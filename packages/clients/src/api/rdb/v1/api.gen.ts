@@ -3,12 +3,11 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  unmarshalScwFile,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '../../../bridge'
-import type { Region, ScwFile, WaitForOptions } from '../../../bridge'
+import type { Region, WaitForOptions } from '../../../bridge'
 import {
   DATABASE_BACKUP_TRANSIENT_STATUSES,
   INSTANCE_LOG_TRANSIENT_STATUSES,
@@ -652,22 +651,21 @@ export class API extends ParentAPI {
    * Get the TLS certificate of an instance
    *
    * @param request - The request {@link GetInstanceCertificateRequest}
-   * @returns A Promise of ScwFile
+   * @returns A Promise of Blob
    */
   getInstanceCertificate = (request: Readonly<GetInstanceCertificateRequest>) =>
-    this.client.fetch<ScwFile>(
-      {
-        method: 'GET',
-        path: `/rdb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/instances/${validatePathParam(
-          'instanceId',
-          request.instanceId,
-        )}/certificate`,
-      },
-      unmarshalScwFile,
-    )
+    this.client.fetch<Blob>({
+      method: 'GET',
+      path: `/rdb/v1/regions/${validatePathParam(
+        'region',
+        request.region ?? this.client.settings.defaultRegion,
+      )}/instances/${validatePathParam(
+        'instanceId',
+        request.instanceId,
+      )}/certificate`,
+      urlParams: urlParams(['dl', 1]),
+      responseType: 'blob',
+    })
 
   /**
    * Renew the TLS certificate of an instance
