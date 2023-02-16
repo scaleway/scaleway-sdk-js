@@ -1,10 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-export type ListAPIKeysRequestBearerType =
-  | 'unknown_bearer_type'
-  | 'user'
-  | 'application'
+export type BearerType = 'unknown_bearer_type' | 'user' | 'application'
 
 export type ListAPIKeysRequestOrderBy =
   | 'created_at_asc'
@@ -758,7 +755,7 @@ export type ListAPIKeysRequest = {
   /** Filter out by bearer ID */
   bearerId?: string
   /** Filter out by type of bearer */
-  bearerType?: ListAPIKeysRequestBearerType
+  bearerType?: BearerType
 }
 
 export type CreateAPIKeyRequest = {
