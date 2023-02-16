@@ -746,8 +746,8 @@ export type ListAPIKeysRequest = {
   userId?: string
   /** Filter out editable API keys or not */
   editable?: boolean
-  /** Filter out expirable API keys or not */
-  expirable?: boolean
+  /** Filter out expired API keys or not */
+  expired?: boolean
   /** Filter out by access key */
   accessKey?: string
   /** Filter out by description */
