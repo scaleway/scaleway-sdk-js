@@ -773,7 +773,7 @@ export class API extends ParentAPI {
           ['bearer_type', request.bearerType ?? 'unknown_bearer_type'],
           ['description', request.description],
           ['editable', request.editable],
-          ['expirable', request.expirable],
+          ['expired', request.expired],
           ['order_by', request.orderBy ?? 'created_at_asc'],
           [
             'organization_id',
