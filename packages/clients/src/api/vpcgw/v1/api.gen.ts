@@ -953,6 +953,12 @@ export class API extends ParentAPI {
       )}/ips/${validatePathParam('ipId', request.ipId)}`,
     })
 
+  /**
+   * Refresh SSH keys of a VPC Public Gateway
+   *
+   * @param request - The request {@link RefreshSSHKeysRequest}
+   * @returns A Promise of Gateway
+   */
   refreshSSHKeys = (request: Readonly<RefreshSSHKeysRequest>) =>
     this.client.fetch<Gateway>(
       {

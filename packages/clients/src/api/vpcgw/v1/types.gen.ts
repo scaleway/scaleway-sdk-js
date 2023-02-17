@@ -936,5 +936,6 @@ export type DeleteIPRequest = {
 export type RefreshSSHKeysRequest = {
   /** Zone to target. If none is passed will use default zone from the config */
   zone?: Zone
+  /** ID of the gateway that needs fresh ssh keys */
   gatewayId: string
 }
