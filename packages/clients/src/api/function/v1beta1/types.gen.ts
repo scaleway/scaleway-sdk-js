@@ -84,10 +84,6 @@ export type ListNamespacesRequestOrderBy =
 
 export type ListTokensRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type ListTriggerInputsRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
-
 export type ListTriggersRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type LogStream = 'unknown' | 'stdout' | 'stderr'
@@ -118,13 +114,12 @@ export type TokenStatus =
   | 'error'
   | 'creating'
 
-export type TriggerInputStatus =
-  | 'unknown'
-  | 'ready'
-  | 'deleting'
-  | 'error'
-  | 'creating'
-  | 'pending'
+export type TriggerInputType =
+  | 'unknown_input_type'
+  | 'sqs'
+  | 'scw_sqs'
+  | 'nats'
+  | 'scw_nats'
 
 export type TriggerStatus =
   | 'unknown_status'
@@ -134,46 +129,22 @@ export type TriggerStatus =
   | 'creating'
   | 'pending'
 
-export type TriggerType = 'unknown_trigger_type' | 'nats' | 'sqs'
-
-export interface CreateTriggerInputRequestNatsClientConfigSpec {
+export interface CreateTriggerRequestMnqNatsClientConfig {
+  mnqNamespaceId: string
   subject: string
 }
 
-export interface CreateTriggerInputRequestSqsClientConfigSpec {
+export interface CreateTriggerRequestMnqSqsClientConfig {
+  mnqNamespaceId: string
   queue: string
 }
 
-export interface CreateTriggerRequestNatsFailureHandlingPolicy {
-  retryPolicy?: CreateTriggerRequestNatsFailureHandlingPolicyRetryPolicy
-  /**
-   * One-of ('deadLetter'): at most one of 'natsDeadLetter', 'sqsDeadLetter'
-   * could be set.
-   */
-  natsDeadLetter?: CreateTriggerRequestNatsFailureHandlingPolicyNatsDeadLetter
-  /**
-   * One-of ('deadLetter'): at most one of 'natsDeadLetter', 'sqsDeadLetter'
-   * could be set.
-   */
-  sqsDeadLetter?: CreateTriggerRequestNatsFailureHandlingPolicySqsDeadLetter
+export interface CreateTriggerRequestSqsClientConfig {
+  endpoint: string
+  queueUrl: string
+  accessKey: string
+  secretKey: string
 }
-
-export interface CreateTriggerRequestNatsFailureHandlingPolicyNatsDeadLetter {
-  mnqNamespaceId?: string
-  subject?: string
-}
-
-export interface CreateTriggerRequestNatsFailureHandlingPolicyRetryPolicy {
-  maxRetries?: number
-  retryPeriod?: string
-}
-
-export interface CreateTriggerRequestNatsFailureHandlingPolicySqsDeadLetter {
-  mnqNamespaceId?: string
-  queue?: string
-}
-
-export interface CreateTriggerRequestSqsFailureHandlingPolicy {}
 
 /** Cron */
 export interface Cron {
@@ -272,11 +243,6 @@ export interface ListTokensResponse {
   totalCount: number
 }
 
-export interface ListTriggerInputsResponse {
-  inputs: TriggerInput[]
-  totalCount: number
-}
-
 export interface ListTriggersResponse {
   triggers: Trigger[]
   totalCount: number
@@ -333,18 +299,6 @@ export interface SecretHashedValue {
   hashedValue: string
 }
 
-export interface SetTriggerInputsRequestNatsConfigs {
-  configs: CreateTriggerInputRequestNatsClientConfigSpec[]
-}
-
-export interface SetTriggerInputsRequestSqsConfigs {
-  configs: CreateTriggerInputRequestSqsClientConfigSpec[]
-}
-
-export interface SetTriggerInputsResponse {
-  triggerInputs: TriggerInput[]
-}
-
 /** Token */
 export interface Token {
   id: string
@@ -364,78 +318,59 @@ export interface Trigger {
   id: string
   name: string
   description: string
-  type: TriggerType
+  inputType: TriggerInputType
   status: TriggerStatus
   errorMessage?: string
   functionId: string
   /**
-   * One-of ('failureHandlingPolicy'): at most one of
-   * 'natsFailureHandlingPolicy', 'sqsFailureHandlingPolicy' could be set.
+   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
+   * 'scwNatsConfig' could be set.
    */
-  natsFailureHandlingPolicy?: TriggerNatsFailureHandlingPolicy
+  scwSqsConfig?: TriggerMnqSqsClientConfig
   /**
-   * One-of ('failureHandlingPolicy'): at most one of
-   * 'natsFailureHandlingPolicy', 'sqsFailureHandlingPolicy' could be set.
+   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
+   * 'scwNatsConfig' could be set.
    */
-  sqsFailureHandlingPolicy?: TriggerSqsFailureHandlingPolicy
+  sqsConfig?: TriggerSqsClientConfig
+  /**
+   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
+   * 'scwNatsConfig' could be set.
+   */
+  scwNatsConfig?: TriggerMnqNatsClientConfig
 }
 
-export interface TriggerInput {
-  id: string
-  mnqNamespaceId?: string
-  status: TriggerInputStatus
-  errorMessage?: string
-  /** One-of ('config'): at most one of 'natsConfig', 'sqsConfig' could be set. */
-  natsConfig?: TriggerInputNatsClientConfig
-  /** One-of ('config'): at most one of 'natsConfig', 'sqsConfig' could be set. */
-  sqsConfig?: TriggerInputSqsClientConfig
-}
-
-export interface TriggerInputNatsClientConfig {
-  subject: string
-}
-
-export interface TriggerInputSqsClientConfig {
-  queue: string
-}
-
-export interface TriggerNatsDeadLetter {
+export interface TriggerMnqNatsClientConfig {
   mnqNamespaceId: string
   subject: string
 }
 
-export interface TriggerNatsFailureHandlingPolicy {
-  retryPolicy?: TriggerRetryPolicy
-  /**
-   * One-of ('deadLetter'): at most one of 'natsDeadLetter', 'sqsDeadLetter'
-   * could be set.
-   */
-  natsDeadLetter?: TriggerNatsDeadLetter
-  /**
-   * One-of ('deadLetter'): at most one of 'natsDeadLetter', 'sqsDeadLetter'
-   * could be set.
-   */
-  sqsDeadLetter?: TriggerSqsDeadLetter
-}
-
-export interface TriggerRetryPolicy {
-  maxRetries: number
-  retryPeriod?: string
-}
-
-export interface TriggerSqsDeadLetter {
+export interface TriggerMnqSqsClientConfig {
   mnqNamespaceId: string
   queue: string
 }
 
-export interface TriggerSqsFailureHandlingPolicy {}
-
-export interface UpdateTriggerInputRequestNatsClientConfigSpec {
-  subject?: string
+export interface TriggerSqsClientConfig {
+  endpoint: string
+  queueUrl: string
+  accessKey: string
+  secretKey: string
 }
 
-export interface UpdateTriggerInputRequestSqsClientConfigSpec {
-  queue?: string
+export interface UpdateTriggerRequestMnqNatsClientConfig {
+  mnqNamespaceId: string
+  subject: string
+}
+
+export interface UpdateTriggerRequestMnqSqsClientConfig {
+  mnqNamespaceId: string
+  queue: string
+}
+
+export interface UpdateTriggerRequestSqsClientConfig {
+  endpoint: string
+  queueUrl: string
+  accessKey: string
+  secretKey: string
 }
 
 /** Upload url */
@@ -710,17 +645,21 @@ export type CreateTriggerRequest = {
   name: string
   description: string
   functionId: string
-  type?: TriggerType
   /**
-   * One-of ('failureHandlingPolicy'): at most one of
-   * 'natsFailureHandlingPolicy', 'sqsFailureHandlingPolicy' could be set.
+   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
+   * 'scwNatsConfig' could be set.
    */
-  natsFailureHandlingPolicy?: CreateTriggerRequestNatsFailureHandlingPolicy
+  scwSqsConfig?: CreateTriggerRequestMnqSqsClientConfig
   /**
-   * One-of ('failureHandlingPolicy'): at most one of
-   * 'natsFailureHandlingPolicy', 'sqsFailureHandlingPolicy' could be set.
+   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
+   * 'scwNatsConfig' could be set.
    */
-  sqsFailureHandlingPolicy?: CreateTriggerRequestSqsFailureHandlingPolicy
+  sqsConfig?: CreateTriggerRequestSqsClientConfig
+  /**
+   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
+   * 'scwNatsConfig' could be set.
+   */
+  scwNatsConfig?: CreateTriggerRequestMnqNatsClientConfig
 }
 
 export type GetTriggerRequest = {
@@ -735,7 +674,21 @@ export type ListTriggersRequest = {
   page?: number
   pageSize?: number
   orderBy?: ListTriggersRequestOrderBy
-  functionId: string
+  /**
+   * One-of ('scope'): at most one of 'functionId', 'namespaceId', 'projectId'
+   * could be set.
+   */
+  functionId?: string
+  /**
+   * One-of ('scope'): at most one of 'functionId', 'namespaceId', 'projectId'
+   * could be set.
+   */
+  namespaceId?: string
+  /**
+   * One-of ('scope'): at most one of 'functionId', 'namespaceId', 'projectId'
+   * could be set.
+   */
+  projectId?: string
 }
 
 export type UpdateTriggerRequest = {
@@ -745,71 +698,24 @@ export type UpdateTriggerRequest = {
   name?: string
   description?: string
   /**
-   * One-of ('failureHandlingPolicy'): at most one of 'natsConfig', 'sqsConfig'
-   * could be set.
+   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
+   * 'scwNatsConfig' could be set.
    */
-  natsConfig?: CreateTriggerRequestNatsFailureHandlingPolicy
+  scwSqsConfig?: UpdateTriggerRequestMnqSqsClientConfig
   /**
-   * One-of ('failureHandlingPolicy'): at most one of 'natsConfig', 'sqsConfig'
-   * could be set.
+   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
+   * 'scwNatsConfig' could be set.
    */
-  sqsConfig?: CreateTriggerRequestSqsFailureHandlingPolicy
+  sqsConfig?: UpdateTriggerRequestSqsClientConfig
+  /**
+   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
+   * 'scwNatsConfig' could be set.
+   */
+  scwNatsConfig?: UpdateTriggerRequestMnqNatsClientConfig
 }
 
 export type DeleteTriggerRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
   triggerId: string
-}
-
-export type CreateTriggerInputRequest = {
-  /** Region to target. If none is passed will use default region from the config */
-  region?: Region
-  triggerId: string
-  mnqNamespaceId?: string
-  /** One-of ('config'): at most one of 'natsConfig', 'sqsConfig' could be set. */
-  natsConfig?: CreateTriggerInputRequestNatsClientConfigSpec
-  /** One-of ('config'): at most one of 'natsConfig', 'sqsConfig' could be set. */
-  sqsConfig?: CreateTriggerInputRequestSqsClientConfigSpec
-}
-
-export type GetTriggerInputRequest = {
-  /** Region to target. If none is passed will use default region from the config */
-  region?: Region
-  triggerInputId: string
-}
-
-export type ListTriggerInputsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
-  region?: Region
-  page?: number
-  pageSize?: number
-  orderBy?: ListTriggerInputsRequestOrderBy
-  triggerId: string
-}
-
-export type SetTriggerInputsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
-  region?: Region
-  triggerInputId: string
-  /** One-of ('configs'): at most one of 'sqs', 'nats' could be set. */
-  sqs?: SetTriggerInputsRequestSqsConfigs
-  /** One-of ('configs'): at most one of 'sqs', 'nats' could be set. */
-  nats?: SetTriggerInputsRequestNatsConfigs
-}
-
-export type UpdateTriggerInputRequest = {
-  /** Region to target. If none is passed will use default region from the config */
-  region?: Region
-  triggerInputId: string
-  /** One-of ('config'): at most one of 'natsConfig', 'sqsConfig' could be set. */
-  natsConfig?: UpdateTriggerInputRequestNatsClientConfigSpec
-  /** One-of ('config'): at most one of 'natsConfig', 'sqsConfig' could be set. */
-  sqsConfig?: UpdateTriggerInputRequestSqsClientConfigSpec
-}
-
-export type DeleteTriggerInputRequest = {
-  /** Region to target. If none is passed will use default region from the config */
-  region?: Region
-  triggerInputId: string
 }

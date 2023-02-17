@@ -15,7 +15,6 @@ import {
   FUNCTION_TRANSIENT_STATUSES,
   NAMESPACE_TRANSIENT_STATUSES,
   TOKEN_TRANSIENT_STATUSES,
-  TRIGGER_INPUT_TRANSIENT_STATUSES,
   TRIGGER_TRANSIENT_STATUSES,
 } from './content.gen'
 import {
@@ -24,13 +23,10 @@ import {
   marshalCreateFunctionRequest,
   marshalCreateNamespaceRequest,
   marshalCreateTokenRequest,
-  marshalCreateTriggerInputRequest,
   marshalCreateTriggerRequest,
-  marshalSetTriggerInputsRequest,
   marshalUpdateCronRequest,
   marshalUpdateFunctionRequest,
   marshalUpdateNamespaceRequest,
-  marshalUpdateTriggerInputRequest,
   marshalUpdateTriggerRequest,
   unmarshalCron,
   unmarshalDomain,
@@ -43,13 +39,10 @@ import {
   unmarshalListLogsResponse,
   unmarshalListNamespacesResponse,
   unmarshalListTokensResponse,
-  unmarshalListTriggerInputsResponse,
   unmarshalListTriggersResponse,
   unmarshalNamespace,
-  unmarshalSetTriggerInputsResponse,
   unmarshalToken,
   unmarshalTrigger,
-  unmarshalTriggerInput,
   unmarshalUploadURL,
 } from './marshalling.gen'
 import type {
@@ -58,7 +51,6 @@ import type {
   CreateFunctionRequest,
   CreateNamespaceRequest,
   CreateTokenRequest,
-  CreateTriggerInputRequest,
   CreateTriggerRequest,
   Cron,
   DeleteCronRequest,
@@ -66,7 +58,6 @@ import type {
   DeleteFunctionRequest,
   DeleteNamespaceRequest,
   DeleteTokenRequest,
-  DeleteTriggerInputRequest,
   DeleteTriggerRequest,
   DeployFunctionRequest,
   Domain,
@@ -79,7 +70,6 @@ import type {
   GetFunctionUploadURLRequest,
   GetNamespaceRequest,
   GetTokenRequest,
-  GetTriggerInputRequest,
   GetTriggerRequest,
   IssueJWTRequest,
   ListCronsRequest,
@@ -96,20 +86,14 @@ import type {
   ListNamespacesResponse,
   ListTokensRequest,
   ListTokensResponse,
-  ListTriggerInputsRequest,
-  ListTriggerInputsResponse,
   ListTriggersRequest,
   ListTriggersResponse,
   Namespace,
-  SetTriggerInputsRequest,
-  SetTriggerInputsResponse,
   Token,
   Trigger,
-  TriggerInput,
   UpdateCronRequest,
   UpdateFunctionRequest,
   UpdateNamespaceRequest,
-  UpdateTriggerInputRequest,
   UpdateTriggerRequest,
   UploadURL,
 } from './types.gen'
@@ -948,7 +932,9 @@ export class API extends ParentAPI {
       options,
     )
 
-  protected pageOfListTriggers = (request: Readonly<ListTriggersRequest>) =>
+  protected pageOfListTriggers = (
+    request: Readonly<ListTriggersRequest> = {},
+  ) =>
     this.client.fetch<ListTriggersResponse>(
       {
         method: 'GET',
@@ -957,19 +943,35 @@ export class API extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/triggers`,
         urlParams: urlParams(
-          ['function_id', request.functionId],
           ['order_by', request.orderBy ?? 'created_at_asc'],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
+          ...Object.entries(
+            resolveOneOf([
+              {
+                default: this.client.settings.defaultProjectId,
+                param: 'project_id',
+                value: request.projectId,
+              },
+              {
+                param: 'function_id',
+                value: request.functionId,
+              },
+              {
+                param: 'namespace_id',
+                value: request.namespaceId,
+              },
+            ]),
+          ),
         ),
       },
       unmarshalListTriggersResponse,
     )
 
-  listTriggers = (request: Readonly<ListTriggersRequest>) =>
+  listTriggers = (request: Readonly<ListTriggersRequest> = {}) =>
     enrichForPagination('triggers', this.pageOfListTriggers, request)
 
   updateTrigger = (request: Readonly<UpdateTriggerRequest>) =>
@@ -998,134 +1000,5 @@ export class API extends ParentAPI {
         )}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
       },
       unmarshalTrigger,
-    )
-
-  createTriggerInput = (request: Readonly<CreateTriggerInputRequest>) =>
-    this.client.fetch<TriggerInput>(
-      {
-        body: JSON.stringify(
-          marshalCreateTriggerInputRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/trigger-inputs`,
-      },
-      unmarshalTriggerInput,
-    )
-
-  getTriggerInput = (request: Readonly<GetTriggerInputRequest>) =>
-    this.client.fetch<TriggerInput>(
-      {
-        method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/trigger-inputs/${validatePathParam(
-          'triggerInputId',
-          request.triggerInputId,
-        )}`,
-      },
-      unmarshalTriggerInput,
-    )
-
-  /**
-   * Waits for {@link TriggerInput} to be in a final state.
-   *
-   * @param request - The request {@link GetTriggerInputRequest}
-   * @param options - The waiting options
-   * @returns A Promise of TriggerInput
-   */
-  waitForTriggerInput = (
-    request: Readonly<GetTriggerInputRequest>,
-    options?: Readonly<WaitForOptions<TriggerInput>>,
-  ) =>
-    waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !TRIGGER_INPUT_TRANSIENT_STATUSES.includes(res.status),
-          )),
-      this.getTriggerInput,
-      request,
-      options,
-    )
-
-  protected pageOfListTriggerInputs = (
-    request: Readonly<ListTriggerInputsRequest>,
-  ) =>
-    this.client.fetch<ListTriggerInputsResponse>(
-      {
-        method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/trigger-inputs`,
-        urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
-          ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
-          ['trigger_id', request.triggerId],
-        ),
-      },
-      unmarshalListTriggerInputsResponse,
-    )
-
-  listTriggerInputs = (request: Readonly<ListTriggerInputsRequest>) =>
-    enrichForPagination('inputs', this.pageOfListTriggerInputs, request)
-
-  setTriggerInputs = (request: Readonly<SetTriggerInputsRequest>) =>
-    this.client.fetch<SetTriggerInputsResponse>(
-      {
-        body: JSON.stringify(
-          marshalSetTriggerInputsRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'PUT',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/trigger-inputs`,
-      },
-      unmarshalSetTriggerInputsResponse,
-    )
-
-  updateTriggerInput = (request: Readonly<UpdateTriggerInputRequest>) =>
-    this.client.fetch<TriggerInput>(
-      {
-        body: JSON.stringify(
-          marshalUpdateTriggerInputRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'PATCH',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/trigger-inputs/${validatePathParam(
-          'triggerInputId',
-          request.triggerInputId,
-        )}`,
-      },
-      unmarshalTriggerInput,
-    )
-
-  deleteTriggerInput = (request: Readonly<DeleteTriggerInputRequest>) =>
-    this.client.fetch<TriggerInput>(
-      {
-        method: 'DELETE',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/trigger-inputs/${validatePathParam(
-          'triggerInputId',
-          request.triggerInputId,
-        )}`,
-      },
-      unmarshalTriggerInput,
     )
 }
