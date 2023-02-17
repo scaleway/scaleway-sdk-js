@@ -227,7 +227,7 @@ export interface AclSpec {
    * The ACL match rule. At least `ip_subnet` or `http_filter` and
    * `http_filter_value` are required
    */
-  match: AclMatch
+  match?: AclMatch
   /** Order between your Acls (ascending order, 0 is first acl executed) */
   index: number
   /** Description of your ACL ressource */
@@ -1413,7 +1413,7 @@ export type CreateAclRequest = {
    * - `http_filter` and `http_filter_value` are defined
    * - `ip_subnet`, `http_filter` and `http_filter_value` are defined
    */
-  match: AclMatch
+  match?: AclMatch
   /** Order between your Acls (ascending order, 0 is first acl executed) */
   index: number
   /** Description of your ACL ressource */
@@ -1440,7 +1440,7 @@ export type UpdateAclRequest = {
    * The ACL match rule. At least `ip_subnet` or `http_filter` and
    * `http_filter_value` are required
    */
-  match: AclMatch
+  match?: AclMatch
   /** Order between your Acls (ascending order, 0 is first acl executed) */
   index: number
   /** Description of your ACL ressource */
@@ -2272,7 +2272,7 @@ export type ZonedApiCreateAclRequest = {
    * - `http_filter` and `http_filter_value` are defined
    * - `ip_subnet`, `http_filter` and `http_filter_value` are defined
    */
-  match: AclMatch
+  match?: AclMatch
   /** Order between your Acls (ascending order, 0 is first acl executed) */
   index: number
   /** Description of your ACL ressource */
@@ -2299,7 +2299,7 @@ export type ZonedApiUpdateAclRequest = {
    * The ACL match rule. At least `ip_subnet` or `http_filter` and
    * `http_filter_value` are required
    */
-  match: AclMatch
+  match?: AclMatch
   /** Order between your Acls (ascending order, 0 is first acl executed) */
   index: number
   /** Description of your ACL ressource */
