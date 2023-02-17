@@ -845,7 +845,7 @@ const marshalAclSpec = (
   action: marshalAclAction(request.action, defaults),
   description: request.description,
   index: request.index,
-  match: marshalAclMatch(request.match, defaults),
+  match: request.match ? marshalAclMatch(request.match, defaults) : undefined,
   name: request.name,
 })
 
@@ -995,7 +995,7 @@ export const marshalCreateAclRequest = (
   action: marshalAclAction(request.action, defaults),
   description: request.description,
   index: request.index,
-  match: marshalAclMatch(request.match, defaults),
+  match: request.match ? marshalAclMatch(request.match, defaults) : undefined,
   name: request.name || randomName('acl'),
 })
 
@@ -1187,7 +1187,7 @@ export const marshalUpdateAclRequest = (
   action: marshalAclAction(request.action, defaults),
   description: request.description,
   index: request.index,
-  match: marshalAclMatch(request.match, defaults),
+  match: request.match ? marshalAclMatch(request.match, defaults) : undefined,
   name: request.name,
 })
 
@@ -1369,7 +1369,7 @@ export const marshalZonedApiCreateAclRequest = (
   action: marshalAclAction(request.action, defaults),
   description: request.description,
   index: request.index,
-  match: marshalAclMatch(request.match, defaults),
+  match: request.match ? marshalAclMatch(request.match, defaults) : undefined,
   name: request.name || randomName('acl'),
 })
 
@@ -1568,7 +1568,7 @@ export const marshalZonedApiUpdateAclRequest = (
   action: marshalAclAction(request.action, defaults),
   description: request.description,
   index: request.index,
-  match: marshalAclMatch(request.match, defaults),
+  match: request.match ? marshalAclMatch(request.match, defaults) : undefined,
   name: request.name,
 })
 
