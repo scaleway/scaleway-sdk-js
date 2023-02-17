@@ -14,15 +14,10 @@ import type {
   CreateFunctionRequest,
   CreateNamespaceRequest,
   CreateTokenRequest,
-  CreateTriggerInputRequest,
-  CreateTriggerInputRequestNatsClientConfigSpec,
-  CreateTriggerInputRequestSqsClientConfigSpec,
   CreateTriggerRequest,
-  CreateTriggerRequestNatsFailureHandlingPolicy,
-  CreateTriggerRequestNatsFailureHandlingPolicyNatsDeadLetter,
-  CreateTriggerRequestNatsFailureHandlingPolicyRetryPolicy,
-  CreateTriggerRequestNatsFailureHandlingPolicySqsDeadLetter,
-  CreateTriggerRequestSqsFailureHandlingPolicy,
+  CreateTriggerRequestMnqNatsClientConfig,
+  CreateTriggerRequestMnqSqsClientConfig,
+  CreateTriggerRequestSqsClientConfig,
   Cron,
   Domain,
   DownloadURL,
@@ -34,75 +29,26 @@ import type {
   ListLogsResponse,
   ListNamespacesResponse,
   ListTokensResponse,
-  ListTriggerInputsResponse,
   ListTriggersResponse,
   Log,
   Namespace,
   Runtime,
   Secret,
   SecretHashedValue,
-  SetTriggerInputsRequest,
-  SetTriggerInputsRequestNatsConfigs,
-  SetTriggerInputsRequestSqsConfigs,
-  SetTriggerInputsResponse,
   Token,
   Trigger,
-  TriggerInput,
-  TriggerInputNatsClientConfig,
-  TriggerInputSqsClientConfig,
-  TriggerNatsDeadLetter,
-  TriggerNatsFailureHandlingPolicy,
-  TriggerRetryPolicy,
-  TriggerSqsDeadLetter,
-  TriggerSqsFailureHandlingPolicy,
+  TriggerMnqNatsClientConfig,
+  TriggerMnqSqsClientConfig,
+  TriggerSqsClientConfig,
   UpdateCronRequest,
   UpdateFunctionRequest,
   UpdateNamespaceRequest,
-  UpdateTriggerInputRequest,
-  UpdateTriggerInputRequestNatsClientConfigSpec,
-  UpdateTriggerInputRequestSqsClientConfigSpec,
   UpdateTriggerRequest,
+  UpdateTriggerRequestMnqNatsClientConfig,
+  UpdateTriggerRequestMnqSqsClientConfig,
+  UpdateTriggerRequestSqsClientConfig,
   UploadURL,
 } from './types.gen'
-
-const unmarshalTriggerNatsDeadLetter = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TriggerNatsDeadLetter' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    mnqNamespaceId: data.mnq_namespace_id,
-    subject: data.subject,
-  } as TriggerNatsDeadLetter
-}
-
-const unmarshalTriggerRetryPolicy = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TriggerRetryPolicy' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    maxRetries: data.max_retries,
-    retryPeriod: data.retry_period,
-  } as TriggerRetryPolicy
-}
-
-const unmarshalTriggerSqsDeadLetter = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TriggerSqsDeadLetter' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    mnqNamespaceId: data.mnq_namespace_id,
-    queue: data.queue,
-  } as TriggerSqsDeadLetter
-}
 
 const unmarshalSecretHashedValue = (data: unknown) => {
   if (!isJSONObject(data)) {
@@ -114,54 +60,45 @@ const unmarshalSecretHashedValue = (data: unknown) => {
   return { hashedValue: data.hashed_value, key: data.key } as SecretHashedValue
 }
 
-const unmarshalTriggerInputNatsClientConfig = (data: unknown) => {
+const unmarshalTriggerMnqNatsClientConfig = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'TriggerInputNatsClientConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { subject: data.subject } as TriggerInputNatsClientConfig
-}
-
-const unmarshalTriggerInputSqsClientConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TriggerInputSqsClientConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { queue: data.queue } as TriggerInputSqsClientConfig
-}
-
-const unmarshalTriggerNatsFailureHandlingPolicy = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TriggerNatsFailureHandlingPolicy' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'TriggerMnqNatsClientConfig' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    natsDeadLetter: data.nats_dead_letter
-      ? unmarshalTriggerNatsDeadLetter(data.nats_dead_letter)
-      : undefined,
-    retryPolicy: data.retry_policy
-      ? unmarshalTriggerRetryPolicy(data.retry_policy)
-      : undefined,
-    sqsDeadLetter: data.sqs_dead_letter
-      ? unmarshalTriggerSqsDeadLetter(data.sqs_dead_letter)
-      : undefined,
-  } as TriggerNatsFailureHandlingPolicy
+    mnqNamespaceId: data.mnq_namespace_id,
+    subject: data.subject,
+  } as TriggerMnqNatsClientConfig
 }
 
-const unmarshalTriggerSqsFailureHandlingPolicy = (data: unknown) => {
+const unmarshalTriggerMnqSqsClientConfig = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'TriggerSqsFailureHandlingPolicy' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'TriggerMnqSqsClientConfig' failed as data isn't a dictionary.`,
     )
   }
 
-  return {} as TriggerSqsFailureHandlingPolicy
+  return {
+    mnqNamespaceId: data.mnq_namespace_id,
+    queue: data.queue,
+  } as TriggerMnqSqsClientConfig
+}
+
+const unmarshalTriggerSqsClientConfig = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TriggerSqsClientConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    accessKey: data.access_key,
+    endpoint: data.endpoint,
+    queueUrl: data.queue_url,
+    secretKey: data.secret_key,
+  } as TriggerSqsClientConfig
 }
 
 export const unmarshalCron = (data: unknown) => {
@@ -326,41 +263,19 @@ export const unmarshalTrigger = (data: unknown) => {
     errorMessage: data.error_message,
     functionId: data.function_id,
     id: data.id,
+    inputType: data.input_type,
     name: data.name,
-    natsFailureHandlingPolicy: data.nats_failure_handling_policy
-      ? unmarshalTriggerNatsFailureHandlingPolicy(
-          data.nats_failure_handling_policy,
-        )
+    scwNatsConfig: data.scw_nats_config
+      ? unmarshalTriggerMnqNatsClientConfig(data.scw_nats_config)
       : undefined,
-    sqsFailureHandlingPolicy: data.sqs_failure_handling_policy
-      ? unmarshalTriggerSqsFailureHandlingPolicy(
-          data.sqs_failure_handling_policy,
-        )
-      : undefined,
-    status: data.status,
-    type: data.type,
-  } as Trigger
-}
-
-export const unmarshalTriggerInput = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TriggerInput' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    errorMessage: data.error_message,
-    id: data.id,
-    mnqNamespaceId: data.mnq_namespace_id,
-    natsConfig: data.nats_config
-      ? unmarshalTriggerInputNatsClientConfig(data.nats_config)
+    scwSqsConfig: data.scw_sqs_config
+      ? unmarshalTriggerMnqSqsClientConfig(data.scw_sqs_config)
       : undefined,
     sqsConfig: data.sqs_config
-      ? unmarshalTriggerInputSqsClientConfig(data.sqs_config)
+      ? unmarshalTriggerSqsClientConfig(data.sqs_config)
       : undefined,
     status: data.status,
-  } as TriggerInput
+  } as Trigger
 }
 
 export const unmarshalDownloadURL = (data: unknown) => {
@@ -464,19 +379,6 @@ export const unmarshalListTokensResponse = (data: unknown) => {
   } as ListTokensResponse
 }
 
-export const unmarshalListTriggerInputsResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListTriggerInputsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    inputs: unmarshalArrayOfObject(data.inputs, unmarshalTriggerInput),
-    totalCount: data.total_count,
-  } as ListTriggerInputsResponse
-}
-
 export const unmarshalListTriggersResponse = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -490,21 +392,6 @@ export const unmarshalListTriggersResponse = (data: unknown) => {
   } as ListTriggersResponse
 }
 
-export const unmarshalSetTriggerInputsResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'SetTriggerInputsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    triggerInputs: unmarshalArrayOfObject(
-      data.trigger_inputs,
-      unmarshalTriggerInput,
-    ),
-  } as SetTriggerInputsResponse
-}
-
 export const unmarshalUploadURL = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -515,80 +402,31 @@ export const unmarshalUploadURL = (data: unknown) => {
   return { headers: data.headers, url: data.url } as UploadURL
 }
 
-const marshalCreateTriggerInputRequestNatsClientConfigSpec = (
-  request: CreateTriggerInputRequestNatsClientConfigSpec,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  subject: request.subject,
-})
-
-const marshalCreateTriggerInputRequestSqsClientConfigSpec = (
-  request: CreateTriggerInputRequestSqsClientConfigSpec,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  queue: request.queue,
-})
-
-const marshalCreateTriggerRequestNatsFailureHandlingPolicyNatsDeadLetter = (
-  request: CreateTriggerRequestNatsFailureHandlingPolicyNatsDeadLetter,
+const marshalCreateTriggerRequestMnqNatsClientConfig = (
+  request: CreateTriggerRequestMnqNatsClientConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mnq_namespace_id: request.mnqNamespaceId,
   subject: request.subject,
 })
 
-const marshalCreateTriggerRequestNatsFailureHandlingPolicyRetryPolicy = (
-  request: CreateTriggerRequestNatsFailureHandlingPolicyRetryPolicy,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  max_retries: request.maxRetries,
-  retry_period: request.retryPeriod,
-})
-
-const marshalCreateTriggerRequestNatsFailureHandlingPolicySqsDeadLetter = (
-  request: CreateTriggerRequestNatsFailureHandlingPolicySqsDeadLetter,
+const marshalCreateTriggerRequestMnqSqsClientConfig = (
+  request: CreateTriggerRequestMnqSqsClientConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mnq_namespace_id: request.mnqNamespaceId,
   queue: request.queue,
 })
 
-const marshalCreateTriggerRequestNatsFailureHandlingPolicy = (
-  request: CreateTriggerRequestNatsFailureHandlingPolicy,
+const marshalCreateTriggerRequestSqsClientConfig = (
+  request: CreateTriggerRequestSqsClientConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  retry_policy: request.retryPolicy
-    ? marshalCreateTriggerRequestNatsFailureHandlingPolicyRetryPolicy(
-        request.retryPolicy,
-        defaults,
-      )
-    : undefined,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'nats_dead_letter',
-      value: request.natsDeadLetter
-        ? marshalCreateTriggerRequestNatsFailureHandlingPolicyNatsDeadLetter(
-            request.natsDeadLetter,
-            defaults,
-          )
-        : undefined,
-    },
-    {
-      param: 'sqs_dead_letter',
-      value: request.sqsDeadLetter
-        ? marshalCreateTriggerRequestNatsFailureHandlingPolicySqsDeadLetter(
-            request.sqsDeadLetter,
-            defaults,
-          )
-        : undefined,
-    },
-  ]),
+  access_key: request.accessKey,
+  endpoint: request.endpoint,
+  queue_url: request.queueUrl,
+  secret_key: request.secretKey,
 })
-
-const marshalCreateTriggerRequestSqsFailureHandlingPolicy = (
-  request: CreateTriggerRequestSqsFailureHandlingPolicy,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({})
 
 const marshalSecret = (
   request: Secret,
@@ -598,36 +436,30 @@ const marshalSecret = (
   value: request.value,
 })
 
-const marshalSetTriggerInputsRequestNatsConfigs = (
-  request: SetTriggerInputsRequestNatsConfigs,
+const marshalUpdateTriggerRequestMnqNatsClientConfig = (
+  request: UpdateTriggerRequestMnqNatsClientConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  configs: request.configs.map(elt =>
-    marshalCreateTriggerInputRequestNatsClientConfigSpec(elt, defaults),
-  ),
-})
-
-const marshalSetTriggerInputsRequestSqsConfigs = (
-  request: SetTriggerInputsRequestSqsConfigs,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  configs: request.configs.map(elt =>
-    marshalCreateTriggerInputRequestSqsClientConfigSpec(elt, defaults),
-  ),
-})
-
-const marshalUpdateTriggerInputRequestNatsClientConfigSpec = (
-  request: UpdateTriggerInputRequestNatsClientConfigSpec,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
+  mnq_namespace_id: request.mnqNamespaceId,
   subject: request.subject,
 })
 
-const marshalUpdateTriggerInputRequestSqsClientConfigSpec = (
-  request: UpdateTriggerInputRequestSqsClientConfigSpec,
+const marshalUpdateTriggerRequestMnqSqsClientConfig = (
+  request: UpdateTriggerRequestMnqSqsClientConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  mnq_namespace_id: request.mnqNamespaceId,
   queue: request.queue,
+})
+
+const marshalUpdateTriggerRequestSqsClientConfig = (
+  request: UpdateTriggerRequestSqsClientConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  access_key: request.accessKey,
+  endpoint: request.endpoint,
+  queue_url: request.queueUrl,
+  secret_key: request.secretKey,
 })
 
 export const marshalCreateCronRequest = (
@@ -704,34 +536,6 @@ export const marshalCreateTokenRequest = (
   ]),
 })
 
-export const marshalCreateTriggerInputRequest = (
-  request: CreateTriggerInputRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  mnq_namespace_id: request.mnqNamespaceId,
-  trigger_id: request.triggerId,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'nats_config',
-      value: request.natsConfig
-        ? marshalCreateTriggerInputRequestNatsClientConfigSpec(
-            request.natsConfig,
-            defaults,
-          )
-        : undefined,
-    },
-    {
-      param: 'sqs_config',
-      value: request.sqsConfig
-        ? marshalCreateTriggerInputRequestSqsClientConfigSpec(
-            request.sqsConfig,
-            defaults,
-          )
-        : undefined,
-    },
-  ]),
-})
-
 export const marshalCreateTriggerRequest = (
   request: CreateTriggerRequest,
   defaults: DefaultValues,
@@ -739,45 +543,32 @@ export const marshalCreateTriggerRequest = (
   description: request.description,
   function_id: request.functionId,
   name: request.name,
-  type: request.type ?? 'unknown_trigger_type',
   ...resolveOneOf<unknown>([
     {
-      param: 'nats_failure_handling_policy',
-      value: request.natsFailureHandlingPolicy
-        ? marshalCreateTriggerRequestNatsFailureHandlingPolicy(
-            request.natsFailureHandlingPolicy,
+      param: 'scw_sqs_config',
+      value: request.scwSqsConfig
+        ? marshalCreateTriggerRequestMnqSqsClientConfig(
+            request.scwSqsConfig,
             defaults,
           )
         : undefined,
     },
     {
-      param: 'sqs_failure_handling_policy',
-      value: request.sqsFailureHandlingPolicy
-        ? marshalCreateTriggerRequestSqsFailureHandlingPolicy(
-            request.sqsFailureHandlingPolicy,
+      param: 'sqs_config',
+      value: request.sqsConfig
+        ? marshalCreateTriggerRequestSqsClientConfig(
+            request.sqsConfig,
             defaults,
           )
         : undefined,
     },
-  ]),
-})
-
-export const marshalSetTriggerInputsRequest = (
-  request: SetTriggerInputsRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  trigger_input_id: request.triggerInputId,
-  ...resolveOneOf<unknown>([
     {
-      param: 'sqs',
-      value: request.sqs
-        ? marshalSetTriggerInputsRequestSqsConfigs(request.sqs, defaults)
-        : undefined,
-    },
-    {
-      param: 'nats',
-      value: request.nats
-        ? marshalSetTriggerInputsRequestNatsConfigs(request.nats, defaults)
+      param: 'scw_nats_config',
+      value: request.scwNatsConfig
+        ? marshalCreateTriggerRequestMnqNatsClientConfig(
+            request.scwNatsConfig,
+            defaults,
+          )
         : undefined,
     },
   ]),
@@ -828,32 +619,6 @@ export const marshalUpdateNamespaceRequest = (
     : undefined,
 })
 
-export const marshalUpdateTriggerInputRequest = (
-  request: UpdateTriggerInputRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  ...resolveOneOf<unknown>([
-    {
-      param: 'nats_config',
-      value: request.natsConfig
-        ? marshalUpdateTriggerInputRequestNatsClientConfigSpec(
-            request.natsConfig,
-            defaults,
-          )
-        : undefined,
-    },
-    {
-      param: 'sqs_config',
-      value: request.sqsConfig
-        ? marshalUpdateTriggerInputRequestSqsClientConfigSpec(
-            request.sqsConfig,
-            defaults,
-          )
-        : undefined,
-    },
-  ]),
-})
-
 export const marshalUpdateTriggerRequest = (
   request: UpdateTriggerRequest,
   defaults: DefaultValues,
@@ -862,10 +627,10 @@ export const marshalUpdateTriggerRequest = (
   name: request.name,
   ...resolveOneOf<unknown>([
     {
-      param: 'nats_config',
-      value: request.natsConfig
-        ? marshalCreateTriggerRequestNatsFailureHandlingPolicy(
-            request.natsConfig,
+      param: 'scw_sqs_config',
+      value: request.scwSqsConfig
+        ? marshalUpdateTriggerRequestMnqSqsClientConfig(
+            request.scwSqsConfig,
             defaults,
           )
         : undefined,
@@ -873,8 +638,17 @@ export const marshalUpdateTriggerRequest = (
     {
       param: 'sqs_config',
       value: request.sqsConfig
-        ? marshalCreateTriggerRequestSqsFailureHandlingPolicy(
+        ? marshalUpdateTriggerRequestSqsClientConfig(
             request.sqsConfig,
+            defaults,
+          )
+        : undefined,
+    },
+    {
+      param: 'scw_nats_config',
+      value: request.scwNatsConfig
+        ? marshalUpdateTriggerRequestMnqNatsClientConfig(
+            request.scwNatsConfig,
             defaults,
           )
         : undefined,
