@@ -6,9 +6,9 @@ const DETECT_SECTION_REGEX = /^\s*([^]+):\s*$/
 const DETECT_ITEM_REGEX = /^\s*(.+?)\s*:\s*(.+?)\s*$/
 
 /**
- * Converts Yaml to configuration map.
+ * Converts YAML to configuration map.
  *
- * @param input - Yaml string
+ * @param input - YAML string
  * @returns The configuration map
  *
  * @internal

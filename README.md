@@ -2,9 +2,8 @@
 
 This SDK enables you to interact with Scaleway APIs.
 
-**⚠️  Notes:**
-* The project is in beta, but should be fairly stable.
-* SDK only works from a node.js runtime, browser calls aren't supported yet.
+> **Warning**
+> SDK only works from a node.js runtime, browser calls aren't supported yet.
 
 **🔗  Important links:**
 * [Reference documentation](https://scaleway.github.io/scaleway-sdk-js)
@@ -13,7 +12,7 @@ This SDK enables you to interact with Scaleway APIs.
 
 ## Getting Started
 
-You'll need a pair of access and secret keys to connect to Scaleway API. Please check the [documentation](https://www.scaleway.com/docs/console/my-project/how-to/generate-api-key) on how to retrieve them.
+You'll need a pair of access and secret keys to connect to Scaleway API. Please check the [documentation](https://www.scaleway.com/en/docs/console/my-project/how-to/generate-api-key/) on how to retrieve them.
 
 **A minimal setup** would look like this:
 
@@ -75,13 +74,11 @@ The project is coded with Typescript, so don't hesitate to take advantage of it.
 
 2. We export **errors** in the namespace `Errors`, allowing you to differentiate the cases (e.g. `Errors.PermissionsDeniedError`).
 
-## Notes
-
-### Contributing Guidelines
+## Contributing Guidelines
 
 This repository is at its early stage and is still in active development.
 If you are looking for a way to contribute please read [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-### Reach us
+## Reach us
 
 We love feedback. Feel free to reach us on [Scaleway Slack community](https://slack.scaleway.com/), we are waiting for you on [#opensource](https://scaleway-community.slack.com/app_redirect?channel=opensource).

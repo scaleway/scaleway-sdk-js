@@ -67,7 +67,7 @@ export const createAdvancedClient = (...configs: ClientConfig[]): Client => {
  * Creates a Scaleway client with a profile.
  *
  * @example
- * Creates a client with credentials & default values (see https://www.scaleway.com/docs/console/my-project/how-to/generate-api-key):
+ * Creates a client with credentials & default values (see https://www.scaleway.com/en/docs/console/my-project/how-to/generate-api-key/):
  * ```
  * import { createClient } from '@scaleway/sdk'
  *
@@ -82,7 +82,7 @@ export const createAdvancedClient = (...configs: ClientConfig[]): Client => {
  *
  * @example
  * Creates a client by loading values from the environment (see https://www.scaleway.com/en/docs/console/my-project/how-to/generate-api-key/#how-to-use-your-api-key)
- * or the config file created by CLI `scw init` (see https://www.scaleway.com/cli):
+ * or the config file created by CLI `scw init` (see https://www.scaleway.com/en/cli/):
  * ```
  * import { loadProfileFromConfigurationFile } from '@scaleway/configuration-loader'
  * import { createClient } from '@scaleway/sdk'

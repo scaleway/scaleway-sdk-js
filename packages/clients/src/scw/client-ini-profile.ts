@@ -99,17 +99,17 @@ export function assertValidAuthenticationSecrets(
 ): asserts obj is AuthenticationSecrets {
   if (!(obj.accessKey && obj.secretKey)) {
     throw new Error(
-      `Invalid secrets, accessKey & secretKey must be defined. See https://www.scaleway.com/docs/console/my-project/how-to/generate-api-key`,
+      `Invalid secrets, accessKey & secretKey must be defined. See https://www.scaleway.com/en/docs/console/my-project/how-to/generate-api-key/`,
     )
   }
   if (!isAccessKey(obj.accessKey)) {
     throw new Error(
-      `Invalid access key format '${obj.accessKey}', expected SCWXXXXXXXXXXXXXXXXX format. See https://www.scaleway.com/docs/console/my-project/how-to/generate-api-key`,
+      `Invalid access key format '${obj.accessKey}', expected SCWXXXXXXXXXXXXXXXXX format. See https://www.scaleway.com/en/docs/console/my-project/how-to/generate-api-key/`,
     )
   }
   if (!isSecretKey(obj.secretKey)) {
     throw new Error(
-      `Invalid secret key format '${obj.secretKey}', expected a UUID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx. See https://www.scaleway.com/docs/console/my-project/how-to/generate-api-key`,
+      `Invalid secret key format '${obj.secretKey}', expected a UUID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx. See https://www.scaleway.com/en/docs/console/my-project/how-to/generate-api-key/`,
     )
   }
 }

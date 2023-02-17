@@ -31,7 +31,7 @@ If there is a match, thumbs up the issue with a 👍 and leave a comment if you 
 When reporting an issue, include the following:
 
 - The version of `scaleway-sdk-js` you are using (e.g. v1.0.0-beta1, v2.0.0, master, ...)
-- The environment and its version (e.g. NodeJS v16.10)
+- The environment and its version (e.g. NodeJS v18.10)
 
 ## Suggesting a feature
 
