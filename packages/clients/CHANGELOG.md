@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0-beta.38](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.37...@scaleway/sdk@0.1.0-beta.38) (2023-02-20)
+
+### Features
+
+- **iam:** add more filtering options for listAPIKeys ([#442](https://github.com/scaleway/scaleway-sdk-js/issues/442)) ([e0fd34f](https://github.com/scaleway/scaleway-sdk-js/commit/e0fd34f73dda8f1d66833d0b86e15bd63c79d89d))
+- **secret:** retrieve secrets by name ([#447](https://github.com/scaleway/scaleway-sdk-js/issues/447)) ([df79670](https://github.com/scaleway/scaleway-sdk-js/commit/df7967049c7aac0e6ab0d648f13b93910310a8b4))
+- **serverless:** simplify the triggers by merging Trigger and TriggerInput ([#452](https://github.com/scaleway/scaleway-sdk-js/issues/452)) ([19469cd](https://github.com/scaleway/scaleway-sdk-js/commit/19469cd28ebe53205568eb1e7308519364efd71d))
+- use Blob type to download files ([#441](https://github.com/scaleway/scaleway-sdk-js/issues/441)) ([31685d2](https://github.com/scaleway/scaleway-sdk-js/commit/31685d20ab154daed1f00318d22736be8d8a46f7))
+
+### Bug Fixes
+
+- **iam:** add global BearerType type ([#446](https://github.com/scaleway/scaleway-sdk-js/issues/446)) ([5e9c196](https://github.com/scaleway/scaleway-sdk-js/commit/5e9c196cc56dc8c97bd521f1f0de0c3cc045e614))
+- **iam:** use expired and not expirable to filter expired API keys ([#448](https://github.com/scaleway/scaleway-sdk-js/issues/448)) ([18e89ac](https://github.com/scaleway/scaleway-sdk-js/commit/18e89acfb51a9be7b6f73285875ea587919b980a))
+- **lb:** set match fields as optional ([#453](https://github.com/scaleway/scaleway-sdk-js/issues/453)) ([a622d81](https://github.com/scaleway/scaleway-sdk-js/commit/a622d81357b4cfbd1d1988269dc3044169c6e9be))
+
 ## [0.1.0-beta.37](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.36...@scaleway/sdk@0.1.0-beta.37) (2023-02-13)
 
 ### Features
