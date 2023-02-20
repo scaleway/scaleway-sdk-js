@@ -21,6 +21,7 @@ import type {
   CreateClusterRequestPoolConfigUpgradePolicy,
   CreatePoolRequest,
   CreatePoolRequestUpgradePolicy,
+  ExternalNode,
   ListClusterAvailableVersionsResponse,
   ListClustersResponse,
   ListNodesResponse,
@@ -236,6 +237,24 @@ export const unmarshalVersion = (data: unknown) => {
     name: data.name,
     region: data.region,
   } as Version
+}
+
+export const unmarshalExternalNode = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ExternalNode' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    clusterCa: data.cluster_ca,
+    clusterUrl: data.cluster_url,
+    clusterVersion: data.cluster_version,
+    id: data.id,
+    kubeletConfig: data.kubelet_config,
+    kubeToken: data.kube_token,
+    name: data.name,
+  } as ExternalNode
 }
 
 export const unmarshalListClusterAvailableVersionsResponse = (
