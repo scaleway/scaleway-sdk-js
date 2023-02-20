@@ -21,6 +21,7 @@ import {
   marshalUpgradeClusterRequest,
   marshalUpgradePoolRequest,
   unmarshalCluster,
+  unmarshalExternalNode,
   unmarshalListClusterAvailableVersionsResponse,
   unmarshalListClustersResponse,
   unmarshalListNodesResponse,
@@ -33,10 +34,12 @@ import {
 import type {
   Cluster,
   CreateClusterRequest,
+  CreateExternalNodeRequest,
   CreatePoolRequest,
   DeleteClusterRequest,
   DeleteNodeRequest,
   DeletePoolRequest,
+  ExternalNode,
   GetClusterRequest,
   GetNodeRequest,
   GetPoolRequest,
@@ -470,6 +473,27 @@ export class API extends ParentAPI {
         )}/pools/${validatePathParam('poolId', request.poolId)}`,
       },
       unmarshalPool,
+    )
+
+  /**
+   * This method returns metadata about a Kosmos node, it is not intended to be
+   * directly called by end users, rather by kapsule-node-agent.
+   *
+   * @param request - The request {@link CreateExternalNodeRequest}
+   * @returns A Promise of ExternalNode
+   */
+  createExternalNode = (request: Readonly<CreateExternalNodeRequest>) =>
+    this.client.fetch<ExternalNode>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/k8s/v1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/pools/${validatePathParam('poolId', request.poolId)}/external-nodes`,
+      },
+      unmarshalExternalNode,
     )
 
   protected pageOfListNodes = (request: Readonly<ListNodesRequest>) =>

@@ -413,6 +413,16 @@ export interface CreatePoolRequestUpgradePolicy {
   maxSurge?: number
 }
 
+export interface ExternalNode {
+  id: string
+  name: string
+  clusterUrl: string
+  clusterVersion: string
+  clusterCa: string
+  kubeToken: string
+  kubeletConfig: string
+}
+
 /** List cluster available versions response */
 export interface ListClusterAvailableVersionsResponse {
   /** The available Kubernetes version for the cluster */
@@ -1000,6 +1010,12 @@ export type DeletePoolRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
   /** The ID of the pool to delete */
+  poolId: string
+}
+
+export type CreateExternalNodeRequest = {
+  /** Region to target. If none is passed will use default region from the config */
+  region?: Region
   poolId: string
 }
 
