@@ -7,8 +7,8 @@
     "build": "tsc -p ./tsconfig.json"
   },
   "dependencies": {
-    "@scaleway/configuration-loader": "^0.1.0-beta",
-    "@scaleway/sdk": "^0.1.0-beta"
+    "@scaleway/configuration-loader": "^1.0",
+    "@scaleway/sdk": "^1.0"
   },
   "devDependencies": {
     "serverless-scaleway-functions": "^0.4.5",
