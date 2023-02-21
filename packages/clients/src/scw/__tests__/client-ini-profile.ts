@@ -46,7 +46,7 @@ describe('assertValidAuthenticationSecrets', () => {
       assertValidAuthenticationSecrets(value)
     }).toThrow(
       new Error(
-        `Invalid secrets, accessKey & secretKey must be defined. See https://www.scaleway.com/docs/console/my-project/how-to/generate-api-key`,
+        `Invalid secrets, accessKey & secretKey must be defined. See https://www.scaleway.com/en/docs/console/my-project/how-to/generate-api-key/`,
       ),
     )
   })
@@ -59,7 +59,7 @@ describe('assertValidAuthenticationSecrets', () => {
       })
     }).toThrow(
       new Error(
-        `Invalid access key format 'SCW0123', expected SCWXXXXXXXXXXXXXXXXX format. See https://www.scaleway.com/docs/console/my-project/how-to/generate-api-key`,
+        `Invalid access key format 'SCW0123', expected SCWXXXXXXXXXXXXXXXXX format. See https://www.scaleway.com/en/docs/console/my-project/how-to/generate-api-key/`,
       ),
     )
   })
@@ -72,7 +72,7 @@ describe('assertValidAuthenticationSecrets', () => {
       })
     }).toThrow(
       new Error(
-        `Invalid secret key format 'e4b83996-4c60-449a-98d2', expected a UUID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx. See https://www.scaleway.com/docs/console/my-project/how-to/generate-api-key`,
+        `Invalid secret key format 'e4b83996-4c60-449a-98d2', expected a UUID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx. See https://www.scaleway.com/en/docs/console/my-project/how-to/generate-api-key/`,
       ),
     )
   })

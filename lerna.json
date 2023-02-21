@@ -5,7 +5,6 @@
   "version": "independent",
   "command": {
     "publish": {
-      "conventionalPrerelease": true,
       "conventionalCommits": true,
       "changelogPreset": "conventionalcommits"
     },
