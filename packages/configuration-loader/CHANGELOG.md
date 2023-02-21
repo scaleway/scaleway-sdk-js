@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.0.0 (2023-02-21)
+
+### Features
+
+- prepare v1 release ([#454](https://github.com/scaleway/scaleway-sdk-js/issues/454)) ([57bc014](https://github.com/scaleway/scaleway-sdk-js/commit/57bc014556338ba9fa7eca2a2d4179f5ff8383be))
+
 ## 0.1.0-beta.7 (2023-01-27)
 
 ### Features

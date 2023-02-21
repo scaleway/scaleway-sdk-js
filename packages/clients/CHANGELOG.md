@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.38...@scaleway/sdk@1.0.0) (2023-02-21)
+
+### Features
+
+- **k8s:** create external node ([#461](https://github.com/scaleway/scaleway-sdk-js/issues/461)) ([371a2bb](https://github.com/scaleway/scaleway-sdk-js/commit/371a2bb945b27416ca0df580b21de6294e94c9df))
+- prepare v1 release ([#454](https://github.com/scaleway/scaleway-sdk-js/issues/454)) ([57bc014](https://github.com/scaleway/scaleway-sdk-js/commit/57bc014556338ba9fa7eca2a2d4179f5ff8383be))
+- **serverless:** add Go 1.20 runtime ([#460](https://github.com/scaleway/scaleway-sdk-js/issues/460)) ([a7da4e2](https://github.com/scaleway/scaleway-sdk-js/commit/a7da4e2478793c3c5d7b3558e1cf4c6982731982))
+
+### Bug Fixes
+
+- **autocompletion:** treat known localities and string as distinguishable types ([#422](https://github.com/scaleway/scaleway-sdk-js/issues/422)) ([4a78253](https://github.com/scaleway/scaleway-sdk-js/commit/4a7825383567160516a283d5d50069b89181499c))
+
 ## [0.1.0-beta.38](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.37...@scaleway/sdk@0.1.0-beta.38) (2023-02-20)
 
 ### Features

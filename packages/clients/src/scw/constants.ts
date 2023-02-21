@@ -1,3 +1,3 @@
-export const version = 'v0.1.0-beta.38'
+export const version = 'v1.0.0'
 
 export const userAgent = `scaleway-sdk-js/${version}`
