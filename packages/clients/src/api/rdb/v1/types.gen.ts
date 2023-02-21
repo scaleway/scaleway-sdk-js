@@ -86,6 +86,11 @@ export type ListUsersRequestOrderBy =
 
 export type MaintenanceStatus = 'unknown' | 'pending' | 'done' | 'canceled'
 
+export type NodeTypeGeneration =
+  | 'unknown_generation'
+  | 'generation_v1'
+  | 'generation_v2'
+
 export type NodeTypeStock =
   | 'unknown'
   | 'low_stock'
@@ -567,6 +572,8 @@ export interface NodeType {
   availableVolumeTypes: NodeTypeVolumeType[]
   /** The Node Type can be used only with high availability option */
   isHaRequired: boolean
+  /** Generation associated the NodeType offer */
+  generation: NodeTypeGeneration
   /** Region the Node Type is in */
   region: Region
 }

@@ -97,6 +97,7 @@ export type {
   Maintenance,
   MaintenanceStatus,
   NodeType,
+  NodeTypeGeneration,
   NodeTypeStock,
   NodeTypeVolumeConstraintSizes,
   NodeTypeVolumeType,
