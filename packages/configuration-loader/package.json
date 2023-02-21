@@ -15,7 +15,7 @@
     "directory": "packages/configuration-loader"
   },
   "engines": {
-    "node": ">=14.13"
+    "node": ">=v14.21.3"
   },
   "type": "module",
   "devDependencies": {
