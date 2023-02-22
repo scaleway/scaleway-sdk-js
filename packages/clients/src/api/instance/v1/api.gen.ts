@@ -30,6 +30,7 @@ import {
   marshalUpdateIpRequest,
   marshalUpdatePlacementGroupRequest,
   marshalUpdatePlacementGroupServersRequest,
+  marshalUpdatePrivateNICRequest,
   marshalUpdateServerRequest,
   marshalUpdateVolumeRequest,
   unmarshalCreateImageResponse,
@@ -69,6 +70,7 @@ import {
   unmarshalListSnapshotsResponse,
   unmarshalListVolumesResponse,
   unmarshalListVolumesTypesResponse,
+  unmarshalPrivateNIC,
   unmarshalServerActionResponse,
   unmarshalSetImageResponse,
   unmarshalSetPlacementGroupResponse,
@@ -169,6 +171,7 @@ import type {
   ListVolumesResponse,
   ListVolumesTypesRequest,
   ListVolumesTypesResponse,
+  PrivateNIC,
   ServerActionRequest,
   ServerActionResponse,
   SetPlacementGroupRequest,
@@ -183,6 +186,7 @@ import type {
   UpdatePlacementGroupResponse,
   UpdatePlacementGroupServersRequest,
   UpdatePlacementGroupServersResponse,
+  UpdatePrivateNICRequest,
   UpdateServerResponse,
   UpdateVolumeRequest,
   UpdateVolumeResponse,
@@ -1484,13 +1488,9 @@ export class API extends ParentAPI {
       )}/ips/${validatePathParam('ip', request.ip)}`,
     })
 
-  /**
-   * List all private NICs of a given server.
-   *
-   * @param request - The request {@link ListPrivateNICsRequest}
-   * @returns A Promise of ListPrivateNICsResponse
-   */
-  listPrivateNICs = (request: Readonly<ListPrivateNICsRequest>) =>
+  protected pageOfListPrivateNICs = (
+    request: Readonly<ListPrivateNICsRequest>,
+  ) =>
     this.client.fetch<ListPrivateNICsResponse>(
       {
         method: 'GET',
@@ -1501,9 +1501,28 @@ export class API extends ParentAPI {
           'serverId',
           request.serverId,
         )}/private_nics`,
+        urlParams: urlParams(
+          ['page', request.page],
+          ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
+          [
+            'tags',
+            request.tags && request.tags.length > 0
+              ? request.tags.join(',')
+              : undefined,
+          ],
+        ),
       },
       unmarshalListPrivateNICsResponse,
     )
+
+  /**
+   * List all private NICs of a given server.
+   *
+   * @param request - The request {@link ListPrivateNICsRequest}
+   * @returns A Promise of ListPrivateNICsResponse
+   */
+  listPrivateNICs = (request: Readonly<ListPrivateNICsRequest>) =>
+    enrichForPagination('privateNics', this.pageOfListPrivateNICs, request)
 
   /**
    * Create a private NIC connecting a server to a private network.
@@ -1552,6 +1571,34 @@ export class API extends ParentAPI {
         )}`,
       },
       unmarshalGetPrivateNICResponse,
+    )
+
+  /**
+   * Update one or more parameter/s to a given private NIC.
+   *
+   * @param request - The request {@link UpdatePrivateNICRequest}
+   * @returns A Promise of PrivateNIC
+   */
+  updatePrivateNIC = (request: Readonly<UpdatePrivateNICRequest>) =>
+    this.client.fetch<PrivateNIC>(
+      {
+        body: JSON.stringify(
+          marshalUpdatePrivateNICRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/instance/v1/zones/${validatePathParam(
+          'zone',
+          request.zone ?? this.client.settings.defaultZone,
+        )}/servers/${validatePathParam(
+          'serverId',
+          request.serverId,
+        )}/private_nics/${validatePathParam(
+          'privateNicId',
+          request.privateNicId,
+        )}`,
+      },
+      unmarshalPrivateNIC,
     )
 
   /**

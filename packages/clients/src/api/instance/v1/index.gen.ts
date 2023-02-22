@@ -148,6 +148,7 @@ export type {
   UpdatePlacementGroupResponse,
   UpdatePlacementGroupServersRequest,
   UpdatePlacementGroupServersResponse,
+  UpdatePrivateNICRequest,
   UpdateServerResponse,
   UpdateVolumeRequest,
   UpdateVolumeResponse,
