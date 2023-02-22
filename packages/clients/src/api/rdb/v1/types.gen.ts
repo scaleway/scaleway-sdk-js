@@ -123,7 +123,8 @@ export type VolumeType = 'lssd' | 'bssd'
 
 export interface ACLRule {
   ip: string
-  port: number
+  /** @deprecated */
+  port?: number
   protocol: ACLRuleProtocol
   direction: ACLRuleDirection
   action: ACLRuleAction
