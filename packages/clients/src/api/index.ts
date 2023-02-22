@@ -1,6 +1,7 @@
 export * as Account from './account'
 export * as AppleSilicon from './applesilicon'
 export * as BareMetal from './baremetal'
+export * as Cockpit from './cockpit'
 export * as Container from './container'
 export * as Domain from './domain'
 export * as FlexibleIP from './flexibleip'
