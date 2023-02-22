@@ -1,0 +1,38 @@
+// This file was automatically generated. DO NOT EDIT.
+// If you have any remark or suggestion do not hesitate to open an issue.
+export { API } from './api.gen'
+export * from './content.gen'
+export type {
+  ActivateCockpitRequest,
+  Cockpit,
+  CockpitEndpoints,
+  CockpitStatus,
+  ContactPoint,
+  ContactPointEmail,
+  CreateContactPointRequest,
+  CreateGrafanaUserRequest,
+  CreateTokenRequest,
+  DeactivateCockpitRequest,
+  DeleteContactPointRequest,
+  DeleteGrafanaUserRequest,
+  DeleteTokenRequest,
+  DisableManagedAlertsRequest,
+  EnableManagedAlertsRequest,
+  GetCockpitRequest,
+  GetTokenRequest,
+  GrafanaUser,
+  GrafanaUserRole,
+  ListContactPointsRequest,
+  ListContactPointsResponse,
+  ListGrafanaUsersRequest,
+  ListGrafanaUsersRequestOrderBy,
+  ListGrafanaUsersResponse,
+  ListTokensRequest,
+  ListTokensRequestOrderBy,
+  ListTokensResponse,
+  ResetCockpitGrafanaRequest,
+  ResetGrafanaUserPasswordRequest,
+  Token,
+  TokenScopes,
+  TriggerTestAlertRequest,
+} from './types.gen'
