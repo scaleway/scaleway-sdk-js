@@ -32,7 +32,9 @@ export const buildRequest = (
     body: request.body,
     headers: {
       Accept: 'application/json',
-      ...(!isBrowser() ? { 'User-Agent': settings.userAgent } : {}),
+      .../* istanbul ignore next */ (!isBrowser()
+        ? { 'User-Agent': settings.userAgent }
+        : {}),
       ...request.headers,
     },
     method: request.method,
