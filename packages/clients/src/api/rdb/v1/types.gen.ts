@@ -709,9 +709,10 @@ export interface UpgradableVersion {
 /** User */
 export interface User {
   /**
-   * Name of the user (Length must be between 1 and 63 characters, First
-   * character must be an alphabet character (a-zA-Z), Your Username cannot
-   * start with '_rdb', Only a-zA-Z0-9_$- characters are accepted)
+   * Name of the user (Length must be between 1 and 63 characters, The max
+   * Length is 32 for MySQL engines, First character must be an alphabet
+   * character (a-zA-Z), Your Username cannot start with '_rdb', Only
+   * a-zA-Z0-9_$- characters are accepted)
    */
   name: string
   /**
