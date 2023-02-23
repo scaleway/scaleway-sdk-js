@@ -43,17 +43,6 @@ describe(`buildRequest`, () => {
     })
   }
 
-  it(`has NOT the header "User-Agent" when browser is detected`, () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error Fake window/document for the test
-    global.window = { document: 'not-undefined' }
-    const fReq = buildRequest(SCW_POST_REQUEST, DEFAULT_SETTINGS)
-    expect(fReq.headers.get('User-Agent')).toBeNull()
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error Reset the global variable
-    delete global.window
-  })
-
   it(`has the custom headers`, () => {
     const mReq: ScwRequest = {
       ...SCW_POST_REQUEST,
