@@ -106,13 +106,7 @@ export type GetSecretRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
   /** ID of the Secret */
-  secretId?: string
-  /**
-   * Name of the Secret (alternative to secret_id).
-   *
-   * One-of ('secretRef'): at most one of 'secretName' could be set.
-   */
-  secretName?: string
+  secretId: string
 }
 
 export type UpdateSecretRequest = {
@@ -137,8 +131,6 @@ export type ListSecretsRequest = {
   projectId?: string
   /** List of tags to filter on (optional) */
   tags?: string[]
-  /** Name of the secrets (optional) */
-  name?: string
   orderBy?: ListSecretsRequestOrderBy
   page?: number
   pageSize?: number
@@ -166,15 +158,9 @@ export type GetSecretVersionRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
   /** ID of the Secret */
-  secretId?: string
+  secretId: string
   /** Revision of the SecretVersion (may be a number or "latest") */
   revision: string
-  /**
-   * Name of the Secret (alternative to secret_id).
-   *
-   * One-of ('secretRef'): at most one of 'secretName' could be set.
-   */
-  secretName?: string
 }
 
 export type UpdateSecretVersionRequest = {
@@ -192,13 +178,7 @@ export type ListSecretVersionsRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
   /** ID of the Secret */
-  secretId?: string
-  /**
-   * Name of the Secret (alternative to secret_id).
-   *
-   * One-of ('secretRef'): at most one of 'secretName' could be set.
-   */
-  secretName?: string
+  secretId: string
   page?: number
   pageSize?: number
   /** Filter results by status */
@@ -236,16 +216,7 @@ export type AccessSecretVersionRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
   /** ID of the Secret */
-  secretId?: string
-  /**
-   * Revision of the SecretVersion (may be a number, "latest" or
-   * "latest_enabled")
-   */
+  secretId: string
+  /** Revision of the SecretVersion (may be a number or "latest") */
   revision: string
-  /**
-   * Name of the Secret (alternative to secret_id).
-   *
-   * One-of ('secretRef'): at most one of 'secretName' could be set.
-   */
-  secretName?: string
 }

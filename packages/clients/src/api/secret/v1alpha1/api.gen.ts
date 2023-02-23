@@ -3,7 +3,6 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  resolveOneOf,
   urlParams,
   validatePathParam,
 } from '../../../bridge'
@@ -81,7 +80,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetSecretRequest}
    * @returns A Promise of Secret
    */
-  getSecret = (request: Readonly<GetSecretRequest> = {}) =>
+  getSecret = (request: Readonly<GetSecretRequest>) =>
     this.client.fetch<Secret>(
       {
         method: 'GET',
@@ -89,16 +88,6 @@ export class API extends ParentAPI {
           'region',
           request.region ?? this.client.settings.defaultRegion,
         )}/secrets/${validatePathParam('secretId', request.secretId)}`,
-        urlParams: urlParams(
-          ...Object.entries(
-            resolveOneOf([
-              {
-                param: 'secret_name',
-                value: request.secretName,
-              },
-            ]),
-          ),
-        ),
       },
       unmarshalSecret,
     )
@@ -134,7 +123,6 @@ export class API extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/secrets`,
         urlParams: urlParams(
-          ['name', request.name],
           ['order_by', request.orderBy ?? 'name_asc'],
           [
             'organization_id',
@@ -218,16 +206,6 @@ export class API extends ParentAPI {
           'secretId',
           request.secretId,
         )}/versions/${validatePathParam('revision', request.revision)}`,
-        urlParams: urlParams(
-          ...Object.entries(
-            resolveOneOf([
-              {
-                param: 'secret_name',
-                value: request.secretName,
-              },
-            ]),
-          ),
-        ),
       },
       unmarshalSecretVersion,
     )
@@ -258,7 +236,7 @@ export class API extends ParentAPI {
     )
 
   protected pageOfListSecretVersions = (
-    request: Readonly<ListSecretVersionsRequest> = {},
+    request: Readonly<ListSecretVersionsRequest>,
   ) =>
     this.client.fetch<ListSecretVersionsResponse>(
       {
@@ -274,14 +252,6 @@ export class API extends ParentAPI {
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['status', request.status],
-          ...Object.entries(
-            resolveOneOf([
-              {
-                param: 'secret_name',
-                value: request.secretName,
-              },
-            ]),
-          ),
         ),
       },
       unmarshalListSecretVersionsResponse,
@@ -293,7 +263,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListSecretVersionsRequest}
    * @returns A Promise of ListSecretVersionsResponse
    */
-  listSecretVersions = (request: Readonly<ListSecretVersionsRequest> = {}) =>
+  listSecretVersions = (request: Readonly<ListSecretVersionsRequest>) =>
     enrichForPagination('versions', this.pageOfListSecretVersions, request)
 
   /**
@@ -382,16 +352,6 @@ export class API extends ParentAPI {
           'secretId',
           request.secretId,
         )}/versions/${validatePathParam('revision', request.revision)}/access`,
-        urlParams: urlParams(
-          ...Object.entries(
-            resolveOneOf([
-              {
-                param: 'secret_name',
-                value: request.secretName,
-              },
-            ]),
-          ),
-        ),
       },
       unmarshalAccessSecretVersionResponse,
     )
