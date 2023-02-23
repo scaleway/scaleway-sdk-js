@@ -299,6 +299,7 @@ export interface ListPlacementGroupsResponse {
 
 export interface ListPrivateNICsResponse {
   privateNics: PrivateNIC[]
+  totalCount: number
 }
 
 /** List security group rules response */
@@ -411,6 +412,8 @@ export interface PrivateNIC {
   macAddress: string
   /** The private NIC state */
   state: PrivateNICState
+  /** The private NIC tags */
+  tags: string[]
 }
 
 /** Security group */
@@ -1587,6 +1590,15 @@ export type ListPrivateNICsRequest = {
   zone?: Zone
   /** The server the private NIC is attached to */
   serverId: string
+  /** The private NIC tags */
+  tags?: string[]
+  /**
+   * A positive integer lower or equal to 100 to select the number of items to
+   * return
+   */
+  perPage?: number
+  /** A positive integer to choose the page to return */
+  page?: number
 }
 
 export type CreatePrivateNICRequest = {
@@ -1596,6 +1608,8 @@ export type CreatePrivateNICRequest = {
   serverId: string
   /** UUID of the private network where the private NIC will be attached */
   privateNetworkId: string
+  /** The private NIC tags */
+  tags?: string[]
 }
 
 export type GetPrivateNICRequest = {
@@ -1605,6 +1619,17 @@ export type GetPrivateNICRequest = {
   serverId: string
   /** The private NIC unique ID */
   privateNicId: string
+}
+
+export type UpdatePrivateNICRequest = {
+  /** Zone to target. If none is passed will use default zone from the config */
+  zone?: Zone
+  /** UUID of the server the private NIC will be attached to */
+  serverId: string
+  /** The private NIC unique ID */
+  privateNicId: string
+  /** Tags used to select private NIC/s */
+  tags?: string[]
 }
 
 export type DeletePrivateNICRequest = {

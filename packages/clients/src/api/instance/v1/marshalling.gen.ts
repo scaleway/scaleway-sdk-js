@@ -99,6 +99,7 @@ import type {
   UpdatePlacementGroupResponse,
   UpdatePlacementGroupServersRequest,
   UpdatePlacementGroupServersResponse,
+  UpdatePrivateNICRequest,
   UpdateServerResponse,
   UpdateVolumeRequest,
   UpdateVolumeResponse,
@@ -274,7 +275,7 @@ const unmarshalPlacementGroup = (data: unknown) => {
   } as PlacementGroup
 }
 
-const unmarshalPrivateNIC = (data: unknown) => {
+export const unmarshalPrivateNIC = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PrivateNIC' failed as data isn't a dictionary.`,
@@ -287,6 +288,7 @@ const unmarshalPrivateNIC = (data: unknown) => {
     privateNetworkId: data.private_network_id,
     serverId: data.server_id,
     state: data.state,
+    tags: data.tags,
   } as PrivateNIC
 }
 
@@ -1078,6 +1080,7 @@ export const unmarshalListPrivateNICsResponse = (data: unknown) => {
 
   return {
     privateNics: unmarshalArrayOfObject(data.private_nics, unmarshalPrivateNIC),
+    totalCount: data.total_count,
   } as ListPrivateNICsResponse
 }
 
@@ -1485,6 +1488,7 @@ const marshalPrivateNIC = (
   private_network_id: request.privateNetworkId,
   server_id: request.serverId,
   state: request.state,
+  tags: request.tags,
 })
 
 const marshalSecurityGroupSummary = (
@@ -1684,6 +1688,7 @@ export const marshalCreatePrivateNICRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_network_id: request.privateNetworkId,
+  tags: request.tags,
 })
 
 export const marshalCreateSecurityGroupRequest = (
@@ -2057,6 +2062,13 @@ export const marshalUpdatePlacementGroupServersRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   servers: request.servers,
+})
+
+export const marshalUpdatePrivateNICRequest = (
+  request: UpdatePrivateNICRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  tags: request.tags,
 })
 
 export const marshalUpdateServerRequest = (
