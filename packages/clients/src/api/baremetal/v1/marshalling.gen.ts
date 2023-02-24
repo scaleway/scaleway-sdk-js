@@ -266,13 +266,16 @@ export const unmarshalOffer = (data: unknown) => {
     pricePerMonth: data.price_per_month
       ? unmarshalMoney(data.price_per_month)
       : undefined,
+    privateBandwidth: data.private_bandwidth,
     quotaName: data.quota_name,
     raidControllers: unmarshalArrayOfObject(
       data.raid_controllers,
       unmarshalRaidController,
     ),
+    sharedBandwidth: data.shared_bandwidth,
     stock: data.stock,
     subscriptionPeriod: data.subscription_period,
+    tags: data.tags,
   } as Offer
 }
 
