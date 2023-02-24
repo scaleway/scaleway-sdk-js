@@ -260,7 +260,7 @@ export interface Offer {
   name: string
   /** Stock level */
   stock: OfferStock
-  /** Bandwidth available in bits/s with the offer */
+  /** Public Bandwidth available in bits/s with the offer */
   bandwidth: number
   /** Commercial range of the offer */
   commercialRange: string
@@ -295,6 +295,12 @@ export interface Offer {
   fee?: Money
   /** Options available on offer */
   options: OfferOptionOffer[]
+  /** Private bandwidth available in bits/s with the offer */
+  privateBandwidth: number
+  /** The offer is shared or not */
+  sharedBandwidth: boolean
+  /** Array of tags attached to the offer */
+  tags: string[]
 }
 
 /** Offer. option offer */
