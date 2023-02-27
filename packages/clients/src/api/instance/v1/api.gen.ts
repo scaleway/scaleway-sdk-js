@@ -303,15 +303,12 @@ export class API extends ParentAPI {
           ['commercial_type', request.commercialType],
           ['name', request.name],
           ['order', request.order],
-          [
-            'organization',
-            request.organization ?? this.client.settings.defaultOrganizationId,
-          ],
+          ['organization', request.organization],
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
           ['private_ip', request.privateIp],
           ['private_network', request.privateNetwork],
-          ['project', request.project ?? this.client.settings.defaultProjectId],
+          ['project', request.project],
           ['state', request.state],
           [
             'tags',
@@ -508,13 +505,10 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['arch', request.arch],
           ['name', request.name],
-          [
-            'organization',
-            request.organization ?? this.client.settings.defaultOrganizationId,
-          ],
+          ['organization', request.organization],
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
-          ['project', request.project ?? this.client.settings.defaultProjectId],
+          ['project', request.project],
           ['public', request.public],
           ['tags', request.tags],
         ),
@@ -613,13 +607,10 @@ export class API extends ParentAPI {
         )}/snapshots`,
         urlParams: urlParams(
           ['name', request.name],
-          [
-            'organization',
-            request.organization ?? this.client.settings.defaultOrganizationId,
-          ],
+          ['organization', request.organization],
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
-          ['project', request.project ?? this.client.settings.defaultProjectId],
+          ['project', request.project],
           ['tags', request.tags],
         ),
       },
@@ -740,13 +731,10 @@ export class API extends ParentAPI {
         )}/volumes`,
         urlParams: urlParams(
           ['name', request.name],
-          [
-            'organization',
-            request.organization ?? this.client.settings.defaultOrganizationId,
-          ],
+          ['organization', request.organization],
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
-          ['project', request.project ?? this.client.settings.defaultProjectId],
+          ['project', request.project],
           [
             'tags',
             request.tags && request.tags.length > 0
@@ -858,13 +846,10 @@ export class API extends ParentAPI {
         )}/security_groups`,
         urlParams: urlParams(
           ['name', request.name],
-          [
-            'organization',
-            request.organization ?? this.client.settings.defaultOrganizationId,
-          ],
+          ['organization', request.organization],
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
-          ['project', request.project ?? this.client.settings.defaultProjectId],
+          ['project', request.project],
           ['project_default', request.projectDefault],
           [
             'tags',
@@ -1152,13 +1137,10 @@ export class API extends ParentAPI {
         )}/placement_groups`,
         urlParams: urlParams(
           ['name', request.name],
-          [
-            'organization',
-            request.organization ?? this.client.settings.defaultOrganizationId,
-          ],
+          ['organization', request.organization],
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
-          ['project', request.project ?? this.client.settings.defaultProjectId],
+          ['project', request.project],
           [
             'tags',
             request.tags && request.tags.length > 0
@@ -1385,13 +1367,10 @@ export class API extends ParentAPI {
         )}/ips`,
         urlParams: urlParams(
           ['name', request.name],
-          [
-            'organization',
-            request.organization ?? this.client.settings.defaultOrganizationId,
-          ],
+          ['organization', request.organization],
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
-          ['project', request.project ?? this.client.settings.defaultProjectId],
+          ['project', request.project],
           [
             'tags',
             request.tags && request.tags.length > 0
@@ -1684,11 +1663,8 @@ export class API extends ParentAPI {
           request.zone ?? this.client.settings.defaultZone,
         )}/dashboard`,
         urlParams: urlParams(
-          [
-            'organization',
-            request.organization ?? this.client.settings.defaultOrganizationId,
-          ],
-          ['project', request.project ?? this.client.settings.defaultProjectId],
+          ['organization', request.organization],
+          ['project', request.project],
         ),
       },
       unmarshalGetDashboardResponse,

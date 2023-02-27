@@ -173,20 +173,13 @@ export class API extends ParentAPI {
           ['dns_zone', request.dnsZone],
           ['domain', request.domain],
           ['order_by', request.orderBy ?? 'domain_asc'],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
         ),
       },
       unmarshalListDNSZonesResponse,
@@ -306,10 +299,7 @@ export class API extends ParentAPI {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
           ['type', request.type ?? 'unknown'],
         ),
       },
@@ -379,10 +369,7 @@ export class API extends ParentAPI {
           'dnsZone',
           request.dnsZone,
         )}/nameservers`,
-        urlParams: urlParams([
-          'project_id',
-          request.projectId ?? this.client.settings.defaultProjectId,
-        ]),
+        urlParams: urlParams(['project_id', request.projectId]),
       },
       unmarshalListDNSZoneNameserversResponse,
     )
@@ -696,10 +683,7 @@ export class API extends ParentAPI {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
         ),
       },
       unmarshalListSSLCertificatesResponse,
@@ -781,20 +765,13 @@ export class RegistrarAPI extends ParentAPI {
         urlParams: urlParams(
           ['domain', request.domain],
           ['order_by', request.orderBy ?? 'domain_desc'],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
           ['statuses', request.statuses],
           ['types', request.types],
         ),
@@ -978,20 +955,13 @@ export class RegistrarAPI extends ParentAPI {
         path: `/domain/v2beta1/contacts`,
         urlParams: urlParams(
           ['domain', request.domain],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
         ),
       },
       unmarshalListContactsResponse,
@@ -1062,20 +1032,13 @@ export class RegistrarAPI extends ParentAPI {
           ['domain', request.domain],
           ['is_external', request.isExternal],
           ['order_by', request.orderBy ?? 'domain_asc'],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
           ['registrar', request.registrar],
           ['status', request.status ?? 'status_unknown'],
         ),
@@ -1101,20 +1064,13 @@ export class RegistrarAPI extends ParentAPI {
         path: `/domain/v2beta1/renewable-domains`,
         urlParams: urlParams(
           ['order_by', request.orderBy ?? 'domain_asc'],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
         ),
       },
       unmarshalListRenewableDomainsResponse,

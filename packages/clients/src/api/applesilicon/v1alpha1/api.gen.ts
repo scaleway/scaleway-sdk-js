@@ -136,20 +136,13 @@ export class API extends ParentAPI {
         )}/servers`,
         urlParams: urlParams(
           ['order_by', request.orderBy ?? 'created_at_asc'],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
         ),
       },
       unmarshalListServersResponse,

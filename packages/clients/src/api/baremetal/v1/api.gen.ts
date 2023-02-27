@@ -117,20 +117,13 @@ export class API extends ParentAPI {
           ['name', request.name],
           ['option_id', request.optionId],
           ['order_by', request.orderBy ?? 'created_at_asc'],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
           ['status', request.status],
           ['tags', request.tags],
         ),
@@ -810,21 +803,14 @@ export class PrivateNetworkAPI extends ParentAPI {
         )}/server-private-networks`,
         urlParams: urlParams(
           ['order_by', request.orderBy ?? 'created_at_asc'],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['private_network_id', request.privateNetworkId],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
           ['server_id', request.serverId],
         ),
       },
