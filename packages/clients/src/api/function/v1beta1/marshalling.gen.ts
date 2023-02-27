@@ -69,6 +69,8 @@ const unmarshalTriggerMnqNatsClientConfig = (data: unknown) => {
 
   return {
     mnqNamespaceId: data.mnq_namespace_id,
+    mnqProjectId: data.mnq_project_id,
+    mnqRegion: data.mnq_region,
     subject: data.subject,
   } as TriggerMnqNatsClientConfig
 }
@@ -82,6 +84,8 @@ const unmarshalTriggerMnqSqsClientConfig = (data: unknown) => {
 
   return {
     mnqNamespaceId: data.mnq_namespace_id,
+    mnqProjectId: data.mnq_project_id,
+    mnqRegion: data.mnq_region,
     queue: data.queue,
   } as TriggerMnqSqsClientConfig
 }
@@ -407,6 +411,8 @@ const marshalCreateTriggerRequestMnqNatsClientConfig = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mnq_namespace_id: request.mnqNamespaceId,
+  mnq_project_id: request.mnqProjectId,
+  mnq_region: request.mnqRegion,
   subject: request.subject,
 })
 
@@ -415,6 +421,8 @@ const marshalCreateTriggerRequestMnqSqsClientConfig = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mnq_namespace_id: request.mnqNamespaceId,
+  mnq_project_id: request.mnqProjectId,
+  mnq_region: request.mnqRegion,
   queue: request.queue,
 })
 
@@ -441,6 +449,8 @@ const marshalUpdateTriggerRequestMnqNatsClientConfig = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mnq_namespace_id: request.mnqNamespaceId,
+  mnq_project_id: request.mnqProjectId,
+  mnq_region: request.mnqRegion,
   subject: request.subject,
 })
 
@@ -449,6 +459,8 @@ const marshalUpdateTriggerRequestMnqSqsClientConfig = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mnq_namespace_id: request.mnqNamespaceId,
+  mnq_project_id: request.mnqProjectId,
+  mnq_region: request.mnqRegion,
   queue: request.queue,
 })
 

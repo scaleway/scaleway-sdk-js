@@ -133,11 +133,15 @@ export type TriggerStatus =
 export interface CreateTriggerRequestMnqNatsClientConfig {
   mnqNamespaceId: string
   subject: string
+  mnqProjectId: string
+  mnqRegion: string
 }
 
 export interface CreateTriggerRequestMnqSqsClientConfig {
   mnqNamespaceId: string
   queue: string
+  mnqProjectId: string
+  mnqRegion: string
 }
 
 export interface CreateTriggerRequestSqsClientConfig {
@@ -343,11 +347,15 @@ export interface Trigger {
 export interface TriggerMnqNatsClientConfig {
   mnqNamespaceId: string
   subject: string
+  mnqProjectId: string
+  mnqRegion: string
 }
 
 export interface TriggerMnqSqsClientConfig {
   mnqNamespaceId: string
   queue: string
+  mnqProjectId: string
+  mnqRegion: string
 }
 
 export interface TriggerSqsClientConfig {
@@ -360,11 +368,15 @@ export interface TriggerSqsClientConfig {
 export interface UpdateTriggerRequestMnqNatsClientConfig {
   mnqNamespaceId: string
   subject: string
+  mnqProjectId: string
+  mnqRegion: string
 }
 
 export interface UpdateTriggerRequestMnqSqsClientConfig {
   mnqNamespaceId: string
   queue: string
+  mnqProjectId: string
+  mnqRegion: string
 }
 
 export interface UpdateTriggerRequestSqsClientConfig {
