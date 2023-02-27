@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.0.0...@scaleway/sdk@1.1.0) (2023-02-27)
+
+### Features
+
+- **baremetal:** add privateBandwidth, sharedBandwidth and tags to Offer ([#476](https://github.com/scaleway/scaleway-sdk-js/issues/476)) ([373706c](https://github.com/scaleway/scaleway-sdk-js/commit/373706c768b9acc59a4a4fb28964579b297bdcfc))
+- **cockpit:** add v1beta1 ([#469](https://github.com/scaleway/scaleway-sdk-js/issues/469)) ([9b88df0](https://github.com/scaleway/scaleway-sdk-js/commit/9b88df00aed630216568baae02a0e2d232a7d6a0))
+- **instance:** add pagination to listPrivateNICs and add updatePrivateNIC endpoint ([#467](https://github.com/scaleway/scaleway-sdk-js/issues/467)) ([5e6ab40](https://github.com/scaleway/scaleway-sdk-js/commit/5e6ab40b017bed27601bc640123c083cefcdc1a2))
+- **rdb:** add generation property to NodeType ([#465](https://github.com/scaleway/scaleway-sdk-js/issues/465)) ([4f7415e](https://github.com/scaleway/scaleway-sdk-js/commit/4f7415e973d69bd6f6cb8fab4c6df04a24d9f572))
+- **rdb:** deprecate ACLRule port ([#470](https://github.com/scaleway/scaleway-sdk-js/issues/470)) ([c0deb0a](https://github.com/scaleway/scaleway-sdk-js/commit/c0deb0abe9e50fed916d7e0330e846f12ef5f62e))
+- **secret_manager:** add endpoints \*ByName() ([#479](https://github.com/scaleway/scaleway-sdk-js/issues/479)) ([276302a](https://github.com/scaleway/scaleway-sdk-js/commit/276302a5e46e9de18695219c61fc7cea8fd4a15b))
+- **serverless:** add mnqProjectId and mnqRegion for triggers ([#480](https://github.com/scaleway/scaleway-sdk-js/issues/480)) ([95edb87](https://github.com/scaleway/scaleway-sdk-js/commit/95edb87e64ba6d3a586f48ecff2de849000283a2))
+
+### Bug Fixes
+
+- avoid fallback on default projectId and organizationId for optional fields ([#478](https://github.com/scaleway/scaleway-sdk-js/issues/478)) ([84ca4cc](https://github.com/scaleway/scaleway-sdk-js/commit/84ca4cc895a2a96966fe79de8ab4cae70f3c48cd))
+
 ## [1.0.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@0.1.0-beta.38...@scaleway/sdk@1.0.0) (2023-02-21)
 
 ### Features
