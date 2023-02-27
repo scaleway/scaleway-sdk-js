@@ -32,7 +32,7 @@ export class API extends ParentAPI {
         path: `/marketplace/v1/images`,
         urlParams: urlParams(
           ['page', request.page],
-          ['per_page', request.perPage],
+          ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListImagesResponse,
