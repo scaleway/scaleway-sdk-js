@@ -125,21 +125,14 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy ?? 'created_at_asc'],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['private_network_id', request.privateNetworkId],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
           ['status', request.status ?? 'unknown'],
           ['tags', request.tags],
           ['type', request.type],
@@ -437,20 +430,13 @@ export class API extends ParentAPI {
           ['address', request.address],
           ['has_address', request.hasAddress],
           ['order_by', request.orderBy ?? 'created_at_asc'],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
         ),
       },
       unmarshalListDHCPsResponse,
@@ -847,20 +833,13 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['is_free', request.isFree],
           ['order_by', request.orderBy ?? 'created_at_asc'],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
           ['reverse', request.reverse],
           ['tags', request.tags],
         ),

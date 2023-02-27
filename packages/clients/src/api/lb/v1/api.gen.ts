@@ -241,20 +241,13 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy ?? 'created_at_asc'],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
         ),
       },
       unmarshalListLbsResponse,
@@ -397,20 +390,13 @@ export class API extends ParentAPI {
         )}/ips`,
         urlParams: urlParams(
           ['ip_address', request.ipAddress],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
         ),
       },
       unmarshalListIpsResponse,
@@ -1300,20 +1286,13 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy ?? 'created_at_asc'],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
         ),
       },
       unmarshalListSubscriberResponse,
@@ -1523,20 +1502,13 @@ export class ZonedAPI extends ParentAPI {
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy ?? 'created_at_asc'],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
         ),
       },
       unmarshalListLbsResponse,
@@ -1679,20 +1651,13 @@ export class ZonedAPI extends ParentAPI {
         )}/ips`,
         urlParams: urlParams(
           ['ip_address', request.ipAddress],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
         ),
       },
       unmarshalListIpsResponse,
@@ -2637,20 +2602,13 @@ export class ZonedAPI extends ParentAPI {
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy ?? 'created_at_asc'],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
         ),
       },
       unmarshalListSubscriberResponse,

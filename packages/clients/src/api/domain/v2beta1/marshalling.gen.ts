@@ -1667,7 +1667,7 @@ export const marshalCloneDNSZoneRequest = (
 ): Record<string, unknown> => ({
   dest_dns_zone: request.destDnsZone,
   overwrite: request.overwrite,
-  project_id: request.projectId ?? defaults.defaultProjectId,
+  project_id: request.projectId,
 })
 
 export const marshalCreateDNSZoneRequest = (
@@ -1862,7 +1862,7 @@ export const marshalRegistrarApiTradeDomainRequest = (
   request: RegistrarApiTradeDomainRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  project_id: request.projectId ?? defaults.defaultProjectId,
+  project_id: request.projectId,
   ...resolveOneOf<unknown>([
     {
       param: 'new_owner_contact_id',

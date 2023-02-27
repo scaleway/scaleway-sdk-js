@@ -132,10 +132,7 @@ export class API extends ParentAPI {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
           ['since', request.since],
           ['statuses', request.statuses],
           ['until', request.until],
@@ -171,10 +168,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['domain_id', request.domainId],
           ['mail_from', request.mailFrom],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
           ['since', request.since],
           ['until', request.until],
         ),
@@ -272,20 +266,13 @@ export class API extends ParentAPI {
         )}/domains`,
         urlParams: urlParams(
           ['name', request.name],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
           ['status', request.status],
         ),
       },
