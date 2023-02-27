@@ -109,6 +109,13 @@ export type GetSecretRequest = {
   secretId: string
 }
 
+export type GetSecretByNameRequest = {
+  /** Region to target. If none is passed will use default region from the config */
+  region?: Region
+  /** Name of the Secret */
+  secretName: string
+}
+
 export type UpdateSecretRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
@@ -129,6 +136,8 @@ export type ListSecretsRequest = {
   organizationId?: string
   /** ID of a project to filter on (optional) */
   projectId?: string
+  /** Secret name to filter on (optional) */
+  name?: string
   /** List of tags to filter on (optional) */
   tags?: string[]
   orderBy?: ListSecretsRequestOrderBy
@@ -163,6 +172,15 @@ export type GetSecretVersionRequest = {
   revision: string
 }
 
+export type GetSecretVersionByNameRequest = {
+  /** Region to target. If none is passed will use default region from the config */
+  region?: Region
+  /** Name of the Secret */
+  secretName: string
+  /** Revision of the SecretVersion (may be a number or "latest") */
+  revision: string
+}
+
 export type UpdateSecretVersionRequest = {
   /** Region to target. If none is passed will use default region from the config */
   region?: Region
@@ -179,6 +197,17 @@ export type ListSecretVersionsRequest = {
   region?: Region
   /** ID of the Secret */
   secretId: string
+  page?: number
+  pageSize?: number
+  /** Filter results by status */
+  status?: SecretVersionStatus[]
+}
+
+export type ListSecretVersionsByNameRequest = {
+  /** Region to target. If none is passed will use default region from the config */
+  region?: Region
+  /** Name of the Secret */
+  secretName: string
   page?: number
   pageSize?: number
   /** Filter results by status */
@@ -217,6 +246,15 @@ export type AccessSecretVersionRequest = {
   region?: Region
   /** ID of the Secret */
   secretId: string
+  /** Revision of the SecretVersion (may be a number or "latest") */
+  revision: string
+}
+
+export type AccessSecretVersionByNameRequest = {
+  /** Region to target. If none is passed will use default region from the config */
+  region?: Region
+  /** Name of the Secret */
+  secretName: string
   /** Revision of the SecretVersion (may be a number or "latest") */
   revision: string
 }

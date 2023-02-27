@@ -19,6 +19,7 @@ import {
   unmarshalSecretVersion,
 } from './marshalling.gen'
 import type {
+  AccessSecretVersionByNameRequest,
   AccessSecretVersionRequest,
   AccessSecretVersionResponse,
   CreateSecretRequest,
@@ -27,8 +28,11 @@ import type {
   DestroySecretVersionRequest,
   DisableSecretVersionRequest,
   EnableSecretVersionRequest,
+  GetSecretByNameRequest,
   GetSecretRequest,
+  GetSecretVersionByNameRequest,
   GetSecretVersionRequest,
+  ListSecretVersionsByNameRequest,
   ListSecretVersionsRequest,
   ListSecretVersionsResponse,
   ListSecretsRequest,
@@ -93,6 +97,27 @@ export class API extends ParentAPI {
     )
 
   /**
+   * Get metadata of a Secret
+   *
+   * @param request - The request {@link GetSecretByNameRequest}
+   * @returns A Promise of Secret
+   */
+  getSecretByName = (request: Readonly<GetSecretByNameRequest>) =>
+    this.client.fetch<Secret>(
+      {
+        method: 'GET',
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/secrets-by-name/${validatePathParam(
+          'secretName',
+          request.secretName,
+        )}`,
+      },
+      unmarshalSecret,
+    )
+
+  /**
    * Update metadata of a Secret
    *
    * @param request - The request {@link UpdateSecretRequest}
@@ -123,21 +148,15 @@ export class API extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/secrets`,
         urlParams: urlParams(
+          ['name', request.name],
           ['order_by', request.orderBy ?? 'name_asc'],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
           ['tags', request.tags],
         ),
       },
@@ -211,6 +230,27 @@ export class API extends ParentAPI {
     )
 
   /**
+   * Get metadata of a SecretVersion
+   *
+   * @param request - The request {@link GetSecretVersionByNameRequest}
+   * @returns A Promise of SecretVersion
+   */
+  getSecretVersionByName = (request: Readonly<GetSecretVersionByNameRequest>) =>
+    this.client.fetch<SecretVersion>(
+      {
+        method: 'GET',
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/secrets-by-name/${validatePathParam(
+          'secretName',
+          request.secretName,
+        )}/versions/${validatePathParam('revision', request.revision)}`,
+      },
+      unmarshalSecretVersion,
+    )
+
+  /**
    * Update metadata of a SecretVersion
    *
    * @param request - The request {@link UpdateSecretVersionRequest}
@@ -265,6 +305,46 @@ export class API extends ParentAPI {
    */
   listSecretVersions = (request: Readonly<ListSecretVersionsRequest>) =>
     enrichForPagination('versions', this.pageOfListSecretVersions, request)
+
+  protected pageOfListSecretVersionsByName = (
+    request: Readonly<ListSecretVersionsByNameRequest>,
+  ) =>
+    this.client.fetch<ListSecretVersionsResponse>(
+      {
+        method: 'GET',
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/secrets-by-name/${validatePathParam(
+          'secretName',
+          request.secretName,
+        )}/versions`,
+        urlParams: urlParams(
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['status', request.status],
+        ),
+      },
+      unmarshalListSecretVersionsResponse,
+    )
+
+  /**
+   * List versions of a secret, not returning any sensitive data
+   *
+   * @param request - The request {@link ListSecretVersionsByNameRequest}
+   * @returns A Promise of ListSecretVersionsResponse
+   */
+  listSecretVersionsByName = (
+    request: Readonly<ListSecretVersionsByNameRequest>,
+  ) =>
+    enrichForPagination(
+      'versions',
+      this.pageOfListSecretVersionsByName,
+      request,
+    )
 
   /**
    * Destroy a SecretVersion, permanently destroying the sensitive data
@@ -351,6 +431,29 @@ export class API extends ParentAPI {
         )}/secrets/${validatePathParam(
           'secretId',
           request.secretId,
+        )}/versions/${validatePathParam('revision', request.revision)}/access`,
+      },
+      unmarshalAccessSecretVersionResponse,
+    )
+
+  /**
+   * Access a SecretVersion, returning the sensitive data
+   *
+   * @param request - The request {@link AccessSecretVersionByNameRequest}
+   * @returns A Promise of AccessSecretVersionResponse
+   */
+  accessSecretVersionByName = (
+    request: Readonly<AccessSecretVersionByNameRequest>,
+  ) =>
+    this.client.fetch<AccessSecretVersionResponse>(
+      {
+        method: 'GET',
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/secrets-by-name/${validatePathParam(
+          'secretName',
+          request.secretName,
         )}/versions/${validatePathParam('revision', request.revision)}/access`,
       },
       unmarshalAccessSecretVersionResponse,
