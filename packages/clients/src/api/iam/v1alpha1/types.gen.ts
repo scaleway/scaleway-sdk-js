@@ -41,6 +41,8 @@ export type ListPoliciesRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
 
+export type ListQuotaRequestOrderBy = 'name_asc' | 'name_desc'
+
 export type ListSSHKeysRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -183,6 +185,11 @@ export interface ListPoliciesResponse {
   totalCount: number
 }
 
+export interface ListQuotaResponse {
+  quota: Quotum[]
+  totalCount: number
+}
+
 /** List rules response */
 export interface ListRulesResponse {
   /** Rules of the policy */
@@ -271,6 +278,14 @@ export interface Policy {
    * 'noPrincipal' could be set.
    */
   noPrincipal?: boolean
+}
+
+export interface Quotum {
+  name: string
+  /** One-of ('value'): at most one of 'limit', 'unlimited' could be set. */
+  limit?: number
+  /** One-of ('value'): at most one of 'limit', 'unlimited' could be set. */
+  unlimited?: boolean
 }
 
 /** Rule */
@@ -796,4 +811,16 @@ export type UpdateAPIKeyRequest = {
 export type DeleteAPIKeyRequest = {
   /** Access key to delete */
   accessKey: string
+}
+
+export type ListQuotaRequest = {
+  orderBy?: ListQuotaRequestOrderBy
+  page?: number
+  pageSize?: number
+  organizationId?: string
+}
+
+export type GetQuotumRequest = {
+  quotumName: string
+  organizationId?: string
 }

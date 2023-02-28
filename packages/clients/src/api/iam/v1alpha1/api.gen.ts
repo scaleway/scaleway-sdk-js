@@ -30,10 +30,12 @@ import {
   unmarshalListGroupsResponse,
   unmarshalListPermissionSetsResponse,
   unmarshalListPoliciesResponse,
+  unmarshalListQuotaResponse,
   unmarshalListRulesResponse,
   unmarshalListSSHKeysResponse,
   unmarshalListUsersResponse,
   unmarshalPolicy,
+  unmarshalQuotum,
   unmarshalSSHKey,
   unmarshalSetRulesResponse,
   unmarshalUser,
@@ -58,6 +60,7 @@ import type {
   GetApplicationRequest,
   GetGroupRequest,
   GetPolicyRequest,
+  GetQuotumRequest,
   GetSSHKeyRequest,
   GetUserRequest,
   Group,
@@ -71,6 +74,8 @@ import type {
   ListPermissionSetsResponse,
   ListPoliciesRequest,
   ListPoliciesResponse,
+  ListQuotaRequest,
+  ListQuotaResponse,
   ListRulesRequest,
   ListRulesResponse,
   ListSSHKeysRequest,
@@ -78,6 +83,7 @@ import type {
   ListUsersRequest,
   ListUsersResponse,
   Policy,
+  Quotum,
   RemoveGroupMemberRequest,
   SSHKey,
   SetGroupMembersRequest,
@@ -872,4 +878,45 @@ export class API extends ParentAPI {
         request.accessKey,
       )}`,
     })
+
+  protected pageOfListQuota = (request: Readonly<ListQuotaRequest> = {}) =>
+    this.client.fetch<ListQuotaResponse>(
+      {
+        method: 'GET',
+        path: `/iam/v1alpha1/quota`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy ?? 'name_asc'],
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListQuotaResponse,
+    )
+
+  listQuota = (request: Readonly<ListQuotaRequest> = {}) =>
+    enrichForPagination('quota', this.pageOfListQuota, request)
+
+  getQuotum = (request: Readonly<GetQuotumRequest>) =>
+    this.client.fetch<Quotum>(
+      {
+        method: 'GET',
+        path: `/iam/v1alpha1/quota/${validatePathParam(
+          'quotumName',
+          request.quotumName,
+        )}`,
+        urlParams: urlParams([
+          'organization_id',
+          request.organizationId ?? this.client.settings.defaultOrganizationId,
+        ]),
+      },
+      unmarshalQuotum,
+    )
 }

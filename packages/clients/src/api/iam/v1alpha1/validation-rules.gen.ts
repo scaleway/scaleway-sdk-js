@@ -119,6 +119,16 @@ export const ListPoliciesRequest = {
   },
 }
 
+export const ListQuotaRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const ListRulesRequest = {
   page: {
     greaterThanOrEqual: 1,
