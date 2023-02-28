@@ -710,17 +710,24 @@ export interface PrivateNetwork {
   /**
    * Local ip address of load balancer instance.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig' could be
-   * set.
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
    * Value set to true if load balancer instance use a DHCP.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig' could be
-   * set.
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
+  /**
+   * Value set to true if load balancer instance use a DHCP.
+   *
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
+   */
+  ipamConfig?: PrivateNetworkIpamConfig
   /** Instance private network id */
   privateNetworkId: string
   /** Status (running, to create...) of private network connection */
@@ -1652,17 +1659,24 @@ export type AttachPrivateNetworkRequest = {
   /**
    * Define two local ip address of your choice for each load balancer instance.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig' could be
-   * set.
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
    * Set to true if you want to let DHCP assign IP addresses.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig' could be
-   * set.
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
+  /**
+   * For internal use only.
+   *
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
+   */
+  ipamConfig?: PrivateNetworkIpamConfig
 }
 
 export type DetachPrivateNetworkRequest = {
@@ -2520,17 +2534,24 @@ export type ZonedApiAttachPrivateNetworkRequest = {
   /**
    * Define two local ip address of your choice for each load balancer instance.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig' could be
-   * set.
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
    * Set to true if you want to let DHCP assign IP addresses.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig' could be
-   * set.
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
+  /**
+   * For internal use only.
+   *
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
+   */
+  ipamConfig?: PrivateNetworkIpamConfig
 }
 
 export type ZonedApiDetachPrivateNetworkRequest = {
