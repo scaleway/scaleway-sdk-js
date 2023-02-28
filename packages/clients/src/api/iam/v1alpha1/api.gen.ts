@@ -901,9 +901,21 @@ export class API extends ParentAPI {
       unmarshalListQuotaResponse,
     )
 
+  /**
+   * List all quota in the organization with the associated limit
+   *
+   * @param request - The request {@link ListQuotaRequest}
+   * @returns A Promise of ListQuotaResponse
+   */
   listQuota = (request: Readonly<ListQuotaRequest> = {}) =>
     enrichForPagination('quota', this.pageOfListQuota, request)
 
+  /**
+   * Get a quotum in the organization with the associated limit
+   *
+   * @param request - The request {@link GetQuotumRequest}
+   * @returns A Promise of Quotum
+   */
   getQuotum = (request: Readonly<GetQuotumRequest>) =>
     this.client.fetch<Quotum>(
       {
