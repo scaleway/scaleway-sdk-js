@@ -57,6 +57,7 @@ import type {
   MigrateLbRequest,
   PrivateNetwork,
   PrivateNetworkDHCPConfig,
+  PrivateNetworkIpamConfig,
   PrivateNetworkStaticConfig,
   RemoveBackendServersRequest,
   Route,
@@ -466,6 +467,16 @@ const unmarshalPrivateNetworkDHCPConfig = (data: unknown) => {
   return {} as PrivateNetworkDHCPConfig
 }
 
+const unmarshalPrivateNetworkIpamConfig = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PrivateNetworkIpamConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as PrivateNetworkIpamConfig
+}
+
 const unmarshalPrivateNetworkStaticConfig = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -550,6 +561,9 @@ export const unmarshalPrivateNetwork = (data: unknown) => {
     createdAt: unmarshalDate(data.created_at),
     dhcpConfig: data.dhcp_config
       ? unmarshalPrivateNetworkDHCPConfig(data.dhcp_config)
+      : undefined,
+    ipamConfig: data.ipam_config
+      ? unmarshalPrivateNetworkIpamConfig(data.ipam_config)
       : undefined,
     lb: data.lb ? unmarshalLb(data.lb) : undefined,
     privateNetworkId: data.private_network_id,
@@ -924,6 +938,11 @@ const marshalPrivateNetworkDHCPConfig = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
+const marshalPrivateNetworkIpamConfig = (
+  request: PrivateNetworkIpamConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({})
+
 const marshalPrivateNetworkStaticConfig = (
   request: PrivateNetworkStaticConfig,
   defaults: DefaultValues,
@@ -983,6 +1002,12 @@ export const marshalAttachPrivateNetworkRequest = (
       param: 'dhcp_config',
       value: request.dhcpConfig
         ? marshalPrivateNetworkDHCPConfig(request.dhcpConfig, defaults)
+        : undefined,
+    },
+    {
+      param: 'ipam_config',
+      value: request.ipamConfig
+        ? marshalPrivateNetworkIpamConfig(request.ipamConfig, defaults)
         : undefined,
     },
   ]),
@@ -1357,6 +1382,12 @@ export const marshalZonedApiAttachPrivateNetworkRequest = (
       param: 'dhcp_config',
       value: request.dhcpConfig
         ? marshalPrivateNetworkDHCPConfig(request.dhcpConfig, defaults)
+        : undefined,
+    },
+    {
+      param: 'ipam_config',
+      value: request.ipamConfig
+        ? marshalPrivateNetworkIpamConfig(request.ipamConfig, defaults)
         : undefined,
     },
   ]),
