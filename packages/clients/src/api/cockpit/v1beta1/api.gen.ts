@@ -134,7 +134,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Reset the Grafana your cockpit associated with the given project ID.
+   * Reset the Grafana of your cockpit associated with the given project ID.
    *
    * @param request - The request {@link ResetCockpitGrafanaRequest}
    * @returns A Promise of Cockpit
@@ -153,7 +153,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create token associated with the given project ID.
+   * Create a token associated with the given project ID.
    *
    * @param request - The request {@link CreateTokenRequest}
    * @returns A Promise of Token
