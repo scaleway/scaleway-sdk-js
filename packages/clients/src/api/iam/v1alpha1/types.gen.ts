@@ -185,8 +185,11 @@ export interface ListPoliciesResponse {
   totalCount: number
 }
 
+/** List quota response */
 export interface ListQuotaResponse {
+  /** List of quota */
   quota: Quotum[]
+  /** Total count of quota */
   totalCount: number
 }
 
@@ -280,11 +283,21 @@ export interface Policy {
   noPrincipal?: boolean
 }
 
+/** Quotum */
 export interface Quotum {
+  /** Name of the quotum */
   name: string
-  /** One-of ('value'): at most one of 'limit', 'unlimited' could be set. */
+  /**
+   * Max limit of the quotum.
+   *
+   * One-of ('value'): at most one of 'limit', 'unlimited' could be set.
+   */
   limit?: number
-  /** One-of ('value'): at most one of 'limit', 'unlimited' could be set. */
+  /**
+   * Whether the quotum is unlimited or not.
+   *
+   * One-of ('value'): at most one of 'limit', 'unlimited' could be set.
+   */
   unlimited?: boolean
 }
 
@@ -814,13 +827,19 @@ export type DeleteAPIKeyRequest = {
 }
 
 export type ListQuotaRequest = {
+  /** Criteria for sorting results */
   orderBy?: ListQuotaRequestOrderBy
-  page?: number
+  /** Number of results per page. Value must be between 1 and 100 */
   pageSize?: number
+  /** Number of page. Value must be greater to 1 */
+  page?: number
+  /** Filter by organization ID */
   organizationId?: string
 }
 
 export type GetQuotumRequest = {
+  /** Name of the quotum to get */
   quotumName: string
+  /** ID of the organization */
   organizationId?: string
 }

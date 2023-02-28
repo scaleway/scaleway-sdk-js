@@ -55,6 +55,12 @@ export const CreateSSHKeyRequest = {
   },
 }
 
+export const GetQuotumRequest = {
+  quotumName: {
+    minLength: 1,
+  },
+}
+
 export const ListAPIKeysRequest = {
   description: {
     maxLength: 200,
