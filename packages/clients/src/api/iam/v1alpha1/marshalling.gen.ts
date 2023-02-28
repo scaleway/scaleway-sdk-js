@@ -23,11 +23,13 @@ import type {
   ListGroupsResponse,
   ListPermissionSetsResponse,
   ListPoliciesResponse,
+  ListQuotaResponse,
   ListRulesResponse,
   ListSSHKeysResponse,
   ListUsersResponse,
   PermissionSet,
   Policy,
+  Quotum,
   RemoveGroupMemberRequest,
   Rule,
   RuleSpecs,
@@ -142,6 +144,20 @@ export const unmarshalPolicy = (data: unknown) => {
     updatedAt: unmarshalDate(data.updated_at),
     userId: data.user_id,
   } as Policy
+}
+
+export const unmarshalQuotum = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Quotum' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    limit: data.limit,
+    name: data.name,
+    unlimited: data.unlimited,
+  } as Quotum
 }
 
 const unmarshalRule = (data: unknown) => {
@@ -271,6 +287,19 @@ export const unmarshalListPoliciesResponse = (data: unknown) => {
     policies: unmarshalArrayOfObject(data.policies, unmarshalPolicy),
     totalCount: data.total_count,
   } as ListPoliciesResponse
+}
+
+export const unmarshalListQuotaResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListQuotaResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    quota: unmarshalArrayOfObject(data.quota, unmarshalQuotum),
+    totalCount: data.total_count,
+  } as ListQuotaResponse
 }
 
 export const unmarshalListRulesResponse = (data: unknown) => {
