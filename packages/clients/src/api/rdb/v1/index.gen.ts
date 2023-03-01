@@ -96,6 +96,7 @@ export type {
   LogsPolicy,
   Maintenance,
   MaintenanceStatus,
+  MigrateEndpointRequest,
   NodeType,
   NodeTypeGeneration,
   NodeTypeStock,

@@ -30,6 +30,7 @@ import {
   marshalCreateUserRequest,
   marshalDeleteInstanceACLRulesRequest,
   marshalDeleteInstanceSettingsRequest,
+  marshalMigrateEndpointRequest,
   marshalPrepareInstanceLogsRequest,
   marshalPurgeInstanceLogsRequest,
   marshalRestoreDatabaseBackupRequest,
@@ -133,6 +134,7 @@ import type {
   ListSnapshotsResponse,
   ListUsersRequest,
   ListUsersResponse,
+  MigrateEndpointRequest,
   PrepareInstanceLogsRequest,
   PrepareInstanceLogsResponse,
   Privilege,
@@ -1615,6 +1617,31 @@ export class API extends ParentAPI {
           'region',
           request.region ?? this.client.settings.defaultRegion,
         )}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+      },
+      unmarshalEndpoint,
+    )
+
+  /**
+   * Migrate an existing instance endpoint to another instance
+   *
+   * @param request - The request {@link MigrateEndpointRequest}
+   * @returns A Promise of Endpoint
+   */
+  migrateEndpoint = (request: Readonly<MigrateEndpointRequest>) =>
+    this.client.fetch<Endpoint>(
+      {
+        body: JSON.stringify(
+          marshalMigrateEndpointRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/rdb/v1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/endpoints/${validatePathParam(
+          'endpointId',
+          request.endpointId,
+        )}/migrate`,
       },
       unmarshalEndpoint,
     )

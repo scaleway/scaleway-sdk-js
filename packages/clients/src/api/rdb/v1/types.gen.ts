@@ -1363,3 +1363,12 @@ export type GetEndpointRequest = {
   /** UUID of the endpoint you want to get */
   endpointId: string
 }
+
+export type MigrateEndpointRequest = {
+  /** Region to target. If none is passed will use default region from the config */
+  region?: Region
+  /** UUID of the endpoint you want to migrate */
+  endpointId: string
+  /** UUID of the instance you want to attach the endpoint to */
+  instanceId: string
+}

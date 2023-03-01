@@ -61,6 +61,7 @@ import type {
   ListUsersResponse,
   LogsPolicy,
   Maintenance,
+  MigrateEndpointRequest,
   NodeType,
   NodeTypeVolumeConstraintSizes,
   NodeTypeVolumeType,
@@ -1032,6 +1033,13 @@ export const marshalDeleteInstanceSettingsRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   setting_names: request.settingNames,
+})
+
+export const marshalMigrateEndpointRequest = (
+  request: MigrateEndpointRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  instance_id: request.instanceId,
 })
 
 export const marshalPrepareInstanceLogsRequest = (
