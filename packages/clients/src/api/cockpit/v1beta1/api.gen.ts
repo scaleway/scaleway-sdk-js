@@ -68,6 +68,12 @@ const jsonContentHeaders = {
  * This API allows to manage Cockpits.
  */
 export class API extends ParentAPI {
+  /**
+   * Activate a cockpit associated with the given project ID.
+   *
+   * @param request - The request {@link ActivateCockpitRequest}
+   * @returns A Promise of Cockpit
+   */
   activateCockpit = (request: Readonly<ActivateCockpitRequest> = {}) =>
     this.client.fetch<Cockpit>(
       {
@@ -120,6 +126,12 @@ export class API extends ParentAPI {
       options,
     )
 
+  /**
+   * Deactivate a cockpit associated with the given project ID.
+   *
+   * @param request - The request {@link DeactivateCockpitRequest}
+   * @returns A Promise of Cockpit
+   */
   deactivateCockpit = (request: Readonly<DeactivateCockpitRequest> = {}) =>
     this.client.fetch<Cockpit>(
       {
