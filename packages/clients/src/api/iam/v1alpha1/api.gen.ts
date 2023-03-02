@@ -25,9 +25,11 @@ import {
   unmarshalAPIKey,
   unmarshalApplication,
   unmarshalGroup,
+  unmarshalJWT,
   unmarshalListAPIKeysResponse,
   unmarshalListApplicationsResponse,
   unmarshalListGroupsResponse,
+  unmarshalListJWTsResponse,
   unmarshalListPermissionSetsResponse,
   unmarshalListPoliciesResponse,
   unmarshalListQuotaResponse,
@@ -53,23 +55,28 @@ import type {
   DeleteAPIKeyRequest,
   DeleteApplicationRequest,
   DeleteGroupRequest,
+  DeleteJWTRequest,
   DeletePolicyRequest,
   DeleteSSHKeyRequest,
   DeleteUserRequest,
   GetAPIKeyRequest,
   GetApplicationRequest,
   GetGroupRequest,
+  GetJWTRequest,
   GetPolicyRequest,
   GetQuotumRequest,
   GetSSHKeyRequest,
   GetUserRequest,
   Group,
+  JWT,
   ListAPIKeysRequest,
   ListAPIKeysResponse,
   ListApplicationsRequest,
   ListApplicationsResponse,
   ListGroupsRequest,
   ListGroupsResponse,
+  ListJWTsRequest,
+  ListJWTsResponse,
   ListPermissionSetsRequest,
   ListPermissionSetsResponse,
   ListPoliciesRequest,
@@ -931,4 +938,58 @@ export class API extends ParentAPI {
       },
       unmarshalQuotum,
     )
+
+  protected pageOfListJWTs = (request: Readonly<ListJWTsRequest>) =>
+    this.client.fetch<ListJWTsResponse>(
+      {
+        method: 'GET',
+        path: `/iam/v1alpha1/jwts`,
+        urlParams: urlParams(
+          ['audience_id', request.audienceId],
+          ['expired', request.expired],
+          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListJWTsResponse,
+    )
+
+  /**
+   * List JWTs
+   *
+   * @param request - The request {@link ListJWTsRequest}
+   * @returns A Promise of ListJWTsResponse
+   */
+  listJWTs = (request: Readonly<ListJWTsRequest>) =>
+    enrichForPagination('jwts', this.pageOfListJWTs, request)
+
+  /**
+   * Get a JWT
+   *
+   * @param request - The request {@link GetJWTRequest}
+   * @returns A Promise of JWT
+   */
+  getJWT = (request: Readonly<GetJWTRequest>) =>
+    this.client.fetch<JWT>(
+      {
+        method: 'GET',
+        path: `/iam/v1alpha1/jwts/${validatePathParam('jti', request.jti)}`,
+      },
+      unmarshalJWT,
+    )
+
+  /**
+   * Delete a JWT
+   *
+   * @param request - The request {@link DeleteJWTRequest}
+   */
+  deleteJWT = (request: Readonly<DeleteJWTRequest>) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/iam/v1alpha1/jwts/${validatePathParam('jti', request.jti)}`,
+    })
 }

@@ -18,9 +18,11 @@ import type {
   CreatePolicyRequest,
   CreateSSHKeyRequest,
   Group,
+  JWT,
   ListAPIKeysResponse,
   ListApplicationsResponse,
   ListGroupsResponse,
+  ListJWTsResponse,
   ListPermissionSetsResponse,
   ListPoliciesResponse,
   ListQuotaResponse,
@@ -103,6 +105,25 @@ export const unmarshalGroup = (data: unknown) => {
     updatedAt: unmarshalDate(data.updated_at),
     userIds: data.user_ids,
   } as Group
+}
+
+export const unmarshalJWT = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'JWT' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    audienceId: data.audience_id,
+    createdAt: unmarshalDate(data.created_at),
+    expiresAt: unmarshalDate(data.expires_at),
+    ip: data.ip,
+    issuerId: data.issuer_id,
+    jti: data.jti,
+    updatedAt: unmarshalDate(data.updated_at),
+    userAgent: data.user_agent,
+  } as JWT
 }
 
 const unmarshalPermissionSet = (data: unknown) => {
@@ -258,6 +279,19 @@ export const unmarshalListGroupsResponse = (data: unknown) => {
     groups: unmarshalArrayOfObject(data.groups, unmarshalGroup),
     totalCount: data.total_count,
   } as ListGroupsResponse
+}
+
+export const unmarshalListJWTsResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListJWTsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    jwts: unmarshalArrayOfObject(data.jwts, unmarshalJWT),
+    totalCount: data.total_count,
+  } as ListJWTsResponse
 }
 
 export const unmarshalListPermissionSetsResponse = (data: unknown) => {

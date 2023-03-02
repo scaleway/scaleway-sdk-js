@@ -102,6 +102,16 @@ export const ListGroupsRequest = {
   },
 }
 
+export const ListJWTsRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const ListPermissionSetsRequest = {
   page: {
     greaterThanOrEqual: 1,
