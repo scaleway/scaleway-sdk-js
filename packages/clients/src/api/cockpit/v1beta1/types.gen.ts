@@ -19,23 +19,23 @@ export type ListTokensRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-/** Cockpit */
+/** Cockpit. */
 export interface Cockpit {
-  /** Project ID */
+  /** Project ID. */
   projectId: string
-  /** Created at */
+  /** Created at. */
   createdAt?: Date
-  /** Updated at */
+  /** Updated at. */
   updatedAt?: Date
-  /** Endpoints */
+  /** Endpoints. */
   endpoints?: CockpitEndpoints
-  /** Status */
+  /** Status. */
   status: CockpitStatus
-  /** Managed alerts enabled */
+  /** Managed alerts enabled. */
   managedAlertsEnabled: boolean
 }
 
-/** Cockpit. endpoints */
+/** Cockpit. endpoints. */
 export interface CockpitEndpoints {
   metricsUrl: string
   logsUrl: string
@@ -43,7 +43,7 @@ export interface CockpitEndpoints {
   grafanaUrl: string
 }
 
-/** Alert contact point */
+/** Alert contact point. */
 export interface ContactPoint {
   /**
    * Alert contact point configuration.
@@ -57,7 +57,7 @@ export interface ContactPointEmail {
   to: string
 }
 
-/** Grafana user */
+/** Grafana user. */
 export interface GrafanaUser {
   id: number
   login: string
@@ -65,31 +65,31 @@ export interface GrafanaUser {
   password?: string
 }
 
-/** List contact points response */
+/** List contact points response. */
 export interface ListContactPointsResponse {
-  /** Total count of contact points */
+  /** Total count of contact points. */
   totalCount: number
-  /** Contact points array */
+  /** Contact points array. */
   contactPoints: ContactPoint[]
-  /** Has receivers other than default */
+  /** Has receivers other than default. */
   hasAdditionalReceivers: boolean
-  /** Has unmanaged contact points */
+  /** Has unmanaged contact points. */
   hasAdditionalContactPoints: boolean
 }
 
-/** List grafana users response */
+/** List grafana users response. */
 export interface ListGrafanaUsersResponse {
   totalCount: number
   grafanaUsers: GrafanaUser[]
 }
 
-/** List tokens response */
+/** List tokens response. */
 export interface ListTokensResponse {
   totalCount: number
   tokens: Token[]
 }
 
-/** Token */
+/** Token. */
 export interface Token {
   id: string
   projectId: string
@@ -100,7 +100,7 @@ export interface Token {
   secretKey?: string
 }
 
-/** Token scopes */
+/** Token scopes. */
 export interface TokenScopes {
   queryMetrics: boolean
   writeMetrics: boolean
@@ -149,24 +149,24 @@ export type DeleteTokenRequest = {
 }
 
 export type CreateContactPointRequest = {
-  /** Project ID */
+  /** Project ID. */
   projectId?: string
-  /** Contact point to create */
+  /** Contact point to create. */
   contactPoint?: ContactPoint
 }
 
 export type ListContactPointsRequest = {
-  /** Page number */
+  /** Page number. */
   page?: number
-  /** Page size */
+  /** Page size. */
   pageSize?: number
-  /** Project ID */
+  /** Project ID. */
   projectId?: string
 }
 
 export type DeleteContactPointRequest = {
   projectId?: string
-  /** Contact point to delete */
+  /** Contact point to delete. */
   contactPoint?: ContactPoint
 }
 

@@ -32,135 +32,135 @@ export type NodeTypeStock =
   | 'out_of_stock'
   | 'available'
 
-/** Acl rule */
+/** Acl rule. */
 export interface ACLRule {
-  /** ID of the rule */
+  /** ID of the rule. */
   id: string
-  /** IPv4 network address of the rule */
+  /** IPv4 network address of the rule. */
   ipCidr?: string
-  /** Description of the rule */
+  /** Description of the rule. */
   description?: string
 }
 
-/** Acl rule spec */
+/** Acl rule spec. */
 export interface ACLRuleSpec {
-  /** IPv4 network address of the rule */
+  /** IPv4 network address of the rule. */
   ipCidr: string
-  /** Description of the rule */
+  /** Description of the rule. */
   description: string
 }
 
-/** Add acl rules response */
+/** Add acl rules response. */
 export interface AddAclRulesResponse {
-  /** ACL Rules enabled on the cluster */
+  /** ACL Rules enabled on the cluster. */
   aclRules: ACLRule[]
-  /** Total count of acl rules of the cluster */
+  /** Total count of acl rules of the cluster. */
   totalCount: number
 }
 
-/** Add endpoints response */
+/** Add endpoints response. */
 export interface AddEndpointsResponse {
-  /** Endpoints defined on the cluster */
+  /** Endpoints defined on the cluster. */
   endpoints: Endpoint[]
-  /** Total count of endpoints of the cluster */
+  /** Total count of endpoints of the cluster. */
   totalCount: number
 }
 
-/** Available cluster setting */
+/** Available cluster setting. */
 export interface AvailableClusterSetting {
-  /** Name of the setting */
+  /** Name of the setting. */
   name: string
-  /** Default value of the setting */
+  /** Default value of the setting. */
   defaultValue?: string
-  /** Type of the setting */
+  /** Type of the setting. */
   type: AvailableClusterSettingPropertyType
-  /** Description of the setting */
+  /** Description of the setting. */
   description: string
-  /** Optional maximum value of the setting */
+  /** Optional maximum value of the setting. */
   maxValue?: number
-  /** Optional minimum value of the setting */
+  /** Optional minimum value of the setting. */
   minValue?: number
-  /** Optional validation rule of the setting */
+  /** Optional validation rule of the setting. */
   regex?: string
-  /** Whether the setting is deprecated */
+  /** Whether the setting is deprecated. */
   deprecated: boolean
 }
 
-/** Cluster */
+/** Cluster. */
 export interface Cluster {
-  /** UUID of the cluster */
+  /** UUID of the cluster. */
   id: string
-  /** Name of the cluster */
+  /** Name of the cluster. */
   name: string
-  /** Project ID the cluster belongs to */
+  /** Project ID the cluster belongs to. */
   projectId: string
-  /** Status of the cluster */
+  /** Status of the cluster. */
   status: ClusterStatus
-  /** Redis™ engine version of the cluster */
+  /** Redis™ engine version of the cluster. */
   version: string
-  /** List of cluster endpoints */
+  /** List of cluster endpoints. */
   endpoints: Endpoint[]
-  /** List of tags applied to the cluster */
+  /** List of tags applied to the cluster. */
   tags: string[]
-  /** Node type of the cluster */
+  /** Node type of the cluster. */
   nodeType: string
-  /** Creation date (Format ISO 8601) */
+  /** Creation date (Format ISO 8601). */
   createdAt?: Date
-  /** Update date (Format ISO 8601) */
+  /** Update date (Format ISO 8601). */
   updatedAt?: Date
-  /** Whether or not TLS is enabled */
+  /** Whether or not TLS is enabled. */
   tlsEnabled: boolean
-  /** List of cluster settings */
+  /** List of cluster settings. */
   clusterSettings: ClusterSetting[]
-  /** List of acl rules */
+  /** List of acl rules. */
   aclRules: ACLRule[]
-  /** Number of nodes of the cluster */
+  /** Number of nodes of the cluster. */
   clusterSize: number
-  /** Zone of the cluster */
+  /** Zone of the cluster. */
   zone: Zone
-  /** Name of the user associated to the cluster */
+  /** Name of the user associated to the cluster. */
   userName: string
-  /** List of versions the cluster can be migrated to */
+  /** List of versions the cluster can be migrated to. */
   upgradableVersions: string[]
 }
 
-/** Cluster metrics response */
+/** Cluster metrics response. */
 export interface ClusterMetricsResponse {
-  /** Time series of metrics of a given cluster */
+  /** Time series of metrics of a given cluster. */
   timeseries: TimeSeries[]
 }
 
-/** Cluster setting */
+/** Cluster setting. */
 export interface ClusterSetting {
-  /** Value of the setting */
+  /** Value of the setting. */
   value: string
-  /** Name of the setting */
+  /** Name of the setting. */
   name: string
 }
 
-/** Cluster settings response */
+/** Cluster settings response. */
 export interface ClusterSettingsResponse {
-  /** Settings configured for a given cluster */
+  /** Settings configured for a given cluster. */
   settings: ClusterSetting[]
 }
 
-/** Cluster version */
+/** Cluster version. */
 export interface ClusterVersion {
-  /** Redis™ engine version */
+  /** Redis™ engine version. */
   version: string
-  /** End of life date */
+  /** End of life date. */
   endOfLifeAt?: Date
-  /** Cluster settings available to be set */
+  /** Cluster settings available to be set. */
   availableSettings: AvailableClusterSetting[]
-  /** Redis™ logo url */
+  /** Redis™ logo url. */
   logoUrl: string
-  /** Zone of the Managed Database for Redis™ */
+  /** Zone of the Managed Database for Redis™. */
   zone: Zone
 }
 
-/** Endpoint */
+/** Endpoint. */
 export interface Endpoint {
-  /** TCP port of the endpoint */
+  /** TCP port of the endpoint. */
   port: number
   /**
    * Private network details.
@@ -176,13 +176,13 @@ export interface Endpoint {
    * be set.
    */
   publicNetwork?: PublicNetwork
-  /** Lis of IPv4 address of the endpoint */
+  /** Lis of IPv4 address of the endpoint. */
   ips: string[]
-  /** UUID of the endpoint */
+  /** UUID of the endpoint. */
   id: string
 }
 
-/** Endpoint spec */
+/** Endpoint spec. */
 export interface EndpointSpec {
   /**
    * Private network spec details.
@@ -200,9 +200,9 @@ export interface EndpointSpec {
   publicNetwork?: EndpointSpecPublicNetworkSpec
 }
 
-/** Endpoint spec. private network spec */
+/** Endpoint spec. private network spec. */
 export interface EndpointSpecPrivateNetworkSpec {
-  /** UUID of the private network to be connected to the cluster */
+  /** UUID of the private network to be connected to the cluster. */
   id: string
   /**
    * Endpoint IPv4 adress with a CIDR notation. You must provide at least one
@@ -211,97 +211,97 @@ export interface EndpointSpecPrivateNetworkSpec {
   serviceIps: string[]
 }
 
-/** Endpoint spec. public network spec */
+/** Endpoint spec. public network spec. */
 export interface EndpointSpecPublicNetworkSpec {}
 
-/** List cluster versions response */
+/** List cluster versions response. */
 export interface ListClusterVersionsResponse {
-  /** List of the available Redis™ engine versions */
+  /** List of the available Redis™ engine versions. */
   versions: ClusterVersion[]
-  /** Total count of available Redis™ engine versions */
+  /** Total count of available Redis™ engine versions. */
   totalCount: number
 }
 
-/** List clusters response */
+/** List clusters response. */
 export interface ListClustersResponse {
-  /** List all clusters */
+  /** List all clusters. */
   clusters: Cluster[]
-  /** Total count of clusters */
+  /** Total count of clusters. */
   totalCount: number
 }
 
-/** List node types response */
+/** List node types response. */
 export interface ListNodeTypesResponse {
-  /** Types of the node */
+  /** Types of the node. */
   nodeTypes: NodeType[]
-  /** Total count of node-types available */
+  /** Total count of node-types available. */
   totalCount: number
 }
 
-/** Node type */
+/** Node type. */
 export interface NodeType {
-  /** Node Type name identifier */
+  /** Node Type name identifier. */
   name: string
-  /** Current stock status for the Node Type */
+  /** Current stock status for the Node Type. */
   stockStatus: NodeTypeStock
-  /** Current specs of the offer */
+  /** Current specs of the offer. */
   description: string
-  /** Number of virtual CPUs */
+  /** Number of virtual CPUs. */
   vcpus: number
-  /** Quantity of RAM */
+  /** Quantity of RAM. */
   memory: number
-  /** The Node Type is currently disabled */
+  /** The Node Type is currently disabled. */
   disabled: boolean
-  /** The Node Type is currently in beta */
+  /** The Node Type is currently in beta. */
   beta: boolean
-  /** Zone the Node Type is in */
+  /** Zone the Node Type is in. */
   zone: Zone
 }
 
-/** Private network */
+/** Private network. */
 export interface PrivateNetwork {
-  /** UUID of the private network */
+  /** UUID of the private network. */
   id: string
-  /** List of IPv4 CIDR notation addresses of the endpoint */
+  /** List of IPv4 CIDR notation addresses of the endpoint. */
   serviceIps: string[]
-  /** Private network zone */
+  /** Private network zone. */
   zone: Zone
 }
 
 export interface PublicNetwork {}
 
-/** Set acl rules response */
+/** Set acl rules response. */
 export interface SetAclRulesResponse {
-  /** ACL Rules enabled on the cluster */
+  /** ACL Rules enabled on the cluster. */
   aclRules: ACLRule[]
 }
 
-/** Set endpoints response */
+/** Set endpoints response. */
 export interface SetEndpointsResponse {
-  /** Endpoints defined on the cluster */
+  /** Endpoints defined on the cluster. */
   endpoints: Endpoint[]
 }
 
 export type CreateClusterRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The project ID on which to create the cluster */
+  /** The project ID on which to create the cluster. */
   projectId?: string
-  /** Name of the cluster */
+  /** Name of the cluster. */
   name?: string
-  /** Redis™ engine version of the cluster */
+  /** Redis™ engine version of the cluster. */
   version: string
-  /** Tags to apply to the cluster */
+  /** Tags to apply to the cluster. */
   tags?: string[]
-  /** Type of node to use for the cluster */
+  /** Type of node to use for the cluster. */
   nodeType: string
-  /** Name of the user created when the cluster is created */
+  /** Name of the user created when the cluster is created. */
   userName: string
-  /** Password of the user */
+  /** Password of the user. */
   password: string
-  /** Number of nodes for the cluster */
+  /** Number of nodes for the cluster. */
   clusterSize?: number
-  /** List of ACLRuleSpec used to secure your publicly exposed cluster */
+  /** List of ACLRuleSpec used to secure your publicly exposed cluster. */
   aclRules?: ACLRuleSpec[]
   /**
    * Zero or multiple EndpointSpec used to expose your cluster publicly and
@@ -309,57 +309,57 @@ export type CreateClusterRequest = {
    * publicly exposed by default.
    */
   endpoints?: EndpointSpec[]
-  /** Whether or not TLS is enabled */
+  /** Whether or not TLS is enabled. */
   tlsEnabled: boolean
-  /** List of cluster settings to be set at cluster initialisation */
+  /** List of cluster settings to be set at cluster initialisation. */
   clusterSettings?: ClusterSetting[]
 }
 
 export type UpdateClusterRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster to update */
+  /** UUID of the cluster to update. */
   clusterId: string
-  /** Name of the cluster */
+  /** Name of the cluster. */
   name?: string
-  /** Tags of a given cluster */
+  /** Tags of a given cluster. */
   tags?: string[]
-  /** Name of the cluster user */
+  /** Name of the cluster user. */
   userName?: string
-  /** Password of the cluster user */
+  /** Password of the cluster user. */
   password?: string
 }
 
 export type GetClusterRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster */
+  /** UUID of the cluster. */
   clusterId: string
 }
 
 export type ListClustersRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Tags of the clusters to filter upon */
+  /** Tags of the clusters to filter upon. */
   tags?: string[]
-  /** Name of the clusters to filter upon */
+  /** Name of the clusters to filter upon. */
   name?: string
-  /** Criteria to use when ordering cluster listing */
+  /** Criteria to use when ordering cluster listing. */
   orderBy?: ListClustersRequestOrderBy
-  /** Project ID to list the cluster of */
+  /** Project ID to list the cluster of. */
   projectId?: string
-  /** Organization ID to list the cluster of */
+  /** Organization ID to list the cluster of. */
   organizationId?: string
-  /** Version of the clusters to filter upon */
+  /** Version of the clusters to filter upon. */
   version?: string
   page?: number
   pageSize?: number
 }
 
 export type MigrateClusterRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster to update */
+  /** UUID of the cluster to update. */
   clusterId: string
   /**
    * Redis™ engine version of the cluster.
@@ -385,156 +385,156 @@ export type MigrateClusterRequest = {
 }
 
 export type DeleteClusterRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster to delete */
+  /** UUID of the cluster to delete. */
   clusterId: string
 }
 
 export type GetClusterMetricsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster */
+  /** UUID of the cluster. */
   clusterId: string
-  /** Start date to gather metrics from */
+  /** Start date to gather metrics from. */
   startAt?: Date
-  /** End date to gather metrics from */
+  /** End date to gather metrics from. */
   endAt?: Date
-  /** Name of the metric to gather */
+  /** Name of the metric to gather. */
   metricName?: string
 }
 
 export type ListNodeTypesRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Whether or not to include disabled types */
+  /** Whether or not to include disabled types. */
   includeDisabledTypes: boolean
   page?: number
   pageSize?: number
 }
 
 export type ListClusterVersionsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Whether or not to include disabled Redis™ engine versions */
+  /** Whether or not to include disabled Redis™ engine versions. */
   includeDisabled: boolean
-  /** Whether or not to include beta Redis™ engine versions */
+  /** Whether or not to include beta Redis™ engine versions. */
   includeBeta: boolean
-  /** Whether or not to include deprecated Redis™ engine versions */
+  /** Whether or not to include deprecated Redis™ engine versions. */
   includeDeprecated: boolean
-  /** List Redis™ engine versions that match a given name pattern */
+  /** List Redis™ engine versions that match a given name pattern. */
   version?: string
   page?: number
   pageSize?: number
 }
 
 export type GetClusterCertificateRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster */
+  /** UUID of the cluster. */
   clusterId: string
 }
 
 export type RenewClusterCertificateRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster */
+  /** UUID of the cluster. */
   clusterId: string
 }
 
 export type AddClusterSettingsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster you want to add settings to */
+  /** UUID of the cluster you want to add settings to. */
   clusterId: string
-  /** Settings to add on the cluster */
+  /** Settings to add on the cluster. */
   settings: ClusterSetting[]
 }
 
 export type DeleteClusterSettingRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster where the settings has to be set */
+  /** UUID of the cluster where the settings has to be set. */
   clusterId: string
-  /** Setting name to delete */
+  /** Setting name to delete. */
   settingName: string
 }
 
 export type SetClusterSettingsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster where the settings has to be set */
+  /** UUID of the cluster where the settings has to be set. */
   clusterId: string
-  /** Settings to define for the cluster */
+  /** Settings to define for the cluster. */
   settings: ClusterSetting[]
 }
 
 export type SetAclRulesRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster where the ACL rules has to be set */
+  /** UUID of the cluster where the ACL rules has to be set. */
   clusterId: string
-  /** ACLs rules to define for the cluster */
+  /** ACLs rules to define for the cluster. */
   aclRules: ACLRuleSpec[]
 }
 
 export type AddAclRulesRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster you want to add acl rules to */
+  /** UUID of the cluster you want to add acl rules to. */
   clusterId: string
-  /** ACLs rules to add to the cluster */
+  /** ACLs rules to add to the cluster. */
   aclRules: ACLRuleSpec[]
 }
 
 export type DeleteAclRuleRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the acl rule you want to delete */
+  /** UUID of the acl rule you want to delete. */
   aclId: string
 }
 
 export type GetAclRuleRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the acl rule you want to get */
+  /** UUID of the acl rule you want to get. */
   aclId: string
 }
 
 export type SetEndpointsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster where the endpoints has to be set */
+  /** UUID of the cluster where the endpoints has to be set. */
   clusterId: string
-  /** Endpoints to define for the cluster */
+  /** Endpoints to define for the cluster. */
   endpoints: EndpointSpec[]
 }
 
 export type AddEndpointsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster you want to add endpoints to */
+  /** UUID of the cluster you want to add endpoints to. */
   clusterId: string
-  /** Endpoints to add to the cluster */
+  /** Endpoints to add to the cluster. */
   endpoints: EndpointSpec[]
 }
 
 export type DeleteEndpointRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the endpoint you want to delete */
+  /** UUID of the endpoint you want to delete. */
   endpointId: string
 }
 
 export type GetEndpointRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the endpoint you want to get */
+  /** UUID of the endpoint you want to get. */
   endpointId: string
 }
 
 export type UpdateEndpointRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   endpointId: string
   /**

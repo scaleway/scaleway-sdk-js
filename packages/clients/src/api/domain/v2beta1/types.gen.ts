@@ -208,7 +208,7 @@ export interface AvailableDomain {
   tld?: Tld
 }
 
-/** Check contacts compatibility response */
+/** Check contacts compatibility response. */
 export interface CheckContactsCompatibilityResponse {
   compatible: boolean
   ownerCheckResult?: CheckContactsCompatibilityResponseContactCheckResult
@@ -221,10 +221,10 @@ export interface CheckContactsCompatibilityResponseContactCheckResult {
   errorMessage?: string
 }
 
-/** Clear dns zone records response */
+/** Clear dns zone records response. */
 export interface ClearDNSZoneRecordsResponse {}
 
-/** Contact */
+/** Contact. */
 export interface Contact {
   id: string
   legalForm: ContactLegalForm
@@ -366,16 +366,16 @@ export interface DSRecordPublicKey {
   key: string
 }
 
-/** Delete dns zone response */
+/** Delete dns zone response. */
 export interface DeleteDNSZoneResponse {}
 
-/** Delete external domain response */
+/** Delete external domain response. */
 export interface DeleteExternalDomainResponse {}
 
-/** Delete ssl certificate response */
+/** Delete ssl certificate response. */
 export interface DeleteSSLCertificateResponse {}
 
-/** Domain */
+/** Domain. */
 export interface Domain {
   domain: string
   organizationId: string
@@ -515,19 +515,19 @@ export interface DomainSummary {
   organizationId: string
 }
 
-/** Get dns zone tsig key response */
+/** Get dns zone tsig key response. */
 export interface GetDNSZoneTsigKeyResponse {
   name: string
   key: string
   algorithm: string
 }
 
-/** Get dns zone version diff response */
+/** Get dns zone version diff response. */
 export interface GetDNSZoneVersionDiffResponse {
   changes: RecordChange[]
 }
 
-/** Get domain auth code response */
+/** Get domain auth code response. */
 export interface GetDomainAuthCodeResponse {
   authCode: string
 }
@@ -543,7 +543,7 @@ export interface ImportProviderDNSZoneRequestOnlineV1 {
   token: string
 }
 
-/** Import provider dns zone response */
+/** Import provider dns zone response. */
 export interface ImportProviderDNSZoneResponse {
   records: DomainRecord[]
 }
@@ -563,78 +563,78 @@ export interface ImportRawDNSZoneRequestTsigKey {
   algorithm: string
 }
 
-/** Import raw dns zone response */
+/** Import raw dns zone response. */
 export interface ImportRawDNSZoneResponse {
   records: DomainRecord[]
 }
 
-/** List contacts response */
+/** List contacts response. */
 export interface ListContactsResponse {
   totalCount: number
   contacts: ContactRoles[]
 }
 
-/** List dns zone nameservers response */
+/** List dns zone nameservers response. */
 export interface ListDNSZoneNameserversResponse {
-  /** The returned DNS zone nameservers */
+  /** The returned DNS zone nameservers. */
   ns: Nameserver[]
 }
 
-/** List dns zone records response */
+/** List dns zone records response. */
 export interface ListDNSZoneRecordsResponse {
-  /** The total number of DNS zone records */
+  /** The total number of DNS zone records. */
   totalCount: number
-  /** The paginated returned DNS zone records */
+  /** The paginated returned DNS zone records. */
   records: DomainRecord[]
 }
 
-/** List dns zone version records response */
+/** List dns zone version records response. */
 export interface ListDNSZoneVersionRecordsResponse {
-  /** The total number of DNS zones versions records */
+  /** The total number of DNS zones versions records. */
   totalCount: number
   records: DomainRecord[]
 }
 
-/** List dns zone versions response */
+/** List dns zone versions response. */
 export interface ListDNSZoneVersionsResponse {
-  /** The total number of DNS zones versions */
+  /** The total number of DNS zones versions. */
   totalCount: number
   versions: DNSZoneVersion[]
 }
 
-/** List dns zones response */
+/** List dns zones response. */
 export interface ListDNSZonesResponse {
-  /** The total number of DNS zones */
+  /** The total number of DNS zones. */
   totalCount: number
-  /** The paginated returned DNS zones */
+  /** The paginated returned DNS zones. */
   dnsZones: DNSZone[]
 }
 
-/** List domain hosts response */
+/** List domain hosts response. */
 export interface ListDomainHostsResponse {
   totalCount: number
   hosts: Host[]
 }
 
-/** List domains response */
+/** List domains response. */
 export interface ListDomainsResponse {
   totalCount: number
   domains: DomainSummary[]
 }
 
-/** List renewable domains response */
+/** List renewable domains response. */
 export interface ListRenewableDomainsResponse {
   totalCount: number
   domains: RenewableDomain[]
 }
 
-/** List ssl certificates response */
+/** List ssl certificates response. */
 export interface ListSSLCertificatesResponse {
   totalCount: number
   certificates: SSLCertificate[]
 }
 
-/** List tasks response */
+/** List tasks response. */
 export interface ListTasksResponse {
   totalCount: number
   tasks: Task[]
@@ -731,9 +731,9 @@ export interface RecordIdentifier {
   ttl?: number
 }
 
-/** Refresh dns zone response */
+/** Refresh dns zone response. */
 export interface RefreshDNSZoneResponse {
-  /** The returned DNS zones */
+  /** The returned DNS zones. */
   dnsZones: DNSZone[]
 }
 
@@ -758,7 +758,7 @@ export interface RenewableDomain {
   tld?: Tld
 }
 
-/** Restore dns zone version response */
+/** Restore dns zone version response. */
 export interface RestoreDNSZoneVersionResponse {}
 
 export interface SSLCertificate {
@@ -771,9 +771,9 @@ export interface SSLCertificate {
   expiredAt?: Date
 }
 
-/** Search available domains response */
+/** Search available domains response. */
 export interface SearchAvailableDomainsResponse {
-  /** Array of available domains */
+  /** Array of available domains. */
   availableDomains: AvailableDomain[]
 }
 
@@ -815,137 +815,137 @@ export interface UpdateContactRequestQuestion {
   answer?: string
 }
 
-/** Update dns zone nameservers response */
+/** Update dns zone nameservers response. */
 export interface UpdateDNSZoneNameserversResponse {
-  /** The returned DNS zone nameservers */
+  /** The returned DNS zone nameservers. */
   ns: Nameserver[]
 }
 
-/** Update dns zone records response */
+/** Update dns zone records response. */
 export interface UpdateDNSZoneRecordsResponse {
-  /** The returned DNS zone records */
+  /** The returned DNS zone records. */
   records: DomainRecord[]
 }
 
 export type ListDNSZonesRequest = {
-  /** The organization ID on which to filter the returned DNS zones */
+  /** The organization ID on which to filter the returned DNS zones. */
   organizationId?: string
-  /** The project ID on which to filter the returned DNS zones */
+  /** The project ID on which to filter the returned DNS zones. */
   projectId?: string
-  /** The sort order of the returned DNS zones */
+  /** The sort order of the returned DNS zones. */
   orderBy?: ListDNSZonesRequestOrderBy
-  /** The page number for the returned DNS zones */
+  /** The page number for the returned DNS zones. */
   page?: number
-  /** The maximum number of DNS zones per page */
+  /** The maximum number of DNS zones per page. */
   pageSize?: number
-  /** The domain on which to filter the returned DNS zones */
+  /** The domain on which to filter the returned DNS zones. */
   domain: string
-  /** The DNS zone on which to filter the returned DNS zones */
+  /** The DNS zone on which to filter the returned DNS zones. */
   dnsZone: string
 }
 
 export type CreateDNSZoneRequest = {
-  /** The domain of the DNS zone to create */
+  /** The domain of the DNS zone to create. */
   domain: string
-  /** The subdomain of the DNS zone to create */
+  /** The subdomain of the DNS zone to create. */
   subdomain: string
-  /** The project ID where the DNS zone will be created */
+  /** The project ID where the DNS zone will be created. */
   projectId?: string
 }
 
 export type UpdateDNSZoneRequest = {
-  /** The DNS zone to update */
+  /** The DNS zone to update. */
   dnsZone: string
-  /** The new DNS zone */
+  /** The new DNS zone. */
   newDnsZone: string
-  /** The project ID of the new DNS zone */
+  /** The project ID of the new DNS zone. */
   projectId?: string
 }
 
 export type CloneDNSZoneRequest = {
-  /** The DNS zone to clone */
+  /** The DNS zone to clone. */
   dnsZone: string
-  /** The destinaton DNS zone */
+  /** The destinaton DNS zone. */
   destDnsZone: string
-  /** Whether or not the destination DNS zone will be overwritten */
+  /** Whether or not the destination DNS zone will be overwritten. */
   overwrite: boolean
-  /** The project ID of the destination DNS zone */
+  /** The project ID of the destination DNS zone. */
   projectId?: string
 }
 
 export type DeleteDNSZoneRequest = {
-  /** The DNS zone to delete */
+  /** The DNS zone to delete. */
   dnsZone: string
-  /** The project ID of the DNS zone to delete */
+  /** The project ID of the DNS zone to delete. */
   projectId?: string
 }
 
 export type ListDNSZoneRecordsRequest = {
-  /** The DNS zone on which to filter the returned DNS zone records */
+  /** The DNS zone on which to filter the returned DNS zone records. */
   dnsZone: string
-  /** The project ID on which to filter the returned DNS zone records */
+  /** The project ID on which to filter the returned DNS zone records. */
   projectId?: string
-  /** The sort order of the returned DNS zone records */
+  /** The sort order of the returned DNS zone records. */
   orderBy?: ListDNSZoneRecordsRequestOrderBy
-  /** The page number for the returned DNS zone records */
+  /** The page number for the returned DNS zone records. */
   page?: number
-  /** The maximum number of DNS zone records per page */
+  /** The maximum number of DNS zone records per page. */
   pageSize?: number
-  /** The name on which to filter the returned DNS zone records */
+  /** The name on which to filter the returned DNS zone records. */
   name: string
-  /** The record type on which to filter the returned DNS zone records */
+  /** The record type on which to filter the returned DNS zone records. */
   type?: DomainRecordType
-  /** The record ID on which to filter the returned DNS zone records */
+  /** The record ID on which to filter the returned DNS zone records. */
   id?: string
 }
 
 export type UpdateDNSZoneRecordsRequest = {
-  /** The DNS zone where the DNS zone records will be updated */
+  /** The DNS zone where the DNS zone records will be updated. */
   dnsZone: string
-  /** The changes made to the records */
+  /** The changes made to the records. */
   changes: RecordChange[]
-  /** Whether or not to return all the records */
+  /** Whether or not to return all the records. */
   returnAllRecords?: boolean
   /**
    * Forbid the creation of the target zone if not existing (default action is
-   * yes)
+   * yes).
    */
   disallowNewZoneCreation: boolean
   /**
    * Don't use the autoincremenent serial but the provided one (0 to keep the
-   * same)
+   * same).
    */
   serial?: number
 }
 
 export type ListDNSZoneNameserversRequest = {
-  /** The DNS zone on which to filter the returned DNS zone nameservers */
+  /** The DNS zone on which to filter the returned DNS zone nameservers. */
   dnsZone: string
-  /** The project ID on which to filter the returned DNS zone nameservers */
+  /** The project ID on which to filter the returned DNS zone nameservers. */
   projectId?: string
 }
 
 export type UpdateDNSZoneNameserversRequest = {
-  /** The DNS zone where the DNS zone nameservers will be updated */
+  /** The DNS zone where the DNS zone nameservers will be updated. */
   dnsZone: string
-  /** The new DNS zone nameservers */
+  /** The new DNS zone nameservers. */
   ns: Nameserver[]
 }
 
 export type ClearDNSZoneRecordsRequest = {
-  /** The DNS zone to clear */
+  /** The DNS zone to clear. */
   dnsZone: string
 }
 
 export type ExportRawDNSZoneRequest = {
-  /** The DNS zone to export */
+  /** The DNS zone to export. */
   dnsZone: string
-  /** Format for DNS zone */
+  /** Format for DNS zone. */
   format?: RawFormat
 }
 
 export type ImportRawDNSZoneRequest = {
-  /** The DNS zone to import */
+  /** The DNS zone to import. */
   dnsZone: string
   /** @deprecated */
   content?: string
@@ -973,27 +973,27 @@ export type ImportProviderDNSZoneRequest = {
 }
 
 export type RefreshDNSZoneRequest = {
-  /** The DNS zone to refresh */
+  /** The DNS zone to refresh. */
   dnsZone: string
-  /** Whether or not to recreate the DNS zone */
+  /** Whether or not to recreate the DNS zone. */
   recreateDnsZone: boolean
-  /** Whether or not to recreate the sub DNS zone */
+  /** Whether or not to recreate the sub DNS zone. */
   recreateSubDnsZone: boolean
 }
 
 export type ListDNSZoneVersionsRequest = {
   dnsZone: string
-  /** The page number for the returned DNS zones versions */
+  /** The page number for the returned DNS zones versions. */
   page?: number
-  /** The maximum number of DNS zones versions per page */
+  /** The maximum number of DNS zones versions per page. */
   pageSize?: number
 }
 
 export type ListDNSZoneVersionRecordsRequest = {
   dnsZoneVersionId: string
-  /** The page number for the returned DNS zones versions records */
+  /** The page number for the returned DNS zones versions records. */
   page?: number
-  /** The maximum number of DNS zones versions records per page */
+  /** The maximum number of DNS zones versions records per page. */
   pageSize?: number
 }
 
@@ -1304,11 +1304,11 @@ export type RegistrarApiDisableDomainDNSSECRequest = {
 }
 
 export type RegistrarApiSearchAvailableDomainsRequest = {
-  /** A list of domain to search, TLD is optional */
+  /** A list of domain to search, TLD is optional. */
   domains: string[]
-  /** Array of tlds to search on */
+  /** Array of tlds to search on. */
   tlds?: string[]
-  /** Search exact match */
+  /** Search exact match. */
   strictSearch: boolean
 }
 

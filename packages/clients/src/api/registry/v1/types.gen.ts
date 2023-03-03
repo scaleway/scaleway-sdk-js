@@ -39,22 +39,22 @@ export type NamespaceStatus =
 
 export type TagStatus = 'unknown' | 'ready' | 'deleting' | 'error' | 'locked'
 
-/** Image */
+/** Image. */
 export interface Image {
-  /** The unique ID of the Image */
+  /** The unique ID of the Image. */
   id: string
-  /** The Image name, unique in a namespace */
+  /** The Image name, unique in a namespace. */
   name: string
-  /** The unique ID of the Namespace the image belongs to */
+  /** The unique ID of the Namespace the image belongs to. */
   namespaceId: string
-  /** The status of the image */
+  /** The status of the image. */
   status: ImageStatus
-  /** Details of the image status */
+  /** Details of the image status. */
   statusMessage?: string
   /**
    * A `public` image is pullable from internet without authentication, opposed
    * to a `private` image. `inherit` will use the namespace `is_public`
-   * parameter
+   * parameter.
    */
   visibility: ImageVisibility
   /**
@@ -63,127 +63,136 @@ export interface Image {
    * two images is counted twice.
    */
   size: number
-  /** Creation date */
+  /** Creation date. */
   createdAt?: Date
-  /** Last modification date, from the user or the service */
+  /** Last modification date, from the user or the service. */
   updatedAt?: Date
-  /** List of docker tags of the image */
+  /** List of docker tags of the image. */
   tags: string[]
 }
 
-/** List images response */
+/** List images response. */
 export interface ListImagesResponse {
-  /** Paginated list of images matching filters */
+  /** Paginated list of images matching filters. */
   images: Image[]
-  /** Total number of images matching filters */
+  /** Total number of images matching filters. */
   totalCount: number
 }
 
-/** List namespaces response */
+/** List namespaces response. */
 export interface ListNamespacesResponse {
-  /** Paginated list of namespaces matching filters */
+  /** Paginated list of namespaces matching filters. */
   namespaces: Namespace[]
-  /** Total number of namespaces matching filters */
+  /** Total number of namespaces matching filters. */
   totalCount: number
 }
 
-/** List tags response */
+/** List tags response. */
 export interface ListTagsResponse {
-  /** Paginated list of tags matching filters */
+  /** Paginated list of tags matching filters. */
   tags: Tag[]
-  /** Total number of tags matching filters */
+  /** Total number of tags matching filters. */
   totalCount: number
 }
 
-/** Namespace */
+/** Namespace. */
 export interface Namespace {
-  /** The unique ID of the namespace */
+  /** The unique ID of the namespace. */
   id: string
-  /** The name of the namespace, unique in a region accross all organizations */
+  /** The name of the namespace, unique in a region accross all organizations. */
   name: string
-  /** Description of the namespace */
+  /** Description of the namespace. */
   description: string
-  /** Owner of the namespace */
+  /** Owner of the namespace. */
   organizationId: string
-  /** Project of the namespace */
+  /** Project of the namespace. */
   projectId: string
-  /** Namespace status */
+  /** Namespace status. */
   status: NamespaceStatus
-  /** Namespace status details */
+  /** Namespace status details. */
   statusMessage: string
-  /** Endpoint reachable by docker */
+  /** Endpoint reachable by docker. */
   endpoint: string
-  /** Namespace visibility policy */
+  /** Namespace visibility policy. */
   isPublic: boolean
   /**
    * Total size of the namespace, calculated as the sum of the size of all
-   * images in the namespace
+   * images in the namespace.
    */
   size: number
-  /** Creation date */
+  /** Creation date. */
   createdAt?: Date
-  /** Last modification date, from the user or the service */
+  /** Last modification date, from the user or the service. */
   updatedAt?: Date
-  /** Number of images in the namespace */
+  /** Number of images in the namespace. */
   imageCount: number
-  /** Region the namespace belongs to */
+  /** Region the namespace belongs to. */
   region: Region
 }
 
-/** Tag */
+/** Tag. */
 export interface Tag {
-  /** The unique ID of the tag */
+  /** The unique ID of the tag. */
   id: string
-  /** Tag name, unique for an image */
+  /** Tag name, unique for an image. */
   name: string
-  /** Image ID this tag belongs to */
+  /** Image ID this tag belongs to. */
   imageId: string
-  /** Tag status */
+  /** Tag status. */
   status: TagStatus
   /**
    * Hash of the tag actual content. Several tags of a same image may have the
-   * same digest
+   * same digest.
    */
   digest: string
-  /** Creation date */
+  /** Creation date. */
   createdAt?: Date
-  /** Last modification date, from the user or the service */
+  /** Last modification date, from the user or the service. */
   updatedAt?: Date
 }
 
 export type ListNamespacesRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** A positive integer to choose the page to display */
+  /** A positive integer to choose the page to display. */
   page?: number
   /**
    * A positive integer lower or equal to 100 to select the number of items to
-   * display
+   * display.
    */
   pageSize?: number
-  /** Field by which to order the display of Images */
+  /** Field by which to order the display of Images. */
   orderBy?: ListNamespacesRequestOrderBy
-  /** Filter by Organization ID */
+  /** Filter by Organization ID. */
   organizationId?: string
-  /** Filter by Project ID */
+  /** Filter by Project ID. */
   projectId?: string
-  /** Filter by the namespace name (exact match) */
+  /** Filter by the namespace name (exact match). */
   name?: string
 }
 
 export type GetNamespaceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** The unique ID of the Namespace */
+  /** The unique ID of the Namespace. */
   namespaceId: string
 }
 
 export type CreateNamespaceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** Define a namespace name */
+  /** Define a namespace name. */
   name?: string
-  /** Define a description */
+  /** Define a description. */
   description: string
   /**
    * @deprecated Assign the namespace owner (deprecated).
@@ -199,110 +208,137 @@ export type CreateNamespaceRequest = {
    * could be set.
    */
   projectId?: string
-  /** Define the default visibility policy */
+  /** Define the default visibility policy. */
   isPublic: boolean
 }
 
 export type UpdateNamespaceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** Namespace ID to update */
+  /** Namespace ID to update. */
   namespaceId: string
-  /** Define a description */
+  /** Define a description. */
   description?: string
-  /** Define the default visibility policy */
+  /** Define the default visibility policy. */
   isPublic?: boolean
 }
 
 export type DeleteNamespaceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** The unique ID of the Namespace */
+  /** The unique ID of the Namespace. */
   namespaceId: string
 }
 
 export type ListImagesRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** A positive integer to choose the page to display */
+  /** A positive integer to choose the page to display. */
   page?: number
   /**
    * A positive integer lower or equal to 100 to select the number of items to
-   * display
+   * display.
    */
   pageSize?: number
-  /** Field by which to order the display of Images */
+  /** Field by which to order the display of Images. */
   orderBy?: ListImagesRequestOrderBy
-  /** Filter by the Namespace ID */
+  /** Filter by the Namespace ID. */
   namespaceId?: string
-  /** Filter by the Image name (exact match) */
+  /** Filter by the Image name (exact match). */
   name?: string
-  /** Filter by Organization ID */
+  /** Filter by Organization ID. */
   organizationId?: string
-  /** Filter by Project ID */
+  /** Filter by Project ID. */
   projectId?: string
 }
 
 export type GetImageRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** The unique ID of the Image */
+  /** The unique ID of the Image. */
   imageId: string
 }
 
 export type UpdateImageRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** Image ID to update */
+  /** Image ID to update. */
   imageId: string
   /**
    * A `public` image is pullable from internet without authentication, opposed
    * to a `private` image. `inherit` will use the namespace `is_public`
-   * parameter
+   * parameter.
    */
   visibility?: ImageVisibility
 }
 
 export type DeleteImageRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** The unique ID of the Image */
+  /** The unique ID of the Image. */
   imageId: string
 }
 
 export type ListTagsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** The unique ID of the image */
+  /** The unique ID of the image. */
   imageId: string
-  /** A positive integer to choose the page to display */
+  /** A positive integer to choose the page to display. */
   page?: number
   /**
    * A positive integer lower or equal to 100 to select the number of items to
-   * display
+   * display.
    */
   pageSize?: number
-  /** Field by which to order the display of Images */
+  /** Field by which to order the display of Images. */
   orderBy?: ListTagsRequestOrderBy
-  /** Filter by the tag name (exact match) */
+  /** Filter by the tag name (exact match). */
   name?: string
 }
 
 export type GetTagRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** The unique ID of the Tag */
+  /** The unique ID of the Tag. */
   tagId: string
 }
 
 export type DeleteTagRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** The unique ID of the tag */
+  /** The unique ID of the tag. */
   tagId: string
   /**
    * If two tags share the same digest the deletion will fail unless this
-   * parameter is set to true
+   * parameter is set to true.
    */
   force: boolean
 }

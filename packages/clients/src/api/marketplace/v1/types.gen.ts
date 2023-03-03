@@ -10,29 +10,29 @@ export interface GetVersionResponse {
   version?: Version
 }
 
-/** Image */
+/** Image. */
 export interface Image {
-  /** UUID of this image */
+  /** UUID of this image. */
   id: string
-  /** Name of the image */
+  /** Name of the image. */
   name: string
-  /** Text description of this image */
+  /** Text description of this image. */
   description: string
-  /** URL of this image's logo */
+  /** URL of this image's logo. */
   logo: string
-  /** List of categories this image belongs to */
+  /** List of categories this image belongs to. */
   categories: string[]
-  /** Creation date of this image */
+  /** Creation date of this image. */
   creationDate?: Date
-  /** Date of the last modification of this image */
+  /** Date of the last modification of this image. */
   modificationDate?: Date
-  /** Expiration date of this image */
+  /** Expiration date of this image. */
   validUntil?: Date
   /** Typically an identifier for a distribution (ex. "ubuntu_focal"). */
   label: string
-  /** List of versions of this image */
+  /** List of versions of this image. */
   versions: Version[]
-  /** Organization this image belongs to */
+  /** Organization this image belongs to. */
   organization?: Organization
   currentPublicVersion: string
 }
@@ -47,15 +47,15 @@ export interface ListVersionsResponse {
   totalCount: number
 }
 
-/** Local image */
+/** Local image. */
 export interface LocalImage {
   /** Version you will typically use to define an image in an API call. */
   id: string
-  /** List of all commercial types that are compatible with this local image */
+  /** List of all commercial types that are compatible with this local image. */
   compatibleCommercialTypes: string[]
-  /** Supported architecture for this local image */
+  /** Supported architecture for this local image. */
   arch: string
-  /** Availability Zone where this local image is available */
+  /** Availability Zone where this local image is available. */
   zone: Zone
 }
 
@@ -64,32 +64,32 @@ export interface Organization {
   name: string
 }
 
-/** Version */
+/** Version. */
 export interface Version {
-  /** UUID of this version */
+  /** UUID of this version. */
   id: string
-  /** Name of this version */
+  /** Name of this version. */
   name: string
-  /** Creation date of this image version */
+  /** Creation date of this image version. */
   creationDate?: Date
-  /** Date of the last modification of this version */
+  /** Date of the last modification of this version. */
   modificationDate?: Date
-  /** List of local images available in this version */
+  /** List of local images available in this version. */
   localImages: LocalImage[]
 }
 
 export type ListImagesRequest = {
   /**
    * A positive integer lower or equal to 100 to select the number of items to
-   * display
+   * display.
    */
   perPage?: number
-  /** A positive integer to choose the page to display */
+  /** A positive integer to choose the page to display. */
   page?: number
 }
 
 export type GetImageRequest = {
-  /** Display the image name */
+  /** Display the image name. */
   imageId: string
 }
 

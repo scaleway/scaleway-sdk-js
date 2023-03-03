@@ -86,37 +86,37 @@ export type VolumeState =
 
 export type VolumeVolumeType = 'l_ssd' | 'b_ssd' | 'unified'
 
-/** Bootscript */
+/** Bootscript. */
 export interface Bootscript {
-  /** The bootscript arguments */
+  /** The bootscript arguments. */
   bootcmdargs: string
   /**
    * Dispmay if the bootscript is the default bootscript if no other boot option
-   * is configured
+   * is configured.
    */
   default: boolean
   /**
    * Provide information regarding a Device Tree Binary (dtb) for use with C1
-   * servers
+   * servers.
    */
   dtb: string
-  /** The bootscript ID */
+  /** The bootscript ID. */
   id: string
-  /** The initrd (initial ramdisk) configuration */
+  /** The initrd (initial ramdisk) configuration. */
   initrd: string
-  /** The server kernel version */
+  /** The server kernel version. */
   kernel: string
-  /** The bootscript organization ID */
+  /** The bootscript organization ID. */
   organization: string
-  /** The bootscript project ID */
+  /** The bootscript project ID. */
   project: string
-  /** Provide information if the bootscript is public */
+  /** Provide information if the bootscript is public. */
   public: boolean
-  /** The bootscript title */
+  /** The bootscript title. */
   title: string
-  /** The bootscript arch */
+  /** The bootscript arch. */
   arch: Arch
-  /** The zone in which is the bootscript */
+  /** The zone in which is the bootscript. */
   zone: Zone
 }
 
@@ -265,35 +265,35 @@ export interface Ip {
   zone: Zone
 }
 
-/** List bootscripts response */
+/** List bootscripts response. */
 export interface ListBootscriptsResponse {
-  /** Total number of bootscripts */
+  /** Total number of bootscripts. */
   totalCount: number
-  /** List of bootscripts */
+  /** List of bootscripts. */
   bootscripts: Bootscript[]
 }
 
-/** List images response */
+/** List images response. */
 export interface ListImagesResponse {
-  /** Total number of images */
+  /** Total number of images. */
   totalCount: number
-  /** List of images */
+  /** List of images. */
   images: Image[]
 }
 
-/** List ips response */
+/** List ips response. */
 export interface ListIpsResponse {
-  /** Total number of ips */
+  /** Total number of ips. */
   totalCount: number
-  /** List of ips */
+  /** List of ips. */
   ips: Ip[]
 }
 
-/** List placement groups response */
+/** List placement groups response. */
 export interface ListPlacementGroupsResponse {
-  /** Total number of placement groups */
+  /** Total number of placement groups. */
   totalCount: number
-  /** List of placement groups */
+  /** List of placement groups. */
   placementGroups: PlacementGroup[]
 }
 
@@ -302,19 +302,19 @@ export interface ListPrivateNICsResponse {
   totalCount: number
 }
 
-/** List security group rules response */
+/** List security group rules response. */
 export interface ListSecurityGroupRulesResponse {
-  /** Total number of security groups */
+  /** Total number of security groups. */
   totalCount: number
-  /** List of security rules */
+  /** List of security rules. */
   rules: SecurityGroupRule[]
 }
 
-/** List security groups response */
+/** List security groups response. */
 export interface ListSecurityGroupsResponse {
-  /** Total number of security groups */
+  /** Total number of security groups. */
   totalCount: number
-  /** List of security groups */
+  /** List of security groups. */
   securityGroups: SecurityGroup[]
 }
 
@@ -326,71 +326,71 @@ export interface ListServerUserDataResponse {
   userData: string[]
 }
 
-/** List servers response */
+/** List servers response. */
 export interface ListServersResponse {
-  /** Total number of servers */
+  /** Total number of servers. */
   totalCount: number
-  /** List of servers */
+  /** List of servers. */
   servers: Server[]
 }
 
-/** List servers types response */
+/** List servers types response. */
 export interface ListServersTypesResponse {
-  /** Total number of server types */
+  /** Total number of server types. */
   totalCount: number
-  /** List of server types */
+  /** List of server types. */
   servers: Record<string, ServerType>
 }
 
-/** List snapshots response */
+/** List snapshots response. */
 export interface ListSnapshotsResponse {
-  /** Total number of snapshots */
+  /** Total number of snapshots. */
   totalCount: number
-  /** List of snapshots */
+  /** List of snapshots. */
   snapshots: Snapshot[]
 }
 
-/** List volumes response */
+/** List volumes response. */
 export interface ListVolumesResponse {
-  /** Total number of volumes */
+  /** Total number of volumes. */
   totalCount: number
-  /** List of volumes */
+  /** List of volumes. */
   volumes: Volume[]
 }
 
-/** List volumes types response */
+/** List volumes types response. */
 export interface ListVolumesTypesResponse {
-  /** Total number of volume types */
+  /** Total number of volume types. */
   totalCount: number
-  /** Map of volume types */
+  /** Map of volume types. */
   volumes: Record<string, VolumeType>
 }
 
-/** Placement group */
+/** Placement group. */
 export interface PlacementGroup {
-  /** The placement group unique ID */
+  /** The placement group unique ID. */
   id: string
-  /** The placement group name */
+  /** The placement group name. */
   name: string
-  /** The placement group organization ID */
+  /** The placement group organization ID. */
   organization: string
-  /** The placement group project ID */
+  /** The placement group project ID. */
   project: string
-  /** The placement group tags */
+  /** The placement group tags. */
   tags: string[]
   /**
    * Select the failling mode when the placement cannot be respected, either
-   * optional or enforced
+   * optional or enforced.
    */
   policyMode: PlacementGroupPolicyMode
   /**
    * Select the behavior of the placement group, either low_latency (group) or
-   * max_availability (spread)
+   * max_availability (spread).
    */
   policyType: PlacementGroupPolicyType
-  /** Returns true if the policy is respected, false otherwise */
+  /** Returns true if the policy is respected, false otherwise. */
   policyRespected: boolean
-  /** The zone in which is the placement group */
+  /** The zone in which is the placement group. */
   zone: Zone
 }
 
@@ -400,60 +400,60 @@ export interface PlacementGroupServer {
   policyRespected: boolean
 }
 
-/** Private nic */
+/** Private nic. */
 export interface PrivateNIC {
-  /** The private NIC unique ID */
+  /** The private NIC unique ID. */
   id: string
-  /** The server the private NIC is attached to */
+  /** The server the private NIC is attached to. */
   serverId: string
-  /** The private network where the private NIC is attached */
+  /** The private network where the private NIC is attached. */
   privateNetworkId: string
-  /** The private NIC MAC address */
+  /** The private NIC MAC address. */
   macAddress: string
-  /** The private NIC state */
+  /** The private NIC state. */
   state: PrivateNICState
-  /** The private NIC tags */
+  /** The private NIC tags. */
   tags: string[]
 }
 
-/** Security group */
+/** Security group. */
 export interface SecurityGroup {
-  /** The security groups' unique ID */
+  /** The security groups' unique ID. */
   id: string
-  /** The security groups name */
+  /** The security groups name. */
   name: string
-  /** The security groups description */
+  /** The security groups description. */
   description: string
-  /** True if SMTP is blocked on IPv4 and IPv6 */
+  /** True if SMTP is blocked on IPv4 and IPv6. */
   enableDefaultSecurity: boolean
-  /** The default inbound policy */
+  /** The default inbound policy. */
   inboundDefaultPolicy: SecurityGroupPolicy
-  /** The default outbound policy */
+  /** The default outbound policy. */
   outboundDefaultPolicy: SecurityGroupPolicy
-  /** The security groups organization ID */
+  /** The security groups organization ID. */
   organization: string
-  /** The security group project ID */
+  /** The security group project ID. */
   project: string
-  /** The security group tags */
+  /** The security group tags. */
   tags: string[]
   /**
    * @deprecated True if it is your default security group for this organization
-   *   ID
+   *   ID.
    */
   organizationDefault?: boolean
-  /** True if it is your default security group for this project ID */
+  /** True if it is your default security group for this project ID. */
   projectDefault: boolean
-  /** The security group creation date */
+  /** The security group creation date. */
   creationDate?: Date
-  /** The security group modification date */
+  /** The security group modification date. */
   modificationDate?: Date
-  /** List of servers attached to this security group */
+  /** List of servers attached to this security group. */
   servers: ServerSummary[]
-  /** True if the security group is stateful */
+  /** True if the security group is stateful. */
   stateful: boolean
-  /** Security group state */
+  /** Security group state. */
   state: SecurityGroupState
-  /** The zone in which is the security group */
+  /** The zone in which is the security group. */
   zone: Zone
 }
 
@@ -480,69 +480,69 @@ export interface SecurityGroupTemplate {
   name: string
 }
 
-/** Server */
+/** Server. */
 export interface Server {
-  /** The server unique ID */
+  /** The server unique ID. */
   id: string
-  /** The server name */
+  /** The server name. */
   name: string
-  /** The server organization ID */
+  /** The server organization ID. */
   organization: string
-  /** The server project ID */
+  /** The server project ID. */
   project: string
-  /** Provide as list of allowed actions on the server */
+  /** Provide as list of allowed actions on the server. */
   allowedActions: ServerAction[]
-  /** The server associated tags */
+  /** The server associated tags. */
   tags: string[]
-  /** The server commercial type (eg. GP1-M) */
+  /** The server commercial type (eg. GP1-M). */
   commercialType: string
-  /** The server creation date */
+  /** The server creation date. */
   creationDate?: Date
-  /** True if a dynamic IP is required */
+  /** True if a dynamic IP is required. */
   dynamicIpRequired: boolean
-  /** True if IPv6 is enabled */
+  /** True if IPv6 is enabled. */
   enableIpv6: boolean
-  /** The server host name */
+  /** The server host name. */
   hostname: string
-  /** Provide information on the server image */
+  /** Provide information on the server image. */
   image?: Image
-  /** The server protection option is activated */
+  /** The server protection option is activated. */
   protected: boolean
-  /** The server private IP address */
+  /** The server private IP address. */
   privateIp?: string
-  /** Information about the public IP */
+  /** Information about the public IP. */
   publicIp?: ServerIp
-  /** The server modification date */
+  /** The server modification date. */
   modificationDate?: Date
-  /** The server state */
+  /** The server state. */
   state: ServerState
-  /** The server location */
+  /** The server location. */
   location?: ServerLocation
-  /** The server IPv6 address */
+  /** The server IPv6 address. */
   ipv6?: ServerIpv6
-  /** @deprecated The server bootscript */
+  /** @deprecated The server bootscript. */
   bootscript?: Bootscript
-  /** The server boot type */
+  /** The server boot type. */
   bootType: BootType
-  /** The server volumes */
+  /** The server volumes. */
   volumes: Record<string, VolumeServer>
-  /** The server security group */
+  /** The server security group. */
   securityGroup?: SecurityGroupSummary
-  /** The server planned maintenances */
+  /** The server planned maintenances. */
   maintenances: ServerMaintenance[]
-  /** The server state_detail */
+  /** The server state_detail. */
   stateDetail: string
-  /** The server arch */
+  /** The server arch. */
   arch: Arch
-  /** The server placement group */
+  /** The server placement group. */
   placementGroup?: PlacementGroup
-  /** The server private NICs */
+  /** The server private NICs. */
   privateNics: PrivateNIC[]
-  /** The zone in which is the server */
+  /** The zone in which is the server. */
   zone: Zone
 }
 
-/** Server action request. volume backup template */
+/** Server action request. volume backup template. */
 export interface ServerActionRequestVolumeBackupTemplate {
   /**
    * Overrides the volume_type of the snapshot for this volume. If omitted, the
@@ -555,23 +555,23 @@ export interface ServerActionResponse {
   task?: Task
 }
 
-/** Server. ip */
+/** Server. ip. */
 export interface ServerIp {
-  /** The unique ID of the IP address */
+  /** The unique ID of the IP address. */
   id: string
-  /** The server public IPv4 IP-Address */
+  /** The server public IPv4 IP-Address. */
   address: string
-  /** True if the IP address is dynamic */
+  /** True if the IP address is dynamic. */
   dynamic: boolean
 }
 
-/** Server. ipv6 */
+/** Server. ipv6. */
 export interface ServerIpv6 {
-  /** The server IPv6 IP-Address */
+  /** The server IPv6 IP-Address. */
   address: string
-  /** The IPv6 IP-addresses gateway */
+  /** The IPv6 IP-addresses gateway. */
   gateway: string
-  /** The IPv6 IP-addresses CIDR netmask */
+  /** The IPv6 IP-addresses CIDR netmask. */
   netmask: string
 }
 
@@ -592,73 +592,73 @@ export interface ServerSummary {
   name: string
 }
 
-/** Server type */
+/** Server type. */
 export interface ServerType {
-  /** @deprecated Estimated monthly price, for a 30 days month, in Euro */
+  /** @deprecated Estimated monthly price, for a 30 days month, in Euro. */
   monthlyPrice?: number
-  /** Hourly price in Euro */
+  /** Hourly price in Euro. */
   hourlyPrice: number
-  /** Alternative instance name if any */
+  /** Alternative instance name if any. */
   altNames: string[]
-  /** Additional volume constraints */
+  /** Additional volume constraints. */
   perVolumeConstraint?: ServerTypeVolumeConstraintsByType
-  /** Initial volume constraints */
+  /** Initial volume constraints. */
   volumesConstraint?: ServerTypeVolumeConstraintSizes
-  /** Number of CPU */
+  /** Number of CPU. */
   ncpus: number
-  /** Number of GPU */
+  /** Number of GPU. */
   gpu?: number
-  /** Available RAM in bytes */
+  /** Available RAM in bytes. */
   ram: number
-  /** CPU architecture */
+  /** CPU architecture. */
   arch: Arch
-  /** True if it is a baremetal instance */
+  /** True if it is a baremetal instance. */
   baremetal: boolean
-  /** Network available for the instance */
+  /** Network available for the instance. */
   network?: ServerTypeNetwork
-  /** Capabilities */
+  /** Capabilities. */
   capabilities?: ServerTypeCapabilities
 }
 
-/** Server type. capabilities */
+/** Server type. capabilities. */
 export interface ServerTypeCapabilities {
-  /** True if server supports block storage */
+  /** True if server supports block storage. */
   blockStorage?: boolean
-  /** List of supported boot types */
+  /** List of supported boot types. */
   bootTypes: BootType[]
 }
 
-/** Server type. network */
+/** Server type. network. */
 export interface ServerTypeNetwork {
-  /** List of available network interfaces */
+  /** List of available network interfaces. */
   interfaces: ServerTypeNetworkInterface[]
-  /** Total maximum internal bandwidth in bits per seconds */
+  /** Total maximum internal bandwidth in bits per seconds. */
   sumInternalBandwidth?: number
-  /** Total maximum internet bandwidth in bits per seconds */
+  /** Total maximum internet bandwidth in bits per seconds. */
   sumInternetBandwidth?: number
-  /** True if IPv6 is enabled */
+  /** True if IPv6 is enabled. */
   ipv6Support: boolean
 }
 
-/** Server type. network. interface */
+/** Server type. network. interface. */
 export interface ServerTypeNetworkInterface {
-  /** Maximum internal bandwidth in bits per seconds */
+  /** Maximum internal bandwidth in bits per seconds. */
   internalBandwidth?: number
-  /** Maximum internet bandwidth in bits per seconds */
+  /** Maximum internet bandwidth in bits per seconds. */
   internetBandwidth?: number
 }
 
-/** Server type. volume constraint sizes */
+/** Server type. volume constraint sizes. */
 export interface ServerTypeVolumeConstraintSizes {
-  /** Minimum volume size in bytes */
+  /** Minimum volume size in bytes. */
   minSize: number
-  /** Maximum volume size in bytes */
+  /** Maximum volume size in bytes. */
   maxSize: number
 }
 
-/** Server type. volume constraints by type */
+/** Server type. volume constraints by type. */
 export interface ServerTypeVolumeConstraintsByType {
-  /** Local SSD volumes */
+  /** Local SSD volumes. */
   lSsd?: ServerTypeVolumeConstraintSizes
 }
 
@@ -670,43 +670,43 @@ export interface SetPlacementGroupServersResponse {
   servers: PlacementGroupServer[]
 }
 
-/** Set security group rules request. rule */
+/** Set security group rules request. rule. */
 export interface SetSecurityGroupRulesRequestRule {
   /**
    * UUID of the security rule to update. If no value is provided, a new rule
-   * will be created
+   * will be created.
    */
   id?: string
-  /** Action to apply when the rule matches a packet */
+  /** Action to apply when the rule matches a packet. */
   action: SecurityGroupRuleAction
-  /** Protocol family this rule applies to */
+  /** Protocol family this rule applies to. */
   protocol: SecurityGroupRuleProtocol
-  /** Direction the rule applies to */
+  /** Direction the rule applies to. */
   direction: SecurityGroupRuleDirection
-  /** The range of IP address this rules applies to */
+  /** The range of IP address this rules applies to. */
   ipRange: string
   /**
    * Beginning of the range of ports this rule applies to (inclusive). This
-   * value will be set to null if protocol is ICMP or ANY
+   * value will be set to null if protocol is ICMP or ANY.
    */
   destPortFrom?: number
   /**
    * End of the range of ports this rule applies to (inclusive). This value will
    * be set to null if protocol is ICMP or ANY, or if it is equal to
-   * dest_port_from
+   * dest_port_from.
    */
   destPortTo?: number
   /**
    * Position of this rule in the security group rules list. If several rules
-   * are passed with the same position, the resulting order is undefined
+   * are passed with the same position, the resulting order is undefined.
    */
   position: number
   /**
    * Indicates if this rule is editable. Rules with the value false will be
-   * ignored
+   * ignored.
    */
   editable?: boolean
-  /** Zone of the rule. This field is ignored */
+  /** Zone of the rule. This field is ignored. */
   zone: Zone
 }
 
@@ -714,61 +714,61 @@ export interface SetSecurityGroupRulesResponse {
   rules: SecurityGroupRule[]
 }
 
-/** Snapshot */
+/** Snapshot. */
 export interface Snapshot {
-  /** The snapshot ID */
+  /** The snapshot ID. */
   id: string
-  /** The snapshot name */
+  /** The snapshot name. */
   name: string
-  /** The snapshot organization ID */
+  /** The snapshot organization ID. */
   organization: string
-  /** The snapshot project ID */
+  /** The snapshot project ID. */
   project: string
-  /** The snapshot tags */
+  /** The snapshot tags. */
   tags: string[]
-  /** The snapshot volume type */
+  /** The snapshot volume type. */
   volumeType: VolumeVolumeType
-  /** The snapshot size */
+  /** The snapshot size. */
   size: number
-  /** The snapshot state */
+  /** The snapshot state. */
   state: SnapshotState
-  /** The volume on which the snapshot is based on */
+  /** The volume on which the snapshot is based on. */
   baseVolume?: SnapshotBaseVolume
-  /** The snapshot creation date */
+  /** The snapshot creation date. */
   creationDate?: Date
-  /** The snapshot modification date */
+  /** The snapshot modification date. */
   modificationDate?: Date
-  /** The snapshot zone */
+  /** The snapshot zone. */
   zone: Zone
-  /** The reason for the failed snapshot import */
+  /** The reason for the failed snapshot import. */
   errorReason?: string
 }
 
-/** Snapshot. base volume */
+/** Snapshot. base volume. */
 export interface SnapshotBaseVolume {
-  /** The volume ID on which the snapshot is based on */
+  /** The volume ID on which the snapshot is based on. */
   id: string
-  /** The volume name on which the snapshot is based on */
+  /** The volume name on which the snapshot is based on. */
   name: string
 }
 
-/** Task */
+/** Task. */
 export interface Task {
-  /** The unique ID of the task */
+  /** The unique ID of the task. */
   id: string
-  /** The description of the task */
+  /** The description of the task. */
   description: string
-  /** The progress of the task in percent */
+  /** The progress of the task in percent. */
   progress: number
-  /** The task start date */
+  /** The task start date. */
   startedAt?: Date
-  /** The task end date */
+  /** The task end date. */
   terminatedAt?: Date
-  /** The task status */
+  /** The task status. */
   status: TaskStatus
   hrefFrom: string
   hrefResult: string
-  /** The zone in which is the task */
+  /** The zone in which is the task. */
   zone: Zone
 }
 
@@ -792,33 +792,33 @@ export interface UpdateVolumeResponse {
   volume?: Volume
 }
 
-/** Volume */
+/** Volume. */
 export interface Volume {
-  /** The volume unique ID */
+  /** The volume unique ID. */
   id: string
-  /** The volume name */
+  /** The volume name. */
   name: string
-  /** @deprecated Show the volume NBD export URI */
+  /** @deprecated Show the volume NBD export URI. */
   exportUri?: string
-  /** The volume disk size */
+  /** The volume disk size. */
   size: number
-  /** The volume type */
+  /** The volume type. */
   volumeType: VolumeVolumeType
-  /** The volume creation date */
+  /** The volume creation date. */
   creationDate?: Date
-  /** The volume modification date */
+  /** The volume modification date. */
   modificationDate?: Date
-  /** The volume organization ID */
+  /** The volume organization ID. */
   organization: string
-  /** The volume project ID */
+  /** The volume project ID. */
   project: string
-  /** The volume tags */
+  /** The volume tags. */
   tags: string[]
-  /** The server attached to the volume */
+  /** The server attached to the volume. */
   server?: ServerSummary
-  /** The volume state */
+  /** The volume state. */
   state: VolumeState
-  /** The zone in which is the volume */
+  /** The zone in which is the volume. */
   zone: Zone
 }
 
@@ -838,23 +838,23 @@ export interface VolumeServer {
   zone: Zone
 }
 
-/** Volume server template */
+/** Volume server template. */
 export interface VolumeServerTemplate {
-  /** UUID of the volume */
+  /** UUID of the volume. */
   id: string
-  /** Force the server to boot on this volume */
+  /** Force the server to boot on this volume. */
   boot: boolean
-  /** Name of the volume */
+  /** Name of the volume. */
   name: string
-  /** Disk size of the volume, must be a multiple of 512 */
+  /** Disk size of the volume, must be a multiple of 512. */
   size: number
-  /** Type of the volume */
+  /** Type of the volume. */
   volumeType: VolumeVolumeType
-  /** The ID of the snapshot on which this volume will be based */
+  /** The ID of the snapshot on which this volume will be based. */
   baseSnapshot: string
-  /** Organization ID of the volume */
+  /** Organization ID of the volume. */
   organization: string
-  /** Project ID of the volume */
+  /** Project ID of the volume. */
   project: string
 }
 
@@ -865,15 +865,15 @@ export interface VolumeSummary {
   volumeType: VolumeVolumeType
 }
 
-/** Volume template */
+/** Volume template. */
 export interface VolumeTemplate {
-  /** UUID of the volume */
+  /** UUID of the volume. */
   id: string
-  /** Name of the volume */
+  /** Name of the volume. */
   name: string
-  /** Disk size of the volume, must be a multiple of 512 */
+  /** Disk size of the volume, must be a multiple of 512. */
   size: number
-  /** Type of the volume */
+  /** Type of the volume. */
   volumeType: VolumeVolumeType
   /**
    * @deprecated Organization ID of the volume.
@@ -907,89 +907,89 @@ export interface VolumeTypeConstraints {
 }
 
 export type GetServerTypesAvailabilityRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   perPage?: number
   page?: number
 }
 
 export type ListServersTypesRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   perPage?: number
   page?: number
 }
 
 export type ListVolumesTypesRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   perPage?: number
   page?: number
 }
 
 export type ListServersRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
    * A positive integer lower or equal to 100 to select the number of items to
-   * return
+   * return.
    */
   perPage?: number
-  /** A positive integer to choose the page to return */
+  /** A positive integer to choose the page to return. */
   page?: number
-  /** List only servers of this organization ID */
+  /** List only servers of this organization ID. */
   organization?: string
-  /** List only servers of this project ID */
+  /** List only servers of this project ID. */
   project?: string
   /**
    * Filter servers by name (for eg. "server1" will return "server100" and
-   * "server1" but not "foo")
+   * "server1" but not "foo").
    */
   name?: string
-  /** List servers by private_ip */
+  /** List servers by private_ip. */
   privateIp?: string
-  /** List servers that are not attached to a public IP */
+  /** List servers that are not attached to a public IP. */
   withoutIp?: boolean
-  /** List servers of this commercial type */
+  /** List servers of this commercial type. */
   commercialType?: string
-  /** List servers in this state */
+  /** List servers in this state. */
   state?: ServerState
   /**
    * List servers with these exact tags (to filter with several tags, use commas
-   * to separate them)
+   * to separate them).
    */
   tags?: string[]
-  /** List servers in this Private Network */
+  /** List servers in this Private Network. */
   privateNetwork?: string
-  /** Define the order of the returned servers */
+  /** Define the order of the returned servers. */
   order?: ListServersRequestOrder
 }
 
 export type DeleteServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   serverId: string
 }
 
 export type GetServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the server you want to get */
+  /** UUID of the server you want to get. */
   serverId: string
 }
 
 export type ListServerActionsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   serverId: string
 }
 
 export type ServerActionRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the server */
+  /** UUID of the server. */
   serverId: string
-  /** The action to perform on the server */
+  /** The action to perform on the server. */
   action?: ServerAction
   /**
    * The name of the backup you want to create. This field should only be
@@ -1004,23 +1004,23 @@ export type ServerActionRequest = {
 }
 
 export type ListServerUserDataRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the server */
+  /** UUID of the server. */
   serverId: string
 }
 
 export type DeleteServerUserDataRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the server */
+  /** UUID of the server. */
   serverId: string
-  /** Key of the user data to delete */
+  /** Key of the user data to delete. */
   key: string
 }
 
 export type ListImagesRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   organization?: string
   perPage?: number
@@ -1033,24 +1033,24 @@ export type ListImagesRequest = {
 }
 
 export type GetImageRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the image you want to get */
+  /** UUID of the image you want to get. */
   imageId: string
 }
 
 export type CreateImageRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Name of the image */
+  /** Name of the image. */
   name?: string
-  /** UUID of the snapshot */
+  /** UUID of the snapshot. */
   rootVolume: string
-  /** Architecture of the image */
+  /** Architecture of the image. */
   arch: Arch
-  /** @deprecated Default bootscript of the image */
+  /** @deprecated Default bootscript of the image. */
   defaultBootscript?: string
-  /** Additional volumes of the image */
+  /** Additional volumes of the image. */
   extraVolumes?: Record<string, VolumeTemplate>
   /**
    * @deprecated Organization ID of the image.
@@ -1066,21 +1066,21 @@ export type CreateImageRequest = {
    * could be set.
    */
   project?: string
-  /** The tags of the image */
+  /** The tags of the image. */
   tags?: string[]
-  /** True to create a public image */
+  /** True to create a public image. */
   public?: boolean
 }
 
 export type DeleteImageRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the image you want to delete */
+  /** UUID of the image you want to delete. */
   imageId: string
 }
 
 export type ListSnapshotsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   organization?: string
   perPage?: number
@@ -1091,13 +1091,13 @@ export type ListSnapshotsRequest = {
 }
 
 export type CreateSnapshotRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Name of the snapshot */
+  /** Name of the snapshot. */
   name?: string
-  /** UUID of the volume */
+  /** UUID of the volume. */
   volumeId?: string
-  /** The tags of the snapshot */
+  /** The tags of the snapshot. */
   tags?: string[]
   /**
    * @deprecated Organization ID of the snapshot.
@@ -1118,68 +1118,71 @@ export type CreateSnapshotRequest = {
    * the original volume will be used.
    */
   volumeType?: SnapshotVolumeType
-  /** Bucket name for snapshot imports */
+  /** Bucket name for snapshot imports. */
   bucket?: string
-  /** Object key for snapshot imports */
+  /** Object key for snapshot imports. */
   key?: string
-  /** Imported snapshot size, must be a multiple of 512 */
+  /** Imported snapshot size, must be a multiple of 512. */
   size?: number
 }
 
 export type GetSnapshotRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the snapshot you want to get */
+  /** UUID of the snapshot you want to get. */
   snapshotId: string
 }
 
 export type DeleteSnapshotRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the snapshot you want to delete */
+  /** UUID of the snapshot you want to delete. */
   snapshotId: string
 }
 
 export type ExportSnapshotRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The snapshot ID */
+  /** The snapshot ID. */
   snapshotId: string
-  /** S3 bucket name */
+  /** S3 bucket name. */
   bucket: string
-  /** S3 object key */
+  /** S3 object key. */
   key: string
 }
 
 export type ListVolumesRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Filter by volume type */
+  /** Filter by volume type. */
   volumeType?: VolumeVolumeType
   /**
    * A positive integer lower or equal to 100 to select the number of items to
-   * return
+   * return.
    */
   perPage?: number
-  /** A positive integer to choose the page to return */
+  /** A positive integer to choose the page to return. */
   page?: number
-  /** Filter volume by organization ID */
+  /** Filter volume by organization ID. */
   organization?: string
-  /** Filter volume by project ID */
+  /** Filter volume by project ID. */
   project?: string
   /**
    * Filter volumes with these exact tags (to filter with several tags, use
-   * commas to separate them)
+   * commas to separate them).
    */
   tags?: string[]
-  /** Filter volume by name (for eg. "vol" will return "myvolume" but not "data") */
+  /**
+   * Filter volume by name (for eg. "vol" will return "myvolume" but not
+   * "data").
+   */
   name?: string
 }
 
 export type CreateVolumeRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The volume name */
+  /** The volume name. */
   name?: string
   /**
    * @deprecated The volume organization ID.
@@ -1195,9 +1198,9 @@ export type CreateVolumeRequest = {
    * could be set.
    */
   project?: string
-  /** The volume tags */
+  /** The volume tags. */
   tags?: string[]
-  /** The volume type */
+  /** The volume type. */
   volumeType?: VolumeVolumeType
   /**
    * The volume disk size, must be a multiple of 512.
@@ -1223,63 +1226,63 @@ export type CreateVolumeRequest = {
 }
 
 export type GetVolumeRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the volume you want to get */
+  /** UUID of the volume you want to get. */
   volumeId: string
 }
 
 export type UpdateVolumeRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the volume */
+  /** UUID of the volume. */
   volumeId: string
-  /** The volume name */
+  /** The volume name. */
   name?: string
-  /** The tags of the volume */
+  /** The tags of the volume. */
   tags?: string[]
-  /** The volume disk size, must be a multiple of 512 */
+  /** The volume disk size, must be a multiple of 512. */
   size?: number
 }
 
 export type DeleteVolumeRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the volume you want to delete */
+  /** UUID of the volume you want to delete. */
   volumeId: string
 }
 
 export type ListSecurityGroupsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Name of the security group */
+  /** Name of the security group. */
   name?: string
-  /** The security group organization ID */
+  /** The security group organization ID. */
   organization?: string
-  /** The security group project ID */
+  /** The security group project ID. */
   project?: string
   /**
    * List security groups with these exact tags (to filter with several tags,
-   * use commas to separate them)
+   * use commas to separate them).
    */
   tags?: string[]
-  /** Filter security groups with this value for project_default */
+  /** Filter security groups with this value for project_default. */
   projectDefault?: boolean
   /**
    * A positive integer lower or equal to 100 to select the number of items to
-   * return
+   * return.
    */
   perPage?: number
-  /** A positive integer to choose the page to return */
+  /** A positive integer to choose the page to return. */
   page?: number
 }
 
 export type CreateSecurityGroupRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Name of the security group */
+  /** Name of the security group. */
   name?: string
-  /** Description of the security group */
+  /** Description of the security group. */
   description: string
   /**
    * @deprecated Organization ID the security group belongs to.
@@ -1295,7 +1298,7 @@ export type CreateSecurityGroupRequest = {
    * could be set.
    */
   project?: string
-  /** The tags of the security group */
+  /** The tags of the security group. */
   tags?: string[]
   /**
    * @deprecated Whether this security group becomes the default security group
@@ -1313,121 +1316,121 @@ export type CreateSecurityGroupRequest = {
    * 'projectDefault' could be set.
    */
   projectDefault?: boolean
-  /** Whether the security group is stateful or not */
+  /** Whether the security group is stateful or not. */
   stateful: boolean
-  /** Default policy for inbound rules */
+  /** Default policy for inbound rules. */
   inboundDefaultPolicy?: SecurityGroupPolicy
-  /** Default policy for outbound rules */
+  /** Default policy for outbound rules. */
   outboundDefaultPolicy?: SecurityGroupPolicy
-  /** True to block SMTP on IPv4 and IPv6 */
+  /** True to block SMTP on IPv4 and IPv6. */
   enableDefaultSecurity?: boolean
 }
 
 export type GetSecurityGroupRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the security group you want to get */
+  /** UUID of the security group you want to get. */
   securityGroupId: string
 }
 
 export type DeleteSecurityGroupRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the security group you want to delete */
+  /** UUID of the security group you want to delete. */
   securityGroupId: string
 }
 
 export type ListDefaultSecurityGroupRulesRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
 }
 
 export type ListSecurityGroupRulesRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the security group */
+  /** UUID of the security group. */
   securityGroupId: string
   /**
    * A positive integer lower or equal to 100 to select the number of items to
-   * return
+   * return.
    */
   perPage?: number
-  /** A positive integer to choose the page to return */
+  /** A positive integer to choose the page to return. */
   page?: number
 }
 
 export type CreateSecurityGroupRuleRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the security group */
+  /** UUID of the security group. */
   securityGroupId: string
   protocol: SecurityGroupRuleProtocol
   direction: SecurityGroupRuleDirection
   action: SecurityGroupRuleAction
   ipRange: string
-  /** The beginning of the range of ports to apply this rule to (inclusive) */
+  /** The beginning of the range of ports to apply this rule to (inclusive). */
   destPortFrom?: number
-  /** The end of the range of ports to apply this rule to (inclusive) */
+  /** The end of the range of ports to apply this rule to (inclusive). */
   destPortTo?: number
-  /** The position of this rule in the security group rules list */
+  /** The position of this rule in the security group rules list. */
   position: number
-  /** Indicates if this rule is editable (will be ignored) */
+  /** Indicates if this rule is editable (will be ignored). */
   editable: boolean
 }
 
 export type SetSecurityGroupRulesRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the security group to update the rules on */
+  /** UUID of the security group to update the rules on. */
   securityGroupId: string
-  /** List of rules to update in the security group */
+  /** List of rules to update in the security group. */
   rules?: SetSecurityGroupRulesRequestRule[]
 }
 
 export type DeleteSecurityGroupRuleRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   securityGroupId: string
   securityGroupRuleId: string
 }
 
 export type GetSecurityGroupRuleRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   securityGroupId: string
   securityGroupRuleId: string
 }
 
 export type ListPlacementGroupsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
    * A positive integer lower or equal to 100 to select the number of items to
-   * return
+   * return.
    */
   perPage?: number
-  /** A positive integer to choose the page to return */
+  /** A positive integer to choose the page to return. */
   page?: number
-  /** List only placement groups of this organization ID */
+  /** List only placement groups of this organization ID. */
   organization?: string
-  /** List only placement groups of this project ID */
+  /** List only placement groups of this project ID. */
   project?: string
   /**
    * List placement groups with these exact tags (to filter with several tags,
-   * use commas to separate them)
+   * use commas to separate them).
    */
   tags?: string[]
   /**
    * Filter placement groups by name (for eg. "cluster1" will return
-   * "cluster100" and "cluster1" but not "foo")
+   * "cluster100" and "cluster1" but not "foo").
    */
   name?: string
 }
 
 export type CreatePlacementGroupRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Name of the placement group */
+  /** Name of the placement group. */
   name?: string
   /**
    * @deprecated Organization ID of the placement group.
@@ -1443,23 +1446,23 @@ export type CreatePlacementGroupRequest = {
    * could be set.
    */
   project?: string
-  /** The tags of the placement group */
+  /** The tags of the placement group. */
   tags?: string[]
-  /** The operating mode of the placement group */
+  /** The operating mode of the placement group. */
   policyMode?: PlacementGroupPolicyMode
-  /** The policy type of the placement group */
+  /** The policy type of the placement group. */
   policyType?: PlacementGroupPolicyType
 }
 
 export type GetPlacementGroupRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the placement group you want to get */
+  /** UUID of the placement group you want to get. */
   placementGroupId: string
 }
 
 export type SetPlacementGroupRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   placementGroupId: string
   name: string
@@ -1471,73 +1474,73 @@ export type SetPlacementGroupRequest = {
 }
 
 export type UpdatePlacementGroupRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the placement group */
+  /** UUID of the placement group. */
   placementGroupId: string
-  /** Name of the placement group */
+  /** Name of the placement group. */
   name?: string
-  /** The tags of the placement group */
+  /** The tags of the placement group. */
   tags?: string[]
-  /** The operating mode of the placement group */
+  /** The operating mode of the placement group. */
   policyMode?: PlacementGroupPolicyMode
-  /** The policy type of the placement group */
+  /** The policy type of the placement group. */
   policyType?: PlacementGroupPolicyType
 }
 
 export type DeletePlacementGroupRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the placement group you want to delete */
+  /** UUID of the placement group you want to delete. */
   placementGroupId: string
 }
 
 export type GetPlacementGroupServersRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   placementGroupId: string
 }
 
 export type SetPlacementGroupServersRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   placementGroupId: string
   servers?: string[]
 }
 
 export type UpdatePlacementGroupServersRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the placement group */
+  /** UUID of the placement group. */
   placementGroupId: string
   servers: string[]
 }
 
 export type ListIpsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The project ID the IPs are reserved in */
+  /** The project ID the IPs are reserved in. */
   project?: string
-  /** The organization ID the IPs are reserved in */
+  /** The organization ID the IPs are reserved in. */
   organization?: string
   /**
    * Filter IPs with these exact tags (to filter with several tags, use commas
-   * to separate them)
+   * to separate them).
    */
   tags?: string[]
-  /** Filter on the IP address (Works as a LIKE operation on the IP address) */
+  /** Filter on the IP address (Works as a LIKE operation on the IP address). */
   name?: string
   /**
    * A positive integer lower or equal to 100 to select the number of items to
-   * return
+   * return.
    */
   perPage?: number
-  /** A positive integer to choose the page to return */
+  /** A positive integer to choose the page to return. */
   page?: number
 }
 
 export type CreateIpRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
    * @deprecated The organization ID the IP is reserved in.
@@ -1553,96 +1556,96 @@ export type CreateIpRequest = {
    * could be set.
    */
   project?: string
-  /** The tags of the IP */
+  /** The tags of the IP. */
   tags?: string[]
-  /** UUID of the server you want to attach the IP to */
+  /** UUID of the server you want to attach the IP to. */
   server?: string
 }
 
 export type GetIpRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The IP ID or address to get */
+  /** The IP ID or address to get. */
   ip: string
 }
 
 export type UpdateIpRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** IP ID or IP address */
+  /** IP ID or IP address. */
   ip: string
-  /** Reverse domain name */
+  /** Reverse domain name. */
   reverse?: string | null
-  /** An array of keywords you want to tag this IP with */
+  /** An array of keywords you want to tag this IP with. */
   tags?: string[]
   server?: string | null
 }
 
 export type DeleteIpRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The ID or the address of the IP to delete */
+  /** The ID or the address of the IP to delete. */
   ip: string
 }
 
 export type ListPrivateNICsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The server the private NIC is attached to */
+  /** The server the private NIC is attached to. */
   serverId: string
-  /** The private NIC tags */
+  /** The private NIC tags. */
   tags?: string[]
   /**
    * A positive integer lower or equal to 100 to select the number of items to
-   * return
+   * return.
    */
   perPage?: number
-  /** A positive integer to choose the page to return */
+  /** A positive integer to choose the page to return. */
   page?: number
 }
 
 export type CreatePrivateNICRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the server the private NIC will be attached to */
+  /** UUID of the server the private NIC will be attached to. */
   serverId: string
-  /** UUID of the private network where the private NIC will be attached */
+  /** UUID of the private network where the private NIC will be attached. */
   privateNetworkId: string
-  /** The private NIC tags */
+  /** The private NIC tags. */
   tags?: string[]
 }
 
 export type GetPrivateNICRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The server the private NIC is attached to */
+  /** The server the private NIC is attached to. */
   serverId: string
-  /** The private NIC unique ID */
+  /** The private NIC unique ID. */
   privateNicId: string
 }
 
 export type UpdatePrivateNICRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the server the private NIC will be attached to */
+  /** UUID of the server the private NIC will be attached to. */
   serverId: string
-  /** The private NIC unique ID */
+  /** The private NIC unique ID. */
   privateNicId: string
-  /** Tags used to select private NIC/s */
+  /** Tags used to select private NIC/s. */
   tags?: string[]
 }
 
 export type DeletePrivateNICRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The server the private NIC is attached to */
+  /** The server the private NIC is attached to. */
   serverId: string
-  /** The private NIC unique ID */
+  /** The private NIC unique ID. */
   privateNicId: string
 }
 
 export type ListBootscriptsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   arch?: string
   title?: string
@@ -1653,13 +1656,13 @@ export type ListBootscriptsRequest = {
 }
 
 export type GetBootscriptRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   bootscriptId: string
 }
 
 export type GetDashboardRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   organization?: string
   project?: string

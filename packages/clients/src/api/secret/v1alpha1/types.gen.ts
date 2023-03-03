@@ -18,61 +18,61 @@ export type SecretVersionStatus =
   | 'disabled'
   | 'destroyed'
 
-/** Access secret version response */
+/** Access secret version response. */
 export interface AccessSecretVersionResponse {
-  /** ID of the Secret */
+  /** ID of the Secret. */
   secretId: string
-  /** Revision of the SecretVersion */
+  /** Revision of the SecretVersion. */
   revision: number
-  /** The base64-encoded secret payload of the SecretVersion */
+  /** The base64-encoded secret payload of the SecretVersion. */
   data: string
 }
 
-/** List secret versions response */
+/** List secret versions response. */
 export interface ListSecretVersionsResponse {
-  /** Count of all SecretVersions */
+  /** Count of all SecretVersions. */
   totalCount: number
-  /** Single page of SecretVersions */
+  /** Single page of SecretVersions. */
   versions: SecretVersion[]
 }
 
-/** List secrets response */
+/** List secrets response. */
 export interface ListSecretsResponse {
-  /** Count of all Secrets matching the requested criteria */
+  /** Count of all Secrets matching the requested criteria. */
   totalCount: number
-  /** Single page of Secrets matching the requested criteria */
+  /** Single page of Secrets matching the requested criteria. */
   secrets: Secret[]
 }
 
-/** Secret */
+/** Secret. */
 export interface Secret {
-  /** ID of the Secret */
+  /** ID of the Secret. */
   id: string
-  /** ID of the project containing the Secret */
+  /** ID of the project containing the Secret. */
   projectId: string
-  /** Name of the Secret */
+  /** Name of the Secret. */
   name: string
   /** - `ready`: the Secret is ready. `locked`: the Secret is locked. */
   status: SecretStatus
-  /** The time at which the Secret was created */
+  /** The time at which the Secret was created. */
   createdAt?: Date
-  /** The time at which the Secret was updated */
+  /** The time at which the Secret was updated. */
   updatedAt?: Date
-  /** List of tags associated to this Secret */
+  /** List of tags associated to this Secret. */
   tags: string[]
-  /** Region of the Secret */
+  /** Region of the Secret. */
   region: Region
-  /** The number of versions for this Secret */
+  /** The number of versions for this Secret. */
   versionCount: number
-  /** Description of the Secret */
+  /** Description of the Secret. */
   description?: string
 }
 
-/** Secret version */
+/** Secret version. */
 export interface SecretVersion {
-  /** ID of the Secret */
+  /** ID of the Secret. */
   secretId: string
-  /** Revision of the SecretVersion */
+  /** Revision of the SecretVersion. */
   revision: number
   /**
    * - `unknown`: the SecretVersion is in an invalid state. `enabled`: the
@@ -81,64 +81,79 @@ export interface SecretVersion {
    *   permanently destroyed.
    */
   status: SecretVersionStatus
-  /** The time at which the SecretVersion was created */
+  /** The time at which the SecretVersion was created. */
   createdAt?: Date
-  /** The time at which the SecretVersion was updated */
+  /** The time at which the SecretVersion was updated. */
   updatedAt?: Date
-  /** Description of the SecretVersion */
+  /** Description of the SecretVersion. */
   description?: string
 }
 
 export type CreateSecretRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the project containing the Secret */
+  /** ID of the project containing the Secret. */
   projectId?: string
-  /** Name of the Secret */
+  /** Name of the Secret. */
   name: string
-  /** List of tags associated to this Secret */
+  /** List of tags associated to this Secret. */
   tags?: string[]
-  /** Description of the Secret */
+  /** Description of the Secret. */
   description?: string
 }
 
 export type GetSecretRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the Secret */
+  /** ID of the Secret. */
   secretId: string
 }
 
 export type GetSecretByNameRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** Name of the Secret */
+  /** Name of the Secret. */
   secretName: string
 }
 
 export type UpdateSecretRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the Secret */
+  /** ID of the Secret. */
   secretId: string
-  /** New name of the Secret (optional) */
+  /** New name of the Secret (optional). */
   name?: string
-  /** New list of tags associated to this Secret (optional) */
+  /** New list of tags associated to this Secret (optional). */
   tags?: string[]
-  /** Description of the Secret */
+  /** Description of the Secret. */
   description?: string
 }
 
 export type ListSecretsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of an organization to filter on (optional) */
+  /** ID of an organization to filter on (optional). */
   organizationId?: string
-  /** ID of a project to filter on (optional) */
+  /** ID of a project to filter on (optional). */
   projectId?: string
-  /** Secret name to filter on (optional) */
+  /** Secret name to filter on (optional). */
   name?: string
-  /** List of tags to filter on (optional) */
+  /** List of tags to filter on (optional). */
   tags?: string[]
   orderBy?: ListSecretsRequestOrderBy
   page?: number
@@ -146,115 +161,151 @@ export type ListSecretsRequest = {
 }
 
 export type DeleteSecretRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the Secret */
+  /** ID of the Secret. */
   secretId: string
 }
 
 export type CreateSecretVersionRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the Secret */
+  /** ID of the Secret. */
   secretId: string
-  /** The base64-encoded secret payload of the SecretVersion */
+  /** The base64-encoded secret payload of the SecretVersion. */
   data: string
-  /** Description of the SecretVersion */
+  /** Description of the SecretVersion. */
   description?: string
 }
 
 export type GetSecretVersionRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the Secret */
+  /** ID of the Secret. */
   secretId: string
-  /** Revision of the SecretVersion (may be a number or "latest") */
+  /** Revision of the SecretVersion (may be a number or "latest"). */
   revision: string
 }
 
 export type GetSecretVersionByNameRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** Name of the Secret */
+  /** Name of the Secret. */
   secretName: string
-  /** Revision of the SecretVersion (may be a number or "latest") */
+  /** Revision of the SecretVersion (may be a number or "latest"). */
   revision: string
 }
 
 export type UpdateSecretVersionRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the Secret */
+  /** ID of the Secret. */
   secretId: string
-  /** Revision of the SecretVersion (may be a number or "latest") */
+  /** Revision of the SecretVersion (may be a number or "latest"). */
   revision: string
-  /** Description of the SecretVersion */
+  /** Description of the SecretVersion. */
   description?: string
 }
 
 export type ListSecretVersionsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the Secret */
+  /** ID of the Secret. */
   secretId: string
   page?: number
   pageSize?: number
-  /** Filter results by status */
+  /** Filter results by status. */
   status?: SecretVersionStatus[]
 }
 
 export type ListSecretVersionsByNameRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** Name of the Secret */
+  /** Name of the Secret. */
   secretName: string
   page?: number
   pageSize?: number
-  /** Filter results by status */
+  /** Filter results by status. */
   status?: SecretVersionStatus[]
 }
 
 export type DestroySecretVersionRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the Secret */
+  /** ID of the Secret. */
   secretId: string
-  /** Revision of the SecretVersion (may be a number or "latest") */
+  /** Revision of the SecretVersion (may be a number or "latest"). */
   revision: string
 }
 
 export type EnableSecretVersionRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the Secret */
+  /** ID of the Secret. */
   secretId: string
-  /** Revision of the SecretVersion (may be a number or "latest") */
+  /** Revision of the SecretVersion (may be a number or "latest"). */
   revision: string
 }
 
 export type DisableSecretVersionRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the Secret */
+  /** ID of the Secret. */
   secretId: string
-  /** Revision of the SecretVersion (may be a number or "latest") */
+  /** Revision of the SecretVersion (may be a number or "latest"). */
   revision: string
 }
 
 export type AccessSecretVersionRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the Secret */
+  /** ID of the Secret. */
   secretId: string
-  /** Revision of the SecretVersion (may be a number or "latest") */
+  /** Revision of the SecretVersion (may be a number or "latest"). */
   revision: string
 }
 
 export type AccessSecretVersionByNameRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** Name of the Secret */
+  /** Name of the Secret. */
   secretName: string
-  /** Revision of the SecretVersion (may be a number or "latest") */
+  /** Revision of the SecretVersion (may be a number or "latest"). */
   revision: string
 }
