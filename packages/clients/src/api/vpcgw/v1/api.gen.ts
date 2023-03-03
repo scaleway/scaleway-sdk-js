@@ -14,7 +14,6 @@ import {
 } from './content.gen'
 import {
   marshalCreateDHCPEntryRequest,
-  marshalCreateDHCPRequest,
   marshalCreateGatewayNetworkRequest,
   marshalCreateGatewayRequest,
   marshalCreateIPRequest,

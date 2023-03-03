@@ -10,7 +10,6 @@ import {
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateDHCPEntryRequest,
-  CreateDHCPRequest,
   CreateGatewayNetworkRequest,
   CreateGatewayRequest,
   CreateIPRequest,
@@ -347,26 +346,6 @@ export const marshalCreateDHCPEntryRequest = (
   mac_address: request.macAddress,
 })
 
-export const marshalCreateDHCPRequest = (
-  request: CreateDHCPRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  address: request.address,
-  dns_local_name: request.dnsLocalName,
-  dns_search: request.dnsSearch,
-  dns_servers_override: request.dnsServersOverride,
-  enable_dynamic: request.enableDynamic,
-  pool_high: request.poolHigh,
-  pool_low: request.poolLow,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-  push_default_route: request.pushDefaultRoute,
-  push_dns_server: request.pushDnsServer,
-  rebind_timer: request.rebindTimer,
-  renew_timer: request.renewTimer,
-  subnet: request.subnet,
-  valid_lifetime: request.validLifetime,
-})
-
 export const marshalCreateGatewayNetworkRequest = (
   request: CreateGatewayNetworkRequest,
   defaults: DefaultValues,
@@ -375,10 +354,16 @@ export const marshalCreateGatewayNetworkRequest = (
   enable_masquerade: request.enableMasquerade,
   gateway_id: request.gatewayId,
   private_network_id: request.privateNetworkId,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     {
       param: 'dhcp_id',
       value: request.dhcpId,
+    },
+    {
+      param: 'dhcp',
+      value: request.dhcp
+        ? marshalCreateDHCPRequest(request.dhcp, defaults)
+        : undefined,
     },
     {
       param: 'address',
