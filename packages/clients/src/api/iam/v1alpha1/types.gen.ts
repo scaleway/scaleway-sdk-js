@@ -77,11 +77,11 @@ export type UserStatus = 'unknown_status' | 'invitation_pending' | 'activated'
 
 export type UserType = 'unknown_type' | 'guest' | 'owner'
 
-/** Api key. */
+/** Api key */
 export interface APIKey {
-  /** Access key of API key. */
+  /** Access key of API key */
   accessKey: string
-  /** Secret key of API Key. */
+  /** Secret key of API Key */
   secretKey?: string
   /**
    * ID of application bearer.
@@ -95,103 +95,103 @@ export interface APIKey {
    * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
   userId?: string
-  /** Description of API key. */
+  /** Description of API key */
   description: string
-  /** Creation date and time of API key. */
+  /** Creation date and time of API key */
   createdAt?: Date
-  /** Last update date and time of API key. */
+  /** Last update date and time of API key */
   updatedAt?: Date
-  /** Expiration date and time of API key. */
+  /** Expiration date and time of API key */
   expiresAt?: Date
-  /** The default project ID specified for this API key. */
+  /** The default project ID specified for this API key */
   defaultProjectId: string
-  /** Whether or not the API key is editable. */
+  /** Whether or not the API key is editable */
   editable: boolean
-  /** IP Address of the device which created the API key. */
+  /** IP Address of the device which created the API key */
   creationIp: string
 }
 
-/** Application. */
+/** Application */
 export interface Application {
-  /** ID of application. */
+  /** ID of application */
   id: string
-  /** Name of application. */
+  /** Name of application */
   name: string
-  /** Description of the application. */
+  /** Description of the application */
   description: string
-  /** Creation date of application. */
+  /** Creation date of application */
   createdAt?: Date
-  /** Last update date of application. */
+  /** Last update date of application */
   updatedAt?: Date
-  /** ID of organization. */
+  /** ID of organization */
   organizationId: string
-  /** Whether or not the application is editable. */
+  /** Whether or not the application is editable */
   editable: boolean
-  /** Number of API keys owned by the application. */
+  /** Number of API keys owned by the application */
   nbApiKeys: number
 }
 
-/** Group. */
+/** Group */
 export interface Group {
-  /** ID of group. */
+  /** ID of group */
   id: string
-  /** Creation date and time of group. */
+  /** Creation date and time of group */
   createdAt?: Date
-  /** Last update date and time of group. */
+  /** Last update date and time of group */
   updatedAt?: Date
-  /** ID of organization linked to the group. */
+  /** ID of organization linked to the group */
   organizationId: string
-  /** Name of group. */
+  /** Name of group */
   name: string
-  /** Description of the group. */
+  /** Description of the group */
   description: string
-  /** IDs of users attached to this group. */
+  /** IDs of users attached to this group */
   userIds: string[]
-  /** IDs of applications attached to this group. */
+  /** IDs of applications attached to this group */
   applicationIds: string[]
 }
 
-/** Jwt. */
+/** Jwt */
 export interface JWT {
-  /** JWT ID. */
+  /** JWT ID */
   jti: string
-  /** ID of the user who issued the JWT. */
+  /** ID of the user who issued the JWT */
   issuerId: string
-  /** ID of the user targeted by the JWT. */
+  /** ID of the user targeted by the JWT */
   audienceId: string
-  /** Creation date of the JWT. */
+  /** Creation date of the JWT */
   createdAt?: Date
-  /** Last update date of the JWT. */
+  /** Last update date of the JWT */
   updatedAt?: Date
-  /** Expiration date of the JWT. */
+  /** Expiration date of the JWT */
   expiresAt?: Date
-  /** IP address used during the creation of the JWT. */
+  /** IP address used during the creation of the JWT */
   ip: string
-  /** User-agent used during the creation of the JWT. */
+  /** User-agent used during the creation of the JWT */
   userAgent: string
 }
 
-/** List api keys response. */
+/** List api keys response */
 export interface ListAPIKeysResponse {
-  /** List of API keys. */
+  /** List of API keys */
   apiKeys: APIKey[]
-  /** Total count of API Keys. */
+  /** Total count of API Keys */
   totalCount: number
 }
 
-/** List applications response. */
+/** List applications response */
 export interface ListApplicationsResponse {
-  /** List of applications. */
+  /** List of applications */
   applications: Application[]
-  /** Total count of applications. */
+  /** Total count of applications */
   totalCount: number
 }
 
-/** List groups response. */
+/** List groups response */
 export interface ListGroupsResponse {
-  /** List of groups. */
+  /** List of groups */
   groups: Group[]
-  /** Total count of groups. */
+  /** Total count of groups */
   totalCount: number
 }
 
@@ -200,89 +200,89 @@ export interface ListJWTsResponse {
   totalCount: number
 }
 
-/** List permission sets response. */
+/** List permission sets response */
 export interface ListPermissionSetsResponse {
-  /** List of permission sets. */
+  /** List of permission sets */
   permissionSets: PermissionSet[]
-  /** Total count of permission sets. */
+  /** Total count of permission sets */
   totalCount: number
 }
 
-/** List policies response. */
+/** List policies response */
 export interface ListPoliciesResponse {
-  /** List of policies. */
+  /** List of policies */
   policies: Policy[]
-  /** Total count of policies. */
+  /** Total count of policies */
   totalCount: number
 }
 
-/** List quota response. */
+/** List quota response */
 export interface ListQuotaResponse {
-  /** List of quota. */
+  /** List of quota */
   quota: Quotum[]
-  /** Total count of quota. */
+  /** Total count of quota */
   totalCount: number
 }
 
-/** List rules response. */
+/** List rules response */
 export interface ListRulesResponse {
-  /** Rules of the policy. */
+  /** Rules of the policy */
   rules: Rule[]
-  /** Total count of rules. */
+  /** Total count of rules */
   totalCount: number
 }
 
-/** List ssh keys response. */
+/** List ssh keys response */
 export interface ListSSHKeysResponse {
-  /** List of SSH keys. */
+  /** List of SSH keys */
   sshKeys: SSHKey[]
-  /** Total count of SSH keys. */
+  /** Total count of SSH keys */
   totalCount: number
 }
 
-/** List users response. */
+/** List users response */
 export interface ListUsersResponse {
-  /** List of users. */
+  /** List of users */
   users: User[]
-  /** Total count of users. */
+  /** Total count of users */
   totalCount: number
 }
 
-/** Permission set. */
+/** Permission set */
 export interface PermissionSet {
-  /** Id of permission set. */
+  /** Id of permission set */
   id: string
-  /** Name of permission set. */
+  /** Name of permission set */
   name: string
-  /** Scope of permission set. */
+  /** Scope of permission set */
   scopeType: PermissionSetScopeType
-  /** Description of permission set. */
+  /** Description of permission set */
   description: string
-  /** Categories of permission set. */
+  /** Categories of permission set */
   categories?: string[]
 }
 
-/** Policy. */
+/** Policy */
 export interface Policy {
-  /** Id of policy. */
+  /** Id of policy */
   id: string
-  /** Name of policy. */
+  /** Name of policy */
   name: string
-  /** Description of policy. */
+  /** Description of policy */
   description: string
-  /** Organization ID of policy. */
+  /** Organization ID of policy */
   organizationId: string
-  /** Creation date and time of policy. */
+  /** Creation date and time of policy */
   createdAt?: Date
-  /** Last update date and time of policy. */
+  /** Last update date and time of policy */
   updatedAt?: Date
-  /** Editable status of policy. */
+  /** Editable status of policy */
   editable: boolean
-  /** Number of rules of policy. */
+  /** Number of rules of policy */
   nbRules: number
-  /** Number of scopes of policy. */
+  /** Number of scopes of policy */
   nbScopes: number
-  /** Number of permission sets of policy. */
+  /** Number of permission sets of policy */
   nbPermissionSets: number
   /**
    * ID of user, owner of the policy.
@@ -314,9 +314,9 @@ export interface Policy {
   noPrincipal?: boolean
 }
 
-/** Quotum. */
+/** Quotum */
 export interface Quotum {
-  /** Name of the quotum. */
+  /** Name of the quotum */
   name: string
   /**
    * Max limit of the quotum.
@@ -332,13 +332,13 @@ export interface Quotum {
   unlimited?: boolean
 }
 
-/** Rule. */
+/** Rule */
 export interface Rule {
-  /** Id of rule. */
+  /** Id of rule */
   id: string
-  /** Names of permission sets bound to the rule. */
+  /** Names of permission sets bound to the rule */
   permissionSetNames?: string[]
-  /** Permission_set_names have the same scope_type. */
+  /** Permission_set_names have the same scope_type */
   permissionSetsScopeType: PermissionSetScopeType
   /**
    * List of project IDs scoped to the rule.
@@ -363,9 +363,9 @@ export interface Rule {
   accountRootUserId?: string
 }
 
-/** Rule specs. */
+/** Rule specs */
 export interface RuleSpecs {
-  /** Names of permission sets bound to the rule. */
+  /** Names of permission sets bound to the rule */
   permissionSetNames?: string[]
   /**
    * List of project IDs scoped to the rule.
@@ -383,97 +383,97 @@ export interface RuleSpecs {
   organizationId?: string
 }
 
-/** Ssh key. */
+/** Ssh key */
 export interface SSHKey {
-  /** ID of SSH key. */
+  /** ID of SSH key */
   id: string
-  /** Name of SSH key. */
+  /** Name of SSH key */
   name: string
-  /** Public key of SSH key. */
+  /** Public key of SSH key */
   publicKey: string
-  /** Fingerprint of SSH key. */
+  /** Fingerprint of SSH key */
   fingerprint: string
-  /** Creation date of SSH key. */
+  /** Creation date of SSH key */
   createdAt?: Date
-  /** Last update date of SSH key. */
+  /** Last update date of SSH key */
   updatedAt?: Date
-  /** ID of organization linked to the SSH key. */
+  /** ID of organization linked to the SSH key */
   organizationId: string
-  /** ID of project linked to the SSH key. */
+  /** ID of project linked to the SSH key */
   projectId: string
-  /** SSH key status. */
+  /** SSH key status */
   disabled: boolean
 }
 
-/** Set rules response. */
+/** Set rules response */
 export interface SetRulesResponse {
-  /** Rules of policy. */
+  /** Rules of policy */
   rules: Rule[]
 }
 
-/** User. */
+/** User */
 export interface User {
-  /** ID of user. */
+  /** ID of user */
   id: string
-  /** Email of user. */
+  /** Email of user */
   email: string
-  /** Creation date of user. */
+  /** Creation date of user */
   createdAt?: Date
-  /** Last update date of user. */
+  /** Last update date of user */
   updatedAt?: Date
-  /** ID of organization. */
+  /** ID of organization */
   organizationId: string
-  /** Deletion status of user. Owner user cannot be deleted. */
+  /** Deletion status of user. Owner user cannot be deleted */
   deletable: boolean
-  /** Last login date. */
+  /** Last login date */
   lastLoginAt?: Date
-  /** Type of the user. */
+  /** Type of the user */
   type: UserType
-  /** 2FA enabled. */
+  /** 2FA enabled */
   twoFactorEnabled: boolean
-  /** Status of invitation for the user. */
+  /** Status of invitation for the user */
   status: UserStatus
 }
 
 export type ListSSHKeysRequest = {
-  /** Sort order of SSH keys. */
+  /** Sort order of SSH keys */
   orderBy?: ListSSHKeysRequestOrderBy
-  /** Requested page number. Value must be greater or equals to 1. */
+  /** Requested page number. Value must be greater or equals to 1 */
   page?: number
-  /** Number of items per page. Value must be between 1 and 100. */
+  /** Number of items per page. Value must be between 1 and 100 */
   pageSize?: number
-  /** Filter by organization ID. */
+  /** Filter by organization ID */
   organizationId?: string
-  /** Name of group to find. */
+  /** Name of group to find */
   name?: string
-  /** Filter by project ID. */
+  /** Filter by project ID */
   projectId?: string
-  /** Filter out disabled SSH keys or not. */
+  /** Filter out disabled SSH keys or not */
   disabled?: boolean
 }
 
 export type CreateSSHKeyRequest = {
-  /** The name of the SSH key. Max length is 1000. */
+  /** The name of the SSH key. Max length is 1000 */
   name?: string
   /**
    * SSH public key. Currently ssh-rsa, ssh-dss (DSA), ssh-ed25519 and ecdsa
-   * keys with NIST curves are supported. Max length is 65000.
+   * keys with NIST curves are supported. Max length is 65000
    */
   publicKey: string
-  /** Project owning the resource. */
+  /** Project owning the resource */
   projectId?: string
 }
 
 export type GetSSHKeyRequest = {
-  /** The ID of the SSH key. */
+  /** The ID of the SSH key */
   sshKeyId: string
 }
 
 export type UpdateSSHKeyRequest = {
   sshKeyId: string
-  /** Name of the SSH key. Max length is 1000. */
+  /** Name of the SSH key. Max length is 1000 */
   name?: string
-  /** Enable or disable the SSH key. */
+  /** Enable or disable the SSH key */
   disabled?: boolean
 }
 
@@ -482,118 +482,118 @@ export type DeleteSSHKeyRequest = {
 }
 
 export type ListUsersRequest = {
-  /** Criteria for sorting results. */
+  /** Criteria for sorting results */
   orderBy?: ListUsersRequestOrderBy
-  /** Number of results per page. Value must be between 1 and 100. */
+  /** Number of results per page. Value must be between 1 and 100 */
   pageSize?: number
-  /** Number of page. Value must be greater or equals to 1. */
+  /** Number of page. Value must be greater or equals to 1 */
   page?: number
-  /** ID of organization to filter. */
+  /** ID of organization to filter */
   organizationId?: string
-  /** Filter out by a list of ID. */
+  /** Filter out by a list of ID */
   userIds?: string[]
 }
 
 export type GetUserRequest = {
-  /** ID of user to find. */
+  /** ID of user to find */
   userId: string
 }
 
 export type DeleteUserRequest = {
-  /** ID of user to delete. */
+  /** ID of user to delete */
   userId: string
 }
 
 export type ListApplicationsRequest = {
-  /** Criteria for sorting results. */
+  /** Criteria for sorting results */
   orderBy?: ListApplicationsRequestOrderBy
-  /** Number of results per page. Value must be between 1 and 100. */
+  /** Number of results per page. Value must be between 1 and 100 */
   pageSize?: number
-  /** Number of page. Value must be greater to 1. */
+  /** Number of page. Value must be greater to 1 */
   page?: number
-  /** Name of application to filter. */
+  /** Name of application to filter */
   name?: string
-  /** ID of organization to filter. */
+  /** ID of organization to filter */
   organizationId?: string
-  /** Filter out editable applications or not. */
+  /** Filter out editable applications or not */
   editable?: boolean
-  /** Filter out by a list of ID. */
+  /** Filter out by a list of ID */
   applicationIds?: string[]
 }
 
 export type CreateApplicationRequest = {
-  /** Name of application to create (max length is 64 chars). */
+  /** Name of application to create (max length is 64 chars) */
   name?: string
-  /** ID of organization. */
+  /** ID of organization */
   organizationId?: string
-  /** Description of application (max length is 200 chars). */
+  /** Description of application (max length is 200 chars) */
   description: string
 }
 
 export type GetApplicationRequest = {
-  /** ID of application to find. */
+  /** ID of application to find */
   applicationId: string
 }
 
 export type UpdateApplicationRequest = {
-  /** ID of application to update. */
+  /** ID of application to update */
   applicationId: string
-  /** New name of application (max length is 64 chars). */
+  /** New name of application (max length is 64 chars) */
   name?: string
-  /** New description of application (max length is 200 chars). */
+  /** New description of application (max length is 200 chars) */
   description?: string
 }
 
 export type DeleteApplicationRequest = {
-  /** ID of application to delete. */
+  /** ID of application to delete */
   applicationId: string
 }
 
 export type ListGroupsRequest = {
-  /** Sort order of groups. */
+  /** Sort order of groups */
   orderBy?: ListGroupsRequestOrderBy
-  /** Requested page number. Value must be greater or equals to 1. */
+  /** Requested page number. Value must be greater or equals to 1 */
   page?: number
-  /** Number of items per page. Value must be between 1 and 100. */
+  /** Number of items per page. Value must be between 1 and 100 */
   pageSize?: number
-  /** Filter by organization ID. */
+  /** Filter by organization ID */
   organizationId?: string
-  /** Name of group to find. */
+  /** Name of group to find */
   name?: string
-  /** Filter out by a list of application ID. */
+  /** Filter out by a list of application ID */
   applicationIds?: string[]
-  /** Filter out by a list of user ID. */
+  /** Filter out by a list of user ID */
   userIds?: string[]
-  /** Filter out by a list of group ID. */
+  /** Filter out by a list of group ID */
   groupIds?: string[]
 }
 
 export type CreateGroupRequest = {
-  /** ID of organization linked to the group. */
+  /** ID of organization linked to the group */
   organizationId?: string
   /**
    * Name of the group to create (max length is 64 chars). MUST be unique inside
-   * an organization.
+   * an organization
    */
   name?: string
-  /** Description of the group to create (max length is 200 chars). */
+  /** Description of the group to create (max length is 200 chars) */
   description: string
 }
 
 export type GetGroupRequest = {
-  /** ID of group. */
+  /** ID of group */
   groupId: string
 }
 
 export type UpdateGroupRequest = {
-  /** ID of group to update. */
+  /** ID of group to update */
   groupId: string
   /**
    * New name for the group (max length is 64 chars). MUST be unique inside an
-   * organization.
+   * organization
    */
   name?: string
-  /** New description for the group (max length is 200 chars). */
+  /** New description for the group (max length is 200 chars) */
   description?: string
 }
 
@@ -604,7 +604,7 @@ export type SetGroupMembersRequest = {
 }
 
 export type AddGroupMemberRequest = {
-  /** ID of group. */
+  /** ID of group */
   groupId: string
   /**
    * ID of the user to add.
@@ -621,7 +621,7 @@ export type AddGroupMemberRequest = {
 }
 
 export type RemoveGroupMemberRequest = {
-  /** ID of group. */
+  /** ID of group */
   groupId: string
   /**
    * ID of the user to remove.
@@ -638,41 +638,41 @@ export type RemoveGroupMemberRequest = {
 }
 
 export type DeleteGroupRequest = {
-  /** ID of group to delete. */
+  /** ID of group to delete */
   groupId: string
 }
 
 export type ListPoliciesRequest = {
-  /** Criteria for sorting results. */
+  /** Criteria for sorting results */
   orderBy?: ListPoliciesRequestOrderBy
-  /** Number of results per page. Value must be between 1 and 100. */
+  /** Number of results per page. Value must be between 1 and 100 */
   pageSize?: number
-  /** Number of page. Value must be greater to 1. */
+  /** Number of page. Value must be greater to 1 */
   page?: number
-  /** ID of organization to filter. */
+  /** ID of organization to filter */
   organizationId?: string
-  /** Filter out editable policies or not. */
+  /** Filter out editable policies or not */
   editable?: boolean
-  /** Filter out by a list of user ID. */
+  /** Filter out by a list of user ID */
   userIds?: string[]
-  /** Filter out by a list of group ID. */
+  /** Filter out by a list of group ID */
   groupIds?: string[]
-  /** Filter out by a list of application ID. */
+  /** Filter out by a list of application ID */
   applicationIds?: string[]
-  /** True when the policy do not belong to any principal. */
+  /** True when the policy do not belong to any principal */
   noPrincipal?: boolean
-  /** Name of policy to fetch. */
+  /** Name of policy to fetch */
   policyName?: string
 }
 
 export type CreatePolicyRequest = {
-  /** Name of policy to create (max length is 64 chars). */
+  /** Name of policy to create (max length is 64 chars) */
   name?: string
-  /** Description of policy to create (max length is 200 chars). */
+  /** Description of policy to create (max length is 200 chars) */
   description: string
-  /** ID of organization. */
+  /** ID of organization */
   organizationId?: string
-  /** Rules of the policy to create. */
+  /** Rules of the policy to create */
   rules?: RuleSpecs[]
   /**
    * ID of user, owner of the policy.
@@ -705,16 +705,16 @@ export type CreatePolicyRequest = {
 }
 
 export type GetPolicyRequest = {
-  /** Id of policy to search. */
+  /** Id of policy to search */
   policyId: string
 }
 
 export type UpdatePolicyRequest = {
-  /** Id of policy to update. */
+  /** Id of policy to update */
   policyId: string
-  /** New name of policy (max length is 64 chars). */
+  /** New name of policy (max length is 64 chars) */
   name?: string
-  /** New description of policy (max length is 200 chars). */
+  /** New description of policy (max length is 200 chars) */
   description?: string
   /**
    * New ID of user, owner of the policy.
@@ -747,7 +747,7 @@ export type UpdatePolicyRequest = {
 }
 
 export type DeletePolicyRequest = {
-  /** Id of policy to delete. */
+  /** Id of policy to delete */
   policyId: string
 }
 
@@ -756,40 +756,40 @@ export type ClonePolicyRequest = {
 }
 
 export type SetRulesRequest = {
-  /** Id of policy to update. */
+  /** Id of policy to update */
   policyId: string
-  /** Rules of the policy to set. */
+  /** Rules of the policy to set */
   rules: RuleSpecs[]
 }
 
 export type ListRulesRequest = {
-  /** Id of policy to search. */
+  /** Id of policy to search */
   policyId: string
-  /** Number of results per page. Value must be between 1 and 100. */
+  /** Number of results per page. Value must be between 1 and 100 */
   pageSize?: number
-  /** Number of page. Value must be greater to 1. */
+  /** Number of page. Value must be greater to 1 */
   page?: number
 }
 
 export type ListPermissionSetsRequest = {
-  /** Criteria for sorting results. */
+  /** Criteria for sorting results */
   orderBy?: ListPermissionSetsRequestOrderBy
-  /** Number of results per page. Value must be between 1 and 100. */
+  /** Number of results per page. Value must be between 1 and 100 */
   pageSize?: number
-  /** Number of page. Value must be greater to 1. */
+  /** Number of page. Value must be greater to 1 */
   page?: number
-  /** Filter by organization ID. */
+  /** Filter by organization ID */
   organizationId?: string
 }
 
 export type ListAPIKeysRequest = {
-  /** Criteria for sorting results. */
+  /** Criteria for sorting results */
   orderBy?: ListAPIKeysRequestOrderBy
-  /** Number of page. Value must be greater or equals to 1. */
+  /** Number of page. Value must be greater or equals to 1 */
   page?: number
-  /** Number of results per page. Value must be between 1 and 100. */
+  /** Number of results per page. Value must be between 1 and 100 */
   pageSize?: number
-  /** ID of organization. */
+  /** ID of organization */
   organizationId?: string
   /**
    * @deprecated ID of an application bearer.
@@ -803,17 +803,17 @@ export type ListAPIKeysRequest = {
    *   One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
   userId?: string
-  /** Filter out editable API keys or not. */
+  /** Filter out editable API keys or not */
   editable?: boolean
-  /** Filter out expired API keys or not. */
+  /** Filter out expired API keys or not */
   expired?: boolean
-  /** Filter out by access key. */
+  /** Filter out by access key */
   accessKey?: string
-  /** Filter out by description. */
+  /** Filter out by description */
   description?: string
-  /** Filter out by bearer ID. */
+  /** Filter out by bearer ID */
   bearerId?: string
-  /** Filter out by type of bearer. */
+  /** Filter out by type of bearer */
   bearerType?: BearerType
 }
 
@@ -830,70 +830,70 @@ export type CreateAPIKeyRequest = {
    * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
   userId?: string
-  /** Expiration date of the API key. */
+  /** Expiration date of the API key */
   expiresAt?: Date
-  /** The default project ID to use with object storage. */
+  /** The default project ID to use with object storage */
   defaultProjectId?: string
-  /** The description of the API key (max length is 200 chars). */
+  /** The description of the API key (max length is 200 chars) */
   description: string
 }
 
 export type GetAPIKeyRequest = {
-  /** Access key to search for. */
+  /** Access key to search for */
   accessKey: string
 }
 
 export type UpdateAPIKeyRequest = {
-  /** Access key to update. */
+  /** Access key to update */
   accessKey: string
-  /** The new default project ID to set. */
+  /** The new default project ID to set */
   defaultProjectId?: string
-  /** The new description to update. */
+  /** The new description to update */
   description?: string
 }
 
 export type DeleteAPIKeyRequest = {
-  /** Access key to delete. */
+  /** Access key to delete */
   accessKey: string
 }
 
 export type ListQuotaRequest = {
-  /** Criteria for sorting results. */
+  /** Criteria for sorting results */
   orderBy?: ListQuotaRequestOrderBy
-  /** Number of results per page. Value must be between 1 and 100. */
+  /** Number of results per page. Value must be between 1 and 100 */
   pageSize?: number
-  /** Number of page. Value must be greater to 1. */
+  /** Number of page. Value must be greater to 1 */
   page?: number
-  /** Filter by organization ID. */
+  /** Filter by organization ID */
   organizationId?: string
 }
 
 export type GetQuotumRequest = {
-  /** Name of the quotum to get. */
+  /** Name of the quotum to get */
   quotumName: string
-  /** ID of the organization. */
+  /** ID of the organization */
   organizationId?: string
 }
 
 export type ListJWTsRequest = {
-  /** Criteria for sorting results. */
+  /** Criteria for sorting results */
   orderBy?: ListJWTsRequestOrderBy
-  /** ID of the user to search. */
+  /** ID of the user to search */
   audienceId: string
-  /** Number of results per page. Value must be between 1 and 100. */
+  /** Number of results per page. Value must be between 1 and 100 */
   pageSize?: number
-  /** Number of page. Value must be greater to 1. */
+  /** Number of page. Value must be greater to 1 */
   page?: number
-  /** Filter out expired JWTs or not. */
+  /** Filter out expired JWTs or not */
   expired?: boolean
 }
 
 export type GetJWTRequest = {
-  /** JWT ID of the JWT to get. */
+  /** JWT ID of the JWT to get */
   jti: string
 }
 
 export type DeleteJWTRequest = {
-  /** JWT ID of the JWT to delete. */
+  /** JWT ID of the JWT to delete */
   jti: string
 }
