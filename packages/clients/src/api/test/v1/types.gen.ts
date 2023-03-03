@@ -63,7 +63,7 @@ export type ListHumansRequest = {
 }
 
 export type GetHumanRequest = {
-  /** UUID of the human you want to get */
+  /** UUID of the human you want to get. */
   humanId: string
 }
 
@@ -90,7 +90,7 @@ export type CreateHumanRequest = {
 }
 
 export type UpdateHumanRequest = {
-  /** UUID of the human you want to update */
+  /** UUID of the human you want to update. */
   humanId: string
   height?: number
   shoeSize?: number
@@ -104,16 +104,16 @@ export type UpdateHumanRequest = {
 }
 
 export type DeleteHumanRequest = {
-  /** UUID of the human you want to delete */
+  /** UUID of the human you want to delete. */
   humanId: string
 }
 
 export type RunHumanRequest = {
-  /** UUID of the human you want to make run */
+  /** UUID of the human you want to make run. */
   humanId: string
 }
 
 export type SmokeHumanRequest = {
-  /** @deprecated UUID of the human you want to make smoking */
+  /** @deprecated UUID of the human you want to make smoking. */
   humanId?: string
 }

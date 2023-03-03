@@ -99,7 +99,7 @@ export type NodeTypeStock =
 
 export type Permission = 'readonly' | 'readwrite' | 'all' | 'custom' | 'none'
 
-/** Read replica. status */
+/** Read replica. status. */
 export type ReadReplicaStatus =
   | 'unknown'
   | 'provisioning'
@@ -136,15 +136,15 @@ export interface ACLRuleRequest {
   description: string
 }
 
-/** Add instance acl rules response */
+/** Add instance acl rules response. */
 export interface AddInstanceACLRulesResponse {
-  /** Rules enabled on the instance */
+  /** Rules enabled on the instance. */
   rules: ACLRule[]
 }
 
-/** Add instance settings response */
+/** Add instance settings response. */
 export interface AddInstanceSettingsResponse {
-  /** Settings available on the instance */
+  /** Settings available on the instance. */
   settings: InstanceSetting[]
 }
 
@@ -154,77 +154,77 @@ export interface BackupSchedule {
   disabled: boolean
 }
 
-/** Database */
+/** Database. */
 export interface Database {
-  /** Name of the database */
+  /** Name of the database. */
   name: string
-  /** Name of the owner of the database */
+  /** Name of the owner of the database. */
   owner: string
-  /** Whether or not the database is managed or not */
+  /** Whether or not the database is managed or not. */
   managed: boolean
-  /** Size of the database */
+  /** Size of the database. */
   size: number
 }
 
-/** Database backup */
+/** Database backup. */
 export interface DatabaseBackup {
-  /** UUID of the database backup */
+  /** UUID of the database backup. */
   id: string
-  /** UUID of the instance */
+  /** UUID of the instance. */
   instanceId: string
-  /** Name of the database of this backup */
+  /** Name of the database of this backup. */
   databaseName: string
-  /** Name of the backup */
+  /** Name of the backup. */
   name: string
-  /** Status of the backup */
+  /** Status of the backup. */
   status: DatabaseBackupStatus
-  /** Size of the database backup */
+  /** Size of the database backup. */
   size?: number
-  /** Expiration date (Format ISO 8601) */
+  /** Expiration date (Format ISO 8601). */
   expiresAt?: Date
-  /** Creation date (Format ISO 8601) */
+  /** Creation date (Format ISO 8601). */
   createdAt?: Date
-  /** Updated date (Format ISO 8601) */
+  /** Updated date (Format ISO 8601). */
   updatedAt?: Date
-  /** Name of the instance of the backup */
+  /** Name of the instance of the backup. */
   instanceName: string
-  /** URL you can download the backup from */
+  /** URL you can download the backup from. */
   downloadUrl?: string
-  /** Expiration date of the download link */
+  /** Expiration date of the download link. */
   downloadUrlExpiresAt?: Date
-  /** Region of this database backup */
+  /** Region of this database backup. */
   region: Region
-  /** Store logical backups in the same region as the source database instance */
+  /** Store logical backups in the same region as the source database instance. */
   sameRegion: boolean
 }
 
-/** Database engine */
+/** Database engine. */
 export interface DatabaseEngine {
-  /** Engine name */
+  /** Engine name. */
   name: string
-  /** Engine logo URL */
+  /** Engine logo URL. */
   logoUrl: string
-  /** Available versions */
+  /** Available versions. */
   versions: EngineVersion[]
-  /** Region of this database engine */
+  /** Region of this database engine. */
   region: Region
 }
 
-/** Delete instance acl rules response */
+/** Delete instance acl rules response. */
 export interface DeleteInstanceACLRulesResponse {
-  /** ACL rules present on the instance */
+  /** ACL rules present on the instance. */
   rules: ACLRule[]
 }
 
-/** Delete instance settings response */
+/** Delete instance settings response. */
 export interface DeleteInstanceSettingsResponse {
-  /** Settings names to delete from the instance */
+  /** Settings names to delete from the instance. */
   settings: InstanceSetting[]
 }
 
-/** Endpoint */
+/** Endpoint. */
 export interface Endpoint {
-  /** UUID of the endpoint */
+  /** UUID of the endpoint. */
   id: string
   /**
    * IPv4 address of the endpoint.
@@ -232,9 +232,9 @@ export interface Endpoint {
    * One-of ('address'): at most one of 'ip', 'hostname' could be set.
    */
   ip?: string
-  /** TCP port of the endpoint */
+  /** TCP port of the endpoint. */
   port: number
-  /** Name of the endpoint */
+  /** Name of the endpoint. */
   name?: string
   /**
    * Private network details. One at the most per RDB instance or read replica
@@ -273,17 +273,17 @@ export interface EndpointDirectAccessDetails {}
 
 export interface EndpointLoadBalancerDetails {}
 
-/** Endpoint. private network details */
+/** Endpoint. private network details. */
 export interface EndpointPrivateNetworkDetails {
-  /** UUID of the private network */
+  /** UUID of the private network. */
   privateNetworkId: string
-  /** CIDR notation of the endpoint IPv4 address */
+  /** CIDR notation of the endpoint IPv4 address. */
   serviceIp: string
-  /** Private network zone */
+  /** Private network zone. */
   zone: Zone
 }
 
-/** Endpoint spec */
+/** Endpoint spec. */
 export interface EndpointSpec {
   /**
    * Load balancer endpoint specifications. Public endpoint for RDB instances
@@ -306,9 +306,9 @@ export interface EndpointSpec {
 
 export interface EndpointSpecLoadBalancer {}
 
-/** Endpoint spec. private network */
+/** Endpoint spec. private network. */
 export interface EndpointSpecPrivateNetwork {
-  /** UUID of the private network to be connected to the database instance */
+  /** UUID of the private network to be connected to the database instance. */
   privateNetworkId: string
   /**
    * Endpoint IPv4 adress with a CIDR notation. Check documentation about IP and
@@ -317,119 +317,119 @@ export interface EndpointSpecPrivateNetwork {
   serviceIp: string
 }
 
-/** Engine setting */
+/** Engine setting. */
 export interface EngineSetting {
-  /** Setting name from database engine */
+  /** Setting name from database engine. */
   name: string
-  /** Value set when not specified */
+  /** Value set when not specified. */
   defaultValue: string
-  /** Setting can be applied without restarting */
+  /** Setting can be applied without restarting. */
   hotConfigurable: boolean
-  /** Setting description */
+  /** Setting description. */
   description: string
-  /** Setting type */
+  /** Setting type. */
   propertyType: EngineSettingPropertyType
-  /** Setting base unit */
+  /** Setting base unit. */
   unit?: string
-  /** Validation regex for string type settings */
+  /** Validation regex for string type settings. */
   stringConstraint?: string
-  /** Minimum value for int types */
+  /** Minimum value for int types. */
   intMin?: number
-  /** Maximum value for int types */
+  /** Maximum value for int types. */
   intMax?: number
-  /** Minimum value for float types */
+  /** Minimum value for float types. */
   floatMin?: number
-  /** Maximum value for float types */
+  /** Maximum value for float types. */
   floatMax?: number
 }
 
-/** Engine version */
+/** Engine version. */
 export interface EngineVersion {
-  /** Database engine version */
+  /** Database engine version. */
   version: string
-  /** Database engine name */
+  /** Database engine name. */
   name: string
-  /** End of life date */
+  /** End of life date. */
   endOfLife?: Date
-  /** Engine settings available to be set */
+  /** Engine settings available to be set. */
   availableSettings: EngineSetting[]
-  /** Disabled versions cannot be created */
+  /** Disabled versions cannot be created. */
   disabled: boolean
-  /** Beta status of engine version */
+  /** Beta status of engine version. */
   beta: boolean
-  /** Engine settings available to be set at database initialisation */
+  /** Engine settings available to be set at database initialisation. */
   availableInitSettings: EngineSetting[]
 }
 
-/** Instance */
+/** Instance. */
 export interface Instance {
-  /** Creation date (Format ISO 8601) */
+  /** Creation date (Format ISO 8601). */
   createdAt?: Date
-  /** Volumes of the instance */
+  /** Volumes of the instance. */
   volume?: Volume
-  /** Region the instance is in */
+  /** Region the instance is in. */
   region: Region
-  /** UUID of the instance */
+  /** UUID of the instance. */
   id: string
-  /** Name of the instance */
+  /** Name of the instance. */
   name: string
-  /** Organization ID the instance belongs to */
+  /** Organization ID the instance belongs to. */
   organizationId: string
-  /** Project ID the instance belongs to */
+  /** Project ID the instance belongs to. */
   projectId: string
-  /** Status of the instance */
+  /** Status of the instance. */
   status: InstanceStatus
-  /** Database engine of the database (PostgreSQL, MySQL, ...) */
+  /** Database engine of the database (PostgreSQL, MySQL, ...). */
   engine: string
-  /** Available database engine versions for upgrade */
+  /** Available database engine versions for upgrade. */
   upgradableVersion: UpgradableVersion[]
-  /** @deprecated Endpoint of the instance */
+  /** @deprecated Endpoint of the instance. */
   endpoint?: Endpoint
-  /** List of tags applied to the instance */
+  /** List of tags applied to the instance. */
   tags: string[]
-  /** Advanced settings of the instance */
+  /** Advanced settings of the instance. */
   settings: InstanceSetting[]
-  /** Backup schedule of the instance */
+  /** Backup schedule of the instance. */
   backupSchedule?: BackupSchedule
-  /** Whether or not High-Availability is enabled */
+  /** Whether or not High-Availability is enabled. */
   isHaCluster: boolean
-  /** Read replicas of the instance */
+  /** Read replicas of the instance. */
   readReplicas: ReadReplica[]
-  /** Node type of the instance */
+  /** Node type of the instance. */
   nodeType: string
-  /** List of engine settings to be set at database initialisation */
+  /** List of engine settings to be set at database initialisation. */
   initSettings: InstanceSetting[]
-  /** List of instance endpoints */
+  /** List of instance endpoints. */
   endpoints: Endpoint[]
-  /** Logs policy of the instance */
+  /** Logs policy of the instance. */
   logsPolicy?: LogsPolicy
-  /** Store logical backups in the same region as the database instance */
+  /** Store logical backups in the same region as the database instance. */
   backupSameRegion: boolean
-  /** List of instance maintenances */
+  /** List of instance maintenances. */
   maintenances: Maintenance[]
 }
 
-/** Instance log */
+/** Instance log. */
 export interface InstanceLog {
-  /** Presigned S3 URL to download your log file */
+  /** Presigned S3 URL to download your log file. */
   downloadUrl?: string
-  /** UUID of the instance log */
+  /** UUID of the instance log. */
   id: string
-  /** Status of the logs in a given instance */
+  /** Status of the logs in a given instance. */
   status: InstanceLogStatus
-  /** Name of the undelying node */
+  /** Name of the undelying node. */
   nodeName: string
-  /** Expiration date (Format ISO 8601) */
+  /** Expiration date (Format ISO 8601). */
   expiresAt?: Date
-  /** Creation date (Format ISO 8601) */
+  /** Creation date (Format ISO 8601). */
   createdAt?: Date
-  /** Region the instance is in */
+  /** Region the instance is in. */
   region: Region
 }
 
-/** Instance metrics */
+/** Instance metrics. */
 export interface InstanceMetrics {
-  /** Time series of metrics of a given instance */
+  /** Time series of metrics of a given instance. */
   timeseries: TimeSeries[]
 }
 
@@ -438,41 +438,41 @@ export interface InstanceSetting {
   value: string
 }
 
-/** List database backups response */
+/** List database backups response. */
 export interface ListDatabaseBackupsResponse {
-  /** List of database backups */
+  /** List of database backups. */
   databaseBackups: DatabaseBackup[]
-  /** Total count of database backups available */
+  /** Total count of database backups available. */
   totalCount: number
 }
 
-/** List database engines response */
+/** List database engines response. */
 export interface ListDatabaseEnginesResponse {
-  /** List of the available database engines */
+  /** List of the available database engines. */
   engines: DatabaseEngine[]
-  /** Total count of database engines available */
+  /** Total count of database engines available. */
   totalCount: number
 }
 
-/** List databases response */
+/** List databases response. */
 export interface ListDatabasesResponse {
-  /** List of the databases */
+  /** List of the databases. */
   databases: Database[]
-  /** Total count of databases present on a given instance */
+  /** Total count of databases present on a given instance. */
   totalCount: number
 }
 
-/** List instance acl rules response */
+/** List instance acl rules response. */
 export interface ListInstanceACLRulesResponse {
-  /** List of the ACL rules present on a given instance */
+  /** List of the ACL rules present on a given instance. */
   rules: ACLRule[]
-  /** Total count of ACL rules present on a given instance */
+  /** Total count of ACL rules present on a given instance. */
   totalCount: number
 }
 
-/** List instance logs details response */
+/** List instance logs details response. */
 export interface ListInstanceLogsDetailsResponse {
-  /** Remote instance logs details */
+  /** Remote instance logs details. */
   details: ListInstanceLogsDetailsResponseInstanceLogDetail[]
 }
 
@@ -481,155 +481,155 @@ export interface ListInstanceLogsDetailsResponseInstanceLogDetail {
   size: number
 }
 
-/** List instance logs response */
+/** List instance logs response. */
 export interface ListInstanceLogsResponse {
-  /** Available logs in a given instance */
+  /** Available logs in a given instance. */
   instanceLogs: InstanceLog[]
 }
 
-/** List instances response */
+/** List instances response. */
 export interface ListInstancesResponse {
-  /** List all instances available in a given organization/project */
+  /** List all instances available in a given organization/project. */
   instances: Instance[]
-  /** Total count of instances available in a given organization/project */
+  /** Total count of instances available in a given organization/project. */
   totalCount: number
 }
 
-/** List node types response */
+/** List node types response. */
 export interface ListNodeTypesResponse {
-  /** Types of the node */
+  /** Types of the node. */
   nodeTypes: NodeType[]
-  /** Total count of node-types available */
+  /** Total count of node-types available. */
   totalCount: number
 }
 
-/** List privileges response */
+/** List privileges response. */
 export interface ListPrivilegesResponse {
-  /** Privileges of a given user in a given database in a given instance */
+  /** Privileges of a given user in a given database in a given instance. */
   privileges: Privilege[]
-  /** Total count of privileges present on a given database */
+  /** Total count of privileges present on a given database. */
   totalCount: number
 }
 
-/** List snapshots response */
+/** List snapshots response. */
 export interface ListSnapshotsResponse {
-  /** List of snapshots */
+  /** List of snapshots. */
   snapshots: Snapshot[]
-  /** Total count of snapshots available */
+  /** Total count of snapshots available. */
   totalCount: number
 }
 
-/** List users response */
+/** List users response. */
 export interface ListUsersResponse {
-  /** List of users in a given instance */
+  /** List of users in a given instance. */
   users: User[]
-  /** Total count of users present on a given instance */
+  /** Total count of users present on a given instance. */
   totalCount: number
 }
 
-/** Logs policy */
+/** Logs policy. */
 export interface LogsPolicy {
-  /** Max age (in day) of remote logs to keep on the database instance */
+  /** Max age (in day) of remote logs to keep on the database instance. */
   maxAgeRetention?: number
-  /** Max disk size of remote logs to keep on the database instance */
+  /** Max disk size of remote logs to keep on the database instance. */
   totalDiskRetention?: number
 }
 
-/** Maintenance */
+/** Maintenance. */
 export interface Maintenance {
-  /** Start date of the maintenance window */
+  /** Start date of the maintenance window. */
   startsAt?: Date
-  /** End date of the maintenance window */
+  /** End date of the maintenance window. */
   stopsAt?: Date
-  /** Closed maintenance date */
+  /** Closed maintenance date. */
   closedAt?: Date
-  /** Maintenance information message */
+  /** Maintenance information message. */
   reason: string
-  /** Status of the maintenance */
+  /** Status of the maintenance. */
   status: MaintenanceStatus
 }
 
-/** Node type */
+/** Node type. */
 export interface NodeType {
-  /** Node Type name identifier */
+  /** Node Type name identifier. */
   name: string
-  /** Current stock status for the Node Type */
+  /** Current stock status for the Node Type. */
   stockStatus: NodeTypeStock
-  /** Current specs of the offer */
+  /** Current specs of the offer. */
   description: string
-  /** Number of virtual CPUs */
+  /** Number of virtual CPUs. */
   vcpus: number
-  /** Quantity of RAM */
+  /** Quantity of RAM. */
   memory: number
-  /** @deprecated {undefined} Deprecated Node Type volume constraints */
+  /** @deprecated {undefined} Deprecated Node Type volume constraints. */
   volumeConstraint?: NodeTypeVolumeConstraintSizes
-  /** @deprecated The Node Type is compliant with Block Storage */
+  /** @deprecated The Node Type is compliant with Block Storage. */
   isBssdCompatible?: boolean
-  /** The Node Type is currently disabled */
+  /** The Node Type is currently disabled. */
   disabled: boolean
-  /** The Node Type is currently in beta */
+  /** The Node Type is currently in beta. */
   beta: boolean
-  /** Available storage options for the Node Type */
+  /** Available storage options for the Node Type. */
   availableVolumeTypes: NodeTypeVolumeType[]
-  /** The Node Type can be used only with high availability option */
+  /** The Node Type can be used only with high availability option. */
   isHaRequired: boolean
-  /** Generation associated the NodeType offer */
+  /** Generation associated the NodeType offer. */
   generation: NodeTypeGeneration
-  /** Region the Node Type is in */
+  /** Region the Node Type is in. */
   region: Region
 }
 
-/** Node type. volume constraint sizes */
+/** Node type. volume constraint sizes. */
 export interface NodeTypeVolumeConstraintSizes {
-  /** [deprecated] Mimimum size required for the Volume */
+  /** [deprecated] Mimimum size required for the Volume. */
   minSize: number
-  /** [deprecated] Maximum size required for the Volume */
+  /** [deprecated] Maximum size required for the Volume. */
   maxSize: number
 }
 
-/** Node type. volume type */
+/** Node type. volume type. */
 export interface NodeTypeVolumeType {
-  /** Volume Type */
+  /** Volume Type. */
   type: VolumeType
-  /** The description of the Volume */
+  /** The description of the Volume. */
   description: string
-  /** Mimimum size required for the Volume */
+  /** Mimimum size required for the Volume. */
   minSize: number
-  /** Maximum size required for the Volume */
+  /** Maximum size required for the Volume. */
   maxSize: number
-  /** Minimum increment level for a Block Storage volume size */
+  /** Minimum increment level for a Block Storage volume size. */
   chunkSize: number
 }
 
-/** Prepare instance logs response */
+/** Prepare instance logs response. */
 export interface PrepareInstanceLogsResponse {
-  /** Instance logs for a given instance between a start and an end date */
+  /** Instance logs for a given instance between a start and an end date. */
   instanceLogs: InstanceLog[]
 }
 
-/** Privilege */
+/** Privilege. */
 export interface Privilege {
-  /** Permission (Read, Read/Write, All, Custom) */
+  /** Permission (Read, Read/Write, All, Custom). */
   permission: Permission
-  /** Name of the database */
+  /** Name of the database. */
   databaseName: string
-  /** Name of the user */
+  /** Name of the user. */
   userName: string
 }
 
-/** Read replica */
+/** Read replica. */
 export interface ReadReplica {
-  /** UUID of the read replica */
+  /** UUID of the read replica. */
   id: string
-  /** Display read replica connection information */
+  /** Display read replica connection information. */
   endpoints: Endpoint[]
-  /** Read replica status */
+  /** Read replica status. */
   status: ReadReplicaStatus
-  /** Region the read replica is in */
+  /** Region the read replica is in. */
   region: Region
 }
 
-/** Read replica endpoint spec */
+/** Read replica endpoint spec. */
 export interface ReadReplicaEndpointSpec {
   /**
    * Direct access endpoint specifications. Public endpoint reserved for read
@@ -651,9 +651,9 @@ export interface ReadReplicaEndpointSpec {
 
 export interface ReadReplicaEndpointSpecDirectAccess {}
 
-/** Read replica endpoint spec. private network */
+/** Read replica endpoint spec. private network. */
 export interface ReadReplicaEndpointSpecPrivateNetwork {
-  /** UUID of the private network to be connected to the read replica */
+  /** UUID of the private network to be connected to the read replica. */
   privateNetworkId: string
   /**
    * Endpoint IPv4 adress with a CIDR notation. Check documentation about IP and
@@ -662,41 +662,41 @@ export interface ReadReplicaEndpointSpecPrivateNetwork {
   serviceIp: string
 }
 
-/** Set instance acl rules response */
+/** Set instance acl rules response. */
 export interface SetInstanceACLRulesResponse {
-  /** ACLs rules configured for an instance */
+  /** ACLs rules configured for an instance. */
   rules: ACLRule[]
 }
 
-/** Set instance settings response */
+/** Set instance settings response. */
 export interface SetInstanceSettingsResponse {
-  /** Settings configured for a given instance */
+  /** Settings configured for a given instance. */
   settings: InstanceSetting[]
 }
 
-/** Snapshot */
+/** Snapshot. */
 export interface Snapshot {
-  /** UUID of the snapshot */
+  /** UUID of the snapshot. */
   id: string
-  /** UUID of the instance */
+  /** UUID of the instance. */
   instanceId: string
-  /** Name of the snapshot */
+  /** Name of the snapshot. */
   name: string
-  /** Status of the snapshot */
+  /** Status of the snapshot. */
   status: SnapshotStatus
-  /** Size of the snapshot */
+  /** Size of the snapshot. */
   size?: number
-  /** Expiration date (Format ISO 8601) */
+  /** Expiration date (Format ISO 8601). */
   expiresAt?: Date
-  /** Creation date (Format ISO 8601) */
+  /** Creation date (Format ISO 8601). */
   createdAt?: Date
-  /** Updated date (Format ISO 8601) */
+  /** Updated date (Format ISO 8601). */
   updatedAt?: Date
-  /** Name of the instance of the snapshot */
+  /** Name of the instance of the snapshot. */
   instanceName: string
-  /** Source node type */
+  /** Source node type. */
   nodeType: string
-  /** Region of this snapshot */
+  /** Region of this snapshot. */
   region: Region
 }
 
@@ -707,18 +707,18 @@ export interface UpgradableVersion {
   minorVersion: string
 }
 
-/** User */
+/** User. */
 export interface User {
   /**
    * Name of the user (Length must be between 1 and 63 characters, The max
    * Length is 32 for MySQL engines, First character must be an alphabet
    * character (a-zA-Z), Your Username cannot start with '_rdb', Only
-   * a-zA-Z0-9_$- characters are accepted)
+   * a-zA-Z0-9_$- characters are accepted).
    */
   name: string
   /**
    * Whether or not a user got administrative privileges on the database
-   * instance
+   * instance.
    */
   isAdmin: boolean
 }
@@ -729,106 +729,136 @@ export interface Volume {
 }
 
 export type ListDatabaseEnginesRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** Name of the Database Engine */
+  /** Name of the Database Engine. */
   name?: string
-  /** Version of the Database Engine */
+  /** Version of the Database Engine. */
   version?: string
   page?: number
   pageSize?: number
 }
 
 export type ListNodeTypesRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** Whether or not to include disabled types */
+  /** Whether or not to include disabled types. */
   includeDisabledTypes: boolean
   page?: number
   pageSize?: number
 }
 
 export type ListDatabaseBackupsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** Name of the database backups */
+  /** Name of the database backups. */
   name?: string
-  /** Criteria to use when ordering database backups listing */
+  /** Criteria to use when ordering database backups listing. */
   orderBy?: ListDatabaseBackupsRequestOrderBy
-  /** UUID of the instance */
+  /** UUID of the instance. */
   instanceId?: string
-  /** Organization ID the database backups belongs to */
+  /** Organization ID the database backups belongs to. */
   organizationId?: string
-  /** Project ID the database backups belongs to */
+  /** Project ID the database backups belongs to. */
   projectId?: string
   page?: number
   pageSize?: number
 }
 
 export type CreateDatabaseBackupRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance */
+  /** UUID of the instance. */
   instanceId: string
-  /** Name of the database you want to make a backup of */
+  /** Name of the database you want to make a backup of. */
   databaseName: string
-  /** Name of the backup */
+  /** Name of the backup. */
   name?: string
-  /** Expiration date (Format ISO 8601) */
+  /** Expiration date (Format ISO 8601). */
   expiresAt?: Date
 }
 
 export type GetDatabaseBackupRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the database backup */
+  /** UUID of the database backup. */
   databaseBackupId: string
 }
 
 export type UpdateDatabaseBackupRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the database backup to update */
+  /** UUID of the database backup to update. */
   databaseBackupId: string
-  /** Name of the Database Backup */
+  /** Name of the Database Backup. */
   name?: string
-  /** Expiration date (Format ISO 8601) */
+  /** Expiration date (Format ISO 8601). */
   expiresAt?: Date
 }
 
 export type DeleteDatabaseBackupRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the database backup to delete */
+  /** UUID of the database backup to delete. */
   databaseBackupId: string
 }
 
 export type RestoreDatabaseBackupRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** Backup of a logical database */
+  /** Backup of a logical database. */
   databaseBackupId: string
   /**
    * Defines the destination database in order to restore into a specified
    * database, the default destination is set to the origin database of the
-   * backup
+   * backup.
    */
   databaseName?: string
-  /** Defines the rdb instance where the backup has to be restored */
+  /** Defines the rdb instance where the backup has to be restored. */
   instanceId: string
 }
 
 export type ExportDatabaseBackupRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the database backup you want to export */
+  /** UUID of the database backup you want to export. */
   databaseBackupId: string
 }
 
 export type UpgradeInstanceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance you want to upgrade */
+  /** UUID of the instance you want to upgrade. */
   instanceId: string
   /**
    * Node type of the instance you want to upgrade to.
@@ -869,31 +899,40 @@ export type UpgradeInstanceRequest = {
 }
 
 export type ListInstancesRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** List instance that have a given tags */
+  /** List instance that have a given tags. */
   tags?: string[]
-  /** List instance that match a given name pattern */
+  /** List instance that match a given name pattern. */
   name?: string
-  /** Criteria to use when ordering instance listing */
+  /** Criteria to use when ordering instance listing. */
   orderBy?: ListInstancesRequestOrderBy
-  /** Please use `project_id` instead */
+  /** Please use `project_id` instead. */
   organizationId?: string
-  /** Project ID to list the instance of */
+  /** Project ID to list the instance of. */
   projectId?: string
   page?: number
   pageSize?: number
 }
 
 export type GetInstanceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance */
+  /** UUID of the instance. */
   instanceId: string
 }
 
 export type CreateInstanceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /**
    * @deprecated Please use `project_id` instead.
@@ -909,466 +948,595 @@ export type CreateInstanceRequest = {
    * could be set.
    */
   projectId?: string
-  /** Name of the instance */
+  /** Name of the instance. */
   name?: string
-  /** Database engine of the database (PostgreSQL, MySQL, ...) */
+  /** Database engine of the database (PostgreSQL, MySQL, ...). */
   engine: string
-  /** Name of the user created when the instance is created */
+  /** Name of the user created when the instance is created. */
   userName: string
-  /** Password of the user */
+  /** Password of the user. */
   password: string
-  /** Type of node to use for the instance */
+  /** Type of node to use for the instance. */
   nodeType: string
-  /** Whether or not High-Availability is enabled */
+  /** Whether or not High-Availability is enabled. */
   isHaCluster: boolean
-  /** Whether or not backups are disabled */
+  /** Whether or not backups are disabled. */
   disableBackup: boolean
-  /** Tags to apply to the instance */
+  /** Tags to apply to the instance. */
   tags?: string[]
-  /** List of engine settings to be set at database initialisation */
+  /** List of engine settings to be set at database initialisation. */
   initSettings?: InstanceSetting[]
-  /** Type of volume where data are stored (lssd, bssd, ...) */
+  /** Type of volume where data are stored (lssd, bssd, ...). */
   volumeType?: VolumeType
-  /** Volume size when volume_type is not lssd */
+  /** Volume size when volume_type is not lssd. */
   volumeSize: number
   /**
    * One or multiple EndpointSpec used to expose your database instance. A
-   * load_balancer public endpoint is systematically created
+   * load_balancer public endpoint is systematically created.
    */
   initEndpoints?: EndpointSpec[]
-  /** Store logical backups in the same region as the database instance */
+  /** Store logical backups in the same region as the database instance. */
   backupSameRegion: boolean
 }
 
 export type UpdateInstanceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance to update */
+  /** UUID of the instance to update. */
   instanceId: string
-  /** In hours */
+  /** In hours. */
   backupScheduleFrequency?: number
-  /** In days */
+  /** In days. */
   backupScheduleRetention?: number
-  /** Whether or not the backup schedule is disabled */
+  /** Whether or not the backup schedule is disabled. */
   isBackupScheduleDisabled?: boolean
-  /** Name of the instance */
+  /** Name of the instance. */
   name?: string
-  /** Tags of a given instance */
+  /** Tags of a given instance. */
   tags?: string[]
-  /** Logs policy of the instance */
+  /** Logs policy of the instance. */
   logsPolicy?: LogsPolicy
-  /** Store logical backups in the same region as the database instance */
+  /** Store logical backups in the same region as the database instance. */
   backupSameRegion?: boolean
 }
 
 export type DeleteInstanceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance to delete */
+  /** UUID of the instance to delete. */
   instanceId: string
 }
 
 export type CloneInstanceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance you want to clone */
+  /** UUID of the instance you want to clone. */
   instanceId: string
-  /** Name of the clone instance */
+  /** Name of the clone instance. */
   name: string
-  /** Node type of the clone */
+  /** Node type of the clone. */
   nodeType?: string
 }
 
 export type RestartInstanceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance you want to restart */
+  /** UUID of the instance you want to restart. */
   instanceId: string
 }
 
 export type GetInstanceCertificateRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance */
+  /** UUID of the instance. */
   instanceId: string
 }
 
 export type RenewInstanceCertificateRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance you want logs of */
+  /** UUID of the instance you want logs of. */
   instanceId: string
 }
 
 export type GetInstanceMetricsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance */
+  /** UUID of the instance. */
   instanceId: string
-  /** Start date to gather metrics from */
+  /** Start date to gather metrics from. */
   startDate?: Date
-  /** End date to gather metrics from */
+  /** End date to gather metrics from. */
   endDate?: Date
-  /** Name of the metric to gather */
+  /** Name of the metric to gather. */
   metricName?: string
 }
 
 export type CreateReadReplicaRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance you want a read replica of */
+  /** UUID of the instance you want a read replica of. */
   instanceId: string
-  /** Specification of the endpoint you want to create */
+  /** Specification of the endpoint you want to create. */
   endpointSpec?: ReadReplicaEndpointSpec[]
 }
 
 export type GetReadReplicaRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the read replica */
+  /** UUID of the read replica. */
   readReplicaId: string
 }
 
 export type DeleteReadReplicaRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the read replica */
+  /** UUID of the read replica. */
   readReplicaId: string
 }
 
 export type ResetReadReplicaRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the read replica */
+  /** UUID of the read replica. */
   readReplicaId: string
 }
 
 export type CreateReadReplicaEndpointRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the read replica */
+  /** UUID of the read replica. */
   readReplicaId: string
-  /** Specification of the endpoint you want to create */
+  /** Specification of the endpoint you want to create. */
   endpointSpec: ReadReplicaEndpointSpec[]
 }
 
 export type PrepareInstanceLogsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance you want logs of */
+  /** UUID of the instance you want logs of. */
   instanceId: string
   /**
    * Start datetime of your log. Format:
-   * `{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z`
+   * `{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z`.
    */
   startDate?: Date
   /**
    * End datetime of your log. Format:
-   * `{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z`
+   * `{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z`.
    */
   endDate?: Date
 }
 
 export type ListInstanceLogsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance you want logs of */
+  /** UUID of the instance you want logs of. */
   instanceId: string
-  /** Criteria to use when ordering instance logs listing */
+  /** Criteria to use when ordering instance logs listing. */
   orderBy?: ListInstanceLogsRequestOrderBy
 }
 
 export type GetInstanceLogRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance_log you want */
+  /** UUID of the instance_log you want. */
   instanceLogId: string
 }
 
 export type PurgeInstanceLogsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance you want logs of */
+  /** UUID of the instance you want logs of. */
   instanceId: string
-  /** Specific log name to purge */
+  /** Specific log name to purge. */
   logName?: string
 }
 
 export type ListInstanceLogsDetailsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance you want logs of */
+  /** UUID of the instance you want logs of. */
   instanceId: string
 }
 
 export type AddInstanceSettingsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance you want to add settings to */
+  /** UUID of the instance you want to add settings to. */
   instanceId: string
-  /** Settings to add on the instance */
+  /** Settings to add on the instance. */
   settings: InstanceSetting[]
 }
 
 export type DeleteInstanceSettingsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance to delete settings from */
+  /** UUID of the instance to delete settings from. */
   instanceId: string
-  /** Settings names to delete */
+  /** Settings names to delete. */
   settingNames: string[]
 }
 
 export type SetInstanceSettingsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance where the settings has to be set */
+  /** UUID of the instance where the settings has to be set. */
   instanceId: string
-  /** Settings to define for the instance */
+  /** Settings to define for the instance. */
   settings: InstanceSetting[]
 }
 
 export type ListInstanceACLRulesRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance */
+  /** UUID of the instance. */
   instanceId: string
   page?: number
   pageSize?: number
 }
 
 export type AddInstanceACLRulesRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance you want to add acl rules to */
+  /** UUID of the instance you want to add acl rules to. */
   instanceId: string
-  /** ACLs rules to add to the instance */
+  /** ACLs rules to add to the instance. */
   rules: ACLRuleRequest[]
 }
 
 export type SetInstanceACLRulesRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance where the ACL rules has to be set */
+  /** UUID of the instance where the ACL rules has to be set. */
   instanceId: string
-  /** ACL rules to define for the instance */
+  /** ACL rules to define for the instance. */
   rules: ACLRuleRequest[]
 }
 
 export type DeleteInstanceACLRulesRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance you want to delete an ACL rules from */
+  /** UUID of the instance you want to delete an ACL rules from. */
   instanceId: string
-  /** ACL rules IP present on the instance */
+  /** ACL rules IP present on the instance. */
   aclRuleIps: string[]
 }
 
 export type ListUsersRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance */
+  /** UUID of the instance. */
   instanceId: string
-  /** Name of the user */
+  /** Name of the user. */
   name?: string
-  /** Criteria to use when ordering users listing */
+  /** Criteria to use when ordering users listing. */
   orderBy?: ListUsersRequestOrderBy
   page?: number
   pageSize?: number
 }
 
 export type CreateUserRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance you want to create a user in */
+  /** UUID of the instance you want to create a user in. */
   instanceId: string
-  /** Name of the user you want to create */
+  /** Name of the user you want to create. */
   name: string
-  /** Password of the user you want to create */
+  /** Password of the user you want to create. */
   password: string
-  /** Whether the user you want to create will have administrative privileges */
+  /** Whether the user you want to create will have administrative privileges. */
   isAdmin: boolean
 }
 
 export type UpdateUserRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance the user belongs to */
+  /** UUID of the instance the user belongs to. */
   instanceId: string
-  /** Name of the database user */
+  /** Name of the database user. */
   name: string
-  /** Password of the database user */
+  /** Password of the database user. */
   password?: string
-  /** Whether or not this user got administrative privileges */
+  /** Whether or not this user got administrative privileges. */
   isAdmin?: boolean
 }
 
 export type DeleteUserRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance to delete a user from */
+  /** UUID of the instance to delete a user from. */
   instanceId: string
-  /** Name of the user */
+  /** Name of the user. */
   name: string
 }
 
 export type ListDatabasesRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance to list database of */
+  /** UUID of the instance to list database of. */
   instanceId: string
-  /** Name of the database */
+  /** Name of the database. */
   name?: string
-  /** Whether or not the database is managed */
+  /** Whether or not the database is managed. */
   managed?: boolean
-  /** User that owns this database */
+  /** User that owns this database. */
   owner?: string
-  /** Criteria to use when ordering database listing */
+  /** Criteria to use when ordering database listing. */
   orderBy?: ListDatabasesRequestOrderBy
   page?: number
   pageSize?: number
 }
 
 export type CreateDatabaseRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance where to create the database */
+  /** UUID of the instance where to create the database. */
   instanceId: string
-  /** Name of the database */
+  /** Name of the database. */
   name: string
 }
 
 export type DeleteDatabaseRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance where to delete the database */
+  /** UUID of the instance where to delete the database. */
   instanceId: string
-  /** Name of the database to delete */
+  /** Name of the database to delete. */
   name: string
 }
 
 export type ListPrivilegesRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance */
+  /** UUID of the instance. */
   instanceId: string
-  /** Criteria to use when ordering privileges listing */
+  /** Criteria to use when ordering privileges listing. */
   orderBy?: ListPrivilegesRequestOrderBy
   page?: number
   pageSize?: number
-  /** Name of the database */
+  /** Name of the database. */
   databaseName?: string
-  /** Name of the user */
+  /** Name of the user. */
   userName?: string
 }
 
 export type SetPrivilegeRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance */
+  /** UUID of the instance. */
   instanceId: string
-  /** Name of the database */
+  /** Name of the database. */
   databaseName: string
-  /** Name of the user */
+  /** Name of the user. */
   userName: string
-  /** Permission to set (Read, Read/Write, All, Custom) */
+  /** Permission to set (Read, Read/Write, All, Custom). */
   permission?: Permission
 }
 
 export type ListSnapshotsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** Name of the snapshot */
+  /** Name of the snapshot. */
   name?: string
-  /** Criteria to use when ordering snapshot listing */
+  /** Criteria to use when ordering snapshot listing. */
   orderBy?: ListSnapshotsRequestOrderBy
-  /** UUID of the instance */
+  /** UUID of the instance. */
   instanceId?: string
-  /** Organization ID the snapshots belongs to */
+  /** Organization ID the snapshots belongs to. */
   organizationId?: string
-  /** Project ID the snapshots belongs to */
+  /** Project ID the snapshots belongs to. */
   projectId?: string
   page?: number
   pageSize?: number
 }
 
 export type GetSnapshotRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the snapshot */
+  /** UUID of the snapshot. */
   snapshotId: string
 }
 
 export type CreateSnapshotRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance */
+  /** UUID of the instance. */
   instanceId: string
-  /** Name of the snapshot */
+  /** Name of the snapshot. */
   name?: string
-  /** Expiration date (Format ISO 8601) */
+  /** Expiration date (Format ISO 8601). */
   expiresAt?: Date
 }
 
 export type UpdateSnapshotRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the snapshot to update */
+  /** UUID of the snapshot to update. */
   snapshotId: string
-  /** Name of the snapshot */
+  /** Name of the snapshot. */
   name?: string
-  /** Expiration date (Format ISO 8601) */
+  /** Expiration date (Format ISO 8601). */
   expiresAt?: Date
 }
 
 export type DeleteSnapshotRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the snapshot to delete */
+  /** UUID of the snapshot to delete. */
   snapshotId: string
 }
 
 export type CreateInstanceFromSnapshotRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** Block snapshot of the instance */
+  /** Block snapshot of the instance. */
   snapshotId: string
-  /** Name of the instance created with the snapshot */
+  /** Name of the instance created with the snapshot. */
   instanceName: string
-  /** Whether or not High-Availability is enabled on the new instance */
+  /** Whether or not High-Availability is enabled on the new instance. */
   isHaCluster?: boolean
-  /** The node type used to restore the snapshot */
+  /** The node type used to restore the snapshot. */
   nodeType?: string
 }
 
 export type CreateEndpointRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the instance you want to add endpoint to */
+  /** UUID of the instance you want to add endpoint to. */
   instanceId: string
-  /** Specification of the endpoint you want to create */
+  /** Specification of the endpoint you want to create. */
   endpointSpec?: EndpointSpec
 }
 
 export type DeleteEndpointRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** This endpoint can also be used to delete a read replica endpoint. */
   endpointId: string
 }
 
 export type GetEndpointRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the endpoint you want to get */
+  /** UUID of the endpoint you want to get. */
   endpointId: string
 }
 
 export type MigrateEndpointRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** UUID of the endpoint you want to migrate */
+  /** UUID of the endpoint you want to migrate. */
   endpointId: string
-  /** UUID of the instance you want to attach the endpoint to */
+  /** UUID of the instance you want to attach the endpoint to. */
   instanceId: string
 }

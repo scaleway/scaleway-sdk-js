@@ -151,7 +151,7 @@ export interface CreateTriggerRequestSqsClientConfig {
   secretKey: string
 }
 
-/** Cron */
+/** Cron. */
 export interface Cron {
   id: string
   functionId: string
@@ -161,7 +161,7 @@ export interface Cron {
   name: string
 }
 
-/** Domain */
+/** Domain. */
 export interface Domain {
   id: string
   hostname: string
@@ -176,7 +176,7 @@ export interface DownloadURL {
   headers: Record<string, string[]>
 }
 
-/** Function */
+/** Function. */
 export interface Function {
   id: string
   name: string
@@ -207,37 +207,37 @@ export interface Function {
   runtimeMessage: string
 }
 
-/** List crons response */
+/** List crons response. */
 export interface ListCronsResponse {
   crons: Cron[]
   totalCount: number
 }
 
-/** List domains response */
+/** List domains response. */
 export interface ListDomainsResponse {
   domains: Domain[]
   totalCount: number
 }
 
-/** List function runtimes response */
+/** List function runtimes response. */
 export interface ListFunctionRuntimesResponse {
   runtimes: Runtime[]
   totalCount: number
 }
 
-/** List functions response */
+/** List functions response. */
 export interface ListFunctionsResponse {
   functions: Function[]
   totalCount: number
 }
 
-/** List logs response */
+/** List logs response. */
 export interface ListLogsResponse {
   logs: Log[]
   totalCount: number
 }
 
-/** List namespaces response */
+/** List namespaces response. */
 export interface ListNamespacesResponse {
   namespaces: Namespace[]
   totalCount: number
@@ -253,20 +253,20 @@ export interface ListTriggersResponse {
   totalCount: number
 }
 
-/** Log */
+/** Log. */
 export interface Log {
   message: string
   timestamp?: Date
   id: string
-  /** Contains the severity of the log (info, debug, error, ...) */
+  /** Contains the severity of the log (info, debug, error, ...). */
   level: string
-  /** Source of the log (core runtime or user code) */
+  /** Source of the log (core runtime or user code). */
   source: string
-  /** Can be stdout or stderr */
+  /** Can be stdout or stderr. */
   stream: LogStream
 }
 
-/** Namespace */
+/** Namespace. */
 export interface Namespace {
   id: string
   name: string
@@ -304,7 +304,7 @@ export interface SecretHashedValue {
   hashedValue: string
 }
 
-/** Token */
+/** Token. */
 export interface Token {
   id: string
   token: string
@@ -386,14 +386,17 @@ export interface UpdateTriggerRequestSqsClientConfig {
   secretKey: string
 }
 
-/** Upload url */
+/** Upload url. */
 export interface UploadURL {
   url: string
   headers: Record<string, string[]>
 }
 
 export type ListNamespacesRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   page?: number
   pageSize?: number
@@ -404,13 +407,19 @@ export type ListNamespacesRequest = {
 }
 
 export type GetNamespaceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   namespaceId: string
 }
 
 export type CreateNamespaceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   name?: string
   environmentVariables?: Record<string, string>
@@ -420,7 +429,10 @@ export type CreateNamespaceRequest = {
 }
 
 export type UpdateNamespaceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   namespaceId: string
   environmentVariables?: Record<string, string>
@@ -429,13 +441,19 @@ export type UpdateNamespaceRequest = {
 }
 
 export type DeleteNamespaceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   namespaceId: string
 }
 
 export type ListFunctionsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   page?: number
   pageSize?: number
@@ -447,13 +465,19 @@ export type ListFunctionsRequest = {
 }
 
 export type GetFunctionRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   functionId: string
 }
 
 export type CreateFunctionRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   name?: string
   namespaceId: string
@@ -478,7 +502,10 @@ export type CreateFunctionRequest = {
 }
 
 export type UpdateFunctionRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   functionId: string
   environmentVariables?: Record<string, string>
@@ -503,37 +530,55 @@ export type UpdateFunctionRequest = {
 }
 
 export type DeleteFunctionRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   functionId: string
 }
 
 export type DeployFunctionRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   functionId: string
 }
 
 export type ListFunctionRuntimesRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
 }
 
 export type GetFunctionUploadURLRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   functionId: string
   contentLength: number
 }
 
 export type GetFunctionDownloadURLRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   functionId: string
 }
 
 export type ListCronsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   page?: number
   pageSize?: number
@@ -542,13 +587,19 @@ export type ListCronsRequest = {
 }
 
 export type GetCronRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   cronId: string
 }
 
 export type CreateCronRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   functionId: string
   schedule: string
@@ -557,7 +608,10 @@ export type CreateCronRequest = {
 }
 
 export type UpdateCronRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   cronId: string
   functionId?: string
@@ -567,13 +621,19 @@ export type UpdateCronRequest = {
 }
 
 export type DeleteCronRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   cronId: string
 }
 
 export type ListLogsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   functionId: string
   page?: number
@@ -582,7 +642,10 @@ export type ListLogsRequest = {
 }
 
 export type ListDomainsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   page?: number
   pageSize?: number
@@ -591,26 +654,38 @@ export type ListDomainsRequest = {
 }
 
 export type GetDomainRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   domainId: string
 }
 
 export type CreateDomainRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   hostname: string
   functionId: string
 }
 
 export type DeleteDomainRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   domainId: string
 }
 
 export type IssueJWTRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set. */
   functionId?: string
@@ -620,7 +695,10 @@ export type IssueJWTRequest = {
 }
 
 export type CreateTokenRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set. */
   functionId?: string
@@ -631,13 +709,19 @@ export type CreateTokenRequest = {
 }
 
 export type GetTokenRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   tokenId: string
 }
 
 export type ListTokensRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   page?: number
   pageSize?: number
@@ -647,13 +731,19 @@ export type ListTokensRequest = {
 }
 
 export type DeleteTokenRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   tokenId: string
 }
 
 export type CreateTriggerRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   name: string
   description: string
@@ -676,13 +766,19 @@ export type CreateTriggerRequest = {
 }
 
 export type GetTriggerRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   triggerId: string
 }
 
 export type ListTriggersRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   page?: number
   pageSize?: number
@@ -705,7 +801,10 @@ export type ListTriggersRequest = {
 }
 
 export type UpdateTriggerRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   triggerId: string
   name?: string
@@ -728,7 +827,10 @@ export type UpdateTriggerRequest = {
 }
 
 export type DeleteTriggerRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   triggerId: string
 }

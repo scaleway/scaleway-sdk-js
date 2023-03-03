@@ -3,8 +3,11 @@
 import type { Region } from '../../../bridge'
 
 export type GetClusterKubeConfigRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** The ID of the cluster to download the kubeconfig from */
+  /** The ID of the cluster to download the kubeconfig from. */
   clusterId: string
 }

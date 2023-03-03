@@ -22,15 +22,15 @@ export type ListNamespacesRequestOrderBy =
 
 export type NamespaceProtocol = 'unknown' | 'nats' | 'sqs_sns'
 
-/** Credential */
+/** Credential. */
 export interface Credential {
-  /** Credential ID */
+  /** Credential ID. */
   id: string
-  /** Credential name */
+  /** Credential name. */
   name: string
-  /** Namespace containing the Credential */
+  /** Namespace containing the Credential. */
   namespaceId: string
-  /** Protocol associated to the Credential */
+  /** Protocol associated to the Credential. */
   protocol: NamespaceProtocol
   /**
    * Credentials file used to connect to the NATS service.
@@ -48,31 +48,31 @@ export interface Credential {
   sqsSnsCredentials?: CredentialSQSSNSCreds
 }
 
-/** Credential.nats creds file */
+/** Credential.nats creds file. */
 export interface CredentialNATSCredsFile {
-  /** Raw content of the NATS credentials file */
+  /** Raw content of the NATS credentials file. */
   content: string
 }
 
-/** Credential.sqssns creds */
+/** Credential.sqssns creds. */
 export interface CredentialSQSSNSCreds {
-  /** ID of the key */
+  /** ID of the key. */
   accessKey: string
-  /** Secret value of the key */
+  /** Secret value of the key. */
   secretKey?: string
-  /** List of permissions associated to this Credential */
+  /** List of permissions associated to this Credential. */
   permissions?: Permissions
 }
 
-/** Credential summary */
+/** Credential summary. */
 export interface CredentialSummary {
-  /** Credential ID */
+  /** Credential ID. */
   id: string
-  /** Credential name */
+  /** Credential name. */
   name: string
-  /** Namespace containing the Credential */
+  /** Namespace containing the Credential. */
   namespaceId: string
-  /** Protocol associated to the Credential */
+  /** Protocol associated to the Credential. */
   protocol: NamespaceProtocol
   /**
    * Credential used to connect to the SQS/SNS service.
@@ -82,115 +82,133 @@ export interface CredentialSummary {
   sqsSnsCredentials?: CredentialSummarySQSSNSCreds
 }
 
-/** Credential summary.sqssns creds */
+/** Credential summary.sqssns creds. */
 export interface CredentialSummarySQSSNSCreds {
-  /** ID of the key */
+  /** ID of the key. */
   accessKey: string
-  /** List of permissions associated to this Credential */
+  /** List of permissions associated to this Credential. */
   permissions?: Permissions
 }
 
-/** List credentials response */
+/** List credentials response. */
 export interface ListCredentialsResponse {
-  /** Total number of existing Credentials */
+  /** Total number of existing Credentials. */
   totalCount: number
-  /** A page of Credentials */
+  /** A page of Credentials. */
   credentials: CredentialSummary[]
 }
 
-/** List namespaces response */
+/** List namespaces response. */
 export interface ListNamespacesResponse {
-  /** Total number of existing Namespaces */
+  /** Total number of existing Namespaces. */
   totalCount: number
-  /** A page of Namespaces */
+  /** A page of Namespaces. */
   namespaces: Namespace[]
 }
 
-/** Namespace */
+/** Namespace. */
 export interface Namespace {
-  /** Namespace ID */
+  /** Namespace ID. */
   id: string
-  /** Namespace name */
+  /** Namespace name. */
   name: string
-  /** Endpoint of the service matching the Namespace protocol */
+  /** Endpoint of the service matching the Namespace protocol. */
   endpoint: string
-  /** Namespace protocol */
+  /** Namespace protocol. */
   protocol: NamespaceProtocol
-  /** Project containing the Namespace */
+  /** Project containing the Namespace. */
   projectId: string
-  /** Region where the Namespace is deployed */
+  /** Region where the Namespace is deployed. */
   region: Region
-  /** Namespace creation date */
+  /** Namespace creation date. */
   createdAt?: Date
-  /** Namespace last modification date */
+  /** Namespace last modification date. */
   updatedAt?: Date
 }
 
-/** Permissions */
+/** Permissions. */
 export interface Permissions {
-  /** Defines if user can publish messages to the service */
+  /** Defines if user can publish messages to the service. */
   canPublish?: boolean
-  /** Defines if user can receive messages from the service */
+  /** Defines if user can receive messages from the service. */
   canReceive?: boolean
-  /** Defines if user can manage the associated resource(s) */
+  /** Defines if user can manage the associated resource(s). */
   canManage?: boolean
 }
 
 export type ListNamespacesRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** Will list only the Namespaces owned by the specified organization */
+  /** Will list only the Namespaces owned by the specified organization. */
   organizationId?: string
-  /** Will list only the Namespaces contained into the specified project */
+  /** Will list only the Namespaces contained into the specified project. */
   projectId?: string
-  /** Indicate the page number of results to be returned */
+  /** Indicate the page number of results to be returned. */
   page?: number
-  /** Maximum number of results returned by page */
+  /** Maximum number of results returned by page. */
   pageSize?: number
-  /** Field used for sorting results */
+  /** Field used for sorting results. */
   orderBy?: ListNamespacesRequestOrderBy
 }
 
 export type CreateNamespaceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** Namespace name */
+  /** Namespace name. */
   name?: string
-  /** Namespace protocol */
+  /** Namespace protocol. */
   protocol: NamespaceProtocol
-  /** Project containing the Namespace */
+  /** Project containing the Namespace. */
   projectId?: string
 }
 
 export type UpdateNamespaceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the Namespace to update */
+  /** ID of the Namespace to update. */
   namespaceId: string
-  /** Namespace name */
+  /** Namespace name. */
   name?: string
 }
 
 export type GetNamespaceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the Namespace to get */
+  /** ID of the Namespace to get. */
   namespaceId: string
 }
 
 export type DeleteNamespaceRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the Namespace to delete */
+  /** ID of the Namespace to delete. */
   namespaceId: string
 }
 
 export type CreateCredentialRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** Namespace containing the Credential */
+  /** Namespace containing the Credential. */
   namespaceId: string
-  /** Credential name */
+  /** Credential name. */
   name?: string
   /**
    * List of permissions associated to this Credential.
@@ -201,31 +219,40 @@ export type CreateCredentialRequest = {
 }
 
 export type DeleteCredentialRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the Credential to delete */
+  /** ID of the Credential to delete. */
   credentialId: string
 }
 
 export type ListCredentialsRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** Namespace containing the Credential */
+  /** Namespace containing the Credential. */
   namespaceId?: string
-  /** Indicate the page number of results to be returned */
+  /** Indicate the page number of results to be returned. */
   page?: number
-  /** Maximum number of results returned by page */
+  /** Maximum number of results returned by page. */
   pageSize?: number
-  /** Field used for sorting results */
+  /** Field used for sorting results. */
   orderBy?: ListCredentialsRequestOrderBy
 }
 
 export type UpdateCredentialRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the Credential to update */
+  /** ID of the Credential to update. */
   credentialId: string
-  /** Credential name */
+  /** Credential name. */
   name?: string
   /**
    * List of permissions associated to this Credential.
@@ -236,8 +263,11 @@ export type UpdateCredentialRequest = {
 }
 
 export type GetCredentialRequest = {
-  /** Region to target. If none is passed will use default region from the config */
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
-  /** ID of the Credential to get */
+  /** ID of the Credential to get. */
   credentialId: string
 }

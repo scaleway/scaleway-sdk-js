@@ -72,118 +72,118 @@ export type ServerStatus =
 
 export type SettingType = 'unknown' | 'smtp'
 
-/** Bmc access */
+/** Bmc access. */
 export interface BMCAccess {
-  /** URL to access to the server console */
+  /** URL to access to the server console. */
   url: string
   /**
    * The login to use for the BMC (Baseboard Management Controller) access
-   * authentification
+   * authentification.
    */
   login: string
   /**
    * The password to use for the BMC (Baseboard Management Controller) access
-   * authentification
+   * authentification.
    */
   password: string
   /**
    * The date after which the BMC (Baseboard Management Controller) access will
-   * be closed
+   * be closed.
    */
   expiresAt?: Date
 }
 
-/** Cpu */
+/** Cpu. */
 export interface CPU {
-  /** Name of the CPU */
+  /** Name of the CPU. */
   name: string
-  /** Number of cores of the CPU */
+  /** Number of cores of the CPU. */
   coreCount: number
-  /** Number of threads of the CPU */
+  /** Number of threads of the CPU. */
   threadCount: number
-  /** Frequency of the CPU in MHz */
+  /** Frequency of the CPU in MHz. */
   frequency: number
-  /** Benchmark of the CPU */
+  /** Benchmark of the CPU. */
   benchmark: string
 }
 
-/** Create server request. install */
+/** Create server request. install. */
 export interface CreateServerRequestInstall {
-  /** ID of the OS to install on the server */
+  /** ID of the OS to install on the server. */
   osId: string
-  /** Hostname of the server */
+  /** Hostname of the server. */
   hostname: string
-  /** SSH key IDs authorized on the server */
+  /** SSH key IDs authorized on the server. */
   sshKeyIds: string[]
-  /** User used for the installation */
+  /** User used for the installation. */
   user?: string
-  /** Password used for the installation */
+  /** Password used for the installation. */
   password?: string
-  /** User used for the service to install */
+  /** User used for the service to install. */
   serviceUser?: string
-  /** Password used for the service to install */
+  /** Password used for the service to install. */
   servicePassword?: string
 }
 
-/** Disk */
+/** Disk. */
 export interface Disk {
-  /** Capacity of the disk in bytes */
+  /** Capacity of the disk in bytes. */
   capacity: number
-  /** Type of the disk */
+  /** Type of the disk. */
   type: string
 }
 
-/** Get server metrics response */
+/** Get server metrics response. */
 export interface GetServerMetricsResponse {
-  /** Timeseries of ping on the server */
+  /** Timeseries of ping on the server. */
   pings?: TimeSeries
 }
 
-/** Ip */
+/** Ip. */
 export interface IP {
-  /** ID of the IP */
+  /** ID of the IP. */
   id: string
-  /** Address of the IP */
+  /** Address of the IP. */
   address: string
-  /** Reverse IP value */
+  /** Reverse IP value. */
   reverse: string
-  /** Version of IP (v4 or v6) */
+  /** Version of IP (v4 or v6). */
   version: IPVersion
-  /** Status of the reverse */
+  /** Status of the reverse. */
   reverseStatus: IPReverseStatus
-  /** A message related to the reverse status, in case of an error for example */
+  /** A message related to the reverse status, in case of an error for example. */
   reverseStatusMessage: string
 }
 
-/** List os response */
+/** List os response. */
 export interface ListOSResponse {
-  /** Total count of matching OS */
+  /** Total count of matching OS. */
   totalCount: number
-  /** OS that match filters */
+  /** OS that match filters. */
   os: OS[]
 }
 
-/** List offers response */
+/** List offers response. */
 export interface ListOffersResponse {
-  /** Total count of matching offers */
+  /** Total count of matching offers. */
   totalCount: number
-  /** Offers that match filters */
+  /** Offers that match filters. */
   offers: Offer[]
 }
 
-/** List options response */
+/** List options response. */
 export interface ListOptionsResponse {
-  /** Total count of matching options */
+  /** Total count of matching options. */
   totalCount: number
-  /** Options that match filters */
+  /** Options that match filters. */
   options: Option[]
 }
 
-/** List server events response */
+/** List server events response. */
 export interface ListServerEventsResponse {
-  /** Total count of matching events */
+  /** Total count of matching events. */
   totalCount: number
-  /** Server events that match filters */
+  /** Server events that match filters. */
   events: ServerEvent[]
 }
 
@@ -192,57 +192,57 @@ export interface ListServerPrivateNetworksResponse {
   totalCount: number
 }
 
-/** List servers response */
+/** List servers response. */
 export interface ListServersResponse {
-  /** Total count of matching servers */
+  /** Total count of matching servers. */
   totalCount: number
-  /** Servers that match filters */
+  /** Servers that match filters. */
   servers: Server[]
 }
 
-/** List settings response */
+/** List settings response. */
 export interface ListSettingsResponse {
-  /** Total count of matching sttings */
+  /** Total count of matching sttings. */
   totalCount: number
-  /** Settings that match filters */
+  /** Settings that match filters. */
   settings: Setting[]
 }
 
-/** Memory */
+/** Memory. */
 export interface Memory {
-  /** Capacity of the memory in bytes */
+  /** Capacity of the memory in bytes. */
   capacity: number
-  /** Type of the memory */
+  /** Type of the memory. */
   type: string
-  /** Frequency of the memory in MHz */
+  /** Frequency of the memory in MHz. */
   frequency: number
-  /** True if the memory is an error-correcting code memory */
+  /** True if the memory is an error-correcting code memory. */
   isEcc: boolean
 }
 
-/** Os */
+/** Os. */
 export interface OS {
-  /** ID of the OS */
+  /** ID of the OS. */
   id: string
-  /** Name of the OS */
+  /** Name of the OS. */
   name: string
-  /** Version of the OS */
+  /** Version of the OS. */
   version: string
-  /** URL of this os's logo */
+  /** URL of this os's logo. */
   logoUrl: string
-  /** Define the SSH requirements to install the OS */
+  /** Define the SSH requirements to install the OS. */
   ssh?: OSOSField
-  /** Define the username requirements to install the OS */
+  /** Define the username requirements to install the OS. */
   user?: OSOSField
-  /** Define the password requirements to install the OS */
+  /** Define the password requirements to install the OS. */
   password?: OSOSField
-  /** Define the username requirements to install the service */
+  /** Define the username requirements to install the service. */
   serviceUser?: OSOSField
-  /** Define the password requirements to install the service */
+  /** Define the password requirements to install the service. */
   servicePassword?: OSOSField
-  /** State of OS */
+  /** State of OS. */
   enabled: boolean
-  /** License required (check server options for pricing details) */
+  /** License required (check server options for pricing details). */
   licenseRequired: boolean
 }
 
@@ -252,95 +252,95 @@ export interface OSOSField {
   defaultValue?: string
 }
 
-/** Offer */
+/** Offer. */
 export interface Offer {
-  /** ID of the offer */
+  /** ID of the offer. */
   id: string
-  /** Name of the offer */
+  /** Name of the offer. */
   name: string
-  /** Stock level */
+  /** Stock level. */
   stock: OfferStock
-  /** Public Bandwidth available in bits/s with the offer */
+  /** Public Bandwidth available in bits/s with the offer. */
   bandwidth: number
-  /** Commercial range of the offer */
+  /** Commercial range of the offer. */
   commercialRange: string
   /**
    * Price of the offer for the next 60 minutes (a server order at 11h32 will be
-   * payed until 12h32)
+   * payed until 12h32).
    */
   pricePerHour?: Money
-  /** Price of the offer per months */
+  /** Price of the offer per months. */
   pricePerMonth?: Money
-  /** Disks specifications of the offer */
+  /** Disks specifications of the offer. */
   disks: Disk[]
-  /** True if the offer is currently available */
+  /** True if the offer is currently available. */
   enable: boolean
-  /** CPU specifications of the offer */
+  /** CPU specifications of the offer. */
   cpus: CPU[]
-  /** Memory specifications of the offer */
+  /** Memory specifications of the offer. */
   memories: Memory[]
-  /** Name of the quota associated to the offer */
+  /** Name of the quota associated to the offer. */
   quotaName: string
-  /** Persistent memory specifications of the offer */
+  /** Persistent memory specifications of the offer. */
   persistentMemories: PersistentMemory[]
-  /** Raid controller specifications of the offer */
+  /** Raid controller specifications of the offer. */
   raidControllers: RaidController[]
-  /** Array of incompatible OS ids */
+  /** Array of incompatible OS ids. */
   incompatibleOsIds: string[]
-  /** Period of subscription for the offer */
+  /** Period of subscription for the offer. */
   subscriptionPeriod: OfferSubscriptionPeriod
-  /** Operation path of the service */
+  /** Operation path of the service. */
   operationPath: string
-  /** Fee to pay on order */
+  /** Fee to pay on order. */
   fee?: Money
-  /** Options available on offer */
+  /** Options available on offer. */
   options: OfferOptionOffer[]
-  /** Private bandwidth available in bits/s with the offer */
+  /** Private bandwidth available in bits/s with the offer. */
   privateBandwidth: number
-  /** The offer is shared or not */
+  /** The offer is shared or not. */
   sharedBandwidth: boolean
-  /** Array of tags attached to the offer */
+  /** Array of tags attached to the offer. */
   tags: string[]
 }
 
-/** Offer. option offer */
+/** Offer. option offer. */
 export interface OfferOptionOffer {
-  /** ID of the option */
+  /** ID of the option. */
   id: string
-  /** Name of the option */
+  /** Name of the option. */
   name: string
   /**
    * If true the option is enabled and included by default in the offer If false
-   * the option is available for the offer but not included by default
+   * the option is available for the offer but not included by default.
    */
   enabled: boolean
-  /** Period of subscription for the offer */
+  /** Period of subscription for the offer. */
   subscriptionPeriod: OfferSubscriptionPeriod
-  /** Price of the option */
+  /** Price of the option. */
   price?: Money
-  /** Boolean to know if option could be managed */
+  /** Boolean to know if option could be managed. */
   manageable: boolean
-  /** ID of the OS linked to the option */
+  /** ID of the OS linked to the option. */
   osId?: string
 }
 
-/** Option */
+/** Option. */
 export interface Option {
-  /** ID of the option */
+  /** ID of the option. */
   id: string
-  /** Name of the option */
+  /** Name of the option. */
   name: string
-  /** Is false if the option could not be added or removed */
+  /** Is false if the option could not be added or removed. */
   manageable: boolean
 }
 
-/** Persistent memory */
+/** Persistent memory. */
 export interface PersistentMemory {
-  /** Capacity of the memory in bytes */
+  /** Capacity of the memory in bytes. */
   capacity: number
-  /** Type of the memory */
+  /** Type of the memory. */
   type: string
-  /** Frequency of the memory in MHz */
+  /** Frequency of the memory in MHz. */
   frequency: number
 }
 
@@ -349,123 +349,123 @@ export interface RaidController {
   raidLevel: string[]
 }
 
-/** Server */
+/** Server. */
 export interface Server {
-  /** ID of the server */
+  /** ID of the server. */
   id: string
-  /** Organization ID the server is attached to */
+  /** Organization ID the server is attached to. */
   organizationId: string
-  /** Project ID the server is attached to */
+  /** Project ID the server is attached to. */
   projectId: string
-  /** Name of the server */
+  /** Name of the server. */
   name: string
-  /** Description of the server */
+  /** Description of the server. */
   description: string
-  /** Date of last modification of the server */
+  /** Date of last modification of the server. */
   updatedAt?: Date
-  /** Date of creation of the server */
+  /** Date of creation of the server. */
   createdAt?: Date
-  /** Status of the server */
+  /** Status of the server. */
   status: ServerStatus
-  /** Offer ID of the server */
+  /** Offer ID of the server. */
   offerId: string
-  /** Offer name of the server */
+  /** Offer name of the server. */
   offerName: string
-  /** Array of customs tags attached to the server */
+  /** Array of customs tags attached to the server. */
   tags: string[]
-  /** Array of IPs attached to the server */
+  /** Array of IPs attached to the server. */
   ips: IP[]
-  /** Domain of the server */
+  /** Domain of the server. */
   domain: string
-  /** Boot type of the server */
+  /** Boot type of the server. */
   bootType: ServerBootType
-  /** The zone in which is the server */
+  /** The zone in which is the server. */
   zone: Zone
-  /** Configuration of installation */
+  /** Configuration of installation. */
   install?: ServerInstall
-  /** Server status of ping */
+  /** Server status of ping. */
   pingStatus: ServerPingStatus
-  /** Options enabled on server */
+  /** Options enabled on server. */
   options: ServerOption[]
-  /** Configuration of rescue boot */
+  /** Configuration of rescue boot. */
   rescueServer?: ServerRescueServer
 }
 
-/** Server event */
+/** Server event. */
 export interface ServerEvent {
-  /** ID of the server for whom the action will be applied */
+  /** ID of the server for whom the action will be applied. */
   id: string
-  /** The action that will be applied to the server */
+  /** The action that will be applied to the server. */
   action: string
-  /** Date of last modification of the action */
+  /** Date of last modification of the action. */
   updatedAt?: Date
-  /** Date of creation of the action */
+  /** Date of creation of the action. */
   createdAt?: Date
 }
 
-/** Server. install */
+/** Server. install. */
 export interface ServerInstall {
-  /** ID of the OS */
+  /** ID of the OS. */
   osId: string
-  /** Host defined in the server install */
+  /** Host defined in the server install. */
   hostname: string
-  /** SSH public key IDs defined in the server install */
+  /** SSH public key IDs defined in the server install. */
   sshKeyIds: string[]
-  /** Status of the server install */
+  /** Status of the server install. */
   status: ServerInstallStatus
   /**
    * User defined in the server install or the default one if none were
-   * specified
+   * specified.
    */
   user: string
   /**
    * Service user defined in the server install or the default one if none were
-   * specified
+   * specified.
    */
   serviceUser: string
-  /** The address of the installed service */
+  /** The address of the installed service. */
   serviceUrl: string
 }
 
-/** Server. option */
+/** Server. option. */
 export interface ServerOption {
-  /** ID of the option */
+  /** ID of the option. */
   id: string
-  /** Name of the option */
+  /** Name of the option. */
   name: string
-  /** Status of the option */
+  /** Status of the option. */
   status: ServerOptionOptionStatus
-  /** Is false if the option could not be added or removed */
+  /** Is false if the option could not be added or removed. */
   manageable: boolean
-  /** Auto expiration date for compatible options */
+  /** Auto expiration date for compatible options. */
   expiresAt?: Date
 }
 
-/** Server private network */
+/** Server private network. */
 export interface ServerPrivateNetwork {
-  /** The private network ID */
+  /** The private network ID. */
   id: string
-  /** The private network project ID */
+  /** The private network project ID. */
   projectId: string
-  /** The server ID */
+  /** The server ID. */
   serverId: string
-  /** The private network ID */
+  /** The private network ID. */
   privateNetworkId: string
-  /** The VLAN ID associated to the private network */
+  /** The VLAN ID associated to the private network. */
   vlan?: number
-  /** The configuration status of the private network */
+  /** The configuration status of the private network. */
   status: ServerPrivateNetworkStatus
-  /** The private network creation date */
+  /** The private network creation date. */
   createdAt?: Date
-  /** The date the private network was last modified */
+  /** The date the private network was last modified. */
   updatedAt?: Date
 }
 
-/** Server. rescue server */
+/** Server. rescue server. */
 export interface ServerRescueServer {
-  /** Rescue user name */
+  /** Rescue user name. */
   user: string
-  /** Rescue password */
+  /** Rescue password. */
   password: string
 }
 
@@ -473,52 +473,52 @@ export interface SetServerPrivateNetworksResponse {
   serverPrivateNetworks: ServerPrivateNetwork[]
 }
 
-/** Setting */
+/** Setting. */
 export interface Setting {
-  /** ID of the setting */
+  /** ID of the setting. */
   id: string
-  /** Type of the setting */
+  /** Type of the setting. */
   type: SettingType
-  /** ID of the project ID */
+  /** ID of the project ID. */
   projectId: string
-  /** The setting is enable or disable */
+  /** The setting is enable or disable. */
   enabled: boolean
 }
 
 export type ListServersRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Page number */
+  /** Page number. */
   page?: number
-  /** Number of server per page */
+  /** Number of server per page. */
   pageSize?: number
-  /** Order of the servers */
+  /** Order of the servers. */
   orderBy?: ListServersRequestOrderBy
-  /** Filter by tags */
+  /** Filter by tags. */
   tags?: string[]
-  /** Filter by status */
+  /** Filter by status. */
   status?: string[]
-  /** Filter by name */
+  /** Filter by name. */
   name?: string
-  /** Filter by organization ID */
+  /** Filter by organization ID. */
   organizationId?: string
-  /** Filter by project ID */
+  /** Filter by project ID. */
   projectId?: string
-  /** Filter by option ID */
+  /** Filter by option ID. */
   optionId?: string
 }
 
 export type GetServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the server */
+  /** ID of the server. */
   serverId: string
 }
 
 export type CreateServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Offer ID of the new server */
+  /** Offer ID of the new server. */
   offerId: string
   /**
    * @deprecated Organization ID with which the server will be created.
@@ -534,281 +534,281 @@ export type CreateServerRequest = {
    * could be set.
    */
   projectId?: string
-  /** Name of the server (≠hostname) */
+  /** Name of the server (≠hostname). */
   name: string
-  /** Description associated to the server, max 255 characters */
+  /** Description associated to the server, max 255 characters. */
   description: string
-  /** Tags to associate to the server */
+  /** Tags to associate to the server. */
   tags?: string[]
-  /** Configuration of installation */
+  /** Configuration of installation. */
   install?: CreateServerRequestInstall
-  /** IDs of options to enable on server */
+  /** IDs of options to enable on server. */
   optionIds?: string[]
 }
 
 export type UpdateServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the server to update */
+  /** ID of the server to update. */
   serverId: string
-  /** Name of the server (≠hostname), not updated if null */
+  /** Name of the server (≠hostname), not updated if null. */
   name?: string
   /**
    * Description associated to the server, max 255 characters, not updated if
-   * null
+   * null.
    */
   description?: string
-  /** Tags associated to the server, not updated if null */
+  /** Tags associated to the server, not updated if null. */
   tags?: string[]
 }
 
 export type InstallServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Server ID to install */
+  /** Server ID to install. */
   serverId: string
-  /** ID of the OS to install on the server */
+  /** ID of the OS to install on the server. */
   osId: string
-  /** Hostname of the server */
+  /** Hostname of the server. */
   hostname: string
-  /** SSH key IDs authorized on the server */
+  /** SSH key IDs authorized on the server. */
   sshKeyIds: string[]
-  /** User used for the installation */
+  /** User used for the installation. */
   user?: string
-  /** Password used for the installation */
+  /** Password used for the installation. */
   password?: string
-  /** User used for the service to install */
+  /** User used for the service to install. */
   serviceUser?: string
-  /** Password used for the service to install */
+  /** Password used for the service to install. */
   servicePassword?: string
 }
 
 export type GetServerMetricsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Server ID to get the metrics */
+  /** Server ID to get the metrics. */
   serverId: string
 }
 
 export type DeleteServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the server to delete */
+  /** ID of the server to delete. */
   serverId: string
 }
 
 export type RebootServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the server to reboot */
+  /** ID of the server to reboot. */
   serverId: string
-  /** The type of boot */
+  /** The type of boot. */
   bootType?: ServerBootType
 }
 
 export type StartServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the server to start */
+  /** ID of the server to start. */
   serverId: string
-  /** The type of boot */
+  /** The type of boot. */
   bootType?: ServerBootType
 }
 
 export type StopServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the server to stop */
+  /** ID of the server to stop. */
   serverId: string
 }
 
 export type ListServerEventsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the server events searched */
+  /** ID of the server events searched. */
   serverId: string
-  /** Page number */
+  /** Page number. */
   page?: number
-  /** Number of server events per page */
+  /** Number of server events per page. */
   pageSize?: number
-  /** Order of the server events */
+  /** Order of the server events. */
   orderBy?: ListServerEventsRequestOrderBy
 }
 
 export type StartBMCAccessRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the server */
+  /** ID of the server. */
   serverId: string
-  /** The IP authorized to connect to the given server */
+  /** The IP authorized to connect to the given server. */
   ip: string
 }
 
 export type GetBMCAccessRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the server */
+  /** ID of the server. */
   serverId: string
 }
 
 export type StopBMCAccessRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the server */
+  /** ID of the server. */
   serverId: string
 }
 
 export type UpdateIPRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the server */
+  /** ID of the server. */
   serverId: string
-  /** ID of the IP to update */
+  /** ID of the IP to update. */
   ipId: string
-  /** New reverse IP to update, not updated if null */
+  /** New reverse IP to update, not updated if null. */
   reverse?: string
 }
 
 export type AddOptionServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the server */
+  /** ID of the server. */
   serverId: string
-  /** ID of the option to add */
+  /** ID of the option to add. */
   optionId: string
-  /** Auto expire the option after this date */
+  /** Auto expire the option after this date. */
   expiresAt?: Date
 }
 
 export type DeleteOptionServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the server */
+  /** ID of the server. */
   serverId: string
-  /** ID of the option to delete */
+  /** ID of the option to delete. */
   optionId: string
 }
 
 export type ListOffersRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Page number */
+  /** Page number. */
   page?: number
-  /** Number of offers per page */
+  /** Number of offers per page. */
   pageSize?: number
-  /** Period of subscription to filter offers */
+  /** Period of subscription to filter offers. */
   subscriptionPeriod?: OfferSubscriptionPeriod
 }
 
 export type GetOfferRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the researched Offer */
+  /** ID of the researched Offer. */
   offerId: string
 }
 
 export type GetOptionRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the option */
+  /** ID of the option. */
   optionId: string
 }
 
 export type ListOptionsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Page number */
+  /** Page number. */
   page?: number
-  /** Number of options per page */
+  /** Number of options per page. */
   pageSize?: number
-  /** Filter options by offer_id */
+  /** Filter options by offer_id. */
   offerId?: string
-  /** Filter options by name */
+  /** Filter options by name. */
   name?: string
 }
 
 export type ListSettingsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Page number */
+  /** Page number. */
   page?: number
-  /** Set the maximum list size */
+  /** Set the maximum list size. */
   pageSize?: number
-  /** Order the response */
+  /** Order the response. */
   orderBy?: ListSettingsRequestOrderBy
-  /** ID of the project */
+  /** ID of the project. */
   projectId?: string
 }
 
 export type UpdateSettingRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the setting */
+  /** ID of the setting. */
   settingId: string
-  /** Enable/Disable the setting */
+  /** Enable/Disable the setting. */
   enabled?: boolean
 }
 
 export type ListOSRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Page number */
+  /** Page number. */
   page?: number
-  /** Number of OS per page */
+  /** Number of OS per page. */
   pageSize?: number
-  /** Filter OS by offer ID */
+  /** Filter OS by offer ID. */
   offerId?: string
 }
 
 export type GetOSRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the OS */
+  /** ID of the OS. */
   osId: string
 }
 
 export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The ID of the server */
+  /** The ID of the server. */
   serverId: string
-  /** The ID of the private network */
+  /** The ID of the private network. */
   privateNetworkId: string
 }
 
 export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The ID of the server */
+  /** The ID of the server. */
   serverId: string
-  /** The IDs of the private networks */
+  /** The IDs of the private networks. */
   privateNetworkIds: string[]
 }
 
 export type PrivateNetworkApiListServerPrivateNetworksRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The sort order for the returned private networks */
+  /** The sort order for the returned private networks. */
   orderBy?: ListServerPrivateNetworksRequestOrderBy
-  /** The page number for the returned private networks */
+  /** The page number for the returned private networks. */
   page?: number
-  /** The maximum number of private networks per page */
+  /** The maximum number of private networks per page. */
   pageSize?: number
-  /** Filter private networks by server ID */
+  /** Filter private networks by server ID. */
   serverId?: string
-  /** Filter private networks by private network ID */
+  /** Filter private networks by private network ID. */
   privateNetworkId?: string
-  /** Filter private networks by organization ID */
+  /** Filter private networks by organization ID. */
   organizationId?: string
-  /** Filter private networks by project ID */
+  /** Filter private networks by project ID. */
   projectId?: string
 }
 
 export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
-  /** Zone to target. If none is passed will use default zone from the config */
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The ID of the server */
+  /** The ID of the server. */
   serverId: string
-  /** The ID of the private network */
+  /** The ID of the private network. */
   privateNetworkId: string
 }
