@@ -29,6 +29,12 @@ export type ListGroupsRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
+export type ListJWTsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'updated_at_asc'
+  | 'updated_at_desc'
+
 export type ListPermissionSetsRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
@@ -145,6 +151,26 @@ export interface Group {
   applicationIds: string[]
 }
 
+/** Jwt */
+export interface JWT {
+  /** JWT ID */
+  jti: string
+  /** ID of the user who issued the JWT */
+  issuerId: string
+  /** ID of the user targeted by the JWT */
+  audienceId: string
+  /** Creation date of the JWT */
+  createdAt?: Date
+  /** Last update date of the JWT */
+  updatedAt?: Date
+  /** Expiration date of the JWT */
+  expiresAt?: Date
+  /** IP address used during the creation of the JWT */
+  ip: string
+  /** User-agent used during the creation of the JWT */
+  userAgent: string
+}
+
 /** List api keys response */
 export interface ListAPIKeysResponse {
   /** List of API keys */
@@ -166,6 +192,11 @@ export interface ListGroupsResponse {
   /** List of groups */
   groups: Group[]
   /** Total count of groups */
+  totalCount: number
+}
+
+export interface ListJWTsResponse {
+  jwts: JWT[]
   totalCount: number
 }
 
@@ -842,4 +873,27 @@ export type GetQuotumRequest = {
   quotumName: string
   /** ID of the organization */
   organizationId?: string
+}
+
+export type ListJWTsRequest = {
+  /** Criteria for sorting results */
+  orderBy?: ListJWTsRequestOrderBy
+  /** ID of the user to search */
+  audienceId: string
+  /** Number of results per page. Value must be between 1 and 100 */
+  pageSize?: number
+  /** Number of page. Value must be greater to 1 */
+  page?: number
+  /** Filter out expired JWTs or not */
+  expired?: boolean
+}
+
+export type GetJWTRequest = {
+  /** JWT ID of the JWT to get */
+  jti: string
+}
+
+export type DeleteJWTRequest = {
+  /** JWT ID of the JWT to delete */
+  jti: string
 }
