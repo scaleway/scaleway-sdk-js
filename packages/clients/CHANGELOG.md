@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.1.0...@scaleway/sdk@1.2.0) (2023-03-06)
+
+### Features
+
+- add nl-ams-3 zone ([#499](https://github.com/scaleway/scaleway-sdk-js/issues/499)) ([451b4ae](https://github.com/scaleway/scaleway-sdk-js/commit/451b4aef543a538f95e4c07b1e633cd6a2a2ccbc))
+- **iam:** add ListJWTs, GetJWT, and DeleteJWT ([#493](https://github.com/scaleway/scaleway-sdk-js/issues/493)) ([a4ebbb8](https://github.com/scaleway/scaleway-sdk-js/commit/a4ebbb852b3f554caf2f96dabfd9e0c2fe440da3))
+- **iam:** add listQuota method ([#483](https://github.com/scaleway/scaleway-sdk-js/issues/483)) ([c2225b6](https://github.com/scaleway/scaleway-sdk-js/commit/c2225b62efb39ed5bcf94a61f21a34f6a7ea7104))
+- **lb:** add ipamConfig to PrivateNetwork ([#484](https://github.com/scaleway/scaleway-sdk-js/issues/484)) ([cff9a33](https://github.com/scaleway/scaleway-sdk-js/commit/cff9a331aa7f44d797de39ca24a28064735538e5))
+- **rdb:** migrate endpoint from one instance to another ([#488](https://github.com/scaleway/scaleway-sdk-js/issues/488)) ([212bedf](https://github.com/scaleway/scaleway-sdk-js/commit/212bedfed7bf0376df9ecf9fc985f8dec11b7c0e))
+- **webhosting:** add v1alpha1 ([#498](https://github.com/scaleway/scaleway-sdk-js/issues/498)) ([4cf3d8d](https://github.com/scaleway/scaleway-sdk-js/commit/4cf3d8de37fc92981cd93405c64cacb4b1ce9819))
+
+### Bug Fixes
+
+- **k8s:** export getClusterKubeConfig ([#487](https://github.com/scaleway/scaleway-sdk-js/issues/487)) ([6ab9df8](https://github.com/scaleway/scaleway-sdk-js/commit/6ab9df88e4c4cc5119230c8111b17c43daed975c))
+
 ## [1.1.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.0.0...@scaleway/sdk@1.1.0) (2023-02-27)
 
 ### Features
