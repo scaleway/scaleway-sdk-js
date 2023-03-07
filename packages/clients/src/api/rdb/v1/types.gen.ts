@@ -313,9 +313,22 @@ export interface EndpointSpecPrivateNetwork {
   /**
    * Endpoint IPv4 adress with a CIDR notation. Check documentation about IP and
    * subnet limitation.
+   *
+   * One-of ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
    */
-  serviceIp: string
+  serviceIp?: string
+  /**
+   * Automated configuration of your private network endpoint with Scaleway IPAM
+   * service. One at the most per RDB instance or read replica (an RDB instance
+   * and its read replica can have different private networks). Cannot be
+   * updated (has to be deleted and recreated).
+   *
+   * One-of ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
+   */
+  ipamConfig?: EndpointSpecPrivateNetworkIpamConfig
 }
+
+export interface EndpointSpecPrivateNetworkIpamConfig {}
 
 /** Engine setting. */
 export interface EngineSetting {
@@ -658,9 +671,22 @@ export interface ReadReplicaEndpointSpecPrivateNetwork {
   /**
    * Endpoint IPv4 adress with a CIDR notation. Check documentation about IP and
    * subnet limitations.
+   *
+   * One-of ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
    */
-  serviceIp: string
+  serviceIp?: string
+  /**
+   * Automated configuration of your private network endpoint with Scaleway IPAM
+   * service. One at the most per RDB instance or read replica (an RDB instance
+   * and its read replica can have different private networks). Cannot be
+   * updated (has to be deleted and recreated).
+   *
+   * One-of ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
+   */
+  ipamConfig?: ReadReplicaEndpointSpecPrivateNetworkIpamConfig
 }
+
+export interface ReadReplicaEndpointSpecPrivateNetworkIpamConfig {}
 
 /** Set instance acl rules response. */
 export interface SetInstanceACLRulesResponse {

@@ -41,6 +41,7 @@ import type {
   EndpointSpec,
   EndpointSpecLoadBalancer,
   EndpointSpecPrivateNetwork,
+  EndpointSpecPrivateNetworkIpamConfig,
   EngineSetting,
   EngineVersion,
   Instance,
@@ -73,6 +74,7 @@ import type {
   ReadReplicaEndpointSpec,
   ReadReplicaEndpointSpecDirectAccess,
   ReadReplicaEndpointSpecPrivateNetwork,
+  ReadReplicaEndpointSpecPrivateNetworkIpamConfig,
   RestoreDatabaseBackupRequest,
   SetInstanceACLRulesRequest,
   SetInstanceACLRulesResponse,
@@ -795,6 +797,16 @@ export const unmarshalSetInstanceSettingsResponse = (data: unknown) => {
   } as SetInstanceSettingsResponse
 }
 
+const marshalEndpointSpecPrivateNetworkIpamConfig = (
+  request: EndpointSpecPrivateNetworkIpamConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({})
+
+const marshalReadReplicaEndpointSpecPrivateNetworkIpamConfig = (
+  request: ReadReplicaEndpointSpecPrivateNetworkIpamConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({})
+
 const marshalEndpointSpecLoadBalancer = (
   request: EndpointSpecLoadBalancer,
   defaults: DefaultValues,
@@ -805,7 +817,21 @@ const marshalEndpointSpecPrivateNetwork = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_network_id: request.privateNetworkId,
-  service_ip: request.serviceIp,
+  ...resolveOneOf<unknown>([
+    {
+      param: 'service_ip',
+      value: request.serviceIp,
+    },
+    {
+      param: 'ipam_config',
+      value: request.ipamConfig
+        ? marshalEndpointSpecPrivateNetworkIpamConfig(
+            request.ipamConfig,
+            defaults,
+          )
+        : undefined,
+    },
+  ]),
 })
 
 const marshalReadReplicaEndpointSpecDirectAccess = (
@@ -818,7 +844,21 @@ const marshalReadReplicaEndpointSpecPrivateNetwork = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_network_id: request.privateNetworkId,
-  service_ip: request.serviceIp,
+  ...resolveOneOf<unknown>([
+    {
+      param: 'service_ip',
+      value: request.serviceIp,
+    },
+    {
+      param: 'ipam_config',
+      value: request.ipamConfig
+        ? marshalReadReplicaEndpointSpecPrivateNetworkIpamConfig(
+            request.ipamConfig,
+            defaults,
+          )
+        : undefined,
+    },
+  ]),
 })
 
 const marshalACLRuleRequest = (
