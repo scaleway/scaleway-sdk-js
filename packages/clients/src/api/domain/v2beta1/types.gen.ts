@@ -38,6 +38,7 @@ export type ContactExtensionNLLegalForm =
   | 'foundation'
   | 'association'
   | 'trading_partnership'
+  | 'natural_person'
 
 export type ContactLegalForm =
   | 'legal_form_unknown'
