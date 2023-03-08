@@ -134,10 +134,12 @@ const unmarshalOffer = (data: unknown) => {
   }
 
   return {
+    available: data.available,
     billingOperationPath: data.billing_operation_path,
     id: data.id,
     price: data.price ? unmarshalMoney(data.price) : undefined,
     product: data.product ? unmarshalOfferProduct(data.product) : undefined,
+    quotaWarnings: data.quota_warnings,
   } as Offer
 }
 

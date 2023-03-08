@@ -27,6 +27,7 @@ export type {
   NameserverStatus,
   Offer,
   OfferProduct,
+  OfferQuotaWarning,
   RestoreHostingRequest,
   UpdateHostingRequest,
 } from './types.gen'

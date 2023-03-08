@@ -31,6 +31,12 @@ export type ListOffersRequestOrderBy = 'price_asc'
 
 export type NameserverStatus = 'unknown_status' | 'valid' | 'invalid'
 
+export type OfferQuotaWarning =
+  | 'unknown_quota_warning'
+  | 'email_count_exceeded'
+  | 'database_count_exceeded'
+  | 'disk_usage_exceeded'
+
 /** Dns record. */
 export interface DnsRecord {
   /** Record name. */
@@ -142,6 +148,10 @@ export interface Offer {
   product?: OfferProduct
   /** Offer price. */
   price?: Money
+  /** If offer is available for a specific hosting. */
+  available: boolean
+  /** If not available, return quota warnings. */
+  quotaWarnings: OfferQuotaWarning[]
 }
 
 /** Offer. product. */
@@ -276,4 +286,6 @@ export type ListOffersRequest = {
   withoutOptions: boolean
   /** Select only options. */
   onlyOptions: boolean
+  /** Define a specific hosting id (optional). */
+  hostingId?: string
 }
