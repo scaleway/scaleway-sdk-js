@@ -527,13 +527,22 @@ export type CreateGatewayNetworkRequest = {
   /**
    * Existing configuration.
    *
-   * One-of ('ipConfig'): at most one of 'dhcpId', 'address' could be set.
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address' could be
+   * set.
    */
   dhcpId?: string
   /**
+   * New DHCP configuration.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address' could be
+   * set.
+   */
+  dhcp?: CreateDHCPRequest
+  /**
    * Static IP address in CIDR format to to use without DHCP.
    *
-   * One-of ('ipConfig'): at most one of 'dhcpId', 'address' could be set.
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address' could be
+   * set.
    */
   address?: string
   /**
