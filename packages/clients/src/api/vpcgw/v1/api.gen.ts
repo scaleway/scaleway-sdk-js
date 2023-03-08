@@ -14,6 +14,7 @@ import {
 } from './content.gen'
 import {
   marshalCreateDHCPEntryRequest,
+  marshalCreateDHCPRequest,
   marshalCreateGatewayNetworkRequest,
   marshalCreateGatewayRequest,
   marshalCreateIPRequest,
@@ -484,7 +485,7 @@ export class API extends ParentAPI {
         method: 'POST',
         path: `/vpc-gw/v1/zones/${validatePathParam(
           'zone',
-          request.zone ?? this.client.settings.defaultZone,
+          request.zone,
         )}/dhcps`,
       },
       unmarshalDHCP,

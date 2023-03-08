@@ -10,6 +10,7 @@ import {
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateDHCPEntryRequest,
+  CreateDHCPRequest,
   CreateGatewayNetworkRequest,
   CreateGatewayRequest,
   CreateIPRequest,
@@ -318,6 +319,27 @@ export const unmarshalSetPATRulesResponse = (data: unknown) => {
     patRules: unmarshalArrayOfObject(data.pat_rules, unmarshalPATRule),
   } as SetPATRulesResponse
 }
+
+export const marshalCreateDHCPRequest = (
+  request: CreateDHCPRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  address: request.address,
+  dns_local_name: request.dnsLocalName,
+  dns_search: request.dnsSearch,
+  dns_servers_override: request.dnsServersOverride,
+  enable_dynamic: request.enableDynamic,
+  pool_high: request.poolHigh,
+  pool_low: request.poolLow,
+  project_id: request.projectId,
+  push_default_route: request.pushDefaultRoute,
+  push_dns_server: request.pushDnsServer,
+  rebind_timer: request.rebindTimer,
+  renew_timer: request.renewTimer,
+  subnet: request.subnet,
+  valid_lifetime: request.validLifetime,
+  zone: request.zone,
+})
 
 const marshalSetDHCPEntriesRequestEntry = (
   request: SetDHCPEntriesRequestEntry,
