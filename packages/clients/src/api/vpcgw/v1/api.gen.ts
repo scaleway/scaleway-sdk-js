@@ -485,7 +485,7 @@ export class API extends ParentAPI {
         method: 'POST',
         path: `/vpc-gw/v1/zones/${validatePathParam(
           'zone',
-          request.zone,
+          request.zone ?? this.client.settings.defaultZone,
         )}/dhcps`,
       },
       unmarshalDHCP,

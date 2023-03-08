@@ -338,7 +338,7 @@ export const marshalCreateDHCPRequest = (
   renew_timer: request.renewTimer,
   subnet: request.subnet,
   valid_lifetime: request.validLifetime,
-  zone: request.zone,
+  zone: request.zone ?? defaults.defaultZone,
 })
 
 const marshalSetDHCPEntriesRequestEntry = (
