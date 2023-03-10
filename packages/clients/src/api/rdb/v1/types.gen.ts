@@ -138,13 +138,13 @@ export interface ACLRuleRequest {
 
 /** Add instance acl rules response. */
 export interface AddInstanceACLRulesResponse {
-  /** Rules enabled on the instance. */
+  /** ACL Rules enabled for the Database Instance. */
   rules: ACLRule[]
 }
 
 /** Add instance settings response. */
 export interface AddInstanceSettingsResponse {
-  /** Settings available on the instance. */
+  /** Settings available on the Database Instance. */
   settings: InstanceSetting[]
 }
 
@@ -158,9 +158,9 @@ export interface BackupSchedule {
 export interface Database {
   /** Name of the database. */
   name: string
-  /** Name of the owner of the database. */
+  /** Name of the database owner. */
   owner: string
-  /** Whether or not the database is managed or not. */
+  /** Defines whether the database is managed or not. */
   managed: boolean
   /** Size of the database. */
   size: number
@@ -170,9 +170,9 @@ export interface Database {
 export interface DatabaseBackup {
   /** UUID of the database backup. */
   id: string
-  /** UUID of the instance. */
+  /** UUID of the Database Instance. */
   instanceId: string
-  /** Name of the database of this backup. */
+  /** Name of backed up database. */
   databaseName: string
   /** Name of the backup. */
   name: string
@@ -180,21 +180,21 @@ export interface DatabaseBackup {
   status: DatabaseBackupStatus
   /** Size of the database backup. */
   size?: number
-  /** Expiration date (Format ISO 8601). */
+  /** Expiration date (must follow the ISO 8601 format). */
   expiresAt?: Date
-  /** Creation date (Format ISO 8601). */
+  /** Creation date (must follow the ISO 8601 format). */
   createdAt?: Date
-  /** Updated date (Format ISO 8601). */
+  /** Updated date (must follow the ISO 8601 format). */
   updatedAt?: Date
-  /** Name of the instance of the backup. */
+  /** Name of the Database Instance of the backup. */
   instanceName: string
   /** URL you can download the backup from. */
   downloadUrl?: string
   /** Expiration date of the download link. */
   downloadUrlExpiresAt?: Date
-  /** Region of this database backup. */
+  /** Region of the database backup. */
   region: Region
-  /** Store logical backups in the same region as the source database instance. */
+  /** Store logical backups in the same region as the source Database Instance. */
   sameRegion: boolean
 }
 
@@ -206,19 +206,19 @@ export interface DatabaseEngine {
   logoUrl: string
   /** Available versions. */
   versions: EngineVersion[]
-  /** Region of this database engine. */
+  /** Region of this Database Instance. */
   region: Region
 }
 
 /** Delete instance acl rules response. */
 export interface DeleteInstanceACLRulesResponse {
-  /** ACL rules present on the instance. */
+  /** IP addresses defined in the ACL rules of the Database Instance. */
   rules: ACLRule[]
 }
 
 /** Delete instance settings response. */
 export interface DeleteInstanceSettingsResponse {
-  /** Settings names to delete from the instance. */
+  /** Settings names to delete from the Database Instance. */
   settings: InstanceSetting[]
 }
 
@@ -237,25 +237,25 @@ export interface Endpoint {
   /** Name of the endpoint. */
   name?: string
   /**
-   * Private network details. One at the most per RDB instance or read replica
-   * (an RDB instance and its read replica can have different private networks).
-   * Cannot be updated (has to be deleted and recreated).
+   * Private Network details. One maximum per Database Instance or Read Replica
+   * (a Database Instance and its Read Replica can have different Private
+   * Networks). Cannot be updated (has to be deleted and recreated).
    *
    * One-of ('details'): at most one of 'privateNetwork', 'loadBalancer',
    * 'directAccess' could be set.
    */
   privateNetwork?: EndpointPrivateNetworkDetails
   /**
-   * Load balancer details. Public endpoint for RDB instances which is
-   * systematically present. One per RDB instance.
+   * Load balancer details. Public endpoint for Database Instance which is
+   * systematically present. One per Database Instance.
    *
    * One-of ('details'): at most one of 'privateNetwork', 'loadBalancer',
    * 'directAccess' could be set.
    */
   loadBalancer?: EndpointLoadBalancerDetails
   /**
-   * Direct access details. Public endpoint reserved for read replicas. One per
-   * read replica.
+   * Direct access details. Public endpoint reserved for Read Replicas. One per
+   * Read Replica.
    *
    * One-of ('details'): at most one of 'privateNetwork', 'loadBalancer',
    * 'directAccess' could be set.
@@ -286,17 +286,18 @@ export interface EndpointPrivateNetworkDetails {
 /** Endpoint spec. */
 export interface EndpointSpec {
   /**
-   * Load balancer endpoint specifications. Public endpoint for RDB instances
-   * which is systematically present. One per RDB instance.
+   * Load balancer endpoint specifications. Public endpoint for Database
+   * Instance which is systematically present. One per RDB instance.
    *
    * One-of ('spec'): at most one of 'loadBalancer', 'privateNetwork' could be
    * set.
    */
   loadBalancer?: EndpointSpecLoadBalancer
   /**
-   * Private network endpoint specifications. One at the most per RDB instance
-   * or read replica (an RDB instance and its read replica can have different
-   * private networks). Cannot be updated (has to be deleted and recreated).
+   * Private Network endpoint specifications. One maximum per Database Instance
+   * or Read Replica (a Database Instance and its Read Replica can have
+   * different Private Networks). Cannot be updated (has to be deleted and
+   * recreated).
    *
    * One-of ('spec'): at most one of 'loadBalancer', 'privateNetwork' could be
    * set.
@@ -308,20 +309,20 @@ export interface EndpointSpecLoadBalancer {}
 
 /** Endpoint spec. private network. */
 export interface EndpointSpecPrivateNetwork {
-  /** UUID of the private network to be connected to the database instance. */
+  /** UUID of the Private Network to be connected to the Database Instance. */
   privateNetworkId: string
   /**
-   * Endpoint IPv4 adress with a CIDR notation. Check documentation about IP and
-   * subnet limitation.
+   * Endpoint IPv4 address with a CIDR notation. Refer to the official Scaleway
+   * documentation to learn more about IP and subnet limitations.
    *
    * One-of ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
    */
   serviceIp?: string
   /**
-   * Automated configuration of your private network endpoint with Scaleway IPAM
-   * service. One at the most per RDB instance or read replica (an RDB instance
-   * and its read replica can have different private networks). Cannot be
-   * updated (has to be deleted and recreated).
+   * Automated configuration of your Private Network endpoint with Scaleway IPAM
+   * service. One at the most per Database Instance or Read Replica (a Database
+   * Instance and its Read Replica can have different Private Networks). Cannot
+   * be updated (has to be deleted and recreated).
    *
    * One-of ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
    */
@@ -332,7 +333,7 @@ export interface EndpointSpecPrivateNetworkIpamConfig {}
 
 /** Engine setting. */
 export interface EngineSetting {
-  /** Setting name from database engine. */
+  /** Setting name from the database engine. */
   name: string
   /** Value set when not specified. */
   defaultValue: string
@@ -370,55 +371,55 @@ export interface EngineVersion {
   disabled: boolean
   /** Beta status of engine version. */
   beta: boolean
-  /** Engine settings available to be set at database initialisation. */
+  /** Engine settings available to be set at database initialization. */
   availableInitSettings: EngineSetting[]
 }
 
 /** Instance. */
 export interface Instance {
-  /** Creation date (Format ISO 8601). */
+  /** Creation date (must follow the ISO 8601 format). */
   createdAt?: Date
-  /** Volumes of the instance. */
+  /** Volumes of the Database Instance. */
   volume?: Volume
-  /** Region the instance is in. */
+  /** Region the Database Instance is in. */
   region: Region
-  /** UUID of the instance. */
+  /** UUID of the Database Instance. */
   id: string
-  /** Name of the instance. */
+  /** Name of the Database Instance. */
   name: string
-  /** Organization ID the instance belongs to. */
+  /** Organization ID the Database Instance belongs to. */
   organizationId: string
-  /** Project ID the instance belongs to. */
+  /** Project ID the Database Instance belongs to. */
   projectId: string
-  /** Status of the instance. */
+  /** Status of the Database Instance. */
   status: InstanceStatus
   /** Database engine of the database (PostgreSQL, MySQL, ...). */
   engine: string
   /** Available database engine versions for upgrade. */
   upgradableVersion: UpgradableVersion[]
-  /** @deprecated Endpoint of the instance. */
+  /** @deprecated Endpoint of the Database Instance. */
   endpoint?: Endpoint
-  /** List of tags applied to the instance. */
+  /** List of tags applied to the Database Instance. */
   tags: string[]
-  /** Advanced settings of the instance. */
+  /** Advanced settings of the Database Instance. */
   settings: InstanceSetting[]
-  /** Backup schedule of the instance. */
+  /** Backup schedule of the Database Instance. */
   backupSchedule?: BackupSchedule
-  /** Whether or not High-Availability is enabled. */
+  /** Defines whether or not High-Availability is enabled. */
   isHaCluster: boolean
-  /** Read replicas of the instance. */
+  /** Read Replicas of the Database Instance. */
   readReplicas: ReadReplica[]
-  /** Node type of the instance. */
+  /** Node type of the Database Instance. */
   nodeType: string
-  /** List of engine settings to be set at database initialisation. */
+  /** List of engine settings to be set at database initialization. */
   initSettings: InstanceSetting[]
-  /** List of instance endpoints. */
+  /** List of Database Instance endpoints. */
   endpoints: Endpoint[]
-  /** Logs policy of the instance. */
+  /** Logs policy of the Database Instance. */
   logsPolicy?: LogsPolicy
-  /** Store logical backups in the same region as the database instance. */
+  /** Store logical backups in the same region as the Database Instance. */
   backupSameRegion: boolean
-  /** List of instance maintenances. */
+  /** List of Database Instance maintenance events. */
   maintenances: Maintenance[]
 }
 
@@ -426,23 +427,23 @@ export interface Instance {
 export interface InstanceLog {
   /** Presigned S3 URL to download your log file. */
   downloadUrl?: string
-  /** UUID of the instance log. */
+  /** UUID of the Database Instance log. */
   id: string
-  /** Status of the logs in a given instance. */
+  /** Status of the logs in a Database Instance. */
   status: InstanceLogStatus
-  /** Name of the undelying node. */
+  /** Name of the underlying node. */
   nodeName: string
-  /** Expiration date (Format ISO 8601). */
+  /** Expiration date (must follow the ISO 8601 format). */
   expiresAt?: Date
-  /** Creation date (Format ISO 8601). */
+  /** Creation date (must follow the ISO 8601 format). */
   createdAt?: Date
-  /** Region the instance is in. */
+  /** Region the Database Instance is in. */
   region: Region
 }
 
 /** Instance metrics. */
 export interface InstanceMetrics {
-  /** Time series of metrics of a given instance. */
+  /** Time series of metrics of a Database Instance. */
   timeseries: TimeSeries[]
 }
 
@@ -471,21 +472,21 @@ export interface ListDatabaseEnginesResponse {
 export interface ListDatabasesResponse {
   /** List of the databases. */
   databases: Database[]
-  /** Total count of databases present on a given instance. */
+  /** Total count of databases present on a Database Instance. */
   totalCount: number
 }
 
 /** List instance acl rules response. */
 export interface ListInstanceACLRulesResponse {
-  /** List of the ACL rules present on a given instance. */
+  /** List of ACL rules present on a Database Instance. */
   rules: ACLRule[]
-  /** Total count of ACL rules present on a given instance. */
+  /** Total count of ACL rules present on a Database Instance. */
   totalCount: number
 }
 
 /** List instance logs details response. */
 export interface ListInstanceLogsDetailsResponse {
-  /** Remote instance logs details. */
+  /** Remote Database Instance logs details. */
   details: ListInstanceLogsDetailsResponseInstanceLogDetail[]
 }
 
@@ -496,15 +497,15 @@ export interface ListInstanceLogsDetailsResponseInstanceLogDetail {
 
 /** List instance logs response. */
 export interface ListInstanceLogsResponse {
-  /** Available logs in a given instance. */
+  /** Available logs in a Database Instance. */
   instanceLogs: InstanceLog[]
 }
 
 /** List instances response. */
 export interface ListInstancesResponse {
-  /** List all instances available in a given organization/project. */
+  /** List of all Database Instances available in an Organization or Project. */
   instances: Instance[]
-  /** Total count of instances available in a given organization/project. */
+  /** Total count of Database Instances available in a Organization or Project. */
   totalCount: number
 }
 
@@ -518,9 +519,9 @@ export interface ListNodeTypesResponse {
 
 /** List privileges response. */
 export interface ListPrivilegesResponse {
-  /** Privileges of a given user in a given database in a given instance. */
+  /** Privileges of a user in a database in a Database Instance. */
   privileges: Privilege[]
-  /** Total count of privileges present on a given database. */
+  /** Total count of privileges present on a database. */
   totalCount: number
 }
 
@@ -534,17 +535,17 @@ export interface ListSnapshotsResponse {
 
 /** List users response. */
 export interface ListUsersResponse {
-  /** List of users in a given instance. */
+  /** List of users in a Database Instance. */
   users: User[]
-  /** Total count of users present on a given instance. */
+  /** Total count of users present on a Database Instance. */
   totalCount: number
 }
 
 /** Logs policy. */
 export interface LogsPolicy {
-  /** Max age (in day) of remote logs to keep on the database instance. */
+  /** Max age (in days) of remote logs to keep on the Database Instance. */
   maxAgeRetention?: number
-  /** Max disk size of remote logs to keep on the database instance. */
+  /** Max disk size of remote logs to keep on the Database Instance. */
   totalDiskRetention?: number
 }
 
@@ -616,7 +617,7 @@ export interface NodeTypeVolumeType {
 
 /** Prepare instance logs response. */
 export interface PrepareInstanceLogsResponse {
-  /** Instance logs for a given instance between a start and an end date. */
+  /** Instance logs for a Database Instance between a start and an end date. */
   instanceLogs: InstanceLog[]
 }
 
@@ -632,28 +633,28 @@ export interface Privilege {
 
 /** Read replica. */
 export interface ReadReplica {
-  /** UUID of the read replica. */
+  /** UUID of the Read Replica. */
   id: string
-  /** Display read replica connection information. */
+  /** Display Read Replica connection information. */
   endpoints: Endpoint[]
   /** Read replica status. */
   status: ReadReplicaStatus
-  /** Region the read replica is in. */
+  /** Region the Read Replica is in. */
   region: Region
 }
 
 /** Read replica endpoint spec. */
 export interface ReadReplicaEndpointSpec {
   /**
-   * Direct access endpoint specifications. Public endpoint reserved for read
-   * replicas. One per read replica.
+   * Direct access endpoint specifications. Public endpoint reserved for Read
+   * Replicas. One per Read Replica.
    *
    * One-of ('spec'): at most one of 'directAccess', 'privateNetwork' could be
    * set.
    */
   directAccess?: ReadReplicaEndpointSpecDirectAccess
   /**
-   * Private network endpoint specifications. One at the most per read replica.
+   * Private Network endpoint specifications. One at the most per Read Replica.
    * Cannot be updated (has to be deleted and recreated).
    *
    * One-of ('spec'): at most one of 'directAccess', 'privateNetwork' could be
@@ -666,20 +667,20 @@ export interface ReadReplicaEndpointSpecDirectAccess {}
 
 /** Read replica endpoint spec. private network. */
 export interface ReadReplicaEndpointSpecPrivateNetwork {
-  /** UUID of the private network to be connected to the read replica. */
+  /** UUID of the Private Network to be connected to the Read Replica. */
   privateNetworkId: string
   /**
-   * Endpoint IPv4 adress with a CIDR notation. Check documentation about IP and
-   * subnet limitations.
+   * Endpoint IPv4 address with a CIDR notation. Refer to the official Scaleway
+   * documentation to learn more about IP and subnet limitations.
    *
    * One-of ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
    */
   serviceIp?: string
   /**
-   * Automated configuration of your private network endpoint with Scaleway IPAM
-   * service. One at the most per RDB instance or read replica (an RDB instance
-   * and its read replica can have different private networks). Cannot be
-   * updated (has to be deleted and recreated).
+   * Automated configuration of your Private Network endpoint with Scaleway IPAM
+   * service. One at the most per Database Instance or Read Replica (a Database
+   * Instance and its Read Replica can have different private networks). Cannot
+   * be updated (has to be deleted and recreated).
    *
    * One-of ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
    */
@@ -690,13 +691,13 @@ export interface ReadReplicaEndpointSpecPrivateNetworkIpamConfig {}
 
 /** Set instance acl rules response. */
 export interface SetInstanceACLRulesResponse {
-  /** ACLs rules configured for an instance. */
+  /** ACLs rules configured for a Database Instance. */
   rules: ACLRule[]
 }
 
 /** Set instance settings response. */
 export interface SetInstanceSettingsResponse {
-  /** Settings configured for a given instance. */
+  /** Settings configured for a Database Instance. */
   settings: InstanceSetting[]
 }
 
@@ -704,7 +705,7 @@ export interface SetInstanceSettingsResponse {
 export interface Snapshot {
   /** UUID of the snapshot. */
   id: string
-  /** UUID of the instance. */
+  /** UUID of the Database Instance. */
   instanceId: string
   /** Name of the snapshot. */
   name: string
@@ -712,13 +713,13 @@ export interface Snapshot {
   status: SnapshotStatus
   /** Size of the snapshot. */
   size?: number
-  /** Expiration date (Format ISO 8601). */
+  /** Expiration date (must follow the ISO 8601 format). */
   expiresAt?: Date
-  /** Creation date (Format ISO 8601). */
+  /** Creation date (must follow the ISO 8601 format). */
   createdAt?: Date
-  /** Updated date (Format ISO 8601). */
+  /** Updated date (must follow the ISO 8601 format). */
   updatedAt?: Date
-  /** Name of the instance of the snapshot. */
+  /** Name of the Database Instance of the snapshot. */
   instanceName: string
   /** Source node type. */
   nodeType: string
@@ -736,15 +737,15 @@ export interface UpgradableVersion {
 /** User. */
 export interface User {
   /**
-   * Name of the user (Length must be between 1 and 63 characters, The max
-   * Length is 32 for MySQL engines, First character must be an alphabet
-   * character (a-zA-Z), Your Username cannot start with '_rdb', Only
-   * a-zA-Z0-9_$- characters are accepted).
+   * Name of the user (Length must be between 1 and 63 characters for PostgreSQL
+   * and between 1 and 32 characters for MySQL. First character must be an
+   * alphabet character (a-zA-Z). Your username cannot start with '_rdb' or in
+   * PostgreSQL, 'pg_'. Only a-zA-Z0-9_$- characters are accepted).
    */
   name: string
   /**
-   * Whether or not a user got administrative privileges on the database
-   * instance.
+   * Defines whether or not a user got administrative privileges on the Database
+   * Instance.
    */
   isAdmin: boolean
 }
@@ -760,9 +761,9 @@ export type ListDatabaseEnginesRequest = {
    * config.
    */
   region?: Region
-  /** Name of the Database Engine. */
+  /** Name of the database engine. */
   name?: string
-  /** Version of the Database Engine. */
+  /** Version of the database engine. */
   version?: string
   page?: number
   pageSize?: number
@@ -774,7 +775,7 @@ export type ListNodeTypesRequest = {
    * config.
    */
   region?: Region
-  /** Whether or not to include disabled types. */
+  /** Defines whether or not to include disabled types. */
   includeDisabledTypes: boolean
   page?: number
   pageSize?: number
@@ -790,11 +791,11 @@ export type ListDatabaseBackupsRequest = {
   name?: string
   /** Criteria to use when ordering database backups listing. */
   orderBy?: ListDatabaseBackupsRequestOrderBy
-  /** UUID of the instance. */
+  /** UUID of the Database Instance. */
   instanceId?: string
-  /** Organization ID the database backups belongs to. */
+  /** Organization ID of the Organization the database backups belong to. */
   organizationId?: string
-  /** Project ID the database backups belongs to. */
+  /** Project ID of the Project the database backups belong to. */
   projectId?: string
   page?: number
   pageSize?: number
@@ -806,13 +807,13 @@ export type CreateDatabaseBackupRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance. */
+  /** UUID of the Database Instance. */
   instanceId: string
-  /** Name of the database you want to make a backup of. */
+  /** Name of the database you want to back up. */
   databaseName: string
   /** Name of the backup. */
   name?: string
-  /** Expiration date (Format ISO 8601). */
+  /** Expiration date (must follow the ISO 8601 format). */
   expiresAt?: Date
 }
 
@@ -836,7 +837,7 @@ export type UpdateDatabaseBackupRequest = {
   databaseBackupId: string
   /** Name of the Database Backup. */
   name?: string
-  /** Expiration date (Format ISO 8601). */
+  /** Expiration date (must follow the ISO 8601 format). */
   expiresAt?: Date
 }
 
@@ -859,12 +860,11 @@ export type RestoreDatabaseBackupRequest = {
   /** Backup of a logical database. */
   databaseBackupId: string
   /**
-   * Defines the destination database in order to restore into a specified
-   * database, the default destination is set to the origin database of the
-   * backup.
+   * Defines the destination database to restore into a specified database (the
+   * default destination is set to the origin database of the backup).
    */
   databaseName?: string
-  /** Defines the rdb instance where the backup has to be restored. */
+  /** Defines the Database Instance where the backup has to be restored. */
   instanceId: string
 }
 
@@ -884,17 +884,18 @@ export type UpgradeInstanceRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance you want to upgrade. */
+  /** UUID of the Database Instance you want to upgrade. */
   instanceId: string
   /**
-   * Node type of the instance you want to upgrade to.
+   * Node type of the Database Instance you want to upgrade to.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
    * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
    */
   nodeType?: string
   /**
-   * Set to true to enable high availability on your instance.
+   * Defines whether or not high availability should be enabled on the Database
+   * Instance.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
    * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
@@ -908,15 +909,15 @@ export type UpgradeInstanceRequest = {
    */
   volumeSize?: number
   /**
-   * Change your instance storage type.
+   * Change your Database Instance storage type.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
    * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
    */
   volumeType?: VolumeType
   /**
-   * This will create a new Database Instance with same instance specification
-   * as the current one and perform a Database Engine upgrade.
+   * This will create a new Database Instance with same specifications as the
+   * current one and perform a Database Engine upgrade.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
    * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
@@ -930,15 +931,15 @@ export type ListInstancesRequest = {
    * config.
    */
   region?: Region
-  /** List instance that have a given tags. */
+  /** List Database Instances that have a given tag. */
   tags?: string[]
-  /** List instance that match a given name pattern. */
+  /** Lists Database Instances that match a name pattern. */
   name?: string
-  /** Criteria to use when ordering instance listing. */
+  /** Criteria to use when ordering Database Instance listings. */
   orderBy?: ListInstancesRequestOrderBy
-  /** Please use `project_id` instead. */
+  /** Please use project_id instead. */
   organizationId?: string
-  /** Project ID to list the instance of. */
+  /** Project ID to list the Database Instance of. */
   projectId?: string
   page?: number
   pageSize?: number
@@ -950,7 +951,7 @@ export type GetInstanceRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance. */
+  /** UUID of the Database Instance. */
   instanceId: string
 }
 
@@ -961,47 +962,50 @@ export type CreateInstanceRequest = {
    */
   region?: Region
   /**
-   * @deprecated Please use `project_id` instead.
+   * @deprecated Please use project_id instead.
    *
    *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    *   could be set.
    */
   organizationId?: string
   /**
-   * The project ID on which to create the instance.
+   * The Project ID on which the Database Instance will be created.
    *
    * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    * could be set.
    */
   projectId?: string
-  /** Name of the instance. */
+  /** Name of the Database Instance. */
   name?: string
-  /** Database engine of the database (PostgreSQL, MySQL, ...). */
+  /** Database engine of the Database Instance (PostgreSQL, MySQL, ...). */
   engine: string
-  /** Name of the user created when the instance is created. */
+  /** Username created when the Database Instance is created. */
   userName: string
   /** Password of the user. */
   password: string
-  /** Type of node to use for the instance. */
+  /** Type of node to use for the Database Instance. */
   nodeType: string
-  /** Whether or not High-Availability is enabled. */
+  /** Defines whether or not High-Availability is enabled. */
   isHaCluster: boolean
-  /** Whether or not backups are disabled. */
+  /** Defines whether or not backups are disabled. */
   disableBackup: boolean
-  /** Tags to apply to the instance. */
+  /** Tags to apply to the Database Instance. */
   tags?: string[]
-  /** List of engine settings to be set at database initialisation. */
+  /** List of engine settings to be set upon Database Instance initialization. */
   initSettings?: InstanceSetting[]
-  /** Type of volume where data are stored (lssd, bssd, ...). */
+  /** Type of volume where data is stored (lssd, bssd, ...). */
   volumeType?: VolumeType
   /** Volume size when volume_type is not lssd. */
   volumeSize: number
   /**
-   * One or multiple EndpointSpec used to expose your database instance. A
+   * One or multiple EndpointSpec used to expose your Database Instance. A
    * load_balancer public endpoint is systematically created.
    */
   initEndpoints?: EndpointSpec[]
-  /** Store logical backups in the same region as the database instance. */
+  /**
+   * Defines whether to or not to store logical backups in the same region as
+   * the Database Instance.
+   */
   backupSameRegion: boolean
 }
 
@@ -1011,21 +1015,21 @@ export type UpdateInstanceRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance to update. */
+  /** UUID of the Database Instance to update. */
   instanceId: string
   /** In hours. */
   backupScheduleFrequency?: number
   /** In days. */
   backupScheduleRetention?: number
-  /** Whether or not the backup schedule is disabled. */
+  /** Defines whether or not the backup schedule is disabled. */
   isBackupScheduleDisabled?: boolean
-  /** Name of the instance. */
+  /** Name of the Database Instance. */
   name?: string
-  /** Tags of a given instance. */
+  /** Tags of a Database Instance. */
   tags?: string[]
-  /** Logs policy of the instance. */
+  /** Logs policy of the Database Instance. */
   logsPolicy?: LogsPolicy
-  /** Store logical backups in the same region as the database instance. */
+  /** Store logical backups in the same region as the Database Instance. */
   backupSameRegion?: boolean
 }
 
@@ -1035,7 +1039,7 @@ export type DeleteInstanceRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance to delete. */
+  /** UUID of the Database Instance to delete. */
   instanceId: string
 }
 
@@ -1045,9 +1049,9 @@ export type CloneInstanceRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance you want to clone. */
+  /** UUID of the Database Instance you want to clone. */
   instanceId: string
-  /** Name of the clone instance. */
+  /** Name of the Database Instance clone. */
   name: string
   /** Node type of the clone. */
   nodeType?: string
@@ -1059,7 +1063,7 @@ export type RestartInstanceRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance you want to restart. */
+  /** UUID of the Database Instance you want to restart. */
   instanceId: string
 }
 
@@ -1069,7 +1073,7 @@ export type GetInstanceCertificateRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance. */
+  /** UUID of the Database Instance. */
   instanceId: string
 }
 
@@ -1079,7 +1083,7 @@ export type RenewInstanceCertificateRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance you want logs of. */
+  /** UUID of the Database Instance you want logs of. */
   instanceId: string
 }
 
@@ -1089,7 +1093,7 @@ export type GetInstanceMetricsRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance. */
+  /** UUID of the Database Instance. */
   instanceId: string
   /** Start date to gather metrics from. */
   startDate?: Date
@@ -1105,7 +1109,7 @@ export type CreateReadReplicaRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance you want a read replica of. */
+  /** UUID of the Database Instance you want to create a Read Replica from. */
   instanceId: string
   /** Specification of the endpoint you want to create. */
   endpointSpec?: ReadReplicaEndpointSpec[]
@@ -1117,7 +1121,7 @@ export type GetReadReplicaRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the read replica. */
+  /** UUID of the Read Replica. */
   readReplicaId: string
 }
 
@@ -1127,7 +1131,7 @@ export type DeleteReadReplicaRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the read replica. */
+  /** UUID of the Read Replica. */
   readReplicaId: string
 }
 
@@ -1137,7 +1141,7 @@ export type ResetReadReplicaRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the read replica. */
+  /** UUID of the Read Replica. */
   readReplicaId: string
 }
 
@@ -1147,7 +1151,7 @@ export type CreateReadReplicaEndpointRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the read replica. */
+  /** UUID of the Read Replica. */
   readReplicaId: string
   /** Specification of the endpoint you want to create. */
   endpointSpec: ReadReplicaEndpointSpec[]
@@ -1159,17 +1163,11 @@ export type PrepareInstanceLogsRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance you want logs of. */
+  /** UUID of the Database Instance you want logs of. */
   instanceId: string
-  /**
-   * Start datetime of your log. Format:
-   * `{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z`.
-   */
+  /** Start datetime of your log. (RFC 3339 format). */
   startDate?: Date
-  /**
-   * End datetime of your log. Format:
-   * `{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z`.
-   */
+  /** End datetime of your log. (RFC 3339 format). */
   endDate?: Date
 }
 
@@ -1179,9 +1177,9 @@ export type ListInstanceLogsRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance you want logs of. */
+  /** UUID of the Database Instance you want logs of. */
   instanceId: string
-  /** Criteria to use when ordering instance logs listing. */
+  /** Criteria to use when ordering Database Instance logs listing. */
   orderBy?: ListInstanceLogsRequestOrderBy
 }
 
@@ -1201,9 +1199,9 @@ export type PurgeInstanceLogsRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance you want logs of. */
+  /** UUID of the Database Instance you want logs of. */
   instanceId: string
-  /** Specific log name to purge. */
+  /** Given log name to purge. */
   logName?: string
 }
 
@@ -1213,7 +1211,7 @@ export type ListInstanceLogsDetailsRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance you want logs of. */
+  /** UUID of the Database Instance you want logs of. */
   instanceId: string
 }
 
@@ -1223,9 +1221,9 @@ export type AddInstanceSettingsRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance you want to add settings to. */
+  /** UUID of the Database Instance you want to add settings to. */
   instanceId: string
-  /** Settings to add on the instance. */
+  /** Settings to add to the Database Instance. */
   settings: InstanceSetting[]
 }
 
@@ -1235,7 +1233,7 @@ export type DeleteInstanceSettingsRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance to delete settings from. */
+  /** UUID of the Database Instance to delete settings from. */
   instanceId: string
   /** Settings names to delete. */
   settingNames: string[]
@@ -1247,9 +1245,9 @@ export type SetInstanceSettingsRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance where the settings has to be set. */
+  /** UUID of the Database Instance where the settings must be set. */
   instanceId: string
-  /** Settings to define for the instance. */
+  /** Settings to define for the Database Instance. */
   settings: InstanceSetting[]
 }
 
@@ -1259,7 +1257,7 @@ export type ListInstanceACLRulesRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance. */
+  /** UUID of the Database Instance. */
   instanceId: string
   page?: number
   pageSize?: number
@@ -1271,9 +1269,9 @@ export type AddInstanceACLRulesRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance you want to add acl rules to. */
+  /** UUID of the Database Instance you want to add ACL rules to. */
   instanceId: string
-  /** ACLs rules to add to the instance. */
+  /** ACL rules to add to the Database Instance. */
   rules: ACLRuleRequest[]
 }
 
@@ -1283,9 +1281,9 @@ export type SetInstanceACLRulesRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance where the ACL rules has to be set. */
+  /** UUID of the Database Instance where the ACL rules must be set. */
   instanceId: string
-  /** ACL rules to define for the instance. */
+  /** ACL rules to define for the Database Instance. */
   rules: ACLRuleRequest[]
 }
 
@@ -1295,9 +1293,9 @@ export type DeleteInstanceACLRulesRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance you want to delete an ACL rules from. */
+  /** UUID of the Database Instance you want to delete an ACL rule from. */
   instanceId: string
-  /** ACL rules IP present on the instance. */
+  /** IP addresses defined in the ACL rules of the Database Instance. */
   aclRuleIps: string[]
 }
 
@@ -1307,11 +1305,11 @@ export type ListUsersRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance. */
+  /** UUID of the Database Instance. */
   instanceId: string
   /** Name of the user. */
   name?: string
-  /** Criteria to use when ordering users listing. */
+  /** Criteria to use when requesting user listing. */
   orderBy?: ListUsersRequestOrderBy
   page?: number
   pageSize?: number
@@ -1323,13 +1321,13 @@ export type CreateUserRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance you want to create a user in. */
+  /** UUID of the Database Instance in which you want to create a user. */
   instanceId: string
   /** Name of the user you want to create. */
   name: string
   /** Password of the user you want to create. */
   password: string
-  /** Whether the user you want to create will have administrative privileges. */
+  /** Defines whether the user will have administrative privileges. */
   isAdmin: boolean
 }
 
@@ -1339,13 +1337,13 @@ export type UpdateUserRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance the user belongs to. */
+  /** UUID of the Database Instance the user belongs to. */
   instanceId: string
   /** Name of the database user. */
   name: string
   /** Password of the database user. */
   password?: string
-  /** Whether or not this user got administrative privileges. */
+  /** Defines whether or not this user got administrative privileges. */
   isAdmin?: boolean
 }
 
@@ -1355,7 +1353,7 @@ export type DeleteUserRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance to delete a user from. */
+  /** UUID of the Database Instance to delete the user from. */
   instanceId: string
   /** Name of the user. */
   name: string
@@ -1367,11 +1365,11 @@ export type ListDatabasesRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance to list database of. */
+  /** UUID of the Database Instance to list the databases of. */
   instanceId: string
   /** Name of the database. */
   name?: string
-  /** Whether or not the database is managed. */
+  /** Defines whether or not the database is managed. */
   managed?: boolean
   /** User that owns this database. */
   owner?: string
@@ -1387,7 +1385,7 @@ export type CreateDatabaseRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance where to create the database. */
+  /** UUID of the Database Instance where to create the database. */
   instanceId: string
   /** Name of the database. */
   name: string
@@ -1399,7 +1397,7 @@ export type DeleteDatabaseRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance where to delete the database. */
+  /** UUID of the Database Instance where to delete the database. */
   instanceId: string
   /** Name of the database to delete. */
   name: string
@@ -1411,7 +1409,7 @@ export type ListPrivilegesRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance. */
+  /** UUID of the Database Instance. */
   instanceId: string
   /** Criteria to use when ordering privileges listing. */
   orderBy?: ListPrivilegesRequestOrderBy
@@ -1429,7 +1427,7 @@ export type SetPrivilegeRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance. */
+  /** UUID of the Database Instance. */
   instanceId: string
   /** Name of the database. */
   databaseName: string
@@ -1449,7 +1447,7 @@ export type ListSnapshotsRequest = {
   name?: string
   /** Criteria to use when ordering snapshot listing. */
   orderBy?: ListSnapshotsRequestOrderBy
-  /** UUID of the instance. */
+  /** UUID of the Database Instance. */
   instanceId?: string
   /** Organization ID the snapshots belongs to. */
   organizationId?: string
@@ -1475,11 +1473,11 @@ export type CreateSnapshotRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance. */
+  /** UUID of the Database Instance. */
   instanceId: string
   /** Name of the snapshot. */
   name?: string
-  /** Expiration date (Format ISO 8601). */
+  /** Expiration date (must follow the ISO 8601 format). */
   expiresAt?: Date
 }
 
@@ -1493,7 +1491,7 @@ export type UpdateSnapshotRequest = {
   snapshotId: string
   /** Name of the snapshot. */
   name?: string
-  /** Expiration date (Format ISO 8601). */
+  /** Expiration date (must follow the ISO 8601 format). */
   expiresAt?: Date
 }
 
@@ -1513,11 +1511,14 @@ export type CreateInstanceFromSnapshotRequest = {
    * config.
    */
   region?: Region
-  /** Block snapshot of the instance. */
+  /** Block snapshot of the Database Instance. */
   snapshotId: string
-  /** Name of the instance created with the snapshot. */
+  /** Name of the Database Instance created with the snapshot. */
   instanceName: string
-  /** Whether or not High-Availability is enabled on the new instance. */
+  /**
+   * Defines whether or not High-Availability is enabled on the new Database
+   * Instance.
+   */
   isHaCluster?: boolean
   /** The node type used to restore the snapshot. */
   nodeType?: string
@@ -1529,7 +1530,7 @@ export type CreateEndpointRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the instance you want to add endpoint to. */
+  /** UUID of the Database Instance you to which you want to add an endpoint. */
   instanceId: string
   /** Specification of the endpoint you want to create. */
   endpointSpec?: EndpointSpec
@@ -1541,7 +1542,7 @@ export type DeleteEndpointRequest = {
    * config.
    */
   region?: Region
-  /** This endpoint can also be used to delete a read replica endpoint. */
+  /** This endpoint can also be used to delete a Read Replica endpoint. */
   endpointId: string
 }
 
