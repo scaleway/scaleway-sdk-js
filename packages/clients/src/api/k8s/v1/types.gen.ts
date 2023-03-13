@@ -103,45 +103,48 @@ export type Runtime = 'unknown_runtime' | 'docker' | 'containerd' | 'crio'
 
 /** Cluster. */
 export interface Cluster {
-  /** The ID of the cluster. */
+  /** ID of the cluster. */
   id: string
-  /** The type of the cluster. */
+  /** Type of the cluster. */
   type: string
-  /** The name of the cluster. */
+  /** Nqme of the cluster. */
   name: string
-  /** The status of the cluster. */
+  /** Status of the cluster. */
   status: ClusterStatus
-  /** The Kubernetes version of the cluster. */
+  /** Kubernetes version of the cluster. */
   version: string
-  /** The region in which the cluster is. */
+  /** Region in which the cluster is deployed. */
   region: Region
-  /** The ID of the organization owning the cluster. */
+  /** ID of the organization owning the cluster. */
   organizationId: string
-  /** The ID of the project owning the cluster. */
+  /** ID of the project owning the cluster. */
   projectId: string
-  /** The tags associated with the cluster. */
+  /** Tags associated with the cluster. */
   tags: string[]
-  /** The Container Network Interface (CNI) plugin running in the cluster. */
+  /** Container Network Interface (CNI) plugin running in the cluster. */
   cni: CNI
-  /** The description of the cluster. */
+  /** Description of the cluster. */
   description: string
-  /** The Kubernetes API server URL of the cluster. */
+  /** Kubernetes API server URL of the cluster. */
   clusterUrl: string
-  /** The DNS wildcard resovling all the ready nodes of the cluster. */
+  /** DNS wildcard resovling all the ready nodes of the cluster. */
   dnsWildcard: string
-  /** The date at which the cluster was created. */
+  /** Date at which the cluster was created. */
   createdAt?: Date
-  /** The date at which the cluster was last updated. */
+  /** Date at which the cluster was last updated. */
   updatedAt?: Date
-  /** The autoscaler config for the cluster. */
+  /** Autoscaler config for the cluster. */
   autoscalerConfig?: ClusterAutoscalerConfig
-  /** @deprecated The enablement of the Kubernetes Dashboard in the cluster. */
+  /**
+   * @deprecated Defines whether the Kubernetes dashboard is enabled for the
+   *   cluster.
+   */
   dashboardEnabled?: boolean
-  /** @deprecated The ingress controller used in the cluster. */
+  /** @deprecated Ingress controller used in the cluster. */
   ingress?: Ingress
-  /** The auto upgrade configuration of the cluster. */
+  /** Auto upgrade configuration of the cluster. */
   autoUpgrade?: ClusterAutoUpgrade
-  /** True if a new Kubernetes version is available. */
+  /** Defines whether a new Kubernetes version is available. */
   upgradeAvailable: boolean
   /** List of enabled feature gates. */
   featureGates: string[]
@@ -165,7 +168,7 @@ export interface Cluster {
 export interface ClusterAutoUpgrade {
   /** Whether or not auto upgrade is enabled for the cluster. */
   enabled: boolean
-  /** The maintenance window of the cluster auto upgrades. */
+  /** Maintenance window of the cluster auto upgrades. */
   maintenanceWindow?: MaintenanceWindow
 }
 
@@ -244,8 +247,8 @@ export interface ClusterOpenIDConnectConfig {
    */
   groupsPrefix: string
   /**
-   * Multiple key=value pairs that describes a required claim in the ID Token.
-   * If set, the claims are verified to be present in the ID Token with a
+   * Multiple key=value pairs that describes a required claim in the ID token.
+   * If set, the claims are verified to be present in the ID token with a
    * matching value.
    */
   requiredClaim: string[]
@@ -255,7 +258,7 @@ export interface ClusterOpenIDConnectConfig {
 export interface CreateClusterRequestAutoUpgrade {
   /** Whether or not auto upgrade is enabled for the cluster. */
   enable: boolean
-  /** The maintenance window of the cluster auto upgrades. */
+  /** Maintenance window of the cluster auto upgrades. */
   maintenanceWindow?: MaintenanceWindow
 }
 
@@ -334,8 +337,8 @@ export interface CreateClusterRequestOpenIDConnectConfig {
    */
   groupsPrefix?: string
   /**
-   * Multiple key=value pairs that describes a required claim in the ID Token.
-   * If set, the claims are verified to be present in the ID Token with a
+   * Multiple key=value pairs that describes a required claim in the ID token.
+   * If set, the claims are verified to be present in the ID token with a
    * matching value.
    */
   requiredClaim?: string[]
@@ -343,60 +346,57 @@ export interface CreateClusterRequestOpenIDConnectConfig {
 
 /** Create cluster request. pool config. */
 export interface CreateClusterRequestPoolConfig {
-  /** The name of the pool. */
+  /** Name of the pool. */
   name: string
   /**
-   * The node type is the type of Scaleway Instance wanted for the pool. Nodes
-   * with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST).
+   * Node type is the type of Scaleway Instance wanted for the pool. Nodes with
+   * insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST).
    * 'external' is a special node type used to provision instances from other
    * cloud providers.
    */
   nodeType: string
-  /** The placement group ID in which all the nodes of the pool will be created. */
+  /** Placement group ID in which all the nodes of the pool will be created. */
   placementGroupId?: string
-  /** The enablement of the autoscaling feature for the pool. */
+  /** Defines whether the autoscaling feature is enabled for the pool. */
   autoscaling: boolean
-  /** The size (number of nodes) of the pool. */
+  /** Size (number of nodes) of the pool. */
   size: number
   /**
-   * The minimum size of the pool. Note that this field will be used only when
-   * autoscaling is enabled.
+   * Defines the minimum size of the pool. Note that this field will be used
+   * only when autoscaling is enabled.
    */
   minSize?: number
   /**
-   * The maximum size of the pool. Note that this field will be used only when
-   * autoscaling is enabled.
+   * Defines the maximum size of the pool. Note that this field will be used
+   * only when autoscaling is enabled.
    */
   maxSize?: number
   /**
-   * The customization of the container runtime is available for each pool. Note
+   * Customization of the container runtime is available for each pool. Note
    * that `docker` is deprecated since 1.20 and will be removed in 1.24.
    */
   containerRuntime: Runtime
-  /** The enablement of the autohealing feature for the pool. */
+  /** Defines whether the autohealing feature is enabled for the pool. */
   autohealing: boolean
-  /** The tags associated with the pool. */
+  /** Tags associated with the pool. */
   tags: string[]
   /**
-   * The Kubelet arguments to be used by this pool. Note that this feature is to
-   * be considered as experimental.
+   * Kubelet arguments to be used by this pool. Note that this feature is to be
+   * considered as experimental.
    */
   kubeletArgs: Record<string, string>
-  /** The Pool upgrade policy. */
+  /** Pool upgrade policy. */
   upgradePolicy?: CreateClusterRequestPoolConfigUpgradePolicy
-  /** The Zone in which the Pool's node will be spawn in. */
+  /** Zone in which the pool's nodes will be spawned. */
   zone: Zone
   /**
-   * The system volume disk type, we provide two different types of volume
-   * (`volume_type`):
-   *
-   * - `l_ssd` is a local block storage: your system is stored locally on the
-   *   hypervisor of your node.
-   * - `b_ssd` is a remote block storage: your system is stored on a centralised
-   *   and resilient cluster.
+   * Defines the system volume disk type, we provide two different types of
+   * volume (`volume_type`): `l_ssd` is a local block storage: your system is
+   * stored locally on the hypervisor of your node. `b_ssd` is a remote block
+   * storage: your system is stored on a centralised and resilient cluster.
    */
   rootVolumeType: PoolVolumeType
-  /** The system volume disk size. */
+  /** System volume disk size. */
   rootVolumeSize?: number
 }
 
@@ -425,154 +425,151 @@ export interface ExternalNode {
 
 /** List cluster available versions response. */
 export interface ListClusterAvailableVersionsResponse {
-  /** The available Kubernetes version for the cluster. */
+  /** Available Kubernetes version for the cluster. */
   versions: Version[]
 }
 
 /** List clusters response. */
 export interface ListClustersResponse {
-  /** The total number of clusters. */
+  /** Total number of clusters. */
   totalCount: number
-  /** The paginated returned clusters. */
+  /** Paginated returned clusters. */
   clusters: Cluster[]
 }
 
 /** List nodes response. */
 export interface ListNodesResponse {
-  /** The total number of nodes. */
+  /** Total number of nodes. */
   totalCount: number
-  /** The paginated returned nodes. */
+  /** Paginated returned nodes. */
   nodes: Node[]
 }
 
 /** List pools response. */
 export interface ListPoolsResponse {
-  /** The total number of pools that exists for the cluster. */
+  /** Total number of pools that exists for the cluster. */
   totalCount: number
-  /** The paginated returned pools. */
+  /** Paginated returned pools. */
   pools: Pool[]
 }
 
 /** List versions response. */
 export interface ListVersionsResponse {
-  /** The available Kubernetes versions. */
+  /** Available Kubernetes versions. */
   versions: Version[]
 }
 
 /** Maintenance window. */
 export interface MaintenanceWindow {
-  /** The start hour of the 2-hour maintenance window. */
+  /** Start time of the two-hour maintenance window. */
   startHour: number
-  /** The day of the week for the maintenance window. */
+  /** Day of the week for the maintenance window. */
   day: MaintenanceWindowDayOfTheWeek
 }
 
 /** Node. */
 export interface Node {
-  /** The ID of the node. */
+  /** ID of the node. */
   id: string
-  /** The pool ID of the node. */
+  /** Pool ID of the node. */
   poolId: string
-  /** The cluster ID of the node. */
+  /** Cluster ID of the node. */
   clusterId: string
   /**
    * It is prefixed by instance type and location information (see
    * https://pkg.go.dev/k8s.io/api/core/v1#NodeSpec.ProviderID).
    */
   providerId: string
-  /** The cluster region of the node. */
+  /** Cluster region of the node. */
   region: Region
-  /** The name of the node. */
+  /** Name of the node. */
   name: string
-  /** @deprecated The public IPv4 address of the node. */
+  /** @deprecated Public IPv4 address of the node. */
   publicIpV4?: string
-  /** @deprecated The public IPv6 address of the node. */
+  /** @deprecated Public IPv6 address of the node. */
   publicIpV6?: string
   /**
    * @deprecated These conditions contains the Node Problem Detector conditions,
    *   as well as some in house conditions.
    */
   conditions?: Record<string, string>
-  /** The status of the node. */
+  /** Status of the node. */
   status: NodeStatus
   /** Details of the error, if any occured when managing the node. */
   errorMessage?: string
-  /** The date at which the node was created. */
+  /** Date on which the node was created. */
   createdAt?: Date
-  /** The date at which the node was last updated. */
+  /** Date at which the node was last updated. */
   updatedAt?: Date
 }
 
 /** Pool. */
 export interface Pool {
-  /** The ID of the pool. */
+  /** ID of the pool. */
   id: string
-  /** The cluster ID of the pool. */
+  /** Cluster ID of the pool. */
   clusterId: string
-  /** The date at which the pool was created. */
+  /** Date at which the pool was created. */
   createdAt?: Date
-  /** The date at which the pool was last updated. */
+  /** Date at which the pool was last updated. */
   updatedAt?: Date
-  /** The name of the pool. */
+  /** Name of the pool. */
   name: string
-  /** The status of the pool. */
+  /** Status of the pool. */
   status: PoolStatus
-  /** The version of the pool. */
+  /** Version of the pool. */
   version: string
   /**
-   * The node type is the type of Scaleway Instance wanted for the pool. Nodes
-   * with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST).
+   * Node type is the type of Scaleway Instance wanted for the pool. Nodes with
+   * insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST).
    * 'external' is a special node type used to provision instances from other
    * cloud providers.
    */
   nodeType: string
-  /** The enablement of the autoscaling feature for the pool. */
+  /** Defines whether the autoscaling feature is enabled for the pool. */
   autoscaling: boolean
-  /** The size (number of nodes) of the pool. */
+  /** Size (number of nodes) of the pool. */
   size: number
   /**
-   * The minimum size of the pool. Note that this field will be used only when
-   * autoscaling is enabled.
+   * Defines the minimum size of the pool. Note that this field will be used
+   * only when autoscaling is enabled.
    */
   minSize: number
   /**
-   * The maximum size of the pool. Note that this field will be used only when
-   * autoscaling is enabled.
+   * Defines the maximum size of the pool. Note that this field will be used
+   * only when autoscaling is enabled.
    */
   maxSize: number
   /**
-   * The customization of the container runtime is available for each pool. Note
+   * Customization of the container runtime is available for each pool. Note
    * that `docker` is deprecated since 1.20 and will be removed in 1.24.
    */
   containerRuntime: Runtime
-  /** The enablement of the autohealing feature for the pool. */
+  /** Defines whether the autohealing feature is enabled for the pool. */
   autohealing: boolean
-  /** The tags associated with the pool. */
+  /** Tags associated with the pool. */
   tags: string[]
-  /** The placement group ID in which all the nodes of the pool will be created. */
+  /** Placement group ID in which all the nodes of the pool will be created. */
   placementGroupId?: string
   /**
-   * The Kubelet arguments to be used by this pool. Note that this feature is to
-   * be considered as experimental.
+   * Kubelet arguments to be used by this pool. Note that this feature is to be
+   * considered as experimental.
    */
   kubeletArgs: Record<string, string>
-  /** The Pool upgrade policy. */
+  /** Pool upgrade policy. */
   upgradePolicy?: PoolUpgradePolicy
-  /** The Zone in which the Pool's node will be spawn in. */
+  /** Zone in which the pool's nodes will be spawned. */
   zone: Zone
   /**
-   * The system volume disk type, we provide two different types of volume
-   * (`volume_type`):
-   *
-   * - `l_ssd` is a local block storage: your system is stored locally on the
-   *   hypervisor of your node.
-   * - `b_ssd` is a remote block storage: your system is stored on a centralised
-   *   and resilient cluster.
+   * Defines the system volume disk type, we provide two different types of
+   * volume (`volume_type`): `l_ssd` is a local block storage: your system is
+   * stored locally on the hypervisor of your node. `b_ssd` is a remote block
+   * storage: your system is stored on a centralised and resilient cluster.
    */
   rootVolumeType: PoolVolumeType
-  /** The system volume disk size. */
+  /** System volume disk size. */
   rootVolumeSize?: number
-  /** The cluster region of the pool. */
+  /** Cluster region of the pool. */
   region: Region
 }
 
@@ -585,7 +582,7 @@ export interface PoolUpgradePolicy {
 export interface UpdateClusterRequestAutoUpgrade {
   /** Whether or not auto upgrade is enabled for the cluster. */
   enable?: boolean
-  /** The maintenance window of the cluster auto upgrades. */
+  /** Maintenance window of the cluster auto upgrades. */
   maintenanceWindow?: MaintenanceWindow
 }
 
@@ -664,8 +661,8 @@ export interface UpdateClusterRequestOpenIDConnectConfig {
    */
   groupsPrefix?: string
   /**
-   * Multiple key=value pairs that describes a required claim in the ID Token.
-   * If set, the claims are verified to be present in the ID Token with a
+   * Multiple key=value pairs that describes a required claim in the ID token.
+   * If set, the claims are verified to be present in the ID token with a
    * matching value.
    */
   requiredClaim?: string[]
@@ -678,23 +675,23 @@ export interface UpdatePoolRequestUpgradePolicy {
 
 /** Version. */
 export interface Version {
-  /** The name of the Kubernetes version. */
+  /** Name of the Kubernetes version. */
   name: string
-  /** The label of the Kubernetes version. */
+  /** Label of the Kubernetes version. */
   label: string
-  /** The region in which this version is available. */
+  /** Region in which this version is available. */
   region: Region
-  /** The supported Container Network Interface (CNI) plugins for this version. */
+  /** Supported Container Network Interface (CNI) plugins for this version. */
   availableCnis: CNI[]
-  /** @deprecated The supported Ingress Controllers for this version. */
+  /** @deprecated Supported Ingress Controllers for this version. */
   availableIngresses?: Ingress[]
-  /** The supported container runtimes for this version. */
+  /** Supported container runtimes for this version. */
   availableContainerRuntimes: Runtime[]
-  /** The supported feature gates for this version. */
+  /** Supported feature gates for this version. */
   availableFeatureGates: string[]
-  /** The supported admission plugins for this version. */
+  /** Supported admission plugins for this version. */
   availableAdmissionPlugins: string[]
-  /** The supported kubelet arguments for this version. */
+  /** Supported kubelet arguments for this version. */
   availableKubeletArgs: Record<string, string>
 }
 
@@ -704,21 +701,21 @@ export type ListClustersRequest = {
    * config.
    */
   region?: Region
-  /** The organization ID on which to filter the returned clusters. */
+  /** Organization ID on which to filter the returned clusters. */
   organizationId?: string
-  /** The project ID on which to filter the returned clusters. */
+  /** Project ID on which to filter the returned clusters. */
   projectId?: string
-  /** The sort order of the returned clusters. */
+  /** Sort order of the returned clusters. */
   orderBy?: ListClustersRequestOrderBy
-  /** The page number for the returned clusters. */
+  /** Page number for the returned clusters. */
   page?: number
-  /** The maximum number of clusters per page. */
+  /** Maximum number of clusters per page. */
   pageSize?: number
-  /** The name on which to filter the returned clusters. */
+  /** Name on which to filter the returned clusters. */
   name?: string
-  /** The status on which to filter the returned clusters. */
+  /** Status on which to filter the returned clusters. */
   status?: ClusterStatus
-  /** The type on which to filter the returned clusters. */
+  /** Type on which to filter the returned clusters. */
   type?: string
 }
 
@@ -729,14 +726,14 @@ export type CreateClusterRequest = {
    */
   region?: Region
   /**
-   * @deprecated The organization ID where the cluster will be created.
+   * @deprecated Organization ID in which the cluster will be created.
    *
    *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    *   could be set.
    */
   organizationId?: string
   /**
-   * The project ID where the cluster will be created.
+   * Poject ID in which the cluster will be created.
    *
    * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    * could be set.
@@ -744,21 +741,21 @@ export type CreateClusterRequest = {
   projectId?: string
   /** The type of the cluster (possible values are kapsule, multicloud). */
   type: string
-  /** The name of the cluster. */
+  /** Name of the cluster. */
   name?: string
-  /** The description of the cluster. */
+  /** Description of the cluster. */
   description: string
-  /** The tags associated with the cluster. */
+  /** Tags associated with the cluster. */
   tags?: string[]
-  /** The Kubernetes version of the cluster. */
+  /** Kubernetes version of the cluster. */
   version: string
-  /** The Container Network Interface (CNI) plugin that will run in the cluster. */
+  /** Container Network Interface (CNI) plugin that will run in the cluster. */
   cni: CNI
-  /** @deprecated The enablement of the Kubernetes Dashboard in the cluster. */
+  /** @deprecated Defines if the Kubernetes Dashboard is enabled in the cluster. */
   enableDashboard?: boolean
-  /** @deprecated The Ingress Controller that will run in the cluster. */
+  /** @deprecated Ingress Controller that will run in the cluster. */
   ingress?: Ingress
-  /** The pools to be created along with the cluster. */
+  /** Pools to be created along with the cluster. */
   pools?: CreateClusterRequestPoolConfig[]
   /**
    * This field allows to specify some configuration for the autoscaler, which
@@ -806,30 +803,27 @@ export type UpdateClusterRequest = {
    * config.
    */
   region?: Region
-  /** The ID of the cluster to update. */
+  /** ID of the cluster to update. */
   clusterId: string
-  /**
-   * This field allows to update the external name of the cluster. The internal
-   * name (used for instance in hostname) won't change.
-   */
+  /** New external name of the cluster. */
   name?: string
-  /** The new description of the cluster. */
+  /** New description of the cluster. */
   description?: string
-  /** The new tags associated with the cluster. */
+  /** New tags associated with the cluster. */
   tags?: string[]
   /**
-   * This field allows to update some configuration for the autoscaler, which is
-   * an implementation of the
+   * Object defining the configuration for the autoscaler, which is an
+   * implementation of the
    * [cluster-autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/).
    */
   autoscalerConfig?: UpdateClusterRequestAutoscalerConfig
-  /** @deprecated The new value of the Kubernetes Dashboard enablement. */
+  /** @deprecated New value of the Kubernetes Dashboard enablement. */
   enableDashboard?: boolean
-  /** @deprecated The new Ingress Controller for the cluster. */
+  /** @deprecated New Ingress Controller for the cluster. */
   ingress?: Ingress
   /**
-   * The new auto upgrade configuration of the cluster. Note that all fields
-   * need to be set.
+   * New auto upgrade configuration of the cluster. Note that all fields need to
+   * be set.
    */
   autoUpgrade?: UpdateClusterRequestAutoUpgrade
   /** List of feature gates to enable. */
@@ -856,7 +850,7 @@ export type DeleteClusterRequest = {
    * config.
    */
   region?: Region
-  /** The ID of the cluster to delete. */
+  /** ID of the cluster to delete. */
   clusterId: string
   /**
    * Set true if you want to delete all volumes (including retain volume type)
@@ -871,12 +865,12 @@ export type UpgradeClusterRequest = {
    * config.
    */
   region?: Region
-  /** The ID of the cluster to upgrade. */
+  /** ID of the cluster to upgrade. */
   clusterId: string
   /**
-   * The new Kubernetes version of the cluster. Note that the version shoud
-   * either be a higher patch version of the same minor version or the direct
-   * minor version after the current one.
+   * New Kubernetes version of the cluster. Note that the version shoud either
+   * be a higher patch version of the same minor version or the direct minor
+   * version after the current one.
    */
   version: string
   /**
@@ -893,8 +887,8 @@ export type ListClusterAvailableVersionsRequest = {
    */
   region?: Region
   /**
-   * The ID of the cluster which the available Kuberentes versions will be
-   * listed from.
+   * ID of the cluster which the available Kuberentes versions will be listed
+   * from.
    */
   clusterId: string
 }
@@ -905,7 +899,7 @@ export type ResetClusterAdminTokenRequest = {
    * config.
    */
   region?: Region
-  /** The ID of the cluster of which the admin token will be renewed. */
+  /** ID of the cluster on which the admin token will be renewed. */
   clusterId: string
 }
 
@@ -915,17 +909,17 @@ export type ListPoolsRequest = {
    * config.
    */
   region?: Region
-  /** The ID of the cluster from which the pools will be listed from. */
+  /** ID of the cluster from which the pools will be listed from. */
   clusterId: string
-  /** The sort order of the returned pools. */
+  /** Sort order of the returned pools. */
   orderBy?: ListPoolsRequestOrderBy
-  /** The page number for the returned pools. */
+  /** Page number for the returned pools. */
   page?: number
-  /** The maximum number of pools per page. */
+  /** Maximum number of pools per page. */
   pageSize?: number
-  /** The name on which to filter the returned pools. */
+  /** Name on which to filter the returned pools. */
   name?: string
-  /** The status on which to filter the returned pools. */
+  /** Status on which to filter the returned pools. */
   status?: PoolStatus
 }
 
@@ -935,62 +929,59 @@ export type CreatePoolRequest = {
    * config.
    */
   region?: Region
-  /** The ID of the cluster in which the pool will be created. */
+  /** ID of the cluster in which the pool will be created. */
   clusterId: string
-  /** The name of the pool. */
+  /** Name of the pool. */
   name?: string
   /**
-   * The node type is the type of Scaleway Instance wanted for the pool. Nodes
-   * with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST).
+   * Node type is the type of Scaleway Instance wanted for the pool. Nodes with
+   * insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST).
    * 'external' is a special node type used to provision instances from other
    * cloud providers.
    */
   nodeType: string
-  /** The placement group ID in which all the nodes of the pool will be created. */
+  /** Placement group ID in which all the nodes of the pool will be created. */
   placementGroupId?: string
-  /** The enablement of the autoscaling feature for the pool. */
+  /** Defines whether the autoscaling feature is enabled for the pool. */
   autoscaling: boolean
-  /** The size (number of nodes) of the pool. */
+  /** Size (number of nodes) of the pool. */
   size: number
   /**
-   * The minimum size of the pool. Note that this field will be used only when
-   * autoscaling is enabled.
+   * Defines the minimum size of the pool. Note that this field will be used
+   * only when autoscaling is enabled.
    */
   minSize?: number
   /**
-   * The maximum size of the pool. Note that this field will be used only when
-   * autoscaling is enabled.
+   * Defines the maximum size of the pool. Note that this field will be used
+   * only when autoscaling is enabled.
    */
   maxSize?: number
   /**
-   * The customization of the container runtime is available for each pool. Note
+   * Customization of the container runtime is available for each pool. Note
    * that `docker` is deprecated since 1.20 and will be removed in 1.24.
    */
   containerRuntime?: Runtime
-  /** The enablement of the autohealing feature for the pool. */
+  /** Defines whether the autohealing feature is enabled for the pool. */
   autohealing: boolean
-  /** The tags associated with the pool. */
+  /** Tags associated with the pool. */
   tags?: string[]
   /**
-   * The Kubelet arguments to be used by this pool. Note that this feature is to
-   * be considered as experimental.
+   * Kubelet arguments to be used by this pool. Note that this feature is to be
+   * considered as experimental.
    */
   kubeletArgs?: Record<string, string>
-  /** The Pool upgrade policy. */
+  /** Pool upgrade policy. */
   upgradePolicy?: CreatePoolRequestUpgradePolicy
-  /** The Zone in which the Pool's node will be spawn in. */
+  /** Zone in which the pool's nodes will be spawned. */
   zone?: Zone
   /**
-   * The system volume disk type, we provide two different types of volume
-   * (`volume_type`):
-   *
-   * - `l_ssd` is a local block storage: your system is stored locally on the
-   *   hypervisor of your node.
-   * - `b_ssd` is a remote block storage: your system is stored on a centralised
-   *   and resilient cluster.
+   * Defines the system volume disk type, we provide two different types of
+   * volume (`volume_type`): `l_ssd` is a local block storage: your system is
+   * stored locally on the hypervisor of your node. `b_ssd` is a remote block
+   * storage: your system is stored on a centralised and resilient cluster.
    */
   rootVolumeType?: PoolVolumeType
-  /** The system volume disk size. */
+  /** System volume disk size. */
   rootVolumeSize?: number
 }
 
@@ -1000,7 +991,7 @@ export type GetPoolRequest = {
    * config.
    */
   region?: Region
-  /** The ID of the requested pool. */
+  /** ID of the requested pool. */
   poolId: string
 }
 
@@ -1010,9 +1001,9 @@ export type UpgradePoolRequest = {
    * config.
    */
   region?: Region
-  /** The ID of the pool to upgrade. */
+  /** ID of the pool to upgrade. */
   poolId: string
-  /** The new Kubernetes version for the pool. */
+  /** New Kubernetes version for the pool. */
   version: string
 }
 
@@ -1022,26 +1013,26 @@ export type UpdatePoolRequest = {
    * config.
    */
   region?: Region
-  /** The ID of the pool to update. */
+  /** ID of the pool to update. */
   poolId: string
-  /** The new value for the enablement of autoscaling for the pool. */
+  /** New value for the enablement of autoscaling for the pool. */
   autoscaling?: boolean
-  /** The new size for the pool. */
+  /** New size for the pool. */
   size?: number
-  /** The new minimun size for the pool. */
+  /** New minimun size for the pool. */
   minSize?: number
-  /** The new maximum size for the pool. */
+  /** New maximum size for the pool. */
   maxSize?: number
-  /** The new value for the enablement of autohealing for the pool. */
+  /** New value for the enablement of autohealing for the pool. */
   autohealing?: boolean
-  /** The new tags associated with the pool. */
+  /** New tags associated with the pool. */
   tags?: string[]
   /**
-   * The new Kubelet arguments to be used by this pool. Note that this feature
-   * is to be considered as experimental.
+   * New Kubelet arguments to be used by this pool. Note that this feature is to
+   * be considered as experimental.
    */
   kubeletArgs?: Record<string, string>
-  /** The Pool upgrade policy. */
+  /** Upgrade policy for the pool. */
   upgradePolicy?: UpdatePoolRequestUpgradePolicy
 }
 
@@ -1051,7 +1042,7 @@ export type DeletePoolRequest = {
    * config.
    */
   region?: Region
-  /** The ID of the pool to delete. */
+  /** ID of the pool to delete. */
   poolId: string
 }
 
@@ -1070,19 +1061,19 @@ export type ListNodesRequest = {
    * config.
    */
   region?: Region
-  /** The cluster ID from which the nodes will be listed from. */
+  /** Cluster ID from which the nodes will be listed from. */
   clusterId: string
-  /** The pool ID on which to filter the returned nodes. */
+  /** Pool ID on which to filter the returned nodes. */
   poolId?: string
-  /** The sort order of the returned nodes. */
+  /** Sort order of the returned nodes. */
   orderBy?: ListNodesRequestOrderBy
-  /** The page number for the returned nodes. */
+  /** Page number for the returned nodes. */
   page?: number
-  /** The maximum number of nodes per page. */
+  /** Maximum number of nodes per page. */
   pageSize?: number
-  /** The name on which to filter the returned nodes. */
+  /** Name on which to filter the returned nodes. */
   name?: string
-  /** The status on which to filter the returned nodes. */
+  /** Status on which to filter the returned nodes. */
   status?: NodeStatus
 }
 
@@ -1092,7 +1083,7 @@ export type GetNodeRequest = {
    * config.
    */
   region?: Region
-  /** The ID of the requested node. */
+  /** ID of the requested node. */
   nodeId: string
 }
 
@@ -1102,7 +1093,7 @@ export type ReplaceNodeRequest = {
    * config.
    */
   region?: Region
-  /** The ID of the node to replace. */
+  /** ID of the node to replace. */
   nodeId: string
 }
 
@@ -1112,7 +1103,7 @@ export type RebootNodeRequest = {
    * config.
    */
   region?: Region
-  /** The ID of the node to reboot. */
+  /** ID of the node to reboot. */
   nodeId: string
 }
 
@@ -1122,7 +1113,7 @@ export type DeleteNodeRequest = {
    * config.
    */
   region?: Region
-  /** The ID of the node to replace. */
+  /** ID of the node to replace. */
   nodeId: string
   /** Skip draining node from its workload. */
   skipDrain: boolean
@@ -1144,6 +1135,6 @@ export type GetVersionRequest = {
    * config.
    */
   region?: Region
-  /** The requested version name. */
+  /** Requested version name. */
   versionName: string
 }
