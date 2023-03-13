@@ -1052,7 +1052,7 @@ export const marshalCreateCertificateRequest = (
   request: CreateCertificateRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  name: request.name || randomName('certiticate'),
+  name: request.name || randomName('certificate'),
   ...resolveOneOf<unknown>(
     [
       {
@@ -1432,7 +1432,7 @@ export const marshalZonedApiCreateCertificateRequest = (
   request: ZonedApiCreateCertificateRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  name: request.name || randomName('certiticate'),
+  name: request.name || randomName('certificate'),
   ...resolveOneOf<unknown>(
     [
       {

@@ -107,15 +107,11 @@ export type PrivateNetworkStatus = 'unknown' | 'ready' | 'pending' | 'error'
 export type Protocol = 'tcp' | 'http'
 
 /**
- * The PROXY protocol informs the other end about the incoming connection, so
- * that it can know the client's address or the public address it accessed to,
- * whatever the upper layer protocol.
- *
- * `proxy_protocol_none` Disable proxy protocol. `proxy_protocol_v1` Version one
- * (text format). `proxy_protocol_v2` Version two (binary format).
- * `proxy_protocol_v2_ssl` Version two with SSL connection.
- * `proxy_protocol_v2_ssl_cn` Version two with SSL connection and common name
- * information.
+ * PROXY protocol to use between the Load Balancer and backend servers. Allows
+ * the backend servers to be informed of the client's real IP address. PROXY
+ * protocol must be supported by the backend servers' software. For more
+ * information on the different protocols available, see the [dedicated
+ * documentation](https://www.scaleway.com/en/docs/network/load-balancer/reference-content/configuring-load-balancer/#choosing-a-proxy-protocol).
  */
 export type ProxyProtocol =
   | 'proxy_protocol_unknown'
@@ -133,40 +129,39 @@ export type SSLCompatibilityLevel =
 
 export type StickySessionsType = 'none' | 'cookie' | 'table'
 
-/**
- * The use of Access Control Lists (ACL) provide a flexible solution to perform
- * a action generally consist in blocking or allow a request based on ip (and
- * URL on HTTP).
- */
+/** Acl. */
 export interface Acl {
-  /** ID of your ACL ressource. */
+  /** ACL ID. */
   id: string
-  /** Name of you ACL ressource. */
+  /** ACL name. */
   name: string
   /**
-   * The ACL match rule. At least `ip_subnet` or `http_filter` and
+   * ACL match filter object. One of `ip_subnet` or `http_filter` &
    * `http_filter_value` are required.
    */
   match?: AclMatch
-  /** Action to undertake when an ACL filter matches. */
+  /** Action to take when incoming traffic matches an ACL filter. */
   action?: AclAction
-  /** See the Frontend object description. */
+  /** ACL is attached to this frontend object. */
   frontend?: Frontend
-  /** Order between your Acls (ascending order, 0 is first acl executed). */
+  /**
+   * Priority of this ACL (ACLs are applied in ascending order, 0 is the first
+   * ACL executed).
+   */
   index: number
-  /** Date at which the ACL was created. */
+  /** Date on which the ACL was created. */
   createdAt?: Date
-  /** Date at which the ACL was last updated. */
+  /** Date on which the ACL was last updated. */
   updatedAt?: Date
-  /** Description of your ACL ressource. */
+  /** ACL description. */
   description: string
 }
 
 /** Acl action. */
 export interface AclAction {
-  /** The action type. */
+  /** Action to take when incoming traffic matches an ACL filter. */
   type: AclActionType
-  /** Redirect parameters when using an ACL with `redirect` action. */
+  /** Redirection parameters when using an ACL with a `redirect` action. */
   redirect?: AclActionRedirect
 }
 
@@ -175,17 +170,12 @@ export interface AclActionRedirect {
   /** Redirect type. */
   type: AclActionRedirectRedirectType
   /**
-   * An URL can be used in case of a location redirect (e.g.
-   * `https://scaleway.com` will redirect to this same URL). A scheme name (e.g.
-   * `https`, `http`, `ftp`, `git`) will replace the request's original scheme.
-   * This can be useful to implement HTTP to HTTPS redirects. Placeholders can
-   * be used when using a `location` redirect in order to insert original
-   * request's parts, these are:
-   *
-   * - `{{ host }}` for the current request's Host header
-   * - `{{ query }}` for the current request's query string
-   * - `{{ path }}` for the current request's URL path
-   * - `{{ scheme }}` for the current request's scheme.
+   * Redirect target. For a location redirect, you can use a URL e.g.
+   * `https://scaleway.com`. Using a scheme name (e.g. `https`, `http`, `ftp`,
+   * `git`) will replace the request's original scheme. This can be useful to
+   * implement HTTP to HTTPS redirects. Valid placeholders that can be used in a
+   * `location` redirect to preserve parts of the original request in the
+   * redirection URL are {{ host }}, {{ query }}, {{ path }} and {{ scheme }}.
    */
   target: string
   /**
@@ -197,87 +187,100 @@ export interface AclActionRedirect {
 
 /** Acl match. */
 export interface AclMatch {
-  /**
-   * A list of IPs or CIDR v4/v6 addresses of the client of the session to
-   * match.
-   */
+  /** List of IPs or CIDR v4/v6 addresses to filter for from the client side. */
   ipSubnet: string[]
   /**
-   * The HTTP filter to match. This filter is supported only if your backend
-   * supports HTTP forwarding. It extracts the request's URL path, which starts
+   * Type of HTTP filter to match. Extracts the request's URL path, which starts
    * at the first slash and ends before the question mark (without the host
-   * part).
+   * part). Defines where to filter for the http_filter_value. Only supported
+   * for HTTP backends.
    */
   httpFilter: AclHttpFilter
-  /** A list of possible values to match for the given HTTP filter. */
+  /** List of values to filter for. */
   httpFilterValue: string[]
   /**
-   * A exra parameter. You can use this field with http_header_match acl type to
-   * set the header name to filter.
+   * Name of the HTTP header to filter on if `http_header_match` was selected in
+   * `http_filter`.
    */
   httpFilterOption?: string
-  /** If set to `true`, the ACL matching condition will be of type "UNLESS". */
+  /**
+   * Defines whether to invert the match condition. If set to `true`, the ACL
+   * carries out its action when the condition DOES NOT match.
+   */
   invert: boolean
 }
 
 /** Acl spec. */
 export interface AclSpec {
-  /** Name of your ACL resource. */
+  /** ACL name. */
   name: string
-  /** Action to undertake when an ACL filter matches. */
+  /** Action to take when incoming traffic matches an ACL filter. */
   action: AclAction
   /**
-   * The ACL match rule. At least `ip_subnet` or `http_filter` and
+   * ACL match filter object. One of `ip_subnet` or `http_filter` and
    * `http_filter_value` are required.
    */
   match?: AclMatch
-  /** Order between your Acls (ascending order, 0 is first acl executed). */
+  /**
+   * Priority of this ACL (ACLs are applied in ascending order, 0 is the first
+   * ACL executed).
+   */
   index: number
-  /** Description of your ACL ressource. */
+  /** ACL description. */
   description: string
 }
 
 /** Backend. */
 export interface Backend {
-  /** Load balancer Backend ID. */
+  /** Backend ID. */
   id: string
-  /** Load balancer Backend name. */
+  /** Name of the backend. */
   name: string
-  /** Type of backend protocol. */
+  /** Protocol used by the backend when forwarding traffic to backend servers. */
   forwardProtocol: Protocol
-  /** User sessions will be forwarded to this port of backend servers. */
+  /** Port used by the backend when forwarding traffic to backend servers. */
   forwardPort: number
-  /** Load balancer algorithm used to select the backend server. */
+  /**
+   * Load balancing algorithm to use when determining which backend server to
+   * forward new traffic to.
+   */
   forwardPortAlgorithm: ForwardPortAlgorithm
-  /** Enables cookie-based session persistence. */
+  /**
+   * Defines whether sticky sessions (binding a particular session to a
+   * particular backend server) are activated and the method to use if so. None
+   * disables sticky sessions. Cookie-based uses an HTTP cookie to stick a
+   * session to a backend server. Table-based uses the source (client) IP
+   * address to stick a session to a backend server.
+   */
   stickySessions: StickySessionsType
-  /** Cookie name for sticky sessions. */
+  /** Cookie name for cookie-based sticky sessions. */
   stickySessionsCookieName: string
-  /** Health Check used to verify backend servers status. */
+  /**
+   * Object defining the health check to be carried out by the backend when
+   * checking the status and health of backend servers.
+   */
   healthCheck?: HealthCheck
-  /** Servers IP addresses attached to the backend. */
+  /** List of IP addresses of backend servers attached to this backend. */
   pool: string[]
-  /** Load balancer the backend is attached to. */
+  /** Load Balancer the backend is attached to. */
   lb?: Lb
   /** @deprecated Deprecated in favor of proxy_protocol field. */
   sendProxyV2?: boolean
-  /**
-   * Maximum server connection inactivity time (allowed time the server has to
-   * process the request).
-   */
+  /** Maximum allowed time for a backend server to process a request. */
   timeoutServer?: string
-  /** Maximum initial server connection establishment time. */
+  /** Maximum allowed time for establishing a connection to a backend server. */
   timeoutConnect?: string
   /**
-   * Maximum tunnel inactivity time after Websocket is established (take
-   * precedence over client and server timeout).
+   * Maximum allowed tunnel inactivity time after Websocket is established
+   * (takes precedence over client and server timeout).
    */
   timeoutTunnel?: string
-  /** Defines what occurs when a backend server is marked down. */
+  /** Action to take when a backend server is marked as down. */
   onMarkedDownAction: OnMarkedDownAction
   /**
-   * PROXY protocol, forward client's address (must be supported by backend
-   * servers software).
+   * Protocol to use between the Load Balancer and backend servers. Allows the
+   * backend servers to be informed of the client's real IP address. The PROXY
+   * protocol must be supported by the backend servers' software.
    */
   proxyProtocol: ProxyProtocol
   /** Date at which the backend was created. */
@@ -285,26 +288,26 @@ export interface Backend {
   /** Date at which the backend was updated. */
   updatedAt?: Date
   /**
-   * Scaleway S3 bucket website to be served in case all backend servers are
-   * down.
+   * Scaleway S3 bucket website to be served as failover if all backend servers
+   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud.
    */
   failoverHost?: string
-  /** Enable SSL between load balancer and backend servers. */
+  /**
+   * Defines whether to enable SSL bridging between the Load Balancer and
+   * backend servers.
+   */
   sslBridging?: boolean
-  /** Whether or not the server certificate should be verified. */
+  /** Defines whether the server certificate verification should be ignored. */
   ignoreSslServerVerify?: boolean
 }
 
-/**
- * State and statistics of your backend server like last health check status,
- * server uptime, result state of your backend server.
- */
+/** Backend server stats. */
 export interface BackendServerStats {
-  /** ID of your Load balancer cluster server. */
+  /** ID of your Load Balancer's underlying Instance. */
   instanceId: string
-  /** ID of your Backend. */
+  /** Backend ID. */
   backendId: string
-  /** IPv4 or IPv6 address of the server backend. */
+  /** IPv4 or IPv6 address of the backend server. */
   ip: string
   /** Server operational state (stopped/starting/running/stopping). */
   serverState: BackendServerStatsServerState
@@ -314,9 +317,9 @@ export interface BackendServerStats {
   lastHealthCheckStatus: BackendServerStatsHealthCheckStatus
 }
 
-/** SSL certificate. */
+/** Certificate. */
 export interface Certificate {
-  /** Type of certificate (Let's encrypt or custom). */
+  /** Certificate type (Let's Encrypt or custom). */
   type: CertificateType
   /** Certificate ID. */
   id: string
@@ -326,80 +329,82 @@ export interface Certificate {
   subjectAlternativeName: string[]
   /** Identifier (SHA-1) of the certificate. */
   fingerprint: string
-  /** Validity bounds. */
+  /** Lower validity bound. */
   notValidBefore?: Date
-  /** Validity bounds. */
+  /** Upper validity bound. */
   notValidAfter?: Date
-  /** Status of certificate. */
+  /** Certificate status. */
   status: CertificateStatus
-  /** Load balancer object. */
+  /** Load Balancer object the certificate is attached to. */
   lb?: Lb
   /** Certificate name. */
   name: string
-  /** Date at which the certificate was created. */
+  /** Date on which the certificate was created. */
   createdAt?: Date
-  /** Date at which the certificate was last updated. */
+  /** Date on which the certificate was last updated. */
   updatedAt?: Date
   /**
-   * Additional information on the status (e.g. in case of certificate
-   * generation failure).
+   * Additional information about the certificate status (useful in case of
+   * certificate generation failure, for example).
    */
   statusDetails?: string
 }
 
-/** Import a custom SSL certificate. */
+/** Create certificate request. custom certificate. */
 export interface CreateCertificateRequestCustomCertificate {
   /**
-   * The full PEM-formatted include an entire certificate chain including public
-   * key, private key, and optionally certificate authorities.
+   * Full PEM-formatted certificate, consisting of the entire certificate chain
+   * including public key, private key, and (optionally) Certificate
+   * Authorities.
    */
   certificateChain: string
 }
 
-/** Generate a new SSL certificate using Let's Encrypt. */
+/** Create certificate request. letsencrypt config. */
 export interface CreateCertificateRequestLetsencryptConfig {
   /**
-   * Main domain name of certificate (make sure this domain exists and resolves
-   * to your load balancer HA IP).
+   * Main domain name of certificate (this domain must exist and resolve to your
+   * Load Balancer IP address).
    */
   commonName: string
   /**
-   * Alternative domain names (make sure all domain names exists and resolves to
-   * your load balancer HA IP).
+   * Alternative domain names (all domain names must exist and resolve to your
+   * Load Balancer IP address).
    */
   subjectAlternativeName: string[]
 }
 
 /** Frontend. */
 export interface Frontend {
-  /** Load balancer Frontend ID. */
+  /** Frontend ID. */
   id: string
-  /** Load balancer Frontend name. */
+  /** Name of the frontend. */
   name: string
-  /** TCP port to listen on the front side. */
+  /** Port the frontend listens on. */
   inboundPort: number
-  /** Backend resource the Frontend is attached to. */
+  /** Backend object the frontend is attached to. */
   backend?: Backend
-  /** Load balancer the frontend is attached to. */
+  /** Load Balancer object the frontend is attached to. */
   lb?: Lb
-  /** Maximum inactivity time on the client side. */
+  /** Maximum allowed inactivity time on the client side. */
   timeoutClient?: string
   /** @deprecated Certificate, deprecated in favor of certificate_ids array. */
   certificate?: Certificate
-  /** List of certificate IDs to bind on the frontend. */
+  /** List of SSL/TLS certificate IDs to bind to the frontend. */
   certificateIds: string[]
-  /** Date at which the frontend was created. */
+  /** Date on which the frontend was created. */
   createdAt?: Date
-  /** Date at which the frontend was updated. */
+  /** Date on which the frontend was last updated. */
   updatedAt?: Date
-  /** Whether or not HTTP3 protocol is enabled. */
+  /** Defines whether to enable HTTP/3 protocol on the frontend. */
   enableHttp3: boolean
 }
 
 /** Health check. */
 export interface HealthCheck {
   /**
-   * The check requires MySQL >=3.22, for older versions, use TCP check.
+   * Object to configure a MySQL health check. The check requires MySQL >=3.22,
+   * for older versions, use a TCP health check.
    *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
@@ -407,7 +412,8 @@ export interface HealthCheck {
    */
   mysqlConfig?: HealthCheckMysqlConfig
   /**
-   * The response is analyzed to find an LDAPv3 response message.
+   * Object to configure an LDAP health check. The response is analyzed to find
+   * the LDAPv3 response message.
    *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
@@ -415,7 +421,8 @@ export interface HealthCheck {
    */
   ldapConfig?: HealthCheckLdapConfig
   /**
-   * The response is analyzed to find the +PONG response message.
+   * Object to configure a Redis health check. The response is analyzed to find
+   * the +PONG response message.
    *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
@@ -423,12 +430,12 @@ export interface HealthCheck {
    */
   redisConfig?: HealthCheckRedisConfig
   /**
-   * Number of consecutive unsuccessful health checks, after which the server
+   * Number of consecutive unsuccessful health checks after which the server
    * will be considered dead.
    */
   checkMaxRetries: number
   /**
-   * Basic TCP health check.
+   * Object to configure a basic TCP health check.
    *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
@@ -436,7 +443,7 @@ export interface HealthCheck {
    */
   tcpConfig?: HealthCheckTcpConfig
   /**
-   * PostgreSQL health check.
+   * Object to configure a PostgreSQL health check.
    *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
@@ -444,7 +451,7 @@ export interface HealthCheck {
    */
   pgsqlConfig?: HealthCheckPgsqlConfig
   /**
-   * HTTP health check.
+   * Object to configure an HTTP health check.
    *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
@@ -452,55 +459,61 @@ export interface HealthCheck {
    */
   httpConfig?: HealthCheckHttpConfig
   /**
-   * HTTPS health check.
+   * Object to configure an HTTPS health check.
    *
    * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
    * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   httpsConfig?: HealthCheckHttpsConfig
-  /** TCP port to use for the backend server health check. */
+  /** Port to use for the backend server health check. */
   port: number
   /** Maximum time a backend server has to reply to the health check. */
   checkTimeout?: string
-  /** Time between two consecutive health checks. */
+  /** Time to wait between two consecutive health checks. */
   checkDelay?: string
-  /**
-   * It defines whether the health check should be done considering the proxy
-   * protocol.
-   */
+  /** Defines whether proxy protocol should be activated for the health check. */
   checkSendProxy: boolean
 }
 
 /** Health check. http config. */
 export interface HealthCheckHttpConfig {
-  /** HTTP uri used for Healthcheck to the backend servers. */
+  /** The HTTP URI to use when performing a health check on backend servers. */
   uri: string
-  /** HTTP method used for Healthcheck to the backend servers. */
+  /** The HTTP method used when performing a health check on backend servers. */
   method: string
   /**
-   * A health check response will be considered as valid if the response's
-   * status code match.
+   * The HTTP response code that should be returned for a health check to be
+   * considered successful.
    */
   code?: number
-  /** HTTP host header used with the request. */
+  /**
+   * The HTTP host header used when performing a health check on backend
+   * servers.
+   */
   hostHeader: string
 }
 
 /** Health check. https config. */
 export interface HealthCheckHttpsConfig {
-  /** HTTP uri used for Healthcheck to the backend servers. */
+  /** The HTTP URI to use when performing a health check on backend servers. */
   uri: string
-  /** HTTP method used for Healthcheck to the backend servers. */
+  /** The HTTP method used when performing a health check on backend servers. */
   method: string
   /**
-   * A health check response will be considered as valid if the response's
-   * status code match.
+   * The HTTP response code that should be returned for a health check to be
+   * considered successful.
    */
   code?: number
-  /** HTTP host header used with the request. */
+  /**
+   * The HTTP host header used when performing a health check on backend
+   * servers.
+   */
   hostHeader: string
-  /** Specifies the SNI to use to do health checks over SSL. */
+  /**
+   * The SNI value used when performing a health check on backend servers over
+   * SSL.
+   */
   sni: string
 }
 
@@ -526,33 +539,33 @@ export interface Instance {
   status: InstanceStatus
   /** Instance IP address. */
   ipAddress: string
-  /** Date at which the Instance was created. */
+  /** Date on which the Instance was created. */
   createdAt?: Date
-  /** Date at which the Instance was updated. */
+  /** Date on which the Instance was last updated. */
   updatedAt?: Date
-  /** @deprecated The region the instance is in. */
+  /** @deprecated The region the Instance is in. */
   region?: Region
-  /** The zone the instance is in. */
+  /** The zone the Instance is in. */
   zone: Zone
 }
 
 /** Ip. */
 export interface Ip {
-  /** Flexible IP ID. */
+  /** IP address ID. */
   id: string
   /** IP address. */
   ipAddress: string
-  /** Organization ID. */
+  /** Organization ID of the Scaleway Organization the IP address is in. */
   organizationId: string
-  /** Project ID. */
+  /** Project ID of the Scaleway Project the IP address is in. */
   projectId: string
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId?: string
-  /** Reverse FQDN. */
+  /** Reverse DNS (domain name) of the IP address. */
   reverse: string
-  /** @deprecated The region the Flexible IP is in. */
+  /** @deprecated The region the IP address is in. */
   region?: Region
-  /** The zone the Flexible IP is in. */
+  /** The zone the IP address is in. */
   zone: Zone
 }
 
@@ -560,27 +573,27 @@ export interface Ip {
 export interface Lb {
   /** Underlying Instance ID. */
   id: string
-  /** Load balancer name. */
+  /** Load Balancer name. */
   name: string
-  /** Load balancer description. */
+  /** Load Balancer description. */
   description: string
-  /** Load balancer status. */
+  /** Load Balancer status. */
   status: LbStatus
-  /** List of underlying instances. */
+  /** List of underlying Instances. */
   instances: Instance[]
-  /** Organization ID. */
+  /** Scaleway Organization ID. */
   organizationId: string
-  /** Project ID. */
+  /** Scaleway Project ID. */
   projectId: string
-  /** List of IPs attached to the Load balancer. */
+  /** List of IP addresses attached to the Load Balancer. */
   ip: Ip[]
-  /** Load balancer tags. */
+  /** Load Balancer tags. */
   tags: string[]
-  /** Number of frontends the Load balancer has. */
+  /** Number of frontends the Load Balancer has. */
   frontendCount: number
-  /** Number of backends the Load balancer has. */
+  /** Number of backends the Load Balancer has. */
   backendCount: number
-  /** Load balancer offer type. */
+  /** Load Balancer offer type. */
   type: string
   /** Subscriber information. */
   subscriber?: Subscriber
@@ -589,23 +602,23 @@ export interface Lb {
    * side.
    */
   sslCompatibilityLevel: SSLCompatibilityLevel
-  /** Date at which the Load balancer was created. */
+  /** Date on which the Load Balancer was created. */
   createdAt?: Date
-  /** Date at which the Load balancer was updated. */
+  /** Date on which the Load Balancer was last updated. */
   updatedAt?: Date
-  /** Number of private networks attached to the Load balancer. */
+  /** Number of Private Networks attached to the Load Balancer. */
   privateNetworkCount: number
-  /** Number of routes the Load balancer has. */
+  /** Number of routes configured on the Load Balancer. */
   routeCount: number
-  /** @deprecated The region the Load balancer is in. */
+  /** @deprecated The region the Load Balancer is in. */
   region?: Region
-  /** The zone the Load balancer is in. */
+  /** The zone the Load Balancer is in. */
   zone: Zone
 }
 
 /** Lb stats. */
 export interface LbStats {
-  /** List stats object of your Load balancer. */
+  /** List of objects containing Load Balancer statistics. */
   backendServersStats: BackendServerStats[]
 }
 
@@ -620,124 +633,125 @@ export interface LbType {
 
 /** List acl response. */
 export interface ListAclResponse {
-  /** List of Acl object (see Acl object description). */
+  /** List of ACL objects. */
   acls: Acl[]
-  /** The total number of items. */
+  /** The total number of objects. */
   totalCount: number
 }
 
 /** List backend stats response. */
 export interface ListBackendStatsResponse {
-  /** List backend stats object of your Load balancer. */
+  /** List of objects containing backend server statistics. */
   backendServersStats: BackendServerStats[]
-  /** The total number of items. */
+  /** The total number of objects. */
   totalCount: number
 }
 
 /** List backends response. */
 export interface ListBackendsResponse {
-  /** List Backend objects of a load balancer. */
+  /** List of backend objects of a given Load Balancer. */
   backends: Backend[]
-  /** Total count, wihtout pagination. */
+  /** Total count of backend objects, without pagination. */
   totalCount: number
 }
 
 /** List certificates response. */
 export interface ListCertificatesResponse {
-  /** List of certificates. */
+  /** List of certificate objects. */
   certificates: Certificate[]
-  /** The total number of items. */
+  /** The total number of objects. */
   totalCount: number
 }
 
 /** List frontends response. */
 export interface ListFrontendsResponse {
-  /** List frontends object of your Load balancer. */
+  /** List of frontend objects of a given Load Balancer. */
   frontends: Frontend[]
-  /** Total count, wihtout pagination. */
+  /** Total count of frontend objects, without pagination. */
   totalCount: number
 }
 
 /** List ips response. */
 export interface ListIpsResponse {
-  /** List IP address object. */
+  /** List of IP address objects. */
   ips: Ip[]
-  /** Total count, wihtout pagination. */
+  /** Total count of IP address objects, without pagination. */
   totalCount: number
 }
 
 /** List lb private networks response. */
 export interface ListLbPrivateNetworksResponse {
-  /** Private networks of a given load balancer. */
+  /** List of Private Network objects attached to the Load Balancer. */
   privateNetwork: PrivateNetwork[]
-  /** The total number of items. */
+  /** Total number of objects in the response. */
   totalCount: number
 }
 
 /** List lb types response. */
 export interface ListLbTypesResponse {
-  /** Different types of LB. */
+  /** List of Load Balancer commercial offer type objects. */
   lbTypes: LbType[]
-  /** The total number of items. */
+  /** Total number of Load Balancer offer type objects. */
   totalCount: number
 }
 
-/** Get list of Load balancers. */
+/** List lbs response. */
 export interface ListLbsResponse {
-  /** List of Load balancer. */
+  /** List of Load Balancer objects. */
   lbs: Lb[]
-  /** The total number of items. */
+  /** The total number of Load Balancer objects. */
   totalCount: number
 }
 
 /** List routes response. */
 export interface ListRoutesResponse {
-  /** List of Routes object. */
+  /** List of route objects. */
   routes: Route[]
-  /** The total number of items. */
+  /** The total number of route objects. */
   totalCount: number
 }
 
 /** List subscriber response. */
 export interface ListSubscriberResponse {
-  /** List of Subscribers object. */
+  /** List of subscriber objects. */
   subscribers: Subscriber[]
-  /** The total number of items. */
+  /** The total number of objects. */
   totalCount: number
 }
 
 /** Private network. */
 export interface PrivateNetwork {
-  /** LoadBalancer object. */
+  /** Load Balancer object which is attached to the Private Network. */
   lb?: Lb
   /**
-   * Local ip address of load balancer instance.
+   * Object containing an array of a local IP address for the Load Balancer on
+   * this Private Network.
    *
    * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
    * 'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
-   * Value set to true if load balancer instance use a DHCP.
+   * Defines whether to let DHCP assign IP addresses.
    *
    * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
    * 'ipamConfig' could be set.
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
   /**
-   * Value set to true if load balancer instance use a DHCP.
+   * For internal use only.
    *
    * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
    * 'ipamConfig' could be set.
    */
   ipamConfig?: PrivateNetworkIpamConfig
-  /** Instance private network id. */
+  /** Private Network ID. */
   privateNetworkId: string
-  /** Status (running, to create...) of private network connection. */
+  /** Status of Private Network connection. */
   status: PrivateNetworkStatus
-  /** Date at which the PN was created. */
+  /** Date on which the Private Network was created. */
   createdAt?: Date
-  /** Date at which the PN was last updated. */
+  /** Date on which the PN was last updated. */
   updatedAt?: Date
 }
 
@@ -751,32 +765,38 @@ export interface PrivateNetworkStaticConfig {
 
 /** Route. */
 export interface Route {
-  /** Id of match ressource. */
+  /** Route ID. */
   id: string
-  /** Id of frontend. */
+  /** ID of the source frontend. */
   frontendId: string
-  /** Id of backend. */
+  /** ID of the target backend. */
   backendId: string
-  /** Value to match a redirection. */
+  /**
+   * Object defining the match condition for a route to be applied. If an
+   * incoming client session matches the specified condition (i.e. it has a
+   * matching SNI value or HTTP Host header value), it will be passed to the
+   * target backend.
+   */
   match?: RouteMatch
-  /** Date at which the route was created. */
+  /** Date on which the route was created. */
   createdAt?: Date
-  /** Date at which the route was last updated. */
+  /** Date on which the route was last updated. */
   updatedAt?: Date
 }
 
 /** Route. match. */
 export interface RouteMatch {
   /**
-   * Server Name Indication TLS extension (SNI) field from an incoming
-   * connection made via an SSL/TLS transport layer.
+   * Value to match in the Server Name Indication TLS extension (SNI) field from
+   * an incoming connection made via an SSL/TLS transport layer. This field
+   * should be set for routes on TCP Load Balancers.
    *
    * One-of ('matchType'): at most one of 'sni', 'hostHeader' could be set.
    */
   sni?: string
   /**
-   * The Host request header specifies the host of the server to which the
-   * request is being sent.
+   * Value to match in the HTTP Host request header from an incoming connection.
+   * This field should be set for routes on HTTP Load Balancers.
    *
    * One-of ('matchType'): at most one of 'sni', 'hostHeader' could be set.
    */
@@ -785,9 +805,9 @@ export interface RouteMatch {
 
 /** Set acls response. */
 export interface SetAclsResponse {
-  /** List of ACLs object (see ACL object description). */
+  /** List of ACL objects. */
   acls: Acl[]
-  /** The total number of items. */
+  /** The total number of ACL objects. */
   totalCount: number
 }
 
@@ -805,7 +825,7 @@ export interface Subscriber {
    */
   emailConfig?: SubscriberEmailConfig
   /**
-   * WebHook URI of subscriber.
+   * Webhook URI of subscriber.
    *
    * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be
    * set.
@@ -813,15 +833,15 @@ export interface Subscriber {
   webhookConfig?: SubscriberWebhookConfig
 }
 
-/** Email alert of subscriber. */
+/** Subscriber. email config. */
 export interface SubscriberEmailConfig {
-  /** Email who receive alert. */
+  /** Email address to send alerts to. */
   email: string
 }
 
 /** Webhook alert of subscriber. */
 export interface SubscriberWebhookConfig {
-  /** URI who receive POST request. */
+  /** URI to receive POST requests. */
   uri: string
 }
 
@@ -831,17 +851,23 @@ export type ListLbsRequest = {
    * config.
    */
   region?: Region
-  /** Use this to search by name. */
+  /** Load Balancer name to filter for. */
   name?: string
-  /** Response order. */
+  /** Sort order of Load Balancers in the response. */
   orderBy?: ListLbsRequestOrderBy
-  /** The number of items to return. */
+  /** Number of Load Balancers to return. */
   pageSize?: number
-  /** Page number. */
+  /** Page number to return, from the paginated results. */
   page?: number
-  /** Filter LBs by organization ID. */
+  /**
+   * Organization ID to filter for, only Load Balancers from this Organization
+   * will be returned.
+   */
   organizationId?: string
-  /** Filter LBs by project ID. */
+  /**
+   * Project ID to filter for, only Load Balancers from this Project will be
+   * returned.
+   */
   projectId?: string
 }
 
@@ -852,46 +878,39 @@ export type CreateLbRequest = {
    */
   region?: Region
   /**
-   * @deprecated Owner of resources.
+   * @deprecated Scaleway Organization to create the Load Balancer in.
    *
    *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    *   could be set.
    */
   organizationId?: string
   /**
-   * Assign the resource to a project ID.
+   * Scaleway Project to create the Load Balancer in.
    *
    * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    * could be set.
    */
   projectId?: string
-  /** Resource names. */
+  /** Name for the Load Balancer. */
   name?: string
-  /** Resource description. */
+  /** Description for the Load Balancer. */
   description: string
-  /**
-   * Just like for compute instances, when you destroy a load balancer, you can
-   * keep its highly available IP address and reuse it for another load balancer
-   * later.
-   */
+  /** ID of an existing flexible IP address to attach to the Load Balancer. */
   ipId?: string
-  /** List of keyword. */
+  /** List of tags for the Load Balancer. */
   tags?: string[]
-  /** Load balancer offer type. */
+  /**
+   * Load Balancer commercial offer type. Use the Load Balancer types endpoint
+   * to retrieve a list of available offer types.
+   */
   type: string
   /**
-   * Enforces minimal SSL version (in SSL/TLS offloading context).
-   *
-   * - `intermediate` General-purpose servers with a variety of clients,
-   *   recommended for almost all systems (Supports Firefox 27, Android 4.4.2,
-   *   Chrome 31, Edge, IE 11 on Windows 7, Java 8u31, OpenSSL 1.0.1, Opera 20,
-   *   and Safari 9).
-   * - `modern` Services with clients that support TLS 1.3 and don't need backward
-   *   compatibility (Firefox 63, Android 10.0, Chrome 70, Edge 75, Java 11,
-   *   OpenSSL 1.1.1, Opera 57, and Safari 12.1).
-   * - `old` Compatible with a number of very old clients, and should be used only
-   *   as a last resort (Firefox 1, Android 2.3, Chrome 1, Edge 12, IE8 on
-   *   Windows XP, Java 6, OpenSSL 0.9.8, Opera 5, and Safari 1).
+   * Determines the minimal SSL version which needs to be supported on the
+   * client side, in an SSL/TLS offloading context. Intermediate is suitable for
+   * general-purpose servers with a variety of clients, recommended for almost
+   * all systems. Modern is suitable for services with clients that support TLS
+   * 1.3 and do not need backward compatibility. Old is compatible with a small
+   * number of very old clients and should be used only as a last resort.
    */
   sslCompatibilityLevel?: SSLCompatibilityLevel
 }
@@ -902,7 +921,7 @@ export type GetLbRequest = {
    * config.
    */
   region?: Region
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
 }
 
@@ -912,27 +931,21 @@ export type UpdateLbRequest = {
    * config.
    */
   region?: Region
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Resource name. */
+  /** Load Balancer name. */
   name: string
-  /** Resource description. */
+  /** Load Balancer description. */
   description: string
-  /** List of keywords. */
+  /** List of tags for the Load Balancer. */
   tags?: string[]
   /**
-   * Enforces minimal SSL version (in SSL/TLS offloading context).
-   *
-   * - `intermediate` General-purpose servers with a variety of clients,
-   *   recommended for almost all systems (Supports Firefox 27, Android 4.4.2,
-   *   Chrome 31, Edge, IE 11 on Windows 7, Java 8u31, OpenSSL 1.0.1, Opera 20,
-   *   and Safari 9).
-   * - `modern` Services with clients that support TLS 1.3 and don't need backward
-   *   compatibility (Firefox 63, Android 10.0, Chrome 70, Edge 75, Java 11,
-   *   OpenSSL 1.1.1, Opera 57, and Safari 12.1).
-   * - `old` Compatible with a number of very old clients, and should be used only
-   *   as a last resort (Firefox 1, Android 2.3, Chrome 1, Edge 12, IE8 on
-   *   Windows XP, Java 6, OpenSSL 0.9.8, Opera 5, and Safari 1).
+   * Determines the minimal SSL version which needs to be supported on the
+   * client side, in an SSL/TLS offloading context. Intermediate is suitable for
+   * general-purpose servers with a variety of clients, recommended for almost
+   * all systems. Modern is suitable for services with clients that support TLS
+   * 1.3 and don't need backward compatibility. Old is compatible with a small
+   * number of very old clients and should be used only as a last resort.
    */
   sslCompatibilityLevel?: SSLCompatibilityLevel
 }
@@ -943,9 +956,13 @@ export type DeleteLbRequest = {
    * config.
    */
   region?: Region
-  /** Load balancer ID. */
+  /** ID of the Load Balancer to delete. */
   lbId: string
-  /** Set true if you don't want to keep this IP address. */
+  /**
+   * Defines whether the Load Balancer's flexible IP should be deleted. Set to
+   * true to release the flexible IP, or false to keep it available in your
+   * account for future Load Balancers.
+   */
   releaseIp: boolean
 }
 
@@ -955,9 +972,12 @@ export type MigrateLbRequest = {
    * config.
    */
   region?: Region
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Load balancer type (check /lb-types to list all type). */
+  /**
+   * Load Balancer type to migrate to (use the List all Load Balancer offer
+   * types endpoint to get a list of available offer types).
+   */
   type: string
 }
 
@@ -967,15 +987,21 @@ export type ListIPsRequest = {
    * config.
    */
   region?: Region
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
-  /** The number of items to return. */
+  /** Number of IP addresses to return. */
   pageSize?: number
-  /** Use this to search by IP address. */
+  /** IP address to filter for. */
   ipAddress?: string
-  /** Filter IPs by organization id. */
+  /**
+   * Organization ID to filter for, only Load Balancer IP addresses from this
+   * Organization will be returned.
+   */
   organizationId?: string
-  /** Filter IPs by project ID. */
+  /**
+   * Project ID to filter for, only Load Balancer IP addresses from this Project
+   * will be returned.
+   */
   projectId?: string
 }
 
@@ -986,20 +1012,21 @@ export type CreateIpRequest = {
    */
   region?: Region
   /**
-   * @deprecated Owner of resources.
+   * @deprecated Organization ID of the Organization where the IP address should
+   *   be created.
    *
    *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    *   could be set.
    */
   organizationId?: string
   /**
-   * Assign the resource to a project ID.
+   * Project ID of the Project where the IP address should be created.
    *
    * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    * could be set.
    */
   projectId?: string
-  /** Reverse domain name. */
+  /** Reverse DNS (domain name) for the IP address. */
   reverse?: string
 }
 
@@ -1031,7 +1058,7 @@ export type UpdateIpRequest = {
   region?: Region
   /** IP address ID. */
   ipId: string
-  /** Reverse DNS. */
+  /** Reverse DNS (domain name) for the IP address. */
   reverse?: string
 }
 
@@ -1041,15 +1068,15 @@ export type ListBackendsRequest = {
    * config.
    */
   region?: Region
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Use this to search by name. */
+  /** Name of the backend to filter for. */
   name?: string
-  /** Response order. */
+  /** Sort order of backends in the response. */
   orderBy?: ListBackendsRequestOrderBy
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
-  /** The number of items to return. */
+  /** Number of backends to return. */
   pageSize?: number
 }
 
@@ -1059,61 +1086,73 @@ export type CreateBackendRequest = {
    * config.
    */
   region?: Region
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Resource name. */
+  /** Name for the backend. */
   name?: string
-  /** Backend protocol. TCP or HTTP. */
-  forwardProtocol: Protocol
-  /** User sessions will be forwarded to this port of backend servers. */
-  forwardPort: number
-  /** Load balancing algorithm. */
-  forwardPortAlgorithm: ForwardPortAlgorithm
-  /** Enables cookie-based session persistence. */
-  stickySessions: StickySessionsType
-  /** Cookie name for sticky sessions. */
-  stickySessionsCookieName: string
-  /** See the Healthcheck object description. */
-  healthCheck: HealthCheck
-  /** Backend server IP addresses list (IPv4 or IPv6). */
-  serverIp: string[]
-  /** @deprecated Deprecated in favor of proxy_protocol field ! */
-  sendProxyV2?: boolean
   /**
-   * Maximum server connection inactivity time (allowed time the server has to
-   * process the request).
+   * Protocol to be used by the backend when forwarding traffic to backend
+   * servers.
    */
+  forwardProtocol: Protocol
+  /** Port to be used by the backend when forwarding traffic to backend servers. */
+  forwardPort: number
+  /**
+   * Load balancing algorithm to be used when determining which backend server
+   * to forward new traffic to.
+   */
+  forwardPortAlgorithm: ForwardPortAlgorithm
+  /**
+   * Defines whether to activate sticky sessions (binding a particular session
+   * to a particular backend server) and the method to use if so. None disables
+   * sticky sessions. Cookie-based uses an HTTP cookie TO stick a session to a
+   * backend server. Table-based uses the source (client) IP address to stick a
+   * session to a backend server.
+   */
+  stickySessions: StickySessionsType
+  /** Cookie name for cookie-based sticky sessions. */
+  stickySessionsCookieName: string
+  /**
+   * Object defining the health check to be carried out by the backend when
+   * checking the status and health of backend servers.
+   */
+  healthCheck: HealthCheck
+  /**
+   * List of backend server IP addresses (IPv4 or IPv6) the backend should
+   * forward traffic to.
+   */
+  serverIp: string[]
+  /** @deprecated Deprecated in favor of proxy_protocol field. */
+  sendProxyV2?: boolean
+  /** Maximum allowed time for a backend server to process a request. */
   timeoutServer?: string
-  /** Maximum initial server connection establishment time. */
+  /** Maximum allowed time for establishing a connection to a backend server. */
   timeoutConnect?: string
   /**
-   * Maximum tunnel inactivity time after Websocket is established (take
-   * precedence over client and server timeout).
+   * Maximum allowed tunnel inactivity time after Websocket is established
+   * (takes precedence over client and server timeout).
    */
   timeoutTunnel?: string
-  /** Modify what occurs when a backend server is marked down. */
+  /** Action to take when a backend server is marked as down. */
   onMarkedDownAction?: OnMarkedDownAction
   /**
-   * The PROXY protocol informs the other end about the incoming connection, so
-   * that it can know the client's address or the public address it accessed to,
-   * whatever the upper layer protocol.
-   *
-   * `proxy_protocol_none` Disable proxy protocol. `proxy_protocol_v1` Version
-   * one (text format). `proxy_protocol_v2` Version two (binary format).
-   * `proxy_protocol_v2_ssl` Version two with SSL connection.
-   * `proxy_protocol_v2_ssl_cn` Version two with SSL connection and common name
-   * information.
+   * PROXY protocol to use between the Load Balancer and backend servers. Allows
+   * the backend servers to be informed of the client's real IP address. PROXY
+   * protocol must be supported by the backend servers' software.
    */
   proxyProtocol?: ProxyProtocol
   /**
-   * Only the host part of the Scaleway S3 bucket website is expected. E.g.
-   * `failover-website.s3-website.fr-par.scw.cloud` if your bucket website URL
-   * is `https://failover-website.s3-website.fr-par.scw.cloud/`.
+   * Scaleway S3 bucket website to be served as failover if all backend servers
+   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud. Do not include
+   * the scheme (eg https://).
    */
   failoverHost?: string
-  /** Enable SSL between load balancer and backend servers. */
+  /**
+   * Defines whether to enable SSL between the Load Balancer and backend
+   * servers.
+   */
   sslBridging?: boolean
-  /** Set to true to ignore server certificate verification. */
+  /** Defines whether the server certificate verification should be ignored. */
   ignoreSslServerVerify?: boolean
 }
 
@@ -1133,57 +1172,63 @@ export type UpdateBackendRequest = {
    * config.
    */
   region?: Region
-  /** Backend ID to update. */
+  /** Backend ID. */
   backendId: string
-  /** Resource name. */
+  /** Backend name. */
   name: string
-  /** Backend protocol. TCP or HTTP. */
-  forwardProtocol: Protocol
-  /** User sessions will be forwarded to this port of backend servers. */
-  forwardPort: number
-  /** Load balancing algorithm. */
-  forwardPortAlgorithm: ForwardPortAlgorithm
-  /** Enable cookie-based session persistence. */
-  stickySessions: StickySessionsType
-  /** Cookie name for sticky sessions. */
-  stickySessionsCookieName: string
-  /** @deprecated Deprecated in favor of proxy_protocol field! */
-  sendProxyV2?: boolean
   /**
-   * Maximum server connection inactivity time (allowed time the server has to
-   * process the request).
+   * Protocol to be used by the backend when forwarding traffic to backend
+   * servers.
    */
+  forwardProtocol: Protocol
+  /** Port to be used by the backend when forwarding traffic to backend servers. */
+  forwardPort: number
+  /**
+   * Load balancing algorithm to be used when determining which backend server
+   * to forward new traffic to.
+   */
+  forwardPortAlgorithm: ForwardPortAlgorithm
+  /**
+   * Defines whether to activate sticky sessions (binding a particular session
+   * to a particular backend server) and the method to use if so. None disables
+   * sticky sessions. Cookie-based uses an HTTP cookie to stick a session to a
+   * backend server. Table-based uses the source (client) IP address to stick a
+   * session to a backend server.
+   */
+  stickySessions: StickySessionsType
+  /** Cookie name for cookie-based sticky sessions. */
+  stickySessionsCookieName: string
+  /** @deprecated Deprecated in favor of proxy_protocol field. */
+  sendProxyV2?: boolean
+  /** Maximum allowed time for a backend server to process a request. */
   timeoutServer?: string
-  /** Maximum initial server connection establishment time. */
+  /** Maximum allowed time for establishing a connection to a backend server. */
   timeoutConnect?: string
   /**
-   * Maximum tunnel inactivity time after Websocket is established (take
-   * precedence over client and server timeout).
+   * Maximum allowed tunnel inactivity time after Websocket is established
+   * (takes precedence over client and server timeout).
    */
   timeoutTunnel?: string
-  /** Modify what occurs when a backend server is marked down. */
+  /** Action to take when a backend server is marked down. */
   onMarkedDownAction?: OnMarkedDownAction
   /**
-   * The PROXY protocol informs the other end about the incoming connection, so
-   * that it can know the client's address or the public address it accessed to,
-   * whatever the upper layer protocol is.
-   *
-   * `proxy_protocol_none` Disable proxy protocol. `proxy_protocol_v1` Version
-   * one (text format). `proxy_protocol_v2` Version two (binary format).
-   * `proxy_protocol_v2_ssl` Version two with SSL connection.
-   * `proxy_protocol_v2_ssl_cn` Version two with SSL connection and common name
-   * information.
+   * PROXY protocol to use between the Load Balancer and backend servers. Allows
+   * the backend servers to be informed of the client's real IP address. PROXY
+   * protocol must be supported by the backend servers' software.
    */
   proxyProtocol?: ProxyProtocol
   /**
-   * Only the host part of the Scaleway S3 bucket website is expected. Example:
-   * `failover-website.s3-website.fr-par.scw.cloud` if your bucket website URL
-   * is `https://failover-website.s3-website.fr-par.scw.cloud/`.
+   * Scaleway S3 bucket website to be served as failover if all backend servers
+   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud. Do not include
+   * the scheme (eg https://).
    */
   failoverHost?: string
-  /** Enable SSL between load balancer and backend servers. */
+  /**
+   * Defines whether to enable SSL bridging between the Load Balancer and
+   * backend servers.
+   */
   sslBridging?: boolean
-  /** Set to true to ignore server certificate verification. */
+  /** Defines whether the server certificate verification should be ignored. */
   ignoreSslServerVerify?: boolean
 }
 
@@ -1205,7 +1250,7 @@ export type AddBackendServersRequest = {
   region?: Region
   /** Backend ID. */
   backendId: string
-  /** Set all IPs to add on your backend. */
+  /** List of IP addresses to add to backend servers. */
   serverIp: string[]
 }
 
@@ -1217,7 +1262,7 @@ export type RemoveBackendServersRequest = {
   region?: Region
   /** Backend ID. */
   backendId: string
-  /** Set all IPs to remove of your backend. */
+  /** List of IP addresses to remove from backend servers. */
   serverIp: string[]
 }
 
@@ -1229,7 +1274,10 @@ export type SetBackendServersRequest = {
   region?: Region
   /** Backend ID. */
   backendId: string
-  /** Set all IPs to add on your backend and remove all other. */
+  /**
+   * List of IP addresses for backend servers. Any other existing backend
+   * servers will be removed.
+   */
   serverIp: string[]
 }
 
@@ -1241,9 +1289,9 @@ export type UpdateHealthCheckRequest = {
   region?: Region
   /** Backend ID. */
   backendId: string
-  /** Specify the port used to health check. */
+  /** Port to use for the backend server health check. */
   port: number
-  /** Time between two consecutive health checks. */
+  /** Time to wait between two consecutive health checks. */
   checkDelay: string
   /** Maximum time a backend server has to reply to the health check. */
   checkTimeout: string
@@ -1308,10 +1356,7 @@ export type UpdateHealthCheckRequest = {
    * could be set.
    */
   httpsConfig?: HealthCheckHttpsConfig
-  /**
-   * It defines whether the health check should be done considering the proxy
-   * protocol.
-   */
+  /** Defines whether proxy protocol should be activated for the health check. */
   checkSendProxy: boolean
 }
 
@@ -1321,15 +1366,15 @@ export type ListFrontendsRequest = {
    * config.
    */
   region?: Region
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Use this to search by name. */
+  /** Name of the frontend to filter for. */
   name?: string
-  /** Response order. */
+  /** Sort order of frontends in the response. */
   orderBy?: ListFrontendsRequestOrderBy
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
-  /** The number of items to return. */
+  /** Number of frontends to return. */
   pageSize?: number
 }
 
@@ -1339,21 +1384,21 @@ export type CreateFrontendRequest = {
    * config.
    */
   region?: Region
-  /** Load balancer ID. */
+  /** Load Balancer ID (ID of the Load Balancer to attach the frontend to). */
   lbId: string
-  /** Resource name. */
+  /** Name for the frontend. */
   name?: string
-  /** TCP port to listen on the front side. */
+  /** Port the frontend should listen on. */
   inboundPort: number
-  /** Backend ID. */
+  /** Backend ID (ID of the backend the frontend should pass traffic to). */
   backendId: string
-  /** Set the maximum inactivity time on the client side. */
+  /** Maximum allowed inactivity time on the client side. */
   timeoutClient?: string
-  /** @deprecated Certificate ID, deprecated in favor of certificate_ids array ! */
+  /** @deprecated Certificate ID, deprecated in favor of certificate_ids array. */
   certificateId?: string
-  /** List of certificate IDs to bind on the frontend. */
+  /** List of SSL/TLS certificate IDs to bind to the frontend. */
   certificateIds?: string[]
-  /** Activate HTTP 3 protocol (beta). */
+  /** Defines whether to enable HTTP/3 protocol on the frontend. */
   enableHttp3: boolean
 }
 
@@ -1375,19 +1420,19 @@ export type UpdateFrontendRequest = {
   region?: Region
   /** Frontend ID. */
   frontendId: string
-  /** Resource name. */
+  /** Frontend name. */
   name: string
-  /** TCP port to listen on the front side. */
+  /** Port the frontend should listen on. */
   inboundPort: number
-  /** Backend ID. */
+  /** Backend ID (ID of the backend the frontend should pass traffic to). */
   backendId: string
-  /** Client session maximum inactivity time. */
+  /** Maximum allowed inactivity time on the client side. */
   timeoutClient?: string
-  /** @deprecated Certificate ID, deprecated in favor of `certificate_ids` array! */
+  /** @deprecated Certificate ID, deprecated in favor of certificate_ids array. */
   certificateId?: string
-  /** List of certificate IDs to bind on the frontend. */
+  /** List of SSL/TLS certificate IDs to bind to the frontend. */
   certificateIds?: string[]
-  /** Activate HTTP 3 protocol (beta). */
+  /** Defines whether to enable HTTP/3 protocol on the frontend. */
   enableHttp3: boolean
 }
 
@@ -1397,7 +1442,7 @@ export type DeleteFrontendRequest = {
    * config.
    */
   region?: Region
-  /** Frontend ID to delete. */
+  /** ID of the frontend to delete. */
   frontendId: string
 }
 
@@ -1407,11 +1452,11 @@ export type ListRoutesRequest = {
    * config.
    */
   region?: Region
-  /** Response order. */
+  /** Sort order of routes in the response. */
   orderBy?: ListRoutesRequestOrderBy
-  /** The number of items to return. */
+  /** The number of route objects to return. */
   pageSize?: number
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
   frontendId?: string
 }
@@ -1422,11 +1467,16 @@ export type CreateRouteRequest = {
    * config.
    */
   region?: Region
-  /** Origin of redirection. */
+  /** ID of the source frontend to create the route on. */
   frontendId: string
-  /** Destination of destination. */
+  /** ID of the target backend for the route. */
   backendId: string
-  /** Value to match a redirection. */
+  /**
+   * Object defining the match condition for a route to be applied. If an
+   * incoming client session matches the specified condition (i.e. it has a
+   * matching SNI value or HTTP Host header value), it will be passed to the
+   * target backend.
+   */
   match?: RouteMatch
 }
 
@@ -1436,7 +1486,7 @@ export type GetRouteRequest = {
    * config.
    */
   region?: Region
-  /** Id of route to get. */
+  /** Route ID. */
   routeId: string
 }
 
@@ -1446,11 +1496,16 @@ export type UpdateRouteRequest = {
    * config.
    */
   region?: Region
-  /** Route id to update. */
+  /** Route ID. */
   routeId: string
-  /** Backend id of redirection. */
+  /** ID of the target backend for the route. */
   backendId: string
-  /** Value to match a redirection. */
+  /**
+   * Object defining the match condition for a route to be applied. If an
+   * incoming client session matches the specified condition (i.e. it has a
+   * matching SNI value or HTTP Host header value), it will be passed to the
+   * target backend.
+   */
   match?: RouteMatch
 }
 
@@ -1460,7 +1515,7 @@ export type DeleteRouteRequest = {
    * config.
    */
   region?: Region
-  /** Route id to delete. */
+  /** Route ID. */
   routeId: string
 }
 
@@ -1470,7 +1525,7 @@ export type GetLbStatsRequest = {
    * config.
    */
   region?: Region
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
 }
 
@@ -1480,11 +1535,11 @@ export type ListBackendStatsRequest = {
    * config.
    */
   region?: Region
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
-  /** The number of items to return. */
+  /** Number of items to return. */
   pageSize?: number
 }
 
@@ -1494,15 +1549,18 @@ export type ListAclsRequest = {
    * config.
    */
   region?: Region
-  /** ID of your frontend. */
+  /**
+   * Frontend ID (ACLs attached to this frontend will be returned in the
+   * response).
+   */
   frontendId: string
-  /** Response order. */
+  /** Sort order of ACLs in the response. */
   orderBy?: ListAclRequestOrderBy
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
-  /** The number of items to return. */
+  /** The number of ACLs to return. */
   pageSize?: number
-  /** Filter acl per name. */
+  /** ACL name to filter for. */
   name?: string
 }
 
@@ -1512,23 +1570,23 @@ export type CreateAclRequest = {
    * config.
    */
   region?: Region
-  /** ID of your frontend. */
+  /** Frontend ID to attach the ACL to. */
   frontendId: string
-  /** Name of your ACL ressource. */
+  /** ACL name. */
   name?: string
-  /** Action to undertake when an ACL filter matches. */
+  /** Action to take when incoming traffic matches an ACL filter. */
   action: AclAction
   /**
-   * The ACL match rule. You can have one of those three cases:
-   *
-   * - `ip_subnet` is defined
-   * - `http_filter` and `http_filter_value` are defined
-   * - `ip_subnet`, `http_filter` and `http_filter_value` are defined.
+   * ACL match filter object. One of `ip_subnet` or `http_filter` &
+   * `http_filter_value` are required.
    */
   match?: AclMatch
-  /** Order between your Acls (ascending order, 0 is first acl executed). */
+  /**
+   * Priority of this ACL (ACLs are applied in ascending order, 0 is the first
+   * ACL executed).
+   */
   index: number
-  /** Description of your ACL ressource. */
+  /** ACL description. */
   description: string
 }
 
@@ -1538,7 +1596,7 @@ export type GetAclRequest = {
    * config.
    */
   region?: Region
-  /** ID of your ACL ressource. */
+  /** ACL ID. */
   aclId: string
 }
 
@@ -1548,20 +1606,23 @@ export type UpdateAclRequest = {
    * config.
    */
   region?: Region
-  /** ID of your ACL ressource. */
+  /** ACL ID. */
   aclId: string
-  /** Name of your ACL ressource. */
+  /** ACL name. */
   name: string
-  /** Action to undertake when an ACL filter matches. */
+  /** Action to take when incoming traffic matches an ACL filter. */
   action: AclAction
   /**
-   * The ACL match rule. At least `ip_subnet` or `http_filter` and
+   * ACL match filter object. One of `ip_subnet` or `http_filter` &
    * `http_filter_value` are required.
    */
   match?: AclMatch
-  /** Order between your Acls (ascending order, 0 is first acl executed). */
+  /**
+   * Priority of this ACL (ACLs are applied in ascending order, 0 is the first
+   * ACL executed).
+   */
   index: number
-  /** Description of your ACL ressource. */
+  /** ACL description. */
   description?: string
 }
 
@@ -1571,7 +1632,7 @@ export type DeleteAclRequest = {
    * config.
    */
   region?: Region
-  /** ID of your ACL ressource. */
+  /** ACL ID. */
   aclId: string
 }
 
@@ -1581,19 +1642,19 @@ export type CreateCertificateRequest = {
    * config.
    */
   region?: Region
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Certificate name. */
+  /** Name for the certificate. */
   name?: string
   /**
-   * Let's Encrypt type.
+   * Object to define a new Let's Encrypt certificate to be generated.
    *
    * One-of ('type'): at most one of 'letsencrypt', 'customCertificate' could be
    * set.
    */
   letsencrypt?: CreateCertificateRequestLetsencryptConfig
   /**
-   * Custom import certificate.
+   * Object to define an existing custom certificate to be imported.
    *
    * One-of ('type'): at most one of 'letsencrypt', 'customCertificate' could be
    * set.
@@ -1607,15 +1668,18 @@ export type ListCertificatesRequest = {
    * config.
    */
   region?: Region
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Response order. */
+  /** Sort order of certificates in the response. */
   orderBy?: ListCertificatesRequestOrderBy
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
-  /** The number of items to return. */
+  /** Number of certificates to return. */
   pageSize?: number
-  /** Use this to search by name. */
+  /**
+   * Certificate name to filter for, only certificates of this name will be
+   * returned.
+   */
   name?: string
 }
 
@@ -1657,7 +1721,7 @@ export type ListLbTypesRequest = {
    * config.
    */
   region?: Region
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
   /** The number of items to return. */
   pageSize?: number
@@ -1686,14 +1750,14 @@ export type CreateSubscriberRequest = {
    */
   webhookConfig?: SubscriberWebhookConfig
   /**
-   * @deprecated Owner of resources.
+   * @deprecated Organization ID to create the subscriber in.
    *
    *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    *   could be set.
    */
   organizationId?: string
   /**
-   * Assign the resource to a project ID.
+   * Project ID to create the subscriber in.
    *
    * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    * could be set.
@@ -1717,17 +1781,17 @@ export type ListSubscriberRequest = {
    * config.
    */
   region?: Region
-  /** Response order. */
+  /** Sort order of subscribers in the response. */
   orderBy?: ListSubscriberRequestOrderBy
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
   /** The number of items to return. */
   pageSize?: number
-  /** Use this to search by name. */
+  /** Subscriber name to search for. */
   name: string
-  /** Filter Subscribers by organization ID. */
+  /** Filter subscribers by Organization ID. */
   organizationId?: string
-  /** Filter Subscribers by project ID. */
+  /** Filter subscribers by Project ID. */
   projectId?: string
 }
 
@@ -1737,7 +1801,7 @@ export type UpdateSubscriberRequest = {
    * config.
    */
   region?: Region
-  /** Assign the resource to a project IDs. */
+  /** Subscriber ID. */
   subscriberId: string
   /** Subscriber name. */
   name: string
@@ -1749,7 +1813,7 @@ export type UpdateSubscriberRequest = {
    */
   emailConfig?: SubscriberEmailConfig
   /**
-   * WebHook URI configuration.
+   * Webhook URI configuration.
    *
    * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be
    * set.
@@ -1773,7 +1837,7 @@ export type SubscribeToLbRequest = {
    * config.
    */
   region?: Region
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
   /** Subscriber ID. */
   subscriberId: string
@@ -1785,7 +1849,7 @@ export type UnsubscribeFromLbRequest = {
    * config.
    */
   region?: Region
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
 }
 
@@ -1795,13 +1859,13 @@ export type ListLbPrivateNetworksRequest = {
    * config.
    */
   region?: Region
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Response order. */
+  /** Sort order of Private Network objects in the response. */
   orderBy?: ListPrivateNetworksRequestOrderBy
-  /** The number of items to return. */
+  /** Number of objects to return. */
   pageSize?: number
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
 }
 
@@ -1811,19 +1875,20 @@ export type AttachPrivateNetworkRequest = {
    * config.
    */
   region?: Region
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Set your instance private network id. */
+  /** Private Network ID. */
   privateNetworkId: string
   /**
-   * Define two local ip address of your choice for each load balancer instance.
+   * Object containing an array of a local IP address for the Load Balancer on
+   * this Private Network.
    *
    * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
    * 'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
-   * Set to true if you want to let DHCP assign IP addresses.
+   * Defines whether to let DHCP assign IP addresses.
    *
    * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
    * 'ipamConfig' could be set.
@@ -1853,17 +1918,23 @@ export type DetachPrivateNetworkRequest = {
 export type ZonedApiListLbsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Use this to search by name. */
+  /** Load Balancer name to filter for. */
   name?: string
-  /** Response order. */
+  /** Sort order of Load Balancers in the response. */
   orderBy?: ListLbsRequestOrderBy
-  /** The number of items to return. */
+  /** Number of Load Balancers to return. */
   pageSize?: number
-  /** Page number. */
+  /** Page number to return, from the paginated results. */
   page?: number
-  /** Filter LBs by organization ID. */
+  /**
+   * Organization ID to filter for, only Load Balancers from this Organization
+   * will be returned.
+   */
   organizationId?: string
-  /** Filter LBs by project ID. */
+  /**
+   * Project ID to filter for, only Load Balancers from this Project will be
+   * returned.
+   */
   projectId?: string
 }
 
@@ -1871,46 +1942,39 @@ export type ZonedApiCreateLbRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
-   * @deprecated Owner of resources.
+   * @deprecated Scaleway Organization to create the Load Balancer in.
    *
    *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    *   could be set.
    */
   organizationId?: string
   /**
-   * Assign the resource to a project ID.
+   * Scaleway Project to create the Load Balancer in.
    *
    * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    * could be set.
    */
   projectId?: string
-  /** Resource names. */
+  /** Name for the Load Balancer. */
   name?: string
-  /** Resource description. */
+  /** Description for the Load Balancer. */
   description: string
-  /**
-   * Just like for compute instances, when you destroy a load balancer, you can
-   * keep its highly available IP address and reuse it for another load balancer
-   * later.
-   */
+  /** ID of an existing flexible IP address to attach to the Load Balancer. */
   ipId?: string
-  /** List of keyword. */
+  /** List of tags for the Load Balancer. */
   tags?: string[]
-  /** Load balancer offer type. */
+  /**
+   * Load Balancer commercial offer type. Use the Load Balancer types endpoint
+   * to retrieve a list of available offer types.
+   */
   type: string
   /**
-   * Enforces minimal SSL version (in SSL/TLS offloading context).
-   *
-   * - `intermediate` General-purpose servers with a variety of clients,
-   *   recommended for almost all systems (Supports Firefox 27, Android 4.4.2,
-   *   Chrome 31, Edge, IE 11 on Windows 7, Java 8u31, OpenSSL 1.0.1, Opera 20,
-   *   and Safari 9).
-   * - `modern` Services with clients that support TLS 1.3 and don't need backward
-   *   compatibility (Firefox 63, Android 10.0, Chrome 70, Edge 75, Java 11,
-   *   OpenSSL 1.1.1, Opera 57, and Safari 12.1).
-   * - `old` Compatible with a number of very old clients, and should be used only
-   *   as a last resort (Firefox 1, Android 2.3, Chrome 1, Edge 12, IE8 on
-   *   Windows XP, Java 6, OpenSSL 0.9.8, Opera 5, and Safari 1).
+   * Determines the minimal SSL version which needs to be supported on the
+   * client side, in an SSL/TLS offloading context. Intermediate is suitable for
+   * general-purpose servers with a variety of clients, recommended for almost
+   * all systems. Modern is suitable for services with clients that support TLS
+   * 1.3 and do not need backward compatibility. Old is compatible with a small
+   * number of very old clients and should be used only as a last resort.
    */
   sslCompatibilityLevel?: SSLCompatibilityLevel
 }
@@ -1918,34 +1982,28 @@ export type ZonedApiCreateLbRequest = {
 export type ZonedApiGetLbRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
 }
 
 export type ZonedApiUpdateLbRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Resource name. */
+  /** Load Balancer name. */
   name: string
-  /** Resource description. */
+  /** Load Balancer description. */
   description: string
-  /** List of keywords. */
+  /** List of tags for the Load Balancer. */
   tags?: string[]
   /**
-   * Enforces minimal SSL version (in SSL/TLS offloading context).
-   *
-   * - `intermediate` General-purpose servers with a variety of clients,
-   *   recommended for almost all systems (Supports Firefox 27, Android 4.4.2,
-   *   Chrome 31, Edge, IE 11 on Windows 7, Java 8u31, OpenSSL 1.0.1, Opera 20,
-   *   and Safari 9).
-   * - `modern` Services with clients that support TLS 1.3 and don't need backward
-   *   compatibility (Firefox 63, Android 10.0, Chrome 70, Edge 75, Java 11,
-   *   OpenSSL 1.1.1, Opera 57, and Safari 12.1).
-   * - `old` Compatible with a number of very old clients, and should be used only
-   *   as a last resort (Firefox 1, Android 2.3, Chrome 1, Edge 12, IE8 on
-   *   Windows XP, Java 6, OpenSSL 0.9.8, Opera 5, and Safari 1).
+   * Determines the minimal SSL version which needs to be supported on the
+   * client side, in an SSL/TLS offloading context. Intermediate is suitable for
+   * general-purpose servers with a variety of clients, recommended for almost
+   * all systems. Modern is suitable for services with clients that support TLS
+   * 1.3 and don't need backward compatibility. Old is compatible with a small
+   * number of very old clients and should be used only as a last resort.
    */
   sslCompatibilityLevel?: SSLCompatibilityLevel
 }
@@ -1953,33 +2011,46 @@ export type ZonedApiUpdateLbRequest = {
 export type ZonedApiDeleteLbRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Load balancer ID. */
+  /** ID of the Load Balancer to delete. */
   lbId: string
-  /** Set true if you don't want to keep this IP address. */
+  /**
+   * Defines whether the Load Balancer's flexible IP should be deleted. Set to
+   * true to release the flexible IP, or false to keep it available in your
+   * account for future Load Balancers.
+   */
   releaseIp: boolean
 }
 
 export type ZonedApiMigrateLbRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Load balancer type (check /lb-types to list all type). */
+  /**
+   * Load Balancer type to migrate to (use the List all Load Balancer offer
+   * types endpoint to get a list of available offer types).
+   */
   type: string
 }
 
 export type ZonedApiListIPsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
-  /** The number of items to return. */
+  /** Number of IP addresses to return. */
   pageSize?: number
-  /** Use this to search by IP address. */
+  /** IP address to filter for. */
   ipAddress?: string
-  /** Filter IPs by organization id. */
+  /**
+   * Organization ID to filter for, only Load Balancer IP addresses from this
+   * Organization will be returned.
+   */
   organizationId?: string
-  /** Filter IPs by project ID. */
+  /**
+   * Project ID to filter for, only Load Balancer IP addresses from this Project
+   * will be returned.
+   */
   projectId?: string
 }
 
@@ -1987,20 +2058,21 @@ export type ZonedApiCreateIpRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
-   * @deprecated Owner of resources.
+   * @deprecated Organization ID of the Organization where the IP address should
+   *   be created.
    *
    *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    *   could be set.
    */
   organizationId?: string
   /**
-   * Assign the resource to a project ID.
+   * Project ID of the Project where the IP address should be created.
    *
    * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    * could be set.
    */
   projectId?: string
-  /** Reverse domain name. */
+  /** Reverse DNS (domain name) for the IP address. */
   reverse?: string
 }
 
@@ -2023,83 +2095,95 @@ export type ZonedApiUpdateIpRequest = {
   zone?: Zone
   /** IP address ID. */
   ipId: string
-  /** Reverse DNS. */
+  /** Reverse DNS (domain name) for the IP address. */
   reverse?: string
 }
 
 export type ZonedApiListBackendsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Use this to search by name. */
+  /** Name of the backend to filter for. */
   name?: string
-  /** Response order. */
+  /** Sort order of backends in the response. */
   orderBy?: ListBackendsRequestOrderBy
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
-  /** The number of items to return. */
+  /** Number of backends to return. */
   pageSize?: number
 }
 
 export type ZonedApiCreateBackendRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Resource name. */
+  /** Name for the backend. */
   name?: string
-  /** Backend protocol. TCP or HTTP. */
-  forwardProtocol: Protocol
-  /** User sessions will be forwarded to this port of backend servers. */
-  forwardPort: number
-  /** Load balancing algorithm. */
-  forwardPortAlgorithm: ForwardPortAlgorithm
-  /** Enables cookie-based session persistence. */
-  stickySessions: StickySessionsType
-  /** Cookie name for sticky sessions. */
-  stickySessionsCookieName: string
-  /** See the Healthcheck object description. */
-  healthCheck: HealthCheck
-  /** Backend server IP addresses list (IPv4 or IPv6). */
-  serverIp: string[]
-  /** @deprecated Deprecated in favor of proxy_protocol field ! */
-  sendProxyV2?: boolean
   /**
-   * Maximum server connection inactivity time (allowed time the server has to
-   * process the request).
+   * Protocol to be used by the backend when forwarding traffic to backend
+   * servers.
    */
+  forwardProtocol: Protocol
+  /** Port to be used by the backend when forwarding traffic to backend servers. */
+  forwardPort: number
+  /**
+   * Load balancing algorithm to be used when determining which backend server
+   * to forward new traffic to.
+   */
+  forwardPortAlgorithm: ForwardPortAlgorithm
+  /**
+   * Defines whether to activate sticky sessions (binding a particular session
+   * to a particular backend server) and the method to use if so. None disables
+   * sticky sessions. Cookie-based uses an HTTP cookie TO stick a session to a
+   * backend server. Table-based uses the source (client) IP address to stick a
+   * session to a backend server.
+   */
+  stickySessions: StickySessionsType
+  /** Cookie name for cookie-based sticky sessions. */
+  stickySessionsCookieName: string
+  /**
+   * Object defining the health check to be carried out by the backend when
+   * checking the status and health of backend servers.
+   */
+  healthCheck: HealthCheck
+  /**
+   * List of backend server IP addresses (IPv4 or IPv6) the backend should
+   * forward traffic to.
+   */
+  serverIp: string[]
+  /** @deprecated Deprecated in favor of proxy_protocol field. */
+  sendProxyV2?: boolean
+  /** Maximum allowed time for a backend server to process a request. */
   timeoutServer?: string
-  /** Maximum initial server connection establishment time. */
+  /** Maximum allowed time for establishing a connection to a backend server. */
   timeoutConnect?: string
   /**
-   * Maximum tunnel inactivity time after Websocket is established (take
-   * precedence over client and server timeout).
+   * Maximum allowed tunnel inactivity time after Websocket is established
+   * (takes precedence over client and server timeout).
    */
   timeoutTunnel?: string
-  /** Modify what occurs when a backend server is marked down. */
+  /** Action to take when a backend server is marked as down. */
   onMarkedDownAction?: OnMarkedDownAction
   /**
-   * The PROXY protocol informs the other end about the incoming connection, so
-   * that it can know the client's address or the public address it accessed to,
-   * whatever the upper layer protocol.
-   *
-   * `proxy_protocol_none` Disable proxy protocol. `proxy_protocol_v1` Version
-   * one (text format). `proxy_protocol_v2` Version two (binary format).
-   * `proxy_protocol_v2_ssl` Version two with SSL connection.
-   * `proxy_protocol_v2_ssl_cn` Version two with SSL connection and common name
-   * information.
+   * PROXY protocol to use between the Load Balancer and backend servers. Allows
+   * the backend servers to be informed of the client's real IP address. PROXY
+   * protocol must be supported by the backend servers' software.
    */
   proxyProtocol?: ProxyProtocol
   /**
-   * Only the host part of the Scaleway S3 bucket website is expected. E.g.
-   * `failover-website.s3-website.fr-par.scw.cloud` if your bucket website URL
-   * is `https://failover-website.s3-website.fr-par.scw.cloud/`.
+   * Scaleway S3 bucket website to be served as failover if all backend servers
+   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud. Do not include
+   * the scheme (eg https://).
    */
   failoverHost?: string
-  /** Enable SSL between load balancer and backend servers. */
+  /**
+   * Defines whether to enable SSL between the Load Balancer and backend
+   * servers.
+   */
   sslBridging?: boolean
-  /** Set to true to ignore server certificate verification. */
+  /** Defines whether the server certificate verification should be ignored. */
   ignoreSslServerVerify?: boolean
 }
 
@@ -2113,57 +2197,63 @@ export type ZonedApiGetBackendRequest = {
 export type ZonedApiUpdateBackendRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Backend ID to update. */
+  /** Backend ID. */
   backendId: string
-  /** Resource name. */
+  /** Backend name. */
   name: string
-  /** Backend protocol. TCP or HTTP. */
-  forwardProtocol: Protocol
-  /** User sessions will be forwarded to this port of backend servers. */
-  forwardPort: number
-  /** Load balancing algorithm. */
-  forwardPortAlgorithm: ForwardPortAlgorithm
-  /** Enable cookie-based session persistence. */
-  stickySessions: StickySessionsType
-  /** Cookie name for sticky sessions. */
-  stickySessionsCookieName: string
-  /** @deprecated Deprecated in favor of proxy_protocol field! */
-  sendProxyV2?: boolean
   /**
-   * Maximum server connection inactivity time (allowed time the server has to
-   * process the request).
+   * Protocol to be used by the backend when forwarding traffic to backend
+   * servers.
    */
+  forwardProtocol: Protocol
+  /** Port to be used by the backend when forwarding traffic to backend servers. */
+  forwardPort: number
+  /**
+   * Load balancing algorithm to be used when determining which backend server
+   * to forward new traffic to.
+   */
+  forwardPortAlgorithm: ForwardPortAlgorithm
+  /**
+   * Defines whether to activate sticky sessions (binding a particular session
+   * to a particular backend server) and the method to use if so. None disables
+   * sticky sessions. Cookie-based uses an HTTP cookie to stick a session to a
+   * backend server. Table-based uses the source (client) IP address to stick a
+   * session to a backend server.
+   */
+  stickySessions: StickySessionsType
+  /** Cookie name for cookie-based sticky sessions. */
+  stickySessionsCookieName: string
+  /** @deprecated Deprecated in favor of proxy_protocol field. */
+  sendProxyV2?: boolean
+  /** Maximum allowed time for a backend server to process a request. */
   timeoutServer?: string
-  /** Maximum initial server connection establishment time. */
+  /** Maximum allowed time for establishing a connection to a backend server. */
   timeoutConnect?: string
   /**
-   * Maximum tunnel inactivity time after Websocket is established (take
-   * precedence over client and server timeout).
+   * Maximum allowed tunnel inactivity time after Websocket is established
+   * (takes precedence over client and server timeout).
    */
   timeoutTunnel?: string
-  /** Modify what occurs when a backend server is marked down. */
+  /** Action to take when a backend server is marked down. */
   onMarkedDownAction?: OnMarkedDownAction
   /**
-   * The PROXY protocol informs the other end about the incoming connection, so
-   * that it can know the client's address or the public address it accessed to,
-   * whatever the upper layer protocol is.
-   *
-   * `proxy_protocol_none` Disable proxy protocol. `proxy_protocol_v1` Version
-   * one (text format). `proxy_protocol_v2` Version two (binary format).
-   * `proxy_protocol_v2_ssl` Version two with SSL connection.
-   * `proxy_protocol_v2_ssl_cn` Version two with SSL connection and common name
-   * information.
+   * PROXY protocol to use between the Load Balancer and backend servers. Allows
+   * the backend servers to be informed of the client's real IP address. PROXY
+   * protocol must be supported by the backend servers' software.
    */
   proxyProtocol?: ProxyProtocol
   /**
-   * Only the host part of the Scaleway S3 bucket website is expected. Example:
-   * `failover-website.s3-website.fr-par.scw.cloud` if your bucket website URL
-   * is `https://failover-website.s3-website.fr-par.scw.cloud/`.
+   * Scaleway S3 bucket website to be served as failover if all backend servers
+   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud. Do not include
+   * the scheme (eg https://).
    */
   failoverHost?: string
-  /** Enable SSL between load balancer and backend servers. */
+  /**
+   * Defines whether to enable SSL bridging between the Load Balancer and
+   * backend servers.
+   */
   sslBridging?: boolean
-  /** Set to true to ignore server certificate verification. */
+  /** Defines whether the server certificate verification should be ignored. */
   ignoreSslServerVerify?: boolean
 }
 
@@ -2179,7 +2269,7 @@ export type ZonedApiAddBackendServersRequest = {
   zone?: Zone
   /** Backend ID. */
   backendId: string
-  /** Set all IPs to add on your backend. */
+  /** List of IP addresses to add to backend servers. */
   serverIp: string[]
 }
 
@@ -2188,7 +2278,7 @@ export type ZonedApiRemoveBackendServersRequest = {
   zone?: Zone
   /** Backend ID. */
   backendId: string
-  /** Set all IPs to remove of your backend. */
+  /** List of IP addresses to remove from backend servers. */
   serverIp: string[]
 }
 
@@ -2197,7 +2287,10 @@ export type ZonedApiSetBackendServersRequest = {
   zone?: Zone
   /** Backend ID. */
   backendId: string
-  /** Set all IPs to add on your backend and remove all other. */
+  /**
+   * List of IP addresses for backend servers. Any other existing backend
+   * servers will be removed.
+   */
   serverIp: string[]
 }
 
@@ -2206,9 +2299,9 @@ export type ZonedApiUpdateHealthCheckRequest = {
   zone?: Zone
   /** Backend ID. */
   backendId: string
-  /** Specify the port used to health check. */
+  /** Port to use for the backend server health check. */
   port: number
-  /** Time between two consecutive health checks. */
+  /** Time to wait between two consecutive health checks. */
   checkDelay: string
   /** Maximum time a backend server has to reply to the health check. */
   checkTimeout: string
@@ -2273,46 +2366,43 @@ export type ZonedApiUpdateHealthCheckRequest = {
    * could be set.
    */
   httpsConfig?: HealthCheckHttpsConfig
-  /**
-   * It defines whether the health check should be done considering the proxy
-   * protocol.
-   */
+  /** Defines whether proxy protocol should be activated for the health check. */
   checkSendProxy: boolean
 }
 
 export type ZonedApiListFrontendsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Use this to search by name. */
+  /** Name of the frontend to filter for. */
   name?: string
-  /** Response order. */
+  /** Sort order of frontends in the response. */
   orderBy?: ListFrontendsRequestOrderBy
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
-  /** The number of items to return. */
+  /** Number of frontends to return. */
   pageSize?: number
 }
 
 export type ZonedApiCreateFrontendRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Load balancer ID. */
+  /** Load Balancer ID (ID of the Load Balancer to attach the frontend to). */
   lbId: string
-  /** Resource name. */
+  /** Name for the frontend. */
   name?: string
-  /** TCP port to listen on the front side. */
+  /** Port the frontend should listen on. */
   inboundPort: number
-  /** Backend ID. */
+  /** Backend ID (ID of the backend the frontend should pass traffic to). */
   backendId: string
-  /** Set the maximum inactivity time on the client side. */
+  /** Maximum allowed inactivity time on the client side. */
   timeoutClient?: string
-  /** @deprecated Certificate ID, deprecated in favor of certificate_ids array ! */
+  /** @deprecated Certificate ID, deprecated in favor of certificate_ids array. */
   certificateId?: string
-  /** List of certificate IDs to bind on the frontend. */
+  /** List of SSL/TLS certificate IDs to bind to the frontend. */
   certificateIds?: string[]
-  /** Activate HTTP 3 protocol (beta). */
+  /** Defines whether to enable HTTP/3 protocol on the frontend. */
   enableHttp3: boolean
 }
 
@@ -2328,37 +2418,37 @@ export type ZonedApiUpdateFrontendRequest = {
   zone?: Zone
   /** Frontend ID. */
   frontendId: string
-  /** Resource name. */
+  /** Frontend name. */
   name: string
-  /** TCP port to listen on the front side. */
+  /** Port the frontend should listen on. */
   inboundPort: number
-  /** Backend ID. */
+  /** Backend ID (ID of the backend the frontend should pass traffic to). */
   backendId: string
-  /** Client session maximum inactivity time. */
+  /** Maximum allowed inactivity time on the client side. */
   timeoutClient?: string
-  /** @deprecated Certificate ID, deprecated in favor of `certificate_ids` array! */
+  /** @deprecated Certificate ID, deprecated in favor of certificate_ids array. */
   certificateId?: string
-  /** List of certificate IDs to bind on the frontend. */
+  /** List of SSL/TLS certificate IDs to bind to the frontend. */
   certificateIds?: string[]
-  /** Activate HTTP 3 protocol (beta). */
+  /** Defines whether to enable HTTP/3 protocol on the frontend. */
   enableHttp3: boolean
 }
 
 export type ZonedApiDeleteFrontendRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Frontend ID to delete. */
+  /** ID of the frontend to delete. */
   frontendId: string
 }
 
 export type ZonedApiListRoutesRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Response order. */
+  /** Sort order of routes in the response. */
   orderBy?: ListRoutesRequestOrderBy
-  /** The number of items to return. */
+  /** The number of route objects to return. */
   pageSize?: number
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
   frontendId?: string
 }
@@ -2366,154 +2456,173 @@ export type ZonedApiListRoutesRequest = {
 export type ZonedApiCreateRouteRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Origin of redirection. */
+  /** ID of the source frontend to create the route on. */
   frontendId: string
-  /** Destination of destination. */
+  /** ID of the target backend for the route. */
   backendId: string
-  /** Value to match a redirection. */
+  /**
+   * Object defining the match condition for a route to be applied. If an
+   * incoming client session matches the specified condition (i.e. it has a
+   * matching SNI value or HTTP Host header value), it will be passed to the
+   * target backend.
+   */
   match?: RouteMatch
 }
 
 export type ZonedApiGetRouteRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Id of route to get. */
+  /** Route ID. */
   routeId: string
 }
 
 export type ZonedApiUpdateRouteRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Route id to update. */
+  /** Route ID. */
   routeId: string
-  /** Backend id of redirection. */
+  /** ID of the target backend for the route. */
   backendId: string
-  /** Value to match a redirection. */
+  /**
+   * Object defining the match condition for a route to be applied. If an
+   * incoming client session matches the specified condition (i.e. it has a
+   * matching SNI value or HTTP Host header value), it will be passed to the
+   * target backend.
+   */
   match?: RouteMatch
 }
 
 export type ZonedApiDeleteRouteRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Route id to delete. */
+  /** Route ID. */
   routeId: string
 }
 
 export type ZonedApiGetLbStatsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
 }
 
 export type ZonedApiListBackendStatsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
-  /** The number of items to return. */
+  /** Number of items to return. */
   pageSize?: number
 }
 
 export type ZonedApiListAclsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of your frontend. */
+  /**
+   * Frontend ID (ACLs attached to this frontend will be returned in the
+   * response).
+   */
   frontendId: string
-  /** Response order. */
+  /** Sort order of ACLs in the response. */
   orderBy?: ListAclRequestOrderBy
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
-  /** The number of items to return. */
+  /** The number of ACLs to return. */
   pageSize?: number
-  /** Filter acl per name. */
+  /** ACL name to filter for. */
   name?: string
 }
 
 export type ZonedApiCreateAclRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of your frontend. */
+  /** Frontend ID to attach the ACL to. */
   frontendId: string
-  /** Name of your ACL ressource. */
+  /** ACL name. */
   name?: string
-  /** Action to undertake when an ACL filter matches. */
+  /** Action to take when incoming traffic matches an ACL filter. */
   action: AclAction
   /**
-   * The ACL match rule. You can have one of those three cases:
-   *
-   * - `ip_subnet` is defined
-   * - `http_filter` and `http_filter_value` are defined
-   * - `ip_subnet`, `http_filter` and `http_filter_value` are defined.
+   * ACL match filter object. One of `ip_subnet` or `http_filter` &
+   * `http_filter_value` are required.
    */
   match?: AclMatch
-  /** Order between your Acls (ascending order, 0 is first acl executed). */
+  /**
+   * Priority of this ACL (ACLs are applied in ascending order, 0 is the first
+   * ACL executed).
+   */
   index: number
-  /** Description of your ACL ressource. */
+  /** ACL description. */
   description: string
 }
 
 export type ZonedApiGetAclRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of your ACL ressource. */
+  /** ACL ID. */
   aclId: string
 }
 
 export type ZonedApiUpdateAclRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of your ACL ressource. */
+  /** ACL ID. */
   aclId: string
-  /** Name of your ACL ressource. */
+  /** ACL name. */
   name: string
-  /** Action to undertake when an ACL filter matches. */
+  /** Action to take when incoming traffic matches an ACL filter. */
   action: AclAction
   /**
-   * The ACL match rule. At least `ip_subnet` or `http_filter` and
+   * ACL match filter object. One of `ip_subnet` or `http_filter` &
    * `http_filter_value` are required.
    */
   match?: AclMatch
-  /** Order between your Acls (ascending order, 0 is first acl executed). */
+  /**
+   * Priority of this ACL (ACLs are applied in ascending order, 0 is the first
+   * ACL executed).
+   */
   index: number
-  /** Description of your ACL ressource. */
+  /** ACL description. */
   description?: string
 }
 
 export type ZonedApiDeleteAclRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of your ACL ressource. */
+  /** ACL ID. */
   aclId: string
 }
 
 export type ZonedApiSetAclsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The Frontend to change ACL to. */
+  /** Frontend ID. */
   frontendId: string
-  /** Array of ACLs to erease the existing ACLs. */
+  /**
+   * List of ACLs for this frontend. Any other existing ACLs on this frontend
+   * will be removed.
+   */
   acls: AclSpec[]
 }
 
 export type ZonedApiCreateCertificateRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Certificate name. */
+  /** Name for the certificate. */
   name?: string
   /**
-   * Let's Encrypt type.
+   * Object to define a new Let's Encrypt certificate to be generated.
    *
    * One-of ('type'): at most one of 'letsencrypt', 'customCertificate' could be
    * set.
    */
   letsencrypt?: CreateCertificateRequestLetsencryptConfig
   /**
-   * Custom import certificate.
+   * Object to define an existing custom certificate to be imported.
    *
    * One-of ('type'): at most one of 'letsencrypt', 'customCertificate' could be
    * set.
@@ -2524,15 +2633,18 @@ export type ZonedApiCreateCertificateRequest = {
 export type ZonedApiListCertificatesRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Response order. */
+  /** Sort order of certificates in the response. */
   orderBy?: ListCertificatesRequestOrderBy
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
-  /** The number of items to return. */
+  /** Number of certificates to return. */
   pageSize?: number
-  /** Use this to search by name. */
+  /**
+   * Certificate name to filter for, only certificates of this name will be
+   * returned.
+   */
   name?: string
 }
 
@@ -2562,7 +2674,7 @@ export type ZonedApiDeleteCertificateRequest = {
 export type ZonedApiListLbTypesRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
   /** The number of items to return. */
   pageSize?: number
@@ -2588,14 +2700,14 @@ export type ZonedApiCreateSubscriberRequest = {
    */
   webhookConfig?: SubscriberWebhookConfig
   /**
-   * @deprecated Owner of resources.
+   * @deprecated Organization ID to create the subscriber in.
    *
    *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    *   could be set.
    */
   organizationId?: string
   /**
-   * Assign the resource to a project ID.
+   * Project ID to create the subscriber in.
    *
    * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    * could be set.
@@ -2613,24 +2725,24 @@ export type ZonedApiGetSubscriberRequest = {
 export type ZonedApiListSubscriberRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Response order. */
+  /** Sort order of subscribers in the response. */
   orderBy?: ListSubscriberRequestOrderBy
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
   /** The number of items to return. */
   pageSize?: number
-  /** Use this to search by name. */
+  /** Subscriber name to search for. */
   name: string
-  /** Filter Subscribers by organization ID. */
+  /** Filter subscribers by Organization ID. */
   organizationId?: string
-  /** Filter Subscribers by project ID. */
+  /** Filter subscribers by Project ID. */
   projectId?: string
 }
 
 export type ZonedApiUpdateSubscriberRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Assign the resource to a project IDs. */
+  /** Subscriber ID. */
   subscriberId: string
   /** Subscriber name. */
   name: string
@@ -2642,7 +2754,7 @@ export type ZonedApiUpdateSubscriberRequest = {
    */
   emailConfig?: SubscriberEmailConfig
   /**
-   * WebHook URI configuration.
+   * Webhook URI configuration.
    *
    * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be
    * set.
@@ -2660,7 +2772,7 @@ export type ZonedApiDeleteSubscriberRequest = {
 export type ZonedApiSubscribeToLbRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
   /** Subscriber ID. */
   subscriberId: string
@@ -2669,39 +2781,40 @@ export type ZonedApiSubscribeToLbRequest = {
 export type ZonedApiUnsubscribeFromLbRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
 }
 
 export type ZonedApiListLbPrivateNetworksRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Response order. */
+  /** Sort order of Private Network objects in the response. */
   orderBy?: ListPrivateNetworksRequestOrderBy
-  /** The number of items to return. */
+  /** Number of objects to return. */
   pageSize?: number
-  /** Page number. */
+  /** The page number to return, from the paginated results. */
   page?: number
 }
 
 export type ZonedApiAttachPrivateNetworkRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Load balancer ID. */
+  /** Load Balancer ID. */
   lbId: string
-  /** Set your instance private network id. */
+  /** Private Network ID. */
   privateNetworkId: string
   /**
-   * Define two local ip address of your choice for each load balancer instance.
+   * Object containing an array of a local IP address for the Load Balancer on
+   * this Private Network.
    *
    * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
    * 'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
-   * Set to true if you want to let DHCP assign IP addresses.
+   * Defines whether to let DHCP assign IP addresses.
    *
    * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
    * 'ipamConfig' could be set.
