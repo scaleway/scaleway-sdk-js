@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.2.0...@scaleway/sdk@1.3.0) (2023-03-13)
+
+### Features
+
+- **dom:** add `natural_person` as a contact legal extension ([#504](https://github.com/scaleway/scaleway-sdk-js/issues/504)) ([20b42f0](https://github.com/scaleway/scaleway-sdk-js/commit/20b42f04b91953177f10a95a4dd9be14ee6c11fb))
+- **rdb:** prepare ipam integration ([#501](https://github.com/scaleway/scaleway-sdk-js/issues/501)) ([65e95be](https://github.com/scaleway/scaleway-sdk-js/commit/65e95be31aaa0af9ed119c0be14417f68232a7b4))
+- **vpc_gw:** add dhcp field in CreateGatewayNetworkRequest ([#502](https://github.com/scaleway/scaleway-sdk-js/issues/502)) ([2852168](https://github.com/scaleway/scaleway-sdk-js/commit/28521687e5483390fc2e69047b567169c6794940))
+- **webhosting:** filter listOffers with hostingId and indicate the available ones ([#503](https://github.com/scaleway/scaleway-sdk-js/issues/503)) ([b726ef0](https://github.com/scaleway/scaleway-sdk-js/commit/b726ef0673a07bc407a9071c9512a75200f5b42f))
+
 ## [1.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.1.0...@scaleway/sdk@1.2.0) (2023-03-06)
 
 ### Features
