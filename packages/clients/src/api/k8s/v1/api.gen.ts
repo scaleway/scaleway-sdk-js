@@ -113,7 +113,7 @@ export class API extends ParentAPI {
     enrichForPagination('clusters', this.pageOfListClusters, request)
 
   /**
-   * Creates a new Kubernetes cluster on a Scaleway account.
+   * Create a new Kubernetes cluster on a Scaleway account.
    *
    * @param request - The request {@link CreateClusterRequest}
    * @returns A Promise of Cluster
@@ -198,9 +198,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Deletes a specific cluster and all its associated pools and nodes. Note
-   * that this method will not delete any Load Balancers or Block Volumes that
-   * are associated with the cluster.
+   * Delete a specific cluster and all its associated pools and nodes. Note that
+   * this method will not delete any Load Balancers or Block Volumes that are
+   * associated with the cluster.
    *
    * @param request - The request {@link DeleteClusterRequest}
    * @returns A Promise of Cluster
@@ -222,7 +222,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Upgrades a specific Kubernetes cluster and/or its associated pools to a
+   * Upgrade a specific Kubernetes cluster and/or its associated pools to a
    * specific and supported Kubernetes version.
    *
    * @param request - The request {@link UpgradeClusterRequest}
