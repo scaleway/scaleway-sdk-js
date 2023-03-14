@@ -90,7 +90,7 @@
     "jest-environment-jsdom": "^29.5.0",
     "jest-junit": "^15.0.0",
     "lerna": "^6.5.1",
-    "lint-staged": "^13.1.4",
+    "lint-staged": "^13.2.0",
     "prettier": "^2.8.4",
     "read-pkg": "^7.1.0",
     "rollup": "^3.18.0",
