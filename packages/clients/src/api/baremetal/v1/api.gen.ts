@@ -93,9 +93,9 @@ const jsonContentHeaders = {
 }
 
 /**
- * Elastic metal API.
+ * Elastic Metal API.
  *
- * This API allows to manage your Bare metal server.
+ * This API allows to manage your Elastic Metal server.
  */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
@@ -132,7 +132,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List elastic metal servers for organization.
+   * List Elastic Metal servers for a specific organization.
    *
    * @param request - The request {@link ListServersRequest}
    * @returns A Promise of ListServersResponse
@@ -141,7 +141,8 @@ export class API extends ParentAPI {
     enrichForPagination('servers', this.pageOfListServers, request)
 
   /**
-   * Get the server associated with the given ID.
+   * Get full details of an existing Elastic Metal server associated with the
+   * ID.
    *
    * @param request - The request {@link GetServerRequest}
    * @returns A Promise of Server
@@ -179,8 +180,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new elastic metal server. Once the server is created, you probably
-   * want to install an OS.
+   * Create a new Elastic Metal server. Once the server is created, proceed with
+   * the [installation of an OS](#post-3e949e).
    *
    * @param request - The request {@link CreateServerRequest}
    * @returns A Promise of Server
@@ -202,7 +203,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the server associated with the given ID.
+   * Update the server associated with the ID. You can update parameters such as
+   * the server's name, tags and description. Any parameters left null in the
+   * request body are not updated.
    *
    * @param request - The request {@link UpdateServerRequest}
    * @returns A Promise of Server
@@ -224,7 +227,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Install an OS on the server associated with the given ID.
+   * Install an Operating System (OS) on the Elastic Metal server with a
+   * specific ID.
    *
    * @param request - The request {@link InstallServerRequest}
    * @returns A Promise of Server
@@ -246,7 +250,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Give the ping status on the server associated with the given ID.
+   * Get the ping status of the server associated with the ID.
    *
    * @param request - The request {@link GetServerMetricsRequest}
    * @returns A Promise of GetServerMetricsResponse
@@ -264,7 +268,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the server associated with the given ID.
+   * Delete the server associated with the ID.
    *
    * @param request - The request {@link DeleteServerRequest}
    * @returns A Promise of Server
@@ -282,8 +286,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Reboot the server associated with the given ID, use boot param to reboot in
-   * rescue.
+   * Reboot the Elastic Metal server associated with the ID, use the `boot_type`
+   * `rescue` to reboot the server in rescue mode.
    *
    * @param request - The request {@link RebootServerRequest}
    * @returns A Promise of Server
@@ -305,7 +309,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Start the server associated with the given ID.
+   * Start the server associated with the ID.
    *
    * @param request - The request {@link StartServerRequest}
    * @returns A Promise of Server
@@ -327,7 +331,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Stop the server associated with the given ID.
+   * Stop the server associated with the ID. The server remains allocated to
+   * your account and all data remains on the local storage of the server.
    *
    * @param request - The request {@link StopServerRequest}
    * @returns A Promise of Server
@@ -369,7 +374,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List events associated to the given server ID.
+   * List event (i.e. start/stop/reboot) associated to the server ID.
    *
    * @param request - The request {@link ListServerEventsRequest}
    * @returns A Promise of ListServerEventsResponse
@@ -378,17 +383,17 @@ export class API extends ParentAPI {
     enrichForPagination('events', this.pageOfListServerEvents, request)
 
   /**
-   * Start BMC (Baseboard Management Controller) access associated with the
-   * given ID. The BMC (Baseboard Management Controller) access is available one
-   * hour after the installation of the server. You need first to create an
-   * option Remote Access. You will find the ID and the price with a call to
-   * listOffers
+   * Start BMC (Baseboard Management Controller) access associated with the ID.
+   * The BMC (Baseboard Management Controller) access is available one hour
+   * after the installation of the server. You need first to create an option
+   * Remote Access. You will find the ID and the price with a call to listOffers
    * (https://developers.scaleway.com/en/products/baremetal/api/#get-78db92).
-   * Then you can add the option
-   * https://developers.scaleway.com/en/products/baremetal/api/#post-b14abd. Do
-   * not forget to delete the Option. After start BMC, you need to Get Remote
-   * Access to get the login/password
-   * https://developers.scaleway.com/en/products/baremetal/api/#get-cefc0f.
+   * Then add the option
+   * https://developers.scaleway.com/en/products/baremetal/api/#post-b14abd.
+   * After adding the BMC option, you need to Get Remote Access to get the
+   * login/password
+   * https://developers.scaleway.com/en/products/baremetal/api/#get-cefc0f. Do
+   * not forget to delete the Option after use.
    *
    * @param request - The request {@link StartBMCAccessRequest}
    * @returns A Promise of BMCAccess
@@ -414,7 +419,7 @@ export class API extends ParentAPI {
 
   /**
    * Get the BMC (Baseboard Management Controller) access associated with the
-   * given ID.
+   * ID, including the URL and login information needed to connect.
    *
    * @param request - The request {@link GetBMCAccessRequest}
    * @returns A Promise of BMCAccess
@@ -435,8 +440,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Stop BMC (Baseboard Management Controller) access associated with the given
-   * ID.
+   * Stop BMC (Baseboard Management Controller) access associated with the ID.
    *
    * @param request - The request {@link StopBMCAccessRequest}
    */
@@ -450,8 +454,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Configure ip associated with the given server ID and ipID. You can use this
-   * method to set a reverse dns for an IP.
+   * Configure the IP address associated with the server ID and IP ID. You can
+   * use this method to set a reverse DNS for an IP address.
    *
    * @param request - The request {@link UpdateIPRequest}
    * @returns A Promise of IP
@@ -476,7 +480,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Add an option to a specific server.
+   * Add an option, such as Private Networks, to a specific server.
    *
    * @param request - The request {@link AddOptionServerRequest}
    * @returns A Promise of Server
@@ -545,7 +549,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all available server offers.
+   * List all available Elastic Metal server configurations.
    *
    * @param request - The request {@link ListOffersRequest}
    * @returns A Promise of ListOffersResponse
@@ -554,7 +558,7 @@ export class API extends ParentAPI {
     enrichForPagination('offers', this.pageOfListOffers, request)
 
   /**
-   * Return specific offer for the given ID.
+   * Get details of an offer identified by its offer ID.
    *
    * @param request - The request {@link GetOfferRequest}
    * @returns A Promise of Offer
@@ -572,7 +576,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Return specific option for the given ID.
+   * Return specific option for the ID.
    *
    * @param request - The request {@link GetOptionRequest}
    * @returns A Promise of Option
@@ -697,7 +701,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all available OS that can be install on an elastic metal server.
+   * List all OSes that are available for installation on Elastic Metal servers.
    *
    * @param request - The request {@link ListOSRequest}
    * @returns A Promise of ListOSResponse
@@ -706,7 +710,7 @@ export class API extends ParentAPI {
     enrichForPagination('os', this.pageOfListOS, request)
 
   /**
-   * Return specific OS for the given ID.
+   * Return specific OS for the ID.
    *
    * @param request - The request {@link GetOSRequest}
    * @returns A Promise of OS
@@ -730,7 +734,7 @@ export class PrivateNetworkAPI extends ParentAPI {
   public static readonly LOCALITIES: Zone[] = ['fr-par-2']
 
   /**
-   * Add a server to a private network
+   * Add a server to a Private Network
    *
    * @param request - The request
    *   {@link PrivateNetworkApiAddServerPrivateNetworkRequest}
@@ -761,7 +765,7 @@ export class PrivateNetworkAPI extends ParentAPI {
     )
 
   /**
-   * Set multiple private networks on a server
+   * Set multiple Private Networks on a server
    *
    * @param request - The request
    *   {@link PrivateNetworkApiSetServerPrivateNetworksRequest}
@@ -818,7 +822,7 @@ export class PrivateNetworkAPI extends ParentAPI {
     )
 
   /**
-   * List the private networks of a server
+   * List the Private Networks of a server
    *
    * @param request - The request
    *   {@link PrivateNetworkApiListServerPrivateNetworksRequest}
@@ -834,7 +838,7 @@ export class PrivateNetworkAPI extends ParentAPI {
     )
 
   /**
-   * Delete a private network
+   * Delete a Private Network
    *
    * @param request - The request
    *   {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}

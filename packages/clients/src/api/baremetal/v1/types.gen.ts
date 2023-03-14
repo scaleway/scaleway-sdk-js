@@ -97,9 +97,9 @@ export interface BMCAccess {
 export interface CPU {
   /** Name of the CPU. */
   name: string
-  /** Number of cores of the CPU. */
+  /** Number of CPU cores. */
   coreCount: number
-  /** Number of threads of the CPU. */
+  /** Number CPU threads. */
   threadCount: number
   /** Frequency of the CPU in MHz. */
   frequency: number
@@ -109,17 +109,17 @@ export interface CPU {
 
 /** Create server request. install. */
 export interface CreateServerRequestInstall {
-  /** ID of the OS to install on the server. */
+  /** ID of the OS to installation on the server. */
   osId: string
   /** Hostname of the server. */
   hostname: string
   /** SSH key IDs authorized on the server. */
   sshKeyIds: string[]
-  /** User used for the installation. */
+  /** User for the installation. */
   user?: string
-  /** Password used for the installation. */
+  /** Password for the installation. */
   password?: string
-  /** User used for the service to install. */
+  /** Regular user that runs the service to be installed on the server. */
   serviceUser?: string
   /** Password used for the service to install. */
   servicePassword?: string
@@ -135,7 +135,7 @@ export interface Disk {
 
 /** Get server metrics response. */
 export interface GetServerMetricsResponse {
-  /** Timeseries of ping on the server. */
+  /** Timeseries object representing pings on the server. */
   pings?: TimeSeries
 }
 
@@ -151,7 +151,7 @@ export interface IP {
   version: IPVersion
   /** Status of the reverse. */
   reverseStatus: IPReverseStatus
-  /** A message related to the reverse status, in case of an error for example. */
+  /** A message related to the reverse status, e.g. in case of an error. */
   reverseStatusMessage: string
 }
 
@@ -196,13 +196,13 @@ export interface ListServerPrivateNetworksResponse {
 export interface ListServersResponse {
   /** Total count of matching servers. */
   totalCount: number
-  /** Servers that match filters. */
+  /** Array of Elastic Metal server objects matching the filters in the request. */
   servers: Server[]
 }
 
 /** List settings response. */
 export interface ListSettingsResponse {
-  /** Total count of matching sttings. */
+  /** Total count of matching settings. */
   totalCount: number
   /** Settings that match filters. */
   settings: Setting[]
@@ -228,17 +228,17 @@ export interface OS {
   name: string
   /** Version of the OS. */
   version: string
-  /** URL of this os's logo. */
+  /** URL of this OS's logo. */
   logoUrl: string
-  /** Define the SSH requirements to install the OS. */
+  /** Object defining the SSH requirements to install the OS. */
   ssh?: OSOSField
-  /** Define the username requirements to install the OS. */
+  /** Object defining the username requirements to install the OS. */
   user?: OSOSField
-  /** Define the password requirements to install the OS. */
+  /** Object defining the password requirements to install the OS. */
   password?: OSOSField
-  /** Define the username requirements to install the service. */
+  /** Object defining the username requirements to install the service. */
   serviceUser?: OSOSField
-  /** Define the password requirements to install the service. */
+  /** Object defining the password requirements to install the service. */
   servicePassword?: OSOSField
   /** State of OS. */
   enabled: boolean
@@ -260,7 +260,7 @@ export interface Offer {
   name: string
   /** Stock level. */
   stock: OfferStock
-  /** Public Bandwidth available in bits/s with the offer. */
+  /** Public bandwidth available (in bits/s) with the offer. */
   bandwidth: number
   /** Commercial range of the offer. */
   commercialRange: string
@@ -269,11 +269,11 @@ export interface Offer {
    * payed until 12h32).
    */
   pricePerHour?: Money
-  /** Price of the offer per months. */
+  /** Monthly price of the offer, if subscribing on a monthly basis. */
   pricePerMonth?: Money
   /** Disks specifications of the offer. */
   disks: Disk[]
-  /** True if the offer is currently available. */
+  /** Defines whether the offer is currently available. */
   enable: boolean
   /** CPU specifications of the offer. */
   cpus: CPU[]
@@ -285,19 +285,22 @@ export interface Offer {
   persistentMemories: PersistentMemory[]
   /** Raid controller specifications of the offer. */
   raidControllers: RaidController[]
-  /** Array of incompatible OS ids. */
+  /** Array of OS images IDs incompatible with the server. */
   incompatibleOsIds: string[]
   /** Period of subscription for the offer. */
   subscriptionPeriod: OfferSubscriptionPeriod
   /** Operation path of the service. */
   operationPath: string
-  /** Fee to pay on order. */
+  /**
+   * One time fee invoiced by Scaleway for the setup and activation of the
+   * server.
+   */
   fee?: Money
-  /** Options available on offer. */
+  /** Available options for customization of the server. */
   options: OfferOptionOffer[]
   /** Private bandwidth available in bits/s with the offer. */
   privateBandwidth: number
-  /** The offer is shared or not. */
+  /** Defines whether the offer's bandwidth is shared or not. */
   sharedBandwidth: boolean
   /** Array of tags attached to the offer. */
   tags: string[]
@@ -330,7 +333,7 @@ export interface Option {
   id: string
   /** Name of the option. */
   name: string
-  /** Is false if the option could not be added or removed. */
+  /** Defines whether the option is manageable (could be added or removed). */
   manageable: boolean
 }
 
@@ -361,9 +364,9 @@ export interface Server {
   name: string
   /** Description of the server. */
   description: string
-  /** Date of last modification of the server. */
+  /** Last modification date of the server. */
   updatedAt?: Date
-  /** Date of creation of the server. */
+  /** Creation date of the server. */
   createdAt?: Date
   /** Status of the server. */
   status: ServerStatus
@@ -371,7 +374,7 @@ export interface Server {
   offerId: string
   /** Offer name of the server. */
   offerName: string
-  /** Array of customs tags attached to the server. */
+  /** Array of custom tags attached to the server. */
   tags: string[]
   /** Array of IPs attached to the server. */
   ips: IP[]
@@ -379,13 +382,13 @@ export interface Server {
   domain: string
   /** Boot type of the server. */
   bootType: ServerBootType
-  /** The zone in which is the server. */
+  /** Zone in which is the server located. */
   zone: Zone
-  /** Configuration of installation. */
+  /** Configuration of the installation. */
   install?: ServerInstall
-  /** Server status of ping. */
+  /** Status of server ping. */
   pingStatus: ServerPingStatus
-  /** Options enabled on server. */
+  /** Options enabled on the server. */
   options: ServerOption[]
   /** Configuration of rescue boot. */
   rescueServer?: ServerRescueServer
@@ -393,7 +396,7 @@ export interface Server {
 
 /** Server event. */
 export interface ServerEvent {
-  /** ID of the server for whom the action will be applied. */
+  /** ID of the server to which the action will be applied. */
   id: string
   /** The action that will be applied to the server. */
   action: string
@@ -407,23 +410,23 @@ export interface ServerEvent {
 export interface ServerInstall {
   /** ID of the OS. */
   osId: string
-  /** Host defined in the server install. */
+  /** Host defined during the server installation. */
   hostname: string
-  /** SSH public key IDs defined in the server install. */
+  /** SSH public key IDs defined during server installation. */
   sshKeyIds: string[]
-  /** Status of the server install. */
+  /** Status of the server installation. */
   status: ServerInstallStatus
   /**
-   * User defined in the server install or the default one if none were
+   * User defined in the server installation, or the default user if none were
    * specified.
    */
   user: string
   /**
-   * Service user defined in the server install or the default one if none were
-   * specified.
+   * Service user defined in the server installation, or the default user if
+   * none were specified.
    */
   serviceUser: string
-  /** The address of the installed service. */
+  /** Address of the installed service. */
   serviceUrl: string
 }
 
@@ -433,9 +436,9 @@ export interface ServerOption {
   id: string
   /** Name of the option. */
   name: string
-  /** Status of the option. */
+  /** Status of the option on this server. */
   status: ServerOptionOptionStatus
-  /** Is false if the option could not be added or removed. */
+  /** Defines whether the option can be managed (added or removed). */
   manageable: boolean
   /** Auto expiration date for compatible options. */
   expiresAt?: Date
@@ -443,21 +446,21 @@ export interface ServerOption {
 
 /** Server private network. */
 export interface ServerPrivateNetwork {
-  /** The private network ID. */
+  /** The Private Network ID. */
   id: string
-  /** The private network project ID. */
+  /** The Private Network Project ID. */
   projectId: string
   /** The server ID. */
   serverId: string
-  /** The private network ID. */
+  /** The Private Network ID. */
   privateNetworkId: string
-  /** The VLAN ID associated to the private network. */
+  /** The VLAN ID associated to the Private Network. */
   vlan?: number
-  /** The configuration status of the private network. */
+  /** The configuration status of the Private Network. */
   status: ServerPrivateNetworkStatus
-  /** The private network creation date. */
+  /** The Private Network creation date. */
   createdAt?: Date
-  /** The date the private network was last modified. */
+  /** The date the Private Network was last modified. */
   updatedAt?: Date
 }
 
@@ -481,7 +484,7 @@ export interface Setting {
   type: SettingType
   /** ID of the project ID. */
   projectId: string
-  /** The setting is enable or disable. */
+  /** Defines whether the setting is enabled. */
   enabled: boolean
 }
 
@@ -490,21 +493,21 @@ export type ListServersRequest = {
   zone?: Zone
   /** Page number. */
   page?: number
-  /** Number of server per page. */
+  /** Number of servers per page. */
   pageSize?: number
   /** Order of the servers. */
   orderBy?: ListServersRequestOrderBy
-  /** Filter by tags. */
+  /** Tags to filter for. */
   tags?: string[]
-  /** Filter by status. */
+  /** Status to filter for. */
   status?: string[]
-  /** Filter by name. */
+  /** Names to filter for. */
   name?: string
-  /** Filter by organization ID. */
+  /** Organization ID to filter for. */
   organizationId?: string
-  /** Filter by project ID. */
+  /** Project ID to filter for. */
   projectId?: string
-  /** Filter by option ID. */
+  /** Option ID to filter for. */
   optionId?: string
 }
 
@@ -536,11 +539,14 @@ export type CreateServerRequest = {
   projectId?: string
   /** Name of the server (≠hostname). */
   name: string
-  /** Description associated to the server, max 255 characters. */
+  /** Description associated with the server, max 255 characters. */
   description: string
   /** Tags to associate to the server. */
   tags?: string[]
-  /** Configuration of installation. */
+  /**
+   * Object describing the configuration details of the OS installation on the
+   * server.
+   */
   install?: CreateServerRequestInstall
   /** IDs of options to enable on server. */
   optionIds?: string[]
@@ -554,11 +560,11 @@ export type UpdateServerRequest = {
   /** Name of the server (≠hostname), not updated if null. */
   name?: string
   /**
-   * Description associated to the server, max 255 characters, not updated if
+   * Description associated with the server, max 255 characters, not updated if
    * null.
    */
   description?: string
-  /** Tags associated to the server, not updated if null. */
+  /** Tags associated with the server, not updated if null. */
   tags?: string[]
 }
 
@@ -567,7 +573,7 @@ export type InstallServerRequest = {
   zone?: Zone
   /** Server ID to install. */
   serverId: string
-  /** ID of the OS to install on the server. */
+  /** ID of the OS to installation on the server. */
   osId: string
   /** Hostname of the server. */
   hostname: string
@@ -640,7 +646,7 @@ export type StartBMCAccessRequest = {
   zone?: Zone
   /** ID of the server. */
   serverId: string
-  /** The IP authorized to connect to the given server. */
+  /** The IP authorized to connect to the server. */
   ip: string
 }
 
@@ -696,7 +702,7 @@ export type ListOffersRequest = {
   page?: number
   /** Number of offers per page. */
   pageSize?: number
-  /** Period of subscription to filter offers. */
+  /** Subscription period type to filter offers by. */
   subscriptionPeriod?: OfferSubscriptionPeriod
 }
 
@@ -721,9 +727,9 @@ export type ListOptionsRequest = {
   page?: number
   /** Number of options per page. */
   pageSize?: number
-  /** Filter options by offer_id. */
+  /** Offer ID to filter options for. */
   offerId?: string
-  /** Filter options by name. */
+  /** Name to filter options for. */
   name?: string
 }
 
@@ -734,7 +740,7 @@ export type ListSettingsRequest = {
   page?: number
   /** Set the maximum list size. */
   pageSize?: number
-  /** Order the response. */
+  /** Sort order for items in the response. */
   orderBy?: ListSettingsRequestOrderBy
   /** ID of the project. */
   projectId?: string
@@ -745,7 +751,7 @@ export type UpdateSettingRequest = {
   zone?: Zone
   /** ID of the setting. */
   settingId: string
-  /** Enable/Disable the setting. */
+  /** Defines whether the setting is enabled. */
   enabled?: boolean
 }
 
@@ -756,7 +762,7 @@ export type ListOSRequest = {
   page?: number
   /** Number of OS per page. */
   pageSize?: number
-  /** Filter OS by offer ID. */
+  /** Offer IDs to filter OSes for. */
   offerId?: string
 }
 
@@ -772,7 +778,7 @@ export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
   zone?: Zone
   /** The ID of the server. */
   serverId: string
-  /** The ID of the private network. */
+  /** The ID of the Private Network. */
   privateNetworkId: string
 }
 
@@ -781,26 +787,26 @@ export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
   zone?: Zone
   /** The ID of the server. */
   serverId: string
-  /** The IDs of the private networks. */
+  /** The IDs of the Private Networks. */
   privateNetworkIds: string[]
 }
 
 export type PrivateNetworkApiListServerPrivateNetworksRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The sort order for the returned private networks. */
+  /** The sort order for the returned Private Networks. */
   orderBy?: ListServerPrivateNetworksRequestOrderBy
-  /** The page number for the returned private networks. */
+  /** The page number for the returned Private Networks. */
   page?: number
-  /** The maximum number of private networks per page. */
+  /** The maximum number of Private Networks per page. */
   pageSize?: number
-  /** Filter private networks by server ID. */
+  /** Filter Private Networks by server ID. */
   serverId?: string
-  /** Filter private networks by private network ID. */
+  /** Filter Private Networks by Private Network ID. */
   privateNetworkId?: string
-  /** Filter private networks by organization ID. */
+  /** Filter Private Networks by Organization ID. */
   organizationId?: string
-  /** Filter private networks by project ID. */
+  /** Filter Private Networks by Project ID. */
   projectId?: string
 }
 
@@ -809,6 +815,6 @@ export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
   zone?: Zone
   /** The ID of the server. */
   serverId: string
-  /** The ID of the private network. */
+  /** The ID of the Private Network. */
   privateNetworkId: string
 }
