@@ -24,7 +24,7 @@ export type ServerTypeStock =
 
 /** List os response. */
 export interface ListOSResponse {
-  /** Total number of os. */
+  /** Total number of OS. */
   totalCount: number
   /** List of OS. */
   os: OS[]
@@ -32,25 +32,25 @@ export interface ListOSResponse {
 
 /** List server types response. */
 export interface ListServerTypesResponse {
-  /** The available server types. */
+  /** Available server types. */
   serverTypes: ServerType[]
 }
 
 /** List servers response. */
 export interface ListServersResponse {
-  /** The total number of servers. */
+  /** Total number of servers. */
   totalCount: number
-  /** The paginated returned servers. */
+  /** Paginated returned servers. */
   servers: Server[]
 }
 
 /** Os. */
 export interface OS {
-  /** The OS unique ID. */
+  /** Unique ID of the OS. */
   id: string
-  /** The OS name. */
+  /** OS name. */
   name: string
-  /** The OS name as it should be displayed. */
+  /** OS name as it should be displayed. */
   label: string
   /** URL of the image. */
   imageUrl: string
@@ -76,13 +76,13 @@ export interface Server {
   vncUrl: string
   /** Current status of the server. */
   status: ServerStatus
-  /** The date at which the server was created. */
+  /** Date on which the server was created. */
   createdAt?: Date
-  /** The date at which the server was last updated. */
+  /** Date on which the server was last updated. */
   updatedAt?: Date
-  /** The date at which the server was last deleted. */
+  /** Date on which the server was last deleted. */
   deletableAt?: Date
-  /** The zone of the server. */
+  /** Zone of the server. */
   zone: Zone
 }
 
@@ -143,16 +143,16 @@ export type CreateServerRequest = {
 export type ListServersRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The sort order of the returned servers. */
+  /** Sort order of the returned servers. */
   orderBy?: ListServersRequestOrderBy
-  /** List only servers of this project ID. */
+  /** Only list servers of this project ID. */
   projectId?: string
-  /** List only servers of this organization ID. */
+  /** Only list servers of this Organization ID. */
   organizationId?: string
-  /** A positive integer to choose the page to return. */
+  /** Positive integer to choose the page to return. */
   page?: number
   /**
-   * A positive integer lower or equal to 100 to select the number of items to
+   * Positive integer lower or equal to 100 to select the number of items to
    * return.
    */
   pageSize?: number
@@ -161,18 +161,18 @@ export type ListServersRequest = {
 export type ListOSRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** A positive integer to choose the page to return. */
+  /** Positive integer to choose the page to return. */
   page?: number
   /**
-   * A positive integer lower or equal to 100 to select the number of items to
+   * Positive integer lower or equal to 100 to select the number of items to
    * return.
    */
   pageSize?: number
-  /** List of compatible server type. */
+  /** List of compatible server types. */
   serverType?: string
   /**
-   * Filter os by name (for eg. "11.1" will return "11.1.2" and "11.1" but not
-   * "12").
+   * Filter OS by name (note that "11.1" will return "11.1.2" and "11.1" but not
+   * "12")).
    */
   name?: string
 }
