@@ -9,67 +9,70 @@ export type ListProjectsRequestOrderBy =
 
 /** List projects response. */
 export interface ListProjectsResponse {
-  /** The total number of projects. */
+  /** Total number of Projects. */
   totalCount: number
-  /** The paginated returned projects. */
+  /** Paginated returned Projects. */
   projects: Project[]
 }
 
 /** Project. */
 export interface Project {
-  /** The ID of the project. */
+  /** ID of the Project. */
   id: string
-  /** The name of the project. */
+  /** Name of the Project. */
   name: string
-  /** The organization ID of the project. */
+  /** Organization ID of the Project. */
   organizationId: string
-  /** The creation date of the project. */
+  /** Creation date of the Project. */
   createdAt?: Date
-  /** The update date of the project. */
+  /** Update date of the Project. */
   updatedAt?: Date
-  /** The description of the project. */
+  /** Description of the Project. */
   description: string
 }
 
 export type CreateProjectRequest = {
-  /** The name of the project. */
+  /** Name of the Project. */
   name: string
-  /** The organization ID of the project. */
+  /** Organization ID of the Project. */
   organizationId?: string
-  /** The description of the project. */
+  /** Description of the Project. */
   description?: string
 }
 
 export type ListProjectsRequest = {
-  /** The organization ID of the project. */
+  /** Organization ID of the Project. */
   organizationId?: string
-  /** The name of the project. */
+  /** Name of the Project. */
   name?: string
-  /** The page number for the returned projects. */
+  /** Page number for the returned Projects. */
   page?: number
-  /** The maximum number of project per page. */
+  /** Maximum number of Project per page. */
   pageSize?: number
-  /** The sort order of the returned projects. */
+  /** Sort order of the returned Projects. */
   orderBy?: ListProjectsRequestOrderBy
-  /** Filter out by a list of project ID. */
+  /**
+   * Project IDs to filter for. The results will be limited to any Projects with
+   * an ID in this array.
+   */
   projectIds?: string[]
 }
 
 export type GetProjectRequest = {
-  /** The project ID of the project. */
+  /** Project ID of the Project. */
   projectId?: string
 }
 
 export type DeleteProjectRequest = {
-  /** The project ID of the project. */
+  /** Project ID of the Project. */
   projectId?: string
 }
 
 export type UpdateProjectRequest = {
-  /** The project ID of the project. */
+  /** Project ID of the Project. */
   projectId?: string
-  /** The name of the project. */
+  /** Name of the Project. */
   name?: string
-  /** The description of the project. */
+  /** Description of the Project. */
   description?: string
 }
