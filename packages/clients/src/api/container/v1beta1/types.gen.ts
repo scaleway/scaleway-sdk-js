@@ -104,7 +104,7 @@ export interface Container {
   port: number
   secretEnvironmentVariables: SecretHashedValue[]
   /**
-   * Possible values:
+   * Configure how HTTP and HTTPS requests are handled. Possible values:
    *
    * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.
@@ -325,7 +325,7 @@ export type CreateContainerRequest = {
   port?: number
   secretEnvironmentVariables?: Secret[]
   /**
-   * Possible values:
+   * Configure how HTTP and HTTPS requests are handled. Possible values:
    *
    * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.
@@ -355,7 +355,7 @@ export type UpdateContainerRequest = {
   port?: number
   secretEnvironmentVariables?: Secret[]
   /**
-   * Possible values:
+   * Configure how HTTP and HTTPS requests are handled. Possible values:
    *
    * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.

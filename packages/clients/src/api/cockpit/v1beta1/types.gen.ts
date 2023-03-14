@@ -43,7 +43,7 @@ export interface CockpitEndpoints {
   grafanaUrl: string
 }
 
-/** Alert contact point. */
+/** Alert contact point. Contact point. */
 export interface ContactPoint {
   /**
    * Alert contact point configuration.

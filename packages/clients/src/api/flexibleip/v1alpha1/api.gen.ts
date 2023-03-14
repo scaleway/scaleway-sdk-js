@@ -54,7 +54,7 @@ export class API extends ParentAPI {
   ]
 
   /**
-   * Create a Flexible IP
+   * Create a Flexible IP.
    *
    * @param request - The request {@link CreateFlexibleIPRequest}
    * @returns A Promise of FlexibleIP
@@ -76,7 +76,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a Flexible IP
+   * Get a Flexible IP.
    *
    * @param request - The request {@link GetFlexibleIPRequest}
    * @returns A Promise of FlexibleIP
@@ -143,7 +143,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Flexible IPs
+   * List Flexible IPs.
    *
    * @param request - The request {@link ListFlexibleIPsRequest}
    * @returns A Promise of ListFlexibleIPsResponse
@@ -152,7 +152,7 @@ export class API extends ParentAPI {
     enrichForPagination('flexibleIps', this.pageOfListFlexibleIPs, request)
 
   /**
-   * Update a Flexible IP
+   * Update a Flexible IP.
    *
    * @param request - The request {@link UpdateFlexibleIPRequest}
    * @returns A Promise of FlexibleIP
@@ -174,7 +174,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a Flexible IP
+   * Delete a Flexible IP.
    *
    * @param request - The request {@link DeleteFlexibleIPRequest}
    */
@@ -188,7 +188,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Attach a Flexible IP to a server
+   * Attach a Flexible IP to a server.
    *
    * @param request - The request {@link AttachFlexibleIPRequest}
    * @returns A Promise of AttachFlexibleIPsResponse
@@ -210,7 +210,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Detach a Flexible IP from a server
+   * Detach a Flexible IP from a server.
    *
    * @param request - The request {@link DetachFlexibleIPRequest}
    * @returns A Promise of DetachFlexibleIPsResponse
@@ -232,7 +232,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Generate a virtual MAC on a given Flexible IP
+   * Generate a virtual MAC on a given Flexible IP.
    *
    * @param request - The request {@link GenerateMACAddrRequest}
    * @returns A Promise of FlexibleIP
@@ -254,8 +254,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Duplicate a Virtual MAC from a given Flexible IP onto another attached on
-   * the same server.
+   * Duplicate a Virtual MAC. Duplicate a Virtual MAC from a given Flexible IP
+   * onto another attached on the same server.
    *
    * @param request - The request {@link DuplicateMACAddrRequest}
    * @returns A Promise of FlexibleIP
@@ -293,7 +293,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Remove a virtual MAC from a Flexible IP
+   * Remove a virtual MAC from a Flexible IP.
    *
    * @param request - The request {@link DeleteMACAddrRequest}
    */

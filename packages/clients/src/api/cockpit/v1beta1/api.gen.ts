@@ -65,11 +65,12 @@ const jsonContentHeaders = {
 /**
  * Cockpit API.
  *
- * This API allows to manage Cockpits.
+ * This API allows to manage Cockpits. Cockpit API.
  */
 export class API extends ParentAPI {
   /**
-   * Activate a cockpit associated with the given project ID.
+   * Activate a cockpit. Activate a cockpit associated with the given project
+   * ID.
    *
    * @param request - The request {@link ActivateCockpitRequest}
    * @returns A Promise of Cockpit
@@ -88,7 +89,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get the cockpit associated with the given project ID.
+   * Get cockpit. Get the cockpit associated with the given project ID.
    *
    * @param request - The request {@link GetCockpitRequest}
    * @returns A Promise of Cockpit
@@ -127,7 +128,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Deactivate a cockpit associated with the given project ID.
+   * Deactivate a cockpit. Deactivate a cockpit associated with the given
+   * project ID.
    *
    * @param request - The request {@link DeactivateCockpitRequest}
    * @returns A Promise of Cockpit
@@ -146,7 +148,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Reset the Grafana of your cockpit associated with the given project ID.
+   * Reset Grafana. Reset the Grafana of your cockpit associated with the given
+   * project ID.
    *
    * @param request - The request {@link ResetCockpitGrafanaRequest}
    * @returns A Promise of Cockpit
@@ -165,7 +168,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a token associated with the given project ID.
+   * Create a token. Create a token associated with the given project ID.
    *
    * @param request - The request {@link CreateTokenRequest}
    * @returns A Promise of Token
@@ -205,7 +208,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List tokens associated with the given project ID.
+   * List tokens. List tokens associated with the given project ID.
    *
    * @param request - The request {@link ListTokensRequest}
    * @returns A Promise of ListTokensResponse
@@ -214,7 +217,7 @@ export class API extends ParentAPI {
     enrichForPagination('tokens', this.pageOfListTokens, request)
 
   /**
-   * Get the token associated with the given ID.
+   * Get token. Get the token associated with the given ID.
    *
    * @param request - The request {@link GetTokenRequest}
    * @returns A Promise of Token
@@ -232,7 +235,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the token associated with the given ID.
+   * Delete token. Delete the token associated with the given ID.
    *
    * @param request - The request {@link DeleteTokenRequest}
    */
@@ -246,7 +249,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Create an alert contact point for the default receiver.
+   * Create an alert contact point. Create an alert contact point for the
+   * default receiver.
    *
    * @param request - The request {@link CreateContactPointRequest}
    * @returns A Promise of ContactPoint
@@ -287,7 +291,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List alert contact points associated with the given cockpit ID.
+   * List alert contact points. List alert contact points associated with the
+   * given cockpit ID.
    *
    * @param request - The request {@link ListContactPointsRequest}
    * @returns A Promise of ListContactPointsResponse
@@ -296,7 +301,8 @@ export class API extends ParentAPI {
     enrichForPagination('contactPoints', this.pageOfListContactPoints, request)
 
   /**
-   * Delete an alert contact point for the default receiver.
+   * Delete an alert contact point. Delete an alert contact point for the
+   * default receiver.
    *
    * @param request - The request {@link DeleteContactPointRequest}
    */
@@ -343,7 +349,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Trigger a test alert to all receivers.
+   * Trigger a test alert. Trigger a test alert to all receivers.
    *
    * @param request - The request {@link TriggerTestAlertRequest}
    */
@@ -358,7 +364,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Create a grafana user for your grafana instance.
+   * Create a grafana user. Create a grafana user for your grafana instance.
    *
    * @param request - The request {@link CreateGrafanaUserRequest}
    * @returns A Promise of GrafanaUser
@@ -400,7 +406,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List grafana users who are able to connect to your grafana instance.
+   * List grafana users. List grafana users who are able to connect to your
+   * grafana instance.
    *
    * @param request - The request {@link ListGrafanaUsersRequest}
    * @returns A Promise of ListGrafanaUsersResponse
@@ -409,7 +416,7 @@ export class API extends ParentAPI {
     enrichForPagination('grafanaUsers', this.pageOfListGrafanaUsers, request)
 
   /**
-   * Delete a grafana user from your grafana instance.
+   * Delete a grafana user. Delete a grafana user from your grafana instance.
    *
    * @param request - The request {@link DeleteGrafanaUserRequest}
    */
@@ -427,7 +434,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Reset the Grafana user password from your grafana instance.
+   * Reset Grafana user password. Reset the Grafana user password from your
+   * grafana instance.
    *
    * @param request - The request {@link ResetGrafanaUserPasswordRequest}
    * @returns A Promise of GrafanaUser

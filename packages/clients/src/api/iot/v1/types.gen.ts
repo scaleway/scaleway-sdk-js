@@ -152,8 +152,9 @@ export interface Device {
   /** Filter-sets to restrict the topics the device can publish/subscribe to. */
   messageFilters?: DeviceMessageFilters
   /**
-   * Assigning a custom certificate allows a device to authenticate using that
-   * specific certificate without checking the hub's CA certificate.
+   * Whether the device was assigned a custom certificate. Assigning a custom
+   * certificate allows a device to authenticate using that specific certificate
+   * without checking the hub's CA certificate.
    */
   hasCustomCertificate: boolean
   /** Device add date. */
@@ -173,9 +174,9 @@ export interface DeviceMessageFilters {
 /** Device. message filters. rule. */
 export interface DeviceMessageFiltersRule {
   /**
-   * If accept, the set will accept all topics in the topics list, but no other.
-   * If reject, the set will deny all topics in the topics list, but all others
-   * will be allowed.
+   * How to use the topic list. If accept, the set will accept all topics in the
+   * topics list, but no other. If reject, the set will deny all topics in the
+   * topics list, but all others will be allowed.
    */
   policy: DeviceMessageFiltersRulePolicy
   /**
@@ -226,9 +227,9 @@ export interface Hub {
   /** Number of currently connected devices. */
   connectedDeviceCount: number
   /**
-   * Devices should be connected to this host, port may be 1883 (MQTT), 8883
-   * (MQTT over TLS), 80 (MQTT over Websocket) or 443 (MQTT over Websocket over
-   * TLS).
+   * Host to connect your devices to. Devices should be connected to this host,
+   * port may be 1883 (MQTT), 8883 (MQTT over TLS), 80 (MQTT over Websocket) or
+   * 443 (MQTT over Websocket over TLS).
    */
   endpoint: string
   /** Disable Hub events. */
@@ -246,17 +247,18 @@ export interface Hub {
   /** Organization owning the resource. */
   organizationId: string
   /**
-   * When an unknown device connects to your hub using a valid certificate
-   * chain, it will be automatically provisioned inside your hub. The hub uses
-   * the common name of the device certifcate to find out if a device with the
-   * same name already exists. This setting can only be enabled on a hub with a
-   * custom certificate authority.
+   * Enable device auto provisioning. When an unknown device connects to your
+   * hub using a valid certificate chain, it will be automatically provisioned
+   * inside your hub. The hub uses the common name of the device certifcate to
+   * find out if a device with the same name already exists. This setting can
+   * only be enabled on a hub with a custom certificate authority.
    */
   enableDeviceAutoProvisioning: boolean
   /**
-   * After creating a hub, this flag is set to False as the hub certificates are
-   * managed by Scaleway. Once a custom certificate authority is installed, this
-   * flag will be set to true.
+   * Whether the hub is using a custom certificate authority. After creating a
+   * hub, this flag is set to False as the hub certificates are managed by
+   * Scaleway. Once a custom certificate authority is installed, this flag will
+   * be set to true.
    */
   hasCustomCa: boolean
   /**
@@ -330,7 +332,10 @@ export interface Network {
   hubId: string
   /** Network creation date. */
   createdAt?: Date
-  /** This prefix will be prepended to all topics for this Network. */
+  /**
+   * Topic prefix for the Network. This prefix will be prepended to all topics
+   * for this Network.
+   */
   topicPrefix: string
 }
 
@@ -631,9 +636,9 @@ export type SetHubCARequest = {
   /** The CA's PEM-encoded certificate. */
   caCertPem: string
   /**
-   * The challenge is a PEM-encoded certificate to prove the possession of the
-   * CA. It must be signed by the CA, and have a Common Name equal to the Hub
-   * ID.
+   * Proof of possession PEM-encoded certificate. The challenge is a PEM-encoded
+   * certificate to prove the possession of the CA. It must be signed by the CA,
+   * and have a Common Name equal to the Hub ID.
    */
   challengeCertPem: string
 }
@@ -995,11 +1000,14 @@ export type PutTwinDocumentRequest = {
   /** Document name. */
   documentName: string
   /**
-   * If set, ensures that the document's current version matches before
-   * persisting the update.
+   * The version of the document to update. If set, ensures that the document's
+   * current version matches before persisting the update.
    */
   version?: number
-  /** The new data that will replace the contents of the document. */
+  /**
+   * New document data. The new data that will replace the contents of the
+   * document.
+   */
   data?: Record<string, unknown>
 }
 
@@ -1014,17 +1022,17 @@ export type PatchTwinDocumentRequest = {
   /** Document name. */
   documentName: string
   /**
-   * If set, ensures that the document's current version matches before
-   * persisting the update.
+   * The version of the document to update. If set, ensures that the document's
+   * current version matches before persisting the update.
    */
   version?: number
   /**
-   * A json data that will be applied on the document's current data. Patching
-   * rules: The patch goes recursively through the patch objects. If the patch
-   * object property is null, then it is removed from the final object. If the
-   * patch object property is a value (number, strings, bool, arrays), it is
-   * replaced. If the patch object property is an object, the previous rules
-   * will be applied recursively on it.
+   * Patch data. A json data that will be applied on the document's current
+   * data. Patching rules: The patch goes recursively through the patch objects.
+   * If the patch object property is null, then it is removed from the final
+   * object. If the patch object property is a value (number, strings, bool,
+   * arrays), it is replaced. If the patch object property is an object, the
+   * previous rules will be applied recursively on it.
    */
   data?: Record<string, unknown>
 }

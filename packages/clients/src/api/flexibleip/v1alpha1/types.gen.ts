@@ -56,6 +56,8 @@ export interface FlexibleIP {
   /** Date of creation of the Flexible IP. */
   createdAt?: Date
   /**
+   * Status of the Flexible IP.
+   *
    * - Ready : Flexible IP is created and ready to be attached to a server or to
    *   have a virtual MAC generated.
    * - Updating: Flexible IP is being attached to a server or a virtual MAC
@@ -173,8 +175,9 @@ export type AttachFlexibleIPRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
-   * Multiple IDs can be provided as long as Flexible IPs belong to the same MAC
-   * groups (see details about MAC groups).
+   * A list of Flexible IP IDs to attach. Multiple IDs can be provided as long
+   * as Flexible IPs belong to the same MAC groups (see details about MAC
+   * groups).
    */
   fipsIds: string[]
   /** A server ID on which to attach the Flexible IPs. */
@@ -185,8 +188,9 @@ export type DetachFlexibleIPRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
-   * Multiple IDs can be provided as long as Flexible IPs belong to the same MAC
-   * groups (see details about MAC groups).
+   * A list of Flexible IP IDs to detach. Multiple IDs can be provided as long
+   * as Flexible IPs belong to the same MAC groups (see details about MAC
+   * groups).
    */
   fipsIds: string[]
 }
@@ -203,9 +207,15 @@ export type GenerateMACAddrRequest = {
 export type DuplicateMACAddrRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Flexible IPs need to be attached to the same server. */
+  /**
+   * Flexible IP ID on which to duplicate the Virtual MAC. Flexible IPs need to
+   * be attached to the same server.
+   */
   fipId: string
-  /** Flexible IPs need to be attached to the same server. */
+  /**
+   * Flexible IP ID to duplicate the Virtual MAC from. Flexible IPs need to be
+   * attached to the same server.
+   */
   duplicateFromFipId: string
 }
 
@@ -220,8 +230,9 @@ export type DeleteMACAddrRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
-   * If the Flexible IP belongs to a MAC group, the MAC will be removed from the
-   * MAC group and from the Flexible IP.
+   * Flexible IP ID from which to delete the Virtual MAC. If the Flexible IP
+   * belongs to a MAC group, the MAC will be removed from the MAC group and from
+   * the Flexible IP.
    */
   fipId: string
 }

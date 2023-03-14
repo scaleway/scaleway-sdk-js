@@ -916,8 +916,9 @@ export type UpgradeInstanceRequest = {
    */
   volumeType?: VolumeType
   /**
-   * This will create a new Database Instance with same specifications as the
-   * current one and perform a Database Engine upgrade.
+   * Update your database engine to a newer version. This will create a new
+   * Database Instance with same specifications as the current one and perform a
+   * Database Engine upgrade.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
    * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
@@ -1542,7 +1543,10 @@ export type DeleteEndpointRequest = {
    * config.
    */
   region?: Region
-  /** This endpoint can also be used to delete a Read Replica endpoint. */
+  /**
+   * UUID of the endpoint you want to delete. This endpoint can also be used to
+   * delete a Read Replica endpoint.
+   */
   endpointId: string
 }
 

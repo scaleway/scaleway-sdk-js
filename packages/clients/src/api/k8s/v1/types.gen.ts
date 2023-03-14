@@ -151,8 +151,9 @@ export interface Cluster {
   /** List of enabled admission plugins. */
   admissionPlugins: string[]
   /**
-   * This feature is in ALPHA state, it may be deleted or modified. This
-   * configuration is the [OpenID Connect
+   * ALPHA - The OpenID Connect configuration of the cluster. This feature is in
+   * ALPHA state, it may be deleted or modified. This configuration is the
+   * [OpenID Connect
    * configuration](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#openid-connect-tokens)
    * of the Kubernetes API server.
    */
@@ -190,9 +191,10 @@ export interface ClusterAutoscalerConfig {
   /** Detect similar node groups and balance the number of nodes between them. */
   balanceSimilarNodeGroups: boolean
   /**
-   * Pods with priority below cutoff will be expendable. They can be killed
-   * without any consideration during scale down and they don't cause scale up.
-   * Pods with null priority (PodPriority disabled) are non expendable.
+   * Pods with priority below cutoff will be expendable. Pods with priority
+   * below cutoff will be expendable. They can be killed without any
+   * consideration during scale down and they don't cause scale up. Pods with
+   * null priority (PodPriority disabled) are non expendable.
    */
   expendablePodsPriorityCutoff: number
   /** How long a node should be unneeded before it is eligible for scale down. */
@@ -213,8 +215,9 @@ export interface ClusterAutoscalerConfig {
 export interface ClusterOpenIDConnectConfig {
   /**
    * URL of the provider which allows the API server to discover public signing
-   * keys. Only URLs which use the `https://` scheme are accepted. This is
-   * typically the provider's discovery URL without a path, for example
+   * keys. URL of the provider which allows the API server to discover public
+   * signing keys. Only URLs which use the `https://` scheme are accepted. This
+   * is typically the provider's discovery URL without a path, for example
    * "https://accounts.google.com" or "https://login.salesforce.com". This URL
    * should point to the level below .well-known/openid-configuration.
    */
@@ -222,31 +225,33 @@ export interface ClusterOpenIDConnectConfig {
   /** A client id that all tokens must be issued for. */
   clientId: string
   /**
-   * JWT claim to use as the user name. By default `sub`, which is expected to
-   * be a unique identifier of the end user. Admins can choose other claims,
-   * such as `email` or `name`, depending on their provider. However, claims
-   * other than `email` will be prefixed with the issuer URL to prevent naming
-   * clashes with other plugins.
+   * JWT claim to use as the user name. JWT claim to use as the user name. By
+   * default `sub`, which is expected to be a unique identifier of the end user.
+   * Admins can choose other claims, such as `email` or `name`, depending on
+   * their provider. However, claims other than `email` will be prefixed with
+   * the issuer URL to prevent naming clashes with other plugins.
    */
   usernameClaim: string
   /**
-   * Prefix prepended to username claims to prevent clashes with existing names
-   * (such as `system:` users). For example, the value `oidc:` will create
-   * usernames like `oidc:jane.doe`. If this flag isn't provided and
-   * `username_claim` is a value other than `email` the prefix defaults to `(
-   * Issuer URL )#` where `( Issuer URL )` is the value of `issuer_url`. The
-   * value `-` can be used to disable all prefixing.
+   * Prefix prepended to username. Prefix prepended to username claims to
+   * prevent clashes with existing names (such as `system:` users). For example,
+   * the value `oidc:` will create usernames like `oidc:jane.doe`. If this flag
+   * isn't provided and `username_claim` is a value other than `email` the
+   * prefix defaults to `( Issuer URL )#` where `( Issuer URL )` is the value of
+   * `issuer_url`. The value `-` can be used to disable all prefixing.
    */
   usernamePrefix: string
   /** JWT claim to use as the user's group. */
   groupsClaim: string[]
   /**
-   * Prefix prepended to group claims to prevent clashes with existing names
-   * (such as `system:` groups). For example, the value `oidc:` will create
-   * group names like `oidc:engineering` and `oidc:infra`.
+   * Prefix prepended to group claims. Prefix prepended to group claims to
+   * prevent clashes with existing names (such as `system:` groups). For
+   * example, the value `oidc:` will create group names like `oidc:engineering`
+   * and `oidc:infra`.
    */
   groupsPrefix: string
   /**
+   * Multiple key=value pairs that describes a required claim in the ID token.
    * Multiple key=value pairs that describes a required claim in the ID token.
    * If set, the claims are verified to be present in the ID token with a
    * matching value.
@@ -280,9 +285,10 @@ export interface CreateClusterRequestAutoscalerConfig {
   /** Detect similar node groups and balance the number of nodes between them. */
   balanceSimilarNodeGroups?: boolean
   /**
-   * Pods with priority below cutoff will be expendable. They can be killed
-   * without any consideration during scale down and they don't cause scale up.
-   * Pods with null priority (PodPriority disabled) are non expendable.
+   * Pods with priority below cutoff will be expendable. Pods with priority
+   * below cutoff will be expendable. They can be killed without any
+   * consideration during scale down and they don't cause scale up. Pods with
+   * null priority (PodPriority disabled) are non expendable.
    */
   expendablePodsPriorityCutoff?: number
   /** How long a node should be unneeded before it is eligible for scale down. */
@@ -303,8 +309,9 @@ export interface CreateClusterRequestAutoscalerConfig {
 export interface CreateClusterRequestOpenIDConnectConfig {
   /**
    * URL of the provider which allows the API server to discover public signing
-   * keys. Only URLs which use the `https://` scheme are accepted. This is
-   * typically the provider's discovery URL without a path, for example
+   * keys. URL of the provider which allows the API server to discover public
+   * signing keys. Only URLs which use the `https://` scheme are accepted. This
+   * is typically the provider's discovery URL without a path, for example
    * "https://accounts.google.com" or "https://login.salesforce.com". This URL
    * should point to the level below .well-known/openid-configuration.
    */
@@ -312,31 +319,33 @@ export interface CreateClusterRequestOpenIDConnectConfig {
   /** A client id that all tokens must be issued for. */
   clientId: string
   /**
-   * JWT claim to use as the user name. By default `sub`, which is expected to
-   * be a unique identifier of the end user. Admins can choose other claims,
-   * such as `email` or `name`, depending on their provider. However, claims
-   * other than `email` will be prefixed with the issuer URL to prevent naming
-   * clashes with other plugins.
+   * JWT claim to use as the user name. JWT claim to use as the user name. By
+   * default `sub`, which is expected to be a unique identifier of the end user.
+   * Admins can choose other claims, such as `email` or `name`, depending on
+   * their provider. However, claims other than `email` will be prefixed with
+   * the issuer URL to prevent naming clashes with other plugins.
    */
   usernameClaim?: string
   /**
-   * Prefix prepended to username claims to prevent clashes with existing names
-   * (such as `system:` users). For example, the value `oidc:` will create
-   * usernames like `oidc:jane.doe`. If this flag isn't provided and
-   * `username_claim` is a value other than `email` the prefix defaults to `(
-   * Issuer URL )#` where `( Issuer URL )` is the value of `issuer_url`. The
-   * value `-` can be used to disable all prefixing.
+   * Prefix prepended to username. Prefix prepended to username claims to
+   * prevent clashes with existing names (such as `system:` users). For example,
+   * the value `oidc:` will create usernames like `oidc:jane.doe`. If this flag
+   * isn't provided and `username_claim` is a value other than `email` the
+   * prefix defaults to `( Issuer URL )#` where `( Issuer URL )` is the value of
+   * `issuer_url`. The value `-` can be used to disable all prefixing.
    */
   usernamePrefix?: string
   /** JWT claim to use as the user's group. */
   groupsClaim?: string[]
   /**
-   * Prefix prepended to group claims to prevent clashes with existing names
-   * (such as `system:` groups). For example, the value `oidc:` will create
-   * group names like `oidc:engineering` and `oidc:infra`.
+   * Prefix prepended to group claims. Prefix prepended to group claims to
+   * prevent clashes with existing names (such as `system:` groups). For
+   * example, the value `oidc:` will create group names like `oidc:engineering`
+   * and `oidc:infra`.
    */
   groupsPrefix?: string
   /**
+   * Multiple key=value pairs that describes a required claim in the ID token.
    * Multiple key=value pairs that describes a required claim in the ID token.
    * If set, the claims are verified to be present in the ID token with a
    * matching value.
@@ -349,7 +358,8 @@ export interface CreateClusterRequestPoolConfig {
   /** Name of the pool. */
   name: string
   /**
-   * Node type is the type of Scaleway Instance wanted for the pool. Nodes with
+   * Node type is the type of Scaleway Instance wanted for the pool. Node type
+   * is the type of Scaleway Instance wanted for the pool. Nodes with
    * insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST).
    * 'external' is a special node type used to provision instances from other
    * cloud providers.
@@ -362,18 +372,19 @@ export interface CreateClusterRequestPoolConfig {
   /** Size (number of nodes) of the pool. */
   size: number
   /**
-   * Defines the minimum size of the pool. Note that this field will be used
-   * only when autoscaling is enabled.
+   * Minimum size of the pool. Defines the minimum size of the pool. Note that
+   * this field will be used only when autoscaling is enabled.
    */
   minSize?: number
   /**
-   * Defines the maximum size of the pool. Note that this field will be used
-   * only when autoscaling is enabled.
+   * Maximum size of the pool. Defines the maximum size of the pool. Note that
+   * this field will be used only when autoscaling is enabled.
    */
   maxSize?: number
   /**
-   * Customization of the container runtime is available for each pool. Note
-   * that `docker` is deprecated since 1.20 and will be removed in 1.24.
+   * Container runtime for the nodes of the pool. Customization of the container
+   * runtime is available for each pool. Note that `docker` is deprecated since
+   * 1.20 and will be removed in 1.24.
    */
   containerRuntime: Runtime
   /** Defines whether the autohealing feature is enabled for the pool. */
@@ -390,10 +401,11 @@ export interface CreateClusterRequestPoolConfig {
   /** Zone in which the pool's nodes will be spawned. */
   zone: Zone
   /**
-   * Defines the system volume disk type, we provide two different types of
-   * volume (`volume_type`): `l_ssd` is a local block storage: your system is
-   * stored locally on the hypervisor of your node. `b_ssd` is a remote block
-   * storage: your system is stored on a centralised and resilient cluster.
+   * System volume disk type. Defines the system volume disk type, we provide
+   * two different types of volume (`volume_type`): `l_ssd` is a local block
+   * storage: your system is stored locally on the hypervisor of your node.
+   * `b_ssd` is a remote block storage: your system is stored on a centralised
+   * and resilient cluster.
    */
   rootVolumeType: PoolVolumeType
   /** System volume disk size. */
@@ -476,7 +488,8 @@ export interface Node {
   /** Cluster ID of the node. */
   clusterId: string
   /**
-   * It is prefixed by instance type and location information (see
+   * Underlying instance ID. It is prefixed by instance type and location
+   * information (see
    * https://pkg.go.dev/k8s.io/api/core/v1#NodeSpec.ProviderID).
    */
   providerId: string
@@ -489,8 +502,8 @@ export interface Node {
   /** @deprecated Public IPv6 address of the node. */
   publicIpV6?: string
   /**
-   * @deprecated These conditions contains the Node Problem Detector conditions,
-   *   as well as some in house conditions.
+   * @deprecated Conditions of the node. These conditions contains the Node
+   *   Problem Detector conditions, as well as some in house conditions.
    */
   conditions?: Record<string, string>
   /** Status of the node. */
@@ -520,7 +533,8 @@ export interface Pool {
   /** Version of the pool. */
   version: string
   /**
-   * Node type is the type of Scaleway Instance wanted for the pool. Nodes with
+   * Node type is the type of Scaleway Instance wanted for the pool. Node type
+   * is the type of Scaleway Instance wanted for the pool. Nodes with
    * insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST).
    * 'external' is a special node type used to provision instances from other
    * cloud providers.
@@ -531,18 +545,19 @@ export interface Pool {
   /** Size (number of nodes) of the pool. */
   size: number
   /**
-   * Defines the minimum size of the pool. Note that this field will be used
-   * only when autoscaling is enabled.
+   * Minimum size of the pool. Defines the minimum size of the pool. Note that
+   * this field will be used only when autoscaling is enabled.
    */
   minSize: number
   /**
-   * Defines the maximum size of the pool. Note that this field will be used
-   * only when autoscaling is enabled.
+   * Maximum size of the pool. Defines the maximum size of the pool. Note that
+   * this field will be used only when autoscaling is enabled.
    */
   maxSize: number
   /**
-   * Customization of the container runtime is available for each pool. Note
-   * that `docker` is deprecated since 1.20 and will be removed in 1.24.
+   * Container runtime for the nodes of the pool. Customization of the container
+   * runtime is available for each pool. Note that `docker` is deprecated since
+   * 1.20 and will be removed in 1.24.
    */
   containerRuntime: Runtime
   /** Defines whether the autohealing feature is enabled for the pool. */
@@ -561,10 +576,11 @@ export interface Pool {
   /** Zone in which the pool's nodes will be spawned. */
   zone: Zone
   /**
-   * Defines the system volume disk type, we provide two different types of
-   * volume (`volume_type`): `l_ssd` is a local block storage: your system is
-   * stored locally on the hypervisor of your node. `b_ssd` is a remote block
-   * storage: your system is stored on a centralised and resilient cluster.
+   * System volume disk type. Defines the system volume disk type, we provide
+   * two different types of volume (`volume_type`): `l_ssd` is a local block
+   * storage: your system is stored locally on the hypervisor of your node.
+   * `b_ssd` is a remote block storage: your system is stored on a centralised
+   * and resilient cluster.
    */
   rootVolumeType: PoolVolumeType
   /** System volume disk size. */
@@ -604,9 +620,10 @@ export interface UpdateClusterRequestAutoscalerConfig {
   /** Detect similar node groups and balance the number of nodes between them. */
   balanceSimilarNodeGroups?: boolean
   /**
-   * Pods with priority below cutoff will be expendable. They can be killed
-   * without any consideration during scale down and they don't cause scale up.
-   * Pods with null priority (PodPriority disabled) are non expendable.
+   * Pods with priority below cutoff will be expendable. Pods with priority
+   * below cutoff will be expendable. They can be killed without any
+   * consideration during scale down and they don't cause scale up. Pods with
+   * null priority (PodPriority disabled) are non expendable.
    */
   expendablePodsPriorityCutoff?: number
   /** How long a node should be unneeded before it is eligible for scale down. */
@@ -627,8 +644,9 @@ export interface UpdateClusterRequestAutoscalerConfig {
 export interface UpdateClusterRequestOpenIDConnectConfig {
   /**
    * URL of the provider which allows the API server to discover public signing
-   * keys. Only URLs which use the `https://` scheme are accepted. This is
-   * typically the provider's discovery URL without a path, for example
+   * keys. URL of the provider which allows the API server to discover public
+   * signing keys. Only URLs which use the `https://` scheme are accepted. This
+   * is typically the provider's discovery URL without a path, for example
    * "https://accounts.google.com" or "https://login.salesforce.com". This URL
    * should point to the level below .well-known/openid-configuration.
    */
@@ -636,31 +654,33 @@ export interface UpdateClusterRequestOpenIDConnectConfig {
   /** A client id that all tokens must be issued for. */
   clientId?: string
   /**
-   * JWT claim to use as the user name. By default `sub`, which is expected to
-   * be a unique identifier of the end user. Admins can choose other claims,
-   * such as `email` or `name`, depending on their provider. However, claims
-   * other than `email` will be prefixed with the issuer URL to prevent naming
-   * clashes with other plugins.
+   * JWT claim to use as the user name. JWT claim to use as the user name. By
+   * default `sub`, which is expected to be a unique identifier of the end user.
+   * Admins can choose other claims, such as `email` or `name`, depending on
+   * their provider. However, claims other than `email` will be prefixed with
+   * the issuer URL to prevent naming clashes with other plugins.
    */
   usernameClaim?: string
   /**
-   * Prefix prepended to username claims to prevent clashes with existing names
-   * (such as `system:` users). For example, the value `oidc:` will create
-   * usernames like `oidc:jane.doe`. If this flag isn't provided and
-   * `username_claim` is a value other than `email` the prefix defaults to `(
-   * Issuer URL )#` where `( Issuer URL )` is the value of `issuer_url`. The
-   * value `-` can be used to disable all prefixing.
+   * Prefix prepended to username. Prefix prepended to username claims to
+   * prevent clashes with existing names (such as `system:` users). For example,
+   * the value `oidc:` will create usernames like `oidc:jane.doe`. If this flag
+   * isn't provided and `username_claim` is a value other than `email` the
+   * prefix defaults to `( Issuer URL )#` where `( Issuer URL )` is the value of
+   * `issuer_url`. The value `-` can be used to disable all prefixing.
    */
   usernamePrefix?: string
   /** JWT claim to use as the user's group. */
   groupsClaim?: string[]
   /**
-   * Prefix prepended to group claims to prevent clashes with existing names
-   * (such as `system:` groups). For example, the value `oidc:` will create
-   * group names like `oidc:engineering` and `oidc:infra`.
+   * Prefix prepended to group claims. Prefix prepended to group claims to
+   * prevent clashes with existing names (such as `system:` groups). For
+   * example, the value `oidc:` will create group names like `oidc:engineering`
+   * and `oidc:infra`.
    */
   groupsPrefix?: string
   /**
+   * Multiple key=value pairs that describes a required claim in the ID token.
    * Multiple key=value pairs that describes a required claim in the ID token.
    * If set, the claims are verified to be present in the ID token with a
    * matching value.
@@ -739,7 +759,10 @@ export type CreateClusterRequest = {
    * could be set.
    */
   projectId?: string
-  /** Type of the cluster (possible values are kapsule, multicloud). */
+  /**
+   * Type of the cluster. Type of the cluster (possible values are kapsule,
+   * multicloud).
+   */
   type: string
   /** Name of the cluster. */
   name?: string
@@ -758,15 +781,15 @@ export type CreateClusterRequest = {
   /** Pools to be created along with the cluster. */
   pools?: CreateClusterRequestPoolConfig[]
   /**
-   * This field allows to specify some configuration for the autoscaler, which
-   * is an implementation of the
+   * Autoscaler config for the cluster. This field allows to specify some
+   * configuration for the autoscaler, which is an implementation of the
    * [cluster-autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/).
    */
   autoscalerConfig?: CreateClusterRequestAutoscalerConfig
   /**
-   * This configuration enables to set a specific 2-hour time window in which
-   * the cluster can be automatically updated to the latest patch version in the
-   * current minor one.
+   * Auto upgrade configuration of the cluster. This configuration enables to
+   * set a specific 2-hour time window in which the cluster can be automatically
+   * updated to the latest patch version in the current minor one.
    */
   autoUpgrade?: CreateClusterRequestAutoUpgrade
   /** List of feature gates to enable. */
@@ -774,8 +797,9 @@ export type CreateClusterRequest = {
   /** List of admission plugins to enable. */
   admissionPlugins?: string[]
   /**
-   * This feature is in ALPHA state, it may be deleted or modified. This
-   * configuration enables to set the [OpenID Connect
+   * ALPHA - OpenID Connect configuration of the cluster. This feature is in
+   * ALPHA state, it may be deleted or modified. This configuration enables to
+   * set the [OpenID Connect
    * configuration](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#openid-connect-tokens)
    * of the Kubernetes API server.
    */
@@ -812,8 +836,8 @@ export type UpdateClusterRequest = {
   /** New tags associated with the cluster. */
   tags?: string[]
   /**
-   * Object defining the configuration for the autoscaler, which is an
-   * implementation of the
+   * New autoscaler config for the cluster. Object defining the configuration
+   * for the autoscaler, which is an implementation of the
    * [cluster-autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/).
    */
   autoscalerConfig?: UpdateClusterRequestAutoscalerConfig
@@ -822,8 +846,8 @@ export type UpdateClusterRequest = {
   /** @deprecated New Ingress Controller for the cluster. */
   ingress?: Ingress
   /**
-   * New auto upgrade configuration of the cluster. Note that all fields need to
-   * be set.
+   * New auto upgrade configuration of the cluster. New auto upgrade
+   * configuration of the cluster. Note that all fields need to be set.
    */
   autoUpgrade?: UpdateClusterRequestAutoUpgrade
   /** List of feature gates to enable. */
@@ -831,8 +855,9 @@ export type UpdateClusterRequest = {
   /** List of admission plugins to enable. */
   admissionPlugins?: string[]
   /**
-   * This feature is in ALPHA state, it may be deleted or modified. This
-   * configuration enables to update the [OpenID Connect
+   * ALPHA - New OpenID Connect configuration of the cluster. This feature is in
+   * ALPHA state, it may be deleted or modified. This configuration enables to
+   * update the [OpenID Connect
    * configuration](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#openid-connect-tokens)
    * of the Kubernetes API server.
    */
@@ -868,14 +893,14 @@ export type UpgradeClusterRequest = {
   /** ID of the cluster to upgrade. */
   clusterId: string
   /**
-   * New Kubernetes version of the cluster. Note that the version shoud either
-   * be a higher patch version of the same minor version or the direct minor
-   * version after the current one.
+   * New Kubernetes version of the cluster. New Kubernetes version of the
+   * cluster. Note that the version shoud either be a higher patch version of
+   * the same minor version or the direct minor version after the current one.
    */
   version: string
   /**
-   * This field makes the upgrade upgrades the pool once the Kubernetes master
-   * in upgrade.
+   * Enablement of the pools upgrade. This field makes the upgrade upgrades the
+   * pool once the Kubernetes master in upgrade.
    */
   upgradePools: boolean
 }
@@ -934,7 +959,8 @@ export type CreatePoolRequest = {
   /** Name of the pool. */
   name?: string
   /**
-   * Node type is the type of Scaleway Instance wanted for the pool. Nodes with
+   * Node type is the type of Scaleway Instance wanted for the pool. Node type
+   * is the type of Scaleway Instance wanted for the pool. Nodes with
    * insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST).
    * 'external' is a special node type used to provision instances from other
    * cloud providers.
@@ -947,18 +973,19 @@ export type CreatePoolRequest = {
   /** Size (number of nodes) of the pool. */
   size: number
   /**
-   * Defines the minimum size of the pool. Note that this field will be used
-   * only when autoscaling is enabled.
+   * Minimum size of the pool. Defines the minimum size of the pool. Note that
+   * this field will be used only when autoscaling is enabled.
    */
   minSize?: number
   /**
-   * Defines the maximum size of the pool. Note that this field will be used
-   * only when autoscaling is enabled.
+   * Maximum size of the pool. Defines the maximum size of the pool. Note that
+   * this field will be used only when autoscaling is enabled.
    */
   maxSize?: number
   /**
-   * Customization of the container runtime is available for each pool. Note
-   * that `docker` is deprecated since 1.20 and will be removed in 1.24.
+   * Container runtime for the nodes of the pool. Customization of the container
+   * runtime is available for each pool. Note that `docker` is deprecated since
+   * 1.20 and will be removed in 1.24.
    */
   containerRuntime?: Runtime
   /** Defines whether the autohealing feature is enabled for the pool. */
@@ -975,10 +1002,11 @@ export type CreatePoolRequest = {
   /** Zone in which the pool's nodes will be spawned. */
   zone?: Zone
   /**
-   * Defines the system volume disk type, we provide two different types of
-   * volume (`volume_type`): `l_ssd` is a local block storage: your system is
-   * stored locally on the hypervisor of your node. `b_ssd` is a remote block
-   * storage: your system is stored on a centralised and resilient cluster.
+   * System volume disk type. Defines the system volume disk type, we provide
+   * two different types of volume (`volume_type`): `l_ssd` is a local block
+   * storage: your system is stored locally on the hypervisor of your node.
+   * `b_ssd` is a remote block storage: your system is stored on a centralised
+   * and resilient cluster.
    */
   rootVolumeType?: PoolVolumeType
   /** System volume disk size. */

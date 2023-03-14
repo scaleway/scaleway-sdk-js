@@ -52,7 +52,10 @@ export interface Secret {
   projectId: string
   /** Name of the Secret. */
   name: string
-  /** - `ready`: the Secret is ready. `locked`: the Secret is locked. */
+  /**
+   * Current status of the Secret. `ready`: the Secret is ready. `locked`: the
+   * Secret is locked.
+   */
   status: SecretStatus
   /** The time at which the Secret was created. */
   createdAt?: Date
@@ -75,10 +78,10 @@ export interface SecretVersion {
   /** Revision of the SecretVersion. */
   revision: number
   /**
-   * - `unknown`: the SecretVersion is in an invalid state. `enabled`: the
-   *   SecretVersion is accessible. `disabled`: the SecretVersion is not
-   *   accessible but can be enabled. `destroyed`: the SecretVersion is
-   *   permanently destroyed.
+   * Current status of the SecretVersion. `unknown`: the SecretVersion is in an
+   * invalid state. `enabled`: the SecretVersion is accessible. `disabled`: the
+   * SecretVersion is not accessible but can be enabled. `destroyed`: the
+   * SecretVersion is permanently destroyed.
    */
   status: SecretVersionStatus
   /** The time at which the SecretVersion was created. */

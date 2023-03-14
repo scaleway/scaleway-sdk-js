@@ -545,8 +545,9 @@ export interface Server {
 /** Server action request. volume backup template. */
 export interface ServerActionRequestVolumeBackupTemplate {
   /**
-   * Overrides the volume_type of the snapshot for this volume. If omitted, the
-   * volume type of the original volume will be used.
+   * The snapshot's volume type. Overrides the volume_type of the snapshot for
+   * this volume. If omitted, the volume type of the original volume will be
+   * used.
    */
   volumeType: SnapshotVolumeType
 }
@@ -992,13 +993,15 @@ export type ServerActionRequest = {
   /** The action to perform on the server. */
   action?: ServerAction
   /**
-   * The name of the backup you want to create. This field should only be
-   * specified when performing a backup action.
+   * The name of the backup you want to create. The name of the backup you want
+   * to create. This field should only be specified when performing a backup
+   * action.
    */
   name?: string
   /**
-   * For each volume UUID, the snapshot parameters of the volume. This field
-   * should only be specified when performing a backup action.
+   * For each volume UUID, the snapshot parameters of the volume. For each
+   * volume UUID, the snapshot parameters of the volume. This field should only
+   * be specified when performing a backup action.
    */
   volumes?: Record<string, ServerActionRequestVolumeBackupTemplate>
 }
@@ -1114,8 +1117,8 @@ export type CreateSnapshotRequest = {
    */
   project?: string
   /**
-   * Overrides the volume_type of the snapshot. If omitted, the volume type of
-   * the original volume will be used.
+   * The volume type of the snapshot. Overrides the volume_type of the snapshot.
+   * If omitted, the volume type of the original volume will be used.
    */
   volumeType?: SnapshotVolumeType
   /** Bucket name for snapshot imports. */

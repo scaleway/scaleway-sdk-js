@@ -132,10 +132,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List SSH keys. By default, the SSH keys listed are ordered by creation date
-   * in ascending order. This can be modified via the `order_by` field. You can
-   * define additional parameters for your query such as `organization_id`,
-   * `name`, `project_id` and `disabled`.
+   * List SSH keys. List SSH keys. By default, the SSH keys listed are ordered
+   * by creation date in ascending order. This can be modified via the
+   * `order_by` field. You can define additional parameters for your query such
+   * as `organization_id`, `name`, `project_id` and `disabled`.
    *
    * @param request - The request {@link ListSSHKeysRequest}
    * @returns A Promise of ListSSHKeysResponse
@@ -144,8 +144,8 @@ export class API extends ParentAPI {
     enrichForPagination('sshKeys', this.pageOfListSSHKeys, request)
 
   /**
-   * Add a new SSH key to a Scaleway Project. You must specify the `name`,
-   * `public_key` and `project_id`.
+   * Create an SSH key. Add a new SSH key to a Scaleway Project. You must
+   * specify the `name`, `public_key` and `project_id`.
    *
    * @param request - The request {@link CreateSSHKeyRequest}
    * @returns A Promise of SSHKey
@@ -164,9 +164,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrieve information about a given SSH key, specified by the `ssh_key_id`
-   * parameter. The SSH key's full details, including `id`, `name`,
-   * `public_key`, and `project_id` are returned in the response.
+   * Get an SSH key. Retrieve information about a given SSH key, specified by
+   * the `ssh_key_id` parameter. The SSH key's full details, including `id`,
+   * `name`, `public_key`, and `project_id` are returned in the response.
    *
    * @param request - The request {@link GetSSHKeyRequest}
    * @returns A Promise of SSHKey
@@ -184,7 +184,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the parameters of an SSH key, including `name` and `disable`.
+   * Update an SSH key. Update the parameters of an SSH key, including `name`
+   * and `disable`.
    *
    * @param request - The request {@link UpdateSSHKeyRequest}
    * @returns A Promise of SSHKey
@@ -206,9 +207,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a given SSH key, specified by the `ssh_key_id`. Deleting an SSH is
-   * permanent, and cannot be undone. Note that you might need to update any
-   * configurations that used the SSH key.
+   * Delete an SSH key. Delete a given SSH key, specified by the `ssh_key_id`.
+   * Deleting an SSH is permanent, and cannot be undone. Note that you might
+   * need to update any configurations that used the SSH key.
    *
    * @param request - The request {@link DeleteSSHKeyRequest}
    */
@@ -245,11 +246,11 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List the users of an Organization. By default, the users listed are ordered
-   * by creation date in ascending order. This can be modified via the
-   * `order_by` field. You must define the `organization_id` in the query path
-   * of your request. You can also define additional parameters for your query
-   * such as `user_ids`.
+   * List users of an Organization. List the users of an Organization. By
+   * default, the users listed are ordered by creation date in ascending order.
+   * This can be modified via the `order_by` field. You must define the
+   * `organization_id` in the query path of your request. You can also define
+   * additional parameters for your query such as `user_ids`.
    *
    * @param request - The request {@link ListUsersRequest}
    * @returns A Promise of ListUsersResponse
@@ -258,9 +259,10 @@ export class API extends ParentAPI {
     enrichForPagination('users', this.pageOfListUsers, request)
 
   /**
-   * Retrieve information about a user, specified by the `user_id` parameter.
-   * The user's full details, including `id`, `email`, `organization_id`,
-   * `status` and `two_factor_enabled` are returned in the response.
+   * Get a given user. Retrieve information about a user, specified by the
+   * `user_id` parameter. The user's full details, including `id`, `email`,
+   * `organization_id`, `status` and `two_factor_enabled` are returned in the
+   * response.
    *
    * @param request - The request {@link GetUserRequest}
    * @returns A Promise of User
@@ -278,10 +280,11 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Remove a user from an Organization in which they are a guest. You must
-   * define the `user_id` in your request. Note that removing a user from an
-   * Organization automatically deletes their API keys, and any policies
-   * directly attached to them become orphaned.
+   * Delete a guest user from an Organization. Remove a user from an
+   * Organization in which they are a guest. You must define the `user_id` in
+   * your request. Note that removing a user from an Organization automatically
+   * deletes their API keys, and any policies directly attached to them become
+   * orphaned.
    *
    * @param request - The request {@link DeleteUserRequest}
    */
@@ -322,11 +325,12 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List the applications of an Organization. By default, the applications
-   * listed are ordered by creation date in ascending order. This can be
-   * modified via the `order_by` field. You must define the `organization_id` in
-   * the query path of your request. You can also define additional parameters
-   * for your query such as `application_ids`.
+   * List applications of an Organization. List the applications of an
+   * Organization. By default, the applications listed are ordered by creation
+   * date in ascending order. This can be modified via the `order_by` field. You
+   * must define the `organization_id` in the query path of your request. You
+   * can also define additional parameters for your query such as
+   * `application_ids`.
    *
    * @param request - The request {@link ListApplicationsRequest}
    * @returns A Promise of ListApplicationsResponse
@@ -335,8 +339,8 @@ export class API extends ParentAPI {
     enrichForPagination('applications', this.pageOfListApplications, request)
 
   /**
-   * Create a new application. You must define the `name` parameter in the
-   * request.
+   * Create a new application. Create a new application. You must define the
+   * `name` parameter in the request.
    *
    * @param request - The request {@link CreateApplicationRequest}
    * @returns A Promise of Application
@@ -355,10 +359,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrieve information about an application, specified by the
-   * `application_id` parameter. The application's full details, including `id`,
-   * `email`, `organization_id`, `status` and `two_factor_enabled` are returned
-   * in the response.
+   * Get a given application. Retrieve information about an application,
+   * specified by the `application_id` parameter. The application's full
+   * details, including `id`, `email`, `organization_id`, `status` and
+   * `two_factor_enabled` are returned in the response.
    *
    * @param request - The request {@link GetApplicationRequest}
    * @returns A Promise of Application
@@ -376,8 +380,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the parameters of an application, including `name` and
-   * `description`.
+   * Update an application. Update the parameters of an application, including
+   * `name` and `description`.
    *
    * @param request - The request {@link UpdateApplicationRequest}
    * @returns A Promise of Application
@@ -399,9 +403,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an application. Note that this action is irreversible and will
-   * automatically delete the application's API keys. Policies attached to users
-   * and applications via this group will no longer apply.
+   * Delete an application. Delete an application. Note that this action is
+   * irreversible and will automatically delete the application's API keys.
+   * Policies attached to users and applications via this group will no longer
+   * apply.
    *
    * @param request - The request {@link DeleteApplicationRequest}
    */
@@ -437,11 +442,11 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List groups. By default, the groups listed are ordered by creation date in
-   * ascending order. This can be modified via the `order_by` field. You can
-   * define additional parameters to filter your query. Use `user_ids` or
-   * `application_ids` to list all groups certain users or applications belong
-   * to.
+   * List groups. List groups. By default, the groups listed are ordered by
+   * creation date in ascending order. This can be modified via the `order_by`
+   * field. You can define additional parameters to filter your query. Use
+   * `user_ids` or `application_ids` to list all groups certain users or
+   * applications belong to.
    *
    * @param request - The request {@link ListGroupsRequest}
    * @returns A Promise of ListGroupsResponse
@@ -450,8 +455,8 @@ export class API extends ParentAPI {
     enrichForPagination('groups', this.pageOfListGroups, request)
 
   /**
-   * Create a new group. You must define the `name` and `organization_id`
-   * parameters in the request.
+   * Create a group. Create a new group. You must define the `name` and
+   * `organization_id` parameters in the request.
    *
    * @param request - The request {@link CreateGroupRequest}
    * @returns A Promise of Group
@@ -470,8 +475,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrive information about a given group, specified by the `group_id`
-   * parameter. The group's full details, including `user_ids` and
+   * Get a group. Retrive information about a given group, specified by the
+   * `group_id` parameter. The group's full details, including `user_ids` and
    * `application_ids` are returned in the response.
    *
    * @param request - The request {@link GetGroupRequest}
@@ -490,7 +495,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the parameters of group, including `name` and `description`.
+   * Update a group. Update the parameters of group, including `name` and
+   * `description`.
    *
    * @param request - The request {@link UpdateGroupRequest}
    * @returns A Promise of Group
@@ -512,8 +518,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Overwrite users and applications configuration in a group. Any information
-   * that you add using this command will overwrite the previous configuration.
+   * Overwrite users and applications of a group. Overwrite users and
+   * applications configuration in a group. Any information that you add using
+   * this command will overwrite the previous configuration.
    *
    * @param request - The request {@link SetGroupMembersRequest}
    * @returns A Promise of Group
@@ -535,9 +542,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Add a user or an application to a group. You can specify a `user_id` and
-   * and `application_id` in the body of your request. Note that you can only
-   * add one of each per request.
+   * Add a user or an application to a group. Add a user or an application to a
+   * group. You can specify a `user_id` and and `application_id` in the body of
+   * your request. Note that you can only add one of each per request.
    *
    * @param request - The request {@link AddGroupMemberRequest}
    * @returns A Promise of Group
@@ -559,12 +566,13 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Remove a user or an application from a group. You can specify a `user_id`
-   * and and `application_id` in the body of your request. Note that you can
-   * only remove one of each per request. Removing a user from a group means
-   * that any permissions given to them via the group (i.e. from an attached
-   * policy) will no longer apply. Be sure you want to remove these permissions
-   * from the user before proceeding.
+   * Remove a user or an application from a group. Remove a user or an
+   * application from a group. You can specify a `user_id` and and
+   * `application_id` in the body of your request. Note that you can only remove
+   * one of each per request. Removing a user from a group means that any
+   * permissions given to them via the group (i.e. from an attached policy) will
+   * no longer apply. Be sure you want to remove these permissions from the user
+   * before proceeding.
    *
    * @param request - The request {@link RemoveGroupMemberRequest}
    * @returns A Promise of Group
@@ -586,9 +594,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a group. Note that this action is irreversible and could delete
-   * permissions for group members. Policies attached to users and applications
-   * via this group will no longer apply.
+   * Delete a group. Delete a group. Note that this action is irreversible and
+   * could delete permissions for group members. Policies attached to users and
+   * applications via this group will no longer apply.
    *
    * @param request - The request {@link DeleteGroupRequest}
    */
@@ -632,12 +640,12 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List the policies of an Organization. By default, the policies listed are
-   * ordered by creation date in ascending order. This can be modified via the
-   * `order_by` field. You must define the `organization_id` in the query path
-   * of your request. You can also define additional parameters to filter your
-   * query, such as `user_ids`, `groups_ids`, `application_ids`, and
-   * `policy_name`.
+   * List policies of an Organization. List the policies of an Organization. By
+   * default, the policies listed are ordered by creation date in ascending
+   * order. This can be modified via the `order_by` field. You must define the
+   * `organization_id` in the query path of your request. You can also define
+   * additional parameters to filter your query, such as `user_ids`,
+   * `groups_ids`, `application_ids`, and `policy_name`.
    *
    * @param request - The request {@link ListPoliciesRequest}
    * @returns A Promise of ListPoliciesResponse
@@ -646,9 +654,10 @@ export class API extends ParentAPI {
     enrichForPagination('policies', this.pageOfListPolicies, request)
 
   /**
-   * Create a new application. You must define the `name` parameter in the
-   * request. You can specify parameters such as `user_id`, `groups_id`,
-   * `application_id`, `no_principal`, `rules` and its child attributes.
+   * Create a new policy. Create a new application. You must define the `name`
+   * parameter in the request. You can specify parameters such as `user_id`,
+   * `groups_id`, `application_id`, `no_principal`, `rules` and its child
+   * attributes.
    *
    * @param request - The request {@link CreatePolicyRequest}
    * @returns A Promise of Policy
@@ -667,10 +676,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrieve information about a policy, speficified by the `policy_id`
-   * parameter. The policy's full details, including `id`, `name`,
-   * `organization_id`, `nb_rules` and `nb_scopes`, `nb_permission_sets` are
-   * returned in the response.
+   * Get an existing policy. Retrieve information about a policy, speficified by
+   * the `policy_id` parameter. The policy's full details, including `id`,
+   * `name`, `organization_id`, `nb_rules` and `nb_scopes`, `nb_permission_sets`
+   * are returned in the response.
    *
    * @param request - The request {@link GetPolicyRequest}
    * @returns A Promise of Policy
@@ -688,8 +697,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the parameters of a policy, including `name`, `description`,
-   * `user_id`, `group_id`, `application_id` and `no_principal`.
+   * Update an existing policy. Update the parameters of a policy, including
+   * `name`, `description`, `user_id`, `group_id`, `application_id` and
+   * `no_principal`.
    *
    * @param request - The request {@link UpdatePolicyRequest}
    * @returns A Promise of Policy
@@ -711,9 +721,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a policy. You must define specify the `policy_id` parameter in your
-   * request. Note that when deleting a policy, all permissions it gives to its
-   * principal (user, group or application) will be revoked.
+   * Delete a policy. Delete a policy. You must define specify the `policy_id`
+   * parameter in your request. Note that when deleting a policy, all
+   * permissions it gives to its principal (user, group or application) will be
+   * revoked.
    *
    * @param request - The request {@link DeletePolicyRequest}
    */
@@ -741,12 +752,12 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Overwrite the rules of a given policy. Any information that you add using
-   * this command will overwrite the previous configuration. If you include some
-   * of the rules you already had in your previous configuration in your new
-   * one, but you change their order, the new order of display will apply. While
-   * policy rules are ordered, they have no impact on the access logic of IAM
-   * because rules are allow-only.
+   * Set rules of a given policy. Overwrite the rules of a given policy. Any
+   * information that you add using this command will overwrite the previous
+   * configuration. If you include some of the rules you already had in your
+   * previous configuration in your new one, but you change their order, the new
+   * order of display will apply. While policy rules are ordered, they have no
+   * impact on the access logic of IAM because rules are allow-only.
    *
    * @param request - The request {@link SetRulesRequest}
    * @returns A Promise of SetRulesResponse
@@ -782,10 +793,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List the rules of a given policy. By default, the rules listed are ordered
-   * by creation date in ascending order. This can be modified via the
-   * `order_by` field. You must define the `policy_id` in the query path of your
-   * request.
+   * List rules of a given policy. List the rules of a given policy. By default,
+   * the rules listed are ordered by creation date in ascending order. This can
+   * be modified via the `order_by` field. You must define the `policy_id` in
+   * the query path of your request.
    *
    * @param request - The request {@link ListRulesRequest}
    * @returns A Promise of ListRulesResponse
@@ -818,8 +829,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List permission sets available for given Organization. You must define the
-   * `organization_id` in the query path of your request.
+   * List permission sets. List permission sets available for given
+   * Organization. You must define the `organization_id` in the query path of
+   * your request.
    *
    * @param request - The request {@link ListPermissionSetsRequest}
    * @returns A Promise of ListPermissionSetsResponse
@@ -872,10 +884,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List API keys. By default, the API keys listed are ordered by creation date
-   * in ascending order. This can be modified via the `order_by` field. You can
-   * define additional parameters for your query such as `editable`, `expired`,
-   * `access_key` and `bearer_id`.
+   * List API keys. List API keys. By default, the API keys listed are ordered
+   * by creation date in ascending order. This can be modified via the
+   * `order_by` field. You can define additional parameters for your query such
+   * as `editable`, `expired`, `access_key` and `bearer_id`.
    *
    * @param request - The request {@link ListAPIKeysRequest}
    * @returns A Promise of ListAPIKeysResponse
@@ -884,12 +896,12 @@ export class API extends ParentAPI {
     enrichForPagination('apiKeys', this.pageOfListAPIKeys, request)
 
   /**
-   * Create an API key. You must specify the `application_id` or the `user_id`
-   * and the description. You can also specify the `default_project_id` which is
-   * the Project ID of your preferred Project, to use with Object Storage. The
-   * `access_key` and `secret_key` values are returned in the response. Note
-   * that he secret key is only showed once. Make sure that you copy and store
-   * both keys somewhere safe.
+   * Create an API key. Create an API key. You must specify the `application_id`
+   * or the `user_id` and the description. You can also specify the
+   * `default_project_id` which is the Project ID of your preferred Project, to
+   * use with Object Storage. The `access_key` and `secret_key` values are
+   * returned in the response. Note that he secret key is only showed once. Make
+   * sure that you copy and store both keys somewhere safe.
    *
    * @param request - The request {@link CreateAPIKeyRequest}
    * @returns A Promise of APIKey
@@ -908,12 +920,12 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrive information about an API key, specified by the `access_key`
-   * parameter. The API key's details, including either the `user_id` or
-   * `application_id` of its bearer are returned in the response. Note that the
-   * string value for the `secret_key` is nullable, and therefore is not
-   * displayed in the response. The `secret_key` value is only displayed upon
-   * API key creation.
+   * Get an API key. Retrive information about an API key, specified by the
+   * `access_key` parameter. The API key's details, including either the
+   * `user_id` or `application_id` of its bearer are returned in the response.
+   * Note that the string value for the `secret_key` is nullable, and therefore
+   * is not displayed in the response. The `secret_key` value is only displayed
+   * upon API key creation.
    *
    * @param request - The request {@link GetAPIKeyRequest}
    * @returns A Promise of APIKey
@@ -931,8 +943,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the parameters of an API key, including `default_project_id` and
-   * `description`.
+   * Update an API key. Update the parameters of an API key, including
+   * `default_project_id` and `description`.
    *
    * @param request - The request {@link UpdateAPIKeyRequest}
    * @returns A Promise of APIKey
@@ -954,9 +966,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an API key. Note that this action is irreversible and cannot be
-   * undone. Make sure you update any configurations using the API keys you
-   * delete.
+   * Delete an API key. Delete an API key. Note that this action is irreversible
+   * and cannot be undone. Make sure you update any configurations using the API
+   * keys you delete.
    *
    * @param request - The request {@link DeleteAPIKeyRequest}
    */
@@ -992,10 +1004,11 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all product and features quota for an Organization, with their
-   * associated limits. By default, the quota listed are ordered by creation
-   * date in ascending order. This can be modified via the `order_by` field. You
-   * must define the `organization_id` in the query path of your request.
+   * List all quotas in the Organization. List all product and features quota
+   * for an Organization, with their associated limits. By default, the quota
+   * listed are ordered by creation date in ascending order. This can be
+   * modified via the `order_by` field. You must define the `organization_id` in
+   * the query path of your request.
    *
    * @param request - The request {@link ListQuotaRequest}
    * @returns A Promise of ListQuotaResponse
@@ -1004,9 +1017,9 @@ export class API extends ParentAPI {
     enrichForPagination('quota', this.pageOfListQuota, request)
 
   /**
-   * Retrieve information about a resource quota, speficified by the
-   * `quotum_name` parameter. The quota's `limit`, or whether it is unlimited,
-   * is returned in the response.
+   * Get a quota in the Organization. Retrieve information about a resource
+   * quota, speficified by the `quotum_name` parameter. The quota's `limit`, or
+   * whether it is unlimited, is returned in the response.
    *
    * @param request - The request {@link GetQuotumRequest}
    * @returns A Promise of Quotum
@@ -1047,7 +1060,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List JWTs
+   * List JWTs.
    *
    * @param request - The request {@link ListJWTsRequest}
    * @returns A Promise of ListJWTsResponse
@@ -1056,7 +1069,7 @@ export class API extends ParentAPI {
     enrichForPagination('jwts', this.pageOfListJWTs, request)
 
   /**
-   * Get a JWT
+   * Get a JWT.
    *
    * @param request - The request {@link GetJWTRequest}
    * @returns A Promise of JWT
@@ -1071,7 +1084,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a JWT
+   * Delete a JWT.
    *
    * @param request - The request {@link DeleteJWTRequest}
    */

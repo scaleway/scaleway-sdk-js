@@ -224,7 +224,7 @@ const jsonContentHeaders = {
 /**
  * Load balancer API.
  *
- * This API allows you to manage your load balancer service.
+ * This API allows you to manage your load balancer service. Load balancer API.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -254,7 +254,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List load balancers
+   * List load balancers.
    *
    * @param request - The request {@link ListLbsRequest}
    * @returns A Promise of ListLbsResponse
@@ -263,7 +263,7 @@ export class API extends ParentAPI {
     enrichForPagination('lbs', this.pageOfListLbs, request)
 
   /**
-   * Create a load balancer
+   * Create a load balancer.
    *
    * @param request - The request {@link CreateLbRequest}
    * @returns A Promise of Lb
@@ -285,7 +285,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a load balancer
+   * Get a load balancer.
    *
    * @param request - The request {@link GetLbRequest}
    * @returns A Promise of Lb
@@ -322,7 +322,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a load balancer
+   * Update a load balancer.
    *
    * @param request - The request {@link UpdateLbRequest}
    * @returns A Promise of Lb
@@ -344,7 +344,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a load balancer
+   * Delete a load balancer.
    *
    * @param request - The request {@link DeleteLbRequest}
    */
@@ -359,7 +359,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Migrate a load balancer
+   * Migrate a load balancer.
    *
    * @param request - The request {@link MigrateLbRequest}
    * @returns A Promise of Lb
@@ -403,7 +403,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List IPs
+   * List IPs.
    *
    * @param request - The request {@link ListIPsRequest}
    * @returns A Promise of ListIpsResponse
@@ -412,7 +412,7 @@ export class API extends ParentAPI {
     enrichForPagination('ips', this.pageOfListIPs, request)
 
   /**
-   * Create an IP
+   * Create an IP.
    *
    * @param request - The request {@link CreateIpRequest}
    * @returns A Promise of Ip
@@ -434,7 +434,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get an IP
+   * Get an IP.
    *
    * @param request - The request {@link GetIpRequest}
    * @returns A Promise of Ip
@@ -452,7 +452,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an IP
+   * Delete an IP.
    *
    * @param request - The request {@link ReleaseIpRequest}
    */
@@ -466,7 +466,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Update an IP
+   * Update an IP.
    *
    * @param request - The request {@link UpdateIpRequest}
    * @returns A Promise of Ip
@@ -509,7 +509,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List backends in a given load balancer
+   * List backends in a given load balancer.
    *
    * @param request - The request {@link ListBackendsRequest}
    * @returns A Promise of ListBackendsResponse
@@ -518,7 +518,7 @@ export class API extends ParentAPI {
     enrichForPagination('backends', this.pageOfListBackends, request)
 
   /**
-   * Create a backend in a given load balancer
+   * Create a backend in a given load balancer.
    *
    * @param request - The request {@link CreateBackendRequest}
    * @returns A Promise of Backend
@@ -540,7 +540,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a backend in a given load balancer
+   * Get a backend in a given load balancer.
    *
    * @param request - The request {@link GetBackendRequest}
    * @returns A Promise of Backend
@@ -558,7 +558,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a backend in a given load balancer
+   * Update a backend in a given load balancer.
    *
    * @param request - The request {@link UpdateBackendRequest}
    * @returns A Promise of Backend
@@ -580,7 +580,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a backend in a given load balancer
+   * Delete a backend in a given load balancer.
    *
    * @param request - The request {@link DeleteBackendRequest}
    */
@@ -594,7 +594,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Add a set of servers in a given backend
+   * Add a set of servers in a given backend.
    *
    * @param request - The request {@link AddBackendServersRequest}
    * @returns A Promise of Backend
@@ -619,7 +619,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Remove a set of servers for a given backend
+   * Remove a set of servers for a given backend.
    *
    * @param request - The request {@link RemoveBackendServersRequest}
    * @returns A Promise of Backend
@@ -644,7 +644,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Define all servers in a given backend
+   * Define all servers in a given backend.
    *
    * @param request - The request {@link SetBackendServersRequest}
    * @returns A Promise of Backend
@@ -669,7 +669,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an health check for a given backend
+   * Update an health check for a given backend.
    *
    * @param request - The request {@link UpdateHealthCheckRequest}
    * @returns A Promise of HealthCheck
@@ -715,7 +715,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List frontends in a given load balancer
+   * List frontends in a given load balancer.
    *
    * @param request - The request {@link ListFrontendsRequest}
    * @returns A Promise of ListFrontendsResponse
@@ -724,7 +724,7 @@ export class API extends ParentAPI {
     enrichForPagination('frontends', this.pageOfListFrontends, request)
 
   /**
-   * Create a frontend in a given load balancer
+   * Create a frontend in a given load balancer.
    *
    * @param request - The request {@link CreateFrontendRequest}
    * @returns A Promise of Frontend
@@ -746,7 +746,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a frontend
+   * Get a frontend.
    *
    * @param request - The request {@link GetFrontendRequest}
    * @returns A Promise of Frontend
@@ -764,7 +764,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a frontend
+   * Update a frontend.
    *
    * @param request - The request {@link UpdateFrontendRequest}
    * @returns A Promise of Frontend
@@ -786,7 +786,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a frontend
+   * Delete a frontend.
    *
    * @param request - The request {@link DeleteFrontendRequest}
    */
@@ -821,7 +821,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all backend redirections
+   * List all backend redirections.
    *
    * @param request - The request {@link ListRoutesRequest}
    * @returns A Promise of ListRoutesResponse
@@ -830,7 +830,7 @@ export class API extends ParentAPI {
     enrichForPagination('routes', this.pageOfListRoutes, request)
 
   /**
-   * Create a backend redirection
+   * Create a backend redirection.
    *
    * @param request - The request {@link CreateRouteRequest}
    * @returns A Promise of Route
@@ -852,7 +852,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get single backend redirection
+   * Get single backend redirection.
    *
    * @param request - The request {@link GetRouteRequest}
    * @returns A Promise of Route
@@ -870,7 +870,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Edit a backend redirection
+   * Edit a backend redirection.
    *
    * @param request - The request {@link UpdateRouteRequest}
    * @returns A Promise of Route
@@ -892,7 +892,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a backend redirection
+   * Delete a backend redirection.
    *
    * @param request - The request {@link DeleteRouteRequest}
    */
@@ -906,7 +906,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Get usage statistics of a given load balancer
+   * Get usage statistics of a given load balancer.
    *
    * @deprecated
    * @param request - The request {@link GetLbStatsRequest}
@@ -977,7 +977,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List ACL for a given frontend
+   * List ACL for a given frontend.
    *
    * @param request - The request {@link ListAclsRequest}
    * @returns A Promise of ListAclResponse
@@ -986,7 +986,7 @@ export class API extends ParentAPI {
     enrichForPagination('acls', this.pageOfListAcls, request)
 
   /**
-   * Create an ACL for a given frontend
+   * Create an ACL for a given frontend.
    *
    * @param request - The request {@link CreateAclRequest}
    * @returns A Promise of Acl
@@ -1011,7 +1011,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get an ACL
+   * Get an ACL.
    *
    * @param request - The request {@link GetAclRequest}
    * @returns A Promise of Acl
@@ -1029,7 +1029,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an ACL
+   * Update an ACL.
    *
    * @param request - The request {@link UpdateAclRequest}
    * @returns A Promise of Acl
@@ -1051,7 +1051,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an ACL
+   * Delete an ACL.
    *
    * @param request - The request {@link DeleteAclRequest}
    */
@@ -1065,8 +1065,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Generate a new TLS certificate using Let's Encrypt or import your
-   * certificate.
+   * Create a TLS certificate. Generate a new TLS certificate using Let's
+   * Encrypt or import your certificate.
    *
    * @param request - The request {@link CreateCertificateRequest}
    * @returns A Promise of Certificate
@@ -1111,7 +1111,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all TLS certificates on a given load balancer
+   * List all TLS certificates on a given load balancer.
    *
    * @param request - The request {@link ListCertificatesRequest}
    * @returns A Promise of ListCertificatesResponse
@@ -1120,7 +1120,7 @@ export class API extends ParentAPI {
     enrichForPagination('certificates', this.pageOfListCertificates, request)
 
   /**
-   * Get a TLS certificate
+   * Get a TLS certificate.
    *
    * @param request - The request {@link GetCertificateRequest}
    * @returns A Promise of Certificate
@@ -1163,7 +1163,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a TLS certificate
+   * Update a TLS certificate.
    *
    * @param request - The request {@link UpdateCertificateRequest}
    * @returns A Promise of Certificate
@@ -1188,7 +1188,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a TLS certificate
+   * Delete a TLS certificate.
    *
    * @param request - The request {@link DeleteCertificateRequest}
    */
@@ -1224,7 +1224,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all load balancer offer type
+   * List all load balancer offer type.
    *
    * @param request - The request {@link ListLbTypesRequest}
    * @returns A Promise of ListLbTypesResponse
@@ -1233,7 +1233,7 @@ export class API extends ParentAPI {
     enrichForPagination('lbTypes', this.pageOfListLbTypes, request)
 
   /**
-   * Create a subscriber, webhook or email
+   * Create a subscriber, webhook or email.
    *
    * @param request - The request {@link CreateSubscriberRequest}
    * @returns A Promise of Subscriber
@@ -1255,7 +1255,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a subscriber
+   * Get a subscriber.
    *
    * @param request - The request {@link GetSubscriberRequest}
    * @returns A Promise of Subscriber
@@ -1299,7 +1299,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all subscriber
+   * List all subscriber.
    *
    * @param request - The request {@link ListSubscriberRequest}
    * @returns A Promise of ListSubscriberResponse
@@ -1308,7 +1308,7 @@ export class API extends ParentAPI {
     enrichForPagination('subscribers', this.pageOfListSubscriber, request)
 
   /**
-   * Update a subscriber
+   * Update a subscriber.
    *
    * @param request - The request {@link UpdateSubscriberRequest}
    * @returns A Promise of Subscriber
@@ -1333,7 +1333,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a subscriber
+   * Delete a subscriber.
    *
    * @param request - The request {@link DeleteSubscriberRequest}
    */
@@ -1350,7 +1350,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Subscribe a subscriber to a given load balancer
+   * Subscribe a subscriber to a given load balancer.
    *
    * @param request - The request {@link SubscribeToLbRequest}
    * @returns A Promise of Lb
@@ -1372,7 +1372,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Unsubscribe a subscriber from a given load balancer
+   * Unsubscribe a subscriber from a given load balancer.
    *
    * @param request - The request {@link UnsubscribeFromLbRequest}
    * @returns A Promise of Lb
@@ -1412,7 +1412,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List attached private network of load balancer
+   * List attached private network of load balancer.
    *
    * @param request - The request {@link ListLbPrivateNetworksRequest}
    * @returns A Promise of ListLbPrivateNetworksResponse
@@ -1425,7 +1425,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Add load balancer on instance private network
+   * Add load balancer on instance private network.
    *
    * @param request - The request {@link AttachPrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
@@ -1453,7 +1453,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Remove load balancer of private network
+   * Remove load balancer of private network.
    *
    * @param request - The request {@link DetachPrivateNetworkRequest}
    */
@@ -1478,7 +1478,8 @@ export class API extends ParentAPI {
 /**
  * Load Balancer API.
  *
- * This API allows you to manage your Scaleway Load Balancer services.
+ * This API allows you to manage your Scaleway Load Balancer services. Load
+ * Balancer API.
  */
 export class ZonedAPI extends ParentAPI {
   /** Lists the available zones of the API. */
@@ -1515,10 +1516,10 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * List all Load Balancers in the specified zone, for a Scaleway Organization
-   * or Scaleway Project. By default, the Load Balancers returned in the list
-   * are ordered by creation date in ascending order, though this can be
-   * modified via the `order_by` field.
+   * List Load Balancers. List all Load Balancers in the specified zone, for a
+   * Scaleway Organization or Scaleway Project. By default, the Load Balancers
+   * returned in the list are ordered by creation date in ascending order,
+   * though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ZonedApiListLbsRequest}
    * @returns A Promise of ListLbsResponse
@@ -1527,9 +1528,9 @@ export class ZonedAPI extends ParentAPI {
     enrichForPagination('lbs', this.pageOfListLbs, request)
 
   /**
-   * Create a new Load Balancer. Note that the Load Balancer will be created
-   * without frontends or backends; these must be created separately via the
-   * dedicated endpoints.
+   * Create a Load Balancer. Create a new Load Balancer. Note that the Load
+   * Balancer will be created without frontends or backends; these must be
+   * created separately via the dedicated endpoints.
    *
    * @param request - The request {@link ZonedApiCreateLbRequest}
    * @returns A Promise of Lb
@@ -1551,9 +1552,9 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Retrieve information about an existing Load Balancer, specified by its Load
-   * Balancer ID. Its full details, including name, status and IP address, are
-   * returned in the response object.
+   * Get a Load Balancer. Retrieve information about an existing Load Balancer,
+   * specified by its Load Balancer ID. Its full details, including name, status
+   * and IP address, are returned in the response object.
    *
    * @param request - The request {@link ZonedApiGetLbRequest}
    * @returns A Promise of Lb
@@ -1590,9 +1591,9 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Update the parameters of an existing Load Balancer, specified by its Load
-   * Balancer ID. Note that the request type is PUT and not PATCH. You must set
-   * all parameters.
+   * Update a Load Balancer. Update the parameters of an existing Load Balancer,
+   * specified by its Load Balancer ID. Note that the request type is PUT and
+   * not PATCH. You must set all parameters.
    *
    * @param request - The request {@link ZonedApiUpdateLbRequest}
    * @returns A Promise of Lb
@@ -1614,10 +1615,10 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Delete an existing Load Balancer, specified by its Load Balancer ID.
-   * Deleting a Load Balancer is permanent, and cannot be undone. The Load
-   * Balancer's flexible IP address can either be deleted with the Load
-   * Balancer, or kept in your account for future use.
+   * Delete a Load Balancer. Delete an existing Load Balancer, specified by its
+   * Load Balancer ID. Deleting a Load Balancer is permanent, and cannot be
+   * undone. The Load Balancer's flexible IP address can either be deleted with
+   * the Load Balancer, or kept in your account for future use.
    *
    * @param request - The request {@link ZonedApiDeleteLbRequest}
    */
@@ -1632,9 +1633,9 @@ export class ZonedAPI extends ParentAPI {
     })
 
   /**
-   * Migrate an existing Load Balancer from one commercial type to another.
-   * Allows you to scale your Load Balancer up or down in terms of bandwidth or
-   * multi-cloud provision.
+   * Migrate a Load Balancer. Migrate an existing Load Balancer from one
+   * commercial type to another. Allows you to scale your Load Balancer up or
+   * down in terms of bandwidth or multi-cloud provision.
    *
    * @param request - The request {@link ZonedApiMigrateLbRequest}
    * @returns A Promise of Lb
@@ -1678,9 +1679,9 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * List the Load Balancer flexible IP addresses held in the account (filtered
-   * by Organization ID or Project ID). It is also possible to search for a
-   * specific IP address.
+   * List IP addresses. List the Load Balancer flexible IP addresses held in the
+   * account (filtered by Organization ID or Project ID). It is also possible to
+   * search for a specific IP address.
    *
    * @param request - The request {@link ZonedApiListIPsRequest}
    * @returns A Promise of ListIpsResponse
@@ -1689,8 +1690,9 @@ export class ZonedAPI extends ParentAPI {
     enrichForPagination('ips', this.pageOfListIPs, request)
 
   /**
-   * Create a new Load Balancer flexible IP address, in the specified Scaleway
-   * Project. This can be attached to new Load Balancers created in the future.
+   * Create an IP address. Create a new Load Balancer flexible IP address, in
+   * the specified Scaleway Project. This can be attached to new Load Balancers
+   * created in the future.
    *
    * @param request - The request {@link ZonedApiCreateIpRequest}
    * @returns A Promise of Ip
@@ -1712,7 +1714,8 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Retrieve the full details of a Load Balancer flexible IP address.
+   * Get an IP address. Retrieve the full details of a Load Balancer flexible IP
+   * address.
    *
    * @param request - The request {@link ZonedApiGetIpRequest}
    * @returns A Promise of Ip
@@ -1730,8 +1733,8 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Delete a Load Balancer flexible IP address. This action is irreversible,
-   * and cannot be undone.
+   * Delete an IP address. Delete a Load Balancer flexible IP address. This
+   * action is irreversible, and cannot be undone.
    *
    * @param request - The request {@link ZonedApiReleaseIpRequest}
    */
@@ -1745,7 +1748,8 @@ export class ZonedAPI extends ParentAPI {
     })
 
   /**
-   * Update the reverse DNS of a Load Balancer flexible IP address.
+   * Update an IP address. Update the reverse DNS of a Load Balancer flexible IP
+   * address.
    *
    * @param request - The request {@link ZonedApiUpdateIpRequest}
    * @returns A Promise of Ip
@@ -1790,11 +1794,12 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * List all the backends of a Load Balancer, specified by its Load Balancer
-   * ID. By default, results are returned in ascending order by the creation
-   * date of each backend. The response is an array of backend objects,
-   * containing full details of each one including their configuration
-   * parameters such as protocol, port and forwarding algorithm.
+   * List the backends of a given Load Balancer. List all the backends of a Load
+   * Balancer, specified by its Load Balancer ID. By default, results are
+   * returned in ascending order by the creation date of each backend. The
+   * response is an array of backend objects, containing full details of each
+   * one including their configuration parameters such as protocol, port and
+   * forwarding algorithm.
    *
    * @param request - The request {@link ZonedApiListBackendsRequest}
    * @returns A Promise of ListBackendsResponse
@@ -1803,8 +1808,9 @@ export class ZonedAPI extends ParentAPI {
     enrichForPagination('backends', this.pageOfListBackends, request)
 
   /**
-   * Create a new backend for a given Load Balancer, specifying its full
-   * configuration including protocol, port and forwarding algorithm.
+   * Create a backend for a given Load Balancer. Create a new backend for a
+   * given Load Balancer, specifying its full configuration including protocol,
+   * port and forwarding algorithm.
    *
    * @param request - The request {@link ZonedApiCreateBackendRequest}
    * @returns A Promise of Backend
@@ -1826,9 +1832,10 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Get the full details of a given backend, specified by its backend ID. The
-   * response contains the backend's full configuration parameters including
-   * protocol, port and forwarding algorithm.
+   * Get a backend of a given Load Balancer. Get the full details of a given
+   * backend, specified by its backend ID. The response contains the backend's
+   * full configuration parameters including protocol, port and forwarding
+   * algorithm.
    *
    * @param request - The request {@link ZonedApiGetBackendRequest}
    * @returns A Promise of Backend
@@ -1846,9 +1853,9 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Update a backend of a given Load Balancer, specified by its backend ID.
-   * Note that the request type is PUT and not PATCH. You must set all
-   * parameters.
+   * Update a backend of a given Load Balancer. Update a backend of a given Load
+   * Balancer, specified by its backend ID. Note that the request type is PUT
+   * and not PATCH. You must set all parameters.
    *
    * @param request - The request {@link ZonedApiUpdateBackendRequest}
    * @returns A Promise of Backend
@@ -1870,8 +1877,9 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Delete a backend of a given Load Balancer, specified by its backend ID.
-   * This action is irreversible and cannot be undone.
+   * Delete a backend of a given Load Balancer. Delete a backend of a given Load
+   * Balancer, specified by its backend ID. This action is irreversible and
+   * cannot be undone.
    *
    * @param request - The request {@link ZonedApiDeleteBackendRequest}
    */
@@ -1885,10 +1893,10 @@ export class ZonedAPI extends ParentAPI {
     })
 
   /**
-   * For a given backend specified by its backend ID, add a set of backend
-   * servers (identified by their IP addresses) it should forward traffic to.
-   * These will be appended to any existing set of backend servers for this
-   * backend.
+   * Add a set of backend servers to a given backend. For a given backend
+   * specified by its backend ID, add a set of backend servers (identified by
+   * their IP addresses) it should forward traffic to. These will be appended to
+   * any existing set of backend servers for this backend.
    *
    * @param request - The request {@link ZonedApiAddBackendServersRequest}
    * @returns A Promise of Backend
@@ -1916,9 +1924,9 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * For a given backend specified by its backend ID, remove the specified
-   * backend servers (identified by their IP addresses) so that it no longer
-   * forwards traffic to them.
+   * Remove a set of servers for a given backend. For a given backend specified
+   * by its backend ID, remove the specified backend servers (identified by
+   * their IP addresses) so that it no longer forwards traffic to them.
    *
    * @param request - The request {@link ZonedApiRemoveBackendServersRequest}
    * @returns A Promise of Backend
@@ -1948,10 +1956,10 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * For a given backend specified by its backend ID, define the set of backend
-   * servers (identified by their IP addresses) that it should forward traffic
-   * to. Any existing backend servers configured for this backend will be
-   * removed.
+   * Define all backend servers for a given backend. For a given backend
+   * specified by its backend ID, define the set of backend servers (identified
+   * by their IP addresses) that it should forward traffic to. Any existing
+   * backend servers configured for this backend will be removed.
    *
    * @param request - The request {@link ZonedApiSetBackendServersRequest}
    * @returns A Promise of Backend
@@ -1979,10 +1987,10 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Update the configuration of the health check performed by a given backend
-   * to verify the health of its backend servers, identified by its backend ID.
-   * Note that the request type is PUT and not PATCH. You must set all
-   * parameters.
+   * Update a health check for a given backend. Update the configuration of the
+   * health check performed by a given backend to verify the health of its
+   * backend servers, identified by its backend ID. Note that the request type
+   * is PUT and not PATCH. You must set all parameters.
    *
    * @param request - The request {@link ZonedApiUpdateHealthCheckRequest}
    * @returns A Promise of HealthCheck
@@ -2033,11 +2041,12 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * List all the frontends of a Load Balancer, specified by its Load Balancer
-   * ID. By default, results are returned in ascending order by the creation
-   * date of each frontend. The response is an array of frontend objects,
-   * containing full details of each one including the port they listen on and
-   * the backend they are attached to.
+   * List frontends of a given Load Balancer. List all the frontends of a Load
+   * Balancer, specified by its Load Balancer ID. By default, results are
+   * returned in ascending order by the creation date of each frontend. The
+   * response is an array of frontend objects, containing full details of each
+   * one including the port they listen on and the backend they are attached
+   * to.
    *
    * @param request - The request {@link ZonedApiListFrontendsRequest}
    * @returns A Promise of ListFrontendsResponse
@@ -2046,9 +2055,9 @@ export class ZonedAPI extends ParentAPI {
     enrichForPagination('frontends', this.pageOfListFrontends, request)
 
   /**
-   * Create a new frontend for a given Load Balancer, specifying its
-   * configuration including the port it should listen on and the backend to
-   * attach it to.
+   * Create a frontend in a given Load Balancer. Create a new frontend for a
+   * given Load Balancer, specifying its configuration including the port it
+   * should listen on and the backend to attach it to.
    *
    * @param request - The request {@link ZonedApiCreateFrontendRequest}
    * @returns A Promise of Frontend
@@ -2070,10 +2079,10 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Get the full details of a given frontend, specified by its frontend ID. The
-   * response contains the frontend's full configuration parameters including
-   * the backend it is attached to, the port it listens on, and any certificates
-   * it has.
+   * Get a frontend. Get the full details of a given frontend, specified by its
+   * frontend ID. The response contains the frontend's full configuration
+   * parameters including the backend it is attached to, the port it listens on,
+   * and any certificates it has.
    *
    * @param request - The request {@link ZonedApiGetFrontendRequest}
    * @returns A Promise of Frontend
@@ -2091,10 +2100,10 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Update a given frontend, specified by its frontend ID. You can update
-   * configuration parameters including its name and the port it listens on.
-   * Note that the request type is PUT and not PATCH. You must set all
-   * parameters.
+   * Update a frontend. Update a given frontend, specified by its frontend ID.
+   * You can update configuration parameters including its name and the port it
+   * listens on. Note that the request type is PUT and not PATCH. You must set
+   * all parameters.
    *
    * @param request - The request {@link ZonedApiUpdateFrontendRequest}
    * @returns A Promise of Frontend
@@ -2116,8 +2125,8 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Delete a given frontend, specified by its frontend ID. This action is
-   * irreversible and cannot be undone.
+   * Delete a frontend. Delete a given frontend, specified by its frontend ID.
+   * This action is irreversible and cannot be undone.
    *
    * @param request - The request {@link ZonedApiDeleteFrontendRequest}
    */
@@ -2154,9 +2163,10 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * List all routes for a given frontend. The response is an array of routes,
-   * each one with a specified backend to direct to if a certain condition is
-   * matched (based on the value of the SNI field or HTTP Host header).
+   * List all routes. List all routes for a given frontend. The response is an
+   * array of routes, each one with a specified backend to direct to if a
+   * certain condition is matched (based on the value of the SNI field or HTTP
+   * Host header).
    *
    * @param request - The request {@link ZonedApiListRoutesRequest}
    * @returns A Promise of ListRoutesResponse
@@ -2165,9 +2175,9 @@ export class ZonedAPI extends ParentAPI {
     enrichForPagination('routes', this.pageOfListRoutes, request)
 
   /**
-   * Create a new route on a given frontend. To configure a route, specify the
-   * backend to direct to if a certain condition is matched (based on the value
-   * of the SNI field or HTTP Host header).
+   * Create a route. Create a new route on a given frontend. To configure a
+   * route, specify the backend to direct to if a certain condition is matched
+   * (based on the value of the SNI field or HTTP Host header).
    *
    * @param request - The request {@link ZonedApiCreateRouteRequest}
    * @returns A Promise of Route
@@ -2189,9 +2199,9 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Retrieve information about an existing route, specified by its route ID.
-   * Its full details, origin frontend, target backend and match condition, are
-   * returned in the response object.
+   * Get a route. Retrieve information about an existing route, specified by its
+   * route ID. Its full details, origin frontend, target backend and match
+   * condition, are returned in the response object.
    *
    * @param request - The request {@link ZonedApiGetRouteRequest}
    * @returns A Promise of Route
@@ -2209,7 +2219,8 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Update the configuration of an existing route, specified by its route ID.
+   * Update a route. Update the configuration of an existing route, specified by
+   * its route ID.
    *
    * @param request - The request {@link ZonedApiUpdateRouteRequest}
    * @returns A Promise of Route
@@ -2231,8 +2242,8 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Delete an existing route, specified by its route ID. Deleting a route is
-   * permanent, and cannot be undone.
+   * Delete a route. Delete an existing route, specified by its route ID.
+   * Deleting a route is permanent, and cannot be undone.
    *
    * @param request - The request {@link ZonedApiDeleteRouteRequest}
    */
@@ -2246,7 +2257,7 @@ export class ZonedAPI extends ParentAPI {
     })
 
   /**
-   * Get usage statistics of a given Load Balancer
+   * Get usage statistics of a given Load Balancer.
    *
    * @deprecated
    * @param request - The request {@link ZonedApiGetLbStatsRequest}
@@ -2286,8 +2297,8 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * List information about your backend servers, including their state and the
-   * result of their last health check.
+   * List backend server statistics. List information about your backend
+   * servers, including their state and the result of their last health check.
    *
    * @param request - The request {@link ZonedApiListBackendStatsRequest}
    * @returns A Promise of ListBackendStatsResponse
@@ -2324,9 +2335,10 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * List the ACLs for a given frontend, specified by its frontend ID. The
-   * response is an array of ACL objects, each one representing an ACL that
-   * denies or allows traffic based on certain conditions.
+   * List ACLs for a given frontend. List the ACLs for a given frontend,
+   * specified by its frontend ID. The response is an array of ACL objects, each
+   * one representing an ACL that denies or allows traffic based on certain
+   * conditions.
    *
    * @param request - The request {@link ZonedApiListAclsRequest}
    * @returns A Promise of ListAclResponse
@@ -2335,9 +2347,10 @@ export class ZonedAPI extends ParentAPI {
     enrichForPagination('acls', this.pageOfListAcls, request)
 
   /**
-   * Create a new ACL for a given frontend. Each ACL must have a name, an action
-   * to perform (allow or deny), and a match rule (the action is carried out
-   * when the incoming traffic matches the rule).
+   * Create an ACL for a given frontend. Create a new ACL for a given frontend.
+   * Each ACL must have a name, an action to perform (allow or deny), and a
+   * match rule (the action is carried out when the incoming traffic matches the
+   * rule).
    *
    * @param request - The request {@link ZonedApiCreateAclRequest}
    * @returns A Promise of Acl
@@ -2362,9 +2375,9 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Get information for a particular ACL, specified by its ACL ID. The response
-   * returns full details of the ACL, including its name, action, match rule and
-   * frontend.
+   * Get an ACL. Get information for a particular ACL, specified by its ACL ID.
+   * The response returns full details of the ACL, including its name, action,
+   * match rule and frontend.
    *
    * @param request - The request {@link ZonedApiGetAclRequest}
    * @returns A Promise of Acl
@@ -2382,8 +2395,8 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Update a particular ACL, specified by its ACL ID. You can update details
-   * including its name, action and match rule.
+   * Update an ACL. Update a particular ACL, specified by its ACL ID. You can
+   * update details including its name, action and match rule.
    *
    * @param request - The request {@link ZonedApiUpdateAclRequest}
    * @returns A Promise of Acl
@@ -2405,8 +2418,8 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Delete an ACL, specified by its ACL ID. Deleting an ACL is irreversible and
-   * cannot be undone.
+   * Delete an ACL. Delete an ACL, specified by its ACL ID. Deleting an ACL is
+   * irreversible and cannot be undone.
    *
    * @param request - The request {@link ZonedApiDeleteAclRequest}
    */
@@ -2420,9 +2433,9 @@ export class ZonedAPI extends ParentAPI {
     })
 
   /**
-   * For a given frontend specified by its frontend ID, define and add the
-   * complete set of ACLS for that frontend. Any existing ACLs on this frontend
-   * will be removed.
+   * Define all ACLs for a given frontend. For a given frontend specified by its
+   * frontend ID, define and add the complete set of ACLS for that frontend. Any
+   * existing ACLs on this frontend will be removed.
    *
    * @param request - The request {@link ZonedApiSetAclsRequest}
    * @returns A Promise of SetAclsResponse
@@ -2447,9 +2460,9 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Generate a new SSL/TLS certificate for a given Load Balancer. You can
-   * choose to create a Let's Encrypt certificate, or import a custom
-   * certificate.
+   * Create an SSL/TLS certificate. Generate a new SSL/TLS certificate for a
+   * given Load Balancer. You can choose to create a Let's Encrypt certificate,
+   * or import a custom certificate.
    *
    * @param request - The request {@link ZonedApiCreateCertificateRequest}
    * @returns A Promise of Certificate
@@ -2497,9 +2510,10 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * List all the SSL/TLS certificates on a given Load Balancer. The response is
-   * an array of certificate objects, which are by default listed in ascending
-   * order of creation date.
+   * List all SSL/TLS certificates on a given Load Balancer. List all the
+   * SSL/TLS certificates on a given Load Balancer. The response is an array of
+   * certificate objects, which are by default listed in ascending order of
+   * creation date.
    *
    * @param request - The request {@link ZonedApiListCertificatesRequest}
    * @returns A Promise of ListCertificatesResponse
@@ -2508,9 +2522,10 @@ export class ZonedAPI extends ParentAPI {
     enrichForPagination('certificates', this.pageOfListCertificates, request)
 
   /**
-   * Get information for a particular SSL/TLS certificate, specified by its
-   * certificate ID. The response returns full details of the certificate,
-   * including its type, main domain name, and alternative domain names.
+   * Get an SSL/TLS certificate. Get information for a particular SSL/TLS
+   * certificate, specified by its certificate ID. The response returns full
+   * details of the certificate, including its type, main domain name, and
+   * alternative domain names.
    *
    * @param request - The request {@link ZonedApiGetCertificateRequest}
    * @returns A Promise of Certificate
@@ -2553,8 +2568,8 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Update the name of a particular SSL/TLS certificate, specified by its
-   * certificate ID.
+   * Update an SSL/TLS certificate. Update the name of a particular SSL/TLS
+   * certificate, specified by its certificate ID.
    *
    * @param request - The request {@link ZonedApiUpdateCertificateRequest}
    * @returns A Promise of Certificate
@@ -2582,8 +2597,9 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Delete an SSL/TLS certificate, specified by its certificate ID. Deleting a
-   * certificate is irreversible and cannot be undone.
+   * Delete an SSL/TLS certificate. Delete an SSL/TLS certificate, specified by
+   * its certificate ID. Deleting a certificate is irreversible and cannot be
+   * undone.
    *
    * @param request - The request {@link ZonedApiDeleteCertificateRequest}
    */
@@ -2621,9 +2637,9 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * List all the different commercial Load Balancer types. The response
-   * includes an array of offer types, each with a name, description, and
-   * information about its stock availability.
+   * List all Load Balancer offer types. List all the different commercial Load
+   * Balancer types. The response includes an array of offer types, each with a
+   * name, description, and information about its stock availability.
    *
    * @param request - The request {@link ZonedApiListLbTypesRequest}
    * @returns A Promise of ListLbTypesResponse
@@ -2632,8 +2648,9 @@ export class ZonedAPI extends ParentAPI {
     enrichForPagination('lbTypes', this.pageOfListLbTypes, request)
 
   /**
-   * Create a new subscriber, either with an email configuration or a webhook
-   * configuration, for a specified Scaleway Project.
+   * Create a subscriber. Create a new subscriber, either with an email
+   * configuration or a webhook configuration, for a specified Scaleway
+   * Project.
    *
    * @param request - The request {@link ZonedApiCreateSubscriberRequest}
    * @returns A Promise of Subscriber
@@ -2655,9 +2672,9 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Retrieve information about an existing subscriber, specified by its
-   * subscriber ID. Its full details, including name and email/webhook
-   * configuration, are returned in the response object.
+   * Get a subscriber. Retrieve information about an existing subscriber,
+   * specified by its subscriber ID. Its full details, including name and
+   * email/webhook configuration, are returned in the response object.
    *
    * @param request - The request {@link ZonedApiGetSubscriberRequest}
    * @returns A Promise of Subscriber
@@ -2703,9 +2720,10 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * List all subscribers to Load Balancer alerts. By default, returns all
-   * subscribers to Load Balancer alerts for the Organization associated with
-   * the authentication token used for the request.
+   * List all subscribers. List all subscribers to Load Balancer alerts. By
+   * default, returns all subscribers to Load Balancer alerts for the
+   * Organization associated with the authentication token used for the
+   * request.
    *
    * @param request - The request {@link ZonedApiListSubscriberRequest}
    * @returns A Promise of ListSubscriberResponse
@@ -2714,8 +2732,9 @@ export class ZonedAPI extends ParentAPI {
     enrichForPagination('subscribers', this.pageOfListSubscriber, request)
 
   /**
-   * Update the parameters of a given subscriber (e.g. name, webhook
-   * configuration, email configuration), specified by its subscriber ID.
+   * Update a subscriber. Update the parameters of a given subscriber (e.g.
+   * name, webhook configuration, email configuration), specified by its
+   * subscriber ID.
    *
    * @param request - The request {@link ZonedApiUpdateSubscriberRequest}
    * @returns A Promise of Subscriber
@@ -2740,8 +2759,8 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Delete an existing subscriber, specified by its subscriber ID. Deleting a
-   * subscriber is permanent, and cannot be undone.
+   * Delete a subscriber. Delete an existing subscriber, specified by its
+   * subscriber ID. Deleting a subscriber is permanent, and cannot be undone.
    *
    * @param request - The request {@link ZonedApiDeleteSubscriberRequest}
    */
@@ -2758,7 +2777,8 @@ export class ZonedAPI extends ParentAPI {
     })
 
   /**
-   * Subscribe an existing subscriber to alerts for a given Load Balancer.
+   * Subscribe a subscriber to alerts for a given Load Balancer. Subscribe an
+   * existing subscriber to alerts for a given Load Balancer.
    *
    * @param request - The request {@link ZonedApiSubscribeToLbRequest}
    * @returns A Promise of Lb
@@ -2780,9 +2800,9 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Unsubscribe a subscriber from alerts for a given Load Balancer. The
-   * subscriber is not deleted, and can be resubscribed in the future if
-   * necessary.
+   * Unsubscribe a subscriber from alerts for a given Load Balancer. Unsubscribe
+   * a subscriber from alerts for a given Load Balancer. The subscriber is not
+   * deleted, and can be resubscribed in the future if necessary.
    *
    * @param request - The request {@link ZonedApiUnsubscribeFromLbRequest}
    * @returns A Promise of Lb
@@ -2822,10 +2842,11 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * List the Private Networks attached to a given Load Balancer, specified by
-   * its Load Balancer ID. The response is an array of Private Network objects,
-   * giving information including the status, configuration, name and creation
-   * date of each Private Network.
+   * List Private Networks attached to a Load Balancer. List the Private
+   * Networks attached to a given Load Balancer, specified by its Load Balancer
+   * ID. The response is an array of Private Network objects, giving information
+   * including the status, configuration, name and creation date of each Private
+   * Network.
    *
    * @param request - The request {@link ZonedApiListLbPrivateNetworksRequest}
    * @returns A Promise of ListLbPrivateNetworksResponse
@@ -2840,8 +2861,9 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Attach a specified Load Balancer to a specified Private Network, defining a
-   * static or DHCP configuration for the Load Balancer on the network.
+   * Attach a Load Balancer to a Private Network. Attach a specified Load
+   * Balancer to a specified Private Network, defining a static or DHCP
+   * configuration for the Load Balancer on the network.
    *
    * @param request - The request {@link ZonedApiAttachPrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
@@ -2874,7 +2896,8 @@ export class ZonedAPI extends ParentAPI {
     )
 
   /**
-   * Detach a specified Load Balancer from a specified Private Network.
+   * Detach Load Balancer from Private Network. Detach a specified Load Balancer
+   * from a specified Private Network.
    *
    * @param request - The request {@link ZonedApiDetachPrivateNetworkRequest}
    */

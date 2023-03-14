@@ -305,8 +305,9 @@ export type CreateClusterRequest = {
   aclRules?: ACLRuleSpec[]
   /**
    * Zero or multiple EndpointSpec used to expose your cluster publicly and
-   * inside private networks. If no EndpoindSpec is given the cluster will be
-   * publicly exposed by default.
+   * inside private networks. Zero or multiple EndpointSpec used to expose your
+   * cluster publicly and inside private networks. If no EndpoindSpec is given
+   * the cluster will be publicly exposed by default.
    */
   endpoints?: EndpointSpec[]
   /** Whether or not TLS is enabled. */

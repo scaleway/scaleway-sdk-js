@@ -41,7 +41,7 @@ const jsonContentHeaders = {
 /**
  * MnQ API (beta).
  *
- * This API allows you to manage Messaging or Queueing brokers.
+ * This API allows you to manage Messaging or Queueing brokers. MnQ API (beta).
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -72,7 +72,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List namespaces
+   * List namespaces.
    *
    * @param request - The request {@link ListNamespacesRequest}
    * @returns A Promise of ListNamespacesResponse
@@ -81,7 +81,7 @@ export class API extends ParentAPI {
     enrichForPagination('namespaces', this.pageOfListNamespaces, request)
 
   /**
-   * Create a namespace
+   * Create a namespace.
    *
    * @param request - The request {@link CreateNamespaceRequest}
    * @returns A Promise of Namespace
@@ -103,7 +103,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the name of a namespace
+   * Update the name of a namespace.
    *
    * @param request - The request {@link UpdateNamespaceRequest}
    * @returns A Promise of Namespace
@@ -125,7 +125,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a namespace
+   * Get a namespace.
    *
    * @param request - The request {@link GetNamespaceRequest}
    * @returns A Promise of Namespace
@@ -143,7 +143,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a namespace
+   * Delete a namespace.
    *
    * @param request - The request {@link DeleteNamespaceRequest}
    */
@@ -157,7 +157,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Create a set of credentials for a specific namespace.
+   * Create a set of credentials. Create a set of credentials for a specific
+   * namespace.
    *
    * @param request - The request {@link CreateCredentialRequest}
    * @returns A Promise of Credential
@@ -179,7 +180,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete credentials
+   * Delete credentials.
    *
    * @param request - The request {@link DeleteCredentialRequest}
    */
@@ -219,7 +220,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List credentials
+   * List credentials.
    *
    * @param request - The request {@link ListCredentialsRequest}
    * @returns A Promise of ListCredentialsResponse
@@ -253,7 +254,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a set of credentials
+   * Get a set of credentials.
    *
    * @param request - The request {@link GetCredentialRequest}
    * @returns A Promise of Credential

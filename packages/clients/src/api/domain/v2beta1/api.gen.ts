@@ -161,7 +161,7 @@ const jsonContentHeaders = {
 /**
  * DNS API.
  *
- * Manage your DNS zones and records.
+ * DNS API. Manage your DNS zones and records.
  */
 export class API extends ParentAPI {
   protected pageOfListDNSZones = (request: Readonly<ListDNSZonesRequest>) =>
@@ -186,8 +186,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Returns a list of manageable DNS zones. You can filter the DNS zones by
-   * domain name.
+   * List DNS zones. Returns a list of manageable DNS zones. You can filter the
+   * DNS zones by domain name.
    *
    * @param request - The request {@link ListDNSZonesRequest}
    * @returns A Promise of ListDNSZonesResponse
@@ -196,7 +196,7 @@ export class API extends ParentAPI {
     enrichForPagination('dnsZones', this.pageOfListDNSZones, request)
 
   /**
-   * Create a new DNS zone.
+   * Create a DNS zone. Create a new DNS zone.
    *
    * @param request - The request {@link CreateDNSZoneRequest}
    * @returns A Promise of DNSZone
@@ -215,7 +215,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the name and/or the organizations for a DNS zone.
+   * Update a DNS zone. Update the name and/or the organizations for a DNS zone.
    *
    * @param request - The request {@link UpdateDNSZoneRequest}
    * @returns A Promise of DNSZone
@@ -237,7 +237,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Clone an existed DNS zone with all its records into a new one.
+   * Clone a DNS zone. Clone an existed DNS zone with all its records into a new
+   * one.
    *
    * @param request - The request {@link CloneDNSZoneRequest}
    * @returns A Promise of DNSZone
@@ -259,7 +260,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a DNS zone and all it's records.
+   * Delete DNS zone. Delete a DNS zone and all it's records.
    *
    * @param request - The request {@link DeleteDNSZoneRequest}
    * @returns A Promise of DeleteDNSZoneResponse
@@ -307,8 +308,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Returns a list of DNS records of a DNS zone with default NS. You can filter
-   * the records by type and name.
+   * List DNS zone records. Returns a list of DNS records of a DNS zone with
+   * default NS. You can filter the records by type and name.
    *
    * @param request - The request {@link ListDNSZoneRecordsRequest}
    * @returns A Promise of ListDNSZoneRecordsResponse
@@ -317,7 +318,8 @@ export class API extends ParentAPI {
     enrichForPagination('records', this.pageOfListDNSZoneRecords, request)
 
   /**
-   * Only available with default NS.<br/> Send a list of actions and records.
+   * Update DNS zone records. Only available with default NS.<br/> Send a list
+   * of actions and records.
    *
    * Action can be:
    *
@@ -355,8 +357,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Returns a list of Nameservers and their optional glue records for a DNS
-   * zone.
+   * List DNS zone nameservers. Returns a list of Nameservers and their optional
+   * glue records for a DNS zone.
    *
    * @param request - The request {@link ListDNSZoneNameserversRequest}
    * @returns A Promise of ListDNSZoneNameserversResponse
@@ -375,7 +377,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update DNS zone nameservers and set optional glue records.
+   * Update DNS zone nameservers. Update DNS zone nameservers and set optional
+   * glue records.
    *
    * @param request - The request {@link UpdateDNSZoneNameserversRequest}
    * @returns A Promise of UpdateDNSZoneNameserversResponse
@@ -399,8 +402,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Only available with default NS.<br/> Delete all the records from a DNS
-   * zone. All edits will be versioned.
+   * Clear DNS zone records. Only available with default NS.<br/> Delete all the
+   * records from a DNS zone. All edits will be versioned.
    *
    * @param request - The request {@link ClearDNSZoneRecordsRequest}
    * @returns A Promise of ClearDNSZoneRecordsResponse
@@ -418,7 +421,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a DNS zone in a given format with default NS.
+   * Export raw DNS zone. Get a DNS zone in a given format with default NS.
    *
    * @param request - The request {@link ExportRawDNSZoneRequest}
    * @returns A Promise of Blob
@@ -438,7 +441,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Import and replace records from a given provider format with default NS.
+   * Import raw DNS zone. Import and replace records from a given provider
+   * format with default NS.
    *
    * @param request - The request {@link ImportRawDNSZoneRequest}
    * @returns A Promise of ImportRawDNSZoneResponse
@@ -460,7 +464,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Import and replace records from a given provider format with default NS.
+   * Import provider DNS zone. Import and replace records from a given provider
+   * format with default NS.
    *
    * @param request - The request {@link ImportProviderDNSZoneRequest}
    * @returns A Promise of ImportProviderDNSZoneResponse
@@ -482,8 +487,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Refresh SOA DNS zone. You can recreate the given DNS zone and its sub DNS
-   * zone if needed.
+   * Refresh DNS zone. Refresh SOA DNS zone. You can recreate the given DNS zone
+   * and its sub DNS zone if needed.
    *
    * @param request - The request {@link RefreshDNSZoneRequest}
    * @returns A Promise of RefreshDNSZoneResponse
@@ -526,9 +531,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a list of DNS zone versions.<br/> The maximum version count is
-   * 100.<br/> If the count reaches this limit, the oldest version will be
-   * deleted after each new modification.
+   * List DNS zone versions. Get a list of DNS zone versions.<br/> The maximum
+   * version count is 100.<br/> If the count reaches this limit, the oldest
+   * version will be deleted after each new modification.
    *
    * @param request - The request {@link ListDNSZoneVersionsRequest}
    * @returns A Promise of ListDNSZoneVersionsResponse
@@ -558,7 +563,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a list of records from a previous DNS zone version.
+   * List DNS zone version records. Get a list of records from a previous DNS
+   * zone version.
    *
    * @param request - The request {@link ListDNSZoneVersionRecordsRequest}
    * @returns A Promise of ListDNSZoneVersionRecordsResponse
@@ -573,7 +579,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get all differences from a previous DNS zone version.
+   * Get DNS zone version diff. Get all differences from a previous DNS zone
+   * version.
    *
    * @param request - The request {@link GetDNSZoneVersionDiffRequest}
    * @returns A Promise of GetDNSZoneVersionDiffResponse
@@ -591,7 +598,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Restore and activate a previous DNS zone version.
+   * Restore DNS zone version. Restore and activate a previous DNS zone version.
    *
    * @param request - The request {@link RestoreDNSZoneVersionRequest}
    * @returns A Promise of RestoreDNSZoneVersionResponse
@@ -611,7 +618,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get the zone TLS certificate if it exists
+   * Get the zone TLS certificate if it exists.
    *
    * @param request - The request {@link GetSSLCertificateRequest}
    * @returns A Promise of SSLCertificate
@@ -651,7 +658,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create or return the zone TLS certificate
+   * Create or return the zone TLS certificate.
    *
    * @param request - The request {@link CreateSSLCertificateRequest}
    * @returns A Promise of SSLCertificate
@@ -690,7 +697,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all user TLS certificates
+   * List all user TLS certificates.
    *
    * @param request - The request {@link ListSSLCertificatesRequest}
    * @returns A Promise of ListSSLCertificatesResponse
@@ -699,7 +706,7 @@ export class API extends ParentAPI {
     enrichForPagination('certificates', this.pageOfListSSLCertificates, request)
 
   /**
-   * Delete an TLS certificate
+   * Delete an TLS certificate.
    *
    * @param request - The request {@link DeleteSSLCertificateRequest}
    * @returns A Promise of DeleteSSLCertificateResponse
@@ -717,7 +724,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get the DNS zone TSIG Key to allow AXFR request.
+   * Get the DNS zone TSIG Key. Get the DNS zone TSIG Key to allow AXFR request.
    *
    * @param request - The request {@link GetDNSZoneTsigKeyRequest}
    * @returns A Promise of GetDNSZoneTsigKeyResponse
@@ -735,7 +742,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the DNS zone TSIG Key
+   * Delete the DNS zone TSIG Key.
    *
    * @param request - The request {@link DeleteDNSZoneTsigKeyRequest}
    */
@@ -752,7 +759,7 @@ export class API extends ParentAPI {
 /**
  * Domains registrar API.
  *
- * Manage your domains and contacts.
+ * Domains registrar API. Manage your domains and contacts.
  */
 export class RegistrarAPI extends ParentAPI {
   protected pageOfListTasks = (
@@ -780,7 +787,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * List all account tasks. You can filter the list by domain name.
+   * List tasks. List all account tasks. You can filter the list by domain name.
    *
    * @param request - The request {@link RegistrarApiListTasksRequest}
    * @returns A Promise of ListTasksResponse
@@ -789,8 +796,8 @@ export class RegistrarAPI extends ParentAPI {
     enrichForPagination('tasks', this.pageOfListTasks, request)
 
   /**
-   * Request the registration of domain names. You can provide an already
-   * existing domain's contact or a new contact.
+   * Buy one or more domains. Request the registration of domain names. You can
+   * provide an already existing domain's contact or a new contact.
    *
    * @param request - The request {@link RegistrarApiBuyDomainsRequest}
    * @returns A Promise of OrderResponse
@@ -809,7 +816,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Request the renewal of domain names.
+   * Renew one or more domains. Request the renewal of domain names.
    *
    * @param request - The request {@link RegistrarApiRenewDomainsRequest}
    * @returns A Promise of OrderResponse
@@ -828,7 +835,8 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Request the transfer from another registrar domain to Scaleway.
+   * Transfer a domain. Request the transfer from another registrar domain to
+   * Scaleway.
    *
    * @param request - The request {@link RegistrarApiTransferInDomainRequest}
    * @returns A Promise of OrderResponse
@@ -850,11 +858,11 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Request a trade for the contact owner.<br/> If an `organization_id` is
-   * given, the change is from the current Scaleway account to another Scaleway
-   * account.<br/> If no contact is given, the first contact of the other
-   * Scaleway account is taken.<br/> If the other Scaleway account has no
-   * contact. An error occurs.
+   * Trade a domain contact. Request a trade for the contact owner.<br/> If an
+   * `organization_id` is given, the change is from the current Scaleway account
+   * to another Scaleway account.<br/> If no contact is given, the first contact
+   * of the other Scaleway account is taken.<br/> If the other Scaleway account
+   * has no contact. An error occurs.
    *
    * @param request - The request {@link RegistrarApiTradeDomainRequest}
    * @returns A Promise of OrderResponse
@@ -876,7 +884,8 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Request the registration of an external domain name.
+   * Register an external domain. Request the registration of an external domain
+   * name.
    *
    * @param request - The request
    *   {@link RegistrarApiRegisterExternalDomainRequest}
@@ -901,7 +910,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Delete an external domain name.
+   * Delete an external domain. Delete an external domain name.
    *
    * @param request - The request {@link RegistrarApiDeleteExternalDomainRequest}
    * @returns A Promise of DeleteExternalDomainResponse
@@ -921,8 +930,9 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Check if contacts are compatible against a domain or a tld. If not, it will
-   * return the information requiring a correction.
+   * Check if contacts are compatible against a domain or a tld. Check if
+   * contacts are compatible against a domain or a tld. If not, it will return
+   * the information requiring a correction.
    *
    * @param request - The request
    *   {@link RegistrarApiCheckContactsCompatibilityRequest}
@@ -968,8 +978,8 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Return a list of contacts with their domains and roles. You can filter the
-   * list by domain name.
+   * List contacts. Return a list of contacts with their domains and roles. You
+   * can filter the list by domain name.
    *
    * @param request - The request {@link RegistrarApiListContactsRequest}
    * @returns A Promise of ListContactsResponse
@@ -978,8 +988,8 @@ export class RegistrarAPI extends ParentAPI {
     enrichForPagination('contacts', this.pageOfListContacts, request)
 
   /**
-   * Return a contact details retrieved from the registrar using a given contact
-   * ID.
+   * Get a contact. Return a contact details retrieved from the registrar using
+   * a given contact ID.
    *
    * @param request - The request {@link RegistrarApiGetContactRequest}
    * @returns A Promise of Contact
@@ -997,7 +1007,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * You can edit the contact coordinates.
+   * Update contact. You can edit the contact coordinates.
    *
    * @param request - The request {@link RegistrarApiUpdateContactRequest}
    * @returns A Promise of Contact
@@ -1047,7 +1057,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Returns a list of domains owned by the user.
+   * List domains. Returns a list of domains owned by the user.
    *
    * @param request - The request {@link RegistrarApiListDomainsRequest}
    * @returns A Promise of ListDomainsResponse
@@ -1077,8 +1087,9 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Returns a list of domains owned by the user with a renew status and if
-   * renewable, the maximum renew duration in years.
+   * List scaleway domains that can or not be renewed. Returns a list of domains
+   * owned by the user with a renew status and if renewable, the maximum renew
+   * duration in years.
    *
    * @param request - The request {@link RegistrarApiListRenewableDomainsRequest}
    * @returns A Promise of ListRenewableDomainsResponse
@@ -1088,7 +1099,7 @@ export class RegistrarAPI extends ParentAPI {
   ) => enrichForPagination('domains', this.pageOfListRenewableDomains, request)
 
   /**
-   * Returns a the domain with more informations.
+   * Get domain. Returns a the domain with more informations.
    *
    * @param request - The request {@link RegistrarApiGetDomainRequest}
    * @returns A Promise of Domain
@@ -1126,9 +1137,9 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Update the domain contacts or create a new one.<br/> If you add the same
-   * contact for multiple roles. Only one ID will be created and used for all of
-   * them.
+   * Update a domain. Update the domain contacts or create a new one.<br/> If
+   * you add the same contact for multiple roles. Only one ID will be created
+   * and used for all of them.
    *
    * @param request - The request {@link RegistrarApiUpdateDomainRequest}
    * @returns A Promise of Domain
@@ -1150,8 +1161,8 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Lock domain transfer. A locked domain transfer can't be transferred and the
-   * auth code can't be requested.
+   * Lock domain transfer. Lock domain transfer. A locked domain transfer can't
+   * be transferred and the auth code can't be requested.
    *
    * @param request - The request {@link RegistrarApiLockDomainTransferRequest}
    * @returns A Promise of Domain
@@ -1173,8 +1184,8 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Unlock domain transfer. An unlocked domain can be transferred and the auth
-   * code can be requested for this.
+   * Unlock domain transfer. Unlock domain transfer. An unlocked domain can be
+   * transferred and the auth code can be requested for this.
    *
    * @param request - The request {@link RegistrarApiUnlockDomainTransferRequest}
    * @returns A Promise of Domain
@@ -1196,7 +1207,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Enable domain auto renew
+   * Enable domain auto renew.
    *
    * @param request - The request
    *   {@link RegistrarApiEnableDomainAutoRenewRequest}
@@ -1219,7 +1230,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Disable domain auto renew
+   * Disable domain auto renew.
    *
    * @param request - The request
    *   {@link RegistrarApiDisableDomainAutoRenewRequest}
@@ -1242,10 +1253,10 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * If possible, return the auth code for an unlocked domain transfer, or an
-   * error if the domain is locked. Some TLD may have a different procedure to
-   * retrieve the auth code, in that case, the information is given in the
-   * message field.
+   * Return domain auth code. If possible, return the auth code for an unlocked
+   * domain transfer, or an error if the domain is locked. Some TLD may have a
+   * different procedure to retrieve the auth code, in that case, the
+   * information is given in the message field.
    *
    * @param request - The request {@link RegistrarApiGetDomainAuthCodeRequest}
    * @returns A Promise of GetDomainAuthCodeResponse
@@ -1265,9 +1276,9 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * If your domain has the default Scaleway NS and uses another registrar, you
-   * have to update the DS record manually. For the algorithm, here are the code
-   * numbers for each type:
+   * Update domain DNSSEC. If your domain has the default Scaleway NS and uses
+   * another registrar, you have to update the DS record manually. For the
+   * algorithm, here are the code numbers for each type:
    *
    * - 1: RSAMD5
    * - 2: DIFFIE_HELLMAN
@@ -1313,7 +1324,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Disable domain DNSSEC
+   * Disable domain DNSSEC.
    *
    * @param request - The request {@link RegistrarApiDisableDomainDNSSECRequest}
    * @returns A Promise of Domain
@@ -1335,7 +1346,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Search a domain (or at maximum, 10 domains).
+   * Search available domains. Search a domain (or at maximum, 10 domains).
    *
    * If the TLD list is empty or not set the search returns the results from the
    * most popular TLDs.
@@ -1361,7 +1372,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Create domain hostname with glue IPs
+   * Create domain hostname with glue IPs.
    *
    * @param request - The request {@link RegistrarApiCreateDomainHostRequest}
    * @returns A Promise of Host
@@ -1407,7 +1418,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * List domain hostnames with they glue IPs
+   * List domain hostnames with they glue IPs.
    *
    * @param request - The request {@link RegistrarApiListDomainHostsRequest}
    * @returns A Promise of ListDomainHostsResponse
@@ -1416,7 +1427,7 @@ export class RegistrarAPI extends ParentAPI {
     enrichForPagination('hosts', this.pageOfListDomainHosts, request)
 
   /**
-   * Update domain hostname with glue IPs
+   * Update domain hostname with glue IPs.
    *
    * @param request - The request {@link RegistrarApiUpdateDomainHostRequest}
    * @returns A Promise of Host
@@ -1441,7 +1452,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Delete domain hostname
+   * Delete domain hostname.
    *
    * @param request - The request {@link RegistrarApiDeleteDomainHostRequest}
    * @returns A Promise of Host

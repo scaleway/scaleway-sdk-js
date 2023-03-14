@@ -224,7 +224,7 @@ export class API extends ParentAPI {
   ]
 
   /**
-   * Get availability for all server types.
+   * Get availability. Get availability for all server types.
    *
    * @param request - The request {@link GetServerTypesAvailabilityRequest}
    * @returns A Promise of GetServerTypesAvailabilityResponse
@@ -248,7 +248,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get server types technical details.
+   * List server types. Get server types technical details.
    *
    * @param request - The request {@link ListServersTypesRequest}
    * @returns A Promise of ListServersTypesResponse
@@ -270,7 +270,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get volumes technical details.
+   * List volumes types. Get volumes technical details.
    *
    * @param request - The request {@link ListVolumesTypesRequest}
    * @returns A Promise of ListVolumesTypesResponse
@@ -323,7 +323,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all servers
+   * List all servers.
    *
    * @param request - The request {@link ListServersRequest}
    * @returns A Promise of ListServersResponse
@@ -348,7 +348,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a server with the given ID.
+   * Delete a server. Delete a server with the given ID.
    *
    * @param request - The request {@link DeleteServerRequest}
    */
@@ -362,7 +362,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Get the details of a specified Server.
+   * Get a server. Get the details of a specified Server.
    *
    * @param request - The request {@link GetServerRequest}
    * @returns A Promise of GetServerResponse
@@ -412,7 +412,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all actions that can currently be performed on a server.
+   * List server actions. List all actions that can currently be performed on a
+   * server.
    *
    * @param request - The request {@link ListServerActionsRequest}
    * @returns A Promise of ListServerActionsResponse
@@ -430,12 +431,13 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Perform power related actions on a server. Be wary that when terminating a
-   * server, all the attached volumes (local _and_ block storage) are deleted.
-   * So, if you want to keep your local volumes, you must use the `archive`
-   * action instead of `terminate`. And if you want to keep block-storage
-   * volumes, **you must** detach it beforehand you issue the `terminate` call.
-   * For more information, read the [Volumes](#volumes-7e8a39) documentation.
+   * Perform action. Perform power related actions on a server. Be wary that
+   * when terminating a server, all the attached volumes (local _and_ block
+   * storage) are deleted. So, if you want to keep your local volumes, you must
+   * use the `archive` action instead of `terminate`. And if you want to keep
+   * block-storage volumes, **you must** detach it beforehand you issue the
+   * `terminate` call. For more information, read the [Volumes](#volumes-7e8a39)
+   * documentation.
    *
    * @param request - The request {@link ServerActionRequest}
    * @returns A Promise of ServerActionResponse
@@ -457,7 +459,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all user data keys registered on a given server.
+   * List user data. List all user data keys registered on a given server.
    *
    * @param request - The request {@link ListServerUserDataRequest}
    * @returns A Promise of ListServerUserDataResponse
@@ -478,7 +480,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the given key from a server user data.
+   * Delete user data. Delete the given key from a server user data.
    *
    * @param request - The request {@link DeleteServerUserDataRequest}
    */
@@ -517,7 +519,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all images available in an account.
+   * List instance images. List all images available in an account.
    *
    * @param request - The request {@link ListImagesRequest}
    * @returns A Promise of ListImagesResponse
@@ -526,7 +528,7 @@ export class API extends ParentAPI {
     enrichForPagination('images', this.pageOfListImages, request)
 
   /**
-   * Get details of an image with the given ID.
+   * Get an instance image. Get details of an image with the given ID.
    *
    * @param request - The request {@link GetImageRequest}
    * @returns A Promise of GetImageResponse
@@ -544,7 +546,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create an instance image
+   * Create an instance image.
    *
    * @param request - The request {@link CreateImageRequest}
    * @returns A Promise of CreateImageResponse
@@ -582,7 +584,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the image with the given ID.
+   * Delete an instance image. Delete the image with the given ID.
    *
    * @param request - The request {@link DeleteImageRequest}
    */
@@ -618,7 +620,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List snapshots
+   * List snapshots.
    *
    * @param request - The request {@link ListSnapshotsRequest}
    * @returns A Promise of ListSnapshotsResponse
@@ -627,7 +629,7 @@ export class API extends ParentAPI {
     enrichForPagination('snapshots', this.pageOfListSnapshots, request)
 
   /**
-   * Create a snapshot from a given volume or from a QCOW2 file
+   * Create a snapshot from a given volume or from a QCOW2 file.
    *
    * @param request - The request {@link CreateSnapshotRequest}
    * @returns A Promise of CreateSnapshotResponse
@@ -649,7 +651,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get details of a snapshot with the given ID.
+   * Get a snapshot. Get details of a snapshot with the given ID.
    *
    * @param request - The request {@link GetSnapshotRequest}
    * @returns A Promise of GetSnapshotResponse
@@ -683,7 +685,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the snapshot with the given ID.
+   * Delete a snapshot. Delete the snapshot with the given ID.
    *
    * @param request - The request {@link DeleteSnapshotRequest}
    */
@@ -697,7 +699,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Export a snapshot to a given S3 bucket in the same region.
+   * Export a snapshot. Export a snapshot to a given S3 bucket in the same
+   * region.
    *
    * @param request - The request {@link ExportSnapshotRequest}
    * @returns A Promise of ExportSnapshotResponse
@@ -748,7 +751,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List volumes
+   * List volumes.
    *
    * @param request - The request {@link ListVolumesRequest}
    * @returns A Promise of ListVolumesResponse
@@ -757,7 +760,7 @@ export class API extends ParentAPI {
     enrichForPagination('volumes', this.pageOfListVolumes, request)
 
   /**
-   * Create a volume
+   * Create a volume.
    *
    * @param request - The request {@link CreateVolumeRequest}
    * @returns A Promise of CreateVolumeResponse
@@ -779,7 +782,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get details of a volume with the given ID.
+   * Get a volume. Get details of a volume with the given ID.
    *
    * @param request - The request {@link GetVolumeRequest}
    * @returns A Promise of GetVolumeResponse
@@ -797,9 +800,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Replace name and/or size properties of given ID volume with the given
-   * value(s). Any volume name can be changed while, for now, only `b_ssd`
-   * volume growing is supported.
+   * Update a volume. Replace name and/or size properties of given ID volume
+   * with the given value(s). Any volume name can be changed while, for now,
+   * only `b_ssd` volume growing is supported.
    *
    * @param request - The request {@link UpdateVolumeRequest}
    * @returns A Promise of UpdateVolumeResponse
@@ -821,7 +824,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the volume with the given ID.
+   * Delete a volume. Delete the volume with the given ID.
    *
    * @param request - The request {@link DeleteVolumeRequest}
    */
@@ -863,7 +866,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all security groups available in an account.
+   * List security groups. List all security groups available in an account.
    *
    * @param request - The request {@link ListSecurityGroupsRequest}
    * @returns A Promise of ListSecurityGroupsResponse
@@ -876,7 +879,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a security group
+   * Create a security group.
    *
    * @param request - The request {@link CreateSecurityGroupRequest}
    * @returns A Promise of CreateSecurityGroupResponse
@@ -898,7 +901,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get the details of a Security Group with the given ID.
+   * Get a security group. Get the details of a Security Group with the given
+   * ID.
    *
    * @param request - The request {@link GetSecurityGroupRequest}
    * @returns A Promise of GetSecurityGroupResponse
@@ -919,7 +923,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a security group
+   * Delete a security group.
    *
    * @param request - The request {@link DeleteSecurityGroupRequest}
    */
@@ -952,7 +956,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Lists the default rules applied to all the security groups.
+   * Get default rules. Lists the default rules applied to all the security
+   * groups.
    *
    * @param request - The request {@link ListDefaultSecurityGroupRulesRequest}
    * @returns A Promise of ListSecurityGroupRulesResponse
@@ -993,7 +998,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List rules
+   * List rules.
    *
    * @param request - The request {@link ListSecurityGroupRulesRequest}
    * @returns A Promise of ListSecurityGroupRulesResponse
@@ -1002,7 +1007,7 @@ export class API extends ParentAPI {
     enrichForPagination('rules', this.pageOfListSecurityGroupRules, request)
 
   /**
-   * Create rule
+   * Create rule.
    *
    * @param request - The request {@link CreateSecurityGroupRuleRequest}
    * @returns A Promise of CreateSecurityGroupRuleResponse
@@ -1029,9 +1034,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Replaces the rules of the security group with the rules provided. This
-   * endpoint supports the update of existing rules, creation of new rules and
-   * deletion of existing rules when they are not passed in the request.
+   * Update all the rules of a security group. Replaces the rules of the
+   * security group with the rules provided. This endpoint supports the update
+   * of existing rules, creation of new rules and deletion of existing rules
+   * when they are not passed in the request.
    *
    * @param request - The request {@link SetSecurityGroupRulesRequest}
    * @returns A Promise of SetSecurityGroupRulesResponse
@@ -1056,7 +1062,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a security group rule with the given ID.
+   * Delete rule. Delete a security group rule with the given ID.
    *
    * @param request - The request {@link DeleteSecurityGroupRuleRequest}
    */
@@ -1078,7 +1084,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Get details of a security group rule with the given ID.
+   * Get rule. Get details of a security group rule with the given ID.
    *
    * @param request - The request {@link GetSecurityGroupRuleRequest}
    * @returns A Promise of GetSecurityGroupRuleResponse
@@ -1153,7 +1159,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all placement groups.
+   * List placement groups. List all placement groups.
    *
    * @param request - The request {@link ListPlacementGroupsRequest}
    * @returns A Promise of ListPlacementGroupsResponse
@@ -1166,7 +1172,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new placement group.
+   * Create a placement group. Create a new placement group.
    *
    * @param request - The request {@link CreatePlacementGroupRequest}
    * @returns A Promise of CreatePlacementGroupResponse
@@ -1190,7 +1196,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get the given placement group.
+   * Get a placement group. Get the given placement group.
    *
    * @param request - The request {@link GetPlacementGroupRequest}
    * @returns A Promise of GetPlacementGroupResponse
@@ -1211,7 +1217,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set all parameters of the given placement group.
+   * Set placement group. Set all parameters of the given placement group.
    *
    * @param request - The request {@link SetPlacementGroupRequest}
    * @returns A Promise of SetPlacementGroupResponse
@@ -1236,7 +1242,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update one or more parameter of the given placement group.
+   * Update a placement group. Update one or more parameter of the given
+   * placement group.
    *
    * @param request - The request {@link UpdatePlacementGroupRequest}
    * @returns A Promise of UpdatePlacementGroupResponse
@@ -1278,7 +1285,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Get all servers belonging to the given placement group.
+   * Get placement group servers. Get all servers belonging to the given
+   * placement group.
    *
    * @param request - The request {@link GetPlacementGroupServersRequest}
    * @returns A Promise of GetPlacementGroupServersResponse
@@ -1301,7 +1309,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set all servers belonging to the given placement group.
+   * Set placement group servers. Set all servers belonging to the given
+   * placement group.
    *
    * @param request - The request {@link SetPlacementGroupServersRequest}
    * @returns A Promise of SetPlacementGroupServersResponse
@@ -1328,7 +1337,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update all servers belonging to the given placement group.
+   * Update placement group servers. Update all servers belonging to the given
+   * placement group.
    *
    * @param request - The request {@link UpdatePlacementGroupServersRequest}
    * @returns A Promise of UpdatePlacementGroupServersResponse
@@ -1383,7 +1393,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all flexible IPs
+   * List all flexible IPs.
    *
    * @param request - The request {@link ListIpsRequest}
    * @returns A Promise of ListIpsResponse
@@ -1392,7 +1402,7 @@ export class API extends ParentAPI {
     enrichForPagination('ips', this.pageOfListIps, request)
 
   /**
-   * Reserve a flexible IP
+   * Reserve a flexible IP.
    *
    * @param request - The request {@link CreateIpRequest}
    * @returns A Promise of CreateIpResponse
@@ -1414,7 +1424,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get details of an IP with the given ID or address.
+   * Get a flexible IP. Get details of an IP with the given ID or address.
    *
    * @param request - The request {@link GetIpRequest}
    * @returns A Promise of GetIpResponse
@@ -1432,7 +1442,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a flexible IP
+   * Update a flexible IP.
    *
    * @param request - The request {@link UpdateIpRequest}
    * @returns A Promise of UpdateIpResponse
@@ -1454,7 +1464,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the IP with the given ID.
+   * Delete a flexible IP. Delete the IP with the given ID.
    *
    * @param request - The request {@link DeleteIpRequest}
    */
@@ -1495,7 +1505,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all private NICs of a given server.
+   * List all private NICs. List all private NICs of a given server.
    *
    * @param request - The request {@link ListPrivateNICsRequest}
    * @returns A Promise of ListPrivateNICsResponse
@@ -1529,7 +1539,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get private NIC properties.
+   * Get a private NIC. Get private NIC properties.
    *
    * @param request - The request {@link GetPrivateNICRequest}
    * @returns A Promise of GetPrivateNICResponse
@@ -1553,7 +1563,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update one or more parameter/s to a given private NIC.
+   * Update a private NIC. Update one or more parameter/s to a given private
+   * NIC.
    *
    * @param request - The request {@link UpdatePrivateNICRequest}
    * @returns A Promise of PrivateNIC
@@ -1623,7 +1634,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List bootscripts
+   * List bootscripts.
    *
    * @deprecated
    * @param request - The request {@link ListBootscriptsRequest}
@@ -1633,7 +1644,7 @@ export class API extends ParentAPI {
     enrichForPagination('bootscripts', this.pageOfListBootscripts, request)
 
   /**
-   * Get details of a bootscript with the given ID.
+   * Get bootscripts. Get details of a bootscript with the given ID.
    *
    * @deprecated
    * @param request - The request {@link GetBootscriptRequest}

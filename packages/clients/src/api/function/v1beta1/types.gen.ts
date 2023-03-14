@@ -197,7 +197,7 @@ export interface Function {
   secretEnvironmentVariables: SecretHashedValue[]
   region: Region
   /**
-   * Possible values:
+   * Configure how HTTP and HTTPS requests are handled. Possible values:
    *
    * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.
@@ -492,7 +492,7 @@ export type CreateFunctionRequest = {
   description?: string
   secretEnvironmentVariables?: Secret[]
   /**
-   * Possible values:
+   * Configure how HTTP and HTTPS requests are handled. Possible values:
    *
    * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.
@@ -520,7 +520,7 @@ export type UpdateFunctionRequest = {
   description?: string
   secretEnvironmentVariables?: Secret[]
   /**
-   * Possible values:
+   * Configure how HTTP and HTTPS requests are handled. Possible values:
    *
    * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.
