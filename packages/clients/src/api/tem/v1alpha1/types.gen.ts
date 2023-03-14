@@ -100,6 +100,8 @@ export interface Email {
   rcptTo: string
   /** Type of the recipient. */
   rcptType: EmailRcptType
+  /** Subject of the email. */
+  subject: string
   /** Creation date of the email object. */
   createdAt?: Date
   /** Last update time of the email object. */
@@ -240,6 +242,8 @@ export type ListEmailsRequest = {
   mailTo?: string
   /** Optional, list emails having any of this status. */
   statuses?: EmailStatus[]
+  /** Optional, list emails having this subject. */
+  subject?: string
 }
 
 export type GetStatisticsRequest = {
@@ -279,8 +283,12 @@ export type CreateDomainRequest = {
    * config.
    */
   region?: Region
+  /** ID of the project to which the domain belongs. */
   projectId?: string
+  /** Fully qualified domain dame. */
   domainName: string
+  /** Accept the Scaleway Terms of Service. */
+  acceptTos: boolean
 }
 
 export type GetDomainRequest = {
