@@ -104,7 +104,7 @@ const jsonContentHeaders = {
 /**
  * IoT API.
  *
- * This API allows you to manage IoT hubs and devices.
+ * This API allows you to manage IoT hubs and devices. IoT API.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -134,7 +134,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List hubs
+   * List hubs.
    *
    * @param request - The request {@link ListHubsRequest}
    * @returns A Promise of ListHubsResponse
@@ -143,7 +143,7 @@ export class API extends ParentAPI {
     enrichForPagination('hubs', this.pageOfListHubs, request)
 
   /**
-   * Create a hub
+   * Create a hub.
    *
    * @param request - The request {@link CreateHubRequest}
    * @returns A Promise of Hub
@@ -165,7 +165,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a hub
+   * Get a hub.
    *
    * @param request - The request {@link GetHubRequest}
    * @returns A Promise of Hub
@@ -202,7 +202,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a hub
+   * Update a hub.
    *
    * @param request - The request {@link UpdateHubRequest}
    * @returns A Promise of Hub
@@ -224,7 +224,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Enable a hub
+   * Enable a hub.
    *
    * @param request - The request {@link EnableHubRequest}
    * @returns A Promise of Hub
@@ -244,7 +244,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Disable a hub
+   * Disable a hub.
    *
    * @param request - The request {@link DisableHubRequest}
    * @returns A Promise of Hub
@@ -264,7 +264,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a hub
+   * Delete a hub.
    *
    * @param request - The request {@link DeleteHubRequest}
    */
@@ -279,7 +279,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Get a hub's metrics
+   * Get a hub's metrics.
    *
    * @deprecated
    * @param request - The request {@link GetHubMetricsRequest}
@@ -299,7 +299,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set the certificate authority of a hub
+   * Set the certificate authority of a hub.
    *
    * @param request - The request {@link SetHubCARequest}
    * @returns A Promise of Hub
@@ -321,7 +321,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get the certificate authority of a hub
+   * Get the certificate authority of a hub.
    *
    * @param request - The request {@link GetHubCARequest}
    * @returns A Promise of GetHubCAResponse
@@ -363,7 +363,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List devices
+   * List devices.
    *
    * @param request - The request {@link ListDevicesRequest}
    * @returns A Promise of ListDevicesResponse
@@ -372,7 +372,7 @@ export class API extends ParentAPI {
     enrichForPagination('devices', this.pageOfListDevices, request)
 
   /**
-   * Add a device
+   * Add a device.
    *
    * @param request - The request {@link CreateDeviceRequest}
    * @returns A Promise of CreateDeviceResponse
@@ -394,7 +394,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a device
+   * Get a device.
    *
    * @param request - The request {@link GetDeviceRequest}
    * @returns A Promise of Device
@@ -412,7 +412,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a device
+   * Update a device.
    *
    * @param request - The request {@link UpdateDeviceRequest}
    * @returns A Promise of Device
@@ -434,7 +434,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Enable a device
+   * Enable a device.
    *
    * @param request - The request {@link EnableDeviceRequest}
    * @returns A Promise of Device
@@ -454,7 +454,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Disable a device
+   * Disable a device.
    *
    * @param request - The request {@link DisableDeviceRequest}
    * @returns A Promise of Device
@@ -474,7 +474,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Renew a device certificate
+   * Renew a device certificate.
    *
    * @param request - The request {@link RenewDeviceCertificateRequest}
    * @returns A Promise of RenewDeviceCertificateResponse
@@ -497,7 +497,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set a custom certificate on a device
+   * Set a custom certificate on a device.
    *
    * @param request - The request {@link SetDeviceCertificateRequest}
    * @returns A Promise of SetDeviceCertificateResponse
@@ -522,7 +522,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a device's certificate
+   * Get a device's certificate.
    *
    * @param request - The request {@link GetDeviceCertificateRequest}
    * @returns A Promise of GetDeviceCertificateResponse
@@ -543,7 +543,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Remove a device
+   * Remove a device.
    *
    * @param request - The request {@link DeleteDeviceRequest}
    */
@@ -557,7 +557,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Get a device's metrics
+   * Get a device's metrics.
    *
    * @deprecated
    * @param request - The request {@link GetDeviceMetricsRequest}
@@ -599,7 +599,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List routes
+   * List routes.
    *
    * @param request - The request {@link ListRoutesRequest}
    * @returns A Promise of ListRoutesResponse
@@ -608,7 +608,7 @@ export class API extends ParentAPI {
     enrichForPagination('routes', this.pageOfListRoutes, request)
 
   /**
-   * Multiple route kinds can be created:
+   * Create a route. Multiple route kinds can be created:
    *
    * - Database Route. Create a route that will record subscribed MQTT messages
    *   into your database. <b>You need to manage the database by yourself</b>.
@@ -639,7 +639,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a route
+   * Update a route.
    *
    * @param request - The request {@link UpdateRouteRequest}
    * @returns A Promise of Route
@@ -661,7 +661,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a route
+   * Get a route.
    *
    * @param request - The request {@link GetRouteRequest}
    * @returns A Promise of Route
@@ -679,7 +679,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a route
+   * Delete a route.
    *
    * @param request - The request {@link DeleteRouteRequest}
    */
@@ -718,7 +718,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List the Networks
+   * List the Networks.
    *
    * @param request - The request {@link ListNetworksRequest}
    * @returns A Promise of ListNetworksResponse
@@ -727,7 +727,7 @@ export class API extends ParentAPI {
     enrichForPagination('networks', this.pageOfListNetworks, request)
 
   /**
-   * Create a new Network
+   * Create a new Network.
    *
    * @param request - The request {@link CreateNetworkRequest}
    * @returns A Promise of CreateNetworkResponse
@@ -749,7 +749,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrieve a specific Network
+   * Retrieve a specific Network.
    *
    * @param request - The request {@link GetNetworkRequest}
    * @returns A Promise of Network
@@ -767,7 +767,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a Network
+   * Delete a Network.
    *
    * @param request - The request {@link DeleteNetworkRequest}
    */
@@ -781,7 +781,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * BETA - Get a Cloud Twin Document
+   * BETA - Get a Cloud Twin Document.
    *
    * @param request - The request {@link GetTwinDocumentRequest}
    * @returns A Promise of TwinDocument
@@ -805,7 +805,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * BETA - Update a Cloud Twin Document
+   * BETA - Update a Cloud Twin Document.
    *
    * @param request - The request {@link PutTwinDocumentRequest}
    * @returns A Promise of TwinDocument
@@ -833,7 +833,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * BETA - Patch a Cloud Twin Document
+   * BETA - Patch a Cloud Twin Document.
    *
    * @param request - The request {@link PatchTwinDocumentRequest}
    * @returns A Promise of TwinDocument
@@ -861,7 +861,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * BETA - Delete a Cloud Twin Document
+   * BETA - Delete a Cloud Twin Document.
    *
    * @param request - The request {@link DeleteTwinDocumentRequest}
    */
@@ -878,7 +878,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * BETA - List the documents of a Cloud Twin
+   * BETA - List the documents of a Cloud Twin.
    *
    * @param request - The request {@link ListTwinDocumentsRequest}
    * @returns A Promise of ListTwinDocumentsResponse
@@ -896,7 +896,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * BETA - Delete all the documents of a Cloud Twin
+   * BETA - Delete all the documents of a Cloud Twin.
    *
    * @param request - The request {@link DeleteTwinDocumentsRequest}
    */

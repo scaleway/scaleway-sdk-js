@@ -313,8 +313,8 @@ export interface OfferOptionOffer {
   /** Name of the option. */
   name: string
   /**
-   * If true the option is enabled and included by default in the offer If false
-   * the option is available for the offer but not included by default.
+   * If true the option is enabled and included by default in the offer. If
+   * false the option is available for the offer but not included by default.
    */
   enabled: boolean
   /** Period of subscription for the offer. */

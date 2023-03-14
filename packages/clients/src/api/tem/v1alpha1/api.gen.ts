@@ -48,14 +48,14 @@ const jsonContentHeaders = {
 /**
  * Transactional Email API.
  *
- * Tem.
+ * Tem. Transactional Email API.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par']
 
   /**
-   * Send an email
+   * Send an email.
    *
    * @param request - The request {@link CreateEmailRequest}
    * @returns A Promise of CreateEmailResponse
@@ -77,7 +77,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get information about an email
+   * Get information about an email.
    *
    * @param request - The request {@link GetEmailRequest}
    * @returns A Promise of Email
@@ -144,7 +144,7 @@ export class API extends ParentAPI {
 
   /**
    * List emails sent from a domain and/or for a project and/or for an
-   * organization
+   * organization.
    *
    * @param request - The request {@link ListEmailsRequest}
    * @returns A Promise of ListEmailsResponse
@@ -153,7 +153,7 @@ export class API extends ParentAPI {
     enrichForPagination('emails', this.pageOfListEmails, request)
 
   /**
-   * Get statistics on the email statuses
+   * Get statistics on the email statuses.
    *
    * @param request - The request {@link GetStatisticsRequest}
    * @returns A Promise of Statistics
@@ -178,7 +178,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Try to cancel an email if it has not yet been sent
+   * Try to cancel an email if it has not yet been sent.
    *
    * @param request - The request {@link CancelEmailRequest}
    * @returns A Promise of Email
@@ -198,7 +198,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Register a domain in a project
+   * Register a domain in a project.
    *
    * @param request - The request {@link CreateDomainRequest}
    * @returns A Promise of Domain
@@ -220,7 +220,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get information about a domain
+   * Get information about a domain.
    *
    * @param request - The request {@link GetDomainRequest}
    * @returns A Promise of Domain
@@ -281,7 +281,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List domains in a project and/or in an organization
+   * List domains in a project and/or in an organization.
    *
    * @param request - The request {@link ListDomainsRequest}
    * @returns A Promise of ListDomainsResponse
@@ -290,7 +290,7 @@ export class API extends ParentAPI {
     enrichForPagination('domains', this.pageOfListDomains, request)
 
   /**
-   * Revoke a domain
+   * Revoke a domain.
    *
    * @param request - The request {@link RevokeDomainRequest}
    * @returns A Promise of Domain
@@ -310,7 +310,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Ask for an immediate check of a domain (DNS check)
+   * Ask for an immediate check of a domain (DNS check).
    *
    * @param request - The request {@link CheckDomainRequest}
    * @returns A Promise of Domain

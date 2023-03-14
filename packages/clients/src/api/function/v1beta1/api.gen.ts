@@ -105,7 +105,7 @@ const jsonContentHeaders = {
 /**
  * Functions API.
  *
- * Serverless functions API.
+ * Serverless functions API. Functions API.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -137,7 +137,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all your namespaces
+   * List all your namespaces.
    *
    * @param request - The request {@link ListNamespacesRequest}
    * @returns A Promise of ListNamespacesResponse
@@ -146,7 +146,7 @@ export class API extends ParentAPI {
     enrichForPagination('namespaces', this.pageOfListNamespaces, request)
 
   /**
-   * Get the namespace associated with the given id.
+   * Get a namespace. Get the namespace associated with the given id.
    *
    * @param request - The request {@link GetNamespaceRequest}
    * @returns A Promise of Namespace
@@ -184,7 +184,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new namespace
+   * Create a new namespace.
    *
    * @param request - The request {@link CreateNamespaceRequest}
    * @returns A Promise of Namespace
@@ -206,7 +206,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the space associated with the given id.
+   * Update an existing namespace. Update the space associated with the given
+   * id.
    *
    * @param request - The request {@link UpdateNamespaceRequest}
    * @returns A Promise of Namespace
@@ -228,7 +229,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the namespace associated with the given id.
+   * Delete an existing namespace. Delete the namespace associated with the
+   * given id.
    *
    * @param request - The request {@link DeleteNamespaceRequest}
    * @returns A Promise of Namespace
@@ -270,7 +272,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all your functions
+   * List all your functions.
    *
    * @param request - The request {@link ListFunctionsRequest}
    * @returns A Promise of ListFunctionsResponse
@@ -279,7 +281,7 @@ export class API extends ParentAPI {
     enrichForPagination('functions', this.pageOfListFunctions, request)
 
   /**
-   * Get the function associated with the given id.
+   * Get a function. Get the function associated with the given id.
    *
    * @param request - The request {@link GetFunctionRequest}
    * @returns A Promise of Function
@@ -317,7 +319,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new function
+   * Create a new function.
    *
    * @param request - The request {@link CreateFunctionRequest}
    * @returns A Promise of Function
@@ -339,7 +341,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the function associated with the given id.
+   * Update an existing function. Update the function associated with the given
+   * id.
    *
    * @param request - The request {@link UpdateFunctionRequest}
    * @returns A Promise of Function
@@ -361,7 +364,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the function associated with the given id.
+   * Delete a function. Delete the function associated with the given id.
    *
    * @param request - The request {@link DeleteFunctionRequest}
    * @returns A Promise of Function
@@ -379,7 +382,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Deploy a function associated with the given id.
+   * Deploy a function. Deploy a function associated with the given id.
    *
    * @param request - The request {@link DeployFunctionRequest}
    * @returns A Promise of Function
@@ -402,7 +405,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List available function runtimes.
+   * List function runtimes. List available function runtimes.
    *
    * @param request - The request {@link ListFunctionRuntimesRequest}
    * @returns A Promise of ListFunctionRuntimesResponse
@@ -422,7 +425,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get an upload URL of a function associated with the given id.
+   * Get an upload URL of a function. Get an upload URL of a function associated
+   * with the given id.
    *
    * @param request - The request {@link GetFunctionUploadURLRequest}
    * @returns A Promise of UploadURL
@@ -444,7 +448,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a download URL for a function associated with the given id.
+   * Get a download URL of a function. Get a download URL for a function
+   * associated with the given id.
    *
    * @param request - The request {@link GetFunctionDownloadURLRequest}
    * @returns A Promise of DownloadURL
@@ -486,7 +491,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all your crons
+   * List all your crons.
    *
    * @param request - The request {@link ListCronsRequest}
    * @returns A Promise of ListCronsResponse
@@ -495,7 +500,7 @@ export class API extends ParentAPI {
     enrichForPagination('crons', this.pageOfListCrons, request)
 
   /**
-   * Get the cron associated with the given id.
+   * Get a cron. Get the cron associated with the given id.
    *
    * @param request - The request {@link GetCronRequest}
    * @returns A Promise of Cron
@@ -532,7 +537,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new cron
+   * Create a new cron.
    *
    * @param request - The request {@link CreateCronRequest}
    * @returns A Promise of Cron
@@ -554,7 +559,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the cron associated with the given id.
+   * Update an existing cron. Update the cron associated with the given id.
    *
    * @param request - The request {@link UpdateCronRequest}
    * @returns A Promise of Cron
@@ -576,7 +581,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the cron associated with the given id.
+   * Delete an existing cron. Delete the cron associated with the given id.
    *
    * @param request - The request {@link DeleteCronRequest}
    * @returns A Promise of Cron
@@ -617,7 +622,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List your application logs
+   * List your application logs.
    *
    * @param request - The request {@link ListLogsRequest}
    * @returns A Promise of ListLogsResponse
@@ -647,7 +652,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all domain name bindings
+   * List all domain name bindings.
    *
    * @param request - The request {@link ListDomainsRequest}
    * @returns A Promise of ListDomainsResponse
@@ -656,7 +661,7 @@ export class API extends ParentAPI {
     enrichForPagination('domains', this.pageOfListDomains, request)
 
   /**
-   * Get a domain name binding
+   * Get a domain name binding.
    *
    * @param request - The request {@link GetDomainRequest}
    * @returns A Promise of Domain
@@ -694,7 +699,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a domain name binding
+   * Create a domain name binding.
    *
    * @param request - The request {@link CreateDomainRequest}
    * @returns A Promise of Domain
@@ -716,7 +721,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a domain name binding
+   * Delete a domain name binding.
    *
    * @param request - The request {@link DeleteDomainRequest}
    * @returns A Promise of Domain
@@ -733,7 +738,11 @@ export class API extends ParentAPI {
       unmarshalDomain,
     )
 
-  /** @deprecated */
+  /**
+   * @deprecated
+   * @param request - The request {@link IssueJWTRequest}
+   * @returns A Promise of Token
+   */
   issueJWT = (request: Readonly<IssueJWTRequest> = {}) =>
     this.client.fetch<Token>(
       {
@@ -762,7 +771,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new revocable token
+   * Create a new revocable token.
    *
    * @param request - The request {@link CreateTokenRequest}
    * @returns A Promise of Token
@@ -784,7 +793,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a token
+   * Get a token.
    *
    * @param request - The request {@link GetTokenRequest}
    * @returns A Promise of Token
@@ -844,7 +853,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all tokens
+   * List all tokens.
    *
    * @param request - The request {@link ListTokensRequest}
    * @returns A Promise of ListTokensResponse
@@ -853,7 +862,7 @@ export class API extends ParentAPI {
     enrichForPagination('tokens', this.pageOfListTokens, request)
 
   /**
-   * Delete a token
+   * Delete a token.
    *
    * @param request - The request {@link DeleteTokenRequest}
    * @returns A Promise of Token

@@ -88,7 +88,7 @@ export class API extends ParentAPI {
   ]
 
   /**
-   * Create a cluster
+   * Create a cluster.
    *
    * @param request - The request {@link CreateClusterRequest}
    * @returns A Promise of Cluster
@@ -110,7 +110,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a cluster
+   * Update a cluster.
    *
    * @param request - The request {@link UpdateClusterRequest}
    * @returns A Promise of Cluster
@@ -132,7 +132,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a cluster
+   * Get a cluster.
    *
    * @param request - The request {@link GetClusterRequest}
    * @returns A Promise of Cluster
@@ -197,7 +197,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List clusters
+   * List clusters.
    *
    * @param request - The request {@link ListClustersRequest}
    * @returns A Promise of ListClustersResponse
@@ -206,10 +206,11 @@ export class API extends ParentAPI {
     enrichForPagination('clusters', this.pageOfListClusters, request)
 
   /**
-   * Upgrade your Database for Redis® cluster to a new version or scale it
-   * vertically / horizontally. Please note: scaling horizontally your Database
-   * for Redis® cluster won't renew its TLS certificate. In order to refresh the
-   * SSL certificate, you have to use the dedicated api route.
+   * Migrate your cluster architecture. Upgrade your Database for Redis® cluster
+   * to a new version or scale it vertically / horizontally. Please note:
+   * scaling horizontally your Database for Redis® cluster won't renew its TLS
+   * certificate. In order to refresh the SSL certificate, you have to use the
+   * dedicated api route.
    *
    * @param request - The request {@link MigrateClusterRequest}
    * @returns A Promise of Cluster
@@ -234,7 +235,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a cluster
+   * Delete a cluster.
    *
    * @param request - The request {@link DeleteClusterRequest}
    * @returns A Promise of Cluster
@@ -252,7 +253,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get metrics of a cluster
+   * Get metrics of a cluster.
    *
    * @param request - The request {@link GetClusterMetricsRequest}
    * @returns A Promise of ClusterMetricsResponse
@@ -298,7 +299,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List available node types
+   * List available node types.
    *
    * @param request - The request {@link ListNodeTypesRequest}
    * @returns A Promise of ListNodeTypesResponse
@@ -332,7 +333,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List available Redis™ versions
+   * List available Redis™ versions.
    *
    * @param request - The request {@link ListClusterVersionsRequest}
    * @returns A Promise of ListClusterVersionsResponse
@@ -341,7 +342,7 @@ export class API extends ParentAPI {
     enrichForPagination('versions', this.pageOfListClusterVersions, request)
 
   /**
-   * Get the TLS certificate of a cluster
+   * Get the TLS certificate of a cluster.
    *
    * @param request - The request {@link GetClusterCertificateRequest}
    * @returns A Promise of Blob
@@ -361,7 +362,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Renew the TLS certificate of a cluster
+   * Renew the TLS certificate of a cluster.
    *
    * @param request - The request {@link RenewClusterCertificateRequest}
    * @returns A Promise of Cluster
@@ -386,7 +387,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Add cluster settings
+   * Add cluster settings.
    *
    * @param request - The request {@link AddClusterSettingsRequest}
    * @returns A Promise of ClusterSettingsResponse
@@ -411,7 +412,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a cluster setting
+   * Delete a cluster setting.
    *
    * @param request - The request {@link DeleteClusterSettingRequest}
    * @returns A Promise of Cluster
@@ -432,7 +433,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set cluster settings
+   * Set cluster settings.
    *
    * @param request - The request {@link SetClusterSettingsRequest}
    * @returns A Promise of ClusterSettingsResponse
@@ -457,7 +458,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set ACL rules for a given cluster
+   * Set ACL rules for a given cluster.
    *
    * @param request - The request {@link SetAclRulesRequest}
    * @returns A Promise of SetAclRulesResponse
@@ -479,7 +480,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Add ACL rules for a given cluster
+   * Add ACL rules for a given cluster.
    *
    * @param request - The request {@link AddAclRulesRequest}
    * @returns A Promise of AddAclRulesResponse
@@ -501,7 +502,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an ACL rule for a given cluster
+   * Delete an ACL rule for a given cluster.
    *
    * @param request - The request {@link DeleteAclRuleRequest}
    * @returns A Promise of Cluster
@@ -519,7 +520,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get an ACL rule
+   * Get an ACL rule.
    *
    * @param request - The request {@link GetAclRuleRequest}
    * @returns A Promise of ACLRule
@@ -537,7 +538,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set endpoints for a given cluster
+   * Set endpoints for a given cluster.
    *
    * @param request - The request {@link SetEndpointsRequest}
    * @returns A Promise of SetEndpointsResponse
@@ -562,7 +563,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Add endpoints for a given cluster
+   * Add endpoints for a given cluster.
    *
    * @param request - The request {@link AddEndpointsRequest}
    * @returns A Promise of AddEndpointsResponse
@@ -587,7 +588,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an endpoint for a given cluster
+   * Delete an endpoint for a given cluster.
    *
    * @param request - The request {@link DeleteEndpointRequest}
    * @returns A Promise of Cluster
@@ -605,7 +606,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get an endpoint
+   * Get an endpoint.
    *
    * @param request - The request {@link GetEndpointRequest}
    * @returns A Promise of Endpoint

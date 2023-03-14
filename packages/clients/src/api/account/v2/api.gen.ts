@@ -29,12 +29,12 @@ const jsonContentHeaders = {
 /**
  * Account API.
  *
- * This API allows you to manage projects.
+ * User related data. This API allows you to manage projects.
  */
 export class API extends ParentAPI {
   /**
-   * Generate a new Project for an Organization, specifying its configuration
-   * including name and description.
+   * Create a new Project for an Organization. Generate a new Project for an
+   * Organization, specifying its configuration including name and description.
    *
    * @param request - The request {@link CreateProjectRequest}
    * @returns A Promise of Project
@@ -79,10 +79,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all Projects of an Organization. The response will include the total
-   * number of Projects as well as their associated Organizations, names and
-   * IDs. Other information include the creation and update date of the
-   * Project.
+   * List all Projects of an Organization. List all Projects of an Organization.
+   * The response will include the total number of Projects as well as their
+   * associated Organizations, names and IDs. Other information include the
+   * creation and update date of the Project.
    *
    * @param request - The request {@link ListProjectsRequest}
    * @returns A Promise of ListProjectsResponse
@@ -91,9 +91,9 @@ export class API extends ParentAPI {
     enrichForPagination('projects', this.pageOfListProjects, request)
 
   /**
-   * Retrieve information about an existing Project, specified by its Project
-   * ID. Its full details, including ID, name and description, are returned in
-   * the response object.
+   * Get an existing Project. Retrieve information about an existing Project,
+   * specified by its Project ID. Its full details, including ID, name and
+   * description, are returned in the response object.
    *
    * @param request - The request {@link GetProjectRequest}
    * @returns A Promise of Project
@@ -111,10 +111,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an existing Project, specified by its Project ID. The Project needs
-   * to be empty (meaning there are no resources left in it) to be deleted
-   * effectively. Note that deleting a Project is permanent, and cannot be
-   * undone.
+   * Delete an existing Project. Delete an existing Project, specified by its
+   * Project ID. The Project needs to be empty (meaning there are no resources
+   * left in it) to be deleted effectively. Note that deleting a Project is
+   * permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteProjectRequest}
    */
@@ -128,8 +128,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Update the parameters of an existing Project, specified by its Project ID.
-   * These parameters include the name and description.
+   * Update Project. Update the parameters of an existing Project, specified by
+   * its Project ID. These parameters include the name and description.
    *
    * @param request - The request {@link UpdateProjectRequest}
    * @returns A Promise of Project

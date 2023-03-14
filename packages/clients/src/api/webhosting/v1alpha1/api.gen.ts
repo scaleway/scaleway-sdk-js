@@ -42,7 +42,7 @@ export class API extends ParentAPI {
   public static readonly LOCALITIES: Region[] = ['fr-par']
 
   /**
-   * Create a hosting
+   * Create a hosting.
    *
    * @param request - The request {@link CreateHostingRequest}
    * @returns A Promise of Hosting
@@ -91,7 +91,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all hostings
+   * List all hostings.
    *
    * @param request - The request {@link ListHostingsRequest}
    * @returns A Promise of ListHostingsResponse
@@ -100,7 +100,7 @@ export class API extends ParentAPI {
     enrichForPagination('hostings', this.pageOfListHostings, request)
 
   /**
-   * Get the details of a Hosting with the given ID.
+   * Get a hosting. Get the details of a Hosting with the given ID.
    *
    * @param request - The request {@link GetHostingRequest}
    * @returns A Promise of Hosting
@@ -138,7 +138,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a hosting
+   * Update a hosting.
    *
    * @param request - The request {@link UpdateHostingRequest}
    * @returns A Promise of Hosting
@@ -160,7 +160,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a hosting with the given ID.
+   * Delete a hosting. Delete a hosting with the given ID.
    *
    * @param request - The request {@link DeleteHostingRequest}
    * @returns A Promise of Hosting
@@ -178,7 +178,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Restore a hosting with the given ID.
+   * Retore a hosting. Restore a hosting with the given ID.
    *
    * @param request - The request {@link RestoreHostingRequest}
    * @returns A Promise of Hosting
@@ -201,7 +201,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get the DNS records of a specified domain.
+   * Get the DNS records. Get the DNS records of a specified domain.
    *
    * @param request - The request {@link GetDomainDnsRecordsRequest}
    * @returns A Promise of DnsRecords
@@ -219,7 +219,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all offers
+   * List all offers.
    *
    * @param request - The request {@link ListOffersRequest}
    * @returns A Promise of ListOffersResponse

@@ -112,6 +112,7 @@ export type Protocol = 'tcp' | 'http'
  * protocol must be supported by the backend servers' software. For more
  * information on the different protocols available, see the [dedicated
  * documentation](https://www.scaleway.com/en/docs/network/load-balancer/reference-content/configuring-load-balancer/#choosing-a-proxy-protocol).
+ * Proxy protocol.
  */
 export type ProxyProtocol =
   | 'proxy_protocol_unknown'
@@ -478,41 +479,55 @@ export interface HealthCheck {
 
 /** Health check. http config. */
 export interface HealthCheckHttpConfig {
-  /** The HTTP URI to use when performing a health check on backend servers. */
+  /**
+   * HTTP URI used for the health check. The HTTP URI to use when performing a
+   * health check on backend servers.
+   */
   uri: string
-  /** The HTTP method used when performing a health check on backend servers. */
+  /**
+   * HTTP method used for the health check. The HTTP method used when performing
+   * a health check on backend servers.
+   */
   method: string
   /**
-   * The HTTP response code that should be returned for a health check to be
-   * considered successful.
+   * HTTP response code expected for a successful health check. The HTTP
+   * response code that should be returned for a health check to be considered
+   * successful.
    */
   code?: number
   /**
-   * The HTTP host header used when performing a health check on backend
-   * servers.
+   * HTTP host header used for the health check. The HTTP host header used when
+   * performing a health check on backend servers.
    */
   hostHeader: string
 }
 
 /** Health check. https config. */
 export interface HealthCheckHttpsConfig {
-  /** The HTTP URI to use when performing a health check on backend servers. */
+  /**
+   * HTTP URI used for the health check. The HTTP URI to use when performing a
+   * health check on backend servers.
+   */
   uri: string
-  /** The HTTP method used when performing a health check on backend servers. */
+  /**
+   * HTTP method used for the health check. The HTTP method used when performing
+   * a health check on backend servers.
+   */
   method: string
   /**
-   * The HTTP response code that should be returned for a health check to be
-   * considered successful.
+   * HTTP response code expected for a successful health check. The HTTP
+   * response code that should be returned for a health check to be considered
+   * successful.
    */
   code?: number
   /**
-   * The HTTP host header used when performing a health check on backend
-   * servers.
+   * HTTP host header used for the health check. The HTTP host header used when
+   * performing a health check on backend servers.
    */
   hostHeader: string
   /**
-   * The SNI value used when performing a health check on backend servers over
-   * SSL.
+   * SNI used for SSL health checks. The SNI value used when performing a health
+   * check on backend servers over SSL.
    */
   sni: string
 }
@@ -787,16 +802,18 @@ export interface Route {
 /** Route. match. */
 export interface RouteMatch {
   /**
-   * Value to match in the Server Name Indication TLS extension (SNI) field from
-   * an incoming connection made via an SSL/TLS transport layer. This field
-   * should be set for routes on TCP Load Balancers.
+   * Server Name Indication (SNI) value to match. Value to match in the Server
+   * Name Indication TLS extension (SNI) field from an incoming connection made
+   * via an SSL/TLS transport layer. This field should be set for routes on TCP
+   * Load Balancers.
    *
    * One-of ('matchType'): at most one of 'sni', 'hostHeader' could be set.
    */
   sni?: string
   /**
-   * Value to match in the HTTP Host request header from an incoming connection.
-   * This field should be set for routes on HTTP Load Balancers.
+   * HTTP host header to match. Value to match in the HTTP Host request header
+   * from an incoming connection. This field should be set for routes on HTTP
+   * Load Balancers.
    *
    * One-of ('matchType'): at most one of 'sni', 'hostHeader' could be set.
    */
@@ -839,7 +856,7 @@ export interface SubscriberEmailConfig {
   email: string
 }
 
-/** Webhook alert of subscriber. */
+/** Webhook alert of subscriber. Subscriber. webhook config. */
 export interface SubscriberWebhookConfig {
   /** URI to receive POST requests. */
   uri: string

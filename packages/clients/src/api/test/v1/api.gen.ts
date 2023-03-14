@@ -38,8 +38,8 @@ const jsonContentHeaders = {
 /**
  * Fake API.
  *
- * Test is a fake service that aim to manage fake humans. It is used for
- * internal and public end-to-end tests.
+ * No Auth Service for end-to-end testing. Test is a fake service that aim to
+ * manage fake humans. It is used for internal and public end-to-end tests.
  *
  * This service don't use the Scaleway authentication service but a fake one. It
  * allows to use this test service publicly without requiring a Scaleway
@@ -51,8 +51,8 @@ const jsonContentHeaders = {
  */
 export class API extends ParentAPI {
   /**
-   * Register a human and return a access-key and a secret-key that must be used
-   * in all other commands.
+   * Register a user. Register a human and return a access-key and a secret-key
+   * that must be used in all other commands.
    *
    * Hint: you can use other test commands by setting the SCW_SECRET_KEY env
    * variable.
@@ -93,7 +93,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all your humans
+   * List all your humans.
    *
    * @param request - The request {@link ListHumansRequest}
    * @returns A Promise of ListHumansResponse
@@ -102,7 +102,7 @@ export class API extends ParentAPI {
     enrichForPagination('humans', this.pageOfListHumans, request)
 
   /**
-   * Get the human details associated with the given id.
+   * Get human details. Get the human details associated with the given id.
    *
    * @param request - The request {@link GetHumanRequest}
    * @returns A Promise of Human
@@ -140,7 +140,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new human
+   * Create a new human.
    *
    * @param request - The request {@link CreateHumanRequest}
    * @returns A Promise of Human
@@ -159,7 +159,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the human associated with the given id.
+   * Update an existing human. Update the human associated with the given id.
    *
    * @param request - The request {@link UpdateHumanRequest}
    * @returns A Promise of Human
@@ -181,7 +181,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the human associated with the given id.
+   * Delete an existing human. Delete the human associated with the given id.
    *
    * @param request - The request {@link DeleteHumanRequest}
    * @returns A Promise of Human
@@ -199,7 +199,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Start a one hour running for the given human.
+   * Start a 1h running for the given human. Start a one hour running for the
+   * given human.
    *
    * @param request - The request {@link RunHumanRequest}
    * @returns A Promise of Human

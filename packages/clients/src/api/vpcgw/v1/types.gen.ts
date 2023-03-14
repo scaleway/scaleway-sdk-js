@@ -363,8 +363,9 @@ export interface PATRule {
 /** Set dhcp entries request. entry. */
 export interface SetDHCPEntriesRequestEntry {
   /**
-   * MAC address to give a static entry to. A matching entry will be upgraded to
-   * a reservation, and a matching reservation will be updated.
+   * MAC address to give a static entry to. MAC address to give a static entry
+   * to. A matching entry will be upgraded to a reservation, and a matching
+   * reservation will be updated.
    */
   macAddress: string
   /** IP address to give to the device. */
@@ -380,8 +381,8 @@ export interface SetDHCPEntriesResponse {
 /** Set pat rules request. rule. */
 export interface SetPATRulesRequestRule {
   /**
-   * Public port to listen on. Uniquely identifies the rule, and a matching rule
-   * will be updated with the new parameters.
+   * Public port to listen on. Public port to listen on. Uniquely identifies the
+   * rule, and a matching rule will be updated with the new parameters.
    */
   publicPort: number
   /** Private IP to forward data to. */

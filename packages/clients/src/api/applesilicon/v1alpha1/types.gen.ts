@@ -98,7 +98,10 @@ export interface ServerType {
   memory?: ServerTypeMemory
   /** Current stock. */
   stock: ServerTypeStock
-  /** Minimum duration of the lease in seconds (example. 3.4s). */
+  /**
+   * Minimum duration of the lease in seconds. Minimum duration of the lease in
+   * seconds (example. 3.4s).
+   */
   minimumLeaseDuration?: string
 }
 

@@ -38,7 +38,10 @@ export interface Image {
   updatedAt?: Date
   /** Expiration date of this image. */
   validUntil?: Date
-  /** Typically an identifier for a distribution (ex. "ubuntu_focal"). */
+  /**
+   * Label of this image. Typically an identifier for a distribution (ex.
+   * "ubuntu_focal").
+   */
   label: string
 }
 
@@ -64,7 +67,10 @@ export interface ListVersionsResponse {
 
 /** Local image. */
 export interface LocalImage {
-  /** Version you will typically use to define an image in an API call. */
+  /**
+   * UUID of this local image. Version you will typically use to define an image
+   * in an API call.
+   */
   id: string
   /** List of all commercial types that are compatible with this local image. */
   compatibleCommercialTypes: string[]

@@ -39,7 +39,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List marketplace images
+   * List marketplace images.
    *
    * @param request - The request {@link ListImagesRequest}
    * @returns A Promise of ListImagesResponse
@@ -48,7 +48,7 @@ export class API extends ParentAPI {
     enrichForPagination('images', this.pageOfListImages, request)
 
   /**
-   * Get a specific marketplace image
+   * Get a specific marketplace image.
    *
    * @param request - The request {@link GetImageRequest}
    * @returns A Promise of GetImageResponse

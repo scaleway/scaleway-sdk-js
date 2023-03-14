@@ -191,7 +191,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List the PostgreSQL and MySQL database engines available at Scaleway.
+   * List available database engines. List the PostgreSQL and MySQL database
+   * engines available at Scaleway.
    *
    * @param request - The request {@link ListDatabaseEnginesRequest}
    * @returns A Promise of ListDatabaseEnginesResponse
@@ -220,9 +221,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all available node types. By default, the databases returned in the
-   * list are ordered by creation date in ascending order, though this can be
-   * modified via the order_by field.
+   * List available node types. List all available node types. By default, the
+   * databases returned in the list are ordered by creation date in ascending
+   * order, though this can be modified via the order_by field.
    *
    * @param request - The request {@link ListNodeTypesRequest}
    * @returns A Promise of ListNodeTypesResponse
@@ -257,9 +258,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all backups in a specified zone, for a given Scaleway Organization or
-   * Scaleway Project. By default, the backups listed are ordered by creation
-   * date in ascending order. This can be modified via the `order_by` field.
+   * List database backups. List all backups in a specified zone, for a given
+   * Scaleway Organization or Scaleway Project. By default, the backups listed
+   * are ordered by creation date in ascending order. This can be modified via
+   * the `order_by` field.
    *
    * @param request - The request {@link ListDatabaseBackupsRequest}
    * @returns A Promise of ListDatabaseBackupsResponse
@@ -272,8 +274,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new backup. You must set the `instance_id`, `database_name`,
-   * `name` and `expires_at` parameters.
+   * Create a database backup. Create a new backup. You must set the
+   * `instance_id`, `database_name`, `name` and `expires_at` parameters.
    *
    * @param request - The request {@link CreateDatabaseBackupRequest}
    * @returns A Promise of DatabaseBackup
@@ -295,9 +297,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrieve information about a given backup, specified by its database backup
-   * ID and region. Full details about the backup, like size, URL and expiration
-   * date, are returned in the response.
+   * Get a database backup. Retrieve information about a given backup, specified
+   * by its database backup ID and region. Full details about the backup, like
+   * size, URL and expiration date, are returned in the response.
    *
    * @param request - The request {@link GetDatabaseBackupRequest}
    * @returns A Promise of DatabaseBackup
@@ -340,7 +342,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the parameters of a backup, including name and expiration date.
+   * Update a database backup. Update the parameters of a backup, including name
+   * and expiration date.
    *
    * @param request - The request {@link UpdateDatabaseBackupRequest}
    * @returns A Promise of DatabaseBackup
@@ -365,8 +368,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a backup, specified by its database backup ID and region. Deleting a
-   * backup is permanent, and cannot be undone.
+   * Delete a database backup. Delete a backup, specified by its database backup
+   * ID and region. Deleting a backup is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteDatabaseBackupRequest}
    * @returns A Promise of DatabaseBackup
@@ -387,10 +390,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Launch the process of restoring database backup. You must specify the
-   * `instance_id` of the Database Instance of destination, where the backup
-   * will be restored. Note that large database backups can take up to several
-   * hours to restore.
+   * Restore a database backup. Launch the process of restoring database backup.
+   * You must specify the `instance_id` of the Database Instance of destination,
+   * where the backup will be restored. Note that large database backups can
+   * take up to several hours to restore.
    *
    * @param request - The request {@link RestoreDatabaseBackupRequest}
    * @returns A Promise of DatabaseBackup
@@ -415,8 +418,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Export a backup, specified by the `database_backup_id` and the `region`
-   * parameters. The download URL is returned in the response.
+   * Export a database backup. Export a backup, specified by the
+   * `database_backup_id` and the `region` parameters. The download URL is
+   * returned in the response.
    *
    * @param request - The request {@link ExportDatabaseBackupRequest}
    * @returns A Promise of DatabaseBackup
@@ -439,9 +443,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Upgrade your current Database Instance specifications like node type, high
-   * availability, volume, or the database engine version. Note that upon
-   * upgrade the `enable_ha` parameter can only be set to `true`.
+   * Upgrade a Database Instance. Upgrade your current Database Instance
+   * specifications like node type, high availability, volume, or the database
+   * engine version. Note that upon upgrade the `enable_ha` parameter can only
+   * be set to `true`.
    *
    * @param request - The request {@link UpgradeInstanceRequest}
    * @returns A Promise of Instance
@@ -492,13 +497,14 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all Database Instances in the specified zone, for a given Scaleway
-   * Organization or Scaleway Project. By default, the Database Instances
-   * returned in the list are ordered by creation date in ascending order,
-   * though this can be modified via the order_by field. You can define
-   * additional parameters for your query, such as `tags` and `name`. For the
-   * `name` parameter, the value you include will be checked against the whole
-   * name string to see if it includes the string you put in the parameter.
+   * List Database Instances. List all Database Instances in the specified zone,
+   * for a given Scaleway Organization or Scaleway Project. By default, the
+   * Database Instances returned in the list are ordered by creation date in
+   * ascending order, though this can be modified via the order_by field. You
+   * can define additional parameters for your query, such as `tags` and `name`.
+   * For the `name` parameter, the value you include will be checked against the
+   * whole name string to see if it includes the string you put in the
+   * parameter.
    *
    * @param request - The request {@link ListInstancesRequest}
    * @returns A Promise of ListInstancesResponse
@@ -507,9 +513,10 @@ export class API extends ParentAPI {
     enrichForPagination('instances', this.pageOfListInstances, request)
 
   /**
-   * Retrieve information about a given Database Instance, specified by the
-   * `region` and `instance_id` parameters. Its full details, including name,
-   * status, IP address and port, are returned in the response object.
+   * Get a Database Instance. Retrieve information about a given Database
+   * Instance, specified by the `region` and `instance_id` parameters. Its full
+   * details, including name, status, IP address and port, are returned in the
+   * response object.
    *
    * @param request - The request {@link GetInstanceRequest}
    * @returns A Promise of Instance
@@ -547,9 +554,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new Database Instance. You must set the `engine`, `user_name`,
-   * `password` and `node_type` parameters. Optionally, you can specify the
-   * volume type and size.
+   * Create a Database Instance. Create a new Database Instance. You must set
+   * the `engine`, `user_name`, `password` and `node_type` parameters.
+   * Optionally, you can specify the volume type and size.
    *
    * @param request - The request {@link CreateInstanceRequest}
    * @returns A Promise of Instance
@@ -571,8 +578,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the parameters of a Database Instance, including name, tags and
-   * backup schedule details.
+   * Update a Database Instance. Update the parameters of a Database Instance,
+   * including name, tags and backup schedule details.
    *
    * @param request - The request {@link UpdateInstanceRequest}
    * @returns A Promise of Instance
@@ -594,9 +601,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a given Database Instance, specified by the `region` and
-   * `instance_id` parameters. Deleting a Database Instance is permanent, and
-   * cannot be undone. Note that upon deletion all your data will be lost.
+   * Delete a Database Instance. Delete a given Database Instance, specified by
+   * the `region` and `instance_id` parameters. Deleting a Database Instance is
+   * permanent, and cannot be undone. Note that upon deletion all your data will
+   * be lost.
    *
    * @param request - The request {@link DeleteInstanceRequest}
    * @returns A Promise of Instance
@@ -614,11 +622,11 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Clone a given Database Instance, specified by the `region` and
-   * `instance_id` parameters. The clone feature allows you to create a new
-   * Database Instance from an existing one. The clone includes all existing
-   * databases, users and permissions. You can create a clone on a Database
-   * Instance bigger than your current one.
+   * Clone a Database Instance. Clone a given Database Instance, specified by
+   * the `region` and `instance_id` parameters. The clone feature allows you to
+   * create a new Database Instance from an existing one. The clone includes all
+   * existing databases, users and permissions. You can create a clone on a
+   * Database Instance bigger than your current one.
    *
    * @param request - The request {@link CloneInstanceRequest}
    * @returns A Promise of Instance
@@ -643,9 +651,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Restart a given Database Instance, specified by the `region` and
-   * `instance_id` parameters. The status of the Database Instance returned in
-   * the response.
+   * Restart Database Instance. Restart a given Database Instance, specified by
+   * the `region` and `instance_id` parameters. The status of the Database
+   * Instance returned in the response.
    *
    * @param request - The request {@link RestartInstanceRequest}
    * @returns A Promise of Instance
@@ -668,8 +676,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrieve information about the TLS certificate of a given Database
-   * Instance. Details like name and content are returned in the response.
+   * Get the TLS certificate of a Database Instance. Retrieve information about
+   * the TLS certificate of a given Database Instance. Details like name and
+   * content are returned in the response.
    *
    * @param request - The request {@link GetInstanceCertificateRequest}
    * @returns A Promise of Blob
@@ -689,10 +698,11 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Renew a TLS for a Database Instance. Renewing a certificate means that you
-   * will not be able to connect to your Database Instance using the previous
-   * certificate. You will also need to download and update the new certificate
-   * for all database clients.
+   * Renew the TLS certificate of a Database Instance. Renew a TLS for a
+   * Database Instance. Renewing a certificate means that you will not be able
+   * to connect to your Database Instance using the previous certificate. You
+   * will also need to download and update the new certificate for all database
+   * clients.
    *
    * @param request - The request {@link RenewInstanceCertificateRequest}
    */
@@ -713,9 +723,9 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Retrieve the time series metrics of a give Database Instance. You can
-   * define the period from which to retrieve metrics by specifying the
-   * `start_date` and `end_date`.
+   * Get Database Instance metrics. Retrieve the time series metrics of a give
+   * Database Instance. You can define the period from which to retrieve metrics
+   * by specifying the `start_date` and `end_date`.
    *
    * @param request - The request {@link GetInstanceMetricsRequest}
    * @returns A Promise of InstanceMetrics
@@ -741,9 +751,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new Read Replica of a Database Instance. You must specify the
-   * `region` and the `instance_id`. You can only create a maximum of 3 Read
-   * Replicas per Database Instance.
+   * Create a Read Replica. Create a new Read Replica of a Database Instance.
+   * You must specify the `region` and the `instance_id`. You can only create a
+   * maximum of 3 Read Replicas per Database Instance.
    *
    * @param request - The request {@link CreateReadReplicaRequest}
    * @returns A Promise of ReadReplica
@@ -765,9 +775,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrieve information about a Database Instance Read Replica. Full details
-   * about the Read Replica, like `endpoints`, `status` and `region` are
-   * returned in the response.
+   * Get a Read Replica. Retrieve information about a Database Instance Read
+   * Replica. Full details about the Read Replica, like `endpoints`, `status`
+   * and `region` are returned in the response.
    *
    * @param request - The request {@link GetReadReplicaRequest}
    * @returns A Promise of ReadReplica
@@ -810,8 +820,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a Read Replica of a Database Instance. You must specify the `region`
-   * and `read_replica_id` parameters of the Read Replica you want to delete.
+   * Delete a Read Replica. Delete a Read Replica of a Database Instance. You
+   * must specify the `region` and `read_replica_id` parameters of the Read
+   * Replica you want to delete.
    *
    * @param request - The request {@link DeleteReadReplicaRequest}
    * @returns A Promise of ReadReplica
@@ -832,11 +843,11 @@ export class API extends ParentAPI {
     )
 
   /**
-   * When you resync a Read Replica, first it is reset, then its data is
-   * resynchronized from the primary node. Your Read Replica remains unavailable
-   * during the resync process. The duration of this process is proportional to
-   * the size of your Database Instance. The configured endpoints do not
-   * change.
+   * Resync a Read Replica. When you resync a Read Replica, first it is reset,
+   * then its data is resynchronized from the primary node. Your Read Replica
+   * remains unavailable during the resync process. The duration of this process
+   * is proportional to the size of your Database Instance. The configured
+   * endpoints do not change.
    *
    * @param request - The request {@link ResetReadReplicaRequest}
    * @returns A Promise of ReadReplica
@@ -859,8 +870,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new endpoint for a Read Replica. Read Replicas can have at most
-   * one direct access and one Private Network endpoint.
+   * Create an endpoint for a Read Replica. Create a new endpoint for a Read
+   * Replica. Read Replicas can have at most one direct access and one Private
+   * Network endpoint.
    *
    * @param request - The request {@link CreateReadReplicaEndpointRequest}
    * @returns A Promise of ReadReplica
@@ -890,12 +902,12 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Prepare your Database Instance logs. You can define the `start_date` and
-   * `end_date` parameters for your query. The download URL is returned in the
-   * response. Logs are recorded from 00h00 to 23h59 and then aggregated in a
-   * `.log` file once a day. Therefore, even if you specify a timeframe from
-   * which you want to get the logs, you will receive logs from the full 24
-   * hours.
+   * Prepare logs of a Database Instance. Prepare your Database Instance logs.
+   * You can define the `start_date` and `end_date` parameters for your query.
+   * The download URL is returned in the response. Logs are recorded from 00h00
+   * to 23h59 and then aggregated in a `.log` file once a day. Therefore, even
+   * if you specify a timeframe from which you want to get the logs, you will
+   * receive logs from the full 24 hours.
    *
    * @param request - The request {@link PrepareInstanceLogsRequest}
    * @returns A Promise of PrepareInstanceLogsResponse
@@ -920,9 +932,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List the available logs of a Database Instance. By default, the logs
-   * returned in the list are ordered by creation date in ascending order,
-   * though this can be modified via the order_by field.
+   * List available logs of a Database Instance. List the available logs of a
+   * Database Instance. By default, the logs returned in the list are ordered by
+   * creation date in ascending order, though this can be modified via the
+   * order_by field.
    *
    * @param request - The request {@link ListInstanceLogsRequest}
    * @returns A Promise of ListInstanceLogsResponse
@@ -944,10 +957,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrieve information about the logs of a Database Instance. Specify the
-   * `instance_log_id` and `region` in your request to get information such as
-   * `download_url`, `status`, `expires_at` and `created_at` about your logs in
-   * the response.
+   * Get given logs of a Database Instance. Retrieve information about the logs
+   * of a Database Instance. Specify the `instance_log_id` and `region` in your
+   * request to get information such as `download_url`, `status`, `expires_at`
+   * and `created_at` about your logs in the response.
    *
    * @param request - The request {@link GetInstanceLogRequest}
    * @returns A Promise of InstanceLog
@@ -987,8 +1000,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Purge a given remote log from a Database Instance. You can specify the
-   * `log_name` of the log you wish to clean from your Database Instance.
+   * Purge remote Database Instance logs. Purge a given remote log from a
+   * Database Instance. You can specify the `log_name` of the log you wish to
+   * clean from your Database Instance.
    *
    * @param request - The request {@link PurgeInstanceLogsRequest}
    */
@@ -1009,9 +1023,9 @@ export class API extends ParentAPI {
     })
 
   /**
-   * List remote log details. By default, the details returned in the list are
-   * ordered by creation date in ascending order, though this can be modified
-   * via the order_by field.
+   * List remote Database Instance logs details. List remote log details. By
+   * default, the details returned in the list are ordered by creation date in
+   * ascending order, though this can be modified via the order_by field.
    *
    * @param request - The request {@link ListInstanceLogsDetailsRequest}
    * @returns A Promise of ListInstanceLogsDetailsResponse
@@ -1034,8 +1048,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Add an advanced setting to a Database Instance. You must set the `name` and
-   * the `value` of each setting.
+   * Add Database Instance advanced settings. Add an advanced setting to a
+   * Database Instance. You must set the `name` and the `value` of each
+   * setting.
    *
    * @param request - The request {@link AddInstanceSettingsRequest}
    * @returns A Promise of AddInstanceSettingsResponse
@@ -1060,8 +1075,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an advanced setting in a Database Instance. You must specify the
-   * names of the settings you want to delete in the request.
+   * Delete Database Instance advanced settings. Delete an advanced setting in a
+   * Database Instance. You must specify the names of the settings you want to
+   * delete in the request.
    *
    * @param request - The request {@link DeleteInstanceSettingsRequest}
    * @returns A Promise of DeleteInstanceSettingsResponse
@@ -1086,9 +1102,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an advanced setting for a Database Instance. Settings added upon
-   * database engine initalization can only be defined once, and cannot,
-   * therefore, be updated.
+   * Set Database Instance advanced settings. Update an advanced setting for a
+   * Database Instance. Settings added upon database engine initalization can
+   * only be defined once, and cannot, therefore, be updated.
    *
    * @param request - The request {@link SetInstanceSettingsRequest}
    * @returns A Promise of SetInstanceSettingsResponse
@@ -1137,9 +1153,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List the ACL rules for a given Database Instance. The response is an array
-   * of ACL objects, each one representing an ACL that denies, allows or
-   * redirects traffic based on certain conditions.
+   * List ACL rules of a Database Instance. List the ACL rules for a given
+   * Database Instance. The response is an array of ACL objects, each one
+   * representing an ACL that denies, allows or redirects traffic based on
+   * certain conditions.
    *
    * @param request - The request {@link ListInstanceACLRulesRequest}
    * @returns A Promise of ListInstanceACLRulesResponse
@@ -1148,7 +1165,8 @@ export class API extends ParentAPI {
     enrichForPagination('rules', this.pageOfListInstanceACLRules, request)
 
   /**
-   * Add an additional ACL rule to a Database Instance.
+   * Add an ACL rule to a Database Instance. Add an additional ACL rule to a
+   * Database Instance.
    *
    * @param request - The request {@link AddInstanceACLRulesRequest}
    * @returns A Promise of AddInstanceACLRulesResponse
@@ -1173,7 +1191,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Replace all the ACL rules of a Database Instance.
+   * Set ACL rules for a Database Instance. Replace all the ACL rules of a
+   * Database Instance.
    *
    * @param request - The request {@link SetInstanceACLRulesRequest}
    * @returns A Promise of SetInstanceACLRulesResponse
@@ -1198,7 +1217,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete one or more ACL rules of a Database Instance.
+   * Delete ACL rules of a Database Instance. Delete one or more ACL rules of a
+   * Database Instance.
    *
    * @param request - The request {@link DeleteInstanceACLRulesRequest}
    * @returns A Promise of DeleteInstanceACLRulesResponse
@@ -1247,9 +1267,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all users of a given Database Instance. By default, the users returned
-   * in the list are ordered by creation date in ascending order, though this
-   * can be modified via the order_by field.
+   * List users of a Database Instance. List all users of a given Database
+   * Instance. By default, the users returned in the list are ordered by
+   * creation date in ascending order, though this can be modified via the
+   * order_by field.
    *
    * @param request - The request {@link ListUsersRequest}
    * @returns A Promise of ListUsersResponse
@@ -1258,8 +1279,9 @@ export class API extends ParentAPI {
     enrichForPagination('users', this.pageOfListUsers, request)
 
   /**
-   * Create a new user for a Database Instance. You must define the `name`,
-   * `password` and `is_admin` parameters.
+   * Create a user for a Database Instance. Create a new user for a Database
+   * Instance. You must define the `name`, `password` and `is_admin`
+   * parameters.
    *
    * @param request - The request {@link CreateUserRequest}
    * @returns A Promise of User
@@ -1284,9 +1306,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the parameters of a user on a Database Instance. You can update the
-   * `password` and `is_admin` parameters, but you cannot change the name of the
-   * user.
+   * Update a user on a Database Instance. Update the parameters of a user on a
+   * Database Instance. You can update the `password` and `is_admin` parameters,
+   * but you cannot change the name of the user.
    *
    * @param request - The request {@link UpdateUserRequest}
    * @returns A Promise of User
@@ -1311,9 +1333,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a given user on a Database Instance. You must specify, in the
-   * endpoint, the `region`, `instance_id` and `name` parameters of the user you
-   * want to delete.
+   * Delete a user on a Database Instance. Delete a given user on a Database
+   * Instance. You must specify, in the endpoint, the `region`, `instance_id`
+   * and `name` parameters of the user you want to delete.
    *
    * @param request - The request {@link DeleteUserRequest}
    */
@@ -1356,11 +1378,11 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all databases of a given Database Instance. By default, the databases
-   * returned in the list are ordered by creation date in ascending order,
-   * though this can be modified via the order_by field. You can define
-   * additional parameters for your query, such as `name`, `managed` and
-   * `owner`.
+   * List databases in a Database Instance. List all databases of a given
+   * Database Instance. By default, the databases returned in the list are
+   * ordered by creation date in ascending order, though this can be modified
+   * via the order_by field. You can define additional parameters for your
+   * query, such as `name`, `managed` and `owner`.
    *
    * @param request - The request {@link ListDatabasesRequest}
    * @returns A Promise of ListDatabasesResponse
@@ -1369,7 +1391,8 @@ export class API extends ParentAPI {
     enrichForPagination('databases', this.pageOfListDatabases, request)
 
   /**
-   * Create a new database. You must define the `name` parameter in the request.
+   * Create a database in a Database Instance. Create a new database. You must
+   * define the `name` parameter in the request.
    *
    * @param request - The request {@link CreateDatabaseRequest}
    * @returns A Promise of Database
@@ -1394,9 +1417,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a given database on a Database Instance. You must specify, in the
-   * endpoint, the `region`, `instance_id` and `name` parameters of the database
-   * you want to delete.
+   * Delete a database in a Database Instance. Delete a given database on a
+   * Database Instance. You must specify, in the endpoint, the `region`,
+   * `instance_id` and `name` parameters of the database you want to delete.
    *
    * @param request - The request {@link DeleteDatabaseRequest}
    */
@@ -1438,10 +1461,11 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List privileges of a user on a database. By default, the details returned
-   * in the list are ordered by creation date in ascending order, though this
-   * can be modified via the order_by field. You can define additional
-   * parameters for your query, such as `database_name` and `user_name`.
+   * List user privileges for a database. List privileges of a user on a
+   * database. By default, the details returned in the list are ordered by
+   * creation date in ascending order, though this can be modified via the
+   * order_by field. You can define additional parameters for your query, such
+   * as `database_name` and `user_name`.
    *
    * @param request - The request {@link ListPrivilegesRequest}
    * @returns A Promise of ListPrivilegesResponse
@@ -1450,8 +1474,9 @@ export class API extends ParentAPI {
     enrichForPagination('privileges', this.pageOfListPrivileges, request)
 
   /**
-   * Set the privileges of a user on a database. You must define
-   * `database_name`, `user_name` and `permission` in the request body.
+   * Set user privileges for a database. Set the privileges of a user on a
+   * database. You must define `database_name`, `user_name` and `permission` in
+   * the request body.
    *
    * @param request - The request {@link SetPrivilegeRequest}
    * @returns A Promise of Privilege
@@ -1502,11 +1527,11 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List snapshots. You can include the `instance_id` or `project_id` in your
-   * query to get the list of snaphots for specific Database Instances and/or
-   * Projects. By default, the details returned in the list are ordered by
-   * creation date in ascending order, though this can be modified via the
-   * order_by field.
+   * List snapshots. List snapshots. You can include the `instance_id` or
+   * `project_id` in your query to get the list of snaphots for specific
+   * Database Instances and/or Projects. By default, the details returned in the
+   * list are ordered by creation date in ascending order, though this can be
+   * modified via the order_by field.
    *
    * @param request - The request {@link ListSnapshotsRequest}
    * @returns A Promise of ListSnapshotsResponse
@@ -1515,9 +1540,9 @@ export class API extends ParentAPI {
     enrichForPagination('snapshots', this.pageOfListSnapshots, request)
 
   /**
-   * Retrieve information about a given snapshot, specified by its `snapshot_id`
-   * and `region`. Full details about the snapshot, like size and expiration
-   * date, are returned in the response.
+   * Get a Database Instance snapshot. Retrieve information about a given
+   * snapshot, specified by its `snapshot_id` and `region`. Full details about
+   * the snapshot, like size and expiration date, are returned in the response.
    *
    * @param request - The request {@link GetSnapshotRequest}
    * @returns A Promise of Snapshot
@@ -1555,8 +1580,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new snapshot of a Database Instance. You must define the `name`
-   * parameter in the request.
+   * Create a Database Instance snapshot. Create a new snapshot of a Database
+   * Instance. You must define the `name` parameter in the request.
    *
    * @param request - The request {@link CreateSnapshotRequest}
    * @returns A Promise of Snapshot
@@ -1581,8 +1606,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the parameters of a snapshot of a Database Instance. You can update
-   * the `name` and `expires_at` parameters.
+   * Update a Database Instance snapshot. Update the parameters of a snapshot of
+   * a Database Instance. You can update the `name` and `expires_at`
+   * parameters.
    *
    * @param request - The request {@link UpdateSnapshotRequest}
    * @returns A Promise of Snapshot
@@ -1604,9 +1630,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a given snapshot of a Database Instance. You must specify, in the
-   * endpoint, the `region` and `snapshot_id` parameters of the snapshot you
-   * want to delete.
+   * Delete a Database Instance snapshot. Delete a given snapshot of a Database
+   * Instance. You must specify, in the endpoint, the `region` and `snapshot_id`
+   * parameters of the snapshot you want to delete.
    *
    * @param request - The request {@link DeleteSnapshotRequest}
    * @returns A Promise of Snapshot
@@ -1624,13 +1650,14 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Restore a snapshot. When you restore a snapshot, a new Instance is created
-   * and billed to your account. Note that is possible to select a larger node
-   * type for your new Database Instance. However, the Block volume size will be
-   * the same as the size of the restored snapshot. All Instance settings will
-   * be restored if you chose a node type with the same or more memory size than
-   * the initial Instance. Settings will be reset to the default if your node
-   * type has less memory.
+   * Create a new Database Instance from a snapshot. Restore a snapshot. When
+   * you restore a snapshot, a new Instance is created and billed to your
+   * account. Note that is possible to select a larger node type for your new
+   * Database Instance. However, the Block volume size will be the same as the
+   * size of the restored snapshot. All Instance settings will be restored if
+   * you chose a node type with the same or more memory size than the initial
+   * Instance. Settings will be reset to the default if your node type has less
+   * memory.
    *
    * @param request - The request {@link CreateInstanceFromSnapshotRequest}
    * @returns A Promise of Instance
@@ -1660,10 +1687,11 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new endpoint for a Database Instance. You can add `load_balacer`
-   * and `private_network` specifications to the body of the request. Note that
-   * this action replaces your current endpoint, which means you might need to
-   * update any environment configurations that point to the old endpoint.
+   * Create a new Database Instance endpoint. Create a new endpoint for a
+   * Database Instance. You can add `load_balacer` and `private_network`
+   * specifications to the body of the request. Note that this action replaces
+   * your current endpoint, which means you might need to update any environment
+   * configurations that point to the old endpoint.
    *
    * @param request - The request {@link CreateEndpointRequest}
    * @returns A Promise of Endpoint
@@ -1688,10 +1716,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the endpoint of a Database Instance. You must specify the `region`
-   * and `endpoint_id` parameters of the endpoint you want to delete. Note that
-   * might need to update any environment configurations that point to the
-   * deleted endpoint.
+   * Delete a Database Instance endpoint. Delete the endpoint of a Database
+   * Instance. You must specify the `region` and `endpoint_id` parameters of the
+   * endpoint you want to delete. Note that might need to update any environment
+   * configurations that point to the deleted endpoint.
    *
    * @param request - The request {@link DeleteEndpointRequest}
    */
@@ -1705,9 +1733,10 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Retrieve information about a Database Instance endpoint. Full details about
-   * the endpoint, like `ip`, `port`, `private_network` and `load_balancer`
-   * specifications are returned in the response.
+   * Get a Database Instance endpoint. Retrieve information about a Database
+   * Instance endpoint. Full details about the endpoint, like `ip`, `port`,
+   * `private_network` and `load_balancer` specifications are returned in the
+   * response.
    *
    * @param request - The request {@link GetEndpointRequest}
    * @returns A Promise of Endpoint
@@ -1725,7 +1754,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Migrate an existing instance endpoint to another instance
+   * Migrate an existing instance endpoint to another instance.
    *
    * @param request - The request {@link MigrateEndpointRequest}
    * @returns A Promise of Endpoint

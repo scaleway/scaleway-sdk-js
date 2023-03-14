@@ -68,7 +68,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List private networks
+   * List private networks.
    *
    * @param request - The request {@link ListPrivateNetworksRequest}
    * @returns A Promise of ListPrivateNetworksResponse
@@ -81,7 +81,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a private network
+   * Create a private network.
    *
    * @param request - The request {@link CreatePrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
@@ -105,7 +105,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a private network
+   * Get a private network.
    *
    * @param request - The request {@link GetPrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
@@ -126,7 +126,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update private network
+   * Update private network.
    *
    * @param request - The request {@link UpdatePrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
@@ -151,7 +151,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a private network
+   * Delete a private network.
    *
    * @param request - The request {@link DeletePrivateNetworkRequest}
    */

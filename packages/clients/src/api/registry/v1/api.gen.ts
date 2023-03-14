@@ -52,7 +52,7 @@ const jsonContentHeaders = {
 /**
  * Registry API.
  *
- * Container registry API.
+ * Container registry API. Registry API.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -84,7 +84,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all your namespaces
+   * List all your namespaces.
    *
    * @param request - The request {@link ListNamespacesRequest}
    * @returns A Promise of ListNamespacesResponse
@@ -93,7 +93,7 @@ export class API extends ParentAPI {
     enrichForPagination('namespaces', this.pageOfListNamespaces, request)
 
   /**
-   * Get the namespace associated with the given id.
+   * Get a namespace. Get the namespace associated with the given id.
    *
    * @param request - The request {@link GetNamespaceRequest}
    * @returns A Promise of Namespace
@@ -131,7 +131,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new namespace
+   * Create a new namespace.
    *
    * @param request - The request {@link CreateNamespaceRequest}
    * @returns A Promise of Namespace
@@ -153,7 +153,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the namespace associated with the given id.
+   * Update an existing namespace. Update the namespace associated with the
+   * given id.
    *
    * @param request - The request {@link UpdateNamespaceRequest}
    * @returns A Promise of Namespace
@@ -175,7 +176,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the namespace associated with the given id.
+   * Delete an existing namespace. Delete the namespace associated with the
+   * given id.
    *
    * @param request - The request {@link DeleteNamespaceRequest}
    * @returns A Promise of Namespace
@@ -217,7 +219,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all your images
+   * List all your images.
    *
    * @param request - The request {@link ListImagesRequest}
    * @returns A Promise of ListImagesResponse
@@ -226,7 +228,7 @@ export class API extends ParentAPI {
     enrichForPagination('images', this.pageOfListImages, request)
 
   /**
-   * Get the image associated with the given id.
+   * Get a image. Get the image associated with the given id.
    *
    * @param request - The request {@link GetImageRequest}
    * @returns A Promise of Image
@@ -264,7 +266,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the image associated with the given id.
+   * Update an existing image. Update the image associated with the given id.
    *
    * @param request - The request {@link UpdateImageRequest}
    * @returns A Promise of Image
@@ -286,7 +288,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the image associated with the given id.
+   * Delete an image. Delete the image associated with the given id.
    *
    * @param request - The request {@link DeleteImageRequest}
    * @returns A Promise of Image
@@ -325,7 +327,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all your tags
+   * List all your tags.
    *
    * @param request - The request {@link ListTagsRequest}
    * @returns A Promise of ListTagsResponse
@@ -334,7 +336,7 @@ export class API extends ParentAPI {
     enrichForPagination('tags', this.pageOfListTags, request)
 
   /**
-   * Get the tag associated with the given id.
+   * Get a tag. Get the tag associated with the given id.
    *
    * @param request - The request {@link GetTagRequest}
    * @returns A Promise of Tag
@@ -371,7 +373,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the tag associated with the given id.
+   * Delete a tag. Delete the tag associated with the given id.
    *
    * @param request - The request {@link DeleteTagRequest}
    * @returns A Promise of Tag
