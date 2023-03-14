@@ -46,8 +46,8 @@ const jsonContentHeaders = {
 /**
  * Apple silicon.
  *
- * Scaleway Apple silicon M1 as-a-Service is built using the latest generation
- * of Apple Mac mini hardware (fifth generation).
+ * Scaleway Apple silicon as-a-Service is built using the latest generation of
+ * Apple Mac mini hardware (fifth generation).
  *
  * These dedicated Mac mini M1s are designed for developing, building, testing,
  * and signing applications for Apple devices, including iPhones, iPads, Mac
@@ -69,7 +69,9 @@ export class API extends ParentAPI {
   public static readonly LOCALITIES: Zone[] = ['fr-par-3']
 
   /**
-   * List all server types technical details.
+   * List all technical details about Apple silicon server types available in
+   * the specified zone. Since there is only one Availability Zone for Apple
+   * silicon servers, the targeted value is `fr-par-3`.
    *
    * @param request - The request {@link ListServerTypesRequest}
    * @returns A Promise of ListServerTypesResponse
@@ -105,7 +107,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a server.
+   * Create a new server in the targeted zone, specifying its configuration
+   * including name and type.
    *
    * @param request - The request {@link CreateServerRequest}
    * @returns A Promise of Server
@@ -149,7 +152,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all servers.
+   * List all servers in the specified zone. By default, returned servers in the
+   * list are ordered by creation date in ascending order, though this can be
+   * modified via the `order_by` field.
    *
    * @param request - The request {@link ListServersRequest}
    * @returns A Promise of ListServersResponse
@@ -179,7 +184,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all Operating System (OS).
+   * List all Operating System (OS). The response will include the total number
+   * of OS as well as their associated IDs, names and labels.
    *
    * @param request - The request {@link ListOSRequest}
    * @returns A Promise of ListOSResponse
@@ -188,7 +194,8 @@ export class API extends ParentAPI {
     enrichForPagination('os', this.pageOfListOS, request)
 
   /**
-   * Get an Operating System (OS).
+   * Get an Operating System (OS). The response will include the OS's unique ID
+   * as well as its name and label.
    *
    * @param request - The request {@link GetOSRequest}
    * @returns A Promise of OS
@@ -206,7 +213,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a server.
+   * Retrieve information about an existing Apple silicon server, specified by
+   * its server ID. Its full details, including name, status and IP address, are
+   * returned in the response object.
    *
    * @param request - The request {@link GetServerRequest}
    * @returns A Promise of Server
@@ -244,7 +253,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a server.
+   * Update the parameters of an existing Apple silicon server, specified by its
+   * server ID.
    *
    * @param request - The request {@link UpdateServerRequest}
    * @returns A Promise of Server
@@ -266,7 +276,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a server.
+   * Delete an existing Apple silicon server, specified by its server ID.
+   * Deleting a server is permanent, and cannot be undone. Note that the minimum
+   * allocation period for Apple silicon-as-a-service is 24 hours, meaning you
+   * cannot delete your server prior to that.
    *
    * @param request - The request {@link DeleteServerRequest}
    */
@@ -280,7 +293,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Reboot a server.
+   * Reboot an existing Apple silicon server, specified by its server ID.
    *
    * @param request - The request {@link RebootServerRequest}
    * @returns A Promise of Server
@@ -300,7 +313,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Reinstall a server.
+   * Reinstall an existing Apple silicon server (specified by its server ID)
+   * from a new image (OS). All the data on the disk is deleted and all
+   * configuration is reset to the defailt configuration values of the image
+   * (OS).
    *
    * @param request - The request {@link ReinstallServerRequest}
    * @returns A Promise of Server
