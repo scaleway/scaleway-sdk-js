@@ -107,7 +107,7 @@ export interface Cluster {
   id: string
   /** Type of the cluster. */
   type: string
-  /** Nqme of the cluster. */
+  /** Name of the cluster. */
   name: string
   /** Status of the cluster. */
   status: ClusterStatus
@@ -733,13 +733,13 @@ export type CreateClusterRequest = {
    */
   organizationId?: string
   /**
-   * Poject ID in which the cluster will be created.
+   * Project ID in which the cluster will be created.
    *
    * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    * could be set.
    */
   projectId?: string
-  /** The type of the cluster (possible values are kapsule, multicloud). */
+  /** Type of the cluster (possible values are kapsule, multicloud). */
   type: string
   /** Name of the cluster. */
   name?: string
