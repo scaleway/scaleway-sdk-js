@@ -135,6 +135,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['since', request.since],
           ['statuses', request.statuses],
+          ['subject', request.subject],
           ['until', request.until],
         ),
       },

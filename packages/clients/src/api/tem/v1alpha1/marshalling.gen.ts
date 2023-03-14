@@ -96,6 +96,7 @@ export const unmarshalEmail = (data: unknown) => {
     rcptType: data.rcpt_type,
     status: data.status,
     statusDetails: data.status_details,
+    subject: data.subject,
     tryCount: data.try_count,
     updatedAt: unmarshalDate(data.updated_at),
   } as Email
@@ -177,6 +178,7 @@ export const marshalCreateDomainRequest = (
   request: CreateDomainRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  accept_tos: request.acceptTos,
   domain_name: request.domainName,
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
