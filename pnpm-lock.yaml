@@ -30,7 +30,7 @@ importers:
       lint-staged: ^13.2.0
       prettier: ^2.8.4
       read-pkg: ^7.1.0
-      rollup: ^3.19.0
+      rollup: ^3.19.1
       rollup-plugin-dts: ^5.2.0
       rollup-plugin-visualizer: ^5.9.0
       typedoc: ^0.23.26
