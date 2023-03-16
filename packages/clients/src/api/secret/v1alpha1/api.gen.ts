@@ -98,7 +98,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get metadata of a Secret.
+   * Get metadata of a Secret by name.
    *
    * @param request - The request {@link GetSecretByNameRequest}
    * @returns A Promise of Secret
@@ -174,7 +174,7 @@ export class API extends ParentAPI {
     enrichForPagination('secrets', this.pageOfListSecrets, request)
 
   /**
-   * Delete a secret.
+   * Delete a Secret.
    *
    * @param request - The request {@link DeleteSecretRequest}
    */
@@ -231,7 +231,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get metadata of a SecretVersion.
+   * Get metadata of a SecretVersion by name.
    *
    * @param request - The request {@link GetSecretVersionByNameRequest}
    * @returns A Promise of SecretVersion
@@ -299,7 +299,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List versions of a secret, not returning any sensitive data.
+   * List versions of a Secret, not returning any sensitive data.
    *
    * @param request - The request {@link ListSecretVersionsRequest}
    * @returns A Promise of ListSecretVersionsResponse
@@ -333,7 +333,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List versions of a secret, not returning any sensitive data.
+   * List versions of a Secret by name, not returning any sensitive data.
    *
    * @param request - The request {@link ListSecretVersionsByNameRequest}
    * @returns A Promise of ListSecretVersionsResponse
@@ -438,7 +438,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Access a SecretVersion, returning the sensitive data.
+   * Access a SecretVersion by name, returning the sensitive data.
    *
    * @param request - The request {@link AccessSecretVersionByNameRequest}
    * @returns A Promise of AccessSecretVersionResponse
