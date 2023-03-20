@@ -899,10 +899,25 @@ export type UpgradeClusterRequest = {
    */
   version: string
   /**
-   * Enablement of the pools upgrade. This field makes the upgrade upgrades the
-   * pool once the Kubernetes master in upgrade.
+   * Enablement of the pools upgrade. This field also trigger pools upgrade once
+   * the control plane is upgraded.
    */
   upgradePools: boolean
+}
+
+export type SetClusterTypeRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the cluster to migrate from one type to another. */
+  clusterId: string
+  /**
+   * Type of the cluster. Type of the cluster. Note that some migrations are not
+   * possible (please refer to product documentation).
+   */
+  type: string
 }
 
 export type ListClusterAvailableVersionsRequest = {

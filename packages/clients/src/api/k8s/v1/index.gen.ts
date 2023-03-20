@@ -54,6 +54,7 @@ export type {
   ReplaceNodeRequest,
   ResetClusterAdminTokenRequest,
   Runtime,
+  SetClusterTypeRequest,
   UpdateClusterRequest,
   UpdateClusterRequestAutoUpgrade,
   UpdateClusterRequestAutoscalerConfig,
