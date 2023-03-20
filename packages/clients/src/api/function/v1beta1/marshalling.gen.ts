@@ -68,6 +68,7 @@ const unmarshalTriggerMnqNatsClientConfig = (data: unknown) => {
   }
 
   return {
+    mnqCredentialId: data.mnq_credential_id,
     mnqNamespaceId: data.mnq_namespace_id,
     mnqProjectId: data.mnq_project_id,
     mnqRegion: data.mnq_region,
@@ -83,6 +84,7 @@ const unmarshalTriggerMnqSqsClientConfig = (data: unknown) => {
   }
 
   return {
+    mnqCredentialId: data.mnq_credential_id,
     mnqNamespaceId: data.mnq_namespace_id,
     mnqProjectId: data.mnq_project_id,
     mnqRegion: data.mnq_region,
