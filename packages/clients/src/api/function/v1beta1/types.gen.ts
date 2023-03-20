@@ -349,6 +349,7 @@ export interface TriggerMnqNatsClientConfig {
   subject: string
   mnqProjectId: string
   mnqRegion: string
+  mnqCredentialId?: string
 }
 
 export interface TriggerMnqSqsClientConfig {
@@ -356,6 +357,7 @@ export interface TriggerMnqSqsClientConfig {
   queue: string
   mnqProjectId: string
   mnqRegion: string
+  mnqCredentialId?: string
 }
 
 export interface TriggerSqsClientConfig {
