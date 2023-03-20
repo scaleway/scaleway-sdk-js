@@ -16,6 +16,7 @@ import {
 import {
   marshalCreateClusterRequest,
   marshalCreatePoolRequest,
+  marshalSetClusterTypeRequest,
   marshalUpdateClusterRequest,
   marshalUpdatePoolRequest,
   marshalUpgradeClusterRequest,
@@ -59,6 +60,7 @@ import type {
   RebootNodeRequest,
   ReplaceNodeRequest,
   ResetClusterAdminTokenRequest,
+  SetClusterTypeRequest,
   UpdateClusterRequest,
   UpdatePoolRequest,
   UpgradeClusterRequest,
@@ -246,6 +248,31 @@ export class API extends ParentAPI {
           'clusterId',
           request.clusterId,
         )}/upgrade`,
+      },
+      unmarshalCluster,
+    )
+
+  /**
+   * Change type of a cluster. Change type of a specific Kubernetes cluster.
+   *
+   * @param request - The request {@link SetClusterTypeRequest}
+   * @returns A Promise of Cluster
+   */
+  setClusterType = (request: Readonly<SetClusterTypeRequest>) =>
+    this.client.fetch<Cluster>(
+      {
+        body: JSON.stringify(
+          marshalSetClusterTypeRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/k8s/v1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/clusters/${validatePathParam(
+          'clusterId',
+          request.clusterId,
+        )}/set-type`,
       },
       unmarshalCluster,
     )

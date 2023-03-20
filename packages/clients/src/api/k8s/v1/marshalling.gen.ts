@@ -31,6 +31,7 @@ import type {
   Node,
   Pool,
   PoolUpgradePolicy,
+  SetClusterTypeRequest,
   UpdateClusterRequest,
   UpdateClusterRequestAutoUpgrade,
   UpdateClusterRequestAutoscalerConfig,
@@ -528,6 +529,13 @@ export const marshalCreatePoolRequest = (
     ? marshalCreatePoolRequestUpgradePolicy(request.upgradePolicy, defaults)
     : undefined,
   zone: request.zone ?? defaults.defaultZone,
+})
+
+export const marshalSetClusterTypeRequest = (
+  request: SetClusterTypeRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  type: request.type,
 })
 
 export const marshalUpdateClusterRequest = (
