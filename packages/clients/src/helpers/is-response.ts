@@ -3,15 +3,15 @@
  *
  * @internal
  */
-export const isResponse = (value: unknown): value is Response =>
-  value !== null &&
-  value !== undefined &&
-  typeof value === 'object' &&
-  'status' in value &&
-  typeof value.status === 'number' &&
-  'statusText' in value &&
-  typeof value.statusText === 'string' &&
-  'headers' in value &&
-  typeof value.headers === 'object' &&
-  'body' in value &&
-  typeof value.body !== 'undefined'
+export const isResponse = (obj: unknown): obj is Response =>
+  obj !== null &&
+  obj !== undefined &&
+  typeof obj === 'object' &&
+  'status' in obj &&
+  typeof obj.status === 'number' &&
+  'statusText' in obj &&
+  typeof obj.statusText === 'string' &&
+  'headers' in obj &&
+  typeof obj.headers === 'object' &&
+  'body' in obj &&
+  typeof obj.body !== 'undefined'
