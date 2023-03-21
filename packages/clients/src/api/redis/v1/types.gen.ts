@@ -52,17 +52,17 @@ export interface ACLRuleSpec {
 
 /** Add acl rules response. */
 export interface AddAclRulesResponse {
-  /** ACL Rules enabled on the cluster. */
+  /** ACL Rules enabled for the Database Instance. */
   aclRules: ACLRule[]
-  /** Total count of acl rules of the cluster. */
+  /** Total count of ACL rules of the Database Instance. */
   totalCount: number
 }
 
 /** Add endpoints response. */
 export interface AddEndpointsResponse {
-  /** Endpoints defined on the cluster. */
+  /** Endpoints defined on the Database Instance. */
   endpoints: Endpoint[]
-  /** Total count of endpoints of the cluster. */
+  /** Total count of endpoints of the Database Instance. */
   totalCount: number
 }
 
@@ -72,7 +72,7 @@ export interface AvailableClusterSetting {
   name: string
   /** Default value of the setting. */
   defaultValue?: string
-  /** Type of the setting. */
+  /** Type of setting. */
   type: AvailableClusterSettingPropertyType
   /** Description of the setting. */
   description: string
@@ -82,27 +82,27 @@ export interface AvailableClusterSetting {
   minValue?: number
   /** Optional validation rule of the setting. */
   regex?: string
-  /** Whether the setting is deprecated. */
+  /** Whether or not the setting is deprecated. */
   deprecated: boolean
 }
 
 /** Cluster. */
 export interface Cluster {
-  /** UUID of the cluster. */
+  /** UUID of the Database Instance. */
   id: string
-  /** Name of the cluster. */
+  /** Name of the Database Instance. */
   name: string
-  /** Project ID the cluster belongs to. */
+  /** Project ID the Database Instance belongs to. */
   projectId: string
-  /** Status of the cluster. */
+  /** Status of the Database Instance. */
   status: ClusterStatus
-  /** Redis™ engine version of the cluster. */
+  /** Redis™ engine version of the Database Instance. */
   version: string
-  /** List of cluster endpoints. */
+  /** List of Database Instance endpoints. */
   endpoints: Endpoint[]
-  /** List of tags applied to the cluster. */
+  /** List of tags applied to the Database Instance. */
   tags: string[]
-  /** Node type of the cluster. */
+  /** Node type of the Database Instance. */
   nodeType: string
   /** Creation date (Format ISO 8601). */
   createdAt?: Date
@@ -110,17 +110,17 @@ export interface Cluster {
   updatedAt?: Date
   /** Whether or not TLS is enabled. */
   tlsEnabled: boolean
-  /** List of cluster settings. */
+  /** List of Database Instance settings. */
   clusterSettings: ClusterSetting[]
-  /** List of acl rules. */
+  /** List of ACL rules. */
   aclRules: ACLRule[]
-  /** Number of nodes of the cluster. */
+  /** Number of nodes of the Database Instance cluster. */
   clusterSize: number
-  /** Zone of the cluster. */
+  /** Zone of the Database Instance. */
   zone: Zone
   /** Name of the user associated to the cluster. */
   userName: string
-  /** List of versions the cluster can be migrated to. */
+  /** List of engine versions the Database Instance can upgrade to. */
   upgradableVersions: string[]
 }
 
@@ -140,7 +140,7 @@ export interface ClusterSetting {
 
 /** Cluster settings response. */
 export interface ClusterSettingsResponse {
-  /** Settings configured for a given cluster. */
+  /** Settings configured for a given Database Instance. */
   settings: ClusterSetting[]
 }
 
@@ -148,13 +148,13 @@ export interface ClusterSettingsResponse {
 export interface ClusterVersion {
   /** Redis™ engine version. */
   version: string
-  /** End of life date. */
+  /** Date of End of Life. */
   endOfLifeAt?: Date
-  /** Cluster settings available to be set. */
+  /** Cluster settings available to be updated. */
   availableSettings: AvailableClusterSetting[]
   /** Redis™ logo url. */
   logoUrl: string
-  /** Zone of the Managed Database for Redis™. */
+  /** Zone of the Redis™ Database Instance. */
   zone: Zone
 }
 
@@ -163,7 +163,7 @@ export interface Endpoint {
   /** TCP port of the endpoint. */
   port: number
   /**
-   * Private network details.
+   * Private Network details.
    *
    * One-of ('details'): at most one of 'privateNetwork', 'publicNetwork' could
    * be set.
@@ -176,7 +176,7 @@ export interface Endpoint {
    * be set.
    */
   publicNetwork?: PublicNetwork
-  /** Lis of IPv4 address of the endpoint. */
+  /** List of IPv4 addresses of the endpoint. */
   ips: string[]
   /** UUID of the endpoint. */
   id: string
@@ -185,14 +185,14 @@ export interface Endpoint {
 /** Endpoint spec. */
 export interface EndpointSpec {
   /**
-   * Private network spec details.
+   * Private Network specification details.
    *
    * One-of ('endpointType'): at most one of 'privateNetwork', 'publicNetwork'
    * could be set.
    */
   privateNetwork?: EndpointSpecPrivateNetworkSpec
   /**
-   * Public network spec details.
+   * Public network specification details.
    *
    * One-of ('endpointType'): at most one of 'privateNetwork', 'publicNetwork'
    * could be set.
@@ -202,11 +202,11 @@ export interface EndpointSpec {
 
 /** Endpoint spec. private network spec. */
 export interface EndpointSpecPrivateNetworkSpec {
-  /** UUID of the private network to be connected to the cluster. */
+  /** UUID of the Private Network to connect to the Database Instance. */
   id: string
   /**
-   * Endpoint IPv4 adress with a CIDR notation. You must provide at least one
-   * IPv4 per node. Check documentation about IP and subnet limitation.
+   * Endpoint IPv4 address with a CIDR notation. You must provide at least one
+   * IPv4 per node.
    */
   serviceIps: string[]
 }
@@ -216,7 +216,7 @@ export interface EndpointSpecPublicNetworkSpec {}
 
 /** List cluster versions response. */
 export interface ListClusterVersionsResponse {
-  /** List of the available Redis™ engine versions. */
+  /** List of available Redis™ engine versions. */
   versions: ClusterVersion[]
   /** Total count of available Redis™ engine versions. */
   totalCount: number
@@ -224,47 +224,47 @@ export interface ListClusterVersionsResponse {
 
 /** List clusters response. */
 export interface ListClustersResponse {
-  /** List all clusters. */
+  /** List all Database Instances. */
   clusters: Cluster[]
-  /** Total count of clusters. */
+  /** Total count of Database Instances. */
   totalCount: number
 }
 
 /** List node types response. */
 export interface ListNodeTypesResponse {
-  /** Types of the node. */
+  /** Types of node. */
   nodeTypes: NodeType[]
-  /** Total count of node-types available. */
+  /** Total count of node types available. */
   totalCount: number
 }
 
 /** Node type. */
 export interface NodeType {
-  /** Node Type name identifier. */
+  /** Node type name. */
   name: string
-  /** Current stock status for the Node Type. */
+  /** Current stock status of the node type. */
   stockStatus: NodeTypeStock
-  /** Current specs of the offer. */
+  /** Current specifications of the offer. */
   description: string
   /** Number of virtual CPUs. */
   vcpus: number
   /** Quantity of RAM. */
   memory: number
-  /** The Node Type is currently disabled. */
+  /** The node type is currently disabled. */
   disabled: boolean
-  /** The Node Type is currently in beta. */
+  /** The node type is currently in beta. */
   beta: boolean
-  /** Zone the Node Type is in. */
+  /** Zone of the node type. */
   zone: Zone
 }
 
 /** Private network. */
 export interface PrivateNetwork {
-  /** UUID of the private network. */
+  /** UUID of the Private Network. */
   id: string
   /** List of IPv4 CIDR notation addresses of the endpoint. */
   serviceIps: string[]
-  /** Private network zone. */
+  /** Zone of the Private Network. */
   zone: Zone
 }
 
@@ -272,62 +272,62 @@ export interface PublicNetwork {}
 
 /** Set acl rules response. */
 export interface SetAclRulesResponse {
-  /** ACL Rules enabled on the cluster. */
+  /** ACL Rules enabled for the Database Instance. */
   aclRules: ACLRule[]
 }
 
 /** Set endpoints response. */
 export interface SetEndpointsResponse {
-  /** Endpoints defined on the cluster. */
+  /** Endpoints defined on the Database Instance. */
   endpoints: Endpoint[]
 }
 
 export type CreateClusterRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The project ID on which to create the cluster. */
+  /** The Project ID in which to create the Database Instance. */
   projectId?: string
-  /** Name of the cluster. */
+  /** Name of the Database Instance. */
   name?: string
-  /** Redis™ engine version of the cluster. */
+  /** Redis™ engine version of the Database Instance. */
   version: string
-  /** Tags to apply to the cluster. */
+  /** Tags to apply to the Database Instance. */
   tags?: string[]
-  /** Type of node to use for the cluster. */
+  /** Type of node to use for the Database Instance. */
   nodeType: string
-  /** Name of the user created when the cluster is created. */
+  /** Name of the user created upon Database Instance creation. */
   userName: string
   /** Password of the user. */
   password: string
-  /** Number of nodes for the cluster. */
+  /** Number of nodes in the Redis™ cluster. */
   clusterSize?: number
   /** List of ACLRuleSpec used to secure your publicly exposed cluster. */
   aclRules?: ACLRuleSpec[]
   /**
    * Zero or multiple EndpointSpec used to expose your cluster publicly and
-   * inside private networks. Zero or multiple EndpointSpec used to expose your
+   * inside Private Networks. Zero or multiple EndpointSpec used to expose your
    * cluster publicly and inside private networks. If no EndpoindSpec is given
    * the cluster will be publicly exposed by default.
    */
   endpoints?: EndpointSpec[]
   /** Whether or not TLS is enabled. */
   tlsEnabled: boolean
-  /** List of cluster settings to be set at cluster initialisation. */
+  /** List of advanced settings to be set upon Database Instance initialization. */
   clusterSettings?: ClusterSetting[]
 }
 
 export type UpdateClusterRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster to update. */
+  /** UUID of the Database Instance to update. */
   clusterId: string
-  /** Name of the cluster. */
+  /** Name of the Database Instance. */
   name?: string
-  /** Tags of a given cluster. */
+  /** Database Instance tags. */
   tags?: string[]
-  /** Name of the cluster user. */
+  /** Name of the Database Instance user. */
   userName?: string
-  /** Password of the cluster user. */
+  /** Password of the Database Instance user. */
   password?: string
 }
 
@@ -341,17 +341,17 @@ export type GetClusterRequest = {
 export type ListClustersRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Tags of the clusters to filter upon. */
+  /** Filter by Database Instance tags. */
   tags?: string[]
-  /** Name of the clusters to filter upon. */
+  /** Filter by Database Instance names. */
   name?: string
-  /** Criteria to use when ordering cluster listing. */
+  /** Criteria to use when ordering the list. */
   orderBy?: ListClustersRequestOrderBy
-  /** Project ID to list the cluster of. */
+  /** Filter by Project ID. */
   projectId?: string
-  /** Organization ID to list the cluster of. */
+  /** Filter by Organization ID. */
   organizationId?: string
-  /** Version of the clusters to filter upon. */
+  /** Filter by Redis™ engine version. */
   version?: string
   page?: number
   pageSize?: number
@@ -360,24 +360,24 @@ export type ListClustersRequest = {
 export type MigrateClusterRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster to update. */
+  /** UUID of the Database Instance to update. */
   clusterId: string
   /**
-   * Redis™ engine version of the cluster.
+   * Redis™ engine version of the Database Instance.
    *
    * One-of ('action'): at most one of 'version', 'nodeType', 'clusterSize'
    * could be set.
    */
   version?: string
   /**
-   * Type of node to use for the cluster.
+   * Type of node to use for the Database Instance.
    *
    * One-of ('action'): at most one of 'version', 'nodeType', 'clusterSize'
    * could be set.
    */
   nodeType?: string
   /**
-   * Number of nodes for the cluster.
+   * Number of nodes for the Database Instance.
    *
    * One-of ('action'): at most one of 'version', 'nodeType', 'clusterSize'
    * could be set.
@@ -388,7 +388,7 @@ export type MigrateClusterRequest = {
 export type DeleteClusterRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster to delete. */
+  /** UUID of the Database Instance to delete. */
   clusterId: string
 }
 
@@ -397,9 +397,9 @@ export type GetClusterMetricsRequest = {
   zone?: Zone
   /** UUID of the cluster. */
   clusterId: string
-  /** Start date to gather metrics from. */
+  /** Start date. */
   startAt?: Date
-  /** End date to gather metrics from. */
+  /** End date. */
   endAt?: Date
   /** Name of the metric to gather. */
   metricName?: string
@@ -446,16 +446,16 @@ export type RenewClusterCertificateRequest = {
 export type AddClusterSettingsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster you want to add settings to. */
+  /** UUID of the Database Instance you want to add settings to. */
   clusterId: string
-  /** Settings to add on the cluster. */
+  /** Settings to add to the cluster. */
   settings: ClusterSetting[]
 }
 
 export type DeleteClusterSettingRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster where the settings has to be set. */
+  /** UUID of the Database Instance where the settings must be set. */
   clusterId: string
   /** Setting name to delete. */
   settingName: string
@@ -464,16 +464,16 @@ export type DeleteClusterSettingRequest = {
 export type SetClusterSettingsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster where the settings has to be set. */
+  /** UUID of the Database Instance where the settings must be set. */
   clusterId: string
-  /** Settings to define for the cluster. */
+  /** Settings to define for the Database Instance. */
   settings: ClusterSetting[]
 }
 
 export type SetAclRulesRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster where the ACL rules has to be set. */
+  /** UUID of the Database Instance where the ACL rules have to be set. */
   clusterId: string
   /** ACLs rules to define for the cluster. */
   aclRules: ACLRuleSpec[]
@@ -482,7 +482,7 @@ export type SetAclRulesRequest = {
 export type AddAclRulesRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster you want to add acl rules to. */
+  /** UUID of the Database Instance you want to add ACL rules to. */
   clusterId: string
   /** ACLs rules to add to the cluster. */
   aclRules: ACLRuleSpec[]
@@ -491,32 +491,32 @@ export type AddAclRulesRequest = {
 export type DeleteAclRuleRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the acl rule you want to delete. */
+  /** UUID of the ACL rule you want to delete. */
   aclId: string
 }
 
 export type GetAclRuleRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the acl rule you want to get. */
+  /** UUID of the ACL rule you want to get. */
   aclId: string
 }
 
 export type SetEndpointsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster where the endpoints has to be set. */
+  /** UUID of the Database Instance where the endpoints have to be set. */
   clusterId: string
-  /** Endpoints to define for the cluster. */
+  /** Endpoints to define for the Database Instance. */
   endpoints: EndpointSpec[]
 }
 
 export type AddEndpointsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the cluster you want to add endpoints to. */
+  /** UUID of the Database Instance you want to add endpoints to. */
   clusterId: string
-  /** Endpoints to add to the cluster. */
+  /** Endpoints to add to the Database Instance. */
   endpoints: EndpointSpec[]
 }
 

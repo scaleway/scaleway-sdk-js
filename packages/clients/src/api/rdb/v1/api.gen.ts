@@ -222,8 +222,8 @@ export class API extends ParentAPI {
 
   /**
    * List available node types. List all available node types. By default, the
-   * databases returned in the list are ordered by creation date in ascending
-   * order, though this can be modified via the order_by field.
+   * node types returned in the list are ordered by creation date in ascending
+   * order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListNodeTypesRequest}
    * @returns A Promise of ListNodeTypesResponse
@@ -258,7 +258,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List database backups. List all backups in a specified zone, for a given
+   * List database backups. List all backups in a specified region, for a given
    * Scaleway Organization or Scaleway Project. By default, the backups listed
    * are ordered by creation date in ascending order. This can be modified via
    * the `order_by` field.
@@ -497,9 +497,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Database Instances. List all Database Instances in the specified zone,
-   * for a given Scaleway Organization or Scaleway Project. By default, the
-   * Database Instances returned in the list are ordered by creation date in
+   * List Database Instances. List all Database Instances in the specified
+   * region, for a given Scaleway Organization or Scaleway Project. By default,
+   * the Database Instances returned in the list are ordered by creation date in
    * ascending order, though this can be modified via the order_by field. You
    * can define additional parameters for your query, such as `tags` and `name`.
    * For the `name` parameter, the value you include will be checked against the
@@ -723,7 +723,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Get Database Instance metrics. Retrieve the time series metrics of a give
+   * Get Database Instance metrics. Retrieve the time series metrics of a given
    * Database Instance. You can define the period from which to retrieve metrics
    * by specifying the `start_date` and `end_date`.
    *
@@ -1528,10 +1528,10 @@ export class API extends ParentAPI {
 
   /**
    * List snapshots. List snapshots. You can include the `instance_id` or
-   * `project_id` in your query to get the list of snaphots for specific
+   * `project_id` in your query to get the list of snapshots for specific
    * Database Instances and/or Projects. By default, the details returned in the
    * list are ordered by creation date in ascending order, though this can be
-   * modified via the order_by field.
+   * modified via the `order_by` field.
    *
    * @param request - The request {@link ListSnapshotsRequest}
    * @returns A Promise of ListSnapshotsResponse
@@ -1688,7 +1688,7 @@ export class API extends ParentAPI {
 
   /**
    * Create a new Database Instance endpoint. Create a new endpoint for a
-   * Database Instance. You can add `load_balacer` and `private_network`
+   * Database Instance. You can add `load_balancer` and `private_network`
    * specifications to the body of the request. Note that this action replaces
    * your current endpoint, which means you might need to update any environment
    * configurations that point to the old endpoint.
