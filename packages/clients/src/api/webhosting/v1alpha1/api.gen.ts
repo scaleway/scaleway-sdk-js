@@ -178,7 +178,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retore a hosting. Restore a hosting with the given ID.
+   * Restore a hosting. Restore a hosting with the given ID.
    *
    * @param request - The request {@link RestoreHostingRequest}
    * @returns A Promise of Hosting
@@ -201,7 +201,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get the DNS records. Get the DNS records of a specified domain.
+   * Get the DNS records. The set of DNS record of a specific domain associated
+   * to a hosting.
    *
    * @param request - The request {@link GetDomainDnsRecordsRequest}
    * @returns A Promise of DnsRecords
