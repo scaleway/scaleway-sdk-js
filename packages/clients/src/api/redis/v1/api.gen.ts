@@ -676,6 +676,15 @@ export class API extends ParentAPI {
       unmarshalEndpoint,
     )
 
+  /**
+   * Update an endpoint. Update information about a Redis™ Database Instance
+   * (Redis™ cluster) endpoint. Full details about the endpoint, like `ips`,
+   * `port`, `private_network` and `public_network` specifications are returned
+   * in the response.
+   *
+   * @param request - The request {@link UpdateEndpointRequest}
+   * @returns A Promise of Endpoint
+   */
   updateEndpoint = (request: Readonly<UpdateEndpointRequest>) =>
     this.client.fetch<Endpoint>(
       {
