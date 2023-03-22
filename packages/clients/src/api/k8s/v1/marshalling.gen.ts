@@ -150,6 +150,7 @@ export const unmarshalCluster = (data: unknown) => {
       ? unmarshalClusterOpenIDConnectConfig(data.open_id_connect_config)
       : undefined,
     organizationId: data.organization_id,
+    privateNetworkId: data.private_network_id,
     projectId: data.project_id,
     region: data.region,
     status: data.status,
@@ -491,6 +492,7 @@ export const marshalCreateClusterRequest = (
         marshalCreateClusterRequestPoolConfig(elt, defaults),
       )
     : undefined,
+  private_network_id: request.privateNetworkId,
   tags: request.tags,
   type: request.type,
   version: request.version,
