@@ -163,6 +163,8 @@ export interface Cluster {
    * certificate.
    */
   apiserverCertSans: string[]
+  /** Private network ID for internal cluster communication. */
+  privateNetworkId?: string
 }
 
 /** Cluster. auto upgrade. */
@@ -809,6 +811,11 @@ export type CreateClusterRequest = {
    * certificate.
    */
   apiserverCertSans?: string[]
+  /**
+   * Private network ID for internal cluster communication (cannot be changed
+   * later).
+   */
+  privateNetworkId?: string
 }
 
 export type GetClusterRequest = {
