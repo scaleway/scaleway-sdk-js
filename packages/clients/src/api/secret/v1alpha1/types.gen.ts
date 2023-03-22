@@ -20,75 +20,81 @@ export type SecretVersionStatus =
 
 /** Access secret version response. */
 export interface AccessSecretVersionResponse {
-  /** ID of the Secret. */
+  /** ID of the secret. */
   secretId: string
-  /** Revision of the SecretVersion. */
+  /**
+   * Version number. The first version of the secret is numbered 1, and all
+   * subsequent revisions augment by 1.
+   */
   revision: number
-  /** The base64-encoded secret payload of the SecretVersion. */
+  /** The base64-encoded secret payload of the version. */
   data: string
 }
 
 /** List secret versions response. */
 export interface ListSecretVersionsResponse {
-  /** Count of all SecretVersions. */
+  /** Number of versions. */
   totalCount: number
-  /** Single page of SecretVersions. */
+  /** Single page of versions. */
   versions: SecretVersion[]
 }
 
 /** List secrets response. */
 export interface ListSecretsResponse {
-  /** Count of all Secrets matching the requested criteria. */
+  /** Count of all secrets matching the requested criteria. */
   totalCount: number
-  /** Single page of Secrets matching the requested criteria. */
+  /** Single page of secrets matching the requested criteria. */
   secrets: Secret[]
 }
 
 /** Secret. */
 export interface Secret {
-  /** ID of the Secret. */
+  /** ID of the secret. */
   id: string
-  /** ID of the project containing the Secret. */
+  /** ID of the Project containing the secret. */
   projectId: string
-  /** Name of the Secret. */
+  /** Name of the secret. */
   name: string
   /**
-   * Current status of the Secret. `ready`: the Secret is ready. `locked`: the
-   * Secret is locked.
+   * Current status of the secret. `ready`: the secret is ready. `locked`: the
+   * secret is locked.
    */
   status: SecretStatus
-  /** The time at which the Secret was created. */
+  /** Date and time of the secret's creation. */
   createdAt?: Date
-  /** The time at which the Secret was updated. */
+  /** Last update of the secret. */
   updatedAt?: Date
-  /** List of tags associated to this Secret. */
+  /** List of the secret's tags. */
   tags: string[]
-  /** Region of the Secret. */
+  /** Region of the secret. */
   region: Region
-  /** The number of versions for this Secret. */
+  /** Number of versions for this secret. */
   versionCount: number
-  /** Description of the Secret. */
+  /** Updated description of the secret. */
   description?: string
 }
 
 /** Secret version. */
 export interface SecretVersion {
-  /** ID of the Secret. */
+  /** ID of the secret. */
   secretId: string
-  /** Revision of the SecretVersion. */
+  /**
+   * Version number. The first version of the secret is numbered 1, and all
+   * subsequent revisions augment by 1.
+   */
   revision: number
   /**
-   * Current status of the SecretVersion. `unknown`: the SecretVersion is in an
-   * invalid state. `enabled`: the SecretVersion is accessible. `disabled`: the
-   * SecretVersion is not accessible but can be enabled. `destroyed`: the
-   * SecretVersion is permanently destroyed.
+   * Current status of the version. `unknown`: the version is in an invalid
+   * state. `enabled`: the version is accessible. `disabled`: the version is not
+   * accessible but can be enabled. `destroyed`: the version is permanently
+   * deleted. It is not possible to recover it.
    */
   status: SecretVersionStatus
-  /** The time at which the SecretVersion was created. */
+  /** Date and time of the version's creation. */
   createdAt?: Date
-  /** The time at which the SecretVersion was updated. */
+  /** Last update of the version. */
   updatedAt?: Date
-  /** Description of the SecretVersion. */
+  /** Description of the version. */
   description?: string
 }
 
@@ -98,13 +104,13 @@ export type CreateSecretRequest = {
    * config.
    */
   region?: Region
-  /** ID of the project containing the Secret. */
+  /** ID of the Project containing the secret. */
   projectId?: string
-  /** Name of the Secret. */
+  /** Name of the secret. */
   name: string
-  /** List of tags associated to this Secret. */
+  /** List of the secret's tags. */
   tags?: string[]
-  /** Description of the Secret. */
+  /** Description of the secret. */
   description?: string
 }
 
@@ -114,7 +120,7 @@ export type GetSecretRequest = {
    * config.
    */
   region?: Region
-  /** ID of the Secret. */
+  /** ID of the secret. */
   secretId: string
 }
 
@@ -124,7 +130,7 @@ export type GetSecretByNameRequest = {
    * config.
    */
   region?: Region
-  /** Name of the Secret. */
+  /** Name of the secret. */
   secretName: string
 }
 
@@ -134,13 +140,13 @@ export type UpdateSecretRequest = {
    * config.
    */
   region?: Region
-  /** ID of the Secret. */
+  /** ID of the secret. */
   secretId: string
-  /** New name of the Secret (optional). */
+  /** Secret's updated name (optional). */
   name?: string
-  /** New list of tags associated to this Secret (optional). */
+  /** Secret's updated list of tags (optional). */
   tags?: string[]
-  /** Description of the Secret. */
+  /** Description of the secret. */
   description?: string
 }
 
@@ -150,11 +156,11 @@ export type ListSecretsRequest = {
    * config.
    */
   region?: Region
-  /** ID of an organization to filter on (optional). */
+  /** Filter by Organization ID (optional). */
   organizationId?: string
-  /** ID of a project to filter on (optional). */
+  /** Filter by Project ID (optional). */
   projectId?: string
-  /** Secret name to filter on (optional). */
+  /** Filter by secret name (optional). */
   name?: string
   /** List of tags to filter on (optional). */
   tags?: string[]
@@ -169,7 +175,7 @@ export type DeleteSecretRequest = {
    * config.
    */
   region?: Region
-  /** ID of the Secret. */
+  /** ID of the secret. */
   secretId: string
 }
 
@@ -179,11 +185,11 @@ export type CreateSecretVersionRequest = {
    * config.
    */
   region?: Region
-  /** ID of the Secret. */
+  /** ID of the secret. */
   secretId: string
-  /** The base64-encoded secret payload of the SecretVersion. */
+  /** The base64-encoded secret payload of the version. */
   data: string
-  /** Description of the SecretVersion. */
+  /** Description of the version. */
   description?: string
 }
 
@@ -193,9 +199,12 @@ export type GetSecretVersionRequest = {
    * config.
    */
   region?: Region
-  /** ID of the Secret. */
+  /** ID of the secret. */
   secretId: string
-  /** Revision of the SecretVersion (may be a number or "latest"). */
+  /**
+   * Version number. The first version of the secret is numbered 1, and all
+   * subsequent revisions augment by 1. Value can be a number or "latest".
+   */
   revision: string
 }
 
@@ -205,9 +214,12 @@ export type GetSecretVersionByNameRequest = {
    * config.
    */
   region?: Region
-  /** Name of the Secret. */
+  /** Name of the secret. */
   secretName: string
-  /** Revision of the SecretVersion (may be a number or "latest"). */
+  /**
+   * Version number. The first version of the secret is numbered 1, and all
+   * subsequent revisions augment by 1. Value can be a number or "latest".
+   */
   revision: string
 }
 
@@ -217,11 +229,14 @@ export type UpdateSecretVersionRequest = {
    * config.
    */
   region?: Region
-  /** ID of the Secret. */
+  /** ID of the secret. */
   secretId: string
-  /** Revision of the SecretVersion (may be a number or "latest"). */
+  /**
+   * Version number. The first version of the secret is numbered 1, and all
+   * subsequent revisions augment by 1. Value can be a number or "latest".
+   */
   revision: string
-  /** Description of the SecretVersion. */
+  /** Description of the version. */
   description?: string
 }
 
@@ -231,7 +246,7 @@ export type ListSecretVersionsRequest = {
    * config.
    */
   region?: Region
-  /** ID of the Secret. */
+  /** ID of the secret. */
   secretId: string
   page?: number
   pageSize?: number
@@ -245,7 +260,7 @@ export type ListSecretVersionsByNameRequest = {
    * config.
    */
   region?: Region
-  /** Name of the Secret. */
+  /** Name of the secret. */
   secretName: string
   page?: number
   pageSize?: number
@@ -259,9 +274,12 @@ export type DestroySecretVersionRequest = {
    * config.
    */
   region?: Region
-  /** ID of the Secret. */
+  /** ID of the secret. */
   secretId: string
-  /** Revision of the SecretVersion (may be a number or "latest"). */
+  /**
+   * Version number. The first version of the secret is numbered 1, and all
+   * subsequent revisions augment by 1. Value can be a number or "latest".
+   */
   revision: string
 }
 
@@ -271,9 +289,12 @@ export type EnableSecretVersionRequest = {
    * config.
    */
   region?: Region
-  /** ID of the Secret. */
+  /** ID of the secret. */
   secretId: string
-  /** Revision of the SecretVersion (may be a number or "latest"). */
+  /**
+   * Version number. The first version of the secret is numbered 1, and all
+   * subsequent revisions augment by 1. Value can be a number or "latest".
+   */
   revision: string
 }
 
@@ -283,9 +304,12 @@ export type DisableSecretVersionRequest = {
    * config.
    */
   region?: Region
-  /** ID of the Secret. */
+  /** ID of the secret. */
   secretId: string
-  /** Revision of the SecretVersion (may be a number or "latest"). */
+  /**
+   * Version number. The first version of the secret is numbered 1, and all
+   * subsequent revisions augment by 1. Value can be a number or "latest".
+   */
   revision: string
 }
 
@@ -295,9 +319,12 @@ export type AccessSecretVersionRequest = {
    * config.
    */
   region?: Region
-  /** ID of the Secret. */
+  /** ID of the secret. */
   secretId: string
-  /** Revision of the SecretVersion (may be a number or "latest"). */
+  /**
+   * Version number. The first version of the secret is numbered 1, and all
+   * subsequent revisions augment by 1. Value can be a number or "latest".
+   */
   revision: string
 }
 
@@ -307,8 +334,11 @@ export type AccessSecretVersionByNameRequest = {
    * config.
    */
   region?: Region
-  /** Name of the Secret. */
+  /** Name of the secret. */
   secretName: string
-  /** Revision of the SecretVersion (may be a number or "latest"). */
+  /**
+   * Version number. The first version of the secret is numbered 1, and all
+   * subsequent revisions augment by 1. Value can be a number or "latest".
+   */
   revision: string
 }

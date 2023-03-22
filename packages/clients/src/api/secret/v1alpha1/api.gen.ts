@@ -48,17 +48,17 @@ const jsonContentHeaders = {
 }
 
 /**
- * Secret API (beta).
+ * Secret Manager API documentation.
  *
  * This API allows you to conveniently store, access and share sensitive data.
- * Secret API (beta).
+ * Secret Manager API documentation.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par']
 
   /**
-   * Create a Secret containing no versions.
+   * Create a secret. You must sepcify the `region` to create a secret.
    *
    * @param request - The request {@link CreateSecretRequest}
    * @returns A Promise of Secret
@@ -80,7 +80,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get metadata of a Secret.
+   * Get metadata using the secret's name. Retrieve the metadata of a secret
+   * specified by the `region` and the `secret_name` parameters.
    *
    * @param request - The request {@link GetSecretRequest}
    * @returns A Promise of Secret
@@ -98,7 +99,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get metadata of a Secret by name.
+   * Get metadata using the secret's ID. Retrieve the metadata of a secret
+   * specified by the `region` and the `secret_id` parameters.
    *
    * @param request - The request {@link GetSecretByNameRequest}
    * @returns A Promise of Secret
@@ -119,7 +121,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update metadata of a Secret.
+   * Update metadata of a secret. Edit a secret's metadata such as name, tag(s)
+   * and description. The secret to update is specified by the `secret_id` and
+   * `region` parameters.
    *
    * @param request - The request {@link UpdateSecretRequest}
    * @returns A Promise of Secret
@@ -165,7 +169,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Secrets.
+   * List secrets. Retrieve the list of secrets created within an Organization
+   * and/or Project. You must specify either the `organization_id` or the
+   * `project_id` and the `region`.
    *
    * @param request - The request {@link ListSecretsRequest}
    * @returns A Promise of ListSecretsResponse
@@ -174,7 +180,8 @@ export class API extends ParentAPI {
     enrichForPagination('secrets', this.pageOfListSecrets, request)
 
   /**
-   * Delete a Secret.
+   * Delete a secret. Delete a given secret specified by the `region` and
+   * `secret_id` parameters.
    *
    * @param request - The request {@link DeleteSecretRequest}
    */
@@ -188,7 +195,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Create a SecretVersion.
+   * Create a version. Create a version of a given secret specified by the
+   * `region` and `secret_id` parameters.
    *
    * @param request - The request {@link CreateSecretVersionRequest}
    * @returns A Promise of SecretVersion
@@ -210,7 +218,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get metadata of a SecretVersion.
+   * Get metadata of a secret's version using the secret's ID. Retrieve the
+   * metadata of a secret's given version specified by the `region`, `secret_id`
+   * and `revision` parameters.
    *
    * @param request - The request {@link GetSecretVersionRequest}
    * @returns A Promise of SecretVersion
@@ -231,7 +241,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get metadata of a SecretVersion by name.
+   * Get metadata of a secret's version using the secret's name. Retrieve the
+   * metadata of a secret's given version specified by the `region`,
+   * `secret_name` and `revision` parameters.
    *
    * @param request - The request {@link GetSecretVersionByNameRequest}
    * @returns A Promise of SecretVersion
@@ -252,7 +264,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update metadata of a SecretVersion.
+   * Update metadata of a version. Edit the metadata of a secret's given
+   * version, specified by the `region`, `secret_id` and `revision` parameters.
    *
    * @param request - The request {@link UpdateSecretVersionRequest}
    * @returns A Promise of SecretVersion
@@ -299,7 +312,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List versions of a Secret, not returning any sensitive data.
+   * List versions of a secret using the secret's ID. Retrieve the list of a
+   * given secret's versions specified by the `secret_id` and `region`
+   * parameters.
    *
    * @param request - The request {@link ListSecretVersionsRequest}
    * @returns A Promise of ListSecretVersionsResponse
@@ -333,7 +348,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List versions of a Secret by name, not returning any sensitive data.
+   * List versions of a secret using the secret's name. Retrieve the list of a
+   * given secret's versions specified by the `secret_name` and `region`
+   * parameters.
    *
    * @param request - The request {@link ListSecretVersionsByNameRequest}
    * @returns A Promise of ListSecretVersionsResponse
@@ -348,7 +365,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Destroy a SecretVersion, permanently destroying the sensitive data.
+   * Delete a version. Delete a secret's version and the sensitive data
+   * contained in it. Deleting a version is permanent and cannot be undone.
    *
    * @param request - The request {@link DestroySecretVersionRequest}
    * @returns A Promise of SecretVersion
@@ -371,7 +389,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Enable a SecretVersion.
+   * Enable a version. Make a specific version accessible. You must specify the
+   * `region`, `secret_id` and `revision` parameters.
    *
    * @param request - The request {@link EnableSecretVersionRequest}
    * @returns A Promise of SecretVersion
@@ -394,7 +413,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Disable a SecretVersion.
+   * Disable a version. Make a specific version inaccessible. You must specify
+   * the `region`, `secret_id` and `revision` parameters.
    *
    * @param request - The request {@link DisableSecretVersionRequest}
    * @returns A Promise of SecretVersion
@@ -417,7 +437,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Access a SecretVersion, returning the sensitive data.
+   * Access a secret's version using the secret's ID. Access sensitive data in a
+   * secret's version specified by the `region`, `secret_id` and `revision`
+   * parameters.
    *
    * @param request - The request {@link AccessSecretVersionRequest}
    * @returns A Promise of AccessSecretVersionResponse
@@ -438,7 +460,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Access a SecretVersion by name, returning the sensitive data.
+   * Access a secret's version using the secret's name. Access sensitive data in
+   * a secret's version specified by the `region`, `secret_name` and `revision`
+   * parameters.
    *
    * @param request - The request {@link AccessSecretVersionByNameRequest}
    * @returns A Promise of AccessSecretVersionResponse
