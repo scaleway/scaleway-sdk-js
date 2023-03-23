@@ -737,6 +737,13 @@ export class API extends ParentAPI {
       )}`,
     })
 
+  /**
+   * Clone a policy. Clone a policy. You must define specify the `policy_id`
+   * parameter in your request.
+   *
+   * @param request - The request {@link ClonePolicyRequest}
+   * @returns A Promise of Policy
+   */
   clonePolicy = (request: Readonly<ClonePolicyRequest>) =>
     this.client.fetch<Policy>(
       {
