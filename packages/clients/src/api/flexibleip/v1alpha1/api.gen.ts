@@ -276,6 +276,13 @@ export class API extends ParentAPI {
       unmarshalFlexibleIP,
     )
 
+  /**
+   * Move a virtual MAC. Move a Virtual MAC from a given Flexible IP onto
+   * another Flexible IP.
+   *
+   * @param request - The request {@link MoveMACAddrRequest}
+   * @returns A Promise of FlexibleIP
+   */
   moveMACAddr = (request: Readonly<MoveMACAddrRequest>) =>
     this.client.fetch<FlexibleIP>(
       {
