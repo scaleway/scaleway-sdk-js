@@ -231,6 +231,7 @@ const unmarshalRuntime = (data: unknown) => {
     extension: data.extension,
     implementation: data.implementation,
     language: data.language,
+    logoUrl: data.logo_url,
     name: data.name,
     status: data.status,
     statusMessage: data.status_message,

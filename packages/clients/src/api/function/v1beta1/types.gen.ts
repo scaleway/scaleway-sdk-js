@@ -292,6 +292,7 @@ export interface Runtime {
   statusMessage: string
   extension: string
   implementation: string
+  logoUrl: string
 }
 
 export interface Secret {
