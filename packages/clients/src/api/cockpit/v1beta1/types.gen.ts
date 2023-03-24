@@ -129,7 +129,7 @@ export type ResetCockpitGrafanaRequest = {
 
 export type CreateTokenRequest = {
   projectId?: string
-  name: string
+  name?: string
   scopes?: TokenScopes
 }
 
