@@ -173,7 +173,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateTokenRequest}
    * @returns A Promise of Token
    */
-  createToken = (request: Readonly<CreateTokenRequest>) =>
+  createToken = (request: Readonly<CreateTokenRequest> = {}) =>
     this.client.fetch<Token>(
       {
         body: JSON.stringify(

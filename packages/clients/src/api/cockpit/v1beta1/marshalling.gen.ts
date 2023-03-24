@@ -1,5 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+import randomName from '@scaleway/random-name'
 import {
   isJSONObject,
   resolveOneOf,
@@ -250,7 +251,7 @@ export const marshalCreateTokenRequest = (
   request: CreateTokenRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  name: request.name,
+  name: request.name || randomName('token'),
   project_id: request.projectId ?? defaults.defaultProjectId,
   scopes: request.scopes
     ? marshalTokenScopes(request.scopes, defaults)
