@@ -862,11 +862,8 @@ export type UpdateClusterRequest = {
   /** List of admission plugins to enable. */
   admissionPlugins?: string[]
   /**
-   * ALPHA - New OpenID Connect configuration of the cluster. This feature is in
-   * ALPHA state, it may be deleted or modified. This configuration enables to
-   * update the [OpenID Connect
-   * configuration](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#openid-connect-tokens)
-   * of the Kubernetes API server.
+   * OpenID Connect configuration of the cluster. This configuration enables to
+   * update the OpenID Connect configuration of the Kubernetes API server.
    */
   openIdConnectConfig?: UpdateClusterRequestOpenIDConnectConfig
   /**
