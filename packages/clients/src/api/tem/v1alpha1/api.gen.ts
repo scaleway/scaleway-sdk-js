@@ -46,16 +46,19 @@ const jsonContentHeaders = {
 }
 
 /**
- * Transactional Email API.
+ * Transactional Email API documentation.
  *
- * Tem. Transactional Email API.
+ * Tem. Transactional Email API documentation.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par']
 
   /**
-   * Send an email.
+   * Send an email. You must specify the `region`, the sender and the
+   * recipient's information and the `project_id` to send an email from a
+   * checked domain. The subject of the email must contain at least 6
+   * characters.
    *
    * @param request - The request {@link CreateEmailRequest}
    * @returns A Promise of CreateEmailResponse
@@ -77,7 +80,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get information about an email.
+   * Get an email. Retrieve information about a specific email using the
+   * `email_id` and `region` parameters.
    *
    * @param request - The request {@link GetEmailRequest}
    * @returns A Promise of Email
@@ -143,8 +147,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List emails sent from a domain and/or for a project and/or for an
-   * organization.
+   * List emails. Retrieve the list of emails sent from a specific domain or for
+   * a specific Project or Organization. You must specify the `region`.
    *
    * @param request - The request {@link ListEmailsRequest}
    * @returns A Promise of ListEmailsResponse
@@ -153,7 +157,7 @@ export class API extends ParentAPI {
     enrichForPagination('emails', this.pageOfListEmails, request)
 
   /**
-   * Get statistics on the email statuses.
+   * Email statuses. Get information on your emails' statuses.
    *
    * @param request - The request {@link GetStatisticsRequest}
    * @returns A Promise of Statistics
@@ -178,7 +182,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Try to cancel an email if it has not yet been sent.
+   * Cancel an email. You can cancel the sending of an email if it has not been
+   * sent yet. You must specify the `region` and the `email_id` of the email you
+   * want to cancel.
    *
    * @param request - The request {@link CancelEmailRequest}
    * @returns A Promise of Email
@@ -198,7 +204,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Register a domain in a project.
+   * Register a domain in a project. You must specify the `region`, `project_id`
+   * and `domain_name` to register a domain in a specific Project.
    *
    * @param request - The request {@link CreateDomainRequest}
    * @returns A Promise of Domain
@@ -220,7 +227,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get information about a domain.
+   * Get information about a domain. Retrieve information about a specific
+   * domain using the `region` and `domain_id` parameters.
    *
    * @param request - The request {@link GetDomainRequest}
    * @returns A Promise of Domain
@@ -281,7 +289,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List domains in a project and/or in an organization.
+   * List domains. Retrieve domains in a specific project or in a specific
+   * Organization using the `region` parameter.
    *
    * @param request - The request {@link ListDomainsRequest}
    * @returns A Promise of ListDomainsResponse
@@ -290,7 +299,9 @@ export class API extends ParentAPI {
     enrichForPagination('domains', this.pageOfListDomains, request)
 
   /**
-   * Revoke a domain.
+   * Delete a domain. You must specify the domain you want to delete by the
+   * `region` and `domain_id`. Deleting a domain is permanent and cannot be
+   * undone.
    *
    * @param request - The request {@link RevokeDomainRequest}
    * @returns A Promise of Domain
@@ -310,7 +321,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Ask for an immediate check of a domain (DNS check).
+   * Domain DNS check. Perform an immediate DNS check of a domain using the
+   * `region` and `domain_id` parameters.
    *
    * @param request - The request {@link CheckDomainRequest}
    * @returns A Promise of Domain

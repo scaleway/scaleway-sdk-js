@@ -25,7 +25,7 @@ export type EmailStatus =
 export interface CreateEmailRequestAddress {
   /** Email address. */
   email: string
-  /** Optional display name. */
+  /** (Optional) Name displayed. */
   name?: string
 }
 
@@ -33,12 +33,9 @@ export interface CreateEmailRequestAddress {
 export interface CreateEmailRequestAttachment {
   /** Filename of the attachment. */
   name: string
-  /**
-   * MIME type of the attachment (Currently only allow, text files, pdf and html
-   * files).
-   */
+  /** MIME type of the attachment. */
   type: string
-  /** Content of the attachment, encoded in base64. */
+  /** Content of the attachment encoded in base64. */
   content: string
 }
 
@@ -52,27 +49,27 @@ export interface CreateEmailResponse {
 export interface Domain {
   /** ID of the domain. */
   id: string
-  /** ID of the organization to which the domain belongs. */
+  /** ID of the domain's Organization. */
   organizationId: string
-  /** ID of the project. */
+  /** ID of the domain's Project. */
   projectId: string
   /** Domain name (example.com). */
   name: string
   /** Status of the domain. */
   status: DomainStatus
-  /** Date and time of domain's creation. */
+  /** Date and time of domain creation. */
   createdAt?: Date
   /** Date and time of the next scheduled check. */
   nextCheckAt?: Date
-  /** Date and time the domain was last found to be valid. */
+  /** Date and time the domain was last valid. */
   lastValidAt?: Date
-  /** Date and time of the revocation of the domain. */
+  /** Date and time of the domain's deletion. */
   revokedAt?: Date
-  /** Error message if the last check failed. */
+  /** Error message returned if the last check failed. */
   lastError?: string
-  /** Snippet of the SPF record that should be registered in the DNS zone. */
+  /** Snippet of the SPF record to register in the DNS zone. */
   spfConfig: string
-  /** DKIM public key, as should be recorded in the DNS zone. */
+  /** DKIM public key to record in the DNS zone. */
   dkimConfig: string
   /** Domain's statistics. */
   statistics?: DomainStatistics
@@ -90,29 +87,29 @@ export interface DomainStatistics {
 export interface Email {
   /** Technical ID of the email. */
   id: string
-  /** MessageID of the email. */
+  /** Message ID of the email. */
   messageId: string
-  /** ID of the project to which the email belongs. */
+  /** ID of the Project to which the email belongs. */
   projectId: string
   /** Email address of the sender. */
   mailFrom: string
   /** Email address of the recipient. */
   rcptTo: string
-  /** Type of the recipient. */
+  /** Type of recipient. */
   rcptType: EmailRcptType
   /** Subject of the email. */
   subject: string
   /** Creation date of the email object. */
   createdAt?: Date
-  /** Last update time of the email object. */
+  /** Last update of the email object. */
   updatedAt?: Date
   /** Status of the email. */
   status: EmailStatus
-  /** Additional information on the status. */
+  /** Additional status information. */
   statusDetails?: string
-  /** Total number of attempts to send the email. */
+  /** Number of attempts to send the email. */
   tryCount: number
-  /** Informations about the latest three attempts to send the email. */
+  /** Information about the last three attempts to send the email. */
   lastTries: EmailTry[]
 }
 
@@ -120,7 +117,7 @@ export interface Email {
 export interface EmailTry {
   /** Rank number of this attempt to send the email. */
   rank: number
-  /** Date of the attempt. */
+  /** Date of the attempt to send the email. */
   triedAt?: Date
   /**
    * The SMTP status code received after the attempt. 0 if the attempt did not
@@ -128,15 +125,15 @@ export interface EmailTry {
    */
   code: number
   /**
-   * The SMTP message received, if any. If the attempt did not reach an SMTP
-   * server, the message says why.
+   * The SMTP message received. If the attempt did not reach an SMTP server, the
+   * message returned explains what happened.
    */
   message: string
 }
 
 /** List domains response. */
 export interface ListDomainsResponse {
-  /** Total number of domains matching the request (without pagination). */
+  /** Number of domains that match the request (without pagination). */
   totalCount: number
   domains: Domain[]
 }
@@ -151,31 +148,31 @@ export interface ListEmailsResponse {
 
 /** Statistics. */
 export interface Statistics {
-  /** Total number of emails matching the request criteria. */
+  /** Total number of emails matching the requested criteria. */
   totalCount: number
   /**
-   * Number of emails still in the `new` transient state (received from the API,
-   * not yet processed).
+   * Number of emails still in the `new` transient state. This means emails
+   * received from the API but not yet processed.
    */
   newCount: number
   /**
-   * Number of emails still in the `sending` transient state (received from the
-   * API, not yet in their final status).
+   * Number of emails still in the `sending` transient state. This means emails
+   * received from the API but not yet in their final status.
    */
   sendingCount: number
   /**
-   * Number of emails in the final `sent` state (have been delivered to the
-   * target mail system).
+   * Number of emails in the final `sent` state. This means emails that have
+   * been delivered to the target mail system.
    */
   sentCount: number
   /**
-   * Number of emails in the final `failed` state (refused by the target mail
-   * system with a final error status).
+   * Number of emails in the final `failed` state. This means emails that have
+   * been refused by the target mail system with a final error status.
    */
   failedCount: number
   /**
-   * Number of emails in the final `canceled` state (canceled by customer's
-   * request).
+   * Number of emails in the final `canceled` state. This meanns emails that
+   * have been canceled upon request.
    */
   canceledCount: number
 }
@@ -186,7 +183,7 @@ export type CreateEmailRequest = {
    * config.
    */
   region?: Region
-  /** Sender information (must be from a checked domain declared in the project). */
+  /** Sender information. Must be from a checked domain declared in the Project. */
   from?: CreateEmailRequestAddress
   /** Array of recipient information (limited to 1 recipient). */
   to?: CreateEmailRequestAddress[]
@@ -194,17 +191,17 @@ export type CreateEmailRequest = {
   cc?: CreateEmailRequestAddress[]
   /** Array of recipient information (unimplemented). */
   bcc?: CreateEmailRequestAddress[]
-  /** Message subject. */
+  /** Subject of the email. */
   subject: string
   /** Text content. */
   text: string
   /** HTML content. */
   html: string
-  /** ID of the project in which to create the email. */
+  /** ID of the Project in which to create the email. */
   projectId?: string
   /** Array of attachments. */
   attachments?: CreateEmailRequestAttachment[]
-  /** Maximum date to deliver mail. */
+  /** Maximum date to deliver the email. */
   sendBefore?: Date
 }
 
@@ -226,24 +223,24 @@ export type ListEmailsRequest = {
   region?: Region
   page?: number
   pageSize?: number
-  /** Optional ID of the project in which to list the emails. */
+  /** ID of the Project in which to list the emails (optional). */
   projectId?: string
-  /** Optional ID of the domain for which to list the emails. */
+  /** ID of the domain for which to list the emails (optional). */
   domainId?: string
-  /** Optional ID of the message for which to list the emails. */
+  /** ID of the message for which to list the emails (optional). */
   messageId?: string
-  /** Optional, list emails created after this date. */
-  since?: Date
-  /** Optional, list emails created before this date. */
-  until?: Date
-  /** Optional, list emails sent with this `mail_from` sender's address. */
-  mailFrom?: string
-  /** Optional, list emails sent with this `mail_to` recipient's address. */
-  mailTo?: string
-  /** Optional, list emails having any of this status. */
-  statuses?: EmailStatus[]
-  /** Optional, list emails having this subject. */
+  /** Subject of the email. */
   subject?: string
+  /** List emails created after this date (optional). */
+  since?: Date
+  /** List emails created before this date (optional). */
+  until?: Date
+  /** List emails sent with this `mail_from` sender's address (optional). */
+  mailFrom?: string
+  /** List emails sent with this `mail_to` recipient's address (optional). */
+  mailTo?: string
+  /** List emails having any of this status (optional). */
+  statuses?: EmailStatus[]
 }
 
 export type GetStatisticsRequest = {
@@ -252,18 +249,18 @@ export type GetStatisticsRequest = {
    * config.
    */
   region?: Region
-  /** Optional, count emails for this project. */
+  /** Number of emails for this Project (optional). */
   projectId?: string
   /**
-   * Optional, count emails send from this domain (must be coherent with the
-   * `project_id` and the `organization_id`).
+   * Number of emails sent from this domain (must be coherent with the
+   * `project_id` and the `organization_id`) (optional).
    */
   domainId?: string
-  /** Optional, count emails created after this date. */
+  /** Number of emails created after this date (optional). */
   since?: Date
-  /** Optional, count emails created before this date. */
+  /** Number of emails created before this date (optional). */
   until?: Date
-  /** Optional, count emails sent with this `mail_from` sender's address. */
+  /** Number of emails sent with this `mail_from` sender's address (optional). */
   mailFrom?: string
 }
 
@@ -287,7 +284,7 @@ export type CreateDomainRequest = {
   projectId?: string
   /** Fully qualified domain dame. */
   domainName: string
-  /** Accept the Scaleway Terms of Service. */
+  /** Accept Scaleway's Terms of Service. */
   acceptTos: boolean
 }
 
@@ -307,7 +304,7 @@ export type ListDomainsRequest = {
    * config.
    */
   region?: Region
-  /** Page number (1 for the first page). */
+  /** Requested page number. Value must be greater or equal to 1. */
   page?: number
   /** Page size. */
   pageSize?: number
@@ -323,7 +320,7 @@ export type RevokeDomainRequest = {
    * config.
    */
   region?: Region
-  /** ID of the domain to revoke. */
+  /** ID of the domain to delete. */
   domainId: string
 }
 
