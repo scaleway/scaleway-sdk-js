@@ -94,7 +94,7 @@ export const ListGroupsRequest = {
     minLength: 1,
   },
   page: {
-    greaterThanOrEqual: 1,
+    greaterThan: 0,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -114,7 +114,7 @@ export const ListJWTsRequest = {
 
 export const ListPermissionSetsRequest = {
   page: {
-    greaterThanOrEqual: 1,
+    greaterThan: 0,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -124,7 +124,7 @@ export const ListPermissionSetsRequest = {
 
 export const ListPoliciesRequest = {
   page: {
-    greaterThanOrEqual: 1,
+    greaterThan: 0,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -147,7 +147,7 @@ export const ListQuotaRequest = {
 
 export const ListRulesRequest = {
   page: {
-    greaterThanOrEqual: 1,
+    greaterThan: 0,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -161,7 +161,7 @@ export const ListSSHKeysRequest = {
     minLength: 1,
   },
   page: {
-    greaterThanOrEqual: 1,
+    greaterThan: 0,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -171,7 +171,7 @@ export const ListSSHKeysRequest = {
 
 export const ListUsersRequest = {
   page: {
-    greaterThanOrEqual: 1,
+    greaterThan: 0,
   },
   pageSize: {
     greaterThanOrEqual: 1,
