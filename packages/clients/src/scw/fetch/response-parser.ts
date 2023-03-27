@@ -1,3 +1,4 @@
+import { isResponse } from '../../helpers/is-response'
 import { isJSONObject } from '../../helpers/json'
 import { parseScalewayError } from '../errors/error-parser'
 import { ScalewayError } from '../errors/scw-error'
@@ -50,7 +51,7 @@ export const responseParser =
     responseType: 'json' | 'text' | 'blob',
   ) =>
   async (response: Response): Promise<T> => {
-    if (!(response instanceof Response)) {
+    if (!isResponse(response)) {
       throw new TypeError('Invalid response object')
     }
 
