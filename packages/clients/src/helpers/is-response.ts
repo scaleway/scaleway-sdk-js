@@ -1,6 +1,8 @@
 /**
  * Validates an object is of type Response without using `instanceof`.
  *
+ * @remarks Check issue #509 for more context.
+ *
  * @internal
  */
 export const isResponse = (obj: unknown): obj is Response =>
