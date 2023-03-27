@@ -294,6 +294,7 @@ export const unmarshalHealthCheck = (data: unknown) => {
     tcpConfig: data.tcp_config
       ? unmarshalHealthCheckTcpConfig(data.tcp_config)
       : undefined,
+    transientCheckDelay: data.transient_check_delay,
   } as HealthCheck
 }
 
@@ -363,10 +364,12 @@ export const unmarshalBackend = (data: unknown) => {
     id: data.id,
     ignoreSslServerVerify: data.ignore_ssl_server_verify,
     lb: data.lb ? unmarshalLb(data.lb) : undefined,
+    maxRetries: data.max_retries,
     name: data.name,
     onMarkedDownAction: data.on_marked_down_action,
     pool: data.pool,
     proxyProtocol: data.proxy_protocol,
+    redispatchAttemptCount: data.redispatch_attempt_count,
     sendProxyV2: data.send_proxy_v2,
     sslBridging: data.ssl_bridging,
     stickySessions: data.sticky_sessions,
@@ -887,6 +890,7 @@ const marshalHealthCheck = (
   check_send_proxy: request.checkSendProxy,
   check_timeout: request.checkTimeout,
   port: request.port,
+  transient_check_delay: request.transientCheckDelay,
   ...resolveOneOf<unknown>([
     {
       param: 'mysql_config',
@@ -1034,10 +1038,12 @@ export const marshalCreateBackendRequest = (
   forward_protocol: request.forwardProtocol,
   health_check: marshalHealthCheck(request.healthCheck, defaults),
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
+  max_retries: request.maxRetries,
   name: request.name || randomName('lbb'),
   on_marked_down_action:
     request.onMarkedDownAction ?? 'on_marked_down_action_none',
   proxy_protocol: request.proxyProtocol ?? 'proxy_protocol_unknown',
+  redispatch_attempt_count: request.redispatchAttemptCount,
   send_proxy_v2: request.sendProxyV2,
   server_ip: request.serverIp,
   ssl_bridging: request.sslBridging,
@@ -1225,10 +1231,12 @@ export const marshalUpdateBackendRequest = (
   forward_port_algorithm: request.forwardPortAlgorithm,
   forward_protocol: request.forwardProtocol,
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
+  max_retries: request.maxRetries,
   name: request.name,
   on_marked_down_action:
     request.onMarkedDownAction ?? 'on_marked_down_action_none',
   proxy_protocol: request.proxyProtocol ?? 'proxy_protocol_unknown',
+  redispatch_attempt_count: request.redispatchAttemptCount,
   send_proxy_v2: request.sendProxyV2,
   ssl_bridging: request.sslBridging,
   sticky_sessions: request.stickySessions,
@@ -1267,6 +1275,7 @@ export const marshalUpdateHealthCheckRequest = (
   check_send_proxy: request.checkSendProxy,
   check_timeout: request.checkTimeout,
   port: request.port,
+  transient_check_delay: request.transientCheckDelay,
   ...resolveOneOf<unknown>([
     {
       param: 'mysql_config',
@@ -1414,10 +1423,12 @@ export const marshalZonedApiCreateBackendRequest = (
   forward_protocol: request.forwardProtocol,
   health_check: marshalHealthCheck(request.healthCheck, defaults),
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
+  max_retries: request.maxRetries,
   name: request.name || randomName('lbb'),
   on_marked_down_action:
     request.onMarkedDownAction ?? 'on_marked_down_action_none',
   proxy_protocol: request.proxyProtocol ?? 'proxy_protocol_unknown',
+  redispatch_attempt_count: request.redispatchAttemptCount,
   send_proxy_v2: request.sendProxyV2,
   server_ip: request.serverIp,
   ssl_bridging: request.sslBridging,
@@ -1612,10 +1623,12 @@ export const marshalZonedApiUpdateBackendRequest = (
   forward_port_algorithm: request.forwardPortAlgorithm,
   forward_protocol: request.forwardProtocol,
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
+  max_retries: request.maxRetries,
   name: request.name,
   on_marked_down_action:
     request.onMarkedDownAction ?? 'on_marked_down_action_none',
   proxy_protocol: request.proxyProtocol ?? 'proxy_protocol_unknown',
+  redispatch_attempt_count: request.redispatchAttemptCount,
   send_proxy_v2: request.sendProxyV2,
   ssl_bridging: request.sslBridging,
   sticky_sessions: request.stickySessions,
@@ -1654,6 +1667,7 @@ export const marshalZonedApiUpdateHealthCheckRequest = (
   check_send_proxy: request.checkSendProxy,
   check_timeout: request.checkTimeout,
   port: request.port,
+  transient_check_delay: request.transientCheckDelay,
   ...resolveOneOf<unknown>([
     {
       param: 'mysql_config',
