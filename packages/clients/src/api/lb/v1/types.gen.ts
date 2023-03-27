@@ -300,6 +300,10 @@ export interface Backend {
   sslBridging?: boolean
   /** Defines whether the server certificate verification should be ignored. */
   ignoreSslServerVerify?: boolean
+  /** Whether to use another backend server on each attempt. */
+  redispatchAttemptCount?: number
+  /** Number of retries when a backend server connection failed. */
+  maxRetries?: number
 }
 
 /** Backend server stats. */
@@ -475,6 +479,11 @@ export interface HealthCheck {
   checkDelay?: string
   /** Defines whether proxy protocol should be activated for the health check. */
   checkSendProxy: boolean
+  /**
+   * Time to wait between two consecutive health checks when a backend server is
+   * in a transient state (going UP or DOWN).
+   */
+  transientCheckDelay?: string
 }
 
 /** Health check. http config. */
@@ -1171,6 +1180,10 @@ export type CreateBackendRequest = {
   sslBridging?: boolean
   /** Defines whether the server certificate verification should be ignored. */
   ignoreSslServerVerify?: boolean
+  /** Whether to use another backend server on each attempt. */
+  redispatchAttemptCount?: number
+  /** Number of retries when a backend server connection failed. */
+  maxRetries?: number
 }
 
 export type GetBackendRequest = {
@@ -1247,6 +1260,10 @@ export type UpdateBackendRequest = {
   sslBridging?: boolean
   /** Defines whether the server certificate verification should be ignored. */
   ignoreSslServerVerify?: boolean
+  /** Whether to use another backend server on each retries. */
+  redispatchAttemptCount?: number
+  /** Number of retries when a backend server connection failed. */
+  maxRetries?: number
 }
 
 export type DeleteBackendRequest = {
@@ -1375,6 +1392,11 @@ export type UpdateHealthCheckRequest = {
   httpsConfig?: HealthCheckHttpsConfig
   /** Defines whether proxy protocol should be activated for the health check. */
   checkSendProxy: boolean
+  /**
+   * Time to wait between two consecutive health checks when a backend server is
+   * in a transient state (going UP or DOWN).
+   */
+  transientCheckDelay?: string
 }
 
 export type ListFrontendsRequest = {
@@ -2202,6 +2224,10 @@ export type ZonedApiCreateBackendRequest = {
   sslBridging?: boolean
   /** Defines whether the server certificate verification should be ignored. */
   ignoreSslServerVerify?: boolean
+  /** Whether to use another backend server on each attempt. */
+  redispatchAttemptCount?: number
+  /** Number of retries when a backend server connection failed. */
+  maxRetries?: number
 }
 
 export type ZonedApiGetBackendRequest = {
@@ -2272,6 +2298,10 @@ export type ZonedApiUpdateBackendRequest = {
   sslBridging?: boolean
   /** Defines whether the server certificate verification should be ignored. */
   ignoreSslServerVerify?: boolean
+  /** Whether to use another backend server on each retries. */
+  redispatchAttemptCount?: number
+  /** Number of retries when a backend server connection failed. */
+  maxRetries?: number
 }
 
 export type ZonedApiDeleteBackendRequest = {
@@ -2385,6 +2415,11 @@ export type ZonedApiUpdateHealthCheckRequest = {
   httpsConfig?: HealthCheckHttpsConfig
   /** Defines whether proxy protocol should be activated for the health check. */
   checkSendProxy: boolean
+  /**
+   * Time to wait between two consecutive health checks when a backend server is
+   * in a transient state (going UP or DOWN).
+   */
+  transientCheckDelay?: string
 }
 
 export type ZonedApiListFrontendsRequest = {
