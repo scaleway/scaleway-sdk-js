@@ -1,4 +1,4 @@
-import { describe, expect, it } from '@jest/globals'
+import { describe, expect, it, jest } from '@jest/globals'
 import { enableConsoleLogger, getLogger, setLogger } from '..'
 import { ConsoleLogger } from '../console-logger'
 import type { LogLevel } from '../level-resolver'
@@ -130,7 +130,7 @@ describe('ConsoleLogger', () => {
   })
 
   it('returns the proper level boolean', () => {
-    const log = jest.fn().mockImplementation()
+    const log = jest.fn().mockImplementation(() => {})
     const out = makeCallbackConsole(log)
     for (const test of IS_LEVEL_ENOUGH_CASES) {
       const logger = new ConsoleLogger(test.base, '', out)

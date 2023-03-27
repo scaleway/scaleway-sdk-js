@@ -1,4 +1,4 @@
-import { describe, expect } from '@jest/globals'
+import { describe, expect, test } from '@jest/globals'
 import { isJSON, isJSONObject } from '../json'
 
 describe('isJSON', () => {
