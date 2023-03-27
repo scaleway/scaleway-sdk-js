@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.4.0...@scaleway/sdk@1.5.0) (2023-03-27)
+
+### Features
+
+- **account:** remove v2alpha1 (please migrate to IAM) ([#548](https://github.com/scaleway/scaleway-sdk-js/issues/548)) ([cbb2f85](https://github.com/scaleway/scaleway-sdk-js/commit/cbb2f85485376a490d27be60c9c178dc016bd0c9))
+- **billing:** add v2alpha1 ([#531](https://github.com/scaleway/scaleway-sdk-js/issues/531)) ([d6a86c4](https://github.com/scaleway/scaleway-sdk-js/commit/d6a86c4005c0bc615df92abaf9506c501168f6d7))
+- **cockpit:** generate token name by default ([#551](https://github.com/scaleway/scaleway-sdk-js/issues/551)) ([7ec9ab2](https://github.com/scaleway/scaleway-sdk-js/commit/7ec9ab26db06eb8eb5764664f643755d6714d178))
+- **function:** add logoUrl to Runtime ([#547](https://github.com/scaleway/scaleway-sdk-js/issues/547)) ([56077e6](https://github.com/scaleway/scaleway-sdk-js/commit/56077e6c1e9c66f45479be8997cc0c93622ef825))
+- **k8s:** add privateNetworkId field ([#539](https://github.com/scaleway/scaleway-sdk-js/issues/539)) ([f09fa40](https://github.com/scaleway/scaleway-sdk-js/commit/f09fa4090b30c01ca6fbd217a4b04df3d788a411))
+- **k8s:** method to change cluster type ([#534](https://github.com/scaleway/scaleway-sdk-js/issues/534)) ([0b439b9](https://github.com/scaleway/scaleway-sdk-js/commit/0b439b93afd23b32e133fb94b206e600903da1b4))
+- **serverless:** add mnq credential id on trigger ([#535](https://github.com/scaleway/scaleway-sdk-js/issues/535)) ([a2fd61e](https://github.com/scaleway/scaleway-sdk-js/commit/a2fd61e9a1caa73115084d2f39bd0cc8672b02d3))
+
+### Bug Fixes
+
+- **fetch:** check response is of proper type without using instanceof ([#536](https://github.com/scaleway/scaleway-sdk-js/issues/536)) ([e1184d1](https://github.com/scaleway/scaleway-sdk-js/commit/e1184d1dfbfeee90ba9f86130f88588b4ebf91de))
+- **secret-manager:** incomplete API descriptions ([#530](https://github.com/scaleway/scaleway-sdk-js/issues/530)) ([0ac0753](https://github.com/scaleway/scaleway-sdk-js/commit/0ac07539eacc47540c6dcb8b984394c186c42ee6))
+
 ## [1.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.2.0...@scaleway/sdk@1.4.0) (2023-03-15)
 
 ### Features
