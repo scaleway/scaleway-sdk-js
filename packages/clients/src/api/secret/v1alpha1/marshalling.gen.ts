@@ -112,6 +112,7 @@ export const marshalCreateSecretVersionRequest = (
 ): Record<string, unknown> => ({
   data: request.data,
   description: request.description,
+  disable_previous: request.disablePrevious,
 })
 
 export const marshalUpdateSecretRequest = (

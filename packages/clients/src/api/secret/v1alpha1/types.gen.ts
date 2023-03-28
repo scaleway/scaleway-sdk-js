@@ -191,6 +191,11 @@ export type CreateSecretVersionRequest = {
   data: string
   /** Description of the version. */
   description?: string
+  /**
+   * Disable the previous secret version. If there is no previous version or if
+   * the previous version was already disabled, does nothing.
+   */
+  disablePrevious: boolean
 }
 
 export type GetSecretVersionRequest = {
