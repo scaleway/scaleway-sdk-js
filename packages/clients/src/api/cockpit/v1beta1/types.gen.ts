@@ -14,11 +14,15 @@ export type GrafanaUserRole = 'unknown_role' | 'editor' | 'viewer'
 
 export type ListGrafanaUsersRequestOrderBy = 'login_asc' | 'login_desc'
 
+export type ListPlansRequestOrderBy = 'name_asc' | 'name_desc'
+
 export type ListTokensRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
   | 'name_asc'
   | 'name_desc'
+
+export type PlanName = 'unknown_name' | 'free' | 'premium' | 'custom'
 
 /** Cockpit. */
 export interface Cockpit {
@@ -34,6 +38,8 @@ export interface Cockpit {
   status: CockpitStatus
   /** Managed alerts enabled. */
   managedAlertsEnabled: boolean
+  /** Pricing plan. */
+  plan?: Plan
 }
 
 /** Cockpit. endpoints. */
@@ -90,11 +96,38 @@ export interface ListGrafanaUsersResponse {
   grafanaUsers: GrafanaUser[]
 }
 
+/** List all pricing plans response. List plans response. */
+export interface ListPlansResponse {
+  totalCount: number
+  plans: Plan[]
+}
+
 /** List tokens response. */
 export interface ListTokensResponse {
   totalCount: number
   tokens: Token[]
 }
+
+/** Plan. */
+export interface Plan {
+  /** Plan id. */
+  id: string
+  /** Plan name. */
+  name: PlanName
+  /** Retention for metrics. */
+  retentionMetricsInterval?: string
+  /** Retention for logs. */
+  retentionLogsInterval?: string
+  /** Ingestion price for 1million samples in cents. */
+  sampleIngestionPrice: number
+  /** Ingestion price in cents for 1 Go of logs. */
+  logsIngestionPrice: number
+  /** Retention price in euros per month. */
+  retentionPrice: number
+}
+
+/** Select pricing plan response. Select plan response. */
+export interface SelectPlanResponse {}
 
 /** Token. */
 export interface Token {
@@ -221,4 +254,15 @@ export type DeleteGrafanaUserRequest = {
 export type ResetGrafanaUserPasswordRequest = {
   grafanaUserId: number
   projectId?: string
+}
+
+export type ListPlansRequest = {
+  page?: number
+  pageSize?: number
+  orderBy?: ListPlansRequestOrderBy
+}
+
+export type SelectPlanRequest = {
+  projectId?: string
+  planId: string
 }
