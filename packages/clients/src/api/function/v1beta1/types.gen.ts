@@ -368,23 +368,7 @@ export interface TriggerSqsClientConfig {
   secretKey: string
 }
 
-export interface UpdateTriggerRequestMnqNatsClientConfig {
-  mnqNamespaceId: string
-  subject: string
-  mnqProjectId: string
-  mnqRegion: string
-}
-
-export interface UpdateTriggerRequestMnqSqsClientConfig {
-  mnqNamespaceId: string
-  queue: string
-  mnqProjectId: string
-  mnqRegion: string
-}
-
 export interface UpdateTriggerRequestSqsClientConfig {
-  endpoint: string
-  queueUrl: string
   accessKey: string
   secretKey: string
 }
@@ -812,21 +796,8 @@ export type UpdateTriggerRequest = {
   triggerId: string
   name?: string
   description?: string
-  /**
-   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
-   * 'scwNatsConfig' could be set.
-   */
-  scwSqsConfig?: UpdateTriggerRequestMnqSqsClientConfig
-  /**
-   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
-   * 'scwNatsConfig' could be set.
-   */
+  /** One-of ('config'): at most one of 'sqsConfig' could be set. */
   sqsConfig?: UpdateTriggerRequestSqsClientConfig
-  /**
-   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
-   * 'scwNatsConfig' could be set.
-   */
-  scwNatsConfig?: UpdateTriggerRequestMnqNatsClientConfig
 }
 
 export type DeleteTriggerRequest = {
