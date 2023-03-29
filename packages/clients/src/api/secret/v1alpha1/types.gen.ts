@@ -47,6 +47,20 @@ export interface ListSecretsResponse {
   secrets: Secret[]
 }
 
+/** Password generation params. */
+export interface PasswordGenerationParams {
+  /** Length of the password to generate (between 1 and 1024). */
+  length: number
+  /** Do not include lower case letters by default in the alphabet. */
+  noLowercaseLetters: boolean
+  /** Do not include upper case letters by default in the alphabet. */
+  noUppercaseLetters: boolean
+  /** Do not include digits by default in the alphabet. */
+  noDigits: boolean
+  /** Additional ascii characters to be included in the alphabet. */
+  additionalChars: string
+}
+
 /** Secret. */
 export interface Secret {
   /** ID of the secret. */
@@ -196,6 +210,16 @@ export type CreateSecretVersionRequest = {
    * the previous version was already disabled, does nothing.
    */
   disablePrevious: boolean
+  /**
+   * Options to generate a password. If specified, a random password will be
+   * generated. The data field must be empty. By default, the generator will use
+   * upper and lower case letters, and digits. This behavior can be tuned using
+   * the generation params.
+   *
+   * One-of ('PasswordGeneration'): at most one of 'passwordGeneration' could be
+   * set.
+   */
+  passwordGeneration?: PasswordGenerationParams
 }
 
 export type GetSecretVersionRequest = {
