@@ -61,119 +61,119 @@ export interface SetSnapshotResponse {
 export type CreateServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The server name. */
+  /** Instance name. */
   name?: string
-  /** Define if a dynamic IP is required for the instance. */
+  /** Define if a dynamic IP is required for the Instance. */
   dynamicIpRequired?: boolean
-  /** Define the server commercial type (i.e. GP1-S). */
+  /** Define the Instance commercial type (i.e. GP1-S). */
   commercialType: string
-  /** The server image ID or label. */
+  /** Instance image ID or label. */
   image: string
-  /** The volumes attached to the server. */
+  /** Volumes attached to the server. */
   volumes?: Record<string, VolumeServerTemplate>
   /** True if IPv6 is enabled on the server. */
   enableIpv6: boolean
-  /** The ID of the reserved IP to attach to the server. */
+  /** ID of the reserved IP to attach to the server. */
   publicIp?: string
-  /** The boot type to use. */
+  /** Boot type to use. */
   bootType?: BootType
-  /**
-   * @deprecated The bootscript ID to use when `boot_type` is set to
-   *   `bootscript`.
-   */
+  /** @deprecated Bootscript ID to use when `boot_type` is set to `bootscript`. */
   bootscript?: string
   /**
-   * @deprecated The server organization ID.
+   * @deprecated Instance Organization ID.
    *
    *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
    *   could be set.
    */
   organization?: string
   /**
-   * The server project ID.
+   * Instance Project ID.
    *
    * One-of ('projectIdentifier'): at most one of 'organization', 'project'
    * could be set.
    */
   project?: string
-  /** The server tags. */
+  /** Instance tags. */
   tags?: string[]
-  /** The security group ID. */
+  /** Security group ID. */
   securityGroup?: string
-  /** Placement group ID if server must be part of a placement group. */
+  /** Placement group ID if Instance must be part of a placement group. */
   placementGroup?: string
 }
 
 export type SetServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The server unique ID. */
+  /** Instance unique ID. */
   id: string
-  /** The server name. */
+  /** Instance name. */
   name: string
-  /** The server organization ID. */
+  /** Instance Organization ID. */
   organization?: string
-  /** The server project ID. */
+  /** Instance Project ID. */
   project?: string
-  /** Provide as list of allowed actions on the server. */
+  /** Provide a list of allowed actions on the server. */
   allowedActions?: ServerAction[]
-  /** The server associated tags. */
+  /** Tags associated with the Instance. */
   tags?: string[]
-  /** The server commercial type (eg. GP1-M). */
+  /** Instance commercial type (eg. GP1-M). */
   commercialType: string
-  /** The server creation date. */
+  /** Instance creation date. */
   creationDate?: Date
   /** True if a dynamic IP is required. */
   dynamicIpRequired: boolean
   /** True if IPv6 is enabled. */
   enableIpv6: boolean
-  /** The server host name. */
+  /** Instance host name. */
   hostname: string
-  /** Provide information on the server image. */
+  /** Provide information on the Instance image. */
   image?: Image
-  /** The server protection option is activated. */
+  /** Instance protection option is activated. */
   protected: boolean
-  /** The server private IP address. */
+  /** Instance private IP address. */
   privateIp?: string
   /** Information about the public IP. */
   publicIp?: ServerIp
-  /** The server modification date. */
+  /** Instance modification date. */
   modificationDate?: Date
-  /** The server state. */
+  /** Instance state. */
   state?: ServerState
-  /** The server location. */
+  /** Instance location. */
   location?: ServerLocation
-  /** The server IPv6 address. */
+  /** Instance IPv6 address. */
   ipv6?: ServerIpv6
-  /** @deprecated The server bootscript. */
+  /** @deprecated Instance bootscript. */
   bootscript?: Bootscript
-  /** The server boot type. */
+  /** Instance boot type. */
   bootType?: BootType
-  /** The server volumes. */
+  /** Instance volumes. */
   volumes?: Record<string, Volume>
-  /** The server security group. */
+  /** Instance security group. */
   securityGroup?: SecurityGroupSummary
-  /** The server planned maintenances. */
+  /** Instance planned maintenances. */
   maintenances?: ServerMaintenance[]
-  /** The server state_detail. */
+  /** Instance state_detail. */
   stateDetail: string
-  /** The server arch. */
+  /**
+   * Instance architecture (refers to the CPU architecture used for the
+   * Instance, e.g. x86_64, arm64).
+   */
   arch?: Arch
-  /** The server placement group. */
+  /** Instance placement group. */
   placementGroup?: PlacementGroup
-  /** The server private NICs. */
+  /** Instance private NICs. */
   privateNics?: PrivateNIC[]
 }
 
 export type UpdateServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the server. */
+  /** UUID of the Instance. */
   serverId: string
-  /** Name of the server. */
+  /** Name of the Instance. */
   name?: string
   bootType?: BootType
-  /** Tags of the server. */
+  /** Tags of the Instance. */
   tags?: string[]
   volumes?: Record<string, VolumeServerTemplate>
   /** @deprecated */
@@ -182,9 +182,9 @@ export type UpdateServerRequest = {
   enableIpv6?: boolean
   protected?: boolean
   securityGroup?: SecurityGroupTemplate
-  /** Placement group ID if server must be part of a placement group. */
+  /** Placement group ID if Instance must be part of a placement group. */
   placementGroup?: string | null
-  /** The server private NICs. */
+  /** Instance private NICs. */
   privateNics?: PrivateNIC[]
 }
 
@@ -228,33 +228,33 @@ export type SetSnapshotRequest = {
 export type SetSecurityGroupRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The ID of the security group (will be ignored). */
+  /** ID of the security group (will be ignored). */
   id: string
-  /** The name of the security group. */
+  /** Name of the security group. */
   name: string
-  /** The tags of the security group. */
+  /** Tags of the security group. */
   tags?: string[]
-  /** The creation date of the security group (will be ignored). */
+  /** Creation date of the security group (will be ignored). */
   creationDate?: Date
-  /** The modification date of the security group (will be ignored). */
+  /** Modification date of the security group (will be ignored). */
   modificationDate?: Date
-  /** The description of the security group. */
+  /** Description of the security group. */
   description: string
   /** True to block SMTP on IPv4 and IPv6. */
   enableDefaultSecurity: boolean
-  /** The default inbound policy. */
+  /** Default inbound policy. */
   inboundDefaultPolicy?: SecurityGroupPolicy
-  /** The default outbound policy. */
+  /** Default outbound policy. */
   outboundDefaultPolicy?: SecurityGroupPolicy
-  /** The security groups organization ID. */
+  /** Security groups Organization ID. */
   organization?: string
-  /** The security group project ID. */
+  /** Security group Project ID. */
   project?: string
   /** @deprecated Please use project_default instead. */
   organizationDefault?: boolean
-  /** True use this security group for future instances created in this project. */
+  /** True use this security group for future Instances created in this project. */
   projectDefault: boolean
-  /** The servers attached to this security group. */
+  /** Instances attached to this security group. */
   servers?: ServerSummary[]
   /** True to set the security group as stateful. */
   stateful: boolean
