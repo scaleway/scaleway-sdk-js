@@ -26,6 +26,7 @@ export type {
   Endpoint,
   EndpointSpec,
   EndpointSpecPrivateNetworkSpec,
+  EndpointSpecPrivateNetworkSpecIpamConfig,
   EndpointSpecPublicNetworkSpec,
   GetAclRuleRequest,
   GetClusterCertificateRequest,

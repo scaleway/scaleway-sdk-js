@@ -27,6 +27,7 @@ import type {
   Endpoint,
   EndpointSpec,
   EndpointSpecPrivateNetworkSpec,
+  EndpointSpecPrivateNetworkSpecIpamConfig,
   EndpointSpecPublicNetworkSpec,
   ListClusterVersionsResponse,
   ListClustersResponse,
@@ -313,11 +314,22 @@ export const unmarshalSetEndpointsResponse = (data: unknown) => {
   } as SetEndpointsResponse
 }
 
+const marshalEndpointSpecPrivateNetworkSpecIpamConfig = (
+  request: EndpointSpecPrivateNetworkSpecIpamConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({})
+
 const marshalEndpointSpecPrivateNetworkSpec = (
   request: EndpointSpecPrivateNetworkSpec,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   id: request.id,
+  ipam_config: request.ipamConfig
+    ? marshalEndpointSpecPrivateNetworkSpecIpamConfig(
+        request.ipamConfig,
+        defaults,
+      )
+    : undefined,
   service_ips: request.serviceIps,
 })
 
