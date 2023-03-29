@@ -27,9 +27,13 @@ import type {
   GrafanaUser,
   ListContactPointsResponse,
   ListGrafanaUsersResponse,
+  ListPlansResponse,
   ListTokensResponse,
+  Plan,
   ResetCockpitGrafanaRequest,
   ResetGrafanaUserPasswordRequest,
+  SelectPlanRequest,
+  SelectPlanResponse,
   Token,
   TokenScopes,
   TriggerTestAlertRequest,
@@ -105,6 +109,24 @@ export const unmarshalGrafanaUser = (data: unknown) => {
   } as GrafanaUser
 }
 
+const unmarshalPlan = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Plan' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    logsIngestionPrice: data.logs_ingestion_price,
+    name: data.name,
+    retentionLogsInterval: data.retention_logs_interval,
+    retentionMetricsInterval: data.retention_metrics_interval,
+    retentionPrice: data.retention_price,
+    sampleIngestionPrice: data.sample_ingestion_price,
+  } as Plan
+}
+
 export const unmarshalToken = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -136,6 +158,7 @@ export const unmarshalCockpit = (data: unknown) => {
       ? unmarshalCockpitEndpoints(data.endpoints)
       : undefined,
     managedAlertsEnabled: data.managed_alerts_enabled,
+    plan: data.plan ? unmarshalPlan(data.plan) : undefined,
     projectId: data.project_id,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
@@ -188,6 +211,19 @@ export const unmarshalListGrafanaUsersResponse = (data: unknown) => {
   } as ListGrafanaUsersResponse
 }
 
+export const unmarshalListPlansResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPlansResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    plans: unmarshalArrayOfObject(data.plans, unmarshalPlan),
+    totalCount: data.total_count,
+  } as ListPlansResponse
+}
+
 export const unmarshalListTokensResponse = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -199,6 +235,16 @@ export const unmarshalListTokensResponse = (data: unknown) => {
     tokens: unmarshalArrayOfObject(data.tokens, unmarshalToken),
     totalCount: data.total_count,
   } as ListTokensResponse
+}
+
+export const unmarshalSelectPlanResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SelectPlanResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as SelectPlanResponse
 }
 
 const marshalContactPointEmail = (
@@ -321,6 +367,14 @@ export const marshalResetGrafanaUserPasswordRequest = (
   request: ResetGrafanaUserPasswordRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
+export const marshalSelectPlanRequest = (
+  request: SelectPlanRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  plan_id: request.planId,
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 

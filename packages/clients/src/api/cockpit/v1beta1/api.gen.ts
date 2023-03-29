@@ -21,6 +21,7 @@ import {
   marshalEnableManagedAlertsRequest,
   marshalResetCockpitGrafanaRequest,
   marshalResetGrafanaUserPasswordRequest,
+  marshalSelectPlanRequest,
   marshalTriggerTestAlertRequest,
   unmarshalCockpit,
   unmarshalCockpitMetrics,
@@ -28,7 +29,9 @@ import {
   unmarshalGrafanaUser,
   unmarshalListContactPointsResponse,
   unmarshalListGrafanaUsersResponse,
+  unmarshalListPlansResponse,
   unmarshalListTokensResponse,
+  unmarshalSelectPlanResponse,
   unmarshalToken,
 } from './marshalling.gen'
 import type {
@@ -53,10 +56,14 @@ import type {
   ListContactPointsResponse,
   ListGrafanaUsersRequest,
   ListGrafanaUsersResponse,
+  ListPlansRequest,
+  ListPlansResponse,
   ListTokensRequest,
   ListTokensResponse,
   ResetCockpitGrafanaRequest,
   ResetGrafanaUserPasswordRequest,
+  SelectPlanRequest,
+  SelectPlanResponse,
   Token,
   TriggerTestAlertRequest,
 } from './types.gen'
@@ -483,5 +490,50 @@ export class API extends ParentAPI {
         )}/reset-password`,
       },
       unmarshalGrafanaUser,
+    )
+
+  protected pageOfListPlans = (request: Readonly<ListPlansRequest> = {}) =>
+    this.client.fetch<ListPlansResponse>(
+      {
+        method: 'GET',
+        path: `/cockpit/v1beta1/plans`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy ?? 'name_asc'],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListPlansResponse,
+    )
+
+  /**
+   * List plans. List all pricing plans.
+   *
+   * @param request - The request {@link ListPlansRequest}
+   * @returns A Promise of ListPlansResponse
+   */
+  listPlans = (request: Readonly<ListPlansRequest> = {}) =>
+    enrichForPagination('plans', this.pageOfListPlans, request)
+
+  /**
+   * Select pricing plan. Select the wanted pricing plan.
+   *
+   * @param request - The request {@link SelectPlanRequest}
+   * @returns A Promise of SelectPlanResponse
+   */
+  selectPlan = (request: Readonly<SelectPlanRequest>) =>
+    this.client.fetch<SelectPlanResponse>(
+      {
+        body: JSON.stringify(
+          marshalSelectPlanRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/cockpit/v1beta1/select-plan`,
+      },
+      unmarshalSelectPlanResponse,
     )
 }
