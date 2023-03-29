@@ -209,7 +209,14 @@ export interface EndpointSpecPrivateNetworkSpec {
    * IPv4 per node.
    */
   serviceIps: string[]
+  /**
+   * Automated configuration of your Private Network endpoint with Scaleway IPAM
+   * service.
+   */
+  ipamConfig?: EndpointSpecPrivateNetworkSpecIpamConfig
 }
+
+export interface EndpointSpecPrivateNetworkSpecIpamConfig {}
 
 /** Endpoint spec. public network spec. */
 export interface EndpointSpecPublicNetworkSpec {}
