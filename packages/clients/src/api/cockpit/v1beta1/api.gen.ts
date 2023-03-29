@@ -23,6 +23,7 @@ import {
   marshalResetGrafanaUserPasswordRequest,
   marshalTriggerTestAlertRequest,
   unmarshalCockpit,
+  unmarshalCockpitMetrics,
   unmarshalContactPoint,
   unmarshalGrafanaUser,
   unmarshalListContactPointsResponse,
@@ -33,6 +34,7 @@ import {
 import type {
   ActivateCockpitRequest,
   Cockpit,
+  CockpitMetrics,
   ContactPoint,
   CreateContactPointRequest,
   CreateGrafanaUserRequest,
@@ -43,6 +45,7 @@ import type {
   DeleteTokenRequest,
   DisableManagedAlertsRequest,
   EnableManagedAlertsRequest,
+  GetCockpitMetricsRequest,
   GetCockpitRequest,
   GetTokenRequest,
   GrafanaUser,
@@ -125,6 +128,30 @@ export class API extends ParentAPI {
       this.getCockpit,
       request,
       options,
+    )
+
+  /**
+   * Get cockpit metrics. Get the cockpit metrics with the given project ID.
+   *
+   * @param request - The request {@link GetCockpitMetricsRequest}
+   * @returns A Promise of CockpitMetrics
+   */
+  getCockpitMetrics = (request: Readonly<GetCockpitMetricsRequest> = {}) =>
+    this.client.fetch<CockpitMetrics>(
+      {
+        method: 'GET',
+        path: `/cockpit/v1beta1/cockpit/metrics`,
+        urlParams: urlParams(
+          ['end_date', request.endDate],
+          ['metric_name', request.metricName],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
+          ['start_date', request.startDate],
+        ),
+      },
+      unmarshalCockpitMetrics,
     )
 
   /**

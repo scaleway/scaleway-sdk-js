@@ -1,5 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+import type { TimeSeries } from '../../../bridge'
 
 export type CockpitStatus =
   | 'unknown_status'
@@ -41,6 +42,12 @@ export interface CockpitEndpoints {
   logsUrl: string
   alertmanagerUrl: string
   grafanaUrl: string
+}
+
+/** Cockpit metrics. */
+export interface CockpitMetrics {
+  /** Timeseries array. */
+  timeseries: TimeSeries[]
 }
 
 /** Alert contact point. Contact point. */
@@ -117,6 +124,17 @@ export type ActivateCockpitRequest = {
 
 export type GetCockpitRequest = {
   projectId?: string
+}
+
+export type GetCockpitMetricsRequest = {
+  /** Project ID. */
+  projectId?: string
+  /** Start date. */
+  startDate?: Date
+  /** End date. */
+  endDate?: Date
+  /** Metric name. */
+  metricName?: string
 }
 
 export type DeactivateCockpitRequest = {
