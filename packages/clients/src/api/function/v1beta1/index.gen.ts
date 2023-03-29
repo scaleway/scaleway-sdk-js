@@ -82,8 +82,6 @@ export type {
   UpdateFunctionRequest,
   UpdateNamespaceRequest,
   UpdateTriggerRequest,
-  UpdateTriggerRequestMnqNatsClientConfig,
-  UpdateTriggerRequestMnqSqsClientConfig,
   UpdateTriggerRequestSqsClientConfig,
   UploadURL,
 } from './types.gen'

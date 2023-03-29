@@ -44,8 +44,6 @@ import type {
   UpdateFunctionRequest,
   UpdateNamespaceRequest,
   UpdateTriggerRequest,
-  UpdateTriggerRequestMnqNatsClientConfig,
-  UpdateTriggerRequestMnqSqsClientConfig,
   UpdateTriggerRequestSqsClientConfig,
   UploadURL,
 } from './types.gen'
@@ -447,33 +445,11 @@ const marshalSecret = (
   value: request.value,
 })
 
-const marshalUpdateTriggerRequestMnqNatsClientConfig = (
-  request: UpdateTriggerRequestMnqNatsClientConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  mnq_namespace_id: request.mnqNamespaceId,
-  mnq_project_id: request.mnqProjectId,
-  mnq_region: request.mnqRegion,
-  subject: request.subject,
-})
-
-const marshalUpdateTriggerRequestMnqSqsClientConfig = (
-  request: UpdateTriggerRequestMnqSqsClientConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  mnq_namespace_id: request.mnqNamespaceId,
-  mnq_project_id: request.mnqProjectId,
-  mnq_region: request.mnqRegion,
-  queue: request.queue,
-})
-
 const marshalUpdateTriggerRequestSqsClientConfig = (
   request: UpdateTriggerRequestSqsClientConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   access_key: request.accessKey,
-  endpoint: request.endpoint,
-  queue_url: request.queueUrl,
   secret_key: request.secretKey,
 })
 
@@ -640,30 +616,12 @@ export const marshalUpdateTriggerRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'scw_sqs_config',
-      value: request.scwSqsConfig
-        ? marshalUpdateTriggerRequestMnqSqsClientConfig(
-            request.scwSqsConfig,
-            defaults,
-          )
-        : undefined,
-    },
+  ...resolveOneOf([
     {
       param: 'sqs_config',
       value: request.sqsConfig
         ? marshalUpdateTriggerRequestSqsClientConfig(
             request.sqsConfig,
-            defaults,
-          )
-        : undefined,
-    },
-    {
-      param: 'scw_nats_config',
-      value: request.scwNatsConfig
-        ? marshalUpdateTriggerRequestMnqNatsClientConfig(
-            request.scwNatsConfig,
             defaults,
           )
         : undefined,
