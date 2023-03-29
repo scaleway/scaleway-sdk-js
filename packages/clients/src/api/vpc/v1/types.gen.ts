@@ -54,6 +54,8 @@ export type ListPrivateNetworksRequest = {
   projectId?: string
   /** The PrivateNetwork IDs on which to filter the returned private networks. */
   privateNetworkIds?: string[]
+  /** Include regional Private Networks. */
+  includeRegional?: boolean
 }
 
 export type CreatePrivateNetworkRequest = {

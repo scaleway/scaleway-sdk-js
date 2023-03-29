@@ -51,6 +51,7 @@ export class API extends ParentAPI {
           request.zone ?? this.client.settings.defaultZone,
         )}/private-networks`,
         urlParams: urlParams(
+          ['include_regional', request.includeRegional],
           ['name', request.name],
           ['order_by', request.orderBy ?? 'created_at_asc'],
           ['organization_id', request.organizationId],
