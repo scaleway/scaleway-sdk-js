@@ -88,35 +88,35 @@ export type VolumeVolumeType = 'l_ssd' | 'b_ssd' | 'unified'
 
 /** Bootscript. */
 export interface Bootscript {
-  /** The bootscript arguments. */
+  /** Bootscript arguments. */
   bootcmdargs: string
   /**
-   * Dispmay if the bootscript is the default bootscript if no other boot option
-   * is configured.
+   * Display if the bootscript is the default bootscript (if no other boot
+   * option is configured).
    */
   default: boolean
   /**
-   * Provide information regarding a Device Tree Binary (dtb) for use with C1
+   * Provide information regarding a Device Tree Binary (DTB) for use with C1
    * servers.
    */
   dtb: string
-  /** The bootscript ID. */
+  /** Bootscript ID. */
   id: string
-  /** The initrd (initial ramdisk) configuration. */
+  /** Initrd (initial ramdisk) configuration. */
   initrd: string
-  /** The server kernel version. */
+  /** Instance kernel version. */
   kernel: string
-  /** The bootscript organization ID. */
+  /** Bootscript Organization ID. */
   organization: string
-  /** The bootscript project ID. */
+  /** Bootscript Project ID. */
   project: string
   /** Provide information if the bootscript is public. */
   public: boolean
-  /** The bootscript title. */
+  /** Bootscript title. */
   title: string
-  /** The bootscript arch. */
+  /** Bootscript architecture. */
   arch: Arch
-  /** The zone in which is the bootscript. */
+  /** Zone in which the bootscript is located. */
   zone: Zone
 }
 
@@ -199,7 +199,9 @@ export interface GetPlacementGroupResponse {
   placementGroup?: PlacementGroup
 }
 
+/** Get placement group servers response. */
 export interface GetPlacementGroupServersResponse {
+  /** Instances attached to the placement group. */
   servers: PlacementGroupServer[]
 }
 
@@ -328,17 +330,17 @@ export interface ListServerUserDataResponse {
 
 /** List servers response. */
 export interface ListServersResponse {
-  /** Total number of servers. */
+  /** Total number of Instances. */
   totalCount: number
-  /** List of servers. */
+  /** List of Instances. */
   servers: Server[]
 }
 
 /** List servers types response. */
 export interface ListServersTypesResponse {
-  /** Total number of server types. */
+  /** Total number of Instance types. */
   totalCount: number
-  /** List of server types. */
+  /** List of Instance types. */
   servers: Record<string, ServerType>
 }
 
@@ -368,18 +370,18 @@ export interface ListVolumesTypesResponse {
 
 /** Placement group. */
 export interface PlacementGroup {
-  /** The placement group unique ID. */
+  /** Placement group unique ID. */
   id: string
-  /** The placement group name. */
+  /** Placement group name. */
   name: string
-  /** The placement group organization ID. */
+  /** Placement group Organization ID. */
   organization: string
-  /** The placement group project ID. */
+  /** Placement group Project ID. */
   project: string
-  /** The placement group tags. */
+  /** Placement group tags. */
   tags: string[]
   /**
-   * Select the failling mode when the placement cannot be respected, either
+   * Select the failure mode when the placement cannot be respected, either
    * optional or enforced.
    */
   policyMode: PlacementGroupPolicyMode
@@ -390,70 +392,74 @@ export interface PlacementGroup {
   policyType: PlacementGroupPolicyType
   /** Returns true if the policy is respected, false otherwise. */
   policyRespected: boolean
-  /** The zone in which is the placement group. */
+  /** Zone in which the placement group is located. */
   zone: Zone
 }
 
+/** Placement group server. */
 export interface PlacementGroupServer {
+  /** Instance UUID. */
   id: string
+  /** Instance name. */
   name: string
+  /** Defines whether the placement group policy is respected (either 1 or 0). */
   policyRespected: boolean
 }
 
 /** Private nic. */
 export interface PrivateNIC {
-  /** The private NIC unique ID. */
+  /** Private NIC unique ID. */
   id: string
-  /** The server the private NIC is attached to. */
+  /** Instance to which the private NIC is attached. */
   serverId: string
-  /** The private network where the private NIC is attached. */
+  /** Private Network the private NIC is attached to. */
   privateNetworkId: string
-  /** The private NIC MAC address. */
+  /** Private NIC MAC address. */
   macAddress: string
-  /** The private NIC state. */
+  /** Private NIC state. */
   state: PrivateNICState
-  /** The private NIC tags. */
+  /** Private NIC tags. */
   tags: string[]
 }
 
 /** Security group. */
 export interface SecurityGroup {
-  /** The security groups' unique ID. */
+  /** Security group unique ID. */
   id: string
-  /** The security groups name. */
+  /** Security group name. */
   name: string
-  /** The security groups description. */
+  /** Security group description. */
   description: string
   /** True if SMTP is blocked on IPv4 and IPv6. */
   enableDefaultSecurity: boolean
-  /** The default inbound policy. */
+  /** Default inbound policy. */
   inboundDefaultPolicy: SecurityGroupPolicy
-  /** The default outbound policy. */
+  /** Default outbound policy. */
   outboundDefaultPolicy: SecurityGroupPolicy
-  /** The security groups organization ID. */
+  /** Security group Organization ID. */
   organization: string
-  /** The security group project ID. */
+  /** Security group Project ID. */
   project: string
-  /** The security group tags. */
+  /** Security group tags. */
   tags: string[]
   /**
-   * @deprecated True if it is your default security group for this organization
+   * @deprecated True if it is your default security group for this Organization
    *   ID.
    */
   organizationDefault?: boolean
-  /** True if it is your default security group for this project ID. */
+  /** True if it is your default security group for this Project ID. */
   projectDefault: boolean
-  /** The security group creation date. */
+  /** Security group creation date. */
   creationDate?: Date
-  /** The security group modification date. */
+  /** Security group modification date. */
   modificationDate?: Date
-  /** List of servers attached to this security group. */
+  /** List of Instances attached to this security group. */
   servers: ServerSummary[]
-  /** True if the security group is stateful. */
+  /** Defines whether the security group is stateful. */
   stateful: boolean
   /** Security group state. */
   state: SecurityGroupState
-  /** The zone in which is the security group. */
+  /** Zone in which the security group is located. */
   zone: Zone
 }
 
@@ -482,70 +488,70 @@ export interface SecurityGroupTemplate {
 
 /** Server. */
 export interface Server {
-  /** The server unique ID. */
+  /** Instance unique ID. */
   id: string
-  /** The server name. */
+  /** Instance name. */
   name: string
-  /** The server organization ID. */
+  /** Instance Organization ID. */
   organization: string
-  /** The server project ID. */
+  /** Instance Project ID. */
   project: string
-  /** Provide as list of allowed actions on the server. */
+  /** List of allowed actions on the Instance. */
   allowedActions: ServerAction[]
-  /** The server associated tags. */
+  /** Tags associated with the Instance. */
   tags: string[]
-  /** The server commercial type (eg. GP1-M). */
+  /** Instance commercial type (eg. GP1-M). */
   commercialType: string
-  /** The server creation date. */
+  /** Instance creation date. */
   creationDate?: Date
   /** True if a dynamic IP is required. */
   dynamicIpRequired: boolean
   /** True if IPv6 is enabled. */
   enableIpv6: boolean
-  /** The server host name. */
+  /** Instance host name. */
   hostname: string
-  /** Provide information on the server image. */
+  /** Information about the Instance image. */
   image?: Image
-  /** The server protection option is activated. */
+  /** Defines whether the Instance protection option is activated. */
   protected: boolean
-  /** The server private IP address. */
+  /** Private IP address of the Instance. */
   privateIp?: string
   /** Information about the public IP. */
   publicIp?: ServerIp
-  /** The server modification date. */
+  /** Instance modification date. */
   modificationDate?: Date
-  /** The server state. */
+  /** Instance state. */
   state: ServerState
-  /** The server location. */
+  /** Instance location. */
   location?: ServerLocation
-  /** The server IPv6 address. */
+  /** Instance IPv6 address. */
   ipv6?: ServerIpv6
-  /** @deprecated The server bootscript. */
+  /** @deprecated Instance bootscript. */
   bootscript?: Bootscript
-  /** The server boot type. */
+  /** Instance boot type. */
   bootType: BootType
-  /** The server volumes. */
+  /** Instance volumes. */
   volumes: Record<string, VolumeServer>
-  /** The server security group. */
+  /** Instance security group. */
   securityGroup?: SecurityGroupSummary
-  /** The server planned maintenances. */
+  /** Instance planned maintenance. */
   maintenances: ServerMaintenance[]
-  /** The server state_detail. */
+  /** Detailed information about the Instance state. */
   stateDetail: string
-  /** The server arch. */
+  /** Instance architecture. */
   arch: Arch
-  /** The server placement group. */
+  /** Instance placement group. */
   placementGroup?: PlacementGroup
-  /** The server private NICs. */
+  /** Instance private NICs. */
   privateNics: PrivateNIC[]
-  /** The zone in which is the server. */
+  /** Zone in which the Instance is located. */
   zone: Zone
 }
 
 /** Server action request. volume backup template. */
 export interface ServerActionRequestVolumeBackupTemplate {
   /**
-   * The snapshot's volume type. Overrides the volume_type of the snapshot for
+   * Snapshot's volume type. Overrides the `volume_type` of the snapshot for
    * this volume. If omitted, the volume type of the original volume will be
    * used.
    */
@@ -558,9 +564,9 @@ export interface ServerActionResponse {
 
 /** Server. ip. */
 export interface ServerIp {
-  /** The unique ID of the IP address. */
+  /** Unique ID of the IP address. */
   id: string
-  /** The server public IPv4 IP-Address. */
+  /** Instance public IPv4 IP-Address. */
   address: string
   /** True if the IP address is dynamic. */
   dynamic: boolean
@@ -568,11 +574,11 @@ export interface ServerIp {
 
 /** Server. ipv6. */
 export interface ServerIpv6 {
-  /** The server IPv6 IP-Address. */
+  /** Instance IPv6 IP-Address. */
   address: string
-  /** The IPv6 IP-addresses gateway. */
+  /** IPv6 IP-addresses gateway. */
   gateway: string
-  /** The IPv6 IP-addresses CIDR netmask. */
+  /** IPv6 IP-addresses CIDR netmask. */
   netmask: string
 }
 
@@ -599,7 +605,7 @@ export interface ServerType {
   monthlyPrice?: number
   /** Hourly price in Euro. */
   hourlyPrice: number
-  /** Alternative instance name if any. */
+  /** Alternative Instance name, if any. */
   altNames: string[]
   /** Additional volume constraints. */
   perVolumeConstraint?: ServerTypeVolumeConstraintsByType
@@ -613,9 +619,9 @@ export interface ServerType {
   ram: number
   /** CPU architecture. */
   arch: Arch
-  /** True if it is a baremetal instance. */
+  /** True if it is a baremetal Instance. */
   baremetal: boolean
-  /** Network available for the instance. */
+  /** Network available for the Instance. */
   network?: ServerTypeNetwork
   /** Capabilities. */
   capabilities?: ServerTypeCapabilities
@@ -623,7 +629,7 @@ export interface ServerType {
 
 /** Server type. capabilities. */
 export interface ServerTypeCapabilities {
-  /** True if server supports block storage. */
+  /** Defines whether the Instance supports block storage. */
   blockStorage?: boolean
   /** List of supported boot types. */
   bootTypes: BootType[]
@@ -667,7 +673,9 @@ export interface SetPlacementGroupResponse {
   placementGroup?: PlacementGroup
 }
 
+/** Set placement group servers response. */
 export interface SetPlacementGroupServersResponse {
+  /** Instances attached to the placement group. */
   servers: PlacementGroupServer[]
 }
 
@@ -684,7 +692,7 @@ export interface SetSecurityGroupRulesRequestRule {
   protocol: SecurityGroupRuleProtocol
   /** Direction the rule applies to. */
   direction: SecurityGroupRuleDirection
-  /** The range of IP address this rules applies to. */
+  /** Range of IP addresses these rules apply to. */
   ipRange: string
   /**
    * Beginning of the range of ports this rule applies to (inclusive). This
@@ -717,59 +725,59 @@ export interface SetSecurityGroupRulesResponse {
 
 /** Snapshot. */
 export interface Snapshot {
-  /** The snapshot ID. */
+  /** Snapshot ID. */
   id: string
-  /** The snapshot name. */
+  /** Snapshot name. */
   name: string
-  /** The snapshot organization ID. */
+  /** Snapshot Organization ID. */
   organization: string
-  /** The snapshot project ID. */
+  /** Snapshot Project ID. */
   project: string
-  /** The snapshot tags. */
+  /** Snapshot tags. */
   tags: string[]
-  /** The snapshot volume type. */
+  /** Snapshot volume type. */
   volumeType: VolumeVolumeType
-  /** The snapshot size. */
+  /** Snapshot size. */
   size: number
-  /** The snapshot state. */
+  /** Snapshot state. */
   state: SnapshotState
-  /** The volume on which the snapshot is based on. */
+  /** Volume on which the snapshot is based on. */
   baseVolume?: SnapshotBaseVolume
-  /** The snapshot creation date. */
+  /** Snapshot creation date. */
   creationDate?: Date
-  /** The snapshot modification date. */
+  /** Snapshot modification date. */
   modificationDate?: Date
-  /** The snapshot zone. */
+  /** Snapshot zone. */
   zone: Zone
-  /** The reason for the failed snapshot import. */
+  /** Reason for the failed snapshot import. */
   errorReason?: string
 }
 
 /** Snapshot. base volume. */
 export interface SnapshotBaseVolume {
-  /** The volume ID on which the snapshot is based on. */
+  /** Volume ID on which the snapshot is based. */
   id: string
-  /** The volume name on which the snapshot is based on. */
+  /** Volume name on which the snapshot is based on. */
   name: string
 }
 
 /** Task. */
 export interface Task {
-  /** The unique ID of the task. */
+  /** Unique ID of the task. */
   id: string
-  /** The description of the task. */
+  /** Description of the task. */
   description: string
-  /** The progress of the task in percent. */
+  /** Progress of the task in percent. */
   progress: number
-  /** The task start date. */
+  /** Task start date. */
   startedAt?: Date
-  /** The task end date. */
+  /** Task end date. */
   terminatedAt?: Date
-  /** The task status. */
+  /** Task status. */
   status: TaskStatus
   hrefFrom: string
   hrefResult: string
-  /** The zone in which is the task. */
+  /** Zone in which the task is excecuted. */
   zone: Zone
 }
 
@@ -781,7 +789,9 @@ export interface UpdatePlacementGroupResponse {
   placementGroup?: PlacementGroup
 }
 
+/** Update placement group servers response. */
 export interface UpdatePlacementGroupServersResponse {
+  /** Instances attached to the placement group. */
   servers: PlacementGroupServer[]
 }
 
@@ -795,31 +805,31 @@ export interface UpdateVolumeResponse {
 
 /** Volume. */
 export interface Volume {
-  /** The volume unique ID. */
+  /** Volume unique ID. */
   id: string
-  /** The volume name. */
+  /** Volume name. */
   name: string
   /** @deprecated Show the volume NBD export URI. */
   exportUri?: string
-  /** The volume disk size. */
+  /** Volume disk size. */
   size: number
-  /** The volume type. */
+  /** Volume type. */
   volumeType: VolumeVolumeType
-  /** The volume creation date. */
+  /** Volume creation date. */
   creationDate?: Date
-  /** The volume modification date. */
+  /** Volume modification date. */
   modificationDate?: Date
-  /** The volume organization ID. */
+  /** Volume Organization ID. */
   organization: string
-  /** The volume project ID. */
+  /** Volume Project ID. */
   project: string
-  /** The volume tags. */
+  /** Volume tags. */
   tags: string[]
-  /** The server attached to the volume. */
+  /** Instance attached to the volume. */
   server?: ServerSummary
-  /** The volume state. */
+  /** Volume state. */
   state: VolumeState
-  /** The zone in which is the volume. */
+  /** Zone in which the volume is located. */
   zone: Zone
 }
 
@@ -843,7 +853,7 @@ export interface VolumeServer {
 export interface VolumeServerTemplate {
   /** UUID of the volume. */
   id: string
-  /** Force the server to boot on this volume. */
+  /** Force the Instance to boot on this volume. */
   boot: boolean
   /** Name of the volume. */
   name: string
@@ -851,7 +861,7 @@ export interface VolumeServerTemplate {
   size: number
   /** Type of the volume. */
   volumeType: VolumeVolumeType
-  /** The ID of the snapshot on which this volume will be based. */
+  /** ID of the snapshot on which this volume will be based. */
   baseSnapshot: string
   /** Organization ID of the volume. */
   organization: string
@@ -938,29 +948,29 @@ export type ListServersRequest = {
   perPage?: number
   /** A positive integer to choose the page to return. */
   page?: number
-  /** List only servers of this organization ID. */
+  /** List only Instances of this Organization ID. */
   organization?: string
-  /** List only servers of this project ID. */
+  /** List only Instances of this Project ID. */
   project?: string
   /**
-   * Filter servers by name (for eg. "server1" will return "server100" and
+   * Filter Instances by name (eg. "server1" will return "server100" and
    * "server1" but not "foo").
    */
   name?: string
-  /** List servers by private_ip. */
+  /** List Instances by private_ip. */
   privateIp?: string
-  /** List servers that are not attached to a public IP. */
+  /** List Instances that are not attached to a public IP. */
   withoutIp?: boolean
-  /** List servers of this commercial type. */
+  /** List Instances of this commercial type. */
   commercialType?: string
-  /** List servers in this state. */
+  /** List Instances in this state. */
   state?: ServerState
   /**
-   * List servers with these exact tags (to filter with several tags, use commas
-   * to separate them).
+   * List Instances with these exact tags (to filter with several tags, use
+   * commas to separate them).
    */
   tags?: string[]
-  /** List servers in this Private Network. */
+  /** List Instances in this Private Network. */
   privateNetwork?: string
   /** Define the order of the returned servers. */
   order?: ListServersRequestOrder
@@ -975,7 +985,7 @@ export type DeleteServerRequest = {
 export type GetServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the server you want to get. */
+  /** UUID of the Instance you want to get. */
   serverId: string
 }
 
@@ -988,13 +998,13 @@ export type ListServerActionsRequest = {
 export type ServerActionRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the server. */
+  /** UUID of the Instance. */
   serverId: string
-  /** The action to perform on the server. */
+  /** Action to perform on the Instance. */
   action?: ServerAction
   /**
-   * The name of the backup you want to create. The name of the backup you want
-   * to create. This field should only be specified when performing a backup
+   * Name of the backup you want to create. Name of the backup you want to
+   * create. This field should only be specified when performing a backup
    * action.
    */
   name?: string
@@ -1009,14 +1019,14 @@ export type ServerActionRequest = {
 export type ListServerUserDataRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the server. */
+  /** UUID of the Instance. */
   serverId: string
 }
 
 export type DeleteServerUserDataRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the server. */
+  /** UUID of the Instance. */
   serverId: string
   /** Key of the user data to delete. */
   key: string
@@ -1069,7 +1079,7 @@ export type CreateImageRequest = {
    * could be set.
    */
   project?: string
-  /** The tags of the image. */
+  /** Tags of the image. */
   tags?: string[]
   /** True to create a public image. */
   public?: boolean
@@ -1100,7 +1110,7 @@ export type CreateSnapshotRequest = {
   name?: string
   /** UUID of the volume. */
   volumeId?: string
-  /** The tags of the snapshot. */
+  /** Tags of the snapshot. */
   tags?: string[]
   /**
    * @deprecated Organization ID of the snapshot.
@@ -1117,8 +1127,8 @@ export type CreateSnapshotRequest = {
    */
   project?: string
   /**
-   * The volume type of the snapshot. Overrides the volume_type of the snapshot.
-   * If omitted, the volume type of the original volume will be used.
+   * Volume type of the snapshot. Overrides the volume_type of the snapshot. If
+   * omitted, the volume type of the original volume will be used.
    */
   volumeType?: SnapshotVolumeType
   /** Bucket name for snapshot imports. */
@@ -1146,7 +1156,7 @@ export type DeleteSnapshotRequest = {
 export type ExportSnapshotRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The snapshot ID. */
+  /** Snapshot ID. */
   snapshotId: string
   /** S3 bucket name. */
   bucket: string
@@ -1166,9 +1176,9 @@ export type ListVolumesRequest = {
   perPage?: number
   /** A positive integer to choose the page to return. */
   page?: number
-  /** Filter volume by organization ID. */
+  /** Filter volume by Organization ID. */
   organization?: string
-  /** Filter volume by project ID. */
+  /** Filter volume by Project ID. */
   project?: string
   /**
    * Filter volumes with these exact tags (to filter with several tags, use
@@ -1185,42 +1195,42 @@ export type ListVolumesRequest = {
 export type CreateVolumeRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The volume name. */
+  /** Volume name. */
   name?: string
   /**
-   * @deprecated The volume organization ID.
+   * @deprecated Volume Organization ID.
    *
    *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
    *   could be set.
    */
   organization?: string
   /**
-   * The volume project ID.
+   * Volume Project ID.
    *
    * One-of ('projectIdentifier'): at most one of 'organization', 'project'
    * could be set.
    */
   project?: string
-  /** The volume tags. */
+  /** Volume tags. */
   tags?: string[]
-  /** The volume type. */
+  /** Volume type. */
   volumeType?: VolumeVolumeType
   /**
-   * The volume disk size, must be a multiple of 512.
+   * Volume disk size, must be a multiple of 512.
    *
    * One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could
    * be set.
    */
   size?: number
   /**
-   * The ID of the volume on which this volume will be based.
+   * ID of the volume on which this volume will be based.
    *
    * One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could
    * be set.
    */
   baseVolume?: string
   /**
-   * The ID of the snapshot on which this volume will be based.
+   * ID of the snapshot on which this volume will be based.
    *
    * One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could
    * be set.
@@ -1240,11 +1250,11 @@ export type UpdateVolumeRequest = {
   zone?: Zone
   /** UUID of the volume. */
   volumeId: string
-  /** The volume name. */
+  /** Volume name. */
   name?: string
-  /** The tags of the volume. */
+  /** Tags of the volume. */
   tags?: string[]
-  /** The volume disk size, must be a multiple of 512. */
+  /** Volume disk size, must be a multiple of 512. */
   size?: number
 }
 
@@ -1260,9 +1270,9 @@ export type ListSecurityGroupsRequest = {
   zone?: Zone
   /** Name of the security group. */
   name?: string
-  /** The security group organization ID. */
+  /** Security group Organization ID. */
   organization?: string
-  /** The security group project ID. */
+  /** Security group Project ID. */
   project?: string
   /**
    * List security groups with these exact tags (to filter with several tags,
@@ -1301,11 +1311,11 @@ export type CreateSecurityGroupRequest = {
    * could be set.
    */
   project?: string
-  /** The tags of the security group. */
+  /** Tags of the security group. */
   tags?: string[]
   /**
-   * @deprecated Whether this security group becomes the default security group
-   *   for new instances.
+   * @deprecated Defines whether this security group becomes the default
+   *   security group for new Instances.
    *
    *   One-of ('defaultIdentifier'): at most one of 'organizationDefault',
    *   'projectDefault' could be set.
@@ -1313,7 +1323,7 @@ export type CreateSecurityGroupRequest = {
   organizationDefault?: boolean
   /**
    * Whether this security group becomes the default security group for new
-   * instances.
+   * Instances.
    *
    * One-of ('defaultIdentifier'): at most one of 'organizationDefault',
    * 'projectDefault' could be set.
@@ -1371,11 +1381,11 @@ export type CreateSecurityGroupRuleRequest = {
   direction: SecurityGroupRuleDirection
   action: SecurityGroupRuleAction
   ipRange: string
-  /** The beginning of the range of ports to apply this rule to (inclusive). */
+  /** Beginning of the range of ports to apply this rule to (inclusive). */
   destPortFrom?: number
-  /** The end of the range of ports to apply this rule to (inclusive). */
+  /** End of the range of ports to apply this rule to (inclusive). */
   destPortTo?: number
-  /** The position of this rule in the security group rules list. */
+  /** Position of this rule in the security group rules list. */
   position: number
   /** Indicates if this rule is editable (will be ignored). */
   editable: boolean
@@ -1414,9 +1424,9 @@ export type ListPlacementGroupsRequest = {
   perPage?: number
   /** A positive integer to choose the page to return. */
   page?: number
-  /** List only placement groups of this organization ID. */
+  /** List only placement groups of this Organization ID. */
   organization?: string
-  /** List only placement groups of this project ID. */
+  /** List only placement groups of this Project ID. */
   project?: string
   /**
    * List placement groups with these exact tags (to filter with several tags,
@@ -1449,11 +1459,11 @@ export type CreatePlacementGroupRequest = {
    * could be set.
    */
   project?: string
-  /** The tags of the placement group. */
+  /** Tags of the placement group. */
   tags?: string[]
-  /** The operating mode of the placement group. */
+  /** Operating mode of the placement group. */
   policyMode?: PlacementGroupPolicyMode
-  /** The policy type of the placement group. */
+  /** Policy type of the placement group. */
   policyType?: PlacementGroupPolicyType
 }
 
@@ -1483,11 +1493,11 @@ export type UpdatePlacementGroupRequest = {
   placementGroupId: string
   /** Name of the placement group. */
   name?: string
-  /** The tags of the placement group. */
+  /** Tags of the placement group. */
   tags?: string[]
-  /** The operating mode of the placement group. */
+  /** Operating mode of the placement group. */
   policyMode?: PlacementGroupPolicyMode
-  /** The policy type of the placement group. */
+  /** Policy type of the placement group. */
   policyType?: PlacementGroupPolicyType
 }
 
@@ -1501,30 +1511,34 @@ export type DeletePlacementGroupRequest = {
 export type GetPlacementGroupServersRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
+  /** UUID of the placement group you want to get. */
   placementGroupId: string
 }
 
 export type SetPlacementGroupServersRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
+  /** UUID of the placement group you want to set. */
   placementGroupId: string
-  servers?: string[]
+  /** An array of the Instances' UUIDs you want to configure. */
+  servers: string[]
 }
 
 export type UpdatePlacementGroupServersRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the placement group. */
+  /** UUID of the placement group you want to update. */
   placementGroupId: string
+  /** An array of the Instances' UUIDs you want to configure. */
   servers: string[]
 }
 
 export type ListIpsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The project ID the IPs are reserved in. */
+  /** Project ID in which the IPs are reserved. */
   project?: string
-  /** The organization ID the IPs are reserved in. */
+  /** Organization ID in which the IPs are reserved. */
   organization?: string
   /**
    * Filter IPs with these exact tags (to filter with several tags, use commas
@@ -1546,29 +1560,29 @@ export type CreateIpRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
-   * @deprecated The organization ID the IP is reserved in.
+   * @deprecated Organization ID in which the IP is reserved.
    *
    *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
    *   could be set.
    */
   organization?: string
   /**
-   * The project ID the IP is reserved in.
+   * Project ID in which the IP is reserved.
    *
    * One-of ('projectIdentifier'): at most one of 'organization', 'project'
    * could be set.
    */
   project?: string
-  /** The tags of the IP. */
+  /** Tags of the IP. */
   tags?: string[]
-  /** UUID of the server you want to attach the IP to. */
+  /** UUID of the Instance you want to attach the IP to. */
   server?: string
 }
 
 export type GetIpRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The IP ID or address to get. */
+  /** IP ID or address to get. */
   ip: string
 }
 
@@ -1587,16 +1601,16 @@ export type UpdateIpRequest = {
 export type DeleteIpRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The ID or the address of the IP to delete. */
+  /** ID or address of the IP to delete. */
   ip: string
 }
 
 export type ListPrivateNICsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The server the private NIC is attached to. */
+  /** Instance to which the private NIC is attached. */
   serverId: string
-  /** The private NIC tags. */
+  /** Private NIC tags. */
   tags?: string[]
   /**
    * A positive integer lower or equal to 100 to select the number of items to
@@ -1610,29 +1624,29 @@ export type ListPrivateNICsRequest = {
 export type CreatePrivateNICRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the server the private NIC will be attached to. */
+  /** UUID of the Instance the private NIC will be attached to. */
   serverId: string
   /** UUID of the private network where the private NIC will be attached. */
   privateNetworkId: string
-  /** The private NIC tags. */
+  /** Private NIC tags. */
   tags?: string[]
 }
 
 export type GetPrivateNICRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The server the private NIC is attached to. */
+  /** Instance to which the private NIC is attached. */
   serverId: string
-  /** The private NIC unique ID. */
+  /** Private NIC unique ID. */
   privateNicId: string
 }
 
 export type UpdatePrivateNICRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the server the private NIC will be attached to. */
+  /** UUID of the Instance the private NIC will be attached to. */
   serverId: string
-  /** The private NIC unique ID. */
+  /** Private NIC unique ID. */
   privateNicId: string
   /** Tags used to select private NIC/s. */
   tags?: string[]
@@ -1641,9 +1655,9 @@ export type UpdatePrivateNICRequest = {
 export type DeletePrivateNICRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The server the private NIC is attached to. */
+  /** Instance to which the private NIC is attached. */
   serverId: string
-  /** The private NIC unique ID. */
+  /** Private NIC unique ID. */
   privateNicId: string
 }
 
