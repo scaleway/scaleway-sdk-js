@@ -407,33 +407,12 @@ export interface Frontend {
 
 /** Health check. */
 export interface HealthCheck {
-  /**
-   * Object to configure a MySQL health check. The check requires MySQL >=3.22,
-   * for older versions, use a TCP health check.
-   *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
-   * could be set.
-   */
-  mysqlConfig?: HealthCheckMysqlConfig
-  /**
-   * Object to configure an LDAP health check. The response is analyzed to find
-   * the LDAPv3 response message.
-   *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
-   * could be set.
-   */
-  ldapConfig?: HealthCheckLdapConfig
-  /**
-   * Object to configure a Redis health check. The response is analyzed to find
-   * the +PONG response message.
-   *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
-   * could be set.
-   */
-  redisConfig?: HealthCheckRedisConfig
+  /** Port to use for the backend server health check. */
+  port: number
+  /** Time to wait between two consecutive health checks. */
+  checkDelay?: string
+  /** Maximum time a backend server has to reply to the health check. */
+  checkTimeout?: string
   /**
    * Number of consecutive unsuccessful health checks after which the server
    * will be considered dead.
@@ -442,41 +421,62 @@ export interface HealthCheck {
   /**
    * Object to configure a basic TCP health check.
    *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   tcpConfig?: HealthCheckTcpConfig
   /**
+   * Object to configure a MySQL health check. The check requires MySQL >=3.22,
+   * for older versions, use a TCP health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
+   */
+  mysqlConfig?: HealthCheckMysqlConfig
+  /**
    * Object to configure a PostgreSQL health check.
    *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   pgsqlConfig?: HealthCheckPgsqlConfig
   /**
+   * Object to configure an LDAP health check. The response is analyzed to find
+   * the LDAPv3 response message.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
+   */
+  ldapConfig?: HealthCheckLdapConfig
+  /**
+   * Object to configure a Redis health check. The response is analyzed to find
+   * the +PONG response message.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
+   */
+  redisConfig?: HealthCheckRedisConfig
+  /**
    * Object to configure an HTTP health check.
    *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   httpConfig?: HealthCheckHttpConfig
   /**
    * Object to configure an HTTPS health check.
    *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'tcpConfig', 'pgsqlConfig', 'httpConfig', 'httpsConfig'
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   httpsConfig?: HealthCheckHttpsConfig
-  /** Port to use for the backend server health check. */
-  port: number
-  /** Maximum time a backend server has to reply to the health check. */
-  checkTimeout?: string
-  /** Time to wait between two consecutive health checks. */
-  checkDelay?: string
   /** Defines whether proxy protocol should be activated for the health check. */
   checkSendProxy: boolean
   /**
@@ -543,11 +543,15 @@ export interface HealthCheckHttpsConfig {
 
 export interface HealthCheckLdapConfig {}
 
+/** Health check. mysql config. */
 export interface HealthCheckMysqlConfig {
+  /** MySQL user to use for the health check. */
   user: string
 }
 
+/** Health check. pgsql config. */
 export interface HealthCheckPgsqlConfig {
+  /** PostgreSQL user to use for the health check. */
   user: string
 }
 
@@ -646,12 +650,17 @@ export interface LbStats {
   backendServersStats: BackendServerStats[]
 }
 
+/** Lb type. */
 export interface LbType {
+  /** Load Balancer commercial offer type name. */
   name: string
+  /** Current stock status for a given Load Balancer type. */
   stockStatus: LbTypeStock
+  /** Load Balancer commercial offer type description. */
   description: string
-  /** @deprecated */
+  /** @deprecated The region the Load Balancer stock is in. */
   region?: Region
+  /** The zone the Load Balancer stock is in. */
   zone: Zone
 }
 
@@ -783,7 +792,9 @@ export interface PrivateNetworkDHCPConfig {}
 
 export interface PrivateNetworkIpamConfig {}
 
+/** Private network. static config. */
 export interface PrivateNetworkStaticConfig {
+  /** Array of a local IP address for the Load Balancer on this Private Network. */
   ipAddress: string[]
 }
 
@@ -1162,20 +1173,19 @@ export type CreateBackendRequest = {
   /** Action to take when a backend server is marked as down. */
   onMarkedDownAction?: OnMarkedDownAction
   /**
-   * PROXY protocol to use between the Load Balancer and backend servers. Allows
-   * the backend servers to be informed of the client's real IP address. PROXY
+   * Protocol to use between the Load Balancer and backend servers. Allows the
+   * backend servers to be informed of the client's real IP address. The PROXY
    * protocol must be supported by the backend servers' software.
    */
   proxyProtocol?: ProxyProtocol
   /**
    * Scaleway S3 bucket website to be served as failover if all backend servers
-   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud. Do not include
-   * the scheme (eg https://).
+   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud.
    */
   failoverHost?: string
   /**
-   * Defines whether to enable SSL between the Load Balancer and backend
-   * servers.
+   * Defines whether to enable SSL bridging between the Load Balancer and
+   * backend servers.
    */
   sslBridging?: boolean
   /** Defines whether the server certificate verification should be ignored. */
@@ -1239,18 +1249,17 @@ export type UpdateBackendRequest = {
    * (takes precedence over client and server timeout).
    */
   timeoutTunnel?: string
-  /** Action to take when a backend server is marked down. */
+  /** Action to take when a backend server is marked as down. */
   onMarkedDownAction?: OnMarkedDownAction
   /**
-   * PROXY protocol to use between the Load Balancer and backend servers. Allows
-   * the backend servers to be informed of the client's real IP address. PROXY
+   * Protocol to use between the Load Balancer and backend servers. Allows the
+   * backend servers to be informed of the client's real IP address. The PROXY
    * protocol must be supported by the backend servers' software.
    */
   proxyProtocol?: ProxyProtocol
   /**
    * Scaleway S3 bucket website to be served as failover if all backend servers
-   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud. Do not include
-   * the scheme (eg https://).
+   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud.
    */
   failoverHost?: string
   /**
@@ -1260,7 +1269,7 @@ export type UpdateBackendRequest = {
   sslBridging?: boolean
   /** Defines whether the server certificate verification should be ignored. */
   ignoreSslServerVerify?: boolean
-  /** Whether to use another backend server on each retries. */
+  /** Whether to use another backend server on each attempt. */
   redispatchAttemptCount?: number
   /** Number of retries when a backend server connection failed. */
   maxRetries?: number
@@ -1330,68 +1339,71 @@ export type UpdateHealthCheckRequest = {
   /** Maximum time a backend server has to reply to the health check. */
   checkTimeout: string
   /**
-   * Number of consecutive unsuccessful health checks, after which the server
+   * Number of consecutive unsuccessful health checks after which the server
    * will be considered dead.
    */
   checkMaxRetries: number
+  /** Defines whether proxy protocol should be activated for the health check. */
+  checkSendProxy: boolean
   /**
-   * The check requires MySQL >=3.22, for older version, please use TCP check.
+   * Object to configure a basic TCP health check.
    *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
-   * could be set.
-   */
-  mysqlConfig?: HealthCheckMysqlConfig
-  /**
-   * The response is analyzed to find an LDAPv3 response message.
-   *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
-   * could be set.
-   */
-  ldapConfig?: HealthCheckLdapConfig
-  /**
-   * The response is analyzed to find the +PONG response message.
-   *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
-   * could be set.
-   */
-  redisConfig?: HealthCheckRedisConfig
-  /**
-   * PostgreSQL health check.
-   *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
-   * could be set.
-   */
-  pgsqlConfig?: HealthCheckPgsqlConfig
-  /**
-   * Basic TCP health check.
-   *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   tcpConfig?: HealthCheckTcpConfig
   /**
-   * HTTP health check.
+   * Object to configure a MySQL health check. The check requires MySQL >=3.22,
+   * for older versions, use a TCP health check.
    *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
+   */
+  mysqlConfig?: HealthCheckMysqlConfig
+  /**
+   * Object to configure a PostgreSQL health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
+   */
+  pgsqlConfig?: HealthCheckPgsqlConfig
+  /**
+   * Object to configure an LDAP health check. The response is analyzed to find
+   * the LDAPv3 response message.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
+   */
+  ldapConfig?: HealthCheckLdapConfig
+  /**
+   * Object to configure a Redis health check. The response is analyzed to find
+   * the +PONG response message.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
+   */
+  redisConfig?: HealthCheckRedisConfig
+  /**
+   * Object to configure an HTTP health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   httpConfig?: HealthCheckHttpConfig
   /**
-   * HTTPS health check.
+   * Object to configure an HTTPS health check.
    *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   httpsConfig?: HealthCheckHttpsConfig
-  /** Defines whether proxy protocol should be activated for the health check. */
-  checkSendProxy: boolean
   /**
    * Time to wait between two consecutive health checks when a backend server is
    * in a transient state (going UP or DOWN).
@@ -1497,6 +1509,7 @@ export type ListRoutesRequest = {
   pageSize?: number
   /** The page number to return, from the paginated results. */
   page?: number
+  /** Frontend ID to filter for, only Routes from this Frontend will be returned. */
   frontendId?: string
 }
 
@@ -2206,20 +2219,19 @@ export type ZonedApiCreateBackendRequest = {
   /** Action to take when a backend server is marked as down. */
   onMarkedDownAction?: OnMarkedDownAction
   /**
-   * PROXY protocol to use between the Load Balancer and backend servers. Allows
-   * the backend servers to be informed of the client's real IP address. PROXY
+   * Protocol to use between the Load Balancer and backend servers. Allows the
+   * backend servers to be informed of the client's real IP address. The PROXY
    * protocol must be supported by the backend servers' software.
    */
   proxyProtocol?: ProxyProtocol
   /**
    * Scaleway S3 bucket website to be served as failover if all backend servers
-   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud. Do not include
-   * the scheme (eg https://).
+   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud.
    */
   failoverHost?: string
   /**
-   * Defines whether to enable SSL between the Load Balancer and backend
-   * servers.
+   * Defines whether to enable SSL bridging between the Load Balancer and
+   * backend servers.
    */
   sslBridging?: boolean
   /** Defines whether the server certificate verification should be ignored. */
@@ -2277,18 +2289,17 @@ export type ZonedApiUpdateBackendRequest = {
    * (takes precedence over client and server timeout).
    */
   timeoutTunnel?: string
-  /** Action to take when a backend server is marked down. */
+  /** Action to take when a backend server is marked as down. */
   onMarkedDownAction?: OnMarkedDownAction
   /**
-   * PROXY protocol to use between the Load Balancer and backend servers. Allows
-   * the backend servers to be informed of the client's real IP address. PROXY
+   * Protocol to use between the Load Balancer and backend servers. Allows the
+   * backend servers to be informed of the client's real IP address. The PROXY
    * protocol must be supported by the backend servers' software.
    */
   proxyProtocol?: ProxyProtocol
   /**
    * Scaleway S3 bucket website to be served as failover if all backend servers
-   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud. Do not include
-   * the scheme (eg https://).
+   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud.
    */
   failoverHost?: string
   /**
@@ -2298,7 +2309,7 @@ export type ZonedApiUpdateBackendRequest = {
   sslBridging?: boolean
   /** Defines whether the server certificate verification should be ignored. */
   ignoreSslServerVerify?: boolean
-  /** Whether to use another backend server on each retries. */
+  /** Whether to use another backend server on each attempt. */
   redispatchAttemptCount?: number
   /** Number of retries when a backend server connection failed. */
   maxRetries?: number
@@ -2353,68 +2364,71 @@ export type ZonedApiUpdateHealthCheckRequest = {
   /** Maximum time a backend server has to reply to the health check. */
   checkTimeout: string
   /**
-   * Number of consecutive unsuccessful health checks, after which the server
+   * Number of consecutive unsuccessful health checks after which the server
    * will be considered dead.
    */
   checkMaxRetries: number
+  /** Defines whether proxy protocol should be activated for the health check. */
+  checkSendProxy: boolean
   /**
-   * The check requires MySQL >=3.22, for older version, please use TCP check.
+   * Object to configure a basic TCP health check.
    *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
-   * could be set.
-   */
-  mysqlConfig?: HealthCheckMysqlConfig
-  /**
-   * The response is analyzed to find an LDAPv3 response message.
-   *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
-   * could be set.
-   */
-  ldapConfig?: HealthCheckLdapConfig
-  /**
-   * The response is analyzed to find the +PONG response message.
-   *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
-   * could be set.
-   */
-  redisConfig?: HealthCheckRedisConfig
-  /**
-   * PostgreSQL health check.
-   *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
-   * could be set.
-   */
-  pgsqlConfig?: HealthCheckPgsqlConfig
-  /**
-   * Basic TCP health check.
-   *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   tcpConfig?: HealthCheckTcpConfig
   /**
-   * HTTP health check.
+   * Object to configure a MySQL health check. The check requires MySQL >=3.22,
+   * for older versions, use a TCP health check.
    *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
+   */
+  mysqlConfig?: HealthCheckMysqlConfig
+  /**
+   * Object to configure a PostgreSQL health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
+   */
+  pgsqlConfig?: HealthCheckPgsqlConfig
+  /**
+   * Object to configure an LDAP health check. The response is analyzed to find
+   * the LDAPv3 response message.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
+   */
+  ldapConfig?: HealthCheckLdapConfig
+  /**
+   * Object to configure a Redis health check. The response is analyzed to find
+   * the +PONG response message.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
+   */
+  redisConfig?: HealthCheckRedisConfig
+  /**
+   * Object to configure an HTTP health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   httpConfig?: HealthCheckHttpConfig
   /**
-   * HTTPS health check.
+   * Object to configure an HTTPS health check.
    *
-   * One-of ('config'): at most one of 'mysqlConfig', 'ldapConfig',
-   * 'redisConfig', 'pgsqlConfig', 'tcpConfig', 'httpConfig', 'httpsConfig'
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
    * could be set.
    */
   httpsConfig?: HealthCheckHttpsConfig
-  /** Defines whether proxy protocol should be activated for the health check. */
-  checkSendProxy: boolean
   /**
    * Time to wait between two consecutive health checks when a backend server is
    * in a transient state (going UP or DOWN).
@@ -2502,6 +2516,7 @@ export type ZonedApiListRoutesRequest = {
   pageSize?: number
   /** The page number to return, from the paginated results. */
   page?: number
+  /** Frontend ID to filter for, only Routes from this Frontend will be returned. */
   frontendId?: string
 }
 
