@@ -893,9 +893,21 @@ const marshalHealthCheck = (
   transient_check_delay: request.transientCheckDelay,
   ...resolveOneOf<unknown>([
     {
+      param: 'tcp_config',
+      value: request.tcpConfig
+        ? marshalHealthCheckTcpConfig(request.tcpConfig, defaults)
+        : undefined,
+    },
+    {
       param: 'mysql_config',
       value: request.mysqlConfig
         ? marshalHealthCheckMysqlConfig(request.mysqlConfig, defaults)
+        : undefined,
+    },
+    {
+      param: 'pgsql_config',
+      value: request.pgsqlConfig
+        ? marshalHealthCheckPgsqlConfig(request.pgsqlConfig, defaults)
         : undefined,
     },
     {
@@ -908,18 +920,6 @@ const marshalHealthCheck = (
       param: 'redis_config',
       value: request.redisConfig
         ? marshalHealthCheckRedisConfig(request.redisConfig, defaults)
-        : undefined,
-    },
-    {
-      param: 'tcp_config',
-      value: request.tcpConfig
-        ? marshalHealthCheckTcpConfig(request.tcpConfig, defaults)
-        : undefined,
-    },
-    {
-      param: 'pgsql_config',
-      value: request.pgsqlConfig
-        ? marshalHealthCheckPgsqlConfig(request.pgsqlConfig, defaults)
         : undefined,
     },
     {
@@ -1278,9 +1278,21 @@ export const marshalUpdateHealthCheckRequest = (
   transient_check_delay: request.transientCheckDelay,
   ...resolveOneOf<unknown>([
     {
+      param: 'tcp_config',
+      value: request.tcpConfig
+        ? marshalHealthCheckTcpConfig(request.tcpConfig, defaults)
+        : undefined,
+    },
+    {
       param: 'mysql_config',
       value: request.mysqlConfig
         ? marshalHealthCheckMysqlConfig(request.mysqlConfig, defaults)
+        : undefined,
+    },
+    {
+      param: 'pgsql_config',
+      value: request.pgsqlConfig
+        ? marshalHealthCheckPgsqlConfig(request.pgsqlConfig, defaults)
         : undefined,
     },
     {
@@ -1293,18 +1305,6 @@ export const marshalUpdateHealthCheckRequest = (
       param: 'redis_config',
       value: request.redisConfig
         ? marshalHealthCheckRedisConfig(request.redisConfig, defaults)
-        : undefined,
-    },
-    {
-      param: 'pgsql_config',
-      value: request.pgsqlConfig
-        ? marshalHealthCheckPgsqlConfig(request.pgsqlConfig, defaults)
-        : undefined,
-    },
-    {
-      param: 'tcp_config',
-      value: request.tcpConfig
-        ? marshalHealthCheckTcpConfig(request.tcpConfig, defaults)
         : undefined,
     },
     {
@@ -1670,9 +1670,21 @@ export const marshalZonedApiUpdateHealthCheckRequest = (
   transient_check_delay: request.transientCheckDelay,
   ...resolveOneOf<unknown>([
     {
+      param: 'tcp_config',
+      value: request.tcpConfig
+        ? marshalHealthCheckTcpConfig(request.tcpConfig, defaults)
+        : undefined,
+    },
+    {
       param: 'mysql_config',
       value: request.mysqlConfig
         ? marshalHealthCheckMysqlConfig(request.mysqlConfig, defaults)
+        : undefined,
+    },
+    {
+      param: 'pgsql_config',
+      value: request.pgsqlConfig
+        ? marshalHealthCheckPgsqlConfig(request.pgsqlConfig, defaults)
         : undefined,
     },
     {
@@ -1685,18 +1697,6 @@ export const marshalZonedApiUpdateHealthCheckRequest = (
       param: 'redis_config',
       value: request.redisConfig
         ? marshalHealthCheckRedisConfig(request.redisConfig, defaults)
-        : undefined,
-    },
-    {
-      param: 'pgsql_config',
-      value: request.pgsqlConfig
-        ? marshalHealthCheckPgsqlConfig(request.pgsqlConfig, defaults)
-        : undefined,
-    },
-    {
-      param: 'tcp_config',
-      value: request.tcpConfig
-        ? marshalHealthCheckTcpConfig(request.tcpConfig, defaults)
         : undefined,
     },
     {
