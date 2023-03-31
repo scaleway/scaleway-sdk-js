@@ -66,7 +66,7 @@ export const ListAPIKeysRequest = {
     maxLength: 200,
   },
   page: {
-    greaterThanOrEqual: 1,
+    greaterThan: 0,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -81,7 +81,7 @@ export const ListApplicationsRequest = {
     pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
   },
   page: {
-    greaterThanOrEqual: 1,
+    greaterThan: 0,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -104,7 +104,7 @@ export const ListGroupsRequest = {
 
 export const ListJWTsRequest = {
   page: {
-    greaterThanOrEqual: 1,
+    greaterThan: 0,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -137,7 +137,7 @@ export const ListPoliciesRequest = {
 
 export const ListQuotaRequest = {
   page: {
-    greaterThanOrEqual: 1,
+    greaterThan: 0,
   },
   pageSize: {
     greaterThanOrEqual: 1,
