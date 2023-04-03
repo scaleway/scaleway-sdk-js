@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.5.0...@scaleway/sdk@1.6.0) (2023-04-03)
+
+### Features
+
+- **cockpit:** add listPlans and selectPlan endpoints ([#569](https://github.com/scaleway/scaleway-sdk-js/issues/569)) ([78a74da](https://github.com/scaleway/scaleway-sdk-js/commit/78a74dae2e345003765f0315405ebecd76ae3a14))
+- **cockpit:** get usage metrics ([#562](https://github.com/scaleway/scaleway-sdk-js/issues/562)) ([b0b8f80](https://github.com/scaleway/scaleway-sdk-js/commit/b0b8f80beaf1b53ed6d2e3e79ac88e0d0bc9c7e6))
+- **iam:** use the same validation rule for pages ([#572](https://github.com/scaleway/scaleway-sdk-js/issues/572)) ([b70829c](https://github.com/scaleway/scaleway-sdk-js/commit/b70829cf0e1333e91de64e06a74c277539878f59))
+- **lb:** add new backend options: retries, redispatch and fastinter ([#559](https://github.com/scaleway/scaleway-sdk-js/issues/559)) ([954a6b2](https://github.com/scaleway/scaleway-sdk-js/commit/954a6b2c50842a536475507bcbd9f9f8a7714f1e))
+- **redis:** ipam integration ([#564](https://github.com/scaleway/scaleway-sdk-js/issues/564)) ([5f95d68](https://github.com/scaleway/scaleway-sdk-js/commit/5f95d68000b44f18b70229e20a90f3fd0538ec8b))
+- **secret:** add option to disable previous version when creating a new Secret Version ([#561](https://github.com/scaleway/scaleway-sdk-js/issues/561)) ([e8bd249](https://github.com/scaleway/scaleway-sdk-js/commit/e8bd249641160fda68ccdf3453ea6c13139cfad0))
+- **secret:** add option to generate passwords ([#567](https://github.com/scaleway/scaleway-sdk-js/issues/567)) ([7767a7d](https://github.com/scaleway/scaleway-sdk-js/commit/7767a7d8ea3d3b2598c8cc068a7702d30a2a286c))
+- **serverless:** change UpdateTriggerRequest to only be able to update a few fields ([#566](https://github.com/scaleway/scaleway-sdk-js/issues/566)) ([3cfa9e9](https://github.com/scaleway/scaleway-sdk-js/commit/3cfa9e97e729dbd6ea8762cd48145bb434510532))
+- **vpc:** allow listing regional PN using includeRegional parameter ([#565](https://github.com/scaleway/scaleway-sdk-js/issues/565)) ([ee5ac49](https://github.com/scaleway/scaleway-sdk-js/commit/ee5ac494263025a0014f00d4153a6c899f35687e))
+
 ## [1.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.4.0...@scaleway/sdk@1.5.0) (2023-03-27)
 
 ### Features
