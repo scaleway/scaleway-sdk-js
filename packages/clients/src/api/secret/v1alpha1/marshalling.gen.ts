@@ -67,6 +67,7 @@ export const unmarshalAccessSecretVersionResponse = (data: unknown) => {
 
   return {
     data: data.data,
+    dataCrc32: data.data_crc32,
     revision: data.revision,
     secretId: data.secret_id,
   } as AccessSecretVersionResponse
@@ -124,6 +125,7 @@ export const marshalCreateSecretVersionRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   data: request.data,
+  data_crc32: request.dataCrc32,
   description: request.description,
   disable_previous: request.disablePrevious,
   ...resolveOneOf([

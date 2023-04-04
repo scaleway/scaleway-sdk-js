@@ -29,6 +29,11 @@ export interface AccessSecretVersionResponse {
   revision: number
   /** The base64-encoded secret payload of the version. */
   data: string
+  /**
+   * The CRC32 checksum of the data as a base-10 integer. This field is present
+   * only if a CRC32 was supplied during the creation of the version.
+   */
+  dataCrc32: number
 }
 
 /** List secret versions response. */
@@ -220,6 +225,14 @@ export type CreateSecretVersionRequest = {
    * set.
    */
   passwordGeneration?: PasswordGenerationParams
+  /**
+   * The CRC32 checksum of the data as a base-10 integer. This field is optional
+   * and can be set to 0. If greater than 0, the Secret Manager will verify the
+   * integrity of the data received against the given CRC32. An error is
+   * returned if the CRC32 does not match. Otherwise, the CRC32 will be stored
+   * and returned along with the SecretVersion on futur accesses.
+   */
+  dataCrc32: number
 }
 
 export type GetSecretVersionRequest = {
