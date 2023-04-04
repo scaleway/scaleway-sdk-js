@@ -214,7 +214,7 @@ export type CreateSecretVersionRequest = {
    * Options to generate a password. If specified, a random password will be
    * generated. The data field must be empty. By default, the generator will use
    * upper and lower case letters, and digits. This behavior can be tuned using
-   * the generation params.
+   * the generation parameters.
    *
    * One-of ('PasswordGeneration'): at most one of 'passwordGeneration' could be
    * set.
