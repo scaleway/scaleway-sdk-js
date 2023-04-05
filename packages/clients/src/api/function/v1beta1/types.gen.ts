@@ -369,8 +369,8 @@ export interface TriggerSqsClientConfig {
 }
 
 export interface UpdateTriggerRequestSqsClientConfig {
-  accessKey: string
-  secretKey: string
+  accessKey?: string
+  secretKey?: string
 }
 
 /** Upload url. */
@@ -733,7 +733,7 @@ export type CreateTriggerRequest = {
    */
   region?: Region
   name: string
-  description: string
+  description?: string
   functionId: string
   /**
    * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
