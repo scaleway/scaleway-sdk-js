@@ -51,6 +51,7 @@ export const unmarshalSecretVersion = (data: unknown) => {
   return {
     createdAt: unmarshalDate(data.created_at),
     description: data.description,
+    isLatest: data.is_latest,
     revision: data.revision,
     secretId: data.secret_id,
     status: data.status,

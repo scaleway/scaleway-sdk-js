@@ -109,6 +109,8 @@ export interface SecretVersion {
    * deleted. It is not possible to recover it.
    */
   status: SecretVersionStatus
+  /** True if the version is the latest one. */
+  isLatest: boolean
   /** Date and time of the version's creation. */
   createdAt?: Date
   /** Last update of the version. */
