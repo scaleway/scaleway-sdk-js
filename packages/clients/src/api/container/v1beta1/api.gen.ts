@@ -116,7 +116,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all your namespaces.
+   * List all your namespaces. List all namespaces in a specified region.
    *
    * @param request - The request {@link ListNamespacesRequest}
    * @returns A Promise of ListNamespacesResponse
@@ -125,7 +125,7 @@ export class API extends ParentAPI {
     enrichForPagination('namespaces', this.pageOfListNamespaces, request)
 
   /**
-   * Get a namespace. Get the namespace associated with the given id.
+   * Get a namespace. Get the namespace associated with the specified ID.
    *
    * @param request - The request {@link GetNamespaceRequest}
    * @returns A Promise of Namespace
@@ -163,7 +163,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new namespace.
+   * Create a new namespace. Create a new namespace in a specified region.
    *
    * @param request - The request {@link CreateNamespaceRequest}
    * @returns A Promise of Namespace
@@ -185,8 +185,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an existing namespace. Update the space associated with the given
-   * id.
+   * Update an existing namespace. Update the space associated with the
+   * specified ID.
    *
    * @param request - The request {@link UpdateNamespaceRequest}
    * @returns A Promise of Namespace
@@ -209,7 +209,7 @@ export class API extends ParentAPI {
 
   /**
    * Delete an existing namespace. Delete the namespace associated with the
-   * given id.
+   * specified ID.
    *
    * @param request - The request {@link DeleteNamespaceRequest}
    * @returns A Promise of Namespace
@@ -251,7 +251,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all your containers.
+   * List all your containers. List all containers for a specified region.
    *
    * @param request - The request {@link ListContainersRequest}
    * @returns A Promise of ListContainersResponse
@@ -260,7 +260,7 @@ export class API extends ParentAPI {
     enrichForPagination('containers', this.pageOfListContainers, request)
 
   /**
-   * Get a container. Get the container associated with the given id.
+   * Get a container. Get the container associated with the specified ID.
    *
    * @param request - The request {@link GetContainerRequest}
    * @returns A Promise of Container
@@ -298,7 +298,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new container.
+   * Create a new container. Create a new container in the specified region.
    *
    * @param request - The request {@link CreateContainerRequest}
    * @returns A Promise of Container
@@ -321,7 +321,7 @@ export class API extends ParentAPI {
 
   /**
    * Update an existing container. Update the container associated with the
-   * given id.
+   * specified ID.
    *
    * @param request - The request {@link UpdateContainerRequest}
    * @returns A Promise of Container
@@ -343,7 +343,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a container. Delete the container associated with the given id.
+   * Delete a container. Delete the container associated with the specified ID.
    *
    * @param request - The request {@link DeleteContainerRequest}
    * @returns A Promise of Container
@@ -361,7 +361,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Deploy a container. Deploy a container associated with the given id.
+   * Deploy a container. Deploy a container associated with the specified ID.
    *
    * @param request - The request {@link DeployContainerRequest}
    * @returns A Promise of Container
@@ -414,7 +414,7 @@ export class API extends ParentAPI {
     enrichForPagination('crons', this.pageOfListCrons, request)
 
   /**
-   * Get a cron. Get the cron associated with the given id.
+   * Get a cron. Get the cron associated with the specified ID.
    *
    * @param request - The request {@link GetCronRequest}
    * @returns A Promise of Cron
@@ -473,7 +473,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an existing cron. Update the cron associated with the given id.
+   * Update an existing cron. Update the cron associated with the specified ID.
    *
    * @param request - The request {@link UpdateCronRequest}
    * @returns A Promise of Cron
@@ -495,7 +495,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an existing cron. Delete the cron associated with the given id.
+   * Delete an existing cron. Delete the cron associated with the specified ID.
    *
    * @param request - The request {@link DeleteCronRequest}
    * @returns A Promise of Cron
@@ -536,7 +536,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List your container logs.
+   * List your container logs. List the logs of the container with the specified
+   * ID.
    *
    * @param request - The request {@link ListLogsRequest}
    * @returns A Promise of ListLogsResponse
@@ -566,7 +567,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all domain name bindings.
+   * List all domain name bindings. List all domain name bindings in a specified
+   * region.
    *
    * @param request - The request {@link ListDomainsRequest}
    * @returns A Promise of ListDomainsResponse
@@ -575,7 +577,8 @@ export class API extends ParentAPI {
     enrichForPagination('domains', this.pageOfListDomains, request)
 
   /**
-   * Get a domain name binding.
+   * Get a domain name binding. Get a domain name binding for the container with
+   * the specified ID.
    *
    * @param request - The request {@link GetDomainRequest}
    * @returns A Promise of Domain
@@ -613,7 +616,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a domain name binding.
+   * Create a domain name binding. Create a domain name binding for the
+   * container with the specified ID.
    *
    * @param request - The request {@link CreateDomainRequest}
    * @returns A Promise of Domain
@@ -635,7 +639,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a domain name binding.
+   * Delete a domain name binding. Delete the domain name binding with the
+   * specific ID.
    *
    * @param request - The request {@link DeleteDomainRequest}
    * @returns A Promise of Domain
@@ -707,7 +712,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a token.
+   * Get a token. Get a token with a specified ID.
    *
    * @param request - The request {@link GetTokenRequest}
    * @returns A Promise of Token
@@ -767,7 +772,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all tokens.
+   * List all tokens. List all tokens belonging to a specified Organization or
+   * Project.
    *
    * @param request - The request {@link ListTokensRequest}
    * @returns A Promise of ListTokensResponse
@@ -776,7 +782,7 @@ export class API extends ParentAPI {
     enrichForPagination('tokens', this.pageOfListTokens, request)
 
   /**
-   * Delete a token.
+   * Delete a token. Delete a token with a specified ID.
    *
    * @param request - The request {@link DeleteTokenRequest}
    * @returns A Promise of Token
