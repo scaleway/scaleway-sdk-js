@@ -153,21 +153,33 @@ export interface CreateTriggerRequestSqsClientConfig {
 
 /** Cron. */
 export interface Cron {
+  /** UUID of the cron. */
   id: string
+  /** UUID of the function the cron applies to. */
   functionId: string
+  /** Schedule of the cron. */
   schedule: string
+  /** Arguments to pass with the cron. */
   args?: Record<string, unknown>
+  /** Status of the cron. */
   status: CronStatus
+  /** Name of the cron. */
   name: string
 }
 
 /** Domain. */
 export interface Domain {
+  /** UUID of the domain. */
   id: string
+  /** Hostname associated with the function. */
   hostname: string
+  /** UUID of the function the domain is associated with. */
   functionId: string
+  /** URL of the function. */
   url: string
+  /** State of the doamin. */
   status: DomainStatus
+  /** Error message if the domain is in "error" state. */
   errorMessage?: string
 }
 
@@ -178,26 +190,44 @@ export interface DownloadURL {
 
 /** Function. */
 export interface Function {
+  /** UUID of the function. */
   id: string
+  /** Name of the function. */
   name: string
+  /** UUID of the namespace the function belongs to. */
   namespaceId: string
+  /** Status of the function. */
   status: FunctionStatus
+  /** Environment variables of the function. */
   environmentVariables: Record<string, string>
+  /** Minimum number of instances to scale the function to. */
   minScale: number
+  /** Maximum number of instances to scale the function to. */
   maxScale: number
+  /** Runtime of the function. */
   runtime: FunctionRuntime
+  /** Memory limit of the function in MB. */
   memoryLimit: number
+  /** CPU limit of the function. */
   cpuLimit: number
+  /** Request processing time limit for the function. */
   timeout?: string
+  /** Handler to use for the function. */
   handler: string
+  /** Error message if the function is in "error" state. */
   errorMessage?: string
+  /** Privacy setting of the function. */
   privacy: FunctionPrivacy
+  /** Description of the function. */
   description?: string
+  /** Domain name associated with the function. */
   domainName: string
+  /** Secret environment variables of the function. */
   secretEnvironmentVariables: SecretHashedValue[]
+  /** Region in which the function is deployed. */
   region: Region
   /**
-   * Configure how HTTP and HTTPS requests are handled. Possible values:
+   * Configuration for handling of HTTP and HTTPS requests. Possible values:
    *
    * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.
@@ -209,37 +239,48 @@ export interface Function {
 
 /** List crons response. */
 export interface ListCronsResponse {
+  /** Array of crons. */
   crons: Cron[]
+  /** Total number of crons. */
   totalCount: number
 }
 
 /** List domains response. */
 export interface ListDomainsResponse {
+  /** Array of domains. */
   domains: Domain[]
+  /** Total number of domains. */
   totalCount: number
 }
 
 /** List function runtimes response. */
 export interface ListFunctionRuntimesResponse {
+  /** Array of runtimes available. */
   runtimes: Runtime[]
+  /** Total number of runtimes. */
   totalCount: number
 }
 
 /** List functions response. */
 export interface ListFunctionsResponse {
+  /** Array of functions. */
   functions: Function[]
+  /** Total number of functions. */
   totalCount: number
 }
 
 /** List logs response. */
 export interface ListLogsResponse {
+  /** Array of logs. */
   logs: Log[]
+  /** Total number of logs. */
   totalCount: number
 }
 
 /** List namespaces response. */
 export interface ListNamespacesResponse {
   namespaces: Namespace[]
+  /** Total number of namespaces. */
   totalCount: number
 }
 
@@ -255,10 +296,13 @@ export interface ListTriggersResponse {
 
 /** Log. */
 export interface Log {
+  /** Message of the log. */
   message: string
+  /** Timestamp of the log. */
   timestamp?: Date
+  /** UUID of the log. */
   id: string
-  /** Contains the severity of the log (info, debug, error, ...). */
+  /** Severity of the log (info, debug, error etc.). */
   level: string
   /** Source of the log (core runtime or user code). */
   source: string
@@ -268,17 +312,29 @@ export interface Log {
 
 /** Namespace. */
 export interface Namespace {
+  /** UUID of the namespace. */
   id: string
+  /** Name of the namespace. */
   name: string
+  /** Environment variables of the namespace. */
   environmentVariables: Record<string, string>
+  /** UUID of the Organization the namespace belongs to. */
   organizationId: string
+  /** UUID of the Project the namespace belongs to. */
   projectId: string
+  /** Status of the namespace. */
   status: NamespaceStatus
+  /** UUID of the registry namespace. */
   registryNamespaceId: string
+  /** Error message if the namespace is in "error" state. */
   errorMessage?: string
+  /** Registry endpoint of the namespace. */
   registryEndpoint: string
+  /** Description of the namespace. */
   description?: string
+  /** Secret environment variables of the namespace. */
   secretEnvironmentVariables: SecretHashedValue[]
+  /** Region in which the namespace is located. */
   region: Region
 }
 
@@ -307,16 +363,29 @@ export interface SecretHashedValue {
 
 /** Token. */
 export interface Token {
+  /** UUID of the token. */
   id: string
+  /** String of the token. */
   token: string
-  /** One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set. */
+  /**
+   * UUID of the function the token is associated with.
+   *
+   * One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set.
+   */
   functionId?: string
-  /** One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set. */
+  /**
+   * UUID of the namespace the token is assoicated with.
+   *
+   * One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set.
+   */
   namespaceId?: string
-  /** @deprecated */
+  /** @deprecated Public key of the token. */
   publicKey?: string
+  /** Status of the token. */
   status: TokenStatus
+  /** Description of the token. */
   description?: string
+  /** Date on which the token expires. */
   expiresAt?: Date
 }
 
@@ -375,7 +444,9 @@ export interface UpdateTriggerRequestSqsClientConfig {
 
 /** Upload url. */
 export interface UploadURL {
+  /** Upload URL to upload the function to. */
   url: string
+  /** HTTP headers. */
   headers: Record<string, string[]>
 }
 
@@ -385,11 +456,17 @@ export type ListNamespacesRequest = {
    * config.
    */
   region?: Region
+  /** Page number. */
   page?: number
+  /** Number of namespaces per page. */
   pageSize?: number
+  /** Order of the namespaces. */
   orderBy?: ListNamespacesRequestOrderBy
+  /** Name of the namespace. */
   name?: string
+  /** UUID of the Organization the namespace belongs to. */
   organizationId?: string
+  /** UUID of the Project the namespace belongs to. */
   projectId?: string
 }
 
@@ -399,6 +476,7 @@ export type GetNamespaceRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the namespace. */
   namespaceId: string
 }
 
@@ -409,9 +487,13 @@ export type CreateNamespaceRequest = {
    */
   region?: Region
   name?: string
+  /** Environment variables of the namespace. */
   environmentVariables?: Record<string, string>
+  /** UUID of the project in which the namespace will be created. */
   projectId?: string
+  /** Description of the namespace. */
   description?: string
+  /** Secret environment variables of the namespace. */
   secretEnvironmentVariables?: Secret[]
 }
 
@@ -421,9 +503,13 @@ export type UpdateNamespaceRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the namespapce. */
   namespaceId: string
+  /** Environment variables of the namespace. */
   environmentVariables?: Record<string, string>
+  /** Description of the namespace. */
   description?: string
+  /** Secret environment variables of the namespace. */
   secretEnvironmentVariables?: Secret[]
 }
 
@@ -433,6 +519,7 @@ export type DeleteNamespaceRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the namespace. */
   namespaceId: string
 }
 
@@ -442,12 +529,19 @@ export type ListFunctionsRequest = {
    * config.
    */
   region?: Region
+  /** Page number. */
   page?: number
+  /** Number of functions per page. */
   pageSize?: number
+  /** Order of the functions. */
   orderBy?: ListFunctionsRequestOrderBy
+  /** UUID of the namespace the function belongs to. */
   namespaceId: string
+  /** Name of the function. */
   name?: string
+  /** UUID of the Organziation the function belongs to. */
   organizationId?: string
+  /** UUID of the Project the function belongs to. */
   projectId?: string
 }
 
@@ -457,6 +551,7 @@ export type GetFunctionRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the function. */
   functionId: string
 }
 
@@ -466,16 +561,27 @@ export type CreateFunctionRequest = {
    * config.
    */
   region?: Region
+  /** Name of the function to create. */
   name?: string
+  /** UUID of the namespace the function will be created in. */
   namespaceId: string
+  /** Environment variables of the function. */
   environmentVariables?: Record<string, string>
+  /** Minumum number of instances to scale the function to. */
   minScale?: number
+  /** Maximum number of instances to scale the function to. */
   maxScale?: number
+  /** Runtime to use with the function. */
   runtime?: FunctionRuntime
+  /** Memory limit of the function in MB. */
   memoryLimit?: number
+  /** Request processing time limit for the function. */
   timeout?: string
+  /** Handler to use with the function. */
   handler?: string
+  /** Privacy setting of the function. */
   privacy?: FunctionPrivacy
+  /** Description of the function. */
   description?: string
   secretEnvironmentVariables?: Secret[]
   /**
@@ -494,17 +600,29 @@ export type UpdateFunctionRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the function to update. */
   functionId: string
+  /** Environment variables of the function to update. */
   environmentVariables?: Record<string, string>
+  /** Minumum number of instances to scale the function to. */
   minScale?: number
+  /** Maximum number of instances to scale the function to. */
   maxScale?: number
+  /** Runtime to use with the function. */
   runtime?: FunctionRuntime
+  /** Memory limit of the function in MB. */
   memoryLimit?: number
+  /** Processing time limit for the function. */
   timeout?: string
+  /** Redeploy failed function. */
   redeploy?: boolean
+  /** Handler to use with the function. */
   handler?: string
+  /** Privacy setting of the function. */
   privacy?: FunctionPrivacy
+  /** Description of the function. */
   description?: string
+  /** Secret environment variables of the function. */
   secretEnvironmentVariables?: Secret[]
   /**
    * Configure how HTTP and HTTPS requests are handled. Possible values:
@@ -522,6 +640,7 @@ export type DeleteFunctionRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the function to delete. */
   functionId: string
 }
 
@@ -531,6 +650,7 @@ export type DeployFunctionRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the function to deploy. */
   functionId: string
 }
 
@@ -548,6 +668,7 @@ export type GetFunctionUploadURLRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the function to get the upload URL for. */
   functionId: string
   contentLength: number
 }
@@ -558,6 +679,7 @@ export type GetFunctionDownloadURLRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the function to get the the download URL for. */
   functionId: string
 }
 
@@ -567,9 +689,13 @@ export type ListCronsRequest = {
    * config.
    */
   region?: Region
+  /** Page number. */
   page?: number
+  /** Number of crons per page. */
   pageSize?: number
+  /** Order of the crons. */
   orderBy?: ListCronsRequestOrderBy
+  /** UUID of the function. */
   functionId: string
 }
 
@@ -579,6 +705,7 @@ export type GetCronRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the cron to get. */
   cronId: string
 }
 
@@ -588,9 +715,13 @@ export type CreateCronRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the function to use the cron with. */
   functionId: string
+  /** Schedule of the cron in UNIX cron format. */
   schedule: string
+  /** Arguments to use with the cron. */
   args?: Record<string, unknown>
+  /** Name of the cron. */
   name?: string
 }
 
@@ -600,10 +731,15 @@ export type UpdateCronRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the cron to update. */
   cronId: string
+  /** UUID of the function to use the cron with. */
   functionId?: string
+  /** Schedule of the cron in UNIX cron format. */
   schedule?: string
+  /** Arguments to use with the cron. */
   args?: Record<string, unknown>
+  /** Name of the cron. */
   name?: string
 }
 
@@ -613,6 +749,7 @@ export type DeleteCronRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the cron to delete. */
   cronId: string
 }
 
@@ -622,9 +759,13 @@ export type ListLogsRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the function to get the logs for. */
   functionId: string
+  /** Page number. */
   page?: number
+  /** Number of logs per page. */
   pageSize?: number
+  /** Order of the logs. */
   orderBy?: ListLogsRequestOrderBy
 }
 
@@ -634,9 +775,13 @@ export type ListDomainsRequest = {
    * config.
    */
   region?: Region
+  /** Page number. */
   page?: number
+  /** Number of domains per page. */
   pageSize?: number
+  /** Order of the domains. */
   orderBy?: ListDomainsRequestOrderBy
+  /** UUID of the function the domain is assoicated with. */
   functionId: string
 }
 
@@ -646,6 +791,7 @@ export type GetDomainRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the domain to get. */
   domainId: string
 }
 
@@ -655,7 +801,9 @@ export type CreateDomainRequest = {
    * config.
    */
   region?: Region
+  /** Hostame to create. */
   hostname: string
+  /** UUID of the function to associate the domain with. */
   functionId: string
 }
 
@@ -665,6 +813,7 @@ export type DeleteDomainRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the domain to delete. */
   domainId: string
 }
 
@@ -687,11 +836,21 @@ export type CreateTokenRequest = {
    * config.
    */
   region?: Region
-  /** One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set. */
+  /**
+   * UUID of the function to associate the token with.
+   *
+   * One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set.
+   */
   functionId?: string
-  /** One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set. */
+  /**
+   * UUID of the namespace to associate the token with.
+   *
+   * One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set.
+   */
   namespaceId?: string
+  /** Description of the token. */
   description?: string
+  /** Date on which the token expires. */
   expiresAt?: Date
 }
 
@@ -701,6 +860,7 @@ export type GetTokenRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the token to get. */
   tokenId: string
 }
 
@@ -710,10 +870,15 @@ export type ListTokensRequest = {
    * config.
    */
   region?: Region
+  /** Page number. */
   page?: number
+  /** Number of tokens per page. */
   pageSize?: number
+  /** Sort order for the tokens. */
   orderBy?: ListTokensRequestOrderBy
+  /** UUID of the function the token is assoicated with. */
   functionId?: string
+  /** UUID of the namespace the token is associated with. */
   namespaceId?: string
 }
 
@@ -723,6 +888,7 @@ export type DeleteTokenRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the token to delete. */
   tokenId: string
 }
 
