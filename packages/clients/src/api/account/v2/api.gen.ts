@@ -9,12 +9,10 @@ import {
 import {
   marshalCreateProjectRequest,
   marshalUpdateProjectRequest,
-  unmarshalCaptchaProvider,
   unmarshalListProjectsResponse,
   unmarshalProject,
 } from './marshalling.gen'
 import type {
-  CaptchaProvider,
   CreateProjectRequest,
   DeleteProjectRequest,
   GetProjectRequest,
@@ -150,19 +148,5 @@ export class API extends ParentAPI {
         )}`,
       },
       unmarshalProject,
-    )
-
-  /**
-   * Get a Captcha provider.
-   *
-   * @returns A Promise of CaptchaProvider
-   */
-  getCaptchaProvider = () =>
-    this.client.fetch<CaptchaProvider>(
-      {
-        method: 'GET',
-        path: `/account/v2/captcha-provider`,
-      },
-      unmarshalCaptchaProvider,
     )
 }

@@ -1,21 +1,11 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-export type CaptchaProviderName =
-  | 'unknown_name'
-  | 'recaptcha_v2'
-  | 'friendly_captcha'
-  | 'hcaptcha'
-
 export type ListProjectsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
   | 'name_asc'
   | 'name_desc'
-
-export interface CaptchaProvider {
-  name: CaptchaProviderName
-}
 
 /** List projects response. */
 export interface ListProjectsResponse {
