@@ -137,7 +137,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all your namespaces.
+   * List all your namespaces. List all existing namespaces in the specified
+   * region.
    *
    * @param request - The request {@link ListNamespacesRequest}
    * @returns A Promise of ListNamespacesResponse
@@ -146,7 +147,7 @@ export class API extends ParentAPI {
     enrichForPagination('namespaces', this.pageOfListNamespaces, request)
 
   /**
-   * Get a namespace. Get the namespace associated with the given id.
+   * Get a namespace. Get the namespace associated with the specified ID.
    *
    * @param request - The request {@link GetNamespaceRequest}
    * @returns A Promise of Namespace
@@ -184,7 +185,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new namespace.
+   * Create a new namespace. Create a new namespace in a specified Organization
+   * or Proejct.
    *
    * @param request - The request {@link CreateNamespaceRequest}
    * @returns A Promise of Namespace
@@ -206,8 +208,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an existing namespace. Update the space associated with the given
-   * id.
+   * Update an existing namespace. Update the namespace associated with the
+   * specified ID.
    *
    * @param request - The request {@link UpdateNamespaceRequest}
    * @returns A Promise of Namespace
@@ -230,7 +232,7 @@ export class API extends ParentAPI {
 
   /**
    * Delete an existing namespace. Delete the namespace associated with the
-   * given id.
+   * specified ID.
    *
    * @param request - The request {@link DeleteNamespaceRequest}
    * @returns A Promise of Namespace
@@ -281,7 +283,7 @@ export class API extends ParentAPI {
     enrichForPagination('functions', this.pageOfListFunctions, request)
 
   /**
-   * Get a function. Get the function associated with the given id.
+   * Get a function. Get the function associated with the specified ID.
    *
    * @param request - The request {@link GetFunctionRequest}
    * @returns A Promise of Function
@@ -319,7 +321,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new function.
+   * Create a new function. Create a new function in the specified region for a
+   * specified Organization or Project.
    *
    * @param request - The request {@link CreateFunctionRequest}
    * @returns A Promise of Function
@@ -341,8 +344,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an existing function. Update the function associated with the given
-   * id.
+   * Update an existing function. Update the function associated with the
+   * specified ID.
    *
    * @param request - The request {@link UpdateFunctionRequest}
    * @returns A Promise of Function
@@ -364,7 +367,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a function. Delete the function associated with the given id.
+   * Delete a function. Delete the function associated with the specified ID.
    *
    * @param request - The request {@link DeleteFunctionRequest}
    * @returns A Promise of Function
@@ -382,7 +385,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Deploy a function. Deploy a function associated with the given id.
+   * Deploy a function. Deploy a function associated with the specified ID.
    *
    * @param request - The request {@link DeployFunctionRequest}
    * @returns A Promise of Function
@@ -426,7 +429,7 @@ export class API extends ParentAPI {
 
   /**
    * Get an upload URL of a function. Get an upload URL of a function associated
-   * with the given id.
+   * with the specified ID.
    *
    * @param request - The request {@link GetFunctionUploadURLRequest}
    * @returns A Promise of UploadURL
@@ -449,7 +452,7 @@ export class API extends ParentAPI {
 
   /**
    * Get a download URL of a function. Get a download URL for a function
-   * associated with the given id.
+   * associated with the specified ID.
    *
    * @param request - The request {@link GetFunctionDownloadURLRequest}
    * @returns A Promise of DownloadURL
@@ -491,7 +494,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all your crons.
+   * List all crons. List all the cronjobs in a specified region.
    *
    * @param request - The request {@link ListCronsRequest}
    * @returns A Promise of ListCronsResponse
@@ -500,7 +503,7 @@ export class API extends ParentAPI {
     enrichForPagination('crons', this.pageOfListCrons, request)
 
   /**
-   * Get a cron. Get the cron associated with the given id.
+   * Get a cron. Get the cron associated with the specified ID.
    *
    * @param request - The request {@link GetCronRequest}
    * @returns A Promise of Cron
@@ -537,7 +540,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new cron.
+   * Create a new cron. Create a new cronjob for a function with the specified
+   * ID.
    *
    * @param request - The request {@link CreateCronRequest}
    * @returns A Promise of Cron
@@ -559,7 +563,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an existing cron. Update the cron associated with the given id.
+   * Update an existing cron. Update the cron associated with the specified ID.
    *
    * @param request - The request {@link UpdateCronRequest}
    * @returns A Promise of Cron
@@ -581,7 +585,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an existing cron. Delete the cron associated with the given id.
+   * Delete an existing cron. Delete the cron associated with the specified ID.
    *
    * @param request - The request {@link DeleteCronRequest}
    * @returns A Promise of Cron
@@ -622,7 +626,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List your application logs.
+   * List application logs. List the application logs of the function with the
+   * specified ID.
    *
    * @param request - The request {@link ListLogsRequest}
    * @returns A Promise of ListLogsResponse
@@ -652,7 +657,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all domain name bindings.
+   * List all domain name bindings. List all domain name bindings in a specified
+   * region.
    *
    * @param request - The request {@link ListDomainsRequest}
    * @returns A Promise of ListDomainsResponse
@@ -661,7 +667,8 @@ export class API extends ParentAPI {
     enrichForPagination('domains', this.pageOfListDomains, request)
 
   /**
-   * Get a domain name binding.
+   * Get a domain name binding. Get a domain name binding for the function with
+   * the specified ID.
    *
    * @param request - The request {@link GetDomainRequest}
    * @returns A Promise of Domain
@@ -699,7 +706,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a domain name binding.
+   * Create a domain name binding. Create a domain name binding for the function
+   * with the specified ID.
    *
    * @param request - The request {@link CreateDomainRequest}
    * @returns A Promise of Domain
@@ -721,7 +729,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a domain name binding.
+   * Delete a domain name binding. Delete a domain name binding for the function
+   * with the specified ID.
    *
    * @param request - The request {@link DeleteDomainRequest}
    * @returns A Promise of Domain
