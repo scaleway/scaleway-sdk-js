@@ -7,6 +7,7 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  CaptchaProvider,
   CreateProjectRequest,
   ListProjectsResponse,
   Project,
@@ -28,6 +29,16 @@ export const unmarshalProject = (data: unknown) => {
     organizationId: data.organization_id,
     updatedAt: unmarshalDate(data.updated_at),
   } as Project
+}
+
+export const unmarshalCaptchaProvider = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CaptchaProvider' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return { name: data.name } as CaptchaProvider
 }
 
 export const unmarshalListProjectsResponse = (data: unknown) => {

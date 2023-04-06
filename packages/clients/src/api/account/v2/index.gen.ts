@@ -2,6 +2,8 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 export { API } from './api.gen'
 export type {
+  CaptchaProvider,
+  CaptchaProviderName,
   CreateProjectRequest,
   DeleteProjectRequest,
   GetProjectRequest,
