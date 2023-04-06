@@ -24,23 +24,25 @@ export type NamespaceProtocol = 'unknown' | 'nats' | 'sqs_sns'
 
 /** Credential. */
 export interface Credential {
-  /** Credential ID. */
+  /** ID of the credentials. */
   id: string
-  /** Credential name. */
+  /** Name of the credentials. */
   name: string
-  /** Namespace containing the Credential. */
+  /** Namespace containing the credentials. */
   namespaceId: string
-  /** Protocol associated to the Credential. */
+  /** Protocol associated with the credentials. */
   protocol: NamespaceProtocol
   /**
-   * Credentials file used to connect to the NATS service.
+   * Object containing the credentials, if the credentials are for a NATS
+   * namespace.
    *
    * One-of ('credentialType'): at most one of 'natsCredentials',
    * 'sqsSnsCredentials' could be set.
    */
   natsCredentials?: CredentialNATSCredsFile
   /**
-   * Credential used to connect to the SQS/SNS service.
+   * Object containing the credentials and their metadata, if the credentials
+   * are for an SQS/SNS namespace.
    *
    * One-of ('credentialType'): at most one of 'natsCredentials',
    * 'sqsSnsCredentials' could be set.
@@ -56,26 +58,27 @@ export interface CredentialNATSCredsFile {
 
 /** Credential.sqssns creds. */
 export interface CredentialSQSSNSCreds {
-  /** ID of the key. */
+  /** Access key ID. */
   accessKey: string
-  /** Secret value of the key. */
+  /** Secret key ID. */
   secretKey?: string
-  /** List of permissions associated to this Credential. */
+  /** Permissions associated with these credentials. */
   permissions?: Permissions
 }
 
 /** Credential summary. */
 export interface CredentialSummary {
-  /** Credential ID. */
+  /** ID of the credentials. */
   id: string
-  /** Credential name. */
+  /** Name of the credentials. */
   name: string
-  /** Namespace containing the Credential. */
+  /** Namespace containing the credentials. */
   namespaceId: string
-  /** Protocol associated to the Credential. */
+  /** Protocol associated with the credentials. */
   protocol: NamespaceProtocol
   /**
-   * Credential used to connect to the SQS/SNS service.
+   * Object containing the credentials and their metadata, if the credentials
+   * are for an SQS/SNS namespace.
    *
    * One-of ('credentialType'): at most one of 'sqsSnsCredentials' could be set.
    */
@@ -84,25 +87,25 @@ export interface CredentialSummary {
 
 /** Credential summary.sqssns creds. */
 export interface CredentialSummarySQSSNSCreds {
-  /** ID of the key. */
+  /** Access key ID. */
   accessKey: string
-  /** List of permissions associated to this Credential. */
+  /** Permissions associated with these credentials. */
   permissions?: Permissions
 }
 
 /** List credentials response. */
 export interface ListCredentialsResponse {
-  /** Total number of existing Credentials. */
+  /** Total count of existing credentials (matching any filters specified). */
   totalCount: number
-  /** A page of Credentials. */
+  /** Credentials on this page. */
   credentials: CredentialSummary[]
 }
 
 /** List namespaces response. */
 export interface ListNamespacesResponse {
-  /** Total number of existing Namespaces. */
+  /** Total count of existing namespaces (matching any filters specified). */
   totalCount: number
-  /** A page of Namespaces. */
+  /** Namespaces on this page. */
   namespaces: Namespace[]
 }
 
@@ -112,13 +115,13 @@ export interface Namespace {
   id: string
   /** Namespace name. */
   name: string
-  /** Endpoint of the service matching the Namespace protocol. */
+  /** Endpoint of the service matching the namespace's protocol. */
   endpoint: string
   /** Namespace protocol. */
   protocol: NamespaceProtocol
-  /** Project containing the Namespace. */
+  /** Project ID of the Project containing the namespace. */
   projectId: string
-  /** Region where the Namespace is deployed. */
+  /** Region where the namespace is deployed. */
   region: Region
   /** Namespace creation date. */
   createdAt?: Date
@@ -128,11 +131,20 @@ export interface Namespace {
 
 /** Permissions. */
 export interface Permissions {
-  /** Defines if user can publish messages to the service. */
+  /**
+   * Defines whether the credentials bearer can publish messages to the service
+   * (send messages to SQS queues or publish to SNS topics).
+   */
   canPublish?: boolean
-  /** Defines if user can receive messages from the service. */
+  /**
+   * Defines whether the credentials bearer can receive messages from the
+   * service.
+   */
   canReceive?: boolean
-  /** Defines if user can manage the associated resource(s). */
+  /**
+   * Defines whether the credentials bearer can manage the associated resources
+   * (SQS queues or SNS topics or subscriptions).
+   */
   canManage?: boolean
 }
 
@@ -142,15 +154,15 @@ export type ListNamespacesRequest = {
    * config.
    */
   region?: Region
-  /** Will list only the Namespaces owned by the specified organization. */
+  /** Include only namespaces in this Organization. */
   organizationId?: string
-  /** Will list only the Namespaces contained into the specified project. */
+  /** Include only namespaces in this Project. */
   projectId?: string
-  /** Indicate the page number of results to be returned. */
+  /** Page number to return. */
   page?: number
-  /** Maximum number of results returned by page. */
+  /** Maximum number of namespaces to return per page. */
   pageSize?: number
-  /** Field used for sorting results. */
+  /** Order in which to return results. */
   orderBy?: ListNamespacesRequestOrderBy
 }
 
@@ -162,7 +174,10 @@ export type CreateNamespaceRequest = {
   region?: Region
   /** Namespace name. */
   name?: string
-  /** Namespace protocol. */
+  /**
+   * Namespace protocol. You must specify a valid protocol (and not `unknown`)
+   * to avoid an error.
+   */
   protocol: NamespaceProtocol
   /** Project containing the Namespace. */
   projectId?: string
@@ -196,7 +211,7 @@ export type DeleteNamespaceRequest = {
    * config.
    */
   region?: Region
-  /** ID of the Namespace to delete. */
+  /** ID of the namespace to delete. */
   namespaceId: string
 }
 
@@ -206,12 +221,12 @@ export type CreateCredentialRequest = {
    * config.
    */
   region?: Region
-  /** Namespace containing the Credential. */
+  /** Namespace containing the credentials. */
   namespaceId: string
-  /** Credential name. */
+  /** Name of the credentials. */
   name?: string
   /**
-   * List of permissions associated to this Credential.
+   * Permissions associated with these credentials.
    *
    * One-of ('optionalPermissions'): at most one of 'permissions' could be set.
    */
@@ -224,7 +239,7 @@ export type DeleteCredentialRequest = {
    * config.
    */
   region?: Region
-  /** ID of the Credential to delete. */
+  /** ID of the credentials to delete. */
   credentialId: string
 }
 
@@ -234,13 +249,13 @@ export type ListCredentialsRequest = {
    * config.
    */
   region?: Region
-  /** Namespace containing the Credential. */
+  /** Namespace containing the credentials. */
   namespaceId?: string
-  /** Indicate the page number of results to be returned. */
+  /** Page number to return. */
   page?: number
-  /** Maximum number of results returned by page. */
+  /** Maximum number of credentials to return per page. */
   pageSize?: number
-  /** Field used for sorting results. */
+  /** Order in which to return results. */
   orderBy?: ListCredentialsRequestOrderBy
 }
 
@@ -250,12 +265,12 @@ export type UpdateCredentialRequest = {
    * config.
    */
   region?: Region
-  /** ID of the Credential to update. */
+  /** ID of the credentials to update. */
   credentialId: string
-  /** Credential name. */
+  /** Name of the credentials. */
   name?: string
   /**
-   * List of permissions associated to this Credential.
+   * Permissions associated with these credentials.
    *
    * One-of ('optionalPermissions'): at most one of 'permissions' could be set.
    */
@@ -268,6 +283,6 @@ export type GetCredentialRequest = {
    * config.
    */
   region?: Region
-  /** ID of the Credential to get. */
+  /** ID of the credentials to get. */
   credentialId: string
 }

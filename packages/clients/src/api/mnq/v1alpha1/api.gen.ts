@@ -41,7 +41,8 @@ const jsonContentHeaders = {
 /**
  * MnQ API (beta).
  *
- * This API allows you to manage Messaging or Queueing brokers. MnQ API (beta).
+ * This API allows you to manage Scaleway Messaging and Queueing brokers. MnQ
+ * API (beta).
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -72,7 +73,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List namespaces.
+   * List namespaces. List all Messaging and Queuing namespaces in the specified
+   * region, for a Scaleway Organization or Project. By default, the namespaces
+   * returned in the list are ordered by creation date in ascending order,
+   * though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListNamespacesRequest}
    * @returns A Promise of ListNamespacesResponse
@@ -81,7 +85,8 @@ export class API extends ParentAPI {
     enrichForPagination('namespaces', this.pageOfListNamespaces, request)
 
   /**
-   * Create a namespace.
+   * Create a namespace. Create a Messaging and Queuing namespace, set to the
+   * desired protocol.
    *
    * @param request - The request {@link CreateNamespaceRequest}
    * @returns A Promise of Namespace
@@ -103,7 +108,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update the name of a namespace.
+   * Update the name of a namespace. Update the name of a Messaging and Queuing
+   * namespace, specified by its namespace ID.
    *
    * @param request - The request {@link UpdateNamespaceRequest}
    * @returns A Promise of Namespace
@@ -125,7 +131,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a namespace.
+   * Get a namespace. Retrieve information about an existing Messaging and
+   * Queuing namespace, identified by its namespace ID. Its full details,
+   * including name, endpoint and protocol, are returned in the response.
    *
    * @param request - The request {@link GetNamespaceRequest}
    * @returns A Promise of Namespace
@@ -143,7 +151,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a namespace.
+   * Delete a namespace. Delete a Messaging and Queuing namespace, specified by
+   * its namespace ID. Note that deleting a namespace is irreversible, and any
+   * URLs, credentials and queued messages belonging to this namespace will also
+   * be deleted.
    *
    * @param request - The request {@link DeleteNamespaceRequest}
    */
@@ -157,8 +168,11 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Create a set of credentials. Create a set of credentials for a specific
-   * namespace.
+   * Create credentials. Create a set of credentials for a Messaging and Queuing
+   * namespace, specified by its namespace ID. If creating credentials for a
+   * NATS namespace, the `permissions` object must not be included in the
+   * request. If creating credentials for an SQS/SNS namespace, the
+   * `permissions` object is required, with all three of its child attributes.
    *
    * @param request - The request {@link CreateCredentialRequest}
    * @returns A Promise of Credential
@@ -180,7 +194,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete credentials.
+   * Delete credentials. Delete a set of credentials, specified by their
+   * credential ID. Deleting credentials is irreversible and cannot be undone.
+   * The credentials can no longer be used to access the namespace.
    *
    * @param request - The request {@link DeleteCredentialRequest}
    */
@@ -220,7 +236,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List credentials.
+   * List credentials. List existing credentials in the specified region. The
+   * response contains only the metadata for the credentials, not the
+   * credentials themselves (for this, use **Get Credentials**).
    *
    * @param request - The request {@link ListCredentialsRequest}
    * @returns A Promise of ListCredentialsResponse
@@ -229,7 +247,10 @@ export class API extends ParentAPI {
     enrichForPagination('credentials', this.pageOfListCredentials, request)
 
   /**
-   * Update a set of credentials.
+   * Update credentials. Update a set of credentials. You can update the
+   * credentials' name, or (in the case of SQS/SNS credentials only) their
+   * permissions. To update the name of NATS credentials, do not include the
+   * `permissions` object in your request.
    *
    * @param request - The request {@link UpdateCredentialRequest}
    * @returns A Promise of Credential
@@ -254,7 +275,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a set of credentials.
+   * Get credentials. Retrieve an existing set of credentials, identified by the
+   * `credential_id`. The credentials themselves, as well as their metadata
+   * (protocol, namespace ID etc), are returned in the response.
    *
    * @param request - The request {@link GetCredentialRequest}
    * @returns A Promise of Credential
