@@ -271,7 +271,7 @@ export const marshalCreateContainerRequest = (
   max_scale: request.maxScale,
   memory_limit: request.memoryLimit,
   min_scale: request.minScale,
-  name: request.name || randomName('ctnr'),
+  name: request.name,
   namespace_id: request.namespaceId,
   port: request.port,
   privacy: request.privacy ?? 'unknown_privacy',
