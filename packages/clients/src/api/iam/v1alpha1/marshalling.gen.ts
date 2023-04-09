@@ -231,6 +231,7 @@ export const unmarshalUser = (data: unknown) => {
     email: data.email,
     id: data.id,
     lastLoginAt: unmarshalDate(data.last_login_at),
+    mfa: data.mfa,
     organizationId: data.organization_id,
     status: data.status,
     twoFactorEnabled: data.two_factor_enabled,

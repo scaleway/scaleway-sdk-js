@@ -429,10 +429,12 @@ export interface User {
   lastLoginAt?: Date
   /** Type of user. */
   type: UserType
-  /** Whether MFA is enabled. */
-  twoFactorEnabled: boolean
+  /** @deprecated Deprecated, use "mfa" instead. */
+  twoFactorEnabled?: boolean
   /** Status of user invitation. */
   status: UserStatus
+  /** Whether MFA is enabled. */
+  mfa: boolean
 }
 
 export type ListSSHKeysRequest = {
@@ -492,6 +494,8 @@ export type ListUsersRequest = {
   organizationId?: string
   /** Filter by list of IDs. */
   userIds?: string[]
+  /** Filter by MFA status. */
+  mfa?: boolean
 }
 
 export type GetUserRequest = {

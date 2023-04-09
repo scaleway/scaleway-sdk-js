@@ -228,6 +228,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/iam/v1alpha1/users`,
         urlParams: urlParams(
+          ['mfa', request.mfa],
           ['order_by', request.orderBy ?? 'created_at_asc'],
           [
             'organization_id',
@@ -261,8 +262,7 @@ export class API extends ParentAPI {
   /**
    * Get a given user. Retrieve information about a user, specified by the
    * `user_id` parameter. The user's full details, including `id`, `email`,
-   * `organization_id`, `status` and `two_factor_enabled` are returned in the
-   * response.
+   * `organization_id`, `status` and `mfa` are returned in the response.
    *
    * @param request - The request {@link GetUserRequest}
    * @returns A Promise of User
