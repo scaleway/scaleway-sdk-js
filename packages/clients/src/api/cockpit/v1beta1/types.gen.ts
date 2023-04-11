@@ -26,40 +26,44 @@ export type PlanName = 'unknown_name' | 'free' | 'premium' | 'custom'
 
 /** Cockpit. */
 export interface Cockpit {
-  /** Project ID. */
+  /** ID of the Project the Cockpit belongs to. */
   projectId: string
-  /** Created at. */
+  /** Date and time of the Cockpit's creation. */
   createdAt?: Date
-  /** Updated at. */
+  /** Date and time of the Cockpit's last update. */
   updatedAt?: Date
-  /** Endpoints. */
+  /** Endpoints of the Cockpit. */
   endpoints?: CockpitEndpoints
-  /** Status. */
+  /** Status of the Cockpit. */
   status: CockpitStatus
-  /** Managed alerts enabled. */
+  /** Specifies whether managed alerts are enabled or disabled. */
   managedAlertsEnabled: boolean
-  /** Pricing plan. */
+  /** Pricing plan information. */
   plan?: Plan
 }
 
 /** Cockpit. endpoints. */
 export interface CockpitEndpoints {
+  /** URL for metrics. */
   metricsUrl: string
+  /** URL for logs. */
   logsUrl: string
+  /** URL for the alert manager. */
   alertmanagerUrl: string
+  /** URL for the Grafana dashboard. */
   grafanaUrl: string
 }
 
-/** Cockpit metrics. */
+/** Metrics for a given Cockpit. Cockpit metrics. */
 export interface CockpitMetrics {
-  /** Timeseries array. */
+  /** Time series array. */
   timeseries: TimeSeries[]
 }
 
-/** Alert contact point. Contact point. */
+/** Contact point. */
 export interface ContactPoint {
   /**
-   * Alert contact point configuration.
+   * Contact point configuration.
    *
    * One-of ('configuration'): at most one of 'email' could be set.
    */
@@ -72,138 +76,174 @@ export interface ContactPointEmail {
 
 /** Grafana user. */
 export interface GrafanaUser {
+  /** ID of the Grafana user. */
   id: number
+  /** Username of the Grafana user. */
   login: string
+  /** Role assigned to the Grafana user. */
   role: GrafanaUserRole
+  /** The Grafana user's password. */
   password?: string
 }
 
-/** List contact points response. */
+/** Response returned when listing contact points. List contact points response. */
 export interface ListContactPointsResponse {
-  /** Total count of contact points. */
+  /** Count of all contact points created. */
   totalCount: number
-  /** Contact points array. */
+  /** Array of contact points. */
   contactPoints: ContactPoint[]
-  /** Has receivers other than default. */
+  /**
+   * Specifies whether the contact point has other receivers than the default
+   * receiver.
+   */
   hasAdditionalReceivers: boolean
-  /** Has unmanaged contact points. */
+  /** Specifies whether there are unmanaged contact points. */
   hasAdditionalContactPoints: boolean
 }
 
-/** List grafana users response. */
+/** Response returned when listing Grafana users. List grafana users response. */
 export interface ListGrafanaUsersResponse {
+  /** Count of all Grafana users. */
   totalCount: number
+  /** Information on all Grafana users. */
   grafanaUsers: GrafanaUser[]
 }
 
-/** List all pricing plans response. List plans response. */
+/** Response returned when listing all pricing plans. List plans response. */
 export interface ListPlansResponse {
+  /** Count of all pricing plans. */
   totalCount: number
+  /** Information on plans. */
   plans: Plan[]
 }
 
 /** List tokens response. */
 export interface ListTokensResponse {
+  /** Count of all tokens created. */
   totalCount: number
+  /** List of all tokens created. */
   tokens: Token[]
 }
 
-/** Plan. */
+/** Pricing plan. Plan. */
 export interface Plan {
-  /** Plan id. */
+  /** ID of a given pricing plan. */
   id: string
-  /** Plan name. */
+  /** Name of a given pricing plan. */
   name: PlanName
   /** Retention for metrics. */
   retentionMetricsInterval?: string
   /** Retention for logs. */
   retentionLogsInterval?: string
-  /** Ingestion price for 1million samples in cents. */
+  /** Ingestion price for 1 million samples in cents. */
   sampleIngestionPrice: number
-  /** Ingestion price in cents for 1 Go of logs. */
+  /** Ingestion price for 1 GB of logs in cents. */
   logsIngestionPrice: number
   /** Retention price in euros per month. */
   retentionPrice: number
 }
 
-/** Select pricing plan response. Select plan response. */
+/** Response returned when selecting a pricing plan. Select plan response. */
 export interface SelectPlanResponse {}
 
 /** Token. */
 export interface Token {
+  /** ID of the token. */
   id: string
+  /** ID of the Project. */
   projectId: string
+  /** Name of the token. */
   name: string
+  /** Date and time of the token's creation. */
   createdAt?: Date
+  /** Date and time of the token's last update. */
   updatedAt?: Date
+  /** Token's permissions. */
   scopes?: TokenScopes
+  /** Token's secret key. */
   secretKey?: string
 }
 
 /** Token scopes. */
 export interface TokenScopes {
+  /** Permission to fetch metrics. */
   queryMetrics: boolean
+  /** Permission to write metrics. */
   writeMetrics: boolean
+  /** Permission to setup metrics rules. */
   setupMetricsRules: boolean
+  /** Permission to fetch logs. */
   queryLogs: boolean
+  /** Permission to write logs. */
   writeLogs: boolean
+  /** Permission to setup logs rules. */
   setupLogsRules: boolean
+  /** Permission to setup alerts. */
   setupAlerts: boolean
 }
 
 export type ActivateCockpitRequest = {
+  /** ID of the Project the Cockpit belongs to. */
   projectId?: string
 }
 
 export type GetCockpitRequest = {
+  /** ID of the Project the Cockpit belongs to. */
   projectId?: string
 }
 
 export type GetCockpitMetricsRequest = {
-  /** Project ID. */
+  /** ID of the Project the Cockpit belongs to. */
   projectId?: string
-  /**
-   * Start date. Start date, if omited, query will be instant query and End Date
-   * will be used as query time.
-   */
+  /** Desired time range's start date for the metrics. */
   startDate?: Date
-  /** End date. End date, if omited set to now. */
+  /** Desired time range's end date for the metrics. */
   endDate?: Date
-  /** Metric name. */
+  /** Name of the metric requested. */
   metricName?: string
 }
 
 export type DeactivateCockpitRequest = {
+  /** ID of the Project the Cockpit belongs to. */
   projectId?: string
 }
 
 export type ResetCockpitGrafanaRequest = {
+  /** ID of the Project the Cockpit belongs to. */
   projectId?: string
 }
 
 export type CreateTokenRequest = {
+  /** ID of the Project. */
   projectId?: string
+  /** Name of the token. */
   name?: string
+  /** Token's permissions. */
   scopes?: TokenScopes
 }
 
 export type ListTokensRequest = {
+  /** Page number. */
   page?: number
+  /** Page size. */
   pageSize?: number
   orderBy?: ListTokensRequestOrderBy
+  /** ID of the Project. */
   projectId?: string
 }
 
 export type GetTokenRequest = {
+  /** ID of the token. */
   tokenId: string
 }
 
 export type DeleteTokenRequest = {
+  /** ID of the token. */
   tokenId: string
 }
 
 export type CreateContactPointRequest = {
-  /** Project ID. */
+  /** ID of the Project in which to create the contact point. */
   projectId?: string
   /** Contact point to create. */
   contactPoint?: ContactPoint
@@ -214,21 +254,24 @@ export type ListContactPointsRequest = {
   page?: number
   /** Page size. */
   pageSize?: number
-  /** Project ID. */
+  /** ID of the Project from which to list the contact points. */
   projectId?: string
 }
 
 export type DeleteContactPointRequest = {
+  /** ID of the Project. */
   projectId?: string
   /** Contact point to delete. */
   contactPoint?: ContactPoint
 }
 
 export type EnableManagedAlertsRequest = {
+  /** ID of the Project. */
   projectId?: string
 }
 
 export type DisableManagedAlertsRequest = {
+  /** ID of the Project. */
   projectId?: string
 }
 
@@ -237,35 +280,49 @@ export type TriggerTestAlertRequest = {
 }
 
 export type CreateGrafanaUserRequest = {
+  /** ID of the Project. */
   projectId?: string
+  /** Username of the Grafana user. */
   login: string
+  /** Role assigned to the Grafana user. */
   role?: GrafanaUserRole
 }
 
 export type ListGrafanaUsersRequest = {
+  /** Page number. */
   page?: number
+  /** Page size. */
   pageSize?: number
   orderBy?: ListGrafanaUsersRequestOrderBy
+  /** ID of the Project. */
   projectId?: string
 }
 
 export type DeleteGrafanaUserRequest = {
+  /** ID of the Grafana user. */
   grafanaUserId: number
+  /** ID of the Project. */
   projectId?: string
 }
 
 export type ResetGrafanaUserPasswordRequest = {
+  /** ID of the Grafana user. */
   grafanaUserId: number
+  /** ID of the Project. */
   projectId?: string
 }
 
 export type ListPlansRequest = {
+  /** Page number. */
   page?: number
+  /** Page size. */
   pageSize?: number
   orderBy?: ListPlansRequestOrderBy
 }
 
 export type SelectPlanRequest = {
+  /** ID of the Project. */
   projectId?: string
+  /** ID of the pricing plan. */
   planId: string
 }

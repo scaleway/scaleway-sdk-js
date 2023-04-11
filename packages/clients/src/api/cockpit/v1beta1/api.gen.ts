@@ -73,14 +73,16 @@ const jsonContentHeaders = {
 }
 
 /**
- * Cockpit API.
+ * Cockpit API documentation.
  *
- * This API allows to manage Cockpits. Cockpit API.
+ * Cockpit's API allows you to monitor your applications and their
+ * infrastructure. Cockpit's API allows you to activate your Cockpit on your
+ * Projects. Scaleway's Cockpit stores metrics and logs and provides a dedicated
+ * Grafana for dashboarding to visualize them.
  */
 export class API extends ParentAPI {
   /**
-   * Activate a cockpit. Activate a cockpit associated with the given project
-   * ID.
+   * Activate a Cockpit. Activate the Cockpit of the specified Project ID.
    *
    * @param request - The request {@link ActivateCockpitRequest}
    * @returns A Promise of Cockpit
@@ -99,7 +101,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get cockpit. Get the cockpit associated with the given project ID.
+   * Get a Cockpit. Retrieve the Cockpit of the specified Project ID.
    *
    * @param request - The request {@link GetCockpitRequest}
    * @returns A Promise of Cockpit
@@ -138,7 +140,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get cockpit metrics. Get the cockpit metrics with the given project ID.
+   * Get Cockpit metrics. Get metrics from your Cockpit with the specified
+   * Project ID.
    *
    * @param request - The request {@link GetCockpitMetricsRequest}
    * @returns A Promise of CockpitMetrics
@@ -162,8 +165,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Deactivate a cockpit. Deactivate a cockpit associated with the given
-   * project ID.
+   * Deactivate a Cockpit. Deactivate the Cockpit of the specified Project ID.
    *
    * @param request - The request {@link DeactivateCockpitRequest}
    * @returns A Promise of Cockpit
@@ -182,8 +184,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Reset Grafana. Reset the Grafana of your cockpit associated with the given
-   * project ID.
+   * Reset a Grafana. Reset your Cockpit's Grafana associated with the specified
+   * Project ID.
    *
    * @param request - The request {@link ResetCockpitGrafanaRequest}
    * @returns A Promise of Cockpit
@@ -202,7 +204,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a token. Create a token associated with the given project ID.
+   * Create a token. Create a token associated with the specified Project ID.
    *
    * @param request - The request {@link CreateTokenRequest}
    * @returns A Promise of Token
@@ -242,7 +244,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List tokens. List tokens associated with the given project ID.
+   * List tokens. Get a list of tokens associated with the specified Project ID.
    *
    * @param request - The request {@link ListTokensRequest}
    * @returns A Promise of ListTokensResponse
@@ -251,7 +253,7 @@ export class API extends ParentAPI {
     enrichForPagination('tokens', this.pageOfListTokens, request)
 
   /**
-   * Get token. Get the token associated with the given ID.
+   * Get a token. Retrieve the token associated with the specified token ID.
    *
    * @param request - The request {@link GetTokenRequest}
    * @returns A Promise of Token
@@ -269,7 +271,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete token. Delete the token associated with the given ID.
+   * Delete a token. Delete the token associated with the specified token ID.
    *
    * @param request - The request {@link DeleteTokenRequest}
    */
@@ -283,7 +285,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Create an alert contact point. Create an alert contact point for the
+   * Create a contact point. Create a contact point to receive alerts for the
    * default receiver.
    *
    * @param request - The request {@link CreateContactPointRequest}
@@ -325,8 +327,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List alert contact points. List alert contact points associated with the
-   * given cockpit ID.
+   * List contact points. Get a list of contact points for the Cockpit
+   * associated with the specified Project ID.
    *
    * @param request - The request {@link ListContactPointsRequest}
    * @returns A Promise of ListContactPointsResponse
@@ -335,8 +337,8 @@ export class API extends ParentAPI {
     enrichForPagination('contactPoints', this.pageOfListContactPoints, request)
 
   /**
-   * Delete an alert contact point. Delete an alert contact point for the
-   * default receiver.
+   * Delete an alert contact point. Delete a contact point for the default
+   * receiver.
    *
    * @param request - The request {@link DeleteContactPointRequest}
    */
@@ -351,7 +353,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Enable managed alerts.
+   * Enable managed alerts. Enable the sending of managed alerts for the
+   * specified Project's Cockpit.
    *
    * @param request - The request {@link EnableManagedAlertsRequest}
    */
@@ -366,7 +369,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Disable managed alerts.
+   * Disable managed alerts. Disable the sending of managed alerts for the
+   * specified Project's Cockpit.
    *
    * @param request - The request {@link DisableManagedAlertsRequest}
    */
@@ -383,7 +387,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Trigger a test alert. Trigger a test alert to all receivers.
+   * Trigger a test alert. Trigger a test alert to all of the Cockpit's
+   * receivers.
    *
    * @param request - The request {@link TriggerTestAlertRequest}
    */
@@ -398,7 +403,9 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Create a grafana user. Create a grafana user for your grafana instance.
+   * Create a Grafana user. Create a Grafana user for your Cockpit's Grafana
+   * instance. Make sure you save the automatically-generated password and the
+   * Grafana user ID.
    *
    * @param request - The request {@link CreateGrafanaUserRequest}
    * @returns A Promise of GrafanaUser
@@ -440,8 +447,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List grafana users. List grafana users who are able to connect to your
-   * grafana instance.
+   * List Grafana users. Get a list of Grafana users who are able to connect to
+   * the Cockpit's Grafana instance.
    *
    * @param request - The request {@link ListGrafanaUsersRequest}
    * @returns A Promise of ListGrafanaUsersResponse
@@ -450,7 +457,8 @@ export class API extends ParentAPI {
     enrichForPagination('grafanaUsers', this.pageOfListGrafanaUsers, request)
 
   /**
-   * Delete a grafana user. Delete a grafana user from your grafana instance.
+   * Delete a Grafana user. Delete a Grafana user from a Grafana instance,
+   * specified by the Cockpit's Project ID and the Grafana user ID.
    *
    * @param request - The request {@link DeleteGrafanaUserRequest}
    */
@@ -468,8 +476,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Reset Grafana user password. Reset the Grafana user password from your
-   * grafana instance.
+   * Reset a Grafana user's password. Reset a Grafana user's password specified
+   * by the Cockpit's Project ID and the Grafana user ID.
    *
    * @param request - The request {@link ResetGrafanaUserPasswordRequest}
    * @returns A Promise of GrafanaUser
@@ -510,7 +518,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List plans. List all pricing plans.
+   * List pricing plans. Get a list of all pricing plans available.
    *
    * @param request - The request {@link ListPlansRequest}
    * @returns A Promise of ListPlansResponse
@@ -519,7 +527,9 @@ export class API extends ParentAPI {
     enrichForPagination('plans', this.pageOfListPlans, request)
 
   /**
-   * Select pricing plan. Select the wanted pricing plan.
+   * Select pricing plan. Select your chosen pricing plan for your Cockpit,
+   * specifying the Cockpit's Project ID and the pricing plan's ID in the
+   * request.
    *
    * @param request - The request {@link SelectPlanRequest}
    * @returns A Promise of SelectPlanResponse
