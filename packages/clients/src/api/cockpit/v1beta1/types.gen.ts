@@ -162,9 +162,12 @@ export type GetCockpitRequest = {
 export type GetCockpitMetricsRequest = {
   /** Project ID. */
   projectId?: string
-  /** Start date. */
+  /**
+   * Start date. Start date, if omited, query will be instant query and End Date
+   * will be used as query time.
+   */
   startDate?: Date
-  /** End date. */
+  /** End date. End date, if omited set to now. */
   endDate?: Date
   /** Metric name. */
   metricName?: string
