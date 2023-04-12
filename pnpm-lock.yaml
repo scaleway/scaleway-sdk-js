@@ -13,7 +13,7 @@ importers:
       '@jest/globals': ^29.5.0
       '@rollup/plugin-babel': ^6.0.3
       '@rollup/plugin-commonjs': ^24.0.1
-      '@rollup/plugin-node-resolve': ^15.0.1
+      '@rollup/plugin-node-resolve': ^15.0.2
       '@scaleway/eslint-config-react': ^3.15.8
       babel-plugin-annotate-pure-calls: ^0.4.0
       cross-env: ^7.0.3
@@ -44,7 +44,7 @@ importers:
       '@jest/globals': 29.5.0
       '@rollup/plugin-babel': 6.0.3_wlieuynzbak3666wdkk5ilofqu
       '@rollup/plugin-commonjs': 24.0.1_rollup@3.20.2
-      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.20.2
+      '@rollup/plugin-node-resolve': 15.0.2_rollup@3.20.2
       '@scaleway/eslint-config-react': 3.15.8_ip5up2nocltd47wbnuyybe5dxu
       babel-plugin-annotate-pure-calls: 0.4.0_@babel+core@7.21.4
       cross-env: 7.0.3
@@ -2538,8 +2538,8 @@ packages:
       rollup: 3.20.2
     dev: true
 
-  /@rollup/plugin-node-resolve/15.0.1_rollup@3.20.2:
-    resolution: {integrity: sha512-ReY88T7JhJjeRVbfCyNj+NXAG3IIsVMsX9b5/9jC98dRP8/yxlZdz7mHZbHk5zHr24wZZICS5AcXsFZAXYUQEg==}
+  /@rollup/plugin-node-resolve/15.0.2_rollup@3.20.2:
+    resolution: {integrity: sha512-Y35fRGUjC3FaurG722uhUuG8YHOJRJQbI6/CkbRkdPotSpDj9NtIN85z1zrcyDcCQIW4qp5mgG72U+gJ0TAFEg==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^2.78.0||^3.0.0
@@ -2550,7 +2550,7 @@ packages:
       '@rollup/pluginutils': 5.0.2_rollup@3.20.2
       '@types/resolve': 1.20.2
       deepmerge: 4.2.2
-      is-builtin-module: 3.2.0
+      is-builtin-module: 3.2.1
       is-module: 1.0.0
       resolve: 1.22.1
       rollup: 3.20.2
@@ -5850,8 +5850,8 @@ packages:
       has-tostringtag: 1.0.0
     dev: true
 
-  /is-builtin-module/3.2.0:
-    resolution: {integrity: sha512-phDA4oSGt7vl1n5tJvTWooWWAsXLY+2xCnxNqvKhGEzujg+A43wPlPOyDg3C8XQHN+6k/JTQWJ/j0dQh/qr+Hw==}
+  /is-builtin-module/3.2.1:
+    resolution: {integrity: sha512-BSLE3HnV2syZ0FK0iMA/yUGplUeMmNz4AW5fnTunbCIqZi4vG3WjJT9FHMy5D69xmAYBHXQhJdALdpwVxV501A==}
     engines: {node: '>=6'}
     dependencies:
       builtin-modules: 3.3.0
@@ -5871,12 +5871,6 @@ packages:
 
   /is-core-module/2.11.0:
     resolution: {integrity: sha512-RRjxlvLDkD1YJwDbroBHMb+cukurkDWNyHx7D3oNB5x9rb5ogcksMC5wHCadcXoo67gVr/+3GFySh3134zi6rw==}
-    dependencies:
-      has: 1.0.3
-    dev: true
-
-  /is-core-module/2.9.0:
-    resolution: {integrity: sha512-+5FPy5PnwmO3lvfMb0AsoPaBG+5KHUI0wYFXOtYPnVVVspTFUuMZNfNaNVRt3FZadstu2c8x23vykRW/NBoU6A==}
     dependencies:
       has: 1.0.3
     dev: true
@@ -8799,7 +8793,7 @@ packages:
     resolution: {integrity: sha512-nBpuuYuY5jFsli/JIs1oldw6fOQCBioohqWZg/2hiaOybXOft4lonv85uDOKXdf8rhyK159cxU5cDcK/NKk8zw==}
     hasBin: true
     dependencies:
-      is-core-module: 2.9.0
+      is-core-module: 2.11.0
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
     dev: true
