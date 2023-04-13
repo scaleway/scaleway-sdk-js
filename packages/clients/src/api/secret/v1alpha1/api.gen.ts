@@ -8,6 +8,7 @@ import {
 } from '../../../bridge'
 import type { Region } from '../../../bridge'
 import {
+  marshalAddSecretOwnerRequest,
   marshalCreateSecretRequest,
   marshalCreateSecretVersionRequest,
   marshalUpdateSecretRequest,
@@ -22,6 +23,7 @@ import type {
   AccessSecretVersionByNameRequest,
   AccessSecretVersionRequest,
   AccessSecretVersionResponse,
+  AddSecretOwnerRequest,
   CreateSecretRequest,
   CreateSecretVersionRequest,
   DeleteSecretRequest,
@@ -144,6 +146,24 @@ export class API extends ParentAPI {
       unmarshalSecret,
     )
 
+  /**
+   * Allow another product to use the secret.
+   *
+   * @param request - The request {@link AddSecretOwnerRequest}
+   */
+  addSecretOwner = (request: Readonly<AddSecretOwnerRequest>) =>
+    this.client.fetch<void>({
+      body: JSON.stringify(
+        marshalAddSecretOwnerRequest(request, this.client.settings),
+      ),
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/secret-manager/v1alpha1/regions/${validatePathParam(
+        'region',
+        request.region ?? this.client.settings.defaultRegion,
+      )}/secrets/${validatePathParam('secretId', request.secretId)}/add-owner`,
+    })
+
   protected pageOfListSecrets = (request: Readonly<ListSecretsRequest> = {}) =>
     this.client.fetch<ListSecretsResponse>(
       {
@@ -153,6 +173,7 @@ export class API extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/secrets`,
         urlParams: urlParams(
+          ['is_managed', request.isManaged],
           ['name', request.name],
           ['order_by', request.orderBy ?? 'name_asc'],
           ['organization_id', request.organizationId],

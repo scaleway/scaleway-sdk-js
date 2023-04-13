@@ -9,6 +9,7 @@ import {
 import type { DefaultValues } from '../../../bridge'
 import type {
   AccessSecretVersionResponse,
+  AddSecretOwnerRequest,
   CreateSecretRequest,
   CreateSecretVersionRequest,
   ListSecretVersionsResponse,
@@ -31,6 +32,7 @@ export const unmarshalSecret = (data: unknown) => {
     createdAt: unmarshalDate(data.created_at),
     description: data.description,
     id: data.id,
+    isManaged: data.is_managed,
     name: data.name,
     projectId: data.project_id,
     region: data.region,
@@ -109,6 +111,13 @@ const marshalPasswordGenerationParams = (
   no_digits: request.noDigits,
   no_lowercase_letters: request.noLowercaseLetters,
   no_uppercase_letters: request.noUppercaseLetters,
+})
+
+export const marshalAddSecretOwnerRequest = (
+  request: AddSecretOwnerRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  product_name: request.productName,
 })
 
 export const marshalCreateSecretRequest = (
