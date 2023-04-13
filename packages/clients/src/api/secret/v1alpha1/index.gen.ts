@@ -5,6 +5,7 @@ export type {
   AccessSecretVersionByNameRequest,
   AccessSecretVersionRequest,
   AccessSecretVersionResponse,
+  AddSecretOwnerRequest,
   CreateSecretRequest,
   CreateSecretVersionRequest,
   DeleteSecretRequest,

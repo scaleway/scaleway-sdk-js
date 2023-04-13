@@ -91,6 +91,8 @@ export interface Secret {
   versionCount: number
   /** Updated description of the secret. */
   description?: string
+  /** True for secrets that are managed by another product. */
+  isManaged: boolean
 }
 
 /** Secret version. */
@@ -171,6 +173,18 @@ export type UpdateSecretRequest = {
   description?: string
 }
 
+export type AddSecretOwnerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the secret. */
+  secretId: string
+  /** Name of the product to add. */
+  productName: string
+}
+
 export type ListSecretsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -185,6 +199,8 @@ export type ListSecretsRequest = {
   name?: string
   /** List of tags to filter on (optional). */
   tags?: string[]
+  /** Filter by managed / not managed (optional). */
+  isManaged?: boolean
   orderBy?: ListSecretsRequestOrderBy
   page?: number
   pageSize?: number
