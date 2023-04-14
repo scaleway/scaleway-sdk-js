@@ -2,8 +2,8 @@
 
 This SDK enables you to interact with Scaleway APIs.
 
-> **Warning**
-> SDK only works from a node.js runtime, browser calls aren't supported yet.
+> **Note**
+> The SDK works exclusively within a Node.js environment, as browser requests are limited by CORS restrictions.
 
 **🔗  Important links:**
 * [Reference documentation](https://scaleway.github.io/scaleway-sdk-js)
