@@ -33,23 +33,23 @@ export interface AccessSecretVersionResponse {
    * The CRC32 checksum of the data as a base-10 integer. This field is present
    * only if a CRC32 was supplied during the creation of the version.
    */
-  dataCrc32: number
+  dataCrc32?: number
 }
 
 /** List secret versions response. */
 export interface ListSecretVersionsResponse {
-  /** Number of versions. */
-  totalCount: number
   /** Single page of versions. */
   versions: SecretVersion[]
+  /** Number of versions. */
+  totalCount: number
 }
 
 /** List secrets response. */
 export interface ListSecretsResponse {
-  /** Count of all secrets matching the requested criteria. */
-  totalCount: number
   /** Single page of secrets matching the requested criteria. */
   secrets: Secret[]
+  /** Count of all secrets matching the requested criteria. */
+  totalCount: number
 }
 
 /** Password generation params. */
@@ -85,25 +85,25 @@ export interface Secret {
   updatedAt?: Date
   /** List of the secret's tags. */
   tags: string[]
-  /** Region of the secret. */
-  region: Region
   /** Number of versions for this secret. */
   versionCount: number
   /** Updated description of the secret. */
   description?: string
   /** True for secrets that are managed by another product. */
   isManaged: boolean
+  /** Region of the secret. */
+  region: Region
 }
 
 /** Secret version. */
 export interface SecretVersion {
-  /** ID of the secret. */
-  secretId: string
   /**
    * Version number. The first version of the secret is numbered 1, and all
    * subsequent revisions augment by 1.
    */
   revision: number
+  /** ID of the secret. */
+  secretId: string
   /**
    * Current status of the version. `unknown`: the version is in an invalid
    * state. `enabled`: the version is accessible. `disabled`: the version is not
@@ -111,14 +111,14 @@ export interface SecretVersion {
    * deleted. It is not possible to recover it.
    */
   status: SecretVersionStatus
-  /** True if the version is the latest one. */
-  isLatest: boolean
   /** Date and time of the version's creation. */
   createdAt?: Date
   /** Last update of the version. */
   updatedAt?: Date
   /** Description of the version. */
   description?: string
+  /** True if the version is the latest one. */
+  isLatest: boolean
 }
 
 export type CreateSecretRequest = {
@@ -173,18 +173,6 @@ export type UpdateSecretRequest = {
   description?: string
 }
 
-export type AddSecretOwnerRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** ID of the secret. */
-  secretId: string
-  /** Name of the product to add. */
-  productName: string
-}
-
 export type ListSecretsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -195,15 +183,15 @@ export type ListSecretsRequest = {
   organizationId?: string
   /** Filter by Project ID (optional). */
   projectId?: string
-  /** Filter by secret name (optional). */
-  name?: string
-  /** List of tags to filter on (optional). */
-  tags?: string[]
-  /** Filter by managed / not managed (optional). */
-  isManaged?: boolean
   orderBy?: ListSecretsRequestOrderBy
   page?: number
   pageSize?: number
+  /** List of tags to filter on (optional). */
+  tags?: string[]
+  /** Filter by secret name (optional). */
+  name?: string
+  /** Filter by managed / not managed (optional). */
+  isManaged?: boolean
 }
 
 export type DeleteSecretRequest = {
@@ -214,6 +202,18 @@ export type DeleteSecretRequest = {
   region?: Region
   /** ID of the secret. */
   secretId: string
+}
+
+export type AddSecretOwnerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the secret. */
+  secretId: string
+  /** Name of the product to add. */
+  productName: string
 }
 
 export type CreateSecretVersionRequest = {
@@ -229,28 +229,28 @@ export type CreateSecretVersionRequest = {
   /** Description of the version. */
   description?: string
   /**
-   * Disable the previous secret version. If there is no previous version or if
-   * the previous version was already disabled, does nothing.
+   * Disable the previous secret version. Optional. If there is no previous
+   * version or if the previous version was already disabled, does nothing.
    */
-  disablePrevious: boolean
+  disablePrevious?: boolean
   /**
-   * Options to generate a password. If specified, a random password will be
-   * generated. The data field must be empty. By default, the generator will use
-   * upper and lower case letters, and digits. This behavior can be tuned using
-   * the generation parameters.
+   * Options to generate a password. Optional. If specified, a random password
+   * will be generated. The data and data_crc32 fields must be empty. By
+   * default, the generator will use upper and lower case letters, and digits.
+   * This behavior can be tuned using the generation parameters.
    *
    * One-of ('PasswordGeneration'): at most one of 'passwordGeneration' could be
    * set.
    */
   passwordGeneration?: PasswordGenerationParams
   /**
-   * The CRC32 checksum of the data as a base-10 integer. This field is optional
-   * and can be set to 0. If greater than 0, the Secret Manager will verify the
-   * integrity of the data received against the given CRC32. An error is
-   * returned if the CRC32 does not match. Otherwise, the CRC32 will be stored
-   * and returned along with the SecretVersion on futur accesses.
+   * The CRC32 checksum of the data as a base-10 integer. Optional. If
+   * specified, the Secret Manager will verify the integrity of the data
+   * received against the given CRC32. An error is returned if the CRC32 does
+   * not match. Otherwise, the CRC32 will be stored and returned along with the
+   * SecretVersion on futur accesses.
    */
-  dataCrc32: number
+  dataCrc32?: number
 }
 
 export type GetSecretVersionRequest = {
@@ -328,21 +328,6 @@ export type ListSecretVersionsByNameRequest = {
   status?: SecretVersionStatus[]
 }
 
-export type DestroySecretVersionRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** ID of the secret. */
-  secretId: string
-  /**
-   * Version number. The first version of the secret is numbered 1, and all
-   * subsequent revisions augment by 1. Value can be a number or "latest".
-   */
-  revision: string
-}
-
 export type EnableSecretVersionRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -396,6 +381,21 @@ export type AccessSecretVersionByNameRequest = {
   region?: Region
   /** Name of the secret. */
   secretName: string
+  /**
+   * Version number. The first version of the secret is numbered 1, and all
+   * subsequent revisions augment by 1. Value can be a number or "latest".
+   */
+  revision: string
+}
+
+export type DestroySecretVersionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the secret. */
+  secretId: string
   /**
    * Version number. The first version of the secret is numbered 1, and all
    * subsequent revisions augment by 1. Value can be a number or "latest".
