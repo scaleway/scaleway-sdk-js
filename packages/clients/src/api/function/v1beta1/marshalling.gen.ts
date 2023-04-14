@@ -147,6 +147,7 @@ export const unmarshalFunction = (data: unknown) => {
   }
 
   return {
+    buildMessage: data.build_message,
     cpuLimit: data.cpu_limit,
     description: data.description,
     domainName: data.domain_name,
