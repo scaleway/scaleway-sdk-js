@@ -15,85 +15,100 @@ export interface ListPrivateNetworksResponse {
 
 /** Private network. */
 export interface PrivateNetwork {
-  /** The private network ID. */
+  /** Private Network ID. */
   id: string
-  /** The private network name. */
+  /** Private Network name. */
   name: string
-  /** The private network organization. */
+  /** Scaleway Organization the Private Network belongs to. */
   organizationId: string
-  /** The private network project ID. */
+  /** Scaleway Project the Private Network belongs to. */
   projectId: string
-  /** The zone in which the private network is available. */
+  /** Availability Zone in which the Private Network is available. */
   zone: Zone
-  /** The private network tags. */
+  /** Tags of the Private Network. */
   tags: string[]
-  /** The private network creation date. */
+  /** Date the Private Network was created. */
   createdAt?: Date
-  /** The last private network modification date. */
+  /** Date the Private Network was last modified. */
   updatedAt?: Date
-  /** Private network subnets CIDR. */
+  /** Private Network subnets CIDR. */
   subnets: string[]
 }
 
 export type ListPrivateNetworksRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The sort order of the returned private networks. */
+  /** Sort order of the returned Private Networks. */
   orderBy?: ListPrivateNetworksRequestOrderBy
-  /** The page number for the returned private networks. */
+  /** Page number to return, from the paginated results. */
   page?: number
-  /** The maximum number of private networks per page. */
+  /** Maximum number of Private Networks to return per page. */
   pageSize?: number
-  /** Filter private networks with names containing this string. */
+  /**
+   * Name to filter for. Only Private Networks with names containing this string
+   * will be returned.
+   */
   name?: string
-  /** Filter private networks with one or more matching tags. */
+  /**
+   * Tags to filter for. Only Private Networks with one or more matching tags
+   * will be returned.
+   */
   tags?: string[]
-  /** The organization ID on which to filter the returned private networks. */
+  /**
+   * Organization ID to filter for. Only Private Networks belonging to this
+   * Organization will be returned.
+   */
   organizationId?: string
-  /** The project ID on which to filter the returned private networks. */
+  /**
+   * Project ID to filter for. Only Private Networks belonging to this Project
+   * will be returned.
+   */
   projectId?: string
-  /** The PrivateNetwork IDs on which to filter the returned private networks. */
+  /**
+   * Private Network IDs to filter for. Only Private Networks with one of these
+   * IDs will be returned.
+   */
   privateNetworkIds?: string[]
-  /** Include regional Private Networks. */
+  /** Defines whether to include regional Private Networks in the response. */
   includeRegional?: boolean
 }
 
 export type CreatePrivateNetworkRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The name of the private network. */
+  /** Name for the Private Network. */
   name?: string
-  /** The project ID of the private network. */
+  /** Scaleway Project in which to create the Private Network. */
   projectId?: string
-  /** The private networks tags. */
+  /** Tags for the Private Network. */
   tags?: string[]
-  /** Private network subnets CIDR. */
+  /** Private Network subnets CIDR. */
   subnets?: string[]
 }
 
 export type GetPrivateNetworkRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The private network id. */
+  /** Private Network ID. */
   privateNetworkId: string
 }
 
 export type UpdatePrivateNetworkRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The private network ID. */
+  /** Private Network ID. */
   privateNetworkId: string
-  /** The name of the private network. */
+  /** Name of the private network. */
   name?: string
-  /** The private networks tags. */
+  /** Tags for the Private Network. */
   tags?: string[]
-  /** @deprecated Private network subnets CIDR (deprecated). */
+  /** @deprecated Private Network subnets CIDR (deprecated). */
   subnets?: string[]
 }
 
 export type DeletePrivateNetworkRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The private network ID. */
+  /** Private Network ID. */
   privateNetworkId: string
 }

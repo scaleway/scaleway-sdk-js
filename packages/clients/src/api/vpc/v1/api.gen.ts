@@ -69,7 +69,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List private networks.
+   * List Private Networks. List existing Private Networks in a specified
+   * Availability Zone. By default, the Private Networks returned in the list
+   * are ordered by creation date in ascending order, though this can be
+   * modified via the order_by field.
    *
    * @param request - The request {@link ListPrivateNetworksRequest}
    * @returns A Promise of ListPrivateNetworksResponse
@@ -82,7 +85,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a private network.
+   * Create a Private Network. Create a new Private Network. Once created, you
+   * can attach Scaleway resources in the same Availability Zone.
    *
    * @param request - The request {@link CreatePrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
@@ -106,7 +110,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a private network.
+   * Get a Private Network. Retrieve information about an existing Private
+   * Network, specified by its Private Network ID. Its full details are returned
+   * in the response object.
    *
    * @param request - The request {@link GetPrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
@@ -127,7 +133,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update private network.
+   * Update Private Network. Update parameters (such as name or tags) of an
+   * existing Private Network, specified by its Private Network ID.
    *
    * @param request - The request {@link UpdatePrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
@@ -152,7 +159,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a private network.
+   * Delete a Private Network. Delete an existing Private Network. Note that you
+   * must first detach all resources from the network, in order to delete it.
    *
    * @param request - The request {@link DeletePrivateNetworkRequest}
    */
