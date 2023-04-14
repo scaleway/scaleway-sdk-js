@@ -216,6 +216,8 @@ export interface Function {
   handler: string
   /** Error message if the function is in "error" state. */
   errorMessage?: string
+  /** Description of the current build step. */
+  buildMessage?: string
   /** Privacy setting of the function. */
   privacy: FunctionPrivacy
   /** Description of the function. */
