@@ -146,24 +146,6 @@ export class API extends ParentAPI {
       unmarshalSecret,
     )
 
-  /**
-   * Allow another product to use the secret.
-   *
-   * @param request - The request {@link AddSecretOwnerRequest}
-   */
-  addSecretOwner = (request: Readonly<AddSecretOwnerRequest>) =>
-    this.client.fetch<void>({
-      body: JSON.stringify(
-        marshalAddSecretOwnerRequest(request, this.client.settings),
-      ),
-      headers: jsonContentHeaders,
-      method: 'POST',
-      path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/secrets/${validatePathParam('secretId', request.secretId)}/add-owner`,
-    })
-
   protected pageOfListSecrets = (request: Readonly<ListSecretsRequest> = {}) =>
     this.client.fetch<ListSecretsResponse>(
       {
@@ -213,6 +195,24 @@ export class API extends ParentAPI {
         'region',
         request.region ?? this.client.settings.defaultRegion,
       )}/secrets/${validatePathParam('secretId', request.secretId)}`,
+    })
+
+  /**
+   * Allow a product to use the secret.
+   *
+   * @param request - The request {@link AddSecretOwnerRequest}
+   */
+  addSecretOwner = (request: Readonly<AddSecretOwnerRequest>) =>
+    this.client.fetch<void>({
+      body: JSON.stringify(
+        marshalAddSecretOwnerRequest(request, this.client.settings),
+      ),
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/secret-manager/v1alpha1/regions/${validatePathParam(
+        'region',
+        request.region ?? this.client.settings.defaultRegion,
+      )}/secrets/${validatePathParam('secretId', request.secretId)}/add-owner`,
     })
 
   /**
@@ -386,30 +386,6 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a version. Delete a secret's version and the sensitive data
-   * contained in it. Deleting a version is permanent and cannot be undone.
-   *
-   * @param request - The request {@link DestroySecretVersionRequest}
-   * @returns A Promise of SecretVersion
-   */
-  destroySecretVersion = (request: Readonly<DestroySecretVersionRequest>) =>
-    this.client.fetch<SecretVersion>(
-      {
-        body: '{}',
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets/${validatePathParam(
-          'secretId',
-          request.secretId,
-        )}/versions/${validatePathParam('revision', request.revision)}/destroy`,
-      },
-      unmarshalSecretVersion,
-    )
-
-  /**
    * Enable a version. Make a specific version accessible. You must specify the
    * `region`, `secret_id` and `revision` parameters.
    *
@@ -503,5 +479,29 @@ export class API extends ParentAPI {
         )}/versions/${validatePathParam('revision', request.revision)}/access`,
       },
       unmarshalAccessSecretVersionResponse,
+    )
+
+  /**
+   * Delete a version. Delete a secret's version and the sensitive data
+   * contained in it. Deleting a version is permanent and cannot be undone.
+   *
+   * @param request - The request {@link DestroySecretVersionRequest}
+   * @returns A Promise of SecretVersion
+   */
+  destroySecretVersion = (request: Readonly<DestroySecretVersionRequest>) =>
+    this.client.fetch<SecretVersion>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/secrets/${validatePathParam(
+          'secretId',
+          request.secretId,
+        )}/versions/${validatePathParam('revision', request.revision)}/destroy`,
+      },
+      unmarshalSecretVersion,
     )
 }
