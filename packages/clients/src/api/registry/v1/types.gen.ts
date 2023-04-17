@@ -41,20 +41,20 @@ export type TagStatus = 'unknown' | 'ready' | 'deleting' | 'error' | 'locked'
 
 /** Image. */
 export interface Image {
-  /** The unique ID of the Image. */
+  /** The UUID of the image. */
   id: string
-  /** The Image name, unique in a namespace. */
+  /** The name of the image, it must be unique within the namespace. */
   name: string
-  /** The unique ID of the Namespace the image belongs to. */
+  /** The UUID of the namespace the image belongs to. */
   namespaceId: string
   /** The status of the image. */
   status: ImageStatus
   /** Details of the image status. */
   statusMessage?: string
   /**
-   * A `public` image is pullable from internet without authentication, opposed
-   * to a `private` image. `inherit` will use the namespace `is_public`
-   * parameter.
+   * Set to `public` to allow the image to be pulled without authentication.
+   * Else, set to `private`. Set to `inherit` to keep the same visibility
+   * configuration as the namespace.
    */
   visibility: ImageVisibility
   /**
@@ -64,9 +64,9 @@ export interface Image {
    * counted twice.
    */
   size: number
-  /** Creation date. */
+  /** Date and time of image creation. */
   createdAt?: Date
-  /** Last modification date, from the user or the service. */
+  /** Date and time of last update. */
   updatedAt?: Date
   /** List of docker tags of the image. */
   tags: string[]
@@ -74,31 +74,31 @@ export interface Image {
 
 /** List images response. */
 export interface ListImagesResponse {
-  /** Paginated list of images matching filters. */
+  /** Paginated list of images that match the selected filters. */
   images: Image[]
-  /** Total number of images matching filters. */
+  /** Total number of images that match the selected filters. */
   totalCount: number
 }
 
 /** List namespaces response. */
 export interface ListNamespacesResponse {
-  /** Paginated list of namespaces matching filters. */
+  /** Paginated list of namespaces that match the selected filters. */
   namespaces: Namespace[]
-  /** Total number of namespaces matching filters. */
+  /** Total number of namespaces that match the selected filters. */
   totalCount: number
 }
 
 /** List tags response. */
 export interface ListTagsResponse {
-  /** Paginated list of tags matching filters. */
+  /** Paginated list of tags that match the selected filters. */
   tags: Tag[]
-  /** Total number of tags matching filters. */
+  /** Total number of tags that match the selected filters. */
   totalCount: number
 }
 
 /** Namespace. */
 export interface Namespace {
-  /** The unique ID of the namespace. */
+  /** The UUID of the namespace. */
   id: string
   /** The name of the namespace, unique in a region accross all organizations. */
   name: string
@@ -114,16 +114,16 @@ export interface Namespace {
   statusMessage: string
   /** Endpoint reachable by docker. */
   endpoint: string
-  /** Namespace visibility policy. */
+  /** Whether or not namespace is public. */
   isPublic: boolean
   /**
    * Total size of the namespace, calculated as the sum of the size of all
    * images in the namespace.
    */
   size: number
-  /** Creation date. */
+  /** Date and time of creation. */
   createdAt?: Date
-  /** Last modification date, from the user or the service. */
+  /** Date and time of last update. */
   updatedAt?: Date
   /** Number of images in the namespace. */
   imageCount: number
@@ -133,22 +133,22 @@ export interface Namespace {
 
 /** Tag. */
 export interface Tag {
-  /** The unique ID of the tag. */
+  /** The UUID of the tag. */
   id: string
-  /** Tag name, unique for an image. */
+  /** Tag name, unique to an image. */
   name: string
-  /** Image ID this tag belongs to. */
+  /** Image ID the of the image the tag belongs to. */
   imageId: string
   /** Tag status. */
   status: TagStatus
   /**
-   * Hash of the tag actual content. Several tags of a same image may have the
-   * same digest.
+   * Hash of the tag content. Several tags of a same image may have the same
+   * digest.
    */
   digest: string
-  /** Creation date. */
+  /** Date and time of creation. */
   createdAt?: Date
-  /** Last modification date, from the user or the service. */
+  /** Date and time of last update. */
   updatedAt?: Date
 }
 
@@ -165,7 +165,11 @@ export type ListNamespacesRequest = {
    * display.
    */
   pageSize?: number
-  /** Field by which to order the display of Images. */
+  /**
+   * Criteria to use when ordering namespace listings. Possible values are
+   * `created_at_asc`, `created_at_desc`, `name_asc`, `name_desc`, `region`,
+   * `status_asc` and `status_desc`. The default value is `created_at_asc`.
+   */
   orderBy?: ListNamespacesRequestOrderBy
   /** Filter by Organization ID. */
   organizationId?: string
@@ -181,7 +185,7 @@ export type GetNamespaceRequest = {
    * config.
    */
   region?: Region
-  /** The unique ID of the Namespace. */
+  /** The UUID of the namespace. */
   namespaceId: string
 }
 
@@ -191,25 +195,25 @@ export type CreateNamespaceRequest = {
    * config.
    */
   region?: Region
-  /** Define a namespace name. */
+  /** Name of the namespace. */
   name?: string
-  /** Define a description. */
+  /** Description of the namespace. */
   description: string
   /**
-   * @deprecated Assign the namespace owner (deprecated).
+   * @deprecated Namespace owner (deprecated).
    *
    *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    *   could be set.
    */
   organizationId?: string
   /**
-   * Assign the namespace to a project ID.
+   * Project ID on which the namespace will be created.
    *
    * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    * could be set.
    */
   projectId?: string
-  /** Define the default visibility policy. */
+  /** Whether or not namespace is public. */
   isPublic: boolean
 }
 
@@ -219,11 +223,11 @@ export type UpdateNamespaceRequest = {
    * config.
    */
   region?: Region
-  /** Namespace ID to update. */
+  /** ID of the namespace to update. */
   namespaceId: string
-  /** Define a description. */
+  /** Namespace description. */
   description?: string
-  /** Define the default visibility policy. */
+  /** Whether or not the namespace is public. */
   isPublic?: boolean
 }
 
@@ -233,7 +237,7 @@ export type DeleteNamespaceRequest = {
    * config.
    */
   region?: Region
-  /** The unique ID of the Namespace. */
+  /** The UUID of the namespace. */
   namespaceId: string
 }
 
@@ -250,11 +254,15 @@ export type ListImagesRequest = {
    * display.
    */
   pageSize?: number
-  /** Field by which to order the display of Images. */
+  /**
+   * Criteria to use when ordering image listings. Possible values are
+   * `created_at_asc`, `created_at_desc`, `name_asc`, `name_desc`, `region`,
+   * `status_asc` and `status_desc`. The default value is `created_at_asc`.
+   */
   orderBy?: ListImagesRequestOrderBy
-  /** Filter by the Namespace ID. */
+  /** Filter by the namespace ID. */
   namespaceId?: string
-  /** Filter by the Image name (exact match). */
+  /** Filter by the image name (exact match). */
   name?: string
   /** Filter by Organization ID. */
   organizationId?: string
@@ -268,7 +276,7 @@ export type GetImageRequest = {
    * config.
    */
   region?: Region
-  /** The unique ID of the Image. */
+  /** The UUID of the image. */
   imageId: string
 }
 
@@ -278,12 +286,12 @@ export type UpdateImageRequest = {
    * config.
    */
   region?: Region
-  /** Image ID to update. */
+  /** ID of the image to update. */
   imageId: string
   /**
-   * A `public` image is pullable from internet without authentication, opposed
-   * to a `private` image. `inherit` will use the namespace `is_public`
-   * parameter.
+   * Set to `public` to allow the image to be pulled without authentication.
+   * Else, set to `private`. Set to `inherit` to keep the same visibility
+   * configuration as the namespace.
    */
   visibility?: ImageVisibility
 }
@@ -294,7 +302,7 @@ export type DeleteImageRequest = {
    * config.
    */
   region?: Region
-  /** The unique ID of the Image. */
+  /** The UUID of the image. */
   imageId: string
 }
 
@@ -304,7 +312,7 @@ export type ListTagsRequest = {
    * config.
    */
   region?: Region
-  /** The unique ID of the image. */
+  /** The UUID of the image. */
   imageId: string
   /** A positive integer to choose the page to display. */
   page?: number
@@ -313,7 +321,11 @@ export type ListTagsRequest = {
    * display.
    */
   pageSize?: number
-  /** Field by which to order the display of Images. */
+  /**
+   * Criteria to use when ordering tag listings. Possible values are
+   * `created_at_asc`, `created_at_desc`, `name_asc`, `name_desc`, `region`,
+   * `status_asc` and `status_desc`. The default value is `created_at_asc`.
+   */
   orderBy?: ListTagsRequestOrderBy
   /** Filter by the tag name (exact match). */
   name?: string
@@ -325,7 +337,7 @@ export type GetTagRequest = {
    * config.
    */
   region?: Region
-  /** The unique ID of the Tag. */
+  /** The UUID of the tag. */
   tagId: string
 }
 
@@ -335,7 +347,7 @@ export type DeleteTagRequest = {
    * config.
    */
   region?: Region
-  /** The unique ID of the tag. */
+  /** The UUID of the tag. */
   tagId: string
   /**
    * If two tags share the same digest the deletion will fail unless this
