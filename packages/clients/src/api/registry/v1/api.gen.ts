@@ -49,11 +49,7 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/**
- * Registry API.
- *
- * Container registry API. Registry API.
- */
+/** Container Registry API. */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
@@ -84,7 +80,11 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all your namespaces.
+   * List namespaces. List all namespaces in a specified region. By default, the
+   * namespaces listed are ordered by creation date in ascending order. This can
+   * be modified via the order_by field. You can also define additional
+   * parameters for your query, such as the `instance_id` and `project_id`
+   * parameters.
    *
    * @param request - The request {@link ListNamespacesRequest}
    * @returns A Promise of ListNamespacesResponse
@@ -93,7 +93,10 @@ export class API extends ParentAPI {
     enrichForPagination('namespaces', this.pageOfListNamespaces, request)
 
   /**
-   * Get a namespace. Get the namespace associated with the given id.
+   * Get a namespace. Retrieve information about a given namespace, specified by
+   * its `namespace_id` and region. Full details about the namespace, such as
+   * `description`, `project_id`, `status`, `endpoint`, `is_public`, `size`, and
+   * `image_count` are returned in the response.
    *
    * @param request - The request {@link GetNamespaceRequest}
    * @returns A Promise of Namespace
@@ -131,7 +134,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new namespace.
+   * Create a namespace. Create a new Container Registry namespace. You must
+   * specify the namespace name and region in which you want it to be created.
+   * Optionally, you can specify the `project_id` and `is_public` in the request
+   * payload.
    *
    * @param request - The request {@link CreateNamespaceRequest}
    * @returns A Promise of Namespace
@@ -153,8 +159,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an existing namespace. Update the namespace associated with the
-   * given id.
+   * Update a namespace. Update the parameters of a given namespace, specified
+   * by its `namespace_id` and `region`. You can update the `description` and
+   * `is_public` parameters.
    *
    * @param request - The request {@link UpdateNamespaceRequest}
    * @returns A Promise of Namespace
@@ -176,8 +183,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an existing namespace. Delete the namespace associated with the
-   * given id.
+   * Delete a namespace. Delete a given namespace. You must specify, in the
+   * endpoint, the `region` and `namespace_id` parameters of the namespace you
+   * want to delete.
    *
    * @param request - The request {@link DeleteNamespaceRequest}
    * @returns A Promise of Namespace
@@ -219,7 +227,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all your images.
+   * List images. List all images in a specified region. By default, the images
+   * listed are ordered by creation date in ascending order. This can be
+   * modified via the order_by field. You can also define additional parameters
+   * for your query, such as the `namespace_id` and `project_id` parameters.
    *
    * @param request - The request {@link ListImagesRequest}
    * @returns A Promise of ListImagesResponse
@@ -228,7 +239,10 @@ export class API extends ParentAPI {
     enrichForPagination('images', this.pageOfListImages, request)
 
   /**
-   * Get a image. Get the image associated with the given id.
+   * Get an image. Retrieve information about a given container image, specified
+   * by its `image_id` and region. Full details about the image, such as `name`,
+   * `namespace_id`, `status`, `visibility`, and `size` are returned in the
+   * response.
    *
    * @param request - The request {@link GetImageRequest}
    * @returns A Promise of Image
@@ -266,7 +280,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an existing image. Update the image associated with the given id.
+   * Update an image. Update the parameters of a given image, specified by its
+   * `image_id` and `region`. You can update the `visibility` parameter.
    *
    * @param request - The request {@link UpdateImageRequest}
    * @returns A Promise of Image
@@ -288,7 +303,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an image. Delete the image associated with the given id.
+   * Delete an image. Delete a given image. You must specify, in the endpoint,
+   * the `region` and `image_id` parameters of the image you want to delete.
    *
    * @param request - The request {@link DeleteImageRequest}
    * @returns A Promise of Image
@@ -327,7 +343,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all your tags.
+   * List tags. List all tags for a given image, specified by region. By
+   * default, the tags listed are ordered by creation date in ascending order.
+   * This can be modified via the order_by field. You can also define additional
+   * parameters for your query, such as the `name`.
    *
    * @param request - The request {@link ListTagsRequest}
    * @returns A Promise of ListTagsResponse
@@ -336,7 +355,9 @@ export class API extends ParentAPI {
     enrichForPagination('tags', this.pageOfListTags, request)
 
   /**
-   * Get a tag. Get the tag associated with the given id.
+   * Get a tag. Retrieve information about a given image tag, specified by its
+   * `tag_id` and region. Full details about the tag, such as `name`,
+   * `image_id`, `status`, and `digest` are returned in the response.
    *
    * @param request - The request {@link GetTagRequest}
    * @returns A Promise of Tag
@@ -373,7 +394,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a tag. Delete the tag associated with the given id.
+   * Delete a tag. Delete a given image tag. You must specify, in the endpoint,
+   * the `region` and `tag_id` parameters of the tag you want to delete.
    *
    * @param request - The request {@link DeleteTagRequest}
    * @returns A Promise of Tag
