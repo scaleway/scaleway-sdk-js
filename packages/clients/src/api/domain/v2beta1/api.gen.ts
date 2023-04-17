@@ -159,9 +159,10 @@ const jsonContentHeaders = {
 }
 
 /**
- * DNS API.
+ * Domains and DNS API documentation.
  *
- * DNS API. Manage your DNS zones and records.
+ * Domains and DNS API documetation. Manage your domains, DNS zones and records
+ * with the Domains and DNS API.
  */
 export class API extends ParentAPI {
   protected pageOfListDNSZones = (request: Readonly<ListDNSZonesRequest>) =>
@@ -186,8 +187,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List DNS zones. Returns a list of manageable DNS zones. You can filter the
-   * DNS zones by domain name.
+   * List DNS zones. Retrieve the list of DNS zones you can manage and filter
+   * DNS zones associated with specific domain names.
    *
    * @param request - The request {@link ListDNSZonesRequest}
    * @returns A Promise of ListDNSZonesResponse
@@ -196,7 +197,8 @@ export class API extends ParentAPI {
     enrichForPagination('dnsZones', this.pageOfListDNSZones, request)
 
   /**
-   * Create a DNS zone. Create a new DNS zone.
+   * Create a DNS zone. Create a new DNS zone specified by the domain name, the
+   * subdomain and the Project ID.
    *
    * @param request - The request {@link CreateDNSZoneRequest}
    * @returns A Promise of DNSZone
@@ -215,7 +217,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a DNS zone. Update the name and/or the organizations for a DNS zone.
+   * Update a DNS zone. Update the name and/or the Organizations for a DNS zone.
    *
    * @param request - The request {@link UpdateDNSZoneRequest}
    * @returns A Promise of DNSZone
@@ -237,8 +239,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Clone a DNS zone. Clone an existed DNS zone with all its records into a new
-   * one.
+   * Clone a DNS zone. Clone an existing DNS zone with all its records into a
+   * new DNS zone.
    *
    * @param request - The request {@link CloneDNSZoneRequest}
    * @returns A Promise of DNSZone
@@ -260,7 +262,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete DNS zone. Delete a DNS zone and all it's records.
+   * Delete a DNS zone. Delete a DNS zone and all its records.
    *
    * @param request - The request {@link DeleteDNSZoneRequest}
    * @returns A Promise of DeleteDNSZoneResponse
@@ -308,8 +310,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List DNS zone records. Returns a list of DNS records of a DNS zone with
-   * default NS. You can filter the records by type and name.
+   * List records within a DNS zone. Retrieve a list of DNS records within a DNS
+   * zone that has default name servers. You can filter records by type and
+   * name.
    *
    * @param request - The request {@link ListDNSZoneRecordsRequest}
    * @returns A Promise of ListDNSZoneRecordsResponse
@@ -318,22 +321,18 @@ export class API extends ParentAPI {
     enrichForPagination('records', this.pageOfListDNSZoneRecords, request)
 
   /**
-   * Update DNS zone records. Only available with default NS.<br/> Send a list
-   * of actions and records.
+   * Update records within a DNS zone. Update records within a DNS zone that has
+   * default name servers and perform several actions on your records.
    *
-   * Action can be:
+   * Actions include:
    *
-   * - Add:
-   * - Add new record
-   * - Can be more specific and add a new IP to an existing A record for example
-   * - Set:
-   * - Edit a record
-   * - Can be more specific and edit an IP from an existing A record for example
-   * - Delete:
-   * - Delete a record
-   * - Can be more specific and delete an IP from an existing A record for example
-   * - Clear:
-   * - Delete all records from a DNS zone
+   * - Add: allows you to add a new record or add a new IP to an existing A
+   *   record, for example
+   * - Set: allows you to edit a record or edit an IP from an existing A record,
+   *   for example
+   * - Delete: allows you to delete a record or delete an IP from an existing A
+   *   record, for example
+   * - Clear: allows you to delete all records from a DNS zone
    *
    * All edits will be versioned.
    *
@@ -357,8 +356,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List DNS zone nameservers. Returns a list of Nameservers and their optional
-   * glue records for a DNS zone.
+   * List name servers within a DNS zone. Retrieve a list of name servers within
+   * a DNS zone and their optional glue records.
    *
    * @param request - The request {@link ListDNSZoneNameserversRequest}
    * @returns A Promise of ListDNSZoneNameserversResponse
@@ -377,8 +376,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update DNS zone nameservers. Update DNS zone nameservers and set optional
-   * glue records.
+   * Update name servers within a DNS zone. Update name servers within a DNS
+   * zone and set optional glue records.
    *
    * @param request - The request {@link UpdateDNSZoneNameserversRequest}
    * @returns A Promise of UpdateDNSZoneNameserversResponse
@@ -402,8 +401,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Clear DNS zone records. Only available with default NS.<br/> Delete all the
-   * records from a DNS zone. All edits will be versioned.
+   * Clear records within a DNS zone. Delete all records within a DNS zone that
+   * has default name servers.<br/> All edits will be versioned.
    *
    * @param request - The request {@link ClearDNSZoneRecordsRequest}
    * @returns A Promise of ClearDNSZoneRecordsResponse
@@ -421,7 +420,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Export raw DNS zone. Get a DNS zone in a given format with default NS.
+   * Export a raw DNS zone. Export a DNS zone with default name servers, in a
+   * specific format.
    *
    * @param request - The request {@link ExportRawDNSZoneRequest}
    * @returns A Promise of Blob
@@ -441,8 +441,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Import raw DNS zone. Import and replace records from a given provider
-   * format with default NS.
+   * Import a raw DNS zone. Import and replace the format of records from a
+   * given provider, with default name servers.
    *
    * @param request - The request {@link ImportRawDNSZoneRequest}
    * @returns A Promise of ImportRawDNSZoneResponse
@@ -464,8 +464,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Import provider DNS zone. Import and replace records from a given provider
-   * format with default NS.
+   * Import a DNS zone from another provider. Import and replace the format of
+   * records from a given provider, with default name servers.
    *
    * @param request - The request {@link ImportProviderDNSZoneRequest}
    * @returns A Promise of ImportProviderDNSZoneResponse
@@ -487,8 +487,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Refresh DNS zone. Refresh SOA DNS zone. You can recreate the given DNS zone
-   * and its sub DNS zone if needed.
+   * Refresh a DNS zone. Refresh an SOA DNS zone to reload the records in the
+   * DNS zone and update the SOA serial. You can recreate the given DNS zone and
+   * its sub DNS zone if needed.
    *
    * @param request - The request {@link RefreshDNSZoneRequest}
    * @returns A Promise of RefreshDNSZoneResponse
@@ -531,9 +532,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List DNS zone versions. Get a list of DNS zone versions.<br/> The maximum
-   * version count is 100.<br/> If the count reaches this limit, the oldest
-   * version will be deleted after each new modification.
+   * List versions of a DNS zone. Retrieve a list of a DNS zone's versions.<br/>
+   * The maximum version count is 100. If the count reaches this limit, the
+   * oldest version will be deleted after each new modification.
    *
    * @param request - The request {@link ListDNSZoneVersionsRequest}
    * @returns A Promise of ListDNSZoneVersionsResponse
@@ -563,8 +564,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List DNS zone version records. Get a list of records from a previous DNS
-   * zone version.
+   * List records from a given version of a specific DNS zone. Retrieve a list
+   * of records from a specific DNS zone version.
    *
    * @param request - The request {@link ListDNSZoneVersionRecordsRequest}
    * @returns A Promise of ListDNSZoneVersionRecordsResponse
@@ -579,8 +580,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get DNS zone version diff. Get all differences from a previous DNS zone
-   * version.
+   * Access differences from a specific DNS zone version. Access a previous DNS
+   * zone version to see the differences from another specific version.
    *
    * @param request - The request {@link GetDNSZoneVersionDiffRequest}
    * @returns A Promise of GetDNSZoneVersionDiffResponse
@@ -598,7 +599,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Restore DNS zone version. Restore and activate a previous DNS zone version.
+   * Restore a DNS zone version. Restore and activate a version of a specific
+   * DNS zone.
    *
    * @param request - The request {@link RestoreDNSZoneVersionRequest}
    * @returns A Promise of RestoreDNSZoneVersionResponse
@@ -618,7 +620,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get the zone TLS certificate if it exists.
+   * Get a DNS zone's TLS certificate. Get the DNS zone's TLS certificate. If
+   * you do not have a certificate, the ouptut returns `no certificate found`.
    *
    * @param request - The request {@link GetSSLCertificateRequest}
    * @returns A Promise of SSLCertificate
@@ -658,7 +661,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create or return the zone TLS certificate.
+   * Create or get the DNS zone's TLS certificate. Create a new TLS certificate
+   * or retrieve information about an existing TLS certificate.
    *
    * @param request - The request {@link CreateSSLCertificateRequest}
    * @returns A Promise of SSLCertificate
@@ -697,7 +701,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all user TLS certificates.
+   * List a user's TLS certificates. List all the TLS certificates a user has
+   * created, specified by the user's Project ID and the DNS zone.
    *
    * @param request - The request {@link ListSSLCertificatesRequest}
    * @returns A Promise of ListSSLCertificatesResponse
@@ -706,7 +711,9 @@ export class API extends ParentAPI {
     enrichForPagination('certificates', this.pageOfListSSLCertificates, request)
 
   /**
-   * Delete an TLS certificate.
+   * Delete a TLS certificate. Delete an existing TLS certificate specified by
+   * its DNS zone. Deleting a TLS certificate is permanent and cannot be
+   * undone.
    *
    * @param request - The request {@link DeleteSSLCertificateRequest}
    * @returns A Promise of DeleteSSLCertificateResponse
@@ -724,7 +731,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get the DNS zone TSIG Key. Get the DNS zone TSIG Key to allow AXFR request.
+   * Get the DNS zone's TSIG key. Retrieve information about the TSIG key of a
+   * given DNS zone to allow AXFR requests.
    *
    * @param request - The request {@link GetDNSZoneTsigKeyRequest}
    * @returns A Promise of GetDNSZoneTsigKeyResponse
@@ -742,7 +750,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the DNS zone TSIG Key.
+   * Delete the DNS zone's TSIG key. Delete an existing TSIG key specified by
+   * its DNS zone. Deleting a TSIG key is permanent and cannot be undone.
    *
    * @param request - The request {@link DeleteDNSZoneTsigKeyRequest}
    */
