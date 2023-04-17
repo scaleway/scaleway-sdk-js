@@ -134,7 +134,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List hubs.
+   * List hubs. List all Hubs in the specified zone. By default, returned Hubs
+   * are ordered by creation date in ascending order, though this can be
+   * modified via the `order_by` field.
    *
    * @param request - The request {@link ListHubsRequest}
    * @returns A Promise of ListHubsResponse
@@ -143,7 +145,8 @@ export class API extends ParentAPI {
     enrichForPagination('hubs', this.pageOfListHubs, request)
 
   /**
-   * Create a hub.
+   * Create a hub. Create a new Hub in the targeted region, specifying its
+   * configuration including name and product plan.
    *
    * @param request - The request {@link CreateHubRequest}
    * @returns A Promise of Hub
@@ -165,7 +168,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a hub.
+   * Get a hub. Retrieve information about an existing IoT Hub, specified by its
+   * Hub ID. Its full details, including name, status and endpoint, are returned
+   * in the response object.
    *
    * @param request - The request {@link GetHubRequest}
    * @returns A Promise of Hub
@@ -202,7 +207,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a hub.
+   * Update a hub. Update the parameters of an existing IoT Hub, specified by
+   * its Hub ID.
    *
    * @param request - The request {@link UpdateHubRequest}
    * @returns A Promise of Hub
@@ -224,7 +230,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Enable a hub.
+   * Enable a hub. Enable an existing IoT Hub, specified by its Hub ID.
    *
    * @param request - The request {@link EnableHubRequest}
    * @returns A Promise of Hub
@@ -244,7 +250,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Disable a hub.
+   * Disable a hub. Disable an existing IoT Hub, specified by its Hub ID.
    *
    * @param request - The request {@link DisableHubRequest}
    * @returns A Promise of Hub
@@ -264,7 +270,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a hub.
+   * Delete a hub. Delete an existing IoT Hub, specified by its Hub ID. Deleting
+   * a Hub is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteHubRequest}
    */
@@ -299,7 +306,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set the certificate authority of a hub.
+   * Set the certificate authority of a hub. Set a particular PEM-encoded
+   * certificate, specified by the Hub ID.
    *
    * @param request - The request {@link SetHubCARequest}
    * @returns A Promise of Hub
@@ -321,7 +329,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get the certificate authority of a hub.
+   * Get the certificate authority of a hub. Get information for a particular
+   * PEM-encoded certificate, specified by the Hub ID.
    *
    * @param request - The request {@link GetHubCARequest}
    * @returns A Promise of GetHubCAResponse
@@ -363,7 +372,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List devices.
+   * List devices. List all devices in the specified region. By default,
+   * returned devices are ordered by creation date in ascending order, though
+   * this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListDevicesRequest}
    * @returns A Promise of ListDevicesResponse
@@ -372,7 +383,7 @@ export class API extends ParentAPI {
     enrichForPagination('devices', this.pageOfListDevices, request)
 
   /**
-   * Add a device.
+   * Add a device. Attach a device to a given Hub.
    *
    * @param request - The request {@link CreateDeviceRequest}
    * @returns A Promise of CreateDeviceResponse
@@ -394,7 +405,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a device.
+   * Get a device. Retrieve information about an existing device, specified by
+   * its device ID. Its full details, including name, status and ID, are
+   * returned in the response object.
    *
    * @param request - The request {@link GetDeviceRequest}
    * @returns A Promise of Device
@@ -412,7 +425,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a device.
+   * Update a device. Update the parameters of an existing device, specified by
+   * its device ID.
    *
    * @param request - The request {@link UpdateDeviceRequest}
    * @returns A Promise of Device
@@ -434,7 +448,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Enable a device.
+   * Enable a device. Enable a specific device, specified by its device ID.
    *
    * @param request - The request {@link EnableDeviceRequest}
    * @returns A Promise of Device
@@ -454,7 +468,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Disable a device.
+   * Disable a device. Disable an existing device, specified by its device ID.
    *
    * @param request - The request {@link DisableDeviceRequest}
    * @returns A Promise of Device
@@ -474,7 +488,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Renew a device certificate.
+   * Renew a device certificate. Renew the certificate of an existing device,
+   * specified by its device ID.
    *
    * @param request - The request {@link RenewDeviceCertificateRequest}
    * @returns A Promise of RenewDeviceCertificateResponse
@@ -497,7 +512,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set a custom certificate on a device.
+   * Set a custom certificate on a device. Switch the existing certificate of a
+   * given device with an EM-encoded custom certificate.
    *
    * @param request - The request {@link SetDeviceCertificateRequest}
    * @returns A Promise of SetDeviceCertificateResponse
@@ -522,7 +538,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a device's certificate.
+   * Get a device's certificate. Get information for a particular PEM-encoded
+   * certificate, specified by the device ID. The response returns full details
+   * of the device, including its type of certificate.
    *
    * @param request - The request {@link GetDeviceCertificateRequest}
    * @returns A Promise of GetDeviceCertificateResponse
@@ -543,7 +561,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Remove a device.
+   * Remove a device. Remove a specific device from the specific Hub it is
+   * attached to.
    *
    * @param request - The request {@link DeleteDeviceRequest}
    */
@@ -599,7 +618,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List routes.
+   * List routes. List all routes in the specified region. By default, returned
+   * routes are ordered by creation date in ascending order, though this can be
+   * modified via the `order_by` field.
    *
    * @param request - The request {@link ListRoutesRequest}
    * @returns A Promise of ListRoutesResponse
@@ -608,15 +629,15 @@ export class API extends ParentAPI {
     enrichForPagination('routes', this.pageOfListRoutes, request)
 
   /**
-   * Create a route. Multiple route kinds can be created:
+   * Create a route. Multiple kinds of routes can be created, such as:
    *
-   * - Database Route. Create a route that will record subscribed MQTT messages
+   * - Database Route Create a route that will record subscribed MQTT messages
    *   into your database. <b>You need to manage the database by yourself</b>.
    * - REST Route. Create a route that will call a REST API on received subscribed
    *   MQTT messages.
    * - S3 Routes. Create a route that will put subscribed MQTT messages into an S3
-   *   bucket. You need to create the bucket yourself and grant us write access.
-   *   The grant can be done with s3cmd (`s3cmd setacl s3://&lt;my-bucket&gt;
+   *   bucket. You need to create the bucket yourself and grant write access.
+   *   Granting can be done with s3cmd (`s3cmd setacl s3://&lt;my-bucket&gt;
    *   --acl-grant=write:555c69c3-87d0-4bf8-80f1-99a2f757d031:555c69c3-87d0-4bf8-80f1-99a2f757d031`).
    *
    * @param request - The request {@link CreateRouteRequest}
@@ -639,7 +660,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a route.
+   * Update a route. Update the parameters of an existing route, specified by
+   * its route ID.
    *
    * @param request - The request {@link UpdateRouteRequest}
    * @returns A Promise of Route
@@ -661,7 +683,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a route.
+   * Get a route. Get information for a particular route, specified by the route
+   * ID. The response returns full details of the route, including its type, the
+   * topic it subscribes to and its configuration.
    *
    * @param request - The request {@link GetRouteRequest}
    * @returns A Promise of Route
@@ -679,7 +703,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a route.
+   * Delete a route. Delete an existing route, specified by its route ID.
+   * Deleting a route is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteRouteRequest}
    */
