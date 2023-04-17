@@ -54,7 +54,8 @@ export class API extends ParentAPI {
   ]
 
   /**
-   * Create a Flexible IP.
+   * Create a new flexible IP. Generate a new flexible IP within a given zone,
+   * specifying its configuration including Project ID and description.
    *
    * @param request - The request {@link CreateFlexibleIPRequest}
    * @returns A Promise of FlexibleIP
@@ -76,7 +77,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a Flexible IP.
+   * Get an existing flexible IP. Retrieve information about an existing
+   * flexible IP, specified by its ID and zone. Its full details, including
+   * Project ID, description and status, are returned in the response object.
    *
    * @param request - The request {@link GetFlexibleIPRequest}
    * @returns A Promise of FlexibleIP
@@ -143,7 +146,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Flexible IPs.
+   * List flexible IPs. List all flexible IPs within a given zone.
    *
    * @param request - The request {@link ListFlexibleIPsRequest}
    * @returns A Promise of ListFlexibleIPsResponse
@@ -152,7 +155,9 @@ export class API extends ParentAPI {
     enrichForPagination('flexibleIps', this.pageOfListFlexibleIPs, request)
 
   /**
-   * Update a Flexible IP.
+   * Update an existing flexible IP. Update the parameters of an existing
+   * flexible IP, specified by its ID and zone. These parameters include tags
+   * and description.
    *
    * @param request - The request {@link UpdateFlexibleIPRequest}
    * @returns A Promise of FlexibleIP
@@ -174,7 +179,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a Flexible IP.
+   * Delete an existing flexible IP. Delete an existing flexible IP, specified
+   * by its ID and zone. Note that deleting a flexible IP is permanent and
+   * cannot be undone.
    *
    * @param request - The request {@link DeleteFlexibleIPRequest}
    */
@@ -188,7 +195,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Attach a Flexible IP to a server.
+   * Attach an existing flexible IP to a server. Attach an existing flexible IP
+   * to a specified Elastic Metal server.
    *
    * @param request - The request {@link AttachFlexibleIPRequest}
    * @returns A Promise of AttachFlexibleIPsResponse
@@ -210,7 +218,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Detach a Flexible IP from a server.
+   * Detach an existing flexible IP from a server. Detach an existing flexible
+   * IP from a specified Elastic Metal server.
    *
    * @param request - The request {@link DetachFlexibleIPRequest}
    * @returns A Promise of DetachFlexibleIPsResponse
@@ -232,7 +241,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Generate a virtual MAC on a given Flexible IP.
+   * Generate a virtual MAC address on an existing flexible IP. Generate a
+   * virtual MAC (Media Access Control) address on an existing flexible IP.
    *
    * @param request - The request {@link GenerateMACAddrRequest}
    * @returns A Promise of FlexibleIP
@@ -254,8 +264,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Duplicate a Virtual MAC. Duplicate a Virtual MAC from a given Flexible IP
-   * onto another attached on the same server.
+   * Duplicate a virtual MAC address to another flexible IP. Duplicate a virtual
+   * MAC address from a given flexible IP to another flexible IP attached to the
+   * same server.
    *
    * @param request - The request {@link DuplicateMACAddrRequest}
    * @returns A Promise of FlexibleIP
@@ -277,8 +288,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Move a virtual MAC. Move a Virtual MAC from a given Flexible IP onto
-   * another Flexible IP.
+   * Relocate an existing virtual MAC address to a different flexible IP.
+   * Relocate a virtual MAC (Media Access Control) address from an existing
+   * flexible IP to a different flexible IP.
    *
    * @param request - The request {@link MoveMACAddrRequest}
    * @returns A Promise of FlexibleIP
@@ -300,7 +312,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Remove a virtual MAC from a Flexible IP.
+   * Detach a given virtual MAC address from an existing flexible IP. Detach a
+   * given MAC (Media Access Control) address from an existing flexible IP.
    *
    * @param request - The request {@link DeleteMACAddrRequest}
    */

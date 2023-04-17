@@ -25,84 +25,84 @@ export type MACAddressType = 'unknown_type' | 'vmware' | 'xen' | 'kvm'
 
 /** Attach flexible i ps response. */
 export interface AttachFlexibleIPsResponse {
-  /** Total count of Flexible IPs being updated. */
+  /** Total count of flexible IPs that are being updated. */
   totalCount: number
-  /** Listing of Flexible IPs in updating state. */
+  /** List of flexible IPs in an updating state. */
   flexibleIps: FlexibleIP[]
 }
 
 /** Detach flexible i ps response. */
 export interface DetachFlexibleIPsResponse {
-  /** Total count of Flexible IPs being detached. */
+  /** Total count of flexible IPs that are being detached. */
   totalCount: number
-  /** Listing of Flexible IPs in detaching state. */
+  /** List of flexible IPs in a detaching state. */
   flexibleIps: FlexibleIP[]
 }
 
 /** Flexible ip. */
 export interface FlexibleIP {
-  /** ID of the Flexible IP. */
+  /** ID of the flexible IP. */
   id: string
-  /** Organization ID the Flexible IP is attached to. */
+  /** ID of the Organization the flexible IP is attached to. */
   organizationId: string
-  /** Project ID the Flexible IP is attached to. */
+  /** ID of the Project the flexible IP is attached to. */
   projectId: string
-  /** Description of the Flexible IP. */
+  /** Flexible IP description. */
   description: string
-  /** Tags associated with the Flexible IP. */
+  /** Flexible IP tags. */
   tags: string[]
-  /** Date of last update of the Flexible IP. */
+  /** Date on which the flexible IP was last updated. */
   updatedAt?: Date
-  /** Date of creation of the Flexible IP. */
+  /** Date on which the flexible IP was created. */
   createdAt?: Date
   /**
-   * Status of the Flexible IP.
+   * Flexible IP status.
    *
-   * - Ready : Flexible IP is created and ready to be attached to a server or to
-   *   have a virtual MAC generated.
-   * - Updating: Flexible IP is being attached to a server or a virtual MAC
+   * - Ready : flexible IP is created and ready to be attached to a server or to
+   *   be associated with a virtual MAC.
+   * - Updating: flexible IP is being attached to a server or a virtual MAC
    *   operation is ongoing
-   * - Attached: Flexible IP is attached to a server
-   * - Error: a Flexible IP operation resulted in an error
-   * - Detaching: Flexible IP is being detached from a server
-   * - Locked: Flexible IP resource is locked.
+   * - Attached: flexible IP is attached to a server
+   * - Error: a flexible IP operation resulted in an error
+   * - Detaching: flexible IP is being detached from a server
+   * - Locked: the resource of the flexible IP is locked.
    */
   status: FlexibleIPStatus
-  /** IP of the Flexible IP. */
+  /** IP of the flexible IP. */
   ipAddress: string
-  /** MAC address of the Flexible IP. */
+  /** MAC address of the flexible IP. */
   macAddress?: MACAddress
-  /** ID of the server linked to the Flexible IP. */
+  /** ID of the server linked to the flexible IP. */
   serverId?: string
   /** Reverse DNS value. */
   reverse: string
-  /** Flexible IP Availability Zone. */
+  /** Availability Zone of the flexible IP. */
   zone: Zone
 }
 
 /** List flexible i ps response. */
 export interface ListFlexibleIPsResponse {
-  /** Total count of matching Flexible IPs. */
+  /** Total count of matching flexible IPs. */
   totalCount: number
-  /** Listing of Flexible IPs. */
+  /** List of all flexible IPs. */
   flexibleIps: FlexibleIP[]
 }
 
 /** Mac address. */
 export interface MACAddress {
-  /** ID of the Flexible IP. */
+  /** ID of the flexible IP. */
   id: string
   /** MAC address of the Virtual MAC. */
   macAddress: string
-  /** Virtual MAC type. */
+  /** Type of virtual MAC. */
   macType: MACAddressType
-  /** Virtual MAC status. */
+  /** Status of virtual MAC. */
   status: MACAddressStatus
-  /** Date of last update of the Virtual MAC. */
+  /** Date on which the virtual MAC was last updated. */
   updatedAt?: Date
-  /** Date of creation of the Virtual MAC. */
+  /** Date on which the virtual MAC was created. */
   createdAt?: Date
-  /** MAC Addr IP Availability Zone. */
+  /** MAC address IP Availability Zone. */
   zone: Zone
 }
 
@@ -111,63 +111,72 @@ export type CreateFlexibleIPRequest = {
   zone?: Zone
   /** ID of the project to associate with the Flexible IP. */
   projectId?: string
-  /** Description to associate with the Flexible IP, max 255 characters. */
+  /** Flexible IP description (max. of 255 characters). */
   description: string
-  /** Tags to associate to the Flexible IP. */
+  /** Tags to associate to the flexible IP. */
   tags?: string[]
-  /** Server ID on which to attach the created Flexible IP. */
+  /** ID of the server to which the newly created flexible IP will be attached. */
   serverId?: string
-  /** Reverse DNS value. */
+  /** Value of the reverse DNS. */
   reverse?: string
-  /** If true, creates a Flexible IP with an ipv6 address. */
+  /** Defines whether the flexible IP has an IPv6 address. */
   isIpv6: boolean
 }
 
 export type GetFlexibleIPRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Flexible IP ID. */
+  /** ID of the flexible IP. */
   fipId: string
 }
 
 export type ListFlexibleIPsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The sort order of the returned Flexible IPs. */
+  /** Sort order of the returned flexible IPs. */
   orderBy?: ListFlexibleIPsRequestOrderBy
-  /** The page number for the returned Flexible IPs. */
+  /** Page number. */
   page?: number
-  /** The maximum number of Flexible IPs per page. */
+  /** Maximum number of flexible IPs per page. */
   pageSize?: number
-  /** Filter Flexible IPs with one or more matching tags. */
+  /**
+   * Filter by tag, only flexible IPs with one or more matching tags will be
+   * returned.
+   */
   tags?: string[]
-  /** Filter Flexible IPs by status. */
+  /** Filter by status, only flexible IPs with this status will be returned. */
   status?: FlexibleIPStatus[]
-  /** Filter Flexible IPs by server IDs. */
+  /**
+   * Filter by server IDs, only flexible IPs with these server IDs will be
+   * returned.
+   */
   serverIds?: string[]
-  /** Filter Flexible IPs by organization ID. */
+  /**
+   * Filter by Organization ID, only flexible IPs from this Organization will be
+   * returned.
+   */
   organizationId?: string
-  /** Filter Flexible IPs by project ID. */
+  /** Filter by Project ID, only flexible IPs from this Project will be returned. */
   projectId?: string
 }
 
 export type UpdateFlexibleIPRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the Flexible IP to update. */
+  /** ID of the flexible IP to update. */
   fipId: string
-  /** Description to associate with the Flexible IP, max 255 characters. */
+  /** Flexible IP description (max. 255 characters). */
   description?: string
-  /** Tags to associate with the Flexible IP. */
+  /** Tags associated with the flexible IP. */
   tags?: string[]
-  /** Reverse DNS value. */
+  /** Value of the reverse DNS. */
   reverse?: string
 }
 
 export type DeleteFlexibleIPRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the Flexible IP to delete. */
+  /** ID of the flexible IP to delete. */
   fipId: string
 }
 
@@ -175,12 +184,12 @@ export type AttachFlexibleIPRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
-   * A list of Flexible IP IDs to attach. Multiple IDs can be provided as long
-   * as Flexible IPs belong to the same MAC groups (see details about MAC
-   * groups).
+   * List of flexible IP IDs to attach to a server. Multiple IDs can be
+   * provided, but note that flexible IPs must belong to the same MAC group (see
+   * details about MAC groups).
    */
   fipsIds: string[]
-  /** A server ID on which to attach the Flexible IPs. */
+  /** ID of the server on which to attach the flexible IPs. */
   serverId: string
 }
 
@@ -188,9 +197,8 @@ export type DetachFlexibleIPRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
-   * A list of Flexible IP IDs to detach. Multiple IDs can be provided as long
-   * as Flexible IPs belong to the same MAC groups (see details about MAC
-   * groups).
+   * List of flexible IP IDs to detach from a server. Multiple IDs can be
+   * provided. Note that flexible IPs must belong to the same MAC group.
    */
   fipsIds: string[]
 }
@@ -198,7 +206,7 @@ export type DetachFlexibleIPRequest = {
 export type GenerateMACAddrRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Flexible IP ID on which to generate a Virtual MAC. */
+  /** ID of the flexible IP for which to generate a virtual MAC. */
   fipId: string
   /** TODO. */
   macType: MACAddressType
@@ -208,13 +216,13 @@ export type DuplicateMACAddrRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
-   * Flexible IP ID on which to duplicate the Virtual MAC. Flexible IPs need to
-   * be attached to the same server.
+   * ID of the flexible IP on which to duplicate the virtual MAC. Note that the
+   * flexible IPs need to be attached to the same server.
    */
   fipId: string
   /**
-   * Flexible IP ID to duplicate the Virtual MAC from. Flexible IPs need to be
-   * attached to the same server.
+   * ID of the flexible IP to duplicate the Virtual MAC from. Note that flexible
+   * IPs need to be attached to the same server.
    */
   duplicateFromFipId: string
 }
@@ -230,9 +238,9 @@ export type DeleteMACAddrRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
-   * Flexible IP ID from which to delete the Virtual MAC. If the Flexible IP
-   * belongs to a MAC group, the MAC will be removed from the MAC group and from
-   * the Flexible IP.
+   * ID of the flexible IP from which to delete the virtual MAC. If the flexible
+   * IP belongs to a MAC group, the MAC will be removed from both the MAC group
+   * and flexible IP.
    */
   fipId: string
 }
