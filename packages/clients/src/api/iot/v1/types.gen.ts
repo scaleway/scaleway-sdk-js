@@ -89,7 +89,7 @@ export interface Certificate {
 
 /** Create device response. */
 export interface CreateDeviceResponse {
-  /** Created device information. */
+  /** Information related to the created device. */
   device?: Device
   /** Device certificate. */
   certificate?: Certificate
@@ -97,7 +97,7 @@ export interface CreateDeviceResponse {
 
 /** Create network response. */
 export interface CreateNetworkResponse {
-  /** Created network. */
+  /** Information related to the created network. */
   network?: Network
   /** Endpoint Key to keep secret. This cannot be retrieved later. */
   secret: string
@@ -128,7 +128,7 @@ export interface CreateRouteRequestS3Config {
 
 /** Device. */
 export interface Device {
-  /** Device ID, also used as MQTT Client ID or Username. */
+  /** Device ID, also used as MQTT Client ID or username. */
   id: string
   /** Device name. */
   name: string
@@ -138,28 +138,31 @@ export interface Device {
   status: DeviceStatus
   /** Hub ID. */
   hubId: string
-  /** Device last connection/activity date. */
+  /** Last connection/activity date of a device. */
   lastActivityAt?: Date
-  /** Whether the device is connected to the Hub or not. */
+  /** Defines whether the device is connected to the Hub. */
   isConnected: boolean
-  /** Whether to allow device to connect without TLS mutual authentication. */
+  /**
+   * Defines whether to allow the device to connect to the Hub without TLS
+   * mutual authentication.
+   */
   allowInsecure: boolean
   /**
-   * Whether to allow multiple physical devices to connect with this device's
-   * credentials.
+   * Defines whether to allow multiple physical devices to connect to the Hub
+   * with this device's credentials.
    */
   allowMultipleConnections: boolean
   /** Filter-sets to restrict the topics the device can publish/subscribe to. */
   messageFilters?: DeviceMessageFilters
   /**
-   * Whether the device was assigned a custom certificate. Assigning a custom
-   * certificate allows a device to authenticate using that specific certificate
-   * without checking the hub's CA certificate.
+   * Defines whether the device was assigned a custom certificate. Assigning a
+   * custom certificate allows a device to authenticate using that specific
+   * certificate without checking the Hub's CA certificate.
    */
   hasCustomCertificate: boolean
-  /** Device add date. */
+  /** Date at which the device was added. */
   createdAt?: Date
-  /** Device last modification date. */
+  /** Date at which the device was last modified. */
   updatedAt?: Date
 }
 
@@ -174,9 +177,10 @@ export interface DeviceMessageFilters {
 /** Device. message filters. rule. */
 export interface DeviceMessageFiltersRule {
   /**
-   * How to use the topic list. If accept, the set will accept all topics in the
-   * topics list, but no other. If reject, the set will deny all topics in the
-   * topics list, but all others will be allowed.
+   * How to use the topic list. If set to `accept`, all topics in the topics
+   * list will be allowed, with all other topics being denied. If set to
+   * `reject`, all topics in the topics list will be denied, with all other
+   * topics being allowed.
    */
   policy: DeviceMessageFiltersRulePolicy
   /**
@@ -188,7 +192,7 @@ export interface DeviceMessageFiltersRule {
 
 /** Get device certificate response. */
 export interface GetDeviceCertificateResponse {
-  /** Created device information. */
+  /** Information related to the created device. */
   device?: Device
   /** Device certificate. */
   certificatePem: string
@@ -206,7 +210,7 @@ export interface GetHubCAResponse {
 
 /** Get hub metrics response. */
 export interface GetHubMetricsResponse {
-  /** Metrics for a hub over the requested period. */
+  /** Metrics for a Hub over the requested period. */
   metrics: TimeSeries[]
 }
 
@@ -220,19 +224,19 @@ export interface Hub {
   status: HubStatus
   /** Hub feature set. */
   productPlan: HubProductPlan
-  /** Whether the hub has been enabled. */
+  /** Defines whether the hub has been enabled. */
   enabled: boolean
   /** Number of registered devices. */
   deviceCount: number
   /** Number of currently connected devices. */
   connectedDeviceCount: number
   /**
-   * Host to connect your devices to. Devices should be connected to this host,
-   * port may be 1883 (MQTT), 8883 (MQTT over TLS), 80 (MQTT over Websocket) or
+   * Host to connect your devices to. Devices should be connected to this host.
+   * Port may be 1883 (MQTT), 8883 (MQTT over TLS), 80 (MQTT over Websocket) or
    * 443 (MQTT over Websocket over TLS).
    */
   endpoint: string
-  /** Disable Hub events. */
+  /** Defines whether to disable Hub events. */
   disableEvents: boolean
   /** Hub events topic prefix. */
   eventsTopicPrefix: string
@@ -247,18 +251,19 @@ export interface Hub {
   /** Organization owning the resource. */
   organizationId: string
   /**
-   * Enable device auto provisioning. When an unknown device connects to your
-   * hub using a valid certificate chain, it will be automatically provisioned
-   * inside your hub. The hub uses the common name of the device certifcate to
-   * find out if a device with the same name already exists. This setting can
-   * only be enabled on a hub with a custom certificate authority.
+   * Defines whether to enable device auto provisioning. When an unknown device
+   * connects to your hub using a valid certificate chain, it will be
+   * automatically provisioned inside your Hub. The Hub uses the common name of
+   * the device certifcate to find out if a device with the same name already
+   * exists. This setting can only be enabled on a hub with a custom certificate
+   * authority.
    */
   enableDeviceAutoProvisioning: boolean
   /**
-   * Whether the hub is using a custom certificate authority. After creating a
-   * hub, this flag is set to False as the hub certificates are managed by
-   * Scaleway. Once a custom certificate authority is installed, this flag will
-   * be set to true.
+   * Defines whether the hub is using a custom certificate authority. Flag is
+   * automatically set to `false` after Hub creation, as Hub certificates are
+   * managed by Scaleway. Once a custom certificate authority is set, the flag
+   * will be set to `true`.
    */
   hasCustomCa: boolean
   /**
@@ -278,13 +283,13 @@ export interface HubTwinsGraphiteConfig {
 export interface ListDevicesResponse {
   /** Total number of devices. */
   totalCount: number
-  /** A page of devices. */
+  /** Page of devices. */
   devices: Device[]
 }
 
 /** List hubs response. */
 export interface ListHubsResponse {
-  /** Total number of hubs. */
+  /** Total number of Hubs. */
   totalCount: number
   /** A page of hubs. */
   hubs: Hub[]
@@ -294,7 +299,7 @@ export interface ListHubsResponse {
 export interface ListNetworksResponse {
   /** Total number of Networks. */
   totalCount: number
-  /** A page of networks. */
+  /** Page of networks. */
   networks: Network[]
 }
 
@@ -302,19 +307,19 @@ export interface ListNetworksResponse {
 export interface ListRoutesResponse {
   /** Total number of routes. */
   totalCount: number
-  /** A page of routes. */
+  /** Page of routes. */
   routes: RouteSummary[]
 }
 
 /** List twin documents response. */
 export interface ListTwinDocumentsResponse {
-  /** Twin's document list. */
+  /** List of the twin document. */
   documents: ListTwinDocumentsResponseDocumentSummary[]
 }
 
 /** List twin documents response. document summary. */
 export interface ListTwinDocumentsResponseDocumentSummary {
-  /** Document's name. */
+  /** Name of the document. */
   documentName: string
 }
 
@@ -330,7 +335,7 @@ export interface Network {
   endpoint: string
   /** Hub ID to connect the Network to. */
   hubId: string
-  /** Network creation date. */
+  /** Date at which the network was created. */
   createdAt?: Date
   /**
    * Topic prefix for the Network. This prefix will be prepended to all topics
@@ -341,7 +346,7 @@ export interface Network {
 
 /** Renew device certificate response. */
 export interface RenewDeviceCertificateResponse {
-  /** Created device information. */
+  /** Information related to the created device. */
   device?: Device
   /** Device certificate. */
   certificate?: Certificate
@@ -353,7 +358,7 @@ export interface Route {
   id: string
   /** Route name. */
   name: string
-  /** ID of the route's hub. */
+  /** Hub ID of the route. */
   hubId: string
   /**
    * Topic the route subscribes to. It must be a valid MQTT topic and up to
@@ -362,7 +367,7 @@ export interface Route {
   topic: string
   /** Route type. */
   type: RouteRouteType
-  /** Route creation date. */
+  /** Date at which the route was created. */
   createdAt?: Date
   /**
    * When using S3 Route, S3-specific configuration fields.
@@ -385,15 +390,15 @@ export interface Route {
    * could be set.
    */
   restConfig?: RouteRestConfig
-  /** Route last update date. */
+  /** Date at which the route was last updated. */
   updatedAt?: Date
 }
 
 /** Route. database config. */
 export interface RouteDatabaseConfig {
   /**
-   * Database engine the route will connect to. If not specified, will default
-   * to 'PostgreSQL'.
+   * Database engine the route will connect to. If not specified, the default
+   * database will be 'PostgreSQL'.
    */
   engine: RouteDatabaseConfigEngine
   /** Database host. */
@@ -415,7 +420,7 @@ export interface RouteDatabaseConfig {
 
 /** Route. rest config. */
 export interface RouteRestConfig {
-  /** HTTP Verb used to call REST URI. */
+  /** HTTP verb used to call REST URI. */
   verb: RouteRestConfigHttpVerb
   /** URI of the REST endpoint. */
   uri: string
@@ -425,9 +430,9 @@ export interface RouteRestConfig {
 
 /** Route.s3 config. */
 export interface RouteS3Config {
-  /** Region of the S3 route's destination bucket (eg 'fr-par'). */
+  /** Region of the S3 route's destination bucket (e.g., 'fr-par'). */
   bucketRegion: string
-  /** Name of the S3 route's destination bucket. */
+  /** Destination bucket name of the S3 route. */
   bucketName: string
   /** Optional string to prefix object names with. */
   objectPrefix: string
@@ -444,7 +449,7 @@ export interface RouteSummary {
   id: string
   /** Route name. */
   name: string
-  /** ID of the route's hub. */
+  /** Hub ID of the route. */
   hubId: string
   /**
    * Topic the route subscribes to. It must be a valid MQTT topic and up to
@@ -453,9 +458,9 @@ export interface RouteSummary {
   topic: string
   /** Route type. */
   type: RouteRouteType
-  /** Route creation date. */
+  /** Date at which the route was created. */
   createdAt?: Date
-  /** Route last update date. */
+  /** Date at which the route was last updated. */
   updatedAt?: Date
 }
 
@@ -466,13 +471,13 @@ export interface SetDeviceCertificateResponse {
 
 /** Twin document. */
 export interface TwinDocument {
-  /** Document's parent twin ID. */
+  /** Parent twin ID of the document. */
   twinId: string
-  /** Document's name. */
+  /** Name of the document. */
   documentName: string
-  /** Document's new version. */
+  /** New version of the document. */
   version: number
-  /** Document's new data. */
+  /** New data related to the document. */
   data?: Record<string, unknown>
 }
 
@@ -505,17 +510,17 @@ export type ListHubsRequest = {
    * config.
    */
   region?: Region
-  /** Page number. */
+  /** Page number to return, from the paginated results. */
   page?: number
-  /** Page size. The maximum value is 100. */
+  /** Number of Hubs to return within a page. Maximum value is 100. */
   pageSize?: number
-  /** Ordering of requested hub. */
+  /** Sort order of Hubs in the response. */
   orderBy?: ListHubsRequestOrderBy
-  /** Filter on project. */
+  /** Only list Hubs of this Project ID. */
   projectId?: string
-  /** Filter on the organization. */
+  /** Only list Hubs of this Organization ID. */
   organizationId?: string
-  /** Filter on the name. */
+  /** Hub name. */
   name?: string
 }
 
@@ -527,13 +532,16 @@ export type CreateHubRequest = {
   region?: Region
   /** Hub name (up to 255 characters). */
   name?: string
-  /** Organization/project owning the resource. */
+  /**
+   * Project/Organization ID to filter for, only Hubs from this
+   * Project/Organization will be returned.
+   */
   projectId?: string
-  /** Hub feature set. */
+  /** Hub product plan. */
   productPlan: HubProductPlan
   /** Disable Hub events. */
   disableEvents?: boolean
-  /** Hub events topic prefix (default '$SCW/events'). */
+  /** Topic prefix (default '$SCW/events') of Hub events. */
   eventsTopicPrefix?: string
   /**
    * BETA - not implemented yet.
@@ -560,15 +568,15 @@ export type UpdateHubRequest = {
    * config.
    */
   region?: Region
-  /** Hub ID. */
+  /** ID of the Hub you want to update. */
   hubId: string
   /** Hub name (up to 255 characters). */
   name?: string
-  /** Hub feature set. */
+  /** Hub product plan. */
   productPlan?: HubProductPlan
   /** Disable Hub events. */
   disableEvents?: boolean
-  /** Hub events topic prefix. */
+  /** Topic prefix of Hub events. */
   eventsTopicPrefix?: string
   /** Enable device auto provisioning. */
   enableDeviceAutoProvisioning?: boolean
@@ -609,7 +617,10 @@ export type DeleteHubRequest = {
   region?: Region
   /** Hub ID. */
   hubId: string
-  /** Force deletion of devices added to this hub instead of rejecting operation. */
+  /**
+   * Defines whether to force the deletion of devices added to this Hub or
+   * reject the operation.
+   */
   deleteDevices?: boolean
 }
 
@@ -621,7 +632,7 @@ export type GetHubMetricsRequest = {
   region?: Region
   /** Hub ID. */
   hubId: string
-  /** Start date used to compute the best scale for the returned metrics. */
+  /** Start date used to compute the best scale for returned metrics. */
   startDate: Date
 }
 
@@ -633,12 +644,12 @@ export type SetHubCARequest = {
   region?: Region
   /** Hub ID. */
   hubId: string
-  /** The CA's PEM-encoded certificate. */
+  /** CA's PEM-encoded certificate. */
   caCertPem: string
   /**
-   * Proof of possession PEM-encoded certificate. The challenge is a PEM-encoded
-   * certificate to prove the possession of the CA. It must be signed by the CA,
-   * and have a Common Name equal to the Hub ID.
+   * Proof of possession of PEM-encoded certificate. Challenge is a PEM-encoded
+   * certificate that acts as proof of possession of the CA. It must be signed
+   * by the CA, and have a Common Name equal to the Hub ID.
    */
   challengeCertPem: string
 }
@@ -658,17 +669,17 @@ export type ListDevicesRequest = {
    * config.
    */
   region?: Region
-  /** Page number. */
+  /** Page number to return, from the paginated results. */
   page?: number
-  /** Page size. The maximum value is 100. */
+  /** Number of devices to return within a page. Maximum value is 100. */
   pageSize?: number
   /** Ordering of requested devices. */
   orderBy?: ListDevicesRequestOrderBy
-  /** Filter on the name. */
+  /** Name to filter for, only devices with this name will be returned. */
   name?: string
-  /** Filter on the hub. */
+  /** Hub ID to filter for, only devices attached to this Hub will be returned. */
   hubId?: string
-  /** Filter on the allow_insecure flag. */
+  /** Defines wheter to filter the allow_insecure flag. */
   allowInsecure?: boolean
   /** Device status (enabled, disabled, etc.). */
   status?: DeviceStatus
@@ -682,14 +693,17 @@ export type CreateDeviceRequest = {
   region?: Region
   /** Device name. */
   name?: string
-  /** ID of the device's hub. */
+  /** Hub ID of the device. */
   hubId: string
   /**
-   * Allow plain and server-authenticated SSL connections in addition to
-   * mutually-authenticated ones.
+   * Defines whether to allow plain and server-authenticated SSL connections in
+   * addition to mutually-authenticated ones.
    */
   allowInsecure: boolean
-  /** Allow multiple physical devices to connect with this device's credentials. */
+  /**
+   * Defines whether to allow multiple physical devices to connect with this
+   * device's credentials.
+   */
   allowMultipleConnections: boolean
   /**
    * Filter-sets to authorize or deny the device to publish/subscribe to
@@ -718,14 +732,17 @@ export type UpdateDeviceRequest = {
   region?: Region
   /** Device ID. */
   deviceId: string
-  /** Device description. */
+  /** Description for the device. */
   description?: string
   /**
-   * Allow plain and server-authenticated SSL connections in addition to
-   * mutually-authenticated ones.
+   * Defines whether to allow plain and server-authenticated SSL connections in
+   * addition to mutually-authenticated ones.
    */
   allowInsecure?: boolean
-  /** Allow multiple physical devices to connect with this device's credentials. */
+  /**
+   * Defines whether to allow multiple physical devices to connect with this
+   * device's credentials.
+   */
   allowMultipleConnections?: boolean
   /** Filter-sets to restrict the topics the device can publish/subscribe to. */
   messageFilters?: DeviceMessageFilters
@@ -771,7 +788,7 @@ export type SetDeviceCertificateRequest = {
   region?: Region
   /** Device ID. */
   deviceId: string
-  /** The PEM-encoded custom certificate. */
+  /** PEM-encoded custom certificate. */
   certificatePem: string
 }
 
@@ -813,15 +830,15 @@ export type ListRoutesRequest = {
    * config.
    */
   region?: Region
-  /** Page number. */
+  /** Page number to return, from the paginated results. */
   page?: number
-  /** Page size. The maximum value is 100. */
+  /** Number of routes to return within a page. Maximum value is 100. */
   pageSize?: number
   /** Ordering of requested routes. */
   orderBy?: ListRoutesRequestOrderBy
-  /** Filter on the hub. */
+  /** Hub ID to filter for. */
   hubId?: string
-  /** Filter on route's name. */
+  /** Route name to filter for. */
   name?: string
 }
 
@@ -833,7 +850,7 @@ export type CreateRouteRequest = {
   region?: Region
   /** Route name. */
   name?: string
-  /** ID of the route's hub. */
+  /** Hub ID of the route. */
   hubId: string
   /**
    * Topic the route subscribes to. It must be a valid MQTT topic and up to
@@ -927,17 +944,17 @@ export type ListNetworksRequest = {
    * config.
    */
   region?: Region
-  /** Page number. */
+  /** Page number to return, from the paginated results. */
   page?: number
-  /** Page size. The maximum value is 100. */
+  /** Number of networks to return. The maximum value is 100. */
   pageSize?: number
   /** Ordering of requested routes. */
   orderBy?: ListNetworksRequestOrderBy
-  /** Filter on Network name. */
+  /** Network name to filter for. */
   name?: string
-  /** Filter on the hub. */
+  /** Hub ID to filter for. */
   hubId?: string
-  /** Filter on the topic prefix. */
+  /** Topic prefix to filter for. */
   topicPrefix?: string
 }
 
@@ -985,7 +1002,7 @@ export type GetTwinDocumentRequest = {
   region?: Region
   /** Twin ID. */
   twinId: string
-  /** Document name. */
+  /** Name of the document. */
   documentName: string
 }
 
@@ -997,15 +1014,15 @@ export type PutTwinDocumentRequest = {
   region?: Region
   /** Twin ID. */
   twinId: string
-  /** Document name. */
+  /** Name of the document. */
   documentName: string
   /**
-   * The version of the document to update. If set, ensures that the document's
-   * current version matches before persisting the update.
+   * Version of the document to update. If set, ensures that the current version
+   * of the document matches before persisting the update.
    */
   version?: number
   /**
-   * New document data. The new data that will replace the contents of the
+   * Data of the new document. New data that will replace the contents of the
    * document.
    */
   data?: Record<string, unknown>
@@ -1019,20 +1036,20 @@ export type PatchTwinDocumentRequest = {
   region?: Region
   /** Twin ID. */
   twinId: string
-  /** Document name. */
+  /** Name of the document. */
   documentName: string
   /**
-   * The version of the document to update. If set, ensures that the document's
-   * current version matches before persisting the update.
+   * The version of the document to update. If set, ensures that the current
+   * version of the document matches before persisting the update.
    */
   version?: number
   /**
    * Patch data. A json data that will be applied on the document's current
    * data. Patching rules: The patch goes recursively through the patch objects.
-   * If the patch object property is null, then it is removed from the final
-   * object. If the patch object property is a value (number, strings, bool,
-   * arrays), it is replaced. If the patch object property is an object, the
-   * previous rules will be applied recursively on it.
+   * If the patch object property is null, it is removed from the final object.
+   * If the patch object property is a value (number, strings, bool, arrays), it
+   * is replaced. If the patch object property is an object, the previous rules
+   * will be applied recursively on it.
    */
   data?: Record<string, unknown>
 }
@@ -1045,7 +1062,7 @@ export type DeleteTwinDocumentRequest = {
   region?: Region
   /** Twin ID. */
   twinId: string
-  /** Document name. */
+  /** Name of the document. */
   documentName: string
 }
 
