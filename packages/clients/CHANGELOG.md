@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.6.0...@scaleway/sdk@1.7.0) (2023-04-17)
+
+### Features
+
+- **iam:** add User.mfa and deprecate twoFactorEnabled ([#586](https://github.com/scaleway/scaleway-sdk-js/issues/586)) ([39e3dda](https://github.com/scaleway/scaleway-sdk-js/commit/39e3dda9236ce913330ef042bf17f5e1fc6598e4))
+- **secret:** add isLatest field to SecretVersion ([#582](https://github.com/scaleway/scaleway-sdk-js/issues/582)) ([3cb7ec1](https://github.com/scaleway/scaleway-sdk-js/commit/3cb7ec144ee050eeb8efe3c11e6fc291d3ddb74e))
+- **secret:** add managed secrets ([#606](https://github.com/scaleway/scaleway-sdk-js/issues/606)) ([b3547f5](https://github.com/scaleway/scaleway-sdk-js/commit/b3547f5eacbb6e182c0a0008bef9a094de9e72fc))
+- **secret:** add secret version CRC32 ([#578](https://github.com/scaleway/scaleway-sdk-js/issues/578)) ([f1a5662](https://github.com/scaleway/scaleway-sdk-js/commit/f1a56629e0af1749c166c95116677f9204b9a311))
+- **secret:** use optional type for some request fields ([#610](https://github.com/scaleway/scaleway-sdk-js/issues/610)) ([34bbc3e](https://github.com/scaleway/scaleway-sdk-js/commit/34bbc3e758f5fcae03dedfe96167dd268c5d5e55))
+- **serverless:** add build message ([#608](https://github.com/scaleway/scaleway-sdk-js/issues/608)) ([ba02c93](https://github.com/scaleway/scaleway-sdk-js/commit/ba02c93979a8f5e4e80ccb8fc531d9f37a3694c5))
+
+### Bug Fixes
+
+- **serverless:** make some fields optional to create/update triggers ([#579](https://github.com/scaleway/scaleway-sdk-js/issues/579)) ([370d81c](https://github.com/scaleway/scaleway-sdk-js/commit/370d81c019684d4e150d653d2e0dfb22a17e3228))
+
 ## [1.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.5.0...@scaleway/sdk@1.6.0) (2023-04-03)
 
 ### Features
