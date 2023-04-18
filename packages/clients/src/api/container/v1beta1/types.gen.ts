@@ -100,7 +100,7 @@ export interface Container {
   maxScale: number
   /** Memory limit of the container in MB. */
   memoryLimit: number
-  /** CPU limit of the container. */
+  /** CPU limit of the container in mvCPU. */
   cpuLimit: number
   /** Processing time limit for the container. */
   timeout?: string
@@ -415,6 +415,8 @@ export type CreateContainerRequest = {
   maxScale?: number
   /** Memory limit of the container in MB. */
   memoryLimit?: number
+  /** CPU limit of the container in mvCPU. */
+  cpuLimit?: number
   /** Processing time limit for the container. */
   timeout?: string
   /** Privacy setting of the container. */
@@ -460,6 +462,8 @@ export type UpdateContainerRequest = {
   maxScale?: number
   /** Memory limit of the container in MB. */
   memoryLimit?: number
+  /** CPU limit of the container in mvCPU. */
+  cpuLimit?: number
   /** Processing time limit for the container. */
   timeout?: string
   /** Defines whether to redeploy failed containers. */
