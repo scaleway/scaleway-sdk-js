@@ -264,6 +264,7 @@ export const marshalCreateContainerRequest = (
   request: CreateContainerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  cpu_limit: request.cpuLimit,
   description: request.description,
   environment_variables: request.environmentVariables,
   http_option: request.httpOption ?? 'unknown_http_option',
@@ -340,6 +341,7 @@ export const marshalUpdateContainerRequest = (
   request: UpdateContainerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  cpu_limit: request.cpuLimit,
   description: request.description,
   environment_variables: request.environmentVariables,
   http_option: request.httpOption ?? 'unknown_http_option',
