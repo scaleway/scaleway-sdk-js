@@ -3,7 +3,6 @@
 import randomName from '@scaleway/random-name'
 import {
   isJSONObject,
-  resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
@@ -181,14 +180,9 @@ export const marshalCreateCredentialRequest = (
 ): Record<string, unknown> => ({
   name: request.name || randomName('mnq'),
   namespace_id: request.namespaceId,
-  ...resolveOneOf([
-    {
-      param: 'permissions',
-      value: request.permissions
-        ? marshalPermissions(request.permissions, defaults)
-        : undefined,
-    },
-  ]),
+  permissions: request.permissions
+    ? marshalPermissions(request.permissions, defaults)
+    : undefined,
 })
 
 export const marshalCreateNamespaceRequest = (
@@ -205,14 +199,9 @@ export const marshalUpdateCredentialRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  ...resolveOneOf([
-    {
-      param: 'permissions',
-      value: request.permissions
-        ? marshalPermissions(request.permissions, defaults)
-        : undefined,
-    },
-  ]),
+  permissions: request.permissions
+    ? marshalPermissions(request.permissions, defaults)
+    : undefined,
 })
 
 export const marshalUpdateNamespaceRequest = (
