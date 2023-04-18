@@ -225,11 +225,7 @@ export type CreateCredentialRequest = {
   namespaceId: string
   /** Name of the credentials. */
   name?: string
-  /**
-   * Permissions associated with these credentials.
-   *
-   * One-of ('optionalPermissions'): at most one of 'permissions' could be set.
-   */
+  /** Permissions associated with these credentials. */
   permissions?: Permissions
 }
 
@@ -269,11 +265,7 @@ export type UpdateCredentialRequest = {
   credentialId: string
   /** Name of the credentials. */
   name?: string
-  /**
-   * Permissions associated with these credentials.
-   *
-   * One-of ('optionalPermissions'): at most one of 'permissions' could be set.
-   */
+  /** Permissions associated with these credentials. */
   permissions?: Permissions
 }
 
