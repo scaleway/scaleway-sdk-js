@@ -44,7 +44,7 @@ const jsonContentHeaders = {
 }
 
 /**
- * Apple silicon.
+ * Apple silicon API.
  *
  * Apple Mac mini as a service. Scaleway Apple silicon as-a-Service is built
  * using the latest generation of Apple Mac mini hardware (fifth generation).
@@ -89,7 +89,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a server type. Get a server technical details.
+   * Get a server type. Get technical details (CPU, disk size etc.) of a server
+   * type.
    *
    * @param request - The request {@link GetServerTypeRequest}
    * @returns A Promise of ServerType
@@ -184,7 +185,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all Operating System (OS). List all Operating System (OS). The
+   * List all Operating Systems (OS). List all Operating Systems (OS). The
    * response will include the total number of OS as well as their associated
    * IDs, names and labels.
    *
