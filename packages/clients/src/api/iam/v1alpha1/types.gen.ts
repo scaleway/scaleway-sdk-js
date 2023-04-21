@@ -103,9 +103,9 @@ export interface APIKey {
   updatedAt?: Date
   /** Date and time of API key expiration. */
   expiresAt?: Date
-  /** The default Project ID specified for this API key. */
+  /** Default Project ID specified for this API key. */
   defaultProjectId: string
-  /** Whether or not the API key is editable. */
+  /** Defines whether or not the API key is editable. */
   editable: boolean
   /** IP address of the device that created the API key. */
   creationIp: string
@@ -125,7 +125,7 @@ export interface Application {
   updatedAt?: Date
   /** ID of the Organization. */
   organizationId: string
-  /** Whether or not the application is editable. */
+  /** Defines whether or not the application is editable. */
   editable: boolean
   /** Number of API keys attributed to the application. */
   nbApiKeys: number
@@ -276,7 +276,7 @@ export interface Policy {
   createdAt?: Date
   /** Date and time of last policy update. */
   updatedAt?: Date
-  /** Whether or not a policy is editable. */
+  /** Defines whether or not a policy is editable. */
   editable: boolean
   /** Number of rules of the policy. */
   nbRules: number
@@ -306,7 +306,7 @@ export interface Policy {
    */
   applicationId?: string
   /**
-   * Whether or not a policy is attributed to a principal.
+   * Defines whether or not a policy is attributed to a principal.
    *
    * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId',
    * 'noPrincipal' could be set.
@@ -325,7 +325,7 @@ export interface Quotum {
    */
   limit?: number
   /**
-   * Whether or not the quota is unlimited.
+   * Defines whether or not the quota is unlimited.
    *
    * One-of ('value'): at most one of 'limit', 'unlimited' could be set.
    */
@@ -433,7 +433,7 @@ export interface User {
   twoFactorEnabled?: boolean
   /** Status of user invitation. */
   status: UserStatus
-  /** Whether MFA is enabled. */
+  /** Defines whether MFA is enabled. */
   mfa: boolean
 }
 
@@ -450,12 +450,12 @@ export type ListSSHKeysRequest = {
   name?: string
   /** Filter by Project ID. */
   projectId?: string
-  /** Whether to include disabled SSH keys or not. */
+  /** Defines whether to include disabled SSH keys or not. */
   disabled?: boolean
 }
 
 export type CreateSSHKeyRequest = {
-  /** The name of the SSH key. Max length is 1000. */
+  /** Name of the SSH key. Max length is 1000. */
   name?: string
   /**
    * SSH public key. Currently only the ssh-rsa, ssh-dss (DSA), ssh-ed25519 and
@@ -467,7 +467,7 @@ export type CreateSSHKeyRequest = {
 }
 
 export type GetSSHKeyRequest = {
-  /** The ID of the SSH key. */
+  /** ID of the SSH key. */
   sshKeyId: string
 }
 
@@ -519,7 +519,7 @@ export type ListApplicationsRequest = {
   name?: string
   /** ID of the Organization to filter. */
   organizationId?: string
-  /** Whether to filter out editable applications or not. */
+  /** Defines whether to filter out editable applications or not. */
   editable?: boolean
   /** Filter by list of IDs. */
   applicationIds?: string[]
@@ -655,15 +655,15 @@ export type ListPoliciesRequest = {
   page?: number
   /** ID of the Organization to filter. */
   organizationId?: string
-  /** Whether or not filter out editable policies. */
+  /** Defines whether or not filter out editable policies. */
   editable?: boolean
-  /** Whether or not to filter by list of user IDs. */
+  /** Defines whether or not to filter by list of user IDs. */
   userIds?: string[]
-  /** Whether or not to filter by list of group IDs. */
+  /** Defines whether or not to filter by list of group IDs. */
   groupIds?: string[]
   /** Filter by a list of application IDs. */
   applicationIds?: string[]
-  /** Whether or not the policy is attributed to a principal. */
+  /** Defines whether or not the policy is attributed to a principal. */
   noPrincipal?: boolean
   /** Name of the policy to fetch. */
   policyName?: string
@@ -700,7 +700,7 @@ export type CreatePolicyRequest = {
    */
   applicationId?: string
   /**
-   * Whether or not a policy is attributed to a principal.
+   * Defines whether or not a policy is attributed to a principal.
    *
    * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId',
    * 'noPrincipal' could be set.
@@ -742,7 +742,7 @@ export type UpdatePolicyRequest = {
    */
   applicationId?: string
   /**
-   * Whether or not the policy is attributed to a principal.
+   * Defines whether or not the policy is attributed to a principal.
    *
    * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId',
    * 'noPrincipal' could be set.
@@ -807,9 +807,9 @@ export type ListAPIKeysRequest = {
    *   One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
   userId?: string
-  /** Whether to filter out editable API keys or not. */
+  /** Defines whether to filter out editable API keys or not. */
   editable?: boolean
-  /** Whether to filter out expired API keys or not. */
+  /** Defines whether to filter out expired API keys or not. */
   expired?: boolean
   /** Filter by access key. */
   accessKey?: string
@@ -836,9 +836,9 @@ export type CreateAPIKeyRequest = {
   userId?: string
   /** Expiration date of the API key. */
   expiresAt?: Date
-  /** The default Project ID to use with Object Storage. */
+  /** Default Project ID to use with Object Storage. */
   defaultProjectId?: string
-  /** The description of the API key (max length is 200 characters). */
+  /** Description of the API key (max length is 200 characters). */
   description: string
 }
 
@@ -850,9 +850,9 @@ export type GetAPIKeyRequest = {
 export type UpdateAPIKeyRequest = {
   /** Access key to update. */
   accessKey: string
-  /** The new default Project ID to set. */
+  /** New default Project ID to set. */
   defaultProjectId?: string
-  /** The new description to update. */
+  /** New description to update. */
   description?: string
 }
 
