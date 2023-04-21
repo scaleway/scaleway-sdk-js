@@ -82,7 +82,7 @@ export interface AvailableClusterSetting {
   minValue?: number
   /** Optional validation rule of the setting. */
   regex?: string
-  /** Whether or not the setting is deprecated. */
+  /** Defines whether or not the setting is deprecated. */
   deprecated: boolean
 }
 
@@ -108,7 +108,7 @@ export interface Cluster {
   createdAt?: Date
   /** Update date (Format ISO 8601). */
   updatedAt?: Date
-  /** Whether or not TLS is enabled. */
+  /** Defines whether or not TLS is enabled. */
   tlsEnabled: boolean
   /** List of Database Instance settings. */
   clusterSettings: ClusterSetting[]
@@ -257,9 +257,9 @@ export interface NodeType {
   vcpus: number
   /** Quantity of RAM. */
   memory: number
-  /** The node type is currently disabled. */
+  /** Defines whether node type is currently disabled or not. */
   disabled: boolean
-  /** The node type is currently in beta. */
+  /** Defines whether node type is currently in beta. */
   beta: boolean
   /** Zone of the node type. */
   zone: Zone
@@ -292,7 +292,7 @@ export interface SetEndpointsResponse {
 export type CreateClusterRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** The Project ID in which to create the Database Instance. */
+  /** Project ID in which to create the Database Instance. */
   projectId?: string
   /** Name of the Database Instance. */
   name?: string
@@ -317,7 +317,7 @@ export type CreateClusterRequest = {
    * the cluster will be publicly exposed by default.
    */
   endpoints?: EndpointSpec[]
-  /** Whether or not TLS is enabled. */
+  /** Defines whether or not TLS is enabled. */
   tlsEnabled: boolean
   /** List of advanced settings to be set upon Database Instance initialization. */
   clusterSettings?: ClusterSetting[]
@@ -415,7 +415,7 @@ export type GetClusterMetricsRequest = {
 export type ListNodeTypesRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Whether or not to include disabled types. */
+  /** Defines whether or not to include disabled types. */
   includeDisabledTypes: boolean
   page?: number
   pageSize?: number
@@ -424,11 +424,11 @@ export type ListNodeTypesRequest = {
 export type ListClusterVersionsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Whether or not to include disabled Redis™ engine versions. */
+  /** Defines whether or not to include disabled Redis™ engine versions. */
   includeDisabled: boolean
-  /** Whether or not to include beta Redis™ engine versions. */
+  /** Defines whether or not to include beta Redis™ engine versions. */
   includeBeta: boolean
-  /** Whether or not to include deprecated Redis™ engine versions. */
+  /** Defines whether or not to include deprecated Redis™ engine versions. */
   includeDeprecated: boolean
   /** List Redis™ engine versions that match a given name pattern. */
   version?: string
