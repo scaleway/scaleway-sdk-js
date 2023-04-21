@@ -41,13 +41,13 @@ export type TagStatus = 'unknown' | 'ready' | 'deleting' | 'error' | 'locked'
 
 /** Image. */
 export interface Image {
-  /** The UUID of the image. */
+  /** UUID of the image. */
   id: string
-  /** The name of the image, it must be unique within the namespace. */
+  /** Name of the image, it must be unique within the namespace. */
   name: string
-  /** The UUID of the namespace the image belongs to. */
+  /** UUID of the namespace the image belongs to. */
   namespaceId: string
-  /** The status of the image. */
+  /** Status of the image. */
   status: ImageStatus
   /** Details of the image status. */
   statusMessage?: string
@@ -98,9 +98,9 @@ export interface ListTagsResponse {
 
 /** Namespace. */
 export interface Namespace {
-  /** The UUID of the namespace. */
+  /** UUID of the namespace. */
   id: string
-  /** The name of the namespace, unique in a region accross all organizations. */
+  /** Name of the namespace, unique in a region accross all organizations. */
   name: string
   /** Description of the namespace. */
   description: string
@@ -114,7 +114,7 @@ export interface Namespace {
   statusMessage: string
   /** Endpoint reachable by docker. */
   endpoint: string
-  /** Whether or not namespace is public. */
+  /** Defines whether or not namespace is public. */
   isPublic: boolean
   /**
    * Total size of the namespace, calculated as the sum of the size of all
@@ -133,7 +133,7 @@ export interface Namespace {
 
 /** Tag. */
 export interface Tag {
-  /** The UUID of the tag. */
+  /** UUID of the tag. */
   id: string
   /** Tag name, unique to an image. */
   name: string
@@ -185,7 +185,7 @@ export type GetNamespaceRequest = {
    * config.
    */
   region?: Region
-  /** The UUID of the namespace. */
+  /** UUID of the namespace. */
   namespaceId: string
 }
 
@@ -213,7 +213,7 @@ export type CreateNamespaceRequest = {
    * could be set.
    */
   projectId?: string
-  /** Whether or not namespace is public. */
+  /** Defines whether or not namespace is public. */
   isPublic: boolean
 }
 
@@ -227,7 +227,7 @@ export type UpdateNamespaceRequest = {
   namespaceId: string
   /** Namespace description. */
   description?: string
-  /** Whether or not the namespace is public. */
+  /** Defines whether or not the namespace is public. */
   isPublic?: boolean
 }
 
@@ -237,7 +237,7 @@ export type DeleteNamespaceRequest = {
    * config.
    */
   region?: Region
-  /** The UUID of the namespace. */
+  /** UUID of the namespace. */
   namespaceId: string
 }
 
@@ -276,7 +276,7 @@ export type GetImageRequest = {
    * config.
    */
   region?: Region
-  /** The UUID of the image. */
+  /** UUID of the image. */
   imageId: string
 }
 
@@ -302,7 +302,7 @@ export type DeleteImageRequest = {
    * config.
    */
   region?: Region
-  /** The UUID of the image. */
+  /** UUID of the image. */
   imageId: string
 }
 
@@ -312,7 +312,7 @@ export type ListTagsRequest = {
    * config.
    */
   region?: Region
-  /** The UUID of the image. */
+  /** UUID of the image. */
   imageId: string
   /** A positive integer to choose the page to display. */
   page?: number
@@ -337,7 +337,7 @@ export type GetTagRequest = {
    * config.
    */
   region?: Region
-  /** The UUID of the tag. */
+  /** UUID of the tag. */
   tagId: string
 }
 
@@ -347,7 +347,7 @@ export type DeleteTagRequest = {
    * config.
    */
   region?: Region
-  /** The UUID of the tag. */
+  /** UUID of the tag. */
   tagId: string
   /**
    * If two tags share the same digest the deletion will fail unless this
