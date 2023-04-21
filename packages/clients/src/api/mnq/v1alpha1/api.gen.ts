@@ -39,10 +39,10 @@ const jsonContentHeaders = {
 }
 
 /**
- * MnQ API (beta).
+ * Messaging and Queuing API.
  *
- * This API allows you to manage Scaleway Messaging and Queueing brokers. MnQ
- * API (beta).
+ * This API allows you to manage Scaleway Messaging and Queueing brokers.
+ * Messaging and Queuing API.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
