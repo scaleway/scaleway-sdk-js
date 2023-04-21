@@ -102,9 +102,9 @@ const jsonContentHeaders = {
 }
 
 /**
- * IoT API.
+ * IoT Hub API.
  *
- * This API allows you to manage IoT hubs and devices. IoT API.
+ * This API allows you to manage IoT hubs and devices. IoT Hub API.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -286,7 +286,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Get a hub's metrics.
+   * Get a hub's metrics. Get the metrics of an existing IoT Hub, specified by
+   * its Hub ID.
    *
    * @deprecated
    * @param request - The request {@link GetHubMetricsRequest}
@@ -576,7 +577,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Get a device's metrics.
+   * Get a device's metrics. Get the metrics of an existing device, specified by
+   * its device ID.
    *
    * @deprecated
    * @param request - The request {@link GetDeviceMetricsRequest}
@@ -743,7 +745,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List the Networks.
+   * List the networks.
    *
    * @param request - The request {@link ListNetworksRequest}
    * @returns A Promise of ListNetworksResponse
@@ -752,7 +754,9 @@ export class API extends ParentAPI {
     enrichForPagination('networks', this.pageOfListNetworks, request)
 
   /**
-   * Create a new Network.
+   * Create a new network. Create a new network for an existing hub. Beside the
+   * default network, you can add networks for different data providers.
+   * Possible network types are Sigfox and REST.
    *
    * @param request - The request {@link CreateNetworkRequest}
    * @returns A Promise of CreateNetworkResponse
@@ -774,7 +778,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrieve a specific Network.
+   * Retrieve a specific network. Retrieve an existing network, specified by its
+   * network ID. The response returns full details of the network, including its
+   * type, the topic prefix and its endpoint.
    *
    * @param request - The request {@link GetNetworkRequest}
    * @returns A Promise of Network
@@ -792,7 +798,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a Network.
+   * Delete a Network. Delete an existing network, specified by its network ID.
+   * Deleting a network is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteNetworkRequest}
    */
