@@ -33,7 +33,7 @@ export interface Project {
 
 export type CreateProjectRequest = {
   /** Name of the Project. */
-  name: string
+  name?: string
   /** Organization ID of the Project. */
   organizationId?: string
   /** Description of the Project. */
