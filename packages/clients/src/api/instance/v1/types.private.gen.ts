@@ -240,7 +240,10 @@ export type SetSecurityGroupRequest = {
   modificationDate?: Date
   /** Description of the security group. */
   description: string
-  /** True to block SMTP on IPv4 and IPv6. */
+  /**
+   * True to block SMTP on IPv4 and IPv6. This feature is read only, please open
+   * a support ticket if you need to make it configurable.
+   */
   enableDefaultSecurity: boolean
   /** Default inbound policy. */
   inboundDefaultPolicy?: SecurityGroupPolicy

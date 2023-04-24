@@ -430,7 +430,10 @@ export interface SecurityGroup {
   name: string
   /** Security group description. */
   description: string
-  /** True if SMTP is blocked on IPv4 and IPv6. */
+  /**
+   * True if SMTP is blocked on IPv4 and IPv6. This feature is read only, please
+   * open a support ticket if you need to make it configurable.
+   */
   enableDefaultSecurity: boolean
   /** Default inbound policy. */
   inboundDefaultPolicy: SecurityGroupPolicy
@@ -1335,7 +1338,10 @@ export type CreateSecurityGroupRequest = {
   inboundDefaultPolicy?: SecurityGroupPolicy
   /** Default policy for outbound rules. */
   outboundDefaultPolicy?: SecurityGroupPolicy
-  /** True to block SMTP on IPv4 and IPv6. */
+  /**
+   * True to block SMTP on IPv4 and IPv6. This feature is read only, please open
+   * a support ticket if you need to make it configurable.
+   */
   enableDefaultSecurity?: boolean
 }
 
