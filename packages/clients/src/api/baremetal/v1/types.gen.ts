@@ -482,7 +482,7 @@ export interface Setting {
   id: string
   /** Type of the setting. */
   type: SettingType
-  /** ID of the project ID. */
+  /** ID of the Project ID. */
   projectId: string
   /** Defines whether the setting is enabled. */
   enabled: boolean
@@ -742,7 +742,7 @@ export type ListSettingsRequest = {
   pageSize?: number
   /** Sort order for items in the response. */
   orderBy?: ListSettingsRequestOrderBy
-  /** ID of the project. */
+  /** ID of the Project. */
   projectId?: string
 }
 
