@@ -782,7 +782,8 @@ export type CreateClusterRequest = {
   /**
    * Autoscaler config for the cluster. This field allows to specify some
    * configuration for the autoscaler, which is an implementation of the
-   * [cluster-autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/).
+   * cluster-autoscaler
+   * (https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/).
    */
   autoscalerConfig?: CreateClusterRequestAutoscalerConfig
   /**
