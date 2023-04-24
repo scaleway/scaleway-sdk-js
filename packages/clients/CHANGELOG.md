@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.7.0...@scaleway/sdk@1.8.0) (2023-04-24)
+
+### Features
+
+- **container:** add cpuLimit to create / update containers ([#618](https://github.com/scaleway/scaleway-sdk-js/issues/618)) ([100247e](https://github.com/scaleway/scaleway-sdk-js/commit/100247eda87db35261980f23ea757c9af4bb3324))
+
 ## [1.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.6.0...@scaleway/sdk@1.7.0) (2023-04-17)
 
 ### Features
