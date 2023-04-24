@@ -132,8 +132,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Elastic Metal servers for an organization. List Elastic Metal servers
-   * for a specific organization.
+   * List Elastic Metal servers for an Organization. List Elastic Metal servers
+   * for a specific Organization.
    *
    * @param request - The request {@link ListServersRequest}
    * @returns A Promise of ListServersResponse
@@ -659,7 +659,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all settings. Return all settings for a project ID.
+   * List all settings. Return all settings for a Project ID.
    *
    * @param request - The request {@link ListSettingsRequest}
    * @returns A Promise of ListSettingsResponse
@@ -668,7 +668,7 @@ export class API extends ParentAPI {
     enrichForPagination('settings', this.pageOfListSettings, request)
 
   /**
-   * Update setting. Update a setting for a project ID (enable or disable).
+   * Update setting. Update a setting for a Project ID (enable or disable).
    *
    * @param request - The request {@link UpdateSettingRequest}
    * @returns A Promise of Setting
@@ -720,7 +720,7 @@ export class API extends ParentAPI {
     enrichForPagination('os', this.pageOfListOS, request)
 
   /**
-   * Get an OS with an ID. Return specific OS for the ID.
+   * Get OS with an ID. Return the specific OS for the ID.
    *
    * @param request - The request {@link GetOSRequest}
    * @returns A Promise of OS
