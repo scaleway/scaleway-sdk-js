@@ -50,10 +50,10 @@ const jsonContentHeaders = {
 }
 
 /**
- * Secret Manager API documentation.
+ * Secret Manager API.
  *
- * This API allows you to conveniently store, access and share sensitive data.
- * Secret Manager API documentation.
+ * Secret Manager API. This API allows you to conveniently store, access and
+ * share sensitive data.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
