@@ -102,11 +102,7 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/**
- * Functions API.
- *
- * Serverless functions API. Functions API.
- */
+/** Serverless Functions API. */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
