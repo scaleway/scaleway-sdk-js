@@ -271,7 +271,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List volumes types. List all volume types and their technical details.
+   * List volume types. List all volume types and their technical details.
    *
    * @param request - The request {@link ListVolumesTypesRequest}
    * @returns A Promise of ListVolumesTypesResponse
@@ -445,7 +445,7 @@ export class API extends ParentAPI {
    * preserve your local volumes, you should use the `archive` action instead of
    * `terminate`. Similarly, if you want to keep your block storage volumes, you
    * must first detach them before issuing the `terminate` command. For more
-   * information, read the [Volumes](#volumes-7e8a39) documentation.
+   * information, read the [Volumes](#path-volumes-list-volumes) documentation.
    *
    * @param request - The request {@link ServerActionRequest}
    * @returns A Promise of ServerActionResponse
