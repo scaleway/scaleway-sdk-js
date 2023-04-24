@@ -39,7 +39,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateProjectRequest}
    * @returns A Promise of Project
    */
-  createProject = (request: Readonly<CreateProjectRequest>) =>
+  createProject = (request: Readonly<CreateProjectRequest> = {}) =>
     this.client.fetch<Project>(
       {
         body: JSON.stringify(
