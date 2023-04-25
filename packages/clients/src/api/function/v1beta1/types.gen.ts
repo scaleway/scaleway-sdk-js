@@ -50,6 +50,7 @@ export type FunctionRuntime =
   | 'php82'
   | 'node19'
   | 'go120'
+  | 'node20'
 
 export type FunctionStatus =
   | 'unknown'
