@@ -240,10 +240,12 @@ export interface OS {
   serviceUser?: OSOSField
   /** Object defining the password requirements to install the service. */
   servicePassword?: OSOSField
-  /** State of OS. */
+  /** Defines if the operating system is enabled or not. */
   enabled: boolean
   /** License required (check server options for pricing details). */
   licenseRequired: boolean
+  /** Defines if a specific Organization is allowed to install this OS type. */
+  allowed: boolean
 }
 
 export interface OSOSField {
