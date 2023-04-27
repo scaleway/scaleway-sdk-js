@@ -1,5 +1,6 @@
 import { describe, expect, it } from '@jest/globals'
 import {
+  withAdditionalInterceptors,
   withDefaultPageSize,
   withHTTPClient,
   withProfile,
@@ -29,10 +30,33 @@ const DEFAULT_SETTINGS: Readonly<Settings> = {
   defaultRegion: 'nl-ams',
   defaultZone: 'fr-par-1',
   httpClient: fetch,
+  interceptors: [],
   requestInterceptors: [],
   responseInterceptors: [],
   userAgent: 'scaleway-sdk-js/v1.0.0-beta',
 }
+
+describe('withAdditionalInterceptors', () => {
+  it('appends interceptors to existing ones', () => {
+    const oneInterProfile = withAdditionalInterceptors([
+      {
+        request: req => req,
+      },
+    ])(DEFAULT_SETTINGS)
+    const twoInterProfile = withAdditionalInterceptors([
+      {
+        requestError: err => err,
+        response: res => res,
+        responseError: err => err,
+      },
+    ])(oneInterProfile)
+    expect(twoInterProfile.interceptors.length).toEqual(2)
+    expect(twoInterProfile.interceptors[1].requestError).toBeDefined()
+    expect(twoInterProfile.interceptors[1].response).toBeDefined()
+    expect(twoInterProfile.interceptors[1].responseError).toBeDefined()
+    expect(twoInterProfile.interceptors[1].request).toBeUndefined()
+  })
+})
 
 describe('withProfile', () => {
   it(`doesn't modify Settings object with empty Profile object`, () => {
@@ -53,6 +77,7 @@ describe('withProfile', () => {
         defaultRegion: undefined,
         defaultZone: undefined,
         httpClient: undefined,
+        interceptors: undefined,
         requestInterceptors: undefined,
         responseInterceptors: undefined,
         userAgent: undefined,
@@ -67,6 +92,7 @@ describe('withProfile', () => {
         defaultRegion: null,
         defaultZone: null,
         httpClient: null,
+        interceptors: null,
         requestInterceptors: null,
         responseInterceptors: null,
         userAgent: null,
@@ -81,6 +107,7 @@ describe('withProfile', () => {
         defaultRegion: '',
         defaultZone: '',
         httpClient: '',
+        interceptors: '',
         requestInterceptors: '',
         responseInterceptors: '',
         userAgent: '',
@@ -95,6 +122,7 @@ describe('withProfile', () => {
         defaultRegion: 0,
         defaultZone: 0,
         httpClient: 0,
+        interceptors: 0,
         requestInterceptors: 0,
         responseInterceptors: 0,
         userAgent: 0,
@@ -163,13 +191,18 @@ describe('withProfile', () => {
   })
 
   it('modifies authentication', async () => {
-    const { headers } = await withProfile({
+    const request = new Request(DEFAULT_SETTINGS.apiURL)
+    const reqInterceptor = withProfile({
       accessKey: FILLED_PROFILE.accessKey,
       secretKey: FILLED_PROFILE.secretKey,
-    })(DEFAULT_SETTINGS).requestInterceptors[0](
-      new Request(DEFAULT_SETTINGS.apiURL),
-    )
-    expect(headers.get('x-auth-token')).toStrictEqual(FILLED_PROFILE.secretKey)
+    })(DEFAULT_SETTINGS).interceptors[0].request
+    expect(reqInterceptor).toBeDefined()
+    if (reqInterceptor) {
+      const { headers } = await reqInterceptor(request)
+      expect(headers.get('x-auth-token')).toStrictEqual(
+        FILLED_PROFILE.secretKey,
+      )
+    }
   })
 })
 

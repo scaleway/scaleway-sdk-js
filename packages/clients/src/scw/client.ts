@@ -12,8 +12,7 @@ import type { Fetcher } from './fetch/build-fetcher'
 const DEFAULT_SETTINGS: Settings = {
   apiURL: 'https://api.scaleway.com',
   httpClient: fetch,
-  requestInterceptors: [],
-  responseInterceptors: [],
+  interceptors: [],
   userAgent,
 }
 

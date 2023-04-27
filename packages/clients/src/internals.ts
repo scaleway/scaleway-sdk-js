@@ -1,7 +1,12 @@
 export { isJSONObject } from './helpers/json'
 export { waitForResource } from './internal/async/interval-retrier'
-export type { RequestInterceptor } from './internal/interceptors/request'
-export type { ResponseInterceptor } from './internal/interceptors/response'
+export type {
+  NetworkInterceptors,
+  RequestInterceptor,
+  ResponseInterceptor,
+  RequestErrorInterceptor,
+  ResponseErrorInterceptor,
+} from './internal/interceptors/network'
 export { API } from './scw/api'
 export { authenticateWithSessionToken } from './scw/auth'
 export type { DefaultValues } from './scw/client-settings'

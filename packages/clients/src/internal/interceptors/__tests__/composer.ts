@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals'
-import type { Interceptor } from '../interceptor'
-import { composeInterceptors } from '../interceptor'
+import type { Interceptor } from '../composer'
+import { composeInterceptors } from '../composer'
 
 type StringArrayInterceptor = Interceptor<string[]>
 

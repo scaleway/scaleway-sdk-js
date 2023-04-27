@@ -1,5 +1,6 @@
 import { isBrowser } from '../../helpers/is-browser'
-import { composeInterceptors } from '../../internal/interceptors/interceptor'
+import { composeInterceptors } from '../../internal/interceptors/composer'
+import type { RequestInterceptor, ResponseInterceptor } from '../../internals'
 import { obfuscateAuthHeadersEntry } from '../auth'
 import type { Settings } from '../client-settings'
 import {
@@ -61,12 +62,16 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
   let requestNumber = 0
   const prepareRequest = (requestId: string) =>
     composeInterceptors([
-      ...settings.requestInterceptors,
+      ...(settings.interceptors
+        .map(obj => obj.request)
+        .filter(obj => obj) as RequestInterceptor[]),
       logRequest(requestId, obfuscateInterceptor(obfuscateAuthHeadersEntry)),
     ])
   const prepareResponse = (requestId: string) =>
     composeInterceptors([
-      ...settings.responseInterceptors,
+      ...(settings.interceptors
+        .map(obj => obj.response)
+        .filter(obj => obj) as ResponseInterceptor[]),
       logResponse(requestId),
     ])
 
@@ -75,11 +80,17 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
     unwrapper: ResponseUnmarshaller<T> = asIs,
   ): Promise<T> => {
     const requestId = `${(requestNumber += 1)}`
+    const finalRequest = buildRequest(request, settings)
+    const reqInterceptors = prepareRequest(requestId)
+    const resInterceptors = responseParser<T>(
+      unwrapper,
+      request.responseType ?? 'json',
+    )
 
-    return Promise.resolve(buildRequest(request, settings))
-      .then(prepareRequest(requestId))
+    return Promise.resolve(finalRequest)
+      .then(reqInterceptors)
       .then(httpClient)
       .then(prepareResponse(requestId))
-      .then(responseParser<T>(unwrapper, request.responseType ?? 'json'))
+      .then(resInterceptors)
   }
 }

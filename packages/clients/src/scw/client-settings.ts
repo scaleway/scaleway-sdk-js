@@ -1,5 +1,8 @@
-import type { RequestInterceptor } from '../internal/interceptors/request'
-import type { ResponseInterceptor } from '../internal/interceptors/response'
+import type {
+  NetworkInterceptors,
+  RequestInterceptor,
+  ResponseInterceptor,
+} from '../internal/interceptors/network'
 import {
   isOrganizationId,
   isProjectId,
@@ -37,12 +40,20 @@ export interface Settings extends DefaultValues {
   httpClient: typeof fetch
   /**
    * The Request interceptors.
+   *
+   * @deprecated Please use `interceptors` instead.
    */
-  requestInterceptors: RequestInterceptor[]
+  requestInterceptors?: RequestInterceptor[]
   /**
    * The Response interceptors.
+   *
+   * @deprecated Please use `interceptors` instead.
    */
-  responseInterceptors: ResponseInterceptor[]
+  responseInterceptors?: ResponseInterceptor[]
+  /**
+   * The Network interceptors.
+   */
+  interceptors: NetworkInterceptors[]
   /**
    * The User-Agent sent with each request.
    *

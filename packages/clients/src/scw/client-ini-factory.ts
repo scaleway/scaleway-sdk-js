@@ -1,3 +1,4 @@
+import type { NetworkInterceptors } from '../internals'
 import { authenticateWithSecrets } from './auth'
 import { hasAuthenticationSecrets } from './client-ini-profile'
 import type { Profile } from './client-ini-profile'
@@ -40,9 +41,11 @@ export const withProfile =
       newSettings.defaultZone = profile.defaultZone
     }
     if (hasAuthenticationSecrets(profile)) {
-      newSettings.requestInterceptors = [
-        authenticateWithSecrets(profile),
-        ...settings.requestInterceptors,
+      newSettings.interceptors = [
+        {
+          request: authenticateWithSecrets(profile),
+        },
+        ...newSettings.interceptors,
       ]
     }
 
@@ -108,4 +111,23 @@ export const withUserAgentSuffix =
     userAgent: settings.userAgent
       ? `${settings.userAgent} ${userAgent}`
       : userAgent,
+  })
+
+/**
+ * Instantiates the SDK with additional interceptors.
+ *
+ * @param interceptors - The additional interceptors
+ * @returns A factory {@link ClientConfig}
+ *
+ * @remarks
+ * It doesn't override the existing interceptors, but instead push more to the list.
+ * This method should be used in conjunction with the initializer `createAdvancedClient`.
+ *
+ * @public
+ */
+export const withAdditionalInterceptors =
+  (interceptors: NetworkInterceptors[]) =>
+  (settings: Readonly<Settings>): Settings => ({
+    ...settings,
+    interceptors: settings.interceptors.concat(interceptors),
   })

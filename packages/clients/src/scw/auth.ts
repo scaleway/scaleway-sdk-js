@@ -1,8 +1,8 @@
-import type { RequestInterceptor } from '../internal/interceptors/request'
+import type { RequestInterceptor } from '../internal/interceptors/network'
 import {
   addAsyncHeaderInterceptor,
   addHeaderInterceptor,
-} from '../internal/interceptors/request'
+} from '../internal/interceptors/network'
 import { assertValidAuthenticationSecrets } from './client-ini-profile'
 import type { AuthenticationSecrets } from './client-ini-profile'
 
