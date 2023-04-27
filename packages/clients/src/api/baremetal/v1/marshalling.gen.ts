@@ -218,6 +218,7 @@ export const unmarshalOS = (data: unknown) => {
   }
 
   return {
+    allowed: data.allowed,
     enabled: data.enabled,
     id: data.id,
     licenseRequired: data.license_required,
