@@ -2,7 +2,7 @@ import type {
   NetworkInterceptors,
   RequestInterceptor,
   ResponseInterceptor,
-} from '../internal/interceptors/network'
+} from '../internal/interceptors/types'
 import {
   isOrganizationId,
   isProjectId,

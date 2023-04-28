@@ -1,7 +1,7 @@
 import type {
   RequestInterceptor,
   ResponseInterceptor,
-} from '../../internal/interceptors/network'
+} from '../../internal/interceptors/types'
 import { getLogger } from '../../internal/logger'
 import { LevelResolver, shouldLog } from '../../internal/logger/level-resolver'
 import { dumpRequest, dumpResponse } from './http-dumper'

@@ -6,7 +6,7 @@ export type {
   ResponseInterceptor,
   RequestErrorInterceptor,
   ResponseErrorInterceptor,
-} from './internal/interceptors/network'
+} from './internal/interceptors/types'
 export { API } from './scw/api'
 export { authenticateWithSessionToken } from './scw/auth'
 export type { DefaultValues } from './scw/client-settings'

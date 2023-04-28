@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals'
-import { addAsyncHeaderInterceptor, addHeaderInterceptor } from '../network'
+import { addAsyncHeaderInterceptor, addHeaderInterceptor } from '../helpers'
 
 describe('addHeaderInterceptor', () => {
   it('insertsnothing if value is undefined', async () => {
