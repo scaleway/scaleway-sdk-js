@@ -4,7 +4,7 @@ export type {
   NetworkInterceptors,
   RequestInterceptor,
   ResponseInterceptor,
-  RequestErrorInterceptor,
+  // RequestErrorInterceptor,
   ResponseErrorInterceptor,
 } from './internal/interceptors/types'
 export { API } from './scw/api'

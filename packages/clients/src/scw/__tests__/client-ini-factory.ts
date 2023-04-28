@@ -45,13 +45,13 @@ describe('withAdditionalInterceptors', () => {
     ])(DEFAULT_SETTINGS)
     const twoInterProfile = withAdditionalInterceptors([
       {
-        requestError: err => err,
+        // requestError: err => err,
         response: res => res,
         responseError: err => err,
       },
     ])(oneInterProfile)
     expect(twoInterProfile.interceptors.length).toEqual(2)
-    expect(twoInterProfile.interceptors[1].requestError).toBeDefined()
+    // expect(twoInterProfile.interceptors[1].requestError).toBeDefined()
     expect(twoInterProfile.interceptors[1].response).toBeDefined()
     expect(twoInterProfile.interceptors[1].responseError).toBeDefined()
     expect(twoInterProfile.interceptors[1].request).toBeUndefined()

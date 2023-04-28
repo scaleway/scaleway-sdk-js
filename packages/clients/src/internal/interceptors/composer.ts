@@ -1,4 +1,4 @@
-import type { RequestErrorInterceptor } from './types'
+import type { ResponseErrorInterceptor } from './types'
 
 export interface Interceptor<T> {
   (instance: Readonly<T>): T | Promise<T>
@@ -23,10 +23,33 @@ export const composeInterceptors =
     )
 
 /**
+ * Compose response error interceptors.
+ *
+ * @internal
+ */
+export const composeResponseErrorInterceptors =
+  (interceptors: ResponseErrorInterceptor[]) =>
+  async (request: Request, error: unknown): Promise<unknown> => {
+    let prevError = error
+    for (const interceptor of interceptors) {
+      try {
+        const res = await interceptor(request, prevError)
+
+        return res
+      } catch (err) {
+        prevError = err
+      }
+    }
+
+    throw error
+  }
+
+/**
  * Compose request error interceptors.
  *
  * @internal
  */
+/*
 export const composeRequestErrorInterceptors =
   (interceptors: RequestErrorInterceptor[]) =>
   async (error: unknown): Promise<unknown> => {
@@ -43,3 +66,4 @@ export const composeRequestErrorInterceptors =
 
     throw error
   }
+*/

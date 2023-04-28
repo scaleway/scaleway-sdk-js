@@ -1,6 +1,13 @@
 import { isBrowser } from '../../helpers/is-browser'
-import { composeInterceptors } from '../../internal/interceptors/composer'
-import type { RequestInterceptor, ResponseInterceptor } from '../../internals'
+import {
+  composeInterceptors,
+  composeResponseErrorInterceptors,
+} from '../../internal/interceptors/composer'
+import type {
+  RequestInterceptor,
+  ResponseErrorInterceptor,
+  ResponseInterceptor,
+} from '../../internals'
 import { obfuscateAuthHeadersEntry } from '../auth'
 import type { Settings } from '../client-settings'
 import {
@@ -74,6 +81,18 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
         .filter(obj => obj) as ResponseInterceptor[]),
       logResponse(requestId),
     ])
+  // const prepareRequestErrors = () =>
+  //   composeRequestErrorInterceptors(
+  //     settings.interceptors
+  //     .map(obj => obj.requestError)
+  //     .filter(obj => obj) as RequestErrorInterceptor[]
+  //   )
+  const prepareResponseErrors = () =>
+    composeResponseErrorInterceptors(
+      settings.interceptors
+        .map(obj => obj.responseError)
+        .filter(obj => obj) as ResponseErrorInterceptor[],
+    )
 
   return async <T>(
     request: Readonly<ScwRequest>,
@@ -86,11 +105,15 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
       unwrapper,
       request.responseType ?? 'json',
     )
+    const resErrorInterceptors = prepareResponseErrors()
 
-    return Promise.resolve(finalRequest)
+    const output = Promise.resolve(finalRequest)
       .then(reqInterceptors)
       .then(httpClient)
       .then(prepareResponse(requestId))
       .then(resInterceptors)
+      .catch(obj => resErrorInterceptors(finalRequest, obj) as T)
+
+    return output
   }
 }
