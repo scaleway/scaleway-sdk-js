@@ -226,6 +226,7 @@ export const unmarshalUser = (data: unknown) => {
   }
 
   return {
+    accountRootUserId: data.account_root_user_id,
     createdAt: unmarshalDate(data.created_at),
     deletable: data.deletable,
     email: data.email,
