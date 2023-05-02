@@ -435,6 +435,8 @@ export interface User {
   status: UserStatus
   /** Defines whether MFA is enabled. */
   mfa: boolean
+  /** ID of the account root user associated with the user. */
+  accountRootUserId: string
 }
 
 export type ListSSHKeysRequest = {
