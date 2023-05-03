@@ -131,3 +131,29 @@ export const withAdditionalInterceptors =
     ...settings,
     interceptors: settings.interceptors.concat(interceptors),
   })
+
+/**
+ * Instantiates the SDK with legacy interceptors.
+ */
+/* eslint-disable deprecation/deprecation */
+export const withLegacyInterceptors =
+  () =>
+  (settings: Readonly<Settings>): Settings => {
+    if (!settings.requestInterceptors && !settings.responseInterceptors) {
+      return settings
+    }
+    const allInterceptors = settings.interceptors.concat(
+      (settings.requestInterceptors ?? []).map(obj => ({
+        request: obj,
+      })),
+      (settings.responseInterceptors ?? []).map(obj => ({
+        response: obj,
+      })),
+    )
+
+    return {
+      ...settings,
+      interceptors: allInterceptors,
+    }
+  }
+/* eslint-enable deprecation/deprecation */
