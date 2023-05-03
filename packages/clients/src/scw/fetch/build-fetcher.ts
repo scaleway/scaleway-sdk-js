@@ -101,13 +101,11 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
     )
     const resErrorInterceptors = prepareResponseErrors()
 
-    const output = Promise.resolve(finalRequest)
+    return Promise.resolve(finalRequest)
       .then(reqInterceptors)
       .then(httpClient)
       .then(prepareResponse(requestId))
       .then(resInterceptors)
       .catch(obj => resErrorInterceptors(finalRequest, obj) as T)
-
-    return output
   }
 }
