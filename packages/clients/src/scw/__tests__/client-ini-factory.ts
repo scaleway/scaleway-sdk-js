@@ -1,8 +1,10 @@
 import { describe, expect, it } from '@jest/globals'
+import type { ClientConfig } from '../client-ini-factory'
 import {
   withAdditionalInterceptors,
   withDefaultPageSize,
   withHTTPClient,
+  withLegacyInterceptors,
   withProfile,
   withUserAgent,
   withUserAgentSuffix,
@@ -31,32 +33,8 @@ const DEFAULT_SETTINGS: Readonly<Settings> = {
   defaultZone: 'fr-par-1',
   httpClient: fetch,
   interceptors: [],
-  requestInterceptors: [],
-  responseInterceptors: [],
   userAgent: 'scaleway-sdk-js/v1.0.0-beta',
 }
-
-describe('withAdditionalInterceptors', () => {
-  it('appends interceptors to existing ones', () => {
-    const oneInterProfile = withAdditionalInterceptors([
-      {
-        request: req => req,
-      },
-    ])(DEFAULT_SETTINGS)
-    const twoInterProfile = withAdditionalInterceptors([
-      {
-        // requestError: err => err,
-        response: res => res,
-        responseError: err => err,
-      },
-    ])(oneInterProfile)
-    expect(twoInterProfile.interceptors.length).toEqual(2)
-    // expect(twoInterProfile.interceptors[1].requestError).toBeDefined()
-    expect(twoInterProfile.interceptors[1].response).toBeDefined()
-    expect(twoInterProfile.interceptors[1].responseError).toBeDefined()
-    expect(twoInterProfile.interceptors[1].request).toBeUndefined()
-  })
-})
 
 describe('withProfile', () => {
   it(`doesn't modify Settings object with empty Profile object`, () => {
@@ -269,5 +247,63 @@ describe('withUserAgentSuffix', () => {
     expect(
       JSON.stringify(withUserAgentSuffix(addUserAgent)(newSettings)),
     ).toStrictEqual(JSON.stringify(expectedSettings))
+  })
+})
+
+describe('withAdditionalInterceptors', () => {
+  it('appends interceptors to existing ones', () => {
+    const oneInterProfile = withAdditionalInterceptors([
+      {
+        request: req => req,
+      },
+    ])(DEFAULT_SETTINGS)
+    const twoInterProfile = withAdditionalInterceptors([
+      {
+        response: res => res,
+        responseError: err => err,
+      },
+    ])(oneInterProfile)
+    expect(twoInterProfile.interceptors.length).toEqual(2)
+    expect(twoInterProfile.interceptors[1].response).toBeDefined()
+    expect(twoInterProfile.interceptors[1].responseError).toBeDefined()
+    expect(twoInterProfile.interceptors[1].request).toBeUndefined()
+  })
+})
+
+describe('withLegacyInterceptors', () => {
+  it('changes nothing if no legacy interceptor', () => {
+    expect(
+      JSON.stringify(withLegacyInterceptors()(DEFAULT_SETTINGS)),
+    ).toStrictEqual(JSON.stringify(DEFAULT_SETTINGS))
+  })
+
+  it('appends the legacy request and response interceptors', () => {
+    const legacyInterceptors: ClientConfig = (obj: Settings): Settings => ({
+      ...obj,
+      requestInterceptors: [(req): Request => req, (req): Request => req],
+      responseInterceptors: [(res): Response => res],
+    })
+    expect(
+      withLegacyInterceptors()(legacyInterceptors(DEFAULT_SETTINGS))
+        .interceptors.length,
+    ).toBe(3)
+
+    const legacyReqInterceptors: ClientConfig = (obj: Settings): Settings => ({
+      ...obj,
+      requestInterceptors: [(req): Request => req, (req): Request => req],
+    })
+    expect(
+      withLegacyInterceptors()(legacyReqInterceptors(DEFAULT_SETTINGS))
+        .interceptors.length,
+    ).toBe(2)
+
+    const legacyResInterceptors: ClientConfig = (obj: Settings): Settings => ({
+      ...obj,
+      responseInterceptors: [(res): Response => res],
+    })
+    expect(
+      withLegacyInterceptors()(legacyResInterceptors(DEFAULT_SETTINGS))
+        .interceptors.length,
+    ).toBe(1)
   })
 })
