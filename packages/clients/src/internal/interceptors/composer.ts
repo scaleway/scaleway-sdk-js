@@ -43,27 +43,3 @@ export const composeResponseErrorInterceptors =
 
     throw error
   }
-
-/**
- * Compose request error interceptors.
- *
- * @internal
- */
-/*
-export const composeRequestErrorInterceptors =
-  (interceptors: RequestErrorInterceptor[]) =>
-  async (error: unknown): Promise<unknown> => {
-    let prevError = error
-    for (const interceptor of interceptors) {
-      try {
-        const res = await interceptor(prevError)
-
-        return res
-      } catch (err) {
-        prevError = err
-      }
-    }
-
-    throw error
-  }
-*/
