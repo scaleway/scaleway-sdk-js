@@ -1,13 +1,13 @@
 import { isBrowser } from '../../helpers/is-browser'
-import {
-  composeInterceptors,
-  composeResponseErrorInterceptors,
-} from '../../internal/interceptors/composer'
 import type {
   RequestInterceptor,
   ResponseErrorInterceptor,
   ResponseInterceptor,
-} from '../../internals'
+} from '../../index'
+import {
+  composeInterceptors,
+  composeResponseErrorInterceptors,
+} from '../../internal/interceptors/composer'
 import { obfuscateAuthHeadersEntry } from '../auth'
 import type { Settings } from '../client-settings'
 import {
