@@ -81,12 +81,6 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
         .filter(obj => obj) as ResponseInterceptor[]),
       logResponse(requestId),
     ])
-  // const prepareRequestErrors = () =>
-  //   composeRequestErrorInterceptors(
-  //     settings.interceptors
-  //     .map(obj => obj.requestError)
-  //     .filter(obj => obj) as RequestErrorInterceptor[]
-  //   )
   const prepareResponseErrors = () =>
     composeResponseErrorInterceptors(
       settings.interceptors

@@ -111,4 +111,25 @@ describe(`buildFetcher (mock)`, () => {
       }),
     ).resolves.toMatchObject({ any_parameter: 'any-value' })
   })
+
+  it('gets a response with response error interceptor despite the error', () => {
+    mockedFetch.mockRejectedValue(new TypeError(''))
+
+    return expect(
+      buildFetcher(
+        {
+          ...DEFAULT_SETTINGS,
+          interceptors: [
+            {
+              responseError: () => Promise.resolve(42),
+            },
+          ],
+        },
+        global.fetch,
+      )({
+        method: 'GET',
+        path: '/will-trigger-an-error',
+      }),
+    ).resolves.toBe(42)
+  })
 })
