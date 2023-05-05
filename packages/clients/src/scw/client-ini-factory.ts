@@ -116,12 +116,42 @@ export const withUserAgentSuffix =
 /**
  * Instantiates the SDK with additional interceptors.
  *
- * @param interceptors - The additional interceptors
+ * @param interceptors - The additional {@link NetworkInterceptors} interceptors
  * @returns A factory {@link ClientConfig}
  *
  * @remarks
  * It doesn't override the existing interceptors, but instead push more to the list.
  * This method should be used in conjunction with the initializer `createAdvancedClient`.
+ *
+ * @example
+ * ```
+ * withAdditionalInterceptors([
+ *   {
+ *     request: ({ request }) => {
+ *       console.log(`Do something with ${JSON.stringify(request)}`)
+ *       return request
+ *     },
+ *     response: ({ response }) => {
+ *       console.log(`Do something with ${JSON.stringify(response)}`)
+ *       return response
+ *     },
+ *     responseError: async ({
+ *       request,
+ *       error,
+ *     }: {
+ *       request: Request
+ *       error: unknown
+ *     }) => {
+ *       console.log(
+ *         `Do something with ${JSON.stringify(request)} and ${JSON.stringify(
+ *           error,
+ *         )}`,
+ *       )
+ *       throw error // or return Promise.resolve(someData)
+ *     },
+ *   },
+ * ])
+ * ```
  *
  * @public
  */
