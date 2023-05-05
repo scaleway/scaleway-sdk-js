@@ -5,8 +5,9 @@ import type {
   ResponseInterceptor,
 } from '../../index'
 import {
-  composeInterceptors,
+  composeRequestInterceptors,
   composeResponseErrorInterceptors,
+  composeResponseInterceptors,
 } from '../../internal/interceptors/composer'
 import { obfuscateAuthHeadersEntry } from '../auth'
 import type { Settings } from '../client-settings'
@@ -68,14 +69,14 @@ export type Fetcher = <T>(
 export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
   let requestNumber = 0
   const prepareRequest = (requestId: string) =>
-    composeInterceptors([
+    composeRequestInterceptors([
       ...(settings.interceptors
         .map(obj => obj.request)
         .filter(obj => obj) as RequestInterceptor[]),
       logRequest(requestId, obfuscateInterceptor(obfuscateAuthHeadersEntry)),
     ])
   const prepareResponse = (requestId: string) =>
-    composeInterceptors([
+    composeResponseInterceptors([
       ...(settings.interceptors
         .map(obj => obj.response)
         .filter(obj => obj) as ResponseInterceptor[]),
@@ -95,7 +96,8 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
     const requestId = `${(requestNumber += 1)}`
     const finalRequest = buildRequest(request, settings)
     const reqInterceptors = prepareRequest(requestId)
-    const resInterceptors = responseParser<T>(
+    const resInterceptors = prepareResponse(requestId)
+    const resUnmarshaller = responseParser<T>(
       unwrapper,
       request.responseType ?? 'json',
     )
@@ -104,8 +106,8 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
     return Promise.resolve(finalRequest)
       .then(reqInterceptors)
       .then(httpClient)
-      .then(prepareResponse(requestId))
       .then(resInterceptors)
+      .then(resUnmarshaller)
       .catch(obj => resErrorInterceptors(finalRequest, obj) as T)
   }
 }

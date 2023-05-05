@@ -44,10 +44,11 @@ class ObfuscatedRequest extends Request {
  */
 export const obfuscateInterceptor =
   (obfuscate: HeaderEntryMapper): RequestInterceptor =>
-  request =>
+  ({ request }) =>
     new ObfuscatedRequest(request, obfuscate)
 
-const identity = <T>(instance: T) => instance
+const identity: RequestInterceptor = ({ request }: { request: Request }) =>
+  request
 
 /**
  * Creates an interceptor to log the requests.
@@ -63,11 +64,11 @@ export const logRequest =
     identifier: string,
     obfuscate: RequestInterceptor = identity,
   ): RequestInterceptor =>
-  async request => {
+  async ({ request }) => {
     if (shouldLog(LevelResolver[getLogger().logLevel], 'debug')) {
       getLogger().debug(
         `--------------- Scaleway SDK REQUEST ${identifier} ---------------
-${await dumpRequest(await obfuscate(request))}
+${await dumpRequest(await obfuscate({ request }))}
 ---------------------------------------------------------`,
       )
     }
@@ -85,7 +86,7 @@ ${await dumpRequest(await obfuscate(request))}
  */
 export const logResponse =
   (identifier: string): ResponseInterceptor =>
-  async response => {
+  async ({ response }) => {
     if (shouldLog(LevelResolver[getLogger().logLevel], 'debug')) {
       getLogger().debug(
         `--------------- Scaleway SDK RESPONSE ${identifier} ---------------

@@ -176,7 +176,7 @@ describe('withProfile', () => {
     })(DEFAULT_SETTINGS).interceptors[0].request
     expect(reqInterceptor).toBeDefined()
     if (reqInterceptor) {
-      const { headers } = await reqInterceptor(request)
+      const { headers } = await reqInterceptor({ request })
       expect(headers.get('x-auth-token')).toStrictEqual(
         FILLED_PROFILE.secretKey,
       )
@@ -254,12 +254,12 @@ describe('withAdditionalInterceptors', () => {
   it('appends interceptors to existing ones', () => {
     const oneInterProfile = withAdditionalInterceptors([
       {
-        request: req => req,
+        request: ({ request }) => request,
       },
     ])(DEFAULT_SETTINGS)
     const twoInterProfile = withAdditionalInterceptors([
       {
-        response: res => res,
+        response: ({ response }) => response,
         responseError: err => err,
       },
     ])(oneInterProfile)
@@ -280,8 +280,11 @@ describe('withLegacyInterceptors', () => {
   it('appends the legacy request and response interceptors', () => {
     const legacyInterceptors: ClientConfig = (obj: Settings): Settings => ({
       ...obj,
-      requestInterceptors: [(req): Request => req, (req): Request => req],
-      responseInterceptors: [(res): Response => res],
+      requestInterceptors: [
+        ({ request }): Request => request,
+        ({ request }): Request => request,
+      ],
+      responseInterceptors: [({ response }): Response => response],
     })
     expect(
       withLegacyInterceptors()(legacyInterceptors(DEFAULT_SETTINGS))
@@ -290,7 +293,10 @@ describe('withLegacyInterceptors', () => {
 
     const legacyReqInterceptors: ClientConfig = (obj: Settings): Settings => ({
       ...obj,
-      requestInterceptors: [(req): Request => req, (req): Request => req],
+      requestInterceptors: [
+        ({ request }): Request => request,
+        ({ request }): Request => request,
+      ],
     })
     expect(
       withLegacyInterceptors()(legacyReqInterceptors(DEFAULT_SETTINGS))
@@ -299,7 +305,7 @@ describe('withLegacyInterceptors', () => {
 
     const legacyResInterceptors: ClientConfig = (obj: Settings): Settings => ({
       ...obj,
-      responseInterceptors: [(res): Response => res],
+      responseInterceptors: [({ response }): Response => response],
     })
     expect(
       withLegacyInterceptors()(legacyResInterceptors(DEFAULT_SETTINGS))

@@ -43,13 +43,13 @@ describe(`logRequest`, () => {
 
   it(`logs nothing if the level isn't high enough`, async () => {
     enableDummyLogger('warn')
-    await logRequest('1')(request)
+    await logRequest('1')({ request })
     expect(latestMessage).toBe('')
   })
 
   it(`logs something if the level is high enough`, async () => {
     enableDummyLogger('debug')
-    await logRequest('1')(request)
+    await logRequest('1')({ request })
     expect(
       latestMessage.startsWith('--------------- Scaleway SDK REQUEST 1'),
     ).toBe(true)
@@ -61,13 +61,13 @@ describe(`logResponse`, () => {
 
   it(`logs nothing if the level isn't high enough`, async () => {
     enableDummyLogger('warn')
-    await logResponse('1')(response)
+    await logResponse('1')({ response })
     expect(latestMessage).toBe('')
   })
 
   it(`logs something if the level is high enough`, async () => {
     enableDummyLogger('debug')
-    await logResponse('1')(response)
+    await logResponse('1')({ response })
     expect(
       latestMessage.startsWith('--------------- Scaleway SDK RESPONSE 1'),
     ).toBe(true)
@@ -81,22 +81,22 @@ describe('obfuscateInterceptor', () => {
       [name, `${preprendValue}${value}`]
 
   it('changes the request headers', async () => {
-    const obfRequest = await obfuscateInterceptor(prependInterceptor('obj-'))(
-      new Request('https://api.scaleway.com', {
+    const obfRequest = await obfuscateInterceptor(prependInterceptor('obj-'))({
+      request: new Request('https://api.scaleway.com', {
         headers: { 'X-Random-Key': 'value' },
       }),
-    )
+    })
 
     expect(obfRequest).toBeInstanceOf(Request)
     expect(obfRequest.headers.get('X-Random-Key')).toBe('obj-value')
   })
 
   it('clones the request without altering the headers', async () => {
-    const obfRequest = await obfuscateInterceptor(prependInterceptor('obj-'))(
-      new Request('https://api.scaleway.com', {
+    const obfRequest = await obfuscateInterceptor(prependInterceptor('obj-'))({
+      request: new Request('https://api.scaleway.com', {
         headers: { 'X-Random-Key': 'value' },
       }),
-    )
+    })
 
     expect(obfRequest.clone().headers.get('X-Random-Key')).toBe('obj-value')
   })

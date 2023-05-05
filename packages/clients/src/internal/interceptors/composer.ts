@@ -1,25 +1,41 @@
-import type { ResponseErrorInterceptor } from './types'
-
-export interface Interceptor<T> {
-  (instance: Readonly<T>): T | Promise<T>
-}
+import type {
+  RequestInterceptor,
+  ResponseErrorInterceptor,
+  ResponseInterceptor,
+} from './types'
 
 /**
- * Composes interceptors.
+ * Composes request interceptors.
  *
- * @param interceptors - A list of interceptors (that modify an object instance)
+ * @param interceptors - A list of request interceptors
  * @returns An async composed interceptor
  *
  * @internal
  */
-export const composeInterceptors =
-  <T>(interceptors: Interceptor<T>[]) =>
-  async (instance: T): Promise<T> =>
+export const composeRequestInterceptors =
+  (interceptors: RequestInterceptor[]) =>
+  async (request: Request): Promise<Request> =>
     interceptors.reduce(
-      async (asyncResult, interceptor) => interceptor(await asyncResult),
-      new Promise<T>(resolve => {
-        resolve(instance)
-      }),
+      async (asyncResult, interceptor): Promise<Request> =>
+        interceptor({ request: await asyncResult }),
+      Promise.resolve(request),
+    )
+
+/**
+ * Composes response interceptors.
+ *
+ * @param interceptors - A list of response interceptors
+ * @returns An async composed interceptor
+ *
+ * @internal
+ */
+export const composeResponseInterceptors =
+  (interceptors: ResponseInterceptor[]) =>
+  async (response: Response): Promise<Response> =>
+    interceptors.reduce(
+      async (asyncResult, interceptor): Promise<Response> =>
+        interceptor({ response: await asyncResult }),
+      Promise.resolve(response),
     )
 
 /**
@@ -33,7 +49,7 @@ export const composeResponseErrorInterceptors =
     let prevError = error
     for (const interceptor of interceptors) {
       try {
-        const res = await interceptor(request, prevError)
+        const res = await interceptor({ request, error: prevError })
 
         return res
       } catch (err) {

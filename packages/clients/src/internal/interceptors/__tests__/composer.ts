@@ -1,41 +1,25 @@
 import { describe, expect, it } from '@jest/globals'
-import type { Interceptor } from '../composer'
 import {
-  composeInterceptors,
+  composeRequestInterceptors,
   composeResponseErrorInterceptors,
 } from '../composer'
 
-type StringArrayInterceptor = Interceptor<string[]>
+describe('composeRequestInterceptors', () => {
+  it('modifies the request header', async () => {
+    const interceptor = composeRequestInterceptors([
+      ({ request }): Request => {
+        const clone = request.clone()
+        clone.headers.set('new-header', '42')
 
-const addStrInterceptor =
-  (str: string): StringArrayInterceptor =>
-  (list: Readonly<string[]>): string[] =>
-    list.concat(str)
-
-const removeFirstStrInterceptor =
-  (): StringArrayInterceptor =>
-  (list: Readonly<string[]>): string[] =>
-    list.slice(1)
-
-describe('composeInterceptors', () => {
-  it('calls one interceptor', async () => {
-    const interceptor = composeInterceptors([addStrInterceptor('Fusion')])
-    expect(await interceptor(['Tree', 'Animal'])).toStrictEqual([
-      'Tree',
-      'Animal',
-      'Fusion',
+        return clone
+      },
     ])
-  })
 
-  it('compose two interceptors', async () => {
-    const interceptor = composeInterceptors([
-      addStrInterceptor('Fusion'),
-      removeFirstStrInterceptor(),
-    ])
-    expect(await interceptor(['Tree', 'Animal'])).toStrictEqual([
-      'Animal',
-      'Fusion',
-    ])
+    return expect(
+      interceptor(new Request('https://api.scaleway.com')).then(obj =>
+        obj.headers.get('new-header'),
+      ),
+    ).resolves.toBe('42')
   })
 })
 
@@ -52,12 +36,12 @@ describe('composeResponseErrorInterceptors', () => {
     }
 
     const interceptors = composeResponseErrorInterceptors([
-      (_: Request, error: unknown): Promise<unknown> => {
+      ({ error }): Promise<unknown> => {
         throw error instanceof NumberError
           ? new NumberError(error.counter + 1)
           : error
       },
-      (_: Request, error: unknown): Promise<unknown> => {
+      ({ error }): Promise<unknown> => {
         throw error instanceof NumberError
           ? new NumberError(error.counter + 2)
           : error
@@ -69,11 +53,11 @@ describe('composeResponseErrorInterceptors', () => {
 
   it('stops at the second interceptor (amongst three) if it resolves', () => {
     const interceptors = composeResponseErrorInterceptors([
-      (_: Request, error: unknown): Promise<unknown> => {
+      ({ error }): Promise<unknown> => {
         throw error
       },
       (): Promise<unknown> => Promise.resolve(42),
-      (_: Request, error: unknown): Promise<unknown> => {
+      ({ error }): Promise<unknown> => {
         throw error
       },
     ])(new Request('https://api.scaleway.com'), new TypeError(''))
