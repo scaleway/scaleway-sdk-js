@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.8.0...@scaleway/sdk@1.9.0) (2023-05-08)
+
+### Features
+
+- **account/v2:** default generated project name ([#636](https://github.com/scaleway/scaleway-sdk-js/issues/636)) ([c75d638](https://github.com/scaleway/scaleway-sdk-js/commit/c75d638ae73ca8079d863ddaa56b0267868f09a3))
+- **baremetal:** define if an organization is allowed to install the OS ([#640](https://github.com/scaleway/scaleway-sdk-js/issues/640)) ([6cdffdf](https://github.com/scaleway/scaleway-sdk-js/commit/6cdffdf99109e278bfb7895edd5344acb0aebc62))
+- **function:** add node20 runtime ([#637](https://github.com/scaleway/scaleway-sdk-js/issues/637)) ([6fd59dd](https://github.com/scaleway/scaleway-sdk-js/commit/6fd59dd9be0aa7e727d31d60089ec84e7cb4c8e2))
+- **iam:** add accountRootUserId in User ([#644](https://github.com/scaleway/scaleway-sdk-js/issues/644)) ([3897493](https://github.com/scaleway/scaleway-sdk-js/commit/38974939fe8aa86c1cc3f5f9b2ba43149cca5938))
+
 ## [1.8.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.7.0...@scaleway/sdk@1.8.0) (2023-04-24)
 
 ### Features
