@@ -19,6 +19,8 @@ interface TokenAccessor {
  * @param getToken - The token accessor
  * @returns The request interceptor
  *
+ * @deprecated Please use addAsyncHeaderInterceptor instead.
+ *
  * @internal
  */
 export const authenticateWithSessionToken = (
