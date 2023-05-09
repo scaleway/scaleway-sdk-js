@@ -43,7 +43,7 @@ export interface DnsRecord {
   name: string
   /** Record type. */
   type: DnsRecordType
-  /** Record time to live. */
+  /** Record time-to-live. */
   ttl: number
   /** Record value. */
   value: string
@@ -65,39 +65,39 @@ export interface DnsRecords {
 
 /** Hosting. */
 export interface Hosting {
-  /** ID of the hosting. */
+  /** ID of the Web Hosting plan. */
   id: string
-  /** Organization ID of the hosting. */
+  /** ID of the Scaleway Organization the Web Hosting plan belongs to. */
   organizationId: string
-  /** Project ID of the hosting. */
+  /** ID of the Scaleway Project the Web Hosting plan belongs to. */
   projectId: string
-  /** Last update date. */
+  /** Date on which the Web Hosting plan was last updated. */
   updatedAt?: Date
-  /** Creation date. */
+  /** Date on which the Web Hosting plan was created. */
   createdAt?: Date
-  /** The hosting status. */
+  /** Status of the Web Hosting plan. */
   status: HostingStatus
   /** Hostname of the host platform. */
   platformHostname: string
   /** Number of the host platform. */
   platformNumber?: number
-  /** ID of the active offer. */
+  /** ID of the active offer for the Web Hosting plan. */
   offerId: string
-  /** Name of the active offer. */
+  /** Name of the active offer for the Web Hosting plan. */
   offerName: string
-  /** Main domain of the hosting. */
+  /** Main domain associated with the Web Hosting plan. */
   domain: string
-  /** Tags of the hosting. */
+  /** List of tags associated with the Web Hosting plan. */
   tags: string[]
-  /** Active options of the hosting. */
+  /** Array of any options activated for the Web Hosting plan. */
   options: HostingOption[]
-  /** DNS status of the hosting. */
+  /** DNS status of the Web Hosting plan. */
   dnsStatus: HostingDnsStatus
-  /** URL to connect to cPanel Dashboard and to Webmail interface. */
+  /** URL to connect to cPanel dashboard and to Webmail interface. */
   cpanelUrls?: HostingCpanelUrls
-  /** Main hosting cPanel username. */
+  /** Main Web Hosting cPanel username. */
   username: string
-  /** Region of the hosting. */
+  /** Region where the Web Hosting plan is hosted. */
   region: Region
 }
 
@@ -116,15 +116,15 @@ export interface HostingOption {
 
 /** List hostings response. */
 export interface ListHostingsResponse {
-  /** Number of returned hostings. */
+  /** Number of Web Hosting plans returned. */
   totalCount: number
-  /** List of hostings. */
+  /** List of Web Hosting plans. */
   hostings: Hosting[]
 }
 
 /** List offers response. */
 export interface ListOffersResponse {
-  /** List of returned offers. */
+  /** List of offers. */
   offers: Offer[]
 }
 
@@ -134,7 +134,7 @@ export interface Nameserver {
   hostname: string
   /** Status of the nameserver. */
   status: NameserverStatus
-  /** If the nameserver is the default. */
+  /** Defines whether the nameserver is the default one. */
   isDefault: boolean
 }
 
@@ -144,13 +144,16 @@ export interface Offer {
   id: string
   /** Unique identifier used for billing. */
   billingOperationPath: string
-  /** Offer product. */
+  /** Product constituting this offer. */
   product?: OfferProduct
-  /** Offer price. */
+  /** Price of this offer. */
   price?: Money
-  /** If offer is available for a specific hosting. */
+  /**
+   * If a hosting_id was specified in the call, defines whether this offer is
+   * available for that Web Hosting plan to migrate (update) to.
+   */
   available: boolean
-  /** If not available, return quota warnings. */
+  /** Quota warnings, if the offer is not available for the specified hosting_id. */
   quotaWarnings: OfferQuotaWarning[]
 }
 
@@ -175,17 +178,20 @@ export type CreateHostingRequest = {
    * config.
    */
   region?: Region
-  /** ID of the selected offer for the hosting. */
+  /** ID of the selected offer for the Web Hosting plan. */
   offerId: string
-  /** Project ID of the hosting. */
+  /** ID of the Scaleway Project in which to create the Web Hosting plan. */
   projectId?: string
-  /** Contact email of the client for the hosting. */
+  /** Contact email for the Web Hosting client. */
   email?: string
-  /** The tags of the hosting. */
+  /** List of tags for the Web Hosting plan. */
   tags?: string[]
-  /** The domain name of the hosting. */
+  /**
+   * Domain name to link to the Web Hosting plan. You must already own this
+   * domain name, and have completed the DNS validation process beforehand.
+   */
   domain: string
-  /** IDs of the selected options for the hosting. */
+  /** IDs of any selected additional options for the Web Hosting plan. */
   optionIds?: string[]
 }
 
@@ -195,24 +201,42 @@ export type ListHostingsRequest = {
    * config.
    */
   region?: Region
-  /** A positive integer to choose the page to return. */
+  /**
+   * Page number to return, from the paginated results (must be a positive
+   * integer).
+   */
   page?: number
   /**
-   * A positive integer lower or equal to 100 to select the number of items to
-   * return.
+   * Number of Web Hosting plans to return (must be a positive integer lower or
+   * equal to 100).
    */
   pageSize?: number
-  /** Define the order of the returned hostings. */
+  /** Sort order for Web Hosting plans in the response. */
   orderBy?: ListHostingsRequestOrderBy
-  /** Return hostings with these tags. */
+  /**
+   * Tags to filter for, only Web Hosting plans with matching tags will be
+   * returned.
+   */
   tags?: string[]
-  /** Return hostings with these statuses. */
+  /**
+   * Statuses to filter for, only Web Hosting plans with matching statuses will
+   * be returned.
+   */
   statuses?: HostingStatus[]
-  /** Return hostings with this domain. */
+  /**
+   * Domain to filter for, only Web Hosting plans associated with this domain
+   * will be returned.
+   */
   domain?: string
-  /** Return hostings from this project ID. */
+  /**
+   * Project ID to filter for, only Web Hosting plans from this Project will be
+   * returned.
+   */
   projectId?: string
-  /** Return hostings from this organization ID. */
+  /**
+   * Organization ID to filter for, only Web Hosting plans from this
+   * Organization will be returned.
+   */
   organizationId?: string
 }
 
@@ -234,13 +258,13 @@ export type UpdateHostingRequest = {
   region?: Region
   /** Hosting ID. */
   hostingId: string
-  /** New contact email for the hosting. */
+  /** New contact email for the Web Hosting plan. */
   email?: string
-  /** New tags for the hosting. */
+  /** New tags for the Web Hosting plan. */
   tags?: string[]
-  /** New options IDs for the hosting. */
+  /** IDs of the new options for the Web Hosting plan. */
   optionIds?: string[]
-  /** New offer ID for the hosting. */
+  /** ID of the new offer for the Web Hosting plan. */
   offerId?: string
 }
 
@@ -270,7 +294,7 @@ export type GetDomainDnsRecordsRequest = {
    * config.
    */
   region?: Region
-  /** Domain associated to the DNS records. */
+  /** Domain associated with the DNS records. */
   domain: string
 }
 
@@ -280,12 +304,21 @@ export type ListOffersRequest = {
    * config.
    */
   region?: Region
-  /** Define the order of the returned hostings. */
+  /** Sort order of offers in the response. */
   orderBy?: ListOffersRequestOrderBy
-  /** Select only offers, no options. */
+  /**
+   * Defines whether the response should consist of offers only, without
+   * options.
+   */
   withoutOptions: boolean
-  /** Select only options. */
+  /**
+   * Defines whether the response should consist of options only, without
+   * offers.
+   */
   onlyOptions: boolean
-  /** Define a specific hosting id (optional). */
+  /**
+   * ID of a Web Hosting plan, to check compatibility with returned offers (in
+   * case of wanting to update the plan).
+   */
   hostingId?: string
 }
