@@ -94,20 +94,25 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
     unwrapper: ResponseUnmarshaller<T> = asIs,
   ): Promise<T> => {
     const requestId = `${(requestNumber += 1)}`
-    const finalRequest = buildRequest(request, settings)
     const reqInterceptors = prepareRequest(requestId)
-    const resInterceptors = prepareResponse(requestId)
-    const resUnmarshaller = responseParser<T>(
-      unwrapper,
-      request.responseType ?? 'json',
-    )
-    const resErrorInterceptors = prepareResponseErrors()
+    const finalRequest = await reqInterceptors(buildRequest(request, settings))
 
-    return Promise.resolve(finalRequest)
-      .then(reqInterceptors)
-      .then(httpClient)
-      .then(resInterceptors)
-      .then(resUnmarshaller)
-      .catch(obj => resErrorInterceptors(finalRequest, obj) as T)
+    try {
+      const response = await httpClient(finalRequest)
+      const resInterceptors = prepareResponse(requestId)
+      const finalResponse = await resInterceptors(response)
+      const resUnmarshaller = responseParser<T>(
+        unwrapper,
+        request.responseType ?? 'json',
+      )
+      const unmarshaledResponse = await resUnmarshaller(finalResponse)
+
+      return unmarshaledResponse
+    } catch (err) {
+      const resErrorInterceptors = prepareResponseErrors()
+      const handledError = (await resErrorInterceptors(finalRequest, err)) as T
+
+      return handledError
+    }
   }
 }
