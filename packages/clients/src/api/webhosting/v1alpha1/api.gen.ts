@@ -36,13 +36,14 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/** Webhosting API. */
+/** Web Hosting API. */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par']
 
   /**
-   * Create a hosting.
+   * Order a Web Hosting plan. Order a Web Hosting plan, specifying the offer
+   * type required via the `offer_id` parameter.
    *
    * @param request - The request {@link CreateHostingRequest}
    * @returns A Promise of Hosting
@@ -91,7 +92,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all hostings.
+   * List all Web Hosting plans. List all of your existing Web Hosting plans.
+   * Various filters are available to limit the results, including filtering by
+   * domain, status, tag and Project ID.
    *
    * @param request - The request {@link ListHostingsRequest}
    * @returns A Promise of ListHostingsResponse
@@ -100,7 +103,8 @@ export class API extends ParentAPI {
     enrichForPagination('hostings', this.pageOfListHostings, request)
 
   /**
-   * Get a hosting. Get the details of a Hosting with the given ID.
+   * Get a Web Hosting plan. Get the details of one of your existing Web Hosting
+   * plans, specified by its `hosting_id`.
    *
    * @param request - The request {@link GetHostingRequest}
    * @returns A Promise of Hosting
@@ -138,7 +142,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a hosting.
+   * Update a Web Hosting plan. Update the details of one of your existing Web
+   * Hosting plans, specified by its `hosting_id`. You can update parameters
+   * including the contact email address, tags, options and offer.
    *
    * @param request - The request {@link UpdateHostingRequest}
    * @returns A Promise of Hosting
@@ -160,7 +166,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a hosting. Delete a hosting with the given ID.
+   * Delete a Web Hosting plan. Delete a Web Hosting plan, specified by its
+   * `hosting_id`. Note that deletion is not immediate: it will take place at
+   * the end of the calendar month, after which time your Web Hosting plan and
+   * all its data (files and emails) will be irreversibly lost.
    *
    * @param request - The request {@link DeleteHostingRequest}
    * @returns A Promise of Hosting
@@ -178,7 +187,12 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Restore a hosting. Restore a hosting with the given ID.
+   * Restore a Web Hosting plan. When you [delete a Web Hosting
+   * plan](#path-hostings-delete-a-hosting), definitive deletion does not take
+   * place until the end of the calendar month. In the time between initiating
+   * the deletion, and definitive deletion at the end of the month, you can
+   * choose to **restore** the Web Hosting plan, using this endpoint and
+   * specifying its `hosting_id`.
    *
    * @param request - The request {@link RestoreHostingRequest}
    * @returns A Promise of Hosting
@@ -201,8 +215,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get the DNS records. The set of DNS record of a specific domain associated
-   * to a hosting.
+   * Get DNS records. Get the set of DNS records of a specified domain
+   * associated with a Web Hosting plan.
    *
    * @param request - The request {@link GetDomainDnsRecordsRequest}
    * @returns A Promise of DnsRecords
@@ -220,7 +234,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all offers.
+   * List all offers. List the different Web Hosting offers, and their options,
+   * available to order from Scaleway.
    *
    * @param request - The request {@link ListOffersRequest}
    * @returns A Promise of ListOffersResponse
