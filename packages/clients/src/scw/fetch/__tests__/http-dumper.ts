@@ -9,6 +9,7 @@ const DEFAULT_SETTINGS: Settings = {
   defaultRegion: 'fr-par',
   defaultZone: 'fr-par-1',
   httpClient: fetch,
+  interceptors: [],
   requestInterceptors: [],
   responseInterceptors: [],
   userAgent: 'scaleway-sdk-js/v1.0.0',

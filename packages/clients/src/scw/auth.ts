@@ -1,8 +1,8 @@
-import type { RequestInterceptor } from '../internal/interceptors/request'
 import {
   addAsyncHeaderInterceptor,
   addHeaderInterceptor,
-} from '../internal/interceptors/request'
+} from '../internal/interceptors/helpers'
+import type { RequestInterceptor } from '../internal/interceptors/types'
 import { assertValidAuthenticationSecrets } from './client-ini-profile'
 import type { AuthenticationSecrets } from './client-ini-profile'
 
@@ -18,6 +18,8 @@ interface TokenAccessor {
  *
  * @param getToken - The token accessor
  * @returns The request interceptor
+ *
+ * @deprecated Please use addAsyncHeaderInterceptor instead.
  *
  * @internal
  */

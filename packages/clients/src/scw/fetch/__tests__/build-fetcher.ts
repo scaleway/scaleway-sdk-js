@@ -1,5 +1,6 @@
 import { afterAll, describe, expect, it, jest } from '@jest/globals'
 import { isBrowser } from '../../../helpers/is-browser'
+import { addHeaderInterceptor } from '../../../internal/interceptors/helpers'
 import type { Settings } from '../../client-settings'
 import { buildFetcher, buildRequest } from '../build-fetcher'
 import type { ScwRequest } from '../types'
@@ -9,6 +10,7 @@ const DEFAULT_SETTINGS: Settings = {
   defaultRegion: 'fr-par',
   defaultZone: 'fr-par-1',
   httpClient: global.fetch,
+  interceptors: [],
   requestInterceptors: [],
   responseInterceptors: [],
   userAgent: 'scaleway-sdk-js/v1.0.0',
@@ -96,6 +98,31 @@ describe(`buildFetcher (mock)`, () => {
     ).resolves.toStrictEqual('dummy-output')
   })
 
+  it('gets modified response', () => {
+    mockedFetch.mockResolvedValue(
+      new Response(JSON.stringify({}), {
+        headers: { 'Content-Type': 'application/json' },
+      }),
+    )
+
+    return expect(
+      buildFetcher(
+        {
+          ...DEFAULT_SETTINGS,
+          interceptors: [
+            {
+              response: () => new Response(JSON.stringify(42)),
+            },
+          ],
+        },
+        global.fetch,
+      )({
+        method: 'POST',
+        path: '/undefined',
+      }),
+    ).resolves.toStrictEqual('42')
+  })
+
   it(`gets a response without error for a simple request without unmarshaller`, async () => {
     mockedFetch.mockResolvedValue(
       new Response(JSON.stringify({ any_parameter: 'any-value' }), {
@@ -109,5 +136,49 @@ describe(`buildFetcher (mock)`, () => {
         path: '/undefined',
       }),
     ).resolves.toMatchObject({ any_parameter: 'any-value' })
+  })
+
+  it('gets a response with response error interceptor despite the error', () => {
+    mockedFetch.mockRejectedValue(new TypeError(''))
+
+    return expect(
+      buildFetcher(
+        {
+          ...DEFAULT_SETTINGS,
+          interceptors: [
+            {
+              responseError: () => Promise.resolve(42),
+            },
+          ],
+        },
+        global.fetch,
+      )({
+        method: 'GET',
+        path: '/will-trigger-an-error',
+      }),
+    ).resolves.toBe(42)
+  })
+
+  it('gets modified request in response error', () => {
+    mockedFetch.mockRejectedValue(new TypeError(''))
+
+    return expect(
+      buildFetcher(
+        {
+          ...DEFAULT_SETTINGS,
+          interceptors: [
+            {
+              request: addHeaderInterceptor('random-header', '42'),
+              responseError: ({ request }) =>
+                request.headers.get('random-header'),
+            },
+          ],
+        },
+        global.fetch,
+      )({
+        method: 'GET',
+        path: '/will-trigger-an-error',
+      }),
+    ).resolves.toBe('42')
   })
 })

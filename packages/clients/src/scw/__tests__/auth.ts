@@ -67,7 +67,7 @@ describe('authenticateWithSessionToken', () => {
     const sourceReq = new Request('https://api.scaleway.com/my/path')
     const updatedReq = await authenticateWithSessionToken(
       (): Promise<string> => Promise.resolve(dummyToken),
-    )(sourceReq)
+    )({ request: sourceReq })
     const expectedReq = sourceReq.clone()
     expectedReq.headers.append('x-session-token', 'dummy')
     expect(updatedReq).toStrictEqual(expectedReq)
@@ -82,7 +82,9 @@ describe('authenticateWithSecrets', () => {
       accessKey: 'SCW01234567890123456',
       secretKey: 'e4b83996-4c60-449a-98d2-38f5de7b4e6b',
     }
-    const updatedReq = await authenticateWithSecrets(validSecrets)(sourceReq)
+    const updatedReq = await authenticateWithSecrets(validSecrets)({
+      request: sourceReq,
+    })
     const expectedReq = sourceReq.clone()
     expectedReq.headers.append('x-auth-token', validSecrets.secretKey)
     expect(updatedReq).toStrictEqual(expectedReq)
@@ -93,6 +95,8 @@ describe('authenticateWithSecrets', () => {
       accessKey: '',
       secretKey: '',
     }
-    expect(() => authenticateWithSecrets(invalidSecrets)(sourceReq)).toThrow()
+    expect(() =>
+      authenticateWithSecrets(invalidSecrets)({ request: sourceReq }),
+    ).toThrow()
   })
 })

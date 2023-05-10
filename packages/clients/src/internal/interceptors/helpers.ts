@@ -1,7 +1,4 @@
-import type { Interceptor } from './interceptor'
-
-/** Request Interceptor. */
-export type RequestInterceptor = Interceptor<Request>
+import type { RequestInterceptor } from './types'
 
 /**
  * Adds an header to a request through an interceptor.
@@ -14,7 +11,7 @@ export type RequestInterceptor = Interceptor<Request>
  */
 export const addHeaderInterceptor =
   (key: string, value?: string): RequestInterceptor =>
-  request => {
+  ({ request }) => {
     const clone = request.clone()
     if (value !== undefined) {
       clone.headers.append(key, value)

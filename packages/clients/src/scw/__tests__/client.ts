@@ -36,7 +36,7 @@ describe('createAdvancedClient', () => {
         secretKey: '3aef5281-13eb-4705-b858-eb64dd5da24c',
       }),
     )
-    expect(client.settings.requestInterceptors.length).toBe(1)
+    expect(client.settings.interceptors.length).toBe(1)
   })
 
   it('does not mutate default requestInterceptors', () => {
@@ -52,7 +52,7 @@ describe('createAdvancedClient', () => {
         secretKey: '3aef5281-13eb-4705-b858-eb64dd5da24c',
       }),
     )
-    expect(client.settings.requestInterceptors.length).toBe(1)
+    expect(client.settings.interceptors.length).toBe(1)
   })
 
   it('contains override from custom option', () => {

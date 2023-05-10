@@ -1,3 +1,4 @@
+import type { NetworkInterceptors } from '../index'
 import { authenticateWithSecrets } from './auth'
 import { hasAuthenticationSecrets } from './client-ini-profile'
 import type { Profile } from './client-ini-profile'
@@ -40,9 +41,11 @@ export const withProfile =
       newSettings.defaultZone = profile.defaultZone
     }
     if (hasAuthenticationSecrets(profile)) {
-      newSettings.requestInterceptors = [
-        authenticateWithSecrets(profile),
-        ...settings.requestInterceptors,
+      newSettings.interceptors = [
+        {
+          request: authenticateWithSecrets(profile),
+        },
+        ...newSettings.interceptors,
       ]
     }
 
@@ -109,3 +112,78 @@ export const withUserAgentSuffix =
       ? `${settings.userAgent} ${userAgent}`
       : userAgent,
   })
+
+/**
+ * Instantiates the SDK with additional interceptors.
+ *
+ * @param interceptors - The additional {@link NetworkInterceptors} interceptors
+ * @returns A factory {@link ClientConfig}
+ *
+ * @remarks
+ * It doesn't override the existing interceptors, but instead push more to the list.
+ * This method should be used in conjunction with the initializer `createAdvancedClient`.
+ *
+ * @example
+ * ```
+ * withAdditionalInterceptors([
+ *   {
+ *     request: ({ request }) => {
+ *       console.log(`Do something with ${JSON.stringify(request)}`)
+ *       return request
+ *     },
+ *     response: ({ response }) => {
+ *       console.log(`Do something with ${JSON.stringify(response)}`)
+ *       return response
+ *     },
+ *     responseError: async ({
+ *       request,
+ *       error,
+ *     }: {
+ *       request: Request
+ *       error: unknown
+ *     }) => {
+ *       console.log(
+ *         `Do something with ${JSON.stringify(request)} and ${JSON.stringify(
+ *           error,
+ *         )}`,
+ *       )
+ *       throw error // or return Promise.resolve(someData)
+ *     },
+ *   },
+ * ])
+ * ```
+ *
+ * @public
+ */
+export const withAdditionalInterceptors =
+  (interceptors: NetworkInterceptors[]) =>
+  (settings: Readonly<Settings>): Settings => ({
+    ...settings,
+    interceptors: settings.interceptors.concat(interceptors),
+  })
+
+/**
+ * Instantiates the SDK with legacy interceptors.
+ */
+/* eslint-disable deprecation/deprecation */
+export const withLegacyInterceptors =
+  () =>
+  (settings: Readonly<Settings>): Settings => {
+    if (!settings.requestInterceptors && !settings.responseInterceptors) {
+      return settings
+    }
+    const allInterceptors = settings.interceptors.concat(
+      (settings.requestInterceptors ?? []).map(obj => ({
+        request: obj,
+      })),
+      (settings.responseInterceptors ?? []).map(obj => ({
+        response: obj,
+      })),
+    )
+
+    return {
+      ...settings,
+      interceptors: allInterceptors,
+    }
+  }
+/* eslint-enable deprecation/deprecation */

@@ -1,6 +1,6 @@
 import { getLogger } from '../internal/logger'
 import type { ClientConfig } from './client-ini-factory'
-import { withProfile } from './client-ini-factory'
+import { withLegacyInterceptors, withProfile } from './client-ini-factory'
 import type { Profile } from './client-ini-profile'
 import type { Settings } from './client-settings'
 import { assertValidSettings } from './client-settings'
@@ -12,8 +12,7 @@ import type { Fetcher } from './fetch/build-fetcher'
 const DEFAULT_SETTINGS: Settings = {
   apiURL: 'https://api.scaleway.com',
   httpClient: fetch,
-  requestInterceptors: [],
-  responseInterceptors: [],
+  interceptors: [],
   userAgent,
 }
 
@@ -50,10 +49,12 @@ export type Client = {
  * @public
  */
 export const createAdvancedClient = (...configs: ClientConfig[]): Client => {
-  const settings = configs.reduce(
-    (currentSettings, config) => config(currentSettings),
-    DEFAULT_SETTINGS,
-  )
+  const settings = configs
+    .concat([withLegacyInterceptors()])
+    .reduce(
+      (currentSettings, config) => config(currentSettings),
+      DEFAULT_SETTINGS,
+    )
   assertValidSettings(settings)
   getLogger().info(`init Scaleway SDK version ${version}`)
 

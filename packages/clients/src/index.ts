@@ -2,6 +2,12 @@ export type {
   WaitForOptions,
   WaitForStopCondition,
 } from './internal/async/interval-retrier'
+export type {
+  NetworkInterceptors,
+  RequestInterceptor,
+  ResponseInterceptor,
+  ResponseErrorInterceptor,
+} from './internal/interceptors/types'
 export { enableConsoleLogger, setLogger } from './internal/logger'
 export type { Logger } from './internal/logger/logger'
 export { createClient, createAdvancedClient } from './scw/client'
@@ -9,6 +15,7 @@ export type { Client } from './scw/client'
 export type { Profile } from './scw/client-ini-profile'
 export type { Settings } from './scw/client-settings'
 export {
+  withAdditionalInterceptors,
   withDefaultPageSize,
   withHTTPClient,
   withProfile,

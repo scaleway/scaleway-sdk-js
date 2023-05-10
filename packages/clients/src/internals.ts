@@ -1,9 +1,10 @@
 export { isJSONObject } from './helpers/json'
 export { waitForResource } from './internal/async/interval-retrier'
-export type { RequestInterceptor } from './internal/interceptors/request'
-export type { ResponseInterceptor } from './internal/interceptors/response'
+export { addAsyncHeaderInterceptor } from './internal/interceptors/helpers'
 export { API } from './scw/api'
+/* eslint-disable deprecation/deprecation */
 export { authenticateWithSessionToken } from './scw/auth'
+/* eslint-enable deprecation/deprecation */
 export type { DefaultValues } from './scw/client-settings'
 export {
   marshalScwFile,

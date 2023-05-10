@@ -1,7 +1,10 @@
 import { describe, expect, it } from '@jest/globals'
+import type { ClientConfig } from '../client-ini-factory'
 import {
+  withAdditionalInterceptors,
   withDefaultPageSize,
   withHTTPClient,
+  withLegacyInterceptors,
   withProfile,
   withUserAgent,
   withUserAgentSuffix,
@@ -29,8 +32,7 @@ const DEFAULT_SETTINGS: Readonly<Settings> = {
   defaultRegion: 'nl-ams',
   defaultZone: 'fr-par-1',
   httpClient: fetch,
-  requestInterceptors: [],
-  responseInterceptors: [],
+  interceptors: [],
   userAgent: 'scaleway-sdk-js/v1.0.0-beta',
 }
 
@@ -53,6 +55,7 @@ describe('withProfile', () => {
         defaultRegion: undefined,
         defaultZone: undefined,
         httpClient: undefined,
+        interceptors: undefined,
         requestInterceptors: undefined,
         responseInterceptors: undefined,
         userAgent: undefined,
@@ -67,6 +70,7 @@ describe('withProfile', () => {
         defaultRegion: null,
         defaultZone: null,
         httpClient: null,
+        interceptors: null,
         requestInterceptors: null,
         responseInterceptors: null,
         userAgent: null,
@@ -81,6 +85,7 @@ describe('withProfile', () => {
         defaultRegion: '',
         defaultZone: '',
         httpClient: '',
+        interceptors: '',
         requestInterceptors: '',
         responseInterceptors: '',
         userAgent: '',
@@ -95,6 +100,7 @@ describe('withProfile', () => {
         defaultRegion: 0,
         defaultZone: 0,
         httpClient: 0,
+        interceptors: 0,
         requestInterceptors: 0,
         responseInterceptors: 0,
         userAgent: 0,
@@ -163,13 +169,18 @@ describe('withProfile', () => {
   })
 
   it('modifies authentication', async () => {
-    const { headers } = await withProfile({
+    const request = new Request(DEFAULT_SETTINGS.apiURL)
+    const reqInterceptor = withProfile({
       accessKey: FILLED_PROFILE.accessKey,
       secretKey: FILLED_PROFILE.secretKey,
-    })(DEFAULT_SETTINGS).requestInterceptors[0](
-      new Request(DEFAULT_SETTINGS.apiURL),
-    )
-    expect(headers.get('x-auth-token')).toStrictEqual(FILLED_PROFILE.secretKey)
+    })(DEFAULT_SETTINGS).interceptors[0].request
+    expect(reqInterceptor).toBeDefined()
+    if (reqInterceptor) {
+      const { headers } = await reqInterceptor({ request })
+      expect(headers.get('x-auth-token')).toStrictEqual(
+        FILLED_PROFILE.secretKey,
+      )
+    }
   })
 })
 
@@ -236,5 +247,69 @@ describe('withUserAgentSuffix', () => {
     expect(
       JSON.stringify(withUserAgentSuffix(addUserAgent)(newSettings)),
     ).toStrictEqual(JSON.stringify(expectedSettings))
+  })
+})
+
+describe('withAdditionalInterceptors', () => {
+  it('appends interceptors to existing ones', () => {
+    const oneInterProfile = withAdditionalInterceptors([
+      {
+        request: ({ request }) => request,
+      },
+    ])(DEFAULT_SETTINGS)
+    const twoInterProfile = withAdditionalInterceptors([
+      {
+        response: ({ response }) => response,
+        responseError: err => err,
+      },
+    ])(oneInterProfile)
+    expect(twoInterProfile.interceptors.length).toEqual(2)
+    expect(twoInterProfile.interceptors[1].response).toBeDefined()
+    expect(twoInterProfile.interceptors[1].responseError).toBeDefined()
+    expect(twoInterProfile.interceptors[1].request).toBeUndefined()
+  })
+})
+
+describe('withLegacyInterceptors', () => {
+  it('changes nothing if no legacy interceptor', () => {
+    expect(
+      JSON.stringify(withLegacyInterceptors()(DEFAULT_SETTINGS)),
+    ).toStrictEqual(JSON.stringify(DEFAULT_SETTINGS))
+  })
+
+  it('appends the legacy request and response interceptors', () => {
+    const legacyInterceptors: ClientConfig = (obj: Settings): Settings => ({
+      ...obj,
+      requestInterceptors: [
+        ({ request }): Request => request,
+        ({ request }): Request => request,
+      ],
+      responseInterceptors: [({ response }): Response => response],
+    })
+    expect(
+      withLegacyInterceptors()(legacyInterceptors(DEFAULT_SETTINGS))
+        .interceptors.length,
+    ).toBe(3)
+
+    const legacyReqInterceptors: ClientConfig = (obj: Settings): Settings => ({
+      ...obj,
+      requestInterceptors: [
+        ({ request }): Request => request,
+        ({ request }): Request => request,
+      ],
+    })
+    expect(
+      withLegacyInterceptors()(legacyReqInterceptors(DEFAULT_SETTINGS))
+        .interceptors.length,
+    ).toBe(2)
+
+    const legacyResInterceptors: ClientConfig = (obj: Settings): Settings => ({
+      ...obj,
+      responseInterceptors: [({ response }): Response => response],
+    })
+    expect(
+      withLegacyInterceptors()(legacyResInterceptors(DEFAULT_SETTINGS))
+        .interceptors.length,
+    ).toBe(1)
   })
 })
