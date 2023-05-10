@@ -758,10 +758,7 @@ export type CreateClusterRequest = {
    * could be set.
    */
   projectId?: string
-  /**
-   * Type of the cluster. Type of the cluster (possible values are kapsule,
-   * multicloud).
-   */
+  /** Type of the cluster (possible values are kapsule, multicloud). */
   type: string
   /** Name of the cluster. */
   name?: string
@@ -913,8 +910,8 @@ export type SetClusterTypeRequest = {
   /** ID of the cluster to migrate from one type to another. */
   clusterId: string
   /**
-   * Type of the cluster. Type of the cluster. Note that some migrations are not
-   * possible (please refer to product documentation).
+   * Type of the cluster. Note that some migrations are not possible (please
+   * refer to product documentation).
    */
   type: string
 }
