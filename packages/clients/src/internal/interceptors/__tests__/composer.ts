@@ -64,4 +64,17 @@ describe('composeResponseErrorInterceptors', () => {
 
     return expect(interceptors).resolves.toBe(42)
   })
+
+  it('throws the last processed error', () => {
+    const interceptors = composeResponseErrorInterceptors([
+      ({ error }): Promise<unknown> => {
+        throw error
+      },
+      (): Promise<unknown> => {
+        throw new TypeError('second error')
+      },
+    ])(new Request('https://api.scaleway.com'), new TypeError('first error'))
+
+    return expect(interceptors).rejects.toThrow(new TypeError('second error'))
+  })
 })

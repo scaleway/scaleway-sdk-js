@@ -57,5 +57,5 @@ export const composeResponseErrorInterceptors =
       }
     }
 
-    throw error
+    throw prevError
   }
