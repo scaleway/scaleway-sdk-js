@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.9.0...@scaleway/sdk@1.10.0) (2023-05-10)
+
+### Features
+
+- add `responseError` interceptor ([#643](https://github.com/scaleway/scaleway-sdk-js/issues/643)) ([cd58ba4](https://github.com/scaleway/scaleway-sdk-js/commit/cd58ba43210eb0d9229f500d65d30a8f30af8253))
+
 ## [1.9.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.8.0...@scaleway/sdk@1.9.0) (2023-05-08)
 
 ### Features
