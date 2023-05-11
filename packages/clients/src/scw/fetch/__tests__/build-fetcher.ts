@@ -159,6 +159,30 @@ describe(`buildFetcher (mock)`, () => {
     ).resolves.toBe(42)
   })
 
+  it('gets the unmarshalled value of what responseError returns', () => {
+    mockedFetch.mockRejectedValue(new TypeError(''))
+
+    return expect(
+      buildFetcher(
+        {
+          ...DEFAULT_SETTINGS,
+          interceptors: [
+            {
+              responseError: () => Promise.resolve(42),
+            },
+          ],
+        },
+        global.fetch,
+      )(
+        {
+          method: 'GET',
+          path: '/will-trigger-an-error',
+        },
+        data => `${typeof data === 'number' ? data : ''}-dummy-output`,
+      ),
+    ).resolves.toBe('42-dummy-output')
+  })
+
   it('gets modified request in response error', () => {
     mockedFetch.mockRejectedValue(new TypeError(''))
 
