@@ -112,7 +112,7 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
       const resErrorInterceptors = prepareResponseErrors()
       const handledError = (await resErrorInterceptors(finalRequest, err)) as T
 
-      return handledError
+      return unwrapper(handledError)
     }
   }
 }
