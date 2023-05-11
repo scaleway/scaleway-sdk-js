@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.10.0...@scaleway/sdk@1.10.1) (2023-05-11)
+
+### Bug Fixes
+
+- unmarshal the value returned by the responseError interceptor ([#650](https://github.com/scaleway/scaleway-sdk-js/issues/650)) ([a71bed1](https://github.com/scaleway/scaleway-sdk-js/commit/a71bed14b07d8784258d45a8b0a60cfcd754688e))
+
 ## [1.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.9.0...@scaleway/sdk@1.10.0) (2023-05-10)
 
 ### Features
