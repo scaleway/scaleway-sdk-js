@@ -104,6 +104,8 @@ export const fetchAll = async <
  * @param fetcher - The method to retrieve paginated resources
  * @param request - A request with pagination options
  * @returns A resource Promise with the pagination helpers
+ *
+ * @internal
  */
 export const enrichForPagination = <
   K extends string,

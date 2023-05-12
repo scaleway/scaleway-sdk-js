@@ -8,7 +8,11 @@ import type {
   TimeSeriesPoint,
 } from './custom-types'
 
-/** Unmarshals {@link Money} */
+/**
+ * Unmarshals {@link Money}
+ *
+ * @internal
+ */
 export const unmarshalMoney = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(

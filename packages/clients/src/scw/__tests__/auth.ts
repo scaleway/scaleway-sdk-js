@@ -65,9 +65,11 @@ describe('authenticateWithSessionToken', () => {
   it('retrieves the token and updates the request header', async () => {
     const dummyToken = 'dummy'
     const sourceReq = new Request('https://api.scaleway.com/my/path')
+    /* eslint-disable deprecation/deprecation */
     const updatedReq = await authenticateWithSessionToken(
       (): Promise<string> => Promise.resolve(dummyToken),
     )({ request: sourceReq })
+    /* eslint-enable deprecation/deprecation */
     const expectedReq = sourceReq.clone()
     expectedReq.headers.append('x-session-token', 'dummy')
     expect(updatedReq).toStrictEqual(expectedReq)
