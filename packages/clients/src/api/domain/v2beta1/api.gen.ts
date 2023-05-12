@@ -766,9 +766,9 @@ export class API extends ParentAPI {
 }
 
 /**
- * Domains registrar API.
+ * Domains and DNS - Registrar API.
  *
- * Domains registrar API. Manage your domains and contacts.
+ * Domains and DNS - Registrar API. Manage your domains and contacts.
  */
 export class RegistrarAPI extends ParentAPI {
   protected pageOfListTasks = (
