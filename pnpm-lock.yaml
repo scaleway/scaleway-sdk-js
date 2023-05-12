@@ -89,8 +89,8 @@ importers:
         specifier: ^5.9.0
         version: 5.9.0(rollup@3.21.5)
       typedoc:
-        specifier: ^0.24.1
-        version: 0.24.1(typescript@5.0.4)
+        specifier: ^0.24.7
+        version: 0.24.7(typescript@5.0.4)
       typescript:
         specifier: ^5.0.4
         version: 5.0.4
@@ -7275,8 +7275,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /marked@4.2.12:
-    resolution: {integrity: sha512-yr8hSKa3Fv4D3jdZmtMMPghgVt6TWbk86WQaWhDloQjRSQhMMYCAro7jP7VDJrjjdV8pxVxMssXS8B8Y5DZ5aw==}
+  /marked@4.3.0:
+    resolution: {integrity: sha512-PRsaiG84bK+AMvxziE/lCFss8juXjNaWzVbN5tXAm4XjeaS9NAHhop+PjQxz2A9h8Q4M/xGmzP8vqNwy6JeK0A==}
     engines: {node: '>= 12'}
     hasBin: true
     dev: true
@@ -9584,16 +9584,16 @@ packages:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
     dev: true
 
-  /typedoc@0.24.1(typescript@5.0.4):
-    resolution: {integrity: sha512-u4HwjZcSQhQSkkhLjgcs0ooAf6HrFVLDHHrwU2xZW8WxH0KnGZlNkaWxiOcK5Gagj7mxJSgwWx0dv8ACDAOXAQ==}
+  /typedoc@0.24.7(typescript@5.0.4):
+    resolution: {integrity: sha512-zzfKDFIZADA+XRIp2rMzLe9xZ6pt12yQOhCr7cD7/PBTjhPmMyMvGrkZ2lPNJitg3Hj1SeiYFNzCsSDrlpxpKw==}
     engines: {node: '>= 14.14'}
     hasBin: true
     peerDependencies:
       typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x
     dependencies:
       lunr: 2.3.9
-      marked: 4.2.12
-      minimatch: 7.4.3
+      marked: 4.3.0
+      minimatch: 9.0.0
       shiki: 0.14.1
       typescript: 5.0.4
     dev: true
