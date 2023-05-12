@@ -103,11 +103,11 @@ export type Runtime = 'unknown_runtime' | 'docker' | 'containerd' | 'crio'
 
 /** Cluster. */
 export interface Cluster {
-  /** ID of the cluster. */
+  /** Cluster ID. */
   id: string
-  /** Type of the cluster. */
+  /** Cluster type. */
   type: string
-  /** Name of the cluster. */
+  /** Cluster name. */
   name: string
   /** Status of the cluster. */
   status: ClusterStatus
@@ -115,23 +115,23 @@ export interface Cluster {
   version: string
   /** Region in which the cluster is deployed. */
   region: Region
-  /** ID of the organization owning the cluster. */
+  /** ID of the Organization owning the cluster. */
   organizationId: string
-  /** ID of the project owning the cluster. */
+  /** ID of the Project owning the cluster. */
   projectId: string
   /** Tags associated with the cluster. */
   tags: string[]
   /** Container Network Interface (CNI) plugin running in the cluster. */
   cni: CNI
-  /** Description of the cluster. */
+  /** Cluster description. */
   description: string
   /** Kubernetes API server URL of the cluster. */
   clusterUrl: string
-  /** DNS wildcard resovling all the ready nodes of the cluster. */
+  /** Wildcard DNS resolving all the ready cluster nodes. */
   dnsWildcard: string
-  /** Date at which the cluster was created. */
+  /** Date on which the cluster was created. */
   createdAt?: Date
-  /** Date at which the cluster was last updated. */
+  /** Date on which the cluster was last updated. */
   updatedAt?: Date
   /** Autoscaler config for the cluster. */
   autoscalerConfig?: ClusterAutoscalerConfig
@@ -140,7 +140,10 @@ export interface Cluster {
    *   cluster.
    */
   dashboardEnabled?: boolean
-  /** @deprecated Ingress controller used in the cluster. */
+  /**
+   * @deprecated Managed Ingress controller used in the cluster (deprecated
+   *   feature).
+   */
   ingress?: Ingress
   /** Auto upgrade configuration of the cluster. */
   autoUpgrade?: ClusterAutoUpgrade
@@ -151,8 +154,8 @@ export interface Cluster {
   /** List of enabled admission plugins. */
   admissionPlugins: string[]
   /**
-   * OpenID Connect configuration of the cluster. This configuration enables to
-   * update the OpenID Connect configuration of the Kubernetes API server.
+   * This configuration enables to update the OpenID Connect configuration of
+   * the Kubernetes API server.
    */
   openIdConnectConfig?: ClusterOpenIDConnectConfig
   /**
@@ -166,7 +169,7 @@ export interface Cluster {
 
 /** Cluster. auto upgrade. */
 export interface ClusterAutoUpgrade {
-  /** Whether or not auto upgrade is enabled for the cluster. */
+  /** Defines whether auto upgrade is enabled for the cluster. */
   enabled: boolean
   /** Maintenance window of the cluster auto upgrades. */
   maintenanceWindow?: MaintenanceWindow
@@ -190,16 +193,15 @@ export interface ClusterAutoscalerConfig {
   /** Detect similar node groups and balance the number of nodes between them. */
   balanceSimilarNodeGroups: boolean
   /**
-   * Pods with priority below cutoff will be expendable. Pods with priority
-   * below cutoff will be expendable. They can be killed without any
-   * consideration during scale down and they don't cause scale up. Pods with
-   * null priority (PodPriority disabled) are non expendable.
+   * Pods with priority below cutoff will be expendable. They can be killed
+   * without any consideration during scale down and they won't cause scale up.
+   * Pods with null priority (PodPriority disabled) are non expendable.
    */
   expendablePodsPriorityCutoff: number
-  /** How long a node should be unneeded before it is eligible for scale down. */
+  /** How long a node should be unneeded before it is eligible to be scaled down. */
   scaleDownUnneededTime: string
   /**
-   * Node utilization level, defined as sum of requested resources divided by
+   * Node utilization level, defined as a sum of requested resources divided by
    * capacity, below which a node can be considered for scale down.
    */
   scaleDownUtilizationThreshold: number
@@ -214,53 +216,49 @@ export interface ClusterAutoscalerConfig {
 export interface ClusterOpenIDConnectConfig {
   /**
    * URL of the provider which allows the API server to discover public signing
-   * keys. URL of the provider which allows the API server to discover public
-   * signing keys. Only URLs which use the `https://` scheme are accepted. This
-   * is typically the provider's discovery URL without a path, for example
-   * "https://accounts.google.com" or "https://login.salesforce.com". This URL
-   * should point to the level below .well-known/openid-configuration.
+   * keys. Only URLs using the `https://` scheme are accepted. This is typically
+   * the provider's discovery URL without a path, for example
+   * "https://accounts.google.com" or "https://login.salesforce.com".
    */
   issuerUrl: string
-  /** A client id that all tokens must be issued for. */
+  /** A client ID that all tokens must be issued for. */
   clientId: string
   /**
-   * JWT claim to use as the user name. JWT claim to use as the user name. By
-   * default `sub`, which is expected to be a unique identifier of the end user.
-   * Admins can choose other claims, such as `email` or `name`, depending on
-   * their provider. However, claims other than `email` will be prefixed with
-   * the issuer URL to prevent naming clashes with other plugins.
+   * JWT claim to use as the user name. The default is `sub`, which is expected
+   * to be the end user's unique identifier. Admins can choose other claims,
+   * such as `email` or `name`, depending on their provider. However, claims
+   * other than `email` will be prefixed with the issuer URL to prevent name
+   * collision.
    */
   usernameClaim: string
   /**
-   * Prefix prepended to username. Prefix prepended to username claims to
-   * prevent clashes with existing names (such as `system:` users). For example,
-   * the value `oidc:` will create usernames like `oidc:jane.doe`. If this flag
-   * isn't provided and `username_claim` is a value other than `email` the
-   * prefix defaults to `( Issuer URL )#` where `( Issuer URL )` is the value of
-   * `issuer_url`. The value `-` can be used to disable all prefixing.
+   * Prefix prepended to username claims to prevent name collision (such as
+   * `system:` users). For example, the value `oidc:` will create usernames like
+   * `oidc:jane.doe`. If this flag is not provided and `username_claim` is a
+   * value other than `email`, the prefix defaults to `( Issuer URL )#` where `(
+   * Issuer URL )` is the value of `issuer_url`. The value `-` can be used to
+   * disable all prefixing.
    */
   usernamePrefix: string
   /** JWT claim to use as the user's group. */
   groupsClaim: string[]
   /**
-   * Prefix prepended to group claims. Prefix prepended to group claims to
-   * prevent clashes with existing names (such as `system:` groups). For
-   * example, the value `oidc:` will create group names like `oidc:engineering`
-   * and `oidc:infra`.
+   * Prefix prepended to group claims to prevent name collision (such as
+   * `system:` groups). For example, the value `oidc:` will create group names
+   * like `oidc:engineering` and `oidc:infra`.
    */
   groupsPrefix: string
   /**
-   * Multiple key=value pairs that describes a required claim in the ID token.
-   * Multiple key=value pairs that describes a required claim in the ID token.
-   * If set, the claims are verified to be present in the ID token with a
-   * matching value.
+   * Multiple key=value pairs describing a required claim in the ID token. If
+   * set, the claims are verified to be present in the ID token with a matching
+   * value.
    */
   requiredClaim: string[]
 }
 
 /** Create cluster request. auto upgrade. */
 export interface CreateClusterRequestAutoUpgrade {
-  /** Whether or not auto upgrade is enabled for the cluster. */
+  /** Defines whether auto upgrade is enabled for the cluster. */
   enable: boolean
   /** Maintenance window of the cluster auto upgrades. */
   maintenanceWindow?: MaintenanceWindow
@@ -284,16 +282,15 @@ export interface CreateClusterRequestAutoscalerConfig {
   /** Detect similar node groups and balance the number of nodes between them. */
   balanceSimilarNodeGroups?: boolean
   /**
-   * Pods with priority below cutoff will be expendable. Pods with priority
-   * below cutoff will be expendable. They can be killed without any
-   * consideration during scale down and they don't cause scale up. Pods with
-   * null priority (PodPriority disabled) are non expendable.
+   * Pods with priority below cutoff will be expendable. They can be killed
+   * without any consideration during scale down and they won't cause scale up.
+   * Pods with null priority (PodPriority disabled) are non expendable.
    */
   expendablePodsPriorityCutoff?: number
-  /** How long a node should be unneeded before it is eligible for scale down. */
+  /** How long a node should be unneeded before it is eligible to be scaled down. */
   scaleDownUnneededTime?: string
   /**
-   * Node utilization level, defined as sum of requested resources divided by
+   * Node utilization level, defined as a sum of requested resources divided by
    * capacity, below which a node can be considered for scale down.
    */
   scaleDownUtilizationThreshold?: number
@@ -308,46 +305,42 @@ export interface CreateClusterRequestAutoscalerConfig {
 export interface CreateClusterRequestOpenIDConnectConfig {
   /**
    * URL of the provider which allows the API server to discover public signing
-   * keys. URL of the provider which allows the API server to discover public
-   * signing keys. Only URLs which use the `https://` scheme are accepted. This
-   * is typically the provider's discovery URL without a path, for example
-   * "https://accounts.google.com" or "https://login.salesforce.com". This URL
-   * should point to the level below .well-known/openid-configuration.
+   * keys. Only URLs using the `https://` scheme are accepted. This is typically
+   * the provider's discovery URL without a path, for example
+   * "https://accounts.google.com" or "https://login.salesforce.com".
    */
   issuerUrl: string
-  /** A client id that all tokens must be issued for. */
+  /** A client ID that all tokens must be issued for. */
   clientId: string
   /**
-   * JWT claim to use as the user name. JWT claim to use as the user name. By
-   * default `sub`, which is expected to be a unique identifier of the end user.
-   * Admins can choose other claims, such as `email` or `name`, depending on
-   * their provider. However, claims other than `email` will be prefixed with
-   * the issuer URL to prevent naming clashes with other plugins.
+   * JWT claim to use as the user name. The default is `sub`, which is expected
+   * to be the end user's unique identifier. Admins can choose other claims,
+   * such as `email` or `name`, depending on their provider. However, claims
+   * other than `email` will be prefixed with the issuer URL to prevent name
+   * collision.
    */
   usernameClaim?: string
   /**
-   * Prefix prepended to username. Prefix prepended to username claims to
-   * prevent clashes with existing names (such as `system:` users). For example,
-   * the value `oidc:` will create usernames like `oidc:jane.doe`. If this flag
-   * isn't provided and `username_claim` is a value other than `email` the
-   * prefix defaults to `( Issuer URL )#` where `( Issuer URL )` is the value of
-   * `issuer_url`. The value `-` can be used to disable all prefixing.
+   * Prefix prepended to username claims to prevent name collision (such as
+   * `system:` users). For example, the value `oidc:` will create usernames like
+   * `oidc:jane.doe`. If this flag is not provided and `username_claim` is a
+   * value other than `email`, the prefix defaults to `( Issuer URL )#` where `(
+   * Issuer URL )` is the value of `issuer_url`. The value `-` can be used to
+   * disable all prefixing.
    */
   usernamePrefix?: string
   /** JWT claim to use as the user's group. */
   groupsClaim?: string[]
   /**
-   * Prefix prepended to group claims. Prefix prepended to group claims to
-   * prevent clashes with existing names (such as `system:` groups). For
-   * example, the value `oidc:` will create group names like `oidc:engineering`
-   * and `oidc:infra`.
+   * Prefix prepended to group claims to prevent name collision (such as
+   * `system:` groups). For example, the value `oidc:` will create group names
+   * like `oidc:engineering` and `oidc:infra`.
    */
   groupsPrefix?: string
   /**
-   * Multiple key=value pairs that describes a required claim in the ID token.
-   * Multiple key=value pairs that describes a required claim in the ID token.
-   * If set, the claims are verified to be present in the ID token with a
-   * matching value.
+   * Multiple key=value pairs describing a required claim in the ID token. If
+   * set, the claims are verified to be present in the ID token with a matching
+   * value.
    */
   requiredClaim?: string[]
 }
@@ -357,11 +350,10 @@ export interface CreateClusterRequestPoolConfig {
   /** Name of the pool. */
   name: string
   /**
-   * Node type is the type of Scaleway Instance wanted for the pool. Node type
-   * is the type of Scaleway Instance wanted for the pool. Nodes with
+   * Node type is the type of Scaleway Instance wanted for the pool. Nodes with
    * insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST).
    * 'external' is a special node type used to provision instances from other
-   * cloud providers.
+   * cloud providers in a Kosmos Cluster.
    */
   nodeType: string
   /** Placement group ID in which all the nodes of the pool will be created. */
@@ -371,19 +363,19 @@ export interface CreateClusterRequestPoolConfig {
   /** Size (number of nodes) of the pool. */
   size: number
   /**
-   * Minimum size of the pool. Defines the minimum size of the pool. Note that
-   * this field will be used only when autoscaling is enabled.
+   * Defines the minimum size of the pool. Note that this field is only used
+   * when autoscaling is enabled on the pool.
    */
   minSize?: number
   /**
-   * Maximum size of the pool. Defines the maximum size of the pool. Note that
-   * this field will be used only when autoscaling is enabled.
+   * Defines the maximum size of the pool. Note that this field is only used
+   * when autoscaling is enabled on the pool.
    */
   maxSize?: number
   /**
-   * Container runtime for the nodes of the pool. Customization of the container
-   * runtime is available for each pool. Note that `docker` is deprecated since
-   * 1.20 and will be removed in 1.24.
+   * Customization of the container runtime is available for each pool. Note
+   * that `docker` has been deprecated since version 1.20 and will be removed by
+   * version 1.24.
    */
   containerRuntime: Runtime
   /** Defines whether the autohealing feature is enabled for the pool. */
@@ -391,8 +383,8 @@ export interface CreateClusterRequestPoolConfig {
   /** Tags associated with the pool. */
   tags: string[]
   /**
-   * Kubelet arguments to be used by this pool. Note that this feature is to be
-   * considered as experimental.
+   * Kubelet arguments to be used by this pool. Note that this feature is
+   * experimental.
    */
   kubeletArgs: Record<string, string>
   /** Pool upgrade policy. */
@@ -400,11 +392,11 @@ export interface CreateClusterRequestPoolConfig {
   /** Zone in which the pool's nodes will be spawned. */
   zone: Zone
   /**
-   * System volume disk type. Defines the system volume disk type, we provide
-   * two different types of volume (`volume_type`): `l_ssd` is a local block
-   * storage: your system is stored locally on the hypervisor of your node.
-   * `b_ssd` is a remote block storage: your system is stored on a centralised
-   * and resilient cluster.
+   * Defines the system volume disk type. Two different types of volume
+   * (`volume_type`) are provided: `l_ssd` is a local block storage which means
+   * your system is stored locally on your node's hypervisor. `b_ssd` is a
+   * remote block storage which means your system is stored on a centralized and
+   * resilient cluster.
    */
   rootVolumeType: PoolVolumeType
   /** System volume disk size. */
@@ -436,7 +428,7 @@ export interface ExternalNode {
 
 /** List cluster available versions response. */
 export interface ListClusterAvailableVersionsResponse {
-  /** Available Kubernetes version for the cluster. */
+  /** Available Kubernetes versions for the cluster. */
   versions: Version[]
 }
 
@@ -480,7 +472,7 @@ export interface MaintenanceWindow {
 
 /** Node. */
 export interface Node {
-  /** ID of the node. */
+  /** Node ID. */
   id: string
   /** Pool ID of the node. */
   poolId: string
@@ -501,42 +493,41 @@ export interface Node {
   /** @deprecated Public IPv6 address of the node. */
   publicIpV6?: string
   /**
-   * @deprecated Conditions of the node. These conditions contains the Node
+   * @deprecated Conditions of the node. These conditions contain the Node
    *   Problem Detector conditions, as well as some in house conditions.
    */
   conditions?: Record<string, string>
   /** Status of the node. */
   status: NodeStatus
-  /** Details of the error, if any occured when managing the node. */
+  /** Details of the error, if any occurred when managing the node. */
   errorMessage?: string
   /** Date on which the node was created. */
   createdAt?: Date
-  /** Date at which the node was last updated. */
+  /** Date on which the node was last updated. */
   updatedAt?: Date
 }
 
 /** Pool. */
 export interface Pool {
-  /** ID of the pool. */
+  /** Pool ID. */
   id: string
   /** Cluster ID of the pool. */
   clusterId: string
-  /** Date at which the pool was created. */
+  /** Date on which the pool was created. */
   createdAt?: Date
-  /** Date at which the pool was last updated. */
+  /** Date on which the pool was last updated. */
   updatedAt?: Date
-  /** Name of the pool. */
+  /** Pool name. */
   name: string
-  /** Status of the pool. */
+  /** Pool status. */
   status: PoolStatus
-  /** Version of the pool. */
+  /** Pool version. */
   version: string
   /**
-   * Node type is the type of Scaleway Instance wanted for the pool. Node type
-   * is the type of Scaleway Instance wanted for the pool. Nodes with
+   * Node type is the type of Scaleway Instance wanted for the pool. Nodes with
    * insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST).
    * 'external' is a special node type used to provision instances from other
-   * cloud providers.
+   * cloud providers in a Kosmos Cluster.
    */
   nodeType: string
   /** Defines whether the autoscaling feature is enabled for the pool. */
@@ -544,19 +535,19 @@ export interface Pool {
   /** Size (number of nodes) of the pool. */
   size: number
   /**
-   * Minimum size of the pool. Defines the minimum size of the pool. Note that
-   * this field will be used only when autoscaling is enabled.
+   * Defines the minimum size of the pool. Note that this field is only used
+   * when autoscaling is enabled on the pool.
    */
   minSize: number
   /**
-   * Maximum size of the pool. Defines the maximum size of the pool. Note that
-   * this field will be used only when autoscaling is enabled.
+   * Defines the maximum size of the pool. Note that this field is only used
+   * when autoscaling is enabled on the pool.
    */
   maxSize: number
   /**
-   * Container runtime for the nodes of the pool. Customization of the container
-   * runtime is available for each pool. Note that `docker` is deprecated since
-   * 1.20 and will be removed in 1.24.
+   * Customization of the container runtime is available for each pool. Note
+   * that `docker` has been deprecated since version 1.20 and will be removed by
+   * version 1.24.
    */
   containerRuntime: Runtime
   /** Defines whether the autohealing feature is enabled for the pool. */
@@ -566,8 +557,8 @@ export interface Pool {
   /** Placement group ID in which all the nodes of the pool will be created. */
   placementGroupId?: string
   /**
-   * Kubelet arguments to be used by this pool. Note that this feature is to be
-   * considered as experimental.
+   * Kubelet arguments to be used by this pool. Note that this feature is
+   * experimental.
    */
   kubeletArgs: Record<string, string>
   /** Pool upgrade policy. */
@@ -575,11 +566,11 @@ export interface Pool {
   /** Zone in which the pool's nodes will be spawned. */
   zone: Zone
   /**
-   * System volume disk type. Defines the system volume disk type, we provide
-   * two different types of volume (`volume_type`): `l_ssd` is a local block
-   * storage: your system is stored locally on the hypervisor of your node.
-   * `b_ssd` is a remote block storage: your system is stored on a centralised
-   * and resilient cluster.
+   * Defines the system volume disk type. Two different types of volume
+   * (`volume_type`) are provided: `l_ssd` is a local block storage which means
+   * your system is stored locally on your node's hypervisor. `b_ssd` is a
+   * remote block storage which means your system is stored on a centralized and
+   * resilient cluster.
    */
   rootVolumeType: PoolVolumeType
   /** System volume disk size. */
@@ -595,7 +586,7 @@ export interface PoolUpgradePolicy {
 
 /** Update cluster request. auto upgrade. */
 export interface UpdateClusterRequestAutoUpgrade {
-  /** Whether or not auto upgrade is enabled for the cluster. */
+  /** Defines whether auto upgrade is enabled for the cluster. */
   enable?: boolean
   /** Maintenance window of the cluster auto upgrades. */
   maintenanceWindow?: MaintenanceWindow
@@ -619,16 +610,15 @@ export interface UpdateClusterRequestAutoscalerConfig {
   /** Detect similar node groups and balance the number of nodes between them. */
   balanceSimilarNodeGroups?: boolean
   /**
-   * Pods with priority below cutoff will be expendable. Pods with priority
-   * below cutoff will be expendable. They can be killed without any
-   * consideration during scale down and they don't cause scale up. Pods with
-   * null priority (PodPriority disabled) are non expendable.
+   * Pods with priority below cutoff will be expendable. They can be killed
+   * without any consideration during scale down and they won't cause scale up.
+   * Pods with null priority (PodPriority disabled) are non expendable.
    */
   expendablePodsPriorityCutoff?: number
-  /** How long a node should be unneeded before it is eligible for scale down. */
+  /** How long a node should be unneeded before it is eligible to be scaled down. */
   scaleDownUnneededTime?: string
   /**
-   * Node utilization level, defined as sum of requested resources divided by
+   * Node utilization level, defined as a sum of requested resources divided by
    * capacity, below which a node can be considered for scale down.
    */
   scaleDownUtilizationThreshold?: number
@@ -643,46 +633,42 @@ export interface UpdateClusterRequestAutoscalerConfig {
 export interface UpdateClusterRequestOpenIDConnectConfig {
   /**
    * URL of the provider which allows the API server to discover public signing
-   * keys. URL of the provider which allows the API server to discover public
-   * signing keys. Only URLs which use the `https://` scheme are accepted. This
-   * is typically the provider's discovery URL without a path, for example
-   * "https://accounts.google.com" or "https://login.salesforce.com". This URL
-   * should point to the level below .well-known/openid-configuration.
+   * keys. Only URLs using the `https://` scheme are accepted. This is typically
+   * the provider's discovery URL without a path, for example
+   * "https://accounts.google.com" or "https://login.salesforce.com".
    */
   issuerUrl?: string
-  /** A client id that all tokens must be issued for. */
+  /** A client ID that all tokens must be issued for. */
   clientId?: string
   /**
-   * JWT claim to use as the user name. JWT claim to use as the user name. By
-   * default `sub`, which is expected to be a unique identifier of the end user.
-   * Admins can choose other claims, such as `email` or `name`, depending on
-   * their provider. However, claims other than `email` will be prefixed with
-   * the issuer URL to prevent naming clashes with other plugins.
+   * JWT claim to use as the user name. The default is `sub`, which is expected
+   * to be the end user's unique identifier. Admins can choose other claims,
+   * such as `email` or `name`, depending on their provider. However, claims
+   * other than `email` will be prefixed with the issuer URL to prevent name
+   * collision.
    */
   usernameClaim?: string
   /**
-   * Prefix prepended to username. Prefix prepended to username claims to
-   * prevent clashes with existing names (such as `system:` users). For example,
-   * the value `oidc:` will create usernames like `oidc:jane.doe`. If this flag
-   * isn't provided and `username_claim` is a value other than `email` the
-   * prefix defaults to `( Issuer URL )#` where `( Issuer URL )` is the value of
-   * `issuer_url`. The value `-` can be used to disable all prefixing.
+   * Prefix prepended to username claims to prevent name collision (such as
+   * `system:` users). For example, the value `oidc:` will create usernames like
+   * `oidc:jane.doe`. If this flag is not provided and `username_claim` is a
+   * value other than `email`, the prefix defaults to `( Issuer URL )#` where `(
+   * Issuer URL )` is the value of `issuer_url`. The value `-` can be used to
+   * disable all prefixing.
    */
   usernamePrefix?: string
   /** JWT claim to use as the user's group. */
   groupsClaim?: string[]
   /**
-   * Prefix prepended to group claims. Prefix prepended to group claims to
-   * prevent clashes with existing names (such as `system:` groups). For
-   * example, the value `oidc:` will create group names like `oidc:engineering`
-   * and `oidc:infra`.
+   * Prefix prepended to group claims to prevent name collision (such as
+   * `system:` groups). For example, the value `oidc:` will create group names
+   * like `oidc:engineering` and `oidc:infra`.
    */
   groupsPrefix?: string
   /**
-   * Multiple key=value pairs that describes a required claim in the ID token.
-   * Multiple key=value pairs that describes a required claim in the ID token.
-   * If set, the claims are verified to be present in the ID token with a
-   * matching value.
+   * Multiple key=value pairs describing a required claim in the ID token. If
+   * set, the claims are verified to be present in the ID token with a matching
+   * value.
    */
   requiredClaim?: string[]
 }
@@ -724,17 +710,20 @@ export type ListClustersRequest = {
   organizationId?: string
   /** Project ID on which to filter the returned clusters. */
   projectId?: string
-  /** Sort order of the returned clusters. */
+  /** Sort order of returned clusters. */
   orderBy?: ListClustersRequestOrderBy
-  /** Page number for the returned clusters. */
+  /** Page number to return for clusters, from the paginated results. */
   page?: number
   /** Maximum number of clusters per page. */
   pageSize?: number
-  /** Name on which to filter the returned clusters. */
+  /**
+   * Name to filter on, only clusters containing this substring in their name
+   * will be returned.
+   */
   name?: string
-  /** Status on which to filter the returned clusters. */
+  /** Status to filter on, only clusters with this status will be returned. */
   status?: ClusterStatus
-  /** Type on which to filter the returned clusters. */
+  /** Type to filter on, only clusters with this type will be returned. */
   type?: string
 }
 
@@ -758,35 +747,41 @@ export type CreateClusterRequest = {
    * could be set.
    */
   projectId?: string
-  /** Type of the cluster (possible values are kapsule, multicloud). */
+  /**
+   * Type of the cluster (possible values are kapsule, multicloud,
+   * kapsule-dedicated-8, kapsule-dedicated-16).
+   */
   type: string
-  /** Name of the cluster. */
+  /** Cluster name. */
   name?: string
-  /** Description of the cluster. */
+  /** Cluster description. */
   description: string
   /** Tags associated with the cluster. */
   tags?: string[]
   /** Kubernetes version of the cluster. */
   version: string
-  /** Container Network Interface (CNI) plugin that will run in the cluster. */
+  /** Container Network Interface (CNI) plugin running in the cluster. */
   cni: CNI
-  /** @deprecated Defines if the Kubernetes Dashboard is enabled in the cluster. */
+  /**
+   * @deprecated Defines whether the Kubernetes Dashboard is enabled in the
+   *   cluster.
+   */
   enableDashboard?: boolean
-  /** @deprecated Ingress Controller that will run in the cluster. */
+  /** @deprecated Ingress Controller running in the cluster (deprecated feature). */
   ingress?: Ingress
-  /** Pools to be created along with the cluster. */
+  /** Pools created along with the cluster. */
   pools?: CreateClusterRequestPoolConfig[]
   /**
-   * Autoscaler config for the cluster. This field allows to specify some
-   * configuration for the autoscaler, which is an implementation of the
-   * cluster-autoscaler
+   * Autoscaler configuration for the cluster. It allows you to set (to an
+   * extent) your preferred autoscaler configuration, which is an implementation
+   * of the cluster-autoscaler
    * (https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/).
    */
   autoscalerConfig?: CreateClusterRequestAutoscalerConfig
   /**
    * Auto upgrade configuration of the cluster. This configuration enables to
    * set a specific 2-hour time window in which the cluster can be automatically
-   * updated to the latest patch version in the current minor one.
+   * updated to the latest patch version.
    */
   autoUpgrade?: CreateClusterRequestAutoUpgrade
   /** List of feature gates to enable. */
@@ -816,7 +811,7 @@ export type GetClusterRequest = {
    * config.
    */
   region?: Region
-  /** The ID of the requested cluster. */
+  /** ID of the requested cluster. */
   clusterId: string
 }
 
@@ -828,25 +823,21 @@ export type UpdateClusterRequest = {
   region?: Region
   /** ID of the cluster to update. */
   clusterId: string
-  /** New external name of the cluster. */
+  /** New external name for the cluster. */
   name?: string
-  /** New description of the cluster. */
+  /** New description for the cluster. */
   description?: string
   /** New tags associated with the cluster. */
   tags?: string[]
-  /**
-   * New autoscaler config for the cluster. Object defining the configuration
-   * for the autoscaler, which is an implementation of the
-   * [cluster-autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/).
-   */
+  /** New autoscaler config for the cluster. */
   autoscalerConfig?: UpdateClusterRequestAutoscalerConfig
-  /** @deprecated New value of the Kubernetes Dashboard enablement. */
+  /** @deprecated New value for the Kubernetes Dashboard enablement. */
   enableDashboard?: boolean
-  /** @deprecated New Ingress Controller for the cluster. */
+  /** @deprecated New Ingress Controller for the cluster (deprecated feature). */
   ingress?: Ingress
   /**
-   * New auto upgrade configuration of the cluster. New auto upgrade
-   * configuration of the cluster. Note that all fields need to be set.
+   * New auto upgrade configuration for the cluster. Note that all fields need
+   * to be set.
    */
   autoUpgrade?: UpdateClusterRequestAutoUpgrade
   /** List of feature gates to enable. */
@@ -874,8 +865,8 @@ export type DeleteClusterRequest = {
   /** ID of the cluster to delete. */
   clusterId: string
   /**
-   * Set true if you want to delete all volumes (including retain volume type)
-   * and loadbalancers whose name start with cluster ID.
+   * Defines whether all volumes (including retain volume type) and Load
+   * Balancers with a name starting with the cluster ID will also be deleted.
    */
   withAdditionalResources: boolean
 }
@@ -889,14 +880,14 @@ export type UpgradeClusterRequest = {
   /** ID of the cluster to upgrade. */
   clusterId: string
   /**
-   * New Kubernetes version of the cluster. New Kubernetes version of the
-   * cluster. Note that the version shoud either be a higher patch version of
-   * the same minor version or the direct minor version after the current one.
+   * New Kubernetes version of the cluster. Note that the version should either
+   * be a higher patch version of the same minor version or the direct minor
+   * version after the current one.
    */
   version: string
   /**
-   * Enablement of the pools upgrade. This field also trigger pools upgrade once
-   * the control plane is upgraded.
+   * Defines whether pools will also be upgraded once the control plane is
+   * upgraded.
    */
   upgradePools: boolean
 }
@@ -922,10 +913,7 @@ export type ListClusterAvailableVersionsRequest = {
    * config.
    */
   region?: Region
-  /**
-   * ID of the cluster which the available Kuberentes versions will be listed
-   * from.
-   */
+  /** Cluster ID for which the available Kubernetes versions will be listed. */
   clusterId: string
 }
 
@@ -935,7 +923,7 @@ export type ResetClusterAdminTokenRequest = {
    * config.
    */
   region?: Region
-  /** ID of the cluster on which the admin token will be renewed. */
+  /** Cluster ID on which the admin token will be renewed. */
   clusterId: string
 }
 
@@ -945,17 +933,20 @@ export type ListPoolsRequest = {
    * config.
    */
   region?: Region
-  /** ID of the cluster from which the pools will be listed from. */
+  /** ID of the cluster whose pools will be listed. */
   clusterId: string
-  /** Sort order of the returned pools. */
+  /** Sort order of returned pools. */
   orderBy?: ListPoolsRequestOrderBy
   /** Page number for the returned pools. */
   page?: number
   /** Maximum number of pools per page. */
   pageSize?: number
-  /** Name on which to filter the returned pools. */
+  /**
+   * Name to filter on, only pools containing this substring in their name will
+   * be returned.
+   */
   name?: string
-  /** Status on which to filter the returned pools. */
+  /** Status to filter on, only pools with this status will be returned. */
   status?: PoolStatus
 }
 
@@ -965,16 +956,15 @@ export type CreatePoolRequest = {
    * config.
    */
   region?: Region
-  /** ID of the cluster in which the pool will be created. */
+  /** Cluster ID to which the pool will be attached. */
   clusterId: string
-  /** Name of the pool. */
+  /** Pool name. */
   name?: string
   /**
-   * Node type is the type of Scaleway Instance wanted for the pool. Node type
-   * is the type of Scaleway Instance wanted for the pool. Nodes with
+   * Node type is the type of Scaleway Instance wanted for the pool. Nodes with
    * insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST).
    * 'external' is a special node type used to provision instances from other
-   * cloud providers.
+   * cloud providers in a Kosmos Cluster.
    */
   nodeType: string
   /** Placement group ID in which all the nodes of the pool will be created. */
@@ -984,19 +974,19 @@ export type CreatePoolRequest = {
   /** Size (number of nodes) of the pool. */
   size: number
   /**
-   * Minimum size of the pool. Defines the minimum size of the pool. Note that
-   * this field will be used only when autoscaling is enabled.
+   * Defines the minimum size of the pool. Note that this field is only used
+   * when autoscaling is enabled on the pool.
    */
   minSize?: number
   /**
-   * Maximum size of the pool. Defines the maximum size of the pool. Note that
-   * this field will be used only when autoscaling is enabled.
+   * Defines the maximum size of the pool. Note that this field is only used
+   * when autoscaling is enabled on the pool.
    */
   maxSize?: number
   /**
-   * Container runtime for the nodes of the pool. Customization of the container
-   * runtime is available for each pool. Note that `docker` is deprecated since
-   * 1.20 and will be removed in 1.24.
+   * Customization of the container runtime is available for each pool. Note
+   * that `docker` has been deprecated since version 1.20 and will be removed by
+   * version 1.24.
    */
   containerRuntime?: Runtime
   /** Defines whether the autohealing feature is enabled for the pool. */
@@ -1004,8 +994,8 @@ export type CreatePoolRequest = {
   /** Tags associated with the pool. */
   tags?: string[]
   /**
-   * Kubelet arguments to be used by this pool. Note that this feature is to be
-   * considered as experimental.
+   * Kubelet arguments to be used by this pool. Note that this feature is
+   * experimental.
    */
   kubeletArgs?: Record<string, string>
   /** Pool upgrade policy. */
@@ -1013,11 +1003,11 @@ export type CreatePoolRequest = {
   /** Zone in which the pool's nodes will be spawned. */
   zone?: Zone
   /**
-   * System volume disk type. Defines the system volume disk type, we provide
-   * two different types of volume (`volume_type`): `l_ssd` is a local block
-   * storage: your system is stored locally on the hypervisor of your node.
-   * `b_ssd` is a remote block storage: your system is stored on a centralised
-   * and resilient cluster.
+   * Defines the system volume disk type. Two different types of volume
+   * (`volume_type`) are provided: `l_ssd` is a local block storage which means
+   * your system is stored locally on your node's hypervisor. `b_ssd` is a
+   * remote block storage which means your system is stored on a centralized and
+   * resilient cluster.
    */
   rootVolumeType?: PoolVolumeType
   /** System volume disk size. */
@@ -1054,24 +1044,24 @@ export type UpdatePoolRequest = {
   region?: Region
   /** ID of the pool to update. */
   poolId: string
-  /** New value for the enablement of autoscaling for the pool. */
+  /** New value for the pool autoscaling enablement. */
   autoscaling?: boolean
-  /** New size for the pool. */
+  /** New desired pool size. */
   size?: number
-  /** New minimun size for the pool. */
+  /** New minimum size for the pool. */
   minSize?: number
   /** New maximum size for the pool. */
   maxSize?: number
-  /** New value for the enablement of autohealing for the pool. */
+  /** New value for the pool autohealing enablement. */
   autohealing?: boolean
   /** New tags associated with the pool. */
   tags?: string[]
   /**
-   * New Kubelet arguments to be used by this pool. Note that this feature is to
-   * be considered as experimental.
+   * New Kubelet arguments to be used by this pool. Note that this feature is
+   * experimental.
    */
   kubeletArgs?: Record<string, string>
-  /** Upgrade policy for the pool. */
+  /** New upgrade policy for the pool. */
   upgradePolicy?: UpdatePoolRequestUpgradePolicy
 }
 
@@ -1110,9 +1100,12 @@ export type ListNodesRequest = {
   page?: number
   /** Maximum number of nodes per page. */
   pageSize?: number
-  /** Name on which to filter the returned nodes. */
+  /**
+   * Name to filter on, only nodes containing this substring in their name will
+   * be returned.
+   */
   name?: string
-  /** Status on which to filter the returned nodes. */
+  /** Status to filter on, only nodes with this status will be returned. */
   status?: NodeStatus
 }
 

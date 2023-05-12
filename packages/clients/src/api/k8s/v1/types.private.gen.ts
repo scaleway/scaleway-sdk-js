@@ -8,6 +8,6 @@ export type GetClusterKubeConfigRequest = {
    * config.
    */
   region?: Region
-  /** ID of the cluster to download the kubeconfig from. */
+  /** Cluster ID for which to download the kubeconfig. */
   clusterId: string
 }
