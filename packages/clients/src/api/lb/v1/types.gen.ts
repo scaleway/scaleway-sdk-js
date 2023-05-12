@@ -304,6 +304,13 @@ export interface Backend {
   redispatchAttemptCount?: number
   /** Number of retries when a backend server connection failed. */
   maxRetries?: number
+  /** Maximum number of connections allowed per backend server. */
+  maxConnections?: number
+  /**
+   * Maximum time for a request to be left pending in queue when
+   * `max_connections` is reached.
+   */
+  timeoutQueue?: string
 }
 
 /** Backend server stats. */
@@ -1194,6 +1201,13 @@ export type CreateBackendRequest = {
   redispatchAttemptCount?: number
   /** Number of retries when a backend server connection failed. */
   maxRetries?: number
+  /** Maximum number of connections allowed per backend server. */
+  maxConnections?: number
+  /**
+   * Maximum time for a request to be left pending in queue when
+   * `max_connections` is reached.
+   */
+  timeoutQueue?: string
 }
 
 export type GetBackendRequest = {
@@ -1273,6 +1287,13 @@ export type UpdateBackendRequest = {
   redispatchAttemptCount?: number
   /** Number of retries when a backend server connection failed. */
   maxRetries?: number
+  /** Maximum number of connections allowed per backend server. */
+  maxConnections?: number
+  /**
+   * Maximum time for a request to be left pending in queue when
+   * `max_connections` is reached.
+   */
+  timeoutQueue?: string
 }
 
 export type DeleteBackendRequest = {
@@ -2240,6 +2261,13 @@ export type ZonedApiCreateBackendRequest = {
   redispatchAttemptCount?: number
   /** Number of retries when a backend server connection failed. */
   maxRetries?: number
+  /** Maximum number of connections allowed per backend server. */
+  maxConnections?: number
+  /**
+   * Maximum time for a request to be left pending in queue when
+   * `max_connections` is reached.
+   */
+  timeoutQueue?: string
 }
 
 export type ZonedApiGetBackendRequest = {
@@ -2313,6 +2341,13 @@ export type ZonedApiUpdateBackendRequest = {
   redispatchAttemptCount?: number
   /** Number of retries when a backend server connection failed. */
   maxRetries?: number
+  /** Maximum number of connections allowed per backend server. */
+  maxConnections?: number
+  /**
+   * Maximum time for a request to be left pending in queue when
+   * `max_connections` is reached.
+   */
+  timeoutQueue?: string
 }
 
 export type ZonedApiDeleteBackendRequest = {

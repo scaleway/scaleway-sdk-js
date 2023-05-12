@@ -364,6 +364,7 @@ export const unmarshalBackend = (data: unknown) => {
     id: data.id,
     ignoreSslServerVerify: data.ignore_ssl_server_verify,
     lb: data.lb ? unmarshalLb(data.lb) : undefined,
+    maxConnections: data.max_connections,
     maxRetries: data.max_retries,
     name: data.name,
     onMarkedDownAction: data.on_marked_down_action,
@@ -375,6 +376,7 @@ export const unmarshalBackend = (data: unknown) => {
     stickySessions: data.sticky_sessions,
     stickySessionsCookieName: data.sticky_sessions_cookie_name,
     timeoutConnect: data.timeout_connect,
+    timeoutQueue: data.timeout_queue,
     timeoutServer: data.timeout_server,
     timeoutTunnel: data.timeout_tunnel,
     updatedAt: unmarshalDate(data.updated_at),
@@ -1038,6 +1040,7 @@ export const marshalCreateBackendRequest = (
   forward_protocol: request.forwardProtocol,
   health_check: marshalHealthCheck(request.healthCheck, defaults),
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
+  max_connections: request.maxConnections,
   max_retries: request.maxRetries,
   name: request.name || randomName('lbb'),
   on_marked_down_action:
@@ -1050,6 +1053,7 @@ export const marshalCreateBackendRequest = (
   sticky_sessions: request.stickySessions,
   sticky_sessions_cookie_name: request.stickySessionsCookieName,
   timeout_connect: request.timeoutConnect,
+  timeout_queue: request.timeoutQueue,
   timeout_server: request.timeoutServer,
   timeout_tunnel: request.timeoutTunnel,
 })
@@ -1231,6 +1235,7 @@ export const marshalUpdateBackendRequest = (
   forward_port_algorithm: request.forwardPortAlgorithm,
   forward_protocol: request.forwardProtocol,
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
+  max_connections: request.maxConnections,
   max_retries: request.maxRetries,
   name: request.name,
   on_marked_down_action:
@@ -1242,6 +1247,7 @@ export const marshalUpdateBackendRequest = (
   sticky_sessions: request.stickySessions,
   sticky_sessions_cookie_name: request.stickySessionsCookieName,
   timeout_connect: request.timeoutConnect,
+  timeout_queue: request.timeoutQueue,
   timeout_server: request.timeoutServer,
   timeout_tunnel: request.timeoutTunnel,
 })
@@ -1423,6 +1429,7 @@ export const marshalZonedApiCreateBackendRequest = (
   forward_protocol: request.forwardProtocol,
   health_check: marshalHealthCheck(request.healthCheck, defaults),
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
+  max_connections: request.maxConnections,
   max_retries: request.maxRetries,
   name: request.name || randomName('lbb'),
   on_marked_down_action:
@@ -1435,6 +1442,7 @@ export const marshalZonedApiCreateBackendRequest = (
   sticky_sessions: request.stickySessions,
   sticky_sessions_cookie_name: request.stickySessionsCookieName,
   timeout_connect: request.timeoutConnect,
+  timeout_queue: request.timeoutQueue,
   timeout_server: request.timeoutServer,
   timeout_tunnel: request.timeoutTunnel,
 })
@@ -1623,6 +1631,7 @@ export const marshalZonedApiUpdateBackendRequest = (
   forward_port_algorithm: request.forwardPortAlgorithm,
   forward_protocol: request.forwardProtocol,
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
+  max_connections: request.maxConnections,
   max_retries: request.maxRetries,
   name: request.name,
   on_marked_down_action:
@@ -1634,6 +1643,7 @@ export const marshalZonedApiUpdateBackendRequest = (
   sticky_sessions: request.stickySessions,
   sticky_sessions_cookie_name: request.stickySessionsCookieName,
   timeout_connect: request.timeoutConnect,
+  timeout_queue: request.timeoutQueue,
   timeout_server: request.timeoutServer,
   timeout_tunnel: request.timeoutTunnel,
 })
