@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.10.1...@scaleway/sdk@1.11.0) (2023-05-15)
+
+### Features
+
+- **lb:** add maxConnections and timeoutQueue fields ([#652](https://github.com/scaleway/scaleway-sdk-js/issues/652)) ([2b7a29a](https://github.com/scaleway/scaleway-sdk-js/commit/2b7a29a2b38a2e523cd7cdf18de28dc6bc801e12))
+
 ## [1.10.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.10.0...@scaleway/sdk@1.10.1) (2023-05-11)
 
 ### Bug Fixes
