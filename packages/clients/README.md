@@ -9,7 +9,7 @@ This SDK enables you to interact with Scaleway APIs.
 
 ## Getting Started
 
-You'll need a pair of access and secret keys to connect to Scaleway API. Please check the [documentation](https://www.scaleway.com/en/docs/console/my-project/how-to/generate-api-key/) on how to retrieve them.
+You'll need a pair of access and secret keys to connect to Scaleway API. Please check the [documentation](https://www.scaleway.com/en/docs/identity-and-access-management/iam/how-to/create-api-keys/) on how to retrieve them.
 
 **A minimal setup** would look like this:
 
