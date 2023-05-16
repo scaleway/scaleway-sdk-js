@@ -11,6 +11,7 @@ import type { DefaultValues } from '../../../bridge'
 import type {
   APIKey,
   AddGroupMemberRequest,
+  AddGroupMembersRequest,
   Application,
   CreateAPIKeyRequest,
   CreateApplicationRequest,
@@ -420,6 +421,14 @@ export const marshalAddGroupMemberRequest = (
       value: request.applicationId,
     },
   ]),
+})
+
+export const marshalAddGroupMembersRequest = (
+  request: AddGroupMembersRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  application_ids: request.applicationIds,
+  user_ids: request.userIds,
 })
 
 export const marshalCreateAPIKeyRequest = (

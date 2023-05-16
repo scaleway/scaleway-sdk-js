@@ -9,6 +9,7 @@ import {
 } from '../../../bridge'
 import {
   marshalAddGroupMemberRequest,
+  marshalAddGroupMembersRequest,
   marshalCreateAPIKeyRequest,
   marshalCreateApplicationRequest,
   marshalCreateGroupRequest,
@@ -45,6 +46,7 @@ import {
 import type {
   APIKey,
   AddGroupMemberRequest,
+  AddGroupMembersRequest,
   Application,
   ClonePolicyRequest,
   CreateAPIKeyRequest,
@@ -561,6 +563,33 @@ export class API extends ParentAPI {
           'groupId',
           request.groupId,
         )}/add-member`,
+      },
+      unmarshalGroup,
+    )
+
+  /**
+   * Add multiple users and applications to a group. Add multiple users and
+   * applications to a group in a single call. You can specify an array of
+   * `user_id`s and `application_id`s. Note that any existing users and
+   * applications in the group will remain. To add new users/applications and
+   * delete pre-existing ones, use the [Overwrite users and applications of a
+   * group](#path-groups-overwrite-users-and-applications-of-a-group) method.
+   *
+   * @param request - The request {@link AddGroupMembersRequest}
+   * @returns A Promise of Group
+   */
+  addGroupMembers = (request: Readonly<AddGroupMembersRequest>) =>
+    this.client.fetch<Group>(
+      {
+        body: JSON.stringify(
+          marshalAddGroupMembersRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/iam/v1alpha1/groups/${validatePathParam(
+          'groupId',
+          request.groupId,
+        )}/add-members`,
       },
       unmarshalGroup,
     )
