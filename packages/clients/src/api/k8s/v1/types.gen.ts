@@ -420,10 +420,11 @@ export interface ExternalNode {
   id: string
   name: string
   clusterUrl: string
-  clusterVersion: string
+  poolVersion: string
   clusterCa: string
   kubeToken: string
   kubeletConfig: string
+  externalIp: string
 }
 
 /** List cluster available versions response. */
