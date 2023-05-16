@@ -626,6 +626,15 @@ export type AddGroupMemberRequest = {
   applicationId?: string
 }
 
+export type AddGroupMembersRequest = {
+  /** ID of the group. */
+  groupId: string
+  /** IDs of the users to add. */
+  userIds?: string[]
+  /** IDs of the applications to add. */
+  applicationIds?: string[]
+}
+
 export type RemoveGroupMemberRequest = {
   /** ID of the group. */
   groupId: string
