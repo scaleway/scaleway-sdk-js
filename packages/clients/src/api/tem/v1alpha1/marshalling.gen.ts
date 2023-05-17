@@ -90,6 +90,7 @@ export const unmarshalEmail = (data: unknown) => {
     id: data.id,
     lastTries: unmarshalArrayOfObject(data.last_tries, unmarshalEmailTry),
     mailFrom: data.mail_from,
+    mailRcpt: data.mail_rcpt,
     messageId: data.message_id,
     projectId: data.project_id,
     rcptTo: data.rcpt_to,

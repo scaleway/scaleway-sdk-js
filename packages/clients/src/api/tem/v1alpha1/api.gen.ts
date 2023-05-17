@@ -125,8 +125,10 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['domain_id', request.domainId],
           ['mail_from', request.mailFrom],
+          ['mail_rcpt', request.mailRcpt],
           ['mail_to', request.mailTo],
           ['message_id', request.messageId],
+          ['order_by', request.orderBy ?? 'created_at_desc'],
           ['page', request.page],
           [
             'page_size',
@@ -144,7 +146,15 @@ export class API extends ParentAPI {
 
   /**
    * List emails. Retrieve the list of emails sent from a specific domain or for
-   * a specific Project or Organization. You must specify the `region`.
+   * a specific Project or Organization. You must specify the `region`. You can
+   * filter your emails in ascending or descending order using:
+   *
+   * - Created_at
+   * - Updated_at
+   * - Status
+   * - Mail_from
+   * - Mail_rcpt
+   * - Subject
    *
    * @param request - The request {@link ListEmailsRequest}
    * @returns A Promise of ListEmailsResponse
