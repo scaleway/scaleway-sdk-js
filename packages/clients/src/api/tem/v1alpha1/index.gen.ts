@@ -23,6 +23,7 @@ export type {
   ListDomainsRequest,
   ListDomainsResponse,
   ListEmailsRequest,
+  ListEmailsRequestOrderBy,
   ListEmailsResponse,
   RevokeDomainRequest,
   Statistics,

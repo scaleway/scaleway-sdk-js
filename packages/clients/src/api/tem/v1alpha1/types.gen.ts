@@ -21,6 +21,20 @@ export type EmailStatus =
   | 'failed'
   | 'canceled'
 
+export type ListEmailsRequestOrderBy =
+  | 'created_at_desc'
+  | 'created_at_asc'
+  | 'updated_at_desc'
+  | 'updated_at_asc'
+  | 'status_desc'
+  | 'status_asc'
+  | 'mail_from_desc'
+  | 'mail_from_asc'
+  | 'mail_rcpt_desc'
+  | 'mail_rcpt_asc'
+  | 'subject_desc'
+  | 'subject_asc'
+
 /** Create email request. address. */
 export interface CreateEmailRequestAddress {
   /** Email address. */
@@ -93,8 +107,10 @@ export interface Email {
   projectId: string
   /** Email address of the sender. */
   mailFrom: string
+  /** @deprecated (Deprecated) Email address of the recipient. */
+  rcptTo?: string
   /** Email address of the recipient. */
-  rcptTo: string
+  mailRcpt: string
   /** Type of recipient. */
   rcptType: EmailRcptType
   /** Subject of the email. */
@@ -140,7 +156,7 @@ export interface ListDomainsResponse {
 
 /** List emails response. */
 export interface ListEmailsResponse {
-  /** Count of all emails matching the requested criteria. */
+  /** Number of emails matching the requested criteria. */
   totalCount: number
   /** Single page of emails matching the requested criteria. */
   emails: Email[]
@@ -223,24 +239,41 @@ export type ListEmailsRequest = {
   region?: Region
   page?: number
   pageSize?: number
-  /** ID of the Project in which to list the emails (optional). */
+  /** (Optional) ID of the Project in which to list the emails. */
   projectId?: string
-  /** ID of the domain for which to list the emails (optional). */
+  /** (Optional) ID of the domain for which to list the emails. */
   domainId?: string
-  /** ID of the message for which to list the emails (optional). */
+  /** (Optional) ID of the message for which to list the emails. */
   messageId?: string
-  /** Subject of the email. */
-  subject?: string
-  /** List emails created after this date (optional). */
+  /** (Optional) List emails created after this date. */
   since?: Date
-  /** List emails created before this date (optional). */
+  /** (Optional) List emails created before this date. */
   until?: Date
-  /** List emails sent with this `mail_from` sender's address (optional). */
+  /** (Optional) List emails sent with this sender's email address. */
   mailFrom?: string
-  /** List emails sent with this `mail_to` recipient's address (optional). */
+  /**
+   * @deprecated (Deprecated) List emails sent to this recipient's email
+   *   address.
+   */
   mailTo?: string
-  /** List emails having any of this status (optional). */
+  /** (Optional) List emails sent to this recipient's email address. */
+  mailRcpt?: string
+  /** (Optional) List emails with any of these statuses. */
   statuses?: EmailStatus[]
+  /** (Optional) List emails with this subject. */
+  subject?: string
+  /**
+   * (Optional) List emails corresponding to specific criteria. You can filter
+   * your emails in ascending or descending order using:
+   *
+   * - Created_at
+   * - Updated_at
+   * - Status
+   * - Mail_from
+   * - Mail_rcpt
+   * - Subject.
+   */
+  orderBy?: ListEmailsRequestOrderBy
 }
 
 export type GetStatisticsRequest = {
@@ -249,18 +282,18 @@ export type GetStatisticsRequest = {
    * config.
    */
   region?: Region
-  /** Number of emails for this Project (optional). */
+  /** (Optional) Number of emails for this Project. */
   projectId?: string
   /**
-   * Number of emails sent from this domain (must be coherent with the
-   * `project_id` and the `organization_id`) (optional).
+   * (Optional) Number of emails sent from this domain (must be coherent with
+   * the `project_id` and the `organization_id`).
    */
   domainId?: string
-  /** Number of emails created after this date (optional). */
+  /** (Optional) Number of emails created after this date. */
   since?: Date
-  /** Number of emails created before this date (optional). */
+  /** (Optional) Number of emails created before this date. */
   until?: Date
-  /** Number of emails sent with this `mail_from` sender's address (optional). */
+  /** (Optional) Number of emails sent with this sender's email address. */
   mailFrom?: string
 }
 
