@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.11.0...@scaleway/sdk@1.12.0) (2023-05-19)
+
+### Features
+
+- **iam:** add group members ([#665](https://github.com/scaleway/scaleway-sdk-js/issues/665)) ([d01aba0](https://github.com/scaleway/scaleway-sdk-js/commit/d01aba0e3947896c56b62dd73be413fb35adab61))
+- **tem:** improve listEmails endpoint ([#666](https://github.com/scaleway/scaleway-sdk-js/issues/666)) ([72bfef4](https://github.com/scaleway/scaleway-sdk-js/commit/72bfef4e93fbc94cc77d1e8923bc9fdeaf1c1965))
+
+### Bug Fixes
+
+- **k8s:** change field name for Kosmos rpc message ([#664](https://github.com/scaleway/scaleway-sdk-js/issues/664)) ([b056d3c](https://github.com/scaleway/scaleway-sdk-js/commit/b056d3c34a5c0629fae46b6996a923ee8e6a0422))
+
 ## [1.11.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.10.1...@scaleway/sdk@1.11.0) (2023-05-15)
 
 ### Features
