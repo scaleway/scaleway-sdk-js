@@ -12,6 +12,7 @@ export type {
   DestroySecretVersionRequest,
   DisableSecretVersionRequest,
   EnableSecretVersionRequest,
+  GeneratePasswordRequest,
   GetSecretByNameRequest,
   GetSecretRequest,
   GetSecretVersionByNameRequest,

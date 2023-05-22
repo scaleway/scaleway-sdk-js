@@ -117,7 +117,7 @@ export interface SecretVersion {
   updatedAt?: Date
   /** Description of the version. */
   description?: string
-  /** True if the version is the latest one. */
+  /** Returns `true` if the version is the latest. */
   isLatest: boolean
 }
 
@@ -234,23 +234,50 @@ export type CreateSecretVersionRequest = {
    */
   disablePrevious?: boolean
   /**
-   * Options to generate a password. Optional. If specified, a random password
-   * will be generated. The `data` and `data_crc32` fields must be empty. By
-   * default, the generator will use upper and lower case letters, and digits.
-   * This behavior can be tuned using the generation parameters.
-   *
-   * One-of ('PasswordGeneration'): at most one of 'passwordGeneration' could be
-   * set.
-   */
-  passwordGeneration?: PasswordGenerationParams
-  /**
-   * The CRC32 checksum of the data as a base-10 integer. Optional. If
+   * (Optional.) The CRC32 checksum of the data as a base-10 integer. If
    * specified, Secret Manager will verify the integrity of the data received
-   * against the given CRC32. An error is returned if the CRC32 does not match.
-   * Otherwise, the CRC32 will be stored and returned along with the
-   * SecretVersion on futur accesses.
+   * against the given CRC32 checksum. An error is returned if the CRC32 does
+   * not match. If, however, the CRC32 matches, it will be stored and returned
+   * along with the SecretVersion on future access requests.
    */
   dataCrc32?: number
+}
+
+export type GeneratePasswordRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the secret. */
+  secretId: string
+  /** Description of the version. */
+  description?: string
+  /**
+   * (Optional.) Disable the previous secret version. This has no effect if
+   * there is no previous version or if the previous version was already
+   * disabled.
+   */
+  disablePrevious?: boolean
+  /** Length of the password to generate (between 1 and 1024 characters). */
+  length: number
+  /**
+   * (Optional.) Exclude lower case letters by default in the password character
+   * set.
+   */
+  noLowercaseLetters?: boolean
+  /**
+   * (Optional.) Exclude upper case letters by default in the password character
+   * set.
+   */
+  noUppercaseLetters?: boolean
+  /** (Optional.) Exclude digits by default in the password character set. */
+  noDigits?: boolean
+  /**
+   * (Optional.) Additional ASCII characters to be included in the password
+   * character set.
+   */
+  additionalChars?: string
 }
 
 export type GetSecretVersionRequest = {

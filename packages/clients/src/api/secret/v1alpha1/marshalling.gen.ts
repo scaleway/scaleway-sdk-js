@@ -2,7 +2,6 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import {
   isJSONObject,
-  resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
@@ -12,9 +11,9 @@ import type {
   AddSecretOwnerRequest,
   CreateSecretRequest,
   CreateSecretVersionRequest,
+  GeneratePasswordRequest,
   ListSecretVersionsResponse,
   ListSecretsResponse,
-  PasswordGenerationParams,
   Secret,
   SecretVersion,
   UpdateSecretRequest,
@@ -102,17 +101,6 @@ export const unmarshalListSecretsResponse = (data: unknown) => {
   } as ListSecretsResponse
 }
 
-const marshalPasswordGenerationParams = (
-  request: PasswordGenerationParams,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  additional_chars: request.additionalChars,
-  length: request.length,
-  no_digits: request.noDigits,
-  no_lowercase_letters: request.noLowercaseLetters,
-  no_uppercase_letters: request.noUppercaseLetters,
-})
-
 export const marshalAddSecretOwnerRequest = (
   request: AddSecretOwnerRequest,
   defaults: DefaultValues,
@@ -138,14 +126,19 @@ export const marshalCreateSecretVersionRequest = (
   data_crc32: request.dataCrc32,
   description: request.description,
   disable_previous: request.disablePrevious,
-  ...resolveOneOf([
-    {
-      param: 'password_generation',
-      value: request.passwordGeneration
-        ? marshalPasswordGenerationParams(request.passwordGeneration, defaults)
-        : undefined,
-    },
-  ]),
+})
+
+export const marshalGeneratePasswordRequest = (
+  request: GeneratePasswordRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  additional_chars: request.additionalChars,
+  description: request.description,
+  disable_previous: request.disablePrevious,
+  length: request.length,
+  no_digits: request.noDigits,
+  no_lowercase_letters: request.noLowercaseLetters,
+  no_uppercase_letters: request.noUppercaseLetters,
 })
 
 export const marshalUpdateSecretRequest = (
