@@ -11,6 +11,7 @@ import {
   marshalAddSecretOwnerRequest,
   marshalCreateSecretRequest,
   marshalCreateSecretVersionRequest,
+  marshalGeneratePasswordRequest,
   marshalUpdateSecretRequest,
   marshalUpdateSecretVersionRequest,
   unmarshalAccessSecretVersionResponse,
@@ -30,6 +31,7 @@ import type {
   DestroySecretVersionRequest,
   DisableSecretVersionRequest,
   EnableSecretVersionRequest,
+  GeneratePasswordRequest,
   GetSecretByNameRequest,
   GetSecretRequest,
   GetSecretVersionByNameRequest,
@@ -234,6 +236,33 @@ export class API extends ParentAPI {
           'region',
           request.region ?? this.client.settings.defaultRegion,
         )}/secrets/${validatePathParam('secretId', request.secretId)}/versions`,
+      },
+      unmarshalSecretVersion,
+    )
+
+  /**
+   * Generate a password in a new version. Generate a password for the given
+   * secret specified by the `region` and `secret_id` parameters. This will also
+   * create a new version of the secret that will store the password.
+   *
+   * @param request - The request {@link GeneratePasswordRequest}
+   * @returns A Promise of SecretVersion
+   */
+  generatePassword = (request: Readonly<GeneratePasswordRequest>) =>
+    this.client.fetch<SecretVersion>(
+      {
+        body: JSON.stringify(
+          marshalGeneratePasswordRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/secrets/${validatePathParam(
+          'secretId',
+          request.secretId,
+        )}/generate-password`,
       },
       unmarshalSecretVersion,
     )
