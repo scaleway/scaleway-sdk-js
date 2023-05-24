@@ -44,6 +44,7 @@ export type {
   ListVersionsResponse,
   MaintenanceWindow,
   MaintenanceWindowDayOfTheWeek,
+  MigrateToPrivateNetworkClusterRequest,
   Node,
   NodeStatus,
   Pool,

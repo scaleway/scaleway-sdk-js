@@ -928,6 +928,18 @@ export type ResetClusterAdminTokenRequest = {
   clusterId: string
 }
 
+export type MigrateToPrivateNetworkClusterRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the cluster to migrate. */
+  clusterId: string
+  /** ID of the Private Network to link to the cluster. */
+  privateNetworkId: string
+}
+
 export type ListPoolsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
