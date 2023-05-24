@@ -155,6 +155,11 @@ export type GetSecretByNameRequest = {
   region?: Region
   /** Name of the secret. */
   secretName: string
+  /**
+   * ID of the Project to target. (Optional.) If not specified, Secret Manager
+   * will look for the secret in all Projects.
+   */
+  projectId?: string
 }
 
 export type UpdateSecretRequest = {
@@ -229,7 +234,7 @@ export type CreateSecretVersionRequest = {
   /** Description of the version. */
   description?: string
   /**
-   * Disable the previous secret version. Optional. If there is no previous
+   * Disable the previous secret version. (Optional.) If there is no previous
    * version or if the previous version was already disabled, does nothing.
    */
   disablePrevious?: boolean
@@ -308,6 +313,11 @@ export type GetSecretVersionByNameRequest = {
    * subsequent revisions augment by 1. Value can be a number or "latest".
    */
   revision: string
+  /**
+   * ID of the Project to target. (Optional.) If not specified, Secret Manager
+   * will look for the secret version in all Projects.
+   */
+  projectId?: string
 }
 
 export type UpdateSecretVersionRequest = {
@@ -353,6 +363,11 @@ export type ListSecretVersionsByNameRequest = {
   pageSize?: number
   /** Filter results by status. */
   status?: SecretVersionStatus[]
+  /**
+   * ID of the Project to target. (Optional.) If not specified, Secret Manager
+   * will look for the secret in all Projects.
+   */
+  projectId?: string
 }
 
 export type EnableSecretVersionRequest = {
@@ -413,6 +428,11 @@ export type AccessSecretVersionByNameRequest = {
    * subsequent revisions augment by 1. Value can be a number or "latest".
    */
   revision: string
+  /**
+   * ID of the Project to target. (Optional.) If not specified, Secret Manager
+   * will look for the secret version in all Projects.
+   */
+  projectId?: string
 }
 
 export type DestroySecretVersionRequest = {
