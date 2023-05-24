@@ -104,7 +104,7 @@ export class API extends ParentAPI {
 
   /**
    * Get metadata using the secret's ID. Retrieve the metadata of a secret
-   * specified by the `region` and the `secret_id` parameters.
+   * specified by the `region`, `secret_id` and `project_id` parameters.
    *
    * @param request - The request {@link GetSecretByNameRequest}
    * @returns A Promise of Secret
@@ -120,6 +120,7 @@ export class API extends ParentAPI {
           'secretName',
           request.secretName,
         )}`,
+        urlParams: urlParams(['project_id', request.projectId]),
       },
       unmarshalSecret,
     )
@@ -293,7 +294,7 @@ export class API extends ParentAPI {
   /**
    * Get metadata of a secret's version using the secret's name. Retrieve the
    * metadata of a secret's given version specified by the `region`,
-   * `secret_name` and `revision` parameters.
+   * `secret_name`, `revision` and `project_id` parameters.
    *
    * @param request - The request {@link GetSecretVersionByNameRequest}
    * @returns A Promise of SecretVersion
@@ -309,6 +310,7 @@ export class API extends ParentAPI {
           'secretName',
           request.secretName,
         )}/versions/${validatePathParam('revision', request.revision)}`,
+        urlParams: urlParams(['project_id', request.projectId]),
       },
       unmarshalSecretVersion,
     )
@@ -391,6 +393,7 @@ export class API extends ParentAPI {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
+          ['project_id', request.projectId],
           ['status', request.status],
         ),
       },
@@ -399,8 +402,8 @@ export class API extends ParentAPI {
 
   /**
    * List versions of a secret using the secret's name. Retrieve the list of a
-   * given secret's versions specified by the `secret_name` and `region`
-   * parameters.
+   * given secret's versions specified by the `secret_name`,`region` and
+   * `project_id` parameters.
    *
    * @param request - The request {@link ListSecretVersionsByNameRequest}
    * @returns A Promise of ListSecretVersionsResponse
@@ -487,8 +490,8 @@ export class API extends ParentAPI {
 
   /**
    * Access a secret's version using the secret's name. Access sensitive data in
-   * a secret's version specified by the `region`, `secret_name` and `revision`
-   * parameters.
+   * a secret's version specified by the `region`, `secret_name`, `revision` and
+   * `project_id` parameters.
    *
    * @param request - The request {@link AccessSecretVersionByNameRequest}
    * @returns A Promise of AccessSecretVersionResponse
@@ -506,6 +509,7 @@ export class API extends ParentAPI {
           'secretName',
           request.secretName,
         )}/versions/${validatePathParam('revision', request.revision)}/access`,
+        urlParams: urlParams(['project_id', request.projectId]),
       },
       unmarshalAccessSecretVersionResponse,
     )
