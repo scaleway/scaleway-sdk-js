@@ -1286,27 +1286,7 @@ export class RegistrarAPI extends ParentAPI {
 
   /**
    * Update domain DNSSEC. If your domain has the default Scaleway NS and uses
-   * another registrar, you have to update the DS record manually. For the
-   * algorithm, here are the code numbers for each type:
-   *
-   * - 1: RSAMD5
-   * - 2: DIFFIE_HELLMAN
-   * - 3: DSA_SHA1
-   * - 5: RSA_SHA1
-   * - 6: DSA_NSEC3_SHA1
-   * - 7: RSASHA1_NSEC3_SHA1
-   * - 8: RSASHA256
-   * - 10: RSASHA512
-   * - 12: ECC_GOST
-   * - 13: ECDSAP256SHA256
-   * - 14: ECDSAP384SHA384
-   *
-   * And for the digest type:
-   *
-   * - 1: SHA_1
-   * - 2: SHA_256
-   * - 3: GOST_R_34_11_94
-   * - 4: SHA_384
+   * another registrar, you have to update the DS record manually.
    *
    * @param request - The request {@link RegistrarApiEnableDomainDNSSECRequest}
    * @returns A Promise of Domain
