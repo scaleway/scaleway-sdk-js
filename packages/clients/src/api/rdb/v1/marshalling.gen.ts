@@ -290,6 +290,7 @@ export const unmarshalReadReplica = (data: unknown) => {
     endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
     id: data.id,
     region: data.region,
+    sameZone: data.same_zone,
     status: data.status,
   } as ReadReplica
 }
@@ -1042,6 +1043,7 @@ export const marshalCreateReadReplicaRequest = (
       )
     : undefined,
   instance_id: request.instanceId,
+  same_zone: request.sameZone,
 })
 
 export const marshalCreateSnapshotRequest = (

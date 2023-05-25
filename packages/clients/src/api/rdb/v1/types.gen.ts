@@ -641,6 +641,11 @@ export interface ReadReplica {
   status: ReadReplicaStatus
   /** Region the Read Replica is in. */
   region: Region
+  /**
+   * Whether the replica is in the same availability zone as the main instance
+   * nodes or not.
+   */
+  sameZone: boolean
 }
 
 /** Read replica endpoint spec. */
@@ -1114,6 +1119,11 @@ export type CreateReadReplicaRequest = {
   instanceId: string
   /** Specification of the endpoint you want to create. */
   endpointSpec?: ReadReplicaEndpointSpec[]
+  /**
+   * Defines whether to create the replica in the same availability zone as the
+   * main instance nodes or not.
+   */
+  sameZone?: boolean
 }
 
 export type GetReadReplicaRequest = {
