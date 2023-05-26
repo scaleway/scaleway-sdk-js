@@ -1600,6 +1600,8 @@ export type GetLbStatsRequest = {
   region?: Region
   /** Load Balancer ID. */
   lbId: string
+  /** ID of the backend. */
+  backendId?: string
 }
 
 export type ListBackendStatsRequest = {
@@ -2606,6 +2608,8 @@ export type ZonedApiGetLbStatsRequest = {
   zone?: Zone
   /** Load Balancer ID. */
   lbId: string
+  /** ID of the backend. */
+  backendId?: string
 }
 
 export type ZonedApiListBackendStatsRequest = {

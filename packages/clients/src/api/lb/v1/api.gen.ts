@@ -920,6 +920,7 @@ export class API extends ParentAPI {
           'region',
           request.region ?? this.client.settings.defaultRegion,
         )}/lbs/${validatePathParam('lbId', request.lbId)}/stats`,
+        urlParams: urlParams(['backend_id', request.backendId]),
       },
       unmarshalLbStats,
     )
@@ -2271,6 +2272,7 @@ export class ZonedAPI extends ParentAPI {
           'zone',
           request.zone ?? this.client.settings.defaultZone,
         )}/lbs/${validatePathParam('lbId', request.lbId)}/stats`,
+        urlParams: urlParams(['backend_id', request.backendId]),
       },
       unmarshalLbStats,
     )
