@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.12.0...@scaleway/sdk@1.13.0) (2023-05-29)
+
+### Features
+
+- **k8s:** add migrateToPrivateNetworkCluster endpoint ([#674](https://github.com/scaleway/scaleway-sdk-js/issues/674)) ([968fc9b](https://github.com/scaleway/scaleway-sdk-js/commit/968fc9b1e0ce6385dac1cbd5cc8d193ce0a86b79))
+- **lb:** add backendId to getLbStats request ([#677](https://github.com/scaleway/scaleway-sdk-js/issues/677)) ([588e907](https://github.com/scaleway/scaleway-sdk-js/commit/588e90716011aa9bb4e2f66a9d1d5ba5f6325416))
+- **rdb:** add sameZone for cross-zones ReadReplica ([#673](https://github.com/scaleway/scaleway-sdk-js/issues/673)) ([1035a22](https://github.com/scaleway/scaleway-sdk-js/commit/1035a224be036acf17b90beb31fae4eaf3d8a625))
+- **secret:** add back `passwordGeneration` field ([#676](https://github.com/scaleway/scaleway-sdk-js/issues/676)) ([de11a07](https://github.com/scaleway/scaleway-sdk-js/commit/de11a07a1808ec37248348c9fc1ddfe9b50fdaf3))
+- **secret:** add endpoint to generate password ([#669](https://github.com/scaleway/scaleway-sdk-js/issues/669)) ([08a9ed3](https://github.com/scaleway/scaleway-sdk-js/commit/08a9ed3c99c404413999aa17d54a0bcea487e198))
+- **secret:** add projectId field in requests ([#672](https://github.com/scaleway/scaleway-sdk-js/issues/672)) ([cf3d5ff](https://github.com/scaleway/scaleway-sdk-js/commit/cf3d5ff28b359b49cd7b7750683dc022f5a2aeb5))
+- **vpc:** add v2 ([#668](https://github.com/scaleway/scaleway-sdk-js/issues/668)) ([f035cd6](https://github.com/scaleway/scaleway-sdk-js/commit/f035cd62e9efa36c6853d0a5acb5c800e62e9e3d))
+
 ## [1.12.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.11.0...@scaleway/sdk@1.12.0) (2023-05-19)
 
 ### Features
