@@ -201,11 +201,11 @@ export type CreateEmailRequest = {
   region?: Region
   /** Sender information. Must be from a checked domain declared in the Project. */
   from?: CreateEmailRequestAddress
-  /** Array of recipient information (limited to 1 recipient). */
+  /** An array of the primary recipient's information. */
   to?: CreateEmailRequestAddress[]
-  /** Array of recipient information (unimplemented). */
+  /** An array of the carbon copy recipient's information. */
   cc?: CreateEmailRequestAddress[]
-  /** Array of recipient information (unimplemented). */
+  /** An array of the blind carbon copy recipient's information. */
   bcc?: CreateEmailRequestAddress[]
   /** Subject of the email. */
   subject: string
@@ -262,17 +262,9 @@ export type ListEmailsRequest = {
   statuses?: EmailStatus[]
   /** (Optional) List emails with this subject. */
   subject?: string
-  /**
-   * (Optional) List emails corresponding to specific criteria. You can filter
-   * your emails in ascending or descending order using:
-   *
-   * - Created_at
-   * - Updated_at
-   * - Status
-   * - Mail_from
-   * - Mail_rcpt
-   * - Subject.
-   */
+  /** (Optional) List emails by searching to all fields. */
+  search?: string
+  /** (Optional) List emails corresponding to specific criteria. */
   orderBy?: ListEmailsRequestOrderBy
 }
 
