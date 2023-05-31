@@ -10,6 +10,8 @@ export type ListSecretsRequestOrderBy =
   | 'updated_at_asc'
   | 'updated_at_desc'
 
+export type Product = 'unknown'
+
 export type SecretStatus = 'ready' | 'locked'
 
 export type SecretVersionStatus =
@@ -217,8 +219,13 @@ export type AddSecretOwnerRequest = {
   region?: Region
   /** ID of the secret. */
   secretId: string
-  /** Name of the product to add. */
-  productName: string
+  /**
+   * @deprecated (Deprecated: use product field) ID of the product to add (see
+   *   product enum).
+   */
+  productName?: string
+  /** ID of the product to add (see product enum). */
+  product?: Product
 }
 
 export type CreateSecretVersionRequest = {

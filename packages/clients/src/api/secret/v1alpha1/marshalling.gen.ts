@@ -118,6 +118,7 @@ export const marshalAddSecretOwnerRequest = (
   request: AddSecretOwnerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  product: request.product ?? 'unknown',
   product_name: request.productName,
 })
 
