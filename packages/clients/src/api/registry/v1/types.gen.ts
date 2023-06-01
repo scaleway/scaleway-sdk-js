@@ -350,8 +350,8 @@ export type DeleteTagRequest = {
   /** UUID of the tag. */
   tagId: string
   /**
-   * If two tags share the same digest the deletion will fail unless this
-   * parameter is set to true.
+   * @deprecated If two tags share the same digest the deletion will fail unless
+   *   this parameter is set to true (deprecated).
    */
-  force: boolean
+  force?: boolean
 }
