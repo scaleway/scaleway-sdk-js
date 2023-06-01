@@ -866,8 +866,9 @@ export type DeleteClusterRequest = {
   /** ID of the cluster to delete. */
   clusterId: string
   /**
-   * Defines whether all volumes (including retain volume type) and Load
-   * Balancers with a name starting with the cluster ID will also be deleted.
+   * Defines whether all volumes (including retain volume type), empty Private
+   * Networks and Load Balancers with a name starting with the cluster ID will
+   * also be deleted.
    */
   withAdditionalResources: boolean
 }
