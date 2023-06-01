@@ -24,6 +24,7 @@ export type {
   ListSecretsRequestOrderBy,
   ListSecretsResponse,
   PasswordGenerationParams,
+  Product,
   Secret,
   SecretStatus,
   SecretVersion,
