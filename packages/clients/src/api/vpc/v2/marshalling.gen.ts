@@ -76,6 +76,7 @@ export const unmarshalVPC = (data: unknown) => {
     isDefault: data.is_default,
     name: data.name,
     organizationId: data.organization_id,
+    privateNetworkCount: data.private_network_count,
     projectId: data.project_id,
     region: data.region,
     tags: data.tags,

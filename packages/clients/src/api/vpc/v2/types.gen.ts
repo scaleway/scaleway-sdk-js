@@ -92,6 +92,8 @@ export interface VPC {
   createdAt?: Date
   /** Date the VPC was last modified. */
   updatedAt?: Date
+  /** Number of Private Networks within this VPC. */
+  privateNetworkCount: number
 }
 
 export type ListVPCsRequest = {
