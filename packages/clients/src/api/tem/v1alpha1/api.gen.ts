@@ -135,6 +135,7 @@ export class API extends ParentAPI {
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['project_id', request.projectId],
+          ['search', request.search],
           ['since', request.since],
           ['statuses', request.statuses],
           ['subject', request.subject],
@@ -146,15 +147,7 @@ export class API extends ParentAPI {
 
   /**
    * List emails. Retrieve the list of emails sent from a specific domain or for
-   * a specific Project or Organization. You must specify the `region`. You can
-   * filter your emails in ascending or descending order using:
-   *
-   * - Created_at
-   * - Updated_at
-   * - Status
-   * - Mail_from
-   * - Mail_rcpt
-   * - Subject
+   * a specific Project or Organization. You must specify the `region`.
    *
    * @param request - The request {@link ListEmailsRequest}
    * @returns A Promise of ListEmailsResponse
