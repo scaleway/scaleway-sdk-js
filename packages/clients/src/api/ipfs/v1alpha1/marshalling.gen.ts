@@ -30,7 +30,12 @@ const unmarshalPinCIDMeta = (data: unknown) => {
     )
   }
 
-  return { id: data.id } as PinCIDMeta
+  return {
+    id: data.id,
+    progress: data.progress,
+    size: data.size,
+    url: data.url,
+  } as PinCIDMeta
 }
 
 const unmarshalPinCID = (data: unknown) => {
@@ -55,13 +60,7 @@ const unmarshalPinInfo = (data: unknown) => {
     )
   }
 
-  return {
-    id: data.id,
-    progress: data.progress,
-    size: data.size,
-    statusDetails: data.status_details,
-    url: data.url,
-  } as PinInfo
+  return { statusDetails: data.status_details } as PinInfo
 }
 
 export const unmarshalPin = (data: unknown) => {

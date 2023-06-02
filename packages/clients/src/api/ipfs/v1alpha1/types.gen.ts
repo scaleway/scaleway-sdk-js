@@ -40,15 +40,14 @@ export interface PinCID {
 }
 
 export interface PinCIDMeta {
-  id?: string
+  id: string
+  url?: string
+  size?: number
+  progress?: number
 }
 
 export interface PinInfo {
   statusDetails?: string
-  id?: string
-  url?: string
-  size?: number
-  progress?: number
 }
 
 export interface PinOptions {
