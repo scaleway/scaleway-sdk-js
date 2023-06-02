@@ -941,6 +941,11 @@ export type CreateLbRequest = {
   description: string
   /** ID of an existing flexible IP address to attach to the Load Balancer. */
   ipId?: string
+  /**
+   * Defines whether to automatically assign a flexible public IP to lb. Default
+   * value is `false` (do not assign).
+   */
+  assignFlexibleIp?: boolean
   /** List of tags for the Load Balancer. */
   tags?: string[]
   /**
@@ -2036,6 +2041,11 @@ export type ZonedApiCreateLbRequest = {
   description: string
   /** ID of an existing flexible IP address to attach to the Load Balancer. */
   ipId?: string
+  /**
+   * Defines whether to automatically assign a flexible public IP to lb. Default
+   * value is `false` (do not assign).
+   */
+  assignFlexibleIp?: boolean
   /** List of tags for the Load Balancer. */
   tags?: string[]
   /**
