@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.13.0...@scaleway/sdk@1.14.0) (2023-06-05)
+
+### Features
+
+- **registry:** deprecate `force` field in DeleteTagRequest ([#685](https://github.com/scaleway/scaleway-sdk-js/issues/685)) ([fb4c058](https://github.com/scaleway/scaleway-sdk-js/commit/fb4c05855061e01ff7dea76c477aef293d27ce54))
+- **secret:** upgrade product field to an enum ([#680](https://github.com/scaleway/scaleway-sdk-js/issues/680)) ([e939329](https://github.com/scaleway/scaleway-sdk-js/commit/e9393297a38197c44b1768299e2dc8b04f8cffe8))
+- **tem:** list emails by searching to all fields ([#686](https://github.com/scaleway/scaleway-sdk-js/issues/686)) ([1905974](https://github.com/scaleway/scaleway-sdk-js/commit/1905974714acf07ea3e9521c756ac8d1006aebd8))
+- **vpc:** add `privateNetworkCount` field to VPC ([#683](https://github.com/scaleway/scaleway-sdk-js/issues/683)) ([648507d](https://github.com/scaleway/scaleway-sdk-js/commit/648507d27d4e92a775cccc289abee082cea5cc44))
+
 ## [1.13.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.12.0...@scaleway/sdk@1.13.0) (2023-05-29)
 
 ### Features
