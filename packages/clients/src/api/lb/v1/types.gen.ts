@@ -949,6 +949,8 @@ export type CreateLbRequest = {
    * value is `false` (do not assign).
    */
   assignFlexibleIp?: boolean
+  /** List of IP IDs to attach to the Load Balancer. */
+  ipIds?: string[]
   /** List of tags for the Load Balancer. */
   tags?: string[]
   /**
@@ -1080,6 +1082,8 @@ export type CreateIpRequest = {
   projectId?: string
   /** Reverse DNS (domain name) for the IP address. */
   reverse?: string
+  /** If true, creates a Flexible IP with an ipv6 address. */
+  isIpv6: boolean
 }
 
 export type GetIpRequest = {
@@ -2054,6 +2058,8 @@ export type ZonedApiCreateLbRequest = {
    * value is `false` (do not assign).
    */
   assignFlexibleIp?: boolean
+  /** List of IP IDs to attach to the Load Balancer. */
+  ipIds?: string[]
   /** List of tags for the Load Balancer. */
   tags?: string[]
   /**
@@ -2167,6 +2173,8 @@ export type ZonedApiCreateIpRequest = {
   projectId?: string
   /** Reverse DNS (domain name) for the IP address. */
   reverse?: string
+  /** If true, creates a Flexible IP with an ipv6 address. */
+  isIpv6: boolean
 }
 
 export type ZonedApiGetIpRequest = {
