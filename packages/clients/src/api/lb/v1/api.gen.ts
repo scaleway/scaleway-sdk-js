@@ -417,7 +417,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateIpRequest}
    * @returns A Promise of Ip
    */
-  createIp = (request: Readonly<CreateIpRequest> = {}) =>
+  createIp = (request: Readonly<CreateIpRequest>) =>
     this.client.fetch<Ip>(
       {
         body: JSON.stringify(
@@ -936,6 +936,7 @@ export class API extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/lbs/${validatePathParam('lbId', request.lbId)}/backend-stats`,
         urlParams: urlParams(
+          ['backend_id', request.backendId],
           ['page', request.page],
           [
             'page_size',
@@ -1698,7 +1699,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiCreateIpRequest}
    * @returns A Promise of Ip
    */
-  createIp = (request: Readonly<ZonedApiCreateIpRequest> = {}) =>
+  createIp = (request: Readonly<ZonedApiCreateIpRequest>) =>
     this.client.fetch<Ip>(
       {
         body: JSON.stringify(
@@ -2288,6 +2289,7 @@ export class ZonedAPI extends ParentAPI {
           request.zone ?? this.client.settings.defaultZone,
         )}/lbs/${validatePathParam('lbId', request.lbId)}/backend-stats`,
         urlParams: urlParams(
+          ['backend_id', request.backendId],
           ['page', request.page],
           [
             'page_size',

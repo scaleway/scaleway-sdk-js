@@ -939,8 +939,18 @@ export type CreateLbRequest = {
   name?: string
   /** Description for the Load Balancer. */
   description: string
-  /** ID of an existing flexible IP address to attach to the Load Balancer. */
+  /**
+   * @deprecated ID of an existing flexible IP address to attach to the Load
+   *   Balancer.
+   */
   ipId?: string
+  /**
+   * Defines whether to automatically assign a flexible public IP to lb. Default
+   * value is `false` (do not assign).
+   */
+  assignFlexibleIp?: boolean
+  /** List of IP IDs to attach to the Load Balancer. */
+  ipIds?: string[]
   /** List of tags for the Load Balancer. */
   tags?: string[]
   /**
@@ -1072,6 +1082,8 @@ export type CreateIpRequest = {
   projectId?: string
   /** Reverse DNS (domain name) for the IP address. */
   reverse?: string
+  /** If true, creates a Flexible IP with an ipv6 address. */
+  isIpv6: boolean
 }
 
 export type GetIpRequest = {
@@ -1616,6 +1628,8 @@ export type ListBackendStatsRequest = {
   page?: number
   /** Number of items to return. */
   pageSize?: number
+  /** ID of the backend. */
+  backendId?: string
 }
 
 export type ListAclsRequest = {
@@ -2034,8 +2048,18 @@ export type ZonedApiCreateLbRequest = {
   name?: string
   /** Description for the Load Balancer. */
   description: string
-  /** ID of an existing flexible IP address to attach to the Load Balancer. */
+  /**
+   * @deprecated ID of an existing flexible IP address to attach to the Load
+   *   Balancer.
+   */
   ipId?: string
+  /**
+   * Defines whether to automatically assign a flexible public IP to lb. Default
+   * value is `false` (do not assign).
+   */
+  assignFlexibleIp?: boolean
+  /** List of IP IDs to attach to the Load Balancer. */
+  ipIds?: string[]
   /** List of tags for the Load Balancer. */
   tags?: string[]
   /**
@@ -2149,6 +2173,8 @@ export type ZonedApiCreateIpRequest = {
   projectId?: string
   /** Reverse DNS (domain name) for the IP address. */
   reverse?: string
+  /** If true, creates a Flexible IP with an ipv6 address. */
+  isIpv6: boolean
 }
 
 export type ZonedApiGetIpRequest = {
@@ -2621,6 +2647,8 @@ export type ZonedApiListBackendStatsRequest = {
   page?: number
   /** Number of items to return. */
   pageSize?: number
+  /** ID of the backend. */
+  backendId?: string
 }
 
 export type ZonedApiListAclsRequest = {

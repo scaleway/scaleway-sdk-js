@@ -1105,6 +1105,7 @@ export const marshalCreateIpRequest = (
   request: CreateIpRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  is_ipv6: request.isIpv6,
   reverse: request.reverse,
   ...resolveOneOf([
     {
@@ -1124,8 +1125,10 @@ export const marshalCreateLbRequest = (
   request: CreateLbRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  assign_flexible_ip: request.assignFlexibleIp,
   description: request.description,
   ip_id: request.ipId,
+  ip_ids: request.ipIds,
   name: request.name || randomName('lb'),
   ssl_compatibility_level:
     request.sslCompatibilityLevel ?? 'ssl_compatibility_level_unknown',
@@ -1494,6 +1497,7 @@ export const marshalZonedApiCreateIpRequest = (
   request: ZonedApiCreateIpRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  is_ipv6: request.isIpv6,
   reverse: request.reverse,
   ...resolveOneOf([
     {
@@ -1513,8 +1517,10 @@ export const marshalZonedApiCreateLbRequest = (
   request: ZonedApiCreateLbRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  assign_flexible_ip: request.assignFlexibleIp,
   description: request.description,
   ip_id: request.ipId,
+  ip_ids: request.ipIds,
   name: request.name || randomName('lb'),
   ssl_compatibility_level:
     request.sslCompatibilityLevel ?? 'ssl_compatibility_level_unknown',
