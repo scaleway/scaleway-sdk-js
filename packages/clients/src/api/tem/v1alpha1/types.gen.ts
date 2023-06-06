@@ -11,6 +11,12 @@ export type DomainStatus =
   | 'revoked'
   | 'pending'
 
+export type DomainStatusRecordStatus =
+  | 'unknown_record_status'
+  | 'valid'
+  | 'invalid'
+  | 'not_found'
+
 export type EmailRcptType = 'unknown_rcpt_type' | 'to' | 'cc' | 'bcc'
 
 export type EmailStatus =
@@ -79,7 +85,7 @@ export interface Domain {
   lastValidAt?: Date
   /** Date and time of the domain's deletion. */
   revokedAt?: Date
-  /** Error message returned if the last check failed. */
+  /** @deprecated Error message returned if the last check failed. */
   lastError?: string
   /** Snippet of the SPF record to register in the DNS zone. */
   spfConfig: string
@@ -97,6 +103,38 @@ export interface DomainStatistics {
   canceledCount: number
 }
 
+/** Domain status. */
+export interface DomainStatus {
+  /** The id of the domain. */
+  domainId: string
+  /** The domain name (example.com). */
+  domainName: string
+  /** The SPF record verification data. */
+  spfRecord?: DomainStatusSpfRecord
+  /** The DKIM record verification data. */
+  dkimRecord?: DomainStatusDkimRecord
+}
+
+/** Domain status. dkim record. */
+export interface DomainStatusDkimRecord {
+  /** Status of the DKIM record's configurartion. */
+  status: DomainStatusRecordStatus
+  /** Time and date the DKIM record was last valid. */
+  lastValidAt?: Date
+  /** An error text displays in case the record is not valid. */
+  error?: string
+}
+
+/** Domain status. spf record. */
+export interface DomainStatusSpfRecord {
+  /** Status of the SPF record's configurartion. */
+  status: DomainStatusRecordStatus
+  /** Time and date the SPF record was last valid. */
+  lastValidAt?: Date
+  /** An error text displays in case the record is not valid. */
+  error?: string
+}
+
 /** Email. */
 export interface Email {
   /** Technical ID of the email. */
@@ -107,7 +145,7 @@ export interface Email {
   projectId: string
   /** Email address of the sender. */
   mailFrom: string
-  /** @deprecated (Deprecated) Email address of the recipient. */
+  /** @deprecated Email address of the recipient. */
   rcptTo?: string
   /** Email address of the recipient. */
   mailRcpt: string
@@ -251,10 +289,7 @@ export type ListEmailsRequest = {
   until?: Date
   /** (Optional) List emails sent with this sender's email address. */
   mailFrom?: string
-  /**
-   * @deprecated (Deprecated) List emails sent to this recipient's email
-   *   address.
-   */
+  /** @deprecated List emails sent to this recipient's email address. */
   mailTo?: string
   /** (Optional) List emails sent to this recipient's email address. */
   mailRcpt?: string
@@ -356,5 +391,15 @@ export type CheckDomainRequest = {
    */
   region?: Region
   /** ID of the domain to check. */
+  domainId: string
+}
+
+export type CheckDomainStatusRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the domain to delete. */
   domainId: string
 }

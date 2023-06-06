@@ -17,6 +17,7 @@ import {
   marshalCreateEmailRequest,
   unmarshalCreateEmailResponse,
   unmarshalDomain,
+  unmarshalDomainStatus,
   unmarshalEmail,
   unmarshalListDomainsResponse,
   unmarshalListEmailsResponse,
@@ -25,10 +26,12 @@ import {
 import type {
   CancelEmailRequest,
   CheckDomainRequest,
+  CheckDomainStatusRequest,
   CreateDomainRequest,
   CreateEmailRequest,
   CreateEmailResponse,
   Domain,
+  DomainStatus,
   Email,
   GetDomainRequest,
   GetEmailRequest,
@@ -338,5 +341,30 @@ export class API extends ParentAPI {
         )}/domains/${validatePathParam('domainId', request.domainId)}/check`,
       },
       unmarshalDomain,
+    )
+
+  /**
+   * Display SPF and DKIM records status and potential errors. Display SPF and
+   * DKIM records status and potential errors, including the found records to
+   * ease the debugging.
+   *
+   * @param request - The request {@link CheckDomainStatusRequest}
+   * @returns A Promise of DomainStatus
+   */
+  checkDomainStatus = (request: Readonly<CheckDomainStatusRequest>) =>
+    this.client.fetch<DomainStatus>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/domains/${validatePathParam(
+          'domainId',
+          request.domainId,
+        )}/verification`,
+      },
+      unmarshalDomainStatus,
     )
 }

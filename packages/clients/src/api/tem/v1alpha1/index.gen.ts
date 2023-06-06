@@ -5,6 +5,7 @@ export * from './content.gen'
 export type {
   CancelEmailRequest,
   CheckDomainRequest,
+  CheckDomainStatusRequest,
   CreateDomainRequest,
   CreateEmailRequest,
   CreateEmailRequestAddress,
@@ -13,6 +14,9 @@ export type {
   Domain,
   DomainStatistics,
   DomainStatus,
+  DomainStatusDkimRecord,
+  DomainStatusRecordStatus,
+  DomainStatusSpfRecord,
   Email,
   EmailRcptType,
   EmailStatus,
