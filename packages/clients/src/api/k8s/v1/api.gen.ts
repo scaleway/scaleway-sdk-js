@@ -25,6 +25,7 @@ import {
   unmarshalCluster,
   unmarshalExternalNode,
   unmarshalListClusterAvailableVersionsResponse,
+  unmarshalListClusterTypesResponse,
   unmarshalListClustersResponse,
   unmarshalListNodesResponse,
   unmarshalListPoolsResponse,
@@ -48,6 +49,8 @@ import type {
   GetVersionRequest,
   ListClusterAvailableVersionsRequest,
   ListClusterAvailableVersionsResponse,
+  ListClusterTypesRequest,
+  ListClusterTypesResponse,
   ListClustersRequest,
   ListClustersResponse,
   ListNodesRequest,
@@ -733,4 +736,35 @@ export class API extends ParentAPI {
       },
       unmarshalVersion,
     )
+
+  protected pageOfListClusterTypes = (
+    request: Readonly<ListClusterTypesRequest> = {},
+  ) =>
+    this.client.fetch<ListClusterTypesResponse>(
+      {
+        method: 'GET',
+        path: `/k8s/v1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/cluster-types`,
+        urlParams: urlParams(
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListClusterTypesResponse,
+    )
+
+  /**
+   * List cluster types. List available cluster types and their technical
+   * details.
+   *
+   * @param request - The request {@link ListClusterTypesRequest}
+   * @returns A Promise of ListClusterTypesResponse
+   */
+  listClusterTypes = (request: Readonly<ListClusterTypesRequest> = {}) =>
+    enrichForPagination('clusterTypes', this.pageOfListClusterTypes, request)
 }
