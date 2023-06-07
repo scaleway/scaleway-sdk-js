@@ -97,7 +97,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateVPCRequest}
    * @returns A Promise of VPC
    */
-  createVPC = (request: Readonly<CreateVPCRequest> = {}) =>
+  createVPC = (request: Readonly<CreateVPCRequest>) =>
     this.client.fetch<VPC>(
       {
         body: JSON.stringify(

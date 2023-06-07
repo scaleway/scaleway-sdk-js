@@ -30,7 +30,7 @@ const unmarshalPinCIDMeta = (data: unknown) => {
     )
   }
 
-  return { appId: data.app_id, url: data.url } as PinCIDMeta
+  return { id: data.id } as PinCIDMeta
 }
 
 const unmarshalPinCID = (data: unknown) => {
@@ -55,7 +55,13 @@ const unmarshalPinInfo = (data: unknown) => {
     )
   }
 
-  return { statusDetails: data.status_details } as PinInfo
+  return {
+    id: data.id,
+    progress: data.progress,
+    size: data.size,
+    statusDetails: data.status_details,
+    url: data.url,
+  } as PinInfo
 }
 
 export const unmarshalPin = (data: unknown) => {
@@ -89,6 +95,7 @@ export const unmarshalVolume = (data: unknown) => {
     name: data.name,
     projectId: data.project_id,
     region: data.region,
+    size: data.size,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
   } as Volume
@@ -132,14 +139,6 @@ export const unmarshalReplacePinResponse = (data: unknown) => {
   } as ReplacePinResponse
 }
 
-const marshalPinCIDMeta = (
-  request: PinCIDMeta,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  app_id: request.appId,
-  url: request.url,
-})
-
 const marshalPinOptions = (
   request: PinOptions,
   defaults: DefaultValues,
@@ -153,7 +152,6 @@ export const marshalCreatePinByCIDRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   cid: request.cid,
-  meta: request.meta ? marshalPinCIDMeta(request.meta, defaults) : undefined,
   name: request.name,
   origins: request.origins,
   pin_options: request.pinOptions
@@ -187,7 +185,6 @@ export const marshalReplacePinRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   cid: request.cid,
-  meta: request.meta ? marshalPinCIDMeta(request.meta, defaults) : undefined,
   name: request.name,
   origins: request.origins,
   pin_options: request.pinOptions

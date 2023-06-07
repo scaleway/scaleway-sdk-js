@@ -165,6 +165,7 @@ export const marshalCreateVPCRequest = (
   request: CreateVPCRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  default_private_network_name: request.defaultPrivateNetworkName,
   name: request.name || randomName('vpc'),
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,

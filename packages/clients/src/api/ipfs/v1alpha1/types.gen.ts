@@ -40,12 +40,15 @@ export interface PinCID {
 }
 
 export interface PinCIDMeta {
-  appId: string
-  url?: string
+  id?: string
 }
 
 export interface PinInfo {
   statusDetails?: string
+  id?: string
+  url?: string
+  size?: number
+  progress?: number
 }
 
 export interface PinOptions {
@@ -66,6 +69,7 @@ export interface Volume {
   updatedAt?: Date
   tags: string[]
   name: string
+  size?: number
 }
 
 export type CreateVolumeRequest = {
@@ -141,7 +145,6 @@ export type CreatePinByCIDRequest = {
   cid: string
   name?: string
   origins?: string[]
-  meta?: PinCIDMeta
   pinOptions?: PinOptions
 }
 
@@ -156,7 +159,6 @@ export type ReplacePinRequest = {
   cid: string
   name?: string
   origins?: string[]
-  meta?: PinCIDMeta
   pinOptions?: PinOptions
 }
 
