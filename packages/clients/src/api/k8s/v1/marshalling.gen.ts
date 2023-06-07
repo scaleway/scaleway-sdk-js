@@ -13,6 +13,7 @@ import type {
   ClusterAutoUpgrade,
   ClusterAutoscalerConfig,
   ClusterOpenIDConnectConfig,
+  ClusterType,
   CreateClusterRequest,
   CreateClusterRequestAutoUpgrade,
   CreateClusterRequestAutoscalerConfig,
@@ -23,6 +24,7 @@ import type {
   CreatePoolRequestUpgradePolicy,
   ExternalNode,
   ListClusterAvailableVersionsResponse,
+  ListClusterTypesResponse,
   ListClustersResponse,
   ListNodesResponse,
   ListPoolsResponse,
@@ -163,6 +165,16 @@ export const unmarshalCluster = (data: unknown) => {
   } as Cluster
 }
 
+const unmarshalClusterType = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ClusterType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return { availability: data.availability, name: data.name } as ClusterType
+}
+
 export const unmarshalNode = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -273,6 +285,22 @@ export const unmarshalListClusterAvailableVersionsResponse = (
   return {
     versions: unmarshalArrayOfObject(data.versions, unmarshalVersion),
   } as ListClusterAvailableVersionsResponse
+}
+
+export const unmarshalListClusterTypesResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListClusterTypesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    clusterTypes: unmarshalArrayOfObject(
+      data.cluster_types,
+      unmarshalClusterType,
+    ),
+    totalCount: data.total_count,
+  } as ListClusterTypesResponse
 }
 
 export const unmarshalListClustersResponse = (data: unknown) => {

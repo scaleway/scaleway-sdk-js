@@ -41,6 +41,16 @@ export const CreatePoolRequest = {
   },
 }
 
+export const ListClusterTypesRequest = {
+  page: {
+    greaterThan: 0,
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const ListClustersRequest = {
   name: {
     minLength: 1,

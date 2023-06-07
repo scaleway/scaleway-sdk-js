@@ -30,6 +30,8 @@ export type ClusterStatus =
   | 'locked'
   | 'pool_required'
 
+export type ClusterTypeAvailability = 'available' | 'scarce' | 'shortage'
+
 export type Ingress =
   | 'unknown_ingress'
   | 'none'
@@ -256,6 +258,14 @@ export interface ClusterOpenIDConnectConfig {
   requiredClaim: string[]
 }
 
+/** Cluster type. */
+export interface ClusterType {
+  /** Cluster type name. */
+  name: string
+  /** Cluster type availability. */
+  availability: ClusterTypeAvailability
+}
+
 /** Create cluster request. auto upgrade. */
 export interface CreateClusterRequestAutoUpgrade {
   /** Defines whether auto upgrade is enabled for the cluster. */
@@ -431,6 +441,14 @@ export interface ExternalNode {
 export interface ListClusterAvailableVersionsResponse {
   /** Available Kubernetes versions for the cluster. */
   versions: Version[]
+}
+
+/** List cluster types response. */
+export interface ListClusterTypesResponse {
+  /** Total number of cluster-types. */
+  totalCount: number
+  /** Paginated returned cluster-types. */
+  clusterTypes: ClusterType[]
 }
 
 /** List clusters response. */
@@ -1183,4 +1201,16 @@ export type GetVersionRequest = {
   region?: Region
   /** Requested version name. */
   versionName: string
+}
+
+export type ListClusterTypesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Page number, from the paginated results, to return for cluster-types. */
+  page?: number
+  /** Maximum number of clusters per page. */
+  pageSize?: number
 }
