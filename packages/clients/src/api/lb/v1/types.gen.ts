@@ -939,7 +939,10 @@ export type CreateLbRequest = {
   name?: string
   /** Description for the Load Balancer. */
   description: string
-  /** ID of an existing flexible IP address to attach to the Load Balancer. */
+  /**
+   * @deprecated ID of an existing flexible IP address to attach to the Load
+   *   Balancer.
+   */
   ipId?: string
   /**
    * Defines whether to automatically assign a flexible public IP to lb. Default
@@ -1621,6 +1624,8 @@ export type ListBackendStatsRequest = {
   page?: number
   /** Number of items to return. */
   pageSize?: number
+  /** ID of the backend. */
+  backendId?: string
 }
 
 export type ListAclsRequest = {
@@ -2039,7 +2044,10 @@ export type ZonedApiCreateLbRequest = {
   name?: string
   /** Description for the Load Balancer. */
   description: string
-  /** ID of an existing flexible IP address to attach to the Load Balancer. */
+  /**
+   * @deprecated ID of an existing flexible IP address to attach to the Load
+   *   Balancer.
+   */
   ipId?: string
   /**
    * Defines whether to automatically assign a flexible public IP to lb. Default
@@ -2631,6 +2639,8 @@ export type ZonedApiListBackendStatsRequest = {
   page?: number
   /** Number of items to return. */
   pageSize?: number
+  /** ID of the backend. */
+  backendId?: string
 }
 
 export type ZonedApiListAclsRequest = {
