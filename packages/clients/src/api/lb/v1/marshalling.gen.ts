@@ -1124,6 +1124,7 @@ export const marshalCreateLbRequest = (
   request: CreateLbRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  assign_flexible_ip: request.assignFlexibleIp,
   description: request.description,
   ip_id: request.ipId,
   name: request.name || randomName('lb'),
@@ -1513,6 +1514,7 @@ export const marshalZonedApiCreateLbRequest = (
   request: ZonedApiCreateLbRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  assign_flexible_ip: request.assignFlexibleIp,
   description: request.description,
   ip_id: request.ipId,
   name: request.name || randomName('lb'),
