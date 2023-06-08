@@ -17,6 +17,7 @@ import {
   marshalCreateEmailRequest,
   unmarshalCreateEmailResponse,
   unmarshalDomain,
+  unmarshalDomainLastStatus,
   unmarshalEmail,
   unmarshalListDomainsResponse,
   unmarshalListEmailsResponse,
@@ -24,11 +25,13 @@ import {
 } from './marshalling.gen'
 import type {
   CancelEmailRequest,
+  CheckDomainLastStatusRequest,
   CheckDomainRequest,
   CreateDomainRequest,
   CreateEmailRequest,
   CreateEmailResponse,
   Domain,
+  DomainLastStatus,
   Email,
   GetDomainRequest,
   GetEmailRequest,
@@ -338,5 +341,30 @@ export class API extends ParentAPI {
         )}/domains/${validatePathParam('domainId', request.domainId)}/check`,
       },
       unmarshalDomain,
+    )
+
+  /**
+   * Display SPF and DKIM records status and potential errors. Display SPF and
+   * DKIM records status and potential errors, including the found records to
+   * make debugging easier.
+   *
+   * @param request - The request {@link CheckDomainLastStatusRequest}
+   * @returns A Promise of DomainLastStatus
+   */
+  checkDomainLastStatus = (request: Readonly<CheckDomainLastStatusRequest>) =>
+    this.client.fetch<DomainLastStatus>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/domains/${validatePathParam(
+          'domainId',
+          request.domainId,
+        )}/verification`,
+      },
+      unmarshalDomainLastStatus,
     )
 }

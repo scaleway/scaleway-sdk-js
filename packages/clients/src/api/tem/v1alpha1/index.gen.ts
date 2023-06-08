@@ -4,6 +4,7 @@ export { API } from './api.gen'
 export * from './content.gen'
 export type {
   CancelEmailRequest,
+  CheckDomainLastStatusRequest,
   CheckDomainRequest,
   CreateDomainRequest,
   CreateEmailRequest,
@@ -11,6 +12,10 @@ export type {
   CreateEmailRequestAttachment,
   CreateEmailResponse,
   Domain,
+  DomainLastStatus,
+  DomainLastStatusDkimRecord,
+  DomainLastStatusRecordStatus,
+  DomainLastStatusSpfRecord,
   DomainStatistics,
   DomainStatus,
   Email,

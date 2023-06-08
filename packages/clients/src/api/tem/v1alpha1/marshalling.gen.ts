@@ -13,6 +13,9 @@ import type {
   CreateEmailRequestAttachment,
   CreateEmailResponse,
   Domain,
+  DomainLastStatus,
+  DomainLastStatusDkimRecord,
+  DomainLastStatusSpfRecord,
   DomainStatistics,
   Email,
   EmailTry,
@@ -78,6 +81,34 @@ export const unmarshalDomain = (data: unknown) => {
   } as Domain
 }
 
+const unmarshalDomainLastStatusDkimRecord = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainLastStatusDkimRecord' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    error: data.error,
+    lastValidAt: unmarshalDate(data.last_valid_at),
+    status: data.status,
+  } as DomainLastStatusDkimRecord
+}
+
+const unmarshalDomainLastStatusSpfRecord = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainLastStatusSpfRecord' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    error: data.error,
+    lastValidAt: unmarshalDate(data.last_valid_at),
+    status: data.status,
+  } as DomainLastStatusSpfRecord
+}
+
 export const unmarshalEmail = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -113,6 +144,25 @@ export const unmarshalCreateEmailResponse = (data: unknown) => {
   return {
     emails: unmarshalArrayOfObject(data.emails, unmarshalEmail),
   } as CreateEmailResponse
+}
+
+export const unmarshalDomainLastStatus = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainLastStatus' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    dkimRecord: data.dkim_record
+      ? unmarshalDomainLastStatusDkimRecord(data.dkim_record)
+      : undefined,
+    domainId: data.domain_id,
+    domainName: data.domain_name,
+    spfRecord: data.spf_record
+      ? unmarshalDomainLastStatusSpfRecord(data.spf_record)
+      : undefined,
+  } as DomainLastStatus
 }
 
 export const unmarshalListDomainsResponse = (data: unknown) => {
