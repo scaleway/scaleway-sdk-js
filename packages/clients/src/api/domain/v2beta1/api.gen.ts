@@ -796,7 +796,8 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * List tasks. List all account tasks. You can filter the list by domain name.
+   * List tasks. List all operations performed on the account. You can filter
+   * the list of tasks by domain name.
    *
    * @param request - The request {@link RegistrarApiListTasksRequest}
    * @returns A Promise of ListTasksResponse
@@ -805,8 +806,8 @@ export class RegistrarAPI extends ParentAPI {
     enrichForPagination('tasks', this.pageOfListTasks, request)
 
   /**
-   * Buy one or more domains. Request the registration of domain names. You can
-   * provide an already existing domain's contact or a new contact.
+   * Purchase domains. Request the registration of domain names. You can provide
+   * a domain's already existing contact or a new contact.
    *
    * @param request - The request {@link RegistrarApiBuyDomainsRequest}
    * @returns A Promise of OrderResponse
@@ -825,7 +826,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Renew one or more domains. Request the renewal of domain names.
+   * Renew domains. Request the renewal of one or more domain names.
    *
    * @param request - The request {@link RegistrarApiRenewDomainsRequest}
    * @returns A Promise of OrderResponse
@@ -844,8 +845,8 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Transfer a domain. Request the transfer from another registrar domain to
-   * Scaleway.
+   * Transfer a domain. Request the transfer of a domain from another registrar
+   * to Scaleway Domains and DNS.
    *
    * @param request - The request {@link RegistrarApiTransferInDomainRequest}
    * @returns A Promise of OrderResponse
@@ -867,11 +868,14 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Trade a domain contact. Request a trade for the contact owner.<br/> If an
-   * `organization_id` is given, the change is from the current Scaleway account
-   * to another Scaleway account.<br/> If no contact is given, the first contact
-   * of the other Scaleway account is taken.<br/> If the other Scaleway account
-   * has no contact. An error occurs.
+   * Trade a domain's contact. Request to change a domain's contact owner.<br/>
+   * If you specify the `organization_id` of the domain's new owner, the contact
+   * will change from the current owner's Scaleway account to the new owner's
+   * Scaleway account.<br/> If the new owner's current contact information is
+   * not available, the first ever contact they have created for previous
+   * domains is taken into account to operate the change.<br/> If the new owner
+   * has never created a contact to register domains before, an error message
+   * displays.
    *
    * @param request - The request {@link RegistrarApiTradeDomainRequest}
    * @returns A Promise of OrderResponse
@@ -939,9 +943,10 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Check if contacts are compatible against a domain or a tld. Check if
-   * contacts are compatible against a domain or a tld. If not, it will return
-   * the information requiring a correction.
+   * Check if contacts are compatible with a domain or a TLD. Check whether
+   * contacts are compatible with a domain or a TLD. If contacts are not
+   * compatible with either the domain or the TLD, the information that needs to
+   * be corrected is returned.
    *
    * @param request - The request
    *   {@link RegistrarApiCheckContactsCompatibilityRequest}
@@ -987,8 +992,8 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * List contacts. Return a list of contacts with their domains and roles. You
-   * can filter the list by domain name.
+   * List contacts. Retrieve the list of contacts and their associated domains
+   * and roles. You can filter the list by domain name.
    *
    * @param request - The request {@link RegistrarApiListContactsRequest}
    * @returns A Promise of ListContactsResponse
@@ -997,8 +1002,8 @@ export class RegistrarAPI extends ParentAPI {
     enrichForPagination('contacts', this.pageOfListContacts, request)
 
   /**
-   * Get a contact. Return a contact details retrieved from the registrar using
-   * a given contact ID.
+   * Get a contact. Retrieve a contact's details from the registrar using the
+   * given contact's ID.
    *
    * @param request - The request {@link RegistrarApiGetContactRequest}
    * @returns A Promise of Contact
@@ -1016,7 +1021,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Update contact. You can edit the contact coordinates.
+   * Update contact. Edit the contact's information.
    *
    * @param request - The request {@link RegistrarApiUpdateContactRequest}
    * @returns A Promise of Contact
@@ -1066,7 +1071,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * List domains. Returns a list of domains owned by the user.
+   * List domains. Retrieve the list of domains you own.
    *
    * @param request - The request {@link RegistrarApiListDomainsRequest}
    * @returns A Promise of ListDomainsResponse
@@ -1096,9 +1101,9 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * List scaleway domains that can or not be renewed. Returns a list of domains
-   * owned by the user with a renew status and if renewable, the maximum renew
-   * duration in years.
+   * List domains that can be renewed. Retrieve the list of domains you own that
+   * can be renewed. You can also see the maximum renewal duration in years for
+   * your domains that are renewable.
    *
    * @param request - The request {@link RegistrarApiListRenewableDomainsRequest}
    * @returns A Promise of ListRenewableDomainsResponse
@@ -1108,7 +1113,8 @@ export class RegistrarAPI extends ParentAPI {
   ) => enrichForPagination('domains', this.pageOfListRenewableDomains, request)
 
   /**
-   * Get domain. Returns a the domain with more informations.
+   * Get domain. Retrieve a specific domain and display the domain's
+   * information.
    *
    * @param request - The request {@link RegistrarApiGetDomainRequest}
    * @returns A Promise of Domain
@@ -1146,9 +1152,10 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Update a domain. Update the domain contacts or create a new one.<br/> If
-   * you add the same contact for multiple roles. Only one ID will be created
-   * and used for all of them.
+   * Update a domain's contacts. Update contacts for a specific domain or create
+   * a new contact.<br/> If you add the same contact for multiple roles (owner,
+   * administrative, technical), only one ID will be created and used for all of
+   * the roles.
    *
    * @param request - The request {@link RegistrarApiUpdateDomainRequest}
    * @returns A Promise of Domain
@@ -1170,8 +1177,9 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Lock domain transfer. Lock domain transfer. A locked domain transfer can't
-   * be transferred and the auth code can't be requested.
+   * Lock the transfer of a domain. Lock the transfer of a domain. This means
+   * that the domain cannot be transferred and the authorization code cannot be
+   * requested to your current registrar.
    *
    * @param request - The request {@link RegistrarApiLockDomainTransferRequest}
    * @returns A Promise of Domain
@@ -1193,8 +1201,9 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Unlock domain transfer. Unlock domain transfer. An unlocked domain can be
-   * transferred and the auth code can be requested for this.
+   * Unlock the transfer of a domain. Unlock the transfer of a domain. This
+   * means that the domain can be transferred and the authorization code can be
+   * requested to your current registrar.
    *
    * @param request - The request {@link RegistrarApiUnlockDomainTransferRequest}
    * @returns A Promise of Domain
@@ -1216,7 +1225,8 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Enable domain auto renew.
+   * Enable auto renew. Enable the `auto renew` feature for a domain. This means
+   * the domain will be automatically renewed before its expiry date.
    *
    * @param request - The request
    *   {@link RegistrarApiEnableDomainAutoRenewRequest}
@@ -1239,7 +1249,8 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Disable domain auto renew.
+   * Disable auto renew. Disable the `auto renew` feature for a domain. This
+   * means the domain will not be renewed before its expiry date.
    *
    * @param request - The request
    *   {@link RegistrarApiDisableDomainAutoRenewRequest}
@@ -1262,10 +1273,11 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Return domain auth code. If possible, return the auth code for an unlocked
-   * domain transfer, or an error if the domain is locked. Some TLD may have a
-   * different procedure to retrieve the auth code, in that case, the
-   * information is given in the message field.
+   * Get a domain's authorization code. Retrieve the authorization code to
+   * tranfer an unlocked domain. The output returns an error if the domain is
+   * locked. Some TLDs may have a different procedure to retrieve the
+   * authorization code. In that case, the information displays in the message
+   * field.
    *
    * @param request - The request {@link RegistrarApiGetDomainAuthCodeRequest}
    * @returns A Promise of GetDomainAuthCodeResponse
@@ -1313,7 +1325,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Disable domain DNSSEC.
+   * Disable a domain's DNSSEC. Disable DNSSEC for a domain.
    *
    * @param request - The request {@link RegistrarApiDisableDomainDNSSECRequest}
    * @returns A Promise of Domain
@@ -1335,10 +1347,11 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Search available domains. Search a domain (or at maximum, 10 domains).
+   * Search available domains. Search a domain or a maximum of 10 domains that
+   * are available.
    *
-   * If the TLD list is empty or not set the search returns the results from the
-   * most popular TLDs.
+   * If the TLD list is empty or not set, the search returns the results from
+   * the most popular TLDs.
    *
    * @param request - The request
    *   {@link RegistrarApiSearchAvailableDomainsRequest}
@@ -1361,7 +1374,8 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Create domain hostname with glue IPs.
+   * Create a hostname for a domain. Create a hostname for a domain with glue
+   * IPs.
    *
    * @param request - The request {@link RegistrarApiCreateDomainHostRequest}
    * @returns A Promise of Host
@@ -1407,7 +1421,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * List domain hostnames with they glue IPs.
+   * List a domain's hostnames. List a domain's hostnames using their glue IPs.
    *
    * @param request - The request {@link RegistrarApiListDomainHostsRequest}
    * @returns A Promise of ListDomainHostsResponse
@@ -1416,7 +1430,7 @@ export class RegistrarAPI extends ParentAPI {
     enrichForPagination('hosts', this.pageOfListDomainHosts, request)
 
   /**
-   * Update domain hostname with glue IPs.
+   * Update a domain's hostname. Update a domain's hostname with glue IPs.
    *
    * @param request - The request {@link RegistrarApiUpdateDomainHostRequest}
    * @returns A Promise of Host
@@ -1441,7 +1455,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Delete domain hostname.
+   * Delete a domain's hostname. Delete a domain's hostname.
    *
    * @param request - The request {@link RegistrarApiDeleteDomainHostRequest}
    * @returns A Promise of Host
