@@ -221,8 +221,11 @@ export interface GetServerResponse {
   server?: Server
 }
 
+/** Get server types availability response. */
 export interface GetServerTypesAvailabilityResponse {
+  /** Map of server types. */
   servers: Record<string, GetServerTypesAvailabilityResponseAvailability>
+  totalCount: number
 }
 
 export interface GetServerTypesAvailabilityResponseAvailability {
@@ -923,7 +926,12 @@ export interface VolumeTypeConstraints {
 export type GetServerTypesAvailabilityRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
+  /**
+   * A positive integer lower or equal to 100 to select the number of items to
+   * return.
+   */
   perPage?: number
+  /** A positive integer to choose the page to return. */
   page?: number
 }
 
