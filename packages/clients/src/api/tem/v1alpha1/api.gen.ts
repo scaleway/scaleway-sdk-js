@@ -25,7 +25,6 @@ import {
 } from './marshalling.gen'
 import type {
   CancelEmailRequest,
-  CheckDomainLastStatusRequest,
   CheckDomainRequest,
   CreateDomainRequest,
   CreateEmailRequest,
@@ -33,6 +32,7 @@ import type {
   Domain,
   DomainLastStatus,
   Email,
+  GetDomainLastStatusRequest,
   GetDomainRequest,
   GetEmailRequest,
   GetStatisticsRequest,
@@ -348,15 +348,13 @@ export class API extends ParentAPI {
    * DKIM records status and potential errors, including the found records to
    * make debugging easier.
    *
-   * @param request - The request {@link CheckDomainLastStatusRequest}
+   * @param request - The request {@link GetDomainLastStatusRequest}
    * @returns A Promise of DomainLastStatus
    */
-  checkDomainLastStatus = (request: Readonly<CheckDomainLastStatusRequest>) =>
+  getDomainLastStatus = (request: Readonly<GetDomainLastStatusRequest>) =>
     this.client.fetch<DomainLastStatus>(
       {
-        body: '{}',
-        headers: jsonContentHeaders,
-        method: 'POST',
+        method: 'GET',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam(
           'region',
           request.region ?? this.client.settings.defaultRegion,
