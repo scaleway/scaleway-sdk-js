@@ -50,11 +50,11 @@ export class API extends ParentAPI {
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
 
   /**
-   * Create a new volume from a Project ID. Volume is identified by an ID and
-   * used to host pin references. Volume is personal (at least to your
-   * organization) even if IPFS blocks and CID are available to anyone. Should
-   * be the first command you made because every pin must be attached to a
-   * volume.
+   * Create a new volume. Create a new volume from a Project ID. Volume is
+   * identified by an ID and used to host pin references. Volume is personal (at
+   * least to your organization) even if IPFS blocks and CID are available to
+   * anyone. Should be the first command you made because every pin must be
+   * attached to a volume.
    *
    * @param request - The request {@link CreateVolumeRequest}
    * @returns A Promise of Volume
@@ -76,7 +76,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrieve information about a specific volume.
+   * Get information about a volume. Retrieve information about a specific
+   * volume.
    *
    * @param request - The request {@link GetVolumeRequest}
    * @returns A Promise of Volume
@@ -118,7 +119,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrieve information about all volumes from a Project ID.
+   * List all volumes by a Project ID. Retrieve information about all volumes
+   * from a Project ID.
    *
    * @param request - The request {@link ListVolumesRequest}
    * @returns A Promise of ListVolumesResponse
@@ -127,7 +129,7 @@ export class API extends ParentAPI {
     enrichForPagination('volumes', this.pageOfListVolumes, request)
 
   /**
-   * Update volume information (tag, name...).
+   * Update volume information. Update volume information (tag, name...).
    *
    * @param request - The request {@link UpdateVolumeRequest}
    * @returns A Promise of Volume
@@ -149,8 +151,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a volume by its ID and every pin attached to this volume. Can take a
-   * while, depending of your pinned content.
+   * Delete an existing volume. Delete a volume by its ID and every pin attached
+   * to this volume. This process can take a while to conclude, depending on the
+   * size of your pinned content.
    *
    * @param request - The request {@link DeleteVolumeRequest}
    */
@@ -164,7 +167,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Create a pin request. Will fetch and store the content pointed by the
+   * Create a pin by URL. Will fetch and store the content pointed by the
    * provided URL. The content must be available on the public IPFS network. The
    * content (IPFS blocks) will be host by the pinning service until pin
    * deletion. From that point, any other IPFS peer can fetch and host your
@@ -192,7 +195,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a pin request. Will fetch and store the content pointed by the
+   * Create a pin by CID. Will fetch and store the content pointed by the
    * provided CID. The content must be available on the public IPFS network. The
    * content (IPFS blocks) will be host by the pinning service until pin
    * deletion. From that point, any other IPFS peer can fetch and host your
@@ -236,8 +239,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrieve information about the provided pin ID (not the CID): status, last
-   * modification, CID.
+   * Get pin information. Retrieve information about the provided **pin ID**,
+   * such as status, last modification, and CID.
    *
    * @param request - The request {@link GetPinRequest}
    * @returns A Promise of Pin
@@ -299,7 +302,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrieve information about all pins into a volume.
+   * List all pins within a volume. Retrieve information about all pins into a
+   * volume.
    *
    * @param request - The request {@link ListPinsRequest}
    * @returns A Promise of ListPinsResponse
@@ -308,8 +312,9 @@ export class API extends ParentAPI {
     enrichForPagination('pins', this.pageOfListPins, request)
 
   /**
-   * Create an unpin request. If the pin was the last to target a specific CID,
-   * the content will be erase from storage. The function is indempotent.
+   * Create an unpin request. An unpin request means that you no longer own the
+   * content. This content can therefore be removed and no longer provided on
+   * the IPFS network.
    *
    * @param request - The request {@link DeletePinRequest}
    */
