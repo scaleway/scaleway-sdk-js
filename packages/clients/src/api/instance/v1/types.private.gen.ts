@@ -63,8 +63,10 @@ export type CreateServerRequest = {
   zone?: Zone
   /** Instance name. */
   name?: string
-  /** Define if a dynamic IP is required for the Instance. */
+  /** Define if a dynamic IPv4 is required for the Instance. */
   dynamicIpRequired?: boolean
+  /** If true, configure the Instance so it uses the new routed IP mode. */
+  routedIpEnabled?: boolean
   /** Define the Instance commercial type (i.e. GP1-S). */
   commercialType: string
   /** Instance image ID or label. */
@@ -73,8 +75,10 @@ export type CreateServerRequest = {
   volumes?: Record<string, VolumeServerTemplate>
   /** True if IPv6 is enabled on the server. */
   enableIpv6: boolean
-  /** ID of the reserved IP to attach to the server. */
+  /** ID of the reserved IP to attach to the Instance. */
   publicIp?: string
+  /** A list of reserved IP IDs to attach to the Instance. */
+  publicIps?: string[]
   /** Boot type to use. */
   bootType?: BootType
   /** @deprecated Bootscript ID to use when `boot_type` is set to `bootscript`. */
@@ -120,8 +124,13 @@ export type SetServerRequest = {
   commercialType: string
   /** Instance creation date. */
   creationDate?: Date
-  /** True if a dynamic IP is required. */
+  /** True if a dynamic IPv4 is required. */
   dynamicIpRequired: boolean
+  /**
+   * True to configure the instance so it uses the new routed IP mode (once this
+   * is set to True you cannot set it back to False).
+   */
+  routedIpEnabled?: boolean
   /** True if IPv6 is enabled. */
   enableIpv6: boolean
   /** Instance host name. */
@@ -134,6 +143,8 @@ export type SetServerRequest = {
   privateIp?: string
   /** Information about the public IP. */
   publicIp?: ServerIp
+  /** Information about all the public IPs attached to the server. */
+  publicIps?: ServerIp[]
   /** Instance modification date. */
   modificationDate?: Date
   /** Instance state. */
@@ -179,6 +190,12 @@ export type UpdateServerRequest = {
   /** @deprecated */
   bootscript?: string
   dynamicIpRequired?: boolean
+  /**
+   * True to configure the instance so it uses the new routed IP mode (once this
+   * is set to True you cannot set it back to False).
+   */
+  routedIpEnabled?: boolean
+  publicIps?: ServerIp[]
   enableIpv6?: boolean
   protected?: boolean
   securityGroup?: SecurityGroupTemplate

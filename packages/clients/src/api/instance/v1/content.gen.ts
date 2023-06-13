@@ -2,6 +2,7 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type {
   ImageState,
+  IpState,
   PrivateNICState,
   SecurityGroupState,
   ServerState,
@@ -13,6 +14,9 @@ import type {
 
 /** Lists transient statutes of the enum {@link ImageState}. */
 export const IMAGE_TRANSIENT_STATUSES: ImageState[] = ['creating']
+
+/** Lists transient statutes of the enum {@link IpState}. */
+export const IP_TRANSIENT_STATUSES: IpState[] = ['pending']
 
 /** Lists transient statutes of the enum {@link PrivateNICState}. */
 export const PRIVATE_NIC_TRANSIENT_STATUSES: PrivateNICState[] = ['syncing']
