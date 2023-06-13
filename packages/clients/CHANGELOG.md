@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.14.0...@scaleway/sdk@1.15.0) (2023-06-13)
+
+### Features
+
+- **instance:** add totalCount field to GetServerTypesAvailabilityResponse ([#704](https://github.com/scaleway/scaleway-sdk-js/issues/704)) ([787c7c6](https://github.com/scaleway/scaleway-sdk-js/commit/787c7c6b86070cb382c950c88b07c61f5f01380a))
+- **ipfs:** add v1alpha1 ([#681](https://github.com/scaleway/scaleway-sdk-js/issues/681)) ([3ec9346](https://github.com/scaleway/scaleway-sdk-js/commit/3ec9346da792c1517747fd77ac01d736d1b1bef7))
+- **ipfs:** update meta field ([#688](https://github.com/scaleway/scaleway-sdk-js/issues/688)) ([3975a9f](https://github.com/scaleway/scaleway-sdk-js/commit/3975a9f0c40dfcb8a9048fe145e375260dbf8ec8))
+- **k8s:** list cluster types ([#700](https://github.com/scaleway/scaleway-sdk-js/issues/700)) ([f3cf9c5](https://github.com/scaleway/scaleway-sdk-js/commit/f3cf9c585efe1f6cc3b61992e138e2738772fb55))
+- **lb:** add flexible ip auto assign flag ([#689](https://github.com/scaleway/scaleway-sdk-js/issues/689)) ([d49a63e](https://github.com/scaleway/scaleway-sdk-js/commit/d49a63efb5fa9aed64a50e789f1c0ea840e56f01))
+- **lb:** allow multi ip attach ([#695](https://github.com/scaleway/scaleway-sdk-js/issues/695)) ([246516e](https://github.com/scaleway/scaleway-sdk-js/commit/246516e8a85edd61e01e90f5a3dc1ba9eab0cddc))
+- **tem:** rename `checkDomainLastStatus` to `getDomainLastStatus` ([#707](https://github.com/scaleway/scaleway-sdk-js/issues/707)) ([2a945c2](https://github.com/scaleway/scaleway-sdk-js/commit/2a945c220a24d0351a5bba8bfda0b71191ed6057))
+- update generated APIs ([#702](https://github.com/scaleway/scaleway-sdk-js/issues/702)) ([999d052](https://github.com/scaleway/scaleway-sdk-js/commit/999d0528b3506c0804520ccca4825db907d97a0f))
+- **vpc/v2:** allow setting PN name on VPC creation ([#693](https://github.com/scaleway/scaleway-sdk-js/issues/693)) ([dfab7da](https://github.com/scaleway/scaleway-sdk-js/commit/dfab7daba00532db0212e4461d6fd10fea846ad4))
+
+### Bug Fixes
+
+- **ipfs:** replace usage meta by info ([#694](https://github.com/scaleway/scaleway-sdk-js/issues/694)) ([8043817](https://github.com/scaleway/scaleway-sdk-js/commit/80438179d9c94ac8abff9c6be62601b55edac7c0))
+- **ipfs:** replace usage meta by info ([#706](https://github.com/scaleway/scaleway-sdk-js/issues/706)) ([887e717](https://github.com/scaleway/scaleway-sdk-js/commit/887e71710354ac44c3d9adc11d2e0b8be9048576))
+
 ## [1.14.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.13.0...@scaleway/sdk@1.14.0) (2023-06-05)
 
 ### Features
