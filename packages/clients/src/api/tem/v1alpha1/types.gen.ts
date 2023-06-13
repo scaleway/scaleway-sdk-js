@@ -394,7 +394,7 @@ export type CheckDomainRequest = {
   domainId: string
 }
 
-export type CheckDomainLastStatusRequest = {
+export type GetDomainLastStatusRequest = {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
