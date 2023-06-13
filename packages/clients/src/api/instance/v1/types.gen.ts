@@ -8,6 +8,15 @@ export type BootType = 'local' | 'bootscript' | 'rescue'
 
 export type ImageState = 'available' | 'creating' | 'error'
 
+export type IpState =
+  | 'unknown_state'
+  | 'detached'
+  | 'attached'
+  | 'pending'
+  | 'error'
+
+export type IpType = 'unknown_iptype' | 'nat' | 'routed_ipv4' | 'routed_ipv6'
+
 export type ListServersRequestOrder =
   | 'creation_date_desc'
   | 'creation_date_asc'
@@ -37,6 +46,10 @@ export type ServerAction =
   | 'poweroff'
   | 'terminate'
   | 'reboot'
+
+export type ServerIpIpFamily = 'inet' | 'inet6'
+
+export type ServerIpProvisioningMode = 'manual' | 'dhcp' | 'slaac'
 
 export type ServerState =
   | 'running'
@@ -267,6 +280,9 @@ export interface Ip {
   organization: string
   tags: string[]
   project: string
+  type: IpType
+  state: IpState
+  prefix: string
   zone: Zone
 }
 
@@ -510,8 +526,10 @@ export interface Server {
   commercialType: string
   /** Instance creation date. */
   creationDate?: Date
-  /** True if a dynamic IP is required. */
+  /** True if a dynamic IPv4 is required. */
   dynamicIpRequired: boolean
+  /** True to configure the instance so it uses the new routed IP mode. */
+  routedIpEnabled: boolean
   /** True if IPv6 is enabled. */
   enableIpv6: boolean
   /** Instance host name. */
@@ -524,6 +542,10 @@ export interface Server {
   privateIp?: string
   /** Information about the public IP. */
   publicIp?: ServerIp
+  /** Information about all the public IPs attached to the server. */
+  publicIps: ServerIp[]
+  /** The server's MAC address. */
+  macAddress: string
   /** Instance modification date. */
   modificationDate?: Date
   /** Instance state. */
@@ -572,10 +594,18 @@ export interface ServerActionResponse {
 export interface ServerIp {
   /** Unique ID of the IP address. */
   id: string
-  /** Instance public IPv4 IP-Address. */
+  /** Instance's public IP-Address. */
   address: string
+  /** Gateway's IP address. */
+  gateway: string
+  /** CIDR netmask. */
+  netmask: string
+  /** IP address family (inet or inet6). */
+  family: ServerIpIpFamily
   /** True if the IP address is dynamic. */
   dynamic: boolean
+  /** Information about this address provisioning mode. */
+  provisioningMode: ServerIpProvisioningMode
 }
 
 /** Server. ipv6. */
@@ -1591,6 +1621,8 @@ export type CreateIpRequest = {
   tags?: string[]
   /** UUID of the Instance you want to attach the IP to. */
   server?: string
+  /** IP type to reserve (either 'nat', 'routed_ipv4' or 'routed_ipv6'). */
+  type?: IpType
 }
 
 export type GetIpRequest = {
@@ -1607,6 +1639,8 @@ export type UpdateIpRequest = {
   ip: string
   /** Reverse domain name. */
   reverse?: string | null
+  /** Convert a 'nat' IP to a 'routed_ipv4'. */
+  type?: IpType
   /** An array of keywords you want to tag this IP with. */
   tags?: string[]
   server?: string | null

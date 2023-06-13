@@ -312,7 +312,11 @@ const unmarshalServerIp = (data: unknown) => {
   return {
     address: data.address,
     dynamic: data.dynamic,
+    family: data.family,
+    gateway: data.gateway,
     id: data.id,
+    netmask: data.netmask,
+    provisioningMode: data.provisioning_mode,
   } as ServerIp
 }
 
@@ -506,10 +510,13 @@ const unmarshalIp = (data: unknown) => {
     address: data.address,
     id: data.id,
     organization: data.organization,
+    prefix: data.prefix,
     project: data.project,
     reverse: data.reverse,
     server: data.server ? unmarshalServerSummary(data.server) : undefined,
+    state: data.state,
     tags: data.tags,
+    type: data.type,
     zone: data.zone,
   } as Ip
 }
@@ -602,6 +609,7 @@ const unmarshalServer = (data: unknown) => {
     location: data.location
       ? unmarshalServerLocation(data.location)
       : undefined,
+    macAddress: data.mac_address,
     maintenances: unmarshalArrayOfObject(
       data.maintenances,
       unmarshalServerMaintenance,
@@ -617,6 +625,8 @@ const unmarshalServer = (data: unknown) => {
     project: data.project,
     protected: data.protected,
     publicIp: data.public_ip ? unmarshalServerIp(data.public_ip) : undefined,
+    publicIps: unmarshalArrayOfObject(data.public_ips, unmarshalServerIp),
+    routedIpEnabled: data.routed_ip_enabled,
     securityGroup: data.security_group
       ? unmarshalSecurityGroupSummary(data.security_group)
       : undefined,
@@ -1521,7 +1531,11 @@ const marshalServerIp = (
 ): Record<string, unknown> => ({
   address: request.address,
   dynamic: request.dynamic,
+  family: request.family,
+  gateway: request.gateway,
   id: request.id,
+  netmask: request.netmask,
+  provisioning_mode: request.provisioningMode,
 })
 
 const marshalServerIpv6 = (
@@ -1648,6 +1662,7 @@ export const marshalCreateIpRequest = (
 ): Record<string, unknown> => ({
   server: request.server,
   tags: request.tags,
+  type: request.type ?? 'unknown_iptype',
   ...resolveOneOf([
     {
       default: defaults.defaultProjectId,
@@ -1754,6 +1769,8 @@ export const marshalCreateServerRequest = (
   name: request.name || randomName('srv'),
   placement_group: request.placementGroup,
   public_ip: request.publicIp,
+  public_ips: request.publicIps,
+  routed_ip_enabled: request.routedIpEnabled,
   security_group: request.securityGroup,
   tags: request.tags,
   volumes: request.volumes
@@ -2003,6 +2020,10 @@ export const marshalSetServerRequest = (
   public_ip: request.publicIp
     ? marshalServerIp(request.publicIp, defaults)
     : undefined,
+  public_ips: request.publicIps
+    ? request.publicIps.map(elt => marshalServerIp(elt, defaults))
+    : undefined,
+  routed_ip_enabled: request.routedIpEnabled,
   security_group: request.securityGroup
     ? marshalSecurityGroupSummary(request.securityGroup, defaults)
     : undefined,
@@ -2046,6 +2067,7 @@ export const marshalUpdateIpRequest = (
   reverse: request.reverse,
   server: request.server,
   tags: request.tags,
+  type: request.type ?? 'unknown_iptype',
 })
 
 export const marshalUpdatePlacementGroupRequest = (
@@ -2086,6 +2108,10 @@ export const marshalUpdateServerRequest = (
     ? request.privateNics.map(elt => marshalPrivateNIC(elt, defaults))
     : undefined,
   protected: request.protected,
+  public_ips: request.publicIps
+    ? request.publicIps.map(elt => marshalServerIp(elt, defaults))
+    : undefined,
+  routed_ip_enabled: request.routedIpEnabled,
   security_group: request.securityGroup
     ? marshalSecurityGroupTemplate(request.securityGroup, defaults)
     : undefined,
