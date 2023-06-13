@@ -1689,9 +1689,7 @@ export class API extends ParentAPI {
   /**
    * Create a new Database Instance endpoint. Create a new endpoint for a
    * Database Instance. You can add `load_balancer` and `private_network`
-   * specifications to the body of the request. Note that this action replaces
-   * your current endpoint, which means you might need to update any environment
-   * configurations that point to the old endpoint.
+   * specifications to the body of the request.
    *
    * @param request - The request {@link CreateEndpointRequest}
    * @returns A Promise of Endpoint
