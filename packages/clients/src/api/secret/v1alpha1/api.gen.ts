@@ -17,6 +17,7 @@ import {
   unmarshalAccessSecretVersionResponse,
   unmarshalListSecretVersionsResponse,
   unmarshalListSecretsResponse,
+  unmarshalListTagsResponse,
   unmarshalSecret,
   unmarshalSecretVersion,
 } from './marshalling.gen'
@@ -41,6 +42,8 @@ import type {
   ListSecretVersionsResponse,
   ListSecretsRequest,
   ListSecretsResponse,
+  ListTagsRequest,
+  ListTagsResponse,
   Secret,
   SecretVersion,
   UpdateSecretRequest,
@@ -537,4 +540,33 @@ export class API extends ParentAPI {
       },
       unmarshalSecretVersion,
     )
+
+  protected pageOfListTags = (request: Readonly<ListTagsRequest> = {}) =>
+    this.client.fetch<ListTagsResponse>(
+      {
+        method: 'GET',
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/tags`,
+        urlParams: urlParams(
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['project_id', request.projectId],
+        ),
+      },
+      unmarshalListTagsResponse,
+    )
+
+  /**
+   * List tags. List all tags associated to secrets in one or several Projects.
+   *
+   * @param request - The request {@link ListTagsRequest}
+   * @returns A Promise of ListTagsResponse
+   */
+  listTags = (request: Readonly<ListTagsRequest> = {}) =>
+    enrichForPagination('tags', this.pageOfListTags, request)
 }

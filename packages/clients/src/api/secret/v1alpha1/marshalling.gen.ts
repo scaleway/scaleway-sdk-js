@@ -15,6 +15,7 @@ import type {
   GeneratePasswordRequest,
   ListSecretVersionsResponse,
   ListSecretsResponse,
+  ListTagsResponse,
   PasswordGenerationParams,
   Secret,
   SecretVersion,
@@ -101,6 +102,16 @@ export const unmarshalListSecretsResponse = (data: unknown) => {
     secrets: unmarshalArrayOfObject(data.secrets, unmarshalSecret),
     totalCount: data.total_count,
   } as ListSecretsResponse
+}
+
+export const unmarshalListTagsResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListTagsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return { tags: data.tags, totalCount: data.total_count } as ListTagsResponse
 }
 
 const marshalPasswordGenerationParams = (

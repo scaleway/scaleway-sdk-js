@@ -23,6 +23,8 @@ export type {
   ListSecretsRequest,
   ListSecretsRequestOrderBy,
   ListSecretsResponse,
+  ListTagsRequest,
+  ListTagsResponse,
   PasswordGenerationParams,
   Product,
   Secret,
