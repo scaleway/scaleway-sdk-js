@@ -54,6 +54,14 @@ export interface ListSecretsResponse {
   totalCount: number
 }
 
+/** List tags response. */
+export interface ListTagsResponse {
+  /** List of tags. */
+  tags: string[]
+  /** Count of all tags matching the requested criteria. */
+  totalCount: number
+}
+
 /** Password generation params. */
 export interface PasswordGenerationParams {
   /** Length of the password to generate (between 1 and 1024). */
@@ -466,4 +474,19 @@ export type DestroySecretVersionRequest = {
    * subsequent revisions augment by 1. Value can be a number or "latest".
    */
   revision: string
+}
+
+export type ListTagsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /**
+   * ID of the Project to target. (Optional.) If not specified, Secret Manager
+   * will look for tags in all Projects.
+   */
+  projectId?: string
+  page?: number
+  pageSize?: number
 }
