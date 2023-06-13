@@ -989,6 +989,7 @@ export const unmarshalGetServerTypesAvailabilityResponse = (data: unknown) => {
       data.servers,
       unmarshalGetServerTypesAvailabilityResponseAvailability,
     ),
+    totalCount: data.total_count,
   } as GetServerTypesAvailabilityResponse
 }
 
