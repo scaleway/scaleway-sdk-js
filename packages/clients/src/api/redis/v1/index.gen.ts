@@ -44,6 +44,7 @@ export type {
   NodeType,
   NodeTypeStock,
   PrivateNetwork,
+  PrivateNetworkProvisioningMode,
   PublicNetwork,
   RenewClusterCertificateRequest,
   SetAclRulesRequest,
