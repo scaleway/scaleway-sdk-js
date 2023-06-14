@@ -54,6 +54,7 @@ const unmarshalPrivateNetwork = (data: unknown) => {
 
   return {
     id: data.id,
+    provisioningMode: data.provisioning_mode,
     serviceIps: data.service_ips,
     zone: data.zone,
   } as PrivateNetwork

@@ -32,6 +32,8 @@ export type NodeTypeStock =
   | 'out_of_stock'
   | 'available'
 
+export type PrivateNetworkProvisioningMode = 'static' | 'ipam'
+
 /** Acl rule. */
 export interface ACLRule {
   /** ID of the rule. */
@@ -273,6 +275,8 @@ export interface PrivateNetwork {
   serviceIps: string[]
   /** Zone of the Private Network. */
   zone: Zone
+  /** How your endpoint ips are provisioned. */
+  provisioningMode: PrivateNetworkProvisioningMode
 }
 
 export interface PublicNetwork {}
