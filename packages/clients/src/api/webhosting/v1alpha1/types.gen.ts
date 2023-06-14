@@ -24,6 +24,7 @@ export type HostingStatus =
   | 'deleting'
   | 'error'
   | 'locked'
+  | 'migrating'
 
 export type ListHostingsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 

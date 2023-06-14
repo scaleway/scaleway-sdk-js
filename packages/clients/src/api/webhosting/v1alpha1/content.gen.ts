@@ -6,4 +6,5 @@ import type { HostingStatus } from './types.gen'
 export const HOSTING_TRANSIENT_STATUSES: HostingStatus[] = [
   'delivering',
   'deleting',
+  'migrating',
 ]
