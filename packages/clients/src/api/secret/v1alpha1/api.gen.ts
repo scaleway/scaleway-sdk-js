@@ -87,8 +87,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get metadata using the secret's name. Retrieve the metadata of a secret
-   * specified by the `region` and the `secret_name` parameters.
+   * Get metadata using the secret's ID. Retrieve the metadata of a secret
+   * specified by the `region` and `secret_id` parameters.
    *
    * @param request - The request {@link GetSecretRequest}
    * @returns A Promise of Secret
@@ -106,8 +106,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get metadata using the secret's ID. Retrieve the metadata of a secret
-   * specified by the `region`, `secret_id` and `project_id` parameters.
+   * Get metadata using the secret's name. Retrieve the metadata of a secret
+   * specified by the `region` and `secret_name` parameters.
    *
    * @param request - The request {@link GetSecretByNameRequest}
    * @returns A Promise of Secret
