@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.15.0...@scaleway/sdk@1.16.0) (2023-06-19)
+
+### Features
+
+- **instance:** add support for nl-ams-3 ([#721](https://github.com/scaleway/scaleway-sdk-js/issues/721)) ([fc8c093](https://github.com/scaleway/scaleway-sdk-js/commit/fc8c0935fb46cbb8c183f1c62b923be5f541cc86))
+- **instance:** use the new 'IP Mobility' network stack ([#709](https://github.com/scaleway/scaleway-sdk-js/issues/709)) ([91d5d6f](https://github.com/scaleway/scaleway-sdk-js/commit/91d5d6f2cf78093df534aed1fb48f892f4e273cf))
+- **redis:** expose if ipam to Redis PN endpoint ([#722](https://github.com/scaleway/scaleway-sdk-js/issues/722)) ([bdca967](https://github.com/scaleway/scaleway-sdk-js/commit/bdca9675b7c7825d5fc76cfc517638a01ce706ce))
+- **secret:** add endpoint to list tags ([#708](https://github.com/scaleway/scaleway-sdk-js/issues/708)) ([a28d914](https://github.com/scaleway/scaleway-sdk-js/commit/a28d9142e40717f5b285b9f85361862dc28bb990))
+- **vpc:** add support for nl-ams-3 ([#726](https://github.com/scaleway/scaleway-sdk-js/issues/726)) ([713f26a](https://github.com/scaleway/scaleway-sdk-js/commit/713f26a4440d3f64df0bc39c51f9a3985a5db352))
+- **webhosting:** add a migrating status ([#725](https://github.com/scaleway/scaleway-sdk-js/issues/725)) ([53cbe2d](https://github.com/scaleway/scaleway-sdk-js/commit/53cbe2d1364d7b8fb6a68cec89c640f088566eb3))
+
 ## [1.15.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.14.0...@scaleway/sdk@1.15.0) (2023-06-13)
 
 ### Features
