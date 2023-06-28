@@ -29,6 +29,7 @@ export type {
   Product,
   Secret,
   SecretStatus,
+  SecretType,
   SecretVersion,
   SecretVersionStatus,
   UpdateSecretRequest,

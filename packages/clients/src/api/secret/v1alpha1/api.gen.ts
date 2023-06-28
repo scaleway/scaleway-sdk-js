@@ -562,7 +562,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List tags. List all tags associated to secrets in one or several Projects.
+   * List tags. List all tags associated with secrets within a given Project.
    *
    * @param request - The request {@link ListTagsRequest}
    * @returns A Promise of ListTagsResponse
