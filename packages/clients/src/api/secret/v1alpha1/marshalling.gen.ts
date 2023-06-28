@@ -40,6 +40,7 @@ export const unmarshalSecret = (data: unknown) => {
     region: data.region,
     status: data.status,
     tags: data.tags,
+    type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
     versionCount: data.version_count,
   } as Secret
@@ -141,6 +142,7 @@ export const marshalCreateSecretRequest = (
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
+  type: request.type ?? 'unknown_secret_type',
 })
 
 export const marshalCreateSecretVersionRequest = (

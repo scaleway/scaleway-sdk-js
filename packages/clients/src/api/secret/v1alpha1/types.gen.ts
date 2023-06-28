@@ -14,6 +14,11 @@ export type Product = 'unknown'
 
 export type SecretStatus = 'ready' | 'locked'
 
+export type SecretType =
+  | 'unknown_secret_type'
+  | 'opaque'
+  | 'network_edge_certificate'
+
 export type SecretVersionStatus =
   | 'unknown'
   | 'enabled'
@@ -99,8 +104,10 @@ export interface Secret {
   versionCount: number
   /** Updated description of the secret. */
   description?: string
-  /** True for secrets that are managed by another product. */
+  /** Returns `true` for secrets that are managed by another product. */
   isManaged: boolean
+  /** Type of the secret. See `Secret.Type` enum for description of values. */
+  type: SecretType
   /** Region of the secret. */
   region: Region
 }
@@ -145,6 +152,11 @@ export type CreateSecretRequest = {
   tags?: string[]
   /** Description of the secret. */
   description?: string
+  /**
+   * Type of the secret. (Optional.) See `Secret.Type` enum for description of
+   * values. If not specified, the type is `Opaque`.
+   */
+  type?: SecretType
 }
 
 export type GetSecretRequest = {
@@ -227,12 +239,9 @@ export type AddSecretOwnerRequest = {
   region?: Region
   /** ID of the secret. */
   secretId: string
-  /**
-   * @deprecated (Deprecated: use product field) ID of the product to add (see
-   *   product enum).
-   */
+  /** @deprecated (Deprecated: use `product` field) Name of the product to add. */
   productName?: string
-  /** ID of the product to add (see product enum). */
+  /** ID of the product to add. See `Product` enum for description of values. */
   product?: Product
 }
 
