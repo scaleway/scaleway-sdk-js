@@ -888,21 +888,21 @@ export interface VolumeServer {
 /** Volume server template. */
 export interface VolumeServerTemplate {
   /** UUID of the volume. */
-  id: string
+  id?: string
   /** Force the Instance to boot on this volume. */
-  boot: boolean
+  boot?: boolean
   /** Name of the volume. */
-  name: string
+  name?: string
   /** Disk size of the volume, must be a multiple of 512. */
-  size: number
+  size?: number
   /** Type of the volume. */
   volumeType: VolumeVolumeType
   /** ID of the snapshot on which this volume will be based. */
-  baseSnapshot: string
+  baseSnapshot?: string
   /** Organization ID of the volume. */
-  organization: string
+  organization?: string
   /** Project ID of the volume. */
-  project: string
+  project?: string
 }
 
 export interface VolumeSummary {
@@ -1678,6 +1678,8 @@ export type CreatePrivateNICRequest = {
   privateNetworkId: string
   /** Private NIC tags. */
   tags?: string[]
+  /** Ip_ids defined from IPAM. */
+  ipIds?: string[]
 }
 
 export type GetPrivateNICRequest = {
