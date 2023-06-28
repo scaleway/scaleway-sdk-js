@@ -10,6 +10,7 @@ export type {
   DeleteSubnetsRequest,
   DeleteSubnetsResponse,
   DeleteVPCRequest,
+  EnableDHCPRequest,
   GetPrivateNetworkRequest,
   GetVPCRequest,
   ListPrivateNetworksRequest,

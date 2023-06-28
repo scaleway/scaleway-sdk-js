@@ -51,6 +51,7 @@ export const unmarshalPrivateNetwork = (data: unknown) => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
+    dhcpEnabled: data.dhcp_enabled,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
