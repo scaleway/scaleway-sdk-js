@@ -264,6 +264,8 @@ export interface ClusterType {
   name: string
   /** Cluster type availability. */
   availability: ClusterTypeAvailability
+  /** Maximum number of nodes supported by the offer. */
+  maxNodes: number
 }
 
 /** Create cluster request. auto upgrade. */

@@ -172,7 +172,11 @@ const unmarshalClusterType = (data: unknown) => {
     )
   }
 
-  return { availability: data.availability, name: data.name } as ClusterType
+  return {
+    availability: data.availability,
+    maxNodes: data.max_nodes,
+    name: data.name,
+  } as ClusterType
 }
 
 export const unmarshalNode = (data: unknown) => {
