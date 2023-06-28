@@ -20,5 +20,6 @@ export type {
   ListVersionsRequestOrderBy,
   ListVersionsResponse,
   LocalImage,
+  LocalImageType,
   Version,
 } from './types.gen'

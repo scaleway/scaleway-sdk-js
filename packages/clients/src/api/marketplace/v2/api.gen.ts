@@ -149,6 +149,7 @@ export class API extends ParentAPI {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
+          ['type', request.type ?? 'unknown_type'],
           ['zone', request.zone ?? this.client.settings.defaultZone],
           ...Object.entries(
             resolveOneOf([

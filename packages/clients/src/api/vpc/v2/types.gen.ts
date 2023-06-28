@@ -54,6 +54,8 @@ export interface PrivateNetwork {
   subnets: Subnet[]
   /** VPC the Private Network belongs to. */
   vpcId: string
+  /** Defines whether managed DHCP is enabled for this Private Network. */
+  dhcpEnabled: boolean
 }
 
 export interface SetSubnetsResponse {
@@ -227,6 +229,11 @@ export type ListPrivateNetworksRequest = {
    * returned.
    */
   vpcId?: string
+  /**
+   * DHCP status to filter for. When true, only Private Networks with managed
+   * DHCP enabled will be returned.
+   */
+  dhcpEnabled?: boolean
 }
 
 export type CreatePrivateNetworkRequest = {
@@ -305,6 +312,16 @@ export type MigrateZonalPrivateNetworksRequest = {
   projectId?: string
   /** IDs of the Private Networks to migrate. */
   privateNetworkIds?: string[]
+}
+
+export type EnableDHCPRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Private Network ID. */
+  privateNetworkId: string
 }
 
 export type SetSubnetsRequest = {

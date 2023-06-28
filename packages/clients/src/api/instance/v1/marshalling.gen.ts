@@ -1703,6 +1703,7 @@ export const marshalCreatePrivateNICRequest = (
   request: CreatePrivateNICRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  ip_ids: request.ipIds,
   private_network_id: request.privateNetworkId,
   tags: request.tags,
 })
