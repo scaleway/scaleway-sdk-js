@@ -266,6 +266,8 @@ export interface ClusterType {
   availability: ClusterTypeAvailability
   /** Maximum number of nodes supported by the offer. */
   maxNodes: number
+  /** Time period during which you can no longer switch to a lower offer. */
+  commitmentDelay?: string
 }
 
 /** Create cluster request. auto upgrade. */
