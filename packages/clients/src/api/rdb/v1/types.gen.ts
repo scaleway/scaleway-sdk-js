@@ -148,10 +148,16 @@ export interface AddInstanceSettingsResponse {
   settings: InstanceSetting[]
 }
 
+/** Backup schedule. */
 export interface BackupSchedule {
+  /** Frequency of the backup schedule (in hours). */
   frequency: number
+  /** Default retention period of backups (in days). */
   retention: number
+  /** Defines whether the backup schedule feature is disabled. */
   disabled: boolean
+  /** Next run of the backup schedule (accurate to 10 minutes). */
+  nextRunAt?: Date
 }
 
 /** Database. */
@@ -1037,6 +1043,8 @@ export type UpdateInstanceRequest = {
   logsPolicy?: LogsPolicy
   /** Store logical backups in the same region as the Database Instance. */
   backupSameRegion?: boolean
+  /** Defines the start time of the autobackup. */
+  backupScheduleStartHour?: number
 }
 
 export type DeleteInstanceRequest = {
