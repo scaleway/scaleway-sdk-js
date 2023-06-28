@@ -14,6 +14,8 @@ export type ListLocalImagesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type ListVersionsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
+export type LocalImageType = 'unknown_type' | 'instance_local' | 'instance_sbs'
+
 export interface Category {
   id: string
   name: string
@@ -80,6 +82,8 @@ export interface LocalImage {
   zone: Zone
   /** Image label this image belongs to. */
   label: string
+  /** Type of this local image. */
+  type: LocalImageType
 }
 
 /** Version. */
@@ -150,6 +154,7 @@ export type ListLocalImagesRequest = {
    */
   imageLabel?: string
   zone?: Zone
+  type?: LocalImageType
 }
 
 export type GetLocalImageRequest = {
