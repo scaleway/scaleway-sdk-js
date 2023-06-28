@@ -6,6 +6,29 @@ export type ListPinsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type ListVolumesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
+export type PinDetails =
+  | 'unknown_details'
+  | 'pinning_looking_for_provider'
+  | 'pinning_in_progress'
+  | 'pinning_blocks_fetched'
+  | 'pinning_fetching_url_data'
+  | 'pinned_ok'
+  | 'unpinned_ok'
+  | 'unpinning_in_progress'
+  | 'failed_contains_banned_cid'
+  | 'failed_pinning'
+  | 'failed_pinning_no_provider'
+  | 'failed_pinning_bad_cid_format'
+  | 'failed_pinning_timeout'
+  | 'failed_pinning_too_big_content'
+  | 'failed_pinning_unreachable_url'
+  | 'failed_pinning_bad_url_format'
+  | 'failed_pinning_no_url_content_length'
+  | 'failed_pinning_bad_url_status_code'
+  | 'failed_unpinning'
+  | 'checking_coherence'
+  | 'rescheduled'
+
 export type PinStatus =
   | 'unknown_status'
   | 'queued'
@@ -44,11 +67,11 @@ export interface PinCIDMeta {
 }
 
 export interface PinInfo {
-  statusDetails?: string
   id?: string
   url?: string
   size?: number
   progress?: number
+  statusDetails: PinDetails
 }
 
 export interface PinOptions {

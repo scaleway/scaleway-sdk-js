@@ -19,6 +19,7 @@ export type {
   Pin,
   PinCID,
   PinCIDMeta,
+  PinDetails,
   PinInfo,
   PinOptions,
   PinStatus,
