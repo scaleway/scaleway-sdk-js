@@ -33,6 +33,7 @@ import type {
   DeleteSubnetsRequest,
   DeleteSubnetsResponse,
   DeleteVPCRequest,
+  EnableDHCPRequest,
   GetPrivateNetworkRequest,
   GetVPCRequest,
   ListPrivateNetworksRequest,
@@ -178,6 +179,7 @@ export class API extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/private-networks`,
         urlParams: urlParams(
+          ['dhcp_enabled', request.dhcpEnabled],
           ['name', request.name],
           ['order_by', request.orderBy ?? 'created_at_asc'],
           ['organization_id', request.organizationId],
@@ -329,6 +331,31 @@ export class API extends ParentAPI {
         request.region ?? this.client.settings.defaultRegion,
       )}/private-networks/migrate-zonal`,
     })
+
+  /**
+   * Enable DHCP on a Private Network. Enable DHCP managed on an existing
+   * Private Network. Note that you will not be able to deactivate it
+   * afterwards.
+   *
+   * @param request - The request {@link EnableDHCPRequest}
+   * @returns A Promise of PrivateNetwork
+   */
+  enableDHCP = (request: Readonly<EnableDHCPRequest>) =>
+    this.client.fetch<PrivateNetwork>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/vpc/v2/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/private-networks/${validatePathParam(
+          'privateNetworkId',
+          request.privateNetworkId,
+        )}/enable-dhcp`,
+      },
+      unmarshalPrivateNetwork,
+    )
 
   /**
    * Set the subnets of a Private Network. Set subnets for an existing Private
