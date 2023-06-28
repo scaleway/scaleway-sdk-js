@@ -417,7 +417,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateIpRequest}
    * @returns A Promise of Ip
    */
-  createIp = (request: Readonly<CreateIpRequest>) =>
+  createIp = (request: Readonly<CreateIpRequest> = {}) =>
     this.client.fetch<Ip>(
       {
         body: JSON.stringify(
@@ -947,6 +947,12 @@ export class API extends ParentAPI {
       unmarshalListBackendStatsResponse,
     )
 
+  /**
+   * List backend server statistics.
+   *
+   * @param request - The request {@link ListBackendStatsRequest}
+   * @returns A Promise of ListBackendStatsResponse
+   */
   listBackendStats = (request: Readonly<ListBackendStatsRequest>) =>
     enrichForPagination(
       'backendServersStats',
@@ -1490,6 +1496,7 @@ export class ZonedAPI extends ParentAPI {
     'fr-par-2',
     'nl-ams-1',
     'nl-ams-2',
+    'nl-ams-3',
     'pl-waw-1',
     'pl-waw-2',
   ]
@@ -1699,7 +1706,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiCreateIpRequest}
    * @returns A Promise of Ip
    */
-  createIp = (request: Readonly<ZonedApiCreateIpRequest>) =>
+  createIp = (request: Readonly<ZonedApiCreateIpRequest> = {}) =>
     this.client.fetch<Ip>(
       {
         body: JSON.stringify(
