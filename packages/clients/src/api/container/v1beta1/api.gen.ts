@@ -15,6 +15,7 @@ import {
   DOMAIN_TRANSIENT_STATUSES,
   NAMESPACE_TRANSIENT_STATUSES,
   TOKEN_TRANSIENT_STATUSES,
+  TRIGGER_TRANSIENT_STATUSES,
 } from './content.gen'
 import {
   marshalCreateContainerRequest,
@@ -22,9 +23,11 @@ import {
   marshalCreateDomainRequest,
   marshalCreateNamespaceRequest,
   marshalCreateTokenRequest,
+  marshalCreateTriggerRequest,
   marshalUpdateContainerRequest,
   marshalUpdateCronRequest,
   marshalUpdateNamespaceRequest,
+  marshalUpdateTriggerRequest,
   unmarshalContainer,
   unmarshalCron,
   unmarshalDomain,
@@ -34,8 +37,10 @@ import {
   unmarshalListLogsResponse,
   unmarshalListNamespacesResponse,
   unmarshalListTokensResponse,
+  unmarshalListTriggersResponse,
   unmarshalNamespace,
   unmarshalToken,
+  unmarshalTrigger,
 } from './marshalling.gen'
 import type {
   Container,
@@ -44,12 +49,14 @@ import type {
   CreateDomainRequest,
   CreateNamespaceRequest,
   CreateTokenRequest,
+  CreateTriggerRequest,
   Cron,
   DeleteContainerRequest,
   DeleteCronRequest,
   DeleteDomainRequest,
   DeleteNamespaceRequest,
   DeleteTokenRequest,
+  DeleteTriggerRequest,
   DeployContainerRequest,
   Domain,
   GetContainerRequest,
@@ -57,6 +64,7 @@ import type {
   GetDomainRequest,
   GetNamespaceRequest,
   GetTokenRequest,
+  GetTriggerRequest,
   IssueJWTRequest,
   ListContainersRequest,
   ListContainersResponse,
@@ -70,11 +78,15 @@ import type {
   ListNamespacesResponse,
   ListTokensRequest,
   ListTokensResponse,
+  ListTriggersRequest,
+  ListTriggersResponse,
   Namespace,
   Token,
+  Trigger,
   UpdateContainerRequest,
   UpdateCronRequest,
   UpdateNamespaceRequest,
+  UpdateTriggerRequest,
 } from './types.gen'
 
 const jsonContentHeaders = {
@@ -793,5 +805,154 @@ export class API extends ParentAPI {
         )}/tokens/${validatePathParam('tokenId', request.tokenId)}`,
       },
       unmarshalToken,
+    )
+
+  /**
+   * Create a trigger. Create a new trigger for a specified container.
+   *
+   * @param request - The request {@link CreateTriggerRequest}
+   * @returns A Promise of Trigger
+   */
+  createTrigger = (request: Readonly<CreateTriggerRequest>) =>
+    this.client.fetch<Trigger>(
+      {
+        body: JSON.stringify(
+          marshalCreateTriggerRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/containers/v1beta1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/triggers`,
+      },
+      unmarshalTrigger,
+    )
+
+  /**
+   * Get a trigger. Get a trigger with a specified ID.
+   *
+   * @param request - The request {@link GetTriggerRequest}
+   * @returns A Promise of Trigger
+   */
+  getTrigger = (request: Readonly<GetTriggerRequest>) =>
+    this.client.fetch<Trigger>(
+      {
+        method: 'GET',
+        path: `/containers/v1beta1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
+      },
+      unmarshalTrigger,
+    )
+
+  /**
+   * Waits for {@link Trigger} to be in a final state.
+   *
+   * @param request - The request {@link GetTriggerRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Trigger
+   */
+  waitForTrigger = (
+    request: Readonly<GetTriggerRequest>,
+    options?: Readonly<WaitForOptions<Trigger>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res =>
+          Promise.resolve(!TRIGGER_TRANSIENT_STATUSES.includes(res.status))),
+      this.getTrigger,
+      request,
+      options,
+    )
+
+  protected pageOfListTriggers = (
+    request: Readonly<ListTriggersRequest> = {},
+  ) =>
+    this.client.fetch<ListTriggersResponse>(
+      {
+        method: 'GET',
+        path: `/containers/v1beta1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/triggers`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ...Object.entries(
+            resolveOneOf([
+              {
+                default: this.client.settings.defaultProjectId,
+                param: 'project_id',
+                value: request.projectId,
+              },
+              {
+                param: 'container_id',
+                value: request.containerId,
+              },
+              {
+                param: 'namespace_id',
+                value: request.namespaceId,
+              },
+            ]),
+          ),
+        ),
+      },
+      unmarshalListTriggersResponse,
+    )
+
+  /**
+   * List all triggers. List all triggers belonging to a specified Organization
+   * or Project.
+   *
+   * @param request - The request {@link ListTriggersRequest}
+   * @returns A Promise of ListTriggersResponse
+   */
+  listTriggers = (request: Readonly<ListTriggersRequest> = {}) =>
+    enrichForPagination('triggers', this.pageOfListTriggers, request)
+
+  /**
+   * Update a trigger. Update a trigger with a specified ID.
+   *
+   * @param request - The request {@link UpdateTriggerRequest}
+   * @returns A Promise of Trigger
+   */
+  updateTrigger = (request: Readonly<UpdateTriggerRequest>) =>
+    this.client.fetch<Trigger>(
+      {
+        body: JSON.stringify(
+          marshalUpdateTriggerRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/containers/v1beta1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
+      },
+      unmarshalTrigger,
+    )
+
+  /**
+   * Delete a trigger. Delete a trigger with a specified ID.
+   *
+   * @param request - The request {@link DeleteTriggerRequest}
+   * @returns A Promise of Trigger
+   */
+  deleteTrigger = (request: Readonly<DeleteTriggerRequest>) =>
+    this.client.fetch<Trigger>(
+      {
+        method: 'DELETE',
+        path: `/containers/v1beta1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
+      },
+      unmarshalTrigger,
     )
 }
