@@ -62,6 +62,8 @@ export type ListNamespacesRequestOrderBy =
 
 export type ListTokensRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
+export type ListTriggersRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+
 export type LogStream = 'unknown' | 'stdout' | 'stderr'
 
 export type NamespaceStatus =
@@ -81,6 +83,21 @@ export type TokenStatus =
   | 'deleting'
   | 'error'
   | 'creating'
+
+export type TriggerInputType =
+  | 'unknown_input_type'
+  | 'sqs'
+  | 'scw_sqs'
+  | 'nats'
+  | 'scw_nats'
+
+export type TriggerStatus =
+  | 'unknown_status'
+  | 'ready'
+  | 'deleting'
+  | 'error'
+  | 'creating'
+  | 'pending'
 
 /** Container. */
 export interface Container {
@@ -135,6 +152,27 @@ export interface Container {
   httpOption: ContainerHttpOption
   /** Region in which the container will be deployed. */
   region: Region
+}
+
+export interface CreateTriggerRequestMnqNatsClientConfig {
+  mnqNamespaceId: string
+  subject: string
+  mnqProjectId: string
+  mnqRegion: string
+}
+
+export interface CreateTriggerRequestMnqSqsClientConfig {
+  mnqNamespaceId: string
+  queue: string
+  mnqProjectId: string
+  mnqRegion: string
+}
+
+export interface CreateTriggerRequestSqsClientConfig {
+  endpoint: string
+  queueUrl: string
+  accessKey: string
+  secretKey: string
 }
 
 /** Cron. */
@@ -209,6 +247,11 @@ export interface ListNamespacesResponse {
 
 export interface ListTokensResponse {
   tokens: Token[]
+  totalCount: number
+}
+
+export interface ListTriggersResponse {
+  triggers: Trigger[]
   totalCount: number
 }
 
@@ -289,6 +332,59 @@ export interface Token {
   description?: string
   /** Expiry date of the token. */
   expiresAt?: Date
+}
+
+export interface Trigger {
+  id: string
+  name: string
+  description: string
+  inputType: TriggerInputType
+  status: TriggerStatus
+  errorMessage?: string
+  containerId: string
+  /**
+   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
+   * 'scwNatsConfig' could be set.
+   */
+  scwSqsConfig?: TriggerMnqSqsClientConfig
+  /**
+   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
+   * 'scwNatsConfig' could be set.
+   */
+  sqsConfig?: TriggerSqsClientConfig
+  /**
+   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
+   * 'scwNatsConfig' could be set.
+   */
+  scwNatsConfig?: TriggerMnqNatsClientConfig
+}
+
+export interface TriggerMnqNatsClientConfig {
+  mnqNamespaceId: string
+  subject: string
+  mnqProjectId: string
+  mnqRegion: string
+  mnqCredentialId?: string
+}
+
+export interface TriggerMnqSqsClientConfig {
+  mnqNamespaceId: string
+  queue: string
+  mnqProjectId: string
+  mnqRegion: string
+  mnqCredentialId?: string
+}
+
+export interface TriggerSqsClientConfig {
+  endpoint: string
+  queueUrl: string
+  accessKey: string
+  secretKey: string
+}
+
+export interface UpdateTriggerRequestSqsClientConfig {
+  accessKey?: string
+  secretKey?: string
 }
 
 export type ListNamespacesRequest = {
@@ -719,4 +815,87 @@ export type DeleteTokenRequest = {
   region?: Region
   /** UUID of the token to delete. */
   tokenId: string
+}
+
+export type CreateTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  name: string
+  description?: string
+  containerId: string
+  /**
+   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
+   * 'scwNatsConfig' could be set.
+   */
+  scwSqsConfig?: CreateTriggerRequestMnqSqsClientConfig
+  /**
+   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
+   * 'scwNatsConfig' could be set.
+   */
+  sqsConfig?: CreateTriggerRequestSqsClientConfig
+  /**
+   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
+   * 'scwNatsConfig' could be set.
+   */
+  scwNatsConfig?: CreateTriggerRequestMnqNatsClientConfig
+}
+
+export type GetTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  triggerId: string
+}
+
+export type ListTriggersRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  page?: number
+  pageSize?: number
+  orderBy?: ListTriggersRequestOrderBy
+  /**
+   * One-of ('scope'): at most one of 'containerId', 'namespaceId', 'projectId'
+   * could be set.
+   */
+  containerId?: string
+  /**
+   * One-of ('scope'): at most one of 'containerId', 'namespaceId', 'projectId'
+   * could be set.
+   */
+  namespaceId?: string
+  /**
+   * One-of ('scope'): at most one of 'containerId', 'namespaceId', 'projectId'
+   * could be set.
+   */
+  projectId?: string
+}
+
+export type UpdateTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  triggerId: string
+  name?: string
+  description?: string
+  /** One-of ('config'): at most one of 'sqsConfig' could be set. */
+  sqsConfig?: UpdateTriggerRequestSqsClientConfig
+}
+
+export type DeleteTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  triggerId: string
 }
