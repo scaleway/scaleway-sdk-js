@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.16.0...@scaleway/sdk@1.17.0) (2023-06-28)
+
+### Features
+
+- **containers:** add trigger CRUD ([#737](https://github.com/scaleway/scaleway-sdk-js/issues/737)) ([6102ac5](https://github.com/scaleway/scaleway-sdk-js/commit/6102ac56f81dba3bac13b5ae5669e77be0d5b2db))
+- **instance:** add ipIds to CreatePrivateNIC request ([#744](https://github.com/scaleway/scaleway-sdk-js/issues/744)) ([b9558a0](https://github.com/scaleway/scaleway-sdk-js/commit/b9558a0ef4bdfc2ce271186bf5be9b0b740409c6))
+- **lb:** add support for nl-ams-3 ([#742](https://github.com/scaleway/scaleway-sdk-js/issues/742)) ([822b30e](https://github.com/scaleway/scaleway-sdk-js/commit/822b30e143c09112c05a5ddc75dfd69cba03a27d))
+- **marketplace:** add type field to LocalImage ([#743](https://github.com/scaleway/scaleway-sdk-js/issues/743)) ([e1bb6ce](https://github.com/scaleway/scaleway-sdk-js/commit/e1bb6cee549b965efc78f54514b9e7f584d2079b))
+- **rdb:** add possibility to update BackupSchedule next update ([#739](https://github.com/scaleway/scaleway-sdk-js/issues/739)) ([f95713b](https://github.com/scaleway/scaleway-sdk-js/commit/f95713b2d2695d2e79abaf071c6192cba8869291))
+- **secret:** add secret types in create secret request ([#738](https://github.com/scaleway/scaleway-sdk-js/issues/738)) ([ff391f1](https://github.com/scaleway/scaleway-sdk-js/commit/ff391f19c2cc4788a71adb8b6deaae24fb52601f))
+- **vpc_gw:** add support for nl-ams-3 ([#736](https://github.com/scaleway/scaleway-sdk-js/issues/736)) ([542b877](https://github.com/scaleway/scaleway-sdk-js/commit/542b8778ee4eeb95669e4298c31b66d9553152db))
+- **vpc:** enable dhcp on private network ([#741](https://github.com/scaleway/scaleway-sdk-js/issues/741)) ([2e604ff](https://github.com/scaleway/scaleway-sdk-js/commit/2e604ff69188c1e305ef145a36f7503274209530))
+
+### Bug Fixes
+
+- **ipfs:** use enum for status details ([#735](https://github.com/scaleway/scaleway-sdk-js/issues/735)) ([8f36b69](https://github.com/scaleway/scaleway-sdk-js/commit/8f36b698b8b4b22ff25a2625a965e5bf63d06244))
+
 ## [1.16.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.15.0...@scaleway/sdk@1.16.0) (2023-06-19)
 
 ### Features
