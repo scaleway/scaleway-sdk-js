@@ -135,3 +135,4 @@ export type {
   Volume,
   VolumeType,
 } from './types.gen'
+export * as ValidationRules from './validation-rules.gen'

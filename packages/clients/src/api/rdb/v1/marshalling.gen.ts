@@ -183,6 +183,7 @@ const unmarshalBackupSchedule = (data: unknown) => {
   return {
     disabled: data.disabled,
     frequency: data.frequency,
+    nextRunAt: unmarshalDate(data.next_run_at),
     retention: data.retention,
   } as BackupSchedule
 }
@@ -1145,6 +1146,7 @@ export const marshalUpdateInstanceRequest = (
   backup_same_region: request.backupSameRegion,
   backup_schedule_frequency: request.backupScheduleFrequency,
   backup_schedule_retention: request.backupScheduleRetention,
+  backup_schedule_start_hour: request.backupScheduleStartHour,
   is_backup_schedule_disabled: request.isBackupScheduleDisabled,
   logs_policy: request.logsPolicy
     ? marshalLogsPolicy(request.logsPolicy, defaults)
