@@ -108,6 +108,7 @@ export class API extends ParentAPI {
     'fr-par-2',
     'nl-ams-1',
     'nl-ams-2',
+    'nl-ams-3',
     'pl-waw-1',
     'pl-waw-2',
   ]
