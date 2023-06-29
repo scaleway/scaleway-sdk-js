@@ -141,6 +141,7 @@ export const unmarshalCluster = (data: unknown) => {
       : undefined,
     clusterUrl: data.cluster_url,
     cni: data.cni,
+    commitmentEndsAt: unmarshalDate(data.commitment_ends_at),
     createdAt: unmarshalDate(data.created_at),
     dashboardEnabled: data.dashboard_enabled,
     description: data.description,
