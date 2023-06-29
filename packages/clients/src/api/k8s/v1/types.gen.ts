@@ -167,6 +167,8 @@ export interface Cluster {
   apiserverCertSans: string[]
   /** Private network ID for internal cluster communication. */
   privateNetworkId?: string
+  /** Date on which it will be possible to switch to a smaller offer. */
+  commitmentEndsAt?: Date
 }
 
 /** Cluster. auto upgrade. */
