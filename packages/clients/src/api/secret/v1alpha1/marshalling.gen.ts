@@ -35,6 +35,7 @@ export const unmarshalSecret = (data: unknown) => {
     description: data.description,
     id: data.id,
     isManaged: data.is_managed,
+    isProtected: data.is_protected,
     name: data.name,
     projectId: data.project_id,
     region: data.region,

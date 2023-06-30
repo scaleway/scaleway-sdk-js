@@ -27,11 +27,13 @@ export type {
   ListTagsResponse,
   PasswordGenerationParams,
   Product,
+  ProtectSecretRequest,
   Secret,
   SecretStatus,
   SecretType,
   SecretVersion,
   SecretVersionStatus,
+  UnprotectSecretRequest,
   UpdateSecretRequest,
   UpdateSecretVersionRequest,
 } from './types.gen'
