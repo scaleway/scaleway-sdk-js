@@ -90,8 +90,9 @@ export interface Secret {
   /** Name of the secret. */
   name: string
   /**
-   * Current status of the secret. `ready`: the secret is ready. `locked`: the
-   * secret is locked.
+   * Current status of the secret. `ready`: the secret can be read, modified and
+   * deleted. `locked`: no action can be performed on the secret. This status
+   * can only be applied and removed by Scaleway.
    */
   status: SecretStatus
   /** Date and time of the secret's creation. */
@@ -106,6 +107,8 @@ export interface Secret {
   description?: string
   /** Returns `true` for secrets that are managed by another product. */
   isManaged: boolean
+  /** Returns `true` for protected secrets that cannot be deleted. */
+  isProtected: boolean
   /** Type of the secret. See `Secret.Type` enum for description of values. */
   type: SecretType
   /** Region of the secret. */
@@ -228,6 +231,26 @@ export type DeleteSecretRequest = {
    */
   region?: Region
   /** ID of the secret. */
+  secretId: string
+}
+
+export type ProtectSecretRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the secret to protect. */
+  secretId: string
+}
+
+export type UnprotectSecretRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the secret to unprotect. */
   secretId: string
 }
 

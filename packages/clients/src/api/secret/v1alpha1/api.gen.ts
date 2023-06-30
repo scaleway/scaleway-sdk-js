@@ -44,8 +44,10 @@ import type {
   ListSecretsResponse,
   ListTagsRequest,
   ListTagsResponse,
+  ProtectSecretRequest,
   Secret,
   SecretVersion,
+  UnprotectSecretRequest,
   UpdateSecretRequest,
   UpdateSecretVersionRequest,
 } from './types.gen'
@@ -202,6 +204,52 @@ export class API extends ParentAPI {
         request.region ?? this.client.settings.defaultRegion,
       )}/secrets/${validatePathParam('secretId', request.secretId)}`,
     })
+
+  /**
+   * Protect a secret. Protect a given secret specified by the `secret_id`
+   * parameter. A protected secret can be read and modified but cannot be
+   * deleted.
+   *
+   * @param request - The request {@link ProtectSecretRequest}
+   * @returns A Promise of Secret
+   */
+  protectSecret = (request: Readonly<ProtectSecretRequest>) =>
+    this.client.fetch<Secret>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/secrets/${validatePathParam('secretId', request.secretId)}/protect`,
+      },
+      unmarshalSecret,
+    )
+
+  /**
+   * Unprotect a secret. Unprotect a given secret specified by the `secret_id`
+   * parameter. An unprotected secret can be read, modified and deleted.
+   *
+   * @param request - The request {@link UnprotectSecretRequest}
+   * @returns A Promise of Secret
+   */
+  unprotectSecret = (request: Readonly<UnprotectSecretRequest>) =>
+    this.client.fetch<Secret>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/secrets/${validatePathParam(
+          'secretId',
+          request.secretId,
+        )}/unprotect`,
+      },
+      unmarshalSecret,
+    )
 
   /**
    * Allow a product to use the secret.
