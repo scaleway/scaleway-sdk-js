@@ -23,6 +23,7 @@ import type {
   CreatePoolRequest,
   CreatePoolRequestUpgradePolicy,
   ExternalNode,
+  ListClusterAvailableTypesResponse,
   ListClusterAvailableVersionsResponse,
   ListClusterTypesResponse,
   ListClustersResponse,
@@ -277,6 +278,22 @@ export const unmarshalExternalNode = (data: unknown) => {
     name: data.name,
     poolVersion: data.pool_version,
   } as ExternalNode
+}
+
+export const unmarshalListClusterAvailableTypesResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListClusterAvailableTypesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    clusterTypes: unmarshalArrayOfObject(
+      data.cluster_types,
+      unmarshalClusterType,
+    ),
+    totalCount: data.total_count,
+  } as ListClusterAvailableTypesResponse
 }
 
 export const unmarshalListClusterAvailableVersionsResponse = (

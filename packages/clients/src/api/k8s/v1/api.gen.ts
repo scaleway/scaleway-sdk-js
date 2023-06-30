@@ -24,6 +24,7 @@ import {
   marshalUpgradePoolRequest,
   unmarshalCluster,
   unmarshalExternalNode,
+  unmarshalListClusterAvailableTypesResponse,
   unmarshalListClusterAvailableVersionsResponse,
   unmarshalListClusterTypesResponse,
   unmarshalListClustersResponse,
@@ -47,6 +48,8 @@ import type {
   GetNodeRequest,
   GetPoolRequest,
   GetVersionRequest,
+  ListClusterAvailableTypesRequest,
+  ListClusterAvailableTypesResponse,
   ListClusterAvailableVersionsRequest,
   ListClusterAvailableVersionsResponse,
   ListClusterTypesRequest,
@@ -303,6 +306,30 @@ export class API extends ParentAPI {
         )}/available-versions`,
       },
       unmarshalListClusterAvailableVersionsResponse,
+    )
+
+  /**
+   * List available cluster types for a cluster. List the cluster types that a
+   * specific Kubernetes cluster is allowed to switch to.
+   *
+   * @param request - The request {@link ListClusterAvailableTypesRequest}
+   * @returns A Promise of ListClusterAvailableTypesResponse
+   */
+  listClusterAvailableTypes = (
+    request: Readonly<ListClusterAvailableTypesRequest>,
+  ) =>
+    this.client.fetch<ListClusterAvailableTypesResponse>(
+      {
+        method: 'GET',
+        path: `/k8s/v1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/clusters/${validatePathParam(
+          'clusterId',
+          request.clusterId,
+        )}/available-types`,
+      },
+      unmarshalListClusterAvailableTypesResponse,
     )
 
   protected _getClusterKubeConfig = (
