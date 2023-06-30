@@ -443,6 +443,14 @@ export interface ExternalNode {
   externalIp: string
 }
 
+/** List cluster available types response. */
+export interface ListClusterAvailableTypesResponse {
+  /** Available cluster types for the cluster. */
+  clusterTypes: ClusterType[]
+  /** Total number of types. */
+  totalCount: number
+}
+
 /** List cluster available versions response. */
 export interface ListClusterAvailableVersionsResponse {
   /** Available Kubernetes versions for the cluster. */
@@ -940,6 +948,16 @@ export type ListClusterAvailableVersionsRequest = {
    */
   region?: Region
   /** Cluster ID for which the available Kubernetes versions will be listed. */
+  clusterId: string
+}
+
+export type ListClusterAvailableTypesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Cluster ID for which the available Kubernetes types will be listed. */
   clusterId: string
 }
 

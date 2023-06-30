@@ -31,6 +31,8 @@ export type {
   GetPoolRequest,
   GetVersionRequest,
   Ingress,
+  ListClusterAvailableTypesRequest,
+  ListClusterAvailableTypesResponse,
   ListClusterAvailableVersionsRequest,
   ListClusterAvailableVersionsResponse,
   ListClusterTypesRequest,
