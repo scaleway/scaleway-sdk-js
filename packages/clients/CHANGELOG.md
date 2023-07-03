@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.17.0...@scaleway/sdk@1.18.0) (2023-07-03)
+
+### Features
+
+- add secret protection ([#748](https://github.com/scaleway/scaleway-sdk-js/issues/748)) ([5bee9e2](https://github.com/scaleway/scaleway-sdk-js/commit/5bee9e2d432909d5d43181090f3c2c6e0efe7552))
+- **k8s:** add cluster types compatibility ([#749](https://github.com/scaleway/scaleway-sdk-js/issues/749)) ([3680415](https://github.com/scaleway/scaleway-sdk-js/commit/36804151db92a86ab83e304ca49c92e897bd894a))
+- **k8s:** add commitment to offer list ([#746](https://github.com/scaleway/scaleway-sdk-js/issues/746)) ([089e1c8](https://github.com/scaleway/scaleway-sdk-js/commit/089e1c8a2cb2a26b4996a1fdd510a11c7509e5af))
+- **k8s:** return commitment end date ([#747](https://github.com/scaleway/scaleway-sdk-js/issues/747)) ([7ee2e85](https://github.com/scaleway/scaleway-sdk-js/commit/7ee2e856ab6bac105c5f427cebc66e562abb1acb))
+- **k8s:** return maximum number of nodes supported by an offer ([#745](https://github.com/scaleway/scaleway-sdk-js/issues/745)) ([b67d4d9](https://github.com/scaleway/scaleway-sdk-js/commit/b67d4d97afad92e04789bdda8398ab28ed7a4428))
+
 ## [1.17.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.16.0...@scaleway/sdk@1.17.0) (2023-06-28)
 
 ### Features
