@@ -2101,6 +2101,7 @@ export const marshalUpdateServerRequest = (
 ): Record<string, unknown> => ({
   boot_type: request.bootType,
   bootscript: request.bootscript,
+  commercial_type: request.commercialType,
   dynamic_ip_required: request.dynamicIpRequired,
   enable_ipv6: request.enableIpv6,
   name: request.name,
