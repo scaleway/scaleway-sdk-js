@@ -13,7 +13,7 @@
   "devDependencies": {
     "serverless-scaleway-functions": "^0.4.7",
     "@types/node": "^18.11.18",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.6"
   },
   "description": "Minimal Typescript template to run Scaleway SDK-JS in a Function."
 }
