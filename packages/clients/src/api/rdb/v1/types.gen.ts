@@ -593,8 +593,10 @@ export interface NodeType {
   availableVolumeTypes: NodeTypeVolumeType[]
   /** The Node Type can be used only with high availability option. */
   isHaRequired: boolean
-  /** Generation associated the NodeType offer. */
+  /** Generation associated with the NodeType offer. */
   generation: NodeTypeGeneration
+  /** Instance range associated with the NodeType offer. */
+  instanceRange: string
   /** Region the Node Type is in. */
   region: Region
 }
