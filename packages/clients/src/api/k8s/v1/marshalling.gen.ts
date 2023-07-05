@@ -179,6 +179,8 @@ const unmarshalClusterType = (data: unknown) => {
     commitmentDelay: data.commitment_delay,
     maxNodes: data.max_nodes,
     name: data.name,
+    resiliency: data.resiliency,
+    sla: data.sla,
   } as ClusterType
 }
 
