@@ -145,8 +145,6 @@ export type CreateVPCRequest = {
   region?: Region
   /** Name for the VPC. */
   name?: string
-  /** Name for the VPC's associated default Private Network. */
-  defaultPrivateNetworkName: string
   /** Scaleway Project in which to create the VPC. */
   projectId?: string
   /** Tags for the VPC. */
