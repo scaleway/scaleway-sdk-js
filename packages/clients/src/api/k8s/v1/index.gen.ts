@@ -13,6 +13,7 @@ export type {
   ClusterStatus,
   ClusterType,
   ClusterTypeAvailability,
+  ClusterTypeResiliency,
   CreateClusterRequest,
   CreateClusterRequestAutoUpgrade,
   CreateClusterRequestAutoscalerConfig,

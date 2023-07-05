@@ -32,6 +32,11 @@ export type ClusterStatus =
 
 export type ClusterTypeAvailability = 'available' | 'scarce' | 'shortage'
 
+export type ClusterTypeResiliency =
+  | 'unknown_resiliency'
+  | 'standard'
+  | 'high_availability'
+
 export type Ingress =
   | 'unknown_ingress'
   | 'none'
@@ -270,6 +275,10 @@ export interface ClusterType {
   maxNodes: number
   /** Time period during which you can no longer switch to a lower offer. */
   commitmentDelay?: string
+  /** Value of the Service Level Agreement of the offer. */
+  sla: number
+  /** Resiliency offered by the offer. */
+  resiliency: ClusterTypeResiliency
 }
 
 /** Create cluster request. auto upgrade. */
