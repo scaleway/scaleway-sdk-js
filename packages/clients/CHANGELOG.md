@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.19.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.18.0...@scaleway/sdk@1.19.0) (2023-07-06)
+
+### Features
+
+- **instance:** add commercialType to UpdateServerRequest ([#761](https://github.com/scaleway/scaleway-sdk-js/issues/761)) ([04380f4](https://github.com/scaleway/scaleway-sdk-js/commit/04380f4a2df429ff9da01e94bb3953f923a5567c))
+- **k8s:** add resiliency and sla to cluster types ([#759](https://github.com/scaleway/scaleway-sdk-js/issues/759)) ([bcfee00](https://github.com/scaleway/scaleway-sdk-js/commit/bcfee00ab524193a19e41c5d5c92189ff4f3a5a9))
+- **rdb:** add instanceRange to NodeType ([#760](https://github.com/scaleway/scaleway-sdk-js/issues/760)) ([abdb97d](https://github.com/scaleway/scaleway-sdk-js/commit/abdb97d85631dfcd500c34c033d67f7d3dfc8437))
+- **vpc/v2:** drop defaultPrivateNetworkName ([#753](https://github.com/scaleway/scaleway-sdk-js/issues/753)) ([133daa5](https://github.com/scaleway/scaleway-sdk-js/commit/133daa526182d31c24feaa323d1b1dc26cd8990c))
+
 ## [1.18.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.17.0...@scaleway/sdk@1.18.0) (2023-07-03)
 
 ### Features
