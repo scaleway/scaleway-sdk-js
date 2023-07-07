@@ -97,6 +97,7 @@ export const unmarshalHosting = (data: unknown) => {
     dnsStatus: data.dns_status,
     domain: data.domain,
     id: data.id,
+    offerEndOfLife: data.offer_end_of_life,
     offerId: data.offer_id,
     offerName: data.offer_name,
     options: unmarshalArrayOfObject(data.options, unmarshalHostingOption),
@@ -136,6 +137,7 @@ const unmarshalOffer = (data: unknown) => {
   return {
     available: data.available,
     billingOperationPath: data.billing_operation_path,
+    endOfLife: data.end_of_life,
     id: data.id,
     price: data.price ? unmarshalMoney(data.price) : undefined,
     product: data.product ? unmarshalOfferProduct(data.product) : undefined,

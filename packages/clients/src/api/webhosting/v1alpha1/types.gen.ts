@@ -98,6 +98,8 @@ export interface Hosting {
   cpanelUrls?: HostingCpanelUrls
   /** Main Web Hosting cPanel username. */
   username: string
+  /** Indicates if the hosting offer has reached its end of life. */
+  offerEndOfLife: boolean
   /** Region where the Web Hosting plan is hosted. */
   region: Region
 }
@@ -156,6 +158,8 @@ export interface Offer {
   available: boolean
   /** Quota warnings, if the offer is not available for the specified hosting_id. */
   quotaWarnings: OfferQuotaWarning[]
+  /** Indicates if the offer has reached its end of life. */
+  endOfLife: boolean
 }
 
 /** Offer. product. */
