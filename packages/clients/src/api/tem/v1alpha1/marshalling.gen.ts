@@ -118,6 +118,7 @@ export const unmarshalEmail = (data: unknown) => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
+    flags: data.flags,
     id: data.id,
     lastTries: unmarshalArrayOfObject(data.last_tries, unmarshalEmailTry),
     mailFrom: data.mail_from,
