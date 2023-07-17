@@ -17,6 +17,8 @@ export type DomainStatus =
   | 'revoked'
   | 'pending'
 
+export type EmailFlag = 'unknown_flag' | 'soft_bounce' | 'hard_bounce'
+
 export type EmailRcptType = 'unknown_rcpt_type' | 'to' | 'cc' | 'bcc'
 
 export type EmailStatus =
@@ -165,6 +167,11 @@ export interface Email {
   tryCount: number
   /** Information about the last three attempts to send the email. */
   lastTries: EmailTry[]
+  /**
+   * Flags categorize emails. They allow you to obtain more information about
+   * recurring errors, for example.
+   */
+  flags: EmailFlag[]
 }
 
 /** Email. try. */
@@ -301,6 +308,8 @@ export type ListEmailsRequest = {
   search?: string
   /** (Optional) List emails corresponding to specific criteria. */
   orderBy?: ListEmailsRequestOrderBy
+  /** (Optional) List emails containing only specific flags. */
+  flags?: EmailFlag[]
 }
 
 export type GetStatisticsRequest = {

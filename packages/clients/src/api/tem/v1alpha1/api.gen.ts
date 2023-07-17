@@ -127,6 +127,7 @@ export class API extends ParentAPI {
         )}/emails`,
         urlParams: urlParams(
           ['domain_id', request.domainId],
+          ['flags', request.flags],
           ['mail_from', request.mailFrom],
           ['mail_rcpt', request.mailRcpt],
           ['mail_to', request.mailTo],

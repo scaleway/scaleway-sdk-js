@@ -18,6 +18,7 @@ export type {
   DomainStatistics,
   DomainStatus,
   Email,
+  EmailFlag,
   EmailRcptType,
   EmailStatus,
   EmailTry,
