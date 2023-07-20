@@ -279,6 +279,10 @@ export interface ClusterType {
   sla: number
   /** Resiliency offered by the offer. */
   resiliency: ClusterTypeResiliency
+  /** Max RAM allowed for the control plane. */
+  memory: number
+  /** Returns information if this offer uses dedicated resources. */
+  dedicated: boolean
 }
 
 /** Create cluster request. auto upgrade. */
