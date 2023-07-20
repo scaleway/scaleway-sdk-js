@@ -41,6 +41,7 @@ export const READ_REPLICA_TRANSIENT_STATUSES: ReadReplicaStatus[] = [
   'initializing',
   'deleting',
   'configuring',
+  'promoting',
 ]
 
 /** Lists transient statutes of the enum {@link SnapshotStatus}. */

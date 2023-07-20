@@ -109,6 +109,7 @@ export type ReadReplicaStatus =
   | 'error'
   | 'locked'
   | 'configuring'
+  | 'promoting'
 
 export type SnapshotStatus =
   | 'unknown'
@@ -1157,6 +1158,16 @@ export type DeleteReadReplicaRequest = {
 }
 
 export type ResetReadReplicaRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the Read Replica. */
+  readReplicaId: string
+}
+
+export type PromoteReadReplicaRequest = {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
