@@ -138,6 +138,7 @@ import type {
   PrepareInstanceLogsRequest,
   PrepareInstanceLogsResponse,
   Privilege,
+  PromoteReadReplicaRequest,
   PurgeInstanceLogsRequest,
   ReadReplica,
   RenewInstanceCertificateRequest,
@@ -867,6 +868,30 @@ export class API extends ParentAPI {
         )}/reset`,
       },
       unmarshalReadReplica,
+    )
+
+  /**
+   * Promote a Read Replica. Promote a Read Replica to Database Instance
+   * automatically.
+   *
+   * @param request - The request {@link PromoteReadReplicaRequest}
+   * @returns A Promise of Instance
+   */
+  promoteReadReplica = (request: Readonly<PromoteReadReplicaRequest>) =>
+    this.client.fetch<Instance>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/rdb/v1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/read-replicas/${validatePathParam(
+          'readReplicaId',
+          request.readReplicaId,
+        )}/promote`,
+      },
+      unmarshalInstance,
     )
 
   /**

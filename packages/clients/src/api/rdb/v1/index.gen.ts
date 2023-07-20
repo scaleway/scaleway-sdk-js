@@ -107,6 +107,7 @@ export type {
   PrepareInstanceLogsRequest,
   PrepareInstanceLogsResponse,
   Privilege,
+  PromoteReadReplicaRequest,
   PurgeInstanceLogsRequest,
   ReadReplica,
   ReadReplicaEndpointSpec,
