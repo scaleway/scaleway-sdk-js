@@ -1015,6 +1015,11 @@ export type ListServersRequest = {
   privateNetwork?: string
   /** Define the order of the returned servers. */
   order?: ListServersRequestOrder
+  /**
+   * List Instances from the given Private Networks (use commas to separate
+   * them).
+   */
+  privateNetworks?: string[]
 }
 
 export type DeleteServerRequest = {

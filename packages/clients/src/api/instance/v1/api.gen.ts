@@ -310,6 +310,12 @@ export class API extends ParentAPI {
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
           ['private_ip', request.privateIp],
           ['private_network', request.privateNetwork],
+          [
+            'private_networks',
+            request.privateNetworks && request.privateNetworks.length > 0
+              ? request.privateNetworks.join(',')
+              : undefined,
+          ],
           ['project', request.project],
           ['state', request.state],
           [
