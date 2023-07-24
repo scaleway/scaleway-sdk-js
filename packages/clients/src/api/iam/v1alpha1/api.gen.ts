@@ -15,6 +15,7 @@ import {
   marshalCreateGroupRequest,
   marshalCreatePolicyRequest,
   marshalCreateSSHKeyRequest,
+  marshalCreateUserRequest,
   marshalRemoveGroupMemberRequest,
   marshalSetGroupMembersRequest,
   marshalSetRulesRequest,
@@ -54,6 +55,7 @@ import type {
   CreateGroupRequest,
   CreatePolicyRequest,
   CreateSSHKeyRequest,
+  CreateUserRequest,
   DeleteAPIKeyRequest,
   DeleteApplicationRequest,
   DeleteGroupRequest,
@@ -298,6 +300,26 @@ export class API extends ParentAPI {
         request.userId,
       )}`,
     })
+
+  /**
+   * Create a new user. Create a new user. You must define the `organization_id`
+   * and the `email` in your request.
+   *
+   * @param request - The request {@link CreateUserRequest}
+   * @returns A Promise of User
+   */
+  createUser = (request: Readonly<CreateUserRequest>) =>
+    this.client.fetch<User>(
+      {
+        body: JSON.stringify(
+          marshalCreateUserRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/iam/v1alpha1/users`,
+      },
+      unmarshalUser,
+    )
 
   protected pageOfListApplications = (
     request: Readonly<ListApplicationsRequest> = {},
