@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.20.0...@scaleway/sdk@1.21.0) (2023-07-24)
+
+### Features
+
+- **account/v2:** deprecate in favor of upcoming v3 ([#767](https://github.com/scaleway/scaleway-sdk-js/issues/767)) ([1b5c2ee](https://github.com/scaleway/scaleway-sdk-js/commit/1b5c2ee33a33f399826f6649ca0bc5d79581fd5d))
+- **account:** add v3 and the ProjectAPI ([#769](https://github.com/scaleway/scaleway-sdk-js/issues/769)) ([bdf3d69](https://github.com/scaleway/scaleway-sdk-js/commit/bdf3d69b877df5c3a6084099d2457de37ebed76b))
+- **k8s:** return more information on cluster types ([#773](https://github.com/scaleway/scaleway-sdk-js/issues/773)) ([fc96ca3](https://github.com/scaleway/scaleway-sdk-js/commit/fc96ca3289d2154efd54fd82abd9538ce3780e0e))
+- **rdb:** promote read replica ([#774](https://github.com/scaleway/scaleway-sdk-js/issues/774)) ([1c1d832](https://github.com/scaleway/scaleway-sdk-js/commit/1c1d83262214672c171c119d4bb995c1b40db801))
+- **tem:** add flags field on email getting methods ([#771](https://github.com/scaleway/scaleway-sdk-js/issues/771)) ([ce00ce9](https://github.com/scaleway/scaleway-sdk-js/commit/ce00ce9d34d75e14ca887fc8d39452ecf59cf581))
+
 ## [1.20.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.19.0...@scaleway/sdk@1.20.0) (2023-07-11)
 
 ### Features
