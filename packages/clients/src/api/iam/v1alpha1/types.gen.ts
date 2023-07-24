@@ -510,6 +510,13 @@ export type DeleteUserRequest = {
   userId: string
 }
 
+export type CreateUserRequest = {
+  /** ID of the Organization. */
+  organizationId?: string
+  /** Email of the user. */
+  email: string
+}
+
 export type ListApplicationsRequest = {
   /** Criteria for sorting results. */
   orderBy?: ListApplicationsRequestOrderBy

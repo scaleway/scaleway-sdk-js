@@ -18,6 +18,7 @@ import type {
   CreateGroupRequest,
   CreatePolicyRequest,
   CreateSSHKeyRequest,
+  CreateUserRequest,
   Group,
   JWT,
   ListAPIKeysResponse,
@@ -505,6 +506,14 @@ export const marshalCreateSSHKeyRequest = (
   name: request.name || randomName('key'),
   project_id: request.projectId ?? defaults.defaultProjectId,
   public_key: request.publicKey,
+})
+
+export const marshalCreateUserRequest = (
+  request: CreateUserRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  email: request.email,
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
 })
 
 export const marshalRemoveGroupMemberRequest = (
