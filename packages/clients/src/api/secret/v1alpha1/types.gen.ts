@@ -14,10 +14,7 @@ export type Product = 'unknown'
 
 export type SecretStatus = 'ready' | 'locked'
 
-export type SecretType =
-  | 'unknown_secret_type'
-  | 'opaque'
-  | 'network_edge_certificate'
+export type SecretType = 'unknown_secret_type' | 'opaque' | 'certificate'
 
 export type SecretVersionStatus =
   | 'unknown'
