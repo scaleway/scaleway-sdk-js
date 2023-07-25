@@ -77,8 +77,10 @@ describe(`logResponse`, () => {
 describe('obfuscateInterceptor', () => {
   const prependInterceptor =
     (preprendValue: string) =>
-    ([name, value]: [string, string]): [string, string] =>
-      [name, `${preprendValue}${value}`]
+    ([name, value]: [string, string]): [string, string] => [
+      name,
+      `${preprendValue}${value}`,
+    ]
 
   it('changes the request headers', async () => {
     const obfRequest = await obfuscateInterceptor(prependInterceptor('obj-'))({

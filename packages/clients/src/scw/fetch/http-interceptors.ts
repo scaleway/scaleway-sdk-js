@@ -21,7 +21,10 @@ interface HeaderEntryMapper {
  * @internal
  */
 class ObfuscatedRequest extends Request {
-  constructor(private request: Request, private obfuscate: HeaderEntryMapper) {
+  constructor(
+    private request: Request,
+    private obfuscate: HeaderEntryMapper,
+  ) {
     super(request)
   }
 
