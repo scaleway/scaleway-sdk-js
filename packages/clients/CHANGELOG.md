@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.22.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.21.0...@scaleway/sdk@1.22.0) (2023-08-01)
+
+
+### Features
+
+* **iam/v1alpha1:** add method to create a user ([#775](https://github.com/scaleway/scaleway-sdk-js/issues/775)) ([4f4db14](https://github.com/scaleway/scaleway-sdk-js/commit/4f4db1449b9948b7706ea5d57c8370b8e027045c))
+* **instance:** added field private_networks for ListServersRequest ([#779](https://github.com/scaleway/scaleway-sdk-js/issues/779)) ([5e7ff1b](https://github.com/scaleway/scaleway-sdk-js/commit/5e7ff1be91530fa64be9de4dbfd30456157f987c))
+* **tem:** add spam flag ([#781](https://github.com/scaleway/scaleway-sdk-js/issues/781)) ([f96f2bf](https://github.com/scaleway/scaleway-sdk-js/commit/f96f2bfe482be7f73a6e1b2ee25ef9446a9f03e5))
+
+
+### Bug Fixes
+
+* **sm:** rename certificate type to be more generic ([#776](https://github.com/scaleway/scaleway-sdk-js/issues/776)) ([29ffba8](https://github.com/scaleway/scaleway-sdk-js/commit/29ffba8f115e45efe08cbbb97c4dd2574881152c))
+
+
+
 ## [1.21.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.20.0...@scaleway/sdk@1.21.0) (2023-07-24)
 
 ### Features
