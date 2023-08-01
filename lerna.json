@@ -1,6 +1,7 @@
 {
-  "packages": ["packages/*"],
-  "useWorkspaces": true,
+  "packages": [
+    "packages/*"
+  ],
   "npmClient": "pnpm",
   "version": "independent",
   "command": {
@@ -11,5 +12,6 @@
     "version": {
       "message": "chore(release): publish"
     }
-  }
+  },
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json"
 }
