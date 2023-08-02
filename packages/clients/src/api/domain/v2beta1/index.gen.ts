@@ -77,6 +77,7 @@ export type {
   ImportRawDNSZoneRequestTsigKey,
   ImportRawDNSZoneResponse,
   LanguageCode,
+  ListContactsRequestRole,
   ListContactsResponse,
   ListDNSZoneNameserversRequest,
   ListDNSZoneNameserversResponse,

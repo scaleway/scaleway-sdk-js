@@ -134,6 +134,12 @@ export type HostStatus = 'unknown_status' | 'active' | 'updating' | 'deleting'
 
 export type LanguageCode = 'unknown_language_code' | 'en_US' | 'fr_FR' | 'de_DE'
 
+export type ListContactsRequestRole =
+  | 'unknown_role'
+  | 'owner'
+  | 'administrative'
+  | 'technical'
+
 export type ListDNSZoneRecordsRequestOrderBy = 'name_asc' | 'name_desc'
 
 export type ListDNSZonesRequestOrderBy =
@@ -1184,6 +1190,8 @@ export type RegistrarApiListContactsRequest = {
   domain?: string
   projectId?: string
   organizationId?: string
+  role?: ListContactsRequestRole
+  emailStatus?: ContactEmailStatus
 }
 
 export type RegistrarApiGetContactRequest = {
