@@ -979,6 +979,7 @@ export class RegistrarAPI extends ParentAPI {
         path: `/domain/v2beta1/contacts`,
         urlParams: urlParams(
           ['domain', request.domain],
+          ['email_status', request.emailStatus ?? 'email_status_unknown'],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -986,6 +987,7 @@ export class RegistrarAPI extends ParentAPI {
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['project_id', request.projectId],
+          ['role', request.role ?? 'unknown_role'],
         ),
       },
       unmarshalListContactsResponse,
