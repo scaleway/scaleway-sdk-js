@@ -469,7 +469,7 @@ const unmarshalPrivateNetworkDHCPConfig = (data: unknown) => {
     )
   }
 
-  return {} as PrivateNetworkDHCPConfig
+  return { ipId: data.ip_id } as PrivateNetworkDHCPConfig
 }
 
 const unmarshalPrivateNetworkIpamConfig = (data: unknown) => {
@@ -942,7 +942,9 @@ const marshalHealthCheck = (
 const marshalPrivateNetworkDHCPConfig = (
   request: PrivateNetworkDHCPConfig,
   defaults: DefaultValues,
-): Record<string, unknown> => ({})
+): Record<string, unknown> => ({
+  ip_id: request.ipId,
+})
 
 const marshalPrivateNetworkIpamConfig = (
   request: PrivateNetworkIpamConfig,

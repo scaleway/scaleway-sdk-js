@@ -764,25 +764,25 @@ export interface PrivateNetwork {
   /** Load Balancer object which is attached to the Private Network. */
   lb?: Lb
   /**
-   * Object containing an array of a local IP address for the Load Balancer on
-   * this Private Network.
+   * @deprecated Object containing an array of a local IP address for the Load
+   *   Balancer on this Private Network.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
-   * Defines whether to let DHCP assign IP addresses.
+   * Object containing DHCP-assigned IP addresses.
    *
    * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
    * 'ipamConfig' could be set.
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
   /**
-   * For internal use only.
+   * @deprecated For internal use only.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   ipamConfig?: PrivateNetworkIpamConfig
   /** Private Network ID. */
@@ -795,14 +795,19 @@ export interface PrivateNetwork {
   updatedAt?: Date
 }
 
-export interface PrivateNetworkDHCPConfig {}
+export interface PrivateNetworkDHCPConfig {
+  ipId: string
+}
 
 export interface PrivateNetworkIpamConfig {}
 
 /** Private network. static config. */
 export interface PrivateNetworkStaticConfig {
-  /** Array of a local IP address for the Load Balancer on this Private Network. */
-  ipAddress: string[]
+  /**
+   * @deprecated Array of a local IP address for the Load Balancer on this
+   *   Private Network.
+   */
+  ipAddress?: string[]
 }
 
 /** Route. */
@@ -1965,11 +1970,11 @@ export type AttachPrivateNetworkRequest = {
   /** Private Network ID. */
   privateNetworkId: string
   /**
-   * Object containing an array of a local IP address for the Load Balancer on
-   * this Private Network.
+   * @deprecated Object containing an array of a local IP address for the Load
+   *   Balancer on this Private Network.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
@@ -1980,10 +1985,10 @@ export type AttachPrivateNetworkRequest = {
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
   /**
-   * For internal use only.
+   * @deprecated For internal use only.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   ipamConfig?: PrivateNetworkIpamConfig
 }
@@ -2932,11 +2937,11 @@ export type ZonedApiAttachPrivateNetworkRequest = {
   /** Private Network ID. */
   privateNetworkId: string
   /**
-   * Object containing an array of a local IP address for the Load Balancer on
-   * this Private Network.
+   * @deprecated Object containing an array of a local IP address for the Load
+   *   Balancer on this Private Network.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
@@ -2947,10 +2952,10 @@ export type ZonedApiAttachPrivateNetworkRequest = {
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
   /**
-   * For internal use only.
+   * @deprecated For internal use only.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   ipamConfig?: PrivateNetworkIpamConfig
 }
