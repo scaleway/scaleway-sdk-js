@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.23.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.22.0...@scaleway/sdk@1.23.0) (2023-08-03)
+
+
+### Features
+
+* **domain:** add filter to endpoint listContacts ([#788](https://github.com/scaleway/scaleway-sdk-js/issues/788)) ([78b4d64](https://github.com/scaleway/scaleway-sdk-js/commit/78b4d649977c226550d0887c469be7a1871299e2))
+* **instance:** add support for pl-waw-3 ([#785](https://github.com/scaleway/scaleway-sdk-js/issues/785)) ([2a41c43](https://github.com/scaleway/scaleway-sdk-js/commit/2a41c43d933f9024750b92131d04688a2d8ee188))
+* **lb:** support dhcp/ipam private network ([#786](https://github.com/scaleway/scaleway-sdk-js/issues/786)) ([0b056b5](https://github.com/scaleway/scaleway-sdk-js/commit/0b056b5d088e0cb016b2b93e563d5a5a9b2ded42))
+
+
+
 ## [1.22.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.21.0...@scaleway/sdk@1.22.0) (2023-08-01)
 
 
