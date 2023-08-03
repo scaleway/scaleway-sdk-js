@@ -17,7 +17,12 @@ export type DomainStatus =
   | 'revoked'
   | 'pending'
 
-export type EmailFlag = 'unknown_flag' | 'soft_bounce' | 'hard_bounce' | 'spam'
+export type EmailFlag =
+  | 'unknown_flag'
+  | 'soft_bounce'
+  | 'hard_bounce'
+  | 'spam'
+  | 'mailbox_full'
 
 export type EmailRcptType = 'unknown_rcpt_type' | 'to' | 'cc' | 'bcc'
 
