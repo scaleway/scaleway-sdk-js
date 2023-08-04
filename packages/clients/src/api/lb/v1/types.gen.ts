@@ -796,7 +796,7 @@ export interface PrivateNetwork {
 }
 
 export interface PrivateNetworkDHCPConfig {
-  ipId: string
+  ipId?: string
 }
 
 export interface PrivateNetworkIpamConfig {}
