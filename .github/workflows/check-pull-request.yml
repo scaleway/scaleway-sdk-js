@@ -17,4 +17,13 @@ jobs:
           check-latest: true
           cache: "pnpm"
       - run: pnpm install
-      - run: echo '${{ github.event.pull_request.title }}' | pnpm commitlint
+      - name: Check title
+        run: |
+          title="${{ github.event.pull_request.title }}"
+          title_escaped=${title//\'/\'}
+          if [ "$title" == "feat: update generated APIs" ]; then
+            echo "Invalid title."
+            exit 1
+          else
+            echo "$title_escaped" | pnpm commitlint
+          fi
