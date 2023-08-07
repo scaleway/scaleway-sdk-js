@@ -2,7 +2,7 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Zone } from '../../../bridge'
 
-export type Arch = 'x86_64' | 'arm'
+export type Arch = 'x86_64' | 'arm' | 'arm64'
 
 export type BootType = 'local' | 'bootscript' | 'rescue'
 
