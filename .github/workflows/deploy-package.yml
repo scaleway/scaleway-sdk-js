@@ -24,7 +24,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - uses: pnpm/action-setup@v2.2.4
       - name: Use Node.js
-        uses: actions/setup-node@v3.6.0
+        uses: actions/setup-node@v3.7.0
         with:
           node-version: 18
           check-latest: true
