@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.24.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.23.0...@scaleway/sdk@1.24.0) (2023-08-07)
+
+
+### Features
+
+* **tem:** add flag mailbox_full ([#789](https://github.com/scaleway/scaleway-sdk-js/issues/789)) ([80d65a6](https://github.com/scaleway/scaleway-sdk-js/commit/80d65a69026dda3407e051a5ca1897d6f342ecf2))
+
+
+### Bug Fixes
+
+* **lb:** make private network's ip_id nullable ([#790](https://github.com/scaleway/scaleway-sdk-js/issues/790)) ([1c6808b](https://github.com/scaleway/scaleway-sdk-js/commit/1c6808b5782ed0718951deed765f16dc695f3158))
+
+
+
 ## [1.23.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.22.0...@scaleway/sdk@1.23.0) (2023-08-03)
 
 
