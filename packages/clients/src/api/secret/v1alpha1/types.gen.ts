@@ -2,6 +2,12 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Region } from '../../../bridge'
 
+export type ListFoldersRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'name_asc'
+  | 'name_desc'
+
 export type ListSecretsRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
@@ -38,6 +44,28 @@ export interface AccessSecretVersionResponse {
    * available if a CRC32 was supplied during the creation of the version.
    */
   dataCrc32?: number
+}
+
+/** Folder. */
+export interface Folder {
+  /** ID of the folder. */
+  id: string
+  /** ID of the Project containing the folder. */
+  projectId: string
+  /** Name of the folder. */
+  name: string
+  /** Path of the folder. Location of the folder in the directory structure. */
+  path: string
+  /** Date and time of the folder's creation. */
+  createdAt?: Date
+}
+
+/** List folders response. */
+export interface ListFoldersResponse {
+  /** List of folders. */
+  folders: Folder[]
+  /** Count of all folders matching the requested criteria. */
+  totalCount: number
 }
 
 /** List secret versions response. */
@@ -108,6 +136,8 @@ export interface Secret {
   isProtected: boolean
   /** Type of the secret. See `Secret.Type` enum for description of values. */
   type: SecretType
+  /** Path of the secret. Location of the secret in the directory structure. */
+  path: string
   /** Region of the secret. */
   region: Region
 }
@@ -157,6 +187,28 @@ export type CreateSecretRequest = {
    * values. If not specified, the type is `Opaque`.
    */
   type?: SecretType
+  /**
+   * Path of the secret. (Optional.) Location of the secret in the directory
+   * structure. If not specified, the path is `/`.
+   */
+  path?: string
+}
+
+export type CreateFolderRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the Project containing the folder. */
+  projectId?: string
+  /** Name of the folder. */
+  name: string
+  /**
+   * Path of the folder. (Optional.) Location of the folder in the directory
+   * structure. If not specified, the path is `/`.
+   */
+  path?: string
 }
 
 export type GetSecretRequest = {
@@ -198,6 +250,11 @@ export type UpdateSecretRequest = {
   tags?: string[]
   /** Description of the secret. */
   description?: string
+  /**
+   * Path of the folder. (Optional.) Location of the folder in the directory
+   * structure. If not specified, the path is `/`.
+   */
+  path?: string
 }
 
 export type ListSecretsRequest = {
@@ -219,6 +276,23 @@ export type ListSecretsRequest = {
   name?: string
   /** Filter by managed / not managed (optional). */
   isManaged?: boolean
+  /** Filter by path (optional). */
+  path?: string
+}
+
+export type ListFoldersRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the Project. */
+  projectId?: string
+  /** Filter by path (optional). */
+  path?: string
+  page?: number
+  pageSize?: number
+  orderBy?: ListFoldersRequestOrderBy
 }
 
 export type DeleteSecretRequest = {
@@ -229,6 +303,16 @@ export type DeleteSecretRequest = {
   region?: Region
   /** ID of the secret. */
   secretId: string
+}
+
+export type DeleteFolderRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the folder. */
+  folderId: string
 }
 
 export type ProtectSecretRequest = {

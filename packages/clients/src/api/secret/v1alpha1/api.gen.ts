@@ -9,12 +9,15 @@ import {
 import type { Region } from '../../../bridge'
 import {
   marshalAddSecretOwnerRequest,
+  marshalCreateFolderRequest,
   marshalCreateSecretRequest,
   marshalCreateSecretVersionRequest,
   marshalGeneratePasswordRequest,
   marshalUpdateSecretRequest,
   marshalUpdateSecretVersionRequest,
   unmarshalAccessSecretVersionResponse,
+  unmarshalFolder,
+  unmarshalListFoldersResponse,
   unmarshalListSecretVersionsResponse,
   unmarshalListSecretsResponse,
   unmarshalListTagsResponse,
@@ -26,17 +29,22 @@ import type {
   AccessSecretVersionRequest,
   AccessSecretVersionResponse,
   AddSecretOwnerRequest,
+  CreateFolderRequest,
   CreateSecretRequest,
   CreateSecretVersionRequest,
+  DeleteFolderRequest,
   DeleteSecretRequest,
   DestroySecretVersionRequest,
   DisableSecretVersionRequest,
   EnableSecretVersionRequest,
+  Folder,
   GeneratePasswordRequest,
   GetSecretByNameRequest,
   GetSecretRequest,
   GetSecretVersionByNameRequest,
   GetSecretVersionRequest,
+  ListFoldersRequest,
+  ListFoldersResponse,
   ListSecretVersionsByNameRequest,
   ListSecretVersionsRequest,
   ListSecretVersionsResponse,
@@ -67,7 +75,7 @@ export class API extends ParentAPI {
   public static readonly LOCALITIES: Region[] = ['fr-par']
 
   /**
-   * Create a secret. You must sepcify the `region` to create a secret.
+   * Create a secret. You must specify the `region` to create a secret.
    *
    * @param request - The request {@link CreateSecretRequest}
    * @returns A Promise of Secret
@@ -86,6 +94,28 @@ export class API extends ParentAPI {
         )}/secrets`,
       },
       unmarshalSecret,
+    )
+
+  /**
+   * Create folder.
+   *
+   * @param request - The request {@link CreateFolderRequest}
+   * @returns A Promise of Folder
+   */
+  createFolder = (request: Readonly<CreateFolderRequest>) =>
+    this.client.fetch<Folder>(
+      {
+        body: JSON.stringify(
+          marshalCreateFolderRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/folders`,
+      },
+      unmarshalFolder,
     )
 
   /**
@@ -111,6 +141,11 @@ export class API extends ParentAPI {
    * Get metadata using the secret's name. Retrieve the metadata of a secret
    * specified by the `region` and `secret_name` parameters.
    *
+   * GetSecretByName usage is now deprecated.
+   *
+   * Scaleway recommends you to use ListSecrets with the `name` filter.
+   *
+   * @deprecated
    * @param request - The request {@link GetSecretByNameRequest}
    * @returns A Promise of Secret
    */
@@ -172,6 +207,7 @@ export class API extends ParentAPI {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
+          ['path', request.path],
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
@@ -190,6 +226,40 @@ export class API extends ParentAPI {
   listSecrets = (request: Readonly<ListSecretsRequest> = {}) =>
     enrichForPagination('secrets', this.pageOfListSecrets, request)
 
+  protected pageOfListFolders = (request: Readonly<ListFoldersRequest> = {}) =>
+    this.client.fetch<ListFoldersResponse>(
+      {
+        method: 'GET',
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/folders`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['path', request.path],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
+        ),
+      },
+      unmarshalListFoldersResponse,
+    )
+
+  /**
+   * List secrets. Retrieve the list of folders created within a Project.
+   *
+   * @param request - The request {@link ListFoldersRequest}
+   * @returns A Promise of ListFoldersResponse
+   */
+  listFolders = (request: Readonly<ListFoldersRequest> = {}) =>
+    enrichForPagination('folders', this.pageOfListFolders, request)
+
   /**
    * Delete a secret. Delete a given secret specified by the `region` and
    * `secret_id` parameters.
@@ -203,6 +273,20 @@ export class API extends ParentAPI {
         'region',
         request.region ?? this.client.settings.defaultRegion,
       )}/secrets/${validatePathParam('secretId', request.secretId)}`,
+    })
+
+  /**
+   * Delete a given folder specified by the and `folder_id` parameter.
+   *
+   * @param request - The request {@link DeleteFolderRequest}
+   */
+  deleteFolder = (request: Readonly<DeleteFolderRequest>) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/secret-manager/v1alpha1/regions/${validatePathParam(
+        'region',
+        request.region ?? this.client.settings.defaultRegion,
+      )}/folders/${validatePathParam('folderId', request.folderId)}`,
     })
 
   /**

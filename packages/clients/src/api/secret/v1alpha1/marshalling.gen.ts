@@ -10,9 +10,12 @@ import type { DefaultValues } from '../../../bridge'
 import type {
   AccessSecretVersionResponse,
   AddSecretOwnerRequest,
+  CreateFolderRequest,
   CreateSecretRequest,
   CreateSecretVersionRequest,
+  Folder,
   GeneratePasswordRequest,
+  ListFoldersResponse,
   ListSecretVersionsResponse,
   ListSecretsResponse,
   ListTagsResponse,
@@ -22,6 +25,22 @@ import type {
   UpdateSecretRequest,
   UpdateSecretVersionRequest,
 } from './types.gen'
+
+export const unmarshalFolder = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Folder' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    path: data.path,
+    projectId: data.project_id,
+  } as Folder
+}
 
 export const unmarshalSecret = (data: unknown) => {
   if (!isJSONObject(data)) {
@@ -37,6 +56,7 @@ export const unmarshalSecret = (data: unknown) => {
     isManaged: data.is_managed,
     isProtected: data.is_protected,
     name: data.name,
+    path: data.path,
     projectId: data.project_id,
     region: data.region,
     status: data.status,
@@ -78,6 +98,19 @@ export const unmarshalAccessSecretVersionResponse = (data: unknown) => {
     revision: data.revision,
     secretId: data.secret_id,
   } as AccessSecretVersionResponse
+}
+
+export const unmarshalListFoldersResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListFoldersResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    folders: unmarshalArrayOfObject(data.folders, unmarshalFolder),
+    totalCount: data.total_count,
+  } as ListFoldersResponse
 }
 
 export const unmarshalListSecretVersionsResponse = (data: unknown) => {
@@ -135,12 +168,22 @@ export const marshalAddSecretOwnerRequest = (
   product_name: request.productName,
 })
 
+export const marshalCreateFolderRequest = (
+  request: CreateFolderRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+  path: request.path,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
 export const marshalCreateSecretRequest = (
   request: CreateSecretRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
+  path: request.path,
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
   type: request.type ?? 'unknown_secret_type',
@@ -183,6 +226,7 @@ export const marshalUpdateSecretRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
+  path: request.path,
   tags: request.tags,
 })
 
