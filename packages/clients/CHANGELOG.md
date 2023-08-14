@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.25.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.24.0...@scaleway/sdk@1.25.0) (2023-08-14)
+
+
+### Features
+
+* **instance:** add arm64 in architecture enum ([#797](https://github.com/scaleway/scaleway-sdk-js/issues/797)) ([effdfef](https://github.com/scaleway/scaleway-sdk-js/commit/effdfefd3f10f3bd82979185145be682df36c098))
+* **secret-manager:** add secret path ([#798](https://github.com/scaleway/scaleway-sdk-js/issues/798)) ([7db7c5b](https://github.com/scaleway/scaleway-sdk-js/commit/7db7c5bc0fa7d55f6aeef528d7b04f6a0c2ab89e))
+
+
+
 ## [1.24.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.23.0...@scaleway/sdk@1.24.0) (2023-08-07)
 
 
