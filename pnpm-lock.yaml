@@ -33,8 +33,8 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3(@babel/core@7.22.10)(rollup@3.26.2)
       '@rollup/plugin-commonjs':
-        specifier: ^25.0.3
-        version: 25.0.3(rollup@3.26.2)
+        specifier: ^25.0.4
+        version: 25.0.4(rollup@3.26.2)
       '@rollup/plugin-node-resolve':
         specifier: ^15.1.0
         version: 15.1.0(rollup@3.26.2)
@@ -2117,7 +2117,7 @@ packages:
     requiresBuild: true
     dependencies:
       '@jridgewell/resolve-uri': 3.1.0
-      '@jridgewell/sourcemap-codec': 1.4.14
+      '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
   /@lerna/child-process@7.1.4:
@@ -2558,8 +2558,8 @@ packages:
       rollup: 3.26.2
     dev: true
 
-  /@rollup/plugin-commonjs@25.0.3(rollup@3.26.2):
-    resolution: {integrity: sha512-uBdtWr/H3BVcgm97MUdq2oJmqBR23ny1hOrWe2PKo9FTbjsGqg32jfasJUKYAI5ouqacjRnj65mBB/S79F+GQA==}
+  /@rollup/plugin-commonjs@25.0.4(rollup@3.26.2):
+    resolution: {integrity: sha512-L92Vz9WUZXDnlQQl3EwbypJR4+DM2EbsO+/KOcEkP4Mc6Ct453EeDB2uH9lgRwj4w5yflgNpq9pHOiY8aoUXBQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^2.68.0||^3.0.0
@@ -7187,7 +7187,7 @@ packages:
     resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
     engines: {node: '>=12'}
     dependencies:
-      '@jridgewell/sourcemap-codec': 1.4.14
+      '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
   /magic-string@0.30.2:
