@@ -36,8 +36,8 @@ importers:
         specifier: ^25.0.4
         version: 25.0.4(rollup@3.28.1)
       '@rollup/plugin-node-resolve':
-        specifier: ^15.2.0
-        version: 15.2.0(rollup@3.28.1)
+        specifier: ^15.2.1
+        version: 15.2.1(rollup@3.28.1)
       '@scaleway/eslint-config-react':
         specifier: ^3.15.21
         version: 3.15.21(eslint@8.47.0)(typescript@5.1.6)
@@ -2653,8 +2653,8 @@ packages:
       rollup: 3.28.1
     dev: true
 
-  /@rollup/plugin-node-resolve@15.2.0(rollup@3.28.1):
-    resolution: {integrity: sha512-mKur03xNGT8O9ODO6FtT43ITGqHWZbKPdVJHZb+iV9QYcdlhUUB0wgknvA4KCUmC5oHJF6O2W1EgmyOQyVUI4Q==}
+  /@rollup/plugin-node-resolve@15.2.1(rollup@3.28.1):
+    resolution: {integrity: sha512-nsbUg588+GDSu8/NS8T4UAshO6xeaOfINNuXeVHcKV02LJtoRaM1SiOacClw4kws1SFiNhdLGxlbMY9ga/zs/w==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^2.78.0||^3.0.0
@@ -2667,7 +2667,7 @@ packages:
       deepmerge: 4.2.2
       is-builtin-module: 3.2.1
       is-module: 1.0.0
-      resolve: 1.22.1
+      resolve: 1.22.4
       rollup: 3.28.1
     dev: true
 
@@ -7868,7 +7868,7 @@ packages:
     engines: {node: ^16.14.0 || >=18.0.0}
     dependencies:
       hosted-git-info: 7.0.0
-      is-core-module: 2.11.0
+      is-core-module: 2.13.0
       semver: 7.5.4
       validate-npm-package-license: 3.0.4
     dev: true
@@ -8846,15 +8846,6 @@ packages:
     dependencies:
       is-core-module: 2.11.0
       path-parse: 1.0.7
-    dev: true
-
-  /resolve@1.22.1:
-    resolution: {integrity: sha512-nBpuuYuY5jFsli/JIs1oldw6fOQCBioohqWZg/2hiaOybXOft4lonv85uDOKXdf8rhyK159cxU5cDcK/NKk8zw==}
-    hasBin: true
-    dependencies:
-      is-core-module: 2.13.0
-      path-parse: 1.0.7
-      supports-preserve-symlinks-flag: 1.0.0
     dev: true
 
   /resolve@1.22.4:
