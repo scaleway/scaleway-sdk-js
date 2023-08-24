@@ -208,6 +208,7 @@ export type TaskType =
   | 'create_host'
   | 'update_host'
   | 'delete_host'
+  | 'move_project'
 
 export interface AvailableDomain {
   domain: string

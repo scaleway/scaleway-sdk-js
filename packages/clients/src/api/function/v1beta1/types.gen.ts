@@ -673,6 +673,7 @@ export type GetFunctionUploadURLRequest = {
   region?: Region
   /** UUID of the function to get the upload URL for. */
   functionId: string
+  /** Size of the archive to upload in bytes. */
   contentLength: number
 }
 
