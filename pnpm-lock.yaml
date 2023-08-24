@@ -48,8 +48,8 @@ importers:
         specifier: ^7.0.3
         version: 7.0.3
       cross-fetch:
-        specifier: ^3.1.8
-        version: 3.1.8
+        specifier: ^4.0.0
+        version: 4.0.0
       cz-conventional-changelog:
         specifier: ^3.3.0
         version: 3.3.0
@@ -3965,8 +3965,8 @@ packages:
       cross-spawn: 7.0.3
     dev: true
 
-  /cross-fetch@3.1.8:
-    resolution: {integrity: sha512-cvA+JwZoU0Xq+h6WkMvAUqPEYy92Obet6UdKLfW60qn99ftItKjB5T+BkyWOFWe2pUyfQ+IJHmpOTznqk1M6Kg==}
+  /cross-fetch@4.0.0:
+    resolution: {integrity: sha512-e4a5N8lVvuLgAWgnCrLr2PP0YyDOTHa9H/Rj54dirp61qXnNq46m82bRhNqIA5VccJtWBvPTFRV3TtvHUKPB1g==}
     dependencies:
       node-fetch: 2.6.12
     transitivePeerDependencies:
