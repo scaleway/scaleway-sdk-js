@@ -6,8 +6,6 @@
     "group:recommended",
     "helpers:disableTypesNodeMajor"
   ],
-  "reviewers": ["team:devtools", "team:console"],
-  "reviewersSampleSize": 2,
   "updateNotScheduled": true,
   "lockFileMaintenance": { "enabled": false },
   "enabledManagers": ["github-actions", "npm"],
