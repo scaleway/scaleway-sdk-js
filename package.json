@@ -91,7 +91,7 @@
     "lerna": "^7.1.4",
     "lint-staged": "^13.2.3",
     "prettier": "^3.0.2",
-    "read-pkg": "^8.0.0",
+    "read-pkg": "^8.1.0",
     "rollup": "^3.26.2",
     "rollup-plugin-dts": "^5.3.1",
     "rollup-plugin-visualizer": "^5.9.2",
