@@ -6,8 +6,6 @@
     "group:recommended",
     "helpers:disableTypesNodeMajor"
   ],
-  "assignees": ["team:devtools"],
-  "assigneesSampleSize": 1,
   "reviewers": ["team:devtools", "team:console"],
   "reviewersSampleSize": 2,
   "updateNotScheduled": true,
