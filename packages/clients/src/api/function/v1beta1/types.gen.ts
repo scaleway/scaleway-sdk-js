@@ -51,6 +51,7 @@ export type FunctionRuntime =
   | 'node19'
   | 'go120'
   | 'node20'
+  | 'go121'
 
 export type FunctionStatus =
   | 'unknown'
