@@ -16,7 +16,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3.8.1
         with:
-          node-version: 17
+          node-version: 18
           check-latest: true
           cache: "pnpm"
       - run: pnpm install
