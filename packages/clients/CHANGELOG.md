@@ -3,56 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.25.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.24.0...@scaleway/sdk@1.25.0) (2023-08-14)
-
+## [1.26.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.25.0...@scaleway/sdk@1.26.0) (2023-08-28)
 
 ### Features
 
-* **instance:** add arm64 in architecture enum ([#797](https://github.com/scaleway/scaleway-sdk-js/issues/797)) ([effdfef](https://github.com/scaleway/scaleway-sdk-js/commit/effdfefd3f10f3bd82979185145be682df36c098))
-* **secret-manager:** add secret path ([#798](https://github.com/scaleway/scaleway-sdk-js/issues/798)) ([7db7c5b](https://github.com/scaleway/scaleway-sdk-js/commit/7db7c5bc0fa7d55f6aeef528d7b04f6a0c2ab89e))
+- **domain:** add a new task type for moving project ([#828](https://github.com/scaleway/scaleway-sdk-js/issues/828)) ([4f93083](https://github.com/scaleway/scaleway-sdk-js/commit/4f930838826a2d574e3f127f020eb429b6fbcdb9))
+- **function:** add go1.21 support ([#832](https://github.com/scaleway/scaleway-sdk-js/issues/832)) ([51b8592](https://github.com/scaleway/scaleway-sdk-js/commit/51b85927905306678100e9e42dc76c10ce9dc3f4))
 
+## [1.25.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.24.0...@scaleway/sdk@1.25.0) (2023-08-14)
 
+### Features
+
+- **instance:** add arm64 in architecture enum ([#797](https://github.com/scaleway/scaleway-sdk-js/issues/797)) ([effdfef](https://github.com/scaleway/scaleway-sdk-js/commit/effdfefd3f10f3bd82979185145be682df36c098))
+- **secret-manager:** add secret path ([#798](https://github.com/scaleway/scaleway-sdk-js/issues/798)) ([7db7c5b](https://github.com/scaleway/scaleway-sdk-js/commit/7db7c5bc0fa7d55f6aeef528d7b04f6a0c2ab89e))
 
 ## [1.24.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.23.0...@scaleway/sdk@1.24.0) (2023-08-07)
 
-
 ### Features
 
-* **tem:** add flag mailbox_full ([#789](https://github.com/scaleway/scaleway-sdk-js/issues/789)) ([80d65a6](https://github.com/scaleway/scaleway-sdk-js/commit/80d65a69026dda3407e051a5ca1897d6f342ecf2))
-
+- **tem:** add flag mailbox_full ([#789](https://github.com/scaleway/scaleway-sdk-js/issues/789)) ([80d65a6](https://github.com/scaleway/scaleway-sdk-js/commit/80d65a69026dda3407e051a5ca1897d6f342ecf2))
 
 ### Bug Fixes
 
-* **lb:** make private network's ip_id nullable ([#790](https://github.com/scaleway/scaleway-sdk-js/issues/790)) ([1c6808b](https://github.com/scaleway/scaleway-sdk-js/commit/1c6808b5782ed0718951deed765f16dc695f3158))
-
-
+- **lb:** make private network's ip_id nullable ([#790](https://github.com/scaleway/scaleway-sdk-js/issues/790)) ([1c6808b](https://github.com/scaleway/scaleway-sdk-js/commit/1c6808b5782ed0718951deed765f16dc695f3158))
 
 ## [1.23.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.22.0...@scaleway/sdk@1.23.0) (2023-08-03)
 
-
 ### Features
 
-* **domain:** add filter to endpoint listContacts ([#788](https://github.com/scaleway/scaleway-sdk-js/issues/788)) ([78b4d64](https://github.com/scaleway/scaleway-sdk-js/commit/78b4d649977c226550d0887c469be7a1871299e2))
-* **instance:** add support for pl-waw-3 ([#785](https://github.com/scaleway/scaleway-sdk-js/issues/785)) ([2a41c43](https://github.com/scaleway/scaleway-sdk-js/commit/2a41c43d933f9024750b92131d04688a2d8ee188))
-* **lb:** support dhcp/ipam private network ([#786](https://github.com/scaleway/scaleway-sdk-js/issues/786)) ([0b056b5](https://github.com/scaleway/scaleway-sdk-js/commit/0b056b5d088e0cb016b2b93e563d5a5a9b2ded42))
-
-
+- **domain:** add filter to endpoint listContacts ([#788](https://github.com/scaleway/scaleway-sdk-js/issues/788)) ([78b4d64](https://github.com/scaleway/scaleway-sdk-js/commit/78b4d649977c226550d0887c469be7a1871299e2))
+- **instance:** add support for pl-waw-3 ([#785](https://github.com/scaleway/scaleway-sdk-js/issues/785)) ([2a41c43](https://github.com/scaleway/scaleway-sdk-js/commit/2a41c43d933f9024750b92131d04688a2d8ee188))
+- **lb:** support dhcp/ipam private network ([#786](https://github.com/scaleway/scaleway-sdk-js/issues/786)) ([0b056b5](https://github.com/scaleway/scaleway-sdk-js/commit/0b056b5d088e0cb016b2b93e563d5a5a9b2ded42))
 
 ## [1.22.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.21.0...@scaleway/sdk@1.22.0) (2023-08-01)
 
-
 ### Features
 
-* **iam/v1alpha1:** add method to create a user ([#775](https://github.com/scaleway/scaleway-sdk-js/issues/775)) ([4f4db14](https://github.com/scaleway/scaleway-sdk-js/commit/4f4db1449b9948b7706ea5d57c8370b8e027045c))
-* **instance:** added field private_networks for ListServersRequest ([#779](https://github.com/scaleway/scaleway-sdk-js/issues/779)) ([5e7ff1b](https://github.com/scaleway/scaleway-sdk-js/commit/5e7ff1be91530fa64be9de4dbfd30456157f987c))
-* **tem:** add spam flag ([#781](https://github.com/scaleway/scaleway-sdk-js/issues/781)) ([f96f2bf](https://github.com/scaleway/scaleway-sdk-js/commit/f96f2bfe482be7f73a6e1b2ee25ef9446a9f03e5))
-
+- **iam/v1alpha1:** add method to create a user ([#775](https://github.com/scaleway/scaleway-sdk-js/issues/775)) ([4f4db14](https://github.com/scaleway/scaleway-sdk-js/commit/4f4db1449b9948b7706ea5d57c8370b8e027045c))
+- **instance:** added field private_networks for ListServersRequest ([#779](https://github.com/scaleway/scaleway-sdk-js/issues/779)) ([5e7ff1b](https://github.com/scaleway/scaleway-sdk-js/commit/5e7ff1be91530fa64be9de4dbfd30456157f987c))
+- **tem:** add spam flag ([#781](https://github.com/scaleway/scaleway-sdk-js/issues/781)) ([f96f2bf](https://github.com/scaleway/scaleway-sdk-js/commit/f96f2bfe482be7f73a6e1b2ee25ef9446a9f03e5))
 
 ### Bug Fixes
 
-* **sm:** rename certificate type to be more generic ([#776](https://github.com/scaleway/scaleway-sdk-js/issues/776)) ([29ffba8](https://github.com/scaleway/scaleway-sdk-js/commit/29ffba8f115e45efe08cbbb97c4dd2574881152c))
-
-
+- **sm:** rename certificate type to be more generic ([#776](https://github.com/scaleway/scaleway-sdk-js/issues/776)) ([29ffba8](https://github.com/scaleway/scaleway-sdk-js/commit/29ffba8f115e45efe08cbbb97c4dd2574881152c))
 
 ## [1.21.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.20.0...@scaleway/sdk@1.21.0) (2023-07-24)
 
