@@ -663,6 +663,7 @@ const unmarshalServerType = (data: unknown) => {
       ? unmarshalServerTypeVolumeConstraintsByType(data.per_volume_constraint)
       : undefined,
     ram: data.ram,
+    scratchStorageMaxSize: data.scratch_storage_max_size,
     volumesConstraint: data.volumes_constraint
       ? unmarshalServerTypeVolumeConstraintSizes(data.volumes_constraint)
       : undefined,
