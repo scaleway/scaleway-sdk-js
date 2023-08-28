@@ -661,6 +661,8 @@ export interface ServerType {
   network?: ServerTypeNetwork
   /** Capabilities. */
   capabilities?: ServerTypeCapabilities
+  /** Maximum available scratch storage. */
+  scratchStorageMaxSize?: number
 }
 
 /** Server type. capabilities. */
