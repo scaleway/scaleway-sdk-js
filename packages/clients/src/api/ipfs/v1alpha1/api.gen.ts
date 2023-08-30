@@ -8,34 +8,45 @@ import {
   waitForResource,
 } from '../../../bridge'
 import type { Region, WaitForOptions } from '../../../bridge'
-import { PIN_TRANSIENT_STATUSES } from './content.gen'
+import { NAME_TRANSIENT_STATUSES, PIN_TRANSIENT_STATUSES } from './content.gen'
 import {
+  marshalCreateNameRequest,
   marshalCreatePinByCIDRequest,
   marshalCreatePinByURLRequest,
   marshalCreateVolumeRequest,
   marshalReplacePinRequest,
+  marshalUpdateNameRequest,
   marshalUpdateVolumeRequest,
+  unmarshalListNamesResponse,
   unmarshalListPinsResponse,
   unmarshalListVolumesResponse,
+  unmarshalName,
   unmarshalPin,
   unmarshalReplacePinResponse,
   unmarshalVolume,
 } from './marshalling.gen'
 import type {
+  CreateNameRequest,
   CreatePinByCIDRequest,
   CreatePinByURLRequest,
   CreateVolumeRequest,
+  DeleteNameRequest,
   DeletePinRequest,
   DeleteVolumeRequest,
+  GetNameRequest,
   GetPinRequest,
   GetVolumeRequest,
+  ListNamesRequest,
+  ListNamesResponse,
   ListPinsRequest,
   ListPinsResponse,
   ListVolumesRequest,
   ListVolumesResponse,
+  Name,
   Pin,
   ReplacePinRequest,
   ReplacePinResponse,
+  UpdateNameRequest,
   UpdateVolumeRequest,
   Volume,
 } from './types.gen'
@@ -327,4 +338,101 @@ export class API extends ParentAPI {
       )}/pins/${validatePathParam('pinId', request.pinId)}`,
       urlParams: urlParams(['volume_id', request.volumeId]),
     })
+
+  createName = (request: Readonly<CreateNameRequest>) =>
+    this.client.fetch<Name>(
+      {
+        body: JSON.stringify(
+          marshalCreateNameRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/ipfs/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/names`,
+      },
+      unmarshalName,
+    )
+
+  getName = (request: Readonly<GetNameRequest>) =>
+    this.client.fetch<Name>(
+      {
+        method: 'GET',
+        path: `/ipfs/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/names/${validatePathParam('nameId', request.nameId)}`,
+      },
+      unmarshalName,
+    )
+
+  /**
+   * Waits for {@link Name} to be in a final state.
+   *
+   * @param request - The request {@link GetNameRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Name
+   */
+  waitForName = (
+    request: Readonly<GetNameRequest>,
+    options?: Readonly<WaitForOptions<Name>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res => Promise.resolve(!NAME_TRANSIENT_STATUSES.includes(res.status))),
+      this.getName,
+      request,
+      options,
+    )
+
+  deleteName = (request: Readonly<DeleteNameRequest>) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/ipfs/v1alpha1/regions/${validatePathParam(
+        'region',
+        request.region ?? this.client.settings.defaultRegion,
+      )}/names/${validatePathParam('nameId', request.nameId)}`,
+    })
+
+  protected pageOfListNames = (request: Readonly<ListNamesRequest> = {}) =>
+    this.client.fetch<ListNamesResponse>(
+      {
+        method: 'GET',
+        path: `/ipfs/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/names`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['organization_id', request.organizationId],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['project_id', request.projectId],
+        ),
+      },
+      unmarshalListNamesResponse,
+    )
+
+  listNames = (request: Readonly<ListNamesRequest> = {}) =>
+    enrichForPagination('names', this.pageOfListNames, request)
+
+  updateName = (request: Readonly<UpdateNameRequest>) =>
+    this.client.fetch<Name>(
+      {
+        body: JSON.stringify(
+          marshalUpdateNameRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/ipfs/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/names/${validatePathParam('nameId', request.nameId)}`,
+      },
+      unmarshalName,
+    )
 }
