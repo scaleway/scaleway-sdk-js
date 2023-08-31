@@ -103,6 +103,7 @@ export class API extends ParentAPI {
     'fr-par-1',
     'fr-par-2',
     'nl-ams-1',
+    'nl-ams-2',
   ]
 
   protected pageOfListServers = (request: Readonly<ListServersRequest> = {}) =>
