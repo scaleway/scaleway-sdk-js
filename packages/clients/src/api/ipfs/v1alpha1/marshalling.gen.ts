@@ -243,6 +243,7 @@ export const marshalUpdateNameRequest = (
   request: UpdateNameRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  cid: request.cid,
   name: request.name,
   tags: request.tags,
 })
