@@ -143,7 +143,8 @@ export class API extends ParentAPI {
    *
    * GetSecretByName usage is now deprecated.
    *
-   * Scaleway recommends you to use ListSecrets with the `name` filter.
+   * Scaleway recommends that you use the `ListSecrets` request with the `name`
+   * filter.
    *
    * @deprecated
    * @param request - The request {@link GetSecretByNameRequest}
@@ -276,7 +277,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Delete a given folder specified by the and `folder_id` parameter.
+   * Delete a given folder specified by the `region` and `folder_id` parameters.
    *
    * @param request - The request {@link DeleteFolderRequest}
    */
