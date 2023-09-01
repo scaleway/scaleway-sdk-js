@@ -297,4 +297,5 @@ export type UpdateNameRequest = {
   nameId: string
   name?: string
   tags?: string[]
+  cid?: string
 }
