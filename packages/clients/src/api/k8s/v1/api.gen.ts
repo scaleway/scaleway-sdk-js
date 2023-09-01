@@ -258,6 +258,9 @@ export class API extends ParentAPI {
 
   /**
    * Change the Cluster type. Change the type of a specific Kubernetes cluster.
+   * To see the possible values you can enter for the `type` field, [list
+   * available cluster
+   * types](#path-clusters-list-available-cluster-types-for-a-cluster).
    *
    * @param request - The request {@link SetClusterTypeRequest}
    * @returns A Promise of Cluster
