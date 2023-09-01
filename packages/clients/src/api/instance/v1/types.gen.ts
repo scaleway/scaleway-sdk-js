@@ -46,6 +46,7 @@ export type ServerAction =
   | 'poweroff'
   | 'terminate'
   | 'reboot'
+  | 'enable_routed_ip'
 
 export type ServerIpIpFamily = 'inet' | 'inet6'
 
