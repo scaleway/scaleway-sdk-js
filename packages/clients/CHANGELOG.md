@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.27.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.26.0...@scaleway/sdk@1.27.0) (2023-09-04)
+
+### Features
+
+- add missing openapi spec for secret folders API ([#844](https://github.com/scaleway/scaleway-sdk-js/issues/844)) ([f24ce9b](https://github.com/scaleway/scaleway-sdk-js/commit/f24ce9bffc3d101e600e91ab6ef101a189fbad53))
+- **baremetal:** add nl-ams-2 ([#840](https://github.com/scaleway/scaleway-sdk-js/issues/840)) ([92c9e54](https://github.com/scaleway/scaleway-sdk-js/commit/92c9e54953262fe141f5be035d134f91c4441135))
+- **instance:** add missing 'enable_routed_ip' action ([#842](https://github.com/scaleway/scaleway-sdk-js/issues/842)) ([98a18b0](https://github.com/scaleway/scaleway-sdk-js/commit/98a18b0671d0670d53d269a0740ad7774b02995b))
+- **instance:** add scratch storage ([#837](https://github.com/scaleway/scaleway-sdk-js/issues/837)) ([96a7bbd](https://github.com/scaleway/scaleway-sdk-js/commit/96a7bbd77c52f85dbb23884d1486c3a7d381967b))
+- **instance:** add scratch storage max size in ListServersTypes ([#836](https://github.com/scaleway/scaleway-sdk-js/issues/836)) ([486233c](https://github.com/scaleway/scaleway-sdk-js/commit/486233c9adb55acda233e66f117478a45dc4495a))
+- **ipfs:** add cid field in update name method ([#841](https://github.com/scaleway/scaleway-sdk-js/issues/841)) ([19446bd](https://github.com/scaleway/scaleway-sdk-js/commit/19446bd32085208e28db4d3853b8d74650c70189))
+- **ipfs:** add ip name services ([#838](https://github.com/scaleway/scaleway-sdk-js/issues/838)) ([45847e3](https://github.com/scaleway/scaleway-sdk-js/commit/45847e349c838f90a4e0606ec3d608fa8a25caaa))
+
 ## [1.26.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.25.0...@scaleway/sdk@1.26.0) (2023-08-28)
 
 ### Features
