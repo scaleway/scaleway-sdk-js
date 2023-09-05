@@ -30,6 +30,7 @@ export type {
   GetIPRequest,
   GetPATRuleRequest,
   IP,
+  IpamConfig,
   ListDHCPEntriesRequest,
   ListDHCPEntriesRequestOrderBy,
   ListDHCPEntriesResponse,

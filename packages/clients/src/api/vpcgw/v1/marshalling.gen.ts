@@ -21,6 +21,7 @@ import type {
   GatewayNetwork,
   GatewayType,
   IP,
+  IpamConfig,
   ListDHCPEntriesResponse,
   ListDHCPsResponse,
   ListGatewayNetworksResponse,
@@ -340,6 +341,13 @@ export const marshalCreateDHCPRequest = (
   valid_lifetime: request.validLifetime,
 })
 
+const marshalIpamConfig = (
+  request: IpamConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  push_default_route: request.pushDefaultRoute,
+})
+
 const marshalSetDHCPEntriesRequestEntry = (
   request: SetDHCPEntriesRequestEntry,
   defaults: DefaultValues,
@@ -389,6 +397,12 @@ export const marshalCreateGatewayNetworkRequest = (
     {
       param: 'address',
       value: request.address,
+    },
+    {
+      param: 'ipam_config',
+      value: request.ipamConfig
+        ? marshalIpamConfig(request.ipamConfig, defaults)
+        : undefined,
     },
   ]),
 })
@@ -481,7 +495,7 @@ export const marshalUpdateGatewayNetworkRequest = (
 ): Record<string, unknown> => ({
   enable_dhcp: request.enableDhcp,
   enable_masquerade: request.enableMasquerade,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     {
       param: 'dhcp_id',
       value: request.dhcpId,
@@ -489,6 +503,12 @@ export const marshalUpdateGatewayNetworkRequest = (
     {
       param: 'address',
       value: request.address,
+    },
+    {
+      param: 'ipam_config',
+      value: request.ipamConfig
+        ? marshalIpamConfig(request.ipamConfig, defaults)
+        : undefined,
     },
   ]),
 })
