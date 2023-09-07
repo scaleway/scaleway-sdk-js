@@ -284,6 +284,12 @@ export interface IP {
   zone: Zone
 }
 
+/** Ipam config. */
+export interface IpamConfig {
+  /** Defines whether the default route is enabled on that Gateway Network. */
+  pushDefaultRoute: boolean
+}
+
 /** List dhcp entries response. */
 export interface ListDHCPEntriesResponse {
   /** DHCP entries in this page. */
@@ -542,32 +548,43 @@ export type CreateGatewayNetworkRequest = {
   /** Defines whether to enable masquerade (dynamic NAT) on this network. */
   enableMasquerade: boolean
   /**
-   * ID of an existing DHCP configuration object to use for this GatewayNetwork.
-   *
-   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address' could be
-   * set.
-   */
-  dhcpId?: string
-  /**
-   * New DHCP configuration object to use for this GatewayNetwork.
-   *
-   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address' could be
-   * set.
-   */
-  dhcp?: CreateDHCPRequest
-  /**
-   * Static IP address in CIDR format to to use without DHCP.
-   *
-   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address' could be
-   * set.
-   */
-  address?: string
-  /**
    * Defines whether to enable DHCP on this Private Network. Defaults to `true`
    * if either `dhcp_id` or `dhcp` are present. If set to `true`, either
    * `dhcp_id` or `dhcp` must be present.
    */
   enableDhcp?: boolean
+  /**
+   * ID of an existing DHCP configuration object to use for this GatewayNetwork.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address',
+   * 'ipamConfig' could be set.
+   */
+  dhcpId?: string
+  /**
+   * New DHCP configuration object to use for this GatewayNetwork.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address',
+   * 'ipamConfig' could be set.
+   */
+  dhcp?: CreateDHCPRequest
+  /**
+   * Static IP address in CIDR format to to use without DHCP.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address',
+   * 'ipamConfig' could be set.
+   */
+  address?: string
+  /**
+   * Auto-configure the GatewayNetwork using Scaleway's IPAM (IP address
+   * management service). Note: all or none of the GatewayNetworks for a single
+   * gateway can use the IPAM. DHCP and IPAM configurations cannot be mixed.
+   * Some products may require that the Public Gateway uses the IPAM, to ensure
+   * correct functionality.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address',
+   * 'ipamConfig' could be set.
+   */
+  ipamConfig?: IpamConfig
 }
 
 export type UpdateGatewayNetworkRequest = {
@@ -577,20 +594,29 @@ export type UpdateGatewayNetworkRequest = {
   gatewayNetworkId: string
   /** Defines whether to enable masquerade (dynamic NAT) on the GatewayNetwork. */
   enableMasquerade?: boolean
-  /**
-   * ID of the new DHCP configuration object to use with this GatewayNetwork.
-   *
-   * One-of ('ipConfig'): at most one of 'dhcpId', 'address' could be set.
-   */
-  dhcpId?: string
   /** Defines whether to enable DHCP on the connected Private Network. */
   enableDhcp?: boolean
   /**
+   * ID of the new DHCP configuration object to use with this GatewayNetwork.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'address', 'ipamConfig' could
+   * be set.
+   */
+  dhcpId?: string
+  /**
    * New static IP address.
    *
-   * One-of ('ipConfig'): at most one of 'dhcpId', 'address' could be set.
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'address', 'ipamConfig' could
+   * be set.
    */
   address?: string
+  /**
+   * New IPAM configuration to use for this GatewayNetwork.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'address', 'ipamConfig' could
+   * be set.
+   */
+  ipamConfig?: IpamConfig
 }
 
 export type DeleteGatewayNetworkRequest = {
