@@ -11,6 +11,8 @@ import type {
   CreatePinByCIDRequest,
   CreatePinByURLRequest,
   CreateVolumeRequest,
+  ExportKeyNameResponse,
+  ImportKeyNameRequest,
   ListNamesResponse,
   ListPinsResponse,
   ListVolumesResponse,
@@ -125,6 +127,23 @@ export const unmarshalVolume = (data: unknown) => {
   } as Volume
 }
 
+export const unmarshalExportKeyNameResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ExportKeyNameResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    nameId: data.name_id,
+    privateKey: data.private_key,
+    projectId: data.project_id,
+    publicKey: data.public_key,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as ExportKeyNameResponse
+}
+
 export const unmarshalListNamesResponse = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -223,6 +242,15 @@ export const marshalCreateVolumeRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
+export const marshalImportKeyNameRequest = (
+  request: ImportKeyNameRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+  private_key: request.privateKey,
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 

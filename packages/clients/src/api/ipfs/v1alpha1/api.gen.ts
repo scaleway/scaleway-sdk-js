@@ -14,9 +14,11 @@ import {
   marshalCreatePinByCIDRequest,
   marshalCreatePinByURLRequest,
   marshalCreateVolumeRequest,
+  marshalImportKeyNameRequest,
   marshalReplacePinRequest,
   marshalUpdateNameRequest,
   marshalUpdateVolumeRequest,
+  unmarshalExportKeyNameResponse,
   unmarshalListNamesResponse,
   unmarshalListPinsResponse,
   unmarshalListVolumesResponse,
@@ -33,9 +35,12 @@ import type {
   DeleteNameRequest,
   DeletePinRequest,
   DeleteVolumeRequest,
+  ExportKeyNameRequest,
+  ExportKeyNameResponse,
   GetNameRequest,
   GetPinRequest,
   GetVolumeRequest,
+  ImportKeyNameRequest,
   ListNamesRequest,
   ListNamesResponse,
   ListPinsRequest,
@@ -432,6 +437,34 @@ export class API extends ParentAPI {
           'region',
           request.region ?? this.client.settings.defaultRegion,
         )}/names/${validatePathParam('nameId', request.nameId)}`,
+      },
+      unmarshalName,
+    )
+
+  exportKeyName = (request: Readonly<ExportKeyNameRequest>) =>
+    this.client.fetch<ExportKeyNameResponse>(
+      {
+        method: 'GET',
+        path: `/ipfs/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/names/export-key/${validatePathParam('nameId', request.nameId)}`,
+      },
+      unmarshalExportKeyNameResponse,
+    )
+
+  importKeyName = (request: Readonly<ImportKeyNameRequest>) =>
+    this.client.fetch<Name>(
+      {
+        body: JSON.stringify(
+          marshalImportKeyNameRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/ipfs/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/names/import-key`,
       },
       unmarshalName,
     )
