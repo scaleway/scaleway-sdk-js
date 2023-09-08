@@ -45,6 +45,15 @@ export type PinStatus =
   | 'failed'
   | 'pinned'
 
+export interface ExportKeyNameResponse {
+  nameId: string
+  projectId: string
+  createdAt?: Date
+  updatedAt?: Date
+  publicKey: string
+  privateKey: string
+}
+
 export interface ListNamesResponse {
   names: Name[]
   totalCount: number
@@ -298,4 +307,24 @@ export type UpdateNameRequest = {
   name?: string
   tags?: string[]
   cid?: string
+}
+
+export type ExportKeyNameRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  nameId: string
+}
+
+export type ImportKeyNameRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  projectId?: string
+  name: string
+  privateKey: string
 }
