@@ -23,6 +23,9 @@ export type EmailFlag =
   | 'hard_bounce'
   | 'spam'
   | 'mailbox_full'
+  | 'mailbox_not_found'
+  | 'greylisted'
+  | 'send_before_expiration'
 
 export type EmailRcptType = 'unknown_rcpt_type' | 'to' | 'cc' | 'bcc'
 
