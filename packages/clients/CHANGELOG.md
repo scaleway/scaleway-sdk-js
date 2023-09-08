@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.28.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.27.0...@scaleway/sdk@1.28.0) (2023-09-08)
+
+### Features
+
+- **ipfs:** add export and import key ([#847](https://github.com/scaleway/scaleway-sdk-js/issues/847)) ([2bdd5fa](https://github.com/scaleway/scaleway-sdk-js/commit/2bdd5fa8e20cbe08dc7d2557b4814b322c2d0fdc))
+- **pgw:** ipam config for native vpc integration ([#846](https://github.com/scaleway/scaleway-sdk-js/issues/846)) ([0a4eb3b](https://github.com/scaleway/scaleway-sdk-js/commit/0a4eb3bbd56bb9b060ee69bfe0f53d5bc16122a2))
+
 ## [1.27.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.26.0...@scaleway/sdk@1.27.0) (2023-09-04)
 
 ### Features
