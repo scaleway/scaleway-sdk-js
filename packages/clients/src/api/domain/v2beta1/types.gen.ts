@@ -147,6 +147,10 @@ export type ListDNSZonesRequestOrderBy =
   | 'domain_desc'
   | 'subdomain_asc'
   | 'subdomain_desc'
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'updated_at_asc'
+  | 'updated_at_desc'
 
 export type ListDomainsRequestOrderBy = 'domain_asc' | 'domain_desc'
 
@@ -848,8 +852,18 @@ export type ListDNSZonesRequest = {
   pageSize?: number
   /** Domain on which to filter the returned DNS zones. */
   domain: string
-  /** DNS zone on which to filter the returned DNS zones. */
-  dnsZone: string
+  /** @deprecated DNS zone on which to filter the returned DNS zones. */
+  dnsZone?: string
+  /** DNS zones on which to filter the returned DNS zones. */
+  dnsZones?: string[]
+  /** Only list DNS zones created after this date. */
+  createdAfter?: Date
+  /** Only list DNS zones created before this date. */
+  createdBefore?: Date
+  /** Only list DNS zones updated after this date. */
+  updatedAfter?: Date
+  /** Only list DNS zones updated before this date. */
+  updatedBefore?: Date
 }
 
 export type CreateDNSZoneRequest = {
