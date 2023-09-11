@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.29.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.28.0...@scaleway/sdk@1.29.0) (2023-09-11)
+
+### Features
+
+- **dom:** add more filters on ListDNSZones to ease VPC sync ([#850](https://github.com/scaleway/scaleway-sdk-js/issues/850)) ([c7526ee](https://github.com/scaleway/scaleway-sdk-js/commit/c7526eeecaeaefbe9a23938eb81b5c06274c6c23))
+- **tem:** update email flag ([#849](https://github.com/scaleway/scaleway-sdk-js/issues/849)) ([e395e5e](https://github.com/scaleway/scaleway-sdk-js/commit/e395e5e5a304723273b826618af0b23238134fb1))
+
 ## [1.28.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.27.0...@scaleway/sdk@1.28.0) (2023-09-08)
 
 ### Features
