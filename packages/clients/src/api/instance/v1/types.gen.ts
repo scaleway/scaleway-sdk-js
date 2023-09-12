@@ -388,6 +388,25 @@ export interface ListVolumesTypesResponse {
   volumes: Record<string, VolumeType>
 }
 
+/** Migration plan. */
+export interface MigrationPlan {
+  /**
+   * A volume which will be migrated to SBS together with the snapshots, if
+   * present.
+   */
+  volume?: Volume
+  /**
+   * A list of snapshots which will be migrated to SBS together and with the
+   * volume, if present.
+   */
+  snapshots: Snapshot[]
+  /**
+   * A value to be passed to ApplyBlockMigrationRequest, to confirm that the
+   * execution of the plan is being requested.
+   */
+  validationKey: string
+}
+
 /** Placement group. */
 export interface PlacementGroup {
   /** Placement group unique ID. */
@@ -1741,4 +1760,45 @@ export type GetDashboardRequest = {
   zone?: Zone
   organization?: string
   project?: string
+}
+
+export type PlanBlockMigrationRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /**
+   * The volume for which the migration plan will be generated.
+   *
+   * One-of ('resource'): at most one of 'volumeId', 'snapshotId' could be set.
+   */
+  volumeId?: string
+  /**
+   * The snapshot for which the migration plan will be generated.
+   *
+   * One-of ('resource'): at most one of 'volumeId', 'snapshotId' could be set.
+   */
+  snapshotId?: string
+}
+
+export type ApplyBlockMigrationRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /**
+   * The volume to migrate, along with potentially other resources, according to
+   * the migration plan generated with a call to PlanBlockMigration.
+   *
+   * One-of ('resource'): at most one of 'volumeId', 'snapshotId' could be set.
+   */
+  volumeId?: string
+  /**
+   * The snapshot to migrate, along with potentially other resources, according
+   * to the migration plan generated with a call to PlanBlockMigration.
+   *
+   * One-of ('resource'): at most one of 'volumeId', 'snapshotId' could be set.
+   */
+  snapshotId?: string
+  /**
+   * A value to be retrieved from a call to PlanBlockMigration, to confirm that
+   * the volume and/or snapshots specified in said plan should be migrated.
+   */
+  validationKey: string
 }

@@ -8,6 +8,7 @@ import {
 } from '../../../bridge'
 import type { Zone } from '../../../bridge'
 import {
+  marshalApplyBlockMigrationRequest,
   marshalCreateImageRequest,
   marshalCreateIpRequest,
   marshalCreatePlacementGroupRequest,
@@ -18,6 +19,7 @@ import {
   marshalCreateSnapshotRequest,
   marshalCreateVolumeRequest,
   marshalExportSnapshotRequest,
+  marshalPlanBlockMigrationRequest,
   marshalServerActionRequest,
   marshalSetImageRequest,
   marshalSetPlacementGroupRequest,
@@ -70,6 +72,7 @@ import {
   unmarshalListSnapshotsResponse,
   unmarshalListVolumesResponse,
   unmarshalListVolumesTypesResponse,
+  unmarshalMigrationPlan,
   unmarshalPrivateNIC,
   unmarshalServerActionResponse,
   unmarshalSetImageResponse,
@@ -87,6 +90,7 @@ import {
   unmarshalUpdateVolumeResponse,
 } from './marshalling.gen'
 import type {
+  ApplyBlockMigrationRequest,
   CreateImageRequest,
   CreateImageResponse,
   CreateIpRequest,
@@ -171,6 +175,8 @@ import type {
   ListVolumesResponse,
   ListVolumesTypesRequest,
   ListVolumesTypesResponse,
+  MigrationPlan,
+  PlanBlockMigrationRequest,
   PrivateNIC,
   ServerActionRequest,
   ServerActionResponse,
@@ -1708,4 +1714,53 @@ export class API extends ParentAPI {
       },
       unmarshalGetDashboardResponse,
     )
+
+  /**
+   * Get a volume or snapshot's migration plan. Given a volume or snapshot,
+   * returns the migration plan for a call to the RPC ApplyBlockMigration. This
+   * plan will include zero or one volume, and zero or more snapshots, which
+   * will need to be migrated together. This RPC does not perform the actual
+   * migration itself, ApplyBlockMigration must be used. The validation_key
+   * value returned by this call must be provided to the ApplyBlockMigration
+   * call to confirm that all resources listed in the plan should be migrated.
+   *
+   * @param request - The request {@link PlanBlockMigrationRequest}
+   * @returns A Promise of MigrationPlan
+   */
+  planBlockMigration = (request: Readonly<PlanBlockMigrationRequest> = {}) =>
+    this.client.fetch<MigrationPlan>(
+      {
+        body: JSON.stringify(
+          marshalPlanBlockMigrationRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/instance/v1/zones/${validatePathParam(
+          'zone',
+          request.zone ?? this.client.settings.defaultZone,
+        )}/block-migration/plan`,
+      },
+      unmarshalMigrationPlan,
+    )
+
+  /**
+   * Migrate a volume and/or snapshots to SBS (Scaleway Block Storage). To be
+   * used, this RPC must be preceded by a call to PlanBlockMigration. To migrate
+   * all resources mentioned in the MigrationPlan, the validation_key returned
+   * in the MigrationPlan must be provided.
+   *
+   * @param request - The request {@link ApplyBlockMigrationRequest}
+   */
+  applyBlockMigration = (request: Readonly<ApplyBlockMigrationRequest>) =>
+    this.client.fetch<void>({
+      body: JSON.stringify(
+        marshalApplyBlockMigrationRequest(request, this.client.settings),
+      ),
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/instance/v1/zones/${validatePathParam(
+        'zone',
+        request.zone ?? this.client.settings.defaultZone,
+      )}/block-migration/apply`,
+    })
 }
