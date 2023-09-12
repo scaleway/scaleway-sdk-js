@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.30.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.29.0...@scaleway/sdk@1.30.0) (2023-09-12)
+
+### Features
+
+- **instance:** add RPC for volume/snapshot migration to SBS ([#853](https://github.com/scaleway/scaleway-sdk-js/issues/853)) ([b822287](https://github.com/scaleway/scaleway-sdk-js/commit/b822287c07b3ccb11793fc1d67ee4cdecd121b3f))
+- **ipfs:** add cli command for ipfs naming ([#852](https://github.com/scaleway/scaleway-sdk-js/issues/852)) ([4612c3a](https://github.com/scaleway/scaleway-sdk-js/commit/4612c3ac7fc4ded359a85c63ff6f51c5d4667ef5))
+
 ## [1.29.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.28.0...@scaleway/sdk@1.29.0) (2023-09-11)
 
 ### Features
