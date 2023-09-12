@@ -10,6 +10,7 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  ApplyBlockMigrationRequest,
   Bootscript,
   CreateImageRequest,
   CreateImageResponse,
@@ -61,8 +62,10 @@ import type {
   ListSnapshotsResponse,
   ListVolumesResponse,
   ListVolumesTypesResponse,
+  MigrationPlan,
   PlacementGroup,
   PlacementGroupServer,
+  PlanBlockMigrationRequest,
   PrivateNIC,
   SecurityGroup,
   SecurityGroupRule,
@@ -1210,6 +1213,20 @@ export const unmarshalListVolumesTypesResponse = (data: unknown) => {
   } as ListVolumesTypesResponse
 }
 
+export const unmarshalMigrationPlan = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'MigrationPlan' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    snapshots: unmarshalArrayOfObject(data.snapshots, unmarshalSnapshot),
+    validationKey: data.validation_key,
+    volume: data.volume ? unmarshalVolume(data.volume) : undefined,
+  } as MigrationPlan
+}
+
 export const unmarshalServerActionResponse = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -1624,6 +1641,23 @@ const marshalVolumeTemplate = (
   ]),
 })
 
+export const marshalApplyBlockMigrationRequest = (
+  request: ApplyBlockMigrationRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  validation_key: request.validationKey,
+  ...resolveOneOf([
+    {
+      param: 'volume_id',
+      value: request.volumeId,
+    },
+    {
+      param: 'snapshot_id',
+      value: request.snapshotId,
+    },
+  ]),
+})
+
 export const marshalCreateImageRequest = (
   request: CreateImageRequest,
   defaults: DefaultValues,
@@ -1864,6 +1898,22 @@ export const marshalExportSnapshotRequest = (
 ): Record<string, unknown> => ({
   bucket: request.bucket,
   key: request.key,
+})
+
+export const marshalPlanBlockMigrationRequest = (
+  request: PlanBlockMigrationRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ...resolveOneOf([
+    {
+      param: 'volume_id',
+      value: request.volumeId,
+    },
+    {
+      param: 'snapshot_id',
+      value: request.snapshotId,
+    },
+  ]),
 })
 
 export const marshalServerActionRequest = (

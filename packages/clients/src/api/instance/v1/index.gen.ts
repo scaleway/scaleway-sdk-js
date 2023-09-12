@@ -3,6 +3,7 @@
 export { API } from './api.gen'
 export * from './content.gen'
 export type {
+  ApplyBlockMigrationRequest,
   Arch,
   BootType,
   Bootscript,
@@ -98,10 +99,12 @@ export type {
   ListVolumesResponse,
   ListVolumesTypesRequest,
   ListVolumesTypesResponse,
+  MigrationPlan,
   PlacementGroup,
   PlacementGroupPolicyMode,
   PlacementGroupPolicyType,
   PlacementGroupServer,
+  PlanBlockMigrationRequest,
   PrivateNIC,
   PrivateNICState,
   SecurityGroup,
