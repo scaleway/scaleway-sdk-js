@@ -318,7 +318,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all pins within a volume. Retrieve information about all pins into a
+   * List all pins within a volume. Retrieve information about all pins within a
    * volume.
    *
    * @param request - The request {@link ListPinsRequest}
@@ -344,6 +344,13 @@ export class API extends ParentAPI {
       urlParams: urlParams(['volume_id', request.volumeId]),
     })
 
+  /**
+   * Create a new name. You can use the `ipfs key` command to list and generate
+   * more names and their respective keys.
+   *
+   * @param request - The request {@link CreateNameRequest}
+   * @returns A Promise of Name
+   */
   createName = (request: Readonly<CreateNameRequest>) =>
     this.client.fetch<Name>(
       {
@@ -360,6 +367,12 @@ export class API extends ParentAPI {
       unmarshalName,
     )
 
+  /**
+   * Get information about a name. Retrieve information about a specific name.
+   *
+   * @param request - The request {@link GetNameRequest}
+   * @returns A Promise of Name
+   */
   getName = (request: Readonly<GetNameRequest>) =>
     this.client.fetch<Name>(
       {
@@ -391,6 +404,11 @@ export class API extends ParentAPI {
       options,
     )
 
+  /**
+   * Delete an existing name. Delete a name by its ID.
+   *
+   * @param request - The request {@link DeleteNameRequest}
+   */
   deleteName = (request: Readonly<DeleteNameRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
@@ -422,9 +440,22 @@ export class API extends ParentAPI {
       unmarshalListNamesResponse,
     )
 
+  /**
+   * List all names by a Project ID. Retrieve information about all names from a
+   * Project ID.
+   *
+   * @param request - The request {@link ListNamesRequest}
+   * @returns A Promise of ListNamesResponse
+   */
   listNames = (request: Readonly<ListNamesRequest> = {}) =>
     enrichForPagination('names', this.pageOfListNames, request)
 
+  /**
+   * Update name information. Update name information (CID, tag, name...).
+   *
+   * @param request - The request {@link UpdateNameRequest}
+   * @returns A Promise of Name
+   */
   updateName = (request: Readonly<UpdateNameRequest>) =>
     this.client.fetch<Name>(
       {
@@ -441,6 +472,12 @@ export class API extends ParentAPI {
       unmarshalName,
     )
 
+  /**
+   * Export your private key. Export a private key by its ID.
+   *
+   * @param request - The request {@link ExportKeyNameRequest}
+   * @returns A Promise of ExportKeyNameResponse
+   */
   exportKeyName = (request: Readonly<ExportKeyNameRequest>) =>
     this.client.fetch<ExportKeyNameResponse>(
       {
@@ -453,6 +490,12 @@ export class API extends ParentAPI {
       unmarshalExportKeyNameResponse,
     )
 
+  /**
+   * Import your private key. Import a private key.
+   *
+   * @param request - The request {@link ImportKeyNameRequest}
+   * @returns A Promise of Name
+   */
   importKeyName = (request: Readonly<ImportKeyNameRequest>) =>
     this.client.fetch<Name>(
       {
