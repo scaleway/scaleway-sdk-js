@@ -77,8 +77,8 @@ export interface Name {
   tags: string[]
   name: string
   key: string
-  cid: string
   status: NameStatus
+  value: string
 }
 
 export interface Pin {
@@ -263,7 +263,7 @@ export type CreateNameRequest = {
   region?: Region
   projectId?: string
   name: string
-  cid: string
+  value: string
 }
 
 export type GetNameRequest = {
@@ -306,7 +306,7 @@ export type UpdateNameRequest = {
   nameId: string
   name?: string
   tags?: string[]
-  cid?: string
+  value?: string
 }
 
 export type ExportKeyNameRequest = {
@@ -327,4 +327,5 @@ export type ImportKeyNameRequest = {
   projectId?: string
   name: string
   privateKey: string
+  value: string
 }

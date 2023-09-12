@@ -78,7 +78,6 @@ export const unmarshalName = (data: unknown) => {
   }
 
   return {
-    cid: data.cid,
     createdAt: unmarshalDate(data.created_at),
     key: data.key,
     name: data.name,
@@ -87,6 +86,7 @@ export const unmarshalName = (data: unknown) => {
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
+    value: data.value,
   } as Name
 }
 
@@ -207,9 +207,9 @@ export const marshalCreateNameRequest = (
   request: CreateNameRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  cid: request.cid,
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
+  value: request.value,
 })
 
 export const marshalCreatePinByCIDRequest = (
@@ -252,6 +252,7 @@ export const marshalImportKeyNameRequest = (
   name: request.name,
   private_key: request.privateKey,
   project_id: request.projectId ?? defaults.defaultProjectId,
+  value: request.value,
 })
 
 export const marshalReplacePinRequest = (
@@ -271,9 +272,9 @@ export const marshalUpdateNameRequest = (
   request: UpdateNameRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  cid: request.cid,
   name: request.name,
   tags: request.tags,
+  value: request.value,
 })
 
 export const marshalUpdateVolumeRequest = (
