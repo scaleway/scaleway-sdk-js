@@ -176,10 +176,14 @@ export interface TokenScopes {
   queryLogs: boolean
   /** Permission to write logs. */
   writeLogs: boolean
-  /** Permission to setup logs rules. */
+  /** Permission to set up logs rules. */
   setupLogsRules: boolean
-  /** Permission to setup alerts. */
+  /** Permission to set up alerts. */
   setupAlerts: boolean
+  /** Permission to fetch traces. */
+  queryTraces: boolean
+  /** Permission to write traces. */
+  writeTraces: boolean
 }
 
 export type ActivateCockpitRequest = {
