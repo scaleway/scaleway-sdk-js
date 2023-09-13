@@ -11,31 +11,27 @@ jobs:
   typecheck:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3.6.0
-      - uses: pnpm/action-setup@v2.4.0
-      - name: Use Node.js
-        uses: actions/setup-node@v3.8.1
+      - uses: actions/checkout@v4
+      - name: Use Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: 18
-          check-latest: true
-          cache: "pnpm"
-      - run: pnpm install
-      - run: pnpm run build
-      - run: pnpm tsc --noEmit
+          bun-version: latest
+      - run: bun install
+      - run: bun run build
+      - run: bun tsc --noEmit
+
   lint:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3.6.0
-      - uses: pnpm/action-setup@v2.4.0
-      - name: Use Node.js
-        uses: actions/setup-node@v3.8.1
+      - uses: actions/checkout@v4
+      - name: Use Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: 18
-          check-latest: true
-          cache: "pnpm"
-      - run: pnpm install
-      - run: pnpm run build
-      - run: pnpm run lint
+          bun-version: latest
+      - run: bun install
+      - run: bun run build
+      - run: bun run lint
+
   test:
     runs-on: ubuntu-22.04
     strategy:
@@ -43,19 +39,13 @@ jobs:
         test-environment:
           - node
           - jsdom
-        node:
-          - "18"
-          - "19"
     steps:
-      - uses: actions/checkout@v3.6.0
-      - uses: pnpm/action-setup@v2.4.0
-      - name: Use Node.js
-        uses: actions/setup-node@v3.8.1
+      - uses: actions/checkout@v4
+      - name: Use Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: ${{ matrix.node }}
-          check-latest: true
-          cache: "pnpm"
-      - run: pnpm install
-      - run: pnpm run build
-      - run: pnpm run test:coverage --testEnvironment ${{ matrix.test-environment }}
+          bun-version: latest
+      - run: bun install
+      - run: bun run build
+      - run: bun run test:coverage --testEnvironment ${{ matrix.test-environment }}
       - uses: codecov/codecov-action@v3.1.4
