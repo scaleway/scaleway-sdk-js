@@ -59,11 +59,13 @@ const unmarshalTokenScopes = (data: unknown) => {
   return {
     queryLogs: data.query_logs,
     queryMetrics: data.query_metrics,
+    queryTraces: data.query_traces,
     setupAlerts: data.setup_alerts,
     setupLogsRules: data.setup_logs_rules,
     setupMetricsRules: data.setup_metrics_rules,
     writeLogs: data.write_logs,
     writeMetrics: data.write_metrics,
+    writeTraces: data.write_traces,
   } as TokenScopes
 }
 
@@ -274,11 +276,13 @@ const marshalTokenScopes = (
 ): Record<string, unknown> => ({
   query_logs: request.queryLogs,
   query_metrics: request.queryMetrics,
+  query_traces: request.queryTraces,
   setup_alerts: request.setupAlerts,
   setup_logs_rules: request.setupLogsRules,
   setup_metrics_rules: request.setupMetricsRules,
   write_logs: request.writeLogs,
   write_metrics: request.writeMetrics,
+  write_traces: request.writeTraces,
 })
 
 export const marshalActivateCockpitRequest = (
