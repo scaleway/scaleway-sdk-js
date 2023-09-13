@@ -22,18 +22,16 @@ jobs:
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/$GITHUB_REPOSITORY
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      - uses: pnpm/action-setup@v2.4.0
-      - name: Use Node.js
-        uses: actions/setup-node@v3.8.1
+      - name: Use Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: 18
-          check-latest: true
-      - run: pnpm install
-      - run: pnpm run build
+          bun-version: latest
+      - run: bun install
+      - run: bun run build
       - run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: pnpm lerna publish -y --create-release github
+      - run: bun lerna publish -y --create-release github
         env:
           HUSKY: 0
           GH_TOKEN: ${{ secrets.GH_TOKEN }}

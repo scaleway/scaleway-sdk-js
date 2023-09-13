@@ -34,21 +34,17 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v2.4.0
-      - name: Setup Node
-        uses: actions/setup-node@v3.8.1
+      - name: Use Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: 18
-          check-latest: true
-          cache: "pnpm"
+          bun-version: latest
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3
       - name: Install dependencies
-        run: pnpm install
+        run: bun install
       - name: Build doc
-        run: pnpm run doc
+        run: bun run doc
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:

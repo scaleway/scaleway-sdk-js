@@ -9,7 +9,7 @@ We assume that you have the dependency [serverless](https://www.serverless.com/)
 
 **Steps:**
 
-1. Install dependencies: `pnpm install`.
-2. Build the project: `pnpm run build`.
+1. Install dependencies: `bun install`.
+2. Build the project: `bun run build`.
 3. Deploy in production: `SCW_DEFAULT_PROJECT_ID= SCW_SECRET_KEY= serverless deploy`
   * Or just `serverless deploy` if you already defined `SCW_DEFAULT_PROJECT_ID` and `SCW_SECRET_KEY` in your bash profile.

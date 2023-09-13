@@ -4,4 +4,4 @@
 
 . "$(dirname "$0")/_/husky.sh"
 
-pnpm commitlint --edit $1
+bun commitlint --edit $1

@@ -6,6 +6,6 @@
 
 **Steps:**
 
-1. Install dependencies: `pnpm install`.
-2. Build the project: `pnpm run build`.
-3. Start the server: `pnpm run start`.
+1. Install dependencies: `bun install`.
+2. Build the project: `bun run build`.
+3. Start the server: `bun run start`.
