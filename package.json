@@ -11,8 +11,8 @@
   "type": "module",
   "scripts": {
     "build": "lerna exec --stream -- rollup -c ../../rollup.config.mjs",
-    "build:profile": "cross-env PROFILE=true pnpm run build",
-    "commit": "npx git-cz -a",
+    "build:profile": "cross-env PROFILE=true bun run build",
+    "commit": "bunx git-cz -a",
     "doc": "typedoc",
     "format": "prettier --write '**/*.ts'",
     "lint": "eslint --cache --ext ts .",
@@ -82,7 +82,7 @@
     "cross-env": "^7.0.3",
     "cross-fetch": "^4.0.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.48.0",
+    "eslint": "8.49.0",
     "eslint-plugin-tsdoc": "^0.2.17",
     "husky": "^8.0.3",
     "jest": "^29.6.4",
@@ -97,6 +97,5 @@
     "rollup-plugin-visualizer": "^5.9.2",
     "typedoc": "^0.25.0",
     "typescript": "^5.2.2"
-  },
-  "packageManager": "pnpm@8.6.12"
+  }
 }

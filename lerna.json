@@ -2,7 +2,7 @@
   "packages": [
     "packages/*"
   ],
-  "npmClient": "pnpm",
+  "npmClient": "bun",
   "version": "independent",
   "command": {
     "publish": {
