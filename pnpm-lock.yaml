@@ -72,8 +72,8 @@ importers:
         specifier: ^16.0.0
         version: 16.0.0
       lerna:
-        specifier: ^7.1.5
-        version: 7.1.5
+        specifier: ^7.2.0
+        version: 7.2.0
       lint-staged:
         specifier: ^14.0.1
         version: 14.0.1
@@ -1960,8 +1960,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@lerna/child-process@7.1.5:
-    resolution: {integrity: sha512-YXmxzxXTP3u9HQpSXvK8qqoAm7VWQIFria3FVMQKkOSkWkph1TNnvt3Q1JvKT7/Jgd1HfTc3QrK09a2FND9+8A==}
+  /@lerna/child-process@7.2.0:
+    resolution: {integrity: sha512-8cRsYYX8rGZTXL1KcLBv0RHD9PMvphWZay8yg4qf2giX6x86dQyTetSU4SplG2LBGVClilmNHJa/CQwvPQNUFA==}
     engines: {node: ^14.17.0 || >=16.0.0}
     dependencies:
       chalk: 4.1.2
@@ -1969,11 +1969,11 @@ packages:
       strong-log-transformer: 2.1.0
     dev: true
 
-  /@lerna/create@7.1.5:
-    resolution: {integrity: sha512-/CDI/cvXJbycgSDzWXzP7DBuJ10qL/uYEouFt3/mxi9+hSfM885fu6lbVPV7QOf8A0otXcTs7PN2dVyMrnWQeg==}
+  /@lerna/create@7.2.0:
+    resolution: {integrity: sha512-bBypNfwqOQNcfR2nXJ3mWUeIAIoSFpXg8MjuFSf87PzIiyeTEKa3Z57vAa3bDbHQtcB7x6f0rWysK1eQZSH15Q==}
     engines: {node: ^14.17.0 || >=16.0.0}
     dependencies:
-      '@lerna/child-process': 7.1.5
+      '@lerna/child-process': 7.2.0
       '@npmcli/run-script': 6.0.2
       '@nx/devkit': 16.5.5(nx@16.5.5)
       '@octokit/plugin-enterprise-rest': 6.0.1
@@ -1998,6 +1998,7 @@ packages:
       ini: 1.3.8
       init-package-json: 5.0.0
       inquirer: 8.2.4
+      is-ci: 3.0.1
       is-stream: 2.0.0
       js-yaml: 4.1.0
       libnpmpublish: 7.3.0
@@ -6234,16 +6235,6 @@ packages:
       - supports-color
     dev: true
 
-  /jest-diff@29.6.3:
-    resolution: {integrity: sha512-3sw+AdWnwH9sSNohMRKA7JiYUJSRr/WS6+sEFfBuhxU5V5GlEVKfvUn8JuMHE0wqKowemR1C2aHy8VtXbaV8dQ==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    dependencies:
-      chalk: 4.1.2
-      diff-sequences: 29.6.3
-      jest-get-type: 29.6.3
-      pretty-format: 29.6.3
-    dev: true
-
   /jest-diff@29.7.0:
     resolution: {integrity: sha512-LMIgiIrhigmPrs03JHpxUh2yISK3vLFPkAodPeo0+BuF7wA2FoQbkEg1u8gBYBThncu7e1oEDUfIXVuTqLRUjw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -6750,13 +6741,13 @@ packages:
       language-subtag-registry: 0.3.22
     dev: true
 
-  /lerna@7.1.5:
-    resolution: {integrity: sha512-5bvfmoIH4Czk5mdoLaRPYkM3M63Ei6+TOuXs3MgXmvqD8vs+vQpHuBVmiYFp5Mwsck3FkidJ+eTxfucltA2Lmw==}
+  /lerna@7.2.0:
+    resolution: {integrity: sha512-E13iAY4Tdo+86m4ClAe0j0bP7f8QG2neJReglILPOe+gAOoX17TGqEWanmkDELlUXOrTTwnte0ewc6I6/NOqpg==}
     engines: {node: ^14.17.0 || >=16.0.0}
     hasBin: true
     dependencies:
-      '@lerna/child-process': 7.1.5
-      '@lerna/create': 7.1.5
+      '@lerna/child-process': 7.2.0
+      '@lerna/create': 7.2.0
       '@npmcli/run-script': 6.0.2
       '@nx/devkit': 16.5.5(nx@16.5.5)
       '@octokit/plugin-enterprise-rest': 6.0.1
@@ -6787,7 +6778,7 @@ packages:
       inquirer: 8.2.4
       is-ci: 3.0.1
       is-stream: 2.0.0
-      jest-diff: 29.6.3
+      jest-diff: 29.7.0
       js-yaml: 4.1.0
       libnpmaccess: 7.0.2
       libnpmpublish: 7.3.0
@@ -8214,15 +8205,6 @@ packages:
     resolution: {integrity: sha512-o2YR9qtniXvwEZlOKbveKfDQVyqxbEIWn48Z8m3ZJjBjcCmUy3xZGIv+7AkaeuaTr6yPXJjwv07ZWlsWbEy1rQ==}
     engines: {node: '>=14'}
     hasBin: true
-    dev: true
-
-  /pretty-format@29.6.3:
-    resolution: {integrity: sha512-ZsBgjVhFAj5KeK+nHfF1305/By3lechHQSMWCTl8iHSbfOm2TN5nHEtFc/+W7fAyUeCs2n5iow72gld4gW0xDw==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    dependencies:
-      '@jest/schemas': 29.6.3
-      ansi-styles: 5.2.0
-      react-is: 18.2.0
     dev: true
 
   /pretty-format@29.7.0:
