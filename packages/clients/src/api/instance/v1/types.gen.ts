@@ -1051,6 +1051,8 @@ export type ListServersRequest = {
    * them).
    */
   privateNetworks?: string[]
+  /** List Instances associated with the given private NIC MAC address. */
+  privateNicMacAddress?: string
 }
 
 export type DeleteServerRequest = {

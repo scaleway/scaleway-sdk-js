@@ -323,6 +323,7 @@ export class API extends ParentAPI {
               ? request.privateNetworks.join(',')
               : undefined,
           ],
+          ['private_nic_mac_address', request.privateNicMacAddress],
           ['project', request.project],
           ['state', request.state],
           [
