@@ -168,13 +168,22 @@ export interface OfferProduct {
   name: string
   /** Product option. */
   option: boolean
+  /** Limit number of email accounts. */
   emailAccountsQuota: number
+  /** Limit quantity of email storage in gigabytes. */
   emailStorageQuota: number
+  /** Limit number of databases. */
   databasesQuota: number
+  /** Limit quantity of hosting storage in gigabytes. */
   hostingStorageQuota: number
+  /** Whether or not support is included. */
   supportIncluded: boolean
+  /** Limit number of virtual CPU. */
   vCpu: number
+  /** Limit quantity of memory in gigabytes. */
   ram: number
+  /** Limit number of add-on domains. */
+  maxAddonDomains: number
 }
 
 export type CreateHostingRequest = {
