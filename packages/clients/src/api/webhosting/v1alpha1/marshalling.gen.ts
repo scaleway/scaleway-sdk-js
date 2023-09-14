@@ -57,6 +57,7 @@ const unmarshalOfferProduct = (data: unknown) => {
     emailAccountsQuota: data.email_accounts_quota,
     emailStorageQuota: data.email_storage_quota,
     hostingStorageQuota: data.hosting_storage_quota,
+    maxAddonDomains: data.max_addon_domains,
     name: data.name,
     option: data.option,
     ram: data.ram,
