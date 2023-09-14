@@ -87,7 +87,11 @@ export type VolumeServerState =
   | 'saving'
   | 'hotsyncing'
 
-export type VolumeServerVolumeType = 'l_ssd' | 'b_ssd'
+export type VolumeServerVolumeType =
+  | 'l_ssd'
+  | 'b_ssd'
+  | 'sbs_volume'
+  | 'scratch'
 
 export type VolumeState =
   | 'available'
@@ -98,7 +102,12 @@ export type VolumeState =
   | 'saving'
   | 'hotsyncing'
 
-export type VolumeVolumeType = 'l_ssd' | 'b_ssd' | 'unified' | 'scratch'
+export type VolumeVolumeType =
+  | 'l_ssd'
+  | 'b_ssd'
+  | 'unified'
+  | 'scratch'
+  | 'sbs_volume'
 
 /** Bootscript. */
 export interface Bootscript {
