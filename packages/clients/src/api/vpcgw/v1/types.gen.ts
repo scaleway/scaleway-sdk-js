@@ -545,12 +545,16 @@ export type CreateGatewayNetworkRequest = {
   gatewayId: string
   /** Private Network to connect. */
   privateNetworkId: string
-  /** Defines whether to enable masquerade (dynamic NAT) on this network. */
+  /**
+   * Defines whether to enable masquerade (dynamic NAT) on the GatewayNetwork.
+   * Note: this setting is ignored when passing `ipam_config`.
+   */
   enableMasquerade: boolean
   /**
    * Defines whether to enable DHCP on this Private Network. Defaults to `true`
    * if either `dhcp_id` or `dhcp` are present. If set to `true`, either
-   * `dhcp_id` or `dhcp` must be present.
+   * `dhcp_id` or `dhcp` must be present. Note: this setting is ignored when
+   * passing `ipam_config`.
    */
   enableDhcp?: boolean
   /**
@@ -592,9 +596,16 @@ export type UpdateGatewayNetworkRequest = {
   zone?: Zone
   /** ID of the GatewayNetwork to update. */
   gatewayNetworkId: string
-  /** Defines whether to enable masquerade (dynamic NAT) on the GatewayNetwork. */
+  /**
+   * Defines whether to enable masquerade (dynamic NAT) on the GatewayNetwork.
+   * Note: this setting is ignored when passing `ipam_config`.
+   */
   enableMasquerade?: boolean
-  /** Defines whether to enable DHCP on the connected Private Network. */
+  /**
+   * Defines whether to enable DHCP on this Private Network. Defaults to `true`
+   * if `dhcp_id` is present. If set to `true`, `dhcp_id` must be present. Note:
+   * this setting is ignored when passing `ipam_config`.
+   */
   enableDhcp?: boolean
   /**
    * ID of the new DHCP configuration object to use with this GatewayNetwork.
@@ -611,7 +622,11 @@ export type UpdateGatewayNetworkRequest = {
    */
   address?: string
   /**
-   * New IPAM configuration to use for this GatewayNetwork.
+   * Auto-configure the GatewayNetwork using Scaleway's IPAM (IP address
+   * management service). Note: all or none of the GatewayNetworks for a single
+   * gateway can use the IPAM. DHCP and IPAM configurations cannot be mixed.
+   * Some products may require that the Public Gateway uses the IPAM, to ensure
+   * correct functionality.
    *
    * One-of ('ipConfig'): at most one of 'dhcpId', 'address', 'ipamConfig' could
    * be set.
