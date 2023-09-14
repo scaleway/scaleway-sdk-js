@@ -1636,6 +1636,11 @@ export type ListIpsRequest = {
   perPage?: number
   /** A positive integer to choose the page to return. */
   page?: number
+  /**
+   * Filter on the IP Mobility IP type (whose value should be either 'nat',
+   * 'routed_ipv4' or 'routed_ipv6').
+   */
+  type?: string
 }
 
 export type CreateIpRequest = {
