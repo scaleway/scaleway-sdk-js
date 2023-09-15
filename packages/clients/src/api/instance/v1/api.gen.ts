@@ -1420,6 +1420,7 @@ export class API extends ParentAPI {
               ? request.tags.join(',')
               : undefined,
           ],
+          ['type', request.type],
         ),
       },
       unmarshalListIpsResponse,
