@@ -15,14 +15,16 @@ export type PaginatedFetcher<
 export type PaginatedContent<
   K extends string,
   T = unknown,
-> = PaginatedResponse & {
+> = PaginatedResponse & ({
   [key in K]: T[]
-}
+} | {
+    [key in K]: Record<string, T>
+  })
 
 export const extract =
   <K extends string>(key: K) =>
-  <T extends PaginatedContent<K>>(result: T) =>
-    result[key]
+    <T extends PaginatedContent<K>>(result: T) =>
+      result[key]
 
 function* pages<
   K extends string,
@@ -34,17 +36,23 @@ function* pages<
   request: R,
   firstPage: T,
 ): Generator<Promise<T[K]>, void, void> {
-  if (!Array.isArray(firstPage[key])) {
+  const isArray = Array.isArray(firstPage[key])
+  const isObject = !isArray && typeof firstPage[key] === 'object'
+  if (!isArray && !isObject) {
     throw new Error(`Property ${key} is not a list in paginated result`)
   }
+
   const getList = extract(key)
   let page = request.page || 1
   if (page === 1) {
     yield Promise.resolve(getList(firstPage))
     page += 1
   }
-  const { length } = firstPage[key]
-  if (!length) return
+
+  const length = isArray
+    ? (firstPage[key] as unknown[]).length
+    : Object.keys(firstPage[key] as Record<string, unknown>).length
+
   const { totalCount } = firstPage
   while (page <= Math.floor((totalCount + length - 1) / length)) {
     yield fetcher({ ...request, page }).then(getList)
