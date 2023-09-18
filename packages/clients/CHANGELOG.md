@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.31.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.30.0...@scaleway/sdk@1.31.0) (2023-09-18)
+
+### Features
+
+- **cockpit:** add traces permission to token ([#854](https://github.com/scaleway/scaleway-sdk-js/issues/854)) ([f71cea6](https://github.com/scaleway/scaleway-sdk-js/commit/f71cea629b1625df1999298582f116b487e2eca6))
+- **instance:** add field private_nic_mac_address for ListServersRequest ([#858](https://github.com/scaleway/scaleway-sdk-js/issues/858)) ([322717c](https://github.com/scaleway/scaleway-sdk-js/commit/322717c9310265fd57d6d0df8edbedfa2707bc71))
+- **instance:** add new sbs_volume and scratch volumes types ([#857](https://github.com/scaleway/scaleway-sdk-js/issues/857)) ([e4e2f29](https://github.com/scaleway/scaleway-sdk-js/commit/e4e2f29c4bafa8dbb43ddcde8efd9eca0bfa0b97))
+- **instance:** added field type for ListIpsRequest ([#870](https://github.com/scaleway/scaleway-sdk-js/issues/870)) ([efaf8c6](https://github.com/scaleway/scaleway-sdk-js/commit/efaf8c688c9fe3d13e8c0262cb7815c971076fc2))
+- **webhosting:** add addon domains limit to Product ([#868](https://github.com/scaleway/scaleway-sdk-js/issues/868)) ([f2c6d4a](https://github.com/scaleway/scaleway-sdk-js/commit/f2c6d4a4a5225e07a12edb2aa460f4cb29c68f98))
+
 ## [1.30.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.29.0...@scaleway/sdk@1.30.0) (2023-09-12)
 
 ### Features
