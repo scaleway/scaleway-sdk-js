@@ -1180,6 +1180,7 @@ export type ListSnapshotsRequest = {
   name?: string
   project?: string
   tags?: string
+  baseVolumeId?: string
 }
 
 export type CreateSnapshotRequest = {

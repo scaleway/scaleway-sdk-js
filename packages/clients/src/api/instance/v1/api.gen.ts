@@ -633,6 +633,7 @@ export class API extends ParentAPI {
           request.zone ?? this.client.settings.defaultZone,
         )}/snapshots`,
         urlParams: urlParams(
+          ['base_volume_id', request.baseVolumeId],
           ['name', request.name],
           ['organization', request.organization],
           ['page', request.page],
