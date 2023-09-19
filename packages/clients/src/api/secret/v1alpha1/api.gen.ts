@@ -253,7 +253,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List secrets. Retrieve the list of folders created within a Project.
+   * List folders. Retrieve the list of folders created within a Project.
    *
    * @param request - The request {@link ListFoldersRequest}
    * @returns A Promise of ListFoldersResponse
