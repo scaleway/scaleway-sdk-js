@@ -243,10 +243,7 @@ export class API extends ParentAPI {
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['path', request.path],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
         ),
       },
       unmarshalListFoldersResponse,
