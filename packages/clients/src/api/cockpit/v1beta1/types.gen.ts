@@ -10,6 +10,13 @@ export type CockpitStatus =
   | 'updating'
   | 'error'
 
+export type DatasourceType =
+  | 'unknown_datasource_type'
+  | 'metrics'
+  | 'logs'
+  | 'traces'
+  | 'alerts'
+
 export type GrafanaUserRole = 'unknown_role' | 'editor' | 'viewer'
 
 export type ListGrafanaUsersRequestOrderBy = 'login_asc' | 'login_desc'
@@ -72,6 +79,20 @@ export interface ContactPoint {
 
 export interface ContactPointEmail {
   to: string
+}
+
+/** Datasource. */
+export interface Datasource {
+  /** ID of the datasource. */
+  id: string
+  /** ID of the Project the Cockpit belongs to. */
+  projectId: string
+  /** Datasource name. */
+  name: string
+  /** Datasource URL. */
+  url: string
+  /** Datasource type. */
+  type: DatasourceType
 }
 
 /** Grafana user. */
@@ -215,6 +236,15 @@ export type DeactivateCockpitRequest = {
 export type ResetCockpitGrafanaRequest = {
   /** ID of the Project the Cockpit belongs to. */
   projectId?: string
+}
+
+export type CreateDatasourceRequest = {
+  /** ID of the Project the Cockpit belongs to. */
+  projectId?: string
+  /** Datasource name. */
+  name: string
+  /** Datasource type. */
+  type?: DatasourceType
 }
 
 export type CreateTokenRequest = {

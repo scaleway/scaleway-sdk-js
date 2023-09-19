@@ -17,8 +17,10 @@ import type {
   ContactPoint,
   ContactPointEmail,
   CreateContactPointRequest,
+  CreateDatasourceRequest,
   CreateGrafanaUserRequest,
   CreateTokenRequest,
+  Datasource,
   DeactivateCockpitRequest,
   DeleteContactPointRequest,
   DeleteGrafanaUserRequest,
@@ -179,6 +181,22 @@ export const unmarshalCockpitMetrics = (data: unknown) => {
   } as CockpitMetrics
 }
 
+export const unmarshalDatasource = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Datasource' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    name: data.name,
+    projectId: data.project_id,
+    type: data.type,
+    url: data.url,
+  } as Datasource
+}
+
 export const unmarshalListContactPointsResponse = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -300,6 +318,15 @@ export const marshalCreateContactPointRequest = (
     ? marshalContactPoint(request.contactPoint, defaults)
     : undefined,
   project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
+export const marshalCreateDatasourceRequest = (
+  request: CreateDatasourceRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  type: request.type ?? 'unknown_datasource_type',
 })
 
 export const marshalCreateGrafanaUserRequest = (
