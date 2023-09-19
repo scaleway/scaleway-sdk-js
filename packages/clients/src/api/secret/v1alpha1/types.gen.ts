@@ -286,7 +286,7 @@ export type ListFoldersRequest = {
    * config.
    */
   region?: Region
-  /** ID of the Project. */
+  /** Filter by Project ID (optional). */
   projectId?: string
   /** Filter by path (optional). */
   path?: string
