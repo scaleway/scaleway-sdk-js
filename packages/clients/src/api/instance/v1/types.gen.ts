@@ -1174,12 +1174,22 @@ export type DeleteImageRequest = {
 export type ListSnapshotsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
+  /** List snapshots only for this Organization ID. */
   organization?: string
-  perPage?: number
-  page?: number
-  name?: string
+  /** List snapshots only for this Project ID. */
   project?: string
+  /**
+   * Number of snapshots returned per page (positive integer lower or equal to
+   * 100).
+   */
+  perPage?: number
+  /** Page to be returned. */
+  page?: number
+  /** List snapshots of the requested name. */
+  name?: string
+  /** List snapshots that have the requested tag. */
   tags?: string
+  /** List snapshots originating only from this volume. */
   baseVolumeId?: string
 }
 
