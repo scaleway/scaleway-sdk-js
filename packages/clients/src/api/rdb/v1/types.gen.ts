@@ -120,7 +120,7 @@ export type SnapshotStatus =
   | 'error'
   | 'locked'
 
-export type VolumeType = 'lssd' | 'bssd'
+export type VolumeType = 'lssd' | 'bssd' | 'sbs'
 
 export interface ACLRule {
   ip: string
