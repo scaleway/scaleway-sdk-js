@@ -763,6 +763,8 @@ export interface ListSubscriberResponse {
 export interface PrivateNetwork {
   /** Load Balancer object which is attached to the Private Network. */
   lb?: Lb
+  /** IPAM IDs of the booked IP addresses. */
+  ipamIds: string[]
   /**
    * @deprecated Object containing an array of a local IP address for the Load
    *   Balancer on this Private Network.
@@ -772,10 +774,10 @@ export interface PrivateNetwork {
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
-   * Object containing DHCP-assigned IP addresses.
+   * @deprecated Object containing DHCP-assigned IP addresses.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
   /**
@@ -796,6 +798,7 @@ export interface PrivateNetwork {
 }
 
 export interface PrivateNetworkDHCPConfig {
+  /** @deprecated */
   ipId?: string
 }
 
@@ -1978,10 +1981,10 @@ export type AttachPrivateNetworkRequest = {
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
-   * Defines whether to let DHCP assign IP addresses.
+   * @deprecated Defines whether to let DHCP assign IP addresses.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
   /**
@@ -2945,10 +2948,10 @@ export type ZonedApiAttachPrivateNetworkRequest = {
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
-   * Defines whether to let DHCP assign IP addresses.
+   * @deprecated Defines whether to let DHCP assign IP addresses.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
   /**

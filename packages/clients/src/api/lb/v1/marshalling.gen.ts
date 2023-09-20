@@ -570,6 +570,7 @@ export const unmarshalPrivateNetwork = (data: unknown) => {
     ipamConfig: data.ipam_config
       ? unmarshalPrivateNetworkIpamConfig(data.ipam_config)
       : undefined,
+    ipamIds: data.ipam_ids,
     lb: data.lb ? unmarshalLb(data.lb) : undefined,
     privateNetworkId: data.private_network_id,
     staticConfig: data.static_config
