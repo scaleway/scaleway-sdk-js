@@ -105,6 +105,7 @@ export class API extends ParentAPI {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
+          ['private_network_id', request.privateNetworkId],
           ['project_id', request.projectId],
           ['status', request.status ?? 'unknown'],
           ['type', request.type],

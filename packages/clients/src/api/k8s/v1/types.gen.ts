@@ -771,6 +771,11 @@ export type ListClustersRequest = {
   status?: ClusterStatus
   /** Type to filter on, only clusters with this type will be returned. */
   type?: string
+  /**
+   * Private Network ID to filter on, only clusters within this Private Network
+   * will be returned.
+   */
+  privateNetworkId?: string
 }
 
 export type CreateClusterRequest = {
