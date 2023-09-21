@@ -2,18 +2,9 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Region } from '../../../bridge'
 
-export type ListNamesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
-
 export type ListPinsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type ListVolumesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
-
-export type NameStatus =
-  | 'unknown_status'
-  | 'queued'
-  | 'publishing'
-  | 'failed'
-  | 'published'
 
 export type PinDetails =
   | 'unknown_details'
@@ -45,20 +36,6 @@ export type PinStatus =
   | 'failed'
   | 'pinned'
 
-export interface ExportKeyNameResponse {
-  nameId: string
-  projectId: string
-  createdAt?: Date
-  updatedAt?: Date
-  publicKey: string
-  privateKey: string
-}
-
-export interface ListNamesResponse {
-  names: Name[]
-  totalCount: number
-}
-
 export interface ListPinsResponse {
   totalCount: number
   pins: Pin[]
@@ -67,18 +44,6 @@ export interface ListPinsResponse {
 export interface ListVolumesResponse {
   volumes: Volume[]
   totalCount: number
-}
-
-export interface Name {
-  nameId: string
-  projectId: string
-  createdAt?: Date
-  updatedAt?: Date
-  tags: string[]
-  name: string
-  key: string
-  status: NameStatus
-  value: string
 }
 
 export interface Pin {
@@ -253,79 +218,4 @@ export type DeletePinRequest = {
   region?: Region
   pinId: string
   volumeId: string
-}
-
-export type CreateNameRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  projectId?: string
-  name: string
-  value: string
-}
-
-export type GetNameRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  nameId: string
-}
-
-export type DeleteNameRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  nameId: string
-}
-
-export type ListNamesRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  page?: number
-  pageSize?: number
-  orderBy?: ListNamesRequestOrderBy
-  projectId?: string
-  organizationId?: string
-}
-
-export type UpdateNameRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  nameId: string
-  name?: string
-  tags?: string[]
-  value?: string
-}
-
-export type ExportKeyNameRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  nameId: string
-}
-
-export type ImportKeyNameRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  projectId?: string
-  name: string
-  privateKey: string
-  value: string
 }
