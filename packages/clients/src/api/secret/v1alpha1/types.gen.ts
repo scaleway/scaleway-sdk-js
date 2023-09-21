@@ -434,7 +434,11 @@ export type GetSecretVersionRequest = {
   secretId: string
   /**
    * Version number. The first version of the secret is numbered 1, and all
-   * subsequent revisions augment by 1. Value can be a number or "latest".
+   * subsequent revisions augment by 1. Value can be either:
+   *
+   * - A number (the revision number)
+   * - "latest" (the latest revision)
+   * - "latest_enabled" (the latest enabled revision).
    */
   revision: string
 }
@@ -449,7 +453,11 @@ export type GetSecretVersionByNameRequest = {
   secretName: string
   /**
    * Version number. The first version of the secret is numbered 1, and all
-   * subsequent revisions augment by 1. Value can be a number or "latest".
+   * subsequent revisions augment by 1. Value can be either:
+   *
+   * - A number (the revision number)
+   * - "latest" (the latest revision)
+   * - "latest_enabled" (the latest enabled revision).
    */
   revision: string
   /**
@@ -469,7 +477,11 @@ export type UpdateSecretVersionRequest = {
   secretId: string
   /**
    * Version number. The first version of the secret is numbered 1, and all
-   * subsequent revisions augment by 1. Value can be a number or "latest".
+   * subsequent revisions augment by 1. Value can be either:
+   *
+   * - A number (the revision number)
+   * - "latest" (the latest revision)
+   * - "latest_enabled" (the latest enabled revision).
    */
   revision: string
   /** Description of the version. */
@@ -519,7 +531,11 @@ export type EnableSecretVersionRequest = {
   secretId: string
   /**
    * Version number. The first version of the secret is numbered 1, and all
-   * subsequent revisions augment by 1. Value can be a number or "latest".
+   * subsequent revisions augment by 1. Value can be either:
+   *
+   * - A number (the revision number)
+   * - "latest" (the latest revision)
+   * - "latest_enabled" (the latest enabled revision).
    */
   revision: string
 }
@@ -534,7 +550,11 @@ export type DisableSecretVersionRequest = {
   secretId: string
   /**
    * Version number. The first version of the secret is numbered 1, and all
-   * subsequent revisions augment by 1. Value can be a number or "latest".
+   * subsequent revisions augment by 1. Value can be either:
+   *
+   * - A number (the revision number)
+   * - "latest" (the latest revision)
+   * - "latest_enabled" (the latest enabled revision).
    */
   revision: string
 }
@@ -549,7 +569,11 @@ export type AccessSecretVersionRequest = {
   secretId: string
   /**
    * Version number. The first version of the secret is numbered 1, and all
-   * subsequent revisions augment by 1. Value can be a number or "latest".
+   * subsequent revisions augment by 1. Value can be either:
+   *
+   * - A number (the revision number)
+   * - "latest" (the latest revision)
+   * - "latest_enabled" (the latest enabled revision).
    */
   revision: string
 }
@@ -564,7 +588,11 @@ export type AccessSecretVersionByNameRequest = {
   secretName: string
   /**
    * Version number. The first version of the secret is numbered 1, and all
-   * subsequent revisions augment by 1. Value can be a number or "latest".
+   * subsequent revisions augment by 1. Value can be either:
+   *
+   * - A number (the revision number)
+   * - "latest" (the latest revision)
+   * - "latest_enabled" (the latest enabled revision).
    */
   revision: string
   /**
@@ -584,7 +612,11 @@ export type DestroySecretVersionRequest = {
   secretId: string
   /**
    * Version number. The first version of the secret is numbered 1, and all
-   * subsequent revisions augment by 1. Value can be a number or "latest".
+   * subsequent revisions augment by 1. Value can be either:
+   *
+   * - A number (the revision number)
+   * - "latest" (the latest revision)
+   * - "latest_enabled" (the latest enabled revision).
    */
   revision: string
 }
