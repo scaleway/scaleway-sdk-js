@@ -7,16 +7,11 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
-  CreateNameRequest,
   CreatePinByCIDRequest,
   CreatePinByURLRequest,
   CreateVolumeRequest,
-  ExportKeyNameResponse,
-  ImportKeyNameRequest,
-  ListNamesResponse,
   ListPinsResponse,
   ListVolumesResponse,
-  Name,
   Pin,
   PinCID,
   PinCIDMeta,
@@ -24,7 +19,6 @@ import type {
   PinOptions,
   ReplacePinRequest,
   ReplacePinResponse,
-  UpdateNameRequest,
   UpdateVolumeRequest,
   Volume,
 } from './types.gen'
@@ -70,26 +64,6 @@ const unmarshalPinInfo = (data: unknown) => {
   } as PinInfo
 }
 
-export const unmarshalName = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Name' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    createdAt: unmarshalDate(data.created_at),
-    key: data.key,
-    name: data.name,
-    nameId: data.name_id,
-    projectId: data.project_id,
-    status: data.status,
-    tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
-    value: data.value,
-  } as Name
-}
-
 export const unmarshalPin = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -125,36 +99,6 @@ export const unmarshalVolume = (data: unknown) => {
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
   } as Volume
-}
-
-export const unmarshalExportKeyNameResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ExportKeyNameResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    createdAt: unmarshalDate(data.created_at),
-    nameId: data.name_id,
-    privateKey: data.private_key,
-    projectId: data.project_id,
-    publicKey: data.public_key,
-    updatedAt: unmarshalDate(data.updated_at),
-  } as ExportKeyNameResponse
-}
-
-export const unmarshalListNamesResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListNamesResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    names: unmarshalArrayOfObject(data.names, unmarshalName),
-    totalCount: data.total_count,
-  } as ListNamesResponse
 }
 
 export const unmarshalListPinsResponse = (data: unknown) => {
@@ -203,15 +147,6 @@ const marshalPinOptions = (
   required_zones: request.requiredZones,
 })
 
-export const marshalCreateNameRequest = (
-  request: CreateNameRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  name: request.name,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-  value: request.value,
-})
-
 export const marshalCreatePinByCIDRequest = (
   request: CreatePinByCIDRequest,
   defaults: DefaultValues,
@@ -245,16 +180,6 @@ export const marshalCreateVolumeRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
-export const marshalImportKeyNameRequest = (
-  request: ImportKeyNameRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  name: request.name,
-  private_key: request.privateKey,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-  value: request.value,
-})
-
 export const marshalReplacePinRequest = (
   request: ReplacePinRequest,
   defaults: DefaultValues,
@@ -266,15 +191,6 @@ export const marshalReplacePinRequest = (
     ? marshalPinOptions(request.pinOptions, defaults)
     : undefined,
   volume_id: request.volumeId,
-})
-
-export const marshalUpdateNameRequest = (
-  request: UpdateNameRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  name: request.name,
-  tags: request.tags,
-  value: request.value,
 })
 
 export const marshalUpdateVolumeRequest = (
