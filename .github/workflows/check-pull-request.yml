@@ -19,7 +19,7 @@ jobs:
       - run: pnpm install
       - name: Check title
         run: |
-          title=$(cat <<- 'EOF' | sed "s/'/'\"'\"'/g"
+          title=$(cat <<- "EOF"
           ${{ github.event.pull_request.title }}
           EOF
           )
