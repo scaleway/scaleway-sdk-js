@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.32.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.31.0...@scaleway/sdk@1.32.0) (2023-09-25)
+
+### Features
+
+- add missing special secret version revision ([#882](https://github.com/scaleway/scaleway-sdk-js/issues/882)) ([2042c38](https://github.com/scaleway/scaleway-sdk-js/commit/2042c383e23dcd4b0a14d7a52fa0c6f944f13585))
+- **cockpit:** create datasource ([#875](https://github.com/scaleway/scaleway-sdk-js/issues/875)) ([ab1e2a7](https://github.com/scaleway/scaleway-sdk-js/commit/ab1e2a75cf387b047c58712287c971c559d1a13f))
+- **instance:** add base_volume_id filter on ListSnapshotsRequest ([#874](https://github.com/scaleway/scaleway-sdk-js/issues/874)) ([7b96fae](https://github.com/scaleway/scaleway-sdk-js/commit/7b96faea308ebe21f21e7acb3cefb5466249aa9d))
+- **ipfs:** remove name resource ([#883](https://github.com/scaleway/scaleway-sdk-js/issues/883)) ([086e2a6](https://github.com/scaleway/scaleway-sdk-js/commit/086e2a63c6d497519d2e795d35dc364b11aad3d1))
+- **k8s:** add filter on PrivateNetworkID ([#880](https://github.com/scaleway/scaleway-sdk-js/issues/880)) ([01b010a](https://github.com/scaleway/scaleway-sdk-js/commit/01b010acc38adda04168ac3d54462f57c227f8a3))
+- **lb:** release private lb feature ([#879](https://github.com/scaleway/scaleway-sdk-js/issues/879)) ([76a1c30](https://github.com/scaleway/scaleway-sdk-js/commit/76a1c306be7195efe8c8cbe5d1f0e6aa3a485b7b))
+- **rdb:** add sbs volume type ([#881](https://github.com/scaleway/scaleway-sdk-js/issues/881)) ([38af291](https://github.com/scaleway/scaleway-sdk-js/commit/38af2918f076cb5799aa68f4a3a0cdb59b066f7b))
+
 ## [1.31.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.30.0...@scaleway/sdk@1.31.0) (2023-09-18)
 
 ### Features
