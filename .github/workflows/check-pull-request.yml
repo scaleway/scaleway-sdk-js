@@ -19,10 +19,10 @@ jobs:
       - run: pnpm install
       - name: Check title
         run: |
-          title_escaped='${${{ github.event.pull_request.title }}//\'/\'}'
+          title=$(echo "${{ github.event.pull_request.title }}" | sed "s/'/\\\'/g")
           if [ "$title" == "feat: update generated APIs" ]; then
             echo "Invalid title."
             exit 1
           else
-            echo "$title_escaped" | pnpm commitlint
+            echo "$title" | pnpm commitlint
           fi
