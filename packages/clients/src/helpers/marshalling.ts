@@ -44,7 +44,7 @@ export const resolveOneOf = <T>(
   const elt =
     list.find(obj => obj.value !== undefined) ||
     list.find(obj => obj.default !== undefined)
-  const value = elt?.value !== undefined ? elt.value : elt?.default
+  const value = elt?.value ?? elt?.default
   if (elt && value !== undefined) return { [elt.param]: value }
   if (isRequired) {
     const keyList = list.map(obj => obj.param).join(' or ')
