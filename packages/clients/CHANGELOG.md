@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.32.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.32.0...@scaleway/sdk@1.32.1) (2023-09-26)
+
+### Bug Fixes
+
+- resolveOneOf should work with false value ([#889](https://github.com/scaleway/scaleway-sdk-js/issues/889)) ([b84bf30](https://github.com/scaleway/scaleway-sdk-js/commit/b84bf3086b3c3d27bc9a4e07c497aac19486d64b))
+
 ## [1.32.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.31.0...@scaleway/sdk@1.32.0) (2023-09-25)
 
 ### Features
