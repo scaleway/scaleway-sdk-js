@@ -42,7 +42,7 @@ export const resolveOneOf = <T>(
   isRequired = false,
 ): Record<string, T> => {
   const elt =
-    list.find(obj => obj.value !== undefined) ||
+    list.find(obj => obj.value !== undefined) ??
     list.find(obj => obj.default !== undefined)
   const value = elt?.value ?? elt?.default
   if (elt && value !== undefined) {
