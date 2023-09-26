@@ -41,9 +41,14 @@ export const resolveOneOf = <T>(
   }[],
   isRequired = false,
 ): Record<string, T> => {
-  const elt = list.find(obj => obj.value) || list.find(obj => obj.default)
-  const value = elt?.value || elt?.default
-  if (value) return { [elt.param]: value }
+  const elt =
+    list.find(obj => obj.value !== undefined) ??
+    list.find(obj => obj.default !== undefined)
+  const value = elt?.value ?? elt?.default
+  if (elt && value !== undefined) {
+    return { [elt.param]: value }
+  }
+
   if (isRequired) {
     const keyList = list.map(obj => obj.param).join(' or ')
     throw new TypeError(`one of ${keyList} must be indicated in the request`)

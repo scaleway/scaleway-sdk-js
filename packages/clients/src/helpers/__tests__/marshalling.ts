@@ -158,6 +158,18 @@ describe('resolveOneOf', () => {
       ),
     ).toStrictEqual({})
   })
+
+  it('handles false kind values, like boolean.false', () => {
+    expect(
+      resolveOneOf(
+        [
+          { default: undefined, param: 'my_key_1', value: false },
+          { default: undefined, param: 'my_key_2', value: true },
+        ],
+        false,
+      ),
+    ).toStrictEqual({ my_key_1: false })
+  })
 })
 
 describe('unmarshalDate', () => {
