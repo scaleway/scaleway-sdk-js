@@ -166,6 +166,8 @@ export type ListTasksRequestOrderBy =
   | 'updated_at_asc'
   | 'updated_at_desc'
 
+export type ListTldsRequestOrderBy = 'name_asc' | 'name_desc'
+
 export type RawFormat = 'unknown_raw_format' | 'bind'
 
 export type RenewableDomainStatus =
@@ -650,6 +652,14 @@ export interface ListSSLCertificatesResponse {
 export interface ListTasksResponse {
   totalCount: number
   tasks: Task[]
+}
+
+/** List tlds response. */
+export interface ListTldsResponse {
+  /** Array of TLDs. */
+  tlds: Tld[]
+  /** Total count of TLDs returned. */
+  totalCount: number
 }
 
 export interface Nameserver {
@@ -1331,6 +1341,17 @@ export type RegistrarApiSearchAvailableDomainsRequest = {
   tlds?: string[]
   /** Search exact match. */
   strictSearch: boolean
+}
+
+export type RegistrarApiListTldsRequest = {
+  /** Array of TLDs to return. */
+  tlds?: string[]
+  /** Page number for the returned Projects. */
+  page?: number
+  /** Maximum number of Project per page. */
+  pageSize?: number
+  /** Sort order of the returned TLDs. */
+  orderBy?: ListTldsRequestOrderBy
 }
 
 export type RegistrarApiCreateDomainHostRequest = {

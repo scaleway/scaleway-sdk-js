@@ -73,6 +73,7 @@ import type {
   ListRenewableDomainsResponse,
   ListSSLCertificatesResponse,
   ListTasksResponse,
+  ListTldsResponse,
   Nameserver,
   NewContact,
   OrderResponse,
@@ -1124,6 +1125,19 @@ export const unmarshalListTasksResponse = (data: unknown) => {
     tasks: unmarshalArrayOfObject(data.tasks, unmarshalTask),
     totalCount: data.total_count,
   } as ListTasksResponse
+}
+
+export const unmarshalListTldsResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListTldsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    tlds: unmarshalArrayOfObject(data.tlds, unmarshalTld),
+    totalCount: data.total_count,
+  } as ListTldsResponse
 }
 
 export const unmarshalOrderResponse = (data: unknown) => {
