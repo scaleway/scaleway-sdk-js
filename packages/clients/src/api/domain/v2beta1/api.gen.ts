@@ -58,6 +58,7 @@ import {
   unmarshalListRenewableDomainsResponse,
   unmarshalListSSLCertificatesResponse,
   unmarshalListTasksResponse,
+  unmarshalListTldsResponse,
   unmarshalOrderResponse,
   unmarshalRefreshDNSZoneResponse,
   unmarshalRegisterExternalDomainResponse,
@@ -112,6 +113,7 @@ import type {
   ListSSLCertificatesRequest,
   ListSSLCertificatesResponse,
   ListTasksResponse,
+  ListTldsResponse,
   OrderResponse,
   RefreshDNSZoneRequest,
   RefreshDNSZoneResponse,
@@ -133,6 +135,7 @@ import type {
   RegistrarApiListDomainsRequest,
   RegistrarApiListRenewableDomainsRequest,
   RegistrarApiListTasksRequest,
+  RegistrarApiListTldsRequest,
   RegistrarApiLockDomainTransferRequest,
   RegistrarApiRegisterExternalDomainRequest,
   RegistrarApiRenewDomainsRequest,
@@ -1379,6 +1382,35 @@ export class RegistrarAPI extends ParentAPI {
       },
       unmarshalSearchAvailableDomainsResponse,
     )
+
+  protected pageOfListTlds = (
+    request: Readonly<RegistrarApiListTldsRequest> = {},
+  ) =>
+    this.client.fetch<ListTldsResponse>(
+      {
+        method: 'GET',
+        path: `/domain/v2beta1/tlds`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy ?? 'name_asc'],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['tlds', request.tlds],
+        ),
+      },
+      unmarshalListTldsResponse,
+    )
+
+  /**
+   * List TLD offers. Retrieve the list of TLDs and offers associated with them.
+   *
+   * @param request - The request {@link RegistrarApiListTldsRequest}
+   * @returns A Promise of ListTldsResponse
+   */
+  listTlds = (request: Readonly<RegistrarApiListTldsRequest> = {}) =>
+    enrichForPagination('tlds', this.pageOfListTlds, request)
 
   /**
    * Create a hostname for a domain. Create a hostname for a domain with glue
