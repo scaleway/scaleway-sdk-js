@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.33.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.32.1...@scaleway/sdk@1.33.0) (2023-10-02)
+
+### Features
+
+- **document-db:** set all docs and SDK public ([#890](https://github.com/scaleway/scaleway-sdk-js/issues/890)) ([58f9413](https://github.com/scaleway/scaleway-sdk-js/commit/58f9413634cc7e543cd8da483833806cb96f1fa0))
+- **dom:** add endpoint to list Tlds Offers ([#895](https://github.com/scaleway/scaleway-sdk-js/issues/895)) ([22a5981](https://github.com/scaleway/scaleway-sdk-js/commit/22a59817f83a29a8e64fad31a2bd5a68b430e07a))
+- **sbs:** switch sbs to Private Beta ([#893](https://github.com/scaleway/scaleway-sdk-js/issues/893)) ([0c50515](https://github.com/scaleway/scaleway-sdk-js/commit/0c50515bd6a87b097f4bcdd73dcc99d45aff37d7))
+
 ## [1.32.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.32.0...@scaleway/sdk@1.32.1) (2023-09-26)
 
 ### Bug Fixes
