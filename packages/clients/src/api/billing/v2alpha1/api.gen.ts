@@ -24,6 +24,14 @@ import type {
  * This API allows you to query your consumption. Billing API.
  */
 export class API extends ParentAPI {
+  /**
+   * Get current month's consumption. The consumption reflects the amount of
+   * money you have spent for the products you have used. The consumption value
+   * is monetary and is not computed in real time.
+   *
+   * @param request - The request {@link GetConsumptionRequest}
+   * @returns A Promise of GetConsumptionResponse
+   */
   getConsumption = (request: Readonly<GetConsumptionRequest> = {}) =>
     this.client.fetch<GetConsumptionResponse>(
       {
@@ -60,9 +68,22 @@ export class API extends ParentAPI {
       unmarshalListInvoicesResponse,
     )
 
+  /**
+   * List invoices. List all your invoices, filtering by `start_date` and
+   * `invoice_type`. Each invoice has its own ID.
+   *
+   * @param request - The request {@link ListInvoicesRequest}
+   * @returns A Promise of ListInvoicesResponse
+   */
   listInvoices = (request: Readonly<ListInvoicesRequest> = {}) =>
     enrichForPagination('invoices', this.pageOfListInvoices, request)
 
+  /**
+   * Download an invoice. Download a specific invoice, specified by its ID.
+   *
+   * @param request - The request {@link DownloadInvoiceRequest}
+   * @returns A Promise of Blob
+   */
   downloadInvoice = (request: Readonly<DownloadInvoiceRequest>) =>
     this.client.fetch<Blob>({
       method: 'GET',
