@@ -964,7 +964,7 @@ export type CreateRouteRequest = {
    * matching SNI value or HTTP Host header value), it will be passed to the
    * target backend.
    */
-  match: RouteMatch
+  match?: RouteMatch
 }
 
 /** Create a new alert subscriber (webhook or email). */
@@ -1642,7 +1642,7 @@ export type UpdateRouteRequest = {
    * matching SNI value or HTTP Host header value), it will be passed to the
    * target backend.
    */
-  match: RouteMatch
+  match?: RouteMatch
 }
 
 export type UpdateSubscriberRequest = {
@@ -1911,7 +1911,7 @@ export type ZonedApiCreateRouteRequest = {
    * matching SNI value or HTTP Host header value), it will be passed to the
    * target backend.
    */
-  match: RouteMatch
+  match?: RouteMatch
 }
 
 /** Create a new alert subscriber (webhook or email). */
@@ -2511,7 +2511,7 @@ export type ZonedApiUpdateRouteRequest = {
    * matching SNI value or HTTP Host header value), it will be passed to the
    * target backend.
    */
-  match: RouteMatch
+  match?: RouteMatch
 }
 
 export type ZonedApiUpdateSubscriberRequest = {

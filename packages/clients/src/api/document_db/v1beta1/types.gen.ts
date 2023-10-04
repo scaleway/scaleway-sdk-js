@@ -593,7 +593,7 @@ export type CreateEndpointRequest = {
   /** UUID of the Database Instance you to which you want to add an endpoint. */
   instanceId: string
   /** Specification of the endpoint you want to create. */
-  endpointSpec: EndpointSpec
+  endpointSpec?: EndpointSpec
 }
 
 export type CreateInstanceFromSnapshotRequest = {
@@ -1093,7 +1093,7 @@ export type UpdateInstanceRequest = {
   /** Tags of a Database Instance. */
   tags?: string[]
   /** Logs policy of the Database Instance. */
-  logsPolicy: LogsPolicy
+  logsPolicy?: LogsPolicy
   /** Store logical backups in the same region as the Database Instance. */
   backupSameRegion?: boolean
   /** Defines the start time of the autobackup. */

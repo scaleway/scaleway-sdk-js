@@ -310,7 +310,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateContactPointRequest}
    * @returns A Promise of ContactPoint
    */
-  createContactPoint = (request: Readonly<CreateContactPointRequest>) =>
+  createContactPoint = (request: Readonly<CreateContactPointRequest> = {}) =>
     this.client.fetch<ContactPoint>(
       {
         body: JSON.stringify(
@@ -360,7 +360,7 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteContactPointRequest}
    */
-  deleteContactPoint = (request: Readonly<DeleteContactPointRequest>) =>
+  deleteContactPoint = (request: Readonly<DeleteContactPointRequest> = {}) =>
     this.client.fetch<void>({
       body: JSON.stringify(
         marshalDeleteContactPointRequest(request, this.client.settings),

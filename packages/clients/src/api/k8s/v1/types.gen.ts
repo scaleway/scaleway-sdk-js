@@ -779,7 +779,7 @@ export type CreatePoolRequest = {
    */
   kubeletArgs: Record<string, string>
   /** Pool upgrade policy. */
-  upgradePolicy: CreatePoolRequestUpgradePolicy
+  upgradePolicy?: CreatePoolRequestUpgradePolicy
   /** Zone in which the pool's nodes will be spawned. */
   zone?: Zone
   /**
@@ -1060,7 +1060,7 @@ export type UpdateClusterRequest = {
    * OpenID Connect configuration of the cluster. This configuration enables to
    * update the OpenID Connect configuration of the Kubernetes API server.
    */
-  openIdConnectConfig: UpdateClusterRequestOpenIDConnectConfig
+  openIdConnectConfig?: UpdateClusterRequestOpenIDConnectConfig
   /**
    * Additional Subject Alternative Names for the Kubernetes API server
    * certificate.
@@ -1090,7 +1090,7 @@ export type UpdatePoolRequest = {
    */
   kubeletArgs?: Record<string, string>
   /** New upgrade policy for the pool. */
-  upgradePolicy: UpdatePoolRequestUpgradePolicy
+  upgradePolicy?: UpdatePoolRequestUpgradePolicy
 }
 
 export type UpgradeClusterRequest = {

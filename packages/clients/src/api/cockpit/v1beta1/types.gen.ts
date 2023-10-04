@@ -157,7 +157,7 @@ export type CreateContactPointRequest = {
   /** ID of the Project in which to create the contact point. */
   projectId?: string
   /** Contact point to create. */
-  contactPoint: ContactPoint
+  contactPoint?: ContactPoint
 }
 
 /** Request to create a datasource. */
@@ -213,7 +213,7 @@ export type DeleteContactPointRequest = {
   /** ID of the Project. */
   projectId?: string
   /** Contact point to delete. */
-  contactPoint: ContactPoint
+  contactPoint?: ContactPoint
 }
 
 /** Request to delete a Grafana user. */

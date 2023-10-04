@@ -104,7 +104,7 @@ export type CreateCredentialRequest = {
   /** Name of the credentials. */
   name?: string
   /** Permissions associated with these credentials. */
-  permissions: Permissions
+  permissions?: Permissions
 }
 
 export type CreateNamespaceRequest = {
@@ -214,7 +214,7 @@ export type UpdateCredentialRequest = {
   /** Name of the credentials. */
   name?: string
   /** Permissions associated with these credentials. */
-  permissions: Permissions
+  permissions?: Permissions
 }
 
 export type UpdateNamespaceRequest = {
