@@ -2,7 +2,6 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import {
   isJSONObject,
-  resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
@@ -26,7 +25,7 @@ import type {
   UpdateSecretVersionRequest,
 } from './types.gen'
 
-export const unmarshalFolder = (data: unknown) => {
+export const unmarshalFolder = (data: unknown): Folder => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Folder' failed as data isn't a dictionary.`,
@@ -42,7 +41,25 @@ export const unmarshalFolder = (data: unknown) => {
   } as Folder
 }
 
-export const unmarshalSecret = (data: unknown) => {
+export const unmarshalSecretVersion = (data: unknown): SecretVersion => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SecretVersion' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description,
+    isLatest: data.is_latest,
+    revision: data.revision,
+    secretId: data.secret_id,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as SecretVersion
+}
+
+export const unmarshalSecret = (data: unknown): Secret => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Secret' failed as data isn't a dictionary.`,
@@ -69,25 +86,9 @@ export const unmarshalSecret = (data: unknown) => {
   } as Secret
 }
 
-export const unmarshalSecretVersion = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'SecretVersion' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    createdAt: unmarshalDate(data.created_at),
-    description: data.description,
-    isLatest: data.is_latest,
-    revision: data.revision,
-    secretId: data.secret_id,
-    status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
-  } as SecretVersion
-}
-
-export const unmarshalAccessSecretVersionResponse = (data: unknown) => {
+export const unmarshalAccessSecretVersionResponse = (
+  data: unknown,
+): AccessSecretVersionResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'AccessSecretVersionResponse' failed as data isn't a dictionary.`,
@@ -102,7 +103,9 @@ export const unmarshalAccessSecretVersionResponse = (data: unknown) => {
   } as AccessSecretVersionResponse
 }
 
-export const unmarshalListFoldersResponse = (data: unknown) => {
+export const unmarshalListFoldersResponse = (
+  data: unknown,
+): ListFoldersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListFoldersResponse' failed as data isn't a dictionary.`,
@@ -115,7 +118,9 @@ export const unmarshalListFoldersResponse = (data: unknown) => {
   } as ListFoldersResponse
 }
 
-export const unmarshalListSecretVersionsResponse = (data: unknown) => {
+export const unmarshalListSecretVersionsResponse = (
+  data: unknown,
+): ListSecretVersionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSecretVersionsResponse' failed as data isn't a dictionary.`,
@@ -128,7 +133,9 @@ export const unmarshalListSecretVersionsResponse = (data: unknown) => {
   } as ListSecretVersionsResponse
 }
 
-export const unmarshalListSecretsResponse = (data: unknown) => {
+export const unmarshalListSecretsResponse = (
+  data: unknown,
+): ListSecretsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSecretsResponse' failed as data isn't a dictionary.`,
@@ -141,32 +148,24 @@ export const unmarshalListSecretsResponse = (data: unknown) => {
   } as ListSecretsResponse
 }
 
-export const unmarshalListTagsResponse = (data: unknown) => {
+export const unmarshalListTagsResponse = (data: unknown): ListTagsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListTagsResponse' failed as data isn't a dictionary.`,
     )
   }
 
-  return { tags: data.tags, totalCount: data.total_count } as ListTagsResponse
+  return {
+    tags: data.tags,
+    totalCount: data.total_count,
+  } as ListTagsResponse
 }
-
-const marshalPasswordGenerationParams = (
-  request: PasswordGenerationParams,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  additional_chars: request.additionalChars,
-  length: request.length,
-  no_digits: request.noDigits,
-  no_lowercase_letters: request.noLowercaseLetters,
-  no_uppercase_letters: request.noUppercaseLetters,
-})
 
 export const marshalAddSecretOwnerRequest = (
   request: AddSecretOwnerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  product: request.product ?? 'unknown',
+  product: request.product,
   product_name: request.productName,
 })
 
@@ -190,7 +189,18 @@ export const marshalCreateSecretRequest = (
   path: request.path,
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
-  type: request.type ?? 'unknown_secret_type',
+  type: request.type,
+})
+
+const marshalPasswordGenerationParams = (
+  request: PasswordGenerationParams,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  additional_chars: request.additionalChars,
+  length: request.length,
+  no_digits: request.noDigits,
+  no_lowercase_letters: request.noLowercaseLetters,
+  no_uppercase_letters: request.noUppercaseLetters,
 })
 
 export const marshalCreateSecretVersionRequest = (
@@ -201,14 +211,10 @@ export const marshalCreateSecretVersionRequest = (
   data_crc32: request.dataCrc32,
   description: request.description,
   disable_previous: request.disablePrevious,
-  ...resolveOneOf([
-    {
-      param: 'password_generation',
-      value: request.passwordGeneration
-        ? marshalPasswordGenerationParams(request.passwordGeneration, defaults)
-        : undefined,
-    },
-  ]),
+  password_generation:
+    request.passwordGeneration !== undefined
+      ? marshalPasswordGenerationParams(request.passwordGeneration, defaults)
+      : undefined,
 })
 
 export const marshalGeneratePasswordRequest = (

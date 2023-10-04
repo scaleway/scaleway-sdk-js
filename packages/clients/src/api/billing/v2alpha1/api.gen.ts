@@ -24,7 +24,7 @@ import type {
 /**
  * Billing API.
  *
- * This API allows you to query your consumption. Billing API.
+ * This API allows you to query your consumption.
  */
 export class API extends ParentAPI {
   /**
@@ -56,8 +56,8 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/billing/v2alpha1/invoices`,
         urlParams: urlParams(
-          ['invoice_type', request.invoiceType ?? 'unknown_type'],
-          ['order_by', request.orderBy ?? 'invoice_number_desc'],
+          ['invoice_type', request.invoiceType],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -94,7 +94,7 @@ export class API extends ParentAPI {
         'invoiceId',
         request.invoiceId,
       )}/download`,
-      urlParams: urlParams(['dl', 1], ['file_type', request.fileType ?? 'pdf']),
+      urlParams: urlParams(['dl', 1], ['file_type', request.fileType]),
       responseType: 'blob',
     })
 

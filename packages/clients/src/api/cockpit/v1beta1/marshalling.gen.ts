@@ -44,17 +44,80 @@ import type {
   TriggerTestAlertRequest,
 } from './types.gen'
 
-const unmarshalContactPointEmail = (data: unknown) => {
+const unmarshalContactPointEmail = (data: unknown): ContactPointEmail => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ContactPointEmail' failed as data isn't a dictionary.`,
     )
   }
 
-  return { to: data.to } as ContactPointEmail
+  return {
+    to: data.to,
+  } as ContactPointEmail
 }
 
-const unmarshalTokenScopes = (data: unknown) => {
+export const unmarshalContactPoint = (data: unknown): ContactPoint => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContactPoint' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    email: data.email ? unmarshalContactPointEmail(data.email) : undefined,
+  } as ContactPoint
+}
+
+export const unmarshalDatasource = (data: unknown): Datasource => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Datasource' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    name: data.name,
+    projectId: data.project_id,
+    type: data.type,
+    url: data.url,
+  } as Datasource
+}
+
+export const unmarshalGrafanaProductDashboard = (
+  data: unknown,
+): GrafanaProductDashboard => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GrafanaProductDashboard' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    dashboardName: data.dashboard_name,
+    tags: data.tags,
+    title: data.title,
+    url: data.url,
+    variables: data.variables,
+  } as GrafanaProductDashboard
+}
+
+export const unmarshalGrafanaUser = (data: unknown): GrafanaUser => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GrafanaUser' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    login: data.login,
+    password: data.password,
+    role: data.role,
+  } as GrafanaUser
+}
+
+const unmarshalTokenScopes = (data: unknown): TokenScopes => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'TokenScopes' failed as data isn't a dictionary.`,
@@ -74,7 +137,25 @@ const unmarshalTokenScopes = (data: unknown) => {
   } as TokenScopes
 }
 
-const unmarshalCockpitEndpoints = (data: unknown) => {
+export const unmarshalToken = (data: unknown): Token => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Token' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    projectId: data.project_id,
+    scopes: data.scopes ? unmarshalTokenScopes(data.scopes) : undefined,
+    secretKey: data.secret_key,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as Token
+}
+
+const unmarshalCockpitEndpoints = (data: unknown): CockpitEndpoints => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CockpitEndpoints' failed as data isn't a dictionary.`,
@@ -90,66 +171,7 @@ const unmarshalCockpitEndpoints = (data: unknown) => {
   } as CockpitEndpoints
 }
 
-export const unmarshalContactPoint = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ContactPoint' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    email: data.email ? unmarshalContactPointEmail(data.email) : undefined,
-  } as ContactPoint
-}
-
-export const unmarshalDatasource = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Datasource' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-    name: data.name,
-    projectId: data.project_id,
-    type: data.type,
-    url: data.url,
-  } as Datasource
-}
-
-export const unmarshalGrafanaProductDashboard = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GrafanaProductDashboard' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    dashboardName: data.dashboard_name,
-    tags: data.tags,
-    title: data.title,
-    url: data.url,
-    variables: data.variables,
-  } as GrafanaProductDashboard
-}
-
-export const unmarshalGrafanaUser = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GrafanaUser' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-    login: data.login,
-    password: data.password,
-    role: data.role,
-  } as GrafanaUser
-}
-
-const unmarshalPlan = (data: unknown) => {
+const unmarshalPlan = (data: unknown): Plan => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Plan' failed as data isn't a dictionary.`,
@@ -169,25 +191,7 @@ const unmarshalPlan = (data: unknown) => {
   } as Plan
 }
 
-export const unmarshalToken = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Token' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    createdAt: unmarshalDate(data.created_at),
-    id: data.id,
-    name: data.name,
-    projectId: data.project_id,
-    scopes: data.scopes ? unmarshalTokenScopes(data.scopes) : undefined,
-    secretKey: data.secret_key,
-    updatedAt: unmarshalDate(data.updated_at),
-  } as Token
-}
-
-export const unmarshalCockpit = (data: unknown) => {
+export const unmarshalCockpit = (data: unknown): Cockpit => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Cockpit' failed as data isn't a dictionary.`,
@@ -207,7 +211,7 @@ export const unmarshalCockpit = (data: unknown) => {
   } as Cockpit
 }
 
-export const unmarshalCockpitMetrics = (data: unknown) => {
+export const unmarshalCockpitMetrics = (data: unknown): CockpitMetrics => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CockpitMetrics' failed as data isn't a dictionary.`,
@@ -219,7 +223,9 @@ export const unmarshalCockpitMetrics = (data: unknown) => {
   } as CockpitMetrics
 }
 
-export const unmarshalListContactPointsResponse = (data: unknown) => {
+export const unmarshalListContactPointsResponse = (
+  data: unknown,
+): ListContactPointsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListContactPointsResponse' failed as data isn't a dictionary.`,
@@ -237,7 +243,9 @@ export const unmarshalListContactPointsResponse = (data: unknown) => {
   } as ListContactPointsResponse
 }
 
-export const unmarshalListDatasourcesResponse = (data: unknown) => {
+export const unmarshalListDatasourcesResponse = (
+  data: unknown,
+): ListDatasourcesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListDatasourcesResponse' failed as data isn't a dictionary.`,
@@ -252,7 +260,7 @@ export const unmarshalListDatasourcesResponse = (data: unknown) => {
 
 export const unmarshalListGrafanaProductDashboardsResponse = (
   data: unknown,
-) => {
+): ListGrafanaProductDashboardsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListGrafanaProductDashboardsResponse' failed as data isn't a dictionary.`,
@@ -268,7 +276,9 @@ export const unmarshalListGrafanaProductDashboardsResponse = (
   } as ListGrafanaProductDashboardsResponse
 }
 
-export const unmarshalListGrafanaUsersResponse = (data: unknown) => {
+export const unmarshalListGrafanaUsersResponse = (
+  data: unknown,
+): ListGrafanaUsersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListGrafanaUsersResponse' failed as data isn't a dictionary.`,
@@ -284,7 +294,9 @@ export const unmarshalListGrafanaUsersResponse = (data: unknown) => {
   } as ListGrafanaUsersResponse
 }
 
-export const unmarshalListPlansResponse = (data: unknown) => {
+export const unmarshalListPlansResponse = (
+  data: unknown,
+): ListPlansResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListPlansResponse' failed as data isn't a dictionary.`,
@@ -297,7 +309,9 @@ export const unmarshalListPlansResponse = (data: unknown) => {
   } as ListPlansResponse
 }
 
-export const unmarshalListTokensResponse = (data: unknown) => {
+export const unmarshalListTokensResponse = (
+  data: unknown,
+): ListTokensResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListTokensResponse' failed as data isn't a dictionary.`,
@@ -310,7 +324,9 @@ export const unmarshalListTokensResponse = (data: unknown) => {
   } as ListTokensResponse
 }
 
-export const unmarshalSelectPlanResponse = (data: unknown) => {
+export const unmarshalSelectPlanResponse = (
+  data: unknown,
+): SelectPlanResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SelectPlanResponse' failed as data isn't a dictionary.`,
@@ -319,6 +335,13 @@ export const unmarshalSelectPlanResponse = (data: unknown) => {
 
   return {} as SelectPlanResponse
 }
+
+export const marshalActivateCockpitRequest = (
+  request: ActivateCockpitRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
+})
 
 const marshalContactPointEmail = (
   request: ContactPointEmail,
@@ -334,11 +357,41 @@ const marshalContactPoint = (
   ...resolveOneOf([
     {
       param: 'email',
-      value: request.email
-        ? marshalContactPointEmail(request.email, defaults)
-        : undefined,
+      value:
+        request.email !== undefined
+          ? marshalContactPointEmail(request.email, defaults)
+          : undefined,
     },
   ]),
+})
+
+export const marshalCreateContactPointRequest = (
+  request: CreateContactPointRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  contact_point:
+    request.contactPoint !== undefined
+      ? marshalContactPoint(request.contactPoint, defaults)
+      : undefined,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
+export const marshalCreateDatasourceRequest = (
+  request: CreateDatasourceRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  type: request.type,
+})
+
+export const marshalCreateGrafanaUserRequest = (
+  request: CreateGrafanaUserRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  login: request.login,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  role: request.role,
 })
 
 const marshalTokenScopes = (
@@ -356,50 +409,16 @@ const marshalTokenScopes = (
   write_traces: request.writeTraces,
 })
 
-export const marshalActivateCockpitRequest = (
-  request: ActivateCockpitRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  project_id: request.projectId ?? defaults.defaultProjectId,
-})
-
-export const marshalCreateContactPointRequest = (
-  request: CreateContactPointRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  contact_point: request.contactPoint
-    ? marshalContactPoint(request.contactPoint, defaults)
-    : undefined,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-})
-
-export const marshalCreateDatasourceRequest = (
-  request: CreateDatasourceRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  name: request.name,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-  type: request.type ?? 'unknown_datasource_type',
-})
-
-export const marshalCreateGrafanaUserRequest = (
-  request: CreateGrafanaUserRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  login: request.login,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-  role: request.role ?? 'unknown_role',
-})
-
 export const marshalCreateTokenRequest = (
   request: CreateTokenRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name || randomName('token'),
   project_id: request.projectId ?? defaults.defaultProjectId,
-  scopes: request.scopes
-    ? marshalTokenScopes(request.scopes, defaults)
-    : undefined,
+  scopes:
+    request.scopes !== undefined
+      ? marshalTokenScopes(request.scopes, defaults)
+      : undefined,
 })
 
 export const marshalDeactivateCockpitRequest = (
@@ -413,9 +432,10 @@ export const marshalDeleteContactPointRequest = (
   request: DeleteContactPointRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  contact_point: request.contactPoint
-    ? marshalContactPoint(request.contactPoint, defaults)
-    : undefined,
+  contact_point:
+    request.contactPoint !== undefined
+      ? marshalContactPoint(request.contactPoint, defaults)
+      : undefined,
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 

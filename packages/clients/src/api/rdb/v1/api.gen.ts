@@ -245,7 +245,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['instance_id', request.instanceId],
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -483,7 +483,7 @@ export class API extends ParentAPI {
         )}/instances`,
         urlParams: urlParams(
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -976,7 +976,7 @@ export class API extends ParentAPI {
           'instanceId',
           request.instanceId,
         )}/logs`,
-        urlParams: urlParams(['order_by', request.orderBy ?? 'created_at_asc']),
+        urlParams: urlParams(['order_by', request.orderBy]),
       },
       unmarshalListInstanceLogsResponse,
     )
@@ -1280,7 +1280,7 @@ export class API extends ParentAPI {
         )}/users`,
         urlParams: urlParams(
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'name_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -1390,7 +1390,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['managed', request.managed],
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'name_asc'],
+          ['order_by', request.orderBy],
           ['owner', request.owner],
           ['page', request.page],
           [
@@ -1473,7 +1473,7 @@ export class API extends ParentAPI {
         )}/privileges`,
         urlParams: urlParams(
           ['database_name', request.databaseName],
-          ['order_by', request.orderBy ?? 'user_name_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -1538,7 +1538,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['instance_id', request.instanceId],
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
