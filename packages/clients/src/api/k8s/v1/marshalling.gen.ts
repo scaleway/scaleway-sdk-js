@@ -47,71 +47,7 @@ import type {
   Version,
 } from './types.gen'
 
-const unmarshalMaintenanceWindow = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'MaintenanceWindow' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { day: data.day, startHour: data.start_hour } as MaintenanceWindow
-}
-
-const unmarshalClusterAutoUpgrade = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ClusterAutoUpgrade' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    enabled: data.enabled,
-    maintenanceWindow: data.maintenance_window
-      ? unmarshalMaintenanceWindow(data.maintenance_window)
-      : undefined,
-  } as ClusterAutoUpgrade
-}
-
-const unmarshalClusterAutoscalerConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ClusterAutoscalerConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    balanceSimilarNodeGroups: data.balance_similar_node_groups,
-    estimator: data.estimator,
-    expander: data.expander,
-    expendablePodsPriorityCutoff: data.expendable_pods_priority_cutoff,
-    ignoreDaemonsetsUtilization: data.ignore_daemonsets_utilization,
-    maxGracefulTerminationSec: data.max_graceful_termination_sec,
-    scaleDownDelayAfterAdd: data.scale_down_delay_after_add,
-    scaleDownDisabled: data.scale_down_disabled,
-    scaleDownUnneededTime: data.scale_down_unneeded_time,
-    scaleDownUtilizationThreshold: data.scale_down_utilization_threshold,
-  } as ClusterAutoscalerConfig
-}
-
-const unmarshalClusterOpenIDConnectConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ClusterOpenIDConnectConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    clientId: data.client_id,
-    groupsClaim: data.groups_claim,
-    groupsPrefix: data.groups_prefix,
-    issuerUrl: data.issuer_url,
-    requiredClaim: data.required_claim,
-    usernameClaim: data.username_claim,
-    usernamePrefix: data.username_prefix,
-  } as ClusterOpenIDConnectConfig
-}
-
-const unmarshalPoolUpgradePolicy = (data: unknown) => {
+const unmarshalPoolUpgradePolicy = (data: unknown): PoolUpgradePolicy => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PoolUpgradePolicy' failed as data isn't a dictionary.`,
@@ -124,93 +60,7 @@ const unmarshalPoolUpgradePolicy = (data: unknown) => {
   } as PoolUpgradePolicy
 }
 
-export const unmarshalCluster = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Cluster' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    admissionPlugins: data.admission_plugins,
-    apiserverCertSans: data.apiserver_cert_sans,
-    autoscalerConfig: data.autoscaler_config
-      ? unmarshalClusterAutoscalerConfig(data.autoscaler_config)
-      : undefined,
-    autoUpgrade: data.auto_upgrade
-      ? unmarshalClusterAutoUpgrade(data.auto_upgrade)
-      : undefined,
-    clusterUrl: data.cluster_url,
-    cni: data.cni,
-    commitmentEndsAt: unmarshalDate(data.commitment_ends_at),
-    createdAt: unmarshalDate(data.created_at),
-    dashboardEnabled: data.dashboard_enabled,
-    description: data.description,
-    dnsWildcard: data.dns_wildcard,
-    featureGates: data.feature_gates,
-    id: data.id,
-    ingress: data.ingress,
-    name: data.name,
-    openIdConnectConfig: data.open_id_connect_config
-      ? unmarshalClusterOpenIDConnectConfig(data.open_id_connect_config)
-      : undefined,
-    organizationId: data.organization_id,
-    privateNetworkId: data.private_network_id,
-    projectId: data.project_id,
-    region: data.region,
-    status: data.status,
-    tags: data.tags,
-    type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
-    upgradeAvailable: data.upgrade_available,
-    version: data.version,
-  } as Cluster
-}
-
-const unmarshalClusterType = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ClusterType' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    availability: data.availability,
-    commitmentDelay: data.commitment_delay,
-    dedicated: data.dedicated,
-    maxNodes: data.max_nodes,
-    memory: data.memory,
-    name: data.name,
-    resiliency: data.resiliency,
-    sla: data.sla,
-  } as ClusterType
-}
-
-export const unmarshalNode = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Node' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    clusterId: data.cluster_id,
-    conditions: data.conditions,
-    createdAt: unmarshalDate(data.created_at),
-    errorMessage: data.error_message,
-    id: data.id,
-    name: data.name,
-    poolId: data.pool_id,
-    providerId: data.provider_id,
-    publicIpV4: data.public_ip_v4,
-    publicIpV6: data.public_ip_v6,
-    region: data.region,
-    status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
-  } as Node
-}
-
-export const unmarshalPool = (data: unknown) => {
+export const unmarshalPool = (data: unknown): Pool => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Pool' failed as data isn't a dictionary.`,
@@ -246,7 +96,7 @@ export const unmarshalPool = (data: unknown) => {
   } as Pool
 }
 
-export const unmarshalVersion = (data: unknown) => {
+export const unmarshalVersion = (data: unknown): Version => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Version' failed as data isn't a dictionary.`,
@@ -258,7 +108,9 @@ export const unmarshalVersion = (data: unknown) => {
     availableCnis: data.available_cnis,
     availableContainerRuntimes: data.available_container_runtimes,
     availableFeatureGates: data.available_feature_gates,
-    availableIngresses: data.available_ingresses,
+    availableIngresses: data.available_ingresses
+      ? data.available_ingresses
+      : undefined,
     availableKubeletArgs: data.available_kubelet_args,
     label: data.label,
     name: data.name,
@@ -266,7 +118,145 @@ export const unmarshalVersion = (data: unknown) => {
   } as Version
 }
 
-export const unmarshalExternalNode = (data: unknown) => {
+const unmarshalMaintenanceWindow = (data: unknown): MaintenanceWindow => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'MaintenanceWindow' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    day: data.day,
+    startHour: data.start_hour,
+  } as MaintenanceWindow
+}
+
+const unmarshalClusterAutoUpgrade = (data: unknown): ClusterAutoUpgrade => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ClusterAutoUpgrade' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    enabled: data.enabled,
+    maintenanceWindow: data.maintenance_window
+      ? unmarshalMaintenanceWindow(data.maintenance_window)
+      : undefined,
+  } as ClusterAutoUpgrade
+}
+
+const unmarshalClusterAutoscalerConfig = (
+  data: unknown,
+): ClusterAutoscalerConfig => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ClusterAutoscalerConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    balanceSimilarNodeGroups: data.balance_similar_node_groups,
+    estimator: data.estimator,
+    expander: data.expander,
+    expendablePodsPriorityCutoff: data.expendable_pods_priority_cutoff,
+    ignoreDaemonsetsUtilization: data.ignore_daemonsets_utilization,
+    maxGracefulTerminationSec: data.max_graceful_termination_sec,
+    scaleDownDelayAfterAdd: data.scale_down_delay_after_add,
+    scaleDownDisabled: data.scale_down_disabled,
+    scaleDownUnneededTime: data.scale_down_unneeded_time,
+    scaleDownUtilizationThreshold: data.scale_down_utilization_threshold,
+  } as ClusterAutoscalerConfig
+}
+
+const unmarshalClusterOpenIDConnectConfig = (
+  data: unknown,
+): ClusterOpenIDConnectConfig => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ClusterOpenIDConnectConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    clientId: data.client_id,
+    groupsClaim: data.groups_claim,
+    groupsPrefix: data.groups_prefix,
+    issuerUrl: data.issuer_url,
+    requiredClaim: data.required_claim,
+    usernameClaim: data.username_claim,
+    usernamePrefix: data.username_prefix,
+  } as ClusterOpenIDConnectConfig
+}
+
+export const unmarshalCluster = (data: unknown): Cluster => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Cluster' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    admissionPlugins: data.admission_plugins,
+    apiserverCertSans: data.apiserver_cert_sans,
+    autoUpgrade: data.auto_upgrade
+      ? unmarshalClusterAutoUpgrade(data.auto_upgrade)
+      : undefined,
+    autoscalerConfig: data.autoscaler_config
+      ? unmarshalClusterAutoscalerConfig(data.autoscaler_config)
+      : undefined,
+    clusterUrl: data.cluster_url,
+    cni: data.cni,
+    commitmentEndsAt: unmarshalDate(data.commitment_ends_at),
+    createdAt: unmarshalDate(data.created_at),
+    dashboardEnabled: data.dashboard_enabled,
+    description: data.description,
+    dnsWildcard: data.dns_wildcard,
+    featureGates: data.feature_gates,
+    id: data.id,
+    ingress: data.ingress ? data.ingress : undefined,
+    name: data.name,
+    openIdConnectConfig: data.open_id_connect_config
+      ? unmarshalClusterOpenIDConnectConfig(data.open_id_connect_config)
+      : undefined,
+    organizationId: data.organization_id,
+    privateNetworkId: data.private_network_id,
+    projectId: data.project_id,
+    region: data.region,
+    status: data.status,
+    tags: data.tags,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at),
+    upgradeAvailable: data.upgrade_available,
+    version: data.version,
+  } as Cluster
+}
+
+export const unmarshalNode = (data: unknown): Node => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Node' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    clusterId: data.cluster_id,
+    conditions: data.conditions ? data.conditions : undefined,
+    createdAt: unmarshalDate(data.created_at),
+    errorMessage: data.error_message,
+    id: data.id,
+    name: data.name,
+    poolId: data.pool_id,
+    providerId: data.provider_id,
+    publicIpV4: data.public_ip_v4,
+    publicIpV6: data.public_ip_v6,
+    region: data.region,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as Node
+}
+
+export const unmarshalExternalNode = (data: unknown): ExternalNode => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ExternalNode' failed as data isn't a dictionary.`,
@@ -278,14 +268,35 @@ export const unmarshalExternalNode = (data: unknown) => {
     clusterUrl: data.cluster_url,
     externalIp: data.external_ip,
     id: data.id,
-    kubeletConfig: data.kubelet_config,
     kubeToken: data.kube_token,
+    kubeletConfig: data.kubelet_config,
     name: data.name,
     poolVersion: data.pool_version,
   } as ExternalNode
 }
 
-export const unmarshalListClusterAvailableTypesResponse = (data: unknown) => {
+const unmarshalClusterType = (data: unknown): ClusterType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ClusterType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    availability: data.availability,
+    commitmentDelay: data.commitment_delay,
+    dedicated: data.dedicated,
+    maxNodes: data.max_nodes,
+    memory: data.memory,
+    name: data.name,
+    resiliency: data.resiliency,
+    sla: data.sla,
+  } as ClusterType
+}
+
+export const unmarshalListClusterAvailableTypesResponse = (
+  data: unknown,
+): ListClusterAvailableTypesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListClusterAvailableTypesResponse' failed as data isn't a dictionary.`,
@@ -303,7 +314,7 @@ export const unmarshalListClusterAvailableTypesResponse = (data: unknown) => {
 
 export const unmarshalListClusterAvailableVersionsResponse = (
   data: unknown,
-) => {
+): ListClusterAvailableVersionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListClusterAvailableVersionsResponse' failed as data isn't a dictionary.`,
@@ -315,7 +326,9 @@ export const unmarshalListClusterAvailableVersionsResponse = (
   } as ListClusterAvailableVersionsResponse
 }
 
-export const unmarshalListClusterTypesResponse = (data: unknown) => {
+export const unmarshalListClusterTypesResponse = (
+  data: unknown,
+): ListClusterTypesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListClusterTypesResponse' failed as data isn't a dictionary.`,
@@ -331,7 +344,9 @@ export const unmarshalListClusterTypesResponse = (data: unknown) => {
   } as ListClusterTypesResponse
 }
 
-export const unmarshalListClustersResponse = (data: unknown) => {
+export const unmarshalListClustersResponse = (
+  data: unknown,
+): ListClustersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListClustersResponse' failed as data isn't a dictionary.`,
@@ -344,7 +359,9 @@ export const unmarshalListClustersResponse = (data: unknown) => {
   } as ListClustersResponse
 }
 
-export const unmarshalListNodesResponse = (data: unknown) => {
+export const unmarshalListNodesResponse = (
+  data: unknown,
+): ListNodesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListNodesResponse' failed as data isn't a dictionary.`,
@@ -357,7 +374,9 @@ export const unmarshalListNodesResponse = (data: unknown) => {
   } as ListNodesResponse
 }
 
-export const unmarshalListPoolsResponse = (data: unknown) => {
+export const unmarshalListPoolsResponse = (
+  data: unknown,
+): ListPoolsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListPoolsResponse' failed as data isn't a dictionary.`,
@@ -370,7 +389,9 @@ export const unmarshalListPoolsResponse = (data: unknown) => {
   } as ListPoolsResponse
 }
 
-export const unmarshalListVersionsResponse = (data: unknown) => {
+export const unmarshalListVersionsResponse = (
+  data: unknown,
+): ListVersionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListVersionsResponse' failed as data isn't a dictionary.`,
@@ -382,14 +403,6 @@ export const unmarshalListVersionsResponse = (data: unknown) => {
   } as ListVersionsResponse
 }
 
-const marshalCreateClusterRequestPoolConfigUpgradePolicy = (
-  request: CreateClusterRequestPoolConfigUpgradePolicy,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  max_surge: request.maxSurge,
-  max_unavailable: request.maxUnavailable,
-})
-
 const marshalMaintenanceWindow = (
   request: MaintenanceWindow,
   defaults: DefaultValues,
@@ -398,14 +411,23 @@ const marshalMaintenanceWindow = (
   start_hour: request.startHour,
 })
 
+const marshalCreateClusterRequestPoolConfigUpgradePolicy = (
+  request: CreateClusterRequestPoolConfigUpgradePolicy,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  max_surge: request.maxSurge,
+  max_unavailable: request.maxUnavailable,
+})
+
 const marshalCreateClusterRequestAutoUpgrade = (
   request: CreateClusterRequestAutoUpgrade,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enable: request.enable,
-  maintenance_window: request.maintenanceWindow
-    ? marshalMaintenanceWindow(request.maintenanceWindow, defaults)
-    : undefined,
+  maintenance_window:
+    request.maintenanceWindow !== undefined
+      ? marshalMaintenanceWindow(request.maintenanceWindow, defaults)
+      : undefined,
 })
 
 const marshalCreateClusterRequestAutoscalerConfig = (
@@ -455,13 +477,68 @@ const marshalCreateClusterRequestPoolConfig = (
   root_volume_type: request.rootVolumeType,
   size: request.size,
   tags: request.tags,
-  upgrade_policy: request.upgradePolicy
-    ? marshalCreateClusterRequestPoolConfigUpgradePolicy(
-        request.upgradePolicy,
-        defaults,
-      )
-    : undefined,
+  upgrade_policy:
+    request.upgradePolicy !== undefined
+      ? marshalCreateClusterRequestPoolConfigUpgradePolicy(
+          request.upgradePolicy,
+          defaults,
+        )
+      : undefined,
   zone: request.zone,
+})
+
+export const marshalCreateClusterRequest = (
+  request: CreateClusterRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  admission_plugins: request.admissionPlugins,
+  apiserver_cert_sans: request.apiserverCertSans,
+  auto_upgrade:
+    request.autoUpgrade !== undefined
+      ? marshalCreateClusterRequestAutoUpgrade(request.autoUpgrade, defaults)
+      : undefined,
+  autoscaler_config:
+    request.autoscalerConfig !== undefined
+      ? marshalCreateClusterRequestAutoscalerConfig(
+          request.autoscalerConfig,
+          defaults,
+        )
+      : undefined,
+  cni: request.cni,
+  description: request.description,
+  enable_dashboard: request.enableDashboard,
+  feature_gates: request.featureGates,
+  ingress: request.ingress,
+  name: request.name || randomName('k8s'),
+  open_id_connect_config:
+    request.openIdConnectConfig !== undefined
+      ? marshalCreateClusterRequestOpenIDConnectConfig(
+          request.openIdConnectConfig,
+          defaults,
+        )
+      : undefined,
+  pools:
+    request.pools !== undefined
+      ? request.pools.map(elt =>
+          marshalCreateClusterRequestPoolConfig(elt, defaults),
+        )
+      : undefined,
+  private_network_id: request.privateNetworkId,
+  tags: request.tags,
+  type: request.type,
+  version: request.version,
+  ...resolveOneOf([
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
+    },
+    {
+      default: defaults.defaultProjectId,
+      param: 'project_id',
+      value: request.projectId,
+    },
+  ]),
 })
 
 const marshalCreatePoolRequestUpgradePolicy = (
@@ -472,14 +549,55 @@ const marshalCreatePoolRequestUpgradePolicy = (
   max_unavailable: request.maxUnavailable,
 })
 
+export const marshalCreatePoolRequest = (
+  request: CreatePoolRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  autohealing: request.autohealing,
+  autoscaling: request.autoscaling,
+  container_runtime: request.containerRuntime,
+  kubelet_args:
+    request.kubeletArgs !== undefined ? request.kubeletArgs : undefined,
+  max_size: request.maxSize,
+  min_size: request.minSize,
+  name: request.name || randomName('pool'),
+  node_type: request.nodeType,
+  placement_group_id: request.placementGroupId,
+  public_ip_disabled: request.publicIpDisabled,
+  root_volume_size: request.rootVolumeSize,
+  root_volume_type: request.rootVolumeType,
+  size: request.size,
+  tags: request.tags,
+  upgrade_policy:
+    request.upgradePolicy !== undefined
+      ? marshalCreatePoolRequestUpgradePolicy(request.upgradePolicy, defaults)
+      : undefined,
+  zone: request.zone ?? defaults.defaultZone,
+})
+
+export const marshalMigrateToPrivateNetworkClusterRequest = (
+  request: MigrateToPrivateNetworkClusterRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_network_id: request.privateNetworkId,
+})
+
+export const marshalSetClusterTypeRequest = (
+  request: SetClusterTypeRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  type: request.type,
+})
+
 const marshalUpdateClusterRequestAutoUpgrade = (
   request: UpdateClusterRequestAutoUpgrade,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enable: request.enable,
-  maintenance_window: request.maintenanceWindow
-    ? marshalMaintenanceWindow(request.maintenanceWindow, defaults)
-    : undefined,
+  maintenance_window:
+    request.maintenanceWindow !== undefined
+      ? marshalMaintenanceWindow(request.maintenanceWindow, defaults)
+      : undefined,
 })
 
 const marshalUpdateClusterRequestAutoscalerConfig = (
@@ -511,129 +629,44 @@ const marshalUpdateClusterRequestOpenIDConnectConfig = (
   username_prefix: request.usernamePrefix,
 })
 
-const marshalUpdatePoolRequestUpgradePolicy = (
-  request: UpdatePoolRequestUpgradePolicy,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  max_surge: request.maxSurge,
-  max_unavailable: request.maxUnavailable,
-})
-
-export const marshalCreateClusterRequest = (
-  request: CreateClusterRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  admission_plugins: request.admissionPlugins,
-  apiserver_cert_sans: request.apiserverCertSans,
-  auto_upgrade: request.autoUpgrade
-    ? marshalCreateClusterRequestAutoUpgrade(request.autoUpgrade, defaults)
-    : undefined,
-  autoscaler_config: request.autoscalerConfig
-    ? marshalCreateClusterRequestAutoscalerConfig(
-        request.autoscalerConfig,
-        defaults,
-      )
-    : undefined,
-  cni: request.cni,
-  description: request.description,
-  enable_dashboard: request.enableDashboard,
-  feature_gates: request.featureGates,
-  ingress: request.ingress,
-  name: request.name || randomName('k8s'),
-  open_id_connect_config: request.openIdConnectConfig
-    ? marshalCreateClusterRequestOpenIDConnectConfig(
-        request.openIdConnectConfig,
-        defaults,
-      )
-    : undefined,
-  pools: request.pools
-    ? request.pools.map(elt =>
-        marshalCreateClusterRequestPoolConfig(elt, defaults),
-      )
-    : undefined,
-  private_network_id: request.privateNetworkId,
-  tags: request.tags,
-  type: request.type,
-  version: request.version,
-  ...resolveOneOf([
-    {
-      default: defaults.defaultProjectId,
-      param: 'project_id',
-      value: request.projectId,
-    },
-    {
-      default: defaults.defaultOrganizationId,
-      param: 'organization_id',
-      value: request.organizationId,
-    },
-  ]),
-})
-
-export const marshalCreatePoolRequest = (
-  request: CreatePoolRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  autohealing: request.autohealing,
-  autoscaling: request.autoscaling,
-  container_runtime: request.containerRuntime ?? 'unknown_runtime',
-  kubelet_args: request.kubeletArgs,
-  max_size: request.maxSize,
-  min_size: request.minSize,
-  name: request.name || randomName('pool'),
-  node_type: request.nodeType,
-  placement_group_id: request.placementGroupId,
-  public_ip_disabled: request.publicIpDisabled,
-  root_volume_size: request.rootVolumeSize,
-  root_volume_type: request.rootVolumeType ?? 'default_volume_type',
-  size: request.size,
-  tags: request.tags,
-  upgrade_policy: request.upgradePolicy
-    ? marshalCreatePoolRequestUpgradePolicy(request.upgradePolicy, defaults)
-    : undefined,
-  zone: request.zone ?? defaults.defaultZone,
-})
-
-export const marshalMigrateToPrivateNetworkClusterRequest = (
-  request: MigrateToPrivateNetworkClusterRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  private_network_id: request.privateNetworkId,
-})
-
-export const marshalSetClusterTypeRequest = (
-  request: SetClusterTypeRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  type: request.type,
-})
-
 export const marshalUpdateClusterRequest = (
   request: UpdateClusterRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   admission_plugins: request.admissionPlugins,
   apiserver_cert_sans: request.apiserverCertSans,
-  auto_upgrade: request.autoUpgrade
-    ? marshalUpdateClusterRequestAutoUpgrade(request.autoUpgrade, defaults)
-    : undefined,
-  autoscaler_config: request.autoscalerConfig
-    ? marshalUpdateClusterRequestAutoscalerConfig(
-        request.autoscalerConfig,
-        defaults,
-      )
-    : undefined,
+  auto_upgrade:
+    request.autoUpgrade !== undefined
+      ? marshalUpdateClusterRequestAutoUpgrade(request.autoUpgrade, defaults)
+      : undefined,
+  autoscaler_config:
+    request.autoscalerConfig !== undefined
+      ? marshalUpdateClusterRequestAutoscalerConfig(
+          request.autoscalerConfig,
+          defaults,
+        )
+      : undefined,
   description: request.description,
   enable_dashboard: request.enableDashboard,
   feature_gates: request.featureGates,
   ingress: request.ingress,
   name: request.name,
-  open_id_connect_config: request.openIdConnectConfig
-    ? marshalUpdateClusterRequestOpenIDConnectConfig(
-        request.openIdConnectConfig,
-        defaults,
-      )
-    : undefined,
+  open_id_connect_config:
+    request.openIdConnectConfig !== undefined
+      ? marshalUpdateClusterRequestOpenIDConnectConfig(
+          request.openIdConnectConfig,
+          defaults,
+        )
+      : undefined,
   tags: request.tags,
+})
+
+const marshalUpdatePoolRequestUpgradePolicy = (
+  request: UpdatePoolRequestUpgradePolicy,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  max_surge: request.maxSurge,
+  max_unavailable: request.maxUnavailable,
 })
 
 export const marshalUpdatePoolRequest = (
@@ -647,9 +680,10 @@ export const marshalUpdatePoolRequest = (
   min_size: request.minSize,
   size: request.size,
   tags: request.tags,
-  upgrade_policy: request.upgradePolicy
-    ? marshalUpdatePoolRequestUpgradePolicy(request.upgradePolicy, defaults)
-    : undefined,
+  upgrade_policy:
+    request.upgradePolicy !== undefined
+      ? marshalUpdatePoolRequestUpgradePolicy(request.upgradePolicy, defaults)
+      : undefined,
 })
 
 export const marshalUpgradeClusterRequest = (

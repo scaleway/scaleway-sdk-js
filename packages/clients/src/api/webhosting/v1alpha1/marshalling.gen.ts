@@ -22,7 +22,7 @@ import type {
   UpdateHostingRequest,
 } from './types.gen'
 
-const unmarshalHostingCpanelUrls = (data: unknown) => {
+const unmarshalHostingCpanelUrls = (data: unknown): HostingCpanelUrls => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'HostingCpanelUrls' failed as data isn't a dictionary.`,
@@ -35,55 +35,20 @@ const unmarshalHostingCpanelUrls = (data: unknown) => {
   } as HostingCpanelUrls
 }
 
-const unmarshalHostingOption = (data: unknown) => {
+const unmarshalHostingOption = (data: unknown): HostingOption => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'HostingOption' failed as data isn't a dictionary.`,
     )
   }
 
-  return { id: data.id, name: data.name } as HostingOption
-}
-
-const unmarshalOfferProduct = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'OfferProduct' failed as data isn't a dictionary.`,
-    )
-  }
-
   return {
-    databasesQuota: data.databases_quota,
-    emailAccountsQuota: data.email_accounts_quota,
-    emailStorageQuota: data.email_storage_quota,
-    hostingStorageQuota: data.hosting_storage_quota,
-    maxAddonDomains: data.max_addon_domains,
+    id: data.id,
     name: data.name,
-    option: data.option,
-    ram: data.ram,
-    supportIncluded: data.support_included,
-    vCpu: data.v_cpu,
-  } as OfferProduct
+  } as HostingOption
 }
 
-const unmarshalDnsRecord = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DnsRecord' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    name: data.name,
-    priority: data.priority,
-    status: data.status,
-    ttl: data.ttl,
-    type: data.type,
-    value: data.value,
-  } as DnsRecord
-}
-
-export const unmarshalHosting = (data: unknown) => {
+export const unmarshalHosting = (data: unknown): Hosting => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Hosting' failed as data isn't a dictionary.`,
@@ -114,7 +79,24 @@ export const unmarshalHosting = (data: unknown) => {
   } as Hosting
 }
 
-const unmarshalNameserver = (data: unknown) => {
+const unmarshalDnsRecord = (data: unknown): DnsRecord => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DnsRecord' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+    priority: data.priority,
+    status: data.status,
+    ttl: data.ttl,
+    type: data.type,
+    value: data.value,
+  } as DnsRecord
+}
+
+const unmarshalNameserver = (data: unknown): Nameserver => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Nameserver' failed as data isn't a dictionary.`,
@@ -128,7 +110,57 @@ const unmarshalNameserver = (data: unknown) => {
   } as Nameserver
 }
 
-const unmarshalOffer = (data: unknown) => {
+export const unmarshalDnsRecords = (data: unknown): DnsRecords => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DnsRecords' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    nameServers: unmarshalArrayOfObject(data.name_servers, unmarshalNameserver),
+    records: unmarshalArrayOfObject(data.records, unmarshalDnsRecord),
+    status: data.status,
+  } as DnsRecords
+}
+
+export const unmarshalListHostingsResponse = (
+  data: unknown,
+): ListHostingsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListHostingsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    hostings: unmarshalArrayOfObject(data.hostings, unmarshalHosting),
+    totalCount: data.total_count,
+  } as ListHostingsResponse
+}
+
+const unmarshalOfferProduct = (data: unknown): OfferProduct => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferProduct' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    databasesQuota: data.databases_quota,
+    emailAccountsQuota: data.email_accounts_quota,
+    emailStorageQuota: data.email_storage_quota,
+    hostingStorageQuota: data.hosting_storage_quota,
+    maxAddonDomains: data.max_addon_domains,
+    name: data.name,
+    option: data.option,
+    ram: data.ram,
+    supportIncluded: data.support_included,
+    vCpu: data.v_cpu,
+  } as OfferProduct
+}
+
+const unmarshalOffer = (data: unknown): Offer => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Offer' failed as data isn't a dictionary.`,
@@ -146,34 +178,9 @@ const unmarshalOffer = (data: unknown) => {
   } as Offer
 }
 
-export const unmarshalDnsRecords = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DnsRecords' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    nameServers: unmarshalArrayOfObject(data.name_servers, unmarshalNameserver),
-    records: unmarshalArrayOfObject(data.records, unmarshalDnsRecord),
-    status: data.status,
-  } as DnsRecords
-}
-
-export const unmarshalListHostingsResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListHostingsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    hostings: unmarshalArrayOfObject(data.hostings, unmarshalHosting),
-    totalCount: data.total_count,
-  } as ListHostingsResponse
-}
-
-export const unmarshalListOffersResponse = (data: unknown) => {
+export const unmarshalListOffersResponse = (
+  data: unknown,
+): ListOffersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListOffersResponse' failed as data isn't a dictionary.`,

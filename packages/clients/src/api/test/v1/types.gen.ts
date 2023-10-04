@@ -40,33 +40,6 @@ export interface Human {
   projectId: string
 }
 
-export interface ListHumansResponse {
-  totalCount: number
-  humans: Human[]
-}
-
-export interface RegisterResponse {
-  secretKey: string
-  accessKey: string
-}
-
-export type RegisterRequest = {
-  username: string
-}
-
-export type ListHumansRequest = {
-  page?: number
-  pageSize?: number
-  orderBy?: ListHumansRequestOrderBy
-  organizationId?: string
-  projectId?: string
-}
-
-export type GetHumanRequest = {
-  /** UUID of the human you want to get. */
-  humanId: string
-}
-
 export type CreateHumanRequest = {
   height: number
   shoeSize: number
@@ -77,8 +50,10 @@ export type CreateHumanRequest = {
   isHappy: boolean
   eyesColor?: EyeColors
   /**
-   * @deprecated One-of ('projectIdentifier'): at most one of 'organizationId',
-   *   'projectId' could be set.
+   * @deprecated
+   *
+   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   could be set.
    */
   organizationId?: string
   name: string
@@ -87,6 +62,48 @@ export type CreateHumanRequest = {
    * could be set.
    */
   projectId?: string
+}
+
+export type DeleteHumanRequest = {
+  /** UUID of the human you want to delete. */
+  humanId: string
+}
+
+export type GetHumanRequest = {
+  /** UUID of the human you want to get. */
+  humanId: string
+}
+
+export type ListHumansRequest = {
+  page?: number
+  pageSize?: number
+  orderBy?: ListHumansRequestOrderBy
+  organizationId?: string
+  projectId?: string
+}
+
+export interface ListHumansResponse {
+  totalCount: number
+  humans: Human[]
+}
+
+export type RegisterRequest = {
+  username: string
+}
+
+export interface RegisterResponse {
+  secretKey: string
+  accessKey: string
+}
+
+export type RunHumanRequest = {
+  /** UUID of the human you want to make run. */
+  humanId: string
+}
+
+export type SmokeHumanRequest = {
+  /** @deprecated UUID of the human you want to make smoking. */
+  humanId: string
 }
 
 export type UpdateHumanRequest = {
@@ -102,19 +119,4 @@ export type UpdateHumanRequest = {
   isHappy?: boolean
   eyesColor?: EyeColors
   name?: string
-}
-
-export type DeleteHumanRequest = {
-  /** UUID of the human you want to delete. */
-  humanId: string
-}
-
-export type RunHumanRequest = {
-  /** UUID of the human you want to make run. */
-  humanId: string
-}
-
-export type SmokeHumanRequest = {
-  /** @deprecated UUID of the human you want to make smoking. */
-  humanId?: string
 }

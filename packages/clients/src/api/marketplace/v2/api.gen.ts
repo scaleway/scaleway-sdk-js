@@ -47,7 +47,7 @@ export class API extends ParentAPI {
           ['arch', request.arch],
           ['category', request.category],
           ['include_eol', request.includeEol],
-          ['order_by', request.orderBy ?? 'name_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -94,7 +94,7 @@ export class API extends ParentAPI {
         path: `/marketplace/v2/versions`,
         urlParams: urlParams(
           ['image_id', request.imageId],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -143,28 +143,19 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/marketplace/v2/local-images`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          ['type', request.type ?? 'unknown_type'],
-          ['zone', request.zone ?? this.client.settings.defaultZone],
+          ['type', request.type],
+          ['zone', request.zone],
           ...Object.entries(
             resolveOneOf([
-              {
-                param: 'image_id',
-                value: request.imageId,
-              },
-              {
-                param: 'version_id',
-                value: request.versionId,
-              },
-              {
-                param: 'image_label',
-                value: request.imageLabel,
-              },
+              { param: 'image_id', value: request.imageId },
+              { param: 'version_id', value: request.versionId },
+              { param: 'image_label', value: request.imageLabel },
             ]),
           ),
         ),

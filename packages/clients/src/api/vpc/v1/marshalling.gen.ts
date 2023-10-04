@@ -14,7 +14,7 @@ import type {
   UpdatePrivateNetworkRequest,
 } from './types.gen'
 
-export const unmarshalPrivateNetwork = (data: unknown) => {
+export const unmarshalPrivateNetwork = (data: unknown): PrivateNetwork => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PrivateNetwork' failed as data isn't a dictionary.`,
@@ -34,7 +34,9 @@ export const unmarshalPrivateNetwork = (data: unknown) => {
   } as PrivateNetwork
 }
 
-export const unmarshalListPrivateNetworksResponse = (data: unknown) => {
+export const unmarshalListPrivateNetworksResponse = (
+  data: unknown,
+): ListPrivateNetworksResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListPrivateNetworksResponse' failed as data isn't a dictionary.`,

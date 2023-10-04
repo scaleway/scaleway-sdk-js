@@ -22,7 +22,6 @@ export interface Category {
   description: string
 }
 
-/** Image. */
 export interface Image {
   /** UUID of this image. */
   id: string
@@ -40,39 +39,12 @@ export interface Image {
   updatedAt?: Date
   /** Expiration date of this image. */
   validUntil?: Date
-  /**
-   * Label of this image. Typically an identifier for a distribution (ex.
-   * "ubuntu_focal").
-   */
+  /** Typically an identifier for a distribution (ex. "ubuntu_focal"). */
   label: string
 }
 
-export interface ListCategoriesResponse {
-  categories: Category[]
-  totalCount: number
-}
-
-export interface ListImagesResponse {
-  images: Image[]
-  totalCount: number
-}
-
-export interface ListLocalImagesResponse {
-  localImages: LocalImage[]
-  totalCount: number
-}
-
-export interface ListVersionsResponse {
-  versions: Version[]
-  totalCount: number
-}
-
-/** Local image. */
 export interface LocalImage {
-  /**
-   * UUID of this local image. Version you will typically use to define an image
-   * in an API call.
-   */
+  /** Version you will typically use to define an image in an API call. */
   id: string
   /** List of all commercial types that are compatible with this local image. */
   compatibleCommercialTypes: string[]
@@ -86,7 +58,6 @@ export interface LocalImage {
   type: LocalImageType
 }
 
-/** Version. */
 export interface Version {
   /** UUID of this version. */
   id: string
@@ -98,6 +69,33 @@ export interface Version {
   updatedAt?: Date
   /** Date this version was officially published. */
   publishedAt?: Date
+}
+
+export type GetCategoryRequest = {
+  categoryId: string
+}
+
+export type GetImageRequest = {
+  /** Display the image name. */
+  imageId: string
+}
+
+export type GetLocalImageRequest = {
+  localImageId: string
+}
+
+export type GetVersionRequest = {
+  versionId: string
+}
+
+export type ListCategoriesRequest = {
+  pageSize?: number
+  page?: number
+}
+
+export interface ListCategoriesResponse {
+  categories: Category[]
+  totalCount: number
 }
 
 export type ListImagesRequest = {
@@ -118,20 +116,9 @@ export type ListImagesRequest = {
   includeEol: boolean
 }
 
-export type GetImageRequest = {
-  /** Display the image name. */
-  imageId: string
-}
-
-export type ListVersionsRequest = {
-  imageId: string
-  pageSize?: number
-  page?: number
-  orderBy?: ListVersionsRequestOrderBy
-}
-
-export type GetVersionRequest = {
-  versionId: string
+export interface ListImagesResponse {
+  images: Image[]
+  totalCount: number
 }
 
 export type ListLocalImagesRequest = {
@@ -153,19 +140,24 @@ export type ListLocalImagesRequest = {
    * be set.
    */
   imageLabel?: string
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   type?: LocalImageType
 }
 
-export type GetLocalImageRequest = {
-  localImageId: string
+export interface ListLocalImagesResponse {
+  localImages: LocalImage[]
+  totalCount: number
 }
 
-export type ListCategoriesRequest = {
+export type ListVersionsRequest = {
+  imageId: string
   pageSize?: number
   page?: number
+  orderBy?: ListVersionsRequestOrderBy
 }
 
-export type GetCategoryRequest = {
-  categoryId: string
+export interface ListVersionsResponse {
+  versions: Version[]
+  totalCount: number
 }

@@ -65,7 +65,6 @@ export type {
   LogStream,
   Namespace,
   NamespaceStatus,
-  NullValue,
   Runtime,
   RuntimeStatus,
   Secret,
