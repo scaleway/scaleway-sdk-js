@@ -76,7 +76,6 @@ const jsonContentHeaders = {
  * Messaging and Queuing NATS API.
  *
  * This API allows you to manage Scaleway Messaging and Queueing NATS accounts.
- * Messaging and Queuing NATS API.
  */
 export class NatsAPI extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -186,7 +185,7 @@ export class NatsAPI extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/nats-accounts`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -285,7 +284,7 @@ export class NatsAPI extends ParentAPI {
     )
 
   protected pageOfListNatsCredentials = (
-    request: Readonly<NatsApiListNatsCredentialsRequest>,
+    request: Readonly<NatsApiListNatsCredentialsRequest> = {},
   ) =>
     this.client.fetch<ListNatsCredentialsResponse>(
       {
@@ -296,7 +295,7 @@ export class NatsAPI extends ParentAPI {
         )}/nats-credentials`,
         urlParams: urlParams(
           ['nats_account_id', request.natsAccountId],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -317,7 +316,7 @@ export class NatsAPI extends ParentAPI {
    * @returns A Promise of ListNatsCredentialsResponse
    */
   listNatsCredentials = (
-    request: Readonly<NatsApiListNatsCredentialsRequest>,
+    request: Readonly<NatsApiListNatsCredentialsRequest> = {},
   ) =>
     enrichForPagination(
       'natsCredentials',
@@ -330,7 +329,6 @@ export class NatsAPI extends ParentAPI {
  * Messaging and Queuing SNS API.
  *
  * This API allows you to manage Scaleway Messaging and Queueing SNS brokers.
- * Messaging and Queuing SNS API.
  */
 export class SnsAPI extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -522,7 +520,7 @@ export class SnsAPI extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/sns-credentials`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -556,7 +554,6 @@ export class SnsAPI extends ParentAPI {
  * Messaging and Queuing SQS API.
  *
  * This API allows you to manage Scaleway Messaging and Queueing SQS brokers.
- * Messaging and Queuing SQS API.
  */
 export class SqsAPI extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -749,7 +746,7 @@ export class SqsAPI extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/sqs-credentials`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',

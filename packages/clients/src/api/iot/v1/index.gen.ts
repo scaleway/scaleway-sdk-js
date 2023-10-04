@@ -62,7 +62,6 @@ export type {
   ListTwinDocumentsResponseDocumentSummary,
   Network,
   NetworkNetworkType,
-  NullValue,
   PatchTwinDocumentRequest,
   PutTwinDocumentRequest,
   RenewDeviceCertificateRequest,

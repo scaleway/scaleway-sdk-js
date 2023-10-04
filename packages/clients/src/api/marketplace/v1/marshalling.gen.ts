@@ -16,7 +16,7 @@ import type {
   Version,
 } from './types.gen'
 
-const unmarshalLocalImage = (data: unknown) => {
+const unmarshalLocalImage = (data: unknown): LocalImage => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'LocalImage' failed as data isn't a dictionary.`,
@@ -31,17 +31,20 @@ const unmarshalLocalImage = (data: unknown) => {
   } as LocalImage
 }
 
-const unmarshalOrganization = (data: unknown) => {
+const unmarshalOrganization = (data: unknown): Organization => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Organization' failed as data isn't a dictionary.`,
     )
   }
 
-  return { id: data.id, name: data.name } as Organization
+  return {
+    id: data.id,
+    name: data.name,
+  } as Organization
 }
 
-const unmarshalVersion = (data: unknown) => {
+const unmarshalVersion = (data: unknown): Version => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Version' failed as data isn't a dictionary.`,
@@ -57,7 +60,7 @@ const unmarshalVersion = (data: unknown) => {
   } as Version
 }
 
-const unmarshalImage = (data: unknown) => {
+const unmarshalImage = (data: unknown): Image => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Image' failed as data isn't a dictionary.`,
@@ -74,15 +77,13 @@ const unmarshalImage = (data: unknown) => {
     logo: data.logo,
     modificationDate: unmarshalDate(data.modification_date),
     name: data.name,
-    organization: data.organization
-      ? unmarshalOrganization(data.organization)
-      : undefined,
+    organization: unmarshalOrganization(data.organization),
     validUntil: unmarshalDate(data.valid_until),
     versions: unmarshalArrayOfObject(data.versions, unmarshalVersion),
   } as Image
 }
 
-export const unmarshalGetImageResponse = (data: unknown) => {
+export const unmarshalGetImageResponse = (data: unknown): GetImageResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetImageResponse' failed as data isn't a dictionary.`,
@@ -90,11 +91,13 @@ export const unmarshalGetImageResponse = (data: unknown) => {
   }
 
   return {
-    image: data.image ? unmarshalImage(data.image) : undefined,
+    image: unmarshalImage(data.image),
   } as GetImageResponse
 }
 
-export const unmarshalGetVersionResponse = (data: unknown) => {
+export const unmarshalGetVersionResponse = (
+  data: unknown,
+): GetVersionResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetVersionResponse' failed as data isn't a dictionary.`,
@@ -102,11 +105,13 @@ export const unmarshalGetVersionResponse = (data: unknown) => {
   }
 
   return {
-    version: data.version ? unmarshalVersion(data.version) : undefined,
+    version: unmarshalVersion(data.version),
   } as GetVersionResponse
 }
 
-export const unmarshalListImagesResponse = (data: unknown) => {
+export const unmarshalListImagesResponse = (
+  data: unknown,
+): ListImagesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListImagesResponse' failed as data isn't a dictionary.`,
@@ -119,7 +124,9 @@ export const unmarshalListImagesResponse = (data: unknown) => {
   } as ListImagesResponse
 }
 
-export const unmarshalListVersionsResponse = (data: unknown) => {
+export const unmarshalListVersionsResponse = (
+  data: unknown,
+): ListVersionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListVersionsResponse' failed as data isn't a dictionary.`,

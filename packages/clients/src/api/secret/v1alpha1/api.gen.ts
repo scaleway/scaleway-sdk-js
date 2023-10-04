@@ -201,7 +201,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['is_managed', request.isManaged],
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'name_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -236,7 +236,7 @@ export class API extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/folders`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',

@@ -66,7 +66,7 @@ export class API extends ParentAPI {
         )}/namespaces`,
         urlParams: urlParams(
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -213,7 +213,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['name', request.name],
           ['namespace_id', request.namespaceId],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -331,7 +331,7 @@ export class API extends ParentAPI {
         )}/images/${validatePathParam('imageId', request.imageId)}/tags`,
         urlParams: urlParams(
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',

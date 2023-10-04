@@ -24,22 +24,7 @@ import type {
   Statistics,
 } from './types.gen'
 
-const unmarshalDomainStatistics = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainStatistics' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    canceledCount: data.canceled_count,
-    failedCount: data.failed_count,
-    sentCount: data.sent_count,
-    totalCount: data.total_count,
-  } as DomainStatistics
-}
-
-const unmarshalEmailTry = (data: unknown) => {
+const unmarshalEmailTry = (data: unknown): EmailTry => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'EmailTry' failed as data isn't a dictionary.`,
@@ -54,62 +39,7 @@ const unmarshalEmailTry = (data: unknown) => {
   } as EmailTry
 }
 
-export const unmarshalDomain = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Domain' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    createdAt: unmarshalDate(data.created_at),
-    dkimConfig: data.dkim_config,
-    id: data.id,
-    lastError: data.last_error,
-    lastValidAt: unmarshalDate(data.last_valid_at),
-    name: data.name,
-    nextCheckAt: unmarshalDate(data.next_check_at),
-    organizationId: data.organization_id,
-    projectId: data.project_id,
-    region: data.region,
-    revokedAt: unmarshalDate(data.revoked_at),
-    spfConfig: data.spf_config,
-    statistics: data.statistics
-      ? unmarshalDomainStatistics(data.statistics)
-      : undefined,
-    status: data.status,
-  } as Domain
-}
-
-const unmarshalDomainLastStatusDkimRecord = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainLastStatusDkimRecord' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    error: data.error,
-    lastValidAt: unmarshalDate(data.last_valid_at),
-    status: data.status,
-  } as DomainLastStatusDkimRecord
-}
-
-const unmarshalDomainLastStatusSpfRecord = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainLastStatusSpfRecord' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    error: data.error,
-    lastValidAt: unmarshalDate(data.last_valid_at),
-    status: data.status,
-  } as DomainLastStatusSpfRecord
-}
-
-export const unmarshalEmail = (data: unknown) => {
+export const unmarshalEmail = (data: unknown): Email => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Email' failed as data isn't a dictionary.`,
@@ -135,7 +65,49 @@ export const unmarshalEmail = (data: unknown) => {
   } as Email
 }
 
-export const unmarshalCreateEmailResponse = (data: unknown) => {
+const unmarshalDomainStatistics = (data: unknown): DomainStatistics => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainStatistics' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    canceledCount: data.canceled_count,
+    failedCount: data.failed_count,
+    sentCount: data.sent_count,
+    totalCount: data.total_count,
+  } as DomainStatistics
+}
+
+export const unmarshalDomain = (data: unknown): Domain => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Domain' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    dkimConfig: data.dkim_config,
+    id: data.id,
+    lastError: data.last_error,
+    lastValidAt: unmarshalDate(data.last_valid_at),
+    name: data.name,
+    nextCheckAt: unmarshalDate(data.next_check_at),
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    region: data.region,
+    revokedAt: unmarshalDate(data.revoked_at),
+    spfConfig: data.spf_config,
+    statistics: unmarshalDomainStatistics(data.statistics),
+    status: data.status,
+  } as Domain
+}
+
+export const unmarshalCreateEmailResponse = (
+  data: unknown,
+): CreateEmailResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CreateEmailResponse' failed as data isn't a dictionary.`,
@@ -147,7 +119,39 @@ export const unmarshalCreateEmailResponse = (data: unknown) => {
   } as CreateEmailResponse
 }
 
-export const unmarshalDomainLastStatus = (data: unknown) => {
+const unmarshalDomainLastStatusDkimRecord = (
+  data: unknown,
+): DomainLastStatusDkimRecord => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainLastStatusDkimRecord' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    error: data.error,
+    lastValidAt: unmarshalDate(data.last_valid_at),
+    status: data.status,
+  } as DomainLastStatusDkimRecord
+}
+
+const unmarshalDomainLastStatusSpfRecord = (
+  data: unknown,
+): DomainLastStatusSpfRecord => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainLastStatusSpfRecord' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    error: data.error,
+    lastValidAt: unmarshalDate(data.last_valid_at),
+    status: data.status,
+  } as DomainLastStatusSpfRecord
+}
+
+export const unmarshalDomainLastStatus = (data: unknown): DomainLastStatus => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'DomainLastStatus' failed as data isn't a dictionary.`,
@@ -155,18 +159,16 @@ export const unmarshalDomainLastStatus = (data: unknown) => {
   }
 
   return {
-    dkimRecord: data.dkim_record
-      ? unmarshalDomainLastStatusDkimRecord(data.dkim_record)
-      : undefined,
+    dkimRecord: unmarshalDomainLastStatusDkimRecord(data.dkim_record),
     domainId: data.domain_id,
     domainName: data.domain_name,
-    spfRecord: data.spf_record
-      ? unmarshalDomainLastStatusSpfRecord(data.spf_record)
-      : undefined,
+    spfRecord: unmarshalDomainLastStatusSpfRecord(data.spf_record),
   } as DomainLastStatus
 }
 
-export const unmarshalListDomainsResponse = (data: unknown) => {
+export const unmarshalListDomainsResponse = (
+  data: unknown,
+): ListDomainsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListDomainsResponse' failed as data isn't a dictionary.`,
@@ -179,7 +181,9 @@ export const unmarshalListDomainsResponse = (data: unknown) => {
   } as ListDomainsResponse
 }
 
-export const unmarshalListEmailsResponse = (data: unknown) => {
+export const unmarshalListEmailsResponse = (
+  data: unknown,
+): ListEmailsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListEmailsResponse' failed as data isn't a dictionary.`,
@@ -192,7 +196,7 @@ export const unmarshalListEmailsResponse = (data: unknown) => {
   } as ListEmailsResponse
 }
 
-export const unmarshalStatistics = (data: unknown) => {
+export const unmarshalStatistics = (data: unknown): Statistics => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Statistics' failed as data isn't a dictionary.`,
@@ -208,6 +212,15 @@ export const unmarshalStatistics = (data: unknown) => {
     totalCount: data.total_count,
   } as Statistics
 }
+
+export const marshalCreateDomainRequest = (
+  request: CreateDomainRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  accept_tos: request.acceptTos,
+  domain_name: request.domainName,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+})
 
 const marshalCreateEmailRequestAddress = (
   request: CreateEmailRequestAddress,
@@ -226,39 +239,35 @@ const marshalCreateEmailRequestAttachment = (
   type: request.type,
 })
 
-export const marshalCreateDomainRequest = (
-  request: CreateDomainRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  accept_tos: request.acceptTos,
-  domain_name: request.domainName,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-})
-
 export const marshalCreateEmailRequest = (
   request: CreateEmailRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  attachments: request.attachments
-    ? request.attachments.map(elt =>
-        marshalCreateEmailRequestAttachment(elt, defaults),
-      )
-    : undefined,
-  bcc: request.bcc
-    ? request.bcc.map(elt => marshalCreateEmailRequestAddress(elt, defaults))
-    : undefined,
-  cc: request.cc
-    ? request.cc.map(elt => marshalCreateEmailRequestAddress(elt, defaults))
-    : undefined,
-  from: request.from
-    ? marshalCreateEmailRequestAddress(request.from, defaults)
-    : undefined,
+  attachments:
+    request.attachments !== undefined
+      ? request.attachments.map(elt =>
+          marshalCreateEmailRequestAttachment(elt, defaults),
+        )
+      : undefined,
+  bcc:
+    request.bcc !== undefined
+      ? request.bcc.map(elt => marshalCreateEmailRequestAddress(elt, defaults))
+      : undefined,
+  cc:
+    request.cc !== undefined
+      ? request.cc.map(elt => marshalCreateEmailRequestAddress(elt, defaults))
+      : undefined,
+  from:
+    request.from !== undefined
+      ? marshalCreateEmailRequestAddress(request.from, defaults)
+      : undefined,
   html: request.html,
   project_id: request.projectId ?? defaults.defaultProjectId,
   send_before: request.sendBefore,
   subject: request.subject,
   text: request.text,
-  to: request.to
-    ? request.to.map(elt => marshalCreateEmailRequestAddress(elt, defaults))
-    : undefined,
+  to:
+    request.to !== undefined
+      ? request.to.map(elt => marshalCreateEmailRequestAddress(elt, defaults))
+      : undefined,
 })

@@ -34,45 +34,7 @@ import type {
   SqsPermissions,
 } from './types.gen'
 
-const unmarshalFile = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'File' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { content: data.content, name: data.name } as File
-}
-
-const unmarshalSnsPermissions = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'SnsPermissions' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    canManage: data.can_manage,
-    canPublish: data.can_publish,
-    canReceive: data.can_receive,
-  } as SnsPermissions
-}
-
-const unmarshalSqsPermissions = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'SqsPermissions' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    canManage: data.can_manage,
-    canPublish: data.can_publish,
-    canReceive: data.can_receive,
-  } as SqsPermissions
-}
-
-export const unmarshalNatsAccount = (data: unknown) => {
+export const unmarshalNatsAccount = (data: unknown): NatsAccount => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'NatsAccount' failed as data isn't a dictionary.`,
@@ -90,7 +52,20 @@ export const unmarshalNatsAccount = (data: unknown) => {
   } as NatsAccount
 }
 
-export const unmarshalNatsCredentials = (data: unknown) => {
+const unmarshalFile = (data: unknown): File => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'File' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    content: data.content,
+    name: data.name,
+  } as File
+}
+
+export const unmarshalNatsCredentials = (data: unknown): NatsCredentials => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'NatsCredentials' failed as data isn't a dictionary.`,
@@ -100,7 +75,7 @@ export const unmarshalNatsCredentials = (data: unknown) => {
   return {
     checksum: data.checksum,
     createdAt: unmarshalDate(data.created_at),
-    credentials: data.credentials ? unmarshalFile(data.credentials) : undefined,
+    credentials: unmarshalFile(data.credentials),
     id: data.id,
     name: data.name,
     natsAccountId: data.nats_account_id,
@@ -108,7 +83,21 @@ export const unmarshalNatsCredentials = (data: unknown) => {
   } as NatsCredentials
 }
 
-export const unmarshalSnsCredentials = (data: unknown) => {
+const unmarshalSnsPermissions = (data: unknown): SnsPermissions => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SnsPermissions' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    canManage: data.can_manage,
+    canPublish: data.can_publish,
+    canReceive: data.can_receive,
+  } as SnsPermissions
+}
+
+export const unmarshalSnsCredentials = (data: unknown): SnsCredentials => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SnsCredentials' failed as data isn't a dictionary.`,
@@ -120,9 +109,7 @@ export const unmarshalSnsCredentials = (data: unknown) => {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     name: data.name,
-    permissions: data.permissions
-      ? unmarshalSnsPermissions(data.permissions)
-      : undefined,
+    permissions: unmarshalSnsPermissions(data.permissions),
     projectId: data.project_id,
     region: data.region,
     secretChecksum: data.secret_checksum,
@@ -131,7 +118,21 @@ export const unmarshalSnsCredentials = (data: unknown) => {
   } as SnsCredentials
 }
 
-export const unmarshalSqsCredentials = (data: unknown) => {
+const unmarshalSqsPermissions = (data: unknown): SqsPermissions => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SqsPermissions' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    canManage: data.can_manage,
+    canPublish: data.can_publish,
+    canReceive: data.can_receive,
+  } as SqsPermissions
+}
+
+export const unmarshalSqsCredentials = (data: unknown): SqsCredentials => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SqsCredentials' failed as data isn't a dictionary.`,
@@ -143,9 +144,7 @@ export const unmarshalSqsCredentials = (data: unknown) => {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     name: data.name,
-    permissions: data.permissions
-      ? unmarshalSqsPermissions(data.permissions)
-      : undefined,
+    permissions: unmarshalSqsPermissions(data.permissions),
     projectId: data.project_id,
     region: data.region,
     secretChecksum: data.secret_checksum,
@@ -154,7 +153,9 @@ export const unmarshalSqsCredentials = (data: unknown) => {
   } as SqsCredentials
 }
 
-export const unmarshalListNatsAccountsResponse = (data: unknown) => {
+export const unmarshalListNatsAccountsResponse = (
+  data: unknown,
+): ListNatsAccountsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListNatsAccountsResponse' failed as data isn't a dictionary.`,
@@ -170,7 +171,9 @@ export const unmarshalListNatsAccountsResponse = (data: unknown) => {
   } as ListNatsAccountsResponse
 }
 
-export const unmarshalListNatsCredentialsResponse = (data: unknown) => {
+export const unmarshalListNatsCredentialsResponse = (
+  data: unknown,
+): ListNatsCredentialsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListNatsCredentialsResponse' failed as data isn't a dictionary.`,
@@ -186,7 +189,9 @@ export const unmarshalListNatsCredentialsResponse = (data: unknown) => {
   } as ListNatsCredentialsResponse
 }
 
-export const unmarshalListSnsCredentialsResponse = (data: unknown) => {
+export const unmarshalListSnsCredentialsResponse = (
+  data: unknown,
+): ListSnsCredentialsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSnsCredentialsResponse' failed as data isn't a dictionary.`,
@@ -202,7 +207,9 @@ export const unmarshalListSnsCredentialsResponse = (data: unknown) => {
   } as ListSnsCredentialsResponse
 }
 
-export const unmarshalListSqsCredentialsResponse = (data: unknown) => {
+export const unmarshalListSqsCredentialsResponse = (
+  data: unknown,
+): ListSqsCredentialsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSqsCredentialsResponse' failed as data isn't a dictionary.`,
@@ -218,7 +225,7 @@ export const unmarshalListSqsCredentialsResponse = (data: unknown) => {
   } as ListSqsCredentialsResponse
 }
 
-export const unmarshalSnsInfo = (data: unknown) => {
+export const unmarshalSnsInfo = (data: unknown): SnsInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SnsInfo' failed as data isn't a dictionary.`,
@@ -235,7 +242,7 @@ export const unmarshalSnsInfo = (data: unknown) => {
   } as SnsInfo
 }
 
-export const unmarshalSqsInfo = (data: unknown) => {
+export const unmarshalSqsInfo = (data: unknown): SqsInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SqsInfo' failed as data isn't a dictionary.`,
@@ -251,24 +258,6 @@ export const unmarshalSqsInfo = (data: unknown) => {
     updatedAt: unmarshalDate(data.updated_at),
   } as SqsInfo
 }
-
-const marshalSnsPermissions = (
-  request: SnsPermissions,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  can_manage: request.canManage,
-  can_publish: request.canPublish,
-  can_receive: request.canReceive,
-})
-
-const marshalSqsPermissions = (
-  request: SqsPermissions,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  can_manage: request.canManage,
-  can_publish: request.canPublish,
-  can_receive: request.canReceive,
-})
 
 export const marshalNatsApiCreateNatsAccountRequest = (
   request: NatsApiCreateNatsAccountRequest,
@@ -300,14 +289,24 @@ export const marshalSnsApiActivateSnsRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
+const marshalSnsPermissions = (
+  request: SnsPermissions,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  can_manage: request.canManage,
+  can_publish: request.canPublish,
+  can_receive: request.canReceive,
+})
+
 export const marshalSnsApiCreateSnsCredentialsRequest = (
   request: SnsApiCreateSnsCredentialsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name || randomName('mnq_sns'),
-  permissions: request.permissions
-    ? marshalSnsPermissions(request.permissions, defaults)
-    : undefined,
+  permissions:
+    request.permissions !== undefined
+      ? marshalSnsPermissions(request.permissions, defaults)
+      : undefined,
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
@@ -323,9 +322,10 @@ export const marshalSnsApiUpdateSnsCredentialsRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  permissions: request.permissions
-    ? marshalSnsPermissions(request.permissions, defaults)
-    : undefined,
+  permissions:
+    request.permissions !== undefined
+      ? marshalSnsPermissions(request.permissions, defaults)
+      : undefined,
 })
 
 export const marshalSqsApiActivateSqsRequest = (
@@ -335,14 +335,24 @@ export const marshalSqsApiActivateSqsRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
+const marshalSqsPermissions = (
+  request: SqsPermissions,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  can_manage: request.canManage,
+  can_publish: request.canPublish,
+  can_receive: request.canReceive,
+})
+
 export const marshalSqsApiCreateSqsCredentialsRequest = (
   request: SqsApiCreateSqsCredentialsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name || randomName('mnq_sqs'),
-  permissions: request.permissions
-    ? marshalSqsPermissions(request.permissions, defaults)
-    : undefined,
+  permissions:
+    request.permissions !== undefined
+      ? marshalSqsPermissions(request.permissions, defaults)
+      : undefined,
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
@@ -358,7 +368,8 @@ export const marshalSqsApiUpdateSqsCredentialsRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  permissions: request.permissions
-    ? marshalSqsPermissions(request.permissions, defaults)
-    : undefined,
+  permissions:
+    request.permissions !== undefined
+      ? marshalSqsPermissions(request.permissions, defaults)
+      : undefined,
 })

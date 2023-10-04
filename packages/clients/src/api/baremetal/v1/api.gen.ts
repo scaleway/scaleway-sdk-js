@@ -95,7 +95,7 @@ const jsonContentHeaders = {
 /**
  * Elastic Metal API.
  *
- * This API allows to manage your Elastic Metal server. Elastic Metal API.
+ * This API allows to manage your Elastic Metal server.
  */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
@@ -117,7 +117,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['name', request.name],
           ['option_id', request.optionId],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -367,7 +367,7 @@ export class API extends ParentAPI {
           request.zone ?? this.client.settings.defaultZone,
         )}/servers/${validatePathParam('serverId', request.serverId)}/events`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -549,10 +549,7 @@ export class API extends ParentAPI {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'subscription_period',
-            request.subscriptionPeriod ?? 'unknown_subscription_period',
-          ],
+          ['subscription_period', request.subscriptionPeriod],
         ),
       },
       unmarshalListOffersResponse,
@@ -644,7 +641,7 @@ export class API extends ParentAPI {
           request.zone ?? this.client.settings.defaultZone,
         )}/settings`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -817,7 +814,7 @@ export class PrivateNetworkAPI extends ParentAPI {
           request.zone ?? this.client.settings.defaultZone,
         )}/server-private-networks`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [

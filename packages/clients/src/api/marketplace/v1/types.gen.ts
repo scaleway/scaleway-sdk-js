@@ -2,15 +2,35 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Zone } from '../../../bridge'
 
-export interface GetImageResponse {
-  image?: Image
+export interface LocalImage {
+  /** Version you will typically use to define an image in an API call. */
+  id: string
+  /** List of all commercial types that are compatible with this local image. */
+  compatibleCommercialTypes: string[]
+  /** Supported architecture for this local image. */
+  arch: string
+  /** Availability Zone where this local image is available. */
+  zone: Zone
 }
 
-export interface GetVersionResponse {
-  version?: Version
+export interface Organization {
+  id: string
+  name: string
 }
 
-/** Image. */
+export interface Version {
+  /** UUID of this version. */
+  id: string
+  /** Name of this version. */
+  name: string
+  /** Creation date of this image version. */
+  creationDate?: Date
+  /** Date of the last modification of this version. */
+  modificationDate?: Date
+  /** List of local images available in this version. */
+  localImages: LocalImage[]
+}
+
 export interface Image {
   /** UUID of this image. */
   id: string
@@ -28,60 +48,31 @@ export interface Image {
   modificationDate?: Date
   /** Expiration date of this image. */
   validUntil?: Date
-  /**
-   * Label of this image. Typically an identifier for a distribution (ex.
-   * "ubuntu_focal").
-   */
+  /** Typically an identifier for a distribution (ex. "ubuntu_focal"). */
   label: string
   /** List of versions of this image. */
   versions: Version[]
   /** Organization this image belongs to. */
-  organization?: Organization
+  organization: Organization
   currentPublicVersion: string
 }
 
-export interface ListImagesResponse {
-  images: Image[]
-  totalCount: number
+export type GetImageRequest = {
+  /** Display the image name. */
+  imageId: string
 }
 
-export interface ListVersionsResponse {
-  versions: Version[]
-  totalCount: number
+export interface GetImageResponse {
+  image: Image
 }
 
-/** Local image. */
-export interface LocalImage {
-  /**
-   * UUID of this local image. Version you will typically use to define an image
-   * in an API call.
-   */
-  id: string
-  /** List of all commercial types that are compatible with this local image. */
-  compatibleCommercialTypes: string[]
-  /** Supported architecture for this local image. */
-  arch: string
-  /** Availability Zone where this local image is available. */
-  zone: Zone
+export type GetVersionRequest = {
+  imageId: string
+  versionId: string
 }
 
-export interface Organization {
-  id: string
-  name: string
-}
-
-/** Version. */
-export interface Version {
-  /** UUID of this version. */
-  id: string
-  /** Name of this version. */
-  name: string
-  /** Creation date of this image version. */
-  creationDate?: Date
-  /** Date of the last modification of this version. */
-  modificationDate?: Date
-  /** List of local images available in this version. */
-  localImages: LocalImage[]
+export interface GetVersionResponse {
+  version: Version
 }
 
 export type ListImagesRequest = {
@@ -94,16 +85,16 @@ export type ListImagesRequest = {
   page?: number
 }
 
-export type GetImageRequest = {
-  /** Display the image name. */
-  imageId: string
+export interface ListImagesResponse {
+  images: Image[]
+  totalCount: number
 }
 
 export type ListVersionsRequest = {
   imageId: string
 }
 
-export type GetVersionRequest = {
-  imageId: string
-  versionId: string
+export interface ListVersionsResponse {
+  versions: Version[]
+  totalCount: number
 }

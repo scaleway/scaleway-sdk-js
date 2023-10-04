@@ -54,7 +54,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['include_regional', request.includeRegional],
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [

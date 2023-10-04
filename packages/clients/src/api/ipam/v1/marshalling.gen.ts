@@ -16,7 +16,7 @@ import type {
   UpdateIPRequest,
 } from './types.gen'
 
-const unmarshalResource = (data: unknown) => {
+const unmarshalResource = (data: unknown): Resource => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Resource' failed as data isn't a dictionary.`,
@@ -31,7 +31,7 @@ const unmarshalResource = (data: unknown) => {
   } as Resource
 }
 
-const unmarshalSource = (data: unknown) => {
+const unmarshalSource = (data: unknown): Source => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Source' failed as data isn't a dictionary.`,
@@ -45,7 +45,7 @@ const unmarshalSource = (data: unknown) => {
   } as Source
 }
 
-export const unmarshalIP = (data: unknown) => {
+export const unmarshalIP = (data: unknown): IP => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'IP' failed as data isn't a dictionary.`,
@@ -59,15 +59,15 @@ export const unmarshalIP = (data: unknown) => {
     isIpv6: data.is_ipv6,
     projectId: data.project_id,
     region: data.region,
-    resource: data.resource ? unmarshalResource(data.resource) : undefined,
-    source: data.source ? unmarshalSource(data.source) : undefined,
+    resource: unmarshalResource(data.resource),
+    source: unmarshalSource(data.source),
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
     zone: data.zone,
   } as IP
 }
 
-export const unmarshalListIPsResponse = (data: unknown) => {
+export const unmarshalListIPsResponse = (data: unknown): ListIPsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListIPsResponse' failed as data isn't a dictionary.`,
@@ -84,19 +84,10 @@ const marshalSource = (
   request: Source,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([
-    {
-      param: 'zonal',
-      value: request.zonal,
-    },
-    {
-      param: 'private_network_id',
-      value: request.privateNetworkId,
-    },
-    {
-      param: 'subnet_id',
-      value: request.subnetId,
-    },
+  ...resolveOneOf<string>([
+    { param: 'zonal', value: request.zonal },
+    { param: 'private_network_id', value: request.privateNetworkId },
+    { param: 'subnet_id', value: request.subnetId },
   ]),
 })
 
@@ -107,7 +98,10 @@ export const marshalBookIPRequest = (
   address: request.address,
   is_ipv6: request.isIpv6,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  source: request.source ? marshalSource(request.source, defaults) : undefined,
+  source:
+    request.source !== undefined
+      ? marshalSource(request.source, defaults)
+      : undefined,
   tags: request.tags,
 })
 

@@ -25,7 +25,44 @@ export type ResourceType =
   | 'baremetal_server'
   | 'baremetal_private_nic'
 
-/** Ip. */
+export interface Resource {
+  /** Type of resource the IP is attached to. */
+  type: ResourceType
+  /** ID of the resource the IP is attached to. */
+  id: string
+  /** MAC of the resource the IP is attached to. */
+  macAddress?: string
+  /**
+   * When the IP is in a Private Network, then a DNS record is available to
+   * resolve the resource name to this IP.
+   */
+  name?: string
+}
+
+export interface Source {
+  /**
+   * This source is global.
+   *
+   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId'
+   * could be set.
+   */
+  zonal?: string
+  /**
+   * This source is specific.
+   *
+   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId'
+   * could be set.
+   */
+  privateNetworkId?: string
+  /**
+   * This source is specific.
+   *
+   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId'
+   * could be set.
+   */
+  subnetId?: string
+}
+
 export interface IP {
   /** IP ID. */
   id: string
@@ -40,63 +77,15 @@ export interface IP {
   /** Date the IP was last modified. */
   updatedAt?: Date
   /** Source pool where the IP was booked in. */
-  source?: Source
+  source: Source
   /** Resource which the IP is attached to. */
-  resource?: Resource
+  resource: Resource
   /** Tags for the IP. */
   tags: string[]
   /** Region of the IP. */
   region: Region
   /** Zone of the IP, if zonal. */
-  zone: Zone
-}
-
-export interface ListIPsResponse {
-  totalCount: number
-  ips: IP[]
-}
-
-/** Resource. */
-export interface Resource {
-  /** Type of resource the IP is attached to. */
-  type: ResourceType
-  /** ID of the resource the IP is attached to. */
-  id: string
-  /** MAC of the resource the IP is attached to. */
-  macAddress?: string
-  /**
-   * Name of the resource the IP is attached to. When the IP is in a Private
-   * Network, then a DNS record is available to resolve the resource name to
-   * this IP.
-   */
-  name?: string
-}
-
-/** Source. */
-export interface Source {
-  /**
-   * Zone the IP lives in if the IP is a public zoned IP. This source is global.
-   *
-   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId'
-   * could be set.
-   */
-  zonal?: string
-  /**
-   * Private Network the IP lives in if the IP is a private IP. This source is
-   * specific.
-   *
-   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId'
-   * could be set.
-   */
-  privateNetworkId?: string
-  /**
-   * Private Network subnet the IP lives in if the IP is a private IP in a
-   * Private Network. This source is specific.
-   *
-   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId'
-   * could be set.
-   */
-  subnetId?: string
+  zone?: Zone
 }
 
 export type BookIPRequest = {
@@ -106,8 +95,8 @@ export type BookIPRequest = {
    */
   region?: Region
   /**
-   * Scaleway Project in which to create the IP. When creating an IP in a
-   * Private Network, the Project must match the Private Network's Project.
+   * When creating an IP in a Private Network, the Project must match the
+   * Private Network's Project.
    */
   projectId?: string
   /** Source in which to book the IP. Not all sources are available for booking. */
@@ -115,23 +104,12 @@ export type BookIPRequest = {
   /** Request an IPv6 instead of an IPv4. */
   isIpv6: boolean
   /**
-   * Request a specific IP in the requested source pool. Note that only the
-   * Private Network source allows you to pick a specific IP. If the requested
-   * IP is already booked, then the call will fail.
+   * Note that only the Private Network source allows you to pick a specific IP.
+   * If the requested IP is already booked, then the call will fail.
    */
   address?: string
   /** Tags for the IP. */
   tags?: string[]
-}
-
-export type ReleaseIPRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** IP ID. */
-  ipId: string
 }
 
 export type GetIPRequest = {
@@ -142,18 +120,6 @@ export type GetIPRequest = {
   region?: Region
   /** IP ID. */
   ipId: string
-}
-
-export type UpdateIPRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** IP ID. */
-  ipId: string
-  /** Tags for the IP. */
-  tags?: string[]
 }
 
 export type ListIPsRequest = {
@@ -181,8 +147,7 @@ export type ListIPsRequest = {
    */
   zonal?: string
   /**
-   * Private Network to filter for. Only IPs that are private, and in this
-   * Private Network, will be returned.
+   * Only IPs that are private, and in this Private Network, will be returned.
    *
    * One-of ('source'): at most one of 'zonal', 'privateNetworkId' could be set.
    */
@@ -221,4 +186,31 @@ export type ListIPsRequest = {
    * this string within their name will be returned.
    */
   resourceName?: string
+}
+
+export interface ListIPsResponse {
+  totalCount: number
+  ips: IP[]
+}
+
+export type ReleaseIPRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** IP ID. */
+  ipId: string
+}
+
+export type UpdateIPRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** IP ID. */
+  ipId: string
+  /** Tags for the IP. */
+  tags?: string[]
 }

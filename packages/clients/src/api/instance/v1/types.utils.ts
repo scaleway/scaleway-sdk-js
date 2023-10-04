@@ -123,8 +123,3 @@ export type SetServerUserDataRequest = {
   /** The data encoded in base64 */
   content: string
 }
-
-export type {
-  CreateServerRequest,
-  UpdateServerRequest,
-} from './types.private.gen'

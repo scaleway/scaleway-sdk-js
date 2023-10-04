@@ -90,7 +90,7 @@ const jsonContentHeaders = {
  *
  * Cockpit's API allows you to activate your Cockpit on your Projects.
  * Scaleway's Cockpit stores metrics and logs and provides a dedicated Grafana
- * for dashboarding to visualize them. Cockpit API.
+ * for dashboarding to visualize them.
  */
 export class API extends ParentAPI {
   /**
@@ -240,7 +240,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/cockpit/v1beta1/datasources`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -290,7 +290,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/cockpit/v1beta1/tokens`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -487,7 +487,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/cockpit/v1beta1/grafana-users`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'login_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -562,7 +562,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/cockpit/v1beta1/plans`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'name_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',

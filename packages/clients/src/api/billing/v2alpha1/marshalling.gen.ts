@@ -13,7 +13,9 @@ import type {
   ListInvoicesResponse,
 } from './types.gen'
 
-const unmarshalGetConsumptionResponseConsumption = (data: unknown) => {
+const unmarshalGetConsumptionResponseConsumption = (
+  data: unknown,
+): GetConsumptionResponseConsumption => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetConsumptionResponseConsumption' failed as data isn't a dictionary.`,
@@ -29,7 +31,25 @@ const unmarshalGetConsumptionResponseConsumption = (data: unknown) => {
   } as GetConsumptionResponseConsumption
 }
 
-const unmarshalInvoice = (data: unknown) => {
+export const unmarshalGetConsumptionResponse = (
+  data: unknown,
+): GetConsumptionResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetConsumptionResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    consumptions: unmarshalArrayOfObject(
+      data.consumptions,
+      unmarshalGetConsumptionResponseConsumption,
+    ),
+    updatedAt: unmarshalDate(data.updated_at),
+  } as GetConsumptionResponse
+}
+
+const unmarshalInvoice = (data: unknown): Invoice => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Invoice' failed as data isn't a dictionary.`,
@@ -50,23 +70,9 @@ const unmarshalInvoice = (data: unknown) => {
   } as Invoice
 }
 
-export const unmarshalGetConsumptionResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GetConsumptionResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    consumptions: unmarshalArrayOfObject(
-      data.consumptions,
-      unmarshalGetConsumptionResponseConsumption,
-    ),
-    updatedAt: unmarshalDate(data.updated_at),
-  } as GetConsumptionResponse
-}
-
-export const unmarshalListInvoicesResponse = (data: unknown) => {
+export const unmarshalListInvoicesResponse = (
+  data: unknown,
+): ListInvoicesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListInvoicesResponse' failed as data isn't a dictionary.`,

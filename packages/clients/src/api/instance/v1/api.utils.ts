@@ -15,6 +15,7 @@ import {
 import { unmarshalSetImageResponse } from './marshalling.gen'
 import { marshalSetImageRequestWithID } from './marshalling.utils'
 import type {
+  CreateServerRequest,
   GetImageRequest,
   GetPrivateNICRequest,
   GetServerRequest,
@@ -26,6 +27,7 @@ import type {
   ServerActionRequest,
   ServerState,
   Snapshot,
+  UpdateServerRequest,
   Volume,
   VolumeServerTemplate,
 } from './types.gen'
@@ -36,7 +38,6 @@ import type {
 import type {
   AttachVolumeRequest,
   AttachVolumeResponse,
-  CreateServerRequest,
   DetachVolumeRequest,
   DetachVolumeResponse,
   GetServerUserDataRequest,
@@ -47,7 +48,6 @@ import type {
   UpdateSecurityGroupResponse,
   UpdateSecurityGroupRuleRequest,
   UpdateSecurityGroupRuleResponse,
-  UpdateServerRequest,
   UpdateSnapshotRequest,
   UpdateSnapshotResponse,
 } from './types.utils'
@@ -72,9 +72,7 @@ export class InstanceV1UtilsAPI extends API {
   ) =>
     tryAtIntervals(
       async () => {
-        const value = await this.getImage(request).then(
-          res => res.image as Image,
-        )
+        const value = await this.getImage(request).then(res => res.image)
 
         return {
           done: !IMAGE_TRANSIENT_STATUSES.includes(value.state),
@@ -102,7 +100,7 @@ export class InstanceV1UtilsAPI extends API {
     tryAtIntervals(
       async () => {
         const value = await this.getPrivateNIC(request).then(
-          res => res.privateNic as PrivateNIC,
+          res => res.privateNic,
         )
 
         return {
@@ -130,9 +128,7 @@ export class InstanceV1UtilsAPI extends API {
   ) =>
     tryAtIntervals(
       async () => {
-        const value = await this.getServer(request).then(
-          res => res.server as Server,
-        )
+        const value = await this.getServer(request).then(res => res.server)
 
         return {
           done: !SERVER_TRANSIENT_STATUSES.includes(value.state),
@@ -159,9 +155,7 @@ export class InstanceV1UtilsAPI extends API {
   ) =>
     tryAtIntervals(
       async () => {
-        const value = await this.getSnapshot(request).then(
-          res => res.snapshot as Snapshot,
-        )
+        const value = await this.getSnapshot(request).then(res => res.snapshot)
 
         return {
           done: !SNAPSHOT_TRANSIENT_STATUSES.includes(value.state),
@@ -188,9 +182,7 @@ export class InstanceV1UtilsAPI extends API {
   ) =>
     tryAtIntervals(
       async () => {
-        const value = await this.getVolume(request).then(
-          res => res.volume as Volume,
-        )
+        const value = await this.getVolume(request).then(res => res.volume)
 
         return {
           done: !VOLUME_TRANSIENT_STATUSES.includes(value.state),
@@ -405,7 +397,7 @@ export class InstanceV1UtilsAPI extends API {
     const volumes = await this.getServer({
       serverId: request.serverId,
       zone: request.zone,
-    }).then(res => validateNotUndefined(res.server?.volumes))
+    }).then(res => validateNotUndefined(res.server.volumes))
 
     const newVolumes: Record<string, { id: string; name: string }> = {}
     for (const [key, server] of Object.entries(volumes)) {
@@ -453,7 +445,7 @@ export class InstanceV1UtilsAPI extends API {
       volumeId: request.volumeId,
       zone: request.zone,
     })
-      .then(res => validateNotUndefined(res.volume?.server?.id))
+      .then(res => validateNotUndefined(res.volume.server.id))
       .then(serverId =>
         this.getServer({
           serverId,

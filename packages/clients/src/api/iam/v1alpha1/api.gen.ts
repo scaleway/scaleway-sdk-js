@@ -122,7 +122,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['disabled', request.disabled],
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -233,7 +233,7 @@ export class API extends ParentAPI {
         path: `/iam/v1alpha1/users`,
         urlParams: urlParams(
           ['mfa', request.mfa],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           [
             'organization_id',
             request.organizationId ??
@@ -332,7 +332,7 @@ export class API extends ParentAPI {
           ['application_ids', request.applicationIds],
           ['editable', request.editable],
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           [
             'organization_id',
             request.organizationId ??
@@ -452,7 +452,7 @@ export class API extends ParentAPI {
           ['application_ids', request.applicationIds],
           ['group_ids', request.groupIds],
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -672,7 +672,7 @@ export class API extends ParentAPI {
           ['editable', request.editable],
           ['group_ids', request.groupIds],
           ['no_principal', request.noPrincipal],
-          ['order_by', request.orderBy ?? 'policy_name_asc'],
+          ['order_by', request.orderBy],
           [
             'organization_id',
             request.organizationId ??
@@ -870,7 +870,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/iam/v1alpha1/permission-sets`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'name_asc'],
+          ['order_by', request.orderBy],
           [
             'organization_id',
             request.organizationId ??
@@ -909,11 +909,11 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['access_key', request.accessKey],
           ['bearer_id', request.bearerId],
-          ['bearer_type', request.bearerType ?? 'unknown_bearer_type'],
+          ['bearer_type', request.bearerType],
           ['description', request.description],
           ['editable', request.editable],
           ['expired', request.expired],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           [
             'organization_id',
             request.organizationId ??
@@ -925,15 +925,9 @@ export class API extends ParentAPI {
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ...Object.entries(
-            resolveOneOf([
-              {
-                param: 'application_id',
-                value: request.applicationId,
-              },
-              {
-                param: 'user_id',
-                value: request.userId,
-              },
+            resolveOneOf<string>([
+              { param: 'application_id', value: request.applicationId },
+              { param: 'user_id', value: request.userId },
             ]),
           ),
         ),
@@ -1045,7 +1039,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/iam/v1alpha1/quota`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'name_asc'],
+          ['order_by', request.orderBy],
           [
             'organization_id',
             request.organizationId ??
@@ -1098,7 +1092,7 @@ export class API extends ParentAPI {
       unmarshalQuotum,
     )
 
-  protected pageOfListJWTs = (request: Readonly<ListJWTsRequest>) =>
+  protected pageOfListJWTs = (request: Readonly<ListJWTsRequest> = {}) =>
     this.client.fetch<ListJWTsResponse>(
       {
         method: 'GET',
@@ -1106,7 +1100,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['audience_id', request.audienceId],
           ['expired', request.expired],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -1123,7 +1117,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListJWTsRequest}
    * @returns A Promise of ListJWTsResponse
    */
-  listJWTs = (request: Readonly<ListJWTsRequest>) =>
+  listJWTs = (request: Readonly<ListJWTsRequest> = {}) =>
     enrichForPagination('jwts', this.pageOfListJWTs, request)
 
   /**

@@ -16,7 +16,7 @@ import type {
   UpdateHumanRequest,
 } from './types.gen'
 
-export const unmarshalHuman = (data: unknown) => {
+export const unmarshalHuman = (data: unknown): Human => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Human' failed as data isn't a dictionary.`,
@@ -42,7 +42,9 @@ export const unmarshalHuman = (data: unknown) => {
   } as Human
 }
 
-export const unmarshalListHumansResponse = (data: unknown) => {
+export const unmarshalListHumansResponse = (
+  data: unknown,
+): ListHumansResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListHumansResponse' failed as data isn't a dictionary.`,
@@ -55,7 +57,7 @@ export const unmarshalListHumansResponse = (data: unknown) => {
   } as ListHumansResponse
 }
 
-export const unmarshalRegisterResponse = (data: unknown) => {
+export const unmarshalRegisterResponse = (data: unknown): RegisterResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'RegisterResponse' failed as data isn't a dictionary.`,
@@ -74,23 +76,23 @@ export const marshalCreateHumanRequest = (
 ): Record<string, unknown> => ({
   altitude_in_meter: request.altitudeInMeter,
   altitude_in_millimeter: request.altitudeInMillimeter,
-  eyes_color: request.eyesColor ?? 'unknown',
+  eyes_color: request.eyesColor,
   fingers_count: request.fingersCount,
   hair_count: request.hairCount,
   height: request.height,
   is_happy: request.isHappy,
   name: request.name,
   shoe_size: request.shoeSize,
-  ...resolveOneOf([
-    {
-      default: defaults.defaultProjectId,
-      param: 'project_id',
-      value: request.projectId,
-    },
+  ...resolveOneOf<string>([
     {
       default: defaults.defaultOrganizationId,
       param: 'organization_id',
       value: request.organizationId,
+    },
+    {
+      default: defaults.defaultProjectId,
+      param: 'project_id',
+      value: request.projectId,
     },
   ]),
 })
@@ -108,7 +110,7 @@ export const marshalUpdateHumanRequest = (
 ): Record<string, unknown> => ({
   altitude_in_meter: request.altitudeInMeter,
   altitude_in_millimeter: request.altitudeInMillimeter,
-  eyes_color: request.eyesColor ?? 'unknown',
+  eyes_color: request.eyesColor,
   fingers_count: request.fingersCount,
   hair_count: request.hairCount,
   height: request.height,

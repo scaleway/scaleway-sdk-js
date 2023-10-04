@@ -38,7 +38,41 @@ export type OfferQuotaWarning =
   | 'database_count_exceeded'
   | 'disk_usage_exceeded'
 
-/** Dns record. */
+export interface HostingCpanelUrls {
+  dashboard: string
+  webmail: string
+}
+
+export interface HostingOption {
+  /** Option ID. */
+  id: string
+  /** Option name. */
+  name: string
+}
+
+export interface OfferProduct {
+  /** Product name. */
+  name: string
+  /** Product option. */
+  option: boolean
+  /** Limit number of email accounts. */
+  emailAccountsQuota: number
+  /** Limit quantity of email storage in gigabytes. */
+  emailStorageQuota: number
+  /** Limit number of databases. */
+  databasesQuota: number
+  /** Limit quantity of hosting storage in gigabytes. */
+  hostingStorageQuota: number
+  /** Whether or not support is included. */
+  supportIncluded: boolean
+  /** Limit number of virtual CPU. */
+  vCpu: number
+  /** Limit quantity of memory in gigabytes. */
+  ram: number
+  /** Limit number of add-on domains. */
+  maxAddonDomains: number
+}
+
 export interface DnsRecord {
   /** Record name. */
   name: string
@@ -54,17 +88,15 @@ export interface DnsRecord {
   status: DnsRecordStatus
 }
 
-/** Dns records. */
-export interface DnsRecords {
-  /** List of DNS records. */
-  records: DnsRecord[]
-  /** List of nameservers. */
-  nameServers: Nameserver[]
-  /** Status of the records. */
-  status: DnsRecordsStatus
+export interface Nameserver {
+  /** Hostname of the nameserver. */
+  hostname: string
+  /** Status of the nameserver. */
+  status: NameserverStatus
+  /** Defines whether the nameserver is the default one. */
+  isDefault: boolean
 }
 
-/** Hosting. */
 export interface Hosting {
   /** ID of the Web Hosting plan. */
   id: string
@@ -95,7 +127,7 @@ export interface Hosting {
   /** DNS status of the Web Hosting plan. */
   dnsStatus: HostingDnsStatus
   /** URL to connect to cPanel dashboard and to Webmail interface. */
-  cpanelUrls?: HostingCpanelUrls
+  cpanelUrls: HostingCpanelUrls
   /** Main Web Hosting cPanel username. */
   username: string
   /** Indicates if the hosting offer has reached its end of life. */
@@ -104,51 +136,13 @@ export interface Hosting {
   region: Region
 }
 
-export interface HostingCpanelUrls {
-  dashboard: string
-  webmail: string
-}
-
-/** Hosting. option. */
-export interface HostingOption {
-  /** Option ID. */
-  id: string
-  /** Option name. */
-  name: string
-}
-
-/** List hostings response. */
-export interface ListHostingsResponse {
-  /** Number of Web Hosting plans returned. */
-  totalCount: number
-  /** List of Web Hosting plans. */
-  hostings: Hosting[]
-}
-
-/** List offers response. */
-export interface ListOffersResponse {
-  /** List of offers. */
-  offers: Offer[]
-}
-
-/** Nameserver. */
-export interface Nameserver {
-  /** Hostname of the nameserver. */
-  hostname: string
-  /** Status of the nameserver. */
-  status: NameserverStatus
-  /** Defines whether the nameserver is the default one. */
-  isDefault: boolean
-}
-
-/** Offer. */
 export interface Offer {
   /** Offer ID. */
   id: string
   /** Unique identifier used for billing. */
   billingOperationPath: string
   /** Product constituting this offer. */
-  product?: OfferProduct
+  product: OfferProduct
   /** Price of this offer. */
   price?: Money
   /**
@@ -160,30 +154,6 @@ export interface Offer {
   quotaWarnings: OfferQuotaWarning[]
   /** Indicates if the offer has reached its end of life. */
   endOfLife: boolean
-}
-
-/** Offer. product. */
-export interface OfferProduct {
-  /** Product name. */
-  name: string
-  /** Product option. */
-  option: boolean
-  /** Limit number of email accounts. */
-  emailAccountsQuota: number
-  /** Limit quantity of email storage in gigabytes. */
-  emailStorageQuota: number
-  /** Limit number of databases. */
-  databasesQuota: number
-  /** Limit quantity of hosting storage in gigabytes. */
-  hostingStorageQuota: number
-  /** Whether or not support is included. */
-  supportIncluded: boolean
-  /** Limit number of virtual CPU. */
-  vCpu: number
-  /** Limit quantity of memory in gigabytes. */
-  ram: number
-  /** Limit number of add-on domains. */
-  maxAddonDomains: number
 }
 
 export type CreateHostingRequest = {
@@ -207,6 +177,45 @@ export type CreateHostingRequest = {
   domain: string
   /** IDs of any selected additional options for the Web Hosting plan. */
   optionIds?: string[]
+}
+
+export type DeleteHostingRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Hosting ID. */
+  hostingId: string
+}
+
+export interface DnsRecords {
+  /** List of DNS records. */
+  records: DnsRecord[]
+  /** List of nameservers. */
+  nameServers: Nameserver[]
+  /** Status of the records. */
+  status: DnsRecordsStatus
+}
+
+export type GetDomainDnsRecordsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Domain associated with the DNS records. */
+  domain: string
+}
+
+export type GetHostingRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Hosting ID. */
+  hostingId: string
 }
 
 export type ListHostingsRequest = {
@@ -254,62 +263,11 @@ export type ListHostingsRequest = {
   organizationId?: string
 }
 
-export type GetHostingRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Hosting ID. */
-  hostingId: string
-}
-
-export type UpdateHostingRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Hosting ID. */
-  hostingId: string
-  /** New contact email for the Web Hosting plan. */
-  email?: string
-  /** New tags for the Web Hosting plan. */
-  tags?: string[]
-  /** IDs of the new options for the Web Hosting plan. */
-  optionIds?: string[]
-  /** ID of the new offer for the Web Hosting plan. */
-  offerId?: string
-}
-
-export type DeleteHostingRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Hosting ID. */
-  hostingId: string
-}
-
-export type RestoreHostingRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Hosting ID. */
-  hostingId: string
-}
-
-export type GetDomainDnsRecordsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Domain associated with the DNS records. */
-  domain: string
+export interface ListHostingsResponse {
+  /** Number of Web Hosting plans returned. */
+  totalCount: number
+  /** List of Web Hosting plans. */
+  hostings: Hosting[]
 }
 
 export type ListOffersRequest = {
@@ -335,4 +293,37 @@ export type ListOffersRequest = {
    * case of wanting to update the plan).
    */
   hostingId?: string
+}
+
+export interface ListOffersResponse {
+  /** List of offers. */
+  offers: Offer[]
+}
+
+export type RestoreHostingRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Hosting ID. */
+  hostingId: string
+}
+
+export type UpdateHostingRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Hosting ID. */
+  hostingId: string
+  /** New contact email for the Web Hosting plan. */
+  email?: string
+  /** New tags for the Web Hosting plan. */
+  tags?: string[]
+  /** IDs of the new options for the Web Hosting plan. */
+  optionIds?: string[]
+  /** ID of the new offer for the Web Hosting plan. */
+  offerId?: string
 }
