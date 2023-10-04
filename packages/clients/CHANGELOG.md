@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.33.0...@scaleway/sdk@2.0.0-alpha.0) (2023-10-04)
+
+### Features
+
+- don't export private types ([c3ec87c](https://github.com/scaleway/scaleway-sdk-js/commit/c3ec87c64ba9798ec1e442f425da47e79516c211))
+- v2 ([a0dbfed](https://github.com/scaleway/scaleway-sdk-js/commit/a0dbfedc5e429e0c345ecba2d414474f9dc48b94))
+
 ## [1.33.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.32.1...@scaleway/sdk@1.33.0) (2023-10-02)
 
 ### Features
