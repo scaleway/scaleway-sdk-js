@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.0.0-alpha.1...@scaleway/sdk@2.0.0-alpha.2) (2023-10-04)
+
+### Features
+
+- all optional messages should be optional ([29a761f](https://github.com/scaleway/scaleway-sdk-js/commit/29a761f85eee34b67139b6c3d1c0d976dfa81143))
+
 ## [2.0.0-alpha.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.0.0-alpha.0...@scaleway/sdk@2.0.0-alpha.1) (2023-10-04)
 
 **Note:** Version bump only for package @scaleway/sdk
