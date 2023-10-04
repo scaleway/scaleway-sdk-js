@@ -101,7 +101,9 @@ export type CreateVolumeRequest = {
    * config.
    */
   region?: Region
+  /** Project id. */
   projectId?: string
+  /** Volume name. */
   name: string
 }
 
@@ -111,6 +113,7 @@ export type GetVolumeRequest = {
    * config.
    */
   region?: Region
+  /** Volume id. */
   volumeId: string
 }
 
@@ -120,10 +123,14 @@ export type ListVolumesRequest = {
    * config.
    */
   region?: Region
+  /** Project id whose volumes you wish to list. */
   projectId?: string
-  page?: number
-  pageSize?: number
+  /** Sort order of the returned Volume. */
   orderBy?: ListVolumesRequestOrderBy
+  /** Page number to return, from the paginated results. */
+  page?: number
+  /** Maximum number of Volume to return per page. */
+  pageSize?: number
 }
 
 export type UpdateVolumeRequest = {
@@ -132,8 +139,11 @@ export type UpdateVolumeRequest = {
    * config.
    */
   region?: Region
+  /** Volume id. */
   volumeId: string
+  /** Volume name. */
   name?: string
+  /** Tags for the Volume. */
   tags?: string[]
 }
 
@@ -143,6 +153,7 @@ export type DeleteVolumeRequest = {
    * config.
    */
   region?: Region
+  /** Volume id. */
   volumeId: string
 }
 
@@ -152,9 +163,13 @@ export type CreatePinByURLRequest = {
    * config.
    */
   region?: Region
+  /** Volume Id on which you wish to pin your content. */
   volumeId: string
+  /** Url whose content you wish to pin. */
   url: string
+  /** Pin name. */
   name?: string
+  /** Pin options. */
   pinOptions?: PinOptions
 }
 
@@ -164,10 +179,15 @@ export type CreatePinByCIDRequest = {
    * config.
    */
   region?: Region
+  /** Volume Id on which you wish to pin your content. */
   volumeId: string
+  /** Cid whose content you wish to pin. */
   cid: string
-  name?: string
+  /** Node containing the content you wish to pin. */
   origins?: string[]
+  /** Pin name. */
+  name?: string
+  /** Pin options. */
   pinOptions?: PinOptions
 }
 
@@ -177,11 +197,17 @@ export type ReplacePinRequest = {
    * config.
    */
   region?: Region
+  /** Pin id whose information you wish to replace. */
   pinId: string
+  /** Volume id. */
   volumeId: string
+  /** New cid you want to pin in place of the old one. */
   cid: string
+  /** New name to replace. */
   name?: string
+  /** Node containing the content you wish to pin. */
   origins?: string[]
+  /** Pin options. */
   pinOptions?: PinOptions
 }
 
@@ -191,7 +217,9 @@ export type GetPinRequest = {
    * config.
    */
   region?: Region
+  /** Pin id for which you wish to obtain information. */
   pinId: string
+  /** Volume id. */
   volumeId: string
 }
 
@@ -201,12 +229,19 @@ export type ListPinsRequest = {
    * config.
    */
   region?: Region
+  /** Volume ID for which you wish to list the pins. */
   volumeId: string
+  /** Project id. */
   projectId?: string
+  /** Organization id. */
   organizationId?: string
-  page?: number
-  pageSize?: number
+  /** Sort order of the returned Volume. */
   orderBy?: ListPinsRequestOrderBy
+  /** Page number to return, from the paginated results. */
+  page?: number
+  /** Maximum number of Volume to return per page. */
+  pageSize?: number
+  /** List pins by status. */
   status?: PinStatus
 }
 
@@ -216,6 +251,8 @@ export type DeletePinRequest = {
    * config.
    */
   region?: Region
+  /** Pin id you wish to remove from the volume. */
   pinId: string
+  /** Volume id. */
   volumeId: string
 }
