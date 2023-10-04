@@ -101,7 +101,7 @@ export type CreateVolumeRequest = {
    * config.
    */
   region?: Region
-  /** Project id. */
+  /** Project ID. */
   projectId?: string
   /** Volume name. */
   name: string
@@ -113,7 +113,7 @@ export type GetVolumeRequest = {
    * config.
    */
   region?: Region
-  /** Volume id. */
+  /** Volume ID. */
   volumeId: string
 }
 
@@ -123,13 +123,13 @@ export type ListVolumesRequest = {
    * config.
    */
   region?: Region
-  /** Project id whose volumes you wish to list. */
+  /** Project ID, only volumes belonging to this project will be listed. */
   projectId?: string
-  /** Sort order of the returned Volume. */
+  /** Sort the order of the returned volumes. */
   orderBy?: ListVolumesRequestOrderBy
-  /** Page number to return, from the paginated results. */
+  /** Page number. */
   page?: number
-  /** Maximum number of Volume to return per page. */
+  /** Maximum number of volumes to return per page. */
   pageSize?: number
 }
 
@@ -139,11 +139,11 @@ export type UpdateVolumeRequest = {
    * config.
    */
   region?: Region
-  /** Volume id. */
+  /** Volume ID. */
   volumeId: string
   /** Volume name. */
   name?: string
-  /** Tags for the Volume. */
+  /** Tags of the volume. */
   tags?: string[]
 }
 
@@ -153,7 +153,7 @@ export type DeleteVolumeRequest = {
    * config.
    */
   region?: Region
-  /** Volume id. */
+  /** Volume ID. */
   volumeId: string
 }
 
@@ -163,9 +163,9 @@ export type CreatePinByURLRequest = {
    * config.
    */
   region?: Region
-  /** Volume Id on which you wish to pin your content. */
+  /** Volume ID on which you want to pin your content. */
   volumeId: string
-  /** Url whose content you wish to pin. */
+  /** URL containing the content you want to pin. */
   url: string
   /** Pin name. */
   name?: string
@@ -179,11 +179,11 @@ export type CreatePinByCIDRequest = {
    * config.
    */
   region?: Region
-  /** Volume Id on which you wish to pin your content. */
+  /** Volume ID on which you want to pin your content. */
   volumeId: string
-  /** Cid whose content you wish to pin. */
+  /** CID containing the content you want to pin. */
   cid: string
-  /** Node containing the content you wish to pin. */
+  /** Node containing the content you want to pin. */
   origins?: string[]
   /** Pin name. */
   name?: string
@@ -197,15 +197,15 @@ export type ReplacePinRequest = {
    * config.
    */
   region?: Region
-  /** Pin id whose information you wish to replace. */
+  /** Pin ID whose information you wish to replace. */
   pinId: string
-  /** Volume id. */
+  /** Volume ID. */
   volumeId: string
-  /** New cid you want to pin in place of the old one. */
+  /** New CID you want to pin in place of the old one. */
   cid: string
   /** New name to replace. */
   name?: string
-  /** Node containing the content you wish to pin. */
+  /** Node containing the content you want to pin. */
   origins?: string[]
   /** Pin options. */
   pinOptions?: PinOptions
@@ -217,9 +217,9 @@ export type GetPinRequest = {
    * config.
    */
   region?: Region
-  /** Pin id for which you wish to obtain information. */
+  /** Pin ID of which you want to obtain information. */
   pinId: string
-  /** Volume id. */
+  /** Volume ID. */
   volumeId: string
 }
 
@@ -229,17 +229,17 @@ export type ListPinsRequest = {
    * config.
    */
   region?: Region
-  /** Volume ID for which you wish to list the pins. */
+  /** Volume ID of which you want to list the pins. */
   volumeId: string
-  /** Project id. */
+  /** Project ID. */
   projectId?: string
-  /** Organization id. */
+  /** Organization ID. */
   organizationId?: string
   /** Sort order of the returned Volume. */
   orderBy?: ListPinsRequestOrderBy
-  /** Page number to return, from the paginated results. */
+  /** Page number. */
   page?: number
-  /** Maximum number of Volume to return per page. */
+  /** Maximum number of volumes to return per page. */
   pageSize?: number
   /** List pins by status. */
   status?: PinStatus
@@ -251,8 +251,8 @@ export type DeletePinRequest = {
    * config.
    */
   region?: Region
-  /** Pin id you wish to remove from the volume. */
+  /** Pin ID you want to remove from the volume. */
   pinId: string
-  /** Volume id. */
+  /** Volume ID. */
   volumeId: string
 }
