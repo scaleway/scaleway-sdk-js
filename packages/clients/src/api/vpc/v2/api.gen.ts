@@ -69,7 +69,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['is_default', request.isDefault],
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -181,7 +181,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['dhcp_enabled', request.dhcpEnabled],
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [

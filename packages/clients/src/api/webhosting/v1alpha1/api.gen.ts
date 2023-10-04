@@ -76,7 +76,7 @@ export class API extends ParentAPI {
         )}/hostings`,
         urlParams: urlParams(
           ['domain', request.domain],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -251,7 +251,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['hosting_id', request.hostingId],
           ['only_options', request.onlyOptions],
-          ['order_by', request.orderBy ?? 'price_asc'],
+          ['order_by', request.orderBy],
           ['without_options', request.withoutOptions],
         ),
       },

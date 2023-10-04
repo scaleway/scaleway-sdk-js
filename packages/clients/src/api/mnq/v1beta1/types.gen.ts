@@ -38,7 +38,6 @@ export type SnsInfoStatus = 'unknown_status' | 'enabled' | 'disabled'
 
 export type SqsInfoStatus = 'unknown_status' | 'enabled' | 'disabled'
 
-/** File. */
 export interface File {
   /** File name. */
   name: string
@@ -46,39 +45,42 @@ export interface File {
   content: string
 }
 
-/** List nats accounts response. */
-export interface ListNatsAccountsResponse {
-  /** Total count of existing NATS accounts (matching any filters specified). */
-  totalCount: number
-  /** NATS accounts on this page. */
-  natsAccounts: NatsAccount[]
+export interface SnsPermissions {
+  /**
+   * Defines whether the credentials bearer can publish messages to the service
+   * (publish to SNS topics).
+   */
+  canPublish?: boolean
+  /**
+   * Defines whether the credentials bearer can receive messages from the
+   * service (configure subscriptions).
+   */
+  canReceive?: boolean
+  /**
+   * Defines whether the credentials bearer can manage the associated SNS topics
+   * or subscriptions.
+   */
+  canManage?: boolean
 }
 
-/** List nats credentials response. */
-export interface ListNatsCredentialsResponse {
-  /** Total count of existing credentials (matching any filters specified). */
-  totalCount: number
-  /** Credentials on this page. */
-  natsCredentials: NatsCredentials[]
+export interface SqsPermissions {
+  /**
+   * Defines whether the credentials bearer can publish messages to the service
+   * (send messages to SQS queues).
+   */
+  canPublish?: boolean
+  /**
+   * Defines whether the credentials bearer can receive messages from SQS
+   * queues.
+   */
+  canReceive?: boolean
+  /**
+   * Defines whether the credentials bearer can manage the associated SQS
+   * queues.
+   */
+  canManage?: boolean
 }
 
-/** List sns credentials response. */
-export interface ListSnsCredentialsResponse {
-  /** Total count of existing credentials (matching any filters specified). */
-  totalCount: number
-  /** SNS credentials on this page. */
-  snsCredentials: SnsCredentials[]
-}
-
-/** List sqs credentials response. */
-export interface ListSqsCredentialsResponse {
-  /** Total count of existing credentials (matching any filters specified). */
-  totalCount: number
-  /** SQS credentials on this page. */
-  sqsCredentials: SqsCredentials[]
-}
-
-/** Nats account. */
 export interface NatsAccount {
   /** NATS account ID. */
   id: string
@@ -96,7 +98,6 @@ export interface NatsAccount {
   updatedAt?: Date
 }
 
-/** Nats credentials. */
 export interface NatsCredentials {
   /** ID of the credentials. */
   id: string
@@ -117,7 +118,6 @@ export interface NatsCredentials {
   checksum: string
 }
 
-/** Sns credentials. */
 export interface SnsCredentials {
   /** ID of the credentials. */
   id: string
@@ -141,42 +141,6 @@ export interface SnsCredentials {
   permissions?: SnsPermissions
 }
 
-/** Sns info. */
-export interface SnsInfo {
-  /** Project ID of the Project containing the service. */
-  projectId: string
-  /** Region of the service. */
-  region: Region
-  /** SNS creation date. */
-  createdAt?: Date
-  /** SNS last modification date. */
-  updatedAt?: Date
-  /** SNS activation status. */
-  status: SnsInfoStatus
-  /** Endpoint of the SNS service for this region and project. */
-  snsEndpointUrl: string
-}
-
-/** Sns permissions. */
-export interface SnsPermissions {
-  /**
-   * Defines whether the credentials bearer can publish messages to the service
-   * (publish to SNS topics).
-   */
-  canPublish?: boolean
-  /**
-   * Defines whether the credentials bearer can receive messages from the
-   * service (configure subscriptions).
-   */
-  canReceive?: boolean
-  /**
-   * Defines whether the credentials bearer can manage the associated SNS topics
-   * or subscriptions.
-   */
-  canManage?: boolean
-}
-
-/** Sqs credentials. */
 export interface SqsCredentials {
   /** ID of the credentials. */
   id: string
@@ -200,39 +164,32 @@ export interface SqsCredentials {
   permissions?: SqsPermissions
 }
 
-/** Sqs info. */
-export interface SqsInfo {
-  /** Project ID of the Project containing the service. */
-  projectId: string
-  /** Region of the service. */
-  region: Region
-  /** SQS creation date. */
-  createdAt?: Date
-  /** SQS last modification date. */
-  updatedAt?: Date
-  /** SQS activation status. */
-  status: SqsInfoStatus
-  /** Endpoint of the SQS service for this region and project. */
-  sqsEndpointUrl: string
+export interface ListNatsAccountsResponse {
+  /** Total count of existing NATS accounts (matching any filters specified). */
+  totalCount: number
+  /** NATS accounts on this page. */
+  natsAccounts: NatsAccount[]
 }
 
-/** Sqs permissions. */
-export interface SqsPermissions {
-  /**
-   * Defines whether the credentials bearer can publish messages to the service
-   * (send messages to SQS queues).
-   */
-  canPublish?: boolean
-  /**
-   * Defines whether the credentials bearer can receive messages from SQS
-   * queues.
-   */
-  canReceive?: boolean
-  /**
-   * Defines whether the credentials bearer can manage the associated SQS
-   * queues.
-   */
-  canManage?: boolean
+export interface ListNatsCredentialsResponse {
+  /** Total count of existing credentials (matching any filters specified). */
+  totalCount: number
+  /** Credentials on this page. */
+  natsCredentials: NatsCredentials[]
+}
+
+export interface ListSnsCredentialsResponse {
+  /** Total count of existing credentials (matching any filters specified). */
+  totalCount: number
+  /** SNS credentials on this page. */
+  snsCredentials: SnsCredentials[]
+}
+
+export interface ListSqsCredentialsResponse {
+  /** Total count of existing credentials (matching any filters specified). */
+  totalCount: number
+  /** SQS credentials on this page. */
+  sqsCredentials: SqsCredentials[]
 }
 
 export type NatsApiCreateNatsAccountRequest = {
@@ -247,6 +204,18 @@ export type NatsApiCreateNatsAccountRequest = {
   projectId?: string
 }
 
+export type NatsApiCreateNatsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** NATS account containing the credentials. */
+  natsAccountId: string
+  /** Name of the credentials. */
+  name?: string
+}
+
 export type NatsApiDeleteNatsAccountRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -257,16 +226,14 @@ export type NatsApiDeleteNatsAccountRequest = {
   natsAccountId: string
 }
 
-export type NatsApiUpdateNatsAccountRequest = {
+export type NatsApiDeleteNatsCredentialsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
    */
   region?: Region
-  /** ID of the NATS account to update. */
-  natsAccountId: string
-  /** NATS account name. */
-  name?: string
+  /** ID of the credentials to delete. */
+  natsCredentialsId: string
 }
 
 export type NatsApiGetNatsAccountRequest = {
@@ -277,6 +244,16 @@ export type NatsApiGetNatsAccountRequest = {
   region?: Region
   /** ID of the NATS account to get. */
   natsAccountId: string
+}
+
+export type NatsApiGetNatsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the credentials to get. */
+  natsCredentialsId: string
 }
 
 export type NatsApiListNatsAccountsRequest = {
@@ -295,38 +272,6 @@ export type NatsApiListNatsAccountsRequest = {
   orderBy?: ListNatsAccountsRequestOrderBy
 }
 
-export type NatsApiCreateNatsCredentialsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** NATS account containing the credentials. */
-  natsAccountId: string
-  /** Name of the credentials. */
-  name?: string
-}
-
-export type NatsApiDeleteNatsCredentialsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** ID of the credentials to delete. */
-  natsCredentialsId: string
-}
-
-export type NatsApiGetNatsCredentialsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** ID of the credentials to get. */
-  natsCredentialsId: string
-}
-
 export type NatsApiListNatsCredentialsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -334,13 +279,25 @@ export type NatsApiListNatsCredentialsRequest = {
    */
   region?: Region
   /** Include only credentials for this NATS account. */
-  natsAccountId: string
+  natsAccountId?: string
   /** Page number to return. */
   page?: number
   /** Maximum number of credentials to return per page. */
   pageSize?: number
   /** Order in which to return results. */
   orderBy?: ListNatsCredentialsRequestOrderBy
+}
+
+export type NatsApiUpdateNatsAccountRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the NATS account to update. */
+  natsAccountId: string
+  /** NATS account name. */
+  name?: string
 }
 
 export type SnsApiActivateSnsRequest = {
@@ -350,26 +307,6 @@ export type SnsApiActivateSnsRequest = {
    */
   region?: Region
   /** Project on which to activate the SNS service. */
-  projectId?: string
-}
-
-export type SnsApiGetSnsInfoRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Project to retrieve SNS info from. */
-  projectId?: string
-}
-
-export type SnsApiDeactivateSnsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Project on which to deactivate the SNS service. */
   projectId?: string
 }
 
@@ -387,6 +324,16 @@ export type SnsApiCreateSnsCredentialsRequest = {
   permissions?: SnsPermissions
 }
 
+export type SnsApiDeactivateSnsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Project on which to deactivate the SNS service. */
+  projectId?: string
+}
+
 export type SnsApiDeleteSnsCredentialsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -397,20 +344,6 @@ export type SnsApiDeleteSnsCredentialsRequest = {
   snsCredentialsId: string
 }
 
-export type SnsApiUpdateSnsCredentialsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** ID of the SNS credentials to update. */
-  snsCredentialsId: string
-  /** Name of the credentials. */
-  name?: string
-  /** Permissions associated with these credentials. */
-  permissions?: SnsPermissions
-}
-
 export type SnsApiGetSnsCredentialsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -419,6 +352,16 @@ export type SnsApiGetSnsCredentialsRequest = {
   region?: Region
   /** ID of the SNS credentials to get. */
   snsCredentialsId: string
+}
+
+export type SnsApiGetSnsInfoRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Project to retrieve SNS info from. */
+  projectId?: string
 }
 
 export type SnsApiListSnsCredentialsRequest = {
@@ -437,6 +380,35 @@ export type SnsApiListSnsCredentialsRequest = {
   orderBy?: ListSnsCredentialsRequestOrderBy
 }
 
+export type SnsApiUpdateSnsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the SNS credentials to update. */
+  snsCredentialsId: string
+  /** Name of the credentials. */
+  name?: string
+  /** Permissions associated with these credentials. */
+  permissions?: SnsPermissions
+}
+
+export interface SnsInfo {
+  /** Project ID of the Project containing the service. */
+  projectId: string
+  /** Region of the service. */
+  region: Region
+  /** SNS creation date. */
+  createdAt?: Date
+  /** SNS last modification date. */
+  updatedAt?: Date
+  /** SNS activation status. */
+  status: SnsInfoStatus
+  /** Endpoint of the SNS service for this region and project. */
+  snsEndpointUrl: string
+}
+
 export type SqsApiActivateSqsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -444,26 +416,6 @@ export type SqsApiActivateSqsRequest = {
    */
   region?: Region
   /** Project on which to activate the SQS service. */
-  projectId?: string
-}
-
-export type SqsApiGetSqsInfoRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Project to retrieve SQS info from. */
-  projectId?: string
-}
-
-export type SqsApiDeactivateSqsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Project on which to deactivate the SQS service. */
   projectId?: string
 }
 
@@ -481,6 +433,16 @@ export type SqsApiCreateSqsCredentialsRequest = {
   permissions?: SqsPermissions
 }
 
+export type SqsApiDeactivateSqsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Project on which to deactivate the SQS service. */
+  projectId?: string
+}
+
 export type SqsApiDeleteSqsCredentialsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -491,20 +453,6 @@ export type SqsApiDeleteSqsCredentialsRequest = {
   sqsCredentialsId: string
 }
 
-export type SqsApiUpdateSqsCredentialsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** ID of the SQS credentials to update. */
-  sqsCredentialsId: string
-  /** Name of the credentials. */
-  name?: string
-  /** Permissions associated with these credentials. */
-  permissions?: SqsPermissions
-}
-
 export type SqsApiGetSqsCredentialsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -513,6 +461,16 @@ export type SqsApiGetSqsCredentialsRequest = {
   region?: Region
   /** ID of the SQS credentials to get. */
   sqsCredentialsId: string
+}
+
+export type SqsApiGetSqsInfoRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Project to retrieve SQS info from. */
+  projectId?: string
 }
 
 export type SqsApiListSqsCredentialsRequest = {
@@ -529,4 +487,33 @@ export type SqsApiListSqsCredentialsRequest = {
   pageSize?: number
   /** Order in which to return results. */
   orderBy?: ListSqsCredentialsRequestOrderBy
+}
+
+export type SqsApiUpdateSqsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the SQS credentials to update. */
+  sqsCredentialsId: string
+  /** Name of the credentials. */
+  name?: string
+  /** Permissions associated with these credentials. */
+  permissions?: SqsPermissions
+}
+
+export interface SqsInfo {
+  /** Project ID of the Project containing the service. */
+  projectId: string
+  /** Region of the service. */
+  region: Region
+  /** SQS creation date. */
+  createdAt?: Date
+  /** SQS last modification date. */
+  updatedAt?: Date
+  /** SQS activation status. */
+  status: SqsInfoStatus
+  /** Endpoint of the SQS service for this region and project. */
+  sqsEndpointUrl: string
 }

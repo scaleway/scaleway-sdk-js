@@ -15,6 +15,7 @@ import {
 import { unmarshalSetImageResponse } from './marshalling.gen'
 import { marshalSetImageRequestWithID } from './marshalling.utils'
 import type {
+  CreateServerRequest,
   GetImageRequest,
   GetPrivateNICRequest,
   GetServerRequest,
@@ -26,6 +27,7 @@ import type {
   ServerActionRequest,
   ServerState,
   Snapshot,
+  UpdateServerRequest,
   Volume,
   VolumeServerTemplate,
 } from './types.gen'
@@ -36,7 +38,6 @@ import type {
 import type {
   AttachVolumeRequest,
   AttachVolumeResponse,
-  CreateServerRequest,
   DetachVolumeRequest,
   DetachVolumeResponse,
   GetServerUserDataRequest,
@@ -47,7 +48,6 @@ import type {
   UpdateSecurityGroupResponse,
   UpdateSecurityGroupRuleRequest,
   UpdateSecurityGroupRuleResponse,
-  UpdateServerRequest,
   UpdateSnapshotRequest,
   UpdateSnapshotResponse,
 } from './types.utils'

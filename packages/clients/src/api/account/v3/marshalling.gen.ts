@@ -14,7 +14,7 @@ import type {
   ProjectApiUpdateProjectRequest,
 } from './types.gen'
 
-export const unmarshalProject = (data: unknown) => {
+export const unmarshalProject = (data: unknown): Project => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Project' failed as data isn't a dictionary.`,
@@ -31,7 +31,9 @@ export const unmarshalProject = (data: unknown) => {
   } as Project
 }
 
-export const unmarshalListProjectsResponse = (data: unknown) => {
+export const unmarshalListProjectsResponse = (
+  data: unknown,
+): ListProjectsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListProjectsResponse' failed as data isn't a dictionary.`,
