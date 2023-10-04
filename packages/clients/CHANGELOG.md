@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.34.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.33.0...@scaleway/sdk@1.34.0) (2023-10-04)
+
+### Features
+
+- **instance:** add servers filter in ListServersRequest ([#903](https://github.com/scaleway/scaleway-sdk-js/issues/903)) ([a96eb9f](https://github.com/scaleway/scaleway-sdk-js/commit/a96eb9f9626dd3dd0f7c70858bc8adf172bcf7e7))
+- **lb:** add pl-waw-3 az ([#902](https://github.com/scaleway/scaleway-sdk-js/issues/902)) ([997aa1d](https://github.com/scaleway/scaleway-sdk-js/commit/997aa1da10e777e99c725f21fab37ece13730c27))
+
 ## [1.33.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.32.1...@scaleway/sdk@1.33.0) (2023-10-02)
 
 ### Features
