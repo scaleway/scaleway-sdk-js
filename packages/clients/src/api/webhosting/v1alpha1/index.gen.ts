@@ -1,9 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-export { API } from './api.gen'
+export { API, DediboxAPI } from './api.gen'
 export * from './content.gen'
 export type {
   CreateHostingRequest,
+  DediboxApiListDediboxHostingsRequest,
+  DediboxApiMigrateDediboxHostingRequest,
+  DediboxHosting,
+  DediboxHostingType,
   DeleteHostingRequest,
   DnsRecord,
   DnsRecordStatus,
@@ -17,6 +21,8 @@ export type {
   HostingDnsStatus,
   HostingOption,
   HostingStatus,
+  ListDediboxHostingsRequestOrderBy,
+  ListDediboxHostingsResponse,
   ListHostingsRequest,
   ListHostingsRequestOrderBy,
   ListHostingsResponse,

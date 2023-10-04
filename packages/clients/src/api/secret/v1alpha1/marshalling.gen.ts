@@ -2,7 +2,6 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import {
   isJSONObject,
-  resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
@@ -42,6 +41,24 @@ export const unmarshalFolder = (data: unknown) => {
   } as Folder
 }
 
+export const unmarshalSecretVersion = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SecretVersion' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description ? data.description : undefined,
+    isLatest: data.is_latest,
+    revision: data.revision,
+    secretId: data.secret_id,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as SecretVersion
+}
+
 export const unmarshalSecret = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -51,7 +68,7 @@ export const unmarshalSecret = (data: unknown) => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
-    description: data.description,
+    description: data.description ? data.description : undefined,
     id: data.id,
     isManaged: data.is_managed,
     isProtected: data.is_protected,
@@ -67,24 +84,6 @@ export const unmarshalSecret = (data: unknown) => {
   } as Secret
 }
 
-export const unmarshalSecretVersion = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'SecretVersion' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    createdAt: unmarshalDate(data.created_at),
-    description: data.description,
-    isLatest: data.is_latest,
-    revision: data.revision,
-    secretId: data.secret_id,
-    status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
-  } as SecretVersion
-}
-
 export const unmarshalAccessSecretVersionResponse = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -94,7 +93,7 @@ export const unmarshalAccessSecretVersionResponse = (data: unknown) => {
 
   return {
     data: data.data,
-    dataCrc32: data.data_crc32,
+    dataCrc32: data.data_crc32 ? data.data_crc32 : undefined,
     revision: data.revision,
     secretId: data.secret_id,
   } as AccessSecretVersionResponse
@@ -146,25 +145,17 @@ export const unmarshalListTagsResponse = (data: unknown) => {
     )
   }
 
-  return { tags: data.tags, totalCount: data.total_count } as ListTagsResponse
+  return {
+    tags: data.tags,
+    totalCount: data.total_count,
+  } as ListTagsResponse
 }
-
-const marshalPasswordGenerationParams = (
-  request: PasswordGenerationParams,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  additional_chars: request.additionalChars,
-  length: request.length,
-  no_digits: request.noDigits,
-  no_lowercase_letters: request.noLowercaseLetters,
-  no_uppercase_letters: request.noUppercaseLetters,
-})
 
 export const marshalAddSecretOwnerRequest = (
   request: AddSecretOwnerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  product: request.product ?? 'unknown',
+  product: request.product,
   product_name: request.productName,
 })
 
@@ -186,7 +177,18 @@ export const marshalCreateSecretRequest = (
   path: request.path,
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
-  type: request.type ?? 'unknown_secret_type',
+  type: request.type,
+})
+
+const marshalPasswordGenerationParams = (
+  request: PasswordGenerationParams,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  additional_chars: request.additionalChars,
+  length: request.length,
+  no_digits: request.noDigits,
+  no_lowercase_letters: request.noLowercaseLetters,
+  no_uppercase_letters: request.noUppercaseLetters,
 })
 
 export const marshalCreateSecretVersionRequest = (
@@ -197,14 +199,7 @@ export const marshalCreateSecretVersionRequest = (
   data_crc32: request.dataCrc32,
   description: request.description,
   disable_previous: request.disablePrevious,
-  ...resolveOneOf([
-    {
-      param: 'password_generation',
-      value: request.passwordGeneration
-        ? marshalPasswordGenerationParams(request.passwordGeneration, defaults)
-        : undefined,
-    },
-  ]),
+  password_generation: request.passwordGeneration,
 })
 
 export const marshalGeneratePasswordRequest = (

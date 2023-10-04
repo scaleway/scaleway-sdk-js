@@ -129,7 +129,7 @@ export class API extends ParentAPI {
           request.zone ?? this.client.settings.defaultZone,
         )}/fips`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -224,7 +224,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DetachFlexibleIPRequest}
    * @returns A Promise of DetachFlexibleIPsResponse
    */
-  detachFlexibleIP = (request: Readonly<DetachFlexibleIPRequest>) =>
+  detachFlexibleIP = (request: Readonly<DetachFlexibleIPRequest> = {}) =>
     this.client.fetch<DetachFlexibleIPsResponse>(
       {
         body: JSON.stringify(

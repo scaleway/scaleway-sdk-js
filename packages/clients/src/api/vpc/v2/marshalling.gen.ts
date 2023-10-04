@@ -92,7 +92,9 @@ export const unmarshalAddSubnetsResponse = (data: unknown) => {
     )
   }
 
-  return { subnets: data.subnets } as AddSubnetsResponse
+  return {
+    subnets: data.subnets,
+  } as AddSubnetsResponse
 }
 
 export const unmarshalDeleteSubnetsResponse = (data: unknown) => {
@@ -102,7 +104,9 @@ export const unmarshalDeleteSubnetsResponse = (data: unknown) => {
     )
   }
 
-  return { subnets: data.subnets } as DeleteSubnetsResponse
+  return {
+    subnets: data.subnets,
+  } as DeleteSubnetsResponse
 }
 
 export const unmarshalListPrivateNetworksResponse = (data: unknown) => {
@@ -141,7 +145,9 @@ export const unmarshalSetSubnetsResponse = (data: unknown) => {
     )
   }
 
-  return { subnets: data.subnets } as SetSubnetsResponse
+  return {
+    subnets: data.subnets,
+  } as SetSubnetsResponse
 }
 
 export const marshalAddSubnetsRequest = (
@@ -184,16 +190,8 @@ export const marshalMigrateZonalPrivateNetworksRequest = (
 ): Record<string, unknown> => ({
   private_network_ids: request.privateNetworkIds,
   ...resolveOneOf([
-    {
-      default: defaults.defaultProjectId,
-      param: 'project_id',
-      value: request.projectId,
-    },
-    {
-      default: defaults.defaultOrganizationId,
-      param: 'organization_id',
-      value: request.organizationId,
-    },
+    { param: 'organization_id', value: request.organizationId },
+    { param: 'project_id', value: request.projectId },
   ]),
 })
 

@@ -48,63 +48,6 @@ import type {
   UploadURL,
 } from './types.gen'
 
-const unmarshalSecretHashedValue = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'SecretHashedValue' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { hashedValue: data.hashed_value, key: data.key } as SecretHashedValue
-}
-
-const unmarshalTriggerMnqNatsClientConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TriggerMnqNatsClientConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    mnqCredentialId: data.mnq_credential_id,
-    mnqNamespaceId: data.mnq_namespace_id,
-    mnqProjectId: data.mnq_project_id,
-    mnqRegion: data.mnq_region,
-    subject: data.subject,
-  } as TriggerMnqNatsClientConfig
-}
-
-const unmarshalTriggerMnqSqsClientConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TriggerMnqSqsClientConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    mnqCredentialId: data.mnq_credential_id,
-    mnqNamespaceId: data.mnq_namespace_id,
-    mnqProjectId: data.mnq_project_id,
-    mnqRegion: data.mnq_region,
-    queue: data.queue,
-  } as TriggerMnqSqsClientConfig
-}
-
-const unmarshalTriggerSqsClientConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TriggerSqsClientConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    accessKey: data.access_key,
-    endpoint: data.endpoint,
-    queueUrl: data.queue_url,
-    secretKey: data.secret_key,
-  } as TriggerSqsClientConfig
-}
-
 export const unmarshalCron = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -113,7 +56,7 @@ export const unmarshalCron = (data: unknown) => {
   }
 
   return {
-    args: data.args,
+    args: data.args ? data.args : undefined,
     functionId: data.function_id,
     id: data.id,
     name: data.name,
@@ -130,13 +73,26 @@ export const unmarshalDomain = (data: unknown) => {
   }
 
   return {
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ? data.error_message : undefined,
     functionId: data.function_id,
     hostname: data.hostname,
     id: data.id,
     status: data.status,
     url: data.url,
   } as Domain
+}
+
+const unmarshalSecretHashedValue = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SecretHashedValue' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    hashedValue: data.hashed_value,
+    key: data.key,
+  } as SecretHashedValue
 }
 
 export const unmarshalFunction = (data: unknown) => {
@@ -147,12 +103,12 @@ export const unmarshalFunction = (data: unknown) => {
   }
 
   return {
-    buildMessage: data.build_message,
+    buildMessage: data.build_message ? data.build_message : undefined,
     cpuLimit: data.cpu_limit,
-    description: data.description,
+    description: data.description ? data.description : undefined,
     domainName: data.domain_name,
     environmentVariables: data.environment_variables,
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ? data.error_message : undefined,
     handler: data.handler,
     httpOption: data.http_option,
     id: data.id,
@@ -170,25 +126,8 @@ export const unmarshalFunction = (data: unknown) => {
       unmarshalSecretHashedValue,
     ),
     status: data.status,
-    timeout: data.timeout,
+    timeout: data.timeout ? data.timeout : undefined,
   } as Function
-}
-
-const unmarshalLog = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Log' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-    level: data.level,
-    message: data.message,
-    source: data.source,
-    stream: data.stream,
-    timestamp: unmarshalDate(data.timestamp),
-  } as Log
 }
 
 export const unmarshalNamespace = (data: unknown) => {
@@ -199,9 +138,9 @@ export const unmarshalNamespace = (data: unknown) => {
   }
 
   return {
-    description: data.description,
+    description: data.description ? data.description : undefined,
     environmentVariables: data.environment_variables,
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ? data.error_message : undefined,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
@@ -217,27 +156,6 @@ export const unmarshalNamespace = (data: unknown) => {
   } as Namespace
 }
 
-const unmarshalRuntime = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Runtime' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    codeSample: data.code_sample,
-    defaultHandler: data.default_handler,
-    extension: data.extension,
-    implementation: data.implementation,
-    language: data.language,
-    logoUrl: data.logo_url,
-    name: data.name,
-    status: data.status,
-    statusMessage: data.status_message,
-    version: data.version,
-  } as Runtime
-}
-
 export const unmarshalToken = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -246,15 +164,66 @@ export const unmarshalToken = (data: unknown) => {
   }
 
   return {
-    description: data.description,
+    description: data.description ? data.description : undefined,
     expiresAt: unmarshalDate(data.expires_at),
-    functionId: data.function_id,
+    functionId: data.function_id ? data.function_id : undefined,
     id: data.id,
-    namespaceId: data.namespace_id,
-    publicKey: data.public_key,
+    namespaceId: data.namespace_id ? data.namespace_id : undefined,
+    publicKey: data.public_key ? data.public_key : undefined,
     status: data.status,
     token: data.token,
   } as Token
+}
+
+const unmarshalTriggerMnqNatsClientConfig = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TriggerMnqNatsClientConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    mnqCredentialId: data.mnq_credential_id
+      ? data.mnq_credential_id
+      : undefined,
+    mnqNamespaceId: data.mnq_namespace_id,
+    mnqProjectId: data.mnq_project_id,
+    mnqRegion: data.mnq_region,
+    subject: data.subject,
+  } as TriggerMnqNatsClientConfig
+}
+
+const unmarshalTriggerSqsClientConfig = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TriggerSqsClientConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    accessKey: data.access_key,
+    endpoint: data.endpoint,
+    queueUrl: data.queue_url,
+    secretKey: data.secret_key,
+  } as TriggerSqsClientConfig
+}
+
+const unmarshalTriggerMnqSqsClientConfig = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TriggerMnqSqsClientConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    mnqCredentialId: data.mnq_credential_id
+      ? data.mnq_credential_id
+      : undefined,
+    mnqNamespaceId: data.mnq_namespace_id,
+    mnqProjectId: data.mnq_project_id,
+    mnqRegion: data.mnq_region,
+    queue: data.queue,
+  } as TriggerMnqSqsClientConfig
 }
 
 export const unmarshalTrigger = (data: unknown) => {
@@ -266,7 +235,7 @@ export const unmarshalTrigger = (data: unknown) => {
 
   return {
     description: data.description,
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ? data.error_message : undefined,
     functionId: data.function_id,
     id: data.id,
     inputType: data.input_type,
@@ -291,7 +260,10 @@ export const unmarshalDownloadURL = (data: unknown) => {
     )
   }
 
-  return { headers: data.headers, url: data.url } as DownloadURL
+  return {
+    headers: data.headers,
+    url: data.url,
+  } as DownloadURL
 }
 
 export const unmarshalListCronsResponse = (data: unknown) => {
@@ -320,6 +292,27 @@ export const unmarshalListDomainsResponse = (data: unknown) => {
   } as ListDomainsResponse
 }
 
+const unmarshalRuntime = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Runtime' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    codeSample: data.code_sample,
+    defaultHandler: data.default_handler,
+    extension: data.extension,
+    implementation: data.implementation,
+    language: data.language,
+    logoUrl: data.logo_url,
+    name: data.name,
+    status: data.status,
+    statusMessage: data.status_message,
+    version: data.version,
+  } as Runtime
+}
+
 export const unmarshalListFunctionRuntimesResponse = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -344,6 +337,23 @@ export const unmarshalListFunctionsResponse = (data: unknown) => {
     functions: unmarshalArrayOfObject(data.functions, unmarshalFunction),
     totalCount: data.total_count,
   } as ListFunctionsResponse
+}
+
+const unmarshalLog = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Log' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    level: data.level,
+    message: data.message,
+    source: data.source,
+    stream: data.stream,
+    timestamp: unmarshalDate(data.timestamp),
+  } as Log
 }
 
 export const unmarshalListLogsResponse = (data: unknown) => {
@@ -405,54 +415,11 @@ export const unmarshalUploadURL = (data: unknown) => {
     )
   }
 
-  return { headers: data.headers, url: data.url } as UploadURL
+  return {
+    headers: data.headers,
+    url: data.url,
+  } as UploadURL
 }
-
-const marshalCreateTriggerRequestMnqNatsClientConfig = (
-  request: CreateTriggerRequestMnqNatsClientConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  mnq_namespace_id: request.mnqNamespaceId,
-  mnq_project_id: request.mnqProjectId,
-  mnq_region: request.mnqRegion,
-  subject: request.subject,
-})
-
-const marshalCreateTriggerRequestMnqSqsClientConfig = (
-  request: CreateTriggerRequestMnqSqsClientConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  mnq_namespace_id: request.mnqNamespaceId,
-  mnq_project_id: request.mnqProjectId,
-  mnq_region: request.mnqRegion,
-  queue: request.queue,
-})
-
-const marshalCreateTriggerRequestSqsClientConfig = (
-  request: CreateTriggerRequestSqsClientConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  access_key: request.accessKey,
-  endpoint: request.endpoint,
-  queue_url: request.queueUrl,
-  secret_key: request.secretKey,
-})
-
-const marshalSecret = (
-  request: Secret,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  key: request.key,
-  value: request.value,
-})
-
-const marshalUpdateTriggerRequestSqsClientConfig = (
-  request: UpdateTriggerRequestSqsClientConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  access_key: request.accessKey,
-  secret_key: request.secretKey,
-})
 
 export const marshalCreateCronRequest = (
   request: CreateCronRequest,
@@ -472,6 +439,14 @@ export const marshalCreateDomainRequest = (
   hostname: request.hostname,
 })
 
+const marshalSecret = (
+  request: Secret,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  key: request.key,
+  value: request.value,
+})
+
 export const marshalCreateFunctionRequest = (
   request: CreateFunctionRequest,
   defaults: DefaultValues,
@@ -479,19 +454,15 @@ export const marshalCreateFunctionRequest = (
   description: request.description,
   environment_variables: request.environmentVariables,
   handler: request.handler,
-  http_option: request.httpOption ?? 'unknown_http_option',
+  http_option: request.httpOption,
   max_scale: request.maxScale,
   memory_limit: request.memoryLimit,
   min_scale: request.minScale,
   name: request.name || randomName('fn'),
   namespace_id: request.namespaceId,
-  privacy: request.privacy ?? 'unknown_privacy',
-  runtime: request.runtime ?? 'unknown_runtime',
-  secret_environment_variables: request.secretEnvironmentVariables
-    ? request.secretEnvironmentVariables.map(elt =>
-        marshalSecret(elt, defaults),
-      )
-    : undefined,
+  privacy: request.privacy,
+  runtime: request.runtime,
+  secret_environment_variables: request.secretEnvironmentVariables,
   timeout: request.timeout,
 })
 
@@ -503,11 +474,7 @@ export const marshalCreateNamespaceRequest = (
   environment_variables: request.environmentVariables,
   name: request.name || randomName('ns'),
   project_id: request.projectId ?? defaults.defaultProjectId,
-  secret_environment_variables: request.secretEnvironmentVariables
-    ? request.secretEnvironmentVariables.map(elt =>
-        marshalSecret(elt, defaults),
-      )
-    : undefined,
+  secret_environment_variables: request.secretEnvironmentVariables,
 })
 
 export const marshalCreateTokenRequest = (
@@ -517,15 +484,39 @@ export const marshalCreateTokenRequest = (
   description: request.description,
   expires_at: request.expiresAt,
   ...resolveOneOf([
-    {
-      param: 'function_id',
-      value: request.functionId,
-    },
-    {
-      param: 'namespace_id',
-      value: request.namespaceId,
-    },
+    { param: 'function_id', value: request.functionId },
+    { param: 'namespace_id', value: request.namespaceId },
   ]),
+})
+
+const marshalCreateTriggerRequestMnqNatsClientConfig = (
+  request: CreateTriggerRequestMnqNatsClientConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  mnq_namespace_id: request.mnqNamespaceId,
+  mnq_project_id: request.mnqProjectId,
+  mnq_region: request.mnqRegion,
+  subject: request.subject,
+})
+
+const marshalCreateTriggerRequestSqsClientConfig = (
+  request: CreateTriggerRequestSqsClientConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  access_key: request.accessKey,
+  endpoint: request.endpoint,
+  queue_url: request.queueUrl,
+  secret_key: request.secretKey,
+})
+
+const marshalCreateTriggerRequestMnqSqsClientConfig = (
+  request: CreateTriggerRequestMnqSqsClientConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  mnq_namespace_id: request.mnqNamespaceId,
+  mnq_project_id: request.mnqProjectId,
+  mnq_region: request.mnqRegion,
+  queue: request.queue,
 })
 
 export const marshalCreateTriggerRequest = (
@@ -535,34 +526,10 @@ export const marshalCreateTriggerRequest = (
   description: request.description,
   function_id: request.functionId,
   name: request.name,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'scw_sqs_config',
-      value: request.scwSqsConfig
-        ? marshalCreateTriggerRequestMnqSqsClientConfig(
-            request.scwSqsConfig,
-            defaults,
-          )
-        : undefined,
-    },
-    {
-      param: 'sqs_config',
-      value: request.sqsConfig
-        ? marshalCreateTriggerRequestSqsClientConfig(
-            request.sqsConfig,
-            defaults,
-          )
-        : undefined,
-    },
-    {
-      param: 'scw_nats_config',
-      value: request.scwNatsConfig
-        ? marshalCreateTriggerRequestMnqNatsClientConfig(
-            request.scwNatsConfig,
-            defaults,
-          )
-        : undefined,
-    },
+  ...resolveOneOf([
+    { param: 'scw_nats_config', value: request.scwNatsConfig },
+    { param: 'scw_sqs_config', value: request.scwSqsConfig },
+    { param: 'sqs_config', value: request.sqsConfig },
   ]),
 })
 
@@ -583,18 +550,14 @@ export const marshalUpdateFunctionRequest = (
   description: request.description,
   environment_variables: request.environmentVariables,
   handler: request.handler,
-  http_option: request.httpOption ?? 'unknown_http_option',
+  http_option: request.httpOption,
   max_scale: request.maxScale,
   memory_limit: request.memoryLimit,
   min_scale: request.minScale,
-  privacy: request.privacy ?? 'unknown_privacy',
+  privacy: request.privacy,
   redeploy: request.redeploy,
-  runtime: request.runtime ?? 'unknown_runtime',
-  secret_environment_variables: request.secretEnvironmentVariables
-    ? request.secretEnvironmentVariables.map(elt =>
-        marshalSecret(elt, defaults),
-      )
-    : undefined,
+  runtime: request.runtime,
+  secret_environment_variables: request.secretEnvironmentVariables,
   timeout: request.timeout,
 })
 
@@ -604,11 +567,15 @@ export const marshalUpdateNamespaceRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   environment_variables: request.environmentVariables,
-  secret_environment_variables: request.secretEnvironmentVariables
-    ? request.secretEnvironmentVariables.map(elt =>
-        marshalSecret(elt, defaults),
-      )
-    : undefined,
+  secret_environment_variables: request.secretEnvironmentVariables,
+})
+
+const marshalUpdateTriggerRequestSqsClientConfig = (
+  request: UpdateTriggerRequestSqsClientConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  access_key: request.accessKey,
+  secret_key: request.secretKey,
 })
 
 export const marshalUpdateTriggerRequest = (
@@ -617,15 +584,5 @@ export const marshalUpdateTriggerRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
-  ...resolveOneOf([
-    {
-      param: 'sqs_config',
-      value: request.sqsConfig
-        ? marshalUpdateTriggerRequestSqsClientConfig(
-            request.sqsConfig,
-            defaults,
-          )
-        : undefined,
-    },
-  ]),
+  ...resolveOneOf([{ param: 'sqs_config', value: request.sqsConfig }]),
 })

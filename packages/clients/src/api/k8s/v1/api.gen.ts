@@ -98,7 +98,7 @@ export class API extends ParentAPI {
         )}/clusters`,
         urlParams: urlParams(
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -107,7 +107,7 @@ export class API extends ParentAPI {
           ],
           ['private_network_id', request.privateNetworkId],
           ['project_id', request.projectId],
-          ['status', request.status ?? 'unknown'],
+          ['status', request.status],
           ['type', request.type],
         ),
       },
@@ -416,13 +416,13 @@ export class API extends ParentAPI {
         )}/clusters/${validatePathParam('clusterId', request.clusterId)}/pools`,
         urlParams: urlParams(
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          ['status', request.status ?? 'unknown'],
+          ['status', request.status],
         ),
       },
       unmarshalListPoolsResponse,
@@ -597,14 +597,14 @@ export class API extends ParentAPI {
         )}/clusters/${validatePathParam('clusterId', request.clusterId)}/nodes`,
         urlParams: urlParams(
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['pool_id', request.poolId],
-          ['status', request.status ?? 'unknown'],
+          ['status', request.status],
         ),
       },
       unmarshalListNodesResponse,

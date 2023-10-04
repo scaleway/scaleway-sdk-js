@@ -74,7 +74,7 @@ export const marshalCreateHumanRequest = (
 ): Record<string, unknown> => ({
   altitude_in_meter: request.altitudeInMeter,
   altitude_in_millimeter: request.altitudeInMillimeter,
-  eyes_color: request.eyesColor ?? 'unknown',
+  eyes_color: request.eyesColor,
   fingers_count: request.fingersCount,
   hair_count: request.hairCount,
   height: request.height,
@@ -82,16 +82,8 @@ export const marshalCreateHumanRequest = (
   name: request.name,
   shoe_size: request.shoeSize,
   ...resolveOneOf([
-    {
-      default: defaults.defaultProjectId,
-      param: 'project_id',
-      value: request.projectId,
-    },
-    {
-      default: defaults.defaultOrganizationId,
-      param: 'organization_id',
-      value: request.organizationId,
-    },
+    { param: 'organization_id', value: request.organizationId },
+    { param: 'project_id', value: request.projectId },
   ]),
 })
 
@@ -108,7 +100,7 @@ export const marshalUpdateHumanRequest = (
 ): Record<string, unknown> => ({
   altitude_in_meter: request.altitudeInMeter,
   altitude_in_millimeter: request.altitudeInMillimeter,
-  eyes_color: request.eyesColor ?? 'unknown',
+  eyes_color: request.eyesColor,
   fingers_count: request.fingersCount,
   hair_count: request.hairCount,
   height: request.height,

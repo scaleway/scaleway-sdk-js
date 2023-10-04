@@ -29,6 +29,22 @@ const unmarshalGetConsumptionResponseConsumption = (data: unknown) => {
   } as GetConsumptionResponseConsumption
 }
 
+export const unmarshalGetConsumptionResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetConsumptionResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    consumptions: unmarshalArrayOfObject(
+      data.consumptions,
+      unmarshalGetConsumptionResponseConsumption,
+    ),
+    updatedAt: unmarshalDate(data.updated_at),
+  } as GetConsumptionResponse
+}
+
 const unmarshalInvoice = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -48,22 +64,6 @@ const unmarshalInvoice = (data: unknown) => {
       ? unmarshalMoney(data.total_untaxed)
       : undefined,
   } as Invoice
-}
-
-export const unmarshalGetConsumptionResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GetConsumptionResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    consumptions: unmarshalArrayOfObject(
-      data.consumptions,
-      unmarshalGetConsumptionResponseConsumption,
-    ),
-    updatedAt: unmarshalDate(data.updated_at),
-  } as GetConsumptionResponse
 }
 
 export const unmarshalListInvoicesResponse = (data: unknown) => {

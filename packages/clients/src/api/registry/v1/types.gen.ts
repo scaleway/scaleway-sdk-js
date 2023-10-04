@@ -39,7 +39,6 @@ export type NamespaceStatus =
 
 export type TagStatus = 'unknown' | 'ready' | 'deleting' | 'error' | 'locked'
 
-/** Image. */
 export interface Image {
   /** UUID of the image. */
   id: string
@@ -58,10 +57,9 @@ export interface Image {
    */
   visibility: ImageVisibility
   /**
-   * Image size in bytes, calculated from the size of image layers. Image size
-   * in bytes, calculated from the size of image layers. One layer used in two
-   * tags of the same image is counted once but one layer used in two images is
-   * counted twice.
+   * Image size in bytes, calculated from the size of image layers. One layer
+   * used in two tags of the same image is counted once but one layer used in
+   * two images is counted twice.
    */
   size: number
   /** Date and time of image creation. */
@@ -72,31 +70,6 @@ export interface Image {
   tags: string[]
 }
 
-/** List images response. */
-export interface ListImagesResponse {
-  /** Paginated list of images that match the selected filters. */
-  images: Image[]
-  /** Total number of images that match the selected filters. */
-  totalCount: number
-}
-
-/** List namespaces response. */
-export interface ListNamespacesResponse {
-  /** Paginated list of namespaces that match the selected filters. */
-  namespaces: Namespace[]
-  /** Total number of namespaces that match the selected filters. */
-  totalCount: number
-}
-
-/** List tags response. */
-export interface ListTagsResponse {
-  /** Paginated list of tags that match the selected filters. */
-  tags: Tag[]
-  /** Total number of tags that match the selected filters. */
-  totalCount: number
-}
-
-/** Namespace. */
 export interface Namespace {
   /** UUID of the namespace. */
   id: string
@@ -131,7 +104,6 @@ export interface Namespace {
   region: Region
 }
 
-/** Tag. */
 export interface Tag {
   /** UUID of the tag. */
   id: string
@@ -152,100 +124,69 @@ export interface Tag {
   updatedAt?: Date
 }
 
-export type ListNamespacesRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** A positive integer to choose the page to display. */
-  page?: number
-  /**
-   * A positive integer lower or equal to 100 to select the number of items to
-   * display.
-   */
-  pageSize?: number
-  /**
-   * Criteria to use when ordering namespace listings. Possible values are
-   * `created_at_asc`, `created_at_desc`, `name_asc`, `name_desc`, `region`,
-   * `status_asc` and `status_desc`. The default value is `created_at_asc`.
-   */
-  orderBy?: ListNamespacesRequestOrderBy
-  /** Filter by Organization ID. */
-  organizationId?: string
-  /** Filter by Project ID. */
-  projectId?: string
-  /** Filter by the namespace name (exact match). */
-  name?: string
-}
-
-export type GetNamespaceRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the namespace. */
-  namespaceId: string
-}
-
 export type CreateNamespaceRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
   region?: Region
   /** Name of the namespace. */
   name?: string
   /** Description of the namespace. */
   description: string
   /**
-   * @deprecated Namespace owner (deprecated).
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   *   could be set.
+   * Namespace owner (deprecated). One-of ('projectIdentifier'): at most one of
+   * 'organizationId', 'projectId' could be set.
    */
   organizationId?: string
   /**
-   * Project ID on which the namespace will be created.
-   *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   * could be set.
+   * Project ID on which the namespace will be created. One-of
+   * ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
+   * be set.
    */
   projectId?: string
   /** Defines whether or not namespace is public. */
   isPublic: boolean
 }
 
-export type UpdateNamespaceRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
+export type DeleteImageRequest = {
   region?: Region
-  /** ID of the namespace to update. */
-  namespaceId: string
-  /** Namespace description. */
-  description?: string
-  /** Defines whether or not the namespace is public. */
-  isPublic?: boolean
+  /** UUID of the image. */
+  imageId: string
 }
 
 export type DeleteNamespaceRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
   region?: Region
   /** UUID of the namespace. */
   namespaceId: string
 }
 
-export type ListImagesRequest = {
+export type DeleteTagRequest = {
+  region?: Region
+  /** UUID of the tag. */
+  tagId: string
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * If two tags share the same digest the deletion will fail unless this
+   * parameter is set to true (deprecated).
    */
+  force?: boolean
+}
+
+export type GetImageRequest = {
+  region?: Region
+  /** UUID of the image. */
+  imageId: string
+}
+
+export type GetNamespaceRequest = {
+  region?: Region
+  /** UUID of the namespace. */
+  namespaceId: string
+}
+
+export type GetTagRequest = {
+  region?: Region
+  /** UUID of the tag. */
+  tagId: string
+}
+
+export type ListImagesRequest = {
   region?: Region
   /** A positive integer to choose the page to display. */
   page?: number
@@ -270,47 +211,44 @@ export type ListImagesRequest = {
   projectId?: string
 }
 
-export type GetImageRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the image. */
-  imageId: string
+export interface ListImagesResponse {
+  /** Paginated list of images that match the selected filters. */
+  images: Image[]
+  /** Total number of images that match the selected filters. */
+  totalCount: number
 }
 
-export type UpdateImageRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
+export type ListNamespacesRequest = {
   region?: Region
-  /** ID of the image to update. */
-  imageId: string
+  /** A positive integer to choose the page to display. */
+  page?: number
   /**
-   * Set to `public` to allow the image to be pulled without authentication.
-   * Else, set to `private`. Set to `inherit` to keep the same visibility
-   * configuration as the namespace.
+   * A positive integer lower or equal to 100 to select the number of items to
+   * display.
    */
-  visibility?: ImageVisibility
+  pageSize?: number
+  /**
+   * Criteria to use when ordering namespace listings. Possible values are
+   * `created_at_asc`, `created_at_desc`, `name_asc`, `name_desc`, `region`,
+   * `status_asc` and `status_desc`. The default value is `created_at_asc`.
+   */
+  orderBy?: ListNamespacesRequestOrderBy
+  /** Filter by Organization ID. */
+  organizationId?: string
+  /** Filter by Project ID. */
+  projectId?: string
+  /** Filter by the namespace name (exact match). */
+  name?: string
 }
 
-export type DeleteImageRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the image. */
-  imageId: string
+export interface ListNamespacesResponse {
+  /** Paginated list of namespaces that match the selected filters. */
+  namespaces: Namespace[]
+  /** Total number of namespaces that match the selected filters. */
+  totalCount: number
 }
 
 export type ListTagsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
   region?: Region
   /** UUID of the image. */
   imageId: string
@@ -331,27 +269,31 @@ export type ListTagsRequest = {
   name?: string
 }
 
-export type GetTagRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the tag. */
-  tagId: string
+export interface ListTagsResponse {
+  /** Paginated list of tags that match the selected filters. */
+  tags: Tag[]
+  /** Total number of tags that match the selected filters. */
+  totalCount: number
 }
 
-export type DeleteTagRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
+export type UpdateImageRequest = {
   region?: Region
-  /** UUID of the tag. */
-  tagId: string
+  /** ID of the image to update. */
+  imageId: string
   /**
-   * @deprecated If two tags share the same digest the deletion will fail unless
-   *   this parameter is set to true (deprecated).
+   * Set to `public` to allow the image to be pulled without authentication.
+   * Else, set to `private`. Set to `inherit` to keep the same visibility
+   * configuration as the namespace.
    */
-  force?: boolean
+  visibility?: ImageVisibility
+}
+
+export type UpdateNamespaceRequest = {
+  region?: Region
+  /** ID of the namespace to update. */
+  namespaceId: string
+  /** Namespace description. */
+  description?: string
+  /** Defines whether or not the namespace is public. */
+  isPublic?: boolean
 }

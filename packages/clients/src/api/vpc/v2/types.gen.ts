@@ -14,25 +14,17 @@ export type ListVPCsRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-export interface AddSubnetsResponse {
-  subnets: string[]
+export interface Subnet {
+  /** ID of the subnet. */
+  id: string
+  /** Subnet creation date. */
+  createdAt?: Date
+  /** Subnet last modification date. */
+  updatedAt?: Date
+  /** Subnet CIDR. */
+  subnet: string
 }
 
-export interface DeleteSubnetsResponse {
-  subnets: string[]
-}
-
-export interface ListPrivateNetworksResponse {
-  privateNetworks: PrivateNetwork[]
-  totalCount: number
-}
-
-export interface ListVPCsResponse {
-  vpcs: VPC[]
-  totalCount: number
-}
-
-/** Private network. */
 export interface PrivateNetwork {
   /** Private Network ID. */
   id: string
@@ -58,23 +50,6 @@ export interface PrivateNetwork {
   dhcpEnabled: boolean
 }
 
-export interface SetSubnetsResponse {
-  subnets: string[]
-}
-
-/** Subnet. */
-export interface Subnet {
-  /** ID of the subnet. */
-  id: string
-  /** Subnet creation date. */
-  createdAt?: Date
-  /** Subnet last modification date. */
-  updatedAt?: Date
-  /** Subnet CIDR. */
-  subnet: string
-}
-
-/** Vpc. */
 export interface VPC {
   /** VPC ID. */
   id: string
@@ -98,50 +73,33 @@ export interface VPC {
   privateNetworkCount: number
 }
 
-export type ListVPCsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
+export type AddSubnetsRequest = {
   region?: Region
-  /** Sort order of the returned VPCs. */
-  orderBy?: ListVPCsRequestOrderBy
-  /** Page number to return, from the paginated results. */
-  page?: number
-  /** Maximum number of VPCs to return per page. */
-  pageSize?: number
-  /**
-   * Name to filter for. Only VPCs with names containing this string will be
-   * returned.
-   */
+  /** Private Network ID. */
+  privateNetworkId: string
+  /** Private Network subnets CIDR. */
+  subnets?: string[]
+}
+
+export interface AddSubnetsResponse {
+  subnets: string[]
+}
+
+export type CreatePrivateNetworkRequest = {
+  region?: Region
+  /** Name for the Private Network. */
   name?: string
-  /**
-   * Tags to filter for. Only VPCs with one more more matching tags will be
-   * returned.
-   */
-  tags?: string[]
-  /**
-   * Organization ID to filter for. Only VPCs belonging to this Organization
-   * will be returned.
-   */
-  organizationId?: string
-  /**
-   * Project ID to filter for. Only VPCs belonging to this Project will be
-   * returned.
-   */
+  /** Scaleway Project in which to create the Private Network. */
   projectId?: string
-  /**
-   * Defines whether to filter only for VPCs which are the default one for their
-   * Project.
-   */
-  isDefault?: boolean
+  /** Tags for the Private Network. */
+  tags?: string[]
+  /** Private Network subnets CIDR. */
+  subnets?: string[]
+  /** VPC in which to create the Private Network. */
+  vpcId?: string
 }
 
 export type CreateVPCRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
   region?: Region
   /** Name for the VPC. */
   name?: string
@@ -151,45 +109,49 @@ export type CreateVPCRequest = {
   tags?: string[]
 }
 
-export type GetVPCRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
+export type DeletePrivateNetworkRequest = {
   region?: Region
-  /** VPC ID. */
-  vpcId: string
+  /** Private Network ID. */
+  privateNetworkId: string
 }
 
-export type UpdateVPCRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
+export type DeleteSubnetsRequest = {
   region?: Region
-  /** VPC ID. */
-  vpcId: string
-  /** Name for the VPC. */
-  name?: string
-  /** Tags for the VPC. */
-  tags?: string[]
+  /** Private Network ID. */
+  privateNetworkId: string
+  /** Private Network subnets CIDR. */
+  subnets?: string[]
+}
+
+export interface DeleteSubnetsResponse {
+  subnets: string[]
 }
 
 export type DeleteVPCRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
+  region?: Region
+  /** VPC ID. */
+  vpcId: string
+}
+
+export type EnableDHCPRequest = {
+  region?: Region
+  /** Private Network ID. */
+  privateNetworkId: string
+}
+
+export type GetPrivateNetworkRequest = {
+  region?: Region
+  /** Private Network ID. */
+  privateNetworkId: string
+}
+
+export type GetVPCRequest = {
   region?: Region
   /** VPC ID. */
   vpcId: string
 }
 
 export type ListPrivateNetworksRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
   region?: Region
   /** Sort order of the returned Private Networks. */
   orderBy?: ListPrivateNetworksRequestOrderBy
@@ -234,99 +196,70 @@ export type ListPrivateNetworksRequest = {
   dhcpEnabled?: boolean
 }
 
-export type CreatePrivateNetworkRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
+export interface ListPrivateNetworksResponse {
+  privateNetworks: PrivateNetwork[]
+  totalCount: number
+}
+
+export type ListVPCsRequest = {
   region?: Region
-  /** Name for the Private Network. */
+  /** Sort order of the returned VPCs. */
+  orderBy?: ListVPCsRequestOrderBy
+  /** Page number to return, from the paginated results. */
+  page?: number
+  /** Maximum number of VPCs to return per page. */
+  pageSize?: number
+  /**
+   * Name to filter for. Only VPCs with names containing this string will be
+   * returned.
+   */
   name?: string
-  /** Scaleway Project in which to create the Private Network. */
+  /**
+   * Tags to filter for. Only VPCs with one more more matching tags will be
+   * returned.
+   */
+  tags?: string[]
+  /**
+   * Organization ID to filter for. Only VPCs belonging to this Organization
+   * will be returned.
+   */
+  organizationId?: string
+  /**
+   * Project ID to filter for. Only VPCs belonging to this Project will be
+   * returned.
+   */
   projectId?: string
-  /** Tags for the Private Network. */
-  tags?: string[]
-  /** Private Network subnets CIDR. */
-  subnets?: string[]
-  /** VPC in which to create the Private Network. */
-  vpcId?: string
+  /**
+   * Defines whether to filter only for VPCs which are the default one for their
+   * Project.
+   */
+  isDefault?: boolean
 }
 
-export type GetPrivateNetworkRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Private Network ID. */
-  privateNetworkId: string
-}
-
-export type UpdatePrivateNetworkRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Private Network ID. */
-  privateNetworkId: string
-  /** Name for the Private Network. */
-  name?: string
-  /** Tags for the Private Network. */
-  tags?: string[]
-}
-
-export type DeletePrivateNetworkRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Private Network ID. */
-  privateNetworkId: string
+export interface ListVPCsResponse {
+  vpcs: VPC[]
+  totalCount: number
 }
 
 export type MigrateZonalPrivateNetworksRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
   region?: Region
   /**
    * Organization ID to target. The specified zoned Private Networks within this
-   * Organization will be migrated to regional.
-   *
-   * One-of ('scope'): at most one of 'organizationId', 'projectId' could be
-   * set.
+   * Organization will be migrated to regional. One-of ('scope'): at most one of
+   * 'organizationId', 'projectId' could be set.
    */
   organizationId?: string
   /**
    * Project to target. The specified zoned Private Networks within this Project
-   * will be migrated to regional.
-   *
-   * One-of ('scope'): at most one of 'organizationId', 'projectId' could be
-   * set.
+   * will be migrated to regional. One-of ('scope'): at most one of
+   * 'organizationId', 'projectId' could be set.
    */
   projectId?: string
   /** IDs of the Private Networks to migrate. */
   privateNetworkIds?: string[]
 }
 
-export type EnableDHCPRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Private Network ID. */
-  privateNetworkId: string
-}
-
 export type SetSubnetsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
   region?: Region
   /** Private Network ID. */
   privateNetworkId: string
@@ -334,26 +267,26 @@ export type SetSubnetsRequest = {
   subnets?: string[]
 }
 
-export type AddSubnetsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Private Network ID. */
-  privateNetworkId: string
-  /** Private Network subnets CIDR. */
-  subnets?: string[]
+export interface SetSubnetsResponse {
+  subnets: string[]
 }
 
-export type DeleteSubnetsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
+export type UpdatePrivateNetworkRequest = {
   region?: Region
   /** Private Network ID. */
   privateNetworkId: string
-  /** Private Network subnets CIDR. */
-  subnets?: string[]
+  /** Name for the Private Network. */
+  name?: string
+  /** Tags for the Private Network. */
+  tags?: string[]
+}
+
+export type UpdateVPCRequest = {
+  region?: Region
+  /** VPC ID. */
+  vpcId: string
+  /** Name for the VPC. */
+  name?: string
+  /** Tags for the VPC. */
+  tags?: string[]
 }

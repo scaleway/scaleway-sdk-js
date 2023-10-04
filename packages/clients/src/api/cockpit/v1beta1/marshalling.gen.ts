@@ -48,42 +48,9 @@ const unmarshalContactPointEmail = (data: unknown) => {
     )
   }
 
-  return { to: data.to } as ContactPointEmail
-}
-
-const unmarshalTokenScopes = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TokenScopes' failed as data isn't a dictionary.`,
-    )
-  }
-
   return {
-    queryLogs: data.query_logs,
-    queryMetrics: data.query_metrics,
-    queryTraces: data.query_traces,
-    setupAlerts: data.setup_alerts,
-    setupLogsRules: data.setup_logs_rules,
-    setupMetricsRules: data.setup_metrics_rules,
-    writeLogs: data.write_logs,
-    writeMetrics: data.write_metrics,
-    writeTraces: data.write_traces,
-  } as TokenScopes
-}
-
-const unmarshalCockpitEndpoints = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CockpitEndpoints' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    alertmanagerUrl: data.alertmanager_url,
-    grafanaUrl: data.grafana_url,
-    logsUrl: data.logs_url,
-    metricsUrl: data.metrics_url,
-  } as CockpitEndpoints
+    to: data.to,
+  } as ContactPointEmail
 }
 
 export const unmarshalContactPoint = (data: unknown) => {
@@ -108,27 +75,29 @@ export const unmarshalGrafanaUser = (data: unknown) => {
   return {
     id: data.id,
     login: data.login,
-    password: data.password,
+    password: data.password ? data.password : undefined,
     role: data.role,
   } as GrafanaUser
 }
 
-const unmarshalPlan = (data: unknown) => {
+const unmarshalTokenScopes = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'Plan' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'TokenScopes' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    id: data.id,
-    logsIngestionPrice: data.logs_ingestion_price,
-    name: data.name,
-    retentionLogsInterval: data.retention_logs_interval,
-    retentionMetricsInterval: data.retention_metrics_interval,
-    retentionPrice: data.retention_price,
-    sampleIngestionPrice: data.sample_ingestion_price,
-  } as Plan
+    queryLogs: data.query_logs,
+    queryMetrics: data.query_metrics,
+    queryTraces: data.query_traces,
+    setupAlerts: data.setup_alerts,
+    setupLogsRules: data.setup_logs_rules,
+    setupMetricsRules: data.setup_metrics_rules,
+    writeLogs: data.write_logs,
+    writeMetrics: data.write_metrics,
+    writeTraces: data.write_traces,
+  } as TokenScopes
 }
 
 export const unmarshalToken = (data: unknown) => {
@@ -143,10 +112,47 @@ export const unmarshalToken = (data: unknown) => {
     id: data.id,
     name: data.name,
     projectId: data.project_id,
-    scopes: data.scopes ? unmarshalTokenScopes(data.scopes) : undefined,
-    secretKey: data.secret_key,
+    scopes: unmarshalTokenScopes(data.scopes),
+    secretKey: data.secret_key ? data.secret_key : undefined,
     updatedAt: unmarshalDate(data.updated_at),
   } as Token
+}
+
+const unmarshalPlan = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Plan' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    logsIngestionPrice: data.logs_ingestion_price,
+    name: data.name,
+    retentionLogsInterval: data.retention_logs_interval
+      ? data.retention_logs_interval
+      : undefined,
+    retentionMetricsInterval: data.retention_metrics_interval
+      ? data.retention_metrics_interval
+      : undefined,
+    retentionPrice: data.retention_price,
+    sampleIngestionPrice: data.sample_ingestion_price,
+  } as Plan
+}
+
+const unmarshalCockpitEndpoints = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CockpitEndpoints' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    alertmanagerUrl: data.alertmanager_url,
+    grafanaUrl: data.grafana_url,
+    logsUrl: data.logs_url,
+    metricsUrl: data.metrics_url,
+  } as CockpitEndpoints
 }
 
 export const unmarshalCockpit = (data: unknown) => {
@@ -158,11 +164,9 @@ export const unmarshalCockpit = (data: unknown) => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
-    endpoints: data.endpoints
-      ? unmarshalCockpitEndpoints(data.endpoints)
-      : undefined,
+    endpoints: unmarshalCockpitEndpoints(data.endpoints),
     managedAlertsEnabled: data.managed_alerts_enabled,
-    plan: data.plan ? unmarshalPlan(data.plan) : undefined,
+    plan: unmarshalPlan(data.plan),
     projectId: data.project_id,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
@@ -267,6 +271,13 @@ export const unmarshalSelectPlanResponse = (data: unknown) => {
   return {} as SelectPlanResponse
 }
 
+export const marshalActivateCockpitRequest = (
+  request: ActivateCockpitRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
 const marshalContactPointEmail = (
   request: ContactPointEmail,
   defaults: DefaultValues,
@@ -278,14 +289,33 @@ const marshalContactPoint = (
   request: ContactPoint,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([
-    {
-      param: 'email',
-      value: request.email
-        ? marshalContactPointEmail(request.email, defaults)
-        : undefined,
-    },
-  ]),
+  ...resolveOneOf([{ param: 'email', value: request.email }]),
+})
+
+export const marshalCreateContactPointRequest = (
+  request: CreateContactPointRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  contact_point: request.contactPoint,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
+export const marshalCreateDatasourceRequest = (
+  request: CreateDatasourceRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  type: request.type,
+})
+
+export const marshalCreateGrafanaUserRequest = (
+  request: CreateGrafanaUserRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  login: request.login,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  role: request.role,
 })
 
 const marshalTokenScopes = (
@@ -303,50 +333,13 @@ const marshalTokenScopes = (
   write_traces: request.writeTraces,
 })
 
-export const marshalActivateCockpitRequest = (
-  request: ActivateCockpitRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  project_id: request.projectId ?? defaults.defaultProjectId,
-})
-
-export const marshalCreateContactPointRequest = (
-  request: CreateContactPointRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  contact_point: request.contactPoint
-    ? marshalContactPoint(request.contactPoint, defaults)
-    : undefined,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-})
-
-export const marshalCreateDatasourceRequest = (
-  request: CreateDatasourceRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  name: request.name,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-  type: request.type ?? 'unknown_datasource_type',
-})
-
-export const marshalCreateGrafanaUserRequest = (
-  request: CreateGrafanaUserRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  login: request.login,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-  role: request.role ?? 'unknown_role',
-})
-
 export const marshalCreateTokenRequest = (
   request: CreateTokenRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name || randomName('token'),
   project_id: request.projectId ?? defaults.defaultProjectId,
-  scopes: request.scopes
-    ? marshalTokenScopes(request.scopes, defaults)
-    : undefined,
+  scopes: request.scopes,
 })
 
 export const marshalDeactivateCockpitRequest = (
@@ -360,9 +353,7 @@ export const marshalDeleteContactPointRequest = (
   request: DeleteContactPointRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  contact_point: request.contactPoint
-    ? marshalContactPoint(request.contactPoint, defaults)
-    : undefined,
+  contact_point: request.contactPoint,
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 

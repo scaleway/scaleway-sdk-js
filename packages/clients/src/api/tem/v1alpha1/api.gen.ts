@@ -132,7 +132,7 @@ export class API extends ParentAPI {
           ['mail_rcpt', request.mailRcpt],
           ['mail_to', request.mailTo],
           ['message_id', request.messageId],
-          ['order_by', request.orderBy ?? 'created_at_desc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',

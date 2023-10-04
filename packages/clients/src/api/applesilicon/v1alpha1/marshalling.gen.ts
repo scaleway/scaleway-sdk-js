@@ -21,36 +21,6 @@ import type {
   UpdateServerRequest,
 } from './types.gen'
 
-const unmarshalServerTypeCPU = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ServerTypeCPU' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { coreCount: data.core_count, name: data.name } as ServerTypeCPU
-}
-
-const unmarshalServerTypeDisk = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ServerTypeDisk' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { capacity: data.capacity, type: data.type } as ServerTypeDisk
-}
-
-const unmarshalServerTypeMemory = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ServerTypeMemory' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { capacity: data.capacity, type: data.type } as ServerTypeMemory
-}
-
 export const unmarshalOS = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -65,6 +35,64 @@ export const unmarshalOS = (data: unknown) => {
     label: data.label,
     name: data.name,
   } as OS
+}
+
+const unmarshalServerTypeMemory = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeMemory' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    capacity: data.capacity,
+    type: data.type,
+  } as ServerTypeMemory
+}
+
+const unmarshalServerTypeDisk = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeDisk' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    capacity: data.capacity,
+    type: data.type,
+  } as ServerTypeDisk
+}
+
+const unmarshalServerTypeCPU = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeCPU' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    coreCount: data.core_count,
+    name: data.name,
+  } as ServerTypeCPU
+}
+
+export const unmarshalServerType = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    cpu: unmarshalServerTypeCPU(data.cpu),
+    disk: unmarshalServerTypeDisk(data.disk),
+    memory: unmarshalServerTypeMemory(data.memory),
+    minimumLeaseDuration: data.minimum_lease_duration
+      ? data.minimum_lease_duration
+      : undefined,
+    name: data.name,
+    stock: data.stock,
+  } as ServerType
 }
 
 export const unmarshalServer = (data: unknown) => {
@@ -88,23 +116,6 @@ export const unmarshalServer = (data: unknown) => {
     vncUrl: data.vnc_url,
     zone: data.zone,
   } as Server
-}
-
-export const unmarshalServerType = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ServerType' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    cpu: data.cpu ? unmarshalServerTypeCPU(data.cpu) : undefined,
-    disk: data.disk ? unmarshalServerTypeDisk(data.disk) : undefined,
-    memory: data.memory ? unmarshalServerTypeMemory(data.memory) : undefined,
-    minimumLeaseDuration: data.minimum_lease_duration,
-    name: data.name,
-    stock: data.stock,
-  } as ServerType
 }
 
 export const unmarshalListOSResponse = (data: unknown) => {

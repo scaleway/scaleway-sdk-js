@@ -34,7 +34,7 @@ export const unmarshalImage = (data: unknown) => {
     namespaceId: data.namespace_id,
     size: data.size,
     status: data.status,
-    statusMessage: data.status_message,
+    statusMessage: data.status_message ? data.status_message : undefined,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
     visibility: data.visibility,
@@ -131,16 +131,8 @@ export const marshalCreateNamespaceRequest = (
   is_public: request.isPublic,
   name: request.name || randomName('ns'),
   ...resolveOneOf([
-    {
-      default: defaults.defaultProjectId,
-      param: 'project_id',
-      value: request.projectId,
-    },
-    {
-      default: defaults.defaultOrganizationId,
-      param: 'organization_id',
-      value: request.organizationId,
-    },
+    { param: 'organization_id', value: request.organizationId },
+    { param: 'project_id', value: request.projectId },
   ]),
 })
 
@@ -148,7 +140,7 @@ export const marshalUpdateImageRequest = (
   request: UpdateImageRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  visibility: request.visibility ?? 'visibility_unknown',
+  visibility: request.visibility,
 })
 
 export const marshalUpdateNamespaceRequest = (

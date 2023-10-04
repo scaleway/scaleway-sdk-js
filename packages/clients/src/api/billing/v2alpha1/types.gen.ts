@@ -22,15 +22,6 @@ export type ListInvoicesRequestOrderBy =
   | 'invoice_type_desc'
   | 'invoice_type_asc'
 
-/** Get consumption response. */
-export interface GetConsumptionResponse {
-  /** Detailed consumption list. */
-  consumptions: GetConsumptionResponseConsumption[]
-  /** Last consumption update date. */
-  updatedAt?: Date
-}
-
-/** Get consumption response. consumption. */
 export interface GetConsumptionResponseConsumption {
   /** Monetary value of the consumption. */
   value?: Money
@@ -44,7 +35,6 @@ export interface GetConsumptionResponseConsumption {
   operationPath: string
 }
 
-/** Invoice. */
 export interface Invoice {
   /** Invoice ID. */
   id: string
@@ -64,17 +54,23 @@ export interface Invoice {
   number: number
 }
 
-/** List invoices response. */
-export interface ListInvoicesResponse {
-  /** Total number of invoices. */
-  totalCount: number
-  /** Paginated returned invoices. */
-  invoices: Invoice[]
+export type DownloadInvoiceRequest = {
+  /** Invoice ID. */
+  invoiceId: string
+  /** Wanted file type. */
+  fileType?: DownloadInvoiceRequestFileType
 }
 
 export type GetConsumptionRequest = {
   /** Filter by organization ID. */
   organizationId?: string
+}
+
+export interface GetConsumptionResponse {
+  /** Detailed consumption list. */
+  consumptions: GetConsumptionResponseConsumption[]
+  /** Last consumption update date. */
+  updatedAt?: Date
 }
 
 export type ListInvoicesRequest = {
@@ -100,9 +96,9 @@ export type ListInvoicesRequest = {
   orderBy?: ListInvoicesRequestOrderBy
 }
 
-export type DownloadInvoiceRequest = {
-  /** Invoice ID. */
-  invoiceId: string
-  /** Wanted file type. */
-  fileType?: DownloadInvoiceRequestFileType
+export interface ListInvoicesResponse {
+  /** Total number of invoices. */
+  totalCount: number
+  /** Paginated returned invoices. */
+  invoices: Invoice[]
 }

@@ -51,91 +51,21 @@ export type ListEmailsRequestOrderBy =
   | 'subject_desc'
   | 'subject_asc'
 
-/** Create email request. address. */
-export interface CreateEmailRequestAddress {
-  /** Email address. */
-  email: string
-  /** (Optional) Name displayed. */
-  name?: string
-}
-
-/** Create email request. attachment. */
-export interface CreateEmailRequestAttachment {
-  /** Filename of the attachment. */
-  name: string
-  /** MIME type of the attachment. */
-  type: string
-  /** Content of the attachment encoded in base64. */
-  content: string
-}
-
-/** Create email response. */
-export interface CreateEmailResponse {
-  /** Single page of emails matching the requested criteria. */
-  emails: Email[]
-}
-
-/** Domain. */
-export interface Domain {
-  /** ID of the domain. */
-  id: string
-  /** ID of the domain's Organization. */
-  organizationId: string
-  /** ID of the domain's Project. */
-  projectId: string
-  /** Domain name (example.com). */
-  name: string
-  /** Status of the domain. */
-  status: DomainStatus
-  /** Date and time of domain creation. */
-  createdAt?: Date
-  /** Date and time of the next scheduled check. */
-  nextCheckAt?: Date
-  /** Date and time the domain was last valid. */
-  lastValidAt?: Date
-  /** Date and time of the domain's deletion. */
-  revokedAt?: Date
-  /** @deprecated Error message returned if the last check failed. */
-  lastError?: string
-  /** Snippet of the SPF record to register in the DNS zone. */
-  spfConfig: string
-  /** DKIM public key to record in the DNS zone. */
-  dkimConfig: string
-  /** Domain's statistics. */
-  statistics?: DomainStatistics
-  region: Region
-}
-
-/** Domain last status. */
-export interface DomainLastStatus {
-  /** The id of the domain. */
-  domainId: string
-  /** The domain name (example.com). */
-  domainName: string
-  /** The SPF record verification data. */
-  spfRecord?: DomainLastStatusSpfRecord
-  /** The DKIM record verification data. */
-  dkimRecord?: DomainLastStatusDkimRecord
-}
-
-/** Domain last status. dkim record. */
-export interface DomainLastStatusDkimRecord {
-  /** Status of the DKIM record's configurartion. */
-  status: DomainLastStatusRecordStatus
-  /** Time and date the DKIM record was last valid. */
-  lastValidAt?: Date
-  /** An error text displays in case the record is not valid. */
-  error?: string
-}
-
-/** Domain last status. spf record. */
-export interface DomainLastStatusSpfRecord {
-  /** Status of the SPF record's configurartion. */
-  status: DomainLastStatusRecordStatus
-  /** Time and date the SPF record was last valid. */
-  lastValidAt?: Date
-  /** An error text displays in case the record is not valid. */
-  error?: string
+export interface EmailTry {
+  /** Rank number of this attempt to send the email. */
+  rank: number
+  /** Date of the attempt to send the email. */
+  triedAt?: Date
+  /**
+   * The SMTP status code received after the attempt. 0 if the attempt did not
+   * reach an SMTP server.
+   */
+  code: number
+  /**
+   * The SMTP message received. If the attempt did not reach an SMTP server, the
+   * message returned explains what happened.
+   */
+  message: string
 }
 
 export interface DomainStatistics {
@@ -145,7 +75,22 @@ export interface DomainStatistics {
   canceledCount: number
 }
 
-/** Email. */
+export interface CreateEmailRequestAddress {
+  /** Email address. */
+  email: string
+  /** (Optional) Name displayed. */
+  name?: string
+}
+
+export interface CreateEmailRequestAttachment {
+  /** Filename of the attachment. */
+  name: string
+  /** MIME type of the attachment. */
+  type: string
+  /** Content of the attachment encoded in base64. */
+  content: string
+}
+
 export interface Email {
   /** Technical ID of the email. */
   id: string
@@ -155,7 +100,7 @@ export interface Email {
   projectId: string
   /** Email address of the sender. */
   mailFrom: string
-  /** @deprecated Email address of the recipient. */
+  /** Email address of the recipient. */
   rcptTo?: string
   /** Email address of the recipient. */
   mailRcpt: string
@@ -182,32 +127,201 @@ export interface Email {
   flags: EmailFlag[]
 }
 
-/** Email. try. */
-export interface EmailTry {
-  /** Rank number of this attempt to send the email. */
-  rank: number
-  /** Date of the attempt to send the email. */
-  triedAt?: Date
-  /**
-   * The SMTP status code received after the attempt. 0 if the attempt did not
-   * reach an SMTP server.
-   */
-  code: number
-  /**
-   * The SMTP message received. If the attempt did not reach an SMTP server, the
-   * message returned explains what happened.
-   */
-  message: string
+export interface DomainLastStatusDkimRecord {
+  /** Status of the DKIM record's configurartion. */
+  status: DomainLastStatusRecordStatus
+  /** Time and date the DKIM record was last valid. */
+  lastValidAt?: Date
+  /** An error text displays in case the record is not valid. */
+  error?: string
 }
 
-/** List domains response. */
+export interface DomainLastStatusSpfRecord {
+  /** Status of the SPF record's configurartion. */
+  status: DomainLastStatusRecordStatus
+  /** Time and date the SPF record was last valid. */
+  lastValidAt?: Date
+  /** An error text displays in case the record is not valid. */
+  error?: string
+}
+
+export interface Domain {
+  /** ID of the domain. */
+  id: string
+  /** ID of the domain's Organization. */
+  organizationId: string
+  /** ID of the domain's Project. */
+  projectId: string
+  /** Domain name (example.com). */
+  name: string
+  /** Status of the domain. */
+  status: DomainStatus
+  /** Date and time of domain creation. */
+  createdAt?: Date
+  /** Date and time of the next scheduled check. */
+  nextCheckAt?: Date
+  /** Date and time the domain was last valid. */
+  lastValidAt?: Date
+  /** Date and time of the domain's deletion. */
+  revokedAt?: Date
+  /** Error message returned if the last check failed. */
+  lastError?: string
+  /** Snippet of the SPF record to register in the DNS zone. */
+  spfConfig: string
+  /** DKIM public key to record in the DNS zone. */
+  dkimConfig: string
+  /** Domain's statistics. */
+  statistics: DomainStatistics
+  region: Region
+}
+
+export type CancelEmailRequest = {
+  region?: Region
+  /** ID of the email to cancel. */
+  emailId: string
+}
+
+export type CheckDomainRequest = {
+  region?: Region
+  /** ID of the domain to check. */
+  domainId: string
+}
+
+export type CreateDomainRequest = {
+  region?: Region
+  /** ID of the project to which the domain belongs. */
+  projectId?: string
+  /** Fully qualified domain dame. */
+  domainName: string
+  /** Accept Scaleway's Terms of Service. */
+  acceptTos: boolean
+}
+
+export type CreateEmailRequest = {
+  region?: Region
+  /** Sender information. Must be from a checked domain declared in the Project. */
+  from: CreateEmailRequestAddress
+  /** An array of the primary recipient's information. */
+  to?: CreateEmailRequestAddress[]
+  /** An array of the carbon copy recipient's information. */
+  cc?: CreateEmailRequestAddress[]
+  /** An array of the blind carbon copy recipient's information. */
+  bcc?: CreateEmailRequestAddress[]
+  /** Subject of the email. */
+  subject: string
+  /** Text content. */
+  text: string
+  /** HTML content. */
+  html: string
+  /** ID of the Project in which to create the email. */
+  projectId?: string
+  /** Array of attachments. */
+  attachments?: CreateEmailRequestAttachment[]
+  /** Maximum date to deliver the email. */
+  sendBefore?: Date
+}
+
+export interface CreateEmailResponse {
+  /** Single page of emails matching the requested criteria. */
+  emails: Email[]
+}
+
+export interface DomainLastStatus {
+  /** The id of the domain. */
+  domainId: string
+  /** The domain name (example.com). */
+  domainName: string
+  /** The SPF record verification data. */
+  spfRecord: DomainLastStatusSpfRecord
+  /** The DKIM record verification data. */
+  dkimRecord: DomainLastStatusDkimRecord
+}
+
+export type GetDomainLastStatusRequest = {
+  region?: Region
+  /** ID of the domain to delete. */
+  domainId: string
+}
+
+export type GetDomainRequest = {
+  region?: Region
+  /** ID of the domain. */
+  domainId: string
+}
+
+export type GetEmailRequest = {
+  region?: Region
+  /** ID of the email to retrieve. */
+  emailId: string
+}
+
+export type GetStatisticsRequest = {
+  region?: Region
+  /** (Optional) Number of emails for this Project. */
+  projectId?: string
+  /**
+   * (Optional) Number of emails sent from this domain (must be coherent with
+   * the `project_id` and the `organization_id`).
+   */
+  domainId?: string
+  /** (Optional) Number of emails created after this date. */
+  since?: Date
+  /** (Optional) Number of emails created before this date. */
+  until?: Date
+  /** (Optional) Number of emails sent with this sender's email address. */
+  mailFrom?: string
+}
+
+export type ListDomainsRequest = {
+  region?: Region
+  /** Requested page number. Value must be greater or equal to 1. */
+  page?: number
+  /** Page size. */
+  pageSize?: number
+  projectId?: string
+  status?: DomainStatus[]
+  organizationId?: string
+  name?: string
+}
+
 export interface ListDomainsResponse {
   /** Number of domains that match the request (without pagination). */
   totalCount: number
   domains: Domain[]
 }
 
-/** List emails response. */
+export type ListEmailsRequest = {
+  region?: Region
+  page?: number
+  pageSize?: number
+  /** (Optional) ID of the Project in which to list the emails. */
+  projectId?: string
+  /** (Optional) ID of the domain for which to list the emails. */
+  domainId?: string
+  /** (Optional) ID of the message for which to list the emails. */
+  messageId?: string
+  /** (Optional) List emails created after this date. */
+  since?: Date
+  /** (Optional) List emails created before this date. */
+  until?: Date
+  /** (Optional) List emails sent with this sender's email address. */
+  mailFrom?: string
+  /** List emails sent to this recipient's email address. */
+  mailTo?: string
+  /** (Optional) List emails sent to this recipient's email address. */
+  mailRcpt?: string
+  /** (Optional) List emails with any of these statuses. */
+  statuses?: EmailStatus[]
+  /** (Optional) List emails with this subject. */
+  subject?: string
+  /** (Optional) List emails by searching to all fields. */
+  search?: string
+  /** (Optional) List emails corresponding to specific criteria. */
+  orderBy?: ListEmailsRequestOrderBy
+  /** (Optional) List emails containing only specific flags. */
+  flags?: EmailFlag[]
+}
+
 export interface ListEmailsResponse {
   /** Number of emails matching the requested criteria. */
   totalCount: number
@@ -215,7 +329,12 @@ export interface ListEmailsResponse {
   emails: Email[]
 }
 
-/** Statistics. */
+export type RevokeDomainRequest = {
+  region?: Region
+  /** ID of the domain to delete. */
+  domainId: string
+}
+
 export interface Statistics {
   /** Total number of emails matching the requested criteria. */
   totalCount: number
@@ -244,179 +363,4 @@ export interface Statistics {
    * been canceled upon request.
    */
   canceledCount: number
-}
-
-export type CreateEmailRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Sender information. Must be from a checked domain declared in the Project. */
-  from?: CreateEmailRequestAddress
-  /** An array of the primary recipient's information. */
-  to?: CreateEmailRequestAddress[]
-  /** An array of the carbon copy recipient's information. */
-  cc?: CreateEmailRequestAddress[]
-  /** An array of the blind carbon copy recipient's information. */
-  bcc?: CreateEmailRequestAddress[]
-  /** Subject of the email. */
-  subject: string
-  /** Text content. */
-  text: string
-  /** HTML content. */
-  html: string
-  /** ID of the Project in which to create the email. */
-  projectId?: string
-  /** Array of attachments. */
-  attachments?: CreateEmailRequestAttachment[]
-  /** Maximum date to deliver the email. */
-  sendBefore?: Date
-}
-
-export type GetEmailRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** ID of the email to retrieve. */
-  emailId: string
-}
-
-export type ListEmailsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  page?: number
-  pageSize?: number
-  /** (Optional) ID of the Project in which to list the emails. */
-  projectId?: string
-  /** (Optional) ID of the domain for which to list the emails. */
-  domainId?: string
-  /** (Optional) ID of the message for which to list the emails. */
-  messageId?: string
-  /** (Optional) List emails created after this date. */
-  since?: Date
-  /** (Optional) List emails created before this date. */
-  until?: Date
-  /** (Optional) List emails sent with this sender's email address. */
-  mailFrom?: string
-  /** @deprecated List emails sent to this recipient's email address. */
-  mailTo?: string
-  /** (Optional) List emails sent to this recipient's email address. */
-  mailRcpt?: string
-  /** (Optional) List emails with any of these statuses. */
-  statuses?: EmailStatus[]
-  /** (Optional) List emails with this subject. */
-  subject?: string
-  /** (Optional) List emails by searching to all fields. */
-  search?: string
-  /** (Optional) List emails corresponding to specific criteria. */
-  orderBy?: ListEmailsRequestOrderBy
-  /** (Optional) List emails containing only specific flags. */
-  flags?: EmailFlag[]
-}
-
-export type GetStatisticsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** (Optional) Number of emails for this Project. */
-  projectId?: string
-  /**
-   * (Optional) Number of emails sent from this domain (must be coherent with
-   * the `project_id` and the `organization_id`).
-   */
-  domainId?: string
-  /** (Optional) Number of emails created after this date. */
-  since?: Date
-  /** (Optional) Number of emails created before this date. */
-  until?: Date
-  /** (Optional) Number of emails sent with this sender's email address. */
-  mailFrom?: string
-}
-
-export type CancelEmailRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** ID of the email to cancel. */
-  emailId: string
-}
-
-export type CreateDomainRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** ID of the project to which the domain belongs. */
-  projectId?: string
-  /** Fully qualified domain dame. */
-  domainName: string
-  /** Accept Scaleway's Terms of Service. */
-  acceptTos: boolean
-}
-
-export type GetDomainRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** ID of the domain. */
-  domainId: string
-}
-
-export type ListDomainsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Requested page number. Value must be greater or equal to 1. */
-  page?: number
-  /** Page size. */
-  pageSize?: number
-  projectId?: string
-  status?: DomainStatus[]
-  organizationId?: string
-  name?: string
-}
-
-export type RevokeDomainRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** ID of the domain to delete. */
-  domainId: string
-}
-
-export type CheckDomainRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** ID of the domain to check. */
-  domainId: string
-}
-
-export type GetDomainLastStatusRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** ID of the domain to delete. */
-  domainId: string
 }

@@ -11,19 +11,24 @@ import type { Region, WaitForOptions } from '../../../bridge'
 import { HOSTING_TRANSIENT_STATUSES } from './content.gen'
 import {
   marshalCreateHostingRequest,
+  marshalDediboxApiMigrateDediboxHostingRequest,
   marshalUpdateHostingRequest,
   unmarshalDnsRecords,
   unmarshalHosting,
+  unmarshalListDediboxHostingsResponse,
   unmarshalListHostingsResponse,
   unmarshalListOffersResponse,
 } from './marshalling.gen'
 import type {
   CreateHostingRequest,
+  DediboxApiListDediboxHostingsRequest,
+  DediboxApiMigrateDediboxHostingRequest,
   DeleteHostingRequest,
   DnsRecords,
   GetDomainDnsRecordsRequest,
   GetHostingRequest,
   Hosting,
+  ListDediboxHostingsResponse,
   ListHostingsRequest,
   ListHostingsResponse,
   ListOffersRequest,
@@ -76,7 +81,7 @@ export class API extends ParentAPI {
         )}/hostings`,
         urlParams: urlParams(
           ['domain', request.domain],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -251,10 +256,89 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['hosting_id', request.hostingId],
           ['only_options', request.onlyOptions],
-          ['order_by', request.orderBy ?? 'price_asc'],
+          ['order_by', request.orderBy],
           ['without_options', request.withoutOptions],
         ),
       },
       unmarshalListOffersResponse,
+    )
+}
+
+/**
+ * WebHosting Dedibox API.
+ *
+ * This API allows to migrate your Dedibox hostings.
+ */
+export class DediboxAPI extends ParentAPI {
+  /** Lists the available regions of the API. */
+  public static readonly LOCALITIES: Region[] = ['fr-par']
+
+  protected pageOfListDediboxHostings = (
+    request: Readonly<DediboxApiListDediboxHostingsRequest> = {},
+  ) =>
+    this.client.fetch<ListDediboxHostingsResponse>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/dedibox-hostings`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListDediboxHostingsResponse,
+    )
+
+  /**
+   * List all Dedibox hostings for Dedibox user ID.
+   *
+   * @param request - The request {@link DediboxApiListDediboxHostingsRequest}
+   * @returns A Promise of ListDediboxHostingsResponse
+   */
+  listDediboxHostings = (
+    request: Readonly<DediboxApiListDediboxHostingsRequest> = {},
+  ) =>
+    enrichForPagination(
+      'dediboxHostings',
+      this.pageOfListDediboxHostings,
+      request,
+    )
+
+  /**
+   * Migrate a hosting from Dedibox to Scaleway account.
+   *
+   * @param request - The request {@link DediboxApiMigrateDediboxHostingRequest}
+   * @returns A Promise of Hosting
+   */
+  migrateDediboxHosting = (
+    request: Readonly<DediboxApiMigrateDediboxHostingRequest>,
+  ) =>
+    this.client.fetch<Hosting>(
+      {
+        body: JSON.stringify(
+          marshalDediboxApiMigrateDediboxHostingRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/dedibox-hostings/migrate`,
+      },
+      unmarshalHosting,
     )
 }

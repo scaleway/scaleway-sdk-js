@@ -9,11 +9,14 @@ import {
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateHostingRequest,
+  DediboxApiMigrateDediboxHostingRequest,
+  DediboxHosting,
   DnsRecord,
   DnsRecords,
   Hosting,
   HostingCpanelUrls,
   HostingOption,
+  ListDediboxHostingsResponse,
   ListHostingsResponse,
   ListOffersResponse,
   Nameserver,
@@ -42,45 +45,10 @@ const unmarshalHostingOption = (data: unknown) => {
     )
   }
 
-  return { id: data.id, name: data.name } as HostingOption
-}
-
-const unmarshalOfferProduct = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'OfferProduct' failed as data isn't a dictionary.`,
-    )
-  }
-
   return {
-    databasesQuota: data.databases_quota,
-    emailAccountsQuota: data.email_accounts_quota,
-    emailStorageQuota: data.email_storage_quota,
-    hostingStorageQuota: data.hosting_storage_quota,
-    maxAddonDomains: data.max_addon_domains,
+    id: data.id,
     name: data.name,
-    option: data.option,
-    ram: data.ram,
-    supportIncluded: data.support_included,
-    vCpu: data.v_cpu,
-  } as OfferProduct
-}
-
-const unmarshalDnsRecord = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DnsRecord' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    name: data.name,
-    priority: data.priority,
-    status: data.status,
-    ttl: data.ttl,
-    type: data.type,
-    value: data.value,
-  } as DnsRecord
+  } as HostingOption
 }
 
 export const unmarshalHosting = (data: unknown) => {
@@ -91,9 +59,7 @@ export const unmarshalHosting = (data: unknown) => {
   }
 
   return {
-    cpanelUrls: data.cpanel_urls
-      ? unmarshalHostingCpanelUrls(data.cpanel_urls)
-      : undefined,
+    cpanelUrls: unmarshalHostingCpanelUrls(data.cpanel_urls),
     createdAt: unmarshalDate(data.created_at),
     dnsStatus: data.dns_status,
     domain: data.domain,
@@ -104,7 +70,7 @@ export const unmarshalHosting = (data: unknown) => {
     options: unmarshalArrayOfObject(data.options, unmarshalHostingOption),
     organizationId: data.organization_id,
     platformHostname: data.platform_hostname,
-    platformNumber: data.platform_number,
+    platformNumber: data.platform_number ? data.platform_number : undefined,
     projectId: data.project_id,
     region: data.region,
     status: data.status,
@@ -128,22 +94,21 @@ const unmarshalNameserver = (data: unknown) => {
   } as Nameserver
 }
 
-const unmarshalOffer = (data: unknown) => {
+const unmarshalDnsRecord = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'Offer' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'DnsRecord' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    available: data.available,
-    billingOperationPath: data.billing_operation_path,
-    endOfLife: data.end_of_life,
-    id: data.id,
-    price: data.price ? unmarshalMoney(data.price) : undefined,
-    product: data.product ? unmarshalOfferProduct(data.product) : undefined,
-    quotaWarnings: data.quota_warnings,
-  } as Offer
+    name: data.name,
+    priority: data.priority ? data.priority : undefined,
+    status: data.status,
+    ttl: data.ttl,
+    type: data.type,
+    value: data.value,
+  } as DnsRecord
 }
 
 export const unmarshalDnsRecords = (data: unknown) => {
@@ -160,6 +125,37 @@ export const unmarshalDnsRecords = (data: unknown) => {
   } as DnsRecords
 }
 
+const unmarshalDediboxHosting = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DediboxHosting' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    dediboxId: data.dedibox_id,
+    domain: data.domain,
+    offerId: data.offer_id,
+    type: data.type,
+  } as DediboxHosting
+}
+
+export const unmarshalListDediboxHostingsResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDediboxHostingsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    dediboxHostings: unmarshalArrayOfObject(
+      data.dedibox_hostings,
+      unmarshalDediboxHosting,
+    ),
+    totalCount: data.total_count,
+  } as ListDediboxHostingsResponse
+}
+
 export const unmarshalListHostingsResponse = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -171,6 +167,45 @@ export const unmarshalListHostingsResponse = (data: unknown) => {
     hostings: unmarshalArrayOfObject(data.hostings, unmarshalHosting),
     totalCount: data.total_count,
   } as ListHostingsResponse
+}
+
+const unmarshalOfferProduct = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferProduct' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    databasesQuota: data.databases_quota,
+    emailAccountsQuota: data.email_accounts_quota,
+    emailStorageQuota: data.email_storage_quota,
+    hostingStorageQuota: data.hosting_storage_quota,
+    maxAddonDomains: data.max_addon_domains,
+    name: data.name,
+    option: data.option,
+    ram: data.ram,
+    supportIncluded: data.support_included,
+    vCpu: data.v_cpu,
+  } as OfferProduct
+}
+
+const unmarshalOffer = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Offer' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    available: data.available,
+    billingOperationPath: data.billing_operation_path,
+    endOfLife: data.end_of_life,
+    id: data.id,
+    price: data.price ? unmarshalMoney(data.price) : undefined,
+    product: unmarshalOfferProduct(data.product),
+    quotaWarnings: data.quota_warnings,
+  } as Offer
 }
 
 export const unmarshalListOffersResponse = (data: unknown) => {
@@ -195,6 +230,17 @@ export const marshalCreateHostingRequest = (
   option_ids: request.optionIds,
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
+})
+
+export const marshalDediboxApiMigrateDediboxHostingRequest = (
+  request: DediboxApiMigrateDediboxHostingRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  domain: request.domain,
+  email: request.email,
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  token: request.token,
 })
 
 export const marshalUpdateHostingRequest = (

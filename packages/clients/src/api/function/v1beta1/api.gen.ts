@@ -119,7 +119,7 @@ export class API extends ParentAPI {
         )}/namespaces`,
         urlParams: urlParams(
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -256,7 +256,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['name', request.name],
           ['namespace_id', request.namespaceId],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -478,7 +478,7 @@ export class API extends ParentAPI {
         )}/crons`,
         urlParams: urlParams(
           ['function_id', request.functionId],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -610,7 +610,7 @@ export class API extends ParentAPI {
           request.functionId,
         )}/logs`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'timestamp_desc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -641,7 +641,7 @@ export class API extends ParentAPI {
         )}/domains`,
         urlParams: urlParams(
           ['function_id', request.functionId],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -760,14 +760,8 @@ export class API extends ParentAPI {
           ['expires_at', request.expiresAt],
           ...Object.entries(
             resolveOneOf([
-              {
-                param: 'function_id',
-                value: request.functionId,
-              },
-              {
-                param: 'namespace_id',
-                value: request.namespaceId,
-              },
+              { param: 'function_id', value: request.functionId },
+              { param: 'namespace_id', value: request.namespaceId },
             ]),
           ),
         ),
@@ -846,7 +840,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['function_id', request.functionId],
           ['namespace_id', request.namespaceId],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -943,7 +937,7 @@ export class API extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/triggers`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -951,18 +945,12 @@ export class API extends ParentAPI {
           ],
           ...Object.entries(
             resolveOneOf([
+              { param: 'function_id', value: request.functionId },
+              { param: 'namespace_id', value: request.namespaceId },
               {
                 default: this.client.settings.defaultProjectId,
                 param: 'project_id',
                 value: request.projectId,
-              },
-              {
-                param: 'function_id',
-                value: request.functionId,
-              },
-              {
-                param: 'namespace_id',
-                value: request.namespaceId,
               },
             ]),
           ),

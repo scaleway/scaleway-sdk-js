@@ -60,7 +60,6 @@ export type {
   LogStream,
   Namespace,
   NamespaceStatus,
-  NullValue,
   Secret,
   SecretHashedValue,
   Token,

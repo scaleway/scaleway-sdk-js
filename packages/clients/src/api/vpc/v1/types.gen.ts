@@ -8,12 +8,6 @@ export type ListPrivateNetworksRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-export interface ListPrivateNetworksResponse {
-  privateNetworks: PrivateNetwork[]
-  totalCount: number
-}
-
-/** Private network. */
 export interface PrivateNetwork {
   /** Private Network ID. */
   id: string
@@ -35,8 +29,31 @@ export interface PrivateNetwork {
   subnets: string[]
 }
 
+export type CreatePrivateNetworkRequest = {
+  zone?: Zone
+  /** Name for the Private Network. */
+  name?: string
+  /** Scaleway Project in which to create the Private Network. */
+  projectId?: string
+  /** Tags for the Private Network. */
+  tags?: string[]
+  /** Private Network subnets CIDR. */
+  subnets?: string[]
+}
+
+export type DeletePrivateNetworkRequest = {
+  zone?: Zone
+  /** Private Network ID. */
+  privateNetworkId: string
+}
+
+export type GetPrivateNetworkRequest = {
+  zone?: Zone
+  /** Private Network ID. */
+  privateNetworkId: string
+}
+
 export type ListPrivateNetworksRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Sort order of the returned Private Networks. */
   orderBy?: ListPrivateNetworksRequestOrderBy
@@ -73,28 +90,12 @@ export type ListPrivateNetworksRequest = {
   includeRegional?: boolean
 }
 
-export type CreatePrivateNetworkRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** Name for the Private Network. */
-  name?: string
-  /** Scaleway Project in which to create the Private Network. */
-  projectId?: string
-  /** Tags for the Private Network. */
-  tags?: string[]
-  /** Private Network subnets CIDR. */
-  subnets?: string[]
-}
-
-export type GetPrivateNetworkRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** Private Network ID. */
-  privateNetworkId: string
+export interface ListPrivateNetworksResponse {
+  privateNetworks: PrivateNetwork[]
+  totalCount: number
 }
 
 export type UpdatePrivateNetworkRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Private Network ID. */
   privateNetworkId: string
@@ -102,13 +103,6 @@ export type UpdatePrivateNetworkRequest = {
   name?: string
   /** Tags for the Private Network. */
   tags?: string[]
-  /** @deprecated Private Network subnets CIDR (deprecated). */
+  /** Private Network subnets CIDR (deprecated). */
   subnets?: string[]
-}
-
-export type DeletePrivateNetworkRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** Private Network ID. */
-  privateNetworkId: string
 }

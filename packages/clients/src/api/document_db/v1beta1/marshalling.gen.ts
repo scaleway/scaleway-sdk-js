@@ -130,13 +130,13 @@ export const unmarshalEndpoint = (data: unknown) => {
     directAccess: data.direct_access
       ? unmarshalEndpointDirectAccessDetails(data.direct_access)
       : undefined,
-    hostname: data.hostname,
+    hostname: data.hostname ? data.hostname : undefined,
     id: data.id,
-    ip: data.ip,
+    ip: data.ip ? data.ip : undefined,
     loadBalancer: data.load_balancer
       ? unmarshalEndpointLoadBalancerDetails(data.load_balancer)
       : undefined,
-    name: data.name,
+    name: data.name ? data.name : undefined,
     port: data.port,
     privateNetwork: data.private_network
       ? unmarshalEndpointPrivateNetworkDetails(data.private_network)
@@ -144,88 +144,53 @@ export const unmarshalEndpoint = (data: unknown) => {
   } as Endpoint
 }
 
-const unmarshalEngineSetting = (data: unknown) => {
+export const unmarshalReadReplica = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'EngineSetting' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'ReadReplica' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    defaultValue: data.default_value,
-    description: data.description,
-    floatMax: data.float_max,
-    floatMin: data.float_min,
-    hotConfigurable: data.hot_configurable,
-    intMax: data.int_max,
-    intMin: data.int_min,
+    endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
+    id: data.id,
+    region: data.region,
+    sameZone: data.same_zone,
+    status: data.status,
+  } as ReadReplica
+}
+
+export const unmarshalDatabase = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Database' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    managed: data.managed,
     name: data.name,
-    propertyType: data.property_type,
-    stringConstraint: data.string_constraint,
-    unit: data.unit,
-  } as EngineSetting
+    owner: data.owner,
+    size: data.size,
+  } as Database
 }
 
-const unmarshalBackupSchedule = (data: unknown) => {
+export const unmarshalInstanceLog = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'BackupSchedule' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'InstanceLog' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    disabled: data.disabled,
-    frequency: data.frequency,
-    nextRunAt: unmarshalDate(data.next_run_at),
-    retention: data.retention,
-  } as BackupSchedule
-}
-
-const unmarshalEngineVersion = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EngineVersion' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    availableInitSettings: unmarshalArrayOfObject(
-      data.available_init_settings,
-      unmarshalEngineSetting,
-    ),
-    availableSettings: unmarshalArrayOfObject(
-      data.available_settings,
-      unmarshalEngineSetting,
-    ),
-    beta: data.beta,
-    disabled: data.disabled,
-    endOfLife: unmarshalDate(data.end_of_life),
-    name: data.name,
-    version: data.version,
-  } as EngineVersion
-}
-
-const unmarshalInstanceSetting = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'InstanceSetting' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { name: data.name, value: data.value } as InstanceSetting
-}
-
-const unmarshalLogsPolicy = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'LogsPolicy' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    maxAgeRetention: data.max_age_retention,
-    totalDiskRetention: data.total_disk_retention,
-  } as LogsPolicy
+    createdAt: unmarshalDate(data.created_at),
+    downloadUrl: data.download_url ? data.download_url : undefined,
+    expiresAt: unmarshalDate(data.expires_at),
+    id: data.id,
+    nodeName: data.node_name,
+    region: data.region,
+    status: data.status,
+  } as InstanceLog
 }
 
 const unmarshalMaintenance = (data: unknown) => {
@@ -244,49 +209,49 @@ const unmarshalMaintenance = (data: unknown) => {
   } as Maintenance
 }
 
-const unmarshalNodeTypeVolumeConstraintSizes = (data: unknown) => {
+const unmarshalLogsPolicy = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'NodeTypeVolumeConstraintSizes' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'LogsPolicy' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    maxSize: data.max_size,
-    minSize: data.min_size,
-  } as NodeTypeVolumeConstraintSizes
+    maxAgeRetention: data.max_age_retention
+      ? data.max_age_retention
+      : undefined,
+    totalDiskRetention: data.total_disk_retention
+      ? data.total_disk_retention
+      : undefined,
+  } as LogsPolicy
 }
 
-const unmarshalNodeTypeVolumeType = (data: unknown) => {
+const unmarshalBackupSchedule = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'NodeTypeVolumeType' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'BackupSchedule' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    chunkSize: data.chunk_size,
-    description: data.description,
-    maxSize: data.max_size,
-    minSize: data.min_size,
-    type: data.type,
-  } as NodeTypeVolumeType
+    disabled: data.disabled,
+    frequency: data.frequency,
+    nextRunAt: unmarshalDate(data.next_run_at),
+    retention: data.retention,
+  } as BackupSchedule
 }
 
-export const unmarshalReadReplica = (data: unknown) => {
+const unmarshalInstanceSetting = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'ReadReplica' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'InstanceSetting' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
-    id: data.id,
-    region: data.region,
-    sameZone: data.same_zone,
-    status: data.status,
-  } as ReadReplica
+    name: data.name,
+    value: data.value,
+  } as InstanceSetting
 }
 
 const unmarshalUpgradableVersion = (data: unknown) => {
@@ -311,54 +276,10 @@ const unmarshalVolume = (data: unknown) => {
     )
   }
 
-  return { size: data.size, type: data.type } as Volume
-}
-
-const unmarshalACLRule = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ACLRule' failed as data isn't a dictionary.`,
-    )
-  }
-
   return {
-    action: data.action,
-    description: data.description,
-    direction: data.direction,
-    ip: data.ip,
-    port: data.port,
-    protocol: data.protocol,
-  } as ACLRule
-}
-
-export const unmarshalDatabase = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Database' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    managed: data.managed,
-    name: data.name,
-    owner: data.owner,
     size: data.size,
-  } as Database
-}
-
-const unmarshalDatabaseEngine = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DatabaseEngine' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    logoUrl: data.logo_url,
-    name: data.name,
-    region: data.region,
-    versions: unmarshalArrayOfObject(data.versions, unmarshalEngineVersion),
-  } as DatabaseEngine
+    type: data.type,
+  } as Volume
 }
 
 export const unmarshalInstance = (data: unknown) => {
@@ -370,9 +291,7 @@ export const unmarshalInstance = (data: unknown) => {
 
   return {
     backupSameRegion: data.backup_same_region,
-    backupSchedule: data.backup_schedule
-      ? unmarshalBackupSchedule(data.backup_schedule)
-      : undefined,
+    backupSchedule: unmarshalBackupSchedule(data.backup_schedule),
     createdAt: unmarshalDate(data.created_at),
     endpoint: data.endpoint ? unmarshalEndpoint(data.endpoint) : undefined,
     endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
@@ -383,9 +302,7 @@ export const unmarshalInstance = (data: unknown) => {
       unmarshalInstanceSetting,
     ),
     isHaCluster: data.is_ha_cluster,
-    logsPolicy: data.logs_policy
-      ? unmarshalLogsPolicy(data.logs_policy)
-      : undefined,
+    logsPolicy: unmarshalLogsPolicy(data.logs_policy),
     maintenances: unmarshalArrayOfObject(
       data.maintenances,
       unmarshalMaintenance,
@@ -406,71 +323,8 @@ export const unmarshalInstance = (data: unknown) => {
       data.upgradable_version,
       unmarshalUpgradableVersion,
     ),
-    volume: data.volume ? unmarshalVolume(data.volume) : undefined,
+    volume: unmarshalVolume(data.volume),
   } as Instance
-}
-
-export const unmarshalInstanceLog = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'InstanceLog' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    createdAt: unmarshalDate(data.created_at),
-    downloadUrl: data.download_url,
-    expiresAt: unmarshalDate(data.expires_at),
-    id: data.id,
-    nodeName: data.node_name,
-    region: data.region,
-    status: data.status,
-  } as InstanceLog
-}
-
-const unmarshalListInstanceLogsDetailsResponseInstanceLogDetail = (
-  data: unknown,
-) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListInstanceLogsDetailsResponseInstanceLogDetail' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    logName: data.log_name,
-    size: data.size,
-  } as ListInstanceLogsDetailsResponseInstanceLogDetail
-}
-
-const unmarshalNodeType = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'NodeType' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    availableVolumeTypes: unmarshalArrayOfObject(
-      data.available_volume_types,
-      unmarshalNodeTypeVolumeType,
-    ),
-    beta: data.beta,
-    description: data.description,
-    disabled: data.disabled,
-    generation: data.generation,
-    instanceRange: data.instance_range,
-    isBssdCompatible: data.is_bssd_compatible,
-    isHaRequired: data.is_ha_required,
-    memory: data.memory,
-    name: data.name,
-    region: data.region,
-    stockStatus: data.stock_status,
-    vcpus: data.vcpus,
-    volumeConstraint: data.volume_constraint
-      ? unmarshalNodeTypeVolumeConstraintSizes(data.volume_constraint)
-      : undefined,
-  } as NodeType
 }
 
 export const unmarshalPrivilege = (data: unknown) => {
@@ -503,7 +357,7 @@ export const unmarshalSnapshot = (data: unknown) => {
     name: data.name,
     nodeType: data.node_type,
     region: data.region,
-    size: data.size,
+    size: data.size ? data.size : undefined,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as Snapshot
@@ -516,7 +370,27 @@ export const unmarshalUser = (data: unknown) => {
     )
   }
 
-  return { isAdmin: data.is_admin, name: data.name } as User
+  return {
+    isAdmin: data.is_admin,
+    name: data.name,
+  } as User
+}
+
+const unmarshalACLRule = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ACLRule' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    action: data.action,
+    description: data.description,
+    direction: data.direction,
+    ip: data.ip,
+    port: data.port ? data.port : undefined,
+    protocol: data.protocol,
+  } as ACLRule
 }
 
 export const unmarshalAddInstanceACLRulesResponse = (data: unknown) => {
@@ -579,6 +453,69 @@ export const unmarshalInstanceMetrics = (data: unknown) => {
   } as InstanceMetrics
 }
 
+const unmarshalEngineSetting = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EngineSetting' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    defaultValue: data.default_value,
+    description: data.description,
+    floatMax: data.float_max ? data.float_max : undefined,
+    floatMin: data.float_min ? data.float_min : undefined,
+    hotConfigurable: data.hot_configurable,
+    intMax: data.int_max ? data.int_max : undefined,
+    intMin: data.int_min ? data.int_min : undefined,
+    name: data.name,
+    propertyType: data.property_type,
+    stringConstraint: data.string_constraint
+      ? data.string_constraint
+      : undefined,
+    unit: data.unit ? data.unit : undefined,
+  } as EngineSetting
+}
+
+const unmarshalEngineVersion = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EngineVersion' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    availableInitSettings: unmarshalArrayOfObject(
+      data.available_init_settings,
+      unmarshalEngineSetting,
+    ),
+    availableSettings: unmarshalArrayOfObject(
+      data.available_settings,
+      unmarshalEngineSetting,
+    ),
+    beta: data.beta,
+    disabled: data.disabled,
+    endOfLife: unmarshalDate(data.end_of_life),
+    name: data.name,
+    version: data.version,
+  } as EngineVersion
+}
+
+const unmarshalDatabaseEngine = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DatabaseEngine' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    logoUrl: data.logo_url,
+    name: data.name,
+    region: data.region,
+    versions: unmarshalArrayOfObject(data.versions, unmarshalEngineVersion),
+  } as DatabaseEngine
+}
+
 export const unmarshalListDatabaseEnginesResponse = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -616,6 +553,21 @@ export const unmarshalListInstanceACLRulesResponse = (data: unknown) => {
     rules: unmarshalArrayOfObject(data.rules, unmarshalACLRule),
     totalCount: data.total_count,
   } as ListInstanceACLRulesResponse
+}
+
+const unmarshalListInstanceLogsDetailsResponseInstanceLogDetail = (
+  data: unknown,
+) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListInstanceLogsDetailsResponseInstanceLogDetail' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    logName: data.log_name,
+    size: data.size,
+  } as ListInstanceLogsDetailsResponseInstanceLogDetail
 }
 
 export const unmarshalListInstanceLogsDetailsResponse = (data: unknown) => {
@@ -659,6 +611,67 @@ export const unmarshalListInstancesResponse = (data: unknown) => {
     instances: unmarshalArrayOfObject(data.instances, unmarshalInstance),
     totalCount: data.total_count,
   } as ListInstancesResponse
+}
+
+const unmarshalNodeTypeVolumeType = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'NodeTypeVolumeType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    chunkSize: data.chunk_size,
+    description: data.description,
+    maxSize: data.max_size,
+    minSize: data.min_size,
+    type: data.type,
+  } as NodeTypeVolumeType
+}
+
+const unmarshalNodeTypeVolumeConstraintSizes = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'NodeTypeVolumeConstraintSizes' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    maxSize: data.max_size,
+    minSize: data.min_size,
+  } as NodeTypeVolumeConstraintSizes
+}
+
+const unmarshalNodeType = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'NodeType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    availableVolumeTypes: unmarshalArrayOfObject(
+      data.available_volume_types,
+      unmarshalNodeTypeVolumeType,
+    ),
+    beta: data.beta,
+    description: data.description,
+    disabled: data.disabled,
+    generation: data.generation,
+    instanceRange: data.instance_range,
+    isBssdCompatible: data.is_bssd_compatible
+      ? data.is_bssd_compatible
+      : undefined,
+    isHaRequired: data.is_ha_required,
+    memory: data.memory,
+    name: data.name,
+    region: data.region,
+    stockStatus: data.stock_status,
+    vcpus: data.vcpus,
+    volumeConstraint: data.volume_constraint
+      ? unmarshalNodeTypeVolumeConstraintSizes(data.volume_constraint)
+      : undefined,
+  } as NodeType
 }
 
 export const unmarshalListNodeTypesResponse = (data: unknown) => {
@@ -737,70 +750,6 @@ export const unmarshalSetInstanceSettingsResponse = (data: unknown) => {
   } as SetInstanceSettingsResponse
 }
 
-const marshalEndpointSpecPrivateNetworkIpamConfig = (
-  request: EndpointSpecPrivateNetworkIpamConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({})
-
-const marshalReadReplicaEndpointSpecPrivateNetworkIpamConfig = (
-  request: ReadReplicaEndpointSpecPrivateNetworkIpamConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({})
-
-const marshalEndpointSpecLoadBalancer = (
-  request: EndpointSpecLoadBalancer,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({})
-
-const marshalEndpointSpecPrivateNetwork = (
-  request: EndpointSpecPrivateNetwork,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  private_network_id: request.privateNetworkId,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'service_ip',
-      value: request.serviceIp,
-    },
-    {
-      param: 'ipam_config',
-      value: request.ipamConfig
-        ? marshalEndpointSpecPrivateNetworkIpamConfig(
-            request.ipamConfig,
-            defaults,
-          )
-        : undefined,
-    },
-  ]),
-})
-
-const marshalReadReplicaEndpointSpecDirectAccess = (
-  request: ReadReplicaEndpointSpecDirectAccess,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({})
-
-const marshalReadReplicaEndpointSpecPrivateNetwork = (
-  request: ReadReplicaEndpointSpecPrivateNetwork,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  private_network_id: request.privateNetworkId,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'service_ip',
-      value: request.serviceIp,
-    },
-    {
-      param: 'ipam_config',
-      value: request.ipamConfig
-        ? marshalReadReplicaEndpointSpecPrivateNetworkIpamConfig(
-            request.ipamConfig,
-            defaults,
-          )
-        : undefined,
-    },
-  ]),
-})
-
 const marshalACLRuleRequest = (
   request: ACLRuleRequest,
   defaults: DefaultValues,
@@ -809,24 +758,11 @@ const marshalACLRuleRequest = (
   ip: request.ip,
 })
 
-const marshalEndpointSpec = (
-  request: EndpointSpec,
+export const marshalAddInstanceACLRulesRequest = (
+  request: AddInstanceACLRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<unknown>([
-    {
-      param: 'load_balancer',
-      value: request.loadBalancer
-        ? marshalEndpointSpecLoadBalancer(request.loadBalancer, defaults)
-        : undefined,
-    },
-    {
-      param: 'private_network',
-      value: request.privateNetwork
-        ? marshalEndpointSpecPrivateNetwork(request.privateNetwork, defaults)
-        : undefined,
-    },
-  ]),
+  rules: request.rules,
 })
 
 const marshalInstanceSetting = (
@@ -837,52 +773,11 @@ const marshalInstanceSetting = (
   value: request.value,
 })
 
-const marshalLogsPolicy = (
-  request: LogsPolicy,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  max_age_retention: request.maxAgeRetention,
-  total_disk_retention: request.totalDiskRetention,
-})
-
-const marshalReadReplicaEndpointSpec = (
-  request: ReadReplicaEndpointSpec,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  ...resolveOneOf<unknown>([
-    {
-      param: 'direct_access',
-      value: request.directAccess
-        ? marshalReadReplicaEndpointSpecDirectAccess(
-            request.directAccess,
-            defaults,
-          )
-        : undefined,
-    },
-    {
-      param: 'private_network',
-      value: request.privateNetwork
-        ? marshalReadReplicaEndpointSpecPrivateNetwork(
-            request.privateNetwork,
-            defaults,
-          )
-        : undefined,
-    },
-  ]),
-})
-
-export const marshalAddInstanceACLRulesRequest = (
-  request: AddInstanceACLRulesRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  rules: request.rules.map(elt => marshalACLRuleRequest(elt, defaults)),
-})
-
 export const marshalAddInstanceSettingsRequest = (
   request: AddInstanceSettingsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  settings: request.settings.map(elt => marshalInstanceSetting(elt, defaults)),
+  settings: request.settings,
 })
 
 export const marshalCloneInstanceRequest = (
@@ -900,13 +795,42 @@ export const marshalCreateDatabaseRequest = (
   name: request.name,
 })
 
+const marshalEndpointSpecPrivateNetworkIpamConfig = (
+  request: EndpointSpecPrivateNetworkIpamConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({})
+
+const marshalEndpointSpecPrivateNetwork = (
+  request: EndpointSpecPrivateNetwork,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_network_id: request.privateNetworkId,
+  ...resolveOneOf([
+    { param: 'ipam_config', value: request.ipamConfig },
+    { param: 'service_ip', value: request.serviceIp },
+  ]),
+})
+
+const marshalEndpointSpecLoadBalancer = (
+  request: EndpointSpecLoadBalancer,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({})
+
+const marshalEndpointSpec = (
+  request: EndpointSpec,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ...resolveOneOf([
+    { param: 'load_balancer', value: request.loadBalancer },
+    { param: 'private_network', value: request.privateNetwork },
+  ]),
+})
+
 export const marshalCreateEndpointRequest = (
   request: CreateEndpointRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoint_spec: request.endpointSpec
-    ? marshalEndpointSpec(request.endpointSpec, defaults)
-    : undefined,
+  endpoint_spec: request.endpointSpec,
 })
 
 export const marshalCreateInstanceFromSnapshotRequest = (
@@ -925,12 +849,8 @@ export const marshalCreateInstanceRequest = (
   backup_same_region: request.backupSameRegion,
   disable_backup: request.disableBackup,
   engine: request.engine,
-  init_endpoints: request.initEndpoints
-    ? request.initEndpoints.map(elt => marshalEndpointSpec(elt, defaults))
-    : undefined,
-  init_settings: request.initSettings
-    ? request.initSettings.map(elt => marshalInstanceSetting(elt, defaults))
-    : undefined,
+  init_endpoints: request.initEndpoints,
+  init_settings: request.initSettings,
   is_ha_cluster: request.isHaCluster,
   name: request.name || randomName('ins'),
   node_type: request.nodeType,
@@ -938,18 +858,41 @@ export const marshalCreateInstanceRequest = (
   tags: request.tags,
   user_name: request.userName,
   volume_size: request.volumeSize,
-  volume_type: request.volumeType ?? 'lssd',
+  volume_type: request.volumeType,
   ...resolveOneOf([
-    {
-      default: defaults.defaultProjectId,
-      param: 'project_id',
-      value: request.projectId,
-    },
-    {
-      default: defaults.defaultOrganizationId,
-      param: 'organization_id',
-      value: request.organizationId,
-    },
+    { param: 'organization_id', value: request.organizationId },
+    { param: 'project_id', value: request.projectId },
+  ]),
+})
+
+const marshalReadReplicaEndpointSpecPrivateNetworkIpamConfig = (
+  request: ReadReplicaEndpointSpecPrivateNetworkIpamConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({})
+
+const marshalReadReplicaEndpointSpecPrivateNetwork = (
+  request: ReadReplicaEndpointSpecPrivateNetwork,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_network_id: request.privateNetworkId,
+  ...resolveOneOf([
+    { param: 'ipam_config', value: request.ipamConfig },
+    { param: 'service_ip', value: request.serviceIp },
+  ]),
+})
+
+const marshalReadReplicaEndpointSpecDirectAccess = (
+  request: ReadReplicaEndpointSpecDirectAccess,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({})
+
+const marshalReadReplicaEndpointSpec = (
+  request: ReadReplicaEndpointSpec,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ...resolveOneOf([
+    { param: 'direct_access', value: request.directAccess },
+    { param: 'private_network', value: request.privateNetwork },
   ]),
 })
 
@@ -957,20 +900,14 @@ export const marshalCreateReadReplicaEndpointRequest = (
   request: CreateReadReplicaEndpointRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoint_spec: request.endpointSpec.map(elt =>
-    marshalReadReplicaEndpointSpec(elt, defaults),
-  ),
+  endpoint_spec: request.endpointSpec,
 })
 
 export const marshalCreateReadReplicaRequest = (
   request: CreateReadReplicaRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoint_spec: request.endpointSpec
-    ? request.endpointSpec.map(elt =>
-        marshalReadReplicaEndpointSpec(elt, defaults),
-      )
-    : undefined,
+  endpoint_spec: request.endpointSpec,
   instance_id: request.instanceId,
   same_zone: request.sameZone,
 })
@@ -1024,14 +961,14 @@ export const marshalSetInstanceACLRulesRequest = (
   request: SetInstanceACLRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  rules: request.rules.map(elt => marshalACLRuleRequest(elt, defaults)),
+  rules: request.rules,
 })
 
 export const marshalSetInstanceSettingsRequest = (
   request: SetInstanceSettingsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  settings: request.settings.map(elt => marshalInstanceSetting(elt, defaults)),
+  settings: request.settings,
 })
 
 export const marshalSetPrivilegeRequest = (
@@ -1039,8 +976,16 @@ export const marshalSetPrivilegeRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   database_name: request.databaseName,
-  permission: request.permission ?? 'readonly',
+  permission: request.permission,
   user_name: request.userName,
+})
+
+const marshalLogsPolicy = (
+  request: LogsPolicy,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  max_age_retention: request.maxAgeRetention,
+  total_disk_retention: request.totalDiskRetention,
 })
 
 export const marshalUpdateInstanceRequest = (
@@ -1052,9 +997,7 @@ export const marshalUpdateInstanceRequest = (
   backup_schedule_retention: request.backupScheduleRetention,
   backup_schedule_start_hour: request.backupScheduleStartHour,
   is_backup_schedule_disabled: request.isBackupScheduleDisabled,
-  logs_policy: request.logsPolicy
-    ? marshalLogsPolicy(request.logsPolicy, defaults)
-    : undefined,
+  logs_policy: request.logsPolicy,
   name: request.name,
   tags: request.tags,
 })
@@ -1079,26 +1022,11 @@ export const marshalUpgradeInstanceRequest = (
   request: UpgradeInstanceRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<unknown>([
-    {
-      param: 'node_type',
-      value: request.nodeType,
-    },
-    {
-      param: 'enable_ha',
-      value: request.enableHa,
-    },
-    {
-      param: 'volume_size',
-      value: request.volumeSize,
-    },
-    {
-      param: 'volume_type',
-      value: request.volumeType,
-    },
-    {
-      param: 'upgradable_version_id',
-      value: request.upgradableVersionId,
-    },
+  ...resolveOneOf([
+    { param: 'enable_ha', value: request.enableHa },
+    { param: 'node_type', value: request.nodeType },
+    { param: 'upgradable_version_id', value: request.upgradableVersionId },
+    { param: 'volume_size', value: request.volumeSize },
+    { param: 'volume_type', value: request.volumeType },
   ]),
 })

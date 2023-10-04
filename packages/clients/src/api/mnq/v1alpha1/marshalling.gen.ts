@@ -23,79 +23,6 @@ import type {
   UpdateNamespaceRequest,
 } from './types.gen'
 
-const unmarshalPermissions = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Permissions' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    canManage: data.can_manage,
-    canPublish: data.can_publish,
-    canReceive: data.can_receive,
-  } as Permissions
-}
-
-const unmarshalCredentialSummarySQSSNSCreds = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CredentialSummarySQSSNSCreds' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    accessKey: data.access_key,
-    permissions: data.permissions
-      ? unmarshalPermissions(data.permissions)
-      : undefined,
-  } as CredentialSummarySQSSNSCreds
-}
-
-const unmarshalCredentialNATSCredsFile = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CredentialNATSCredsFile' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { content: data.content } as CredentialNATSCredsFile
-}
-
-const unmarshalCredentialSQSSNSCreds = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CredentialSQSSNSCreds' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    accessKey: data.access_key,
-    permissions: data.permissions
-      ? unmarshalPermissions(data.permissions)
-      : undefined,
-    secretKey: data.secret_key,
-  } as CredentialSQSSNSCreds
-}
-
-const unmarshalCredentialSummary = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CredentialSummary' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-    name: data.name,
-    namespaceId: data.namespace_id,
-    protocol: data.protocol,
-    sqsSnsCredentials: data.sqs_sns_credentials
-      ? unmarshalCredentialSummarySQSSNSCreds(data.sqs_sns_credentials)
-      : undefined,
-  } as CredentialSummary
-}
-
 export const unmarshalNamespace = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -113,6 +40,46 @@ export const unmarshalNamespace = (data: unknown) => {
     region: data.region,
     updatedAt: unmarshalDate(data.updated_at),
   } as Namespace
+}
+
+const unmarshalPermissions = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Permissions' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    canManage: data.can_manage ? data.can_manage : undefined,
+    canPublish: data.can_publish ? data.can_publish : undefined,
+    canReceive: data.can_receive ? data.can_receive : undefined,
+  } as Permissions
+}
+
+const unmarshalCredentialSQSSNSCreds = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CredentialSQSSNSCreds' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    accessKey: data.access_key,
+    permissions: unmarshalPermissions(data.permissions),
+    secretKey: data.secret_key ? data.secret_key : undefined,
+  } as CredentialSQSSNSCreds
+}
+
+const unmarshalCredentialNATSCredsFile = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CredentialNATSCredsFile' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    content: data.content,
+  } as CredentialNATSCredsFile
 }
 
 export const unmarshalCredential = (data: unknown) => {
@@ -134,6 +101,37 @@ export const unmarshalCredential = (data: unknown) => {
       ? unmarshalCredentialSQSSNSCreds(data.sqs_sns_credentials)
       : undefined,
   } as Credential
+}
+
+const unmarshalCredentialSummarySQSSNSCreds = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CredentialSummarySQSSNSCreds' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    accessKey: data.access_key,
+    permissions: unmarshalPermissions(data.permissions),
+  } as CredentialSummarySQSSNSCreds
+}
+
+const unmarshalCredentialSummary = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CredentialSummary' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    name: data.name,
+    namespaceId: data.namespace_id,
+    protocol: data.protocol,
+    sqsSnsCredentials: data.sqs_sns_credentials
+      ? unmarshalCredentialSummarySQSSNSCreds(data.sqs_sns_credentials)
+      : undefined,
+  } as CredentialSummary
 }
 
 export const unmarshalListCredentialsResponse = (data: unknown) => {
@@ -180,9 +178,7 @@ export const marshalCreateCredentialRequest = (
 ): Record<string, unknown> => ({
   name: request.name || randomName('mnq'),
   namespace_id: request.namespaceId,
-  permissions: request.permissions
-    ? marshalPermissions(request.permissions, defaults)
-    : undefined,
+  permissions: request.permissions,
 })
 
 export const marshalCreateNamespaceRequest = (
@@ -199,9 +195,7 @@ export const marshalUpdateCredentialRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  permissions: request.permissions
-    ? marshalPermissions(request.permissions, defaults)
-    : undefined,
+  permissions: request.permissions,
 })
 
 export const marshalUpdateNamespaceRequest = (

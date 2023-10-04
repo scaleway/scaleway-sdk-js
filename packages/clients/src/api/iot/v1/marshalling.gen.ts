@@ -65,7 +65,7 @@ const unmarshalDeviceMessageFiltersRule = (data: unknown) => {
 
   return {
     policy: data.policy,
-    topics: data.topics,
+    topics: data.topics ? data.topics : undefined,
   } as DeviceMessageFiltersRule
 }
 
@@ -77,33 +77,9 @@ const unmarshalDeviceMessageFilters = (data: unknown) => {
   }
 
   return {
-    publish: data.publish
-      ? unmarshalDeviceMessageFiltersRule(data.publish)
-      : undefined,
-    subscribe: data.subscribe
-      ? unmarshalDeviceMessageFiltersRule(data.subscribe)
-      : undefined,
+    publish: unmarshalDeviceMessageFiltersRule(data.publish),
+    subscribe: unmarshalDeviceMessageFiltersRule(data.subscribe),
   } as DeviceMessageFilters
-}
-
-const unmarshalHubTwinsGraphiteConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'HubTwinsGraphiteConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { pushUri: data.push_uri } as HubTwinsGraphiteConfig
-}
-
-const unmarshalCertificate = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Certificate' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { crt: data.crt, key: data.key } as Certificate
 }
 
 export const unmarshalDevice = (data: unknown) => {
@@ -123,56 +99,11 @@ export const unmarshalDevice = (data: unknown) => {
     id: data.id,
     isConnected: data.is_connected,
     lastActivityAt: unmarshalDate(data.last_activity_at),
-    messageFilters: data.message_filters
-      ? unmarshalDeviceMessageFilters(data.message_filters)
-      : undefined,
+    messageFilters: unmarshalDeviceMessageFilters(data.message_filters),
     name: data.name,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as Device
-}
-
-export const unmarshalHub = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Hub' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    connectedDeviceCount: data.connected_device_count,
-    createdAt: unmarshalDate(data.created_at),
-    deviceCount: data.device_count,
-    disableEvents: data.disable_events,
-    enabled: data.enabled,
-    enableDeviceAutoProvisioning: data.enable_device_auto_provisioning,
-    endpoint: data.endpoint,
-    eventsTopicPrefix: data.events_topic_prefix,
-    hasCustomCa: data.has_custom_ca,
-    id: data.id,
-    name: data.name,
-    organizationId: data.organization_id,
-    productPlan: data.product_plan,
-    projectId: data.project_id,
-    region: data.region,
-    status: data.status,
-    twinsGraphiteConfig: data.twins_graphite_config
-      ? unmarshalHubTwinsGraphiteConfig(data.twins_graphite_config)
-      : undefined,
-    updatedAt: unmarshalDate(data.updated_at),
-  } as Hub
-}
-
-const unmarshalListTwinDocumentsResponseDocumentSummary = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListTwinDocumentsResponseDocumentSummary' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    documentName: data.document_name,
-  } as ListTwinDocumentsResponseDocumentSummary
 }
 
 export const unmarshalNetwork = (data: unknown) => {
@@ -193,69 +124,60 @@ export const unmarshalNetwork = (data: unknown) => {
   } as Network
 }
 
-const unmarshalRouteDatabaseConfig = (data: unknown) => {
+const unmarshalHubTwinsGraphiteConfig = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'RouteDatabaseConfig' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'HubTwinsGraphiteConfig' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    dbname: data.dbname,
-    engine: data.engine,
-    host: data.host,
-    password: data.password,
-    port: data.port,
-    query: data.query,
-    username: data.username,
-  } as RouteDatabaseConfig
+    pushUri: data.push_uri,
+  } as HubTwinsGraphiteConfig
 }
 
-const unmarshalRouteRestConfig = (data: unknown) => {
+export const unmarshalHub = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'RouteRestConfig' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'Hub' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    headers: data.headers,
-    uri: data.uri,
-    verb: data.verb,
-  } as RouteRestConfig
-}
-
-const unmarshalRouteS3Config = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RouteS3Config' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    bucketName: data.bucket_name,
-    bucketRegion: data.bucket_region,
-    objectPrefix: data.object_prefix,
-    strategy: data.strategy,
-  } as RouteS3Config
-}
-
-const unmarshalRouteSummary = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RouteSummary' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
+    connectedDeviceCount: data.connected_device_count,
     createdAt: unmarshalDate(data.created_at),
-    hubId: data.hub_id,
+    deviceCount: data.device_count,
+    disableEvents: data.disable_events,
+    enableDeviceAutoProvisioning: data.enable_device_auto_provisioning,
+    enabled: data.enabled,
+    endpoint: data.endpoint,
+    eventsTopicPrefix: data.events_topic_prefix,
+    hasCustomCa: data.has_custom_ca,
     id: data.id,
     name: data.name,
-    topic: data.topic,
-    type: data.type,
+    organizationId: data.organization_id,
+    productPlan: data.product_plan,
+    projectId: data.project_id,
+    region: data.region,
+    status: data.status,
+    twinsGraphiteConfig: data.twins_graphite_config
+      ? unmarshalHubTwinsGraphiteConfig(data.twins_graphite_config)
+      : undefined,
     updatedAt: unmarshalDate(data.updated_at),
-  } as RouteSummary
+  } as Hub
+}
+
+const unmarshalCertificate = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Certificate' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    crt: data.crt,
+    key: data.key,
+  } as Certificate
 }
 
 export const unmarshalCreateDeviceResponse = (data: unknown) => {
@@ -266,10 +188,8 @@ export const unmarshalCreateDeviceResponse = (data: unknown) => {
   }
 
   return {
-    certificate: data.certificate
-      ? unmarshalCertificate(data.certificate)
-      : undefined,
-    device: data.device ? unmarshalDevice(data.device) : undefined,
+    certificate: unmarshalCertificate(data.certificate),
+    device: unmarshalDevice(data.device),
   } as CreateDeviceResponse
 }
 
@@ -281,7 +201,7 @@ export const unmarshalCreateNetworkResponse = (data: unknown) => {
   }
 
   return {
-    network: data.network ? unmarshalNetwork(data.network) : undefined,
+    network: unmarshalNetwork(data.network),
     secret: data.secret,
   } as CreateNetworkResponse
 }
@@ -295,7 +215,7 @@ export const unmarshalGetDeviceCertificateResponse = (data: unknown) => {
 
   return {
     certificatePem: data.certificate_pem,
-    device: data.device ? unmarshalDevice(data.device) : undefined,
+    device: unmarshalDevice(data.device),
   } as GetDeviceCertificateResponse
 }
 
@@ -318,7 +238,9 @@ export const unmarshalGetHubCAResponse = (data: unknown) => {
     )
   }
 
-  return { caCertPem: data.ca_cert_pem } as GetHubCAResponse
+  return {
+    caCertPem: data.ca_cert_pem,
+  } as GetHubCAResponse
 }
 
 export const unmarshalGetHubMetricsResponse = (data: unknown) => {
@@ -372,6 +294,24 @@ export const unmarshalListNetworksResponse = (data: unknown) => {
   } as ListNetworksResponse
 }
 
+const unmarshalRouteSummary = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RouteSummary' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    hubId: data.hub_id,
+    id: data.id,
+    name: data.name,
+    topic: data.topic,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as RouteSummary
+}
+
 export const unmarshalListRoutesResponse = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -383,6 +323,18 @@ export const unmarshalListRoutesResponse = (data: unknown) => {
     routes: unmarshalArrayOfObject(data.routes, unmarshalRouteSummary),
     totalCount: data.total_count,
   } as ListRoutesResponse
+}
+
+const unmarshalListTwinDocumentsResponseDocumentSummary = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListTwinDocumentsResponseDocumentSummary' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    documentName: data.document_name,
+  } as ListTwinDocumentsResponseDocumentSummary
 }
 
 export const unmarshalListTwinDocumentsResponse = (data: unknown) => {
@@ -408,11 +360,56 @@ export const unmarshalRenewDeviceCertificateResponse = (data: unknown) => {
   }
 
   return {
-    certificate: data.certificate
-      ? unmarshalCertificate(data.certificate)
-      : undefined,
-    device: data.device ? unmarshalDevice(data.device) : undefined,
+    certificate: unmarshalCertificate(data.certificate),
+    device: unmarshalDevice(data.device),
   } as RenewDeviceCertificateResponse
+}
+
+const unmarshalRouteRestConfig = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RouteRestConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    headers: data.headers,
+    uri: data.uri,
+    verb: data.verb,
+  } as RouteRestConfig
+}
+
+const unmarshalRouteDatabaseConfig = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RouteDatabaseConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    dbname: data.dbname,
+    engine: data.engine,
+    host: data.host,
+    password: data.password,
+    port: data.port,
+    query: data.query,
+    username: data.username,
+  } as RouteDatabaseConfig
+}
+
+const unmarshalRouteS3Config = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RouteS3Config' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    bucketName: data.bucket_name,
+    bucketRegion: data.bucket_region,
+    objectPrefix: data.object_prefix,
+    strategy: data.strategy,
+  } as RouteS3Config
 }
 
 export const unmarshalRoute = (data: unknown) => {
@@ -451,7 +448,7 @@ export const unmarshalSetDeviceCertificateResponse = (data: unknown) => {
 
   return {
     certificatePem: data.certificate_pem,
-    device: data.device ? unmarshalDevice(data.device) : undefined,
+    device: unmarshalDevice(data.device),
   } as SetDeviceCertificateResponse
 }
 
@@ -463,7 +460,7 @@ export const unmarshalTwinDocument = (data: unknown) => {
   }
 
   return {
-    data: data.data,
+    data: data.data ? data.data : undefined,
     documentName: data.document_name,
     twinId: data.twin_id,
     version: data.version,
@@ -476,6 +473,66 @@ const marshalDeviceMessageFiltersRule = (
 ): Record<string, unknown> => ({
   policy: request.policy,
   topics: request.topics,
+})
+
+const marshalDeviceMessageFilters = (
+  request: DeviceMessageFilters,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  publish: request.publish,
+  subscribe: request.subscribe,
+})
+
+export const marshalCreateDeviceRequest = (
+  request: CreateDeviceRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  allow_insecure: request.allowInsecure,
+  allow_multiple_connections: request.allowMultipleConnections,
+  description: request.description,
+  hub_id: request.hubId,
+  message_filters: request.messageFilters,
+  name: request.name || randomName('device'),
+})
+
+const marshalHubTwinsGraphiteConfig = (
+  request: HubTwinsGraphiteConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  push_uri: request.pushUri,
+})
+
+export const marshalCreateHubRequest = (
+  request: CreateHubRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  disable_events: request.disableEvents,
+  events_topic_prefix: request.eventsTopicPrefix,
+  name: request.name || randomName('hub'),
+  product_plan: request.productPlan,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  ...resolveOneOf([
+    { param: 'twins_graphite_config', value: request.twinsGraphiteConfig },
+  ]),
+})
+
+export const marshalCreateNetworkRequest = (
+  request: CreateNetworkRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  hub_id: request.hubId,
+  name: request.name || randomName('network'),
+  topic_prefix: request.topicPrefix,
+  type: request.type,
+})
+
+const marshalCreateRouteRequestRestConfig = (
+  request: CreateRouteRequestRestConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  headers: request.headers,
+  uri: request.uri,
+  verb: request.verb,
 })
 
 const marshalCreateRouteRequestDatabaseConfig = (
@@ -491,15 +548,6 @@ const marshalCreateRouteRequestDatabaseConfig = (
   username: request.username,
 })
 
-const marshalCreateRouteRequestRestConfig = (
-  request: CreateRouteRequestRestConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  headers: request.headers,
-  uri: request.uri,
-  verb: request.verb,
-})
-
 const marshalCreateRouteRequestS3Config = (
   request: CreateRouteRequestS3Config,
   defaults: DefaultValues,
@@ -510,100 +558,6 @@ const marshalCreateRouteRequestS3Config = (
   strategy: request.strategy,
 })
 
-const marshalDeviceMessageFilters = (
-  request: DeviceMessageFilters,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  publish: request.publish
-    ? marshalDeviceMessageFiltersRule(request.publish, defaults)
-    : undefined,
-  subscribe: request.subscribe
-    ? marshalDeviceMessageFiltersRule(request.subscribe, defaults)
-    : undefined,
-})
-
-const marshalHubTwinsGraphiteConfig = (
-  request: HubTwinsGraphiteConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  push_uri: request.pushUri,
-})
-
-const marshalUpdateRouteRequestDatabaseConfig = (
-  request: UpdateRouteRequestDatabaseConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  dbname: request.dbname,
-  engine: request.engine,
-  host: request.host,
-  password: request.password,
-  port: request.port,
-  query: request.query,
-  username: request.username,
-})
-
-const marshalUpdateRouteRequestRestConfig = (
-  request: UpdateRouteRequestRestConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  headers: request.headers,
-  uri: request.uri,
-  verb: request.verb,
-})
-
-const marshalUpdateRouteRequestS3Config = (
-  request: UpdateRouteRequestS3Config,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  bucket_name: request.bucketName,
-  bucket_region: request.bucketRegion,
-  object_prefix: request.objectPrefix,
-  strategy: request.strategy,
-})
-
-export const marshalCreateDeviceRequest = (
-  request: CreateDeviceRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  allow_insecure: request.allowInsecure,
-  allow_multiple_connections: request.allowMultipleConnections,
-  description: request.description,
-  hub_id: request.hubId,
-  message_filters: request.messageFilters
-    ? marshalDeviceMessageFilters(request.messageFilters, defaults)
-    : undefined,
-  name: request.name || randomName('device'),
-})
-
-export const marshalCreateHubRequest = (
-  request: CreateHubRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  disable_events: request.disableEvents,
-  events_topic_prefix: request.eventsTopicPrefix,
-  name: request.name || randomName('hub'),
-  product_plan: request.productPlan,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-  ...resolveOneOf([
-    {
-      param: 'twins_graphite_config',
-      value: request.twinsGraphiteConfig
-        ? marshalHubTwinsGraphiteConfig(request.twinsGraphiteConfig, defaults)
-        : undefined,
-    },
-  ]),
-})
-
-export const marshalCreateNetworkRequest = (
-  request: CreateNetworkRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  hub_id: request.hubId,
-  name: request.name || randomName('network'),
-  topic_prefix: request.topicPrefix,
-  type: request.type,
-})
-
 export const marshalCreateRouteRequest = (
   request: CreateRouteRequest,
   defaults: DefaultValues,
@@ -611,25 +565,10 @@ export const marshalCreateRouteRequest = (
   hub_id: request.hubId,
   name: request.name || randomName('route'),
   topic: request.topic,
-  ...resolveOneOf<unknown>([
-    {
-      param: 's3_config',
-      value: request.s3Config
-        ? marshalCreateRouteRequestS3Config(request.s3Config, defaults)
-        : undefined,
-    },
-    {
-      param: 'db_config',
-      value: request.dbConfig
-        ? marshalCreateRouteRequestDatabaseConfig(request.dbConfig, defaults)
-        : undefined,
-    },
-    {
-      param: 'rest_config',
-      value: request.restConfig
-        ? marshalCreateRouteRequestRestConfig(request.restConfig, defaults)
-        : undefined,
-    },
+  ...resolveOneOf([
+    { param: 'db_config', value: request.dbConfig },
+    { param: 'rest_config', value: request.restConfig },
+    { param: 's3_config', value: request.s3Config },
   ]),
 })
 
@@ -672,9 +611,7 @@ export const marshalUpdateDeviceRequest = (
   allow_multiple_connections: request.allowMultipleConnections,
   description: request.description,
   hub_id: request.hubId,
-  message_filters: request.messageFilters
-    ? marshalDeviceMessageFilters(request.messageFilters, defaults)
-    : undefined,
+  message_filters: request.messageFilters,
 })
 
 export const marshalUpdateHubRequest = (
@@ -685,15 +622,42 @@ export const marshalUpdateHubRequest = (
   enable_device_auto_provisioning: request.enableDeviceAutoProvisioning,
   events_topic_prefix: request.eventsTopicPrefix,
   name: request.name,
-  product_plan: request.productPlan ?? 'plan_unknown',
+  product_plan: request.productPlan,
   ...resolveOneOf([
-    {
-      param: 'twins_graphite_config',
-      value: request.twinsGraphiteConfig
-        ? marshalHubTwinsGraphiteConfig(request.twinsGraphiteConfig, defaults)
-        : undefined,
-    },
+    { param: 'twins_graphite_config', value: request.twinsGraphiteConfig },
   ]),
+})
+
+const marshalUpdateRouteRequestRestConfig = (
+  request: UpdateRouteRequestRestConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  headers: request.headers,
+  uri: request.uri,
+  verb: request.verb,
+})
+
+const marshalUpdateRouteRequestDatabaseConfig = (
+  request: UpdateRouteRequestDatabaseConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  dbname: request.dbname,
+  engine: request.engine,
+  host: request.host,
+  password: request.password,
+  port: request.port,
+  query: request.query,
+  username: request.username,
+})
+
+const marshalUpdateRouteRequestS3Config = (
+  request: UpdateRouteRequestS3Config,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  bucket_name: request.bucketName,
+  bucket_region: request.bucketRegion,
+  object_prefix: request.objectPrefix,
+  strategy: request.strategy,
 })
 
 export const marshalUpdateRouteRequest = (
@@ -702,24 +666,9 @@ export const marshalUpdateRouteRequest = (
 ): Record<string, unknown> => ({
   name: request.name,
   topic: request.topic,
-  ...resolveOneOf<unknown>([
-    {
-      param: 's3_config',
-      value: request.s3Config
-        ? marshalUpdateRouteRequestS3Config(request.s3Config, defaults)
-        : undefined,
-    },
-    {
-      param: 'db_config',
-      value: request.dbConfig
-        ? marshalUpdateRouteRequestDatabaseConfig(request.dbConfig, defaults)
-        : undefined,
-    },
-    {
-      param: 'rest_config',
-      value: request.restConfig
-        ? marshalUpdateRouteRequestRestConfig(request.restConfig, defaults)
-        : undefined,
-    },
+  ...resolveOneOf([
+    { param: 'db_config', value: request.dbConfig },
+    { param: 'rest_config', value: request.restConfig },
+    { param: 's3_config', value: request.s3Config },
   ]),
 })

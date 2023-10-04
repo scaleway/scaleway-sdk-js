@@ -22,29 +22,21 @@ export type ServerTypeStock =
   | 'low_stock'
   | 'high_stock'
 
-/** List os response. */
-export interface ListOSResponse {
-  /** Total number of OS. */
-  totalCount: number
-  /** List of OS. */
-  os: OS[]
+export interface ServerTypeCPU {
+  name: string
+  coreCount: number
 }
 
-/** List server types response. */
-export interface ListServerTypesResponse {
-  /** Available server types. */
-  serverTypes: ServerType[]
+export interface ServerTypeDisk {
+  capacity: number
+  type: string
 }
 
-/** List servers response. */
-export interface ListServersResponse {
-  /** Total number of servers. */
-  totalCount: number
-  /** Paginated returned servers. */
-  servers: Server[]
+export interface ServerTypeMemory {
+  capacity: number
+  type: string
 }
 
-/** Os. */
 export interface OS {
   /** Unique ID of the OS. */
   id: string
@@ -58,7 +50,21 @@ export interface OS {
   compatibleServerTypes: string[]
 }
 
-/** Server. */
+export interface ServerType {
+  /** CPU description. */
+  cpu: ServerTypeCPU
+  /** Size of the local disk of the server. */
+  disk: ServerTypeDisk
+  /** Name of the type. */
+  name: string
+  /** Size of memory available. */
+  memory: ServerTypeMemory
+  /** Current stock. */
+  stock: ServerTypeStock
+  /** Minimum duration of the lease in seconds (example. 3.4s). */
+  minimumLeaseDuration?: string
+}
+
 export interface Server {
   /** UUID of the server. */
   id: string
@@ -86,54 +92,7 @@ export interface Server {
   zone: Zone
 }
 
-/** Server type. */
-export interface ServerType {
-  /** CPU description. */
-  cpu?: ServerTypeCPU
-  /** Size of the local disk of the server. */
-  disk?: ServerTypeDisk
-  /** Name of the type. */
-  name: string
-  /** Size of memory available. */
-  memory?: ServerTypeMemory
-  /** Current stock. */
-  stock: ServerTypeStock
-  /**
-   * Minimum duration of the lease in seconds. Minimum duration of the lease in
-   * seconds (example. 3.4s).
-   */
-  minimumLeaseDuration?: string
-}
-
-export interface ServerTypeCPU {
-  name: string
-  coreCount: number
-}
-
-export interface ServerTypeDisk {
-  capacity: number
-  type: string
-}
-
-export interface ServerTypeMemory {
-  capacity: number
-  type: string
-}
-
-export type ListServerTypesRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-}
-
-export type GetServerTypeRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** Server type identifier. */
-  serverType: string
-}
-
 export type CreateServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Create a server with this given name. */
   name?: string
@@ -143,26 +102,31 @@ export type CreateServerRequest = {
   type: string
 }
 
-export type ListServersRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
+export type DeleteServerRequest = {
   zone?: Zone
-  /** Sort order of the returned servers. */
-  orderBy?: ListServersRequestOrderBy
-  /** Only list servers of this project ID. */
-  projectId?: string
-  /** Only list servers of this Organization ID. */
-  organizationId?: string
-  /** Positive integer to choose the page to return. */
-  page?: number
-  /**
-   * Positive integer lower or equal to 100 to select the number of items to
-   * return.
-   */
-  pageSize?: number
+  /** UUID of the server you want to delete. */
+  serverId: string
+}
+
+export type GetOSRequest = {
+  zone?: Zone
+  /** UUID of the OS you want to get. */
+  osId: string
+}
+
+export type GetServerRequest = {
+  zone?: Zone
+  /** UUID of the server you want to get. */
+  serverId: string
+}
+
+export type GetServerTypeRequest = {
+  zone?: Zone
+  /** Server type identifier. */
+  serverType: string
 }
 
 export type ListOSRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Positive integer to choose the page to return. */
   page?: number
@@ -180,46 +144,62 @@ export type ListOSRequest = {
   name?: string
 }
 
-export type GetOSRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** UUID of the OS you want to get. */
-  osId: string
+export interface ListOSResponse {
+  /** Total number of OS. */
+  totalCount: number
+  /** List of OS. */
+  os: OS[]
 }
 
-export type GetServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
+export type ListServerTypesRequest = {
   zone?: Zone
-  /** UUID of the server you want to get. */
-  serverId: string
 }
 
-export type UpdateServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** UUID of the server you want to update. */
-  serverId: string
-  /** Updated name for your server. */
-  name: string
+export interface ListServerTypesResponse {
+  /** Available server types. */
+  serverTypes: ServerType[]
 }
 
-export type DeleteServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
+export type ListServersRequest = {
   zone?: Zone
-  /** UUID of the server you want to delete. */
-  serverId: string
+  /** Sort order of the returned servers. */
+  orderBy?: ListServersRequestOrderBy
+  /** Only list servers of this project ID. */
+  projectId?: string
+  /** Only list servers of this Organization ID. */
+  organizationId?: string
+  /** Positive integer to choose the page to return. */
+  page?: number
+  /**
+   * Positive integer lower or equal to 100 to select the number of items to
+   * return.
+   */
+  pageSize?: number
+}
+
+export interface ListServersResponse {
+  /** Total number of servers. */
+  totalCount: number
+  /** Paginated returned servers. */
+  servers: Server[]
 }
 
 export type RebootServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the server you want to reboot. */
   serverId: string
 }
 
 export type ReinstallServerRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the server you want to reinstall. */
   serverId: string
+}
+
+export type UpdateServerRequest = {
+  zone?: Zone
+  /** UUID of the server you want to update. */
+  serverId: string
+  /** Updated name for your server. */
+  name?: string
 }

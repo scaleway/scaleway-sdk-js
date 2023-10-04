@@ -36,34 +36,15 @@ export type PinStatus =
   | 'failed'
   | 'pinned'
 
-export interface ListPinsResponse {
-  totalCount: number
-  pins: Pin[]
-}
-
-export interface ListVolumesResponse {
-  volumes: Volume[]
-  totalCount: number
-}
-
-export interface Pin {
-  pinId: string
-  status: PinStatus
-  createdAt?: Date
-  cid?: PinCID
-  delegates: string[]
-  info?: PinInfo
+export interface PinCIDMeta {
+  id?: string
 }
 
 export interface PinCID {
   cid?: string
   name?: string
   origins: string[]
-  meta?: PinCIDMeta
-}
-
-export interface PinCIDMeta {
-  id?: string
+  meta: PinCIDMeta
 }
 
 export interface PinInfo {
@@ -79,8 +60,13 @@ export interface PinOptions {
   replicationCount: number
 }
 
-export interface ReplacePinResponse {
-  pin?: Pin
+export interface Pin {
+  pinId: string
+  status: PinStatus
+  createdAt?: Date
+  cid: PinCID
+  delegates: string[]
+  info: PinInfo
 }
 
 export interface Volume {
@@ -95,111 +81,52 @@ export interface Volume {
   size?: number
 }
 
+export type CreatePinByCIDRequest = {
+  region?: Region
+  volumeId: string
+  cid: string
+  name?: string
+  origins?: string[]
+  pinOptions: PinOptions
+}
+
+export type CreatePinByURLRequest = {
+  region?: Region
+  volumeId: string
+  url: string
+  name?: string
+  pinOptions: PinOptions
+}
+
 export type CreateVolumeRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
   region?: Region
   projectId?: string
   name: string
 }
 
-export type GetVolumeRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
+export type DeletePinRequest = {
   region?: Region
+  pinId: string
   volumeId: string
-}
-
-export type ListVolumesRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  projectId?: string
-  page?: number
-  pageSize?: number
-  orderBy?: ListVolumesRequestOrderBy
-}
-
-export type UpdateVolumeRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  volumeId: string
-  name?: string
-  tags?: string[]
 }
 
 export type DeleteVolumeRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
   region?: Region
   volumeId: string
-}
-
-export type CreatePinByURLRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  volumeId: string
-  url: string
-  name?: string
-  pinOptions?: PinOptions
-}
-
-export type CreatePinByCIDRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  volumeId: string
-  cid: string
-  name?: string
-  origins?: string[]
-  pinOptions?: PinOptions
-}
-
-export type ReplacePinRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  pinId: string
-  volumeId: string
-  cid: string
-  name?: string
-  origins?: string[]
-  pinOptions?: PinOptions
 }
 
 export type GetPinRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
   region?: Region
   pinId: string
+  volumeId: string
+}
+
+export type GetVolumeRequest = {
+  region?: Region
   volumeId: string
 }
 
 export type ListPinsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
   region?: Region
   volumeId: string
   projectId?: string
@@ -210,12 +137,41 @@ export type ListPinsRequest = {
   status?: PinStatus
 }
 
-export type DeletePinRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
+export interface ListPinsResponse {
+  totalCount: number
+  pins: Pin[]
+}
+
+export type ListVolumesRequest = {
+  region?: Region
+  projectId?: string
+  page?: number
+  pageSize?: number
+  orderBy?: ListVolumesRequestOrderBy
+}
+
+export interface ListVolumesResponse {
+  volumes: Volume[]
+  totalCount: number
+}
+
+export type ReplacePinRequest = {
   region?: Region
   pinId: string
   volumeId: string
+  cid: string
+  name?: string
+  origins?: string[]
+  pinOptions: PinOptions
+}
+
+export interface ReplacePinResponse {
+  pin: Pin
+}
+
+export type UpdateVolumeRequest = {
+  region?: Region
+  volumeId: string
+  name?: string
+  tags?: string[]
 }

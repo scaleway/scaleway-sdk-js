@@ -49,6 +49,25 @@ import type {
   User,
 } from './types.gen'
 
+export const unmarshalJWT = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'JWT' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    audienceId: data.audience_id,
+    createdAt: unmarshalDate(data.created_at),
+    expiresAt: unmarshalDate(data.expires_at),
+    ip: data.ip,
+    issuerId: data.issuer_id,
+    jti: data.jti,
+    updatedAt: unmarshalDate(data.updated_at),
+    userAgent: data.user_agent,
+  } as JWT
+}
+
 export const unmarshalAPIKey = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -58,16 +77,16 @@ export const unmarshalAPIKey = (data: unknown) => {
 
   return {
     accessKey: data.access_key,
-    applicationId: data.application_id,
+    applicationId: data.application_id ? data.application_id : undefined,
     createdAt: unmarshalDate(data.created_at),
     creationIp: data.creation_ip,
     defaultProjectId: data.default_project_id,
     description: data.description,
     editable: data.editable,
     expiresAt: unmarshalDate(data.expires_at),
-    secretKey: data.secret_key,
+    secretKey: data.secret_key ? data.secret_key : undefined,
     updatedAt: unmarshalDate(data.updated_at),
-    userId: data.user_id,
+    userId: data.user_id ? data.user_id : undefined,
   } as APIKey
 }
 
@@ -109,41 +128,6 @@ export const unmarshalGroup = (data: unknown) => {
   } as Group
 }
 
-export const unmarshalJWT = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'JWT' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    audienceId: data.audience_id,
-    createdAt: unmarshalDate(data.created_at),
-    expiresAt: unmarshalDate(data.expires_at),
-    ip: data.ip,
-    issuerId: data.issuer_id,
-    jti: data.jti,
-    updatedAt: unmarshalDate(data.updated_at),
-    userAgent: data.user_agent,
-  } as JWT
-}
-
-const unmarshalPermissionSet = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PermissionSet' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    categories: data.categories,
-    description: data.description,
-    id: data.id,
-    name: data.name,
-    scopeType: data.scope_type,
-  } as PermissionSet
-}
-
 export const unmarshalPolicy = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -152,20 +136,20 @@ export const unmarshalPolicy = (data: unknown) => {
   }
 
   return {
-    applicationId: data.application_id,
+    applicationId: data.application_id ? data.application_id : undefined,
     createdAt: unmarshalDate(data.created_at),
     description: data.description,
     editable: data.editable,
-    groupId: data.group_id,
+    groupId: data.group_id ? data.group_id : undefined,
     id: data.id,
     name: data.name,
     nbPermissionSets: data.nb_permission_sets,
     nbRules: data.nb_rules,
     nbScopes: data.nb_scopes,
-    noPrincipal: data.no_principal,
+    noPrincipal: data.no_principal ? data.no_principal : undefined,
     organizationId: data.organization_id,
     updatedAt: unmarshalDate(data.updated_at),
-    userId: data.user_id,
+    userId: data.user_id ? data.user_id : undefined,
   } as Policy
 }
 
@@ -177,27 +161,10 @@ export const unmarshalQuotum = (data: unknown) => {
   }
 
   return {
-    limit: data.limit,
+    limit: data.limit ? data.limit : undefined,
     name: data.name,
-    unlimited: data.unlimited,
+    unlimited: data.unlimited ? data.unlimited : undefined,
   } as Quotum
-}
-
-const unmarshalRule = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Rule' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    accountRootUserId: data.account_root_user_id,
-    id: data.id,
-    organizationId: data.organization_id,
-    permissionSetNames: data.permission_set_names,
-    permissionSetsScopeType: data.permission_sets_scope_type,
-    projectIds: data.project_ids,
-  } as Rule
 }
 
 export const unmarshalSSHKey = (data: unknown) => {
@@ -237,7 +204,9 @@ export const unmarshalUser = (data: unknown) => {
     mfa: data.mfa,
     organizationId: data.organization_id,
     status: data.status,
-    twoFactorEnabled: data.two_factor_enabled,
+    twoFactorEnabled: data.two_factor_enabled
+      ? data.two_factor_enabled
+      : undefined,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
   } as User
@@ -298,6 +267,22 @@ export const unmarshalListJWTsResponse = (data: unknown) => {
   } as ListJWTsResponse
 }
 
+const unmarshalPermissionSet = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PermissionSet' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    categories: data.categories ? data.categories : undefined,
+    description: data.description,
+    id: data.id,
+    name: data.name,
+    scopeType: data.scope_type,
+  } as PermissionSet
+}
+
 export const unmarshalListPermissionSetsResponse = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -338,6 +323,27 @@ export const unmarshalListQuotaResponse = (data: unknown) => {
     quota: unmarshalArrayOfObject(data.quota, unmarshalQuotum),
     totalCount: data.total_count,
   } as ListQuotaResponse
+}
+
+const unmarshalRule = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Rule' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    accountRootUserId: data.account_root_user_id
+      ? data.account_root_user_id
+      : undefined,
+    id: data.id,
+    organizationId: data.organization_id ? data.organization_id : undefined,
+    permissionSetNames: data.permission_set_names
+      ? data.permission_set_names
+      : undefined,
+    permissionSetsScopeType: data.permission_sets_scope_type,
+    projectIds: data.project_ids ? data.project_ids : undefined,
+  } as Rule
 }
 
 export const unmarshalListRulesResponse = (data: unknown) => {
@@ -391,36 +397,13 @@ export const unmarshalSetRulesResponse = (data: unknown) => {
   } as SetRulesResponse
 }
 
-const marshalRuleSpecs = (
-  request: RuleSpecs,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  permission_set_names: request.permissionSetNames,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'project_ids',
-      value: request.projectIds,
-    },
-    {
-      param: 'organization_id',
-      value: request.organizationId,
-    },
-  ]),
-})
-
 export const marshalAddGroupMemberRequest = (
   request: AddGroupMemberRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf([
-    {
-      param: 'user_id',
-      value: request.userId,
-    },
-    {
-      param: 'application_id',
-      value: request.applicationId,
-    },
+    { param: 'application_id', value: request.applicationId },
+    { param: 'user_id', value: request.userId },
   ]),
 })
 
@@ -440,14 +423,8 @@ export const marshalCreateAPIKeyRequest = (
   description: request.description,
   expires_at: request.expiresAt,
   ...resolveOneOf([
-    {
-      param: 'application_id',
-      value: request.applicationId,
-    },
-    {
-      param: 'user_id',
-      value: request.userId,
-    },
+    { param: 'application_id', value: request.applicationId },
+    { param: 'user_id', value: request.userId },
   ]),
 })
 
@@ -469,6 +446,17 @@ export const marshalCreateGroupRequest = (
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
 })
 
+const marshalRuleSpecs = (
+  request: RuleSpecs,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  permission_set_names: request.permissionSetNames,
+  ...resolveOneOf([
+    { param: 'organization_id', value: request.organizationId },
+    { param: 'project_ids', value: request.projectIds },
+  ]),
+})
+
 export const marshalCreatePolicyRequest = (
   request: CreatePolicyRequest,
   defaults: DefaultValues,
@@ -476,26 +464,12 @@ export const marshalCreatePolicyRequest = (
   description: request.description,
   name: request.name || randomName('pol'),
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
-  rules: request.rules
-    ? request.rules.map(elt => marshalRuleSpecs(elt, defaults))
-    : undefined,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'user_id',
-      value: request.userId,
-    },
-    {
-      param: 'group_id',
-      value: request.groupId,
-    },
-    {
-      param: 'application_id',
-      value: request.applicationId,
-    },
-    {
-      param: 'no_principal',
-      value: request.noPrincipal,
-    },
+  rules: request.rules,
+  ...resolveOneOf([
+    { param: 'application_id', value: request.applicationId },
+    { param: 'group_id', value: request.groupId },
+    { param: 'no_principal', value: request.noPrincipal },
+    { param: 'user_id', value: request.userId },
   ]),
 })
 
@@ -521,14 +495,8 @@ export const marshalRemoveGroupMemberRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf([
-    {
-      param: 'user_id',
-      value: request.userId,
-    },
-    {
-      param: 'application_id',
-      value: request.applicationId,
-    },
+    { param: 'application_id', value: request.applicationId },
+    { param: 'user_id', value: request.userId },
   ]),
 })
 
@@ -545,7 +513,7 @@ export const marshalSetRulesRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   policy_id: request.policyId,
-  rules: request.rules.map(elt => marshalRuleSpecs(elt, defaults)),
+  rules: request.rules,
 })
 
 export const marshalUpdateAPIKeyRequest = (
@@ -578,23 +546,11 @@ export const marshalUpdatePolicyRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'user_id',
-      value: request.userId,
-    },
-    {
-      param: 'group_id',
-      value: request.groupId,
-    },
-    {
-      param: 'application_id',
-      value: request.applicationId,
-    },
-    {
-      param: 'no_principal',
-      value: request.noPrincipal,
-    },
+  ...resolveOneOf([
+    { param: 'application_id', value: request.applicationId },
+    { param: 'group_id', value: request.groupId },
+    { param: 'no_principal', value: request.noPrincipal },
+    { param: 'user_id', value: request.userId },
   ]),
 })
 

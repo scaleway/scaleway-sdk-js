@@ -16,6 +16,19 @@ import type {
   Version,
 } from './types.gen'
 
+const unmarshalOrganization = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Organization' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    name: data.name,
+  } as Organization
+}
+
 const unmarshalLocalImage = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -29,16 +42,6 @@ const unmarshalLocalImage = (data: unknown) => {
     id: data.id,
     zone: data.zone,
   } as LocalImage
-}
-
-const unmarshalOrganization = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Organization' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { id: data.id, name: data.name } as Organization
 }
 
 const unmarshalVersion = (data: unknown) => {
@@ -74,9 +77,7 @@ const unmarshalImage = (data: unknown) => {
     logo: data.logo,
     modificationDate: unmarshalDate(data.modification_date),
     name: data.name,
-    organization: data.organization
-      ? unmarshalOrganization(data.organization)
-      : undefined,
+    organization: unmarshalOrganization(data.organization),
     validUntil: unmarshalDate(data.valid_until),
     versions: unmarshalArrayOfObject(data.versions, unmarshalVersion),
   } as Image
@@ -90,7 +91,7 @@ export const unmarshalGetImageResponse = (data: unknown) => {
   }
 
   return {
-    image: data.image ? unmarshalImage(data.image) : undefined,
+    image: unmarshalImage(data.image),
   } as GetImageResponse
 }
 
@@ -102,7 +103,7 @@ export const unmarshalGetVersionResponse = (data: unknown) => {
   }
 
   return {
-    version: data.version ? unmarshalVersion(data.version) : undefined,
+    version: unmarshalVersion(data.version),
   } as GetVersionResponse
 }
 

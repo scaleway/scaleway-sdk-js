@@ -65,11 +65,11 @@ export const unmarshalDHCP = (data: unknown) => {
     projectId: data.project_id,
     pushDefaultRoute: data.push_default_route,
     pushDnsServer: data.push_dns_server,
-    rebindTimer: data.rebind_timer,
-    renewTimer: data.renew_timer,
+    rebindTimer: data.rebind_timer ? data.rebind_timer : undefined,
+    renewTimer: data.renew_timer ? data.renew_timer : undefined,
     subnet: data.subnet,
     updatedAt: unmarshalDate(data.updated_at),
-    validLifetime: data.valid_lifetime,
+    validLifetime: data.valid_lifetime ? data.valid_lifetime : undefined,
     zone: data.zone,
   } as DHCP
 }
@@ -82,33 +82,19 @@ export const unmarshalGatewayNetwork = (data: unknown) => {
   }
 
   return {
-    address: data.address,
+    address: data.address ? data.address : undefined,
     createdAt: unmarshalDate(data.created_at),
-    dhcp: data.dhcp ? unmarshalDHCP(data.dhcp) : undefined,
+    dhcp: unmarshalDHCP(data.dhcp),
     enableDhcp: data.enable_dhcp,
     enableMasquerade: data.enable_masquerade,
     gatewayId: data.gateway_id,
     id: data.id,
-    macAddress: data.mac_address,
+    macAddress: data.mac_address ? data.mac_address : undefined,
     privateNetworkId: data.private_network_id,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
     zone: data.zone,
   } as GatewayNetwork
-}
-
-const unmarshalGatewayType = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GatewayType' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    bandwidth: data.bandwidth,
-    name: data.name,
-    zone: data.zone,
-  } as GatewayType
 }
 
 export const unmarshalIP = (data: unknown) => {
@@ -121,11 +107,11 @@ export const unmarshalIP = (data: unknown) => {
   return {
     address: data.address,
     createdAt: unmarshalDate(data.created_at),
-    gatewayId: data.gateway_id,
+    gatewayId: data.gateway_id ? data.gateway_id : undefined,
     id: data.id,
     organizationId: data.organization_id,
     projectId: data.project_id,
-    reverse: data.reverse,
+    reverse: data.reverse ? data.reverse : undefined,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
     zone: data.zone,
@@ -152,6 +138,20 @@ export const unmarshalDHCPEntry = (data: unknown) => {
   } as DHCPEntry
 }
 
+const unmarshalGatewayType = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GatewayType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    bandwidth: data.bandwidth,
+    name: data.name,
+    zone: data.zone,
+  } as GatewayType
+}
+
 export const unmarshalGateway = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -162,24 +162,24 @@ export const unmarshalGateway = (data: unknown) => {
   return {
     bastionEnabled: data.bastion_enabled,
     bastionPort: data.bastion_port,
-    canUpgradeTo: data.can_upgrade_to,
+    canUpgradeTo: data.can_upgrade_to ? data.can_upgrade_to : undefined,
     createdAt: unmarshalDate(data.created_at),
     gatewayNetworks: unmarshalArrayOfObject(
       data.gateway_networks,
       unmarshalGatewayNetwork,
     ),
     id: data.id,
-    ip: data.ip ? unmarshalIP(data.ip) : undefined,
+    ip: unmarshalIP(data.ip),
     name: data.name,
     organizationId: data.organization_id,
     projectId: data.project_id,
     smtpEnabled: data.smtp_enabled,
     status: data.status,
     tags: data.tags,
-    type: data.type ? unmarshalGatewayType(data.type) : undefined,
+    type: unmarshalGatewayType(data.type),
     updatedAt: unmarshalDate(data.updated_at),
     upstreamDnsServers: data.upstream_dns_servers,
-    version: data.version,
+    version: data.version ? data.version : undefined,
     zone: data.zone,
   } as Gateway
 }
@@ -341,31 +341,6 @@ export const marshalCreateDHCPRequest = (
   valid_lifetime: request.validLifetime,
 })
 
-const marshalIpamConfig = (
-  request: IpamConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  push_default_route: request.pushDefaultRoute,
-})
-
-const marshalSetDHCPEntriesRequestEntry = (
-  request: SetDHCPEntriesRequestEntry,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  ip_address: request.ipAddress,
-  mac_address: request.macAddress,
-})
-
-const marshalSetPATRulesRequestRule = (
-  request: SetPATRulesRequestRule,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  private_ip: request.privateIp,
-  private_port: request.privatePort,
-  protocol: request.protocol,
-  public_port: request.publicPort,
-})
-
 export const marshalCreateDHCPEntryRequest = (
   request: CreateDHCPEntryRequest,
   defaults: DefaultValues,
@@ -373,6 +348,13 @@ export const marshalCreateDHCPEntryRequest = (
   gateway_network_id: request.gatewayNetworkId,
   ip_address: request.ipAddress,
   mac_address: request.macAddress,
+})
+
+const marshalIpamConfig = (
+  request: IpamConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  push_default_route: request.pushDefaultRoute,
 })
 
 export const marshalCreateGatewayNetworkRequest = (
@@ -383,27 +365,11 @@ export const marshalCreateGatewayNetworkRequest = (
   enable_masquerade: request.enableMasquerade,
   gateway_id: request.gatewayId,
   private_network_id: request.privateNetworkId,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'dhcp_id',
-      value: request.dhcpId,
-    },
-    {
-      param: 'dhcp',
-      value: request.dhcp
-        ? marshalCreateDHCPRequest(request.dhcp, defaults)
-        : undefined,
-    },
-    {
-      param: 'address',
-      value: request.address,
-    },
-    {
-      param: 'ipam_config',
-      value: request.ipamConfig
-        ? marshalIpamConfig(request.ipamConfig, defaults)
-        : undefined,
-    },
+  ...resolveOneOf([
+    { param: 'address', value: request.address },
+    { param: 'dhcp', value: request.dhcp },
+    { param: 'dhcp_id', value: request.dhcpId },
+    { param: 'ipam_config', value: request.ipamConfig },
   ]),
 })
 
@@ -437,20 +403,34 @@ export const marshalCreatePATRuleRequest = (
   gateway_id: request.gatewayId,
   private_ip: request.privateIp,
   private_port: request.privatePort,
-  protocol: request.protocol ?? 'unknown',
+  protocol: request.protocol,
   public_port: request.publicPort,
+})
+
+const marshalSetDHCPEntriesRequestEntry = (
+  request: SetDHCPEntriesRequestEntry,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ip_address: request.ipAddress,
+  mac_address: request.macAddress,
 })
 
 export const marshalSetDHCPEntriesRequest = (
   request: SetDHCPEntriesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  dhcp_entries: request.dhcpEntries
-    ? request.dhcpEntries.map(elt =>
-        marshalSetDHCPEntriesRequestEntry(elt, defaults),
-      )
-    : undefined,
+  dhcp_entries: request.dhcpEntries,
   gateway_network_id: request.gatewayNetworkId,
+})
+
+const marshalSetPATRulesRequestRule = (
+  request: SetPATRulesRequestRule,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_ip: request.privateIp,
+  private_port: request.privatePort,
+  protocol: request.protocol,
+  public_port: request.publicPort,
 })
 
 export const marshalSetPATRulesRequest = (
@@ -458,9 +438,7 @@ export const marshalSetPATRulesRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   gateway_id: request.gatewayId,
-  pat_rules: request.patRules.map(elt =>
-    marshalSetPATRulesRequestRule(elt, defaults),
-  ),
+  pat_rules: request.patRules,
 })
 
 export const marshalUpdateDHCPEntryRequest = (
@@ -495,21 +473,10 @@ export const marshalUpdateGatewayNetworkRequest = (
 ): Record<string, unknown> => ({
   enable_dhcp: request.enableDhcp,
   enable_masquerade: request.enableMasquerade,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'dhcp_id',
-      value: request.dhcpId,
-    },
-    {
-      param: 'address',
-      value: request.address,
-    },
-    {
-      param: 'ipam_config',
-      value: request.ipamConfig
-        ? marshalIpamConfig(request.ipamConfig, defaults)
-        : undefined,
-    },
+  ...resolveOneOf([
+    { param: 'address', value: request.address },
+    { param: 'dhcp_id', value: request.dhcpId },
+    { param: 'ipam_config', value: request.ipamConfig },
   ]),
 })
 
@@ -540,6 +507,6 @@ export const marshalUpdatePATRuleRequest = (
 ): Record<string, unknown> => ({
   private_ip: request.privateIp,
   private_port: request.privatePort,
-  protocol: request.protocol ?? 'unknown',
+  protocol: request.protocol,
   public_port: request.publicPort,
 })

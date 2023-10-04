@@ -23,6 +23,22 @@ import type {
   Volume,
 } from './types.gen'
 
+const unmarshalPinInfo = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PinInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id ? data.id : undefined,
+    progress: data.progress ? data.progress : undefined,
+    size: data.size ? data.size : undefined,
+    statusDetails: data.status_details,
+    url: data.url ? data.url : undefined,
+  } as PinInfo
+}
+
 const unmarshalPinCIDMeta = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -30,7 +46,9 @@ const unmarshalPinCIDMeta = (data: unknown) => {
     )
   }
 
-  return { id: data.id } as PinCIDMeta
+  return {
+    id: data.id ? data.id : undefined,
+  } as PinCIDMeta
 }
 
 const unmarshalPinCID = (data: unknown) => {
@@ -41,27 +59,11 @@ const unmarshalPinCID = (data: unknown) => {
   }
 
   return {
-    cid: data.cid,
-    meta: data.meta ? unmarshalPinCIDMeta(data.meta) : undefined,
-    name: data.name,
+    cid: data.cid ? data.cid : undefined,
+    meta: unmarshalPinCIDMeta(data.meta),
+    name: data.name ? data.name : undefined,
     origins: data.origins,
   } as PinCID
-}
-
-const unmarshalPinInfo = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PinInfo' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-    progress: data.progress,
-    size: data.size,
-    statusDetails: data.status_details,
-    url: data.url,
-  } as PinInfo
 }
 
 export const unmarshalPin = (data: unknown) => {
@@ -72,10 +74,10 @@ export const unmarshalPin = (data: unknown) => {
   }
 
   return {
-    cid: data.cid ? unmarshalPinCID(data.cid) : undefined,
+    cid: unmarshalPinCID(data.cid),
     createdAt: unmarshalDate(data.created_at),
     delegates: data.delegates,
-    info: data.info ? unmarshalPinInfo(data.info) : undefined,
+    info: unmarshalPinInfo(data.info),
     pinId: data.pin_id,
     status: data.status,
   } as Pin
@@ -95,7 +97,7 @@ export const unmarshalVolume = (data: unknown) => {
     name: data.name,
     projectId: data.project_id,
     region: data.region,
-    size: data.size,
+    size: data.size ? data.size : undefined,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
   } as Volume
@@ -135,7 +137,7 @@ export const unmarshalReplacePinResponse = (data: unknown) => {
   }
 
   return {
-    pin: data.pin ? unmarshalPin(data.pin) : undefined,
+    pin: unmarshalPin(data.pin),
   } as ReplacePinResponse
 }
 
@@ -154,9 +156,7 @@ export const marshalCreatePinByCIDRequest = (
   cid: request.cid,
   name: request.name,
   origins: request.origins,
-  pin_options: request.pinOptions
-    ? marshalPinOptions(request.pinOptions, defaults)
-    : undefined,
+  pin_options: request.pinOptions,
   volume_id: request.volumeId,
 })
 
@@ -165,9 +165,7 @@ export const marshalCreatePinByURLRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  pin_options: request.pinOptions
-    ? marshalPinOptions(request.pinOptions, defaults)
-    : undefined,
+  pin_options: request.pinOptions,
   url: request.url,
   volume_id: request.volumeId,
 })
@@ -187,9 +185,7 @@ export const marshalReplacePinRequest = (
   cid: request.cid,
   name: request.name,
   origins: request.origins,
-  pin_options: request.pinOptions
-    ? marshalPinOptions(request.pinOptions, defaults)
-    : undefined,
+  pin_options: request.pinOptions,
   volume_id: request.volumeId,
 })
 

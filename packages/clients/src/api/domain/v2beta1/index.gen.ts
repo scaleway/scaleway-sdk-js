@@ -76,7 +76,6 @@ export type {
   ImportRawDNSZoneRequestBindSource,
   ImportRawDNSZoneRequestTsigKey,
   ImportRawDNSZoneResponse,
-  LanguageCode,
   ListContactsRequestRole,
   ListContactsResponse,
   ListDNSZoneNameserversRequest,
@@ -163,3 +162,6 @@ export type {
   UpdateDNSZoneRecordsResponse,
   UpdateDNSZoneRequest,
 } from './types.gen'
+
+// For backward compatibility
+export type { LanguageCode } from '../../std/types.gen'

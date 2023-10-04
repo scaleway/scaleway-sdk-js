@@ -42,7 +42,6 @@ const jsonContentHeaders = {
  * Messaging and Queuing API.
  *
  * This API allows you to manage Scaleway Messaging and Queueing brokers.
- * Messaging and Queuing API.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -59,7 +58,7 @@ export class API extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/namespaces`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -91,7 +90,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateNamespaceRequest}
    * @returns A Promise of Namespace
    */
-  createNamespace = (request: Readonly<CreateNamespaceRequest>) =>
+  createNamespace = (request: Readonly<CreateNamespaceRequest> = {}) =>
     this.client.fetch<Namespace>(
       {
         body: JSON.stringify(
@@ -224,7 +223,7 @@ export class API extends ParentAPI {
         )}/credentials`,
         urlParams: urlParams(
           ['namespace_id', request.namespaceId],
-          ['order_by', request.orderBy ?? 'id_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
