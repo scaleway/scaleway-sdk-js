@@ -28,6 +28,7 @@ import type {
   EnableManagedAlertsRequest,
   GrafanaUser,
   ListContactPointsResponse,
+  ListDatasourcesResponse,
   ListGrafanaUsersResponse,
   ListPlansResponse,
   ListTokensResponse,
@@ -96,6 +97,22 @@ export const unmarshalContactPoint = (data: unknown) => {
   return {
     email: data.email ? unmarshalContactPointEmail(data.email) : undefined,
   } as ContactPoint
+}
+
+export const unmarshalDatasource = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Datasource' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    name: data.name,
+    projectId: data.project_id,
+    type: data.type,
+    url: data.url,
+  } as Datasource
 }
 
 export const unmarshalGrafanaUser = (data: unknown) => {
@@ -181,22 +198,6 @@ export const unmarshalCockpitMetrics = (data: unknown) => {
   } as CockpitMetrics
 }
 
-export const unmarshalDatasource = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Datasource' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-    name: data.name,
-    projectId: data.project_id,
-    type: data.type,
-    url: data.url,
-  } as Datasource
-}
-
 export const unmarshalListContactPointsResponse = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -213,6 +214,19 @@ export const unmarshalListContactPointsResponse = (data: unknown) => {
     hasAdditionalReceivers: data.has_additional_receivers,
     totalCount: data.total_count,
   } as ListContactPointsResponse
+}
+
+export const unmarshalListDatasourcesResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDatasourcesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    datasources: unmarshalArrayOfObject(data.datasources, unmarshalDatasource),
+    totalCount: data.total_count,
+  } as ListDatasourcesResponse
 }
 
 export const unmarshalListGrafanaUsersResponse = (data: unknown) => {
