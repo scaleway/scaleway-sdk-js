@@ -57,7 +57,7 @@ export type VolumeStatus =
 export interface CreateVolumeRequestFromEmpty {
   /**
    * Volume size in bytes, with a granularity of 1 GB (10^9 bytes). Must be
-   * compliant with the minimum and maximum allowed size.
+   * compliant with the minimum (1 GB) and maximum (10 TB) allowed size.
    */
   size: number
 }
@@ -66,12 +66,12 @@ export interface CreateVolumeRequestFromEmpty {
 export interface CreateVolumeRequestFromSnapshot {
   /**
    * Volume size in bytes, with a granularity of 1 GB (10^9 bytes). Must be
-   * compliant with the allowed minimum and maximum allowed size. Size is
+   * compliant with the minimum (1 GB) and maximum (10 TB) allowed size. Size is
    * optional and is used only if a resize of the volume is requested, otherwise
    * original snapshot size will be used.
    */
   size?: number
-  /** Source snapshot from which create a volume. */
+  /** Source snapshot from which volume will be created. */
   snapshotId: string
 }
 
@@ -85,7 +85,7 @@ export interface ListSnapshotsResponse {
 
 /** List volume types response. */
 export interface ListVolumeTypesResponse {
-  /** Paginated returned list of volume-types. */
+  /** Returns paginated list of volume-types. */
   volumeTypes: VolumeType[]
   /** Total number of volume-types currently available in stock. */
   totalCount: number
@@ -103,7 +103,7 @@ export interface ListVolumesResponse {
 export interface Reference {
   /** UUID of the reference. */
   id: string
-  /** Type of the resoruce the reference is associated (else snapshot or volume). */
+  /** Type of resoruce to which the reference is associated (snapshot or volume). */
   productResourceType: string
   /**
    * UUID of the volume or the snapshot it refers to (according to the
@@ -112,9 +112,9 @@ export interface Reference {
   productResourceId: string
   /** Creation date of the reference. */
   createdAt?: Date
-  /** Type of the reference (link, exclusive, read_only). */
+  /** Type of reference (link, exclusive, read_only). */
   type: ReferenceType
-  /** Status of the reference (attaching, attached, detaching). */
+  /** Status of reference (attaching, attached, detaching). */
   status: ReferenceStatus
 }
 
@@ -125,8 +125,8 @@ export interface Snapshot {
   /** Name of the snapshot. */
   name: string
   /**
-   * Informations about the parent volume. If the parent volume has been
-   * deleted, value is null.
+   * Information about the parent volume. If the parent volume was deleted,
+   * value is null.
    */
   parentVolume?: SnapshotParentVolume
   /** Size in bytes of the snapshot. */
@@ -151,13 +151,13 @@ export interface Snapshot {
 
 /** Snapshot. parent volume. */
 export interface SnapshotParentVolume {
-  /** Volume ID on which the snapshot is based. */
+  /** Parent volume UUID (volume from which the snapshot originates). */
   id: string
-  /** Name of the parent volume from which the snapshot has been taken. */
+  /** Name of the parent volume. */
   name: string
-  /** Volume type of the parent volume from which the snapshot has been taken. */
+  /** Volume type of the parent volume. */
   type: string
-  /** Current status the parent volume from which the snapshot has been taken. */
+  /** Current status the parent volume. */
   status: VolumeStatus
 }
 
@@ -172,7 +172,7 @@ export interface SnapshotSummary {
    * value is null.
    */
   parentVolume?: SnapshotParentVolume
-  /** Size in bytes of the snapshot. */
+  /** Size of the snapshot in bytes. */
   size: number
   /** UUID of the project the snapshot belongs to. */
   projectId: string
@@ -184,7 +184,7 @@ export interface SnapshotSummary {
   status: SnapshotStatus
   /** List of tags assigned to the volume. */
   tags: string[]
-  /** Snapshot zone. */
+  /** Snapshot Availability Zone. */
   zone: Zone
   /** Storage class of the snapshot. */
   class: StorageClass
@@ -196,15 +196,15 @@ export interface Volume {
   id: string
   /** Name of the volume. */
   name: string
-  /** Type of the volume. */
+  /** Volume type. */
   type: string
   /** Volume size in bytes. */
   size: number
-  /** UUID of the project the volume belongs to. */
+  /** UUID of the project to which the volume belongs. */
   projectId: string
   /** Creation date of the volume. */
   createdAt?: Date
-  /** Last modification date of the properties of a volume. */
+  /** Last update of the properties of a volume. */
   updatedAt?: Date
   /** List of the references to the volume. */
   references: Reference[]
@@ -219,7 +219,7 @@ export interface Volume {
   tags: string[]
   /** Volume zone. */
   zone: Zone
-  /** Volume specifications of the volume. */
+  /** Specifications of the volume. */
   specs?: VolumeSpecifications
 }
 
@@ -236,7 +236,7 @@ export interface VolumeSpecifications {
 
 /** Volume type. */
 export interface VolumeType {
-  /** Internal type of the volume. */
+  /** Volume type. */
   type: string
   /** Price of the volume billed in GB/hour. */
   pricing?: Money
@@ -249,11 +249,11 @@ export interface VolumeType {
 export type ListVolumeTypesRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Positive integer to choose the page to return. */
+  /** Page number. */
   page?: number
   /**
-   * Positive integer lower or equal to 100 to select the number of items to
-   * return.
+   * Page size, defines how many entries are returned in one page, must be lower
+   * or equal to 100.
    */
   pageSize?: number
 }
@@ -261,22 +261,22 @@ export type ListVolumeTypesRequest = {
 export type ListVolumesRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Sort order of the returned volumes. */
+  /** Criteria to use when ordering the list. */
   orderBy?: ListVolumesRequestOrderBy
-  /** Only list volumes of this project ID. */
+  /** Filter by Project ID. */
   projectId?: string
-  /** Positive integer to choose the page to return. */
+  /** Page number. */
   page?: number
   /**
-   * Positive integer lower or equal to 100 to select the number of items to
-   * return.
+   * Page size, defines how many entries are returned in one page, must be lower
+   * or equal to 100.
    */
   pageSize?: number
   /** Filter the return volumes by their names. */
   name?: string
   /**
-   * Filter by a Product Resource Id linked to this volume (such as an Instance
-   * Server Id).
+   * Filter by a product resource ID linked to this volume (such as an Instance
+   * ID).
    */
   productResourceId?: string
 }
@@ -284,7 +284,7 @@ export type ListVolumesRequest = {
 export type CreateVolumeRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Name of the volume you want to create. */
+  /** Name of the volume. */
   name: string
   /**
    * The maximum IO/s expected, according to the different options available in
@@ -296,13 +296,13 @@ export type CreateVolumeRequest = {
   /** UUID of the project the volume belongs to. */
   projectId?: string
   /**
-   * Create a new and empty volume.
+   * Specify the size of the new volume if creating a new one from scratch.
    *
    * One-of ('from'): at most one of 'fromEmpty', 'fromSnapshot' could be set.
    */
   fromEmpty?: CreateVolumeRequestFromEmpty
   /**
-   * Create a volume from an existing snapshot.
+   * Specify the snapshot ID of the original snapshot.
    *
    * One-of ('from'): at most one of 'fromEmpty', 'fromSnapshot' could be set.
    */
@@ -314,7 +314,7 @@ export type CreateVolumeRequest = {
 export type GetVolumeRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the volume you want to get. */
+  /** UUID of the volume. */
   volumeId: string
 }
 
@@ -333,17 +333,18 @@ export type UpdateVolumeRequest = {
   /** When defined, is the new name of the volume. */
   name?: string
   /**
-   * Optional field for growing a volume (size must be equal or larger than the
-   * current one). Size in bytes of the volume, with a granularity of 1 GB (10^9
-   * bytes). Must be compliant with the minimum and maximum allowed size.
+   * Optional field for increasing the size of a volume (size must be equal or
+   * larger than the current one). Size in bytes of the volume, with a
+   * granularity of 1 GB (10^9 bytes). Must be compliant with the minimum (1GB)
+   * and maximum (10TB) allowed size.
    */
   size?: number
   /** List of tags assigned to the volume. */
   tags?: string[]
   /**
    * The maximum IO/s expected, according to the different options available in
-   * stock (`5000 | 15000`). The selected value must be available on the Storage
-   * Class where is currently located the volume.
+   * stock (`5000 | 15000`). The selected value must be available for the
+   * volume's current storage class.
    */
   perfIops?: number
 }
@@ -351,20 +352,20 @@ export type UpdateVolumeRequest = {
 export type ListSnapshotsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** Sort order of the returned snapshots. */
+  /** Criteria to use when ordering the list. */
   orderBy?: ListSnapshotsRequestOrderBy
-  /** Only list snapshots of this project ID. */
+  /** Filter by Project ID. */
   projectId?: string
-  /** Positive integer to choose the page to return. */
+  /** Page number. */
   page?: number
   /**
-   * Positive integer lower or equal to 100 to select the number of items to
-   * return.
+   * Page size, defines how many entries are returned in one page, must be lower
+   * or equal to 100.
    */
   pageSize?: number
-  /** Filter the return snapshots by the volume it belongs to. */
+  /** Filter snapshots by the ID of the original volume. */
   volumeId?: string
-  /** Filter the return snapshots by their names. */
+  /** Filter snapshots by their names. */
   name?: string
 }
 
@@ -378,11 +379,11 @@ export type GetSnapshotRequest = {
 export type CreateSnapshotRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the volume from which creates a snpashot. */
+  /** UUID of the volume to snapshot. */
   volumeId: string
   /** Name of the snapshot. */
   name: string
-  /** UUID of the project the volume and the snapshot belong to. */
+  /** UUID of the project to which the volume and the snapshot belong. */
   projectId?: string
   /** List of tags assigned to the snapshot. */
   tags?: string[]
