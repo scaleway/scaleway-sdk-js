@@ -19,6 +19,12 @@ export type DatasourceType =
 
 export type GrafanaUserRole = 'unknown_role' | 'editor' | 'viewer'
 
+export type ListDatasourcesRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'name_asc'
+  | 'name_desc'
+
 export type ListGrafanaUsersRequestOrderBy = 'login_asc' | 'login_desc'
 
 export type ListPlansRequestOrderBy = 'name_asc' | 'name_desc'
@@ -120,6 +126,14 @@ export interface ListContactPointsResponse {
   hasAdditionalReceivers: boolean
   /** Specifies whether there are unmanaged contact points. */
   hasAdditionalContactPoints: boolean
+}
+
+/** List datasources response. */
+export interface ListDatasourcesResponse {
+  /** Count of all datasources corresponding to the request. */
+  totalCount: number
+  /** List of the datasources within the pagination. */
+  datasources: Datasource[]
 }
 
 /** Response returned when listing Grafana users. List grafana users response. */
@@ -247,6 +261,19 @@ export type CreateDatasourceRequest = {
   type?: DatasourceType
 }
 
+export type ListDatasourcesRequest = {
+  /** Page number. */
+  page?: number
+  /** Page size. */
+  pageSize?: number
+  /** How the response is ordered. */
+  orderBy?: ListDatasourcesRequestOrderBy
+  /** ID of the Project. */
+  projectId?: string
+  /** Filter by datasource types. */
+  types?: DatasourceType[]
+}
+
 export type CreateTokenRequest = {
   /** ID of the Project. */
   projectId?: string
@@ -261,6 +288,7 @@ export type ListTokensRequest = {
   page?: number
   /** Page size. */
   pageSize?: number
+  /** How the response is ordered. */
   orderBy?: ListTokensRequestOrderBy
   /** ID of the Project. */
   projectId?: string
