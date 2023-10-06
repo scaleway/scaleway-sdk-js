@@ -47,10 +47,10 @@ const jsonContentHeaders = {
 }
 
 /**
- * Scaleway Block Storage (SBS) API.
+ * Scaleway Block Storage API.
  *
  * This API allows you to use and manage your Block Storage volumes. Scaleway
- * Block Storage (SBS) API.
+ * Block Storage API.
  */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
@@ -112,8 +112,8 @@ export class API extends ParentAPI {
 
   /**
    * List volumes. List all existing volumes in a specified zone. By default,
-   * the volume listed are ordered by creation date in ascending order. This can
-   * be modified via the `order_by` field.
+   * the volumes listed are ordered by creation date in ascending order. This
+   * can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListVolumesRequest}
    * @returns A Promise of ListVolumesResponse
@@ -122,13 +122,12 @@ export class API extends ParentAPI {
     enrichForPagination('volumes', this.pageOfListVolumes, request)
 
   /**
-   * Create a new empty volume by specifying the `size`. To create a volume from
-   * an existing snapshot, specify the `snapshot_id` in the request payload
+   * Create a volume. To create a new volume from scratch, you must specify
+   * `from_empty` and the `size`. To create a volume from an existing snapshot,
+   * specify `from_snapshot` and the `snapshot_id` in the request payload
    * instead, size is optional and can be specified if you need to extend the
-   * original size. In that case the created volume will have the same volume
-   * class (and underlying IOPS limitations) as the originating snapshot. You
-   * can specify the desired performance of the volume by setting `requirements`
-   * accordingly.
+   * original size. The volume will take on the same volume class and underlying
+   * IOPS limitations as the original snapshot.
    *
    * @param request - The request {@link CreateVolumeRequest}
    * @returns A Promise of Volume
@@ -204,10 +203,10 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Update a volume. Update technical details about a volume, such as its name,
-   * tags, or its new size and `volume_type` (within the same Block Storage
-   * class). You can only resize a volume to a larger size. It is not possible
-   * for now to change your Block Storage Class.
+   * Update a volume. Update the technical details of a volume, such as its
+   * name, tags, or its new size and `volume_type` (within the same Block
+   * Storage class). You can only resize a volume to a larger size. It is
+   * currently not possible to change your Block Storage Class.
    *
    * @param request - The request {@link UpdateVolumeRequest}
    * @returns A Promise of Volume
@@ -344,7 +343,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Update a snapshot. Update name or tags of the snapshot.
+   * Update a snapshot. Update the name or tags of the snapshot.
    *
    * @param request - The request {@link UpdateSnapshotRequest}
    * @returns A Promise of Snapshot
