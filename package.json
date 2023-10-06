@@ -76,7 +76,7 @@
     "@jest/globals": "^29.7.0",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.4",
-    "@rollup/plugin-node-resolve": "^15.2.1",
+    "@rollup/plugin-node-resolve": "^15.2.2",
     "@scaleway/eslint-config-react": "^3.15.26",
     "babel-plugin-annotate-pure-calls": "^0.4.0",
     "cross-env": "^7.0.3",
