@@ -137,6 +137,7 @@ export interface CreateTriggerRequestMnqNatsClientConfig {
   subject: string
   mnqProjectId: string
   mnqRegion: string
+  mnqNatsAccountId: string
 }
 
 export interface CreateTriggerRequestMnqSqsClientConfig {

@@ -355,6 +355,7 @@ const marshalCreateTriggerRequestMnqNatsClientConfig = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mnq_namespace_id: request.mnqNamespaceId,
+  mnq_nats_account_id: request.mnqNatsAccountId,
   mnq_project_id: request.mnqProjectId,
   mnq_region: request.mnqRegion,
   subject: request.subject,
