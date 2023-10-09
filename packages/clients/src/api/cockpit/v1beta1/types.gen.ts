@@ -101,6 +101,20 @@ export interface Datasource {
   type: DatasourceType
 }
 
+/** Grafana dashboard. Grafana product dashboard. */
+export interface GrafanaProductDashboard {
+  /** Name of the dashboard. */
+  dashboardName: string
+  /** Title of the dashboard. */
+  title: string
+  /** URL of the dashboard. */
+  url: string
+  /** Tags of the dashboard. */
+  tags: string[]
+  /** Variables of the dashboard. */
+  variables: string[]
+}
+
 /** Grafana user. */
 export interface GrafanaUser {
   /** ID of the Grafana user. */
@@ -134,6 +148,17 @@ export interface ListDatasourcesResponse {
   totalCount: number
   /** List of the datasources within the pagination. */
   datasources: Datasource[]
+}
+
+/**
+ * Response returned when getting a list of dashboards. List grafana product
+ * dashboards response.
+ */
+export interface ListGrafanaProductDashboardsResponse {
+  /** Count of grafana dasboards. */
+  totalCount: number
+  /** Information on grafana dashboards. */
+  dashboards: GrafanaProductDashboard[]
 }
 
 /** Response returned when listing Grafana users. List grafana users response. */
@@ -387,4 +412,22 @@ export type SelectPlanRequest = {
   projectId?: string
   /** ID of the pricing plan. */
   planId: string
+}
+
+export type ListGrafanaProductDashboardsRequest = {
+  /** ID of the Project. */
+  projectId?: string
+  /** Page number. */
+  page?: number
+  /** Page size. */
+  pageSize?: number
+  /** Tags to filter the dashboards. */
+  tags?: string[]
+}
+
+export type GetGrafanaProductDashboardRequest = {
+  /** Name of the dashboard. */
+  dashboardName: string
+  /** ID of the Project. */
+  projectId?: string
 }

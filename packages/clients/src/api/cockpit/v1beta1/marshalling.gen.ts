@@ -26,9 +26,11 @@ import type {
   DeleteGrafanaUserRequest,
   DisableManagedAlertsRequest,
   EnableManagedAlertsRequest,
+  GrafanaProductDashboard,
   GrafanaUser,
   ListContactPointsResponse,
   ListDatasourcesResponse,
+  ListGrafanaProductDashboardsResponse,
   ListGrafanaUsersResponse,
   ListPlansResponse,
   ListTokensResponse,
@@ -113,6 +115,22 @@ export const unmarshalDatasource = (data: unknown) => {
     type: data.type,
     url: data.url,
   } as Datasource
+}
+
+export const unmarshalGrafanaProductDashboard = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GrafanaProductDashboard' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    dashboardName: data.dashboard_name,
+    tags: data.tags,
+    title: data.title,
+    url: data.url,
+    variables: data.variables,
+  } as GrafanaProductDashboard
 }
 
 export const unmarshalGrafanaUser = (data: unknown) => {
@@ -227,6 +245,24 @@ export const unmarshalListDatasourcesResponse = (data: unknown) => {
     datasources: unmarshalArrayOfObject(data.datasources, unmarshalDatasource),
     totalCount: data.total_count,
   } as ListDatasourcesResponse
+}
+
+export const unmarshalListGrafanaProductDashboardsResponse = (
+  data: unknown,
+) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListGrafanaProductDashboardsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    dashboards: unmarshalArrayOfObject(
+      data.dashboards,
+      unmarshalGrafanaProductDashboard,
+    ),
+    totalCount: data.total_count,
+  } as ListGrafanaProductDashboardsResponse
 }
 
 export const unmarshalListGrafanaUsersResponse = (data: unknown) => {
