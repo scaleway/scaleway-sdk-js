@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.35.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.34.0...@scaleway/sdk@1.35.0) (2023-10-09)
+
+### Features
+
+- **cockpit:** add list datasource endpoint ([#906](https://github.com/scaleway/scaleway-sdk-js/issues/906)) ([8677e4a](https://github.com/scaleway/scaleway-sdk-js/commit/8677e4a8828eee2e3a9311c0b6395d0f37b06450))
+- **k8s:** expose `public_ip_disabled` field ([#907](https://github.com/scaleway/scaleway-sdk-js/issues/907)) ([58d4945](https://github.com/scaleway/scaleway-sdk-js/commit/58d4945faa568fa063e41d551b281f56ff143189))
+- **serverless:** prepare for MNQ API ([#908](https://github.com/scaleway/scaleway-sdk-js/issues/908)) ([ce611bf](https://github.com/scaleway/scaleway-sdk-js/commit/ce611bf8f868f933658b92b8b18c9d97d083398e))
+
 ## [1.34.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.33.0...@scaleway/sdk@1.34.0) (2023-10-04)
 
 ### Features
