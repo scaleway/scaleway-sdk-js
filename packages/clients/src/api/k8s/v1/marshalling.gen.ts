@@ -83,6 +83,7 @@ export const unmarshalPool = (data: unknown) => {
     placementGroupId: data.placement_group_id
       ? data.placement_group_id
       : undefined,
+    publicIpDisabled: data.public_ip_disabled,
     region: data.region,
     rootVolumeSize: data.root_volume_size ? data.root_volume_size : undefined,
     rootVolumeType: data.root_volume_type,
@@ -116,24 +117,6 @@ export const unmarshalVersion = (data: unknown) => {
     name: data.name,
     region: data.region,
   } as Version
-}
-
-const unmarshalClusterOpenIDConnectConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ClusterOpenIDConnectConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    clientId: data.client_id,
-    groupsClaim: data.groups_claim,
-    groupsPrefix: data.groups_prefix,
-    issuerUrl: data.issuer_url,
-    requiredClaim: data.required_claim,
-    usernameClaim: data.username_claim,
-    usernamePrefix: data.username_prefix,
-  } as ClusterOpenIDConnectConfig
 }
 
 const unmarshalMaintenanceWindow = (data: unknown) => {
@@ -181,6 +164,24 @@ const unmarshalClusterAutoscalerConfig = (data: unknown) => {
     scaleDownUnneededTime: data.scale_down_unneeded_time,
     scaleDownUtilizationThreshold: data.scale_down_utilization_threshold,
   } as ClusterAutoscalerConfig
+}
+
+const unmarshalClusterOpenIDConnectConfig = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ClusterOpenIDConnectConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    clientId: data.client_id,
+    groupsClaim: data.groups_claim,
+    groupsPrefix: data.groups_prefix,
+    issuerUrl: data.issuer_url,
+    requiredClaim: data.required_claim,
+    usernameClaim: data.username_claim,
+    usernamePrefix: data.username_prefix,
+  } as ClusterOpenIDConnectConfig
 }
 
 export const unmarshalCluster = (data: unknown) => {
@@ -385,19 +386,6 @@ export const unmarshalListVersionsResponse = (data: unknown) => {
   } as ListVersionsResponse
 }
 
-const marshalCreateClusterRequestOpenIDConnectConfig = (
-  request: CreateClusterRequestOpenIDConnectConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  client_id: request.clientId,
-  groups_claim: request.groupsClaim,
-  groups_prefix: request.groupsPrefix,
-  issuer_url: request.issuerUrl,
-  required_claim: request.requiredClaim,
-  username_claim: request.usernameClaim,
-  username_prefix: request.usernamePrefix,
-})
-
 const marshalMaintenanceWindow = (
   request: MaintenanceWindow,
   defaults: DefaultValues,
@@ -406,12 +394,23 @@ const marshalMaintenanceWindow = (
   start_hour: request.startHour,
 })
 
+const marshalCreateClusterRequestPoolConfigUpgradePolicy = (
+  request: CreateClusterRequestPoolConfigUpgradePolicy,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  max_surge: request.maxSurge,
+  max_unavailable: request.maxUnavailable,
+})
+
 const marshalCreateClusterRequestAutoUpgrade = (
   request: CreateClusterRequestAutoUpgrade,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enable: request.enable,
-  maintenance_window: request.maintenanceWindow,
+  maintenance_window: marshalMaintenanceWindow(
+    request.maintenanceWindow,
+    defaults,
+  ),
 })
 
 const marshalCreateClusterRequestAutoscalerConfig = (
@@ -430,12 +429,17 @@ const marshalCreateClusterRequestAutoscalerConfig = (
   scale_down_utilization_threshold: request.scaleDownUtilizationThreshold,
 })
 
-const marshalCreateClusterRequestPoolConfigUpgradePolicy = (
-  request: CreateClusterRequestPoolConfigUpgradePolicy,
+const marshalCreateClusterRequestOpenIDConnectConfig = (
+  request: CreateClusterRequestOpenIDConnectConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  max_surge: request.maxSurge,
-  max_unavailable: request.maxUnavailable,
+  client_id: request.clientId,
+  groups_claim: request.groupsClaim,
+  groups_prefix: request.groupsPrefix,
+  issuer_url: request.issuerUrl,
+  required_claim: request.requiredClaim,
+  username_claim: request.usernameClaim,
+  username_prefix: request.usernamePrefix,
 })
 
 const marshalCreateClusterRequestPoolConfig = (
@@ -451,12 +455,16 @@ const marshalCreateClusterRequestPoolConfig = (
   name: request.name,
   node_type: request.nodeType,
   placement_group_id: request.placementGroupId,
+  public_ip_disabled: request.publicIpDisabled,
   root_volume_size: request.rootVolumeSize,
   root_volume_type: request.rootVolumeType,
   size: request.size,
   tags: request.tags,
-  upgrade_policy: request.upgradePolicy,
-  zone: request.zone ?? defaults.defaultZone,
+  upgrade_policy: marshalCreateClusterRequestPoolConfigUpgradePolicy(
+    request.upgradePolicy,
+    defaults,
+  ),
+  zone: request.zone,
 })
 
 export const marshalCreateClusterRequest = (
@@ -465,21 +473,35 @@ export const marshalCreateClusterRequest = (
 ): Record<string, unknown> => ({
   admission_plugins: request.admissionPlugins,
   apiserver_cert_sans: request.apiserverCertSans,
-  auto_upgrade: request.autoUpgrade,
-  autoscaler_config: request.autoscalerConfig,
+  auto_upgrade: marshalCreateClusterRequestAutoUpgrade(
+    request.autoUpgrade,
+    defaults,
+  ),
+  autoscaler_config: marshalCreateClusterRequestAutoscalerConfig(
+    request.autoscalerConfig,
+    defaults,
+  ),
   cni: request.cni,
   description: request.description,
   enable_dashboard: request.enableDashboard,
   feature_gates: request.featureGates,
   ingress: request.ingress,
   name: request.name || randomName('k8s'),
-  open_id_connect_config: request.openIdConnectConfig,
-  pools: request.pools,
+  open_id_connect_config: marshalCreateClusterRequestOpenIDConnectConfig(
+    request.openIdConnectConfig,
+    defaults,
+  ),
+  pools:
+    request.pools !== undefined
+      ? request.pools.map(elt =>
+          marshalCreateClusterRequestPoolConfig(elt, defaults),
+        )
+      : undefined,
   private_network_id: request.privateNetworkId,
   tags: request.tags,
   type: request.type,
   version: request.version,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'organization_id', value: request.organizationId },
     { param: 'project_id', value: request.projectId },
   ]),
@@ -506,11 +528,15 @@ export const marshalCreatePoolRequest = (
   name: request.name || randomName('pool'),
   node_type: request.nodeType,
   placement_group_id: request.placementGroupId,
+  public_ip_disabled: request.publicIpDisabled,
   root_volume_size: request.rootVolumeSize,
   root_volume_type: request.rootVolumeType,
   size: request.size,
   tags: request.tags,
-  upgrade_policy: request.upgradePolicy,
+  upgrade_policy:
+    request.upgradePolicy !== undefined
+      ? marshalCreatePoolRequestUpgradePolicy(request.upgradePolicy, defaults)
+      : undefined,
   zone: request.zone ?? defaults.defaultZone,
 })
 
@@ -528,25 +554,15 @@ export const marshalSetClusterTypeRequest = (
   type: request.type,
 })
 
-const marshalUpdateClusterRequestOpenIDConnectConfig = (
-  request: UpdateClusterRequestOpenIDConnectConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  client_id: request.clientId,
-  groups_claim: request.groupsClaim,
-  groups_prefix: request.groupsPrefix,
-  issuer_url: request.issuerUrl,
-  required_claim: request.requiredClaim,
-  username_claim: request.usernameClaim,
-  username_prefix: request.usernamePrefix,
-})
-
 const marshalUpdateClusterRequestAutoUpgrade = (
   request: UpdateClusterRequestAutoUpgrade,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enable: request.enable,
-  maintenance_window: request.maintenanceWindow,
+  maintenance_window: marshalMaintenanceWindow(
+    request.maintenanceWindow,
+    defaults,
+  ),
 })
 
 const marshalUpdateClusterRequestAutoscalerConfig = (
@@ -565,20 +581,45 @@ const marshalUpdateClusterRequestAutoscalerConfig = (
   scale_down_utilization_threshold: request.scaleDownUtilizationThreshold,
 })
 
+const marshalUpdateClusterRequestOpenIDConnectConfig = (
+  request: UpdateClusterRequestOpenIDConnectConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  client_id: request.clientId,
+  groups_claim: request.groupsClaim,
+  groups_prefix: request.groupsPrefix,
+  issuer_url: request.issuerUrl,
+  required_claim: request.requiredClaim,
+  username_claim: request.usernameClaim,
+  username_prefix: request.usernamePrefix,
+})
+
 export const marshalUpdateClusterRequest = (
   request: UpdateClusterRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   admission_plugins: request.admissionPlugins,
   apiserver_cert_sans: request.apiserverCertSans,
-  auto_upgrade: request.autoUpgrade,
-  autoscaler_config: request.autoscalerConfig,
+  auto_upgrade: marshalUpdateClusterRequestAutoUpgrade(
+    request.autoUpgrade,
+    defaults,
+  ),
+  autoscaler_config: marshalUpdateClusterRequestAutoscalerConfig(
+    request.autoscalerConfig,
+    defaults,
+  ),
   description: request.description,
   enable_dashboard: request.enableDashboard,
   feature_gates: request.featureGates,
   ingress: request.ingress,
   name: request.name,
-  open_id_connect_config: request.openIdConnectConfig,
+  open_id_connect_config:
+    request.openIdConnectConfig !== undefined
+      ? marshalUpdateClusterRequestOpenIDConnectConfig(
+          request.openIdConnectConfig,
+          defaults,
+        )
+      : undefined,
   tags: request.tags,
 })
 
@@ -601,7 +642,10 @@ export const marshalUpdatePoolRequest = (
   min_size: request.minSize,
   size: request.size,
   tags: request.tags,
-  upgrade_policy: request.upgradePolicy,
+  upgrade_policy:
+    request.upgradePolicy !== undefined
+      ? marshalUpdatePoolRequestUpgradePolicy(request.upgradePolicy, defaults)
+      : undefined,
 })
 
 export const marshalUpgradeClusterRequest = (

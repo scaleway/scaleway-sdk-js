@@ -365,11 +365,23 @@ export const marshalCreateGatewayNetworkRequest = (
   enable_masquerade: request.enableMasquerade,
   gateway_id: request.gatewayId,
   private_network_id: request.privateNetworkId,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'address', value: request.address },
-    { param: 'dhcp', value: request.dhcp },
+    {
+      param: 'dhcp',
+      value:
+        request.dhcp !== undefined
+          ? marshalCreateDHCPRequest(request.dhcp, defaults)
+          : undefined,
+    },
     { param: 'dhcp_id', value: request.dhcpId },
-    { param: 'ipam_config', value: request.ipamConfig },
+    {
+      param: 'ipam_config',
+      value:
+        request.ipamConfig !== undefined
+          ? marshalIpamConfig(request.ipamConfig, defaults)
+          : undefined,
+    },
   ]),
 })
 
@@ -419,7 +431,12 @@ export const marshalSetDHCPEntriesRequest = (
   request: SetDHCPEntriesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  dhcp_entries: request.dhcpEntries,
+  dhcp_entries:
+    request.dhcpEntries !== undefined
+      ? request.dhcpEntries.map(elt =>
+          marshalSetDHCPEntriesRequestEntry(elt, defaults),
+        )
+      : undefined,
   gateway_network_id: request.gatewayNetworkId,
 })
 
@@ -438,7 +455,12 @@ export const marshalSetPATRulesRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   gateway_id: request.gatewayId,
-  pat_rules: request.patRules,
+  pat_rules:
+    request.patRules !== undefined
+      ? request.patRules.map(elt =>
+          marshalSetPATRulesRequestRule(elt, defaults),
+        )
+      : undefined,
 })
 
 export const marshalUpdateDHCPEntryRequest = (
@@ -473,10 +495,16 @@ export const marshalUpdateGatewayNetworkRequest = (
 ): Record<string, unknown> => ({
   enable_dhcp: request.enableDhcp,
   enable_masquerade: request.enableMasquerade,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'address', value: request.address },
     { param: 'dhcp_id', value: request.dhcpId },
-    { param: 'ipam_config', value: request.ipamConfig },
+    {
+      param: 'ipam_config',
+      value:
+        request.ipamConfig !== undefined
+          ? marshalIpamConfig(request.ipamConfig, defaults)
+          : undefined,
+    },
   ]),
 })
 

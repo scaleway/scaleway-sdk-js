@@ -19,6 +19,12 @@ export type DatasourceType =
 
 export type GrafanaUserRole = 'unknown_role' | 'editor' | 'viewer'
 
+export type ListDatasourcesRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'name_asc'
+  | 'name_desc'
+
 export type ListGrafanaUsersRequestOrderBy = 'login_asc' | 'login_desc'
 
 export type ListPlansRequestOrderBy = 'name_asc' | 'name_desc'
@@ -92,6 +98,20 @@ export interface ContactPoint {
    * 'email' could be set.
    */
   email?: ContactPointEmail
+}
+
+/** Datasource. */
+export interface Datasource {
+  /** ID of the datasource. */
+  id: string
+  /** ID of the Project the Cockpit belongs to. */
+  projectId: string
+  /** Datasource name. */
+  name: string
+  /** Datasource URL. */
+  url: string
+  /** Datasource type. */
+  type: DatasourceType
 }
 
 /** Grafana user. */
@@ -189,20 +209,6 @@ export type CreateTokenRequest = {
   scopes: TokenScopes
 }
 
-/** Datasource. */
-export interface Datasource {
-  /** ID of the datasource. */
-  id: string
-  /** ID of the Project the Cockpit belongs to. */
-  projectId: string
-  /** Datasource name. */
-  name: string
-  /** Datasource URL. */
-  url: string
-  /** Datasource type. */
-  type: DatasourceType
-}
-
 export type DeactivateCockpitRequest = {
   /** ID of the Project the Cockpit belongs to. */
   projectId?: string
@@ -288,6 +294,26 @@ export interface ListContactPointsResponse {
   hasAdditionalContactPoints: boolean
 }
 
+export type ListDatasourcesRequest = {
+  /** Page number. */
+  page?: number
+  /** Page size. */
+  pageSize?: number
+  /** How the response is ordered. */
+  orderBy?: ListDatasourcesRequestOrderBy
+  /** ID of the Project. */
+  projectId?: string
+  /** Filter by datasource types. */
+  types?: DatasourceType[]
+}
+
+export interface ListDatasourcesResponse {
+  /** Count of all datasources corresponding to the request. */
+  totalCount: number
+  /** List of the datasources within the pagination. */
+  datasources: Datasource[]
+}
+
 /** Request to list all Grafana users. */
 export type ListGrafanaUsersRequest = {
   /** Page number. */
@@ -329,6 +355,7 @@ export type ListTokensRequest = {
   page?: number
   /** Page size. */
   pageSize?: number
+  /** How the response is ordered. */
   orderBy?: ListTokensRequestOrderBy
   /** ID of the Project. */
   projectId?: string

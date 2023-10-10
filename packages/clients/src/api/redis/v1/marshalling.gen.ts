@@ -59,16 +59,6 @@ export const unmarshalACLRule = (data: unknown) => {
   } as ACLRule
 }
 
-const unmarshalPublicNetwork = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PublicNetwork' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {} as PublicNetwork
-}
-
 const unmarshalPrivateNetwork = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -82,6 +72,16 @@ const unmarshalPrivateNetwork = (data: unknown) => {
     serviceIps: data.service_ips,
     zone: data.zone,
   } as PrivateNetwork
+}
+
+const unmarshalPublicNetwork = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicNetwork' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as PublicNetwork
 }
 
 export const unmarshalEndpoint = (data: unknown) => {
@@ -330,7 +330,10 @@ export const marshalAddAclRulesRequest = (
   request: AddAclRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  acl_rules: request.aclRules,
+  acl_rules:
+    request.aclRules !== undefined
+      ? request.aclRules.map(elt => marshalACLRuleSpec(elt, defaults))
+      : undefined,
 })
 
 const marshalClusterSetting = (
@@ -345,13 +348,11 @@ export const marshalAddClusterSettingsRequest = (
   request: AddClusterSettingsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  settings: request.settings,
+  settings:
+    request.settings !== undefined
+      ? request.settings.map(elt => marshalClusterSetting(elt, defaults))
+      : undefined,
 })
-
-const marshalEndpointSpecPublicNetworkSpec = (
-  request: EndpointSpecPublicNetworkSpec,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({})
 
 const marshalEndpointSpecPrivateNetworkSpecIpamConfig = (
   request: EndpointSpecPrivateNetworkSpecIpamConfig,
@@ -363,17 +364,43 @@ const marshalEndpointSpecPrivateNetworkSpec = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   id: request.id,
-  ipam_config: request.ipamConfig,
+  ipam_config: marshalEndpointSpecPrivateNetworkSpecIpamConfig(
+    request.ipamConfig,
+    defaults,
+  ),
   service_ips: request.serviceIps,
 })
+
+const marshalEndpointSpecPublicNetworkSpec = (
+  request: EndpointSpecPublicNetworkSpec,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({})
 
 const marshalEndpointSpec = (
   request: EndpointSpec,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([
-    { param: 'private_network', value: request.privateNetwork },
-    { param: 'public_network', value: request.publicNetwork },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'private_network',
+      value:
+        request.privateNetwork !== undefined
+          ? marshalEndpointSpecPrivateNetworkSpec(
+              request.privateNetwork,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'public_network',
+      value:
+        request.publicNetwork !== undefined
+          ? marshalEndpointSpecPublicNetworkSpec(
+              request.publicNetwork,
+              defaults,
+            )
+          : undefined,
+    },
   ]),
 })
 
@@ -381,17 +408,29 @@ export const marshalAddEndpointsRequest = (
   request: AddEndpointsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoints: request.endpoints,
+  endpoints:
+    request.endpoints !== undefined
+      ? request.endpoints.map(elt => marshalEndpointSpec(elt, defaults))
+      : undefined,
 })
 
 export const marshalCreateClusterRequest = (
   request: CreateClusterRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  acl_rules: request.aclRules,
-  cluster_settings: request.clusterSettings,
+  acl_rules:
+    request.aclRules !== undefined
+      ? request.aclRules.map(elt => marshalACLRuleSpec(elt, defaults))
+      : undefined,
+  cluster_settings:
+    request.clusterSettings !== undefined
+      ? request.clusterSettings.map(elt => marshalClusterSetting(elt, defaults))
+      : undefined,
   cluster_size: request.clusterSize,
-  endpoints: request.endpoints,
+  endpoints:
+    request.endpoints !== undefined
+      ? request.endpoints.map(elt => marshalEndpointSpec(elt, defaults))
+      : undefined,
   name: request.name || randomName('ins'),
   node_type: request.nodeType,
   password: request.password,
@@ -406,7 +445,7 @@ export const marshalMigrateClusterRequest = (
   request: MigrateClusterRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'cluster_size', value: request.clusterSize },
     { param: 'node_type', value: request.nodeType },
     { param: 'version', value: request.version },
@@ -417,21 +456,30 @@ export const marshalSetAclRulesRequest = (
   request: SetAclRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  acl_rules: request.aclRules,
+  acl_rules:
+    request.aclRules !== undefined
+      ? request.aclRules.map(elt => marshalACLRuleSpec(elt, defaults))
+      : undefined,
 })
 
 export const marshalSetClusterSettingsRequest = (
   request: SetClusterSettingsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  settings: request.settings,
+  settings:
+    request.settings !== undefined
+      ? request.settings.map(elt => marshalClusterSetting(elt, defaults))
+      : undefined,
 })
 
 export const marshalSetEndpointsRequest = (
   request: SetEndpointsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoints: request.endpoints,
+  endpoints:
+    request.endpoints !== undefined
+      ? request.endpoints.map(elt => marshalEndpointSpec(elt, defaults))
+      : undefined,
 })
 
 export const marshalUpdateClusterRequest = (
@@ -448,8 +496,26 @@ export const marshalUpdateEndpointRequest = (
   request: UpdateEndpointRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([
-    { param: 'private_network', value: request.privateNetwork },
-    { param: 'public_network', value: request.publicNetwork },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'private_network',
+      value:
+        request.privateNetwork !== undefined
+          ? marshalEndpointSpecPrivateNetworkSpec(
+              request.privateNetwork,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'public_network',
+      value:
+        request.publicNetwork !== undefined
+          ? marshalEndpointSpecPublicNetworkSpec(
+              request.publicNetwork,
+              defaults,
+            )
+          : undefined,
+    },
   ]),
 })

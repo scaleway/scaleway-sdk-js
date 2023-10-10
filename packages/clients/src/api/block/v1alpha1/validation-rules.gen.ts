@@ -42,3 +42,9 @@ export const ListVolumesRequest = {
     lessThanOrEqual: 100,
   },
 }
+
+export const Reference = {
+  productResourceType: {
+    minLength: 1,
+  },
+}

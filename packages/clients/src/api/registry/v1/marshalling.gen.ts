@@ -130,7 +130,7 @@ export const marshalCreateNamespaceRequest = (
   description: request.description,
   is_public: request.isPublic,
   name: request.name || randomName('ns'),
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'organization_id', value: request.organizationId },
     { param: 'project_id', value: request.projectId },
   ]),

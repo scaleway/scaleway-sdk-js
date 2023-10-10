@@ -56,6 +56,18 @@ const unmarshalPermissions = (data: unknown) => {
   } as Permissions
 }
 
+const unmarshalCredentialNATSCredsFile = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CredentialNATSCredsFile' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    content: data.content,
+  } as CredentialNATSCredsFile
+}
+
 const unmarshalCredentialSQSSNSCreds = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -68,18 +80,6 @@ const unmarshalCredentialSQSSNSCreds = (data: unknown) => {
     permissions: unmarshalPermissions(data.permissions),
     secretKey: data.secret_key ? data.secret_key : undefined,
   } as CredentialSQSSNSCreds
-}
-
-const unmarshalCredentialNATSCredsFile = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CredentialNATSCredsFile' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    content: data.content,
-  } as CredentialNATSCredsFile
 }
 
 export const unmarshalCredential = (data: unknown) => {
@@ -178,7 +178,10 @@ export const marshalCreateCredentialRequest = (
 ): Record<string, unknown> => ({
   name: request.name || randomName('mnq'),
   namespace_id: request.namespaceId,
-  permissions: request.permissions,
+  permissions:
+    request.permissions !== undefined
+      ? marshalPermissions(request.permissions, defaults)
+      : undefined,
 })
 
 export const marshalCreateNamespaceRequest = (
@@ -195,7 +198,10 @@ export const marshalUpdateCredentialRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  permissions: request.permissions,
+  permissions:
+    request.permissions !== undefined
+      ? marshalPermissions(request.permissions, defaults)
+      : undefined,
 })
 
 export const marshalUpdateNamespaceRequest = (

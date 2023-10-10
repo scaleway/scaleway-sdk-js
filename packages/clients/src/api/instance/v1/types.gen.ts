@@ -81,11 +81,11 @@ export type TaskStatus = 'pending' | 'started' | 'success' | 'failure' | 'retry'
 export type VolumeServerState =
   | 'available'
   | 'snapshotting'
-  | 'error'
   | 'fetching'
   | 'resizing'
   | 'saving'
   | 'hotsyncing'
+  | 'error'
 
 export type VolumeServerVolumeType =
   | 'l_ssd'
@@ -96,11 +96,11 @@ export type VolumeServerVolumeType =
 export type VolumeState =
   | 'available'
   | 'snapshotting'
-  | 'error'
   | 'fetching'
   | 'resizing'
   | 'saving'
   | 'hotsyncing'
+  | 'error'
 
 export type VolumeVolumeType =
   | 'l_ssd'
@@ -1417,6 +1417,8 @@ export type ListServersRequest = {
   privateNetworks?: string[]
   /** List Instances associated with the given private NIC MAC address. */
   privateNicMacAddress?: string
+  /** List Instances from these server ids (use commas to separate them). */
+  servers?: string[]
 }
 
 export interface ListServersResponse {
@@ -1572,10 +1574,10 @@ export type SetPlacementGroupRequest = {
   zone?: Zone
   placementGroupId: string
   name: string
-  organization: string
+  organization?: string
   policyMode?: PlacementGroupPolicyMode
   policyType?: PlacementGroupPolicyType
-  project: string
+  project?: string
   tags?: string[]
 }
 

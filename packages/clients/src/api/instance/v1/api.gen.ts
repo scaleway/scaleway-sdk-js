@@ -7,7 +7,6 @@ import {
   validatePathParam,
 } from '../../../bridge'
 import type { Zone } from '../../../bridge'
-
 import {
   marshalApplyBlockMigrationRequest,
   marshalCreateImageRequest,
@@ -326,6 +325,12 @@ export class API extends ParentAPI {
           ],
           ['private_nic_mac_address', request.privateNicMacAddress],
           ['project', request.project],
+          [
+            'servers',
+            request.servers && request.servers.length > 0
+              ? request.servers.join(',')
+              : undefined,
+          ],
           ['state', request.state],
           [
             'tags',

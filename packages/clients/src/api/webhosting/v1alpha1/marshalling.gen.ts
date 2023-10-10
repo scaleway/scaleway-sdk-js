@@ -9,14 +9,11 @@ import {
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateHostingRequest,
-  DediboxApiMigrateDediboxHostingRequest,
-  DediboxHosting,
   DnsRecord,
   DnsRecords,
   Hosting,
   HostingCpanelUrls,
   HostingOption,
-  ListDediboxHostingsResponse,
   ListHostingsResponse,
   ListOffersResponse,
   Nameserver,
@@ -80,20 +77,6 @@ export const unmarshalHosting = (data: unknown) => {
   } as Hosting
 }
 
-const unmarshalNameserver = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Nameserver' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    hostname: data.hostname,
-    isDefault: data.is_default,
-    status: data.status,
-  } as Nameserver
-}
-
 const unmarshalDnsRecord = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -111,6 +94,20 @@ const unmarshalDnsRecord = (data: unknown) => {
   } as DnsRecord
 }
 
+const unmarshalNameserver = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Nameserver' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    hostname: data.hostname,
+    isDefault: data.is_default,
+    status: data.status,
+  } as Nameserver
+}
+
 export const unmarshalDnsRecords = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -123,37 +120,6 @@ export const unmarshalDnsRecords = (data: unknown) => {
     records: unmarshalArrayOfObject(data.records, unmarshalDnsRecord),
     status: data.status,
   } as DnsRecords
-}
-
-const unmarshalDediboxHosting = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DediboxHosting' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    dediboxId: data.dedibox_id,
-    domain: data.domain,
-    offerId: data.offer_id,
-    type: data.type,
-  } as DediboxHosting
-}
-
-export const unmarshalListDediboxHostingsResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListDediboxHostingsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    dediboxHostings: unmarshalArrayOfObject(
-      data.dedibox_hostings,
-      unmarshalDediboxHosting,
-    ),
-    totalCount: data.total_count,
-  } as ListDediboxHostingsResponse
 }
 
 export const unmarshalListHostingsResponse = (data: unknown) => {
@@ -230,17 +196,6 @@ export const marshalCreateHostingRequest = (
   option_ids: request.optionIds,
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
-})
-
-export const marshalDediboxApiMigrateDediboxHostingRequest = (
-  request: DediboxApiMigrateDediboxHostingRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  domain: request.domain,
-  email: request.email,
-  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-  token: request.token,
 })
 
 export const marshalUpdateHostingRequest = (

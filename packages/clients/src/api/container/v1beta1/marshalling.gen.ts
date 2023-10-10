@@ -189,21 +189,6 @@ const unmarshalTriggerMnqNatsClientConfig = (data: unknown) => {
   } as TriggerMnqNatsClientConfig
 }
 
-const unmarshalTriggerSqsClientConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TriggerSqsClientConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    accessKey: data.access_key,
-    endpoint: data.endpoint,
-    queueUrl: data.queue_url,
-    secretKey: data.secret_key,
-  } as TriggerSqsClientConfig
-}
-
 const unmarshalTriggerMnqSqsClientConfig = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -220,6 +205,21 @@ const unmarshalTriggerMnqSqsClientConfig = (data: unknown) => {
     mnqRegion: data.mnq_region,
     queue: data.queue,
   } as TriggerMnqSqsClientConfig
+}
+
+const unmarshalTriggerSqsClientConfig = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TriggerSqsClientConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    accessKey: data.access_key,
+    endpoint: data.endpoint,
+    queueUrl: data.queue_url,
+    secretKey: data.secret_key,
+  } as TriggerSqsClientConfig
 }
 
 export const unmarshalTrigger = (data: unknown) => {
@@ -383,7 +383,12 @@ export const marshalCreateContainerRequest = (
   privacy: request.privacy,
   protocol: request.protocol,
   registry_image: request.registryImage,
-  secret_environment_variables: request.secretEnvironmentVariables,
+  secret_environment_variables:
+    request.secretEnvironmentVariables !== undefined
+      ? request.secretEnvironmentVariables.map(elt =>
+          marshalSecret(elt, defaults),
+        )
+      : undefined,
   timeout: request.timeout,
 })
 
@@ -413,7 +418,12 @@ export const marshalCreateNamespaceRequest = (
   environment_variables: request.environmentVariables,
   name: request.name || randomName('cns'),
   project_id: request.projectId ?? defaults.defaultProjectId,
-  secret_environment_variables: request.secretEnvironmentVariables,
+  secret_environment_variables:
+    request.secretEnvironmentVariables !== undefined
+      ? request.secretEnvironmentVariables.map(elt =>
+          marshalSecret(elt, defaults),
+        )
+      : undefined,
 })
 
 export const marshalCreateTokenRequest = (
@@ -422,7 +432,7 @@ export const marshalCreateTokenRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   expires_at: request.expiresAt,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'container_id', value: request.containerId },
     { param: 'namespace_id', value: request.namespaceId },
   ]),
@@ -433,19 +443,10 @@ const marshalCreateTriggerRequestMnqNatsClientConfig = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mnq_namespace_id: request.mnqNamespaceId,
+  mnq_nats_account_id: request.mnqNatsAccountId,
   mnq_project_id: request.mnqProjectId,
   mnq_region: request.mnqRegion,
   subject: request.subject,
-})
-
-const marshalCreateTriggerRequestSqsClientConfig = (
-  request: CreateTriggerRequestSqsClientConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  access_key: request.accessKey,
-  endpoint: request.endpoint,
-  queue_url: request.queueUrl,
-  secret_key: request.secretKey,
 })
 
 const marshalCreateTriggerRequestMnqSqsClientConfig = (
@@ -458,6 +459,16 @@ const marshalCreateTriggerRequestMnqSqsClientConfig = (
   queue: request.queue,
 })
 
+const marshalCreateTriggerRequestSqsClientConfig = (
+  request: CreateTriggerRequestSqsClientConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  access_key: request.accessKey,
+  endpoint: request.endpoint,
+  queue_url: request.queueUrl,
+  secret_key: request.secretKey,
+})
+
 export const marshalCreateTriggerRequest = (
   request: CreateTriggerRequest,
   defaults: DefaultValues,
@@ -465,10 +476,37 @@ export const marshalCreateTriggerRequest = (
   container_id: request.containerId,
   description: request.description,
   name: request.name,
-  ...resolveOneOf([
-    { param: 'scw_nats_config', value: request.scwNatsConfig },
-    { param: 'scw_sqs_config', value: request.scwSqsConfig },
-    { param: 'sqs_config', value: request.sqsConfig },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'scw_nats_config',
+      value:
+        request.scwNatsConfig !== undefined
+          ? marshalCreateTriggerRequestMnqNatsClientConfig(
+              request.scwNatsConfig,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'scw_sqs_config',
+      value:
+        request.scwSqsConfig !== undefined
+          ? marshalCreateTriggerRequestMnqSqsClientConfig(
+              request.scwSqsConfig,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'sqs_config',
+      value:
+        request.sqsConfig !== undefined
+          ? marshalCreateTriggerRequestSqsClientConfig(
+              request.sqsConfig,
+              defaults,
+            )
+          : undefined,
+    },
   ]),
 })
 
@@ -489,7 +527,12 @@ export const marshalUpdateContainerRequest = (
   protocol: request.protocol,
   redeploy: request.redeploy,
   registry_image: request.registryImage,
-  secret_environment_variables: request.secretEnvironmentVariables,
+  secret_environment_variables:
+    request.secretEnvironmentVariables !== undefined
+      ? request.secretEnvironmentVariables.map(elt =>
+          marshalSecret(elt, defaults),
+        )
+      : undefined,
   timeout: request.timeout,
 })
 
@@ -509,7 +552,12 @@ export const marshalUpdateNamespaceRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   environment_variables: request.environmentVariables,
-  secret_environment_variables: request.secretEnvironmentVariables,
+  secret_environment_variables:
+    request.secretEnvironmentVariables !== undefined
+      ? request.secretEnvironmentVariables.map(elt =>
+          marshalSecret(elt, defaults),
+        )
+      : undefined,
 })
 
 const marshalUpdateTriggerRequestSqsClientConfig = (
@@ -526,5 +574,16 @@ export const marshalUpdateTriggerRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
-  ...resolveOneOf([{ param: 'sqs_config', value: request.sqsConfig }]),
+  ...resolveOneOf<unknown>([
+    {
+      param: 'sqs_config',
+      value:
+        request.sqsConfig !== undefined
+          ? marshalUpdateTriggerRequestSqsClientConfig(
+              request.sqsConfig,
+              defaults,
+            )
+          : undefined,
+    },
+  ]),
 })

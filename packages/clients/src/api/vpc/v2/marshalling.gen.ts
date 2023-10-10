@@ -189,7 +189,7 @@ export const marshalMigrateZonalPrivateNetworksRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_network_ids: request.privateNetworkIds,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'organization_id', value: request.organizationId },
     { param: 'project_id', value: request.projectId },
   ]),

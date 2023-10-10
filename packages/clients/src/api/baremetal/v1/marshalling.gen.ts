@@ -106,66 +106,6 @@ export const unmarshalOS = (data: unknown) => {
   } as OS
 }
 
-const unmarshalOfferOptionOffer = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'OfferOptionOffer' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    enabled: data.enabled,
-    id: data.id,
-    manageable: data.manageable,
-    name: data.name,
-    osId: data.os_id ? data.os_id : undefined,
-    price: data.price ? unmarshalMoney(data.price) : undefined,
-    subscriptionPeriod: data.subscription_period,
-  } as OfferOptionOffer
-}
-
-const unmarshalRaidController = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RaidController' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    model: data.model,
-    raidLevel: data.raid_level,
-  } as RaidController
-}
-
-const unmarshalPersistentMemory = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PersistentMemory' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    capacity: data.capacity,
-    frequency: data.frequency,
-    type: data.type,
-  } as PersistentMemory
-}
-
-const unmarshalMemory = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Memory' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    capacity: data.capacity,
-    frequency: data.frequency,
-    isEcc: data.is_ecc,
-    type: data.type,
-  } as Memory
-}
-
 const unmarshalCPU = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -193,6 +133,66 @@ const unmarshalDisk = (data: unknown) => {
     capacity: data.capacity,
     type: data.type,
   } as Disk
+}
+
+const unmarshalMemory = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Memory' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    capacity: data.capacity,
+    frequency: data.frequency,
+    isEcc: data.is_ecc,
+    type: data.type,
+  } as Memory
+}
+
+const unmarshalOfferOptionOffer = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferOptionOffer' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    enabled: data.enabled,
+    id: data.id,
+    manageable: data.manageable,
+    name: data.name,
+    osId: data.os_id ? data.os_id : undefined,
+    price: data.price ? unmarshalMoney(data.price) : undefined,
+    subscriptionPeriod: data.subscription_period,
+  } as OfferOptionOffer
+}
+
+const unmarshalPersistentMemory = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PersistentMemory' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    capacity: data.capacity,
+    frequency: data.frequency,
+    type: data.type,
+  } as PersistentMemory
+}
+
+const unmarshalRaidController = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RaidController' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    model: data.model,
+    raidLevel: data.raid_level,
+  } as RaidController
 }
 
 export const unmarshalOffer = (data: unknown) => {
@@ -271,17 +271,22 @@ export const unmarshalServerPrivateNetwork = (data: unknown) => {
   } as ServerPrivateNetwork
 }
 
-const unmarshalServerRescueServer = (data: unknown) => {
+const unmarshalServerInstall = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'ServerRescueServer' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'ServerInstall' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    password: data.password,
+    hostname: data.hostname,
+    osId: data.os_id,
+    serviceUrl: data.service_url,
+    serviceUser: data.service_user,
+    sshKeyIds: data.ssh_key_ids,
+    status: data.status,
     user: data.user,
-  } as ServerRescueServer
+  } as ServerInstall
 }
 
 const unmarshalServerOption = (data: unknown) => {
@@ -300,22 +305,17 @@ const unmarshalServerOption = (data: unknown) => {
   } as ServerOption
 }
 
-const unmarshalServerInstall = (data: unknown) => {
+const unmarshalServerRescueServer = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'ServerInstall' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'ServerRescueServer' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    hostname: data.hostname,
-    osId: data.os_id,
-    serviceUrl: data.service_url,
-    serviceUser: data.service_user,
-    sshKeyIds: data.ssh_key_ids,
-    status: data.status,
+    password: data.password,
     user: data.user,
-  } as ServerInstall
+  } as ServerRescueServer
 }
 
 export const unmarshalServer = (data: unknown) => {
@@ -539,12 +539,12 @@ export const marshalCreateServerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  install: request.install,
+  install: marshalCreateServerRequestInstall(request.install, defaults),
   name: request.name,
   offer_id: request.offerId,
   option_ids: request.optionIds,
   tags: request.tags,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'organization_id', value: request.organizationId },
     { param: 'project_id', value: request.projectId },
   ]),

@@ -280,6 +280,12 @@ export interface Pool {
   rootVolumeType: PoolVolumeType
   /** System volume disk size. */
   rootVolumeSize?: number
+  /**
+   * Defines if the public IP should be removed from Nodes. To use this feature,
+   * your Cluster must have an attached Private Network set up with a Public
+   * Gateway.
+   */
+  publicIpDisabled: boolean
   /** Cluster region of the pool. */
   region: Region
 }
@@ -425,6 +431,12 @@ export interface CreateClusterRequestPoolConfig {
   rootVolumeType: PoolVolumeType
   /** System volume disk size. */
   rootVolumeSize?: number
+  /**
+   * Defines if the public IP should be removed from Nodes. To use this feature,
+   * your Cluster must have an attached Private Network set up with a Public
+   * Gateway.
+   */
+  publicIpDisabled: boolean
 }
 
 export interface CreatePoolRequestUpgradePolicy {
@@ -792,6 +804,12 @@ export type CreatePoolRequest = {
   rootVolumeType?: PoolVolumeType
   /** System volume disk size. */
   rootVolumeSize?: number
+  /**
+   * Defines if the public IP should be removed from Nodes. To use this feature,
+   * your Cluster must have an attached Private Network set up with a Public
+   * Gateway.
+   */
+  publicIpDisabled: boolean
 }
 
 export type DeleteClusterRequest = {

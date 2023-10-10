@@ -1,7 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Zone } from '../../../bridge'
-
 import type {
   Arch,
   BootType,
@@ -87,11 +86,11 @@ export type SetImageRequest = {
   defaultBootscript?: Bootscript
   extraVolumes: Record<string, Volume>
   fromServer: string
-  organization: string
+  organization?: string
   public: boolean
   rootVolume: VolumeSummary
   state?: ImageState
-  project: string
+  project?: string
   tags?: string[]
 }
 
@@ -123,9 +122,9 @@ export type SetSecurityGroupRequest = {
   /** Default outbound policy. */
   outboundDefaultPolicy?: SecurityGroupPolicy
   /** Security groups Organization ID. */
-  organization: string
+  organization?: string
   /** Security group Project ID. */
-  project: string
+  project?: string
   /** Please use project_default instead. */
   organizationDefault?: boolean
   /** True use this security group for future Instances created in this project. */
@@ -166,9 +165,9 @@ export type SetServerRequest = {
   /** Instance name. */
   name: string
   /** Instance Organization ID. */
-  organization: string
+  organization?: string
   /** Instance Project ID. */
-  project: string
+  project?: string
   /** Provide a list of allowed actions on the server. */
   allowedActions?: ServerAction[]
   /** Tags associated with the Instance. */
@@ -238,14 +237,14 @@ export type SetSnapshotRequest = {
   snapshotId: string
   id: string
   name: string
-  organization: string
+  organization?: string
   volumeType?: VolumeVolumeType
   size: number
   state?: SnapshotState
   baseVolume: SnapshotBaseVolume
   creationDate?: Date
   modificationDate?: Date
-  project: string
+  project?: string
   tags?: string[]
 }
 

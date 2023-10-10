@@ -236,6 +236,7 @@ export class ZonedAPI extends ParentAPI {
     'nl-ams-3',
     'pl-waw-1',
     'pl-waw-2',
+    'pl-waw-3',
   ]
 
   protected pageOfListLbs = (request: Readonly<ZonedApiListLbsRequest> = {}) =>

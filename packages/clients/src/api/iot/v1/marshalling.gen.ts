@@ -365,20 +365,6 @@ export const unmarshalRenewDeviceCertificateResponse = (data: unknown) => {
   } as RenewDeviceCertificateResponse
 }
 
-const unmarshalRouteRestConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RouteRestConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    headers: data.headers,
-    uri: data.uri,
-    verb: data.verb,
-  } as RouteRestConfig
-}
-
 const unmarshalRouteDatabaseConfig = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -395,6 +381,20 @@ const unmarshalRouteDatabaseConfig = (data: unknown) => {
     query: data.query,
     username: data.username,
   } as RouteDatabaseConfig
+}
+
+const unmarshalRouteRestConfig = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RouteRestConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    headers: data.headers,
+    uri: data.uri,
+    verb: data.verb,
+  } as RouteRestConfig
 }
 
 const unmarshalRouteS3Config = (data: unknown) => {
@@ -479,8 +479,8 @@ const marshalDeviceMessageFilters = (
   request: DeviceMessageFilters,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  publish: request.publish,
-  subscribe: request.subscribe,
+  publish: marshalDeviceMessageFiltersRule(request.publish, defaults),
+  subscribe: marshalDeviceMessageFiltersRule(request.subscribe, defaults),
 })
 
 export const marshalCreateDeviceRequest = (
@@ -491,7 +491,10 @@ export const marshalCreateDeviceRequest = (
   allow_multiple_connections: request.allowMultipleConnections,
   description: request.description,
   hub_id: request.hubId,
-  message_filters: request.messageFilters,
+  message_filters: marshalDeviceMessageFilters(
+    request.messageFilters,
+    defaults,
+  ),
   name: request.name || randomName('device'),
 })
 
@@ -511,8 +514,14 @@ export const marshalCreateHubRequest = (
   name: request.name || randomName('hub'),
   product_plan: request.productPlan,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  ...resolveOneOf([
-    { param: 'twins_graphite_config', value: request.twinsGraphiteConfig },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'twins_graphite_config',
+      value:
+        request.twinsGraphiteConfig !== undefined
+          ? marshalHubTwinsGraphiteConfig(request.twinsGraphiteConfig, defaults)
+          : undefined,
+    },
   ]),
 })
 
@@ -526,15 +535,6 @@ export const marshalCreateNetworkRequest = (
   type: request.type,
 })
 
-const marshalCreateRouteRequestRestConfig = (
-  request: CreateRouteRequestRestConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  headers: request.headers,
-  uri: request.uri,
-  verb: request.verb,
-})
-
 const marshalCreateRouteRequestDatabaseConfig = (
   request: CreateRouteRequestDatabaseConfig,
   defaults: DefaultValues,
@@ -546,6 +546,15 @@ const marshalCreateRouteRequestDatabaseConfig = (
   port: request.port,
   query: request.query,
   username: request.username,
+})
+
+const marshalCreateRouteRequestRestConfig = (
+  request: CreateRouteRequestRestConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  headers: request.headers,
+  uri: request.uri,
+  verb: request.verb,
 })
 
 const marshalCreateRouteRequestS3Config = (
@@ -565,10 +574,28 @@ export const marshalCreateRouteRequest = (
   hub_id: request.hubId,
   name: request.name || randomName('route'),
   topic: request.topic,
-  ...resolveOneOf([
-    { param: 'db_config', value: request.dbConfig },
-    { param: 'rest_config', value: request.restConfig },
-    { param: 's3_config', value: request.s3Config },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'db_config',
+      value:
+        request.dbConfig !== undefined
+          ? marshalCreateRouteRequestDatabaseConfig(request.dbConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'rest_config',
+      value:
+        request.restConfig !== undefined
+          ? marshalCreateRouteRequestRestConfig(request.restConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 's3_config',
+      value:
+        request.s3Config !== undefined
+          ? marshalCreateRouteRequestS3Config(request.s3Config, defaults)
+          : undefined,
+    },
   ]),
 })
 
@@ -611,7 +638,10 @@ export const marshalUpdateDeviceRequest = (
   allow_multiple_connections: request.allowMultipleConnections,
   description: request.description,
   hub_id: request.hubId,
-  message_filters: request.messageFilters,
+  message_filters: marshalDeviceMessageFilters(
+    request.messageFilters,
+    defaults,
+  ),
 })
 
 export const marshalUpdateHubRequest = (
@@ -623,18 +653,15 @@ export const marshalUpdateHubRequest = (
   events_topic_prefix: request.eventsTopicPrefix,
   name: request.name,
   product_plan: request.productPlan,
-  ...resolveOneOf([
-    { param: 'twins_graphite_config', value: request.twinsGraphiteConfig },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'twins_graphite_config',
+      value:
+        request.twinsGraphiteConfig !== undefined
+          ? marshalHubTwinsGraphiteConfig(request.twinsGraphiteConfig, defaults)
+          : undefined,
+    },
   ]),
-})
-
-const marshalUpdateRouteRequestRestConfig = (
-  request: UpdateRouteRequestRestConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  headers: request.headers,
-  uri: request.uri,
-  verb: request.verb,
 })
 
 const marshalUpdateRouteRequestDatabaseConfig = (
@@ -648,6 +675,15 @@ const marshalUpdateRouteRequestDatabaseConfig = (
   port: request.port,
   query: request.query,
   username: request.username,
+})
+
+const marshalUpdateRouteRequestRestConfig = (
+  request: UpdateRouteRequestRestConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  headers: request.headers,
+  uri: request.uri,
+  verb: request.verb,
 })
 
 const marshalUpdateRouteRequestS3Config = (
@@ -666,9 +702,27 @@ export const marshalUpdateRouteRequest = (
 ): Record<string, unknown> => ({
   name: request.name,
   topic: request.topic,
-  ...resolveOneOf([
-    { param: 'db_config', value: request.dbConfig },
-    { param: 'rest_config', value: request.restConfig },
-    { param: 's3_config', value: request.s3Config },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'db_config',
+      value:
+        request.dbConfig !== undefined
+          ? marshalUpdateRouteRequestDatabaseConfig(request.dbConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'rest_config',
+      value:
+        request.restConfig !== undefined
+          ? marshalUpdateRouteRequestRestConfig(request.restConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 's3_config',
+      value:
+        request.s3Config !== undefined
+          ? marshalUpdateRouteRequestS3Config(request.s3Config, defaults)
+          : undefined,
+    },
   ]),
 })

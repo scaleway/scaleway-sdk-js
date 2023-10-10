@@ -225,39 +225,6 @@ export const unmarshalInstanceLog = (data: unknown) => {
   } as InstanceLog
 }
 
-const unmarshalMaintenance = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Maintenance' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    closedAt: unmarshalDate(data.closed_at),
-    reason: data.reason,
-    startsAt: unmarshalDate(data.starts_at),
-    status: data.status,
-    stopsAt: unmarshalDate(data.stops_at),
-  } as Maintenance
-}
-
-const unmarshalLogsPolicy = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'LogsPolicy' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    maxAgeRetention: data.max_age_retention
-      ? data.max_age_retention
-      : undefined,
-    totalDiskRetention: data.total_disk_retention
-      ? data.total_disk_retention
-      : undefined,
-  } as LogsPolicy
-}
-
 const unmarshalBackupSchedule = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -284,6 +251,39 @@ const unmarshalInstanceSetting = (data: unknown) => {
     name: data.name,
     value: data.value,
   } as InstanceSetting
+}
+
+const unmarshalLogsPolicy = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'LogsPolicy' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    maxAgeRetention: data.max_age_retention
+      ? data.max_age_retention
+      : undefined,
+    totalDiskRetention: data.total_disk_retention
+      ? data.total_disk_retention
+      : undefined,
+  } as LogsPolicy
+}
+
+const unmarshalMaintenance = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Maintenance' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    closedAt: unmarshalDate(data.closed_at),
+    reason: data.reason,
+    startsAt: unmarshalDate(data.starts_at),
+    status: data.status,
+    stopsAt: unmarshalDate(data.stops_at),
+  } as Maintenance
 }
 
 const unmarshalUpgradableVersion = (data: unknown) => {
@@ -661,6 +661,19 @@ export const unmarshalListInstancesResponse = (data: unknown) => {
   } as ListInstancesResponse
 }
 
+const unmarshalNodeTypeVolumeConstraintSizes = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'NodeTypeVolumeConstraintSizes' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    maxSize: data.max_size,
+    minSize: data.min_size,
+  } as NodeTypeVolumeConstraintSizes
+}
+
 const unmarshalNodeTypeVolumeType = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -675,19 +688,6 @@ const unmarshalNodeTypeVolumeType = (data: unknown) => {
     minSize: data.min_size,
     type: data.type,
   } as NodeTypeVolumeType
-}
-
-const unmarshalNodeTypeVolumeConstraintSizes = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'NodeTypeVolumeConstraintSizes' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    maxSize: data.max_size,
-    minSize: data.min_size,
-  } as NodeTypeVolumeConstraintSizes
 }
 
 const unmarshalNodeType = (data: unknown) => {
@@ -825,7 +825,10 @@ export const marshalAddInstanceACLRulesRequest = (
   request: AddInstanceACLRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  rules: request.rules,
+  rules:
+    request.rules !== undefined
+      ? request.rules.map(elt => marshalACLRuleRequest(elt, defaults))
+      : undefined,
 })
 
 const marshalInstanceSetting = (
@@ -840,7 +843,10 @@ export const marshalAddInstanceSettingsRequest = (
   request: AddInstanceSettingsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  settings: request.settings,
+  settings:
+    request.settings !== undefined
+      ? request.settings.map(elt => marshalInstanceSetting(elt, defaults))
+      : undefined,
 })
 
 export const marshalCloneInstanceRequest = (
@@ -873,29 +879,50 @@ const marshalEndpointSpecPrivateNetworkIpamConfig = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
-const marshalEndpointSpecPrivateNetwork = (
-  request: EndpointSpecPrivateNetwork,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  private_network_id: request.privateNetworkId,
-  ...resolveOneOf([
-    { param: 'ipam_config', value: request.ipamConfig },
-    { param: 'service_ip', value: request.serviceIp },
-  ]),
-})
-
 const marshalEndpointSpecLoadBalancer = (
   request: EndpointSpecLoadBalancer,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
+const marshalEndpointSpecPrivateNetwork = (
+  request: EndpointSpecPrivateNetwork,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_network_id: request.privateNetworkId,
+  ...resolveOneOf<unknown>([
+    {
+      param: 'ipam_config',
+      value:
+        request.ipamConfig !== undefined
+          ? marshalEndpointSpecPrivateNetworkIpamConfig(
+              request.ipamConfig,
+              defaults,
+            )
+          : undefined,
+    },
+    { param: 'service_ip', value: request.serviceIp },
+  ]),
+})
+
 const marshalEndpointSpec = (
   request: EndpointSpec,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([
-    { param: 'load_balancer', value: request.loadBalancer },
-    { param: 'private_network', value: request.privateNetwork },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'load_balancer',
+      value:
+        request.loadBalancer !== undefined
+          ? marshalEndpointSpecLoadBalancer(request.loadBalancer, defaults)
+          : undefined,
+    },
+    {
+      param: 'private_network',
+      value:
+        request.privateNetwork !== undefined
+          ? marshalEndpointSpecPrivateNetwork(request.privateNetwork, defaults)
+          : undefined,
+    },
   ]),
 })
 
@@ -903,7 +930,10 @@ export const marshalCreateEndpointRequest = (
   request: CreateEndpointRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoint_spec: request.endpointSpec,
+  endpoint_spec:
+    request.endpointSpec !== undefined
+      ? marshalEndpointSpec(request.endpointSpec, defaults)
+      : undefined,
 })
 
 export const marshalCreateInstanceFromSnapshotRequest = (
@@ -922,8 +952,14 @@ export const marshalCreateInstanceRequest = (
   backup_same_region: request.backupSameRegion,
   disable_backup: request.disableBackup,
   engine: request.engine,
-  init_endpoints: request.initEndpoints,
-  init_settings: request.initSettings,
+  init_endpoints:
+    request.initEndpoints !== undefined
+      ? request.initEndpoints.map(elt => marshalEndpointSpec(elt, defaults))
+      : undefined,
+  init_settings:
+    request.initSettings !== undefined
+      ? request.initSettings.map(elt => marshalInstanceSetting(elt, defaults))
+      : undefined,
   is_ha_cluster: request.isHaCluster,
   name: request.name || randomName('ins'),
   node_type: request.nodeType,
@@ -932,7 +968,7 @@ export const marshalCreateInstanceRequest = (
   user_name: request.userName,
   volume_size: request.volumeSize,
   volume_type: request.volumeType,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'organization_id', value: request.organizationId },
     { param: 'project_id', value: request.projectId },
   ]),
@@ -943,29 +979,56 @@ const marshalReadReplicaEndpointSpecPrivateNetworkIpamConfig = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
-const marshalReadReplicaEndpointSpecPrivateNetwork = (
-  request: ReadReplicaEndpointSpecPrivateNetwork,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  private_network_id: request.privateNetworkId,
-  ...resolveOneOf([
-    { param: 'ipam_config', value: request.ipamConfig },
-    { param: 'service_ip', value: request.serviceIp },
-  ]),
-})
-
 const marshalReadReplicaEndpointSpecDirectAccess = (
   request: ReadReplicaEndpointSpecDirectAccess,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
+const marshalReadReplicaEndpointSpecPrivateNetwork = (
+  request: ReadReplicaEndpointSpecPrivateNetwork,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_network_id: request.privateNetworkId,
+  ...resolveOneOf<unknown>([
+    {
+      param: 'ipam_config',
+      value:
+        request.ipamConfig !== undefined
+          ? marshalReadReplicaEndpointSpecPrivateNetworkIpamConfig(
+              request.ipamConfig,
+              defaults,
+            )
+          : undefined,
+    },
+    { param: 'service_ip', value: request.serviceIp },
+  ]),
+})
+
 const marshalReadReplicaEndpointSpec = (
   request: ReadReplicaEndpointSpec,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([
-    { param: 'direct_access', value: request.directAccess },
-    { param: 'private_network', value: request.privateNetwork },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'direct_access',
+      value:
+        request.directAccess !== undefined
+          ? marshalReadReplicaEndpointSpecDirectAccess(
+              request.directAccess,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'private_network',
+      value:
+        request.privateNetwork !== undefined
+          ? marshalReadReplicaEndpointSpecPrivateNetwork(
+              request.privateNetwork,
+              defaults,
+            )
+          : undefined,
+    },
   ]),
 })
 
@@ -973,14 +1036,24 @@ export const marshalCreateReadReplicaEndpointRequest = (
   request: CreateReadReplicaEndpointRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoint_spec: request.endpointSpec,
+  endpoint_spec:
+    request.endpointSpec !== undefined
+      ? request.endpointSpec.map(elt =>
+          marshalReadReplicaEndpointSpec(elt, defaults),
+        )
+      : undefined,
 })
 
 export const marshalCreateReadReplicaRequest = (
   request: CreateReadReplicaRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoint_spec: request.endpointSpec,
+  endpoint_spec:
+    request.endpointSpec !== undefined
+      ? request.endpointSpec.map(elt =>
+          marshalReadReplicaEndpointSpec(elt, defaults),
+        )
+      : undefined,
   instance_id: request.instanceId,
   same_zone: request.sameZone,
 })
@@ -1050,14 +1123,20 @@ export const marshalSetInstanceACLRulesRequest = (
   request: SetInstanceACLRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  rules: request.rules,
+  rules:
+    request.rules !== undefined
+      ? request.rules.map(elt => marshalACLRuleRequest(elt, defaults))
+      : undefined,
 })
 
 export const marshalSetInstanceSettingsRequest = (
   request: SetInstanceSettingsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  settings: request.settings,
+  settings:
+    request.settings !== undefined
+      ? request.settings.map(elt => marshalInstanceSetting(elt, defaults))
+      : undefined,
 })
 
 export const marshalSetPrivilegeRequest = (
@@ -1094,7 +1173,10 @@ export const marshalUpdateInstanceRequest = (
   backup_schedule_retention: request.backupScheduleRetention,
   backup_schedule_start_hour: request.backupScheduleStartHour,
   is_backup_schedule_disabled: request.isBackupScheduleDisabled,
-  logs_policy: request.logsPolicy,
+  logs_policy:
+    request.logsPolicy !== undefined
+      ? marshalLogsPolicy(request.logsPolicy, defaults)
+      : undefined,
   name: request.name,
   tags: request.tags,
 })
@@ -1119,7 +1201,7 @@ export const marshalUpgradeInstanceRequest = (
   request: UpgradeInstanceRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'enable_ha', value: request.enableHa },
     { param: 'node_type', value: request.nodeType },
     { param: 'upgradable_version_id', value: request.upgradableVersionId },

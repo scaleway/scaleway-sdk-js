@@ -113,29 +113,17 @@ import type {
   UpdateDNSZoneRequest,
 } from './types.gen'
 
-const unmarshalContactExtensionNL = (data: unknown) => {
+const unmarshalContactExtensionFRAssociationInfo = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'ContactExtensionNL' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'ContactExtensionFRAssociationInfo' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    legalForm: data.legal_form,
-    legalFormRegistrationNumber: data.legal_form_registration_number,
-  } as ContactExtensionNL
-}
-
-const unmarshalContactExtensionEU = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ContactExtensionEU' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    europeanCitizenship: data.european_citizenship,
-  } as ContactExtensionEU
+    publicationJo: unmarshalDate(data.publication_jo),
+    publicationJoPage: data.publication_jo_page,
+  } as ContactExtensionFRAssociationInfo
 }
 
 const unmarshalContactExtensionFRCodeAuthAfnicInfo = (data: unknown) => {
@@ -148,31 +136,6 @@ const unmarshalContactExtensionFRCodeAuthAfnicInfo = (data: unknown) => {
   return {
     codeAuthAfnic: data.code_auth_afnic,
   } as ContactExtensionFRCodeAuthAfnicInfo
-}
-
-const unmarshalContactExtensionFRTrademarkInfo = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ContactExtensionFRTrademarkInfo' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    trademarkInpi: data.trademark_inpi,
-  } as ContactExtensionFRTrademarkInfo
-}
-
-const unmarshalContactExtensionFRAssociationInfo = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ContactExtensionFRAssociationInfo' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    publicationJo: unmarshalDate(data.publication_jo),
-    publicationJoPage: data.publication_jo_page,
-  } as ContactExtensionFRAssociationInfo
 }
 
 const unmarshalContactExtensionFRDunsInfo = (data: unknown) => {
@@ -200,6 +163,30 @@ const unmarshalContactExtensionFRIndividualInfo = (data: unknown) => {
   } as ContactExtensionFRIndividualInfo
 }
 
+const unmarshalContactExtensionFRTrademarkInfo = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContactExtensionFRTrademarkInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    trademarkInpi: data.trademark_inpi,
+  } as ContactExtensionFRTrademarkInfo
+}
+
+const unmarshalContactExtensionEU = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContactExtensionEU' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    europeanCitizenship: data.european_citizenship,
+  } as ContactExtensionEU
+}
+
 const unmarshalContactExtensionFR = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -225,6 +212,19 @@ const unmarshalContactExtensionFR = (data: unknown) => {
       ? unmarshalContactExtensionFRTrademarkInfo(data.trademark_info)
       : undefined,
   } as ContactExtensionFR
+}
+
+const unmarshalContactExtensionNL = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContactExtensionNL' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    legalForm: data.legal_form,
+    legalFormRegistrationNumber: data.legal_form_registration_number,
+  } as ContactExtensionNL
 }
 
 const unmarshalContactQuestion = (data: unknown) => {
@@ -410,64 +410,6 @@ export const unmarshalDeleteSSLCertificateResponse = (data: unknown) => {
   return {} as DeleteSSLCertificateResponse
 }
 
-const unmarshalTldOffer = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TldOffer' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    action: data.action,
-    operationPath: data.operation_path,
-    price: data.price ? unmarshalMoney(data.price) : undefined,
-  } as TldOffer
-}
-
-const unmarshalTld = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Tld' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    dnssecSupport: data.dnssec_support,
-    durationInYearsMax: data.duration_in_years_max,
-    durationInYearsMin: data.duration_in_years_min,
-    idnSupport: data.idn_support,
-    name: data.name,
-    offers: unmarshalMapOfObject(data.offers, unmarshalTldOffer),
-    specifications: data.specifications,
-  } as Tld
-}
-
-const unmarshalDomainRegistrationStatusTransfer = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRegistrationStatusTransfer' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    status: data.status,
-    voteCurrentOwner: data.vote_current_owner,
-    voteNewOwner: data.vote_new_owner,
-  } as DomainRegistrationStatusTransfer
-}
-
-const unmarshalDomainRegistrationStatusExternalDomain = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRegistrationStatusExternalDomain' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    validationToken: data.validation_token,
-  } as DomainRegistrationStatusExternalDomain
-}
-
 const unmarshalDSRecordPublicKey = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -511,6 +453,20 @@ const unmarshalDSRecord = (data: unknown) => {
   } as DSRecord
 }
 
+const unmarshalTldOffer = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TldOffer' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    action: data.action,
+    operationPath: data.operation_path,
+    price: data.price ? unmarshalMoney(data.price) : undefined,
+  } as TldOffer
+}
+
 const unmarshalDomainDNSSEC = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -522,6 +478,50 @@ const unmarshalDomainDNSSEC = (data: unknown) => {
     dsRecords: unmarshalArrayOfObject(data.ds_records, unmarshalDSRecord),
     status: data.status,
   } as DomainDNSSEC
+}
+
+const unmarshalDomainRegistrationStatusExternalDomain = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRegistrationStatusExternalDomain' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    validationToken: data.validation_token,
+  } as DomainRegistrationStatusExternalDomain
+}
+
+const unmarshalDomainRegistrationStatusTransfer = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRegistrationStatusTransfer' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    status: data.status,
+    voteCurrentOwner: data.vote_current_owner,
+    voteNewOwner: data.vote_new_owner,
+  } as DomainRegistrationStatusTransfer
+}
+
+const unmarshalTld = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Tld' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    dnssecSupport: data.dnssec_support,
+    durationInYearsMax: data.duration_in_years_max,
+    durationInYearsMin: data.duration_in_years_min,
+    idnSupport: data.idn_support,
+    name: data.name,
+    offers: unmarshalMapOfObject(data.offers, unmarshalTldOffer),
+    specifications: data.specifications,
+  } as Tld
 }
 
 export const unmarshalDomain = (data: unknown) => {
@@ -575,60 +575,18 @@ export const unmarshalGetDNSZoneTsigKeyResponse = (data: unknown) => {
   } as GetDNSZoneTsigKeyResponse
 }
 
-const unmarshalRecordChangeClear = (data: unknown) => {
+const unmarshalDomainRecordGeoIPConfigMatch = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'RecordChangeClear' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {} as RecordChangeClear
-}
-
-const unmarshalRecordChangeDelete = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RecordChangeDelete' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'DomainRecordGeoIPConfigMatch' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    id: data.id ? data.id : undefined,
-    idFields: data.id_fields
-      ? unmarshalRecordIdentifier(data.id_fields)
-      : undefined,
-  } as RecordChangeDelete
-}
-
-const unmarshalRecordIdentifier = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RecordIdentifier' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    data: data.data ? data.data : undefined,
-    name: data.name,
-    ttl: data.ttl ? data.ttl : undefined,
-    type: data.type,
-  } as RecordIdentifier
-}
-
-const unmarshalRecordChangeSet = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RecordChangeSet' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id ? data.id : undefined,
-    idFields: data.id_fields
-      ? unmarshalRecordIdentifier(data.id_fields)
-      : undefined,
-    records: unmarshalArrayOfObject(data.records, unmarshalDomainRecord),
-  } as RecordChangeSet
+    continents: data.continents,
+    countries: data.countries,
+    data: data.data,
+  } as DomainRecordGeoIPConfigMatch
 }
 
 const unmarshalDomainRecordViewConfigView = (data: unknown) => {
@@ -644,21 +602,6 @@ const unmarshalDomainRecordViewConfigView = (data: unknown) => {
   } as DomainRecordViewConfigView
 }
 
-const unmarshalDomainRecordViewConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRecordViewConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    views: unmarshalArrayOfObject(
-      data.views,
-      unmarshalDomainRecordViewConfigView,
-    ),
-  } as DomainRecordViewConfig
-}
-
 const unmarshalDomainRecordWeightedConfigWeightedIP = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -672,19 +615,20 @@ const unmarshalDomainRecordWeightedConfigWeightedIP = (data: unknown) => {
   } as DomainRecordWeightedConfigWeightedIP
 }
 
-const unmarshalDomainRecordWeightedConfig = (data: unknown) => {
+const unmarshalDomainRecordGeoIPConfig = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'DomainRecordWeightedConfig' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'DomainRecordGeoIPConfig' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    weightedIps: unmarshalArrayOfObject(
-      data.weighted_ips,
-      unmarshalDomainRecordWeightedConfigWeightedIP,
+    default: data.default,
+    matches: unmarshalArrayOfObject(
+      data.matches,
+      unmarshalDomainRecordGeoIPConfigMatch,
     ),
-  } as DomainRecordWeightedConfig
+  } as DomainRecordGeoIPConfig
 }
 
 const unmarshalDomainRecordHTTPServiceConfig = (data: unknown) => {
@@ -703,34 +647,34 @@ const unmarshalDomainRecordHTTPServiceConfig = (data: unknown) => {
   } as DomainRecordHTTPServiceConfig
 }
 
-const unmarshalDomainRecordGeoIPConfigMatch = (data: unknown) => {
+const unmarshalDomainRecordViewConfig = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'DomainRecordGeoIPConfigMatch' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'DomainRecordViewConfig' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    continents: data.continents,
-    countries: data.countries,
-    data: data.data,
-  } as DomainRecordGeoIPConfigMatch
+    views: unmarshalArrayOfObject(
+      data.views,
+      unmarshalDomainRecordViewConfigView,
+    ),
+  } as DomainRecordViewConfig
 }
 
-const unmarshalDomainRecordGeoIPConfig = (data: unknown) => {
+const unmarshalDomainRecordWeightedConfig = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'DomainRecordGeoIPConfig' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'DomainRecordWeightedConfig' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    default: data.default,
-    matches: unmarshalArrayOfObject(
-      data.matches,
-      unmarshalDomainRecordGeoIPConfigMatch,
+    weightedIps: unmarshalArrayOfObject(
+      data.weighted_ips,
+      unmarshalDomainRecordWeightedConfigWeightedIP,
     ),
-  } as DomainRecordGeoIPConfig
+  } as DomainRecordWeightedConfig
 }
 
 const unmarshalDomainRecord = (data: unknown) => {
@@ -763,6 +707,21 @@ const unmarshalDomainRecord = (data: unknown) => {
   } as DomainRecord
 }
 
+const unmarshalRecordIdentifier = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RecordIdentifier' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    data: data.data ? data.data : undefined,
+    name: data.name,
+    ttl: data.ttl ? data.ttl : undefined,
+    type: data.type,
+  } as RecordIdentifier
+}
+
 const unmarshalRecordChangeAdd = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -773,6 +732,47 @@ const unmarshalRecordChangeAdd = (data: unknown) => {
   return {
     records: unmarshalArrayOfObject(data.records, unmarshalDomainRecord),
   } as RecordChangeAdd
+}
+
+const unmarshalRecordChangeClear = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RecordChangeClear' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as RecordChangeClear
+}
+
+const unmarshalRecordChangeDelete = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RecordChangeDelete' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id ? data.id : undefined,
+    idFields: data.id_fields
+      ? unmarshalRecordIdentifier(data.id_fields)
+      : undefined,
+  } as RecordChangeDelete
+}
+
+const unmarshalRecordChangeSet = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RecordChangeSet' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id ? data.id : undefined,
+    idFields: data.id_fields
+      ? unmarshalRecordIdentifier(data.id_fields)
+      : undefined,
+    records: unmarshalArrayOfObject(data.records, unmarshalDomainRecord),
+  } as RecordChangeSet
 }
 
 const unmarshalRecordChange = (data: unknown) => {
@@ -1237,7 +1237,7 @@ export const marshalCloneDNSZoneRequest = (
 ): Record<string, unknown> => ({
   dest_dns_zone: request.destDnsZone,
   overwrite: request.overwrite,
-  project_id: request.projectId,
+  project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
 export const marshalCreateDNSZoneRequest = (
@@ -1268,7 +1268,18 @@ export const marshalImportProviderDNSZoneRequest = (
   request: ImportProviderDNSZoneRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([{ param: 'online_v1', value: request.onlineV1 }]),
+  ...resolveOneOf<unknown>([
+    {
+      param: 'online_v1',
+      value:
+        request.onlineV1 !== undefined
+          ? marshalImportProviderDNSZoneRequestOnlineV1(
+              request.onlineV1,
+              defaults,
+            )
+          : undefined,
+    },
+  ]),
 })
 
 const marshalImportRawDNSZoneRequestTsigKey = (
@@ -1285,7 +1296,7 @@ const marshalImportRawDNSZoneRequestAXFRSource = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name_server: request.nameServer,
-  tsig_key: request.tsigKey,
+  tsig_key: marshalImportRawDNSZoneRequestTsigKey(request.tsigKey, defaults),
 })
 
 const marshalImportRawDNSZoneRequestBindSource = (
@@ -1302,9 +1313,27 @@ export const marshalImportRawDNSZoneRequest = (
   content: request.content,
   format: request.format,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  ...resolveOneOf([
-    { param: 'axfr_source', value: request.axfrSource },
-    { param: 'bind_source', value: request.bindSource },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'axfr_source',
+      value:
+        request.axfrSource !== undefined
+          ? marshalImportRawDNSZoneRequestAXFRSource(
+              request.axfrSource,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'bind_source',
+      value:
+        request.bindSource !== undefined
+          ? marshalImportRawDNSZoneRequestBindSource(
+              request.bindSource,
+              defaults,
+            )
+          : undefined,
+    },
   ]),
 })
 
@@ -1316,19 +1345,12 @@ export const marshalRefreshDNSZoneRequest = (
   recreate_sub_dns_zone: request.recreateSubDnsZone,
 })
 
-const marshalContactExtensionNL = (
-  request: ContactExtensionNL,
+const marshalContactExtensionFRAssociationInfo = (
+  request: ContactExtensionFRAssociationInfo,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  legal_form: request.legalForm,
-  legal_form_registration_number: request.legalFormRegistrationNumber,
-})
-
-const marshalContactExtensionEU = (
-  request: ContactExtensionEU,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  european_citizenship: request.europeanCitizenship,
+  publication_jo: request.publicationJo,
+  publication_jo_page: request.publicationJoPage,
 })
 
 const marshalContactExtensionFRCodeAuthAfnicInfo = (
@@ -1336,21 +1358,6 @@ const marshalContactExtensionFRCodeAuthAfnicInfo = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   code_auth_afnic: request.codeAuthAfnic,
-})
-
-const marshalContactExtensionFRTrademarkInfo = (
-  request: ContactExtensionFRTrademarkInfo,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  trademark_inpi: request.trademarkInpi,
-})
-
-const marshalContactExtensionFRAssociationInfo = (
-  request: ContactExtensionFRAssociationInfo,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  publication_jo: request.publicationJo,
-  publication_jo_page: request.publicationJoPage,
 })
 
 const marshalContactExtensionFRDunsInfo = (
@@ -1368,18 +1375,82 @@ const marshalContactExtensionFRIndividualInfo = (
   whois_opt_in: request.whoisOptIn,
 })
 
+const marshalContactExtensionFRTrademarkInfo = (
+  request: ContactExtensionFRTrademarkInfo,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  trademark_inpi: request.trademarkInpi,
+})
+
+const marshalContactExtensionEU = (
+  request: ContactExtensionEU,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  european_citizenship: request.europeanCitizenship,
+})
+
 const marshalContactExtensionFR = (
   request: ContactExtensionFR,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mode: request.mode,
-  ...resolveOneOf([
-    { param: 'association_info', value: request.associationInfo },
-    { param: 'code_auth_afnic_info', value: request.codeAuthAfnicInfo },
-    { param: 'duns_info', value: request.dunsInfo },
-    { param: 'individual_info', value: request.individualInfo },
-    { param: 'trademark_info', value: request.trademarkInfo },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'association_info',
+      value:
+        request.associationInfo !== undefined
+          ? marshalContactExtensionFRAssociationInfo(
+              request.associationInfo,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'code_auth_afnic_info',
+      value:
+        request.codeAuthAfnicInfo !== undefined
+          ? marshalContactExtensionFRCodeAuthAfnicInfo(
+              request.codeAuthAfnicInfo,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'duns_info',
+      value:
+        request.dunsInfo !== undefined
+          ? marshalContactExtensionFRDunsInfo(request.dunsInfo, defaults)
+          : undefined,
+    },
+    {
+      param: 'individual_info',
+      value:
+        request.individualInfo !== undefined
+          ? marshalContactExtensionFRIndividualInfo(
+              request.individualInfo,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'trademark_info',
+      value:
+        request.trademarkInfo !== undefined
+          ? marshalContactExtensionFRTrademarkInfo(
+              request.trademarkInfo,
+              defaults,
+            )
+          : undefined,
+    },
   ]),
+})
+
+const marshalContactExtensionNL = (
+  request: ContactExtensionNL,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  legal_form: request.legalForm,
+  legal_form_registration_number: request.legalFormRegistrationNumber,
 })
 
 const marshalContactQuestion = (
@@ -1402,16 +1473,19 @@ const marshalNewContact = (
   country: request.country,
   email: request.email,
   email_alt: request.emailAlt,
-  extension_eu: request.extensionEu,
-  extension_fr: request.extensionFr,
-  extension_nl: request.extensionNl,
+  extension_eu: marshalContactExtensionEU(request.extensionEu, defaults),
+  extension_fr: marshalContactExtensionFR(request.extensionFr, defaults),
+  extension_nl: marshalContactExtensionNL(request.extensionNl, defaults),
   fax_number: request.faxNumber,
   firstname: request.firstname,
   lang: request.lang,
   lastname: request.lastname,
   legal_form: request.legalForm,
   phone_number: request.phoneNumber,
-  questions: request.questions,
+  questions:
+    request.questions !== undefined
+      ? request.questions.map(elt => marshalContactQuestion(elt, defaults))
+      : undefined,
   resale: request.resale,
   state: request.state,
   vat_identification_code: request.vatIdentificationCode,
@@ -1426,19 +1500,37 @@ export const marshalRegistrarApiBuyDomainsRequest = (
   domains: request.domains,
   duration_in_years: request.durationInYears,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  ...resolveOneOf([
-    { param: 'owner_contact', value: request.ownerContact },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'owner_contact',
+      value:
+        request.ownerContact !== undefined
+          ? marshalNewContact(request.ownerContact, defaults)
+          : undefined,
+    },
     { param: 'owner_contact_id', value: request.ownerContactId },
   ]),
-  ...resolveOneOf([
-    { param: 'administrative_contact', value: request.administrativeContact },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'administrative_contact',
+      value:
+        request.administrativeContact !== undefined
+          ? marshalNewContact(request.administrativeContact, defaults)
+          : undefined,
+    },
     {
       param: 'administrative_contact_id',
       value: request.administrativeContactId,
     },
   ]),
-  ...resolveOneOf([
-    { param: 'technical_contact', value: request.technicalContact },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'technical_contact',
+      value:
+        request.technicalContact !== undefined
+          ? marshalNewContact(request.technicalContact, defaults)
+          : undefined,
+    },
     { param: 'technical_contact_id', value: request.technicalContactId },
   ]),
 })
@@ -1449,19 +1541,37 @@ export const marshalRegistrarApiCheckContactsCompatibilityRequest = (
 ): Record<string, unknown> => ({
   domains: request.domains,
   tlds: request.tlds,
-  ...resolveOneOf([
-    { param: 'owner_contact', value: request.ownerContact },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'owner_contact',
+      value:
+        request.ownerContact !== undefined
+          ? marshalNewContact(request.ownerContact, defaults)
+          : undefined,
+    },
     { param: 'owner_contact_id', value: request.ownerContactId },
   ]),
-  ...resolveOneOf([
-    { param: 'administrative_contact', value: request.administrativeContact },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'administrative_contact',
+      value:
+        request.administrativeContact !== undefined
+          ? marshalNewContact(request.administrativeContact, defaults)
+          : undefined,
+    },
     {
       param: 'administrative_contact_id',
       value: request.administrativeContactId,
     },
   ]),
-  ...resolveOneOf([
-    { param: 'technical_contact', value: request.technicalContact },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'technical_contact',
+      value:
+        request.technicalContact !== undefined
+          ? marshalNewContact(request.technicalContact, defaults)
+          : undefined,
+    },
     { param: 'technical_contact_id', value: request.technicalContactId },
   ]),
 })
@@ -1486,7 +1596,7 @@ const marshalDSRecordDigest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   digest: request.digest,
-  public_key: request.publicKey,
+  public_key: marshalDSRecordPublicKey(request.publicKey, defaults),
   type: request.type,
 })
 
@@ -1496,9 +1606,21 @@ const marshalDSRecord = (
 ): Record<string, unknown> => ({
   algorithm: request.algorithm,
   key_id: request.keyId,
-  ...resolveOneOf([
-    { param: 'digest', value: request.digest },
-    { param: 'public_key', value: request.publicKey },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'digest',
+      value:
+        request.digest !== undefined
+          ? marshalDSRecordDigest(request.digest, defaults)
+          : undefined,
+    },
+    {
+      param: 'public_key',
+      value:
+        request.publicKey !== undefined
+          ? marshalDSRecordPublicKey(request.publicKey, defaults)
+          : undefined,
+    },
   ]),
 })
 
@@ -1506,7 +1628,7 @@ export const marshalRegistrarApiEnableDomainDNSSECRequest = (
   request: RegistrarApiEnableDomainDNSSECRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ds_record: request.dsRecord,
+  ds_record: marshalDSRecord(request.dsRecord, defaults),
 })
 
 export const marshalRegistrarApiRegisterExternalDomainRequest = (
@@ -1530,9 +1652,15 @@ export const marshalRegistrarApiTradeDomainRequest = (
   request: RegistrarApiTradeDomainRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  project_id: request.projectId,
-  ...resolveOneOf([
-    { param: 'new_owner_contact', value: request.newOwnerContact },
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  ...resolveOneOf<unknown>([
+    {
+      param: 'new_owner_contact',
+      value:
+        request.newOwnerContact !== undefined
+          ? marshalNewContact(request.newOwnerContact, defaults)
+          : undefined,
+    },
     { param: 'new_owner_contact_id', value: request.newOwnerContactId },
   ]),
 })
@@ -1549,21 +1677,44 @@ export const marshalRegistrarApiTransferInDomainRequest = (
   request: RegistrarApiTransferInDomainRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  domains: request.domains,
+  domains:
+    request.domains !== undefined
+      ? request.domains.map(elt =>
+          marshalTransferInDomainRequestTransferRequest(elt, defaults),
+        )
+      : undefined,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  ...resolveOneOf([
-    { param: 'owner_contact', value: request.ownerContact },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'owner_contact',
+      value:
+        request.ownerContact !== undefined
+          ? marshalNewContact(request.ownerContact, defaults)
+          : undefined,
+    },
     { param: 'owner_contact_id', value: request.ownerContactId },
   ]),
-  ...resolveOneOf([
-    { param: 'administrative_contact', value: request.administrativeContact },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'administrative_contact',
+      value:
+        request.administrativeContact !== undefined
+          ? marshalNewContact(request.administrativeContact, defaults)
+          : undefined,
+    },
     {
       param: 'administrative_contact_id',
       value: request.administrativeContactId,
     },
   ]),
-  ...resolveOneOf([
-    { param: 'technical_contact', value: request.technicalContact },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'technical_contact',
+      value:
+        request.technicalContact !== undefined
+          ? marshalNewContact(request.technicalContact, defaults)
+          : undefined,
+    },
     { param: 'technical_contact_id', value: request.technicalContactId },
   ]),
 })
@@ -1587,13 +1738,18 @@ export const marshalRegistrarApiUpdateContactRequest = (
   country: request.country,
   email: request.email,
   email_alt: request.emailAlt,
-  extension_eu: request.extensionEu,
-  extension_fr: request.extensionFr,
-  extension_nl: request.extensionNl,
+  extension_eu: marshalContactExtensionEU(request.extensionEu, defaults),
+  extension_fr: marshalContactExtensionFR(request.extensionFr, defaults),
+  extension_nl: marshalContactExtensionNL(request.extensionNl, defaults),
   fax_number: request.faxNumber,
   lang: request.lang,
   phone_number: request.phoneNumber,
-  questions: request.questions,
+  questions:
+    request.questions !== undefined
+      ? request.questions.map(elt =>
+          marshalUpdateContactRequestQuestion(elt, defaults),
+        )
+      : undefined,
   resale: request.resale,
   state: request.state,
   vat_identification_code: request.vatIdentificationCode,
@@ -1612,16 +1768,34 @@ export const marshalRegistrarApiUpdateDomainRequest = (
   request: RegistrarApiUpdateDomainRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([
-    { param: 'technical_contact', value: request.technicalContact },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'technical_contact',
+      value:
+        request.technicalContact !== undefined
+          ? marshalNewContact(request.technicalContact, defaults)
+          : undefined,
+    },
     { param: 'technical_contact_id', value: request.technicalContactId },
   ]),
-  ...resolveOneOf([
-    { param: 'owner_contact', value: request.ownerContact },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'owner_contact',
+      value:
+        request.ownerContact !== undefined
+          ? marshalNewContact(request.ownerContact, defaults)
+          : undefined,
+    },
     { param: 'owner_contact_id', value: request.ownerContactId },
   ]),
-  ...resolveOneOf([
-    { param: 'administrative_contact', value: request.administrativeContact },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'administrative_contact',
+      value:
+        request.administrativeContact !== undefined
+          ? marshalNewContact(request.administrativeContact, defaults)
+          : undefined,
+    },
     {
       param: 'administrative_contact_id',
       value: request.administrativeContactId,
@@ -1641,43 +1815,19 @@ export const marshalUpdateDNSZoneNameserversRequest = (
   request: UpdateDNSZoneNameserversRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ns: request.ns,
+  ns:
+    request.ns !== undefined
+      ? request.ns.map(elt => marshalNameserver(elt, defaults))
+      : undefined,
 })
 
-const marshalRecordChangeClear = (
-  request: RecordChangeClear,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({})
-
-const marshalRecordChangeDelete = (
-  request: RecordChangeDelete,
+const marshalDomainRecordGeoIPConfigMatch = (
+  request: DomainRecordGeoIPConfigMatch,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([
-    { param: 'id', value: request.id },
-    { param: 'id_fields', value: request.idFields },
-  ]),
-})
-
-const marshalRecordIdentifier = (
-  request: RecordIdentifier,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
+  continents: request.continents,
+  countries: request.countries,
   data: request.data,
-  name: request.name,
-  ttl: request.ttl,
-  type: request.type,
-})
-
-const marshalRecordChangeSet = (
-  request: RecordChangeSet,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  records: request.records,
-  ...resolveOneOf([
-    { param: 'id', value: request.id },
-    { param: 'id_fields', value: request.idFields },
-  ]),
 })
 
 const marshalDomainRecordViewConfigView = (
@@ -1688,13 +1838,6 @@ const marshalDomainRecordViewConfigView = (
   subnet: request.subnet,
 })
 
-const marshalDomainRecordViewConfig = (
-  request: DomainRecordViewConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  views: request.views,
-})
-
 const marshalDomainRecordWeightedConfigWeightedIP = (
   request: DomainRecordWeightedConfigWeightedIP,
   defaults: DefaultValues,
@@ -1703,11 +1846,14 @@ const marshalDomainRecordWeightedConfigWeightedIP = (
   weight: request.weight,
 })
 
-const marshalDomainRecordWeightedConfig = (
-  request: DomainRecordWeightedConfig,
+const marshalDomainRecordGeoIPConfig = (
+  request: DomainRecordGeoIPConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  weighted_ips: request.weightedIps,
+  default: request.default,
+  matches: request.matches.map(elt =>
+    marshalDomainRecordGeoIPConfigMatch(elt, defaults),
+  ),
 })
 
 const marshalDomainRecordHTTPServiceConfig = (
@@ -1721,21 +1867,22 @@ const marshalDomainRecordHTTPServiceConfig = (
   user_agent: request.userAgent,
 })
 
-const marshalDomainRecordGeoIPConfigMatch = (
-  request: DomainRecordGeoIPConfigMatch,
+const marshalDomainRecordViewConfig = (
+  request: DomainRecordViewConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  continents: request.continents,
-  countries: request.countries,
-  data: request.data,
+  views: request.views.map(elt =>
+    marshalDomainRecordViewConfigView(elt, defaults),
+  ),
 })
 
-const marshalDomainRecordGeoIPConfig = (
-  request: DomainRecordGeoIPConfig,
+const marshalDomainRecordWeightedConfig = (
+  request: DomainRecordWeightedConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  default: request.default,
-  matches: request.matches,
+  weighted_ips: request.weightedIps.map(elt =>
+    marshalDomainRecordWeightedConfigWeightedIP(elt, defaults),
+  ),
 })
 
 const marshalDomainRecord = (
@@ -1749,30 +1896,129 @@ const marshalDomainRecord = (
   priority: request.priority,
   ttl: request.ttl,
   type: request.type,
-  ...resolveOneOf([
-    { param: 'geo_ip_config', value: request.geoIpConfig },
-    { param: 'http_service_config', value: request.httpServiceConfig },
-    { param: 'view_config', value: request.viewConfig },
-    { param: 'weighted_config', value: request.weightedConfig },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'geo_ip_config',
+      value:
+        request.geoIpConfig !== undefined
+          ? marshalDomainRecordGeoIPConfig(request.geoIpConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'http_service_config',
+      value:
+        request.httpServiceConfig !== undefined
+          ? marshalDomainRecordHTTPServiceConfig(
+              request.httpServiceConfig,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'view_config',
+      value:
+        request.viewConfig !== undefined
+          ? marshalDomainRecordViewConfig(request.viewConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'weighted_config',
+      value:
+        request.weightedConfig !== undefined
+          ? marshalDomainRecordWeightedConfig(request.weightedConfig, defaults)
+          : undefined,
+    },
   ]),
+})
+
+const marshalRecordIdentifier = (
+  request: RecordIdentifier,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  data: request.data,
+  name: request.name,
+  ttl: request.ttl,
+  type: request.type,
 })
 
 const marshalRecordChangeAdd = (
   request: RecordChangeAdd,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  records: request.records,
+  records: request.records.map(elt => marshalDomainRecord(elt, defaults)),
+})
+
+const marshalRecordChangeClear = (
+  request: RecordChangeClear,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({})
+
+const marshalRecordChangeDelete = (
+  request: RecordChangeDelete,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ...resolveOneOf<unknown>([
+    { param: 'id', value: request.id },
+    {
+      param: 'id_fields',
+      value:
+        request.idFields !== undefined
+          ? marshalRecordIdentifier(request.idFields, defaults)
+          : undefined,
+    },
+  ]),
+})
+
+const marshalRecordChangeSet = (
+  request: RecordChangeSet,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  records: request.records.map(elt => marshalDomainRecord(elt, defaults)),
+  ...resolveOneOf<unknown>([
+    { param: 'id', value: request.id },
+    {
+      param: 'id_fields',
+      value:
+        request.idFields !== undefined
+          ? marshalRecordIdentifier(request.idFields, defaults)
+          : undefined,
+    },
+  ]),
 })
 
 const marshalRecordChange = (
   request: RecordChange,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([
-    { param: 'add', value: request.add },
-    { param: 'clear', value: request.clear },
-    { param: 'delete', value: request.delete },
-    { param: 'set', value: request.set },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'add',
+      value:
+        request.add !== undefined
+          ? marshalRecordChangeAdd(request.add, defaults)
+          : undefined,
+    },
+    {
+      param: 'clear',
+      value:
+        request.clear !== undefined
+          ? marshalRecordChangeClear(request.clear, defaults)
+          : undefined,
+    },
+    {
+      param: 'delete',
+      value:
+        request.delete !== undefined
+          ? marshalRecordChangeDelete(request.delete, defaults)
+          : undefined,
+    },
+    {
+      param: 'set',
+      value:
+        request.set !== undefined
+          ? marshalRecordChangeSet(request.set, defaults)
+          : undefined,
+    },
   ]),
 })
 
@@ -1780,7 +2026,10 @@ export const marshalUpdateDNSZoneRecordsRequest = (
   request: UpdateDNSZoneRecordsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  changes: request.changes,
+  changes:
+    request.changes !== undefined
+      ? request.changes.map(elt => marshalRecordChange(elt, defaults))
+      : undefined,
   disallow_new_zone_creation: request.disallowNewZoneCreation,
   return_all_records: request.returnAllRecords,
   serial: request.serial,

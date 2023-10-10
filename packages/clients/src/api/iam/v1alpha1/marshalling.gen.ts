@@ -401,7 +401,7 @@ export const marshalAddGroupMemberRequest = (
   request: AddGroupMemberRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'application_id', value: request.applicationId },
     { param: 'user_id', value: request.userId },
   ]),
@@ -422,7 +422,7 @@ export const marshalCreateAPIKeyRequest = (
   default_project_id: request.defaultProjectId,
   description: request.description,
   expires_at: request.expiresAt,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'application_id', value: request.applicationId },
     { param: 'user_id', value: request.userId },
   ]),
@@ -451,7 +451,7 @@ const marshalRuleSpecs = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   permission_set_names: request.permissionSetNames,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'organization_id', value: request.organizationId },
     { param: 'project_ids', value: request.projectIds },
   ]),
@@ -464,8 +464,11 @@ export const marshalCreatePolicyRequest = (
   description: request.description,
   name: request.name || randomName('pol'),
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
-  rules: request.rules,
-  ...resolveOneOf([
+  rules:
+    request.rules !== undefined
+      ? request.rules.map(elt => marshalRuleSpecs(elt, defaults))
+      : undefined,
+  ...resolveOneOf<unknown>([
     { param: 'application_id', value: request.applicationId },
     { param: 'group_id', value: request.groupId },
     { param: 'no_principal', value: request.noPrincipal },
@@ -494,7 +497,7 @@ export const marshalRemoveGroupMemberRequest = (
   request: RemoveGroupMemberRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'application_id', value: request.applicationId },
     { param: 'user_id', value: request.userId },
   ]),
@@ -513,7 +516,10 @@ export const marshalSetRulesRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   policy_id: request.policyId,
-  rules: request.rules,
+  rules:
+    request.rules !== undefined
+      ? request.rules.map(elt => marshalRuleSpecs(elt, defaults))
+      : undefined,
 })
 
 export const marshalUpdateAPIKeyRequest = (
@@ -546,7 +552,7 @@ export const marshalUpdatePolicyRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'application_id', value: request.applicationId },
     { param: 'group_id', value: request.groupId },
     { param: 'no_principal', value: request.noPrincipal },

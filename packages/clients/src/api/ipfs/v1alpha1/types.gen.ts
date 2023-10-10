@@ -83,57 +83,81 @@ export interface Volume {
 
 export type CreatePinByCIDRequest = {
   region?: Region
+  /** Volume ID on which you want to pin your content. */
   volumeId: string
+  /** CID containing the content you want to pin. */
   cid: string
-  name?: string
+  /** Node containing the content you want to pin. */
   origins?: string[]
+  /** Pin name. */
+  name?: string
+  /** Pin options. */
   pinOptions: PinOptions
 }
 
 export type CreatePinByURLRequest = {
   region?: Region
+  /** Volume ID on which you want to pin your content. */
   volumeId: string
+  /** URL containing the content you want to pin. */
   url: string
+  /** Pin name. */
   name?: string
+  /** Pin options. */
   pinOptions: PinOptions
 }
 
 export type CreateVolumeRequest = {
   region?: Region
+  /** Project ID. */
   projectId?: string
+  /** Volume name. */
   name: string
 }
 
 export type DeletePinRequest = {
   region?: Region
+  /** Pin ID you want to remove from the volume. */
   pinId: string
+  /** Volume ID. */
   volumeId: string
 }
 
 export type DeleteVolumeRequest = {
   region?: Region
+  /** Volume ID. */
   volumeId: string
 }
 
 export type GetPinRequest = {
   region?: Region
+  /** Pin ID of which you want to obtain information. */
   pinId: string
+  /** Volume ID. */
   volumeId: string
 }
 
 export type GetVolumeRequest = {
   region?: Region
+  /** Volume ID. */
   volumeId: string
 }
 
 export type ListPinsRequest = {
   region?: Region
+  /** Volume ID of which you want to list the pins. */
   volumeId: string
+  /** Project ID. */
   projectId?: string
+  /** Organization ID. */
   organizationId?: string
-  page?: number
-  pageSize?: number
+  /** Sort order of the returned Volume. */
   orderBy?: ListPinsRequestOrderBy
+  /** Page number. */
+  page?: number
+  /** Maximum number of volumes to return per page. */
+  pageSize?: number
+  /** List pins by status. */
   status?: PinStatus
 }
 
@@ -144,10 +168,14 @@ export interface ListPinsResponse {
 
 export type ListVolumesRequest = {
   region?: Region
+  /** Project ID, only volumes belonging to this project will be listed. */
   projectId?: string
-  page?: number
-  pageSize?: number
+  /** Sort the order of the returned volumes. */
   orderBy?: ListVolumesRequestOrderBy
+  /** Page number. */
+  page?: number
+  /** Maximum number of volumes to return per page. */
+  pageSize?: number
 }
 
 export interface ListVolumesResponse {
@@ -157,11 +185,17 @@ export interface ListVolumesResponse {
 
 export type ReplacePinRequest = {
   region?: Region
+  /** Pin ID whose information you wish to replace. */
   pinId: string
+  /** Volume ID. */
   volumeId: string
+  /** New CID you want to pin in place of the old one. */
   cid: string
+  /** New name to replace. */
   name?: string
+  /** Node containing the content you want to pin. */
   origins?: string[]
+  /** Pin options. */
   pinOptions: PinOptions
 }
 
@@ -171,7 +205,10 @@ export interface ReplacePinResponse {
 
 export type UpdateVolumeRequest = {
   region?: Region
+  /** Volume ID. */
   volumeId: string
+  /** Volume name. */
   name?: string
+  /** Tags of the volume. */
   tags?: string[]
 }

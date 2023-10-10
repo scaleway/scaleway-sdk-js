@@ -30,6 +30,7 @@ import {
   unmarshalDatasource,
   unmarshalGrafanaUser,
   unmarshalListContactPointsResponse,
+  unmarshalListDatasourcesResponse,
   unmarshalListGrafanaUsersResponse,
   unmarshalListPlansResponse,
   unmarshalListTokensResponse,
@@ -58,6 +59,8 @@ import type {
   GrafanaUser,
   ListContactPointsRequest,
   ListContactPointsResponse,
+  ListDatasourcesRequest,
+  ListDatasourcesResponse,
   ListGrafanaUsersRequest,
   ListGrafanaUsersResponse,
   ListPlansRequest,
@@ -222,6 +225,39 @@ export class API extends ParentAPI {
       },
       unmarshalDatasource,
     )
+
+  protected pageOfListDatasources = (
+    request: Readonly<ListDatasourcesRequest> = {},
+  ) =>
+    this.client.fetch<ListDatasourcesResponse>(
+      {
+        method: 'GET',
+        path: `/cockpit/v1beta1/datasources`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
+          ['types', request.types],
+        ),
+      },
+      unmarshalListDatasourcesResponse,
+    )
+
+  /**
+   * Get a list of datasources for the specified Project ID.
+   *
+   * @param request - The request {@link ListDatasourcesRequest}
+   * @returns A Promise of ListDatasourcesResponse
+   */
+  listDatasources = (request: Readonly<ListDatasourcesRequest> = {}) =>
+    enrichForPagination('datasources', this.pageOfListDatasources, request)
 
   /**
    * Create a token associated with the specified Project ID.

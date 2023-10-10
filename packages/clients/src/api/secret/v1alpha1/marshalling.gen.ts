@@ -199,7 +199,10 @@ export const marshalCreateSecretVersionRequest = (
   data_crc32: request.dataCrc32,
   description: request.description,
   disable_previous: request.disablePrevious,
-  password_generation: request.passwordGeneration,
+  password_generation:
+    request.passwordGeneration !== undefined
+      ? marshalPasswordGenerationParams(request.passwordGeneration, defaults)
+      : undefined,
 })
 
 export const marshalGeneratePasswordRequest = (

@@ -696,7 +696,7 @@ export interface ListQuotaResponse {
 
 export type ListRulesRequest = {
   /** Id of policy to search. */
-  policyId?: string
+  policyId: string
   /** Number of results per page. Value must be between 1 and 100. */
   pageSize?: number
   /** Page number. Value must be greater than 1. */

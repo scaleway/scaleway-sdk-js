@@ -16,19 +16,6 @@ import type {
   Version,
 } from './types.gen'
 
-const unmarshalOrganization = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Organization' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-    name: data.name,
-  } as Organization
-}
-
 const unmarshalLocalImage = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -42,6 +29,19 @@ const unmarshalLocalImage = (data: unknown) => {
     id: data.id,
     zone: data.zone,
   } as LocalImage
+}
+
+const unmarshalOrganization = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Organization' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    name: data.name,
+  } as Organization
 }
 
 const unmarshalVersion = (data: unknown) => {

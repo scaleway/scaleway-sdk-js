@@ -23,22 +23,6 @@ import type {
   Volume,
 } from './types.gen'
 
-const unmarshalPinInfo = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PinInfo' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id ? data.id : undefined,
-    progress: data.progress ? data.progress : undefined,
-    size: data.size ? data.size : undefined,
-    statusDetails: data.status_details,
-    url: data.url ? data.url : undefined,
-  } as PinInfo
-}
-
 const unmarshalPinCIDMeta = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -64,6 +48,22 @@ const unmarshalPinCID = (data: unknown) => {
     name: data.name ? data.name : undefined,
     origins: data.origins,
   } as PinCID
+}
+
+const unmarshalPinInfo = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PinInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id ? data.id : undefined,
+    progress: data.progress ? data.progress : undefined,
+    size: data.size ? data.size : undefined,
+    statusDetails: data.status_details,
+    url: data.url ? data.url : undefined,
+  } as PinInfo
 }
 
 export const unmarshalPin = (data: unknown) => {
@@ -156,7 +156,7 @@ export const marshalCreatePinByCIDRequest = (
   cid: request.cid,
   name: request.name,
   origins: request.origins,
-  pin_options: request.pinOptions,
+  pin_options: marshalPinOptions(request.pinOptions, defaults),
   volume_id: request.volumeId,
 })
 
@@ -165,7 +165,7 @@ export const marshalCreatePinByURLRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  pin_options: request.pinOptions,
+  pin_options: marshalPinOptions(request.pinOptions, defaults),
   url: request.url,
   volume_id: request.volumeId,
 })
@@ -185,7 +185,7 @@ export const marshalReplacePinRequest = (
   cid: request.cid,
   name: request.name,
   origins: request.origins,
-  pin_options: request.pinOptions,
+  pin_options: marshalPinOptions(request.pinOptions, defaults),
   volume_id: request.volumeId,
 })
 

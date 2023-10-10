@@ -833,7 +833,7 @@ export class API extends ParentAPI {
       unmarshalSetRulesResponse,
     )
 
-  protected pageOfListRules = (request: Readonly<ListRulesRequest> = {}) =>
+  protected pageOfListRules = (request: Readonly<ListRulesRequest>) =>
     this.client.fetch<ListRulesResponse>(
       {
         method: 'GET',
@@ -859,7 +859,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListRulesRequest}
    * @returns A Promise of ListRulesResponse
    */
-  listRules = (request: Readonly<ListRulesRequest> = {}) =>
+  listRules = (request: Readonly<ListRulesRequest>) =>
     enrichForPagination('rules', this.pageOfListRules, request)
 
   protected pageOfListPermissionSets = (

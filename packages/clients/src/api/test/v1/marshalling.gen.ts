@@ -81,7 +81,7 @@ export const marshalCreateHumanRequest = (
   is_happy: request.isHappy,
   name: request.name,
   shoe_size: request.shoeSize,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'organization_id', value: request.organizationId },
     { param: 'project_id', value: request.projectId },
   ]),

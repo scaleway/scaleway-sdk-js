@@ -212,6 +212,14 @@ export const marshalCreateDomainRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
+const marshalCreateEmailRequestAddress = (
+  request: CreateEmailRequestAddress,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  email: request.email,
+  name: request.name,
+})
+
 const marshalCreateEmailRequestAttachment = (
   request: CreateEmailRequestAttachment,
   defaults: DefaultValues,
@@ -221,26 +229,32 @@ const marshalCreateEmailRequestAttachment = (
   type: request.type,
 })
 
-const marshalCreateEmailRequestAddress = (
-  request: CreateEmailRequestAddress,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  email: request.email,
-  name: request.name,
-})
-
 export const marshalCreateEmailRequest = (
   request: CreateEmailRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  attachments: request.attachments,
-  bcc: request.bcc,
-  cc: request.cc,
-  from: request.from,
+  attachments:
+    request.attachments !== undefined
+      ? request.attachments.map(elt =>
+          marshalCreateEmailRequestAttachment(elt, defaults),
+        )
+      : undefined,
+  bcc:
+    request.bcc !== undefined
+      ? request.bcc.map(elt => marshalCreateEmailRequestAddress(elt, defaults))
+      : undefined,
+  cc:
+    request.cc !== undefined
+      ? request.cc.map(elt => marshalCreateEmailRequestAddress(elt, defaults))
+      : undefined,
+  from: marshalCreateEmailRequestAddress(request.from, defaults),
   html: request.html,
   project_id: request.projectId ?? defaults.defaultProjectId,
   send_before: request.sendBefore,
   subject: request.subject,
   text: request.text,
-  to: request.to,
+  to:
+    request.to !== undefined
+      ? request.to.map(elt => marshalCreateEmailRequestAddress(elt, defaults))
+      : undefined,
 })

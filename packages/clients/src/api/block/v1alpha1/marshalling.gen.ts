@@ -27,7 +27,7 @@ import type {
   VolumeType,
 } from './types.gen'
 
-const unmarshalReference = (data: unknown) => {
+export const unmarshalReference = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Reference' failed as data isn't a dictionary.`,
@@ -42,6 +42,45 @@ const unmarshalReference = (data: unknown) => {
     status: data.status,
     type: data.type,
   } as Reference
+}
+
+const unmarshalVolumeSpecifications = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VolumeSpecifications' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    class: data.class,
+    perfIops: data.perf_iops ? data.perf_iops : undefined,
+  } as VolumeSpecifications
+}
+
+export const unmarshalVolume = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Volume' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    parentSnapshotId: data.parent_snapshot_id
+      ? data.parent_snapshot_id
+      : undefined,
+    projectId: data.project_id,
+    references: unmarshalArrayOfObject(data.references, unmarshalReference),
+    size: data.size,
+    specs: unmarshalVolumeSpecifications(data.specs),
+    status: data.status,
+    tags: data.tags,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone,
+  } as Volume
 }
 
 const unmarshalSnapshotParentVolume = (data: unknown) => {
@@ -59,16 +98,6 @@ const unmarshalSnapshotParentVolume = (data: unknown) => {
   } as SnapshotParentVolume
 }
 
-const unmarshalVolumeSpecifications = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'VolumeSpecifications' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { class: data.class, perfIops: data.perf_iops } as VolumeSpecifications
-}
-
 const unmarshalSnapshotSummary = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -81,9 +110,7 @@ const unmarshalSnapshotSummary = (data: unknown) => {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     name: data.name,
-    parentVolume: data.parent_volume
-      ? unmarshalSnapshotParentVolume(data.parent_volume)
-      : undefined,
+    parentVolume: unmarshalSnapshotParentVolume(data.parent_volume),
     projectId: data.project_id,
     size: data.size,
     status: data.status,
@@ -93,28 +120,17 @@ const unmarshalSnapshotSummary = (data: unknown) => {
   } as SnapshotSummary
 }
 
-export const unmarshalVolume = (data: unknown) => {
+export const unmarshalListSnapshotsResponse = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'Volume' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'ListSnapshotsResponse' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    id: data.id,
-    name: data.name,
-    parentSnapshotId: data.parent_snapshot_id,
-    projectId: data.project_id,
-    references: unmarshalArrayOfObject(data.references, unmarshalReference),
-    size: data.size,
-    specs: data.specs ? unmarshalVolumeSpecifications(data.specs) : undefined,
-    status: data.status,
-    tags: data.tags,
-    type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
-    zone: data.zone,
-  } as Volume
+    snapshots: unmarshalArrayOfObject(data.snapshots, unmarshalSnapshotSummary),
+    totalCount: data.total_count,
+  } as ListSnapshotsResponse
 }
 
 const unmarshalVolumeType = (data: unknown) => {
@@ -129,22 +145,9 @@ const unmarshalVolumeType = (data: unknown) => {
     snapshotPricing: data.snapshot_pricing
       ? unmarshalMoney(data.snapshot_pricing)
       : undefined,
-    specs: data.specs ? unmarshalVolumeSpecifications(data.specs) : undefined,
+    specs: unmarshalVolumeSpecifications(data.specs),
     type: data.type,
   } as VolumeType
-}
-
-export const unmarshalListSnapshotsResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListSnapshotsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    snapshots: unmarshalArrayOfObject(data.snapshots, unmarshalSnapshotSummary),
-    totalCount: data.total_count,
-  } as ListSnapshotsResponse
 }
 
 export const unmarshalListVolumeTypesResponse = (data: unknown) => {
@@ -185,9 +188,7 @@ export const unmarshalSnapshot = (data: unknown) => {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     name: data.name,
-    parentVolume: data.parent_volume
-      ? unmarshalSnapshotParentVolume(data.parent_volume)
-      : undefined,
+    parentVolume: unmarshalSnapshotParentVolume(data.parent_volume),
     projectId: data.project_id,
     references: unmarshalArrayOfObject(data.references, unmarshalReference),
     size: data.size,
@@ -197,6 +198,16 @@ export const unmarshalSnapshot = (data: unknown) => {
     zone: data.zone,
   } as Snapshot
 }
+
+export const marshalCreateSnapshotRequest = (
+  request: CreateSnapshotRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags,
+  volume_id: request.volumeId,
+})
 
 const marshalCreateVolumeRequestFromEmpty = (
   request: CreateVolumeRequestFromEmpty,
@@ -213,16 +224,6 @@ const marshalCreateVolumeRequestFromSnapshot = (
   snapshot_id: request.snapshotId,
 })
 
-export const marshalCreateSnapshotRequest = (
-  request: CreateSnapshotRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  name: request.name,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-  tags: request.tags,
-  volume_id: request.volumeId,
-})
-
 export const marshalCreateVolumeRequest = (
   request: CreateVolumeRequest,
   defaults: DefaultValues,
@@ -233,26 +234,23 @@ export const marshalCreateVolumeRequest = (
   ...resolveOneOf<unknown>([
     {
       param: 'from_empty',
-      value: request.fromEmpty
-        ? marshalCreateVolumeRequestFromEmpty(request.fromEmpty, defaults)
-        : undefined,
+      value:
+        request.fromEmpty !== undefined
+          ? marshalCreateVolumeRequestFromEmpty(request.fromEmpty, defaults)
+          : undefined,
     },
     {
       param: 'from_snapshot',
-      value: request.fromSnapshot
-        ? marshalCreateVolumeRequestFromSnapshot(request.fromSnapshot, defaults)
-        : undefined,
+      value:
+        request.fromSnapshot !== undefined
+          ? marshalCreateVolumeRequestFromSnapshot(
+              request.fromSnapshot,
+              defaults,
+            )
+          : undefined,
     },
   ]),
-  ...resolveOneOf(
-    [
-      {
-        param: 'perf_iops',
-        value: request.perfIops,
-      },
-    ],
-    true,
-  ),
+  ...resolveOneOf<unknown>([{ param: 'perf_iops', value: request.perfIops }]),
 })
 
 export const marshalUpdateSnapshotRequest = (

@@ -122,18 +122,6 @@ export const unmarshalIp = (data: unknown) => {
   } as Ip
 }
 
-const unmarshalSubscriberWebhookConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'SubscriberWebhookConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    uri: data.uri,
-  } as SubscriberWebhookConfig
-}
-
 const unmarshalSubscriberEmailConfig = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -144,6 +132,18 @@ const unmarshalSubscriberEmailConfig = (data: unknown) => {
   return {
     email: data.email,
   } as SubscriberEmailConfig
+}
+
+const unmarshalSubscriberWebhookConfig = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SubscriberWebhookConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    uri: data.uri,
+  } as SubscriberWebhookConfig
 }
 
 export const unmarshalSubscriber = (data: unknown) => {
@@ -165,6 +165,21 @@ export const unmarshalSubscriber = (data: unknown) => {
   } as Subscriber
 }
 
+const unmarshalHealthCheckHttpConfig = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HealthCheckHttpConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    code: data.code ? data.code : undefined,
+    hostHeader: data.host_header,
+    method: data.method,
+    uri: data.uri,
+  } as HealthCheckHttpConfig
+}
+
 const unmarshalHealthCheckHttpsConfig = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -181,31 +196,6 @@ const unmarshalHealthCheckHttpsConfig = (data: unknown) => {
   } as HealthCheckHttpsConfig
 }
 
-const unmarshalHealthCheckHttpConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'HealthCheckHttpConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    code: data.code ? data.code : undefined,
-    hostHeader: data.host_header,
-    method: data.method,
-    uri: data.uri,
-  } as HealthCheckHttpConfig
-}
-
-const unmarshalHealthCheckRedisConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'HealthCheckRedisConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {} as HealthCheckRedisConfig
-}
-
 const unmarshalHealthCheckLdapConfig = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -214,6 +204,18 @@ const unmarshalHealthCheckLdapConfig = (data: unknown) => {
   }
 
   return {} as HealthCheckLdapConfig
+}
+
+const unmarshalHealthCheckMysqlConfig = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HealthCheckMysqlConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    user: data.user,
+  } as HealthCheckMysqlConfig
 }
 
 const unmarshalHealthCheckPgsqlConfig = (data: unknown) => {
@@ -228,16 +230,14 @@ const unmarshalHealthCheckPgsqlConfig = (data: unknown) => {
   } as HealthCheckPgsqlConfig
 }
 
-const unmarshalHealthCheckMysqlConfig = (data: unknown) => {
+const unmarshalHealthCheckRedisConfig = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'HealthCheckMysqlConfig' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'HealthCheckRedisConfig' failed as data isn't a dictionary.`,
     )
   }
 
-  return {
-    user: data.user,
-  } as HealthCheckMysqlConfig
+  return {} as HealthCheckRedisConfig
 }
 
 const unmarshalHealthCheckTcpConfig = (data: unknown) => {
@@ -492,16 +492,6 @@ export const unmarshalAcl = (data: unknown) => {
   } as Acl
 }
 
-const unmarshalPrivateNetworkIpamConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PrivateNetworkIpamConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {} as PrivateNetworkIpamConfig
-}
-
 const unmarshalPrivateNetworkDHCPConfig = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -512,6 +502,16 @@ const unmarshalPrivateNetworkDHCPConfig = (data: unknown) => {
   return {
     ipId: data.ip_id ? data.ip_id : undefined,
   } as PrivateNetworkDHCPConfig
+}
+
+const unmarshalPrivateNetworkIpamConfig = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PrivateNetworkIpamConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as PrivateNetworkIpamConfig
 }
 
 const unmarshalPrivateNetworkStaticConfig = (data: unknown) => {
@@ -802,17 +802,17 @@ export const marshalAddBackendServersRequest = (
   server_ip: request.serverIp,
 })
 
-const marshalPrivateNetworkIpamConfig = (
-  request: PrivateNetworkIpamConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({})
-
 const marshalPrivateNetworkDHCPConfig = (
   request: PrivateNetworkDHCPConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ip_id: request.ipId,
 })
+
+const marshalPrivateNetworkIpamConfig = (
+  request: PrivateNetworkIpamConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({})
 
 const marshalPrivateNetworkStaticConfig = (
   request: PrivateNetworkStaticConfig,
@@ -825,22 +825,29 @@ export const marshalAttachPrivateNetworkRequest = (
   request: AttachPrivateNetworkRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([
-    { param: 'dhcp_config', value: request.dhcpConfig },
-    { param: 'ipam_config', value: request.ipamConfig },
-    { param: 'static_config', value: request.staticConfig },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'dhcp_config',
+      value:
+        request.dhcpConfig !== undefined
+          ? marshalPrivateNetworkDHCPConfig(request.dhcpConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'ipam_config',
+      value:
+        request.ipamConfig !== undefined
+          ? marshalPrivateNetworkIpamConfig(request.ipamConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'static_config',
+      value:
+        request.staticConfig !== undefined
+          ? marshalPrivateNetworkStaticConfig(request.staticConfig, defaults)
+          : undefined,
+    },
   ]),
-})
-
-const marshalAclMatch = (
-  request: AclMatch,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  http_filter: request.httpFilter,
-  http_filter_option: request.httpFilterOption,
-  http_filter_value: request.httpFilterValue,
-  invert: request.invert,
-  ip_subnet: request.ipSubnet,
 })
 
 const marshalAclActionRedirect = (
@@ -856,19 +863,40 @@ const marshalAclAction = (
   request: AclAction,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  redirect: request.redirect,
+  redirect: marshalAclActionRedirect(request.redirect, defaults),
   type: request.type,
+})
+
+const marshalAclMatch = (
+  request: AclMatch,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  http_filter: request.httpFilter,
+  http_filter_option: request.httpFilterOption,
+  http_filter_value: request.httpFilterValue,
+  invert: request.invert,
+  ip_subnet: request.ipSubnet,
 })
 
 export const marshalCreateAclRequest = (
   request: CreateAclRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  action: request.action,
+  action: marshalAclAction(request.action, defaults),
   description: request.description,
   index: request.index,
-  match: request.match,
+  match: marshalAclMatch(request.match, defaults),
   name: request.name || randomName('acl'),
+})
+
+const marshalHealthCheckHttpConfig = (
+  request: HealthCheckHttpConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  code: request.code,
+  host_header: request.hostHeader,
+  method: request.method,
+  uri: request.uri,
 })
 
 const marshalHealthCheckHttpsConfig = (
@@ -882,25 +910,17 @@ const marshalHealthCheckHttpsConfig = (
   uri: request.uri,
 })
 
-const marshalHealthCheckHttpConfig = (
-  request: HealthCheckHttpConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  code: request.code,
-  host_header: request.hostHeader,
-  method: request.method,
-  uri: request.uri,
-})
-
-const marshalHealthCheckRedisConfig = (
-  request: HealthCheckRedisConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({})
-
 const marshalHealthCheckLdapConfig = (
   request: HealthCheckLdapConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({})
+
+const marshalHealthCheckMysqlConfig = (
+  request: HealthCheckMysqlConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  user: request.user,
+})
 
 const marshalHealthCheckPgsqlConfig = (
   request: HealthCheckPgsqlConfig,
@@ -909,12 +929,10 @@ const marshalHealthCheckPgsqlConfig = (
   user: request.user,
 })
 
-const marshalHealthCheckMysqlConfig = (
-  request: HealthCheckMysqlConfig,
+const marshalHealthCheckRedisConfig = (
+  request: HealthCheckRedisConfig,
   defaults: DefaultValues,
-): Record<string, unknown> => ({
-  user: request.user,
-})
+): Record<string, unknown> => ({})
 
 const marshalHealthCheckTcpConfig = (
   request: HealthCheckTcpConfig,
@@ -931,14 +949,56 @@ const marshalHealthCheck = (
   check_timeout: request.checkTimeout,
   port: request.port,
   transient_check_delay: request.transientCheckDelay,
-  ...resolveOneOf([
-    { param: 'http_config', value: request.httpConfig },
-    { param: 'https_config', value: request.httpsConfig },
-    { param: 'ldap_config', value: request.ldapConfig },
-    { param: 'mysql_config', value: request.mysqlConfig },
-    { param: 'pgsql_config', value: request.pgsqlConfig },
-    { param: 'redis_config', value: request.redisConfig },
-    { param: 'tcp_config', value: request.tcpConfig },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'http_config',
+      value:
+        request.httpConfig !== undefined
+          ? marshalHealthCheckHttpConfig(request.httpConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'https_config',
+      value:
+        request.httpsConfig !== undefined
+          ? marshalHealthCheckHttpsConfig(request.httpsConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'ldap_config',
+      value:
+        request.ldapConfig !== undefined
+          ? marshalHealthCheckLdapConfig(request.ldapConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'mysql_config',
+      value:
+        request.mysqlConfig !== undefined
+          ? marshalHealthCheckMysqlConfig(request.mysqlConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'pgsql_config',
+      value:
+        request.pgsqlConfig !== undefined
+          ? marshalHealthCheckPgsqlConfig(request.pgsqlConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'redis_config',
+      value:
+        request.redisConfig !== undefined
+          ? marshalHealthCheckRedisConfig(request.redisConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'tcp_config',
+      value:
+        request.tcpConfig !== undefined
+          ? marshalHealthCheckTcpConfig(request.tcpConfig, defaults)
+          : undefined,
+    },
   ]),
 })
 
@@ -950,7 +1010,7 @@ export const marshalCreateBackendRequest = (
   forward_port: request.forwardPort,
   forward_port_algorithm: request.forwardPortAlgorithm,
   forward_protocol: request.forwardProtocol,
-  health_check: request.healthCheck,
+  health_check: marshalHealthCheck(request.healthCheck, defaults),
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
   max_connections: request.maxConnections,
   max_retries: request.maxRetries,
@@ -989,9 +1049,27 @@ export const marshalCreateCertificateRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name || randomName('certificate'),
-  ...resolveOneOf([
-    { param: 'custom_certificate', value: request.customCertificate },
-    { param: 'letsencrypt', value: request.letsencrypt },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'custom_certificate',
+      value:
+        request.customCertificate !== undefined
+          ? marshalCreateCertificateRequestCustomCertificate(
+              request.customCertificate,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'letsencrypt',
+      value:
+        request.letsencrypt !== undefined
+          ? marshalCreateCertificateRequestLetsencryptConfig(
+              request.letsencrypt,
+              defaults,
+            )
+          : undefined,
+    },
   ]),
 })
 
@@ -1013,7 +1091,7 @@ export const marshalCreateIpRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   reverse: request.reverse,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'organization_id', value: request.organizationId },
     { param: 'project_id', value: request.projectId },
   ]),
@@ -1030,7 +1108,7 @@ export const marshalCreateLbRequest = (
   ssl_compatibility_level: request.sslCompatibilityLevel,
   tags: request.tags,
   type: request.type,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'organization_id', value: request.organizationId },
     { param: 'project_id', value: request.projectId },
   ]),
@@ -1040,7 +1118,7 @@ const marshalRouteMatch = (
   request: RouteMatch,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'host_header', value: request.hostHeader },
     { param: 'sni', value: request.sni },
   ]),
@@ -1052,14 +1130,10 @@ export const marshalCreateRouteRequest = (
 ): Record<string, unknown> => ({
   backend_id: request.backendId,
   frontend_id: request.frontendId,
-  match: request.match,
-})
-
-const marshalSubscriberWebhookConfig = (
-  request: SubscriberWebhookConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  uri: request.uri,
+  match:
+    request.match !== undefined
+      ? marshalRouteMatch(request.match, defaults)
+      : undefined,
 })
 
 const marshalSubscriberEmailConfig = (
@@ -1069,18 +1143,37 @@ const marshalSubscriberEmailConfig = (
   email: request.email,
 })
 
+const marshalSubscriberWebhookConfig = (
+  request: SubscriberWebhookConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  uri: request.uri,
+})
+
 export const marshalCreateSubscriberRequest = (
   request: CreateSubscriberRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'organization_id', value: request.organizationId },
     { param: 'project_id', value: request.projectId },
   ]),
-  ...resolveOneOf([
-    { param: 'email_config', value: request.emailConfig },
-    { param: 'webhook_config', value: request.webhookConfig },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'email_config',
+      value:
+        request.emailConfig !== undefined
+          ? marshalSubscriberEmailConfig(request.emailConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'webhook_config',
+      value:
+        request.webhookConfig !== undefined
+          ? marshalSubscriberWebhookConfig(request.webhookConfig, defaults)
+          : undefined,
+    },
   ]),
 })
 
@@ -1116,10 +1209,10 @@ export const marshalUpdateAclRequest = (
   request: UpdateAclRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  action: request.action,
+  action: marshalAclAction(request.action, defaults),
   description: request.description,
   index: request.index,
-  match: request.match,
+  match: marshalAclMatch(request.match, defaults),
   name: request.name,
 })
 
@@ -1178,14 +1271,56 @@ export const marshalUpdateHealthCheckRequest = (
   check_timeout: request.checkTimeout,
   port: request.port,
   transient_check_delay: request.transientCheckDelay,
-  ...resolveOneOf([
-    { param: 'http_config', value: request.httpConfig },
-    { param: 'https_config', value: request.httpsConfig },
-    { param: 'ldap_config', value: request.ldapConfig },
-    { param: 'mysql_config', value: request.mysqlConfig },
-    { param: 'pgsql_config', value: request.pgsqlConfig },
-    { param: 'redis_config', value: request.redisConfig },
-    { param: 'tcp_config', value: request.tcpConfig },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'http_config',
+      value:
+        request.httpConfig !== undefined
+          ? marshalHealthCheckHttpConfig(request.httpConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'https_config',
+      value:
+        request.httpsConfig !== undefined
+          ? marshalHealthCheckHttpsConfig(request.httpsConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'ldap_config',
+      value:
+        request.ldapConfig !== undefined
+          ? marshalHealthCheckLdapConfig(request.ldapConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'mysql_config',
+      value:
+        request.mysqlConfig !== undefined
+          ? marshalHealthCheckMysqlConfig(request.mysqlConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'pgsql_config',
+      value:
+        request.pgsqlConfig !== undefined
+          ? marshalHealthCheckPgsqlConfig(request.pgsqlConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'redis_config',
+      value:
+        request.redisConfig !== undefined
+          ? marshalHealthCheckRedisConfig(request.redisConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'tcp_config',
+      value:
+        request.tcpConfig !== undefined
+          ? marshalHealthCheckTcpConfig(request.tcpConfig, defaults)
+          : undefined,
+    },
   ]),
 })
 
@@ -1211,7 +1346,10 @@ export const marshalUpdateRouteRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   backend_id: request.backendId,
-  match: request.match,
+  match:
+    request.match !== undefined
+      ? marshalRouteMatch(request.match, defaults)
+      : undefined,
 })
 
 export const marshalUpdateSubscriberRequest = (
@@ -1219,9 +1357,21 @@ export const marshalUpdateSubscriberRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  ...resolveOneOf([
-    { param: 'email_config', value: request.emailConfig },
-    { param: 'webhook_config', value: request.webhookConfig },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'email_config',
+      value:
+        request.emailConfig !== undefined
+          ? marshalSubscriberEmailConfig(request.emailConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'webhook_config',
+      value:
+        request.webhookConfig !== undefined
+          ? marshalSubscriberWebhookConfig(request.webhookConfig, defaults)
+          : undefined,
+    },
   ]),
 })
 
@@ -1236,10 +1386,28 @@ export const marshalZonedApiAttachPrivateNetworkRequest = (
   request: ZonedApiAttachPrivateNetworkRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([
-    { param: 'dhcp_config', value: request.dhcpConfig },
-    { param: 'ipam_config', value: request.ipamConfig },
-    { param: 'static_config', value: request.staticConfig },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'dhcp_config',
+      value:
+        request.dhcpConfig !== undefined
+          ? marshalPrivateNetworkDHCPConfig(request.dhcpConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'ipam_config',
+      value:
+        request.ipamConfig !== undefined
+          ? marshalPrivateNetworkIpamConfig(request.ipamConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'static_config',
+      value:
+        request.staticConfig !== undefined
+          ? marshalPrivateNetworkStaticConfig(request.staticConfig, defaults)
+          : undefined,
+    },
   ]),
 })
 
@@ -1247,10 +1415,10 @@ export const marshalZonedApiCreateAclRequest = (
   request: ZonedApiCreateAclRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  action: request.action,
+  action: marshalAclAction(request.action, defaults),
   description: request.description,
   index: request.index,
-  match: request.match,
+  match: marshalAclMatch(request.match, defaults),
   name: request.name || randomName('acl'),
 })
 
@@ -1262,7 +1430,7 @@ export const marshalZonedApiCreateBackendRequest = (
   forward_port: request.forwardPort,
   forward_port_algorithm: request.forwardPortAlgorithm,
   forward_protocol: request.forwardProtocol,
-  health_check: request.healthCheck,
+  health_check: marshalHealthCheck(request.healthCheck, defaults),
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
   max_connections: request.maxConnections,
   max_retries: request.maxRetries,
@@ -1286,9 +1454,27 @@ export const marshalZonedApiCreateCertificateRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name || randomName('certificate'),
-  ...resolveOneOf([
-    { param: 'custom_certificate', value: request.customCertificate },
-    { param: 'letsencrypt', value: request.letsencrypt },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'custom_certificate',
+      value:
+        request.customCertificate !== undefined
+          ? marshalCreateCertificateRequestCustomCertificate(
+              request.customCertificate,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'letsencrypt',
+      value:
+        request.letsencrypt !== undefined
+          ? marshalCreateCertificateRequestLetsencryptConfig(
+              request.letsencrypt,
+              defaults,
+            )
+          : undefined,
+    },
   ]),
 })
 
@@ -1310,7 +1496,7 @@ export const marshalZonedApiCreateIpRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   reverse: request.reverse,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'organization_id', value: request.organizationId },
     { param: 'project_id', value: request.projectId },
   ]),
@@ -1327,7 +1513,7 @@ export const marshalZonedApiCreateLbRequest = (
   ssl_compatibility_level: request.sslCompatibilityLevel,
   tags: request.tags,
   type: request.type,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'organization_id', value: request.organizationId },
     { param: 'project_id', value: request.projectId },
   ]),
@@ -1339,7 +1525,10 @@ export const marshalZonedApiCreateRouteRequest = (
 ): Record<string, unknown> => ({
   backend_id: request.backendId,
   frontend_id: request.frontendId,
-  match: request.match,
+  match:
+    request.match !== undefined
+      ? marshalRouteMatch(request.match, defaults)
+      : undefined,
 })
 
 export const marshalZonedApiCreateSubscriberRequest = (
@@ -1347,13 +1536,25 @@ export const marshalZonedApiCreateSubscriberRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  ...resolveOneOf([
+  ...resolveOneOf<unknown>([
     { param: 'organization_id', value: request.organizationId },
     { param: 'project_id', value: request.projectId },
   ]),
-  ...resolveOneOf([
-    { param: 'email_config', value: request.emailConfig },
-    { param: 'webhook_config', value: request.webhookConfig },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'email_config',
+      value:
+        request.emailConfig !== undefined
+          ? marshalSubscriberEmailConfig(request.emailConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'webhook_config',
+      value:
+        request.webhookConfig !== undefined
+          ? marshalSubscriberWebhookConfig(request.webhookConfig, defaults)
+          : undefined,
+    },
   ]),
 })
 
@@ -1375,10 +1576,10 @@ const marshalAclSpec = (
   request: AclSpec,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  action: request.action,
+  action: marshalAclAction(request.action, defaults),
   description: request.description,
   index: request.index,
-  match: request.match,
+  match: marshalAclMatch(request.match, defaults),
   name: request.name,
 })
 
@@ -1386,7 +1587,10 @@ export const marshalZonedApiSetAclsRequest = (
   request: ZonedApiSetAclsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  acls: request.acls,
+  acls:
+    request.acls !== undefined
+      ? request.acls.map(elt => marshalAclSpec(elt, defaults))
+      : undefined,
 })
 
 export const marshalZonedApiSetBackendServersRequest = (
@@ -1407,10 +1611,10 @@ export const marshalZonedApiUpdateAclRequest = (
   request: ZonedApiUpdateAclRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  action: request.action,
+  action: marshalAclAction(request.action, defaults),
   description: request.description,
   index: request.index,
-  match: request.match,
+  match: marshalAclMatch(request.match, defaults),
   name: request.name,
 })
 
@@ -1469,14 +1673,56 @@ export const marshalZonedApiUpdateHealthCheckRequest = (
   check_timeout: request.checkTimeout,
   port: request.port,
   transient_check_delay: request.transientCheckDelay,
-  ...resolveOneOf([
-    { param: 'http_config', value: request.httpConfig },
-    { param: 'https_config', value: request.httpsConfig },
-    { param: 'ldap_config', value: request.ldapConfig },
-    { param: 'mysql_config', value: request.mysqlConfig },
-    { param: 'pgsql_config', value: request.pgsqlConfig },
-    { param: 'redis_config', value: request.redisConfig },
-    { param: 'tcp_config', value: request.tcpConfig },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'http_config',
+      value:
+        request.httpConfig !== undefined
+          ? marshalHealthCheckHttpConfig(request.httpConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'https_config',
+      value:
+        request.httpsConfig !== undefined
+          ? marshalHealthCheckHttpsConfig(request.httpsConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'ldap_config',
+      value:
+        request.ldapConfig !== undefined
+          ? marshalHealthCheckLdapConfig(request.ldapConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'mysql_config',
+      value:
+        request.mysqlConfig !== undefined
+          ? marshalHealthCheckMysqlConfig(request.mysqlConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'pgsql_config',
+      value:
+        request.pgsqlConfig !== undefined
+          ? marshalHealthCheckPgsqlConfig(request.pgsqlConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'redis_config',
+      value:
+        request.redisConfig !== undefined
+          ? marshalHealthCheckRedisConfig(request.redisConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'tcp_config',
+      value:
+        request.tcpConfig !== undefined
+          ? marshalHealthCheckTcpConfig(request.tcpConfig, defaults)
+          : undefined,
+    },
   ]),
 })
 
@@ -1502,7 +1748,10 @@ export const marshalZonedApiUpdateRouteRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   backend_id: request.backendId,
-  match: request.match,
+  match:
+    request.match !== undefined
+      ? marshalRouteMatch(request.match, defaults)
+      : undefined,
 })
 
 export const marshalZonedApiUpdateSubscriberRequest = (
@@ -1510,8 +1759,20 @@ export const marshalZonedApiUpdateSubscriberRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  ...resolveOneOf([
-    { param: 'email_config', value: request.emailConfig },
-    { param: 'webhook_config', value: request.webhookConfig },
+  ...resolveOneOf<unknown>([
+    {
+      param: 'email_config',
+      value:
+        request.emailConfig !== undefined
+          ? marshalSubscriberEmailConfig(request.emailConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'webhook_config',
+      value:
+        request.webhookConfig !== undefined
+          ? marshalSubscriberWebhookConfig(request.webhookConfig, defaults)
+          : undefined,
+    },
   ]),
 })
