@@ -28,9 +28,11 @@ import {
   unmarshalCockpitMetrics,
   unmarshalContactPoint,
   unmarshalDatasource,
+  unmarshalGrafanaProductDashboard,
   unmarshalGrafanaUser,
   unmarshalListContactPointsResponse,
   unmarshalListDatasourcesResponse,
+  unmarshalListGrafanaProductDashboardsResponse,
   unmarshalListGrafanaUsersResponse,
   unmarshalListPlansResponse,
   unmarshalListTokensResponse,
@@ -55,12 +57,16 @@ import type {
   EnableManagedAlertsRequest,
   GetCockpitMetricsRequest,
   GetCockpitRequest,
+  GetGrafanaProductDashboardRequest,
   GetTokenRequest,
+  GrafanaProductDashboard,
   GrafanaUser,
   ListContactPointsRequest,
   ListContactPointsResponse,
   ListDatasourcesRequest,
   ListDatasourcesResponse,
+  ListGrafanaProductDashboardsRequest,
+  ListGrafanaProductDashboardsResponse,
   ListGrafanaUsersRequest,
   ListGrafanaUsersResponse,
   ListPlansRequest,
@@ -594,5 +600,68 @@ export class API extends ParentAPI {
         path: `/cockpit/v1beta1/select-plan`,
       },
       unmarshalSelectPlanResponse,
+    )
+
+  protected pageOfListGrafanaProductDashboards = (
+    request: Readonly<ListGrafanaProductDashboardsRequest> = {},
+  ) =>
+    this.client.fetch<ListGrafanaProductDashboardsResponse>(
+      {
+        method: 'GET',
+        path: `/cockpit/v1beta1/grafana-product-dashboards`,
+        urlParams: urlParams(
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
+          ['tags', request.tags],
+        ),
+      },
+      unmarshalListGrafanaProductDashboardsResponse,
+    )
+
+  /**
+   * List product dashboards. Get a list of available product dashboards.
+   *
+   * @param request - The request {@link ListGrafanaProductDashboardsRequest}
+   * @returns A Promise of ListGrafanaProductDashboardsResponse
+   */
+  listGrafanaProductDashboards = (
+    request: Readonly<ListGrafanaProductDashboardsRequest> = {},
+  ) =>
+    enrichForPagination(
+      'dashboards',
+      this.pageOfListGrafanaProductDashboards,
+      request,
+    )
+
+  /**
+   * Get a product dashboard. Get a product dashboard specified by the dashboard
+   * ID.
+   *
+   * @param request - The request {@link GetGrafanaProductDashboardRequest}
+   * @returns A Promise of GrafanaProductDashboard
+   */
+  getGrafanaProductDashboard = (
+    request: Readonly<GetGrafanaProductDashboardRequest>,
+  ) =>
+    this.client.fetch<GrafanaProductDashboard>(
+      {
+        method: 'GET',
+        path: `/cockpit/v1beta1/grafana-product-dashboards/${validatePathParam(
+          'dashboardName',
+          request.dashboardName,
+        )}`,
+        urlParams: urlParams([
+          'project_id',
+          request.projectId ?? this.client.settings.defaultProjectId,
+        ]),
+      },
+      unmarshalGrafanaProductDashboard,
     )
 }
