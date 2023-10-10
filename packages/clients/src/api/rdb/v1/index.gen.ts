@@ -126,6 +126,7 @@ export type {
   SetPrivilegeRequest,
   Snapshot,
   SnapshotStatus,
+  StorageClass,
   UpdateDatabaseBackupRequest,
   UpdateInstanceRequest,
   UpdateSnapshotRequest,
