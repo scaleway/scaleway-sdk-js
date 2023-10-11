@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.3](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.0.0-alpha.2...@scaleway/sdk@2.0.0-alpha.3) (2023-10-11)
+
+### Features
+
+- add line jumps ([066f846](https://github.com/scaleway/scaleway-sdk-js/commit/066f846fb8af965d743e9717d867ee7bce18e0b5))
+- update apis ([0108d89](https://github.com/scaleway/scaleway-sdk-js/commit/0108d89b86a6782e275ee984fe87981935282f49))
+
 ## [2.0.0-alpha.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.0.0-alpha.1...@scaleway/sdk@2.0.0-alpha.2) (2023-10-04)
 
 ### Features
