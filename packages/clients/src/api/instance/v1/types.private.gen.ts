@@ -195,14 +195,15 @@ export type UpdateServerRequest = {
    * is set to True you cannot set it back to False).
    */
   routedIpEnabled?: boolean
-  publicIps?: ServerIp[]
+  /** A list of reserved IP IDs to attach to the Instance. */
+  publicIps?: string[]
   enableIpv6?: boolean
   protected?: boolean
   securityGroup?: SecurityGroupTemplate
   /** Placement group ID if Instance must be part of a placement group. */
   placementGroup?: string | null
   /** Instance private NICs. */
-  privateNics?: PrivateNIC[]
+  privateNics?: string[]
   /**
    * Set the commercial_type for this Instance. Warning: This field has some
    * restrictions:
