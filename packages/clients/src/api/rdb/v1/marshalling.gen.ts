@@ -273,6 +273,7 @@ const unmarshalNodeTypeVolumeType = (data: unknown) => {
 
   return {
     chunkSize: data.chunk_size,
+    class: data.class,
     description: data.description,
     maxSize: data.max_size,
     minSize: data.min_size,
@@ -318,7 +319,7 @@ const unmarshalVolume = (data: unknown) => {
     )
   }
 
-  return { size: data.size, type: data.type } as Volume
+  return { class: data.class, size: data.size, type: data.type } as Volume
 }
 
 const unmarshalACLRule = (data: unknown) => {

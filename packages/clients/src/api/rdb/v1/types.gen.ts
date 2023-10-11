@@ -120,7 +120,9 @@ export type SnapshotStatus =
   | 'error'
   | 'locked'
 
-export type VolumeType = 'lssd' | 'bssd' | 'sbs'
+export type StorageClass = 'unknown_storage_class' | 'lssd' | 'bssd' | 'sbs'
+
+export type VolumeType = 'lssd' | 'bssd' | 'sbs_5k' | 'sbs_15k'
 
 export interface ACLRule {
   ip: string
@@ -622,6 +624,8 @@ export interface NodeTypeVolumeType {
   maxSize: number
   /** Minimum increment level for a Block Storage volume size. */
   chunkSize: number
+  /** The storage class of the volume. */
+  class: StorageClass
 }
 
 /** Prepare instance logs response. */
@@ -767,6 +771,7 @@ export interface User {
 export interface Volume {
   type: VolumeType
   size: number
+  class: StorageClass
 }
 
 export type ListDatabaseEnginesRequest = {
