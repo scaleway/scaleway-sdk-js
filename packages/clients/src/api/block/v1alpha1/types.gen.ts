@@ -389,6 +389,16 @@ export type CreateSnapshotRequest = {
   tags?: string[]
 }
 
+export type ImportSnapshotFromS3Request = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  bucket: string
+  key: string
+  name: string
+  projectId?: string
+  tags?: string[]
+}
+
 export type DeleteSnapshotRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone

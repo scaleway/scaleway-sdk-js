@@ -11,6 +11,7 @@ export type {
   DeleteVolumeRequest,
   GetSnapshotRequest,
   GetVolumeRequest,
+  ImportSnapshotFromS3Request,
   ListSnapshotsRequest,
   ListSnapshotsRequestOrderBy,
   ListSnapshotsResponse,

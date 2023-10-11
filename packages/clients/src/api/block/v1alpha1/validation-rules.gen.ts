@@ -13,6 +13,12 @@ export const CreateVolumeRequest = {
   },
 }
 
+export const ImportSnapshotFromS3Request = {
+  name: {
+    minLength: 1,
+  },
+}
+
 export const ListSnapshotsRequest = {
   page: {
     greaterThan: 0,

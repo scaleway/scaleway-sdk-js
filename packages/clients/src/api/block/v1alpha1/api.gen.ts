@@ -15,6 +15,7 @@ import {
 import {
   marshalCreateSnapshotRequest,
   marshalCreateVolumeRequest,
+  marshalImportSnapshotFromS3Request,
   marshalUpdateSnapshotRequest,
   marshalUpdateVolumeRequest,
   unmarshalListSnapshotsResponse,
@@ -30,6 +31,7 @@ import type {
   DeleteVolumeRequest,
   GetSnapshotRequest,
   GetVolumeRequest,
+  ImportSnapshotFromS3Request,
   ListSnapshotsRequest,
   ListSnapshotsResponse,
   ListVolumeTypesRequest,
@@ -323,6 +325,22 @@ export class API extends ParentAPI {
           'zone',
           request.zone ?? this.client.settings.defaultZone,
         )}/snapshots`,
+      },
+      unmarshalSnapshot,
+    )
+
+  importSnapshotFromS3 = (request: Readonly<ImportSnapshotFromS3Request>) =>
+    this.client.fetch<Snapshot>(
+      {
+        body: JSON.stringify(
+          marshalImportSnapshotFromS3Request(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/block/v1alpha1/zones/${validatePathParam(
+          'zone',
+          request.zone ?? this.client.settings.defaultZone,
+        )}/snapshots/import-from-s3`,
       },
       unmarshalSnapshot,
     )
