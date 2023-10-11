@@ -108,6 +108,7 @@ export type VolumeVolumeType =
   | 'unified'
   | 'scratch'
   | 'sbs_volume'
+  | 'sbs_snapshot'
 
 /** Bootscript. */
 export interface Bootscript {
