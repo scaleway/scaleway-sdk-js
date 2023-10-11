@@ -320,6 +320,7 @@ const unmarshalServerIp = (data: unknown) => {
     id: data.id,
     netmask: data.netmask,
     provisioningMode: data.provisioning_mode,
+    tags: data.tags,
   } as ServerIp
 }
 
@@ -1554,6 +1555,7 @@ const marshalServerIp = (
   id: request.id,
   netmask: request.netmask,
   provisioning_mode: request.provisioningMode,
+  tags: request.tags,
 })
 
 const marshalServerIpv6 = (
@@ -2157,13 +2159,9 @@ export const marshalUpdateServerRequest = (
   enable_ipv6: request.enableIpv6,
   name: request.name,
   placement_group: request.placementGroup,
-  private_nics: request.privateNics
-    ? request.privateNics.map(elt => marshalPrivateNIC(elt, defaults))
-    : undefined,
+  private_nics: request.privateNics,
   protected: request.protected,
-  public_ips: request.publicIps
-    ? request.publicIps.map(elt => marshalServerIp(elt, defaults))
-    : undefined,
+  public_ips: request.publicIps,
   routed_ip_enabled: request.routedIpEnabled,
   security_group: request.securityGroup
     ? marshalSecurityGroupTemplate(request.securityGroup, defaults)
