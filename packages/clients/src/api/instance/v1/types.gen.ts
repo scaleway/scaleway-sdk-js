@@ -635,6 +635,8 @@ export interface ServerIp {
   dynamic: boolean
   /** Information about this address provisioning mode. */
   provisioningMode: ServerIpProvisioningMode
+  /** Tags associated with the IP. */
+  tags: string[]
 }
 
 /** Server. ipv6. */
