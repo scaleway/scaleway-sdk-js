@@ -6,6 +6,7 @@ import {
   unmarshalDate,
   unmarshalMoney,
 } from '../../../bridge'
+
 import type {
   GetConsumptionResponse,
   GetConsumptionResponseConsumption,

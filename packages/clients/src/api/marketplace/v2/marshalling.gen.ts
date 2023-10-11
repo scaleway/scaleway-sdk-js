@@ -5,6 +5,7 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
+
 import type {
   Category,
   Image,
