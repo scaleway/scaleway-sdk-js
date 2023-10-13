@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.36.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.35.0...@scaleway/sdk@1.36.0) (2023-10-13)
+
+### Features
+
+- **block:** add snapshot import ([#922](https://github.com/scaleway/scaleway-sdk-js/issues/922)) ([3d74e31](https://github.com/scaleway/scaleway-sdk-js/commit/3d74e31aeaf87f1089413d16297396bcb8962b9e))
+- **cockpit:** list and get Grafana dashboards ([#916](https://github.com/scaleway/scaleway-sdk-js/issues/916)) ([3f695fa](https://github.com/scaleway/scaleway-sdk-js/commit/3f695fac15a4c27f7b5774104b8d08068d3303f5))
+- **instance:** add tags in Server.public_ips ([#919](https://github.com/scaleway/scaleway-sdk-js/issues/919)) ([fa230c6](https://github.com/scaleway/scaleway-sdk-js/commit/fa230c65fd186496067bb9ef26414e97fbca2377))
+- **instance:** modify UpdateServer public_ips and private_nics to match real implem ([#921](https://github.com/scaleway/scaleway-sdk-js/issues/921)) ([0f09608](https://github.com/scaleway/scaleway-sdk-js/commit/0f09608356edcde266a4324fbcc89ab673e399fe))
+- **instance:** sync endpoints about the feature OS image in SBS volume ([#920](https://github.com/scaleway/scaleway-sdk-js/issues/920)) ([d9ba798](https://github.com/scaleway/scaleway-sdk-js/commit/d9ba79876e637f0a7637a85f8aac4490db7a8d38))
+- **mnq:** add v1beta1 ([#917](https://github.com/scaleway/scaleway-sdk-js/issues/917)) ([9d6c414](https://github.com/scaleway/scaleway-sdk-js/commit/9d6c4145f3a5bc5f36bf9868022922d8ac8fd2ba))
+- **rdb:** expose SBS IOPS ([#918](https://github.com/scaleway/scaleway-sdk-js/issues/918)) ([91e1187](https://github.com/scaleway/scaleway-sdk-js/commit/91e1187494b8864d1d3b9e178635e1f7580392e9))
+
 ## [1.35.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.34.0...@scaleway/sdk@1.35.0) (2023-10-09)
 
 ### Features
