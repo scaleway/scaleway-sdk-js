@@ -7,5 +7,12 @@
     "excludeInternal": true,
     "excludePrivate": true,
     "excludeProtected": true,
-    "readme": "none"
+    "readme": "none",
+    "navigationLinks": {
+      "GitHub Project": "https://github.com/scaleway/scaleway-sdk-js",
+      "Developers Reference": "https://www.scaleway.com/en/developers/"
+    },
+    "visibilityFilters": {
+      "protected": false,
+    }
 }
