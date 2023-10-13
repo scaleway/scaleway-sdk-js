@@ -337,7 +337,7 @@ export interface Token {
    * One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set.
    */
   namespaceId?: string
-  /** Public key of the token. */
+  /** @deprecated Public key of the token. */
   publicKey?: string
   /** Status of the token. */
   status: TokenStatus

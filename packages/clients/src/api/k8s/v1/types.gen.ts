@@ -472,7 +472,7 @@ export interface Version {
   region: Region
   /** Supported Container Network Interface (CNI) plugins for this version. */
   availableCnis: CNI[]
-  /** Supported Ingress Controllers for this version. */
+  /** @deprecated Supported Ingress Controllers for this version. */
   availableIngresses?: Ingress[]
   /** Supported container runtimes for this version. */
   availableContainerRuntimes: Runtime[]
@@ -517,9 +517,15 @@ export interface Cluster {
   updatedAt?: Date
   /** Autoscaler config for the cluster. */
   autoscalerConfig: ClusterAutoscalerConfig
-  /** Defines whether the Kubernetes dashboard is enabled for the cluster. */
+  /**
+   * @deprecated Defines whether the Kubernetes dashboard is enabled for the
+   *   cluster.
+   */
   dashboardEnabled?: boolean
-  /** Managed Ingress controller used in the cluster (deprecated feature). */
+  /**
+   * @deprecated Managed Ingress controller used in the cluster (deprecated
+   *   feature).
+   */
   ingress?: Ingress
   /** Auto upgrade configuration of the cluster. */
   autoUpgrade: ClusterAutoUpgrade
@@ -562,13 +568,13 @@ export interface Node {
   region: Region
   /** Name of the node. */
   name: string
-  /** Public IPv4 address of the node. */
+  /** @deprecated Public IPv4 address of the node. */
   publicIpV4?: string
-  /** Public IPv6 address of the node. */
+  /** @deprecated Public IPv6 address of the node. */
   publicIpV6?: string
   /**
-   * Conditions of the node. These conditions contain the Node Problem Detector
-   * conditions, as well as some in house conditions.
+   * @deprecated Conditions of the node. These conditions contain the Node
+   *   Problem Detector conditions, as well as some in house conditions.
    */
   conditions?: Record<string, string>
   /** Status of the node. */
@@ -675,10 +681,10 @@ export interface UpdatePoolRequestUpgradePolicy {
 export type CreateClusterRequest = {
   region?: Region
   /**
-   * Organization ID in which the cluster will be created.
+   * @deprecated Organization ID in which the cluster will be created.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   could be set.
    */
   organizationId?: string
   /**
@@ -703,9 +709,12 @@ export type CreateClusterRequest = {
   version: string
   /** Container Network Interface (CNI) plugin running in the cluster. */
   cni?: CNI
-  /** Defines whether the Kubernetes Dashboard is enabled in the cluster. */
+  /**
+   * @deprecated Defines whether the Kubernetes Dashboard is enabled in the
+   *   cluster.
+   */
   enableDashboard?: boolean
-  /** Ingress Controller running in the cluster (deprecated feature). */
+  /** @deprecated Ingress Controller running in the cluster (deprecated feature). */
   ingress?: Ingress
   /** Pools created along with the cluster. */
   pools?: CreateClusterRequestPoolConfig[]
@@ -1069,9 +1078,9 @@ export type UpdateClusterRequest = {
   tags?: string[]
   /** New autoscaler config for the cluster. */
   autoscalerConfig?: UpdateClusterRequestAutoscalerConfig
-  /** New value for the Kubernetes Dashboard enablement. */
+  /** @deprecated New value for the Kubernetes Dashboard enablement. */
   enableDashboard?: boolean
-  /** New Ingress Controller for the cluster (deprecated feature). */
+  /** @deprecated New Ingress Controller for the cluster (deprecated feature). */
   ingress?: Ingress
   /**
    * New auto upgrade configuration for the cluster. Note that all fields need

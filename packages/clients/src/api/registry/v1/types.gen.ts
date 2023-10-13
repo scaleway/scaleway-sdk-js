@@ -131,10 +131,10 @@ export type CreateNamespaceRequest = {
   /** Description of the namespace. */
   description: string
   /**
-   * Namespace owner (deprecated).
+   * @deprecated Namespace owner (deprecated).
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   could be set.
    */
   organizationId?: string
   /**
@@ -165,8 +165,8 @@ export type DeleteTagRequest = {
   /** UUID of the tag. */
   tagId: string
   /**
-   * If two tags share the same digest the deletion will fail unless this
-   * parameter is set to true (deprecated).
+   * @deprecated If two tags share the same digest the deletion will fail unless
+   *   this parameter is set to true (deprecated).
    */
   force?: boolean
 }

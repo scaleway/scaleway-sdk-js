@@ -425,6 +425,7 @@ export interface Contact {
   companyIdentificationCode: string
   lang: StdLanguageCode
   resale: boolean
+  /** @deprecated */
   questions?: ContactQuestion[]
   extensionFr: ContactExtensionFR
   extensionEu: ContactExtensionEU
@@ -478,6 +479,7 @@ export interface NewContact {
   companyIdentificationCode?: string
   lang: StdLanguageCode
   resale: boolean
+  /** @deprecated */
   questions?: ContactQuestion[]
   extensionFr: ContactExtensionFR
   extensionEu: ContactExtensionEU
@@ -780,8 +782,10 @@ export interface ImportProviderDNSZoneResponse {
 export type ImportRawDNSZoneRequest = {
   /** DNS zone to import. */
   dnsZone: string
+  /** @deprecated */
   content?: string
   projectId?: string
+  /** @deprecated */
   format?: RawFormat
   /**
    * Import a bind file format.
@@ -885,7 +889,7 @@ export type ListDNSZonesRequest = {
   pageSize?: number
   /** Domain on which to filter the returned DNS zones. */
   domain: string
-  /** DNS zone on which to filter the returned DNS zones. */
+  /** @deprecated DNS zone on which to filter the returned DNS zones. */
   dnsZone?: string
   /** DNS zones on which to filter the returned DNS zones. */
   dnsZones?: string[]
@@ -1241,6 +1245,7 @@ export type RegistrarApiUpdateContactRequest = {
   companyIdentificationCode?: string
   lang?: StdLanguageCode
   resale?: boolean
+  /** @deprecated */
   questions?: UpdateContactRequestQuestion[]
   extensionFr?: ContactExtensionFR
   extensionEu?: ContactExtensionEU

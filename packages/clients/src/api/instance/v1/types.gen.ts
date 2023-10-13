@@ -153,7 +153,7 @@ export interface Volume {
   id: string
   /** Volume name. */
   name: string
-  /** Show the volume NBD export URI. */
+  /** @deprecated Show the volume NBD export URI. */
   exportUri?: string
   /** Volume disk size. */
   size: number
@@ -204,6 +204,7 @@ export interface Image {
   arch: Arch
   creationDate?: Date
   modificationDate?: Date
+  /** @deprecated */
   defaultBootscript?: Bootscript
   extraVolumes: Record<string, Volume>
   fromServer: string
@@ -368,10 +369,10 @@ export interface VolumeTemplate {
   /** Type of the volume. */
   volumeType: VolumeVolumeType
   /**
-   * Organization ID of the volume.
+   * @deprecated Organization ID of the volume.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   could be set.
    */
   organization?: string
   /**
@@ -419,7 +420,10 @@ export interface SecurityGroup {
   project: string
   /** Security group tags. */
   tags: string[]
-  /** True if it is your default security group for this Organization ID. */
+  /**
+   * @deprecated True if it is your default security group for this Organization
+   *   ID.
+   */
   organizationDefault?: boolean
   /** True if it is your default security group for this Project ID. */
   projectDefault: boolean
@@ -514,7 +518,7 @@ export interface Server {
   location: ServerLocation
   /** Instance IPv6 address. */
   ipv6: ServerIpv6
-  /** Instance bootscript. */
+  /** @deprecated Instance bootscript. */
   bootscript?: Bootscript
   /** Instance boot type. */
   bootType: BootType
@@ -616,7 +620,7 @@ export interface GetServerTypesAvailabilityResponseAvailability {
 }
 
 export interface ServerType {
-  /** Estimated monthly price, for a 30 days month, in Euro. */
+  /** @deprecated Estimated monthly price, for a 30 days month, in Euro. */
   monthlyPrice?: number
   /** Hourly price in Euro. */
   hourlyPrice: number
@@ -733,15 +737,15 @@ export type CreateImageRequest = {
   rootVolume: string
   /** Architecture of the image. */
   arch?: Arch
-  /** Default bootscript of the image. */
+  /** @deprecated Default bootscript of the image. */
   defaultBootscript?: string
   /** Additional volumes of the image. */
   extraVolumes?: Record<string, VolumeTemplate>
   /**
-   * Organization ID of the image.
+   * @deprecated Organization ID of the image.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   could be set.
    */
   organization?: string
   /**
@@ -764,10 +768,10 @@ export interface CreateImageResponse {
 export type CreateIpRequest = {
   zone?: Zone
   /**
-   * Organization ID in which the IP is reserved.
+   * @deprecated Organization ID in which the IP is reserved.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   could be set.
    */
   organization?: string
   /**
@@ -794,10 +798,10 @@ export type CreatePlacementGroupRequest = {
   /** Name of the placement group. */
   name?: string
   /**
-   * Organization ID of the placement group.
+   * @deprecated Organization ID of the placement group.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   could be set.
    */
   organization?: string
   /**
@@ -842,10 +846,10 @@ export type CreateSecurityGroupRequest = {
   /** Description of the security group. */
   description: string
   /**
-   * Organization ID the security group belongs to.
+   * @deprecated Organization ID the security group belongs to.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   could be set.
    */
   organization?: string
   /**
@@ -858,11 +862,11 @@ export type CreateSecurityGroupRequest = {
   /** Tags of the security group. */
   tags?: string[]
   /**
-   * Defines whether this security group becomes the default security group for
-   * new Instances.
+   * @deprecated Defines whether this security group becomes the default
+   *   security group for new Instances.
    *
-   * One-of ('defaultIdentifier'): at most one of 'organizationDefault',
-   * 'projectDefault' could be set.
+   *   One-of ('defaultIdentifier'): at most one of 'organizationDefault',
+   *   'projectDefault' could be set.
    */
   organizationDefault?: boolean
   /**
@@ -934,13 +938,13 @@ export type CreateServerRequest = {
   publicIps?: string[]
   /** Boot type to use. */
   bootType?: BootType
-  /** Bootscript ID to use when `boot_type` is set to `bootscript`. */
+  /** @deprecated Bootscript ID to use when `boot_type` is set to `bootscript`. */
   bootscript?: string
   /**
-   * Instance Organization ID.
+   * @deprecated Instance Organization ID.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   could be set.
    */
   organization?: string
   /**
@@ -971,10 +975,10 @@ export type CreateSnapshotRequest = {
   /** Tags of the snapshot. */
   tags?: string[]
   /**
-   * Organization ID of the snapshot.
+   * @deprecated Organization ID of the snapshot.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   could be set.
    */
   organization?: string
   /**
@@ -1007,10 +1011,10 @@ export type CreateVolumeRequest = {
   /** Volume name. */
   name?: string
   /**
-   * Volume Organization ID.
+   * @deprecated Volume Organization ID.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   could be set.
    */
   organization?: string
   /**
@@ -1667,6 +1671,7 @@ export type SetImageRequest = {
   arch?: Arch
   creationDate?: Date
   modificationDate?: Date
+  /** @deprecated */
   defaultBootscript?: Bootscript
   extraVolumes?: Record<string, Volume>
   fromServer: string
@@ -1786,6 +1791,7 @@ export type UpdateServerRequest = {
   /** Tags of the Instance. */
   tags?: string[]
   volumes?: Record<string, VolumeServerTemplate>
+  /** @deprecated */
   bootscript?: string
   dynamicIpRequired?: boolean
   /**

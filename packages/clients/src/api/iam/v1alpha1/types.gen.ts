@@ -335,7 +335,7 @@ export interface User {
   lastLoginAt?: Date
   /** Type of user. */
   type: UserType
-  /** Deprecated, use "mfa" instead. */
+  /** @deprecated Deprecated, use "mfa" instead. */
   twoFactorEnabled?: boolean
   /** Status of user invitation. */
   status: UserStatus
@@ -561,15 +561,15 @@ export type ListAPIKeysRequest = {
   /** ID of Organization. */
   organizationId?: string
   /**
-   * ID of application that bears the API key.
+   * @deprecated ID of application that bears the API key.
    *
-   * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
+   *   One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
   applicationId?: string
   /**
-   * ID of user that bears the API key.
+   * @deprecated ID of user that bears the API key.
    *
-   * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
+   *   One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
   userId?: string
   /** Defines whether to filter out editable API keys or not. */

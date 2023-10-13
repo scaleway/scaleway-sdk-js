@@ -61,7 +61,7 @@ export type SetSecurityGroupRequest = {
   organization?: string
   /** Security group Project ID. */
   project?: string
-  /** Please use project_default instead. */
+  /** @deprecated Please use project_default instead. */
   organizationDefault?: boolean
   /** True use this security group for future Instances created in this project. */
   projectDefault: boolean
@@ -141,7 +141,7 @@ export type SetServerRequest = {
   location?: ServerLocation
   /** Instance IPv6 address. */
   ipv6?: ServerIpv6
-  /** Instance bootscript. */
+  /** @deprecated Instance bootscript. */
   bootscript?: Bootscript
   /** Instance boot type. */
   bootType?: BootType

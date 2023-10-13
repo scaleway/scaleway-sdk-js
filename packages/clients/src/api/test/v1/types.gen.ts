@@ -50,8 +50,10 @@ export type CreateHumanRequest = {
   isHappy: boolean
   eyesColor?: EyeColors
   /**
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   * could be set.
+   * @deprecated
+   *
+   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   could be set.
    */
   organizationId?: string
   name: string
@@ -100,7 +102,7 @@ export type RunHumanRequest = {
 }
 
 export type SmokeHumanRequest = {
-  /** UUID of the human you want to make smoking. */
+  /** @deprecated UUID of the human you want to make smoking. */
   humanId: string
 }
 

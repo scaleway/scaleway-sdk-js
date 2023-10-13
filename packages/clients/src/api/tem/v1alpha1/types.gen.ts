@@ -100,7 +100,7 @@ export interface Email {
   projectId: string
   /** Email address of the sender. */
   mailFrom: string
-  /** Email address of the recipient. */
+  /** @deprecated Email address of the recipient. */
   rcptTo?: string
   /** Email address of the recipient. */
   mailRcpt: string
@@ -164,7 +164,7 @@ export interface Domain {
   lastValidAt?: Date
   /** Date and time of the domain's deletion. */
   revokedAt?: Date
-  /** Error message returned if the last check failed. */
+  /** @deprecated Error message returned if the last check failed. */
   lastError?: string
   /** Snippet of the SPF record to register in the DNS zone. */
   spfConfig: string
@@ -306,7 +306,7 @@ export type ListEmailsRequest = {
   until?: Date
   /** (Optional) List emails sent with this sender's email address. */
   mailFrom?: string
-  /** List emails sent to this recipient's email address. */
+  /** @deprecated List emails sent to this recipient's email address. */
   mailTo?: string
   /** (Optional) List emails sent to this recipient's email address. */
   mailRcpt?: string

@@ -199,7 +199,7 @@ export interface Instance {
   createdAt?: Date
   /** Date on which the Instance was last updated. */
   updatedAt?: Date
-  /** The region the Instance is in. */
+  /** @deprecated The region the Instance is in. */
   region?: Region
   /** The zone the Instance is in. */
   zone: Zone
@@ -218,7 +218,7 @@ export interface Ip {
   lbId?: string
   /** Reverse DNS (domain name) of the IP address. */
   reverse: string
-  /** The region the IP address is in. */
+  /** @deprecated The region the IP address is in. */
   region?: Region
   /** The zone the IP address is in. */
   zone: Zone
@@ -366,7 +366,7 @@ export interface Lb {
   privateNetworkCount: number
   /** Number of routes configured on the Load Balancer. */
   routeCount: number
-  /** The region the Load Balancer is in. */
+  /** @deprecated The region the Load Balancer is in. */
   region?: Region
   /** The zone the Load Balancer is in. */
   zone: Zone
@@ -424,7 +424,7 @@ export interface Backend {
   pool: string[]
   /** Load Balancer the backend is attached to. */
   lb: Lb
-  /** Deprecated in favor of proxy_protocol field. */
+  /** @deprecated Deprecated in favor of proxy_protocol field. */
   sendProxyV2?: boolean
   /** Maximum allowed time for a backend server to process a request. */
   timeoutServer?: string
@@ -548,7 +548,7 @@ export interface Frontend {
   lb: Lb
   /** Maximum allowed inactivity time on the client side. */
   timeoutClient?: string
-  /** Certificate, deprecated in favor of certificate_ids array. */
+  /** @deprecated Certificate, deprecated in favor of certificate_ids array. */
   certificate?: Certificate
   /** List of SSL/TLS certificate IDs to bind to the frontend. */
   certificateIds: string[]
@@ -561,13 +561,17 @@ export interface Frontend {
 }
 
 export interface PrivateNetworkDHCPConfig {
+  /** @deprecated */
   ipId?: string
 }
 
 export interface PrivateNetworkIpamConfig {}
 
 export interface PrivateNetworkStaticConfig {
-  /** Array of a local IP address for the Load Balancer on this Private Network. */
+  /**
+   * @deprecated Array of a local IP address for the Load Balancer on this
+   *   Private Network.
+   */
   ipAddress?: string[]
 }
 
@@ -659,25 +663,25 @@ export interface PrivateNetwork {
   /** IPAM IDs of the booked IP addresses. */
   ipamIds: string[]
   /**
-   * Object containing an array of a local IP address for the Load Balancer on
-   * this Private Network.
+   * @deprecated Object containing an array of a local IP address for the Load
+   *   Balancer on this Private Network.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
-   * Object containing DHCP-assigned IP addresses.
+   * @deprecated Object containing DHCP-assigned IP addresses.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
   /**
-   * For internal use only.
+   * @deprecated For internal use only.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   ipamConfig?: PrivateNetworkIpamConfig
   /** Private Network ID. */
@@ -697,7 +701,7 @@ export interface LbType {
   stockStatus: LbTypeStock
   /** Load Balancer commercial offer type description. */
   description: string
-  /** The region the Load Balancer stock is in. */
+  /** @deprecated The region the Load Balancer stock is in. */
   region?: Region
   /** The zone the Load Balancer stock is in. */
   zone: Zone
@@ -757,25 +761,25 @@ export type AttachPrivateNetworkRequest = {
   /** Private Network ID. */
   privateNetworkId: string
   /**
-   * Object containing an array of a local IP address for the Load Balancer on
-   * this Private Network.
+   * @deprecated Object containing an array of a local IP address for the Load
+   *   Balancer on this Private Network.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
-   * Defines whether to let DHCP assign IP addresses.
+   * @deprecated Defines whether to let DHCP assign IP addresses.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
   /**
-   * For internal use only.
+   * @deprecated For internal use only.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   ipamConfig?: PrivateNetworkIpamConfig
 }
@@ -841,7 +845,7 @@ export type CreateBackendRequest = {
    * forward traffic to.
    */
   serverIp?: string[]
-  /** Deprecated in favor of proxy_protocol field. */
+  /** @deprecated Deprecated in favor of proxy_protocol field. */
   sendProxyV2?: boolean
   /** Maximum allowed time for a backend server to process a request. */
   timeoutServer?: string
@@ -919,7 +923,7 @@ export type CreateFrontendRequest = {
   backendId: string
   /** Maximum allowed inactivity time on the client side. */
   timeoutClient?: string
-  /** Certificate ID, deprecated in favor of certificate_ids array. */
+  /** @deprecated Certificate ID, deprecated in favor of certificate_ids array. */
   certificateId?: string
   /** List of SSL/TLS certificate IDs to bind to the frontend. */
   certificateIds?: string[]
@@ -930,10 +934,11 @@ export type CreateFrontendRequest = {
 export type CreateIpRequest = {
   region?: Region
   /**
-   * Organization ID of the Organization where the IP address should be created.
+   * @deprecated Organization ID of the Organization where the IP address should
+   *   be created.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   could be set.
    */
   organizationId?: string
   /**
@@ -950,10 +955,10 @@ export type CreateIpRequest = {
 export type CreateLbRequest = {
   region?: Region
   /**
-   * Scaleway Organization to create the Load Balancer in.
+   * @deprecated Scaleway Organization to create the Load Balancer in.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   could be set.
    */
   organizationId?: string
   /**
@@ -967,7 +972,10 @@ export type CreateLbRequest = {
   name?: string
   /** Description for the Load Balancer. */
   description: string
-  /** ID of an existing flexible IP address to attach to the Load Balancer. */
+  /**
+   * @deprecated ID of an existing flexible IP address to attach to the Load
+   *   Balancer.
+   */
   ipId?: string
   /**
    * Defines whether to automatically assign a flexible public IP to lb. Default
@@ -1027,10 +1035,10 @@ export type CreateSubscriberRequest = {
    */
   webhookConfig?: SubscriberWebhookConfig
   /**
-   * Organization ID to create the subscriber in.
+   * @deprecated Organization ID to create the subscriber in.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   could be set.
    */
   organizationId?: string
   /**
@@ -1508,7 +1516,7 @@ export type UpdateBackendRequest = {
   stickySessions?: StickySessionsType
   /** Cookie name for cookie-based sticky sessions. */
   stickySessionsCookieName: string
-  /** Deprecated in favor of proxy_protocol field. */
+  /** @deprecated Deprecated in favor of proxy_protocol field. */
   sendProxyV2?: boolean
   /** Maximum allowed time for a backend server to process a request. */
   timeoutServer?: string
@@ -1572,7 +1580,7 @@ export type UpdateFrontendRequest = {
   backendId: string
   /** Maximum allowed inactivity time on the client side. */
   timeoutClient?: string
-  /** Certificate ID, deprecated in favor of certificate_ids array. */
+  /** @deprecated Certificate ID, deprecated in favor of certificate_ids array. */
   certificateId?: string
   /** List of SSL/TLS certificate IDs to bind to the frontend. */
   certificateIds?: string[]
@@ -1744,25 +1752,25 @@ export type ZonedApiAttachPrivateNetworkRequest = {
   /** Private Network ID. */
   privateNetworkId: string
   /**
-   * Object containing an array of a local IP address for the Load Balancer on
-   * this Private Network.
+   * @deprecated Object containing an array of a local IP address for the Load
+   *   Balancer on this Private Network.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
-   * Defines whether to let DHCP assign IP addresses.
+   * @deprecated Defines whether to let DHCP assign IP addresses.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
   /**
-   * For internal use only.
+   * @deprecated For internal use only.
    *
-   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   * 'ipamConfig' could be set.
+   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   *   'ipamConfig' could be set.
    */
   ipamConfig?: PrivateNetworkIpamConfig
 }
@@ -1828,7 +1836,7 @@ export type ZonedApiCreateBackendRequest = {
    * forward traffic to.
    */
   serverIp?: string[]
-  /** Deprecated in favor of proxy_protocol field. */
+  /** @deprecated Deprecated in favor of proxy_protocol field. */
   sendProxyV2?: boolean
   /** Maximum allowed time for a backend server to process a request. */
   timeoutServer?: string
@@ -1906,7 +1914,7 @@ export type ZonedApiCreateFrontendRequest = {
   backendId: string
   /** Maximum allowed inactivity time on the client side. */
   timeoutClient?: string
-  /** Certificate ID, deprecated in favor of certificate_ids array. */
+  /** @deprecated Certificate ID, deprecated in favor of certificate_ids array. */
   certificateId?: string
   /** List of SSL/TLS certificate IDs to bind to the frontend. */
   certificateIds?: string[]
@@ -1917,10 +1925,11 @@ export type ZonedApiCreateFrontendRequest = {
 export type ZonedApiCreateIpRequest = {
   zone?: Zone
   /**
-   * Organization ID of the Organization where the IP address should be created.
+   * @deprecated Organization ID of the Organization where the IP address should
+   *   be created.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   could be set.
    */
   organizationId?: string
   /**
@@ -1937,10 +1946,10 @@ export type ZonedApiCreateIpRequest = {
 export type ZonedApiCreateLbRequest = {
   zone?: Zone
   /**
-   * Scaleway Organization to create the Load Balancer in.
+   * @deprecated Scaleway Organization to create the Load Balancer in.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   could be set.
    */
   organizationId?: string
   /**
@@ -1954,7 +1963,10 @@ export type ZonedApiCreateLbRequest = {
   name?: string
   /** Description for the Load Balancer. */
   description: string
-  /** ID of an existing flexible IP address to attach to the Load Balancer. */
+  /**
+   * @deprecated ID of an existing flexible IP address to attach to the Load
+   *   Balancer.
+   */
   ipId?: string
   /**
    * Defines whether to automatically assign a flexible public IP to lb. Default
@@ -2014,10 +2026,10 @@ export type ZonedApiCreateSubscriberRequest = {
    */
   webhookConfig?: SubscriberWebhookConfig
   /**
-   * Organization ID to create the subscriber in.
+   * @deprecated Organization ID to create the subscriber in.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   could be set.
    */
   organizationId?: string
   /**
@@ -2417,7 +2429,7 @@ export type ZonedApiUpdateBackendRequest = {
   stickySessions?: StickySessionsType
   /** Cookie name for cookie-based sticky sessions. */
   stickySessionsCookieName: string
-  /** Deprecated in favor of proxy_protocol field. */
+  /** @deprecated Deprecated in favor of proxy_protocol field. */
   sendProxyV2?: boolean
   /** Maximum allowed time for a backend server to process a request. */
   timeoutServer?: string
@@ -2481,7 +2493,7 @@ export type ZonedApiUpdateFrontendRequest = {
   backendId: string
   /** Maximum allowed inactivity time on the client side. */
   timeoutClient?: string
-  /** Certificate ID, deprecated in favor of certificate_ids array. */
+  /** @deprecated Certificate ID, deprecated in favor of certificate_ids array. */
   certificateId?: string
   /** List of SSL/TLS certificate IDs to bind to the frontend. */
   certificateIds?: string[]

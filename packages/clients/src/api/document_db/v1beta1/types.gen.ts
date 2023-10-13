@@ -345,6 +345,7 @@ export interface ACLRuleRequest {
 
 export interface ACLRule {
   ip: string
+  /** @deprecated */
   port?: number
   protocol: ACLRuleProtocol
   direction: ACLRuleDirection
@@ -458,7 +459,7 @@ export interface Instance {
   engine: string
   /** Available database engine versions for upgrade. */
   upgradableVersion: UpgradableVersion[]
-  /** Endpoint of the Database Instance. */
+  /** @deprecated Endpoint of the Database Instance. */
   endpoint?: Endpoint
   /** List of tags applied to the Database Instance. */
   tags: string[]
@@ -495,9 +496,9 @@ export interface NodeType {
   vcpus: number
   /** Quantity of RAM. */
   memory: number
-  /** [deprecated] Node Type volume constraints. */
+  /** @deprecated {undefined} Deprecated Node Type volume constraints. */
   volumeConstraint?: NodeTypeVolumeConstraintSizes
-  /** The Node Type is compliant with Block Storage. */
+  /** @deprecated The Node Type is compliant with Block Storage. */
   isBssdCompatible?: boolean
   /** The Node Type is currently disabled. */
   disabled: boolean
@@ -633,10 +634,10 @@ export type CreateInstanceFromSnapshotRequest = {
 export type CreateInstanceRequest = {
   region?: Region
   /**
-   * Please use project_id instead.
+   * @deprecated Please use project_id instead.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   could be set.
    */
   organizationId?: string
   /**

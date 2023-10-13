@@ -170,7 +170,7 @@ export type AddSecretOwnerRequest = {
   region?: Region
   /** ID of the secret. */
   secretId: string
-  /** (Deprecated: use `product` field) Name of the product to add. */
+  /** @deprecated (Deprecated: use `product` field) Name of the product to add. */
   productName?: string
   /** See `Product` enum for description of values. */
   product?: Product
@@ -225,10 +225,10 @@ export type CreateSecretVersionRequest = {
    */
   disablePrevious?: boolean
   /**
-   * (Optional.) If specified, a random password will be generated. The `data`
-   * and `data_crc32` fields must be empty. By default, the generator will use
-   * upper and lower case letters, and digits. This behavior can be tuned using
-   * the generation parameters.
+   * @deprecated (Optional.) If specified, a random password will be generated.
+   *   The `data` and `data_crc32` fields must be empty. By default, the
+   *   generator will use upper and lower case letters, and digits. This
+   *   behavior can be tuned using the generation parameters.
    */
   passwordGeneration?: PasswordGenerationParams
   /**

@@ -424,10 +424,10 @@ export type CreateServerRequest = {
   /** Offer ID of the new server. */
   offerId: string
   /**
-   * Organization ID with which the server will be created.
+   * @deprecated Organization ID with which the server will be created.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   * could be set.
+   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   could be set.
    */
   organizationId?: string
   /**
