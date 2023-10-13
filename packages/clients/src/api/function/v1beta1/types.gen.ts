@@ -133,7 +133,8 @@ export type TriggerStatus =
   | 'pending'
 
 export interface CreateTriggerRequestMnqNatsClientConfig {
-  mnqNamespaceId: string
+  /** @deprecated */
+  mnqNamespaceId?: string
   subject: string
   mnqProjectId: string
   mnqRegion: string
@@ -141,7 +142,8 @@ export interface CreateTriggerRequestMnqNatsClientConfig {
 }
 
 export interface CreateTriggerRequestMnqSqsClientConfig {
-  mnqNamespaceId: string
+  /** @deprecated */
+  mnqNamespaceId?: string
   queue: string
   mnqProjectId: string
   mnqRegion: string
@@ -420,15 +422,18 @@ export interface Trigger {
 }
 
 export interface TriggerMnqNatsClientConfig {
-  mnqNamespaceId: string
+  /** @deprecated */
+  mnqNamespaceId?: string
   subject: string
   mnqProjectId: string
   mnqRegion: string
   mnqCredentialId?: string
+  mnqNatsAccountId: string
 }
 
 export interface TriggerMnqSqsClientConfig {
-  mnqNamespaceId: string
+  /** @deprecated */
+  mnqNamespaceId?: string
   queue: string
   mnqProjectId: string
   mnqRegion: string
