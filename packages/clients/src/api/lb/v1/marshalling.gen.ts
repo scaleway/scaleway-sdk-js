@@ -7,7 +7,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   Acl,
@@ -828,6 +827,13 @@ export const marshalAttachPrivateNetworkRequest = (
 ): Record<string, unknown> => ({
   ...resolveOneOf<unknown>([
     {
+      param: 'static_config',
+      value:
+        request.staticConfig !== undefined
+          ? marshalPrivateNetworkStaticConfig(request.staticConfig, defaults)
+          : undefined,
+    },
+    {
       param: 'dhcp_config',
       value:
         request.dhcpConfig !== undefined
@@ -839,13 +845,6 @@ export const marshalAttachPrivateNetworkRequest = (
       value:
         request.ipamConfig !== undefined
           ? marshalPrivateNetworkIpamConfig(request.ipamConfig, defaults)
-          : undefined,
-    },
-    {
-      param: 'static_config',
-      value:
-        request.staticConfig !== undefined
-          ? marshalPrivateNetworkStaticConfig(request.staticConfig, defaults)
           : undefined,
     },
   ]),
@@ -883,10 +882,16 @@ export const marshalCreateAclRequest = (
   request: CreateAclRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  action: marshalAclAction(request.action, defaults),
+  action:
+    request.action !== undefined
+      ? marshalAclAction(request.action, defaults)
+      : undefined,
   description: request.description,
   index: request.index,
-  match: marshalAclMatch(request.match, defaults),
+  match:
+    request.match !== undefined
+      ? marshalAclMatch(request.match, defaults)
+      : undefined,
   name: request.name || randomName('acl'),
 })
 
@@ -952,24 +957,10 @@ const marshalHealthCheck = (
   transient_check_delay: request.transientCheckDelay,
   ...resolveOneOf<unknown>([
     {
-      param: 'http_config',
+      param: 'tcp_config',
       value:
-        request.httpConfig !== undefined
-          ? marshalHealthCheckHttpConfig(request.httpConfig, defaults)
-          : undefined,
-    },
-    {
-      param: 'https_config',
-      value:
-        request.httpsConfig !== undefined
-          ? marshalHealthCheckHttpsConfig(request.httpsConfig, defaults)
-          : undefined,
-    },
-    {
-      param: 'ldap_config',
-      value:
-        request.ldapConfig !== undefined
-          ? marshalHealthCheckLdapConfig(request.ldapConfig, defaults)
+        request.tcpConfig !== undefined
+          ? marshalHealthCheckTcpConfig(request.tcpConfig, defaults)
           : undefined,
     },
     {
@@ -987,6 +978,13 @@ const marshalHealthCheck = (
           : undefined,
     },
     {
+      param: 'ldap_config',
+      value:
+        request.ldapConfig !== undefined
+          ? marshalHealthCheckLdapConfig(request.ldapConfig, defaults)
+          : undefined,
+    },
+    {
       param: 'redis_config',
       value:
         request.redisConfig !== undefined
@@ -994,10 +992,17 @@ const marshalHealthCheck = (
           : undefined,
     },
     {
-      param: 'tcp_config',
+      param: 'http_config',
       value:
-        request.tcpConfig !== undefined
-          ? marshalHealthCheckTcpConfig(request.tcpConfig, defaults)
+        request.httpConfig !== undefined
+          ? marshalHealthCheckHttpConfig(request.httpConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'https_config',
+      value:
+        request.httpsConfig !== undefined
+          ? marshalHealthCheckHttpsConfig(request.httpsConfig, defaults)
           : undefined,
     },
   ]),
@@ -1011,7 +1016,10 @@ export const marshalCreateBackendRequest = (
   forward_port: request.forwardPort,
   forward_port_algorithm: request.forwardPortAlgorithm,
   forward_protocol: request.forwardProtocol,
-  health_check: marshalHealthCheck(request.healthCheck, defaults),
+  health_check:
+    request.healthCheck !== undefined
+      ? marshalHealthCheck(request.healthCheck, defaults)
+      : undefined,
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
   max_connections: request.maxConnections,
   max_retries: request.maxRetries,
@@ -1052,21 +1060,21 @@ export const marshalCreateCertificateRequest = (
   name: request.name || randomName('certificate'),
   ...resolveOneOf<unknown>([
     {
-      param: 'custom_certificate',
-      value:
-        request.customCertificate !== undefined
-          ? marshalCreateCertificateRequestCustomCertificate(
-              request.customCertificate,
-              defaults,
-            )
-          : undefined,
-    },
-    {
       param: 'letsencrypt',
       value:
         request.letsencrypt !== undefined
           ? marshalCreateCertificateRequestLetsencryptConfig(
               request.letsencrypt,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'custom_certificate',
+      value:
+        request.customCertificate !== undefined
+          ? marshalCreateCertificateRequestCustomCertificate(
+              request.customCertificate,
               defaults,
             )
           : undefined,
@@ -1120,8 +1128,8 @@ const marshalRouteMatch = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf<unknown>([
-    { param: 'host_header', value: request.hostHeader },
     { param: 'sni', value: request.sni },
+    { param: 'host_header', value: request.hostHeader },
   ]),
 })
 
@@ -1210,10 +1218,16 @@ export const marshalUpdateAclRequest = (
   request: UpdateAclRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  action: marshalAclAction(request.action, defaults),
+  action:
+    request.action !== undefined
+      ? marshalAclAction(request.action, defaults)
+      : undefined,
   description: request.description,
   index: request.index,
-  match: marshalAclMatch(request.match, defaults),
+  match:
+    request.match !== undefined
+      ? marshalAclMatch(request.match, defaults)
+      : undefined,
   name: request.name,
 })
 
@@ -1274,24 +1288,10 @@ export const marshalUpdateHealthCheckRequest = (
   transient_check_delay: request.transientCheckDelay,
   ...resolveOneOf<unknown>([
     {
-      param: 'http_config',
+      param: 'tcp_config',
       value:
-        request.httpConfig !== undefined
-          ? marshalHealthCheckHttpConfig(request.httpConfig, defaults)
-          : undefined,
-    },
-    {
-      param: 'https_config',
-      value:
-        request.httpsConfig !== undefined
-          ? marshalHealthCheckHttpsConfig(request.httpsConfig, defaults)
-          : undefined,
-    },
-    {
-      param: 'ldap_config',
-      value:
-        request.ldapConfig !== undefined
-          ? marshalHealthCheckLdapConfig(request.ldapConfig, defaults)
+        request.tcpConfig !== undefined
+          ? marshalHealthCheckTcpConfig(request.tcpConfig, defaults)
           : undefined,
     },
     {
@@ -1309,6 +1309,13 @@ export const marshalUpdateHealthCheckRequest = (
           : undefined,
     },
     {
+      param: 'ldap_config',
+      value:
+        request.ldapConfig !== undefined
+          ? marshalHealthCheckLdapConfig(request.ldapConfig, defaults)
+          : undefined,
+    },
+    {
       param: 'redis_config',
       value:
         request.redisConfig !== undefined
@@ -1316,10 +1323,17 @@ export const marshalUpdateHealthCheckRequest = (
           : undefined,
     },
     {
-      param: 'tcp_config',
+      param: 'http_config',
       value:
-        request.tcpConfig !== undefined
-          ? marshalHealthCheckTcpConfig(request.tcpConfig, defaults)
+        request.httpConfig !== undefined
+          ? marshalHealthCheckHttpConfig(request.httpConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'https_config',
+      value:
+        request.httpsConfig !== undefined
+          ? marshalHealthCheckHttpsConfig(request.httpsConfig, defaults)
           : undefined,
     },
   ]),
@@ -1389,6 +1403,13 @@ export const marshalZonedApiAttachPrivateNetworkRequest = (
 ): Record<string, unknown> => ({
   ...resolveOneOf<unknown>([
     {
+      param: 'static_config',
+      value:
+        request.staticConfig !== undefined
+          ? marshalPrivateNetworkStaticConfig(request.staticConfig, defaults)
+          : undefined,
+    },
+    {
       param: 'dhcp_config',
       value:
         request.dhcpConfig !== undefined
@@ -1402,13 +1423,6 @@ export const marshalZonedApiAttachPrivateNetworkRequest = (
           ? marshalPrivateNetworkIpamConfig(request.ipamConfig, defaults)
           : undefined,
     },
-    {
-      param: 'static_config',
-      value:
-        request.staticConfig !== undefined
-          ? marshalPrivateNetworkStaticConfig(request.staticConfig, defaults)
-          : undefined,
-    },
   ]),
 })
 
@@ -1416,10 +1430,16 @@ export const marshalZonedApiCreateAclRequest = (
   request: ZonedApiCreateAclRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  action: marshalAclAction(request.action, defaults),
+  action:
+    request.action !== undefined
+      ? marshalAclAction(request.action, defaults)
+      : undefined,
   description: request.description,
   index: request.index,
-  match: marshalAclMatch(request.match, defaults),
+  match:
+    request.match !== undefined
+      ? marshalAclMatch(request.match, defaults)
+      : undefined,
   name: request.name || randomName('acl'),
 })
 
@@ -1431,7 +1451,10 @@ export const marshalZonedApiCreateBackendRequest = (
   forward_port: request.forwardPort,
   forward_port_algorithm: request.forwardPortAlgorithm,
   forward_protocol: request.forwardProtocol,
-  health_check: marshalHealthCheck(request.healthCheck, defaults),
+  health_check:
+    request.healthCheck !== undefined
+      ? marshalHealthCheck(request.healthCheck, defaults)
+      : undefined,
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
   max_connections: request.maxConnections,
   max_retries: request.maxRetries,
@@ -1457,21 +1480,21 @@ export const marshalZonedApiCreateCertificateRequest = (
   name: request.name || randomName('certificate'),
   ...resolveOneOf<unknown>([
     {
-      param: 'custom_certificate',
-      value:
-        request.customCertificate !== undefined
-          ? marshalCreateCertificateRequestCustomCertificate(
-              request.customCertificate,
-              defaults,
-            )
-          : undefined,
-    },
-    {
       param: 'letsencrypt',
       value:
         request.letsencrypt !== undefined
           ? marshalCreateCertificateRequestLetsencryptConfig(
               request.letsencrypt,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'custom_certificate',
+      value:
+        request.customCertificate !== undefined
+          ? marshalCreateCertificateRequestCustomCertificate(
+              request.customCertificate,
               defaults,
             )
           : undefined,
@@ -1612,10 +1635,16 @@ export const marshalZonedApiUpdateAclRequest = (
   request: ZonedApiUpdateAclRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  action: marshalAclAction(request.action, defaults),
+  action:
+    request.action !== undefined
+      ? marshalAclAction(request.action, defaults)
+      : undefined,
   description: request.description,
   index: request.index,
-  match: marshalAclMatch(request.match, defaults),
+  match:
+    request.match !== undefined
+      ? marshalAclMatch(request.match, defaults)
+      : undefined,
   name: request.name,
 })
 
@@ -1676,24 +1705,10 @@ export const marshalZonedApiUpdateHealthCheckRequest = (
   transient_check_delay: request.transientCheckDelay,
   ...resolveOneOf<unknown>([
     {
-      param: 'http_config',
+      param: 'tcp_config',
       value:
-        request.httpConfig !== undefined
-          ? marshalHealthCheckHttpConfig(request.httpConfig, defaults)
-          : undefined,
-    },
-    {
-      param: 'https_config',
-      value:
-        request.httpsConfig !== undefined
-          ? marshalHealthCheckHttpsConfig(request.httpsConfig, defaults)
-          : undefined,
-    },
-    {
-      param: 'ldap_config',
-      value:
-        request.ldapConfig !== undefined
-          ? marshalHealthCheckLdapConfig(request.ldapConfig, defaults)
+        request.tcpConfig !== undefined
+          ? marshalHealthCheckTcpConfig(request.tcpConfig, defaults)
           : undefined,
     },
     {
@@ -1711,6 +1726,13 @@ export const marshalZonedApiUpdateHealthCheckRequest = (
           : undefined,
     },
     {
+      param: 'ldap_config',
+      value:
+        request.ldapConfig !== undefined
+          ? marshalHealthCheckLdapConfig(request.ldapConfig, defaults)
+          : undefined,
+    },
+    {
       param: 'redis_config',
       value:
         request.redisConfig !== undefined
@@ -1718,10 +1740,17 @@ export const marshalZonedApiUpdateHealthCheckRequest = (
           : undefined,
     },
     {
-      param: 'tcp_config',
+      param: 'http_config',
       value:
-        request.tcpConfig !== undefined
-          ? marshalHealthCheckTcpConfig(request.tcpConfig, defaults)
+        request.httpConfig !== undefined
+          ? marshalHealthCheckHttpConfig(request.httpConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'https_config',
+      value:
+        request.httpsConfig !== undefined
+          ? marshalHealthCheckHttpsConfig(request.httpsConfig, defaults)
           : undefined,
     },
   ]),

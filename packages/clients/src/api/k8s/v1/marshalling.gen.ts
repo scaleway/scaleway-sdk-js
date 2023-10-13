@@ -7,7 +7,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   Cluster,
@@ -47,7 +46,6 @@ import type {
   UpgradePoolRequest,
   Version,
 } from './types.gen'
-import type {} from './types.private.gen'
 
 const unmarshalPoolUpgradePolicy = (data: unknown) => {
   if (!isJSONObject(data)) {
@@ -474,24 +472,30 @@ export const marshalCreateClusterRequest = (
 ): Record<string, unknown> => ({
   admission_plugins: request.admissionPlugins,
   apiserver_cert_sans: request.apiserverCertSans,
-  auto_upgrade: marshalCreateClusterRequestAutoUpgrade(
-    request.autoUpgrade,
-    defaults,
-  ),
-  autoscaler_config: marshalCreateClusterRequestAutoscalerConfig(
-    request.autoscalerConfig,
-    defaults,
-  ),
+  auto_upgrade:
+    request.autoUpgrade !== undefined
+      ? marshalCreateClusterRequestAutoUpgrade(request.autoUpgrade, defaults)
+      : undefined,
+  autoscaler_config:
+    request.autoscalerConfig !== undefined
+      ? marshalCreateClusterRequestAutoscalerConfig(
+          request.autoscalerConfig,
+          defaults,
+        )
+      : undefined,
   cni: request.cni,
   description: request.description,
   enable_dashboard: request.enableDashboard,
   feature_gates: request.featureGates,
   ingress: request.ingress,
   name: request.name || randomName('k8s'),
-  open_id_connect_config: marshalCreateClusterRequestOpenIDConnectConfig(
-    request.openIdConnectConfig,
-    defaults,
-  ),
+  open_id_connect_config:
+    request.openIdConnectConfig !== undefined
+      ? marshalCreateClusterRequestOpenIDConnectConfig(
+          request.openIdConnectConfig,
+          defaults,
+        )
+      : undefined,
   pools:
     request.pools !== undefined
       ? request.pools.map(elt =>
@@ -523,7 +527,8 @@ export const marshalCreatePoolRequest = (
   autohealing: request.autohealing,
   autoscaling: request.autoscaling,
   container_runtime: request.containerRuntime,
-  kubelet_args: request.kubeletArgs,
+  kubelet_args:
+    request.kubeletArgs !== undefined ? request.kubeletArgs : undefined,
   max_size: request.maxSize,
   min_size: request.minSize,
   name: request.name || randomName('pool'),
@@ -601,14 +606,17 @@ export const marshalUpdateClusterRequest = (
 ): Record<string, unknown> => ({
   admission_plugins: request.admissionPlugins,
   apiserver_cert_sans: request.apiserverCertSans,
-  auto_upgrade: marshalUpdateClusterRequestAutoUpgrade(
-    request.autoUpgrade,
-    defaults,
-  ),
-  autoscaler_config: marshalUpdateClusterRequestAutoscalerConfig(
-    request.autoscalerConfig,
-    defaults,
-  ),
+  auto_upgrade:
+    request.autoUpgrade !== undefined
+      ? marshalUpdateClusterRequestAutoUpgrade(request.autoUpgrade, defaults)
+      : undefined,
+  autoscaler_config:
+    request.autoscalerConfig !== undefined
+      ? marshalUpdateClusterRequestAutoscalerConfig(
+          request.autoscalerConfig,
+          defaults,
+        )
+      : undefined,
   description: request.description,
   enable_dashboard: request.enableDashboard,
   feature_gates: request.featureGates,

@@ -81,13 +81,17 @@ export interface RuleSpecs {
   /** Names of permission sets bound to the rule. */
   permissionSetNames?: string[]
   /**
-   * List of Project IDs the rule is scoped to. One-of ('scope'): at most one of
-   * 'projectIds', 'organizationId' could be set.
+   * List of Project IDs the rule is scoped to.
+   *
+   * One-of ('scope'): at most one of 'projectIds', 'organizationId' could be
+   * set.
    */
   projectIds?: string[]
   /**
-   * ID of Organization the rule is scoped to. One-of ('scope'): at most one of
-   * 'projectIds', 'organizationId' could be set.
+   * ID of Organization the rule is scoped to.
+   *
+   * One-of ('scope'): at most one of 'projectIds', 'organizationId' could be
+   * set.
    */
   organizationId?: string
 }
@@ -117,13 +121,15 @@ export interface APIKey {
   /** Secret key of the API Key. */
   secretKey?: string
   /**
-   * ID of application that bears the API key. One-of ('bearer'): at most one of
-   * 'applicationId', 'userId' could be set.
+   * ID of application that bears the API key.
+   *
+   * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
   applicationId?: string
   /**
-   * ID of user that bears the API key. One-of ('bearer'): at most one of
-   * 'applicationId', 'userId' could be set.
+   * ID of user that bears the API key.
+   *
+   * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
   userId?: string
   /** Description of API key. */
@@ -215,24 +221,30 @@ export interface Policy {
   /** Number of permission sets of the policy. */
   nbPermissionSets: number
   /**
-   * ID of the user attributed to the policy. One-of ('principal'): at most one
-   * of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
+   * ID of the user attributed to the policy.
+   *
+   * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId',
+   * 'noPrincipal' could be set.
    */
   userId?: string
   /**
-   * ID of the group attributed to the policy. One-of ('principal'): at most one
-   * of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
+   * ID of the group attributed to the policy.
+   *
+   * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId',
+   * 'noPrincipal' could be set.
    */
   groupId?: string
   /**
-   * ID of the application attributed to the policy. One-of ('principal'): at
-   * most one of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be
-   * set.
+   * ID of the application attributed to the policy.
+   *
+   * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId',
+   * 'noPrincipal' could be set.
    */
   applicationId?: string
   /**
-   * Defines whether or not a policy is attributed to a principal. One-of
-   * ('principal'): at most one of 'userId', 'groupId', 'applicationId',
+   * Defines whether or not a policy is attributed to a principal.
+   *
+   * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId',
    * 'noPrincipal' could be set.
    */
   noPrincipal?: boolean
@@ -242,13 +254,15 @@ export interface Quotum {
   /** Name of the quota. */
   name: string
   /**
-   * Maximum limit of the quota. One-of ('value'): at most one of 'limit',
-   * 'unlimited' could be set.
+   * Maximum limit of the quota.
+   *
+   * One-of ('value'): at most one of 'limit', 'unlimited' could be set.
    */
   limit?: number
   /**
-   * Defines whether or not the quota is unlimited. One-of ('value'): at most
-   * one of 'limit', 'unlimited' could be set.
+   * Defines whether or not the quota is unlimited.
+   *
+   * One-of ('value'): at most one of 'limit', 'unlimited' could be set.
    */
   unlimited?: boolean
 }
@@ -261,18 +275,24 @@ export interface Rule {
   /** Permission_set_names have the same scope_type. */
   permissionSetsScopeType: PermissionSetScopeType
   /**
-   * List of Project IDs the rule is scoped to. One-of ('scope'): at most one of
-   * 'projectIds', 'organizationId', 'accountRootUserId' could be set.
+   * List of Project IDs the rule is scoped to.
+   *
+   * One-of ('scope'): at most one of 'projectIds', 'organizationId',
+   * 'accountRootUserId' could be set.
    */
   projectIds?: string[]
   /**
-   * ID of Organization the rule is scoped to. One-of ('scope'): at most one of
-   * 'projectIds', 'organizationId', 'accountRootUserId' could be set.
+   * ID of Organization the rule is scoped to.
+   *
+   * One-of ('scope'): at most one of 'projectIds', 'organizationId',
+   * 'accountRootUserId' could be set.
    */
   organizationId?: string
   /**
-   * ID of account root user the rule is scoped to. One-of ('scope'): at most
-   * one of 'projectIds', 'organizationId', 'accountRootUserId' could be set.
+   * ID of account root user the rule is scoped to.
+   *
+   * One-of ('scope'): at most one of 'projectIds', 'organizationId',
+   * 'accountRootUserId' could be set.
    */
   accountRootUserId?: string
 }
@@ -329,13 +349,15 @@ export type AddGroupMemberRequest = {
   /** ID of the group. */
   groupId: string
   /**
-   * ID of the user to add. One-of ('member'): at most one of 'userId',
-   * 'applicationId' could be set.
+   * ID of the user to add.
+   *
+   * One-of ('member'): at most one of 'userId', 'applicationId' could be set.
    */
   userId?: string
   /**
-   * ID of the application to add. One-of ('member'): at most one of 'userId',
-   * 'applicationId' could be set.
+   * ID of the application to add.
+   *
+   * One-of ('member'): at most one of 'userId', 'applicationId' could be set.
    */
   applicationId?: string
 }
@@ -355,13 +377,15 @@ export type ClonePolicyRequest = {
 
 export type CreateAPIKeyRequest = {
   /**
-   * ID of the application. One-of ('bearer'): at most one of 'applicationId',
-   * 'userId' could be set.
+   * ID of the application.
+   *
+   * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
   applicationId?: string
   /**
-   * ID of the user. One-of ('bearer'): at most one of 'applicationId', 'userId'
-   * could be set.
+   * ID of the user.
+   *
+   * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
   userId?: string
   /** Expiration date of the API key. */
@@ -403,23 +427,30 @@ export type CreatePolicyRequest = {
   /** Rules of the policy to create. */
   rules?: RuleSpecs[]
   /**
-   * ID of user attributed to the policy. One-of ('principal'): at most one of
-   * 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
+   * ID of user attributed to the policy.
+   *
+   * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId',
+   * 'noPrincipal' could be set.
    */
   userId?: string
   /**
-   * ID of group attributed to the policy. One-of ('principal'): at most one of
-   * 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
+   * ID of group attributed to the policy.
+   *
+   * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId',
+   * 'noPrincipal' could be set.
    */
   groupId?: string
   /**
-   * ID of application attributed to the policy. One-of ('principal'): at most
-   * one of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
+   * ID of application attributed to the policy.
+   *
+   * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId',
+   * 'noPrincipal' could be set.
    */
   applicationId?: string
   /**
-   * Defines whether or not a policy is attributed to a principal. One-of
-   * ('principal'): at most one of 'userId', 'groupId', 'applicationId',
+   * Defines whether or not a policy is attributed to a principal.
+   *
+   * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId',
    * 'noPrincipal' could be set.
    */
   noPrincipal?: boolean
@@ -530,13 +561,15 @@ export type ListAPIKeysRequest = {
   /** ID of Organization. */
   organizationId?: string
   /**
-   * ID of application that bears the API key. One-of ('bearer'): at most one of
-   * 'applicationId', 'userId' could be set.
+   * ID of application that bears the API key.
+   *
+   * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
   applicationId?: string
   /**
-   * ID of user that bears the API key. One-of ('bearer'): at most one of
-   * 'applicationId', 'userId' could be set.
+   * ID of user that bears the API key.
+   *
+   * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
   userId?: string
   /** Defines whether to filter out editable API keys or not. */
@@ -760,13 +793,15 @@ export type RemoveGroupMemberRequest = {
   /** ID of the group. */
   groupId: string
   /**
-   * ID of the user to remove. One-of ('member'): at most one of 'userId',
-   * 'applicationId' could be set.
+   * ID of the user to remove.
+   *
+   * One-of ('member'): at most one of 'userId', 'applicationId' could be set.
    */
   userId?: string
   /**
-   * ID of the application to remove. One-of ('member'): at most one of
-   * 'userId', 'applicationId' could be set.
+   * ID of the application to remove.
+   *
+   * One-of ('member'): at most one of 'userId', 'applicationId' could be set.
    */
   applicationId?: string
 }
@@ -827,24 +862,30 @@ export type UpdatePolicyRequest = {
   /** New description of policy (max length is 200 characters). */
   description?: string
   /**
-   * New ID of user attributed to the policy. One-of ('principal'): at most one
-   * of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
+   * New ID of user attributed to the policy.
+   *
+   * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId',
+   * 'noPrincipal' could be set.
    */
   userId?: string
   /**
-   * New ID of group attributed to the policy. One-of ('principal'): at most one
-   * of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
+   * New ID of group attributed to the policy.
+   *
+   * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId',
+   * 'noPrincipal' could be set.
    */
   groupId?: string
   /**
-   * New ID of application attributed to the policy. One-of ('principal'): at
-   * most one of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be
-   * set.
+   * New ID of application attributed to the policy.
+   *
+   * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId',
+   * 'noPrincipal' could be set.
    */
   applicationId?: string
   /**
-   * Defines whether or not the policy is attributed to a principal. One-of
-   * ('principal'): at most one of 'userId', 'groupId', 'applicationId',
+   * Defines whether or not the policy is attributed to a principal.
+   *
+   * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId',
    * 'noPrincipal' could be set.
    */
   noPrincipal?: boolean

@@ -92,7 +92,7 @@ export type CreatePinByCIDRequest = {
   /** Pin name. */
   name?: string
   /** Pin options. */
-  pinOptions: PinOptions
+  pinOptions?: PinOptions
 }
 
 export type CreatePinByURLRequest = {
@@ -104,7 +104,7 @@ export type CreatePinByURLRequest = {
   /** Pin name. */
   name?: string
   /** Pin options. */
-  pinOptions: PinOptions
+  pinOptions?: PinOptions
 }
 
 export type CreateVolumeRequest = {
@@ -196,7 +196,7 @@ export type ReplacePinRequest = {
   /** Node containing the content you want to pin. */
   origins?: string[]
   /** Pin options. */
-  pinOptions: PinOptions
+  pinOptions?: PinOptions
 }
 
 export interface ReplacePinResponse {

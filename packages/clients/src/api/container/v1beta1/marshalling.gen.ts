@@ -7,7 +7,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   Container,
@@ -479,16 +478,6 @@ export const marshalCreateTriggerRequest = (
   name: request.name,
   ...resolveOneOf<unknown>([
     {
-      param: 'scw_nats_config',
-      value:
-        request.scwNatsConfig !== undefined
-          ? marshalCreateTriggerRequestMnqNatsClientConfig(
-              request.scwNatsConfig,
-              defaults,
-            )
-          : undefined,
-    },
-    {
       param: 'scw_sqs_config',
       value:
         request.scwSqsConfig !== undefined
@@ -504,6 +493,16 @@ export const marshalCreateTriggerRequest = (
         request.sqsConfig !== undefined
           ? marshalCreateTriggerRequestSqsClientConfig(
               request.sqsConfig,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'scw_nats_config',
+      value:
+        request.scwNatsConfig !== undefined
+          ? marshalCreateTriggerRequestMnqNatsClientConfig(
+              request.scwNatsConfig,
               defaults,
             )
           : undefined,

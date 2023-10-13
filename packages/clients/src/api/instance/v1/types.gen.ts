@@ -108,6 +108,7 @@ export type VolumeVolumeType =
   | 'unified'
   | 'scratch'
   | 'sbs_volume'
+  | 'sbs_snapshot'
 
 export interface ServerSummary {
   id: string
@@ -277,6 +278,8 @@ export interface ServerIp {
   dynamic: boolean
   /** Information about this address provisioning mode. */
   provisioningMode: ServerIpProvisioningMode
+  /** Tags associated with the IP. */
+  tags: string[]
 }
 
 export interface ServerIpv6 {
@@ -365,13 +368,17 @@ export interface VolumeTemplate {
   /** Type of the volume. */
   volumeType: VolumeVolumeType
   /**
-   * Organization ID of the volume. One-of ('projectIdentifier'): at most one of
-   * 'organization', 'project' could be set.
+   * Organization ID of the volume.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   organization?: string
   /**
-   * Project ID of the volume. One-of ('projectIdentifier'): at most one of
-   * 'organization', 'project' could be set.
+   * Project ID of the volume.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   project?: string
 }
@@ -699,14 +706,16 @@ export type ApplyBlockMigrationRequest = {
   zone?: Zone
   /**
    * The volume to migrate, along with potentially other resources, according to
-   * the migration plan generated with a call to PlanBlockMigration. One-of
-   * ('resource'): at most one of 'volumeId', 'snapshotId' could be set.
+   * the migration plan generated with a call to PlanBlockMigration.
+   *
+   * One-of ('resource'): at most one of 'volumeId', 'snapshotId' could be set.
    */
   volumeId?: string
   /**
    * The snapshot to migrate, along with potentially other resources, according
-   * to the migration plan generated with a call to PlanBlockMigration. One-of
-   * ('resource'): at most one of 'volumeId', 'snapshotId' could be set.
+   * to the migration plan generated with a call to PlanBlockMigration.
+   *
+   * One-of ('resource'): at most one of 'volumeId', 'snapshotId' could be set.
    */
   snapshotId?: string
   /**
@@ -727,15 +736,19 @@ export type CreateImageRequest = {
   /** Default bootscript of the image. */
   defaultBootscript?: string
   /** Additional volumes of the image. */
-  extraVolumes: Record<string, VolumeTemplate>
+  extraVolumes?: Record<string, VolumeTemplate>
   /**
-   * Organization ID of the image. One-of ('projectIdentifier'): at most one of
-   * 'organization', 'project' could be set.
+   * Organization ID of the image.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   organization?: string
   /**
-   * Project ID of the image. One-of ('projectIdentifier'): at most one of
-   * 'organization', 'project' could be set.
+   * Project ID of the image.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   project?: string
   /** Tags of the image. */
@@ -751,13 +764,17 @@ export interface CreateImageResponse {
 export type CreateIpRequest = {
   zone?: Zone
   /**
-   * Organization ID in which the IP is reserved. One-of ('projectIdentifier'):
-   * at most one of 'organization', 'project' could be set.
+   * Organization ID in which the IP is reserved.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   organization?: string
   /**
-   * Project ID in which the IP is reserved. One-of ('projectIdentifier'): at
-   * most one of 'organization', 'project' could be set.
+   * Project ID in which the IP is reserved.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   project?: string
   /** Tags of the IP. */
@@ -777,13 +794,17 @@ export type CreatePlacementGroupRequest = {
   /** Name of the placement group. */
   name?: string
   /**
-   * Organization ID of the placement group. One-of ('projectIdentifier'): at
-   * most one of 'organization', 'project' could be set.
+   * Organization ID of the placement group.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   organization?: string
   /**
-   * Project ID of the placement group. One-of ('projectIdentifier'): at most
-   * one of 'organization', 'project' could be set.
+   * Project ID of the placement group.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   project?: string
   /** Tags of the placement group. */
@@ -821,28 +842,35 @@ export type CreateSecurityGroupRequest = {
   /** Description of the security group. */
   description: string
   /**
-   * Organization ID the security group belongs to. One-of
-   * ('projectIdentifier'): at most one of 'organization', 'project' could be
-   * set.
+   * Organization ID the security group belongs to.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   organization?: string
   /**
-   * Project ID the security group belong to. One-of ('projectIdentifier'): at
-   * most one of 'organization', 'project' could be set.
+   * Project ID the security group belong to.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   project?: string
   /** Tags of the security group. */
   tags?: string[]
   /**
    * Defines whether this security group becomes the default security group for
-   * new Instances. One-of ('defaultIdentifier'): at most one of
-   * 'organizationDefault', 'projectDefault' could be set.
+   * new Instances.
+   *
+   * One-of ('defaultIdentifier'): at most one of 'organizationDefault',
+   * 'projectDefault' could be set.
    */
   organizationDefault?: boolean
   /**
    * Whether this security group becomes the default security group for new
-   * Instances. One-of ('defaultIdentifier'): at most one of
-   * 'organizationDefault', 'projectDefault' could be set.
+   * Instances.
+   *
+   * One-of ('defaultIdentifier'): at most one of 'organizationDefault',
+   * 'projectDefault' could be set.
    */
   projectDefault?: boolean
   /** Whether the security group is stateful or not. */
@@ -884,6 +912,52 @@ export interface CreateSecurityGroupRuleResponse {
   rule: SecurityGroupRule
 }
 
+export type CreateServerRequest = {
+  zone?: Zone
+  /** Instance name. */
+  name?: string
+  /** Define if a dynamic IPv4 is required for the Instance. */
+  dynamicIpRequired?: boolean
+  /** If true, configure the Instance so it uses the new routed IP mode. */
+  routedIpEnabled?: boolean
+  /** Define the Instance commercial type (i.e. GP1-S). */
+  commercialType: string
+  /** Instance image ID or label. */
+  image: string
+  /** Volumes attached to the server. */
+  volumes?: Record<string, VolumeServerTemplate>
+  /** True if IPv6 is enabled on the server. */
+  enableIpv6: boolean
+  /** ID of the reserved IP to attach to the Instance. */
+  publicIp?: string
+  /** A list of reserved IP IDs to attach to the Instance. */
+  publicIps?: string[]
+  /** Boot type to use. */
+  bootType?: BootType
+  /** Bootscript ID to use when `boot_type` is set to `bootscript`. */
+  bootscript?: string
+  /**
+   * Instance Organization ID.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
+   */
+  organization?: string
+  /**
+   * Instance Project ID.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
+   */
+  project?: string
+  /** Instance tags. */
+  tags?: string[]
+  /** Security group ID. */
+  securityGroup?: string
+  /** Placement group ID if Instance must be part of a placement group. */
+  placementGroup?: string
+}
+
 export interface CreateServerResponse {
   server: Server
 }
@@ -897,13 +971,17 @@ export type CreateSnapshotRequest = {
   /** Tags of the snapshot. */
   tags?: string[]
   /**
-   * Organization ID of the snapshot. One-of ('projectIdentifier'): at most one
-   * of 'organization', 'project' could be set.
+   * Organization ID of the snapshot.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   organization?: string
   /**
-   * Project ID of the snapshot. One-of ('projectIdentifier'): at most one of
-   * 'organization', 'project' could be set.
+   * Project ID of the snapshot.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   project?: string
   /**
@@ -929,13 +1007,17 @@ export type CreateVolumeRequest = {
   /** Volume name. */
   name?: string
   /**
-   * Volume Organization ID. One-of ('projectIdentifier'): at most one of
-   * 'organization', 'project' could be set.
+   * Volume Organization ID.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   organization?: string
   /**
-   * Volume Project ID. One-of ('projectIdentifier'): at most one of
-   * 'organization', 'project' could be set.
+   * Volume Project ID.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
    */
   project?: string
   /** Volume tags. */
@@ -943,18 +1025,24 @@ export type CreateVolumeRequest = {
   /** Volume type. */
   volumeType?: VolumeVolumeType
   /**
-   * Volume disk size, must be a multiple of 512. One-of ('from'): at most one
-   * of 'size', 'baseVolume', 'baseSnapshot' could be set.
+   * Volume disk size, must be a multiple of 512.
+   *
+   * One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could
+   * be set.
    */
   size?: number
   /**
-   * ID of the volume on which this volume will be based. One-of ('from'): at
-   * most one of 'size', 'baseVolume', 'baseSnapshot' could be set.
+   * ID of the volume on which this volume will be based.
+   *
+   * One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could
+   * be set.
    */
   baseVolume?: string
   /**
-   * ID of the snapshot on which this volume will be based. One-of ('from'): at
-   * most one of 'size', 'baseVolume', 'baseSnapshot' could be set.
+   * ID of the snapshot on which this volume will be based.
+   *
+   * One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could
+   * be set.
    */
   baseSnapshot?: string
 }
@@ -1537,13 +1625,15 @@ export interface MigrationPlan {
 export type PlanBlockMigrationRequest = {
   zone?: Zone
   /**
-   * The volume for which the migration plan will be generated. One-of
-   * ('resource'): at most one of 'volumeId', 'snapshotId' could be set.
+   * The volume for which the migration plan will be generated.
+   *
+   * One-of ('resource'): at most one of 'volumeId', 'snapshotId' could be set.
    */
   volumeId?: string
   /**
-   * The snapshot for which the migration plan will be generated. One-of
-   * ('resource'): at most one of 'volumeId', 'snapshotId' could be set.
+   * The snapshot for which the migration plan will be generated.
+   *
+   * One-of ('resource'): at most one of 'volumeId', 'snapshotId' could be set.
    */
   snapshotId?: string
 }
@@ -1563,11 +1653,29 @@ export type ServerActionRequest = {
    * For each volume UUID, the snapshot parameters of the volume. This field
    * should only be specified when performing a backup action.
    */
-  volumes: Record<string, ServerActionRequestVolumeBackupTemplate>
+  volumes?: Record<string, ServerActionRequestVolumeBackupTemplate>
 }
 
 export interface ServerActionResponse {
   task: Task
+}
+
+export type SetImageRequest = {
+  zone?: Zone
+  id: string
+  name: string
+  arch?: Arch
+  creationDate?: Date
+  modificationDate?: Date
+  defaultBootscript?: Bootscript
+  extraVolumes?: Record<string, Volume>
+  fromServer: string
+  organization?: string
+  public: boolean
+  rootVolume?: VolumeSummary
+  state?: ImageState
+  project?: string
+  tags?: string[]
 }
 
 export type SetPlacementGroupRequest = {
@@ -1615,12 +1723,12 @@ export type UpdateIpRequest = {
   /** IP ID or IP address. */
   ip: string
   /** Reverse domain name. */
-  reverse?: string
+  reverse?: string | null
   /** Convert a 'nat' IP to a 'routed_ipv4'. */
   type?: IpType
   /** An array of keywords you want to tag this IP with. */
   tags?: string[]
-  server?: string
+  server?: string | null
 }
 
 export interface UpdateIpResponse {
@@ -1666,6 +1774,45 @@ export type UpdatePrivateNICRequest = {
   privateNicId: string
   /** Tags used to select private NIC/s. */
   tags?: string[]
+}
+
+export type UpdateServerRequest = {
+  zone?: Zone
+  /** UUID of the Instance. */
+  serverId: string
+  /** Name of the Instance. */
+  name?: string
+  bootType?: BootType
+  /** Tags of the Instance. */
+  tags?: string[]
+  volumes?: Record<string, VolumeServerTemplate>
+  bootscript?: string
+  dynamicIpRequired?: boolean
+  /**
+   * True to configure the instance so it uses the new routed IP mode (once this
+   * is set to True you cannot set it back to False).
+   */
+  routedIpEnabled?: boolean
+  /** A list of reserved IP IDs to attach to the Instance. */
+  publicIps?: string[]
+  enableIpv6?: boolean
+  protected?: boolean
+  securityGroup?: SecurityGroupTemplate
+  /** Placement group ID if Instance must be part of a placement group. */
+  placementGroup?: string | null
+  /** Instance private NICs. */
+  privateNics?: string[]
+  /**
+   * Warning: This field has some restrictions:
+   *
+   * - Cannot be changed if the Instance is not in `stopped` state.
+   * - Cannot be changed if the Instance is in a placement group.
+   * - Local storage requirements of the target commercial_types must be fulfilled
+   *   (i.e. if an Instance has 80GB of local storage, it can be changed into a
+   *   GP1-XS, which has a maximum of 150GB, but it cannot be changed into a
+   *   DEV1-S, which has only 20GB).
+   */
+  commercialType?: string
 }
 
 export interface UpdateServerResponse {

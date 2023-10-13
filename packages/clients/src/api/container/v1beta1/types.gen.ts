@@ -281,13 +281,15 @@ export interface Token {
   /** Identifier of the token. */
   token: string
   /**
-   * UUID of the container the token belongs to. One-of ('scope'): at most one
-   * of 'containerId', 'namespaceId' could be set.
+   * UUID of the container the token belongs to.
+   *
+   * One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set.
    */
   containerId?: string
   /**
-   * UUID of the namespace the token belongs to. One-of ('scope'): at most one
-   * of 'containerId', 'namespaceId' could be set.
+   * UUID of the namespace the token belongs to.
+   *
+   * One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set.
    */
   namespaceId?: string
   /** Public key of the token. */
@@ -412,13 +414,15 @@ export type CreateNamespaceRequest = {
 export type CreateTokenRequest = {
   region?: Region
   /**
-   * UUID of the container to create the token for. One-of ('scope'): at most
-   * one of 'containerId', 'namespaceId' could be set.
+   * UUID of the container to create the token for.
+   *
+   * One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set.
    */
   containerId?: string
   /**
-   * UUID of the namespace to create the token for. One-of ('scope'): at most
-   * one of 'containerId', 'namespaceId' could be set.
+   * UUID of the namespace to create the token for.
+   *
+   * One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set.
    */
   namespaceId?: string
   /** Description of the token. */

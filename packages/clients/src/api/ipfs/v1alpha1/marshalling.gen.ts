@@ -5,7 +5,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreatePinByCIDRequest,
@@ -157,7 +156,10 @@ export const marshalCreatePinByCIDRequest = (
   cid: request.cid,
   name: request.name,
   origins: request.origins,
-  pin_options: marshalPinOptions(request.pinOptions, defaults),
+  pin_options:
+    request.pinOptions !== undefined
+      ? marshalPinOptions(request.pinOptions, defaults)
+      : undefined,
   volume_id: request.volumeId,
 })
 
@@ -166,7 +168,10 @@ export const marshalCreatePinByURLRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  pin_options: marshalPinOptions(request.pinOptions, defaults),
+  pin_options:
+    request.pinOptions !== undefined
+      ? marshalPinOptions(request.pinOptions, defaults)
+      : undefined,
   url: request.url,
   volume_id: request.volumeId,
 })
@@ -186,7 +191,10 @@ export const marshalReplacePinRequest = (
   cid: request.cid,
   name: request.name,
   origins: request.origins,
-  pin_options: marshalPinOptions(request.pinOptions, defaults),
+  pin_options:
+    request.pinOptions !== undefined
+      ? marshalPinOptions(request.pinOptions, defaults)
+      : undefined,
   volume_id: request.volumeId,
 })
 

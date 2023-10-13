@@ -5,7 +5,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateDomainRequest,
@@ -248,7 +247,10 @@ export const marshalCreateEmailRequest = (
     request.cc !== undefined
       ? request.cc.map(elt => marshalCreateEmailRequestAddress(elt, defaults))
       : undefined,
-  from: marshalCreateEmailRequestAddress(request.from, defaults),
+  from:
+    request.from !== undefined
+      ? marshalCreateEmailRequestAddress(request.from, defaults)
+      : undefined,
   html: request.html,
   project_id: request.projectId ?? defaults.defaultProjectId,
   send_before: request.sendBefore,

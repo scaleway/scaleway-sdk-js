@@ -675,15 +675,17 @@ export interface UpdatePoolRequestUpgradePolicy {
 export type CreateClusterRequest = {
   region?: Region
   /**
-   * Organization ID in which the cluster will be created. One-of
-   * ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
-   * be set.
+   * Organization ID in which the cluster will be created.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   organizationId?: string
   /**
-   * Project ID in which the cluster will be created. One-of
-   * ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
-   * be set.
+   * Project ID in which the cluster will be created.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   projectId?: string
   /**
@@ -713,13 +715,13 @@ export type CreateClusterRequest = {
    * of the cluster-autoscaler
    * (https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/).
    */
-  autoscalerConfig: CreateClusterRequestAutoscalerConfig
+  autoscalerConfig?: CreateClusterRequestAutoscalerConfig
   /**
    * Auto upgrade configuration of the cluster. This configuration enables to
    * set a specific 2-hour time window in which the cluster can be automatically
    * updated to the latest patch version.
    */
-  autoUpgrade: CreateClusterRequestAutoUpgrade
+  autoUpgrade?: CreateClusterRequestAutoUpgrade
   /** List of feature gates to enable. */
   featureGates?: string[]
   /** List of admission plugins to enable. */
@@ -728,7 +730,7 @@ export type CreateClusterRequest = {
    * OpenID Connect configuration of the cluster. This configuration enables to
    * update the OpenID Connect configuration of the Kubernetes API server.
    */
-  openIdConnectConfig: CreateClusterRequestOpenIDConnectConfig
+  openIdConnectConfig?: CreateClusterRequestOpenIDConnectConfig
   /**
    * Additional Subject Alternative Names for the Kubernetes API server
    * certificate.
@@ -789,7 +791,7 @@ export type CreatePoolRequest = {
    * Kubelet arguments to be used by this pool. Note that this feature is
    * experimental.
    */
-  kubeletArgs: Record<string, string>
+  kubeletArgs?: Record<string, string>
   /** Pool upgrade policy. */
   upgradePolicy?: CreatePoolRequestUpgradePolicy
   /** Zone in which the pool's nodes will be spawned. */
@@ -849,6 +851,12 @@ export interface ExternalNode {
   kubeToken: string
   kubeletConfig: string
   externalIp: string
+}
+
+export type GetClusterKubeConfigRequest = {
+  region?: Region
+  /** Cluster ID for which to download the kubeconfig. */
+  clusterId: string
 }
 
 export type GetClusterRequest = {
@@ -1060,7 +1068,7 @@ export type UpdateClusterRequest = {
   /** New tags associated with the cluster. */
   tags?: string[]
   /** New autoscaler config for the cluster. */
-  autoscalerConfig: UpdateClusterRequestAutoscalerConfig
+  autoscalerConfig?: UpdateClusterRequestAutoscalerConfig
   /** New value for the Kubernetes Dashboard enablement. */
   enableDashboard?: boolean
   /** New Ingress Controller for the cluster (deprecated feature). */
@@ -1069,7 +1077,7 @@ export type UpdateClusterRequest = {
    * New auto upgrade configuration for the cluster. Note that all fields need
    * to be set.
    */
-  autoUpgrade: UpdateClusterRequestAutoUpgrade
+  autoUpgrade?: UpdateClusterRequestAutoUpgrade
   /** List of feature gates to enable. */
   featureGates?: string[]
   /** List of admission plugins to enable. */

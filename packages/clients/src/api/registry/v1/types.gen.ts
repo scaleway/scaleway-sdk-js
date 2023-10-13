@@ -131,14 +131,17 @@ export type CreateNamespaceRequest = {
   /** Description of the namespace. */
   description: string
   /**
-   * Namespace owner (deprecated). One-of ('projectIdentifier'): at most one of
-   * 'organizationId', 'projectId' could be set.
+   * Namespace owner (deprecated).
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   organizationId?: string
   /**
-   * Project ID on which the namespace will be created. One-of
-   * ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
-   * be set.
+   * Project ID on which the namespace will be created.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   projectId?: string
   /** Defines whether or not namespace is public. */

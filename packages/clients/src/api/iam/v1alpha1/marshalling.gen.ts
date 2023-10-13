@@ -7,7 +7,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   APIKey,
@@ -403,8 +402,8 @@ export const marshalAddGroupMemberRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf<unknown>([
-    { param: 'application_id', value: request.applicationId },
     { param: 'user_id', value: request.userId },
+    { param: 'application_id', value: request.applicationId },
   ]),
 })
 
@@ -453,8 +452,8 @@ const marshalRuleSpecs = (
 ): Record<string, unknown> => ({
   permission_set_names: request.permissionSetNames,
   ...resolveOneOf<unknown>([
-    { param: 'organization_id', value: request.organizationId },
     { param: 'project_ids', value: request.projectIds },
+    { param: 'organization_id', value: request.organizationId },
   ]),
 })
 
@@ -470,10 +469,10 @@ export const marshalCreatePolicyRequest = (
       ? request.rules.map(elt => marshalRuleSpecs(elt, defaults))
       : undefined,
   ...resolveOneOf<unknown>([
-    { param: 'application_id', value: request.applicationId },
-    { param: 'group_id', value: request.groupId },
-    { param: 'no_principal', value: request.noPrincipal },
     { param: 'user_id', value: request.userId },
+    { param: 'group_id', value: request.groupId },
+    { param: 'application_id', value: request.applicationId },
+    { param: 'no_principal', value: request.noPrincipal },
   ]),
 })
 
@@ -499,8 +498,8 @@ export const marshalRemoveGroupMemberRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf<unknown>([
-    { param: 'application_id', value: request.applicationId },
     { param: 'user_id', value: request.userId },
+    { param: 'application_id', value: request.applicationId },
   ]),
 })
 
@@ -554,10 +553,10 @@ export const marshalUpdatePolicyRequest = (
   description: request.description,
   name: request.name,
   ...resolveOneOf<unknown>([
-    { param: 'application_id', value: request.applicationId },
-    { param: 'group_id', value: request.groupId },
-    { param: 'no_principal', value: request.noPrincipal },
     { param: 'user_id', value: request.userId },
+    { param: 'group_id', value: request.groupId },
+    { param: 'application_id', value: request.applicationId },
+    { param: 'no_principal', value: request.noPrincipal },
   ]),
 })
 

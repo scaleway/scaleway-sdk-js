@@ -105,13 +105,17 @@ export interface Endpoint {
   /** TCP port of the endpoint. */
   port: number
   /**
-   * Private Network details. One-of ('details'): at most one of
-   * 'privateNetwork', 'publicNetwork' could be set.
+   * Private Network details.
+   *
+   * One-of ('details'): at most one of 'privateNetwork', 'publicNetwork' could
+   * be set.
    */
   privateNetwork?: PrivateNetwork
   /**
-   * Public network details. One-of ('details'): at most one of
-   * 'privateNetwork', 'publicNetwork' could be set.
+   * Public network details.
+   *
+   * One-of ('details'): at most one of 'privateNetwork', 'publicNetwork' could
+   * be set.
    */
   publicNetwork?: PublicNetwork
   /** List of IPv4 addresses of the endpoint. */
@@ -129,13 +133,17 @@ export interface ACLRuleSpec {
 
 export interface EndpointSpec {
   /**
-   * Private Network specification details. One-of ('endpointType'): at most one
-   * of 'privateNetwork', 'publicNetwork' could be set.
+   * Private Network specification details.
+   *
+   * One-of ('endpointType'): at most one of 'privateNetwork', 'publicNetwork'
+   * could be set.
    */
   privateNetwork?: EndpointSpecPrivateNetworkSpec
   /**
-   * Public network specification details. One-of ('endpointType'): at most one
-   * of 'privateNetwork', 'publicNetwork' could be set.
+   * Public network specification details.
+   *
+   * One-of ('endpointType'): at most one of 'privateNetwork', 'publicNetwork'
+   * could be set.
    */
   publicNetwork?: EndpointSpecPublicNetworkSpec
 }
@@ -417,18 +425,24 @@ export type MigrateClusterRequest = {
   /** UUID of the Database Instance to update. */
   clusterId: string
   /**
-   * Redis™ engine version of the Database Instance. One-of ('action'): at most
-   * one of 'version', 'nodeType', 'clusterSize' could be set.
+   * Redis™ engine version of the Database Instance.
+   *
+   * One-of ('action'): at most one of 'version', 'nodeType', 'clusterSize'
+   * could be set.
    */
   version?: string
   /**
-   * Type of node to use for the Database Instance. One-of ('action'): at most
-   * one of 'version', 'nodeType', 'clusterSize' could be set.
+   * Type of node to use for the Database Instance.
+   *
+   * One-of ('action'): at most one of 'version', 'nodeType', 'clusterSize'
+   * could be set.
    */
   nodeType?: string
   /**
-   * Number of nodes for the Database Instance. One-of ('action'): at most one
-   * of 'version', 'nodeType', 'clusterSize' could be set.
+   * Number of nodes for the Database Instance.
+   *
+   * One-of ('action'): at most one of 'version', 'nodeType', 'clusterSize'
+   * could be set.
    */
   clusterSize?: number
 }

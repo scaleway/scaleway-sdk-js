@@ -8,7 +8,6 @@ import {
   unmarshalDate,
   unmarshalTimeSeries,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   ACLRule,
@@ -447,9 +446,9 @@ export const marshalMigrateClusterRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf<unknown>([
-    { param: 'cluster_size', value: request.clusterSize },
-    { param: 'node_type', value: request.nodeType },
     { param: 'version', value: request.version },
+    { param: 'node_type', value: request.nodeType },
+    { param: 'cluster_size', value: request.clusterSize },
   ]),
 })
 

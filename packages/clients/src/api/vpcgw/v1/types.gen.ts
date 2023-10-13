@@ -417,28 +417,33 @@ export type CreateGatewayNetworkRequest = {
   enableDhcp?: boolean
   /**
    * ID of an existing DHCP configuration object to use for this GatewayNetwork.
+   *
    * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address',
    * 'ipamConfig' could be set.
    */
   dhcpId?: string
   /**
-   * New DHCP configuration object to use for this GatewayNetwork. One-of
-   * ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address', 'ipamConfig'
-   * could be set.
+   * New DHCP configuration object to use for this GatewayNetwork.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address',
+   * 'ipamConfig' could be set.
    */
   dhcp?: CreateDHCPRequest
   /**
-   * Static IP address in CIDR format to to use without DHCP. One-of
-   * ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address', 'ipamConfig'
-   * could be set.
+   * Static IP address in CIDR format to to use without DHCP.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address',
+   * 'ipamConfig' could be set.
    */
   address?: string
   /**
    * Note: all or none of the GatewayNetworks for a single gateway can use the
    * IPAM. DHCP and IPAM configurations cannot be mixed. Some products may
    * require that the Public Gateway uses the IPAM, to ensure correct
-   * functionality. One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp',
-   * 'address', 'ipamConfig' could be set.
+   * functionality.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address',
+   * 'ipamConfig' could be set.
    */
   ipamConfig?: IpamConfig
 }
@@ -869,21 +874,26 @@ export type UpdateGatewayNetworkRequest = {
   enableDhcp?: boolean
   /**
    * ID of the new DHCP configuration object to use with this GatewayNetwork.
+   *
    * One-of ('ipConfig'): at most one of 'dhcpId', 'address', 'ipamConfig' could
    * be set.
    */
   dhcpId?: string
   /**
-   * New static IP address. One-of ('ipConfig'): at most one of 'dhcpId',
-   * 'address', 'ipamConfig' could be set.
+   * New static IP address.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'address', 'ipamConfig' could
+   * be set.
    */
   address?: string
   /**
    * Note: all or none of the GatewayNetworks for a single gateway can use the
    * IPAM. DHCP and IPAM configurations cannot be mixed. Some products may
    * require that the Public Gateway uses the IPAM, to ensure correct
-   * functionality. One-of ('ipConfig'): at most one of 'dhcpId', 'address',
-   * 'ipamConfig' could be set.
+   * functionality.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'address', 'ipamConfig' could
+   * be set.
    */
   ipamConfig?: IpamConfig
 }

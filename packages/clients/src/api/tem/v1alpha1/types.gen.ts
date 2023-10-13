@@ -200,7 +200,7 @@ export type CreateDomainRequest = {
 export type CreateEmailRequest = {
   region?: Region
   /** Sender information. Must be from a checked domain declared in the Project. */
-  from: CreateEmailRequestAddress
+  from?: CreateEmailRequestAddress
   /** An array of the primary recipient's information. */
   to?: CreateEmailRequestAddress[]
   /** An array of the carbon copy recipient's information. */

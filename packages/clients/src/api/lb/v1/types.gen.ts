@@ -231,13 +231,17 @@ export interface Subscriber {
   /** Subscriber name. */
   name: string
   /**
-   * Email address of subscriber. One-of ('config'): at most one of
-   * 'emailConfig', 'webhookConfig' could be set.
+   * Email address of subscriber.
+   *
+   * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be
+   * set.
    */
   emailConfig?: SubscriberEmailConfig
   /**
-   * Webhook URI of subscriber. One-of ('config'): at most one of 'emailConfig',
-   * 'webhookConfig' could be set.
+   * Webhook URI of subscriber.
+   *
+   * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be
+   * set.
    */
   webhookConfig?: SubscriberWebhookConfig
 }
@@ -255,48 +259,62 @@ export interface HealthCheck {
    */
   checkMaxRetries: number
   /**
-   * Object to configure a basic TCP health check. One-of ('config'): at most
-   * one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig',
-   * 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
+   * Object to configure a basic TCP health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   tcpConfig?: HealthCheckTcpConfig
   /**
    * Object to configure a MySQL health check. The check requires MySQL >=3.22,
-   * for older versions, use a TCP health check. One-of ('config'): at most one
-   * of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig',
-   * 'httpConfig', 'httpsConfig' could be set.
+   * for older versions, use a TCP health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   mysqlConfig?: HealthCheckMysqlConfig
   /**
-   * Object to configure a PostgreSQL health check. One-of ('config'): at most
-   * one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig',
-   * 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
+   * Object to configure a PostgreSQL health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   pgsqlConfig?: HealthCheckPgsqlConfig
   /**
    * Object to configure an LDAP health check. The response is analyzed to find
-   * the LDAPv3 response message. One-of ('config'): at most one of 'tcpConfig',
-   * 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig',
-   * 'httpsConfig' could be set.
+   * the LDAPv3 response message.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   ldapConfig?: HealthCheckLdapConfig
   /**
    * Object to configure a Redis health check. The response is analyzed to find
-   * the +PONG response message. One-of ('config'): at most one of 'tcpConfig',
-   * 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig',
-   * 'httpsConfig' could be set.
+   * the +PONG response message.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   redisConfig?: HealthCheckRedisConfig
   /**
-   * Object to configure an HTTP health check. One-of ('config'): at most one of
-   * 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig',
-   * 'httpConfig', 'httpsConfig' could be set.
+   * Object to configure an HTTP health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   httpConfig?: HealthCheckHttpConfig
   /**
-   * Object to configure an HTTPS health check. One-of ('config'): at most one
-   * of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig',
-   * 'httpConfig', 'httpsConfig' could be set.
+   * Object to configure an HTTPS health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   httpsConfig?: HealthCheckHttpsConfig
   /** Defines whether proxy protocol should be activated for the health check. */
@@ -557,14 +575,16 @@ export interface RouteMatch {
   /**
    * Value to match in the Server Name Indication TLS extension (SNI) field from
    * an incoming connection made via an SSL/TLS transport layer. This field
-   * should be set for routes on TCP Load Balancers. One-of ('matchType'): at
-   * most one of 'sni', 'hostHeader' could be set.
+   * should be set for routes on TCP Load Balancers.
+   *
+   * One-of ('matchType'): at most one of 'sni', 'hostHeader' could be set.
    */
   sni?: string
   /**
    * Value to match in the HTTP Host request header from an incoming connection.
-   * This field should be set for routes on HTTP Load Balancers. One-of
-   * ('matchType'): at most one of 'sni', 'hostHeader' could be set.
+   * This field should be set for routes on HTTP Load Balancers.
+   *
+   * One-of ('matchType'): at most one of 'sni', 'hostHeader' could be set.
    */
   hostHeader?: string
 }
@@ -640,18 +660,24 @@ export interface PrivateNetwork {
   ipamIds: string[]
   /**
    * Object containing an array of a local IP address for the Load Balancer on
-   * this Private Network. One-of ('config'): at most one of 'staticConfig',
-   * 'dhcpConfig', 'ipamConfig' could be set.
+   * this Private Network.
+   *
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
-   * Object containing DHCP-assigned IP addresses. One-of ('config'): at most
-   * one of 'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
+   * Object containing DHCP-assigned IP addresses.
+   *
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
   /**
-   * For internal use only. One-of ('config'): at most one of 'staticConfig',
-   * 'dhcpConfig', 'ipamConfig' could be set.
+   * For internal use only.
+   *
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
    */
   ipamConfig?: PrivateNetworkIpamConfig
   /** Private Network ID. */
@@ -732,18 +758,24 @@ export type AttachPrivateNetworkRequest = {
   privateNetworkId: string
   /**
    * Object containing an array of a local IP address for the Load Balancer on
-   * this Private Network. One-of ('config'): at most one of 'staticConfig',
-   * 'dhcpConfig', 'ipamConfig' could be set.
+   * this Private Network.
+   *
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
-   * Defines whether to let DHCP assign IP addresses. One-of ('config'): at most
-   * one of 'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
+   * Defines whether to let DHCP assign IP addresses.
+   *
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
   /**
-   * For internal use only. One-of ('config'): at most one of 'staticConfig',
-   * 'dhcpConfig', 'ipamConfig' could be set.
+   * For internal use only.
+   *
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
    */
   ipamConfig?: PrivateNetworkIpamConfig
 }
@@ -756,12 +788,12 @@ export type CreateAclRequest = {
   /** ACL name. */
   name?: string
   /** Action to take when incoming traffic matches an ACL filter. */
-  action: AclAction
+  action?: AclAction
   /**
    * ACL match filter object. One of `ip_subnet` or `http_filter` &
    * `http_filter_value` are required.
    */
-  match: AclMatch
+  match?: AclMatch
   /**
    * Priority of this ACL (ACLs are applied in ascending order, 0 is the first
    * ACL executed).
@@ -803,7 +835,7 @@ export type CreateBackendRequest = {
    * Object defining the health check to be carried out by the backend when
    * checking the status and health of backend servers.
    */
-  healthCheck: HealthCheck
+  healthCheck?: HealthCheck
   /**
    * List of backend server IP addresses (IPv4 or IPv6) the backend should
    * forward traffic to.
@@ -860,13 +892,17 @@ export type CreateCertificateRequest = {
   /** Name for the certificate. */
   name?: string
   /**
-   * Object to define a new Let's Encrypt certificate to be generated. One-of
-   * ('type'): at most one of 'letsencrypt', 'customCertificate' could be set.
+   * Object to define a new Let's Encrypt certificate to be generated.
+   *
+   * One-of ('type'): at most one of 'letsencrypt', 'customCertificate' could be
+   * set.
    */
   letsencrypt?: CreateCertificateRequestLetsencryptConfig
   /**
-   * Object to define an existing custom certificate to be imported. One-of
-   * ('type'): at most one of 'letsencrypt', 'customCertificate' could be set.
+   * Object to define an existing custom certificate to be imported.
+   *
+   * One-of ('type'): at most one of 'letsencrypt', 'customCertificate' could be
+   * set.
    */
   customCertificate?: CreateCertificateRequestCustomCertificate
 }
@@ -895,14 +931,16 @@ export type CreateIpRequest = {
   region?: Region
   /**
    * Organization ID of the Organization where the IP address should be created.
+   *
    * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    * could be set.
    */
   organizationId?: string
   /**
-   * Project ID of the Project where the IP address should be created. One-of
-   * ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
-   * be set.
+   * Project ID of the Project where the IP address should be created.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   projectId?: string
   /** Reverse DNS (domain name) for the IP address. */
@@ -912,15 +950,17 @@ export type CreateIpRequest = {
 export type CreateLbRequest = {
   region?: Region
   /**
-   * Scaleway Organization to create the Load Balancer in. One-of
-   * ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
-   * be set.
+   * Scaleway Organization to create the Load Balancer in.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   organizationId?: string
   /**
-   * Scaleway Project to create the Load Balancer in. One-of
-   * ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
-   * be set.
+   * Scaleway Project to create the Load Balancer in.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   projectId?: string
   /** Name for the Load Balancer. */
@@ -973,23 +1013,31 @@ export type CreateSubscriberRequest = {
   /** Subscriber name. */
   name: string
   /**
-   * Email address configuration. One-of ('config'): at most one of
-   * 'emailConfig', 'webhookConfig' could be set.
+   * Email address configuration.
+   *
+   * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be
+   * set.
    */
   emailConfig?: SubscriberEmailConfig
   /**
-   * WebHook URI configuration. One-of ('config'): at most one of 'emailConfig',
-   * 'webhookConfig' could be set.
+   * WebHook URI configuration.
+   *
+   * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be
+   * set.
    */
   webhookConfig?: SubscriberWebhookConfig
   /**
-   * Organization ID to create the subscriber in. One-of ('projectIdentifier'):
-   * at most one of 'organizationId', 'projectId' could be set.
+   * Organization ID to create the subscriber in.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   organizationId?: string
   /**
-   * Project ID to create the subscriber in. One-of ('projectIdentifier'): at
-   * most one of 'organizationId', 'projectId' could be set.
+   * Project ID to create the subscriber in.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   projectId?: string
 }
@@ -1417,12 +1465,12 @@ export type UpdateAclRequest = {
   /** ACL name. */
   name: string
   /** Action to take when incoming traffic matches an ACL filter. */
-  action: AclAction
+  action?: AclAction
   /**
    * ACL match filter object. One of `ip_subnet` or `http_filter` &
    * `http_filter_value` are required.
    */
-  match: AclMatch
+  match?: AclMatch
   /**
    * Priority of this ACL (ACLs are applied in ascending order, 0 is the first
    * ACL executed).
@@ -1550,48 +1598,62 @@ export type UpdateHealthCheckRequest = {
   /** Defines whether proxy protocol should be activated for the health check. */
   checkSendProxy: boolean
   /**
-   * Object to configure a basic TCP health check. One-of ('config'): at most
-   * one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig',
-   * 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
+   * Object to configure a basic TCP health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   tcpConfig?: HealthCheckTcpConfig
   /**
    * Object to configure a MySQL health check. The check requires MySQL >=3.22,
-   * for older versions, use a TCP health check. One-of ('config'): at most one
-   * of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig',
-   * 'httpConfig', 'httpsConfig' could be set.
+   * for older versions, use a TCP health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   mysqlConfig?: HealthCheckMysqlConfig
   /**
-   * Object to configure a PostgreSQL health check. One-of ('config'): at most
-   * one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig',
-   * 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
+   * Object to configure a PostgreSQL health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   pgsqlConfig?: HealthCheckPgsqlConfig
   /**
    * Object to configure an LDAP health check. The response is analyzed to find
-   * the LDAPv3 response message. One-of ('config'): at most one of 'tcpConfig',
-   * 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig',
-   * 'httpsConfig' could be set.
+   * the LDAPv3 response message.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   ldapConfig?: HealthCheckLdapConfig
   /**
    * Object to configure a Redis health check. The response is analyzed to find
-   * the +PONG response message. One-of ('config'): at most one of 'tcpConfig',
-   * 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig',
-   * 'httpsConfig' could be set.
+   * the +PONG response message.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   redisConfig?: HealthCheckRedisConfig
   /**
-   * Object to configure an HTTP health check. One-of ('config'): at most one of
-   * 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig',
-   * 'httpConfig', 'httpsConfig' could be set.
+   * Object to configure an HTTP health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   httpConfig?: HealthCheckHttpConfig
   /**
-   * Object to configure an HTTPS health check. One-of ('config'): at most one
-   * of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig',
-   * 'httpConfig', 'httpsConfig' could be set.
+   * Object to configure an HTTPS health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   httpsConfig?: HealthCheckHttpsConfig
   /**
@@ -1652,13 +1714,17 @@ export type UpdateSubscriberRequest = {
   /** Subscriber name. */
   name: string
   /**
-   * Email address configuration. One-of ('config'): at most one of
-   * 'emailConfig', 'webhookConfig' could be set.
+   * Email address configuration.
+   *
+   * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be
+   * set.
    */
   emailConfig?: SubscriberEmailConfig
   /**
-   * Webhook URI configuration. One-of ('config'): at most one of 'emailConfig',
-   * 'webhookConfig' could be set.
+   * Webhook URI configuration.
+   *
+   * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be
+   * set.
    */
   webhookConfig?: SubscriberWebhookConfig
 }
@@ -1679,18 +1745,24 @@ export type ZonedApiAttachPrivateNetworkRequest = {
   privateNetworkId: string
   /**
    * Object containing an array of a local IP address for the Load Balancer on
-   * this Private Network. One-of ('config'): at most one of 'staticConfig',
-   * 'dhcpConfig', 'ipamConfig' could be set.
+   * this Private Network.
+   *
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
-   * Defines whether to let DHCP assign IP addresses. One-of ('config'): at most
-   * one of 'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
+   * Defines whether to let DHCP assign IP addresses.
+   *
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
   /**
-   * For internal use only. One-of ('config'): at most one of 'staticConfig',
-   * 'dhcpConfig', 'ipamConfig' could be set.
+   * For internal use only.
+   *
+   * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
+   * 'ipamConfig' could be set.
    */
   ipamConfig?: PrivateNetworkIpamConfig
 }
@@ -1703,12 +1775,12 @@ export type ZonedApiCreateAclRequest = {
   /** ACL name. */
   name?: string
   /** Action to take when incoming traffic matches an ACL filter. */
-  action: AclAction
+  action?: AclAction
   /**
    * ACL match filter object. One of `ip_subnet` or `http_filter` &
    * `http_filter_value` are required.
    */
-  match: AclMatch
+  match?: AclMatch
   /**
    * Priority of this ACL (ACLs are applied in ascending order, 0 is the first
    * ACL executed).
@@ -1750,7 +1822,7 @@ export type ZonedApiCreateBackendRequest = {
    * Object defining the health check to be carried out by the backend when
    * checking the status and health of backend servers.
    */
-  healthCheck: HealthCheck
+  healthCheck?: HealthCheck
   /**
    * List of backend server IP addresses (IPv4 or IPv6) the backend should
    * forward traffic to.
@@ -1807,13 +1879,17 @@ export type ZonedApiCreateCertificateRequest = {
   /** Name for the certificate. */
   name?: string
   /**
-   * Object to define a new Let's Encrypt certificate to be generated. One-of
-   * ('type'): at most one of 'letsencrypt', 'customCertificate' could be set.
+   * Object to define a new Let's Encrypt certificate to be generated.
+   *
+   * One-of ('type'): at most one of 'letsencrypt', 'customCertificate' could be
+   * set.
    */
   letsencrypt?: CreateCertificateRequestLetsencryptConfig
   /**
-   * Object to define an existing custom certificate to be imported. One-of
-   * ('type'): at most one of 'letsencrypt', 'customCertificate' could be set.
+   * Object to define an existing custom certificate to be imported.
+   *
+   * One-of ('type'): at most one of 'letsencrypt', 'customCertificate' could be
+   * set.
    */
   customCertificate?: CreateCertificateRequestCustomCertificate
 }
@@ -1842,14 +1918,16 @@ export type ZonedApiCreateIpRequest = {
   zone?: Zone
   /**
    * Organization ID of the Organization where the IP address should be created.
+   *
    * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
    * could be set.
    */
   organizationId?: string
   /**
-   * Project ID of the Project where the IP address should be created. One-of
-   * ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
-   * be set.
+   * Project ID of the Project where the IP address should be created.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   projectId?: string
   /** Reverse DNS (domain name) for the IP address. */
@@ -1859,15 +1937,17 @@ export type ZonedApiCreateIpRequest = {
 export type ZonedApiCreateLbRequest = {
   zone?: Zone
   /**
-   * Scaleway Organization to create the Load Balancer in. One-of
-   * ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
-   * be set.
+   * Scaleway Organization to create the Load Balancer in.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   organizationId?: string
   /**
-   * Scaleway Project to create the Load Balancer in. One-of
-   * ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
-   * be set.
+   * Scaleway Project to create the Load Balancer in.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   projectId?: string
   /** Name for the Load Balancer. */
@@ -1920,23 +2000,31 @@ export type ZonedApiCreateSubscriberRequest = {
   /** Subscriber name. */
   name: string
   /**
-   * Email address configuration. One-of ('config'): at most one of
-   * 'emailConfig', 'webhookConfig' could be set.
+   * Email address configuration.
+   *
+   * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be
+   * set.
    */
   emailConfig?: SubscriberEmailConfig
   /**
-   * WebHook URI configuration. One-of ('config'): at most one of 'emailConfig',
-   * 'webhookConfig' could be set.
+   * WebHook URI configuration.
+   *
+   * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be
+   * set.
    */
   webhookConfig?: SubscriberWebhookConfig
   /**
-   * Organization ID to create the subscriber in. One-of ('projectIdentifier'):
-   * at most one of 'organizationId', 'projectId' could be set.
+   * Organization ID to create the subscriber in.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   organizationId?: string
   /**
-   * Project ID to create the subscriber in. One-of ('projectIdentifier'): at
-   * most one of 'organizationId', 'projectId' could be set.
+   * Project ID to create the subscriber in.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   projectId?: string
 }
@@ -2286,12 +2374,12 @@ export type ZonedApiUpdateAclRequest = {
   /** ACL name. */
   name: string
   /** Action to take when incoming traffic matches an ACL filter. */
-  action: AclAction
+  action?: AclAction
   /**
    * ACL match filter object. One of `ip_subnet` or `http_filter` &
    * `http_filter_value` are required.
    */
-  match: AclMatch
+  match?: AclMatch
   /**
    * Priority of this ACL (ACLs are applied in ascending order, 0 is the first
    * ACL executed).
@@ -2419,48 +2507,62 @@ export type ZonedApiUpdateHealthCheckRequest = {
   /** Defines whether proxy protocol should be activated for the health check. */
   checkSendProxy: boolean
   /**
-   * Object to configure a basic TCP health check. One-of ('config'): at most
-   * one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig',
-   * 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
+   * Object to configure a basic TCP health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   tcpConfig?: HealthCheckTcpConfig
   /**
    * Object to configure a MySQL health check. The check requires MySQL >=3.22,
-   * for older versions, use a TCP health check. One-of ('config'): at most one
-   * of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig',
-   * 'httpConfig', 'httpsConfig' could be set.
+   * for older versions, use a TCP health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   mysqlConfig?: HealthCheckMysqlConfig
   /**
-   * Object to configure a PostgreSQL health check. One-of ('config'): at most
-   * one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig',
-   * 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
+   * Object to configure a PostgreSQL health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   pgsqlConfig?: HealthCheckPgsqlConfig
   /**
    * Object to configure an LDAP health check. The response is analyzed to find
-   * the LDAPv3 response message. One-of ('config'): at most one of 'tcpConfig',
-   * 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig',
-   * 'httpsConfig' could be set.
+   * the LDAPv3 response message.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   ldapConfig?: HealthCheckLdapConfig
   /**
    * Object to configure a Redis health check. The response is analyzed to find
-   * the +PONG response message. One-of ('config'): at most one of 'tcpConfig',
-   * 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig',
-   * 'httpsConfig' could be set.
+   * the +PONG response message.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   redisConfig?: HealthCheckRedisConfig
   /**
-   * Object to configure an HTTP health check. One-of ('config'): at most one of
-   * 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig',
-   * 'httpConfig', 'httpsConfig' could be set.
+   * Object to configure an HTTP health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   httpConfig?: HealthCheckHttpConfig
   /**
-   * Object to configure an HTTPS health check. One-of ('config'): at most one
-   * of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig',
-   * 'httpConfig', 'httpsConfig' could be set.
+   * Object to configure an HTTPS health check.
+   *
+   * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
+   * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
+   * could be set.
    */
   httpsConfig?: HealthCheckHttpsConfig
   /**
@@ -2521,13 +2623,17 @@ export type ZonedApiUpdateSubscriberRequest = {
   /** Subscriber name. */
   name: string
   /**
-   * Email address configuration. One-of ('config'): at most one of
-   * 'emailConfig', 'webhookConfig' could be set.
+   * Email address configuration.
+   *
+   * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be
+   * set.
    */
   emailConfig?: SubscriberEmailConfig
   /**
-   * Webhook URI configuration. One-of ('config'): at most one of 'emailConfig',
-   * 'webhookConfig' could be set.
+   * Webhook URI configuration.
+   *
+   * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be
+   * set.
    */
   webhookConfig?: SubscriberWebhookConfig
 }

@@ -238,8 +238,10 @@ export interface Hub {
    */
   hasCustomCa: boolean
   /**
-   * BETA - not implemented yet. One-of ('twinsDbConfig'): at most one of
-   * 'twinsGraphiteConfig' could be set.
+   * BETA - not implemented yet.
+   *
+   * One-of ('twinsDbConfig'): at most one of 'twinsGraphiteConfig' could be
+   * set.
    */
   twinsGraphiteConfig?: HubTwinsGraphiteConfig
 }
@@ -358,7 +360,7 @@ export type CreateDeviceRequest = {
    * Filter-sets to authorize or deny the device to publish/subscribe to
    * specific topics.
    */
-  messageFilters: DeviceMessageFilters
+  messageFilters?: DeviceMessageFilters
   /** Device description. */
   description?: string
 }
@@ -386,8 +388,10 @@ export type CreateHubRequest = {
   /** Topic prefix (default '$SCW/events') of Hub events. */
   eventsTopicPrefix?: string
   /**
-   * BETA - not implemented yet. One-of ('twinsDbConfig'): at most one of
-   * 'twinsGraphiteConfig' could be set.
+   * BETA - not implemented yet.
+   *
+   * One-of ('twinsDbConfig'): at most one of 'twinsGraphiteConfig' could be
+   * set.
    */
   twinsGraphiteConfig?: HubTwinsGraphiteConfig
 }
@@ -423,20 +427,24 @@ export type CreateRouteRequest = {
    */
   topic: string
   /**
-   * If creating S3 Route, S3-specific configuration fields. One-of ('config'):
-   * at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
+   * If creating S3 Route, S3-specific configuration fields.
+   *
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   s3Config?: CreateRouteRequestS3Config
   /**
-   * If creating Database Route, DB-specific configuration fields. One-of
-   * ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be
-   * set.
+   * If creating Database Route, DB-specific configuration fields.
+   *
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   dbConfig?: CreateRouteRequestDatabaseConfig
   /**
-   * If creating Rest Route, Rest-specific configuration fields. One-of
-   * ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be
-   * set.
+   * If creating Rest Route, Rest-specific configuration fields.
+   *
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   restConfig?: CreateRouteRequestRestConfig
 }
@@ -758,20 +766,24 @@ export interface Route {
   /** Date at which the route was created. */
   createdAt?: Date
   /**
-   * When using S3 Route, S3-specific configuration fields. One-of ('config'):
-   * at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
+   * When using S3 Route, S3-specific configuration fields.
+   *
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   s3Config?: RouteS3Config
   /**
-   * When using Database Route, DB-specific configuration fields. One-of
-   * ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be
-   * set.
+   * When using Database Route, DB-specific configuration fields.
+   *
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   dbConfig?: RouteDatabaseConfig
   /**
-   * When using Rest Route, Rest-specific configuration fields. One-of
-   * ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be
-   * set.
+   * When using Rest Route, Rest-specific configuration fields.
+   *
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   restConfig?: RouteRestConfig
   /** Date at which the route was last updated. */
@@ -833,7 +845,7 @@ export type UpdateDeviceRequest = {
    */
   allowMultipleConnections?: boolean
   /** Filter-sets to restrict the topics the device can publish/subscribe to. */
-  messageFilters: DeviceMessageFilters
+  messageFilters?: DeviceMessageFilters
   /** Change Hub for this device, additional fees may apply, see IoT Hub pricing. */
   hubId?: string
 }
@@ -853,8 +865,10 @@ export type UpdateHubRequest = {
   /** Enable device auto provisioning. */
   enableDeviceAutoProvisioning?: boolean
   /**
-   * BETA - not implemented yet. One-of ('twinsDbConfig'): at most one of
-   * 'twinsGraphiteConfig' could be set.
+   * BETA - not implemented yet.
+   *
+   * One-of ('twinsDbConfig'): at most one of 'twinsGraphiteConfig' could be
+   * set.
    */
   twinsGraphiteConfig?: HubTwinsGraphiteConfig
 }
@@ -871,21 +885,24 @@ export type UpdateRouteRequest = {
    */
   topic?: string
   /**
-   * When updating S3 Route, S3-specific configuration fields. One-of
-   * ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be
-   * set.
+   * When updating S3 Route, S3-specific configuration fields.
+   *
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   s3Config?: UpdateRouteRequestS3Config
   /**
-   * When updating Database Route, DB-specific configuration fields. One-of
-   * ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be
-   * set.
+   * When updating Database Route, DB-specific configuration fields.
+   *
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   dbConfig?: UpdateRouteRequestDatabaseConfig
   /**
-   * When updating Rest Route, Rest-specific configuration fields. One-of
-   * ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be
-   * set.
+   * When updating Rest Route, Rest-specific configuration fields.
+   *
+   * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
+   * could be set.
    */
   restConfig?: UpdateRouteRequestRestConfig
 }

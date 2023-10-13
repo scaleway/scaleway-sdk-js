@@ -8,7 +8,6 @@ import {
   unmarshalDate,
   unmarshalTimeSeries,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   ACLRule,
@@ -310,6 +309,7 @@ const unmarshalVolume = (data: unknown) => {
   }
 
   return {
+    class: data.class,
     size: data.size,
     type: data.type,
   } as Volume
@@ -684,6 +684,7 @@ const unmarshalNodeTypeVolumeType = (data: unknown) => {
 
   return {
     chunkSize: data.chunk_size,
+    class: data.class,
     description: data.description,
     maxSize: data.max_size,
     minSize: data.min_size,
@@ -891,6 +892,7 @@ const marshalEndpointSpecPrivateNetwork = (
 ): Record<string, unknown> => ({
   private_network_id: request.privateNetworkId,
   ...resolveOneOf<unknown>([
+    { param: 'service_ip', value: request.serviceIp },
     {
       param: 'ipam_config',
       value:
@@ -901,7 +903,6 @@ const marshalEndpointSpecPrivateNetwork = (
             )
           : undefined,
     },
-    { param: 'service_ip', value: request.serviceIp },
   ]),
 })
 
@@ -991,6 +992,7 @@ const marshalReadReplicaEndpointSpecPrivateNetwork = (
 ): Record<string, unknown> => ({
   private_network_id: request.privateNetworkId,
   ...resolveOneOf<unknown>([
+    { param: 'service_ip', value: request.serviceIp },
     {
       param: 'ipam_config',
       value:
@@ -1001,7 +1003,6 @@ const marshalReadReplicaEndpointSpecPrivateNetwork = (
             )
           : undefined,
     },
-    { param: 'service_ip', value: request.serviceIp },
   ]),
 })
 
@@ -1203,10 +1204,10 @@ export const marshalUpgradeInstanceRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf<unknown>([
-    { param: 'enable_ha', value: request.enableHa },
     { param: 'node_type', value: request.nodeType },
-    { param: 'upgradable_version_id', value: request.upgradableVersionId },
+    { param: 'enable_ha', value: request.enableHa },
     { param: 'volume_size', value: request.volumeSize },
     { param: 'volume_type', value: request.volumeType },
+    { param: 'upgradable_version_id', value: request.upgradableVersionId },
   ]),
 })

@@ -8,7 +8,6 @@ import {
   unmarshalDate,
   unmarshalMapOfObject,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   ApplyBlockMigrationRequest,
@@ -25,6 +24,7 @@ import type {
   CreateSecurityGroupResponse,
   CreateSecurityGroupRuleRequest,
   CreateSecurityGroupRuleResponse,
+  CreateServerRequest,
   CreateServerResponse,
   CreateSnapshotRequest,
   CreateSnapshotResponse,
@@ -87,6 +87,7 @@ import type {
   ServerTypeNetworkInterface,
   ServerTypeVolumeConstraintSizes,
   ServerTypeVolumeConstraintsByType,
+  SetImageRequest,
   SetPlacementGroupRequest,
   SetPlacementGroupResponse,
   SetPlacementGroupServersRequest,
@@ -104,6 +105,7 @@ import type {
   UpdatePlacementGroupServersRequest,
   UpdatePlacementGroupServersResponse,
   UpdatePrivateNICRequest,
+  UpdateServerRequest,
   UpdateServerResponse,
   UpdateVolumeRequest,
   UpdateVolumeResponse,
@@ -117,8 +119,6 @@ import type {
   VolumeTypeConstraints,
 } from './types.gen'
 import type {
-  CreateServerRequest,
-  SetImageRequest,
   SetImageResponse,
   SetSecurityGroupRequest,
   SetSecurityGroupResponse,
@@ -128,7 +128,6 @@ import type {
   SetServerResponse,
   SetSnapshotRequest,
   SetSnapshotResponse,
-  UpdateServerRequest,
 } from './types.private.gen'
 
 export const unmarshalPrivateNIC = (data: unknown) => {
@@ -444,6 +443,7 @@ const unmarshalServerIp = (data: unknown) => {
     id: data.id,
     netmask: data.netmask,
     provisioningMode: data.provisioning_mode,
+    tags: data.tags,
   } as ServerIp
 }
 
@@ -1410,8 +1410,8 @@ export const marshalApplyBlockMigrationRequest = (
 ): Record<string, unknown> => ({
   validation_key: request.validationKey,
   ...resolveOneOf<unknown>([
-    { param: 'snapshot_id', value: request.snapshotId },
     { param: 'volume_id', value: request.volumeId },
+    { param: 'snapshot_id', value: request.snapshotId },
   ]),
 })
 
@@ -1435,13 +1435,16 @@ export const marshalCreateImageRequest = (
 ): Record<string, unknown> => ({
   arch: request.arch,
   default_bootscript: request.defaultBootscript,
-  extra_volumes: Object.entries(request.extraVolumes).reduce(
-    (acc, [key, value]) => ({
-      ...acc,
-      [key]: marshalVolumeTemplate(value, defaults),
-    }),
-    {},
-  ),
+  extra_volumes:
+    request.extraVolumes !== undefined
+      ? Object.entries(request.extraVolumes).reduce(
+          (acc, [key, value]) => ({
+            ...acc,
+            [key]: marshalVolumeTemplate(value, defaults),
+          }),
+          {},
+        )
+      : undefined,
   name: request.name || randomName('img'),
   public: request.public,
   root_volume: request.rootVolume,
@@ -1554,13 +1557,16 @@ export const marshalCreateServerRequest = (
   routed_ip_enabled: request.routedIpEnabled,
   security_group: request.securityGroup,
   tags: request.tags,
-  volumes: Object.entries(request.volumes).reduce(
-    (acc, [key, value]) => ({
-      ...acc,
-      [key]: marshalVolumeServerTemplate(value, defaults),
-    }),
-    {},
-  ),
+  volumes:
+    request.volumes !== undefined
+      ? Object.entries(request.volumes).reduce(
+          (acc, [key, value]) => ({
+            ...acc,
+            [key]: marshalVolumeServerTemplate(value, defaults),
+          }),
+          {},
+        )
+      : undefined,
   ...resolveOneOf<unknown>([
     { param: 'organization', value: request.organization },
     { param: 'project', value: request.project },
@@ -1596,9 +1602,9 @@ export const marshalCreateVolumeRequest = (
     { param: 'project', value: request.project },
   ]),
   ...resolveOneOf<unknown>([
-    { param: 'base_snapshot', value: request.baseSnapshot },
-    { param: 'base_volume', value: request.baseVolume },
     { param: 'size', value: request.size },
+    { param: 'base_volume', value: request.baseVolume },
+    { param: 'base_snapshot', value: request.baseSnapshot },
   ]),
 })
 
@@ -1615,8 +1621,8 @@ export const marshalPlanBlockMigrationRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf<unknown>([
-    { param: 'snapshot_id', value: request.snapshotId },
     { param: 'volume_id', value: request.volumeId },
+    { param: 'snapshot_id', value: request.snapshotId },
   ]),
 })
 
@@ -1633,13 +1639,19 @@ export const marshalServerActionRequest = (
 ): Record<string, unknown> => ({
   action: request.action,
   name: request.name,
-  volumes: Object.entries(request.volumes).reduce(
-    (acc, [key, value]) => ({
-      ...acc,
-      [key]: marshalServerActionRequestVolumeBackupTemplate(value, defaults),
-    }),
-    {},
-  ),
+  volumes:
+    request.volumes !== undefined
+      ? Object.entries(request.volumes).reduce(
+          (acc, [key, value]) => ({
+            ...acc,
+            [key]: marshalServerActionRequestVolumeBackupTemplate(
+              value,
+              defaults,
+            ),
+          }),
+          {},
+        )
+      : undefined,
 })
 
 const marshalServerSummary = (
@@ -1707,17 +1719,26 @@ export const marshalSetImageRequest = (
     request.defaultBootscript !== undefined
       ? marshalBootscript(request.defaultBootscript, defaults)
       : undefined,
-  extra_volumes: Object.entries(request.extraVolumes).reduce(
-    (acc, [key, value]) => ({ ...acc, [key]: marshalVolume(value, defaults) }),
-    {},
-  ),
+  extra_volumes:
+    request.extraVolumes !== undefined
+      ? Object.entries(request.extraVolumes).reduce(
+          (acc, [key, value]) => ({
+            ...acc,
+            [key]: marshalVolume(value, defaults),
+          }),
+          {},
+        )
+      : undefined,
   from_server: request.fromServer,
   modification_date: request.modificationDate,
   name: request.name,
   organization: request.organization ?? defaults.defaultOrganizationId,
   project: request.project ?? defaults.defaultProjectId,
   public: request.public,
-  root_volume: marshalVolumeSummary(request.rootVolume, defaults),
+  root_volume:
+    request.rootVolume !== undefined
+      ? marshalVolumeSummary(request.rootVolume, defaults)
+      : undefined,
   state: request.state,
   tags: request.tags,
 })
@@ -1880,6 +1901,7 @@ const marshalServerIp = (
   id: request.id,
   netmask: request.netmask,
   provisioning_mode: request.provisioningMode,
+  tags: request.tags,
 })
 
 const marshalServerIpv6 = (
@@ -1926,9 +1948,18 @@ export const marshalSetServerRequest = (
   dynamic_ip_required: request.dynamicIpRequired,
   enable_ipv6: request.enableIpv6,
   hostname: request.hostname,
-  image: marshalImage(request.image, defaults),
-  ipv6: marshalServerIpv6(request.ipv6, defaults),
-  location: marshalServerLocation(request.location, defaults),
+  image:
+    request.image !== undefined
+      ? marshalImage(request.image, defaults)
+      : undefined,
+  ipv6:
+    request.ipv6 !== undefined
+      ? marshalServerIpv6(request.ipv6, defaults)
+      : undefined,
+  location:
+    request.location !== undefined
+      ? marshalServerLocation(request.location, defaults)
+      : undefined,
   maintenances:
     request.maintenances !== undefined
       ? request.maintenances.map(elt => marshalServerMaintenance(elt, defaults))
@@ -1936,7 +1967,10 @@ export const marshalSetServerRequest = (
   modification_date: request.modificationDate,
   name: request.name,
   organization: request.organization ?? defaults.defaultOrganizationId,
-  placement_group: marshalPlacementGroup(request.placementGroup, defaults),
+  placement_group:
+    request.placementGroup !== undefined
+      ? marshalPlacementGroup(request.placementGroup, defaults)
+      : undefined,
   private_ip: request.privateIp,
   private_nics:
     request.privateNics !== undefined
@@ -1944,20 +1978,32 @@ export const marshalSetServerRequest = (
       : undefined,
   project: request.project ?? defaults.defaultProjectId,
   protected: request.protected,
-  public_ip: marshalServerIp(request.publicIp, defaults),
+  public_ip:
+    request.publicIp !== undefined
+      ? marshalServerIp(request.publicIp, defaults)
+      : undefined,
   public_ips:
     request.publicIps !== undefined
       ? request.publicIps.map(elt => marshalServerIp(elt, defaults))
       : undefined,
   routed_ip_enabled: request.routedIpEnabled,
-  security_group: marshalSecurityGroupSummary(request.securityGroup, defaults),
+  security_group:
+    request.securityGroup !== undefined
+      ? marshalSecurityGroupSummary(request.securityGroup, defaults)
+      : undefined,
   state: request.state,
   state_detail: request.stateDetail,
   tags: request.tags,
-  volumes: Object.entries(request.volumes).reduce(
-    (acc, [key, value]) => ({ ...acc, [key]: marshalVolume(value, defaults) }),
-    {},
-  ),
+  volumes:
+    request.volumes !== undefined
+      ? Object.entries(request.volumes).reduce(
+          (acc, [key, value]) => ({
+            ...acc,
+            [key]: marshalVolume(value, defaults),
+          }),
+          {},
+        )
+      : undefined,
 })
 
 const marshalSnapshotBaseVolume = (
@@ -1972,7 +2018,10 @@ export const marshalSetSnapshotRequest = (
   request: SetSnapshotRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  base_volume: marshalSnapshotBaseVolume(request.baseVolume, defaults),
+  base_volume:
+    request.baseVolume !== undefined
+      ? marshalSnapshotBaseVolume(request.baseVolume, defaults)
+      : undefined,
   creation_date: request.creationDate,
   id: request.id,
   modification_date: request.modificationDate,
@@ -2038,17 +2087,14 @@ export const marshalUpdateServerRequest = (
   enable_ipv6: request.enableIpv6,
   name: request.name,
   placement_group: request.placementGroup,
-  private_nics:
-    request.privateNics !== undefined
-      ? request.privateNics.map(elt => marshalPrivateNIC(elt, defaults))
-      : undefined,
+  private_nics: request.privateNics,
   protected: request.protected,
-  public_ips:
-    request.publicIps !== undefined
-      ? request.publicIps.map(elt => marshalServerIp(elt, defaults))
-      : undefined,
+  public_ips: request.publicIps,
   routed_ip_enabled: request.routedIpEnabled,
-  security_group: marshalSecurityGroupTemplate(request.securityGroup, defaults),
+  security_group:
+    request.securityGroup !== undefined
+      ? marshalSecurityGroupTemplate(request.securityGroup, defaults)
+      : undefined,
   tags: request.tags,
   volumes:
     request.volumes !== undefined

@@ -154,8 +154,8 @@ export class API extends ParentAPI {
           ...Object.entries(
             resolveOneOf([
               { param: 'image_id', value: request.imageId },
-              { param: 'image_label', value: request.imageLabel },
               { param: 'version_id', value: request.versionId },
+              { param: 'image_label', value: request.imageLabel },
             ]),
           ),
         ),

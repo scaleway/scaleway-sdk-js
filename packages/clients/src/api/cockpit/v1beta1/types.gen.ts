@@ -94,8 +94,9 @@ export interface Plan {
 /** Contact point. */
 export interface ContactPoint {
   /**
-   * Contact point configuration. One-of ('configuration'): at most one of
-   * 'email' could be set.
+   * Contact point configuration.
+   *
+   * One-of ('configuration'): at most one of 'email' could be set.
    */
   email?: ContactPointEmail
 }
@@ -112,6 +113,20 @@ export interface Datasource {
   url: string
   /** Datasource type. */
   type: DatasourceType
+}
+
+/** Grafana dashboard. */
+export interface GrafanaProductDashboard {
+  /** Name of the dashboard. */
+  dashboardName: string
+  /** Title of the dashboard. */
+  title: string
+  /** URL of the dashboard. */
+  url: string
+  /** Tags of the dashboard. */
+  tags: string[]
+  /** Variables of the dashboard. */
+  variables: string[]
 }
 
 /** Grafana user. */
@@ -206,7 +221,7 @@ export type CreateTokenRequest = {
   /** Name of the token. */
   name?: string
   /** Token's permissions. */
-  scopes: TokenScopes
+  scopes?: TokenScopes
 }
 
 export type DeactivateCockpitRequest = {
@@ -264,6 +279,14 @@ export type GetCockpitRequest = {
   projectId?: string
 }
 
+/** Request to get a dashboard. */
+export type GetGrafanaProductDashboardRequest = {
+  /** Name of the dashboard. */
+  dashboardName: string
+  /** ID of the Project. */
+  projectId?: string
+}
+
 export type GetTokenRequest = {
   /** ID of the token. */
   tokenId: string
@@ -312,6 +335,26 @@ export interface ListDatasourcesResponse {
   totalCount: number
   /** List of the datasources within the pagination. */
   datasources: Datasource[]
+}
+
+/** Request to get a list of dashboards. */
+export type ListGrafanaProductDashboardsRequest = {
+  /** ID of the Project. */
+  projectId?: string
+  /** Page number. */
+  page?: number
+  /** Page size. */
+  pageSize?: number
+  /** Tags to filter the dashboards. */
+  tags?: string[]
+}
+
+/** Response returned when getting a list of dashboards. */
+export interface ListGrafanaProductDashboardsResponse {
+  /** Count of grafana dasboards. */
+  totalCount: number
+  /** Information on grafana dashboards. */
+  dashboards: GrafanaProductDashboard[]
 }
 
 /** Request to list all Grafana users. */

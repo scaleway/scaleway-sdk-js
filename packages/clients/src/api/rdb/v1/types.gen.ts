@@ -119,7 +119,9 @@ export type SnapshotStatus =
   | 'error'
   | 'locked'
 
-export type VolumeType = 'lssd' | 'bssd' | 'sbs'
+export type StorageClass = 'unknown_storage_class' | 'lssd' | 'bssd' | 'sbs'
+
+export type VolumeType = 'lssd' | 'bssd' | 'sbs_5k' | 'sbs_15k'
 
 export interface EndpointDirectAccessDetails {}
 
@@ -167,8 +169,9 @@ export interface Endpoint {
   /** UUID of the endpoint. */
   id: string
   /**
-   * IPv4 address of the endpoint. One-of ('address'): at most one of 'ip',
-   * 'hostname' could be set.
+   * IPv4 address of the endpoint.
+   *
+   * One-of ('address'): at most one of 'ip', 'hostname' could be set.
    */
   ip?: string
   /** TCP port of the endpoint. */
@@ -178,26 +181,32 @@ export interface Endpoint {
   /**
    * Private Network details. One maximum per Database Instance or Read Replica
    * (a Database Instance and its Read Replica can have different Private
-   * Networks). Cannot be updated (has to be deleted and recreated). One-of
-   * ('details'): at most one of 'privateNetwork', 'loadBalancer',
+   * Networks). Cannot be updated (has to be deleted and recreated).
+   *
+   * One-of ('details'): at most one of 'privateNetwork', 'loadBalancer',
    * 'directAccess' could be set.
    */
   privateNetwork?: EndpointPrivateNetworkDetails
   /**
    * Load balancer details. Public endpoint for Database Instance which is
-   * systematically present. One per Database Instance. One-of ('details'): at
-   * most one of 'privateNetwork', 'loadBalancer', 'directAccess' could be set.
+   * systematically present. One per Database Instance.
+   *
+   * One-of ('details'): at most one of 'privateNetwork', 'loadBalancer',
+   * 'directAccess' could be set.
    */
   loadBalancer?: EndpointLoadBalancerDetails
   /**
    * Direct access details. Public endpoint reserved for Read Replicas. One per
-   * Read Replica. One-of ('details'): at most one of 'privateNetwork',
-   * 'loadBalancer', 'directAccess' could be set.
+   * Read Replica.
+   *
+   * One-of ('details'): at most one of 'privateNetwork', 'loadBalancer',
+   * 'directAccess' could be set.
    */
   directAccess?: EndpointDirectAccessDetails
   /**
-   * Hostname of the endpoint. One-of ('address'): at most one of 'ip',
-   * 'hostname' could be set.
+   * Hostname of the endpoint.
+   *
+   * One-of ('address'): at most one of 'ip', 'hostname' could be set.
    */
   hostname?: string
 }
@@ -209,16 +218,18 @@ export interface EndpointSpecPrivateNetwork {
   privateNetworkId: string
   /**
    * Endpoint IPv4 address with a CIDR notation. Refer to the official Scaleway
-   * documentation to learn more about IP and subnet limitations. One-of
-   * ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
+   * documentation to learn more about IP and subnet limitations.
+   *
+   * One-of ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
    */
   serviceIp?: string
   /**
    * Automated configuration of your Private Network endpoint with Scaleway IPAM
    * service. One at the most per Database Instance or Read Replica (a Database
    * Instance and its Read Replica can have different Private Networks). Cannot
-   * be updated (has to be deleted and recreated). One-of ('config'): at most
-   * one of 'serviceIp', 'ipamConfig' could be set.
+   * be updated (has to be deleted and recreated).
+   *
+   * One-of ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
    */
   ipamConfig?: EndpointSpecPrivateNetworkIpamConfig
 }
@@ -230,16 +241,18 @@ export interface ReadReplicaEndpointSpecPrivateNetwork {
   privateNetworkId: string
   /**
    * Endpoint IPv4 address with a CIDR notation. Refer to the official Scaleway
-   * documentation to learn more about IP and subnet limitations. One-of
-   * ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
+   * documentation to learn more about IP and subnet limitations.
+   *
+   * One-of ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
    */
   serviceIp?: string
   /**
    * Automated configuration of your Private Network endpoint with Scaleway IPAM
    * service. One at the most per Database Instance or Read Replica (a Database
    * Instance and its Read Replica can have different private networks). Cannot
-   * be updated (has to be deleted and recreated). One-of ('config'): at most
-   * one of 'serviceIp', 'ipamConfig' could be set.
+   * be updated (has to be deleted and recreated).
+   *
+   * One-of ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
    */
   ipamConfig?: ReadReplicaEndpointSpecPrivateNetworkIpamConfig
 }
@@ -323,6 +336,7 @@ export interface UpgradableVersion {
 export interface Volume {
   type: VolumeType
   size: number
+  class: StorageClass
 }
 
 export interface NodeTypeVolumeConstraintSizes {
@@ -343,6 +357,8 @@ export interface NodeTypeVolumeType {
   maxSize: number
   /** Minimum increment level for a Block Storage volume size. */
   chunkSize: number
+  /** The storage class of the volume. */
+  class: StorageClass
 }
 
 export interface ACLRuleRequest {
@@ -362,16 +378,20 @@ export interface ACLRule {
 export interface EndpointSpec {
   /**
    * Load balancer endpoint specifications. Public endpoint for Database
-   * Instance which is systematically present. One per RDB instance. One-of
-   * ('spec'): at most one of 'loadBalancer', 'privateNetwork' could be set.
+   * Instance which is systematically present. One per RDB instance.
+   *
+   * One-of ('spec'): at most one of 'loadBalancer', 'privateNetwork' could be
+   * set.
    */
   loadBalancer?: EndpointSpecLoadBalancer
   /**
    * Private Network endpoint specifications. One maximum per Database Instance
    * or Read Replica (a Database Instance and its Read Replica can have
    * different Private Networks). Cannot be updated (has to be deleted and
-   * recreated). One-of ('spec'): at most one of 'loadBalancer',
-   * 'privateNetwork' could be set.
+   * recreated).
+   *
+   * One-of ('spec'): at most one of 'loadBalancer', 'privateNetwork' could be
+   * set.
    */
   privateNetwork?: EndpointSpecPrivateNetwork
 }
@@ -379,14 +399,18 @@ export interface EndpointSpec {
 export interface ReadReplicaEndpointSpec {
   /**
    * Direct access endpoint specifications. Public endpoint reserved for Read
-   * Replicas. One per Read Replica. One-of ('spec'): at most one of
-   * 'directAccess', 'privateNetwork' could be set.
+   * Replicas. One per Read Replica.
+   *
+   * One-of ('spec'): at most one of 'directAccess', 'privateNetwork' could be
+   * set.
    */
   directAccess?: ReadReplicaEndpointSpecDirectAccess
   /**
    * Private Network endpoint specifications. One at the most per Read Replica.
-   * Cannot be updated (has to be deleted and recreated). One-of ('spec'): at
-   * most one of 'directAccess', 'privateNetwork' could be set.
+   * Cannot be updated (has to be deleted and recreated).
+   *
+   * One-of ('spec'): at most one of 'directAccess', 'privateNetwork' could be
+   * set.
    */
   privateNetwork?: ReadReplicaEndpointSpecPrivateNetwork
 }
@@ -675,14 +699,17 @@ export type CreateInstanceFromSnapshotRequest = {
 export type CreateInstanceRequest = {
   region?: Region
   /**
-   * Please use project_id instead. One-of ('projectIdentifier'): at most one of
-   * 'organizationId', 'projectId' could be set.
+   * Please use project_id instead.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   organizationId?: string
   /**
-   * The Project ID on which the Database Instance will be created. One-of
-   * ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
-   * be set.
+   * The Project ID on which the Database Instance will be created.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   projectId?: string
   /** Name of the Database Instance. */
@@ -1267,34 +1294,40 @@ export type UpgradeInstanceRequest = {
   /** UUID of the Database Instance you want to upgrade. */
   instanceId: string
   /**
-   * Node type of the Database Instance you want to upgrade to. One-of
-   * ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'volumeSize',
-   * 'volumeType', 'upgradableVersionId' could be set.
+   * Node type of the Database Instance you want to upgrade to.
+   *
+   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
+   * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
    */
   nodeType?: string
   /**
    * Defines whether or not high availability should be enabled on the Database
-   * Instance. One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
+   * Instance.
+   *
+   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
    * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
    */
   enableHa?: boolean
   /**
-   * Increase your block storage volume size. One-of ('upgradeTarget'): at most
-   * one of 'nodeType', 'enableHa', 'volumeSize', 'volumeType',
-   * 'upgradableVersionId' could be set.
+   * Increase your block storage volume size.
+   *
+   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
+   * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
    */
   volumeSize?: number
   /**
-   * Change your Database Instance storage type. One-of ('upgradeTarget'): at
-   * most one of 'nodeType', 'enableHa', 'volumeSize', 'volumeType',
-   * 'upgradableVersionId' could be set.
+   * Change your Database Instance storage type.
+   *
+   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
+   * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
    */
   volumeType?: VolumeType
   /**
    * This will create a new Database Instance with same specifications as the
-   * current one and perform a Database Engine upgrade. One-of
-   * ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'volumeSize',
-   * 'volumeType', 'upgradableVersionId' could be set.
+   * current one and perform a Database Engine upgrade.
+   *
+   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
+   * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
    */
   upgradableVersionId?: string
 }

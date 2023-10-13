@@ -784,13 +784,15 @@ export type ImportRawDNSZoneRequest = {
   projectId?: string
   format?: RawFormat
   /**
-   * Import a bind file format. One-of ('source'): at most one of 'bindSource',
-   * 'axfrSource' could be set.
+   * Import a bind file format.
+   *
+   * One-of ('source'): at most one of 'bindSource', 'axfrSource' could be set.
    */
   bindSource?: ImportRawDNSZoneRequestBindSource
   /**
-   * Import from the name server given with TSIG, to use or not. One-of
-   * ('source'): at most one of 'bindSource', 'axfrSource' could be set.
+   * Import from the name server given with TSIG, to use or not.
+   *
+   * One-of ('source'): at most one of 'bindSource', 'axfrSource' could be set.
    */
   axfrSource?: ImportRawDNSZoneRequestAXFRSource
 }
@@ -1073,7 +1075,7 @@ export type RegistrarApiEnableDomainAutoRenewRequest = {
 
 export type RegistrarApiEnableDomainDNSSECRequest = {
   domain: string
-  dsRecord: DSRecord
+  dsRecord?: DSRecord
 }
 
 export type RegistrarApiGetContactRequest = {
@@ -1240,11 +1242,11 @@ export type RegistrarApiUpdateContactRequest = {
   lang?: StdLanguageCode
   resale?: boolean
   questions?: UpdateContactRequestQuestion[]
-  extensionFr: ContactExtensionFR
-  extensionEu: ContactExtensionEU
+  extensionFr?: ContactExtensionFR
+  extensionEu?: ContactExtensionEU
   whoisOptIn?: boolean
   state?: string
-  extensionNl: ContactExtensionNL
+  extensionNl?: ContactExtensionNL
 }
 
 export type RegistrarApiUpdateDomainHostRequest = {

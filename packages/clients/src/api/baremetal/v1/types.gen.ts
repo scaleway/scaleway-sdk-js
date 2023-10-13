@@ -424,15 +424,17 @@ export type CreateServerRequest = {
   /** Offer ID of the new server. */
   offerId: string
   /**
-   * Organization ID with which the server will be created. One-of
-   * ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
-   * be set.
+   * Organization ID with which the server will be created.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   organizationId?: string
   /**
-   * Project ID with which the server will be created. One-of
-   * ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
-   * be set.
+   * Project ID with which the server will be created.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * could be set.
    */
   projectId?: string
   /** Name of the server (≠hostname). */
@@ -445,7 +447,7 @@ export type CreateServerRequest = {
    * Object describing the configuration details of the OS installation on the
    * server.
    */
-  install: CreateServerRequestInstall
+  install?: CreateServerRequestInstall
   /** IDs of options to enable on server. */
   optionIds?: string[]
 }

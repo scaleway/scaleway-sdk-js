@@ -8,7 +8,6 @@ import {
   unmarshalMapOfObject,
   unmarshalMoney,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   AvailableDomain,
@@ -1316,21 +1315,21 @@ export const marshalImportRawDNSZoneRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,
   ...resolveOneOf<unknown>([
     {
-      param: 'axfr_source',
-      value:
-        request.axfrSource !== undefined
-          ? marshalImportRawDNSZoneRequestAXFRSource(
-              request.axfrSource,
-              defaults,
-            )
-          : undefined,
-    },
-    {
       param: 'bind_source',
       value:
         request.bindSource !== undefined
           ? marshalImportRawDNSZoneRequestBindSource(
               request.bindSource,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'axfr_source',
+      value:
+        request.axfrSource !== undefined
+          ? marshalImportRawDNSZoneRequestAXFRSource(
+              request.axfrSource,
               defaults,
             )
           : undefined,
@@ -1397,21 +1396,11 @@ const marshalContactExtensionFR = (
   mode: request.mode,
   ...resolveOneOf<unknown>([
     {
-      param: 'association_info',
+      param: 'individual_info',
       value:
-        request.associationInfo !== undefined
-          ? marshalContactExtensionFRAssociationInfo(
-              request.associationInfo,
-              defaults,
-            )
-          : undefined,
-    },
-    {
-      param: 'code_auth_afnic_info',
-      value:
-        request.codeAuthAfnicInfo !== undefined
-          ? marshalContactExtensionFRCodeAuthAfnicInfo(
-              request.codeAuthAfnicInfo,
+        request.individualInfo !== undefined
+          ? marshalContactExtensionFRIndividualInfo(
+              request.individualInfo,
               defaults,
             )
           : undefined,
@@ -1424,11 +1413,11 @@ const marshalContactExtensionFR = (
           : undefined,
     },
     {
-      param: 'individual_info',
+      param: 'association_info',
       value:
-        request.individualInfo !== undefined
-          ? marshalContactExtensionFRIndividualInfo(
-              request.individualInfo,
+        request.associationInfo !== undefined
+          ? marshalContactExtensionFRAssociationInfo(
+              request.associationInfo,
               defaults,
             )
           : undefined,
@@ -1439,6 +1428,16 @@ const marshalContactExtensionFR = (
         request.trademarkInfo !== undefined
           ? marshalContactExtensionFRTrademarkInfo(
               request.trademarkInfo,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'code_auth_afnic_info',
+      value:
+        request.codeAuthAfnicInfo !== undefined
+          ? marshalContactExtensionFRCodeAuthAfnicInfo(
+              request.codeAuthAfnicInfo,
               defaults,
             )
           : undefined,
@@ -1502,6 +1501,7 @@ export const marshalRegistrarApiBuyDomainsRequest = (
   duration_in_years: request.durationInYears,
   project_id: request.projectId ?? defaults.defaultProjectId,
   ...resolveOneOf<unknown>([
+    { param: 'owner_contact_id', value: request.ownerContactId },
     {
       param: 'owner_contact',
       value:
@@ -1509,9 +1509,12 @@ export const marshalRegistrarApiBuyDomainsRequest = (
           ? marshalNewContact(request.ownerContact, defaults)
           : undefined,
     },
-    { param: 'owner_contact_id', value: request.ownerContactId },
   ]),
   ...resolveOneOf<unknown>([
+    {
+      param: 'administrative_contact_id',
+      value: request.administrativeContactId,
+    },
     {
       param: 'administrative_contact',
       value:
@@ -1519,12 +1522,9 @@ export const marshalRegistrarApiBuyDomainsRequest = (
           ? marshalNewContact(request.administrativeContact, defaults)
           : undefined,
     },
-    {
-      param: 'administrative_contact_id',
-      value: request.administrativeContactId,
-    },
   ]),
   ...resolveOneOf<unknown>([
+    { param: 'technical_contact_id', value: request.technicalContactId },
     {
       param: 'technical_contact',
       value:
@@ -1532,7 +1532,6 @@ export const marshalRegistrarApiBuyDomainsRequest = (
           ? marshalNewContact(request.technicalContact, defaults)
           : undefined,
     },
-    { param: 'technical_contact_id', value: request.technicalContactId },
   ]),
 })
 
@@ -1543,6 +1542,7 @@ export const marshalRegistrarApiCheckContactsCompatibilityRequest = (
   domains: request.domains,
   tlds: request.tlds,
   ...resolveOneOf<unknown>([
+    { param: 'owner_contact_id', value: request.ownerContactId },
     {
       param: 'owner_contact',
       value:
@@ -1550,9 +1550,12 @@ export const marshalRegistrarApiCheckContactsCompatibilityRequest = (
           ? marshalNewContact(request.ownerContact, defaults)
           : undefined,
     },
-    { param: 'owner_contact_id', value: request.ownerContactId },
   ]),
   ...resolveOneOf<unknown>([
+    {
+      param: 'administrative_contact_id',
+      value: request.administrativeContactId,
+    },
     {
       param: 'administrative_contact',
       value:
@@ -1560,12 +1563,9 @@ export const marshalRegistrarApiCheckContactsCompatibilityRequest = (
           ? marshalNewContact(request.administrativeContact, defaults)
           : undefined,
     },
-    {
-      param: 'administrative_contact_id',
-      value: request.administrativeContactId,
-    },
   ]),
   ...resolveOneOf<unknown>([
+    { param: 'technical_contact_id', value: request.technicalContactId },
     {
       param: 'technical_contact',
       value:
@@ -1573,7 +1573,6 @@ export const marshalRegistrarApiCheckContactsCompatibilityRequest = (
           ? marshalNewContact(request.technicalContact, defaults)
           : undefined,
     },
-    { param: 'technical_contact_id', value: request.technicalContactId },
   ]),
 })
 
@@ -1629,7 +1628,10 @@ export const marshalRegistrarApiEnableDomainDNSSECRequest = (
   request: RegistrarApiEnableDomainDNSSECRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ds_record: marshalDSRecord(request.dsRecord, defaults),
+  ds_record:
+    request.dsRecord !== undefined
+      ? marshalDSRecord(request.dsRecord, defaults)
+      : undefined,
 })
 
 export const marshalRegistrarApiRegisterExternalDomainRequest = (
@@ -1655,6 +1657,7 @@ export const marshalRegistrarApiTradeDomainRequest = (
 ): Record<string, unknown> => ({
   project_id: request.projectId ?? defaults.defaultProjectId,
   ...resolveOneOf<unknown>([
+    { param: 'new_owner_contact_id', value: request.newOwnerContactId },
     {
       param: 'new_owner_contact',
       value:
@@ -1662,7 +1665,6 @@ export const marshalRegistrarApiTradeDomainRequest = (
           ? marshalNewContact(request.newOwnerContact, defaults)
           : undefined,
     },
-    { param: 'new_owner_contact_id', value: request.newOwnerContactId },
   ]),
 })
 
@@ -1686,6 +1688,7 @@ export const marshalRegistrarApiTransferInDomainRequest = (
       : undefined,
   project_id: request.projectId ?? defaults.defaultProjectId,
   ...resolveOneOf<unknown>([
+    { param: 'owner_contact_id', value: request.ownerContactId },
     {
       param: 'owner_contact',
       value:
@@ -1693,9 +1696,12 @@ export const marshalRegistrarApiTransferInDomainRequest = (
           ? marshalNewContact(request.ownerContact, defaults)
           : undefined,
     },
-    { param: 'owner_contact_id', value: request.ownerContactId },
   ]),
   ...resolveOneOf<unknown>([
+    {
+      param: 'administrative_contact_id',
+      value: request.administrativeContactId,
+    },
     {
       param: 'administrative_contact',
       value:
@@ -1703,12 +1709,9 @@ export const marshalRegistrarApiTransferInDomainRequest = (
           ? marshalNewContact(request.administrativeContact, defaults)
           : undefined,
     },
-    {
-      param: 'administrative_contact_id',
-      value: request.administrativeContactId,
-    },
   ]),
   ...resolveOneOf<unknown>([
+    { param: 'technical_contact_id', value: request.technicalContactId },
     {
       param: 'technical_contact',
       value:
@@ -1716,7 +1719,6 @@ export const marshalRegistrarApiTransferInDomainRequest = (
           ? marshalNewContact(request.technicalContact, defaults)
           : undefined,
     },
-    { param: 'technical_contact_id', value: request.technicalContactId },
   ]),
 })
 
@@ -1739,9 +1741,18 @@ export const marshalRegistrarApiUpdateContactRequest = (
   country: request.country,
   email: request.email,
   email_alt: request.emailAlt,
-  extension_eu: marshalContactExtensionEU(request.extensionEu, defaults),
-  extension_fr: marshalContactExtensionFR(request.extensionFr, defaults),
-  extension_nl: marshalContactExtensionNL(request.extensionNl, defaults),
+  extension_eu:
+    request.extensionEu !== undefined
+      ? marshalContactExtensionEU(request.extensionEu, defaults)
+      : undefined,
+  extension_fr:
+    request.extensionFr !== undefined
+      ? marshalContactExtensionFR(request.extensionFr, defaults)
+      : undefined,
+  extension_nl:
+    request.extensionNl !== undefined
+      ? marshalContactExtensionNL(request.extensionNl, defaults)
+      : undefined,
   fax_number: request.faxNumber,
   lang: request.lang,
   phone_number: request.phoneNumber,
@@ -1770,6 +1781,7 @@ export const marshalRegistrarApiUpdateDomainRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf<unknown>([
+    { param: 'technical_contact_id', value: request.technicalContactId },
     {
       param: 'technical_contact',
       value:
@@ -1777,9 +1789,9 @@ export const marshalRegistrarApiUpdateDomainRequest = (
           ? marshalNewContact(request.technicalContact, defaults)
           : undefined,
     },
-    { param: 'technical_contact_id', value: request.technicalContactId },
   ]),
   ...resolveOneOf<unknown>([
+    { param: 'owner_contact_id', value: request.ownerContactId },
     {
       param: 'owner_contact',
       value:
@@ -1787,19 +1799,18 @@ export const marshalRegistrarApiUpdateDomainRequest = (
           ? marshalNewContact(request.ownerContact, defaults)
           : undefined,
     },
-    { param: 'owner_contact_id', value: request.ownerContactId },
   ]),
   ...resolveOneOf<unknown>([
+    {
+      param: 'administrative_contact_id',
+      value: request.administrativeContactId,
+    },
     {
       param: 'administrative_contact',
       value:
         request.administrativeContact !== undefined
           ? marshalNewContact(request.administrativeContact, defaults)
           : undefined,
-    },
-    {
-      param: 'administrative_contact_id',
-      value: request.administrativeContactId,
     },
   ]),
 })
@@ -1916,17 +1927,17 @@ const marshalDomainRecord = (
           : undefined,
     },
     {
-      param: 'view_config',
-      value:
-        request.viewConfig !== undefined
-          ? marshalDomainRecordViewConfig(request.viewConfig, defaults)
-          : undefined,
-    },
-    {
       param: 'weighted_config',
       value:
         request.weightedConfig !== undefined
           ? marshalDomainRecordWeightedConfig(request.weightedConfig, defaults)
+          : undefined,
+    },
+    {
+      param: 'view_config',
+      value:
+        request.viewConfig !== undefined
+          ? marshalDomainRecordViewConfig(request.viewConfig, defaults)
           : undefined,
     },
   ]),
@@ -2000,10 +2011,10 @@ const marshalRecordChange = (
           : undefined,
     },
     {
-      param: 'clear',
+      param: 'set',
       value:
-        request.clear !== undefined
-          ? marshalRecordChangeClear(request.clear, defaults)
+        request.set !== undefined
+          ? marshalRecordChangeSet(request.set, defaults)
           : undefined,
     },
     {
@@ -2014,10 +2025,10 @@ const marshalRecordChange = (
           : undefined,
     },
     {
-      param: 'set',
+      param: 'clear',
       value:
-        request.set !== undefined
-          ? marshalRecordChangeSet(request.set, defaults)
+        request.clear !== undefined
+          ? marshalRecordChangeClear(request.clear, defaults)
           : undefined,
     },
   ]),

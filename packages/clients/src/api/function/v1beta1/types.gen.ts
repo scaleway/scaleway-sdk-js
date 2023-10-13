@@ -326,13 +326,15 @@ export interface Token {
   /** String of the token. */
   token: string
   /**
-   * UUID of the function the token is associated with. One-of ('scope'): at
-   * most one of 'functionId', 'namespaceId' could be set.
+   * UUID of the function the token is associated with.
+   *
+   * One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set.
    */
   functionId?: string
   /**
-   * UUID of the namespace the token is assoicated with. One-of ('scope'): at
-   * most one of 'functionId', 'namespaceId' could be set.
+   * UUID of the namespace the token is assoicated with.
+   *
+   * One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set.
    */
   namespaceId?: string
   /** Public key of the token. */
@@ -446,13 +448,15 @@ export type CreateNamespaceRequest = {
 export type CreateTokenRequest = {
   region?: Region
   /**
-   * UUID of the function to associate the token with. One-of ('scope'): at most
-   * one of 'functionId', 'namespaceId' could be set.
+   * UUID of the function to associate the token with.
+   *
+   * One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set.
    */
   functionId?: string
   /**
-   * UUID of the namespace to associate the token with. One-of ('scope'): at
-   * most one of 'functionId', 'namespaceId' could be set.
+   * UUID of the namespace to associate the token with.
+   *
+   * One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set.
    */
   namespaceId?: string
   /** Description of the token. */

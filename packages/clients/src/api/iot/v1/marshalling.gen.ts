@@ -8,7 +8,6 @@ import {
   unmarshalDate,
   unmarshalTimeSeries,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   Certificate,
@@ -492,10 +491,10 @@ export const marshalCreateDeviceRequest = (
   allow_multiple_connections: request.allowMultipleConnections,
   description: request.description,
   hub_id: request.hubId,
-  message_filters: marshalDeviceMessageFilters(
-    request.messageFilters,
-    defaults,
-  ),
+  message_filters:
+    request.messageFilters !== undefined
+      ? marshalDeviceMessageFilters(request.messageFilters, defaults)
+      : undefined,
   name: request.name || randomName('device'),
 })
 
@@ -577,6 +576,13 @@ export const marshalCreateRouteRequest = (
   topic: request.topic,
   ...resolveOneOf<unknown>([
     {
+      param: 's3_config',
+      value:
+        request.s3Config !== undefined
+          ? marshalCreateRouteRequestS3Config(request.s3Config, defaults)
+          : undefined,
+    },
+    {
       param: 'db_config',
       value:
         request.dbConfig !== undefined
@@ -588,13 +594,6 @@ export const marshalCreateRouteRequest = (
       value:
         request.restConfig !== undefined
           ? marshalCreateRouteRequestRestConfig(request.restConfig, defaults)
-          : undefined,
-    },
-    {
-      param: 's3_config',
-      value:
-        request.s3Config !== undefined
-          ? marshalCreateRouteRequestS3Config(request.s3Config, defaults)
           : undefined,
     },
   ]),
@@ -639,10 +638,10 @@ export const marshalUpdateDeviceRequest = (
   allow_multiple_connections: request.allowMultipleConnections,
   description: request.description,
   hub_id: request.hubId,
-  message_filters: marshalDeviceMessageFilters(
-    request.messageFilters,
-    defaults,
-  ),
+  message_filters:
+    request.messageFilters !== undefined
+      ? marshalDeviceMessageFilters(request.messageFilters, defaults)
+      : undefined,
 })
 
 export const marshalUpdateHubRequest = (
@@ -705,6 +704,13 @@ export const marshalUpdateRouteRequest = (
   topic: request.topic,
   ...resolveOneOf<unknown>([
     {
+      param: 's3_config',
+      value:
+        request.s3Config !== undefined
+          ? marshalUpdateRouteRequestS3Config(request.s3Config, defaults)
+          : undefined,
+    },
+    {
       param: 'db_config',
       value:
         request.dbConfig !== undefined
@@ -716,13 +722,6 @@ export const marshalUpdateRouteRequest = (
       value:
         request.restConfig !== undefined
           ? marshalUpdateRouteRequestRestConfig(request.restConfig, defaults)
-          : undefined,
-    },
-    {
-      param: 's3_config',
-      value:
-        request.s3Config !== undefined
-          ? marshalUpdateRouteRequestS3Config(request.s3Config, defaults)
           : undefined,
     },
   ]),

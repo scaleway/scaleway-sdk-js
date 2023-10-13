@@ -8,7 +8,6 @@ import {
   unmarshalMoney,
   unmarshalTimeSeries,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   AddOptionServerRequest,
@@ -540,7 +539,10 @@ export const marshalCreateServerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  install: marshalCreateServerRequestInstall(request.install, defaults),
+  install:
+    request.install !== undefined
+      ? marshalCreateServerRequestInstall(request.install, defaults)
+      : undefined,
   name: request.name,
   offer_id: request.offerId,
   option_ids: request.optionIds,

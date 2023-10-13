@@ -72,8 +72,9 @@ export interface CredentialSummary {
   protocol: NamespaceProtocol
   /**
    * Object containing the credentials and their metadata, if the credentials
-   * are for an SQS/SNS namespace. One-of ('credentialType'): at most one of
-   * 'sqsSnsCredentials' could be set.
+   * are for an SQS/SNS namespace.
+   *
+   * One-of ('credentialType'): at most one of 'sqsSnsCredentials' could be set.
    */
   sqsSnsCredentials?: CredentialSummarySQSSNSCreds
 }
@@ -131,14 +132,18 @@ export interface Credential {
   protocol: NamespaceProtocol
   /**
    * Object containing the credentials, if the credentials are for a NATS
-   * namespace. One-of ('credentialType'): at most one of 'natsCredentials',
+   * namespace.
+   *
+   * One-of ('credentialType'): at most one of 'natsCredentials',
    * 'sqsSnsCredentials' could be set.
    */
   natsCredentials?: CredentialNATSCredsFile
   /**
    * Object containing the credentials and their metadata, if the credentials
-   * are for an SQS/SNS namespace. One-of ('credentialType'): at most one of
-   * 'natsCredentials', 'sqsSnsCredentials' could be set.
+   * are for an SQS/SNS namespace.
+   *
+   * One-of ('credentialType'): at most one of 'natsCredentials',
+   * 'sqsSnsCredentials' could be set.
    */
   sqsSnsCredentials?: CredentialSQSSNSCreds
 }

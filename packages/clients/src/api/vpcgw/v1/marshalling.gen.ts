@@ -7,7 +7,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateDHCPEntryRequest,
@@ -367,7 +366,7 @@ export const marshalCreateGatewayNetworkRequest = (
   gateway_id: request.gatewayId,
   private_network_id: request.privateNetworkId,
   ...resolveOneOf<unknown>([
-    { param: 'address', value: request.address },
+    { param: 'dhcp_id', value: request.dhcpId },
     {
       param: 'dhcp',
       value:
@@ -375,7 +374,7 @@ export const marshalCreateGatewayNetworkRequest = (
           ? marshalCreateDHCPRequest(request.dhcp, defaults)
           : undefined,
     },
-    { param: 'dhcp_id', value: request.dhcpId },
+    { param: 'address', value: request.address },
     {
       param: 'ipam_config',
       value:
@@ -497,8 +496,8 @@ export const marshalUpdateGatewayNetworkRequest = (
   enable_dhcp: request.enableDhcp,
   enable_masquerade: request.enableMasquerade,
   ...resolveOneOf<unknown>([
-    { param: 'address', value: request.address },
     { param: 'dhcp_id', value: request.dhcpId },
+    { param: 'address', value: request.address },
     {
       param: 'ipam_config',
       value:

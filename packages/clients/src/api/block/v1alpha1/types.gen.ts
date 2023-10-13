@@ -194,20 +194,23 @@ export type CreateVolumeRequest = {
   name: string
   /**
    * The maximum IO/s expected, according to the different options available in
-   * stock (`5000 | 15000`). One-of ('requirements'): at most one of 'perfIops'
-   * could be set.
+   * stock (`5000 | 15000`).
+   *
+   * One-of ('requirements'): at most one of 'perfIops' could be set.
    */
   perfIops?: number
   /** UUID of the project the volume belongs to. */
   projectId?: string
   /**
    * Specify the size of the new volume if creating a new one from scratch.
+   *
    * One-of ('from'): at most one of 'fromEmpty', 'fromSnapshot' could be set.
    */
   fromEmpty?: CreateVolumeRequestFromEmpty
   /**
-   * Specify the snapshot ID of the original snapshot. One-of ('from'): at most
-   * one of 'fromEmpty', 'fromSnapshot' could be set.
+   * Specify the snapshot ID of the original snapshot.
+   *
+   * One-of ('from'): at most one of 'fromEmpty', 'fromSnapshot' could be set.
    */
   fromSnapshot?: CreateVolumeRequestFromSnapshot
   /** List of tags assigned to the volume. */
@@ -236,6 +239,15 @@ export type GetVolumeRequest = {
   zone?: Zone
   /** UUID of the volume. */
   volumeId: string
+}
+
+export type ImportSnapshotFromS3Request = {
+  zone?: Zone
+  bucket: string
+  key: string
+  name: string
+  projectId?: string
+  tags?: string[]
 }
 
 export type ListSnapshotsRequest = {

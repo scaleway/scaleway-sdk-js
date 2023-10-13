@@ -7,13 +7,13 @@ import {
   unmarshalDate,
   unmarshalMoney,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateSnapshotRequest,
   CreateVolumeRequest,
   CreateVolumeRequestFromEmpty,
   CreateVolumeRequestFromSnapshot,
+  ImportSnapshotFromS3Request,
   ListSnapshotsResponse,
   ListVolumeTypesResponse,
   ListVolumesResponse,
@@ -252,6 +252,17 @@ export const marshalCreateVolumeRequest = (
     },
   ]),
   ...resolveOneOf<unknown>([{ param: 'perf_iops', value: request.perfIops }]),
+})
+
+export const marshalImportSnapshotFromS3Request = (
+  request: ImportSnapshotFromS3Request,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  bucket: request.bucket,
+  key: request.key,
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags,
 })
 
 export const marshalUpdateSnapshotRequest = (

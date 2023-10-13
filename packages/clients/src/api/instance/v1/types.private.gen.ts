@@ -1,13 +1,11 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Zone } from '../../../bridge'
-
 import type {
   Arch,
   BootType,
   Bootscript,
   Image,
-  ImageState,
   PlacementGroup,
   PrivateNIC,
   SecurityGroup,
@@ -17,7 +15,6 @@ import type {
   SecurityGroupRuleDirection,
   SecurityGroupRuleProtocol,
   SecurityGroupSummary,
-  SecurityGroupTemplate,
   Server,
   ServerAction,
   ServerIp,
@@ -30,70 +27,8 @@ import type {
   SnapshotBaseVolume,
   SnapshotState,
   Volume,
-  VolumeServerTemplate,
-  VolumeSummary,
   VolumeVolumeType,
 } from './types.gen'
-
-export type CreateServerRequest = {
-  zone?: Zone
-  /** Instance name. */
-  name?: string
-  /** Define if a dynamic IPv4 is required for the Instance. */
-  dynamicIpRequired?: boolean
-  /** If true, configure the Instance so it uses the new routed IP mode. */
-  routedIpEnabled?: boolean
-  /** Define the Instance commercial type (i.e. GP1-S). */
-  commercialType: string
-  /** Instance image ID or label. */
-  image: string
-  /** Volumes attached to the server. */
-  volumes: Record<string, VolumeServerTemplate>
-  /** True if IPv6 is enabled on the server. */
-  enableIpv6: boolean
-  /** ID of the reserved IP to attach to the Instance. */
-  publicIp?: string
-  /** A list of reserved IP IDs to attach to the Instance. */
-  publicIps?: string[]
-  /** Boot type to use. */
-  bootType?: BootType
-  /** Bootscript ID to use when `boot_type` is set to `bootscript`. */
-  bootscript?: string
-  /**
-   * Instance Organization ID. One-of ('projectIdentifier'): at most one of
-   * 'organization', 'project' could be set.
-   */
-  organization?: string
-  /**
-   * Instance Project ID. One-of ('projectIdentifier'): at most one of
-   * 'organization', 'project' could be set.
-   */
-  project?: string
-  /** Instance tags. */
-  tags?: string[]
-  /** Security group ID. */
-  securityGroup?: string
-  /** Placement group ID if Instance must be part of a placement group. */
-  placementGroup?: string
-}
-
-export type SetImageRequest = {
-  zone?: Zone
-  id: string
-  name: string
-  arch?: Arch
-  creationDate?: Date
-  modificationDate?: Date
-  defaultBootscript?: Bootscript
-  extraVolumes: Record<string, Volume>
-  fromServer: string
-  organization?: string
-  public: boolean
-  rootVolume: VolumeSummary
-  state?: ImageState
-  project?: string
-  tags?: string[]
-}
 
 export interface SetImageResponse {
   image: Image
@@ -189,13 +124,13 @@ export type SetServerRequest = {
   /** Instance host name. */
   hostname: string
   /** Provide information on the Instance image. */
-  image: Image
+  image?: Image
   /** Instance protection option is activated. */
   protected: boolean
   /** Instance private IP address. */
   privateIp?: string
   /** Information about the public IP. */
-  publicIp: ServerIp
+  publicIp?: ServerIp
   /** Information about all the public IPs attached to the server. */
   publicIps?: ServerIp[]
   /** Instance modification date. */
@@ -203,17 +138,17 @@ export type SetServerRequest = {
   /** Instance state. */
   state?: ServerState
   /** Instance location. */
-  location: ServerLocation
+  location?: ServerLocation
   /** Instance IPv6 address. */
-  ipv6: ServerIpv6
+  ipv6?: ServerIpv6
   /** Instance bootscript. */
   bootscript?: Bootscript
   /** Instance boot type. */
   bootType?: BootType
   /** Instance volumes. */
-  volumes: Record<string, Volume>
+  volumes?: Record<string, Volume>
   /** Instance security group. */
-  securityGroup: SecurityGroupSummary
+  securityGroup?: SecurityGroupSummary
   /** Instance planned maintenances. */
   maintenances?: ServerMaintenance[]
   /** Instance state_detail. */
@@ -224,7 +159,7 @@ export type SetServerRequest = {
    */
   arch?: Arch
   /** Instance placement group. */
-  placementGroup: PlacementGroup
+  placementGroup?: PlacementGroup
   /** Instance private NICs. */
   privateNics?: PrivateNIC[]
 }
@@ -242,7 +177,7 @@ export type SetSnapshotRequest = {
   volumeType?: VolumeVolumeType
   size: number
   state?: SnapshotState
-  baseVolume: SnapshotBaseVolume
+  baseVolume?: SnapshotBaseVolume
   creationDate?: Date
   modificationDate?: Date
   project?: string
@@ -251,42 +186,4 @@ export type SetSnapshotRequest = {
 
 export interface SetSnapshotResponse {
   snapshot: Snapshot
-}
-
-export type UpdateServerRequest = {
-  zone?: Zone
-  /** UUID of the Instance. */
-  serverId: string
-  /** Name of the Instance. */
-  name?: string
-  bootType?: BootType
-  /** Tags of the Instance. */
-  tags?: string[]
-  volumes?: Record<string, VolumeServerTemplate>
-  bootscript?: string
-  dynamicIpRequired?: boolean
-  /**
-   * True to configure the instance so it uses the new routed IP mode (once this
-   * is set to True you cannot set it back to False).
-   */
-  routedIpEnabled?: boolean
-  publicIps?: ServerIp[]
-  enableIpv6?: boolean
-  protected?: boolean
-  securityGroup: SecurityGroupTemplate
-  /** Placement group ID if Instance must be part of a placement group. */
-  placementGroup?: string
-  /** Instance private NICs. */
-  privateNics?: PrivateNIC[]
-  /**
-   * Warning: This field has some restrictions:
-   *
-   * - Cannot be changed if the Instance is not in `stopped` state.
-   * - Cannot be changed if the Instance is in a placement group.
-   * - Local storage requirements of the target commercial_types must be fulfilled
-   *   (i.e. if an Instance has 80GB of local storage, it can be changed into a
-   *   GP1-XS, which has a maximum of 150GB, but it cannot be changed into a
-   *   DEV1-S, which has only 20GB).
-   */
-  commercialType?: string
 }

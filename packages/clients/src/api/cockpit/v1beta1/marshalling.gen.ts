@@ -8,7 +8,6 @@ import {
   unmarshalDate,
   unmarshalTimeSeries,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   ActivateCockpitRequest,
@@ -27,9 +26,11 @@ import type {
   DeleteGrafanaUserRequest,
   DisableManagedAlertsRequest,
   EnableManagedAlertsRequest,
+  GrafanaProductDashboard,
   GrafanaUser,
   ListContactPointsResponse,
   ListDatasourcesResponse,
+  ListGrafanaProductDashboardsResponse,
   ListGrafanaUsersResponse,
   ListPlansResponse,
   ListTokensResponse,
@@ -81,6 +82,22 @@ export const unmarshalDatasource = (data: unknown) => {
     type: data.type,
     url: data.url,
   } as Datasource
+}
+
+export const unmarshalGrafanaProductDashboard = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GrafanaProductDashboard' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    dashboardName: data.dashboard_name,
+    tags: data.tags,
+    title: data.title,
+    url: data.url,
+    variables: data.variables,
+  } as GrafanaProductDashboard
 }
 
 export const unmarshalGrafanaUser = (data: unknown) => {
@@ -234,6 +251,24 @@ export const unmarshalListDatasourcesResponse = (data: unknown) => {
   } as ListDatasourcesResponse
 }
 
+export const unmarshalListGrafanaProductDashboardsResponse = (
+  data: unknown,
+) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListGrafanaProductDashboardsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    dashboards: unmarshalArrayOfObject(
+      data.dashboards,
+      unmarshalGrafanaProductDashboard,
+    ),
+    totalCount: data.total_count,
+  } as ListGrafanaProductDashboardsResponse
+}
+
 export const unmarshalListGrafanaUsersResponse = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -365,7 +400,10 @@ export const marshalCreateTokenRequest = (
 ): Record<string, unknown> => ({
   name: request.name || randomName('token'),
   project_id: request.projectId ?? defaults.defaultProjectId,
-  scopes: marshalTokenScopes(request.scopes, defaults),
+  scopes:
+    request.scopes !== undefined
+      ? marshalTokenScopes(request.scopes, defaults)
+      : undefined,
 })
 
 export const marshalDeactivateCockpitRequest = (
