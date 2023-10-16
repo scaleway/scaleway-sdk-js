@@ -7,7 +7,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateCronRequest,
@@ -186,6 +185,7 @@ const unmarshalTriggerMnqNatsClientConfig = (data: unknown) => {
   return {
     mnqCredentialId: data.mnq_credential_id,
     mnqNamespaceId: data.mnq_namespace_id,
+    mnqNatsAccountId: data.mnq_nats_account_id,
     mnqProjectId: data.mnq_project_id,
     mnqRegion: data.mnq_region,
     subject: data.subject,

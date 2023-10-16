@@ -886,16 +886,6 @@ export interface ExternalNode {
   externalIp: string
 }
 
-export type GetClusterKubeConfigRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Cluster ID for which to download the kubeconfig. */
-  clusterId: string
-}
-
 export type GetClusterRequest = {
   /**
    * Region to target. If none is passed will use default region from the

@@ -44,7 +44,6 @@ import type {
   DeleteNodeRequest,
   DeletePoolRequest,
   ExternalNode,
-  GetClusterKubeConfigRequest,
   GetClusterRequest,
   GetNodeRequest,
   GetPoolRequest,
@@ -76,6 +75,7 @@ import type {
   UpgradePoolRequest,
   Version,
 } from './types.gen'
+import type { GetClusterKubeConfigRequest } from './types.private.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

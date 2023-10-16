@@ -8,7 +8,6 @@ import {
   unmarshalDate,
   unmarshalMapOfObject,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   ApplyBlockMigrationRequest,
@@ -25,7 +24,6 @@ import type {
   CreateSecurityGroupResponse,
   CreateSecurityGroupRuleRequest,
   CreateSecurityGroupRuleResponse,
-  CreateServerRequest,
   CreateServerResponse,
   CreateSnapshotRequest,
   CreateSnapshotResponse,
@@ -88,7 +86,6 @@ import type {
   ServerTypeNetworkInterface,
   ServerTypeVolumeConstraintSizes,
   ServerTypeVolumeConstraintsByType,
-  SetImageRequest,
   SetPlacementGroupRequest,
   SetPlacementGroupResponse,
   SetPlacementGroupServersRequest,
@@ -106,7 +103,6 @@ import type {
   UpdatePlacementGroupServersRequest,
   UpdatePlacementGroupServersResponse,
   UpdatePrivateNICRequest,
-  UpdateServerRequest,
   UpdateServerResponse,
   UpdateVolumeRequest,
   UpdateVolumeResponse,
@@ -120,6 +116,8 @@ import type {
   VolumeTypeConstraints,
 } from './types.gen'
 import type {
+  CreateServerRequest,
+  SetImageRequest,
   SetImageResponse,
   SetSecurityGroupRequest,
   SetSecurityGroupResponse,
@@ -129,6 +127,7 @@ import type {
   SetServerResponse,
   SetSnapshotRequest,
   SetSnapshotResponse,
+  UpdateServerRequest,
 } from './types.private.gen'
 
 export const unmarshalPrivateNIC = (data: unknown) => {

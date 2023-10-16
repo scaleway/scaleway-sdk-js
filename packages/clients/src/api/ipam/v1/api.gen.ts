@@ -39,8 +39,8 @@ export class API extends ParentAPI {
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
 
   /**
-   * Book a new IP from the specified source. Currently IPs can only be booked
-   * from a Private Network.
+   * Book a new IP. Book a new IP from the specified source. Currently IPs can
+   * only be booked from a Private Network.
    *
    * @param request - The request {@link BookIPRequest}
    * @returns A Promise of IP
@@ -62,8 +62,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Release an IP not currently attached to a resource, and returns it to the
-   * available IP pool.
+   * Release an IP. Release an IP not currently attached to a resource, and
+   * returns it to the available IP pool.
    *
    * @param request - The request {@link ReleaseIPRequest}
    */
@@ -79,7 +79,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Retrieve details of an existing IP, specified by its IP ID.
+   * Get an IP. Retrieve details of an existing IP, specified by its IP ID.
    *
    * @param request - The request {@link GetIPRequest}
    * @returns A Promise of IP
@@ -97,7 +97,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update parameters including tags of the specified IP.
+   * Update an IP. Update parameters including tags of the specified IP.
    *
    * @param request - The request {@link UpdateIPRequest}
    * @returns A Promise of IP
@@ -154,11 +154,11 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List existing IPs in the specified region using various filters. For
-   * example, you can filter for IPs within a specified Private Network, or for
-   * public IPs within a specified Project. By default, the IPs returned in the
-   * list are ordered by creation date in ascending order, though this can be
-   * modified via the order_by field.
+   * List existing IPs. List existing IPs in the specified region using various
+   * filters. For example, you can filter for IPs within a specified Private
+   * Network, or for public IPs within a specified Project. By default, the IPs
+   * returned in the list are ordered by creation date in ascending order,
+   * though this can be modified via the order_by field.
    *
    * @param request - The request {@link ListIPsRequest}
    * @returns A Promise of ListIPsResponse

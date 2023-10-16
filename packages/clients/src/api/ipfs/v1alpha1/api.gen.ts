@@ -8,15 +8,21 @@ import {
   waitForResource,
 } from '../../../bridge'
 import type { Region, WaitForOptions } from '../../../bridge'
-import { PIN_TRANSIENT_STATUSES } from './content.gen'
+import { NAME_TRANSIENT_STATUSES, PIN_TRANSIENT_STATUSES } from './content.gen'
 import {
   marshalCreatePinByCIDRequest,
   marshalCreatePinByURLRequest,
   marshalCreateVolumeRequest,
+  marshalIpnsApiCreateNameRequest,
+  marshalIpnsApiImportKeyNameRequest,
+  marshalIpnsApiUpdateNameRequest,
   marshalReplacePinRequest,
   marshalUpdateVolumeRequest,
+  unmarshalExportKeyNameResponse,
+  unmarshalListNamesResponse,
   unmarshalListPinsResponse,
   unmarshalListVolumesResponse,
+  unmarshalName,
   unmarshalPin,
   unmarshalReplacePinResponse,
   unmarshalVolume,
@@ -27,12 +33,22 @@ import type {
   CreateVolumeRequest,
   DeletePinRequest,
   DeleteVolumeRequest,
+  ExportKeyNameResponse,
   GetPinRequest,
   GetVolumeRequest,
+  IpnsApiCreateNameRequest,
+  IpnsApiDeleteNameRequest,
+  IpnsApiExportKeyNameRequest,
+  IpnsApiGetNameRequest,
+  IpnsApiImportKeyNameRequest,
+  IpnsApiListNamesRequest,
+  IpnsApiUpdateNameRequest,
+  ListNamesResponse,
   ListPinsRequest,
   ListPinsResponse,
   ListVolumesRequest,
   ListVolumesResponse,
+  Name,
   Pin,
   ReplacePinRequest,
   ReplacePinResponse,
@@ -327,4 +343,180 @@ export class API extends ParentAPI {
       )}/pins/${validatePathParam('pinId', request.pinId)}`,
       urlParams: urlParams(['volume_id', request.volumeId]),
     })
+}
+
+/** IPFS Naming service API. */
+export class IpnsAPI extends ParentAPI {
+  /** Lists the available regions of the API. */
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+
+  /**
+   * Create a new name. You can use the `ipns key` command to list and generate
+   * more names and their respective keys.
+   *
+   * @param request - The request {@link IpnsApiCreateNameRequest}
+   * @returns A Promise of Name
+   */
+  createName = (request: Readonly<IpnsApiCreateNameRequest>) =>
+    this.client.fetch<Name>(
+      {
+        body: JSON.stringify(
+          marshalIpnsApiCreateNameRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/ipfs/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/names`,
+      },
+      unmarshalName,
+    )
+
+  /**
+   * Get information about a name. Retrieve information about a specific name.
+   *
+   * @param request - The request {@link IpnsApiGetNameRequest}
+   * @returns A Promise of Name
+   */
+  getName = (request: Readonly<IpnsApiGetNameRequest>) =>
+    this.client.fetch<Name>(
+      {
+        method: 'GET',
+        path: `/ipfs/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/names/${validatePathParam('nameId', request.nameId)}`,
+      },
+      unmarshalName,
+    )
+
+  /**
+   * Waits for {@link Name} to be in a final state.
+   *
+   * @param request - The request {@link IpnsApiGetNameRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Name
+   */
+  waitForName = (
+    request: Readonly<IpnsApiGetNameRequest>,
+    options?: Readonly<WaitForOptions<Name>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res => Promise.resolve(!NAME_TRANSIENT_STATUSES.includes(res.status))),
+      this.getName,
+      request,
+      options,
+    )
+
+  /**
+   * Delete an existing name. Delete a name by its ID.
+   *
+   * @param request - The request {@link IpnsApiDeleteNameRequest}
+   */
+  deleteName = (request: Readonly<IpnsApiDeleteNameRequest>) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/ipfs/v1alpha1/regions/${validatePathParam(
+        'region',
+        request.region ?? this.client.settings.defaultRegion,
+      )}/names/${validatePathParam('nameId', request.nameId)}`,
+    })
+
+  protected pageOfListNames = (
+    request: Readonly<IpnsApiListNamesRequest> = {},
+  ) =>
+    this.client.fetch<ListNamesResponse>(
+      {
+        method: 'GET',
+        path: `/ipfs/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/names`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['project_id', request.projectId],
+        ),
+      },
+      unmarshalListNamesResponse,
+    )
+
+  /**
+   * List all names by a Project ID. Retrieve information about all names from a
+   * Project ID.
+   *
+   * @param request - The request {@link IpnsApiListNamesRequest}
+   * @returns A Promise of ListNamesResponse
+   */
+  listNames = (request: Readonly<IpnsApiListNamesRequest> = {}) =>
+    enrichForPagination('names', this.pageOfListNames, request)
+
+  /**
+   * Update name information. Update name information (CID, tag, name...).
+   *
+   * @param request - The request {@link IpnsApiUpdateNameRequest}
+   * @returns A Promise of Name
+   */
+  updateName = (request: Readonly<IpnsApiUpdateNameRequest>) =>
+    this.client.fetch<Name>(
+      {
+        body: JSON.stringify(
+          marshalIpnsApiUpdateNameRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/ipfs/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/names/${validatePathParam('nameId', request.nameId)}`,
+      },
+      unmarshalName,
+    )
+
+  /**
+   * Export your private key. Export a private key by its ID.
+   *
+   * @param request - The request {@link IpnsApiExportKeyNameRequest}
+   * @returns A Promise of ExportKeyNameResponse
+   */
+  exportKeyName = (request: Readonly<IpnsApiExportKeyNameRequest>) =>
+    this.client.fetch<ExportKeyNameResponse>(
+      {
+        method: 'GET',
+        path: `/ipfs/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/names/${validatePathParam('nameId', request.nameId)}/export-key`,
+      },
+      unmarshalExportKeyNameResponse,
+    )
+
+  /**
+   * Import your private key. Import a private key.
+   *
+   * @param request - The request {@link IpnsApiImportKeyNameRequest}
+   * @returns A Promise of Name
+   */
+  importKeyName = (request: Readonly<IpnsApiImportKeyNameRequest>) =>
+    this.client.fetch<Name>(
+      {
+        body: JSON.stringify(
+          marshalIpnsApiImportKeyNameRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/ipfs/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/names/import-key`,
+      },
+      unmarshalName,
+    )
 }

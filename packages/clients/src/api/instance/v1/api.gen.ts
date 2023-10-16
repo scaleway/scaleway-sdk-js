@@ -7,7 +7,6 @@ import {
   validatePathParam,
 } from '../../../bridge'
 import type { Zone } from '../../../bridge'
-
 import {
   marshalApplyBlockMigrationRequest,
   marshalCreateImageRequest,
@@ -104,7 +103,6 @@ import type {
   CreateSecurityGroupResponse,
   CreateSecurityGroupRuleRequest,
   CreateSecurityGroupRuleResponse,
-  CreateServerRequest,
   CreateServerResponse,
   CreateSnapshotRequest,
   CreateSnapshotResponse,
@@ -182,7 +180,6 @@ import type {
   PrivateNIC,
   ServerActionRequest,
   ServerActionResponse,
-  SetImageRequest,
   SetPlacementGroupRequest,
   SetPlacementGroupResponse,
   SetPlacementGroupServersRequest,
@@ -196,12 +193,13 @@ import type {
   UpdatePlacementGroupServersRequest,
   UpdatePlacementGroupServersResponse,
   UpdatePrivateNICRequest,
-  UpdateServerRequest,
   UpdateServerResponse,
   UpdateVolumeRequest,
   UpdateVolumeResponse,
 } from './types.gen'
 import type {
+  CreateServerRequest,
+  SetImageRequest,
   SetImageResponse,
   SetSecurityGroupRequest,
   SetSecurityGroupResponse,
@@ -211,6 +209,7 @@ import type {
   SetServerResponse,
   SetSnapshotRequest,
   SetSnapshotResponse,
+  UpdateServerRequest,
 } from './types.private.gen'
 
 const jsonContentHeaders = {

@@ -17,7 +17,7 @@ export const NatsApiCreateNatsAccountRequest = {
 
 export const NatsApiCreateNatsCredentialsRequest = {
   name: {
-    maxLength: 64,
+    maxLength: 500,
     minLength: 1,
   },
 }
@@ -31,21 +31,21 @@ export const NatsApiUpdateNatsAccountRequest = {
 
 export const NatsCredentials = {
   name: {
-    maxLength: 64,
+    maxLength: 500,
     minLength: 1,
   },
 }
 
 export const SnsApiCreateSnsCredentialsRequest = {
   name: {
-    maxLength: 64,
+    maxLength: 500,
     minLength: 1,
   },
 }
 
 export const SnsApiUpdateSnsCredentialsRequest = {
   name: {
-    maxLength: 64,
+    maxLength: 500,
     minLength: 1,
   },
 }
@@ -55,21 +55,21 @@ export const SnsCredentials = {
     minLength: 1,
   },
   name: {
-    maxLength: 64,
+    maxLength: 500,
     minLength: 1,
   },
 }
 
 export const SqsApiCreateSqsCredentialsRequest = {
   name: {
-    maxLength: 64,
+    maxLength: 500,
     minLength: 1,
   },
 }
 
 export const SqsApiUpdateSqsCredentialsRequest = {
   name: {
-    maxLength: 64,
+    maxLength: 500,
     minLength: 1,
   },
 }
@@ -79,7 +79,7 @@ export const SqsCredentials = {
     minLength: 1,
   },
   name: {
-    maxLength: 64,
+    maxLength: 500,
     minLength: 1,
   },
 }

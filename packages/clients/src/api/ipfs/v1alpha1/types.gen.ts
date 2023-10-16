@@ -2,9 +2,18 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Region } from '../../../bridge'
 
+export type ListNamesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+
 export type ListPinsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type ListVolumesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+
+export type NameStatus =
+  | 'unknown_status'
+  | 'queued'
+  | 'publishing'
+  | 'failed'
+  | 'published'
 
 export type PinDetails =
   | 'unknown_details'
@@ -58,6 +67,23 @@ export interface PinInfo {
 export interface PinOptions {
   requiredZones: string[]
   replicationCount: number
+}
+
+export interface Name {
+  nameId: string
+  projectId: string
+  createdAt?: Date
+  updatedAt?: Date
+  tags: string[]
+  name: string
+  key: string
+  status: NameStatus
+  value: string
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region: Region
 }
 
 export interface Pin {
@@ -153,6 +179,15 @@ export type DeleteVolumeRequest = {
   volumeId: string
 }
 
+export interface ExportKeyNameResponse {
+  nameId: string
+  projectId: string
+  createdAt?: Date
+  updatedAt?: Date
+  publicKey: string
+  privateKey: string
+}
+
 export type GetPinRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -173,6 +208,105 @@ export type GetVolumeRequest = {
   region?: Region
   /** Volume ID. */
   volumeId: string
+}
+
+export type IpnsApiCreateNameRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Project ID. */
+  projectId?: string
+  /** Name for your records. */
+  name: string
+  /** Value you want to associate with your records, CID or IPNS key. */
+  value: string
+}
+
+export type IpnsApiDeleteNameRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Name ID you wish to delete. */
+  nameId: string
+}
+
+export type IpnsApiExportKeyNameRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Name ID whose keys you want to export. */
+  nameId: string
+}
+
+export type IpnsApiGetNameRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Name ID whose information you want to retrieve. */
+  nameId: string
+}
+
+export type IpnsApiImportKeyNameRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Project ID. */
+  projectId?: string
+  /** Name for your records. */
+  name: string
+  /** Base64 private key. */
+  privateKey: string
+  /** Value you want to associate with your records, CID or IPNS key. */
+  value: string
+}
+
+export type IpnsApiListNamesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Project ID. */
+  projectId?: string
+  /** Organization ID. */
+  organizationId?: string
+  /** Sort the order of the returned names. */
+  orderBy?: ListNamesRequestOrderBy
+  /** Page number. */
+  page?: number
+  /** Maximum number of names to return per page. */
+  pageSize?: number
+}
+
+export type IpnsApiUpdateNameRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Name ID you wish to update. */
+  nameId: string
+  /** New name you want to associate with your record. */
+  name?: string
+  /** New tags you want to associate with your record. */
+  tags?: string[]
+  /** Value you want to associate with your records, CID or IPNS key. */
+  value?: string
+}
+
+export interface ListNamesResponse {
+  names: Name[]
+  totalCount: number
 }
 
 export type ListPinsRequest = {

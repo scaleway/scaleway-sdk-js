@@ -7,7 +7,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   Cluster,
@@ -47,6 +46,7 @@ import type {
   UpgradePoolRequest,
   Version,
 } from './types.gen'
+import type {} from './types.private.gen'
 
 const unmarshalPoolUpgradePolicy = (data: unknown) => {
   if (!isJSONObject(data)) {

@@ -5,14 +5,19 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreatePinByCIDRequest,
   CreatePinByURLRequest,
   CreateVolumeRequest,
+  ExportKeyNameResponse,
+  IpnsApiCreateNameRequest,
+  IpnsApiImportKeyNameRequest,
+  IpnsApiUpdateNameRequest,
+  ListNamesResponse,
   ListPinsResponse,
   ListVolumesResponse,
+  Name,
   Pin,
   PinCID,
   PinCIDMeta,
@@ -23,6 +28,27 @@ import type {
   UpdateVolumeRequest,
   Volume,
 } from './types.gen'
+
+export const unmarshalName = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Name' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    key: data.key,
+    name: data.name,
+    nameId: data.name_id,
+    projectId: data.project_id,
+    region: data.region,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+    value: data.value,
+  } as Name
+}
 
 const unmarshalPinCIDMeta = (data: unknown) => {
   if (!isJSONObject(data)) {
@@ -104,6 +130,36 @@ export const unmarshalVolume = (data: unknown) => {
   } as Volume
 }
 
+export const unmarshalExportKeyNameResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ExportKeyNameResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    nameId: data.name_id,
+    privateKey: data.private_key,
+    projectId: data.project_id,
+    publicKey: data.public_key,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as ExportKeyNameResponse
+}
+
+export const unmarshalListNamesResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListNamesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    names: unmarshalArrayOfObject(data.names, unmarshalName),
+    totalCount: data.total_count,
+  } as ListNamesResponse
+}
+
 export const unmarshalListPinsResponse = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -183,6 +239,34 @@ export const marshalCreateVolumeRequest = (
 ): Record<string, unknown> => ({
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
+export const marshalIpnsApiCreateNameRequest = (
+  request: IpnsApiCreateNameRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  value: request.value,
+})
+
+export const marshalIpnsApiImportKeyNameRequest = (
+  request: IpnsApiImportKeyNameRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+  private_key: request.privateKey,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  value: request.value,
+})
+
+export const marshalIpnsApiUpdateNameRequest = (
+  request: IpnsApiUpdateNameRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+  tags: request.tags,
+  value: request.value,
 })
 
 export const marshalReplacePinRequest = (
