@@ -46,7 +46,6 @@ import type {
   UpgradePoolRequest,
   Version,
 } from './types.gen'
-import type {} from './types.private.gen'
 
 const unmarshalPoolUpgradePolicy = (data: unknown) => {
   if (!isJSONObject(data)) {

@@ -927,6 +927,53 @@ export interface CreateSecurityGroupRuleResponse {
   rule: SecurityGroupRule
 }
 
+export type CreateServerRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** Instance name. */
+  name?: string
+  /** Define if a dynamic IPv4 is required for the Instance. */
+  dynamicIpRequired?: boolean
+  /** If true, configure the Instance so it uses the new routed IP mode. */
+  routedIpEnabled?: boolean
+  /** Define the Instance commercial type (i.e. GP1-S). */
+  commercialType: string
+  /** Instance image ID or label. */
+  image: string
+  /** Volumes attached to the server. */
+  volumes?: Record<string, VolumeServerTemplate>
+  /** True if IPv6 is enabled on the server. */
+  enableIpv6: boolean
+  /** ID of the reserved IP to attach to the Instance. */
+  publicIp?: string
+  /** A list of reserved IP IDs to attach to the Instance. */
+  publicIps?: string[]
+  /** Boot type to use. */
+  bootType?: BootType
+  /** @deprecated Bootscript ID to use when `boot_type` is set to `bootscript`. */
+  bootscript?: string
+  /**
+   * @deprecated Instance Organization ID.
+   *
+   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   could be set.
+   */
+  organization?: string
+  /**
+   * Instance Project ID.
+   *
+   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * could be set.
+   */
+  project?: string
+  /** Instance tags. */
+  tags?: string[]
+  /** Security group ID. */
+  securityGroup?: string
+  /** Placement group ID if Instance must be part of a placement group. */
+  placementGroup?: string
+}
+
 export interface CreateServerResponse {
   server: Server
 }
@@ -1672,6 +1719,26 @@ export interface ServerActionResponse {
   task: Task
 }
 
+export type SetImageRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  id: string
+  name: string
+  arch?: Arch
+  creationDate?: Date
+  modificationDate?: Date
+  /** @deprecated */
+  defaultBootscript?: Bootscript
+  extraVolumes?: Record<string, Volume>
+  fromServer: string
+  organization?: string
+  public: boolean
+  rootVolume?: VolumeSummary
+  state?: ImageState
+  project?: string
+  tags?: string[]
+}
+
 export type SetPlacementGroupRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
@@ -1775,6 +1842,47 @@ export type UpdatePrivateNICRequest = {
   privateNicId: string
   /** Tags used to select private NIC/s. */
   tags?: string[]
+}
+
+export type UpdateServerRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** UUID of the Instance. */
+  serverId: string
+  /** Name of the Instance. */
+  name?: string
+  bootType?: BootType
+  /** Tags of the Instance. */
+  tags?: string[]
+  volumes?: Record<string, VolumeServerTemplate>
+  /** @deprecated */
+  bootscript?: string
+  dynamicIpRequired?: boolean
+  /**
+   * True to configure the instance so it uses the new routed IP mode (once this
+   * is set to True you cannot set it back to False).
+   */
+  routedIpEnabled?: boolean
+  /** A list of reserved IP IDs to attach to the Instance. */
+  publicIps?: string[]
+  enableIpv6?: boolean
+  protected?: boolean
+  securityGroup?: SecurityGroupTemplate
+  /** Placement group ID if Instance must be part of a placement group. */
+  placementGroup?: string | null
+  /** Instance private NICs. */
+  privateNics?: string[]
+  /**
+   * Warning: This field has some restrictions:
+   *
+   * - Cannot be changed if the Instance is not in `stopped` state.
+   * - Cannot be changed if the Instance is in a placement group.
+   * - Local storage requirements of the target commercial_types must be fulfilled
+   *   (i.e. if an Instance has 80GB of local storage, it can be changed into a
+   *   GP1-XS, which has a maximum of 150GB, but it cannot be changed into a
+   *   DEV1-S, which has only 20GB).
+   */
+  commercialType?: string
 }
 
 export interface UpdateServerResponse {
