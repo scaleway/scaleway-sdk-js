@@ -65,7 +65,7 @@ const unmarshalDeviceMessageFiltersRule = (data: unknown) => {
 
   return {
     policy: data.policy,
-    topics: data.topics ? data.topics : undefined,
+    topics: data.topics,
   } as DeviceMessageFiltersRule
 }
 
@@ -460,7 +460,7 @@ export const unmarshalTwinDocument = (data: unknown) => {
   }
 
   return {
-    data: data.data ? data.data : undefined,
+    data: data.data,
     documentName: data.document_name,
     twinId: data.twin_id,
     version: data.version,

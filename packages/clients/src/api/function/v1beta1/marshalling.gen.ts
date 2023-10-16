@@ -56,7 +56,7 @@ export const unmarshalCron = (data: unknown) => {
   }
 
   return {
-    args: data.args ? data.args : undefined,
+    args: data.args,
     functionId: data.function_id,
     id: data.id,
     name: data.name,
@@ -73,7 +73,7 @@ export const unmarshalDomain = (data: unknown) => {
   }
 
   return {
-    errorMessage: data.error_message ? data.error_message : undefined,
+    errorMessage: data.error_message,
     functionId: data.function_id,
     hostname: data.hostname,
     id: data.id,
@@ -103,12 +103,12 @@ export const unmarshalFunction = (data: unknown) => {
   }
 
   return {
-    buildMessage: data.build_message ? data.build_message : undefined,
+    buildMessage: data.build_message,
     cpuLimit: data.cpu_limit,
-    description: data.description ? data.description : undefined,
+    description: data.description,
     domainName: data.domain_name,
     environmentVariables: data.environment_variables,
-    errorMessage: data.error_message ? data.error_message : undefined,
+    errorMessage: data.error_message,
     handler: data.handler,
     httpOption: data.http_option,
     id: data.id,
@@ -126,7 +126,7 @@ export const unmarshalFunction = (data: unknown) => {
       unmarshalSecretHashedValue,
     ),
     status: data.status,
-    timeout: data.timeout ? data.timeout : undefined,
+    timeout: data.timeout,
   } as Function
 }
 
@@ -138,9 +138,9 @@ export const unmarshalNamespace = (data: unknown) => {
   }
 
   return {
-    description: data.description ? data.description : undefined,
+    description: data.description,
     environmentVariables: data.environment_variables,
-    errorMessage: data.error_message ? data.error_message : undefined,
+    errorMessage: data.error_message,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
@@ -164,12 +164,12 @@ export const unmarshalToken = (data: unknown) => {
   }
 
   return {
-    description: data.description ? data.description : undefined,
+    description: data.description,
     expiresAt: unmarshalDate(data.expires_at),
-    functionId: data.function_id ? data.function_id : undefined,
+    functionId: data.function_id,
     id: data.id,
-    namespaceId: data.namespace_id ? data.namespace_id : undefined,
-    publicKey: data.public_key ? data.public_key : undefined,
+    namespaceId: data.namespace_id,
+    publicKey: data.public_key,
     status: data.status,
     token: data.token,
   } as Token
@@ -183,9 +183,7 @@ const unmarshalTriggerMnqNatsClientConfig = (data: unknown) => {
   }
 
   return {
-    mnqCredentialId: data.mnq_credential_id
-      ? data.mnq_credential_id
-      : undefined,
+    mnqCredentialId: data.mnq_credential_id,
     mnqNamespaceId: data.mnq_namespace_id,
     mnqProjectId: data.mnq_project_id,
     mnqRegion: data.mnq_region,
@@ -201,9 +199,7 @@ const unmarshalTriggerMnqSqsClientConfig = (data: unknown) => {
   }
 
   return {
-    mnqCredentialId: data.mnq_credential_id
-      ? data.mnq_credential_id
-      : undefined,
+    mnqCredentialId: data.mnq_credential_id,
     mnqNamespaceId: data.mnq_namespace_id,
     mnqProjectId: data.mnq_project_id,
     mnqRegion: data.mnq_region,
@@ -235,7 +231,7 @@ export const unmarshalTrigger = (data: unknown) => {
 
   return {
     description: data.description,
-    errorMessage: data.error_message ? data.error_message : undefined,
+    errorMessage: data.error_message,
     functionId: data.function_id,
     id: data.id,
     inputType: data.input_type,

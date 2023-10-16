@@ -77,7 +77,7 @@ const unmarshalOSOSField = (data: unknown) => {
   }
 
   return {
-    defaultValue: data.default_value ? data.default_value : undefined,
+    defaultValue: data.default_value,
     editable: data.editable,
     required: data.required,
   } as OSOSField
@@ -162,7 +162,7 @@ const unmarshalOfferOptionOffer = (data: unknown) => {
     id: data.id,
     manageable: data.manageable,
     name: data.name,
-    osId: data.os_id ? data.os_id : undefined,
+    osId: data.os_id,
     price: data.price ? unmarshalMoney(data.price) : undefined,
     subscriptionPeriod: data.subscription_period,
   } as OfferOptionOffer
@@ -267,7 +267,7 @@ export const unmarshalServerPrivateNetwork = (data: unknown) => {
     serverId: data.server_id,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
-    vlan: data.vlan ? data.vlan : undefined,
+    vlan: data.vlan,
   } as ServerPrivateNetwork
 }
 

@@ -287,7 +287,7 @@ export const unmarshalDNSZone = (data: unknown) => {
 
   return {
     domain: data.domain,
-    message: data.message ? data.message : undefined,
+    message: data.message,
     ns: data.ns,
     nsDefault: data.ns_default,
     nsMaster: data.ns_master,
@@ -342,7 +342,7 @@ const unmarshalCheckContactsCompatibilityResponseContactCheckResult = (
 
   return {
     compatible: data.compatible,
-    errorMessage: data.error_message ? data.error_message : undefined,
+    errorMessage: data.error_message,
   } as CheckContactsCompatibilityResponseContactCheckResult
 }
 
@@ -640,10 +640,10 @@ const unmarshalDomainRecordHTTPServiceConfig = (data: unknown) => {
 
   return {
     ips: data.ips,
-    mustContain: data.must_contain ? data.must_contain : undefined,
+    mustContain: data.must_contain,
     strategy: data.strategy,
     url: data.url,
-    userAgent: data.user_agent ? data.user_agent : undefined,
+    userAgent: data.user_agent,
   } as DomainRecordHTTPServiceConfig
 }
 
@@ -685,7 +685,7 @@ const unmarshalDomainRecord = (data: unknown) => {
   }
 
   return {
-    comment: data.comment ? data.comment : undefined,
+    comment: data.comment,
     data: data.data,
     geoIpConfig: data.geo_ip_config
       ? unmarshalDomainRecordGeoIPConfig(data.geo_ip_config)
@@ -715,9 +715,9 @@ const unmarshalRecordIdentifier = (data: unknown) => {
   }
 
   return {
-    data: data.data ? data.data : undefined,
+    data: data.data,
     name: data.name,
-    ttl: data.ttl ? data.ttl : undefined,
+    ttl: data.ttl,
     type: data.type,
   } as RecordIdentifier
 }
@@ -752,7 +752,7 @@ const unmarshalRecordChangeDelete = (data: unknown) => {
   }
 
   return {
-    id: data.id ? data.id : undefined,
+    id: data.id,
     idFields: data.id_fields
       ? unmarshalRecordIdentifier(data.id_fields)
       : undefined,
@@ -767,7 +767,7 @@ const unmarshalRecordChangeSet = (data: unknown) => {
   }
 
   return {
-    id: data.id ? data.id : undefined,
+    id: data.id,
     idFields: data.id_fields
       ? unmarshalRecordIdentifier(data.id_fields)
       : undefined,
@@ -1041,9 +1041,7 @@ const unmarshalRenewableDomain = (data: unknown) => {
     limitRenewAt: unmarshalDate(data.limit_renew_at),
     organizationId: data.organization_id,
     projectId: data.project_id,
-    renewableDurationInYears: data.renewable_duration_in_years
-      ? data.renewable_duration_in_years
-      : undefined,
+    renewableDurationInYears: data.renewable_duration_in_years,
     status: data.status,
     tld: unmarshalTld(data.tld),
   } as RenewableDomain
@@ -1086,9 +1084,9 @@ const unmarshalTask = (data: unknown) => {
   }
 
   return {
-    domain: data.domain ? data.domain : undefined,
+    domain: data.domain,
     id: data.id,
-    message: data.message ? data.message : undefined,
+    message: data.message,
     organizationId: data.organization_id,
     projectId: data.project_id,
     startedAt: unmarshalDate(data.started_at),

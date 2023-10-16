@@ -53,9 +53,9 @@ export const unmarshalACLRule = (data: unknown) => {
   }
 
   return {
-    description: data.description ? data.description : undefined,
+    description: data.description,
     id: data.id,
-    ipCidr: data.ip_cidr ? data.ip_cidr : undefined,
+    ipCidr: data.ip_cidr,
   } as ACLRule
 }
 
@@ -206,13 +206,13 @@ const unmarshalAvailableClusterSetting = (data: unknown) => {
   }
 
   return {
-    defaultValue: data.default_value ? data.default_value : undefined,
+    defaultValue: data.default_value,
     deprecated: data.deprecated,
     description: data.description,
-    maxValue: data.max_value ? data.max_value : undefined,
-    minValue: data.min_value ? data.min_value : undefined,
+    maxValue: data.max_value,
+    minValue: data.min_value,
     name: data.name,
-    regex: data.regex ? data.regex : undefined,
+    regex: data.regex,
     type: data.type,
   } as AvailableClusterSetting
 }

@@ -55,10 +55,10 @@ export const unmarshalEmail = (data: unknown) => {
     mailRcpt: data.mail_rcpt,
     messageId: data.message_id,
     projectId: data.project_id,
-    rcptTo: data.rcpt_to ? data.rcpt_to : undefined,
+    rcptTo: data.rcpt_to,
     rcptType: data.rcpt_type,
     status: data.status,
-    statusDetails: data.status_details ? data.status_details : undefined,
+    statusDetails: data.status_details,
     subject: data.subject,
     tryCount: data.try_count,
     updatedAt: unmarshalDate(data.updated_at),
@@ -91,7 +91,7 @@ export const unmarshalDomain = (data: unknown) => {
     createdAt: unmarshalDate(data.created_at),
     dkimConfig: data.dkim_config,
     id: data.id,
-    lastError: data.last_error ? data.last_error : undefined,
+    lastError: data.last_error,
     lastValidAt: unmarshalDate(data.last_valid_at),
     name: data.name,
     nextCheckAt: unmarshalDate(data.next_check_at),
@@ -125,7 +125,7 @@ const unmarshalDomainLastStatusDkimRecord = (data: unknown) => {
   }
 
   return {
-    error: data.error ? data.error : undefined,
+    error: data.error,
     lastValidAt: unmarshalDate(data.last_valid_at),
     status: data.status,
   } as DomainLastStatusDkimRecord
@@ -139,7 +139,7 @@ const unmarshalDomainLastStatusSpfRecord = (data: unknown) => {
   }
 
   return {
-    error: data.error ? data.error : undefined,
+    error: data.error,
     lastValidAt: unmarshalDate(data.last_valid_at),
     status: data.status,
   } as DomainLastStatusSpfRecord

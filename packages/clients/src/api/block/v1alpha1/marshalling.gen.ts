@@ -54,7 +54,7 @@ const unmarshalVolumeSpecifications = (data: unknown) => {
 
   return {
     class: data.class,
-    perfIops: data.perf_iops ? data.perf_iops : undefined,
+    perfIops: data.perf_iops,
   } as VolumeSpecifications
 }
 
@@ -69,9 +69,7 @@ export const unmarshalVolume = (data: unknown) => {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     name: data.name,
-    parentSnapshotId: data.parent_snapshot_id
-      ? data.parent_snapshot_id
-      : undefined,
+    parentSnapshotId: data.parent_snapshot_id,
     projectId: data.project_id,
     references: unmarshalArrayOfObject(data.references, unmarshalReference),
     size: data.size,

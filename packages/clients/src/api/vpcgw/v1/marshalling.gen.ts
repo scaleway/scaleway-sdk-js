@@ -65,11 +65,11 @@ export const unmarshalDHCP = (data: unknown) => {
     projectId: data.project_id,
     pushDefaultRoute: data.push_default_route,
     pushDnsServer: data.push_dns_server,
-    rebindTimer: data.rebind_timer ? data.rebind_timer : undefined,
-    renewTimer: data.renew_timer ? data.renew_timer : undefined,
+    rebindTimer: data.rebind_timer,
+    renewTimer: data.renew_timer,
     subnet: data.subnet,
     updatedAt: unmarshalDate(data.updated_at),
-    validLifetime: data.valid_lifetime ? data.valid_lifetime : undefined,
+    validLifetime: data.valid_lifetime,
     zone: data.zone,
   } as DHCP
 }
@@ -82,14 +82,14 @@ export const unmarshalGatewayNetwork = (data: unknown) => {
   }
 
   return {
-    address: data.address ? data.address : undefined,
+    address: data.address,
     createdAt: unmarshalDate(data.created_at),
     dhcp: unmarshalDHCP(data.dhcp),
     enableDhcp: data.enable_dhcp,
     enableMasquerade: data.enable_masquerade,
     gatewayId: data.gateway_id,
     id: data.id,
-    macAddress: data.mac_address ? data.mac_address : undefined,
+    macAddress: data.mac_address,
     privateNetworkId: data.private_network_id,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
@@ -107,11 +107,11 @@ export const unmarshalIP = (data: unknown) => {
   return {
     address: data.address,
     createdAt: unmarshalDate(data.created_at),
-    gatewayId: data.gateway_id ? data.gateway_id : undefined,
+    gatewayId: data.gateway_id,
     id: data.id,
     organizationId: data.organization_id,
     projectId: data.project_id,
-    reverse: data.reverse ? data.reverse : undefined,
+    reverse: data.reverse,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
     zone: data.zone,
@@ -162,7 +162,7 @@ export const unmarshalGateway = (data: unknown) => {
   return {
     bastionEnabled: data.bastion_enabled,
     bastionPort: data.bastion_port,
-    canUpgradeTo: data.can_upgrade_to ? data.can_upgrade_to : undefined,
+    canUpgradeTo: data.can_upgrade_to,
     createdAt: unmarshalDate(data.created_at),
     gatewayNetworks: unmarshalArrayOfObject(
       data.gateway_networks,
@@ -179,7 +179,7 @@ export const unmarshalGateway = (data: unknown) => {
     type: unmarshalGatewayType(data.type),
     updatedAt: unmarshalDate(data.updated_at),
     upstreamDnsServers: data.upstream_dns_servers,
-    version: data.version ? data.version : undefined,
+    version: data.version,
     zone: data.zone,
   } as Gateway
 }

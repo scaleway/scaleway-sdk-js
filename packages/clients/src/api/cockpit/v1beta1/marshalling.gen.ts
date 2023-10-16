@@ -110,7 +110,7 @@ export const unmarshalGrafanaUser = (data: unknown) => {
   return {
     id: data.id,
     login: data.login,
-    password: data.password ? data.password : undefined,
+    password: data.password,
     role: data.role,
   } as GrafanaUser
 }
@@ -148,7 +148,7 @@ export const unmarshalToken = (data: unknown) => {
     name: data.name,
     projectId: data.project_id,
     scopes: unmarshalTokenScopes(data.scopes),
-    secretKey: data.secret_key ? data.secret_key : undefined,
+    secretKey: data.secret_key,
     updatedAt: unmarshalDate(data.updated_at),
   } as Token
 }
@@ -179,12 +179,8 @@ const unmarshalPlan = (data: unknown) => {
     id: data.id,
     logsIngestionPrice: data.logs_ingestion_price,
     name: data.name,
-    retentionLogsInterval: data.retention_logs_interval
-      ? data.retention_logs_interval
-      : undefined,
-    retentionMetricsInterval: data.retention_metrics_interval
-      ? data.retention_metrics_interval
-      : undefined,
+    retentionLogsInterval: data.retention_logs_interval,
+    retentionMetricsInterval: data.retention_metrics_interval,
     retentionPrice: data.retention_price,
     sampleIngestionPrice: data.sample_ingestion_price,
   } as Plan

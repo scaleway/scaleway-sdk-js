@@ -77,16 +77,16 @@ export const unmarshalAPIKey = (data: unknown) => {
 
   return {
     accessKey: data.access_key,
-    applicationId: data.application_id ? data.application_id : undefined,
+    applicationId: data.application_id,
     createdAt: unmarshalDate(data.created_at),
     creationIp: data.creation_ip,
     defaultProjectId: data.default_project_id,
     description: data.description,
     editable: data.editable,
     expiresAt: unmarshalDate(data.expires_at),
-    secretKey: data.secret_key ? data.secret_key : undefined,
+    secretKey: data.secret_key,
     updatedAt: unmarshalDate(data.updated_at),
-    userId: data.user_id ? data.user_id : undefined,
+    userId: data.user_id,
   } as APIKey
 }
 
@@ -136,20 +136,20 @@ export const unmarshalPolicy = (data: unknown) => {
   }
 
   return {
-    applicationId: data.application_id ? data.application_id : undefined,
+    applicationId: data.application_id,
     createdAt: unmarshalDate(data.created_at),
     description: data.description,
     editable: data.editable,
-    groupId: data.group_id ? data.group_id : undefined,
+    groupId: data.group_id,
     id: data.id,
     name: data.name,
     nbPermissionSets: data.nb_permission_sets,
     nbRules: data.nb_rules,
     nbScopes: data.nb_scopes,
-    noPrincipal: data.no_principal ? data.no_principal : undefined,
+    noPrincipal: data.no_principal,
     organizationId: data.organization_id,
     updatedAt: unmarshalDate(data.updated_at),
-    userId: data.user_id ? data.user_id : undefined,
+    userId: data.user_id,
   } as Policy
 }
 
@@ -161,9 +161,9 @@ export const unmarshalQuotum = (data: unknown) => {
   }
 
   return {
-    limit: data.limit ? data.limit : undefined,
+    limit: data.limit,
     name: data.name,
-    unlimited: data.unlimited ? data.unlimited : undefined,
+    unlimited: data.unlimited,
   } as Quotum
 }
 
@@ -204,9 +204,7 @@ export const unmarshalUser = (data: unknown) => {
     mfa: data.mfa,
     organizationId: data.organization_id,
     status: data.status,
-    twoFactorEnabled: data.two_factor_enabled
-      ? data.two_factor_enabled
-      : undefined,
+    twoFactorEnabled: data.two_factor_enabled,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
   } as User
@@ -275,7 +273,7 @@ const unmarshalPermissionSet = (data: unknown) => {
   }
 
   return {
-    categories: data.categories ? data.categories : undefined,
+    categories: data.categories,
     description: data.description,
     id: data.id,
     name: data.name,
@@ -333,16 +331,12 @@ const unmarshalRule = (data: unknown) => {
   }
 
   return {
-    accountRootUserId: data.account_root_user_id
-      ? data.account_root_user_id
-      : undefined,
+    accountRootUserId: data.account_root_user_id,
     id: data.id,
-    organizationId: data.organization_id ? data.organization_id : undefined,
-    permissionSetNames: data.permission_set_names
-      ? data.permission_set_names
-      : undefined,
+    organizationId: data.organization_id,
+    permissionSetNames: data.permission_set_names,
     permissionSetsScopeType: data.permission_sets_scope_type,
-    projectIds: data.project_ids ? data.project_ids : undefined,
+    projectIds: data.project_ids,
   } as Rule
 }
 

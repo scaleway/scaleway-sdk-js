@@ -6,7 +6,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateServerRequest,
@@ -88,9 +87,7 @@ export const unmarshalServerType = (data: unknown) => {
     cpu: unmarshalServerTypeCPU(data.cpu),
     disk: unmarshalServerTypeDisk(data.disk),
     memory: unmarshalServerTypeMemory(data.memory),
-    minimumLeaseDuration: data.minimum_lease_duration
-      ? data.minimum_lease_duration
-      : undefined,
+    minimumLeaseDuration: data.minimum_lease_duration,
     name: data.name,
     stock: data.stock,
   } as ServerType

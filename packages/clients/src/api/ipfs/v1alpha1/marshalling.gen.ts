@@ -31,7 +31,7 @@ const unmarshalPinCIDMeta = (data: unknown) => {
   }
 
   return {
-    id: data.id ? data.id : undefined,
+    id: data.id,
   } as PinCIDMeta
 }
 
@@ -43,9 +43,9 @@ const unmarshalPinCID = (data: unknown) => {
   }
 
   return {
-    cid: data.cid ? data.cid : undefined,
+    cid: data.cid,
     meta: unmarshalPinCIDMeta(data.meta),
-    name: data.name ? data.name : undefined,
+    name: data.name,
     origins: data.origins,
   } as PinCID
 }
@@ -58,11 +58,11 @@ const unmarshalPinInfo = (data: unknown) => {
   }
 
   return {
-    id: data.id ? data.id : undefined,
-    progress: data.progress ? data.progress : undefined,
-    size: data.size ? data.size : undefined,
+    id: data.id,
+    progress: data.progress,
+    size: data.size,
     statusDetails: data.status_details,
-    url: data.url ? data.url : undefined,
+    url: data.url,
   } as PinInfo
 }
 
@@ -97,7 +97,7 @@ export const unmarshalVolume = (data: unknown) => {
     name: data.name,
     projectId: data.project_id,
     region: data.region,
-    size: data.size ? data.size : undefined,
+    size: data.size,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
   } as Volume

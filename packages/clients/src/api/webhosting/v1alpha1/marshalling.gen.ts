@@ -6,7 +6,6 @@ import {
   unmarshalDate,
   unmarshalMoney,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateHostingRequest,
@@ -68,7 +67,7 @@ export const unmarshalHosting = (data: unknown) => {
     options: unmarshalArrayOfObject(data.options, unmarshalHostingOption),
     organizationId: data.organization_id,
     platformHostname: data.platform_hostname,
-    platformNumber: data.platform_number ? data.platform_number : undefined,
+    platformNumber: data.platform_number,
     projectId: data.project_id,
     region: data.region,
     status: data.status,
@@ -87,7 +86,7 @@ const unmarshalDnsRecord = (data: unknown) => {
 
   return {
     name: data.name,
-    priority: data.priority ? data.priority : undefined,
+    priority: data.priority,
     status: data.status,
     ttl: data.ttl,
     type: data.type,

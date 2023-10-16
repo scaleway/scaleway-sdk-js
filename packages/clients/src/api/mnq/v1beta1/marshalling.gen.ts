@@ -91,9 +91,9 @@ const unmarshalSnsPermissions = (data: unknown) => {
   }
 
   return {
-    canManage: data.can_manage ? data.can_manage : undefined,
-    canPublish: data.can_publish ? data.can_publish : undefined,
-    canReceive: data.can_receive ? data.can_receive : undefined,
+    canManage: data.can_manage,
+    canPublish: data.can_publish,
+    canReceive: data.can_receive,
   } as SnsPermissions
 }
 
@@ -126,9 +126,9 @@ const unmarshalSqsPermissions = (data: unknown) => {
   }
 
   return {
-    canManage: data.can_manage ? data.can_manage : undefined,
-    canPublish: data.can_publish ? data.can_publish : undefined,
-    canReceive: data.can_receive ? data.can_receive : undefined,
+    canManage: data.can_manage,
+    canPublish: data.can_publish,
+    canReceive: data.can_receive,
   } as SqsPermissions
 }
 

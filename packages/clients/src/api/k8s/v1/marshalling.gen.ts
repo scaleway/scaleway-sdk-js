@@ -79,12 +79,10 @@ export const unmarshalPool = (data: unknown) => {
     minSize: data.min_size,
     name: data.name,
     nodeType: data.node_type,
-    placementGroupId: data.placement_group_id
-      ? data.placement_group_id
-      : undefined,
+    placementGroupId: data.placement_group_id,
     publicIpDisabled: data.public_ip_disabled,
     region: data.region,
-    rootVolumeSize: data.root_volume_size ? data.root_volume_size : undefined,
+    rootVolumeSize: data.root_volume_size,
     rootVolumeType: data.root_volume_type,
     size: data.size,
     status: data.status,
@@ -199,9 +197,7 @@ export const unmarshalCluster = (data: unknown) => {
     cni: data.cni,
     commitmentEndsAt: unmarshalDate(data.commitment_ends_at),
     createdAt: unmarshalDate(data.created_at),
-    dashboardEnabled: data.dashboard_enabled
-      ? data.dashboard_enabled
-      : undefined,
+    dashboardEnabled: data.dashboard_enabled,
     description: data.description,
     dnsWildcard: data.dns_wildcard,
     featureGates: data.feature_gates,
@@ -212,9 +208,7 @@ export const unmarshalCluster = (data: unknown) => {
       data.open_id_connect_config,
     ),
     organizationId: data.organization_id,
-    privateNetworkId: data.private_network_id
-      ? data.private_network_id
-      : undefined,
+    privateNetworkId: data.private_network_id,
     projectId: data.project_id,
     region: data.region,
     status: data.status,
@@ -237,13 +231,13 @@ export const unmarshalNode = (data: unknown) => {
     clusterId: data.cluster_id,
     conditions: data.conditions ? data.conditions : undefined,
     createdAt: unmarshalDate(data.created_at),
-    errorMessage: data.error_message ? data.error_message : undefined,
+    errorMessage: data.error_message,
     id: data.id,
     name: data.name,
     poolId: data.pool_id,
     providerId: data.provider_id,
-    publicIpV4: data.public_ip_v4 ? data.public_ip_v4 : undefined,
-    publicIpV6: data.public_ip_v6 ? data.public_ip_v6 : undefined,
+    publicIpV4: data.public_ip_v4,
+    publicIpV6: data.public_ip_v6,
     region: data.region,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
@@ -278,7 +272,7 @@ const unmarshalClusterType = (data: unknown) => {
 
   return {
     availability: data.availability,
-    commitmentDelay: data.commitment_delay ? data.commitment_delay : undefined,
+    commitmentDelay: data.commitment_delay,
     dedicated: data.dedicated,
     maxNodes: data.max_nodes,
     memory: data.memory,

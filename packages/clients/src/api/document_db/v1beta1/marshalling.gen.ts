@@ -130,13 +130,13 @@ export const unmarshalEndpoint = (data: unknown) => {
     directAccess: data.direct_access
       ? unmarshalEndpointDirectAccessDetails(data.direct_access)
       : undefined,
-    hostname: data.hostname ? data.hostname : undefined,
+    hostname: data.hostname,
     id: data.id,
-    ip: data.ip ? data.ip : undefined,
+    ip: data.ip,
     loadBalancer: data.load_balancer
       ? unmarshalEndpointLoadBalancerDetails(data.load_balancer)
       : undefined,
-    name: data.name ? data.name : undefined,
+    name: data.name,
     port: data.port,
     privateNetwork: data.private_network
       ? unmarshalEndpointPrivateNetworkDetails(data.private_network)
@@ -184,7 +184,7 @@ export const unmarshalInstanceLog = (data: unknown) => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
-    downloadUrl: data.download_url ? data.download_url : undefined,
+    downloadUrl: data.download_url,
     expiresAt: unmarshalDate(data.expires_at),
     id: data.id,
     nodeName: data.node_name,
@@ -229,12 +229,8 @@ const unmarshalLogsPolicy = (data: unknown) => {
   }
 
   return {
-    maxAgeRetention: data.max_age_retention
-      ? data.max_age_retention
-      : undefined,
-    totalDiskRetention: data.total_disk_retention
-      ? data.total_disk_retention
-      : undefined,
+    maxAgeRetention: data.max_age_retention,
+    totalDiskRetention: data.total_disk_retention,
   } as LogsPolicy
 }
 
@@ -357,7 +353,7 @@ export const unmarshalSnapshot = (data: unknown) => {
     name: data.name,
     nodeType: data.node_type,
     region: data.region,
-    size: data.size ? data.size : undefined,
+    size: data.size,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as Snapshot
@@ -388,7 +384,7 @@ const unmarshalACLRule = (data: unknown) => {
     description: data.description,
     direction: data.direction,
     ip: data.ip,
-    port: data.port ? data.port : undefined,
+    port: data.port,
     protocol: data.protocol,
   } as ACLRule
 }
@@ -463,17 +459,15 @@ const unmarshalEngineSetting = (data: unknown) => {
   return {
     defaultValue: data.default_value,
     description: data.description,
-    floatMax: data.float_max ? data.float_max : undefined,
-    floatMin: data.float_min ? data.float_min : undefined,
+    floatMax: data.float_max,
+    floatMin: data.float_min,
     hotConfigurable: data.hot_configurable,
-    intMax: data.int_max ? data.int_max : undefined,
-    intMin: data.int_min ? data.int_min : undefined,
+    intMax: data.int_max,
+    intMin: data.int_min,
     name: data.name,
     propertyType: data.property_type,
-    stringConstraint: data.string_constraint
-      ? data.string_constraint
-      : undefined,
-    unit: data.unit ? data.unit : undefined,
+    stringConstraint: data.string_constraint,
+    unit: data.unit,
   } as EngineSetting
 }
 
@@ -659,9 +653,7 @@ const unmarshalNodeType = (data: unknown) => {
     disabled: data.disabled,
     generation: data.generation,
     instanceRange: data.instance_range,
-    isBssdCompatible: data.is_bssd_compatible
-      ? data.is_bssd_compatible
-      : undefined,
+    isBssdCompatible: data.is_bssd_compatible,
     isHaRequired: data.is_ha_required,
     memory: data.memory,
     name: data.name,

@@ -6,7 +6,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateCredentialRequest,
@@ -51,9 +50,9 @@ const unmarshalPermissions = (data: unknown) => {
   }
 
   return {
-    canManage: data.can_manage ? data.can_manage : undefined,
-    canPublish: data.can_publish ? data.can_publish : undefined,
-    canReceive: data.can_receive ? data.can_receive : undefined,
+    canManage: data.can_manage,
+    canPublish: data.can_publish,
+    canReceive: data.can_receive,
   } as Permissions
 }
 
@@ -79,7 +78,7 @@ const unmarshalCredentialSQSSNSCreds = (data: unknown) => {
   return {
     accessKey: data.access_key,
     permissions: unmarshalPermissions(data.permissions),
-    secretKey: data.secret_key ? data.secret_key : undefined,
+    secretKey: data.secret_key,
   } as CredentialSQSSNSCreds
 }
 

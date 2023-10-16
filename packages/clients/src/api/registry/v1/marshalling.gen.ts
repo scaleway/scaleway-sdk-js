@@ -7,7 +7,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateNamespaceRequest,
@@ -35,7 +34,7 @@ export const unmarshalImage = (data: unknown) => {
     namespaceId: data.namespace_id,
     size: data.size,
     status: data.status,
-    statusMessage: data.status_message ? data.status_message : undefined,
+    statusMessage: data.status_message,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
     visibility: data.visibility,

@@ -25,8 +25,8 @@ const unmarshalResource = (data: unknown) => {
 
   return {
     id: data.id,
-    macAddress: data.mac_address ? data.mac_address : undefined,
-    name: data.name ? data.name : undefined,
+    macAddress: data.mac_address,
+    name: data.name,
     type: data.type,
   } as Resource
 }
@@ -39,11 +39,9 @@ const unmarshalSource = (data: unknown) => {
   }
 
   return {
-    privateNetworkId: data.private_network_id
-      ? data.private_network_id
-      : undefined,
-    subnetId: data.subnet_id ? data.subnet_id : undefined,
-    zonal: data.zonal ? data.zonal : undefined,
+    privateNetworkId: data.private_network_id,
+    subnetId: data.subnet_id,
+    zonal: data.zonal,
   } as Source
 }
 
@@ -65,7 +63,7 @@ export const unmarshalIP = (data: unknown) => {
     source: unmarshalSource(data.source),
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
-    zone: data.zone ? data.zone : undefined,
+    zone: data.zone,
   } as IP
 }
 

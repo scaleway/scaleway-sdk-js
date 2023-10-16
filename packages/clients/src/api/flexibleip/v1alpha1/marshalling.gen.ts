@@ -5,7 +5,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   AttachFlexibleIPRequest,
@@ -56,7 +55,7 @@ export const unmarshalFlexibleIP = (data: unknown) => {
     organizationId: data.organization_id,
     projectId: data.project_id,
     reverse: data.reverse,
-    serverId: data.server_id ? data.server_id : undefined,
+    serverId: data.server_id,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),

@@ -192,7 +192,7 @@ const unmarshalVolume = (data: unknown) => {
 
   return {
     creationDate: unmarshalDate(data.creation_date),
-    exportUri: data.export_uri ? data.export_uri : undefined,
+    exportUri: data.export_uri,
     id: data.id,
     modificationDate: unmarshalDate(data.modification_date),
     name: data.name,
@@ -275,7 +275,7 @@ const unmarshalIp = (data: unknown) => {
     organization: data.organization,
     prefix: data.prefix,
     project: data.project,
-    reverse: data.reverse ? data.reverse : undefined,
+    reverse: data.reverse,
     server: unmarshalServerSummary(data.server),
     state: data.state,
     tags: data.tags,
@@ -356,9 +356,7 @@ const unmarshalSecurityGroup = (data: unknown) => {
     modificationDate: unmarshalDate(data.modification_date),
     name: data.name,
     organization: data.organization,
-    organizationDefault: data.organization_default
-      ? data.organization_default
-      : undefined,
+    organizationDefault: data.organization_default,
     outboundDefaultPolicy: data.outbound_default_policy,
     project: data.project,
     projectDefault: data.project_default,
@@ -391,8 +389,8 @@ const unmarshalSecurityGroupRule = (data: unknown) => {
 
   return {
     action: data.action,
-    destPortFrom: data.dest_port_from ? data.dest_port_from : undefined,
-    destPortTo: data.dest_port_to ? data.dest_port_to : undefined,
+    destPortFrom: data.dest_port_from,
+    destPortTo: data.dest_port_to,
     direction: data.direction,
     editable: data.editable,
     id: data.id,
@@ -545,7 +543,7 @@ const unmarshalServer = (data: unknown) => {
     name: data.name,
     organization: data.organization,
     placementGroup: unmarshalPlacementGroup(data.placement_group),
-    privateIp: data.private_ip ? data.private_ip : undefined,
+    privateIp: data.private_ip,
     privateNics: unmarshalArrayOfObject(data.private_nics, unmarshalPrivateNIC),
     project: data.project,
     protected: data.protected,
@@ -596,7 +594,7 @@ const unmarshalSnapshot = (data: unknown) => {
   return {
     baseVolume: unmarshalSnapshotBaseVolume(data.base_volume),
     creationDate: unmarshalDate(data.creation_date),
-    errorReason: data.error_reason ? data.error_reason : undefined,
+    errorReason: data.error_reason,
     id: data.id,
     modificationDate: unmarshalDate(data.modification_date),
     name: data.name,
@@ -1026,12 +1024,8 @@ const unmarshalServerTypeNetworkInterface = (data: unknown) => {
   }
 
   return {
-    internalBandwidth: data.internal_bandwidth
-      ? data.internal_bandwidth
-      : undefined,
-    internetBandwidth: data.internet_bandwidth
-      ? data.internet_bandwidth
-      : undefined,
+    internalBandwidth: data.internal_bandwidth,
+    internetBandwidth: data.internet_bandwidth,
   } as ServerTypeNetworkInterface
 }
 
@@ -1056,7 +1050,7 @@ const unmarshalServerTypeCapabilities = (data: unknown) => {
   }
 
   return {
-    blockStorage: data.block_storage ? data.block_storage : undefined,
+    blockStorage: data.block_storage,
     bootTypes: data.boot_types,
   } as ServerTypeCapabilities
 }
@@ -1074,12 +1068,8 @@ const unmarshalServerTypeNetwork = (data: unknown) => {
       unmarshalServerTypeNetworkInterface,
     ),
     ipv6Support: data.ipv6_support,
-    sumInternalBandwidth: data.sum_internal_bandwidth
-      ? data.sum_internal_bandwidth
-      : undefined,
-    sumInternetBandwidth: data.sum_internet_bandwidth
-      ? data.sum_internet_bandwidth
-      : undefined,
+    sumInternalBandwidth: data.sum_internal_bandwidth,
+    sumInternetBandwidth: data.sum_internet_bandwidth,
   } as ServerTypeNetwork
 }
 
@@ -1107,18 +1097,16 @@ const unmarshalServerType = (data: unknown) => {
     arch: data.arch,
     baremetal: data.baremetal,
     capabilities: unmarshalServerTypeCapabilities(data.capabilities),
-    gpu: data.gpu ? data.gpu : undefined,
+    gpu: data.gpu,
     hourlyPrice: data.hourly_price,
-    monthlyPrice: data.monthly_price ? data.monthly_price : undefined,
+    monthlyPrice: data.monthly_price,
     ncpus: data.ncpus,
     network: unmarshalServerTypeNetwork(data.network),
     perVolumeConstraint: unmarshalServerTypeVolumeConstraintsByType(
       data.per_volume_constraint,
     ),
     ram: data.ram,
-    scratchStorageMaxSize: data.scratch_storage_max_size
-      ? data.scratch_storage_max_size
-      : undefined,
+    scratchStorageMaxSize: data.scratch_storage_max_size,
     volumesConstraint: unmarshalServerTypeVolumeConstraintSizes(
       data.volumes_constraint,
     ),

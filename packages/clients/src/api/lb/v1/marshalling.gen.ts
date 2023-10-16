@@ -113,10 +113,10 @@ export const unmarshalIp = (data: unknown) => {
   return {
     id: data.id,
     ipAddress: data.ip_address,
-    lbId: data.lb_id ? data.lb_id : undefined,
+    lbId: data.lb_id,
     organizationId: data.organization_id,
     projectId: data.project_id,
-    region: data.region ? data.region : undefined,
+    region: data.region,
     reverse: data.reverse,
     zone: data.zone,
   } as Ip
@@ -173,7 +173,7 @@ const unmarshalHealthCheckHttpConfig = (data: unknown) => {
   }
 
   return {
-    code: data.code ? data.code : undefined,
+    code: data.code,
     hostHeader: data.host_header,
     method: data.method,
     uri: data.uri,
@@ -188,7 +188,7 @@ const unmarshalHealthCheckHttpsConfig = (data: unknown) => {
   }
 
   return {
-    code: data.code ? data.code : undefined,
+    code: data.code,
     hostHeader: data.host_header,
     method: data.method,
     sni: data.sni,
@@ -258,10 +258,10 @@ export const unmarshalHealthCheck = (data: unknown) => {
   }
 
   return {
-    checkDelay: data.check_delay ? data.check_delay : undefined,
+    checkDelay: data.check_delay,
     checkMaxRetries: data.check_max_retries,
     checkSendProxy: data.check_send_proxy,
-    checkTimeout: data.check_timeout ? data.check_timeout : undefined,
+    checkTimeout: data.check_timeout,
     httpConfig: data.http_config
       ? unmarshalHealthCheckHttpConfig(data.http_config)
       : undefined,
@@ -284,9 +284,7 @@ export const unmarshalHealthCheck = (data: unknown) => {
     tcpConfig: data.tcp_config
       ? unmarshalHealthCheckTcpConfig(data.tcp_config)
       : undefined,
-    transientCheckDelay: data.transient_check_delay
-      ? data.transient_check_delay
-      : undefined,
+    transientCheckDelay: data.transient_check_delay,
   } as HealthCheck
 }
 
@@ -301,7 +299,7 @@ const unmarshalInstance = (data: unknown) => {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     ipAddress: data.ip_address,
-    region: data.region ? data.region : undefined,
+    region: data.region,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
     zone: data.zone,
@@ -327,7 +325,7 @@ export const unmarshalLb = (data: unknown) => {
     organizationId: data.organization_id,
     privateNetworkCount: data.private_network_count,
     projectId: data.project_id,
-    region: data.region ? data.region : undefined,
+    region: data.region,
     routeCount: data.route_count,
     sslCompatibilityLevel: data.ssl_compatibility_level,
     status: data.status,
@@ -348,33 +346,29 @@ export const unmarshalBackend = (data: unknown) => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
-    failoverHost: data.failover_host ? data.failover_host : undefined,
+    failoverHost: data.failover_host,
     forwardPort: data.forward_port,
     forwardPortAlgorithm: data.forward_port_algorithm,
     forwardProtocol: data.forward_protocol,
     healthCheck: unmarshalHealthCheck(data.health_check),
     id: data.id,
-    ignoreSslServerVerify: data.ignore_ssl_server_verify
-      ? data.ignore_ssl_server_verify
-      : undefined,
+    ignoreSslServerVerify: data.ignore_ssl_server_verify,
     lb: unmarshalLb(data.lb),
-    maxConnections: data.max_connections ? data.max_connections : undefined,
-    maxRetries: data.max_retries ? data.max_retries : undefined,
+    maxConnections: data.max_connections,
+    maxRetries: data.max_retries,
     name: data.name,
     onMarkedDownAction: data.on_marked_down_action,
     pool: data.pool,
     proxyProtocol: data.proxy_protocol,
-    redispatchAttemptCount: data.redispatch_attempt_count
-      ? data.redispatch_attempt_count
-      : undefined,
-    sendProxyV2: data.send_proxy_v2 ? data.send_proxy_v2 : undefined,
-    sslBridging: data.ssl_bridging ? data.ssl_bridging : undefined,
+    redispatchAttemptCount: data.redispatch_attempt_count,
+    sendProxyV2: data.send_proxy_v2,
+    sslBridging: data.ssl_bridging,
     stickySessions: data.sticky_sessions,
     stickySessionsCookieName: data.sticky_sessions_cookie_name,
-    timeoutConnect: data.timeout_connect ? data.timeout_connect : undefined,
-    timeoutQueue: data.timeout_queue ? data.timeout_queue : undefined,
-    timeoutServer: data.timeout_server ? data.timeout_server : undefined,
-    timeoutTunnel: data.timeout_tunnel ? data.timeout_tunnel : undefined,
+    timeoutConnect: data.timeout_connect,
+    timeoutQueue: data.timeout_queue,
+    timeoutServer: data.timeout_server,
+    timeoutTunnel: data.timeout_tunnel,
     updatedAt: unmarshalDate(data.updated_at),
   } as Backend
 }
@@ -396,7 +390,7 @@ export const unmarshalCertificate = (data: unknown) => {
     notValidAfter: unmarshalDate(data.not_valid_after),
     notValidBefore: unmarshalDate(data.not_valid_before),
     status: data.status,
-    statusDetails: data.status_details ? data.status_details : undefined,
+    statusDetails: data.status_details,
     subjectAlternativeName: data.subject_alternative_name,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
@@ -422,7 +416,7 @@ export const unmarshalFrontend = (data: unknown) => {
     inboundPort: data.inbound_port,
     lb: unmarshalLb(data.lb),
     name: data.name,
-    timeoutClient: data.timeout_client ? data.timeout_client : undefined,
+    timeoutClient: data.timeout_client,
     updatedAt: unmarshalDate(data.updated_at),
   } as Frontend
 }
@@ -435,7 +429,7 @@ const unmarshalAclActionRedirect = (data: unknown) => {
   }
 
   return {
-    code: data.code ? data.code : undefined,
+    code: data.code,
     target: data.target,
     type: data.type,
   } as AclActionRedirect
@@ -463,9 +457,7 @@ const unmarshalAclMatch = (data: unknown) => {
 
   return {
     httpFilter: data.http_filter,
-    httpFilterOption: data.http_filter_option
-      ? data.http_filter_option
-      : undefined,
+    httpFilterOption: data.http_filter_option,
     httpFilterValue: data.http_filter_value,
     invert: data.invert,
     ipSubnet: data.ip_subnet,
@@ -500,7 +492,7 @@ const unmarshalPrivateNetworkDHCPConfig = (data: unknown) => {
   }
 
   return {
-    ipId: data.ip_id ? data.ip_id : undefined,
+    ipId: data.ip_id,
   } as PrivateNetworkDHCPConfig
 }
 
@@ -560,8 +552,8 @@ const unmarshalRouteMatch = (data: unknown) => {
   }
 
   return {
-    hostHeader: data.host_header ? data.host_header : undefined,
-    sni: data.sni ? data.sni : undefined,
+    hostHeader: data.host_header,
+    sni: data.sni,
   } as RouteMatch
 }
 
@@ -724,7 +716,7 @@ const unmarshalLbType = (data: unknown) => {
   return {
     description: data.description,
     name: data.name,
-    region: data.region ? data.region : undefined,
+    region: data.region,
     stockStatus: data.stock_status,
     zone: data.zone,
   } as LbType

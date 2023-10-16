@@ -5,7 +5,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   AccessSecretVersionResponse,
@@ -51,7 +50,7 @@ export const unmarshalSecretVersion = (data: unknown) => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
-    description: data.description ? data.description : undefined,
+    description: data.description,
     isLatest: data.is_latest,
     revision: data.revision,
     secretId: data.secret_id,
@@ -69,7 +68,7 @@ export const unmarshalSecret = (data: unknown) => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
-    description: data.description ? data.description : undefined,
+    description: data.description,
     id: data.id,
     isManaged: data.is_managed,
     isProtected: data.is_protected,
@@ -94,7 +93,7 @@ export const unmarshalAccessSecretVersionResponse = (data: unknown) => {
 
   return {
     data: data.data,
-    dataCrc32: data.data_crc32 ? data.data_crc32 : undefined,
+    dataCrc32: data.data_crc32,
     revision: data.revision,
     secretId: data.secret_id,
   } as AccessSecretVersionResponse

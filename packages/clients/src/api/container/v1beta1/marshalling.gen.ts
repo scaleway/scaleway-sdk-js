@@ -66,10 +66,10 @@ export const unmarshalContainer = (data: unknown) => {
 
   return {
     cpuLimit: data.cpu_limit,
-    description: data.description ? data.description : undefined,
+    description: data.description,
     domainName: data.domain_name,
     environmentVariables: data.environment_variables,
-    errorMessage: data.error_message ? data.error_message : undefined,
+    errorMessage: data.error_message,
     httpOption: data.http_option,
     id: data.id,
     maxConcurrency: data.max_concurrency,
@@ -88,7 +88,7 @@ export const unmarshalContainer = (data: unknown) => {
       unmarshalSecretHashedValue,
     ),
     status: data.status,
-    timeout: data.timeout ? data.timeout : undefined,
+    timeout: data.timeout,
   } as Container
 }
 
@@ -100,7 +100,7 @@ export const unmarshalCron = (data: unknown) => {
   }
 
   return {
-    args: data.args ? data.args : undefined,
+    args: data.args,
     containerId: data.container_id,
     id: data.id,
     name: data.name,
@@ -118,7 +118,7 @@ export const unmarshalDomain = (data: unknown) => {
 
   return {
     containerId: data.container_id,
-    errorMessage: data.error_message ? data.error_message : undefined,
+    errorMessage: data.error_message,
     hostname: data.hostname,
     id: data.id,
     status: data.status,
@@ -134,9 +134,9 @@ export const unmarshalNamespace = (data: unknown) => {
   }
 
   return {
-    description: data.description ? data.description : undefined,
+    description: data.description,
     environmentVariables: data.environment_variables,
-    errorMessage: data.error_message ? data.error_message : undefined,
+    errorMessage: data.error_message,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
@@ -160,12 +160,12 @@ export const unmarshalToken = (data: unknown) => {
   }
 
   return {
-    containerId: data.container_id ? data.container_id : undefined,
-    description: data.description ? data.description : undefined,
+    containerId: data.container_id,
+    description: data.description,
     expiresAt: unmarshalDate(data.expires_at),
     id: data.id,
-    namespaceId: data.namespace_id ? data.namespace_id : undefined,
-    publicKey: data.public_key ? data.public_key : undefined,
+    namespaceId: data.namespace_id,
+    publicKey: data.public_key,
     status: data.status,
     token: data.token,
   } as Token
@@ -179,9 +179,7 @@ const unmarshalTriggerMnqNatsClientConfig = (data: unknown) => {
   }
 
   return {
-    mnqCredentialId: data.mnq_credential_id
-      ? data.mnq_credential_id
-      : undefined,
+    mnqCredentialId: data.mnq_credential_id,
     mnqNamespaceId: data.mnq_namespace_id,
     mnqProjectId: data.mnq_project_id,
     mnqRegion: data.mnq_region,
@@ -197,9 +195,7 @@ const unmarshalTriggerMnqSqsClientConfig = (data: unknown) => {
   }
 
   return {
-    mnqCredentialId: data.mnq_credential_id
-      ? data.mnq_credential_id
-      : undefined,
+    mnqCredentialId: data.mnq_credential_id,
     mnqNamespaceId: data.mnq_namespace_id,
     mnqProjectId: data.mnq_project_id,
     mnqRegion: data.mnq_region,
@@ -232,7 +228,7 @@ export const unmarshalTrigger = (data: unknown) => {
   return {
     containerId: data.container_id,
     description: data.description,
-    errorMessage: data.error_message ? data.error_message : undefined,
+    errorMessage: data.error_message,
     id: data.id,
     inputType: data.input_type,
     name: data.name,
