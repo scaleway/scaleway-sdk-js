@@ -99,6 +99,10 @@ export interface Namespace {
 }
 
 export type CreateCredentialRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Namespace containing the credentials. */
   namespaceId: string
@@ -109,6 +113,10 @@ export type CreateCredentialRequest = {
 }
 
 export type CreateNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Namespace name. */
   name?: string
@@ -116,7 +124,7 @@ export type CreateNamespaceRequest = {
    * Namespace protocol. You must specify a valid protocol (and not `unknown`)
    * to avoid an error.
    */
-  protocol?: NamespaceProtocol
+  protocol: NamespaceProtocol
   /** Project containing the Namespace. */
   projectId?: string
 }
@@ -149,30 +157,50 @@ export interface Credential {
 }
 
 export type DeleteCredentialRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the credentials to delete. */
   credentialId: string
 }
 
 export type DeleteNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the namespace to delete. */
   namespaceId: string
 }
 
 export type GetCredentialRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the credentials to get. */
   credentialId: string
 }
 
 export type GetNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the Namespace to get. */
   namespaceId: string
 }
 
 export type ListCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Namespace containing the credentials. */
   namespaceId?: string
@@ -192,6 +220,10 @@ export interface ListCredentialsResponse {
 }
 
 export type ListNamespacesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Include only namespaces in this Organization. */
   organizationId?: string
@@ -213,6 +245,10 @@ export interface ListNamespacesResponse {
 }
 
 export type UpdateCredentialRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the credentials to update. */
   credentialId: string
@@ -223,6 +259,10 @@ export type UpdateCredentialRequest = {
 }
 
 export type UpdateNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the Namespace to update. */
   namespaceId: string

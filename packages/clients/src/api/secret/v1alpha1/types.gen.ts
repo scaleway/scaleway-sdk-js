@@ -115,6 +115,10 @@ export interface Secret {
 }
 
 export type AccessSecretVersionByNameRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Name of the secret. */
   secretName: string
@@ -135,6 +139,10 @@ export type AccessSecretVersionByNameRequest = {
 }
 
 export type AccessSecretVersionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the secret. */
   secretId: string
@@ -167,6 +175,10 @@ export interface AccessSecretVersionResponse {
 }
 
 export type AddSecretOwnerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the secret. */
   secretId: string
@@ -177,6 +189,10 @@ export type AddSecretOwnerRequest = {
 }
 
 export type CreateFolderRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the Project containing the folder. */
   projectId?: string
@@ -190,6 +206,10 @@ export type CreateFolderRequest = {
 }
 
 export type CreateSecretRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the Project containing the secret. */
   projectId?: string
@@ -212,6 +232,10 @@ export type CreateSecretRequest = {
 }
 
 export type CreateSecretVersionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the secret. */
   secretId: string
@@ -241,18 +265,30 @@ export type CreateSecretVersionRequest = {
 }
 
 export type DeleteFolderRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the folder. */
   folderId: string
 }
 
 export type DeleteSecretRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the secret. */
   secretId: string
 }
 
 export type DestroySecretVersionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the secret. */
   secretId: string
@@ -268,6 +304,10 @@ export type DestroySecretVersionRequest = {
 }
 
 export type DisableSecretVersionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the secret. */
   secretId: string
@@ -283,6 +323,10 @@ export type DisableSecretVersionRequest = {
 }
 
 export type EnableSecretVersionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the secret. */
   secretId: string
@@ -298,6 +342,10 @@ export type EnableSecretVersionRequest = {
 }
 
 export type GeneratePasswordRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the secret. */
   secretId: string
@@ -330,6 +378,10 @@ export type GeneratePasswordRequest = {
 }
 
 export type GetSecretByNameRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Name of the secret. */
   secretName: string
@@ -341,12 +393,20 @@ export type GetSecretByNameRequest = {
 }
 
 export type GetSecretRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the secret. */
   secretId: string
 }
 
 export type GetSecretVersionByNameRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Name of the secret. */
   secretName: string
@@ -367,6 +427,10 @@ export type GetSecretVersionByNameRequest = {
 }
 
 export type GetSecretVersionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the secret. */
   secretId: string
@@ -382,6 +446,10 @@ export type GetSecretVersionRequest = {
 }
 
 export type ListFoldersRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Filter by Project ID (optional). */
   projectId?: string
@@ -400,6 +468,10 @@ export interface ListFoldersResponse {
 }
 
 export type ListSecretVersionsByNameRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Name of the secret. */
   secretName: string
@@ -415,6 +487,10 @@ export type ListSecretVersionsByNameRequest = {
 }
 
 export type ListSecretVersionsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the secret. */
   secretId: string
@@ -432,6 +508,10 @@ export interface ListSecretVersionsResponse {
 }
 
 export type ListSecretsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Filter by Organization ID (optional). */
   organizationId?: string
@@ -458,6 +538,10 @@ export interface ListSecretsResponse {
 }
 
 export type ListTagsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /**
    * (Optional.) If not specified, Secret Manager will look for tags in all
@@ -476,18 +560,30 @@ export interface ListTagsResponse {
 }
 
 export type ProtectSecretRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the secret to protect. */
   secretId: string
 }
 
 export type UnprotectSecretRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the secret to unprotect. */
   secretId: string
 }
 
 export type UpdateSecretRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the secret. */
   secretId: string
@@ -505,6 +601,10 @@ export type UpdateSecretRequest = {
 }
 
 export type UpdateSecretVersionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the secret. */
   secretId: string

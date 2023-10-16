@@ -125,6 +125,10 @@ export interface Tag {
 }
 
 export type CreateNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Name of the namespace. */
   name?: string
@@ -149,18 +153,30 @@ export type CreateNamespaceRequest = {
 }
 
 export type DeleteImageRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the image. */
   imageId: string
 }
 
 export type DeleteNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the namespace. */
   namespaceId: string
 }
 
 export type DeleteTagRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the tag. */
   tagId: string
@@ -172,24 +188,40 @@ export type DeleteTagRequest = {
 }
 
 export type GetImageRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the image. */
   imageId: string
 }
 
 export type GetNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the namespace. */
   namespaceId: string
 }
 
 export type GetTagRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the tag. */
   tagId: string
 }
 
 export type ListImagesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** A positive integer to choose the page to display. */
   page?: number
@@ -222,6 +254,10 @@ export interface ListImagesResponse {
 }
 
 export type ListNamespacesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** A positive integer to choose the page to display. */
   page?: number
@@ -252,6 +288,10 @@ export interface ListNamespacesResponse {
 }
 
 export type ListTagsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the image. */
   imageId: string
@@ -280,6 +320,10 @@ export interface ListTagsResponse {
 }
 
 export type UpdateImageRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the image to update. */
   imageId: string
@@ -292,6 +336,10 @@ export type UpdateImageRequest = {
 }
 
 export type UpdateNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the namespace to update. */
   namespaceId: string

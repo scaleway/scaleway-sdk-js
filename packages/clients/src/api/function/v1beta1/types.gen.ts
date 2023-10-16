@@ -378,6 +378,10 @@ export interface UpdateTriggerRequestSqsClientConfig {
 }
 
 export type CreateCronRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the function to use the cron with. */
   functionId: string
@@ -390,6 +394,10 @@ export type CreateCronRequest = {
 }
 
 export type CreateDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Hostame to create. */
   hostname: string
@@ -398,6 +406,10 @@ export type CreateDomainRequest = {
 }
 
 export type CreateFunctionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Name of the function to create. */
   name?: string
@@ -433,6 +445,10 @@ export type CreateFunctionRequest = {
 }
 
 export type CreateNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   name?: string
   /** Environment variables of the namespace. */
@@ -446,6 +462,10 @@ export type CreateNamespaceRequest = {
 }
 
 export type CreateTokenRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /**
    * UUID of the function to associate the token with.
@@ -466,6 +486,10 @@ export type CreateTokenRequest = {
 }
 
 export type CreateTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   name: string
   description?: string
@@ -488,41 +512,69 @@ export type CreateTriggerRequest = {
 }
 
 export type DeleteCronRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the cron to delete. */
   cronId: string
 }
 
 export type DeleteDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the domain to delete. */
   domainId: string
 }
 
 export type DeleteFunctionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the function to delete. */
   functionId: string
 }
 
 export type DeleteNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the namespace. */
   namespaceId: string
 }
 
 export type DeleteTokenRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the token to delete. */
   tokenId: string
 }
 
 export type DeleteTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   triggerId: string
 }
 
 export type DeployFunctionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the function to deploy. */
   functionId: string
@@ -534,30 +586,50 @@ export interface DownloadURL {
 }
 
 export type GetCronRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the cron to get. */
   cronId: string
 }
 
 export type GetDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the domain to get. */
   domainId: string
 }
 
 export type GetFunctionDownloadURLRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the function to get the the download URL for. */
   functionId: string
 }
 
 export type GetFunctionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the function. */
   functionId: string
 }
 
 export type GetFunctionUploadURLRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the function to get the upload URL for. */
   functionId: string
@@ -566,23 +638,39 @@ export type GetFunctionUploadURLRequest = {
 }
 
 export type GetNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the namespace. */
   namespaceId: string
 }
 
 export type GetTokenRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the token to get. */
   tokenId: string
 }
 
 export type GetTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   triggerId: string
 }
 
 export type IssueJWTRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set. */
   functionId?: string
@@ -592,6 +680,10 @@ export type IssueJWTRequest = {
 }
 
 export type ListCronsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Page number. */
   page?: number
@@ -611,6 +703,10 @@ export interface ListCronsResponse {
 }
 
 export type ListDomainsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Page number. */
   page?: number
@@ -630,6 +726,10 @@ export interface ListDomainsResponse {
 }
 
 export type ListFunctionRuntimesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
 }
 
@@ -641,6 +741,10 @@ export interface ListFunctionRuntimesResponse {
 }
 
 export type ListFunctionsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Page number. */
   page?: number
@@ -666,6 +770,10 @@ export interface ListFunctionsResponse {
 }
 
 export type ListLogsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the function to get the logs for. */
   functionId: string
@@ -685,6 +793,10 @@ export interface ListLogsResponse {
 }
 
 export type ListNamespacesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Page number. */
   page?: number
@@ -707,6 +819,10 @@ export interface ListNamespacesResponse {
 }
 
 export type ListTokensRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Page number. */
   page?: number
@@ -726,6 +842,10 @@ export interface ListTokensResponse {
 }
 
 export type ListTriggersRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   page?: number
   pageSize?: number
@@ -753,6 +873,10 @@ export interface ListTriggersResponse {
 }
 
 export type UpdateCronRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the cron to update. */
   cronId: string
@@ -767,6 +891,10 @@ export type UpdateCronRequest = {
 }
 
 export type UpdateFunctionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the function to update. */
   functionId: string
@@ -803,6 +931,10 @@ export type UpdateFunctionRequest = {
 }
 
 export type UpdateNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the namespapce. */
   namespaceId: string
@@ -815,6 +947,10 @@ export type UpdateNamespaceRequest = {
 }
 
 export type UpdateTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   triggerId: string
   name?: string

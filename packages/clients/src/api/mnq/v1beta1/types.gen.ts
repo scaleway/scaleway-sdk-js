@@ -193,6 +193,10 @@ export interface ListSqsCredentialsResponse {
 }
 
 export type NatsApiCreateNatsAccountRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** NATS account name. */
   name?: string
@@ -201,6 +205,10 @@ export type NatsApiCreateNatsAccountRequest = {
 }
 
 export type NatsApiCreateNatsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** NATS account containing the credentials. */
   natsAccountId: string
@@ -209,30 +217,50 @@ export type NatsApiCreateNatsCredentialsRequest = {
 }
 
 export type NatsApiDeleteNatsAccountRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the NATS account to delete. */
   natsAccountId: string
 }
 
 export type NatsApiDeleteNatsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the credentials to delete. */
   natsCredentialsId: string
 }
 
 export type NatsApiGetNatsAccountRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the NATS account to get. */
   natsAccountId: string
 }
 
 export type NatsApiGetNatsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the credentials to get. */
   natsCredentialsId: string
 }
 
 export type NatsApiListNatsAccountsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Include only NATS accounts in this Project. */
   projectId?: string
@@ -245,6 +273,10 @@ export type NatsApiListNatsAccountsRequest = {
 }
 
 export type NatsApiListNatsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Include only credentials for this NATS account. */
   natsAccountId?: string
@@ -257,6 +289,10 @@ export type NatsApiListNatsCredentialsRequest = {
 }
 
 export type NatsApiUpdateNatsAccountRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the NATS account to update. */
   natsAccountId: string
@@ -265,12 +301,20 @@ export type NatsApiUpdateNatsAccountRequest = {
 }
 
 export type SnsApiActivateSnsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Project on which to activate the SNS service. */
   projectId?: string
 }
 
 export type SnsApiCreateSnsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Project containing the SNS credentials. */
   projectId?: string
@@ -281,30 +325,50 @@ export type SnsApiCreateSnsCredentialsRequest = {
 }
 
 export type SnsApiDeactivateSnsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Project on which to deactivate the SNS service. */
   projectId?: string
 }
 
 export type SnsApiDeleteSnsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the credentials to delete. */
   snsCredentialsId: string
 }
 
 export type SnsApiGetSnsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the SNS credentials to get. */
   snsCredentialsId: string
 }
 
 export type SnsApiGetSnsInfoRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Project to retrieve SNS info from. */
   projectId?: string
 }
 
 export type SnsApiListSnsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Include only SNS credentials in this Project. */
   projectId?: string
@@ -317,6 +381,10 @@ export type SnsApiListSnsCredentialsRequest = {
 }
 
 export type SnsApiUpdateSnsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the SNS credentials to update. */
   snsCredentialsId: string
@@ -342,12 +410,20 @@ export interface SnsInfo {
 }
 
 export type SqsApiActivateSqsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Project on which to activate the SQS service. */
   projectId?: string
 }
 
 export type SqsApiCreateSqsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Project containing the SQS credentials. */
   projectId?: string
@@ -358,30 +434,50 @@ export type SqsApiCreateSqsCredentialsRequest = {
 }
 
 export type SqsApiDeactivateSqsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Project on which to deactivate the SQS service. */
   projectId?: string
 }
 
 export type SqsApiDeleteSqsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the credentials to delete. */
   sqsCredentialsId: string
 }
 
 export type SqsApiGetSqsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the SQS credentials to get. */
   sqsCredentialsId: string
 }
 
 export type SqsApiGetSqsInfoRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Project to retrieve SQS info from. */
   projectId?: string
 }
 
 export type SqsApiListSqsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Include only SQS credentials in this Project. */
   projectId?: string
@@ -394,6 +490,10 @@ export type SqsApiListSqsCredentialsRequest = {
 }
 
 export type SqsApiUpdateSqsCredentialsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the SQS credentials to update. */
   sqsCredentialsId: string

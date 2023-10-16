@@ -79,12 +79,13 @@ export interface FlexibleIP {
 }
 
 export type AttachFlexibleIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
    * Multiple IDs can be provided, but note that flexible IPs must belong to the
    * same MAC group (see details about MAC groups).
    */
-  fipsIds?: string[]
+  fipsIds: string[]
   /** ID of the server on which to attach the flexible IPs. */
   serverId: string
 }
@@ -97,6 +98,7 @@ export interface AttachFlexibleIPsResponse {
 }
 
 export type CreateFlexibleIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the project to associate with the Flexible IP. */
   projectId?: string
@@ -113,12 +115,14 @@ export type CreateFlexibleIPRequest = {
 }
 
 export type DeleteFlexibleIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the flexible IP to delete. */
   fipId: string
 }
 
 export type DeleteMACAddrRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
    * If the flexible IP belongs to a MAC group, the MAC will be removed from
@@ -128,12 +132,13 @@ export type DeleteMACAddrRequest = {
 }
 
 export type DetachFlexibleIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
    * List of flexible IP IDs to detach from a server. Multiple IDs can be
    * provided. Note that flexible IPs must belong to the same MAC group.
    */
-  fipsIds?: string[]
+  fipsIds: string[]
 }
 
 export interface DetachFlexibleIPsResponse {
@@ -144,6 +149,7 @@ export interface DetachFlexibleIPsResponse {
 }
 
 export type DuplicateMACAddrRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Note that the flexible IPs need to be attached to the same server. */
   fipId: string
@@ -152,20 +158,23 @@ export type DuplicateMACAddrRequest = {
 }
 
 export type GenerateMACAddrRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the flexible IP for which to generate a virtual MAC. */
   fipId: string
   /** TODO. */
-  macType?: MACAddressType
+  macType: MACAddressType
 }
 
 export type GetFlexibleIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the flexible IP. */
   fipId: string
 }
 
 export type ListFlexibleIPsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Sort order of the returned flexible IPs. */
   orderBy?: ListFlexibleIPsRequestOrderBy
@@ -202,12 +211,14 @@ export interface ListFlexibleIPsResponse {
 }
 
 export type MoveMACAddrRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   fipId: string
   dstFipId: string
 }
 
 export type UpdateFlexibleIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the flexible IP to update. */
   fipId: string

@@ -980,7 +980,7 @@ export interface RegisterExternalDomainResponse {
 }
 
 export type RegistrarApiBuyDomainsRequest = {
-  domains?: string[]
+  domains: string[]
   durationInYears: number
   projectId?: string
   /**
@@ -1162,14 +1162,14 @@ export type RegistrarApiRegisterExternalDomainRequest = {
 }
 
 export type RegistrarApiRenewDomainsRequest = {
-  domains?: string[]
+  domains: string[]
   durationInYears: number
   forceLateRenewal?: boolean
 }
 
 export type RegistrarApiSearchAvailableDomainsRequest = {
   /** A list of domain to search, TLD is optional. */
-  domains?: string[]
+  domains: string[]
   /** Array of tlds to search on. */
   tlds?: string[]
   /** Search exact match. */
@@ -1192,7 +1192,7 @@ export type RegistrarApiTradeDomainRequest = {
 }
 
 export type RegistrarApiTransferInDomainRequest = {
-  domains?: TransferInDomainRequestTransferRequest[]
+  domains: TransferInDomainRequestTransferRequest[]
   projectId?: string
   /**
    * One-of ('ownerContactType'): at most one of 'ownerContactId',
@@ -1309,7 +1309,7 @@ export type UpdateDNSZoneNameserversRequest = {
   /** DNS zone in which to update the DNS zone name servers. */
   dnsZone: string
   /** New DNS zone name servers. */
-  ns?: Nameserver[]
+  ns: Nameserver[]
 }
 
 export interface UpdateDNSZoneNameserversResponse {
@@ -1321,7 +1321,7 @@ export type UpdateDNSZoneRecordsRequest = {
   /** DNS zone in which to update the DNS zone records. */
   dnsZone: string
   /** Changes made to the records. */
-  changes?: RecordChange[]
+  changes: RecordChange[]
   /** Specifies whether or not to return all the records. */
   returnAllRecords?: boolean
   /**

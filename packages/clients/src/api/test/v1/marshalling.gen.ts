@@ -6,7 +6,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateHumanRequest,
@@ -83,8 +82,16 @@ export const marshalCreateHumanRequest = (
   name: request.name,
   shoe_size: request.shoeSize,
   ...resolveOneOf<unknown>([
-    { param: 'organization_id', value: request.organizationId },
-    { param: 'project_id', value: request.projectId },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
+    },
+    {
+      default: defaults.defaultProjectId,
+      param: 'project_id',
+      value: request.projectId,
+    },
   ]),
 })
 

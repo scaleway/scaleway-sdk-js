@@ -72,6 +72,10 @@ export interface Pin {
 export interface Volume {
   id: string
   projectId: string
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region: Region
   countPin: number
   createdAt?: Date
@@ -82,6 +86,10 @@ export interface Volume {
 }
 
 export type CreatePinByCIDRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Volume ID on which you want to pin your content. */
   volumeId: string
@@ -96,6 +104,10 @@ export type CreatePinByCIDRequest = {
 }
 
 export type CreatePinByURLRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Volume ID on which you want to pin your content. */
   volumeId: string
@@ -108,6 +120,10 @@ export type CreatePinByURLRequest = {
 }
 
 export type CreateVolumeRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Project ID. */
   projectId?: string
@@ -116,6 +132,10 @@ export type CreateVolumeRequest = {
 }
 
 export type DeletePinRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Pin ID you want to remove from the volume. */
   pinId: string
@@ -124,12 +144,20 @@ export type DeletePinRequest = {
 }
 
 export type DeleteVolumeRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Volume ID. */
   volumeId: string
 }
 
 export type GetPinRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Pin ID of which you want to obtain information. */
   pinId: string
@@ -138,12 +166,20 @@ export type GetPinRequest = {
 }
 
 export type GetVolumeRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Volume ID. */
   volumeId: string
 }
 
 export type ListPinsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Volume ID of which you want to list the pins. */
   volumeId: string
@@ -167,6 +203,10 @@ export interface ListPinsResponse {
 }
 
 export type ListVolumesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Project ID, only volumes belonging to this project will be listed. */
   projectId?: string
@@ -184,6 +224,10 @@ export interface ListVolumesResponse {
 }
 
 export type ReplacePinRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Pin ID whose information you wish to replace. */
   pinId: string
@@ -204,6 +248,10 @@ export interface ReplacePinResponse {
 }
 
 export type UpdateVolumeRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Volume ID. */
   volumeId: string

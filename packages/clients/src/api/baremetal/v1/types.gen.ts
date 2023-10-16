@@ -390,6 +390,7 @@ export interface Setting {
 }
 
 export type AddOptionServerRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the server. */
   serverId: string
@@ -420,6 +421,7 @@ export interface BMCAccess {
 }
 
 export type CreateServerRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Offer ID of the new server. */
   offerId: string
@@ -453,6 +455,7 @@ export type CreateServerRequest = {
 }
 
 export type DeleteOptionServerRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the server. */
   serverId: string
@@ -461,36 +464,42 @@ export type DeleteOptionServerRequest = {
 }
 
 export type DeleteServerRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the server to delete. */
   serverId: string
 }
 
 export type GetBMCAccessRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the server. */
   serverId: string
 }
 
 export type GetOSRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the OS. */
   osId: string
 }
 
 export type GetOfferRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the researched Offer. */
   offerId: string
 }
 
 export type GetOptionRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the option. */
   optionId: string
 }
 
 export type GetServerMetricsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Server ID to get the metrics. */
   serverId: string
@@ -502,12 +511,14 @@ export interface GetServerMetricsResponse {
 }
 
 export type GetServerRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the server. */
   serverId: string
 }
 
 export type InstallServerRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Server ID to install. */
   serverId: string
@@ -516,7 +527,7 @@ export type InstallServerRequest = {
   /** Hostname of the server. */
   hostname: string
   /** SSH key IDs authorized on the server. */
-  sshKeyIds?: string[]
+  sshKeyIds: string[]
   /** User used for the installation. */
   user?: string
   /** Password used for the installation. */
@@ -528,6 +539,7 @@ export type InstallServerRequest = {
 }
 
 export type ListOSRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Page number. */
   page?: number
@@ -545,6 +557,7 @@ export interface ListOSResponse {
 }
 
 export type ListOffersRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Page number. */
   page?: number
@@ -562,6 +575,7 @@ export interface ListOffersResponse {
 }
 
 export type ListOptionsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Page number. */
   page?: number
@@ -581,6 +595,7 @@ export interface ListOptionsResponse {
 }
 
 export type ListServerEventsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the server events searched. */
   serverId: string
@@ -605,6 +620,7 @@ export interface ListServerPrivateNetworksResponse {
 }
 
 export type ListServersRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Page number. */
   page?: number
@@ -634,6 +650,7 @@ export interface ListServersResponse {
 }
 
 export type ListSettingsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Page number. */
   page?: number
@@ -653,6 +670,7 @@ export interface ListSettingsResponse {
 }
 
 export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** The ID of the server. */
   serverId: string
@@ -661,6 +679,7 @@ export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
 }
 
 export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** The ID of the server. */
   serverId: string
@@ -669,6 +688,7 @@ export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
 }
 
 export type PrivateNetworkApiListServerPrivateNetworksRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** The sort order for the returned Private Networks. */
   orderBy?: ListServerPrivateNetworksRequestOrderBy
@@ -687,14 +707,16 @@ export type PrivateNetworkApiListServerPrivateNetworksRequest = {
 }
 
 export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** The ID of the server. */
   serverId: string
   /** The IDs of the Private Networks. */
-  privateNetworkIds?: string[]
+  privateNetworkIds: string[]
 }
 
 export type RebootServerRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the server to reboot. */
   serverId: string
@@ -707,6 +729,7 @@ export interface SetServerPrivateNetworksResponse {
 }
 
 export type StartBMCAccessRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the server. */
   serverId: string
@@ -715,6 +738,7 @@ export type StartBMCAccessRequest = {
 }
 
 export type StartServerRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the server to start. */
   serverId: string
@@ -723,18 +747,21 @@ export type StartServerRequest = {
 }
 
 export type StopBMCAccessRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the server. */
   serverId: string
 }
 
 export type StopServerRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the server to stop. */
   serverId: string
 }
 
 export type UpdateIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the server. */
   serverId: string
@@ -745,6 +772,7 @@ export type UpdateIPRequest = {
 }
 
 export type UpdateServerRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the server to update. */
   serverId: string
@@ -760,6 +788,7 @@ export type UpdateServerRequest = {
 }
 
 export type UpdateSettingRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the setting. */
   settingId: string

@@ -808,15 +808,15 @@ export type RemoveGroupMemberRequest = {
 
 export type SetGroupMembersRequest = {
   groupId: string
-  userIds?: string[]
-  applicationIds?: string[]
+  userIds: string[]
+  applicationIds: string[]
 }
 
 export type SetRulesRequest = {
   /** Id of policy to update. */
   policyId: string
   /** Rules of the policy to set. */
-  rules?: RuleSpecs[]
+  rules: RuleSpecs[]
 }
 
 export interface SetRulesResponse {

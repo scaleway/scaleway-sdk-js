@@ -330,10 +330,7 @@ export const marshalAddAclRulesRequest = (
   request: AddAclRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  acl_rules:
-    request.aclRules !== undefined
-      ? request.aclRules.map(elt => marshalACLRuleSpec(elt, defaults))
-      : undefined,
+  acl_rules: request.aclRules.map(elt => marshalACLRuleSpec(elt, defaults)),
 })
 
 const marshalClusterSetting = (
@@ -348,10 +345,7 @@ export const marshalAddClusterSettingsRequest = (
   request: AddClusterSettingsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  settings:
-    request.settings !== undefined
-      ? request.settings.map(elt => marshalClusterSetting(elt, defaults))
-      : undefined,
+  settings: request.settings.map(elt => marshalClusterSetting(elt, defaults)),
 })
 
 const marshalEndpointSpecPrivateNetworkSpecIpamConfig = (
@@ -408,10 +402,7 @@ export const marshalAddEndpointsRequest = (
   request: AddEndpointsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoints:
-    request.endpoints !== undefined
-      ? request.endpoints.map(elt => marshalEndpointSpec(elt, defaults))
-      : undefined,
+  endpoints: request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)),
 })
 
 export const marshalCreateClusterRequest = (
@@ -456,30 +447,21 @@ export const marshalSetAclRulesRequest = (
   request: SetAclRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  acl_rules:
-    request.aclRules !== undefined
-      ? request.aclRules.map(elt => marshalACLRuleSpec(elt, defaults))
-      : undefined,
+  acl_rules: request.aclRules.map(elt => marshalACLRuleSpec(elt, defaults)),
 })
 
 export const marshalSetClusterSettingsRequest = (
   request: SetClusterSettingsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  settings:
-    request.settings !== undefined
-      ? request.settings.map(elt => marshalClusterSetting(elt, defaults))
-      : undefined,
+  settings: request.settings.map(elt => marshalClusterSetting(elt, defaults)),
 })
 
 export const marshalSetEndpointsRequest = (
   request: SetEndpointsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoints:
-    request.endpoints !== undefined
-      ? request.endpoints.map(elt => marshalEndpointSpec(elt, defaults))
-      : undefined,
+  endpoints: request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)),
 })
 
 export const marshalUpdateClusterRequest = (

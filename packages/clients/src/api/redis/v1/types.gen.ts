@@ -218,11 +218,12 @@ export interface NodeType {
 }
 
 export type AddAclRulesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the Database Instance you want to add ACL rules to. */
   clusterId: string
   /** ACLs rules to add to the cluster. */
-  aclRules?: ACLRuleSpec[]
+  aclRules: ACLRuleSpec[]
 }
 
 export interface AddAclRulesResponse {
@@ -233,19 +234,21 @@ export interface AddAclRulesResponse {
 }
 
 export type AddClusterSettingsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the Database Instance you want to add settings to. */
   clusterId: string
   /** Settings to add to the cluster. */
-  settings?: ClusterSetting[]
+  settings: ClusterSetting[]
 }
 
 export type AddEndpointsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the Database Instance you want to add endpoints to. */
   clusterId: string
   /** Endpoints to add to the Database Instance. */
-  endpoints?: EndpointSpec[]
+  endpoints: EndpointSpec[]
 }
 
 export interface AddEndpointsResponse {
@@ -266,6 +269,7 @@ export interface ClusterSettingsResponse {
 }
 
 export type CreateClusterRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Project ID in which to create the Database Instance. */
   projectId?: string
@@ -298,18 +302,21 @@ export type CreateClusterRequest = {
 }
 
 export type DeleteAclRuleRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the ACL rule you want to delete. */
   aclId: string
 }
 
 export type DeleteClusterRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the Database Instance to delete. */
   clusterId: string
 }
 
 export type DeleteClusterSettingRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the Database Instance where the settings must be set. */
   clusterId: string
@@ -318,24 +325,28 @@ export type DeleteClusterSettingRequest = {
 }
 
 export type DeleteEndpointRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the endpoint you want to delete. */
   endpointId: string
 }
 
 export type GetAclRuleRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the ACL rule you want to get. */
   aclId: string
 }
 
 export type GetClusterCertificateRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the cluster. */
   clusterId: string
 }
 
 export type GetClusterMetricsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the cluster. */
   clusterId: string
@@ -348,18 +359,21 @@ export type GetClusterMetricsRequest = {
 }
 
 export type GetClusterRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the cluster. */
   clusterId: string
 }
 
 export type GetEndpointRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the endpoint you want to get. */
   endpointId: string
 }
 
 export type ListClusterVersionsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Defines whether or not to include disabled Redis™ engine versions. */
   includeDisabled: boolean
@@ -381,6 +395,7 @@ export interface ListClusterVersionsResponse {
 }
 
 export type ListClustersRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Filter by Database Instance tags. */
   tags?: string[]
@@ -406,6 +421,7 @@ export interface ListClustersResponse {
 }
 
 export type ListNodeTypesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Defines whether or not to include disabled types. */
   includeDisabledTypes: boolean
@@ -421,6 +437,7 @@ export interface ListNodeTypesResponse {
 }
 
 export type MigrateClusterRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the Database Instance to update. */
   clusterId: string
@@ -448,17 +465,19 @@ export type MigrateClusterRequest = {
 }
 
 export type RenewClusterCertificateRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the cluster. */
   clusterId: string
 }
 
 export type SetAclRulesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the Database Instance where the ACL rules have to be set. */
   clusterId: string
   /** ACLs rules to define for the cluster. */
-  aclRules?: ACLRuleSpec[]
+  aclRules: ACLRuleSpec[]
 }
 
 export interface SetAclRulesResponse {
@@ -467,19 +486,21 @@ export interface SetAclRulesResponse {
 }
 
 export type SetClusterSettingsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the Database Instance where the settings must be set. */
   clusterId: string
   /** Settings to define for the Database Instance. */
-  settings?: ClusterSetting[]
+  settings: ClusterSetting[]
 }
 
 export type SetEndpointsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the Database Instance where the endpoints have to be set. */
   clusterId: string
   /** Endpoints to define for the Database Instance. */
-  endpoints?: EndpointSpec[]
+  endpoints: EndpointSpec[]
 }
 
 export interface SetEndpointsResponse {
@@ -488,6 +509,7 @@ export interface SetEndpointsResponse {
 }
 
 export type UpdateClusterRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the Database Instance to update. */
   clusterId: string
@@ -502,6 +524,7 @@ export type UpdateClusterRequest = {
 }
 
 export type UpdateEndpointRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   endpointId: string
   /**

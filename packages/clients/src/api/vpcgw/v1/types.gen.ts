@@ -213,6 +213,7 @@ export interface IP {
 }
 
 export type CreateDHCPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Project to create the DHCP configuration in. */
   projectId?: string
@@ -392,6 +393,7 @@ export interface SetPATRulesRequestRule {
 }
 
 export type CreateDHCPEntryRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** GatewayNetwork on which to create a DHCP reservation. */
   gatewayNetworkId: string
@@ -402,6 +404,7 @@ export type CreateDHCPEntryRequest = {
 }
 
 export type CreateGatewayNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Public Gateway to connect. */
   gatewayId: string
@@ -449,6 +452,7 @@ export type CreateGatewayNetworkRequest = {
 }
 
 export type CreateGatewayRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Scaleway Project to create the gateway in. */
   projectId?: string
@@ -474,6 +478,7 @@ export type CreateGatewayRequest = {
 }
 
 export type CreateIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Project to create the IP address in. */
   projectId?: string
@@ -482,6 +487,7 @@ export type CreateIPRequest = {
 }
 
 export type CreatePATRuleRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the Gateway on which to create the rule. */
   gatewayId: string
@@ -496,18 +502,21 @@ export type CreatePATRuleRequest = {
 }
 
 export type DeleteDHCPEntryRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the DHCP entry to delete. */
   dhcpEntryId: string
 }
 
 export type DeleteDHCPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** DHCP configuration ID to delete. */
   dhcpId: string
 }
 
 export type DeleteGatewayNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the GatewayNetwork to delete. */
   gatewayNetworkId: string
@@ -519,6 +528,7 @@ export type DeleteGatewayNetworkRequest = {
 }
 
 export type DeleteGatewayRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the gateway to delete. */
   gatewayId: string
@@ -530,54 +540,63 @@ export type DeleteGatewayRequest = {
 }
 
 export type DeleteIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the IP address to delete. */
   ipId: string
 }
 
 export type DeletePATRuleRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the PAT rule to delete. */
   patRuleId: string
 }
 
 export type GetDHCPEntryRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the DHCP entry to fetch. */
   dhcpEntryId: string
 }
 
 export type GetDHCPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the DHCP configuration to fetch. */
   dhcpId: string
 }
 
 export type GetGatewayNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the GatewayNetwork to fetch. */
   gatewayNetworkId: string
 }
 
 export type GetGatewayRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the gateway to fetch. */
   gatewayId: string
 }
 
 export type GetIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the IP address to get. */
   ipId: string
 }
 
 export type GetPATRuleRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the PAT rule to get. */
   patRuleId: string
 }
 
 export type ListDHCPEntriesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Order in which to return results. */
   orderBy?: ListDHCPEntriesRequestOrderBy
@@ -605,6 +624,7 @@ export interface ListDHCPEntriesResponse {
 }
 
 export type ListDHCPsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Order in which to return results. */
   orderBy?: ListDHCPsRequestOrderBy
@@ -636,6 +656,7 @@ export interface ListDHCPsResponse {
 }
 
 export type ListGatewayNetworksRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Order in which to return results. */
   orderBy?: ListGatewayNetworksRequestOrderBy
@@ -666,6 +687,7 @@ export interface ListGatewayNetworksResponse {
 }
 
 export type ListGatewayTypesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
 }
 
@@ -675,6 +697,7 @@ export interface ListGatewayTypesResponse {
 }
 
 export type ListGatewaysRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Order in which to return results. */
   orderBy?: ListGatewaysRequestOrderBy
@@ -709,6 +732,7 @@ export interface ListGatewaysResponse {
 }
 
 export type ListIPsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Order in which to return results. */
   orderBy?: ListIPsRequestOrderBy
@@ -736,6 +760,7 @@ export interface ListIPsResponse {
 }
 
 export type ListPATRulesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Order in which to return results. */
   orderBy?: ListPATRulesRequestOrderBy
@@ -759,12 +784,14 @@ export interface ListPATRulesResponse {
 }
 
 export type RefreshSSHKeysRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the gateway to refresh SSH keys on. */
   gatewayId: string
 }
 
 export type SetDHCPEntriesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the Gateway Network on which to set DHCP reservation list. */
   gatewayNetworkId: string
@@ -778,11 +805,12 @@ export interface SetDHCPEntriesResponse {
 }
 
 export type SetPATRulesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the gateway on which to set the PAT rules. */
   gatewayId: string
   /** New list of PAT rules. */
-  patRules?: SetPATRulesRequestRule[]
+  patRules: SetPATRulesRequestRule[]
 }
 
 export interface SetPATRulesResponse {
@@ -791,6 +819,7 @@ export interface SetPATRulesResponse {
 }
 
 export type UpdateDHCPEntryRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the DHCP entry to update. */
   dhcpEntryId: string
@@ -799,6 +828,7 @@ export type UpdateDHCPEntryRequest = {
 }
 
 export type UpdateDHCPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** DHCP configuration to update. */
   dhcpId: string
@@ -862,6 +892,7 @@ export type UpdateDHCPRequest = {
 }
 
 export type UpdateGatewayNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the GatewayNetwork to update. */
   gatewayNetworkId: string
@@ -899,6 +930,7 @@ export type UpdateGatewayNetworkRequest = {
 }
 
 export type UpdateGatewayRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the gateway to update. */
   gatewayId: string
@@ -920,6 +952,7 @@ export type UpdateGatewayRequest = {
 }
 
 export type UpdateIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the IP address to update. */
   ipId: string
@@ -932,6 +965,7 @@ export type UpdateIPRequest = {
 }
 
 export type UpdatePATRuleRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the PAT rule to update. */
   patRuleId: string
@@ -946,6 +980,7 @@ export type UpdatePATRuleRequest = {
 }
 
 export type UpgradeGatewayRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the gateway to upgrade. */
   gatewayId: string

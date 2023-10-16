@@ -754,10 +754,7 @@ export const marshalAddInstanceACLRulesRequest = (
   request: AddInstanceACLRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  rules:
-    request.rules !== undefined
-      ? request.rules.map(elt => marshalACLRuleRequest(elt, defaults))
-      : undefined,
+  rules: request.rules.map(elt => marshalACLRuleRequest(elt, defaults)),
 })
 
 const marshalInstanceSetting = (
@@ -772,10 +769,7 @@ export const marshalAddInstanceSettingsRequest = (
   request: AddInstanceSettingsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  settings:
-    request.settings !== undefined
-      ? request.settings.map(elt => marshalInstanceSetting(elt, defaults))
-      : undefined,
+  settings: request.settings.map(elt => marshalInstanceSetting(elt, defaults)),
 })
 
 export const marshalCloneInstanceRequest = (
@@ -888,8 +882,16 @@ export const marshalCreateInstanceRequest = (
   volume_size: request.volumeSize,
   volume_type: request.volumeType,
   ...resolveOneOf<unknown>([
-    { param: 'organization_id', value: request.organizationId },
-    { param: 'project_id', value: request.projectId },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
+    },
+    {
+      default: defaults.defaultProjectId,
+      param: 'project_id',
+      value: request.projectId,
+    },
   ]),
 })
 
@@ -955,12 +957,9 @@ export const marshalCreateReadReplicaEndpointRequest = (
   request: CreateReadReplicaEndpointRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoint_spec:
-    request.endpointSpec !== undefined
-      ? request.endpointSpec.map(elt =>
-          marshalReadReplicaEndpointSpec(elt, defaults),
-        )
-      : undefined,
+  endpoint_spec: request.endpointSpec.map(elt =>
+    marshalReadReplicaEndpointSpec(elt, defaults),
+  ),
 })
 
 export const marshalCreateReadReplicaRequest = (
@@ -1026,20 +1025,14 @@ export const marshalSetInstanceACLRulesRequest = (
   request: SetInstanceACLRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  rules:
-    request.rules !== undefined
-      ? request.rules.map(elt => marshalACLRuleRequest(elt, defaults))
-      : undefined,
+  rules: request.rules.map(elt => marshalACLRuleRequest(elt, defaults)),
 })
 
 export const marshalSetInstanceSettingsRequest = (
   request: SetInstanceSettingsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  settings:
-    request.settings !== undefined
-      ? request.settings.map(elt => marshalInstanceSetting(elt, defaults))
-      : undefined,
+  settings: request.settings.map(elt => marshalInstanceSetting(elt, defaults)),
 })
 
 export const marshalSetPrivilegeRequest = (

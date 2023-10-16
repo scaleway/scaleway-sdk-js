@@ -74,6 +74,10 @@ export interface VPC {
 }
 
 export type AddSubnetsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Private Network ID. */
   privateNetworkId: string
@@ -86,6 +90,10 @@ export interface AddSubnetsResponse {
 }
 
 export type CreatePrivateNetworkRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Name for the Private Network. */
   name?: string
@@ -100,6 +108,10 @@ export type CreatePrivateNetworkRequest = {
 }
 
 export type CreateVPCRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Name for the VPC. */
   name?: string
@@ -110,12 +122,20 @@ export type CreateVPCRequest = {
 }
 
 export type DeletePrivateNetworkRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Private Network ID. */
   privateNetworkId: string
 }
 
 export type DeleteSubnetsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Private Network ID. */
   privateNetworkId: string
@@ -128,30 +148,50 @@ export interface DeleteSubnetsResponse {
 }
 
 export type DeleteVPCRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** VPC ID. */
   vpcId: string
 }
 
 export type EnableDHCPRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Private Network ID. */
   privateNetworkId: string
 }
 
 export type GetPrivateNetworkRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Private Network ID. */
   privateNetworkId: string
 }
 
 export type GetVPCRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** VPC ID. */
   vpcId: string
 }
 
 export type ListPrivateNetworksRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Sort order of the returned Private Networks. */
   orderBy?: ListPrivateNetworksRequestOrderBy
@@ -202,6 +242,10 @@ export interface ListPrivateNetworksResponse {
 }
 
 export type ListVPCsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Sort order of the returned VPCs. */
   orderBy?: ListVPCsRequestOrderBy
@@ -242,6 +286,10 @@ export interface ListVPCsResponse {
 }
 
 export type MigrateZonalPrivateNetworksRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /**
    * Organization ID to target. The specified zoned Private Networks within this
@@ -264,6 +312,10 @@ export type MigrateZonalPrivateNetworksRequest = {
 }
 
 export type SetSubnetsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Private Network ID. */
   privateNetworkId: string
@@ -276,6 +328,10 @@ export interface SetSubnetsResponse {
 }
 
 export type UpdatePrivateNetworkRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Private Network ID. */
   privateNetworkId: string
@@ -286,6 +342,10 @@ export type UpdatePrivateNetworkRequest = {
 }
 
 export type UpdateVPCRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** VPC ID. */
   vpcId: string

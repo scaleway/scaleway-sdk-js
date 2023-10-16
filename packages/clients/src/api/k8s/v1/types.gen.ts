@@ -679,6 +679,10 @@ export interface UpdatePoolRequestUpgradePolicy {
 }
 
 export type CreateClusterRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /**
    * @deprecated Organization ID in which the cluster will be created.
@@ -708,7 +712,7 @@ export type CreateClusterRequest = {
   /** Kubernetes version of the cluster. */
   version: string
   /** Container Network Interface (CNI) plugin running in the cluster. */
-  cni?: CNI
+  cni: CNI
   /**
    * @deprecated Defines whether the Kubernetes Dashboard is enabled in the
    *   cluster.
@@ -753,11 +757,19 @@ export type CreateClusterRequest = {
 }
 
 export type CreateExternalNodeRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   poolId: string
 }
 
 export type CreatePoolRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Cluster ID to which the pool will be attached. */
   clusterId: string
@@ -824,6 +836,10 @@ export type CreatePoolRequest = {
 }
 
 export type DeleteClusterRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the cluster to delete. */
   clusterId: string
@@ -836,6 +852,10 @@ export type DeleteClusterRequest = {
 }
 
 export type DeleteNodeRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the node to replace. */
   nodeId: string
@@ -846,6 +866,10 @@ export type DeleteNodeRequest = {
 }
 
 export type DeletePoolRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the pool to delete. */
   poolId: string
@@ -863,36 +887,60 @@ export interface ExternalNode {
 }
 
 export type GetClusterKubeConfigRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Cluster ID for which to download the kubeconfig. */
   clusterId: string
 }
 
 export type GetClusterRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the requested cluster. */
   clusterId: string
 }
 
 export type GetNodeRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the requested node. */
   nodeId: string
 }
 
 export type GetPoolRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the requested pool. */
   poolId: string
 }
 
 export type GetVersionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Requested version name. */
   versionName: string
 }
 
 export type ListClusterAvailableTypesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Cluster ID for which the available Kubernetes types will be listed. */
   clusterId: string
@@ -906,6 +954,10 @@ export interface ListClusterAvailableTypesResponse {
 }
 
 export type ListClusterAvailableVersionsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Cluster ID for which the available Kubernetes versions will be listed. */
   clusterId: string
@@ -917,6 +969,10 @@ export interface ListClusterAvailableVersionsResponse {
 }
 
 export type ListClusterTypesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Page number, from the paginated results, to return for cluster-types. */
   page?: number
@@ -932,6 +988,10 @@ export interface ListClusterTypesResponse {
 }
 
 export type ListClustersRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Organization ID on which to filter the returned clusters. */
   organizationId?: string
@@ -967,6 +1027,10 @@ export interface ListClustersResponse {
 }
 
 export type ListNodesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Cluster ID from which the nodes will be listed from. */
   clusterId: string
@@ -995,6 +1059,10 @@ export interface ListNodesResponse {
 }
 
 export type ListPoolsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the cluster whose pools will be listed. */
   clusterId: string
@@ -1021,6 +1089,10 @@ export interface ListPoolsResponse {
 }
 
 export type ListVersionsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
 }
 
@@ -1030,6 +1102,10 @@ export interface ListVersionsResponse {
 }
 
 export type MigrateToPrivateNetworkClusterRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the cluster to migrate. */
   clusterId: string
@@ -1038,24 +1114,40 @@ export type MigrateToPrivateNetworkClusterRequest = {
 }
 
 export type RebootNodeRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the node to reboot. */
   nodeId: string
 }
 
 export type ReplaceNodeRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the node to replace. */
   nodeId: string
 }
 
 export type ResetClusterAdminTokenRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Cluster ID on which the admin token will be renewed. */
   clusterId: string
 }
 
 export type SetClusterTypeRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the cluster to migrate from one type to another. */
   clusterId: string
@@ -1067,6 +1159,10 @@ export type SetClusterTypeRequest = {
 }
 
 export type UpdateClusterRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the cluster to update. */
   clusterId: string
@@ -1104,6 +1200,10 @@ export type UpdateClusterRequest = {
 }
 
 export type UpdatePoolRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the pool to update. */
   poolId: string
@@ -1129,6 +1229,10 @@ export type UpdatePoolRequest = {
 }
 
 export type UpgradeClusterRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the cluster to upgrade. */
   clusterId: string
@@ -1146,6 +1250,10 @@ export type UpgradeClusterRequest = {
 }
 
 export type UpgradePoolRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the pool to upgrade. */
   poolId: string

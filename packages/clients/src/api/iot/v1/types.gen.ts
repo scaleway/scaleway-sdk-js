@@ -341,6 +341,10 @@ export interface UpdateRouteRequestS3Config {
 }
 
 export type CreateDeviceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Device name. */
   name?: string
@@ -373,6 +377,10 @@ export interface CreateDeviceResponse {
 }
 
 export type CreateHubRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Hub name (up to 255 characters). */
   name?: string
@@ -382,7 +390,7 @@ export type CreateHubRequest = {
    */
   projectId?: string
   /** Hub product plan. */
-  productPlan?: HubProductPlan
+  productPlan: HubProductPlan
   /** Disable Hub events. */
   disableEvents?: boolean
   /** Topic prefix (default '$SCW/events') of Hub events. */
@@ -397,11 +405,15 @@ export type CreateHubRequest = {
 }
 
 export type CreateNetworkRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Network name. */
   name?: string
   /** Type of network to connect with. */
-  type?: NetworkNetworkType
+  type: NetworkNetworkType
   /** Hub ID to connect the Network to. */
   hubId: string
   /** Topic prefix for the Network. */
@@ -416,6 +428,10 @@ export interface CreateNetworkResponse {
 }
 
 export type CreateRouteRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Route name. */
   name?: string
@@ -450,12 +466,20 @@ export type CreateRouteRequest = {
 }
 
 export type DeleteDeviceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Device ID. */
   deviceId: string
 }
 
 export type DeleteHubRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Hub ID. */
   hubId: string
@@ -467,18 +491,30 @@ export type DeleteHubRequest = {
 }
 
 export type DeleteNetworkRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Network ID. */
   networkId: string
 }
 
 export type DeleteRouteRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Route ID. */
   routeId: string
 }
 
 export type DeleteTwinDocumentRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Twin ID. */
   twinId: string
@@ -487,36 +523,60 @@ export type DeleteTwinDocumentRequest = {
 }
 
 export type DeleteTwinDocumentsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Twin ID. */
   twinId: string
 }
 
 export type DisableDeviceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Device ID. */
   deviceId: string
 }
 
 export type DisableHubRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Hub ID. */
   hubId: string
 }
 
 export type EnableDeviceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Device ID. */
   deviceId: string
 }
 
 export type EnableHubRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Hub ID. */
   hubId: string
 }
 
 export type GetDeviceCertificateRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Device ID. */
   deviceId: string
@@ -530,6 +590,10 @@ export interface GetDeviceCertificateResponse {
 }
 
 export type GetDeviceMetricsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Device ID. */
   deviceId: string
@@ -543,12 +607,20 @@ export interface GetDeviceMetricsResponse {
 }
 
 export type GetDeviceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Device ID. */
   deviceId: string
 }
 
 export type GetHubCARequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   hubId: string
 }
@@ -558,6 +630,10 @@ export interface GetHubCAResponse {
 }
 
 export type GetHubMetricsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Hub ID. */
   hubId: string
@@ -571,24 +647,40 @@ export interface GetHubMetricsResponse {
 }
 
 export type GetHubRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Hub ID. */
   hubId: string
 }
 
 export type GetNetworkRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Network ID. */
   networkId: string
 }
 
 export type GetRouteRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Route ID. */
   routeId: string
 }
 
 export type GetTwinDocumentRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Twin ID. */
   twinId: string
@@ -597,6 +689,10 @@ export type GetTwinDocumentRequest = {
 }
 
 export type ListDevicesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Page number to return, from the paginated results. */
   page?: number
@@ -622,6 +718,10 @@ export interface ListDevicesResponse {
 }
 
 export type ListHubsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Page number to return, from the paginated results. */
   page?: number
@@ -645,6 +745,10 @@ export interface ListHubsResponse {
 }
 
 export type ListNetworksRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Page number to return, from the paginated results. */
   page?: number
@@ -668,6 +772,10 @@ export interface ListNetworksResponse {
 }
 
 export type ListRoutesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Page number to return, from the paginated results. */
   page?: number
@@ -689,6 +797,10 @@ export interface ListRoutesResponse {
 }
 
 export type ListTwinDocumentsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Twin ID. */
   twinId: string
@@ -700,6 +812,10 @@ export interface ListTwinDocumentsResponse {
 }
 
 export type PatchTwinDocumentRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Twin ID. */
   twinId: string
@@ -722,6 +838,10 @@ export type PatchTwinDocumentRequest = {
 }
 
 export type PutTwinDocumentRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Twin ID. */
   twinId: string
@@ -737,6 +857,10 @@ export type PutTwinDocumentRequest = {
 }
 
 export type RenewDeviceCertificateRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Device ID. */
   deviceId: string
@@ -791,6 +915,10 @@ export interface Route {
 }
 
 export type SetDeviceCertificateRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Device ID. */
   deviceId: string
@@ -804,6 +932,10 @@ export interface SetDeviceCertificateResponse {
 }
 
 export type SetHubCARequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Hub ID. */
   hubId: string
@@ -829,6 +961,10 @@ export interface TwinDocument {
 }
 
 export type UpdateDeviceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Device ID. */
   deviceId: string
@@ -851,6 +987,10 @@ export type UpdateDeviceRequest = {
 }
 
 export type UpdateHubRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the Hub you want to update. */
   hubId: string
@@ -874,6 +1014,10 @@ export type UpdateHubRequest = {
 }
 
 export type UpdateRouteRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Route id. */
   routeId: string

@@ -35,6 +35,7 @@ export interface SetImageResponse {
 }
 
 export type SetSecurityGroupRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID of the security group (will be ignored). */
   id: string
@@ -76,6 +77,7 @@ export interface SetSecurityGroupResponse {
 }
 
 export type SetSecurityGroupRuleRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   securityGroupId: string
   securityGroupRuleId: string
@@ -95,6 +97,7 @@ export interface SetSecurityGroupRuleResponse {
 }
 
 export type SetServerRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Instance unique ID. */
   id: string
@@ -169,6 +172,7 @@ export interface SetServerResponse {
 }
 
 export type SetSnapshotRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   snapshotId: string
   id: string

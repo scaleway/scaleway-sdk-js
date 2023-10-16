@@ -172,22 +172,38 @@ export interface Domain {
   dkimConfig: string
   /** Domain's statistics. */
   statistics: DomainStatistics
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region: Region
 }
 
 export type CancelEmailRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the email to cancel. */
   emailId: string
 }
 
 export type CheckDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the domain to check. */
   domainId: string
 }
 
 export type CreateDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the project to which the domain belongs. */
   projectId?: string
@@ -198,6 +214,10 @@ export type CreateDomainRequest = {
 }
 
 export type CreateEmailRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Sender information. Must be from a checked domain declared in the Project. */
   from?: CreateEmailRequestAddress
@@ -238,24 +258,40 @@ export interface DomainLastStatus {
 }
 
 export type GetDomainLastStatusRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the domain to delete. */
   domainId: string
 }
 
 export type GetDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the domain. */
   domainId: string
 }
 
 export type GetEmailRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the email to retrieve. */
   emailId: string
 }
 
 export type GetStatisticsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** (Optional) Number of emails for this Project. */
   projectId?: string
@@ -273,6 +309,10 @@ export type GetStatisticsRequest = {
 }
 
 export type ListDomainsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Requested page number. Value must be greater or equal to 1. */
   page?: number
@@ -291,6 +331,10 @@ export interface ListDomainsResponse {
 }
 
 export type ListEmailsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   page?: number
   pageSize?: number
@@ -330,6 +374,10 @@ export interface ListEmailsResponse {
 }
 
 export type RevokeDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the domain to delete. */
   domainId: string

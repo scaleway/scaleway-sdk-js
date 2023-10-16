@@ -214,6 +214,7 @@ export interface Image {
   state: ImageState
   project: string
   tags: string[]
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone: Zone
 }
 
@@ -317,6 +318,7 @@ export interface VolumeServer {
   state: VolumeServerState
   project: string
   boot: boolean
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone: Zone
 }
 
@@ -395,6 +397,7 @@ export interface Ip {
   type: IpType
   state: IpState
   prefix: string
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone: Zone
 }
 
@@ -451,6 +454,7 @@ export interface SecurityGroupRule {
   destPortTo?: number
   position: number
   editable: boolean
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone: Zone
 }
 
@@ -707,6 +711,7 @@ export interface SecurityGroupTemplate {
 }
 
 export type ApplyBlockMigrationRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
    * The volume to migrate, along with potentially other resources, according to
@@ -730,13 +735,14 @@ export type ApplyBlockMigrationRequest = {
 }
 
 export type CreateImageRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Name of the image. */
   name?: string
   /** UUID of the snapshot. */
   rootVolume: string
   /** Architecture of the image. */
-  arch?: Arch
+  arch: Arch
   /** @deprecated Default bootscript of the image. */
   defaultBootscript?: string
   /** Additional volumes of the image. */
@@ -766,6 +772,7 @@ export interface CreateImageResponse {
 }
 
 export type CreateIpRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
    * @deprecated Organization ID in which the IP is reserved.
@@ -794,6 +801,7 @@ export interface CreateIpResponse {
 }
 
 export type CreatePlacementGroupRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Name of the placement group. */
   name?: string
@@ -824,6 +832,7 @@ export interface CreatePlacementGroupResponse {
 }
 
 export type CreatePrivateNICRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the Instance the private NIC will be attached to. */
   serverId: string
@@ -840,6 +849,7 @@ export interface CreatePrivateNICResponse {
 }
 
 export type CreateSecurityGroupRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Name of the security group. */
   name?: string
@@ -895,12 +905,13 @@ export interface CreateSecurityGroupResponse {
 }
 
 export type CreateSecurityGroupRuleRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the security group. */
   securityGroupId: string
-  protocol?: SecurityGroupRuleProtocol
-  direction?: SecurityGroupRuleDirection
-  action?: SecurityGroupRuleAction
+  protocol: SecurityGroupRuleProtocol
+  direction: SecurityGroupRuleDirection
+  action: SecurityGroupRuleAction
   ipRange: string
   /** Beginning of the range of ports to apply this rule to (inclusive). */
   destPortFrom?: number
@@ -917,6 +928,7 @@ export interface CreateSecurityGroupRuleResponse {
 }
 
 export type CreateServerRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Instance name. */
   name?: string
@@ -967,6 +979,7 @@ export interface CreateServerResponse {
 }
 
 export type CreateSnapshotRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Name of the snapshot. */
   name?: string
@@ -1007,6 +1020,7 @@ export interface CreateSnapshotResponse {
 }
 
 export type CreateVolumeRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Volume name. */
   name?: string
@@ -1056,24 +1070,28 @@ export interface CreateVolumeResponse {
 }
 
 export type DeleteImageRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the image you want to delete. */
   imageId: string
 }
 
 export type DeleteIpRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** ID or address of the IP to delete. */
   ip: string
 }
 
 export type DeletePlacementGroupRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the placement group you want to delete. */
   placementGroupId: string
 }
 
 export type DeletePrivateNICRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Instance to which the private NIC is attached. */
   serverId: string
@@ -1082,23 +1100,27 @@ export type DeletePrivateNICRequest = {
 }
 
 export type DeleteSecurityGroupRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the security group you want to delete. */
   securityGroupId: string
 }
 
 export type DeleteSecurityGroupRuleRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   securityGroupId: string
   securityGroupRuleId: string
 }
 
 export type DeleteServerRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   serverId: string
 }
 
 export type DeleteServerUserDataRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the Instance. */
   serverId: string
@@ -1107,18 +1129,21 @@ export type DeleteServerUserDataRequest = {
 }
 
 export type DeleteSnapshotRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the snapshot you want to delete. */
   snapshotId: string
 }
 
 export type DeleteVolumeRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the volume you want to delete. */
   volumeId: string
 }
 
 export type ExportSnapshotRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Snapshot ID. */
   snapshotId: string
@@ -1133,6 +1158,7 @@ export interface ExportSnapshotResponse {
 }
 
 export type GetBootscriptRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   bootscriptId: string
 }
@@ -1142,6 +1168,7 @@ export interface GetBootscriptResponse {
 }
 
 export type GetDashboardRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   organization?: string
   project?: string
@@ -1152,6 +1179,7 @@ export interface GetDashboardResponse {
 }
 
 export type GetImageRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the image you want to get. */
   imageId: string
@@ -1162,6 +1190,7 @@ export interface GetImageResponse {
 }
 
 export type GetIpRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** IP ID or address to get. */
   ip: string
@@ -1172,6 +1201,7 @@ export interface GetIpResponse {
 }
 
 export type GetPlacementGroupRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the placement group you want to get. */
   placementGroupId: string
@@ -1182,6 +1212,7 @@ export interface GetPlacementGroupResponse {
 }
 
 export type GetPlacementGroupServersRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the placement group you want to get. */
   placementGroupId: string
@@ -1193,6 +1224,7 @@ export interface GetPlacementGroupServersResponse {
 }
 
 export type GetPrivateNICRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Instance to which the private NIC is attached. */
   serverId: string
@@ -1205,6 +1237,7 @@ export interface GetPrivateNICResponse {
 }
 
 export type GetSecurityGroupRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the security group you want to get. */
   securityGroupId: string
@@ -1215,6 +1248,7 @@ export interface GetSecurityGroupResponse {
 }
 
 export type GetSecurityGroupRuleRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   securityGroupId: string
   securityGroupRuleId: string
@@ -1225,6 +1259,7 @@ export interface GetSecurityGroupRuleResponse {
 }
 
 export type GetServerRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the Instance you want to get. */
   serverId: string
@@ -1235,6 +1270,7 @@ export interface GetServerResponse {
 }
 
 export type GetServerTypesAvailabilityRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
    * A positive integer lower or equal to 100 to select the number of items to
@@ -1252,6 +1288,7 @@ export interface GetServerTypesAvailabilityResponse {
 }
 
 export type GetSnapshotRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the snapshot you want to get. */
   snapshotId: string
@@ -1262,6 +1299,7 @@ export interface GetSnapshotResponse {
 }
 
 export type GetVolumeRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the volume you want to get. */
   volumeId: string
@@ -1272,6 +1310,7 @@ export interface GetVolumeResponse {
 }
 
 export type ListBootscriptsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   arch?: string
   title?: string
@@ -1289,10 +1328,12 @@ export interface ListBootscriptsResponse {
 }
 
 export type ListDefaultSecurityGroupRulesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
 }
 
 export type ListImagesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   organization?: string
   perPage?: number
@@ -1312,6 +1353,7 @@ export interface ListImagesResponse {
 }
 
 export type ListIpsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Project ID in which the IPs are reserved. */
   project?: string
@@ -1346,6 +1388,7 @@ export interface ListIpsResponse {
 }
 
 export type ListPlacementGroupsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
    * A positive integer lower or equal to 100 to select the number of items to
@@ -1378,6 +1421,7 @@ export interface ListPlacementGroupsResponse {
 }
 
 export type ListPrivateNICsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Instance to which the private NIC is attached. */
   serverId: string
@@ -1398,6 +1442,7 @@ export interface ListPrivateNICsResponse {
 }
 
 export type ListSecurityGroupRulesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the security group. */
   securityGroupId: string
@@ -1418,6 +1463,7 @@ export interface ListSecurityGroupRulesResponse {
 }
 
 export type ListSecurityGroupsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Name of the security group. */
   name?: string
@@ -1449,6 +1495,7 @@ export interface ListSecurityGroupsResponse {
 }
 
 export type ListServerActionsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   serverId: string
 }
@@ -1458,6 +1505,7 @@ export interface ListServerActionsResponse {
 }
 
 export type ListServerUserDataRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the Instance. */
   serverId: string
@@ -1468,6 +1516,7 @@ export interface ListServerUserDataResponse {
 }
 
 export type ListServersRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
    * A positive integer lower or equal to 100 to select the number of items to
@@ -1521,6 +1570,7 @@ export interface ListServersResponse {
 }
 
 export type ListServersTypesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   perPage?: number
   page?: number
@@ -1534,6 +1584,7 @@ export interface ListServersTypesResponse {
 }
 
 export type ListSnapshotsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** List snapshots only for this Organization ID. */
   organization?: string
@@ -1562,6 +1613,7 @@ export interface ListSnapshotsResponse {
 }
 
 export type ListVolumesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Filter by volume type. */
   volumeType?: VolumeVolumeType
@@ -1596,6 +1648,7 @@ export interface ListVolumesResponse {
 }
 
 export type ListVolumesTypesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   perPage?: number
   page?: number
@@ -1627,6 +1680,7 @@ export interface MigrationPlan {
 }
 
 export type PlanBlockMigrationRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
    * The volume for which the migration plan will be generated.
@@ -1643,6 +1697,7 @@ export type PlanBlockMigrationRequest = {
 }
 
 export type ServerActionRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the Instance. */
   serverId: string
@@ -1665,6 +1720,7 @@ export interface ServerActionResponse {
 }
 
 export type SetImageRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   id: string
   name: string
@@ -1684,6 +1740,7 @@ export type SetImageRequest = {
 }
 
 export type SetPlacementGroupRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   placementGroupId: string
   name: string
@@ -1699,11 +1756,12 @@ export interface SetPlacementGroupResponse {
 }
 
 export type SetPlacementGroupServersRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the placement group you want to set. */
   placementGroupId: string
   /** An array of the Instances' UUIDs you want to configure. */
-  servers?: string[]
+  servers: string[]
 }
 
 export interface SetPlacementGroupServersResponse {
@@ -1712,6 +1770,7 @@ export interface SetPlacementGroupServersResponse {
 }
 
 export type SetSecurityGroupRulesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the security group to update the rules on. */
   securityGroupId: string
@@ -1724,6 +1783,7 @@ export interface SetSecurityGroupRulesResponse {
 }
 
 export type UpdateIpRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** IP ID or IP address. */
   ip: string
@@ -1741,6 +1801,7 @@ export interface UpdateIpResponse {
 }
 
 export type UpdatePlacementGroupRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the placement group. */
   placementGroupId: string
@@ -1759,11 +1820,12 @@ export interface UpdatePlacementGroupResponse {
 }
 
 export type UpdatePlacementGroupServersRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the placement group you want to update. */
   placementGroupId: string
   /** An array of the Instances' UUIDs you want to configure. */
-  servers?: string[]
+  servers: string[]
 }
 
 export interface UpdatePlacementGroupServersResponse {
@@ -1772,6 +1834,7 @@ export interface UpdatePlacementGroupServersResponse {
 }
 
 export type UpdatePrivateNICRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the Instance the private NIC will be attached to. */
   serverId: string
@@ -1782,6 +1845,7 @@ export type UpdatePrivateNICRequest = {
 }
 
 export type UpdateServerRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the Instance. */
   serverId: string
@@ -1826,6 +1890,7 @@ export interface UpdateServerResponse {
 }
 
 export type UpdateVolumeRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the volume. */
   volumeId: string

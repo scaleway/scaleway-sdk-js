@@ -30,6 +30,7 @@ export interface PrivateNetwork {
 }
 
 export type CreatePrivateNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Name for the Private Network. */
   name?: string
@@ -42,18 +43,21 @@ export type CreatePrivateNetworkRequest = {
 }
 
 export type DeletePrivateNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Private Network ID. */
   privateNetworkId: string
 }
 
 export type GetPrivateNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Private Network ID. */
   privateNetworkId: string
 }
 
 export type ListPrivateNetworksRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Sort order of the returned Private Networks. */
   orderBy?: ListPrivateNetworksRequestOrderBy
@@ -96,6 +100,7 @@ export interface ListPrivateNetworksResponse {
 }
 
 export type UpdatePrivateNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Private Network ID. */
   privateNetworkId: string

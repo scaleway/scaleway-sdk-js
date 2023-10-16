@@ -157,6 +157,10 @@ export interface Offer {
 }
 
 export type CreateHostingRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** ID of the selected offer for the Web Hosting plan. */
   offerId: string
@@ -176,6 +180,10 @@ export type CreateHostingRequest = {
 }
 
 export type DeleteHostingRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Hosting ID. */
   hostingId: string
@@ -191,18 +199,30 @@ export interface DnsRecords {
 }
 
 export type GetDomainDnsRecordsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Domain associated with the DNS records. */
   domain: string
 }
 
 export type GetHostingRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Hosting ID. */
   hostingId: string
 }
 
 export type ListHostingsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /**
    * Page number to return, from the paginated results (must be a positive
@@ -251,6 +271,10 @@ export interface ListHostingsResponse {
 }
 
 export type ListOffersRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Sort order of offers in the response. */
   orderBy?: ListOffersRequestOrderBy
@@ -277,12 +301,20 @@ export interface ListOffersResponse {
 }
 
 export type RestoreHostingRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Hosting ID. */
   hostingId: string
 }
 
 export type UpdateHostingRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Hosting ID. */
   hostingId: string

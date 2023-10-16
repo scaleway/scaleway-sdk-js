@@ -151,7 +151,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateHubRequest}
    * @returns A Promise of Hub
    */
-  createHub = (request: Readonly<CreateHubRequest> = {}) =>
+  createHub = (request: Readonly<CreateHubRequest>) =>
     this.client.fetch<Hub>(
       {
         body: JSON.stringify(

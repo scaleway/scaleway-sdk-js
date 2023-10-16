@@ -140,6 +140,7 @@ export type ListLocalImagesRequest = {
    * be set.
    */
   imageLabel?: string
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   type?: LocalImageType
 }

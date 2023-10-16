@@ -224,7 +224,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DetachFlexibleIPRequest}
    * @returns A Promise of DetachFlexibleIPsResponse
    */
-  detachFlexibleIP = (request: Readonly<DetachFlexibleIPRequest> = {}) =>
+  detachFlexibleIP = (request: Readonly<DetachFlexibleIPRequest>) =>
     this.client.fetch<DetachFlexibleIPsResponse>(
       {
         body: JSON.stringify(

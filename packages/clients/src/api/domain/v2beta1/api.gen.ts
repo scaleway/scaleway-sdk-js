@@ -855,9 +855,7 @@ export class RegistrarAPI extends ParentAPI {
    * @param request - The request {@link RegistrarApiTransferInDomainRequest}
    * @returns A Promise of OrderResponse
    */
-  transferInDomain = (
-    request: Readonly<RegistrarApiTransferInDomainRequest> = {},
-  ) =>
+  transferInDomain = (request: Readonly<RegistrarApiTransferInDomainRequest>) =>
     this.client.fetch<OrderResponse>(
       {
         body: JSON.stringify(

@@ -333,6 +333,10 @@ export interface UpdateTriggerRequestSqsClientConfig {
 }
 
 export type CreateContainerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the namespace the container belongs to. */
   namespaceId: string
@@ -378,6 +382,10 @@ export type CreateContainerRequest = {
 }
 
 export type CreateCronRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the container to invoke by the cron. */
   containerId: string
@@ -390,6 +398,10 @@ export type CreateCronRequest = {
 }
 
 export type CreateDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Domain to assign. */
   hostname: string
@@ -398,6 +410,10 @@ export type CreateDomainRequest = {
 }
 
 export type CreateNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Name of the namespace to create. */
   name?: string
@@ -412,6 +428,10 @@ export type CreateNamespaceRequest = {
 }
 
 export type CreateTokenRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /**
    * UUID of the container to create the token for.
@@ -432,6 +452,10 @@ export type CreateTokenRequest = {
 }
 
 export type CreateTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   name: string
   description?: string
@@ -454,82 +478,138 @@ export type CreateTriggerRequest = {
 }
 
 export type DeleteContainerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the container to delete. */
   containerId: string
 }
 
 export type DeleteCronRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the cron to delete. */
   cronId: string
 }
 
 export type DeleteDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the domain to delete. */
   domainId: string
 }
 
 export type DeleteNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the namespace to delete. */
   namespaceId: string
 }
 
 export type DeleteTokenRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the token to delete. */
   tokenId: string
 }
 
 export type DeleteTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   triggerId: string
 }
 
 export type DeployContainerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the container to deploy. */
   containerId: string
 }
 
 export type GetContainerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the container to get. */
   containerId: string
 }
 
 export type GetCronRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the cron to get. */
   cronId: string
 }
 
 export type GetDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the domain to get. */
   domainId: string
 }
 
 export type GetNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the namespace to get. */
   namespaceId: string
 }
 
 export type GetTokenRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the token to get. */
   tokenId: string
 }
 
 export type GetTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   triggerId: string
 }
 
 export type IssueJWTRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set. */
   containerId?: string
@@ -539,6 +619,10 @@ export type IssueJWTRequest = {
 }
 
 export type ListContainersRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Page number. */
   page?: number
@@ -564,6 +648,10 @@ export interface ListContainersResponse {
 }
 
 export type ListCronsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Page number. */
   page?: number
@@ -583,6 +671,10 @@ export interface ListCronsResponse {
 }
 
 export type ListDomainsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Page number. */
   page?: number
@@ -602,6 +694,10 @@ export interface ListDomainsResponse {
 }
 
 export type ListLogsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the container. */
   containerId: string
@@ -619,6 +715,10 @@ export interface ListLogsResponse {
 }
 
 export type ListNamespacesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Page number. */
   page?: number
@@ -642,6 +742,10 @@ export interface ListNamespacesResponse {
 }
 
 export type ListTokensRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Page number. */
   page?: number
@@ -661,6 +765,10 @@ export interface ListTokensResponse {
 }
 
 export type ListTriggersRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   page?: number
   pageSize?: number
@@ -688,6 +796,10 @@ export interface ListTriggersResponse {
 }
 
 export type UpdateContainerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the container to update. */
   containerId: string
@@ -730,6 +842,10 @@ export type UpdateContainerRequest = {
 }
 
 export type UpdateCronRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the cron to update. */
   cronId: string
@@ -744,6 +860,10 @@ export type UpdateCronRequest = {
 }
 
 export type UpdateNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** UUID of the namespace to update. */
   namespaceId: string
@@ -756,6 +876,10 @@ export type UpdateNamespaceRequest = {
 }
 
 export type UpdateTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   triggerId: string
   name?: string

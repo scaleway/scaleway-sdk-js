@@ -455,12 +455,9 @@ export const marshalSetPATRulesRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   gateway_id: request.gatewayId,
-  pat_rules:
-    request.patRules !== undefined
-      ? request.patRules.map(elt =>
-          marshalSetPATRulesRequestRule(elt, defaults),
-        )
-      : undefined,
+  pat_rules: request.patRules.map(elt =>
+    marshalSetPATRulesRequestRule(elt, defaults),
+  ),
 })
 
 export const marshalUpdateDHCPEntryRequest = (

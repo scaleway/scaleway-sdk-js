@@ -874,10 +874,7 @@ export const marshalCreateAclRequest = (
   request: CreateAclRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  action:
-    request.action !== undefined
-      ? marshalAclAction(request.action, defaults)
-      : undefined,
+  action: marshalAclAction(request.action, defaults),
   description: request.description,
   index: request.index,
   match:
@@ -1008,10 +1005,7 @@ export const marshalCreateBackendRequest = (
   forward_port: request.forwardPort,
   forward_port_algorithm: request.forwardPortAlgorithm,
   forward_protocol: request.forwardProtocol,
-  health_check:
-    request.healthCheck !== undefined
-      ? marshalHealthCheck(request.healthCheck, defaults)
-      : undefined,
+  health_check: marshalHealthCheck(request.healthCheck, defaults),
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
   max_connections: request.maxConnections,
   max_retries: request.maxRetries,
@@ -1093,8 +1087,16 @@ export const marshalCreateIpRequest = (
 ): Record<string, unknown> => ({
   reverse: request.reverse,
   ...resolveOneOf<unknown>([
-    { param: 'organization_id', value: request.organizationId },
-    { param: 'project_id', value: request.projectId },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
+    },
+    {
+      default: defaults.defaultProjectId,
+      param: 'project_id',
+      value: request.projectId,
+    },
   ]),
 })
 
@@ -1110,8 +1112,16 @@ export const marshalCreateLbRequest = (
   tags: request.tags,
   type: request.type,
   ...resolveOneOf<unknown>([
-    { param: 'organization_id', value: request.organizationId },
-    { param: 'project_id', value: request.projectId },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
+    },
+    {
+      default: defaults.defaultProjectId,
+      param: 'project_id',
+      value: request.projectId,
+    },
   ]),
 })
 
@@ -1157,8 +1167,16 @@ export const marshalCreateSubscriberRequest = (
 ): Record<string, unknown> => ({
   name: request.name,
   ...resolveOneOf<unknown>([
-    { param: 'organization_id', value: request.organizationId },
-    { param: 'project_id', value: request.projectId },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
+    },
+    {
+      default: defaults.defaultProjectId,
+      param: 'project_id',
+      value: request.projectId,
+    },
   ]),
   ...resolveOneOf<unknown>([
     {
@@ -1210,10 +1228,7 @@ export const marshalUpdateAclRequest = (
   request: UpdateAclRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  action:
-    request.action !== undefined
-      ? marshalAclAction(request.action, defaults)
-      : undefined,
+  action: marshalAclAction(request.action, defaults),
   description: request.description,
   index: request.index,
   match:
@@ -1422,10 +1437,7 @@ export const marshalZonedApiCreateAclRequest = (
   request: ZonedApiCreateAclRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  action:
-    request.action !== undefined
-      ? marshalAclAction(request.action, defaults)
-      : undefined,
+  action: marshalAclAction(request.action, defaults),
   description: request.description,
   index: request.index,
   match:
@@ -1443,10 +1455,7 @@ export const marshalZonedApiCreateBackendRequest = (
   forward_port: request.forwardPort,
   forward_port_algorithm: request.forwardPortAlgorithm,
   forward_protocol: request.forwardProtocol,
-  health_check:
-    request.healthCheck !== undefined
-      ? marshalHealthCheck(request.healthCheck, defaults)
-      : undefined,
+  health_check: marshalHealthCheck(request.healthCheck, defaults),
   ignore_ssl_server_verify: request.ignoreSslServerVerify,
   max_connections: request.maxConnections,
   max_retries: request.maxRetries,
@@ -1513,8 +1522,16 @@ export const marshalZonedApiCreateIpRequest = (
 ): Record<string, unknown> => ({
   reverse: request.reverse,
   ...resolveOneOf<unknown>([
-    { param: 'organization_id', value: request.organizationId },
-    { param: 'project_id', value: request.projectId },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
+    },
+    {
+      default: defaults.defaultProjectId,
+      param: 'project_id',
+      value: request.projectId,
+    },
   ]),
 })
 
@@ -1530,8 +1547,16 @@ export const marshalZonedApiCreateLbRequest = (
   tags: request.tags,
   type: request.type,
   ...resolveOneOf<unknown>([
-    { param: 'organization_id', value: request.organizationId },
-    { param: 'project_id', value: request.projectId },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
+    },
+    {
+      default: defaults.defaultProjectId,
+      param: 'project_id',
+      value: request.projectId,
+    },
   ]),
 })
 
@@ -1553,8 +1578,16 @@ export const marshalZonedApiCreateSubscriberRequest = (
 ): Record<string, unknown> => ({
   name: request.name,
   ...resolveOneOf<unknown>([
-    { param: 'organization_id', value: request.organizationId },
-    { param: 'project_id', value: request.projectId },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
+    },
+    {
+      default: defaults.defaultProjectId,
+      param: 'project_id',
+      value: request.projectId,
+    },
   ]),
   ...resolveOneOf<unknown>([
     {
@@ -1603,10 +1636,7 @@ export const marshalZonedApiSetAclsRequest = (
   request: ZonedApiSetAclsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  acls:
-    request.acls !== undefined
-      ? request.acls.map(elt => marshalAclSpec(elt, defaults))
-      : undefined,
+  acls: request.acls.map(elt => marshalAclSpec(elt, defaults)),
 })
 
 export const marshalZonedApiSetBackendServersRequest = (
@@ -1627,10 +1657,7 @@ export const marshalZonedApiUpdateAclRequest = (
   request: ZonedApiUpdateAclRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  action:
-    request.action !== undefined
-      ? marshalAclAction(request.action, defaults)
-      : undefined,
+  action: marshalAclAction(request.action, defaults),
   description: request.description,
   index: request.index,
   match:

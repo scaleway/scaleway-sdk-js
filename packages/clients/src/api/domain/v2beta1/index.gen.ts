@@ -162,6 +162,3 @@ export type {
   UpdateDNSZoneRecordsResponse,
   UpdateDNSZoneRequest,
 } from './types.gen'
-
-// For backward compatibility
-export type { LanguageCode } from '../../std/types.gen'

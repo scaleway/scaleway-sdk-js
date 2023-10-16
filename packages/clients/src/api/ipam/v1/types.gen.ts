@@ -89,6 +89,10 @@ export interface IP {
 }
 
 export type BookIPRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /**
    * When creating an IP in a Private Network, the Project must match the
@@ -109,12 +113,20 @@ export type BookIPRequest = {
 }
 
 export type GetIPRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** IP ID. */
   ipId: string
 }
 
 export type ListIPsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** Sort order of the returned IPs. */
   orderBy?: ListIPsRequestOrderBy
@@ -182,12 +194,20 @@ export interface ListIPsResponse {
 }
 
 export type ReleaseIPRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** IP ID. */
   ipId: string
 }
 
 export type UpdateIPRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region?: Region
   /** IP ID. */
   ipId: string

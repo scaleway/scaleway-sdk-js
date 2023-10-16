@@ -447,7 +447,11 @@ const marshalRuleSpecs = (
   permission_set_names: request.permissionSetNames,
   ...resolveOneOf<unknown>([
     { param: 'project_ids', value: request.projectIds },
-    { param: 'organization_id', value: request.organizationId },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
+    },
   ]),
 })
 
@@ -510,10 +514,7 @@ export const marshalSetRulesRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   policy_id: request.policyId,
-  rules:
-    request.rules !== undefined
-      ? request.rules.map(elt => marshalRuleSpecs(elt, defaults))
-      : undefined,
+  rules: request.rules.map(elt => marshalRuleSpecs(elt, defaults)),
 })
 
 export const marshalUpdateAPIKeyRequest = (

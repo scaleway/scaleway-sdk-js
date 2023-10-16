@@ -1678,12 +1678,9 @@ export const marshalRegistrarApiTransferInDomainRequest = (
   request: RegistrarApiTransferInDomainRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  domains:
-    request.domains !== undefined
-      ? request.domains.map(elt =>
-          marshalTransferInDomainRequestTransferRequest(elt, defaults),
-        )
-      : undefined,
+  domains: request.domains.map(elt =>
+    marshalTransferInDomainRequestTransferRequest(elt, defaults),
+  ),
   project_id: request.projectId ?? defaults.defaultProjectId,
   ...resolveOneOf<unknown>([
     { param: 'owner_contact_id', value: request.ownerContactId },
@@ -1825,10 +1822,7 @@ export const marshalUpdateDNSZoneNameserversRequest = (
   request: UpdateDNSZoneNameserversRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ns:
-    request.ns !== undefined
-      ? request.ns.map(elt => marshalNameserver(elt, defaults))
-      : undefined,
+  ns: request.ns.map(elt => marshalNameserver(elt, defaults)),
 })
 
 const marshalDomainRecordGeoIPConfigMatch = (
@@ -2036,10 +2030,7 @@ export const marshalUpdateDNSZoneRecordsRequest = (
   request: UpdateDNSZoneRecordsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  changes:
-    request.changes !== undefined
-      ? request.changes.map(elt => marshalRecordChange(elt, defaults))
-      : undefined,
+  changes: request.changes.map(elt => marshalRecordChange(elt, defaults)),
   disallow_new_zone_creation: request.disallowNewZoneCreation,
   return_all_records: request.returnAllRecords,
   serial: request.serial,

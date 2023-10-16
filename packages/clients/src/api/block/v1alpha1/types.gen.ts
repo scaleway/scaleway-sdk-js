@@ -177,6 +177,7 @@ export interface Volume {
 }
 
 export type CreateSnapshotRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the volume to snapshot. */
   volumeId: string
@@ -189,6 +190,7 @@ export type CreateSnapshotRequest = {
 }
 
 export type CreateVolumeRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Name of the volume. */
   name: string
@@ -218,30 +220,35 @@ export type CreateVolumeRequest = {
 }
 
 export type DeleteSnapshotRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the snapshot. */
   snapshotId: string
 }
 
 export type DeleteVolumeRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the volume. */
   volumeId: string
 }
 
 export type GetSnapshotRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the snapshot. */
   snapshotId: string
 }
 
 export type GetVolumeRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the volume. */
   volumeId: string
 }
 
 export type ImportSnapshotFromS3Request = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   bucket: string
   key: string
@@ -251,6 +258,7 @@ export type ImportSnapshotFromS3Request = {
 }
 
 export type ListSnapshotsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Criteria to use when ordering the list. */
   orderBy?: ListSnapshotsRequestOrderBy
@@ -277,6 +285,7 @@ export interface ListSnapshotsResponse {
 }
 
 export type ListVolumeTypesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Page number. */
   page?: number
@@ -295,6 +304,7 @@ export interface ListVolumeTypesResponse {
 }
 
 export type ListVolumesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Criteria to use when ordering the list. */
   orderBy?: ListVolumesRequestOrderBy
@@ -351,6 +361,7 @@ export interface Snapshot {
 }
 
 export type UpdateSnapshotRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the snapshot. */
   snapshotId: string
@@ -361,6 +372,7 @@ export type UpdateSnapshotRequest = {
 }
 
 export type UpdateVolumeRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** UUID of the volume. */
   volumeId: string

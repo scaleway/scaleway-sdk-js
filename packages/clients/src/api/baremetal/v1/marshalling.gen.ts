@@ -548,8 +548,16 @@ export const marshalCreateServerRequest = (
   option_ids: request.optionIds,
   tags: request.tags,
   ...resolveOneOf<unknown>([
-    { param: 'organization_id', value: request.organizationId },
-    { param: 'project_id', value: request.projectId },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
+    },
+    {
+      default: defaults.defaultProjectId,
+      param: 'project_id',
+      value: request.projectId,
+    },
   ]),
 })
 
