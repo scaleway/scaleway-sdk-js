@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.37.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.36.0...@scaleway/sdk@1.37.0) (2023-10-16)
+
+### Features
+
+- **ipfs:** add IPNS API ([#932](https://github.com/scaleway/scaleway-sdk-js/issues/932)) ([c919d46](https://github.com/scaleway/scaleway-sdk-js/commit/c919d46713d8c7e8af499bfc30dcf594cc88a58a))
+- **mnq:** allow long credentials name for serverless functions triggers compatibility ([#930](https://github.com/scaleway/scaleway-sdk-js/issues/930)) ([b1e9d0c](https://github.com/scaleway/scaleway-sdk-js/commit/b1e9d0c5e8b039af0e01998315b0c07e3922f1e2))
+- **serverless:** add mnq_nats_account_id in trigger responses ([#931](https://github.com/scaleway/scaleway-sdk-js/issues/931)) ([58501e2](https://github.com/scaleway/scaleway-sdk-js/commit/58501e217f253f3375416c2749e17c4235d3913e))
+
 ## [1.36.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.35.0...@scaleway/sdk@1.36.0) (2023-10-13)
 
 ### Features
