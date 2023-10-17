@@ -208,6 +208,8 @@ export interface Gateway {
   bastionPort: number
   /** Defines whether SMTP traffic is allowed to pass through the gateway. */
   smtpEnabled: boolean
+  /** Whether this uses non-IPAM IP configurations. */
+  isLegacy: boolean
   /** Zone of the gateway. */
   zone: Zone
 }
@@ -242,6 +244,8 @@ export interface GatewayNetwork {
   enableDhcp: boolean
   /** Address of the Gateway (in CIDR form) to use when DHCP is not used. */
   address?: string
+  /** IPAM IP configuration used. */
+  ipamConfig?: IpamConfig
   /** Zone of the GatewayNetwork connection. */
   zone: Zone
 }
