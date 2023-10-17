@@ -74,6 +74,16 @@ export const unmarshalDHCP = (data: unknown) => {
   } as DHCP
 }
 
+const unmarshalIpamConfig = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'IpamConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return { pushDefaultRoute: data.push_default_route } as IpamConfig
+}
+
 export const unmarshalGatewayNetwork = (data: unknown) => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -89,6 +99,9 @@ export const unmarshalGatewayNetwork = (data: unknown) => {
     enableMasquerade: data.enable_masquerade,
     gatewayId: data.gateway_id,
     id: data.id,
+    ipamConfig: data.ipam_config
+      ? unmarshalIpamConfig(data.ipam_config)
+      : undefined,
     macAddress: data.mac_address,
     privateNetworkId: data.private_network_id,
     status: data.status,
@@ -170,6 +183,7 @@ export const unmarshalGateway = (data: unknown) => {
     ),
     id: data.id,
     ip: data.ip ? unmarshalIP(data.ip) : undefined,
+    isLegacy: data.is_legacy,
     name: data.name,
     organizationId: data.organization_id,
     projectId: data.project_id,
