@@ -5,7 +5,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type {
   Category,
   Image,
@@ -17,7 +16,7 @@ import type {
   Version,
 } from './types.gen'
 
-export const unmarshalCategory = (data: unknown) => {
+export const unmarshalCategory = (data: unknown): Category => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Category' failed as data isn't a dictionary.`,
@@ -31,7 +30,7 @@ export const unmarshalCategory = (data: unknown) => {
   } as Category
 }
 
-export const unmarshalImage = (data: unknown) => {
+export const unmarshalImage = (data: unknown): Image => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Image' failed as data isn't a dictionary.`,
@@ -51,7 +50,7 @@ export const unmarshalImage = (data: unknown) => {
   } as Image
 }
 
-export const unmarshalLocalImage = (data: unknown) => {
+export const unmarshalLocalImage = (data: unknown): LocalImage => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'LocalImage' failed as data isn't a dictionary.`,
@@ -68,7 +67,7 @@ export const unmarshalLocalImage = (data: unknown) => {
   } as LocalImage
 }
 
-export const unmarshalVersion = (data: unknown) => {
+export const unmarshalVersion = (data: unknown): Version => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Version' failed as data isn't a dictionary.`,
@@ -84,7 +83,9 @@ export const unmarshalVersion = (data: unknown) => {
   } as Version
 }
 
-export const unmarshalListCategoriesResponse = (data: unknown) => {
+export const unmarshalListCategoriesResponse = (
+  data: unknown,
+): ListCategoriesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListCategoriesResponse' failed as data isn't a dictionary.`,
@@ -97,7 +98,9 @@ export const unmarshalListCategoriesResponse = (data: unknown) => {
   } as ListCategoriesResponse
 }
 
-export const unmarshalListImagesResponse = (data: unknown) => {
+export const unmarshalListImagesResponse = (
+  data: unknown,
+): ListImagesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListImagesResponse' failed as data isn't a dictionary.`,
@@ -110,7 +113,9 @@ export const unmarshalListImagesResponse = (data: unknown) => {
   } as ListImagesResponse
 }
 
-export const unmarshalListLocalImagesResponse = (data: unknown) => {
+export const unmarshalListLocalImagesResponse = (
+  data: unknown,
+): ListLocalImagesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListLocalImagesResponse' failed as data isn't a dictionary.`,
@@ -123,7 +128,9 @@ export const unmarshalListLocalImagesResponse = (data: unknown) => {
   } as ListLocalImagesResponse
 }
 
-export const unmarshalListVersionsResponse = (data: unknown) => {
+export const unmarshalListVersionsResponse = (
+  data: unknown,
+): ListVersionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListVersionsResponse' failed as data isn't a dictionary.`,

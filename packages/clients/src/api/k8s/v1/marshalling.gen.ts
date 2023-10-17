@@ -47,7 +47,7 @@ import type {
   Version,
 } from './types.gen'
 
-const unmarshalPoolUpgradePolicy = (data: unknown) => {
+const unmarshalPoolUpgradePolicy = (data: unknown): PoolUpgradePolicy => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PoolUpgradePolicy' failed as data isn't a dictionary.`,
@@ -60,7 +60,7 @@ const unmarshalPoolUpgradePolicy = (data: unknown) => {
   } as PoolUpgradePolicy
 }
 
-export const unmarshalPool = (data: unknown) => {
+export const unmarshalPool = (data: unknown): Pool => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Pool' failed as data isn't a dictionary.`,
@@ -94,7 +94,7 @@ export const unmarshalPool = (data: unknown) => {
   } as Pool
 }
 
-export const unmarshalVersion = (data: unknown) => {
+export const unmarshalVersion = (data: unknown): Version => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Version' failed as data isn't a dictionary.`,
@@ -116,7 +116,7 @@ export const unmarshalVersion = (data: unknown) => {
   } as Version
 }
 
-const unmarshalMaintenanceWindow = (data: unknown) => {
+const unmarshalMaintenanceWindow = (data: unknown): MaintenanceWindow => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'MaintenanceWindow' failed as data isn't a dictionary.`,
@@ -129,7 +129,7 @@ const unmarshalMaintenanceWindow = (data: unknown) => {
   } as MaintenanceWindow
 }
 
-const unmarshalClusterAutoUpgrade = (data: unknown) => {
+const unmarshalClusterAutoUpgrade = (data: unknown): ClusterAutoUpgrade => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ClusterAutoUpgrade' failed as data isn't a dictionary.`,
@@ -142,7 +142,9 @@ const unmarshalClusterAutoUpgrade = (data: unknown) => {
   } as ClusterAutoUpgrade
 }
 
-const unmarshalClusterAutoscalerConfig = (data: unknown) => {
+const unmarshalClusterAutoscalerConfig = (
+  data: unknown,
+): ClusterAutoscalerConfig => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ClusterAutoscalerConfig' failed as data isn't a dictionary.`,
@@ -163,7 +165,9 @@ const unmarshalClusterAutoscalerConfig = (data: unknown) => {
   } as ClusterAutoscalerConfig
 }
 
-const unmarshalClusterOpenIDConnectConfig = (data: unknown) => {
+const unmarshalClusterOpenIDConnectConfig = (
+  data: unknown,
+): ClusterOpenIDConnectConfig => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ClusterOpenIDConnectConfig' failed as data isn't a dictionary.`,
@@ -181,7 +185,7 @@ const unmarshalClusterOpenIDConnectConfig = (data: unknown) => {
   } as ClusterOpenIDConnectConfig
 }
 
-export const unmarshalCluster = (data: unknown) => {
+export const unmarshalCluster = (data: unknown): Cluster => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Cluster' failed as data isn't a dictionary.`,
@@ -220,7 +224,7 @@ export const unmarshalCluster = (data: unknown) => {
   } as Cluster
 }
 
-export const unmarshalNode = (data: unknown) => {
+export const unmarshalNode = (data: unknown): Node => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Node' failed as data isn't a dictionary.`,
@@ -244,7 +248,7 @@ export const unmarshalNode = (data: unknown) => {
   } as Node
 }
 
-export const unmarshalExternalNode = (data: unknown) => {
+export const unmarshalExternalNode = (data: unknown): ExternalNode => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ExternalNode' failed as data isn't a dictionary.`,
@@ -263,7 +267,7 @@ export const unmarshalExternalNode = (data: unknown) => {
   } as ExternalNode
 }
 
-const unmarshalClusterType = (data: unknown) => {
+const unmarshalClusterType = (data: unknown): ClusterType => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ClusterType' failed as data isn't a dictionary.`,
@@ -282,7 +286,9 @@ const unmarshalClusterType = (data: unknown) => {
   } as ClusterType
 }
 
-export const unmarshalListClusterAvailableTypesResponse = (data: unknown) => {
+export const unmarshalListClusterAvailableTypesResponse = (
+  data: unknown,
+): ListClusterAvailableTypesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListClusterAvailableTypesResponse' failed as data isn't a dictionary.`,
@@ -300,7 +306,7 @@ export const unmarshalListClusterAvailableTypesResponse = (data: unknown) => {
 
 export const unmarshalListClusterAvailableVersionsResponse = (
   data: unknown,
-) => {
+): ListClusterAvailableVersionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListClusterAvailableVersionsResponse' failed as data isn't a dictionary.`,
@@ -312,7 +318,9 @@ export const unmarshalListClusterAvailableVersionsResponse = (
   } as ListClusterAvailableVersionsResponse
 }
 
-export const unmarshalListClusterTypesResponse = (data: unknown) => {
+export const unmarshalListClusterTypesResponse = (
+  data: unknown,
+): ListClusterTypesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListClusterTypesResponse' failed as data isn't a dictionary.`,
@@ -328,7 +336,9 @@ export const unmarshalListClusterTypesResponse = (data: unknown) => {
   } as ListClusterTypesResponse
 }
 
-export const unmarshalListClustersResponse = (data: unknown) => {
+export const unmarshalListClustersResponse = (
+  data: unknown,
+): ListClustersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListClustersResponse' failed as data isn't a dictionary.`,
@@ -341,7 +351,9 @@ export const unmarshalListClustersResponse = (data: unknown) => {
   } as ListClustersResponse
 }
 
-export const unmarshalListNodesResponse = (data: unknown) => {
+export const unmarshalListNodesResponse = (
+  data: unknown,
+): ListNodesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListNodesResponse' failed as data isn't a dictionary.`,
@@ -354,7 +366,9 @@ export const unmarshalListNodesResponse = (data: unknown) => {
   } as ListNodesResponse
 }
 
-export const unmarshalListPoolsResponse = (data: unknown) => {
+export const unmarshalListPoolsResponse = (
+  data: unknown,
+): ListPoolsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListPoolsResponse' failed as data isn't a dictionary.`,
@@ -367,7 +381,9 @@ export const unmarshalListPoolsResponse = (data: unknown) => {
   } as ListPoolsResponse
 }
 
-export const unmarshalListVersionsResponse = (data: unknown) => {
+export const unmarshalListVersionsResponse = (
+  data: unknown,
+): ListVersionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListVersionsResponse' failed as data isn't a dictionary.`,

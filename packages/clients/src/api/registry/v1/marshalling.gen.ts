@@ -7,7 +7,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateNamespaceRequest,
@@ -21,7 +20,7 @@ import type {
   UpdateNamespaceRequest,
 } from './types.gen'
 
-export const unmarshalImage = (data: unknown) => {
+export const unmarshalImage = (data: unknown): Image => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Image' failed as data isn't a dictionary.`,
@@ -42,7 +41,7 @@ export const unmarshalImage = (data: unknown) => {
   } as Image
 }
 
-export const unmarshalNamespace = (data: unknown) => {
+export const unmarshalNamespace = (data: unknown): Namespace => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Namespace' failed as data isn't a dictionary.`,
@@ -67,7 +66,7 @@ export const unmarshalNamespace = (data: unknown) => {
   } as Namespace
 }
 
-export const unmarshalTag = (data: unknown) => {
+export const unmarshalTag = (data: unknown): Tag => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Tag' failed as data isn't a dictionary.`,
@@ -85,7 +84,9 @@ export const unmarshalTag = (data: unknown) => {
   } as Tag
 }
 
-export const unmarshalListImagesResponse = (data: unknown) => {
+export const unmarshalListImagesResponse = (
+  data: unknown,
+): ListImagesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListImagesResponse' failed as data isn't a dictionary.`,
@@ -98,7 +99,9 @@ export const unmarshalListImagesResponse = (data: unknown) => {
   } as ListImagesResponse
 }
 
-export const unmarshalListNamespacesResponse = (data: unknown) => {
+export const unmarshalListNamespacesResponse = (
+  data: unknown,
+): ListNamespacesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListNamespacesResponse' failed as data isn't a dictionary.`,
@@ -111,7 +114,7 @@ export const unmarshalListNamespacesResponse = (data: unknown) => {
   } as ListNamespacesResponse
 }
 
-export const unmarshalListTagsResponse = (data: unknown) => {
+export const unmarshalListTagsResponse = (data: unknown): ListTagsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListTagsResponse' failed as data isn't a dictionary.`,

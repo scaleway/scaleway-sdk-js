@@ -6,7 +6,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateHumanRequest,
@@ -17,7 +16,7 @@ import type {
   UpdateHumanRequest,
 } from './types.gen'
 
-export const unmarshalHuman = (data: unknown) => {
+export const unmarshalHuman = (data: unknown): Human => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Human' failed as data isn't a dictionary.`,
@@ -43,7 +42,9 @@ export const unmarshalHuman = (data: unknown) => {
   } as Human
 }
 
-export const unmarshalListHumansResponse = (data: unknown) => {
+export const unmarshalListHumansResponse = (
+  data: unknown,
+): ListHumansResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListHumansResponse' failed as data isn't a dictionary.`,
@@ -56,7 +57,7 @@ export const unmarshalListHumansResponse = (data: unknown) => {
   } as ListHumansResponse
 }
 
-export const unmarshalRegisterResponse = (data: unknown) => {
+export const unmarshalRegisterResponse = (data: unknown): RegisterResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'RegisterResponse' failed as data isn't a dictionary.`,

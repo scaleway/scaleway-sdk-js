@@ -5,7 +5,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   AccessSecretVersionResponse,
@@ -26,7 +25,7 @@ import type {
   UpdateSecretVersionRequest,
 } from './types.gen'
 
-export const unmarshalFolder = (data: unknown) => {
+export const unmarshalFolder = (data: unknown): Folder => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Folder' failed as data isn't a dictionary.`,
@@ -42,7 +41,7 @@ export const unmarshalFolder = (data: unknown) => {
   } as Folder
 }
 
-export const unmarshalSecretVersion = (data: unknown) => {
+export const unmarshalSecretVersion = (data: unknown): SecretVersion => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SecretVersion' failed as data isn't a dictionary.`,
@@ -60,7 +59,7 @@ export const unmarshalSecretVersion = (data: unknown) => {
   } as SecretVersion
 }
 
-export const unmarshalSecret = (data: unknown) => {
+export const unmarshalSecret = (data: unknown): Secret => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Secret' failed as data isn't a dictionary.`,
@@ -85,7 +84,9 @@ export const unmarshalSecret = (data: unknown) => {
   } as Secret
 }
 
-export const unmarshalAccessSecretVersionResponse = (data: unknown) => {
+export const unmarshalAccessSecretVersionResponse = (
+  data: unknown,
+): AccessSecretVersionResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'AccessSecretVersionResponse' failed as data isn't a dictionary.`,
@@ -100,7 +101,9 @@ export const unmarshalAccessSecretVersionResponse = (data: unknown) => {
   } as AccessSecretVersionResponse
 }
 
-export const unmarshalListFoldersResponse = (data: unknown) => {
+export const unmarshalListFoldersResponse = (
+  data: unknown,
+): ListFoldersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListFoldersResponse' failed as data isn't a dictionary.`,
@@ -113,7 +116,9 @@ export const unmarshalListFoldersResponse = (data: unknown) => {
   } as ListFoldersResponse
 }
 
-export const unmarshalListSecretVersionsResponse = (data: unknown) => {
+export const unmarshalListSecretVersionsResponse = (
+  data: unknown,
+): ListSecretVersionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSecretVersionsResponse' failed as data isn't a dictionary.`,
@@ -126,7 +131,9 @@ export const unmarshalListSecretVersionsResponse = (data: unknown) => {
   } as ListSecretVersionsResponse
 }
 
-export const unmarshalListSecretsResponse = (data: unknown) => {
+export const unmarshalListSecretsResponse = (
+  data: unknown,
+): ListSecretsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSecretsResponse' failed as data isn't a dictionary.`,
@@ -139,7 +146,7 @@ export const unmarshalListSecretsResponse = (data: unknown) => {
   } as ListSecretsResponse
 }
 
-export const unmarshalListTagsResponse = (data: unknown) => {
+export const unmarshalListTagsResponse = (data: unknown): ListTagsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListTagsResponse' failed as data isn't a dictionary.`,

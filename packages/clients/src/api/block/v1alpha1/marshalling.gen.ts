@@ -7,7 +7,6 @@ import {
   unmarshalDate,
   unmarshalMoney,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateSnapshotRequest,
@@ -29,7 +28,7 @@ import type {
   VolumeType,
 } from './types.gen'
 
-export const unmarshalReference = (data: unknown) => {
+export const unmarshalReference = (data: unknown): Reference => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Reference' failed as data isn't a dictionary.`,
@@ -46,7 +45,7 @@ export const unmarshalReference = (data: unknown) => {
   } as Reference
 }
 
-const unmarshalVolumeSpecifications = (data: unknown) => {
+const unmarshalVolumeSpecifications = (data: unknown): VolumeSpecifications => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'VolumeSpecifications' failed as data isn't a dictionary.`,
@@ -59,7 +58,7 @@ const unmarshalVolumeSpecifications = (data: unknown) => {
   } as VolumeSpecifications
 }
 
-export const unmarshalVolume = (data: unknown) => {
+export const unmarshalVolume = (data: unknown): Volume => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Volume' failed as data isn't a dictionary.`,
@@ -83,7 +82,7 @@ export const unmarshalVolume = (data: unknown) => {
   } as Volume
 }
 
-const unmarshalSnapshotParentVolume = (data: unknown) => {
+const unmarshalSnapshotParentVolume = (data: unknown): SnapshotParentVolume => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SnapshotParentVolume' failed as data isn't a dictionary.`,
@@ -98,7 +97,7 @@ const unmarshalSnapshotParentVolume = (data: unknown) => {
   } as SnapshotParentVolume
 }
 
-const unmarshalSnapshotSummary = (data: unknown) => {
+const unmarshalSnapshotSummary = (data: unknown): SnapshotSummary => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SnapshotSummary' failed as data isn't a dictionary.`,
@@ -120,7 +119,9 @@ const unmarshalSnapshotSummary = (data: unknown) => {
   } as SnapshotSummary
 }
 
-export const unmarshalListSnapshotsResponse = (data: unknown) => {
+export const unmarshalListSnapshotsResponse = (
+  data: unknown,
+): ListSnapshotsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSnapshotsResponse' failed as data isn't a dictionary.`,
@@ -133,7 +134,7 @@ export const unmarshalListSnapshotsResponse = (data: unknown) => {
   } as ListSnapshotsResponse
 }
 
-const unmarshalVolumeType = (data: unknown) => {
+const unmarshalVolumeType = (data: unknown): VolumeType => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'VolumeType' failed as data isn't a dictionary.`,
@@ -150,7 +151,9 @@ const unmarshalVolumeType = (data: unknown) => {
   } as VolumeType
 }
 
-export const unmarshalListVolumeTypesResponse = (data: unknown) => {
+export const unmarshalListVolumeTypesResponse = (
+  data: unknown,
+): ListVolumeTypesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListVolumeTypesResponse' failed as data isn't a dictionary.`,
@@ -163,7 +166,9 @@ export const unmarshalListVolumeTypesResponse = (data: unknown) => {
   } as ListVolumeTypesResponse
 }
 
-export const unmarshalListVolumesResponse = (data: unknown) => {
+export const unmarshalListVolumesResponse = (
+  data: unknown,
+): ListVolumesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListVolumesResponse' failed as data isn't a dictionary.`,
@@ -176,7 +181,7 @@ export const unmarshalListVolumesResponse = (data: unknown) => {
   } as ListVolumesResponse
 }
 
-export const unmarshalSnapshot = (data: unknown) => {
+export const unmarshalSnapshot = (data: unknown): Snapshot => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Snapshot' failed as data isn't a dictionary.`,

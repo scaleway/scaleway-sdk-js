@@ -6,7 +6,6 @@ import {
   unmarshalDate,
   unmarshalMoney,
 } from '../../../bridge'
-
 import type {
   GetConsumptionResponse,
   GetConsumptionResponseConsumption,
@@ -14,7 +13,9 @@ import type {
   ListInvoicesResponse,
 } from './types.gen'
 
-const unmarshalGetConsumptionResponseConsumption = (data: unknown) => {
+const unmarshalGetConsumptionResponseConsumption = (
+  data: unknown,
+): GetConsumptionResponseConsumption => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetConsumptionResponseConsumption' failed as data isn't a dictionary.`,
@@ -30,7 +31,9 @@ const unmarshalGetConsumptionResponseConsumption = (data: unknown) => {
   } as GetConsumptionResponseConsumption
 }
 
-export const unmarshalGetConsumptionResponse = (data: unknown) => {
+export const unmarshalGetConsumptionResponse = (
+  data: unknown,
+): GetConsumptionResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetConsumptionResponse' failed as data isn't a dictionary.`,
@@ -46,7 +49,7 @@ export const unmarshalGetConsumptionResponse = (data: unknown) => {
   } as GetConsumptionResponse
 }
 
-const unmarshalInvoice = (data: unknown) => {
+const unmarshalInvoice = (data: unknown): Invoice => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Invoice' failed as data isn't a dictionary.`,
@@ -67,7 +70,9 @@ const unmarshalInvoice = (data: unknown) => {
   } as Invoice
 }
 
-export const unmarshalListInvoicesResponse = (data: unknown) => {
+export const unmarshalListInvoicesResponse = (
+  data: unknown,
+): ListInvoicesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListInvoicesResponse' failed as data isn't a dictionary.`,

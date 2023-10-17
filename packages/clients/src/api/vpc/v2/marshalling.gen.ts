@@ -7,7 +7,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   AddSubnetsRequest,
@@ -28,7 +27,7 @@ import type {
   VPC,
 } from './types.gen'
 
-const unmarshalSubnet = (data: unknown) => {
+const unmarshalSubnet = (data: unknown): Subnet => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Subnet' failed as data isn't a dictionary.`,
@@ -43,7 +42,7 @@ const unmarshalSubnet = (data: unknown) => {
   } as Subnet
 }
 
-export const unmarshalPrivateNetwork = (data: unknown) => {
+export const unmarshalPrivateNetwork = (data: unknown): PrivateNetwork => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PrivateNetwork' failed as data isn't a dictionary.`,
@@ -65,7 +64,7 @@ export const unmarshalPrivateNetwork = (data: unknown) => {
   } as PrivateNetwork
 }
 
-export const unmarshalVPC = (data: unknown) => {
+export const unmarshalVPC = (data: unknown): VPC => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'VPC' failed as data isn't a dictionary.`,
@@ -86,7 +85,9 @@ export const unmarshalVPC = (data: unknown) => {
   } as VPC
 }
 
-export const unmarshalAddSubnetsResponse = (data: unknown) => {
+export const unmarshalAddSubnetsResponse = (
+  data: unknown,
+): AddSubnetsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'AddSubnetsResponse' failed as data isn't a dictionary.`,
@@ -98,7 +99,9 @@ export const unmarshalAddSubnetsResponse = (data: unknown) => {
   } as AddSubnetsResponse
 }
 
-export const unmarshalDeleteSubnetsResponse = (data: unknown) => {
+export const unmarshalDeleteSubnetsResponse = (
+  data: unknown,
+): DeleteSubnetsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'DeleteSubnetsResponse' failed as data isn't a dictionary.`,
@@ -110,7 +113,9 @@ export const unmarshalDeleteSubnetsResponse = (data: unknown) => {
   } as DeleteSubnetsResponse
 }
 
-export const unmarshalListPrivateNetworksResponse = (data: unknown) => {
+export const unmarshalListPrivateNetworksResponse = (
+  data: unknown,
+): ListPrivateNetworksResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListPrivateNetworksResponse' failed as data isn't a dictionary.`,
@@ -126,7 +131,7 @@ export const unmarshalListPrivateNetworksResponse = (data: unknown) => {
   } as ListPrivateNetworksResponse
 }
 
-export const unmarshalListVPCsResponse = (data: unknown) => {
+export const unmarshalListVPCsResponse = (data: unknown): ListVPCsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListVPCsResponse' failed as data isn't a dictionary.`,
@@ -139,7 +144,9 @@ export const unmarshalListVPCsResponse = (data: unknown) => {
   } as ListVPCsResponse
 }
 
-export const unmarshalSetSubnetsResponse = (data: unknown) => {
+export const unmarshalSetSubnetsResponse = (
+  data: unknown,
+): SetSubnetsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SetSubnetsResponse' failed as data isn't a dictionary.`,

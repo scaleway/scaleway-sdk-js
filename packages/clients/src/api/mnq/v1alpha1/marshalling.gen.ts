@@ -6,7 +6,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateCredentialRequest,
@@ -24,7 +23,7 @@ import type {
   UpdateNamespaceRequest,
 } from './types.gen'
 
-export const unmarshalNamespace = (data: unknown) => {
+export const unmarshalNamespace = (data: unknown): Namespace => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Namespace' failed as data isn't a dictionary.`,
@@ -43,7 +42,7 @@ export const unmarshalNamespace = (data: unknown) => {
   } as Namespace
 }
 
-const unmarshalPermissions = (data: unknown) => {
+const unmarshalPermissions = (data: unknown): Permissions => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Permissions' failed as data isn't a dictionary.`,
@@ -57,7 +56,9 @@ const unmarshalPermissions = (data: unknown) => {
   } as Permissions
 }
 
-const unmarshalCredentialNATSCredsFile = (data: unknown) => {
+const unmarshalCredentialNATSCredsFile = (
+  data: unknown,
+): CredentialNATSCredsFile => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CredentialNATSCredsFile' failed as data isn't a dictionary.`,
@@ -69,7 +70,9 @@ const unmarshalCredentialNATSCredsFile = (data: unknown) => {
   } as CredentialNATSCredsFile
 }
 
-const unmarshalCredentialSQSSNSCreds = (data: unknown) => {
+const unmarshalCredentialSQSSNSCreds = (
+  data: unknown,
+): CredentialSQSSNSCreds => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CredentialSQSSNSCreds' failed as data isn't a dictionary.`,
@@ -83,7 +86,7 @@ const unmarshalCredentialSQSSNSCreds = (data: unknown) => {
   } as CredentialSQSSNSCreds
 }
 
-export const unmarshalCredential = (data: unknown) => {
+export const unmarshalCredential = (data: unknown): Credential => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Credential' failed as data isn't a dictionary.`,
@@ -104,7 +107,9 @@ export const unmarshalCredential = (data: unknown) => {
   } as Credential
 }
 
-const unmarshalCredentialSummarySQSSNSCreds = (data: unknown) => {
+const unmarshalCredentialSummarySQSSNSCreds = (
+  data: unknown,
+): CredentialSummarySQSSNSCreds => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CredentialSummarySQSSNSCreds' failed as data isn't a dictionary.`,
@@ -117,7 +122,7 @@ const unmarshalCredentialSummarySQSSNSCreds = (data: unknown) => {
   } as CredentialSummarySQSSNSCreds
 }
 
-const unmarshalCredentialSummary = (data: unknown) => {
+const unmarshalCredentialSummary = (data: unknown): CredentialSummary => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CredentialSummary' failed as data isn't a dictionary.`,
@@ -135,7 +140,9 @@ const unmarshalCredentialSummary = (data: unknown) => {
   } as CredentialSummary
 }
 
-export const unmarshalListCredentialsResponse = (data: unknown) => {
+export const unmarshalListCredentialsResponse = (
+  data: unknown,
+): ListCredentialsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListCredentialsResponse' failed as data isn't a dictionary.`,
@@ -151,7 +158,9 @@ export const unmarshalListCredentialsResponse = (data: unknown) => {
   } as ListCredentialsResponse
 }
 
-export const unmarshalListNamespacesResponse = (data: unknown) => {
+export const unmarshalListNamespacesResponse = (
+  data: unknown,
+): ListNamespacesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListNamespacesResponse' failed as data isn't a dictionary.`,

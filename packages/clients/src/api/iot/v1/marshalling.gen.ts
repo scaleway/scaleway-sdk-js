@@ -8,7 +8,6 @@ import {
   unmarshalDate,
   unmarshalTimeSeries,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   Certificate,
@@ -57,7 +56,9 @@ import type {
   UpdateRouteRequestS3Config,
 } from './types.gen'
 
-const unmarshalDeviceMessageFiltersRule = (data: unknown) => {
+const unmarshalDeviceMessageFiltersRule = (
+  data: unknown,
+): DeviceMessageFiltersRule => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'DeviceMessageFiltersRule' failed as data isn't a dictionary.`,
@@ -70,7 +71,7 @@ const unmarshalDeviceMessageFiltersRule = (data: unknown) => {
   } as DeviceMessageFiltersRule
 }
 
-const unmarshalDeviceMessageFilters = (data: unknown) => {
+const unmarshalDeviceMessageFilters = (data: unknown): DeviceMessageFilters => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'DeviceMessageFilters' failed as data isn't a dictionary.`,
@@ -83,7 +84,7 @@ const unmarshalDeviceMessageFilters = (data: unknown) => {
   } as DeviceMessageFilters
 }
 
-export const unmarshalDevice = (data: unknown) => {
+export const unmarshalDevice = (data: unknown): Device => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Device' failed as data isn't a dictionary.`,
@@ -107,7 +108,7 @@ export const unmarshalDevice = (data: unknown) => {
   } as Device
 }
 
-export const unmarshalNetwork = (data: unknown) => {
+export const unmarshalNetwork = (data: unknown): Network => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Network' failed as data isn't a dictionary.`,
@@ -125,7 +126,9 @@ export const unmarshalNetwork = (data: unknown) => {
   } as Network
 }
 
-const unmarshalHubTwinsGraphiteConfig = (data: unknown) => {
+const unmarshalHubTwinsGraphiteConfig = (
+  data: unknown,
+): HubTwinsGraphiteConfig => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'HubTwinsGraphiteConfig' failed as data isn't a dictionary.`,
@@ -137,7 +140,7 @@ const unmarshalHubTwinsGraphiteConfig = (data: unknown) => {
   } as HubTwinsGraphiteConfig
 }
 
-export const unmarshalHub = (data: unknown) => {
+export const unmarshalHub = (data: unknown): Hub => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Hub' failed as data isn't a dictionary.`,
@@ -168,7 +171,7 @@ export const unmarshalHub = (data: unknown) => {
   } as Hub
 }
 
-const unmarshalCertificate = (data: unknown) => {
+const unmarshalCertificate = (data: unknown): Certificate => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Certificate' failed as data isn't a dictionary.`,
@@ -181,7 +184,9 @@ const unmarshalCertificate = (data: unknown) => {
   } as Certificate
 }
 
-export const unmarshalCreateDeviceResponse = (data: unknown) => {
+export const unmarshalCreateDeviceResponse = (
+  data: unknown,
+): CreateDeviceResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CreateDeviceResponse' failed as data isn't a dictionary.`,
@@ -194,7 +199,9 @@ export const unmarshalCreateDeviceResponse = (data: unknown) => {
   } as CreateDeviceResponse
 }
 
-export const unmarshalCreateNetworkResponse = (data: unknown) => {
+export const unmarshalCreateNetworkResponse = (
+  data: unknown,
+): CreateNetworkResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CreateNetworkResponse' failed as data isn't a dictionary.`,
@@ -207,7 +214,9 @@ export const unmarshalCreateNetworkResponse = (data: unknown) => {
   } as CreateNetworkResponse
 }
 
-export const unmarshalGetDeviceCertificateResponse = (data: unknown) => {
+export const unmarshalGetDeviceCertificateResponse = (
+  data: unknown,
+): GetDeviceCertificateResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetDeviceCertificateResponse' failed as data isn't a dictionary.`,
@@ -220,7 +229,9 @@ export const unmarshalGetDeviceCertificateResponse = (data: unknown) => {
   } as GetDeviceCertificateResponse
 }
 
-export const unmarshalGetDeviceMetricsResponse = (data: unknown) => {
+export const unmarshalGetDeviceMetricsResponse = (
+  data: unknown,
+): GetDeviceMetricsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetDeviceMetricsResponse' failed as data isn't a dictionary.`,
@@ -232,7 +243,7 @@ export const unmarshalGetDeviceMetricsResponse = (data: unknown) => {
   } as GetDeviceMetricsResponse
 }
 
-export const unmarshalGetHubCAResponse = (data: unknown) => {
+export const unmarshalGetHubCAResponse = (data: unknown): GetHubCAResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetHubCAResponse' failed as data isn't a dictionary.`,
@@ -244,7 +255,9 @@ export const unmarshalGetHubCAResponse = (data: unknown) => {
   } as GetHubCAResponse
 }
 
-export const unmarshalGetHubMetricsResponse = (data: unknown) => {
+export const unmarshalGetHubMetricsResponse = (
+  data: unknown,
+): GetHubMetricsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetHubMetricsResponse' failed as data isn't a dictionary.`,
@@ -256,7 +269,9 @@ export const unmarshalGetHubMetricsResponse = (data: unknown) => {
   } as GetHubMetricsResponse
 }
 
-export const unmarshalListDevicesResponse = (data: unknown) => {
+export const unmarshalListDevicesResponse = (
+  data: unknown,
+): ListDevicesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListDevicesResponse' failed as data isn't a dictionary.`,
@@ -269,7 +284,7 @@ export const unmarshalListDevicesResponse = (data: unknown) => {
   } as ListDevicesResponse
 }
 
-export const unmarshalListHubsResponse = (data: unknown) => {
+export const unmarshalListHubsResponse = (data: unknown): ListHubsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListHubsResponse' failed as data isn't a dictionary.`,
@@ -282,7 +297,9 @@ export const unmarshalListHubsResponse = (data: unknown) => {
   } as ListHubsResponse
 }
 
-export const unmarshalListNetworksResponse = (data: unknown) => {
+export const unmarshalListNetworksResponse = (
+  data: unknown,
+): ListNetworksResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListNetworksResponse' failed as data isn't a dictionary.`,
@@ -295,7 +312,7 @@ export const unmarshalListNetworksResponse = (data: unknown) => {
   } as ListNetworksResponse
 }
 
-const unmarshalRouteSummary = (data: unknown) => {
+const unmarshalRouteSummary = (data: unknown): RouteSummary => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'RouteSummary' failed as data isn't a dictionary.`,
@@ -313,7 +330,9 @@ const unmarshalRouteSummary = (data: unknown) => {
   } as RouteSummary
 }
 
-export const unmarshalListRoutesResponse = (data: unknown) => {
+export const unmarshalListRoutesResponse = (
+  data: unknown,
+): ListRoutesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListRoutesResponse' failed as data isn't a dictionary.`,
@@ -326,7 +345,9 @@ export const unmarshalListRoutesResponse = (data: unknown) => {
   } as ListRoutesResponse
 }
 
-const unmarshalListTwinDocumentsResponseDocumentSummary = (data: unknown) => {
+const unmarshalListTwinDocumentsResponseDocumentSummary = (
+  data: unknown,
+): ListTwinDocumentsResponseDocumentSummary => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListTwinDocumentsResponseDocumentSummary' failed as data isn't a dictionary.`,
@@ -338,7 +359,9 @@ const unmarshalListTwinDocumentsResponseDocumentSummary = (data: unknown) => {
   } as ListTwinDocumentsResponseDocumentSummary
 }
 
-export const unmarshalListTwinDocumentsResponse = (data: unknown) => {
+export const unmarshalListTwinDocumentsResponse = (
+  data: unknown,
+): ListTwinDocumentsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListTwinDocumentsResponse' failed as data isn't a dictionary.`,
@@ -353,7 +376,9 @@ export const unmarshalListTwinDocumentsResponse = (data: unknown) => {
   } as ListTwinDocumentsResponse
 }
 
-export const unmarshalRenewDeviceCertificateResponse = (data: unknown) => {
+export const unmarshalRenewDeviceCertificateResponse = (
+  data: unknown,
+): RenewDeviceCertificateResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'RenewDeviceCertificateResponse' failed as data isn't a dictionary.`,
@@ -366,7 +391,7 @@ export const unmarshalRenewDeviceCertificateResponse = (data: unknown) => {
   } as RenewDeviceCertificateResponse
 }
 
-const unmarshalRouteDatabaseConfig = (data: unknown) => {
+const unmarshalRouteDatabaseConfig = (data: unknown): RouteDatabaseConfig => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'RouteDatabaseConfig' failed as data isn't a dictionary.`,
@@ -384,7 +409,7 @@ const unmarshalRouteDatabaseConfig = (data: unknown) => {
   } as RouteDatabaseConfig
 }
 
-const unmarshalRouteRestConfig = (data: unknown) => {
+const unmarshalRouteRestConfig = (data: unknown): RouteRestConfig => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'RouteRestConfig' failed as data isn't a dictionary.`,
@@ -398,7 +423,7 @@ const unmarshalRouteRestConfig = (data: unknown) => {
   } as RouteRestConfig
 }
 
-const unmarshalRouteS3Config = (data: unknown) => {
+const unmarshalRouteS3Config = (data: unknown): RouteS3Config => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'RouteS3Config' failed as data isn't a dictionary.`,
@@ -413,7 +438,7 @@ const unmarshalRouteS3Config = (data: unknown) => {
   } as RouteS3Config
 }
 
-export const unmarshalRoute = (data: unknown) => {
+export const unmarshalRoute = (data: unknown): Route => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Route' failed as data isn't a dictionary.`,
@@ -440,7 +465,9 @@ export const unmarshalRoute = (data: unknown) => {
   } as Route
 }
 
-export const unmarshalSetDeviceCertificateResponse = (data: unknown) => {
+export const unmarshalSetDeviceCertificateResponse = (
+  data: unknown,
+): SetDeviceCertificateResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SetDeviceCertificateResponse' failed as data isn't a dictionary.`,
@@ -453,7 +480,7 @@ export const unmarshalSetDeviceCertificateResponse = (data: unknown) => {
   } as SetDeviceCertificateResponse
 }
 
-export const unmarshalTwinDocument = (data: unknown) => {
+export const unmarshalTwinDocument = (data: unknown): TwinDocument => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'TwinDocument' failed as data isn't a dictionary.`,

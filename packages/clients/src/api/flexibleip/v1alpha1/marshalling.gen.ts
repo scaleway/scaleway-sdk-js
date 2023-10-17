@@ -5,7 +5,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   AttachFlexibleIPRequest,
@@ -22,7 +21,7 @@ import type {
   UpdateFlexibleIPRequest,
 } from './types.gen'
 
-const unmarshalMACAddress = (data: unknown) => {
+const unmarshalMACAddress = (data: unknown): MACAddress => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'MACAddress' failed as data isn't a dictionary.`,
@@ -40,7 +39,7 @@ const unmarshalMACAddress = (data: unknown) => {
   } as MACAddress
 }
 
-export const unmarshalFlexibleIP = (data: unknown) => {
+export const unmarshalFlexibleIP = (data: unknown): FlexibleIP => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'FlexibleIP' failed as data isn't a dictionary.`,
@@ -64,7 +63,9 @@ export const unmarshalFlexibleIP = (data: unknown) => {
   } as FlexibleIP
 }
 
-export const unmarshalAttachFlexibleIPsResponse = (data: unknown) => {
+export const unmarshalAttachFlexibleIPsResponse = (
+  data: unknown,
+): AttachFlexibleIPsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'AttachFlexibleIPsResponse' failed as data isn't a dictionary.`,
@@ -77,7 +78,9 @@ export const unmarshalAttachFlexibleIPsResponse = (data: unknown) => {
   } as AttachFlexibleIPsResponse
 }
 
-export const unmarshalDetachFlexibleIPsResponse = (data: unknown) => {
+export const unmarshalDetachFlexibleIPsResponse = (
+  data: unknown,
+): DetachFlexibleIPsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'DetachFlexibleIPsResponse' failed as data isn't a dictionary.`,
@@ -90,7 +93,9 @@ export const unmarshalDetachFlexibleIPsResponse = (data: unknown) => {
   } as DetachFlexibleIPsResponse
 }
 
-export const unmarshalListFlexibleIPsResponse = (data: unknown) => {
+export const unmarshalListFlexibleIPsResponse = (
+  data: unknown,
+): ListFlexibleIPsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListFlexibleIPsResponse' failed as data isn't a dictionary.`,

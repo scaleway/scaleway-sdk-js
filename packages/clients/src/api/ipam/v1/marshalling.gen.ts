@@ -6,7 +6,6 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   BookIPRequest,
@@ -17,7 +16,7 @@ import type {
   UpdateIPRequest,
 } from './types.gen'
 
-const unmarshalResource = (data: unknown) => {
+const unmarshalResource = (data: unknown): Resource => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Resource' failed as data isn't a dictionary.`,
@@ -32,7 +31,7 @@ const unmarshalResource = (data: unknown) => {
   } as Resource
 }
 
-const unmarshalSource = (data: unknown) => {
+const unmarshalSource = (data: unknown): Source => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Source' failed as data isn't a dictionary.`,
@@ -46,7 +45,7 @@ const unmarshalSource = (data: unknown) => {
   } as Source
 }
 
-export const unmarshalIP = (data: unknown) => {
+export const unmarshalIP = (data: unknown): IP => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'IP' failed as data isn't a dictionary.`,
@@ -68,7 +67,7 @@ export const unmarshalIP = (data: unknown) => {
   } as IP
 }
 
-export const unmarshalListIPsResponse = (data: unknown) => {
+export const unmarshalListIPsResponse = (data: unknown): ListIPsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListIPsResponse' failed as data isn't a dictionary.`,

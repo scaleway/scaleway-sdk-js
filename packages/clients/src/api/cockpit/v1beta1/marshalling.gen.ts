@@ -8,7 +8,6 @@ import {
   unmarshalDate,
   unmarshalTimeSeries,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   ActivateCockpitRequest,
@@ -45,7 +44,7 @@ import type {
   TriggerTestAlertRequest,
 } from './types.gen'
 
-const unmarshalContactPointEmail = (data: unknown) => {
+const unmarshalContactPointEmail = (data: unknown): ContactPointEmail => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ContactPointEmail' failed as data isn't a dictionary.`,
@@ -57,7 +56,7 @@ const unmarshalContactPointEmail = (data: unknown) => {
   } as ContactPointEmail
 }
 
-export const unmarshalContactPoint = (data: unknown) => {
+export const unmarshalContactPoint = (data: unknown): ContactPoint => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ContactPoint' failed as data isn't a dictionary.`,
@@ -69,7 +68,7 @@ export const unmarshalContactPoint = (data: unknown) => {
   } as ContactPoint
 }
 
-export const unmarshalDatasource = (data: unknown) => {
+export const unmarshalDatasource = (data: unknown): Datasource => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Datasource' failed as data isn't a dictionary.`,
@@ -85,7 +84,9 @@ export const unmarshalDatasource = (data: unknown) => {
   } as Datasource
 }
 
-export const unmarshalGrafanaProductDashboard = (data: unknown) => {
+export const unmarshalGrafanaProductDashboard = (
+  data: unknown,
+): GrafanaProductDashboard => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GrafanaProductDashboard' failed as data isn't a dictionary.`,
@@ -101,7 +102,7 @@ export const unmarshalGrafanaProductDashboard = (data: unknown) => {
   } as GrafanaProductDashboard
 }
 
-export const unmarshalGrafanaUser = (data: unknown) => {
+export const unmarshalGrafanaUser = (data: unknown): GrafanaUser => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GrafanaUser' failed as data isn't a dictionary.`,
@@ -116,7 +117,7 @@ export const unmarshalGrafanaUser = (data: unknown) => {
   } as GrafanaUser
 }
 
-const unmarshalTokenScopes = (data: unknown) => {
+const unmarshalTokenScopes = (data: unknown): TokenScopes => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'TokenScopes' failed as data isn't a dictionary.`,
@@ -136,7 +137,7 @@ const unmarshalTokenScopes = (data: unknown) => {
   } as TokenScopes
 }
 
-export const unmarshalToken = (data: unknown) => {
+export const unmarshalToken = (data: unknown): Token => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Token' failed as data isn't a dictionary.`,
@@ -154,7 +155,7 @@ export const unmarshalToken = (data: unknown) => {
   } as Token
 }
 
-const unmarshalCockpitEndpoints = (data: unknown) => {
+const unmarshalCockpitEndpoints = (data: unknown): CockpitEndpoints => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CockpitEndpoints' failed as data isn't a dictionary.`,
@@ -169,7 +170,7 @@ const unmarshalCockpitEndpoints = (data: unknown) => {
   } as CockpitEndpoints
 }
 
-const unmarshalPlan = (data: unknown) => {
+const unmarshalPlan = (data: unknown): Plan => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Plan' failed as data isn't a dictionary.`,
@@ -187,7 +188,7 @@ const unmarshalPlan = (data: unknown) => {
   } as Plan
 }
 
-export const unmarshalCockpit = (data: unknown) => {
+export const unmarshalCockpit = (data: unknown): Cockpit => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Cockpit' failed as data isn't a dictionary.`,
@@ -205,7 +206,7 @@ export const unmarshalCockpit = (data: unknown) => {
   } as Cockpit
 }
 
-export const unmarshalCockpitMetrics = (data: unknown) => {
+export const unmarshalCockpitMetrics = (data: unknown): CockpitMetrics => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CockpitMetrics' failed as data isn't a dictionary.`,
@@ -217,7 +218,9 @@ export const unmarshalCockpitMetrics = (data: unknown) => {
   } as CockpitMetrics
 }
 
-export const unmarshalListContactPointsResponse = (data: unknown) => {
+export const unmarshalListContactPointsResponse = (
+  data: unknown,
+): ListContactPointsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListContactPointsResponse' failed as data isn't a dictionary.`,
@@ -235,7 +238,9 @@ export const unmarshalListContactPointsResponse = (data: unknown) => {
   } as ListContactPointsResponse
 }
 
-export const unmarshalListDatasourcesResponse = (data: unknown) => {
+export const unmarshalListDatasourcesResponse = (
+  data: unknown,
+): ListDatasourcesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListDatasourcesResponse' failed as data isn't a dictionary.`,
@@ -250,7 +255,7 @@ export const unmarshalListDatasourcesResponse = (data: unknown) => {
 
 export const unmarshalListGrafanaProductDashboardsResponse = (
   data: unknown,
-) => {
+): ListGrafanaProductDashboardsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListGrafanaProductDashboardsResponse' failed as data isn't a dictionary.`,
@@ -266,7 +271,9 @@ export const unmarshalListGrafanaProductDashboardsResponse = (
   } as ListGrafanaProductDashboardsResponse
 }
 
-export const unmarshalListGrafanaUsersResponse = (data: unknown) => {
+export const unmarshalListGrafanaUsersResponse = (
+  data: unknown,
+): ListGrafanaUsersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListGrafanaUsersResponse' failed as data isn't a dictionary.`,
@@ -282,7 +289,9 @@ export const unmarshalListGrafanaUsersResponse = (data: unknown) => {
   } as ListGrafanaUsersResponse
 }
 
-export const unmarshalListPlansResponse = (data: unknown) => {
+export const unmarshalListPlansResponse = (
+  data: unknown,
+): ListPlansResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListPlansResponse' failed as data isn't a dictionary.`,
@@ -295,7 +304,9 @@ export const unmarshalListPlansResponse = (data: unknown) => {
   } as ListPlansResponse
 }
 
-export const unmarshalListTokensResponse = (data: unknown) => {
+export const unmarshalListTokensResponse = (
+  data: unknown,
+): ListTokensResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListTokensResponse' failed as data isn't a dictionary.`,
@@ -308,7 +319,9 @@ export const unmarshalListTokensResponse = (data: unknown) => {
   } as ListTokensResponse
 }
 
-export const unmarshalSelectPlanResponse = (data: unknown) => {
+export const unmarshalSelectPlanResponse = (
+  data: unknown,
+): SelectPlanResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SelectPlanResponse' failed as data isn't a dictionary.`,

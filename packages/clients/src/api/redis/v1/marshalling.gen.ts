@@ -8,7 +8,6 @@ import {
   unmarshalDate,
   unmarshalTimeSeries,
 } from '../../../bridge'
-
 import type { DefaultValues } from '../../../bridge'
 import type {
   ACLRule,
@@ -46,7 +45,7 @@ import type {
   UpdateEndpointRequest,
 } from './types.gen'
 
-export const unmarshalACLRule = (data: unknown) => {
+export const unmarshalACLRule = (data: unknown): ACLRule => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ACLRule' failed as data isn't a dictionary.`,
@@ -60,7 +59,7 @@ export const unmarshalACLRule = (data: unknown) => {
   } as ACLRule
 }
 
-const unmarshalPrivateNetwork = (data: unknown) => {
+const unmarshalPrivateNetwork = (data: unknown): PrivateNetwork => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PrivateNetwork' failed as data isn't a dictionary.`,
@@ -75,7 +74,7 @@ const unmarshalPrivateNetwork = (data: unknown) => {
   } as PrivateNetwork
 }
 
-const unmarshalPublicNetwork = (data: unknown) => {
+const unmarshalPublicNetwork = (data: unknown): PublicNetwork => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicNetwork' failed as data isn't a dictionary.`,
@@ -85,7 +84,7 @@ const unmarshalPublicNetwork = (data: unknown) => {
   return {} as PublicNetwork
 }
 
-export const unmarshalEndpoint = (data: unknown) => {
+export const unmarshalEndpoint = (data: unknown): Endpoint => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Endpoint' failed as data isn't a dictionary.`,
@@ -105,7 +104,7 @@ export const unmarshalEndpoint = (data: unknown) => {
   } as Endpoint
 }
 
-const unmarshalClusterSetting = (data: unknown) => {
+const unmarshalClusterSetting = (data: unknown): ClusterSetting => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ClusterSetting' failed as data isn't a dictionary.`,
@@ -118,7 +117,7 @@ const unmarshalClusterSetting = (data: unknown) => {
   } as ClusterSetting
 }
 
-export const unmarshalCluster = (data: unknown) => {
+export const unmarshalCluster = (data: unknown): Cluster => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Cluster' failed as data isn't a dictionary.`,
@@ -149,7 +148,9 @@ export const unmarshalCluster = (data: unknown) => {
   } as Cluster
 }
 
-export const unmarshalAddAclRulesResponse = (data: unknown) => {
+export const unmarshalAddAclRulesResponse = (
+  data: unknown,
+): AddAclRulesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'AddAclRulesResponse' failed as data isn't a dictionary.`,
@@ -162,7 +163,9 @@ export const unmarshalAddAclRulesResponse = (data: unknown) => {
   } as AddAclRulesResponse
 }
 
-export const unmarshalAddEndpointsResponse = (data: unknown) => {
+export const unmarshalAddEndpointsResponse = (
+  data: unknown,
+): AddEndpointsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'AddEndpointsResponse' failed as data isn't a dictionary.`,
@@ -175,7 +178,9 @@ export const unmarshalAddEndpointsResponse = (data: unknown) => {
   } as AddEndpointsResponse
 }
 
-export const unmarshalClusterMetricsResponse = (data: unknown) => {
+export const unmarshalClusterMetricsResponse = (
+  data: unknown,
+): ClusterMetricsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ClusterMetricsResponse' failed as data isn't a dictionary.`,
@@ -187,7 +192,9 @@ export const unmarshalClusterMetricsResponse = (data: unknown) => {
   } as ClusterMetricsResponse
 }
 
-export const unmarshalClusterSettingsResponse = (data: unknown) => {
+export const unmarshalClusterSettingsResponse = (
+  data: unknown,
+): ClusterSettingsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ClusterSettingsResponse' failed as data isn't a dictionary.`,
@@ -199,7 +206,9 @@ export const unmarshalClusterSettingsResponse = (data: unknown) => {
   } as ClusterSettingsResponse
 }
 
-const unmarshalAvailableClusterSetting = (data: unknown) => {
+const unmarshalAvailableClusterSetting = (
+  data: unknown,
+): AvailableClusterSetting => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'AvailableClusterSetting' failed as data isn't a dictionary.`,
@@ -218,7 +227,7 @@ const unmarshalAvailableClusterSetting = (data: unknown) => {
   } as AvailableClusterSetting
 }
 
-const unmarshalClusterVersion = (data: unknown) => {
+const unmarshalClusterVersion = (data: unknown): ClusterVersion => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ClusterVersion' failed as data isn't a dictionary.`,
@@ -237,7 +246,9 @@ const unmarshalClusterVersion = (data: unknown) => {
   } as ClusterVersion
 }
 
-export const unmarshalListClusterVersionsResponse = (data: unknown) => {
+export const unmarshalListClusterVersionsResponse = (
+  data: unknown,
+): ListClusterVersionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListClusterVersionsResponse' failed as data isn't a dictionary.`,
@@ -250,7 +261,9 @@ export const unmarshalListClusterVersionsResponse = (data: unknown) => {
   } as ListClusterVersionsResponse
 }
 
-export const unmarshalListClustersResponse = (data: unknown) => {
+export const unmarshalListClustersResponse = (
+  data: unknown,
+): ListClustersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListClustersResponse' failed as data isn't a dictionary.`,
@@ -263,7 +276,7 @@ export const unmarshalListClustersResponse = (data: unknown) => {
   } as ListClustersResponse
 }
 
-const unmarshalNodeType = (data: unknown) => {
+const unmarshalNodeType = (data: unknown): NodeType => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'NodeType' failed as data isn't a dictionary.`,
@@ -282,7 +295,9 @@ const unmarshalNodeType = (data: unknown) => {
   } as NodeType
 }
 
-export const unmarshalListNodeTypesResponse = (data: unknown) => {
+export const unmarshalListNodeTypesResponse = (
+  data: unknown,
+): ListNodeTypesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListNodeTypesResponse' failed as data isn't a dictionary.`,
@@ -295,7 +310,9 @@ export const unmarshalListNodeTypesResponse = (data: unknown) => {
   } as ListNodeTypesResponse
 }
 
-export const unmarshalSetAclRulesResponse = (data: unknown) => {
+export const unmarshalSetAclRulesResponse = (
+  data: unknown,
+): SetAclRulesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SetAclRulesResponse' failed as data isn't a dictionary.`,
@@ -307,7 +324,9 @@ export const unmarshalSetAclRulesResponse = (data: unknown) => {
   } as SetAclRulesResponse
 }
 
-export const unmarshalSetEndpointsResponse = (data: unknown) => {
+export const unmarshalSetEndpointsResponse = (
+  data: unknown,
+): SetEndpointsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SetEndpointsResponse' failed as data isn't a dictionary.`,
