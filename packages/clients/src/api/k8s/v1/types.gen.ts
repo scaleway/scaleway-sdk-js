@@ -685,10 +685,9 @@ export type CreateClusterRequest = {
    */
   region?: Region
   /**
-   * @deprecated Organization ID in which the cluster will be created.
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   *   could be set.
+   * @deprecated Organization ID in which the cluster will be created. One-of
+   *   ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
+   *   be set.
    */
   organizationId?: string
   /**

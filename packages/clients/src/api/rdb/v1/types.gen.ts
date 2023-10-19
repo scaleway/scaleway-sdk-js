@@ -732,10 +732,8 @@ export type CreateInstanceRequest = {
    */
   region?: Region
   /**
-   * @deprecated Please use project_id instead.
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   *   could be set.
+   * @deprecated Please use project_id instead. One-of ('projectIdentifier'): at
+   *   most one of 'organizationId', 'projectId' could be set.
    */
   organizationId?: string
   /**

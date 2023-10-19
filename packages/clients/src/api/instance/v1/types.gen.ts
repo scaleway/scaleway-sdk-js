@@ -371,10 +371,8 @@ export interface VolumeTemplate {
   /** Type of the volume. */
   volumeType: VolumeVolumeType
   /**
-   * @deprecated Organization ID of the volume.
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
-   *   could be set.
+   * @deprecated Organization ID of the volume. One-of ('projectIdentifier'): at
+   *   most one of 'organization', 'project' could be set.
    */
   organization?: string
   /**
@@ -748,10 +746,8 @@ export type CreateImageRequest = {
   /** Additional volumes of the image. */
   extraVolumes?: Record<string, VolumeTemplate>
   /**
-   * @deprecated Organization ID of the image.
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
-   *   could be set.
+   * @deprecated Organization ID of the image. One-of ('projectIdentifier'): at
+   *   most one of 'organization', 'project' could be set.
    */
   organization?: string
   /**
@@ -775,10 +771,9 @@ export type CreateIpRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
-   * @deprecated Organization ID in which the IP is reserved.
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
-   *   could be set.
+   * @deprecated Organization ID in which the IP is reserved. One-of
+   *   ('projectIdentifier'): at most one of 'organization', 'project' could be
+   *   set.
    */
   organization?: string
   /**
@@ -806,10 +801,9 @@ export type CreatePlacementGroupRequest = {
   /** Name of the placement group. */
   name?: string
   /**
-   * @deprecated Organization ID of the placement group.
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
-   *   could be set.
+   * @deprecated Organization ID of the placement group. One-of
+   *   ('projectIdentifier'): at most one of 'organization', 'project' could be
+   *   set.
    */
   organization?: string
   /**
@@ -856,10 +850,9 @@ export type CreateSecurityGroupRequest = {
   /** Description of the security group. */
   description: string
   /**
-   * @deprecated Organization ID the security group belongs to.
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
-   *   could be set.
+   * @deprecated Organization ID the security group belongs to. One-of
+   *   ('projectIdentifier'): at most one of 'organization', 'project' could be
+   *   set.
    */
   organization?: string
   /**
@@ -873,10 +866,8 @@ export type CreateSecurityGroupRequest = {
   tags?: string[]
   /**
    * @deprecated Defines whether this security group becomes the default
-   *   security group for new Instances.
-   *
-   *   One-of ('defaultIdentifier'): at most one of 'organizationDefault',
-   *   'projectDefault' could be set.
+   *   security group for new Instances. One-of ('defaultIdentifier'): at most
+   *   one of 'organizationDefault', 'projectDefault' could be set.
    */
   organizationDefault?: boolean
   /**
@@ -953,10 +944,8 @@ export type CreateServerRequest = {
   /** @deprecated Bootscript ID to use when `boot_type` is set to `bootscript`. */
   bootscript?: string
   /**
-   * @deprecated Instance Organization ID.
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
-   *   could be set.
+   * @deprecated Instance Organization ID. One-of ('projectIdentifier'): at most
+   *   one of 'organization', 'project' could be set.
    */
   organization?: string
   /**
@@ -988,10 +977,8 @@ export type CreateSnapshotRequest = {
   /** Tags of the snapshot. */
   tags?: string[]
   /**
-   * @deprecated Organization ID of the snapshot.
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
-   *   could be set.
+   * @deprecated Organization ID of the snapshot. One-of ('projectIdentifier'):
+   *   at most one of 'organization', 'project' could be set.
    */
   organization?: string
   /**
@@ -1025,10 +1012,8 @@ export type CreateVolumeRequest = {
   /** Volume name. */
   name?: string
   /**
-   * @deprecated Volume Organization ID.
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
-   *   could be set.
+   * @deprecated Volume Organization ID. One-of ('projectIdentifier'): at most
+   *   one of 'organization', 'project' could be set.
    */
   organization?: string
   /**

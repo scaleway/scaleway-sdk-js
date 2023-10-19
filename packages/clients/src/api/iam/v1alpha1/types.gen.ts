@@ -561,15 +561,13 @@ export type ListAPIKeysRequest = {
   /** ID of Organization. */
   organizationId?: string
   /**
-   * @deprecated ID of application that bears the API key.
-   *
-   *   One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
+   * @deprecated ID of application that bears the API key. One-of ('bearer'): at
+   *   most one of 'applicationId', 'userId' could be set.
    */
   applicationId?: string
   /**
-   * @deprecated ID of user that bears the API key.
-   *
-   *   One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
+   * @deprecated ID of user that bears the API key. One-of ('bearer'): at most
+   *   one of 'applicationId', 'userId' could be set.
    */
   userId?: string
   /** Defines whether to filter out editable API keys or not. */

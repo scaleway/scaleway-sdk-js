@@ -664,24 +664,19 @@ export interface PrivateNetwork {
   ipamIds: string[]
   /**
    * @deprecated Object containing an array of a local IP address for the Load
-   *   Balancer on this Private Network.
-   *
-   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   *   'ipamConfig' could be set.
+   *   Balancer on this Private Network. One-of ('config'): at most one of
+   *   'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
-   * @deprecated Object containing DHCP-assigned IP addresses.
-   *
-   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   *   'ipamConfig' could be set.
+   * @deprecated Object containing DHCP-assigned IP addresses. One-of
+   *   ('config'): at most one of 'staticConfig', 'dhcpConfig', 'ipamConfig'
+   *   could be set.
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
   /**
-   * @deprecated For internal use only.
-   *
-   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   *   'ipamConfig' could be set.
+   * @deprecated For internal use only. One-of ('config'): at most one of
+   *   'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
    */
   ipamConfig?: PrivateNetworkIpamConfig
   /** Private Network ID. */
@@ -770,24 +765,19 @@ export type AttachPrivateNetworkRequest = {
   privateNetworkId: string
   /**
    * @deprecated Object containing an array of a local IP address for the Load
-   *   Balancer on this Private Network.
-   *
-   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   *   'ipamConfig' could be set.
+   *   Balancer on this Private Network. One-of ('config'): at most one of
+   *   'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
-   * @deprecated Defines whether to let DHCP assign IP addresses.
-   *
-   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   *   'ipamConfig' could be set.
+   * @deprecated Defines whether to let DHCP assign IP addresses. One-of
+   *   ('config'): at most one of 'staticConfig', 'dhcpConfig', 'ipamConfig'
+   *   could be set.
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
   /**
-   * @deprecated For internal use only.
-   *
-   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   *   'ipamConfig' could be set.
+   * @deprecated For internal use only. One-of ('config'): at most one of
+   *   'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
    */
   ipamConfig?: PrivateNetworkIpamConfig
 }
@@ -963,10 +953,8 @@ export type CreateIpRequest = {
   region?: Region
   /**
    * @deprecated Organization ID of the Organization where the IP address should
-   *   be created.
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   *   could be set.
+   *   be created. One-of ('projectIdentifier'): at most one of
+   *   'organizationId', 'projectId' could be set.
    */
   organizationId?: string
   /**
@@ -987,10 +975,9 @@ export type CreateLbRequest = {
    */
   region?: Region
   /**
-   * @deprecated Scaleway Organization to create the Load Balancer in.
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   *   could be set.
+   * @deprecated Scaleway Organization to create the Load Balancer in. One-of
+   *   ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
+   *   be set.
    */
   organizationId?: string
   /**
@@ -1075,10 +1062,9 @@ export type CreateSubscriberRequest = {
    */
   webhookConfig?: SubscriberWebhookConfig
   /**
-   * @deprecated Organization ID to create the subscriber in.
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   *   could be set.
+   * @deprecated Organization ID to create the subscriber in. One-of
+   *   ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
+   *   be set.
    */
   organizationId?: string
   /**
@@ -1967,24 +1953,19 @@ export type ZonedApiAttachPrivateNetworkRequest = {
   privateNetworkId: string
   /**
    * @deprecated Object containing an array of a local IP address for the Load
-   *   Balancer on this Private Network.
-   *
-   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   *   'ipamConfig' could be set.
+   *   Balancer on this Private Network. One-of ('config'): at most one of
+   *   'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
    */
   staticConfig?: PrivateNetworkStaticConfig
   /**
-   * @deprecated Defines whether to let DHCP assign IP addresses.
-   *
-   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   *   'ipamConfig' could be set.
+   * @deprecated Defines whether to let DHCP assign IP addresses. One-of
+   *   ('config'): at most one of 'staticConfig', 'dhcpConfig', 'ipamConfig'
+   *   could be set.
    */
   dhcpConfig?: PrivateNetworkDHCPConfig
   /**
-   * @deprecated For internal use only.
-   *
-   *   One-of ('config'): at most one of 'staticConfig', 'dhcpConfig',
-   *   'ipamConfig' could be set.
+   * @deprecated For internal use only. One-of ('config'): at most one of
+   *   'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
    */
   ipamConfig?: PrivateNetworkIpamConfig
 }
@@ -2145,10 +2126,8 @@ export type ZonedApiCreateIpRequest = {
   zone?: Zone
   /**
    * @deprecated Organization ID of the Organization where the IP address should
-   *   be created.
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   *   could be set.
+   *   be created. One-of ('projectIdentifier'): at most one of
+   *   'organizationId', 'projectId' could be set.
    */
   organizationId?: string
   /**
@@ -2166,10 +2145,9 @@ export type ZonedApiCreateLbRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /**
-   * @deprecated Scaleway Organization to create the Load Balancer in.
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   *   could be set.
+   * @deprecated Scaleway Organization to create the Load Balancer in. One-of
+   *   ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
+   *   be set.
    */
   organizationId?: string
   /**
@@ -2248,10 +2226,9 @@ export type ZonedApiCreateSubscriberRequest = {
    */
   webhookConfig?: SubscriberWebhookConfig
   /**
-   * @deprecated Organization ID to create the subscriber in.
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   *   could be set.
+   * @deprecated Organization ID to create the subscriber in. One-of
+   *   ('projectIdentifier'): at most one of 'organizationId', 'projectId' could
+   *   be set.
    */
   organizationId?: string
   /**

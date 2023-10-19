@@ -2,10 +2,10 @@ import { type DefaultValues } from '../../../bridge'
 import type {
   Bootscript,
   ServerSummary,
+  SetImageRequest,
   Volume,
   VolumeSummary,
 } from './types.gen'
-import type { SetImageRequest } from './types.private.gen'
 
 const marshalVolumeSummary = (
   request: VolumeSummary,
@@ -54,9 +54,7 @@ const marshalVolume = (
   name: request.name,
   organization: request.organization,
   project: request.project,
-  server: request.server
-    ? marshalServerSummary(request.server, defaults)
-    : undefined,
+  server: marshalServerSummary(request.server, defaults),
   size: request.size,
   state: request.state,
   tags: request.tags,

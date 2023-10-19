@@ -135,10 +135,8 @@ export type CreateNamespaceRequest = {
   /** Description of the namespace. */
   description: string
   /**
-   * @deprecated Namespace owner (deprecated).
-   *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   *   could be set.
+   * @deprecated Namespace owner (deprecated). One-of ('projectIdentifier'): at
+   *   most one of 'organizationId', 'projectId' could be set.
    */
   organizationId?: string
   /**
