@@ -857,7 +857,7 @@ export const marshalAttachPrivateNetworkRequest = (
   request: AttachPrivateNetworkRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'static_config',
       value:
@@ -984,7 +984,7 @@ const marshalHealthCheck = (
   check_timeout: request.checkTimeout,
   port: request.port,
   transient_check_delay: request.transientCheckDelay,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'tcp_config',
       value:
@@ -1084,7 +1084,7 @@ export const marshalCreateCertificateRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name || randomName('certificate'),
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'letsencrypt',
       value:
@@ -1126,7 +1126,7 @@ export const marshalCreateIpRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   reverse: request.reverse,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       default: defaults.defaultOrganizationId,
       param: 'organization_id',
@@ -1151,7 +1151,7 @@ export const marshalCreateLbRequest = (
   ssl_compatibility_level: request.sslCompatibilityLevel,
   tags: request.tags,
   type: request.type,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       default: defaults.defaultOrganizationId,
       param: 'organization_id',
@@ -1169,7 +1169,7 @@ const marshalRouteMatch = (
   request: RouteMatch,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     { param: 'sni', value: request.sni },
     { param: 'host_header', value: request.hostHeader },
   ]),
@@ -1206,7 +1206,7 @@ export const marshalCreateSubscriberRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       default: defaults.defaultOrganizationId,
       param: 'organization_id',
@@ -1218,7 +1218,7 @@ export const marshalCreateSubscriberRequest = (
       value: request.projectId,
     },
   ]),
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'email_config',
       value:
@@ -1333,7 +1333,7 @@ export const marshalUpdateHealthCheckRequest = (
   check_timeout: request.checkTimeout,
   port: request.port,
   transient_check_delay: request.transientCheckDelay,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'tcp_config',
       value:
@@ -1419,7 +1419,7 @@ export const marshalUpdateSubscriberRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'email_config',
       value:
@@ -1448,7 +1448,7 @@ export const marshalZonedApiAttachPrivateNetworkRequest = (
   request: ZonedApiAttachPrivateNetworkRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'static_config',
       value:
@@ -1519,7 +1519,7 @@ export const marshalZonedApiCreateCertificateRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name || randomName('certificate'),
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'letsencrypt',
       value:
@@ -1561,7 +1561,7 @@ export const marshalZonedApiCreateIpRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   reverse: request.reverse,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       default: defaults.defaultOrganizationId,
       param: 'organization_id',
@@ -1586,7 +1586,7 @@ export const marshalZonedApiCreateLbRequest = (
   ssl_compatibility_level: request.sslCompatibilityLevel,
   tags: request.tags,
   type: request.type,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       default: defaults.defaultOrganizationId,
       param: 'organization_id',
@@ -1617,7 +1617,7 @@ export const marshalZonedApiCreateSubscriberRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       default: defaults.defaultOrganizationId,
       param: 'organization_id',
@@ -1629,7 +1629,7 @@ export const marshalZonedApiCreateSubscriberRequest = (
       value: request.projectId,
     },
   ]),
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'email_config',
       value:
@@ -1762,7 +1762,7 @@ export const marshalZonedApiUpdateHealthCheckRequest = (
   check_timeout: request.checkTimeout,
   port: request.port,
   transient_check_delay: request.transientCheckDelay,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'tcp_config',
       value:
@@ -1848,7 +1848,7 @@ export const marshalZonedApiUpdateSubscriberRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'email_config',
       value:

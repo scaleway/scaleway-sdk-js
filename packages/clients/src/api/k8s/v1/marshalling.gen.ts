@@ -516,7 +516,7 @@ export const marshalCreateClusterRequest = (
   tags: request.tags,
   type: request.type,
   version: request.version,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       default: defaults.defaultOrganizationId,
       param: 'organization_id',

@@ -143,6 +143,11 @@ export interface DHCP {
   zone: Zone
 }
 
+export interface IpamConfig {
+  /** Defines whether the default route is enabled on that Gateway Network. */
+  pushDefaultRoute: boolean
+}
+
 export interface GatewayNetwork {
   /** ID of the Public Gateway-Private Network connection. */
   id: string
@@ -172,6 +177,8 @@ export interface GatewayNetwork {
   enableDhcp: boolean
   /** Address of the Gateway (in CIDR form) to use when DHCP is not used. */
   address?: string
+  /** IPAM IP configuration used. */
+  ipamConfig: IpamConfig
   /** Zone of the GatewayNetwork connection. */
   zone: Zone
 }
@@ -276,11 +283,6 @@ export type CreateDHCPRequest = {
   dnsLocalName?: string
 }
 
-export interface IpamConfig {
-  /** Defines whether the default route is enabled on that Gateway Network. */
-  pushDefaultRoute: boolean
-}
-
 export interface DHCPEntry {
   /** DHCP entry ID. */
   id: string
@@ -343,6 +345,8 @@ export interface Gateway {
   bastionPort: number
   /** Defines whether SMTP traffic is allowed to pass through the gateway. */
   smtpEnabled: boolean
+  /** Whether this uses non-IPAM IP configurations. */
+  isLegacy: boolean
   /** Zone of the gateway. */
   zone: Zone
 }

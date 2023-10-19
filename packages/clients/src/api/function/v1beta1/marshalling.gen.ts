@@ -510,7 +510,7 @@ export const marshalCreateTokenRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   expires_at: request.expiresAt,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     { param: 'function_id', value: request.functionId },
     { param: 'namespace_id', value: request.namespaceId },
   ]),
@@ -554,7 +554,7 @@ export const marshalCreateTriggerRequest = (
   description: request.description,
   function_id: request.functionId,
   name: request.name,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'scw_sqs_config',
       value:
@@ -649,7 +649,7 @@ export const marshalUpdateTriggerRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'sqs_config',
       value:

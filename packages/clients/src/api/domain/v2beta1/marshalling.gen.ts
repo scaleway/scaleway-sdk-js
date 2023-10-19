@@ -1348,7 +1348,7 @@ export const marshalImportProviderDNSZoneRequest = (
   request: ImportProviderDNSZoneRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'online_v1',
       value:
@@ -1393,7 +1393,7 @@ export const marshalImportRawDNSZoneRequest = (
   content: request.content,
   format: request.format,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'bind_source',
       value:
@@ -1474,7 +1474,7 @@ const marshalContactExtensionFR = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mode: request.mode,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'individual_info',
       value:
@@ -1686,7 +1686,7 @@ export const marshalDSRecord = (
 ): Record<string, unknown> => ({
   algorithm: request.algorithm,
   key_id: request.keyId,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'digest',
       value:
@@ -1982,7 +1982,7 @@ const marshalDomainRecord = (
   priority: request.priority,
   ttl: request.ttl,
   type: request.type,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'geo_ip_config',
       value:
@@ -2076,7 +2076,7 @@ const marshalRecordChange = (
   request: RecordChange,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'add',
       value:

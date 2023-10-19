@@ -84,7 +84,7 @@ const marshalSource = (
   request: Source,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     { param: 'zonal', value: request.zonal },
     { param: 'private_network_id', value: request.privateNetworkId },
     { param: 'subnet_id', value: request.subnetId },
