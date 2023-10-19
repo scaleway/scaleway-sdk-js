@@ -77,3 +77,4 @@ export type {
   UpdateTriggerRequest,
   UpdateTriggerRequestSqsClientConfig,
 } from './types.gen'
+export * as ValidationRules from './validation-rules.gen'
