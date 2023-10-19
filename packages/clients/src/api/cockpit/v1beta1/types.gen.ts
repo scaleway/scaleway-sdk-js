@@ -61,6 +61,8 @@ export interface CockpitEndpoints {
   metricsUrl: string
   /** URL for logs. */
   logsUrl: string
+  /** URL for traces. */
+  tracesUrl: string
   /** URL for the alert manager. */
   alertmanagerUrl: string
   /** URL for the Grafana dashboard. */
