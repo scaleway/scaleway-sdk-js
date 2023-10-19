@@ -20,7 +20,11 @@ export type Product = 'unknown'
 
 export type SecretStatus = 'ready' | 'locked'
 
-export type SecretType = 'unknown_secret_type' | 'opaque' | 'certificate'
+export type SecretType =
+  | 'unknown_secret_type'
+  | 'opaque'
+  | 'certificate'
+  | 'key_value'
 
 export type SecretVersionStatus =
   | 'unknown'
