@@ -86,6 +86,7 @@ const unmarshalCockpitEndpoints = (data: unknown) => {
     grafanaUrl: data.grafana_url,
     logsUrl: data.logs_url,
     metricsUrl: data.metrics_url,
+    tracesUrl: data.traces_url,
   } as CockpitEndpoints
 }
 
