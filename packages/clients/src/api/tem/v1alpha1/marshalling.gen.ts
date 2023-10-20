@@ -16,6 +16,7 @@ import type {
   DomainLastStatus,
   DomainLastStatusDkimRecord,
   DomainLastStatusSpfRecord,
+  DomainReputation,
   DomainStatistics,
   Email,
   EmailTry,
@@ -23,6 +24,22 @@ import type {
   ListEmailsResponse,
   Statistics,
 } from './types.gen'
+
+const unmarshalDomainReputation = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainReputation' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    previousScore: data.previous_score,
+    previousScoredAt: unmarshalDate(data.previous_scored_at),
+    score: data.score,
+    scoredAt: unmarshalDate(data.scored_at),
+    status: data.status,
+  } as DomainReputation
+}
 
 const unmarshalDomainStatistics = (data: unknown) => {
   if (!isJSONObject(data)) {
@@ -72,6 +89,9 @@ export const unmarshalDomain = (data: unknown) => {
     organizationId: data.organization_id,
     projectId: data.project_id,
     region: data.region,
+    reputation: data.reputation
+      ? unmarshalDomainReputation(data.reputation)
+      : undefined,
     revokedAt: unmarshalDate(data.revoked_at),
     spfConfig: data.spf_config,
     statistics: data.statistics
