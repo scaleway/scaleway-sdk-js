@@ -759,7 +759,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['expires_at', request.expiresAt],
           ...Object.entries(
-            resolveOneOf<string>([
+            resolveOneOf([
               { param: 'function_id', value: request.functionId },
               { param: 'namespace_id', value: request.namespaceId },
             ]),
@@ -944,7 +944,7 @@ export class API extends ParentAPI {
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ...Object.entries(
-            resolveOneOf<string>([
+            resolveOneOf([
               { param: 'function_id', value: request.functionId },
               { param: 'namespace_id', value: request.namespaceId },
               {

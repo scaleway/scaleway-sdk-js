@@ -143,7 +143,7 @@ export class API extends ParentAPI {
           ['resource_type', request.resourceType],
           ['tags', request.tags],
           ...Object.entries(
-            resolveOneOf<string>([
+            resolveOneOf([
               { param: 'zonal', value: request.zonal },
               { param: 'private_network_id', value: request.privateNetworkId },
             ]),

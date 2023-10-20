@@ -542,7 +542,7 @@ export const marshalCreateHubRequest = (
   name: request.name || randomName('hub'),
   product_plan: request.productPlan,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  ...resolveOneOf<Record<string, unknown>>([
+  ...resolveOneOf([
     {
       param: 'twins_graphite_config',
       value:
@@ -602,7 +602,7 @@ export const marshalCreateRouteRequest = (
   hub_id: request.hubId,
   name: request.name || randomName('route'),
   topic: request.topic,
-  ...resolveOneOf<Record<string, unknown>>([
+  ...resolveOneOf([
     {
       param: 's3_config',
       value:
@@ -681,7 +681,7 @@ export const marshalUpdateHubRequest = (
   events_topic_prefix: request.eventsTopicPrefix,
   name: request.name,
   product_plan: request.productPlan,
-  ...resolveOneOf<Record<string, unknown>>([
+  ...resolveOneOf([
     {
       param: 'twins_graphite_config',
       value:
@@ -730,7 +730,7 @@ export const marshalUpdateRouteRequest = (
 ): Record<string, unknown> => ({
   name: request.name,
   topic: request.topic,
-  ...resolveOneOf<Record<string, unknown>>([
+  ...resolveOneOf([
     {
       param: 's3_config',
       value:

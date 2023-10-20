@@ -236,7 +236,7 @@ export const marshalCreateVolumeRequest = (
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
-  ...resolveOneOf<Record<string, unknown>>([
+  ...resolveOneOf([
     {
       param: 'from_empty',
       value:
@@ -255,7 +255,7 @@ export const marshalCreateVolumeRequest = (
           : undefined,
     },
   ]),
-  ...resolveOneOf<number>([{ param: 'perf_iops', value: request.perfIops }]),
+  ...resolveOneOf([{ param: 'perf_iops', value: request.perfIops }]),
 })
 
 export const marshalImportSnapshotFromS3Request = (

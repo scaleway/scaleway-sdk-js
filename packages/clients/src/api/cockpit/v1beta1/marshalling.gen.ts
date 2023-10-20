@@ -350,7 +350,7 @@ const marshalContactPoint = (
   request: ContactPoint,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<Record<string, unknown>>([
+  ...resolveOneOf([
     {
       param: 'email',
       value:

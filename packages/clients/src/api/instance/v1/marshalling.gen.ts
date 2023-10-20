@@ -1499,7 +1499,7 @@ export const marshalApplyBlockMigrationRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   validation_key: request.validationKey,
-  ...resolveOneOf<string>([
+  ...resolveOneOf([
     { param: 'volume_id', value: request.volumeId },
     { param: 'snapshot_id', value: request.snapshotId },
   ]),
@@ -1513,7 +1513,7 @@ const marshalVolumeTemplate = (
   name: request.name,
   size: request.size,
   volume_type: request.volumeType,
-  ...resolveOneOf<string>([
+  ...resolveOneOf([
     {
       default: defaults.defaultOrganizationId,
       param: 'organization',
@@ -1547,7 +1547,7 @@ export const marshalCreateImageRequest = (
   public: request.public,
   root_volume: request.rootVolume,
   tags: request.tags,
-  ...resolveOneOf<string>([
+  ...resolveOneOf([
     {
       default: defaults.defaultOrganizationId,
       param: 'organization',
@@ -1568,7 +1568,7 @@ export const marshalCreateIpRequest = (
   server: request.server,
   tags: request.tags,
   type: request.type,
-  ...resolveOneOf<string>([
+  ...resolveOneOf([
     {
       default: defaults.defaultOrganizationId,
       param: 'organization',
@@ -1590,7 +1590,7 @@ export const marshalCreatePlacementGroupRequest = (
   policy_mode: request.policyMode,
   policy_type: request.policyType,
   tags: request.tags,
-  ...resolveOneOf<string>([
+  ...resolveOneOf([
     {
       default: defaults.defaultOrganizationId,
       param: 'organization',
@@ -1624,7 +1624,7 @@ export const marshalCreateSecurityGroupRequest = (
   outbound_default_policy: request.outboundDefaultPolicy,
   stateful: request.stateful,
   tags: request.tags,
-  ...resolveOneOf<string>([
+  ...resolveOneOf([
     {
       default: defaults.defaultOrganizationId,
       param: 'organization',
@@ -1636,7 +1636,7 @@ export const marshalCreateSecurityGroupRequest = (
       value: request.project,
     },
   ]),
-  ...resolveOneOf<boolean>([
+  ...resolveOneOf([
     { param: 'organization_default', value: request.organizationDefault },
     { param: 'project_default', value: request.projectDefault },
   ]),
@@ -1697,7 +1697,7 @@ export const marshalCreateServerRequest = (
           {},
         )
       : undefined,
-  ...resolveOneOf<string>([
+  ...resolveOneOf([
     {
       default: defaults.defaultOrganizationId,
       param: 'organization',
@@ -1722,7 +1722,7 @@ export const marshalCreateSnapshotRequest = (
   tags: request.tags,
   volume_id: request.volumeId,
   volume_type: request.volumeType,
-  ...resolveOneOf<string>([
+  ...resolveOneOf([
     {
       default: defaults.defaultOrganizationId,
       param: 'organization',
@@ -1743,7 +1743,7 @@ export const marshalCreateVolumeRequest = (
   name: request.name || randomName('vol'),
   tags: request.tags,
   volume_type: request.volumeType,
-  ...resolveOneOf<string>([
+  ...resolveOneOf([
     {
       default: defaults.defaultOrganizationId,
       param: 'organization',
@@ -1774,7 +1774,7 @@ export const marshalPlanBlockMigrationRequest = (
   request: PlanBlockMigrationRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<string>([
+  ...resolveOneOf([
     { param: 'volume_id', value: request.volumeId },
     { param: 'snapshot_id', value: request.snapshotId },
   ]),

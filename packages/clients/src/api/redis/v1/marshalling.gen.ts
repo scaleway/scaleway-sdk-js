@@ -394,7 +394,7 @@ const marshalEndpointSpec = (
   request: EndpointSpec,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<Record<string, unknown>>([
+  ...resolveOneOf([
     {
       param: 'private_network',
       value:
@@ -498,7 +498,7 @@ export const marshalUpdateEndpointRequest = (
   request: UpdateEndpointRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<Record<string, unknown>>([
+  ...resolveOneOf([
     {
       param: 'private_network',
       value:

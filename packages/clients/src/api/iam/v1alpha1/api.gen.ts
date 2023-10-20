@@ -925,7 +925,7 @@ export class API extends ParentAPI {
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ...Object.entries(
-            resolveOneOf<string>([
+            resolveOneOf([
               { param: 'application_id', value: request.applicationId },
               { param: 'user_id', value: request.userId },
             ]),

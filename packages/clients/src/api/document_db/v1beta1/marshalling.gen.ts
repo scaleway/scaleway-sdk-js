@@ -861,7 +861,7 @@ const marshalEndpointSpec = (
   request: EndpointSpec,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<Record<string, unknown>>([
+  ...resolveOneOf([
     {
       param: 'load_balancer',
       value:
@@ -921,7 +921,7 @@ export const marshalCreateInstanceRequest = (
   user_name: request.userName,
   volume_size: request.volumeSize,
   volume_type: request.volumeType,
-  ...resolveOneOf<string>([
+  ...resolveOneOf([
     {
       default: defaults.defaultOrganizationId,
       param: 'organization_id',
@@ -969,7 +969,7 @@ const marshalReadReplicaEndpointSpec = (
   request: ReadReplicaEndpointSpec,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<Record<string, unknown>>([
+  ...resolveOneOf([
     {
       param: 'direct_access',
       value:

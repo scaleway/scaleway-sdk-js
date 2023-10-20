@@ -152,7 +152,7 @@ export class API extends ParentAPI {
           ['type', request.type],
           ['zone', request.zone],
           ...Object.entries(
-            resolveOneOf<string>([
+            resolveOneOf([
               { param: 'image_id', value: request.imageId },
               { param: 'version_id', value: request.versionId },
               { param: 'image_label', value: request.imageLabel },

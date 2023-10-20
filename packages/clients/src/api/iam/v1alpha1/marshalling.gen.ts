@@ -413,7 +413,7 @@ export const marshalAddGroupMemberRequest = (
   request: AddGroupMemberRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<string>([
+  ...resolveOneOf([
     { param: 'user_id', value: request.userId },
     { param: 'application_id', value: request.applicationId },
   ]),
@@ -434,7 +434,7 @@ export const marshalCreateAPIKeyRequest = (
   default_project_id: request.defaultProjectId,
   description: request.description,
   expires_at: request.expiresAt,
-  ...resolveOneOf<string>([
+  ...resolveOneOf([
     { param: 'application_id', value: request.applicationId },
     { param: 'user_id', value: request.userId },
   ]),
@@ -513,7 +513,7 @@ export const marshalRemoveGroupMemberRequest = (
   request: RemoveGroupMemberRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<string>([
+  ...resolveOneOf([
     { param: 'user_id', value: request.userId },
     { param: 'application_id', value: request.applicationId },
   ]),

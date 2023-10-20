@@ -3,68 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [2.0.0-alpha.9](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.0.0-alpha.8...@scaleway/sdk@2.0.0-alpha.9) (2023-10-19)
-
-**Note:** Version bump only for package @scaleway/sdk
-
-## [2.0.0-alpha.8](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.0.0-alpha.7...@scaleway/sdk@2.0.0-alpha.8) (2023-10-19)
+## [1.37.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.36.0...@scaleway/sdk@1.37.0) (2023-10-16)
 
 ### Features
 
-- update generation ([68ba3c0](https://github.com/scaleway/scaleway-sdk-js/commit/68ba3c02d6dad1f42f6940a2d847ae92517c8216))
-- update generation ([53f28f0](https://github.com/scaleway/scaleway-sdk-js/commit/53f28f0372131794e5ac5dfeb790f8848febed74))
+- **ipfs:** add IPNS API ([#932](https://github.com/scaleway/scaleway-sdk-js/issues/932)) ([c919d46](https://github.com/scaleway/scaleway-sdk-js/commit/c919d46713d8c7e8af499bfc30dcf594cc88a58a))
+- **mnq:** allow long credentials name for serverless functions triggers compatibility ([#930](https://github.com/scaleway/scaleway-sdk-js/issues/930)) ([b1e9d0c](https://github.com/scaleway/scaleway-sdk-js/commit/b1e9d0c5e8b039af0e01998315b0c07e3922f1e2))
+- **serverless:** add mnq_nats_account_id in trigger responses ([#931](https://github.com/scaleway/scaleway-sdk-js/issues/931)) ([58501e2](https://github.com/scaleway/scaleway-sdk-js/commit/58501e217f253f3375416c2749e17c4235d3913e))
 
-## [2.0.0-alpha.7](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.0.0-alpha.6...@scaleway/sdk@2.0.0-alpha.7) (2023-10-17)
-
-### Features
-
-- explicit marshallers return type ([bff6aad](https://github.com/scaleway/scaleway-sdk-js/commit/bff6aaddbac61df49dcc595f203b9319836acafb))
-
-## [2.0.0-alpha.6](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.0.0-alpha.5...@scaleway/sdk@2.0.0-alpha.6) (2023-10-16)
+## [1.36.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.35.0...@scaleway/sdk@1.36.0) (2023-10-13)
 
 ### Features
 
-- update generation ([da12495](https://github.com/scaleway/scaleway-sdk-js/commit/da124951e11889382dcf7604b1a87642e61f9335))
-- update generation ([431e593](https://github.com/scaleway/scaleway-sdk-js/commit/431e5939cf6e1b4d8354c1e64414c5f0f5c6b66e))
+- **block:** add snapshot import ([#922](https://github.com/scaleway/scaleway-sdk-js/issues/922)) ([3d74e31](https://github.com/scaleway/scaleway-sdk-js/commit/3d74e31aeaf87f1089413d16297396bcb8962b9e))
+- **cockpit:** list and get Grafana dashboards ([#916](https://github.com/scaleway/scaleway-sdk-js/issues/916)) ([3f695fa](https://github.com/scaleway/scaleway-sdk-js/commit/3f695fac15a4c27f7b5774104b8d08068d3303f5))
+- **instance:** add tags in Server.public_ips ([#919](https://github.com/scaleway/scaleway-sdk-js/issues/919)) ([fa230c6](https://github.com/scaleway/scaleway-sdk-js/commit/fa230c65fd186496067bb9ef26414e97fbca2377))
+- **instance:** modify UpdateServer public_ips and private_nics to match real implem ([#921](https://github.com/scaleway/scaleway-sdk-js/issues/921)) ([0f09608](https://github.com/scaleway/scaleway-sdk-js/commit/0f09608356edcde266a4324fbcc89ab673e399fe))
+- **instance:** sync endpoints about the feature OS image in SBS volume ([#920](https://github.com/scaleway/scaleway-sdk-js/issues/920)) ([d9ba798](https://github.com/scaleway/scaleway-sdk-js/commit/d9ba79876e637f0a7637a85f8aac4490db7a8d38))
+- **mnq:** add v1beta1 ([#917](https://github.com/scaleway/scaleway-sdk-js/issues/917)) ([9d6c414](https://github.com/scaleway/scaleway-sdk-js/commit/9d6c4145f3a5bc5f36bf9868022922d8ac8fd2ba))
+- **rdb:** expose SBS IOPS ([#918](https://github.com/scaleway/scaleway-sdk-js/issues/918)) ([91e1187](https://github.com/scaleway/scaleway-sdk-js/commit/91e1187494b8864d1d3b9e178635e1f7580392e9))
 
-## [2.0.0-alpha.5](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.0.0-alpha.4...@scaleway/sdk@2.0.0-alpha.5) (2023-10-16)
-
-### Features
-
-- don't default to undefined for native types ([c3f6f41](https://github.com/scaleway/scaleway-sdk-js/commit/c3f6f41e2e3a8f26f82fc2caeda2719a56cc261c))
-- update generation ([a641316](https://github.com/scaleway/scaleway-sdk-js/commit/a641316db81f095b9f4f7294d391ea3115ba249c))
-- update generation ([e38e054](https://github.com/scaleway/scaleway-sdk-js/commit/e38e0540982218ffe577e87020f07201d9ae00be))
-
-## [2.0.0-alpha.4](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.0.0-alpha.3...@scaleway/sdk@2.0.0-alpha.4) (2023-10-13)
+## [1.35.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.34.0...@scaleway/sdk@1.35.0) (2023-10-09)
 
 ### Features
 
-- add deprecated fields ([d3cc5d6](https://github.com/scaleway/scaleway-sdk-js/commit/d3cc5d6ba6ce9a635b38297582fadbf952503155))
-- update generation ([a52a693](https://github.com/scaleway/scaleway-sdk-js/commit/a52a693abc3f49db39cc8f2c8b273e4987b08c15))
+- **cockpit:** add list datasource endpoint ([#906](https://github.com/scaleway/scaleway-sdk-js/issues/906)) ([8677e4a](https://github.com/scaleway/scaleway-sdk-js/commit/8677e4a8828eee2e3a9311c0b6395d0f37b06450))
+- **k8s:** expose `public_ip_disabled` field ([#907](https://github.com/scaleway/scaleway-sdk-js/issues/907)) ([58d4945](https://github.com/scaleway/scaleway-sdk-js/commit/58d4945faa568fa063e41d551b281f56ff143189))
+- **serverless:** prepare for MNQ API ([#908](https://github.com/scaleway/scaleway-sdk-js/issues/908)) ([ce611bf](https://github.com/scaleway/scaleway-sdk-js/commit/ce611bf8f868f933658b92b8b18c9d97d083398e))
 
-## [2.0.0-alpha.3](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.0.0-alpha.2...@scaleway/sdk@2.0.0-alpha.3) (2023-10-11)
-
-### Features
-
-- add line jumps ([066f846](https://github.com/scaleway/scaleway-sdk-js/commit/066f846fb8af965d743e9717d867ee7bce18e0b5))
-- update apis ([0108d89](https://github.com/scaleway/scaleway-sdk-js/commit/0108d89b86a6782e275ee984fe87981935282f49))
-
-## [2.0.0-alpha.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.0.0-alpha.1...@scaleway/sdk@2.0.0-alpha.2) (2023-10-04)
+## [1.34.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.33.0...@scaleway/sdk@1.34.0) (2023-10-04)
 
 ### Features
 
-- all optional messages should be optional ([29a761f](https://github.com/scaleway/scaleway-sdk-js/commit/29a761f85eee34b67139b6c3d1c0d976dfa81143))
-
-## [2.0.0-alpha.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.0.0-alpha.0...@scaleway/sdk@2.0.0-alpha.1) (2023-10-04)
-
-**Note:** Version bump only for package @scaleway/sdk
-
-## [2.0.0-alpha.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.33.0...@scaleway/sdk@2.0.0-alpha.0) (2023-10-04)
-
-### Features
-
-- don't export private types ([c3ec87c](https://github.com/scaleway/scaleway-sdk-js/commit/c3ec87c64ba9798ec1e442f425da47e79516c211))
-- v2 ([a0dbfed](https://github.com/scaleway/scaleway-sdk-js/commit/a0dbfedc5e429e0c345ecba2d414474f9dc48b94))
+- **instance:** add servers filter in ListServersRequest ([#903](https://github.com/scaleway/scaleway-sdk-js/issues/903)) ([a96eb9f](https://github.com/scaleway/scaleway-sdk-js/commit/a96eb9f9626dd3dd0f7c70858bc8adf172bcf7e7))
+- **lb:** add pl-waw-3 az ([#902](https://github.com/scaleway/scaleway-sdk-js/issues/902)) ([997aa1d](https://github.com/scaleway/scaleway-sdk-js/commit/997aa1da10e777e99c725f21fab37ece13730c27))
 
 ## [1.33.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.32.1...@scaleway/sdk@1.33.0) (2023-10-02)
 
