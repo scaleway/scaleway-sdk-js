@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.10](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.37.0...@scaleway/sdk@2.0.0-alpha.10) (2023-10-20)
+
+### Features
+
+- adjust generation ([2cd3488](https://github.com/scaleway/scaleway-sdk-js/commit/2cd348876a6718ffee8560372773871e2618f828))
+- **cockpit:** add traces endpoint ([#941](https://github.com/scaleway/scaleway-sdk-js/issues/941)) ([cbc69a3](https://github.com/scaleway/scaleway-sdk-js/commit/cbc69a382b8e7e37b656203630801732aaf5ced8))
+- **ipam:** add v1 API ([#938](https://github.com/scaleway/scaleway-sdk-js/issues/938)) ([915f755](https://github.com/scaleway/scaleway-sdk-js/commit/915f7556babb617a31939dfe875258fb8783433d))
+- **secret_manager:** add json type with subtype ([#939](https://github.com/scaleway/scaleway-sdk-js/issues/939)) ([f68b0ac](https://github.com/scaleway/scaleway-sdk-js/commit/f68b0acee995b88de0ee21018739a2a797a4d143))
+- **serverless:** validate trigger queries ([#940](https://github.com/scaleway/scaleway-sdk-js/issues/940)) ([aa54478](https://github.com/scaleway/scaleway-sdk-js/commit/aa544782572b2d7d127be93812cf742e9163e449))
+- v2 ([1a82477](https://github.com/scaleway/scaleway-sdk-js/commit/1a824777472e46052bb1c658a92a60c279a47de1))
+- **vpc_gw:** add field to help clients known which pwg is legacy xor ipam ([#936](https://github.com/scaleway/scaleway-sdk-js/issues/936)) ([a8334bc](https://github.com/scaleway/scaleway-sdk-js/commit/a8334bce5b7bb7111a6d43a729c0ee6822cf4be8))
+
 ## [1.37.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.36.0...@scaleway/sdk@1.37.0) (2023-10-16)
 
 ### Features
