@@ -53,7 +53,7 @@ export interface Image {
   /** List of versions of this image. */
   versions: Version[]
   /** Organization this image belongs to. */
-  organization: Organization
+  organization?: Organization
   currentPublicVersion: string
 }
 
@@ -63,7 +63,7 @@ export type GetImageRequest = {
 }
 
 export interface GetImageResponse {
-  image: Image
+  image?: Image
 }
 
 export type GetVersionRequest = {
@@ -72,7 +72,7 @@ export type GetVersionRequest = {
 }
 
 export interface GetVersionResponse {
-  version: Version
+  version?: Version
 }
 
 export type ListImagesRequest = {

@@ -170,7 +170,7 @@ export interface Volume {
   /** Volume tags. */
   tags: string[]
   /** Instance attached to the volume. */
-  server: ServerSummary
+  server?: ServerSummary
   /** Volume state. */
   state: VolumeState
   /** Zone in which the volume is located. */
@@ -210,7 +210,7 @@ export interface Image {
   fromServer: string
   organization: string
   public: boolean
-  rootVolume: VolumeSummary
+  rootVolume?: VolumeSummary
   state: ImageState
   project: string
   tags: string[]
@@ -310,7 +310,7 @@ export interface VolumeServer {
   name: string
   exportUri: string
   organization: string
-  server: ServerSummary
+  server?: ServerSummary
   size: number
   volumeType: VolumeServerVolumeType
   creationDate?: Date
@@ -349,7 +349,7 @@ export interface ServerTypeNetwork {
 
 export interface ServerTypeVolumeConstraintsByType {
   /** Local SSD volumes. */
-  lSsd: ServerTypeVolumeConstraintSizes
+  lSsd?: ServerTypeVolumeConstraintSizes
 }
 
 export interface VolumeTypeCapabilities {
@@ -390,7 +390,7 @@ export interface Ip {
   id: string
   address: string
   reverse?: string
-  server: ServerSummary
+  server?: ServerSummary
   organization: string
   tags: string[]
   project: string
@@ -503,13 +503,13 @@ export interface Server {
   /** Instance host name. */
   hostname: string
   /** Information about the Instance image. */
-  image: Image
+  image?: Image
   /** Defines whether the Instance protection option is activated. */
   protected: boolean
   /** Private IP address of the Instance. */
   privateIp?: string
   /** Information about the public IP. */
-  publicIp: ServerIp
+  publicIp?: ServerIp
   /** Information about all the public IPs attached to the server. */
   publicIps: ServerIp[]
   /** The server's MAC address. */
@@ -519,9 +519,9 @@ export interface Server {
   /** Instance state. */
   state: ServerState
   /** Instance location. */
-  location: ServerLocation
+  location?: ServerLocation
   /** Instance IPv6 address. */
-  ipv6: ServerIpv6
+  ipv6?: ServerIpv6
   /** @deprecated Instance bootscript. */
   bootscript?: Bootscript
   /** Instance boot type. */
@@ -529,7 +529,7 @@ export interface Server {
   /** Instance volumes. */
   volumes: Record<string, VolumeServer>
   /** Instance security group. */
-  securityGroup: SecurityGroupSummary
+  securityGroup?: SecurityGroupSummary
   /** Instance planned maintenance. */
   maintenances: ServerMaintenance[]
   /** Detailed information about the Instance state. */
@@ -537,7 +537,7 @@ export interface Server {
   /** Instance architecture. */
   arch: Arch
   /** Instance placement group. */
-  placementGroup: PlacementGroup
+  placementGroup?: PlacementGroup
   /** Instance private NICs. */
   privateNics: PrivateNIC[]
   /** Zone in which the Instance is located. */
@@ -562,7 +562,7 @@ export interface Snapshot {
   /** Snapshot state. */
   state: SnapshotState
   /** Volume on which the snapshot is based on. */
-  baseVolume: SnapshotBaseVolume
+  baseVolume?: SnapshotBaseVolume
   /** Snapshot creation date. */
   creationDate?: Date
   /** Snapshot modification date. */
@@ -631,9 +631,9 @@ export interface ServerType {
   /** Alternative Instance name, if any. */
   altNames: string[]
   /** Additional volume constraints. */
-  perVolumeConstraint: ServerTypeVolumeConstraintsByType
+  perVolumeConstraint?: ServerTypeVolumeConstraintsByType
   /** Initial volume constraints. */
-  volumesConstraint: ServerTypeVolumeConstraintSizes
+  volumesConstraint?: ServerTypeVolumeConstraintSizes
   /** Number of CPU. */
   ncpus: number
   /** Number of GPU. */
@@ -645,17 +645,17 @@ export interface ServerType {
   /** True if it is a baremetal Instance. */
   baremetal: boolean
   /** Network available for the Instance. */
-  network: ServerTypeNetwork
+  network?: ServerTypeNetwork
   /** Capabilities. */
-  capabilities: ServerTypeCapabilities
+  capabilities?: ServerTypeCapabilities
   /** Maximum available scratch storage. */
   scratchStorageMaxSize?: number
 }
 
 export interface VolumeType {
   displayName: string
-  capabilities: VolumeTypeCapabilities
-  constraints: VolumeTypeConstraints
+  capabilities?: VolumeTypeCapabilities
+  constraints?: VolumeTypeConstraints
 }
 
 export interface ServerActionRequestVolumeBackupTemplate {
@@ -768,7 +768,7 @@ export type CreateImageRequest = {
 }
 
 export interface CreateImageResponse {
-  image: Image
+  image?: Image
 }
 
 export type CreateIpRequest = {
@@ -797,7 +797,7 @@ export type CreateIpRequest = {
 }
 
 export interface CreateIpResponse {
-  ip: Ip
+  ip?: Ip
 }
 
 export type CreatePlacementGroupRequest = {
@@ -828,7 +828,7 @@ export type CreatePlacementGroupRequest = {
 }
 
 export interface CreatePlacementGroupResponse {
-  placementGroup: PlacementGroup
+  placementGroup?: PlacementGroup
 }
 
 export type CreatePrivateNICRequest = {
@@ -845,7 +845,7 @@ export type CreatePrivateNICRequest = {
 }
 
 export interface CreatePrivateNICResponse {
-  privateNic: PrivateNIC
+  privateNic?: PrivateNIC
 }
 
 export type CreateSecurityGroupRequest = {
@@ -901,7 +901,7 @@ export type CreateSecurityGroupRequest = {
 }
 
 export interface CreateSecurityGroupResponse {
-  securityGroup: SecurityGroup
+  securityGroup?: SecurityGroup
 }
 
 export type CreateSecurityGroupRuleRequest = {
@@ -924,7 +924,7 @@ export type CreateSecurityGroupRuleRequest = {
 }
 
 export interface CreateSecurityGroupRuleResponse {
-  rule: SecurityGroupRule
+  rule?: SecurityGroupRule
 }
 
 export type CreateServerRequest = {
@@ -975,7 +975,7 @@ export type CreateServerRequest = {
 }
 
 export interface CreateServerResponse {
-  server: Server
+  server?: Server
 }
 
 export type CreateSnapshotRequest = {
@@ -1015,8 +1015,8 @@ export type CreateSnapshotRequest = {
 }
 
 export interface CreateSnapshotResponse {
-  snapshot: Snapshot
-  task: Task
+  snapshot?: Snapshot
+  task?: Task
 }
 
 export type CreateVolumeRequest = {
@@ -1066,7 +1066,7 @@ export type CreateVolumeRequest = {
 }
 
 export interface CreateVolumeResponse {
-  volume: Volume
+  volume?: Volume
 }
 
 export type DeleteImageRequest = {
@@ -1154,7 +1154,7 @@ export type ExportSnapshotRequest = {
 }
 
 export interface ExportSnapshotResponse {
-  task: Task
+  task?: Task
 }
 
 export type GetBootscriptRequest = {
@@ -1164,7 +1164,7 @@ export type GetBootscriptRequest = {
 }
 
 export interface GetBootscriptResponse {
-  bootscript: Bootscript
+  bootscript?: Bootscript
 }
 
 export type GetDashboardRequest = {
@@ -1175,7 +1175,7 @@ export type GetDashboardRequest = {
 }
 
 export interface GetDashboardResponse {
-  dashboard: Dashboard
+  dashboard?: Dashboard
 }
 
 export type GetImageRequest = {
@@ -1186,7 +1186,7 @@ export type GetImageRequest = {
 }
 
 export interface GetImageResponse {
-  image: Image
+  image?: Image
 }
 
 export type GetIpRequest = {
@@ -1197,7 +1197,7 @@ export type GetIpRequest = {
 }
 
 export interface GetIpResponse {
-  ip: Ip
+  ip?: Ip
 }
 
 export type GetPlacementGroupRequest = {
@@ -1208,7 +1208,7 @@ export type GetPlacementGroupRequest = {
 }
 
 export interface GetPlacementGroupResponse {
-  placementGroup: PlacementGroup
+  placementGroup?: PlacementGroup
 }
 
 export type GetPlacementGroupServersRequest = {
@@ -1233,7 +1233,7 @@ export type GetPrivateNICRequest = {
 }
 
 export interface GetPrivateNICResponse {
-  privateNic: PrivateNIC
+  privateNic?: PrivateNIC
 }
 
 export type GetSecurityGroupRequest = {
@@ -1244,7 +1244,7 @@ export type GetSecurityGroupRequest = {
 }
 
 export interface GetSecurityGroupResponse {
-  securityGroup: SecurityGroup
+  securityGroup?: SecurityGroup
 }
 
 export type GetSecurityGroupRuleRequest = {
@@ -1255,7 +1255,7 @@ export type GetSecurityGroupRuleRequest = {
 }
 
 export interface GetSecurityGroupRuleResponse {
-  rule: SecurityGroupRule
+  rule?: SecurityGroupRule
 }
 
 export type GetServerRequest = {
@@ -1266,7 +1266,7 @@ export type GetServerRequest = {
 }
 
 export interface GetServerResponse {
-  server: Server
+  server?: Server
 }
 
 export type GetServerTypesAvailabilityRequest = {
@@ -1295,7 +1295,7 @@ export type GetSnapshotRequest = {
 }
 
 export interface GetSnapshotResponse {
-  snapshot: Snapshot
+  snapshot?: Snapshot
 }
 
 export type GetVolumeRequest = {
@@ -1306,7 +1306,7 @@ export type GetVolumeRequest = {
 }
 
 export interface GetVolumeResponse {
-  volume: Volume
+  volume?: Volume
 }
 
 export type ListBootscriptsRequest = {
@@ -1666,7 +1666,7 @@ export interface MigrationPlan {
    * A volume which will be migrated to SBS together with the snapshots, if
    * present.
    */
-  volume: Volume
+  volume?: Volume
   /**
    * A list of snapshots which will be migrated to SBS together and with the
    * volume, if present.
@@ -1716,7 +1716,7 @@ export type ServerActionRequest = {
 }
 
 export interface ServerActionResponse {
-  task: Task
+  task?: Task
 }
 
 export type SetImageRequest = {
@@ -1752,7 +1752,7 @@ export type SetPlacementGroupRequest = {
 }
 
 export interface SetPlacementGroupResponse {
-  placementGroup: PlacementGroup
+  placementGroup?: PlacementGroup
 }
 
 export type SetPlacementGroupServersRequest = {
@@ -1797,7 +1797,7 @@ export type UpdateIpRequest = {
 }
 
 export interface UpdateIpResponse {
-  ip: Ip
+  ip?: Ip
 }
 
 export type UpdatePlacementGroupRequest = {
@@ -1816,7 +1816,7 @@ export type UpdatePlacementGroupRequest = {
 }
 
 export interface UpdatePlacementGroupResponse {
-  placementGroup: PlacementGroup
+  placementGroup?: PlacementGroup
 }
 
 export type UpdatePlacementGroupServersRequest = {
@@ -1886,7 +1886,7 @@ export type UpdateServerRequest = {
 }
 
 export interface UpdateServerResponse {
-  server: Server
+  server?: Server
 }
 
 export type UpdateVolumeRequest = {
@@ -1903,5 +1903,5 @@ export type UpdateVolumeRequest = {
 }
 
 export interface UpdateVolumeResponse {
-  volume: Volume
+  volume?: Volume
 }

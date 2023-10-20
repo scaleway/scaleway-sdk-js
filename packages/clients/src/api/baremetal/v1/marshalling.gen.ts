@@ -97,11 +97,15 @@ export const unmarshalOS = (data: unknown): OS => {
     licenseRequired: data.license_required,
     logoUrl: data.logo_url,
     name: data.name,
-    password: unmarshalOSOSField(data.password),
-    servicePassword: unmarshalOSOSField(data.service_password),
-    serviceUser: unmarshalOSOSField(data.service_user),
-    ssh: unmarshalOSOSField(data.ssh),
-    user: unmarshalOSOSField(data.user),
+    password: data.password ? unmarshalOSOSField(data.password) : undefined,
+    servicePassword: data.service_password
+      ? unmarshalOSOSField(data.service_password)
+      : undefined,
+    serviceUser: data.service_user
+      ? unmarshalOSOSField(data.service_user)
+      : undefined,
+    ssh: data.ssh ? unmarshalOSOSField(data.ssh) : undefined,
+    user: data.user ? unmarshalOSOSField(data.user) : undefined,
     version: data.version,
   } as OS
 }
@@ -333,7 +337,7 @@ export const unmarshalServer = (data: unknown): Server => {
     description: data.description,
     domain: data.domain,
     id: data.id,
-    install: unmarshalServerInstall(data.install),
+    install: data.install ? unmarshalServerInstall(data.install) : undefined,
     ips: unmarshalArrayOfObject(data.ips, unmarshalIP),
     name: data.name,
     offerId: data.offer_id,
@@ -342,7 +346,9 @@ export const unmarshalServer = (data: unknown): Server => {
     organizationId: data.organization_id,
     pingStatus: data.ping_status,
     projectId: data.project_id,
-    rescueServer: unmarshalServerRescueServer(data.rescue_server),
+    rescueServer: data.rescue_server
+      ? unmarshalServerRescueServer(data.rescue_server)
+      : undefined,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),

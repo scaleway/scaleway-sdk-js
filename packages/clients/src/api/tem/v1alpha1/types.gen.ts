@@ -171,7 +171,7 @@ export interface Domain {
   /** DKIM public key to record in the DNS zone. */
   dkimConfig: string
   /** Domain's statistics. */
-  statistics: DomainStatistics
+  statistics?: DomainStatistics
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -252,9 +252,9 @@ export interface DomainLastStatus {
   /** The domain name (example.com). */
   domainName: string
   /** The SPF record verification data. */
-  spfRecord: DomainLastStatusSpfRecord
+  spfRecord?: DomainLastStatusSpfRecord
   /** The DKIM record verification data. */
-  dkimRecord: DomainLastStatusDkimRecord
+  dkimRecord?: DomainLastStatusDkimRecord
 }
 
 export type GetDomainLastStatusRequest = {

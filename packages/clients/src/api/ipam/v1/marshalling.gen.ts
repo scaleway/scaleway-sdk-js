@@ -59,7 +59,7 @@ export const unmarshalIP = (data: unknown): IP => {
     isIpv6: data.is_ipv6,
     projectId: data.project_id,
     region: data.region,
-    resource: unmarshalResource(data.resource),
+    resource: data.resource ? unmarshalResource(data.resource) : undefined,
     source: unmarshalSource(data.source),
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),

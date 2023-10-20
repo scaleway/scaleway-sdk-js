@@ -73,7 +73,7 @@ export const unmarshalVolume = (data: unknown): Volume => {
     projectId: data.project_id,
     references: unmarshalArrayOfObject(data.references, unmarshalReference),
     size: data.size,
-    specs: unmarshalVolumeSpecifications(data.specs),
+    specs: data.specs ? unmarshalVolumeSpecifications(data.specs) : undefined,
     status: data.status,
     tags: data.tags,
     type: data.type,
@@ -109,7 +109,9 @@ const unmarshalSnapshotSummary = (data: unknown): SnapshotSummary => {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     name: data.name,
-    parentVolume: unmarshalSnapshotParentVolume(data.parent_volume),
+    parentVolume: data.parent_volume
+      ? unmarshalSnapshotParentVolume(data.parent_volume)
+      : undefined,
     projectId: data.project_id,
     size: data.size,
     status: data.status,
@@ -146,7 +148,7 @@ const unmarshalVolumeType = (data: unknown): VolumeType => {
     snapshotPricing: data.snapshot_pricing
       ? unmarshalMoney(data.snapshot_pricing)
       : undefined,
-    specs: unmarshalVolumeSpecifications(data.specs),
+    specs: data.specs ? unmarshalVolumeSpecifications(data.specs) : undefined,
     type: data.type,
   } as VolumeType
 }
@@ -193,7 +195,9 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     name: data.name,
-    parentVolume: unmarshalSnapshotParentVolume(data.parent_volume),
+    parentVolume: data.parent_volume
+      ? unmarshalSnapshotParentVolume(data.parent_volume)
+      : undefined,
     projectId: data.project_id,
     references: unmarshalArrayOfObject(data.references, unmarshalReference),
     size: data.size,

@@ -96,9 +96,9 @@ export interface DeviceMessageFiltersRule {
 
 export interface DeviceMessageFilters {
   /** Filtering rule to restrict topics the device can publish to. */
-  publish: DeviceMessageFiltersRule
+  publish?: DeviceMessageFiltersRule
   /** Filtering rule to restrict topics the device can subscribe to. */
-  subscribe: DeviceMessageFiltersRule
+  subscribe?: DeviceMessageFiltersRule
 }
 
 export interface HubTwinsGraphiteConfig {
@@ -136,7 +136,7 @@ export interface Device {
    */
   allowMultipleConnections: boolean
   /** Filter-sets to restrict the topics the device can publish/subscribe to. */
-  messageFilters: DeviceMessageFilters
+  messageFilters?: DeviceMessageFilters
   /**
    * Assigning a custom certificate allows a device to authenticate using that
    * specific certificate without checking the Hub's CA certificate.
@@ -371,9 +371,9 @@ export type CreateDeviceRequest = {
 
 export interface CreateDeviceResponse {
   /** Information related to the created device. */
-  device: Device
+  device?: Device
   /** Device certificate. */
-  certificate: Certificate
+  certificate?: Certificate
 }
 
 export type CreateHubRequest = {
@@ -422,7 +422,7 @@ export type CreateNetworkRequest = {
 
 export interface CreateNetworkResponse {
   /** Information related to the created network. */
-  network: Network
+  network?: Network
   /** Endpoint Key to keep secret. This cannot be retrieved later. */
   secret: string
 }
@@ -584,7 +584,7 @@ export type GetDeviceCertificateRequest = {
 
 export interface GetDeviceCertificateResponse {
   /** Information related to the created device. */
-  device: Device
+  device?: Device
   /** Device certificate. */
   certificatePem: string
 }
@@ -868,9 +868,9 @@ export type RenewDeviceCertificateRequest = {
 
 export interface RenewDeviceCertificateResponse {
   /** Information related to the created device. */
-  device: Device
+  device?: Device
   /** Device certificate. */
-  certificate: Certificate
+  certificate?: Certificate
 }
 
 export interface Route {
@@ -927,7 +927,7 @@ export type SetDeviceCertificateRequest = {
 }
 
 export interface SetDeviceCertificateResponse {
-  device: Device
+  device?: Device
   certificatePem: string
 }
 

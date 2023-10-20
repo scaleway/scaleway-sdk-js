@@ -31,7 +31,7 @@ import type {
 } from './types.gen'
 
 export interface SetImageResponse {
-  image: Image
+  image?: Image
 }
 
 export type SetSecurityGroupRequest = {
@@ -73,7 +73,7 @@ export type SetSecurityGroupRequest = {
 }
 
 export interface SetSecurityGroupResponse {
-  securityGroup: SecurityGroup
+  securityGroup?: SecurityGroup
 }
 
 export type SetSecurityGroupRuleRequest = {
@@ -93,7 +93,7 @@ export type SetSecurityGroupRuleRequest = {
 }
 
 export interface SetSecurityGroupRuleResponse {
-  rule: SecurityGroupRule
+  rule?: SecurityGroupRule
 }
 
 export type SetServerRequest = {
@@ -168,7 +168,7 @@ export type SetServerRequest = {
 }
 
 export interface SetServerResponse {
-  server: Server
+  server?: Server
 }
 
 export type SetSnapshotRequest = {
@@ -189,5 +189,5 @@ export type SetSnapshotRequest = {
 }
 
 export interface SetSnapshotResponse {
-  snapshot: Snapshot
+  snapshot?: Snapshot
 }

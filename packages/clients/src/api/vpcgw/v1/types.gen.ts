@@ -172,13 +172,13 @@ export interface GatewayNetwork {
   /** Current status of the Public Gateway's connection to the Private Network. */
   status: GatewayNetworkStatus
   /** DHCP configuration for the connected Private Network. */
-  dhcp: DHCP
+  dhcp?: DHCP
   /** Defines whether DHCP is enabled on the connected Private Network. */
   enableDhcp: boolean
   /** Address of the Gateway (in CIDR form) to use when DHCP is not used. */
   address?: string
   /** IPAM IP configuration used. */
-  ipamConfig: IpamConfig
+  ipamConfig?: IpamConfig
   /** Zone of the GatewayNetwork connection. */
   zone: Zone
 }
@@ -316,7 +316,7 @@ export interface Gateway {
   /** Gateway last modification date. */
   updatedAt?: Date
   /** Gateway type (commercial offer). */
-  type: GatewayType
+  type?: GatewayType
   /** Current status of the gateway. */
   status: GatewayStatus
   /** Name of the gateway. */
@@ -324,7 +324,7 @@ export interface Gateway {
   /** Tags associated with the gateway. */
   tags: string[]
   /** Public IP address of the gateway. */
-  ip: IP
+  ip?: IP
   /**
    * GatewayNetwork objects attached to the gateway (each one represents a
    * connection to a Private Network).

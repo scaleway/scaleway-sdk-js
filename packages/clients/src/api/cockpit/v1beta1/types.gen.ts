@@ -155,7 +155,7 @@ export interface Token {
   /** Date and time of the token's last update. */
   updatedAt?: Date
   /** Token's permissions. */
-  scopes: TokenScopes
+  scopes?: TokenScopes
   /** Token's secret key. */
   secretKey?: string
 }
@@ -174,13 +174,13 @@ export interface Cockpit {
   /** Date and time of the Cockpit's last update. */
   updatedAt?: Date
   /** Endpoints of the Cockpit. */
-  endpoints: CockpitEndpoints
+  endpoints?: CockpitEndpoints
   /** Status of the Cockpit. */
   status: CockpitStatus
   /** Specifies whether managed alerts are enabled or disabled. */
   managedAlertsEnabled: boolean
   /** Pricing plan information. */
-  plan: Plan
+  plan?: Plan
 }
 
 /** Metrics for a given Cockpit. */

@@ -56,7 +56,9 @@ export const unmarshalHosting = (data: unknown): Hosting => {
   }
 
   return {
-    cpanelUrls: unmarshalHostingCpanelUrls(data.cpanel_urls),
+    cpanelUrls: data.cpanel_urls
+      ? unmarshalHostingCpanelUrls(data.cpanel_urls)
+      : undefined,
     createdAt: unmarshalDate(data.created_at),
     dnsStatus: data.dns_status,
     domain: data.domain,
@@ -171,7 +173,7 @@ const unmarshalOffer = (data: unknown): Offer => {
     endOfLife: data.end_of_life,
     id: data.id,
     price: data.price ? unmarshalMoney(data.price) : undefined,
-    product: unmarshalOfferProduct(data.product),
+    product: data.product ? unmarshalOfferProduct(data.product) : undefined,
     quotaWarnings: data.quota_warnings,
   } as Offer
 }

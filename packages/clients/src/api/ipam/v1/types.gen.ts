@@ -79,7 +79,7 @@ export interface IP {
   /** Source pool where the IP was booked in. */
   source: Source
   /** Resource which the IP is attached to. */
-  resource: Resource
+  resource?: Resource
   /** Tags for the IP. */
   tags: string[]
   /** Region of the IP. */

@@ -77,7 +77,9 @@ const unmarshalImage = (data: unknown): Image => {
     logo: data.logo,
     modificationDate: unmarshalDate(data.modification_date),
     name: data.name,
-    organization: unmarshalOrganization(data.organization),
+    organization: data.organization
+      ? unmarshalOrganization(data.organization)
+      : undefined,
     validUntil: unmarshalDate(data.valid_until),
     versions: unmarshalArrayOfObject(data.versions, unmarshalVersion),
   } as Image
@@ -91,7 +93,7 @@ export const unmarshalGetImageResponse = (data: unknown): GetImageResponse => {
   }
 
   return {
-    image: unmarshalImage(data.image),
+    image: data.image ? unmarshalImage(data.image) : undefined,
   } as GetImageResponse
 }
 
@@ -105,7 +107,7 @@ export const unmarshalGetVersionResponse = (
   }
 
   return {
-    version: unmarshalVersion(data.version),
+    version: data.version ? unmarshalVersion(data.version) : undefined,
   } as GetVersionResponse
 }
 

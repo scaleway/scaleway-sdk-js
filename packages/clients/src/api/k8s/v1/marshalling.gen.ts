@@ -88,7 +88,9 @@ export const unmarshalPool = (data: unknown): Pool => {
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
-    upgradePolicy: unmarshalPoolUpgradePolicy(data.upgrade_policy),
+    upgradePolicy: data.upgrade_policy
+      ? unmarshalPoolUpgradePolicy(data.upgrade_policy)
+      : undefined,
     version: data.version,
     zone: data.zone,
   } as Pool
@@ -138,7 +140,9 @@ const unmarshalClusterAutoUpgrade = (data: unknown): ClusterAutoUpgrade => {
 
   return {
     enabled: data.enabled,
-    maintenanceWindow: unmarshalMaintenanceWindow(data.maintenance_window),
+    maintenanceWindow: data.maintenance_window
+      ? unmarshalMaintenanceWindow(data.maintenance_window)
+      : undefined,
   } as ClusterAutoUpgrade
 }
 
@@ -195,8 +199,12 @@ export const unmarshalCluster = (data: unknown): Cluster => {
   return {
     admissionPlugins: data.admission_plugins,
     apiserverCertSans: data.apiserver_cert_sans,
-    autoUpgrade: unmarshalClusterAutoUpgrade(data.auto_upgrade),
-    autoscalerConfig: unmarshalClusterAutoscalerConfig(data.autoscaler_config),
+    autoUpgrade: data.auto_upgrade
+      ? unmarshalClusterAutoUpgrade(data.auto_upgrade)
+      : undefined,
+    autoscalerConfig: data.autoscaler_config
+      ? unmarshalClusterAutoscalerConfig(data.autoscaler_config)
+      : undefined,
     clusterUrl: data.cluster_url,
     cni: data.cni,
     commitmentEndsAt: unmarshalDate(data.commitment_ends_at),
@@ -208,9 +216,9 @@ export const unmarshalCluster = (data: unknown): Cluster => {
     id: data.id,
     ingress: data.ingress ? data.ingress : undefined,
     name: data.name,
-    openIdConnectConfig: unmarshalClusterOpenIDConnectConfig(
-      data.open_id_connect_config,
-    ),
+    openIdConnectConfig: data.open_id_connect_config
+      ? unmarshalClusterOpenIDConnectConfig(data.open_id_connect_config)
+      : undefined,
     organizationId: data.organization_id,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
@@ -416,10 +424,10 @@ const marshalCreateClusterRequestAutoUpgrade = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enable: request.enable,
-  maintenance_window: marshalMaintenanceWindow(
-    request.maintenanceWindow,
-    defaults,
-  ),
+  maintenance_window:
+    request.maintenanceWindow !== undefined
+      ? marshalMaintenanceWindow(request.maintenanceWindow, defaults)
+      : undefined,
 })
 
 const marshalCreateClusterRequestAutoscalerConfig = (
@@ -469,10 +477,13 @@ const marshalCreateClusterRequestPoolConfig = (
   root_volume_type: request.rootVolumeType,
   size: request.size,
   tags: request.tags,
-  upgrade_policy: marshalCreateClusterRequestPoolConfigUpgradePolicy(
-    request.upgradePolicy,
-    defaults,
-  ),
+  upgrade_policy:
+    request.upgradePolicy !== undefined
+      ? marshalCreateClusterRequestPoolConfigUpgradePolicy(
+          request.upgradePolicy,
+          defaults,
+        )
+      : undefined,
   zone: request.zone,
 })
 
@@ -583,10 +594,10 @@ const marshalUpdateClusterRequestAutoUpgrade = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enable: request.enable,
-  maintenance_window: marshalMaintenanceWindow(
-    request.maintenanceWindow,
-    defaults,
-  ),
+  maintenance_window:
+    request.maintenanceWindow !== undefined
+      ? marshalMaintenanceWindow(request.maintenanceWindow, defaults)
+      : undefined,
 })
 
 const marshalUpdateClusterRequestAutoscalerConfig = (

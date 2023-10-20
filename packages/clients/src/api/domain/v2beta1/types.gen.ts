@@ -281,7 +281,7 @@ export interface ContactExtensionFRTrademarkInfo {
 export interface DSRecordDigest {
   type: DSRecordDigestType
   digest: string
-  publicKey: DSRecordPublicKey
+  publicKey?: DSRecordPublicKey
 }
 
 export interface DomainRecord {
@@ -427,12 +427,12 @@ export interface Contact {
   resale: boolean
   /** @deprecated */
   questions?: ContactQuestion[]
-  extensionFr: ContactExtensionFR
-  extensionEu: ContactExtensionEU
+  extensionFr?: ContactExtensionFR
+  extensionEu?: ContactExtensionEU
   whoisOptIn: boolean
   emailStatus: ContactEmailStatus
   state: string
-  extensionNl: ContactExtensionNL
+  extensionNl?: ContactExtensionNL
 }
 
 export interface ContactRolesRoles {
@@ -481,11 +481,11 @@ export interface NewContact {
   resale: boolean
   /** @deprecated */
   questions?: ContactQuestion[]
-  extensionFr: ContactExtensionFR
-  extensionEu: ContactExtensionEU
+  extensionFr?: ContactExtensionFR
+  extensionEu?: ContactExtensionEU
   whoisOptIn: boolean
   state?: string
-  extensionNl: ContactExtensionNL
+  extensionNl?: ContactExtensionNL
 }
 
 export interface CheckContactsCompatibilityResponseContactCheckResult {
@@ -539,7 +539,7 @@ export interface ImportProviderDNSZoneRequestOnlineV1 {
 
 export interface ImportRawDNSZoneRequestAXFRSource {
   nameServer: string
-  tsigKey: ImportRawDNSZoneRequestTsigKey
+  tsigKey?: ImportRawDNSZoneRequestTsigKey
 }
 
 export interface ImportRawDNSZoneRequestBindSource {
@@ -547,7 +547,7 @@ export interface ImportRawDNSZoneRequestBindSource {
 }
 
 export interface ContactRoles {
-  contact: Contact
+  contact?: Contact
   roles: Record<string, ContactRolesRoles>
 }
 
@@ -604,7 +604,7 @@ export interface RenewableDomain {
   limitRenewAt?: Date
   limitRedemptionAt?: Date
   estimatedDeleteAt?: Date
-  tld: Tld
+  tld?: Tld
 }
 
 export interface SSLCertificate {
@@ -642,14 +642,14 @@ export interface UpdateContactRequestQuestion {
 export interface AvailableDomain {
   domain: string
   available: boolean
-  tld: Tld
+  tld?: Tld
 }
 
 export interface CheckContactsCompatibilityResponse {
   compatible: boolean
-  ownerCheckResult: CheckContactsCompatibilityResponseContactCheckResult
-  administrativeCheckResult: CheckContactsCompatibilityResponseContactCheckResult
-  technicalCheckResult: CheckContactsCompatibilityResponseContactCheckResult
+  ownerCheckResult?: CheckContactsCompatibilityResponseContactCheckResult
+  administrativeCheckResult?: CheckContactsCompatibilityResponseContactCheckResult
+  technicalCheckResult?: CheckContactsCompatibilityResponseContactCheckResult
 }
 
 export type ClearDNSZoneRecordsRequest = {
@@ -710,7 +710,7 @@ export interface Domain {
   organizationId: string
   projectId: string
   autoRenewStatus: DomainFeatureStatus
-  dnssec: DomainDNSSEC
+  dnssec?: DomainDNSSEC
   eppCode: string[]
   expiredAt?: Date
   updatedAt?: Date
@@ -718,9 +718,9 @@ export interface Domain {
   isExternal: boolean
   status: DomainStatus
   dnsZones: DNSZone[]
-  ownerContact: Contact
-  technicalContact: Contact
-  administrativeContact: Contact
+  ownerContact?: Contact
+  technicalContact?: Contact
+  administrativeContact?: Contact
   /**
    * One-of ('registrationStatus'): at most one of
    * 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be
@@ -733,7 +733,7 @@ export interface Domain {
    * set.
    */
   transferRegistrationStatus?: DomainRegistrationStatusTransfer
-  tld: Tld
+  tld?: Tld
 }
 
 export type ExportRawDNSZoneRequest = {

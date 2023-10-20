@@ -495,7 +495,7 @@ export interface Instance {
   /** Creation date (must follow the ISO 8601 format). */
   createdAt?: Date
   /** Volumes of the Database Instance. */
-  volume: Volume
+  volume?: Volume
   /** Region the Database Instance is in. */
   region: Region
   /** UUID of the Database Instance. */
@@ -519,7 +519,7 @@ export interface Instance {
   /** Advanced settings of the Database Instance. */
   settings: InstanceSetting[]
   /** Backup schedule of the Database Instance. */
-  backupSchedule: BackupSchedule
+  backupSchedule?: BackupSchedule
   /** Defines whether or not High-Availability is enabled. */
   isHaCluster: boolean
   /** Read Replicas of the Database Instance. */
@@ -531,7 +531,7 @@ export interface Instance {
   /** List of Database Instance endpoints. */
   endpoints: Endpoint[]
   /** Logs policy of the Database Instance. */
-  logsPolicy: LogsPolicy
+  logsPolicy?: LogsPolicy
   /** Store logical backups in the same region as the Database Instance. */
   backupSameRegion: boolean
   /** List of Database Instance maintenance events. */

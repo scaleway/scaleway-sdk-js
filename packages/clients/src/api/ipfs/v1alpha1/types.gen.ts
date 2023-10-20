@@ -53,7 +53,7 @@ export interface PinCID {
   cid?: string
   name?: string
   origins: string[]
-  meta: PinCIDMeta
+  meta?: PinCIDMeta
 }
 
 export interface PinInfo {
@@ -90,9 +90,9 @@ export interface Pin {
   pinId: string
   status: PinStatus
   createdAt?: Date
-  cid: PinCID
+  cid?: PinCID
   delegates: string[]
-  info: PinInfo
+  info?: PinInfo
 }
 
 export interface Volume {
@@ -378,7 +378,7 @@ export type ReplacePinRequest = {
 }
 
 export interface ReplacePinResponse {
-  pin: Pin
+  pin?: Pin
 }
 
 export type UpdateVolumeRequest = {

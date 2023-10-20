@@ -52,13 +52,13 @@ export interface OS {
 
 export interface ServerType {
   /** CPU description. */
-  cpu: ServerTypeCPU
+  cpu?: ServerTypeCPU
   /** Size of the local disk of the server. */
-  disk: ServerTypeDisk
+  disk?: ServerTypeDisk
   /** Name of the type. */
   name: string
   /** Size of memory available. */
-  memory: ServerTypeMemory
+  memory?: ServerTypeMemory
   /** Current stock. */
   stock: ServerTypeStock
   /** Minimum duration of the lease in seconds (example. 3.4s). */

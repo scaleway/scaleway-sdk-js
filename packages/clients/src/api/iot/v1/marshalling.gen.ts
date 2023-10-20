@@ -79,8 +79,12 @@ const unmarshalDeviceMessageFilters = (data: unknown): DeviceMessageFilters => {
   }
 
   return {
-    publish: unmarshalDeviceMessageFiltersRule(data.publish),
-    subscribe: unmarshalDeviceMessageFiltersRule(data.subscribe),
+    publish: data.publish
+      ? unmarshalDeviceMessageFiltersRule(data.publish)
+      : undefined,
+    subscribe: data.subscribe
+      ? unmarshalDeviceMessageFiltersRule(data.subscribe)
+      : undefined,
   } as DeviceMessageFilters
 }
 
@@ -101,7 +105,9 @@ export const unmarshalDevice = (data: unknown): Device => {
     id: data.id,
     isConnected: data.is_connected,
     lastActivityAt: unmarshalDate(data.last_activity_at),
-    messageFilters: unmarshalDeviceMessageFilters(data.message_filters),
+    messageFilters: data.message_filters
+      ? unmarshalDeviceMessageFilters(data.message_filters)
+      : undefined,
     name: data.name,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
@@ -194,8 +200,10 @@ export const unmarshalCreateDeviceResponse = (
   }
 
   return {
-    certificate: unmarshalCertificate(data.certificate),
-    device: unmarshalDevice(data.device),
+    certificate: data.certificate
+      ? unmarshalCertificate(data.certificate)
+      : undefined,
+    device: data.device ? unmarshalDevice(data.device) : undefined,
   } as CreateDeviceResponse
 }
 
@@ -209,7 +217,7 @@ export const unmarshalCreateNetworkResponse = (
   }
 
   return {
-    network: unmarshalNetwork(data.network),
+    network: data.network ? unmarshalNetwork(data.network) : undefined,
     secret: data.secret,
   } as CreateNetworkResponse
 }
@@ -225,7 +233,7 @@ export const unmarshalGetDeviceCertificateResponse = (
 
   return {
     certificatePem: data.certificate_pem,
-    device: unmarshalDevice(data.device),
+    device: data.device ? unmarshalDevice(data.device) : undefined,
   } as GetDeviceCertificateResponse
 }
 
@@ -386,8 +394,10 @@ export const unmarshalRenewDeviceCertificateResponse = (
   }
 
   return {
-    certificate: unmarshalCertificate(data.certificate),
-    device: unmarshalDevice(data.device),
+    certificate: data.certificate
+      ? unmarshalCertificate(data.certificate)
+      : undefined,
+    device: data.device ? unmarshalDevice(data.device) : undefined,
   } as RenewDeviceCertificateResponse
 }
 
@@ -476,7 +486,7 @@ export const unmarshalSetDeviceCertificateResponse = (
 
   return {
     certificatePem: data.certificate_pem,
-    device: unmarshalDevice(data.device),
+    device: data.device ? unmarshalDevice(data.device) : undefined,
   } as SetDeviceCertificateResponse
 }
 
@@ -507,8 +517,14 @@ const marshalDeviceMessageFilters = (
   request: DeviceMessageFilters,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  publish: marshalDeviceMessageFiltersRule(request.publish, defaults),
-  subscribe: marshalDeviceMessageFiltersRule(request.subscribe, defaults),
+  publish:
+    request.publish !== undefined
+      ? marshalDeviceMessageFiltersRule(request.publish, defaults)
+      : undefined,
+  subscribe:
+    request.subscribe !== undefined
+      ? marshalDeviceMessageFiltersRule(request.subscribe, defaults)
+      : undefined,
 })
 
 export const marshalCreateDeviceRequest = (

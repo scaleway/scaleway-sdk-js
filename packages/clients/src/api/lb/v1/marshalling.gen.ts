@@ -345,7 +345,9 @@ export const unmarshalLb = (data: unknown): Lb => {
     routeCount: data.route_count,
     sslCompatibilityLevel: data.ssl_compatibility_level,
     status: data.status,
-    subscriber: unmarshalSubscriber(data.subscriber),
+    subscriber: data.subscriber
+      ? unmarshalSubscriber(data.subscriber)
+      : undefined,
     tags: data.tags,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
@@ -366,10 +368,12 @@ export const unmarshalBackend = (data: unknown): Backend => {
     forwardPort: data.forward_port,
     forwardPortAlgorithm: data.forward_port_algorithm,
     forwardProtocol: data.forward_protocol,
-    healthCheck: unmarshalHealthCheck(data.health_check),
+    healthCheck: data.health_check
+      ? unmarshalHealthCheck(data.health_check)
+      : undefined,
     id: data.id,
     ignoreSslServerVerify: data.ignore_ssl_server_verify,
-    lb: unmarshalLb(data.lb),
+    lb: data.lb ? unmarshalLb(data.lb) : undefined,
     maxConnections: data.max_connections,
     maxRetries: data.max_retries,
     name: data.name,
@@ -401,7 +405,7 @@ export const unmarshalCertificate = (data: unknown): Certificate => {
     createdAt: unmarshalDate(data.created_at),
     fingerprint: data.fingerprint,
     id: data.id,
-    lb: unmarshalLb(data.lb),
+    lb: data.lb ? unmarshalLb(data.lb) : undefined,
     name: data.name,
     notValidAfter: unmarshalDate(data.not_valid_after),
     notValidBefore: unmarshalDate(data.not_valid_before),
@@ -421,7 +425,7 @@ export const unmarshalFrontend = (data: unknown): Frontend => {
   }
 
   return {
-    backend: unmarshalBackend(data.backend),
+    backend: data.backend ? unmarshalBackend(data.backend) : undefined,
     certificate: data.certificate
       ? unmarshalCertificate(data.certificate)
       : undefined,
@@ -430,7 +434,7 @@ export const unmarshalFrontend = (data: unknown): Frontend => {
     enableHttp3: data.enable_http3,
     id: data.id,
     inboundPort: data.inbound_port,
-    lb: unmarshalLb(data.lb),
+    lb: data.lb ? unmarshalLb(data.lb) : undefined,
     name: data.name,
     timeoutClient: data.timeout_client,
     updatedAt: unmarshalDate(data.updated_at),
@@ -459,7 +463,9 @@ const unmarshalAclAction = (data: unknown): AclAction => {
   }
 
   return {
-    redirect: unmarshalAclActionRedirect(data.redirect),
+    redirect: data.redirect
+      ? unmarshalAclActionRedirect(data.redirect)
+      : undefined,
     type: data.type,
   } as AclAction
 }
@@ -488,13 +494,13 @@ export const unmarshalAcl = (data: unknown): Acl => {
   }
 
   return {
-    action: unmarshalAclAction(data.action),
+    action: data.action ? unmarshalAclAction(data.action) : undefined,
     createdAt: unmarshalDate(data.created_at),
     description: data.description,
-    frontend: unmarshalFrontend(data.frontend),
+    frontend: data.frontend ? unmarshalFrontend(data.frontend) : undefined,
     id: data.id,
     index: data.index,
-    match: unmarshalAclMatch(data.match),
+    match: data.match ? unmarshalAclMatch(data.match) : undefined,
     name: data.name,
     updatedAt: unmarshalDate(data.updated_at),
   } as Acl
@@ -556,7 +562,7 @@ export const unmarshalPrivateNetwork = (data: unknown): PrivateNetwork => {
       ? unmarshalPrivateNetworkIpamConfig(data.ipam_config)
       : undefined,
     ipamIds: data.ipam_ids,
-    lb: unmarshalLb(data.lb),
+    lb: data.lb ? unmarshalLb(data.lb) : undefined,
     privateNetworkId: data.private_network_id,
     staticConfig: data.static_config
       ? unmarshalPrivateNetworkStaticConfig(data.static_config)
@@ -591,7 +597,7 @@ export const unmarshalRoute = (data: unknown): Route => {
     createdAt: unmarshalDate(data.created_at),
     frontendId: data.frontend_id,
     id: data.id,
-    match: unmarshalRouteMatch(data.match),
+    match: data.match ? unmarshalRouteMatch(data.match) : undefined,
     updatedAt: unmarshalDate(data.updated_at),
   } as Route
 }
@@ -895,7 +901,10 @@ const marshalAclAction = (
   request: AclAction,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  redirect: marshalAclActionRedirect(request.redirect, defaults),
+  redirect:
+    request.redirect !== undefined
+      ? marshalAclActionRedirect(request.redirect, defaults)
+      : undefined,
   type: request.type,
 })
 
@@ -1668,7 +1677,10 @@ const marshalAclSpec = (
   action: marshalAclAction(request.action, defaults),
   description: request.description,
   index: request.index,
-  match: marshalAclMatch(request.match, defaults),
+  match:
+    request.match !== undefined
+      ? marshalAclMatch(request.match, defaults)
+      : undefined,
   name: request.name,
 })
 

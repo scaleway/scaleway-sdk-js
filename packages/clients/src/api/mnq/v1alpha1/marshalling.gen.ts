@@ -81,7 +81,9 @@ const unmarshalCredentialSQSSNSCreds = (
 
   return {
     accessKey: data.access_key,
-    permissions: unmarshalPermissions(data.permissions),
+    permissions: data.permissions
+      ? unmarshalPermissions(data.permissions)
+      : undefined,
     secretKey: data.secret_key,
   } as CredentialSQSSNSCreds
 }
@@ -118,7 +120,9 @@ const unmarshalCredentialSummarySQSSNSCreds = (
 
   return {
     accessKey: data.access_key,
-    permissions: unmarshalPermissions(data.permissions),
+    permissions: data.permissions
+      ? unmarshalPermissions(data.permissions)
+      : undefined,
   } as CredentialSummarySQSSNSCreds
 }
 

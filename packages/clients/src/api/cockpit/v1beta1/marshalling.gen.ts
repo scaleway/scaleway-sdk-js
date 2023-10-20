@@ -149,7 +149,7 @@ export const unmarshalToken = (data: unknown): Token => {
     id: data.id,
     name: data.name,
     projectId: data.project_id,
-    scopes: unmarshalTokenScopes(data.scopes),
+    scopes: data.scopes ? unmarshalTokenScopes(data.scopes) : undefined,
     secretKey: data.secret_key,
     updatedAt: unmarshalDate(data.updated_at),
   } as Token
@@ -198,9 +198,11 @@ export const unmarshalCockpit = (data: unknown): Cockpit => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
-    endpoints: unmarshalCockpitEndpoints(data.endpoints),
+    endpoints: data.endpoints
+      ? unmarshalCockpitEndpoints(data.endpoints)
+      : undefined,
     managedAlertsEnabled: data.managed_alerts_enabled,
-    plan: unmarshalPlan(data.plan),
+    plan: data.plan ? unmarshalPlan(data.plan) : undefined,
     projectId: data.project_id,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),

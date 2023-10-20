@@ -198,7 +198,7 @@ const unmarshalVolume = (data: unknown): Volume => {
     name: data.name,
     organization: data.organization,
     project: data.project,
-    server: unmarshalServerSummary(data.server),
+    server: data.server ? unmarshalServerSummary(data.server) : undefined,
     size: data.size,
     state: data.state,
     tags: data.tags,
@@ -243,7 +243,9 @@ const unmarshalImage = (data: unknown): Image => {
     organization: data.organization,
     project: data.project,
     public: data.public,
-    rootVolume: unmarshalVolumeSummary(data.root_volume),
+    rootVolume: data.root_volume
+      ? unmarshalVolumeSummary(data.root_volume)
+      : undefined,
     state: data.state,
     tags: data.tags,
     zone: data.zone,
@@ -260,7 +262,7 @@ export const unmarshalCreateImageResponse = (
   }
 
   return {
-    image: unmarshalImage(data.image),
+    image: data.image ? unmarshalImage(data.image) : undefined,
   } as CreateImageResponse
 }
 
@@ -278,7 +280,7 @@ const unmarshalIp = (data: unknown): Ip => {
     prefix: data.prefix,
     project: data.project,
     reverse: data.reverse,
-    server: unmarshalServerSummary(data.server),
+    server: data.server ? unmarshalServerSummary(data.server) : undefined,
     state: data.state,
     tags: data.tags,
     type: data.type,
@@ -294,7 +296,7 @@ export const unmarshalCreateIpResponse = (data: unknown): CreateIpResponse => {
   }
 
   return {
-    ip: unmarshalIp(data.ip),
+    ip: data.ip ? unmarshalIp(data.ip) : undefined,
   } as CreateIpResponse
 }
 
@@ -328,7 +330,9 @@ export const unmarshalCreatePlacementGroupResponse = (
   }
 
   return {
-    placementGroup: unmarshalPlacementGroup(data.placement_group),
+    placementGroup: data.placement_group
+      ? unmarshalPlacementGroup(data.placement_group)
+      : undefined,
   } as CreatePlacementGroupResponse
 }
 
@@ -342,7 +346,9 @@ export const unmarshalCreatePrivateNICResponse = (
   }
 
   return {
-    privateNic: unmarshalPrivateNIC(data.private_nic),
+    privateNic: data.private_nic
+      ? unmarshalPrivateNIC(data.private_nic)
+      : undefined,
   } as CreatePrivateNICResponse
 }
 
@@ -384,7 +390,9 @@ export const unmarshalCreateSecurityGroupResponse = (
   }
 
   return {
-    securityGroup: unmarshalSecurityGroup(data.security_group),
+    securityGroup: data.security_group
+      ? unmarshalSecurityGroup(data.security_group)
+      : undefined,
   } as CreateSecurityGroupResponse
 }
 
@@ -419,7 +427,7 @@ export const unmarshalCreateSecurityGroupRuleResponse = (
   }
 
   return {
-    rule: unmarshalSecurityGroupRule(data.rule),
+    rule: data.rule ? unmarshalSecurityGroupRule(data.rule) : undefined,
   } as CreateSecurityGroupRuleResponse
 }
 
@@ -513,7 +521,7 @@ const unmarshalVolumeServer = (data: unknown): VolumeServer => {
     name: data.name,
     organization: data.organization,
     project: data.project,
-    server: unmarshalServerSummary(data.server),
+    server: data.server ? unmarshalServerSummary(data.server) : undefined,
     size: data.size,
     state: data.state,
     volumeType: data.volume_type,
@@ -541,9 +549,11 @@ const unmarshalServer = (data: unknown): Server => {
     enableIpv6: data.enable_ipv6,
     hostname: data.hostname,
     id: data.id,
-    image: unmarshalImage(data.image),
-    ipv6: unmarshalServerIpv6(data.ipv6),
-    location: unmarshalServerLocation(data.location),
+    image: data.image ? unmarshalImage(data.image) : undefined,
+    ipv6: data.ipv6 ? unmarshalServerIpv6(data.ipv6) : undefined,
+    location: data.location
+      ? unmarshalServerLocation(data.location)
+      : undefined,
     macAddress: data.mac_address,
     maintenances: unmarshalArrayOfObject(
       data.maintenances,
@@ -552,15 +562,19 @@ const unmarshalServer = (data: unknown): Server => {
     modificationDate: unmarshalDate(data.modification_date),
     name: data.name,
     organization: data.organization,
-    placementGroup: unmarshalPlacementGroup(data.placement_group),
+    placementGroup: data.placement_group
+      ? unmarshalPlacementGroup(data.placement_group)
+      : undefined,
     privateIp: data.private_ip,
     privateNics: unmarshalArrayOfObject(data.private_nics, unmarshalPrivateNIC),
     project: data.project,
     protected: data.protected,
-    publicIp: unmarshalServerIp(data.public_ip),
+    publicIp: data.public_ip ? unmarshalServerIp(data.public_ip) : undefined,
     publicIps: unmarshalArrayOfObject(data.public_ips, unmarshalServerIp),
     routedIpEnabled: data.routed_ip_enabled,
-    securityGroup: unmarshalSecurityGroupSummary(data.security_group),
+    securityGroup: data.security_group
+      ? unmarshalSecurityGroupSummary(data.security_group)
+      : undefined,
     state: data.state,
     stateDetail: data.state_detail,
     tags: data.tags,
@@ -579,7 +593,7 @@ export const unmarshalCreateServerResponse = (
   }
 
   return {
-    server: unmarshalServer(data.server),
+    server: data.server ? unmarshalServer(data.server) : undefined,
   } as CreateServerResponse
 }
 
@@ -604,7 +618,9 @@ const unmarshalSnapshot = (data: unknown): Snapshot => {
   }
 
   return {
-    baseVolume: unmarshalSnapshotBaseVolume(data.base_volume),
+    baseVolume: data.base_volume
+      ? unmarshalSnapshotBaseVolume(data.base_volume)
+      : undefined,
     creationDate: unmarshalDate(data.creation_date),
     errorReason: data.error_reason,
     id: data.id,
@@ -650,8 +666,8 @@ export const unmarshalCreateSnapshotResponse = (
   }
 
   return {
-    snapshot: unmarshalSnapshot(data.snapshot),
-    task: unmarshalTask(data.task),
+    snapshot: data.snapshot ? unmarshalSnapshot(data.snapshot) : undefined,
+    task: data.task ? unmarshalTask(data.task) : undefined,
   } as CreateSnapshotResponse
 }
 
@@ -665,7 +681,7 @@ export const unmarshalCreateVolumeResponse = (
   }
 
   return {
-    volume: unmarshalVolume(data.volume),
+    volume: data.volume ? unmarshalVolume(data.volume) : undefined,
   } as CreateVolumeResponse
 }
 
@@ -679,7 +695,7 @@ export const unmarshalExportSnapshotResponse = (
   }
 
   return {
-    task: unmarshalTask(data.task),
+    task: data.task ? unmarshalTask(data.task) : undefined,
   } as ExportSnapshotResponse
 }
 
@@ -693,7 +709,9 @@ export const unmarshalGetBootscriptResponse = (
   }
 
   return {
-    bootscript: unmarshalBootscript(data.bootscript),
+    bootscript: data.bootscript
+      ? unmarshalBootscript(data.bootscript)
+      : undefined,
   } as GetBootscriptResponse
 }
 
@@ -733,7 +751,7 @@ export const unmarshalGetDashboardResponse = (
   }
 
   return {
-    dashboard: unmarshalDashboard(data.dashboard),
+    dashboard: data.dashboard ? unmarshalDashboard(data.dashboard) : undefined,
   } as GetDashboardResponse
 }
 
@@ -745,7 +763,7 @@ export const unmarshalGetImageResponse = (data: unknown): GetImageResponse => {
   }
 
   return {
-    image: unmarshalImage(data.image),
+    image: data.image ? unmarshalImage(data.image) : undefined,
   } as GetImageResponse
 }
 
@@ -757,7 +775,7 @@ export const unmarshalGetIpResponse = (data: unknown): GetIpResponse => {
   }
 
   return {
-    ip: unmarshalIp(data.ip),
+    ip: data.ip ? unmarshalIp(data.ip) : undefined,
   } as GetIpResponse
 }
 
@@ -771,7 +789,9 @@ export const unmarshalGetPlacementGroupResponse = (
   }
 
   return {
-    placementGroup: unmarshalPlacementGroup(data.placement_group),
+    placementGroup: data.placement_group
+      ? unmarshalPlacementGroup(data.placement_group)
+      : undefined,
   } as GetPlacementGroupResponse
 }
 
@@ -816,7 +836,9 @@ export const unmarshalGetPrivateNICResponse = (
   }
 
   return {
-    privateNic: unmarshalPrivateNIC(data.private_nic),
+    privateNic: data.private_nic
+      ? unmarshalPrivateNIC(data.private_nic)
+      : undefined,
   } as GetPrivateNICResponse
 }
 
@@ -830,7 +852,9 @@ export const unmarshalGetSecurityGroupResponse = (
   }
 
   return {
-    securityGroup: unmarshalSecurityGroup(data.security_group),
+    securityGroup: data.security_group
+      ? unmarshalSecurityGroup(data.security_group)
+      : undefined,
   } as GetSecurityGroupResponse
 }
 
@@ -844,7 +868,7 @@ export const unmarshalGetSecurityGroupRuleResponse = (
   }
 
   return {
-    rule: unmarshalSecurityGroupRule(data.rule),
+    rule: data.rule ? unmarshalSecurityGroupRule(data.rule) : undefined,
   } as GetSecurityGroupRuleResponse
 }
 
@@ -858,7 +882,7 @@ export const unmarshalGetServerResponse = (
   }
 
   return {
-    server: unmarshalServer(data.server),
+    server: data.server ? unmarshalServer(data.server) : undefined,
   } as GetServerResponse
 }
 
@@ -904,7 +928,7 @@ export const unmarshalGetSnapshotResponse = (
   }
 
   return {
-    snapshot: unmarshalSnapshot(data.snapshot),
+    snapshot: data.snapshot ? unmarshalSnapshot(data.snapshot) : undefined,
   } as GetSnapshotResponse
 }
 
@@ -918,7 +942,7 @@ export const unmarshalGetVolumeResponse = (
   }
 
   return {
-    volume: unmarshalVolume(data.volume),
+    volume: data.volume ? unmarshalVolume(data.volume) : undefined,
   } as GetVolumeResponse
 }
 
@@ -1147,7 +1171,9 @@ const unmarshalServerTypeVolumeConstraintsByType = (
   }
 
   return {
-    lSsd: unmarshalServerTypeVolumeConstraintSizes(data.l_ssd),
+    lSsd: data.l_ssd
+      ? unmarshalServerTypeVolumeConstraintSizes(data.l_ssd)
+      : undefined,
   } as ServerTypeVolumeConstraintsByType
 }
 
@@ -1162,20 +1188,24 @@ const unmarshalServerType = (data: unknown): ServerType => {
     altNames: data.alt_names,
     arch: data.arch,
     baremetal: data.baremetal,
-    capabilities: unmarshalServerTypeCapabilities(data.capabilities),
+    capabilities: data.capabilities
+      ? unmarshalServerTypeCapabilities(data.capabilities)
+      : undefined,
     gpu: data.gpu,
     hourlyPrice: data.hourly_price,
     monthlyPrice: data.monthly_price,
     ncpus: data.ncpus,
-    network: unmarshalServerTypeNetwork(data.network),
-    perVolumeConstraint: unmarshalServerTypeVolumeConstraintsByType(
-      data.per_volume_constraint,
-    ),
+    network: data.network
+      ? unmarshalServerTypeNetwork(data.network)
+      : undefined,
+    perVolumeConstraint: data.per_volume_constraint
+      ? unmarshalServerTypeVolumeConstraintsByType(data.per_volume_constraint)
+      : undefined,
     ram: data.ram,
     scratchStorageMaxSize: data.scratch_storage_max_size,
-    volumesConstraint: unmarshalServerTypeVolumeConstraintSizes(
-      data.volumes_constraint,
-    ),
+    volumesConstraint: data.volumes_constraint
+      ? unmarshalServerTypeVolumeConstraintSizes(data.volumes_constraint)
+      : undefined,
   } as ServerType
 }
 
@@ -1261,8 +1291,12 @@ const unmarshalVolumeType = (data: unknown): VolumeType => {
   }
 
   return {
-    capabilities: unmarshalVolumeTypeCapabilities(data.capabilities),
-    constraints: unmarshalVolumeTypeConstraints(data.constraints),
+    capabilities: data.capabilities
+      ? unmarshalVolumeTypeCapabilities(data.capabilities)
+      : undefined,
+    constraints: data.constraints
+      ? unmarshalVolumeTypeConstraints(data.constraints)
+      : undefined,
     displayName: data.display_name,
   } as VolumeType
 }
@@ -1292,7 +1326,7 @@ export const unmarshalMigrationPlan = (data: unknown): MigrationPlan => {
   return {
     snapshots: unmarshalArrayOfObject(data.snapshots, unmarshalSnapshot),
     validationKey: data.validation_key,
-    volume: unmarshalVolume(data.volume),
+    volume: data.volume ? unmarshalVolume(data.volume) : undefined,
   } as MigrationPlan
 }
 
@@ -1306,7 +1340,7 @@ export const unmarshalServerActionResponse = (
   }
 
   return {
-    task: unmarshalTask(data.task),
+    task: data.task ? unmarshalTask(data.task) : undefined,
   } as ServerActionResponse
 }
 
@@ -1318,7 +1352,7 @@ export const unmarshalSetImageResponse = (data: unknown): SetImageResponse => {
   }
 
   return {
-    image: unmarshalImage(data.image),
+    image: data.image ? unmarshalImage(data.image) : undefined,
   } as SetImageResponse
 }
 
@@ -1332,7 +1366,9 @@ export const unmarshalSetPlacementGroupResponse = (
   }
 
   return {
-    placementGroup: unmarshalPlacementGroup(data.placement_group),
+    placementGroup: data.placement_group
+      ? unmarshalPlacementGroup(data.placement_group)
+      : undefined,
   } as SetPlacementGroupResponse
 }
 
@@ -1363,7 +1399,9 @@ export const unmarshalSetSecurityGroupResponse = (
   }
 
   return {
-    securityGroup: unmarshalSecurityGroup(data.security_group),
+    securityGroup: data.security_group
+      ? unmarshalSecurityGroup(data.security_group)
+      : undefined,
   } as SetSecurityGroupResponse
 }
 
@@ -1377,7 +1415,7 @@ export const unmarshalSetSecurityGroupRuleResponse = (
   }
 
   return {
-    rule: unmarshalSecurityGroupRule(data.rule),
+    rule: data.rule ? unmarshalSecurityGroupRule(data.rule) : undefined,
   } as SetSecurityGroupRuleResponse
 }
 
@@ -1405,7 +1443,7 @@ export const unmarshalSetServerResponse = (
   }
 
   return {
-    server: unmarshalServer(data.server),
+    server: data.server ? unmarshalServer(data.server) : undefined,
   } as SetServerResponse
 }
 
@@ -1419,7 +1457,7 @@ export const unmarshalSetSnapshotResponse = (
   }
 
   return {
-    snapshot: unmarshalSnapshot(data.snapshot),
+    snapshot: data.snapshot ? unmarshalSnapshot(data.snapshot) : undefined,
   } as SetSnapshotResponse
 }
 
@@ -1431,7 +1469,7 @@ export const unmarshalUpdateIpResponse = (data: unknown): UpdateIpResponse => {
   }
 
   return {
-    ip: unmarshalIp(data.ip),
+    ip: data.ip ? unmarshalIp(data.ip) : undefined,
   } as UpdateIpResponse
 }
 
@@ -1445,7 +1483,9 @@ export const unmarshalUpdatePlacementGroupResponse = (
   }
 
   return {
-    placementGroup: unmarshalPlacementGroup(data.placement_group),
+    placementGroup: data.placement_group
+      ? unmarshalPlacementGroup(data.placement_group)
+      : undefined,
   } as UpdatePlacementGroupResponse
 }
 
@@ -1476,7 +1516,7 @@ export const unmarshalUpdateServerResponse = (
   }
 
   return {
-    server: unmarshalServer(data.server),
+    server: data.server ? unmarshalServer(data.server) : undefined,
   } as UpdateServerResponse
 }
 
@@ -1490,7 +1530,7 @@ export const unmarshalUpdateVolumeResponse = (
   }
 
   return {
-    volume: unmarshalVolume(data.volume),
+    volume: data.volume ? unmarshalVolume(data.volume) : undefined,
   } as UpdateVolumeResponse
 }
 
@@ -1845,7 +1885,10 @@ const marshalVolume = (
   name: request.name,
   organization: request.organization,
   project: request.project,
-  server: marshalServerSummary(request.server, defaults),
+  server:
+    request.server !== undefined
+      ? marshalServerSummary(request.server, defaults)
+      : undefined,
   size: request.size,
   state: request.state,
   tags: request.tags,
@@ -2003,7 +2046,10 @@ const marshalImage = (
   organization: request.organization,
   project: request.project,
   public: request.public,
-  root_volume: marshalVolumeSummary(request.rootVolume, defaults),
+  root_volume:
+    request.rootVolume !== undefined
+      ? marshalVolumeSummary(request.rootVolume, defaults)
+      : undefined,
   state: request.state,
   tags: request.tags,
   zone: request.zone,

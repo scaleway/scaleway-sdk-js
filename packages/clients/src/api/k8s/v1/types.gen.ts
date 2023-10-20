@@ -131,7 +131,7 @@ export interface ClusterAutoUpgrade {
   /** Defines whether auto upgrade is enabled for the cluster. */
   enabled: boolean
   /** Maintenance window of the cluster auto upgrades. */
-  maintenanceWindow: MaintenanceWindow
+  maintenanceWindow?: MaintenanceWindow
 }
 
 export interface ClusterAutoscalerConfig {
@@ -267,7 +267,7 @@ export interface Pool {
    */
   kubeletArgs: Record<string, string>
   /** Pool upgrade policy. */
-  upgradePolicy: PoolUpgradePolicy
+  upgradePolicy?: PoolUpgradePolicy
   /** Zone in which the pool's nodes will be spawned. */
   zone: Zone
   /**
@@ -294,7 +294,7 @@ export interface CreateClusterRequestAutoUpgrade {
   /** Defines whether auto upgrade is enabled for the cluster. */
   enable: boolean
   /** Maintenance window of the cluster auto upgrades. */
-  maintenanceWindow: MaintenanceWindow
+  maintenanceWindow?: MaintenanceWindow
 }
 
 export interface CreateClusterRequestAutoscalerConfig {
@@ -418,7 +418,7 @@ export interface CreateClusterRequestPoolConfig {
    */
   kubeletArgs: Record<string, string>
   /** Pool upgrade policy. */
-  upgradePolicy: CreateClusterRequestPoolConfigUpgradePolicy
+  upgradePolicy?: CreateClusterRequestPoolConfigUpgradePolicy
   /** Zone in which the pool's nodes will be spawned. */
   zone: Zone
   /**
@@ -516,7 +516,7 @@ export interface Cluster {
   /** Date on which the cluster was last updated. */
   updatedAt?: Date
   /** Autoscaler config for the cluster. */
-  autoscalerConfig: ClusterAutoscalerConfig
+  autoscalerConfig?: ClusterAutoscalerConfig
   /**
    * @deprecated Defines whether the Kubernetes dashboard is enabled for the
    *   cluster.
@@ -528,7 +528,7 @@ export interface Cluster {
    */
   ingress?: Ingress
   /** Auto upgrade configuration of the cluster. */
-  autoUpgrade: ClusterAutoUpgrade
+  autoUpgrade?: ClusterAutoUpgrade
   /** Defines whether a new Kubernetes version is available. */
   upgradeAvailable: boolean
   /** List of enabled feature gates. */
@@ -539,7 +539,7 @@ export interface Cluster {
    * This configuration enables to update the OpenID Connect configuration of
    * the Kubernetes API server.
    */
-  openIdConnectConfig: ClusterOpenIDConnectConfig
+  openIdConnectConfig?: ClusterOpenIDConnectConfig
   /**
    * Additional Subject Alternative Names for the Kubernetes API server
    * certificate.
@@ -591,7 +591,7 @@ export interface UpdateClusterRequestAutoUpgrade {
   /** Defines whether auto upgrade is enabled for the cluster. */
   enable?: boolean
   /** Maintenance window of the cluster auto upgrades. */
-  maintenanceWindow: MaintenanceWindow
+  maintenanceWindow?: MaintenanceWindow
 }
 
 export interface UpdateClusterRequestAutoscalerConfig {

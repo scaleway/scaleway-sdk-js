@@ -293,7 +293,9 @@ export const unmarshalInstance = (data: unknown): Instance => {
 
   return {
     backupSameRegion: data.backup_same_region,
-    backupSchedule: unmarshalBackupSchedule(data.backup_schedule),
+    backupSchedule: data.backup_schedule
+      ? unmarshalBackupSchedule(data.backup_schedule)
+      : undefined,
     createdAt: unmarshalDate(data.created_at),
     endpoint: data.endpoint ? unmarshalEndpoint(data.endpoint) : undefined,
     endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
@@ -304,7 +306,9 @@ export const unmarshalInstance = (data: unknown): Instance => {
       unmarshalInstanceSetting,
     ),
     isHaCluster: data.is_ha_cluster,
-    logsPolicy: unmarshalLogsPolicy(data.logs_policy),
+    logsPolicy: data.logs_policy
+      ? unmarshalLogsPolicy(data.logs_policy)
+      : undefined,
     maintenances: unmarshalArrayOfObject(
       data.maintenances,
       unmarshalMaintenance,
@@ -325,7 +329,7 @@ export const unmarshalInstance = (data: unknown): Instance => {
       data.upgradable_version,
       unmarshalUpgradableVersion,
     ),
-    volume: unmarshalVolume(data.volume),
+    volume: data.volume ? unmarshalVolume(data.volume) : undefined,
   } as Instance
 }
 

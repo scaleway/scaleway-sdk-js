@@ -44,7 +44,7 @@ export interface CredentialSummarySQSSNSCreds {
   /** Access key ID. */
   accessKey: string
   /** Permissions associated with these credentials. */
-  permissions: Permissions
+  permissions?: Permissions
 }
 
 export interface CredentialNATSCredsFile {
@@ -58,7 +58,7 @@ export interface CredentialSQSSNSCreds {
   /** Secret key ID. */
   secretKey?: string
   /** Permissions associated with these credentials. */
-  permissions: Permissions
+  permissions?: Permissions
 }
 
 export interface CredentialSummary {

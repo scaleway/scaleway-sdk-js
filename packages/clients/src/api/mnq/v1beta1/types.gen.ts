@@ -113,7 +113,7 @@ export interface NatsCredentials {
    * Object containing the credentials file (Only returned by **Create Nats
    * Credentials** call).
    */
-  credentials: File
+  credentials?: File
   /** Checksum of the credentials file. */
   checksum: string
 }
@@ -138,7 +138,7 @@ export interface SnsCredentials {
   /** Checksum of the Secret key. */
   secretChecksum: string
   /** Permissions associated with these credentials. */
-  permissions: SnsPermissions
+  permissions?: SnsPermissions
 }
 
 export interface SqsCredentials {
@@ -161,7 +161,7 @@ export interface SqsCredentials {
   /** Checksum of the Secret key. */
   secretChecksum: string
   /** Permissions associated with these credentials. */
-  permissions: SqsPermissions
+  permissions?: SqsPermissions
 }
 
 export interface ListNatsAccountsResponse {

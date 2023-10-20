@@ -352,7 +352,7 @@ export interface Lb {
   /** Load Balancer offer type. */
   type: string
   /** Subscriber information. */
-  subscriber: Subscriber
+  subscriber?: Subscriber
   /**
    * Determines the minimal SSL version which needs to be supported on client
    * side.
@@ -419,11 +419,11 @@ export interface Backend {
    * Object defining the health check to be carried out by the backend when
    * checking the status and health of backend servers.
    */
-  healthCheck: HealthCheck
+  healthCheck?: HealthCheck
   /** List of IP addresses of backend servers attached to this backend. */
   pool: string[]
   /** Load Balancer the backend is attached to. */
-  lb: Lb
+  lb?: Lb
   /** @deprecated Deprecated in favor of proxy_protocol field. */
   sendProxyV2?: boolean
   /** Maximum allowed time for a backend server to process a request. */
@@ -490,7 +490,7 @@ export interface Certificate {
   /** Certificate status. */
   status: CertificateStatus
   /** Load Balancer object the certificate is attached to. */
-  lb: Lb
+  lb?: Lb
   /** Certificate name. */
   name: string
   /** Date on which the certificate was created. */
@@ -508,7 +508,7 @@ export interface AclAction {
   /** Action to take when incoming traffic matches an ACL filter. */
   type: AclActionType
   /** Redirection parameters when using an ACL with a `redirect` action. */
-  redirect: AclActionRedirect
+  redirect?: AclActionRedirect
 }
 
 export interface AclMatch {
@@ -543,9 +543,9 @@ export interface Frontend {
   /** Port the frontend listens on. */
   inboundPort: number
   /** Backend object the frontend is attached to. */
-  backend: Backend
+  backend?: Backend
   /** Load Balancer object the frontend is attached to. */
-  lb: Lb
+  lb?: Lb
   /** Maximum allowed inactivity time on the client side. */
   timeoutClient?: string
   /** @deprecated Certificate, deprecated in favor of certificate_ids array. */
@@ -639,11 +639,11 @@ export interface Acl {
    * ACL match filter object. One of `ip_subnet` or `http_filter` &
    * `http_filter_value` are required.
    */
-  match: AclMatch
+  match?: AclMatch
   /** Action to take when incoming traffic matches an ACL filter. */
-  action: AclAction
+  action?: AclAction
   /** ACL is attached to this frontend object. */
-  frontend: Frontend
+  frontend?: Frontend
   /**
    * Priority of this ACL (ACLs are applied in ascending order, 0 is the first
    * ACL executed).
@@ -659,7 +659,7 @@ export interface Acl {
 
 export interface PrivateNetwork {
   /** Load Balancer object which is attached to the Private Network. */
-  lb: Lb
+  lb?: Lb
   /** IPAM IDs of the booked IP addresses. */
   ipamIds: string[]
   /**
@@ -720,7 +720,7 @@ export interface Route {
    * matching SNI value or HTTP Host header value), it will be passed to the
    * target backend.
    */
-  match: RouteMatch
+  match?: RouteMatch
   /** Date on which the route was created. */
   createdAt?: Date
   /** Date on which the route was last updated. */
@@ -736,7 +736,7 @@ export interface AclSpec {
    * ACL match filter object. One of `ip_subnet` or `http_filter` and
    * `http_filter_value` are required.
    */
-  match: AclMatch
+  match?: AclMatch
   /**
    * Priority of this ACL (ACLs are applied in ascending order, 0 is the first
    * ACL executed).

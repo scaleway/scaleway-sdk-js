@@ -100,7 +100,9 @@ export const unmarshalDomain = (data: unknown): Domain => {
     region: data.region,
     revokedAt: unmarshalDate(data.revoked_at),
     spfConfig: data.spf_config,
-    statistics: unmarshalDomainStatistics(data.statistics),
+    statistics: data.statistics
+      ? unmarshalDomainStatistics(data.statistics)
+      : undefined,
     status: data.status,
   } as Domain
 }
@@ -159,10 +161,14 @@ export const unmarshalDomainLastStatus = (data: unknown): DomainLastStatus => {
   }
 
   return {
-    dkimRecord: unmarshalDomainLastStatusDkimRecord(data.dkim_record),
+    dkimRecord: data.dkim_record
+      ? unmarshalDomainLastStatusDkimRecord(data.dkim_record)
+      : undefined,
     domainId: data.domain_id,
     domainName: data.domain_name,
-    spfRecord: unmarshalDomainLastStatusSpfRecord(data.spf_record),
+    spfRecord: data.spf_record
+      ? unmarshalDomainLastStatusSpfRecord(data.spf_record)
+      : undefined,
   } as DomainLastStatus
 }
 

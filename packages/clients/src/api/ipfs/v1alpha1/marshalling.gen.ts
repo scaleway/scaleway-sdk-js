@@ -71,7 +71,7 @@ const unmarshalPinCID = (data: unknown): PinCID => {
 
   return {
     cid: data.cid,
-    meta: unmarshalPinCIDMeta(data.meta),
+    meta: data.meta ? unmarshalPinCIDMeta(data.meta) : undefined,
     name: data.name,
     origins: data.origins,
   } as PinCID
@@ -101,10 +101,10 @@ export const unmarshalPin = (data: unknown): Pin => {
   }
 
   return {
-    cid: unmarshalPinCID(data.cid),
+    cid: data.cid ? unmarshalPinCID(data.cid) : undefined,
     createdAt: unmarshalDate(data.created_at),
     delegates: data.delegates,
-    info: unmarshalPinInfo(data.info),
+    info: data.info ? unmarshalPinInfo(data.info) : undefined,
     pinId: data.pin_id,
     status: data.status,
   } as Pin
@@ -202,7 +202,7 @@ export const unmarshalReplacePinResponse = (
   }
 
   return {
-    pin: unmarshalPin(data.pin),
+    pin: data.pin ? unmarshalPin(data.pin) : undefined,
   } as ReplacePinResponse
 }
 

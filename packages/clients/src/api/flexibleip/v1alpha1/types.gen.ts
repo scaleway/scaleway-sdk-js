@@ -69,7 +69,7 @@ export interface FlexibleIP {
   /** IP of the flexible IP. */
   ipAddress: string
   /** MAC address of the flexible IP. */
-  macAddress: MACAddress
+  macAddress?: MACAddress
   /** ID of the server linked to the flexible IP. */
   serverId?: string
   /** Reverse DNS value. */

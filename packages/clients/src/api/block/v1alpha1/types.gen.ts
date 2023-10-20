@@ -114,7 +114,7 @@ export interface SnapshotSummary {
   /** Name of the snapshot. */
   name: string
   /** If the parent volume has been deleted, value is null. */
-  parentVolume: SnapshotParentVolume
+  parentVolume?: SnapshotParentVolume
   /** Size of the snapshot in bytes. */
   size: number
   /** UUID of the project the snapshot belongs to. */
@@ -141,7 +141,7 @@ export interface VolumeType {
   /** Price of the snapshot billed in GB/hour. */
   snapshotPricing?: Money
   /** Volume specifications of the volume type. */
-  specs: VolumeSpecifications
+  specs?: VolumeSpecifications
 }
 
 export interface Volume {
@@ -173,7 +173,7 @@ export interface Volume {
   /** Volume zone. */
   zone: Zone
   /** Specifications of the volume. */
-  specs: VolumeSpecifications
+  specs?: VolumeSpecifications
 }
 
 export type CreateSnapshotRequest = {
@@ -339,7 +339,7 @@ export interface Snapshot {
   /** Name of the snapshot. */
   name: string
   /** If the parent volume was deleted, value is null. */
-  parentVolume: SnapshotParentVolume
+  parentVolume?: SnapshotParentVolume
   /** Size in bytes of the snapshot. */
   size: number
   /** UUID of the project the snapshot belongs to. */

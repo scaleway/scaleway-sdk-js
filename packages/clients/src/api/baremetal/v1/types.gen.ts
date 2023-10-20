@@ -228,15 +228,15 @@ export interface OS {
   /** URL of this OS's logo. */
   logoUrl: string
   /** Object defining the SSH requirements to install the OS. */
-  ssh: OSOSField
+  ssh?: OSOSField
   /** Object defining the username requirements to install the OS. */
-  user: OSOSField
+  user?: OSOSField
   /** Object defining the password requirements to install the OS. */
-  password: OSOSField
+  password?: OSOSField
   /** Object defining the username requirements to install the service. */
-  serviceUser: OSOSField
+  serviceUser?: OSOSField
   /** Object defining the password requirements to install the service. */
-  servicePassword: OSOSField
+  servicePassword?: OSOSField
   /** Defines if the operating system is enabled or not. */
   enabled: boolean
   /** License required (check server options for pricing details). */
@@ -369,13 +369,13 @@ export interface Server {
   /** Zone in which is the server located. */
   zone: Zone
   /** Configuration of the installation. */
-  install: ServerInstall
+  install?: ServerInstall
   /** Status of server ping. */
   pingStatus: ServerPingStatus
   /** Options enabled on the server. */
   options: ServerOption[]
   /** Configuration of rescue boot. */
-  rescueServer: ServerRescueServer
+  rescueServer?: ServerRescueServer
 }
 
 export interface Setting {

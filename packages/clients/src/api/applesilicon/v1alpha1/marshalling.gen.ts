@@ -84,9 +84,9 @@ export const unmarshalServerType = (data: unknown): ServerType => {
   }
 
   return {
-    cpu: unmarshalServerTypeCPU(data.cpu),
-    disk: unmarshalServerTypeDisk(data.disk),
-    memory: unmarshalServerTypeMemory(data.memory),
+    cpu: data.cpu ? unmarshalServerTypeCPU(data.cpu) : undefined,
+    disk: data.disk ? unmarshalServerTypeDisk(data.disk) : undefined,
+    memory: data.memory ? unmarshalServerTypeMemory(data.memory) : undefined,
     minimumLeaseDuration: data.minimum_lease_duration,
     name: data.name,
     stock: data.stock,

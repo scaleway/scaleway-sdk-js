@@ -61,7 +61,7 @@ export interface EndpointSpecPrivateNetworkSpec {
    * Automated configuration of your Private Network endpoint with Scaleway IPAM
    * service.
    */
-  ipamConfig: EndpointSpecPrivateNetworkSpecIpamConfig
+  ipamConfig?: EndpointSpecPrivateNetworkSpecIpamConfig
 }
 
 export interface EndpointSpecPublicNetworkSpec {}

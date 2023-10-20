@@ -378,10 +378,13 @@ const marshalEndpointSpecPrivateNetworkSpec = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   id: request.id,
-  ipam_config: marshalEndpointSpecPrivateNetworkSpecIpamConfig(
-    request.ipamConfig,
-    defaults,
-  ),
+  ipam_config:
+    request.ipamConfig !== undefined
+      ? marshalEndpointSpecPrivateNetworkSpecIpamConfig(
+          request.ipamConfig,
+          defaults,
+        )
+      : undefined,
   service_ips: request.serviceIps,
 })
 

@@ -51,7 +51,9 @@ export const unmarshalFlexibleIP = (data: unknown): FlexibleIP => {
     description: data.description,
     id: data.id,
     ipAddress: data.ip_address,
-    macAddress: unmarshalMACAddress(data.mac_address),
+    macAddress: data.mac_address
+      ? unmarshalMACAddress(data.mac_address)
+      : undefined,
     organizationId: data.organization_id,
     projectId: data.project_id,
     reverse: data.reverse,

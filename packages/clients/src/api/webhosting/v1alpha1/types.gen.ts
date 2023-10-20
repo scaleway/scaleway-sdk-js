@@ -127,7 +127,7 @@ export interface Hosting {
   /** DNS status of the Web Hosting plan. */
   dnsStatus: HostingDnsStatus
   /** URL to connect to cPanel dashboard and to Webmail interface. */
-  cpanelUrls: HostingCpanelUrls
+  cpanelUrls?: HostingCpanelUrls
   /** Main Web Hosting cPanel username. */
   username: string
   /** Indicates if the hosting offer has reached its end of life. */
@@ -142,7 +142,7 @@ export interface Offer {
   /** Unique identifier used for billing. */
   billingOperationPath: string
   /** Product constituting this offer. */
-  product: OfferProduct
+  product?: OfferProduct
   /** Price of this offer. */
   price?: Money
   /**

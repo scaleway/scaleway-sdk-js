@@ -75,7 +75,7 @@ export const unmarshalNatsCredentials = (data: unknown): NatsCredentials => {
   return {
     checksum: data.checksum,
     createdAt: unmarshalDate(data.created_at),
-    credentials: unmarshalFile(data.credentials),
+    credentials: data.credentials ? unmarshalFile(data.credentials) : undefined,
     id: data.id,
     name: data.name,
     natsAccountId: data.nats_account_id,
@@ -109,7 +109,9 @@ export const unmarshalSnsCredentials = (data: unknown): SnsCredentials => {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     name: data.name,
-    permissions: unmarshalSnsPermissions(data.permissions),
+    permissions: data.permissions
+      ? unmarshalSnsPermissions(data.permissions)
+      : undefined,
     projectId: data.project_id,
     region: data.region,
     secretChecksum: data.secret_checksum,
@@ -144,7 +146,9 @@ export const unmarshalSqsCredentials = (data: unknown): SqsCredentials => {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     name: data.name,
-    permissions: unmarshalSqsPermissions(data.permissions),
+    permissions: data.permissions
+      ? unmarshalSqsPermissions(data.permissions)
+      : undefined,
     projectId: data.project_id,
     region: data.region,
     secretChecksum: data.secret_checksum,
