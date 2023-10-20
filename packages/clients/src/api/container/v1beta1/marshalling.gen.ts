@@ -493,19 +493,19 @@ export const marshalCreateTriggerRequest = (
         : undefined,
     },
     {
-      param: 'sqs_config',
-      value: request.sqsConfig
-        ? marshalCreateTriggerRequestSqsClientConfig(
-            request.sqsConfig,
+      param: 'scw_nats_config',
+      value: request.scwNatsConfig
+        ? marshalCreateTriggerRequestMnqNatsClientConfig(
+            request.scwNatsConfig,
             defaults,
           )
         : undefined,
     },
     {
-      param: 'scw_nats_config',
-      value: request.scwNatsConfig
-        ? marshalCreateTriggerRequestMnqNatsClientConfig(
-            request.scwNatsConfig,
+      param: 'sqs_config',
+      value: request.sqsConfig
+        ? marshalCreateTriggerRequestSqsClientConfig(
+            request.sqsConfig,
             defaults,
           )
         : undefined,
