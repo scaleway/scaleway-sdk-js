@@ -15,6 +15,8 @@ export type {
   DomainLastStatusDkimRecord,
   DomainLastStatusRecordStatus,
   DomainLastStatusSpfRecord,
+  DomainReputation,
+  DomainReputationStatus,
   DomainStatistics,
   DomainStatus,
   Email,

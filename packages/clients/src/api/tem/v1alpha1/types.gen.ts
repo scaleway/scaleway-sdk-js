@@ -8,6 +8,13 @@ export type DomainLastStatusRecordStatus =
   | 'invalid'
   | 'not_found'
 
+export type DomainReputationStatus =
+  | 'unknown'
+  | 'excellent'
+  | 'good'
+  | 'average'
+  | 'bad'
+
 export type DomainStatus =
   | 'unknown'
   | 'checked'
@@ -103,6 +110,11 @@ export interface Domain {
   dkimConfig: string
   /** Domain's statistics. */
   statistics?: DomainStatistics
+  /**
+   * Domain's reputation, available when your domain is checked and has sent
+   * enough emails.
+   */
+  reputation?: DomainReputation
   region: Region
 }
 
@@ -120,7 +132,7 @@ export interface DomainLastStatus {
 
 /** Domain last status. dkim record. */
 export interface DomainLastStatusDkimRecord {
-  /** Status of the DKIM record's configurartion. */
+  /** Status of the DKIM record's configuration. */
   status: DomainLastStatusRecordStatus
   /** Time and date the DKIM record was last valid. */
   lastValidAt?: Date
@@ -130,12 +142,26 @@ export interface DomainLastStatusDkimRecord {
 
 /** Domain last status. spf record. */
 export interface DomainLastStatusSpfRecord {
-  /** Status of the SPF record's configurartion. */
+  /** Status of the SPF record's configuration. */
   status: DomainLastStatusRecordStatus
   /** Time and date the SPF record was last valid. */
   lastValidAt?: Date
   /** An error text displays in case the record is not valid. */
   error?: string
+}
+
+/** Domain. reputation. */
+export interface DomainReputation {
+  /** Status of your domain reputation. */
+  status: DomainReputationStatus
+  /** Represent a number between 0 and 100 of your domain reputation score. */
+  score: number
+  /** Time and date the score was calculated. */
+  scoredAt?: Date
+  /** The domain reputation score previously calculated. */
+  previousScore?: number
+  /** Time and date the previous score was calculated. */
+  previousScoredAt?: Date
 }
 
 export interface DomainStatistics {
