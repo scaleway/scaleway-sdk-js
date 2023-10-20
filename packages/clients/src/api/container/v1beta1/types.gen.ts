@@ -154,20 +154,29 @@ export interface Container {
   region: Region
 }
 
+/** Create trigger request. mnq nats client config. */
 export interface CreateTriggerRequestMnqNatsClientConfig {
   /** @deprecated */
   mnqNamespaceId?: string
+  /** Name of the NATS subject the trigger should listen to. */
   subject: string
-  mnqProjectId: string
-  mnqRegion: string
+  /** ID of the M&Q NATS account. */
   mnqNatsAccountId: string
+  /** ID of the M&Q project. */
+  mnqProjectId: string
+  /** Region of the M&Q project. */
+  mnqRegion: string
 }
 
+/** Create trigger request. mnq sqs client config. */
 export interface CreateTriggerRequestMnqSqsClientConfig {
+  /** Name of the SQS queue the trigger should listen to. */
+  queue: string
   /** @deprecated */
   mnqNamespaceId?: string
-  queue: string
+  /** ID of the M&Q project. You must have activated SQS on this project. */
   mnqProjectId: string
+  /** Region in which the M&Q project is activated. */
   mnqRegion: string
 }
 
@@ -253,9 +262,12 @@ export interface ListTokensResponse {
   totalCount: number
 }
 
+/** List triggers response. */
 export interface ListTriggersResponse {
-  triggers: Trigger[]
+  /** Total count of existing triggers (matching any filters specified). */
   totalCount: number
+  /** Triggers on this page. */
+  triggers: Trigger[]
 }
 
 /** Log. */
@@ -337,47 +349,72 @@ export interface Token {
   expiresAt?: Date
 }
 
+/** Trigger. */
 export interface Trigger {
+  /** ID of the trigger. */
   id: string
+  /** Name of the trigger. */
   name: string
+  /** Description of the trigger. */
   description: string
-  inputType: TriggerInputType
-  status: TriggerStatus
-  errorMessage?: string
+  /** ID of the container to trigger. */
   containerId: string
+  /** Type of the input. */
+  inputType: TriggerInputType
+  /** Status of the trigger. */
+  status: TriggerStatus
+  /** Error message of the trigger. */
+  errorMessage?: string
   /**
-   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
-   * 'scwNatsConfig' could be set.
+   * Configuration for a Scaleway M&Q SQS queue.
+   *
+   * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig',
+   * 'sqsConfig' could be set.
    */
   scwSqsConfig?: TriggerMnqSqsClientConfig
   /**
-   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
-   * 'scwNatsConfig' could be set.
-   */
-  sqsConfig?: TriggerSqsClientConfig
-  /**
-   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
-   * 'scwNatsConfig' could be set.
+   * Configuration for a Scaleway M&Q NATS subject.
+   *
+   * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig',
+   * 'sqsConfig' could be set.
    */
   scwNatsConfig?: TriggerMnqNatsClientConfig
+  /**
+   * Configuration for an AWS SQS queue.
+   *
+   * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig',
+   * 'sqsConfig' could be set.
+   */
+  sqsConfig?: TriggerSqsClientConfig
 }
 
+/** Trigger. mnq nats client config. */
 export interface TriggerMnqNatsClientConfig {
   /** @deprecated */
   mnqNamespaceId?: string
+  /** Name of the NATS subject the trigger listens to. */
   subject: string
-  mnqProjectId: string
-  mnqRegion: string
-  mnqCredentialId?: string
+  /** ID of the M&Q NATS account. */
   mnqNatsAccountId: string
+  /** ID of the M&Q project. */
+  mnqProjectId: string
+  /** Region of the M&Q project. */
+  mnqRegion: string
+  /** ID of the M&Q credentials used to subscribe to the NATS subject. */
+  mnqCredentialId?: string
 }
 
+/** Trigger. mnq sqs client config. */
 export interface TriggerMnqSqsClientConfig {
   /** @deprecated */
   mnqNamespaceId?: string
+  /** Name of the SQS queue the trigger listens to. */
   queue: string
+  /** ID of the M&Q project. */
   mnqProjectId: string
+  /** Region in which the M&Q project is activated. */
   mnqRegion: string
+  /** ID of the M&Q credentials used to read from the SQS queue. */
   mnqCredentialId?: string
 }
 
@@ -829,24 +866,33 @@ export type CreateTriggerRequest = {
    * config.
    */
   region?: Region
+  /** Name of the trigger. */
   name: string
-  description?: string
+  /** ID of the container to trigger. */
   containerId: string
+  /** Description of the trigger. */
+  description?: string
   /**
-   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
-   * 'scwNatsConfig' could be set.
+   * Configuration for a Scaleway M&Q SQS queue.
+   *
+   * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig',
+   * 'sqsConfig' could be set.
    */
   scwSqsConfig?: CreateTriggerRequestMnqSqsClientConfig
   /**
-   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
-   * 'scwNatsConfig' could be set.
-   */
-  sqsConfig?: CreateTriggerRequestSqsClientConfig
-  /**
-   * One-of ('config'): at most one of 'scwSqsConfig', 'sqsConfig',
-   * 'scwNatsConfig' could be set.
+   * Configuration for a Scaleway M&Q NATS subject.
+   *
+   * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig',
+   * 'sqsConfig' could be set.
    */
   scwNatsConfig?: CreateTriggerRequestMnqNatsClientConfig
+  /**
+   * Configuration for an AWS SQS queue.
+   *
+   * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig',
+   * 'sqsConfig' could be set.
+   */
+  sqsConfig?: CreateTriggerRequestSqsClientConfig
 }
 
 export type GetTriggerRequest = {
@@ -855,6 +901,7 @@ export type GetTriggerRequest = {
    * config.
    */
   region?: Region
+  /** ID of the trigger to get. */
   triggerId: string
 }
 
@@ -864,20 +911,29 @@ export type ListTriggersRequest = {
    * config.
    */
   region?: Region
+  /** Page number to return. */
   page?: number
+  /** Maximum number of triggers to return per page. */
   pageSize?: number
+  /** Order in which to return results. */
   orderBy?: ListTriggersRequestOrderBy
   /**
+   * ID of the container the triggers belongs to.
+   *
    * One-of ('scope'): at most one of 'containerId', 'namespaceId', 'projectId'
    * could be set.
    */
   containerId?: string
   /**
+   * ID of the namespace the triggers belongs to.
+   *
    * One-of ('scope'): at most one of 'containerId', 'namespaceId', 'projectId'
    * could be set.
    */
   namespaceId?: string
   /**
+   * ID of the project the triggers belongs to.
+   *
    * One-of ('scope'): at most one of 'containerId', 'namespaceId', 'projectId'
    * could be set.
    */
@@ -890,10 +946,17 @@ export type UpdateTriggerRequest = {
    * config.
    */
   region?: Region
+  /** ID of the trigger to update. */
   triggerId: string
+  /** Name of the trigger. */
   name?: string
+  /** Description of the trigger. */
   description?: string
-  /** One-of ('config'): at most one of 'sqsConfig' could be set. */
+  /**
+   * Configuration for an AWS SQS queue.
+   *
+   * One-of ('config'): at most one of 'sqsConfig' could be set.
+   */
   sqsConfig?: UpdateTriggerRequestSqsClientConfig
 }
 
@@ -903,5 +966,6 @@ export type DeleteTriggerRequest = {
    * config.
    */
   region?: Region
+  /** ID of the trigger to delete. */
   triggerId: string
 }
