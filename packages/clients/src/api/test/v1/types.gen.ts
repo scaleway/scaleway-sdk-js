@@ -92,6 +92,7 @@ export type CreateHumanRequest = {
 export type UpdateHumanRequest = {
   /** UUID of the human you want to update. */
   humanId: string
+  /** Height of the human in meters. */
   height?: number
   shoeSize?: number
   altitudeInMeter?: number
