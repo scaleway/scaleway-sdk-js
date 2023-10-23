@@ -100,7 +100,7 @@ export type BookIPRequest = {
    */
   projectId?: string
   /** Source in which to book the IP. Not all sources are available for booking. */
-  source?: Source
+  source: Source
   /** Request an IPv6 instead of an IPv4. */
   isIpv6: boolean
   /**

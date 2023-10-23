@@ -98,10 +98,7 @@ export const marshalBookIPRequest = (
   address: request.address,
   is_ipv6: request.isIpv6,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  source:
-    request.source !== undefined
-      ? marshalSource(request.source, defaults)
-      : undefined,
+  source: marshalSource(request.source, defaults),
   tags: request.tags,
 })
 

@@ -453,7 +453,11 @@ export class API extends ParentAPI {
           ['group_ids', request.groupIds],
           ['name', request.name],
           ['order_by', request.orderBy],
-          ['organization_id', request.organizationId],
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
           ['page', request.page],
           [
             'page_size',
