@@ -148,10 +148,10 @@ export interface CreateTriggerRequestMnqNatsClientConfig {
 
 /** Create trigger request. mnq sqs client config. */
 export interface CreateTriggerRequestMnqSqsClientConfig {
-  /** Name of the SQS queue the trigger should listen to. */
-  queue: string
   /** @deprecated */
   mnqNamespaceId?: string
+  /** Name of the SQS queue the trigger should listen to. */
+  queue: string
   /** ID of the M&Q project. You must have activated SQS on this project. */
   mnqProjectId: string
   /** Region in which the M&Q project is activated. */
@@ -465,10 +465,10 @@ export interface TriggerMnqNatsClientConfig {
 
 /** Trigger. mnq sqs client config. */
 export interface TriggerMnqSqsClientConfig {
-  /** Name of the SQS queue the trigger listens to. */
-  queue: string
   /** @deprecated */
   mnqNamespaceId?: string
+  /** Name of the SQS queue the trigger listens to. */
+  queue: string
   /** ID of the M&Q project. */
   mnqProjectId: string
   /** Region in which the M&Q project is activated. */
