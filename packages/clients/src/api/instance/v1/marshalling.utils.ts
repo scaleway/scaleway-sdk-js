@@ -54,7 +54,9 @@ const marshalVolume = (
   name: request.name,
   organization: request.organization,
   project: request.project,
-  server: marshalServerSummary(request.server, defaults),
+  server: request.server
+    ? marshalServerSummary(request.server, defaults)
+    : undefined,
   size: request.size,
   state: request.state,
   tags: request.tags,

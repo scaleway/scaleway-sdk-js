@@ -72,7 +72,9 @@ export class InstanceV1UtilsAPI extends API {
   ) =>
     tryAtIntervals(
       async () => {
-        const value = await this.getImage(request).then(res => res.image)
+        const value = await this.getImage(request).then(
+          res => res.image as Image,
+        )
 
         return {
           done: !IMAGE_TRANSIENT_STATUSES.includes(value.state),
@@ -100,7 +102,7 @@ export class InstanceV1UtilsAPI extends API {
     tryAtIntervals(
       async () => {
         const value = await this.getPrivateNIC(request).then(
-          res => res.privateNic,
+          res => res.privateNic as PrivateNIC,
         )
 
         return {
@@ -128,7 +130,9 @@ export class InstanceV1UtilsAPI extends API {
   ) =>
     tryAtIntervals(
       async () => {
-        const value = await this.getServer(request).then(res => res.server)
+        const value = await this.getServer(request).then(
+          res => res.server as Server,
+        )
 
         return {
           done: !SERVER_TRANSIENT_STATUSES.includes(value.state),
@@ -155,7 +159,9 @@ export class InstanceV1UtilsAPI extends API {
   ) =>
     tryAtIntervals(
       async () => {
-        const value = await this.getSnapshot(request).then(res => res.snapshot)
+        const value = await this.getSnapshot(request).then(
+          res => res.snapshot as Snapshot,
+        )
 
         return {
           done: !SNAPSHOT_TRANSIENT_STATUSES.includes(value.state),
@@ -182,7 +188,9 @@ export class InstanceV1UtilsAPI extends API {
   ) =>
     tryAtIntervals(
       async () => {
-        const value = await this.getVolume(request).then(res => res.volume)
+        const value = await this.getVolume(request).then(
+          res => res.volume as Volume,
+        )
 
         return {
           done: !VOLUME_TRANSIENT_STATUSES.includes(value.state),
@@ -397,7 +405,7 @@ export class InstanceV1UtilsAPI extends API {
     const volumes = await this.getServer({
       serverId: request.serverId,
       zone: request.zone,
-    }).then(res => validateNotUndefined(res.server.volumes))
+    }).then(res => validateNotUndefined(res.server?.volumes))
 
     const newVolumes: Record<string, { id: string; name: string }> = {}
     for (const [key, server] of Object.entries(volumes)) {
@@ -445,7 +453,7 @@ export class InstanceV1UtilsAPI extends API {
       volumeId: request.volumeId,
       zone: request.zone,
     })
-      .then(res => validateNotUndefined(res.volume.server.id))
+      .then(res => validateNotUndefined(res.volume?.server?.id))
       .then(serverId =>
         this.getServer({
           serverId,

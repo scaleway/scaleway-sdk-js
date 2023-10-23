@@ -21,9 +21,15 @@ export class BaremetalV1UtilsAPI extends API {
   ) =>
     tryAtIntervals(
       async () => {
-        const value = await this.getServer(request).then(
-          server => server.install,
-        )
+        const value = await this.getServer(request).then(server => {
+          if (!server.install) {
+            throw new Error(
+              `Server creation has not begun for server ${request.serverId}`,
+            )
+          }
+
+          return server.install
+        })
 
         return {
           done: !SERVER_INSTALL_TRANSIENT_STATUSES.includes(value.status),
