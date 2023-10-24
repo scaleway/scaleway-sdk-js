@@ -9,7 +9,7 @@ export type DomainLastStatusRecordStatus =
   | 'not_found'
 
 export type DomainReputationStatus =
-  | 'unknown'
+  | 'unknown_status'
   | 'excellent'
   | 'good'
   | 'average'
@@ -111,8 +111,8 @@ export interface Domain {
   /** Domain's statistics. */
   statistics?: DomainStatistics
   /**
-   * Domain's reputation, available when your domain is checked and has sent
-   * enough emails.
+   * The domain's reputation is available when your domain is checked and has
+   * sent enough emails.
    */
   reputation?: DomainReputation
   region: Region
@@ -152,15 +152,19 @@ export interface DomainLastStatusSpfRecord {
 
 /** Domain. reputation. */
 export interface DomainReputation {
-  /** Status of your domain reputation. */
+  /** Status of your domain's reputation. */
   status: DomainReputationStatus
-  /** Represent a number between 0 and 100 of your domain reputation score. */
+  /**
+   * A range from 0 to 100 that determines your domain's reputation score. A
+   * score of `0` means a bad domain reputation and a score of `100` means an
+   * excellent domain reputation.
+   */
   score: number
   /** Time and date the score was calculated. */
   scoredAt?: Date
-  /** The domain reputation score previously calculated. */
+  /** The previously-calculated domain's reputation score. */
   previousScore?: number
-  /** Time and date the previous score was calculated. */
+  /** Time and date the previous reputation score was calculated. */
   previousScoredAt?: Date
 }
 
