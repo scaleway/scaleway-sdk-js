@@ -163,7 +163,9 @@ const unmarshalPlan = (data: unknown) => {
     retentionLogsInterval: data.retention_logs_interval,
     retentionMetricsInterval: data.retention_metrics_interval,
     retentionPrice: data.retention_price,
+    retentionTracesInterval: data.retention_traces_interval,
     sampleIngestionPrice: data.sample_ingestion_price,
+    tracesIngestionPrice: data.traces_ingestion_price,
   } as Plan
 }
 

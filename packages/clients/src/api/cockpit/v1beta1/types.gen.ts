@@ -193,14 +193,18 @@ export interface Plan {
   id: string
   /** Name of a given pricing plan. */
   name: PlanName
-  /** Retention for metrics. */
+  /** Interval of time during which Scaleway's Cockpit keeps your metrics. */
   retentionMetricsInterval?: string
-  /** Retention for logs. */
+  /** Interval of time during which Scaleway's Cockpit keeps your logs. */
   retentionLogsInterval?: string
-  /** Ingestion price for 1 million samples in cents. */
+  /** Interval of time during which Scaleway's Cockpit keeps your traces. */
+  retentionTracesInterval?: string
+  /** Ingestion price in cents for 1 million samples. */
   sampleIngestionPrice: number
-  /** Ingestion price for 1 GB of logs in cents. */
+  /** Ingestion price in cents for 1 GB of logs. */
   logsIngestionPrice: number
+  /** Ingestion price in cents for 1 GB of traces. */
+  tracesIngestionPrice: number
   /** Retention price in euros per month. */
   retentionPrice: number
 }
