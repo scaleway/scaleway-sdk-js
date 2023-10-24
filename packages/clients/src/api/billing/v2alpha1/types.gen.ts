@@ -2,9 +2,28 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Money } from '../../../bridge'
 
+export type DiscountDiscountMode =
+  | 'unknown_discount_mode'
+  | 'discount_mode_rate'
+  | 'discount_mode_value'
+  | 'discount_mode_splittable'
+
+export type DiscountFilterType =
+  | 'unknown_type'
+  | 'product_category'
+  | 'product'
+  | 'product_offer'
+  | 'product_reference'
+  | 'region'
+  | 'zone'
+
 export type DownloadInvoiceRequestFileType = 'pdf'
 
 export type InvoiceType = 'unknown_type' | 'periodic' | 'purchase'
+
+export type ListDiscountsRequestOrderBy =
+  | 'creation_date_desc'
+  | 'creation_date_asc'
 
 export type ListInvoicesRequestOrderBy =
   | 'invoice_number_desc'
@@ -21,6 +40,48 @@ export type ListInvoicesRequestOrderBy =
   | 'total_taxed_asc'
   | 'invoice_type_desc'
   | 'invoice_type_asc'
+
+/** Discount. */
+export interface Discount {
+  /** The ID of the discount. */
+  id: string
+  /** The creation date of the discount. */
+  creationDate?: Date
+  /** The organization ID of the discount. */
+  organizationId: string
+  /** The description of the discount. */
+  description: string
+  /** The initial value of the discount. */
+  value: number
+  /** The value indicating how much of the discount has been used. */
+  valueUsed: number
+  /** The remaining value of the discount. */
+  valueRemaining: number
+  /** The mode of the discount. */
+  mode: DiscountDiscountMode
+  /** The start date of the discount. */
+  startDate?: Date
+  /** The stop date of the discount. */
+  stopDate?: Date
+  /** The description of the coupon. */
+  coupon?: DiscountCoupon
+  /** List of products/ranges/regions/zones to limit the usability of discounts. */
+  filters: DiscountFilter[]
+}
+
+/** Discount. coupon. */
+export interface DiscountCoupon {
+  /** The description of the coupon. */
+  description?: string
+}
+
+/** Discount. filter. */
+export interface DiscountFilter {
+  /** Type of the filter. */
+  type: DiscountFilterType
+  /** Value of filter, it can be a product/range/region/zone value. */
+  value: string
+}
 
 /** Get consumption response. */
 export interface GetConsumptionResponse {
@@ -64,6 +125,14 @@ export interface Invoice {
   number: number
 }
 
+/** List discounts response. */
+export interface ListDiscountsResponse {
+  /** Total number of discounts. */
+  totalCount: number
+  /** Paginated returned discounts. */
+  discounts: Discount[]
+}
+
 /** List invoices response. */
 export interface ListInvoicesResponse {
   /** Total number of invoices. */
@@ -105,4 +174,18 @@ export type DownloadInvoiceRequest = {
   invoiceId: string
   /** Wanted file type. */
   fileType?: DownloadInvoiceRequestFileType
+}
+
+export type ListDiscountsRequest = {
+  /** Order discounts in the response by their description. */
+  orderBy?: ListDiscountsRequestOrderBy
+  /** Positive integer to choose the page to return. */
+  page?: number
+  /**
+   * Positive integer lower or equal to 100 to select the number of items to
+   * return.
+   */
+  pageSize?: number
+  /** ID of the organization. */
+  organizationId?: string
 }

@@ -7,11 +7,58 @@ import {
   unmarshalMoney,
 } from '../../../bridge'
 import type {
+  Discount,
+  DiscountCoupon,
+  DiscountFilter,
   GetConsumptionResponse,
   GetConsumptionResponseConsumption,
   Invoice,
+  ListDiscountsResponse,
   ListInvoicesResponse,
 } from './types.gen'
+
+const unmarshalDiscountCoupon = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DiscountCoupon' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return { description: data.description } as DiscountCoupon
+}
+
+const unmarshalDiscountFilter = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DiscountFilter' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return { type: data.type, value: data.value } as DiscountFilter
+}
+
+const unmarshalDiscount = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Discount' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    coupon: data.coupon ? unmarshalDiscountCoupon(data.coupon) : undefined,
+    creationDate: unmarshalDate(data.creation_date),
+    description: data.description,
+    filters: unmarshalArrayOfObject(data.filters, unmarshalDiscountFilter),
+    id: data.id,
+    mode: data.mode,
+    organizationId: data.organization_id,
+    startDate: unmarshalDate(data.start_date),
+    stopDate: unmarshalDate(data.stop_date),
+    value: data.value,
+    valueRemaining: data.value_remaining,
+    valueUsed: data.value_used,
+  } as Discount
+}
 
 const unmarshalGetConsumptionResponseConsumption = (data: unknown) => {
   if (!isJSONObject(data)) {
@@ -64,6 +111,19 @@ export const unmarshalGetConsumptionResponse = (data: unknown) => {
     ),
     updatedAt: unmarshalDate(data.updated_at),
   } as GetConsumptionResponse
+}
+
+export const unmarshalListDiscountsResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDiscountsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    discounts: unmarshalArrayOfObject(data.discounts, unmarshalDiscount),
+    totalCount: data.total_count,
+  } as ListDiscountsResponse
 }
 
 export const unmarshalListInvoicesResponse = (data: unknown) => {
