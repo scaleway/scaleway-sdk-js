@@ -71,6 +71,14 @@ export type ListPATRulesRequestOrderBy =
 
 export type PATRuleProtocol = 'unknown' | 'both' | 'tcp' | 'udp'
 
+/** Create gateway network request. ipam config. */
+export interface CreateGatewayNetworkRequestIpamConfig {
+  /** Enabling the default route also enables masquerading. */
+  pushDefaultRoute: boolean
+  /** Use this IPAM-booked IP ID as the Gateway's IP in this Private Network. */
+  ipamIpId?: string
+}
+
 /** Dhcp. */
 export interface DHCP {
   /** ID of the DHCP config. */
@@ -292,6 +300,8 @@ export interface IP {
 export interface IpamConfig {
   /** Defines whether the default route is enabled on that Gateway Network. */
   pushDefaultRoute: boolean
+  /** IPAM-booked IP ID as the Gateway's IP in this Private Network. */
+  ipamIpId: string
 }
 
 /** List dhcp entries response. */
@@ -407,6 +417,14 @@ export interface SetPATRulesRequestRule {
 export interface SetPATRulesResponse {
   /** List of PAT rules. */
   patRules: PATRule[]
+}
+
+/** Update gateway network request. ipam config. */
+export interface UpdateGatewayNetworkRequestIpamConfig {
+  /** Enabling the default route also enables masquerading. */
+  pushDefaultRoute?: boolean
+  /** Use this IPAM-booked IP ID as the Gateway's IP in this Private Network. */
+  ipamIpId?: string
 }
 
 export type ListGatewaysRequest = {
@@ -592,7 +610,7 @@ export type CreateGatewayNetworkRequest = {
    * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address',
    * 'ipamConfig' could be set.
    */
-  ipamConfig?: IpamConfig
+  ipamConfig?: CreateGatewayNetworkRequestIpamConfig
 }
 
 export type UpdateGatewayNetworkRequest = {
@@ -635,7 +653,7 @@ export type UpdateGatewayNetworkRequest = {
    * One-of ('ipConfig'): at most one of 'dhcpId', 'address', 'ipamConfig' could
    * be set.
    */
-  ipamConfig?: IpamConfig
+  ipamConfig?: UpdateGatewayNetworkRequestIpamConfig
 }
 
 export type DeleteGatewayNetworkRequest = {

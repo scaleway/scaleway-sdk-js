@@ -12,6 +12,7 @@ import type {
   CreateDHCPEntryRequest,
   CreateDHCPRequest,
   CreateGatewayNetworkRequest,
+  CreateGatewayNetworkRequestIpamConfig,
   CreateGatewayRequest,
   CreateIPRequest,
   CreatePATRuleRequest,
@@ -39,6 +40,7 @@ import type {
   UpdateDHCPEntryRequest,
   UpdateDHCPRequest,
   UpdateGatewayNetworkRequest,
+  UpdateGatewayNetworkRequestIpamConfig,
   UpdateGatewayRequest,
   UpdateIPRequest,
   UpdatePATRuleRequest,
@@ -81,7 +83,10 @@ const unmarshalIpamConfig = (data: unknown) => {
     )
   }
 
-  return { pushDefaultRoute: data.push_default_route } as IpamConfig
+  return {
+    ipamIpId: data.ipam_ip_id,
+    pushDefaultRoute: data.push_default_route,
+  } as IpamConfig
 }
 
 export const unmarshalGatewayNetwork = (data: unknown) => {
@@ -355,10 +360,11 @@ export const marshalCreateDHCPRequest = (
   valid_lifetime: request.validLifetime,
 })
 
-const marshalIpamConfig = (
-  request: IpamConfig,
+const marshalCreateGatewayNetworkRequestIpamConfig = (
+  request: CreateGatewayNetworkRequestIpamConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  ipam_ip_id: request.ipamIpId,
   push_default_route: request.pushDefaultRoute,
 })
 
@@ -378,6 +384,14 @@ const marshalSetPATRulesRequestRule = (
   private_port: request.privatePort,
   protocol: request.protocol,
   public_port: request.publicPort,
+})
+
+const marshalUpdateGatewayNetworkRequestIpamConfig = (
+  request: UpdateGatewayNetworkRequestIpamConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ipam_ip_id: request.ipamIpId,
+  push_default_route: request.pushDefaultRoute,
 })
 
 export const marshalCreateDHCPEntryRequest = (
@@ -415,7 +429,10 @@ export const marshalCreateGatewayNetworkRequest = (
     {
       param: 'ipam_config',
       value: request.ipamConfig
-        ? marshalIpamConfig(request.ipamConfig, defaults)
+        ? marshalCreateGatewayNetworkRequestIpamConfig(
+            request.ipamConfig,
+            defaults,
+          )
         : undefined,
     },
   ]),
@@ -521,7 +538,10 @@ export const marshalUpdateGatewayNetworkRequest = (
     {
       param: 'ipam_config',
       value: request.ipamConfig
-        ? marshalIpamConfig(request.ipamConfig, defaults)
+        ? marshalUpdateGatewayNetworkRequestIpamConfig(
+            request.ipamConfig,
+            defaults,
+          )
         : undefined,
     },
   ]),
