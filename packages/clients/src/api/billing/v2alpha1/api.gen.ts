@@ -8,12 +8,15 @@ import {
 } from '../../../bridge'
 import {
   unmarshalGetConsumptionResponse,
+  unmarshalListDiscountsResponse,
   unmarshalListInvoicesResponse,
 } from './marshalling.gen'
 import type {
   DownloadInvoiceRequest,
   GetConsumptionRequest,
   GetConsumptionResponse,
+  ListDiscountsRequest,
+  ListDiscountsResponse,
   ListInvoicesRequest,
   ListInvoicesResponse,
 } from './types.gen'
@@ -94,4 +97,35 @@ export class API extends ParentAPI {
       urlParams: urlParams(['dl', 1], ['file_type', request.fileType ?? 'pdf']),
       responseType: 'blob',
     })
+
+  protected pageOfListDiscounts = (
+    request: Readonly<ListDiscountsRequest> = {},
+  ) =>
+    this.client.fetch<ListDiscountsResponse>(
+      {
+        method: 'GET',
+        path: `/billing/v2alpha1/discounts`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy ?? 'creation_date_desc'],
+          ['organization_id', request.organizationId],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListDiscountsResponse,
+    )
+
+  /**
+   * List all user's discounts. List all discounts for an organization and
+   * usable categories/products/offers/references/regions/zones where the
+   * discount can be applied.
+   *
+   * @param request - The request {@link ListDiscountsRequest}
+   * @returns A Promise of ListDiscountsResponse
+   */
+  listDiscounts = (request: Readonly<ListDiscountsRequest> = {}) =>
+    enrichForPagination('discounts', this.pageOfListDiscounts, request)
 }
