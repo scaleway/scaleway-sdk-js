@@ -884,6 +884,12 @@ export class API extends ParentAPI {
       unmarshalToken,
     )
 
+  /**
+   * Create a trigger. Create a new trigger for a specified function.
+   *
+   * @param request - The request {@link CreateTriggerRequest}
+   * @returns A Promise of Trigger
+   */
   createTrigger = (request: Readonly<CreateTriggerRequest>) =>
     this.client.fetch<Trigger>(
       {
@@ -900,6 +906,12 @@ export class API extends ParentAPI {
       unmarshalTrigger,
     )
 
+  /**
+   * Get a trigger. Get a trigger with a specified ID.
+   *
+   * @param request - The request {@link GetTriggerRequest}
+   * @returns A Promise of Trigger
+   */
   getTrigger = (request: Readonly<GetTriggerRequest>) =>
     this.client.fetch<Trigger>(
       {
@@ -971,9 +983,22 @@ export class API extends ParentAPI {
       unmarshalListTriggersResponse,
     )
 
+  /**
+   * List all triggers. List all triggers belonging to a specified Organization
+   * or Project.
+   *
+   * @param request - The request {@link ListTriggersRequest}
+   * @returns A Promise of ListTriggersResponse
+   */
   listTriggers = (request: Readonly<ListTriggersRequest> = {}) =>
     enrichForPagination('triggers', this.pageOfListTriggers, request)
 
+  /**
+   * Update a trigger. Update a trigger with a specified ID.
+   *
+   * @param request - The request {@link UpdateTriggerRequest}
+   * @returns A Promise of Trigger
+   */
   updateTrigger = (request: Readonly<UpdateTriggerRequest>) =>
     this.client.fetch<Trigger>(
       {
@@ -990,6 +1015,12 @@ export class API extends ParentAPI {
       unmarshalTrigger,
     )
 
+  /**
+   * Delete a trigger. Delete a trigger with a specified ID.
+   *
+   * @param request - The request {@link DeleteTriggerRequest}
+   * @returns A Promise of Trigger
+   */
   deleteTrigger = (request: Readonly<DeleteTriggerRequest>) =>
     this.client.fetch<Trigger>(
       {
