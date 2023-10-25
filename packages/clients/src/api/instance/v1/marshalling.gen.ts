@@ -320,6 +320,7 @@ const unmarshalServerIp = (data: unknown) => {
     id: data.id,
     netmask: data.netmask,
     provisioningMode: data.provisioning_mode,
+    state: data.state,
     tags: data.tags,
   } as ServerIp
 }
@@ -1555,6 +1556,7 @@ const marshalServerIp = (
   id: request.id,
   netmask: request.netmask,
   provisioning_mode: request.provisioningMode,
+  state: request.state,
   tags: request.tags,
 })
 
