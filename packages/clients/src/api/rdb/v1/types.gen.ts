@@ -752,6 +752,22 @@ export interface UpgradableVersion {
   minorVersion: string
 }
 
+/** Upgrade instance request. major upgrade workflow. */
+export interface UpgradeInstanceRequestMajorUpgradeWorkflow {
+  /**
+   * Update your database engine to a newer version. This will create a new
+   * Database Instance with same specifications as the current one and perform a
+   * Database Engine upgrade.
+   */
+  upgradableVersionId: string
+  /**
+   * Include endpoint during the migration. At the end of the migration
+   * procedure this option let you migrate all your database endpoint to the
+   * upgraded instance.
+   */
+  withEndpoints: boolean
+}
+
 /** User. */
 export interface User {
   /**
@@ -909,7 +925,8 @@ export type UpgradeInstanceRequest = {
    * Node type of the Database Instance you want to upgrade to.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
-   * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
+   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow'
+   * could be set.
    */
   nodeType?: string
   /**
@@ -917,21 +934,24 @@ export type UpgradeInstanceRequest = {
    * Instance.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
-   * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
+   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow'
+   * could be set.
    */
   enableHa?: boolean
   /**
    * Increase your block storage volume size.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
-   * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
+   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow'
+   * could be set.
    */
   volumeSize?: number
   /**
    * Change your Database Instance storage type.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
-   * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
+   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow'
+   * could be set.
    */
   volumeType?: VolumeType
   /**
@@ -940,9 +960,19 @@ export type UpgradeInstanceRequest = {
    * Database Engine upgrade.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
-   * 'volumeSize', 'volumeType', 'upgradableVersionId' could be set.
+   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow'
+   * could be set.
    */
   upgradableVersionId?: string
+  /**
+   * Upgrade your database engine to a new major version including instance
+   * endpoints.
+   *
+   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
+   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow'
+   * could be set.
+   */
+  majorUpgradeWorkflow?: UpgradeInstanceRequestMajorUpgradeWorkflow
 }
 
 export type ListInstancesRequest = {

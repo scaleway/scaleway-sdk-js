@@ -133,6 +133,7 @@ export type {
   UpdateUserRequest,
   UpgradableVersion,
   UpgradeInstanceRequest,
+  UpgradeInstanceRequestMajorUpgradeWorkflow,
   User,
   Volume,
   VolumeType,
