@@ -35,6 +35,7 @@ export type {
   Product,
   ProtectSecretRequest,
   Secret,
+  SecretEphemeralAction,
   SecretStatus,
   SecretType,
   SecretVersion,
