@@ -22,7 +22,6 @@ import type {
   PinCID,
   PinCIDMeta,
   PinInfo,
-  PinOptions,
   ReplacePinRequest,
   ReplacePinResponse,
   UpdateVolumeRequest,
@@ -196,14 +195,6 @@ export const unmarshalReplacePinResponse = (data: unknown) => {
   } as ReplacePinResponse
 }
 
-const marshalPinOptions = (
-  request: PinOptions,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  replication_count: request.replicationCount,
-  required_zones: request.requiredZones,
-})
-
 export const marshalCreatePinByCIDRequest = (
   request: CreatePinByCIDRequest,
   defaults: DefaultValues,
@@ -211,9 +202,6 @@ export const marshalCreatePinByCIDRequest = (
   cid: request.cid,
   name: request.name,
   origins: request.origins,
-  pin_options: request.pinOptions
-    ? marshalPinOptions(request.pinOptions, defaults)
-    : undefined,
   volume_id: request.volumeId,
 })
 
@@ -222,9 +210,6 @@ export const marshalCreatePinByURLRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  pin_options: request.pinOptions
-    ? marshalPinOptions(request.pinOptions, defaults)
-    : undefined,
   url: request.url,
   volume_id: request.volumeId,
 })
@@ -272,9 +257,6 @@ export const marshalReplacePinRequest = (
   cid: request.cid,
   name: request.name,
   origins: request.origins,
-  pin_options: request.pinOptions
-    ? marshalPinOptions(request.pinOptions, defaults)
-    : undefined,
   volume_id: request.volumeId,
 })
 

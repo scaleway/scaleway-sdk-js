@@ -110,11 +110,6 @@ export interface PinInfo {
   statusDetails: PinDetails
 }
 
-export interface PinOptions {
-  requiredZones: string[]
-  replicationCount: number
-}
-
 export interface ReplacePinResponse {
   pin?: Pin
 }
@@ -205,8 +200,6 @@ export type CreatePinByURLRequest = {
   url: string
   /** Pin name. */
   name?: string
-  /** Pin options. */
-  pinOptions?: PinOptions
 }
 
 export type CreatePinByCIDRequest = {
@@ -223,8 +216,6 @@ export type CreatePinByCIDRequest = {
   origins?: string[]
   /** Pin name. */
   name?: string
-  /** Pin options. */
-  pinOptions?: PinOptions
 }
 
 export type ReplacePinRequest = {
@@ -243,8 +234,6 @@ export type ReplacePinRequest = {
   name?: string
   /** Node containing the content you want to pin. */
   origins?: string[]
-  /** Pin options. */
-  pinOptions?: PinOptions
 }
 
 export type GetPinRequest = {

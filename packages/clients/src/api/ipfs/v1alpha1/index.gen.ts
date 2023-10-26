@@ -33,7 +33,6 @@ export type {
   PinCIDMeta,
   PinDetails,
   PinInfo,
-  PinOptions,
   PinStatus,
   ReplacePinRequest,
   ReplacePinResponse,
