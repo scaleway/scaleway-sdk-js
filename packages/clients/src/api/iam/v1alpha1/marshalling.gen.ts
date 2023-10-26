@@ -25,12 +25,14 @@ import type {
   ListApplicationsResponse,
   ListGroupsResponse,
   ListJWTsResponse,
+  ListLogsResponse,
   ListPermissionSetsResponse,
   ListPoliciesResponse,
   ListQuotaResponse,
   ListRulesResponse,
   ListSSHKeysResponse,
   ListUsersResponse,
+  Log,
   PermissionSet,
   Policy,
   Quotum,
@@ -126,6 +128,26 @@ export const unmarshalJWT = (data: unknown) => {
     updatedAt: unmarshalDate(data.updated_at),
     userAgent: data.user_agent,
   } as JWT
+}
+
+export const unmarshalLog = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Log' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    action: data.action,
+    bearerId: data.bearer_id,
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    ip: data.ip,
+    organizationId: data.organization_id,
+    resourceId: data.resource_id,
+    resourceType: data.resource_type,
+    userAgent: data.user_agent,
+  } as Log
 }
 
 const unmarshalPermissionSet = (data: unknown) => {
@@ -296,6 +318,19 @@ export const unmarshalListJWTsResponse = (data: unknown) => {
     jwts: unmarshalArrayOfObject(data.jwts, unmarshalJWT),
     totalCount: data.total_count,
   } as ListJWTsResponse
+}
+
+export const unmarshalListLogsResponse = (data: unknown) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListLogsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    logs: unmarshalArrayOfObject(data.logs, unmarshalLog),
+    totalCount: data.total_count,
+  } as ListLogsResponse
 }
 
 export const unmarshalListPermissionSetsResponse = (data: unknown) => {

@@ -32,12 +32,14 @@ import {
   unmarshalListApplicationsResponse,
   unmarshalListGroupsResponse,
   unmarshalListJWTsResponse,
+  unmarshalListLogsResponse,
   unmarshalListPermissionSetsResponse,
   unmarshalListPoliciesResponse,
   unmarshalListQuotaResponse,
   unmarshalListRulesResponse,
   unmarshalListSSHKeysResponse,
   unmarshalListUsersResponse,
+  unmarshalLog,
   unmarshalPolicy,
   unmarshalQuotum,
   unmarshalSSHKey,
@@ -67,6 +69,7 @@ import type {
   GetApplicationRequest,
   GetGroupRequest,
   GetJWTRequest,
+  GetLogRequest,
   GetPolicyRequest,
   GetQuotumRequest,
   GetSSHKeyRequest,
@@ -81,6 +84,8 @@ import type {
   ListGroupsResponse,
   ListJWTsRequest,
   ListJWTsResponse,
+  ListLogsRequest,
+  ListLogsResponse,
   ListPermissionSetsRequest,
   ListPermissionSetsResponse,
   ListPoliciesRequest,
@@ -93,6 +98,7 @@ import type {
   ListSSHKeysResponse,
   ListUsersRequest,
   ListUsersResponse,
+  Log,
   Policy,
   Quotum,
   RemoveGroupMemberRequest,
@@ -1151,4 +1157,43 @@ export class API extends ParentAPI {
       method: 'DELETE',
       path: `/iam/v1alpha1/jwts/${validatePathParam('jti', request.jti)}`,
     })
+
+  protected pageOfListLogs = (request: Readonly<ListLogsRequest> = {}) =>
+    this.client.fetch<ListLogsResponse>(
+      {
+        method: 'GET',
+        path: `/iam/v1alpha1/logs`,
+        urlParams: urlParams(
+          ['action', request.action ?? 'unknown_action'],
+          ['created_after', request.createdAfter],
+          ['created_before', request.createdBefore],
+          ['order_by', request.orderBy ?? 'created_at_asc'],
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['resource_type', request.resourceType ?? 'unknown_resource_type'],
+          ['search', request.search],
+        ),
+      },
+      unmarshalListLogsResponse,
+    )
+
+  listLogs = (request: Readonly<ListLogsRequest> = {}) =>
+    enrichForPagination('logs', this.pageOfListLogs, request)
+
+  getLog = (request: Readonly<GetLogRequest>) =>
+    this.client.fetch<Log>(
+      {
+        method: 'GET',
+        path: `/iam/v1alpha1/logs/${validatePathParam('logId', request.logId)}`,
+      },
+      unmarshalLog,
+    )
 }

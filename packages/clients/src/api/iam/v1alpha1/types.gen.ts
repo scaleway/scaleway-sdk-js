@@ -35,6 +35,8 @@ export type ListJWTsRequestOrderBy =
   | 'updated_at_asc'
   | 'updated_at_desc'
 
+export type ListLogsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+
 export type ListPermissionSetsRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
@@ -66,6 +68,16 @@ export type ListUsersRequestOrderBy =
   | 'email_desc'
   | 'last_login_asc'
   | 'last_login_desc'
+
+export type LogAction = 'unknown_action' | 'created' | 'updated' | 'deleted'
+
+export type LogResourceType =
+  | 'unknown_resource_type'
+  | 'api_key'
+  | 'user'
+  | 'application'
+  | 'group'
+  | 'policy'
 
 export type PermissionSetScopeType =
   | 'unknown_scope_type'
@@ -200,6 +212,14 @@ export interface ListJWTsResponse {
   totalCount: number
 }
 
+/** List logs response. */
+export interface ListLogsResponse {
+  /** List of logs. */
+  logs: Log[]
+  /** Total count of logs. */
+  totalCount: number
+}
+
 /** List permission sets response. */
 export interface ListPermissionSetsResponse {
   /** List of permission sets. */
@@ -246,6 +266,28 @@ export interface ListUsersResponse {
   users: User[]
   /** Total count of users. */
   totalCount: number
+}
+
+/** Log. */
+export interface Log {
+  /** Log ID. */
+  id: string
+  /** Creation date of the log. */
+  createdAt?: Date
+  /** IP address of the HTTP request linked to the log. */
+  ip: string
+  /** User-Agent of the HTTP request linked to the log. */
+  userAgent: string
+  /** Action linked to the log. */
+  action: LogAction
+  /** ID of the principal at the origin of the log. */
+  bearerId: string
+  /** ID of Organization linked to the log. */
+  organizationId: string
+  /** Type of the resource linked to the log. */
+  resourceType: LogResourceType
+  /** ID of the resource linked to the log. */
+  resourceId: string
 }
 
 /** Permission set. */
@@ -918,4 +960,30 @@ export type GetJWTRequest = {
 export type DeleteJWTRequest = {
   /** JWT ID of the JWT to delete. */
   jti: string
+}
+
+export type ListLogsRequest = {
+  /** Criteria for sorting results. */
+  orderBy?: ListLogsRequestOrderBy
+  /** Filter by Organization ID. */
+  organizationId?: string
+  /** Number of results per page. Value must be between 1 and 100. */
+  pageSize?: number
+  /** Page number. Value must be greater to 1. */
+  page?: number
+  /** Defined whether or not to filter out logs created after this timestamp. */
+  createdAfter?: Date
+  /** Defined whether or not to filter out logs created before this timestamp. */
+  createdBefore?: Date
+  /** Defined whether or not to filter out by a specific action. */
+  action?: LogAction
+  /** Defined whether or not to filter out by a specific type of resource. */
+  resourceType?: LogResourceType
+  /** Defined whether or not to filter out log by bearer ID or resource ID. */
+  search?: string
+}
+
+export type GetLogRequest = {
+  /** ID of the log. */
+  logId: string
 }

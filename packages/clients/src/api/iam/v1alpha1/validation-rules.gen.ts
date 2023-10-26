@@ -112,6 +112,16 @@ export const ListJWTsRequest = {
   },
 }
 
+export const ListLogsRequest = {
+  page: {
+    greaterThan: 0,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const ListPermissionSetsRequest = {
   page: {
     greaterThan: 0,
