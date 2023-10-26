@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.39.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.38.1...@scaleway/sdk@1.39.0) (2023-10-26)
+
+### Features
+
+- **billing:** discount application scope endpoint ([#953](https://github.com/scaleway/scaleway-sdk-js/issues/953)) ([5300fc3](https://github.com/scaleway/scaleway-sdk-js/commit/5300fc3585bb065fd996c5d2f86886b33e70d4a4))
+- **cockpit:** add traces infos to plan ([#954](https://github.com/scaleway/scaleway-sdk-js/issues/954)) ([c74c0c4](https://github.com/scaleway/scaleway-sdk-js/commit/c74c0c41b52aaf9f3d5274fcb3dc2e783c4679e2))
+- **iam:** add methods for public logs ([#957](https://github.com/scaleway/scaleway-sdk-js/issues/957)) ([84a7095](https://github.com/scaleway/scaleway-sdk-js/commit/84a7095a503498cfab04d8114e5e595f5125dcbe))
+- **instance:** expose IP state in server.public_ips ([#956](https://github.com/scaleway/scaleway-sdk-js/issues/956)) ([3ad21cb](https://github.com/scaleway/scaleway-sdk-js/commit/3ad21cb822b589a438e2f488306df9a1af7fd144))
+- **ipfs:** remove useless fields in ipfs api ([#959](https://github.com/scaleway/scaleway-sdk-js/issues/959)) ([7f57b6a](https://github.com/scaleway/scaleway-sdk-js/commit/7f57b6ae3a09cfbf80c5234b980677c899ecda25))
+- **rdb:** add seemless major upgrade ([#958](https://github.com/scaleway/scaleway-sdk-js/issues/958)) ([2b19def](https://github.com/scaleway/scaleway-sdk-js/commit/2b19def877bc2cf2c2d4cc1df40c243da92c117b))
+- **vpc_gw:** support passing IPAM IP IDs ([#952](https://github.com/scaleway/scaleway-sdk-js/issues/952)) ([529c0d3](https://github.com/scaleway/scaleway-sdk-js/commit/529c0d38a9bc4450db3249a810a967dc9bbea63f))
+
 ## [1.38.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.38.0...@scaleway/sdk@1.38.1) (2023-10-23)
 
 **Note:** Version bump only for package @scaleway/sdk
