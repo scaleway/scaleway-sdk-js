@@ -124,6 +124,7 @@ export type {
   ServerIp,
   ServerIpIpFamily,
   ServerIpProvisioningMode,
+  ServerIpState,
   ServerIpv6,
   ServerLocation,
   ServerMaintenance,

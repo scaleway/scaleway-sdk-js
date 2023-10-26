@@ -52,6 +52,13 @@ export type ServerIpIpFamily = 'inet' | 'inet6'
 
 export type ServerIpProvisioningMode = 'manual' | 'dhcp' | 'slaac'
 
+export type ServerIpState =
+  | 'unknown_state'
+  | 'detached'
+  | 'attached'
+  | 'pending'
+  | 'error'
+
 export type ServerState =
   | 'running'
   | 'stopped'
@@ -638,6 +645,7 @@ export interface ServerIp {
   provisioningMode: ServerIpProvisioningMode
   /** Tags associated with the IP. */
   tags: string[]
+  state: ServerIpState
 }
 
 /** Server. ipv6. */
