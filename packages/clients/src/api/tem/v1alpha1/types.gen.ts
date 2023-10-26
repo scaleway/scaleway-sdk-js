@@ -120,7 +120,7 @@ export interface Domain {
 
 /** Domain last status. */
 export interface DomainLastStatus {
-  /** The id of the domain. */
+  /** The ID of the domain. */
   domainId: string
   /** The domain name (example.com). */
   domainName: string

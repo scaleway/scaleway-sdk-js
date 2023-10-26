@@ -231,7 +231,13 @@ export class API extends ParentAPI {
 
   /**
    * Get information about a domain. Retrieve information about a specific
-   * domain using the `region` and `domain_id` parameters.
+   * domain using the `region` and `domain_id` parameters. Monitor your domain's
+   * reputation and improve **average** and **bad** reputation statuses, using
+   * your domain's **Email activity** tab on the [Scaleway
+   * console](https://console.scaleway.com/transactional-email/domains) to get a
+   * more detailed report. Check out our [dedicated
+   * documentation](https://www.scaleway.com/en/docs/managed-services/transactional-email/reference-content/understanding-tem-reputation-score/)
+   * to improve your domain's reputation.
    *
    * @param request - The request {@link GetDomainRequest}
    * @returns A Promise of Domain
@@ -292,7 +298,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List domains. Retrieve domains in a specific project or in a specific
+   * List domains. Retrieve domains in a specific Project or in a specific
    * Organization using the `region` parameter.
    *
    * @param request - The request {@link ListDomainsRequest}
