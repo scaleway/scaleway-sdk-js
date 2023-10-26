@@ -88,6 +88,7 @@ import type {
   UpdateUserRequest,
   UpgradableVersion,
   UpgradeInstanceRequest,
+  UpgradeInstanceRequestMajorUpgradeWorkflow,
   User,
   Volume,
 } from './types.gen'
@@ -935,6 +936,14 @@ const marshalReadReplicaEndpointSpec = (
   ]),
 })
 
+const marshalUpgradeInstanceRequestMajorUpgradeWorkflow = (
+  request: UpgradeInstanceRequestMajorUpgradeWorkflow,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  upgradable_version_id: request.upgradableVersionId,
+  with_endpoints: request.withEndpoints,
+})
+
 export const marshalAddInstanceACLRulesRequest = (
   request: AddInstanceACLRulesRequest,
   defaults: DefaultValues,
@@ -1197,6 +1206,15 @@ export const marshalUpgradeInstanceRequest = (
     {
       param: 'upgradable_version_id',
       value: request.upgradableVersionId,
+    },
+    {
+      param: 'major_upgrade_workflow',
+      value: request.majorUpgradeWorkflow
+        ? marshalUpgradeInstanceRequestMajorUpgradeWorkflow(
+            request.majorUpgradeWorkflow,
+            defaults,
+          )
+        : undefined,
     },
   ]),
 })
