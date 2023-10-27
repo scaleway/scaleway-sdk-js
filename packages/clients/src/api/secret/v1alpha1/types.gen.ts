@@ -157,8 +157,6 @@ export interface Secret {
    * enum for description of values.
    */
   ephemeralAction: SecretEphemeralAction
-  /** Returns `true` for secrets that are ephemeral. */
-  isEphemeral: boolean
   /** Region of the secret. */
   region: Region
 }

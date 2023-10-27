@@ -55,7 +55,6 @@ export const unmarshalSecret = (data: unknown) => {
     ephemeralAction: data.ephemeral_action,
     expiresAt: unmarshalDate(data.expires_at),
     id: data.id,
-    isEphemeral: data.is_ephemeral,
     isManaged: data.is_managed,
     isProtected: data.is_protected,
     name: data.name,
