@@ -199,6 +199,7 @@ export class API extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/secrets`,
         urlParams: urlParams(
+          ['is_ephemeral', request.isEphemeral],
           ['is_managed', request.isManaged],
           ['name', request.name],
           ['order_by', request.orderBy ?? 'name_asc'],

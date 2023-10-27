@@ -18,6 +18,11 @@ export type ListSecretsRequestOrderBy =
 
 export type Product = 'unknown'
 
+export type SecretEphemeralAction =
+  | 'unknown_ephemeral_action'
+  | 'delete_secret'
+  | 'disable_secret'
+
 export type SecretStatus = 'ready' | 'locked'
 
 export type SecretType =
@@ -142,6 +147,18 @@ export interface Secret {
   type: SecretType
   /** Path of the secret. Location of the secret in the directory structure. */
   path: string
+  /**
+   * Expiration date of the secret. (Optional.) Date on which the secret will be
+   * deleted or deactivated.
+   */
+  expiresAt?: Date
+  /**
+   * Action to be taken when the secret expires. See `Secret.EphemeralAction`
+   * enum for description of values.
+   */
+  ephemeralAction: SecretEphemeralAction
+  /** Returns `true` for secrets that are ephemeral. */
+  isEphemeral: boolean
   /** Region of the secret. */
   region: Region
 }
@@ -196,6 +213,13 @@ export type CreateSecretRequest = {
    * structure. If not specified, the path is `/`.
    */
   path?: string
+  /**
+   * Expiration date of the secret. (Optional.) Date on which the secret will be
+   * deleted or deactivated.
+   */
+  expiresAt?: Date
+  /** Action to be taken when the secret expires. */
+  ephemeralAction?: SecretEphemeralAction
 }
 
 export type CreateFolderRequest = {
@@ -282,6 +306,8 @@ export type ListSecretsRequest = {
   isManaged?: boolean
   /** Filter by path (optional). */
   path?: string
+  /** Filter by ephemeral / not ephemeral (optional). */
+  isEphemeral?: boolean
 }
 
 export type ListFoldersRequest = {

@@ -52,7 +52,10 @@ export const unmarshalSecret = (data: unknown) => {
   return {
     createdAt: unmarshalDate(data.created_at),
     description: data.description,
+    ephemeralAction: data.ephemeral_action,
+    expiresAt: unmarshalDate(data.expires_at),
     id: data.id,
+    isEphemeral: data.is_ephemeral,
     isManaged: data.is_managed,
     isProtected: data.is_protected,
     name: data.name,
@@ -182,6 +185,8 @@ export const marshalCreateSecretRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
+  ephemeral_action: request.ephemeralAction ?? 'unknown_ephemeral_action',
+  expires_at: request.expiresAt,
   name: request.name,
   path: request.path,
   project_id: request.projectId ?? defaults.defaultProjectId,
