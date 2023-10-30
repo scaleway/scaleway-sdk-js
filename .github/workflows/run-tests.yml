@@ -11,7 +11,7 @@ jobs:
   typecheck:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4.1.0
+      - uses: actions/checkout@v4.1.1
       - uses: pnpm/action-setup@v2.4.0
       - name: Use Node.js
         uses: actions/setup-node@v3.8.2
@@ -25,7 +25,7 @@ jobs:
   lint:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4.1.0
+      - uses: actions/checkout@v4.1.1
       - uses: pnpm/action-setup@v2.4.0
       - name: Use Node.js
         uses: actions/setup-node@v3.8.2
@@ -47,7 +47,7 @@ jobs:
           - "18"
           - "19"
     steps:
-      - uses: actions/checkout@v4.1.0
+      - uses: actions/checkout@v4.1.1
       - uses: pnpm/action-setup@v2.4.0
       - name: Use Node.js
         uses: actions/setup-node@v3.8.2
