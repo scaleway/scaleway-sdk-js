@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.40.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.39.0...@scaleway/sdk@1.40.0) (2023-10-30)
+
+### Features
+
+- **secret_manager:** add ephemeral action to secret creation ([#963](https://github.com/scaleway/scaleway-sdk-js/issues/963)) ([1a3a067](https://github.com/scaleway/scaleway-sdk-js/commit/1a3a067afc973e716c92e94e16e8c0723cc6e214))
+- **secret_manager:** add missing regions ([#964](https://github.com/scaleway/scaleway-sdk-js/issues/964)) ([647ca0f](https://github.com/scaleway/scaleway-sdk-js/commit/647ca0f5e40e39dda997f9237c9292e90879f8e6))
+- **secret_manager:** remove useless is_ephemeral field ([#965](https://github.com/scaleway/scaleway-sdk-js/issues/965)) ([45253c3](https://github.com/scaleway/scaleway-sdk-js/commit/45253c3d91c822e4beb13ad53bdc098eae6099b3))
+
 ## [1.39.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.38.1...@scaleway/sdk@1.39.0) (2023-10-26)
 
 ### Features
