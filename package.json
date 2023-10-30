@@ -92,7 +92,7 @@
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
     "read-pkg": "^8.1.0",
-    "rollup": "^3.29.4",
+    "rollup": "^4.1.4",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-visualizer": "^5.9.2",
     "typedoc": "^0.25.2",
