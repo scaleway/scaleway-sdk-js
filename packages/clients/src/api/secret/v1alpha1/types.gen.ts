@@ -119,15 +119,9 @@ export interface Secret {
   type: SecretType
   /** Location of the secret in the directory structure. */
   path: string
-  /**
-   * Expiration date of the secret. (Optional.) Date on which the secret will be
-   * deleted or deactivated.
-   */
+  /** (Optional.) Date on which the secret will be deleted or deactivated. */
   expiresAt?: Date
-  /**
-   * Action to be taken when the secret expires. See `Secret.EphemeralAction`
-   * enum for description of values.
-   */
+  /** See `Secret.EphemeralAction` enum for description of values. */
   ephemeralAction: SecretEphemeralAction
   /** Region of the secret. */
   region: Region
@@ -248,10 +242,7 @@ export type CreateSecretRequest = {
    * specified, the path is `/`.
    */
   path?: string
-  /**
-   * Expiration date of the secret. (Optional.) Date on which the secret will be
-   * deleted or deactivated.
-   */
+  /** (Optional.) Date on which the secret will be deleted or deactivated. */
   expiresAt?: Date
   /** Action to be taken when the secret expires. */
   ephemeralAction?: SecretEphemeralAction

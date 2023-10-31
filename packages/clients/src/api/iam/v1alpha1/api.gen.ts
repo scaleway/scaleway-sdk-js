@@ -1162,10 +1162,10 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/iam/v1alpha1/logs`,
         urlParams: urlParams(
-          ['action', request.action ?? 'unknown_action'],
+          ['action', request.action],
           ['created_after', request.createdAfter],
           ['created_before', request.createdBefore],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           [
             'organization_id',
             request.organizationId ??
@@ -1176,7 +1176,7 @@ export class API extends ParentAPI {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          ['resource_type', request.resourceType ?? 'unknown_resource_type'],
+          ['resource_type', request.resourceType],
           ['search', request.search],
         ),
       },

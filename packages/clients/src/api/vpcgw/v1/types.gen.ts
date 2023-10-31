@@ -71,15 +71,6 @@ export type ListPATRulesRequestOrderBy =
 
 export type PATRuleProtocol = 'unknown' | 'both' | 'tcp' | 'udp'
 
-/** Create gateway network request. ipam config. */
-export interface CreateGatewayNetworkRequestIpamConfig {
-  /** Enabling the default route also enables masquerading. */
-  pushDefaultRoute: boolean
-  /** Use this IPAM-booked IP ID as the Gateway's IP in this Private Network. */
-  ipamIpId?: string
-}
-
-/** Dhcp. */
 export interface DHCP {
   /** ID of the DHCP config. */
   id: string
@@ -152,77 +143,13 @@ export interface DHCP {
   zone: Zone
 }
 
-/** Dhcp entry. */
-export interface DHCPEntry {
-  /** DHCP entry ID. */
-  id: string
-  /** DHCP entry creation date. */
-  createdAt?: Date
-  /** DHCP entry last modification date. */
-  updatedAt?: Date
-  /** Owning GatewayNetwork. */
-  gatewayNetworkId: string
-  /** MAC address of the client device. */
-  macAddress: string
-  /** Assigned IP address. */
-  ipAddress: string
-  /** Hostname of the client device. */
-  hostname: string
-  /** Entry type, either static (DHCP reservation) or dynamic (DHCP lease). */
-  type: DHCPEntryType
-  /** Zone of this DHCP entry. */
-  zone: Zone
+export interface IpamConfig {
+  /** Defines whether the default route is enabled on that Gateway Network. */
+  pushDefaultRoute: boolean
+  /** IPAM-booked IP ID as the Gateway's IP in this Private Network. */
+  ipamIpId: string
 }
 
-/** Gateway. */
-export interface Gateway {
-  /** ID of the gateway. */
-  id: string
-  /** Owning Organization. */
-  organizationId: string
-  /** Owning Project. */
-  projectId: string
-  /** Gateway creation date. */
-  createdAt?: Date
-  /** Gateway last modification date. */
-  updatedAt?: Date
-  /** Gateway type (commercial offer). */
-  type?: GatewayType
-  /** Current status of the gateway. */
-  status: GatewayStatus
-  /** Name of the gateway. */
-  name: string
-  /** Tags associated with the gateway. */
-  tags: string[]
-  /** Public IP address of the gateway. */
-  ip?: IP
-  /**
-   * GatewayNetwork objects attached to the gateway (each one represents a
-   * connection to a Private Network).
-   */
-  gatewayNetworks: GatewayNetwork[]
-  /**
-   * Array of DNS server IP addresses to override the gateway's default
-   * recursive DNS servers.
-   */
-  upstreamDnsServers: string[]
-  /** Version of the running gateway software. */
-  version?: string
-  /** Newly available gateway software version that can be updated to. */
-  canUpgradeTo?: string
-  /** Defines whether SSH bastion is enabled on the gateway. */
-  bastionEnabled: boolean
-  /** Port of the SSH bastion. */
-  bastionPort: number
-  /** Defines whether SMTP traffic is allowed to pass through the gateway. */
-  smtpEnabled: boolean
-  /** Whether this uses non-IPAM IP configurations. */
-  isLegacy: boolean
-  /** Zone of the gateway. */
-  zone: Zone
-}
-
-/** Gateway network. */
 export interface GatewayNetwork {
   /** ID of the Public Gateway-Private Network connection. */
   id: string
@@ -258,7 +185,6 @@ export interface GatewayNetwork {
   zone: Zone
 }
 
-/** Gateway type. */
 export interface GatewayType {
   /** Public Gateway type name. */
   name: string
@@ -272,7 +198,6 @@ export interface GatewayType {
   zone: Zone
 }
 
-/** Ip. */
 export interface IP {
   /** IP address ID. */
   id: string
@@ -294,410 +219,6 @@ export interface IP {
   gatewayId?: string
   /** Zone of the IP address. */
   zone: Zone
-}
-
-/** Ipam config. */
-export interface IpamConfig {
-  /** Defines whether the default route is enabled on that Gateway Network. */
-  pushDefaultRoute: boolean
-  /** IPAM-booked IP ID as the Gateway's IP in this Private Network. */
-  ipamIpId: string
-}
-
-/** List dhcp entries response. */
-export interface ListDHCPEntriesResponse {
-  /** DHCP entries in this page. */
-  dhcpEntries: DHCPEntry[]
-  /** Total count of DHCP entries matching the filter. */
-  totalCount: number
-}
-
-/** List dhc ps response. */
-export interface ListDHCPsResponse {
-  /** First page of DHCP configuration objects. */
-  dhcps: DHCP[]
-  /** Total count of DHCP configuration objects matching the filter. */
-  totalCount: number
-}
-
-/** List gateway networks response. */
-export interface ListGatewayNetworksResponse {
-  /** GatewayNetworks on this page. */
-  gatewayNetworks: GatewayNetwork[]
-  /** Total GatewayNetworks count matching the filter. */
-  totalCount: number
-}
-
-/** List gateway types response. */
-export interface ListGatewayTypesResponse {
-  /** Available types of Public Gateway. */
-  types: GatewayType[]
-}
-
-/** List gateways response. */
-export interface ListGatewaysResponse {
-  /** Gateways on this page. */
-  gateways: Gateway[]
-  /** Total count of gateways matching the filter. */
-  totalCount: number
-}
-
-/** List i ps response. */
-export interface ListIPsResponse {
-  /** IP addresses on this page. */
-  ips: IP[]
-  /** Total count of IP addresses matching the filter. */
-  totalCount: number
-}
-
-/** List pat rules response. */
-export interface ListPATRulesResponse {
-  /** Array of PAT rules matching the filter. */
-  patRules: PATRule[]
-  /** Total count of PAT rules matching the filter. */
-  totalCount: number
-}
-
-/** Pat rule. */
-export interface PATRule {
-  /** PAT rule ID. */
-  id: string
-  /** Gateway the PAT rule applies to. */
-  gatewayId: string
-  /** PAT rule creation date. */
-  createdAt?: Date
-  /** PAT rule last modification date. */
-  updatedAt?: Date
-  /** Public port to listen on. */
-  publicPort: number
-  /** Private IP address to forward data to. */
-  privateIp: string
-  /** Private port to translate to. */
-  privatePort: number
-  /** Protocol the rule applies to. */
-  protocol: PATRuleProtocol
-  /** Zone of the PAT rule. */
-  zone: Zone
-}
-
-/** Set dhcp entries request. entry. */
-export interface SetDHCPEntriesRequestEntry {
-  /**
-   * MAC address to give a static entry to. MAC address to give a static entry
-   * to. A matching entry will be upgraded to a reservation, and a matching
-   * reservation will be updated.
-   */
-  macAddress: string
-  /** IP address to give to the device. */
-  ipAddress: string
-}
-
-/** Set dhcp entries response. */
-export interface SetDHCPEntriesResponse {
-  /** List of DHCP entries. */
-  dhcpEntries: DHCPEntry[]
-}
-
-/** Set pat rules request. rule. */
-export interface SetPATRulesRequestRule {
-  /**
-   * Public port to listen on. Public port to listen on. Uniquely identifies the
-   * rule, and a matching rule will be updated with the new parameters.
-   */
-  publicPort: number
-  /** Private IP to forward data to. */
-  privateIp: string
-  /** Private port to translate to. */
-  privatePort: number
-  /** Protocol the rule should apply to. */
-  protocol: PATRuleProtocol
-}
-
-/** Set pat rules response. */
-export interface SetPATRulesResponse {
-  /** List of PAT rules. */
-  patRules: PATRule[]
-}
-
-/** Update gateway network request. ipam config. */
-export interface UpdateGatewayNetworkRequestIpamConfig {
-  /** Enabling the default route also enables masquerading. */
-  pushDefaultRoute?: boolean
-  /** Use this IPAM-booked IP ID as the Gateway's IP in this Private Network. */
-  ipamIpId?: string
-}
-
-export type ListGatewaysRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** Order in which to return results. */
-  orderBy?: ListGatewaysRequestOrderBy
-  /** Page number to return. */
-  page?: number
-  /** Gateways per page. */
-  pageSize?: number
-  /** Include only gateways in this Organization. */
-  organizationId?: string
-  /** Include only gateways in this Project. */
-  projectId?: string
-  /** Filter for gateways which have this search term in their name. */
-  name?: string
-  /** Filter for gateways with these tags. */
-  tags?: string[]
-  /** Filter for gateways of this type. */
-  type?: string
-  /**
-   * Filter for gateways with this current status. Use `unknown` to include all
-   * statuses.
-   */
-  status?: GatewayStatus
-  /** Filter for gateways attached to this Private nNetwork. */
-  privateNetworkId?: string
-}
-
-export type GetGatewayRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the gateway to fetch. */
-  gatewayId: string
-}
-
-export type CreateGatewayRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** Scaleway Project to create the gateway in. */
-  projectId?: string
-  /** Name for the gateway. */
-  name?: string
-  /** Tags for the gateway. */
-  tags?: string[]
-  /** Gateway type (commercial offer type). */
-  type: string
-  /**
-   * Array of DNS server IP addresses to override the gateway's default
-   * recursive DNS servers.
-   */
-  upstreamDnsServers?: string[]
-  /** Existing IP address to attach to the gateway. */
-  ipId?: string
-  /** Defines whether SMTP traffic should be allowed pass through the gateway. */
-  enableSmtp: boolean
-  /** Defines whether SSH bastion should be enabled the gateway. */
-  enableBastion: boolean
-  /** Port of the SSH bastion. */
-  bastionPort?: number
-}
-
-export type UpdateGatewayRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the gateway to update. */
-  gatewayId: string
-  /** Name for the gateway. */
-  name?: string
-  /** Tags for the gateway. */
-  tags?: string[]
-  /**
-   * Array of DNS server IP addresses to override the gateway's default
-   * recursive DNS servers.
-   */
-  upstreamDnsServers?: string[]
-  /** Defines whether SSH bastion should be enabled the gateway. */
-  enableBastion?: boolean
-  /** Port of the SSH bastion. */
-  bastionPort?: number
-  /** Defines whether SMTP traffic should be allowed to pass through the gateway. */
-  enableSmtp?: boolean
-}
-
-export type DeleteGatewayRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the gateway to delete. */
-  gatewayId: string
-  /**
-   * Defines whether to clean up attached DHCP configurations (if any, and if
-   * not attached to another Gateway Network).
-   */
-  cleanupDhcp: boolean
-}
-
-export type UpgradeGatewayRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the gateway to upgrade. */
-  gatewayId: string
-}
-
-export type ListGatewayNetworksRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** Order in which to return results. */
-  orderBy?: ListGatewayNetworksRequestOrderBy
-  /** Page number. */
-  page?: number
-  /** GatewayNetworks per page. */
-  pageSize?: number
-  /** Filter for GatewayNetworks connected to this gateway. */
-  gatewayId?: string
-  /** Filter for GatewayNetworks connected to this Private Network. */
-  privateNetworkId?: string
-  /** Filter for GatewayNetworks with this `enable_masquerade` setting. */
-  enableMasquerade?: boolean
-  /** Filter for GatewayNetworks using this DHCP configuration. */
-  dhcpId?: string
-  /**
-   * Filter for GatewayNetworks with this current status this status. Use
-   * `unknown` to include all statuses.
-   */
-  status?: GatewayNetworkStatus
-}
-
-export type GetGatewayNetworkRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the GatewayNetwork to fetch. */
-  gatewayNetworkId: string
-}
-
-export type CreateGatewayNetworkRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** Public Gateway to connect. */
-  gatewayId: string
-  /** Private Network to connect. */
-  privateNetworkId: string
-  /**
-   * Defines whether to enable masquerade (dynamic NAT) on the GatewayNetwork.
-   * Note: this setting is ignored when passing `ipam_config`.
-   */
-  enableMasquerade: boolean
-  /**
-   * Defines whether to enable DHCP on this Private Network. Defaults to `true`
-   * if either `dhcp_id` or `dhcp` are present. If set to `true`, either
-   * `dhcp_id` or `dhcp` must be present. Note: this setting is ignored when
-   * passing `ipam_config`.
-   */
-  enableDhcp?: boolean
-  /**
-   * ID of an existing DHCP configuration object to use for this GatewayNetwork.
-   *
-   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address',
-   * 'ipamConfig' could be set.
-   */
-  dhcpId?: string
-  /**
-   * New DHCP configuration object to use for this GatewayNetwork.
-   *
-   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address',
-   * 'ipamConfig' could be set.
-   */
-  dhcp?: CreateDHCPRequest
-  /**
-   * Static IP address in CIDR format to to use without DHCP.
-   *
-   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address',
-   * 'ipamConfig' could be set.
-   */
-  address?: string
-  /**
-   * Auto-configure the GatewayNetwork using Scaleway's IPAM (IP address
-   * management service). Note: all or none of the GatewayNetworks for a single
-   * gateway can use the IPAM. DHCP and IPAM configurations cannot be mixed.
-   * Some products may require that the Public Gateway uses the IPAM, to ensure
-   * correct functionality.
-   *
-   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address',
-   * 'ipamConfig' could be set.
-   */
-  ipamConfig?: CreateGatewayNetworkRequestIpamConfig
-}
-
-export type UpdateGatewayNetworkRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the GatewayNetwork to update. */
-  gatewayNetworkId: string
-  /**
-   * Defines whether to enable masquerade (dynamic NAT) on the GatewayNetwork.
-   * Note: this setting is ignored when passing `ipam_config`.
-   */
-  enableMasquerade?: boolean
-  /**
-   * Defines whether to enable DHCP on this Private Network. Defaults to `true`
-   * if `dhcp_id` is present. If set to `true`, `dhcp_id` must be present. Note:
-   * this setting is ignored when passing `ipam_config`.
-   */
-  enableDhcp?: boolean
-  /**
-   * ID of the new DHCP configuration object to use with this GatewayNetwork.
-   *
-   * One-of ('ipConfig'): at most one of 'dhcpId', 'address', 'ipamConfig' could
-   * be set.
-   */
-  dhcpId?: string
-  /**
-   * New static IP address.
-   *
-   * One-of ('ipConfig'): at most one of 'dhcpId', 'address', 'ipamConfig' could
-   * be set.
-   */
-  address?: string
-  /**
-   * Auto-configure the GatewayNetwork using Scaleway's IPAM (IP address
-   * management service). Note: all or none of the GatewayNetworks for a single
-   * gateway can use the IPAM. DHCP and IPAM configurations cannot be mixed.
-   * Some products may require that the Public Gateway uses the IPAM, to ensure
-   * correct functionality.
-   *
-   * One-of ('ipConfig'): at most one of 'dhcpId', 'address', 'ipamConfig' could
-   * be set.
-   */
-  ipamConfig?: UpdateGatewayNetworkRequestIpamConfig
-}
-
-export type DeleteGatewayNetworkRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the GatewayNetwork to delete. */
-  gatewayNetworkId: string
-  /**
-   * Defines whether to clean up attached DHCP configurations (if any, and if
-   * not attached to another Gateway Network).
-   */
-  cleanupDhcp: boolean
-}
-
-export type ListDHCPsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** Order in which to return results. */
-  orderBy?: ListDHCPsRequestOrderBy
-  /** Page number. */
-  page?: number
-  /** DHCP configurations per page. */
-  pageSize?: number
-  /** Include only DHCP configuration objects in this Organization. */
-  organizationId?: string
-  /** Include only DHCP configuration objects in this Project. */
-  projectId?: string
-  /**
-   * Filter for DHCP configuration objects with this DHCP server IP address (the
-   * gateway's address in the Private Network).
-   */
-  address?: string
-  /**
-   * Filter for DHCP configuration objects with subnets containing this IP
-   * address.
-   */
-  hasAddress?: string
-}
-
-export type GetDHCPRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the DHCP configuration to fetch. */
-  dhcpId: string
 }
 
 export type CreateDHCPRequest = {
@@ -764,6 +285,568 @@ export type CreateDHCPRequest = {
   dnsLocalName?: string
 }
 
+export interface CreateGatewayNetworkRequestIpamConfig {
+  /** Enabling the default route also enables masquerading. */
+  pushDefaultRoute: boolean
+  /** Use this IPAM-booked IP ID as the Gateway's IP in this Private Network. */
+  ipamIpId?: string
+}
+
+export interface DHCPEntry {
+  /** DHCP entry ID. */
+  id: string
+  /** DHCP entry creation date. */
+  createdAt?: Date
+  /** DHCP entry last modification date. */
+  updatedAt?: Date
+  /** Owning GatewayNetwork. */
+  gatewayNetworkId: string
+  /** MAC address of the client device. */
+  macAddress: string
+  /** Assigned IP address. */
+  ipAddress: string
+  /** Hostname of the client device. */
+  hostname: string
+  /** Entry type, either static (DHCP reservation) or dynamic (DHCP lease). */
+  type: DHCPEntryType
+  /** Zone of this DHCP entry. */
+  zone: Zone
+}
+
+export interface Gateway {
+  /** ID of the gateway. */
+  id: string
+  /** Owning Organization. */
+  organizationId: string
+  /** Owning Project. */
+  projectId: string
+  /** Gateway creation date. */
+  createdAt?: Date
+  /** Gateway last modification date. */
+  updatedAt?: Date
+  /** Gateway type (commercial offer). */
+  type?: GatewayType
+  /** Current status of the gateway. */
+  status: GatewayStatus
+  /** Name of the gateway. */
+  name: string
+  /** Tags associated with the gateway. */
+  tags: string[]
+  /** Public IP address of the gateway. */
+  ip?: IP
+  /**
+   * GatewayNetwork objects attached to the gateway (each one represents a
+   * connection to a Private Network).
+   */
+  gatewayNetworks: GatewayNetwork[]
+  /**
+   * Array of DNS server IP addresses to override the gateway's default
+   * recursive DNS servers.
+   */
+  upstreamDnsServers: string[]
+  /** Version of the running gateway software. */
+  version?: string
+  /** Newly available gateway software version that can be updated to. */
+  canUpgradeTo?: string
+  /** Defines whether SSH bastion is enabled on the gateway. */
+  bastionEnabled: boolean
+  /** Port of the SSH bastion. */
+  bastionPort: number
+  /** Defines whether SMTP traffic is allowed to pass through the gateway. */
+  smtpEnabled: boolean
+  /** Whether this uses non-IPAM IP configurations. */
+  isLegacy: boolean
+  /** Zone of the gateway. */
+  zone: Zone
+}
+
+export interface PATRule {
+  /** PAT rule ID. */
+  id: string
+  /** Gateway the PAT rule applies to. */
+  gatewayId: string
+  /** PAT rule creation date. */
+  createdAt?: Date
+  /** PAT rule last modification date. */
+  updatedAt?: Date
+  /** Public port to listen on. */
+  publicPort: number
+  /** Private IP address to forward data to. */
+  privateIp: string
+  /** Private port to translate to. */
+  privatePort: number
+  /** Protocol the rule applies to. */
+  protocol: PATRuleProtocol
+  /** Zone of the PAT rule. */
+  zone: Zone
+}
+
+export interface SetDHCPEntriesRequestEntry {
+  /**
+   * MAC address to give a static entry to. A matching entry will be upgraded to
+   * a reservation, and a matching reservation will be updated.
+   */
+  macAddress: string
+  /** IP address to give to the device. */
+  ipAddress: string
+}
+
+export interface SetPATRulesRequestRule {
+  /**
+   * Public port to listen on. Uniquely identifies the rule, and a matching rule
+   * will be updated with the new parameters.
+   */
+  publicPort: number
+  /** Private IP to forward data to. */
+  privateIp: string
+  /** Private port to translate to. */
+  privatePort: number
+  /** Protocol the rule should apply to. */
+  protocol: PATRuleProtocol
+}
+
+export interface UpdateGatewayNetworkRequestIpamConfig {
+  /** Enabling the default route also enables masquerading. */
+  pushDefaultRoute?: boolean
+  /** Use this IPAM-booked IP ID as the Gateway's IP in this Private Network. */
+  ipamIpId?: string
+}
+
+export type CreateDHCPEntryRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** GatewayNetwork on which to create a DHCP reservation. */
+  gatewayNetworkId: string
+  /** MAC address to give a static entry to. */
+  macAddress: string
+  /** IP address to give to the device. */
+  ipAddress: string
+}
+
+export type CreateGatewayNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** Public Gateway to connect. */
+  gatewayId: string
+  /** Private Network to connect. */
+  privateNetworkId: string
+  /** Note: this setting is ignored when passing `ipam_config`. */
+  enableMasquerade: boolean
+  /**
+   * Defaults to `true` if either `dhcp_id` or `dhcp` are present. If set to
+   * `true`, either `dhcp_id` or `dhcp` must be present. Note: this setting is
+   * ignored when passing `ipam_config`.
+   */
+  enableDhcp?: boolean
+  /**
+   * ID of an existing DHCP configuration object to use for this GatewayNetwork.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address',
+   * 'ipamConfig' could be set.
+   */
+  dhcpId?: string
+  /**
+   * New DHCP configuration object to use for this GatewayNetwork.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address',
+   * 'ipamConfig' could be set.
+   */
+  dhcp?: CreateDHCPRequest
+  /**
+   * Static IP address in CIDR format to to use without DHCP.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address',
+   * 'ipamConfig' could be set.
+   */
+  address?: string
+  /**
+   * Note: all or none of the GatewayNetworks for a single gateway can use the
+   * IPAM. DHCP and IPAM configurations cannot be mixed. Some products may
+   * require that the Public Gateway uses the IPAM, to ensure correct
+   * functionality.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'dhcp', 'address',
+   * 'ipamConfig' could be set.
+   */
+  ipamConfig?: CreateGatewayNetworkRequestIpamConfig
+}
+
+export type CreateGatewayRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** Scaleway Project to create the gateway in. */
+  projectId?: string
+  /** Name for the gateway. */
+  name?: string
+  /** Tags for the gateway. */
+  tags?: string[]
+  /** Gateway type (commercial offer type). */
+  type: string
+  /**
+   * Array of DNS server IP addresses to override the gateway's default
+   * recursive DNS servers.
+   */
+  upstreamDnsServers?: string[]
+  /** Existing IP address to attach to the gateway. */
+  ipId?: string
+  /** Defines whether SMTP traffic should be allowed pass through the gateway. */
+  enableSmtp: boolean
+  /** Defines whether SSH bastion should be enabled the gateway. */
+  enableBastion: boolean
+  /** Port of the SSH bastion. */
+  bastionPort?: number
+}
+
+export type CreateIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** Project to create the IP address in. */
+  projectId?: string
+  /** Tags to give to the IP address. */
+  tags?: string[]
+}
+
+export type CreatePATRuleRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the Gateway on which to create the rule. */
+  gatewayId: string
+  /** Public port to listen on. */
+  publicPort: number
+  /** Private IP to forward data to. */
+  privateIp: string
+  /** Private port to translate to. */
+  privatePort: number
+  /** Protocol the rule should apply to. */
+  protocol?: PATRuleProtocol
+}
+
+export type DeleteDHCPEntryRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the DHCP entry to delete. */
+  dhcpEntryId: string
+}
+
+export type DeleteDHCPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** DHCP configuration ID to delete. */
+  dhcpId: string
+}
+
+export type DeleteGatewayNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the GatewayNetwork to delete. */
+  gatewayNetworkId: string
+  /**
+   * Defines whether to clean up attached DHCP configurations (if any, and if
+   * not attached to another Gateway Network).
+   */
+  cleanupDhcp: boolean
+}
+
+export type DeleteGatewayRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the gateway to delete. */
+  gatewayId: string
+  /**
+   * Defines whether to clean up attached DHCP configurations (if any, and if
+   * not attached to another Gateway Network).
+   */
+  cleanupDhcp: boolean
+}
+
+export type DeleteIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the IP address to delete. */
+  ipId: string
+}
+
+export type DeletePATRuleRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the PAT rule to delete. */
+  patRuleId: string
+}
+
+export type GetDHCPEntryRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the DHCP entry to fetch. */
+  dhcpEntryId: string
+}
+
+export type GetDHCPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the DHCP configuration to fetch. */
+  dhcpId: string
+}
+
+export type GetGatewayNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the GatewayNetwork to fetch. */
+  gatewayNetworkId: string
+}
+
+export type GetGatewayRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the gateway to fetch. */
+  gatewayId: string
+}
+
+export type GetIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the IP address to get. */
+  ipId: string
+}
+
+export type GetPATRuleRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the PAT rule to get. */
+  patRuleId: string
+}
+
+export type ListDHCPEntriesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** Order in which to return results. */
+  orderBy?: ListDHCPEntriesRequestOrderBy
+  /** Page number. */
+  page?: number
+  /** DHCP entries per page. */
+  pageSize?: number
+  /** Filter for entries on this GatewayNetwork. */
+  gatewayNetworkId?: string
+  /** Filter for entries with this MAC address. */
+  macAddress?: string
+  /** Filter for entries with this IP address. */
+  ipAddress?: string
+  /** Filter for entries with this hostname substring. */
+  hostname?: string
+  /** Filter for entries of this type. */
+  type?: DHCPEntryType
+}
+
+export interface ListDHCPEntriesResponse {
+  /** DHCP entries in this page. */
+  dhcpEntries: DHCPEntry[]
+  /** Total count of DHCP entries matching the filter. */
+  totalCount: number
+}
+
+export type ListDHCPsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** Order in which to return results. */
+  orderBy?: ListDHCPsRequestOrderBy
+  /** Page number. */
+  page?: number
+  /** DHCP configurations per page. */
+  pageSize?: number
+  /** Include only DHCP configuration objects in this Organization. */
+  organizationId?: string
+  /** Include only DHCP configuration objects in this Project. */
+  projectId?: string
+  /**
+   * Filter for DHCP configuration objects with this DHCP server IP address (the
+   * gateway's address in the Private Network).
+   */
+  address?: string
+  /**
+   * Filter for DHCP configuration objects with subnets containing this IP
+   * address.
+   */
+  hasAddress?: string
+}
+
+export interface ListDHCPsResponse {
+  /** First page of DHCP configuration objects. */
+  dhcps: DHCP[]
+  /** Total count of DHCP configuration objects matching the filter. */
+  totalCount: number
+}
+
+export type ListGatewayNetworksRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** Order in which to return results. */
+  orderBy?: ListGatewayNetworksRequestOrderBy
+  /** Page number. */
+  page?: number
+  /** GatewayNetworks per page. */
+  pageSize?: number
+  /** Filter for GatewayNetworks connected to this gateway. */
+  gatewayId?: string
+  /** Filter for GatewayNetworks connected to this Private Network. */
+  privateNetworkId?: string
+  /** Filter for GatewayNetworks with this `enable_masquerade` setting. */
+  enableMasquerade?: boolean
+  /** Filter for GatewayNetworks using this DHCP configuration. */
+  dhcpId?: string
+  /**
+   * Filter for GatewayNetworks with this current status this status. Use
+   * `unknown` to include all statuses.
+   */
+  status?: GatewayNetworkStatus
+}
+
+export interface ListGatewayNetworksResponse {
+  /** GatewayNetworks on this page. */
+  gatewayNetworks: GatewayNetwork[]
+  /** Total GatewayNetworks count matching the filter. */
+  totalCount: number
+}
+
+export type ListGatewayTypesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+}
+
+export interface ListGatewayTypesResponse {
+  /** Available types of Public Gateway. */
+  types: GatewayType[]
+}
+
+export type ListGatewaysRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** Order in which to return results. */
+  orderBy?: ListGatewaysRequestOrderBy
+  /** Page number to return. */
+  page?: number
+  /** Gateways per page. */
+  pageSize?: number
+  /** Include only gateways in this Organization. */
+  organizationId?: string
+  /** Include only gateways in this Project. */
+  projectId?: string
+  /** Filter for gateways which have this search term in their name. */
+  name?: string
+  /** Filter for gateways with these tags. */
+  tags?: string[]
+  /** Filter for gateways of this type. */
+  type?: string
+  /**
+   * Filter for gateways with this current status. Use `unknown` to include all
+   * statuses.
+   */
+  status?: GatewayStatus
+  /** Filter for gateways attached to this Private nNetwork. */
+  privateNetworkId?: string
+}
+
+export interface ListGatewaysResponse {
+  /** Gateways on this page. */
+  gateways: Gateway[]
+  /** Total count of gateways matching the filter. */
+  totalCount: number
+}
+
+export type ListIPsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** Order in which to return results. */
+  orderBy?: ListIPsRequestOrderBy
+  /** Page number. */
+  page?: number
+  /** IP addresses per page. */
+  pageSize?: number
+  /** Filter for IP addresses in this Organization. */
+  organizationId?: string
+  /** Filter for IP addresses in this Project. */
+  projectId?: string
+  /** Filter for IP addresses with these tags. */
+  tags?: string[]
+  /** Filter for IP addresses that have a reverse containing this string. */
+  reverse?: string
+  /** Filter based on whether the IP is attached to a gateway or not. */
+  isFree?: boolean
+}
+
+export interface ListIPsResponse {
+  /** IP addresses on this page. */
+  ips: IP[]
+  /** Total count of IP addresses matching the filter. */
+  totalCount: number
+}
+
+export type ListPATRulesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** Order in which to return results. */
+  orderBy?: ListPATRulesRequestOrderBy
+  /** Page number. */
+  page?: number
+  /** PAT rules per page. */
+  pageSize?: number
+  /** Filter for PAT rules on this Gateway. */
+  gatewayId?: string
+  /** Filter for PAT rules targeting this private ip. */
+  privateIp?: string
+  /** Filter for PAT rules with this protocol. */
+  protocol?: PATRuleProtocol
+}
+
+export interface ListPATRulesResponse {
+  /** Array of PAT rules matching the filter. */
+  patRules: PATRule[]
+  /** Total count of PAT rules matching the filter. */
+  totalCount: number
+}
+
+export type RefreshSSHKeysRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the gateway to refresh SSH keys on. */
+  gatewayId: string
+}
+
+export type SetDHCPEntriesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the Gateway Network on which to set DHCP reservation list. */
+  gatewayNetworkId: string
+  /** New list of DHCP reservations. */
+  dhcpEntries?: SetDHCPEntriesRequestEntry[]
+}
+
+export interface SetDHCPEntriesResponse {
+  /** List of DHCP entries. */
+  dhcpEntries: DHCPEntry[]
+}
+
+export type SetPATRulesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the gateway on which to set the PAT rules. */
+  gatewayId: string
+  /** New list of PAT rules. */
+  patRules: SetPATRulesRequestRule[]
+}
+
+export interface SetPATRulesResponse {
+  /** List of PAT rules. */
+  patRules: PATRule[]
+}
+
+export type UpdateDHCPEntryRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the DHCP entry to update. */
+  dhcpEntryId: string
+  /** New IP address to give to the device. */
+  ipAddress?: string
+}
+
 export type UpdateDHCPRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
@@ -828,114 +911,77 @@ export type UpdateDHCPRequest = {
   dnsLocalName?: string
 }
 
-export type DeleteDHCPRequest = {
+export type UpdateGatewayNetworkRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** DHCP configuration ID to delete. */
-  dhcpId: string
-}
-
-export type ListDHCPEntriesRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** Order in which to return results. */
-  orderBy?: ListDHCPEntriesRequestOrderBy
-  /** Page number. */
-  page?: number
-  /** DHCP entries per page. */
-  pageSize?: number
-  /** Filter for entries on this GatewayNetwork. */
-  gatewayNetworkId?: string
-  /** Filter for entries with this MAC address. */
-  macAddress?: string
-  /** Filter for entries with this IP address. */
-  ipAddress?: string
-  /** Filter for entries with this hostname substring. */
-  hostname?: string
-  /** Filter for entries of this type. */
-  type?: DHCPEntryType
-}
-
-export type GetDHCPEntryRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the DHCP entry to fetch. */
-  dhcpEntryId: string
-}
-
-export type CreateDHCPEntryRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** GatewayNetwork on which to create a DHCP reservation. */
+  /** ID of the GatewayNetwork to update. */
   gatewayNetworkId: string
-  /** MAC address to give a static entry to. */
-  macAddress: string
-  /** IP address to give to the device. */
-  ipAddress: string
+  /** Note: this setting is ignored when passing `ipam_config`. */
+  enableMasquerade?: boolean
+  /**
+   * Defaults to `true` if `dhcp_id` is present. If set to `true`, `dhcp_id`
+   * must be present. Note: this setting is ignored when passing `ipam_config`.
+   */
+  enableDhcp?: boolean
+  /**
+   * ID of the new DHCP configuration object to use with this GatewayNetwork.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'address', 'ipamConfig' could
+   * be set.
+   */
+  dhcpId?: string
+  /**
+   * New static IP address.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'address', 'ipamConfig' could
+   * be set.
+   */
+  address?: string
+  /**
+   * Note: all or none of the GatewayNetworks for a single gateway can use the
+   * IPAM. DHCP and IPAM configurations cannot be mixed. Some products may
+   * require that the Public Gateway uses the IPAM, to ensure correct
+   * functionality.
+   *
+   * One-of ('ipConfig'): at most one of 'dhcpId', 'address', 'ipamConfig' could
+   * be set.
+   */
+  ipamConfig?: UpdateGatewayNetworkRequestIpamConfig
 }
 
-export type UpdateDHCPEntryRequest = {
+export type UpdateGatewayRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the DHCP entry to update. */
-  dhcpEntryId: string
-  /** New IP address to give to the device. */
-  ipAddress?: string
-}
-
-export type SetDHCPEntriesRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the Gateway Network on which to set DHCP reservation list. */
-  gatewayNetworkId: string
-  /** New list of DHCP reservations. */
-  dhcpEntries?: SetDHCPEntriesRequestEntry[]
-}
-
-export type DeleteDHCPEntryRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the DHCP entry to delete. */
-  dhcpEntryId: string
-}
-
-export type ListPATRulesRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** Order in which to return results. */
-  orderBy?: ListPATRulesRequestOrderBy
-  /** Page number. */
-  page?: number
-  /** PAT rules per page. */
-  pageSize?: number
-  /** Filter for PAT rules on this Gateway. */
-  gatewayId?: string
-  /** Filter for PAT rules targeting this private ip. */
-  privateIp?: string
-  /** Filter for PAT rules with this protocol. */
-  protocol?: PATRuleProtocol
-}
-
-export type GetPATRuleRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the PAT rule to get. */
-  patRuleId: string
-}
-
-export type CreatePATRuleRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the Gateway on which to create the rule. */
+  /** ID of the gateway to update. */
   gatewayId: string
-  /** Public port to listen on. */
-  publicPort: number
-  /** Private IP to forward data to. */
-  privateIp: string
-  /** Private port to translate to. */
-  privatePort: number
-  /** Protocol the rule should apply to. */
-  protocol?: PATRuleProtocol
+  /** Name for the gateway. */
+  name?: string
+  /** Tags for the gateway. */
+  tags?: string[]
+  /**
+   * Array of DNS server IP addresses to override the gateway's default
+   * recursive DNS servers.
+   */
+  upstreamDnsServers?: string[]
+  /** Defines whether SSH bastion should be enabled the gateway. */
+  enableBastion?: boolean
+  /** Port of the SSH bastion. */
+  bastionPort?: number
+  /** Defines whether SMTP traffic should be allowed to pass through the gateway. */
+  enableSmtp?: boolean
+}
+
+export type UpdateIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the IP address to update. */
+  ipId: string
+  /** Tags to give to the IP address. */
+  tags?: string[]
+  /** Reverse to set on the address. Empty string to unset. */
+  reverse?: string
+  /** Gateway to attach the IP address to. Empty string to detach. */
+  gatewayId?: string
 }
 
 export type UpdatePATRuleRequest = {
@@ -953,87 +999,9 @@ export type UpdatePATRuleRequest = {
   protocol?: PATRuleProtocol
 }
 
-export type SetPATRulesRequest = {
+export type UpgradeGatewayRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the gateway on which to set the PAT rules. */
-  gatewayId: string
-  /** New list of PAT rules. */
-  patRules: SetPATRulesRequestRule[]
-}
-
-export type DeletePATRuleRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the PAT rule to delete. */
-  patRuleId: string
-}
-
-export type ListGatewayTypesRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-}
-
-export type ListIPsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** Order in which to return results. */
-  orderBy?: ListIPsRequestOrderBy
-  /** Page number. */
-  page?: number
-  /** IP addresses per page. */
-  pageSize?: number
-  /** Filter for IP addresses in this Organization. */
-  organizationId?: string
-  /** Filter for IP addresses in this Project. */
-  projectId?: string
-  /** Filter for IP addresses with these tags. */
-  tags?: string[]
-  /** Filter for IP addresses that have a reverse containing this string. */
-  reverse?: string
-  /** Filter based on whether the IP is attached to a gateway or not. */
-  isFree?: boolean
-}
-
-export type GetIPRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the IP address to get. */
-  ipId: string
-}
-
-export type CreateIPRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** Project to create the IP address in. */
-  projectId?: string
-  /** Tags to give to the IP address. */
-  tags?: string[]
-}
-
-export type UpdateIPRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the IP address to update. */
-  ipId: string
-  /** Tags to give to the IP address. */
-  tags?: string[]
-  /** Reverse to set on the address. Empty string to unset. */
-  reverse?: string
-  /** Gateway to attach the IP address to. Empty string to detach. */
-  gatewayId?: string
-}
-
-export type DeleteIPRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the IP address to delete. */
-  ipId: string
-}
-
-export type RefreshSSHKeysRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the gateway to refresh SSH keys on. */
+  /** ID of the gateway to upgrade. */
   gatewayId: string
 }

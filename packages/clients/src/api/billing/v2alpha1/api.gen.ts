@@ -106,7 +106,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/billing/v2alpha1/discounts`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'creation_date_desc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [

@@ -75,8 +75,6 @@ export type NamespaceStatus =
   | 'creating'
   | 'pending'
 
-export type NullValue = 'NULL_VALUE'
-
 export type TokenStatus =
   | 'unknown'
   | 'ready'
@@ -99,7 +97,82 @@ export type TriggerStatus =
   | 'creating'
   | 'pending'
 
-/** Container. */
+export interface SecretHashedValue {
+  key: string
+  hashedValue: string
+}
+
+export interface TriggerMnqNatsClientConfig {
+  /** @deprecated */
+  mnqNamespaceId?: string
+  /** Name of the NATS subject the trigger listens to. */
+  subject: string
+  /** ID of the M&Q NATS account. */
+  mnqNatsAccountId: string
+  /** ID of the M&Q project. */
+  mnqProjectId: string
+  /** Region of the M&Q project. */
+  mnqRegion: string
+  /** ID of the M&Q credentials used to subscribe to the NATS subject. */
+  mnqCredentialId?: string
+}
+
+export interface TriggerMnqSqsClientConfig {
+  /** @deprecated */
+  mnqNamespaceId?: string
+  /** Name of the SQS queue the trigger listens to. */
+  queue: string
+  /** ID of the M&Q project. */
+  mnqProjectId: string
+  /** Region in which the M&Q project is activated. */
+  mnqRegion: string
+  /** ID of the M&Q credentials used to read from the SQS queue. */
+  mnqCredentialId?: string
+}
+
+export interface TriggerSqsClientConfig {
+  endpoint: string
+  queueUrl: string
+  accessKey: string
+  secretKey: string
+}
+
+export interface Secret {
+  key: string
+  value?: string
+}
+
+export interface CreateTriggerRequestMnqNatsClientConfig {
+  /** @deprecated */
+  mnqNamespaceId?: string
+  /** Name of the NATS subject the trigger should listen to. */
+  subject: string
+  /** ID of the M&Q NATS account. */
+  mnqNatsAccountId: string
+  /** ID of the M&Q project. */
+  mnqProjectId: string
+  /** Region of the M&Q project. */
+  mnqRegion: string
+}
+
+export interface CreateTriggerRequestMnqSqsClientConfig {
+  /** @deprecated */
+  mnqNamespaceId?: string
+  /** Name of the SQS queue the trigger should listen to. */
+  queue: string
+  /** You must have activated SQS on this project. */
+  mnqProjectId: string
+  /** Region in which the M&Q project is activated. */
+  mnqRegion: string
+}
+
+export interface CreateTriggerRequestSqsClientConfig {
+  endpoint: string
+  queueUrl: string
+  accessKey: string
+  secretKey: string
+}
+
 export interface Container {
   /** UUID of the container. */
   id: string
@@ -143,7 +216,7 @@ export interface Container {
   /** Secret environment variables of the container. */
   secretEnvironmentVariables: SecretHashedValue[]
   /**
-   * Configuration for the handling of HTTP and HTTPS requests. Possible values:
+   * Possible values:
    *
    * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.
@@ -154,40 +227,6 @@ export interface Container {
   region: Region
 }
 
-/** Create trigger request. mnq nats client config. */
-export interface CreateTriggerRequestMnqNatsClientConfig {
-  /** @deprecated */
-  mnqNamespaceId?: string
-  /** Name of the NATS subject the trigger should listen to. */
-  subject: string
-  /** ID of the M&Q NATS account. */
-  mnqNatsAccountId: string
-  /** ID of the M&Q project. */
-  mnqProjectId: string
-  /** Region of the M&Q project. */
-  mnqRegion: string
-}
-
-/** Create trigger request. mnq sqs client config. */
-export interface CreateTriggerRequestMnqSqsClientConfig {
-  /** @deprecated */
-  mnqNamespaceId?: string
-  /** Name of the SQS queue the trigger should listen to. */
-  queue: string
-  /** ID of the M&Q project. You must have activated SQS on this project. */
-  mnqProjectId: string
-  /** Region in which the M&Q project is activated. */
-  mnqRegion: string
-}
-
-export interface CreateTriggerRequestSqsClientConfig {
-  endpoint: string
-  queueUrl: string
-  accessKey: string
-  secretKey: string
-}
-
-/** Cron. */
 export interface Cron {
   /** UUID of the cron. */
   id: string
@@ -203,7 +242,6 @@ export interface Cron {
   name: string
 }
 
-/** Domain. */
 export interface Domain {
   /** UUID of the domain. */
   id: string
@@ -219,58 +257,6 @@ export interface Domain {
   errorMessage?: string
 }
 
-/** List containers response. */
-export interface ListContainersResponse {
-  /** Array of containers. */
-  containers: Container[]
-  /** Total number of containers. */
-  totalCount: number
-}
-
-/** List crons response. */
-export interface ListCronsResponse {
-  /** Array of crons. */
-  crons: Cron[]
-  /** Total number of crons. */
-  totalCount: number
-}
-
-/** List domains response. */
-export interface ListDomainsResponse {
-  /** Array of domains. */
-  domains: Domain[]
-  /** Total number of domains. */
-  totalCount: number
-}
-
-/** List logs response. */
-export interface ListLogsResponse {
-  logs: Log[]
-  totalCount: number
-}
-
-/** List namespaces response. */
-export interface ListNamespacesResponse {
-  /** Array of the namespaces. */
-  namespaces: Namespace[]
-  /** Total number of namespaces. */
-  totalCount: number
-}
-
-export interface ListTokensResponse {
-  tokens: Token[]
-  totalCount: number
-}
-
-/** List triggers response. */
-export interface ListTriggersResponse {
-  /** Total count of existing triggers (matching any filters specified). */
-  totalCount: number
-  /** Triggers on this page. */
-  triggers: Trigger[]
-}
-
-/** Log. */
 export interface Log {
   message: string
   timestamp?: Date
@@ -283,7 +269,6 @@ export interface Log {
   stream: LogStream
 }
 
-/** Namespace. */
 export interface Namespace {
   /** UUID of the namespace. */
   id: string
@@ -311,17 +296,6 @@ export interface Namespace {
   region: Region
 }
 
-export interface Secret {
-  key: string
-  value?: string
-}
-
-export interface SecretHashedValue {
-  key: string
-  hashedValue: string
-}
-
-/** Token. */
 export interface Token {
   /** UUID of the token. */
   id: string
@@ -349,7 +323,6 @@ export interface Token {
   expiresAt?: Date
 }
 
-/** Trigger. */
 export interface Trigger {
   /** ID of the trigger. */
   id: string
@@ -388,152 +361,9 @@ export interface Trigger {
   sqsConfig?: TriggerSqsClientConfig
 }
 
-/** Trigger. mnq nats client config. */
-export interface TriggerMnqNatsClientConfig {
-  /** @deprecated */
-  mnqNamespaceId?: string
-  /** Name of the NATS subject the trigger listens to. */
-  subject: string
-  /** ID of the M&Q NATS account. */
-  mnqNatsAccountId: string
-  /** ID of the M&Q project. */
-  mnqProjectId: string
-  /** Region of the M&Q project. */
-  mnqRegion: string
-  /** ID of the M&Q credentials used to subscribe to the NATS subject. */
-  mnqCredentialId?: string
-}
-
-/** Trigger. mnq sqs client config. */
-export interface TriggerMnqSqsClientConfig {
-  /** @deprecated */
-  mnqNamespaceId?: string
-  /** Name of the SQS queue the trigger listens to. */
-  queue: string
-  /** ID of the M&Q project. */
-  mnqProjectId: string
-  /** Region in which the M&Q project is activated. */
-  mnqRegion: string
-  /** ID of the M&Q credentials used to read from the SQS queue. */
-  mnqCredentialId?: string
-}
-
-export interface TriggerSqsClientConfig {
-  endpoint: string
-  queueUrl: string
-  accessKey: string
-  secretKey: string
-}
-
 export interface UpdateTriggerRequestSqsClientConfig {
   accessKey?: string
   secretKey?: string
-}
-
-export type ListNamespacesRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Page number. */
-  page?: number
-  /** Number of namespaces per page. */
-  pageSize?: number
-  /** Order of the namespaces. */
-  orderBy?: ListNamespacesRequestOrderBy
-  /** Name of the namespaces. */
-  name?: string
-  /** UUID of the Organization the namespace belongs to. */
-  organizationId?: string
-  /** UUID of the Project the namespace belongs to. */
-  projectId?: string
-}
-
-export type GetNamespaceRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the namespace to get. */
-  namespaceId: string
-}
-
-export type CreateNamespaceRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Name of the namespace to create. */
-  name?: string
-  /** Environment variables of the namespace to create. */
-  environmentVariables?: Record<string, string>
-  /** UUID of the Project in which the namespace will be created. */
-  projectId?: string
-  /** Description of the namespace to create. */
-  description?: string
-  /** Secret environment variables of the namespace to create. */
-  secretEnvironmentVariables?: Secret[]
-}
-
-export type UpdateNamespaceRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the namespace to update. */
-  namespaceId: string
-  /** Environment variables of the namespace to update. */
-  environmentVariables?: Record<string, string>
-  /** Description of the namespace to update. */
-  description?: string
-  /** Secret environment variables of the namespace to update. */
-  secretEnvironmentVariables?: Secret[]
-}
-
-export type DeleteNamespaceRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the namespace to delete. */
-  namespaceId: string
-}
-
-export type ListContainersRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Page number. */
-  page?: number
-  /** Number of containers per page. */
-  pageSize?: number
-  /** Order of the containers. */
-  orderBy?: ListContainersRequestOrderBy
-  /** UUID of the namespace the container belongs to. */
-  namespaceId: string
-  /** Name of the container. */
-  name?: string
-  /** UUID of the Organization the container belongs to. */
-  organizationId?: string
-  /** UUID of the Project the container belongs to. */
-  projectId?: string
-}
-
-export type GetContainerRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the container to get. */
-  containerId: string
 }
 
 export type CreateContainerRequest = {
@@ -576,13 +406,449 @@ export type CreateContainerRequest = {
   /** Secret environment variables of the container. */
   secretEnvironmentVariables?: Secret[]
   /**
-   * Configure how HTTP and HTTPS requests are handled. Possible values:
+   * Possible values:
    *
    * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.
    * - Enabled: Serve both HTTP and HTTPS traffic.
    */
   httpOption?: ContainerHttpOption
+}
+
+export type CreateCronRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the container to invoke by the cron. */
+  containerId: string
+  /** UNIX cron shedule. */
+  schedule: string
+  /** Arguments to pass with the cron. */
+  args?: Record<string, unknown>
+  /** Name of the cron to create. */
+  name?: string
+}
+
+export type CreateDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Domain to assign. */
+  hostname: string
+  /** UUID of the container to assign the domain to. */
+  containerId: string
+}
+
+export type CreateNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Name of the namespace to create. */
+  name?: string
+  /** Environment variables of the namespace to create. */
+  environmentVariables?: Record<string, string>
+  /** UUID of the Project in which the namespace will be created. */
+  projectId?: string
+  /** Description of the namespace to create. */
+  description?: string
+  /** Secret environment variables of the namespace to create. */
+  secretEnvironmentVariables?: Secret[]
+}
+
+export type CreateTokenRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /**
+   * UUID of the container to create the token for.
+   *
+   * One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set.
+   */
+  containerId?: string
+  /**
+   * UUID of the namespace to create the token for.
+   *
+   * One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set.
+   */
+  namespaceId?: string
+  /** Description of the token. */
+  description?: string
+  /** Expiry date of the token. */
+  expiresAt?: Date
+}
+
+export type CreateTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Name of the trigger. */
+  name: string
+  /** ID of the container to trigger. */
+  containerId: string
+  /** Description of the trigger. */
+  description?: string
+  /**
+   * Configuration for a Scaleway M&Q SQS queue.
+   *
+   * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig',
+   * 'sqsConfig' could be set.
+   */
+  scwSqsConfig?: CreateTriggerRequestMnqSqsClientConfig
+  /**
+   * Configuration for a Scaleway M&Q NATS subject.
+   *
+   * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig',
+   * 'sqsConfig' could be set.
+   */
+  scwNatsConfig?: CreateTriggerRequestMnqNatsClientConfig
+  /**
+   * Configuration for an AWS SQS queue.
+   *
+   * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig',
+   * 'sqsConfig' could be set.
+   */
+  sqsConfig?: CreateTriggerRequestSqsClientConfig
+}
+
+export type DeleteContainerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the container to delete. */
+  containerId: string
+}
+
+export type DeleteCronRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the cron to delete. */
+  cronId: string
+}
+
+export type DeleteDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the domain to delete. */
+  domainId: string
+}
+
+export type DeleteNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the namespace to delete. */
+  namespaceId: string
+}
+
+export type DeleteTokenRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the token to delete. */
+  tokenId: string
+}
+
+export type DeleteTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the trigger to delete. */
+  triggerId: string
+}
+
+export type DeployContainerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the container to deploy. */
+  containerId: string
+}
+
+export type GetContainerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the container to get. */
+  containerId: string
+}
+
+export type GetCronRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the cron to get. */
+  cronId: string
+}
+
+export type GetDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the domain to get. */
+  domainId: string
+}
+
+export type GetNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the namespace to get. */
+  namespaceId: string
+}
+
+export type GetTokenRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the token to get. */
+  tokenId: string
+}
+
+export type GetTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the trigger to get. */
+  triggerId: string
+}
+
+export type IssueJWTRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set. */
+  containerId?: string
+  /** One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set. */
+  namespaceId?: string
+  expiresAt?: Date
+}
+
+export type ListContainersRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Page number. */
+  page?: number
+  /** Number of containers per page. */
+  pageSize?: number
+  /** Order of the containers. */
+  orderBy?: ListContainersRequestOrderBy
+  /** UUID of the namespace the container belongs to. */
+  namespaceId: string
+  /** Name of the container. */
+  name?: string
+  /** UUID of the Organization the container belongs to. */
+  organizationId?: string
+  /** UUID of the Project the container belongs to. */
+  projectId?: string
+}
+
+export interface ListContainersResponse {
+  /** Array of containers. */
+  containers: Container[]
+  /** Total number of containers. */
+  totalCount: number
+}
+
+export type ListCronsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Page number. */
+  page?: number
+  /** Number of crons per page. */
+  pageSize?: number
+  /** Order of the crons. */
+  orderBy?: ListCronsRequestOrderBy
+  /** UUID of the container invoked by the cron. */
+  containerId: string
+}
+
+export interface ListCronsResponse {
+  /** Array of crons. */
+  crons: Cron[]
+  /** Total number of crons. */
+  totalCount: number
+}
+
+export type ListDomainsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Page number. */
+  page?: number
+  /** Number of domains per page. */
+  pageSize?: number
+  /** Order of the domains. */
+  orderBy?: ListDomainsRequestOrderBy
+  /** UUID of the container the domain belongs to. */
+  containerId: string
+}
+
+export interface ListDomainsResponse {
+  /** Array of domains. */
+  domains: Domain[]
+  /** Total number of domains. */
+  totalCount: number
+}
+
+export type ListLogsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the container. */
+  containerId: string
+  /** Page number. */
+  page?: number
+  /** Number of logs per page. */
+  pageSize?: number
+  /** Order of the logs. */
+  orderBy?: ListLogsRequestOrderBy
+}
+
+export interface ListLogsResponse {
+  logs: Log[]
+  totalCount: number
+}
+
+export type ListNamespacesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Page number. */
+  page?: number
+  /** Number of namespaces per page. */
+  pageSize?: number
+  /** Order of the namespaces. */
+  orderBy?: ListNamespacesRequestOrderBy
+  /** Name of the namespaces. */
+  name?: string
+  /** UUID of the Organization the namespace belongs to. */
+  organizationId?: string
+  /** UUID of the Project the namespace belongs to. */
+  projectId?: string
+}
+
+export interface ListNamespacesResponse {
+  /** Array of the namespaces. */
+  namespaces: Namespace[]
+  /** Total number of namespaces. */
+  totalCount: number
+}
+
+export type ListTokensRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Page number. */
+  page?: number
+  /** Number of tokens per page. */
+  pageSize?: number
+  /** Order of the tokens. */
+  orderBy?: ListTokensRequestOrderBy
+  /** UUID of the container the token belongs to. */
+  containerId?: string
+  /** UUID of the namespace the token belongs to. */
+  namespaceId?: string
+}
+
+export interface ListTokensResponse {
+  tokens: Token[]
+  totalCount: number
+}
+
+export type ListTriggersRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Page number to return. */
+  page?: number
+  /** Maximum number of triggers to return per page. */
+  pageSize?: number
+  /** Order in which to return results. */
+  orderBy?: ListTriggersRequestOrderBy
+  /**
+   * ID of the container the triggers belongs to.
+   *
+   * One-of ('scope'): at most one of 'containerId', 'namespaceId', 'projectId'
+   * could be set.
+   */
+  containerId?: string
+  /**
+   * ID of the namespace the triggers belongs to.
+   *
+   * One-of ('scope'): at most one of 'containerId', 'namespaceId', 'projectId'
+   * could be set.
+   */
+  namespaceId?: string
+  /**
+   * ID of the project the triggers belongs to.
+   *
+   * One-of ('scope'): at most one of 'containerId', 'namespaceId', 'projectId'
+   * could be set.
+   */
+  projectId?: string
+}
+
+export interface ListTriggersResponse {
+  /** Total count of existing triggers (matching any filters specified). */
+  totalCount: number
+  /** Triggers on this page. */
+  triggers: Trigger[]
 }
 
 export type UpdateContainerRequest = {
@@ -622,75 +888,13 @@ export type UpdateContainerRequest = {
   port?: number
   secretEnvironmentVariables?: Secret[]
   /**
-   * Configure how HTTP and HTTPS requests are handled. Possible values:
+   * Possible values:
    *
    * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.
    * - Enabled: Serve both HTTP and HTTPS traffic.
    */
   httpOption?: ContainerHttpOption
-}
-
-export type DeleteContainerRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the container to delete. */
-  containerId: string
-}
-
-export type DeployContainerRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the container to deploy. */
-  containerId: string
-}
-
-export type ListCronsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Page number. */
-  page?: number
-  /** Number of crons per page. */
-  pageSize?: number
-  /** Order of the crons. */
-  orderBy?: ListCronsRequestOrderBy
-  /** UUID of the container invoked by the cron. */
-  containerId: string
-}
-
-export type GetCronRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the cron to get. */
-  cronId: string
-}
-
-export type CreateCronRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the container to invoke by the cron. */
-  containerId: string
-  /** UNIX cron shedule. */
-  schedule: string
-  /** Arguments to pass with the cron. */
-  args?: Record<string, unknown>
-  /** Name of the cron to create. */
-  name?: string
 }
 
 export type UpdateCronRequest = {
@@ -711,233 +915,20 @@ export type UpdateCronRequest = {
   name?: string
 }
 
-export type DeleteCronRequest = {
+export type UpdateNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
    */
   region?: Region
-  /** UUID of the cron to delete. */
-  cronId: string
-}
-
-export type ListLogsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the container. */
-  containerId: string
-  /** Page number. */
-  page?: number
-  /** Number of logs per page. */
-  pageSize?: number
-  /** Order of the logs. */
-  orderBy?: ListLogsRequestOrderBy
-}
-
-export type ListDomainsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Page number. */
-  page?: number
-  /** Number of domains per page. */
-  pageSize?: number
-  /** Order of the domains. */
-  orderBy?: ListDomainsRequestOrderBy
-  /** UUID of the container the domain belongs to. */
-  containerId: string
-}
-
-export type GetDomainRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the domain to get. */
-  domainId: string
-}
-
-export type CreateDomainRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Domain to assign. */
-  hostname: string
-  /** UUID of the container to assign the domain to. */
-  containerId: string
-}
-
-export type DeleteDomainRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the domain to delete. */
-  domainId: string
-}
-
-export type IssueJWTRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set. */
-  containerId?: string
-  /** One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set. */
-  namespaceId?: string
-  expiresAt?: Date
-}
-
-export type CreateTokenRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /**
-   * UUID of the container to create the token for.
-   *
-   * One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set.
-   */
-  containerId?: string
-  /**
-   * UUID of the namespace to create the token for.
-   *
-   * One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set.
-   */
-  namespaceId?: string
-  /** Description of the token. */
+  /** UUID of the namespace to update. */
+  namespaceId: string
+  /** Environment variables of the namespace to update. */
+  environmentVariables?: Record<string, string>
+  /** Description of the namespace to update. */
   description?: string
-  /** Expiry date of the token. */
-  expiresAt?: Date
-}
-
-export type GetTokenRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the token to get. */
-  tokenId: string
-}
-
-export type ListTokensRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Page number. */
-  page?: number
-  /** Number of tokens per page. */
-  pageSize?: number
-  /** Order of the tokens. */
-  orderBy?: ListTokensRequestOrderBy
-  /** UUID of the container the token belongs to. */
-  containerId?: string
-  /** UUID of the namespace the token belongs to. */
-  namespaceId?: string
-}
-
-export type DeleteTokenRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the token to delete. */
-  tokenId: string
-}
-
-export type CreateTriggerRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Name of the trigger. */
-  name: string
-  /** ID of the container to trigger. */
-  containerId: string
-  /** Description of the trigger. */
-  description?: string
-  /**
-   * Configuration for a Scaleway M&Q SQS queue.
-   *
-   * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig',
-   * 'sqsConfig' could be set.
-   */
-  scwSqsConfig?: CreateTriggerRequestMnqSqsClientConfig
-  /**
-   * Configuration for a Scaleway M&Q NATS subject.
-   *
-   * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig',
-   * 'sqsConfig' could be set.
-   */
-  scwNatsConfig?: CreateTriggerRequestMnqNatsClientConfig
-  /**
-   * Configuration for an AWS SQS queue.
-   *
-   * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig',
-   * 'sqsConfig' could be set.
-   */
-  sqsConfig?: CreateTriggerRequestSqsClientConfig
-}
-
-export type GetTriggerRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** ID of the trigger to get. */
-  triggerId: string
-}
-
-export type ListTriggersRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Page number to return. */
-  page?: number
-  /** Maximum number of triggers to return per page. */
-  pageSize?: number
-  /** Order in which to return results. */
-  orderBy?: ListTriggersRequestOrderBy
-  /**
-   * ID of the container the triggers belongs to.
-   *
-   * One-of ('scope'): at most one of 'containerId', 'namespaceId', 'projectId'
-   * could be set.
-   */
-  containerId?: string
-  /**
-   * ID of the namespace the triggers belongs to.
-   *
-   * One-of ('scope'): at most one of 'containerId', 'namespaceId', 'projectId'
-   * could be set.
-   */
-  namespaceId?: string
-  /**
-   * ID of the project the triggers belongs to.
-   *
-   * One-of ('scope'): at most one of 'containerId', 'namespaceId', 'projectId'
-   * could be set.
-   */
-  projectId?: string
+  /** Secret environment variables of the namespace to update. */
+  secretEnvironmentVariables?: Secret[]
 }
 
 export type UpdateTriggerRequest = {
@@ -958,14 +949,4 @@ export type UpdateTriggerRequest = {
    * One-of ('config'): at most one of 'sqsConfig' could be set.
    */
   sqsConfig?: UpdateTriggerRequestSqsClientConfig
-}
-
-export type DeleteTriggerRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** ID of the trigger to delete. */
-  triggerId: string
 }
