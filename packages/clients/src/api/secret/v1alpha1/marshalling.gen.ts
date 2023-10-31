@@ -39,6 +39,7 @@ export const unmarshalFolder = (data: unknown) => {
     name: data.name,
     path: data.path,
     projectId: data.project_id,
+    region: data.region,
   } as Folder
 }
 
