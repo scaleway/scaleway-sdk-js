@@ -100,8 +100,6 @@ export type NamespaceStatus =
   | 'creating'
   | 'pending'
 
-export type NullValue = 'NULL_VALUE'
-
 export type RuntimeStatus =
   | 'unknown_status'
   | 'beta'
@@ -132,7 +130,51 @@ export type TriggerStatus =
   | 'creating'
   | 'pending'
 
-/** Create trigger request. mnq nats client config. */
+export interface SecretHashedValue {
+  key: string
+  hashedValue: string
+}
+
+export interface TriggerMnqNatsClientConfig {
+  /** @deprecated */
+  mnqNamespaceId?: string
+  /** Name of the NATS subject the trigger listens to. */
+  subject: string
+  /** ID of the M&Q NATS account. */
+  mnqNatsAccountId: string
+  /** ID of the M&Q project. */
+  mnqProjectId: string
+  /** Region of the M&Q project. */
+  mnqRegion: string
+  /** ID of the M&Q credentials used to subscribe to the NATS subject. */
+  mnqCredentialId?: string
+}
+
+export interface TriggerMnqSqsClientConfig {
+  /** @deprecated */
+  mnqNamespaceId?: string
+  /** Name of the SQS queue the trigger listens to. */
+  queue: string
+  /** ID of the M&Q project. */
+  mnqProjectId: string
+  /** Region in which the M&Q project is activated. */
+  mnqRegion: string
+  /** ID of the M&Q credentials used to read from the SQS queue. */
+  mnqCredentialId?: string
+}
+
+export interface TriggerSqsClientConfig {
+  endpoint: string
+  queueUrl: string
+  accessKey: string
+  secretKey: string
+}
+
+export interface Secret {
+  key: string
+  value?: string
+}
+
 export interface CreateTriggerRequestMnqNatsClientConfig {
   /** @deprecated */
   mnqNamespaceId?: string
@@ -146,13 +188,12 @@ export interface CreateTriggerRequestMnqNatsClientConfig {
   mnqRegion: string
 }
 
-/** Create trigger request. mnq sqs client config. */
 export interface CreateTriggerRequestMnqSqsClientConfig {
   /** @deprecated */
   mnqNamespaceId?: string
   /** Name of the SQS queue the trigger should listen to. */
   queue: string
-  /** ID of the M&Q project. You must have activated SQS on this project. */
+  /** You must have activated SQS on this project. */
   mnqProjectId: string
   /** Region in which the M&Q project is activated. */
   mnqRegion: string
@@ -165,7 +206,6 @@ export interface CreateTriggerRequestSqsClientConfig {
   secretKey: string
 }
 
-/** Cron. */
 export interface Cron {
   /** UUID of the cron. */
   id: string
@@ -181,7 +221,6 @@ export interface Cron {
   name: string
 }
 
-/** Domain. */
 export interface Domain {
   /** UUID of the domain. */
   id: string
@@ -197,12 +236,19 @@ export interface Domain {
   errorMessage?: string
 }
 
-export interface DownloadURL {
-  url: string
-  headers: Record<string, string[]>
+export interface Runtime {
+  name: string
+  language: string
+  version: string
+  defaultHandler: string
+  codeSample: string
+  status: RuntimeStatus
+  statusMessage: string
+  extension: string
+  implementation: string
+  logoUrl: string
 }
 
-/** Function. */
 export interface Function {
   /** UUID of the function. */
   id: string
@@ -243,7 +289,7 @@ export interface Function {
   /** Region in which the function is deployed. */
   region: Region
   /**
-   * Configuration for handling of HTTP and HTTPS requests. Possible values:
+   * Possible values:
    *
    * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.
@@ -253,67 +299,6 @@ export interface Function {
   runtimeMessage: string
 }
 
-/** List crons response. */
-export interface ListCronsResponse {
-  /** Array of crons. */
-  crons: Cron[]
-  /** Total number of crons. */
-  totalCount: number
-}
-
-/** List domains response. */
-export interface ListDomainsResponse {
-  /** Array of domains. */
-  domains: Domain[]
-  /** Total number of domains. */
-  totalCount: number
-}
-
-/** List function runtimes response. */
-export interface ListFunctionRuntimesResponse {
-  /** Array of runtimes available. */
-  runtimes: Runtime[]
-  /** Total number of runtimes. */
-  totalCount: number
-}
-
-/** List functions response. */
-export interface ListFunctionsResponse {
-  /** Array of functions. */
-  functions: Function[]
-  /** Total number of functions. */
-  totalCount: number
-}
-
-/** List logs response. */
-export interface ListLogsResponse {
-  /** Array of logs. */
-  logs: Log[]
-  /** Total number of logs. */
-  totalCount: number
-}
-
-/** List namespaces response. */
-export interface ListNamespacesResponse {
-  namespaces: Namespace[]
-  /** Total number of namespaces. */
-  totalCount: number
-}
-
-export interface ListTokensResponse {
-  tokens: Token[]
-  totalCount: number
-}
-
-/** List triggers response. */
-export interface ListTriggersResponse {
-  /** Total count of existing triggers (matching any filters specified). */
-  totalCount: number
-  /** Triggers on this page. */
-  triggers: Trigger[]
-}
-
-/** Log. */
 export interface Log {
   /** Message of the log. */
   message: string
@@ -329,7 +314,6 @@ export interface Log {
   stream: LogStream
 }
 
-/** Namespace. */
 export interface Namespace {
   /** UUID of the namespace. */
   id: string
@@ -357,30 +341,6 @@ export interface Namespace {
   region: Region
 }
 
-export interface Runtime {
-  name: string
-  language: string
-  version: string
-  defaultHandler: string
-  codeSample: string
-  status: RuntimeStatus
-  statusMessage: string
-  extension: string
-  implementation: string
-  logoUrl: string
-}
-
-export interface Secret {
-  key: string
-  value?: string
-}
-
-export interface SecretHashedValue {
-  key: string
-  hashedValue: string
-}
-
-/** Token. */
 export interface Token {
   /** UUID of the token. */
   id: string
@@ -408,7 +368,6 @@ export interface Token {
   expiresAt?: Date
 }
 
-/** Trigger. */
 export interface Trigger {
   /** ID of the trigger. */
   id: string
@@ -447,158 +406,36 @@ export interface Trigger {
   sqsConfig?: TriggerSqsClientConfig
 }
 
-/** Trigger. mnq nats client config. */
-export interface TriggerMnqNatsClientConfig {
-  /** @deprecated */
-  mnqNamespaceId?: string
-  /** Name of the NATS subject the trigger listens to. */
-  subject: string
-  /** ID of the M&Q NATS account. */
-  mnqNatsAccountId: string
-  /** ID of the M&Q project. */
-  mnqProjectId: string
-  /** Region of the M&Q project. */
-  mnqRegion: string
-  /** ID of the M&Q credentials used to subscribe to the NATS subject. */
-  mnqCredentialId?: string
-}
-
-/** Trigger. mnq sqs client config. */
-export interface TriggerMnqSqsClientConfig {
-  /** Name of the SQS queue the trigger listens to. */
-  queue: string
-  /** @deprecated */
-  mnqNamespaceId?: string
-  /** ID of the M&Q project. */
-  mnqProjectId: string
-  /** Region in which the M&Q project is activated. */
-  mnqRegion: string
-  /** ID of the M&Q credentials used to read from the SQS queue. */
-  mnqCredentialId?: string
-}
-
-export interface TriggerSqsClientConfig {
-  endpoint: string
-  queueUrl: string
-  accessKey: string
-  secretKey: string
-}
-
 export interface UpdateTriggerRequestSqsClientConfig {
   accessKey?: string
   secretKey?: string
 }
 
-/** Upload url. */
-export interface UploadURL {
-  /** Upload URL to upload the function to. */
-  url: string
-  /** HTTP headers. */
-  headers: Record<string, string[]>
-}
-
-export type ListNamespacesRequest = {
+export type CreateCronRequest = {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
    */
   region?: Region
-  /** Page number. */
-  page?: number
-  /** Number of namespaces per page. */
-  pageSize?: number
-  /** Order of the namespaces. */
-  orderBy?: ListNamespacesRequestOrderBy
-  /** Name of the namespace. */
+  /** UUID of the function to use the cron with. */
+  functionId: string
+  /** Schedule of the cron in UNIX cron format. */
+  schedule: string
+  /** Arguments to use with the cron. */
+  args?: Record<string, unknown>
+  /** Name of the cron. */
   name?: string
-  /** UUID of the Organization the namespace belongs to. */
-  organizationId?: string
-  /** UUID of the Project the namespace belongs to. */
-  projectId?: string
 }
 
-export type GetNamespaceRequest = {
+export type CreateDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
    */
   region?: Region
-  /** UUID of the namespace. */
-  namespaceId: string
-}
-
-export type CreateNamespaceRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  name?: string
-  /** Environment variables of the namespace. */
-  environmentVariables?: Record<string, string>
-  /** UUID of the project in which the namespace will be created. */
-  projectId?: string
-  /** Description of the namespace. */
-  description?: string
-  /** Secret environment variables of the namespace. */
-  secretEnvironmentVariables?: Secret[]
-}
-
-export type UpdateNamespaceRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the namespapce. */
-  namespaceId: string
-  /** Environment variables of the namespace. */
-  environmentVariables?: Record<string, string>
-  /** Description of the namespace. */
-  description?: string
-  /** Secret environment variables of the namespace. */
-  secretEnvironmentVariables?: Secret[]
-}
-
-export type DeleteNamespaceRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the namespace. */
-  namespaceId: string
-}
-
-export type ListFunctionsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Page number. */
-  page?: number
-  /** Number of functions per page. */
-  pageSize?: number
-  /** Order of the functions. */
-  orderBy?: ListFunctionsRequestOrderBy
-  /** UUID of the namespace the function belongs to. */
-  namespaceId: string
-  /** Name of the function. */
-  name?: string
-  /** UUID of the Organziation the function belongs to. */
-  organizationId?: string
-  /** UUID of the Project the function belongs to. */
-  projectId?: string
-}
-
-export type GetFunctionRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the function. */
+  /** Hostame to create. */
+  hostname: string
+  /** UUID of the function to associate the domain with. */
   functionId: string
 }
 
@@ -632,7 +469,7 @@ export type CreateFunctionRequest = {
   description?: string
   secretEnvironmentVariables?: Secret[]
   /**
-   * Configure how HTTP and HTTPS requests are handled. Possible values:
+   * Possible values:
    *
    * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
    *   to use HTTPS.
@@ -641,241 +478,21 @@ export type CreateFunctionRequest = {
   httpOption?: FunctionHttpOption
 }
 
-export type UpdateFunctionRequest = {
+export type CreateNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
    */
   region?: Region
-  /** UUID of the function to update. */
-  functionId: string
-  /** Environment variables of the function to update. */
+  name?: string
+  /** Environment variables of the namespace. */
   environmentVariables?: Record<string, string>
-  /** Minumum number of instances to scale the function to. */
-  minScale?: number
-  /** Maximum number of instances to scale the function to. */
-  maxScale?: number
-  /** Runtime to use with the function. */
-  runtime?: FunctionRuntime
-  /** Memory limit of the function in MB. */
-  memoryLimit?: number
-  /** Processing time limit for the function. */
-  timeout?: string
-  /** Redeploy failed function. */
-  redeploy?: boolean
-  /** Handler to use with the function. */
-  handler?: string
-  /** Privacy setting of the function. */
-  privacy?: FunctionPrivacy
-  /** Description of the function. */
+  /** UUID of the project in which the namespace will be created. */
+  projectId?: string
+  /** Description of the namespace. */
   description?: string
-  /** Secret environment variables of the function. */
+  /** Secret environment variables of the namespace. */
   secretEnvironmentVariables?: Secret[]
-  /**
-   * Configure how HTTP and HTTPS requests are handled. Possible values:
-   *
-   * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
-   *   to use HTTPS.
-   * - Enabled: Serve both HTTP and HTTPS traffic.
-   */
-  httpOption?: FunctionHttpOption
-}
-
-export type DeleteFunctionRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the function to delete. */
-  functionId: string
-}
-
-export type DeployFunctionRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the function to deploy. */
-  functionId: string
-}
-
-export type ListFunctionRuntimesRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-}
-
-export type GetFunctionUploadURLRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the function to get the upload URL for. */
-  functionId: string
-  /** Size of the archive to upload in bytes. */
-  contentLength: number
-}
-
-export type GetFunctionDownloadURLRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the function to get the the download URL for. */
-  functionId: string
-}
-
-export type ListCronsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Page number. */
-  page?: number
-  /** Number of crons per page. */
-  pageSize?: number
-  /** Order of the crons. */
-  orderBy?: ListCronsRequestOrderBy
-  /** UUID of the function. */
-  functionId: string
-}
-
-export type GetCronRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the cron to get. */
-  cronId: string
-}
-
-export type CreateCronRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the function to use the cron with. */
-  functionId: string
-  /** Schedule of the cron in UNIX cron format. */
-  schedule: string
-  /** Arguments to use with the cron. */
-  args?: Record<string, unknown>
-  /** Name of the cron. */
-  name?: string
-}
-
-export type UpdateCronRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the cron to update. */
-  cronId: string
-  /** UUID of the function to use the cron with. */
-  functionId?: string
-  /** Schedule of the cron in UNIX cron format. */
-  schedule?: string
-  /** Arguments to use with the cron. */
-  args?: Record<string, unknown>
-  /** Name of the cron. */
-  name?: string
-}
-
-export type DeleteCronRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the cron to delete. */
-  cronId: string
-}
-
-export type ListLogsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the function to get the logs for. */
-  functionId: string
-  /** Page number. */
-  page?: number
-  /** Number of logs per page. */
-  pageSize?: number
-  /** Order of the logs. */
-  orderBy?: ListLogsRequestOrderBy
-}
-
-export type ListDomainsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Page number. */
-  page?: number
-  /** Number of domains per page. */
-  pageSize?: number
-  /** Order of the domains. */
-  orderBy?: ListDomainsRequestOrderBy
-  /** UUID of the function the domain is assoicated with. */
-  functionId: string
-}
-
-export type GetDomainRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the domain to get. */
-  domainId: string
-}
-
-export type CreateDomainRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Hostame to create. */
-  hostname: string
-  /** UUID of the function to associate the domain with. */
-  functionId: string
-}
-
-export type DeleteDomainRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the domain to delete. */
-  domainId: string
-}
-
-export type IssueJWTRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set. */
-  functionId?: string
-  /** One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set. */
-  namespaceId?: string
-  expiresAt?: Date
 }
 
 export type CreateTokenRequest = {
@@ -900,44 +517,6 @@ export type CreateTokenRequest = {
   description?: string
   /** Date on which the token expires. */
   expiresAt?: Date
-}
-
-export type GetTokenRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the token to get. */
-  tokenId: string
-}
-
-export type ListTokensRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Page number. */
-  page?: number
-  /** Number of tokens per page. */
-  pageSize?: number
-  /** Sort order for the tokens. */
-  orderBy?: ListTokensRequestOrderBy
-  /** UUID of the function the token is assoicated with. */
-  functionId?: string
-  /** UUID of the namespace the token is associated with. */
-  namespaceId?: string
-}
-
-export type DeleteTokenRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the token to delete. */
-  tokenId: string
 }
 
 export type CreateTriggerRequest = {
@@ -975,6 +554,153 @@ export type CreateTriggerRequest = {
   sqsConfig?: CreateTriggerRequestSqsClientConfig
 }
 
+export type DeleteCronRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the cron to delete. */
+  cronId: string
+}
+
+export type DeleteDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the domain to delete. */
+  domainId: string
+}
+
+export type DeleteFunctionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the function to delete. */
+  functionId: string
+}
+
+export type DeleteNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the namespace. */
+  namespaceId: string
+}
+
+export type DeleteTokenRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the token to delete. */
+  tokenId: string
+}
+
+export type DeleteTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the trigger to delete. */
+  triggerId: string
+}
+
+export type DeployFunctionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the function to deploy. */
+  functionId: string
+}
+
+export interface DownloadURL {
+  url: string
+  headers: Record<string, string[]>
+}
+
+export type GetCronRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the cron to get. */
+  cronId: string
+}
+
+export type GetDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the domain to get. */
+  domainId: string
+}
+
+export type GetFunctionDownloadURLRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the function to get the the download URL for. */
+  functionId: string
+}
+
+export type GetFunctionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the function. */
+  functionId: string
+}
+
+export type GetFunctionUploadURLRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the function to get the upload URL for. */
+  functionId: string
+  /** Size of the archive to upload in bytes. */
+  contentLength: number
+}
+
+export type GetNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the namespace. */
+  namespaceId: string
+}
+
+export type GetTokenRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the token to get. */
+  tokenId: string
+}
+
 export type GetTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -983,6 +709,181 @@ export type GetTriggerRequest = {
   region?: Region
   /** ID of the trigger to get. */
   triggerId: string
+}
+
+export type IssueJWTRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set. */
+  functionId?: string
+  /** One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set. */
+  namespaceId?: string
+  expiresAt?: Date
+}
+
+export type ListCronsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Page number. */
+  page?: number
+  /** Number of crons per page. */
+  pageSize?: number
+  /** Order of the crons. */
+  orderBy?: ListCronsRequestOrderBy
+  /** UUID of the function. */
+  functionId: string
+}
+
+export interface ListCronsResponse {
+  /** Array of crons. */
+  crons: Cron[]
+  /** Total number of crons. */
+  totalCount: number
+}
+
+export type ListDomainsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Page number. */
+  page?: number
+  /** Number of domains per page. */
+  pageSize?: number
+  /** Order of the domains. */
+  orderBy?: ListDomainsRequestOrderBy
+  /** UUID of the function the domain is assoicated with. */
+  functionId: string
+}
+
+export interface ListDomainsResponse {
+  /** Array of domains. */
+  domains: Domain[]
+  /** Total number of domains. */
+  totalCount: number
+}
+
+export type ListFunctionRuntimesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+}
+
+export interface ListFunctionRuntimesResponse {
+  /** Array of runtimes available. */
+  runtimes: Runtime[]
+  /** Total number of runtimes. */
+  totalCount: number
+}
+
+export type ListFunctionsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Page number. */
+  page?: number
+  /** Number of functions per page. */
+  pageSize?: number
+  /** Order of the functions. */
+  orderBy?: ListFunctionsRequestOrderBy
+  /** UUID of the namespace the function belongs to. */
+  namespaceId: string
+  /** Name of the function. */
+  name?: string
+  /** UUID of the Organziation the function belongs to. */
+  organizationId?: string
+  /** UUID of the Project the function belongs to. */
+  projectId?: string
+}
+
+export interface ListFunctionsResponse {
+  /** Array of functions. */
+  functions: Function[]
+  /** Total number of functions. */
+  totalCount: number
+}
+
+export type ListLogsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the function to get the logs for. */
+  functionId: string
+  /** Page number. */
+  page?: number
+  /** Number of logs per page. */
+  pageSize?: number
+  /** Order of the logs. */
+  orderBy?: ListLogsRequestOrderBy
+}
+
+export interface ListLogsResponse {
+  /** Array of logs. */
+  logs: Log[]
+  /** Total number of logs. */
+  totalCount: number
+}
+
+export type ListNamespacesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Page number. */
+  page?: number
+  /** Number of namespaces per page. */
+  pageSize?: number
+  /** Order of the namespaces. */
+  orderBy?: ListNamespacesRequestOrderBy
+  /** Name of the namespace. */
+  name?: string
+  /** UUID of the Organization the namespace belongs to. */
+  organizationId?: string
+  /** UUID of the Project the namespace belongs to. */
+  projectId?: string
+}
+
+export interface ListNamespacesResponse {
+  namespaces: Namespace[]
+  /** Total number of namespaces. */
+  totalCount: number
+}
+
+export type ListTokensRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Page number. */
+  page?: number
+  /** Number of tokens per page. */
+  pageSize?: number
+  /** Sort order for the tokens. */
+  orderBy?: ListTokensRequestOrderBy
+  /** UUID of the function the token is assoicated with. */
+  functionId?: string
+  /** UUID of the namespace the token is associated with. */
+  namespaceId?: string
+}
+
+export interface ListTokensResponse {
+  tokens: Token[]
+  totalCount: number
 }
 
 export type ListTriggersRequest = {
@@ -1020,6 +921,87 @@ export type ListTriggersRequest = {
   projectId?: string
 }
 
+export interface ListTriggersResponse {
+  /** Total count of existing triggers (matching any filters specified). */
+  totalCount: number
+  /** Triggers on this page. */
+  triggers: Trigger[]
+}
+
+export type UpdateCronRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the cron to update. */
+  cronId: string
+  /** UUID of the function to use the cron with. */
+  functionId?: string
+  /** Schedule of the cron in UNIX cron format. */
+  schedule?: string
+  /** Arguments to use with the cron. */
+  args?: Record<string, unknown>
+  /** Name of the cron. */
+  name?: string
+}
+
+export type UpdateFunctionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the function to update. */
+  functionId: string
+  /** Environment variables of the function to update. */
+  environmentVariables?: Record<string, string>
+  /** Minumum number of instances to scale the function to. */
+  minScale?: number
+  /** Maximum number of instances to scale the function to. */
+  maxScale?: number
+  /** Runtime to use with the function. */
+  runtime?: FunctionRuntime
+  /** Memory limit of the function in MB. */
+  memoryLimit?: number
+  /** Processing time limit for the function. */
+  timeout?: string
+  /** Redeploy failed function. */
+  redeploy?: boolean
+  /** Handler to use with the function. */
+  handler?: string
+  /** Privacy setting of the function. */
+  privacy?: FunctionPrivacy
+  /** Description of the function. */
+  description?: string
+  /** Secret environment variables of the function. */
+  secretEnvironmentVariables?: Secret[]
+  /**
+   * Possible values:
+   *
+   * - Redirected: Responds to HTTP request with a 301 redirect to ask the clients
+   *   to use HTTPS.
+   * - Enabled: Serve both HTTP and HTTPS traffic.
+   */
+  httpOption?: FunctionHttpOption
+}
+
+export type UpdateNamespaceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the namespapce. */
+  namespaceId: string
+  /** Environment variables of the namespace. */
+  environmentVariables?: Record<string, string>
+  /** Description of the namespace. */
+  description?: string
+  /** Secret environment variables of the namespace. */
+  secretEnvironmentVariables?: Secret[]
+}
+
 export type UpdateTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -1040,12 +1022,9 @@ export type UpdateTriggerRequest = {
   sqsConfig?: UpdateTriggerRequestSqsClientConfig
 }
 
-export type DeleteTriggerRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** ID of the trigger to delete. */
-  triggerId: string
+export interface UploadURL {
+  /** Upload URL to upload the function to. */
+  url: string
+  /** HTTP headers. */
+  headers: Record<string, string[]>
 }

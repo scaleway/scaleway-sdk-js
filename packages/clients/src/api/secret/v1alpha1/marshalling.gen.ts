@@ -183,7 +183,7 @@ export const marshalCreateSecretRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  ephemeral_action: request.ephemeralAction ?? 'unknown_ephemeral_action',
+  ephemeral_action: request.ephemeralAction,
   expires_at: request.expiresAt,
   name: request.name,
   path: request.path,

@@ -45,28 +45,23 @@ export type PinStatus =
   | 'failed'
   | 'pinned'
 
-export interface ExportKeyNameResponse {
-  nameId: string
-  projectId: string
-  createdAt?: Date
-  updatedAt?: Date
-  publicKey: string
-  privateKey: string
+export interface PinCIDMeta {
+  id?: string
 }
 
-export interface ListNamesResponse {
-  names: Name[]
-  totalCount: number
+export interface PinCID {
+  cid?: string
+  name?: string
+  origins: string[]
+  meta?: PinCIDMeta
 }
 
-export interface ListPinsResponse {
-  totalCount: number
-  pins: Pin[]
-}
-
-export interface ListVolumesResponse {
-  volumes: Volume[]
-  totalCount: number
+export interface PinInfo {
+  id?: string
+  url?: string
+  size?: number
+  progress?: number
+  statusDetails: PinDetails
 }
 
 export interface Name {
@@ -79,6 +74,10 @@ export interface Name {
   key: string
   status: NameStatus
   value: string
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region: Region
 }
 
@@ -91,32 +90,13 @@ export interface Pin {
   info?: PinInfo
 }
 
-export interface PinCID {
-  cid?: string
-  name?: string
-  origins: string[]
-  meta?: PinCIDMeta
-}
-
-export interface PinCIDMeta {
-  id?: string
-}
-
-export interface PinInfo {
-  id?: string
-  url?: string
-  size?: number
-  progress?: number
-  statusDetails: PinDetails
-}
-
-export interface ReplacePinResponse {
-  pin?: Pin
-}
-
 export interface Volume {
   id: string
   projectId: string
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region: Region
   countPin: number
   createdAt?: Date
@@ -124,82 +104,6 @@ export interface Volume {
   tags: string[]
   name: string
   size?: number
-}
-
-export type CreateVolumeRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Project ID. */
-  projectId?: string
-  /** Volume name. */
-  name: string
-}
-
-export type GetVolumeRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Volume ID. */
-  volumeId: string
-}
-
-export type ListVolumesRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Project ID, only volumes belonging to this project will be listed. */
-  projectId?: string
-  /** Sort the order of the returned volumes. */
-  orderBy?: ListVolumesRequestOrderBy
-  /** Page number. */
-  page?: number
-  /** Maximum number of volumes to return per page. */
-  pageSize?: number
-}
-
-export type UpdateVolumeRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Volume ID. */
-  volumeId: string
-  /** Volume name. */
-  name?: string
-  /** Tags of the volume. */
-  tags?: string[]
-}
-
-export type DeleteVolumeRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Volume ID. */
-  volumeId: string
-}
-
-export type CreatePinByURLRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Volume ID on which you want to pin your content. */
-  volumeId: string
-  /** URL containing the content you want to pin. */
-  url: string
-  /** Pin name. */
-  name?: string
 }
 
 export type CreatePinByCIDRequest = {
@@ -218,22 +122,61 @@ export type CreatePinByCIDRequest = {
   name?: string
 }
 
-export type ReplacePinRequest = {
+export type CreatePinByURLRequest = {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
    */
   region?: Region
-  /** Pin ID whose information you wish to replace. */
+  /** Volume ID on which you want to pin your content. */
+  volumeId: string
+  /** URL containing the content you want to pin. */
+  url: string
+  /** Pin name. */
+  name?: string
+}
+
+export type CreateVolumeRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Project ID. */
+  projectId?: string
+  /** Volume name. */
+  name: string
+}
+
+export type DeletePinRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Pin ID you want to remove from the volume. */
   pinId: string
   /** Volume ID. */
   volumeId: string
-  /** New CID you want to pin in place of the old one. */
-  cid: string
-  /** New name to replace. */
-  name?: string
-  /** Node containing the content you want to pin. */
-  origins?: string[]
+}
+
+export type DeleteVolumeRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Volume ID. */
+  volumeId: string
+}
+
+export interface ExportKeyNameResponse {
+  nameId: string
+  projectId: string
+  createdAt?: Date
+  updatedAt?: Date
+  publicKey: string
+  privateKey: string
 }
 
 export type GetPinRequest = {
@@ -248,36 +191,12 @@ export type GetPinRequest = {
   volumeId: string
 }
 
-export type ListPinsRequest = {
+export type GetVolumeRequest = {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
    */
   region?: Region
-  /** Volume ID of which you want to list the pins. */
-  volumeId: string
-  /** Project ID. */
-  projectId?: string
-  /** Organization ID. */
-  organizationId?: string
-  /** Sort order of the returned Volume. */
-  orderBy?: ListPinsRequestOrderBy
-  /** Page number. */
-  page?: number
-  /** Maximum number of volumes to return per page. */
-  pageSize?: number
-  /** List pins by status. */
-  status?: PinStatus
-}
-
-export type DeletePinRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Pin ID you want to remove from the volume. */
-  pinId: string
   /** Volume ID. */
   volumeId: string
 }
@@ -296,6 +215,26 @@ export type IpnsApiCreateNameRequest = {
   value: string
 }
 
+export type IpnsApiDeleteNameRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Name ID you wish to delete. */
+  nameId: string
+}
+
+export type IpnsApiExportKeyNameRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Name ID whose keys you want to export. */
+  nameId: string
+}
+
 export type IpnsApiGetNameRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -306,14 +245,20 @@ export type IpnsApiGetNameRequest = {
   nameId: string
 }
 
-export type IpnsApiDeleteNameRequest = {
+export type IpnsApiImportKeyNameRequest = {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
    */
   region?: Region
-  /** Name ID you wish to delete. */
-  nameId: string
+  /** Project ID. */
+  projectId?: string
+  /** Name for your records. */
+  name: string
+  /** Base64 private key. */
+  privateKey: string
+  /** Value you want to associate with your records, CID or IPNS key. */
+  value: string
 }
 
 export type IpnsApiListNamesRequest = {
@@ -350,28 +295,91 @@ export type IpnsApiUpdateNameRequest = {
   value?: string
 }
 
-export type IpnsApiExportKeyNameRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** Name ID whose keys you want to export. */
-  nameId: string
+export interface ListNamesResponse {
+  names: Name[]
+  totalCount: number
 }
 
-export type IpnsApiImportKeyNameRequest = {
+export type ListPinsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
    */
   region?: Region
+  /** Volume ID of which you want to list the pins. */
+  volumeId: string
   /** Project ID. */
   projectId?: string
-  /** Name for your records. */
-  name: string
-  /** Base64 private key. */
-  privateKey: string
-  /** Value you want to associate with your records, CID or IPNS key. */
-  value: string
+  /** Organization ID. */
+  organizationId?: string
+  /** Sort order of the returned Volume. */
+  orderBy?: ListPinsRequestOrderBy
+  /** Page number. */
+  page?: number
+  /** Maximum number of volumes to return per page. */
+  pageSize?: number
+  /** List pins by status. */
+  status?: PinStatus
+}
+
+export interface ListPinsResponse {
+  totalCount: number
+  pins: Pin[]
+}
+
+export type ListVolumesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Project ID, only volumes belonging to this project will be listed. */
+  projectId?: string
+  /** Sort the order of the returned volumes. */
+  orderBy?: ListVolumesRequestOrderBy
+  /** Page number. */
+  page?: number
+  /** Maximum number of volumes to return per page. */
+  pageSize?: number
+}
+
+export interface ListVolumesResponse {
+  volumes: Volume[]
+  totalCount: number
+}
+
+export type ReplacePinRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Pin ID whose information you wish to replace. */
+  pinId: string
+  /** Volume ID. */
+  volumeId: string
+  /** New CID you want to pin in place of the old one. */
+  cid: string
+  /** New name to replace. */
+  name?: string
+  /** Node containing the content you want to pin. */
+  origins?: string[]
+}
+
+export interface ReplacePinResponse {
+  pin?: Pin
+}
+
+export type UpdateVolumeRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Volume ID. */
+  volumeId: string
+  /** Volume name. */
+  name?: string
+  /** Tags of the volume. */
+  tags?: string[]
 }
