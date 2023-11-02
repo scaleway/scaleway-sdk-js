@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.41.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.40.0...@scaleway/sdk@1.41.0) (2023-11-02)
+
+### Features
+
+- **secret_manager:** add region to folders ([#973](https://github.com/scaleway/scaleway-sdk-js/issues/973)) ([f9958e8](https://github.com/scaleway/scaleway-sdk-js/commit/f9958e8f854af1fbf32fbfbd428273b16bd64cdd))
+
 ## [1.40.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.39.0...@scaleway/sdk@1.40.0) (2023-10-30)
 
 ### Features
