@@ -747,14 +747,14 @@ export type CreateInstanceRequest = {
   /**
    * @deprecated Please use project_id instead.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
    *   could be set.
    */
   organizationId?: string
   /**
    * The Project ID on which the Database Instance will be created.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
    * could be set.
    */
   projectId?: string

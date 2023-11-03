@@ -30,6 +30,10 @@ export interface JobDefinition {
   environmentVariables: Record<string, string>
   description: string
   jobTimeout?: string
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
   region: Region
 }
 
@@ -43,25 +47,11 @@ export interface JobRun {
   exitCode?: number
   runDuration?: string
   errorMessage: string
-  region: Region
-}
-
-export interface ListJobDefinitionsResponse {
-  jobDefinitions: JobDefinition[]
-  totalCount: number
-}
-
-export interface ListJobRunsResponse {
-  jobRuns: JobRun[]
-  totalCount: number
-}
-
-export type GetServiceInfoRequest = {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region: Region
 }
 
 export type CreateJobDefinitionRequest = {
@@ -81,44 +71,6 @@ export type CreateJobDefinitionRequest = {
   jobTimeout?: string
 }
 
-export type GetJobDefinitionRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  jobDefinitionId: string
-}
-
-export type ListJobDefinitionsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  page?: number
-  pageSize?: number
-  orderBy?: ListJobDefinitionsRequestOrderBy
-  projectId?: string
-}
-
-export type UpdateJobDefinitionRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  jobDefinitionId: string
-  name?: string
-  cpuLimit?: number
-  memoryLimit?: number
-  imageUri?: string
-  command?: string
-  environmentVariables?: Record<string, string>
-  description?: string
-  jobTimeout?: string
-}
-
 export type DeleteJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -128,7 +80,7 @@ export type DeleteJobDefinitionRequest = {
   jobDefinitionId: string
 }
 
-export type StartJobDefinitionRequest = {
+export type GetJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -146,13 +98,29 @@ export type GetJobRunRequest = {
   jobRunId: string
 }
 
-export type StopJobRunRequest = {
+export type GetServiceInfoRequest = {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
    */
   region?: Region
-  jobRunId: string
+}
+
+export type ListJobDefinitionsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  page?: number
+  pageSize?: number
+  orderBy?: ListJobDefinitionsRequestOrderBy
+  projectId?: string
+}
+
+export interface ListJobDefinitionsResponse {
+  jobDefinitions: JobDefinition[]
+  totalCount: number
 }
 
 export type ListJobRunsRequest = {
@@ -166,4 +134,44 @@ export type ListJobRunsRequest = {
   orderBy?: ListJobRunsRequestOrderBy
   jobDefinitionId?: string
   projectId?: string
+}
+
+export interface ListJobRunsResponse {
+  jobRuns: JobRun[]
+  totalCount: number
+}
+
+export type StartJobDefinitionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  jobDefinitionId: string
+}
+
+export type StopJobRunRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  jobRunId: string
+}
+
+export type UpdateJobDefinitionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  jobDefinitionId: string
+  name?: string
+  cpuLimit?: number
+  memoryLimit?: number
+  imageUri?: string
+  command?: string
+  environmentVariables?: Record<string, string>
+  description?: string
+  jobTimeout?: string
 }

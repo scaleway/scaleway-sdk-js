@@ -96,7 +96,7 @@ export class API extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/job-definitions`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -199,7 +199,7 @@ export class API extends ParentAPI {
         )}/job-runs`,
         urlParams: urlParams(
           ['job_definition_id', request.jobDefinitionId],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
