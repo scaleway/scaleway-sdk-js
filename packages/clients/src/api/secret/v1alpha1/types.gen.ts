@@ -16,7 +16,7 @@ export type ListSecretsRequestOrderBy =
   | 'updated_at_asc'
   | 'updated_at_desc'
 
-export type Product = 'unknown'
+export type Product = 'unknown' | 'edge_services'
 
 export type SecretEphemeralAction =
   | 'unknown_ephemeral_action'
