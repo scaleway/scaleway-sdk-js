@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.17](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.41.0...@scaleway/sdk@2.0.0-alpha.17) (2023-11-03)
+
+### Features
+
+- generation ([0bda2de](https://github.com/scaleway/scaleway-sdk-js/commit/0bda2de50c5e3937443e9911731b7e2ef81f1ea0))
+- **serverless_jobs:** generate SDKs ([#974](https://github.com/scaleway/scaleway-sdk-js/issues/974)) ([97e1175](https://github.com/scaleway/scaleway-sdk-js/commit/97e1175551f8291cf1636f0b671fc723ae1a20b0))
+- update ([4c2954b](https://github.com/scaleway/scaleway-sdk-js/commit/4c2954b4ff3cd8f19a876bbaf16301e6ffdfdf99))
+- v2 ([665b970](https://github.com/scaleway/scaleway-sdk-js/commit/665b970fe953caedf019d7a9c7725008f389e6e2))
+
 ## [1.41.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.40.0...@scaleway/sdk@1.41.0) (2023-11-02)
 
 ### Features
