@@ -61,6 +61,8 @@ export interface Folder {
   path: string
   /** Date and time of the folder's creation. */
   createdAt?: Date
+  /** Region of the folder. */
+  region: Region
 }
 
 export interface SecretVersion {

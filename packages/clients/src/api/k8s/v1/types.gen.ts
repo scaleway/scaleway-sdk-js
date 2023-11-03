@@ -687,14 +687,14 @@ export type CreateClusterRequest = {
   /**
    * @deprecated Organization ID in which the cluster will be created.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
    *   could be set.
    */
   organizationId?: string
   /**
    * Project ID in which the cluster will be created.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
    * could be set.
    */
   projectId?: string

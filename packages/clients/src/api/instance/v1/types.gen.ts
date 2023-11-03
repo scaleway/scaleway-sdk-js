@@ -381,14 +381,14 @@ export interface VolumeTemplate {
   /**
    * @deprecated Organization ID of the volume.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   One-of ('projectIdentifier'): at most one of 'project', 'organization'
    *   could be set.
    */
   organization?: string
   /**
    * Project ID of the volume.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * One-of ('projectIdentifier'): at most one of 'project', 'organization'
    * could be set.
    */
   project?: string
@@ -758,14 +758,14 @@ export type CreateImageRequest = {
   /**
    * @deprecated Organization ID of the image.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   One-of ('projectIdentifier'): at most one of 'project', 'organization'
    *   could be set.
    */
   organization?: string
   /**
    * Project ID of the image.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * One-of ('projectIdentifier'): at most one of 'project', 'organization'
    * could be set.
    */
   project?: string
@@ -785,14 +785,14 @@ export type CreateIpRequest = {
   /**
    * @deprecated Organization ID in which the IP is reserved.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   One-of ('projectIdentifier'): at most one of 'project', 'organization'
    *   could be set.
    */
   organization?: string
   /**
    * Project ID in which the IP is reserved.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * One-of ('projectIdentifier'): at most one of 'project', 'organization'
    * could be set.
    */
   project?: string
@@ -816,14 +816,14 @@ export type CreatePlacementGroupRequest = {
   /**
    * @deprecated Organization ID of the placement group.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   One-of ('projectIdentifier'): at most one of 'project', 'organization'
    *   could be set.
    */
   organization?: string
   /**
    * Project ID of the placement group.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * One-of ('projectIdentifier'): at most one of 'project', 'organization'
    * could be set.
    */
   project?: string
@@ -866,14 +866,14 @@ export type CreateSecurityGroupRequest = {
   /**
    * @deprecated Organization ID the security group belongs to.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   One-of ('projectIdentifier'): at most one of 'project', 'organization'
    *   could be set.
    */
   organization?: string
   /**
    * Project ID the security group belong to.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * One-of ('projectIdentifier'): at most one of 'project', 'organization'
    * could be set.
    */
   project?: string
@@ -963,14 +963,14 @@ export type CreateServerRequest = {
   /**
    * @deprecated Instance Organization ID.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   One-of ('projectIdentifier'): at most one of 'project', 'organization'
    *   could be set.
    */
   organization?: string
   /**
    * Instance Project ID.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * One-of ('projectIdentifier'): at most one of 'project', 'organization'
    * could be set.
    */
   project?: string
@@ -998,14 +998,14 @@ export type CreateSnapshotRequest = {
   /**
    * @deprecated Organization ID of the snapshot.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   One-of ('projectIdentifier'): at most one of 'project', 'organization'
    *   could be set.
    */
   organization?: string
   /**
    * Project ID of the snapshot.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * One-of ('projectIdentifier'): at most one of 'project', 'organization'
    * could be set.
    */
   project?: string
@@ -1035,14 +1035,14 @@ export type CreateVolumeRequest = {
   /**
    * @deprecated Volume Organization ID.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   *   One-of ('projectIdentifier'): at most one of 'project', 'organization'
    *   could be set.
    */
   organization?: string
   /**
    * Volume Project ID.
    *
-   * One-of ('projectIdentifier'): at most one of 'organization', 'project'
+   * One-of ('projectIdentifier'): at most one of 'project', 'organization'
    * could be set.
    */
   project?: string

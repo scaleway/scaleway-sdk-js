@@ -1137,14 +1137,14 @@ export const marshalCreateIpRequest = (
   reverse: request.reverse,
   ...resolveOneOf([
     {
-      default: defaults.defaultOrganizationId,
-      param: 'organization_id',
-      value: request.organizationId,
-    },
-    {
       default: defaults.defaultProjectId,
       param: 'project_id',
       value: request.projectId,
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
     },
   ]),
 })
@@ -1162,14 +1162,14 @@ export const marshalCreateLbRequest = (
   type: request.type,
   ...resolveOneOf([
     {
-      default: defaults.defaultOrganizationId,
-      param: 'organization_id',
-      value: request.organizationId,
-    },
-    {
       default: defaults.defaultProjectId,
       param: 'project_id',
       value: request.projectId,
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
     },
   ]),
 })
@@ -1217,14 +1217,14 @@ export const marshalCreateSubscriberRequest = (
   name: request.name,
   ...resolveOneOf([
     {
-      default: defaults.defaultOrganizationId,
-      param: 'organization_id',
-      value: request.organizationId,
-    },
-    {
       default: defaults.defaultProjectId,
       param: 'project_id',
       value: request.projectId,
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
     },
   ]),
   ...resolveOneOf([
@@ -1572,14 +1572,14 @@ export const marshalZonedApiCreateIpRequest = (
   reverse: request.reverse,
   ...resolveOneOf([
     {
-      default: defaults.defaultOrganizationId,
-      param: 'organization_id',
-      value: request.organizationId,
-    },
-    {
       default: defaults.defaultProjectId,
       param: 'project_id',
       value: request.projectId,
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
     },
   ]),
 })
@@ -1597,14 +1597,14 @@ export const marshalZonedApiCreateLbRequest = (
   type: request.type,
   ...resolveOneOf([
     {
-      default: defaults.defaultOrganizationId,
-      param: 'organization_id',
-      value: request.organizationId,
-    },
-    {
       default: defaults.defaultProjectId,
       param: 'project_id',
       value: request.projectId,
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
     },
   ]),
 })
@@ -1628,14 +1628,14 @@ export const marshalZonedApiCreateSubscriberRequest = (
   name: request.name,
   ...resolveOneOf([
     {
-      default: defaults.defaultOrganizationId,
-      param: 'organization_id',
-      value: request.organizationId,
-    },
-    {
       default: defaults.defaultProjectId,
       param: 'project_id',
       value: request.projectId,
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
     },
   ]),
   ...resolveOneOf([

@@ -136,14 +136,14 @@ export const marshalCreateNamespaceRequest = (
   name: request.name || randomName('ns'),
   ...resolveOneOf([
     {
-      default: defaults.defaultOrganizationId,
-      param: 'organization_id',
-      value: request.organizationId,
-    },
-    {
       default: defaults.defaultProjectId,
       param: 'project_id',
       value: request.projectId,
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
     },
   ]),
 })

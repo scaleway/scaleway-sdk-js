@@ -965,14 +965,14 @@ export type CreateIpRequest = {
    * @deprecated Organization ID of the Organization where the IP address should
    *   be created.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
    *   could be set.
    */
   organizationId?: string
   /**
    * Project ID of the Project where the IP address should be created.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
    * could be set.
    */
   projectId?: string
@@ -989,14 +989,14 @@ export type CreateLbRequest = {
   /**
    * @deprecated Scaleway Organization to create the Load Balancer in.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
    *   could be set.
    */
   organizationId?: string
   /**
    * Scaleway Project to create the Load Balancer in.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
    * could be set.
    */
   projectId?: string
@@ -1077,14 +1077,14 @@ export type CreateSubscriberRequest = {
   /**
    * @deprecated Organization ID to create the subscriber in.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
    *   could be set.
    */
   organizationId?: string
   /**
    * Project ID to create the subscriber in.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
    * could be set.
    */
   projectId?: string
@@ -2147,14 +2147,14 @@ export type ZonedApiCreateIpRequest = {
    * @deprecated Organization ID of the Organization where the IP address should
    *   be created.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
    *   could be set.
    */
   organizationId?: string
   /**
    * Project ID of the Project where the IP address should be created.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
    * could be set.
    */
   projectId?: string
@@ -2168,14 +2168,14 @@ export type ZonedApiCreateLbRequest = {
   /**
    * @deprecated Scaleway Organization to create the Load Balancer in.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
    *   could be set.
    */
   organizationId?: string
   /**
    * Scaleway Project to create the Load Balancer in.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
    * could be set.
    */
   projectId?: string
@@ -2250,14 +2250,14 @@ export type ZonedApiCreateSubscriberRequest = {
   /**
    * @deprecated Organization ID to create the subscriber in.
    *
-   *   One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   *   One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
    *   could be set.
    */
   organizationId?: string
   /**
    * Project ID to create the subscriber in.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
+   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
    * could be set.
    */
   projectId?: string

@@ -1556,14 +1556,14 @@ const marshalVolumeTemplate = (
   volume_type: request.volumeType,
   ...resolveOneOf([
     {
-      default: defaults.defaultOrganizationId,
-      param: 'organization',
-      value: request.organization,
-    },
-    {
       default: defaults.defaultProjectId,
       param: 'project',
       value: request.project,
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization',
+      value: request.organization,
     },
   ]),
 })
@@ -1590,14 +1590,14 @@ export const marshalCreateImageRequest = (
   tags: request.tags,
   ...resolveOneOf([
     {
-      default: defaults.defaultOrganizationId,
-      param: 'organization',
-      value: request.organization,
-    },
-    {
       default: defaults.defaultProjectId,
       param: 'project',
       value: request.project,
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization',
+      value: request.organization,
     },
   ]),
 })
@@ -1611,14 +1611,14 @@ export const marshalCreateIpRequest = (
   type: request.type,
   ...resolveOneOf([
     {
-      default: defaults.defaultOrganizationId,
-      param: 'organization',
-      value: request.organization,
-    },
-    {
       default: defaults.defaultProjectId,
       param: 'project',
       value: request.project,
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization',
+      value: request.organization,
     },
   ]),
 })
@@ -1633,14 +1633,14 @@ export const marshalCreatePlacementGroupRequest = (
   tags: request.tags,
   ...resolveOneOf([
     {
-      default: defaults.defaultOrganizationId,
-      param: 'organization',
-      value: request.organization,
-    },
-    {
       default: defaults.defaultProjectId,
       param: 'project',
       value: request.project,
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization',
+      value: request.organization,
     },
   ]),
 })
@@ -1667,14 +1667,14 @@ export const marshalCreateSecurityGroupRequest = (
   tags: request.tags,
   ...resolveOneOf([
     {
-      default: defaults.defaultOrganizationId,
-      param: 'organization',
-      value: request.organization,
-    },
-    {
       default: defaults.defaultProjectId,
       param: 'project',
       value: request.project,
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization',
+      value: request.organization,
     },
   ]),
   ...resolveOneOf([
@@ -1740,14 +1740,14 @@ export const marshalCreateServerRequest = (
       : undefined,
   ...resolveOneOf([
     {
-      default: defaults.defaultOrganizationId,
-      param: 'organization',
-      value: request.organization,
-    },
-    {
       default: defaults.defaultProjectId,
       param: 'project',
       value: request.project,
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization',
+      value: request.organization,
     },
   ]),
 })
@@ -1765,14 +1765,14 @@ export const marshalCreateSnapshotRequest = (
   volume_type: request.volumeType,
   ...resolveOneOf([
     {
-      default: defaults.defaultOrganizationId,
-      param: 'organization',
-      value: request.organization,
-    },
-    {
       default: defaults.defaultProjectId,
       param: 'project',
       value: request.project,
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization',
+      value: request.organization,
     },
   ]),
 })
@@ -1786,14 +1786,14 @@ export const marshalCreateVolumeRequest = (
   volume_type: request.volumeType,
   ...resolveOneOf([
     {
-      default: defaults.defaultOrganizationId,
-      param: 'organization',
-      value: request.organization,
-    },
-    {
       default: defaults.defaultProjectId,
       param: 'project',
       value: request.project,
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization',
+      value: request.organization,
     },
   ]),
   ...resolveOneOf<number | string>([
