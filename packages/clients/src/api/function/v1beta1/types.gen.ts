@@ -465,10 +465,10 @@ export interface TriggerMnqNatsClientConfig {
 
 /** Trigger. mnq sqs client config. */
 export interface TriggerMnqSqsClientConfig {
-  /** Name of the SQS queue the trigger listens to. */
-  queue: string
   /** @deprecated */
   mnqNamespaceId?: string
+  /** Name of the SQS queue the trigger listens to. */
+  queue: string
   /** ID of the M&Q project. */
   mnqProjectId: string
   /** Region in which the M&Q project is activated. */

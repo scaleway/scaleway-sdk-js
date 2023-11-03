@@ -156,10 +156,10 @@ export interface Container {
 
 /** Create trigger request. mnq nats client config. */
 export interface CreateTriggerRequestMnqNatsClientConfig {
-  /** @deprecated */
-  mnqNamespaceId?: string
   /** Name of the NATS subject the trigger should listen to. */
   subject: string
+  /** @deprecated */
+  mnqNamespaceId?: string
   /** ID of the M&Q NATS account. */
   mnqNatsAccountId: string
   /** ID of the M&Q project. */
