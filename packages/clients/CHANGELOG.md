@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.42.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.41.0...@scaleway/sdk@1.42.0) (2023-11-06)
+
+### Features
+
+- **secret_manager:** add edge_services product ([#976](https://github.com/scaleway/scaleway-sdk-js/issues/976)) ([1220dc0](https://github.com/scaleway/scaleway-sdk-js/commit/1220dc09432ac94cea5b5e254e6f699547bb44d6))
+- **serverless_jobs:** generate SDKs ([#974](https://github.com/scaleway/scaleway-sdk-js/issues/974)) ([97e1175](https://github.com/scaleway/scaleway-sdk-js/commit/97e1175551f8291cf1636f0b671fc723ae1a20b0))
+
 ## [1.41.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.40.0...@scaleway/sdk@1.41.0) (2023-11-02)
 
 ### Features
