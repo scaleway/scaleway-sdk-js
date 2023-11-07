@@ -1555,16 +1555,8 @@ const marshalVolumeTemplate = (
   size: request.size,
   volume_type: request.volumeType,
   ...resolveOneOf([
-    {
-      default: defaults.defaultProjectId,
-      param: 'project',
-      value: request.project,
-    },
-    {
-      default: defaults.defaultOrganizationId,
-      param: 'organization',
-      value: request.organization,
-    },
+    { param: 'project', value: request.project },
+    { param: 'organization', value: request.organization },
   ]),
 })
 
@@ -1705,8 +1697,8 @@ const marshalVolumeServerTemplate = (
   boot: request.boot,
   id: request.id,
   name: request.name,
-  organization: request.organization ?? defaults.defaultOrganizationId,
-  project: request.project ?? defaults.defaultProjectId,
+  organization: request.organization,
+  project: request.project,
   size: request.size,
   volume_type: request.volumeType,
 })
@@ -2011,7 +2003,7 @@ const marshalSetSecurityGroupRulesRequestRule = (
   ip_range: request.ipRange,
   position: request.position,
   protocol: request.protocol,
-  zone: request.zone ?? defaults.defaultZone,
+  zone: request.zone,
 })
 
 export const marshalSetSecurityGroupRulesRequest = (

@@ -500,11 +500,7 @@ const marshalRuleSpecs = (
   permission_set_names: request.permissionSetNames,
   ...resolveOneOf<unknown[] | string>([
     { param: 'project_ids', value: request.projectIds },
-    {
-      default: defaults.defaultOrganizationId,
-      param: 'organization_id',
-      value: request.organizationId,
-    },
+    { param: 'organization_id', value: request.organizationId },
   ]),
 })
 
