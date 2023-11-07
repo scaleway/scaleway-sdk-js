@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.42.0...@scaleway/sdk@2.0.0) (2023-11-07)
+
+### Features
+
+- use new generator ([#977](https://github.com/scaleway/scaleway-sdk-js/issues/977)) ([ea3d9ee](https://github.com/scaleway/scaleway-sdk-js/commit/ea3d9ee6dfdd7bb152cb3f0ffc4ce97bc4ed8ec5))
+
 ## [1.42.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.41.0...@scaleway/sdk@1.42.0) (2023-11-06)
 
 ### Features
