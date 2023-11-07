@@ -3,18 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [2.0.0-alpha.18](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.42.0...@scaleway/sdk@2.0.0-alpha.18) (2023-11-07)
-
-### Features
-
-- generation ([d32b6ee](https://github.com/scaleway/scaleway-sdk-js/commit/d32b6eeca6300e03b4a5bb762f8ded40adcbf176))
-- update ([4eb5584](https://github.com/scaleway/scaleway-sdk-js/commit/4eb55849aa737cfadb92693edfe06e3e2ff28513))
-- v2 ([0d7ed77](https://github.com/scaleway/scaleway-sdk-js/commit/0d7ed7771ac79057ddd4ade63126582d38438851))
-
-### Bug Fixes
-
-- avoid default values for nested properties ([b619281](https://github.com/scaleway/scaleway-sdk-js/commit/b61928183a409e9c221d50a0f4f8b30b145cda64))
-
 ## [1.42.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.41.0...@scaleway/sdk@1.42.0) (2023-11-06)
 
 ### Features
