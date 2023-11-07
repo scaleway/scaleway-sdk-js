@@ -104,7 +104,7 @@ const jsonContentHeaders = {
 /**
  * IoT Hub API.
  *
- * This API allows you to manage IoT hubs and devices. IoT Hub API.
+ * This API allows you to manage IoT hubs and devices.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -120,7 +120,7 @@ export class API extends ParentAPI {
         )}/hubs`,
         urlParams: urlParams(
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'name_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -360,13 +360,13 @@ export class API extends ParentAPI {
           ['allow_insecure', request.allowInsecure],
           ['hub_id', request.hubId],
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'name_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          ['status', request.status ?? 'unknown'],
+          ['status', request.status],
         ),
       },
       unmarshalListDevicesResponse,
@@ -608,7 +608,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['hub_id', request.hubId],
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'name_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -639,7 +639,7 @@ export class API extends ParentAPI {
    *   MQTT messages.
    * - S3 Routes. Create a route that will put subscribed MQTT messages into an S3
    *   bucket. You need to create the bucket yourself and grant write access.
-   *   Granting can be done with s3cmd (`s3cmd setacl s3://&lt;my-bucket&gt;
+   *   Granting can be done with s3cmd (`s3cmd setacl s3://<my-bucket>
    *   --acl-grant=write:555c69c3-87d0-4bf8-80f1-99a2f757d031:555c69c3-87d0-4bf8-80f1-99a2f757d031`).
    *
    * @param request - The request {@link CreateRouteRequest}
@@ -732,7 +732,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['hub_id', request.hubId],
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'name_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',

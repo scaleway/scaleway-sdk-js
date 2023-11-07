@@ -41,7 +41,31 @@ export type ListInvoicesRequestOrderBy =
   | 'invoice_type_desc'
   | 'invoice_type_asc'
 
-/** Discount. */
+export interface DiscountCoupon {
+  /** The description of the coupon. */
+  description?: string
+}
+
+export interface DiscountFilter {
+  /** Type of the filter. */
+  type: DiscountFilterType
+  /** Value of filter, it can be a product/range/region/zone value. */
+  value: string
+}
+
+export interface GetConsumptionResponseConsumption {
+  /** Monetary value of the consumption. */
+  value?: Money
+  /** Description of the consumption. */
+  description: string
+  /** Project ID of the consumption. */
+  projectId: string
+  /** Category of the consumption. */
+  category: string
+  /** Unique identifier of the product. */
+  operationPath: string
+}
+
 export interface Discount {
   /** The ID of the discount. */
   id: string
@@ -69,43 +93,6 @@ export interface Discount {
   filters: DiscountFilter[]
 }
 
-/** Discount. coupon. */
-export interface DiscountCoupon {
-  /** The description of the coupon. */
-  description?: string
-}
-
-/** Discount. filter. */
-export interface DiscountFilter {
-  /** Type of the filter. */
-  type: DiscountFilterType
-  /** Value of filter, it can be a product/range/region/zone value. */
-  value: string
-}
-
-/** Get consumption response. */
-export interface GetConsumptionResponse {
-  /** Detailed consumption list. */
-  consumptions: GetConsumptionResponseConsumption[]
-  /** Last consumption update date. */
-  updatedAt?: Date
-}
-
-/** Get consumption response. consumption. */
-export interface GetConsumptionResponseConsumption {
-  /** Monetary value of the consumption. */
-  value?: Money
-  /** Description of the consumption. */
-  description: string
-  /** Project ID of the consumption. */
-  projectId: string
-  /** Category of the consumption. */
-  category: string
-  /** Unique identifier of the product. */
-  operationPath: string
-}
-
-/** Invoice. */
 export interface Invoice {
   /** Invoice ID. */
   id: string
@@ -125,25 +112,44 @@ export interface Invoice {
   number: number
 }
 
-/** List discounts response. */
-export interface ListDiscountsResponse {
-  /** Total number of discounts. */
-  totalCount: number
-  /** Paginated returned discounts. */
-  discounts: Discount[]
-}
-
-/** List invoices response. */
-export interface ListInvoicesResponse {
-  /** Total number of invoices. */
-  totalCount: number
-  /** Paginated returned invoices. */
-  invoices: Invoice[]
+export type DownloadInvoiceRequest = {
+  /** Invoice ID. */
+  invoiceId: string
+  /** Wanted file type. */
+  fileType?: DownloadInvoiceRequestFileType
 }
 
 export type GetConsumptionRequest = {
   /** Filter by organization ID. */
   organizationId?: string
+}
+
+export interface GetConsumptionResponse {
+  /** Detailed consumption list. */
+  consumptions: GetConsumptionResponseConsumption[]
+  /** Last consumption update date. */
+  updatedAt?: Date
+}
+
+export type ListDiscountsRequest = {
+  /** Order discounts in the response by their description. */
+  orderBy?: ListDiscountsRequestOrderBy
+  /** Positive integer to choose the page to return. */
+  page?: number
+  /**
+   * Positive integer lower or equal to 100 to select the number of items to
+   * return.
+   */
+  pageSize?: number
+  /** ID of the organization. */
+  organizationId?: string
+}
+
+export interface ListDiscountsResponse {
+  /** Total number of discounts. */
+  totalCount: number
+  /** Paginated returned discounts. */
+  discounts: Discount[]
 }
 
 export type ListInvoicesRequest = {
@@ -169,23 +175,9 @@ export type ListInvoicesRequest = {
   orderBy?: ListInvoicesRequestOrderBy
 }
 
-export type DownloadInvoiceRequest = {
-  /** Invoice ID. */
-  invoiceId: string
-  /** Wanted file type. */
-  fileType?: DownloadInvoiceRequestFileType
-}
-
-export type ListDiscountsRequest = {
-  /** Order discounts in the response by their description. */
-  orderBy?: ListDiscountsRequestOrderBy
-  /** Positive integer to choose the page to return. */
-  page?: number
-  /**
-   * Positive integer lower or equal to 100 to select the number of items to
-   * return.
-   */
-  pageSize?: number
-  /** ID of the organization. */
-  organizationId?: string
+export interface ListInvoicesResponse {
+  /** Total number of invoices. */
+  totalCount: number
+  /** Paginated returned invoices. */
+  invoices: Invoice[]
 }

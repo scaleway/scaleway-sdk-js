@@ -164,8 +164,7 @@ const jsonContentHeaders = {
 /**
  * Domains and DNS API.
  *
- * Domains and DNS API. Manage your domains, DNS zones and records with the
- * Domains and DNS API.
+ * Manage your domains, DNS zones and records with the Domains and DNS API.
  */
 export class API extends ParentAPI {
   protected pageOfListDNSZones = (request: Readonly<ListDNSZonesRequest>) =>
@@ -179,7 +178,7 @@ export class API extends ParentAPI {
           ['dns_zone', request.dnsZone],
           ['dns_zones', request.dnsZones],
           ['domain', request.domain],
-          ['order_by', request.orderBy ?? 'domain_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -304,14 +303,14 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['id', request.id],
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'name_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['project_id', request.projectId],
-          ['type', request.type ?? 'unknown'],
+          ['type', request.type],
         ),
       },
       unmarshalListDNSZoneRecordsResponse,
@@ -441,10 +440,7 @@ export class API extends ParentAPI {
         'dnsZone',
         request.dnsZone,
       )}/raw`,
-      urlParams: urlParams(
-        ['dl', 1],
-        ['format', request.format ?? 'unknown_raw_format'],
-      ),
+      urlParams: urlParams(['dl', 1], ['format', request.format]),
       responseType: 'blob',
     })
 
@@ -776,7 +772,7 @@ export class API extends ParentAPI {
 /**
  * Domains and DNS - Registrar API.
  *
- * Domains and DNS - Registrar API. Manage your domains and contacts.
+ * Manage your domains and contacts.
  */
 export class RegistrarAPI extends ParentAPI {
   protected pageOfListTasks = (
@@ -788,7 +784,7 @@ export class RegistrarAPI extends ParentAPI {
         path: `/domain/v2beta1/tasks`,
         urlParams: urlParams(
           ['domain', request.domain],
-          ['order_by', request.orderBy ?? 'domain_desc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -987,7 +983,7 @@ export class RegistrarAPI extends ParentAPI {
         path: `/domain/v2beta1/contacts`,
         urlParams: urlParams(
           ['domain', request.domain],
-          ['email_status', request.emailStatus ?? 'email_status_unknown'],
+          ['email_status', request.emailStatus],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -995,7 +991,7 @@ export class RegistrarAPI extends ParentAPI {
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['project_id', request.projectId],
-          ['role', request.role ?? 'unknown_role'],
+          ['role', request.role],
         ),
       },
       unmarshalListContactsResponse,
@@ -1065,7 +1061,7 @@ export class RegistrarAPI extends ParentAPI {
         urlParams: urlParams(
           ['domain', request.domain],
           ['is_external', request.isExternal],
-          ['order_by', request.orderBy ?? 'domain_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -1074,7 +1070,7 @@ export class RegistrarAPI extends ParentAPI {
           ],
           ['project_id', request.projectId],
           ['registrar', request.registrar],
-          ['status', request.status ?? 'status_unknown'],
+          ['status', request.status],
         ),
       },
       unmarshalListDomainsResponse,
@@ -1097,7 +1093,7 @@ export class RegistrarAPI extends ParentAPI {
         method: 'GET',
         path: `/domain/v2beta1/renewable-domains`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'domain_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -1144,7 +1140,7 @@ export class RegistrarAPI extends ParentAPI {
   /**
    * Waits for {@link Domain} to be in a final state.
    *
-   * @param request - The request {@link GetDomainRequest}
+   * @param request - The request {@link RegistrarApiGetDomainRequest}
    * @param options - The waiting options
    * @returns A Promise of Domain
    */
@@ -1391,7 +1387,7 @@ export class RegistrarAPI extends ParentAPI {
         method: 'GET',
         path: `/domain/v2beta1/tlds`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'name_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -1494,7 +1490,7 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Delete a domain's hostname. Delete a domain's hostname.
+   * Delete a domain's hostname.
    *
    * @param request - The request {@link RegistrarApiDeleteDomainHostRequest}
    * @returns A Promise of Host

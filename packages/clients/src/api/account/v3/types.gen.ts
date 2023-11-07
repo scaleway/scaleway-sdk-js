@@ -7,15 +7,6 @@ export type ListProjectsRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-/** List projects response. */
-export interface ListProjectsResponse {
-  /** Total number of Projects. */
-  totalCount: number
-  /** Paginated returned Projects. */
-  projects: Project[]
-}
-
-/** Project. */
 export interface Project {
   /** ID of the Project. */
   id: string
@@ -31,6 +22,13 @@ export interface Project {
   description: string
 }
 
+export interface ListProjectsResponse {
+  /** Total number of Projects. */
+  totalCount: number
+  /** Paginated returned Projects. */
+  projects: Project[]
+}
+
 export type ProjectApiCreateProjectRequest = {
   /** Name of the Project. */
   name?: string
@@ -38,6 +36,16 @@ export type ProjectApiCreateProjectRequest = {
   organizationId?: string
   /** Description of the Project. */
   description: string
+}
+
+export type ProjectApiDeleteProjectRequest = {
+  /** Project ID of the Project. */
+  projectId?: string
+}
+
+export type ProjectApiGetProjectRequest = {
+  /** Project ID of the Project. */
+  projectId?: string
 }
 
 export type ProjectApiListProjectsRequest = {
@@ -56,16 +64,6 @@ export type ProjectApiListProjectsRequest = {
    * an ID in this array.
    */
   projectIds?: string[]
-}
-
-export type ProjectApiGetProjectRequest = {
-  /** Project ID of the Project. */
-  projectId?: string
-}
-
-export type ProjectApiDeleteProjectRequest = {
-  /** Project ID of the Project. */
-  projectId?: string
 }
 
 export type ProjectApiUpdateProjectRequest = {

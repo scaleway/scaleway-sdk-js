@@ -16,7 +16,7 @@ import type {
   UpdateJobDefinitionRequest,
 } from './types.gen'
 
-export const unmarshalJobDefinition = (data: unknown) => {
+export const unmarshalJobDefinition = (data: unknown): JobDefinition => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'JobDefinition' failed as data isn't a dictionary.`,
@@ -40,7 +40,7 @@ export const unmarshalJobDefinition = (data: unknown) => {
   } as JobDefinition
 }
 
-export const unmarshalJobRun = (data: unknown) => {
+export const unmarshalJobRun = (data: unknown): JobRun => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'JobRun' failed as data isn't a dictionary.`,
@@ -61,7 +61,9 @@ export const unmarshalJobRun = (data: unknown) => {
   } as JobRun
 }
 
-export const unmarshalListJobDefinitionsResponse = (data: unknown) => {
+export const unmarshalListJobDefinitionsResponse = (
+  data: unknown,
+): ListJobDefinitionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListJobDefinitionsResponse' failed as data isn't a dictionary.`,
@@ -77,7 +79,9 @@ export const unmarshalListJobDefinitionsResponse = (data: unknown) => {
   } as ListJobDefinitionsResponse
 }
 
-export const unmarshalListJobRunsResponse = (data: unknown) => {
+export const unmarshalListJobRunsResponse = (
+  data: unknown,
+): ListJobRunsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListJobRunsResponse' failed as data isn't a dictionary.`,
@@ -97,7 +101,10 @@ export const marshalCreateJobDefinitionRequest = (
   command: request.command,
   cpu_limit: request.cpuLimit,
   description: request.description,
-  environment_variables: request.environmentVariables,
+  environment_variables:
+    request.environmentVariables !== undefined
+      ? request.environmentVariables
+      : undefined,
   image_uri: request.imageUri,
   job_timeout: request.jobTimeout,
   memory_limit: request.memoryLimit,

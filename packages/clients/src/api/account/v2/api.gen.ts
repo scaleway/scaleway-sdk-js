@@ -63,7 +63,7 @@ export class API extends ParentAPI {
         path: `/account/v2/projects`,
         urlParams: urlParams(
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           [
             'organization_id',
             request.organizationId ??

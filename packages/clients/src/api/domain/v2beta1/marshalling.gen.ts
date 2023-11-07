@@ -113,44 +113,9 @@ import type {
   UpdateDNSZoneRequest,
 } from './types.gen'
 
-const unmarshalDomainRecordGeoIPConfigMatch = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRecordGeoIPConfigMatch' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    continents: data.continents,
-    countries: data.countries,
-    data: data.data,
-  } as DomainRecordGeoIPConfigMatch
-}
-
-const unmarshalDomainRecordViewConfigView = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRecordViewConfigView' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { data: data.data, subnet: data.subnet } as DomainRecordViewConfigView
-}
-
-const unmarshalDomainRecordWeightedConfigWeightedIP = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRecordWeightedConfigWeightedIP' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    ip: data.ip,
-    weight: data.weight,
-  } as DomainRecordWeightedConfigWeightedIP
-}
-
-const unmarshalContactExtensionFRAssociationInfo = (data: unknown) => {
+const unmarshalContactExtensionFRAssociationInfo = (
+  data: unknown,
+): ContactExtensionFRAssociationInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ContactExtensionFRAssociationInfo' failed as data isn't a dictionary.`,
@@ -163,7 +128,9 @@ const unmarshalContactExtensionFRAssociationInfo = (data: unknown) => {
   } as ContactExtensionFRAssociationInfo
 }
 
-const unmarshalContactExtensionFRCodeAuthAfnicInfo = (data: unknown) => {
+const unmarshalContactExtensionFRCodeAuthAfnicInfo = (
+  data: unknown,
+): ContactExtensionFRCodeAuthAfnicInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ContactExtensionFRCodeAuthAfnicInfo' failed as data isn't a dictionary.`,
@@ -175,7 +142,9 @@ const unmarshalContactExtensionFRCodeAuthAfnicInfo = (data: unknown) => {
   } as ContactExtensionFRCodeAuthAfnicInfo
 }
 
-const unmarshalContactExtensionFRDunsInfo = (data: unknown) => {
+const unmarshalContactExtensionFRDunsInfo = (
+  data: unknown,
+): ContactExtensionFRDunsInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ContactExtensionFRDunsInfo' failed as data isn't a dictionary.`,
@@ -188,17 +157,23 @@ const unmarshalContactExtensionFRDunsInfo = (data: unknown) => {
   } as ContactExtensionFRDunsInfo
 }
 
-const unmarshalContactExtensionFRIndividualInfo = (data: unknown) => {
+const unmarshalContactExtensionFRIndividualInfo = (
+  data: unknown,
+): ContactExtensionFRIndividualInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ContactExtensionFRIndividualInfo' failed as data isn't a dictionary.`,
     )
   }
 
-  return { whoisOptIn: data.whois_opt_in } as ContactExtensionFRIndividualInfo
+  return {
+    whoisOptIn: data.whois_opt_in,
+  } as ContactExtensionFRIndividualInfo
 }
 
-const unmarshalContactExtensionFRTrademarkInfo = (data: unknown) => {
+const unmarshalContactExtensionFRTrademarkInfo = (
+  data: unknown,
+): ContactExtensionFRTrademarkInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ContactExtensionFRTrademarkInfo' failed as data isn't a dictionary.`,
@@ -210,79 +185,7 @@ const unmarshalContactExtensionFRTrademarkInfo = (data: unknown) => {
   } as ContactExtensionFRTrademarkInfo
 }
 
-const unmarshalDSRecordPublicKey = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DSRecordPublicKey' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { key: data.key } as DSRecordPublicKey
-}
-
-const unmarshalDomainRecordGeoIPConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRecordGeoIPConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    default: data.default,
-    matches: unmarshalArrayOfObject(
-      data.matches,
-      unmarshalDomainRecordGeoIPConfigMatch,
-    ),
-  } as DomainRecordGeoIPConfig
-}
-
-const unmarshalDomainRecordHTTPServiceConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRecordHTTPServiceConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    ips: data.ips,
-    mustContain: data.must_contain,
-    strategy: data.strategy,
-    url: data.url,
-    userAgent: data.user_agent,
-  } as DomainRecordHTTPServiceConfig
-}
-
-const unmarshalDomainRecordViewConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRecordViewConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    views: unmarshalArrayOfObject(
-      data.views,
-      unmarshalDomainRecordViewConfigView,
-    ),
-  } as DomainRecordViewConfig
-}
-
-const unmarshalDomainRecordWeightedConfig = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRecordWeightedConfig' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    weightedIps: unmarshalArrayOfObject(
-      data.weighted_ips,
-      unmarshalDomainRecordWeightedConfigWeightedIP,
-    ),
-  } as DomainRecordWeightedConfig
-}
-
-const unmarshalContactExtensionEU = (data: unknown) => {
+const unmarshalContactExtensionEU = (data: unknown): ContactExtensionEU => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ContactExtensionEU' failed as data isn't a dictionary.`,
@@ -294,7 +197,7 @@ const unmarshalContactExtensionEU = (data: unknown) => {
   } as ContactExtensionEU
 }
 
-const unmarshalContactExtensionFR = (data: unknown) => {
+const unmarshalContactExtensionFR = (data: unknown): ContactExtensionFR => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ContactExtensionFR' failed as data isn't a dictionary.`,
@@ -321,7 +224,7 @@ const unmarshalContactExtensionFR = (data: unknown) => {
   } as ContactExtensionFR
 }
 
-const unmarshalContactExtensionNL = (data: unknown) => {
+const unmarshalContactExtensionNL = (data: unknown): ContactExtensionNL => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ContactExtensionNL' failed as data isn't a dictionary.`,
@@ -334,92 +237,20 @@ const unmarshalContactExtensionNL = (data: unknown) => {
   } as ContactExtensionNL
 }
 
-const unmarshalContactQuestion = (data: unknown) => {
+const unmarshalContactQuestion = (data: unknown): ContactQuestion => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ContactQuestion' failed as data isn't a dictionary.`,
     )
   }
 
-  return { answer: data.answer, question: data.question } as ContactQuestion
-}
-
-const unmarshalDSRecordDigest = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DSRecordDigest' failed as data isn't a dictionary.`,
-    )
-  }
-
   return {
-    digest: data.digest,
-    publicKey: data.public_key
-      ? unmarshalDSRecordPublicKey(data.public_key)
-      : undefined,
-    type: data.type,
-  } as DSRecordDigest
+    answer: data.answer,
+    question: data.question,
+  } as ContactQuestion
 }
 
-const unmarshalDomainRecord = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRecord' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    comment: data.comment,
-    data: data.data,
-    geoIpConfig: data.geo_ip_config
-      ? unmarshalDomainRecordGeoIPConfig(data.geo_ip_config)
-      : undefined,
-    httpServiceConfig: data.http_service_config
-      ? unmarshalDomainRecordHTTPServiceConfig(data.http_service_config)
-      : undefined,
-    id: data.id,
-    name: data.name,
-    priority: data.priority,
-    ttl: data.ttl,
-    type: data.type,
-    viewConfig: data.view_config
-      ? unmarshalDomainRecordViewConfig(data.view_config)
-      : undefined,
-    weightedConfig: data.weighted_config
-      ? unmarshalDomainRecordWeightedConfig(data.weighted_config)
-      : undefined,
-  } as DomainRecord
-}
-
-const unmarshalRecordIdentifier = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RecordIdentifier' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    data: data.data,
-    name: data.name,
-    ttl: data.ttl,
-    type: data.type,
-  } as RecordIdentifier
-}
-
-const unmarshalTldOffer = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TldOffer' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    action: data.action,
-    operationPath: data.operation_path,
-    price: data.price ? unmarshalMoney(data.price) : undefined,
-  } as TldOffer
-}
-
-export const unmarshalContact = (data: unknown) => {
+export const unmarshalContact = (data: unknown): Contact => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Contact' failed as data isn't a dictionary.`,
@@ -452,11 +283,9 @@ export const unmarshalContact = (data: unknown) => {
     lastname: data.lastname,
     legalForm: data.legal_form,
     phoneNumber: data.phone_number,
-    questions: unmarshalArrayOfObject(
-      data.questions,
-      unmarshalContactQuestion,
-      false,
-    ),
+    questions: data.questions
+      ? unmarshalArrayOfObject(data.questions, unmarshalContactQuestion)
+      : undefined,
     resale: data.resale,
     state: data.state,
     vatIdentificationCode: data.vat_identification_code,
@@ -465,177 +294,7 @@ export const unmarshalContact = (data: unknown) => {
   } as Contact
 }
 
-const unmarshalContactRolesRoles = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ContactRolesRoles' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    isAdministrative: data.is_administrative,
-    isOwner: data.is_owner,
-    isTechnical: data.is_technical,
-  } as ContactRolesRoles
-}
-
-const unmarshalDSRecord = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DSRecord' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    algorithm: data.algorithm,
-    digest: data.digest ? unmarshalDSRecordDigest(data.digest) : undefined,
-    keyId: data.key_id,
-    publicKey: data.public_key
-      ? unmarshalDSRecordPublicKey(data.public_key)
-      : undefined,
-  } as DSRecord
-}
-
-const unmarshalDomainRegistrationStatusExternalDomain = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRegistrationStatusExternalDomain' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    validationToken: data.validation_token,
-  } as DomainRegistrationStatusExternalDomain
-}
-
-const unmarshalDomainRegistrationStatusTransfer = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRegistrationStatusTransfer' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    status: data.status,
-    voteCurrentOwner: data.vote_current_owner,
-    voteNewOwner: data.vote_new_owner,
-  } as DomainRegistrationStatusTransfer
-}
-
-const unmarshalRecordChangeAdd = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RecordChangeAdd' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    records: unmarshalArrayOfObject(data.records, unmarshalDomainRecord),
-  } as RecordChangeAdd
-}
-
-const unmarshalRecordChangeClear = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RecordChangeClear' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {} as RecordChangeClear
-}
-
-const unmarshalRecordChangeDelete = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RecordChangeDelete' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-    idFields: data.id_fields
-      ? unmarshalRecordIdentifier(data.id_fields)
-      : undefined,
-  } as RecordChangeDelete
-}
-
-const unmarshalRecordChangeSet = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RecordChangeSet' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-    idFields: data.id_fields
-      ? unmarshalRecordIdentifier(data.id_fields)
-      : undefined,
-    records: unmarshalArrayOfObject(data.records, unmarshalDomainRecord),
-  } as RecordChangeSet
-}
-
-const unmarshalTld = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Tld' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    dnssecSupport: data.dnssec_support,
-    durationInYearsMax: data.duration_in_years_max,
-    durationInYearsMin: data.duration_in_years_min,
-    idnSupport: data.idn_support,
-    name: data.name,
-    offers: unmarshalMapOfObject(data.offers, unmarshalTldOffer),
-    specifications: data.specifications,
-  } as Tld
-}
-
-const unmarshalAvailableDomain = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'AvailableDomain' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    available: data.available,
-    domain: data.domain,
-    tld: data.tld ? unmarshalTld(data.tld) : undefined,
-  } as AvailableDomain
-}
-
-const unmarshalCheckContactsCompatibilityResponseContactCheckResult = (
-  data: unknown,
-) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CheckContactsCompatibilityResponseContactCheckResult' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    compatible: data.compatible,
-    errorMessage: data.error_message,
-  } as CheckContactsCompatibilityResponseContactCheckResult
-}
-
-const unmarshalContactRoles = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ContactRoles' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    contact: data.contact ? unmarshalContact(data.contact) : undefined,
-    roles: unmarshalMapOfObject(data.roles, unmarshalContactRolesRoles),
-  } as ContactRoles
-}
-
-export const unmarshalDNSZone = (data: unknown) => {
+export const unmarshalDNSZone = (data: unknown): DNSZone => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'DNSZone' failed as data isn't a dictionary.`,
@@ -655,20 +314,191 @@ export const unmarshalDNSZone = (data: unknown) => {
   } as DNSZone
 }
 
-const unmarshalDNSZoneVersion = (data: unknown) => {
+export const unmarshalHost = (data: unknown): Host => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'DNSZoneVersion' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'Host' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    id: data.id,
-  } as DNSZoneVersion
+    domain: data.domain,
+    ips: data.ips,
+    name: data.name,
+    status: data.status,
+  } as Host
 }
 
-const unmarshalDomainDNSSEC = (data: unknown) => {
+export const unmarshalSSLCertificate = (data: unknown): SSLCertificate => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SSLCertificate' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    alternativeDnsZones: data.alternative_dns_zones,
+    certificateChain: data.certificate_chain,
+    createdAt: unmarshalDate(data.created_at),
+    dnsZone: data.dns_zone,
+    expiredAt: unmarshalDate(data.expired_at),
+    privateKey: data.private_key,
+    status: data.status,
+  } as SSLCertificate
+}
+
+const unmarshalCheckContactsCompatibilityResponseContactCheckResult = (
+  data: unknown,
+): CheckContactsCompatibilityResponseContactCheckResult => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CheckContactsCompatibilityResponseContactCheckResult' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    compatible: data.compatible,
+    errorMessage: data.error_message,
+  } as CheckContactsCompatibilityResponseContactCheckResult
+}
+
+export const unmarshalCheckContactsCompatibilityResponse = (
+  data: unknown,
+): CheckContactsCompatibilityResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CheckContactsCompatibilityResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    administrativeCheckResult: data.administrative_check_result
+      ? unmarshalCheckContactsCompatibilityResponseContactCheckResult(
+          data.administrative_check_result,
+        )
+      : undefined,
+    compatible: data.compatible,
+    ownerCheckResult: data.owner_check_result
+      ? unmarshalCheckContactsCompatibilityResponseContactCheckResult(
+          data.owner_check_result,
+        )
+      : undefined,
+    technicalCheckResult: data.technical_check_result
+      ? unmarshalCheckContactsCompatibilityResponseContactCheckResult(
+          data.technical_check_result,
+        )
+      : undefined,
+  } as CheckContactsCompatibilityResponse
+}
+
+export const unmarshalClearDNSZoneRecordsResponse = (
+  data: unknown,
+): ClearDNSZoneRecordsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ClearDNSZoneRecordsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as ClearDNSZoneRecordsResponse
+}
+
+export const unmarshalDeleteDNSZoneResponse = (
+  data: unknown,
+): DeleteDNSZoneResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DeleteDNSZoneResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as DeleteDNSZoneResponse
+}
+
+export const unmarshalDeleteExternalDomainResponse = (
+  data: unknown,
+): DeleteExternalDomainResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DeleteExternalDomainResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as DeleteExternalDomainResponse
+}
+
+export const unmarshalDeleteSSLCertificateResponse = (
+  data: unknown,
+): DeleteSSLCertificateResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DeleteSSLCertificateResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as DeleteSSLCertificateResponse
+}
+
+const unmarshalDSRecordPublicKey = (data: unknown): DSRecordPublicKey => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DSRecordPublicKey' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    key: data.key,
+  } as DSRecordPublicKey
+}
+
+const unmarshalDSRecordDigest = (data: unknown): DSRecordDigest => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DSRecordDigest' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    digest: data.digest,
+    publicKey: data.public_key
+      ? unmarshalDSRecordPublicKey(data.public_key)
+      : undefined,
+    type: data.type,
+  } as DSRecordDigest
+}
+
+export const unmarshalDSRecord = (data: unknown): DSRecord => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DSRecord' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    algorithm: data.algorithm,
+    digest: data.digest ? unmarshalDSRecordDigest(data.digest) : undefined,
+    keyId: data.key_id,
+    publicKey: data.public_key
+      ? unmarshalDSRecordPublicKey(data.public_key)
+      : undefined,
+  } as DSRecord
+}
+
+const unmarshalTldOffer = (data: unknown): TldOffer => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TldOffer' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    action: data.action,
+    operationPath: data.operation_path,
+    price: data.price ? unmarshalMoney(data.price) : undefined,
+  } as TldOffer
+}
+
+const unmarshalDomainDNSSEC = (data: unknown): DomainDNSSEC => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'DomainDNSSEC' failed as data isn't a dictionary.`,
@@ -681,7 +511,556 @@ const unmarshalDomainDNSSEC = (data: unknown) => {
   } as DomainDNSSEC
 }
 
-const unmarshalDomainSummary = (data: unknown) => {
+const unmarshalDomainRegistrationStatusExternalDomain = (
+  data: unknown,
+): DomainRegistrationStatusExternalDomain => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRegistrationStatusExternalDomain' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    validationToken: data.validation_token,
+  } as DomainRegistrationStatusExternalDomain
+}
+
+const unmarshalDomainRegistrationStatusTransfer = (
+  data: unknown,
+): DomainRegistrationStatusTransfer => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRegistrationStatusTransfer' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    status: data.status,
+    voteCurrentOwner: data.vote_current_owner,
+    voteNewOwner: data.vote_new_owner,
+  } as DomainRegistrationStatusTransfer
+}
+
+const unmarshalTld = (data: unknown): Tld => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Tld' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    dnssecSupport: data.dnssec_support,
+    durationInYearsMax: data.duration_in_years_max,
+    durationInYearsMin: data.duration_in_years_min,
+    idnSupport: data.idn_support,
+    name: data.name,
+    offers: unmarshalMapOfObject(data.offers, unmarshalTldOffer),
+    specifications: data.specifications,
+  } as Tld
+}
+
+export const unmarshalDomain = (data: unknown): Domain => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Domain' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    administrativeContact: data.administrative_contact
+      ? unmarshalContact(data.administrative_contact)
+      : undefined,
+    autoRenewStatus: data.auto_renew_status,
+    dnsZones: unmarshalArrayOfObject(data.dns_zones, unmarshalDNSZone),
+    dnssec: data.dnssec ? unmarshalDomainDNSSEC(data.dnssec) : undefined,
+    domain: data.domain,
+    eppCode: data.epp_code,
+    expiredAt: unmarshalDate(data.expired_at),
+    externalDomainRegistrationStatus: data.external_domain_registration_status
+      ? unmarshalDomainRegistrationStatusExternalDomain(
+          data.external_domain_registration_status,
+        )
+      : undefined,
+    isExternal: data.is_external,
+    organizationId: data.organization_id,
+    ownerContact: data.owner_contact
+      ? unmarshalContact(data.owner_contact)
+      : undefined,
+    projectId: data.project_id,
+    registrar: data.registrar,
+    status: data.status,
+    technicalContact: data.technical_contact
+      ? unmarshalContact(data.technical_contact)
+      : undefined,
+    tld: data.tld ? unmarshalTld(data.tld) : undefined,
+    transferRegistrationStatus: data.transfer_registration_status
+      ? unmarshalDomainRegistrationStatusTransfer(
+          data.transfer_registration_status,
+        )
+      : undefined,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as Domain
+}
+
+export const unmarshalGetDNSZoneTsigKeyResponse = (
+  data: unknown,
+): GetDNSZoneTsigKeyResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetDNSZoneTsigKeyResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    algorithm: data.algorithm,
+    key: data.key,
+    name: data.name,
+  } as GetDNSZoneTsigKeyResponse
+}
+
+const unmarshalDomainRecordGeoIPConfigMatch = (
+  data: unknown,
+): DomainRecordGeoIPConfigMatch => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRecordGeoIPConfigMatch' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    continents: data.continents,
+    countries: data.countries,
+    data: data.data,
+  } as DomainRecordGeoIPConfigMatch
+}
+
+const unmarshalDomainRecordViewConfigView = (
+  data: unknown,
+): DomainRecordViewConfigView => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRecordViewConfigView' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    data: data.data,
+    subnet: data.subnet,
+  } as DomainRecordViewConfigView
+}
+
+const unmarshalDomainRecordWeightedConfigWeightedIP = (
+  data: unknown,
+): DomainRecordWeightedConfigWeightedIP => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRecordWeightedConfigWeightedIP' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ip: data.ip,
+    weight: data.weight,
+  } as DomainRecordWeightedConfigWeightedIP
+}
+
+const unmarshalDomainRecordGeoIPConfig = (
+  data: unknown,
+): DomainRecordGeoIPConfig => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRecordGeoIPConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    default: data.default,
+    matches: unmarshalArrayOfObject(
+      data.matches,
+      unmarshalDomainRecordGeoIPConfigMatch,
+    ),
+  } as DomainRecordGeoIPConfig
+}
+
+const unmarshalDomainRecordHTTPServiceConfig = (
+  data: unknown,
+): DomainRecordHTTPServiceConfig => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRecordHTTPServiceConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ips: data.ips,
+    mustContain: data.must_contain,
+    strategy: data.strategy,
+    url: data.url,
+    userAgent: data.user_agent,
+  } as DomainRecordHTTPServiceConfig
+}
+
+const unmarshalDomainRecordViewConfig = (
+  data: unknown,
+): DomainRecordViewConfig => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRecordViewConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    views: unmarshalArrayOfObject(
+      data.views,
+      unmarshalDomainRecordViewConfigView,
+    ),
+  } as DomainRecordViewConfig
+}
+
+const unmarshalDomainRecordWeightedConfig = (
+  data: unknown,
+): DomainRecordWeightedConfig => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRecordWeightedConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    weightedIps: unmarshalArrayOfObject(
+      data.weighted_ips,
+      unmarshalDomainRecordWeightedConfigWeightedIP,
+    ),
+  } as DomainRecordWeightedConfig
+}
+
+const unmarshalDomainRecord = (data: unknown): DomainRecord => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRecord' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    comment: data.comment,
+    data: data.data,
+    geoIpConfig: data.geo_ip_config
+      ? unmarshalDomainRecordGeoIPConfig(data.geo_ip_config)
+      : undefined,
+    httpServiceConfig: data.http_service_config
+      ? unmarshalDomainRecordHTTPServiceConfig(data.http_service_config)
+      : undefined,
+    id: data.id,
+    name: data.name,
+    priority: data.priority,
+    ttl: data.ttl,
+    type: data.type,
+    viewConfig: data.view_config
+      ? unmarshalDomainRecordViewConfig(data.view_config)
+      : undefined,
+    weightedConfig: data.weighted_config
+      ? unmarshalDomainRecordWeightedConfig(data.weighted_config)
+      : undefined,
+  } as DomainRecord
+}
+
+const unmarshalRecordIdentifier = (data: unknown): RecordIdentifier => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RecordIdentifier' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    data: data.data,
+    name: data.name,
+    ttl: data.ttl,
+    type: data.type,
+  } as RecordIdentifier
+}
+
+const unmarshalRecordChangeAdd = (data: unknown): RecordChangeAdd => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RecordChangeAdd' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    records: unmarshalArrayOfObject(data.records, unmarshalDomainRecord),
+  } as RecordChangeAdd
+}
+
+const unmarshalRecordChangeClear = (data: unknown): RecordChangeClear => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RecordChangeClear' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as RecordChangeClear
+}
+
+const unmarshalRecordChangeDelete = (data: unknown): RecordChangeDelete => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RecordChangeDelete' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    idFields: data.id_fields
+      ? unmarshalRecordIdentifier(data.id_fields)
+      : undefined,
+  } as RecordChangeDelete
+}
+
+const unmarshalRecordChangeSet = (data: unknown): RecordChangeSet => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RecordChangeSet' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    idFields: data.id_fields
+      ? unmarshalRecordIdentifier(data.id_fields)
+      : undefined,
+    records: unmarshalArrayOfObject(data.records, unmarshalDomainRecord),
+  } as RecordChangeSet
+}
+
+const unmarshalRecordChange = (data: unknown): RecordChange => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RecordChange' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    add: data.add ? unmarshalRecordChangeAdd(data.add) : undefined,
+    clear: data.clear ? unmarshalRecordChangeClear(data.clear) : undefined,
+    delete: data.delete ? unmarshalRecordChangeDelete(data.delete) : undefined,
+    set: data.set ? unmarshalRecordChangeSet(data.set) : undefined,
+  } as RecordChange
+}
+
+export const unmarshalGetDNSZoneVersionDiffResponse = (
+  data: unknown,
+): GetDNSZoneVersionDiffResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetDNSZoneVersionDiffResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    changes: unmarshalArrayOfObject(data.changes, unmarshalRecordChange),
+  } as GetDNSZoneVersionDiffResponse
+}
+
+export const unmarshalGetDomainAuthCodeResponse = (
+  data: unknown,
+): GetDomainAuthCodeResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetDomainAuthCodeResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    authCode: data.auth_code,
+  } as GetDomainAuthCodeResponse
+}
+
+export const unmarshalImportProviderDNSZoneResponse = (
+  data: unknown,
+): ImportProviderDNSZoneResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ImportProviderDNSZoneResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    records: unmarshalArrayOfObject(data.records, unmarshalDomainRecord),
+  } as ImportProviderDNSZoneResponse
+}
+
+export const unmarshalImportRawDNSZoneResponse = (
+  data: unknown,
+): ImportRawDNSZoneResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ImportRawDNSZoneResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    records: unmarshalArrayOfObject(data.records, unmarshalDomainRecord),
+  } as ImportRawDNSZoneResponse
+}
+
+const unmarshalContactRolesRoles = (data: unknown): ContactRolesRoles => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContactRolesRoles' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    isAdministrative: data.is_administrative,
+    isOwner: data.is_owner,
+    isTechnical: data.is_technical,
+  } as ContactRolesRoles
+}
+
+const unmarshalContactRoles = (data: unknown): ContactRoles => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContactRoles' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    contact: data.contact ? unmarshalContact(data.contact) : undefined,
+    roles: unmarshalMapOfObject(data.roles, unmarshalContactRolesRoles),
+  } as ContactRoles
+}
+
+export const unmarshalListContactsResponse = (
+  data: unknown,
+): ListContactsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListContactsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    contacts: unmarshalArrayOfObject(data.contacts, unmarshalContactRoles),
+    totalCount: data.total_count,
+  } as ListContactsResponse
+}
+
+const unmarshalNameserver = (data: unknown): Nameserver => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Nameserver' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ip: data.ip,
+    name: data.name,
+  } as Nameserver
+}
+
+export const unmarshalListDNSZoneNameserversResponse = (
+  data: unknown,
+): ListDNSZoneNameserversResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDNSZoneNameserversResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ns: unmarshalArrayOfObject(data.ns, unmarshalNameserver),
+  } as ListDNSZoneNameserversResponse
+}
+
+export const unmarshalListDNSZoneRecordsResponse = (
+  data: unknown,
+): ListDNSZoneRecordsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDNSZoneRecordsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    records: unmarshalArrayOfObject(data.records, unmarshalDomainRecord),
+    totalCount: data.total_count,
+  } as ListDNSZoneRecordsResponse
+}
+
+export const unmarshalListDNSZoneVersionRecordsResponse = (
+  data: unknown,
+): ListDNSZoneVersionRecordsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDNSZoneVersionRecordsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    records: unmarshalArrayOfObject(data.records, unmarshalDomainRecord),
+    totalCount: data.total_count,
+  } as ListDNSZoneVersionRecordsResponse
+}
+
+const unmarshalDNSZoneVersion = (data: unknown): DNSZoneVersion => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DNSZoneVersion' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+  } as DNSZoneVersion
+}
+
+export const unmarshalListDNSZoneVersionsResponse = (
+  data: unknown,
+): ListDNSZoneVersionsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDNSZoneVersionsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    totalCount: data.total_count,
+    versions: unmarshalArrayOfObject(data.versions, unmarshalDNSZoneVersion),
+  } as ListDNSZoneVersionsResponse
+}
+
+export const unmarshalListDNSZonesResponse = (
+  data: unknown,
+): ListDNSZonesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDNSZonesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    dnsZones: unmarshalArrayOfObject(data.dns_zones, unmarshalDNSZone),
+    totalCount: data.total_count,
+  } as ListDNSZonesResponse
+}
+
+export const unmarshalListDomainHostsResponse = (
+  data: unknown,
+): ListDomainHostsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDomainHostsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    hosts: unmarshalArrayOfObject(data.hosts, unmarshalHost),
+    totalCount: data.total_count,
+  } as ListDomainHostsResponse
+}
+
+const unmarshalDomainSummary = (data: unknown): DomainSummary => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'DomainSummary' failed as data isn't a dictionary.`,
@@ -713,47 +1092,22 @@ const unmarshalDomainSummary = (data: unknown) => {
   } as DomainSummary
 }
 
-export const unmarshalHost = (data: unknown) => {
+export const unmarshalListDomainsResponse = (
+  data: unknown,
+): ListDomainsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'Host' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'ListDomainsResponse' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    domain: data.domain,
-    ips: data.ips,
-    name: data.name,
-    status: data.status,
-  } as Host
+    domains: unmarshalArrayOfObject(data.domains, unmarshalDomainSummary),
+    totalCount: data.total_count,
+  } as ListDomainsResponse
 }
 
-const unmarshalNameserver = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Nameserver' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { ip: data.ip, name: data.name } as Nameserver
-}
-
-const unmarshalRecordChange = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RecordChange' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    add: data.add ? unmarshalRecordChangeAdd(data.add) : undefined,
-    clear: data.clear ? unmarshalRecordChangeClear(data.clear) : undefined,
-    delete: data.delete ? unmarshalRecordChangeDelete(data.delete) : undefined,
-    set: data.set ? unmarshalRecordChangeSet(data.set) : undefined,
-  } as RecordChange
-}
-
-const unmarshalRenewableDomain = (data: unknown) => {
+const unmarshalRenewableDomain = (data: unknown): RenewableDomain => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'RenewableDomain' failed as data isn't a dictionary.`,
@@ -774,25 +1128,40 @@ const unmarshalRenewableDomain = (data: unknown) => {
   } as RenewableDomain
 }
 
-export const unmarshalSSLCertificate = (data: unknown) => {
+export const unmarshalListRenewableDomainsResponse = (
+  data: unknown,
+): ListRenewableDomainsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'SSLCertificate' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'ListRenewableDomainsResponse' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    alternativeDnsZones: data.alternative_dns_zones,
-    certificateChain: data.certificate_chain,
-    createdAt: unmarshalDate(data.created_at),
-    dnsZone: data.dns_zone,
-    expiredAt: unmarshalDate(data.expired_at),
-    privateKey: data.private_key,
-    status: data.status,
-  } as SSLCertificate
+    domains: unmarshalArrayOfObject(data.domains, unmarshalRenewableDomain),
+    totalCount: data.total_count,
+  } as ListRenewableDomainsResponse
 }
 
-const unmarshalTask = (data: unknown) => {
+export const unmarshalListSSLCertificatesResponse = (
+  data: unknown,
+): ListSSLCertificatesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSSLCertificatesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    certificates: unmarshalArrayOfObject(
+      data.certificates,
+      unmarshalSSLCertificate,
+    ),
+    totalCount: data.total_count,
+  } as ListSSLCertificatesResponse
+}
+
+export const unmarshalTask = (data: unknown): Task => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Task' failed as data isn't a dictionary.`,
@@ -812,309 +1181,9 @@ const unmarshalTask = (data: unknown) => {
   } as Task
 }
 
-export const unmarshalCheckContactsCompatibilityResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CheckContactsCompatibilityResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    administrativeCheckResult: data.administrative_check_result
-      ? unmarshalCheckContactsCompatibilityResponseContactCheckResult(
-          data.administrative_check_result,
-        )
-      : undefined,
-    compatible: data.compatible,
-    ownerCheckResult: data.owner_check_result
-      ? unmarshalCheckContactsCompatibilityResponseContactCheckResult(
-          data.owner_check_result,
-        )
-      : undefined,
-    technicalCheckResult: data.technical_check_result
-      ? unmarshalCheckContactsCompatibilityResponseContactCheckResult(
-          data.technical_check_result,
-        )
-      : undefined,
-  } as CheckContactsCompatibilityResponse
-}
-
-export const unmarshalClearDNSZoneRecordsResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ClearDNSZoneRecordsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {} as ClearDNSZoneRecordsResponse
-}
-
-export const unmarshalDeleteDNSZoneResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DeleteDNSZoneResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {} as DeleteDNSZoneResponse
-}
-
-export const unmarshalDeleteExternalDomainResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DeleteExternalDomainResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {} as DeleteExternalDomainResponse
-}
-
-export const unmarshalDeleteSSLCertificateResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DeleteSSLCertificateResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {} as DeleteSSLCertificateResponse
-}
-
-export const unmarshalDomain = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Domain' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    administrativeContact: data.administrative_contact
-      ? unmarshalContact(data.administrative_contact)
-      : undefined,
-    autoRenewStatus: data.auto_renew_status,
-    dnssec: data.dnssec ? unmarshalDomainDNSSEC(data.dnssec) : undefined,
-    dnsZones: unmarshalArrayOfObject(data.dns_zones, unmarshalDNSZone),
-    domain: data.domain,
-    eppCode: data.epp_code,
-    expiredAt: unmarshalDate(data.expired_at),
-    externalDomainRegistrationStatus: data.external_domain_registration_status
-      ? unmarshalDomainRegistrationStatusExternalDomain(
-          data.external_domain_registration_status,
-        )
-      : undefined,
-    isExternal: data.is_external,
-    organizationId: data.organization_id,
-    ownerContact: data.owner_contact
-      ? unmarshalContact(data.owner_contact)
-      : undefined,
-    projectId: data.project_id,
-    registrar: data.registrar,
-    status: data.status,
-    technicalContact: data.technical_contact
-      ? unmarshalContact(data.technical_contact)
-      : undefined,
-    tld: data.tld ? unmarshalTld(data.tld) : undefined,
-    transferRegistrationStatus: data.transfer_registration_status
-      ? unmarshalDomainRegistrationStatusTransfer(
-          data.transfer_registration_status,
-        )
-      : undefined,
-    updatedAt: unmarshalDate(data.updated_at),
-  } as Domain
-}
-
-export const unmarshalGetDNSZoneTsigKeyResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GetDNSZoneTsigKeyResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    algorithm: data.algorithm,
-    key: data.key,
-    name: data.name,
-  } as GetDNSZoneTsigKeyResponse
-}
-
-export const unmarshalGetDNSZoneVersionDiffResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GetDNSZoneVersionDiffResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    changes: unmarshalArrayOfObject(data.changes, unmarshalRecordChange),
-  } as GetDNSZoneVersionDiffResponse
-}
-
-export const unmarshalGetDomainAuthCodeResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GetDomainAuthCodeResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { authCode: data.auth_code } as GetDomainAuthCodeResponse
-}
-
-export const unmarshalImportProviderDNSZoneResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ImportProviderDNSZoneResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    records: unmarshalArrayOfObject(data.records, unmarshalDomainRecord),
-  } as ImportProviderDNSZoneResponse
-}
-
-export const unmarshalImportRawDNSZoneResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ImportRawDNSZoneResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    records: unmarshalArrayOfObject(data.records, unmarshalDomainRecord),
-  } as ImportRawDNSZoneResponse
-}
-
-export const unmarshalListContactsResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListContactsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    contacts: unmarshalArrayOfObject(data.contacts, unmarshalContactRoles),
-    totalCount: data.total_count,
-  } as ListContactsResponse
-}
-
-export const unmarshalListDNSZoneNameserversResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListDNSZoneNameserversResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    ns: unmarshalArrayOfObject(data.ns, unmarshalNameserver),
-  } as ListDNSZoneNameserversResponse
-}
-
-export const unmarshalListDNSZoneRecordsResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListDNSZoneRecordsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    records: unmarshalArrayOfObject(data.records, unmarshalDomainRecord),
-    totalCount: data.total_count,
-  } as ListDNSZoneRecordsResponse
-}
-
-export const unmarshalListDNSZoneVersionRecordsResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListDNSZoneVersionRecordsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    records: unmarshalArrayOfObject(data.records, unmarshalDomainRecord),
-    totalCount: data.total_count,
-  } as ListDNSZoneVersionRecordsResponse
-}
-
-export const unmarshalListDNSZoneVersionsResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListDNSZoneVersionsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    totalCount: data.total_count,
-    versions: unmarshalArrayOfObject(data.versions, unmarshalDNSZoneVersion),
-  } as ListDNSZoneVersionsResponse
-}
-
-export const unmarshalListDNSZonesResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListDNSZonesResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    dnsZones: unmarshalArrayOfObject(data.dns_zones, unmarshalDNSZone),
-    totalCount: data.total_count,
-  } as ListDNSZonesResponse
-}
-
-export const unmarshalListDomainHostsResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListDomainHostsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    hosts: unmarshalArrayOfObject(data.hosts, unmarshalHost),
-    totalCount: data.total_count,
-  } as ListDomainHostsResponse
-}
-
-export const unmarshalListDomainsResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListDomainsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    domains: unmarshalArrayOfObject(data.domains, unmarshalDomainSummary),
-    totalCount: data.total_count,
-  } as ListDomainsResponse
-}
-
-export const unmarshalListRenewableDomainsResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListRenewableDomainsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    domains: unmarshalArrayOfObject(data.domains, unmarshalRenewableDomain),
-    totalCount: data.total_count,
-  } as ListRenewableDomainsResponse
-}
-
-export const unmarshalListSSLCertificatesResponse = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListSSLCertificatesResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    certificates: unmarshalArrayOfObject(
-      data.certificates,
-      unmarshalSSLCertificate,
-    ),
-    totalCount: data.total_count,
-  } as ListSSLCertificatesResponse
-}
-
-export const unmarshalListTasksResponse = (data: unknown) => {
+export const unmarshalListTasksResponse = (
+  data: unknown,
+): ListTasksResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListTasksResponse' failed as data isn't a dictionary.`,
@@ -1127,7 +1196,7 @@ export const unmarshalListTasksResponse = (data: unknown) => {
   } as ListTasksResponse
 }
 
-export const unmarshalListTldsResponse = (data: unknown) => {
+export const unmarshalListTldsResponse = (data: unknown): ListTldsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListTldsResponse' failed as data isn't a dictionary.`,
@@ -1140,7 +1209,7 @@ export const unmarshalListTldsResponse = (data: unknown) => {
   } as ListTldsResponse
 }
 
-export const unmarshalOrderResponse = (data: unknown) => {
+export const unmarshalOrderResponse = (data: unknown): OrderResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'OrderResponse' failed as data isn't a dictionary.`,
@@ -1156,7 +1225,9 @@ export const unmarshalOrderResponse = (data: unknown) => {
   } as OrderResponse
 }
 
-export const unmarshalRefreshDNSZoneResponse = (data: unknown) => {
+export const unmarshalRefreshDNSZoneResponse = (
+  data: unknown,
+): RefreshDNSZoneResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'RefreshDNSZoneResponse' failed as data isn't a dictionary.`,
@@ -1168,7 +1239,9 @@ export const unmarshalRefreshDNSZoneResponse = (data: unknown) => {
   } as RefreshDNSZoneResponse
 }
 
-export const unmarshalRegisterExternalDomainResponse = (data: unknown) => {
+export const unmarshalRegisterExternalDomainResponse = (
+  data: unknown,
+): RegisterExternalDomainResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'RegisterExternalDomainResponse' failed as data isn't a dictionary.`,
@@ -1184,7 +1257,9 @@ export const unmarshalRegisterExternalDomainResponse = (data: unknown) => {
   } as RegisterExternalDomainResponse
 }
 
-export const unmarshalRestoreDNSZoneVersionResponse = (data: unknown) => {
+export const unmarshalRestoreDNSZoneVersionResponse = (
+  data: unknown,
+): RestoreDNSZoneVersionResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'RestoreDNSZoneVersionResponse' failed as data isn't a dictionary.`,
@@ -1194,7 +1269,23 @@ export const unmarshalRestoreDNSZoneVersionResponse = (data: unknown) => {
   return {} as RestoreDNSZoneVersionResponse
 }
 
-export const unmarshalSearchAvailableDomainsResponse = (data: unknown) => {
+const unmarshalAvailableDomain = (data: unknown): AvailableDomain => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AvailableDomain' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    available: data.available,
+    domain: data.domain,
+    tld: data.tld ? unmarshalTld(data.tld) : undefined,
+  } as AvailableDomain
+}
+
+export const unmarshalSearchAvailableDomainsResponse = (
+  data: unknown,
+): SearchAvailableDomainsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SearchAvailableDomainsResponse' failed as data isn't a dictionary.`,
@@ -1209,7 +1300,9 @@ export const unmarshalSearchAvailableDomainsResponse = (data: unknown) => {
   } as SearchAvailableDomainsResponse
 }
 
-export const unmarshalUpdateDNSZoneNameserversResponse = (data: unknown) => {
+export const unmarshalUpdateDNSZoneNameserversResponse = (
+  data: unknown,
+): UpdateDNSZoneNameserversResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'UpdateDNSZoneNameserversResponse' failed as data isn't a dictionary.`,
@@ -1221,7 +1314,9 @@ export const unmarshalUpdateDNSZoneNameserversResponse = (data: unknown) => {
   } as UpdateDNSZoneNameserversResponse
 }
 
-export const unmarshalUpdateDNSZoneRecordsResponse = (data: unknown) => {
+export const unmarshalUpdateDNSZoneRecordsResponse = (
+  data: unknown,
+): UpdateDNSZoneRecordsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'UpdateDNSZoneRecordsResponse' failed as data isn't a dictionary.`,
@@ -1232,6 +1327,617 @@ export const unmarshalUpdateDNSZoneRecordsResponse = (data: unknown) => {
     records: unmarshalArrayOfObject(data.records, unmarshalDomainRecord),
   } as UpdateDNSZoneRecordsResponse
 }
+
+export const marshalCloneDNSZoneRequest = (
+  request: CloneDNSZoneRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  dest_dns_zone: request.destDnsZone,
+  overwrite: request.overwrite,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
+export const marshalCreateDNSZoneRequest = (
+  request: CreateDNSZoneRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  domain: request.domain,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  subdomain: request.subdomain,
+})
+
+export const marshalCreateSSLCertificateRequest = (
+  request: CreateSSLCertificateRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  alternative_dns_zones: request.alternativeDnsZones,
+  dns_zone: request.dnsZone,
+})
+
+const marshalImportProviderDNSZoneRequestOnlineV1 = (
+  request: ImportProviderDNSZoneRequestOnlineV1,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  token: request.token,
+})
+
+export const marshalImportProviderDNSZoneRequest = (
+  request: ImportProviderDNSZoneRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ...resolveOneOf([
+    {
+      param: 'online_v1',
+      value:
+        request.onlineV1 !== undefined
+          ? marshalImportProviderDNSZoneRequestOnlineV1(
+              request.onlineV1,
+              defaults,
+            )
+          : undefined,
+    },
+  ]),
+})
+
+const marshalImportRawDNSZoneRequestTsigKey = (
+  request: ImportRawDNSZoneRequestTsigKey,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  algorithm: request.algorithm,
+  key: request.key,
+  name: request.name,
+})
+
+const marshalImportRawDNSZoneRequestAXFRSource = (
+  request: ImportRawDNSZoneRequestAXFRSource,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name_server: request.nameServer,
+  tsig_key:
+    request.tsigKey !== undefined
+      ? marshalImportRawDNSZoneRequestTsigKey(request.tsigKey, defaults)
+      : undefined,
+})
+
+const marshalImportRawDNSZoneRequestBindSource = (
+  request: ImportRawDNSZoneRequestBindSource,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  content: request.content,
+})
+
+export const marshalImportRawDNSZoneRequest = (
+  request: ImportRawDNSZoneRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  content: request.content,
+  format: request.format,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  ...resolveOneOf([
+    {
+      param: 'bind_source',
+      value:
+        request.bindSource !== undefined
+          ? marshalImportRawDNSZoneRequestBindSource(
+              request.bindSource,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'axfr_source',
+      value:
+        request.axfrSource !== undefined
+          ? marshalImportRawDNSZoneRequestAXFRSource(
+              request.axfrSource,
+              defaults,
+            )
+          : undefined,
+    },
+  ]),
+})
+
+export const marshalRefreshDNSZoneRequest = (
+  request: RefreshDNSZoneRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  recreate_dns_zone: request.recreateDnsZone,
+  recreate_sub_dns_zone: request.recreateSubDnsZone,
+})
+
+const marshalContactExtensionFRAssociationInfo = (
+  request: ContactExtensionFRAssociationInfo,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  publication_jo: request.publicationJo,
+  publication_jo_page: request.publicationJoPage,
+})
+
+const marshalContactExtensionFRCodeAuthAfnicInfo = (
+  request: ContactExtensionFRCodeAuthAfnicInfo,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  code_auth_afnic: request.codeAuthAfnic,
+})
+
+const marshalContactExtensionFRDunsInfo = (
+  request: ContactExtensionFRDunsInfo,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  duns_id: request.dunsId,
+  local_id: request.localId,
+})
+
+const marshalContactExtensionFRIndividualInfo = (
+  request: ContactExtensionFRIndividualInfo,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  whois_opt_in: request.whoisOptIn,
+})
+
+const marshalContactExtensionFRTrademarkInfo = (
+  request: ContactExtensionFRTrademarkInfo,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  trademark_inpi: request.trademarkInpi,
+})
+
+const marshalContactExtensionEU = (
+  request: ContactExtensionEU,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  european_citizenship: request.europeanCitizenship,
+})
+
+const marshalContactExtensionFR = (
+  request: ContactExtensionFR,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  mode: request.mode,
+  ...resolveOneOf([
+    {
+      param: 'individual_info',
+      value:
+        request.individualInfo !== undefined
+          ? marshalContactExtensionFRIndividualInfo(
+              request.individualInfo,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'duns_info',
+      value:
+        request.dunsInfo !== undefined
+          ? marshalContactExtensionFRDunsInfo(request.dunsInfo, defaults)
+          : undefined,
+    },
+    {
+      param: 'association_info',
+      value:
+        request.associationInfo !== undefined
+          ? marshalContactExtensionFRAssociationInfo(
+              request.associationInfo,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'trademark_info',
+      value:
+        request.trademarkInfo !== undefined
+          ? marshalContactExtensionFRTrademarkInfo(
+              request.trademarkInfo,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'code_auth_afnic_info',
+      value:
+        request.codeAuthAfnicInfo !== undefined
+          ? marshalContactExtensionFRCodeAuthAfnicInfo(
+              request.codeAuthAfnicInfo,
+              defaults,
+            )
+          : undefined,
+    },
+  ]),
+})
+
+const marshalContactExtensionNL = (
+  request: ContactExtensionNL,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  legal_form: request.legalForm,
+  legal_form_registration_number: request.legalFormRegistrationNumber,
+})
+
+const marshalContactQuestion = (
+  request: ContactQuestion,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  answer: request.answer,
+  question: request.question,
+})
+
+const marshalNewContact = (
+  request: NewContact,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  address_line_1: request.addressLine1,
+  address_line_2: request.addressLine2,
+  city: request.city,
+  company_identification_code: request.companyIdentificationCode,
+  company_name: request.companyName,
+  country: request.country,
+  email: request.email,
+  email_alt: request.emailAlt,
+  extension_eu:
+    request.extensionEu !== undefined
+      ? marshalContactExtensionEU(request.extensionEu, defaults)
+      : undefined,
+  extension_fr:
+    request.extensionFr !== undefined
+      ? marshalContactExtensionFR(request.extensionFr, defaults)
+      : undefined,
+  extension_nl:
+    request.extensionNl !== undefined
+      ? marshalContactExtensionNL(request.extensionNl, defaults)
+      : undefined,
+  fax_number: request.faxNumber,
+  firstname: request.firstname,
+  lang: request.lang,
+  lastname: request.lastname,
+  legal_form: request.legalForm,
+  phone_number: request.phoneNumber,
+  questions:
+    request.questions !== undefined
+      ? request.questions.map(elt => marshalContactQuestion(elt, defaults))
+      : undefined,
+  resale: request.resale,
+  state: request.state,
+  vat_identification_code: request.vatIdentificationCode,
+  whois_opt_in: request.whoisOptIn,
+  zip: request.zip,
+})
+
+export const marshalRegistrarApiBuyDomainsRequest = (
+  request: RegistrarApiBuyDomainsRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  domains: request.domains,
+  duration_in_years: request.durationInYears,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  ...resolveOneOf<string | Record<string, unknown>>([
+    { param: 'owner_contact_id', value: request.ownerContactId },
+    {
+      param: 'owner_contact',
+      value:
+        request.ownerContact !== undefined
+          ? marshalNewContact(request.ownerContact, defaults)
+          : undefined,
+    },
+  ]),
+  ...resolveOneOf<string | Record<string, unknown>>([
+    {
+      param: 'administrative_contact_id',
+      value: request.administrativeContactId,
+    },
+    {
+      param: 'administrative_contact',
+      value:
+        request.administrativeContact !== undefined
+          ? marshalNewContact(request.administrativeContact, defaults)
+          : undefined,
+    },
+  ]),
+  ...resolveOneOf<string | Record<string, unknown>>([
+    { param: 'technical_contact_id', value: request.technicalContactId },
+    {
+      param: 'technical_contact',
+      value:
+        request.technicalContact !== undefined
+          ? marshalNewContact(request.technicalContact, defaults)
+          : undefined,
+    },
+  ]),
+})
+
+export const marshalRegistrarApiCheckContactsCompatibilityRequest = (
+  request: RegistrarApiCheckContactsCompatibilityRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  domains: request.domains,
+  tlds: request.tlds,
+  ...resolveOneOf<string | Record<string, unknown>>([
+    { param: 'owner_contact_id', value: request.ownerContactId },
+    {
+      param: 'owner_contact',
+      value:
+        request.ownerContact !== undefined
+          ? marshalNewContact(request.ownerContact, defaults)
+          : undefined,
+    },
+  ]),
+  ...resolveOneOf<string | Record<string, unknown>>([
+    {
+      param: 'administrative_contact_id',
+      value: request.administrativeContactId,
+    },
+    {
+      param: 'administrative_contact',
+      value:
+        request.administrativeContact !== undefined
+          ? marshalNewContact(request.administrativeContact, defaults)
+          : undefined,
+    },
+  ]),
+  ...resolveOneOf<string | Record<string, unknown>>([
+    { param: 'technical_contact_id', value: request.technicalContactId },
+    {
+      param: 'technical_contact',
+      value:
+        request.technicalContact !== undefined
+          ? marshalNewContact(request.technicalContact, defaults)
+          : undefined,
+    },
+  ]),
+})
+
+export const marshalRegistrarApiCreateDomainHostRequest = (
+  request: RegistrarApiCreateDomainHostRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ips: request.ips,
+  name: request.name,
+})
+
+const marshalDSRecordPublicKey = (
+  request: DSRecordPublicKey,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  key: request.key,
+})
+
+const marshalDSRecordDigest = (
+  request: DSRecordDigest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  digest: request.digest,
+  public_key:
+    request.publicKey !== undefined
+      ? marshalDSRecordPublicKey(request.publicKey, defaults)
+      : undefined,
+  type: request.type,
+})
+
+export const marshalDSRecord = (
+  request: DSRecord,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  algorithm: request.algorithm,
+  key_id: request.keyId,
+  ...resolveOneOf([
+    {
+      param: 'digest',
+      value:
+        request.digest !== undefined
+          ? marshalDSRecordDigest(request.digest, defaults)
+          : undefined,
+    },
+    {
+      param: 'public_key',
+      value:
+        request.publicKey !== undefined
+          ? marshalDSRecordPublicKey(request.publicKey, defaults)
+          : undefined,
+    },
+  ]),
+})
+
+export const marshalRegistrarApiEnableDomainDNSSECRequest = (
+  request: RegistrarApiEnableDomainDNSSECRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ds_record:
+    request.dsRecord !== undefined
+      ? marshalDSRecord(request.dsRecord, defaults)
+      : undefined,
+})
+
+export const marshalRegistrarApiRegisterExternalDomainRequest = (
+  request: RegistrarApiRegisterExternalDomainRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  domain: request.domain,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
+export const marshalRegistrarApiRenewDomainsRequest = (
+  request: RegistrarApiRenewDomainsRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  domains: request.domains,
+  duration_in_years: request.durationInYears,
+  force_late_renewal: request.forceLateRenewal,
+})
+
+export const marshalRegistrarApiTradeDomainRequest = (
+  request: RegistrarApiTradeDomainRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  ...resolveOneOf<string | Record<string, unknown>>([
+    { param: 'new_owner_contact_id', value: request.newOwnerContactId },
+    {
+      param: 'new_owner_contact',
+      value:
+        request.newOwnerContact !== undefined
+          ? marshalNewContact(request.newOwnerContact, defaults)
+          : undefined,
+    },
+  ]),
+})
+
+const marshalTransferInDomainRequestTransferRequest = (
+  request: TransferInDomainRequestTransferRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  auth_code: request.authCode,
+  domain: request.domain,
+})
+
+export const marshalRegistrarApiTransferInDomainRequest = (
+  request: RegistrarApiTransferInDomainRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  domains: request.domains.map(elt =>
+    marshalTransferInDomainRequestTransferRequest(elt, defaults),
+  ),
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  ...resolveOneOf<string | Record<string, unknown>>([
+    { param: 'owner_contact_id', value: request.ownerContactId },
+    {
+      param: 'owner_contact',
+      value:
+        request.ownerContact !== undefined
+          ? marshalNewContact(request.ownerContact, defaults)
+          : undefined,
+    },
+  ]),
+  ...resolveOneOf<string | Record<string, unknown>>([
+    {
+      param: 'administrative_contact_id',
+      value: request.administrativeContactId,
+    },
+    {
+      param: 'administrative_contact',
+      value:
+        request.administrativeContact !== undefined
+          ? marshalNewContact(request.administrativeContact, defaults)
+          : undefined,
+    },
+  ]),
+  ...resolveOneOf<string | Record<string, unknown>>([
+    { param: 'technical_contact_id', value: request.technicalContactId },
+    {
+      param: 'technical_contact',
+      value:
+        request.technicalContact !== undefined
+          ? marshalNewContact(request.technicalContact, defaults)
+          : undefined,
+    },
+  ]),
+})
+
+const marshalUpdateContactRequestQuestion = (
+  request: UpdateContactRequestQuestion,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  answer: request.answer,
+  question: request.question,
+})
+
+export const marshalRegistrarApiUpdateContactRequest = (
+  request: RegistrarApiUpdateContactRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  address_line_1: request.addressLine1,
+  address_line_2: request.addressLine2,
+  city: request.city,
+  company_identification_code: request.companyIdentificationCode,
+  country: request.country,
+  email: request.email,
+  email_alt: request.emailAlt,
+  extension_eu:
+    request.extensionEu !== undefined
+      ? marshalContactExtensionEU(request.extensionEu, defaults)
+      : undefined,
+  extension_fr:
+    request.extensionFr !== undefined
+      ? marshalContactExtensionFR(request.extensionFr, defaults)
+      : undefined,
+  extension_nl:
+    request.extensionNl !== undefined
+      ? marshalContactExtensionNL(request.extensionNl, defaults)
+      : undefined,
+  fax_number: request.faxNumber,
+  lang: request.lang,
+  phone_number: request.phoneNumber,
+  questions:
+    request.questions !== undefined
+      ? request.questions.map(elt =>
+          marshalUpdateContactRequestQuestion(elt, defaults),
+        )
+      : undefined,
+  resale: request.resale,
+  state: request.state,
+  vat_identification_code: request.vatIdentificationCode,
+  whois_opt_in: request.whoisOptIn,
+  zip: request.zip,
+})
+
+export const marshalRegistrarApiUpdateDomainHostRequest = (
+  request: RegistrarApiUpdateDomainHostRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ips: request.ips,
+})
+
+export const marshalRegistrarApiUpdateDomainRequest = (
+  request: RegistrarApiUpdateDomainRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ...resolveOneOf<string | Record<string, unknown>>([
+    { param: 'technical_contact_id', value: request.technicalContactId },
+    {
+      param: 'technical_contact',
+      value:
+        request.technicalContact !== undefined
+          ? marshalNewContact(request.technicalContact, defaults)
+          : undefined,
+    },
+  ]),
+  ...resolveOneOf<string | Record<string, unknown>>([
+    { param: 'owner_contact_id', value: request.ownerContactId },
+    {
+      param: 'owner_contact',
+      value:
+        request.ownerContact !== undefined
+          ? marshalNewContact(request.ownerContact, defaults)
+          : undefined,
+    },
+  ]),
+  ...resolveOneOf<string | Record<string, unknown>>([
+    {
+      param: 'administrative_contact_id',
+      value: request.administrativeContactId,
+    },
+    {
+      param: 'administrative_contact',
+      value:
+        request.administrativeContact !== undefined
+          ? marshalNewContact(request.administrativeContact, defaults)
+          : undefined,
+    },
+  ]),
+})
+
+const marshalNameserver = (
+  request: Nameserver,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ip: request.ip,
+  name: request.name,
+})
+
+export const marshalUpdateDNSZoneNameserversRequest = (
+  request: UpdateDNSZoneNameserversRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ns: request.ns.map(elt => marshalNameserver(elt, defaults)),
+})
 
 const marshalDomainRecordGeoIPConfigMatch = (
   request: DomainRecordGeoIPConfigMatch,
@@ -1297,50 +2003,6 @@ const marshalDomainRecordWeightedConfig = (
   ),
 })
 
-const marshalContactExtensionFRAssociationInfo = (
-  request: ContactExtensionFRAssociationInfo,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  publication_jo: request.publicationJo,
-  publication_jo_page: request.publicationJoPage,
-})
-
-const marshalContactExtensionFRCodeAuthAfnicInfo = (
-  request: ContactExtensionFRCodeAuthAfnicInfo,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  code_auth_afnic: request.codeAuthAfnic,
-})
-
-const marshalContactExtensionFRDunsInfo = (
-  request: ContactExtensionFRDunsInfo,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  duns_id: request.dunsId,
-  local_id: request.localId,
-})
-
-const marshalContactExtensionFRIndividualInfo = (
-  request: ContactExtensionFRIndividualInfo,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  whois_opt_in: request.whoisOptIn,
-})
-
-const marshalContactExtensionFRTrademarkInfo = (
-  request: ContactExtensionFRTrademarkInfo,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  trademark_inpi: request.trademarkInpi,
-})
-
-const marshalDSRecordPublicKey = (
-  request: DSRecordPublicKey,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  key: request.key,
-})
-
 const marshalDomainRecord = (
   request: DomainRecord,
   defaults: DefaultValues,
@@ -1352,33 +2014,37 @@ const marshalDomainRecord = (
   priority: request.priority,
   ttl: request.ttl,
   type: request.type,
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'geo_ip_config',
-      value: request.geoIpConfig
-        ? marshalDomainRecordGeoIPConfig(request.geoIpConfig, defaults)
-        : undefined,
+      value:
+        request.geoIpConfig !== undefined
+          ? marshalDomainRecordGeoIPConfig(request.geoIpConfig, defaults)
+          : undefined,
     },
     {
       param: 'http_service_config',
-      value: request.httpServiceConfig
-        ? marshalDomainRecordHTTPServiceConfig(
-            request.httpServiceConfig,
-            defaults,
-          )
-        : undefined,
+      value:
+        request.httpServiceConfig !== undefined
+          ? marshalDomainRecordHTTPServiceConfig(
+              request.httpServiceConfig,
+              defaults,
+            )
+          : undefined,
     },
     {
       param: 'weighted_config',
-      value: request.weightedConfig
-        ? marshalDomainRecordWeightedConfig(request.weightedConfig, defaults)
-        : undefined,
+      value:
+        request.weightedConfig !== undefined
+          ? marshalDomainRecordWeightedConfig(request.weightedConfig, defaults)
+          : undefined,
     },
     {
       param: 'view_config',
-      value: request.viewConfig
-        ? marshalDomainRecordViewConfig(request.viewConfig, defaults)
-        : undefined,
+      value:
+        request.viewConfig !== undefined
+          ? marshalDomainRecordViewConfig(request.viewConfig, defaults)
+          : undefined,
     },
   ]),
 })
@@ -1391,100 +2057,6 @@ const marshalRecordIdentifier = (
   name: request.name,
   ttl: request.ttl,
   type: request.type,
-})
-
-const marshalContactExtensionEU = (
-  request: ContactExtensionEU,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  european_citizenship: request.europeanCitizenship,
-})
-
-const marshalContactExtensionFR = (
-  request: ContactExtensionFR,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  mode: request.mode,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'individual_info',
-      value: request.individualInfo
-        ? marshalContactExtensionFRIndividualInfo(
-            request.individualInfo,
-            defaults,
-          )
-        : undefined,
-    },
-    {
-      param: 'duns_info',
-      value: request.dunsInfo
-        ? marshalContactExtensionFRDunsInfo(request.dunsInfo, defaults)
-        : undefined,
-    },
-    {
-      param: 'association_info',
-      value: request.associationInfo
-        ? marshalContactExtensionFRAssociationInfo(
-            request.associationInfo,
-            defaults,
-          )
-        : undefined,
-    },
-    {
-      param: 'trademark_info',
-      value: request.trademarkInfo
-        ? marshalContactExtensionFRTrademarkInfo(
-            request.trademarkInfo,
-            defaults,
-          )
-        : undefined,
-    },
-    {
-      param: 'code_auth_afnic_info',
-      value: request.codeAuthAfnicInfo
-        ? marshalContactExtensionFRCodeAuthAfnicInfo(
-            request.codeAuthAfnicInfo,
-            defaults,
-          )
-        : undefined,
-    },
-  ]),
-})
-
-const marshalContactExtensionNL = (
-  request: ContactExtensionNL,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  legal_form: request.legalForm,
-  legal_form_registration_number: request.legalFormRegistrationNumber,
-})
-
-const marshalContactQuestion = (
-  request: ContactQuestion,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  answer: request.answer,
-  question: request.question,
-})
-
-const marshalDSRecordDigest = (
-  request: DSRecordDigest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  digest: request.digest,
-  public_key: request.publicKey
-    ? marshalDSRecordPublicKey(request.publicKey, defaults)
-    : undefined,
-  type: request.type,
-})
-
-const marshalImportRawDNSZoneRequestTsigKey = (
-  request: ImportRawDNSZoneRequestTsigKey,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  algorithm: request.algorithm,
-  key: request.key,
-  name: request.name,
 })
 
 const marshalRecordChangeAdd = (
@@ -1503,16 +2075,14 @@ const marshalRecordChangeDelete = (
   request: RecordChangeDelete,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<unknown>([
-    {
-      param: 'id',
-      value: request.id,
-    },
+  ...resolveOneOf<string | Record<string, unknown>>([
+    { param: 'id', value: request.id },
     {
       param: 'id_fields',
-      value: request.idFields
-        ? marshalRecordIdentifier(request.idFields, defaults)
-        : undefined,
+      value:
+        request.idFields !== undefined
+          ? marshalRecordIdentifier(request.idFields, defaults)
+          : undefined,
     },
   ]),
 })
@@ -1522,510 +2092,52 @@ const marshalRecordChangeSet = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   records: request.records.map(elt => marshalDomainRecord(elt, defaults)),
-  ...resolveOneOf<unknown>([
-    {
-      param: 'id',
-      value: request.id,
-    },
+  ...resolveOneOf<string | Record<string, unknown>>([
+    { param: 'id', value: request.id },
     {
       param: 'id_fields',
-      value: request.idFields
-        ? marshalRecordIdentifier(request.idFields, defaults)
-        : undefined,
+      value:
+        request.idFields !== undefined
+          ? marshalRecordIdentifier(request.idFields, defaults)
+          : undefined,
     },
   ]),
-})
-
-const marshalDSRecord = (
-  request: DSRecord,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  algorithm: request.algorithm,
-  key_id: request.keyId,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'digest',
-      value: request.digest
-        ? marshalDSRecordDigest(request.digest, defaults)
-        : undefined,
-    },
-    {
-      param: 'public_key',
-      value: request.publicKey
-        ? marshalDSRecordPublicKey(request.publicKey, defaults)
-        : undefined,
-    },
-  ]),
-})
-
-const marshalImportProviderDNSZoneRequestOnlineV1 = (
-  request: ImportProviderDNSZoneRequestOnlineV1,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  token: request.token,
-})
-
-const marshalImportRawDNSZoneRequestAXFRSource = (
-  request: ImportRawDNSZoneRequestAXFRSource,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  name_server: request.nameServer,
-  tsig_key: request.tsigKey
-    ? marshalImportRawDNSZoneRequestTsigKey(request.tsigKey, defaults)
-    : undefined,
-})
-
-const marshalImportRawDNSZoneRequestBindSource = (
-  request: ImportRawDNSZoneRequestBindSource,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  content: request.content,
-})
-
-const marshalNameserver = (
-  request: Nameserver,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  ip: request.ip,
-  name: request.name,
-})
-
-const marshalNewContact = (
-  request: NewContact,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  address_line_1: request.addressLine1,
-  address_line_2: request.addressLine2,
-  city: request.city,
-  company_identification_code: request.companyIdentificationCode,
-  company_name: request.companyName,
-  country: request.country,
-  email: request.email,
-  email_alt: request.emailAlt,
-  extension_eu: request.extensionEu
-    ? marshalContactExtensionEU(request.extensionEu, defaults)
-    : undefined,
-  extension_fr: request.extensionFr
-    ? marshalContactExtensionFR(request.extensionFr, defaults)
-    : undefined,
-  extension_nl: request.extensionNl
-    ? marshalContactExtensionNL(request.extensionNl, defaults)
-    : undefined,
-  fax_number: request.faxNumber,
-  firstname: request.firstname,
-  lang: request.lang,
-  lastname: request.lastname,
-  legal_form: request.legalForm,
-  phone_number: request.phoneNumber,
-  questions: request.questions
-    ? request.questions.map(elt => marshalContactQuestion(elt, defaults))
-    : undefined,
-  resale: request.resale,
-  state: request.state,
-  vat_identification_code: request.vatIdentificationCode,
-  whois_opt_in: request.whoisOptIn,
-  zip: request.zip,
 })
 
 const marshalRecordChange = (
   request: RecordChange,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<unknown>([
+  ...resolveOneOf([
     {
       param: 'add',
-      value: request.add
-        ? marshalRecordChangeAdd(request.add, defaults)
-        : undefined,
+      value:
+        request.add !== undefined
+          ? marshalRecordChangeAdd(request.add, defaults)
+          : undefined,
     },
     {
       param: 'set',
-      value: request.set
-        ? marshalRecordChangeSet(request.set, defaults)
-        : undefined,
+      value:
+        request.set !== undefined
+          ? marshalRecordChangeSet(request.set, defaults)
+          : undefined,
     },
     {
       param: 'delete',
-      value: request.delete
-        ? marshalRecordChangeDelete(request.delete, defaults)
-        : undefined,
+      value:
+        request.delete !== undefined
+          ? marshalRecordChangeDelete(request.delete, defaults)
+          : undefined,
     },
     {
       param: 'clear',
-      value: request.clear
-        ? marshalRecordChangeClear(request.clear, defaults)
-        : undefined,
+      value:
+        request.clear !== undefined
+          ? marshalRecordChangeClear(request.clear, defaults)
+          : undefined,
     },
   ]),
-})
-
-const marshalTransferInDomainRequestTransferRequest = (
-  request: TransferInDomainRequestTransferRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  auth_code: request.authCode,
-  domain: request.domain,
-})
-
-const marshalUpdateContactRequestQuestion = (
-  request: UpdateContactRequestQuestion,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  answer: request.answer,
-  question: request.question,
-})
-
-export const marshalCloneDNSZoneRequest = (
-  request: CloneDNSZoneRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  dest_dns_zone: request.destDnsZone,
-  overwrite: request.overwrite,
-  project_id: request.projectId,
-})
-
-export const marshalCreateDNSZoneRequest = (
-  request: CreateDNSZoneRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  domain: request.domain,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-  subdomain: request.subdomain,
-})
-
-export const marshalCreateSSLCertificateRequest = (
-  request: CreateSSLCertificateRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  alternative_dns_zones: request.alternativeDnsZones,
-  dns_zone: request.dnsZone,
-})
-
-export const marshalImportProviderDNSZoneRequest = (
-  request: ImportProviderDNSZoneRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  ...resolveOneOf([
-    {
-      param: 'online_v1',
-      value: request.onlineV1
-        ? marshalImportProviderDNSZoneRequestOnlineV1(
-            request.onlineV1,
-            defaults,
-          )
-        : undefined,
-    },
-  ]),
-})
-
-export const marshalImportRawDNSZoneRequest = (
-  request: ImportRawDNSZoneRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  content: request.content,
-  format: request.format,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'bind_source',
-      value: request.bindSource
-        ? marshalImportRawDNSZoneRequestBindSource(request.bindSource, defaults)
-        : undefined,
-    },
-    {
-      param: 'axfr_source',
-      value: request.axfrSource
-        ? marshalImportRawDNSZoneRequestAXFRSource(request.axfrSource, defaults)
-        : undefined,
-    },
-  ]),
-})
-
-export const marshalRefreshDNSZoneRequest = (
-  request: RefreshDNSZoneRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  recreate_dns_zone: request.recreateDnsZone,
-  recreate_sub_dns_zone: request.recreateSubDnsZone,
-})
-
-export const marshalRegistrarApiBuyDomainsRequest = (
-  request: RegistrarApiBuyDomainsRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  domains: request.domains,
-  duration_in_years: request.durationInYears,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'administrative_contact_id',
-      value: request.administrativeContactId,
-    },
-    {
-      param: 'administrative_contact',
-      value: request.administrativeContact
-        ? marshalNewContact(request.administrativeContact, defaults)
-        : undefined,
-    },
-  ]),
-  ...resolveOneOf<unknown>([
-    {
-      param: 'owner_contact_id',
-      value: request.ownerContactId,
-    },
-    {
-      param: 'owner_contact',
-      value: request.ownerContact
-        ? marshalNewContact(request.ownerContact, defaults)
-        : undefined,
-    },
-  ]),
-  ...resolveOneOf<unknown>([
-    {
-      param: 'technical_contact_id',
-      value: request.technicalContactId,
-    },
-    {
-      param: 'technical_contact',
-      value: request.technicalContact
-        ? marshalNewContact(request.technicalContact, defaults)
-        : undefined,
-    },
-  ]),
-})
-
-export const marshalRegistrarApiCheckContactsCompatibilityRequest = (
-  request: RegistrarApiCheckContactsCompatibilityRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  domains: request.domains,
-  tlds: request.tlds,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'administrative_contact_id',
-      value: request.administrativeContactId,
-    },
-    {
-      param: 'administrative_contact',
-      value: request.administrativeContact
-        ? marshalNewContact(request.administrativeContact, defaults)
-        : undefined,
-    },
-  ]),
-  ...resolveOneOf<unknown>([
-    {
-      param: 'owner_contact_id',
-      value: request.ownerContactId,
-    },
-    {
-      param: 'owner_contact',
-      value: request.ownerContact
-        ? marshalNewContact(request.ownerContact, defaults)
-        : undefined,
-    },
-  ]),
-  ...resolveOneOf<unknown>([
-    {
-      param: 'technical_contact_id',
-      value: request.technicalContactId,
-    },
-    {
-      param: 'technical_contact',
-      value: request.technicalContact
-        ? marshalNewContact(request.technicalContact, defaults)
-        : undefined,
-    },
-  ]),
-})
-
-export const marshalRegistrarApiCreateDomainHostRequest = (
-  request: RegistrarApiCreateDomainHostRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  ips: request.ips,
-  name: request.name,
-})
-
-export const marshalRegistrarApiEnableDomainDNSSECRequest = (
-  request: RegistrarApiEnableDomainDNSSECRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  ds_record: request.dsRecord
-    ? marshalDSRecord(request.dsRecord, defaults)
-    : undefined,
-})
-
-export const marshalRegistrarApiRegisterExternalDomainRequest = (
-  request: RegistrarApiRegisterExternalDomainRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  domain: request.domain,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-})
-
-export const marshalRegistrarApiRenewDomainsRequest = (
-  request: RegistrarApiRenewDomainsRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  domains: request.domains,
-  duration_in_years: request.durationInYears,
-  force_late_renewal: request.forceLateRenewal,
-})
-
-export const marshalRegistrarApiTradeDomainRequest = (
-  request: RegistrarApiTradeDomainRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  project_id: request.projectId,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'new_owner_contact_id',
-      value: request.newOwnerContactId,
-    },
-    {
-      param: 'new_owner_contact',
-      value: request.newOwnerContact
-        ? marshalNewContact(request.newOwnerContact, defaults)
-        : undefined,
-    },
-  ]),
-})
-
-export const marshalRegistrarApiTransferInDomainRequest = (
-  request: RegistrarApiTransferInDomainRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  domains: request.domains.map(elt =>
-    marshalTransferInDomainRequestTransferRequest(elt, defaults),
-  ),
-  project_id: request.projectId ?? defaults.defaultProjectId,
-  ...resolveOneOf<unknown>([
-    {
-      param: 'administrative_contact_id',
-      value: request.administrativeContactId,
-    },
-    {
-      param: 'administrative_contact',
-      value: request.administrativeContact
-        ? marshalNewContact(request.administrativeContact, defaults)
-        : undefined,
-    },
-  ]),
-  ...resolveOneOf<unknown>([
-    {
-      param: 'owner_contact_id',
-      value: request.ownerContactId,
-    },
-    {
-      param: 'owner_contact',
-      value: request.ownerContact
-        ? marshalNewContact(request.ownerContact, defaults)
-        : undefined,
-    },
-  ]),
-  ...resolveOneOf<unknown>([
-    {
-      param: 'technical_contact_id',
-      value: request.technicalContactId,
-    },
-    {
-      param: 'technical_contact',
-      value: request.technicalContact
-        ? marshalNewContact(request.technicalContact, defaults)
-        : undefined,
-    },
-  ]),
-})
-
-export const marshalRegistrarApiUpdateContactRequest = (
-  request: RegistrarApiUpdateContactRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  address_line_1: request.addressLine1,
-  address_line_2: request.addressLine2,
-  city: request.city,
-  company_identification_code: request.companyIdentificationCode,
-  country: request.country,
-  email: request.email,
-  email_alt: request.emailAlt,
-  extension_eu: request.extensionEu
-    ? marshalContactExtensionEU(request.extensionEu, defaults)
-    : undefined,
-  extension_fr: request.extensionFr
-    ? marshalContactExtensionFR(request.extensionFr, defaults)
-    : undefined,
-  extension_nl: request.extensionNl
-    ? marshalContactExtensionNL(request.extensionNl, defaults)
-    : undefined,
-  fax_number: request.faxNumber,
-  lang: request.lang ?? 'unknown_language_code',
-  phone_number: request.phoneNumber,
-  questions: request.questions
-    ? request.questions.map(elt =>
-        marshalUpdateContactRequestQuestion(elt, defaults),
-      )
-    : undefined,
-  resale: request.resale,
-  state: request.state,
-  vat_identification_code: request.vatIdentificationCode,
-  whois_opt_in: request.whoisOptIn,
-  zip: request.zip,
-})
-
-export const marshalRegistrarApiUpdateDomainHostRequest = (
-  request: RegistrarApiUpdateDomainHostRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  ips: request.ips,
-})
-
-export const marshalRegistrarApiUpdateDomainRequest = (
-  request: RegistrarApiUpdateDomainRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  ...resolveOneOf<unknown>([
-    {
-      param: 'administrative_contact_id',
-      value: request.administrativeContactId,
-    },
-    {
-      param: 'administrative_contact',
-      value: request.administrativeContact
-        ? marshalNewContact(request.administrativeContact, defaults)
-        : undefined,
-    },
-  ]),
-  ...resolveOneOf<unknown>([
-    {
-      param: 'owner_contact_id',
-      value: request.ownerContactId,
-    },
-    {
-      param: 'owner_contact',
-      value: request.ownerContact
-        ? marshalNewContact(request.ownerContact, defaults)
-        : undefined,
-    },
-  ]),
-  ...resolveOneOf<unknown>([
-    {
-      param: 'technical_contact_id',
-      value: request.technicalContactId,
-    },
-    {
-      param: 'technical_contact',
-      value: request.technicalContact
-        ? marshalNewContact(request.technicalContact, defaults)
-        : undefined,
-    },
-  ]),
-})
-
-export const marshalUpdateDNSZoneNameserversRequest = (
-  request: UpdateDNSZoneNameserversRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  ns: request.ns.map(elt => marshalNameserver(elt, defaults)),
 })
 
 export const marshalUpdateDNSZoneRecordsRequest = (

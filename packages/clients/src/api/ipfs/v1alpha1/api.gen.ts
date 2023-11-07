@@ -119,7 +119,7 @@ export class API extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/volumes`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -302,7 +302,7 @@ export class API extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/pins`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -310,7 +310,7 @@ export class API extends ParentAPI {
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['project_id', request.projectId],
-          ['status', request.status ?? 'unknown_status'],
+          ['status', request.status],
           ['volume_id', request.volumeId],
         ),
       },
@@ -394,7 +394,7 @@ export class IpnsAPI extends ParentAPI {
   /**
    * Waits for {@link Name} to be in a final state.
    *
-   * @param request - The request {@link GetNameRequest}
+   * @param request - The request {@link IpnsApiGetNameRequest}
    * @param options - The waiting options
    * @returns A Promise of Name
    */
@@ -435,7 +435,7 @@ export class IpnsAPI extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/names`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [

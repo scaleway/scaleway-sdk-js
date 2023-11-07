@@ -38,16 +38,7 @@ const jsonContentHeaders = {
 /**
  * Fake API.
  *
- * No Auth Service for end-to-end testing. Test is a fake service that aim to
- * manage fake humans. It is used for internal and public end-to-end tests.
- *
- * This service don't use the Scaleway authentication service but a fake one. It
- * allows to use this test service publicly without requiring a Scaleway
- * account.
- *
- * First, you need to register a user with `scw test human register` to get an
- * access-key. Then, you can use other test commands by setting the
- * SCW_SECRET_KEY env variable.
+ * No Auth Service for end-to-end testing.
  */
 export class API extends ParentAPI {
   /**
@@ -79,7 +70,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/test/v1/humans`,
         urlParams: urlParams(
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -226,7 +217,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SmokeHumanRequest}
    * @returns A Promise of Human
    */
-  smokeHuman = (request: Readonly<SmokeHumanRequest> = {}) =>
+  smokeHuman = (request: Readonly<SmokeHumanRequest>) =>
     this.client.fetch<Human>(
       {
         body: '{}',

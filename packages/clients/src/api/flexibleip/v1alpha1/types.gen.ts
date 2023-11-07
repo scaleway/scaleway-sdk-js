@@ -23,23 +23,23 @@ export type MACAddressStatus =
 
 export type MACAddressType = 'unknown_type' | 'vmware' | 'xen' | 'kvm'
 
-/** Attach flexible i ps response. */
-export interface AttachFlexibleIPsResponse {
-  /** Total count of flexible IPs that are being updated. */
-  totalCount: number
-  /** List of flexible IPs in an updating state. */
-  flexibleIps: FlexibleIP[]
+export interface MACAddress {
+  /** ID of the flexible IP. */
+  id: string
+  /** MAC address of the Virtual MAC. */
+  macAddress: string
+  /** Type of virtual MAC. */
+  macType: MACAddressType
+  /** Status of virtual MAC. */
+  status: MACAddressStatus
+  /** Date on which the virtual MAC was last updated. */
+  updatedAt?: Date
+  /** Date on which the virtual MAC was created. */
+  createdAt?: Date
+  /** MAC address IP Availability Zone. */
+  zone: Zone
 }
 
-/** Detach flexible i ps response. */
-export interface DetachFlexibleIPsResponse {
-  /** Total count of flexible IPs that are being detached. */
-  totalCount: number
-  /** List of flexible IPs in a detaching state. */
-  flexibleIps: FlexibleIP[]
-}
-
-/** Flexible ip. */
 export interface FlexibleIP {
   /** ID of the flexible IP. */
   id: string
@@ -56,8 +56,6 @@ export interface FlexibleIP {
   /** Date on which the flexible IP was created. */
   createdAt?: Date
   /**
-   * Flexible IP status.
-   *
    * - Ready : flexible IP is created and ready to be attached to a server or to
    *   be associated with a virtual MAC.
    * - Updating: flexible IP is being attached to a server or a virtual MAC
@@ -80,30 +78,23 @@ export interface FlexibleIP {
   zone: Zone
 }
 
-/** List flexible i ps response. */
-export interface ListFlexibleIPsResponse {
-  /** Total count of matching flexible IPs. */
-  totalCount: number
-  /** List of all flexible IPs. */
-  flexibleIps: FlexibleIP[]
+export type AttachFlexibleIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /**
+   * Multiple IDs can be provided, but note that flexible IPs must belong to the
+   * same MAC group (see details about MAC groups).
+   */
+  fipsIds: string[]
+  /** ID of the server on which to attach the flexible IPs. */
+  serverId: string
 }
 
-/** Mac address. */
-export interface MACAddress {
-  /** ID of the flexible IP. */
-  id: string
-  /** MAC address of the Virtual MAC. */
-  macAddress: string
-  /** Type of virtual MAC. */
-  macType: MACAddressType
-  /** Status of virtual MAC. */
-  status: MACAddressStatus
-  /** Date on which the virtual MAC was last updated. */
-  updatedAt?: Date
-  /** Date on which the virtual MAC was created. */
-  createdAt?: Date
-  /** MAC address IP Availability Zone. */
-  zone: Zone
+export interface AttachFlexibleIPsResponse {
+  /** Total count of flexible IPs that are being updated. */
+  totalCount: number
+  /** List of flexible IPs in an updating state. */
+  flexibleIps: FlexibleIP[]
 }
 
 export type CreateFlexibleIPRequest = {
@@ -121,6 +112,58 @@ export type CreateFlexibleIPRequest = {
   reverse?: string
   /** Defines whether the flexible IP has an IPv6 address. */
   isIpv6: boolean
+}
+
+export type DeleteFlexibleIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the flexible IP to delete. */
+  fipId: string
+}
+
+export type DeleteMACAddrRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /**
+   * If the flexible IP belongs to a MAC group, the MAC will be removed from
+   * both the MAC group and flexible IP.
+   */
+  fipId: string
+}
+
+export type DetachFlexibleIPRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /**
+   * List of flexible IP IDs to detach from a server. Multiple IDs can be
+   * provided. Note that flexible IPs must belong to the same MAC group.
+   */
+  fipsIds: string[]
+}
+
+export interface DetachFlexibleIPsResponse {
+  /** Total count of flexible IPs that are being detached. */
+  totalCount: number
+  /** List of flexible IPs in a detaching state. */
+  flexibleIps: FlexibleIP[]
+}
+
+export type DuplicateMACAddrRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** Note that the flexible IPs need to be attached to the same server. */
+  fipId: string
+  /** Note that flexible IPs need to be attached to the same server. */
+  duplicateFromFipId: string
+}
+
+export type GenerateMACAddrRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the flexible IP for which to generate a virtual MAC. */
+  fipId: string
+  /** TODO. */
+  macType: MACAddressType
 }
 
 export type GetFlexibleIPRequest = {
@@ -160,6 +203,20 @@ export type ListFlexibleIPsRequest = {
   projectId?: string
 }
 
+export interface ListFlexibleIPsResponse {
+  /** Total count of matching flexible IPs. */
+  totalCount: number
+  /** List of all flexible IPs. */
+  flexibleIps: FlexibleIP[]
+}
+
+export type MoveMACAddrRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  fipId: string
+  dstFipId: string
+}
+
 export type UpdateFlexibleIPRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
@@ -171,76 +228,4 @@ export type UpdateFlexibleIPRequest = {
   tags?: string[]
   /** Value of the reverse DNS. */
   reverse?: string
-}
-
-export type DeleteFlexibleIPRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the flexible IP to delete. */
-  fipId: string
-}
-
-export type AttachFlexibleIPRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /**
-   * List of flexible IP IDs to attach to a server. Multiple IDs can be
-   * provided, but note that flexible IPs must belong to the same MAC group (see
-   * details about MAC groups).
-   */
-  fipsIds: string[]
-  /** ID of the server on which to attach the flexible IPs. */
-  serverId: string
-}
-
-export type DetachFlexibleIPRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /**
-   * List of flexible IP IDs to detach from a server. Multiple IDs can be
-   * provided. Note that flexible IPs must belong to the same MAC group.
-   */
-  fipsIds: string[]
-}
-
-export type GenerateMACAddrRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** ID of the flexible IP for which to generate a virtual MAC. */
-  fipId: string
-  /** TODO. */
-  macType: MACAddressType
-}
-
-export type DuplicateMACAddrRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /**
-   * ID of the flexible IP on which to duplicate the virtual MAC. Note that the
-   * flexible IPs need to be attached to the same server.
-   */
-  fipId: string
-  /**
-   * ID of the flexible IP to duplicate the Virtual MAC from. Note that flexible
-   * IPs need to be attached to the same server.
-   */
-  duplicateFromFipId: string
-}
-
-export type MoveMACAddrRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  fipId: string
-  dstFipId: string
-}
-
-export type DeleteMACAddrRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /**
-   * ID of the flexible IP from which to delete the virtual MAC. If the flexible
-   * IP belongs to a MAC group, the MAC will be removed from both the MAC group
-   * and flexible IP.
-   */
-  fipId: string
 }

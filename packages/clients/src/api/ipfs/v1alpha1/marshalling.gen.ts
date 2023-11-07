@@ -28,48 +28,7 @@ import type {
   Volume,
 } from './types.gen'
 
-const unmarshalPinCIDMeta = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PinCIDMeta' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return { id: data.id } as PinCIDMeta
-}
-
-const unmarshalPinCID = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PinCID' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    cid: data.cid,
-    meta: data.meta ? unmarshalPinCIDMeta(data.meta) : undefined,
-    name: data.name,
-    origins: data.origins,
-  } as PinCID
-}
-
-const unmarshalPinInfo = (data: unknown) => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PinInfo' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-    progress: data.progress,
-    size: data.size,
-    statusDetails: data.status_details,
-    url: data.url,
-  } as PinInfo
-}
-
-export const unmarshalName = (data: unknown) => {
+export const unmarshalName = (data: unknown): Name => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Name' failed as data isn't a dictionary.`,
@@ -90,7 +49,50 @@ export const unmarshalName = (data: unknown) => {
   } as Name
 }
 
-export const unmarshalPin = (data: unknown) => {
+const unmarshalPinCIDMeta = (data: unknown): PinCIDMeta => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PinCIDMeta' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+  } as PinCIDMeta
+}
+
+const unmarshalPinCID = (data: unknown): PinCID => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PinCID' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    cid: data.cid,
+    meta: data.meta ? unmarshalPinCIDMeta(data.meta) : undefined,
+    name: data.name,
+    origins: data.origins,
+  } as PinCID
+}
+
+const unmarshalPinInfo = (data: unknown): PinInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PinInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    progress: data.progress,
+    size: data.size,
+    statusDetails: data.status_details,
+    url: data.url,
+  } as PinInfo
+}
+
+export const unmarshalPin = (data: unknown): Pin => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Pin' failed as data isn't a dictionary.`,
@@ -107,7 +109,7 @@ export const unmarshalPin = (data: unknown) => {
   } as Pin
 }
 
-export const unmarshalVolume = (data: unknown) => {
+export const unmarshalVolume = (data: unknown): Volume => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Volume' failed as data isn't a dictionary.`,
@@ -127,7 +129,9 @@ export const unmarshalVolume = (data: unknown) => {
   } as Volume
 }
 
-export const unmarshalExportKeyNameResponse = (data: unknown) => {
+export const unmarshalExportKeyNameResponse = (
+  data: unknown,
+): ExportKeyNameResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ExportKeyNameResponse' failed as data isn't a dictionary.`,
@@ -144,7 +148,9 @@ export const unmarshalExportKeyNameResponse = (data: unknown) => {
   } as ExportKeyNameResponse
 }
 
-export const unmarshalListNamesResponse = (data: unknown) => {
+export const unmarshalListNamesResponse = (
+  data: unknown,
+): ListNamesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListNamesResponse' failed as data isn't a dictionary.`,
@@ -157,7 +163,7 @@ export const unmarshalListNamesResponse = (data: unknown) => {
   } as ListNamesResponse
 }
 
-export const unmarshalListPinsResponse = (data: unknown) => {
+export const unmarshalListPinsResponse = (data: unknown): ListPinsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListPinsResponse' failed as data isn't a dictionary.`,
@@ -170,7 +176,9 @@ export const unmarshalListPinsResponse = (data: unknown) => {
   } as ListPinsResponse
 }
 
-export const unmarshalListVolumesResponse = (data: unknown) => {
+export const unmarshalListVolumesResponse = (
+  data: unknown,
+): ListVolumesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListVolumesResponse' failed as data isn't a dictionary.`,
@@ -183,7 +191,9 @@ export const unmarshalListVolumesResponse = (data: unknown) => {
   } as ListVolumesResponse
 }
 
-export const unmarshalReplacePinResponse = (data: unknown) => {
+export const unmarshalReplacePinResponse = (
+  data: unknown,
+): ReplacePinResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ReplacePinResponse' failed as data isn't a dictionary.`,

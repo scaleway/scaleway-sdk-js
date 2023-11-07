@@ -125,7 +125,7 @@ export class API extends ParentAPI {
         )}/gateways`,
         urlParams: urlParams(
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -134,7 +134,7 @@ export class API extends ParentAPI {
           ],
           ['private_network_id', request.privateNetworkId],
           ['project_id', request.projectId],
-          ['status', request.status ?? 'unknown'],
+          ['status', request.status],
           ['tags', request.tags],
           ['type', request.type],
         ),
@@ -297,14 +297,14 @@ export class API extends ParentAPI {
           ['dhcp_id', request.dhcpId],
           ['enable_masquerade', request.enableMasquerade],
           ['gateway_id', request.gatewayId],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['private_network_id', request.privateNetworkId],
-          ['status', request.status ?? 'unknown'],
+          ['status', request.status],
         ),
       },
       unmarshalListGatewayNetworksResponse,
@@ -463,7 +463,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['address', request.address],
           ['has_address', request.hasAddress],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -598,13 +598,13 @@ export class API extends ParentAPI {
           ['hostname', request.hostname],
           ['ip_address', request.ipAddress],
           ['mac_address', request.macAddress],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          ['type', request.type ?? 'unknown'],
+          ['type', request.type],
         ),
       },
       unmarshalListDHCPEntriesResponse,
@@ -750,14 +750,14 @@ export class API extends ParentAPI {
         )}/pat-rules`,
         urlParams: urlParams(
           ['gateway_id', request.gatewayId],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['private_ip', request.privateIp],
-          ['protocol', request.protocol ?? 'unknown'],
+          ['protocol', request.protocol],
         ),
       },
       unmarshalListPATRulesResponse,
@@ -913,7 +913,7 @@ export class API extends ParentAPI {
         )}/ips`,
         urlParams: urlParams(
           ['is_free', request.isFree],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [

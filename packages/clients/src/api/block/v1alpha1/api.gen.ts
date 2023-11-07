@@ -51,8 +51,7 @@ const jsonContentHeaders = {
 /**
  * Scaleway Block Storage API.
  *
- * This API allows you to use and manage your Block Storage volumes. Scaleway
- * Block Storage API.
+ * This API allows you to use and manage your Block Storage volumes.
  */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
@@ -99,7 +98,7 @@ export class API extends ParentAPI {
         )}/volumes`,
         urlParams: urlParams(
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
@@ -241,7 +240,7 @@ export class API extends ParentAPI {
         )}/snapshots`,
         urlParams: urlParams(
           ['name', request.name],
-          ['order_by', request.orderBy ?? 'created_at_asc'],
+          ['order_by', request.orderBy],
           ['page', request.page],
           [
             'page_size',
