@@ -1273,13 +1273,17 @@ export type RegistrarApiUpdateDomainRequest = {
    */
   technicalContact?: NewContact
   /**
-   * One-of ('ownerContactInfo'): at most one of 'ownerContactId',
-   * 'ownerContact' could be set.
+   * @deprecated
+   *
+   *   One-of ('ownerContactInfo'): at most one of 'ownerContactId',
+   *   'ownerContact' could be set.
    */
   ownerContactId?: string
   /**
-   * One-of ('ownerContactInfo'): at most one of 'ownerContactId',
-   * 'ownerContact' could be set.
+   * @deprecated
+   *
+   *   One-of ('ownerContactInfo'): at most one of 'ownerContactId',
+   *   'ownerContact' could be set.
    */
   ownerContact?: NewContact
   /**
