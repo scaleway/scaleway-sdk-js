@@ -18,7 +18,7 @@ export type ListJobDefinitionsRequestOrderBy =
 export type ListJobRunsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export interface JobDefinition {
-  jobDefinitionId: string
+  id: string
   name: string
   createdAt?: Date
   updatedAt?: Date
@@ -38,7 +38,7 @@ export interface JobDefinition {
 }
 
 export interface JobRun {
-  jobRunId: string
+  id: string
   jobDefinitionId: string
   state: JobRunState
   createdAt?: Date
@@ -77,7 +77,7 @@ export type DeleteJobDefinitionRequest = {
    * config.
    */
   region?: Region
-  jobDefinitionId: string
+  id: string
 }
 
 export type GetJobDefinitionRequest = {
@@ -86,7 +86,7 @@ export type GetJobDefinitionRequest = {
    * config.
    */
   region?: Region
-  jobDefinitionId: string
+  id: string
 }
 
 export type GetJobRunRequest = {
@@ -95,7 +95,7 @@ export type GetJobRunRequest = {
    * config.
    */
   region?: Region
-  jobRunId: string
+  id: string
 }
 
 export type GetServiceInfoRequest = {
@@ -132,7 +132,7 @@ export type ListJobRunsRequest = {
   page?: number
   pageSize?: number
   orderBy?: ListJobRunsRequestOrderBy
-  jobDefinitionId?: string
+  id?: string
   projectId?: string
 }
 
@@ -147,7 +147,7 @@ export type StartJobDefinitionRequest = {
    * config.
    */
   region?: Region
-  jobDefinitionId: string
+  id: string
 }
 
 export type StopJobRunRequest = {
@@ -156,7 +156,7 @@ export type StopJobRunRequest = {
    * config.
    */
   region?: Region
-  jobRunId: string
+  id: string
 }
 
 export type UpdateJobDefinitionRequest = {
@@ -165,7 +165,7 @@ export type UpdateJobDefinitionRequest = {
    * config.
    */
   region?: Region
-  jobDefinitionId: string
+  id: string
   name?: string
   cpuLimit?: number
   memoryLimit?: number
