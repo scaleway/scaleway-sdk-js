@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.0.0...@scaleway/sdk@2.1.0) (2023-11-08)
+
+### Features
+
+- **domain:** deprecate owner_contact_info in updateDomain ([#979](https://github.com/scaleway/scaleway-sdk-js/issues/979)) ([d87caa7](https://github.com/scaleway/scaleway-sdk-js/commit/d87caa76337694e3f8162e2cc092e22ecf17672a))
+
 ## [2.0.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@1.42.0...@scaleway/sdk@2.0.0) (2023-11-07)
 
 ### Features
