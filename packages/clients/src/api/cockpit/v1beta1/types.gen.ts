@@ -209,6 +209,8 @@ export type CreateDatasourceRequest = {
   name: string
   /** Datasource type. */
   type?: DatasourceType
+  /** Specifies that the returned output is the default datasource per type. */
+  isDefault: boolean
 }
 
 /** Request to create a Grafana user. */
