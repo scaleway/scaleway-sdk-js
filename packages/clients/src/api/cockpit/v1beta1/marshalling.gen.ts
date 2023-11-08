@@ -380,6 +380,7 @@ export const marshalCreateDatasourceRequest = (
   request: CreateDatasourceRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  is_default: request.isDefault,
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
   type: request.type,
