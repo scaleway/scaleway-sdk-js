@@ -8,12 +8,14 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  ControlPanel,
   CreateHostingRequest,
   DnsRecord,
   DnsRecords,
   Hosting,
   HostingCpanelUrls,
   HostingOption,
+  ListControlPanelsResponse,
   ListHostingsResponse,
   ListOffersResponse,
   Nameserver,
@@ -56,6 +58,7 @@ export const unmarshalHosting = (data: unknown): Hosting => {
   }
 
   return {
+    controlPanelName: data.control_panel_name,
     cpanelUrls: data.cpanel_urls
       ? unmarshalHostingCpanelUrls(data.cpanel_urls)
       : undefined,
@@ -124,6 +127,38 @@ export const unmarshalDnsRecords = (data: unknown): DnsRecords => {
   } as DnsRecords
 }
 
+const unmarshalControlPanel = (data: unknown): ControlPanel => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ControlPanel' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    available: data.available,
+    logoUrl: data.logo_url,
+    name: data.name,
+  } as ControlPanel
+}
+
+export const unmarshalListControlPanelsResponse = (
+  data: unknown,
+): ListControlPanelsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListControlPanelsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    controlPanels: unmarshalArrayOfObject(
+      data.control_panels,
+      unmarshalControlPanel,
+    ),
+    totalCount: data.total_count,
+  } as ListControlPanelsResponse
+}
+
 export const unmarshalListHostingsResponse = (
   data: unknown,
 ): ListHostingsResponse => {
@@ -170,6 +205,7 @@ const unmarshalOffer = (data: unknown): Offer => {
   return {
     available: data.available,
     billingOperationPath: data.billing_operation_path,
+    controlPanelName: data.control_panel_name,
     endOfLife: data.end_of_life,
     id: data.id,
     price: data.price ? unmarshalMoney(data.price) : undefined,

@@ -97,6 +97,15 @@ export interface Nameserver {
   isDefault: boolean
 }
 
+export interface ControlPanel {
+  /** Control panel name. */
+  name: string
+  /** Define if the control panel type is available to order. */
+  available: boolean
+  /** URL of this control panel's logo. */
+  logoUrl: string
+}
+
 export interface Hosting {
   /** ID of the Web Hosting plan. */
   id: string
@@ -132,6 +141,8 @@ export interface Hosting {
   username: string
   /** Indicates if the hosting offer has reached its end of life. */
   offerEndOfLife: boolean
+  /** Name of the control panel. */
+  controlPanelName: string
   /** Region where the Web Hosting plan is hosted. */
   region: Region
 }
@@ -154,6 +165,8 @@ export interface Offer {
   quotaWarnings: OfferQuotaWarning[]
   /** Indicates if the offer has reached its end of life. */
   endOfLife: boolean
+  /** Name of the control panel. */
+  controlPanelName: string
 }
 
 export type CreateHostingRequest = {
@@ -218,6 +231,31 @@ export type GetHostingRequest = {
   hostingId: string
 }
 
+export type ListControlPanelsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /**
+   * Page number to return, from the paginated results (must be a positive
+   * integer).
+   */
+  page?: number
+  /**
+   * Number of control panels to return (must be a positive integer lower or
+   * equal to 100).
+   */
+  pageSize?: number
+}
+
+export interface ListControlPanelsResponse {
+  /** Number of control panels returned. */
+  totalCount: number
+  /** List of control panels. */
+  controlPanels: ControlPanel[]
+}
+
 export type ListHostingsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -261,6 +299,11 @@ export type ListHostingsRequest = {
    * Organization will be returned.
    */
   organizationId?: string
+  /**
+   * Name of the control panel to filter for, only Web Hosting plans from this
+   * control panel will be returned.
+   */
+  controlPanels?: string[]
 }
 
 export interface ListHostingsResponse {
