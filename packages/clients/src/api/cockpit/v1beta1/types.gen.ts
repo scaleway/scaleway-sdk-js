@@ -119,6 +119,11 @@ export interface Datasource {
   url: string
   /** Datasource type. */
   type: DatasourceType
+  /**
+   * Specifies that the datasource receives data from Scaleway products and is
+   * managed by Scaleway.
+   */
+  isManagedByScaleway: boolean
 }
 
 /** Grafana dashboard. */
@@ -336,6 +341,8 @@ export type ListDatasourcesRequest = {
   projectId?: string
   /** Filter by datasource types. */
   types?: DatasourceType[]
+  /** Filter by managed datasources. */
+  isManagedByScaleway?: boolean
 }
 
 export interface ListDatasourcesResponse {

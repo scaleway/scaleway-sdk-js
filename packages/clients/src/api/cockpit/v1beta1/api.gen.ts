@@ -240,6 +240,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/cockpit/v1beta1/datasources`,
         urlParams: urlParams(
+          ['is_managed_by_scaleway', request.isManagedByScaleway],
           ['order_by', request.orderBy],
           ['page', request.page],
           [
