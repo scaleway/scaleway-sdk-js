@@ -744,6 +744,8 @@ export class API extends ParentAPI {
     )
 
   /**
+   * Create a JWT token. Deprecated in favor of CreateToken.
+   *
    * @deprecated
    * @param request - The request {@link IssueJWTRequest}
    * @returns A Promise of Token
