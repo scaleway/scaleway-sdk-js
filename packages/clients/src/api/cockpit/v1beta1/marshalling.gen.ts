@@ -77,6 +77,7 @@ export const unmarshalDatasource = (data: unknown): Datasource => {
 
   return {
     id: data.id,
+    isManagedByScaleway: data.is_managed_by_scaleway,
     name: data.name,
     projectId: data.project_id,
     type: data.type,
