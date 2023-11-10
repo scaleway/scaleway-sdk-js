@@ -14,6 +14,7 @@ import {
   marshalUpdateHostingRequest,
   unmarshalDnsRecords,
   unmarshalHosting,
+  unmarshalListControlPanelsResponse,
   unmarshalListHostingsResponse,
   unmarshalListOffersResponse,
 } from './marshalling.gen'
@@ -24,6 +25,8 @@ import type {
   GetDomainDnsRecordsRequest,
   GetHostingRequest,
   Hosting,
+  ListControlPanelsRequest,
+  ListControlPanelsResponse,
   ListHostingsRequest,
   ListHostingsResponse,
   ListOffersRequest,
@@ -39,7 +42,7 @@ const jsonContentHeaders = {
 /** Web Hosting API. */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par']
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams']
 
   /**
    * Order a Web Hosting plan. Order a Web Hosting plan, specifying the offer
@@ -75,6 +78,7 @@ export class API extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/hostings`,
         urlParams: urlParams(
+          ['control_panels', request.controlPanels],
           ['domain', request.domain],
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
@@ -257,4 +261,35 @@ export class API extends ParentAPI {
       },
       unmarshalListOffersResponse,
     )
+
+  protected pageOfListControlPanels = (
+    request: Readonly<ListControlPanelsRequest> = {},
+  ) =>
+    this.client.fetch<ListControlPanelsResponse>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1alpha1/regions/${validatePathParam(
+          'region',
+          request.region ?? this.client.settings.defaultRegion,
+        )}/control-panels`,
+        urlParams: urlParams(
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListControlPanelsResponse,
+    )
+
+  /**
+   * List all control panels type. List the control panels type: cpanel or
+   * plesk.
+   *
+   * @param request - The request {@link ListControlPanelsRequest}
+   * @returns A Promise of ListControlPanelsResponse
+   */
+  listControlPanels = (request: Readonly<ListControlPanelsRequest> = {}) =>
+    enrichForPagination('controlPanels', this.pageOfListControlPanels, request)
 }

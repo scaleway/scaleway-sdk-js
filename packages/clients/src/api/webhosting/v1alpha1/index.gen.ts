@@ -3,6 +3,7 @@
 export { API } from './api.gen'
 export * from './content.gen'
 export type {
+  ControlPanel,
   CreateHostingRequest,
   DeleteHostingRequest,
   DnsRecord,
@@ -17,6 +18,8 @@ export type {
   HostingDnsStatus,
   HostingOption,
   HostingStatus,
+  ListControlPanelsRequest,
+  ListControlPanelsResponse,
   ListHostingsRequest,
   ListHostingsRequestOrderBy,
   ListHostingsResponse,
