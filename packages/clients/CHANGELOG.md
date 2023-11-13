@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.1.0...@scaleway/sdk@2.2.0) (2023-11-13)
+
+### Features
+
+- **cockpit:** add default notion for datasources ([#988](https://github.com/scaleway/scaleway-sdk-js/issues/988)) ([b6360b0](https://github.com/scaleway/scaleway-sdk-js/commit/b6360b069d44bc778177664a9e84ccde77277df5))
+- **cockpit:** add is_product filter to list datasource ([#992](https://github.com/scaleway/scaleway-sdk-js/issues/992)) ([9c86af7](https://github.com/scaleway/scaleway-sdk-js/commit/9c86af7e2f813cdee56444548e49e465bee944d5))
+- **ipfs:** add documentation about replacePin ([#993](https://github.com/scaleway/scaleway-sdk-js/issues/993)) ([306a0d2](https://github.com/scaleway/scaleway-sdk-js/commit/306a0d2a4ded006c3ce36244a34e3a6393e84154))
+- **webhosting:** add control panel support in webhosting ([#995](https://github.com/scaleway/scaleway-sdk-js/issues/995)) ([cef3269](https://github.com/scaleway/scaleway-sdk-js/commit/cef32694813980d25e4c677b0a6a87f00f13a96e))
+
 ## [2.1.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.0.0...@scaleway/sdk@2.1.0) (2023-11-08)
 
 ### Features
