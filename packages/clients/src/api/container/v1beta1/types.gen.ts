@@ -107,13 +107,16 @@ export interface TriggerMnqNatsClientConfig {
   mnqNamespaceId?: string
   /** Name of the NATS subject the trigger listens to. */
   subject: string
-  /** ID of the M&Q NATS account. */
+  /** ID of the Messaging and Queuing NATS account. */
   mnqNatsAccountId: string
-  /** ID of the M&Q project. */
+  /** ID of the Messaging and Queuing project. */
   mnqProjectId: string
-  /** Region of the M&Q project. */
+  /** Currently, only the `fr-par` region is available. */
   mnqRegion: string
-  /** ID of the M&Q credentials used to subscribe to the NATS subject. */
+  /**
+   * ID of the Messaging and Queuing credentials used to subscribe to the NATS
+   * subject.
+   */
   mnqCredentialId?: string
 }
 
@@ -122,11 +125,14 @@ export interface TriggerMnqSqsClientConfig {
   mnqNamespaceId?: string
   /** Name of the SQS queue the trigger listens to. */
   queue: string
-  /** ID of the M&Q project. */
+  /** ID of the Messaging and Queuing project. */
   mnqProjectId: string
-  /** Region in which the M&Q project is activated. */
+  /** Currently, only the `fr-par` region is available. */
   mnqRegion: string
-  /** ID of the M&Q credentials used to read from the SQS queue. */
+  /**
+   * ID of the Messaging and Queuing credentials used to read from the SQS
+   * queue.
+   */
   mnqCredentialId?: string
 }
 
@@ -147,11 +153,11 @@ export interface CreateTriggerRequestMnqNatsClientConfig {
   mnqNamespaceId?: string
   /** Name of the NATS subject the trigger should listen to. */
   subject: string
-  /** ID of the M&Q NATS account. */
+  /** ID of the Messaging and Queuing NATS account. */
   mnqNatsAccountId: string
-  /** ID of the M&Q project. */
+  /** ID of the Messaging and Queuing project. */
   mnqProjectId: string
-  /** Region of the M&Q project. */
+  /** Currently, only the `fr-par` region is available. */
   mnqRegion: string
 }
 
@@ -162,7 +168,7 @@ export interface CreateTriggerRequestMnqSqsClientConfig {
   queue: string
   /** You must have activated SQS on this project. */
   mnqProjectId: string
-  /** Region in which the M&Q project is activated. */
+  /** Currently, only the `fr-par` region is available. */
   mnqRegion: string
 }
 
@@ -339,14 +345,14 @@ export interface Trigger {
   /** Error message of the trigger. */
   errorMessage?: string
   /**
-   * Configuration for a Scaleway M&Q SQS queue.
+   * Configuration for a Scaleway Messaging and Queuing SQS queue.
    *
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig',
    * 'sqsConfig' could be set.
    */
   scwSqsConfig?: TriggerMnqSqsClientConfig
   /**
-   * Configuration for a Scaleway M&Q NATS subject.
+   * Configuration for a Scaleway Messaging and Queuing NATS subject.
    *
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig',
    * 'sqsConfig' could be set.
@@ -498,14 +504,14 @@ export type CreateTriggerRequest = {
   /** Description of the trigger. */
   description?: string
   /**
-   * Configuration for a Scaleway M&Q SQS queue.
+   * Configuration for a Scaleway Messaging and Queuing SQS queue.
    *
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig',
    * 'sqsConfig' could be set.
    */
   scwSqsConfig?: CreateTriggerRequestMnqSqsClientConfig
   /**
-   * Configuration for a Scaleway M&Q NATS subject.
+   * Configuration for a Scaleway Messaging and Queuing NATS subject.
    *
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig',
    * 'sqsConfig' could be set.
