@@ -1058,10 +1058,10 @@ export type CreateVolumeRequest = {
    */
   size?: number
   /**
-   * ID of the volume on which this volume will be based.
+   * @deprecated ID of the volume on which this volume will be based.
    *
-   * One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could
-   * be set.
+   *   One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could
+   *   be set.
    */
   baseVolume?: string
   /**
