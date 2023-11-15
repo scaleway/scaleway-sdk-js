@@ -526,13 +526,18 @@ export type UpdateClusterRequest = {
 export type UpdateEndpointRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
+  /** UUID of the endpoint you want to get. */
   endpointId: string
   /**
+   * Private Network details.
+   *
    * One-of ('endpointType'): at most one of 'privateNetwork', 'publicNetwork'
    * could be set.
    */
   privateNetwork?: EndpointSpecPrivateNetworkSpec
   /**
+   * Public network details.
+   *
    * One-of ('endpointType'): at most one of 'privateNetwork', 'publicNetwork'
    * could be set.
    */
