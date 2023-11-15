@@ -430,6 +430,13 @@ export class API extends ParentAPI {
    * metadata of a secret's given version specified by the `region`,
    * `secret_name`, `revision` and `project_id` parameters.
    *
+   * This method is deprecated.
+   *
+   * Scaleway recommends that you use the `ListSecrets` request with the `name`
+   * filter to specify the secret version desired, then use the
+   * `GetSecretVersion` request.
+   *
+   * @deprecated
    * @param request - The request {@link GetSecretVersionByNameRequest}
    * @returns A Promise of SecretVersion
    */
@@ -539,6 +546,13 @@ export class API extends ParentAPI {
    * given secret's versions specified by the `secret_name`,`region` and
    * `project_id` parameters.
    *
+   * This method is deprecated.
+   *
+   * Scaleway recommends that you use the `ListSecrets` request with the `name`
+   * filter to specify the secret version desired, then use the
+   * `ListSecretVersions` request.
+   *
+   * @deprecated
    * @param request - The request {@link ListSecretVersionsByNameRequest}
    * @returns A Promise of ListSecretVersionsResponse
    */
@@ -627,6 +641,13 @@ export class API extends ParentAPI {
    * a secret's version specified by the `region`, `secret_name`, `revision` and
    * `project_id` parameters.
    *
+   * This method is deprecated.
+   *
+   * Scaleway recommends that you use the `ListSecrets` request with the `name`
+   * filter to specify the secret version desired, then use the
+   * `AccessSecretVersion` request.
+   *
+   * @deprecated
    * @param request - The request {@link AccessSecretVersionByNameRequest}
    * @returns A Promise of AccessSecretVersionResponse
    */
