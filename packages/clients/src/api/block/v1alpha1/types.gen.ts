@@ -174,6 +174,8 @@ export interface Volume {
   zone: Zone
   /** Specifications of the volume. */
   specs?: VolumeSpecifications
+  /** Last time the volume was detached. */
+  lastDetachedAt?: Date
 }
 
 export type CreateSnapshotRequest = {
