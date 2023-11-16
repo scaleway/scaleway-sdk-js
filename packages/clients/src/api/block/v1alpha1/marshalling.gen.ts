@@ -68,6 +68,7 @@ export const unmarshalVolume = (data: unknown): Volume => {
   return {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
+    lastDetachedAt: unmarshalDate(data.last_detached_at),
     name: data.name,
     parentSnapshotId: data.parent_snapshot_id,
     projectId: data.project_id,
