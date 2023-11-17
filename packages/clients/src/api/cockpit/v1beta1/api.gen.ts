@@ -20,7 +20,6 @@ import {
   marshalDeleteGrafanaUserRequest,
   marshalDisableManagedAlertsRequest,
   marshalEnableManagedAlertsRequest,
-  marshalResetCockpitGrafanaRequest,
   marshalResetGrafanaUserPasswordRequest,
   marshalSelectPlanRequest,
   marshalTriggerTestAlertRequest,
@@ -73,7 +72,6 @@ import type {
   ListPlansResponse,
   ListTokensRequest,
   ListTokensResponse,
-  ResetCockpitGrafanaRequest,
   ResetGrafanaUserPasswordRequest,
   SelectPlanRequest,
   SelectPlanResponse,
@@ -190,25 +188,6 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/cockpit/v1beta1/deactivate`,
-      },
-      unmarshalCockpit,
-    )
-
-  /**
-   * Reset your Cockpit's Grafana associated with the specified Project ID.
-   *
-   * @param request - The request {@link ResetCockpitGrafanaRequest}
-   * @returns A Promise of Cockpit
-   */
-  resetCockpitGrafana = (request: Readonly<ResetCockpitGrafanaRequest> = {}) =>
-    this.client.fetch<Cockpit>(
-      {
-        body: JSON.stringify(
-          marshalResetCockpitGrafanaRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/cockpit/v1beta1/reset-grafana`,
       },
       unmarshalCockpit,
     )

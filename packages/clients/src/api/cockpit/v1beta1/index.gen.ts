@@ -47,7 +47,6 @@ export type {
   ListTokensResponse,
   Plan,
   PlanName,
-  ResetCockpitGrafanaRequest,
   ResetGrafanaUserPasswordRequest,
   SelectPlanRequest,
   SelectPlanResponse,

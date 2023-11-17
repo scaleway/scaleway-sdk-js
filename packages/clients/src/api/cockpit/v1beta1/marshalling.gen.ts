@@ -35,7 +35,6 @@ import type {
   ListPlansResponse,
   ListTokensResponse,
   Plan,
-  ResetCockpitGrafanaRequest,
   ResetGrafanaUserPasswordRequest,
   SelectPlanRequest,
   SelectPlanResponse,
@@ -457,13 +456,6 @@ export const marshalDisableManagedAlertsRequest = (
 
 export const marshalEnableManagedAlertsRequest = (
   request: EnableManagedAlertsRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  project_id: request.projectId ?? defaults.defaultProjectId,
-})
-
-export const marshalResetCockpitGrafanaRequest = (
-  request: ResetCockpitGrafanaRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   project_id: request.projectId ?? defaults.defaultProjectId,
