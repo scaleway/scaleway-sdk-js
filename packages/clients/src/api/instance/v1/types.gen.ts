@@ -4,6 +4,12 @@ import type { Zone } from '../../../bridge'
 
 export type Arch = 'x86_64' | 'arm' | 'arm64'
 
+export type AttachServerVolumeRequestVolumeType =
+  | 'unknown_volume_type'
+  | 'l_ssd'
+  | 'b_ssd'
+  | 'sbs_volume'
+
 export type BootType = 'local' | 'bootscript' | 'rescue'
 
 export type ImageState = 'available' | 'creating' | 'error'
@@ -369,6 +375,73 @@ export interface VolumeTypeConstraints {
   max: number
 }
 
+export interface Server {
+  /** Instance unique ID. */
+  id: string
+  /** Instance name. */
+  name: string
+  /** Instance Organization ID. */
+  organization: string
+  /** Instance Project ID. */
+  project: string
+  /** List of allowed actions on the Instance. */
+  allowedActions: ServerAction[]
+  /** Tags associated with the Instance. */
+  tags: string[]
+  /** Instance commercial type (eg. GP1-M). */
+  commercialType: string
+  /** Instance creation date. */
+  creationDate?: Date
+  /** True if a dynamic IPv4 is required. */
+  dynamicIpRequired: boolean
+  /** True to configure the instance so it uses the new routed IP mode. */
+  routedIpEnabled: boolean
+  /** True if IPv6 is enabled. */
+  enableIpv6: boolean
+  /** Instance host name. */
+  hostname: string
+  /** Information about the Instance image. */
+  image?: Image
+  /** Defines whether the Instance protection option is activated. */
+  protected: boolean
+  /** Private IP address of the Instance. */
+  privateIp?: string
+  /** Information about the public IP. */
+  publicIp?: ServerIp
+  /** Information about all the public IPs attached to the server. */
+  publicIps: ServerIp[]
+  /** The server's MAC address. */
+  macAddress: string
+  /** Instance modification date. */
+  modificationDate?: Date
+  /** Instance state. */
+  state: ServerState
+  /** Instance location. */
+  location?: ServerLocation
+  /** Instance IPv6 address. */
+  ipv6?: ServerIpv6
+  /** @deprecated Instance bootscript. */
+  bootscript?: Bootscript
+  /** Instance boot type. */
+  bootType: BootType
+  /** Instance volumes. */
+  volumes: Record<string, VolumeServer>
+  /** Instance security group. */
+  securityGroup?: SecurityGroupSummary
+  /** Instance planned maintenance. */
+  maintenances: ServerMaintenance[]
+  /** Detailed information about the Instance state. */
+  stateDetail: string
+  /** Instance architecture. */
+  arch: Arch
+  /** Instance placement group. */
+  placementGroup?: PlacementGroup
+  /** Instance private NICs. */
+  privateNics: PrivateNIC[]
+  /** Zone in which the Instance is located. */
+  zone: Zone
+}
+
 export interface VolumeTemplate {
   /** UUID of the volume. */
   id: string
@@ -483,73 +556,6 @@ export interface VolumeServerTemplate {
   organization?: string
   /** Project ID of the volume. */
   project?: string
-}
-
-export interface Server {
-  /** Instance unique ID. */
-  id: string
-  /** Instance name. */
-  name: string
-  /** Instance Organization ID. */
-  organization: string
-  /** Instance Project ID. */
-  project: string
-  /** List of allowed actions on the Instance. */
-  allowedActions: ServerAction[]
-  /** Tags associated with the Instance. */
-  tags: string[]
-  /** Instance commercial type (eg. GP1-M). */
-  commercialType: string
-  /** Instance creation date. */
-  creationDate?: Date
-  /** True if a dynamic IPv4 is required. */
-  dynamicIpRequired: boolean
-  /** True to configure the instance so it uses the new routed IP mode. */
-  routedIpEnabled: boolean
-  /** True if IPv6 is enabled. */
-  enableIpv6: boolean
-  /** Instance host name. */
-  hostname: string
-  /** Information about the Instance image. */
-  image?: Image
-  /** Defines whether the Instance protection option is activated. */
-  protected: boolean
-  /** Private IP address of the Instance. */
-  privateIp?: string
-  /** Information about the public IP. */
-  publicIp?: ServerIp
-  /** Information about all the public IPs attached to the server. */
-  publicIps: ServerIp[]
-  /** The server's MAC address. */
-  macAddress: string
-  /** Instance modification date. */
-  modificationDate?: Date
-  /** Instance state. */
-  state: ServerState
-  /** Instance location. */
-  location?: ServerLocation
-  /** Instance IPv6 address. */
-  ipv6?: ServerIpv6
-  /** @deprecated Instance bootscript. */
-  bootscript?: Bootscript
-  /** Instance boot type. */
-  bootType: BootType
-  /** Instance volumes. */
-  volumes: Record<string, VolumeServer>
-  /** Instance security group. */
-  securityGroup?: SecurityGroupSummary
-  /** Instance planned maintenance. */
-  maintenances: ServerMaintenance[]
-  /** Detailed information about the Instance state. */
-  stateDetail: string
-  /** Instance architecture. */
-  arch: Arch
-  /** Instance placement group. */
-  placementGroup?: PlacementGroup
-  /** Instance private NICs. */
-  privateNics: PrivateNIC[]
-  /** Zone in which the Instance is located. */
-  zone: Zone
 }
 
 export interface Snapshot {
@@ -740,6 +746,23 @@ export type ApplyBlockMigrationRequest = {
    * the volume and/or snapshots specified in said plan should be migrated.
    */
   validationKey: string
+}
+
+export type AttachServerVolumeRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** UUID of the Instance. */
+  serverId: string
+  /** UUID of the Volume to attach. */
+  volumeId: string
+  /** Type of the volume to attach. */
+  volumeType?: AttachServerVolumeRequestVolumeType
+  /** Force the Instance to boot on this volume. */
+  boot?: boolean
+}
+
+export interface AttachServerVolumeResponse {
+  server?: Server
 }
 
 export type CreateImageRequest = {
@@ -1148,6 +1171,19 @@ export type DeleteVolumeRequest = {
   zone?: Zone
   /** UUID of the volume you want to delete. */
   volumeId: string
+}
+
+export type DetachServerVolumeRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** UUID of the Instance. */
+  serverId: string
+  /** UUID of the Volume to detach. */
+  volumeId: string
+}
+
+export interface DetachServerVolumeResponse {
+  server?: Server
 }
 
 export type ExportSnapshotRequest = {
