@@ -5,6 +5,9 @@ export * from './content.gen'
 export type {
   ApplyBlockMigrationRequest,
   Arch,
+  AttachServerVolumeRequest,
+  AttachServerVolumeRequestVolumeType,
+  AttachServerVolumeResponse,
   BootType,
   Bootscript,
   CreateImageRequest,
@@ -36,6 +39,8 @@ export type {
   DeleteServerUserDataRequest,
   DeleteSnapshotRequest,
   DeleteVolumeRequest,
+  DetachServerVolumeRequest,
+  DetachServerVolumeResponse,
   ExportSnapshotRequest,
   ExportSnapshotResponse,
   GetBootscriptRequest,

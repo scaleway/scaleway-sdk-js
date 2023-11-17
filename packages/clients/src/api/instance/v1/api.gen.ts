@@ -9,6 +9,7 @@ import {
 import type { Zone } from '../../../bridge'
 import {
   marshalApplyBlockMigrationRequest,
+  marshalAttachServerVolumeRequest,
   marshalCreateImageRequest,
   marshalCreateIpRequest,
   marshalCreatePlacementGroupRequest,
@@ -18,6 +19,7 @@ import {
   marshalCreateServerRequest,
   marshalCreateSnapshotRequest,
   marshalCreateVolumeRequest,
+  marshalDetachServerVolumeRequest,
   marshalExportSnapshotRequest,
   marshalPlanBlockMigrationRequest,
   marshalServerActionRequest,
@@ -35,6 +37,7 @@ import {
   marshalUpdatePrivateNICRequest,
   marshalUpdateServerRequest,
   marshalUpdateVolumeRequest,
+  unmarshalAttachServerVolumeResponse,
   unmarshalCreateImageResponse,
   unmarshalCreateIpResponse,
   unmarshalCreatePlacementGroupResponse,
@@ -44,6 +47,7 @@ import {
   unmarshalCreateServerResponse,
   unmarshalCreateSnapshotResponse,
   unmarshalCreateVolumeResponse,
+  unmarshalDetachServerVolumeResponse,
   unmarshalExportSnapshotResponse,
   unmarshalGetBootscriptResponse,
   unmarshalGetDashboardResponse,
@@ -91,6 +95,8 @@ import {
 } from './marshalling.gen'
 import type {
   ApplyBlockMigrationRequest,
+  AttachServerVolumeRequest,
+  AttachServerVolumeResponse,
   CreateImageRequest,
   CreateImageResponse,
   CreateIpRequest,
@@ -119,6 +125,8 @@ import type {
   DeleteServerUserDataRequest,
   DeleteSnapshotRequest,
   DeleteVolumeRequest,
+  DetachServerVolumeRequest,
+  DetachServerVolumeResponse,
   ExportSnapshotRequest,
   ExportSnapshotResponse,
   GetBootscriptRequest,
@@ -525,6 +533,56 @@ export class API extends ParentAPI {
         request.serverId,
       )}/user_data/${validatePathParam('key', request.key)}`,
     })
+
+  /**
+   * Attach a volume to a server.
+   *
+   * @param request - The request {@link AttachServerVolumeRequest}
+   * @returns A Promise of AttachServerVolumeResponse
+   */
+  attachServerVolume = (request: Readonly<AttachServerVolumeRequest>) =>
+    this.client.fetch<AttachServerVolumeResponse>(
+      {
+        body: JSON.stringify(
+          marshalAttachServerVolumeRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/instance/v1/zones/${validatePathParam(
+          'zone',
+          request.zone ?? this.client.settings.defaultZone,
+        )}/servers/${validatePathParam(
+          'serverId',
+          request.serverId,
+        )}/attach-volume`,
+      },
+      unmarshalAttachServerVolumeResponse,
+    )
+
+  /**
+   * Detach a volume from a server.
+   *
+   * @param request - The request {@link DetachServerVolumeRequest}
+   * @returns A Promise of DetachServerVolumeResponse
+   */
+  detachServerVolume = (request: Readonly<DetachServerVolumeRequest>) =>
+    this.client.fetch<DetachServerVolumeResponse>(
+      {
+        body: JSON.stringify(
+          marshalDetachServerVolumeRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/instance/v1/zones/${validatePathParam(
+          'zone',
+          request.zone ?? this.client.settings.defaultZone,
+        )}/servers/${validatePathParam(
+          'serverId',
+          request.serverId,
+        )}/detach-volume`,
+      },
+      unmarshalDetachServerVolumeResponse,
+    )
 
   protected pageOfListImages = (request: Readonly<ListImagesRequest> = {}) =>
     this.client.fetch<ListImagesResponse>(
