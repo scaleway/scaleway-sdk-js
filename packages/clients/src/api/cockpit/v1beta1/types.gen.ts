@@ -426,11 +426,6 @@ export interface ListTokensResponse {
   tokens: Token[]
 }
 
-export type ResetCockpitGrafanaRequest = {
-  /** ID of the Project the Cockpit belongs to. */
-  projectId?: string
-}
-
 /** Request to reset a Grafana user's password. */
 export type ResetGrafanaUserPasswordRequest = {
   /** ID of the Grafana user. */
