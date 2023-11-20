@@ -102,6 +102,8 @@ import type {
   Snapshot,
   SnapshotBaseVolume,
   Task,
+  UpdateImageRequest,
+  UpdateImageResponse,
   UpdateIpRequest,
   UpdateIpResponse,
   UpdatePlacementGroupRequest,
@@ -109,11 +111,18 @@ import type {
   UpdatePlacementGroupServersRequest,
   UpdatePlacementGroupServersResponse,
   UpdatePrivateNICRequest,
+  UpdateSecurityGroupRequest,
+  UpdateSecurityGroupResponse,
+  UpdateSecurityGroupRuleRequest,
+  UpdateSecurityGroupRuleResponse,
   UpdateServerRequest,
   UpdateServerResponse,
+  UpdateSnapshotRequest,
+  UpdateSnapshotResponse,
   UpdateVolumeRequest,
   UpdateVolumeResponse,
   Volume,
+  VolumeImageUpdateTemplate,
   VolumeServer,
   VolumeServerTemplate,
   VolumeSummary,
@@ -1494,6 +1503,20 @@ export const unmarshalSetSnapshotResponse = (
   } as SetSnapshotResponse
 }
 
+export const unmarshalUpdateImageResponse = (
+  data: unknown,
+): UpdateImageResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'UpdateImageResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    image: data.image ? unmarshalImage(data.image) : undefined,
+  } as UpdateImageResponse
+}
+
 export const unmarshalUpdateIpResponse = (data: unknown): UpdateIpResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -1539,6 +1562,36 @@ export const unmarshalUpdatePlacementGroupServersResponse = (
   } as UpdatePlacementGroupServersResponse
 }
 
+export const unmarshalUpdateSecurityGroupResponse = (
+  data: unknown,
+): UpdateSecurityGroupResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'UpdateSecurityGroupResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    securityGroup: data.security_group
+      ? unmarshalSecurityGroup(data.security_group)
+      : undefined,
+  } as UpdateSecurityGroupResponse
+}
+
+export const unmarshalUpdateSecurityGroupRuleResponse = (
+  data: unknown,
+): UpdateSecurityGroupRuleResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'UpdateSecurityGroupRuleResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    rule: data.rule ? unmarshalSecurityGroupRule(data.rule) : undefined,
+  } as UpdateSecurityGroupRuleResponse
+}
+
 export const unmarshalUpdateServerResponse = (
   data: unknown,
 ): UpdateServerResponse => {
@@ -1551,6 +1604,20 @@ export const unmarshalUpdateServerResponse = (
   return {
     server: data.server ? unmarshalServer(data.server) : undefined,
   } as UpdateServerResponse
+}
+
+export const unmarshalUpdateSnapshotResponse = (
+  data: unknown,
+): UpdateSnapshotResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'UpdateSnapshotResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    snapshot: data.snapshot ? unmarshalSnapshot(data.snapshot) : undefined,
+  } as UpdateSnapshotResponse
 }
 
 export const unmarshalUpdateVolumeResponse = (
@@ -2275,6 +2342,33 @@ export const marshalSetSnapshotRequest = (
   volume_type: request.volumeType,
 })
 
+const marshalVolumeImageUpdateTemplate = (
+  request: VolumeImageUpdateTemplate,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  id: request.id,
+})
+
+export const marshalUpdateImageRequest = (
+  request: UpdateImageRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  arch: request.arch,
+  extra_volumes:
+    request.extraVolumes !== undefined
+      ? Object.entries(request.extraVolumes).reduce(
+          (acc, [key, value]) => ({
+            ...acc,
+            [key]: marshalVolumeImageUpdateTemplate(value, defaults),
+          }),
+          {},
+        )
+      : undefined,
+  name: request.name,
+  public: request.public,
+  tags: request.tags,
+})
+
 export const marshalUpdateIpRequest = (
   request: UpdateIpRequest,
   defaults: DefaultValues,
@@ -2307,6 +2401,34 @@ export const marshalUpdatePrivateNICRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   tags: request.tags,
+})
+
+export const marshalUpdateSecurityGroupRequest = (
+  request: UpdateSecurityGroupRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  description: request.description,
+  enable_default_security: request.enableDefaultSecurity,
+  inbound_default_policy: request.inboundDefaultPolicy,
+  name: request.name,
+  organization_default: request.organizationDefault,
+  outbound_default_policy: request.outboundDefaultPolicy,
+  project_default: request.projectDefault,
+  stateful: request.stateful,
+  tags: request.tags,
+})
+
+export const marshalUpdateSecurityGroupRuleRequest = (
+  request: UpdateSecurityGroupRuleRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  action: request.action,
+  dest_port_from: request.destPortFrom,
+  dest_port_to: request.destPortTo,
+  direction: request.direction,
+  ip_range: request.ipRange,
+  position: request.position,
+  protocol: request.protocol,
 })
 
 const marshalSecurityGroupTemplate = (
@@ -2347,6 +2469,14 @@ export const marshalUpdateServerRequest = (
           {},
         )
       : undefined,
+})
+
+export const marshalUpdateSnapshotRequest = (
+  request: UpdateSnapshotRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+  tags: request.tags,
 })
 
 export const marshalUpdateVolumeRequest = (
