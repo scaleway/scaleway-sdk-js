@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.2.0...@scaleway/sdk@2.3.0) (2023-11-20)
+
+### Features
+
+- **block:** add volume last_detached_at ([#1000](https://github.com/scaleway/scaleway-sdk-js/issues/1000)) ([46619fb](https://github.com/scaleway/scaleway-sdk-js/commit/46619fbedaade6777b2500ca3b507abe543906be))
+- **instance:** add endpoints to attach/detach server volumes ([#1001](https://github.com/scaleway/scaleway-sdk-js/issues/1001)) ([bf3982a](https://github.com/scaleway/scaleway-sdk-js/commit/bf3982a0f03fc22c948686761a193f9c97de6d51))
+- **secret_manager:** deprecate byname api endpoints ([#999](https://github.com/scaleway/scaleway-sdk-js/issues/999)) ([6a15029](https://github.com/scaleway/scaleway-sdk-js/commit/6a150297c95c83b692deac8d78ad15b902dfe2d3))
+
+### Bug Fixes
+
+- update redis documentation ([#998](https://github.com/scaleway/scaleway-sdk-js/issues/998)) ([68fcedb](https://github.com/scaleway/scaleway-sdk-js/commit/68fcedb353e4ef4034a3642ebc6fe5b635366dd9))
+
 ## [2.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.1.0...@scaleway/sdk@2.2.0) (2023-11-13)
 
 ### Features
