@@ -1831,7 +1831,6 @@ export const marshalCreateVolumeRequest = (
   ]),
   ...resolveOneOf<number | string>([
     { param: 'size', value: request.size },
-    { param: 'base_volume', value: request.baseVolume },
     { param: 'base_snapshot', value: request.baseSnapshot },
   ]),
 })
