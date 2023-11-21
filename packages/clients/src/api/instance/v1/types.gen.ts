@@ -1076,22 +1076,13 @@ export type CreateVolumeRequest = {
   /**
    * Volume disk size, must be a multiple of 512.
    *
-   * One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could
-   * be set.
+   * One-of ('from'): at most one of 'size', 'baseSnapshot' could be set.
    */
   size?: number
   /**
-   * @deprecated ID of the volume on which this volume will be based.
-   *
-   *   One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could
-   *   be set.
-   */
-  baseVolume?: string
-  /**
    * ID of the snapshot on which this volume will be based.
    *
-   * One-of ('from'): at most one of 'size', 'baseVolume', 'baseSnapshot' could
-   * be set.
+   * One-of ('from'): at most one of 'size', 'baseSnapshot' could be set.
    */
   baseSnapshot?: string
 }
