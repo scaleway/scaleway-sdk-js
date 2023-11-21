@@ -107,6 +107,7 @@ export const unmarshalApplication = (data: unknown): Application => {
     name: data.name,
     nbApiKeys: data.nb_api_keys,
     organizationId: data.organization_id,
+    tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
   } as Application
 }
@@ -125,6 +126,7 @@ export const unmarshalGroup = (data: unknown): Group => {
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
+    tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
     userIds: data.user_ids,
   } as Group
@@ -170,6 +172,7 @@ export const unmarshalPolicy = (data: unknown): Policy => {
     nbScopes: data.nb_scopes,
     noPrincipal: data.no_principal,
     organizationId: data.organization_id,
+    tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
     userId: data.user_id,
   } as Policy
@@ -226,6 +229,7 @@ export const unmarshalUser = (data: unknown): User => {
     mfa: data.mfa,
     organizationId: data.organization_id,
     status: data.status,
+    tags: data.tags,
     twoFactorEnabled: data.two_factor_enabled,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
@@ -482,6 +486,7 @@ export const marshalCreateApplicationRequest = (
   description: request.description,
   name: request.name || randomName('app'),
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+  tags: request.tags,
 })
 
 export const marshalCreateGroupRequest = (
@@ -491,6 +496,7 @@ export const marshalCreateGroupRequest = (
   description: request.description,
   name: request.name || randomName('grp'),
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+  tags: request.tags,
 })
 
 const marshalRuleSpecs = (
@@ -515,6 +521,7 @@ export const marshalCreatePolicyRequest = (
     request.rules !== undefined
       ? request.rules.map(elt => marshalRuleSpecs(elt, defaults))
       : undefined,
+  tags: request.tags,
   ...resolveOneOf<string | boolean>([
     { param: 'user_id', value: request.userId },
     { param: 'group_id', value: request.groupId },
@@ -538,6 +545,7 @@ export const marshalCreateUserRequest = (
 ): Record<string, unknown> => ({
   email: request.email,
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+  tags: request.tags,
 })
 
 export const marshalRemoveGroupMemberRequest = (
@@ -580,6 +588,7 @@ export const marshalUpdateApplicationRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
+  tags: request.tags,
 })
 
 export const marshalUpdateGroupRequest = (
@@ -588,6 +597,7 @@ export const marshalUpdateGroupRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
+  tags: request.tags,
 })
 
 export const marshalUpdatePolicyRequest = (
@@ -596,6 +606,7 @@ export const marshalUpdatePolicyRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
+  tags: request.tags,
   ...resolveOneOf<string | boolean>([
     { param: 'user_id', value: request.userId },
     { param: 'group_id', value: request.groupId },
