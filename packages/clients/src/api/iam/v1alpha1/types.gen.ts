@@ -177,6 +177,8 @@ export interface Application {
   editable: boolean
   /** Number of API keys attributed to the application. */
   nbApiKeys: number
+  /** Tags associated with the user. */
+  tags: string[]
 }
 
 export interface Group {
@@ -196,6 +198,8 @@ export interface Group {
   userIds: string[]
   /** IDs of applications attached to this group. */
   applicationIds: string[]
+  /** Tags associated to the group. */
+  tags: string[]
 }
 
 export interface Log {
@@ -253,6 +257,8 @@ export interface Policy {
   nbScopes: number
   /** Number of permission sets of the policy. */
   nbPermissionSets: number
+  /** Tags associated with the policy. */
+  tags: string[]
   /**
    * ID of the user attributed to the policy.
    *
@@ -376,6 +382,8 @@ export interface User {
   mfa: boolean
   /** ID of the account root user associated with the user. */
   accountRootUserId: string
+  /** Tags associated with the user. */
+  tags: string[]
 }
 
 export type AddGroupMemberRequest = {
@@ -436,6 +444,8 @@ export type CreateApplicationRequest = {
   organizationId?: string
   /** Description of the application (max length is 200 characters). */
   description: string
+  /** Tags associated with the application (maximum of 10 tags). */
+  tags?: string[]
 }
 
 export type CreateGroupRequest = {
@@ -448,6 +458,8 @@ export type CreateGroupRequest = {
   name?: string
   /** Description of the group to create (max length is 200 chars). */
   description: string
+  /** Tags associated with the group (maximum of 10 tags). */
+  tags?: string[]
 }
 
 export type CreatePolicyRequest = {
@@ -459,6 +471,8 @@ export type CreatePolicyRequest = {
   organizationId?: string
   /** Rules of the policy to create. */
   rules?: RuleSpecs[]
+  /** Tags associated with the policy (maximum of 10 tags). */
+  tags?: string[]
   /**
    * ID of user attributed to the policy.
    *
@@ -506,6 +520,8 @@ export type CreateUserRequest = {
   organizationId?: string
   /** Email of the user. */
   email: string
+  /** Tags associated with the user. */
+  tags?: string[]
 }
 
 export type DeleteAPIKeyRequest = {
@@ -646,6 +662,8 @@ export type ListApplicationsRequest = {
   editable?: boolean
   /** Filter by list of IDs. */
   applicationIds?: string[]
+  /** Filter by tags containing a given string. */
+  tag?: string
 }
 
 export interface ListApplicationsResponse {
@@ -672,6 +690,8 @@ export type ListGroupsRequest = {
   userIds?: string[]
   /** Filter by a list of group IDs. */
   groupIds?: string[]
+  /** Filter by tags containing a given string. */
+  tag?: string
 }
 
 export interface ListGroupsResponse {
@@ -766,6 +786,8 @@ export type ListPoliciesRequest = {
   noPrincipal?: boolean
   /** Name of the policy to fetch. */
   policyName?: string
+  /** Filter by tags containing a given string. */
+  tag?: string
 }
 
 export interface ListPoliciesResponse {
@@ -846,6 +868,8 @@ export type ListUsersRequest = {
   userIds?: string[]
   /** Filter by MFA status. */
   mfa?: boolean
+  /** Filter by tags containing a given string. */
+  tag?: string
 }
 
 export interface ListUsersResponse {
@@ -906,6 +930,8 @@ export type UpdateApplicationRequest = {
   name?: string
   /** New description for the application (max length is 200 chars). */
   description?: string
+  /** New tags for the application (maximum of 10 tags). */
+  tags?: string[]
 }
 
 export type UpdateGroupRequest = {
@@ -918,6 +944,8 @@ export type UpdateGroupRequest = {
   name?: string
   /** New description for the group (max length is 200 chars). */
   description?: string
+  /** New tags for the group (maximum of 10 tags). */
+  tags?: string[]
 }
 
 export type UpdatePolicyRequest = {
@@ -927,6 +955,8 @@ export type UpdatePolicyRequest = {
   name?: string
   /** New description of policy (max length is 200 characters). */
   description?: string
+  /** New tags for the policy (maximum of 10 tags). */
+  tags?: string[]
   /**
    * New ID of user attributed to the policy.
    *
