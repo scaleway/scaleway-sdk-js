@@ -20,6 +20,7 @@ export type ResourceType =
   | 'vpc_gateway'
   | 'vpc_gateway_network'
   | 'k8s_node'
+  | 'k8s_cluster'
   | 'rdb_instance'
   | 'redis_cluster'
   | 'baremetal_server'
