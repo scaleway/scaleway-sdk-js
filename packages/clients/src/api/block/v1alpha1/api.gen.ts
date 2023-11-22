@@ -99,6 +99,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
@@ -241,6 +242,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
