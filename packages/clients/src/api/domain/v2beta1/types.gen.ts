@@ -214,6 +214,7 @@ export type TaskType =
   | 'update_host'
   | 'delete_host'
   | 'move_project'
+  | 'transfer_online_domain'
 
 export interface DomainRecordGeoIPConfigMatch {
   countries: string[]
