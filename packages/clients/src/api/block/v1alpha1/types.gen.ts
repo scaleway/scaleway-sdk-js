@@ -266,6 +266,8 @@ export type ListSnapshotsRequest = {
   orderBy?: ListSnapshotsRequestOrderBy
   /** Filter by Project ID. */
   projectId?: string
+  /** Filter by Organization ID. */
+  organizationId?: string
   /** Page number. */
   page?: number
   /**
@@ -312,6 +314,8 @@ export type ListVolumesRequest = {
   orderBy?: ListVolumesRequestOrderBy
   /** Filter by Project ID. */
   projectId?: string
+  /** Filter by Organization ID. */
+  organizationId?: string
   /** Page number. */
   page?: number
   /**
