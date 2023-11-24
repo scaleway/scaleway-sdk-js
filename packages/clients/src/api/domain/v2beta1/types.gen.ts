@@ -133,6 +133,8 @@ export type DomainStatus =
 
 export type HostStatus = 'unknown_status' | 'active' | 'updating' | 'deleting'
 
+export type LinkedProduct = 'unknown_product' | 'vpc'
+
 export type ListContactsRequestRole =
   | 'unknown_role'
   | 'owner'
@@ -504,6 +506,7 @@ export interface DNSZone {
   message?: string
   updatedAt?: Date
   projectId: string
+  linkedProducts: LinkedProduct[]
 }
 
 export interface DomainDNSSEC {
@@ -735,6 +738,7 @@ export interface Domain {
    */
   transferRegistrationStatus?: DomainRegistrationStatusTransfer
   tld?: Tld
+  linkedProducts: LinkedProduct[]
 }
 
 export type ExportRawDNSZoneRequest = {
