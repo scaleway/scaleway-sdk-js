@@ -303,6 +303,7 @@ export const unmarshalDNSZone = (data: unknown): DNSZone => {
 
   return {
     domain: data.domain,
+    linkedProducts: data.linked_products,
     message: data.message,
     ns: data.ns,
     nsDefault: data.ns_default,
@@ -582,6 +583,7 @@ export const unmarshalDomain = (data: unknown): Domain => {
         )
       : undefined,
     isExternal: data.is_external,
+    linkedProducts: data.linked_products,
     organizationId: data.organization_id,
     ownerContact: data.owner_contact
       ? unmarshalContact(data.owner_contact)
