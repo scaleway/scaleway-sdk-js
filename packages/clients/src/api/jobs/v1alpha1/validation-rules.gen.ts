@@ -13,7 +13,7 @@ export const CreateJobDefinitionRequest = {
     greaterThan: 0,
   },
   name: {
-    minLength: 3,
+    pattern: /^[A-Za-z0-9-_]{3,50}$/,
   },
 }
 
@@ -49,6 +49,6 @@ export const UpdateJobDefinitionRequest = {
     greaterThan: 0,
   },
   name: {
-    minLength: 3,
+    pattern: /^[A-Za-z0-9-_]{3,50}$/,
   },
 }
