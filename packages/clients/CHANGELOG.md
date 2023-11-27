@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.3.0...@scaleway/sdk@2.4.0) (2023-11-27)
+
+### Features
+
+- **block:** add organization_id filter in listings ([#1022](https://github.com/scaleway/scaleway-sdk-js/issues/1022)) ([2f4a741](https://github.com/scaleway/scaleway-sdk-js/commit/2f4a741117620216d2eda29401a556d529530a25))
+- **domain:** add informations on scaleway product using the domain/dnszone ([#1024](https://github.com/scaleway/scaleway-sdk-js/issues/1024)) ([d1a22d9](https://github.com/scaleway/scaleway-sdk-js/commit/d1a22d90dd6453aedad6e746b524eb97551e246e))
+- **iam:** add tags on applications, groups, users and policies ([#1013](https://github.com/scaleway/scaleway-sdk-js/issues/1013)) ([176ba72](https://github.com/scaleway/scaleway-sdk-js/commit/176ba7283942706ce7b65b3d1db16301fa43491e))
+- **instance:** remove support for creating a volume from a volume ([#1011](https://github.com/scaleway/scaleway-sdk-js/issues/1011)) ([76a7755](https://github.com/scaleway/scaleway-sdk-js/commit/76a775529f2148b539b982674e189147b60afe4c))
+- **ipam:** add resource type k8s_cluster ([#1021](https://github.com/scaleway/scaleway-sdk-js/issues/1021)) ([47ea035](https://github.com/scaleway/scaleway-sdk-js/commit/47ea0353f0cd4233404b2dd3478b6fa5779c4cac))
+- **serverless_jobs:** add validation for field name ([#1025](https://github.com/scaleway/scaleway-sdk-js/issues/1025)) ([4be9f79](https://github.com/scaleway/scaleway-sdk-js/commit/4be9f79b945e76f85206a76da2808188a123effe))
+- **tem:** add new task transfer online domain to scw ([#1015](https://github.com/scaleway/scaleway-sdk-js/issues/1015)) ([e73e2a8](https://github.com/scaleway/scaleway-sdk-js/commit/e73e2a8c6fd8df1f850b0ab1b547bdbdd221ca49))
+
+### Bug Fixes
+
+- **mnq:** remove end of life v1alpha1 ([#1014](https://github.com/scaleway/scaleway-sdk-js/issues/1014)) ([1dd4b4c](https://github.com/scaleway/scaleway-sdk-js/commit/1dd4b4cc39f47f88ac82ac294cdeb3d7a76079ad))
+
 ## [2.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.2.0...@scaleway/sdk@2.3.0) (2023-11-20)
 
 ### Features
