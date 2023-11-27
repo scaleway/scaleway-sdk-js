@@ -1,5 +1,9 @@
 export { isJSONObject } from './helpers/json'
-export { waitForResource } from './internal/async/interval-retrier'
+export {
+  createExponentialBackoffStrategy,
+  tryAtIntervals,
+  waitForResource,
+} from './internal/async/interval-retrier'
 export { addAsyncHeaderInterceptor } from './internal/interceptors/helpers'
 export { API } from './scw/api'
 /* eslint-disable deprecation/deprecation */
