@@ -77,7 +77,7 @@ export type DeleteJobDefinitionRequest = {
    * config.
    */
   region?: Region
-  id: string
+  jobDefinitionId: string
 }
 
 export type GetJobDefinitionRequest = {
@@ -86,7 +86,7 @@ export type GetJobDefinitionRequest = {
    * config.
    */
   region?: Region
-  id: string
+  jobDefinitionId: string
 }
 
 export type GetJobRunRequest = {
@@ -95,7 +95,7 @@ export type GetJobRunRequest = {
    * config.
    */
   region?: Region
-  id: string
+  jobRunId: string
 }
 
 export type GetServiceInfoRequest = {
@@ -132,7 +132,7 @@ export type ListJobRunsRequest = {
   page?: number
   pageSize?: number
   orderBy?: ListJobRunsRequestOrderBy
-  id?: string
+  jobDefinitionId?: string
   projectId?: string
 }
 
@@ -147,7 +147,7 @@ export type StartJobDefinitionRequest = {
    * config.
    */
   region?: Region
-  id: string
+  jobDefinitionId: string
 }
 
 export type StopJobRunRequest = {
@@ -156,7 +156,7 @@ export type StopJobRunRequest = {
    * config.
    */
   region?: Region
-  id: string
+  jobRunId: string
 }
 
 export type UpdateJobDefinitionRequest = {
@@ -165,7 +165,7 @@ export type UpdateJobDefinitionRequest = {
    * config.
    */
   region?: Region
-  id: string
+  jobDefinitionId: string
   name?: string
   cpuLimit?: number
   memoryLimit?: number
