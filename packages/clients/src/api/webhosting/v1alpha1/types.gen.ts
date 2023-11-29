@@ -342,6 +342,8 @@ export type ListOffersRequest = {
    * case of wanting to update the plan).
    */
   hostingId?: string
+  /** Name of the control panel to filter for. */
+  controlPanels?: string[]
 }
 
 export interface ListOffersResponse {
