@@ -884,6 +884,9 @@ export interface ExternalNode {
   kubeToken: string
   kubeletConfig: string
   externalIp: string
+  containerdVersion: string
+  runcVersion: string
+  cniPluginsVersion: string
 }
 
 export type GetClusterKubeConfigRequest = {
