@@ -18,6 +18,7 @@ export type {
   DatasourceType,
   DeactivateCockpitRequest,
   DeleteContactPointRequest,
+  DeleteDatasourceRequest,
   DeleteGrafanaUserRequest,
   DeleteTokenRequest,
   DisableManagedAlertsRequest,
