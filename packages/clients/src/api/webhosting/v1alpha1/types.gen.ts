@@ -143,6 +143,12 @@ export interface Hosting {
   offerEndOfLife: boolean
   /** Name of the control panel. */
   controlPanelName: string
+  /** Group of the hosting's host server/platform. */
+  platformGroup: string
+  /** IPv4 address of the hosting's host server. */
+  ipv4: string
+  /** IPv6 address of the hosting's host server. */
+  ipv6: string
   /** Region where the Web Hosting plan is hosted. */
   region: Region
 }
