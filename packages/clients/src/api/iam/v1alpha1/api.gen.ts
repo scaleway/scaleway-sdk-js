@@ -1084,7 +1084,7 @@ export class API extends ParentAPI {
 
   /**
    * Get a quota in the Organization. Retrieve information about a resource
-   * quota, speficified by the `quotum_name` parameter. The quota's `limit`, or
+   * quota, specified by the `quotum_name` parameter. The quota's `limit`, or
    * whether it is unlimited, is returned in the response.
    *
    * @param request - The request {@link GetQuotumRequest}
@@ -1187,9 +1187,25 @@ export class API extends ParentAPI {
       unmarshalListLogsResponse,
     )
 
+  /**
+   * List logs. List logs available for given Organization. You must define the
+   * `organization_id` in the query path of your request.
+   *
+   * @param request - The request {@link ListLogsRequest}
+   * @returns A Promise of ListLogsResponse
+   */
   listLogs = (request: Readonly<ListLogsRequest> = {}) =>
     enrichForPagination('logs', this.pageOfListLogs, request)
 
+  /**
+   * Get a log. Retrieve information about a log, specified by the `log_id`
+   * parameter. The log's full details, including `id`, `ip`, `user_agent`,
+   * `action`, `bearer_id`, `resource_type` and `resource_id` are returned in
+   * the response.
+   *
+   * @param request - The request {@link GetLogRequest}
+   * @returns A Promise of Log
+   */
   getLog = (request: Readonly<GetLogRequest>) =>
     this.client.fetch<Log>(
       {
