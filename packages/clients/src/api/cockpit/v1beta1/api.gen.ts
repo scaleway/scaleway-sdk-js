@@ -50,6 +50,7 @@ import type {
   Datasource,
   DeactivateCockpitRequest,
   DeleteContactPointRequest,
+  DeleteDatasourceRequest,
   DeleteGrafanaUserRequest,
   DeleteTokenRequest,
   DisableManagedAlertsRequest,
@@ -210,6 +211,20 @@ export class API extends ParentAPI {
       },
       unmarshalDatasource,
     )
+
+  /**
+   * Delete the datasource associated with the specified datasource ID.
+   *
+   * @param request - The request {@link DeleteDatasourceRequest}
+   */
+  deleteDatasource = (request: Readonly<DeleteDatasourceRequest>) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/cockpit/v1beta1/datasources/${validatePathParam(
+        'datasourceId',
+        request.datasourceId,
+      )}`,
+    })
 
   protected pageOfListDatasources = (
     request: Readonly<ListDatasourcesRequest> = {},

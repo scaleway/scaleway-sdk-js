@@ -107,20 +107,20 @@ export interface ContactPoint {
   email?: ContactPointEmail
 }
 
-/** Datasource. */
+/** Data source. */
 export interface Datasource {
-  /** ID of the datasource. */
+  /** ID of the data source. */
   id: string
   /** ID of the Project the Cockpit belongs to. */
   projectId: string
-  /** Datasource name. */
+  /** Data source name. */
   name: string
-  /** Datasource URL. */
+  /** Data source URL. */
   url: string
-  /** Datasource type. */
+  /** Data source type. */
   type: DatasourceType
   /**
-   * Specifies that the datasource receives data from Scaleway products and is
+   * Specifies that the data source receives data from Scaleway products and is
    * managed by Scaleway.
    */
   isManagedByScaleway: boolean
@@ -206,15 +206,15 @@ export type CreateContactPointRequest = {
   contactPoint?: ContactPoint
 }
 
-/** Request to create a datasource. */
+/** Request to create a data source. */
 export type CreateDatasourceRequest = {
   /** ID of the Project the Cockpit belongs to. */
   projectId?: string
-  /** Datasource name. */
+  /** Data source name. */
   name: string
-  /** Datasource type. */
+  /** Data source type. */
   type?: DatasourceType
-  /** Specifies that the returned output is the default datasource per type. */
+  /** Specifies that the returned output is the default data source per type. */
   isDefault: boolean
 }
 
@@ -248,6 +248,12 @@ export type DeleteContactPointRequest = {
   projectId?: string
   /** Contact point to delete. */
   contactPoint?: ContactPoint
+}
+
+/** Request to delete a data source. */
+export type DeleteDatasourceRequest = {
+  /** ID of the data source. */
+  datasourceId: string
 }
 
 /** Request to delete a Grafana user. */
