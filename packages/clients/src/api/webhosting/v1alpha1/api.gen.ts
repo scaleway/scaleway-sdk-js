@@ -253,6 +253,7 @@ export class API extends ParentAPI {
           request.region ?? this.client.settings.defaultRegion,
         )}/offers`,
         urlParams: urlParams(
+          ['control_panels', request.controlPanels],
           ['hosting_id', request.hostingId],
           ['only_options', request.onlyOptions],
           ['order_by', request.orderBy],
