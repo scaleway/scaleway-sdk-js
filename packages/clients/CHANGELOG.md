@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.4.2...@scaleway/sdk@2.5.0) (2023-11-30)
+
+### Features
+
+- **cockpit:** add deleteDatasource endpoint ([#1034](https://github.com/scaleway/scaleway-sdk-js/issues/1034)) ([054d13a](https://github.com/scaleway/scaleway-sdk-js/commit/054d13a68737a7f71589d0f3dcc37ecd078e8752))
+- **k8s:** add node binaries versions ([#1033](https://github.com/scaleway/scaleway-sdk-js/issues/1033)) ([89a3fb1](https://github.com/scaleway/scaleway-sdk-js/commit/89a3fb18fc99f2e2d3296822c5652f0ec7abc65f))
+- **webhosting:** add control panels field in listHostings request ([#1035](https://github.com/scaleway/scaleway-sdk-js/issues/1035)) ([667fd73](https://github.com/scaleway/scaleway-sdk-js/commit/667fd73bb4c6b10c6a56ff0a48284b752a60c36e))
+- **webhosting:** add fields to hosting & platforms ([#1032](https://github.com/scaleway/scaleway-sdk-js/issues/1032)) ([d025d26](https://github.com/scaleway/scaleway-sdk-js/commit/d025d26886c76bf05be7489b508920d7bf9341ea))
+
 ## [2.4.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.4.1...@scaleway/sdk@2.4.2) (2023-11-28)
 
 **Note:** Version bump only for package @scaleway/sdk
