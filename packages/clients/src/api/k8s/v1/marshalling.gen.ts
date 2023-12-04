@@ -273,6 +273,7 @@ export const unmarshalExternalNode = (data: unknown): ExternalNode => {
     kubeToken: data.kube_token,
     kubeletConfig: data.kubelet_config,
     name: data.name,
+    nodeLabels: data.node_labels,
     poolVersion: data.pool_version,
     runcVersion: data.runc_version,
   } as ExternalNode
