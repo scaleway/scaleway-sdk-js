@@ -2,7 +2,7 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Zone } from '../../../bridge'
 
-export type Arch = 'x86_64' | 'arm' | 'arm64'
+export type Arch = 'unknown_arch' | 'x86_64' | 'arm' | 'arm64'
 
 export type AttachServerVolumeRequestVolumeType =
   | 'unknown_volume_type'
@@ -51,11 +51,7 @@ export type SecurityGroupRuleProtocol =
   | 'ICMP'
   | 'ANY'
 
-export type SecurityGroupState =
-  | 'unknown_state'
-  | 'available'
-  | 'syncing'
-  | 'syncing_error'
+export type SecurityGroupState = 'available' | 'syncing' | 'syncing_error'
 
 export type ServerAction =
   | 'poweron'
@@ -1961,9 +1957,15 @@ export type UpdateSecurityGroupRuleRequest = {
   action?: SecurityGroupRuleAction
   /** Range of IP addresses these rules apply to. */
   ipRange?: string
-  /** Beginning of the range of ports this rule applies to (inclusive). */
+  /**
+   * Beginning of the range of ports this rule applies to (inclusive). If 0 is
+   * provided, unset the parameter.
+   */
   destPortFrom?: number
-  /** End of the range of ports this rule applies to (inclusive). */
+  /**
+   * End of the range of ports this rule applies to (inclusive). If 0 is
+   * provided, unset the parameter.
+   */
   destPortTo?: number
   /** Position of this rule in the security group rules list. */
   position?: number
