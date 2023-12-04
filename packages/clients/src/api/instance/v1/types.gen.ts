@@ -35,15 +35,27 @@ export type PlacementGroupPolicyType = 'max_availability' | 'low_latency'
 
 export type PrivateNICState = 'available' | 'syncing' | 'syncing_error'
 
-export type SecurityGroupPolicy = 'accept' | 'drop'
+export type SecurityGroupPolicy = 'unknown_policy' | 'accept' | 'drop'
 
-export type SecurityGroupRuleAction = 'accept' | 'drop'
+export type SecurityGroupRuleAction = 'unknown_action' | 'accept' | 'drop'
 
-export type SecurityGroupRuleDirection = 'inbound' | 'outbound'
+export type SecurityGroupRuleDirection =
+  | 'unknown_direction'
+  | 'inbound'
+  | 'outbound'
 
-export type SecurityGroupRuleProtocol = 'TCP' | 'UDP' | 'ICMP' | 'ANY'
+export type SecurityGroupRuleProtocol =
+  | 'unknown_protocol'
+  | 'TCP'
+  | 'UDP'
+  | 'ICMP'
+  | 'ANY'
 
-export type SecurityGroupState = 'available' | 'syncing' | 'syncing_error'
+export type SecurityGroupState =
+  | 'unknown_state'
+  | 'available'
+  | 'syncing'
+  | 'syncing_error'
 
 export type ServerAction =
   | 'poweron'
@@ -719,6 +731,11 @@ export interface SetSecurityGroupRulesRequestRule {
   zone?: Zone
 }
 
+export interface VolumeImageUpdateTemplate {
+  /** UUID of the snapshot. */
+  id: string
+}
+
 export interface SecurityGroupTemplate {
   id: string
   name: string
@@ -751,13 +768,9 @@ export type ApplyBlockMigrationRequest = {
 export type AttachServerVolumeRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the Instance. */
   serverId: string
-  /** UUID of the Volume to attach. */
   volumeId: string
-  /** Type of the volume to attach. */
   volumeType?: AttachServerVolumeRequestVolumeType
-  /** Force the Instance to boot on this volume. */
   boot?: boolean
 }
 
@@ -1167,9 +1180,7 @@ export type DeleteVolumeRequest = {
 export type DetachServerVolumeRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** UUID of the Instance. */
   serverId: string
-  /** UUID of the Volume to detach. */
   volumeId: string
 }
 
@@ -1817,6 +1828,30 @@ export interface SetSecurityGroupRulesResponse {
   rules: SecurityGroupRule[]
 }
 
+export type UpdateImageRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** UUID of the image. */
+  imageId: string
+  /** Name of the image. */
+  name?: string
+  /** Architecture of the image. */
+  arch?: Arch
+  /**
+   * Additional snapshots of the image, with extra_volumeKey being the position
+   * of the snapshot in the image.
+   */
+  extraVolumes?: Record<string, VolumeImageUpdateTemplate>
+  /** Tags of the image. */
+  tags?: string[]
+  /** True to set the image as public. */
+  public?: boolean
+}
+
+export interface UpdateImageResponse {
+  image?: Image
+}
+
 export type UpdateIpRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
@@ -1879,6 +1914,65 @@ export type UpdatePrivateNICRequest = {
   tags?: string[]
 }
 
+export type UpdateSecurityGroupRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** UUID of the security group. */
+  securityGroupId: string
+  /** Name of the security group. */
+  name?: string
+  /** Description of the security group. */
+  description?: string
+  /**
+   * True to block SMTP on IPv4 and IPv6. This feature is read only, please open
+   * a support ticket if you need to make it configurable.
+   */
+  enableDefaultSecurity?: boolean
+  /** Default inbound policy. */
+  inboundDefaultPolicy?: SecurityGroupPolicy
+  /** Tags of the security group. */
+  tags?: string[]
+  /** @deprecated Please use project_default instead. */
+  organizationDefault?: boolean
+  /** True use this security group for future Instances created in this project. */
+  projectDefault?: boolean
+  /** Default outbound policy. */
+  outboundDefaultPolicy?: SecurityGroupPolicy
+  /** True to set the security group as stateful. */
+  stateful?: boolean
+}
+
+export interface UpdateSecurityGroupResponse {
+  securityGroup?: SecurityGroup
+}
+
+export type UpdateSecurityGroupRuleRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** UUID of the security group. */
+  securityGroupId: string
+  /** UUID of the rule. */
+  securityGroupRuleId: string
+  /** Protocol family this rule applies to. */
+  protocol?: SecurityGroupRuleProtocol
+  /** Direction the rule applies to. */
+  direction?: SecurityGroupRuleDirection
+  /** Action to apply when the rule matches a packet. */
+  action?: SecurityGroupRuleAction
+  /** Range of IP addresses these rules apply to. */
+  ipRange?: string
+  /** Beginning of the range of ports this rule applies to (inclusive). */
+  destPortFrom?: number
+  /** End of the range of ports this rule applies to (inclusive). */
+  destPortTo?: number
+  /** Position of this rule in the security group rules list. */
+  position?: number
+}
+
+export interface UpdateSecurityGroupRuleResponse {
+  rule?: SecurityGroupRule
+}
+
 export type UpdateServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
@@ -1922,6 +2016,21 @@ export type UpdateServerRequest = {
 
 export interface UpdateServerResponse {
   server?: Server
+}
+
+export type UpdateSnapshotRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** UUID of the snapshot. */
+  snapshotId: string
+  /** Name of the snapshot. */
+  name?: string
+  /** Tags of the snapshot. */
+  tags?: string[]
+}
+
+export interface UpdateSnapshotResponse {
+  snapshot?: Snapshot
 }
 
 export type UpdateVolumeRequest = {

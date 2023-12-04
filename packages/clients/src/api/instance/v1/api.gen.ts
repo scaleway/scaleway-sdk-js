@@ -31,11 +31,15 @@ import {
   marshalSetSecurityGroupRulesRequest,
   marshalSetServerRequest,
   marshalSetSnapshotRequest,
+  marshalUpdateImageRequest,
   marshalUpdateIpRequest,
   marshalUpdatePlacementGroupRequest,
   marshalUpdatePlacementGroupServersRequest,
   marshalUpdatePrivateNICRequest,
+  marshalUpdateSecurityGroupRequest,
+  marshalUpdateSecurityGroupRuleRequest,
   marshalUpdateServerRequest,
+  marshalUpdateSnapshotRequest,
   marshalUpdateVolumeRequest,
   unmarshalAttachServerVolumeResponse,
   unmarshalCreateImageResponse,
@@ -87,10 +91,14 @@ import {
   unmarshalSetSecurityGroupRulesResponse,
   unmarshalSetServerResponse,
   unmarshalSetSnapshotResponse,
+  unmarshalUpdateImageResponse,
   unmarshalUpdateIpResponse,
   unmarshalUpdatePlacementGroupResponse,
   unmarshalUpdatePlacementGroupServersResponse,
+  unmarshalUpdateSecurityGroupResponse,
+  unmarshalUpdateSecurityGroupRuleResponse,
   unmarshalUpdateServerResponse,
+  unmarshalUpdateSnapshotResponse,
   unmarshalUpdateVolumeResponse,
 } from './marshalling.gen'
 import type {
@@ -196,6 +204,8 @@ import type {
   SetPlacementGroupServersResponse,
   SetSecurityGroupRulesRequest,
   SetSecurityGroupRulesResponse,
+  UpdateImageRequest,
+  UpdateImageResponse,
   UpdateIpRequest,
   UpdateIpResponse,
   UpdatePlacementGroupRequest,
@@ -203,8 +213,14 @@ import type {
   UpdatePlacementGroupServersRequest,
   UpdatePlacementGroupServersResponse,
   UpdatePrivateNICRequest,
+  UpdateSecurityGroupRequest,
+  UpdateSecurityGroupResponse,
+  UpdateSecurityGroupRuleRequest,
+  UpdateSecurityGroupRuleResponse,
   UpdateServerRequest,
   UpdateServerResponse,
+  UpdateSnapshotRequest,
+  UpdateSnapshotResponse,
   UpdateVolumeRequest,
   UpdateVolumeResponse,
 } from './types.gen'
@@ -534,12 +550,6 @@ export class API extends ParentAPI {
       )}/user_data/${validatePathParam('key', request.key)}`,
     })
 
-  /**
-   * Attach a volume to a server.
-   *
-   * @param request - The request {@link AttachServerVolumeRequest}
-   * @returns A Promise of AttachServerVolumeResponse
-   */
   attachServerVolume = (request: Readonly<AttachServerVolumeRequest>) =>
     this.client.fetch<AttachServerVolumeResponse>(
       {
@@ -559,12 +569,6 @@ export class API extends ParentAPI {
       unmarshalAttachServerVolumeResponse,
     )
 
-  /**
-   * Detach a volume from a server.
-   *
-   * @param request - The request {@link DetachServerVolumeRequest}
-   * @returns A Promise of DetachServerVolumeResponse
-   */
   detachServerVolume = (request: Readonly<DetachServerVolumeRequest>) =>
     this.client.fetch<DetachServerVolumeResponse>(
       {
@@ -673,6 +677,28 @@ export class API extends ParentAPI {
     )
 
   /**
+   * Update image. Update the properties of an image.
+   *
+   * @param request - The request {@link UpdateImageRequest}
+   * @returns A Promise of UpdateImageResponse
+   */
+  updateImage = (request: Readonly<UpdateImageRequest>) =>
+    this.client.fetch<UpdateImageResponse>(
+      {
+        body: JSON.stringify(
+          marshalUpdateImageRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/instance/v1/zones/${validatePathParam(
+          'zone',
+          request.zone ?? this.client.settings.defaultZone,
+        )}/images/${validatePathParam('imageId', request.imageId)}`,
+      },
+      unmarshalUpdateImageResponse,
+    )
+
+  /**
    * Delete an Instance image. Delete the image with the specified ID.
    *
    * @param request - The request {@link DeleteImageRequest}
@@ -775,6 +801,28 @@ export class API extends ParentAPI {
         )}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
       },
       unmarshalSetSnapshotResponse,
+    )
+
+  /**
+   * Update a snapshot. Update the properties of a snapshot.
+   *
+   * @param request - The request {@link UpdateSnapshotRequest}
+   * @returns A Promise of UpdateSnapshotResponse
+   */
+  updateSnapshot = (request: Readonly<UpdateSnapshotRequest>) =>
+    this.client.fetch<UpdateSnapshotResponse>(
+      {
+        body: JSON.stringify(
+          marshalUpdateSnapshotRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/instance/v1/zones/${validatePathParam(
+          'zone',
+          request.zone ?? this.client.settings.defaultZone,
+        )}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+      },
+      unmarshalUpdateSnapshotResponse,
     )
 
   /**
@@ -1052,6 +1100,31 @@ export class API extends ParentAPI {
     )
 
   /**
+   * Update a security group. Update the properties of security group.
+   *
+   * @param request - The request {@link UpdateSecurityGroupRequest}
+   * @returns A Promise of UpdateSecurityGroupResponse
+   */
+  updateSecurityGroup = (request: Readonly<UpdateSecurityGroupRequest>) =>
+    this.client.fetch<UpdateSecurityGroupResponse>(
+      {
+        body: JSON.stringify(
+          marshalUpdateSecurityGroupRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/instance/v1/zones/${validatePathParam(
+          'zone',
+          request.zone ?? this.client.settings.defaultZone,
+        )}/security_groups/${validatePathParam(
+          'securityGroupId',
+          request.securityGroupId,
+        )}`,
+      },
+      unmarshalUpdateSecurityGroupResponse,
+    )
+
+  /**
    * Get default rules. Lists the default rules applied to all the security
    * groups.
    *
@@ -1225,6 +1298,37 @@ export class API extends ParentAPI {
         )}`,
       },
       unmarshalSetSecurityGroupRuleResponse,
+    )
+
+  /**
+   * Update security group rule. Update the properties of a rule from a
+   * specified security group.
+   *
+   * @param request - The request {@link UpdateSecurityGroupRuleRequest}
+   * @returns A Promise of UpdateSecurityGroupRuleResponse
+   */
+  updateSecurityGroupRule = (
+    request: Readonly<UpdateSecurityGroupRuleRequest>,
+  ) =>
+    this.client.fetch<UpdateSecurityGroupRuleResponse>(
+      {
+        body: JSON.stringify(
+          marshalUpdateSecurityGroupRuleRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/instance/v1/zones/${validatePathParam(
+          'zone',
+          request.zone ?? this.client.settings.defaultZone,
+        )}/security_groups/${validatePathParam(
+          'securityGroupId',
+          request.securityGroupId,
+        )}/rules/${validatePathParam(
+          'securityGroupRuleId',
+          request.securityGroupRuleId,
+        )}`,
+      },
+      unmarshalUpdateSecurityGroupRuleResponse,
     )
 
   protected pageOfListPlacementGroups = (

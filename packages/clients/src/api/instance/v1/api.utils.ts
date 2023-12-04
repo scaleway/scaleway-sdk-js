@@ -12,8 +12,6 @@ import {
   SNAPSHOT_TRANSIENT_STATUSES,
   VOLUME_TRANSIENT_STATUSES,
 } from './content.gen'
-import { unmarshalSetImageResponse } from './marshalling.gen'
-import { marshalSetImageRequestWithID } from './marshalling.utils'
 import type {
   CreateServerRequest,
   GetImageRequest,
@@ -32,24 +30,12 @@ import type {
   VolumeServerTemplate,
 } from './types.gen'
 import type {
-  SetImageResponse,
-  SetSecurityGroupRuleRequest,
-} from './types.private.gen'
-import type {
   AttachVolumeRequest,
   AttachVolumeResponse,
   DetachVolumeRequest,
   DetachVolumeResponse,
   GetServerUserDataRequest,
   SetServerUserDataRequest,
-  UpdateImageRequest,
-  UpdateImageResponse,
-  UpdateSecurityGroupRequest,
-  UpdateSecurityGroupResponse,
-  UpdateSecurityGroupRuleRequest,
-  UpdateSecurityGroupRuleResponse,
-  UpdateSnapshotRequest,
-  UpdateSnapshotResponse,
 } from './types.utils'
 
 const validateNotUndefined = <T>(obj: T | undefined): T => {
@@ -205,133 +191,6 @@ export class InstanceV1UtilsAPI extends API {
     )
 
   /**
-   * Updates a snapshot.
-   *
-   * @param request - The request {@link UpdateSnapshotRequest}
-   * @returns A Promise of UpdateSnapshotResponse
-   */
-  updateSnapshot = (
-    request: Readonly<UpdateSnapshotRequest>,
-  ): Promise<UpdateSnapshotResponse> =>
-    this.getSnapshot(request)
-      .then(res => validateNotUndefined(res.snapshot))
-      .then(snapshot =>
-        this._setSnapshot({
-          ...snapshot,
-          name: request.name ?? snapshot.name,
-          snapshotId: snapshot.id,
-        }),
-      )
-      .then(res => ({ snapshot: res.snapshot }))
-
-  /**
-   * Updates a security group.
-   *
-   * @param request - The request {@link UpdateSecurityGroupRequest}
-   * @returns A Promise of UpdateSecurityGroupResponse
-   */
-  updateSecurityGroup = (
-    request: UpdateSecurityGroupRequest,
-  ): Promise<UpdateSecurityGroupResponse> =>
-    this.getSecurityGroup({
-      securityGroupId: request.securityGroupId,
-      zone: request.zone,
-    })
-      .then(res => validateNotUndefined(res.securityGroup))
-      .then(securityGroup =>
-        this._setSecurityGroup({
-          creationDate: securityGroup.creationDate,
-          description: request.description ?? securityGroup.description,
-          enableDefaultSecurity:
-            request.enableDefaultSecurity ??
-            securityGroup.enableDefaultSecurity,
-          id: securityGroup.id,
-          inboundDefaultPolicy:
-            request.inboundDefaultPolicy ?? securityGroup.inboundDefaultPolicy,
-          modificationDate: securityGroup.modificationDate,
-          name: request.name ?? securityGroup.name,
-          organization: securityGroup.organization,
-          organizationDefault:
-            request.organizationDefault ?? securityGroup.organizationDefault,
-          outboundDefaultPolicy:
-            request.outboundDefaultPolicy ??
-            securityGroup.outboundDefaultPolicy,
-          project: securityGroup.project,
-          projectDefault:
-            request.projectDefault ?? securityGroup.projectDefault,
-          servers: securityGroup.servers,
-          stateful: request.stateful ?? securityGroup.stateful,
-          zone: request.zone,
-        }),
-      )
-      .then(res => ({ securityGroup: res.securityGroup }))
-
-  /**
-   * Updates a security group rule.
-   *
-   * @param request - The request {@link UpdateSecurityGroupRuleRequest}
-   * @returns A Promise of UpdateSecurityGroupRuleResponse
-   */
-  updateSecurityGroupRule = (
-    request: UpdateSecurityGroupRuleRequest,
-  ): Promise<UpdateSecurityGroupRuleResponse> =>
-    this.getSecurityGroupRule({
-      securityGroupId: request.securityGroupId,
-      securityGroupRuleId: request.securityGroupRuleId,
-      zone: request.zone,
-    })
-      .then(res => validateNotUndefined(res.rule))
-      .then(rule => {
-        let sReq: SetSecurityGroupRuleRequest = {
-          action: request.action ?? rule.action,
-          destPortFrom: rule.destPortFrom,
-          destPortTo: rule.destPortTo,
-          direction: request.direction ?? rule.direction,
-          editable: rule.editable,
-          id: request.securityGroupRuleId,
-          ipRange: request.ipRange ?? rule.ipRange,
-          position: request.position ?? rule.position,
-          protocol: request.protocol ?? rule.protocol,
-          securityGroupId: request.securityGroupId,
-          securityGroupRuleId: request.securityGroupRuleId,
-        }
-        if (request.destPortFrom) {
-          sReq = {
-            ...sReq,
-            destPortFrom:
-              request.destPortFrom > 0 ? request.destPortFrom : undefined,
-          }
-        }
-        if (request.destPortTo) {
-          sReq = {
-            ...sReq,
-            destPortTo: request.destPortTo > 0 ? request.destPortTo : undefined,
-          }
-        }
-        if (
-          sReq.destPortFrom &&
-          sReq.destPortTo &&
-          sReq.destPortFrom === sReq.destPortTo
-        ) {
-          sReq = {
-            ...sReq,
-            destPortTo: undefined,
-          }
-        }
-        // When we use ICMP protocol portFrom and portTo should be set to nil
-        if (request.protocol === 'ICMP') {
-          sReq = {
-            ...sReq,
-            destPortFrom: undefined,
-            destPortTo: undefined,
-          }
-        }
-
-        return this._setSecurityGroupRule(sReq)
-      })
-      .then(res => ({ rule: res.rule }))
-
-  /**
    * Updates a server.
    *
    * @param request - The request {@link UpdateServerRequest}
@@ -477,41 +336,6 @@ export class InstanceV1UtilsAPI extends API {
       zone: request.zone,
     } as UpdateServerRequest).then(obj => obj as DetachVolumeResponse)
   }
-
-  /**
-   * Updates an image.
-   *
-   * @param request - The request {@link UpdateImageRequest}
-   * @returns A Promise of UpdateImageResponse
-   */
-  updateImage = (
-    request: Readonly<UpdateImageRequest>,
-  ): Promise<UpdateImageResponse> =>
-    this.getImage({ zone: request.zone, imageId: request.imageId })
-      .then(res => validateNotUndefined(res.image))
-      .then(image => ({
-        ...image,
-        name: request.name ?? image.name,
-        tags: request.tags ?? image.tags,
-        id: image.id,
-      }))
-      .then(imageReq =>
-        this.client.fetch<SetImageResponse>(
-          {
-            body: JSON.stringify(
-              marshalSetImageRequestWithID(imageReq, this.client.settings),
-            ),
-            headers: { 'Content-Type': 'application/json; charset=utf-8' },
-            method: 'PUT',
-            path: `/instance/v1/zones/${validatePathParam(
-              'zone',
-              imageReq.zone,
-            )}/images/${validatePathParam('id', imageReq.id)}`,
-          },
-          unmarshalSetImageResponse,
-        ),
-      )
-      .then(res => ({ image: res.image }))
 
   /**
    * Get the content of a user data on a server for the given key.

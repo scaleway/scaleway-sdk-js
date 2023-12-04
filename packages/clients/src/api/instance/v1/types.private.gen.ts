@@ -37,7 +37,7 @@ export interface SetImageResponse {
 export type SetSecurityGroupRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
-  /** ID of the security group (will be ignored). */
+  /** UUID of the security group. */
   id: string
   /** Name of the security group. */
   name: string
