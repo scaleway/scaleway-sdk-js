@@ -77,10 +77,10 @@ export interface VolumeSpecifications {
 export interface Reference {
   /** UUID of the reference. */
   id: string
-  /** Type of resoruce to which the reference is associated (snapshot or volume). */
+  /** Type of resource to which the reference is associated. */
   productResourceType: string
   /**
-   * UUID of the volume or the snapshot it refers to (according to the
+   * UUID of the product resource it refers to (according to the
    * product_resource_type).
    */
   productResourceId: string
