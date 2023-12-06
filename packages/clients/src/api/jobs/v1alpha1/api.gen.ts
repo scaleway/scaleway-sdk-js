@@ -3,11 +3,10 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
 } from '../../../bridge'
-import type { Region, ServiceInfo } from '../../../bridge'
+import type { Region } from '../../../bridge'
 import {
   marshalCreateJobDefinitionRequest,
   marshalUpdateJobDefinitionRequest,
@@ -21,7 +20,6 @@ import type {
   DeleteJobDefinitionRequest,
   GetJobDefinitionRequest,
   GetJobRunRequest,
-  GetServiceInfoRequest,
   JobDefinition,
   JobRun,
   ListJobDefinitionsRequest,
@@ -41,18 +39,6 @@ const jsonContentHeaders = {
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
-
-  getServiceInfo = (request: Readonly<GetServiceInfoRequest> = {}) =>
-    this.client.fetch<ServiceInfo>(
-      {
-        method: 'GET',
-        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}`,
-      },
-      unmarshalServiceInfo,
-    )
 
   createJobDefinition = (request: Readonly<CreateJobDefinitionRequest>) =>
     this.client.fetch<JobDefinition>(
