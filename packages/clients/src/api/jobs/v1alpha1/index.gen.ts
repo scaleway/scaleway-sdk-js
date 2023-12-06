@@ -7,7 +7,6 @@ export type {
   DeleteJobDefinitionRequest,
   GetJobDefinitionRequest,
   GetJobRunRequest,
-  GetServiceInfoRequest,
   JobDefinition,
   JobRun,
   JobRunState,

@@ -98,14 +98,6 @@ export type GetJobRunRequest = {
   jobRunId: string
 }
 
-export type GetServiceInfoRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-}
-
 export type ListJobDefinitionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
