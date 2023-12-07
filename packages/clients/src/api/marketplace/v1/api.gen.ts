@@ -8,19 +8,13 @@ import {
 } from '../../../bridge'
 import {
   unmarshalGetImageResponse,
-  unmarshalGetVersionResponse,
   unmarshalListImagesResponse,
-  unmarshalListVersionsResponse,
 } from './marshalling.gen'
 import type {
   GetImageRequest,
   GetImageResponse,
-  GetVersionRequest,
-  GetVersionResponse,
   ListImagesRequest,
   ListImagesResponse,
-  ListVersionsRequest,
-  ListVersionsResponse,
 } from './types.gen'
 
 /** Marketplace API. */
@@ -63,29 +57,5 @@ export class API extends ParentAPI {
         )}`,
       },
       unmarshalGetImageResponse,
-    )
-
-  listVersions = (request: Readonly<ListVersionsRequest>) =>
-    this.client.fetch<ListVersionsResponse>(
-      {
-        method: 'GET',
-        path: `/marketplace/v1/images/${validatePathParam(
-          'imageId',
-          request.imageId,
-        )}/versions`,
-      },
-      unmarshalListVersionsResponse,
-    )
-
-  getVersion = (request: Readonly<GetVersionRequest>) =>
-    this.client.fetch<GetVersionResponse>(
-      {
-        method: 'GET',
-        path: `/marketplace/v1/images/${validatePathParam(
-          'imageId',
-          request.imageId,
-        )}/versions/${validatePathParam('versionId', request.versionId)}`,
-      },
-      unmarshalGetVersionResponse,
     )
 }

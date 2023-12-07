@@ -4,13 +4,9 @@ export { API } from './api.gen'
 export type {
   GetImageRequest,
   GetImageResponse,
-  GetVersionRequest,
-  GetVersionResponse,
   Image,
   ListImagesRequest,
   ListImagesResponse,
-  ListVersionsRequest,
-  ListVersionsResponse,
   LocalImage,
   Organization,
   Version,
