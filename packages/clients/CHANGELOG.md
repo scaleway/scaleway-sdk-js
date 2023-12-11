@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.5.0...@scaleway/sdk@2.6.0) (2023-12-11)
+
+### Features
+
+- **instance:** replace some get/put utils by patch ones ([#1010](https://github.com/scaleway/scaleway-sdk-js/issues/1010)) ([b67133c](https://github.com/scaleway/scaleway-sdk-js/commit/b67133c1cf0af4d9d3f0ea4c1877c9d1c67b8721))
+- **k8s:** add nodelabels for kosmos nodes ([#1040](https://github.com/scaleway/scaleway-sdk-js/issues/1040)) ([c8437f0](https://github.com/scaleway/scaleway-sdk-js/commit/c8437f01dc8b57b88d80ed2cb3abfa6d93ea337f))
+
 ## [2.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.4.2...@scaleway/sdk@2.5.0) (2023-11-30)
 
 ### Features
