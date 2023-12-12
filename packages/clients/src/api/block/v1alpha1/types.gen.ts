@@ -257,6 +257,7 @@ export type ImportSnapshotFromS3Request = {
   name: string
   projectId?: string
   tags?: string[]
+  size?: number
 }
 
 export type ListSnapshotsRequest = {
