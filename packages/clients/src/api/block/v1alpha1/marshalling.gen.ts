@@ -271,6 +271,7 @@ export const marshalImportSnapshotFromS3Request = (
   key: request.key,
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
+  size: request.size,
   tags: request.tags,
 })
 
