@@ -47,6 +47,8 @@ export interface JobRun {
   exitCode?: number
   runDuration?: string
   errorMessage: string
+  cpuLimit: number
+  memoryLimit: number
   /**
    * Region to target. If none is passed will use default region from the
    * config.

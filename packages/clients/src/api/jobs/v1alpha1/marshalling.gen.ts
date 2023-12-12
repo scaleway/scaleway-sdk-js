@@ -48,11 +48,13 @@ export const unmarshalJobRun = (data: unknown): JobRun => {
   }
 
   return {
+    cpuLimit: data.cpu_limit,
     createdAt: unmarshalDate(data.created_at),
     errorMessage: data.error_message,
     exitCode: data.exit_code,
     id: data.id,
     jobDefinitionId: data.job_definition_id,
+    memoryLimit: data.memory_limit,
     region: data.region,
     runDuration: data.run_duration,
     state: data.state,
