@@ -55,7 +55,13 @@ const jsonContentHeaders = {
  */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: Zone[] = ['fr-par-1', 'pl-waw-3']
+  public static readonly LOCALITIES: Zone[] = [
+    'fr-par-1',
+    'fr-par-2',
+    'nl-ams-1',
+    'nl-ams-3',
+    'pl-waw-3',
+  ]
 
   protected pageOfListVolumeTypes = (
     request: Readonly<ListVolumeTypesRequest> = {},
