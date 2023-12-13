@@ -82,6 +82,7 @@ import type {
   SetInstanceSettingsResponse,
   SetPrivilegeRequest,
   Snapshot,
+  SnapshotVolumeType,
   UpdateDatabaseBackupRequest,
   UpdateInstanceRequest,
   UpdateSnapshotRequest,
@@ -381,6 +382,19 @@ export const unmarshalPrivilege = (data: unknown): Privilege => {
   } as Privilege
 }
 
+const unmarshalSnapshotVolumeType = (data: unknown): SnapshotVolumeType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SnapshotVolumeType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    class: data.class,
+    type: data.type,
+  } as SnapshotVolumeType
+}
+
 export const unmarshalSnapshot = (data: unknown): Snapshot => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -400,6 +414,9 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
     size: data.size,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
+    volumeType: data.volume_type
+      ? unmarshalSnapshotVolumeType(data.volume_type)
+      : undefined,
   } as Snapshot
 }
 

@@ -361,6 +361,11 @@ export interface NodeTypeVolumeType {
   class: StorageClass
 }
 
+export interface SnapshotVolumeType {
+  type: VolumeType
+  class: StorageClass
+}
+
 export interface ACLRuleRequest {
   ip: string
   description: string
@@ -599,6 +604,8 @@ export interface Snapshot {
   instanceName: string
   /** Source node type. */
   nodeType: string
+  /** Type of volume where data is stored (lssd, bssd or sbs). */
+  volumeType?: SnapshotVolumeType
   /** Region of this snapshot. */
   region: Region
 }
