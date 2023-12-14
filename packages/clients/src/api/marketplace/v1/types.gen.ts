@@ -66,15 +66,6 @@ export interface GetImageResponse {
   image?: Image
 }
 
-export type GetVersionRequest = {
-  imageId: string
-  versionId: string
-}
-
-export interface GetVersionResponse {
-  version?: Version
-}
-
 export type ListImagesRequest = {
   /**
    * A positive integer lower or equal to 100 to select the number of items to
@@ -87,14 +78,5 @@ export type ListImagesRequest = {
 
 export interface ListImagesResponse {
   images: Image[]
-  totalCount: number
-}
-
-export type ListVersionsRequest = {
-  imageId: string
-}
-
-export interface ListVersionsResponse {
-  versions: Version[]
   totalCount: number
 }

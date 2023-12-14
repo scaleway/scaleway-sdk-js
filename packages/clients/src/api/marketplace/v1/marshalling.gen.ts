@@ -7,10 +7,8 @@ import {
 } from '../../../bridge'
 import type {
   GetImageResponse,
-  GetVersionResponse,
   Image,
   ListImagesResponse,
-  ListVersionsResponse,
   LocalImage,
   Organization,
   Version,
@@ -97,20 +95,6 @@ export const unmarshalGetImageResponse = (data: unknown): GetImageResponse => {
   } as GetImageResponse
 }
 
-export const unmarshalGetVersionResponse = (
-  data: unknown,
-): GetVersionResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GetVersionResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    version: data.version ? unmarshalVersion(data.version) : undefined,
-  } as GetVersionResponse
-}
-
 export const unmarshalListImagesResponse = (
   data: unknown,
 ): ListImagesResponse => {
@@ -124,19 +108,4 @@ export const unmarshalListImagesResponse = (
     images: unmarshalArrayOfObject(data.images, unmarshalImage),
     totalCount: data.total_count,
   } as ListImagesResponse
-}
-
-export const unmarshalListVersionsResponse = (
-  data: unknown,
-): ListVersionsResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListVersionsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    totalCount: data.total_count,
-    versions: unmarshalArrayOfObject(data.versions, unmarshalVersion),
-  } as ListVersionsResponse
 }
