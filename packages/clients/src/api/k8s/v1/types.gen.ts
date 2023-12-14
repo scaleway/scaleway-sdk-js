@@ -859,7 +859,10 @@ export type DeleteNodeRequest = {
   region?: Region
   /** ID of the node to replace. */
   nodeId: string
-  /** Skip draining node from its workload. */
+  /**
+   * Skip draining node from its workload (Note: this parameter is currently
+   * inactive).
+   */
   skipDrain: boolean
   /** Add a new node after the deletion of this node. */
   replace: boolean
