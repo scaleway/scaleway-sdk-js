@@ -90,8 +90,8 @@ importers:
         specifier: ^6.1.0
         version: 6.1.0(rollup@4.9.0)(typescript@5.3.3)
       rollup-plugin-visualizer:
-        specifier: ^5.10.0
-        version: 5.10.0(rollup@4.9.0)
+        specifier: ^5.11.0
+        version: 5.11.0(rollup@4.9.0)
       typedoc:
         specifier: ^0.25.4
         version: 0.25.4(typescript@5.3.3)
@@ -8751,8 +8751,8 @@ packages:
       '@babel/code-frame': 7.23.5
     dev: true
 
-  /rollup-plugin-visualizer@5.10.0(rollup@4.9.0):
-    resolution: {integrity: sha512-N4AkNL0qFvipegbDJ0kupS+8eKGjL0q+lYwV46NflLX/B8Rh73wz3kCIdg50bR6XVhNcaMA4Eb519xtm90Ckfg==}
+  /rollup-plugin-visualizer@5.11.0(rollup@4.9.0):
+    resolution: {integrity: sha512-exM0Ms2SN3AgTzMeW7y46neZQcyLY7eKwWAop1ZoRTCZwyrIRdMMJ6JjToAJbML77X/9N8ZEpmXG4Z/Clb9k8g==}
     engines: {node: '>=14'}
     hasBin: true
     peerDependencies:
