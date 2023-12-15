@@ -76,11 +76,13 @@ import type {
   SetInstanceSettingsResponse,
   SetPrivilegeRequest,
   Snapshot,
+  SnapshotVolumeType,
   UpdateInstanceRequest,
   UpdateSnapshotRequest,
   UpdateUserRequest,
   UpgradableVersion,
   UpgradeInstanceRequest,
+  UpgradeInstanceRequestMajorUpgradeWorkflow,
   User,
   Volume,
 } from './types.gen'
@@ -279,6 +281,7 @@ const unmarshalVolume = (data: unknown): Volume => {
   }
 
   return {
+    class: data.class,
     size: data.size,
     type: data.type,
   } as Volume
@@ -347,6 +350,19 @@ export const unmarshalPrivilege = (data: unknown): Privilege => {
   } as Privilege
 }
 
+const unmarshalSnapshotVolumeType = (data: unknown): SnapshotVolumeType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SnapshotVolumeType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    class: data.class,
+    type: data.type,
+  } as SnapshotVolumeType
+}
+
 export const unmarshalSnapshot = (data: unknown): Snapshot => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -366,6 +382,9 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
     size: data.size,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
+    volumeType: data.volume_type
+      ? unmarshalSnapshotVolumeType(data.volume_type)
+      : undefined,
   } as Snapshot
 }
 
@@ -661,6 +680,7 @@ const unmarshalNodeTypeVolumeType = (data: unknown): NodeTypeVolumeType => {
 
   return {
     chunkSize: data.chunk_size,
+    class: data.class,
     description: data.description,
     maxSize: data.max_size,
     minSize: data.min_size,
@@ -1129,15 +1149,33 @@ export const marshalUpdateUserRequest = (
   password: request.password,
 })
 
+const marshalUpgradeInstanceRequestMajorUpgradeWorkflow = (
+  request: UpgradeInstanceRequestMajorUpgradeWorkflow,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  upgradable_version_id: request.upgradableVersionId,
+  with_endpoints: request.withEndpoints,
+})
+
 export const marshalUpgradeInstanceRequest = (
   request: UpgradeInstanceRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf<string | boolean | number>([
+  ...resolveOneOf<string | boolean | number | Record<string, unknown>>([
     { param: 'node_type', value: request.nodeType },
     { param: 'enable_ha', value: request.enableHa },
     { param: 'volume_size', value: request.volumeSize },
     { param: 'volume_type', value: request.volumeType },
     { param: 'upgradable_version_id', value: request.upgradableVersionId },
+    {
+      param: 'major_upgrade_workflow',
+      value:
+        request.majorUpgradeWorkflow !== undefined
+          ? marshalUpgradeInstanceRequestMajorUpgradeWorkflow(
+              request.majorUpgradeWorkflow,
+              defaults,
+            )
+          : undefined,
+    },
   ]),
 })
