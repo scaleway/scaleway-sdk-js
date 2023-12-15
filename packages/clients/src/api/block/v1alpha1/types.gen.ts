@@ -249,17 +249,6 @@ export type GetVolumeRequest = {
   volumeId: string
 }
 
-export type ImportSnapshotFromS3Request = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  bucket: string
-  key: string
-  name: string
-  projectId?: string
-  tags?: string[]
-  size?: number
-}
-
 export type ListSnapshotsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
