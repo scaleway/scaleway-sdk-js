@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.6.0...@scaleway/sdk@2.7.0) (2023-12-15)
+
+### Features
+
+- **block:** add size to ImportSnapshotFromS3Request ([#1059](https://github.com/scaleway/scaleway-sdk-js/issues/1059)) ([e22c255](https://github.com/scaleway/scaleway-sdk-js/commit/e22c255960fab0db41dc5561217dfaa6371888b2))
+- **block:** specify available localities ([#1061](https://github.com/scaleway/scaleway-sdk-js/issues/1061)) ([0c9c197](https://github.com/scaleway/scaleway-sdk-js/commit/0c9c197d81e9d325f564f29088c798cee2efc7fd))
+- **document_db:** align proto with rdb proto ([#1066](https://github.com/scaleway/scaleway-sdk-js/issues/1066)) ([e10457e](https://github.com/scaleway/scaleway-sdk-js/commit/e10457e073c0ad8d213ba10e76091f23ade67bf4))
+- **rdb:** add volume_type for snapshots ([#1062](https://github.com/scaleway/scaleway-sdk-js/issues/1062)) ([20643a7](https://github.com/scaleway/scaleway-sdk-js/commit/20643a7e71307cdbb7b4dd833bac737c8b19468d))
+- **serverless_jobs:** add resources to job run ([#1060](https://github.com/scaleway/scaleway-sdk-js/issues/1060)) ([9b560c4](https://github.com/scaleway/scaleway-sdk-js/commit/9b560c42c172c7b51f4e596d8803f7b8f9741460))
+- **serverless_sqldb:** generate SDKs ([#1063](https://github.com/scaleway/scaleway-sdk-js/issues/1063)) ([afde985](https://github.com/scaleway/scaleway-sdk-js/commit/afde985565b0dff7dbdbdd5440b991362740331c))
+
+### Bug Fixes
+
+- **k8s:** update field description ([#1064](https://github.com/scaleway/scaleway-sdk-js/issues/1064)) ([a4afc08](https://github.com/scaleway/scaleway-sdk-js/commit/a4afc0865b5518abaf672450c94813cad4950da6))
+- **marketplace/v1:** remove version methods ([#1043](https://github.com/scaleway/scaleway-sdk-js/issues/1043)) ([77b70ef](https://github.com/scaleway/scaleway-sdk-js/commit/77b70efd1a06e6447f8095594c30eba26dbb0682))
+
 ## [2.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.5.0...@scaleway/sdk@2.6.0) (2023-12-11)
 
 ### Features
