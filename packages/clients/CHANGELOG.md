@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.7.0...@scaleway/sdk@2.8.0) (2023-12-18)
+
+### Features
+
+- **block:** remove support for import snapshot from object ([#1067](https://github.com/scaleway/scaleway-sdk-js/issues/1067)) ([0acc421](https://github.com/scaleway/scaleway-sdk-js/commit/0acc421e527565b6f6cc58abb4583ad893f7ae53))
+
 ## [2.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.6.0...@scaleway/sdk@2.7.0) (2023-12-15)
 
 ### Features
