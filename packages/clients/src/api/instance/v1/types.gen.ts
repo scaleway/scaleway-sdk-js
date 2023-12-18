@@ -304,6 +304,8 @@ export interface ServerIp {
   /** Tags associated with the IP. */
   tags: string[]
   state: ServerIpState
+  /** The ip_id of an IPAM ip if the ip is created from IPAM, null if not. */
+  ipamId: string
 }
 
 export interface ServerIpv6 {
@@ -486,6 +488,7 @@ export interface Ip {
   type: IpType
   state: IpState
   prefix: string
+  ipamId: string
   /** Zone to target. If none is passed will use default zone from the config. */
   zone: Zone
 }
