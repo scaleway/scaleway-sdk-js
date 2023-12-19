@@ -167,9 +167,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update metadata of a secret. Edit a secret's metadata such as name, tag(s)
-   * and description. The secret to update is specified by the `secret_id` and
-   * `region` parameters.
+   * Update metadata of a secret. Edit a secret's metadata such as name, tag(s),
+   * description and ephemeral policy. The secret to update is specified by the
+   * `secret_id` and `region` parameters.
    *
    * @param request - The request {@link UpdateSecretRequest}
    * @returns A Promise of Secret
