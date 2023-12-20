@@ -12,6 +12,8 @@ import type {
   CreateFolderRequest,
   CreateSecretRequest,
   CreateSecretVersionRequest,
+  EphemeralPolicy,
+  EphemeralProperties,
   Folder,
   GeneratePasswordRequest,
   ListFoldersResponse,
@@ -42,6 +44,20 @@ export const unmarshalFolder = (data: unknown): Folder => {
   } as Folder
 }
 
+const unmarshalEphemeralProperties = (data: unknown): EphemeralProperties => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EphemeralProperties' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    action: data.action,
+    expiresAt: unmarshalDate(data.expires_at),
+    expiresOnceAccessed: data.expires_once_accessed,
+  } as EphemeralProperties
+}
+
 export const unmarshalSecretVersion = (data: unknown): SecretVersion => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -52,12 +68,29 @@ export const unmarshalSecretVersion = (data: unknown): SecretVersion => {
   return {
     createdAt: unmarshalDate(data.created_at),
     description: data.description,
+    ephemeralProperties: data.ephemeral_properties
+      ? unmarshalEphemeralProperties(data.ephemeral_properties)
+      : undefined,
     isLatest: data.is_latest,
     revision: data.revision,
     secretId: data.secret_id,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as SecretVersion
+}
+
+export const unmarshalEphemeralPolicy = (data: unknown): EphemeralPolicy => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EphemeralPolicy' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    action: data.action,
+    expiresOnceAccessed: data.expires_once_accessed,
+    timeToLive: data.time_to_live,
+  } as EphemeralPolicy
 }
 
 export const unmarshalSecret = (data: unknown): Secret => {
@@ -70,8 +103,9 @@ export const unmarshalSecret = (data: unknown): Secret => {
   return {
     createdAt: unmarshalDate(data.created_at),
     description: data.description,
-    ephemeralAction: data.ephemeral_action,
-    expiresAt: unmarshalDate(data.expires_at),
+    ephemeralPolicy: data.ephemeral_policy
+      ? unmarshalEphemeralPolicy(data.ephemeral_policy)
+      : undefined,
     id: data.id,
     isManaged: data.is_managed,
     isProtected: data.is_protected,
@@ -179,13 +213,24 @@ export const marshalCreateFolderRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
+export const marshalEphemeralPolicy = (
+  request: EphemeralPolicy,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  action: request.action,
+  expires_once_accessed: request.expiresOnceAccessed,
+  time_to_live: request.timeToLive,
+})
+
 export const marshalCreateSecretRequest = (
   request: CreateSecretRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  ephemeral_action: request.ephemeralAction,
-  expires_at: request.expiresAt,
+  ephemeral_policy:
+    request.ephemeralPolicy !== undefined
+      ? marshalEphemeralPolicy(request.ephemeralPolicy, defaults)
+      : undefined,
   name: request.name,
   path: request.path,
   project_id: request.projectId ?? defaults.defaultProjectId,
@@ -236,9 +281,22 @@ export const marshalUpdateSecretRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
+  ephemeral_policy:
+    request.ephemeralPolicy !== undefined
+      ? marshalEphemeralPolicy(request.ephemeralPolicy, defaults)
+      : undefined,
   name: request.name,
   path: request.path,
   tags: request.tags,
+})
+
+const marshalEphemeralProperties = (
+  request: EphemeralProperties,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  action: request.action,
+  expires_at: request.expiresAt,
+  expires_once_accessed: request.expiresOnceAccessed,
 })
 
 export const marshalUpdateSecretVersionRequest = (
@@ -246,4 +304,8 @@ export const marshalUpdateSecretVersionRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
+  ephemeral_properties:
+    request.ephemeralProperties !== undefined
+      ? marshalEphemeralProperties(request.ephemeralProperties, defaults)
+      : undefined,
 })
