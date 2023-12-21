@@ -4,6 +4,8 @@ export { API } from './api.gen'
 export * from './content.gen'
 export type {
   CreateJobDefinitionRequest,
+  CreateJobDefinitionRequestCronScheduleConfig,
+  CronSchedule,
   DeleteJobDefinitionRequest,
   GetJobDefinitionRequest,
   GetJobRunRequest,
@@ -19,5 +21,6 @@ export type {
   StartJobDefinitionRequest,
   StopJobRunRequest,
   UpdateJobDefinitionRequest,
+  UpdateJobDefinitionRequestCronScheduleConfig,
 } from './types.gen'
 export * as ValidationRules from './validation-rules.gen'

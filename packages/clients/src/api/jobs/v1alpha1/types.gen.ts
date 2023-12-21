@@ -17,6 +17,16 @@ export type ListJobDefinitionsRequestOrderBy =
 
 export type ListJobRunsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
+export interface CronSchedule {
+  schedule: string
+  timezone: string
+}
+
+export interface CreateJobDefinitionRequestCronScheduleConfig {
+  schedule: string
+  timezone: string
+}
+
 export interface JobDefinition {
   id: string
   name: string
@@ -30,6 +40,7 @@ export interface JobDefinition {
   environmentVariables: Record<string, string>
   description: string
   jobTimeout?: string
+  cronSchedule?: CronSchedule
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -56,21 +67,36 @@ export interface JobRun {
   region: Region
 }
 
+export interface UpdateJobDefinitionRequestCronScheduleConfig {
+  schedule?: string
+  timezone?: string
+}
+
 export type CreateJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
    */
   region?: Region
+  /** Name of the job definition. */
   name?: string
+  /** CPU limit of the job. */
   cpuLimit: number
+  /** Memory limit of the job. */
   memoryLimit: number
+  /** Image to use for the job. */
   imageUri: string
+  /** Startup command. */
   command: string
+  /** UUID of the Scaleway Project containing the job. */
   projectId?: string
+  /** Environment variables of the job. */
   environmentVariables?: Record<string, string>
+  /** Description of the job. */
   description: string
+  /** Timeout of the job in seconds. */
   jobTimeout?: string
+  cronSchedule?: CreateJobDefinitionRequestCronScheduleConfig
 }
 
 export type DeleteJobDefinitionRequest = {
@@ -79,6 +105,7 @@ export type DeleteJobDefinitionRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the job definition to delete. */
   jobDefinitionId: string
 }
 
@@ -88,6 +115,7 @@ export type GetJobDefinitionRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the job definition to get. */
   jobDefinitionId: string
 }
 
@@ -97,6 +125,7 @@ export type GetJobRunRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the job run to get. */
   jobRunId: string
 }
 
@@ -141,6 +170,7 @@ export type StartJobDefinitionRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the job definition to start. */
   jobDefinitionId: string
 }
 
@@ -150,6 +180,7 @@ export type StopJobRunRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the job run to stop. */
   jobRunId: string
 }
 
@@ -159,13 +190,23 @@ export type UpdateJobDefinitionRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the job definition to update. */
   jobDefinitionId: string
+  /** Name of the job definition. */
   name?: string
+  /** CPU limit of the job. */
   cpuLimit?: number
+  /** Memory limit of the job. */
   memoryLimit?: number
+  /** Image to use for the job. */
   imageUri?: string
+  /** Startup command. */
   command?: string
+  /** Environment variables of the job. */
   environmentVariables?: Record<string, string>
+  /** Description of the job. */
   description?: string
+  /** Timeout of the job in seconds. */
   jobTimeout?: string
+  cronSchedule?: UpdateJobDefinitionRequestCronScheduleConfig
 }

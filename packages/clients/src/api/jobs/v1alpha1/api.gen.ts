@@ -40,6 +40,12 @@ export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
 
+  /**
+   * Create a new job definition in a specified Project.
+   *
+   * @param request - The request {@link CreateJobDefinitionRequest}
+   * @returns A Promise of JobDefinition
+   */
   createJobDefinition = (request: Readonly<CreateJobDefinitionRequest>) =>
     this.client.fetch<JobDefinition>(
       {
@@ -56,6 +62,12 @@ export class API extends ParentAPI {
       unmarshalJobDefinition,
     )
 
+  /**
+   * Get a job definition by its unique identifier.
+   *
+   * @param request - The request {@link GetJobDefinitionRequest}
+   * @returns A Promise of JobDefinition
+   */
   getJobDefinition = (request: Readonly<GetJobDefinitionRequest>) =>
     this.client.fetch<JobDefinition>(
       {
@@ -94,6 +106,12 @@ export class API extends ParentAPI {
       unmarshalListJobDefinitionsResponse,
     )
 
+  /**
+   * List all your job definitions with filters.
+   *
+   * @param request - The request {@link ListJobDefinitionsRequest}
+   * @returns A Promise of ListJobDefinitionsResponse
+   */
   listJobDefinitions = (request: Readonly<ListJobDefinitionsRequest> = {}) =>
     enrichForPagination(
       'jobDefinitions',
@@ -101,6 +119,13 @@ export class API extends ParentAPI {
       request,
     )
 
+  /**
+   * Update an existing job definition associated with the specified unique
+   * identifier.
+   *
+   * @param request - The request {@link UpdateJobDefinitionRequest}
+   * @returns A Promise of JobDefinition
+   */
   updateJobDefinition = (request: Readonly<UpdateJobDefinitionRequest>) =>
     this.client.fetch<JobDefinition>(
       {
@@ -120,6 +145,11 @@ export class API extends ParentAPI {
       unmarshalJobDefinition,
     )
 
+  /**
+   * Delete an exsisting job definition by its unique identifier.
+   *
+   * @param request - The request {@link DeleteJobDefinitionRequest}
+   */
   deleteJobDefinition = (request: Readonly<DeleteJobDefinitionRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
@@ -132,6 +162,13 @@ export class API extends ParentAPI {
       )}`,
     })
 
+  /**
+   * Run an existing job definition by its unique identifier. This will create a
+   * new job run.
+   *
+   * @param request - The request {@link StartJobDefinitionRequest}
+   * @returns A Promise of JobRun
+   */
   startJobDefinition = (request: Readonly<StartJobDefinitionRequest>) =>
     this.client.fetch<JobRun>(
       {
@@ -149,6 +186,12 @@ export class API extends ParentAPI {
       unmarshalJobRun,
     )
 
+  /**
+   * Get a job run by its unique identifier.
+   *
+   * @param request - The request {@link GetJobRunRequest}
+   * @returns A Promise of JobRun
+   */
   getJobRun = (request: Readonly<GetJobRunRequest>) =>
     this.client.fetch<JobRun>(
       {
@@ -161,6 +204,12 @@ export class API extends ParentAPI {
       unmarshalJobRun,
     )
 
+  /**
+   * Stop a job run by its unique identifier.
+   *
+   * @param request - The request {@link StopJobRunRequest}
+   * @returns A Promise of JobRun
+   */
   stopJobRun = (request: Readonly<StopJobRunRequest>) =>
     this.client.fetch<JobRun>(
       {
@@ -197,6 +246,12 @@ export class API extends ParentAPI {
       unmarshalListJobRunsResponse,
     )
 
+  /**
+   * List all job runs with filters.
+   *
+   * @param request - The request {@link ListJobRunsRequest}
+   * @returns A Promise of ListJobRunsResponse
+   */
   listJobRuns = (request: Readonly<ListJobRunsRequest> = {}) =>
     enrichForPagination('jobRuns', this.pageOfListJobRuns, request)
 }
