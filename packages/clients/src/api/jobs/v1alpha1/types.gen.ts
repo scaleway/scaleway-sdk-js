@@ -62,14 +62,23 @@ export type CreateJobDefinitionRequest = {
    * config.
    */
   region?: Region
+  /** Name of the job definition. */
   name?: string
+  /** CPU limit of the job. */
   cpuLimit: number
+  /** Memory limit of the job. */
   memoryLimit: number
+  /** Image to use for the job. */
   imageUri: string
+  /** Startup command. */
   command: string
+  /** UUID of the Scaleway Project containing the job. */
   projectId?: string
+  /** Environment variables of the job. */
   environmentVariables?: Record<string, string>
+  /** Description of the job. */
   description: string
+  /** Timeout of the job in seconds. */
   jobTimeout?: string
 }
 
@@ -79,6 +88,7 @@ export type DeleteJobDefinitionRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the job definition to delete. */
   jobDefinitionId: string
 }
 
@@ -88,6 +98,7 @@ export type GetJobDefinitionRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the job definition to get. */
   jobDefinitionId: string
 }
 
@@ -97,6 +108,7 @@ export type GetJobRunRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the job run to get. */
   jobRunId: string
 }
 
@@ -141,6 +153,7 @@ export type StartJobDefinitionRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the job definition to start. */
   jobDefinitionId: string
 }
 
@@ -150,6 +163,7 @@ export type StopJobRunRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the job run to stop. */
   jobRunId: string
 }
 
@@ -159,13 +173,22 @@ export type UpdateJobDefinitionRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the job definition to update. */
   jobDefinitionId: string
+  /** Name of the job definition. */
   name?: string
+  /** CPU limit of the job. */
   cpuLimit?: number
+  /** Memory limit of the job. */
   memoryLimit?: number
+  /** Image to use for the job. */
   imageUri?: string
+  /** Startup command. */
   command?: string
+  /** Environment variables of the job. */
   environmentVariables?: Record<string, string>
+  /** Description of the job. */
   description?: string
+  /** Timeout of the job in seconds. */
   jobTimeout?: string
 }
