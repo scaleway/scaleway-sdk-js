@@ -444,7 +444,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiCreateIpRequest}
    * @returns A Promise of Ip
    */
-  createIp = (request: Readonly<ZonedApiCreateIpRequest> = {}) =>
+  createIp = (request: Readonly<ZonedApiCreateIpRequest>) =>
     this.client.fetch<Ip>(
       {
         body: JSON.stringify(
@@ -1866,7 +1866,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateIpRequest}
    * @returns A Promise of Ip
    */
-  createIp = (request: Readonly<CreateIpRequest> = {}) =>
+  createIp = (request: Readonly<CreateIpRequest>) =>
     this.client.fetch<Ip>(
       {
         body: JSON.stringify(
