@@ -2,6 +2,8 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Region } from '../../../bridge'
 
+export type EphemeralPolicyAction = 'unknown_action' | 'delete' | 'disable'
+
 export type ListFoldersRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -18,11 +20,6 @@ export type ListSecretsRequestOrderBy =
 
 export type Product = 'unknown' | 'edge_services'
 
-export type SecretEphemeralAction =
-  | 'unknown_ephemeral_action'
-  | 'delete_secret'
-  | 'disable_secret'
-
 export type SecretStatus = 'ready' | 'locked'
 
 export type SecretType =
@@ -36,6 +33,30 @@ export type SecretVersionStatus =
   | 'enabled'
   | 'disabled'
   | 'destroyed'
+
+export interface EphemeralProperties {
+  /** (Optional.) If not specified, the version does not have an expiration date. */
+  expiresAt?: Date
+  /**
+   * (Optional.) If not specified, the version can be accessed an unlimited
+   * amount of times.
+   */
+  expiresOnceAccessed?: boolean
+  /** See `EphemeralPolicy.Action` enum for a description of values. */
+  action: EphemeralPolicyAction
+}
+
+export interface EphemeralPolicy {
+  /**
+   * Time frame, from one second and up to one year, during which the secret's
+   * versions are valid.
+   */
+  timeToLive?: string
+  /** Returns `true` if the version expires after a single user access. */
+  expiresOnceAccessed?: boolean
+  /** See the `EphemeralPolicy.Action` enum for a description of values. */
+  action: EphemeralPolicyAction
+}
 
 export interface PasswordGenerationParams {
   /** Length of the password to generate (between 1 and 1024). */
@@ -88,6 +109,12 @@ export interface SecretVersion {
   description?: string
   /** Returns `true` if the version is the latest. */
   isLatest: boolean
+  /**
+   * Returns the version's expiration date, whether it expires after being
+   * accessed once, and the action to perform (disable or delete) once the
+   * version expires.
+   */
+  ephemeralProperties?: EphemeralProperties
 }
 
 export interface Secret {
@@ -121,10 +148,11 @@ export interface Secret {
   type: SecretType
   /** Location of the secret in the directory structure. */
   path: string
-  /** (Optional.) Date on which the secret will be deleted or deactivated. */
-  expiresAt?: Date
-  /** See `Secret.EphemeralAction` enum for description of values. */
-  ephemeralAction: SecretEphemeralAction
+  /**
+   * (Optional.) Policy that defines whether/when a secret's versions expire. By
+   * default, the policy is applied to all the secret's versions.
+   */
+  ephemeralPolicy?: EphemeralPolicy
   /** Region of the secret. */
   region: Region
 }
@@ -244,10 +272,11 @@ export type CreateSecretRequest = {
    * specified, the path is `/`.
    */
   path?: string
-  /** (Optional.) Date on which the secret will be deleted or deactivated. */
-  expiresAt?: Date
-  /** Action to be taken when the secret expires. */
-  ephemeralAction?: SecretEphemeralAction
+  /**
+   * (Optional.) Policy that defines whether/when a secret's versions expire. By
+   * default, the policy is applied to all the secret's versions.
+   */
+  ephemeralPolicy?: EphemeralPolicy
 }
 
 export type CreateSecretVersionRequest = {
@@ -619,6 +648,8 @@ export type UpdateSecretRequest = {
    * specified, the path is `/`.
    */
   path?: string
+  /** (Optional.) Policy that defines whether/when a secret's versions expire. */
+  ephemeralPolicy?: EphemeralPolicy
 }
 
 export type UpdateSecretVersionRequest = {
@@ -640,4 +671,10 @@ export type UpdateSecretVersionRequest = {
   revision: string
   /** Description of the version. */
   description?: string
+  /**
+   * (Optional.) Properties that defines the version's expiration date, whether
+   * it expires after being accessed once, and the action to perform (disable or
+   * delete) once the version expires.
+   */
+  ephemeralProperties?: EphemeralProperties
 }
