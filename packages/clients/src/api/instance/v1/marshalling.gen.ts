@@ -311,6 +311,7 @@ const unmarshalServerIp = (data: unknown): ServerIp => {
     family: data.family,
     gateway: data.gateway,
     id: data.id,
+    ipamId: data.ipam_id,
     netmask: data.netmask,
     provisioningMode: data.provisioning_mode,
     state: data.state,
@@ -476,6 +477,7 @@ const unmarshalIp = (data: unknown): Ip => {
   return {
     address: data.address,
     id: data.id,
+    ipamId: data.ipam_id,
     organization: data.organization,
     prefix: data.prefix,
     project: data.project,
@@ -2206,6 +2208,7 @@ const marshalServerIp = (
   family: request.family,
   gateway: request.gateway,
   id: request.id,
+  ipam_id: request.ipamId,
   netmask: request.netmask,
   provisioning_mode: request.provisioningMode,
   state: request.state,
