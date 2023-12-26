@@ -17,6 +17,28 @@ export const CreateJobDefinitionRequest = {
   },
 }
 
+export const CreateJobDefinitionRequestCronScheduleConfig = {
+  schedule: {
+    maxLength: 255,
+    minLength: 1,
+  },
+  timezone: {
+    maxLength: 255,
+    minLength: 1,
+  },
+}
+
+export const CronSchedule = {
+  schedule: {
+    maxLength: 255,
+    minLength: 1,
+  },
+  timezone: {
+    maxLength: 255,
+    minLength: 1,
+  },
+}
+
 export const ListJobDefinitionsRequest = {
   page: {
     greaterThanOrEqual: 1,
@@ -50,5 +72,16 @@ export const UpdateJobDefinitionRequest = {
   },
   name: {
     pattern: /^[A-Za-z0-9-_]{3,50}$/,
+  },
+}
+
+export const UpdateJobDefinitionRequestCronScheduleConfig = {
+  schedule: {
+    maxLength: 255,
+    minLength: 1,
+  },
+  timezone: {
+    maxLength: 255,
+    minLength: 1,
   },
 }

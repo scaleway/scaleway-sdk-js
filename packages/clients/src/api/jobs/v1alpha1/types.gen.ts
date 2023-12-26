@@ -17,6 +17,16 @@ export type ListJobDefinitionsRequestOrderBy =
 
 export type ListJobRunsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
+export interface CronSchedule {
+  schedule: string
+  timezone: string
+}
+
+export interface CreateJobDefinitionRequestCronScheduleConfig {
+  schedule: string
+  timezone: string
+}
+
 export interface JobDefinition {
   id: string
   name: string
@@ -30,6 +40,7 @@ export interface JobDefinition {
   environmentVariables: Record<string, string>
   description: string
   jobTimeout?: string
+  cronSchedule?: CronSchedule
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -56,6 +67,11 @@ export interface JobRun {
   region: Region
 }
 
+export interface UpdateJobDefinitionRequestCronScheduleConfig {
+  schedule?: string
+  timezone?: string
+}
+
 export type CreateJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -80,6 +96,7 @@ export type CreateJobDefinitionRequest = {
   description: string
   /** Timeout of the job in seconds. */
   jobTimeout?: string
+  cronSchedule?: CreateJobDefinitionRequestCronScheduleConfig
 }
 
 export type DeleteJobDefinitionRequest = {
@@ -191,4 +208,5 @@ export type UpdateJobDefinitionRequest = {
   description?: string
   /** Timeout of the job in seconds. */
   jobTimeout?: string
+  cronSchedule?: UpdateJobDefinitionRequestCronScheduleConfig
 }

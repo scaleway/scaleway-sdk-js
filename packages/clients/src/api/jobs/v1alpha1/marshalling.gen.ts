@@ -9,12 +9,28 @@ import {
 import type { DefaultValues } from '../../../bridge'
 import type {
   CreateJobDefinitionRequest,
+  CreateJobDefinitionRequestCronScheduleConfig,
+  CronSchedule,
   JobDefinition,
   JobRun,
   ListJobDefinitionsResponse,
   ListJobRunsResponse,
   UpdateJobDefinitionRequest,
+  UpdateJobDefinitionRequestCronScheduleConfig,
 } from './types.gen'
+
+const unmarshalCronSchedule = (data: unknown): CronSchedule => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CronSchedule' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    schedule: data.schedule,
+    timezone: data.timezone,
+  } as CronSchedule
+}
 
 export const unmarshalJobDefinition = (data: unknown): JobDefinition => {
   if (!isJSONObject(data)) {
@@ -27,6 +43,9 @@ export const unmarshalJobDefinition = (data: unknown): JobDefinition => {
     command: data.command,
     cpuLimit: data.cpu_limit,
     createdAt: unmarshalDate(data.created_at),
+    cronSchedule: data.cron_schedule
+      ? unmarshalCronSchedule(data.cron_schedule)
+      : undefined,
     description: data.description,
     environmentVariables: data.environment_variables,
     id: data.id,
@@ -96,12 +115,27 @@ export const unmarshalListJobRunsResponse = (
   } as ListJobRunsResponse
 }
 
+const marshalCreateJobDefinitionRequestCronScheduleConfig = (
+  request: CreateJobDefinitionRequestCronScheduleConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  schedule: request.schedule,
+  timezone: request.timezone,
+})
+
 export const marshalCreateJobDefinitionRequest = (
   request: CreateJobDefinitionRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   command: request.command,
   cpu_limit: request.cpuLimit,
+  cron_schedule:
+    request.cronSchedule !== undefined
+      ? marshalCreateJobDefinitionRequestCronScheduleConfig(
+          request.cronSchedule,
+          defaults,
+        )
+      : undefined,
   description: request.description,
   environment_variables:
     request.environmentVariables !== undefined
@@ -114,12 +148,27 @@ export const marshalCreateJobDefinitionRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
+const marshalUpdateJobDefinitionRequestCronScheduleConfig = (
+  request: UpdateJobDefinitionRequestCronScheduleConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  schedule: request.schedule,
+  timezone: request.timezone,
+})
+
 export const marshalUpdateJobDefinitionRequest = (
   request: UpdateJobDefinitionRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   command: request.command,
   cpu_limit: request.cpuLimit,
+  cron_schedule:
+    request.cronSchedule !== undefined
+      ? marshalUpdateJobDefinitionRequestCronScheduleConfig(
+          request.cronSchedule,
+          defaults,
+        )
+      : undefined,
   description: request.description,
   environment_variables: request.environmentVariables,
   image_uri: request.imageUri,
