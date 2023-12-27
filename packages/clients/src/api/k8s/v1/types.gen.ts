@@ -891,6 +891,7 @@ export interface ExternalNode {
   runcVersion: string
   cniPluginsVersion: string
   nodeLabels: Record<string, string>
+  nodeTaints: Record<string, string>
 }
 
 export type GetClusterKubeConfigRequest = {
