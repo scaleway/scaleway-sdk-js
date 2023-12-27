@@ -444,6 +444,12 @@ export interface CreatePoolRequestUpgradePolicy {
   maxSurge?: number
 }
 
+export interface ExternalNodeCoreV1Taint {
+  key: string
+  value: string
+  effect: string
+}
+
 export interface ClusterType {
   /** Cluster type name. */
   name: string
@@ -891,6 +897,7 @@ export interface ExternalNode {
   runcVersion: string
   cniPluginsVersion: string
   nodeLabels: Record<string, string>
+  nodeTaints: ExternalNodeCoreV1Taint[]
 }
 
 export type GetClusterKubeConfigRequest = {

@@ -27,6 +27,7 @@ export type {
   DeleteNodeRequest,
   DeletePoolRequest,
   ExternalNode,
+  ExternalNodeCoreV1Taint,
   GetClusterKubeConfigRequest,
   GetClusterRequest,
   GetNodeRequest,
