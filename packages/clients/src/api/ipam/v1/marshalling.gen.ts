@@ -12,6 +12,7 @@ import type {
   IP,
   ListIPsResponse,
   Resource,
+  Reverse,
   Source,
   UpdateIPRequest,
 } from './types.gen'
@@ -29,6 +30,19 @@ const unmarshalResource = (data: unknown): Resource => {
     name: data.name,
     type: data.type,
   } as Resource
+}
+
+const unmarshalReverse = (data: unknown): Reverse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Reverse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    address: data.address,
+    hostname: data.hostname,
+  } as Reverse
 }
 
 const unmarshalSource = (data: unknown): Source => {
@@ -60,6 +74,7 @@ export const unmarshalIP = (data: unknown): IP => {
     projectId: data.project_id,
     region: data.region,
     resource: data.resource ? unmarshalResource(data.resource) : undefined,
+    reverses: unmarshalArrayOfObject(data.reverses, unmarshalReverse),
     source: unmarshalSource(data.source),
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
@@ -102,9 +117,21 @@ export const marshalBookIPRequest = (
   tags: request.tags,
 })
 
+const marshalReverse = (
+  request: Reverse,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  address: request.address,
+  hostname: request.hostname,
+})
+
 export const marshalUpdateIPRequest = (
   request: UpdateIPRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  reverses:
+    request.reverses !== undefined
+      ? request.reverses.map(elt => marshalReverse(elt, defaults))
+      : undefined,
   tags: request.tags,
 })

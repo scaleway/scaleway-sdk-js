@@ -11,6 +11,7 @@ export type {
   ReleaseIPRequest,
   Resource,
   ResourceType,
+  Reverse,
   Source,
   UpdateIPRequest,
 } from './types.gen'
