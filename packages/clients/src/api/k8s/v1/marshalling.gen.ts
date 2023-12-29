@@ -23,6 +23,7 @@ import type {
   CreatePoolRequest,
   CreatePoolRequestUpgradePolicy,
   ExternalNode,
+  ExternalNodeCoreV1Taint,
   ListClusterAvailableTypesResponse,
   ListClusterAvailableVersionsResponse,
   ListClusterTypesResponse,
@@ -256,6 +257,22 @@ export const unmarshalNode = (data: unknown): Node => {
   } as Node
 }
 
+const unmarshalExternalNodeCoreV1Taint = (
+  data: unknown,
+): ExternalNodeCoreV1Taint => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ExternalNodeCoreV1Taint' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    effect: data.effect,
+    key: data.key,
+    value: data.value,
+  } as ExternalNodeCoreV1Taint
+}
+
 export const unmarshalExternalNode = (data: unknown): ExternalNode => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -274,6 +291,10 @@ export const unmarshalExternalNode = (data: unknown): ExternalNode => {
     kubeletConfig: data.kubelet_config,
     name: data.name,
     nodeLabels: data.node_labels,
+    nodeTaints: unmarshalArrayOfObject(
+      data.node_taints,
+      unmarshalExternalNodeCoreV1Taint,
+    ),
     poolVersion: data.pool_version,
     runcVersion: data.runc_version,
   } as ExternalNode
