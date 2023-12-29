@@ -40,6 +40,13 @@ export interface Resource {
   name?: string
 }
 
+export interface Reverse {
+  /** Reverse domain name. */
+  hostname: string
+  /** IP corresponding to the hostname. */
+  address?: string
+}
+
 export interface Source {
   /**
    * This source is global.
@@ -83,6 +90,8 @@ export interface IP {
   resource?: Resource
   /** Tags for the IP. */
   tags: string[]
+  /** Array of reverses associated with the IP. */
+  reverses: Reverse[]
   /** Region of the IP. */
   region: Region
   /** Zone of the IP, if zonal. */
@@ -214,4 +223,9 @@ export type UpdateIPRequest = {
   ipId: string
   /** Tags for the IP. */
   tags?: string[]
+  /**
+   * Array of reverse domain names associated with an IP in the subnet of the
+   * current IP.
+   */
+  reverses?: Reverse[]
 }
