@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.8.0...@scaleway/sdk@2.9.0) (2024-01-01)
+
+### Features
+
+- **instance:** add ipam_id to ServerIp and Ip ([#1068](https://github.com/scaleway/scaleway-sdk-js/issues/1068)) ([895328f](https://github.com/scaleway/scaleway-sdk-js/commit/895328f397349e30bd88d0165cf9af75a53343ff))
+- **ipam:** allow publicly to set a custom reverse on their ip ([#1077](https://github.com/scaleway/scaleway-sdk-js/issues/1077)) ([adf09e2](https://github.com/scaleway/scaleway-sdk-js/commit/adf09e2c4b91a9494cdbe866a5ebd9f4646bfa79))
+- **k8s:** use structs for node taints ([#1076](https://github.com/scaleway/scaleway-sdk-js/issues/1076)) ([1127301](https://github.com/scaleway/scaleway-sdk-js/commit/112730149f33b77729a536f936a23be358f25802))
+- **lb:** attach flexible ipv6 ([#1069](https://github.com/scaleway/scaleway-sdk-js/issues/1069)) ([6096c85](https://github.com/scaleway/scaleway-sdk-js/commit/6096c85114fcde6567cb9ef98ce9a8297f519cd5))
+- **secret:** add ephemeral policy ([#1072](https://github.com/scaleway/scaleway-sdk-js/issues/1072)) ([6c9197b](https://github.com/scaleway/scaleway-sdk-js/commit/6c9197b932814a95f2f035ae3245598e13074c25))
+- **serverless:** add CronSchedule to job definitions ([#1074](https://github.com/scaleway/scaleway-sdk-js/issues/1074)) ([0900a76](https://github.com/scaleway/scaleway-sdk-js/commit/0900a76b57e024ae98d5f7dc09f6581aa64e9e2b))
+
 ## [2.8.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.7.0...@scaleway/sdk@2.8.0) (2023-12-18)
 
 ### Features
