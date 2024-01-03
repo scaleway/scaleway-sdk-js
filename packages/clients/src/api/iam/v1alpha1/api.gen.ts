@@ -24,6 +24,7 @@ import {
   marshalUpdateGroupRequest,
   marshalUpdatePolicyRequest,
   marshalUpdateSSHKeyRequest,
+  marshalUpdateUserRequest,
   unmarshalAPIKey,
   unmarshalApplication,
   unmarshalGroup,
@@ -111,6 +112,7 @@ import type {
   UpdateGroupRequest,
   UpdatePolicyRequest,
   UpdateSSHKeyRequest,
+  UpdateUserRequest,
   User,
 } from './types.gen'
 
@@ -282,6 +284,28 @@ export class API extends ParentAPI {
     this.client.fetch<User>(
       {
         method: 'GET',
+        path: `/iam/v1alpha1/users/${validatePathParam(
+          'userId',
+          request.userId,
+        )}`,
+      },
+      unmarshalUser,
+    )
+
+  /**
+   * Update a user. Update the parameters of a user, including `tags`.
+   *
+   * @param request - The request {@link UpdateUserRequest}
+   * @returns A Promise of User
+   */
+  updateUser = (request: Readonly<UpdateUserRequest>) =>
+    this.client.fetch<User>(
+      {
+        body: JSON.stringify(
+          marshalUpdateUserRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
         path: `/iam/v1alpha1/users/${validatePathParam(
           'userId',
           request.userId,
