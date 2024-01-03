@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.9.0...@scaleway/sdk@2.10.0) (2024-01-03)
+
+### Features
+
+- **iam:** add UpdateUser ([#1080](https://github.com/scaleway/scaleway-sdk-js/issues/1080)) ([efb630a](https://github.com/scaleway/scaleway-sdk-js/commit/efb630a29a485b7509a7728eb348b3f7ff8bf2f4))
+- **lb:** generate ip_type for ListIpsRequest ([#1081](https://github.com/scaleway/scaleway-sdk-js/issues/1081)) ([e8e133b](https://github.com/scaleway/scaleway-sdk-js/commit/e8e133bffd23a8b8a66b0e76e48c5370ebbbe34e))
+
 ## [2.9.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.8.0...@scaleway/sdk@2.9.0) (2024-01-01)
 
 ### Features
