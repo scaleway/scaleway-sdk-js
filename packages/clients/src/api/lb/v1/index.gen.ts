@@ -80,6 +80,7 @@ export type {
   ListFrontendsRequestOrderBy,
   ListFrontendsResponse,
   ListIPsRequest,
+  ListIpsRequestIpType,
   ListIpsResponse,
   ListLbPrivateNetworksRequest,
   ListLbPrivateNetworksResponse,
