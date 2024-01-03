@@ -80,6 +80,8 @@ export type ListFrontendsRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
+export type ListIpsRequestIpType = 'all' | 'ipv4' | 'ipv6'
+
 export type ListLbsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -1436,6 +1438,8 @@ export type ListIPsRequest = {
    * will be returned.
    */
   projectId?: string
+  /** IP type to filter for. */
+  ipType?: ListIpsRequestIpType
 }
 
 export interface ListIpsResponse {
@@ -2511,6 +2515,8 @@ export type ZonedApiListIPsRequest = {
    * will be returned.
    */
   projectId?: string
+  /** IP type to filter for. */
+  ipType?: ListIpsRequestIpType
 }
 
 export type ZonedApiListLbPrivateNetworksRequest = {

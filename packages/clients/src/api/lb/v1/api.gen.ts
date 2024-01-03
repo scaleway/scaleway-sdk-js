@@ -413,6 +413,7 @@ export class ZonedAPI extends ParentAPI {
         )}/ips`,
         urlParams: urlParams(
           ['ip_address', request.ipAddress],
+          ['ip_type', request.ipType],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
@@ -1839,6 +1840,7 @@ export class API extends ParentAPI {
         )}/ips`,
         urlParams: urlParams(
           ['ip_address', request.ipAddress],
+          ['ip_type', request.ipType],
           ['organization_id', request.organizationId],
           ['page', request.page],
           [
