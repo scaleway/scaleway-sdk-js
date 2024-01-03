@@ -994,3 +994,10 @@ export type UpdateSSHKeyRequest = {
   /** Enable or disable the SSH key. */
   disabled?: boolean
 }
+
+export type UpdateUserRequest = {
+  /** ID of the user to update. */
+  userId: string
+  /** New tags for the user (maximum of 10 tags). */
+  tags?: string[]
+}
