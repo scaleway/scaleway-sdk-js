@@ -324,6 +324,8 @@ export interface ReadReplica {
    * nodes or not.
    */
   sameZone: boolean
+  /** UUID of the Database Instance. */
+  instanceId: string
 }
 
 export interface UpgradableVersion {

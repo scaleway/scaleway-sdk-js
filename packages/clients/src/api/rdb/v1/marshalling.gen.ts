@@ -169,6 +169,7 @@ export const unmarshalReadReplica = (data: unknown): ReadReplica => {
   return {
     endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
     id: data.id,
+    instanceId: data.instance_id,
     region: data.region,
     sameZone: data.same_zone,
     status: data.status,
