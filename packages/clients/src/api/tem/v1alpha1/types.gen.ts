@@ -115,6 +115,13 @@ export interface CreateEmailRequestAttachment {
   content: string
 }
 
+export interface CreateEmailRequestHeader {
+  /** Email header key. */
+  key: string
+  /** Email header value. */
+  value: string
+}
+
 export interface Email {
   /** Technical ID of the email. */
   id: string
@@ -268,6 +275,8 @@ export type CreateEmailRequest = {
   attachments?: CreateEmailRequestAttachment[]
   /** Maximum date to deliver the email. */
   sendBefore?: Date
+  /** Array of additional headers as key-value. */
+  additionalHeaders?: CreateEmailRequestHeader[]
 }
 
 export interface CreateEmailResponse {

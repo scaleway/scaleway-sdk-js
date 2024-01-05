@@ -11,6 +11,7 @@ import type {
   CreateEmailRequest,
   CreateEmailRequestAddress,
   CreateEmailRequestAttachment,
+  CreateEmailRequestHeader,
   CreateEmailResponse,
   Domain,
   DomainLastStatus,
@@ -265,10 +266,24 @@ const marshalCreateEmailRequestAttachment = (
   type: request.type,
 })
 
+const marshalCreateEmailRequestHeader = (
+  request: CreateEmailRequestHeader,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  key: request.key,
+  value: request.value,
+})
+
 export const marshalCreateEmailRequest = (
   request: CreateEmailRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  additional_headers:
+    request.additionalHeaders !== undefined
+      ? request.additionalHeaders.map(elt =>
+          marshalCreateEmailRequestHeader(elt, defaults),
+        )
+      : undefined,
   attachments:
     request.attachments !== undefined
       ? request.attachments.map(elt =>

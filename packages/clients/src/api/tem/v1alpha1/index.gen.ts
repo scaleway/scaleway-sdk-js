@@ -9,6 +9,7 @@ export type {
   CreateEmailRequest,
   CreateEmailRequestAddress,
   CreateEmailRequestAttachment,
+  CreateEmailRequestHeader,
   CreateEmailResponse,
   Domain,
   DomainLastStatus,
