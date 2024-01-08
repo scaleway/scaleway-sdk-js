@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.10.0...@scaleway/sdk@2.11.0) (2024-01-08)
+
+### Features
+
+- **billing:** add v2beta1 API ([#1082](https://github.com/scaleway/scaleway-sdk-js/issues/1082)) ([c613a94](https://github.com/scaleway/scaleway-sdk-js/commit/c613a94d2099b1cf55cdf53481d4fc5b2f6d6abb))
+- **rdb:** add instance_id to ReadReplica ([#1083](https://github.com/scaleway/scaleway-sdk-js/issues/1083)) ([60a08fc](https://github.com/scaleway/scaleway-sdk-js/commit/60a08fc91a6aa8312e04c6dcdee1ee8d2a57fc7d))
+- **tem:** add field to accept new headers in create email endpoint ([#1084](https://github.com/scaleway/scaleway-sdk-js/issues/1084)) ([fd05628](https://github.com/scaleway/scaleway-sdk-js/commit/fd056280d1cb89c55f34ecb3920d67eddb65dbfa))
+
 ## [2.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.9.0...@scaleway/sdk@2.10.0) (2024-01-03)
 
 ### Features
