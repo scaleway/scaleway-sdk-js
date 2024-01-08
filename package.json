@@ -95,7 +95,7 @@
     "rollup": "^4.9.2",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-visualizer": "^5.11.0",
-    "typedoc": "^0.25.4",
+    "typedoc": "^0.25.6",
     "typescript": "^5.3.3"
   },
   "packageManager": "pnpm@8.12.0"
