@@ -908,6 +908,8 @@ export type GetClusterKubeConfigRequest = {
   region?: Region
   /** Cluster ID for which to download the kubeconfig. */
   clusterId: string
+  /** Hide the legacy token from the kubeconfig. */
+  redacted?: boolean
 }
 
 export type GetClusterRequest = {

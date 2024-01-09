@@ -348,7 +348,7 @@ export class API extends ParentAPI {
         'clusterId',
         request.clusterId,
       )}/kubeconfig`,
-      urlParams: urlParams(['dl', 1]),
+      urlParams: urlParams(['dl', 1], ['redacted', request.redacted]),
       responseType: 'blob',
     })
 
