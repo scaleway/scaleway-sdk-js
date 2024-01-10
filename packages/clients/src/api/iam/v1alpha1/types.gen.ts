@@ -630,7 +630,7 @@ export type ListAPIKeysRequest = {
   editable?: boolean
   /** Defines whether to filter out expired API keys or not. */
   expired?: boolean
-  /** Filter by access key. */
+  /** @deprecated Filter by access key (deprecated in favor of `access_keys`). */
   accessKey?: string
   /** Filter by description. */
   description?: string
@@ -638,6 +638,8 @@ export type ListAPIKeysRequest = {
   bearerId?: string
   /** Filter by type of bearer. */
   bearerType?: BearerType
+  /** Filter by a list of access keys. */
+  accessKeys?: string[]
 }
 
 export interface ListAPIKeysResponse {
@@ -788,6 +790,8 @@ export type ListPoliciesRequest = {
   policyName?: string
   /** Filter by tags containing a given string. */
   tag?: string
+  /** Filter by a list of IDs. */
+  policyIds?: string[]
 }
 
 export interface ListPoliciesResponse {

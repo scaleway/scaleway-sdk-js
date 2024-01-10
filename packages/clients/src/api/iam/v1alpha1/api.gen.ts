@@ -720,6 +720,7 @@ export class API extends ParentAPI {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
+          ['policy_ids', request.policyIds],
           ['policy_name', request.policyName],
           ['tag', request.tag],
           ['user_ids', request.userIds],
@@ -946,6 +947,7 @@ export class API extends ParentAPI {
         path: `/iam/v1alpha1/api-keys`,
         urlParams: urlParams(
           ['access_key', request.accessKey],
+          ['access_keys', request.accessKeys],
           ['bearer_id', request.bearerId],
           ['bearer_type', request.bearerType],
           ['description', request.description],
