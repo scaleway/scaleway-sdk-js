@@ -151,6 +151,10 @@ export type ListDatabaseBackupsRequest = {
    * config.
    */
   region?: Region
+  /** Filter by the UUID of the Scaleway organization. */
+  organizationId?: string
+  /** Filter by the UUID of the Scaleway project. */
+  projectId?: string
   /** Filter by the UUID of the Serverless SQL Database. */
   databaseId: string
   /** Page number. */
@@ -174,6 +178,8 @@ export type ListDatabasesRequest = {
    * config.
    */
   region?: Region
+  /** Filter by the UUID of the Scaleway organization. */
+  organizationId?: string
   /** UUID of the Scaleway project. */
   projectId?: string
   /** Page number. */
