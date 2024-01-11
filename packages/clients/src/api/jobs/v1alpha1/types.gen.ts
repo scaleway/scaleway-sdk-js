@@ -60,6 +60,8 @@ export interface JobRun {
   errorMessage: string
   cpuLimit: number
   memoryLimit: number
+  command: string
+  environmentVariables: Record<string, string>
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -172,6 +174,12 @@ export type StartJobDefinitionRequest = {
   region?: Region
   /** UUID of the job definition to start. */
   jobDefinitionId: string
+  /** Contextual startup command for this specific job run. */
+  command?: string
+  /** Contextual environment variables for this specific job run. */
+  environmentVariables?: Record<string, string>
+  /** Number of jobs to run. */
+  replicas?: number
 }
 
 export type StopJobRunRequest = {
