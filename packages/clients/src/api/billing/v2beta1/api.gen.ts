@@ -10,6 +10,7 @@ import {
 import {
   unmarshalInvoice,
   unmarshalListConsumptionsResponse,
+  unmarshalListDiscountsResponse,
   unmarshalListInvoicesResponse,
   unmarshalListTaxesResponse,
 } from './marshalling.gen'
@@ -20,6 +21,8 @@ import type {
   Invoice,
   ListConsumptionsRequest,
   ListConsumptionsResponse,
+  ListDiscountsRequest,
+  ListDiscountsResponse,
   ListInvoicesRequest,
   ListInvoicesResponse,
   ListTaxesRequest,
@@ -201,4 +204,27 @@ export class API extends ParentAPI {
       urlParams: urlParams(['dl', 1], ['file_type', request.fileType]),
       responseType: 'blob',
     })
+
+  protected pageOfListDiscounts = (
+    request: Readonly<ListDiscountsRequest> = {},
+  ) =>
+    this.client.fetch<ListDiscountsResponse>(
+      {
+        method: 'GET',
+        path: `/billing/v2beta1/discounts`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListDiscountsResponse,
+    )
+
+  listDiscounts = (request: Readonly<ListDiscountsRequest> = {}) =>
+    enrichForPagination('discounts', this.pageOfListDiscounts, request)
 }

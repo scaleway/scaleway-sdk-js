@@ -2,6 +2,21 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Money } from '../../../bridge'
 
+export type DiscountDiscountMode =
+  | 'unknown_discount_mode'
+  | 'discount_mode_rate'
+  | 'discount_mode_value'
+  | 'discount_mode_splittable'
+
+export type DiscountFilterType =
+  | 'unknown_type'
+  | 'category_name'
+  | 'product_name'
+  | 'product_range'
+  | 'resource_name'
+  | 'region'
+  | 'zone'
+
 export type DownloadInvoiceRequestFileType = 'pdf'
 
 export type ExportInvoicesRequestFileType = 'csv'
@@ -25,10 +40,14 @@ export type ExportInvoicesRequestOrderBy =
 export type InvoiceType = 'unknown_type' | 'periodic' | 'purchase'
 
 export type ListConsumptionsRequestOrderBy =
-  | 'updated_at_date_desc'
-  | 'updated_at_date_asc'
+  | 'updated_at_desc'
+  | 'updated_at_asc'
   | 'category_name_desc'
   | 'category_name_asc'
+
+export type ListDiscountsRequestOrderBy =
+  | 'creation_date_desc'
+  | 'creation_date_asc'
 
 export type ListInvoicesRequestOrderBy =
   | 'invoice_number_desc'
@@ -47,10 +66,25 @@ export type ListInvoicesRequestOrderBy =
   | 'invoice_type_asc'
 
 export type ListTaxesRequestOrderBy =
-  | 'updated_at_date_desc'
-  | 'updated_at_date_asc'
+  | 'updated_at_desc'
+  | 'updated_at_asc'
   | 'category_name_desc'
   | 'category_name_asc'
+
+export interface DiscountCoupon {
+  /** The description of the coupon. */
+  description?: string
+}
+
+export interface DiscountFilter {
+  /**
+   * Type of the filter (category name, product name, product range, resource
+   * name, region or zone).
+   */
+  type: DiscountFilterType
+  /** Value of filter. */
+  value: string
+}
 
 export interface ListConsumptionsResponseConsumption {
   /** Monetary value of the consumption. */
@@ -68,6 +102,37 @@ export interface ListConsumptionsResponseConsumption {
   projectId: string
   /** Name of consumption category. */
   categoryName: string
+  /** Unit of consumed quantity. */
+  unit: string
+  /** Consumed quantity. */
+  billedQuantity: string
+}
+
+export interface Discount {
+  /** The ID of the discount. */
+  id: string
+  /** The creation date of the discount. */
+  creationDate?: Date
+  /** The organization ID of the discount. */
+  organizationId: string
+  /** The description of the discount. */
+  description: string
+  /** The initial value of the discount. */
+  value: number
+  /** The value indicating how much of the discount has been used. */
+  valueUsed: number
+  /** The remaining value of the discount. */
+  valueRemaining: number
+  /** The mode of the discount. */
+  mode: DiscountDiscountMode
+  /** The start date of the discount. */
+  startDate?: Date
+  /** The stop date of the discount. */
+  stopDate?: Date
+  /** The description of the coupon. */
+  coupon?: DiscountCoupon
+  /** List of the discount scopes. */
+  filters: DiscountFilter[]
 }
 
 export interface Invoice {
@@ -100,9 +165,8 @@ export interface Invoice {
   state: string
   /** Invoice number. */
   number: number
+  /** The name of the seller (Scaleway). */
   sellerName: string
-  /** Customer name associated to this organization. */
-  customerName: string
 }
 
 export interface ListTaxesResponseTax {
@@ -201,6 +265,27 @@ export interface ListConsumptionsResponse {
   totalDiscountUntaxedValue: number
   /** Last consumption update date. */
   updatedAt?: Date
+}
+
+export type ListDiscountsRequest = {
+  /** Order discounts in the response by their description. */
+  orderBy?: ListDiscountsRequestOrderBy
+  /** Positive integer to choose the page to return. */
+  page?: number
+  /**
+   * Positive integer lower or equal to 100 to select the number of items to
+   * return.
+   */
+  pageSize?: number
+  /** ID of the organization. */
+  organizationId?: string
+}
+
+export interface ListDiscountsResponse {
+  /** Total number of discounts. */
+  totalCount: number
+  /** Paginated returned discounts. */
+  discounts: Discount[]
 }
 
 export type ListInvoicesRequest = {
