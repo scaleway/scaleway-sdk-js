@@ -15,6 +15,7 @@ import type {
   JobRun,
   ListJobDefinitionsResponse,
   ListJobRunsResponse,
+  StartJobDefinitionRequest,
   UpdateJobDefinitionRequest,
   UpdateJobDefinitionRequestCronScheduleConfig,
 } from './types.gen'
@@ -67,8 +68,10 @@ export const unmarshalJobRun = (data: unknown): JobRun => {
   }
 
   return {
+    command: data.command,
     cpuLimit: data.cpu_limit,
     createdAt: unmarshalDate(data.created_at),
+    environmentVariables: data.environment_variables,
     errorMessage: data.error_message,
     exitCode: data.exit_code,
     id: data.id,
@@ -146,6 +149,15 @@ export const marshalCreateJobDefinitionRequest = (
   memory_limit: request.memoryLimit,
   name: request.name || randomName('job'),
   project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
+export const marshalStartJobDefinitionRequest = (
+  request: StartJobDefinitionRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  command: request.command,
+  environment_variables: request.environmentVariables,
+  replicas: request.replicas,
 })
 
 const marshalUpdateJobDefinitionRequestCronScheduleConfig = (

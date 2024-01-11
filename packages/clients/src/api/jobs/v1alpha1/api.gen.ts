@@ -9,6 +9,7 @@ import {
 import type { Region } from '../../../bridge'
 import {
   marshalCreateJobDefinitionRequest,
+  marshalStartJobDefinitionRequest,
   marshalUpdateJobDefinitionRequest,
   unmarshalJobDefinition,
   unmarshalJobRun,
@@ -172,7 +173,9 @@ export class API extends ParentAPI {
   startJobDefinition = (request: Readonly<StartJobDefinitionRequest>) =>
     this.client.fetch<JobRun>(
       {
-        body: '{}',
+        body: JSON.stringify(
+          marshalStartJobDefinitionRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam(
