@@ -358,6 +358,7 @@ const unmarshalServerMaintenance = (data: unknown): ServerMaintenance => {
 
   return {
     reason: data.reason,
+    startDate: unmarshalDate(data.start_date),
   } as ServerMaintenance
 }
 
@@ -2240,6 +2241,7 @@ const marshalServerMaintenance = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   reason: request.reason,
+  start_date: request.startDate,
 })
 
 export const marshalSetServerRequest = (

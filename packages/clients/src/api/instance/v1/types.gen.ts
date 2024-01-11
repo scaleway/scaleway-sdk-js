@@ -327,6 +327,7 @@ export interface ServerLocation {
 
 export interface ServerMaintenance {
   reason: string
+  startDate?: Date
 }
 
 export interface VolumeServer {
