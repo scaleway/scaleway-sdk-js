@@ -87,13 +87,13 @@ const jsonContentHeaders = {
 /**
  * Cockpit API.
  *
- * Cockpit's API allows you to activate your Cockpit on your Projects.
- * Scaleway's Cockpit stores metrics and logs and provides a dedicated Grafana
- * for dashboarding to visualize them.
+ * The Cockpit API allows you to activate your Cockpit to store metrics and
+ * logs. It also provides you with a dedicated Grafana for dashboarding to
+ * visualize your metrics and logs.
  */
 export class API extends ParentAPI {
   /**
-   * Activate the Cockpit of the specified Project ID.
+   * Activate the Cockpit of a given Project specified by the Project ID.
    *
    * @param request - The request {@link ActivateCockpitRequest}
    * @returns A Promise of Cockpit
@@ -112,7 +112,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrieve the Cockpit of the specified Project ID.
+   * Retrieve the Cockpit of a given Project specified by the Project ID.
    *
    * @param request - The request {@link GetCockpitRequest}
    * @returns A Promise of Cockpit
@@ -151,7 +151,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get metrics from your Cockpit with the specified Project ID.
+   * Retrieve metrics from your Cockpit specified by the ID of the Project the
+   * Cockpit belongs to.
    *
    * @param request - The request {@link GetCockpitMetricsRequest}
    * @returns A Promise of CockpitMetrics
@@ -175,7 +176,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Deactivate the Cockpit of the specified Project ID.
+   * Deactivate the Cockpit of a given Project specified by the Project ID.
    *
    * @param request - The request {@link DeactivateCockpitRequest}
    * @returns A Promise of Cockpit
@@ -194,7 +195,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a datasource for the specified Project ID and the given type.
+   * Create a data source for a given Project specified by the Project ID and
+   * the data source type.
    *
    * @param request - The request {@link CreateDatasourceRequest}
    * @returns A Promise of Datasource
@@ -213,7 +215,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the datasource associated with the specified datasource ID.
+   * Delete a given data source specified by the data source ID.
    *
    * @param request - The request {@link DeleteDatasourceRequest}
    */
@@ -252,7 +254,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a list of datasources for the specified Project ID.
+   * Get a list of data sources for the specified Project ID.
    *
    * @param request - The request {@link ListDatasourcesRequest}
    * @returns A Promise of ListDatasourcesResponse
@@ -261,7 +263,7 @@ export class API extends ParentAPI {
     enrichForPagination('datasources', this.pageOfListDatasources, request)
 
   /**
-   * Create a token associated with the specified Project ID.
+   * Create a token in a given Project specified by the Project ID.
    *
    * @param request - The request {@link CreateTokenRequest}
    * @returns A Promise of Token
@@ -301,7 +303,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a list of tokens associated with the specified Project ID.
+   * Get a list of tokens in a given Project specified by the Project ID.
    *
    * @param request - The request {@link ListTokensRequest}
    * @returns A Promise of ListTokensResponse
@@ -310,7 +312,7 @@ export class API extends ParentAPI {
     enrichForPagination('tokens', this.pageOfListTokens, request)
 
   /**
-   * Retrieve the token associated with the specified token ID.
+   * Retrieve a given token specified by the token ID.
    *
    * @param request - The request {@link GetTokenRequest}
    * @returns A Promise of Token
@@ -328,7 +330,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete the token associated with the specified token ID.
+   * Delete a given token specified by the token ID.
    *
    * @param request - The request {@link DeleteTokenRequest}
    */
@@ -342,7 +344,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Create a contact point to receive alerts for the default receiver.
+   * Create a contact point associated with the default receiver, to receive
+   * alerts.
    *
    * @param request - The request {@link CreateContactPointRequest}
    * @returns A Promise of ContactPoint
@@ -383,8 +386,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a list of contact points for the Cockpit associated with the specified
-   * Project ID.
+   * Get a list of contact points created for a given Cockpit, specified by the
+   * ID of the Project the Cockpit belongs to.
    *
    * @param request - The request {@link ListContactPointsRequest}
    * @returns A Promise of ListContactPointsResponse
@@ -393,7 +396,7 @@ export class API extends ParentAPI {
     enrichForPagination('contactPoints', this.pageOfListContactPoints, request)
 
   /**
-   * Delete a contact point for the default receiver.
+   * Delete a contact point associated with the default receiver.
    *
    * @param request - The request {@link DeleteContactPointRequest}
    */
@@ -408,7 +411,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Enable the sending of managed alerts for the specified Project's Cockpit.
+   * Enable the sending of managed alerts for a given Cockpit, specified by the
+   * ID of the Project the Cockpit belongs to.
    *
    * @param request - The request {@link EnableManagedAlertsRequest}
    */
@@ -423,7 +427,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Disable the sending of managed alerts for the specified Project's Cockpit.
+   * Disable the sending of managed alerts for a given Cockpit, specified by the
+   * ID of the Project the Cockpit belongs to.
    *
    * @param request - The request {@link DisableManagedAlertsRequest}
    */
@@ -440,7 +445,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Trigger a test alert to all of the Cockpit's receivers.
+   * Send a test alert to make sure your contact points get notified when an
+   * actual alert is triggered.
    *
    * @param request - The request {@link TriggerTestAlertRequest}
    */
@@ -455,8 +461,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Create a Grafana user for your Cockpit's Grafana instance. Make sure you
-   * save the automatically-generated password and the Grafana user ID.
+   * Create a Grafana user for your Cockpit's Grafana. Make sure you save the
+   * automatically-generated password and the Grafana user ID.
    *
    * @param request - The request {@link CreateGrafanaUserRequest}
    * @returns A Promise of GrafanaUser
@@ -498,8 +504,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a list of Grafana users who are able to connect to the Cockpit's
-   * Grafana instance.
+   * Get a list of all Grafana users created in your Cockpit's Grafana.
    *
    * @param request - The request {@link ListGrafanaUsersRequest}
    * @returns A Promise of ListGrafanaUsersResponse
@@ -508,8 +513,8 @@ export class API extends ParentAPI {
     enrichForPagination('grafanaUsers', this.pageOfListGrafanaUsers, request)
 
   /**
-   * Delete a Grafana user from a Grafana instance, specified by the Cockpit's
-   * Project ID and the Grafana user ID.
+   * Delete a Grafana user from your Cockpit's Grafana, specified by the ID of
+   * the Project the Cockpit belongs to, and the ID of the Grafana user.
    *
    * @param request - The request {@link DeleteGrafanaUserRequest}
    */
@@ -527,8 +532,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Reset a Grafana user's password specified by the Cockpit's Project ID and
-   * the Grafana user ID.
+   * Reset the password of a Grafana user, specified by the ID of the Project
+   * the Cockpit belongs to, and the ID of the Grafana user.
    *
    * @param request - The request {@link ResetGrafanaUserPasswordRequest}
    * @returns A Promise of GrafanaUser
