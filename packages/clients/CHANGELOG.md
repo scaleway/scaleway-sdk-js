@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.12.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.11.0...@scaleway/sdk@2.12.0) (2024-01-15)
+
+### Features
+
+- **billing:** list discounts in v2beta1 and update list consumptions response ([#1099](https://github.com/scaleway/scaleway-sdk-js/issues/1099)) ([be05dd3](https://github.com/scaleway/scaleway-sdk-js/commit/be05dd30f8be3f29b06d64f4ce4c666685d7be66))
+- **iam:** add filtering on multiple IDs on listing endpoints ([#1094](https://github.com/scaleway/scaleway-sdk-js/issues/1094)) ([359c80c](https://github.com/scaleway/scaleway-sdk-js/commit/359c80ccab0a56a155bec8dc8bdd726046f3e3ae))
+- **instance:** add start_date to server maintenance ([#1101](https://github.com/scaleway/scaleway-sdk-js/issues/1101)) ([828812f](https://github.com/scaleway/scaleway-sdk-js/commit/828812fbbf718ca7736c2bf7046abafbcaeb9f2a))
+- **k8s:** add field to hide token from kubeconfig ([#1093](https://github.com/scaleway/scaleway-sdk-js/issues/1093)) ([ba55c0b](https://github.com/scaleway/scaleway-sdk-js/commit/ba55c0b0c95ef2ec1a028f0a6bb8422448669e05))
+- **serverless_jobs:** add run options when starting a job ([#1102](https://github.com/scaleway/scaleway-sdk-js/issues/1102)) ([4315f18](https://github.com/scaleway/scaleway-sdk-js/commit/4315f184b7f3503a8eaf168b59d695cc22e2be66))
+
+### Bug Fixes
+
+- **serverless_sqldb:** restore fields in messages ([#1095](https://github.com/scaleway/scaleway-sdk-js/issues/1095)) ([9951323](https://github.com/scaleway/scaleway-sdk-js/commit/9951323e8ed8fdd25a2badcee38514db040a0342))
+
 ## [2.11.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.10.0...@scaleway/sdk@2.11.0) (2024-01-08)
 
 ### Features
