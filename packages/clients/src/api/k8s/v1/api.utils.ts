@@ -1,5 +1,5 @@
 import { API } from './api.gen'
-import type { GetClusterKubeConfigRequest } from './types.utils'
+import type { GetClusterKubeConfigRequest } from './types.gen'
 
 export class K8SUtilsAPI extends API {
   /**
