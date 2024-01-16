@@ -303,9 +303,10 @@ export interface ServerIp {
   provisioningMode: ServerIpProvisioningMode
   /** Tags associated with the IP. */
   tags: string[]
-  state: ServerIpState
   /** The ip_id of an IPAM ip if the ip is created from IPAM, null if not. */
   ipamId: string
+  /** IP address state. */
+  state: ServerIpState
 }
 
 export interface ServerIpv6 {
