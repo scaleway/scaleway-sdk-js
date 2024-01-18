@@ -167,6 +167,15 @@ export interface DomainLastStatusDkimRecord {
   error?: string
 }
 
+export interface DomainLastStatusDmarcRecord {
+  /** Status of the DMARC record's configuration. */
+  status: DomainLastStatusRecordStatus
+  /** Time and date the DMARC record was last valid. */
+  lastValidAt?: Date
+  /** An error text displays in case the record is not valid. */
+  error?: string
+}
+
 export interface DomainLastStatusSpfRecord {
   /** Status of the SPF record's configuration. */
   status: DomainLastStatusRecordStatus
@@ -293,6 +302,8 @@ export interface DomainLastStatus {
   spfRecord?: DomainLastStatusSpfRecord
   /** The DKIM record verification data. */
   dkimRecord?: DomainLastStatusDkimRecord
+  /** The DMARC record verification data. */
+  dmarcRecord?: DomainLastStatusDmarcRecord
 }
 
 export type GetDomainLastStatusRequest = {
