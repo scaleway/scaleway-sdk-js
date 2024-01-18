@@ -231,6 +231,7 @@ export const marshalCreateSecretRequest = (
     request.ephemeralPolicy !== undefined
       ? marshalEphemeralPolicy(request.ephemeralPolicy, defaults)
       : undefined,
+  is_protected: request.isProtected,
   name: request.name,
   path: request.path,
   project_id: request.projectId ?? defaults.defaultProjectId,
