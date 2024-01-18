@@ -16,6 +16,7 @@ import type {
   Domain,
   DomainLastStatus,
   DomainLastStatusDkimRecord,
+  DomainLastStatusDmarcRecord,
   DomainLastStatusSpfRecord,
   DomainReputation,
   DomainStatistics,
@@ -158,6 +159,22 @@ const unmarshalDomainLastStatusDkimRecord = (
   } as DomainLastStatusDkimRecord
 }
 
+const unmarshalDomainLastStatusDmarcRecord = (
+  data: unknown,
+): DomainLastStatusDmarcRecord => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainLastStatusDmarcRecord' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    error: data.error,
+    lastValidAt: unmarshalDate(data.last_valid_at),
+    status: data.status,
+  } as DomainLastStatusDmarcRecord
+}
+
 const unmarshalDomainLastStatusSpfRecord = (
   data: unknown,
 ): DomainLastStatusSpfRecord => {
@@ -184,6 +201,9 @@ export const unmarshalDomainLastStatus = (data: unknown): DomainLastStatus => {
   return {
     dkimRecord: data.dkim_record
       ? unmarshalDomainLastStatusDkimRecord(data.dkim_record)
+      : undefined,
+    dmarcRecord: data.dmarc_record
+      ? unmarshalDomainLastStatusDmarcRecord(data.dmarc_record)
       : undefined,
     domainId: data.domain_id,
     domainName: data.domain_name,
