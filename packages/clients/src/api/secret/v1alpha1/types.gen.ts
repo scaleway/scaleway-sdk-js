@@ -277,6 +277,8 @@ export type CreateSecretRequest = {
    * default, the policy is applied to all the secret's versions.
    */
   ephemeralPolicy?: EphemeralPolicy
+  /** A protected secret cannot be deleted. */
+  isProtected: boolean
 }
 
 export type CreateSecretVersionRequest = {
