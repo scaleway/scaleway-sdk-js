@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.12.0...@scaleway/sdk@2.13.0) (2024-01-22)
+
+### Features
+
+- **secret_manager:** add protection in secret creation ([#1109](https://github.com/scaleway/scaleway-sdk-js/issues/1109)) ([501fb3e](https://github.com/scaleway/scaleway-sdk-js/commit/501fb3e28dadcc42fee7ac2051f296bf2d2b3fd3))
+- **tem:** add dmarc validation status to DomainLastStatus endpoint ([#1108](https://github.com/scaleway/scaleway-sdk-js/issues/1108)) ([4afd042](https://github.com/scaleway/scaleway-sdk-js/commit/4afd042e9b02a2dd18a6250cd198b2f7a897f62a))
+
+### Bug Fixes
+
+- **k8s:** remove duplicate private type ([#1106](https://github.com/scaleway/scaleway-sdk-js/issues/1106)) ([46f2db2](https://github.com/scaleway/scaleway-sdk-js/commit/46f2db2dc0e42642eb5aede09073ccf5b42b7d5e))
+
 ## [2.12.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.11.0...@scaleway/sdk@2.12.0) (2024-01-15)
 
 ### Features
