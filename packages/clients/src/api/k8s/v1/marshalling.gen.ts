@@ -109,9 +109,6 @@ export const unmarshalVersion = (data: unknown): Version => {
     availableCnis: data.available_cnis,
     availableContainerRuntimes: data.available_container_runtimes,
     availableFeatureGates: data.available_feature_gates,
-    availableIngresses: data.available_ingresses
-      ? data.available_ingresses
-      : undefined,
     availableKubeletArgs: data.available_kubelet_args,
     label: data.label,
     name: data.name,
@@ -210,12 +207,10 @@ export const unmarshalCluster = (data: unknown): Cluster => {
     cni: data.cni,
     commitmentEndsAt: unmarshalDate(data.commitment_ends_at),
     createdAt: unmarshalDate(data.created_at),
-    dashboardEnabled: data.dashboard_enabled,
     description: data.description,
     dnsWildcard: data.dns_wildcard,
     featureGates: data.feature_gates,
     id: data.id,
-    ingress: data.ingress ? data.ingress : undefined,
     name: data.name,
     openIdConnectConfig: data.open_id_connect_config
       ? unmarshalClusterOpenIDConnectConfig(data.open_id_connect_config)
@@ -532,9 +527,7 @@ export const marshalCreateClusterRequest = (
       : undefined,
   cni: request.cni,
   description: request.description,
-  enable_dashboard: request.enableDashboard,
   feature_gates: request.featureGates,
-  ingress: request.ingress,
   name: request.name || randomName('k8s'),
   open_id_connect_config:
     request.openIdConnectConfig !== undefined
@@ -673,9 +666,7 @@ export const marshalUpdateClusterRequest = (
         )
       : undefined,
   description: request.description,
-  enable_dashboard: request.enableDashboard,
   feature_gates: request.featureGates,
-  ingress: request.ingress,
   name: request.name,
   open_id_connect_config:
     request.openIdConnectConfig !== undefined

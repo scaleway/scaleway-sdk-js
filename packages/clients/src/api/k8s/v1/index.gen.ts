@@ -33,7 +33,6 @@ export type {
   GetNodeRequest,
   GetPoolRequest,
   GetVersionRequest,
-  Ingress,
   ListClusterAvailableTypesRequest,
   ListClusterAvailableTypesResponse,
   ListClusterAvailableVersionsRequest,
