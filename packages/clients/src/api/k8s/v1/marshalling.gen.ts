@@ -308,6 +308,7 @@ const unmarshalClusterType = (data: unknown): ClusterType => {
   }
 
   return {
+    auditLogsSupported: data.audit_logs_supported,
     availability: data.availability,
     commitmentDelay: data.commitment_delay,
     dedicated: data.dedicated,

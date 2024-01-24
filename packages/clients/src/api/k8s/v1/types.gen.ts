@@ -467,6 +467,11 @@ export interface ClusterType {
   memory: number
   /** Returns information if this offer uses dedicated resources. */
   dedicated: boolean
+  /**
+   * True if the offer allows activation of the audit log functionality. Please
+   * note that audit logs are sent to Cockpit.
+   */
+  auditLogsSupported: boolean
 }
 
 export interface Version {
