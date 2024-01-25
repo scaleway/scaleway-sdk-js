@@ -25,6 +25,7 @@ export type {
   ContactQuestion,
   ContactRoles,
   ContactRolesRoles,
+  ContactStatus,
   CreateDNSZoneRequest,
   CreateSSLCertificateRequest,
   DNSZone,
