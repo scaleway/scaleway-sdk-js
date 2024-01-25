@@ -288,6 +288,7 @@ export const unmarshalContact = (data: unknown): Contact => {
       : undefined,
     resale: data.resale,
     state: data.state,
+    status: data.status,
     vatIdentificationCode: data.vat_identification_code,
     whoisOptIn: data.whois_opt_in,
     zip: data.zip,
@@ -1171,6 +1172,7 @@ export const unmarshalTask = (data: unknown): Task => {
   }
 
   return {
+    contactIdentifier: data.contact_identifier,
     domain: data.domain,
     id: data.id,
     message: data.message,

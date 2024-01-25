@@ -48,6 +48,8 @@ export type ContactLegalForm =
   | 'association'
   | 'other'
 
+export type ContactStatus = 'status_unknown' | 'active' | 'pending'
+
 export type DNSZoneStatus =
   | 'unknown'
   | 'active'
@@ -436,6 +438,7 @@ export interface Contact {
   emailStatus: ContactEmailStatus
   state: string
   extensionNl?: ContactExtensionNL
+  status: ContactStatus
 }
 
 export interface ContactRolesRoles {
@@ -622,15 +625,26 @@ export interface SSLCertificate {
 }
 
 export interface Task {
+  /** The unique identifier of the task. */
   id: string
+  /** The project ID associated to the task. */
   projectId: string
+  /** The organization ID associated to the task. */
   organizationId: string
+  /** The domain name associated to the task. */
   domain?: string
+  /** The type of the task. */
   type: TaskType
+  /** The status of the task. */
   status: TaskStatus
+  /** Start date of the task. */
   startedAt?: Date
+  /** Last update of the task. */
   updatedAt?: Date
+  /** Error message associated to the task. */
   message?: string
+  /** Human-friendly contact identifier used when the task concerns a contact. */
+  contactIdentifier?: string
 }
 
 export interface TransferInDomainRequestTransferRequest {
