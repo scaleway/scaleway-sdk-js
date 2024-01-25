@@ -37,13 +37,6 @@ export type ClusterTypeResiliency =
   | 'standard'
   | 'high_availability'
 
-export type Ingress =
-  | 'unknown_ingress'
-  | 'none'
-  | 'nginx'
-  | 'traefik'
-  | 'traefik2'
-
 export type ListClustersRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -483,8 +476,6 @@ export interface Version {
   region: Region
   /** Supported Container Network Interface (CNI) plugins for this version. */
   availableCnis: CNI[]
-  /** @deprecated Supported Ingress Controllers for this version. */
-  availableIngresses?: Ingress[]
   /** Supported container runtimes for this version. */
   availableContainerRuntimes: Runtime[]
   /** Supported feature gates for this version. */
@@ -528,16 +519,6 @@ export interface Cluster {
   updatedAt?: Date
   /** Autoscaler config for the cluster. */
   autoscalerConfig?: ClusterAutoscalerConfig
-  /**
-   * @deprecated Defines whether the Kubernetes dashboard is enabled for the
-   *   cluster.
-   */
-  dashboardEnabled?: boolean
-  /**
-   * @deprecated Managed Ingress controller used in the cluster (deprecated
-   *   feature).
-   */
-  ingress?: Ingress
   /** Auto upgrade configuration of the cluster. */
   autoUpgrade?: ClusterAutoUpgrade
   /** Defines whether a new Kubernetes version is available. */
@@ -724,13 +705,6 @@ export type CreateClusterRequest = {
   version: string
   /** Container Network Interface (CNI) plugin running in the cluster. */
   cni: CNI
-  /**
-   * @deprecated Defines whether the Kubernetes Dashboard is enabled in the
-   *   cluster.
-   */
-  enableDashboard?: boolean
-  /** @deprecated Ingress Controller running in the cluster (deprecated feature). */
-  ingress?: Ingress
   /** Pools created along with the cluster. */
   pools?: CreateClusterRequestPoolConfig[]
   /**
@@ -1195,10 +1169,6 @@ export type UpdateClusterRequest = {
   tags?: string[]
   /** New autoscaler config for the cluster. */
   autoscalerConfig?: UpdateClusterRequestAutoscalerConfig
-  /** @deprecated New value for the Kubernetes Dashboard enablement. */
-  enableDashboard?: boolean
-  /** @deprecated New Ingress Controller for the cluster (deprecated feature). */
-  ingress?: Ingress
   /**
    * New auto upgrade configuration for the cluster. Note that all fields need
    * to be set.
