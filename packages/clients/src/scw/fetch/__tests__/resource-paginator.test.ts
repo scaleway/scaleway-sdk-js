@@ -1,4 +1,4 @@
-import { describe, expect, it, jest } from '@jest/globals'
+import { describe, expect, it, vi } from 'vitest'
 import {
   enrichForPagination,
   fetchAll,
@@ -54,7 +54,7 @@ describe('fetchPaginated', () => {
       [{ name: 'Alice' }, { name: 'Bob' }],
       [{ name: 'Claire' }],
     ]
-    const twoPagesFetcher = jest.fn(fetchPages(twoPages))
+    const twoPagesFetcher = vi.fn(fetchPages(twoPages))
     for await (const page of fetchPaginated('items', twoPagesFetcher, {})) {
       expect(page).toStrictEqual(twoPages.shift())
     }
@@ -63,7 +63,7 @@ describe('fetchPaginated', () => {
 
   it('iterate without over iteration - 1 page', async () => {
     const onePage = [[{ name: 'Alice' }, { name: 'Bob' }], []]
-    const onePagesFetcher = jest.fn(fetchPages(onePage))
+    const onePagesFetcher = vi.fn(fetchPages(onePage))
     for await (const page of fetchPaginated('items', onePagesFetcher, {})) {
       expect(page).toStrictEqual(onePage.shift())
     }
@@ -73,7 +73,7 @@ describe('fetchPaginated', () => {
 
   it('iterate without over iteration - 1 result', async () => {
     const singleResult = [[{ name: 'Alice' }]]
-    const singleResultFetcher = jest.fn(fetchPages(singleResult))
+    const singleResultFetcher = vi.fn(fetchPages(singleResult))
     for await (const page of fetchPaginated('items', singleResultFetcher, {})) {
       expect(page).toStrictEqual(singleResult.shift())
     }

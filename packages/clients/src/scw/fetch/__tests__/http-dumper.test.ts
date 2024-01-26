@@ -1,4 +1,4 @@
-import { describe, expect, it } from '@jest/globals'
+import { describe, expect, it } from 'vitest'
 import { isBrowser } from '../../../helpers/is-browser'
 import type { Settings } from '../../client-settings'
 import { buildRequest } from '../build-fetcher'

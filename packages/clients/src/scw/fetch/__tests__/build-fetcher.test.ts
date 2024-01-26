@@ -1,4 +1,4 @@
-import { afterAll, describe, expect, it, jest } from '@jest/globals'
+import { afterAll, describe, expect, it, vi } from 'vitest'
 import { isBrowser } from '../../../helpers/is-browser'
 import { addHeaderInterceptor } from '../../../internal/interceptors/helpers'
 import type { Settings } from '../../client-settings'
@@ -73,11 +73,11 @@ describe(`buildRequest`, () => {
 
 describe(`buildFetcher (mock)`, () => {
   afterAll(() => {
-    jest.restoreAllMocks()
+    vi.restoreAllMocks()
   })
 
-  jest.spyOn(global, 'fetch')
-  const mockedFetch = jest.mocked(fetch)
+  vi.spyOn(global, 'fetch')
+  const mockedFetch = vi.mocked(fetch)
   const fetcher = buildFetcher(DEFAULT_SETTINGS, global.fetch)
 
   it(`gets a response without error for a simple request with unmarshaller`, async () => {

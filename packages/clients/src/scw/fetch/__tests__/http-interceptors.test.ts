@@ -1,4 +1,4 @@
-import { afterAll, beforeEach, describe, expect, it } from '@jest/globals'
+import { afterAll, beforeEach, describe, expect, it } from 'vitest'
 import { setLogger } from '../../../internal/logger'
 import { ConsoleLogger } from '../../../internal/logger/console-logger'
 import type { LogLevel } from '../../../internal/logger/level-resolver'

@@ -1,4 +1,4 @@
-import { describe, expect, it } from '@jest/globals'
+import { describe, expect, it } from 'vitest'
 import { parseScalewayError } from '../../error-parser'
 import {
   InvalidArgumentsError,

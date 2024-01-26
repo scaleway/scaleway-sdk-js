@@ -1,5 +1,5 @@
-import { beforeEach, describe, expect, it } from '@jest/globals'
-import { env } from 'process'
+import { env } from 'node:process'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { EnvironmentKey } from '../env'
 import {
   getScwConfigurationDirectory,

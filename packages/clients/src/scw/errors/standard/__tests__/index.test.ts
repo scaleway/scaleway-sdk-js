@@ -1,4 +1,5 @@
-import { describe, expect, it } from '@jest/globals'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { describe, expect, it } from 'vitest'
 import type { JSONObject } from '../../../../helpers/json'
 import { parseScalewayError } from '../../error-parser'
 import { AlreadyExistsError } from '../already-exists-error'
