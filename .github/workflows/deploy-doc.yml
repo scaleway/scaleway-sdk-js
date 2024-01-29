@@ -27,7 +27,7 @@ defaults:
 
 jobs:
   # Build job
-  build:
+  doc-build:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -37,9 +37,9 @@ jobs:
       - name: Setup PNPM
         uses: pnpm/action-setup@v2.4.0
       - name: Setup Node
-        uses: actions/setup-node@v4.0.1
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: "lts"
           check-latest: true
           cache: "pnpm"
       - name: Setup Pages
@@ -50,17 +50,17 @@ jobs:
       - name: Build doc
         run: pnpm run doc
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./docs
 
   # Deployment job
-  deploy:
+  doc-deploy:
+    needs: doc-build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-22.04
-    needs: build
+    runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
