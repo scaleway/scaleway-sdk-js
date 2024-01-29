@@ -237,6 +237,7 @@ export const marshalCreateHostingRequest = (
 ): Record<string, unknown> => ({
   domain: request.domain,
   email: request.email,
+  language: request.language,
   offer_id: request.offerId,
   option_ids: request.optionIds,
   project_id: request.projectId ?? defaults.defaultProjectId,

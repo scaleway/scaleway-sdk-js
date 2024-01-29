@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Money, Region } from '../../../bridge'
+import type { LanguageCode as StdLanguageCode } from '../../std/types.gen'
 
 export type DnsRecordStatus = 'unknown_status' | 'valid' | 'invalid'
 
@@ -196,6 +197,8 @@ export type CreateHostingRequest = {
   domain: string
   /** IDs of any selected additional options for the Web Hosting plan. */
   optionIds?: string[]
+  /** Default language for the control panel interface. */
+  language?: StdLanguageCode
 }
 
 export type DeleteHostingRequest = {
