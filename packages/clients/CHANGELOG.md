@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.13.0...@scaleway/sdk@2.14.0) (2024-01-29)
+
+### Features
+
+- **domain:** add status to contact message ([#1119](https://github.com/scaleway/scaleway-sdk-js/issues/1119)) ([c91af50](https://github.com/scaleway/scaleway-sdk-js/commit/c91af5041bafd8917b7d42da250ddbbcbc29f25e))
+- **k8s:** add audit logs compatibility with offers ([#1115](https://github.com/scaleway/scaleway-sdk-js/issues/1115)) ([49dec97](https://github.com/scaleway/scaleway-sdk-js/commit/49dec9767edb429ab9cbb0da79f630f0d0949edb))
+- **k8s:** remove some deprecated fields ([#1118](https://github.com/scaleway/scaleway-sdk-js/issues/1118)) ([4b23026](https://github.com/scaleway/scaleway-sdk-js/commit/4b23026a4925af4b701e63f2d2668e4c42e8fd77))
+
 ## [2.13.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.12.0...@scaleway/sdk@2.13.0) (2024-01-22)
 
 ### Features
