@@ -58,4 +58,4 @@ jobs:
       - run: pnpm install
       - run: pnpm run build
       - run: pnpm run test:coverage --testEnvironment ${{ matrix.test-environment }}
-      - uses: codecov/codecov-action@v3.1.4
+      - uses: codecov/codecov-action@v3.1.5
