@@ -1,8 +1,8 @@
-import { afterEach, describe, expect, it } from '@jest/globals'
-import * as fs from 'fs'
-import * as os from 'os'
-import { join } from 'path'
-import { env } from 'process'
+import * as fs from 'node:fs'
+import * as os from 'node:os'
+import { join } from 'node:path'
+import { env } from 'node:process'
+import { afterEach, describe, expect, it } from 'vitest'
 import {
   loadProfileFromConfigurationFile,
   loadProfileFromEnvironmentValues,

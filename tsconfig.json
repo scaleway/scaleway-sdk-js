@@ -13,10 +13,8 @@
     "noUnusedLocals": true,
     "skipLibCheck": false,
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
   },
-  "include": [
-    "**/*.ts"
-  ],
+  "include": ["**/*.ts"],
   "exclude": ["**/examples/**", "**/dist/**"],
 }

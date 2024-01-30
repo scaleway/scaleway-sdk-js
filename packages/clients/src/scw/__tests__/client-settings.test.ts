@@ -1,4 +1,4 @@
-import { describe, expect, it } from '@jest/globals'
+import { describe, expect, it } from 'vitest'
 import type { Settings } from '../client-settings'
 import { assertValidSettings } from '../client-settings'
 

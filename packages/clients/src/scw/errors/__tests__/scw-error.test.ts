@@ -1,4 +1,4 @@
-import { describe, expect, it } from '@jest/globals'
+import { describe, expect, it } from 'vitest'
 import type { JSONObject } from '../../../helpers/json'
 import { ScalewayError } from '../scw-error'
 

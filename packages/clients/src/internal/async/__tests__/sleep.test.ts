@@ -1,13 +1,13 @@
-import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals'
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest'
 import { sleep } from '../sleep'
 
 beforeAll(() => {
-  jest.useFakeTimers()
-  jest.spyOn(global, 'setTimeout')
+  vi.useFakeTimers()
+  vi.spyOn(global, 'setTimeout')
 })
 
 afterAll(() => {
-  jest.useRealTimers()
+  vi.useRealTimers()
 })
 
 describe('sleep', () => {

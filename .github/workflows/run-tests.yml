@@ -16,7 +16,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4.0.1
         with:
-          node-version: 18
+          node-version: 20
           check-latest: true
           cache: "pnpm"
       - run: pnpm install
@@ -30,7 +30,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4.0.1
         with:
-          node-version: 18
+          node-version: 20
           check-latest: true
           cache: "pnpm"
       - run: pnpm install
@@ -45,7 +45,7 @@ jobs:
           - jsdom
         node:
           - "18"
-          - "19"
+          - "20"
     steps:
       - uses: actions/checkout@v4.1.1
       - uses: pnpm/action-setup@v2.4.0
@@ -57,5 +57,5 @@ jobs:
           cache: "pnpm"
       - run: pnpm install
       - run: pnpm run build
-      - run: pnpm run test:coverage --testEnvironment ${{ matrix.test-environment }}
+      - run: pnpm run test:coverage --environment ${{ matrix.test-environment }}
       - uses: codecov/codecov-action@v3.1.5
