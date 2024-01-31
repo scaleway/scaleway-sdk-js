@@ -225,6 +225,14 @@ export class API extends ParentAPI {
       unmarshalListDiscountsResponse,
     )
 
+  /**
+   * List discounts. List all discounts for your organization and usable
+   * categories, products, offers, references, regions and zones where the
+   * discount can be applied.
+   *
+   * @param request - The request {@link ListDiscountsRequest}
+   * @returns A Promise of ListDiscountsResponse
+   */
   listDiscounts = (request: Readonly<ListDiscountsRequest> = {}) =>
     enrichForPagination('discounts', this.pageOfListDiscounts, request)
 }
