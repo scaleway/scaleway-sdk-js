@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.15.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.14.0...@scaleway/sdk@2.15.0) (2024-02-05)
+
+### Features
+
+- **billing:** fix documentation for discounts ([#1129](https://github.com/scaleway/scaleway-sdk-js/issues/1129)) ([6da9854](https://github.com/scaleway/scaleway-sdk-js/commit/6da985478fc3aabe48bf37e15188a9245cadc573))
+- **webhosting:** add language field at public hosting creation ([#1127](https://github.com/scaleway/scaleway-sdk-js/issues/1127)) ([7bf9f0e](https://github.com/scaleway/scaleway-sdk-js/commit/7bf9f0e9d8bdd885b2cfc603f1ca8c04109034ad))
+
 ## [2.14.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.13.0...@scaleway/sdk@2.14.0) (2024-01-29)
 
 ### Features
