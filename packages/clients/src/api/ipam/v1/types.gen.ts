@@ -25,6 +25,7 @@ export type ResourceType =
   | 'redis_cluster'
   | 'baremetal_server'
   | 'baremetal_private_nic'
+  | 'llm_deployment'
 
 export interface Resource {
   /** Type of resource the IP is attached to. */
