@@ -66,7 +66,7 @@
     "husky": "^8.0.3",
     "lerna": "^7.4.2",
     "lint-staged": "^15.2.2",
-    "prettier": "^3.2.4",
+    "prettier": "^3.2.5",
     "read-pkg": "^9.0.1",
     "rollup": "^4.9.6",
     "rollup-plugin-dts": "^6.1.0",
