@@ -59,6 +59,12 @@ export const ListJobRunsRequest = {
   },
 }
 
+export const StartJobDefinitionRequest = {
+  replicas: {
+    greaterThan: 0,
+  },
+}
+
 export const UpdateJobDefinitionRequest = {
   cpuLimit: {
     greaterThan: 0,

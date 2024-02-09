@@ -15,6 +15,7 @@ import {
   unmarshalJobRun,
   unmarshalListJobDefinitionsResponse,
   unmarshalListJobRunsResponse,
+  unmarshalStartJobDefinitionResponse,
 } from './marshalling.gen'
 import type {
   CreateJobDefinitionRequest,
@@ -28,6 +29,7 @@ import type {
   ListJobRunsRequest,
   ListJobRunsResponse,
   StartJobDefinitionRequest,
+  StartJobDefinitionResponse,
   StopJobRunRequest,
   UpdateJobDefinitionRequest,
 } from './types.gen'
@@ -168,10 +170,10 @@ export class API extends ParentAPI {
    * new job run.
    *
    * @param request - The request {@link StartJobDefinitionRequest}
-   * @returns A Promise of JobRun
+   * @returns A Promise of StartJobDefinitionResponse
    */
   startJobDefinition = (request: Readonly<StartJobDefinitionRequest>) =>
-    this.client.fetch<JobRun>(
+    this.client.fetch<StartJobDefinitionResponse>(
       {
         body: JSON.stringify(
           marshalStartJobDefinitionRequest(request, this.client.settings),
@@ -186,7 +188,7 @@ export class API extends ParentAPI {
           request.jobDefinitionId,
         )}/start`,
       },
-      unmarshalJobRun,
+      unmarshalStartJobDefinitionResponse,
     )
 
   /**
