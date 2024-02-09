@@ -622,9 +622,13 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List application logs. List the application logs of the function with the
-   * specified ID.
+   * Deprecated (replaced by
+   * [Cockpit](https://www.scaleway.com/en/developers/api/cockpit/)). List
+   * application logs. Deprecated (replaced by
+   * [Cockpit](https://www.scaleway.com/en/developers/api/cockpit/)). List the
+   * application logs of the function with the specified ID.
    *
+   * @deprecated
    * @param request - The request {@link ListLogsRequest}
    * @returns A Promise of ListLogsResponse
    */

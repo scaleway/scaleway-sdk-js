@@ -544,9 +544,13 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List your container logs. List the logs of the container with the specified
-   * ID.
+   * Deprecated (replaced by
+   * [Cockpit](https://www.scaleway.com/en/developers/api/cockpit/)). List your
+   * container logs. Deprecated (replaced by
+   * [Cockpit](https://www.scaleway.com/en/developers/api/cockpit/)). List the
+   * logs of the container with the specified ID.
    *
+   * @deprecated
    * @param request - The request {@link ListLogsRequest}
    * @returns A Promise of ListLogsResponse
    */
