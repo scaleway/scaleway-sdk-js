@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.15.0...@scaleway/sdk@2.16.0) (2024-02-12)
+
+### Features
+
+- **ipam:** add llm_deployment resource ([#1134](https://github.com/scaleway/scaleway-sdk-js/issues/1134)) ([46c52d3](https://github.com/scaleway/scaleway-sdk-js/commit/46c52d31ce1ef6ac2148d0dca47f3eaa4ec409aa))
+- **serverless_jobs:** returns a list of job runs when starting a job definition ([#1140](https://github.com/scaleway/scaleway-sdk-js/issues/1140)) ([e9e03b8](https://github.com/scaleway/scaleway-sdk-js/commit/e9e03b83dcb2236c9ef2f387a1e2de45c8884e1a))
+- **serverless:** deprecate /logs and /metrics endpoints ([#1139](https://github.com/scaleway/scaleway-sdk-js/issues/1139)) ([50451b5](https://github.com/scaleway/scaleway-sdk-js/commit/50451b56e882ad6e4dd5c3ff465ec9ee1cc24a6e))
+
 ## [2.15.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.14.0...@scaleway/sdk@2.15.0) (2024-02-05)
 
 ### Features
