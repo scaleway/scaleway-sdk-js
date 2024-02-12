@@ -19,6 +19,7 @@ export type {
   ListJobRunsRequestOrderBy,
   ListJobRunsResponse,
   StartJobDefinitionRequest,
+  StartJobDefinitionResponse,
   StopJobRunRequest,
   UpdateJobDefinitionRequest,
   UpdateJobDefinitionRequestCronScheduleConfig,

@@ -10,6 +10,7 @@ export type JobRunState =
   | 'succeeded'
   | 'failed'
   | 'canceled'
+  | 'internal_error'
 
 export type ListJobDefinitionsRequestOrderBy =
   | 'created_at_asc'
@@ -180,6 +181,10 @@ export type StartJobDefinitionRequest = {
   environmentVariables?: Record<string, string>
   /** Number of jobs to run. */
   replicas?: number
+}
+
+export interface StartJobDefinitionResponse {
+  jobRuns: JobRun[]
 }
 
 export type StopJobRunRequest = {

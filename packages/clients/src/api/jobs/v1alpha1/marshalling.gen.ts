@@ -16,6 +16,7 @@ import type {
   ListJobDefinitionsResponse,
   ListJobRunsResponse,
   StartJobDefinitionRequest,
+  StartJobDefinitionResponse,
   UpdateJobDefinitionRequest,
   UpdateJobDefinitionRequestCronScheduleConfig,
 } from './types.gen'
@@ -116,6 +117,20 @@ export const unmarshalListJobRunsResponse = (
     jobRuns: unmarshalArrayOfObject(data.job_runs, unmarshalJobRun),
     totalCount: data.total_count,
   } as ListJobRunsResponse
+}
+
+export const unmarshalStartJobDefinitionResponse = (
+  data: unknown,
+): StartJobDefinitionResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'StartJobDefinitionResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    jobRuns: unmarshalArrayOfObject(data.job_runs, unmarshalJobRun),
+  } as StartJobDefinitionResponse
 }
 
 const marshalCreateJobDefinitionRequestCronScheduleConfig = (
