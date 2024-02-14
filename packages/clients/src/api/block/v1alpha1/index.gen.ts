@@ -25,7 +25,6 @@ export type {
   Snapshot,
   SnapshotParentVolume,
   SnapshotStatus,
-  SnapshotSummary,
   StorageClass,
   UpdateSnapshotRequest,
   UpdateVolumeRequest,

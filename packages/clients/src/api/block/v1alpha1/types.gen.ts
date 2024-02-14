@@ -53,6 +53,24 @@ export type VolumeStatus =
   | 'snapshotting'
   | 'locked'
 
+export interface Reference {
+  /** UUID of the reference. */
+  id: string
+  /** Type of resource to which the reference is associated. */
+  productResourceType: string
+  /**
+   * UUID of the product resource it refers to (according to the
+   * product_resource_type).
+   */
+  productResourceId: string
+  /** Creation date of the reference. */
+  createdAt?: Date
+  /** Type of reference (link, exclusive, read_only). */
+  type: ReferenceType
+  /** Status of reference (attaching, attached, detaching). */
+  status: ReferenceStatus
+}
+
 export interface SnapshotParentVolume {
   /** Parent volume UUID (volume from which the snapshot originates). */
   id: string
@@ -74,24 +92,6 @@ export interface VolumeSpecifications {
   class: StorageClass
 }
 
-export interface Reference {
-  /** UUID of the reference. */
-  id: string
-  /** Type of resource to which the reference is associated. */
-  productResourceType: string
-  /**
-   * UUID of the product resource it refers to (according to the
-   * product_resource_type).
-   */
-  productResourceId: string
-  /** Creation date of the reference. */
-  createdAt?: Date
-  /** Type of reference (link, exclusive, read_only). */
-  type: ReferenceType
-  /** Status of reference (attaching, attached, detaching). */
-  status: ReferenceStatus
-}
-
 export interface CreateVolumeRequestFromEmpty {
   /** Must be compliant with the minimum (1 GB) and maximum (10 TB) allowed size. */
   size: number
@@ -108,14 +108,14 @@ export interface CreateVolumeRequestFromSnapshot {
   snapshotId: string
 }
 
-export interface SnapshotSummary {
+export interface Snapshot {
   /** UUID of the snapshot. */
   id: string
   /** Name of the snapshot. */
   name: string
-  /** If the parent volume has been deleted, value is null. */
+  /** If the parent volume was deleted, value is null. */
   parentVolume?: SnapshotParentVolume
-  /** Size of the snapshot in bytes. */
+  /** Size in bytes of the snapshot. */
   size: number
   /** UUID of the project the snapshot belongs to. */
   projectId: string
@@ -123,11 +123,13 @@ export interface SnapshotSummary {
   createdAt?: Date
   /** Last modification date of the properties of a snapshot. */
   updatedAt?: Date
+  /** List of the references to the snapshot. */
+  references: Reference[]
   /** Current status of the snapshot (available, in_use, ...). */
   status: SnapshotStatus
   /** List of tags assigned to the volume. */
   tags: string[]
-  /** Snapshot Availability Zone. */
+  /** Snapshot zone. */
   zone: Zone
   /** Storage class of the snapshot. */
   class: StorageClass
@@ -273,7 +275,7 @@ export type ListSnapshotsRequest = {
 
 export interface ListSnapshotsResponse {
   /** Paginated returned list of snapshots. */
-  snapshots: SnapshotSummary[]
+  snapshots: Snapshot[]
   /** Total number of snpashots in the project. */
   totalCount: number
 }
@@ -327,33 +329,6 @@ export interface ListVolumesResponse {
   volumes: Volume[]
   /** Total number of volumes in the project. */
   totalCount: number
-}
-
-export interface Snapshot {
-  /** UUID of the snapshot. */
-  id: string
-  /** Name of the snapshot. */
-  name: string
-  /** If the parent volume was deleted, value is null. */
-  parentVolume?: SnapshotParentVolume
-  /** Size in bytes of the snapshot. */
-  size: number
-  /** UUID of the project the snapshot belongs to. */
-  projectId: string
-  /** Creation date of the snapshot. */
-  createdAt?: Date
-  /** Last modification date of the properties of a snapshot. */
-  updatedAt?: Date
-  /** List of the references to the snapshot. */
-  references: Reference[]
-  /** Current status of the snapshot (available, in_use, ...). */
-  status: SnapshotStatus
-  /** List of tags assigned to the volume. */
-  tags: string[]
-  /** Snapshot zone. */
-  zone: Zone
-  /** Storage class of the snapshot. */
-  class: StorageClass
 }
 
 export type UpdateSnapshotRequest = {
