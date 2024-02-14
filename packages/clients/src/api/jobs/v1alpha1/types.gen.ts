@@ -42,6 +42,7 @@ export interface JobDefinition {
   description: string
   jobTimeout?: string
   cronSchedule?: CronSchedule
+  localStorageCapacity: number
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -63,6 +64,7 @@ export interface JobRun {
   memoryLimit: number
   command: string
   environmentVariables: Record<string, string>
+  localStorageCapacity: number
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -85,8 +87,10 @@ export type CreateJobDefinitionRequest = {
   name?: string
   /** CPU limit of the job. */
   cpuLimit: number
-  /** Memory limit of the job. */
+  /** Memory limit of the job (in MiB). */
   memoryLimit: number
+  /** Local storage capacity of the job (in MiB). */
+  localStorageCapacity?: number
   /** Image to use for the job. */
   imageUri: string
   /** Startup command. */
@@ -209,8 +213,10 @@ export type UpdateJobDefinitionRequest = {
   name?: string
   /** CPU limit of the job. */
   cpuLimit?: number
-  /** Memory limit of the job. */
+  /** Memory limit of the job (in MiB). */
   memoryLimit?: number
+  /** Local storage capacity of the job (in MiB). */
+  localStorageCapacity?: number
   /** Image to use for the job. */
   imageUri?: string
   /** Startup command. */
