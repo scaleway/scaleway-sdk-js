@@ -188,6 +188,7 @@ export const unmarshalGateway = (data: unknown): Gateway => {
     ),
     id: data.id,
     ip: data.ip ? unmarshalIP(data.ip) : undefined,
+    ipMobilityEnabled: data.ip_mobility_enabled,
     isLegacy: data.is_legacy,
     name: data.name,
     organizationId: data.organization_id,

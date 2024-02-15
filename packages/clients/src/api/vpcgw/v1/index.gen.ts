@@ -19,6 +19,7 @@ export type {
   DeleteGatewayRequest,
   DeleteIPRequest,
   DeletePATRuleRequest,
+  EnableIPMobilityRequest,
   Gateway,
   GatewayNetwork,
   GatewayNetworkStatus,
