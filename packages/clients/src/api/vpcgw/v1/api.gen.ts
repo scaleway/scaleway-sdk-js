@@ -58,6 +58,7 @@ import type {
   DeleteGatewayRequest,
   DeleteIPRequest,
   DeletePATRuleRequest,
+  EnableIPMobilityRequest,
   Gateway,
   GatewayNetwork,
   GetDHCPEntryRequest,
@@ -259,6 +260,25 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/upgrade`,
+      },
+      unmarshalGateway,
+    )
+
+  /**
+   * Upgrade a Public Gateway to IP mobility. Upgrade a Public Gateway to IP
+   * mobility (move from NAT IP to routed IP). This is idempotent: repeated
+   * calls after the first will return no error but have no effect.
+   *
+   * @param request - The request {@link EnableIPMobilityRequest}
+   * @returns A Promise of Gateway
+   */
+  enableIPMobility = (request: Readonly<EnableIPMobilityRequest>) =>
+    this.client.fetch<Gateway>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/enable-ip-mobility`,
       },
       unmarshalGateway,
     )

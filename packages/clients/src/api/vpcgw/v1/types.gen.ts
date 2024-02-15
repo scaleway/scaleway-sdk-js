@@ -354,8 +354,13 @@ export interface Gateway {
   bastionPort: number
   /** Defines whether SMTP traffic is allowed to pass through the gateway. */
   smtpEnabled: boolean
-  /** Whether this uses non-IPAM IP configurations. */
+  /** Defines whether the gateway uses non-IPAM IP configurations. */
   isLegacy: boolean
+  /**
+   * Defines whether the gateway uses routed IPs (IP mobility) instead of NAT
+   * IPs.
+   */
+  ipMobilityEnabled: boolean
   /** Zone of the gateway. */
   zone: Zone
 }
@@ -571,6 +576,13 @@ export type DeletePATRuleRequest = {
   zone?: Zone
   /** ID of the PAT rule to delete. */
   patRuleId: string
+}
+
+export type EnableIPMobilityRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the gateway to upgrade to IP mobility. */
+  gatewayId: string
 }
 
 export type GetDHCPEntryRequest = {
