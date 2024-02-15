@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.17.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.16.0...@scaleway/sdk@2.17.0) (2024-02-15)
+
+### Features
+
+- **block:** remove SnapshotSummary ([#1146](https://github.com/scaleway/scaleway-sdk-js/issues/1146)) ([41f5fef](https://github.com/scaleway/scaleway-sdk-js/commit/41f5fefa5e96a3020cc089a60e9044a8e108f40f))
+- **serverless_jobs:** add local storage limit ([#1145](https://github.com/scaleway/scaleway-sdk-js/issues/1145)) ([dc885f0](https://github.com/scaleway/scaleway-sdk-js/commit/dc885f09afda4a11a812b0c1ace22d44c5e8e476))
+
 ## [2.16.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.15.0...@scaleway/sdk@2.16.0) (2024-02-12)
 
 ### Features
