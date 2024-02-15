@@ -79,10 +79,7 @@ export class API extends ParentAPI {
     this.client.fetch<Image>(
       {
         method: 'GET',
-        path: `/marketplace/v2/images/${validatePathParam(
-          'imageId',
-          request.imageId,
-        )}`,
+        path: `/marketplace/v2/images/${validatePathParam('imageId', request.imageId)}`,
       },
       unmarshalImage,
     )
@@ -127,10 +124,7 @@ export class API extends ParentAPI {
     this.client.fetch<Version>(
       {
         method: 'GET',
-        path: `/marketplace/v2/versions/${validatePathParam(
-          'versionId',
-          request.versionId,
-        )}`,
+        path: `/marketplace/v2/versions/${validatePathParam('versionId', request.versionId)}`,
       },
       unmarshalVersion,
     )
@@ -188,10 +182,7 @@ export class API extends ParentAPI {
     this.client.fetch<LocalImage>(
       {
         method: 'GET',
-        path: `/marketplace/v2/local-images/${validatePathParam(
-          'localImageId',
-          request.localImageId,
-        )}`,
+        path: `/marketplace/v2/local-images/${validatePathParam('localImageId', request.localImageId)}`,
       },
       unmarshalLocalImage,
     )
@@ -235,10 +226,7 @@ export class API extends ParentAPI {
     this.client.fetch<Category>(
       {
         method: 'GET',
-        path: `/marketplace/v2/categories/${validatePathParam(
-          'categoryId',
-          request.categoryId,
-        )}`,
+        path: `/marketplace/v2/categories/${validatePathParam('categoryId', request.categoryId)}`,
       },
       unmarshalCategory,
     )

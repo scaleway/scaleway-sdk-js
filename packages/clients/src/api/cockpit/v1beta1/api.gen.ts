@@ -222,10 +222,7 @@ export class API extends ParentAPI {
   deleteDatasource = (request: Readonly<DeleteDatasourceRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/cockpit/v1beta1/datasources/${validatePathParam(
-        'datasourceId',
-        request.datasourceId,
-      )}`,
+      path: `/cockpit/v1beta1/datasources/${validatePathParam('datasourceId', request.datasourceId)}`,
     })
 
   protected pageOfListDatasources = (
@@ -321,10 +318,7 @@ export class API extends ParentAPI {
     this.client.fetch<Token>(
       {
         method: 'GET',
-        path: `/cockpit/v1beta1/tokens/${validatePathParam(
-          'tokenId',
-          request.tokenId,
-        )}`,
+        path: `/cockpit/v1beta1/tokens/${validatePathParam('tokenId', request.tokenId)}`,
       },
       unmarshalToken,
     )
@@ -337,10 +331,7 @@ export class API extends ParentAPI {
   deleteToken = (request: Readonly<DeleteTokenRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/cockpit/v1beta1/tokens/${validatePathParam(
-        'tokenId',
-        request.tokenId,
-      )}`,
+      path: `/cockpit/v1beta1/tokens/${validatePathParam('tokenId', request.tokenId)}`,
     })
 
   /**
@@ -525,10 +516,7 @@ export class API extends ParentAPI {
       ),
       headers: jsonContentHeaders,
       method: 'POST',
-      path: `/cockpit/v1beta1/grafana-users/${validatePathParam(
-        'grafanaUserId',
-        request.grafanaUserId,
-      )}/delete`,
+      path: `/cockpit/v1beta1/grafana-users/${validatePathParam('grafanaUserId', request.grafanaUserId)}/delete`,
     })
 
   /**
@@ -548,10 +536,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/cockpit/v1beta1/grafana-users/${validatePathParam(
-          'grafanaUserId',
-          request.grafanaUserId,
-        )}/reset-password`,
+        path: `/cockpit/v1beta1/grafana-users/${validatePathParam('grafanaUserId', request.grafanaUserId)}/reset-password`,
       },
       unmarshalGrafanaUser,
     )
@@ -653,10 +638,7 @@ export class API extends ParentAPI {
     this.client.fetch<GrafanaProductDashboard>(
       {
         method: 'GET',
-        path: `/cockpit/v1beta1/grafana-product-dashboards/${validatePathParam(
-          'dashboardName',
-          request.dashboardName,
-        )}`,
+        path: `/cockpit/v1beta1/grafana-product-dashboards/${validatePathParam('dashboardName', request.dashboardName)}`,
         urlParams: urlParams([
           'project_id',
           request.projectId ?? this.client.settings.defaultProjectId,

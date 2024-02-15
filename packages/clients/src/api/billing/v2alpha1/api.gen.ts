@@ -90,10 +90,7 @@ export class API extends ParentAPI {
   downloadInvoice = (request: Readonly<DownloadInvoiceRequest>) =>
     this.client.fetch<Blob>({
       method: 'GET',
-      path: `/billing/v2alpha1/invoices/${validatePathParam(
-        'invoiceId',
-        request.invoiceId,
-      )}/download`,
+      path: `/billing/v2alpha1/invoices/${validatePathParam('invoiceId', request.invoiceId)}/download`,
       urlParams: urlParams(['dl', 1], ['file_type', request.fileType]),
       responseType: 'blob',
     })

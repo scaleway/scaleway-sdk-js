@@ -63,10 +63,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/databases`,
+        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/databases`,
       },
       unmarshalDatabase,
     )
@@ -82,10 +79,7 @@ export class API extends ParentAPI {
     this.client.fetch<Database>(
       {
         method: 'GET',
-        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/databases/${validatePathParam('databaseId', request.databaseId)}`,
+        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/databases/${validatePathParam('databaseId', request.databaseId)}`,
       },
       unmarshalDatabase,
     )
@@ -121,10 +115,7 @@ export class API extends ParentAPI {
     this.client.fetch<Database>(
       {
         method: 'DELETE',
-        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/databases/${validatePathParam('databaseId', request.databaseId)}`,
+        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/databases/${validatePathParam('databaseId', request.databaseId)}`,
       },
       unmarshalDatabase,
     )
@@ -135,10 +126,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListDatabasesResponse>(
       {
         method: 'GET',
-        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/databases`,
+        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/databases`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -183,10 +171,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/databases/${validatePathParam('databaseId', request.databaseId)}`,
+        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/databases/${validatePathParam('databaseId', request.databaseId)}`,
       },
       unmarshalDatabase,
     )
@@ -211,13 +196,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/databases/${validatePathParam(
-          'databaseId',
-          request.databaseId,
-        )}/restore`,
+        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/databases/${validatePathParam('databaseId', request.databaseId)}/restore`,
       },
       unmarshalDatabase,
     )
@@ -234,10 +213,7 @@ export class API extends ParentAPI {
     this.client.fetch<DatabaseBackup>(
       {
         method: 'GET',
-        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/backups/${validatePathParam('backupId', request.backupId)}`,
+        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backups/${validatePathParam('backupId', request.backupId)}`,
       },
       unmarshalDatabaseBackup,
     )
@@ -248,10 +224,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListDatabaseBackupsResponse>(
       {
         method: 'GET',
-        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/backups`,
+        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backups`,
         urlParams: urlParams(
           ['database_id', request.databaseId],
           ['order_by', request.orderBy],
@@ -290,10 +263,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/backups/${validatePathParam('backupId', request.backupId)}/export`,
+        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backups/${validatePathParam('backupId', request.backupId)}/export`,
       },
       unmarshalDatabaseBackup,
     )

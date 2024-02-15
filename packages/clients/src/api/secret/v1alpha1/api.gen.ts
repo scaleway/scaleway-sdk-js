@@ -88,10 +88,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets`,
       },
       unmarshalSecret,
     )
@@ -110,10 +107,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/folders`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/folders`,
       },
       unmarshalFolder,
     )
@@ -129,10 +123,7 @@ export class API extends ParentAPI {
     this.client.fetch<Secret>(
       {
         method: 'GET',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets/${validatePathParam('secretId', request.secretId)}`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}`,
       },
       unmarshalSecret,
     )
@@ -154,13 +145,7 @@ export class API extends ParentAPI {
     this.client.fetch<Secret>(
       {
         method: 'GET',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets-by-name/${validatePathParam(
-          'secretName',
-          request.secretName,
-        )}`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets-by-name/${validatePathParam('secretName', request.secretName)}`,
         urlParams: urlParams(['project_id', request.projectId]),
       },
       unmarshalSecret,
@@ -182,10 +167,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets/${validatePathParam('secretId', request.secretId)}`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}`,
       },
       unmarshalSecret,
     )
@@ -194,10 +176,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListSecretsResponse>(
       {
         method: 'GET',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets`,
         urlParams: urlParams(
           ['is_ephemeral', request.isEphemeral],
           ['is_managed', request.isManaged],
@@ -232,10 +211,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListFoldersResponse>(
       {
         method: 'GET',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/folders`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/folders`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
@@ -268,10 +244,7 @@ export class API extends ParentAPI {
   deleteSecret = (request: Readonly<DeleteSecretRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/secrets/${validatePathParam('secretId', request.secretId)}`,
+      path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}`,
     })
 
   /**
@@ -282,10 +255,7 @@ export class API extends ParentAPI {
   deleteFolder = (request: Readonly<DeleteFolderRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/folders/${validatePathParam('folderId', request.folderId)}`,
+      path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/folders/${validatePathParam('folderId', request.folderId)}`,
     })
 
   /**
@@ -302,10 +272,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets/${validatePathParam('secretId', request.secretId)}/protect`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/protect`,
       },
       unmarshalSecret,
     )
@@ -323,13 +290,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets/${validatePathParam(
-          'secretId',
-          request.secretId,
-        )}/unprotect`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/unprotect`,
       },
       unmarshalSecret,
     )
@@ -346,10 +307,7 @@ export class API extends ParentAPI {
       ),
       headers: jsonContentHeaders,
       method: 'POST',
-      path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/secrets/${validatePathParam('secretId', request.secretId)}/add-owner`,
+      path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/add-owner`,
     })
 
   /**
@@ -367,10 +325,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets/${validatePathParam('secretId', request.secretId)}/versions`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions`,
       },
       unmarshalSecretVersion,
     )
@@ -391,13 +346,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets/${validatePathParam(
-          'secretId',
-          request.secretId,
-        )}/generate-password`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/generate-password`,
       },
       unmarshalSecretVersion,
     )
@@ -414,13 +363,7 @@ export class API extends ParentAPI {
     this.client.fetch<SecretVersion>(
       {
         method: 'GET',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets/${validatePathParam(
-          'secretId',
-          request.secretId,
-        )}/versions/${validatePathParam('revision', request.revision)}`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}`,
       },
       unmarshalSecretVersion,
     )
@@ -444,13 +387,7 @@ export class API extends ParentAPI {
     this.client.fetch<SecretVersion>(
       {
         method: 'GET',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets-by-name/${validatePathParam(
-          'secretName',
-          request.secretName,
-        )}/versions/${validatePathParam('revision', request.revision)}`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets-by-name/${validatePathParam('secretName', request.secretName)}/versions/${validatePathParam('revision', request.revision)}`,
         urlParams: urlParams(['project_id', request.projectId]),
       },
       unmarshalSecretVersion,
@@ -471,13 +408,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets/${validatePathParam(
-          'secretId',
-          request.secretId,
-        )}/versions/${validatePathParam('revision', request.revision)}`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}`,
       },
       unmarshalSecretVersion,
     )
@@ -488,10 +419,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListSecretVersionsResponse>(
       {
         method: 'GET',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets/${validatePathParam('secretId', request.secretId)}/versions`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions`,
         urlParams: urlParams(
           ['page', request.page],
           [
@@ -521,13 +449,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListSecretVersionsResponse>(
       {
         method: 'GET',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets-by-name/${validatePathParam(
-          'secretName',
-          request.secretName,
-        )}/versions`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets-by-name/${validatePathParam('secretName', request.secretName)}/versions`,
         urlParams: urlParams(
           ['page', request.page],
           [
@@ -578,13 +500,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets/${validatePathParam(
-          'secretId',
-          request.secretId,
-        )}/versions/${validatePathParam('revision', request.revision)}/enable`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}/enable`,
       },
       unmarshalSecretVersion,
     )
@@ -602,13 +518,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets/${validatePathParam(
-          'secretId',
-          request.secretId,
-        )}/versions/${validatePathParam('revision', request.revision)}/disable`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}/disable`,
       },
       unmarshalSecretVersion,
     )
@@ -625,13 +535,7 @@ export class API extends ParentAPI {
     this.client.fetch<AccessSecretVersionResponse>(
       {
         method: 'GET',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets/${validatePathParam(
-          'secretId',
-          request.secretId,
-        )}/versions/${validatePathParam('revision', request.revision)}/access`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}/access`,
       },
       unmarshalAccessSecretVersionResponse,
     )
@@ -657,13 +561,7 @@ export class API extends ParentAPI {
     this.client.fetch<AccessSecretVersionResponse>(
       {
         method: 'GET',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets-by-name/${validatePathParam(
-          'secretName',
-          request.secretName,
-        )}/versions/${validatePathParam('revision', request.revision)}/access`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets-by-name/${validatePathParam('secretName', request.secretName)}/versions/${validatePathParam('revision', request.revision)}/access`,
         urlParams: urlParams(['project_id', request.projectId]),
       },
       unmarshalAccessSecretVersionResponse,
@@ -682,13 +580,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/secrets/${validatePathParam(
-          'secretId',
-          request.secretId,
-        )}/versions/${validatePathParam('revision', request.revision)}/destroy`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}/destroy`,
       },
       unmarshalSecretVersion,
     )
@@ -697,10 +589,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListTagsResponse>(
       {
         method: 'GET',
-        path: `/secret-manager/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/tags`,
+        path: `/secret-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tags`,
         urlParams: urlParams(
           ['page', request.page],
           [

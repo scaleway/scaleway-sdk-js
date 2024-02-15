@@ -60,10 +60,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListNamespacesResponse>(
       {
         method: 'GET',
-        path: `/registry/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/namespaces`,
+        path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -105,10 +102,7 @@ export class API extends ParentAPI {
     this.client.fetch<Namespace>(
       {
         method: 'GET',
-        path: `/registry/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
+        path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
       },
       unmarshalNamespace,
     )
@@ -150,10 +144,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/registry/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/namespaces`,
+        path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces`,
       },
       unmarshalNamespace,
     )
@@ -174,10 +165,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/registry/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
+        path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
       },
       unmarshalNamespace,
     )
@@ -194,10 +182,7 @@ export class API extends ParentAPI {
     this.client.fetch<Namespace>(
       {
         method: 'DELETE',
-        path: `/registry/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
+        path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
       },
       unmarshalNamespace,
     )
@@ -206,10 +191,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListImagesResponse>(
       {
         method: 'GET',
-        path: `/registry/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/images`,
+        path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/images`,
         urlParams: urlParams(
           ['name', request.name],
           ['namespace_id', request.namespaceId],
@@ -251,10 +233,7 @@ export class API extends ParentAPI {
     this.client.fetch<Image>(
       {
         method: 'GET',
-        path: `/registry/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/images/${validatePathParam('imageId', request.imageId)}`,
+        path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/images/${validatePathParam('imageId', request.imageId)}`,
       },
       unmarshalImage,
     )
@@ -294,10 +273,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/registry/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/images/${validatePathParam('imageId', request.imageId)}`,
+        path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/images/${validatePathParam('imageId', request.imageId)}`,
       },
       unmarshalImage,
     )
@@ -313,10 +289,7 @@ export class API extends ParentAPI {
     this.client.fetch<Image>(
       {
         method: 'DELETE',
-        path: `/registry/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/images/${validatePathParam('imageId', request.imageId)}`,
+        path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/images/${validatePathParam('imageId', request.imageId)}`,
       },
       unmarshalImage,
     )
@@ -325,10 +298,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListTagsResponse>(
       {
         method: 'GET',
-        path: `/registry/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/images/${validatePathParam('imageId', request.imageId)}/tags`,
+        path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/images/${validatePathParam('imageId', request.imageId)}/tags`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -366,10 +336,7 @@ export class API extends ParentAPI {
     this.client.fetch<Tag>(
       {
         method: 'GET',
-        path: `/registry/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/tags/${validatePathParam('tagId', request.tagId)}`,
+        path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tags/${validatePathParam('tagId', request.tagId)}`,
       },
       unmarshalTag,
     )
@@ -404,10 +371,7 @@ export class API extends ParentAPI {
     this.client.fetch<Tag>(
       {
         method: 'DELETE',
-        path: `/registry/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/tags/${validatePathParam('tagId', request.tagId)}`,
+        path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tags/${validatePathParam('tagId', request.tagId)}`,
         urlParams: urlParams(['force', request.force]),
       },
       unmarshalTag,

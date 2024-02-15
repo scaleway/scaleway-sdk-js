@@ -237,10 +237,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/domain/v2beta1/dns-zones/${validatePathParam(
-          'dnsZone',
-          request.dnsZone,
-        )}`,
+        path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}`,
       },
       unmarshalDNSZone,
     )
@@ -260,10 +257,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/domain/v2beta1/dns-zones/${validatePathParam(
-          'dnsZone',
-          request.dnsZone,
-        )}/clone`,
+        path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/clone`,
       },
       unmarshalDNSZone,
     )
@@ -278,10 +272,7 @@ export class API extends ParentAPI {
     this.client.fetch<DeleteDNSZoneResponse>(
       {
         method: 'DELETE',
-        path: `/domain/v2beta1/dns-zones/${validatePathParam(
-          'dnsZone',
-          request.dnsZone,
-        )}`,
+        path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}`,
         urlParams: urlParams([
           'project_id',
           request.projectId ?? this.client.settings.defaultProjectId,
@@ -296,10 +287,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListDNSZoneRecordsResponse>(
       {
         method: 'GET',
-        path: `/domain/v2beta1/dns-zones/${validatePathParam(
-          'dnsZone',
-          request.dnsZone,
-        )}/records`,
+        path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/records`,
         urlParams: urlParams(
           ['id', request.id],
           ['name', request.name],
@@ -354,10 +342,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/domain/v2beta1/dns-zones/${validatePathParam(
-          'dnsZone',
-          request.dnsZone,
-        )}/records`,
+        path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/records`,
       },
       unmarshalUpdateDNSZoneRecordsResponse,
     )
@@ -373,10 +358,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListDNSZoneNameserversResponse>(
       {
         method: 'GET',
-        path: `/domain/v2beta1/dns-zones/${validatePathParam(
-          'dnsZone',
-          request.dnsZone,
-        )}/nameservers`,
+        path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/nameservers`,
         urlParams: urlParams(['project_id', request.projectId]),
       },
       unmarshalListDNSZoneNameserversResponse,
@@ -399,10 +381,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/domain/v2beta1/dns-zones/${validatePathParam(
-          'dnsZone',
-          request.dnsZone,
-        )}/nameservers`,
+        path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/nameservers`,
       },
       unmarshalUpdateDNSZoneNameserversResponse,
     )
@@ -418,10 +397,7 @@ export class API extends ParentAPI {
     this.client.fetch<ClearDNSZoneRecordsResponse>(
       {
         method: 'DELETE',
-        path: `/domain/v2beta1/dns-zones/${validatePathParam(
-          'dnsZone',
-          request.dnsZone,
-        )}/records`,
+        path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/records`,
       },
       unmarshalClearDNSZoneRecordsResponse,
     )
@@ -436,10 +412,7 @@ export class API extends ParentAPI {
   exportRawDNSZone = (request: Readonly<ExportRawDNSZoneRequest>) =>
     this.client.fetch<Blob>({
       method: 'GET',
-      path: `/domain/v2beta1/dns-zones/${validatePathParam(
-        'dnsZone',
-        request.dnsZone,
-      )}/raw`,
+      path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/raw`,
       urlParams: urlParams(['dl', 1], ['format', request.format]),
       responseType: 'blob',
     })
@@ -459,10 +432,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/domain/v2beta1/dns-zones/${validatePathParam(
-          'dnsZone',
-          request.dnsZone,
-        )}/raw`,
+        path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/raw`,
       },
       unmarshalImportRawDNSZoneResponse,
     )
@@ -482,10 +452,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/domain/v2beta1/dns-zones/${validatePathParam(
-          'dnsZone',
-          request.dnsZone,
-        )}/import-provider`,
+        path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/import-provider`,
       },
       unmarshalImportProviderDNSZoneResponse,
     )
@@ -506,10 +473,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/domain/v2beta1/dns-zones/${validatePathParam(
-          'dnsZone',
-          request.dnsZone,
-        )}/refresh`,
+        path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/refresh`,
       },
       unmarshalRefreshDNSZoneResponse,
     )
@@ -520,10 +484,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListDNSZoneVersionsResponse>(
       {
         method: 'GET',
-        path: `/domain/v2beta1/dns-zones/${validatePathParam(
-          'dnsZone',
-          request.dnsZone,
-        )}/versions`,
+        path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/versions`,
         urlParams: urlParams(
           ['page', request.page],
           [
@@ -552,10 +513,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListDNSZoneVersionRecordsResponse>(
       {
         method: 'GET',
-        path: `/domain/v2beta1/dns-zones/version/${validatePathParam(
-          'dnsZoneVersionId',
-          request.dnsZoneVersionId,
-        )}`,
+        path: `/domain/v2beta1/dns-zones/version/${validatePathParam('dnsZoneVersionId', request.dnsZoneVersionId)}`,
         urlParams: urlParams(
           ['page', request.page],
           [
@@ -594,10 +552,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetDNSZoneVersionDiffResponse>(
       {
         method: 'GET',
-        path: `/domain/v2beta1/dns-zones/version/${validatePathParam(
-          'dnsZoneVersionId',
-          request.dnsZoneVersionId,
-        )}/diff`,
+        path: `/domain/v2beta1/dns-zones/version/${validatePathParam('dnsZoneVersionId', request.dnsZoneVersionId)}/diff`,
       },
       unmarshalGetDNSZoneVersionDiffResponse,
     )
@@ -615,10 +570,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/domain/v2beta1/dns-zones/version/${validatePathParam(
-          'dnsZoneVersionId',
-          request.dnsZoneVersionId,
-        )}/restore`,
+        path: `/domain/v2beta1/dns-zones/version/${validatePathParam('dnsZoneVersionId', request.dnsZoneVersionId)}/restore`,
       },
       unmarshalRestoreDNSZoneVersionResponse,
     )
@@ -634,10 +586,7 @@ export class API extends ParentAPI {
     this.client.fetch<SSLCertificate>(
       {
         method: 'GET',
-        path: `/domain/v2beta1/ssl-certificates/${validatePathParam(
-          'dnsZone',
-          request.dnsZone,
-        )}`,
+        path: `/domain/v2beta1/ssl-certificates/${validatePathParam('dnsZone', request.dnsZone)}`,
       },
       unmarshalSSLCertificate,
     )
@@ -726,10 +675,7 @@ export class API extends ParentAPI {
     this.client.fetch<DeleteSSLCertificateResponse>(
       {
         method: 'DELETE',
-        path: `/domain/v2beta1/ssl-certificates/${validatePathParam(
-          'dnsZone',
-          request.dnsZone,
-        )}`,
+        path: `/domain/v2beta1/ssl-certificates/${validatePathParam('dnsZone', request.dnsZone)}`,
       },
       unmarshalDeleteSSLCertificateResponse,
     )
@@ -745,10 +691,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetDNSZoneTsigKeyResponse>(
       {
         method: 'GET',
-        path: `/domain/v2beta1/dns-zones/${validatePathParam(
-          'dnsZone',
-          request.dnsZone,
-        )}/tsig-key`,
+        path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/tsig-key`,
       },
       unmarshalGetDNSZoneTsigKeyResponse,
     )
@@ -762,10 +705,7 @@ export class API extends ParentAPI {
   deleteDNSZoneTsigKey = (request: Readonly<DeleteDNSZoneTsigKeyRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/domain/v2beta1/dns-zones/${validatePathParam(
-        'dnsZone',
-        request.dnsZone,
-      )}/tsig-key`,
+      path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/tsig-key`,
     })
 }
 
@@ -892,10 +832,7 @@ export class RegistrarAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/domain/v2beta1/domains/${validatePathParam(
-          'domain',
-          request.domain,
-        )}/trade`,
+        path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/trade`,
       },
       unmarshalOrderResponse,
     )
@@ -938,10 +875,7 @@ export class RegistrarAPI extends ParentAPI {
     this.client.fetch<DeleteExternalDomainResponse>(
       {
         method: 'DELETE',
-        path: `/domain/v2beta1/external-domains/${validatePathParam(
-          'domain',
-          request.domain,
-        )}`,
+        path: `/domain/v2beta1/external-domains/${validatePathParam('domain', request.domain)}`,
       },
       unmarshalDeleteExternalDomainResponse,
     )
@@ -1018,10 +952,7 @@ export class RegistrarAPI extends ParentAPI {
     this.client.fetch<Contact>(
       {
         method: 'GET',
-        path: `/domain/v2beta1/contacts/${validatePathParam(
-          'contactId',
-          request.contactId,
-        )}`,
+        path: `/domain/v2beta1/contacts/${validatePathParam('contactId', request.contactId)}`,
       },
       unmarshalContact,
     )
@@ -1043,10 +974,7 @@ export class RegistrarAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/domain/v2beta1/contacts/${validatePathParam(
-          'contactId',
-          request.contactId,
-        )}`,
+        path: `/domain/v2beta1/contacts/${validatePathParam('contactId', request.contactId)}`,
       },
       unmarshalContact,
     )
@@ -1129,10 +1057,7 @@ export class RegistrarAPI extends ParentAPI {
     this.client.fetch<Domain>(
       {
         method: 'GET',
-        path: `/domain/v2beta1/domains/${validatePathParam(
-          'domain',
-          request.domain,
-        )}`,
+        path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}`,
       },
       unmarshalDomain,
     )
@@ -1174,10 +1099,7 @@ export class RegistrarAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/domain/v2beta1/domains/${validatePathParam(
-          'domain',
-          request.domain,
-        )}`,
+        path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}`,
       },
       unmarshalDomain,
     )
@@ -1198,10 +1120,7 @@ export class RegistrarAPI extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/domain/v2beta1/domains/${validatePathParam(
-          'domain',
-          request.domain,
-        )}/lock-transfer`,
+        path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/lock-transfer`,
       },
       unmarshalDomain,
     )
@@ -1222,10 +1141,7 @@ export class RegistrarAPI extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/domain/v2beta1/domains/${validatePathParam(
-          'domain',
-          request.domain,
-        )}/unlock-transfer`,
+        path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/unlock-transfer`,
       },
       unmarshalDomain,
     )
@@ -1246,10 +1162,7 @@ export class RegistrarAPI extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/domain/v2beta1/domains/${validatePathParam(
-          'domain',
-          request.domain,
-        )}/enable-auto-renew`,
+        path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/enable-auto-renew`,
       },
       unmarshalDomain,
     )
@@ -1270,10 +1183,7 @@ export class RegistrarAPI extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/domain/v2beta1/domains/${validatePathParam(
-          'domain',
-          request.domain,
-        )}/disable-auto-renew`,
+        path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/disable-auto-renew`,
       },
       unmarshalDomain,
     )
@@ -1294,10 +1204,7 @@ export class RegistrarAPI extends ParentAPI {
     this.client.fetch<GetDomainAuthCodeResponse>(
       {
         method: 'GET',
-        path: `/domain/v2beta1/domains/${validatePathParam(
-          'domain',
-          request.domain,
-        )}/auth-code`,
+        path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/auth-code`,
       },
       unmarshalGetDomainAuthCodeResponse,
     )
@@ -1322,10 +1229,7 @@ export class RegistrarAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/domain/v2beta1/domains/${validatePathParam(
-          'domain',
-          request.domain,
-        )}/enable-dnssec`,
+        path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/enable-dnssec`,
       },
       unmarshalDomain,
     )
@@ -1344,10 +1248,7 @@ export class RegistrarAPI extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/domain/v2beta1/domains/${validatePathParam(
-          'domain',
-          request.domain,
-        )}/disable-dnssec`,
+        path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/disable-dnssec`,
       },
       unmarshalDomain,
     )
@@ -1426,10 +1327,7 @@ export class RegistrarAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/domain/v2beta1/domains/${validatePathParam(
-          'domain',
-          request.domain,
-        )}/hosts`,
+        path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/hosts`,
       },
       unmarshalHost,
     )
@@ -1440,10 +1338,7 @@ export class RegistrarAPI extends ParentAPI {
     this.client.fetch<ListDomainHostsResponse>(
       {
         method: 'GET',
-        path: `/domain/v2beta1/domains/${validatePathParam(
-          'domain',
-          request.domain,
-        )}/hosts`,
+        path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/hosts`,
         urlParams: urlParams(
           ['page', request.page],
           [
@@ -1481,10 +1376,7 @@ export class RegistrarAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/domain/v2beta1/domains/${validatePathParam(
-          'domain',
-          request.domain,
-        )}/hosts/${validatePathParam('name', request.name)}`,
+        path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/hosts/${validatePathParam('name', request.name)}`,
       },
       unmarshalHost,
     )
@@ -1499,10 +1391,7 @@ export class RegistrarAPI extends ParentAPI {
     this.client.fetch<Host>(
       {
         method: 'DELETE',
-        path: `/domain/v2beta1/domains/${validatePathParam(
-          'domain',
-          request.domain,
-        )}/hosts/${validatePathParam('name', request.name)}`,
+        path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/hosts/${validatePathParam('name', request.name)}`,
       },
       unmarshalHost,
     )

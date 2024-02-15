@@ -70,10 +70,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/transactional-email/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/emails`,
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/emails`,
       },
       unmarshalCreateEmailResponse,
     )
@@ -89,10 +86,7 @@ export class API extends ParentAPI {
     this.client.fetch<Email>(
       {
         method: 'GET',
-        path: `/transactional-email/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/emails/${validatePathParam('emailId', request.emailId)}`,
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/emails/${validatePathParam('emailId', request.emailId)}`,
       },
       unmarshalEmail,
     )
@@ -121,10 +115,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListEmailsResponse>(
       {
         method: 'GET',
-        path: `/transactional-email/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/emails`,
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/emails`,
         urlParams: urlParams(
           ['domain_id', request.domainId],
           ['flags', request.flags],
@@ -169,10 +160,7 @@ export class API extends ParentAPI {
     this.client.fetch<Statistics>(
       {
         method: 'GET',
-        path: `/transactional-email/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/statistics`,
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/statistics`,
         urlParams: urlParams(
           ['domain_id', request.domainId],
           ['mail_from', request.mailFrom],
@@ -198,10 +186,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/transactional-email/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/emails/${validatePathParam('emailId', request.emailId)}/cancel`,
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/emails/${validatePathParam('emailId', request.emailId)}/cancel`,
       },
       unmarshalEmail,
     )
@@ -221,10 +206,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/transactional-email/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/domains`,
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains`,
       },
       unmarshalDomain,
     )
@@ -246,10 +228,7 @@ export class API extends ParentAPI {
     this.client.fetch<Domain>(
       {
         method: 'GET',
-        path: `/transactional-email/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/domains/${validatePathParam('domainId', request.domainId)}`,
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}`,
       },
       unmarshalDomain,
     )
@@ -278,10 +257,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListDomainsResponse>(
       {
         method: 'GET',
-        path: `/transactional-email/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/domains`,
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains`,
         urlParams: urlParams(
           ['name', request.name],
           ['organization_id', request.organizationId],
@@ -321,10 +297,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/transactional-email/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/domains/${validatePathParam('domainId', request.domainId)}/revoke`,
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}/revoke`,
       },
       unmarshalDomain,
     )
@@ -342,10 +315,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/transactional-email/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/domains/${validatePathParam('domainId', request.domainId)}/check`,
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}/check`,
       },
       unmarshalDomain,
     )
@@ -362,13 +332,7 @@ export class API extends ParentAPI {
     this.client.fetch<DomainLastStatus>(
       {
         method: 'GET',
-        path: `/transactional-email/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/domains/${validatePathParam(
-          'domainId',
-          request.domainId,
-        )}/verification`,
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}/verification`,
       },
       unmarshalDomainLastStatus,
     )

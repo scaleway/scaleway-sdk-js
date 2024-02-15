@@ -83,10 +83,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/ipfs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/volumes`,
+        path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/volumes`,
       },
       unmarshalVolume,
     )
@@ -102,10 +99,7 @@ export class API extends ParentAPI {
     this.client.fetch<Volume>(
       {
         method: 'GET',
-        path: `/ipfs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+        path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
       },
       unmarshalVolume,
     )
@@ -114,10 +108,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListVolumesResponse>(
       {
         method: 'GET',
-        path: `/ipfs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/volumes`,
+        path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/volumes`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
@@ -158,10 +149,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/ipfs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+        path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
       },
       unmarshalVolume,
     )
@@ -176,10 +164,7 @@ export class API extends ParentAPI {
   deleteVolume = (request: Readonly<DeleteVolumeRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/ipfs/v1alpha1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+      path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
     })
 
   /**
@@ -202,10 +187,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/ipfs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/pins/create-by-url`,
+        path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pins/create-by-url`,
       },
       unmarshalPin,
     )
@@ -230,10 +212,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/ipfs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/pins/create-by-cid`,
+        path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pins/create-by-cid`,
       },
       unmarshalPin,
     )
@@ -260,10 +239,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/ipfs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/pins/${validatePathParam('pinId', request.pinId)}/replace`,
+        path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pins/${validatePathParam('pinId', request.pinId)}/replace`,
       },
       unmarshalReplacePinResponse,
     )
@@ -279,10 +255,7 @@ export class API extends ParentAPI {
     this.client.fetch<Pin>(
       {
         method: 'GET',
-        path: `/ipfs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/pins/${validatePathParam('pinId', request.pinId)}`,
+        path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pins/${validatePathParam('pinId', request.pinId)}`,
         urlParams: urlParams(['volume_id', request.volumeId]),
       },
       unmarshalPin,
@@ -311,10 +284,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListPinsResponse>(
       {
         method: 'GET',
-        path: `/ipfs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/pins`,
+        path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pins`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
@@ -351,10 +321,7 @@ export class API extends ParentAPI {
   deletePin = (request: Readonly<DeletePinRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/ipfs/v1alpha1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/pins/${validatePathParam('pinId', request.pinId)}`,
+      path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pins/${validatePathParam('pinId', request.pinId)}`,
       urlParams: urlParams(['volume_id', request.volumeId]),
     })
 }
@@ -379,10 +346,7 @@ export class IpnsAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/ipfs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/names`,
+        path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/names`,
       },
       unmarshalName,
     )
@@ -397,10 +361,7 @@ export class IpnsAPI extends ParentAPI {
     this.client.fetch<Name>(
       {
         method: 'GET',
-        path: `/ipfs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/names/${validatePathParam('nameId', request.nameId)}`,
+        path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/names/${validatePathParam('nameId', request.nameId)}`,
       },
       unmarshalName,
     )
@@ -432,10 +393,7 @@ export class IpnsAPI extends ParentAPI {
   deleteName = (request: Readonly<IpnsApiDeleteNameRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/ipfs/v1alpha1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/names/${validatePathParam('nameId', request.nameId)}`,
+      path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/names/${validatePathParam('nameId', request.nameId)}`,
     })
 
   protected pageOfListNames = (
@@ -444,10 +402,7 @@ export class IpnsAPI extends ParentAPI {
     this.client.fetch<ListNamesResponse>(
       {
         method: 'GET',
-        path: `/ipfs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/names`,
+        path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/names`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
@@ -486,10 +441,7 @@ export class IpnsAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/ipfs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/names/${validatePathParam('nameId', request.nameId)}`,
+        path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/names/${validatePathParam('nameId', request.nameId)}`,
       },
       unmarshalName,
     )
@@ -504,10 +456,7 @@ export class IpnsAPI extends ParentAPI {
     this.client.fetch<ExportKeyNameResponse>(
       {
         method: 'GET',
-        path: `/ipfs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/names/${validatePathParam('nameId', request.nameId)}/export-key`,
+        path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/names/${validatePathParam('nameId', request.nameId)}/export-key`,
       },
       unmarshalExportKeyNameResponse,
     )
@@ -526,10 +475,7 @@ export class IpnsAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/ipfs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/names/import-key`,
+        path: `/ipfs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/names/import-key`,
       },
       unmarshalName,
     )

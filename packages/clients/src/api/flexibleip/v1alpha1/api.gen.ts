@@ -68,10 +68,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/flexible-ip/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/fips`,
+        path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips`,
       },
       unmarshalFlexibleIP,
     )
@@ -88,10 +85,7 @@ export class API extends ParentAPI {
     this.client.fetch<FlexibleIP>(
       {
         method: 'GET',
-        path: `/flexible-ip/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/fips/${validatePathParam('fipId', request.fipId)}`,
+        path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}`,
       },
       unmarshalFlexibleIP,
     )
@@ -124,10 +118,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListFlexibleIPsResponse>(
       {
         method: 'GET',
-        path: `/flexible-ip/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/fips`,
+        path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
@@ -170,10 +161,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/flexible-ip/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/fips/${validatePathParam('fipId', request.fipId)}`,
+        path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}`,
       },
       unmarshalFlexibleIP,
     )
@@ -188,10 +176,7 @@ export class API extends ParentAPI {
   deleteFlexibleIP = (request: Readonly<DeleteFlexibleIPRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/flexible-ip/v1alpha1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/fips/${validatePathParam('fipId', request.fipId)}`,
+      path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}`,
     })
 
   /**
@@ -209,10 +194,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/flexible-ip/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/fips/attach`,
+        path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/attach`,
       },
       unmarshalAttachFlexibleIPsResponse,
     )
@@ -232,10 +214,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/flexible-ip/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/fips/detach`,
+        path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/detach`,
       },
       unmarshalDetachFlexibleIPsResponse,
     )
@@ -255,10 +234,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/flexible-ip/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/fips/${validatePathParam('fipId', request.fipId)}/mac`,
+        path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}/mac`,
       },
       unmarshalFlexibleIP,
     )
@@ -279,10 +255,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/flexible-ip/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/fips/${validatePathParam('fipId', request.fipId)}/mac/duplicate`,
+        path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}/mac/duplicate`,
       },
       unmarshalFlexibleIP,
     )
@@ -303,10 +276,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/flexible-ip/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/fips/${validatePathParam('fipId', request.fipId)}/mac/move`,
+        path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}/mac/move`,
       },
       unmarshalFlexibleIP,
     )
@@ -320,9 +290,6 @@ export class API extends ParentAPI {
   deleteMACAddr = (request: Readonly<DeleteMACAddrRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/flexible-ip/v1alpha1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/fips/${validatePathParam('fipId', request.fipId)}/mac`,
+      path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}/mac`,
     })
 }

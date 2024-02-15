@@ -92,10 +92,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListClustersResponse>(
       {
         method: 'GET',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/clusters`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -137,10 +134,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/clusters`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters`,
       },
       unmarshalCluster,
     )
@@ -155,10 +149,7 @@ export class API extends ParentAPI {
     this.client.fetch<Cluster>(
       {
         method: 'GET',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
       },
       unmarshalCluster,
     )
@@ -199,10 +190,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
       },
       unmarshalCluster,
     )
@@ -219,10 +207,7 @@ export class API extends ParentAPI {
     this.client.fetch<Cluster>(
       {
         method: 'DELETE',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
         urlParams: urlParams([
           'with_additional_resources',
           request.withAdditionalResources,
@@ -246,13 +231,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/clusters/${validatePathParam(
-          'clusterId',
-          request.clusterId,
-        )}/upgrade`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/upgrade`,
       },
       unmarshalCluster,
     )
@@ -274,13 +253,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/clusters/${validatePathParam(
-          'clusterId',
-          request.clusterId,
-        )}/set-type`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/set-type`,
       },
       unmarshalCluster,
     )
@@ -301,13 +274,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListClusterAvailableVersionsResponse>(
       {
         method: 'GET',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/clusters/${validatePathParam(
-          'clusterId',
-          request.clusterId,
-        )}/available-versions`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/available-versions`,
       },
       unmarshalListClusterAvailableVersionsResponse,
     )
@@ -325,13 +292,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListClusterAvailableTypesResponse>(
       {
         method: 'GET',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/clusters/${validatePathParam(
-          'clusterId',
-          request.clusterId,
-        )}/available-types`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/available-types`,
       },
       unmarshalListClusterAvailableTypesResponse,
     )
@@ -341,13 +302,7 @@ export class API extends ParentAPI {
   ) =>
     this.client.fetch<Blob>({
       method: 'GET',
-      path: `/k8s/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/clusters/${validatePathParam(
-        'clusterId',
-        request.clusterId,
-      )}/kubeconfig`,
+      path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/kubeconfig`,
       urlParams: urlParams(['dl', 1], ['redacted', request.redacted]),
       responseType: 'blob',
     })
@@ -365,13 +320,7 @@ export class API extends ParentAPI {
       body: '{}',
       headers: jsonContentHeaders,
       method: 'POST',
-      path: `/k8s/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/clusters/${validatePathParam(
-        'clusterId',
-        request.clusterId,
-      )}/reset-admin-token`,
+      path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/reset-admin-token`,
     })
 
   /**
@@ -395,13 +344,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/clusters/${validatePathParam(
-          'clusterId',
-          request.clusterId,
-        )}/migrate-to-private-network`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/migrate-to-private-network`,
       },
       unmarshalCluster,
     )
@@ -410,10 +353,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListPoolsResponse>(
       {
         method: 'GET',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/clusters/${validatePathParam('clusterId', request.clusterId)}/pools`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/pools`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -453,10 +393,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/clusters/${validatePathParam('clusterId', request.clusterId)}/pools`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/pools`,
       },
       unmarshalPool,
     )
@@ -472,10 +409,7 @@ export class API extends ParentAPI {
     this.client.fetch<Pool>(
       {
         method: 'GET',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/pools/${validatePathParam('poolId', request.poolId)}`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}`,
       },
       unmarshalPool,
     )
@@ -515,10 +449,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/pools/${validatePathParam('poolId', request.poolId)}/upgrade`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/upgrade`,
       },
       unmarshalPool,
     )
@@ -538,10 +469,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/pools/${validatePathParam('poolId', request.poolId)}`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}`,
       },
       unmarshalPool,
     )
@@ -557,10 +485,7 @@ export class API extends ParentAPI {
     this.client.fetch<Pool>(
       {
         method: 'DELETE',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/pools/${validatePathParam('poolId', request.poolId)}`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}`,
       },
       unmarshalPool,
     )
@@ -579,10 +504,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/pools/${validatePathParam('poolId', request.poolId)}/external-nodes`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/external-nodes`,
       },
       unmarshalExternalNode,
     )
@@ -591,10 +513,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListNodesResponse>(
       {
         method: 'GET',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/clusters/${validatePathParam('clusterId', request.clusterId)}/nodes`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/nodes`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -630,10 +549,7 @@ export class API extends ParentAPI {
     this.client.fetch<Node>(
       {
         method: 'GET',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/nodes/${validatePathParam('nodeId', request.nodeId)}`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nodes/${validatePathParam('nodeId', request.nodeId)}`,
       },
       unmarshalNode,
     )
@@ -675,10 +591,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/nodes/${validatePathParam('nodeId', request.nodeId)}/replace`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nodes/${validatePathParam('nodeId', request.nodeId)}/replace`,
       },
       unmarshalNode,
     )
@@ -699,10 +612,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/nodes/${validatePathParam('nodeId', request.nodeId)}/reboot`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nodes/${validatePathParam('nodeId', request.nodeId)}/reboot`,
       },
       unmarshalNode,
     )
@@ -719,10 +629,7 @@ export class API extends ParentAPI {
     this.client.fetch<Node>(
       {
         method: 'DELETE',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/nodes/${validatePathParam('nodeId', request.nodeId)}`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nodes/${validatePathParam('nodeId', request.nodeId)}`,
         urlParams: urlParams(
           ['replace', request.replace],
           ['skip_drain', request.skipDrain],
@@ -742,10 +649,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListVersionsResponse>(
       {
         method: 'GET',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/versions`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/versions`,
       },
       unmarshalListVersionsResponse,
     )
@@ -760,10 +664,7 @@ export class API extends ParentAPI {
     this.client.fetch<Version>(
       {
         method: 'GET',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/versions/${validatePathParam('versionName', request.versionName)}`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/versions/${validatePathParam('versionName', request.versionName)}`,
       },
       unmarshalVersion,
     )
@@ -774,10 +675,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListClusterTypesResponse>(
       {
         method: 'GET',
-        path: `/k8s/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/cluster-types`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/cluster-types`,
         urlParams: urlParams(
           ['page', request.page],
           [

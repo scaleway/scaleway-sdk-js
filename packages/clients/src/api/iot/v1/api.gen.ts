@@ -114,10 +114,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListHubsResponse>(
       {
         method: 'GET',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/hubs`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -159,10 +156,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/hubs`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs`,
       },
       unmarshalHub,
     )
@@ -179,10 +173,7 @@ export class API extends ParentAPI {
     this.client.fetch<Hub>(
       {
         method: 'GET',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/hubs/${validatePathParam('hubId', request.hubId)}`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}`,
       },
       unmarshalHub,
     )
@@ -221,10 +212,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/hubs/${validatePathParam('hubId', request.hubId)}`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}`,
       },
       unmarshalHub,
     )
@@ -241,10 +229,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/hubs/${validatePathParam('hubId', request.hubId)}/enable`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}/enable`,
       },
       unmarshalHub,
     )
@@ -261,10 +246,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/hubs/${validatePathParam('hubId', request.hubId)}/disable`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}/disable`,
       },
       unmarshalHub,
     )
@@ -278,10 +260,7 @@ export class API extends ParentAPI {
   deleteHub = (request: Readonly<DeleteHubRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/iot/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/hubs/${validatePathParam('hubId', request.hubId)}`,
+      path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}`,
       urlParams: urlParams(['delete_devices', request.deleteDevices]),
     })
 
@@ -297,10 +276,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetHubMetricsResponse>(
       {
         method: 'GET',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/hubs/${validatePathParam('hubId', request.hubId)}/metrics`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}/metrics`,
         urlParams: urlParams(['start_date', request.startDate]),
       },
       unmarshalGetHubMetricsResponse,
@@ -321,10 +297,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/hubs/${validatePathParam('hubId', request.hubId)}/ca`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}/ca`,
       },
       unmarshalHub,
     )
@@ -340,10 +313,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetHubCAResponse>(
       {
         method: 'GET',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/hubs/${validatePathParam('hubId', request.hubId)}/ca`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}/ca`,
       },
       unmarshalGetHubCAResponse,
     )
@@ -352,10 +322,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListDevicesResponse>(
       {
         method: 'GET',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/devices`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices`,
         urlParams: urlParams(
           ['allow_insecure', request.allowInsecure],
           ['hub_id', request.hubId],
@@ -397,10 +364,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/devices`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices`,
       },
       unmarshalCreateDeviceResponse,
     )
@@ -417,10 +381,7 @@ export class API extends ParentAPI {
     this.client.fetch<Device>(
       {
         method: 'GET',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/devices/${validatePathParam('deviceId', request.deviceId)}`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}`,
       },
       unmarshalDevice,
     )
@@ -440,10 +401,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/devices/${validatePathParam('deviceId', request.deviceId)}`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}`,
       },
       unmarshalDevice,
     )
@@ -460,10 +418,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/devices/${validatePathParam('deviceId', request.deviceId)}/enable`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}/enable`,
       },
       unmarshalDevice,
     )
@@ -480,10 +435,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/devices/${validatePathParam('deviceId', request.deviceId)}/disable`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}/disable`,
       },
       unmarshalDevice,
     )
@@ -501,13 +453,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/devices/${validatePathParam(
-          'deviceId',
-          request.deviceId,
-        )}/renew-certificate`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}/renew-certificate`,
       },
       unmarshalRenewDeviceCertificateResponse,
     )
@@ -527,13 +473,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/devices/${validatePathParam(
-          'deviceId',
-          request.deviceId,
-        )}/certificate`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}/certificate`,
       },
       unmarshalSetDeviceCertificateResponse,
     )
@@ -550,13 +490,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetDeviceCertificateResponse>(
       {
         method: 'GET',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/devices/${validatePathParam(
-          'deviceId',
-          request.deviceId,
-        )}/certificate`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}/certificate`,
       },
       unmarshalGetDeviceCertificateResponse,
     )
@@ -570,10 +504,7 @@ export class API extends ParentAPI {
   deleteDevice = (request: Readonly<DeleteDeviceRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/iot/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/devices/${validatePathParam('deviceId', request.deviceId)}`,
+      path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}`,
     })
 
   /**
@@ -588,10 +519,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetDeviceMetricsResponse>(
       {
         method: 'GET',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/devices/${validatePathParam('deviceId', request.deviceId)}/metrics`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}/metrics`,
         urlParams: urlParams(['start_date', request.startDate]),
       },
       unmarshalGetDeviceMetricsResponse,
@@ -601,10 +529,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListRoutesResponse>(
       {
         method: 'GET',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/routes`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes`,
         urlParams: urlParams(
           ['hub_id', request.hubId],
           ['name', request.name],
@@ -653,10 +578,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/routes`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes`,
       },
       unmarshalRoute,
     )
@@ -676,10 +598,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/routes/${validatePathParam('routeId', request.routeId)}`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
       },
       unmarshalRoute,
     )
@@ -696,10 +615,7 @@ export class API extends ParentAPI {
     this.client.fetch<Route>(
       {
         method: 'GET',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/routes/${validatePathParam('routeId', request.routeId)}`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
       },
       unmarshalRoute,
     )
@@ -713,10 +629,7 @@ export class API extends ParentAPI {
   deleteRoute = (request: Readonly<DeleteRouteRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/iot/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/routes/${validatePathParam('routeId', request.routeId)}`,
+      path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
     })
 
   protected pageOfListNetworks = (
@@ -725,10 +638,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListNetworksResponse>(
       {
         method: 'GET',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/networks`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/networks`,
         urlParams: urlParams(
           ['hub_id', request.hubId],
           ['name', request.name],
@@ -769,10 +679,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/networks`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/networks`,
       },
       unmarshalCreateNetworkResponse,
     )
@@ -789,10 +696,7 @@ export class API extends ParentAPI {
     this.client.fetch<Network>(
       {
         method: 'GET',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/networks/${validatePathParam('networkId', request.networkId)}`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/networks/${validatePathParam('networkId', request.networkId)}`,
       },
       unmarshalNetwork,
     )
@@ -806,10 +710,7 @@ export class API extends ParentAPI {
   deleteNetwork = (request: Readonly<DeleteNetworkRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/iot/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/networks/${validatePathParam('networkId', request.networkId)}`,
+      path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/networks/${validatePathParam('networkId', request.networkId)}`,
     })
 
   /**
@@ -822,16 +723,7 @@ export class API extends ParentAPI {
     this.client.fetch<TwinDocument>(
       {
         method: 'GET',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/twins/${validatePathParam(
-          'twinId',
-          request.twinId,
-        )}/documents/${validatePathParam(
-          'documentName',
-          request.documentName,
-        )}`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}/documents/${validatePathParam('documentName', request.documentName)}`,
       },
       unmarshalTwinDocument,
     )
@@ -850,16 +742,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/twins/${validatePathParam(
-          'twinId',
-          request.twinId,
-        )}/documents/${validatePathParam(
-          'documentName',
-          request.documentName,
-        )}`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}/documents/${validatePathParam('documentName', request.documentName)}`,
       },
       unmarshalTwinDocument,
     )
@@ -878,16 +761,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/twins/${validatePathParam(
-          'twinId',
-          request.twinId,
-        )}/documents/${validatePathParam(
-          'documentName',
-          request.documentName,
-        )}`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}/documents/${validatePathParam('documentName', request.documentName)}`,
       },
       unmarshalTwinDocument,
     )
@@ -900,13 +774,7 @@ export class API extends ParentAPI {
   deleteTwinDocument = (request: Readonly<DeleteTwinDocumentRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/iot/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/twins/${validatePathParam(
-        'twinId',
-        request.twinId,
-      )}/documents/${validatePathParam('documentName', request.documentName)}`,
+      path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}/documents/${validatePathParam('documentName', request.documentName)}`,
     })
 
   /**
@@ -919,10 +787,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListTwinDocumentsResponse>(
       {
         method: 'GET',
-        path: `/iot/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/twins/${validatePathParam('twinId', request.twinId)}`,
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}`,
       },
       unmarshalListTwinDocumentsResponse,
     )
@@ -935,9 +800,6 @@ export class API extends ParentAPI {
   deleteTwinDocuments = (request: Readonly<DeleteTwinDocumentsRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/iot/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/twins/${validatePathParam('twinId', request.twinId)}`,
+      path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}`,
     })
 }

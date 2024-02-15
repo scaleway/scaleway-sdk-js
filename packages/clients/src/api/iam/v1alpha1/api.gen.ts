@@ -187,10 +187,7 @@ export class API extends ParentAPI {
     this.client.fetch<SSHKey>(
       {
         method: 'GET',
-        path: `/iam/v1alpha1/ssh-keys/${validatePathParam(
-          'sshKeyId',
-          request.sshKeyId,
-        )}`,
+        path: `/iam/v1alpha1/ssh-keys/${validatePathParam('sshKeyId', request.sshKeyId)}`,
       },
       unmarshalSSHKey,
     )
@@ -210,10 +207,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/iam/v1alpha1/ssh-keys/${validatePathParam(
-          'sshKeyId',
-          request.sshKeyId,
-        )}`,
+        path: `/iam/v1alpha1/ssh-keys/${validatePathParam('sshKeyId', request.sshKeyId)}`,
       },
       unmarshalSSHKey,
     )
@@ -228,10 +222,7 @@ export class API extends ParentAPI {
   deleteSSHKey = (request: Readonly<DeleteSSHKeyRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/iam/v1alpha1/ssh-keys/${validatePathParam(
-        'sshKeyId',
-        request.sshKeyId,
-      )}`,
+      path: `/iam/v1alpha1/ssh-keys/${validatePathParam('sshKeyId', request.sshKeyId)}`,
     })
 
   protected pageOfListUsers = (request: Readonly<ListUsersRequest> = {}) =>
@@ -284,10 +275,7 @@ export class API extends ParentAPI {
     this.client.fetch<User>(
       {
         method: 'GET',
-        path: `/iam/v1alpha1/users/${validatePathParam(
-          'userId',
-          request.userId,
-        )}`,
+        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}`,
       },
       unmarshalUser,
     )
@@ -306,10 +294,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/iam/v1alpha1/users/${validatePathParam(
-          'userId',
-          request.userId,
-        )}`,
+        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}`,
       },
       unmarshalUser,
     )
@@ -326,10 +311,7 @@ export class API extends ParentAPI {
   deleteUser = (request: Readonly<DeleteUserRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/iam/v1alpha1/users/${validatePathParam(
-        'userId',
-        request.userId,
-      )}`,
+      path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}`,
     })
 
   /**
@@ -427,10 +409,7 @@ export class API extends ParentAPI {
     this.client.fetch<Application>(
       {
         method: 'GET',
-        path: `/iam/v1alpha1/applications/${validatePathParam(
-          'applicationId',
-          request.applicationId,
-        )}`,
+        path: `/iam/v1alpha1/applications/${validatePathParam('applicationId', request.applicationId)}`,
       },
       unmarshalApplication,
     )
@@ -450,10 +429,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/iam/v1alpha1/applications/${validatePathParam(
-          'applicationId',
-          request.applicationId,
-        )}`,
+        path: `/iam/v1alpha1/applications/${validatePathParam('applicationId', request.applicationId)}`,
       },
       unmarshalApplication,
     )
@@ -469,10 +445,7 @@ export class API extends ParentAPI {
   deleteApplication = (request: Readonly<DeleteApplicationRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/iam/v1alpha1/applications/${validatePathParam(
-        'applicationId',
-        request.applicationId,
-      )}`,
+      path: `/iam/v1alpha1/applications/${validatePathParam('applicationId', request.applicationId)}`,
     })
 
   protected pageOfListGroups = (request: Readonly<ListGroupsRequest> = {}) =>
@@ -547,10 +520,7 @@ export class API extends ParentAPI {
     this.client.fetch<Group>(
       {
         method: 'GET',
-        path: `/iam/v1alpha1/groups/${validatePathParam(
-          'groupId',
-          request.groupId,
-        )}`,
+        path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}`,
       },
       unmarshalGroup,
     )
@@ -570,10 +540,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/iam/v1alpha1/groups/${validatePathParam(
-          'groupId',
-          request.groupId,
-        )}`,
+        path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}`,
       },
       unmarshalGroup,
     )
@@ -594,10 +561,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/iam/v1alpha1/groups/${validatePathParam(
-          'groupId',
-          request.groupId,
-        )}/members`,
+        path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}/members`,
       },
       unmarshalGroup,
     )
@@ -618,10 +582,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/iam/v1alpha1/groups/${validatePathParam(
-          'groupId',
-          request.groupId,
-        )}/add-member`,
+        path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}/add-member`,
       },
       unmarshalGroup,
     )
@@ -645,10 +606,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/iam/v1alpha1/groups/${validatePathParam(
-          'groupId',
-          request.groupId,
-        )}/add-members`,
+        path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}/add-members`,
       },
       unmarshalGroup,
     )
@@ -673,10 +631,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/iam/v1alpha1/groups/${validatePathParam(
-          'groupId',
-          request.groupId,
-        )}/remove-member`,
+        path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}/remove-member`,
       },
       unmarshalGroup,
     )
@@ -691,10 +646,7 @@ export class API extends ParentAPI {
   deleteGroup = (request: Readonly<DeleteGroupRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/iam/v1alpha1/groups/${validatePathParam(
-        'groupId',
-        request.groupId,
-      )}`,
+      path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}`,
     })
 
   protected pageOfListPolicies = (
@@ -778,10 +730,7 @@ export class API extends ParentAPI {
     this.client.fetch<Policy>(
       {
         method: 'GET',
-        path: `/iam/v1alpha1/policies/${validatePathParam(
-          'policyId',
-          request.policyId,
-        )}`,
+        path: `/iam/v1alpha1/policies/${validatePathParam('policyId', request.policyId)}`,
       },
       unmarshalPolicy,
     )
@@ -802,10 +751,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/iam/v1alpha1/policies/${validatePathParam(
-          'policyId',
-          request.policyId,
-        )}`,
+        path: `/iam/v1alpha1/policies/${validatePathParam('policyId', request.policyId)}`,
       },
       unmarshalPolicy,
     )
@@ -821,10 +767,7 @@ export class API extends ParentAPI {
   deletePolicy = (request: Readonly<DeletePolicyRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/iam/v1alpha1/policies/${validatePathParam(
-        'policyId',
-        request.policyId,
-      )}`,
+      path: `/iam/v1alpha1/policies/${validatePathParam('policyId', request.policyId)}`,
     })
 
   /**
@@ -840,10 +783,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/iam/v1alpha1/policies/${validatePathParam(
-          'policyId',
-          request.policyId,
-        )}/clone`,
+        path: `/iam/v1alpha1/policies/${validatePathParam('policyId', request.policyId)}/clone`,
       },
       unmarshalPolicy,
     )
@@ -1026,10 +966,7 @@ export class API extends ParentAPI {
     this.client.fetch<APIKey>(
       {
         method: 'GET',
-        path: `/iam/v1alpha1/api-keys/${validatePathParam(
-          'accessKey',
-          request.accessKey,
-        )}`,
+        path: `/iam/v1alpha1/api-keys/${validatePathParam('accessKey', request.accessKey)}`,
       },
       unmarshalAPIKey,
     )
@@ -1049,10 +986,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/iam/v1alpha1/api-keys/${validatePathParam(
-          'accessKey',
-          request.accessKey,
-        )}`,
+        path: `/iam/v1alpha1/api-keys/${validatePathParam('accessKey', request.accessKey)}`,
       },
       unmarshalAPIKey,
     )
@@ -1067,10 +1001,7 @@ export class API extends ParentAPI {
   deleteAPIKey = (request: Readonly<DeleteAPIKeyRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/iam/v1alpha1/api-keys/${validatePathParam(
-        'accessKey',
-        request.accessKey,
-      )}`,
+      path: `/iam/v1alpha1/api-keys/${validatePathParam('accessKey', request.accessKey)}`,
     })
 
   protected pageOfListQuota = (request: Readonly<ListQuotaRequest> = {}) =>
@@ -1120,10 +1051,7 @@ export class API extends ParentAPI {
     this.client.fetch<Quotum>(
       {
         method: 'GET',
-        path: `/iam/v1alpha1/quota/${validatePathParam(
-          'quotumName',
-          request.quotumName,
-        )}`,
+        path: `/iam/v1alpha1/quota/${validatePathParam('quotumName', request.quotumName)}`,
         urlParams: urlParams([
           'organization_id',
           request.organizationId ?? this.client.settings.defaultOrganizationId,

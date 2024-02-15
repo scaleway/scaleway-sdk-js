@@ -51,10 +51,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetImageResponse>(
       {
         method: 'GET',
-        path: `/marketplace/v1/images/${validatePathParam(
-          'imageId',
-          request.imageId,
-        )}`,
+        path: `/marketplace/v1/images/${validatePathParam('imageId', request.imageId)}`,
       },
       unmarshalGetImageResponse,
     )

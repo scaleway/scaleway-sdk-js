@@ -62,10 +62,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListVPCsResponse>(
       {
         method: 'GET',
-        path: `/vpc/v2/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/vpcs`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs`,
         urlParams: urlParams(
           ['is_default', request.isDefault],
           ['name', request.name],
@@ -106,10 +103,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/vpc/v2/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/vpcs`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs`,
       },
       unmarshalVPC,
     )
@@ -124,10 +118,7 @@ export class API extends ParentAPI {
     this.client.fetch<VPC>(
       {
         method: 'GET',
-        path: `/vpc/v2/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/vpcs/${validatePathParam('vpcId', request.vpcId)}`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}`,
       },
       unmarshalVPC,
     )
@@ -146,10 +137,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/vpc/v2/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/vpcs/${validatePathParam('vpcId', request.vpcId)}`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}`,
       },
       unmarshalVPC,
     )
@@ -162,10 +150,7 @@ export class API extends ParentAPI {
   deleteVPC = (request: Readonly<DeleteVPCRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/vpc/v2/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/vpcs/${validatePathParam('vpcId', request.vpcId)}`,
+      path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}`,
     })
 
   protected pageOfListPrivateNetworks = (
@@ -174,10 +159,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListPrivateNetworksResponse>(
       {
         method: 'GET',
-        path: `/vpc/v2/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/private-networks`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks`,
         urlParams: urlParams(
           ['dhcp_enabled', request.dhcpEnabled],
           ['name', request.name],
@@ -230,10 +212,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/vpc/v2/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/private-networks`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks`,
       },
       unmarshalPrivateNetwork,
     )
@@ -250,13 +229,7 @@ export class API extends ParentAPI {
     this.client.fetch<PrivateNetwork>(
       {
         method: 'GET',
-        path: `/vpc/v2/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/private-networks/${validatePathParam(
-          'privateNetworkId',
-          request.privateNetworkId,
-        )}`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
       },
       unmarshalPrivateNetwork,
     )
@@ -276,13 +249,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/vpc/v2/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/private-networks/${validatePathParam(
-          'privateNetworkId',
-          request.privateNetworkId,
-        )}`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
       },
       unmarshalPrivateNetwork,
     )
@@ -296,13 +263,7 @@ export class API extends ParentAPI {
   deletePrivateNetwork = (request: Readonly<DeletePrivateNetworkRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/vpc/v2/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/private-networks/${validatePathParam(
-        'privateNetworkId',
-        request.privateNetworkId,
-      )}`,
+      path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
     })
 
   /**
@@ -326,10 +287,7 @@ export class API extends ParentAPI {
       ),
       headers: jsonContentHeaders,
       method: 'POST',
-      path: `/vpc/v2/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/private-networks/migrate-zonal`,
+      path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/migrate-zonal`,
     })
 
   /**
@@ -346,13 +304,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/vpc/v2/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/private-networks/${validatePathParam(
-          'privateNetworkId',
-          request.privateNetworkId,
-        )}/enable-dhcp`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/enable-dhcp`,
       },
       unmarshalPrivateNetwork,
     )
@@ -373,13 +325,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/vpc/v2/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/private-networks/${validatePathParam(
-          'privateNetworkId',
-          request.privateNetworkId,
-        )}/subnets`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/subnets`,
       },
       unmarshalSetSubnetsResponse,
     )
@@ -399,13 +345,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/vpc/v2/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/private-networks/${validatePathParam(
-          'privateNetworkId',
-          request.privateNetworkId,
-        )}/subnets`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/subnets`,
       },
       unmarshalAddSubnetsResponse,
     )
@@ -425,13 +365,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'DELETE',
-        path: `/vpc/v2/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/private-networks/${validatePathParam(
-          'privateNetworkId',
-          request.privateNetworkId,
-        )}/subnets`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/subnets`,
       },
       unmarshalDeleteSubnetsResponse,
     )
