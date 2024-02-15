@@ -104,10 +104,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/clusters`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters`,
       },
       unmarshalCluster,
     )
@@ -128,10 +125,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
       },
       unmarshalCluster,
     )
@@ -150,10 +144,7 @@ export class API extends ParentAPI {
     this.client.fetch<Cluster>(
       {
         method: 'GET',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
       },
       unmarshalCluster,
     )
@@ -184,10 +175,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListClustersResponse>(
       {
         method: 'GET',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/clusters`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -239,13 +227,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/clusters/${validatePathParam(
-          'clusterId',
-          request.clusterId,
-        )}/migrate`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/migrate`,
       },
       unmarshalCluster,
     )
@@ -263,10 +245,7 @@ export class API extends ParentAPI {
     this.client.fetch<Cluster>(
       {
         method: 'DELETE',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
       },
       unmarshalCluster,
     )
@@ -283,13 +262,7 @@ export class API extends ParentAPI {
     this.client.fetch<ClusterMetricsResponse>(
       {
         method: 'GET',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/clusters/${validatePathParam(
-          'clusterId',
-          request.clusterId,
-        )}/metrics`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/metrics`,
         urlParams: urlParams(
           ['end_at', request.endAt],
           ['metric_name', request.metricName],
@@ -303,10 +276,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListNodeTypesResponse>(
       {
         method: 'GET',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/node-types`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/node-types`,
         urlParams: urlParams(
           ['include_disabled_types', request.includeDisabledTypes],
           ['page', request.page],
@@ -336,10 +306,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListClusterVersionsResponse>(
       {
         method: 'GET',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/cluster-versions`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/cluster-versions`,
         urlParams: urlParams(
           ['include_beta', request.includeBeta],
           ['include_deprecated', request.includeDeprecated],
@@ -377,13 +344,7 @@ export class API extends ParentAPI {
   getClusterCertificate = (request: Readonly<GetClusterCertificateRequest>) =>
     this.client.fetch<Blob>({
       method: 'GET',
-      path: `/redis/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/clusters/${validatePathParam(
-        'clusterId',
-        request.clusterId,
-      )}/certificate`,
+      path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/certificate`,
       urlParams: urlParams(['dl', 1]),
       responseType: 'blob',
     })
@@ -406,13 +367,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/clusters/${validatePathParam(
-          'clusterId',
-          request.clusterId,
-        )}/renew-certificate`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/renew-certificate`,
       },
       unmarshalCluster,
     )
@@ -433,13 +388,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/clusters/${validatePathParam(
-          'clusterId',
-          request.clusterId,
-        )}/settings`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/settings`,
       },
       unmarshalClusterSettingsResponse,
     )
@@ -456,13 +405,7 @@ export class API extends ParentAPI {
     this.client.fetch<Cluster>(
       {
         method: 'DELETE',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/clusters/${validatePathParam(
-          'clusterId',
-          request.clusterId,
-        )}/settings/${validatePathParam('settingName', request.settingName)}`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/settings/${validatePathParam('settingName', request.settingName)}`,
       },
       unmarshalCluster,
     )
@@ -483,13 +426,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/clusters/${validatePathParam(
-          'clusterId',
-          request.clusterId,
-        )}/settings`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/settings`,
       },
       unmarshalClusterSettingsResponse,
     )
@@ -509,10 +446,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/clusters/${validatePathParam('clusterId', request.clusterId)}/acls`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/acls`,
       },
       unmarshalSetAclRulesResponse,
     )
@@ -532,10 +466,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/clusters/${validatePathParam('clusterId', request.clusterId)}/acls`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/acls`,
       },
       unmarshalAddAclRulesResponse,
     )
@@ -552,10 +483,7 @@ export class API extends ParentAPI {
     this.client.fetch<Cluster>(
       {
         method: 'DELETE',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/acls/${validatePathParam('aclId', request.aclId)}`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/acls/${validatePathParam('aclId', request.aclId)}`,
       },
       unmarshalCluster,
     )
@@ -572,10 +500,7 @@ export class API extends ParentAPI {
     this.client.fetch<ACLRule>(
       {
         method: 'GET',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/acls/${validatePathParam('aclId', request.aclId)}`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/acls/${validatePathParam('aclId', request.aclId)}`,
       },
       unmarshalACLRule,
     )
@@ -596,13 +521,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/clusters/${validatePathParam(
-          'clusterId',
-          request.clusterId,
-        )}/endpoints`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/endpoints`,
       },
       unmarshalSetEndpointsResponse,
     )
@@ -623,13 +542,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/clusters/${validatePathParam(
-          'clusterId',
-          request.clusterId,
-        )}/endpoints`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/endpoints`,
       },
       unmarshalAddEndpointsResponse,
     )
@@ -647,10 +560,7 @@ export class API extends ParentAPI {
     this.client.fetch<Cluster>(
       {
         method: 'DELETE',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
       },
       unmarshalCluster,
     )
@@ -668,10 +578,7 @@ export class API extends ParentAPI {
     this.client.fetch<Endpoint>(
       {
         method: 'GET',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
       },
       unmarshalEndpoint,
     )
@@ -693,10 +600,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/redis/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+        path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
       },
       unmarshalEndpoint,
     )

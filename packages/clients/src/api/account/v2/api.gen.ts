@@ -108,10 +108,7 @@ export class API extends ParentAPI {
     this.client.fetch<Project>(
       {
         method: 'GET',
-        path: `/account/v2/projects/${validatePathParam(
-          'projectId',
-          request.projectId ?? this.client.settings.defaultProjectId,
-        )}`,
+        path: `/account/v2/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
       },
       unmarshalProject,
     )
@@ -129,10 +126,7 @@ export class API extends ParentAPI {
   deleteProject = (request: Readonly<DeleteProjectRequest> = {}) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/account/v2/projects/${validatePathParam(
-        'projectId',
-        request.projectId ?? this.client.settings.defaultProjectId,
-      )}`,
+      path: `/account/v2/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
     })
 
   /**
@@ -152,10 +146,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/account/v2/projects/${validatePathParam(
-          'projectId',
-          request.projectId ?? this.client.settings.defaultProjectId,
-        )}`,
+        path: `/account/v2/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
       },
       unmarshalProject,
     )

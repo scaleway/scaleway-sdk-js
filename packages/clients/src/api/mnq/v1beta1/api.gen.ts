@@ -97,10 +97,7 @@ export class NatsAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/nats-accounts`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-accounts`,
       },
       unmarshalNatsAccount,
     )
@@ -116,13 +113,7 @@ export class NatsAPI extends ParentAPI {
   deleteNatsAccount = (request: Readonly<NatsApiDeleteNatsAccountRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/mnq/v1beta1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/nats-accounts/${validatePathParam(
-        'natsAccountId',
-        request.natsAccountId,
-      )}`,
+      path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-accounts/${validatePathParam('natsAccountId', request.natsAccountId)}`,
     })
 
   /**
@@ -140,13 +131,7 @@ export class NatsAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/nats-accounts/${validatePathParam(
-          'natsAccountId',
-          request.natsAccountId,
-        )}`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-accounts/${validatePathParam('natsAccountId', request.natsAccountId)}`,
       },
       unmarshalNatsAccount,
     )
@@ -163,13 +148,7 @@ export class NatsAPI extends ParentAPI {
     this.client.fetch<NatsAccount>(
       {
         method: 'GET',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/nats-accounts/${validatePathParam(
-          'natsAccountId',
-          request.natsAccountId,
-        )}`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-accounts/${validatePathParam('natsAccountId', request.natsAccountId)}`,
       },
       unmarshalNatsAccount,
     )
@@ -180,10 +159,7 @@ export class NatsAPI extends ParentAPI {
     this.client.fetch<ListNatsAccountsResponse>(
       {
         method: 'GET',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/nats-accounts`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-accounts`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
@@ -229,10 +205,7 @@ export class NatsAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/nats-credentials`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-credentials`,
       },
       unmarshalNatsCredentials,
     )
@@ -250,13 +223,7 @@ export class NatsAPI extends ParentAPI {
   ) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/mnq/v1beta1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/nats-credentials/${validatePathParam(
-        'natsCredentialsId',
-        request.natsCredentialsId,
-      )}`,
+      path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-credentials/${validatePathParam('natsCredentialsId', request.natsCredentialsId)}`,
     })
 
   /**
@@ -272,13 +239,7 @@ export class NatsAPI extends ParentAPI {
     this.client.fetch<NatsCredentials>(
       {
         method: 'GET',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/nats-credentials/${validatePathParam(
-          'natsCredentialsId',
-          request.natsCredentialsId,
-        )}`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-credentials/${validatePathParam('natsCredentialsId', request.natsCredentialsId)}`,
       },
       unmarshalNatsCredentials,
     )
@@ -289,10 +250,7 @@ export class NatsAPI extends ParentAPI {
     this.client.fetch<ListNatsCredentialsResponse>(
       {
         method: 'GET',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/nats-credentials`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-credentials`,
         urlParams: urlParams(
           ['nats_account_id', request.natsAccountId],
           ['order_by', request.orderBy],
@@ -350,10 +308,7 @@ export class SnsAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/activate-sns`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/activate-sns`,
       },
       unmarshalSnsInfo,
     )
@@ -369,10 +324,7 @@ export class SnsAPI extends ParentAPI {
     this.client.fetch<SnsInfo>(
       {
         method: 'GET',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/sns-info`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sns-info`,
         urlParams: urlParams([
           'project_id',
           request.projectId ?? this.client.settings.defaultProjectId,
@@ -397,10 +349,7 @@ export class SnsAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/deactivate-sns`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deactivate-sns`,
       },
       unmarshalSnsInfo,
     )
@@ -426,10 +375,7 @@ export class SnsAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/sns-credentials`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sns-credentials`,
       },
       unmarshalSnsCredentials,
     )
@@ -446,13 +392,7 @@ export class SnsAPI extends ParentAPI {
   ) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/mnq/v1beta1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/sns-credentials/${validatePathParam(
-        'snsCredentialsId',
-        request.snsCredentialsId,
-      )}`,
+      path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sns-credentials/${validatePathParam('snsCredentialsId', request.snsCredentialsId)}`,
     })
 
   /**
@@ -475,13 +415,7 @@ export class SnsAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/sns-credentials/${validatePathParam(
-          'snsCredentialsId',
-          request.snsCredentialsId,
-        )}`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sns-credentials/${validatePathParam('snsCredentialsId', request.snsCredentialsId)}`,
       },
       unmarshalSnsCredentials,
     )
@@ -498,13 +432,7 @@ export class SnsAPI extends ParentAPI {
     this.client.fetch<SnsCredentials>(
       {
         method: 'GET',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/sns-credentials/${validatePathParam(
-          'snsCredentialsId',
-          request.snsCredentialsId,
-        )}`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sns-credentials/${validatePathParam('snsCredentialsId', request.snsCredentialsId)}`,
       },
       unmarshalSnsCredentials,
     )
@@ -515,10 +443,7 @@ export class SnsAPI extends ParentAPI {
     this.client.fetch<ListSnsCredentialsResponse>(
       {
         method: 'GET',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/sns-credentials`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sns-credentials`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
@@ -576,10 +501,7 @@ export class SqsAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/activate-sqs`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/activate-sqs`,
       },
       unmarshalSqsInfo,
     )
@@ -595,10 +517,7 @@ export class SqsAPI extends ParentAPI {
     this.client.fetch<SqsInfo>(
       {
         method: 'GET',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/sqs-info`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sqs-info`,
         urlParams: urlParams([
           'project_id',
           request.projectId ?? this.client.settings.defaultProjectId,
@@ -623,10 +542,7 @@ export class SqsAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/deactivate-sqs`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deactivate-sqs`,
       },
       unmarshalSqsInfo,
     )
@@ -652,10 +568,7 @@ export class SqsAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/sqs-credentials`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sqs-credentials`,
       },
       unmarshalSqsCredentials,
     )
@@ -672,13 +585,7 @@ export class SqsAPI extends ParentAPI {
   ) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/mnq/v1beta1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/sqs-credentials/${validatePathParam(
-        'sqsCredentialsId',
-        request.sqsCredentialsId,
-      )}`,
+      path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sqs-credentials/${validatePathParam('sqsCredentialsId', request.sqsCredentialsId)}`,
     })
 
   /**
@@ -701,13 +608,7 @@ export class SqsAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/sqs-credentials/${validatePathParam(
-          'sqsCredentialsId',
-          request.sqsCredentialsId,
-        )}`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sqs-credentials/${validatePathParam('sqsCredentialsId', request.sqsCredentialsId)}`,
       },
       unmarshalSqsCredentials,
     )
@@ -724,13 +625,7 @@ export class SqsAPI extends ParentAPI {
     this.client.fetch<SqsCredentials>(
       {
         method: 'GET',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/sqs-credentials/${validatePathParam(
-          'sqsCredentialsId',
-          request.sqsCredentialsId,
-        )}`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sqs-credentials/${validatePathParam('sqsCredentialsId', request.sqsCredentialsId)}`,
       },
       unmarshalSqsCredentials,
     )
@@ -741,10 +636,7 @@ export class SqsAPI extends ParentAPI {
     this.client.fetch<ListSqsCredentialsResponse>(
       {
         method: 'GET',
-        path: `/mnq/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/sqs-credentials`,
+        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sqs-credentials`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],

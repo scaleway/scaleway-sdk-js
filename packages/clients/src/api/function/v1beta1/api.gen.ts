@@ -113,10 +113,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListNamespacesResponse>(
       {
         method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/namespaces`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -152,10 +149,7 @@ export class API extends ParentAPI {
     this.client.fetch<Namespace>(
       {
         method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
       },
       unmarshalNamespace,
     )
@@ -195,10 +189,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/namespaces`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces`,
       },
       unmarshalNamespace,
     )
@@ -218,10 +209,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
       },
       unmarshalNamespace,
     )
@@ -237,10 +225,7 @@ export class API extends ParentAPI {
     this.client.fetch<Namespace>(
       {
         method: 'DELETE',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
       },
       unmarshalNamespace,
     )
@@ -249,10 +234,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListFunctionsResponse>(
       {
         method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/functions`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions`,
         urlParams: urlParams(
           ['name', request.name],
           ['namespace_id', request.namespaceId],
@@ -288,10 +270,7 @@ export class API extends ParentAPI {
     this.client.fetch<Function>(
       {
         method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/functions/${validatePathParam('functionId', request.functionId)}`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam('functionId', request.functionId)}`,
       },
       unmarshalFunction,
     )
@@ -331,10 +310,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/functions`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions`,
       },
       unmarshalFunction,
     )
@@ -354,10 +330,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/functions/${validatePathParam('functionId', request.functionId)}`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam('functionId', request.functionId)}`,
       },
       unmarshalFunction,
     )
@@ -372,10 +345,7 @@ export class API extends ParentAPI {
     this.client.fetch<Function>(
       {
         method: 'DELETE',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/functions/${validatePathParam('functionId', request.functionId)}`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam('functionId', request.functionId)}`,
       },
       unmarshalFunction,
     )
@@ -392,13 +362,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/functions/${validatePathParam(
-          'functionId',
-          request.functionId,
-        )}/deploy`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam('functionId', request.functionId)}/deploy`,
       },
       unmarshalFunction,
     )
@@ -415,10 +379,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListFunctionRuntimesResponse>(
       {
         method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/runtimes`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/runtimes`,
       },
       unmarshalListFunctionRuntimesResponse,
     )
@@ -434,13 +395,7 @@ export class API extends ParentAPI {
     this.client.fetch<UploadURL>(
       {
         method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/functions/${validatePathParam(
-          'functionId',
-          request.functionId,
-        )}/upload-url`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam('functionId', request.functionId)}/upload-url`,
         urlParams: urlParams(['content_length', request.contentLength]),
       },
       unmarshalUploadURL,
@@ -457,13 +412,7 @@ export class API extends ParentAPI {
     this.client.fetch<DownloadURL>(
       {
         method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/functions/${validatePathParam(
-          'functionId',
-          request.functionId,
-        )}/download-url`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam('functionId', request.functionId)}/download-url`,
       },
       unmarshalDownloadURL,
     )
@@ -472,10 +421,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListCronsResponse>(
       {
         method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/crons`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons`,
         urlParams: urlParams(
           ['function_id', request.functionId],
           ['order_by', request.orderBy],
@@ -508,10 +454,7 @@ export class API extends ParentAPI {
     this.client.fetch<Cron>(
       {
         method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/crons/${validatePathParam('cronId', request.cronId)}`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons/${validatePathParam('cronId', request.cronId)}`,
       },
       unmarshalCron,
     )
@@ -550,10 +493,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/crons`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons`,
       },
       unmarshalCron,
     )
@@ -572,10 +512,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/crons/${validatePathParam('cronId', request.cronId)}`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons/${validatePathParam('cronId', request.cronId)}`,
       },
       unmarshalCron,
     )
@@ -590,10 +527,7 @@ export class API extends ParentAPI {
     this.client.fetch<Cron>(
       {
         method: 'DELETE',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/crons/${validatePathParam('cronId', request.cronId)}`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons/${validatePathParam('cronId', request.cronId)}`,
       },
       unmarshalCron,
     )
@@ -602,13 +536,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListLogsResponse>(
       {
         method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/functions/${validatePathParam(
-          'functionId',
-          request.functionId,
-        )}/logs`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam('functionId', request.functionId)}/logs`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
@@ -639,10 +567,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListDomainsResponse>(
       {
         method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/domains`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains`,
         urlParams: urlParams(
           ['function_id', request.functionId],
           ['order_by', request.orderBy],
@@ -677,10 +602,7 @@ export class API extends ParentAPI {
     this.client.fetch<Domain>(
       {
         method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/domains/${validatePathParam('domainId', request.domainId)}`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}`,
       },
       unmarshalDomain,
     )
@@ -720,10 +642,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/domains`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains`,
       },
       unmarshalDomain,
     )
@@ -739,10 +658,7 @@ export class API extends ParentAPI {
     this.client.fetch<Domain>(
       {
         method: 'DELETE',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/domains/${validatePathParam('domainId', request.domainId)}`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}`,
       },
       unmarshalDomain,
     )
@@ -758,10 +674,7 @@ export class API extends ParentAPI {
     this.client.fetch<Token>(
       {
         method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/issue-jwt`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/issue-jwt`,
         urlParams: urlParams(
           ['expires_at', request.expiresAt],
           ...Object.entries(
@@ -789,10 +702,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/tokens`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens`,
       },
       unmarshalToken,
     )
@@ -807,10 +717,7 @@ export class API extends ParentAPI {
     this.client.fetch<Token>(
       {
         method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/tokens/${validatePathParam('tokenId', request.tokenId)}`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens/${validatePathParam('tokenId', request.tokenId)}`,
       },
       unmarshalToken,
     )
@@ -839,10 +746,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListTokensResponse>(
       {
         method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/tokens`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens`,
         urlParams: urlParams(
           ['function_id', request.functionId],
           ['namespace_id', request.namespaceId],
@@ -876,10 +780,7 @@ export class API extends ParentAPI {
     this.client.fetch<Token>(
       {
         method: 'DELETE',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/tokens/${validatePathParam('tokenId', request.tokenId)}`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens/${validatePathParam('tokenId', request.tokenId)}`,
       },
       unmarshalToken,
     )
@@ -898,10 +799,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/triggers`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers`,
       },
       unmarshalTrigger,
     )
@@ -916,10 +814,7 @@ export class API extends ParentAPI {
     this.client.fetch<Trigger>(
       {
         method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
       },
       unmarshalTrigger,
     )
@@ -950,10 +845,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListTriggersResponse>(
       {
         method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/triggers`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
@@ -1001,10 +893,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
       },
       unmarshalTrigger,
     )
@@ -1019,10 +908,7 @@ export class API extends ParentAPI {
     this.client.fetch<Trigger>(
       {
         method: 'DELETE',
-        path: `/functions/v1beta1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
+        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
       },
       unmarshalTrigger,
     )

@@ -47,10 +47,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListPrivateNetworksResponse>(
       {
         method: 'GET',
-        path: `/vpc/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/private-networks`,
+        path: `/vpc/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/private-networks`,
         urlParams: urlParams(
           ['include_regional', request.includeRegional],
           ['name', request.name],
@@ -102,10 +99,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/vpc/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/private-networks`,
+        path: `/vpc/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/private-networks`,
       },
       unmarshalPrivateNetwork,
     )
@@ -122,13 +116,7 @@ export class API extends ParentAPI {
     this.client.fetch<PrivateNetwork>(
       {
         method: 'GET',
-        path: `/vpc/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/private-networks/${validatePathParam(
-          'privateNetworkId',
-          request.privateNetworkId,
-        )}`,
+        path: `/vpc/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
       },
       unmarshalPrivateNetwork,
     )
@@ -148,13 +136,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/vpc/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/private-networks/${validatePathParam(
-          'privateNetworkId',
-          request.privateNetworkId,
-        )}`,
+        path: `/vpc/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
       },
       unmarshalPrivateNetwork,
     )
@@ -168,12 +150,6 @@ export class API extends ParentAPI {
   deletePrivateNetwork = (request: Readonly<DeletePrivateNetworkRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/vpc/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/private-networks/${validatePathParam(
-        'privateNetworkId',
-        request.privateNetworkId,
-      )}`,
+      path: `/vpc/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
     })
 }

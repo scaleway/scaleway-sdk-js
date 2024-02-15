@@ -243,10 +243,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<ListLbsResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lbs`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -290,10 +287,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lbs`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs`,
       },
       unmarshalLb,
     )
@@ -310,10 +304,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<Lb>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}`,
       },
       unmarshalLb,
     )
@@ -353,10 +344,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}`,
       },
       unmarshalLb,
     )
@@ -372,10 +360,7 @@ export class ZonedAPI extends ParentAPI {
   deleteLb = (request: Readonly<ZonedApiDeleteLbRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/lb/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/lbs/${validatePathParam('lbId', request.lbId)}`,
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}`,
       urlParams: urlParams(['release_ip', request.releaseIp]),
     })
 
@@ -395,10 +380,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/migrate`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/migrate`,
       },
       unmarshalLb,
     )
@@ -407,10 +389,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<ListIpsResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/ips`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips`,
         urlParams: urlParams(
           ['ip_address', request.ipAddress],
           ['ip_type', request.ipType],
@@ -453,10 +432,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/ips`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips`,
       },
       unmarshalIp,
     )
@@ -472,10 +448,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<Ip>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/ips/${validatePathParam('ipId', request.ipId)}`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
       },
       unmarshalIp,
     )
@@ -489,10 +462,7 @@ export class ZonedAPI extends ParentAPI {
   releaseIp = (request: Readonly<ZonedApiReleaseIpRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/lb/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/ips/${validatePathParam('ipId', request.ipId)}`,
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
     })
 
   /**
@@ -510,10 +480,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/ips/${validatePathParam('ipId', request.ipId)}`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
       },
       unmarshalIp,
     )
@@ -524,10 +491,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<ListBackendsResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/backends`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/backends`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -571,10 +535,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/backends`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/backends`,
       },
       unmarshalBackend,
     )
@@ -592,10 +553,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<Backend>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/backends/${validatePathParam('backendId', request.backendId)}`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}`,
       },
       unmarshalBackend,
     )
@@ -616,10 +574,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/backends/${validatePathParam('backendId', request.backendId)}`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}`,
       },
       unmarshalBackend,
     )
@@ -634,10 +589,7 @@ export class ZonedAPI extends ParentAPI {
   deleteBackend = (request: Readonly<ZonedApiDeleteBackendRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/lb/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/backends/${validatePathParam('backendId', request.backendId)}`,
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}`,
     })
 
   /**
@@ -660,13 +612,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/backends/${validatePathParam(
-          'backendId',
-          request.backendId,
-        )}/servers`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
       },
       unmarshalBackend,
     )
@@ -692,13 +638,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'DELETE',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/backends/${validatePathParam(
-          'backendId',
-          request.backendId,
-        )}/servers`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
       },
       unmarshalBackend,
     )
@@ -723,13 +663,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/backends/${validatePathParam(
-          'backendId',
-          request.backendId,
-        )}/servers`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
       },
       unmarshalBackend,
     )
@@ -754,13 +688,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/backends/${validatePathParam(
-          'backendId',
-          request.backendId,
-        )}/healthcheck`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}/healthcheck`,
       },
       unmarshalHealthCheck,
     )
@@ -771,10 +699,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<ListFrontendsResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/frontends`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/frontends`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -818,10 +743,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/frontends`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/frontends`,
       },
       unmarshalFrontend,
     )
@@ -839,10 +761,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<Frontend>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
       },
       unmarshalFrontend,
     )
@@ -864,10 +783,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
       },
       unmarshalFrontend,
     )
@@ -881,10 +797,7 @@ export class ZonedAPI extends ParentAPI {
   deleteFrontend = (request: Readonly<ZonedApiDeleteFrontendRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/lb/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
     })
 
   protected pageOfListRoutes = (
@@ -893,10 +806,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<ListRoutesResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/routes`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/routes`,
         urlParams: urlParams(
           ['frontend_id', request.frontendId],
           ['order_by', request.orderBy],
@@ -938,10 +848,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/routes`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/routes`,
       },
       unmarshalRoute,
     )
@@ -958,10 +865,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<Route>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/routes/${validatePathParam('routeId', request.routeId)}`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/routes/${validatePathParam('routeId', request.routeId)}`,
       },
       unmarshalRoute,
     )
@@ -981,10 +885,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/routes/${validatePathParam('routeId', request.routeId)}`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/routes/${validatePathParam('routeId', request.routeId)}`,
       },
       unmarshalRoute,
     )
@@ -998,10 +899,7 @@ export class ZonedAPI extends ParentAPI {
   deleteRoute = (request: Readonly<ZonedApiDeleteRouteRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/lb/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/routes/${validatePathParam('routeId', request.routeId)}`,
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/routes/${validatePathParam('routeId', request.routeId)}`,
     })
 
   /**
@@ -1015,10 +913,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<LbStats>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/stats`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/stats`,
         urlParams: urlParams(['backend_id', request.backendId]),
       },
       unmarshalLbStats,
@@ -1030,10 +925,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<ListBackendStatsResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/backend-stats`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/backend-stats`,
         urlParams: urlParams(
           ['backend_id', request.backendId],
           ['page', request.page],
@@ -1064,13 +956,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<ListAclResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/frontends/${validatePathParam(
-          'frontendId',
-          request.frontendId,
-        )}/acls`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/frontends/${validatePathParam('frontendId', request.frontendId)}/acls`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -1113,13 +999,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/frontends/${validatePathParam(
-          'frontendId',
-          request.frontendId,
-        )}/acls`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/frontends/${validatePathParam('frontendId', request.frontendId)}/acls`,
       },
       unmarshalAcl,
     )
@@ -1136,10 +1016,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<Acl>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/acls/${validatePathParam('aclId', request.aclId)}`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/acls/${validatePathParam('aclId', request.aclId)}`,
       },
       unmarshalAcl,
     )
@@ -1159,10 +1036,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/acls/${validatePathParam('aclId', request.aclId)}`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/acls/${validatePathParam('aclId', request.aclId)}`,
       },
       unmarshalAcl,
     )
@@ -1176,10 +1050,7 @@ export class ZonedAPI extends ParentAPI {
   deleteAcl = (request: Readonly<ZonedApiDeleteAclRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/lb/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/acls/${validatePathParam('aclId', request.aclId)}`,
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/acls/${validatePathParam('aclId', request.aclId)}`,
     })
 
   /**
@@ -1198,13 +1069,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/frontends/${validatePathParam(
-          'frontendId',
-          request.frontendId,
-        )}/acls`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/frontends/${validatePathParam('frontendId', request.frontendId)}/acls`,
       },
       unmarshalSetAclsResponse,
     )
@@ -1228,10 +1093,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/certificates`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/certificates`,
       },
       unmarshalCertificate,
     )
@@ -1242,10 +1104,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<ListCertificatesResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/certificates`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/certificates`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -1284,13 +1143,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<Certificate>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/certificates/${validatePathParam(
-          'certificateId',
-          request.certificateId,
-        )}`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
       },
       unmarshalCertificate,
     )
@@ -1335,13 +1188,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/certificates/${validatePathParam(
-          'certificateId',
-          request.certificateId,
-        )}`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
       },
       unmarshalCertificate,
     )
@@ -1356,13 +1203,7 @@ export class ZonedAPI extends ParentAPI {
   deleteCertificate = (request: Readonly<ZonedApiDeleteCertificateRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/lb/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/certificates/${validatePathParam(
-        'certificateId',
-        request.certificateId,
-      )}`,
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
     })
 
   protected pageOfListLbTypes = (
@@ -1371,10 +1212,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<ListLbTypesResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lb-types`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lb-types`,
         urlParams: urlParams(
           ['page', request.page],
           [
@@ -1413,10 +1251,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/subscribers`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/subscribers`,
       },
       unmarshalSubscriber,
     )
@@ -1433,13 +1268,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<Subscriber>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/subscribers/${validatePathParam(
-          'subscriberId',
-          request.subscriberId,
-        )}`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/subscribers/${validatePathParam('subscriberId', request.subscriberId)}`,
       },
       unmarshalSubscriber,
     )
@@ -1450,10 +1279,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<ListSubscriberResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/subscribers`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/subscribers`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -1497,13 +1323,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/subscribers/${validatePathParam(
-          'subscriberId',
-          request.subscriberId,
-        )}`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/subscribers/${validatePathParam('subscriberId', request.subscriberId)}`,
       },
       unmarshalSubscriber,
     )
@@ -1517,13 +1337,7 @@ export class ZonedAPI extends ParentAPI {
   deleteSubscriber = (request: Readonly<ZonedApiDeleteSubscriberRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/lb/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/lb/subscription/${validatePathParam(
-        'subscriberId',
-        request.subscriberId,
-      )}`,
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lb/subscription/${validatePathParam('subscriberId', request.subscriberId)}`,
     })
 
   /**
@@ -1541,10 +1355,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lb/${validatePathParam('lbId', request.lbId)}/subscribe`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lb/${validatePathParam('lbId', request.lbId)}/subscribe`,
       },
       unmarshalLb,
     )
@@ -1561,10 +1372,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<Lb>(
       {
         method: 'DELETE',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lb/${validatePathParam('lbId', request.lbId)}/unsubscribe`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lb/${validatePathParam('lbId', request.lbId)}/unsubscribe`,
       },
       unmarshalLb,
     )
@@ -1575,10 +1383,7 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<ListLbPrivateNetworksResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/private-networks`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/private-networks`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
@@ -1631,16 +1436,7 @@ export class ZonedAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/lbs/${validatePathParam(
-          'lbId',
-          request.lbId,
-        )}/private-networks/${validatePathParam(
-          'privateNetworkId',
-          request.privateNetworkId,
-        )}/attach`,
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/attach`,
       },
       unmarshalPrivateNetwork,
     )
@@ -1658,16 +1454,7 @@ export class ZonedAPI extends ParentAPI {
       body: '{}',
       headers: jsonContentHeaders,
       method: 'POST',
-      path: `/lb/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/lbs/${validatePathParam(
-        'lbId',
-        request.lbId,
-      )}/private-networks/${validatePathParam(
-        'privateNetworkId',
-        request.privateNetworkId,
-      )}/detach`,
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/detach`,
     })
 }
 
@@ -1684,10 +1471,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListLbsResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lbs`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -1726,10 +1510,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lbs`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs`,
       },
       unmarshalLb,
     )
@@ -1744,10 +1525,7 @@ export class API extends ParentAPI {
     this.client.fetch<Lb>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}`,
       },
       unmarshalLb,
     )
@@ -1785,10 +1563,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}`,
       },
       unmarshalLb,
     )
@@ -1801,10 +1576,7 @@ export class API extends ParentAPI {
   deleteLb = (request: Readonly<DeleteLbRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/lb/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/lbs/${validatePathParam('lbId', request.lbId)}`,
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}`,
       urlParams: urlParams(['release_ip', request.releaseIp]),
     })
 
@@ -1822,10 +1594,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/migrate`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/migrate`,
       },
       unmarshalLb,
     )
@@ -1834,10 +1603,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListIpsResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/ips`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips`,
         urlParams: urlParams(
           ['ip_address', request.ipAddress],
           ['ip_type', request.ipType],
@@ -1876,10 +1642,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/ips`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips`,
       },
       unmarshalIp,
     )
@@ -1894,10 +1657,7 @@ export class API extends ParentAPI {
     this.client.fetch<Ip>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/ips/${validatePathParam('ipId', request.ipId)}`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
       },
       unmarshalIp,
     )
@@ -1910,10 +1670,7 @@ export class API extends ParentAPI {
   releaseIp = (request: Readonly<ReleaseIpRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/lb/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/ips/${validatePathParam('ipId', request.ipId)}`,
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
     })
 
   /**
@@ -1930,10 +1687,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/ips/${validatePathParam('ipId', request.ipId)}`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
       },
       unmarshalIp,
     )
@@ -1942,10 +1696,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListBackendsResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/backends`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/backends`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -1982,10 +1733,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/backends`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/backends`,
       },
       unmarshalBackend,
     )
@@ -2000,10 +1748,7 @@ export class API extends ParentAPI {
     this.client.fetch<Backend>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/backends/${validatePathParam('backendId', request.backendId)}`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}`,
       },
       unmarshalBackend,
     )
@@ -2022,10 +1767,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/backends/${validatePathParam('backendId', request.backendId)}`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}`,
       },
       unmarshalBackend,
     )
@@ -2038,10 +1780,7 @@ export class API extends ParentAPI {
   deleteBackend = (request: Readonly<DeleteBackendRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/lb/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/backends/${validatePathParam('backendId', request.backendId)}`,
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}`,
     })
 
   /**
@@ -2058,13 +1797,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/backends/${validatePathParam(
-          'backendId',
-          request.backendId,
-        )}/servers`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
       },
       unmarshalBackend,
     )
@@ -2083,13 +1816,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'DELETE',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/backends/${validatePathParam(
-          'backendId',
-          request.backendId,
-        )}/servers`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
       },
       unmarshalBackend,
     )
@@ -2108,13 +1835,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/backends/${validatePathParam(
-          'backendId',
-          request.backendId,
-        )}/servers`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
       },
       unmarshalBackend,
     )
@@ -2133,13 +1854,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/backends/${validatePathParam(
-          'backendId',
-          request.backendId,
-        )}/healthcheck`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}/healthcheck`,
       },
       unmarshalHealthCheck,
     )
@@ -2148,10 +1863,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListFrontendsResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/frontends`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/frontends`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -2188,10 +1900,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/frontends`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/frontends`,
       },
       unmarshalFrontend,
     )
@@ -2206,10 +1915,7 @@ export class API extends ParentAPI {
     this.client.fetch<Frontend>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
       },
       unmarshalFrontend,
     )
@@ -2228,10 +1934,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
       },
       unmarshalFrontend,
     )
@@ -2244,20 +1947,14 @@ export class API extends ParentAPI {
   deleteFrontend = (request: Readonly<DeleteFrontendRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/lb/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
     })
 
   protected pageOfListRoutes = (request: Readonly<ListRoutesRequest> = {}) =>
     this.client.fetch<ListRoutesResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/routes`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes`,
         urlParams: urlParams(
           ['frontend_id', request.frontendId],
           ['order_by', request.orderBy],
@@ -2294,10 +1991,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/routes`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes`,
       },
       unmarshalRoute,
     )
@@ -2312,10 +2006,7 @@ export class API extends ParentAPI {
     this.client.fetch<Route>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/routes/${validatePathParam('routeId', request.routeId)}`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
       },
       unmarshalRoute,
     )
@@ -2334,10 +2025,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/routes/${validatePathParam('routeId', request.routeId)}`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
       },
       unmarshalRoute,
     )
@@ -2350,10 +2038,7 @@ export class API extends ParentAPI {
   deleteRoute = (request: Readonly<DeleteRouteRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/lb/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/routes/${validatePathParam('routeId', request.routeId)}`,
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
     })
 
   /**
@@ -2367,10 +2052,7 @@ export class API extends ParentAPI {
     this.client.fetch<LbStats>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/stats`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/stats`,
         urlParams: urlParams(['backend_id', request.backendId]),
       },
       unmarshalLbStats,
@@ -2382,10 +2064,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListBackendStatsResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/backend-stats`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/backend-stats`,
         urlParams: urlParams(
           ['backend_id', request.backendId],
           ['page', request.page],
@@ -2415,13 +2094,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListAclResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/frontends/${validatePathParam(
-          'frontendId',
-          request.frontendId,
-        )}/acls`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/frontends/${validatePathParam('frontendId', request.frontendId)}/acls`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -2458,13 +2131,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/frontends/${validatePathParam(
-          'frontendId',
-          request.frontendId,
-        )}/acls`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/frontends/${validatePathParam('frontendId', request.frontendId)}/acls`,
       },
       unmarshalAcl,
     )
@@ -2479,10 +2146,7 @@ export class API extends ParentAPI {
     this.client.fetch<Acl>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/acls/${validatePathParam('aclId', request.aclId)}`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/acls/${validatePathParam('aclId', request.aclId)}`,
       },
       unmarshalAcl,
     )
@@ -2501,10 +2165,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/acls/${validatePathParam('aclId', request.aclId)}`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/acls/${validatePathParam('aclId', request.aclId)}`,
       },
       unmarshalAcl,
     )
@@ -2517,10 +2178,7 @@ export class API extends ParentAPI {
   deleteAcl = (request: Readonly<DeleteAclRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/lb/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/acls/${validatePathParam('aclId', request.aclId)}`,
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/acls/${validatePathParam('aclId', request.aclId)}`,
     })
 
   /**
@@ -2538,10 +2196,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/certificates`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/certificates`,
       },
       unmarshalCertificate,
     )
@@ -2552,10 +2207,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListCertificatesResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/certificates`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/certificates`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -2588,13 +2240,7 @@ export class API extends ParentAPI {
     this.client.fetch<Certificate>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/certificates/${validatePathParam(
-          'certificateId',
-          request.certificateId,
-        )}`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
       },
       unmarshalCertificate,
     )
@@ -2635,13 +2281,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/certificates/${validatePathParam(
-          'certificateId',
-          request.certificateId,
-        )}`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
       },
       unmarshalCertificate,
     )
@@ -2654,23 +2294,14 @@ export class API extends ParentAPI {
   deleteCertificate = (request: Readonly<DeleteCertificateRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/lb/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/certificates/${validatePathParam(
-        'certificateId',
-        request.certificateId,
-      )}`,
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
     })
 
   protected pageOfListLbTypes = (request: Readonly<ListLbTypesRequest> = {}) =>
     this.client.fetch<ListLbTypesResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lb-types`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lb-types`,
         urlParams: urlParams(
           ['page', request.page],
           [
@@ -2705,10 +2336,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/subscribers`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/subscribers`,
       },
       unmarshalSubscriber,
     )
@@ -2723,13 +2351,7 @@ export class API extends ParentAPI {
     this.client.fetch<Subscriber>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/subscribers/${validatePathParam(
-          'subscriberId',
-          request.subscriberId,
-        )}`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/subscribers/${validatePathParam('subscriberId', request.subscriberId)}`,
       },
       unmarshalSubscriber,
     )
@@ -2740,10 +2362,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListSubscriberResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/subscribers`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/subscribers`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -2782,13 +2401,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/subscribers/${validatePathParam(
-          'subscriberId',
-          request.subscriberId,
-        )}`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/subscribers/${validatePathParam('subscriberId', request.subscriberId)}`,
       },
       unmarshalSubscriber,
     )
@@ -2801,13 +2414,7 @@ export class API extends ParentAPI {
   deleteSubscriber = (request: Readonly<DeleteSubscriberRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/lb/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/lb/subscriber/${validatePathParam(
-        'subscriberId',
-        request.subscriberId,
-      )}`,
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lb/subscriber/${validatePathParam('subscriberId', request.subscriberId)}`,
     })
 
   /**
@@ -2824,10 +2431,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lb/${validatePathParam('lbId', request.lbId)}/subscribe`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lb/${validatePathParam('lbId', request.lbId)}/subscribe`,
       },
       unmarshalLb,
     )
@@ -2842,10 +2446,7 @@ export class API extends ParentAPI {
     this.client.fetch<Lb>(
       {
         method: 'DELETE',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lb/${validatePathParam('lbId', request.lbId)}/unsubscribe`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lb/${validatePathParam('lbId', request.lbId)}/unsubscribe`,
       },
       unmarshalLb,
     )
@@ -2856,10 +2457,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListLbPrivateNetworksResponse>(
       {
         method: 'GET',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lbs/${validatePathParam('lbId', request.lbId)}/private-networks`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/private-networks`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
@@ -2899,16 +2497,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/lb/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/lbs/${validatePathParam(
-          'lbId',
-          request.lbId,
-        )}/private-networks/${validatePathParam(
-          'privateNetworkId',
-          request.privateNetworkId,
-        )}/attach`,
+        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/attach`,
       },
       unmarshalPrivateNetwork,
     )
@@ -2923,15 +2512,6 @@ export class API extends ParentAPI {
       body: '{}',
       headers: jsonContentHeaders,
       method: 'POST',
-      path: `/lb/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/lbs/${validatePathParam(
-        'lbId',
-        request.lbId,
-      )}/private-networks/${validatePathParam(
-        'privateNetworkId',
-        request.privateNetworkId,
-      )}/detach`,
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/detach`,
     })
 }

@@ -60,10 +60,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListServerTypesResponse>(
       {
         method: 'GET',
-        path: `/apple-silicon/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/server-types`,
+        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/server-types`,
       },
       unmarshalListServerTypesResponse,
     )
@@ -79,10 +76,7 @@ export class API extends ParentAPI {
     this.client.fetch<ServerType>(
       {
         method: 'GET',
-        path: `/apple-silicon/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/server-type/${validatePathParam('serverType', request.serverType)}`,
+        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/server-type/${validatePathParam('serverType', request.serverType)}`,
       },
       unmarshalServerType,
     )
@@ -102,10 +96,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/apple-silicon/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers`,
+        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
       },
       unmarshalServer,
     )
@@ -114,10 +105,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListServersResponse>(
       {
         method: 'GET',
-        path: `/apple-silicon/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers`,
+        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
@@ -147,10 +135,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListOSResponse>(
       {
         method: 'GET',
-        path: `/apple-silicon/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/os`,
+        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/os`,
         urlParams: urlParams(
           ['name', request.name],
           ['page', request.page],
@@ -186,10 +171,7 @@ export class API extends ParentAPI {
     this.client.fetch<OS>(
       {
         method: 'GET',
-        path: `/apple-silicon/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/os/${validatePathParam('osId', request.osId)}`,
+        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/os/${validatePathParam('osId', request.osId)}`,
       },
       unmarshalOS,
     )
@@ -206,10 +188,7 @@ export class API extends ParentAPI {
     this.client.fetch<Server>(
       {
         method: 'GET',
-        path: `/apple-silicon/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam('serverId', request.serverId)}`,
+        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
       },
       unmarshalServer,
     )
@@ -249,10 +228,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/apple-silicon/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam('serverId', request.serverId)}`,
+        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
       },
       unmarshalServer,
     )
@@ -268,10 +244,7 @@ export class API extends ParentAPI {
   deleteServer = (request: Readonly<DeleteServerRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/apple-silicon/v1alpha1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/servers/${validatePathParam('serverId', request.serverId)}`,
+      path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
     })
 
   /**
@@ -287,10 +260,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/apple-silicon/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam('serverId', request.serverId)}/reboot`,
+        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/reboot`,
       },
       unmarshalServer,
     )
@@ -310,13 +280,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/apple-silicon/v1alpha1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam(
-          'serverId',
-          request.serverId,
-        )}/reinstall`,
+        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/reinstall`,
       },
       unmarshalServer,
     )

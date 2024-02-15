@@ -59,10 +59,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/webhosting/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/hostings`,
+        path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings`,
       },
       unmarshalHosting,
     )
@@ -73,10 +70,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListHostingsResponse>(
       {
         method: 'GET',
-        path: `/webhosting/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/hostings`,
+        path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings`,
         urlParams: urlParams(
           ['control_panels', request.controlPanels],
           ['domain', request.domain],
@@ -117,10 +111,7 @@ export class API extends ParentAPI {
     this.client.fetch<Hosting>(
       {
         method: 'GET',
-        path: `/webhosting/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/hostings/${validatePathParam('hostingId', request.hostingId)}`,
+        path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}`,
       },
       unmarshalHosting,
     )
@@ -161,10 +152,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/webhosting/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/hostings/${validatePathParam('hostingId', request.hostingId)}`,
+        path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}`,
       },
       unmarshalHosting,
     )
@@ -182,10 +170,7 @@ export class API extends ParentAPI {
     this.client.fetch<Hosting>(
       {
         method: 'DELETE',
-        path: `/webhosting/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/hostings/${validatePathParam('hostingId', request.hostingId)}`,
+        path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}`,
       },
       unmarshalHosting,
     )
@@ -207,13 +192,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/webhosting/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/hostings/${validatePathParam(
-          'hostingId',
-          request.hostingId,
-        )}/restore`,
+        path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/restore`,
       },
       unmarshalHosting,
     )
@@ -229,10 +208,7 @@ export class API extends ParentAPI {
     this.client.fetch<DnsRecords>(
       {
         method: 'GET',
-        path: `/webhosting/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/domains/${validatePathParam('domain', request.domain)}/dns-records`,
+        path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domain', request.domain)}/dns-records`,
       },
       unmarshalDnsRecords,
     )
@@ -248,10 +224,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListOffersResponse>(
       {
         method: 'GET',
-        path: `/webhosting/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/offers`,
+        path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/offers`,
         urlParams: urlParams(
           ['control_panels', request.controlPanels],
           ['hosting_id', request.hostingId],
@@ -269,10 +242,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListControlPanelsResponse>(
       {
         method: 'GET',
-        path: `/webhosting/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/control-panels`,
+        path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/control-panels`,
         urlParams: urlParams(
           ['page', request.page],
           [

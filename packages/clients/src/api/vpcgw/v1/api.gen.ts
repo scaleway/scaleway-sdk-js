@@ -120,10 +120,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListGatewaysResponse>(
       {
         method: 'GET',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/gateways`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -166,10 +163,7 @@ export class API extends ParentAPI {
     this.client.fetch<Gateway>(
       {
         method: 'GET',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
       },
       unmarshalGateway,
     )
@@ -210,10 +204,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/gateways`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways`,
       },
       unmarshalGateway,
     )
@@ -234,10 +225,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
       },
       unmarshalGateway,
     )
@@ -251,10 +239,7 @@ export class API extends ParentAPI {
   deleteGateway = (request: Readonly<DeleteGatewayRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/vpc-gw/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
+      path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
       urlParams: urlParams(['cleanup_dhcp', request.cleanupDhcp]),
     })
 
@@ -273,13 +258,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/gateways/${validatePathParam(
-          'gatewayId',
-          request.gatewayId,
-        )}/upgrade`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/upgrade`,
       },
       unmarshalGateway,
     )
@@ -290,10 +269,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListGatewayNetworksResponse>(
       {
         method: 'GET',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/gateway-networks`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateway-networks`,
         urlParams: urlParams(
           ['dhcp_id', request.dhcpId],
           ['enable_masquerade', request.enableMasquerade],
@@ -346,13 +322,7 @@ export class API extends ParentAPI {
     this.client.fetch<GatewayNetwork>(
       {
         method: 'GET',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/gateway-networks/${validatePathParam(
-          'gatewayNetworkId',
-          request.gatewayNetworkId,
-        )}`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateway-networks/${validatePathParam('gatewayNetworkId', request.gatewayNetworkId)}`,
       },
       unmarshalGatewayNetwork,
     )
@@ -396,10 +366,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/gateway-networks`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateway-networks`,
       },
       unmarshalGatewayNetwork,
     )
@@ -422,13 +389,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/gateway-networks/${validatePathParam(
-          'gatewayNetworkId',
-          request.gatewayNetworkId,
-        )}`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateway-networks/${validatePathParam('gatewayNetworkId', request.gatewayNetworkId)}`,
       },
       unmarshalGatewayNetwork,
     )
@@ -443,13 +404,7 @@ export class API extends ParentAPI {
   deleteGatewayNetwork = (request: Readonly<DeleteGatewayNetworkRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/vpc-gw/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/gateway-networks/${validatePathParam(
-        'gatewayNetworkId',
-        request.gatewayNetworkId,
-      )}`,
+      path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateway-networks/${validatePathParam('gatewayNetworkId', request.gatewayNetworkId)}`,
       urlParams: urlParams(['cleanup_dhcp', request.cleanupDhcp]),
     })
 
@@ -457,10 +412,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListDHCPsResponse>(
       {
         method: 'GET',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/dhcps`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dhcps`,
         urlParams: urlParams(
           ['address', request.address],
           ['has_address', request.hasAddress],
@@ -509,10 +461,7 @@ export class API extends ParentAPI {
     this.client.fetch<DHCP>(
       {
         method: 'GET',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/dhcps/${validatePathParam('dhcpId', request.dhcpId)}`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dhcps/${validatePathParam('dhcpId', request.dhcpId)}`,
       },
       unmarshalDHCP,
     )
@@ -537,10 +486,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/dhcps`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dhcps`,
       },
       unmarshalDHCP,
     )
@@ -560,10 +506,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/dhcps/${validatePathParam('dhcpId', request.dhcpId)}`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dhcps/${validatePathParam('dhcpId', request.dhcpId)}`,
       },
       unmarshalDHCP,
     )
@@ -578,10 +521,7 @@ export class API extends ParentAPI {
   deleteDHCP = (request: Readonly<DeleteDHCPRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/vpc-gw/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/dhcps/${validatePathParam('dhcpId', request.dhcpId)}`,
+      path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dhcps/${validatePathParam('dhcpId', request.dhcpId)}`,
     })
 
   protected pageOfListDHCPEntries = (
@@ -590,10 +530,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListDHCPEntriesResponse>(
       {
         method: 'GET',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/dhcp-entries`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dhcp-entries`,
         urlParams: urlParams(
           ['gateway_network_id', request.gatewayNetworkId],
           ['hostname', request.hostname],
@@ -632,13 +569,7 @@ export class API extends ParentAPI {
     this.client.fetch<DHCPEntry>(
       {
         method: 'GET',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/dhcp-entries/${validatePathParam(
-          'dhcpEntryId',
-          request.dhcpEntryId,
-        )}`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dhcp-entries/${validatePathParam('dhcpEntryId', request.dhcpEntryId)}`,
       },
       unmarshalDHCPEntry,
     )
@@ -661,10 +592,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/dhcp-entries`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dhcp-entries`,
       },
       unmarshalDHCPEntry,
     )
@@ -687,13 +615,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/dhcp-entries/${validatePathParam(
-          'dhcpEntryId',
-          request.dhcpEntryId,
-        )}`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dhcp-entries/${validatePathParam('dhcpEntryId', request.dhcpEntryId)}`,
       },
       unmarshalDHCPEntry,
     )
@@ -715,10 +637,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/dhcp-entries`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dhcp-entries`,
       },
       unmarshalSetDHCPEntriesResponse,
     )
@@ -733,10 +652,7 @@ export class API extends ParentAPI {
   deleteDHCPEntry = (request: Readonly<DeleteDHCPEntryRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/vpc-gw/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/dhcp-entries/${validatePathParam('dhcpEntryId', request.dhcpEntryId)}`,
+      path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dhcp-entries/${validatePathParam('dhcpEntryId', request.dhcpEntryId)}`,
     })
 
   protected pageOfListPATRules = (
@@ -745,10 +661,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListPATRulesResponse>(
       {
         method: 'GET',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/pat-rules`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/pat-rules`,
         urlParams: urlParams(
           ['gateway_id', request.gatewayId],
           ['order_by', request.orderBy],
@@ -788,10 +701,7 @@ export class API extends ParentAPI {
     this.client.fetch<PATRule>(
       {
         method: 'GET',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/pat-rules/${validatePathParam('patRuleId', request.patRuleId)}`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/pat-rules/${validatePathParam('patRuleId', request.patRuleId)}`,
       },
       unmarshalPATRule,
     )
@@ -812,10 +722,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/pat-rules`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/pat-rules`,
       },
       unmarshalPATRule,
     )
@@ -836,10 +743,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/pat-rules/${validatePathParam('patRuleId', request.patRuleId)}`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/pat-rules/${validatePathParam('patRuleId', request.patRuleId)}`,
       },
       unmarshalPATRule,
     )
@@ -861,10 +765,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/pat-rules`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/pat-rules`,
       },
       unmarshalSetPATRulesResponse,
     )
@@ -878,10 +779,7 @@ export class API extends ParentAPI {
   deletePATRule = (request: Readonly<DeletePATRuleRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/vpc-gw/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/pat-rules/${validatePathParam('patRuleId', request.patRuleId)}`,
+      path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/pat-rules/${validatePathParam('patRuleId', request.patRuleId)}`,
     })
 
   /**
@@ -896,10 +794,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListGatewayTypesResponse>(
       {
         method: 'GET',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/gateway-types`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateway-types`,
       },
       unmarshalListGatewayTypesResponse,
     )
@@ -908,10 +803,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListIPsResponse>(
       {
         method: 'GET',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/ips`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips`,
         urlParams: urlParams(
           ['is_free', request.isFree],
           ['order_by', request.orderBy],
@@ -952,10 +844,7 @@ export class API extends ParentAPI {
     this.client.fetch<IP>(
       {
         method: 'GET',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/ips/${validatePathParam('ipId', request.ipId)}`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
       },
       unmarshalIP,
     )
@@ -975,10 +864,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/ips`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips`,
       },
       unmarshalIP,
     )
@@ -998,10 +884,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/ips/${validatePathParam('ipId', request.ipId)}`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
       },
       unmarshalIP,
     )
@@ -1015,10 +898,7 @@ export class API extends ParentAPI {
   deleteIP = (request: Readonly<DeleteIPRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/vpc-gw/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/ips/${validatePathParam('ipId', request.ipId)}`,
+      path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
     })
 
   /**
@@ -1035,13 +915,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/vpc-gw/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/gateways/${validatePathParam(
-          'gatewayId',
-          request.gatewayId,
-        )}/refresh-ssh-keys`,
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/refresh-ssh-keys`,
       },
       unmarshalGateway,
     )

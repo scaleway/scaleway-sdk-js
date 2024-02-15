@@ -110,10 +110,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListServersResponse>(
       {
         method: 'GET',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
         urlParams: urlParams(
           ['name', request.name],
           ['option_id', request.optionId],
@@ -153,10 +150,7 @@ export class API extends ParentAPI {
     this.client.fetch<Server>(
       {
         method: 'GET',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam('serverId', request.serverId)}`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
       },
       unmarshalServer,
     )
@@ -196,10 +190,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
       },
       unmarshalServer,
     )
@@ -220,10 +211,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam('serverId', request.serverId)}`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
       },
       unmarshalServer,
     )
@@ -243,10 +231,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam('serverId', request.serverId)}/install`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/install`,
       },
       unmarshalServer,
     )
@@ -262,10 +247,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetServerMetricsResponse>(
       {
         method: 'GET',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam('serverId', request.serverId)}/metrics`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/metrics`,
       },
       unmarshalGetServerMetricsResponse,
     )
@@ -280,10 +262,7 @@ export class API extends ParentAPI {
     this.client.fetch<Server>(
       {
         method: 'DELETE',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam('serverId', request.serverId)}`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
       },
       unmarshalServer,
     )
@@ -304,10 +283,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam('serverId', request.serverId)}/reboot`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/reboot`,
       },
       unmarshalServer,
     )
@@ -326,10 +302,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam('serverId', request.serverId)}/start`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/start`,
       },
       unmarshalServer,
     )
@@ -348,10 +321,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam('serverId', request.serverId)}/stop`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/stop`,
       },
       unmarshalServer,
     )
@@ -362,10 +332,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListServerEventsResponse>(
       {
         method: 'GET',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam('serverId', request.serverId)}/events`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/events`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
@@ -413,13 +380,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam(
-          'serverId',
-          request.serverId,
-        )}/bmc-access`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/bmc-access`,
       },
       unmarshalBMCAccess,
     )
@@ -436,13 +397,7 @@ export class API extends ParentAPI {
     this.client.fetch<BMCAccess>(
       {
         method: 'GET',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam(
-          'serverId',
-          request.serverId,
-        )}/bmc-access`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/bmc-access`,
       },
       unmarshalBMCAccess,
     )
@@ -456,10 +411,7 @@ export class API extends ParentAPI {
   stopBMCAccess = (request: Readonly<StopBMCAccessRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/baremetal/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/servers/${validatePathParam('serverId', request.serverId)}/bmc-access`,
+      path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/bmc-access`,
     })
 
   /**
@@ -477,13 +429,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam(
-          'serverId',
-          request.serverId,
-        )}/ips/${validatePathParam('ipId', request.ipId)}`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/ips/${validatePathParam('ipId', request.ipId)}`,
       },
       unmarshalIP,
     )
@@ -503,13 +449,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam(
-          'serverId',
-          request.serverId,
-        )}/options/${validatePathParam('optionId', request.optionId)}`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/options/${validatePathParam('optionId', request.optionId)}`,
       },
       unmarshalServer,
     )
@@ -524,13 +464,7 @@ export class API extends ParentAPI {
     this.client.fetch<Server>(
       {
         method: 'DELETE',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam(
-          'serverId',
-          request.serverId,
-        )}/options/${validatePathParam('optionId', request.optionId)}`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/options/${validatePathParam('optionId', request.optionId)}`,
       },
       unmarshalServer,
     )
@@ -539,10 +473,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListOffersResponse>(
       {
         method: 'GET',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/offers`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/offers`,
         urlParams: urlParams(
           ['page', request.page],
           [
@@ -574,10 +505,7 @@ export class API extends ParentAPI {
     this.client.fetch<Offer>(
       {
         method: 'GET',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/offers/${validatePathParam('offerId', request.offerId)}`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/offers/${validatePathParam('offerId', request.offerId)}`,
       },
       unmarshalOffer,
     )
@@ -592,10 +520,7 @@ export class API extends ParentAPI {
     this.client.fetch<Option>(
       {
         method: 'GET',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/options/${validatePathParam('optionId', request.optionId)}`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/options/${validatePathParam('optionId', request.optionId)}`,
       },
       unmarshalOption,
     )
@@ -604,10 +529,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListOptionsResponse>(
       {
         method: 'GET',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/options`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/options`,
         urlParams: urlParams(
           ['name', request.name],
           ['offer_id', request.offerId],
@@ -636,10 +558,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListSettingsResponse>(
       {
         method: 'GET',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/settings`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/settings`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
@@ -679,10 +598,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/settings/${validatePathParam('settingId', request.settingId)}`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/settings/${validatePathParam('settingId', request.settingId)}`,
       },
       unmarshalSetting,
     )
@@ -691,10 +607,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListOSResponse>(
       {
         method: 'GET',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/os`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/os`,
         urlParams: urlParams(
           ['offer_id', request.offerId],
           ['page', request.page],
@@ -727,10 +640,7 @@ export class API extends ParentAPI {
     this.client.fetch<OS>(
       {
         method: 'GET',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/os/${validatePathParam('osId', request.osId)}`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/os/${validatePathParam('osId', request.osId)}`,
       },
       unmarshalOS,
     )
@@ -761,13 +671,7 @@ export class PrivateNetworkAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam(
-          'serverId',
-          request.serverId,
-        )}/private-networks`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks`,
       },
       unmarshalServerPrivateNetwork,
     )
@@ -792,13 +696,7 @@ export class PrivateNetworkAPI extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam(
-          'serverId',
-          request.serverId,
-        )}/private-networks`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks`,
       },
       unmarshalSetServerPrivateNetworksResponse,
     )
@@ -809,10 +707,7 @@ export class PrivateNetworkAPI extends ParentAPI {
     this.client.fetch<ListServerPrivateNetworksResponse>(
       {
         method: 'GET',
-        path: `/baremetal/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/server-private-networks`,
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/server-private-networks`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
@@ -856,15 +751,6 @@ export class PrivateNetworkAPI extends ParentAPI {
   ) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/baremetal/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/servers/${validatePathParam(
-        'serverId',
-        request.serverId,
-      )}/private-networks/${validatePathParam(
-        'privateNetworkId',
-        request.privateNetworkId,
-      )}`,
+      path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
     })
 }

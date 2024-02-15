@@ -102,10 +102,7 @@ export class API extends ParentAPI {
     this.client.fetch<Human>(
       {
         method: 'GET',
-        path: `/test/v1/humans/${validatePathParam(
-          'humanId',
-          request.humanId,
-        )}`,
+        path: `/test/v1/humans/${validatePathParam('humanId', request.humanId)}`,
       },
       unmarshalHuman,
     )
@@ -163,10 +160,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/test/v1/humans/${validatePathParam(
-          'humanId',
-          request.humanId,
-        )}`,
+        path: `/test/v1/humans/${validatePathParam('humanId', request.humanId)}`,
       },
       unmarshalHuman,
     )
@@ -181,10 +175,7 @@ export class API extends ParentAPI {
     this.client.fetch<Human>(
       {
         method: 'DELETE',
-        path: `/test/v1/humans/${validatePathParam(
-          'humanId',
-          request.humanId,
-        )}`,
+        path: `/test/v1/humans/${validatePathParam('humanId', request.humanId)}`,
       },
       unmarshalHuman,
     )
@@ -202,10 +193,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/test/v1/humans/${validatePathParam(
-          'humanId',
-          request.humanId,
-        )}/run`,
+        path: `/test/v1/humans/${validatePathParam('humanId', request.humanId)}/run`,
       },
       unmarshalHuman,
     )
@@ -223,10 +211,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/test/v1/humans/${validatePathParam(
-          'humanId',
-          request.humanId,
-        )}/smoke`,
+        path: `/test/v1/humans/${validatePathParam('humanId', request.humanId)}/smoke`,
       },
       unmarshalHuman,
     )

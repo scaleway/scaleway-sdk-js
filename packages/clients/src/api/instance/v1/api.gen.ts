@@ -267,10 +267,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetServerTypesAvailabilityResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/products/servers/availability`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/products/servers/availability`,
         urlParams: urlParams(
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
@@ -290,10 +287,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListServersTypesResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/products/servers`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/products/servers`,
         urlParams: urlParams(
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
@@ -312,10 +306,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListVolumesTypesResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/products/volumes`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/products/volumes`,
         urlParams: urlParams(
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
@@ -328,10 +319,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListServersResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
         urlParams: urlParams(
           ['commercial_type', request.commercialType],
           ['name', request.name],
@@ -386,10 +374,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
       },
       unmarshalCreateServerResponse,
     )
@@ -402,10 +387,7 @@ export class API extends ParentAPI {
   deleteServer = (request: Readonly<DeleteServerRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/servers/${validatePathParam('serverId', request.serverId)}`,
+      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
     })
 
   /**
@@ -418,10 +400,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetServerResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam('serverId', request.serverId)}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
       },
       unmarshalGetServerResponse,
     )
@@ -434,10 +413,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam('id', request.id)}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('id', request.id)}`,
       },
       unmarshalSetServerResponse,
     )
@@ -450,10 +426,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam('serverId', request.serverId)}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
       },
       unmarshalUpdateServerResponse,
     )
@@ -469,10 +442,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListServerActionsResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam('serverId', request.serverId)}/action`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/action`,
       },
       unmarshalListServerActionsResponse,
     )
@@ -504,10 +474,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam('serverId', request.serverId)}/action`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/action`,
       },
       unmarshalServerActionResponse,
     )
@@ -522,13 +489,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListServerUserDataResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam(
-          'serverId',
-          request.serverId,
-        )}/user_data`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/user_data`,
       },
       unmarshalListServerUserDataResponse,
     )
@@ -541,13 +502,7 @@ export class API extends ParentAPI {
   deleteServerUserData = (request: Readonly<DeleteServerUserDataRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/servers/${validatePathParam(
-        'serverId',
-        request.serverId,
-      )}/user_data/${validatePathParam('key', request.key)}`,
+      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/user_data/${validatePathParam('key', request.key)}`,
     })
 
   attachServerVolume = (request: Readonly<AttachServerVolumeRequest>) =>
@@ -558,13 +513,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam(
-          'serverId',
-          request.serverId,
-        )}/attach-volume`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/attach-volume`,
       },
       unmarshalAttachServerVolumeResponse,
     )
@@ -577,13 +526,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam(
-          'serverId',
-          request.serverId,
-        )}/detach-volume`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/detach-volume`,
       },
       unmarshalDetachServerVolumeResponse,
     )
@@ -592,10 +535,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListImagesResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/images`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/images`,
         urlParams: urlParams(
           ['arch', request.arch],
           ['name', request.name],
@@ -629,10 +569,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetImageResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/images/${validatePathParam('imageId', request.imageId)}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/images/${validatePathParam('imageId', request.imageId)}`,
       },
       unmarshalGetImageResponse,
     )
@@ -652,10 +589,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/images`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/images`,
       },
       unmarshalCreateImageResponse,
     )
@@ -668,10 +602,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/images/${validatePathParam('id', request.id)}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/images/${validatePathParam('id', request.id)}`,
       },
       unmarshalSetImageResponse,
     )
@@ -690,10 +621,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/images/${validatePathParam('imageId', request.imageId)}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/images/${validatePathParam('imageId', request.imageId)}`,
       },
       unmarshalUpdateImageResponse,
     )
@@ -706,10 +634,7 @@ export class API extends ParentAPI {
   deleteImage = (request: Readonly<DeleteImageRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/images/${validatePathParam('imageId', request.imageId)}`,
+      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/images/${validatePathParam('imageId', request.imageId)}`,
     })
 
   protected pageOfListSnapshots = (
@@ -718,10 +643,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListSnapshotsResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/snapshots`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots`,
         urlParams: urlParams(
           ['base_volume_id', request.baseVolumeId],
           ['name', request.name],
@@ -761,10 +683,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/snapshots`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots`,
       },
       unmarshalCreateSnapshotResponse,
     )
@@ -779,10 +698,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetSnapshotResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
       },
       unmarshalGetSnapshotResponse,
     )
@@ -795,10 +711,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
       },
       unmarshalSetSnapshotResponse,
     )
@@ -817,10 +730,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
       },
       unmarshalUpdateSnapshotResponse,
     )
@@ -833,10 +743,7 @@ export class API extends ParentAPI {
   deleteSnapshot = (request: Readonly<DeleteSnapshotRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
     })
 
   /**
@@ -854,13 +761,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/snapshots/${validatePathParam(
-          'snapshotId',
-          request.snapshotId,
-        )}/export`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}/export`,
       },
       unmarshalExportSnapshotResponse,
     )
@@ -869,10 +770,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListVolumesResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/volumes`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes`,
         urlParams: urlParams(
           ['name', request.name],
           ['organization', request.organization],
@@ -916,10 +814,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/volumes`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes`,
       },
       unmarshalCreateVolumeResponse,
     )
@@ -934,10 +829,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetVolumeResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
       },
       unmarshalGetVolumeResponse,
     )
@@ -958,10 +850,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
       },
       unmarshalUpdateVolumeResponse,
     )
@@ -974,10 +863,7 @@ export class API extends ParentAPI {
   deleteVolume = (request: Readonly<DeleteVolumeRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
     })
 
   protected pageOfListSecurityGroups = (
@@ -986,10 +872,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListSecurityGroupsResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/security_groups`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups`,
         urlParams: urlParams(
           ['name', request.name],
           ['organization', request.organization],
@@ -1036,10 +919,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/security_groups`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups`,
       },
       unmarshalCreateSecurityGroupResponse,
     )
@@ -1055,13 +935,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetSecurityGroupResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/security_groups/${validatePathParam(
-          'securityGroupId',
-          request.securityGroupId,
-        )}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}`,
       },
       unmarshalGetSecurityGroupResponse,
     )
@@ -1074,13 +948,7 @@ export class API extends ParentAPI {
   deleteSecurityGroup = (request: Readonly<DeleteSecurityGroupRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/security_groups/${validatePathParam(
-        'securityGroupId',
-        request.securityGroupId,
-      )}`,
+      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}`,
     })
 
   protected _setSecurityGroup = (request: Readonly<SetSecurityGroupRequest>) =>
@@ -1091,10 +959,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/security_groups/${validatePathParam('id', request.id)}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('id', request.id)}`,
       },
       unmarshalSetSecurityGroupResponse,
     )
@@ -1113,13 +978,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/security_groups/${validatePathParam(
-          'securityGroupId',
-          request.securityGroupId,
-        )}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}`,
       },
       unmarshalUpdateSecurityGroupResponse,
     )
@@ -1137,10 +996,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListSecurityGroupRulesResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/security_groups/default/rules`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/default/rules`,
       },
       unmarshalListSecurityGroupRulesResponse,
     )
@@ -1151,13 +1007,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListSecurityGroupRulesResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/security_groups/${validatePathParam(
-          'securityGroupId',
-          request.securityGroupId,
-        )}/rules`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules`,
         urlParams: urlParams(
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
@@ -1191,13 +1041,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/security_groups/${validatePathParam(
-          'securityGroupId',
-          request.securityGroupId,
-        )}/rules`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules`,
       },
       unmarshalCreateSecurityGroupRuleResponse,
     )
@@ -1219,13 +1063,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/security_groups/${validatePathParam(
-          'securityGroupId',
-          request.securityGroupId,
-        )}/rules`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules`,
       },
       unmarshalSetSecurityGroupRulesResponse,
     )
@@ -1240,16 +1078,7 @@ export class API extends ParentAPI {
   ) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/security_groups/${validatePathParam(
-        'securityGroupId',
-        request.securityGroupId,
-      )}/rules/${validatePathParam(
-        'securityGroupRuleId',
-        request.securityGroupRuleId,
-      )}`,
+      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules/${validatePathParam('securityGroupRuleId', request.securityGroupRuleId)}`,
     })
 
   /**
@@ -1262,16 +1091,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetSecurityGroupRuleResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/security_groups/${validatePathParam(
-          'securityGroupId',
-          request.securityGroupId,
-        )}/rules/${validatePathParam(
-          'securityGroupRuleId',
-          request.securityGroupRuleId,
-        )}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules/${validatePathParam('securityGroupRuleId', request.securityGroupRuleId)}`,
       },
       unmarshalGetSecurityGroupRuleResponse,
     )
@@ -1286,16 +1106,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/security_groups/${validatePathParam(
-          'securityGroupId',
-          request.securityGroupId,
-        )}/rules/${validatePathParam(
-          'securityGroupRuleId',
-          request.securityGroupRuleId,
-        )}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules/${validatePathParam('securityGroupRuleId', request.securityGroupRuleId)}`,
       },
       unmarshalSetSecurityGroupRuleResponse,
     )
@@ -1317,16 +1128,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/security_groups/${validatePathParam(
-          'securityGroupId',
-          request.securityGroupId,
-        )}/rules/${validatePathParam(
-          'securityGroupRuleId',
-          request.securityGroupRuleId,
-        )}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules/${validatePathParam('securityGroupRuleId', request.securityGroupRuleId)}`,
       },
       unmarshalUpdateSecurityGroupRuleResponse,
     )
@@ -1337,10 +1139,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListPlacementGroupsResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/placement_groups`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups`,
         urlParams: urlParams(
           ['name', request.name],
           ['organization', request.organization],
@@ -1389,10 +1188,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/placement_groups`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups`,
       },
       unmarshalCreatePlacementGroupResponse,
     )
@@ -1407,13 +1203,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetPlacementGroupResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/placement_groups/${validatePathParam(
-          'placementGroupId',
-          request.placementGroupId,
-        )}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}`,
       },
       unmarshalGetPlacementGroupResponse,
     )
@@ -1432,13 +1222,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/placement_groups/${validatePathParam(
-          'placementGroupId',
-          request.placementGroupId,
-        )}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}`,
       },
       unmarshalSetPlacementGroupResponse,
     )
@@ -1458,13 +1242,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/placement_groups/${validatePathParam(
-          'placementGroupId',
-          request.placementGroupId,
-        )}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}`,
       },
       unmarshalUpdatePlacementGroupResponse,
     )
@@ -1477,13 +1255,7 @@ export class API extends ParentAPI {
   deletePlacementGroup = (request: Readonly<DeletePlacementGroupRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/placement_groups/${validatePathParam(
-        'placementGroupId',
-        request.placementGroupId,
-      )}`,
+      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}`,
     })
 
   /**
@@ -1499,13 +1271,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetPlacementGroupServersResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/placement_groups/${validatePathParam(
-          'placementGroupId',
-          request.placementGroupId,
-        )}/servers`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}/servers`,
       },
       unmarshalGetPlacementGroupServersResponse,
     )
@@ -1527,13 +1293,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/placement_groups/${validatePathParam(
-          'placementGroupId',
-          request.placementGroupId,
-        )}/servers`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}/servers`,
       },
       unmarshalSetPlacementGroupServersResponse,
     )
@@ -1558,13 +1318,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/placement_groups/${validatePathParam(
-          'placementGroupId',
-          request.placementGroupId,
-        )}/servers`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}/servers`,
       },
       unmarshalUpdatePlacementGroupServersResponse,
     )
@@ -1573,10 +1327,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListIpsResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/ips`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips`,
         urlParams: urlParams(
           ['name', request.name],
           ['organization', request.organization],
@@ -1619,10 +1370,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/ips`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips`,
       },
       unmarshalCreateIpResponse,
     )
@@ -1637,10 +1385,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetIpResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/ips/${validatePathParam('ip', request.ip)}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ip', request.ip)}`,
       },
       unmarshalGetIpResponse,
     )
@@ -1660,10 +1405,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/ips/${validatePathParam('ip', request.ip)}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ip', request.ip)}`,
       },
       unmarshalUpdateIpResponse,
     )
@@ -1676,10 +1418,7 @@ export class API extends ParentAPI {
   deleteIp = (request: Readonly<DeleteIpRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/ips/${validatePathParam('ip', request.ip)}`,
+      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ip', request.ip)}`,
     })
 
   protected pageOfListPrivateNICs = (
@@ -1688,13 +1427,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListPrivateNICsResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam(
-          'serverId',
-          request.serverId,
-        )}/private_nics`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private_nics`,
         urlParams: urlParams(
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
@@ -1732,13 +1465,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam(
-          'serverId',
-          request.serverId,
-        )}/private_nics`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private_nics`,
       },
       unmarshalCreatePrivateNICResponse,
     )
@@ -1753,16 +1480,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetPrivateNICResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam(
-          'serverId',
-          request.serverId,
-        )}/private_nics/${validatePathParam(
-          'privateNicId',
-          request.privateNicId,
-        )}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private_nics/${validatePathParam('privateNicId', request.privateNicId)}`,
       },
       unmarshalGetPrivateNICResponse,
     )
@@ -1782,16 +1500,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/servers/${validatePathParam(
-          'serverId',
-          request.serverId,
-        )}/private_nics/${validatePathParam(
-          'privateNicId',
-          request.privateNicId,
-        )}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private_nics/${validatePathParam('privateNicId', request.privateNicId)}`,
       },
       unmarshalPrivateNIC,
     )
@@ -1804,16 +1513,7 @@ export class API extends ParentAPI {
   deletePrivateNIC = (request: Readonly<DeletePrivateNICRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/servers/${validatePathParam(
-        'serverId',
-        request.serverId,
-      )}/private_nics/${validatePathParam(
-        'privateNicId',
-        request.privateNicId,
-      )}`,
+      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private_nics/${validatePathParam('privateNicId', request.privateNicId)}`,
     })
 
   protected pageOfListBootscripts = (
@@ -1822,10 +1522,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListBootscriptsResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/bootscripts`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/bootscripts`,
         urlParams: urlParams(
           ['arch', request.arch],
           ['default', request.default],
@@ -1859,13 +1556,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetBootscriptResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/bootscripts/${validatePathParam(
-          'bootscriptId',
-          request.bootscriptId,
-        )}`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/bootscripts/${validatePathParam('bootscriptId', request.bootscriptId)}`,
       },
       unmarshalGetBootscriptResponse,
     )
@@ -1874,10 +1565,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetDashboardResponse>(
       {
         method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/dashboard`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dashboard`,
         urlParams: urlParams(
           ['organization', request.organization],
           ['project', request.project],
@@ -1906,10 +1594,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/instance/v1/zones/${validatePathParam(
-          'zone',
-          request.zone ?? this.client.settings.defaultZone,
-        )}/block-migration/plan`,
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/block-migration/plan`,
       },
       unmarshalMigrationPlan,
     )
@@ -1929,9 +1614,6 @@ export class API extends ParentAPI {
       ),
       headers: jsonContentHeaders,
       method: 'POST',
-      path: `/instance/v1/zones/${validatePathParam(
-        'zone',
-        request.zone ?? this.client.settings.defaultZone,
-      )}/block-migration/apply`,
+      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/block-migration/apply`,
     })
 }
