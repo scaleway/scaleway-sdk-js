@@ -79,7 +79,7 @@ const jsonContentHeaders = {
  */
 export class NatsAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par']
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams']
 
   /**
    * Create a NATS account. Create a NATS account associated with a Project.
@@ -290,7 +290,7 @@ export class NatsAPI extends ParentAPI {
  */
 export class SnsAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par']
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams']
 
   /**
    * Activate SNS. Activate SNS for the specified Project ID. SNS must be
@@ -482,7 +482,7 @@ export class SnsAPI extends ParentAPI {
  */
 export class SqsAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par']
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams']
 
   /**
    * Activate SQS. Activate SQS for the specified Project ID. SQS must be
