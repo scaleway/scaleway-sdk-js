@@ -64,6 +64,7 @@
     "eslint": "8.56.0",
     "eslint-plugin-tsdoc": "0.2.17",
     "husky": "9.0.11",
+    "jsdom": "24.0.0",
     "lerna": "7.4.2",
     "lint-staged": "15.2.2",
     "prettier": "3.2.5",
@@ -76,8 +77,5 @@
     "vite": "5.1.2",
     "vitest": "1.2.2"
   },
-  "packageManager": "pnpm@8.15.2",
-  "dependencies": {
-    "jsdom": "24.0.0"
-  }
+  "packageManager": "pnpm@8.15.2"
 }

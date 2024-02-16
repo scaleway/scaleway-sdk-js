@@ -2,7 +2,7 @@
   "root": true,
   "plugins": ["eslint-plugin-tsdoc"],
   "parserOptions": {
-    "project": ["tsconfig.json"],
+    "project": ["tsconfig.json"]
   },
   "extends": ["@scaleway/react/typescript"],
   "rules": {
@@ -17,23 +17,23 @@
     "import/prefer-default-export": "off",
     "import/no-default-export": "error",
     "no-await-in-loop": "off",
-    "@typescript-eslint/no-namespace": "off",
+    "@typescript-eslint/no-namespace": "off"
   },
   "overrides": [
     {
       "files": [
         "./packages/clients/src/scw/**/*.ts",
-        "./packages/clients/src/internal/**/*.ts",
+        "./packages/clients/src/internal/**/*.ts"
       ],
       "rules": {
-        "@typescript-eslint/consistent-type-definitions": "off",
+        "@typescript-eslint/consistent-type-definitions": "off"
       }
     },
     {
       "files": ["**/*.test.ts", "__tests__/**/*.ts", "vite.config.ts"],
       "rules": {
         "eslint-disable import/no-extraneous-dependencies": "off"
-      },
-    },
-  ],
+      }
+    }
+  ]
 }
