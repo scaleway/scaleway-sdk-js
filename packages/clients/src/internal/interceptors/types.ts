@@ -68,13 +68,7 @@ export interface ResponseInterceptor {
  * @public
  */
 export interface ResponseErrorInterceptor {
-  ({
-    request,
-    error,
-  }: {
-    request: Request
-    error: unknown
-  }): unknown | Promise<unknown>
+  ({ request, error }: { request: Request; error: unknown }): unknown
 }
 
 /**

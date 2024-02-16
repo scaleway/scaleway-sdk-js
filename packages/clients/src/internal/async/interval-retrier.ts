@@ -20,7 +20,7 @@ type Retry<T> = () => Promise<IteratorResult<T, T>>
  *
  * @internal
  */
-type IntervalStrategy = Generator<number, never | number, number>
+type IntervalStrategy = Generator<number, number, number>
 
 /**
  * Creates a fixed interval strategy.

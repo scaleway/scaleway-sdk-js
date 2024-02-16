@@ -46,10 +46,7 @@ export type Profile = {
 }
 
 /** Configuration type. */
-export type ConfigurationType = Record<
-  'default' | string,
-  Record<string, string>
->
+export type ConfigurationType = Record<string, Record<string, string>>
 /** Parameters to load the all the profiles from the configuration file */
 export type AllProfilesFromFileParams = {
   /**
@@ -68,5 +65,5 @@ export type ProfileFromFileParams = AllProfilesFromFileParams & {
    *
    * @defaultValue `default`
    * */
-  profileName?: 'default' | string
+  profileName?: string
 }
