@@ -3,7 +3,7 @@ configValidationMode: off
 useDotenv: true
 provider:
   name: scaleway
-  runtime: node16
+  runtime: node20
   env:
     SCW_ACCESS_KEY: ${env:SCW_ACCESS_KEY}
     SCW_SECRET_KEY: ${env:SCW_SECRET_KEY}
