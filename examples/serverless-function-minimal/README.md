@@ -4,7 +4,7 @@ We assume that you have the dependency [serverless](https://www.serverless.com/)
 
 ## A. How to run
 
-⚠️ **Important:** this example authenticates using environment variables: please rename `.env.template` to `.env` (git ignored) and update the variables.
+⚠️ **Important:** this example creates your Scaleway profile (required by the Javascript client) using environment variables: please rename `.env.template` to `.env` (git ignored) and update the variables.
   * Note: by design, Serverless framework overrides environment variables already defined in your Scaleway account.
 
 **Steps:**
