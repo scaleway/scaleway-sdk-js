@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.18.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.17.0...@scaleway/sdk@2.18.0) (2024-02-19)
+
+### Features
+
+- **mnq:** add support for the nl-ams region ([#1156](https://github.com/scaleway/scaleway-sdk-js/issues/1156)) ([b04e373](https://github.com/scaleway/scaleway-sdk-js/commit/b04e37355e45d74389554a88e368c85059dc329d))
+- **secret_manager:** add v1beta1 ([#1151](https://github.com/scaleway/scaleway-sdk-js/issues/1151)) ([b033004](https://github.com/scaleway/scaleway-sdk-js/commit/b0330043d33fb3cec533ee157a7cfd4489bc3003))
+- **vpc_gw:** introduce idempotent call to migrate PGWs to IPMob ([#1152](https://github.com/scaleway/scaleway-sdk-js/issues/1152)) ([54fffa5](https://github.com/scaleway/scaleway-sdk-js/commit/54fffa56c7df09280abc2ab438174a19a750ca43))
+
 ## [2.17.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.16.0...@scaleway/sdk@2.17.0) (2024-02-15)
 
 ### Features
