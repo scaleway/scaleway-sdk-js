@@ -270,18 +270,14 @@ export class API extends ParentAPI {
    * calls after the first will return no error but have no effect.
    *
    * @param request - The request {@link EnableIPMobilityRequest}
-   * @returns A Promise of Gateway
    */
   enableIPMobility = (request: Readonly<EnableIPMobilityRequest>) =>
-    this.client.fetch<Gateway>(
-      {
-        body: '{}',
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/enable-ip-mobility`,
-      },
-      unmarshalGateway,
-    )
+    this.client.fetch<void>({
+      body: '{}',
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/enable-ip-mobility`,
+    })
 
   protected pageOfListGatewayNetworks = (
     request: Readonly<ListGatewayNetworksRequest> = {},
