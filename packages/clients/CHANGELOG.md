@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.18.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.18.0...@scaleway/sdk@2.18.1) (2024-02-26)
+
+### Bug Fixes
+
+- **vpc_gw:** return Empty on EnableIPMobility ([#1158](https://github.com/scaleway/scaleway-sdk-js/issues/1158)) ([94bef51](https://github.com/scaleway/scaleway-sdk-js/commit/94bef5185438db72d55fd1505cbdba64393e306e))
+
 ## [2.18.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.17.0...@scaleway/sdk@2.18.0) (2024-02-19)
 
 ### Features
