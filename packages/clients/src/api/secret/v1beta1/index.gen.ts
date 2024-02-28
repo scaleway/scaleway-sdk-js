@@ -27,6 +27,8 @@ export type {
   ListSecretsRequest,
   ListSecretsRequestOrderBy,
   ListSecretsResponse,
+  ListTagsRequest,
+  ListTagsResponse,
   Product,
   ProtectSecretRequest,
   Secret,
