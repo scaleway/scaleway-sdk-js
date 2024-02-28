@@ -425,6 +425,25 @@ export interface ListSecretsResponse {
   totalCount: number
 }
 
+export type ListTagsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the Project to target. */
+  projectId?: string
+  page?: number
+  pageSize?: number
+}
+
+export interface ListTagsResponse {
+  /** List of tags. */
+  tags: string[]
+  /** Count of all tags matching the requested criteria. */
+  totalCount: number
+}
+
 export type ProtectSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the

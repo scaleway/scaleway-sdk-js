@@ -19,6 +19,7 @@ import type {
   EphemeralProperties,
   ListSecretVersionsResponse,
   ListSecretsResponse,
+  ListTagsResponse,
   Secret,
   SecretVersion,
   UpdateSecretRequest,
@@ -220,6 +221,19 @@ export const unmarshalListSecretsResponse = (
     secrets: unmarshalArrayOfObject(data.secrets, unmarshalSecret),
     totalCount: data.total_count,
   } as ListSecretsResponse
+}
+
+export const unmarshalListTagsResponse = (data: unknown): ListTagsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListTagsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    tags: data.tags,
+    totalCount: data.total_count,
+  } as ListTagsResponse
 }
 
 export const marshalAddSecretOwnerRequest = (
