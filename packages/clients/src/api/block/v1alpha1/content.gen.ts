@@ -6,7 +6,7 @@ import type { ReferenceStatus, SnapshotStatus, VolumeStatus } from './types.gen'
 export const REFERENCE_TRANSIENT_STATUSES: ReferenceStatus[] = [
   'attaching',
   'detaching',
-  'snapshotting',
+  'creating',
 ]
 
 /** Lists transient statutes of the enum {@link SnapshotStatus}. */

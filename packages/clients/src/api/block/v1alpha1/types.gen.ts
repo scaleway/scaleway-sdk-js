@@ -20,7 +20,7 @@ export type ReferenceStatus =
   | 'attached'
   | 'detaching'
   | 'detached'
-  | 'snapshotting'
+  | 'creating'
   | 'error'
 
 export type ReferenceType = 'unknown_type' | 'link' | 'exclusive' | 'read_only'
