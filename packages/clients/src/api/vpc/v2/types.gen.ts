@@ -71,6 +71,8 @@ export interface VPC {
   updatedAt?: Date
   /** Number of Private Networks within this VPC. */
   privateNetworkCount: number
+  /** Defines whether the VPC routes traffic between its Private Networks. */
+  routingEnabled: boolean
 }
 
 export type AddSubnetsRequest = {
@@ -119,6 +121,8 @@ export type CreateVPCRequest = {
   projectId?: string
   /** Tags for the VPC. */
   tags?: string[]
+  /** Enable routing between Private Networks in the VPC. */
+  enableRouting: boolean
 }
 
 export type DeletePrivateNetworkRequest = {
@@ -278,6 +282,11 @@ export type ListVPCsRequest = {
    * Project.
    */
   isDefault?: boolean
+  /**
+   * Defines whether to filter only for VPCs which route traffic between their
+   * Private Networks.
+   */
+  routingEnabled?: boolean
 }
 
 export interface ListVPCsResponse {
