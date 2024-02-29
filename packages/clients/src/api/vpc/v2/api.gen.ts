@@ -74,6 +74,7 @@ export class API extends ParentAPI {
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['project_id', request.projectId],
+          ['routing_enabled', request.routingEnabled],
           ['tags', request.tags],
         ),
       },
@@ -95,7 +96,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateVPCRequest}
    * @returns A Promise of VPC
    */
-  createVPC = (request: Readonly<CreateVPCRequest> = {}) =>
+  createVPC = (request: Readonly<CreateVPCRequest>) =>
     this.client.fetch<VPC>(
       {
         body: JSON.stringify(

@@ -80,6 +80,7 @@ export const unmarshalVPC = (data: unknown): VPC => {
     privateNetworkCount: data.private_network_count,
     projectId: data.project_id,
     region: data.region,
+    routingEnabled: data.routing_enabled,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
   } as VPC
@@ -180,6 +181,7 @@ export const marshalCreateVPCRequest = (
   request: CreateVPCRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  enable_routing: request.enableRouting,
   name: request.name || randomName('vpc'),
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
