@@ -182,7 +182,6 @@ const unmarshalTriggerMnqNatsClientConfig = (
 
   return {
     mnqCredentialId: data.mnq_credential_id,
-    mnqNamespaceId: data.mnq_namespace_id,
     mnqNatsAccountId: data.mnq_nats_account_id,
     mnqProjectId: data.mnq_project_id,
     mnqRegion: data.mnq_region,
@@ -201,7 +200,6 @@ const unmarshalTriggerMnqSqsClientConfig = (
 
   return {
     mnqCredentialId: data.mnq_credential_id,
-    mnqNamespaceId: data.mnq_namespace_id,
     mnqProjectId: data.mnq_project_id,
     mnqRegion: data.mnq_region,
     queue: data.queue,
@@ -457,7 +455,6 @@ const marshalCreateTriggerRequestMnqNatsClientConfig = (
   request: CreateTriggerRequestMnqNatsClientConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  mnq_namespace_id: request.mnqNamespaceId,
   mnq_nats_account_id: request.mnqNatsAccountId,
   mnq_project_id: request.mnqProjectId,
   mnq_region: request.mnqRegion,
@@ -468,7 +465,6 @@ const marshalCreateTriggerRequestMnqSqsClientConfig = (
   request: CreateTriggerRequestMnqSqsClientConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  mnq_namespace_id: request.mnqNamespaceId,
   mnq_project_id: request.mnqProjectId,
   mnq_region: request.mnqRegion,
   queue: request.queue,
