@@ -136,15 +136,13 @@ export interface SecretHashedValue {
 }
 
 export interface TriggerMnqNatsClientConfig {
-  /** @deprecated */
-  mnqNamespaceId?: string
   /** Name of the NATS subject the trigger listens to. */
   subject: string
   /** ID of the Messaging and Queuing NATS account. */
   mnqNatsAccountId: string
   /** ID of the Messaging and Queuing project. */
   mnqProjectId: string
-  /** Currently, only the `fr-par` region is available. */
+  /** Currently, only the `fr-par` and `nl-ams` regions are available. */
   mnqRegion: string
   /**
    * ID of the Messaging and Queuing credentials used to subscribe to the NATS
@@ -154,13 +152,11 @@ export interface TriggerMnqNatsClientConfig {
 }
 
 export interface TriggerMnqSqsClientConfig {
-  /** @deprecated */
-  mnqNamespaceId?: string
   /** Name of the SQS queue the trigger listens to. */
   queue: string
   /** ID of the Messaging and Queuing project. */
   mnqProjectId: string
-  /** Currently, only the `fr-par` region is available. */
+  /** Currently, only the `fr-par` and `nl-ams` regions are available. */
   mnqRegion: string
   /**
    * ID of the Messaging and Queuing credentials used to read from the SQS
@@ -182,26 +178,22 @@ export interface Secret {
 }
 
 export interface CreateTriggerRequestMnqNatsClientConfig {
-  /** @deprecated */
-  mnqNamespaceId?: string
   /** Name of the NATS subject the trigger should listen to. */
   subject: string
   /** ID of the Messaging and Queuing NATS account. */
   mnqNatsAccountId: string
   /** ID of the Messaging and Queuing project. */
   mnqProjectId: string
-  /** Currently, only the `fr-par` region is available. */
+  /** Currently, only the `fr-par` and `nl-ams` regions are available. */
   mnqRegion: string
 }
 
 export interface CreateTriggerRequestMnqSqsClientConfig {
-  /** @deprecated */
-  mnqNamespaceId?: string
   /** Name of the SQS queue the trigger should listen to. */
   queue: string
   /** You must have activated SQS on this project. */
   mnqProjectId: string
-  /** Currently, only the `fr-par` region is available. */
+  /** Currently, only the `fr-par` and `nl-ams` regions are available. */
   mnqRegion: string
 }
 
