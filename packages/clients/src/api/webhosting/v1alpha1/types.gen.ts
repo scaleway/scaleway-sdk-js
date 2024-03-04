@@ -74,6 +74,13 @@ export interface OfferProduct {
   maxAddonDomains: number
 }
 
+export interface CreateHostingRequestDomainConfiguration {
+  updateNameservers: boolean
+  updateWebRecord: boolean
+  updateMailRecord: boolean
+  updateAllRecords: boolean
+}
+
 export interface DnsRecord {
   /** Record name. */
   name: string
@@ -199,6 +206,11 @@ export type CreateHostingRequest = {
   optionIds?: string[]
   /** Default language for the control panel interface. */
   language?: StdLanguageCode
+  /**
+   * Indicates whether to update hosting domain name servers and DNS records for
+   * domains managed by Scaleway Elements.
+   */
+  domainConfiguration?: CreateHostingRequestDomainConfiguration
 }
 
 export type DeleteHostingRequest = {

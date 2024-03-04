@@ -5,6 +5,7 @@ export * from './content.gen'
 export type {
   ControlPanel,
   CreateHostingRequest,
+  CreateHostingRequestDomainConfiguration,
   DeleteHostingRequest,
   DnsRecord,
   DnsRecordStatus,
