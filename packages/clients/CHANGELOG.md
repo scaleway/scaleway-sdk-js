@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.18.1...@scaleway/sdk@2.19.0) (2024-03-04)
+
+### Features
+
+- **block:** add new reference status not-ready-yet ([#1168](https://github.com/scaleway/scaleway-sdk-js/issues/1168)) ([5e9905a](https://github.com/scaleway/scaleway-sdk-js/commit/5e9905a0d8ed4840449acc290134b3824e985f27))
+- **iam:** add create jwt method ([#1172](https://github.com/scaleway/scaleway-sdk-js/issues/1172)) ([e980276](https://github.com/scaleway/scaleway-sdk-js/commit/e98027636f00889b0d11c1880ef47834a3c59e3d))
+- **secret_manager:** add ListTags to v1beta1 ([#1167](https://github.com/scaleway/scaleway-sdk-js/issues/1167)) ([b3a9ed9](https://github.com/scaleway/scaleway-sdk-js/commit/b3a9ed90ce5593da43935138e3b662c1f111e0fc))
+- **vpc/v2:** add property to enable or disable routing in a VPC ([#1169](https://github.com/scaleway/scaleway-sdk-js/issues/1169)) ([2e07ffd](https://github.com/scaleway/scaleway-sdk-js/commit/2e07ffd639dcafd8aa7437fdd54fc838a48cb497))
+
 ## [2.18.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.18.0...@scaleway/sdk@2.18.1) (2024-02-26)
 
 ### Bug Fixes
