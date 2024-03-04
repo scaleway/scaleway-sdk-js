@@ -10,6 +10,7 @@ import type { DefaultValues } from '../../../bridge'
 import type {
   ControlPanel,
   CreateHostingRequest,
+  CreateHostingRequestDomainConfiguration,
   DnsRecord,
   DnsRecords,
   Hosting,
@@ -231,11 +232,28 @@ export const unmarshalListOffersResponse = (
   } as ListOffersResponse
 }
 
+const marshalCreateHostingRequestDomainConfiguration = (
+  request: CreateHostingRequestDomainConfiguration,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  update_all_records: request.updateAllRecords,
+  update_mail_record: request.updateMailRecord,
+  update_nameservers: request.updateNameservers,
+  update_web_record: request.updateWebRecord,
+})
+
 export const marshalCreateHostingRequest = (
   request: CreateHostingRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   domain: request.domain,
+  domain_configuration:
+    request.domainConfiguration !== undefined
+      ? marshalCreateHostingRequestDomainConfiguration(
+          request.domainConfiguration,
+          defaults,
+        )
+      : undefined,
   email: request.email,
   language: request.language,
   offer_id: request.offerId,
