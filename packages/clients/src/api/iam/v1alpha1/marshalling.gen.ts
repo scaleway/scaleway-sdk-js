@@ -16,9 +16,11 @@ import type {
   CreateAPIKeyRequest,
   CreateApplicationRequest,
   CreateGroupRequest,
+  CreateJWTRequest,
   CreatePolicyRequest,
   CreateSSHKeyRequest,
   CreateUserRequest,
+  EncodedJWT,
   Group,
   JWT,
   ListAPIKeysResponse,
@@ -235,6 +237,20 @@ export const unmarshalUser = (data: unknown): User => {
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
   } as User
+}
+
+export const unmarshalEncodedJWT = (data: unknown): EncodedJWT => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EncodedJWT' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    jwt: data.jwt ? unmarshalJWT(data.jwt) : undefined,
+    renewToken: data.renew_token,
+    token: data.token,
+  } as EncodedJWT
 }
 
 export const unmarshalListAPIKeysResponse = (
@@ -498,6 +514,14 @@ export const marshalCreateGroupRequest = (
   name: request.name || randomName('grp'),
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
   tags: request.tags,
+})
+
+export const marshalCreateJWTRequest = (
+  request: CreateJWTRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  referrer: request.referrer,
+  user_id: request.userId,
 })
 
 const marshalRuleSpecs = (

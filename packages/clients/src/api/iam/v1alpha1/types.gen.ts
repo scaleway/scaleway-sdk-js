@@ -462,6 +462,13 @@ export type CreateGroupRequest = {
   tags?: string[]
 }
 
+export type CreateJWTRequest = {
+  /** ID of the user the JWT will be created for. */
+  userId: string
+  /** Referrer of the JWT. */
+  referrer: string
+}
+
 export type CreatePolicyRequest = {
   /** Name of the policy to create (max length is 64 characters). */
   name?: string
@@ -556,6 +563,15 @@ export type DeleteSSHKeyRequest = {
 export type DeleteUserRequest = {
   /** ID of the user to delete. */
   userId: string
+}
+
+export interface EncodedJWT {
+  /** The renewed JWT. */
+  jwt?: JWT
+  /** The encoded token of the renewed JWT. */
+  token: string
+  /** The encoded renew token. This token is necessary to renew the JWT. */
+  renewToken: string
 }
 
 export type GetAPIKeyRequest = {

@@ -13,6 +13,7 @@ import {
   marshalCreateAPIKeyRequest,
   marshalCreateApplicationRequest,
   marshalCreateGroupRequest,
+  marshalCreateJWTRequest,
   marshalCreatePolicyRequest,
   marshalCreateSSHKeyRequest,
   marshalCreateUserRequest,
@@ -27,6 +28,7 @@ import {
   marshalUpdateUserRequest,
   unmarshalAPIKey,
   unmarshalApplication,
+  unmarshalEncodedJWT,
   unmarshalGroup,
   unmarshalJWT,
   unmarshalListAPIKeysResponse,
@@ -56,6 +58,7 @@ import type {
   CreateAPIKeyRequest,
   CreateApplicationRequest,
   CreateGroupRequest,
+  CreateJWTRequest,
   CreatePolicyRequest,
   CreateSSHKeyRequest,
   CreateUserRequest,
@@ -66,6 +69,7 @@ import type {
   DeletePolicyRequest,
   DeleteSSHKeyRequest,
   DeleteUserRequest,
+  EncodedJWT,
   GetAPIKeyRequest,
   GetApplicationRequest,
   GetGroupRequest,
@@ -1087,6 +1091,25 @@ export class API extends ParentAPI {
    */
   listJWTs = (request: Readonly<ListJWTsRequest> = {}) =>
     enrichForPagination('jwts', this.pageOfListJWTs, request)
+
+  /**
+   * Create a JWT.
+   *
+   * @param request - The request {@link CreateJWTRequest}
+   * @returns A Promise of EncodedJWT
+   */
+  createJWT = (request: Readonly<CreateJWTRequest>) =>
+    this.client.fetch<EncodedJWT>(
+      {
+        body: JSON.stringify(
+          marshalCreateJWTRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/iam/v1alpha1/jwts`,
+      },
+      unmarshalEncodedJWT,
+    )
 
   /**
    * Get a JWT.
