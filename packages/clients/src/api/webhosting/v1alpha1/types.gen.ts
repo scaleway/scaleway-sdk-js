@@ -157,6 +157,8 @@ export interface Hosting {
   ipv4: string
   /** IPv6 address of the hosting's host server. */
   ipv6: string
+  /** Whether the hosting is protected or not. */
+  protected: boolean
   /** Region where the Web Hosting plan is hosted. */
   region: Region
 }
@@ -392,4 +394,6 @@ export type UpdateHostingRequest = {
   optionIds?: string[]
   /** ID of the new offer for the Web Hosting plan. */
   offerId?: string
+  /** Whether the hosting is protected or not. */
+  protected?: boolean
 }
