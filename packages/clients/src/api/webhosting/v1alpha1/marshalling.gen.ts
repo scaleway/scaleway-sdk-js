@@ -78,6 +78,7 @@ export const unmarshalHosting = (data: unknown): Hosting => {
     platformHostname: data.platform_hostname,
     platformNumber: data.platform_number,
     projectId: data.project_id,
+    protected: data.protected,
     region: data.region,
     status: data.status,
     tags: data.tags,
@@ -269,5 +270,6 @@ export const marshalUpdateHostingRequest = (
   email: request.email,
   offer_id: request.offerId,
   option_ids: request.optionIds,
+  protected: request.protected,
   tags: request.tags,
 })
