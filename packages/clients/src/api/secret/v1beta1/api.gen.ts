@@ -149,6 +149,7 @@ export class API extends ParentAPI {
           ['path', request.path],
           ['project_id', request.projectId],
           ['tags', request.tags],
+          ['type', request.type],
         ),
       },
       unmarshalListSecretsResponse,

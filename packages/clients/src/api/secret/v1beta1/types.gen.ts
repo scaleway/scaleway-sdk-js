@@ -24,7 +24,14 @@ export type Product = 'unknown_product' | 'edge_services'
 
 export type SecretStatus = 'unknown_status' | 'ready' | 'locked'
 
-export type SecretType = 'unknown_type' | 'opaque' | 'certificate' | 'key_value'
+export type SecretType =
+  | 'unknown_type'
+  | 'opaque'
+  | 'certificate'
+  | 'key_value'
+  | 'basic_credentials'
+  | 'database_credentials'
+  | 'ssh_key'
 
 export type SecretVersionStatus =
   | 'unknown_status'
@@ -416,6 +423,8 @@ export type ListSecretsRequest = {
   path?: string
   /** Filter by ephemeral / not ephemeral (optional). */
   ephemeral?: boolean
+  /** Filter by secret type (optional). */
+  type?: SecretType
 }
 
 export interface ListSecretsResponse {
