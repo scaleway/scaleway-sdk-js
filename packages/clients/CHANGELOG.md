@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.20.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.19.0...@scaleway/sdk@2.20.0) (2024-03-11)
+
+### Features
+
+- **secret_manager:** add new secret types ([#1175](https://github.com/scaleway/scaleway-sdk-js/issues/1175)) ([66382b5](https://github.com/scaleway/scaleway-sdk-js/commit/66382b56c61a8accd1189a931dca03e13b9b871c))
+- **webhosting:** add "protected" field to hosting ([#1174](https://github.com/scaleway/scaleway-sdk-js/issues/1174)) ([a5fd4cc](https://github.com/scaleway/scaleway-sdk-js/commit/a5fd4cca869b2574a0a9857ec9ac70ab8e4571e7))
+- **webhosting:** add domain configuration ([#1173](https://github.com/scaleway/scaleway-sdk-js/issues/1173)) ([3ecdca1](https://github.com/scaleway/scaleway-sdk-js/commit/3ecdca1314ac1e7a64b7e87919b65b0f481fdc76))
+
 ## [2.19.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.18.1...@scaleway/sdk@2.19.0) (2024-03-04)
 
 ### Features
