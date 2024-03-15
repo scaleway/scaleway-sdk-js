@@ -52,8 +52,6 @@ export type ListDomainsRequestOrderBy =
   | 'hostname_asc'
   | 'hostname_desc'
 
-export type ListLogsRequestOrderBy = 'timestamp_desc' | 'timestamp_asc'
-
 export type ListNamespacesRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -63,8 +61,6 @@ export type ListNamespacesRequestOrderBy =
 export type ListTokensRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type ListTriggersRequestOrderBy = 'created_at_asc' | 'created_at_desc'
-
-export type LogStream = 'unknown' | 'stdout' | 'stderr'
 
 export type NamespaceStatus =
   | 'unknown'
@@ -253,18 +249,6 @@ export interface Domain {
   status: DomainStatus
   /** Last error message of the domain. */
   errorMessage?: string
-}
-
-export interface Log {
-  message: string
-  timestamp?: Date
-  id: string
-  /** Contains the severity of the log (info, debug, error, ...). */
-  level: string
-  /** Source of the log (core runtime or user code). */
-  source: string
-  /** Can be stdout or stderr. */
-  stream: LogStream
 }
 
 export interface Namespace {
@@ -733,27 +717,6 @@ export interface ListDomainsResponse {
   /** Array of domains. */
   domains: Domain[]
   /** Total number of domains. */
-  totalCount: number
-}
-
-export type ListLogsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the container. */
-  containerId: string
-  /** Page number. */
-  page?: number
-  /** Number of logs per page. */
-  pageSize?: number
-  /** Order of the logs. */
-  orderBy?: ListLogsRequestOrderBy
-}
-
-export interface ListLogsResponse {
-  logs: Log[]
   totalCount: number
 }
 

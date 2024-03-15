@@ -26,11 +26,9 @@ import type {
   ListDomainsResponse,
   ListFunctionRuntimesResponse,
   ListFunctionsResponse,
-  ListLogsResponse,
   ListNamespacesResponse,
   ListTokensResponse,
   ListTriggersResponse,
-  Log,
   Namespace,
   Runtime,
   Secret,
@@ -346,36 +344,6 @@ export const unmarshalListFunctionsResponse = (
     functions: unmarshalArrayOfObject(data.functions, unmarshalFunction),
     totalCount: data.total_count,
   } as ListFunctionsResponse
-}
-
-const unmarshalLog = (data: unknown): Log => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Log' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-    level: data.level,
-    message: data.message,
-    source: data.source,
-    stream: data.stream,
-    timestamp: unmarshalDate(data.timestamp),
-  } as Log
-}
-
-export const unmarshalListLogsResponse = (data: unknown): ListLogsResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListLogsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    logs: unmarshalArrayOfObject(data.logs, unmarshalLog),
-    totalCount: data.total_count,
-  } as ListLogsResponse
 }
 
 export const unmarshalListNamespacesResponse = (

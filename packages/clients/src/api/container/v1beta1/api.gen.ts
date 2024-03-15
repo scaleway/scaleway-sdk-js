@@ -34,7 +34,6 @@ import {
   unmarshalListContainersResponse,
   unmarshalListCronsResponse,
   unmarshalListDomainsResponse,
-  unmarshalListLogsResponse,
   unmarshalListNamespacesResponse,
   unmarshalListTokensResponse,
   unmarshalListTriggersResponse,
@@ -72,8 +71,6 @@ import type {
   ListCronsResponse,
   ListDomainsRequest,
   ListDomainsResponse,
-  ListLogsRequest,
-  ListLogsResponse,
   ListNamespacesRequest,
   ListNamespacesResponse,
   ListTokensRequest,
@@ -468,37 +465,6 @@ export class API extends ParentAPI {
       },
       unmarshalCron,
     )
-
-  protected pageOfListLogs = (request: Readonly<ListLogsRequest>) =>
-    this.client.fetch<ListLogsResponse>(
-      {
-        method: 'GET',
-        path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/containers/${validatePathParam('containerId', request.containerId)}/logs`,
-        urlParams: urlParams(
-          ['order_by', request.orderBy],
-          ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
-        ),
-      },
-      unmarshalListLogsResponse,
-    )
-
-  /**
-   * Deprecated (replaced by
-   * [Cockpit](https://www.scaleway.com/en/developers/api/cockpit/)). List your
-   * container logs. Deprecated (replaced by
-   * [Cockpit](https://www.scaleway.com/en/developers/api/cockpit/)). List the
-   * logs of the container with the specified ID.
-   *
-   * @deprecated
-   * @param request - The request {@link ListLogsRequest}
-   * @returns A Promise of ListLogsResponse
-   */
-  listLogs = (request: Readonly<ListLogsRequest>) =>
-    enrichForPagination('logs', this.pageOfListLogs, request)
 
   protected pageOfListDomains = (request: Readonly<ListDomainsRequest>) =>
     this.client.fetch<ListDomainsResponse>(
