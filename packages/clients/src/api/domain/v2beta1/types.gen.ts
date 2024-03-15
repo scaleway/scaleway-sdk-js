@@ -599,6 +599,8 @@ export interface DomainSummary {
    */
   transferRegistrationStatus?: DomainRegistrationStatusTransfer
   organizationId: string
+  createdAt?: Date
+  pendingTrade: boolean
 }
 
 export interface RenewableDomain {
@@ -727,32 +729,51 @@ export interface Domain {
   domain: string
   organizationId: string
   projectId: string
+  /** Status of the automatic renewal of the domain. */
   autoRenewStatus: DomainFeatureStatus
+  /** Status of the DNSSEC configuration of the domain. */
   dnssec?: DomainDNSSEC
+  /** List of the domain's EPP codes. */
   eppCode: string[]
+  /** Date of expiration of the domain. */
   expiredAt?: Date
+  /** Domain's last modification date. */
   updatedAt?: Date
   registrar: string
+  /** Indicates whether Scaleway is the domain's registrar. */
   isExternal: boolean
+  /** Status of the domain. */
   status: DomainStatus
+  /** List of the domain's DNS zones. */
   dnsZones: DNSZone[]
+  /** Contact information of the domain's owner. */
   ownerContact?: Contact
+  /** Contact information of the domain's technical contact. */
   technicalContact?: Contact
+  /** Contact information of the domain's administrative contact. */
   administrativeContact?: Contact
   /**
+   * Registration status of an external domain, if available.
+   *
    * One-of ('registrationStatus'): at most one of
    * 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be
    * set.
    */
   externalDomainRegistrationStatus?: DomainRegistrationStatusExternalDomain
   /**
+   * Status of a domain, when available for transfer.
+   *
    * One-of ('registrationStatus'): at most one of
    * 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be
    * set.
    */
   transferRegistrationStatus?: DomainRegistrationStatusTransfer
+  /** Domain's TLD information. */
   tld?: Tld
+  /** List of Scaleway resources linked to the domain. */
   linkedProducts: LinkedProduct[]
+  /** Indicates if a trade is ongoing. */
+  pendingTrade: boolean
 }
 
 export type ExportRawDNSZoneRequest = {

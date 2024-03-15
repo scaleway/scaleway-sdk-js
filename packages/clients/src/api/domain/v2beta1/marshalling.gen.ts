@@ -589,6 +589,7 @@ export const unmarshalDomain = (data: unknown): Domain => {
     ownerContact: data.owner_contact
       ? unmarshalContact(data.owner_contact)
       : undefined,
+    pendingTrade: data.pending_trade,
     projectId: data.project_id,
     registrar: data.registrar,
     status: data.status,
@@ -1072,6 +1073,7 @@ const unmarshalDomainSummary = (data: unknown): DomainSummary => {
 
   return {
     autoRenewStatus: data.auto_renew_status,
+    createdAt: unmarshalDate(data.created_at),
     dnssecStatus: data.dnssec_status,
     domain: data.domain,
     eppCode: data.epp_code,
@@ -1083,6 +1085,7 @@ const unmarshalDomainSummary = (data: unknown): DomainSummary => {
       : undefined,
     isExternal: data.is_external,
     organizationId: data.organization_id,
+    pendingTrade: data.pending_trade,
     projectId: data.project_id,
     registrar: data.registrar,
     status: data.status,
