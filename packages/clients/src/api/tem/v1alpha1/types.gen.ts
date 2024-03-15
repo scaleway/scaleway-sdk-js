@@ -58,6 +58,13 @@ export type ListEmailsRequestOrderBy =
   | 'subject_desc'
   | 'subject_asc'
 
+export interface DomainRecordsDMARC {
+  /** Name of the DMARC TXT record. */
+  name: string
+  /** Value of the DMARC TXT record. */
+  value: string
+}
+
 export interface EmailTry {
   /** Rank number of this attempt to send the email. */
   rank: number
@@ -73,6 +80,11 @@ export interface EmailTry {
    * message returned explains what happened.
    */
   message: string
+}
+
+export interface DomainRecords {
+  /** DMARC TXT record specification. */
+  dmarc?: DomainRecordsDMARC
 }
 
 export interface DomainReputation {
@@ -217,6 +229,8 @@ export interface Domain {
    * sent enough emails.
    */
   reputation?: DomainReputation
+  /** List of records to configure to validate a domain. */
+  records?: DomainRecords
   /**
    * Region to target. If none is passed will use default region from the
    * config.
