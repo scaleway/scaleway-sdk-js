@@ -35,7 +35,7 @@ export type ListTokensRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-export type PlanName = 'unknown_name' | 'free' | 'premium' | 'custom'
+export type PlanName = 'unknown_name' | 'free' | 'premium' | 'custom' | 'expert'
 
 export interface ContactPointEmail {
   to: string
