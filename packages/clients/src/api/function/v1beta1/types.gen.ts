@@ -77,8 +77,6 @@ export type ListFunctionsRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-export type ListLogsRequestOrderBy = 'timestamp_desc' | 'timestamp_asc'
-
 export type ListNamespacesRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -88,8 +86,6 @@ export type ListNamespacesRequestOrderBy =
 export type ListTokensRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type ListTriggersRequestOrderBy = 'created_at_asc' | 'created_at_desc'
-
-export type LogStream = 'unknown' | 'stdout' | 'stderr'
 
 export type NamespaceStatus =
   | 'unknown'
@@ -295,21 +291,6 @@ export interface Function {
    */
   httpOption: FunctionHttpOption
   runtimeMessage: string
-}
-
-export interface Log {
-  /** Message of the log. */
-  message: string
-  /** Timestamp of the log. */
-  timestamp?: Date
-  /** UUID of the log. */
-  id: string
-  /** Severity of the log (info, debug, error etc.). */
-  level: string
-  /** Source of the log (core runtime or user code). */
-  source: string
-  /** Can be stdout or stderr. */
-  stream: LogStream
 }
 
 export interface Namespace {
@@ -809,29 +790,6 @@ export interface ListFunctionsResponse {
   /** Array of functions. */
   functions: Function[]
   /** Total number of functions. */
-  totalCount: number
-}
-
-export type ListLogsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** UUID of the function to get the logs for. */
-  functionId: string
-  /** Page number. */
-  page?: number
-  /** Number of logs per page. */
-  pageSize?: number
-  /** Order of the logs. */
-  orderBy?: ListLogsRequestOrderBy
-}
-
-export interface ListLogsResponse {
-  /** Array of logs. */
-  logs: Log[]
-  /** Total number of logs. */
   totalCount: number
 }
 

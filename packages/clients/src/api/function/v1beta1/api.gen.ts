@@ -36,7 +36,6 @@ import {
   unmarshalListDomainsResponse,
   unmarshalListFunctionRuntimesResponse,
   unmarshalListFunctionsResponse,
-  unmarshalListLogsResponse,
   unmarshalListNamespacesResponse,
   unmarshalListTokensResponse,
   unmarshalListTriggersResponse,
@@ -80,8 +79,6 @@ import type {
   ListFunctionRuntimesResponse,
   ListFunctionsRequest,
   ListFunctionsResponse,
-  ListLogsRequest,
-  ListLogsResponse,
   ListNamespacesRequest,
   ListNamespacesResponse,
   ListTokensRequest,
@@ -531,37 +528,6 @@ export class API extends ParentAPI {
       },
       unmarshalCron,
     )
-
-  protected pageOfListLogs = (request: Readonly<ListLogsRequest>) =>
-    this.client.fetch<ListLogsResponse>(
-      {
-        method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam('functionId', request.functionId)}/logs`,
-        urlParams: urlParams(
-          ['order_by', request.orderBy],
-          ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
-        ),
-      },
-      unmarshalListLogsResponse,
-    )
-
-  /**
-   * Deprecated (replaced by
-   * [Cockpit](https://www.scaleway.com/en/developers/api/cockpit/)). List
-   * application logs. Deprecated (replaced by
-   * [Cockpit](https://www.scaleway.com/en/developers/api/cockpit/)). List the
-   * application logs of the function with the specified ID.
-   *
-   * @deprecated
-   * @param request - The request {@link ListLogsRequest}
-   * @returns A Promise of ListLogsResponse
-   */
-  listLogs = (request: Readonly<ListLogsRequest>) =>
-    enrichForPagination('logs', this.pageOfListLogs, request)
 
   protected pageOfListDomains = (request: Readonly<ListDomainsRequest>) =>
     this.client.fetch<ListDomainsResponse>(
