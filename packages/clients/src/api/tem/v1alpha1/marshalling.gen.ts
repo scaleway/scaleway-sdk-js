@@ -18,6 +18,8 @@ import type {
   DomainLastStatusDkimRecord,
   DomainLastStatusDmarcRecord,
   DomainLastStatusSpfRecord,
+  DomainRecords,
+  DomainRecordsDMARC,
   DomainReputation,
   DomainStatistics,
   Email,
@@ -68,6 +70,31 @@ export const unmarshalEmail = (data: unknown): Email => {
   } as Email
 }
 
+const unmarshalDomainRecordsDMARC = (data: unknown): DomainRecordsDMARC => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRecordsDMARC' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+    value: data.value,
+  } as DomainRecordsDMARC
+}
+
+const unmarshalDomainRecords = (data: unknown): DomainRecords => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRecords' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    dmarc: data.dmarc ? unmarshalDomainRecordsDMARC(data.dmarc) : undefined,
+  } as DomainRecords
+}
+
 const unmarshalDomainReputation = (data: unknown): DomainReputation => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -116,6 +143,7 @@ export const unmarshalDomain = (data: unknown): Domain => {
     nextCheckAt: unmarshalDate(data.next_check_at),
     organizationId: data.organization_id,
     projectId: data.project_id,
+    records: data.records ? unmarshalDomainRecords(data.records) : undefined,
     region: data.region,
     reputation: data.reputation
       ? unmarshalDomainReputation(data.reputation)

@@ -17,6 +17,8 @@ export type {
   DomainLastStatusDmarcRecord,
   DomainLastStatusRecordStatus,
   DomainLastStatusSpfRecord,
+  DomainRecords,
+  DomainRecordsDMARC,
   DomainReputation,
   DomainReputationStatus,
   DomainStatistics,
