@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.21.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.21.0...@scaleway/sdk@2.21.1) (2024-03-18)
+
+**Note:** Version bump only for package @scaleway/sdk
+
 ## [2.21.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.20.0...@scaleway/sdk@2.21.0) (2024-03-18)
 
 ### Features
