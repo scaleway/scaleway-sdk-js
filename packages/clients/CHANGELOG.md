@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.21.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.20.0...@scaleway/sdk@2.21.0) (2024-03-18)
+
+### Features
+
+- **cockpit:** add new Expert plan ([#1188](https://github.com/scaleway/scaleway-sdk-js/issues/1188)) ([7f7030e](https://github.com/scaleway/scaleway-sdk-js/commit/7f7030eb5a548aab047150b6fa24e28d821dccd4))
+- **domain:** add status on Domain for trade integration ([#1185](https://github.com/scaleway/scaleway-sdk-js/issues/1185)) ([1a23b6a](https://github.com/scaleway/scaleway-sdk-js/commit/1a23b6a39021afd5cecd1e1688e2d6c3b74ea31c))
+- **marketplace:** remove deprecated v1 ([#1182](https://github.com/scaleway/scaleway-sdk-js/issues/1182)) ([ab8bdae](https://github.com/scaleway/scaleway-sdk-js/commit/ab8bdaef0b3109ae94cf3b41807745fd01dcaf2a))
+- **serverless:** remove serverless metrics and logs endpoints ([#1187](https://github.com/scaleway/scaleway-sdk-js/issues/1187)) ([1c3f106](https://github.com/scaleway/scaleway-sdk-js/commit/1c3f106577243de76732c3d2ad981e644d25ed7c))
+- **tem:** add domain records and DMARC configuration ([#1186](https://github.com/scaleway/scaleway-sdk-js/issues/1186)) ([5d43aaa](https://github.com/scaleway/scaleway-sdk-js/commit/5d43aaa421036979c05824c8b602774e8f176dc4))
+
 ## [2.20.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.19.0...@scaleway/sdk@2.20.0) (2024-03-11)
 
 ### Features
