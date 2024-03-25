@@ -1515,6 +1515,11 @@ export type ListLbsRequest = {
    * returned.
    */
   projectId?: string
+  /**
+   * Filter by tag, only Load Balancers with one or more matching tags will be
+   * returned.
+   */
+  tags?: string[]
 }
 
 export interface ListLbsResponse {
@@ -2562,6 +2567,11 @@ export type ZonedApiListLbsRequest = {
    * returned.
    */
   projectId?: string
+  /**
+   * Filter by tag, only Load Balancers with one or more matching tags will be
+   * returned.
+   */
+  tags?: string[]
 }
 
 export type ZonedApiListRoutesRequest = {
