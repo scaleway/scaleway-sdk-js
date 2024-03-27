@@ -12,6 +12,7 @@ export type {
   AddInstanceACLRulesResponse,
   AddInstanceSettingsRequest,
   AddInstanceSettingsResponse,
+  ApplyInstanceMaintenanceRequest,
   BackupSchedule,
   CloneInstanceRequest,
   CreateDatabaseRequest,

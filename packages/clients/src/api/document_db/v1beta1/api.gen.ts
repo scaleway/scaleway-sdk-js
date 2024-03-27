@@ -56,6 +56,7 @@ import {
   unmarshalListPrivilegesResponse,
   unmarshalListSnapshotsResponse,
   unmarshalListUsersResponse,
+  unmarshalMaintenance,
   unmarshalPrivilege,
   unmarshalReadReplica,
   unmarshalSetInstanceACLRulesResponse,
@@ -68,6 +69,7 @@ import type {
   AddInstanceACLRulesResponse,
   AddInstanceSettingsRequest,
   AddInstanceSettingsResponse,
+  ApplyInstanceMaintenanceRequest,
   CloneInstanceRequest,
   CreateDatabaseRequest,
   CreateEndpointRequest,
@@ -119,6 +121,7 @@ import type {
   ListSnapshotsResponse,
   ListUsersRequest,
   ListUsersResponse,
+  Maintenance,
   MigrateEndpointRequest,
   Privilege,
   PromoteReadReplicaRequest,
@@ -1291,5 +1294,25 @@ export class API extends ParentAPI {
         path: `/document-db/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}/migrate`,
       },
       unmarshalEndpoint,
+    )
+
+  /**
+   * Apply an instance maintenance. Apply a pending instance maintenance on your
+   * instance. This action can generate some service interruption.
+   *
+   * @param request - The request {@link ApplyInstanceMaintenanceRequest}
+   * @returns A Promise of Maintenance
+   */
+  applyInstanceMaintenance = (
+    request: Readonly<ApplyInstanceMaintenanceRequest>,
+  ) =>
+    this.client.fetch<Maintenance>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/document-db/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/apply-maintenance`,
+      },
+      unmarshalMaintenance,
     )
 }
