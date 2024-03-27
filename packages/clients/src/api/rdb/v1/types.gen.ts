@@ -84,7 +84,12 @@ export type ListUsersRequestOrderBy =
   | 'is_admin_asc'
   | 'is_admin_desc'
 
-export type MaintenanceStatus = 'unknown' | 'pending' | 'done' | 'canceled'
+export type MaintenanceStatus =
+  | 'unknown'
+  | 'pending'
+  | 'done'
+  | 'canceled'
+  | 'ongoing'
 
 export type NodeTypeGeneration =
   | 'unknown_generation'
@@ -308,6 +313,8 @@ export interface Maintenance {
   reason: string
   /** Status of the maintenance. */
   status: MaintenanceStatus
+  /** Time when Scaleway-side maintenance will be applied. */
+  forcedAt?: Date
 }
 
 export interface ReadReplica {
@@ -672,6 +679,16 @@ export type AddInstanceSettingsRequest = {
 export interface AddInstanceSettingsResponse {
   /** Settings available on the Database Instance. */
   settings: InstanceSetting[]
+}
+
+export type ApplyInstanceMaintenanceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the Database Instance you want to apply maintenance. */
+  instanceId: string
 }
 
 export type CloneInstanceRequest = {

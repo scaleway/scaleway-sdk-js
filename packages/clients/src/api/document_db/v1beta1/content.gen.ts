@@ -24,7 +24,10 @@ export const INSTANCE_TRANSIENT_STATUSES: InstanceStatus[] = [
 ]
 
 /** Lists transient statutes of the enum {@link MaintenanceStatus}. */
-export const MAINTENANCE_TRANSIENT_STATUSES: MaintenanceStatus[] = ['pending']
+export const MAINTENANCE_TRANSIENT_STATUSES: MaintenanceStatus[] = [
+  'pending',
+  'ongoing',
+]
 
 /** Lists transient statutes of the enum {@link ReadReplicaStatus}. */
 export const READ_REPLICA_TRANSIENT_STATUSES: ReadReplicaStatus[] = [

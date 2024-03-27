@@ -159,6 +159,23 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
   } as Endpoint
 }
 
+export const unmarshalMaintenance = (data: unknown): Maintenance => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Maintenance' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    closedAt: unmarshalDate(data.closed_at),
+    forcedAt: unmarshalDate(data.forced_at),
+    reason: data.reason,
+    startsAt: unmarshalDate(data.starts_at),
+    status: data.status,
+    stopsAt: unmarshalDate(data.stops_at),
+  } as Maintenance
+}
+
 export const unmarshalReadReplica = (data: unknown): ReadReplica => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -273,22 +290,6 @@ const unmarshalLogsPolicy = (data: unknown): LogsPolicy => {
     maxAgeRetention: data.max_age_retention,
     totalDiskRetention: data.total_disk_retention,
   } as LogsPolicy
-}
-
-const unmarshalMaintenance = (data: unknown): Maintenance => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Maintenance' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    closedAt: unmarshalDate(data.closed_at),
-    reason: data.reason,
-    startsAt: unmarshalDate(data.starts_at),
-    status: data.status,
-    stopsAt: unmarshalDate(data.stops_at),
-  } as Maintenance
 }
 
 const unmarshalUpgradableVersion = (data: unknown): UpgradableVersion => {

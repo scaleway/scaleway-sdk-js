@@ -63,6 +63,7 @@ import {
   unmarshalListPrivilegesResponse,
   unmarshalListSnapshotsResponse,
   unmarshalListUsersResponse,
+  unmarshalMaintenance,
   unmarshalPrepareInstanceLogsResponse,
   unmarshalPrivilege,
   unmarshalReadReplica,
@@ -76,6 +77,7 @@ import type {
   AddInstanceACLRulesResponse,
   AddInstanceSettingsRequest,
   AddInstanceSettingsResponse,
+  ApplyInstanceMaintenanceRequest,
   CloneInstanceRequest,
   CreateDatabaseBackupRequest,
   CreateDatabaseRequest,
@@ -134,6 +136,7 @@ import type {
   ListSnapshotsResponse,
   ListUsersRequest,
   ListUsersResponse,
+  Maintenance,
   MigrateEndpointRequest,
   PrepareInstanceLogsRequest,
   PrepareInstanceLogsResponse,
@@ -1508,5 +1511,28 @@ export class API extends ParentAPI {
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}/migrate`,
       },
       unmarshalEndpoint,
+    )
+
+  /**
+   * Apply Database Instance maintenance. Apply maintenance tasks to your
+   * Database Instance. This will trigger pending maintenance tasks to start in
+   * your Database Instance and can generate service interruption. Maintenance
+   * tasks can be applied between `starts_at` and `stops_at` times, and are run
+   * directly by Scaleway at `forced_at` timestamp.
+   *
+   * @param request - The request {@link ApplyInstanceMaintenanceRequest}
+   * @returns A Promise of Maintenance
+   */
+  applyInstanceMaintenance = (
+    request: Readonly<ApplyInstanceMaintenanceRequest>,
+  ) =>
+    this.client.fetch<Maintenance>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/apply-maintenance`,
+      },
+      unmarshalMaintenance,
     )
 }
