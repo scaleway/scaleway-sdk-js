@@ -65,7 +65,7 @@
     "eslint-plugin-tsdoc": "0.2.17",
     "husky": "9.0.11",
     "jsdom": "24.0.0",
-    "lerna": "7.4.2",
+    "lerna": "8.1.2",
     "lint-staged": "15.2.2",
     "prettier": "3.2.5",
     "read-pkg": "9.0.1",
