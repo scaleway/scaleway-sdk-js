@@ -19,6 +19,7 @@ export type CNI =
   | 'weave'
   | 'flannel'
   | 'kilo'
+  | 'none'
 
 export type ClusterStatus =
   | 'unknown'
