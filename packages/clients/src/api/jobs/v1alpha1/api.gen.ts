@@ -57,10 +57,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/job-definitions`,
+        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions`,
       },
       unmarshalJobDefinition,
     )
@@ -75,13 +72,7 @@ export class API extends ParentAPI {
     this.client.fetch<JobDefinition>(
       {
         method: 'GET',
-        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/job-definitions/${validatePathParam(
-          'jobDefinitionId',
-          request.jobDefinitionId,
-        )}`,
+        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}`,
       },
       unmarshalJobDefinition,
     )
@@ -92,10 +83,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListJobDefinitionsResponse>(
       {
         method: 'GET',
-        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/job-definitions`,
+        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
@@ -137,13 +125,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/job-definitions/${validatePathParam(
-          'jobDefinitionId',
-          request.jobDefinitionId,
-        )}`,
+        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}`,
       },
       unmarshalJobDefinition,
     )
@@ -156,13 +138,7 @@ export class API extends ParentAPI {
   deleteJobDefinition = (request: Readonly<DeleteJobDefinitionRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/serverless-jobs/v1alpha1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/job-definitions/${validatePathParam(
-        'jobDefinitionId',
-        request.jobDefinitionId,
-      )}`,
+      path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}`,
     })
 
   /**
@@ -180,13 +156,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/job-definitions/${validatePathParam(
-          'jobDefinitionId',
-          request.jobDefinitionId,
-        )}/start`,
+        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/start`,
       },
       unmarshalStartJobDefinitionResponse,
     )
@@ -201,10 +171,7 @@ export class API extends ParentAPI {
     this.client.fetch<JobRun>(
       {
         method: 'GET',
-        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/job-runs/${validatePathParam('jobRunId', request.jobRunId)}`,
+        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-runs/${validatePathParam('jobRunId', request.jobRunId)}`,
       },
       unmarshalJobRun,
     )
@@ -221,10 +188,7 @@ export class API extends ParentAPI {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/job-runs/${validatePathParam('jobRunId', request.jobRunId)}/stop`,
+        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-runs/${validatePathParam('jobRunId', request.jobRunId)}/stop`,
       },
       unmarshalJobRun,
     )
@@ -233,10 +197,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListJobRunsResponse>(
       {
         method: 'GET',
-        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/job-runs`,
+        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-runs`,
         urlParams: urlParams(
           ['job_definition_id', request.jobDefinitionId],
           ['order_by', request.orderBy],
