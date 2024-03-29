@@ -65,6 +65,7 @@ export interface JobRun {
   command: string
   environmentVariables: Record<string, string>
   localStorageCapacity: number
+  startedAt?: Date
   /**
    * Region to target. If none is passed will use default region from the
    * config.
