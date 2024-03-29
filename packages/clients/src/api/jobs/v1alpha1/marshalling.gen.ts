@@ -82,6 +82,7 @@ export const unmarshalJobRun = (data: unknown): JobRun => {
     memoryLimit: data.memory_limit,
     region: data.region,
     runDuration: data.run_duration,
+    startedAt: unmarshalDate(data.started_at),
     state: data.state,
     terminatedAt: unmarshalDate(data.terminated_at),
     updatedAt: unmarshalDate(data.updated_at),
