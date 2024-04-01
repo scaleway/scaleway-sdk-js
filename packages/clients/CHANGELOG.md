@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.22.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.21.1...@scaleway/sdk@2.22.0) (2024-04-01)
+
+### Features
+
+- **k8s:** allow cluster with cni=none ([#1204](https://github.com/scaleway/scaleway-sdk-js/issues/1204)) ([d5343ca](https://github.com/scaleway/scaleway-sdk-js/commit/d5343cad98f40998be3706f7ddb10ca9c2d93c26))
+- **lb:** remove exclude from lb tag filter ([#1197](https://github.com/scaleway/scaleway-sdk-js/issues/1197)) ([3ba104a](https://github.com/scaleway/scaleway-sdk-js/commit/3ba104a2b0962a58cbbceb77bfb7dcd596ef1e53))
+- **llm_inference:** add v1beta1 ([#1201](https://github.com/scaleway/scaleway-sdk-js/issues/1201)) ([571e7ff](https://github.com/scaleway/scaleway-sdk-js/commit/571e7ffe3f7284848ed42b874928379155e3cc67))
+- **rdb:** add apply maintenance ([#1200](https://github.com/scaleway/scaleway-sdk-js/issues/1200)) ([e742fcc](https://github.com/scaleway/scaleway-sdk-js/commit/e742fcce8271797c79961214e1ca22ace9e49e0e))
+- **secret:** add tags filter for browse secrets ([#1198](https://github.com/scaleway/scaleway-sdk-js/issues/1198)) ([dbc4c9a](https://github.com/scaleway/scaleway-sdk-js/commit/dbc4c9a393df8948f93189fef96d75a97827a00b))
+- **serverless_jobs:** add started_at in JobRun ([#1205](https://github.com/scaleway/scaleway-sdk-js/issues/1205)) ([748e4f9](https://github.com/scaleway/scaleway-sdk-js/commit/748e4f9b54570cb0887b645ad5d56bfc87400915))
+
+### Bug Fixes
+
+- **rdb:** set maintenance pending status as non-transient ([#1210](https://github.com/scaleway/scaleway-sdk-js/issues/1210)) ([64f5be8](https://github.com/scaleway/scaleway-sdk-js/commit/64f5be8141d0c8501b0887fdbac9a9e7a8ad84ee))
+
 ## [2.21.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.21.0...@scaleway/sdk@2.21.1) (2024-03-18)
 
 **Note:** Version bump only for package @scaleway/sdk
