@@ -1025,6 +1025,7 @@ export class API extends ParentAPI {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
+          ['quotum_names', request.quotumNames],
         ),
       },
       unmarshalListQuotaResponse,
