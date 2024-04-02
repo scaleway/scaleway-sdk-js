@@ -826,6 +826,8 @@ export type ListQuotaRequest = {
   page?: number
   /** Filter by Organization ID. */
   organizationId?: string
+  /** List of quotum names to filter from. */
+  quotumNames?: string[]
 }
 
 export interface ListQuotaResponse {
