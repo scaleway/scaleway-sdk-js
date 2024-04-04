@@ -19,7 +19,12 @@ export type ListJobDefinitionsRequestOrderBy =
 export type ListJobRunsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export interface CronSchedule {
+  /** UNIX cron schedule to run job (e.g., '* * * * *'). */
   schedule: string
+  /**
+   * Timezone for the cron schedule, in tz database format (e.g.,
+   * 'Europe/Paris').
+   */
   timezone: string
 }
 
@@ -94,7 +99,10 @@ export type CreateJobDefinitionRequest = {
   localStorageCapacity?: number
   /** Image to use for the job. */
   imageUri: string
-  /** Startup command. */
+  /**
+   * Startup command. If empty or not defined, the image's default command is
+   * used.
+   */
   command: string
   /** UUID of the Scaleway Project containing the job. */
   projectId?: string
