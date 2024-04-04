@@ -64,7 +64,8 @@ export class API extends ParentAPI {
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
 
   /**
-   * Create a secret. You must specify the `region` to create a secret.
+   * Create a secret. Create a secret in a given region specified by the
+   * `region` parameter.
    *
    * @param request - The request {@link CreateSecretRequest}
    * @returns A Promise of Secret
