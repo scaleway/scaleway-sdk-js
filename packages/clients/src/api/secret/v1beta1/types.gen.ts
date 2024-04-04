@@ -141,7 +141,7 @@ export interface Secret {
   managed: boolean
   /** Returns `true` for protected secrets that cannot be deleted. */
   protected: boolean
-  /** See `Secret.Type` enum for description of values. */
+  /** See the `Secret.Type` enum for a description of values. */
   type: SecretType
   /** Location of the secret in the directory structure. */
   path: string
@@ -188,6 +188,8 @@ export interface AccessSecretVersionResponse {
    * the version.
    */
   dataCrc32?: number
+  /** See the `Secret.Type` enum for a description of values. */
+  type: SecretType
 }
 
 export type AddSecretOwnerRequest = {
@@ -243,7 +245,7 @@ export type CreateSecretRequest = {
   /** Description of the secret. */
   description?: string
   /**
-   * (Optional.) See `Secret.Type` enum for description of values. If not
+   * (Optional.) See the `Secret.Type` enum for a description of values. If not
    * specified, the type is `Opaque`.
    */
   type?: SecretType
