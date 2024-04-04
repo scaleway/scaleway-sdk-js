@@ -117,6 +117,7 @@ export const unmarshalAccessSecretVersionResponse = (
     dataCrc32: data.data_crc32,
     revision: data.revision,
     secretId: data.secret_id,
+    type: data.type,
   } as AccessSecretVersionResponse
 }
 
