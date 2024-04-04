@@ -34,6 +34,13 @@
       "rules": {
         "eslint-disable import/no-extraneous-dependencies": "off"
       }
+    },
+    {
+      "files": ["packages/clients/src/api/dedibox/v1/*.ts"],
+      "rules": {
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": "off"
+      }
     }
   ]
 }
