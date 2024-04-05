@@ -34,6 +34,7 @@ import type {
   DeleteSubnetsResponse,
   DeleteVPCRequest,
   EnableDHCPRequest,
+  EnableRoutingRequest,
   GetPrivateNetworkRequest,
   GetVPCRequest,
   ListPrivateNetworksRequest,
@@ -308,6 +309,24 @@ export class API extends ParentAPI {
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/enable-dhcp`,
       },
       unmarshalPrivateNetwork,
+    )
+
+  /**
+   * Enable routing on a VPC. Enable routing on an existing VPC. Note that you
+   * will not be able to deactivate it afterwards.
+   *
+   * @param request - The request {@link EnableRoutingRequest}
+   * @returns A Promise of VPC
+   */
+  enableRouting = (request: Readonly<EnableRoutingRequest>) =>
+    this.client.fetch<VPC>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}/enable-routing`,
+      },
+      unmarshalVPC,
     )
 
   /**

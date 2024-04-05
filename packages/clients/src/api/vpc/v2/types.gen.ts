@@ -171,6 +171,15 @@ export type EnableDHCPRequest = {
   privateNetworkId: string
 }
 
+export type EnableRoutingRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  vpcId: string
+}
+
 export type GetPrivateNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the
