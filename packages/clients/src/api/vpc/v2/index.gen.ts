@@ -11,6 +11,7 @@ export type {
   DeleteSubnetsResponse,
   DeleteVPCRequest,
   EnableDHCPRequest,
+  EnableRoutingRequest,
   GetPrivateNetworkRequest,
   GetVPCRequest,
   ListPrivateNetworksRequest,
