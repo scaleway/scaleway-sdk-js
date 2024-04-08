@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.23.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.22.0...@scaleway/sdk@2.23.0) (2024-04-08)
+
+### Features
+
+- **dedibox:** add v1 ([#1215](https://github.com/scaleway/scaleway-sdk-js/issues/1215)) ([711d33d](https://github.com/scaleway/scaleway-sdk-js/commit/711d33d191ca486ea4da23fdbbe6d6c34448a56f))
+- **iam:** allow filtering by name in ListQuotas ([#1212](https://github.com/scaleway/scaleway-sdk-js/issues/1212)) ([39e03b4](https://github.com/scaleway/scaleway-sdk-js/commit/39e03b470deb6dbb7b8c1e52af652b7cd762b111))
+- **secret_manager:** return type on AccessSecretVersion ([#1214](https://github.com/scaleway/scaleway-sdk-js/issues/1214)) ([f29c488](https://github.com/scaleway/scaleway-sdk-js/commit/f29c488a27d731c9106baa1ae15879ec492d9e1d))
+- **vpc/v2:** allow routing activation on existing VPCs ([#1221](https://github.com/scaleway/scaleway-sdk-js/issues/1221)) ([706f4a7](https://github.com/scaleway/scaleway-sdk-js/commit/706f4a72f2d7630982eacfb913cf8bf498da8a53))
+
 ## [2.22.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.21.1...@scaleway/sdk@2.22.0) (2024-04-01)
 
 ### Features
