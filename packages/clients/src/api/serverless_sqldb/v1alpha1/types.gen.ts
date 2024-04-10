@@ -18,8 +18,8 @@ export type DatabaseStatus =
   | 'locked'
 
 export type ListDatabaseBackupsRequestOrderBy =
-  | 'created_at_asc'
   | 'created_at_desc'
+  | 'created_at_asc'
 
 export type ListDatabasesRequestOrderBy =
   | 'created_at_asc'
