@@ -72,6 +72,7 @@ export const unmarshalHosting = (data: unknown): Hosting => {
     offerEndOfLife: data.offer_end_of_life,
     offerId: data.offer_id,
     offerName: data.offer_name,
+    oneTimePassword: data.one_time_password,
     options: unmarshalArrayOfObject(data.options, unmarshalHostingOption),
     organizationId: data.organization_id,
     platformGroup: data.platform_group,
