@@ -467,6 +467,33 @@ export type ProtectSecretRequest = {
   secretId: string
 }
 
+export interface SecretTypeBasicCredentials {
+  /** The username or identifier associated with the credentials. */
+  username: string
+  /** The password associated with the credentials. */
+  password: string
+}
+
+export interface SecretTypeDatabaseCredentials {
+  /** Supported database engines are: 'postgres', 'mysql', 'other'. */
+  engine: string
+  /** The username used to authenticate to the database server. */
+  username: string
+  /** The password used to authenticate to the database server. */
+  password: string
+  /** The hostname or resolvable DNS name of the database server. */
+  host: string
+  /** The name of the database to connect to. */
+  dbname: string
+  /** The port must be an integer ranging from 0 to 65535. */
+  port: string
+}
+
+export interface SecretTypeSSHKey {
+  /** The private SSH key. */
+  sshPrivateKey: string
+}
+
 export type UnprotectSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the

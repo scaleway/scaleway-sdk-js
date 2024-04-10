@@ -34,9 +34,13 @@ export type {
   Secret,
   SecretStatus,
   SecretType,
+  SecretTypeBasicCredentials,
+  SecretTypeDatabaseCredentials,
+  SecretTypeSSHKey,
   SecretVersion,
   SecretVersionStatus,
   UnprotectSecretRequest,
   UpdateSecretRequest,
   UpdateSecretVersionRequest,
 } from './types.gen'
+export * as ValidationRules from './validation-rules.gen'
