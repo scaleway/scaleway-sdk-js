@@ -86,6 +86,7 @@ export class API extends ParentAPI {
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
@@ -201,6 +202,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['job_definition_id', request.jobDefinitionId],
           ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
