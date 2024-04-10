@@ -159,6 +159,11 @@ export interface Hosting {
   ipv6: string
   /** Whether the hosting is protected or not. */
   protected: boolean
+  /**
+   * One-time-password used for the first login or reset password, empty after
+   * first use.
+   */
+  oneTimePassword: string
   /** Region where the Web Hosting plan is hosted. */
   region: Region
 }
