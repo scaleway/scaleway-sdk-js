@@ -155,6 +155,7 @@ export type ListJobDefinitionsRequest = {
   pageSize?: number
   orderBy?: ListJobDefinitionsRequestOrderBy
   projectId?: string
+  organizationId?: string
 }
 
 export interface ListJobDefinitionsResponse {
@@ -173,6 +174,7 @@ export type ListJobRunsRequest = {
   orderBy?: ListJobRunsRequestOrderBy
   jobDefinitionId?: string
   projectId?: string
+  organizationId?: string
 }
 
 export interface ListJobRunsResponse {
