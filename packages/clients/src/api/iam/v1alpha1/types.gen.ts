@@ -304,6 +304,12 @@ export interface Quotum {
    * One-of ('value'): at most one of 'limit', 'unlimited' could be set.
    */
   unlimited?: boolean
+  /** A human-readable name for the quota. */
+  prettyName: string
+  /** The unit in which the quota is expressed. */
+  unit: string
+  /** Details about the quota. */
+  description: string
 }
 
 export interface Rule {
