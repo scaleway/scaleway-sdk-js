@@ -154,6 +154,29 @@ export interface Secret {
   region: Region
 }
 
+export type AccessSecretVersionByPathRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /**
+   * The first version of the secret is numbered 1, and all subsequent revisions
+   * augment by 1. Value can be either:
+   *
+   * - An integer (the revision number)
+   * - "latest" (the latest revision)
+   * - "latest_enabled" (the latest enabled revision).
+   */
+  revision: string
+  /** Secret's path. */
+  secretPath: string
+  /** Secret's name. */
+  secretName: string
+  /** ID of the Project to target. */
+  projectId?: string
+}
+
 export type AccessSecretVersionRequest = {
   /**
    * Region to target. If none is passed will use default region from the

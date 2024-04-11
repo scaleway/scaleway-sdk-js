@@ -22,6 +22,7 @@ import {
   unmarshalSecretVersion,
 } from './marshalling.gen'
 import type {
+  AccessSecretVersionByPathRequest,
   AccessSecretVersionRequest,
   AccessSecretVersionResponse,
   AddSecretOwnerRequest,
@@ -360,6 +361,33 @@ export class API extends ParentAPI {
       {
         method: 'GET',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}/access`,
+      },
+      unmarshalAccessSecretVersionResponse,
+    )
+
+  /**
+   * Access a secret's version using the secret's name and path. Access
+   * sensitive data in a secret's version specified by the `region`,
+   * `secret_name`, `secret_path` and `revision` parameters.
+   *
+   * @param request - The request {@link AccessSecretVersionByPathRequest}
+   * @returns A Promise of AccessSecretVersionResponse
+   */
+  accessSecretVersionByPath = (
+    request: Readonly<AccessSecretVersionByPathRequest>,
+  ) =>
+    this.client.fetch<AccessSecretVersionResponse>(
+      {
+        method: 'GET',
+        path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets-by-path/versions/${validatePathParam('revision', request.revision)}/access`,
+        urlParams: urlParams(
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
+          ['secret_name', request.secretName],
+          ['secret_path', request.secretPath],
+        ),
       },
       unmarshalAccessSecretVersionResponse,
     )
