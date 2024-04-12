@@ -189,8 +189,11 @@ export const unmarshalQuotum = (data: unknown): Quotum => {
   }
 
   return {
+    description: data.description,
     limit: data.limit,
     name: data.name,
+    prettyName: data.pretty_name,
+    unit: data.unit,
     unlimited: data.unlimited,
   } as Quotum
 }
