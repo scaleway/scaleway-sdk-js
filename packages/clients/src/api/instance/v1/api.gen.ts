@@ -350,6 +350,7 @@ export class API extends ParentAPI {
               ? request.tags.join(',')
               : undefined,
           ],
+          ['with_ip', request.withIp],
           ['without_ip', request.withoutIp],
         ),
       },

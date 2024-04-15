@@ -122,17 +122,26 @@ export type SetServerRequest = {
    * is set to True you cannot set it back to False).
    */
   routedIpEnabled?: boolean
-  /** True if IPv6 is enabled. */
-  enableIpv6: boolean
+  /**
+   * @deprecated True if IPv6 is enabled (deprecated and always `False` when
+   *   `routed_ip_enabled` is `True`).
+   */
+  enableIpv6?: boolean
   /** Instance host name. */
   hostname: string
   /** Provide information on the Instance image. */
   image?: Image
   /** Instance protection option is activated. */
   protected: boolean
-  /** Instance private IP address. */
+  /**
+   * @deprecated Instance private IP address (deprecated and always `null` when
+   *   `routed_ip_enabled` is `True`).
+   */
   privateIp?: string
-  /** Information about the public IP. */
+  /**
+   * @deprecated Information about the public IP (deprecated in favor of
+   *   `public_ips`).
+   */
   publicIp?: ServerIp
   /** Information about all the public IPs attached to the server. */
   publicIps?: ServerIp[]
@@ -142,7 +151,10 @@ export type SetServerRequest = {
   state?: ServerState
   /** Instance location. */
   location?: ServerLocation
-  /** Instance IPv6 address. */
+  /**
+   * @deprecated Instance IPv6 address (deprecated when `routed_ip_enabled` is
+   *   `True`).
+   */
   ipv6?: ServerIpv6
   /** @deprecated Instance bootscript. */
   bootscript?: Bootscript
