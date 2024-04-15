@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.24.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.23.0...@scaleway/sdk@2.24.0) (2024-04-15)
+
+### Features
+
+- **iam:** add new quota fields ([#1231](https://github.com/scaleway/scaleway-sdk-js/issues/1231)) ([0a4be74](https://github.com/scaleway/scaleway-sdk-js/commit/0a4be74dd1184a99ed2db39dfcdbc8e14a8a25e7))
+- **secret_manager:** add AccessSecretVersionByPath endpoint ([#1232](https://github.com/scaleway/scaleway-sdk-js/issues/1232)) ([ded7597](https://github.com/scaleway/scaleway-sdk-js/commit/ded759733f81d72d4cfc008bb3b5b7b5dbcd9a9e))
+- **secret_manager:** add secret type messages to simplify deserialization ([#1227](https://github.com/scaleway/scaleway-sdk-js/issues/1227)) ([4536b46](https://github.com/scaleway/scaleway-sdk-js/commit/4536b46bd4a97cc49b38be4303d7ba5d3218e568))
+- **serverless_jobs:** filter job defs and runs by organization_id ([#1228](https://github.com/scaleway/scaleway-sdk-js/issues/1228)) ([736b1c8](https://github.com/scaleway/scaleway-sdk-js/commit/736b1c87e60c590d19a248406cebe81d8d996850))
+- **serverless_sqldb:** swap values of OrderBy of message ListDatabaseBackupsRequest ([#1230](https://github.com/scaleway/scaleway-sdk-js/issues/1230)) ([7c9a9b3](https://github.com/scaleway/scaleway-sdk-js/commit/7c9a9b3eefefd34e448d63a0039f2770f71472b7))
+- **webhosting:** add one-time-password to hosting responses ([#1229](https://github.com/scaleway/scaleway-sdk-js/issues/1229)) ([d13076c](https://github.com/scaleway/scaleway-sdk-js/commit/d13076c2a8bd1d68aa9dc61d254ec930a4bdc109))
+
 ## [2.23.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.22.0...@scaleway/sdk@2.23.0) (2024-04-08)
 
 ### Features
