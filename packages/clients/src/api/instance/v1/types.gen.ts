@@ -408,17 +408,26 @@ export interface Server {
   dynamicIpRequired: boolean
   /** True to configure the instance so it uses the new routed IP mode. */
   routedIpEnabled: boolean
-  /** True if IPv6 is enabled. */
-  enableIpv6: boolean
+  /**
+   * @deprecated True if IPv6 is enabled (deprecated and always `False` when
+   *   `routed_ip_enabled` is `True`).
+   */
+  enableIpv6?: boolean
   /** Instance host name. */
   hostname: string
   /** Information about the Instance image. */
   image?: Image
   /** Defines whether the Instance protection option is activated. */
   protected: boolean
-  /** Private IP address of the Instance. */
+  /**
+   * Private IP address of the Instance (deprecated and always `null` when
+   * `routed_ip_enabled` is `True`).
+   */
   privateIp?: string
-  /** Information about the public IP. */
+  /**
+   * @deprecated Information about the public IP (deprecated in favor of
+   *   `public_ips`).
+   */
   publicIp?: ServerIp
   /** Information about all the public IPs attached to the server. */
   publicIps: ServerIp[]
@@ -430,7 +439,10 @@ export interface Server {
   state: ServerState
   /** Instance location. */
   location?: ServerLocation
-  /** Instance IPv6 address. */
+  /**
+   * @deprecated Instance IPv6 address (deprecated when `routed_ip_enabled` is
+   *   `True`).
+   */
   ipv6?: ServerIpv6
   /** @deprecated Instance bootscript. */
   bootscript?: Bootscript
@@ -987,9 +999,12 @@ export type CreateServerRequest = {
   image: string
   /** Volumes attached to the server. */
   volumes?: Record<string, VolumeServerTemplate>
-  /** True if IPv6 is enabled on the server. */
-  enableIpv6: boolean
-  /** ID of the reserved IP to attach to the Instance. */
+  /**
+   * @deprecated True if IPv6 is enabled on the server (deprecated and always
+   *   `False` when `routed_ip_enabled` is `True`).
+   */
+  enableIpv6?: boolean
+  /** @deprecated ID of the reserved IP to attach to the Instance. */
   publicIp?: string
   /** A list of reserved IP IDs to attach to the Instance. */
   publicIps?: string[]
@@ -1581,10 +1596,12 @@ export type ListServersRequest = {
    * "server1" but not "foo").
    */
   name?: string
-  /** List Instances by private_ip. */
+  /** @deprecated List Instances by private_ip. */
   privateIp?: string
   /** List Instances that are not attached to a public IP. */
   withoutIp?: boolean
+  /** List Instances by IP (both private_ip and public_ip are supported). */
+  withIp?: string
   /** List Instances of this commercial type. */
   commercialType?: string
   /** List Instances in this state. */
@@ -2001,6 +2018,7 @@ export type UpdateServerRequest = {
   routedIpEnabled?: boolean
   /** A list of reserved IP IDs to attach to the Instance. */
   publicIps?: string[]
+  /** @deprecated */
   enableIpv6?: boolean
   protected?: boolean
   securityGroup?: SecurityGroupTemplate
