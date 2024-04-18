@@ -542,6 +542,11 @@ export interface Cluster {
   privateNetworkId?: string
   /** Date on which it will be possible to switch to a smaller offer. */
   commitmentEndsAt?: Date
+  /**
+   * @deprecated Defines whether routed IPs are enabled for nodes of this
+   *   cluster.
+   */
+  routedIpEnabled?: boolean
 }
 
 export interface Node {
