@@ -129,6 +129,7 @@ const unmarshalEndpointPrivateNetworkDetails = (
 
   return {
     privateNetworkId: data.private_network_id,
+    provisioningMode: data.provisioning_mode,
     serviceIp: data.service_ip,
     zone: data.zone,
   } as EndpointPrivateNetworkDetails

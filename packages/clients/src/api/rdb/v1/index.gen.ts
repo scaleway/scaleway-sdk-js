@@ -43,6 +43,7 @@ export type {
   EndpointDirectAccessDetails,
   EndpointLoadBalancerDetails,
   EndpointPrivateNetworkDetails,
+  EndpointPrivateNetworkDetailsProvisioningMode,
   EndpointSpec,
   EndpointSpecLoadBalancer,
   EndpointSpecPrivateNetwork,

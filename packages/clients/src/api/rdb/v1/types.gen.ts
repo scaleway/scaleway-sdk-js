@@ -18,6 +18,8 @@ export type DatabaseBackupStatus =
   | 'exporting'
   | 'locked'
 
+export type EndpointPrivateNetworkDetailsProvisioningMode = 'static' | 'ipam'
+
 export type EngineSettingPropertyType = 'BOOLEAN' | 'INT' | 'STRING' | 'FLOAT'
 
 export type InstanceLogStatus = 'unknown' | 'ready' | 'creating' | 'error'
@@ -139,6 +141,8 @@ export interface EndpointPrivateNetworkDetails {
   serviceIp: string
   /** Private network zone. */
   zone: Zone
+  /** How endpoint ips are provisioned. */
+  provisioningMode: EndpointPrivateNetworkDetailsProvisioningMode
 }
 
 export interface EndpointSpecPrivateNetworkIpamConfig {}
