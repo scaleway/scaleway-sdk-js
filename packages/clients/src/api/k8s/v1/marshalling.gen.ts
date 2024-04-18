@@ -219,6 +219,7 @@ export const unmarshalCluster = (data: unknown): Cluster => {
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
     region: data.region,
+    routedIpEnabled: data.routed_ip_enabled,
     status: data.status,
     tags: data.tags,
     type: data.type,
