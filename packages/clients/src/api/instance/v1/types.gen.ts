@@ -759,21 +759,24 @@ export type ApplyBlockMigrationRequest = {
   zone?: Zone
   /**
    * The volume to migrate, along with potentially other resources, according to
-   * the migration plan generated with a call to PlanBlockMigration.
+   * the migration plan generated with a call to the "Plan a migration"
+   * endpoint.
    *
    * One-of ('resource'): at most one of 'volumeId', 'snapshotId' could be set.
    */
   volumeId?: string
   /**
    * The snapshot to migrate, along with potentially other resources, according
-   * to the migration plan generated with a call to PlanBlockMigration.
+   * to the migration plan generated with a call to the "Plan a migration"
+   * endpoint.
    *
    * One-of ('resource'): at most one of 'volumeId', 'snapshotId' could be set.
    */
   snapshotId?: string
   /**
-   * A value to be retrieved from a call to PlanBlockMigration, to confirm that
-   * the volume and/or snapshots specified in said plan should be migrated.
+   * A value to be retrieved from a call to the "Plan a migration" endpoint, to
+   * confirm that the volume and/or snapshots specified in said plan should be
+   * migrated.
    */
   validationKey: string
 }
@@ -1737,8 +1740,8 @@ export interface MigrationPlan {
    */
   snapshots: Snapshot[]
   /**
-   * A value to be passed to ApplyBlockMigrationRequest, to confirm that the
-   * execution of the plan is being requested.
+   * A value to be passed to the call to the "Apply a migration plan" endpoint,
+   * to confirm that the execution of the plan is being requested.
    */
   validationKey: string
 }

@@ -1577,12 +1577,13 @@ export class API extends ParentAPI {
 
   /**
    * Get a volume or snapshot's migration plan. Given a volume or snapshot,
-   * returns the migration plan for a call to the RPC ApplyBlockMigration. This
-   * plan will include zero or one volume, and zero or more snapshots, which
-   * will need to be migrated together. This RPC does not perform the actual
-   * migration itself, ApplyBlockMigration must be used. The validation_key
-   * value returned by this call must be provided to the ApplyBlockMigration
-   * call to confirm that all resources listed in the plan should be migrated.
+   * returns the migration plan for a call to the "Apply a migration plan"
+   * endpoint. This plan will include zero or one volume, and zero or more
+   * snapshots, which will need to be migrated together. This endpoint does not
+   * perform the actual migration itself, the "Apply a migration plan" endpoint
+   * must be used. The validation_key value returned by this endpoint must be
+   * provided to the call to the "Apply a migration plan" endpoint to confirm
+   * that all resources listed in the plan should be migrated.
    *
    * @param request - The request {@link PlanBlockMigrationRequest}
    * @returns A Promise of MigrationPlan
@@ -1602,9 +1603,9 @@ export class API extends ParentAPI {
 
   /**
    * Migrate a volume and/or snapshots to SBS (Scaleway Block Storage). To be
-   * used, this RPC must be preceded by a call to PlanBlockMigration. To migrate
-   * all resources mentioned in the MigrationPlan, the validation_key returned
-   * in the MigrationPlan must be provided.
+   * used, the call to this endpoint must be preceded by a call to the "Plan a
+   * migration" endpoint. To migrate all resources mentioned in the migration
+   * plan, the validation_key returned in the plan must be provided.
    *
    * @param request - The request {@link ApplyBlockMigrationRequest}
    */
