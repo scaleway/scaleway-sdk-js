@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.25.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.24.0...@scaleway/sdk@2.25.0) (2024-04-22)
+
+### Features
+
+- **cockpit:** add v1 ([#1241](https://github.com/scaleway/scaleway-sdk-js/issues/1241)) ([6d8ef77](https://github.com/scaleway/scaleway-sdk-js/commit/6d8ef77b68c75a3ba15cedf212fcdcb29098c576))
+- **instance:** deprecate some fields following ipmob introduction ([#1240](https://github.com/scaleway/scaleway-sdk-js/issues/1240)) ([d8d3091](https://github.com/scaleway/scaleway-sdk-js/commit/d8d3091d26fd4cca79a280197d8555f6487dba22))
+- **k8s:** add routedIpEnabled field to Cluster ([#1243](https://github.com/scaleway/scaleway-sdk-js/issues/1243)) ([391c75e](https://github.com/scaleway/scaleway-sdk-js/commit/391c75e6916a10c79581b820d57e6ea5d4fad994))
+- **rdb:** add private network provisionning mode ([#1242](https://github.com/scaleway/scaleway-sdk-js/issues/1242)) ([40437b0](https://github.com/scaleway/scaleway-sdk-js/commit/40437b071e11802f5f8c61e211bfa48d9d42dd12))
+
 ## [2.24.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.23.0...@scaleway/sdk@2.24.0) (2024-04-15)
 
 ### Features
