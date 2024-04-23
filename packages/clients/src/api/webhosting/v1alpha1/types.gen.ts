@@ -220,6 +220,16 @@ export type CreateHostingRequest = {
   domainConfiguration?: CreateHostingRequestDomainConfiguration
 }
 
+export type CreateSessionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Hosting ID. */
+  hostingId: string
+}
+
 export type DeleteHostingRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -381,6 +391,11 @@ export type RestoreHostingRequest = {
   region?: Region
   /** Hosting ID. */
   hostingId: string
+}
+
+export interface Session {
+  /** Logged user's session URL. */
+  url: string
 }
 
 export type UpdateHostingRequest = {

@@ -6,6 +6,7 @@ export type {
   ControlPanel,
   CreateHostingRequest,
   CreateHostingRequestDomainConfiguration,
+  CreateSessionRequest,
   DeleteHostingRequest,
   DnsRecord,
   DnsRecordStatus,
@@ -33,6 +34,7 @@ export type {
   OfferProduct,
   OfferQuotaWarning,
   RestoreHostingRequest,
+  Session,
   UpdateHostingRequest,
 } from './types.gen'
 export * as ValidationRules from './validation-rules.gen'
