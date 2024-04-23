@@ -52,6 +52,7 @@ export type {
   ListVersionsResponse,
   MaintenanceWindow,
   MaintenanceWindowDayOfTheWeek,
+  MigrateClusterToRoutedIPsRequest,
   MigrateToPrivateNetworkClusterRequest,
   Node,
   NodeStatus,

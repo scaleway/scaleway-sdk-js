@@ -1102,6 +1102,15 @@ export interface ListVersionsResponse {
   versions: Version[]
 }
 
+export type MigrateClusterToRoutedIPsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  clusterId: string
+}
+
 export type MigrateToPrivateNetworkClusterRequest = {
   /**
    * Region to target. If none is passed will use default region from the
