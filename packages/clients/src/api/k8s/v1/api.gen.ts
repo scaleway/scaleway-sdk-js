@@ -63,6 +63,7 @@ import type {
   ListPoolsResponse,
   ListVersionsRequest,
   ListVersionsResponse,
+  MigrateClusterToRoutedIPsRequest,
   MigrateToPrivateNetworkClusterRequest,
   Node,
   Pool,
@@ -345,6 +346,26 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/migrate-to-private-network`,
+      },
+      unmarshalCluster,
+    )
+
+  /**
+   * Migrate a cluster to Routed IPs. Migrate the nodes of an existing cluster
+   * to Routed IPs and enable Routed IPs for all future nodes.
+   *
+   * @param request - The request {@link MigrateClusterToRoutedIPsRequest}
+   * @returns A Promise of Cluster
+   */
+  migrateClusterToRoutedIPs = (
+    request: Readonly<MigrateClusterToRoutedIPsRequest>,
+  ) =>
+    this.client.fetch<Cluster>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/migrate-to-routed-ips`,
       },
       unmarshalCluster,
     )
