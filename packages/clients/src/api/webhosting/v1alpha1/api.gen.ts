@@ -17,9 +17,11 @@ import {
   unmarshalListControlPanelsResponse,
   unmarshalListHostingsResponse,
   unmarshalListOffersResponse,
+  unmarshalSession,
 } from './marshalling.gen'
 import type {
   CreateHostingRequest,
+  CreateSessionRequest,
   DeleteHostingRequest,
   DnsRecords,
   GetDomainDnsRecordsRequest,
@@ -32,6 +34,7 @@ import type {
   ListOffersRequest,
   ListOffersResponse,
   RestoreHostingRequest,
+  Session,
   UpdateHostingRequest,
 } from './types.gen'
 
@@ -263,4 +266,21 @@ export class API extends ParentAPI {
    */
   listControlPanels = (request: Readonly<ListControlPanelsRequest> = {}) =>
     enrichForPagination('controlPanels', this.pageOfListControlPanels, request)
+
+  /**
+   * Create a user session.
+   *
+   * @param request - The request {@link CreateSessionRequest}
+   * @returns A Promise of Session
+   */
+  createSession = (request: Readonly<CreateSessionRequest>) =>
+    this.client.fetch<Session>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/sessions`,
+      },
+      unmarshalSession,
+    )
 }

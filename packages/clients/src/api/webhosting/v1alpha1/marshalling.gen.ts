@@ -22,6 +22,7 @@ import type {
   Nameserver,
   Offer,
   OfferProduct,
+  Session,
   UpdateHostingRequest,
 } from './types.gen'
 
@@ -232,6 +233,18 @@ export const unmarshalListOffersResponse = (
   return {
     offers: unmarshalArrayOfObject(data.offers, unmarshalOffer),
   } as ListOffersResponse
+}
+
+export const unmarshalSession = (data: unknown): Session => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Session' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    url: data.url,
+  } as Session
 }
 
 const marshalCreateHostingRequestDomainConfiguration = (
