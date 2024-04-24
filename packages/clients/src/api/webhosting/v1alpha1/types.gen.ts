@@ -383,6 +383,21 @@ export interface ListOffersResponse {
   offers: Offer[]
 }
 
+export type ResetHostingPasswordRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the hosting. */
+  hostingId: string
+}
+
+export interface ResetHostingPasswordResponse {
+  /** New password. */
+  password: string
+}
+
 export type RestoreHostingRequest = {
   /**
    * Region to target. If none is passed will use default region from the
