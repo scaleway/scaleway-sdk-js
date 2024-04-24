@@ -22,6 +22,7 @@ import type {
   Nameserver,
   Offer,
   OfferProduct,
+  ResetHostingPasswordResponse,
   Session,
   UpdateHostingRequest,
 } from './types.gen'
@@ -233,6 +234,20 @@ export const unmarshalListOffersResponse = (
   return {
     offers: unmarshalArrayOfObject(data.offers, unmarshalOffer),
   } as ListOffersResponse
+}
+
+export const unmarshalResetHostingPasswordResponse = (
+  data: unknown,
+): ResetHostingPasswordResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ResetHostingPasswordResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    password: data.password,
+  } as ResetHostingPasswordResponse
 }
 
 export const unmarshalSession = (data: unknown): Session => {

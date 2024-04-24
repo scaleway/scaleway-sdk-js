@@ -17,6 +17,7 @@ import {
   unmarshalListControlPanelsResponse,
   unmarshalListHostingsResponse,
   unmarshalListOffersResponse,
+  unmarshalResetHostingPasswordResponse,
   unmarshalSession,
 } from './marshalling.gen'
 import type {
@@ -33,6 +34,8 @@ import type {
   ListHostingsResponse,
   ListOffersRequest,
   ListOffersResponse,
+  ResetHostingPasswordRequest,
+  ResetHostingPasswordResponse,
   RestoreHostingRequest,
   Session,
   UpdateHostingRequest,
@@ -258,8 +261,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all control panels type. List the control panels type: cpanel or
-   * plesk.
+   * "List the control panels type: cpanel or plesk.".
    *
    * @param request - The request {@link ListControlPanelsRequest}
    * @returns A Promise of ListControlPanelsResponse
@@ -282,5 +284,16 @@ export class API extends ParentAPI {
         path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/sessions`,
       },
       unmarshalSession,
+    )
+
+  resetHostingPassword = (request: Readonly<ResetHostingPasswordRequest>) =>
+    this.client.fetch<ResetHostingPasswordResponse>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/reset-password`,
+      },
+      unmarshalResetHostingPasswordResponse,
     )
 }

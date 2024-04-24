@@ -33,6 +33,8 @@ export type {
   Offer,
   OfferProduct,
   OfferQuotaWarning,
+  ResetHostingPasswordRequest,
+  ResetHostingPasswordResponse,
   RestoreHostingRequest,
   Session,
   UpdateHostingRequest,
