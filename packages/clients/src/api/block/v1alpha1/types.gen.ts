@@ -67,7 +67,10 @@ export interface Reference {
   createdAt?: Date
   /** Type of reference (link, exclusive, read_only). */
   type: ReferenceType
-  /** Status of reference (attaching, attached, detaching). */
+  /**
+   * Status of the reference. Statuses include `attaching`, `attached`, and
+   * `detaching`.
+   */
   status: ReferenceStatus
 }
 
