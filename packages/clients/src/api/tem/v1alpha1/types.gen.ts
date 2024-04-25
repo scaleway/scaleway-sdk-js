@@ -379,11 +379,15 @@ export type ListDomainsRequest = {
   region?: Region
   /** Requested page number. Value must be greater or equal to 1. */
   page?: number
-  /** Page size. */
+  /** Requested page size. Value must be between 1 and 1000. */
   pageSize?: number
+  /** (Optional) ID of the Project in which to list the domains. */
   projectId?: string
+  /** (Optional) List domains under specific statuses. */
   status?: DomainStatus[]
+  /** (Optional) ID of the Organization in which to list the domains. */
   organizationId?: string
+  /** (Optional) Names of the domains to list. */
   name?: string
 }
 
