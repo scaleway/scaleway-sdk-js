@@ -13,6 +13,7 @@ import type {
   ListServerTypesResponse,
   ListServersResponse,
   OS,
+  ReinstallServerRequest,
   Server,
   ServerType,
   ServerTypeCPU,
@@ -30,10 +31,14 @@ export const unmarshalOS = (data: unknown): OS => {
 
   return {
     compatibleServerTypes: data.compatible_server_types,
+    family: data.family,
     id: data.id,
     imageUrl: data.image_url,
+    isBeta: data.is_beta,
     label: data.label,
     name: data.name,
+    version: data.version,
+    xcodeVersion: data.xcode_version,
   } as OS
 }
 
@@ -85,6 +90,7 @@ export const unmarshalServerType = (data: unknown): ServerType => {
 
   return {
     cpu: data.cpu ? unmarshalServerTypeCPU(data.cpu) : undefined,
+    defaultOs: data.default_os ? unmarshalOS(data.default_os) : undefined,
     disk: data.disk ? unmarshalServerTypeDisk(data.disk) : undefined,
     memory: data.memory ? unmarshalServerTypeMemory(data.memory) : undefined,
     minimumLeaseDuration: data.minimum_lease_duration,
@@ -107,6 +113,7 @@ export const unmarshalServer = (data: unknown): Server => {
     ip: data.ip,
     name: data.name,
     organizationId: data.organization_id,
+    os: data.os ? unmarshalOS(data.os) : undefined,
     projectId: data.project_id,
     status: data.status,
     type: data.type,
@@ -163,8 +170,16 @@ export const marshalCreateServerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name || randomName('as'),
+  os_id: request.osId,
   project_id: request.projectId ?? defaults.defaultProjectId,
   type: request.type,
+})
+
+export const marshalReinstallServerRequest = (
+  request: ReinstallServerRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  os_id: request.osId,
 })
 
 export const marshalUpdateServerRequest = (
