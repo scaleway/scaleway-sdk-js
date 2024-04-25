@@ -11,6 +11,7 @@ import type { WaitForOptions, Zone } from '../../../bridge'
 import { SERVER_TRANSIENT_STATUSES } from './content.gen'
 import {
   marshalCreateServerRequest,
+  marshalReinstallServerRequest,
   marshalUpdateServerRequest,
   unmarshalListOSResponse,
   unmarshalListServerTypesResponse,
@@ -277,7 +278,9 @@ export class API extends ParentAPI {
   reinstallServer = (request: Readonly<ReinstallServerRequest>) =>
     this.client.fetch<Server>(
       {
-        body: '{}',
+        body: JSON.stringify(
+          marshalReinstallServerRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/reinstall`,

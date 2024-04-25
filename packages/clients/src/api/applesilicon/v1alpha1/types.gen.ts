@@ -22,6 +22,27 @@ export type ServerTypeStock =
   | 'low_stock'
   | 'high_stock'
 
+export interface OS {
+  /** Unique ID of the OS. */
+  id: string
+  /** OS name. */
+  name: string
+  /** OS name as it should be displayed. */
+  label: string
+  /** URL of the image. */
+  imageUrl: string
+  /** The OS family to which this OS belongs, eg. 13 or 14. */
+  family: string
+  /** Describes if the OS is in beta. */
+  isBeta: boolean
+  /** The OS version number, eg. Sonoma has version number 14.3. */
+  version: string
+  /** The current xcode version for this OS. */
+  xcodeVersion: string
+  /** List of compatible server types. */
+  compatibleServerTypes: string[]
+}
+
 export interface ServerTypeCPU {
   name: string
   coreCount: number
@@ -37,19 +58,6 @@ export interface ServerTypeMemory {
   type: string
 }
 
-export interface OS {
-  /** Unique ID of the OS. */
-  id: string
-  /** OS name. */
-  name: string
-  /** OS name as it should be displayed. */
-  label: string
-  /** URL of the image. */
-  imageUrl: string
-  /** List of compatible server types. */
-  compatibleServerTypes: string[]
-}
-
 export interface ServerType {
   /** CPU description. */
   cpu?: ServerTypeCPU
@@ -63,6 +71,8 @@ export interface ServerType {
   stock: ServerTypeStock
   /** Minimum duration of the lease in seconds (example. 3.4s). */
   minimumLeaseDuration?: string
+  /** The default OS for this server type. */
+  defaultOs?: OS
 }
 
 export interface Server {
@@ -80,6 +90,11 @@ export interface Server {
   ip: string
   /** URL of the VNC. */
   vncUrl: string
+  /**
+   * Initially installed OS, this does not necessarily reflect the current OS
+   * version.
+   */
+  os?: OS
   /** Current status of the server. */
   status: ServerStatus
   /** Date on which the server was created. */
@@ -101,6 +116,12 @@ export type CreateServerRequest = {
   projectId?: string
   /** Create a server of the given type. */
   type: string
+  /**
+   * Create a server & install the given os_id, when no os_id provided the
+   * default OS for this server type is chosen. Requesting a non-default OS will
+   * induce an extended delivery time.
+   */
+  osId?: string
 }
 
 export type DeleteServerRequest = {
@@ -204,6 +225,11 @@ export type ReinstallServerRequest = {
   zone?: Zone
   /** UUID of the server you want to reinstall. */
   serverId: string
+  /**
+   * Reinstall the server with the target OS, when no os_id provided the default
+   * OS for the server type is used.
+   */
+  osId?: string
 }
 
 export type UpdateServerRequest = {
