@@ -13,7 +13,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "version": "./scripts/update-constants-file.sh",
-    "build": "vite build --config ../../vite.config.ts",
+    "typecheck": "tsc --noEmit",
+    "type:generate": "tsc --declaration -p tsconfig.build.json",
+    "build": "vite build --config ../../vite.config.ts && pnpm run type:generate",
     "build:profile": "npx vite-bundle-visualizer -c ../../vite.config.ts"
   },
   "files": [
