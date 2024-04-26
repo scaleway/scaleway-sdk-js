@@ -12,7 +12,9 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "version": "./scripts/update-constants-file.sh"
+    "version": "./scripts/update-constants-file.sh",
+    "build": "vite build --config ../../vite.config.ts",
+    "build:profile": "npx vite-bundle-visualizer -c ../../vite.config.ts"
   },
   "files": [
     "dist"

@@ -18,6 +18,10 @@
     "node": ">=14.13"
   },
   "type": "module",
+  "scripts": {
+    "build": "vite build --config ../../vite.config.ts",
+    "build:profile": "npx vite-bundle-visualizer -c ../../vite.config.ts"
+  },
   "devDependencies": {
     "@types/node": "18.11.18"
   }

@@ -1,5 +1,5 @@
-import * as fs from 'node:fs'
-import * as os from 'node:os'
+import { writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { env } from 'node:process'
 import { afterEach, describe, expect, it } from 'vitest'
@@ -10,7 +10,7 @@ import {
 import { EnvironmentKey } from '../env'
 import type { Profile } from '../types'
 
-const CONFIG_FILE_PATH = join(os.tmpdir(), 'scw-config.yaml')
+const CONFIG_FILE_PATH = join(tmpdir(), 'scw-config.yaml')
 
 const EMPTY_PROFILE: Profile = {}
 
@@ -46,7 +46,7 @@ const updateProfileInConfiFile = (
     default_region: ${newProfile.defaultRegion ?? ''}\n
     default_zone: ${newProfile.defaultZone ?? ''}\n
     secret_key: ${newProfile.secretKey ?? ''}`
-  fs.writeFileSync(filePath, yml)
+  writeFileSync(filePath, yml)
 }
 
 afterEach(() => {
