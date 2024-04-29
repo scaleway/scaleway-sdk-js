@@ -254,6 +254,23 @@ export type GetVolumeRequest = {
   volumeId: string
 }
 
+export type ImportSnapshotFromS3Request = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** Scaleway Object Storage bucket where the object is stored. */
+  bucket: string
+  /** The object key inside the given bucket. */
+  key: string
+  /** Name of the snapshot. */
+  name: string
+  /** UUID of the Project to which the volume and the snapshot belong. */
+  projectId?: string
+  /** List of tags assigned to the snapshot. */
+  tags?: string[]
+  /** Size of the snapshot. */
+  size?: number
+}
+
 export type ListSnapshotsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone

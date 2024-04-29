@@ -13,6 +13,7 @@ import type {
   CreateVolumeRequest,
   CreateVolumeRequestFromEmpty,
   CreateVolumeRequestFromSnapshot,
+  ImportSnapshotFromS3Request,
   ListSnapshotsResponse,
   ListVolumeTypesResponse,
   ListVolumesResponse,
@@ -235,6 +236,18 @@ export const marshalCreateVolumeRequest = (
     },
   ]),
   ...resolveOneOf([{ param: 'perf_iops', value: request.perfIops }]),
+})
+
+export const marshalImportSnapshotFromS3Request = (
+  request: ImportSnapshotFromS3Request,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  bucket: request.bucket,
+  key: request.key,
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  size: request.size,
+  tags: request.tags,
 })
 
 export const marshalUpdateSnapshotRequest = (
