@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.26.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.25.0...@scaleway/sdk@2.26.0) (2024-04-29)
+
+### Features
+
+- **apple_silicon:** add os selection fields ([#1252](https://github.com/scaleway/scaleway-sdk-js/issues/1252)) ([c68cc53](https://github.com/scaleway/scaleway-sdk-js/commit/c68cc539ee07d53f3843865e513362c248b114b2))
+- **block:** add ImportSnapshotFromS3Request field explanation ([#1254](https://github.com/scaleway/scaleway-sdk-js/issues/1254)) ([081d400](https://github.com/scaleway/scaleway-sdk-js/commit/081d4003b02d285925995209dc9de0cda8fe67a1))
+- **k8s:** add MigrateClusterToRoutedIPs ([#1250](https://github.com/scaleway/scaleway-sdk-js/issues/1250)) ([30adef7](https://github.com/scaleway/scaleway-sdk-js/commit/30adef791340478d9ed0c87957aed40dd0eb788b))
+- **webhosting:** add a magic link autologin url for webhosting ([#1249](https://github.com/scaleway/scaleway-sdk-js/issues/1249)) ([9bf0ff8](https://github.com/scaleway/scaleway-sdk-js/commit/9bf0ff85909887aa6467beac6474a020fdc8e178))
+- **webhosting:** add public reset hosting password ([#1251](https://github.com/scaleway/scaleway-sdk-js/issues/1251)) ([06b151b](https://github.com/scaleway/scaleway-sdk-js/commit/06b151bf0057c0c1326601c67d6507eadc313364))
+
 ## [2.25.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.24.0...@scaleway/sdk@2.25.0) (2024-04-22)
 
 ### Features
