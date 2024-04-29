@@ -15,6 +15,7 @@ import {
 import {
   marshalCreateSnapshotRequest,
   marshalCreateVolumeRequest,
+  marshalImportSnapshotFromS3Request,
   marshalUpdateSnapshotRequest,
   marshalUpdateVolumeRequest,
   unmarshalListSnapshotsResponse,
@@ -30,6 +31,7 @@ import type {
   DeleteVolumeRequest,
   GetSnapshotRequest,
   GetVolumeRequest,
+  ImportSnapshotFromS3Request,
   ListSnapshotsRequest,
   ListSnapshotsResponse,
   ListVolumeTypesRequest,
@@ -303,6 +305,27 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots`,
+      },
+      unmarshalSnapshot,
+    )
+
+  /**
+   * Import a snapshot from a Scaleway Object Storage bucket. The bucket must
+   * contain a QCOW2 image. The bucket can be imported into any Availability
+   * Zone as long as it is in the same region as the bucket.
+   *
+   * @param request - The request {@link ImportSnapshotFromS3Request}
+   * @returns A Promise of Snapshot
+   */
+  importSnapshotFromS3 = (request: Readonly<ImportSnapshotFromS3Request>) =>
+    this.client.fetch<Snapshot>(
+      {
+        body: JSON.stringify(
+          marshalImportSnapshotFromS3Request(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/import-from-s3`,
       },
       unmarshalSnapshot,
     )
