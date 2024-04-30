@@ -18,6 +18,12 @@
     "node": ">=14.13"
   },
   "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "type:generate": "tsc --declaration -p tsconfig.build.json",
+    "build": "vite build --config ../../vite.config.ts && pnpm run type:generate",
+    "build:profile": "npx vite-bundle-visualizer -c ../../vite.config.ts"
+  },
   "devDependencies": {
     "@types/node": "18.11.18"
   }

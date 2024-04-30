@@ -11,7 +11,7 @@
       "error",
       {
         "selector": "enumMember",
-        "format": ["PascalCase"],
+        "format": ["PascalCase"]
       }
     ],
     "import/prefer-default-export": "off",
