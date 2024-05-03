@@ -118,6 +118,7 @@ export const unmarshalIp = (data: unknown): Ip => {
     projectId: data.project_id,
     region: data.region,
     reverse: data.reverse,
+    tags: data.tags,
     zone: data.zone,
   } as Ip
 }
@@ -1136,6 +1137,7 @@ export const marshalCreateIpRequest = (
 ): Record<string, unknown> => ({
   is_ipv6: request.isIpv6,
   reverse: request.reverse,
+  tags: request.tags,
   ...resolveOneOf([
     {
       default: defaults.defaultProjectId,
@@ -1404,6 +1406,7 @@ export const marshalUpdateIpRequest = (
 ): Record<string, unknown> => ({
   lb_id: request.lbId,
   reverse: request.reverse,
+  tags: request.tags,
 })
 
 export const marshalUpdateLbRequest = (
@@ -1575,6 +1578,7 @@ export const marshalZonedApiCreateIpRequest = (
 ): Record<string, unknown> => ({
   is_ipv6: request.isIpv6,
   reverse: request.reverse,
+  tags: request.tags,
   ...resolveOneOf([
     {
       default: defaults.defaultProjectId,
@@ -1840,6 +1844,7 @@ export const marshalZonedApiUpdateIpRequest = (
 ): Record<string, unknown> => ({
   lb_id: request.lbId,
   reverse: request.reverse,
+  tags: request.tags,
 })
 
 export const marshalZonedApiUpdateLbRequest = (

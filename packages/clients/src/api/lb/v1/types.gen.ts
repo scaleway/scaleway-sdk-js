@@ -220,6 +220,8 @@ export interface Ip {
   lbId?: string
   /** Reverse DNS (domain name) of the IP address. */
   reverse: string
+  /** IP tags. */
+  tags: string[]
   /** @deprecated The region the IP address is in. */
   region?: Region
   /** The zone the IP address is in. */
@@ -982,6 +984,8 @@ export type CreateIpRequest = {
   reverse?: string
   /** If true, creates a Flexible IP with an ipv6 address. */
   isIpv6: boolean
+  /** List of tags for the IP. */
+  tags?: string[]
 }
 
 export type CreateLbRequest = {
@@ -1440,6 +1444,11 @@ export type ListIPsRequest = {
   projectId?: string
   /** IP type to filter for. */
   ipType?: ListIpsRequestIpType
+  /**
+   * Tag to filter for, only IPs with one or more matching tags will be
+   * returned.
+   */
+  tags?: string[]
 }
 
 export interface ListIpsResponse {
@@ -1897,6 +1906,8 @@ export type UpdateIpRequest = {
   reverse?: string
   /** ID of the server on which to attach the flexible IP. */
   lbId?: string
+  /** List of tags for the IP. */
+  tags?: string[]
 }
 
 export type UpdateLbRequest = {
@@ -2182,6 +2193,8 @@ export type ZonedApiCreateIpRequest = {
   reverse?: string
   /** If true, creates a Flexible IP with an ipv6 address. */
   isIpv6: boolean
+  /** List of tags for the IP. */
+  tags?: string[]
 }
 
 export type ZonedApiCreateLbRequest = {
@@ -2522,6 +2535,11 @@ export type ZonedApiListIPsRequest = {
   projectId?: string
   /** IP type to filter for. */
   ipType?: ListIpsRequestIpType
+  /**
+   * Tag to filter for, only IPs with one or more matching tags will be
+   * returned.
+   */
+  tags?: string[]
 }
 
 export type ZonedApiListLbPrivateNetworksRequest = {
@@ -2891,6 +2909,8 @@ export type ZonedApiUpdateIpRequest = {
   reverse?: string
   /** ID of the server on which to attach the flexible IP. */
   lbId?: string
+  /** List of tags for the IP. */
+  tags?: string[]
 }
 
 export type ZonedApiUpdateLbRequest = {
