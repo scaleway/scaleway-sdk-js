@@ -53,10 +53,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/ipam/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/ips`,
+        path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips`,
       },
       unmarshalIP,
     )
@@ -72,10 +69,7 @@ export class API extends ParentAPI {
       body: '{}',
       headers: jsonContentHeaders,
       method: 'DELETE',
-      path: `/ipam/v1/regions/${validatePathParam(
-        'region',
-        request.region ?? this.client.settings.defaultRegion,
-      )}/ips/${validatePathParam('ipId', request.ipId)}`,
+      path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
     })
 
   /**
@@ -88,10 +82,7 @@ export class API extends ParentAPI {
     this.client.fetch<IP>(
       {
         method: 'GET',
-        path: `/ipam/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/ips/${validatePathParam('ipId', request.ipId)}`,
+        path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
       },
       unmarshalIP,
     )
@@ -110,10 +101,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/ipam/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/ips/${validatePathParam('ipId', request.ipId)}`,
+        path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
       },
       unmarshalIP,
     )
@@ -122,10 +110,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListIPsResponse>(
       {
         method: 'GET',
-        path: `/ipam/v1/regions/${validatePathParam(
-          'region',
-          request.region ?? this.client.settings.defaultRegion,
-        )}/ips`,
+        path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips`,
         urlParams: urlParams(
           ['attached', request.attached],
           ['is_ipv6', request.isIpv6],
