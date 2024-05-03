@@ -115,8 +115,9 @@ export type BookIPRequest = {
   /** Request an IPv6 instead of an IPv4. */
   isIpv6: boolean
   /**
-   * Note that only the Private Network source allows you to pick a specific IP.
-   * If the requested IP is already booked, then the call will fail.
+   * The requested address should not include the subnet mask (/suffix). Note
+   * that only the Private Network source allows you to pick a specific IP. If
+   * the requested IP is already booked, then the call will fail.
    */
   address?: string
   /** Tags for the IP. */
