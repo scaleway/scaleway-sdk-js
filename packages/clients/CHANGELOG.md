@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.27.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.26.0...@scaleway/sdk@2.27.0) (2024-05-06)
+
+### Features
+
+- **block:** publish endpoint ImportSnapshotFromS3 ([#1256](https://github.com/scaleway/scaleway-sdk-js/issues/1256)) ([23abe58](https://github.com/scaleway/scaleway-sdk-js/commit/23abe58f1ae3dcac7ba15b9623ddb3fd762c162a))
+- **lb:** publish flexible ip tags feature ([#1257](https://github.com/scaleway/scaleway-sdk-js/issues/1257)) ([62bdf3b](https://github.com/scaleway/scaleway-sdk-js/commit/62bdf3bd206e7cf6b657f7c4e126a9e89608c59e))
+
 ## [2.26.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.25.0...@scaleway/sdk@2.26.0) (2024-04-29)
 
 ### Features
