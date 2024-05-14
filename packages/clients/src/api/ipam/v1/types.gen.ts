@@ -155,15 +155,26 @@ export type ListIPsRequest = {
    * Zone to filter for. Only IPs that are zonal, and in this zone, will be
    * returned.
    *
-   * One-of ('source'): at most one of 'zonal', 'privateNetworkId' could be set.
+   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId'
+   * could be set.
    */
   zonal?: string
   /**
    * Only IPs that are private, and in this Private Network, will be returned.
    *
-   * One-of ('source'): at most one of 'zonal', 'privateNetworkId' could be set.
+   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId'
+   * could be set.
    */
   privateNetworkId?: string
+  /**
+   * Only IPs inside this exact subnet will be returned.
+   *
+   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId'
+   * could be set.
+   */
+  subnetId?: string
+  /** Only IPs owned by resources in this VPC will be returned. */
+  vpcId?: string
   /** Defines whether to filter only for IPs which are attached to a resource. */
   attached?: boolean
   /**

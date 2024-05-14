@@ -31,7 +31,7 @@ const jsonContentHeaders = {
 /**
  * IPAM API.
  *
- * This API allows you to manage IP addresses with Scaleway's IP Address
+ * This API allows you to manage your Scaleway IP addresses with our IP Address
  * Management tool.
  */
 export class API extends ParentAPI {
@@ -127,10 +127,12 @@ export class API extends ParentAPI {
           ['resource_name', request.resourceName],
           ['resource_type', request.resourceType],
           ['tags', request.tags],
+          ['vpc_id', request.vpcId],
           ...Object.entries(
             resolveOneOf([
               { param: 'zonal', value: request.zonal },
               { param: 'private_network_id', value: request.privateNetworkId },
+              { param: 'subnet_id', value: request.subnetId },
             ]),
           ),
         ),
