@@ -45,7 +45,11 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/** Web Hosting API. */
+/**
+ * Web Hosting API.
+ *
+ * This API allows you to manage your Web Hosting services.
+ */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams']

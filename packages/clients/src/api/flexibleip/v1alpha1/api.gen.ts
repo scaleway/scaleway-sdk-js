@@ -44,7 +44,12 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/** Elastic Metal - Flexible IP API. */
+/**
+ * Elastic Metal - Flexible IP API.
+ *
+ * This API allows you to manage your Elastic Metal servers' flexible public IP
+ * addresses.
+ */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
   public static readonly LOCALITIES: Zone[] = [

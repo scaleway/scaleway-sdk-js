@@ -41,7 +41,7 @@ const jsonContentHeaders = {
 /**
  * Serverless SQL Databases API.
  *
- * This API allows you to manage your Serverless SQL DB databases.
+ * This API allows you to manage your Serverless SQL Databases.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */

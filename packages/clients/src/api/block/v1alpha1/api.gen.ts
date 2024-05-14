@@ -51,7 +51,7 @@ const jsonContentHeaders = {
 /**
  * Scaleway Block Storage API.
  *
- * This API allows you to use and manage your Block Storage volumes.
+ * This API allows you to manage your Block Storage volumes.
  */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */

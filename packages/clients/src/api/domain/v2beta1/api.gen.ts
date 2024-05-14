@@ -164,7 +164,7 @@ const jsonContentHeaders = {
 /**
  * Domains and DNS API.
  *
- * Manage your domains, DNS zones and records with the Domains and DNS API.
+ * This API allows you to manage your domains, DNS zones and records.
  */
 export class API extends ParentAPI {
   protected pageOfListDNSZones = (request: Readonly<ListDNSZonesRequest>) =>

@@ -24,7 +24,8 @@ import type {
 /**
  * Billing API.
  *
- * This API allows you to query your consumption.
+ * This API allows you to manage and query your Scaleway billing and
+ * consumption.
  */
 export class API extends ParentAPI {
   /**

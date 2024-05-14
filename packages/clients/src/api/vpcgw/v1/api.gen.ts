@@ -101,7 +101,11 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/** Public Gateways API. */
+/**
+ * Public Gateways API.
+ *
+ * This API allows you to manage your Public Gateways.
+ */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
   public static readonly LOCALITIES: Zone[] = [

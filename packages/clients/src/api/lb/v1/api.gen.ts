@@ -1463,7 +1463,7 @@ export class ZonedAPI extends ParentAPI {
 /**
  * Load balancer API.
  *
- * This API allows you to manage your load balancer service.
+ * This API allows you to manage your Load Balancers.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */

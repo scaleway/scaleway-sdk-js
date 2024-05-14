@@ -240,7 +240,11 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/** Instance API. */
+/**
+ * Instance API.
+ *
+ * This API allows you to manage your Instances.
+ */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
   public static readonly LOCALITIES: Zone[] = [

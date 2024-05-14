@@ -44,7 +44,11 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/** Apple silicon API. */
+/**
+ * Apple silicon API.
+ *
+ * This API allows you to manage your Apple silicon machines.
+ */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
   public static readonly LOCALITIES: Zone[] = ['fr-par-3']

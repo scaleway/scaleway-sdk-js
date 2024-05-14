@@ -75,7 +75,7 @@ const jsonContentHeaders = {
 /**
  * Messaging and Queuing NATS API.
  *
- * This API allows you to manage Scaleway Messaging and Queueing NATS accounts.
+ * This API allows you to manage Scaleway Messaging and Queuing NATS accounts.
  */
 export class NatsAPI extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -286,7 +286,8 @@ export class NatsAPI extends ParentAPI {
 /**
  * Messaging and Queuing SNS API.
  *
- * This API allows you to manage Scaleway Messaging and Queueing SNS brokers.
+ * This API allows you to manage your Scaleway Messaging and Queuing SNS
+ * brokers.
  */
 export class SnsAPI extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -478,7 +479,8 @@ export class SnsAPI extends ParentAPI {
 /**
  * Messaging and Queuing SQS API.
  *
- * This API allows you to manage Scaleway Messaging and Queueing SQS brokers.
+ * This API allows you to manage your Scaleway Messaging and Queuing SQS
+ * brokers.
  */
 export class SqsAPI extends ParentAPI {
   /** Lists the available regions of the API. */

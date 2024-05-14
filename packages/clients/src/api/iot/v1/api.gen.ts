@@ -104,7 +104,7 @@ const jsonContentHeaders = {
 /**
  * IoT Hub API.
  *
- * This API allows you to manage IoT hubs and devices.
+ * This API allows you to manage your IoT hubs and devices.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
