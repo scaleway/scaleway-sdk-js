@@ -48,7 +48,11 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/** Transactional Email API. */
+/**
+ * Transactional Email API.
+ *
+ * This API allows you to manage your Transactional Email services.
+ */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par']

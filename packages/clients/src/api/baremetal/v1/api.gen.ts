@@ -95,7 +95,7 @@ const jsonContentHeaders = {
 /**
  * Elastic Metal API.
  *
- * This API allows to manage your Elastic Metal server.
+ * This API allows you to manage your Elastic Metal servers.
  */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */

@@ -38,7 +38,11 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/** Serverless Jobs API. */
+/**
+ * Serverless Jobs API.
+ *
+ * This API allows you to manage your Serverless Jobs.
+ */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']

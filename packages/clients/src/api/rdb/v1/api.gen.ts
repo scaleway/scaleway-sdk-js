@@ -166,7 +166,12 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/** Managed Database for PostgreSQL and MySQL API. */
+/**
+ * Managed Database for PostgreSQL and MySQL API.
+ *
+ * This API allows you to manage your Managed Databases for PostgreSQL and
+ * MySQL.
+ */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']

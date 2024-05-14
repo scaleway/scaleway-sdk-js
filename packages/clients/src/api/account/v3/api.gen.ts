@@ -29,7 +29,7 @@ const jsonContentHeaders = {
 /**
  * Account API.
  *
- * This API allows you to manage projects.
+ * This API allows you to manage your Scaleway Projects.
  */
 export class ProjectAPI extends ParentAPI {
   /**

@@ -124,7 +124,12 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/** IAM API. */
+/**
+ * IAM API.
+ *
+ * This API allows you to manage Identity and Access Management (IAM) across
+ * your Scaleway Organizations, Projects and resources.
+ */
 export class API extends ParentAPI {
   protected pageOfListSSHKeys = (request: Readonly<ListSSHKeysRequest> = {}) =>
     this.client.fetch<ListSSHKeysResponse>(

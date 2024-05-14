@@ -36,7 +36,12 @@ import type {
   Version,
 } from './types.gen'
 
-/** Marketplace API. */
+/**
+ * Marketplace API.
+ *
+ * This API allows you to find available images for use when launching a
+ * Scaleway Instance.
+ */
 export class API extends ParentAPI {
   protected pageOfListImages = (request: Readonly<ListImagesRequest>) =>
     this.client.fetch<ListImagesResponse>(

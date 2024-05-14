@@ -31,7 +31,7 @@ const jsonContentHeaders = {
 /**
  * IPAM API.
  *
- * This API allows you to manage IP addresses with Scaleway's IP Address
+ * This API allows you to manage your Scaleway IP addresses with our IP Address
  * Management tool.
  */
 export class API extends ParentAPI {

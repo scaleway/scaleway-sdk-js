@@ -49,7 +49,11 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/** Container Registry API. */
+/**
+ * Container Registry API.
+ *
+ * This API allows you to manage your Container Registry resources.
+ */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']

@@ -27,7 +27,12 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/** VPC API. */
+/**
+ * VPC API.
+ *
+ * This API allows you to manage your Virtual Private Clouds (VPCs) and Private
+ * Networks.
+ */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
   public static readonly LOCALITIES: Zone[] = [

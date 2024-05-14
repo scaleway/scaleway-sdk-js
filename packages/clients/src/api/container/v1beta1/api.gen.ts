@@ -90,7 +90,11 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/** Serverless Containers API. */
+/**
+ * Serverless Containers API.
+ *
+ * This API allows you to manage your Serverless Containers.
+ */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
