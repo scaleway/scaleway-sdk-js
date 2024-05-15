@@ -34,6 +34,7 @@ import type {
   DeleteInstanceACLRulesResponse,
   DeleteInstanceSettingsRequest,
   DeleteInstanceSettingsResponse,
+  EncryptionAtRest,
   Endpoint,
   EndpointDirectAccessDetails,
   EndpointLoadBalancerDetails,
@@ -267,6 +268,18 @@ export const unmarshalBackupSchedule = (data: unknown): BackupSchedule => {
   } as BackupSchedule
 }
 
+const unmarshalEncryptionAtRest = (data: unknown): EncryptionAtRest => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EncryptionAtRest' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    enabled: data.enabled,
+  } as EncryptionAtRest
+}
+
 const unmarshalInstanceSetting = (data: unknown): InstanceSetting => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -335,6 +348,9 @@ export const unmarshalInstance = (data: unknown): Instance => {
       ? unmarshalBackupSchedule(data.backup_schedule)
       : undefined,
     createdAt: unmarshalDate(data.created_at),
+    encryption: data.encryption
+      ? unmarshalEncryptionAtRest(data.encryption)
+      : undefined,
     endpoint: data.endpoint ? unmarshalEndpoint(data.endpoint) : undefined,
     endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
     engine: data.engine,
@@ -1002,12 +1018,23 @@ export const marshalCreateInstanceFromSnapshotRequest = (
   node_type: request.nodeType,
 })
 
+const marshalEncryptionAtRest = (
+  request: EncryptionAtRest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  enabled: request.enabled,
+})
+
 export const marshalCreateInstanceRequest = (
   request: CreateInstanceRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   backup_same_region: request.backupSameRegion,
   disable_backup: request.disableBackup,
+  encryption:
+    request.encryption !== undefined
+      ? marshalEncryptionAtRest(request.encryption, defaults)
+      : undefined,
   engine: request.engine,
   init_endpoints:
     request.initEndpoints !== undefined

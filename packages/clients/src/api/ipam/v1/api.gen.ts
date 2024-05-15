@@ -10,6 +10,7 @@ import {
 import type { Region } from '../../../bridge'
 import {
   marshalBookIPRequest,
+  marshalReleaseIPSetRequest,
   marshalUpdateIPRequest,
   unmarshalIP,
   unmarshalListIPsResponse,
@@ -21,6 +22,7 @@ import type {
   ListIPsRequest,
   ListIPsResponse,
   ReleaseIPRequest,
+  ReleaseIPSetRequest,
   UpdateIPRequest,
 } from './types.gen'
 
@@ -70,6 +72,16 @@ export class API extends ParentAPI {
       headers: jsonContentHeaders,
       method: 'DELETE',
       path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
+    })
+
+  releaseIPSet = (request: Readonly<ReleaseIPSetRequest> = {}) =>
+    this.client.fetch<void>({
+      body: JSON.stringify(
+        marshalReleaseIPSetRequest(request, this.client.settings),
+      ),
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ip-sets/release`,
     })
 
   /**

@@ -11,6 +11,7 @@ import type {
   BookIPRequest,
   IP,
   ListIPsResponse,
+  ReleaseIPSetRequest,
   Resource,
   Reverse,
   Source,
@@ -115,6 +116,13 @@ export const marshalBookIPRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,
   source: marshalSource(request.source, defaults),
   tags: request.tags,
+})
+
+export const marshalReleaseIPSetRequest = (
+  request: ReleaseIPSetRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ip_ids: request.ipIds,
 })
 
 const marshalReverse = (

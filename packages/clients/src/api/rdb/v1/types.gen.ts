@@ -294,6 +294,10 @@ export interface BackupSchedule {
   nextRunAt?: Date
 }
 
+export interface EncryptionAtRest {
+  enabled: boolean
+}
+
 export interface InstanceSetting {
   name: string
   value: string
@@ -554,6 +558,8 @@ export interface Instance {
   backupSameRegion: boolean
   /** List of Database Instance maintenance events. */
   maintenances: Maintenance[]
+  /** Encryption at rest settings for your Database Instance. */
+  encryption?: EncryptionAtRest
 }
 
 export interface NodeType {
@@ -820,6 +826,8 @@ export type CreateInstanceRequest = {
    * the Database Instance.
    */
   backupSameRegion: boolean
+  /** Encryption at rest settings for your Database Instance. */
+  encryption?: EncryptionAtRest
 }
 
 export type CreateReadReplicaEndpointRequest = {
