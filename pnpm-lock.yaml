@@ -84,8 +84,8 @@ importers:
   packages/clients:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.0.2
-        version: 5.0.2
+        specifier: 5.1.0
+        version: 5.1.0
 
   packages/configuration-loader:
     devDependencies:
@@ -790,8 +790,8 @@ packages:
     peerDependencies:
       eslint: '>= 8.5'
 
-  '@scaleway/random-name@5.0.2':
-    resolution: {integrity: sha512-LzuzNxFP7FkB0XnS5cajXWOUF4lh+Wyx2P/GyWu3hufLdlAP0qplEpQaXuk2BYFRn9XMF/wBIPcCxKI5sgmG3Q==}
+  '@scaleway/random-name@5.1.0':
+    resolution: {integrity: sha512-fLaEUOps1zOJ7BXUrCzKkV9uLibMlShYLC75viwJUOg3WFzzsKZAeQx3Df1RvJMxGlRnJ0fcj94X/Ch8GLOe/g==}
     engines: {node: '>=20.x'}
 
   '@sigstore/protobuf-specs@0.1.0':
@@ -5215,7 +5215,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@scaleway/random-name@5.0.2': {}
+  '@scaleway/random-name@5.1.0': {}
 
   '@sigstore/protobuf-specs@0.1.0': {}
 
