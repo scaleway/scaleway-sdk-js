@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.28.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.27.0...@scaleway/sdk@2.28.0) (2024-05-15)
+
+### Features
+
+- **ipam:** allow filtering on pn, subnet or vpc id ([#1260](https://github.com/scaleway/scaleway-sdk-js/issues/1260)) ([c71af8b](https://github.com/scaleway/scaleway-sdk-js/commit/c71af8b7e8b4f1a7b1e2a7208baeea39b57afc27))
+
+### Bug Fixes
+
+- **build:** export all types ([#1261](https://github.com/scaleway/scaleway-sdk-js/issues/1261)) ([2c13c19](https://github.com/scaleway/scaleway-sdk-js/commit/2c13c19d1699d2138d0ae9c4cf2a8a29b50d93ff))
+
 ## [2.27.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.26.0...@scaleway/sdk@2.27.0) (2024-05-06)
 
 ### Features

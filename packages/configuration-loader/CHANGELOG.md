@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.5](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/configuration-loader@1.0.4...@scaleway/configuration-loader@1.0.5) (2024-05-15)
+
+### Bug Fixes
+
+- **build:** export all types ([#1261](https://github.com/scaleway/scaleway-sdk-js/issues/1261)) ([2c13c19](https://github.com/scaleway/scaleway-sdk-js/commit/2c13c19d1699d2138d0ae9c4cf2a8a29b50d93ff))
+
 ## 1.0.4 (2024-05-06)
 
 **Note:** Version bump only for package @scaleway/configuration-loader
