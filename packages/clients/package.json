@@ -34,7 +34,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@scaleway/random-name": "4.0.3"
+    "@scaleway/random-name": "5.0.2"
   },
   "bundledDependencies": [
     "@scaleway/random-name"
