@@ -254,6 +254,11 @@ export interface Offer {
   stock: OfferStock
   /** Public bandwidth available (in bits/s) with the offer. */
   bandwidth: number
+  /**
+   * Maximum public bandwidth available (in bits/s) depending on available
+   * options.
+   */
+  maxBandwidth: number
   /** Commercial range of the offer. */
   commercialRange: string
   /**

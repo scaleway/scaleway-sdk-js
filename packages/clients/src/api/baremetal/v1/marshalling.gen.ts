@@ -215,6 +215,7 @@ export const unmarshalOffer = (data: unknown): Offer => {
     fee: data.fee ? unmarshalMoney(data.fee) : undefined,
     id: data.id,
     incompatibleOsIds: data.incompatible_os_ids,
+    maxBandwidth: data.max_bandwidth,
     memories: unmarshalArrayOfObject(data.memories, unmarshalMemory),
     name: data.name,
     operationPath: data.operation_path,
