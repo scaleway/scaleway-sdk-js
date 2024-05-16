@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.29.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.28.0...@scaleway/sdk@2.29.0) (2024-05-16)
+
+### Features
+
+- **ipam:** allow for bulk IPs release ([#1277](https://github.com/scaleway/scaleway-sdk-js/issues/1277)) ([01711a9](https://github.com/scaleway/scaleway-sdk-js/commit/01711a971f07f188652f033904578ced96281868))
+
 ## [2.28.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.27.0...@scaleway/sdk@2.28.0) (2024-05-15)
 
 ### Features
