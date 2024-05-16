@@ -226,6 +226,15 @@ export type ReleaseIPRequest = {
   ipId: string
 }
 
+export type ReleaseIPSetRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  ipIds?: string[]
+}
+
 export type UpdateIPRequest = {
   /**
    * Region to target. If none is passed will use default region from the

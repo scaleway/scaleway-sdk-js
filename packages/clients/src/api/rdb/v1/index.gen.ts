@@ -39,6 +39,7 @@ export type {
   DeleteReadReplicaRequest,
   DeleteSnapshotRequest,
   DeleteUserRequest,
+  EncryptionAtRest,
   Endpoint,
   EndpointDirectAccessDetails,
   EndpointLoadBalancerDetails,

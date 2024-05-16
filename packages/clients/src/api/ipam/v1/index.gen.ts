@@ -9,6 +9,7 @@ export type {
   ListIPsRequestOrderBy,
   ListIPsResponse,
   ReleaseIPRequest,
+  ReleaseIPSetRequest,
   Resource,
   ResourceType,
   Reverse,
