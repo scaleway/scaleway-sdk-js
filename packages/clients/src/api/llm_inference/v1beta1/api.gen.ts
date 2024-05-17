@@ -62,9 +62,9 @@ const jsonContentHeaders = {
 }
 
 /**
- * LLM Inference API.
+ * Managed Inference API.
  *
- * This API allows you to manage your LLM Inference services.
+ * This API allows you to manage your Inference services.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -356,7 +356,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List models. List all available LLM models.
+   * List models. List all available models.
    *
    * @param request - The request {@link ListModelsRequest}
    * @returns A Promise of ListModelsResponse

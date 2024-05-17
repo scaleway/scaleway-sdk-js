@@ -111,8 +111,8 @@ export interface EndpointSpec {
    */
   privateNetwork?: EndpointSpecPrivateNetwork
   /**
-   * By default, LLM deployments are protected by IAM authentication. When
-   * setting this field to true, the authentication will be disabled.
+   * By default, deployments are protected by IAM authentication. When setting
+   * this field to true, the authentication will be disabled.
    */
   disableAuth: boolean
 }
@@ -485,8 +485,8 @@ export type UpdateEndpointRequest = {
   /** ID of the endpoint to update. */
   endpointId: string
   /**
-   * By default, LLM deployments are protected by IAM authentication. When
-   * setting this field to true, the authentication will be disabled.
+   * By default, deployments are protected by IAM authentication. When setting
+   * this field to true, the authentication will be disabled.
    */
   disableAuth?: boolean
 }
