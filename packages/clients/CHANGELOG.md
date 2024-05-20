@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.30.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.29.0...@scaleway/sdk@2.30.0) (2024-05-20)
+
+### Features
+
+- **baremetal:** expose max bandwidth ([#1280](https://github.com/scaleway/scaleway-sdk-js/issues/1280)) ([d67f471](https://github.com/scaleway/scaleway-sdk-js/commit/d67f4713d050dbbd1c6a547e174946cc0bcad5f0))
+- **key_manager:** add v1alpha1 ([#1279](https://github.com/scaleway/scaleway-sdk-js/issues/1279)) ([f3efa9a](https://github.com/scaleway/scaleway-sdk-js/commit/f3efa9add80a0388f097b7a4afe4a63fdc75bda0))
+
 ## [2.29.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.28.0...@scaleway/sdk@2.29.0) (2024-05-16)
 
 ### Features
