@@ -39,6 +39,7 @@ import type {
   ExportSnapshotResponse,
   GetBootscriptResponse,
   GetDashboardResponse,
+  GetEncryptedRdpPasswordResponse,
   GetImageResponse,
   GetIpResponse,
   GetPlacementGroupResponse,
@@ -798,6 +799,23 @@ export const unmarshalGetDashboardResponse = (
   return {
     dashboard: data.dashboard ? unmarshalDashboard(data.dashboard) : undefined,
   } as GetDashboardResponse
+}
+
+export const unmarshalGetEncryptedRdpPasswordResponse = (
+  data: unknown,
+): GetEncryptedRdpPasswordResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetEncryptedRdpPasswordResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    adminPasswordEncryptionSshKeyDescription:
+      data.admin_password_encryption_ssh_key_description,
+    adminPasswordEncryptionSshKeyId: data.admin_password_encryption_ssh_key_id,
+    value: data.value,
+  } as GetEncryptedRdpPasswordResponse
 }
 
 export const unmarshalGetImageResponse = (data: unknown): GetImageResponse => {
@@ -1818,6 +1836,7 @@ export const marshalCreateServerRequest = (
   request: CreateServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  admin_password_encryption_ssh_key_id: request.adminPasswordEncryptionSshKeyId,
   boot_type: request.bootType,
   bootscript: request.bootscript,
   commercial_type: request.commercialType,

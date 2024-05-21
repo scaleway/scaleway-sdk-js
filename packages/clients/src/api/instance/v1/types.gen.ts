@@ -1035,6 +1035,11 @@ export type CreateServerRequest = {
   securityGroup?: string
   /** Placement group ID if Instance must be part of a placement group. */
   placementGroup?: string
+  /**
+   * UUID of the SSH RSA key that will be used to encrypt the initial admin
+   * password for OS requiring it. Mandatory for Windows OS.
+   */
+  adminPasswordEncryptionSshKeyId?: string
 }
 
 export interface CreateServerResponse {
@@ -1121,6 +1126,13 @@ export type CreateVolumeRequest = {
 
 export interface CreateVolumeResponse {
   volume?: Volume
+}
+
+export type DeleteEncryptedRdpPasswordRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** UUID of the Instance. */
+  serverId: string
 }
 
 export type DeleteImageRequest = {
@@ -1241,6 +1253,22 @@ export type GetDashboardRequest = {
 
 export interface GetDashboardResponse {
   dashboard?: Dashboard
+}
+
+export type GetEncryptedRdpPasswordRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** UUID of the Instance. */
+  serverId: string
+}
+
+export interface GetEncryptedRdpPasswordResponse {
+  /** The encrypted RDP password. */
+  value?: string
+  /** The description of the SSH key used for ciphering. */
+  adminPasswordEncryptionSshKeyDescription?: string
+  /** The UUID of the SSH key used for ciphering. */
+  adminPasswordEncryptionSshKeyId?: string
 }
 
 export type GetImageRequest = {
