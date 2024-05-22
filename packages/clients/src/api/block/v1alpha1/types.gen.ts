@@ -52,6 +52,7 @@ export type VolumeStatus =
   | 'error'
   | 'snapshotting'
   | 'locked'
+  | 'updating'
 
 export interface Reference {
   /** UUID of the reference. */
