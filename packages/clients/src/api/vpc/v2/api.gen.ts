@@ -19,6 +19,7 @@ import {
   unmarshalAddSubnetsResponse,
   unmarshalDeleteSubnetsResponse,
   unmarshalListPrivateNetworksResponse,
+  unmarshalListSubnetsResponse,
   unmarshalListVPCsResponse,
   unmarshalPrivateNetwork,
   unmarshalSetSubnetsResponse,
@@ -39,6 +40,8 @@ import type {
   GetVPCRequest,
   ListPrivateNetworksRequest,
   ListPrivateNetworksResponse,
+  ListSubnetsRequest,
+  ListSubnetsResponse,
   ListVPCsRequest,
   ListVPCsResponse,
   MigrateZonalPrivateNetworksRequest,
@@ -333,6 +336,30 @@ export class API extends ParentAPI {
       },
       unmarshalVPC,
     )
+
+  protected pageOfListSubnets = (request: Readonly<ListSubnetsRequest> = {}) =>
+    this.client.fetch<ListSubnetsResponse>(
+      {
+        method: 'GET',
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/subnets`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['project_id', request.projectId],
+          ['subnet_ids', request.subnetIds],
+          ['vpc_id', request.vpcId],
+        ),
+      },
+      unmarshalListSubnetsResponse,
+    )
+
+  listSubnets = (request: Readonly<ListSubnetsRequest> = {}) =>
+    enrichForPagination('subnets', this.pageOfListSubnets, request)
 
   /**
    * Set the subnets of a Private Network. Set subnets for an existing Private
