@@ -8,6 +8,8 @@ export type ListPrivateNetworksRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
+export type ListSubnetsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+
 export type ListVPCsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -251,6 +253,26 @@ export type ListPrivateNetworksRequest = {
 
 export interface ListPrivateNetworksResponse {
   privateNetworks: PrivateNetwork[]
+  totalCount: number
+}
+
+export type ListSubnetsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  orderBy?: ListSubnetsRequestOrderBy
+  page?: number
+  pageSize?: number
+  organizationId?: string
+  projectId?: string
+  subnetIds?: string[]
+  vpcId?: string
+}
+
+export interface ListSubnetsResponse {
+  subnets: Subnet[]
   totalCount: number
 }
 

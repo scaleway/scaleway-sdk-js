@@ -16,6 +16,7 @@ import type {
   DeleteSubnetsRequest,
   DeleteSubnetsResponse,
   ListPrivateNetworksResponse,
+  ListSubnetsResponse,
   ListVPCsResponse,
   MigrateZonalPrivateNetworksRequest,
   PrivateNetwork,
@@ -130,6 +131,21 @@ export const unmarshalListPrivateNetworksResponse = (
     ),
     totalCount: data.total_count,
   } as ListPrivateNetworksResponse
+}
+
+export const unmarshalListSubnetsResponse = (
+  data: unknown,
+): ListSubnetsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSubnetsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    subnets: unmarshalArrayOfObject(data.subnets, unmarshalSubnet),
+    totalCount: data.total_count,
+  } as ListSubnetsResponse
 }
 
 export const unmarshalListVPCsResponse = (data: unknown): ListVPCsResponse => {
