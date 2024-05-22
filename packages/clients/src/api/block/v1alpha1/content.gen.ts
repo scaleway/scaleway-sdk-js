@@ -21,4 +21,5 @@ export const VOLUME_TRANSIENT_STATUSES: VolumeStatus[] = [
   'deleting',
   'resizing',
   'snapshotting',
+  'updating',
 ]
