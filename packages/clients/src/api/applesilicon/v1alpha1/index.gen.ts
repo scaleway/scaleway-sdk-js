@@ -23,7 +23,9 @@ export type {
   ServerType,
   ServerTypeCPU,
   ServerTypeDisk,
+  ServerTypeGPU,
   ServerTypeMemory,
+  ServerTypeNetwork,
   ServerTypeStock,
   UpdateServerRequest,
 } from './types.gen'

@@ -46,6 +46,7 @@ export interface OS {
 export interface ServerTypeCPU {
   name: string
   coreCount: number
+  frequency: number
 }
 
 export interface ServerTypeDisk {
@@ -53,9 +54,17 @@ export interface ServerTypeDisk {
   type: string
 }
 
+export interface ServerTypeGPU {
+  count: number
+}
+
 export interface ServerTypeMemory {
   capacity: number
   type: string
+}
+
+export interface ServerTypeNetwork {
+  publicBandwidthBps: number
 }
 
 export interface ServerType {
@@ -71,6 +80,10 @@ export interface ServerType {
   stock: ServerTypeStock
   /** Minimum duration of the lease in seconds (example. 3.4s). */
   minimumLeaseDuration?: string
+  /** GPU description. */
+  gpu?: ServerTypeGPU
+  /** Network description. */
+  network?: ServerTypeNetwork
   /** The default OS for this server type. */
   defaultOs?: OS
 }

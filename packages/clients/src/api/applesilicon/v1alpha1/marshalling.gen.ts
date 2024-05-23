@@ -18,7 +18,9 @@ import type {
   ServerType,
   ServerTypeCPU,
   ServerTypeDisk,
+  ServerTypeGPU,
   ServerTypeMemory,
+  ServerTypeNetwork,
   UpdateServerRequest,
 } from './types.gen'
 
@@ -51,6 +53,7 @@ const unmarshalServerTypeCPU = (data: unknown): ServerTypeCPU => {
 
   return {
     coreCount: data.core_count,
+    frequency: data.frequency,
     name: data.name,
   } as ServerTypeCPU
 }
@@ -68,6 +71,18 @@ const unmarshalServerTypeDisk = (data: unknown): ServerTypeDisk => {
   } as ServerTypeDisk
 }
 
+const unmarshalServerTypeGPU = (data: unknown): ServerTypeGPU => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeGPU' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    count: data.count,
+  } as ServerTypeGPU
+}
+
 const unmarshalServerTypeMemory = (data: unknown): ServerTypeMemory => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -81,6 +96,18 @@ const unmarshalServerTypeMemory = (data: unknown): ServerTypeMemory => {
   } as ServerTypeMemory
 }
 
+const unmarshalServerTypeNetwork = (data: unknown): ServerTypeNetwork => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeNetwork' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    publicBandwidthBps: data.public_bandwidth_bps,
+  } as ServerTypeNetwork
+}
+
 export const unmarshalServerType = (data: unknown): ServerType => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -92,9 +119,13 @@ export const unmarshalServerType = (data: unknown): ServerType => {
     cpu: data.cpu ? unmarshalServerTypeCPU(data.cpu) : undefined,
     defaultOs: data.default_os ? unmarshalOS(data.default_os) : undefined,
     disk: data.disk ? unmarshalServerTypeDisk(data.disk) : undefined,
+    gpu: data.gpu ? unmarshalServerTypeGPU(data.gpu) : undefined,
     memory: data.memory ? unmarshalServerTypeMemory(data.memory) : undefined,
     minimumLeaseDuration: data.minimum_lease_duration,
     name: data.name,
+    network: data.network
+      ? unmarshalServerTypeNetwork(data.network)
+      : undefined,
     stock: data.stock,
   } as ServerType
 }
