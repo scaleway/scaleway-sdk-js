@@ -358,11 +358,18 @@ export class API extends ParentAPI {
       unmarshalListSubnetsResponse,
     )
 
+  /**
+   * List subnets. List any Private Network's subnets. See ListPrivateNetworks
+   * to list a specific Private Network's subnets.
+   *
+   * @param request - The request {@link ListSubnetsRequest}
+   * @returns A Promise of ListSubnetsResponse
+   */
   listSubnets = (request: Readonly<ListSubnetsRequest> = {}) =>
     enrichForPagination('subnets', this.pageOfListSubnets, request)
 
   /**
-   * Set the subnets of a Private Network. Set subnets for an existing Private
+   * Set a Private Network's subnets. Set subnets for an existing Private
    * Network. Note that the method is PUT and not PATCH. Any existing subnets
    * will be removed in favor of the new specified set of subnets.
    *
