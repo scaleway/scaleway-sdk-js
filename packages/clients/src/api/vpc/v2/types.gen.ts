@@ -25,6 +25,12 @@ export interface Subnet {
   updatedAt?: Date
   /** Subnet CIDR. */
   subnet: string
+  /** Scaleway Project the subnet belongs to. */
+  projectId: string
+  /** Private Network the subnet belongs to. */
+  privateNetworkId: string
+  /** VPC the subnet belongs to. */
+  vpcId: string
 }
 
 export interface PrivateNetwork {
@@ -262,12 +268,28 @@ export type ListSubnetsRequest = {
    * config.
    */
   region?: Region
+  /** Sort order of the returned subnets. */
   orderBy?: ListSubnetsRequestOrderBy
+  /** Page number to return, from the paginated results. */
   page?: number
+  /** Maximum number of Private Networks to return per page. */
   pageSize?: number
+  /**
+   * Organization ID to filter for. Only subnets belonging to this Organization
+   * will be returned.
+   */
   organizationId?: string
+  /**
+   * Project ID to filter for. Only subnets belonging to this Project will be
+   * returned.
+   */
   projectId?: string
+  /**
+   * Subnet IDs to filter for. Only subnets matching the specified IDs will be
+   * returned.
+   */
   subnetIds?: string[]
+  /** VPC ID to filter for. Only subnets belonging to this VPC will be returned. */
   vpcId?: string
 }
 
