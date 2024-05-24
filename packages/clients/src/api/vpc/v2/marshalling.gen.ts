@@ -38,8 +38,11 @@ const unmarshalSubnet = (data: unknown): Subnet => {
   return {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
+    privateNetworkId: data.private_network_id,
+    projectId: data.project_id,
     subnet: data.subnet,
     updatedAt: unmarshalDate(data.updated_at),
+    vpcId: data.vpc_id,
   } as Subnet
 }
 

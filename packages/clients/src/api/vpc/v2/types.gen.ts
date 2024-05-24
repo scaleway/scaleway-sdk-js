@@ -25,6 +25,12 @@ export interface Subnet {
   updatedAt?: Date
   /** Subnet CIDR. */
   subnet: string
+  /** Scaleway Project the subnet belongs to. */
+  projectId: string
+  /** Private Network the subnet belongs to. */
+  privateNetworkId: string
+  /** VPC the subnet belongs to. */
+  vpcId: string
 }
 
 export interface PrivateNetwork {
