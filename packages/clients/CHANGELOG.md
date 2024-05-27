@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.31.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.30.0...@scaleway/sdk@2.31.0) (2024-05-27)
+
+### Features
+
+- **apple_silicon:** add info on server type ([#1289](https://github.com/scaleway/scaleway-sdk-js/issues/1289)) ([ca32ce6](https://github.com/scaleway/scaleway-sdk-js/commit/ca32ce66b23be5f701e2b537b62b6c218f1f75c9))
+- **block:** add volume updating status ([#1288](https://github.com/scaleway/scaleway-sdk-js/issues/1288)) ([54d6d15](https://github.com/scaleway/scaleway-sdk-js/commit/54d6d155321c70b0c0139d25998e0875c5a90f1f))
+- **instance:** add encrypted rdp password method ([#1282](https://github.com/scaleway/scaleway-sdk-js/issues/1282)) ([421e1fc](https://github.com/scaleway/scaleway-sdk-js/commit/421e1fc5575ac2b4d0cc952b9b4c3d6c8cb35e47))
+- **vpc/v2:** add ListSubnets ([#1287](https://github.com/scaleway/scaleway-sdk-js/issues/1287)) ([5faf63c](https://github.com/scaleway/scaleway-sdk-js/commit/5faf63ceb763fea9003a8e9b8eceede811dab296))
+- **vpc/v2:** add ListSubnets docs ([#1293](https://github.com/scaleway/scaleway-sdk-js/issues/1293)) ([76da78e](https://github.com/scaleway/scaleway-sdk-js/commit/76da78e1847b2420a2b5411b05d8116dcf1312c3))
+- **vpc/v2:** expose Subnet fields that v1 exposed ([#1292](https://github.com/scaleway/scaleway-sdk-js/issues/1292)) ([7900a3b](https://github.com/scaleway/scaleway-sdk-js/commit/7900a3b40cedbe6ac200e2fe06a425df6d8a9957))
+
 ## [2.30.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.29.0...@scaleway/sdk@2.30.0) (2024-05-20)
 
 ### Features
