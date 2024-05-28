@@ -475,6 +475,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/offers`,
         urlParams: urlParams(
+          ['name', request.name],
           ['page', request.page],
           [
             'page_size',
