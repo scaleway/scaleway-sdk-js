@@ -32,7 +32,6 @@ import type {
   ListPoolsResponse,
   ListVersionsResponse,
   MaintenanceWindow,
-  MigrateToPrivateNetworkClusterRequest,
   Node,
   Pool,
   PoolUpgradePolicy,
@@ -593,13 +592,6 @@ export const marshalCreatePoolRequest = (
       ? marshalCreatePoolRequestUpgradePolicy(request.upgradePolicy, defaults)
       : undefined,
   zone: request.zone ?? defaults.defaultZone,
-})
-
-export const marshalMigrateToPrivateNetworkClusterRequest = (
-  request: MigrateToPrivateNetworkClusterRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  private_network_id: request.privateNetworkId,
 })
 
 export const marshalSetClusterTypeRequest = (

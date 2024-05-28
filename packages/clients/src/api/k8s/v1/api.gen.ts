@@ -16,7 +16,6 @@ import {
 import {
   marshalCreateClusterRequest,
   marshalCreatePoolRequest,
-  marshalMigrateToPrivateNetworkClusterRequest,
   marshalSetClusterTypeRequest,
   marshalUpdateClusterRequest,
   marshalUpdatePoolRequest,
@@ -64,7 +63,6 @@ import type {
   ListVersionsRequest,
   ListVersionsResponse,
   MigrateClusterToRoutedIPsRequest,
-  MigrateToPrivateNetworkClusterRequest,
   Node,
   Pool,
   RebootNodeRequest,
@@ -327,32 +325,6 @@ export class API extends ParentAPI {
       method: 'POST',
       path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/reset-admin-token`,
     })
-
-  /**
-   * Migrate an existing cluster to a Private Network cluster. Migrate a cluster
-   * that was created before the release of Private Network clusters to a new
-   * one with a Private Network.
-   *
-   * @param request - The request {@link MigrateToPrivateNetworkClusterRequest}
-   * @returns A Promise of Cluster
-   */
-  migrateToPrivateNetworkCluster = (
-    request: Readonly<MigrateToPrivateNetworkClusterRequest>,
-  ) =>
-    this.client.fetch<Cluster>(
-      {
-        body: JSON.stringify(
-          marshalMigrateToPrivateNetworkClusterRequest(
-            request,
-            this.client.settings,
-          ),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/migrate-to-private-network`,
-      },
-      unmarshalCluster,
-    )
 
   /**
    * Migrate a cluster to Routed IPs. Migrate the nodes of an existing cluster
