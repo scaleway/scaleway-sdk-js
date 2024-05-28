@@ -570,6 +570,8 @@ export type ListOffersRequest = {
   pageSize?: number
   /** Subscription period type to filter offers by. */
   subscriptionPeriod?: OfferSubscriptionPeriod
+  /** Offer name to filter offers by. */
+  name?: string
 }
 
 export interface ListOffersResponse {
