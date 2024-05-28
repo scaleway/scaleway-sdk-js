@@ -55,7 +55,6 @@ import {
   unmarshalExportSnapshotResponse,
   unmarshalGetBootscriptResponse,
   unmarshalGetDashboardResponse,
-  unmarshalGetEncryptedRdpPasswordResponse,
   unmarshalGetImageResponse,
   unmarshalGetIpResponse,
   unmarshalGetPlacementGroupResponse,
@@ -124,7 +123,6 @@ import type {
   CreateSnapshotResponse,
   CreateVolumeRequest,
   CreateVolumeResponse,
-  DeleteEncryptedRdpPasswordRequest,
   DeleteImageRequest,
   DeleteIpRequest,
   DeletePlacementGroupRequest,
@@ -143,8 +141,6 @@ import type {
   GetBootscriptResponse,
   GetDashboardRequest,
   GetDashboardResponse,
-  GetEncryptedRdpPasswordRequest,
-  GetEncryptedRdpPasswordResponse,
   GetImageRequest,
   GetImageResponse,
   GetIpRequest,
@@ -1625,38 +1621,5 @@ export class API extends ParentAPI {
       headers: jsonContentHeaders,
       method: 'POST',
       path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/block-migration/apply`,
-    })
-
-  /**
-   * Get the encrypted RDP password. Get the initial administrator password for
-   * Windows RDP. This password is encrypted using the SSH RSA key specified at
-   * the time of Instance creation.
-   *
-   * @param request - The request {@link GetEncryptedRdpPasswordRequest}
-   * @returns A Promise of GetEncryptedRdpPasswordResponse
-   */
-  getEncryptedRdpPassword = (
-    request: Readonly<GetEncryptedRdpPasswordRequest>,
-  ) =>
-    this.client.fetch<GetEncryptedRdpPasswordResponse>(
-      {
-        method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/encrypted_rdp_password`,
-      },
-      unmarshalGetEncryptedRdpPasswordResponse,
-    )
-
-  /**
-   * Delete the encrypted RDP password. Delete the initial administrator
-   * password for Windows RDP.
-   *
-   * @param request - The request {@link DeleteEncryptedRdpPasswordRequest}
-   */
-  deleteEncryptedRdpPassword = (
-    request: Readonly<DeleteEncryptedRdpPasswordRequest>,
-  ) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/encrypted_rdp_password`,
     })
 }
