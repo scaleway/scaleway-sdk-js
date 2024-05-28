@@ -39,7 +39,6 @@ import type {
   ExportSnapshotResponse,
   GetBootscriptResponse,
   GetDashboardResponse,
-  GetEncryptedRdpPasswordResponse,
   GetImageResponse,
   GetIpResponse,
   GetPlacementGroupResponse,
@@ -395,6 +394,8 @@ const unmarshalServer = (data: unknown): Server => {
   }
 
   return {
+    adminPasswordEncryptedValue: data.admin_password_encrypted_value,
+    adminPasswordEncryptionSshKeyId: data.admin_password_encryption_ssh_key_id,
     allowedActions: data.allowed_actions,
     arch: data.arch,
     bootType: data.boot_type,
@@ -799,23 +800,6 @@ export const unmarshalGetDashboardResponse = (
   return {
     dashboard: data.dashboard ? unmarshalDashboard(data.dashboard) : undefined,
   } as GetDashboardResponse
-}
-
-export const unmarshalGetEncryptedRdpPasswordResponse = (
-  data: unknown,
-): GetEncryptedRdpPasswordResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GetEncryptedRdpPasswordResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    adminPasswordEncryptionSshKeyDescription:
-      data.admin_password_encryption_ssh_key_description,
-    adminPasswordEncryptionSshKeyId: data.admin_password_encryption_ssh_key_id,
-    value: data.value,
-  } as GetEncryptedRdpPasswordResponse
 }
 
 export const unmarshalGetImageResponse = (data: unknown): GetImageResponse => {
@@ -2267,6 +2251,7 @@ export const marshalSetServerRequest = (
   request: SetServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  admin_password_encryption_ssh_key_id: request.adminPasswordEncryptionSshKeyId,
   allowed_actions:
     request.allowedActions !== undefined ? request.allowedActions : undefined,
   arch: request.arch,
@@ -2467,6 +2452,7 @@ export const marshalUpdateServerRequest = (
   request: UpdateServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  admin_password_encryption_ssh_key_id: request.adminPasswordEncryptionSshKeyId,
   boot_type: request.bootType,
   bootscript: request.bootscript,
   commercial_type: request.commercialType,

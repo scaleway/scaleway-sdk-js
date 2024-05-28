@@ -464,6 +464,18 @@ export interface Server {
   privateNics: PrivateNIC[]
   /** Zone in which the Instance is located. */
   zone: Zone
+  /**
+   * The public_key value of this key is used to encrypt the admin password.
+   * When set to an empty string, reset this value and
+   * admin_password_encrypted_value to an empty string so a new password may be
+   * generated.
+   */
+  adminPasswordEncryptionSshKeyId?: string
+  /**
+   * This value is reset when admin_password_encryption_ssh_key_id is set to an
+   * empty string.
+   */
+  adminPasswordEncryptedValue?: string
 }
 
 export interface VolumeTemplate {
@@ -1035,10 +1047,7 @@ export type CreateServerRequest = {
   securityGroup?: string
   /** Placement group ID if Instance must be part of a placement group. */
   placementGroup?: string
-  /**
-   * UUID of the SSH RSA key that will be used to encrypt the initial admin
-   * password for OS requiring it. Mandatory for Windows OS.
-   */
+  /** The public_key value of this key is used to encrypt the admin password. */
   adminPasswordEncryptionSshKeyId?: string
 }
 
@@ -1126,13 +1135,6 @@ export type CreateVolumeRequest = {
 
 export interface CreateVolumeResponse {
   volume?: Volume
-}
-
-export type DeleteEncryptedRdpPasswordRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** UUID of the Instance. */
-  serverId: string
 }
 
 export type DeleteImageRequest = {
@@ -1253,22 +1255,6 @@ export type GetDashboardRequest = {
 
 export interface GetDashboardResponse {
   dashboard?: Dashboard
-}
-
-export type GetEncryptedRdpPasswordRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  /** UUID of the Instance. */
-  serverId: string
-}
-
-export interface GetEncryptedRdpPasswordResponse {
-  /** The encrypted RDP password. */
-  value?: string
-  /** The description of the SSH key used for ciphering. */
-  adminPasswordEncryptionSshKeyDescription?: string
-  /** The UUID of the SSH key used for ciphering. */
-  adminPasswordEncryptionSshKeyId?: string
 }
 
 export type GetImageRequest = {
@@ -2068,6 +2054,13 @@ export type UpdateServerRequest = {
    *   DEV1-S, which has only 20GB).
    */
   commercialType?: string
+  /**
+   * The public_key value of this key is used to encrypt the admin password.
+   * When set to an empty string, reset this value and
+   * admin_password_encrypted_value to an empty string so a new password may be
+   * generated.
+   */
+  adminPasswordEncryptionSshKeyId?: string
 }
 
 export interface UpdateServerResponse {

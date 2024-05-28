@@ -177,6 +177,13 @@ export type SetServerRequest = {
   placementGroup?: PlacementGroup
   /** Instance private NICs. */
   privateNics?: PrivateNIC[]
+  /**
+   * The public_key value of this key is used to encrypt the admin password.
+   * When set to an empty string, reset this value and
+   * admin_password_encrypted_value to an empty string so a new password may be
+   * generated.
+   */
+  adminPasswordEncryptionSshKeyId?: string
 }
 
 export interface SetServerResponse {
