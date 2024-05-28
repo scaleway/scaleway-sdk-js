@@ -92,10 +92,10 @@ export interface SecretVersion {
   /** ID of the secret. */
   secretId: string
   /**
-   * - `unknown`: the version is in an invalid state. `enabled`: the version is
-   *   accessible. `disabled`: the version is not accessible but can be enabled.
-   *   `deleted`: the version is permanently deleted. It is not possible to
-   *   recover it.
+   * - `unknown_status`: the version is in an invalid state. `enabled`: the
+   *   version is accessible. `disabled`: the version is not accessible but can
+   *   be enabled. `deleted`: the version is permanently deleted. It is not
+   *   possible to recover it.
    */
   status: SecretVersionStatus
   /** Date and time of the version's creation. */
