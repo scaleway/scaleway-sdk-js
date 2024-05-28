@@ -53,7 +53,6 @@ export type {
   MaintenanceWindow,
   MaintenanceWindowDayOfTheWeek,
   MigrateClusterToRoutedIPsRequest,
-  MigrateToPrivateNetworkClusterRequest,
   Node,
   NodeStatus,
   Pool,
