@@ -42,8 +42,8 @@ importers:
         specifier: 3.3.0
         version: 3.3.0(@types/node@18.11.18)(typescript@5.4.5)
       esbuild-plugin-browserslist:
-        specifier: 0.11.1
-        version: 0.11.1(browserslist@4.23.0)(esbuild@0.20.2)
+        specifier: 0.12.0
+        version: 0.12.0(browserslist@4.23.0)(esbuild@0.20.2)
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -1735,12 +1735,12 @@ packages:
     resolution: {integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==}
     engines: {node: '>= 0.4'}
 
-  esbuild-plugin-browserslist@0.11.1:
-    resolution: {integrity: sha512-yNdZRdDBEbm0PT4q2bJBhXvnwakXG5mG8ipiwGe5SRDPnKa7L7kQm2tHuBMowBtcFz6kRtZTv5njK7PJwU+tCQ==}
+  esbuild-plugin-browserslist@0.12.0:
+    resolution: {integrity: sha512-U9+fwm/e32UCZJreqr2EZx0F7/zQEaUslqIkixzouw7ChRRhu/QPgea5nk5nF9dj6qWt2bJJDVmGDSY9+8M5Xw==}
     engines: {node: '>=18'}
     peerDependencies:
       browserslist: ^4.21.8
-      esbuild: ~0.20.0
+      esbuild: ~0.21.3
 
   esbuild@0.20.2:
     resolution: {integrity: sha512-WdOOppmUNU+IbZ0PaDiTst80zjnrOkyJNHoKupIcVyU8Lvla3Ugx94VzkQ32Ijqd7UhHJy75gNWDMUekcrSJ6g==}
@@ -4491,8 +4491,8 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
 
-  zod@3.23.4:
-    resolution: {integrity: sha512-/AtWOKbBgjzEYYQRNfoGKHObgfAZag6qUJX1VbHo2PRBgS+wfWagEY2mizjfyAPcGesrJOcx/wcl0L9WnVrHFw==}
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
 snapshots:
 
@@ -6447,12 +6447,12 @@ snapshots:
       is-date-object: 1.0.5
       is-symbol: 1.0.4
 
-  esbuild-plugin-browserslist@0.11.1(browserslist@4.23.0)(esbuild@0.20.2):
+  esbuild-plugin-browserslist@0.12.0(browserslist@4.23.0)(esbuild@0.20.2):
     dependencies:
       browserslist: 4.23.0
       debug: 4.3.4
       esbuild: 0.20.2
-      zod: 3.23.4
+      zod: 3.23.8
     transitivePeerDependencies:
       - supports-color
 
@@ -9635,4 +9635,4 @@ snapshots:
 
   yocto-queue@1.0.0: {}
 
-  zod@3.23.4: {}
+  zod@3.23.8: {}
