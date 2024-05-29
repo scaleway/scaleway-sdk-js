@@ -58,6 +58,28 @@ export type ListEmailsRequestOrderBy =
   | 'subject_desc'
   | 'subject_asc'
 
+export type ListWebhookEventsRequestOrderBy =
+  | 'created_at_desc'
+  | 'created_at_asc'
+
+export type ListWebhooksRequestOrderBy = 'created_at_desc' | 'created_at_asc'
+
+export type WebhookEventStatus =
+  | 'unknown_status'
+  | 'waiting'
+  | 'sending'
+  | 'sent'
+  | 'error'
+
+export type WebhookEventType =
+  | 'unknown_type'
+  | 'email_queued'
+  | 'email_dropped'
+  | 'email_deferred'
+  | 'email_delivered'
+  | 'email_spam'
+  | 'email_mailbox_not_found'
+
 export interface DomainRecordsDMARC {
   /** Name of the DMARC TXT record. */
   name: string
@@ -238,6 +260,50 @@ export interface Domain {
   region: Region
 }
 
+export interface WebhookEvent {
+  /** ID of the Webhook Event. */
+  id: string
+  /** ID of the Webhook that triggers the Event. */
+  webhookId: string
+  /** ID of the Webhook Event Organization. */
+  organizationId: string
+  /** ID of the Webhook Event Project. */
+  projectId: string
+  /** Type of the Webhook Event. */
+  type: WebhookEventType
+  /** Status of the Webhook Event. */
+  status: WebhookEventStatus
+  /** Data sent to the Webhook destination. */
+  data: string
+  /** Date and time of the Webhook Event creation. */
+  createdAt?: Date
+  /** Date and time of last Webhook Event updates. */
+  updatedAt?: Date
+  /** Optional Email ID if the event is triggered by an Email resource. */
+  emailId?: string
+}
+
+export interface Webhook {
+  /** ID of the Webhook. */
+  id: string
+  /** ID of the Domain to watch for triggering events. */
+  domainId: string
+  /** ID of the Webhook Organization. */
+  organizationId: string
+  /** ID of the Webhook Project. */
+  projectId: string
+  /** Name of the Webhook. */
+  name: string
+  /** List of event types that will trigger a Webhook Event. */
+  eventTypes: WebhookEventType[]
+  /** Scaleway SNS ARN topic to push the events to. */
+  snsArn: string
+  /** Date and time of the Webhook creation. */
+  createdAt?: Date
+  /** Date and time of last Webhook updates. */
+  updatedAt?: Date
+}
+
 export type CancelEmailRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -305,6 +371,16 @@ export type CreateEmailRequest = {
 export interface CreateEmailResponse {
   /** Single page of emails matching the requested criteria. */
   emails: Email[]
+}
+
+export type DeleteWebhookRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the Webhook to delete. */
+  webhookId: string
 }
 
 export interface DomainLastStatus {
@@ -394,6 +470,7 @@ export type ListDomainsRequest = {
 export interface ListDomainsResponse {
   /** Number of domains that match the request (without pagination). */
   totalCount: number
+  /** Single page of domains matching the requested criteria. */
   domains: Domain[]
 }
 
@@ -440,6 +517,54 @@ export interface ListEmailsResponse {
   emails: Email[]
 }
 
+export type ListWebhookEventsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the Webhook linked to the events. */
+  webhookId: string
+  /** (Optional) List Webhook events corresponding to specific criteria. */
+  orderBy?: ListWebhookEventsRequestOrderBy
+  /** Requested page number. Value must be greater or equal to 1. */
+  page?: number
+  /** Requested page size. Value must be between 1 and 100. */
+  pageSize?: number
+}
+
+export interface ListWebhookEventsResponse {
+  /** Number of Webhook events matching the requested criteria. */
+  totalCount: number
+  /** Single page of Webhook events matching the requested criteria. */
+  webhookEvents: WebhookEvent[]
+}
+
+export type ListWebhooksRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** (Optional) List Webhooks corresponding to specific criteria. */
+  orderBy?: ListWebhooksRequestOrderBy
+  /** (Optional) Requested page number. Value must be greater or equal to 1. */
+  page?: number
+  /** (Optional) Requested page size. Value must be between 1 and 100. */
+  pageSize?: number
+  /** (Optional) ID of the Project for which to list the Webhooks. */
+  projectId?: string
+  /** (Optional) ID of the Organization for which to list the Webhooks. */
+  organizationId?: string
+}
+
+export interface ListWebhooksResponse {
+  /** Number of Webhooks matching the requested criteria. */
+  totalCount: number
+  /** Single page of Webhooks matching the requested criteria. */
+  webhooks: Webhook[]
+}
+
 export type RevokeDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -478,4 +603,20 @@ export interface Statistics {
    * been canceled upon request.
    */
   canceledCount: number
+}
+
+export type UpdateWebhookRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the Webhook to update. */
+  webhookId: string
+  /** Name of the Webhook to update. */
+  name?: string
+  /** List of event types to update. */
+  eventTypes?: WebhookEventType[]
+  /** Scaleway SNS ARN topic to update. */
+  snsArn?: string
 }
