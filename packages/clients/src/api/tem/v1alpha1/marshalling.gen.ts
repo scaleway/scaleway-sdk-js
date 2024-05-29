@@ -26,7 +26,12 @@ import type {
   EmailTry,
   ListDomainsResponse,
   ListEmailsResponse,
+  ListWebhookEventsResponse,
+  ListWebhooksResponse,
   Statistics,
+  UpdateWebhookRequest,
+  Webhook,
+  WebhookEvent,
 } from './types.gen'
 
 const unmarshalEmailTry = (data: unknown): EmailTry => {
@@ -157,6 +162,26 @@ export const unmarshalDomain = (data: unknown): Domain => {
   } as Domain
 }
 
+export const unmarshalWebhook = (data: unknown): Webhook => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Webhook' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    domainId: data.domain_id,
+    eventTypes: data.event_types,
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    snsArn: data.sns_arn,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as Webhook
+}
+
 export const unmarshalCreateEmailResponse = (
   data: unknown,
 ): CreateEmailResponse => {
@@ -271,6 +296,60 @@ export const unmarshalListEmailsResponse = (
   } as ListEmailsResponse
 }
 
+const unmarshalWebhookEvent = (data: unknown): WebhookEvent => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'WebhookEvent' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    data: data.data,
+    emailId: data.email_id,
+    id: data.id,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    status: data.status,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at),
+    webhookId: data.webhook_id,
+  } as WebhookEvent
+}
+
+export const unmarshalListWebhookEventsResponse = (
+  data: unknown,
+): ListWebhookEventsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListWebhookEventsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    totalCount: data.total_count,
+    webhookEvents: unmarshalArrayOfObject(
+      data.webhook_events,
+      unmarshalWebhookEvent,
+    ),
+  } as ListWebhookEventsResponse
+}
+
+export const unmarshalListWebhooksResponse = (
+  data: unknown,
+): ListWebhooksResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListWebhooksResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    totalCount: data.total_count,
+    webhooks: unmarshalArrayOfObject(data.webhooks, unmarshalWebhook),
+  } as ListWebhooksResponse
+}
+
 export const unmarshalStatistics = (data: unknown): Statistics => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -359,4 +438,14 @@ export const marshalCreateEmailRequest = (
     request.to !== undefined
       ? request.to.map(elt => marshalCreateEmailRequestAddress(elt, defaults))
       : undefined,
+})
+
+export const marshalUpdateWebhookRequest = (
+  request: UpdateWebhookRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  event_types:
+    request.eventTypes !== undefined ? request.eventTypes : undefined,
+  name: request.name,
+  sns_arn: request.snsArn,
 })

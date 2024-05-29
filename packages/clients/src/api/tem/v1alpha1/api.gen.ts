@@ -15,13 +15,17 @@ import {
 import {
   marshalCreateDomainRequest,
   marshalCreateEmailRequest,
+  marshalUpdateWebhookRequest,
   unmarshalCreateEmailResponse,
   unmarshalDomain,
   unmarshalDomainLastStatus,
   unmarshalEmail,
   unmarshalListDomainsResponse,
   unmarshalListEmailsResponse,
+  unmarshalListWebhookEventsResponse,
+  unmarshalListWebhooksResponse,
   unmarshalStatistics,
+  unmarshalWebhook,
 } from './marshalling.gen'
 import type {
   CancelEmailRequest,
@@ -29,6 +33,7 @@ import type {
   CreateDomainRequest,
   CreateEmailRequest,
   CreateEmailResponse,
+  DeleteWebhookRequest,
   Domain,
   DomainLastStatus,
   Email,
@@ -40,8 +45,14 @@ import type {
   ListDomainsResponse,
   ListEmailsRequest,
   ListEmailsResponse,
+  ListWebhookEventsRequest,
+  ListWebhookEventsResponse,
+  ListWebhooksRequest,
+  ListWebhooksResponse,
   RevokeDomainRequest,
   Statistics,
+  UpdateWebhookRequest,
+  Webhook,
 } from './types.gen'
 
 const jsonContentHeaders = {
@@ -340,4 +351,69 @@ export class API extends ParentAPI {
       },
       unmarshalDomainLastStatus,
     )
+
+  protected pageOfListWebhooks = (
+    request: Readonly<ListWebhooksRequest> = {},
+  ) =>
+    this.client.fetch<ListWebhooksResponse>(
+      {
+        method: 'GET',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/webhooks`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['project_id', request.projectId],
+        ),
+      },
+      unmarshalListWebhooksResponse,
+    )
+
+  listWebhooks = (request: Readonly<ListWebhooksRequest> = {}) =>
+    enrichForPagination('webhooks', this.pageOfListWebhooks, request)
+
+  updateWebhook = (request: Readonly<UpdateWebhookRequest>) =>
+    this.client.fetch<Webhook>(
+      {
+        body: JSON.stringify(
+          marshalUpdateWebhookRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/webhooks/${validatePathParam('webhookId', request.webhookId)}`,
+      },
+      unmarshalWebhook,
+    )
+
+  deleteWebhook = (request: Readonly<DeleteWebhookRequest>) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/webhooks/${validatePathParam('webhookId', request.webhookId)}`,
+    })
+
+  protected pageOfListWebhookEvents = (
+    request: Readonly<ListWebhookEventsRequest>,
+  ) =>
+    this.client.fetch<ListWebhookEventsResponse>(
+      {
+        method: 'GET',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/webhooks/${validatePathParam('webhookId', request.webhookId)}/events`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListWebhookEventsResponse,
+    )
+
+  listWebhookEvents = (request: Readonly<ListWebhookEventsRequest>) =>
+    enrichForPagination('webhookEvents', this.pageOfListWebhookEvents, request)
 }
