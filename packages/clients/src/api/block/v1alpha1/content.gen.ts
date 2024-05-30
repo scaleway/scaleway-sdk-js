@@ -13,6 +13,7 @@ export const REFERENCE_TRANSIENT_STATUSES: ReferenceStatus[] = [
 export const SNAPSHOT_TRANSIENT_STATUSES: SnapshotStatus[] = [
   'creating',
   'deleting',
+  'exporting',
 ]
 
 /** Lists transient statutes of the enum {@link VolumeStatus}. */

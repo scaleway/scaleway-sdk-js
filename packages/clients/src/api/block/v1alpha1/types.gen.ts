@@ -34,6 +34,7 @@ export type SnapshotStatus =
   | 'deleted'
   | 'in_use'
   | 'locked'
+  | 'exporting'
 
 export type StorageClass =
   | 'unknown_storage_class'
@@ -241,6 +242,17 @@ export type DeleteVolumeRequest = {
   volumeId: string
 }
 
+export type ExportSnapshotToObjectStorageRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** UUID of the snapshot. */
+  snapshotId: string
+  /** Scaleway Object Storage bucket where the object is stored. */
+  bucket: string
+  /** The object key inside the given bucket. */
+  key: string
+}
+
 export type GetSnapshotRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
@@ -253,6 +265,23 @@ export type GetVolumeRequest = {
   zone?: Zone
   /** UUID of the volume. */
   volumeId: string
+}
+
+export type ImportSnapshotFromObjectStorageRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** Scaleway Object Storage bucket where the object is stored. */
+  bucket: string
+  /** The object key inside the given bucket. */
+  key: string
+  /** Name of the snapshot. */
+  name: string
+  /** UUID of the Project to which the volume and the snapshot belong. */
+  projectId?: string
+  /** List of tags assigned to the snapshot. */
+  tags?: string[]
+  /** Size of the snapshot. */
+  size?: number
 }
 
 export type ImportSnapshotFromS3Request = {

@@ -13,6 +13,8 @@ import type {
   CreateVolumeRequest,
   CreateVolumeRequestFromEmpty,
   CreateVolumeRequestFromSnapshot,
+  ExportSnapshotToObjectStorageRequest,
+  ImportSnapshotFromObjectStorageRequest,
   ImportSnapshotFromS3Request,
   ListSnapshotsResponse,
   ListVolumeTypesResponse,
@@ -236,6 +238,26 @@ export const marshalCreateVolumeRequest = (
     },
   ]),
   ...resolveOneOf([{ param: 'perf_iops', value: request.perfIops }]),
+})
+
+export const marshalExportSnapshotToObjectStorageRequest = (
+  request: ExportSnapshotToObjectStorageRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  bucket: request.bucket,
+  key: request.key,
+})
+
+export const marshalImportSnapshotFromObjectStorageRequest = (
+  request: ImportSnapshotFromObjectStorageRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  bucket: request.bucket,
+  key: request.key,
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  size: request.size,
+  tags: request.tags,
 })
 
 export const marshalImportSnapshotFromS3Request = (
