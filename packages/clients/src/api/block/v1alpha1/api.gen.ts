@@ -15,6 +15,8 @@ import {
 import {
   marshalCreateSnapshotRequest,
   marshalCreateVolumeRequest,
+  marshalExportSnapshotToObjectStorageRequest,
+  marshalImportSnapshotFromObjectStorageRequest,
   marshalImportSnapshotFromS3Request,
   marshalUpdateSnapshotRequest,
   marshalUpdateVolumeRequest,
@@ -29,8 +31,10 @@ import type {
   CreateVolumeRequest,
   DeleteSnapshotRequest,
   DeleteVolumeRequest,
+  ExportSnapshotToObjectStorageRequest,
   GetSnapshotRequest,
   GetVolumeRequest,
+  ImportSnapshotFromObjectStorageRequest,
   ImportSnapshotFromS3Request,
   ListSnapshotsRequest,
   ListSnapshotsResponse,
@@ -314,6 +318,7 @@ export class API extends ParentAPI {
    * contain a QCOW2 image. The bucket can be imported into any Availability
    * Zone as long as it is in the same region as the bucket.
    *
+   * @deprecated
    * @param request - The request {@link ImportSnapshotFromS3Request}
    * @returns A Promise of Snapshot
    */
@@ -326,6 +331,57 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/import-from-s3`,
+      },
+      unmarshalSnapshot,
+    )
+
+  /**
+   * Import a snapshot from a Scaleway Object Storage bucket. The bucket must
+   * contain a QCOW2 image. The bucket can be imported into any Availability
+   * Zone as long as it is in the same region as the bucket.
+   *
+   * @param request - The request {@link ImportSnapshotFromObjectStorageRequest}
+   * @returns A Promise of Snapshot
+   */
+  importSnapshotFromObjectStorage = (
+    request: Readonly<ImportSnapshotFromObjectStorageRequest>,
+  ) =>
+    this.client.fetch<Snapshot>(
+      {
+        body: JSON.stringify(
+          marshalImportSnapshotFromObjectStorageRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/import-from-object-storage`,
+      },
+      unmarshalSnapshot,
+    )
+
+  /**
+   * Export a snapshot to a Scaleway Object Storage bucket. The snapshot is
+   * exported in QCOW2 format. The snapshot must not be in transient state.
+   *
+   * @param request - The request {@link ExportSnapshotToObjectStorageRequest}
+   * @returns A Promise of Snapshot
+   */
+  exportSnapshotToObjectStorage = (
+    request: Readonly<ExportSnapshotToObjectStorageRequest>,
+  ) =>
+    this.client.fetch<Snapshot>(
+      {
+        body: JSON.stringify(
+          marshalExportSnapshotToObjectStorageRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}/export-to-object-storage`,
       },
       unmarshalSnapshot,
     )

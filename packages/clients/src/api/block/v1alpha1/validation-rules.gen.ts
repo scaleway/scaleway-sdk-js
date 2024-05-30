@@ -13,6 +13,12 @@ export const CreateVolumeRequest = {
   },
 }
 
+export const ImportSnapshotFromObjectStorageRequest = {
+  name: {
+    minLength: 1,
+  },
+}
+
 export const ImportSnapshotFromS3Request = {
   name: {
     minLength: 1,
