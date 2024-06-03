@@ -556,6 +556,8 @@ export type ListWebhooksRequest = {
   projectId?: string
   /** (Optional) ID of the Organization for which to list the Webhooks. */
   organizationId?: string
+  /** (Optional) ID of the Domain for which to list the Webhooks. */
+  domainId?: string
 }
 
 export interface ListWebhooksResponse {
