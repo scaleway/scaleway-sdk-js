@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.32.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.31.0...@scaleway/sdk@2.32.0) (2024-06-03)
+
+### Features
+
+- **baremetal:** add name filter for ListOffersRequest ([#1296](https://github.com/scaleway/scaleway-sdk-js/issues/1296)) ([066a7e9](https://github.com/scaleway/scaleway-sdk-js/commit/066a7e969a11543cfa151d4b704f90ec94d7996c))
+- **block:** add exporting snapshot to s3 ([#1302](https://github.com/scaleway/scaleway-sdk-js/issues/1302)) ([5a5009e](https://github.com/scaleway/scaleway-sdk-js/commit/5a5009ea69c2599ae3f118f4fb8c13825c8b3b3b))
+- **instance:** move EncryptedRdpPassword elements to Server ([#1298](https://github.com/scaleway/scaleway-sdk-js/issues/1298)) ([9be8437](https://github.com/scaleway/scaleway-sdk-js/commit/9be8437301065141b7f9c3069390d7a77cd0098b))
+- **k8s:** remove MigrateToPrivateNetwork rpc ([#1297](https://github.com/scaleway/scaleway-sdk-js/issues/1297)) ([41c840e](https://github.com/scaleway/scaleway-sdk-js/commit/41c840e8050e31b2261a7674783e22862080b710))
+- **tem:** read update delete webhook(s) ([#1301](https://github.com/scaleway/scaleway-sdk-js/issues/1301)) ([329b018](https://github.com/scaleway/scaleway-sdk-js/commit/329b01881e418dbcbab784dd216d6853902575db))
+
+### Bug Fixes
+
+- **secret_manager:** update secret version status enum doc ([#1295](https://github.com/scaleway/scaleway-sdk-js/issues/1295)) ([5f2a018](https://github.com/scaleway/scaleway-sdk-js/commit/5f2a018fa0b686aa28fd7cbf72ae75ded1b7b2cb))
+
 ## [2.31.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.30.0...@scaleway/sdk@2.31.0) (2024-05-27)
 
 ### Features
