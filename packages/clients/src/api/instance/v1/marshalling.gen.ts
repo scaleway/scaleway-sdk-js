@@ -1755,6 +1755,7 @@ export const marshalCreatePrivateNICRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ip_ids: request.ipIds,
+  ipam_ip_ids: request.ipamIpIds,
   private_network_id: request.privateNetworkId,
   tags: request.tags,
 })
