@@ -912,8 +912,13 @@ export type CreatePrivateNICRequest = {
   privateNetworkId: string
   /** Private NIC tags. */
   tags?: string[]
-  /** Ip_ids defined from IPAM. */
+  /** @deprecated Ip_ids defined from IPAM. */
   ipIds?: string[]
+  /**
+   * UUID of IPAM ips, to be attached to the instance in the requested private
+   * network.
+   */
+  ipamIpIds?: string[]
 }
 
 export interface CreatePrivateNICResponse {
