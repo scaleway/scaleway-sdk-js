@@ -78,6 +78,11 @@ export interface JobRun {
   region: Region
 }
 
+export interface Resource {
+  cpuLimit: number
+  memoryLimit: number
+}
+
 export interface UpdateJobDefinitionRequestCronScheduleConfig {
   schedule?: string
   timezone?: string
@@ -180,6 +185,18 @@ export type ListJobRunsRequest = {
 export interface ListJobRunsResponse {
   jobRuns: JobRun[]
   totalCount: number
+}
+
+export type ListJobsResourcesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+}
+
+export interface ListJobsResourcesResponse {
+  resources: Resource[]
 }
 
 export type StartJobDefinitionRequest = {

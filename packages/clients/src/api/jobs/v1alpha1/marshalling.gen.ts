@@ -15,6 +15,8 @@ import type {
   JobRun,
   ListJobDefinitionsResponse,
   ListJobRunsResponse,
+  ListJobsResourcesResponse,
+  Resource,
   StartJobDefinitionRequest,
   StartJobDefinitionResponse,
   UpdateJobDefinitionRequest,
@@ -120,6 +122,33 @@ export const unmarshalListJobRunsResponse = (
     jobRuns: unmarshalArrayOfObject(data.job_runs, unmarshalJobRun),
     totalCount: data.total_count,
   } as ListJobRunsResponse
+}
+
+const unmarshalResource = (data: unknown): Resource => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Resource' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    cpuLimit: data.cpu_limit,
+    memoryLimit: data.memory_limit,
+  } as Resource
+}
+
+export const unmarshalListJobsResourcesResponse = (
+  data: unknown,
+): ListJobsResourcesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListJobsResourcesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    resources: unmarshalArrayOfObject(data.resources, unmarshalResource),
+  } as ListJobsResourcesResponse
 }
 
 export const unmarshalStartJobDefinitionResponse = (

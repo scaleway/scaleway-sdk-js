@@ -15,6 +15,7 @@ import {
   unmarshalJobRun,
   unmarshalListJobDefinitionsResponse,
   unmarshalListJobRunsResponse,
+  unmarshalListJobsResourcesResponse,
   unmarshalStartJobDefinitionResponse,
 } from './marshalling.gen'
 import type {
@@ -28,6 +29,8 @@ import type {
   ListJobDefinitionsResponse,
   ListJobRunsRequest,
   ListJobRunsResponse,
+  ListJobsResourcesRequest,
+  ListJobsResourcesResponse,
   StartJobDefinitionRequest,
   StartJobDefinitionResponse,
   StopJobRunRequest,
@@ -226,4 +229,19 @@ export class API extends ParentAPI {
    */
   listJobRuns = (request: Readonly<ListJobRunsRequest> = {}) =>
     enrichForPagination('jobRuns', this.pageOfListJobRuns, request)
+
+  /**
+   * List jobs resources for the console.
+   *
+   * @param request - The request {@link ListJobsResourcesRequest}
+   * @returns A Promise of ListJobsResourcesResponse
+   */
+  listJobsResources = (request: Readonly<ListJobsResourcesRequest> = {}) =>
+    this.client.fetch<ListJobsResourcesResponse>(
+      {
+        method: 'GET',
+        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/jobs-resources`,
+      },
+      unmarshalListJobsResourcesResponse,
+    )
 }
