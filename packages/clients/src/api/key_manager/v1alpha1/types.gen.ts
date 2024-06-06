@@ -35,7 +35,11 @@ export interface KeyRotationPolicy {
 }
 
 export interface KeyUsage {
-  /** One-of ('usage'): at most one of 'symmetricEncryption' could be set. */
+  /**
+   * Algorithms used to encrypt and decrypt arbitrary payloads.
+   *
+   * One-of ('usage'): at most one of 'symmetricEncryption' could be set.
+   */
   symmetricEncryption?: KeyAlgorithmSymmetricEncryption
 }
 
@@ -213,7 +217,7 @@ export type GenerateDataKeyRequest = {
   region?: Region
   /** ID of the key. */
   keyId: string
-  /** Symmetric encryption algorithm of the data encryption key. */
+  /** Encryption algorithm of the data encryption key. */
   algorithm?: DataKeyAlgorithmSymmetricEncryption
   /**
    * Default value is `false`, meaning that the plaintext is returned. Set it to
