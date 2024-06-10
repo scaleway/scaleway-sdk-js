@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.33.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.32.0...@scaleway/sdk@2.33.0) (2024-06-10)
+
+### Features
+
+- **instance:** adapt pnic creation to ipam workflow ([#1307](https://github.com/scaleway/scaleway-sdk-js/issues/1307)) ([b71a504](https://github.com/scaleway/scaleway-sdk-js/commit/b71a504155908126989c1e89b0a0a270352d0d96))
+- **serverless_jobs:** add ListJobsResources method ([#1309](https://github.com/scaleway/scaleway-sdk-js/issues/1309)) ([566a38e](https://github.com/scaleway/scaleway-sdk-js/commit/566a38ece7ac0bea74c4d4881713d28d9d2a7493))
+- **serverless:** add node22, python312, php83, go122 and rust178 runtimes ([#1306](https://github.com/scaleway/scaleway-sdk-js/issues/1306)) ([44bf792](https://github.com/scaleway/scaleway-sdk-js/commit/44bf792a53cfdddec1b402f342ec9779b8ea29ea))
+- **tem:** list webhooks by domain ID ([#1305](https://github.com/scaleway/scaleway-sdk-js/issues/1305)) ([82c290c](https://github.com/scaleway/scaleway-sdk-js/commit/82c290c3615c15eef4a4e4a80bf46161caa84145))
+
 ## [2.32.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.31.0...@scaleway/sdk@2.32.0) (2024-06-03)
 
 ### Features
