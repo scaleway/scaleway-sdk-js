@@ -331,7 +331,7 @@ export interface OfferStorageInfo {
 
 export interface IP {
   /** ID of the IP. */
-  ipId: string
+  ipId: number
   /** Address of the IP. */
   address: string
   /** Reverse IP value. */
