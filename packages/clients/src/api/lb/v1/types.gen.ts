@@ -1018,8 +1018,8 @@ export type CreateLbRequest = {
    */
   ipId?: string
   /**
-   * Defines whether to automatically assign a flexible public IP to lb. Default
-   * value is `false` (do not assign).
+   * Defines whether to automatically assign a flexible public IP to the Load
+   * Balancer. Default value is `true` (assign).
    */
   assignFlexibleIp?: boolean
   /**
@@ -2224,8 +2224,8 @@ export type ZonedApiCreateLbRequest = {
    */
   ipId?: string
   /**
-   * Defines whether to automatically assign a flexible public IP to lb. Default
-   * value is `false` (do not assign).
+   * Defines whether to automatically assign a flexible public IP to the Load
+   * Balancer. Default value is `true` (assign).
    */
   assignFlexibleIp?: boolean
   /**
