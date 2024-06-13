@@ -269,6 +269,8 @@ export interface WebhookEvent {
   organizationId: string
   /** ID of the Webhook Event Project. */
   projectId: string
+  /** ID of the webhook event domain. */
+  domainId: string
   /** Type of the Webhook Event. */
   type: WebhookEventType
   /** Status of the Webhook Event. */
@@ -531,6 +533,18 @@ export type ListWebhookEventsRequest = {
   page?: number
   /** Requested page size. Value must be between 1 and 100. */
   pageSize?: number
+  /** ID of the email linked to the events. */
+  emailId?: string
+  /** List of event types linked to the events. */
+  eventTypes?: WebhookEventType[]
+  /** List of event statuses. */
+  statuses?: WebhookEventStatus[]
+  /** ID of the webhook Project. */
+  projectId?: string
+  /** ID of the webhook Organization. */
+  organizationId?: string
+  /** ID of the domain to watch for triggering events. */
+  domainId?: string
 }
 
 export interface ListWebhookEventsResponse {
