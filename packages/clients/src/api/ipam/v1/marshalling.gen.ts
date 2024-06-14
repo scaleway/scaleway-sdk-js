@@ -76,7 +76,7 @@ export const unmarshalIP = (data: unknown): IP => {
     region: data.region,
     resource: data.resource ? unmarshalResource(data.resource) : undefined,
     reverses: unmarshalArrayOfObject(data.reverses, unmarshalReverse),
-    source: unmarshalSource(data.source),
+    source: data.source ? unmarshalSource(data.source) : undefined,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
     zone: data.zone,
