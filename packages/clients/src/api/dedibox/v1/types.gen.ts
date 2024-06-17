@@ -989,7 +989,7 @@ export interface Log {
 export interface ServerEvent {
   /** ID of the event. */
   eventId: number
-  /** Descriptiion of the event. */
+  /** Description of the event. */
   description: string
   /** Date of the event. */
   date?: Date
