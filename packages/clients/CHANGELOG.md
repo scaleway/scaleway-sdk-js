@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.34.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.33.0...@scaleway/sdk@2.34.0) (2024-06-17)
+
+### Features
+
+- **tem:** add filters on list webhooks events endpoint ([#1313](https://github.com/scaleway/scaleway-sdk-js/issues/1313)) ([3a61fcc](https://github.com/scaleway/scaleway-sdk-js/commit/3a61fccb3189e0e58bb48dae90c870eb2b7ddc1d))
+
+### Bug Fixes
+
+- **dedibox:** change ip_id from string to uint64 ([#1311](https://github.com/scaleway/scaleway-sdk-js/issues/1311)) ([55cf7fb](https://github.com/scaleway/scaleway-sdk-js/commit/55cf7fb603625a011bed5e4f6215a6c5177f22f3))
+- **ipam/v1:** allow source field to be null in responses ([#1315](https://github.com/scaleway/scaleway-sdk-js/issues/1315)) ([ca272ea](https://github.com/scaleway/scaleway-sdk-js/commit/ca272ea92c5bbe7a3efa3e16ecff2af1118ba47a))
+- **lb:** change default value for assign_flexible_ip ([#1312](https://github.com/scaleway/scaleway-sdk-js/issues/1312)) ([b46948e](https://github.com/scaleway/scaleway-sdk-js/commit/b46948eeb84afba8069179259c70517588c3eb3f))
+
 ## [2.33.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.32.0...@scaleway/sdk@2.33.0) (2024-06-10)
 
 ### Features
