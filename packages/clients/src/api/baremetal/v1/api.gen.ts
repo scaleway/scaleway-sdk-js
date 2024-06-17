@@ -647,7 +647,7 @@ export class API extends ParentAPI {
     )
 }
 
-/** Elastic Metal Private Network API. */
+/** Elastic Metal - Private Network API. */
 export class PrivateNetworkAPI extends ParentAPI {
   /** Lists the available zones of the API. */
   public static readonly LOCALITIES: Zone[] = ['fr-par-2']
