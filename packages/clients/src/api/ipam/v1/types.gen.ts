@@ -86,7 +86,7 @@ export interface IP {
   /** Date the IP was last modified. */
   updatedAt?: Date
   /** Source pool where the IP was booked in. */
-  source: Source
+  source?: Source
   /** Resource which the IP is attached to. */
   resource?: Resource
   /** Tags for the IP. */
