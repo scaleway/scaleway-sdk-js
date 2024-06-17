@@ -404,12 +404,18 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/webhooks/${validatePathParam('webhookId', request.webhookId)}/events`,
         urlParams: urlParams(
+          ['domain_id', request.domainId],
+          ['email_id', request.emailId],
+          ['event_types', request.eventTypes],
           ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
+          ['project_id', request.projectId],
+          ['statuses', request.statuses],
         ),
       },
       unmarshalListWebhookEventsResponse,

@@ -306,6 +306,7 @@ const unmarshalWebhookEvent = (data: unknown): WebhookEvent => {
   return {
     createdAt: unmarshalDate(data.created_at),
     data: data.data,
+    domainId: data.domain_id,
     emailId: data.email_id,
     id: data.id,
     organizationId: data.organization_id,
