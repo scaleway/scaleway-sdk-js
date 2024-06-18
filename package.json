@@ -46,7 +46,7 @@
   "devDependencies": {
     "@commitlint/cli": "19.3.0",
     "@commitlint/config-conventional": "19.2.2",
-    "@scaleway/eslint-config-react": "3.18.2",
+    "@scaleway/eslint-config-react": "3.18.4",
     "@vitest/coverage-istanbul": "1.6.0",
     "@vitest/coverage-v8": "1.6.0",
     "@vitest/ui": "1.6.0",
