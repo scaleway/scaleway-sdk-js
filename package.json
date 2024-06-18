@@ -51,7 +51,7 @@
     "@vitest/coverage-v8": "1.6.0",
     "@vitest/ui": "1.6.0",
     "babel-plugin-annotate-pure-calls": "0.4.0",
-    "browserslist": "4.23.0",
+    "browserslist": "4.23.1",
     "cross-env": "7.0.3",
     "cross-fetch": "4.0.0",
     "cz-conventional-changelog": "3.3.0",
