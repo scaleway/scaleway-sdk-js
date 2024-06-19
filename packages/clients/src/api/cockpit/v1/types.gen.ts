@@ -18,6 +18,14 @@ export type ListDataSourcesRequestOrderBy =
 
 export type ListGrafanaUsersRequestOrderBy = 'login_asc' | 'login_desc'
 
+export type ListManagedAlertsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'name_asc'
+  | 'name_desc'
+  | 'type_asc'
+  | 'type_desc'
+
 export type ListPlansRequestOrderBy = 'name_asc' | 'name_desc'
 
 export type ListTokensRequestOrderBy =
@@ -109,6 +117,14 @@ export interface GrafanaUser {
   role: GrafanaUserRole
   /** Grafana user's password. */
   password?: string
+}
+
+export interface Alert {
+  productFamily: string
+  product: string
+  name: string
+  rule: string
+  description: string
 }
 
 /** Type of pricing plan. */
@@ -328,6 +344,14 @@ export interface ListGrafanaUsersResponse {
   totalCount: number
   /** Grafana users information. */
   grafanaUsers: GrafanaUser[]
+}
+
+/** Response returned when listing data sources. */
+export interface ListManagedAlertsResponse {
+  /** Total count of data sources matching the request. */
+  totalCount: number
+  /** Alerts matching the request within the pagination. */
+  alerts: Alert[]
 }
 
 /** Output returned when listing pricing plans. */
@@ -562,6 +586,26 @@ export type RegionalApiListDataSourcesRequest = {
    * returned.
    */
   types?: DataSourceType[]
+}
+
+/** Enable the sending of managed alerts. */
+export type RegionalApiListManagedAlertsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Page number to return, from the paginated results. */
+  page?: number
+  /** Number of data sources to return per page. */
+  pageSize?: number
+  /** Sort order for data sources in the response. */
+  orderBy?: ListManagedAlertsRequestOrderBy
+  /**
+   * Project ID to filter for, only data sources from this Project will be
+   * returned.
+   */
+  projectId?: string
 }
 
 /** List tokens. */

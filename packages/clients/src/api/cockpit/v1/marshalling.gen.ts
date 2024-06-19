@@ -8,6 +8,7 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  Alert,
   AlertManager,
   ContactPoint,
   ContactPointEmail,
@@ -23,6 +24,7 @@ import type {
   ListDataSourcesResponse,
   ListGrafanaProductDashboardsResponse,
   ListGrafanaUsersResponse,
+  ListManagedAlertsResponse,
   ListPlansResponse,
   ListTokensResponse,
   Plan,
@@ -253,6 +255,37 @@ export const unmarshalListGrafanaUsersResponse = (
     ),
     totalCount: data.total_count,
   } as ListGrafanaUsersResponse
+}
+
+const unmarshalAlert = (data: unknown): Alert => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Alert' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    description: data.description,
+    name: data.name,
+    product: data.product,
+    productFamily: data.product_family,
+    rule: data.rule,
+  } as Alert
+}
+
+export const unmarshalListManagedAlertsResponse = (
+  data: unknown,
+): ListManagedAlertsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListManagedAlertsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    alerts: unmarshalArrayOfObject(data.alerts, unmarshalAlert),
+    totalCount: data.total_count,
+  } as ListManagedAlertsResponse
 }
 
 export const unmarshalListPlansResponse = (
