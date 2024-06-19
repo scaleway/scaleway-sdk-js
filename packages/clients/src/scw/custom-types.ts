@@ -67,3 +67,8 @@ export interface ScwFile {
   /** Content of the file in base64. */
   content: string
 }
+
+/** A representation of a decimal value, such as 2.5.
+ * Comparable to language-native decimal formats, such as Java's BigDecimal or Python's decimal.Decimal.
+ * Lookup protobuf google.type.Decimal for details **/
+export type Decimal = string
