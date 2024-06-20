@@ -2,6 +2,7 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 export { GlobalAPI, RegionalAPI } from './api.gen'
 export type {
+  Alert,
   AlertManager,
   ContactPoint,
   ContactPointEmail,
@@ -29,6 +30,8 @@ export type {
   ListGrafanaProductDashboardsResponse,
   ListGrafanaUsersRequestOrderBy,
   ListGrafanaUsersResponse,
+  ListManagedAlertsRequestOrderBy,
+  ListManagedAlertsResponse,
   ListPlansRequestOrderBy,
   ListPlansResponse,
   ListTokensRequestOrderBy,
@@ -51,6 +54,7 @@ export type {
   RegionalApiGetUsageOverviewRequest,
   RegionalApiListContactPointsRequest,
   RegionalApiListDataSourcesRequest,
+  RegionalApiListManagedAlertsRequest,
   RegionalApiListTokensRequest,
   RegionalApiTriggerTestAlertRequest,
   Token,

@@ -31,6 +31,7 @@ import {
   unmarshalListDataSourcesResponse,
   unmarshalListGrafanaProductDashboardsResponse,
   unmarshalListGrafanaUsersResponse,
+  unmarshalListManagedAlertsResponse,
   unmarshalListPlansResponse,
   unmarshalListTokensResponse,
   unmarshalPlan,
@@ -59,6 +60,7 @@ import type {
   ListDataSourcesResponse,
   ListGrafanaProductDashboardsResponse,
   ListGrafanaUsersResponse,
+  ListManagedAlertsResponse,
   ListPlansResponse,
   ListTokensResponse,
   Plan,
@@ -78,6 +80,7 @@ import type {
   RegionalApiGetUsageOverviewRequest,
   RegionalApiListContactPointsRequest,
   RegionalApiListDataSourcesRequest,
+  RegionalApiListManagedAlertsRequest,
   RegionalApiListTokensRequest,
   RegionalApiTriggerTestAlertRequest,
   Token,
@@ -758,6 +761,39 @@ export class RegionalAPI extends ParentAPI {
       method: 'POST',
       path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/contact-points/delete`,
     })
+
+  protected pageOfListManagedAlerts = (
+    request: Readonly<RegionalApiListManagedAlertsRequest> = {},
+  ) =>
+    this.client.fetch<ListManagedAlertsResponse>(
+      {
+        method: 'GET',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/managed-alerts`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
+        ),
+      },
+      unmarshalListManagedAlertsResponse,
+    )
+
+  /**
+   * List managed alerts. List all managed alerts for the specified Project.
+   *
+   * @param request - The request {@link RegionalApiListManagedAlertsRequest}
+   * @returns A Promise of ListManagedAlertsResponse
+   */
+  listManagedAlerts = (
+    request: Readonly<RegionalApiListManagedAlertsRequest> = {},
+  ) => enrichForPagination('alerts', this.pageOfListManagedAlerts, request)
 
   /**
    * Enable managed alerts. Enable the sending of managed alerts for the
