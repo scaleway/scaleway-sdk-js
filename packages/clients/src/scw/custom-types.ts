@@ -72,7 +72,7 @@ export interface ScwFile {
  * Comparable to language-native decimal formats, such as Java's BigDecimal or Python's decimal.Decimal.
  * Lookup protobuf google.type.Decimal for details **/
 export class Decimal {
-  str: string
+  private readonly str: string
   constructor(v: string) {
     this.str = v
   }
