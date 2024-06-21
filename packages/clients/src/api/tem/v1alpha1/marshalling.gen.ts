@@ -426,10 +426,7 @@ export const marshalCreateEmailRequest = (
     request.cc !== undefined
       ? request.cc.map(elt => marshalCreateEmailRequestAddress(elt, defaults))
       : undefined,
-  from:
-    request.from !== undefined
-      ? marshalCreateEmailRequestAddress(request.from, defaults)
-      : undefined,
+  from: marshalCreateEmailRequestAddress(request.from, defaults),
   html: request.html,
   project_id: request.projectId ?? defaults.defaultProjectId,
   send_before: request.sendBefore,
