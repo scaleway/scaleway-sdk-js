@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.35.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.34.0...@scaleway/sdk@2.35.0) (2024-06-24)
+
+### Features
+
+- **cockpit:** add route to update datasource name ([#1333](https://github.com/scaleway/scaleway-sdk-js/issues/1333)) ([63772b2](https://github.com/scaleway/scaleway-sdk-js/commit/63772b227a8bdb23076c6ff46b7bd44738f02384))
+- **tem:** add missing rules ([#1335](https://github.com/scaleway/scaleway-sdk-js/issues/1335)) ([4bea1d2](https://github.com/scaleway/scaleway-sdk-js/commit/4bea1d2b5d1e478e0dc6013c8143451ad1e35a2c))
+
+### Bug Fixes
+
+- **serverless:** support rust179 instead of rust178 ([#1332](https://github.com/scaleway/scaleway-sdk-js/issues/1332)) ([877702c](https://github.com/scaleway/scaleway-sdk-js/commit/877702c50c0d446a083d04035ec781f368198264))
+
 ## [2.34.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.33.0...@scaleway/sdk@2.34.0) (2024-06-17)
 
 ### Features
