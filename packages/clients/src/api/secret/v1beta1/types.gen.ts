@@ -430,6 +430,25 @@ export type GetSecretVersionRequest = {
   revision: string
 }
 
+export type ListSecretTypesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the Project to target. */
+  projectId?: string
+  page?: number
+  pageSize?: number
+}
+
+export interface ListSecretTypesResponse {
+  /** List of secret types. */
+  types: SecretType[]
+  /** Count of all secret types matching the requested criteria. */
+  totalCount: number
+}
+
 export type ListSecretVersionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the

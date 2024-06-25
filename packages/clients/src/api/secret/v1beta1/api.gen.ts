@@ -15,6 +15,7 @@ import {
   marshalUpdateSecretVersionRequest,
   unmarshalAccessSecretVersionResponse,
   unmarshalBrowseSecretsResponse,
+  unmarshalListSecretTypesResponse,
   unmarshalListSecretVersionsResponse,
   unmarshalListSecretsResponse,
   unmarshalListTagsResponse,
@@ -36,6 +37,8 @@ import type {
   EnableSecretVersionRequest,
   GetSecretRequest,
   GetSecretVersionRequest,
+  ListSecretTypesRequest,
+  ListSecretTypesResponse,
   ListSecretVersionsRequest,
   ListSecretVersionsResponse,
   ListSecretsRequest,
@@ -457,4 +460,35 @@ export class API extends ParentAPI {
    */
   listTags = (request: Readonly<ListTagsRequest> = {}) =>
     enrichForPagination('tags', this.pageOfListTags, request)
+
+  protected pageOfListSecretTypes = (
+    request: Readonly<ListSecretTypesRequest> = {},
+  ) =>
+    this.client.fetch<ListSecretTypesResponse>(
+      {
+        method: 'GET',
+        path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secret-types`,
+        urlParams: urlParams(
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
+        ),
+      },
+      unmarshalListSecretTypesResponse,
+    )
+
+  /**
+   * List secret types. List all secret types created within a given Project.
+   *
+   * @param request - The request {@link ListSecretTypesRequest}
+   * @returns A Promise of ListSecretTypesResponse
+   */
+  listSecretTypes = (request: Readonly<ListSecretTypesRequest> = {}) =>
+    enrichForPagination('types', this.pageOfListSecretTypes, request)
 }

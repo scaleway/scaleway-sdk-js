@@ -25,6 +25,8 @@ export type {
   EphemeralProperties,
   GetSecretRequest,
   GetSecretVersionRequest,
+  ListSecretTypesRequest,
+  ListSecretTypesResponse,
   ListSecretVersionsRequest,
   ListSecretVersionsResponse,
   ListSecretsRequest,
