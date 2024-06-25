@@ -119,6 +119,7 @@ export const unmarshalFunction = (data: unknown): Function => {
     region: data.region,
     runtime: data.runtime,
     runtimeMessage: data.runtime_message,
+    sandbox: data.sandbox,
     secretEnvironmentVariables: unmarshalArrayOfObject(
       data.secret_environment_variables,
       unmarshalSecretHashedValue,
@@ -445,6 +446,7 @@ export const marshalCreateFunctionRequest = (
   namespace_id: request.namespaceId,
   privacy: request.privacy,
   runtime: request.runtime,
+  sandbox: request.sandbox,
   secret_environment_variables:
     request.secretEnvironmentVariables !== undefined
       ? request.secretEnvironmentVariables.map(elt =>
@@ -576,6 +578,7 @@ export const marshalUpdateFunctionRequest = (
   privacy: request.privacy,
   redeploy: request.redeploy,
   runtime: request.runtime,
+  sandbox: request.sandbox,
   secret_environment_variables:
     request.secretEnvironmentVariables !== undefined
       ? request.secretEnvironmentVariables.map(elt =>

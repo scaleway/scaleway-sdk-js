@@ -58,6 +58,8 @@ export type FunctionRuntime =
   | 'go122'
   | 'rust179'
 
+export type FunctionSandbox = 'unknown_sandbox' | 'v1' | 'v2'
+
 export type FunctionStatus =
   | 'unknown'
   | 'ready'
@@ -296,6 +298,8 @@ export interface Function {
    */
   httpOption: FunctionHttpOption
   runtimeMessage: string
+  /** Execution environment of the function. */
+  sandbox: FunctionSandbox
 }
 
 export interface Namespace {
@@ -460,6 +464,8 @@ export type CreateFunctionRequest = {
    * - Enabled: Serve both HTTP and HTTPS traffic.
    */
   httpOption?: FunctionHttpOption
+  /** Execution environment of the function. */
+  sandbox?: FunctionSandbox
 }
 
 export type CreateNamespaceRequest = {
@@ -945,6 +951,8 @@ export type UpdateFunctionRequest = {
    * - Enabled: Serve both HTTP and HTTPS traffic.
    */
   httpOption?: FunctionHttpOption
+  /** Execution environment of the function. */
+  sandbox?: FunctionSandbox
 }
 
 export type UpdateNamespaceRequest = {

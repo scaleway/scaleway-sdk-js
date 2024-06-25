@@ -181,7 +181,7 @@ const unmarshalBootscript = (data: unknown): Bootscript => {
   }
 
   return {
-    arch: data.arch,
+    architecture: data.architecture,
     bootcmdargs: data.bootcmdargs,
     default: data.default,
     dtb: data.dtb,
@@ -1974,7 +1974,7 @@ const marshalBootscript = (
   request: Bootscript,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  arch: request.arch,
+  architecture: request.architecture,
   bootcmdargs: request.bootcmdargs,
   default: request.default,
   dtb: request.dtb,
