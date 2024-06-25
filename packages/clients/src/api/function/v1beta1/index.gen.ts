@@ -28,6 +28,7 @@ export type {
   FunctionHttpOption,
   FunctionPrivacy,
   FunctionRuntime,
+  FunctionSandbox,
   FunctionStatus,
   GetCronRequest,
   GetDomainRequest,

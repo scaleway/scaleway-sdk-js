@@ -81,6 +81,7 @@ export const unmarshalContainer = (data: unknown): Container => {
     protocol: data.protocol,
     region: data.region,
     registryImage: data.registry_image,
+    sandbox: data.sandbox,
     secretEnvironmentVariables: unmarshalArrayOfObject(
       data.secret_environment_variables,
       unmarshalSecretHashedValue,
@@ -364,6 +365,7 @@ export const marshalCreateContainerRequest = (
   privacy: request.privacy,
   protocol: request.protocol,
   registry_image: request.registryImage,
+  sandbox: request.sandbox,
   secret_environment_variables:
     request.secretEnvironmentVariables !== undefined
       ? request.secretEnvironmentVariables.map(elt =>
@@ -506,6 +508,7 @@ export const marshalUpdateContainerRequest = (
   protocol: request.protocol,
   redeploy: request.redeploy,
   registry_image: request.registryImage,
+  sandbox: request.sandbox,
   secret_environment_variables:
     request.secretEnvironmentVariables !== undefined
       ? request.secretEnvironmentVariables.map(elt =>

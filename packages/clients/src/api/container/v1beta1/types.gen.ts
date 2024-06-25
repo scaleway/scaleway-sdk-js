@@ -11,6 +11,8 @@ export type ContainerPrivacy = 'unknown_privacy' | 'public' | 'private'
 
 export type ContainerProtocol = 'unknown_protocol' | 'http1' | 'h2c'
 
+export type ContainerSandbox = 'unknown_sandbox' | 'v1' | 'v2'
+
 export type ContainerStatus =
   | 'unknown'
   | 'ready'
@@ -217,6 +219,8 @@ export interface Container {
    * - Enabled: Serve both HTTP and HTTPS traffic.
    */
   httpOption: ContainerHttpOption
+  /** Execution environment of the container. */
+  sandbox: ContainerSandbox
   /** Region in which the container will be deployed. */
   region: Region
 }
@@ -395,6 +399,8 @@ export type CreateContainerRequest = {
    * - Enabled: Serve both HTTP and HTTPS traffic.
    */
   httpOption?: ContainerHttpOption
+  /** Execution environment of the container. */
+  sandbox?: ContainerSandbox
 }
 
 export type CreateCronRequest = {
@@ -856,6 +862,8 @@ export type UpdateContainerRequest = {
    * - Enabled: Serve both HTTP and HTTPS traffic.
    */
   httpOption?: ContainerHttpOption
+  /** Execution environment of the container. */
+  sandbox?: ContainerSandbox
 }
 
 export type UpdateCronRequest = {
