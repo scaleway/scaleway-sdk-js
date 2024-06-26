@@ -17,6 +17,7 @@ import type {
   CreateSecretVersionRequest,
   EphemeralPolicy,
   EphemeralProperties,
+  ListSecretTypesResponse,
   ListSecretVersionsResponse,
   ListSecretsResponse,
   ListTagsResponse,
@@ -192,6 +193,21 @@ export const unmarshalBrowseSecretsResponse = (
     ),
     totalCount: data.total_count,
   } as BrowseSecretsResponse
+}
+
+export const unmarshalListSecretTypesResponse = (
+  data: unknown,
+): ListSecretTypesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSecretTypesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    totalCount: data.total_count,
+    types: data.types,
+  } as ListSecretTypesResponse
 }
 
 export const unmarshalListSecretVersionsResponse = (
