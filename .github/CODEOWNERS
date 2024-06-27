@@ -1,0 +1,34 @@
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence,
+* @remyleone
+
+/packages/clients/src/api/account/ @tbellavia
+/packages/clients/src/api/applesilicon/ @Laure-di
+/packages/clients/src/api/baremetal/ @Laure-di
+/packages/clients/src/api/billing/ @tbellavia
+/packages/clients/src/api/block/ @Codelax
+/packages/clients/src/api/cockpit/ @jremy42
+/packages/clients/src/api/container/ @Codelax
+/packages/clients/src/api/dedibox/ @Laure-di
+/packages/clients/src/api/domain/ @yfodil
+/packages/clients/src/api/flexibleip/ @yfodil
+/packages/clients/src/api/function/ @Codelax
+/packages/clients/src/api/iam/ @tbellavia
+/packages/clients/src/api/instance/ @Codelax
+/packages/clients/src/api/iot/ @jremy42
+/packages/clients/src/api/ipam/ @yfodil
+/packages/clients/src/api/jobs/ @Codelax
+/packages/clients/src/api/k8s/ @Codelax
+/packages/clients/src/api/key_manager/ @tbellavia
+/packages/clients/src/api/lb/ @yfodil
+/packages/clients/src/api/marketplace/ @Codelax
+/packages/clients/src/api/mnq/ @jremy42
+/packages/clients/src/api/rdb/ @jremy42
+/packages/clients/src/api/redis/ @jremy42
+/packages/clients/src/api/registry/ @Codelax
+/packages/clients/src/api/secret/ @tbellavia
+/packages/clients/src/api/serverless_sqldb/ @jremy42
+/packages/clients/src/api/tem/ @jremy42
+/packages/clients/src/api/vpc/ @yfodil
+/packages/clients/src/api/vpcgw/ @yfodil
+/packages/clients/src/api/webhosting/ @jremy42
