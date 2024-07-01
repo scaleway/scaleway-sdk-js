@@ -29,7 +29,7 @@ const marshalBootscript = (
   request: Bootscript,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  arch: request.arch,
+  architecture: request.architecture,
   bootcmdargs: request.bootcmdargs,
   default: request.default,
   dtb: request.dtb,
