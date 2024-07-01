@@ -164,7 +164,7 @@ export interface Bootscript {
   /** Bootscript title. */
   title: string
   /** Bootscript architecture. */
-  arch: Arch
+  architecture: Arch
   /** Zone in which the bootscript is located. */
   zone: Zone
 }
