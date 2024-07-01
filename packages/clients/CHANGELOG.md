@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.36.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.35.0...@scaleway/sdk@2.36.0) (2024-07-01)
+
+### Features
+
+- **container:** add of sandbox ([#1338](https://github.com/scaleway/scaleway-sdk-js/issues/1338)) ([65f3c66](https://github.com/scaleway/scaleway-sdk-js/commit/65f3c66eba15435463302e1f9e5b0b3ab26fb010))
+- **secret_manager:** add ListSecretTypes endpoint ([#1340](https://github.com/scaleway/scaleway-sdk-js/issues/1340)) ([21b069f](https://github.com/scaleway/scaleway-sdk-js/commit/21b069fb4eb72ce7374f75642f11d54847e8a52a))
+
+### Bug Fixes
+
+- **inference:** change namespace ([#1339](https://github.com/scaleway/scaleway-sdk-js/issues/1339)) ([9ff7b6d](https://github.com/scaleway/scaleway-sdk-js/commit/9ff7b6dde0d1969f11828a5d70d237d1419f5247))
+
 ## [2.35.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.34.0...@scaleway/sdk@2.35.0) (2024-06-24)
 
 ### Features
