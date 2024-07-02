@@ -2053,6 +2053,7 @@ export type UpdateServerRequest = {
    *
    * - Cannot be changed if the Instance is not in `stopped` state.
    * - Cannot be changed if the Instance is in a placement group.
+   * - Cannot be changed from/to a Windows offer to/from a Linux offer.
    * - Local storage requirements of the target commercial_types must be fulfilled
    *   (i.e. if an Instance has 80GB of local storage, it can be changed into a
    *   GP1-XS, which has a maximum of 150GB, but it cannot be changed into a
