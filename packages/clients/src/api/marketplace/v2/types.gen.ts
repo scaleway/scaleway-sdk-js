@@ -10,7 +10,11 @@ export type ListImagesRequestOrderBy =
   | 'updated_at_asc'
   | 'updated_at_desc'
 
-export type ListLocalImagesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+export type ListLocalImagesRequestOrderBy =
+  | 'type_asc'
+  | 'type_desc'
+  | 'created_at_asc'
+  | 'created_at_desc'
 
 export type ListVersionsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
@@ -123,25 +127,38 @@ export interface ListImagesResponse {
 
 export type ListLocalImagesRequest = {
   /**
+   * A positive integer lower or equal to 100 to select the number of items to
+   * display.
+   */
+  pageSize?: number
+  /** A positive integer to choose the page to display. */
+  page?: number
+  /** Ordering to use. */
+  orderBy?: ListLocalImagesRequestOrderBy
+  /** Filter local images available on this Availability Zone. */
+  zone?: Zone
+  /**
+   * Filter by image id.
+   *
    * One-of ('scope'): at most one of 'imageId', 'versionId', 'imageLabel' could
    * be set.
    */
   imageId?: string
   /**
+   * Filter by version id.
+   *
    * One-of ('scope'): at most one of 'imageId', 'versionId', 'imageLabel' could
    * be set.
    */
   versionId?: string
-  pageSize?: number
-  page?: number
-  orderBy?: ListLocalImagesRequestOrderBy
   /**
+   * Filter by image label.
+   *
    * One-of ('scope'): at most one of 'imageId', 'versionId', 'imageLabel' could
    * be set.
    */
   imageLabel?: string
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  /** Filter by type. */
   type?: LocalImageType
 }
 
