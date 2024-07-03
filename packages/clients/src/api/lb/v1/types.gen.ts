@@ -794,6 +794,14 @@ export type AttachPrivateNetworkRequest = {
    *   'ipamConfig' could be set.
    */
   ipamConfig?: PrivateNetworkIpamConfig
+  /**
+   * IPAM ID of a pre-reserved IP address to assign to the Load Balancer on this
+   * Private Network. In the future, it will be possible to specify multiple IPs
+   * in this field (IPv4 and IPv6), for now only one ID of an IPv4 address is
+   * expected. When null, a new private IP address is created for the Load
+   * Balancer on this Private Network.
+   */
+  ipamIds?: string[]
 }
 
 /** Add an ACL to a Load Balancer frontend. */
@@ -2018,6 +2026,14 @@ export type ZonedApiAttachPrivateNetworkRequest = {
    *   'ipamConfig' could be set.
    */
   ipamConfig?: PrivateNetworkIpamConfig
+  /**
+   * IPAM ID of a pre-reserved IP address to assign to the Load Balancer on this
+   * Private Network. In the future, it will be possible to specify multiple IPs
+   * in this field (IPv4 and IPv6), for now only one ID of an IPv4 address is
+   * expected. When null, a new private IP address is created for the Load
+   * Balancer on this Private Network.
+   */
+  ipamIds?: string[]
 }
 
 /** Add an ACL to a Load Balancer frontend. */

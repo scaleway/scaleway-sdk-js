@@ -864,6 +864,7 @@ export const marshalAttachPrivateNetworkRequest = (
   request: AttachPrivateNetworkRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  ipam_ids: request.ipamIds,
   ...resolveOneOf([
     {
       param: 'static_config',
@@ -1464,6 +1465,7 @@ export const marshalZonedApiAttachPrivateNetworkRequest = (
   request: ZonedApiAttachPrivateNetworkRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  ipam_ids: request.ipamIds,
   ...resolveOneOf([
     {
       param: 'static_config',
