@@ -144,6 +144,7 @@ const unmarshalControlPanel = (data: unknown): ControlPanel => {
 
   return {
     available: data.available,
+    availableLanguages: data.available_languages,
     logoUrl: data.logo_url,
     name: data.name,
   } as ControlPanel
