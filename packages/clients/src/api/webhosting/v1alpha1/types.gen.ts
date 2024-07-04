@@ -112,6 +112,8 @@ export interface ControlPanel {
   available: boolean
   /** URL of this control panel's logo. */
   logoUrl: string
+  /** List of available languages for the control panel. */
+  availableLanguages: StdLanguageCode[]
 }
 
 export interface Hosting {
