@@ -638,6 +638,19 @@ export type RegionalApiTriggerTestAlertRequest = {
   projectId?: string
 }
 
+/** Update a data source name. */
+export type RegionalApiUpdateDataSourceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the data source to update. */
+  dataSourceId: string
+  /** Updated name of the data source. */
+  name?: string
+}
+
 export interface UsageOverview {
   scalewayMetricsUsage?: Usage
   scalewayLogsUsage?: Usage

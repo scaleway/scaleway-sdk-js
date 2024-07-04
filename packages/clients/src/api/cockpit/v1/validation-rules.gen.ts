@@ -56,3 +56,11 @@ export const RegionalApiListTokensRequest = {
     lessThanOrEqual: 1000,
   },
 }
+
+export const RegionalApiUpdateDataSourceRequest = {
+  name: {
+    maxLength: 50,
+    minLength: 3,
+    pattern: /^[A-Za-z0-9-_. ]+$/,
+  },
+}

@@ -37,6 +37,7 @@ import type {
   RegionalApiEnableAlertManagerRequest,
   RegionalApiEnableManagedAlertsRequest,
   RegionalApiTriggerTestAlertRequest,
+  RegionalApiUpdateDataSourceRequest,
   Token,
   Usage,
   UsageOverview,
@@ -485,4 +486,11 @@ export const marshalRegionalApiTriggerTestAlertRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
+export const marshalRegionalApiUpdateDataSourceRequest = (
+  request: RegionalApiUpdateDataSourceRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
 })
