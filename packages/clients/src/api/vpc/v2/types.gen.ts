@@ -58,6 +58,29 @@ export interface PrivateNetwork {
   dhcpEnabled: boolean
 }
 
+export interface Route {
+  /** Route ID. */
+  id: string
+  /** Route description. */
+  description: string
+  /** Tags of the Route. */
+  tags: string[]
+  /** VPC the Route belongs to. */
+  vpcId: string
+  /** Destination of the Route. */
+  destination: string
+  /** ID of the nexthop resource. */
+  nexthopResourceId?: string
+  /** ID of the nexthop private network. */
+  nexthopPrivateNetworkId?: string
+  /** Date the Route was created. */
+  createdAt?: Date
+  /** Date the Route was last modified. */
+  updatedAt?: Date
+  /** Region of the Route. */
+  region: Region
+}
+
 export interface VPC {
   /** VPC ID. */
   id: string
@@ -117,6 +140,26 @@ export type CreatePrivateNetworkRequest = {
   vpcId?: string
 }
 
+export type CreateRouteRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Route description. */
+  description: string
+  /** Tags of the Route. */
+  tags?: string[]
+  /** VPC the Route belongs to. */
+  vpcId: string
+  /** Destination of the Route. */
+  destination: string
+  /** ID of the nexthop resource. */
+  nexthopResourceId?: string
+  /** ID of the nexthop private network. */
+  nexthopPrivateNetworkId?: string
+}
+
 export type CreateVPCRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -141,6 +184,16 @@ export type DeletePrivateNetworkRequest = {
   region?: Region
   /** Private Network ID. */
   privateNetworkId: string
+}
+
+export type DeleteRouteRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Route ID. */
+  routeId: string
 }
 
 export type DeleteSubnetsRequest = {
@@ -196,6 +249,16 @@ export type GetPrivateNetworkRequest = {
   region?: Region
   /** Private Network ID. */
   privateNetworkId: string
+}
+
+export type GetRouteRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Route ID. */
+  routeId: string
 }
 
 export type GetVPCRequest = {
@@ -401,6 +464,26 @@ export type UpdatePrivateNetworkRequest = {
   name?: string
   /** Tags for the Private Network. */
   tags?: string[]
+}
+
+export type UpdateRouteRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Route ID. */
+  routeId: string
+  /** Route description. */
+  description?: string
+  /** Tags of the Route. */
+  tags?: string[]
+  /** Destination of the Route. */
+  destination?: string
+  /** ID of the nexthop resource. */
+  nexthopResourceId?: string
+  /** ID of the nexthop private network. */
+  nexthopPrivateNetworkId?: string
 }
 
 export type UpdateVPCRequest = {
