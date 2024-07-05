@@ -21,6 +21,7 @@ import {
   marshalRegionalApiEnableAlertManagerRequest,
   marshalRegionalApiEnableManagedAlertsRequest,
   marshalRegionalApiTriggerTestAlertRequest,
+  marshalRegionalApiUpdateDataSourceRequest,
   unmarshalAlertManager,
   unmarshalContactPoint,
   unmarshalDataSource,
@@ -83,6 +84,7 @@ import type {
   RegionalApiListManagedAlertsRequest,
   RegionalApiListTokensRequest,
   RegionalApiTriggerTestAlertRequest,
+  RegionalApiUpdateDataSourceRequest,
   Token,
   UsageOverview,
 } from './types.gen'
@@ -488,6 +490,29 @@ export class RegionalAPI extends ParentAPI {
   listDataSources = (
     request: Readonly<RegionalApiListDataSourcesRequest> = {},
   ) => enrichForPagination('dataSources', this.pageOfListDataSources, request)
+
+  /**
+   * Update a data source. Update a given data source name, specified by the
+   * data source ID.
+   *
+   * @param request - The request {@link RegionalApiUpdateDataSourceRequest}
+   * @returns A Promise of DataSource
+   */
+  updateDataSource = (request: Readonly<RegionalApiUpdateDataSourceRequest>) =>
+    this.client.fetch<DataSource>(
+      {
+        body: JSON.stringify(
+          marshalRegionalApiUpdateDataSourceRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/data-sources/${validatePathParam('dataSourceId', request.dataSourceId)}`,
+      },
+      unmarshalDataSource,
+    )
 
   /**
    * Get data source usage overview. Retrieve the data source usage overview per

@@ -57,6 +57,7 @@ export type {
   RegionalApiListManagedAlertsRequest,
   RegionalApiListTokensRequest,
   RegionalApiTriggerTestAlertRequest,
+  RegionalApiUpdateDataSourceRequest,
   Token,
   TokenScope,
   Usage,
