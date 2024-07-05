@@ -12,6 +12,7 @@ import type {
   AddSubnetsRequest,
   AddSubnetsResponse,
   CreatePrivateNetworkRequest,
+  CreateRouteRequest,
   CreateVPCRequest,
   DeleteSubnetsRequest,
   DeleteSubnetsResponse,
@@ -20,10 +21,12 @@ import type {
   ListVPCsResponse,
   MigrateZonalPrivateNetworksRequest,
   PrivateNetwork,
+  Route,
   SetSubnetsRequest,
   SetSubnetsResponse,
   Subnet,
   UpdatePrivateNetworkRequest,
+  UpdateRouteRequest,
   UpdateVPCRequest,
   VPC,
 } from './types.gen'
@@ -66,6 +69,27 @@ export const unmarshalPrivateNetwork = (data: unknown): PrivateNetwork => {
     updatedAt: unmarshalDate(data.updated_at),
     vpcId: data.vpc_id,
   } as PrivateNetwork
+}
+
+export const unmarshalRoute = (data: unknown): Route => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Route' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description,
+    destination: data.destination,
+    id: data.id,
+    nexthopPrivateNetworkId: data.nexthop_private_network_id,
+    nexthopResourceId: data.nexthop_resource_id,
+    region: data.region,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+    vpcId: data.vpc_id,
+  } as Route
 }
 
 export const unmarshalVPC = (data: unknown): VPC => {
@@ -196,6 +220,18 @@ export const marshalCreatePrivateNetworkRequest = (
   vpc_id: request.vpcId,
 })
 
+export const marshalCreateRouteRequest = (
+  request: CreateRouteRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  description: request.description,
+  destination: request.destination,
+  nexthop_private_network_id: request.nexthopPrivateNetworkId,
+  nexthop_resource_id: request.nexthopResourceId,
+  tags: request.tags,
+  vpc_id: request.vpcId,
+})
+
 export const marshalCreateVPCRequest = (
   request: CreateVPCRequest,
   defaults: DefaultValues,
@@ -244,6 +280,17 @@ export const marshalUpdatePrivateNetworkRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
+  tags: request.tags,
+})
+
+export const marshalUpdateRouteRequest = (
+  request: UpdateRouteRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  description: request.description,
+  destination: request.destination,
+  nexthop_private_network_id: request.nexthopPrivateNetworkId,
+  nexthop_resource_id: request.nexthopResourceId,
   tags: request.tags,
 })
 

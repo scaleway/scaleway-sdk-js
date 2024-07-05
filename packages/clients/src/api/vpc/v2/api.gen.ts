@@ -10,11 +10,13 @@ import type { Region } from '../../../bridge'
 import {
   marshalAddSubnetsRequest,
   marshalCreatePrivateNetworkRequest,
+  marshalCreateRouteRequest,
   marshalCreateVPCRequest,
   marshalDeleteSubnetsRequest,
   marshalMigrateZonalPrivateNetworksRequest,
   marshalSetSubnetsRequest,
   marshalUpdatePrivateNetworkRequest,
+  marshalUpdateRouteRequest,
   marshalUpdateVPCRequest,
   unmarshalAddSubnetsResponse,
   unmarshalDeleteSubnetsResponse,
@@ -22,6 +24,7 @@ import {
   unmarshalListSubnetsResponse,
   unmarshalListVPCsResponse,
   unmarshalPrivateNetwork,
+  unmarshalRoute,
   unmarshalSetSubnetsResponse,
   unmarshalVPC,
 } from './marshalling.gen'
@@ -29,14 +32,17 @@ import type {
   AddSubnetsRequest,
   AddSubnetsResponse,
   CreatePrivateNetworkRequest,
+  CreateRouteRequest,
   CreateVPCRequest,
   DeletePrivateNetworkRequest,
+  DeleteRouteRequest,
   DeleteSubnetsRequest,
   DeleteSubnetsResponse,
   DeleteVPCRequest,
   EnableDHCPRequest,
   EnableRoutingRequest,
   GetPrivateNetworkRequest,
+  GetRouteRequest,
   GetVPCRequest,
   ListPrivateNetworksRequest,
   ListPrivateNetworksResponse,
@@ -46,9 +52,11 @@ import type {
   ListVPCsResponse,
   MigrateZonalPrivateNetworksRequest,
   PrivateNetwork,
+  Route,
   SetSubnetsRequest,
   SetSubnetsResponse,
   UpdatePrivateNetworkRequest,
+  UpdateRouteRequest,
   UpdateVPCRequest,
   VPC,
 } from './types.gen'
@@ -428,4 +436,69 @@ export class API extends ParentAPI {
       },
       unmarshalDeleteSubnetsResponse,
     )
+
+  /**
+   * Create a Route. Create a new custom Route.
+   *
+   * @param request - The request {@link CreateRouteRequest}
+   * @returns A Promise of Route
+   */
+  createRoute = (request: Readonly<CreateRouteRequest>) =>
+    this.client.fetch<Route>(
+      {
+        body: JSON.stringify(
+          marshalCreateRouteRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes`,
+      },
+      unmarshalRoute,
+    )
+
+  /**
+   * Get a Route. Retrieve details of an existing Route, specified by its Route
+   * ID.
+   *
+   * @param request - The request {@link GetRouteRequest}
+   * @returns A Promise of Route
+   */
+  getRoute = (request: Readonly<GetRouteRequest>) =>
+    this.client.fetch<Route>(
+      {
+        method: 'GET',
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
+      },
+      unmarshalRoute,
+    )
+
+  /**
+   * Update Route. Update parameters of the specified Route.
+   *
+   * @param request - The request {@link UpdateRouteRequest}
+   * @returns A Promise of Route
+   */
+  updateRoute = (request: Readonly<UpdateRouteRequest>) =>
+    this.client.fetch<Route>(
+      {
+        body: JSON.stringify(
+          marshalUpdateRouteRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
+      },
+      unmarshalRoute,
+    )
+
+  /**
+   * Delete a Route. Delete a Route specified by its Route ID.
+   *
+   * @param request - The request {@link DeleteRouteRequest}
+   */
+  deleteRoute = (request: Readonly<DeleteRouteRequest>) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
+    })
 }
