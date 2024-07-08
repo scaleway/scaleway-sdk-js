@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.37.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.36.0...@scaleway/sdk@2.37.0) (2024-07-08)
+
+### Features
+
+- **edge_services:** enable generation ([#1348](https://github.com/scaleway/scaleway-sdk-js/issues/1348)) ([b369062](https://github.com/scaleway/scaleway-sdk-js/commit/b369062316c01c6561adad5d9d035a2eb4a68eff))
+- **lb:** display ipam_id for pn attachment in doc ([#1350](https://github.com/scaleway/scaleway-sdk-js/issues/1350)) ([b97c8cb](https://github.com/scaleway/scaleway-sdk-js/commit/b97c8cb8077dfa9f5c3e6156af5da2a12d3f9d69))
+- **vpc:** add custom routes CRUD ([#1358](https://github.com/scaleway/scaleway-sdk-js/issues/1358)) ([fa10fb2](https://github.com/scaleway/scaleway-sdk-js/commit/fa10fb2c3db6b1725841aed2cb7ff523e5ebed88))
+- **webhosting:** add available languages in control panel ([#1353](https://github.com/scaleway/scaleway-sdk-js/issues/1353)) ([0baf81e](https://github.com/scaleway/scaleway-sdk-js/commit/0baf81e0098775bb5fa79432fee01a733c273273))
+
+### Bug Fixes
+
+- **instance:** correct bootscript architecture field name ([#1337](https://github.com/scaleway/scaleway-sdk-js/issues/1337)) ([60b2334](https://github.com/scaleway/scaleway-sdk-js/commit/60b233416f531da88ca656d87b9c0abc3e0cff47))
+- **marketplace:** order local images by type by default ([#1352](https://github.com/scaleway/scaleway-sdk-js/issues/1352)) ([8b46aa5](https://github.com/scaleway/scaleway-sdk-js/commit/8b46aa57315fa08845602e70fe6b7410dad93427))
+
 ## [2.36.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.35.0...@scaleway/sdk@2.36.0) (2024-07-01)
 
 ### Features
