@@ -18,6 +18,7 @@ export type ListDeploymentsRequestOrderBy =
   | 'name_desc'
 
 export type ListModelsRequestOrderBy =
+  | 'display_rank_asc'
   | 'created_at_asc'
   | 'created_at_desc'
   | 'name_asc'
