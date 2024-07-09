@@ -59,6 +59,7 @@ export interface BrowseSecretsResponseItemSecretDetails {
   versionCount: number
   protected: boolean
   ephemeralPolicy?: EphemeralPolicy
+  type: SecretType
 }
 
 export interface EphemeralProperties {

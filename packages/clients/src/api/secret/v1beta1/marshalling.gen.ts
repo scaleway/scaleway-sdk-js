@@ -150,6 +150,7 @@ const unmarshalBrowseSecretsResponseItemSecretDetails = (
     id: data.id,
     protected: data.protected,
     tags: data.tags,
+    type: data.type,
     versionCount: data.version_count,
   } as BrowseSecretsResponseItemSecretDetails
 }
