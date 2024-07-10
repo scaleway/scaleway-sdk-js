@@ -138,6 +138,7 @@ export class API extends ParentAPI {
           ['resource_id', request.resourceId],
           ['resource_name', request.resourceName],
           ['resource_type', request.resourceType],
+          ['resource_types', request.resourceTypes],
           ['tags', request.tags],
           ['vpc_id', request.vpcId],
           ...Object.entries(

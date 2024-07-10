@@ -209,6 +209,11 @@ export type ListIPsRequest = {
    * this string within their name will be returned.
    */
   resourceName?: string
+  /**
+   * Resource types to filter for. Only IPs attached to these types of resources
+   * will be returned.
+   */
+  resourceTypes?: ResourceType[]
 }
 
 export interface ListIPsResponse {
