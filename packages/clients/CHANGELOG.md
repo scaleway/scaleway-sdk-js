@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.38.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.38.0...@scaleway/sdk@2.38.1) (2024-07-11)
+
+### Bug Fixes
+
+- **scw:** export Decimal class ([#1363](https://github.com/scaleway/scaleway-sdk-js/issues/1363)) ([2341b21](https://github.com/scaleway/scaleway-sdk-js/commit/2341b216a4e68cae8b1a86d01e28e028f04e62e4))
+
 ## [2.38.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.37.0...@scaleway/sdk@2.38.0) (2024-07-11)
 
 ### Features
