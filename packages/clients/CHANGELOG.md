@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.38.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.37.0...@scaleway/sdk@2.38.0) (2024-07-11)
+
+### Features
+
+- add decimal type ([#1334](https://github.com/scaleway/scaleway-sdk-js/issues/1334)) ([dc00cb0](https://github.com/scaleway/scaleway-sdk-js/commit/dc00cb0e3b2de5330e5e0601b5379efe34be5673))
+- **inference:** update inference models ordering ([#1359](https://github.com/scaleway/scaleway-sdk-js/issues/1359)) ([1b391cc](https://github.com/scaleway/scaleway-sdk-js/commit/1b391cc41913d6c4d12b87d49de045a5b2855121))
+- **ipam:** allow to list available IPs for given resource types ([#1361](https://github.com/scaleway/scaleway-sdk-js/issues/1361)) ([11be518](https://github.com/scaleway/scaleway-sdk-js/commit/11be518cabb12b45104af64b93f8d58541a7cd36))
+- **scw:** add custom marshalers for Decimal ([#1362](https://github.com/scaleway/scaleway-sdk-js/issues/1362)) ([db39985](https://github.com/scaleway/scaleway-sdk-js/commit/db3998570b33dcfdd457f594badb70ffcbb2b882))
+- **secret_manager:** add secret type to browse secret response ([#1360](https://github.com/scaleway/scaleway-sdk-js/issues/1360)) ([94fa112](https://github.com/scaleway/scaleway-sdk-js/commit/94fa112edd0bf6e6b7cf5861c8f8ade9cf2c9488))
+
 ## [2.37.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.36.0...@scaleway/sdk@2.37.0) (2024-07-08)
 
 ### Features
