@@ -7,6 +7,7 @@ import type {
   TimeSeries,
   TimeSeriesPoint,
 } from './custom-types'
+import { Decimal } from './custom-types'
 
 /**
  * Unmarshals {@link Money}
@@ -108,6 +109,21 @@ export const unmarshalTimeSeries = (data: unknown) => {
 }
 
 /**
+ * Unmarshals {@link Decimal}
+ *
+ * @internal
+ */
+export const unmarshalDecimal = (data: unknown) => {
+  if (!(typeof data === 'string')) {
+    throw new TypeError(
+      `Unmarshalling the type 'Decimal' failed as data isn't a string.`,
+    )
+  }
+
+  return new Decimal(data)
+}
+
+/**
  * Marshals {@link ScwFile}.
  *
  * @internal
@@ -153,3 +169,10 @@ export const marshalTimeSeries = (
   name: obj.name,
   points: obj.points.map(elt => marshalTimeSeriesPoint(elt)),
 })
+
+/**
+ * Marshals {@link Decimal}
+ *
+ * @internal
+ */
+export const marshalDecimal = (obj: Decimal): string => obj.toString()
