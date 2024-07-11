@@ -250,6 +250,8 @@ export type BrowseSecretsRequest = {
   pageSize?: number
   /** Filter secrets by tags. */
   tags?: string[]
+  /** Filter by secret type (optional). */
+  type?: SecretType
 }
 
 export interface BrowseSecretsResponse {

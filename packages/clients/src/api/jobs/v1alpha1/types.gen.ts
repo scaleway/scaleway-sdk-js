@@ -117,6 +117,7 @@ export type CreateJobDefinitionRequest = {
   description: string
   /** Timeout of the job in seconds. */
   jobTimeout?: string
+  /** Configure a cron for the job. */
   cronSchedule?: CreateJobDefinitionRequestCronScheduleConfig
 }
 

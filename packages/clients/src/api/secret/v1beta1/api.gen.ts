@@ -195,6 +195,7 @@ export class API extends ParentAPI {
           ['prefix', request.prefix],
           ['project_id', request.projectId],
           ['tags', request.tags],
+          ['type', request.type],
         ),
       },
       unmarshalBrowseSecretsResponse,
