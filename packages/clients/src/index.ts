@@ -23,6 +23,7 @@ export {
   withUserAgentSuffix,
 } from './scw/client-ini-factory'
 export type { ClientConfig } from './scw/client-ini-factory'
+export { Decimal } from './scw/custom-types'
 export type { Money, ScwFile, TimeSeries } from './scw/custom-types'
 /* eslint-disable import/export,no-restricted-syntax */
 export * as Errors from './scw/errors/standard'
