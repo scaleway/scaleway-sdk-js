@@ -10,15 +10,18 @@ export type {
   ScwFile,
   TimeSeries,
 } from './scw/custom-types'
+export { Decimal } from './scw/custom-types'
 export {
   marshalScwFile,
   marshalMoney,
   marshalTimeSeries,
+  marshalDecimal,
   unmarshalMoney,
   unmarshalScwFile,
   unmarshalServiceInfo,
   unmarshalTimeSeries,
   unmarshalTimeSeriesPoint,
+  unmarshalDecimal,
 } from './scw/custom-marshalling'
 export { enrichForPagination } from './scw/fetch/resource-paginator'
 export type { Region, Zone } from './scw/locality'

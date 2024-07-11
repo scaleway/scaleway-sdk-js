@@ -5,10 +5,9 @@ import type {
   ScwFile,
   ServiceInfo,
   TimeSeries,
-  TimeSeriesPoint} from './custom-types';
-import {
-  Decimal
+  TimeSeriesPoint,
 } from './custom-types'
+import { Decimal } from './custom-types'
 
 /**
  * Unmarshals {@link Money}
