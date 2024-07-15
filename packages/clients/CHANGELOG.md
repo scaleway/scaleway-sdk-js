@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.39.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.38.1...@scaleway/sdk@2.39.0) (2024-07-15)
+
+### Features
+
+- **secret_manager:** add secret type to browse secret request ([#1364](https://github.com/scaleway/scaleway-sdk-js/issues/1364)) ([164601c](https://github.com/scaleway/scaleway-sdk-js/commit/164601c783a3a6c27895dff0ff21e3b6039baccc))
+
 ## [2.38.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.38.0...@scaleway/sdk@2.38.1) (2024-07-11)
 
 ### Bug Fixes
