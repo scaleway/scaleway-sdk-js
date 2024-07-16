@@ -106,6 +106,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/edge-services/v1alpha1/pipelines`,
         urlParams: urlParams(
+          ['has_backend_stage_lb', request.hasBackendStageLb],
           ['name', request.name],
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
@@ -550,6 +551,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['bucket_name', request.bucketName],
           ['bucket_region', request.bucketRegion],
+          ['lb_id', request.lbId],
           ['order_by', request.orderBy],
           ['page', request.page],
           [
