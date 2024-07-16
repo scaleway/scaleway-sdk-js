@@ -1210,8 +1210,9 @@ export class RegistrarAPI extends ParentAPI {
     )
 
   /**
-   * Update domain DNSSEC. If your domain has the default Scaleway NS and uses
-   * another registrar, you have to update the DS record manually.
+   * Update domain DNSSEC. If your domain uses another registrar and has the
+   * default Scaleway NS, you have to **update the DS record at your
+   * registrar**.
    *
    * @param request - The request {@link RegistrarApiEnableDomainDNSSECRequest}
    * @returns A Promise of Domain
