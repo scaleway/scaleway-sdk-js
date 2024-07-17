@@ -541,6 +541,11 @@ export type ListBackendStagesRequest = {
    * region will be returned.
    */
   bucketRegion?: string
+  /**
+   * Load Balancer ID to filter for, only backend stages with this Load Balancer
+   * will be returned.
+   */
+  lbId?: string
 }
 
 export interface ListBackendStagesResponse {
@@ -629,6 +634,11 @@ export type ListPipelinesRequest = {
    * returned.
    */
   projectId?: string
+  /**
+   * Filter on backend stage, only pipelines with a Load Balancer origin will be
+   * returned.
+   */
+  hasBackendStageLb?: boolean
 }
 
 export interface ListPipelinesResponse {
