@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.40.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.39.0...@scaleway/sdk@2.40.0) (2024-07-18)
+
+### Features
+
+- **edge_services:** add args to List filters ([#1366](https://github.com/scaleway/scaleway-sdk-js/issues/1366)) ([365da9e](https://github.com/scaleway/scaleway-sdk-js/commit/365da9e93d2cfe442eb2d6529f065574c4323105))
+- **scw:** add blob to scw file marshaler ([#1367](https://github.com/scaleway/scaleway-sdk-js/issues/1367)) ([8def703](https://github.com/scaleway/scaleway-sdk-js/commit/8def703476c14f922dcfb328eea24e5bb9cea3bb))
+
 ## [2.39.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.38.1...@scaleway/sdk@2.39.0) (2024-07-15)
 
 ### Features
