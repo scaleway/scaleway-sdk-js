@@ -16,6 +16,7 @@ export {
   marshalMoney,
   marshalTimeSeries,
   marshalDecimal,
+  marshalBlobToScwFile,
   unmarshalMoney,
   unmarshalScwFile,
   unmarshalServiceInfo,
