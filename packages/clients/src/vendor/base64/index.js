@@ -1,9 +1,5 @@
 'use strict'
 
-exports.byteLength = byteLength
-exports.toByteArray = toByteArray
-exports.fromByteArray = fromByteArray
-
 var lookup = []
 var revLookup = []
 var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
@@ -39,7 +35,7 @@ function getLens (b64) {
 }
 
 // base64 is 4/3 + up to two characters of the original data
-function byteLength (b64) {
+export function byteLength (b64) {
   var lens = getLens(b64)
   var validLen = lens[0]
   var placeHoldersLen = lens[1]
@@ -50,7 +46,7 @@ function _byteLength (b64, validLen, placeHoldersLen) {
   return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
 }
 
-function toByteArray (b64) {
+export function toByteArray (b64) {
   var tmp
   var lens = getLens(b64)
   var validLen = lens[0]
@@ -116,7 +112,7 @@ function encodeChunk (uint8, start, end) {
   return output.join('')
 }
 
-function fromByteArray (uint8) {
+export function fromByteArray (uint8) {
   var tmp
   var len = uint8.length
   var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
