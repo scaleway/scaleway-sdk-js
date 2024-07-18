@@ -1,5 +1,6 @@
 import { isJSONObject } from '../helpers/json'
 import { unmarshalArrayOfObject, unmarshalDate } from '../helpers/marshalling'
+import { fromByteArray } from '../vendor/base64'
 import type {
   Money,
   ScwFile,
@@ -132,6 +133,19 @@ export const marshalScwFile = (obj: ScwFile): Record<string, unknown> => ({
   content: obj.content,
   content_type: obj.contentType,
   name: obj.name,
+})
+
+/**
+ * Marshals {@link Blob}.
+ *
+ * @internal
+ */
+export const marshalBlobToScwFile = async (
+  blob: Blob,
+): Promise<Record<string, unknown>> => ({
+  content: fromByteArray(new Uint8Array(await blob.arrayBuffer())),
+  content_type: blob.type,
+  name: 'file',
 })
 
 /**
