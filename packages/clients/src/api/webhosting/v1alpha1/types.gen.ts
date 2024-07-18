@@ -192,6 +192,23 @@ export interface Offer {
   controlPanelName: string
 }
 
+export type CheckUserOwnsDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Domain for which ownership is to be verified. */
+  domain: string
+  /** ID of the project currently in use. */
+  projectId?: string
+}
+
+export interface CheckUserOwnsDomainResponse {
+  /** Indicates whether the specified project owns the domain. */
+  ownsDomain: boolean
+}
+
 export type CreateHostingRequest = {
   /**
    * Region to target. If none is passed will use default region from the

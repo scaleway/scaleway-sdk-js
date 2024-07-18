@@ -8,6 +8,7 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  CheckUserOwnsDomainResponse,
   ControlPanel,
   CreateHostingRequest,
   CreateHostingRequestDomainConfiguration,
@@ -88,6 +89,20 @@ export const unmarshalHosting = (data: unknown): Hosting => {
     updatedAt: unmarshalDate(data.updated_at),
     username: data.username,
   } as Hosting
+}
+
+export const unmarshalCheckUserOwnsDomainResponse = (
+  data: unknown,
+): CheckUserOwnsDomainResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CheckUserOwnsDomainResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ownsDomain: data.owns_domain,
+  } as CheckUserOwnsDomainResponse
 }
 
 const unmarshalDnsRecord = (data: unknown): DnsRecord => {
