@@ -10,8 +10,10 @@ import {
 import type { Region, WaitForOptions } from '../../../bridge'
 import { HOSTING_TRANSIENT_STATUSES } from './content.gen'
 import {
+  marshalCheckUserOwnsDomainRequest,
   marshalCreateHostingRequest,
   marshalUpdateHostingRequest,
+  unmarshalCheckUserOwnsDomainResponse,
   unmarshalDnsRecords,
   unmarshalHosting,
   unmarshalListControlPanelsResponse,
@@ -21,6 +23,8 @@ import {
   unmarshalSession,
 } from './marshalling.gen'
 import type {
+  CheckUserOwnsDomainRequest,
+  CheckUserOwnsDomainResponse,
   CreateHostingRequest,
   CreateSessionRequest,
   DeleteHostingRequest,
@@ -221,6 +225,25 @@ export class API extends ParentAPI {
         path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domain', request.domain)}/dns-records`,
       },
       unmarshalDnsRecords,
+    )
+
+  /**
+   * "Check whether you own this domain or not.".
+   *
+   * @param request - The request {@link CheckUserOwnsDomainRequest}
+   * @returns A Promise of CheckUserOwnsDomainResponse
+   */
+  checkUserOwnsDomain = (request: Readonly<CheckUserOwnsDomainRequest>) =>
+    this.client.fetch<CheckUserOwnsDomainResponse>(
+      {
+        body: JSON.stringify(
+          marshalCheckUserOwnsDomainRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domain', request.domain)}/check-ownership`,
+      },
+      unmarshalCheckUserOwnsDomainResponse,
     )
 
   /**

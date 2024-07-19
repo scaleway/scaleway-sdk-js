@@ -3,6 +3,8 @@
 export { API } from './api.gen'
 export * from './content.gen'
 export type {
+  CheckUserOwnsDomainRequest,
+  CheckUserOwnsDomainResponse,
   ControlPanel,
   CreateHostingRequest,
   CreateHostingRequestDomainConfiguration,
