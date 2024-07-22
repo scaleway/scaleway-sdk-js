@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.41.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.40.0...@scaleway/sdk@2.41.0) (2024-07-22)
+
+### Features
+
+- **tem:** update Webhook event status ([#1369](https://github.com/scaleway/scaleway-sdk-js/issues/1369)) ([9afb0ac](https://github.com/scaleway/scaleway-sdk-js/commit/9afb0ac30b9f2754772498ff0b9cfc769b0e3ed5))
+- **webhosting:** add domain api ([#1368](https://github.com/scaleway/scaleway-sdk-js/issues/1368)) ([a293ad3](https://github.com/scaleway/scaleway-sdk-js/commit/a293ad31f19c5c7a8aba314897715e736d166e3f))
+
+### Bug Fixes
+
+- **webhosting:** add missing post body ([#1370](https://github.com/scaleway/scaleway-sdk-js/issues/1370)) ([6347911](https://github.com/scaleway/scaleway-sdk-js/commit/634791100647a70997f1c6cfb18283471f75ec65))
+
 ## [2.40.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.39.0...@scaleway/sdk@2.40.0) (2024-07-18)
 
 ### Features
