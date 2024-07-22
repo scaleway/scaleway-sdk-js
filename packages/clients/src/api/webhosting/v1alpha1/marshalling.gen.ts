@@ -8,6 +8,7 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  CheckUserOwnsDomainRequest,
   CheckUserOwnsDomainResponse,
   ControlPanel,
   CreateHostingRequest,
@@ -277,6 +278,13 @@ export const unmarshalSession = (data: unknown): Session => {
     url: data.url,
   } as Session
 }
+
+export const marshalCheckUserOwnsDomainRequest = (
+  request: CheckUserOwnsDomainRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
+})
 
 const marshalCreateHostingRequestDomainConfiguration = (
   request: CreateHostingRequestDomainConfiguration,

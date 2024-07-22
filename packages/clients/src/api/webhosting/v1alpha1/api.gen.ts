@@ -10,6 +10,7 @@ import {
 import type { Region, WaitForOptions } from '../../../bridge'
 import { HOSTING_TRANSIENT_STATUSES } from './content.gen'
 import {
+  marshalCheckUserOwnsDomainRequest,
   marshalCreateHostingRequest,
   marshalUpdateHostingRequest,
   unmarshalCheckUserOwnsDomainResponse,
@@ -235,12 +236,12 @@ export class API extends ParentAPI {
   checkUserOwnsDomain = (request: Readonly<CheckUserOwnsDomainRequest>) =>
     this.client.fetch<CheckUserOwnsDomainResponse>(
       {
+        body: JSON.stringify(
+          marshalCheckUserOwnsDomainRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domain', request.domain)}/check-ownership`,
-        urlParams: urlParams([
-          'project_id',
-          request.projectId ?? this.client.settings.defaultProjectId,
-        ]),
       },
       unmarshalCheckUserOwnsDomainResponse,
     )
