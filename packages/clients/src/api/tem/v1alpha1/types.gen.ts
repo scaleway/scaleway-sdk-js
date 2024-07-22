@@ -66,10 +66,9 @@ export type ListWebhooksRequestOrderBy = 'created_at_desc' | 'created_at_asc'
 
 export type WebhookEventStatus =
   | 'unknown_status'
-  | 'waiting'
   | 'sending'
   | 'sent'
-  | 'error'
+  | 'failed'
 
 export type WebhookEventType =
   | 'unknown_type'
