@@ -101,8 +101,12 @@ export interface Server {
   organizationId: string
   /** IPv4 address of the server. */
   ip: string
-  /** URL of the VNC. */
+  /** Vnc:// URL to access Apple Remote Desktop. */
   vncUrl: string
+  /** SSH Username for remote shell. */
+  sshUsername: string
+  /** Admin password required to execute commands. */
+  sudoPassword: string
   /**
    * Initially installed OS, this does not necessarily reflect the current OS
    * version.
