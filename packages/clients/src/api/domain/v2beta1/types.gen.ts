@@ -108,6 +108,8 @@ export type DomainRecordType =
   | 'DS'
   | 'NAPTR'
   | 'DNAME'
+  | 'SVCB'
+  | 'HTTPS'
 
 export type DomainRegistrationStatusTransferStatus =
   | 'status_unknown'
