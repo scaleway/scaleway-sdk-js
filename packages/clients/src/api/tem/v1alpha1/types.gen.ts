@@ -374,6 +374,24 @@ export interface CreateEmailResponse {
   emails: Email[]
 }
 
+export type CreateWebhookRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the Domain to watch for triggering events. */
+  domainId: string
+  /** ID of the project to which the Webhook belongs. */
+  projectId?: string
+  /** Name of the Webhook. */
+  name: string
+  /** List of event types that will trigger an event. */
+  eventTypes?: WebhookEventType[]
+  /** Scaleway SNS ARN topic to push the events to. */
+  snsArn: string
+}
+
 export type DeleteWebhookRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -446,6 +464,16 @@ export type GetStatisticsRequest = {
   until?: Date
   /** (Optional) Number of emails sent with this sender's email address. */
   mailFrom?: string
+}
+
+export type GetWebhookRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the Webhook to check. */
+  webhookId: string
 }
 
 export type ListDomainsRequest = {

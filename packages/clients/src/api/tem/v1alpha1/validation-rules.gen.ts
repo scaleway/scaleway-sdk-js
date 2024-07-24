@@ -38,6 +38,17 @@ export const CreateEmailRequestHeader = {
   },
 }
 
+export const CreateWebhookRequest = {
+  name: {
+    maxLength: 127,
+    minLength: 3,
+  },
+  snsArn: {
+    maxLength: 127,
+    minLength: 3,
+  },
+}
+
 export const ListDomainsRequest = {
   page: {
     greaterThan: 0,

@@ -13,6 +13,7 @@ import type {
   CreateEmailRequestAttachment,
   CreateEmailRequestHeader,
   CreateEmailResponse,
+  CreateWebhookRequest,
   Domain,
   DomainLastStatus,
   DomainLastStatusDkimRecord,
@@ -436,6 +437,18 @@ export const marshalCreateEmailRequest = (
     request.to !== undefined
       ? request.to.map(elt => marshalCreateEmailRequestAddress(elt, defaults))
       : undefined,
+})
+
+export const marshalCreateWebhookRequest = (
+  request: CreateWebhookRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  domain_id: request.domainId,
+  event_types:
+    request.eventTypes !== undefined ? request.eventTypes : undefined,
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  sns_arn: request.snsArn,
 })
 
 export const marshalUpdateWebhookRequest = (
