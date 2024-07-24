@@ -15,6 +15,7 @@ import {
 import {
   marshalCreateDomainRequest,
   marshalCreateEmailRequest,
+  marshalCreateWebhookRequest,
   marshalUpdateWebhookRequest,
   unmarshalCreateEmailResponse,
   unmarshalDomain,
@@ -33,6 +34,7 @@ import type {
   CreateDomainRequest,
   CreateEmailRequest,
   CreateEmailResponse,
+  CreateWebhookRequest,
   DeleteWebhookRequest,
   Domain,
   DomainLastStatus,
@@ -41,6 +43,7 @@ import type {
   GetDomainRequest,
   GetEmailRequest,
   GetStatisticsRequest,
+  GetWebhookRequest,
   ListDomainsRequest,
   ListDomainsResponse,
   ListEmailsRequest,
@@ -352,6 +355,26 @@ export class API extends ParentAPI {
       unmarshalDomainLastStatus,
     )
 
+  /**
+   * Create a Webhook. Create a new Webhook triggered by a list of event types
+   * and pushed to a Scaleway SNS ARN.
+   *
+   * @param request - The request {@link CreateWebhookRequest}
+   * @returns A Promise of Webhook
+   */
+  createWebhook = (request: Readonly<CreateWebhookRequest>) =>
+    this.client.fetch<Webhook>(
+      {
+        body: JSON.stringify(
+          marshalCreateWebhookRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/webhooks`,
+      },
+      unmarshalWebhook,
+    )
+
   protected pageOfListWebhooks = (
     request: Readonly<ListWebhooksRequest> = {},
   ) =>
@@ -376,6 +399,21 @@ export class API extends ParentAPI {
 
   listWebhooks = (request: Readonly<ListWebhooksRequest> = {}) =>
     enrichForPagination('webhooks', this.pageOfListWebhooks, request)
+
+  /**
+   * Get information about a Webhook.
+   *
+   * @param request - The request {@link GetWebhookRequest}
+   * @returns A Promise of Webhook
+   */
+  getWebhook = (request: Readonly<GetWebhookRequest>) =>
+    this.client.fetch<Webhook>(
+      {
+        method: 'GET',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/webhooks/${validatePathParam('webhookId', request.webhookId)}`,
+      },
+      unmarshalWebhook,
+    )
 
   updateWebhook = (request: Readonly<UpdateWebhookRequest>) =>
     this.client.fetch<Webhook>(
