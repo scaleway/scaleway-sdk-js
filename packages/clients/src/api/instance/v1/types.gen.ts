@@ -334,7 +334,8 @@ export interface ServerMaintenance {
 export interface VolumeServer {
   id: string
   name: string
-  exportUri: string
+  /** @deprecated */
+  exportUri?: string
   organization: string
   server?: ServerSummary
   size: number
