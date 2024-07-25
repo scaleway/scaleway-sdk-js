@@ -397,11 +397,19 @@ export class API extends ParentAPI {
       unmarshalListWebhooksResponse,
     )
 
+  /**
+   * List Webhooks. Retrieve Webhooks in a specific Project or in a specific
+   * Organization using the `region` parameter.
+   *
+   * @param request - The request {@link ListWebhooksRequest}
+   * @returns A Promise of ListWebhooksResponse
+   */
   listWebhooks = (request: Readonly<ListWebhooksRequest> = {}) =>
     enrichForPagination('webhooks', this.pageOfListWebhooks, request)
 
   /**
-   * Get information about a Webhook.
+   * Get information about a Webhook. Retrieve information about a specific
+   * Webhook using the `webhook_id` and `region` parameters.
    *
    * @param request - The request {@link GetWebhookRequest}
    * @returns A Promise of Webhook
@@ -415,6 +423,12 @@ export class API extends ParentAPI {
       unmarshalWebhook,
     )
 
+  /**
+   * Update a Webhook. Update a Webhook events type, SNS ARN or name.
+   *
+   * @param request - The request {@link UpdateWebhookRequest}
+   * @returns A Promise of Webhook
+   */
   updateWebhook = (request: Readonly<UpdateWebhookRequest>) =>
     this.client.fetch<Webhook>(
       {
@@ -428,6 +442,13 @@ export class API extends ParentAPI {
       unmarshalWebhook,
     )
 
+  /**
+   * Delete a Webhook. You must specify the Webhook you want to delete by the
+   * `region` and `webhook_id`. Deleting a Webhook is permanent and cannot be
+   * undone.
+   *
+   * @param request - The request {@link DeleteWebhookRequest}
+   */
   deleteWebhook = (request: Readonly<DeleteWebhookRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
@@ -459,6 +480,14 @@ export class API extends ParentAPI {
       unmarshalListWebhookEventsResponse,
     )
 
+  /**
+   * List Webhook triggered events. Retrieve the list of Webhook events
+   * triggered from a specific Webhook or for a specific Project or
+   * Organization. You must specify the `region`.
+   *
+   * @param request - The request {@link ListWebhookEventsRequest}
+   * @returns A Promise of ListWebhookEventsResponse
+   */
   listWebhookEvents = (request: Readonly<ListWebhookEventsRequest>) =>
     enrichForPagination('webhookEvents', this.pageOfListWebhookEvents, request)
 }
