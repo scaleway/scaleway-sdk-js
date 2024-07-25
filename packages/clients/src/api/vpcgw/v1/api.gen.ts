@@ -27,6 +27,7 @@ import {
   marshalUpdateGatewayRequest,
   marshalUpdateIPRequest,
   marshalUpdatePATRuleRequest,
+  marshalUpgradeGatewayRequest,
   unmarshalDHCP,
   unmarshalDHCPEntry,
   unmarshalGateway,
@@ -249,10 +250,11 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Upgrade a Public Gateway to the latest version. Upgrade a given Public
-   * Gateway to the newest software version. This applies the latest bugfixes
-   * and features to your Public Gateway, but its service will be interrupted
-   * during the update.
+   * Upgrade a Public Gateway to the latest version and/or to a different
+   * commercial offer type. Upgrade a given Public Gateway to the newest
+   * software version or to a different commercial offer type. This applies the
+   * latest bugfixes and features to your Public Gateway. Note that gateway
+   * service will be interrupted during the update.
    *
    * @param request - The request {@link UpgradeGatewayRequest}
    * @returns A Promise of Gateway
@@ -260,7 +262,9 @@ export class API extends ParentAPI {
   upgradeGateway = (request: Readonly<UpgradeGatewayRequest>) =>
     this.client.fetch<Gateway>(
       {
-        body: '{}',
+        body: JSON.stringify(
+          marshalUpgradeGatewayRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/upgrade`,
