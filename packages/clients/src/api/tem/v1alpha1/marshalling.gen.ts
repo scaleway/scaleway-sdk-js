@@ -140,6 +140,7 @@ export const unmarshalDomain = (data: unknown): Domain => {
   }
 
   return {
+    autoconfig: data.autoconfig,
     createdAt: unmarshalDate(data.created_at),
     dkimConfig: data.dkim_config,
     id: data.id,
@@ -374,6 +375,7 @@ export const marshalCreateDomainRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   accept_tos: request.acceptTos,
+  autoconfig: request.autoconfig,
   domain_name: request.domainName,
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
