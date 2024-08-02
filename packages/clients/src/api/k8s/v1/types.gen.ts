@@ -466,6 +466,8 @@ export interface ClusterType {
    * note that audit logs are sent to Cockpit.
    */
   auditLogsSupported: boolean
+  /** Maximum amount of data that can be stored in etcd for the offer. */
+  maxEtcdSize: number
 }
 
 export interface Version {
@@ -547,6 +549,11 @@ export interface Cluster {
    *   cluster.
    */
   routedIpEnabled?: boolean
+  /**
+   * @deprecated Defines whether the SBS-enabled CSI starting from v0.3 is
+   *   installed on the cluster.
+   */
+  sbsCsiEnabled?: boolean
 }
 
 export interface Node {
@@ -583,6 +590,12 @@ export interface Node {
   createdAt?: Date
   /** Date on which the node was last updated. */
   updatedAt?: Date
+}
+
+export interface NodeMetadataCoreV1Taint {
+  key: string
+  value: string
+  effect: string
 }
 
 export interface UpdateClusterRequestAutoUpgrade {
@@ -674,6 +687,16 @@ export interface UpdateClusterRequestOpenIDConnectConfig {
 export interface UpdatePoolRequestUpgradePolicy {
   maxUnavailable?: number
   maxSurge?: number
+}
+
+export type AuthExternalNodeRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Pool the node will be attached to. */
+  poolId: string
 }
 
 export type CreateClusterRequest = {
@@ -885,6 +908,11 @@ export interface ExternalNode {
   nodeTaints: ExternalNodeCoreV1Taint[]
 }
 
+export interface ExternalNodeAuth {
+  nodeToken: string
+  apiUrl: string
+}
+
 export type GetClusterKubeConfigRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -905,6 +933,14 @@ export type GetClusterRequest = {
   region?: Region
   /** ID of the requested cluster. */
   clusterId: string
+}
+
+export type GetNodeMetadataRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
 }
 
 export type GetNodeRequest = {
@@ -1109,6 +1145,23 @@ export type MigrateClusterToRoutedIPsRequest = {
    */
   region?: Region
   clusterId: string
+}
+
+export interface NodeMetadata {
+  id: string
+  name: string
+  clusterUrl: string
+  clusterCa: string
+  credentialProviderConfig: string
+  poolVersion: string
+  kubeletConfig: string
+  nodeLabels: Record<string, string>
+  nodeTaints: NodeMetadataCoreV1Taint[]
+  privateNetworkMode: string
+  kapsuleIfaceMac: string
+  fullIsolation: boolean
+  hasGpu: boolean
+  externalIp: string
 }
 
 export type RebootNodeRequest = {
