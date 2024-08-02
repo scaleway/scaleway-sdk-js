@@ -140,6 +140,7 @@ export const unmarshalServer = (data: unknown): Server => {
   return {
     createdAt: unmarshalDate(data.created_at),
     deletableAt: unmarshalDate(data.deletable_at),
+    deletionScheduled: data.deletion_scheduled,
     id: data.id,
     ip: data.ip,
     name: data.name,
@@ -220,4 +221,5 @@ export const marshalUpdateServerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
+  schedule_deletion: request.scheduleDeletion,
 })
