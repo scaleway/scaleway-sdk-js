@@ -1,10 +1,15 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-export { API } from './api.gen'
+export { API, ClassicMailAPI } from './api.gen'
 export * from './content.gen'
 export type {
   CheckUserOwnsDomainRequest,
   CheckUserOwnsDomainResponse,
+  ClassicMailApiCreateMailboxRequest,
+  ClassicMailApiDeleteMailboxRequest,
+  ClassicMailApiGetMailboxRequest,
+  ClassicMailApiListMailboxesRequest,
+  ClassicMailApiUpdateMailboxRequest,
   ControlPanel,
   CreateHostingRequest,
   CreateHostingRequestDomainConfiguration,
@@ -15,6 +20,7 @@ export type {
   DnsRecordType,
   DnsRecords,
   DnsRecordsStatus,
+  EmailAddress,
   GetDomainDnsRecordsRequest,
   GetHostingRequest,
   Hosting,
@@ -27,9 +33,11 @@ export type {
   ListHostingsRequest,
   ListHostingsRequestOrderBy,
   ListHostingsResponse,
+  ListMailboxesResponse,
   ListOffersRequest,
   ListOffersRequestOrderBy,
   ListOffersResponse,
+  Mailbox,
   Nameserver,
   NameserverStatus,
   Offer,
