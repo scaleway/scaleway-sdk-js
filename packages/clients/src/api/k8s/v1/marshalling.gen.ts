@@ -23,6 +23,7 @@ import type {
   CreatePoolRequest,
   CreatePoolRequestUpgradePolicy,
   ExternalNode,
+  ExternalNodeAuth,
   ExternalNodeCoreV1Taint,
   ListClusterAvailableTypesResponse,
   ListClusterAvailableVersionsResponse,
@@ -33,6 +34,8 @@ import type {
   ListVersionsResponse,
   MaintenanceWindow,
   Node,
+  NodeMetadata,
+  NodeMetadataCoreV1Taint,
   Pool,
   PoolUpgradePolicy,
   SetClusterTypeRequest,
@@ -295,6 +298,19 @@ export const unmarshalExternalNode = (data: unknown): ExternalNode => {
   } as ExternalNode
 }
 
+export const unmarshalExternalNodeAuth = (data: unknown): ExternalNodeAuth => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ExternalNodeAuth' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    apiUrl: data.api_url,
+    nodeToken: data.node_token,
+  } as ExternalNodeAuth
+}
+
 const unmarshalClusterType = (data: unknown): ClusterType => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -422,6 +438,50 @@ export const unmarshalListVersionsResponse = (
   return {
     versions: unmarshalArrayOfObject(data.versions, unmarshalVersion),
   } as ListVersionsResponse
+}
+
+const unmarshalNodeMetadataCoreV1Taint = (
+  data: unknown,
+): NodeMetadataCoreV1Taint => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'NodeMetadataCoreV1Taint' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    effect: data.effect,
+    key: data.key,
+    value: data.value,
+  } as NodeMetadataCoreV1Taint
+}
+
+export const unmarshalNodeMetadata = (data: unknown): NodeMetadata => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'NodeMetadata' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    clusterCa: data.cluster_ca,
+    clusterUrl: data.cluster_url,
+    credentialProviderConfig: data.credential_provider_config,
+    externalIp: data.external_ip,
+    fullIsolation: data.full_isolation,
+    hasGpu: data.has_gpu,
+    id: data.id,
+    kapsuleIfaceMac: data.kapsule_iface_mac,
+    kubeletConfig: data.kubelet_config,
+    name: data.name,
+    nodeLabels: data.node_labels,
+    nodeTaints: unmarshalArrayOfObject(
+      data.node_taints,
+      unmarshalNodeMetadataCoreV1Taint,
+    ),
+    poolVersion: data.pool_version,
+    privateNetworkMode: data.private_network_mode,
+  } as NodeMetadata
 }
 
 const marshalMaintenanceWindow = (

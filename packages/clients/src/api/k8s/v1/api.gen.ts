@@ -23,6 +23,7 @@ import {
   marshalUpgradePoolRequest,
   unmarshalCluster,
   unmarshalExternalNode,
+  unmarshalExternalNodeAuth,
   unmarshalListClusterAvailableTypesResponse,
   unmarshalListClusterAvailableVersionsResponse,
   unmarshalListClusterTypesResponse,
@@ -31,10 +32,12 @@ import {
   unmarshalListPoolsResponse,
   unmarshalListVersionsResponse,
   unmarshalNode,
+  unmarshalNodeMetadata,
   unmarshalPool,
   unmarshalVersion,
 } from './marshalling.gen'
 import type {
+  AuthExternalNodeRequest,
   Cluster,
   CreateClusterRequest,
   CreateExternalNodeRequest,
@@ -43,8 +46,10 @@ import type {
   DeleteNodeRequest,
   DeletePoolRequest,
   ExternalNode,
+  ExternalNodeAuth,
   GetClusterKubeConfigRequest,
   GetClusterRequest,
+  GetNodeMetadataRequest,
   GetNodeRequest,
   GetPoolRequest,
   GetVersionRequest,
@@ -64,6 +69,7 @@ import type {
   ListVersionsResponse,
   MigrateClusterToRoutedIPsRequest,
   Node,
+  NodeMetadata,
   Pool,
   RebootNodeRequest,
   ReplaceNodeRequest,
@@ -485,6 +491,42 @@ export class API extends ParentAPI {
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}`,
       },
       unmarshalPool,
+    )
+
+  /**
+   * Fetch node metadata. Rerieve metadata to instantiate a Kapsule/Kosmos node.
+   * This method is not intended to be called by end users but rather
+   * programmatically by the node-installer.
+   *
+   * @param request - The request {@link GetNodeMetadataRequest}
+   * @returns A Promise of NodeMetadata
+   */
+  getNodeMetadata = (request: Readonly<GetNodeMetadataRequest> = {}) =>
+    this.client.fetch<NodeMetadata>(
+      {
+        method: 'GET',
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nodes/metadata`,
+      },
+      unmarshalNodeMetadata,
+    )
+
+  /**
+   * Authenticate Kosmos external node. Creates a newer Kosmos node and returns
+   * its token. This method is not intended to be called by end users but rather
+   * programmatically by the node-installer.
+   *
+   * @param request - The request {@link AuthExternalNodeRequest}
+   * @returns A Promise of ExternalNodeAuth
+   */
+  authExternalNode = (request: Readonly<AuthExternalNodeRequest>) =>
+    this.client.fetch<ExternalNodeAuth>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/external-nodes/auth`,
+      },
+      unmarshalExternalNodeAuth,
     )
 
   /**
