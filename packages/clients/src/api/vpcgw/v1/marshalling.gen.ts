@@ -44,6 +44,7 @@ import type {
   UpdateGatewayRequest,
   UpdateIPRequest,
   UpdatePATRuleRequest,
+  UpgradeGatewayRequest,
 } from './types.gen'
 
 export const unmarshalDHCP = (data: unknown): DHCP => {
@@ -585,4 +586,11 @@ export const marshalUpdatePATRuleRequest = (
   private_port: request.privatePort,
   protocol: request.protocol,
   public_port: request.publicPort,
+})
+
+export const marshalUpgradeGatewayRequest = (
+  request: UpgradeGatewayRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  type: request.type,
 })
