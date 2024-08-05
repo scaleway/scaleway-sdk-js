@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.42.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.41.0...@scaleway/sdk@2.42.0) (2024-07-29)
+
+### Features
+
+- add SVCB HTTPS in DomainRecordType ([#1372](https://github.com/scaleway/scaleway-sdk-js/issues/1372)) ([ead32a1](https://github.com/scaleway/scaleway-sdk-js/commit/ead32a1cbb14ead02d84b37440fb4220423da62c))
+- **apple_silicon:** expose ssh/sudo credentials in public APIs ([#1371](https://github.com/scaleway/scaleway-sdk-js/issues/1371)) ([885f185](https://github.com/scaleway/scaleway-sdk-js/commit/885f185fbad933c5bb0cec493a10fbe4af4add2c))
+
+### Bug Fixes
+
+- **instance:** change export_uri to deprecated ([#1375](https://github.com/scaleway/scaleway-sdk-js/issues/1375)) ([d207b5e](https://github.com/scaleway/scaleway-sdk-js/commit/d207b5e19447f77a9667a55052dfa2d2f00af02c))
+
 ## [2.41.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.40.0...@scaleway/sdk@2.41.0) (2024-07-22)
 
 ### Features
