@@ -466,6 +466,8 @@ export interface ClusterType {
    * note that audit logs are sent to Cockpit.
    */
   auditLogsSupported: boolean
+  /** Maximum amount of data that can be stored in etcd for the offer. */
+  maxEtcdSize: number
 }
 
 export interface Version {

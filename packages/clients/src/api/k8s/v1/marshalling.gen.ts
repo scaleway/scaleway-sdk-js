@@ -323,6 +323,7 @@ const unmarshalClusterType = (data: unknown): ClusterType => {
     availability: data.availability,
     commitmentDelay: data.commitment_delay,
     dedicated: data.dedicated,
+    maxEtcdSize: data.max_etcd_size,
     maxNodes: data.max_nodes,
     memory: data.memory,
     name: data.name,
