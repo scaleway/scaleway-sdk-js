@@ -221,6 +221,8 @@ export interface Container {
   httpOption: ContainerHttpOption
   /** Execution environment of the container. */
   sandbox: ContainerSandbox
+  /** Local storage limit of the container (in MB). */
+  localStorageLimit: number
   /** Region in which the container will be deployed. */
   region: Region
 }
@@ -401,6 +403,8 @@ export type CreateContainerRequest = {
   httpOption?: ContainerHttpOption
   /** Execution environment of the container. */
   sandbox?: ContainerSandbox
+  /** Local storage limit of the container (in MB). */
+  localStorageLimit?: number
 }
 
 export type CreateCronRequest = {
@@ -864,6 +868,8 @@ export type UpdateContainerRequest = {
   httpOption?: ContainerHttpOption
   /** Execution environment of the container. */
   sandbox?: ContainerSandbox
+  /** Local storage limit of the container (in MB). */
+  localStorageLimit?: number
 }
 
 export type UpdateCronRequest = {
