@@ -3,6 +3,7 @@
 export { API } from './api.gen'
 export * from './content.gen'
 export type {
+  AuthExternalNodeRequest,
   AutoscalerEstimator,
   AutoscalerExpander,
   CNI,
@@ -27,9 +28,11 @@ export type {
   DeleteNodeRequest,
   DeletePoolRequest,
   ExternalNode,
+  ExternalNodeAuth,
   ExternalNodeCoreV1Taint,
   GetClusterKubeConfigRequest,
   GetClusterRequest,
+  GetNodeMetadataRequest,
   GetNodeRequest,
   GetPoolRequest,
   GetVersionRequest,
@@ -54,6 +57,8 @@ export type {
   MaintenanceWindowDayOfTheWeek,
   MigrateClusterToRoutedIPsRequest,
   Node,
+  NodeMetadata,
+  NodeMetadataCoreV1Taint,
   NodeStatus,
   Pool,
   PoolStatus,

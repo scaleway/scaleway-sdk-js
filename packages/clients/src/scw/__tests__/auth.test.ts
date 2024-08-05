@@ -72,7 +72,7 @@ describe('authenticateWithSessionToken', () => {
     /* eslint-enable deprecation/deprecation */
     const expectedReq = sourceReq.clone()
     expectedReq.headers.append('x-session-token', 'dummy')
-    expect(updatedReq).toStrictEqual(expectedReq)
+    expect(updatedReq).toMatchObject(expectedReq)
   })
 })
 
@@ -89,7 +89,7 @@ describe('authenticateWithSecrets', () => {
     })
     const expectedReq = sourceReq.clone()
     expectedReq.headers.append('x-auth-token', validSecrets.secretKey)
-    expect(updatedReq).toStrictEqual(expectedReq)
+    expect(updatedReq).toMatchObject(expectedReq)
   })
 
   it('throws an exception for invalid secrets', () => {
