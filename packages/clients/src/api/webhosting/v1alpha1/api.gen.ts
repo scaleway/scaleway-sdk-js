@@ -11,6 +11,8 @@ import type { Region, WaitForOptions } from '../../../bridge'
 import { HOSTING_TRANSIENT_STATUSES } from './content.gen'
 import {
   marshalCheckUserOwnsDomainRequest,
+  marshalClassicMailApiCreateMailboxRequest,
+  marshalClassicMailApiUpdateMailboxRequest,
   marshalCreateHostingRequest,
   marshalUpdateHostingRequest,
   unmarshalCheckUserOwnsDomainResponse,
@@ -18,13 +20,20 @@ import {
   unmarshalHosting,
   unmarshalListControlPanelsResponse,
   unmarshalListHostingsResponse,
+  unmarshalListMailboxesResponse,
   unmarshalListOffersResponse,
+  unmarshalMailbox,
   unmarshalResetHostingPasswordResponse,
   unmarshalSession,
 } from './marshalling.gen'
 import type {
   CheckUserOwnsDomainRequest,
   CheckUserOwnsDomainResponse,
+  ClassicMailApiCreateMailboxRequest,
+  ClassicMailApiDeleteMailboxRequest,
+  ClassicMailApiGetMailboxRequest,
+  ClassicMailApiListMailboxesRequest,
+  ClassicMailApiUpdateMailboxRequest,
   CreateHostingRequest,
   CreateSessionRequest,
   DeleteHostingRequest,
@@ -36,8 +45,10 @@ import type {
   ListControlPanelsResponse,
   ListHostingsRequest,
   ListHostingsResponse,
+  ListMailboxesResponse,
   ListOffersRequest,
   ListOffersResponse,
+  Mailbox,
   ResetHostingPasswordRequest,
   ResetHostingPasswordResponse,
   RestoreHostingRequest,
@@ -322,5 +333,115 @@ export class API extends ParentAPI {
         path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/reset-password`,
       },
       unmarshalResetHostingPasswordResponse,
+    )
+}
+
+/**
+ * Web Hosting Classic Mailbox API.
+ *
+ * This API allows you to manage your mailboxes for your Web Hosting services.
+ */
+export class ClassicMailAPI extends ParentAPI {
+  /** Lists the available regions of the API. */
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+
+  /**
+   * Create a new mailbox within your hosting plan.. Create a new mailbox within
+   * your hosting plan.
+   *
+   * @param request - The request {@link ClassicMailApiCreateMailboxRequest}
+   * @returns A Promise of Mailbox
+   */
+  createMailbox = (request: Readonly<ClassicMailApiCreateMailboxRequest>) =>
+    this.client.fetch<Mailbox>(
+      {
+        body: JSON.stringify(
+          marshalClassicMailApiCreateMailboxRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/classic-hostings/${validatePathParam('onlineId', request.onlineId)}/mailboxes`,
+      },
+      unmarshalMailbox,
+    )
+
+  /**
+   * Get a mailbox by id within your hosting plan.. Get a mailbox by id within
+   * your hosting plan.
+   *
+   * @param request - The request {@link ClassicMailApiGetMailboxRequest}
+   * @returns A Promise of Mailbox
+   */
+  getMailbox = (request: Readonly<ClassicMailApiGetMailboxRequest>) =>
+    this.client.fetch<Mailbox>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/classic-hostings/${validatePathParam('onlineId', request.onlineId)}/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}`,
+      },
+      unmarshalMailbox,
+    )
+
+  protected pageOfListMailboxes = (
+    request: Readonly<ClassicMailApiListMailboxesRequest>,
+  ) =>
+    this.client.fetch<ListMailboxesResponse>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/classic-hostings/${validatePathParam('onlineId', request.onlineId)}/mailboxes`,
+        urlParams: urlParams(
+          ['domain', request.domain],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListMailboxesResponse,
+    )
+
+  /**
+   * List all mailboxes within your hosting plan.. List all mailboxes within
+   * your hosting plan.
+   *
+   * @param request - The request {@link ClassicMailApiListMailboxesRequest}
+   * @returns A Promise of ListMailboxesResponse
+   */
+  listMailboxes = (request: Readonly<ClassicMailApiListMailboxesRequest>) =>
+    enrichForPagination('mailboxes', this.pageOfListMailboxes, request)
+
+  deleteMailbox = (request: Readonly<ClassicMailApiDeleteMailboxRequest>) =>
+    this.client.fetch<Mailbox>(
+      {
+        method: 'DELETE',
+        path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/classic-hostings/${validatePathParam('onlineId', request.onlineId)}/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}`,
+      },
+      unmarshalMailbox,
+    )
+
+  /**
+   * Update the mailbox within your hosting plan.. Update the mailbox within
+   * your hosting plan.
+   *
+   * @param request - The request {@link ClassicMailApiUpdateMailboxRequest}
+   * @returns A Promise of Mailbox
+   */
+  updateMailbox = (request: Readonly<ClassicMailApiUpdateMailboxRequest>) =>
+    this.client.fetch<Mailbox>(
+      {
+        body: JSON.stringify(
+          marshalClassicMailApiUpdateMailboxRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/webhosting/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/classic-hostings/${validatePathParam('onlineId', request.onlineId)}/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}`,
+      },
+      unmarshalMailbox,
     )
 }

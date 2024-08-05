@@ -10,17 +10,22 @@ import type { DefaultValues } from '../../../bridge'
 import type {
   CheckUserOwnsDomainRequest,
   CheckUserOwnsDomainResponse,
+  ClassicMailApiCreateMailboxRequest,
+  ClassicMailApiUpdateMailboxRequest,
   ControlPanel,
   CreateHostingRequest,
   CreateHostingRequestDomainConfiguration,
   DnsRecord,
   DnsRecords,
+  EmailAddress,
   Hosting,
   HostingCpanelUrls,
   HostingOption,
   ListControlPanelsResponse,
   ListHostingsResponse,
+  ListMailboxesResponse,
   ListOffersResponse,
+  Mailbox,
   Nameserver,
   Offer,
   OfferProduct,
@@ -90,6 +95,32 @@ export const unmarshalHosting = (data: unknown): Hosting => {
     updatedAt: unmarshalDate(data.updated_at),
     username: data.username,
   } as Hosting
+}
+
+const unmarshalEmailAddress = (data: unknown): EmailAddress => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EmailAddress' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    domain: data.domain,
+    login: data.login,
+  } as EmailAddress
+}
+
+export const unmarshalMailbox = (data: unknown): Mailbox => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Mailbox' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    email: data.email ? unmarshalEmailAddress(data.email) : undefined,
+    mailboxId: data.mailbox_id,
+  } as Mailbox
 }
 
 export const unmarshalCheckUserOwnsDomainResponse = (
@@ -199,6 +230,21 @@ export const unmarshalListHostingsResponse = (
   } as ListHostingsResponse
 }
 
+export const unmarshalListMailboxesResponse = (
+  data: unknown,
+): ListMailboxesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListMailboxesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    mailboxes: unmarshalArrayOfObject(data.mailboxes, unmarshalMailbox),
+    totalCount: data.total_count,
+  } as ListMailboxesResponse
+}
+
 const unmarshalOfferProduct = (data: unknown): OfferProduct => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -284,6 +330,32 @@ export const marshalCheckUserOwnsDomainRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
+const marshalEmailAddress = (
+  request: EmailAddress,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  domain: request.domain,
+  login: request.login,
+})
+
+export const marshalClassicMailApiCreateMailboxRequest = (
+  request: ClassicMailApiCreateMailboxRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  email:
+    request.email !== undefined
+      ? marshalEmailAddress(request.email, defaults)
+      : undefined,
+  password: request.password,
+})
+
+export const marshalClassicMailApiUpdateMailboxRequest = (
+  request: ClassicMailApiUpdateMailboxRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  password: request.password,
 })
 
 const marshalCreateHostingRequestDomainConfiguration = (
