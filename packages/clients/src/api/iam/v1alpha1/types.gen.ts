@@ -92,6 +92,8 @@ export type UserType = 'unknown_type' | 'guest' | 'owner'
 export interface RuleSpecs {
   /** Names of permission sets bound to the rule. */
   permissionSetNames?: string[]
+  /** Condition expression to evaluate. */
+  condition: string
   /**
    * List of Project IDs the rule is scoped to.
    *
@@ -319,6 +321,8 @@ export interface Rule {
   permissionSetNames?: string[]
   /** Permission_set_names have the same scope_type. */
   permissionSetsScopeType: PermissionSetScopeType
+  /** Condition expression to evaluate. */
+  condition: string
   /**
    * List of Project IDs the rule is scoped to.
    *

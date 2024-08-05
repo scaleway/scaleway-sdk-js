@@ -314,9 +314,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Import a snapshot from a Scaleway Object Storage bucket. The bucket must
-   * contain a QCOW2 image. The bucket can be imported into any Availability
-   * Zone as long as it is in the same region as the bucket.
+   * (Deprecated in favor of `ImportSnapshotFromObjectStorage`). Import a
+   * snapshot from a Scaleway Object Storage bucket The bucket must contain a
+   * QCOW2 image. The bucket can be imported into any Availability Zone as long
+   * as it is in the same region as the bucket.
    *
    * @deprecated
    * @param request - The request {@link ImportSnapshotFromS3Request}

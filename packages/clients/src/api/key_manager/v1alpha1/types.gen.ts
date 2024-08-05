@@ -36,7 +36,8 @@ export interface KeyRotationPolicy {
 
 export interface KeyUsage {
   /**
-   * Algorithms used to encrypt and decrypt arbitrary payloads.
+   * See the `Key.Algorithm.SymmetricEncryption` enum for a description of
+   * values.
    *
    * One-of ('usage'): at most one of 'symmetricEncryption' could be set.
    */
@@ -56,11 +57,7 @@ export interface Key {
    * AES-256-GCM.
    */
   usage?: KeyUsage
-  /**
-   * Current state of the key. Values include: `unknown_state`: key is in an
-   * unknown state. `enabled`: key can be used for cryptographic operations.
-   * `disabled`: key cannot be used for cryptographic operations.
-   */
+  /** See the `Key.State` enum for a description of values. */
   state: KeyState
   /** The rotation count tracks the amount of times that the key was rotated. */
   rotationCount: number
@@ -217,7 +214,10 @@ export type GenerateDataKeyRequest = {
   region?: Region
   /** ID of the key. */
   keyId: string
-  /** Encryption algorithm of the data encryption key. */
+  /**
+   * See the `DataKey.Algorithm.SymmetricEncryption` enum for a description of
+   * values.
+   */
   algorithm?: DataKeyAlgorithmSymmetricEncryption
   /**
    * Default value is `false`, meaning that the plaintext is returned. Set it to

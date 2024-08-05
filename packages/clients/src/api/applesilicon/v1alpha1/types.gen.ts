@@ -118,8 +118,14 @@ export interface Server {
   createdAt?: Date
   /** Date on which the server was last updated. */
   updatedAt?: Date
-  /** Date on which the server was last deleted. */
+  /** Date from which the server can be deleted. */
   deletableAt?: Date
+  /**
+   * Set to true to mark the server for automatic deletion depending on
+   * `deletable_at` date. Set to false to cancel an existing deletion schedule.
+   * Leave unset otherwise.
+   */
+  deletionScheduled: boolean
   /** Zone of the server. */
   zone: Zone
 }
@@ -256,4 +262,6 @@ export type UpdateServerRequest = {
   serverId: string
   /** Updated name for your server. */
   name?: string
+  /** Specify whether the server should be flagged for automatic deletion. */
+  scheduleDeletion?: boolean
 }
