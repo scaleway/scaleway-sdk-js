@@ -51,6 +51,13 @@ export interface HostingOption {
   name: string
 }
 
+export interface EmailAddress {
+  /** Domain part of the mailbox address. */
+  domain: string
+  /** Username part address of the mailbox address. */
+  login: string
+}
+
 export interface OfferProduct {
   /** Product name. */
   name: string
@@ -170,6 +177,13 @@ export interface Hosting {
   region: Region
 }
 
+export interface Mailbox {
+  /** The ID of the mailbox. */
+  mailboxId: number
+  /** The email address of the mailbox. */
+  email?: EmailAddress
+}
+
 export interface Offer {
   /** Offer ID. */
   id: string
@@ -207,6 +221,77 @@ export type CheckUserOwnsDomainRequest = {
 export interface CheckUserOwnsDomainResponse {
   /** Indicates whether the specified project owns the domain. */
   ownsDomain: boolean
+}
+
+export type ClassicMailApiCreateMailboxRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** The Online hosting ID. */
+  onlineId: number
+  /** The email address of the mailbox. */
+  email?: EmailAddress
+  /** Password for the new mailbox. */
+  password: string
+}
+
+export type ClassicMailApiDeleteMailboxRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** The Online hosting ID. */
+  onlineId: number
+  /** The ID of the mailbox to delete. */
+  mailboxId: number
+}
+
+export type ClassicMailApiGetMailboxRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** The Online hosting ID. */
+  onlineId: number
+  /** The ID of the mailbox to get. */
+  mailboxId: number
+}
+
+export type ClassicMailApiListMailboxesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** The Online hosting ID. */
+  onlineId: number
+  /** Page number (must be a positive integer). */
+  page?: number
+  /**
+   * Number of mailboxes to return (must be a positive integer lower or equal to
+   * 100).
+   */
+  pageSize?: number
+  /** Domain to filter the mailboxes. */
+  domain?: string
+}
+
+export type ClassicMailApiUpdateMailboxRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** The Online hosting ID. */
+  onlineId: number
+  /** The ID of the mailbox to update. */
+  mailboxId: number
+  /** New password for the mailbox. */
+  password?: string
 }
 
 export type CreateHostingRequest = {
@@ -368,6 +453,13 @@ export interface ListHostingsResponse {
   totalCount: number
   /** List of Web Hosting plans. */
   hostings: Hosting[]
+}
+
+export interface ListMailboxesResponse {
+  /** Total number of mailboxes. */
+  totalCount: number
+  /** List of mailboxes. */
+  mailboxes: Mailbox[]
 }
 
 export type ListOffersRequest = {
