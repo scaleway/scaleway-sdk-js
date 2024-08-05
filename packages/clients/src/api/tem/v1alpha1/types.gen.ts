@@ -252,6 +252,8 @@ export interface Domain {
   reputation?: DomainReputation
   /** List of records to configure to validate a domain. */
   records?: DomainRecords
+  /** Status of auto-configuration for the domain's DNS zone. */
+  autoconfig: boolean
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -337,6 +339,8 @@ export type CreateDomainRequest = {
   domainName: string
   /** Accept Scaleway's Terms of Service. */
   acceptTos: boolean
+  /** Activate auto-configuration of the domain's DNS zone. */
+  autoconfig: boolean
 }
 
 export type CreateEmailRequest = {
