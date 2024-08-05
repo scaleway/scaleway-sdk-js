@@ -222,6 +222,7 @@ export const unmarshalCluster = (data: unknown): Cluster => {
     projectId: data.project_id,
     region: data.region,
     routedIpEnabled: data.routed_ip_enabled,
+    sbsCsiEnabled: data.sbs_csi_enabled,
     status: data.status,
     tags: data.tags,
     type: data.type,

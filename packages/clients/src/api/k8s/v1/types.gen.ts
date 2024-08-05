@@ -549,6 +549,11 @@ export interface Cluster {
    *   cluster.
    */
   routedIpEnabled?: boolean
+  /**
+   * @deprecated Defines whether the SBS-enabled CSI starting from v0.3 is
+   *   installed on the cluster.
+   */
+  sbsCsiEnabled?: boolean
 }
 
 export interface Node {
