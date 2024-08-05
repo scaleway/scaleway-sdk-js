@@ -1016,4 +1016,6 @@ export type UpgradeGatewayRequest = {
   zone?: Zone
   /** ID of the gateway to upgrade. */
   gatewayId: string
+  /** Gateway type (commercial offer). */
+  type?: string
 }
