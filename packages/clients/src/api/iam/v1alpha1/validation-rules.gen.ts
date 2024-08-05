@@ -189,6 +189,12 @@ export const ListUsersRequest = {
   },
 }
 
+export const RuleSpecs = {
+  condition: {
+    maxLength: 255,
+  },
+}
+
 export const UpdateAPIKeyRequest = {
   description: {
     maxLength: 200,
