@@ -1,0 +1,119 @@
+account:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/account/**
+
+apple-silicon:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/applesilicon/**
+
+baremetal:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/baremetal/**
+
+billing:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/billing/**
+
+container:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/container/**
+
+domain:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/domain/**
+
+flexible-ip:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/flexibleip/**
+
+function:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/function/**
+
+iam:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/iam/**
+
+instance:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/instance/**
+
+iot:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/iot/**
+
+k8s:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/k8s/**
+
+load-balancer:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/lb/**
+
+mnq:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/mnq/**
+
+object:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/object/**
+
+rdb:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/rdb/**
+
+redis:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/redis/**
+
+registry:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/registry/**
+
+sdb:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/sdb/**
+
+secret:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/secret/**
+
+tem:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/tem/**
+
+vpc:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/vpc/**
+
+vpcgw:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/vpcgw/**
+
+webhosting:
+  - changed-files:
+      - any-glob-to-any-file:
+          - packages/clients/src/api/webhosting/**
