@@ -100,6 +100,7 @@ export const unmarshalSecret = (data: unknown): Secret => {
     tags: data.tags,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
+    usedBy: data.used_by,
     versionCount: data.version_count,
   } as Secret
 }
