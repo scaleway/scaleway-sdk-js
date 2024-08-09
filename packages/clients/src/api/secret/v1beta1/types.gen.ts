@@ -151,6 +151,8 @@ export interface Secret {
    * default, the policy is applied to all the secret's versions.
    */
   ephemeralPolicy?: EphemeralPolicy
+  /** List of Scaleway resources that can access and manage the secret. */
+  usedBy: Product[]
   /** Region of the secret. */
   region: Region
 }
