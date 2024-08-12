@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.43.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.42.0...@scaleway/sdk@2.43.0) (2024-08-12)
+
+### Features
+
+- **apple_silicon:** adapt public API for automatic server deletion ([#1384](https://github.com/scaleway/scaleway-sdk-js/issues/1384)) ([79c21cd](https://github.com/scaleway/scaleway-sdk-js/commit/79c21cd8e5f7cd99844c4b946c2bb4cdd32a2387))
+- **block:** enable snapshot export API ([#1378](https://github.com/scaleway/scaleway-sdk-js/issues/1378)) ([2728353](https://github.com/scaleway/scaleway-sdk-js/commit/27283535dc195849f5a09888ca80256397cd8f3d))
+- **iam:** expose `condition` field ([#1379](https://github.com/scaleway/scaleway-sdk-js/issues/1379)) ([108f0a2](https://github.com/scaleway/scaleway-sdk-js/commit/108f0a239ff515899998bfed93b1c58d3db9dce8))
+- **k8s:** add max_etcd_size in ClusterType ([#1383](https://github.com/scaleway/scaleway-sdk-js/issues/1383)) ([cb84762](https://github.com/scaleway/scaleway-sdk-js/commit/cb84762ebe5d9887617bba86d39101dbc130f1ee))
+- **k8s:** add migration to SBS CSI ([#1387](https://github.com/scaleway/scaleway-sdk-js/issues/1387)) ([6482a07](https://github.com/scaleway/scaleway-sdk-js/commit/6482a072a445ce645967bd2969051c9674043c95))
+- **k8s:** rationalize node bootstrap ([#1381](https://github.com/scaleway/scaleway-sdk-js/issues/1381)) ([434edec](https://github.com/scaleway/scaleway-sdk-js/commit/434edec360f1255061b9cd910c3b42fa69fdbea4))
+- **serverless:** add local storage limit field ([#1380](https://github.com/scaleway/scaleway-sdk-js/issues/1380)) ([dc41d06](https://github.com/scaleway/scaleway-sdk-js/commit/dc41d066189af289c28a033bba58a34aff90af70))
+- **tem:** handle autoconfig in create domain endpoint ([#1382](https://github.com/scaleway/scaleway-sdk-js/issues/1382)) ([293ac79](https://github.com/scaleway/scaleway-sdk-js/commit/293ac79e63e9a7f27f573d13ea2cde8ae8395873))
+- **vpc_gw:** add ability to upgrade Public Gateway to a specific commercial offer type ([#1376](https://github.com/scaleway/scaleway-sdk-js/issues/1376)) ([724ceb5](https://github.com/scaleway/scaleway-sdk-js/commit/724ceb58242b2b883b54ae05e42332a0dc746551))
+- **webhosting:** add first version of the classic mail api ([#1386](https://github.com/scaleway/scaleway-sdk-js/issues/1386)) ([ad3dfed](https://github.com/scaleway/scaleway-sdk-js/commit/ad3dfed78d50fbffe27c9766df4c0de649782df3))
+
 ## [2.42.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.41.0...@scaleway/sdk@2.42.0) (2024-07-29)
 
 ### Features
