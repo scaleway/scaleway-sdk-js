@@ -26,6 +26,7 @@ export const unmarshalDatabaseBackup = (data: unknown): DatabaseBackup => {
   return {
     createdAt: unmarshalDate(data.created_at),
     databaseId: data.database_id,
+    dbSize: data.db_size,
     downloadUrl: data.download_url,
     downloadUrlExpiresAt: unmarshalDate(data.download_url_expires_at),
     expiresAt: unmarshalDate(data.expires_at),

@@ -45,8 +45,10 @@ export interface DatabaseBackup {
   createdAt?: Date
   /** Expiration date. */
   expiresAt?: Date
-  /** Size of the database backup. */
+  /** Size (in bytes) of the database backup file. */
   size?: number
+  /** Size (in bytes) of the database when backup has been done. */
+  dbSize?: number
   /** Download URL of the exported database backup. */
   downloadUrl?: string
   /** Expiration date of the download URL. */
