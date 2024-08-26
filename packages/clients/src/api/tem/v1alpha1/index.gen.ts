@@ -48,6 +48,7 @@ export type {
   ListWebhooksResponse,
   RevokeDomainRequest,
   Statistics,
+  UpdateDomainRequest,
   UpdateWebhookRequest,
   Webhook,
   WebhookEvent,

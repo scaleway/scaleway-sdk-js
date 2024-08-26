@@ -16,6 +16,7 @@ import {
   marshalCreateDomainRequest,
   marshalCreateEmailRequest,
   marshalCreateWebhookRequest,
+  marshalUpdateDomainRequest,
   marshalUpdateWebhookRequest,
   unmarshalCreateEmailResponse,
   unmarshalDomain,
@@ -54,6 +55,7 @@ import type {
   ListWebhooksResponse,
   RevokeDomainRequest,
   Statistics,
+  UpdateDomainRequest,
   UpdateWebhookRequest,
   Webhook,
 } from './types.gen'
@@ -353,6 +355,25 @@ export class API extends ParentAPI {
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}/verification`,
       },
       unmarshalDomainLastStatus,
+    )
+
+  /**
+   * Update a domain. Update a domain auto-configuration.
+   *
+   * @param request - The request {@link UpdateDomainRequest}
+   * @returns A Promise of Domain
+   */
+  updateDomain = (request: Readonly<UpdateDomainRequest>) =>
+    this.client.fetch<Domain>(
+      {
+        body: JSON.stringify(
+          marshalUpdateDomainRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}`,
+      },
+      unmarshalDomain,
     )
 
   /**
