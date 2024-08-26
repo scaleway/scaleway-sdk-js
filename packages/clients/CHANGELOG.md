@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.44.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.43.0...@scaleway/sdk@2.44.0) (2024-08-26)
+
+### Features
+
+- **block:** add ams-2 in sbs localities ([#1391](https://github.com/scaleway/scaleway-sdk-js/issues/1391)) ([9cb1240](https://github.com/scaleway/scaleway-sdk-js/commit/9cb1240d21c0721294396205c368ca431cd18d06))
+- **serverless_sqldb:** add field db_size in message DatabaseBackup ([#1392](https://github.com/scaleway/scaleway-sdk-js/issues/1392)) ([622dbc2](https://github.com/scaleway/scaleway-sdk-js/commit/622dbc27c5ff9bdb2add5e9ae1b53c5967dbec4a))
+
 ## [2.43.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.42.0...@scaleway/sdk@2.43.0) (2024-08-12)
 
 ### Features
