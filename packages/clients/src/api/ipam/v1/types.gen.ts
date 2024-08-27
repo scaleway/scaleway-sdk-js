@@ -12,6 +12,7 @@ export type ListIPsRequestOrderBy =
 
 export type ResourceType =
   | 'unknown_type'
+  | 'custom'
   | 'instance_server'
   | 'instance_ip'
   | 'instance_private_nic'
@@ -72,6 +73,16 @@ export interface Source {
   subnetId?: string
 }
 
+export interface CustomResource {
+  /** MAC address of the custom resource. */
+  macAddress: string
+  /**
+   * When the resource is in a Private Network, a DNS record is available to
+   * resolve the resource name.
+   */
+  name?: string
+}
+
 export interface IP {
   /** IP ID. */
   id: string
@@ -99,6 +110,18 @@ export interface IP {
   zone?: Zone
 }
 
+export type AttachIPRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** IP ID. */
+  ipId: string
+  /** Custom resource to be attached to the IP. */
+  resource: CustomResource
+}
+
 export type BookIPRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -122,6 +145,24 @@ export type BookIPRequest = {
   address?: string
   /** Tags for the IP. */
   tags?: string[]
+  /**
+   * Custom resource to attach to the IP being booked. An example of a custom
+   * resource is a virtual machine hosted on an Elastic Metal server, or an
+   * additional user network interface on an Instance. Do not use this for
+   * attaching IP addresses to standard Scaleway resources, as it will fail -
+   * instead, see the relevant product API for an equivalent method.
+   */
+  resource?: CustomResource
+}
+
+export type DetachIPRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** IP ID. */
+  ipId: string
 }
 
 export type GetIPRequest = {
@@ -219,6 +260,18 @@ export type ListIPsRequest = {
 export interface ListIPsResponse {
   totalCount: number
   ips: IP[]
+}
+
+export type MoveIPRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** IP ID. */
+  ipId: string
+  /** Custom resource to be attached to the IP. */
+  resource?: CustomResource
 }
 
 export type ReleaseIPRequest = {

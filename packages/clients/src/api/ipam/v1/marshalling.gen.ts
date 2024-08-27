@@ -8,9 +8,12 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  AttachIPRequest,
   BookIPRequest,
+  CustomResource,
   IP,
   ListIPsResponse,
+  MoveIPRequest,
   ReleaseIPSetRequest,
   Resource,
   Reverse,
@@ -96,6 +99,21 @@ export const unmarshalListIPsResponse = (data: unknown): ListIPsResponse => {
   } as ListIPsResponse
 }
 
+const marshalCustomResource = (
+  request: CustomResource,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  mac_address: request.macAddress,
+  name: request.name,
+})
+
+export const marshalAttachIPRequest = (
+  request: AttachIPRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  resource: marshalCustomResource(request.resource, defaults),
+})
+
 const marshalSource = (
   request: Source,
   defaults: DefaultValues,
@@ -114,8 +132,22 @@ export const marshalBookIPRequest = (
   address: request.address,
   is_ipv6: request.isIpv6,
   project_id: request.projectId ?? defaults.defaultProjectId,
+  resource:
+    request.resource !== undefined
+      ? marshalCustomResource(request.resource, defaults)
+      : undefined,
   source: marshalSource(request.source, defaults),
   tags: request.tags,
+})
+
+export const marshalMoveIPRequest = (
+  request: MoveIPRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  resource:
+    request.resource !== undefined
+      ? marshalCustomResource(request.resource, defaults)
+      : undefined,
 })
 
 export const marshalReleaseIPSetRequest = (
