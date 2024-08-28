@@ -1144,6 +1144,7 @@ export type MigrateClusterToRoutedIPsRequest = {
    * config.
    */
   region?: Region
+  /** Cluster ID for which the routed ip will be enabled for the nodes. */
   clusterId: string
 }
 
