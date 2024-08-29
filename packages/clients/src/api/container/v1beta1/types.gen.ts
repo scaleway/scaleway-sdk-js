@@ -642,19 +642,6 @@ export type GetTriggerRequest = {
   triggerId: string
 }
 
-export type IssueJWTRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: Region
-  /** One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set. */
-  containerId?: string
-  /** One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set. */
-  namespaceId?: string
-  expiresAt?: Date
-}
-
 export type ListContainersRequest = {
   /**
    * Region to target. If none is passed will use default region from the
