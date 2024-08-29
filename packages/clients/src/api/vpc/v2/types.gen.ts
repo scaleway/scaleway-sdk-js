@@ -238,6 +238,7 @@ export type EnableRoutingRequest = {
    * config.
    */
   region?: Region
+  /** VPC ID. */
   vpcId: string
 }
 
