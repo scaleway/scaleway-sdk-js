@@ -15,6 +15,7 @@ export type {
   CreatePolicyRequest,
   CreateSSHKeyRequest,
   CreateUserRequest,
+  CreateUserRequestMember,
   DeleteAPIKeyRequest,
   DeleteApplicationRequest,
   DeleteGroupRequest,

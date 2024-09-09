@@ -87,7 +87,7 @@ export type PermissionSetScopeType =
 
 export type UserStatus = 'unknown_status' | 'invitation_pending' | 'activated'
 
-export type UserType = 'unknown_type' | 'guest' | 'owner'
+export type UserType = 'unknown_type' | 'guest' | 'owner' | 'member'
 
 export interface RuleSpecs {
   /** Names of permission sets bound to the rule. */
@@ -108,6 +108,17 @@ export interface RuleSpecs {
    * set.
    */
   organizationId?: string
+}
+
+export interface CreateUserRequestMember {
+  /** Email of the user to create. */
+  email: string
+  /** Whether or not to send an email containing the member's password. */
+  sendPasswordEmail: boolean
+  /** The member's username. */
+  username: string
+  /** The member's password. */
+  password: string
 }
 
 export interface JWT {
@@ -372,6 +383,8 @@ export interface User {
   id: string
   /** Email of user. */
   email: string
+  /** User identifier unique to the Organization. */
+  username: string
   /** Date user was created. */
   createdAt?: Date
   /** Date of last user update. */
@@ -535,10 +548,20 @@ export type CreateSSHKeyRequest = {
 export type CreateUserRequest = {
   /** ID of the Organization. */
   organizationId?: string
-  /** Email of the user. */
-  email: string
+  /**
+   * Email of the user.
+   *
+   * One-of ('type'): at most one of 'email', 'member' could be set.
+   */
+  email?: string
   /** Tags associated with the user. */
   tags?: string[]
+  /**
+   * A new IAM Member to create.
+   *
+   * One-of ('type'): at most one of 'email', 'member' could be set.
+   */
+  member?: CreateUserRequestMember
 }
 
 export type DeleteAPIKeyRequest = {
