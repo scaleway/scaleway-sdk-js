@@ -407,8 +407,11 @@ export interface Server {
   creationDate?: Date
   /** True if a dynamic IPv4 is required. */
   dynamicIpRequired: boolean
-  /** True to configure the instance so it uses the new routed IP mode. */
-  routedIpEnabled: boolean
+  /**
+   * @deprecated True to configure the instance so it uses the routed IP mode.
+   *   Use of `routed_ip_enabled` as `False` is deprecated.
+   */
+  routedIpEnabled?: boolean
   /**
    * @deprecated True if IPv6 is enabled (deprecated and always `False` when
    *   `routed_ip_enabled` is `True`).
@@ -865,7 +868,10 @@ export type CreateIpRequest = {
   tags?: string[]
   /** UUID of the Instance you want to attach the IP to. */
   server?: string
-  /** IP type to reserve (either 'nat', 'routed_ipv4' or 'routed_ipv6'). */
+  /**
+   * IP type to reserve (either 'routed_ipv4' or 'routed_ipv6', use of 'nat' is
+   * deprecated).
+   */
   type?: IpType
 }
 
@@ -1012,7 +1018,10 @@ export type CreateServerRequest = {
   name?: string
   /** Define if a dynamic IPv4 is required for the Instance. */
   dynamicIpRequired?: boolean
-  /** If true, configure the Instance so it uses the new routed IP mode. */
+  /**
+   * @deprecated If true, configure the Instance so it uses the new routed IP
+   *   mode.
+   */
   routedIpEnabled?: boolean
   /** Define the Instance commercial type (i.e. GP1-S). */
   commercialType: string
@@ -1459,8 +1468,8 @@ export type ListIpsRequest = {
   /** A positive integer to choose the page to return. */
   page?: number
   /**
-   * Filter on the IP Mobility IP type (whose value should be either 'nat',
-   * 'routed_ipv4' or 'routed_ipv6').
+   * Filter on the IP Mobility IP type (whose value should be either
+   * 'routed_ipv4', 'routed_ipv6' or 'nat').
    */
   type?: string
 }
@@ -2035,8 +2044,8 @@ export type UpdateServerRequest = {
   bootscript?: string
   dynamicIpRequired?: boolean
   /**
-   * True to configure the instance so it uses the new routed IP mode (once this
-   * is set to True you cannot set it back to False).
+   * @deprecated True to configure the instance so it uses the new routed IP
+   *   mode (once this is set to True you cannot set it back to False).
    */
   routedIpEnabled?: boolean
   /** A list of reserved IP IDs to attach to the Instance. */
