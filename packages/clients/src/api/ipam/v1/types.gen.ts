@@ -12,6 +12,7 @@ export type ListIPsRequestOrderBy =
 
 export type ResourceType =
   | 'unknown_type'
+  | 'custom'
   | 'instance_server'
   | 'instance_ip'
   | 'instance_private_nic'
@@ -72,6 +73,16 @@ export interface Source {
   subnetId?: string
 }
 
+export interface CustomResource {
+  /** MAC address of the custom resource. */
+  macAddress: string
+  /**
+   * When the resource is in a Private Network, a DNS record is available to
+   * resolve the resource name.
+   */
+  name?: string
+}
+
 export interface IP {
   /** IP ID. */
   id: string
@@ -81,11 +92,11 @@ export interface IP {
   projectId: string
   /** Defines whether the IP is an IPv6 (false = IPv4). */
   isIpv6: boolean
-  /** Date the IP was booked. */
+  /** Date the IP was reserved. */
   createdAt?: Date
   /** Date the IP was last modified. */
   updatedAt?: Date
-  /** Source pool where the IP was booked in. */
+  /** Source pool where the IP was reserved in. */
   source?: Source
   /** Resource which the IP is attached to. */
   resource?: Resource
@@ -99,6 +110,18 @@ export interface IP {
   zone?: Zone
 }
 
+export type AttachIPRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** IP ID. */
+  ipId: string
+  /** Custom resource to be attached to the IP. */
+  resource: CustomResource
+}
+
 export type BookIPRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -110,18 +133,40 @@ export type BookIPRequest = {
    * Private Network's Project.
    */
   projectId?: string
-  /** Source in which to book the IP. Not all sources are available for booking. */
+  /**
+   * Source in which to reserve the IP. Not all sources are available for
+   * reservation.
+   */
   source: Source
   /** Request an IPv6 instead of an IPv4. */
   isIpv6: boolean
   /**
    * The requested address should not include the subnet mask (/suffix). Note
    * that only the Private Network source allows you to pick a specific IP. If
-   * the requested IP is already booked, then the call will fail.
+   * the requested IP is already reserved, then the call will fail.
    */
   address?: string
   /** Tags for the IP. */
   tags?: string[]
+  /**
+   * Custom resource to attach to the IP being reserved. An example of a custom
+   * resource is a virtual machine hosted on an Elastic Metal server. Do not use
+   * this for attaching IP addresses to standard Scaleway resources, as it will
+   * fail - instead, see the relevant product API for an equivalent method.
+   */
+  resource?: CustomResource
+}
+
+export type DetachIPRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** IP ID. */
+  ipId: string
+  /** Custom resource currently attached to the IP. */
+  resource: CustomResource
 }
 
 export type GetIPRequest = {
@@ -219,6 +264,20 @@ export type ListIPsRequest = {
 export interface ListIPsResponse {
   totalCount: number
   ips: IP[]
+}
+
+export type MoveIPRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** IP ID. */
+  ipId: string
+  /** Custom resource currently attached to the IP. */
+  fromResource: CustomResource
+  /** Custom resource to be attached to the IP. */
+  toResource?: CustomResource
 }
 
 export type ReleaseIPRequest = {
