@@ -15,6 +15,7 @@ import type {
   EncryptRequest,
   EncryptResponse,
   GenerateDataKeyRequest,
+  ImportKeyMaterialRequest,
   Key,
   KeyRotationPolicy,
   KeyUsage,
@@ -62,6 +63,7 @@ export const unmarshalKey = (data: unknown): Key => {
     id: data.id,
     locked: data.locked,
     name: data.name,
+    origin: data.origin,
     projectId: data.project_id,
     protected: data.protected,
     region: data.region,
@@ -156,6 +158,7 @@ export const marshalCreateKeyRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
+  origin: request.origin,
   project_id: request.projectId ?? defaults.defaultProjectId,
   rotation_policy:
     request.rotationPolicy !== undefined
@@ -191,6 +194,14 @@ export const marshalGenerateDataKeyRequest = (
 ): Record<string, unknown> => ({
   algorithm: request.algorithm,
   without_plaintext: request.withoutPlaintext,
+})
+
+export const marshalImportKeyMaterialRequest = (
+  request: ImportKeyMaterialRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  key_material: request.keyMaterial,
+  salt: request.salt,
 })
 
 export const marshalUpdateKeyRequest = (
