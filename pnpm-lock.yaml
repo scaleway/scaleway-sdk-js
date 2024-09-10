@@ -19,10 +19,10 @@ importers:
         version: 3.18.4(eslint@8.57.0)(typescript@5.5.4)
       '@vitest/coverage-istanbul':
         specifier: 2.0.5
-        version: 2.0.5(vitest@2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@24.1.0))
+        version: 2.0.5(vitest@2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@25.0.0))
       '@vitest/coverage-v8':
         specifier: 2.0.5
-        version: 2.0.5(vitest@2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@24.1.0))
+        version: 2.0.5(vitest@2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@25.0.0))
       '@vitest/ui':
         specifier: 2.0.5
         version: 2.0.5(vitest@2.0.5)
@@ -54,8 +54,8 @@ importers:
         specifier: 9.1.5
         version: 9.1.5
       jsdom:
-        specifier: 24.1.0
-        version: 24.1.0
+        specifier: 25.0.0
+        version: 25.0.0
       lerna:
         specifier: 8.1.8
         version: 8.1.8(encoding@0.1.13)
@@ -79,7 +79,7 @@ importers:
         version: 5.4.2(@types/node@22.1.0)
       vitest:
         specifier: 2.0.5
-        version: 2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@24.1.0)
+        version: 2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)
 
   packages/clients:
     dependencies:
@@ -2584,8 +2584,8 @@ packages:
   jsbn@1.1.0:
     resolution: {integrity: sha512-4bYVV3aAMtDTTu4+xsDYa6sy9GyJ69/amsu9sYF2zqjiEoZA5xJi3BrfX3uY+/IekIu7MwdObdbDWpoZdBv3/A==}
 
-  jsdom@24.1.0:
-    resolution: {integrity: sha512-6gpM7pRXCwIOKxX47cgOyvyQDN/Eh0f1MeKySBV2xGdKtqJBLj8P25eY3EVCWo2mglDDzozR2r2MW4T+JiNUZA==}
+  jsdom@25.0.0:
+    resolution: {integrity: sha512-OhoFVT59T7aEq75TVw9xxEfkXgacpqAhQaYgP9y/fDqWQCMB/b1H66RfmPm/MaeaAIU9nDwMOVTlPN51+ao6CQ==}
     engines: {node: '>=18'}
     peerDependencies:
       canvas: ^2.11.2
@@ -5381,7 +5381,7 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitest/coverage-istanbul@2.0.5(vitest@2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@24.1.0))':
+  '@vitest/coverage-istanbul@2.0.5(vitest@2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@25.0.0))':
     dependencies:
       '@istanbuljs/schema': 0.1.3
       debug: 4.3.6
@@ -5393,11 +5393,11 @@ snapshots:
       magicast: 0.3.4
       test-exclude: 7.0.1
       tinyrainbow: 1.2.0
-      vitest: 2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@24.1.0)
+      vitest: 2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitest/coverage-v8@2.0.5(vitest@2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@24.1.0))':
+  '@vitest/coverage-v8@2.0.5(vitest@2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@25.0.0))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 0.2.3
@@ -5411,7 +5411,7 @@ snapshots:
       std-env: 3.7.0
       test-exclude: 7.0.1
       tinyrainbow: 1.2.0
-      vitest: 2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@24.1.0)
+      vitest: 2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -5450,7 +5450,7 @@ snapshots:
       pathe: 1.1.2
       sirv: 2.0.4
       tinyrainbow: 1.2.0
-      vitest: 2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@24.1.0)
+      vitest: 2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)
 
   '@vitest/utils@2.0.5':
     dependencies:
@@ -7287,7 +7287,7 @@ snapshots:
 
   jsbn@1.1.0: {}
 
-  jsdom@24.1.0:
+  jsdom@25.0.0:
     dependencies:
       cssstyle: 4.0.1
       data-urls: 5.0.0
@@ -9022,7 +9022,7 @@ snapshots:
       '@types/node': 22.1.0
       fsevents: 2.3.3
 
-  vitest@2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@24.1.0):
+  vitest@2.0.5(@types/node@22.1.0)(@vitest/ui@2.0.5)(jsdom@25.0.0):
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@vitest/expect': 2.0.5
@@ -9046,7 +9046,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.1.0
       '@vitest/ui': 2.0.5(vitest@2.0.5)
-      jsdom: 24.1.0
+      jsdom: 25.0.0
     transitivePeerDependencies:
       - less
       - lightningcss
