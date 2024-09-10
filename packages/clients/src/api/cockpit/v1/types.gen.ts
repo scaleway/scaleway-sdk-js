@@ -4,7 +4,12 @@ import type { Region } from '../../../bridge'
 
 export type DataSourceOrigin = 'unknown_origin' | 'scaleway' | 'external'
 
-export type DataSourceType = 'unknown_type' | 'metrics' | 'logs' | 'traces'
+export type DataSourceType =
+  | 'unknown_type'
+  | 'metrics'
+  | 'logs'
+  | 'traces'
+  | 'alerts'
 
 export type GrafanaUserRole = 'unknown_role' | 'editor' | 'viewer'
 

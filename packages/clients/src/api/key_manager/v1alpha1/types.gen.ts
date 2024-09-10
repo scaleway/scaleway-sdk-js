@@ -10,6 +10,8 @@ export type KeyAlgorithmSymmetricEncryption =
   | 'unknown_symmetric_encryption'
   | 'aes_256_gcm'
 
+export type KeyOrigin = 'unknown_origin' | 'scaleway_kms' | 'external'
+
 export type KeyState =
   | 'unknown_state'
   | 'enabled'
@@ -77,6 +79,8 @@ export interface Key {
   rotatedAt?: Date
   /** Key rotation policy. */
   rotationPolicy?: KeyRotationPolicy
+  /** Refer to the `Key.Origin` enum for a description of values. */
+  origin: KeyOrigin
   /** Region of the key. */
   region: Region
 }
@@ -104,6 +108,8 @@ export type CreateKeyRequest = {
   rotationPolicy?: KeyRotationPolicy
   /** Default value is `false`. */
   unprotected: boolean
+  /** Refer to the `Key.Origin` enum for a description of values. */
+  origin?: KeyOrigin
 }
 
 export interface DataKey {
@@ -150,6 +156,16 @@ export interface DecryptResponse {
    * will be returned in the response object.
    */
   ciphertext?: string
+}
+
+export type DeleteKeyMaterialRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the key of which to delete the key material. */
+  keyId: string
 }
 
 export type DeleteKeyRequest = {
@@ -235,6 +251,26 @@ export type GetKeyRequest = {
   region?: Region
   /** ID of the key to target. */
   keyId: string
+}
+
+export type ImportKeyMaterialRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** The key's origin must be 'external'. */
+  keyId: string
+  /**
+   * The key material The key material is a random sequence of bytes used to
+   * derive a cryptographic key.
+   */
+  keyMaterial: string
+  /**
+   * A salt can be used to improve the quality of randomness when the key
+   * material is generated from a low entropy source.
+   */
+  salt?: string
 }
 
 export type ListKeysRequest = {
