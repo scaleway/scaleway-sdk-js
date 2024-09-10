@@ -35,7 +35,6 @@ export type {
   GetNamespaceRequest,
   GetTokenRequest,
   GetTriggerRequest,
-  IssueJWTRequest,
   ListContainersRequest,
   ListContainersRequestOrderBy,
   ListContainersResponse,

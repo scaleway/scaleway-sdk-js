@@ -70,7 +70,6 @@ import type {
   GetNamespaceRequest,
   GetTokenRequest,
   GetTriggerRequest,
-  IssueJWTRequest,
   ListCronsRequest,
   ListCronsResponse,
   ListDomainsRequest,
@@ -631,31 +630,6 @@ export class API extends ParentAPI {
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}`,
       },
       unmarshalDomain,
-    )
-
-  /**
-   * Create a JWT token. Deprecated in favor of CreateToken.
-   *
-   * @deprecated
-   * @param request - The request {@link IssueJWTRequest}
-   * @returns A Promise of Token
-   */
-  issueJWT = (request: Readonly<IssueJWTRequest> = {}) =>
-    this.client.fetch<Token>(
-      {
-        method: 'GET',
-        path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/issue-jwt`,
-        urlParams: urlParams(
-          ['expires_at', request.expiresAt],
-          ...Object.entries(
-            resolveOneOf([
-              { param: 'function_id', value: request.functionId },
-              { param: 'namespace_id', value: request.namespaceId },
-            ]),
-          ),
-        ),
-      },
-      unmarshalToken,
     )
 
   /**
