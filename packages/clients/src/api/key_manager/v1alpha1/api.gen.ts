@@ -12,6 +12,7 @@ import {
   marshalDecryptRequest,
   marshalEncryptRequest,
   marshalGenerateDataKeyRequest,
+  marshalImportKeyMaterialRequest,
   marshalUpdateKeyRequest,
   unmarshalDataKey,
   unmarshalDecryptResponse,
@@ -24,6 +25,7 @@ import type {
   DataKey,
   DecryptRequest,
   DecryptResponse,
+  DeleteKeyMaterialRequest,
   DeleteKeyRequest,
   DisableKeyRequest,
   EnableKeyRequest,
@@ -31,6 +33,7 @@ import type {
   EncryptResponse,
   GenerateDataKeyRequest,
   GetKeyRequest,
+  ImportKeyMaterialRequest,
   Key,
   ListKeysRequest,
   ListKeysResponse,
@@ -324,4 +327,39 @@ export class API extends ParentAPI {
       },
       unmarshalDecryptResponse,
     )
+
+  /**
+   * Import key material. Import key material to use to derive a new
+   * cryptographic key. The key's origin must be `external`.
+   *
+   * @param request - The request {@link ImportKeyMaterialRequest}
+   * @returns A Promise of Key
+   */
+  importKeyMaterial = (request: Readonly<ImportKeyMaterialRequest>) =>
+    this.client.fetch<Key>(
+      {
+        body: JSON.stringify(
+          marshalImportKeyMaterialRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/import-key-material`,
+      },
+      unmarshalKey,
+    )
+
+  /**
+   * Delete key material. Delete previously imported key material. This renders
+   * the associated cryptographic key unusable for any operation. The key's
+   * origin must be `external`.
+   *
+   * @param request - The request {@link DeleteKeyMaterialRequest}
+   */
+  deleteKeyMaterial = (request: Readonly<DeleteKeyMaterialRequest>) =>
+    this.client.fetch<void>({
+      body: '{}',
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/delete-key-material`,
+    })
 }

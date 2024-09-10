@@ -652,6 +652,21 @@ export interface Statistics {
   canceledCount: number
 }
 
+export type UpdateDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the domain to update. */
+  domainId: string
+  /**
+   * (Optional) If set to true, activate auto-configuration of the domain's DNS
+   * zone.
+   */
+  autoconfig?: boolean
+}
+
 export type UpdateWebhookRequest = {
   /**
    * Region to target. If none is passed will use default region from the
