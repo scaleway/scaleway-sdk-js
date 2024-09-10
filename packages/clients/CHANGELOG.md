@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.45.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.44.0...@scaleway/sdk@2.45.0) (2024-09-09)
+
+### Features
+
+- **tem:** add support for UpdateDomain ([#1412](https://github.com/scaleway/scaleway-sdk-js/issues/1412)) ([876bf75](https://github.com/scaleway/scaleway-sdk-js/commit/876bf759eb7c15a994083f13b520abcb87ca7fef))
+
 ## [2.44.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.43.0...@scaleway/sdk@2.44.0) (2024-08-26)
 
 ### Features

@@ -9,18 +9,24 @@ import {
 } from '../../../bridge'
 import type { Region } from '../../../bridge'
 import {
+  marshalAttachIPRequest,
   marshalBookIPRequest,
+  marshalDetachIPRequest,
+  marshalMoveIPRequest,
   marshalReleaseIPSetRequest,
   marshalUpdateIPRequest,
   unmarshalIP,
   unmarshalListIPsResponse,
 } from './marshalling.gen'
 import type {
+  AttachIPRequest,
   BookIPRequest,
+  DetachIPRequest,
   GetIPRequest,
   IP,
   ListIPsRequest,
   ListIPsResponse,
+  MoveIPRequest,
   ReleaseIPRequest,
   ReleaseIPSetRequest,
   UpdateIPRequest,
@@ -165,4 +171,75 @@ export class API extends ParentAPI {
    */
   listIPs = (request: Readonly<ListIPsRequest> = {}) =>
     enrichForPagination('ips', this.pageOfListIPs, request)
+
+  /**
+   * Attach existing IP to custom resource. Attach an existing IP from a Private
+   * Network subnet to a custom, named resource via its MAC address. An example
+   * of a custom resource is a virtual machine hosted on an Elastic Metal
+   * server. Do not use this method for attaching IP addresses to standard
+   * Scaleway resources as it will fail - see the relevant product API for an
+   * equivalent method.
+   *
+   * @param request - The request {@link AttachIPRequest}
+   * @returns A Promise of IP
+   */
+  attachIP = (request: Readonly<AttachIPRequest>) =>
+    this.client.fetch<IP>(
+      {
+        body: JSON.stringify(
+          marshalAttachIPRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}/attach`,
+      },
+      unmarshalIP,
+    )
+
+  /**
+   * Detach existing IP from a custom resource. Detach a private IP from a
+   * custom resource. An example of a custom resource is a virtual machine
+   * hosted on an Elastic Metal server. Do not use this method for attaching IP
+   * addresses to standard Scaleway resources (e.g. Instances, Load Balancers)
+   * as it will fail - see the relevant product API for an equivalent method.
+   *
+   * @param request - The request {@link DetachIPRequest}
+   * @returns A Promise of IP
+   */
+  detachIP = (request: Readonly<DetachIPRequest>) =>
+    this.client.fetch<IP>(
+      {
+        body: JSON.stringify(
+          marshalDetachIPRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}/detach`,
+      },
+      unmarshalIP,
+    )
+
+  /**
+   * Move existing IP to a custom resource. Move an existing private IP from one
+   * custom resource (e.g. a virtual machine hosted on an Elastic Metal server)
+   * to another custom resource. This will detach it from the first resource,
+   * and attach it to the second. Do not use this method for moving IP addresses
+   * between standard Scaleway resources (e.g. Instances, Load Balancers) as it
+   * will fail - see the relevant product API for an equivalent method.
+   *
+   * @param request - The request {@link MoveIPRequest}
+   * @returns A Promise of IP
+   */
+  moveIP = (request: Readonly<MoveIPRequest>) =>
+    this.client.fetch<IP>(
+      {
+        body: JSON.stringify(
+          marshalMoveIPRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}/move`,
+      },
+      unmarshalIP,
+    )
 }
