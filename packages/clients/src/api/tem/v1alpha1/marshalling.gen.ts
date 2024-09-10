@@ -30,6 +30,7 @@ import type {
   ListWebhookEventsResponse,
   ListWebhooksResponse,
   Statistics,
+  UpdateDomainRequest,
   UpdateWebhookRequest,
   Webhook,
   WebhookEvent,
@@ -451,6 +452,13 @@ export const marshalCreateWebhookRequest = (
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
   sns_arn: request.snsArn,
+})
+
+export const marshalUpdateDomainRequest = (
+  request: UpdateDomainRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  autoconfig: request.autoconfig,
 })
 
 export const marshalUpdateWebhookRequest = (

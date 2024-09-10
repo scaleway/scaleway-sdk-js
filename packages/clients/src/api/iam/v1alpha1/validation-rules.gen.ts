@@ -55,6 +55,18 @@ export const CreateSSHKeyRequest = {
   },
 }
 
+export const CreateUserRequestMember = {
+  password: {
+    ignoreEmpty: true,
+    maxLength: 72,
+  },
+  username: {
+    maxLength: 64,
+    minLength: 2,
+    pattern: /^[a-zA-Z0-9._-]+$/,
+  },
+}
+
 export const GetQuotumRequest = {
   quotumName: {
     minLength: 1,

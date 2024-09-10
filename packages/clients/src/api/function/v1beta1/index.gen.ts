@@ -38,7 +38,6 @@ export type {
   GetNamespaceRequest,
   GetTokenRequest,
   GetTriggerRequest,
-  IssueJWTRequest,
   ListCronsRequest,
   ListCronsRequestOrderBy,
   ListCronsResponse,

@@ -330,7 +330,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateUserRequest}
    * @returns A Promise of User
    */
-  createUser = (request: Readonly<CreateUserRequest>) =>
+  createUser = (request: Readonly<CreateUserRequest> = {}) =>
     this.client.fetch<User>(
       {
         body: JSON.stringify(

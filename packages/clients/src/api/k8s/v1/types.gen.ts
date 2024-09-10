@@ -1144,6 +1144,20 @@ export type MigrateClusterToRoutedIPsRequest = {
    * config.
    */
   region?: Region
+  /** Cluster ID for which the routed ip will be enabled for the nodes. */
+  clusterId: string
+}
+
+export type MigrateClusterToSBSCSIRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /**
+   * Cluster ID for which the latest CSI compatible with Scaleway Block Storage
+   * will be enabled.
+   */
   clusterId: string
 }
 

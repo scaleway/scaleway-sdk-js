@@ -20,6 +20,7 @@ import type {
   CreatePolicyRequest,
   CreateSSHKeyRequest,
   CreateUserRequest,
+  CreateUserRequestMember,
   EncodedJWT,
   Group,
   JWT,
@@ -239,6 +240,7 @@ export const unmarshalUser = (data: unknown): User => {
     twoFactorEnabled: data.two_factor_enabled,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
+    username: data.username,
   } as User
 }
 
@@ -569,13 +571,32 @@ export const marshalCreateSSHKeyRequest = (
   public_key: request.publicKey,
 })
 
+const marshalCreateUserRequestMember = (
+  request: CreateUserRequestMember,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  email: request.email,
+  password: request.password,
+  send_password_email: request.sendPasswordEmail,
+  username: request.username,
+})
+
 export const marshalCreateUserRequest = (
   request: CreateUserRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  email: request.email,
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
   tags: request.tags,
+  ...resolveOneOf<string | Record<string, unknown>>([
+    { param: 'email', value: request.email },
+    {
+      param: 'member',
+      value:
+        request.member !== undefined
+          ? marshalCreateUserRequestMember(request.member, defaults)
+          : undefined,
+    },
+  ]),
 })
 
 export const marshalRemoveGroupMemberRequest = (
