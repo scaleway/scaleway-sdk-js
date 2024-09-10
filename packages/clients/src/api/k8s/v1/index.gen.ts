@@ -56,6 +56,7 @@ export type {
   MaintenanceWindow,
   MaintenanceWindowDayOfTheWeek,
   MigrateClusterToRoutedIPsRequest,
+  MigrateClusterToSBSCSIRequest,
   Node,
   NodeMetadata,
   NodeMetadataCoreV1Taint,

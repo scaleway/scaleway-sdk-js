@@ -118,8 +118,8 @@ export type SetServerRequest = {
   /** True if a dynamic IPv4 is required. */
   dynamicIpRequired: boolean
   /**
-   * True to configure the instance so it uses the new routed IP mode (once this
-   * is set to True you cannot set it back to False).
+   * @deprecated True to configure the instance so it uses the new routed IP
+   *   mode (once this is set to True you cannot set it back to False).
    */
   routedIpEnabled?: boolean
   /**
