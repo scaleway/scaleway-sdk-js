@@ -13,12 +13,14 @@ import type {
   AddOptionServerRequest,
   BMCAccess,
   CPU,
+  CertificationOption,
   CreateServerRequest,
   CreateServerRequestInstall,
   Disk,
   GetServerMetricsResponse,
   IP,
   InstallServerRequest,
+  LicenseOption,
   ListOSResponse,
   ListOffersResponse,
   ListOptionsResponse,
@@ -35,8 +37,11 @@ import type {
   PersistentMemory,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
   PrivateNetworkApiSetServerPrivateNetworksRequest,
+  PrivateNetworkOption,
+  PublicBandwidthOption,
   RaidController,
   RebootServerRequest,
+  RemoteAccessOption,
   Server,
   ServerEvent,
   ServerInstall,
@@ -111,6 +116,62 @@ export const unmarshalOS = (data: unknown): OS => {
   } as OS
 }
 
+const unmarshalCertificationOption = (data: unknown): CertificationOption => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CertificationOption' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as CertificationOption
+}
+
+const unmarshalLicenseOption = (data: unknown): LicenseOption => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'LicenseOption' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    osId: data.os_id,
+  } as LicenseOption
+}
+
+const unmarshalPrivateNetworkOption = (data: unknown): PrivateNetworkOption => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PrivateNetworkOption' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as PrivateNetworkOption
+}
+
+const unmarshalPublicBandwidthOption = (
+  data: unknown,
+): PublicBandwidthOption => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicBandwidthOption' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    bandwidthInBps: data.bandwidth_in_bps,
+  } as PublicBandwidthOption
+}
+
+const unmarshalRemoteAccessOption = (data: unknown): RemoteAccessOption => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RemoteAccessOption' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as RemoteAccessOption
+}
+
 const unmarshalCPU = (data: unknown): CPU => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -163,12 +224,25 @@ const unmarshalOfferOptionOffer = (data: unknown): OfferOptionOffer => {
   }
 
   return {
+    certification: data.certification
+      ? unmarshalCertificationOption(data.certification)
+      : undefined,
     enabled: data.enabled,
     id: data.id,
+    license: data.license ? unmarshalLicenseOption(data.license) : undefined,
     manageable: data.manageable,
     name: data.name,
     osId: data.os_id,
     price: data.price ? unmarshalMoney(data.price) : undefined,
+    privateNetwork: data.private_network
+      ? unmarshalPrivateNetworkOption(data.private_network)
+      : undefined,
+    publicBandwidth: data.public_bandwidth
+      ? unmarshalPublicBandwidthOption(data.public_bandwidth)
+      : undefined,
+    remoteAccess: data.remote_access
+      ? unmarshalRemoteAccessOption(data.remote_access)
+      : undefined,
     subscriptionPeriod: data.subscription_period,
   } as OfferOptionOffer
 }
@@ -252,9 +326,22 @@ export const unmarshalOption = (data: unknown): Option => {
   }
 
   return {
+    certification: data.certification
+      ? unmarshalCertificationOption(data.certification)
+      : undefined,
     id: data.id,
+    license: data.license ? unmarshalLicenseOption(data.license) : undefined,
     manageable: data.manageable,
     name: data.name,
+    privateNetwork: data.private_network
+      ? unmarshalPrivateNetworkOption(data.private_network)
+      : undefined,
+    publicBandwidth: data.public_bandwidth
+      ? unmarshalPublicBandwidthOption(data.public_bandwidth)
+      : undefined,
+    remoteAccess: data.remote_access
+      ? unmarshalRemoteAccessOption(data.remote_access)
+      : undefined,
   } as Option
 }
 
@@ -305,10 +392,23 @@ const unmarshalServerOption = (data: unknown): ServerOption => {
   }
 
   return {
+    certification: data.certification
+      ? unmarshalCertificationOption(data.certification)
+      : undefined,
     expiresAt: unmarshalDate(data.expires_at),
     id: data.id,
+    license: data.license ? unmarshalLicenseOption(data.license) : undefined,
     manageable: data.manageable,
     name: data.name,
+    privateNetwork: data.private_network
+      ? unmarshalPrivateNetworkOption(data.private_network)
+      : undefined,
+    publicBandwidth: data.public_bandwidth
+      ? unmarshalPublicBandwidthOption(data.public_bandwidth)
+      : undefined,
+    remoteAccess: data.remote_access
+      ? unmarshalRemoteAccessOption(data.remote_access)
+      : undefined,
     status: data.status,
   } as ServerOption
 }

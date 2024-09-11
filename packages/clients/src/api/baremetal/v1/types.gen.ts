@@ -72,6 +72,20 @@ export type ServerStatus =
 
 export type SettingType = 'unknown' | 'smtp'
 
+export interface CertificationOption {}
+
+export interface LicenseOption {
+  osId: string
+}
+
+export interface PrivateNetworkOption {}
+
+export interface PublicBandwidthOption {
+  bandwidthInBps: number
+}
+
+export interface RemoteAccessOption {}
+
 export interface OSOSField {
   editable: boolean
   required: boolean
@@ -125,8 +139,43 @@ export interface OfferOptionOffer {
   price?: Money
   /** Boolean to know if option could be managed. */
   manageable: boolean
-  /** ID of the OS linked to the option. */
+  /** @deprecated Deprecated, use LicenseOptionVars.os_id instead. */
   osId?: string
+  /**
+   * License option, contains the ID of the OS linked to the option.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth',
+   * 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  license?: LicenseOption
+  /**
+   * Public_bandwidth option, contains the bandwidth_in_bps.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth',
+   * 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  publicBandwidth?: PublicBandwidthOption
+  /**
+   * Private_network option.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth',
+   * 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  privateNetwork?: PrivateNetworkOption
+  /**
+   * Remote_access option.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth',
+   * 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  remoteAccess?: RemoteAccessOption
+  /**
+   * Certification option.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth',
+   * 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  certification?: CertificationOption
 }
 
 export interface PersistentMemory {
@@ -192,6 +241,41 @@ export interface ServerOption {
   manageable: boolean
   /** Auto expiration date for compatible options. */
   expiresAt?: Date
+  /**
+   * License option, contains the ID of the OS linked to the option.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth',
+   * 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  license?: LicenseOption
+  /**
+   * Public_bandwidth option, contains the bandwidth_in_bps.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth',
+   * 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  publicBandwidth?: PublicBandwidthOption
+  /**
+   * Private_network option.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth',
+   * 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  privateNetwork?: PrivateNetworkOption
+  /**
+   * Remote_access option.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth',
+   * 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  remoteAccess?: RemoteAccessOption
+  /**
+   * Certification option.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth',
+   * 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  certification?: CertificationOption
 }
 
 export interface ServerRescueServer {
@@ -312,6 +396,41 @@ export interface Option {
   name: string
   /** Defines whether the option is manageable (could be added or removed). */
   manageable: boolean
+  /**
+   * License option, contains the ID of the OS linked to the option.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth',
+   * 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  license?: LicenseOption
+  /**
+   * Public_bandwidth option, contains the bandwidth_in_bps.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth',
+   * 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  publicBandwidth?: PublicBandwidthOption
+  /**
+   * Private_network option.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth',
+   * 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  privateNetwork?: PrivateNetworkOption
+  /**
+   * Remote_access option.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth',
+   * 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  remoteAccess?: RemoteAccessOption
+  /**
+   * Certification option.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth',
+   * 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  certification?: CertificationOption
 }
 
 export interface ServerEvent {
