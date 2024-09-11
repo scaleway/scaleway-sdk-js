@@ -243,6 +243,8 @@ export interface OS {
   licenseRequired: boolean
   /** Defines if a specific Organization is allowed to install this OS type. */
   allowed: boolean
+  /** Defines if custom partitioning is supported by this OS. */
+  customPartitioningSupported: boolean
 }
 
 export interface Offer {
