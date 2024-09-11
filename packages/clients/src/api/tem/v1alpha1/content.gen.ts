@@ -3,7 +3,10 @@
 import type { DomainStatus, EmailStatus } from './types.gen'
 
 /** Lists transient statutes of the enum {@link DomainStatus}. */
-export const DOMAIN_TRANSIENT_STATUSES: DomainStatus[] = ['pending']
+export const DOMAIN_TRANSIENT_STATUSES: DomainStatus[] = [
+  'pending',
+  'autoconfiguring',
+]
 
 /** Lists transient statutes of the enum {@link EmailStatus}. */
 export const EMAIL_TRANSIENT_STATUSES: EmailStatus[] = ['new', 'sending']
