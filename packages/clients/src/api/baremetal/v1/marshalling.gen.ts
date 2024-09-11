@@ -92,6 +92,7 @@ export const unmarshalOS = (data: unknown): OS => {
 
   return {
     allowed: data.allowed,
+    customPartitioningSupported: data.custom_partitioning_supported,
     enabled: data.enabled,
     id: data.id,
     licenseRequired: data.license_required,
