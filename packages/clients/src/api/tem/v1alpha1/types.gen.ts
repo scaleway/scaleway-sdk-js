@@ -23,6 +23,7 @@ export type DomainStatus =
   | 'locked'
   | 'revoked'
   | 'pending'
+  | 'autoconfiguring'
 
 export type EmailFlag =
   | 'unknown_flag'

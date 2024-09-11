@@ -47,8 +47,8 @@ export class API extends ParentAPI {
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
 
   /**
-   * Book a new IP. Book a new IP from the specified source. Currently IPs can
-   * only be booked from a Private Network.
+   * Reserve a new IP. Reserve a new IP from the specified source. Currently IPs
+   * can only be reserved from a Private Network.
    *
    * @param request - The request {@link BookIPRequest}
    * @returns A Promise of IP
@@ -173,7 +173,7 @@ export class API extends ParentAPI {
     enrichForPagination('ips', this.pageOfListIPs, request)
 
   /**
-   * Attach existing IP to custom resource. Attach an existing IP from a Private
+   * Attach IP to custom resource. Attach an existing reserved IP from a Private
    * Network subnet to a custom, named resource via its MAC address. An example
    * of a custom resource is a virtual machine hosted on an Elastic Metal
    * server. Do not use this method for attaching IP addresses to standard
@@ -197,11 +197,11 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Detach existing IP from a custom resource. Detach a private IP from a
-   * custom resource. An example of a custom resource is a virtual machine
-   * hosted on an Elastic Metal server. Do not use this method for attaching IP
-   * addresses to standard Scaleway resources (e.g. Instances, Load Balancers)
-   * as it will fail - see the relevant product API for an equivalent method.
+   * Detach IP from a custom resource. Detach a private IP from a custom
+   * resource. An example of a custom resource is a virtual machine hosted on an
+   * Elastic Metal server. Do not use this method for detaching IP addresses
+   * from standard Scaleway resources (e.g. Instances, Load Balancers) as it
+   * will fail - see the relevant product API for an equivalent method.
    *
    * @param request - The request {@link DetachIPRequest}
    * @returns A Promise of IP
@@ -220,7 +220,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Move existing IP to a custom resource. Move an existing private IP from one
+   * Move IP to a custom resource. Move an existing reserved private IP from one
    * custom resource (e.g. a virtual machine hosted on an Elastic Metal server)
    * to another custom resource. This will detach it from the first resource,
    * and attach it to the second. Do not use this method for moving IP addresses
