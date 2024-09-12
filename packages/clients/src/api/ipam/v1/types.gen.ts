@@ -92,11 +92,11 @@ export interface IP {
   projectId: string
   /** Defines whether the IP is an IPv6 (false = IPv4). */
   isIpv6: boolean
-  /** Date the IP was booked. */
+  /** Date the IP was reserved. */
   createdAt?: Date
   /** Date the IP was last modified. */
   updatedAt?: Date
-  /** Source pool where the IP was booked in. */
+  /** Source pool where the IP was reserved in. */
   source?: Source
   /** Resource which the IP is attached to. */
   resource?: Resource
@@ -133,20 +133,23 @@ export type BookIPRequest = {
    * Private Network's Project.
    */
   projectId?: string
-  /** Source in which to book the IP. Not all sources are available for booking. */
+  /**
+   * Source in which to reserve the IP. Not all sources are available for
+   * reservation.
+   */
   source: Source
   /** Request an IPv6 instead of an IPv4. */
   isIpv6: boolean
   /**
    * The requested address should not include the subnet mask (/suffix). Note
    * that only the Private Network source allows you to pick a specific IP. If
-   * the requested IP is already booked, then the call will fail.
+   * the requested IP is already reserved, then the call will fail.
    */
   address?: string
   /** Tags for the IP. */
   tags?: string[]
   /**
-   * Custom resource to attach to the IP being booked. An example of a custom
+   * Custom resource to attach to the IP being reserved. An example of a custom
    * resource is a virtual machine hosted on an Elastic Metal server. Do not use
    * this for attaching IP addresses to standard Scaleway resources, as it will
    * fail - instead, see the relevant product API for an equivalent method.

@@ -77,6 +77,8 @@ export interface Route {
   createdAt?: Date
   /** Date the Route was last modified. */
   updatedAt?: Date
+  /** Defines whether the route can be modified or deleted by the user. */
+  isReadOnly: boolean
   /** Region of the Route. */
   region: Region
 }
