@@ -1,0 +1,862 @@
+// This file was automatically generated. DO NOT EDIT.
+// If you have any remark or suggestion do not hesitate to open an issue.
+import {
+  API as ParentAPI,
+  enrichForPagination,
+  urlParams,
+  validatePathParam,
+  waitForResource,
+} from '../../../bridge'
+import type { Region, WaitForOptions } from '../../../bridge'
+import { HOSTING_TRANSIENT_STATUSES } from './content.gen'
+import {
+  marshalDatabaseApiAssignDatabaseUserRequest,
+  marshalDatabaseApiChangeDatabaseUserPasswordRequest,
+  marshalDatabaseApiCreateDatabaseRequest,
+  marshalDatabaseApiCreateDatabaseUserRequest,
+  marshalDatabaseApiUnassignDatabaseUserRequest,
+  marshalFtpAccountApiChangeFtpAccountPasswordRequest,
+  marshalFtpAccountApiCreateFtpAccountRequest,
+  marshalHostingApiCreateHostingRequest,
+  marshalHostingApiUpdateHostingRequest,
+  marshalMailAccountApiChangeMailAccountPasswordRequest,
+  marshalMailAccountApiCreateMailAccountRequest,
+  marshalMailAccountApiRemoveMailAccountRequest,
+  unmarshalDatabase,
+  unmarshalDatabaseUser,
+  unmarshalFtpAccount,
+  unmarshalHosting,
+  unmarshalListControlPanelsResponse,
+  unmarshalListDatabaseUsersResponse,
+  unmarshalListDatabasesResponse,
+  unmarshalListFtpAccountsResponse,
+  unmarshalListHostingsResponse,
+  unmarshalListMailAccountsResponse,
+  unmarshalListOffersResponse,
+  unmarshalListWebsitesResponse,
+  unmarshalMailAccount,
+  unmarshalResetHostingPasswordResponse,
+  unmarshalSession,
+} from './marshalling.gen'
+import type {
+  ControlPanelApiListControlPanelsRequest,
+  Database,
+  DatabaseApiAssignDatabaseUserRequest,
+  DatabaseApiChangeDatabaseUserPasswordRequest,
+  DatabaseApiCreateDatabaseRequest,
+  DatabaseApiCreateDatabaseUserRequest,
+  DatabaseApiDeleteDatabaseRequest,
+  DatabaseApiDeleteDatabaseUserRequest,
+  DatabaseApiGetDatabaseRequest,
+  DatabaseApiGetDatabaseUserRequest,
+  DatabaseApiListDatabaseUsersRequest,
+  DatabaseApiListDatabasesRequest,
+  DatabaseApiUnassignDatabaseUserRequest,
+  DatabaseUser,
+  FtpAccount,
+  FtpAccountApiChangeFtpAccountPasswordRequest,
+  FtpAccountApiCreateFtpAccountRequest,
+  FtpAccountApiListFtpAccountsRequest,
+  FtpAccountApiRemoveFtpAccountRequest,
+  Hosting,
+  HostingApiCreateHostingRequest,
+  HostingApiCreateSessionRequest,
+  HostingApiDeleteHostingRequest,
+  HostingApiGetHostingRequest,
+  HostingApiListHostingsRequest,
+  HostingApiResetHostingPasswordRequest,
+  HostingApiUpdateHostingRequest,
+  ListControlPanelsResponse,
+  ListDatabaseUsersResponse,
+  ListDatabasesResponse,
+  ListFtpAccountsResponse,
+  ListHostingsResponse,
+  ListMailAccountsResponse,
+  ListOffersResponse,
+  ListWebsitesResponse,
+  MailAccount,
+  MailAccountApiChangeMailAccountPasswordRequest,
+  MailAccountApiCreateMailAccountRequest,
+  MailAccountApiListMailAccountsRequest,
+  MailAccountApiRemoveMailAccountRequest,
+  OfferApiListOffersRequest,
+  ResetHostingPasswordResponse,
+  Session,
+  WebsiteApiListWebsitesRequest,
+} from './types.gen'
+
+const jsonContentHeaders = {
+  'Content-Type': 'application/json; charset=utf-8',
+}
+
+/**
+ * Web Hosting API.
+ *
+ * This API allows you to manage your Web Hosting services.
+ */
+export class ControlPanelAPI extends ParentAPI {
+  /** Lists the available regions of the API. */
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams']
+
+  protected pageOfListControlPanels = (
+    request: Readonly<ControlPanelApiListControlPanelsRequest> = {},
+  ) =>
+    this.client.fetch<ListControlPanelsResponse>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/control-panels`,
+        urlParams: urlParams(
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListControlPanelsResponse,
+    )
+
+  /**
+   * "List the control panels type: cpanel or plesk.".
+   *
+   * @param request - The request {@link ControlPanelApiListControlPanelsRequest}
+   * @returns A Promise of ListControlPanelsResponse
+   */
+  listControlPanels = (
+    request: Readonly<ControlPanelApiListControlPanelsRequest> = {},
+  ) =>
+    enrichForPagination('controlPanels', this.pageOfListControlPanels, request)
+}
+
+/**
+ * Web Hosting Database API.
+ *
+ * This API allows you to manage your databases and database users for your Web
+ * Hosting services.
+ */
+export class DatabaseAPI extends ParentAPI {
+  /** Lists the available regions of the API. */
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+
+  /**
+   * "Create a new database within your hosting plan".
+   *
+   * @param request - The request {@link DatabaseApiCreateDatabaseRequest}
+   * @returns A Promise of Database
+   */
+  createDatabase = (request: Readonly<DatabaseApiCreateDatabaseRequest>) =>
+    this.client.fetch<Database>(
+      {
+        body: JSON.stringify(
+          marshalDatabaseApiCreateDatabaseRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases`,
+      },
+      unmarshalDatabase,
+    )
+
+  protected pageOfListDatabases = (
+    request: Readonly<DatabaseApiListDatabasesRequest>,
+  ) =>
+    this.client.fetch<ListDatabasesResponse>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListDatabasesResponse,
+    )
+
+  /**
+   * "List all databases within your hosting plan".
+   *
+   * @param request - The request {@link DatabaseApiListDatabasesRequest}
+   * @returns A Promise of ListDatabasesResponse
+   */
+  listDatabases = (request: Readonly<DatabaseApiListDatabasesRequest>) =>
+    enrichForPagination('databases', this.pageOfListDatabases, request)
+
+  /**
+   * "Get details of a database within your hosting plan".
+   *
+   * @param request - The request {@link DatabaseApiGetDatabaseRequest}
+   * @returns A Promise of Database
+   */
+  getDatabase = (request: Readonly<DatabaseApiGetDatabaseRequest>) =>
+    this.client.fetch<Database>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases/${validatePathParam('databaseName', request.databaseName)}`,
+      },
+      unmarshalDatabase,
+    )
+
+  /**
+   * "Delete a database within your hosting plan".
+   *
+   * @param request - The request {@link DatabaseApiDeleteDatabaseRequest}
+   * @returns A Promise of Database
+   */
+  deleteDatabase = (request: Readonly<DatabaseApiDeleteDatabaseRequest>) =>
+    this.client.fetch<Database>(
+      {
+        method: 'DELETE',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases/${validatePathParam('databaseName', request.databaseName)}`,
+      },
+      unmarshalDatabase,
+    )
+
+  /**
+   * "Create a new database user".
+   *
+   * @param request - The request {@link DatabaseApiCreateDatabaseUserRequest}
+   * @returns A Promise of DatabaseUser
+   */
+  createDatabaseUser = (
+    request: Readonly<DatabaseApiCreateDatabaseUserRequest>,
+  ) =>
+    this.client.fetch<DatabaseUser>(
+      {
+        body: JSON.stringify(
+          marshalDatabaseApiCreateDatabaseUserRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases-users`,
+      },
+      unmarshalDatabaseUser,
+    )
+
+  protected pageOfListDatabaseUsers = (
+    request: Readonly<DatabaseApiListDatabaseUsersRequest>,
+  ) =>
+    this.client.fetch<ListDatabaseUsersResponse>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/database-users`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListDatabaseUsersResponse,
+    )
+
+  /**
+   * "List all database users".
+   *
+   * @param request - The request {@link DatabaseApiListDatabaseUsersRequest}
+   * @returns A Promise of ListDatabaseUsersResponse
+   */
+  listDatabaseUsers = (
+    request: Readonly<DatabaseApiListDatabaseUsersRequest>,
+  ) => enrichForPagination('users', this.pageOfListDatabaseUsers, request)
+
+  /**
+   * "Get details of a database user".
+   *
+   * @param request - The request {@link DatabaseApiGetDatabaseUserRequest}
+   * @returns A Promise of DatabaseUser
+   */
+  getDatabaseUser = (request: Readonly<DatabaseApiGetDatabaseUserRequest>) =>
+    this.client.fetch<DatabaseUser>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases-users/${validatePathParam('username', request.username)}`,
+      },
+      unmarshalDatabaseUser,
+    )
+
+  /**
+   * "Delete a database user".
+   *
+   * @param request - The request {@link DatabaseApiDeleteDatabaseUserRequest}
+   * @returns A Promise of DatabaseUser
+   */
+  deleteDatabaseUser = (
+    request: Readonly<DatabaseApiDeleteDatabaseUserRequest>,
+  ) =>
+    this.client.fetch<DatabaseUser>(
+      {
+        method: 'DELETE',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/database-users/${validatePathParam('username', request.username)}`,
+      },
+      unmarshalDatabaseUser,
+    )
+
+  /**
+   * "Change the password of a database user".
+   *
+   * @param request - The request
+   *   {@link DatabaseApiChangeDatabaseUserPasswordRequest}
+   * @returns A Promise of DatabaseUser
+   */
+  changeDatabaseUserPassword = (
+    request: Readonly<DatabaseApiChangeDatabaseUserPasswordRequest>,
+  ) =>
+    this.client.fetch<DatabaseUser>(
+      {
+        body: JSON.stringify(
+          marshalDatabaseApiChangeDatabaseUserPasswordRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases-users/${validatePathParam('username', request.username)}/change-password`,
+      },
+      unmarshalDatabaseUser,
+    )
+
+  /**
+   * "Assign a database user to a database".
+   *
+   * @param request - The request {@link DatabaseApiAssignDatabaseUserRequest}
+   * @returns A Promise of DatabaseUser
+   */
+  assignDatabaseUser = (
+    request: Readonly<DatabaseApiAssignDatabaseUserRequest>,
+  ) =>
+    this.client.fetch<DatabaseUser>(
+      {
+        body: JSON.stringify(
+          marshalDatabaseApiAssignDatabaseUserRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases/${validatePathParam('databaseName', request.databaseName)}/assign-user`,
+      },
+      unmarshalDatabaseUser,
+    )
+
+  /**
+   * "Unassign a database user from a database".
+   *
+   * @param request - The request {@link DatabaseApiUnassignDatabaseUserRequest}
+   * @returns A Promise of DatabaseUser
+   */
+  unassignDatabaseUser = (
+    request: Readonly<DatabaseApiUnassignDatabaseUserRequest>,
+  ) =>
+    this.client.fetch<DatabaseUser>(
+      {
+        body: JSON.stringify(
+          marshalDatabaseApiUnassignDatabaseUserRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases/${validatePathParam('databaseName', request.databaseName)}/unassign-user`,
+      },
+      unmarshalDatabaseUser,
+    )
+}
+
+/**
+ * Web Hosting Offer API.
+ *
+ * This API allows you to manage your offer for your Web Hosting services.
+ */
+export class OfferAPI extends ParentAPI {
+  /** Lists the available regions of the API. */
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+
+  protected pageOfListOffers = (
+    request: Readonly<OfferApiListOffersRequest> = {},
+  ) =>
+    this.client.fetch<ListOffersResponse>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/offers`,
+        urlParams: urlParams(
+          ['control_panels', request.controlPanels],
+          ['hosting_id', request.hostingId],
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListOffersResponse,
+    )
+
+  /**
+   * List all available hosting offers along with their specific options.. List
+   * all available hosting offers along with their specific options.
+   *
+   * @param request - The request {@link OfferApiListOffersRequest}
+   * @returns A Promise of ListOffersResponse
+   */
+  listOffers = (request: Readonly<OfferApiListOffersRequest> = {}) =>
+    enrichForPagination('offers', this.pageOfListOffers, request)
+}
+
+/**
+ * Web Hosting API.
+ *
+ * This API allows you to manage your Web Hosting services.
+ */
+export class HostingAPI extends ParentAPI {
+  /** Lists the available regions of the API. */
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams']
+
+  /**
+   * Order a Web Hosting plan. Order a Web Hosting plan, specifying the offer
+   * type required via the `offer_id` parameter.
+   *
+   * @param request - The request {@link HostingApiCreateHostingRequest}
+   * @returns A Promise of Hosting
+   */
+  createHosting = (request: Readonly<HostingApiCreateHostingRequest>) =>
+    this.client.fetch<Hosting>(
+      {
+        body: JSON.stringify(
+          marshalHostingApiCreateHostingRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings`,
+      },
+      unmarshalHosting,
+    )
+
+  protected pageOfListHostings = (
+    request: Readonly<HostingApiListHostingsRequest> = {},
+  ) =>
+    this.client.fetch<ListHostingsResponse>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings`,
+        urlParams: urlParams(
+          ['control_panels', request.controlPanels],
+          ['domain', request.domain],
+          ['order_by', request.orderBy],
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
+          ['statuses', request.statuses],
+          ['tags', request.tags],
+        ),
+      },
+      unmarshalListHostingsResponse,
+    )
+
+  /**
+   * List all Web Hosting plans. List all of your existing Web Hosting plans.
+   * Various filters are available to limit the results, including filtering by
+   * domain, status, tag and Project ID.
+   *
+   * @param request - The request {@link HostingApiListHostingsRequest}
+   * @returns A Promise of ListHostingsResponse
+   */
+  listHostings = (request: Readonly<HostingApiListHostingsRequest> = {}) =>
+    enrichForPagination('hostings', this.pageOfListHostings, request)
+
+  /**
+   * Get a Web Hosting plan. Get the details of one of your existing Web Hosting
+   * plans, specified by its `hosting_id`.
+   *
+   * @param request - The request {@link HostingApiGetHostingRequest}
+   * @returns A Promise of Hosting
+   */
+  getHosting = (request: Readonly<HostingApiGetHostingRequest>) =>
+    this.client.fetch<Hosting>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}`,
+      },
+      unmarshalHosting,
+    )
+
+  /**
+   * Waits for {@link Hosting} to be in a final state.
+   *
+   * @param request - The request {@link HostingApiGetHostingRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Hosting
+   */
+  waitForHosting = (
+    request: Readonly<HostingApiGetHostingRequest>,
+    options?: Readonly<WaitForOptions<Hosting>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res =>
+          Promise.resolve(!HOSTING_TRANSIENT_STATUSES.includes(res.status))),
+      this.getHosting,
+      request,
+      options,
+    )
+
+  /**
+   * Update a Web Hosting plan. Update the details of one of your existing Web
+   * Hosting plans, specified by its `hosting_id`. You can update parameters
+   * including the contact email address, tags, options and offer.
+   *
+   * @param request - The request {@link HostingApiUpdateHostingRequest}
+   * @returns A Promise of Hosting
+   */
+  updateHosting = (request: Readonly<HostingApiUpdateHostingRequest>) =>
+    this.client.fetch<Hosting>(
+      {
+        body: JSON.stringify(
+          marshalHostingApiUpdateHostingRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}`,
+      },
+      unmarshalHosting,
+    )
+
+  /**
+   * Delete a Web Hosting plan. Delete a Web Hosting plan, specified by its
+   * `hosting_id`. Note that deletion is not immediate: it will take place at
+   * the end of the calendar month, after which time your Web Hosting plan and
+   * all its data (files and emails) will be irreversibly lost.
+   *
+   * @param request - The request {@link HostingApiDeleteHostingRequest}
+   * @returns A Promise of Hosting
+   */
+  deleteHosting = (request: Readonly<HostingApiDeleteHostingRequest>) =>
+    this.client.fetch<Hosting>(
+      {
+        method: 'DELETE',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}`,
+      },
+      unmarshalHosting,
+    )
+
+  /**
+   * Create a user session.
+   *
+   * @param request - The request {@link HostingApiCreateSessionRequest}
+   * @returns A Promise of Session
+   */
+  createSession = (request: Readonly<HostingApiCreateSessionRequest>) =>
+    this.client.fetch<Session>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/sessions`,
+      },
+      unmarshalSession,
+    )
+
+  /**
+   * Reset a Web Hosting plan password.
+   *
+   * @param request - The request {@link HostingApiResetHostingPasswordRequest}
+   * @returns A Promise of ResetHostingPasswordResponse
+   */
+  resetHostingPassword = (
+    request: Readonly<HostingApiResetHostingPasswordRequest>,
+  ) =>
+    this.client.fetch<ResetHostingPasswordResponse>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/reset-password`,
+      },
+      unmarshalResetHostingPasswordResponse,
+    )
+}
+
+/**
+ * Web Hosting FTP Account API.
+ *
+ * This API allows you to manage your FTP accounts for your Web Hosting
+ * services.
+ */
+export class FtpAccountAPI extends ParentAPI {
+  /** Lists the available regions of the API. */
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+
+  /**
+   * Create a new FTP account within your hosting plan.. Create a new FTP
+   * account within your hosting plan.
+   *
+   * @param request - The request {@link FtpAccountApiCreateFtpAccountRequest}
+   * @returns A Promise of FtpAccount
+   */
+  createFtpAccount = (
+    request: Readonly<FtpAccountApiCreateFtpAccountRequest>,
+  ) =>
+    this.client.fetch<FtpAccount>(
+      {
+        body: JSON.stringify(
+          marshalFtpAccountApiCreateFtpAccountRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/ftp-accounts`,
+      },
+      unmarshalFtpAccount,
+    )
+
+  protected pageOfListFtpAccounts = (
+    request: Readonly<FtpAccountApiListFtpAccountsRequest>,
+  ) =>
+    this.client.fetch<ListFtpAccountsResponse>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/ftp-accounts`,
+        urlParams: urlParams(
+          ['domain', request.domain],
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListFtpAccountsResponse,
+    )
+
+  /**
+   * List all FTP accounts within your hosting plan.. List all FTP accounts
+   * within your hosting plan.
+   *
+   * @param request - The request {@link FtpAccountApiListFtpAccountsRequest}
+   * @returns A Promise of ListFtpAccountsResponse
+   */
+  listFtpAccounts = (request: Readonly<FtpAccountApiListFtpAccountsRequest>) =>
+    enrichForPagination('ftpAccounts', this.pageOfListFtpAccounts, request)
+
+  /**
+   * Delete a specific FTP account within your hosting plan.. Delete a specific
+   * FTP account within your hosting plan.
+   *
+   * @param request - The request {@link FtpAccountApiRemoveFtpAccountRequest}
+   * @returns A Promise of FtpAccount
+   */
+  removeFtpAccount = (
+    request: Readonly<FtpAccountApiRemoveFtpAccountRequest>,
+  ) =>
+    this.client.fetch<FtpAccount>(
+      {
+        method: 'DELETE',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/ftp-accounts/${validatePathParam('username', request.username)}`,
+      },
+      unmarshalFtpAccount,
+    )
+
+  changeFtpAccountPassword = (
+    request: Readonly<FtpAccountApiChangeFtpAccountPasswordRequest>,
+  ) =>
+    this.client.fetch<FtpAccount>(
+      {
+        body: JSON.stringify(
+          marshalFtpAccountApiChangeFtpAccountPasswordRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/ftp-accounts/${validatePathParam('username', request.username)}/change-password`,
+      },
+      unmarshalFtpAccount,
+    )
+}
+
+/**
+ * Web Hosting Mail Account API.
+ *
+ * This API allows you to manage your mail accounts for your Web Hosting
+ * services.
+ */
+export class MailAccountAPI extends ParentAPI {
+  /** Lists the available regions of the API. */
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+
+  /**
+   * Create a new mail account within your hosting plan.. Create a new mail
+   * account within your hosting plan.
+   *
+   * @param request - The request {@link MailAccountApiCreateMailAccountRequest}
+   * @returns A Promise of MailAccount
+   */
+  createMailAccount = (
+    request: Readonly<MailAccountApiCreateMailAccountRequest>,
+  ) =>
+    this.client.fetch<MailAccount>(
+      {
+        body: JSON.stringify(
+          marshalMailAccountApiCreateMailAccountRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/mail-accounts`,
+      },
+      unmarshalMailAccount,
+    )
+
+  protected pageOfListMailAccounts = (
+    request: Readonly<MailAccountApiListMailAccountsRequest>,
+  ) =>
+    this.client.fetch<ListMailAccountsResponse>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/mail-accounts`,
+        urlParams: urlParams(
+          ['domain', request.domain],
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListMailAccountsResponse,
+    )
+
+  /**
+   * List all mail accounts within your hosting plan.. List all mail accounts
+   * within your hosting plan.
+   *
+   * @param request - The request {@link MailAccountApiListMailAccountsRequest}
+   * @returns A Promise of ListMailAccountsResponse
+   */
+  listMailAccounts = (
+    request: Readonly<MailAccountApiListMailAccountsRequest>,
+  ) => enrichForPagination('mailAccounts', this.pageOfListMailAccounts, request)
+
+  /**
+   * Delete a mail account within your hosting plan.. Delete a mail account
+   * within your hosting plan.
+   *
+   * @param request - The request {@link MailAccountApiRemoveMailAccountRequest}
+   * @returns A Promise of MailAccount
+   */
+  removeMailAccount = (
+    request: Readonly<MailAccountApiRemoveMailAccountRequest>,
+  ) =>
+    this.client.fetch<MailAccount>(
+      {
+        body: JSON.stringify(
+          marshalMailAccountApiRemoveMailAccountRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/remove-mail-account`,
+      },
+      unmarshalMailAccount,
+    )
+
+  /**
+   * Update the password of a mail account within your hosting plan.. Update the
+   * password of a mail account within your hosting plan.
+   *
+   * @param request - The request
+   *   {@link MailAccountApiChangeMailAccountPasswordRequest}
+   * @returns A Promise of MailAccount
+   */
+  changeMailAccountPassword = (
+    request: Readonly<MailAccountApiChangeMailAccountPasswordRequest>,
+  ) =>
+    this.client.fetch<MailAccount>(
+      {
+        body: JSON.stringify(
+          marshalMailAccountApiChangeMailAccountPasswordRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/change-mail-password`,
+      },
+      unmarshalMailAccount,
+    )
+}
+
+/**
+ * Web Hosting Website API.
+ *
+ * This API allows you to manage your websites for your Web Hosting services.
+ */
+export class WebsiteAPI extends ParentAPI {
+  /** Lists the available regions of the API. */
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+
+  protected pageOfListWebsites = (
+    request: Readonly<WebsiteApiListWebsitesRequest>,
+  ) =>
+    this.client.fetch<ListWebsitesResponse>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/websites`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListWebsitesResponse,
+    )
+
+  /**
+   * List all websites for a specific hosting.. List all websites for a specific
+   * hosting.
+   *
+   * @param request - The request {@link WebsiteApiListWebsitesRequest}
+   * @returns A Promise of ListWebsitesResponse
+   */
+  listWebsites = (request: Readonly<WebsiteApiListWebsitesRequest>) =>
+    enrichForPagination('websites', this.pageOfListWebsites, request)
+}

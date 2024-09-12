@@ -83,6 +83,7 @@ export const unmarshalRoute = (data: unknown): Route => {
     description: data.description,
     destination: data.destination,
     id: data.id,
+    isReadOnly: data.is_read_only,
     nexthopPrivateNetworkId: data.nexthop_private_network_id,
     nexthopResourceId: data.nexthop_resource_id,
     region: data.region,
