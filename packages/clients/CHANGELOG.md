@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.46.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.45.0...@scaleway/sdk@2.46.0) (2024-09-16)
+
+### Features
+
+- add field custom_partitioning_supported to OS ([#1419](https://github.com/scaleway/scaleway-sdk-js/issues/1419)) ([136dbba](https://github.com/scaleway/scaleway-sdk-js/commit/136dbba48a60e7029a9d9b62e316e135f2e307ff))
+- add webhosting/v1 and qaas ([#1427](https://github.com/scaleway/scaleway-sdk-js/issues/1427)) ([1980d7e](https://github.com/scaleway/scaleway-sdk-js/commit/1980d7e665ae7671b4c0561f0c8bac97c964d6f4))
+- **baremetal:** add OptionType and ExtraOptionVars ([#1421](https://github.com/scaleway/scaleway-sdk-js/issues/1421)) ([3258595](https://github.com/scaleway/scaleway-sdk-js/commit/32585953a2275e1157344f93a91d7cfe15f0ab10))
+- **cockpit:** add datasourcetype 'alerts' ([#1414](https://github.com/scaleway/scaleway-sdk-js/issues/1414)) ([9603844](https://github.com/scaleway/scaleway-sdk-js/commit/960384432d0c03c36df37e5ec02cc2c8d86391e6))
+- **container:** remove JWT in favor of CreateToken ([#1408](https://github.com/scaleway/scaleway-sdk-js/issues/1408)) ([5fb4b17](https://github.com/scaleway/scaleway-sdk-js/commit/5fb4b17fcbae76125499692285b07b5b02dff20b))
+- generate indexes ([#1428](https://github.com/scaleway/scaleway-sdk-js/issues/1428)) ([802854b](https://github.com/scaleway/scaleway-sdk-js/commit/802854ba23e951db11ef64cfbfa65e2ff3d15235))
+- **iam:** add support for creating member within a CreateUser ([#1416](https://github.com/scaleway/scaleway-sdk-js/issues/1416)) ([bfb0ab6](https://github.com/scaleway/scaleway-sdk-js/commit/bfb0ab62a56f9342de4d0d142772647f4ddfbab3))
+- **instance:** deprecate use of NATed IP in instance api documentation ([#1410](https://github.com/scaleway/scaleway-sdk-js/issues/1410)) ([8dfe2bc](https://github.com/scaleway/scaleway-sdk-js/commit/8dfe2bce726da1688cf95751e93ffdfa5c13c3bf))
+- **instance:** return block_bandwidth in bytes per seconds ([#1422](https://github.com/scaleway/scaleway-sdk-js/issues/1422)) ([052d409](https://github.com/scaleway/scaleway-sdk-js/commit/052d409c715dbdb50e59d275080f17506edee2c2))
+- **k8s:** expose MigrateClusterToSBSCSI ([#1413](https://github.com/scaleway/scaleway-sdk-js/issues/1413)) ([06ba7ce](https://github.com/scaleway/scaleway-sdk-js/commit/06ba7ce3196e38e8ecad3cd328a5b31eb013ecd5))
+- **key_manager:** make key_id argument positional in ImportKeyMaterial and DeleteKeyMaterial ([#1409](https://github.com/scaleway/scaleway-sdk-js/issues/1409)) ([abe764a](https://github.com/scaleway/scaleway-sdk-js/commit/abe764ad082150c383934d1cf3cf5985ff92e83e))
+- **tem:** add domain autoconfiguring status ([#1420](https://github.com/scaleway/scaleway-sdk-js/issues/1420)) ([ef55b9d](https://github.com/scaleway/scaleway-sdk-js/commit/ef55b9dad6a5994e77de334aabbe20dd7d80609e))
+
+### Bug Fixes
+
+- **ipam:** make public detach & move ips idempotency ([#1411](https://github.com/scaleway/scaleway-sdk-js/issues/1411)) ([562508f](https://github.com/scaleway/scaleway-sdk-js/commit/562508f5642468d67e3e63c42fcd0ac5be4df31b))
+
 ## [2.45.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.44.0...@scaleway/sdk@2.45.0) (2024-09-09)
 
 ### Features
