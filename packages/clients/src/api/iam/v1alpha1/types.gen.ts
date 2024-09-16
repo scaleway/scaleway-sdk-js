@@ -407,6 +407,8 @@ export interface User {
   accountRootUserId: string
   /** Tags associated with the user. */
   tags: string[]
+  /** Defines whether the user is locked. */
+  locked: boolean
 }
 
 export type AddGroupMemberRequest = {
