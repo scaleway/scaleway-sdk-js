@@ -489,6 +489,7 @@ export const marshalHostingApiCreateHostingRequest = (
         )
       : undefined,
   project_id: request.projectId ?? defaults.defaultProjectId,
+  skip_welcome_email: request.skipWelcomeEmail,
   tags: request.tags,
 })
 
