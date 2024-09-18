@@ -2,12 +2,26 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 
 export const CreateClusterRequest = {
-  name: {
+  description: {
+    maxLength: 4096,
     minLength: 1,
+  },
+  name: {
+    maxLength: 100,
+    minLength: 1,
+  },
+  type: {
+    maxLength: 100,
+  },
+  version: {
+    maxLength: 10,
   },
 }
 
 export const CreateClusterRequestAutoscalerConfig = {
+  scaleDownDelayAfterAdd: {
+    maxLength: 100,
+  },
   scaleDownUtilizationThreshold: {
     greaterThan: 0,
     lessThan: 1,
@@ -16,27 +30,36 @@ export const CreateClusterRequestAutoscalerConfig = {
 
 export const CreateClusterRequestOpenIDConnectConfig = {
   clientId: {
+    maxLength: 255,
     minLength: 1,
   },
   groupsPrefix: {
+    maxLength: 100,
     minLength: 1,
   },
+  issuerUrl: {
+    maxLength: 255,
+  },
   usernameClaim: {
+    maxLength: 100,
     minLength: 1,
   },
   usernamePrefix: {
+    maxLength: 100,
     minLength: 1,
   },
 }
 
 export const CreateClusterRequestPoolConfig = {
   name: {
+    maxLength: 100,
     minLength: 1,
   },
 }
 
 export const CreatePoolRequest = {
   name: {
+    maxLength: 100,
     minLength: 1,
   },
 }
@@ -96,15 +119,57 @@ export const MaintenanceWindow = {
   },
 }
 
+export const SetClusterTypeRequest = {
+  type: {
+    maxLength: 100,
+  },
+}
+
 export const UpdateClusterRequest = {
+  description: {
+    maxLength: 4096,
+    minLength: 1,
+  },
   name: {
+    maxLength: 100,
     minLength: 1,
   },
 }
 
 export const UpdateClusterRequestAutoscalerConfig = {
+  scaleDownDelayAfterAdd: {
+    maxLength: 100,
+  },
   scaleDownUtilizationThreshold: {
     greaterThan: 0,
     lessThan: 1,
+  },
+}
+
+export const UpdateClusterRequestOpenIDConnectConfig = {
+  clientId: {
+    maxLength: 255,
+    minLength: 1,
+  },
+  groupsPrefix: {
+    maxLength: 100,
+    minLength: 1,
+  },
+  issuerUrl: {
+    maxLength: 255,
+  },
+  usernameClaim: {
+    maxLength: 100,
+    minLength: 1,
+  },
+  usernamePrefix: {
+    maxLength: 100,
+    minLength: 1,
+  },
+}
+
+export const UpgradeClusterRequest = {
+  version: {
+    maxLength: 10,
   },
 }
