@@ -17,6 +17,7 @@ import {
   marshalCreateEmailRequest,
   marshalCreateWebhookRequest,
   marshalUpdateDomainRequest,
+  marshalUpdateProjectSettingsRequest,
   marshalUpdateWebhookRequest,
   unmarshalCreateEmailResponse,
   unmarshalDomain,
@@ -26,6 +27,7 @@ import {
   unmarshalListEmailsResponse,
   unmarshalListWebhookEventsResponse,
   unmarshalListWebhooksResponse,
+  unmarshalProjectSettings,
   unmarshalStatistics,
   unmarshalWebhook,
 } from './marshalling.gen'
@@ -43,6 +45,7 @@ import type {
   GetDomainLastStatusRequest,
   GetDomainRequest,
   GetEmailRequest,
+  GetProjectSettingsRequest,
   GetStatisticsRequest,
   GetWebhookRequest,
   ListDomainsRequest,
@@ -53,9 +56,11 @@ import type {
   ListWebhookEventsResponse,
   ListWebhooksRequest,
   ListWebhooksResponse,
+  ProjectSettings,
   RevokeDomainRequest,
   Statistics,
   UpdateDomainRequest,
+  UpdateProjectSettingsRequest,
   UpdateWebhookRequest,
   Webhook,
 } from './types.gen'
@@ -511,4 +516,42 @@ export class API extends ParentAPI {
    */
   listWebhookEvents = (request: Readonly<ListWebhookEventsRequest>) =>
     enrichForPagination('webhookEvents', this.pageOfListWebhookEvents, request)
+
+  /**
+   * List project settings. Retrieve the project settings including periodic
+   * reports.
+   *
+   * @param request - The request {@link GetProjectSettingsRequest}
+   * @returns A Promise of ProjectSettings
+   */
+  getProjectSettings = (request: Readonly<GetProjectSettingsRequest> = {}) =>
+    this.client.fetch<ProjectSettings>(
+      {
+        method: 'GET',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/project/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}/settings`,
+      },
+      unmarshalProjectSettings,
+    )
+
+  /**
+   * Update project settings. Update the project settings including periodic
+   * reports.
+   *
+   * @param request - The request {@link UpdateProjectSettingsRequest}
+   * @returns A Promise of ProjectSettings
+   */
+  updateProjectSettings = (
+    request: Readonly<UpdateProjectSettingsRequest> = {},
+  ) =>
+    this.client.fetch<ProjectSettings>(
+      {
+        body: JSON.stringify(
+          marshalUpdateProjectSettingsRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/project/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}/settings`,
+      },
+      unmarshalProjectSettings,
+    )
 }

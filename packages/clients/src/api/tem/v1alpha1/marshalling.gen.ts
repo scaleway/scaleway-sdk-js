@@ -29,8 +29,12 @@ import type {
   ListEmailsResponse,
   ListWebhookEventsResponse,
   ListWebhooksResponse,
+  ProjectSettings,
+  ProjectSettingsPeriodicReport,
   Statistics,
   UpdateDomainRequest,
+  UpdateProjectSettingsRequest,
+  UpdateProjectSettingsRequestUpdatePeriodicReport,
   UpdateWebhookRequest,
   Webhook,
   WebhookEvent,
@@ -354,6 +358,37 @@ export const unmarshalListWebhooksResponse = (
   } as ListWebhooksResponse
 }
 
+const unmarshalProjectSettingsPeriodicReport = (
+  data: unknown,
+): ProjectSettingsPeriodicReport => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ProjectSettingsPeriodicReport' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    enabled: data.enabled,
+    frequency: data.frequency,
+    sendingDay: data.sending_day,
+    sendingHour: data.sending_hour,
+  } as ProjectSettingsPeriodicReport
+}
+
+export const unmarshalProjectSettings = (data: unknown): ProjectSettings => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ProjectSettings' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    periodicReport: data.periodic_report
+      ? unmarshalProjectSettingsPeriodicReport(data.periodic_report)
+      : undefined,
+  } as ProjectSettings
+}
+
 export const unmarshalStatistics = (data: unknown): Statistics => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -459,6 +494,29 @@ export const marshalUpdateDomainRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   autoconfig: request.autoconfig,
+})
+
+const marshalUpdateProjectSettingsRequestUpdatePeriodicReport = (
+  request: UpdateProjectSettingsRequestUpdatePeriodicReport,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  enabled: request.enabled,
+  frequency: request.frequency,
+  sending_day: request.sendingDay,
+  sending_hour: request.sendingHour,
+})
+
+export const marshalUpdateProjectSettingsRequest = (
+  request: UpdateProjectSettingsRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  periodic_report:
+    request.periodicReport !== undefined
+      ? marshalUpdateProjectSettingsRequestUpdatePeriodicReport(
+          request.periodicReport,
+          defaults,
+        )
+      : undefined,
 })
 
 export const marshalUpdateWebhookRequest = (
