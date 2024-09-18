@@ -502,6 +502,11 @@ export type HostingApiCreateHostingRequest = {
    * domains managed by Scaleway Elements.
    */
   domainConfiguration?: CreateHostingRequestDomainConfiguration
+  /**
+   * Indicates whether to skip a welcome email to the contact email containing
+   * hosting info.
+   */
+  skipWelcomeEmail?: boolean
 }
 
 export type HostingApiCreateSessionRequest = {
