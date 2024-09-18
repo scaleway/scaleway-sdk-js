@@ -96,6 +96,17 @@ export const ListWebhooksRequest = {
   },
 }
 
+export const UpdateProjectSettingsRequestUpdatePeriodicReport = {
+  sendingDay: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 28,
+  },
+  sendingHour: {
+    greaterThanOrEqual: 0,
+    lessThanOrEqual: 23,
+  },
+}
+
 export const UpdateWebhookRequest = {
   name: {
     maxLength: 127,

@@ -65,6 +65,12 @@ export type ListWebhookEventsRequestOrderBy =
 
 export type ListWebhooksRequestOrderBy = 'created_at_desc' | 'created_at_asc'
 
+export type ProjectSettingsPeriodicReportFrequency =
+  | 'unknown_frequency'
+  | 'monthly'
+  | 'weekly'
+  | 'daily'
+
 export type WebhookEventStatus =
   | 'unknown_status'
   | 'sending'
@@ -308,6 +314,34 @@ export interface Webhook {
   updatedAt?: Date
 }
 
+export interface ProjectSettingsPeriodicReport {
+  /** Enable or disable periodic report notifications. */
+  enabled: boolean
+  /** At which frequency you receive periodic report notifications. */
+  frequency: ProjectSettingsPeriodicReportFrequency
+  /** At which hour you receive periodic report notifications. */
+  sendingHour: number
+  /**
+   * On which day you receive periodic report notifications (1-7 weekly, 1-28
+   * monthly).
+   */
+  sendingDay: number
+}
+
+export interface UpdateProjectSettingsRequestUpdatePeriodicReport {
+  /** (Optional) Enable or disable periodic report notifications. */
+  enabled?: boolean
+  /** (Optional) At which frequency you receive periodic report notifications. */
+  frequency?: ProjectSettingsPeriodicReportFrequency
+  /** (Optional) At which hour you receive periodic report notifications. */
+  sendingHour?: number
+  /**
+   * (Optional) On which day you receive periodic report notifications (1-7
+   * weekly, 1-28 monthly).
+   */
+  sendingDay?: number
+}
+
 export type CancelEmailRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -448,6 +482,16 @@ export type GetEmailRequest = {
   region?: Region
   /** ID of the email to retrieve. */
   emailId: string
+}
+
+export type GetProjectSettingsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the project. */
+  projectId?: string
 }
 
 export type GetStatisticsRequest = {
@@ -613,6 +657,11 @@ export interface ListWebhooksResponse {
   webhooks: Webhook[]
 }
 
+export interface ProjectSettings {
+  /** Information about your periodic report. */
+  periodicReport?: ProjectSettingsPeriodicReport
+}
+
 export type RevokeDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -666,6 +715,18 @@ export type UpdateDomainRequest = {
    * zone.
    */
   autoconfig?: boolean
+}
+
+export type UpdateProjectSettingsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the project. */
+  projectId?: string
+  /** Periodic report update details - all fields are optional. */
+  periodicReport?: UpdateProjectSettingsRequestUpdatePeriodicReport
 }
 
 export type UpdateWebhookRequest = {
