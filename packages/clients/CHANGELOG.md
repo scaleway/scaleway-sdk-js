@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.47.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.46.0...@scaleway/sdk@2.47.0) (2024-09-23)
+
+### Features
+
+- **iam:** add locked status on User ([#1432](https://github.com/scaleway/scaleway-sdk-js/issues/1432)) ([238aeab](https://github.com/scaleway/scaleway-sdk-js/commit/238aeabd53c8d8d2082b137604703f353ecc45ea))
+- **k8s:** add validations on Create/Update cluster ([#1436](https://github.com/scaleway/scaleway-sdk-js/issues/1436)) ([fab6928](https://github.com/scaleway/scaleway-sdk-js/commit/fab69284129d15bf1f4c8b5115a8ebce031fdcfb))
+- **tem:** add project settings endpoint ([#1435](https://github.com/scaleway/scaleway-sdk-js/issues/1435)) ([773f36c](https://github.com/scaleway/scaleway-sdk-js/commit/773f36c17b4cbbda599bf56921a9c4bcc960fe00))
+- **webhosting:** add send welcome email param at hosting creation ([#1433](https://github.com/scaleway/scaleway-sdk-js/issues/1433)) ([5b9496b](https://github.com/scaleway/scaleway-sdk-js/commit/5b9496b1785a7dc0d4cc243ffb0535eccf2da217))
+
 ## [2.46.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.45.0...@scaleway/sdk@2.46.0) (2024-09-16)
 
 ### Features
