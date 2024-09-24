@@ -114,6 +114,7 @@ const unmarshalDiscountFilter = (data: unknown): DiscountFilter => {
   }
 
   return {
+    exclude: data.exclude,
     type: data.type,
     value: data.value,
   } as DiscountFilter

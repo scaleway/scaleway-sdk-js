@@ -51,6 +51,8 @@ export interface DiscountFilter {
   type: DiscountFilterType
   /** Value of filter, it can be a product/range/region/zone value. */
   value: string
+  /** Boolean to describe if filter is an excluding filter. */
+  exclude: boolean
 }
 
 export interface GetConsumptionResponseConsumption {

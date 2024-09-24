@@ -84,6 +84,8 @@ export interface DiscountFilter {
   type: DiscountFilterType
   /** Value of filter. */
   value: string
+  /** Boolean to describe if filter is an excluding filter. */
+  exclude: boolean
 }
 
 export interface ListConsumptionsResponseConsumption {
