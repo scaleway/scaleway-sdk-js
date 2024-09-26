@@ -21,6 +21,7 @@ import {
   marshalUpdateIPRequest,
   marshalUpdateServerRequest,
   marshalUpdateSettingRequest,
+  marshalValidatePartitioningSchemaRequest,
   unmarshalBMCAccess,
   unmarshalGetServerMetricsResponse,
   unmarshalIP,
@@ -34,6 +35,7 @@ import {
   unmarshalOS,
   unmarshalOffer,
   unmarshalOption,
+  unmarshalSchema,
   unmarshalServer,
   unmarshalServerPrivateNetwork,
   unmarshalSetServerPrivateNetworksResponse,
@@ -46,6 +48,7 @@ import type {
   DeleteOptionServerRequest,
   DeleteServerRequest,
   GetBMCAccessRequest,
+  GetDefaultPartitioningSchemaRequest,
   GetOSRequest,
   GetOfferRequest,
   GetOptionRequest,
@@ -75,6 +78,7 @@ import type {
   PrivateNetworkApiListServerPrivateNetworksRequest,
   PrivateNetworkApiSetServerPrivateNetworksRequest,
   RebootServerRequest,
+  Schema,
   Server,
   ServerPrivateNetwork,
   SetServerPrivateNetworksResponse,
@@ -86,6 +90,7 @@ import type {
   UpdateIPRequest,
   UpdateServerRequest,
   UpdateSettingRequest,
+  ValidatePartitioningSchemaRequest,
 } from './types.gen'
 
 const jsonContentHeaders = {
@@ -356,6 +361,47 @@ export class API extends ParentAPI {
    */
   listServerEvents = (request: Readonly<ListServerEventsRequest>) =>
     enrichForPagination('events', this.pageOfListServerEvents, request)
+
+  /**
+   * Get default partitioning schema. Get the default partitioning schema for
+   * the given offer ID and OS ID.
+   *
+   * @param request - The request {@link GetDefaultPartitioningSchemaRequest}
+   * @returns A Promise of Schema
+   */
+  getDefaultPartitioningSchema = (
+    request: Readonly<GetDefaultPartitioningSchemaRequest>,
+  ) =>
+    this.client.fetch<Schema>(
+      {
+        method: 'GET',
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/partitioning-schemas/default`,
+        urlParams: urlParams(
+          ['offer_id', request.offerId],
+          ['os_id', request.osId],
+        ),
+      },
+      unmarshalSchema,
+    )
+
+  /**
+   * Validate client partitioning schema. Validate the incoming partitioning
+   * schema from a user before installing the server. Return default ErrorCode
+   * if invalid.
+   *
+   * @param request - The request {@link ValidatePartitioningSchemaRequest}
+   */
+  validatePartitioningSchema = (
+    request: Readonly<ValidatePartitioningSchemaRequest>,
+  ) =>
+    this.client.fetch<void>({
+      body: JSON.stringify(
+        marshalValidatePartitioningSchemaRequest(request, this.client.settings),
+      ),
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/partitioning-schemas/validate`,
+    })
 
   /**
    * Start BMC access. Start BMC (Baseboard Management Controller) access

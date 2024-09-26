@@ -4,7 +4,6 @@
 export const CreateClusterRequest = {
   description: {
     maxLength: 4096,
-    minLength: 1,
   },
   name: {
     maxLength: 100,
@@ -128,7 +127,6 @@ export const SetClusterTypeRequest = {
 export const UpdateClusterRequest = {
   description: {
     maxLength: 4096,
-    minLength: 1,
   },
   name: {
     maxLength: 100,
