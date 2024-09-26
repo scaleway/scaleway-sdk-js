@@ -27,6 +27,51 @@ export type OfferSubscriptionPeriod =
   | 'hourly'
   | 'monthly'
 
+export type SchemaFilesystemFormat =
+  | 'unknown_format'
+  | 'fat32'
+  | 'ext4'
+  | 'swap'
+  | 'zfs'
+
+export type SchemaLogicalVolumeType =
+  | 'unknown_raid_type'
+  | 'striped'
+  | 'mirror'
+  | 'raid0'
+  | 'raid1'
+  | 'raid5'
+  | 'raid6'
+  | 'raid10'
+
+export type SchemaPartitionLabel =
+  | 'unknown_partition_label'
+  | 'uefi'
+  | 'legacy'
+  | 'root'
+  | 'boot'
+  | 'swap'
+  | 'data'
+  | 'home'
+  | 'raid'
+  | 'lvm'
+  | 'zfs'
+
+export type SchemaPoolType =
+  | 'unknown_type'
+  | 'no_raid'
+  | 'mirror'
+  | 'raidz1'
+  | 'raidz2'
+
+export type SchemaRAIDLevel =
+  | 'unknown_raid_level'
+  | 'raid_level_0'
+  | 'raid_level_1'
+  | 'raid_level_5'
+  | 'raid_level_6'
+  | 'raid_level_10'
+
 export type ServerBootType = 'unknown_boot_type' | 'normal' | 'rescue'
 
 export type ServerInstallStatus =
@@ -72,6 +117,59 @@ export type ServerStatus =
 
 export type SettingType = 'unknown' | 'smtp'
 
+export interface SchemaLogicalVolume {
+  name: string
+  type: SchemaLogicalVolumeType
+  size: number
+  stripedNumber: number
+  mirrorNumber: number
+}
+
+export interface SchemaPartition {
+  label: SchemaPartitionLabel
+  number: number
+  size: number
+}
+
+export interface SchemaVolumeGroup {
+  volumeGroupName: string
+  physicalVolumes: string[]
+  logicalVolumes: SchemaLogicalVolume[]
+}
+
+export interface SchemaPool {
+  name: string
+  type: SchemaPoolType
+  devices: string[]
+  options: string[]
+  filesystemOptions: string[]
+}
+
+export interface SchemaDisk {
+  device: string
+  partitions: SchemaPartition[]
+}
+
+export interface SchemaFilesystem {
+  device: string
+  format: SchemaFilesystemFormat
+  mountpoint: string
+}
+
+export interface SchemaLVM {
+  volumeGroups: SchemaVolumeGroup[]
+}
+
+export interface SchemaRAID {
+  name: string
+  level: SchemaRAIDLevel
+  devices: string[]
+}
+
+export interface SchemaZFS {
+  pools: SchemaPool[]
+}
+
 export interface CertificationOption {}
 
 export interface LicenseOption {
@@ -85,6 +183,14 @@ export interface PublicBandwidthOption {
 }
 
 export interface RemoteAccessOption {}
+
+export interface Schema {
+  disks: SchemaDisk[]
+  raids: SchemaRAID[]
+  filesystems: SchemaFilesystem[]
+  lvm?: SchemaLVM
+  zfs?: SchemaZFS
+}
 
 export interface OSOSField {
   editable: boolean
@@ -603,6 +709,15 @@ export type GetBMCAccessRequest = {
   serverId: string
 }
 
+export type GetDefaultPartitioningSchemaRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the offer. */
+  offerId: string
+  /** ID of the OS. */
+  osId: string
+}
+
 export type GetOSRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
@@ -922,4 +1037,15 @@ export type UpdateSettingRequest = {
   settingId: string
   /** Defines whether the setting is enabled. */
   enabled?: boolean
+}
+
+export type ValidatePartitioningSchemaRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** Partitioning schema. */
+  partitioningSchema?: Schema
+  /** Offer ID of the server. */
+  offerId: string
+  /** OS ID. */
+  osId: string
 }
