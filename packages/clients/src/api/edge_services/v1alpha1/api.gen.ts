@@ -22,6 +22,7 @@ import {
   marshalCreatePipelineRequest,
   marshalCreatePurgeRequestRequest,
   marshalCreateTLSStageRequest,
+  marshalSelectPlanRequest,
   marshalUpdateBackendStageRequest,
   marshalUpdateCacheStageRequest,
   marshalUpdateDNSStageRequest,
@@ -37,9 +38,11 @@ import {
   unmarshalListCacheStagesResponse,
   unmarshalListDNSStagesResponse,
   unmarshalListPipelinesResponse,
+  unmarshalListPlansResponse,
   unmarshalListPurgeRequestsResponse,
   unmarshalListTLSStagesResponse,
   unmarshalPipeline,
+  unmarshalPlan,
   unmarshalPurgeRequest,
   unmarshalTLSStage,
 } from './marshalling.gen'
@@ -61,11 +64,13 @@ import type {
   DNSStage,
   DeleteBackendStageRequest,
   DeleteCacheStageRequest,
+  DeleteCurrentPlanRequest,
   DeleteDNSStageRequest,
   DeletePipelineRequest,
   DeleteTLSStageRequest,
   GetBackendStageRequest,
   GetCacheStageRequest,
+  GetCurrentPlanRequest,
   GetDNSStageRequest,
   GetPipelineRequest,
   GetPurgeRequestRequest,
@@ -78,12 +83,15 @@ import type {
   ListDNSStagesResponse,
   ListPipelinesRequest,
   ListPipelinesResponse,
+  ListPlansResponse,
   ListPurgeRequestsRequest,
   ListPurgeRequestsResponse,
   ListTLSStagesRequest,
   ListTLSStagesResponse,
   Pipeline,
+  Plan,
   PurgeRequest,
+  SelectPlanRequest,
   TLSStage,
   UpdateBackendStageRequest,
   UpdateCacheStageRequest,
@@ -781,4 +789,49 @@ export class API extends ParentAPI {
       },
       unmarshalCheckLbOriginResponse,
     )
+
+  listPlans = () =>
+    this.client.fetch<ListPlansResponse>(
+      {
+        method: 'GET',
+        path: `/edge-services/v1alpha1/plans`,
+      },
+      unmarshalListPlansResponse,
+    )
+
+  selectPlan = (request: Readonly<SelectPlanRequest> = {}) =>
+    this.client.fetch<Plan>(
+      {
+        body: JSON.stringify(
+          marshalSelectPlanRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/edge-services/v1alpha1/current-plan`,
+      },
+      unmarshalPlan,
+    )
+
+  getCurrentPlan = (request: Readonly<GetCurrentPlanRequest> = {}) =>
+    this.client.fetch<Plan>(
+      {
+        method: 'GET',
+        path: `/edge-services/v1alpha1/current-plan`,
+        urlParams: urlParams([
+          'project_id',
+          request.projectId ?? this.client.settings.defaultProjectId,
+        ]),
+      },
+      unmarshalPlan,
+    )
+
+  deleteCurrentPlan = (request: Readonly<DeleteCurrentPlanRequest> = {}) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/edge-services/v1alpha1/current-plan`,
+      urlParams: urlParams([
+        'project_id',
+        request.projectId ?? this.client.settings.defaultProjectId,
+      ]),
+    })
 }

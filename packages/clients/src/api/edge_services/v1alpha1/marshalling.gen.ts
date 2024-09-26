@@ -28,14 +28,18 @@ import type {
   ListCacheStagesResponse,
   ListDNSStagesResponse,
   ListPipelinesResponse,
+  ListPlansResponse,
   ListPurgeRequestsResponse,
   ListTLSStagesResponse,
   Pipeline,
   PipelineError,
+  Plan,
+  PlanDetails,
   PurgeRequest,
   ScalewayLb,
   ScalewayLbBackendConfig,
   ScalewayS3BackendConfig,
+  SelectPlanRequest,
   TLSSecret,
   TLSSecretsConfig,
   TLSStage,
@@ -344,6 +348,35 @@ export const unmarshalListPipelinesResponse = (
   } as ListPipelinesResponse
 }
 
+const unmarshalPlanDetails = (data: unknown): PlanDetails => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PlanDetails' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    packageGb: data.package_gb,
+    pipelineLimit: data.pipeline_limit,
+    planName: data.plan_name,
+  } as PlanDetails
+}
+
+export const unmarshalListPlansResponse = (
+  data: unknown,
+): ListPlansResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPlansResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    plans: unmarshalArrayOfObject(data.plans, unmarshalPlanDetails),
+    totalCount: data.total_count,
+  } as ListPlansResponse
+}
+
 export const unmarshalListPurgeRequestsResponse = (
   data: unknown,
 ): ListPurgeRequestsResponse => {
@@ -375,6 +408,18 @@ export const unmarshalListTLSStagesResponse = (
     stages: unmarshalArrayOfObject(data.stages, unmarshalTLSStage),
     totalCount: data.total_count,
   } as ListTLSStagesResponse
+}
+
+export const unmarshalPlan = (data: unknown): Plan => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Plan' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    planName: data.plan_name,
+  } as Plan
 }
 
 export const marshalCheckDomainRequest = (
@@ -539,6 +584,14 @@ export const marshalCreateTLSStageRequest = (
     { param: 'cache_stage_id', value: request.cacheStageId },
     { param: 'backend_stage_id', value: request.backendStageId },
   ]),
+})
+
+export const marshalSelectPlanRequest = (
+  request: SelectPlanRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  plan_name: request.planName,
+  project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
 export const marshalUpdateBackendStageRequest = (
