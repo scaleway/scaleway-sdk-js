@@ -193,24 +193,6 @@ export const unmarshalPipeline = (data: unknown): Pipeline => {
   } as Pipeline
 }
 
-export const unmarshalPurgeRequest = (data: unknown): PurgeRequest => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PurgeRequest' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    all: data.all,
-    assets: data.assets,
-    createdAt: unmarshalDate(data.created_at),
-    id: data.id,
-    pipelineId: data.pipeline_id,
-    status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
-  } as PurgeRequest
-}
-
 const unmarshalTLSSecret = (data: unknown): TLSSecret => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -243,6 +225,24 @@ export const unmarshalTLSStage = (data: unknown): TLSStage => {
     secrets: unmarshalArrayOfObject(data.secrets, unmarshalTLSSecret),
     updatedAt: unmarshalDate(data.updated_at),
   } as TLSStage
+}
+
+export const unmarshalPurgeRequest = (data: unknown): PurgeRequest => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PurgeRequest' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    all: data.all,
+    assets: data.assets,
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    pipelineId: data.pipeline_id,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as PurgeRequest
 }
 
 export const unmarshalCheckDomainResponse = (
