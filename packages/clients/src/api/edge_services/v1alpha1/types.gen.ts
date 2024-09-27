@@ -77,6 +77,8 @@ export type PipelineStatus =
   | 'pending'
   | 'warning'
 
+export type PlanName = 'unknown_name' | 'starter' | 'professional' | 'advanced'
+
 export type PurgeRequestStatus = 'unknown_status' | 'done' | 'error' | 'pending'
 
 export interface ScalewayLb {
@@ -238,6 +240,12 @@ export interface Pipeline {
    * One-of ('head'): at most one of 'dnsStageId' could be set.
    */
   dnsStageId?: string
+}
+
+export interface PlanDetails {
+  planName: PlanName
+  packageGb: number
+  pipelineLimit: number
 }
 
 export interface PurgeRequest {
@@ -469,6 +477,10 @@ export type DeleteCacheStageRequest = {
   cacheStageId: string
 }
 
+export type DeleteCurrentPlanRequest = {
+  projectId?: string
+}
+
 export type DeleteDNSStageRequest = {
   /** ID of the DNS stage to delete. */
   dnsStageId: string
@@ -492,6 +504,10 @@ export type GetBackendStageRequest = {
 export type GetCacheStageRequest = {
   /** ID of the requested cache stage. */
   cacheStageId: string
+}
+
+export type GetCurrentPlanRequest = {
+  projectId?: string
 }
 
 export type GetDNSStageRequest = {
@@ -648,6 +664,11 @@ export interface ListPipelinesResponse {
   totalCount: number
 }
 
+export interface ListPlansResponse {
+  totalCount: number
+  plans: PlanDetails[]
+}
+
 export type ListPurgeRequestsRequest = {
   /** Sort order of purge requests in the response. */
   orderBy?: ListPurgeRequestsRequestOrderBy
@@ -713,6 +734,15 @@ export interface ListTLSStagesResponse {
   stages: TLSStage[]
   /** Count of all TLS stages matching the requested criteria. */
   totalCount: number
+}
+
+export interface Plan {
+  planName: PlanName
+}
+
+export type SelectPlanRequest = {
+  projectId?: string
+  planName?: PlanName
 }
 
 export type UpdateBackendStageRequest = {

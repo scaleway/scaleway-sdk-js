@@ -554,6 +554,8 @@ export interface Cluster {
    *   installed on the cluster.
    */
   sbsCsiEnabled?: boolean
+  /** @deprecated Defines whether VPC is fully integrated on the cluster. */
+  fullVpcIntegratonEnabled?: boolean
 }
 
 export interface Node {
