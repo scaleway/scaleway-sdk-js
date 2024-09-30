@@ -126,11 +126,6 @@ export interface TLSSecret {
   region: Region
 }
 
-export interface CheckPEMChainRequestSecretChain {
-  secretId: string
-  secretRegion: string
-}
-
 export interface BackendStage {
   /** ID of the backend stage. */
   id: string
@@ -242,37 +237,6 @@ export interface Pipeline {
   dnsStageId?: string
 }
 
-export interface PlanDetails {
-  planName: PlanName
-  packageGb: number
-  pipelineLimit: number
-}
-
-export interface PurgeRequest {
-  /** ID of the purge request. */
-  id: string
-  /** Pipeline ID the purge request belongs to. */
-  pipelineId: string
-  /** Status of the purge request. */
-  status: PurgeRequestStatus
-  /**
-   * List of asserts to purge.
-   *
-   * One-of ('target'): at most one of 'assets', 'all' could be set.
-   */
-  assets?: string[]
-  /**
-   * Defines whether to purge all content.
-   *
-   * One-of ('target'): at most one of 'assets', 'all' could be set.
-   */
-  all?: boolean
-  /** Date the purge request was created. */
-  createdAt?: Date
-  /** Date the purge request was last updated. */
-  updatedAt?: Date
-}
-
 export interface TLSStage {
   /** ID of the TLS stage. */
   id: string
@@ -307,6 +271,42 @@ export interface TLSStage {
    * set.
    */
   backendStageId?: string
+}
+
+export interface CheckPEMChainRequestSecretChain {
+  secretId: string
+  secretRegion: string
+}
+
+export interface PlanDetails {
+  planName: PlanName
+  packageGb: number
+  pipelineLimit: number
+}
+
+export interface PurgeRequest {
+  /** ID of the purge request. */
+  id: string
+  /** Pipeline ID the purge request belongs to. */
+  pipelineId: string
+  /** Status of the purge request. */
+  status: PurgeRequestStatus
+  /**
+   * List of asserts to purge.
+   *
+   * One-of ('target'): at most one of 'assets', 'all' could be set.
+   */
+  assets?: string[]
+  /**
+   * Defines whether to purge all content.
+   *
+   * One-of ('target'): at most one of 'assets', 'all' could be set.
+   */
+  all?: boolean
+  /** Date the purge request was created. */
+  createdAt?: Date
+  /** Date the purge request was last updated. */
+  updatedAt?: Date
 }
 
 export interface TLSSecretsConfig {
