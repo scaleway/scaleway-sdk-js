@@ -816,11 +816,7 @@ export class API extends ParentAPI {
     this.client.fetch<Plan>(
       {
         method: 'GET',
-        path: `/edge-services/v1alpha1/current-plan`,
-        urlParams: urlParams([
-          'project_id',
-          request.projectId ?? this.client.settings.defaultProjectId,
-        ]),
+        path: `/edge-services/v1alpha1/current-plan/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
       },
       unmarshalPlan,
     )
@@ -828,10 +824,6 @@ export class API extends ParentAPI {
   deleteCurrentPlan = (request: Readonly<DeleteCurrentPlanRequest> = {}) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/edge-services/v1alpha1/current-plan`,
-      urlParams: urlParams([
-        'project_id',
-        request.projectId ?? this.client.settings.defaultProjectId,
-      ]),
+      path: `/edge-services/v1alpha1/current-plan/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
     })
 }
