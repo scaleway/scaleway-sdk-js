@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.48.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.47.0...@scaleway/sdk@2.48.0) (2024-09-30)
+
+### Features
+
+- **baremetal:** add GetDefaultPartitioningRequest ([#1438](https://github.com/scaleway/scaleway-sdk-js/issues/1438)) ([5789768](https://github.com/scaleway/scaleway-sdk-js/commit/57897686d07a5b6a8b1b009325b616294ca8d874))
+- **billing:** add exclude field to describe if filter is an excluding filter ([#1444](https://github.com/scaleway/scaleway-sdk-js/issues/1444)) ([3f36eb5](https://github.com/scaleway/scaleway-sdk-js/commit/3f36eb5f5451592e58a9b6b770c300ce54d04d20))
+- **edge_services:** add GetPipelineStages endpoint ([#1449](https://github.com/scaleway/scaleway-sdk-js/issues/1449)) ([7b6726f](https://github.com/scaleway/scaleway-sdk-js/commit/7b6726f1f0f7cc6fd99d6fa687242d399d0b7dae))
+- **edge_services:** add plan endpoints ([#1446](https://github.com/scaleway/scaleway-sdk-js/issues/1446)) ([51b03da](https://github.com/scaleway/scaleway-sdk-js/commit/51b03daa9bbff4dbd8c9f336d81c4ad16ce33910))
+- **k8s:** add temporary feature flag for VPCv3 ([#1445](https://github.com/scaleway/scaleway-sdk-js/issues/1445)) ([21e3357](https://github.com/scaleway/scaleway-sdk-js/commit/21e3357d86a37791b24c1da1ee757abaf3ab7759))
+
+### Bug Fixes
+
+- **k8s:** allow empty description on kapsule clusters ([#1439](https://github.com/scaleway/scaleway-sdk-js/issues/1439)) ([3a7b87f](https://github.com/scaleway/scaleway-sdk-js/commit/3a7b87fc88998603d7df4df55c48984bbed62267))
+
 ## [2.47.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.46.0...@scaleway/sdk@2.47.0) (2024-09-23)
 
 ### Features
