@@ -45,12 +45,9 @@ import type {
   Schema,
   SchemaDisk,
   SchemaFilesystem,
-  SchemaLVM,
-  SchemaLogicalVolume,
   SchemaPartition,
   SchemaPool,
   SchemaRAID,
-  SchemaVolumeGroup,
   SchemaZFS,
   Server,
   ServerEvent,
@@ -68,22 +65,6 @@ import type {
   ValidatePartitioningSchemaRequest,
 } from './types.gen'
 
-const unmarshalSchemaLogicalVolume = (data: unknown): SchemaLogicalVolume => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'SchemaLogicalVolume' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    mirrorNumber: data.mirror_number,
-    name: data.name,
-    size: data.size,
-    stripedNumber: data.striped_number,
-    type: data.type,
-  } as SchemaLogicalVolume
-}
-
 const unmarshalSchemaPartition = (data: unknown): SchemaPartition => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -96,23 +77,6 @@ const unmarshalSchemaPartition = (data: unknown): SchemaPartition => {
     number: data.number,
     size: data.size,
   } as SchemaPartition
-}
-
-const unmarshalSchemaVolumeGroup = (data: unknown): SchemaVolumeGroup => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'SchemaVolumeGroup' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    logicalVolumes: unmarshalArrayOfObject(
-      data.logical_volumes,
-      unmarshalSchemaLogicalVolume,
-    ),
-    physicalVolumes: data.physical_volumes,
-    volumeGroupName: data.volume_group_name,
-  } as SchemaVolumeGroup
 }
 
 const unmarshalSchemaPool = (data: unknown): SchemaPool => {
@@ -161,21 +125,6 @@ const unmarshalSchemaFilesystem = (data: unknown): SchemaFilesystem => {
   } as SchemaFilesystem
 }
 
-const unmarshalSchemaLVM = (data: unknown): SchemaLVM => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'SchemaLVM' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    volumeGroups: unmarshalArrayOfObject(
-      data.volume_groups,
-      unmarshalSchemaVolumeGroup,
-    ),
-  } as SchemaLVM
-}
-
 const unmarshalSchemaRAID = (data: unknown): SchemaRAID => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -215,7 +164,6 @@ export const unmarshalSchema = (data: unknown): Schema => {
       data.filesystems,
       unmarshalSchemaFilesystem,
     ),
-    lvm: data.lvm ? unmarshalSchemaLVM(data.lvm) : undefined,
     raids: unmarshalArrayOfObject(data.raids, unmarshalSchemaRAID),
     zfs: data.zfs ? unmarshalSchemaZFS(data.zfs) : undefined,
   } as Schema
@@ -922,17 +870,6 @@ export const marshalUpdateSettingRequest = (
   enabled: request.enabled,
 })
 
-const marshalSchemaLogicalVolume = (
-  request: SchemaLogicalVolume,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  mirror_number: request.mirrorNumber,
-  name: request.name,
-  size: request.size,
-  striped_number: request.stripedNumber,
-  type: request.type,
-})
-
 const marshalSchemaPartition = (
   request: SchemaPartition,
   defaults: DefaultValues,
@@ -940,17 +877,6 @@ const marshalSchemaPartition = (
   label: request.label,
   number: request.number,
   size: request.size,
-})
-
-const marshalSchemaVolumeGroup = (
-  request: SchemaVolumeGroup,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  logical_volumes: request.logicalVolumes.map(elt =>
-    marshalSchemaLogicalVolume(elt, defaults),
-  ),
-  physical_volumes: request.physicalVolumes,
-  volume_group_name: request.volumeGroupName,
 })
 
 const marshalSchemaPool = (
@@ -983,15 +909,6 @@ const marshalSchemaFilesystem = (
   mountpoint: request.mountpoint,
 })
 
-const marshalSchemaLVM = (
-  request: SchemaLVM,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  volume_groups: request.volumeGroups.map(elt =>
-    marshalSchemaVolumeGroup(elt, defaults),
-  ),
-})
-
 const marshalSchemaRAID = (
   request: SchemaRAID,
   defaults: DefaultValues,
@@ -1016,10 +933,6 @@ export const marshalSchema = (
   filesystems: request.filesystems.map(elt =>
     marshalSchemaFilesystem(elt, defaults),
   ),
-  lvm:
-    request.lvm !== undefined
-      ? marshalSchemaLVM(request.lvm, defaults)
-      : undefined,
   raids: request.raids.map(elt => marshalSchemaRAID(elt, defaults)),
   zfs:
     request.zfs !== undefined
