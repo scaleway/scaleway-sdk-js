@@ -34,16 +34,6 @@ export type SchemaFilesystemFormat =
   | 'swap'
   | 'zfs'
 
-export type SchemaLogicalVolumeType =
-  | 'unknown_raid_type'
-  | 'striped'
-  | 'mirror'
-  | 'raid0'
-  | 'raid1'
-  | 'raid5'
-  | 'raid6'
-  | 'raid10'
-
 export type SchemaPartitionLabel =
   | 'unknown_partition_label'
   | 'uefi'
@@ -54,7 +44,6 @@ export type SchemaPartitionLabel =
   | 'data'
   | 'home'
   | 'raid'
-  | 'lvm'
   | 'zfs'
 
 export type SchemaPoolType =
@@ -117,24 +106,10 @@ export type ServerStatus =
 
 export type SettingType = 'unknown' | 'smtp'
 
-export interface SchemaLogicalVolume {
-  name: string
-  type: SchemaLogicalVolumeType
-  size: number
-  stripedNumber: number
-  mirrorNumber: number
-}
-
 export interface SchemaPartition {
   label: SchemaPartitionLabel
   number: number
   size: number
-}
-
-export interface SchemaVolumeGroup {
-  volumeGroupName: string
-  physicalVolumes: string[]
-  logicalVolumes: SchemaLogicalVolume[]
 }
 
 export interface SchemaPool {
@@ -154,10 +129,6 @@ export interface SchemaFilesystem {
   device: string
   format: SchemaFilesystemFormat
   mountpoint: string
-}
-
-export interface SchemaLVM {
-  volumeGroups: SchemaVolumeGroup[]
 }
 
 export interface SchemaRAID {
@@ -188,7 +159,6 @@ export interface Schema {
   disks: SchemaDisk[]
   raids: SchemaRAID[]
   filesystems: SchemaFilesystem[]
-  lvm?: SchemaLVM
   zfs?: SchemaZFS
 }
 
