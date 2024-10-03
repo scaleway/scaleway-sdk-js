@@ -4,3 +4,4 @@
  */
 
 export * as v1 from './v1/index'
+export * as v3 from './v3/index.gen'
