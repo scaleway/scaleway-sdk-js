@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.49.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.48.0...@scaleway/sdk@2.49.0) (2024-10-04)
+
+### Features
+
+- **iam:** make sur e-mail optional in CreateUser ([#1456](https://github.com/scaleway/scaleway-sdk-js/issues/1456)) ([f37723e](https://github.com/scaleway/scaleway-sdk-js/commit/f37723ecc2c88d4823eaa3d2670ddea5b4ff5346))
+
+### Bug Fixes
+
+- **edge_services:** fix plan endpoints ([#1450](https://github.com/scaleway/scaleway-sdk-js/issues/1450)) ([9e3bd41](https://github.com/scaleway/scaleway-sdk-js/commit/9e3bd41bf53288e760ae209d462e3a85a22181eb))
+- **scw:** decimal json representation ([#1460](https://github.com/scaleway/scaleway-sdk-js/issues/1460)) ([6829c46](https://github.com/scaleway/scaleway-sdk-js/commit/6829c46bdc362b02fe974ca7dd18267c7c0dbd9b))
+
 ## [2.48.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.47.0...@scaleway/sdk@2.48.0) (2024-09-30)
 
 ### Features
