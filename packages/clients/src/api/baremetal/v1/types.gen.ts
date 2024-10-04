@@ -305,6 +305,8 @@ export interface ServerInstall {
   serviceUser: string
   /** Address of the installed service. */
   serviceUrl: string
+  /** Partitioning schema. */
+  partitioningSchema?: Schema
 }
 
 export interface ServerOption {
@@ -377,6 +379,8 @@ export interface CreateServerRequestInstall {
   serviceUser?: string
   /** Password used for the service to install. */
   servicePassword?: string
+  /** Partitioning schema. */
+  partitioningSchema?: Schema
 }
 
 export interface OS {
@@ -748,6 +752,8 @@ export type InstallServerRequest = {
   serviceUser?: string
   /** Password used for the service to install. */
   servicePassword?: string
+  /** Partitioning schema. */
+  partitioningSchema?: Schema
 }
 
 export type ListOSRequest = {

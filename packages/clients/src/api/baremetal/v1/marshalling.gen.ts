@@ -488,6 +488,9 @@ const unmarshalServerInstall = (data: unknown): ServerInstall => {
   return {
     hostname: data.hostname,
     osId: data.os_id,
+    partitioningSchema: data.partitioning_schema
+      ? unmarshalSchema(data.partitioning_schema)
+      : undefined,
     serviceUrl: data.service_url,
     serviceUser: data.service_user,
     sshKeyIds: data.ssh_key_ids,
@@ -759,117 +762,6 @@ export const marshalAddOptionServerRequest = (
   expires_at: request.expiresAt,
 })
 
-const marshalCreateServerRequestInstall = (
-  request: CreateServerRequestInstall,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  hostname: request.hostname,
-  os_id: request.osId,
-  password: request.password,
-  service_password: request.servicePassword,
-  service_user: request.serviceUser,
-  ssh_key_ids: request.sshKeyIds,
-  user: request.user,
-})
-
-export const marshalCreateServerRequest = (
-  request: CreateServerRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  description: request.description,
-  install:
-    request.install !== undefined
-      ? marshalCreateServerRequestInstall(request.install, defaults)
-      : undefined,
-  name: request.name,
-  offer_id: request.offerId,
-  option_ids: request.optionIds,
-  tags: request.tags,
-  ...resolveOneOf([
-    {
-      default: defaults.defaultProjectId,
-      param: 'project_id',
-      value: request.projectId,
-    },
-    {
-      default: defaults.defaultOrganizationId,
-      param: 'organization_id',
-      value: request.organizationId,
-    },
-  ]),
-})
-
-export const marshalInstallServerRequest = (
-  request: InstallServerRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  hostname: request.hostname,
-  os_id: request.osId,
-  password: request.password,
-  service_password: request.servicePassword,
-  service_user: request.serviceUser,
-  ssh_key_ids: request.sshKeyIds,
-  user: request.user,
-})
-
-export const marshalPrivateNetworkApiAddServerPrivateNetworkRequest = (
-  request: PrivateNetworkApiAddServerPrivateNetworkRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  private_network_id: request.privateNetworkId,
-})
-
-export const marshalPrivateNetworkApiSetServerPrivateNetworksRequest = (
-  request: PrivateNetworkApiSetServerPrivateNetworksRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  private_network_ids: request.privateNetworkIds,
-})
-
-export const marshalRebootServerRequest = (
-  request: RebootServerRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  boot_type: request.bootType,
-})
-
-export const marshalStartBMCAccessRequest = (
-  request: StartBMCAccessRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  ip: request.ip,
-})
-
-export const marshalStartServerRequest = (
-  request: StartServerRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  boot_type: request.bootType,
-})
-
-export const marshalUpdateIPRequest = (
-  request: UpdateIPRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  reverse: request.reverse,
-})
-
-export const marshalUpdateServerRequest = (
-  request: UpdateServerRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  description: request.description,
-  name: request.name,
-  tags: request.tags,
-})
-
-export const marshalUpdateSettingRequest = (
-  request: UpdateSettingRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  enabled: request.enabled,
-})
-
 const marshalSchemaPartition = (
   request: SchemaPartition,
   defaults: DefaultValues,
@@ -938,6 +830,125 @@ export const marshalSchema = (
     request.zfs !== undefined
       ? marshalSchemaZFS(request.zfs, defaults)
       : undefined,
+})
+
+const marshalCreateServerRequestInstall = (
+  request: CreateServerRequestInstall,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  hostname: request.hostname,
+  os_id: request.osId,
+  partitioning_schema:
+    request.partitioningSchema !== undefined
+      ? marshalSchema(request.partitioningSchema, defaults)
+      : undefined,
+  password: request.password,
+  service_password: request.servicePassword,
+  service_user: request.serviceUser,
+  ssh_key_ids: request.sshKeyIds,
+  user: request.user,
+})
+
+export const marshalCreateServerRequest = (
+  request: CreateServerRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  description: request.description,
+  install:
+    request.install !== undefined
+      ? marshalCreateServerRequestInstall(request.install, defaults)
+      : undefined,
+  name: request.name,
+  offer_id: request.offerId,
+  option_ids: request.optionIds,
+  tags: request.tags,
+  ...resolveOneOf([
+    {
+      default: defaults.defaultProjectId,
+      param: 'project_id',
+      value: request.projectId,
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
+      value: request.organizationId,
+    },
+  ]),
+})
+
+export const marshalInstallServerRequest = (
+  request: InstallServerRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  hostname: request.hostname,
+  os_id: request.osId,
+  partitioning_schema:
+    request.partitioningSchema !== undefined
+      ? marshalSchema(request.partitioningSchema, defaults)
+      : undefined,
+  password: request.password,
+  service_password: request.servicePassword,
+  service_user: request.serviceUser,
+  ssh_key_ids: request.sshKeyIds,
+  user: request.user,
+})
+
+export const marshalPrivateNetworkApiAddServerPrivateNetworkRequest = (
+  request: PrivateNetworkApiAddServerPrivateNetworkRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_network_id: request.privateNetworkId,
+})
+
+export const marshalPrivateNetworkApiSetServerPrivateNetworksRequest = (
+  request: PrivateNetworkApiSetServerPrivateNetworksRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_network_ids: request.privateNetworkIds,
+})
+
+export const marshalRebootServerRequest = (
+  request: RebootServerRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  boot_type: request.bootType,
+})
+
+export const marshalStartBMCAccessRequest = (
+  request: StartBMCAccessRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ip: request.ip,
+})
+
+export const marshalStartServerRequest = (
+  request: StartServerRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  boot_type: request.bootType,
+})
+
+export const marshalUpdateIPRequest = (
+  request: UpdateIPRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  reverse: request.reverse,
+})
+
+export const marshalUpdateServerRequest = (
+  request: UpdateServerRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  description: request.description,
+  name: request.name,
+  tags: request.tags,
+})
+
+export const marshalUpdateSettingRequest = (
+  request: UpdateSettingRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  enabled: request.enabled,
 })
 
 export const marshalValidatePartitioningSchemaRequest = (
