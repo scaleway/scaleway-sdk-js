@@ -4,12 +4,14 @@ import {
   marshalScwFile,
   marshalTimeSeries,
   marshalTimeSeriesPoint,
+  unmarshalDecimal,
   unmarshalMoney,
   unmarshalScwFile,
   unmarshalServiceInfo,
   unmarshalTimeSeries,
   unmarshalTimeSeriesPoint,
 } from '../custom-marshalling'
+import { Decimal } from '../custom-types'
 
 describe('unmarshalMoney', () => {
   it('returns the proper object', () => {
@@ -119,6 +121,29 @@ describe('unmarshalTimeSeries', () => {
   it('throws for invalid input', () => {
     expect(() => {
       unmarshalTimeSeries(null)
+    }).toThrow()
+  })
+})
+
+describe('unmarshalDecimal', () => {
+  it('returns the proper object', () => {
+    const decimal = unmarshalDecimal({
+      value: '0.01',
+    })
+    expect(decimal).toBeInstanceOf(Decimal)
+    expect(decimal?.toString()).toStrictEqual('0.01')
+  })
+
+  it('throws for invalid input', () => {
+    expect(unmarshalDecimal(null)).toBeNull()
+    expect(() => {
+      unmarshalDecimal({})
+    }).toThrow()
+    expect(() => {
+      unmarshalDecimal({ value: null })
+    }).toThrow()
+    expect(() => {
+      unmarshalDecimal({ value: 0.02 })
     }).toThrow()
   })
 })

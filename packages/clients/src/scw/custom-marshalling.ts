@@ -115,13 +115,28 @@ export const unmarshalTimeSeries = (data: unknown) => {
  * @internal
  */
 export const unmarshalDecimal = (data: unknown) => {
-  if (!(typeof data === 'string')) {
+  if (!(typeof data === 'object')) {
     throw new TypeError(
-      `Unmarshalling the type 'Decimal' failed as data isn't a string.`,
+      `Unmarshalling the type 'Decimal' failed as data isn't an object.`,
+    )
+  }
+  if (data === null) {
+    return null
+  }
+
+  if (!('value' in data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Decimal' failed as data object does not have a 'value' key.`,
     )
   }
 
-  return new Decimal(data)
+  if (!(typeof data.value === 'string')) {
+    throw new TypeError(
+      `Unmarshalling the type 'Decimal' failed as 'value' is not a string.`,
+    )
+  }
+
+  return new Decimal(data.value)
 }
 
 /**
@@ -189,4 +204,6 @@ export const marshalTimeSeries = (
  *
  * @internal
  */
-export const marshalDecimal = (obj: Decimal): string => obj.toString()
+export const marshalDecimal = (obj: Decimal): { value: string } => ({
+  value: obj.toString(),
+})
