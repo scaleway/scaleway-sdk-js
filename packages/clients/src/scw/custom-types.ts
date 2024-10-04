@@ -79,4 +79,6 @@ export class Decimal {
   }
 
   public toString = (): string => this.str
+
+  public marshal = (): object => ({ value: this.str })
 }
