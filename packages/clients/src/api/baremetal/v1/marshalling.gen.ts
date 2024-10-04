@@ -488,6 +488,9 @@ const unmarshalServerInstall = (data: unknown): ServerInstall => {
   return {
     hostname: data.hostname,
     osId: data.os_id,
+    partitioningSchema: data.partitioning_schema
+      ? unmarshalSchema(data.partitioning_schema)
+      : undefined,
     serviceUrl: data.service_url,
     serviceUser: data.service_user,
     sshKeyIds: data.ssh_key_ids,
@@ -759,12 +762,86 @@ export const marshalAddOptionServerRequest = (
   expires_at: request.expiresAt,
 })
 
+const marshalSchemaPartition = (
+  request: SchemaPartition,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  label: request.label,
+  number: request.number,
+  size: request.size,
+})
+
+const marshalSchemaPool = (
+  request: SchemaPool,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  devices: request.devices,
+  filesystem_options: request.filesystemOptions,
+  name: request.name,
+  options: request.options,
+  type: request.type,
+})
+
+const marshalSchemaDisk = (
+  request: SchemaDisk,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  device: request.device,
+  partitions: request.partitions.map(elt =>
+    marshalSchemaPartition(elt, defaults),
+  ),
+})
+
+const marshalSchemaFilesystem = (
+  request: SchemaFilesystem,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  device: request.device,
+  format: request.format,
+  mountpoint: request.mountpoint,
+})
+
+const marshalSchemaRAID = (
+  request: SchemaRAID,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  devices: request.devices,
+  level: request.level,
+  name: request.name,
+})
+
+const marshalSchemaZFS = (
+  request: SchemaZFS,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  pools: request.pools.map(elt => marshalSchemaPool(elt, defaults)),
+})
+
+export const marshalSchema = (
+  request: Schema,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  disks: request.disks.map(elt => marshalSchemaDisk(elt, defaults)),
+  filesystems: request.filesystems.map(elt =>
+    marshalSchemaFilesystem(elt, defaults),
+  ),
+  raids: request.raids.map(elt => marshalSchemaRAID(elt, defaults)),
+  zfs:
+    request.zfs !== undefined
+      ? marshalSchemaZFS(request.zfs, defaults)
+      : undefined,
+})
+
 const marshalCreateServerRequestInstall = (
   request: CreateServerRequestInstall,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   hostname: request.hostname,
   os_id: request.osId,
+  partitioning_schema:
+    request.partitioningSchema !== undefined
+      ? marshalSchema(request.partitioningSchema, defaults)
+      : undefined,
   password: request.password,
   service_password: request.servicePassword,
   service_user: request.serviceUser,
@@ -805,6 +882,10 @@ export const marshalInstallServerRequest = (
 ): Record<string, unknown> => ({
   hostname: request.hostname,
   os_id: request.osId,
+  partitioning_schema:
+    request.partitioningSchema !== undefined
+      ? marshalSchema(request.partitioningSchema, defaults)
+      : undefined,
   password: request.password,
   service_password: request.servicePassword,
   service_user: request.serviceUser,
