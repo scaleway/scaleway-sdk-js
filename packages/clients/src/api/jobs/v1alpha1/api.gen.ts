@@ -9,32 +9,45 @@ import {
 import type { Region } from '../../../bridge'
 import {
   marshalCreateJobDefinitionRequest,
+  marshalCreateJobDefinitionSecretsRequest,
   marshalStartJobDefinitionRequest,
   marshalUpdateJobDefinitionRequest,
+  marshalUpdateJobDefinitionSecretRequest,
+  unmarshalCreateJobDefinitionSecretsResponse,
   unmarshalJobDefinition,
   unmarshalJobRun,
+  unmarshalListJobDefinitionSecretsResponse,
   unmarshalListJobDefinitionsResponse,
   unmarshalListJobRunsResponse,
   unmarshalListJobsResourcesResponse,
+  unmarshalSecret,
   unmarshalStartJobDefinitionResponse,
 } from './marshalling.gen'
 import type {
   CreateJobDefinitionRequest,
+  CreateJobDefinitionSecretsRequest,
+  CreateJobDefinitionSecretsResponse,
   DeleteJobDefinitionRequest,
+  DeleteJobDefinitionSecretRequest,
   GetJobDefinitionRequest,
+  GetJobDefinitionSecretRequest,
   GetJobRunRequest,
   JobDefinition,
   JobRun,
+  ListJobDefinitionSecretsRequest,
+  ListJobDefinitionSecretsResponse,
   ListJobDefinitionsRequest,
   ListJobDefinitionsResponse,
   ListJobRunsRequest,
   ListJobRunsResponse,
   ListJobsResourcesRequest,
   ListJobsResourcesResponse,
+  Secret,
   StartJobDefinitionRequest,
   StartJobDefinitionResponse,
   StopJobRunRequest,
   UpdateJobDefinitionRequest,
+  UpdateJobDefinitionSecretRequest,
 } from './types.gen'
 
 const jsonContentHeaders = {
@@ -168,6 +181,70 @@ export class API extends ParentAPI {
       },
       unmarshalStartJobDefinitionResponse,
     )
+
+  createJobDefinitionSecrets = (
+    request: Readonly<CreateJobDefinitionSecretsRequest>,
+  ) =>
+    this.client.fetch<CreateJobDefinitionSecretsResponse>(
+      {
+        body: JSON.stringify(
+          marshalCreateJobDefinitionSecretsRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/secrets`,
+      },
+      unmarshalCreateJobDefinitionSecretsResponse,
+    )
+
+  getJobDefinitionSecret = (request: Readonly<GetJobDefinitionSecretRequest>) =>
+    this.client.fetch<Secret>(
+      {
+        method: 'GET',
+        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/secrets/${validatePathParam('secretId', request.secretId)}`,
+      },
+      unmarshalSecret,
+    )
+
+  listJobDefinitionSecrets = (
+    request: Readonly<ListJobDefinitionSecretsRequest>,
+  ) =>
+    this.client.fetch<ListJobDefinitionSecretsResponse>(
+      {
+        method: 'GET',
+        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/secrets`,
+      },
+      unmarshalListJobDefinitionSecretsResponse,
+    )
+
+  updateJobDefinitionSecret = (
+    request: Readonly<UpdateJobDefinitionSecretRequest>,
+  ) =>
+    this.client.fetch<Secret>(
+      {
+        body: JSON.stringify(
+          marshalUpdateJobDefinitionSecretRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/secrets/${validatePathParam('secretId', request.secretId)}`,
+      },
+      unmarshalSecret,
+    )
+
+  deleteJobDefinitionSecret = (
+    request: Readonly<DeleteJobDefinitionSecretRequest>,
+  ) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/secrets/${validatePathParam('secretId', request.secretId)}`,
+    })
 
   /**
    * Get a job run by its unique identifier.

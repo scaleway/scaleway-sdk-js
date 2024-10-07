@@ -18,6 +18,14 @@ export type ListJobDefinitionsRequestOrderBy =
 
 export type ListJobRunsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
+export interface SecretEnvVar {
+  name: string
+}
+
+export interface SecretFile {
+  path: string
+}
+
 export interface CronSchedule {
   /** UNIX cron schedule to run job (e.g., '* * * * *'). */
   schedule: string
@@ -31,6 +39,25 @@ export interface CronSchedule {
 export interface CreateJobDefinitionRequestCronScheduleConfig {
   schedule: string
   timezone: string
+}
+
+export interface CreateJobDefinitionSecretsRequestSecretConfig {
+  secretManagerId: string
+  secretManagerVersion: string
+  /** One-of ('pathOrEnvVar'): at most one of 'path', 'envVarName' could be set. */
+  path?: string
+  /** One-of ('pathOrEnvVar'): at most one of 'path', 'envVarName' could be set. */
+  envVarName?: string
+}
+
+export interface Secret {
+  secretId: string
+  secretManagerId: string
+  secretManagerVersion: string
+  /** One-of ('secretConfig'): at most one of 'file', 'envVar' could be set. */
+  file?: SecretFile
+  /** One-of ('secretConfig'): at most one of 'file', 'envVar' could be set. */
+  envVar?: SecretEnvVar
 }
 
 export interface JobDefinition {
@@ -121,6 +148,22 @@ export type CreateJobDefinitionRequest = {
   cronSchedule?: CreateJobDefinitionRequestCronScheduleConfig
 }
 
+export type CreateJobDefinitionSecretsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the job definition to get. */
+  jobDefinitionId: string
+  /** Secrets to inject into the job. */
+  secrets: CreateJobDefinitionSecretsRequestSecretConfig[]
+}
+
+export interface CreateJobDefinitionSecretsResponse {
+  secrets: Secret[]
+}
+
 export type DeleteJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -129,6 +172,16 @@ export type DeleteJobDefinitionRequest = {
   region?: Region
   /** UUID of the job definition to delete. */
   jobDefinitionId: string
+}
+
+export type DeleteJobDefinitionSecretRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  jobDefinitionId: string
+  secretId: string
 }
 
 export type GetJobDefinitionRequest = {
@@ -141,6 +194,16 @@ export type GetJobDefinitionRequest = {
   jobDefinitionId: string
 }
 
+export type GetJobDefinitionSecretRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  jobDefinitionId: string
+  secretId: string
+}
+
 export type GetJobRunRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -149,6 +212,20 @@ export type GetJobRunRequest = {
   region?: Region
   /** UUID of the job run to get. */
   jobRunId: string
+}
+
+export type ListJobDefinitionSecretsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  jobDefinitionId: string
+}
+
+export interface ListJobDefinitionSecretsResponse {
+  secrets: Secret[]
+  totalCount: number
 }
 
 export type ListJobDefinitionsRequest = {
@@ -257,4 +334,19 @@ export type UpdateJobDefinitionRequest = {
   /** Timeout of the job in seconds. */
   jobTimeout?: string
   cronSchedule?: UpdateJobDefinitionRequestCronScheduleConfig
+}
+
+export type UpdateJobDefinitionSecretRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  jobDefinitionId: string
+  secretId: string
+  secretManagerVersion?: string
+  /** One-of ('secretConfig'): at most one of 'path', 'envVarName' could be set. */
+  path?: string
+  /** One-of ('secretConfig'): at most one of 'path', 'envVarName' could be set. */
+  envVarName?: string
 }
