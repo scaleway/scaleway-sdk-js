@@ -27,6 +27,8 @@ export type {
   DeletePipelineRequest,
   DeleteTLSStageRequest,
   GetBackendStageRequest,
+  GetBillingRequest,
+  GetBillingResponse,
   GetCacheStageRequest,
   GetCurrentPlanRequest,
   GetDNSStageRequest,
