@@ -15,6 +15,8 @@ export type {
   DeleteWebhookRequest,
   Domain,
   DomainLastStatus,
+  DomainLastStatusAutoconfigState,
+  DomainLastStatusAutoconfigStateReason,
   DomainLastStatusDkimRecord,
   DomainLastStatusDmarcRecord,
   DomainLastStatusRecordStatus,
