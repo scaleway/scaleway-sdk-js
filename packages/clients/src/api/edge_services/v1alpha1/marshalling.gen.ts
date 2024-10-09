@@ -5,6 +5,7 @@ import {
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
+  unmarshalMoney,
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
@@ -24,6 +25,7 @@ import type {
   CreatePurgeRequestRequest,
   CreateTLSStageRequest,
   DNSStage,
+  GetBillingResponse,
   ListBackendStagesResponse,
   ListCacheStagesResponse,
   ListDNSStagesResponse,
@@ -288,6 +290,47 @@ export const unmarshalCheckPEMChainResponse = (
   } as CheckPEMChainResponse
 }
 
+const unmarshalPlanDetails = (data: unknown): PlanDetails => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PlanDetails' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    packageGb: data.package_gb,
+    pipelineLimit: data.pipeline_limit,
+    planName: data.plan_name,
+  } as PlanDetails
+}
+
+export const unmarshalGetBillingResponse = (
+  data: unknown,
+): GetBillingResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetBillingResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    currentPlan: data.current_plan
+      ? unmarshalPlanDetails(data.current_plan)
+      : undefined,
+    currentPlanCacheUsage: data.current_plan_cache_usage,
+    extraCacheCost: data.extra_cache_cost
+      ? unmarshalMoney(data.extra_cache_cost)
+      : undefined,
+    extraCacheUsage: data.extra_cache_usage,
+    extraPipelinesCost: data.extra_pipelines_cost
+      ? unmarshalMoney(data.extra_pipelines_cost)
+      : undefined,
+    pipelineNumber: data.pipeline_number,
+    planCost: data.plan_cost ? unmarshalMoney(data.plan_cost) : undefined,
+    totalCost: data.total_cost ? unmarshalMoney(data.total_cost) : undefined,
+  } as GetBillingResponse
+}
+
 export const unmarshalListBackendStagesResponse = (
   data: unknown,
 ): ListBackendStagesResponse => {
@@ -346,20 +389,6 @@ export const unmarshalListPipelinesResponse = (
     pipelines: unmarshalArrayOfObject(data.pipelines, unmarshalPipeline),
     totalCount: data.total_count,
   } as ListPipelinesResponse
-}
-
-const unmarshalPlanDetails = (data: unknown): PlanDetails => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PlanDetails' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    packageGb: data.package_gb,
-    pipelineLimit: data.pipeline_limit,
-    planName: data.plan_name,
-  } as PlanDetails
 }
 
 export const unmarshalListPlansResponse = (
