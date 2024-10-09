@@ -169,6 +169,8 @@ export interface APIKey {
   defaultProjectId: string
   /** Defines whether or not the API key is editable. */
   editable: boolean
+  /** Defines whether or not the API key is managed. */
+  managed: boolean
   /** IP address of the device that created the API key. */
   creationIp: string
 }
@@ -188,6 +190,10 @@ export interface Application {
   organizationId: string
   /** Defines whether or not the application is editable. */
   editable: boolean
+  /** Defines whether or not the application is deletable. */
+  deletable: boolean
+  /** Defines whether or not the application is managed. */
+  managed: boolean
   /** Number of API keys attributed to the application. */
   nbApiKeys: number
   /** Tags associated with the user. */
@@ -213,6 +219,12 @@ export interface Group {
   applicationIds: string[]
   /** Tags associated to the group. */
   tags: string[]
+  /** Defines whether or not the group is editable. */
+  editable: boolean
+  /** Defines whether or not the group is deletable. */
+  deletable: boolean
+  /** Defines whether or not the group is managed. */
+  managed: boolean
 }
 
 export interface Log {
@@ -264,6 +276,10 @@ export interface Policy {
   updatedAt?: Date
   /** Defines whether or not a policy is editable. */
   editable: boolean
+  /** Defines whether or not a policy is deletable. */
+  deletable: boolean
+  /** Defines whether or not a policy is managed. */
+  managed: boolean
   /** Number of rules of the policy. */
   nbRules: number
   /** Number of policy scopes. */

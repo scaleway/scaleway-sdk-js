@@ -34,6 +34,7 @@ import {
   unmarshalCheckLbOriginResponse,
   unmarshalCheckPEMChainResponse,
   unmarshalDNSStage,
+  unmarshalGetBillingResponse,
   unmarshalListBackendStagesResponse,
   unmarshalListCacheStagesResponse,
   unmarshalListDNSStagesResponse,
@@ -69,6 +70,8 @@ import type {
   DeletePipelineRequest,
   DeleteTLSStageRequest,
   GetBackendStageRequest,
+  GetBillingRequest,
+  GetBillingResponse,
   GetCacheStageRequest,
   GetCurrentPlanRequest,
   GetDNSStageRequest,
@@ -826,4 +829,20 @@ export class API extends ParentAPI {
       method: 'DELETE',
       path: `/edge-services/v1alpha1/current-plan/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
     })
+
+  /**
+   * Gives information on current edge-services subscription plan and used
+   * resources with associated price.
+   *
+   * @param request - The request {@link GetBillingRequest}
+   * @returns A Promise of GetBillingResponse
+   */
+  getBilling = (request: Readonly<GetBillingRequest> = {}) =>
+    this.client.fetch<GetBillingResponse>(
+      {
+        method: 'GET',
+        path: `/edge-services/v1alpha1/billing/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
+      },
+      unmarshalGetBillingResponse,
+    )
 }
