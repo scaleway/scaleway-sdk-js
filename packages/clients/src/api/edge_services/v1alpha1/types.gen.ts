@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region, Zone } from '../../../bridge'
+import type { Money, Region, Zone } from '../../../bridge'
 
 export type DNSStageType = 'unknown_type' | 'auto' | 'managed' | 'custom'
 
@@ -279,8 +279,11 @@ export interface CheckPEMChainRequestSecretChain {
 }
 
 export interface PlanDetails {
+  /** Subscription plan name. */
   planName: PlanName
+  /** Amount of egress data from cache included in subscription plan. */
   packageGb: number
+  /** Number of pipeline included in subscription plan. */
   pipelineLimit: number
 }
 
@@ -499,6 +502,32 @@ export type DeleteTLSStageRequest = {
 export type GetBackendStageRequest = {
   /** ID of the requested backend stage. */
   backendStageId: string
+}
+
+export type GetBillingRequest = {
+  projectId?: string
+}
+
+export interface GetBillingResponse {
+  /** Information on the current edge-service subscription plan. */
+  currentPlan?: PlanDetails
+  /** Price of the current subscription plan. */
+  planCost?: Money
+  /** Total number of pipeline currently configured. */
+  pipelineNumber: number
+  /** Cost to date of the pipelines not included in the plans. */
+  extraPipelinesCost?: Money
+  /** Total amount of data egressed from cache in current subscription plan. */
+  currentPlanCacheUsage: number
+  /** Total amount of data egressed from cache not included in the plans. */
+  extraCacheUsage: number
+  /** Cost to date of the data egressed from cache not included in the plans. */
+  extraCacheCost?: Money
+  /**
+   * Total cost to date of edge-service product for the month including current
+   * plan, previous plans, extra pipelines and extra egress cache data.
+   */
+  totalCost?: Money
 }
 
 export type GetCacheStageRequest = {
