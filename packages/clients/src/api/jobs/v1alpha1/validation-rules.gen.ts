@@ -31,6 +31,12 @@ export const CreateJobDefinitionRequestCronScheduleConfig = {
   },
 }
 
+export const CreateJobDefinitionSecretsRequestSecretConfig = {
+  secretManagerVersion: {
+    minLength: 1,
+  },
+}
+
 export const CronSchedule = {
   schedule: {
     maxLength: 255,
@@ -94,6 +100,12 @@ export const UpdateJobDefinitionRequestCronScheduleConfig = {
   },
   timezone: {
     maxLength: 255,
+    minLength: 1,
+  },
+}
+
+export const UpdateJobDefinitionSecretRequest = {
+  secretManagerVersion: {
     minLength: 1,
   },
 }
