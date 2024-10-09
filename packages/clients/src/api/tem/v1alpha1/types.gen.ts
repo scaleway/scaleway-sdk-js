@@ -2,6 +2,11 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Region } from '../../../bridge'
 
+export type DomainLastStatusAutoconfigStateReason =
+  | 'unknown_reason'
+  | 'permission_denied'
+  | 'domain_not_found'
+
 export type DomainLastStatusRecordStatus =
   | 'unknown_record_status'
   | 'valid'
@@ -198,6 +203,15 @@ export interface Email {
   flags: EmailFlag[]
 }
 
+export interface DomainLastStatusAutoconfigState {
+  /** Enable or disable the auto-configuration of domain DNS records. */
+  enabled: boolean
+  /** Whether the domain can be auto-configured or not. */
+  autoconfigurable: boolean
+  /** The reason that the domain cannot be auto-configurable. */
+  reason?: DomainLastStatusAutoconfigStateReason
+}
+
 export interface DomainLastStatusDkimRecord {
   /** Status of the DKIM record's configuration. */
   status: DomainLastStatusRecordStatus
@@ -331,9 +345,9 @@ export interface ProjectSettingsPeriodicReport {
 export interface UpdateProjectSettingsRequestUpdatePeriodicReport {
   /** (Optional) Enable or disable periodic report notifications. */
   enabled?: boolean
-  /** (Optional) At which frequency you receive periodic report notifications. */
+  /** (Optional) Frequency at which you receive periodic report notifications. */
   frequency?: ProjectSettingsPeriodicReportFrequency
-  /** (Optional) At which hour you receive periodic report notifications. */
+  /** (Optional) Hour at which you receive periodic report notifications. */
   sendingHour?: number
   /**
    * (Optional) On which day you receive periodic report notifications (1-7
@@ -452,6 +466,8 @@ export interface DomainLastStatus {
   dkimRecord?: DomainLastStatusDkimRecord
   /** The DMARC record verification data. */
   dmarcRecord?: DomainLastStatusDmarcRecord
+  /** The verification state of domain auto-configuration. */
+  autoconfigState?: DomainLastStatusAutoconfigState
 }
 
 export type GetDomainLastStatusRequest = {
