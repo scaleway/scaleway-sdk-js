@@ -16,6 +16,7 @@ import type {
   CreateWebhookRequest,
   Domain,
   DomainLastStatus,
+  DomainLastStatusAutoconfigState,
   DomainLastStatusDkimRecord,
   DomainLastStatusDmarcRecord,
   DomainLastStatusSpfRecord,
@@ -203,6 +204,22 @@ export const unmarshalCreateEmailResponse = (
   } as CreateEmailResponse
 }
 
+const unmarshalDomainLastStatusAutoconfigState = (
+  data: unknown,
+): DomainLastStatusAutoconfigState => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainLastStatusAutoconfigState' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    autoconfigurable: data.autoconfigurable,
+    enabled: data.enabled,
+    reason: data.reason ? data.reason : undefined,
+  } as DomainLastStatusAutoconfigState
+}
+
 const unmarshalDomainLastStatusDkimRecord = (
   data: unknown,
 ): DomainLastStatusDkimRecord => {
@@ -259,6 +276,9 @@ export const unmarshalDomainLastStatus = (data: unknown): DomainLastStatus => {
   }
 
   return {
+    autoconfigState: data.autoconfig_state
+      ? unmarshalDomainLastStatusAutoconfigState(data.autoconfig_state)
+      : undefined,
     dkimRecord: data.dkim_record
       ? unmarshalDomainLastStatusDkimRecord(data.dkim_record)
       : undefined,
