@@ -3,6 +3,7 @@
 import randomName from '@scaleway/random-name'
 import {
   isJSONObject,
+  resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
@@ -10,18 +11,66 @@ import type { DefaultValues } from '../../../bridge'
 import type {
   CreateJobDefinitionRequest,
   CreateJobDefinitionRequestCronScheduleConfig,
+  CreateJobDefinitionSecretsRequest,
+  CreateJobDefinitionSecretsRequestSecretConfig,
+  CreateJobDefinitionSecretsResponse,
   CronSchedule,
   JobDefinition,
   JobRun,
+  ListJobDefinitionSecretsResponse,
   ListJobDefinitionsResponse,
   ListJobRunsResponse,
   ListJobsResourcesResponse,
   Resource,
+  Secret,
+  SecretEnvVar,
+  SecretFile,
   StartJobDefinitionRequest,
   StartJobDefinitionResponse,
   UpdateJobDefinitionRequest,
   UpdateJobDefinitionRequestCronScheduleConfig,
+  UpdateJobDefinitionSecretRequest,
 } from './types.gen'
+
+const unmarshalSecretEnvVar = (data: unknown): SecretEnvVar => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SecretEnvVar' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+  } as SecretEnvVar
+}
+
+const unmarshalSecretFile = (data: unknown): SecretFile => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SecretFile' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    path: data.path,
+  } as SecretFile
+}
+
+export const unmarshalSecret = (data: unknown): Secret => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Secret' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    envVar: data.env_var ? unmarshalSecretEnvVar(data.env_var) : undefined,
+    file: data.file ? unmarshalSecretFile(data.file) : undefined,
+    secretId: data.secret_id,
+    secretManagerId: data.secret_manager_id,
+    secretManagerVersion: data.secret_manager_version,
+  } as Secret
+}
 
 const unmarshalCronSchedule = (data: unknown): CronSchedule => {
   if (!isJSONObject(data)) {
@@ -89,6 +138,35 @@ export const unmarshalJobRun = (data: unknown): JobRun => {
     terminatedAt: unmarshalDate(data.terminated_at),
     updatedAt: unmarshalDate(data.updated_at),
   } as JobRun
+}
+
+export const unmarshalCreateJobDefinitionSecretsResponse = (
+  data: unknown,
+): CreateJobDefinitionSecretsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CreateJobDefinitionSecretsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    secrets: unmarshalArrayOfObject(data.secrets, unmarshalSecret),
+  } as CreateJobDefinitionSecretsResponse
+}
+
+export const unmarshalListJobDefinitionSecretsResponse = (
+  data: unknown,
+): ListJobDefinitionSecretsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListJobDefinitionSecretsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    secrets: unmarshalArrayOfObject(data.secrets, unmarshalSecret),
+    totalCount: data.total_count,
+  } as ListJobDefinitionSecretsResponse
 }
 
 export const unmarshalListJobDefinitionsResponse = (
@@ -199,6 +277,27 @@ export const marshalCreateJobDefinitionRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
+const marshalCreateJobDefinitionSecretsRequestSecretConfig = (
+  request: CreateJobDefinitionSecretsRequestSecretConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  secret_manager_id: request.secretManagerId,
+  secret_manager_version: request.secretManagerVersion,
+  ...resolveOneOf([
+    { param: 'path', value: request.path },
+    { param: 'env_var_name', value: request.envVarName },
+  ]),
+})
+
+export const marshalCreateJobDefinitionSecretsRequest = (
+  request: CreateJobDefinitionSecretsRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  secrets: request.secrets.map(elt =>
+    marshalCreateJobDefinitionSecretsRequestSecretConfig(elt, defaults),
+  ),
+})
+
 export const marshalStartJobDefinitionRequest = (
   request: StartJobDefinitionRequest,
   defaults: DefaultValues,
@@ -236,4 +335,15 @@ export const marshalUpdateJobDefinitionRequest = (
   local_storage_capacity: request.localStorageCapacity,
   memory_limit: request.memoryLimit,
   name: request.name,
+})
+
+export const marshalUpdateJobDefinitionSecretRequest = (
+  request: UpdateJobDefinitionSecretRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  secret_manager_version: request.secretManagerVersion,
+  ...resolveOneOf([
+    { param: 'path', value: request.path },
+    { param: 'env_var_name', value: request.envVarName },
+  ]),
 })
