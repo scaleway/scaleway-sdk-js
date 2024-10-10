@@ -149,7 +149,7 @@ export type LogStatus =
   | 'in_progress'
   | 'error'
 
-export type MemoryType = 'ddr2' | 'ddr3' | 'ddr4'
+export type MemoryType = 'ddr2' | 'ddr3' | 'ddr4' | 'ddr5'
 
 export type NetworkInterfaceInterfaceType =
   | 'unknown'
