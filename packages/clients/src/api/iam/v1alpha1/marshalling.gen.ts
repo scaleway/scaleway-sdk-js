@@ -87,6 +87,7 @@ export const unmarshalAPIKey = (data: unknown): APIKey => {
     createdAt: unmarshalDate(data.created_at),
     creationIp: data.creation_ip,
     defaultProjectId: data.default_project_id,
+    deletable: data.deletable,
     description: data.description,
     editable: data.editable,
     expiresAt: unmarshalDate(data.expires_at),
