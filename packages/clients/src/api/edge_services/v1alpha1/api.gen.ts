@@ -39,6 +39,7 @@ import {
   unmarshalListCacheStagesResponse,
   unmarshalListDNSStagesResponse,
   unmarshalListPipelinesResponse,
+  unmarshalListPipelinesWithStagesResponse,
   unmarshalListPlansResponse,
   unmarshalListPurgeRequestsResponse,
   unmarshalListTLSStagesResponse,
@@ -86,6 +87,8 @@ import type {
   ListDNSStagesResponse,
   ListPipelinesRequest,
   ListPipelinesResponse,
+  ListPipelinesWithStagesRequest,
+  ListPipelinesWithStagesResponse,
   ListPlansResponse,
   ListPurgeRequestsRequest,
   ListPurgeRequestsResponse,
@@ -200,6 +203,37 @@ export class API extends ParentAPI {
       this.getPipeline,
       request,
       options,
+    )
+
+  protected pageOfListPipelinesWithStages = (
+    request: Readonly<ListPipelinesWithStagesRequest> = {},
+  ) =>
+    this.client.fetch<ListPipelinesWithStagesResponse>(
+      {
+        method: 'GET',
+        path: `/edge-services/v1alpha1/pipelines-stages`,
+        urlParams: urlParams(
+          ['name', request.name],
+          ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['project_id', request.projectId],
+        ),
+      },
+      unmarshalListPipelinesWithStagesResponse,
+    )
+
+  listPipelinesWithStages = (
+    request: Readonly<ListPipelinesWithStagesRequest> = {},
+  ) =>
+    enrichForPagination(
+      'pipelines',
+      this.pageOfListPipelinesWithStages,
+      request,
     )
 
   /**
@@ -831,8 +865,10 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Gives information on current edge-services subscription plan and used
-   * resources with associated price.
+   * Gives information on the currently selected Edge Services subscription
+   * plan, resource usage and associated billing information for this calendar
+   * month (including whether consumption falls within or exceeds the currently
+   * selected subscription plan.).
    *
    * @param request - The request {@link GetBillingRequest}
    * @returns A Promise of GetBillingResponse
