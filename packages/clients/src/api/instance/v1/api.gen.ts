@@ -53,7 +53,6 @@ import {
   unmarshalCreateVolumeResponse,
   unmarshalDetachServerVolumeResponse,
   unmarshalExportSnapshotResponse,
-  unmarshalGetBootscriptResponse,
   unmarshalGetDashboardResponse,
   unmarshalGetImageResponse,
   unmarshalGetIpResponse,
@@ -66,7 +65,6 @@ import {
   unmarshalGetServerTypesAvailabilityResponse,
   unmarshalGetSnapshotResponse,
   unmarshalGetVolumeResponse,
-  unmarshalListBootscriptsResponse,
   unmarshalListImagesResponse,
   unmarshalListIpsResponse,
   unmarshalListPlacementGroupsResponse,
@@ -137,8 +135,6 @@ import type {
   DetachServerVolumeResponse,
   ExportSnapshotRequest,
   ExportSnapshotResponse,
-  GetBootscriptRequest,
-  GetBootscriptResponse,
   GetDashboardRequest,
   GetDashboardResponse,
   GetImageRequest,
@@ -163,8 +159,6 @@ import type {
   GetSnapshotResponse,
   GetVolumeRequest,
   GetVolumeResponse,
-  ListBootscriptsRequest,
-  ListBootscriptsResponse,
   ListDefaultSecurityGroupRulesRequest,
   ListImagesRequest,
   ListImagesResponse,
@@ -1519,51 +1513,6 @@ export class API extends ParentAPI {
       method: 'DELETE',
       path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private_nics/${validatePathParam('privateNicId', request.privateNicId)}`,
     })
-
-  protected pageOfListBootscripts = (
-    request: Readonly<ListBootscriptsRequest> = {},
-  ) =>
-    this.client.fetch<ListBootscriptsResponse>(
-      {
-        method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/bootscripts`,
-        urlParams: urlParams(
-          ['arch', request.arch],
-          ['default', request.default],
-          ['page', request.page],
-          ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
-          ['public', request.public],
-          ['title', request.title],
-        ),
-      },
-      unmarshalListBootscriptsResponse,
-    )
-
-  /**
-   * List bootscripts.
-   *
-   * @deprecated
-   * @param request - The request {@link ListBootscriptsRequest}
-   * @returns A Promise of ListBootscriptsResponse
-   */
-  listBootscripts = (request: Readonly<ListBootscriptsRequest> = {}) =>
-    enrichForPagination('bootscripts', this.pageOfListBootscripts, request)
-
-  /**
-   * Get bootscripts. Get details of a bootscript with the specified ID.
-   *
-   * @deprecated
-   * @param request - The request {@link GetBootscriptRequest}
-   * @returns A Promise of GetBootscriptResponse
-   */
-  getBootscript = (request: Readonly<GetBootscriptRequest>) =>
-    this.client.fetch<GetBootscriptResponse>(
-      {
-        method: 'GET',
-        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/bootscripts/${validatePathParam('bootscriptId', request.bootscriptId)}`,
-      },
-      unmarshalGetBootscriptResponse,
-    )
 
   getDashboard = (request: Readonly<GetDashboardRequest> = {}) =>
     this.client.fetch<GetDashboardResponse>(
