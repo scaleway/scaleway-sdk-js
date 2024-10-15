@@ -128,6 +128,14 @@ export interface Server {
   deletionScheduled: boolean
   /** Zone of the server. */
   zone: Zone
+  /**
+   * Set to true once the server has completed its provisioning steps and is
+   * ready to use. Some OS configurations might require a reinstallation of the
+   * server before delivery depending on the available stock. A reinstallation
+   * after the initial delivery will not change this flag and can be tracked
+   * using the server status.
+   */
+  delivered: boolean
 }
 
 export type CreateServerRequest = {
