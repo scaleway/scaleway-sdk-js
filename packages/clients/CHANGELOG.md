@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.50.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.49.1...@scaleway/sdk@2.50.0) (2024-10-14)
+
+### Features
+
+- **dedibox:** add new memory type ([#1482](https://github.com/scaleway/scaleway-sdk-js/issues/1482)) ([60e5a0d](https://github.com/scaleway/scaleway-sdk-js/commit/60e5a0df24767d774d47055d4e8a91622c62059a))
+- **edge_services:** add GetCurrentBilling endpoint ([#1477](https://github.com/scaleway/scaleway-sdk-js/issues/1477)) ([666c9dc](https://github.com/scaleway/scaleway-sdk-js/commit/666c9dc46f5c6b5020620d087c91ec7e6309aafa))
+- **iam:** add deletable and managed fields ([#1476](https://github.com/scaleway/scaleway-sdk-js/issues/1476)) ([db22c49](https://github.com/scaleway/scaleway-sdk-js/commit/db22c49c2ec62a16a0f61a2769c037fcbca87c69))
+- **serverless_jobs:** enable sdk for secrets ([#1467](https://github.com/scaleway/scaleway-sdk-js/issues/1467)) ([4f6f981](https://github.com/scaleway/scaleway-sdk-js/commit/4f6f98190f7173d9613489ceb1170305500b3a6f))
+- **tem:** add auto-configuration state in domain validation ([#1466](https://github.com/scaleway/scaleway-sdk-js/issues/1466)) ([5169271](https://github.com/scaleway/scaleway-sdk-js/commit/5169271689fbbd36e6171ae70a598ed5ca3b6335))
+
 ## [2.49.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.49.0...@scaleway/sdk@2.49.1) (2024-10-07)
 
 **Note:** Version bump only for package @scaleway/sdk

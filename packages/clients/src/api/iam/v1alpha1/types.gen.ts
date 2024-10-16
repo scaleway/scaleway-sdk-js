@@ -169,6 +169,8 @@ export interface APIKey {
   defaultProjectId: string
   /** Defines whether or not the API key is editable. */
   editable: boolean
+  /** Defines whether or not the API key is deletable. */
+  deletable: boolean
   /** Defines whether or not the API key is managed. */
   managed: boolean
   /** IP address of the device that created the API key. */

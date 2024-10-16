@@ -137,35 +137,18 @@ export interface ServerSummary {
 }
 
 export interface Bootscript {
-  /** Bootscript arguments. */
-  bootcmdargs: string
-  /**
-   * Display if the bootscript is the default bootscript (if no other boot
-   * option is configured).
-   */
-  default: boolean
-  /**
-   * Provide information regarding a Device Tree Binary (DTB) for use with C1
-   * servers.
-   */
-  dtb: string
-  /** Bootscript ID. */
-  id: string
-  /** Initrd (initial ramdisk) configuration. */
-  initrd: string
-  /** Instance kernel version. */
-  kernel: string
-  /** Bootscript Organization ID. */
-  organization: string
-  /** Bootscript Project ID. */
-  project: string
-  /** Provide information if the bootscript is public. */
-  public: boolean
-  /** Bootscript title. */
-  title: string
-  /** Bootscript architecture. */
   architecture: Arch
-  /** Zone in which the bootscript is located. */
+  bootcmdargs: string
+  default: boolean
+  dtb: string
+  id: string
+  initrd: string
+  kernel: string
+  organization: string
+  public: boolean
+  title: string
+  project: string
+  /** Zone to target. If none is passed will use default zone from the config. */
   zone: Zone
 }
 
@@ -448,8 +431,6 @@ export interface Server {
    *   `True`).
    */
   ipv6?: ServerIpv6
-  /** @deprecated Instance bootscript. */
-  bootscript?: Bootscript
   /** Instance boot type. */
   bootType: BootType
   /** Instance volumes. */
@@ -824,8 +805,6 @@ export type CreateImageRequest = {
   rootVolume: string
   /** Architecture of the image. */
   arch: Arch
-  /** @deprecated Default bootscript of the image. */
-  defaultBootscript?: string
   /** Additional volumes of the image. */
   extraVolumes?: Record<string, VolumeTemplate>
   /**
@@ -1045,8 +1024,6 @@ export type CreateServerRequest = {
   publicIps?: string[]
   /** Boot type to use. */
   bootType?: BootType
-  /** @deprecated Bootscript ID to use when `boot_type` is set to `bootscript`. */
-  bootscript?: string
   /**
    * @deprecated Instance Organization ID.
    *
@@ -1256,16 +1233,6 @@ export interface ExportSnapshotResponse {
   task?: Task
 }
 
-export type GetBootscriptRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  bootscriptId: string
-}
-
-export interface GetBootscriptResponse {
-  bootscript?: Bootscript
-}
-
 export type GetDashboardRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
@@ -1406,24 +1373,6 @@ export type GetVolumeRequest = {
 
 export interface GetVolumeResponse {
   volume?: Volume
-}
-
-export type ListBootscriptsRequest = {
-  /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
-  arch?: string
-  title?: string
-  default?: boolean
-  public?: boolean
-  perPage?: number
-  page?: number
-}
-
-export interface ListBootscriptsResponse {
-  /** Total number of bootscripts. */
-  totalCount: number
-  /** List of bootscripts. */
-  bootscripts: Bootscript[]
 }
 
 export type ListDefaultSecurityGroupRulesRequest = {
@@ -2045,8 +1994,6 @@ export type UpdateServerRequest = {
   /** Tags of the Instance. */
   tags?: string[]
   volumes?: Record<string, VolumeServerTemplate>
-  /** @deprecated */
-  bootscript?: string
   dynamicIpRequired?: boolean
   /**
    * @deprecated True to configure the instance so it uses the new routed IP

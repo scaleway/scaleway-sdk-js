@@ -4,7 +4,6 @@ import type { Zone } from '../../../bridge'
 import type {
   Arch,
   BootType,
-  Bootscript,
   Image,
   PlacementGroup,
   PrivateNIC,
@@ -156,8 +155,6 @@ export type SetServerRequest = {
    *   `True`).
    */
   ipv6?: ServerIpv6
-  /** @deprecated Instance bootscript. */
-  bootscript?: Bootscript
   /** Instance boot type. */
   bootType?: BootType
   /** Instance volumes. */
