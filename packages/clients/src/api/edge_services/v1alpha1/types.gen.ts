@@ -24,6 +24,12 @@ export type ListPipelinesRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
+export type ListPipelinesWithStagesRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'name_asc'
+  | 'name_desc'
+
 export type ListPurgeRequestsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -283,8 +289,16 @@ export interface PlanDetails {
   planName: PlanName
   /** Amount of egress data from cache included in subscription plan. */
   packageGb: number
-  /** Number of pipeline included in subscription plan. */
+  /** Number of pipelines included in subscription plan. */
   pipelineLimit: number
+}
+
+export interface PipelineStages {
+  pipeline?: Pipeline
+  dnsStages: DNSStage[]
+  tlsStages: TLSStage[]
+  cacheStages: CacheStage[]
+  backendStages: BackendStage[]
 }
 
 export interface PurgeRequest {
@@ -509,23 +523,39 @@ export type GetBillingRequest = {
 }
 
 export interface GetBillingResponse {
-  /** Information on the current edge-service subscription plan. */
+  /**
+   * Information on the currently-selected, active Edge Services subscription
+   * plan.
+   */
   currentPlan?: PlanDetails
   /** Price of the current subscription plan. */
   planCost?: Money
-  /** Total number of pipeline currently configured. */
+  /** Total number of pipelines currently configured. */
   pipelineNumber: number
-  /** Cost to date of the pipelines not included in the plans. */
+  /**
+   * Cost to date (this month) of pipelines not included in the subscription
+   * plan.
+   */
   extraPipelinesCost?: Money
-  /** Total amount of data egressed from cache in current subscription plan. */
+  /**
+   * Total amount of data egressed from the cache (this month), included in the
+   * active subscription plan.
+   */
   currentPlanCacheUsage: number
-  /** Total amount of data egressed from cache not included in the plans. */
+  /**
+   * Total amount of data egressed from cache (this month), not included in the
+   * active subscription plan.
+   */
   extraCacheUsage: number
-  /** Cost to date of the data egressed from cache not included in the plans. */
+  /**
+   * Cost to date (this month) of the data egressed from the cache that is not
+   * included in the active subscription plan.
+   */
   extraCacheCost?: Money
   /**
-   * Total cost to date of edge-service product for the month including current
-   * plan, previous plans, extra pipelines and extra egress cache data.
+   * Total cost to date (this month) of all Edge Services resources including
+   * active subscription plan, previously active plans, extra pipelines and
+   * extra egress cache data.
    */
   totalCost?: Money
 }
@@ -690,6 +720,20 @@ export interface ListPipelinesResponse {
   /** Paginated list of pipelines. */
   pipelines: Pipeline[]
   /** Count of all pipelines matching the requested criteria. */
+  totalCount: number
+}
+
+export type ListPipelinesWithStagesRequest = {
+  orderBy?: ListPipelinesWithStagesRequestOrderBy
+  page?: number
+  pageSize?: number
+  name?: string
+  organizationId?: string
+  projectId?: string
+}
+
+export interface ListPipelinesWithStagesResponse {
+  pipelines: PipelineStages[]
   totalCount: number
 }
 
