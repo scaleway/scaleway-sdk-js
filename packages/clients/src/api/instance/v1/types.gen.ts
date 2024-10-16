@@ -1010,7 +1010,7 @@ export type CreateServerRequest = {
   /** Define the Instance commercial type (i.e. GP1-S). */
   commercialType: string
   /** Instance image ID or label. */
-  image: string
+  image?: string
   /** Volumes attached to the server. */
   volumes?: Record<string, VolumeServerTemplate>
   /**
