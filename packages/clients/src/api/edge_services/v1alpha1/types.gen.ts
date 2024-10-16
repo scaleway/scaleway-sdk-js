@@ -24,6 +24,12 @@ export type ListPipelinesRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
+export type ListPipelinesWithStagesRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'name_asc'
+  | 'name_desc'
+
 export type ListPurgeRequestsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -285,6 +291,14 @@ export interface PlanDetails {
   packageGb: number
   /** Number of pipelines included in subscription plan. */
   pipelineLimit: number
+}
+
+export interface PipelineStages {
+  pipeline?: Pipeline
+  dnsStages: DNSStage[]
+  tlsStages: TLSStage[]
+  cacheStages: CacheStage[]
+  backendStages: BackendStage[]
 }
 
 export interface PurgeRequest {
@@ -706,6 +720,20 @@ export interface ListPipelinesResponse {
   /** Paginated list of pipelines. */
   pipelines: Pipeline[]
   /** Count of all pipelines matching the requested criteria. */
+  totalCount: number
+}
+
+export type ListPipelinesWithStagesRequest = {
+  orderBy?: ListPipelinesWithStagesRequestOrderBy
+  page?: number
+  pageSize?: number
+  name?: string
+  organizationId?: string
+  projectId?: string
+}
+
+export interface ListPipelinesWithStagesResponse {
+  pipelines: PipelineStages[]
   totalCount: number
 }
 

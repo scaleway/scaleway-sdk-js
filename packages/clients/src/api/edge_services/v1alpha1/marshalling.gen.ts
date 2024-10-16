@@ -30,11 +30,13 @@ import type {
   ListCacheStagesResponse,
   ListDNSStagesResponse,
   ListPipelinesResponse,
+  ListPipelinesWithStagesResponse,
   ListPlansResponse,
   ListPurgeRequestsResponse,
   ListTLSStagesResponse,
   Pipeline,
   PipelineError,
+  PipelineStages,
   Plan,
   PlanDetails,
   PurgeRequest,
@@ -229,6 +231,25 @@ export const unmarshalTLSStage = (data: unknown): TLSStage => {
   } as TLSStage
 }
 
+export const unmarshalPipelineStages = (data: unknown): PipelineStages => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PipelineStages' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    backendStages: unmarshalArrayOfObject(
+      data.backend_stages,
+      unmarshalBackendStage,
+    ),
+    cacheStages: unmarshalArrayOfObject(data.cache_stages, unmarshalCacheStage),
+    dnsStages: unmarshalArrayOfObject(data.dns_stages, unmarshalDNSStage),
+    pipeline: data.pipeline ? unmarshalPipeline(data.pipeline) : undefined,
+    tlsStages: unmarshalArrayOfObject(data.tls_stages, unmarshalTLSStage),
+  } as PipelineStages
+}
+
 export const unmarshalPurgeRequest = (data: unknown): PurgeRequest => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -389,6 +410,21 @@ export const unmarshalListPipelinesResponse = (
     pipelines: unmarshalArrayOfObject(data.pipelines, unmarshalPipeline),
     totalCount: data.total_count,
   } as ListPipelinesResponse
+}
+
+export const unmarshalListPipelinesWithStagesResponse = (
+  data: unknown,
+): ListPipelinesWithStagesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPipelinesWithStagesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    pipelines: unmarshalArrayOfObject(data.pipelines, unmarshalPipelineStages),
+    totalCount: data.total_count,
+  } as ListPipelinesWithStagesResponse
 }
 
 export const unmarshalListPlansResponse = (
