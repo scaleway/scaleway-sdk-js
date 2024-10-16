@@ -29,6 +29,7 @@ import * as Lb from './lb/index.gen'
 import * as LlmInference from './llm_inference/index.gen'
 import * as Marketplace from './marketplace/index.gen'
 import * as Mnq from './mnq/index.gen'
+import * as Mongodb from './mongodb/index.gen'
 import * as Qaas from './qaas/index.gen'
 import * as Rdb from './rdb/index.gen'
 import * as Redis from './redis/index.gen'
@@ -69,6 +70,7 @@ export {
   LlmInference,
   Marketplace,
   Mnq,
+  Mongodb,
   Qaas,
   Rdb,
   Redis,
