@@ -1010,7 +1010,7 @@ export type CreateServerRequest = {
   /** Define the Instance commercial type (i.e. GP1-S). */
   commercialType: string
   /** Instance image ID or label. */
-  image: string
+  image?: string
   /** Volumes attached to the server. */
   volumes?: Record<string, VolumeServerTemplate>
   /**
@@ -1763,6 +1763,11 @@ export type ServerActionRequest = {
    * should only be specified when performing a backup action.
    */
   volumes?: Record<string, ServerActionRequestVolumeBackupTemplate>
+  /**
+   * Disable IPv6 on the Instance while performing migration to routed IPs. This
+   * field should only be specified when performing a enable_routed_ip action.
+   */
+  disableIpv6?: boolean
 }
 
 export interface ServerActionResponse {
