@@ -37,7 +37,6 @@ import type {
   DetachServerVolumeResponse,
   ExportSnapshotRequest,
   ExportSnapshotResponse,
-  GetBootscriptResponse,
   GetDashboardResponse,
   GetImageResponse,
   GetIpResponse,
@@ -53,7 +52,6 @@ import type {
   GetVolumeResponse,
   Image,
   Ip,
-  ListBootscriptsResponse,
   ListImagesResponse,
   ListIpsResponse,
   ListPlacementGroupsResponse,
@@ -399,9 +397,6 @@ const unmarshalServer = (data: unknown): Server => {
     allowedActions: data.allowed_actions,
     arch: data.arch,
     bootType: data.boot_type,
-    bootscript: data.bootscript
-      ? unmarshalBootscript(data.bootscript)
-      : undefined,
     commercialType: data.commercial_type,
     creationDate: unmarshalDate(data.creation_date),
     dynamicIpRequired: data.dynamic_ip_required,
@@ -746,22 +741,6 @@ export const unmarshalExportSnapshotResponse = (
   } as ExportSnapshotResponse
 }
 
-export const unmarshalGetBootscriptResponse = (
-  data: unknown,
-): GetBootscriptResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GetBootscriptResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    bootscript: data.bootscript
-      ? unmarshalBootscript(data.bootscript)
-      : undefined,
-  } as GetBootscriptResponse
-}
-
 const unmarshalDashboard = (data: unknown): Dashboard => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -991,21 +970,6 @@ export const unmarshalGetVolumeResponse = (
   return {
     volume: data.volume ? unmarshalVolume(data.volume) : undefined,
   } as GetVolumeResponse
-}
-
-export const unmarshalListBootscriptsResponse = (
-  data: unknown,
-): ListBootscriptsResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListBootscriptsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    bootscripts: unmarshalArrayOfObject(data.bootscripts, unmarshalBootscript),
-    totalCount: data.total_count,
-  } as ListBootscriptsResponse
 }
 
 export const unmarshalListImagesResponse = (
@@ -1679,7 +1643,6 @@ export const marshalCreateImageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   arch: request.arch,
-  default_bootscript: request.defaultBootscript,
   extra_volumes:
     request.extraVolumes !== undefined
       ? Object.entries(request.extraVolumes).reduce(
@@ -1824,7 +1787,6 @@ export const marshalCreateServerRequest = (
 ): Record<string, unknown> => ({
   admin_password_encryption_ssh_key_id: request.adminPasswordEncryptionSshKeyId,
   boot_type: request.bootType,
-  bootscript: request.bootscript,
   commercial_type: request.commercialType,
   dynamic_ip_required: request.dynamicIpRequired,
   enable_ipv6: request.enableIpv6,
@@ -2258,10 +2220,6 @@ export const marshalSetServerRequest = (
     request.allowedActions !== undefined ? request.allowedActions : undefined,
   arch: request.arch,
   boot_type: request.bootType,
-  bootscript:
-    request.bootscript !== undefined
-      ? marshalBootscript(request.bootscript, defaults)
-      : undefined,
   commercial_type: request.commercialType,
   creation_date: request.creationDate,
   dynamic_ip_required: request.dynamicIpRequired,
@@ -2456,7 +2414,6 @@ export const marshalUpdateServerRequest = (
 ): Record<string, unknown> => ({
   admin_password_encryption_ssh_key_id: request.adminPasswordEncryptionSshKeyId,
   boot_type: request.bootType,
-  bootscript: request.bootscript,
   commercial_type: request.commercialType,
   dynamic_ip_required: request.dynamicIpRequired,
   enable_ipv6: request.enableIpv6,
