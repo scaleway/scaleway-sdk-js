@@ -257,7 +257,9 @@ const unmarshalPrivateNetworkOption = (data: unknown): PrivateNetworkOption => {
     )
   }
 
-  return {} as PrivateNetworkOption
+  return {
+    bandwidthInBps: data.bandwidth_in_bps,
+  } as PrivateNetworkOption
 }
 
 const unmarshalPublicBandwidthOption = (
