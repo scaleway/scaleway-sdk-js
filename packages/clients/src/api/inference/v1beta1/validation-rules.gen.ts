@@ -13,7 +13,7 @@ export const CreateDeploymentRequest = {
   modelName: {
     maxLength: 255,
     minLength: 0,
-    pattern: /^[\w-_]+\/[\w-_.]+(:[\w]+)?$/,
+    pattern: /^[A-Za-z0-9_-]+\/[A-Za-z0-9_.-]+(:\w+)?$/,
   },
   name: {
     maxLength: 255,
