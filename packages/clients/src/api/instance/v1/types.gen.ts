@@ -1763,6 +1763,11 @@ export type ServerActionRequest = {
    * should only be specified when performing a backup action.
    */
   volumes?: Record<string, ServerActionRequestVolumeBackupTemplate>
+  /**
+   * Disable IPv6 on the Instance while performing migration to routed IPs. This
+   * field should only be specified when performing a enable_routed_ip action.
+   */
+  disableIpv6?: boolean
 }
 
 export interface ServerActionResponse {
