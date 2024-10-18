@@ -148,7 +148,9 @@ export interface LicenseOption {
   osId: string
 }
 
-export interface PrivateNetworkOption {}
+export interface PrivateNetworkOption {
+  bandwidthInBps: number
+}
 
 export interface PublicBandwidthOption {
   bandwidthInBps: number
@@ -233,7 +235,7 @@ export interface OfferOptionOffer {
    */
   publicBandwidth?: PublicBandwidthOption
   /**
-   * Private_network option.
+   * Private_network option, contains the bandwidth_in_bps.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth',
    * 'privateNetwork', 'remoteAccess', 'certification' could be set.
@@ -335,7 +337,7 @@ export interface ServerOption {
    */
   publicBandwidth?: PublicBandwidthOption
   /**
-   * Private_network option.
+   * Private_network option, contains the bandwidth_in_bps.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth',
    * 'privateNetwork', 'remoteAccess', 'certification' could be set.
@@ -492,7 +494,7 @@ export interface Option {
    */
   publicBandwidth?: PublicBandwidthOption
   /**
-   * Private_network option.
+   * Private_network option, contains the bandwidth_in_bps.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth',
    * 'privateNetwork', 'remoteAccess', 'certification' could be set.
