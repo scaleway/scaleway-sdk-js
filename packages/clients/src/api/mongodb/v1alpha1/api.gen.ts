@@ -8,7 +8,10 @@ import {
   waitForResource,
 } from '../../../bridge'
 import type { Region, WaitForOptions } from '../../../bridge'
-import { INSTANCE_TRANSIENT_STATUSES } from './content.gen'
+import {
+  INSTANCE_TRANSIENT_STATUSES,
+  SNAPSHOT_TRANSIENT_STATUSES,
+} from './content.gen'
 import {
   marshalCreateInstanceRequest,
   marshalCreateSnapshotRequest,
@@ -33,6 +36,7 @@ import type {
   DeleteSnapshotRequest,
   GetInstanceCertificateRequest,
   GetInstanceRequest,
+  GetSnapshotRequest,
   Instance,
   ListInstancesRequest,
   ListInstancesResponse,
@@ -318,6 +322,43 @@ export class API extends ParentAPI {
         path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/snapshots`,
       },
       unmarshalSnapshot,
+    )
+
+  /**
+   * Get a Database Instance snapshot. Retrieve information about a given
+   * snapshot of a Database Instance. You must specify, in the endpoint, the
+   * `snapshot_id` parameter of the snapshot you want to retrieve.
+   *
+   * @param request - The request {@link GetSnapshotRequest}
+   * @returns A Promise of Snapshot
+   */
+  getSnapshot = (request: Readonly<GetSnapshotRequest>) =>
+    this.client.fetch<Snapshot>(
+      {
+        method: 'GET',
+        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+      },
+      unmarshalSnapshot,
+    )
+
+  /**
+   * Waits for {@link Snapshot} to be in a final state.
+   *
+   * @param request - The request {@link GetSnapshotRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Snapshot
+   */
+  waitForSnapshot = (
+    request: Readonly<GetSnapshotRequest>,
+    options?: Readonly<WaitForOptions<Snapshot>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res =>
+          Promise.resolve(!SNAPSHOT_TRANSIENT_STATUSES.includes(res.status))),
+      this.getSnapshot,
+      request,
+      options,
     )
 
   updateSnapshot = (request: Readonly<UpdateSnapshotRequest>) =>

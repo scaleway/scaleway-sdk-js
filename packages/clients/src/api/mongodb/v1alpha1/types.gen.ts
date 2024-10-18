@@ -340,6 +340,16 @@ export type GetInstanceRequest = {
   instanceId: string
 }
 
+export type GetSnapshotRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the snapshot. */
+  snapshotId: string
+}
+
 export type ListInstancesRequest = {
   /**
    * Region to target. If none is passed will use default region from the
