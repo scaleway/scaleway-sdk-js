@@ -16,6 +16,7 @@ export type {
   EndpointSpecPublicDetails,
   GetInstanceCertificateRequest,
   GetInstanceRequest,
+  GetSnapshotRequest,
   Instance,
   InstanceSetting,
   InstanceStatus,
