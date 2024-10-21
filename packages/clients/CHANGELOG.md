@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.51.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.50.0...@scaleway/sdk@2.51.0) (2024-10-21)
+
+### Features
+
+- **apple_silicon:** add server delivery status ([#1493](https://github.com/scaleway/scaleway-sdk-js/issues/1493)) ([279b60a](https://github.com/scaleway/scaleway-sdk-js/commit/279b60a570219014c2e6fcc5e9a8703d7cf8b3c5))
+- **edge_services:** add ListPipelinesWithStages ([#1495](https://github.com/scaleway/scaleway-sdk-js/issues/1495)) ([c5aab4c](https://github.com/scaleway/scaleway-sdk-js/commit/c5aab4c6f5390ffb13ce93f0b312c9dbed3224ac))
+- **iam:** add visible and deletable on product api keys ([#1483](https://github.com/scaleway/scaleway-sdk-js/issues/1483)) ([e06a7a9](https://github.com/scaleway/scaleway-sdk-js/commit/e06a7a9c705b0d353330e68075ec574c37262d0a))
+- **instance:** add option to disable IPv6 during the migration to routed IPs ([#1507](https://github.com/scaleway/scaleway-sdk-js/issues/1507)) ([cfbfb21](https://github.com/scaleway/scaleway-sdk-js/commit/cfbfb21b0cb78f51484f4ce4f6aa05f9147c3f90))
+- **instance:** set CreateServerRequest.image as optional ([#1506](https://github.com/scaleway/scaleway-sdk-js/issues/1506)) ([93d949e](https://github.com/scaleway/scaleway-sdk-js/commit/93d949e7b8f3252eb51001e23ccc08c3ce8afe03))
+- **mongodb:** add Get Snapshot Endpoint ([#1508](https://github.com/scaleway/scaleway-sdk-js/issues/1508)) ([307c67f](https://github.com/scaleway/scaleway-sdk-js/commit/307c67f85e1b4ad48d3a8e40b9d36565d2a3df04))
+- **mongodb:** add v1alpha1 ([#1505](https://github.com/scaleway/scaleway-sdk-js/issues/1505)) ([7d0a7fb](https://github.com/scaleway/scaleway-sdk-js/commit/7d0a7fbdfeae59e43392fa2f0c5f09d9a1069c76))
+- **webhosting:** add addon domain quota warning ([#1512](https://github.com/scaleway/scaleway-sdk-js/issues/1512)) ([1578eca](https://github.com/scaleway/scaleway-sdk-js/commit/1578ecac458e7adc0ae76d1ac61226624bd8ea83))
+
+### Bug Fixes
+
+- **baremetal:** add bandwidth_in_bps field for PrivateNetworkOption ([#1511](https://github.com/scaleway/scaleway-sdk-js/issues/1511)) ([fadd4b5](https://github.com/scaleway/scaleway-sdk-js/commit/fadd4b5545853e7a687a7030d7c938831e046771))
+- **instance:** remove deprecated bootscript ([#1484](https://github.com/scaleway/scaleway-sdk-js/issues/1484)) ([62c8390](https://github.com/scaleway/scaleway-sdk-js/commit/62c8390fb3ec8780d7b171b24c0fbd67de1c8c01))
+- **instance:** remove deprecated bootscript documentation ([#1485](https://github.com/scaleway/scaleway-sdk-js/issues/1485)) ([d77bf41](https://github.com/scaleway/scaleway-sdk-js/commit/d77bf414842b82322a669609d461a862a40bad4f))
+- update validation patterns ([#1510](https://github.com/scaleway/scaleway-sdk-js/issues/1510)) ([8d23c3a](https://github.com/scaleway/scaleway-sdk-js/commit/8d23c3a62fc67eaebe8bb7b5379eb339441a223e))
+
 ## [2.50.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.49.1...@scaleway/sdk@2.50.0) (2024-10-14)
 
 ### Features
