@@ -8,6 +8,7 @@ export type {
   ContainerPrivacy,
   ContainerProtocol,
   ContainerSandbox,
+  ContainerScalingOption,
   ContainerStatus,
   CreateContainerRequest,
   CreateCronRequest,
