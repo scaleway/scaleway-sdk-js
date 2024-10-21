@@ -25,6 +25,7 @@ import {
   marshalUpdateGroupRequest,
   marshalUpdatePolicyRequest,
   marshalUpdateSSHKeyRequest,
+  marshalUpdateUserPasswordRequest,
   marshalUpdateUserRequest,
   unmarshalAPIKey,
   unmarshalApplication,
@@ -116,6 +117,7 @@ import type {
   UpdateGroupRequest,
   UpdatePolicyRequest,
   UpdateSSHKeyRequest,
+  UpdateUserPasswordRequest,
   UpdateUserRequest,
   User,
 } from './types.gen'
@@ -339,6 +341,19 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users`,
+      },
+      unmarshalUser,
+    )
+
+  updateUserPassword = (request: Readonly<UpdateUserPasswordRequest>) =>
+    this.client.fetch<User>(
+      {
+        body: JSON.stringify(
+          marshalUpdateUserPasswordRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/update-password`,
       },
       unmarshalUser,
     )
