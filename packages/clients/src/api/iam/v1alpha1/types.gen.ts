@@ -89,6 +89,25 @@ export type UserStatus = 'unknown_status' | 'invitation_pending' | 'activated'
 
 export type UserType = 'unknown_type' | 'guest' | 'owner' | 'member'
 
+export interface JWT {
+  /** JWT ID. */
+  jti: string
+  /** ID of the user who issued the JWT. */
+  issuerId: string
+  /** ID of the user targeted by the JWT. */
+  audienceId: string
+  /** Creation date of the JWT. */
+  createdAt?: Date
+  /** Last update date of the JWT. */
+  updatedAt?: Date
+  /** Expiration date of the JWT. */
+  expiresAt?: Date
+  /** IP address used during the creation of the JWT. */
+  ip: string
+  /** User-agent used during the creation of the JWT. */
+  userAgent: string
+}
+
 export interface RuleSpecs {
   /** Names of permission sets bound to the rule. */
   permissionSetNames?: string[]
@@ -119,25 +138,6 @@ export interface CreateUserRequestMember {
   username: string
   /** The member's password. */
   password: string
-}
-
-export interface JWT {
-  /** JWT ID. */
-  jti: string
-  /** ID of the user who issued the JWT. */
-  issuerId: string
-  /** ID of the user targeted by the JWT. */
-  audienceId: string
-  /** Creation date of the JWT. */
-  createdAt?: Date
-  /** Last update date of the JWT. */
-  updatedAt?: Date
-  /** Expiration date of the JWT. */
-  expiresAt?: Date
-  /** IP address used during the creation of the JWT. */
-  ip: string
-  /** User-agent used during the creation of the JWT. */
-  userAgent: string
 }
 
 export interface APIKey {
@@ -1068,6 +1068,12 @@ export type UpdateSSHKeyRequest = {
   name?: string
   /** Enable or disable the SSH key. */
   disabled?: boolean
+}
+
+export type UpdateUserPasswordRequest = {
+  userId: string
+  password: string
+  sendEmail: boolean
 }
 
 export type UpdateUserRequest = {
