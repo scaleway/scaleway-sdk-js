@@ -10,6 +10,7 @@ import {
 import type { DefaultValues } from '../../../bridge'
 import type {
   Container,
+  ContainerScalingOption,
   CreateContainerRequest,
   CreateCronRequest,
   CreateDomainRequest,
@@ -41,6 +42,20 @@ import type {
   UpdateTriggerRequest,
   UpdateTriggerRequestSqsClientConfig,
 } from './types.gen'
+
+const unmarshalContainerScalingOption = (
+  data: unknown,
+): ContainerScalingOption => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContainerScalingOption' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    concurrentRequestsThreshold: data.concurrent_requests_threshold,
+  } as ContainerScalingOption
+}
 
 const unmarshalSecretHashedValue = (data: unknown): SecretHashedValue => {
   if (!isJSONObject(data)) {
@@ -83,6 +98,9 @@ export const unmarshalContainer = (data: unknown): Container => {
     region: data.region,
     registryImage: data.registry_image,
     sandbox: data.sandbox,
+    scalingOption: data.scaling_option
+      ? unmarshalContainerScalingOption(data.scaling_option)
+      : undefined,
     secretEnvironmentVariables: unmarshalArrayOfObject(
       data.secret_environment_variables,
       unmarshalSecretHashedValue,
@@ -340,6 +358,18 @@ export const unmarshalListTriggersResponse = (
   } as ListTriggersResponse
 }
 
+const marshalContainerScalingOption = (
+  request: ContainerScalingOption,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ...resolveOneOf([
+    {
+      param: 'concurrent_requests_threshold',
+      value: request.concurrentRequestsThreshold,
+    },
+  ]),
+})
+
 const marshalSecret = (
   request: Secret,
   defaults: DefaultValues,
@@ -368,6 +398,10 @@ export const marshalCreateContainerRequest = (
   protocol: request.protocol,
   registry_image: request.registryImage,
   sandbox: request.sandbox,
+  scaling_option:
+    request.scalingOption !== undefined
+      ? marshalContainerScalingOption(request.scalingOption, defaults)
+      : undefined,
   secret_environment_variables:
     request.secretEnvironmentVariables !== undefined
       ? request.secretEnvironmentVariables.map(elt =>
@@ -512,6 +546,10 @@ export const marshalUpdateContainerRequest = (
   redeploy: request.redeploy,
   registry_image: request.registryImage,
   sandbox: request.sandbox,
+  scaling_option:
+    request.scalingOption !== undefined
+      ? marshalContainerScalingOption(request.scalingOption, defaults)
+      : undefined,
   secret_environment_variables:
     request.secretEnvironmentVariables !== undefined
       ? request.secretEnvironmentVariables.map(elt =>
