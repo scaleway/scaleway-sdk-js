@@ -1,5 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+import randomName from '@scaleway/random-name'
 import {
   isJSONObject,
   resolveOneOf,
@@ -392,7 +393,7 @@ export const marshalCreateInstanceRequest = (
     request.endpoints !== undefined
       ? request.endpoints.map(elt => marshalEndpointSpec(elt, defaults))
       : undefined,
-  name: request.name,
+  name: request.name || randomName('mgdb'),
   node_number: request.nodeNumber,
   node_type: request.nodeType,
   password: request.password,
