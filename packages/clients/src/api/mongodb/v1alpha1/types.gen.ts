@@ -267,7 +267,7 @@ export type CreateInstanceRequest = {
   /** The Project ID on which the Database Instance will be created. */
   projectId?: string
   /** Name of the Database Instance. */
-  name: string
+  name?: string
   /** Version of the MongoDB™ engine. */
   version: string
   /** Tags to apply to the Database Instance. */
