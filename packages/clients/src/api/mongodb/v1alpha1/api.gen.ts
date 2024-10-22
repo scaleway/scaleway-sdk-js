@@ -361,6 +361,14 @@ export class API extends ParentAPI {
       options,
     )
 
+  /**
+   * Update a Database Instance snapshot. Update the parameters of a snapshot of
+   * a Database Instance. You can update the `name` and `expires_at`
+   * parameters.
+   *
+   * @param request - The request {@link UpdateSnapshotRequest}
+   * @returns A Promise of Snapshot
+   */
   updateSnapshot = (request: Readonly<UpdateSnapshotRequest>) =>
     this.client.fetch<Snapshot>(
       {
