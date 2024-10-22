@@ -55,7 +55,6 @@ export type {
   ListVersionsResponse,
   MaintenanceWindow,
   MaintenanceWindowDayOfTheWeek,
-  MigrateClusterToRoutedIPsRequest,
   MigrateClusterToSBSCSIRequest,
   Node,
   NodeMetadata,
