@@ -30,22 +30,18 @@ export const CreateClusterRequestAutoscalerConfig = {
 export const CreateClusterRequestOpenIDConnectConfig = {
   clientId: {
     maxLength: 255,
-    minLength: 1,
   },
   groupsPrefix: {
     maxLength: 100,
-    minLength: 1,
   },
   issuerUrl: {
     maxLength: 255,
   },
   usernameClaim: {
     maxLength: 100,
-    minLength: 1,
   },
   usernamePrefix: {
     maxLength: 100,
-    minLength: 1,
   },
 }
 
@@ -147,22 +143,18 @@ export const UpdateClusterRequestAutoscalerConfig = {
 export const UpdateClusterRequestOpenIDConnectConfig = {
   clientId: {
     maxLength: 255,
-    minLength: 1,
   },
   groupsPrefix: {
     maxLength: 100,
-    minLength: 1,
   },
   issuerUrl: {
     maxLength: 255,
   },
   usernameClaim: {
     maxLength: 100,
-    minLength: 1,
   },
   usernamePrefix: {
     maxLength: 100,
-    minLength: 1,
   },
 }
 
