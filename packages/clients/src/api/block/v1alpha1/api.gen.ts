@@ -62,9 +62,12 @@ export class API extends ParentAPI {
   public static readonly LOCALITIES: Zone[] = [
     'fr-par-1',
     'fr-par-2',
+    'fr-par-3',
     'nl-ams-1',
     'nl-ams-2',
     'nl-ams-3',
+    'pl-waw-1',
+    'pl-waw-2',
     'pl-waw-3',
   ]
 
