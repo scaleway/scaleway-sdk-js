@@ -191,6 +191,13 @@ export interface Disk {
   type: string
 }
 
+export interface GPU {
+  /** Name of the GPU. */
+  name: string
+  /** Capacity of the vram in bytes. */
+  vram: number
+}
+
 export interface Memory {
   /** Capacity of the memory in bytes. */
   capacity: number
@@ -470,6 +477,8 @@ export interface Offer {
   sharedBandwidth: boolean
   /** Array of tags attached to the offer. */
   tags: string[]
+  /** GPU specifications of the offer. */
+  gpus: GPU[]
 }
 
 export interface Option {
