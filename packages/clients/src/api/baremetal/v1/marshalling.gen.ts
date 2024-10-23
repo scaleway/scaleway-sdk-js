@@ -17,6 +17,7 @@ import type {
   CreateServerRequest,
   CreateServerRequestInstall,
   Disk,
+  GPU,
   GetServerMetricsResponse,
   IP,
   InstallServerRequest,
@@ -315,6 +316,19 @@ const unmarshalDisk = (data: unknown): Disk => {
   } as Disk
 }
 
+const unmarshalGPU = (data: unknown): GPU => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GPU' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+    vram: data.vram,
+  } as GPU
+}
+
 const unmarshalMemory = (data: unknown): Memory => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -402,6 +416,7 @@ export const unmarshalOffer = (data: unknown): Offer => {
     disks: unmarshalArrayOfObject(data.disks, unmarshalDisk),
     enable: data.enable,
     fee: data.fee ? unmarshalMoney(data.fee) : undefined,
+    gpus: unmarshalArrayOfObject(data.gpus, unmarshalGPU),
     id: data.id,
     incompatibleOsIds: data.incompatible_os_ids,
     maxBandwidth: data.max_bandwidth,
