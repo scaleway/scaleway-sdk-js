@@ -16,6 +16,7 @@ import {
   unmarshalCreateJobDefinitionSecretsResponse,
   unmarshalJobDefinition,
   unmarshalJobRun,
+  unmarshalJobsLimits,
   unmarshalListJobDefinitionSecretsResponse,
   unmarshalListJobDefinitionsResponse,
   unmarshalListJobRunsResponse,
@@ -32,8 +33,10 @@ import type {
   GetJobDefinitionRequest,
   GetJobDefinitionSecretRequest,
   GetJobRunRequest,
+  GetJobsLimitsRequest,
   JobDefinition,
   JobRun,
+  JobsLimits,
   ListJobDefinitionSecretsRequest,
   ListJobDefinitionSecretsResponse,
   ListJobDefinitionsRequest,
@@ -320,5 +323,20 @@ export class API extends ParentAPI {
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/jobs-resources`,
       },
       unmarshalListJobsResourcesResponse,
+    )
+
+  /**
+   * Get jobs limits for the console.
+   *
+   * @param request - The request {@link GetJobsLimitsRequest}
+   * @returns A Promise of JobsLimits
+   */
+  getJobsLimits = (request: Readonly<GetJobsLimitsRequest> = {}) =>
+    this.client.fetch<JobsLimits>(
+      {
+        method: 'GET',
+        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/jobs-limits`,
+      },
+      unmarshalJobsLimits,
     )
 }

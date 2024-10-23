@@ -17,6 +17,7 @@ import type {
   CronSchedule,
   JobDefinition,
   JobRun,
+  JobsLimits,
   ListJobDefinitionSecretsResponse,
   ListJobDefinitionsResponse,
   ListJobRunsResponse,
@@ -152,6 +153,18 @@ export const unmarshalCreateJobDefinitionSecretsResponse = (
   return {
     secrets: unmarshalArrayOfObject(data.secrets, unmarshalSecret),
   } as CreateJobDefinitionSecretsResponse
+}
+
+export const unmarshalJobsLimits = (data: unknown): JobsLimits => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'JobsLimits' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    secretsPerJobDefinition: data.secrets_per_job_definition,
+  } as JobsLimits
 }
 
 export const unmarshalListJobDefinitionSecretsResponse = (
