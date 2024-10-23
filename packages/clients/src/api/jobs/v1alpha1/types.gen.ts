@@ -214,6 +214,18 @@ export type GetJobRunRequest = {
   jobRunId: string
 }
 
+export type GetJobsLimitsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+}
+
+export interface JobsLimits {
+  secretsPerJobDefinition: number
+}
+
 export type ListJobDefinitionSecretsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
