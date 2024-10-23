@@ -12,6 +12,7 @@ export type {
   DeleteOptionServerRequest,
   DeleteServerRequest,
   Disk,
+  GPU,
   GetBMCAccessRequest,
   GetDefaultPartitioningSchemaRequest,
   GetOSRequest,
