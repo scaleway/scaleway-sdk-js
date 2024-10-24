@@ -231,6 +231,8 @@ export interface Pipeline {
   errors: PipelineError[]
   /** Project ID of the pipeline. */
   projectId: string
+  /** Organization ID of the pipeline. */
+  organizationId: string
   /** Date the pipeline was created. */
   createdAt?: Date
   /** Date the pipeline was last updated. */

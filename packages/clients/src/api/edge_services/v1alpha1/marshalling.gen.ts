@@ -191,6 +191,7 @@ export const unmarshalPipeline = (data: unknown): Pipeline => {
     errors: unmarshalArrayOfObject(data.errors, unmarshalPipelineError),
     id: data.id,
     name: data.name,
+    organizationId: data.organization_id,
     projectId: data.project_id,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
