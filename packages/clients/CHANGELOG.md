@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.52.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.51.0...@scaleway/sdk@2.52.0) (2024-10-24)
+
+### Features
+
+- **baremetal:** add gpu in offer ([#1523](https://github.com/scaleway/scaleway-sdk-js/issues/1523)) ([664c1d2](https://github.com/scaleway/scaleway-sdk-js/commit/664c1d2bb344b14adf2e3e08ca3338d46c27f2c1))
+- **edge_services:** add orga id in pipeline message ([#1528](https://github.com/scaleway/scaleway-sdk-js/issues/1528)) ([785855b](https://github.com/scaleway/scaleway-sdk-js/commit/785855b594d6e3b7f42e96f3d41c499cac54478e))
+- **iam:** add UpdateUserPassword method ([#1514](https://github.com/scaleway/scaleway-sdk-js/issues/1514)) ([f2afda2](https://github.com/scaleway/scaleway-sdk-js/commit/f2afda20a075a491f1120a258891c0738feaeac3))
+- **mongodb:** add support for generated instance name ([#1513](https://github.com/scaleway/scaleway-sdk-js/issues/1513)) ([8ec5042](https://github.com/scaleway/scaleway-sdk-js/commit/8ec50423ea69e1f6441765d22357ea093e26f718))
+- **serverless_jobs:** add method to get jobs limits ([#1527](https://github.com/scaleway/scaleway-sdk-js/issues/1527)) ([4a9227a](https://github.com/scaleway/scaleway-sdk-js/commit/4a9227aec9eb5d9763c1b0070a1aa4ead2751f54))
+
+### Bug Fixes
+
+- **k8s:** empty oidc fields must be allowed ([#1518](https://github.com/scaleway/scaleway-sdk-js/issues/1518)) ([8c7c670](https://github.com/scaleway/scaleway-sdk-js/commit/8c7c670a0e7d4be1dd7eb7f5a067b50dba2dafd0))
+- **mongodb:** add missing UpdateSnapshot endpoint in documentation ([#1522](https://github.com/scaleway/scaleway-sdk-js/issues/1522)) ([8972ecf](https://github.com/scaleway/scaleway-sdk-js/commit/8972ecf87673be59a81f542c5e37bc78058625ae))
+
 ## [2.51.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.50.0...@scaleway/sdk@2.51.0) (2024-10-21)
 
 ### Features
