@@ -62,9 +62,9 @@ const jsonContentHeaders = {
 }
 
 /**
- * Managed Database for MongoDB.
+ * Managed Database for MongoDB®.
  *
- * This API allows you to manage your Managed Databases for MongoDB.
+ * This API allows you to manage your Managed Databases for MongoDB®.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -118,7 +118,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List available MongoDB™ versions.
+   * List available MongoDB® versions.
    *
    * @param request - The request {@link ListVersionsRequest}
    * @returns A Promise of ListVersionsResponse
@@ -157,14 +157,13 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List MongoDB™ Database Instances. List all MongoDB™ Database Instances in
-   * the specified region, for a given Scaleway Project. By default, the
-   * MongoDB™ Database Instances returned in the list are ordered by creation
-   * date in ascending order, though this can be modified via the order_by
-   * field. You can define additional parameters for your query, such as `tags`
-   * and `name`. For the `name` parameter, the value you include will be checked
-   * against the whole name string to see if it includes the string you put in
-   * the parameter.
+   * List MongoDB® Database Instances. List all MongoDB® Database Instances in
+   * the specified region. By default, the MongoDB® Database Instances returned
+   * in the list are ordered by creation date in ascending order, though this
+   * can be modified via the order_by field. You can define additional
+   * parameters for your query, such as `tags` and `name`. For the `name`
+   * parameter, the value you include will be checked against the whole name
+   * string to see if it includes the string you put in the parameter.
    *
    * @param request - The request {@link ListInstancesRequest}
    * @returns A Promise of ListInstancesResponse
@@ -173,8 +172,8 @@ export class API extends ParentAPI {
     enrichForPagination('instances', this.pageOfListInstances, request)
 
   /**
-   * Get a MongoDB™ Database Instance. Retrieve information about a given
-   * MongoDB™ Database Instance, specified by the `region` and `instance_id`
+   * Get a MongoDB® Database Instance. Retrieve information about a given
+   * MongoDB® Database Instance, specified by the `region` and `instance_id`
    * parameters. Its full details, including name, status, IP address and port,
    * are returned in the response object.
    *
@@ -211,7 +210,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a MongoDB™ Database Instance. Create a new MongoDB™ Database
+   * Create a MongoDB® Database Instance. Create a new MongoDB® Database
    * Instance.
    *
    * @param request - The request {@link CreateInstanceRequest}
@@ -231,7 +230,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a MongoDB™ Database Instance. Update the parameters of a MongoDB™
+   * Update a MongoDB® Database Instance. Update the parameters of a MongoDB®
    * Database Instance.
    *
    * @param request - The request {@link UpdateInstanceRequest}
@@ -251,9 +250,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a MongoDB™ Database Instance. Delete a given MongoDB™ Database
+   * Delete a MongoDB® Database Instance. Delete a given MongoDB® Database
    * Instance, specified by the `region` and `instance_id` parameters. Deleting
-   * a MongoDB™ Database Instance is permanent, and cannot be undone. Note that
+   * a MongoDB® Database Instance is permanent, and cannot be undone. Note that
    * upon deletion all your data will be lost.
    *
    * @param request - The request {@link DeleteInstanceRequest}
