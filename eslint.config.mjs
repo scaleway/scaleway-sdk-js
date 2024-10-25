@@ -37,12 +37,14 @@ export default [
       "import/no-default-export": "error",
       "no-await-in-loop": "off",
       "@typescript-eslint/no-namespace": "off",
+      //"@typescript-eslint/consistent-type-definitions": "off",
+
     },
   },
   {
     files: [
-      "./packages/clients/src/scw/**/*.ts",
-      "./packages/clients/src/internal/**/*.ts",
+      "packages/clients/src/scw/**/*.ts",
+      "packages/clients/src/internal/**/*.ts",
     ],
     rules: {
       "@typescript-eslint/consistent-type-definitions": "off",
