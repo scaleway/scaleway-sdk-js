@@ -37,7 +37,6 @@ export default [
       "import/no-default-export": "error",
       "no-await-in-loop": "off",
       "@typescript-eslint/no-namespace": "off",
-      //"@typescript-eslint/consistent-type-definitions": "off",
 
     },
   },
