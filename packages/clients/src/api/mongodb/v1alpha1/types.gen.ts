@@ -52,14 +52,14 @@ export type VolumeType = 'unknown_type' | 'sbs_5k' | 'sbs_15k'
 
 /** Private Network details. */
 export interface EndpointPrivateNetworkDetails {
-  /** UUID of the private network. */
+  /** UUID of the Private Network. */
   privateNetworkId: string
 }
 
 export interface EndpointPublicDetails {}
 
 export interface EndpointSpecPrivateNetworkDetails {
-  /** UUID of the private network. */
+  /** UUID of the Private Network. */
   privateNetworkId: string
 }
 
@@ -105,11 +105,11 @@ export interface Volume {
 export interface NodeTypeVolumeType {
   /** Volume Type. */
   type: VolumeType
-  /** The description of the Volume. */
+  /** The description of the volume. */
   description: string
-  /** Mimimum size required for the Volume. */
+  /** Mimimum size required for the volume. */
   minSize: number
-  /** Maximum size required for the Volume. */
+  /** Maximum size required for the volume. */
   maxSize: number
   /** Minimum increment level for a Block Storage volume size. */
   chunkSize: number
@@ -167,7 +167,7 @@ export interface Instance {
   projectId: string
   /** Status of the Database Instance. */
   status: InstanceStatus
-  /** MongoDB™ engine version of the Database Instance. */
+  /** MongoDB® engine version of the Database Instance. */
   version: string
   /** List of tags applied to the Database Instance. */
   tags: string[]
@@ -188,9 +188,9 @@ export interface Instance {
 }
 
 export interface NodeType {
-  /** Node Type name identifier. */
+  /** Node type name identifier. */
   name: string
-  /** Current stock status for the Node Type. */
+  /** Current stock status for the node type. */
   stockStatus: NodeTypeStock
   /** Current specs of the offer. */
   description: string
@@ -198,13 +198,13 @@ export interface NodeType {
   vcpus: number
   /** Quantity of RAM. */
   memory: number
-  /** Available storage options for the Node Type. */
+  /** Available storage options for the node type. */
   availableVolumeTypes: NodeTypeVolumeType[]
-  /** The Node Type is currently disabled. */
+  /** The node type is currently disabled. */
   disabled: boolean
-  /** The Node Type is currently in beta. */
+  /** The node type is currently in beta. */
   beta: boolean
-  /** Instance range associated with the NodeType offer. */
+  /** Instance range associated with the node type offer. */
   instanceRange: string
 }
 
@@ -229,9 +229,9 @@ export interface Snapshot {
   instanceName: string
   /** Source node type. */
   nodeType: string
-  /** Type of volume where data is stored sbs_5k or sbs_15k. */
+  /** Type of volume where data is stored - sbs_5k or sbs_15k. */
   volumeType?: SnapshotVolumeType
-  /** Region of this snapshot. */
+  /** Region of the snapshot. */
   region: Region
 }
 
@@ -245,7 +245,7 @@ export interface User {
 }
 
 export interface Version {
-  /** MongoDB™ engine version. */
+  /** MongoDB® engine version. */
   version: string
   /** Date of End of Life. */
   endOfLifeAt?: Date
@@ -268,7 +268,7 @@ export type CreateInstanceRequest = {
   projectId?: string
   /** Name of the Database Instance. */
   name?: string
-  /** Version of the MongoDB™ engine. */
+  /** Version of the MongoDB® engine. */
   version: string
   /** Tags to apply to the Database Instance. */
   tags?: string[]
@@ -362,9 +362,9 @@ export type ListInstancesRequest = {
   name?: string
   /** Criteria to use when ordering Database Instance listings. */
   orderBy?: ListInstancesRequestOrderBy
-  /** Organization ID the Database Instance belongs to. */
+  /** Organization ID of the Database Instance. */
   organizationId?: string
-  /** Project ID to list the Database Instance of. */
+  /** Project ID. */
   projectId?: string
   page?: number
   pageSize?: number
@@ -373,7 +373,7 @@ export type ListInstancesRequest = {
 export interface ListInstancesResponse {
   /** List of all Database Instances available in an Organization or Project. */
   instances: Instance[]
-  /** Total count of Database Instances available in a Organization or Project. */
+  /** Total count of Database Instances available in an Organization or Project. */
   totalCount: number
 }
 
@@ -404,7 +404,7 @@ export type ListSnapshotsRequest = {
   region?: Region
   /** Instance ID the snapshots belongs to. */
   instanceId?: string
-  /** Lists Database snapshots that match a name pattern. */
+  /** Lists database snapshots that match a name pattern. */
   name?: string
   /** Criteria to use when ordering snapshot listings. */
   orderBy?: ListSnapshotsRequestOrderBy
@@ -417,9 +417,9 @@ export type ListSnapshotsRequest = {
 }
 
 export interface ListSnapshotsResponse {
-  /** List of all Database Snapshots available in an Organization or Project. */
+  /** List of all database snapshots available in an Organization or Project. */
   snapshots: Snapshot[]
-  /** Total count of Database Snapshots available in a Organization or Project. */
+  /** Total count of database snapshots available in a Organization or Project. */
   totalCount: number
 }
 
@@ -458,9 +458,9 @@ export type ListVersionsRequest = {
 }
 
 export interface ListVersionsResponse {
-  /** Available MongoDB™ engine version. */
+  /** Available MongoDB® engine version. */
   versions: Version[]
-  /** Total count of MongoDB™ engine version available. */
+  /** Total count of MongoDB® engine version available. */
   totalCount: number
 }
 
@@ -533,7 +533,7 @@ export type UpgradeInstanceRequest = {
   /** UUID of the Database Instance you want to upgrade. */
   instanceId: string
   /**
-   * Increase your block storage volume size.
+   * Increase your Block Storage volume size.
    *
    * One-of ('upgradeTarget'): at most one of 'volumeSize' could be set.
    */
