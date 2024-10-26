@@ -8,10 +8,19 @@
     "cloud",
     "sdk"
   ],
+  "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "node": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    }
+  },
   "scripts": {
+    "publint":"npx publint",
     "version": "./scripts/update-constants-file.sh",
     "typecheck": "tsc --noEmit",
     "type:generate": "tsc --declaration -p tsconfig.build.json",
@@ -26,13 +35,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/scaleway/scaleway-sdk-js",
+    "url": "git+https://github.com/scaleway/scaleway-sdk-js.git",
     "directory": "packages/clients"
   },
   "engines": {
     "node": ">=18.0"
   },
-  "type": "module",
   "dependencies": {
     "@scaleway/random-name": "5.1.0"
   },

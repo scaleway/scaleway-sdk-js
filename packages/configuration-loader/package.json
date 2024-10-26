@@ -3,22 +3,33 @@
   "version": "1.0.5",
   "license": "Apache-2.0",
   "description": "Load configuration via file or environment for NodeJS.",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/scaleway/scaleway-sdk-js",
+    "url": "git+https://github.com/scaleway/scaleway-sdk-js.git",
     "directory": "packages/configuration-loader"
   },
+  "files": [
+    "dist"
+  ],
   "engines": {
-    "node": ">=14.13"
+    "node": ">=18.0"
   },
   "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "node": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    }
+  },
   "scripts": {
+    "publint":"npx publint",
     "typecheck": "tsc --noEmit",
     "type:generate": "tsc --declaration -p tsconfig.build.json",
     "build": "vite build --config ../../vite.config.ts && pnpm run type:generate",

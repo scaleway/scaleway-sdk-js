@@ -6,11 +6,12 @@
   "license": "Apache-2.0",
   "scripts": {
     "build": "tsc -p ./tsconfig.json",
+    "typecheck": "tsc --noEmit",
     "start": "node ./dist/index"
   },
   "dependencies": {
-    "@scaleway/configuration-loader": "^1.0",
-    "@scaleway/sdk": "^2.0"
+    "@scaleway/configuration-loader": "workspace:*",
+    "@scaleway/sdk": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "20.11.19",
