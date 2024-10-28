@@ -1577,8 +1577,8 @@ export type UpgradeInstanceRequest = {
    * Node type of the Database Instance you want to upgrade to.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
-   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow'
-   * could be set.
+   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow',
+   * 'enableEncryption' could be set.
    */
   nodeType?: string
   /**
@@ -1586,24 +1586,24 @@ export type UpgradeInstanceRequest = {
    * Instance.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
-   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow'
-   * could be set.
+   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow',
+   * 'enableEncryption' could be set.
    */
   enableHa?: boolean
   /**
    * Increase your block storage volume size.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
-   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow'
-   * could be set.
+   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow',
+   * 'enableEncryption' could be set.
    */
   volumeSize?: number
   /**
    * Change your Database Instance storage type.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
-   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow'
-   * could be set.
+   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow',
+   * 'enableEncryption' could be set.
    */
   volumeType?: VolumeType
   /**
@@ -1611,8 +1611,8 @@ export type UpgradeInstanceRequest = {
    * current one and perform a Database Engine upgrade.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
-   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow'
-   * could be set.
+   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow',
+   * 'enableEncryption' could be set.
    */
   upgradableVersionId?: string
   /**
@@ -1620,8 +1620,17 @@ export type UpgradeInstanceRequest = {
    * endpoints.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
-   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow'
-   * could be set.
+   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow',
+   * 'enableEncryption' could be set.
    */
   majorUpgradeWorkflow?: UpgradeInstanceRequestMajorUpgradeWorkflow
+  /**
+   * Defines whether or not encryption should be enabled on the Database
+   * Instance.
+   *
+   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa',
+   * 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow',
+   * 'enableEncryption' could be set.
+   */
+  enableEncryption?: boolean
 }
