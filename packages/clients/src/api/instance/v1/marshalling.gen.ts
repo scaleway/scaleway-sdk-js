@@ -1909,6 +1909,7 @@ export const marshalServerActionRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   action: request.action,
+  disable_ipv6: request.disableIpv6,
   name: request.name,
   volumes:
     request.volumes !== undefined

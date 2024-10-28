@@ -38,6 +38,7 @@ export type OfferQuotaWarning =
   | 'email_count_exceeded'
   | 'database_count_exceeded'
   | 'disk_usage_exceeded'
+  | 'addon_domain_count_exceeded'
 
 export interface HostingCpanelUrls {
   dashboard: string

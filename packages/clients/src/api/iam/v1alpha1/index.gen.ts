@@ -86,6 +86,7 @@ export type {
   UpdateGroupRequest,
   UpdatePolicyRequest,
   UpdateSSHKeyRequest,
+  UpdateUserPasswordRequest,
   UpdateUserRequest,
   User,
   UserStatus,

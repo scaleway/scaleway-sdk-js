@@ -17,6 +17,7 @@ import type {
   CreateServerRequest,
   CreateServerRequestInstall,
   Disk,
+  GPU,
   GetServerMetricsResponse,
   IP,
   InstallServerRequest,
@@ -257,7 +258,9 @@ const unmarshalPrivateNetworkOption = (data: unknown): PrivateNetworkOption => {
     )
   }
 
-  return {} as PrivateNetworkOption
+  return {
+    bandwidthInBps: data.bandwidth_in_bps,
+  } as PrivateNetworkOption
 }
 
 const unmarshalPublicBandwidthOption = (
@@ -311,6 +314,19 @@ const unmarshalDisk = (data: unknown): Disk => {
     capacity: data.capacity,
     type: data.type,
   } as Disk
+}
+
+const unmarshalGPU = (data: unknown): GPU => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GPU' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+    vram: data.vram,
+  } as GPU
 }
 
 const unmarshalMemory = (data: unknown): Memory => {
@@ -400,6 +416,7 @@ export const unmarshalOffer = (data: unknown): Offer => {
     disks: unmarshalArrayOfObject(data.disks, unmarshalDisk),
     enable: data.enable,
     fee: data.fee ? unmarshalMoney(data.fee) : undefined,
+    gpus: unmarshalArrayOfObject(data.gpus, unmarshalGPU),
     id: data.id,
     incompatibleOsIds: data.incompatible_os_ids,
     maxBandwidth: data.max_bandwidth,

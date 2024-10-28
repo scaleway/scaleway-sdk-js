@@ -51,6 +51,7 @@ import type {
   UpdateGroupRequest,
   UpdatePolicyRequest,
   UpdateSSHKeyRequest,
+  UpdateUserPasswordRequest,
   UpdateUserRequest,
   User,
 } from './types.gen'
@@ -682,6 +683,14 @@ export const marshalUpdateSSHKeyRequest = (
 ): Record<string, unknown> => ({
   disabled: request.disabled,
   name: request.name,
+})
+
+export const marshalUpdateUserPasswordRequest = (
+  request: UpdateUserPasswordRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  password: request.password,
+  send_email: request.sendEmail,
 })
 
 export const marshalUpdateUserRequest = (

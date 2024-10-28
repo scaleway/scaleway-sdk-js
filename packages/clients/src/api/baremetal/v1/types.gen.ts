@@ -148,7 +148,9 @@ export interface LicenseOption {
   osId: string
 }
 
-export interface PrivateNetworkOption {}
+export interface PrivateNetworkOption {
+  bandwidthInBps: number
+}
 
 export interface PublicBandwidthOption {
   bandwidthInBps: number
@@ -187,6 +189,13 @@ export interface Disk {
   capacity: number
   /** Type of the disk. */
   type: string
+}
+
+export interface GPU {
+  /** Name of the GPU. */
+  name: string
+  /** Capacity of the vram in bytes. */
+  vram: number
 }
 
 export interface Memory {
@@ -233,7 +242,7 @@ export interface OfferOptionOffer {
    */
   publicBandwidth?: PublicBandwidthOption
   /**
-   * Private_network option.
+   * Private_network option, contains the bandwidth_in_bps.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth',
    * 'privateNetwork', 'remoteAccess', 'certification' could be set.
@@ -335,7 +344,7 @@ export interface ServerOption {
    */
   publicBandwidth?: PublicBandwidthOption
   /**
-   * Private_network option.
+   * Private_network option, contains the bandwidth_in_bps.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth',
    * 'privateNetwork', 'remoteAccess', 'certification' could be set.
@@ -468,6 +477,8 @@ export interface Offer {
   sharedBandwidth: boolean
   /** Array of tags attached to the offer. */
   tags: string[]
+  /** GPU specifications of the offer. */
+  gpus: GPU[]
 }
 
 export interface Option {
@@ -492,7 +503,7 @@ export interface Option {
    */
   publicBandwidth?: PublicBandwidthOption
   /**
-   * Private_network option.
+   * Private_network option, contains the bandwidth_in_bps.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth',
    * 'privateNetwork', 'remoteAccess', 'certification' could be set.

@@ -95,6 +95,14 @@ export type TriggerStatus =
   | 'creating'
   | 'pending'
 
+export interface ContainerScalingOption {
+  /**
+   * One-of ('scalingRule'): at most one of 'concurrentRequestsThreshold' could
+   * be set.
+   */
+  concurrentRequestsThreshold?: number
+}
+
 export interface SecretHashedValue {
   key: string
   hashedValue: string
@@ -223,6 +231,19 @@ export interface Container {
   sandbox: ContainerSandbox
   /** Local storage limit of the container (in MB). */
   localStorageLimit: number
+  /**
+   * Possible values:
+   *
+   * - Concurrent_requests_threshold: Scale depending on the number of concurrent
+   *   requests being processed per container instance.
+   */
+  scalingOption?: ContainerScalingOption
+  /** Creation date of the container. */
+  createdAt?: Date
+  /** Last update date of the container. */
+  updatedAt?: Date
+  /** Last date when the container was successfully deployed and set to ready. */
+  readyAt?: Date
   /** Region in which the container will be deployed. */
   region: Region
 }
@@ -385,7 +406,7 @@ export type CreateContainerRequest = {
    * "rg.fr-par.scw.cloud/something/image:tag").
    */
   registryImage?: string
-  /** Number of maximum concurrent executions of the container. */
+  /** @deprecated Number of maximum concurrent executions of the container. */
   maxConcurrency?: number
   /** Protocol the container uses. */
   protocol?: ContainerProtocol
@@ -405,6 +426,13 @@ export type CreateContainerRequest = {
   sandbox?: ContainerSandbox
   /** Local storage limit of the container (in MB). */
   localStorageLimit?: number
+  /**
+   * Possible values:
+   *
+   * - Concurrent_requests_threshold: Scale depending on the number of concurrent
+   *   requests being processed per container instance.
+   */
+  scalingOption?: ContainerScalingOption
 }
 
 export type CreateCronRequest = {
@@ -840,7 +868,7 @@ export type UpdateContainerRequest = {
    * "rg.fr-par.scw.cloud/something/image:tag").
    */
   registryImage?: string
-  /** Number of maximum concurrent executions of the container. */
+  /** @deprecated Number of maximum concurrent executions of the container. */
   maxConcurrency?: number
   protocol?: ContainerProtocol
   port?: number
@@ -857,6 +885,13 @@ export type UpdateContainerRequest = {
   sandbox?: ContainerSandbox
   /** Local storage limit of the container (in MB). */
   localStorageLimit?: number
+  /**
+   * Possible values:
+   *
+   * - Concurrent_requests_threshold: Scale depending on the number of concurrent
+   *   requests being processed per container instance.
+   */
+  scalingOption?: ContainerScalingOption
 }
 
 export type UpdateCronRequest = {
