@@ -327,6 +327,8 @@ export interface Namespace {
   secretEnvironmentVariables: SecretHashedValue[]
   /** Region in which the namespace is located. */
   region: Region
+  /** [ALPHA] List of tags applied to the Serverless Function Namespace. */
+  tags: string[]
 }
 
 export interface Token {
@@ -483,6 +485,8 @@ export type CreateNamespaceRequest = {
   description?: string
   /** Secret environment variables of the namespace. */
   secretEnvironmentVariables?: Secret[]
+  /** [ALPHA] Tags of the Serverless Function Namespace. */
+  tags?: string[]
 }
 
 export type CreateTokenRequest = {
@@ -956,6 +960,8 @@ export type UpdateNamespaceRequest = {
   description?: string
   /** Secret environment variables of the namespace. */
   secretEnvironmentVariables?: Secret[]
+  /** [ALPHA] Tags of the Serverless Function Namespace. */
+  tags?: string[]
 }
 
 export type UpdateTriggerRequest = {

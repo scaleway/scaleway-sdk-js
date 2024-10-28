@@ -303,6 +303,8 @@ export interface Namespace {
   secretEnvironmentVariables: SecretHashedValue[]
   /** Region in which the namespace will be created. */
   region: Region
+  /** [ALPHA] List of tags applied to the Serverless Container Namespace. */
+  tags: string[]
 }
 
 export interface Token {
@@ -479,6 +481,8 @@ export type CreateNamespaceRequest = {
   description?: string
   /** Secret environment variables of the namespace to create. */
   secretEnvironmentVariables?: Secret[]
+  /** [ALPHA] Tags of the Serverless Container Namespace. */
+  tags?: string[]
 }
 
 export type CreateTokenRequest = {
@@ -926,6 +930,8 @@ export type UpdateNamespaceRequest = {
   description?: string
   /** Secret environment variables of the namespace to update. */
   secretEnvironmentVariables?: Secret[]
+  /** [ALPHA] Tags of the Serverless Container Namespace. */
+  tags?: string[]
 }
 
 export type UpdateTriggerRequest = {

@@ -170,6 +170,7 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
       unmarshalSecretHashedValue,
     ),
     status: data.status,
+    tags: data.tags,
   } as Namespace
 }
 
@@ -446,6 +447,7 @@ export const marshalCreateNamespaceRequest = (
           marshalSecret(elt, defaults),
         )
       : undefined,
+  tags: request.tags,
 })
 
 export const marshalCreateTokenRequest = (
@@ -584,6 +586,7 @@ export const marshalUpdateNamespaceRequest = (
           marshalSecret(elt, defaults),
         )
       : undefined,
+  tags: request.tags,
 })
 
 const marshalUpdateTriggerRequestSqsClientConfig = (
