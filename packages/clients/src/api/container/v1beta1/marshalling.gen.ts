@@ -79,6 +79,7 @@ export const unmarshalContainer = (data: unknown): Container => {
 
   return {
     cpuLimit: data.cpu_limit,
+    createdAt: unmarshalDate(data.created_at),
     description: data.description,
     domainName: data.domain_name,
     environmentVariables: data.environment_variables,
@@ -95,6 +96,7 @@ export const unmarshalContainer = (data: unknown): Container => {
     port: data.port,
     privacy: data.privacy,
     protocol: data.protocol,
+    readyAt: unmarshalDate(data.ready_at),
     region: data.region,
     registryImage: data.registry_image,
     sandbox: data.sandbox,
@@ -107,6 +109,7 @@ export const unmarshalContainer = (data: unknown): Container => {
     ),
     status: data.status,
     timeout: data.timeout,
+    updatedAt: unmarshalDate(data.updated_at),
   } as Container
 }
 

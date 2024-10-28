@@ -238,6 +238,12 @@ export interface Container {
    *   requests being processed per container instance.
    */
   scalingOption?: ContainerScalingOption
+  /** Creation date of the container. */
+  createdAt?: Date
+  /** Last update date of the container. */
+  updatedAt?: Date
+  /** Last date when the container was successfully deployed and set to ready. */
+  readyAt?: Date
   /** Region in which the container will be deployed. */
   region: Region
 }
