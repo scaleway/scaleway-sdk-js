@@ -1308,5 +1308,6 @@ export const marshalUpgradeInstanceRequest = (
             )
           : undefined,
     },
+    { param: 'enable_encryption', value: request.enableEncryption },
   ]),
 })
