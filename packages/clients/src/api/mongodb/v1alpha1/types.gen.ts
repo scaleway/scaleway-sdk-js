@@ -300,6 +300,20 @@ export type CreateSnapshotRequest = {
   expiresAt?: Date
 }
 
+export type CreateUserRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the Database Instance the user belongs to. */
+  instanceId: string
+  /** Name of the database user. */
+  name: string
+  /** Password of the database user. */
+  password?: string
+}
+
 export type DeleteInstanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the

@@ -38,6 +38,18 @@ export const CreateSnapshotRequest = {
   },
 }
 
+export const CreateUserRequest = {
+  name: {
+    maxLength: 63,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9_\-]*$/,
+  },
+  password: {
+    maxLength: 128,
+    minLength: 8,
+  },
+}
+
 export const ListInstancesRequest = {
   name: {
     maxLength: 255,
