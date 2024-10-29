@@ -304,14 +304,14 @@ export interface RouteRestConfig {
 }
 
 export interface RouteS3Config {
-  /** Region of the S3 route's destination bucket (e.g., 'fr-par'). */
+  /** Region of the Amazon S3 route's destination bucket (e.g., 'fr-par'). */
   bucketRegion: string
-  /** Destination bucket name of the S3 route. */
+  /** Destination bucket name of the Amazon S3 route. */
   bucketName: string
   /** Optional string to prefix object names with. */
   objectPrefix: string
   /**
-   * How the S3 route's objects will be created: one per topic or one per
+   * How the Amazon S3 route's objects will be created: one per topic or one per
    * message.
    */
   strategy: RouteS3ConfigS3Strategy
@@ -443,7 +443,7 @@ export type CreateRouteRequest = {
    */
   topic: string
   /**
-   * If creating S3 Route, S3-specific configuration fields.
+   * If creating Amazon S3 Routes, Amazon S3-specific configuration fields.
    *
    * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
    * could be set.
@@ -890,7 +890,7 @@ export interface Route {
   /** Date at which the route was created. */
   createdAt?: Date
   /**
-   * When using S3 Route, S3-specific configuration fields.
+   * When using Amazon S3 Routes, Amazon S3-specific configuration fields.
    *
    * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
    * could be set.
@@ -1029,7 +1029,7 @@ export type UpdateRouteRequest = {
    */
   topic?: string
   /**
-   * When updating S3 Route, S3-specific configuration fields.
+   * When updating Amazon S3 Route, Amazon S3-specific configuration fields.
    *
    * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig'
    * could be set.
