@@ -166,7 +166,7 @@ export interface Model {
   tags: string[]
   /** Purpose of the model. */
   description: string
-  /** Defines whether the model has an end user licence agreement. */
+  /** Defines whether the model has an end user license agreement. */
   hasEula: boolean
   /** Creation date of the model. */
   createdAt?: Date
@@ -175,7 +175,7 @@ export interface Model {
   /** Region of the model. */
   region: Region
   /**
-   * S3 URL pointing to the model source weight.
+   * Object Storage URL pointing to the model source weight.
    *
    * One-of ('source'): at most one of 's3Model' could be set.
    */
@@ -304,7 +304,7 @@ export type DeleteEndpointRequest = {
 }
 
 export interface Eula {
-  /** Content of the end user licence agreement. */
+  /** Content of the end user license agreement. */
   content: string
 }
 

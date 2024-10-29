@@ -745,8 +745,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Export a snapshot. Export a snapshot to a specified S3 bucket in the same
-   * region.
+   * Export a snapshot. Export a snapshot to a specified Object Storage bucket
+   * in the same region.
    *
    * @param request - The request {@link ExportSnapshotRequest}
    * @returns A Promise of ExportSnapshotResponse
