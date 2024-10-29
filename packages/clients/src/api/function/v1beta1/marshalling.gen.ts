@@ -103,6 +103,7 @@ export const unmarshalFunction = (data: unknown): Function => {
   return {
     buildMessage: data.build_message,
     cpuLimit: data.cpu_limit,
+    createdAt: unmarshalDate(data.created_at),
     description: data.description,
     domainName: data.domain_name,
     environmentVariables: data.environment_variables,
@@ -116,6 +117,7 @@ export const unmarshalFunction = (data: unknown): Function => {
     name: data.name,
     namespaceId: data.namespace_id,
     privacy: data.privacy,
+    readyAt: unmarshalDate(data.ready_at),
     region: data.region,
     runtime: data.runtime,
     runtimeMessage: data.runtime_message,
@@ -126,6 +128,7 @@ export const unmarshalFunction = (data: unknown): Function => {
     ),
     status: data.status,
     timeout: data.timeout,
+    updatedAt: unmarshalDate(data.updated_at),
   } as Function
 }
 

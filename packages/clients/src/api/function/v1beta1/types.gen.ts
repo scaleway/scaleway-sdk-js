@@ -300,6 +300,12 @@ export interface Function {
   runtimeMessage: string
   /** Execution environment of the function. */
   sandbox: FunctionSandbox
+  /** Creation date of the function. */
+  createdAt?: Date
+  /** Last update date of the function. */
+  updatedAt?: Date
+  /** Last date when the function was successfully deployed and set to ready. */
+  readyAt?: Date
 }
 
 export interface Namespace {
