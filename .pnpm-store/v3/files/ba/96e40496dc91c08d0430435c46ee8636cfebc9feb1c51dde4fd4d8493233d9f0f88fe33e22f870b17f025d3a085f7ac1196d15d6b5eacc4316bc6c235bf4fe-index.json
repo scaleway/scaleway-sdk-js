@@ -1,0 +1,67 @@
+{
+  "name": "espree",
+  "version": "10.2.0",
+  "requiresBuild": false,
+  "files": {
+    "LICENSE": {
+      "checkedAt": 1729086517840,
+      "integrity": "sha512-+FMQwEtTjvl+z8BRPdoRPoVowma+EWpWjZ5RBKtK2wIqcYsGNuzumqk6k5cDvASNavxtPZS71/PEVZhhOq1SBw==",
+      "mode": 420,
+      "size": 1322
+    },
+    "dist/espree.cjs": {
+      "checkedAt": 1729086517841,
+      "integrity": "sha512-LIf/vmk7tKXIEFB53Bmmo1hHphbFKwQ2+OB3WKU4Qr2ub89gE6Rhfp9vtzEc5UiQO3AFi4w8hePbqZydBsfhWQ==",
+      "mode": 420,
+      "size": 31203
+    },
+    "espree.js": {
+      "checkedAt": 1729086517844,
+      "integrity": "sha512-4IPLpwgkQny4RnOKnGYXhkXfS0hd4OkTM0e1o4NKGD8h6pdQgTqmSgLPVr4Rj8KUrq/XbrR/ZOcPAFCY/6N3Dg==",
+      "mode": 420,
+      "size": 6399
+    },
+    "lib/espree.js": {
+      "checkedAt": 1729086517848,
+      "integrity": "sha512-N5ecVGppj1DXUKdvTza+OuwmcPj+beyWMczUMgMsFFFGkMFJHhIaqQoQX4tj5W1KBDFhIxSQgrsiaDh+cFMCLQ==",
+      "mode": 420,
+      "size": 12137
+    },
+    "lib/features.js": {
+      "checkedAt": 1729086517851,
+      "integrity": "sha512-W4cul6kH98/a7xQyMOWVziny4L49ASfGL/YdwbpGF+WG9TypyAbaADmOU8jGgVxk7nKOvyhXZ4iQTREXiSvxow==",
+      "mode": 420,
+      "size": 696
+    },
+    "lib/options.js": {
+      "checkedAt": 1729086517855,
+      "integrity": "sha512-2/+nhouFXAADWSfnTv1QWePXxLBVO2cBkYwCWD01ltPMrDfFiCgFvZ2ZFID7SlP2X8kFUi5AkTKBLhiVf4Sp8Q==",
+      "mode": 420,
+      "size": 3870
+    },
+    "lib/token-translator.js": {
+      "checkedAt": 1729086517859,
+      "integrity": "sha512-o8q6vMbC1BXiOQZJCPpOFsyn7a87+gWUoorpi+ujjduoa/yM3EE573At4qpYVMRwjpUSb1q+gMUdNrDsjrRRJQ==",
+      "mode": 420,
+      "size": 8103
+    },
+    "lib/version.js": {
+      "checkedAt": 1729086517859,
+      "integrity": "sha512-qt3mVjdPdyI129GI16K8MThyrg6vGFi49TMCWWwYVeZO5irA1RREJ1nvyGKKAqZwv+lrEh2W3vyEpBj332t1mg==",
+      "mode": 420,
+      "size": 51
+    },
+    "package.json": {
+      "checkedAt": 1729086517860,
+      "integrity": "sha512-eud3dqcn23V8UecZGBN17IqFBfIyGq/gCMyWYVT0oG7THEWwayd5i7ixqTtBI2R9StqhwyBn49AcE8BPDBnJ+g==",
+      "mode": 420,
+      "size": 2265
+    },
+    "README.md": {
+      "checkedAt": 1729086517861,
+      "integrity": "sha512-FOEKSO62LjHvMQY62q8piA5N53iyJl5RVMv/aQf2dMXTU/p6X1AoapTn7EjpMePcwCUDns8pgUH0itekKdCqDw==",
+      "mode": 420,
+      "size": 13179
+    }
+  }
+}

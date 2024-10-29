@@ -1,0 +1,2 @@
+export * from "./declarations/src/index.js";
+//# sourceMappingURL=emotion-eslint-plugin.cjs.d.mts.map

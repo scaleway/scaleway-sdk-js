@@ -1,0 +1,811 @@
+{
+  "name": "axobject-query",
+  "version": "3.2.4",
+  "requiresBuild": false,
+  "files": {
+    "LICENSE": {
+      "checkedAt": 1730129288153,
+      "integrity": "sha512-RlKUwbPCXPsGYr/W8GM75I5vA4jSRfqFWDn0+oVmgY3yzzClO/nQ7AQZPxym2Xjv6Ww768aj3Ncsme3MHeT1Gw==",
+      "mode": 493,
+      "size": 10236
+    },
+    "lib/etc/objects/AbbrRole.js": {
+      "checkedAt": 1730129288153,
+      "integrity": "sha512-2aVMWk3Aw2pGGbS/C00Xo6R9UiMo9KtLe9Hs0imEcwE5sUpa9fefHwagrLkbwp/08G5mChl5/pXoqtr/AMh0ZQ==",
+      "mode": 420,
+      "size": 276
+    },
+    "lib/etc/objects/AlertDialogRole.js": {
+      "checkedAt": 1730129288154,
+      "integrity": "sha512-cqDVEMOV+4ROdh2NzL/d7eEEwHSt10kvK07Fhxhnn1E/XlEzE9C4S35Dq81WyEo8vv1U/kY5ben0F8R1j67uLg==",
+      "mode": 420,
+      "size": 294
+    },
+    "lib/etc/objects/AlertRole.js": {
+      "checkedAt": 1730129288155,
+      "integrity": "sha512-t9D2qMUf06gK6C30A+9CA9VLry12AgBFF0ZGzGvJVa9EGydgkYq+0AOANMhCbQNShttIKUejNZNguMpG4A1uVQ==",
+      "mode": 420,
+      "size": 279
+    },
+    "lib/etc/objects/AnnotationRole.js": {
+      "checkedAt": 1730129288155,
+      "integrity": "sha512-E2+620swBB+PF2zfarKHlhQDtaQfwDvHzr226CeXntEMDrYuTaKePrcpDy8aGajNK0DzbXk3AZ/o2iVwI0aImA==",
+      "mode": 420,
+      "size": 223
+    },
+    "lib/etc/objects/ApplicationRole.js": {
+      "checkedAt": 1730129288156,
+      "integrity": "sha512-aibUpGXg/3s/yyy5gzIrM4jwpxg34jREfkv4gbJXvA6tUF00gUPtkAK4ISdt5qm5qTDsW+c6mj72eOP31iPB/w==",
+      "mode": 420,
+      "size": 294
+    },
+    "lib/etc/objects/ArticleRole.js": {
+      "checkedAt": 1730129288157,
+      "integrity": "sha512-EXigYPBWYgVuZQuk+JlAqvbsIuMleh9wOSFEZ6nBTT8WsQ+AYAYRK05rq7cmHZ8+N61KnncxIvP8dCO/jCZunw==",
+      "mode": 420,
+      "size": 355
+    },
+    "lib/etc/objects/AudioRole.js": {
+      "checkedAt": 1730129288158,
+      "integrity": "sha512-73SBe+ae9CV/INiMmt6Pfk4EEayIn92Yf1d/ANewt7BjRcSNbj7l6CPor5yWK3rnGccRQGb98EK89e2K7fbhsA==",
+      "mode": 420,
+      "size": 276
+    },
+    "lib/AXObjectElementMap.js": {
+      "checkedAt": 1730129288159,
+      "integrity": "sha512-viKmqe71Jqva9XNdAzmX7zYJgf9M71DlLi5/VVtopCR02ieFrNEiM7qMK3Qa5FUSvYSIQ+965VgrX109UMEZCw==",
+      "mode": 420,
+      "size": 5047
+    },
+    "lib/AXObjectRoleMap.js": {
+      "checkedAt": 1730129288160,
+      "integrity": "sha512-BqsAWmVlpWed6KkfYAQMtgAtQl1ttpnAZiC3UGNZ5KBkdkhtchtAkTRLThXvdxQWz3tFbg4+GVCbmM3SKkxv3g==",
+      "mode": 420,
+      "size": 5097
+    },
+    "lib/AXObjectsMap.js": {
+      "checkedAt": 1730129288161,
+      "integrity": "sha512-qgKGmIL8mpWAFq0Kw2BBJt+HDhQvhmxLwG6PMRkqlc1WYJvKuwbZHAmYbV3NHPXfyhlQ4uUgIMXFStIuN/AHRg==",
+      "mode": 420,
+      "size": 18502
+    },
+    "lib/etc/objects/BannerRole.js": {
+      "checkedAt": 1730129288161,
+      "integrity": "sha512-g4MdKUpelgINKbrMrPN2ctzSOwBxSNpr6gRfu4gUH3Zyb9eUYuZYk6isQal8GHKe9FuawWVQksMjkVpo9dw0UA==",
+      "mode": 420,
+      "size": 282
+    },
+    "lib/etc/objects/BlockquoteRole.js": {
+      "checkedAt": 1730129288162,
+      "integrity": "sha512-aGsSu/dwyWcmdqLcUFU+aDRrrx9D/jv3BZimZIrx1pCEzXvygEgK4/peV5uKDjD6jMst1JGE90ScS6HMSxdnzQ==",
+      "mode": 420,
+      "size": 294
+    },
+    "lib/etc/objects/BusyIndicatorRole.js": {
+      "checkedAt": 1730129288162,
+      "integrity": "sha512-Hdu/nzFsm8KHb6w+sShi00EGnDBa8Zof9uCOg6+Pj5tlZ46bqBc5nfkAdbk6pB5xhpgkhXiKiqUpD1tTTqT8Tg==",
+      "mode": 420,
+      "size": 351
+    },
+    "lib/etc/objects/ButtonRole.js": {
+      "checkedAt": 1730129288163,
+      "integrity": "sha512-YHs9G5TL/4cw22TaY8V8kifEJoSmU6CATb/kAjOLg4GabzdSxLA/3KjcAdZBDor6pmOq1m84ygRFyLUwHrlpAw==",
+      "mode": 420,
+      "size": 348
+    },
+    "lib/etc/objects/CanvasRole.js": {
+      "checkedAt": 1730129288164,
+      "integrity": "sha512-9wmqbyIWzzKwdec9BBHsPLbGVAZlhP5/ZeaM7NGxkaVejCnTPoitkGpr+7LH8qpySiYvaIV1bAhO3AUSnXapzw==",
+      "mode": 420,
+      "size": 279
+    },
+    "lib/etc/objects/CaptionRole.js": {
+      "checkedAt": 1730129288164,
+      "integrity": "sha512-dMEia7BF4owuK4ENTGvj/78tKqNrHbPZfN6PlsVa9asehSCw+tA5qamB7Jl14/0BFZO8RhKZHKbTF6KIdDo/7g==",
+      "mode": 420,
+      "size": 285
+    },
+    "lib/etc/objects/CellRole.js": {
+      "checkedAt": 1730129288182,
+      "integrity": "sha512-lCJ1JkKxSWSqWx+CLNf5TpIn8jM3DmB9W8+yCxzu9PFgyHXw6eaPzi5x123KuckTCMEQbyEErdPVas3xszkjrg==",
+      "mode": 420,
+      "size": 409
+    },
+    "lib/etc/objects/CheckBoxRole.js": {
+      "checkedAt": 1730129288183,
+      "integrity": "sha512-KRaS7ojpWMevymBPPuGEv7cIwACU8RO6SrqGURaXVmlXUZN9dsyG0DEO93zs/Dqrno5KZoJw+kNG1vLsVD6rrw==",
+      "mode": 420,
+      "size": 432
+    },
+    "lib/etc/objects/ColorWellRole.js": {
+      "checkedAt": 1730129288184,
+      "integrity": "sha512-8qVYHxBF9xbPgS0ZktZgCnPMRuxJJyAj+NPxGYnmxmjOhOZQgGUwww22Uw2CUyWJGttBU1jqxkz/Va0BCBDZeQ==",
+      "mode": 420,
+      "size": 360
+    },
+    "lib/etc/objects/ColumnHeaderRole.js": {
+      "checkedAt": 1730129288185,
+      "integrity": "sha512-E3YiDwp1Q1bMf7xc6mGhB/W/g8NrSAiwWFICJ1rMeGhMTTwhpFgoH2HJhNIPbRPksUwDKMnxYRolr/YVz/adtg==",
+      "mode": 420,
+      "size": 362
+    },
+    "lib/etc/objects/ColumnRole.js": {
+      "checkedAt": 1730129288186,
+      "integrity": "sha512-gd7i/MO/szTV3jl1V/SNPWLOTKAJzz1nYXZskOR15+tvHUD2d96kTE+98qQRwyc7x7wbBf5QOXTyvmVx5LHZgA==",
+      "mode": 420,
+      "size": 215
+    },
+    "lib/etc/objects/ComboBoxRole.js": {
+      "checkedAt": 1730129288187,
+      "integrity": "sha512-1XIMYuVWWyCQrERuRQ/PSTvb1JzdLt7gs6IF5EyW7xwlR2FH7YFvrr6RrIdP5h5khSSi3+Zylw1IFt0NxoXqKw==",
+      "mode": 420,
+      "size": 354
+    },
+    "lib/etc/objects/ComplementaryRole.js": {
+      "checkedAt": 1730129288188,
+      "integrity": "sha512-QjuKi69NiPOHYGCcYObTLCSmnW8VyWHGpmYL/V88g2Zn7DCrjHA+9NLRBFvlR+cdTXhTvhzEyfvCUuQRO0sXRQ==",
+      "mode": 420,
+      "size": 303
+    },
+    "lib/etc/objects/ContentInfoRole.js": {
+      "checkedAt": 1730129288189,
+      "integrity": "sha512-gSGRjN27RJvknyfdDlXndFOlVQqB1ebQsiQrEEVfAsgEX2368oOaaEYlYCXoYxE1yLhSzWvMR3hTm974LOaIwQ==",
+      "mode": 420,
+      "size": 299
+    },
+    "lib/etc/objects/DateRole.js": {
+      "checkedAt": 1730129288190,
+      "integrity": "sha512-JrtwQeqz6De0NHX3I4+M+QBDF6o07njTStFIZZIq5hXXKLKJHyJsJK+goACC6RzuZ3kuSez362DBtWZVvWz/Qg==",
+      "mode": 420,
+      "size": 349
+    },
+    "lib/etc/objects/DateTimeRole.js": {
+      "checkedAt": 1730129288191,
+      "integrity": "sha512-qYgyR56fz7Pm8jQYhWrOb3Rcu73qG2y/kfiKFrjTdFhCYoHsgJUe3/A01IWtfE4fBrVCSMO6GByzaDpIFFB9Sw==",
+      "mode": 420,
+      "size": 361
+    },
+    "lib/etc/objects/DefinitionRole.js": {
+      "checkedAt": 1730129288192,
+      "integrity": "sha512-vzw5Xb8Jh1PaVnZM/wvFnHAgOOdyqxAql5g+uEfP7/vg7hgfJR4iVNLw1sbFZRptkhdHhpYHr+48xJUOMKxDww==",
+      "mode": 420,
+      "size": 287
+    },
+    "lib/etc/objects/DescriptionListDetailRole.js": {
+      "checkedAt": 1730129288197,
+      "integrity": "sha512-PLmvPe9IkCPbXJsmuv5iOy4YrEIQGiYsX435V/wq2NoB15S0wBe+oy9NHM1+mV/a+HiWOaM1qeeGBtpil5iO3Q==",
+      "mode": 420,
+      "size": 308
+    },
+    "lib/etc/objects/DescriptionListRole.js": {
+      "checkedAt": 1730129288198,
+      "integrity": "sha512-04En/SJfBc2aRRsvGxRQz3jBaALoFQptx2yhNfhBeh6v6qY8pYjfxE3AmzWIfGdm6bSd2sAIrYOZgAP0I5P+kg==",
+      "mode": 420,
+      "size": 296
+    },
+    "lib/etc/objects/DescriptionListTermRole.js": {
+      "checkedAt": 1730129288198,
+      "integrity": "sha512-k16DwAYytBPg2jdV38OUueolURLC8zy7PzUGGguArS/AREGwqBgrO4I+iQ/NQbS1zdpnFu2xroYfDPUUEv2UKQ==",
+      "mode": 420,
+      "size": 304
+    },
+    "lib/etc/objects/DetailsRole.js": {
+      "checkedAt": 1730129288200,
+      "integrity": "sha512-MB/ybA/HtjzbGkT36OjDsQG/4lqWpsu8Ul7LfLF0WgITlEmPHGYynW7wRnHYIw2YnneJ3oSzcYXasyK7E9I0iA==",
+      "mode": 420,
+      "size": 285
+    },
+    "lib/etc/objects/DialogRole.js": {
+      "checkedAt": 1730129288201,
+      "integrity": "sha512-OiXT7uOEe/hrBHshnsbQPyoWu55vKQnhn02qlcN17s1DGRTJ7TWKbuKgFb+R/pt7LOx5PjcGY23hkM4SXaDLbg==",
+      "mode": 420,
+      "size": 348
+    },
+    "lib/etc/objects/DirectoryRole.js": {
+      "checkedAt": 1730129288202,
+      "integrity": "sha512-XJbtgDQNl/KQafRMszDALYHskkgB0Ea8htidewbvNi4eMrJGG0I9luP2FAdo5mm1zTTwLm2OdUBVVk5PMxgGGg==",
+      "mode": 420,
+      "size": 357
+    },
+    "lib/etc/objects/DisclosureTriangleRole.js": {
+      "checkedAt": 1730129288205,
+      "integrity": "sha512-GoArdm13T6NYJeDU6sE+YGxzgc1CMIGz/Qqbd1nUCIjtQaFbX6i7Qftpj7o7NvnUvLKdNFvVMYcw5eTdR5li3w==",
+      "mode": 420,
+      "size": 614
+    },
+    "lib/etc/objects/DivRole.js": {
+      "checkedAt": 1730129288206,
+      "integrity": "sha512-vtkZC5zzWHjM9CUMF3hrNuspRMnceLXjZIxNpyxOhfzR/TUlJfI2v+RCmWpdAIny/79+vM8VLFl8OQhs3xibJg==",
+      "mode": 420,
+      "size": 271
+    },
+    "lib/etc/objects/DocumentRole.js": {
+      "checkedAt": 1730129288207,
+      "integrity": "sha512-MAfUrTK1TRIaMlf9T/I0OO1uMm4+d2pEh4du9GWVbrSGUYr3qIXNMp98J+B5//3N5EGh3mK0ZrFQGUaji0KePA==",
+      "mode": 420,
+      "size": 288
+    },
+    "lib/elementAXObjectMap.js": {
+      "checkedAt": 1730129288208,
+      "integrity": "sha512-CIGsLB9NGSRFgP9hG9lJMysoQjkDYcwldhsXMbY5/urxHaE8OgG0cJQFoG+fzhSpF+pznNGtlInYFJ7JgzpzYw==",
+      "mode": 420,
+      "size": 6234
+    },
+    "lib/etc/objects/EmbeddedObjectRole.js": {
+      "checkedAt": 1730129288208,
+      "integrity": "sha512-hBXjyQcDTr3vfLh58ee7nDYz8Xb+TNuUVHMxR/F3Rr32L1ZaAIC+cTgaIRh63NiSFjE7NcooymDRI3IO6KI1Lw==",
+      "mode": 420,
+      "size": 294
+    },
+    "lib/etc/objects/FeedRole.js": {
+      "checkedAt": 1730129288209,
+      "integrity": "sha512-KXlxbCYz0OJxEQO3/TqoqQfwf7VlhFvZJe+oDJDbP3cwvVr/XbTLO+LiYqx6pHyLoZp4Xmjv/Gx3EvoPXHpvmg==",
+      "mode": 420,
+      "size": 276
+    },
+    "lib/etc/objects/FigcaptionRole.js": {
+      "checkedAt": 1730129288210,
+      "integrity": "sha512-yMzFQbpSYTggCIdKPqzAlCQLZl4D2FXDmFI1LAc6vnDBIbnVczp34xZ+JRB2Q/iCWEOvTqr6m2iUW8DrREC2kw==",
+      "mode": 420,
+      "size": 294
+    },
+    "lib/etc/objects/FigureRole.js": {
+      "checkedAt": 1730129288211,
+      "integrity": "sha512-IBrob0u7DLxbD42Il2py5FLTKS0c2Lh9kp25Ubik+qM3lHhMmb+4eHxasQFEauMsUSS0VZy5DV5lFS2MsPeJ7A==",
+      "mode": 420,
+      "size": 351
+    },
+    "lib/etc/objects/FooterRole.js": {
+      "checkedAt": 1730129288211,
+      "integrity": "sha512-6ns7eg6R9ACpIZhl6uMR20/nmVwf6L7a8ZA1CzHE/j7DP0/2B6ZCfkTHE5csQoeQyuOQS4z/Feqx4J3wWPNQQQ==",
+      "mode": 420,
+      "size": 282
+    },
+    "lib/etc/objects/FormRole.js": {
+      "checkedAt": 1730129288212,
+      "integrity": "sha512-yRKmh8eO5f3ZiEGW851IN2vNQGEbz9PRdvE4gg7vooKTGuIYPHJvYfKmdfi3UFg2fPxJQ7MbUBCUpG++UA4v+Q==",
+      "mode": 420,
+      "size": 343
+    },
+    "lib/etc/objects/GridRole.js": {
+      "checkedAt": 1730129288213,
+      "integrity": "sha512-OmhhPgx9fts2KukzAvh2tmtpF1hieA0tQIPFW0GYb3MMcYwwx/0amY9Ml3CcMM+oWsIoW5UW3QP5PIqphx11SQ==",
+      "mode": 420,
+      "size": 273
+    },
+    "lib/etc/objects/GroupRole.js": {
+      "checkedAt": 1730129288214,
+      "integrity": "sha512-4vaGjou7VlXtotb7/gUgXzno+ZAOYL3mG+RG/S+R5vIiz+kmHe+YFY79dCkd3bWGb2tmEp06BEFPLOetJP/gCQ==",
+      "mode": 420,
+      "size": 279
+    },
+    "lib/etc/objects/HeadingRole.js": {
+      "checkedAt": 1730129288296,
+      "integrity": "sha512-njwEniFNIsVvEbYamTD1sZdqbh1pnF75vSTh48JUjdLtq1pWWU2LJ0rhm/2CLfApjSmLEhvZe+eXLf8st6v6KQ==",
+      "mode": 420,
+      "size": 675
+    },
+    "lib/etc/objects/IframePresentationalRole.js": {
+      "checkedAt": 1730129288301,
+      "integrity": "sha512-p1rm9jcjhRhrUFxOhR7G5KuX3AliDCGkQ6n76Kmvz/Ike0jycp/3L7eULvs+yml9YRlGzwAn0oC2lFSSsV/ndw==",
+      "mode": 420,
+      "size": 240
+    },
+    "lib/etc/objects/IframeRole.js": {
+      "checkedAt": 1730129288304,
+      "integrity": "sha512-GzoRae7OxEuUN/hbP0xbL+DRnMsaRMHD0Dbh295XLI8Pjwj3PywNHEN4attJk0VMjy3C6j3Nt1e7cy2jrB5W7Q==",
+      "mode": 420,
+      "size": 279
+    },
+    "lib/etc/objects/IgnoredRole.js": {
+      "checkedAt": 1730129288304,
+      "integrity": "sha512-X/aOVaBiivV7PHXPrE9Hsfh7Odphuu6IlI0w2aChySUFYinScbmqKhuwZhB25muhOOuay5DubGtOgGst65CmzQ==",
+      "mode": 420,
+      "size": 217
+    },
+    "lib/etc/objects/ImageMapLinkRole.js": {
+      "checkedAt": 1730129288310,
+      "integrity": "sha512-iNwvJ1Hfb2Zm/XfBuISJAcxCOVAaicTHsbNlfE5U+K1r522WmRdWnZTZqySMFoCWVF/8cul6Thtb0nYjAJCSwQ==",
+      "mode": 420,
+      "size": 224
+    },
+    "lib/etc/objects/ImageMapRole.js": {
+      "checkedAt": 1730129288312,
+      "integrity": "sha512-5UDhHErLDfDrd9rbzJEFGzqMQRI25g5KW6mf7/IOkNNjEQwCif6sFLN91rRkcCrdjPIWS/Kf1OAyM3lb6g14kg==",
+      "mode": 420,
+      "size": 337
+    },
+    "lib/etc/objects/ImageRole.js": {
+      "checkedAt": 1730129288313,
+      "integrity": "sha512-a9m75JiFs1IX2Xw1P6Ac9nyvqzpMPhPIeB/aw2tkFv6Exa46kZNIJTW9BkETMCq4gH9JLThdfNek5ueJFBbmAQ==",
+      "mode": 420,
+      "size": 343
+    },
+    "lib/index.js": {
+      "checkedAt": 1730129288317,
+      "integrity": "sha512-8N74Ji7NVxVNR6lyhmL5yp/y7w9Hp7d1E4peq4Xb8eZdH3nBoTe+MpAxP0bdhbX2eH5fxWCJznjvd/X9+jUfmw==",
+      "mode": 420,
+      "size": 872
+    },
+    "lib/etc/objects/InlineTextBoxRole.js": {
+      "checkedAt": 1730129288320,
+      "integrity": "sha512-sSicGKFupRjpj+EYN92MfNonY9zT6w8g9WuRYMjAywXAPFEAX4bp0hI0hICZ0+q+cTvlEqmvhRi2DXMCTOT2sw==",
+      "mode": 420,
+      "size": 292
+    },
+    "lib/etc/objects/InputTimeRole.js": {
+      "checkedAt": 1730129288325,
+      "integrity": "sha512-MP90pp4Y0mOoprGMWcKqcxHft5gCmeV83w6a5+fiXRJalVbvMtmmTSfWHKEa3+EB8sLOlcaNS85xPKGq2yexKA==",
+      "mode": 420,
+      "size": 359
+    },
+    "lib/util/iterationDecorator.js": {
+      "checkedAt": 1730129288328,
+      "integrity": "sha512-bWI+6ytq3LV5ds+rbLPtWE/3kjttkkI18DtebKbV++2uk1ZlXJRjeIyHI0rR2lxEPszQp3M7Wrhbg4tnhpdSKQ==",
+      "mode": 420,
+      "size": 867
+    },
+    "lib/util/iteratorProxy.js": {
+      "checkedAt": 1730129288329,
+      "integrity": "sha512-pr+zL0VWvHxPtkXtX7ogisiVZQiX/16U1nA4Axskt65ZKNFtd7tgDwIB1AGexCNjfcD+mGhHnogH7aJHWoWg6g==",
+      "mode": 420,
+      "size": 641
+    },
+    "lib/etc/objects/LabelRole.js": {
+      "checkedAt": 1730129288335,
+      "integrity": "sha512-9/g+0Dkw0MXI/M/aIXqPyDvvb1Q1WdHdBDz0S0U+EMpNS3/04S4MjxyETGi0THI4KWCe4lk6mx30uxKTcxA2tA==",
+      "mode": 420,
+      "size": 279
+    },
+    "lib/etc/objects/LegendRole.js": {
+      "checkedAt": 1730129288337,
+      "integrity": "sha512-zcFYQGIhrvdRV+IkdF/P+Vzr4ipmee0TZQ4xhlOdZflLrtXEMGV1EBm5bJE8fLpZN8l3bMfCYc66zmSHJLMc9g==",
+      "mode": 420,
+      "size": 282
+    },
+    "lib/etc/objects/LineBreakRole.js": {
+      "checkedAt": 1730129288339,
+      "integrity": "sha512-BkVS0M8lZPN0WieIik303bsExGQrN7AtR3R2RPMs6LZM3BXPxSnFmVLvKVm95qegmmmNKdvUehewE02nwSL34g==",
+      "mode": 420,
+      "size": 284
+    },
+    "lib/etc/objects/LinkRole.js": {
+      "checkedAt": 1730129288341,
+      "integrity": "sha512-FXFxgIMO6oGYXI0LAcy9/WAm2K7S+TCXtpj/kOW4ppl1mZNdgeiBOi4QysLGxYoyU62MntAvjUPKll8g3ZYtmg==",
+      "mode": 420,
+      "size": 389
+    },
+    "lib/etc/objects/ListBoxOptionRole.js": {
+      "checkedAt": 1730129288344,
+      "integrity": "sha512-rKWiJ4uyPI7hpK9r81iRgZLySh5YRf/mtUP6+tfIfrEWDIqCwMWVy8F0cD9Tu1+rFRgromK9ZsAxiknZaW8nWw==",
+      "mode": 420,
+      "size": 362
+    },
+    "lib/etc/objects/ListBoxRole.js": {
+      "checkedAt": 1730129288349,
+      "integrity": "sha512-rjlR6ibVTInva7ACDylxgBxhGKrtnroiW39ii/k6RU1r7wkaxNnFN8l2hmITnddQt5Lmp6DDR5DFE/9wCy66wA==",
+      "mode": 420,
+      "size": 422
+    },
+    "lib/etc/objects/ListItemRole.js": {
+      "checkedAt": 1730129288350,
+      "integrity": "sha512-A5NNwzEFrq411Jc4OPgAdaef/5HiShE4vnmwnhBZIB3QMElXiwhTMJd31AGzrLJws29EtPf2iAivji+C3XlHiA==",
+      "mode": 420,
+      "size": 353
+    },
+    "lib/etc/objects/ListMarkerRole.js": {
+      "checkedAt": 1730129288352,
+      "integrity": "sha512-g2+KFUfpL/OVUFd8Mh6RULalzaP1Lg/NpJzVMQliO2FQ6vOEFZqm78PLhdadVs6aPxg/17u4p3WCB13lRgh8IA==",
+      "mode": 420,
+      "size": 223
+    },
+    "lib/etc/objects/ListRole.js": {
+      "checkedAt": 1730129288354,
+      "integrity": "sha512-nag9a3zBTeRDPcqxu/BuV79XlTYG0gw6ANepQ0EjBKRQfnD3n8NnuN3NPh2PyIhBcZa0tEPTM1Lf2N3WgkLZUg==",
+      "mode": 420,
+      "size": 406
+    },
+    "lib/etc/objects/LogRole.js": {
+      "checkedAt": 1730129288355,
+      "integrity": "sha512-G2OzA6lyjqEZrm4oDSt+XiBv8xiIaUfa5IDF+EDWh1QYkj5KwypEFH9TZJm4FXhKI5AAE8J0BuUvzHwicioQjw==",
+      "mode": 420,
+      "size": 273
+    },
+    "lib/etc/objects/MainRole.js": {
+      "checkedAt": 1730129288357,
+      "integrity": "sha512-R5DZVW9/wotTInzh5kBcucunL9yuERsAXFwP7SUjgm/woKTblzB5v1u2kpZRSIWKzDksGA9V7jrjooz3MinQfg==",
+      "mode": 420,
+      "size": 343
+    },
+    "lib/etc/objects/MarkRole.js": {
+      "checkedAt": 1730129288357,
+      "integrity": "sha512-RvdDjCMHRAqTI97s9F2myJZbAmSg+x+8HOIcgitmwknVcviRcV67G9wdQ7k0OZ42eoPYmEKtnTqF/lSFW2JF+A==",
+      "mode": 420,
+      "size": 276
+    },
+    "lib/etc/objects/MarqueeRole.js": {
+      "checkedAt": 1730129288358,
+      "integrity": "sha512-Bn2GazY4/0yglePw4aaETjUhlnSjfDnXeCtaZTBrP7Hos5kDSyiSRisyjRxzO8By3vTzzR6TdYnxaaCMCC3CtQ==",
+      "mode": 420,
+      "size": 355
+    },
+    "lib/etc/objects/MathRole.js": {
+      "checkedAt": 1730129288358,
+      "integrity": "sha512-QKacIEbk2V1dyEqW8hFYFFaFybfHD2U647kqmwcAjEGT8DgKtfEa1eJw2GWhmxXfLinz0r9+hGAU00x/x5zwQQ==",
+      "mode": 420,
+      "size": 276
+    },
+    "lib/etc/objects/MenuBarRole.js": {
+      "checkedAt": 1730129288359,
+      "integrity": "sha512-KNNzzu0jk0hyVmfYUfynlFmxcRfaw6EGSd5AyejpoPMxHP6R2YgzHP7n/bLDlKy5MppUPfbsGIf3mX4EB8tOIA==",
+      "mode": 420,
+      "size": 285
+    },
+    "lib/etc/objects/MenuButtonRole.js": {
+      "checkedAt": 1730129288360,
+      "integrity": "sha512-AZhnSs5JNd0dfElcqEzdnntW1BZlRY3S6kJR5xj2OKoPDF09EfnBgIxfRi63pPBTe7m+RmpWwdewwQTeuD6lBw==",
+      "mode": 420,
+      "size": 220
+    },
+    "lib/etc/objects/MenuItemCheckBoxRole.js": {
+      "checkedAt": 1730129288360,
+      "integrity": "sha512-x+BrkwTDRcnAXFiHsJkz7pSC3/rVC+8YhKuOF+eumELJXnHlAzjvaP4OePh3VMaMCO5iit1qGOZKTlfCbAOnZw==",
+      "mode": 420,
+      "size": 309
+    },
+    "lib/etc/objects/MenuItemRadioRole.js": {
+      "checkedAt": 1730129288361,
+      "integrity": "sha512-h/bEpKbUkIRFGaWAcIg6B2YYHgFeZjv1arJSoxo/G2oXSzV/SKPx5yb4zDrbaHSxEmSdoLqfXgyTPxxh8AZwFw==",
+      "mode": 420,
+      "size": 300
+    },
+    "lib/etc/objects/MenuItemRole.js": {
+      "checkedAt": 1730129288362,
+      "integrity": "sha512-cqV3yX7Pt4EiF5sKQ66wRHDeiv+xC+5D10LtJCI5wLhzCaDUJFlSvT1LQsrnMTYqrKl3fIjdI2I4KqV99qdlmg==",
+      "mode": 420,
+      "size": 356
+    },
+    "lib/etc/objects/MenuListOptionRole.js": {
+      "checkedAt": 1730129288362,
+      "integrity": "sha512-cRUoPnh8GNgE59Fthv1Tg92/UYnAqQv7QU+NdaEsV/PY8USgBaJV6MAsnBLtUw5nLY52LGX+DutYYt7jNQXr0w==",
+      "mode": 420,
+      "size": 228
+    },
+    "lib/etc/objects/MenuListPopupRole.js": {
+      "checkedAt": 1730129288364,
+      "integrity": "sha512-ZN8x7WCiA55AP+JvEME5hrCWbudpPRTn78z5CQUVqgmEWP3m2Zi65FewZMTCR9hPWxhhiDTDApe6bKmmX0oqOQ==",
+      "mode": 420,
+      "size": 226
+    },
+    "lib/etc/objects/MenuRole.js": {
+      "checkedAt": 1730129288364,
+      "integrity": "sha512-K6salUrLjHjigB4N6lvcxwPzoANFhORGKTuW9ygcQULGYAabd033tksT104xEOt5db7gsLOvm1ehdAYSxSy3+w==",
+      "mode": 420,
+      "size": 343
+    },
+    "lib/etc/objects/MeterRole.js": {
+      "checkedAt": 1730129288365,
+      "integrity": "sha512-BBrNhuS0SUhlF18sDnKFJrRM060LYTHOgPN/cDBm3Ly/kbSpQOOOEQRhOgpJYPZRZiiHbRk5GPIs4ZJ34Rz3DA==",
+      "mode": 420,
+      "size": 279
+    },
+    "lib/etc/objects/NavigationRole.js": {
+      "checkedAt": 1730129288367,
+      "integrity": "sha512-fJXWVKixCPM3iovRoMskRLgLoExI0Jv+e2UxQwwqLXV4QX287jUCMgR2boeQazYVHXeAMZ9bzMi+HAwsuaiciA==",
+      "mode": 420,
+      "size": 360
+    },
+    "lib/etc/objects/NoneRole.js": {
+      "checkedAt": 1730129288368,
+      "integrity": "sha512-/UVXLU3lQGrt3g7xYo5ZqNyYKzdv/VKJEONMSSRwOzdM8nM6tMPS3Extgd2oVabFfRQ441CX92ZC5S8GEOFHdg==",
+      "mode": 420,
+      "size": 276
+    },
+    "lib/etc/objects/NoteRole.js": {
+      "checkedAt": 1730129288369,
+      "integrity": "sha512-3Gg0PPyD32vfsgYVB6seng4O7ua7vOpz3OtKCl+VrLarPaSgh6DcJIz3iNXzq+qNxx+Q/xL1woJNAXzvuoBElA==",
+      "mode": 420,
+      "size": 276
+    },
+    "lib/etc/objects/OutlineRole.js": {
+      "checkedAt": 1730129288371,
+      "integrity": "sha512-cNlb7SkOrdohtkv4xc5GF8/uI8VHVOh3pesgEPCCVwEFN/NM1ptI4rxwhC4xaRsuLc2RH2hWqEcbShuiBipK6w==",
+      "mode": 420,
+      "size": 217
+    },
+    "lib/etc/objects/ParagraphRole.js": {
+      "checkedAt": 1730129288372,
+      "integrity": "sha512-VpPZ76DvVXsCvCuaQkNB8YNgarn8/1OqVtzUYYlQ8uSDjHyMtJ9CTj08sn/HSAqgbE0tisBIsk0Gra4icsfRNQ==",
+      "mode": 420,
+      "size": 283
+    },
+    "lib/etc/objects/PopUpButtonRole.js": {
+      "checkedAt": 1730129288373,
+      "integrity": "sha512-83uEePgFuYhSjsAqrc7JNHimSf6mjbtswAPioarEJOzvjwnXT7XGSa5UFtvOnc6DU32ZZHBt/zr4tFPb3gaOzA==",
+      "mode": 420,
+      "size": 222
+    },
+    "lib/etc/objects/PreRole.js": {
+      "checkedAt": 1730129288375,
+      "integrity": "sha512-ESL7QMk+PGqCP5JYlFQ6CAzsK49loJinzTNH1l+vUGXYuJyGd+u6OuQVXavDEB3s4YYN9jJp/4UI+BOE+ZGlmQ==",
+      "mode": 420,
+      "size": 273
+    },
+    "lib/etc/objects/PresentationalRole.js": {
+      "checkedAt": 1730129288380,
+      "integrity": "sha512-GwreVXWRMV55sUm+vDwg9BsssClla6seVZ1fa276c05eZ47i1rVLGyWJsNt/ZyezLP7GUjnp163ynWTPjHw9mQ==",
+      "mode": 420,
+      "size": 304
+    },
+    "lib/etc/objects/ProgressIndicatorRole.js": {
+      "checkedAt": 1730129288384,
+      "integrity": "sha512-+Dlt8UL6J5BQyrxqeaqkwYf7tLtuKJqEodxSwfkp6I49gGttFeHXQVYCxU+sK/8mjJJsmD5B/BqG4fZF2CuIYg==",
+      "mode": 420,
+      "size": 380
+    },
+    "lib/etc/objects/RadioButtonRole.js": {
+      "checkedAt": 1730129288386,
+      "integrity": "sha512-jbGWnlgZcaNM6BkoH4+58FvSYPJq0TdZs59LsQ26Mv6wgMcQSbKbLj0dGodRBnkjbb8UzKlkq7EpP7Cx4DV+lg==",
+      "mode": 420,
+      "size": 432
+    },
+    "lib/etc/objects/RadioGroupRole.js": {
+      "checkedAt": 1730129288388,
+      "integrity": "sha512-zZ8wyMG4QInVdMmBvMOraHAfN4zjYYi3UIBsH1WS26yGbuDmpuAy0yW6HJ9CiRU5GtRjMRcx7eJHoUCPV0EXng==",
+      "mode": 420,
+      "size": 294
+    },
+    "lib/etc/objects/RegionRole.js": {
+      "checkedAt": 1730129288391,
+      "integrity": "sha512-wXGdfLxyL5cbKPSyAywoefTRDG9g+4v4d+HNjv6Qb2PWTx/RJo5aVY5QtxGlNdeuz53pKquhpV1FsvqLTy0etQ==",
+      "mode": 420,
+      "size": 282
+    },
+    "lib/etc/objects/RootWebAreaRole.js": {
+      "checkedAt": 1730129288392,
+      "integrity": "sha512-3mWM3G8vMvJb2WxbJsNyLoPSiCYjNv/sILZ2J6YcYENhFHk60atk2okZPm0+80c4c4bUcnizTMkmpbff/jWDaQ==",
+      "mode": 420,
+      "size": 225
+    },
+    "lib/etc/objects/RowHeaderRole.js": {
+      "checkedAt": 1730129288395,
+      "integrity": "sha512-kR70PgV5iUECrpNzGAwrYg0GqIZyDg7FXRjV258fGzoMhFb86WbEWtZ5GryIhgLUvIPPiRUfcLn2gaeftyhAhQ==",
+      "mode": 420,
+      "size": 428
+    },
+    "lib/etc/objects/RowRole.js": {
+      "checkedAt": 1730129288396,
+      "integrity": "sha512-8haWyEBeRW4o5kcbtAAP64a6echwiOZstuwpkF/yq6MGTe5n5jBokZKOmsk7qW0JDo4Z+nQ/DoYI5wC1VeZV0g==",
+      "mode": 420,
+      "size": 338
+    },
+    "lib/etc/objects/RubyRole.js": {
+      "checkedAt": 1730129288411,
+      "integrity": "sha512-xdTDpzuiDdZR/rKu/ySEZVy7AMfzLux6B/yhX/nUCrdggnwG2pv7pIQ3WulV36rh4Lu1JD2VymynecHIeSM+1Q==",
+      "mode": 420,
+      "size": 276
+    },
+    "lib/etc/objects/RulerRole.js": {
+      "checkedAt": 1730129288453,
+      "integrity": "sha512-HPGMfnx3zOpGlCiVJ0v+MoJbdVuL6diPTw8A9iqNrQv2j2BUrv2K0fzTmRPW2Q/7iMpeYr4sa7k5U2r9K0tevw==",
+      "mode": 420,
+      "size": 213
+    },
+    "lib/etc/objects/ScrollAreaRole.js": {
+      "checkedAt": 1730129288473,
+      "integrity": "sha512-yD1iQPx4V5bpvEGUOqV6PJtCEt5c2d4aGYWeS48ZqvMD1w44fazWvSYiMcctI7ZoW1Zhsjd8x4S+PtRA6eeJOw==",
+      "mode": 420,
+      "size": 223
+    },
+    "lib/etc/objects/ScrollBarRole.js": {
+      "checkedAt": 1730129288476,
+      "integrity": "sha512-wdeL/JgT++BNOk2arZDFgeJF/QxIBrD2vIXX+cJ7NHg+xfv8VWomLdCdE+yeShrgvEMZ+BQZ4HkPHsuNE4wJWA==",
+      "mode": 420,
+      "size": 288
+    },
+    "lib/etc/objects/SeamlessWebAreaRole.js": {
+      "checkedAt": 1730129288480,
+      "integrity": "sha512-XX5gW+hs+mlInx0WBA/CuLCRlqfBeSbSIOKQS6TEJVCQiaewmIXjLKsOkn9K2KXuo1tKNU/VN+e0bv28l/G9UA==",
+      "mode": 420,
+      "size": 233
+    },
+    "lib/etc/objects/SearchBoxRole.js": {
+      "checkedAt": 1730129288486,
+      "integrity": "sha512-HKoxZ93jSg4Y9AOOiq3rQ8FrwIEGbbiT8ELa2BAdOlumFqSeHF9VlOMwc2oSDShNiYwloBBJLga4/3qspE5yrg==",
+      "mode": 420,
+      "size": 433
+    },
+    "lib/etc/objects/SearchRole.js": {
+      "checkedAt": 1730129288487,
+      "integrity": "sha512-M9dyqHgIuPTNJeA4wqvD15RACISPbBlbkjJ2iFtmIdttz6QuIAupLb/sFI519DwpYNH0nUlnMyk8SL3yUL9wew==",
+      "mode": 420,
+      "size": 282
+    },
+    "lib/etc/objects/SliderRole.js": {
+      "checkedAt": 1730129288490,
+      "integrity": "sha512-KRUd45lDVm33qahcL62779Hg2eq6rsak3r5VK2bMQkziSB0Ijv/4gtYH9hsSiZkGuMPNHmBtP69jo2XS+EZoxg==",
+      "mode": 420,
+      "size": 423
+    },
+    "lib/etc/objects/SliderThumbRole.js": {
+      "checkedAt": 1730129288493,
+      "integrity": "sha512-uqORaGN1VnTcsQxDEnxbNEw1ibWRKshvjnyzG4iKhKPkxFHJo0uVzvTDJ1HRN3mhNqrA0rSoFnFbo9/4PI9ChQ==",
+      "mode": 420,
+      "size": 225
+    },
+    "lib/etc/objects/SpinButtonPartRole.js": {
+      "checkedAt": 1730129288495,
+      "integrity": "sha512-ptzCuKsda5Z3KOeUvu8cTHQfRAcBFmAgw59ixplu6XP7hw2Gh8tfsebEO0cPFlr9272esei9EZZDi0OdBnzh1Q==",
+      "mode": 420,
+      "size": 231
+    },
+    "lib/etc/objects/SpinButtonRole.js": {
+      "checkedAt": 1730129288498,
+      "integrity": "sha512-Ju2n1UVlWzCywGowN8KlWsCRPzV0s22ie3JC5/h6X2J/9D6LWrs5LvcqMy4l8yNTc5TbzLDnHTttNoZ3g/sj/Q==",
+      "mode": 420,
+      "size": 436
+    },
+    "lib/etc/objects/SplitterRole.js": {
+      "checkedAt": 1730129288501,
+      "integrity": "sha512-84iLEovmQJttRiN+IosqDJgVOwjGUoaBsE8xVKdW1hhTr6eAGzQmxoDtnYEO7byqPgbtohpmjVs/Z9cwANC+zg==",
+      "mode": 420,
+      "size": 286
+    },
+    "lib/etc/objects/StaticTextRole.js": {
+      "checkedAt": 1730129288503,
+      "integrity": "sha512-ds8WBKpPgggKCIg+lC4u+wCRmwChQmBR4sP5AInQwOhOt1a1EsMhm32dIgAwFZSvrSNFgg+H9zHUsmICpFvgkg==",
+      "mode": 420,
+      "size": 223
+    },
+    "lib/etc/objects/StatusRole.js": {
+      "checkedAt": 1730129288506,
+      "integrity": "sha512-7T3jiHUIoun0Z8GyOtkivEf/QZmTEJ7xgdwEDx0Q8YdcjG1YXUIB250HVixMCUKPtlWAoMxsjsZN6QHTuqYnXQ==",
+      "mode": 420,
+      "size": 282
+    },
+    "lib/etc/objects/SVGRootRole.js": {
+      "checkedAt": 1730129288509,
+      "integrity": "sha512-EwCmtcNKQo0F9EFMhHQGpUzfee1KB4mYdMVekE98tlqNhhw7l6OhdPNRYfcXZHc97+BunmhaS1u2p1eoLsPJWg==",
+      "mode": 420,
+      "size": 217
+    },
+    "lib/etc/objects/SwitchRole.js": {
+      "checkedAt": 1730129288513,
+      "integrity": "sha512-Sb/vz+nAvr/NebkGOtiqwD6ha7FhwXznM2A6hRH5eXXRLgSm9DfhviCMFFzBLkiZT55+3NisULhTKYTo7/906g==",
+      "mode": 420,
+      "size": 426
+    },
+    "lib/etc/objects/TabGroupRole.js": {
+      "checkedAt": 1730129288515,
+      "integrity": "sha512-x8rc9Xwc/uIJ4QygKhYIEDCOvywM0eY8T/faNDPXhB8F28k7QGUs5njb27Pi+wDBp1T3cpjwvlgHrJTL8TrBuQ==",
+      "mode": 420,
+      "size": 287
+    },
+    "lib/etc/objects/TableHeaderContainerRole.js": {
+      "checkedAt": 1730129288520,
+      "integrity": "sha512-9FQXJuD9+H3UVXnb2RwRs8Psz+ZZJL5AJM8BEX82XuVPEMziushNFgJfcG2PLMhcm1AJZcFpQuBIwM2oOa5maw==",
+      "mode": 420,
+      "size": 243
+    },
+    "lib/etc/objects/TableRole.js": {
+      "checkedAt": 1730129288522,
+      "integrity": "sha512-2WJ3/MC6pH3OeANRZFfUWeg6oilGT6Ak26fUUqdXGaf3QhnX9Wecv2/mQTc4gfSmYia8+OBrCfogEakNNuOO9A==",
+      "mode": 420,
+      "size": 347
+    },
+    "lib/etc/objects/TabListRole.js": {
+      "checkedAt": 1730129288524,
+      "integrity": "sha512-/pY874HNv9ndVktKKYT2sCe5uLgCrEY0r85ZjEqIToe0nsSHAycaF9pZE5K8EilWT6R/4d6I3fSKdv8TsHOGSA==",
+      "mode": 420,
+      "size": 285
+    },
+    "lib/etc/objects/TabPanelRole.js": {
+      "checkedAt": 1730129288526,
+      "integrity": "sha512-VdcfAIEUT9JDqaVCwstadf96QYoJ9xvJUDMhNLPmo2hpEgeX5em6UMaPdXMTl3M336l/lI8YyQIoC4MP2J/6FA==",
+      "mode": 420,
+      "size": 288
+    },
+    "lib/etc/objects/TabRole.js": {
+      "checkedAt": 1730129288529,
+      "integrity": "sha512-wq+FsPfbH+0Vz2kXeiHrCrvG5INPMy24HzWCwxYUrpTS4wtVLrBsxVYBwCPtqkiTG24gH/8XmUhsLNzx64gONA==",
+      "mode": 420,
+      "size": 270
+    },
+    "lib/etc/objects/TermRole.js": {
+      "checkedAt": 1730129288532,
+      "integrity": "sha512-hbvY4tA7aQeH2kF485VV845WAT2N3ikvsVGcGjSU9wmjqeu1n/4odHRx+nTcbLFiPdwmsq2Yhod2KkDIn9Klhw==",
+      "mode": 420,
+      "size": 276
+    },
+    "lib/etc/objects/TextAreaRole.js": {
+      "checkedAt": 1730129288535,
+      "integrity": "sha512-f79bu/FdFSrXKPBpc2OBmAqWXnN4wbHHu17DFmSN6WGBaE1XoN4gI9K7hKVmC9AkVGVYnG9/1c6hHTaAKYHuvQ==",
+      "mode": 420,
+      "size": 440
+    },
+    "lib/etc/objects/TextFieldRole.js": {
+      "checkedAt": 1730129288538,
+      "integrity": "sha512-FYAlD6mPCeqHAkXpPQaYPQb2wddQYmdrcJ2KkTJbiCooaLJNFANFdZEW1JUaRXLNJr47j9eqO9gqEhhyvfrlZw==",
+      "mode": 420,
+      "size": 497
+    },
+    "lib/etc/objects/TimeRole.js": {
+      "checkedAt": 1730129288544,
+      "integrity": "sha512-lMs8e/PHc14Ln3IRNFAvYqTg5MSmfZfPTb+MnuP7S0xijoLs2yiamwKaZGM5zK0jKZuNB6EELkQ9MPXkdDSiIg==",
+      "mode": 420,
+      "size": 276
+    },
+    "lib/etc/objects/TimerRole.js": {
+      "checkedAt": 1730129288545,
+      "integrity": "sha512-78QgFqwCGYnA0AsMPmetjSF+pm9WFLTeWEakYpiiZxgNfMM+1Pl2nyoKOWWjtxrrgz/C+UHD60V5HFqfEHkiIw==",
+      "mode": 420,
+      "size": 279
+    },
+    "lib/etc/objects/ToggleButtonRole.js": {
+      "checkedAt": 1730129288547,
+      "integrity": "sha512-lXgFK0YK1Sf3gey7J+aOZyy7C5Kcj/XZCs+yodpF8mVhSIM5ZhK6H1JwCFeNd+nqIG1D51RF8dZwWGhwgQXT+A==",
+      "mode": 420,
+      "size": 329
+    },
+    "lib/etc/objects/ToolbarRole.js": {
+      "checkedAt": 1730129288548,
+      "integrity": "sha512-PyHSiQ3zzHz7Vzou7/8FfsUhT+Y+zeLIlWpBWvmm5lumn/A6PswkAzzMyWqSO8SbWBx8ZzD2J2PjKQIm5EXNow==",
+      "mode": 420,
+      "size": 285
+    },
+    "lib/etc/objects/TreeGridRole.js": {
+      "checkedAt": 1730129288548,
+      "integrity": "sha512-nW9tlGX1QX1DMWi/Hve9uDqfJhpa1y3mf+mtD8RzjQcTwdw4Nc0lyv/wxiwNOzAkwbxhasYhYoVWfCHLUVkftg==",
+      "mode": 420,
+      "size": 285
+    },
+    "lib/etc/objects/TreeItemRole.js": {
+      "checkedAt": 1730129288551,
+      "integrity": "sha512-JKtSDqDLxu2bb1bL75b8CvG62iiW/VJZfwAHFyx1NwKTKX5LCeGd0CYwBl3UeuvoH7mMcl3s9/f+72Ogjfe0nA==",
+      "mode": 420,
+      "size": 285
+    },
+    "lib/etc/objects/TreeRole.js": {
+      "checkedAt": 1730129288553,
+      "integrity": "sha512-ef4AkcMqvwE7nZb/1FHlFSiiY16Vk3Oevwt7M6PlNQIzL4jIHQBspGHnbyEA0lVvNyUkt4cNPmZVyCRgbi+/KA==",
+      "mode": 420,
+      "size": 273
+    },
+    "lib/etc/objects/UserInterfaceTooltipRole.js": {
+      "checkedAt": 1730129288555,
+      "integrity": "sha512-3iXbvV0xdgM1YbHDUbjyAA6CvPHQ3MberjDAwXsLWOrv08/0U2st1Mc/UKSPNQVO02NWS++duwRtokrR5x+QzQ==",
+      "mode": 420,
+      "size": 311
+    },
+    "lib/etc/objects/VideoRole.js": {
+      "checkedAt": 1730129288556,
+      "integrity": "sha512-VRQWXmpwj4Qv6bgE6OexaRBCm2G3wZHBpR+iKe2T4xXQgZXsoCt19udkCnrriCXEanCsnnErgqrhmU93F2pcRA==",
+      "mode": 420,
+      "size": 276
+    },
+    "lib/etc/objects/WebAreaRole.js": {
+      "checkedAt": 1730129288556,
+      "integrity": "sha512-fcr0922kOLYyjcD1Nrp/BZQDZhKTy1VczkvNIww+FSFP8tae8t06CZASEPpeE4UAxaqhWgttjT2AoRAPVDsYAg==",
+      "mode": 420,
+      "size": 217
+    },
+    "lib/etc/objects/WindowRole.js": {
+      "checkedAt": 1730129288559,
+      "integrity": "sha512-rQnEz37pb8Rj+sVptk0yTJPJot8kU/lXcR4NITUSNtLlAmOX3nJXe1J0JVgN2VbwRU7xva/C1DuczZJWE7LqxA==",
+      "mode": 420,
+      "size": 212
+    },
+    "package.json": {
+      "checkedAt": 1730129288560,
+      "integrity": "sha512-c2vEBm1VYsk9144Eu20cze2AJKNQYcYhbamwgyyt26Gb83pmig3KgobDZfvfpxJvLvv/PJOpTKnsI6Hrh1/y3w==",
+      "mode": 420,
+      "size": 2021
+    },
+    "README.md": {
+      "checkedAt": 1730129288575,
+      "integrity": "sha512-sZfeAZ+/kBKgVCjexqK0GeMoV1bDE0DWofn9rb/TA0E96e8oPhNJC/wdUNREsMyuPuUl/P3xrqkiF96tE/g3DA==",
+      "mode": 420,
+      "size": 21379
+    }
+  }
+}

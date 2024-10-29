@@ -1,0 +1,37 @@
+{
+  "name": "@shikijs/vscode-textmate",
+  "version": "9.2.2",
+  "requiresBuild": false,
+  "files": {
+    "package.json": {
+      "checkedAt": 1727343353915,
+      "integrity": "sha512-akYLCaI3pRQy8UTJ6xnJM4fCZx6DkswCcO4BJEzN8uj3eirgmpYWUdZq6LXsY+y0OE+cj8k97lh6jtW5OgpMWA==",
+      "mode": 420,
+      "size": 1282
+    },
+    "LICENSE.md": {
+      "checkedAt": 1727343353916,
+      "integrity": "sha512-PfWOHviizO7f7mVvzfOM/UodpLRJpa64+md7huyLadtrfIsFhOtRwDzzUyZf6kngdh4Ihhtd2mtiBB1VXSdzcw==",
+      "mode": 420,
+      "size": 1083
+    },
+    "README.md": {
+      "checkedAt": 1727343353916,
+      "integrity": "sha512-tOt7bFB6F73d1GfOLijbWmAXscgXwl2Rt9gZ/jVuoig/NZnzX3KYn1vsZFJmQfEH3pVCrfnj5N2aTHAL395qNg==",
+      "mode": 420,
+      "size": 441
+    },
+    "dist/index.mjs": {
+      "checkedAt": 1727343353919,
+      "integrity": "sha512-nf47GJVDKxaaCWmU11Hgh6G2xgUu7d+4w/xTocOXmPUSnunipsPZ18JVS6hquPQ2PUz6IJXpYLdPs5pvb8fsIA==",
+      "mode": 420,
+      "size": 97841
+    },
+    "dist/index.d.mts": {
+      "checkedAt": 1727343353920,
+      "integrity": "sha512-AnNWMm7qgW03niRO651NAAqR0uMendTphaJjkfIAx5PdPcQXvYt5aQ7rj0lrtOoFcj/Dt0204N27CgzIN4vTXg==",
+      "mode": 420,
+      "size": 24972
+    }
+  }
+}

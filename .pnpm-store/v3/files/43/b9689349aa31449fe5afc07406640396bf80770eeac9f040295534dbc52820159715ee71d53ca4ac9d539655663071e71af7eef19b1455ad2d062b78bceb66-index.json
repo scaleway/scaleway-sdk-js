@@ -1,0 +1,61 @@
+{
+  "name": "eslint-visitor-keys",
+  "version": "4.1.0",
+  "requiresBuild": false,
+  "files": {
+    "LICENSE": {
+      "checkedAt": 1729086517978,
+      "integrity": "sha512-LK/hBSxf9yMQL2r6cNQN5Ts9V9Xiex+3PSnzFyHRHv276wJR1mZGB/cHFulPafZdeg3B465HZdPiLCPHDjjmiw==",
+      "mode": 420,
+      "size": 11337
+    },
+    "dist/eslint-visitor-keys.cjs": {
+      "checkedAt": 1729086517979,
+      "integrity": "sha512-aDmVKjIqI4rOEXT+2ugOgB6HlcG6EbjTdIMWLOKhTnI4uHbV/ry9W/aMfshc3oKEc2Th72qbVK0VtxpdkqrLzA==",
+      "mode": 420,
+      "size": 7440
+    },
+    "dist/eslint-visitor-keys.d.cts": {
+      "checkedAt": 1729086517980,
+      "integrity": "sha512-//J+I9VX9IPokUccUFWxii4qGQUO1zZwLbXFu+mmgzlJvAl1j5MwCzJmttpLXqdbbplOIpJ2sPXHuvaReEqRDg==",
+      "mode": 420,
+      "size": 762
+    },
+    "lib/index.js": {
+      "checkedAt": 1729086517980,
+      "integrity": "sha512-cDJQvaixWMpA5dKzEGL35OC2Fz9JEIt/w+ke8PvrWoVYy07D0kzfr+/lapU68LeZ3BVA+CeT1gUuvBFQPn/PSA==",
+      "mode": 420,
+      "size": 1864
+    },
+    "lib/visitor-keys.js": {
+      "checkedAt": 1729086517981,
+      "integrity": "sha512-8zKZzN+4mFGdgj0v3GuWXVUBhegZjOi4qBVpbZrAjUjOktNzgiLkYDNjd8EixHedXYi/ClyaUxm/1Xk/Gbp+RQ==",
+      "mode": 420,
+      "size": 5572
+    },
+    "package.json": {
+      "checkedAt": 1729086517982,
+      "integrity": "sha512-gOGDs0Aa0yqrk2w4+jg2NpN+nOFSNs+373gb/6sgR0hxoaW3cDipJI2f6kBSIHRneqy6rXck6yG0wNb2SFs0zg==",
+      "mode": 420,
+      "size": 2164
+    },
+    "README.md": {
+      "checkedAt": 1729086517983,
+      "integrity": "sha512-L2KjHUkW4Hw0d15ldufY+tMZ2Lkxlvw7YvxDRI6pXG28x5NP5agF10XxDVJNgeSoUAdO+LeA5U83MV7ApJsarw==",
+      "mode": 420,
+      "size": 5691
+    },
+    "dist/index.d.ts": {
+      "checkedAt": 1729086517984,
+      "integrity": "sha512-Oi7rGgPS75lfgND/lVnf/0Pd2CKRlRvkNonUXTD2ElQuCFVibBnIHrFF4A1Fs1WnsiaUZxbNqz78vcBDHM3zTw==",
+      "mode": 420,
+      "size": 596
+    },
+    "dist/visitor-keys.d.ts": {
+      "checkedAt": 1729086517984,
+      "integrity": "sha512-ibICB9IRIuRxu/TKUfE+SjP68PL9eQjyg+7K/wVHgTHmIEk/UIZ0HJy7Ukb1VQijo121d2n4aodi6+kWjIjdpw==",
+      "mode": 420,
+      "size": 295
+    }
+  }
+}

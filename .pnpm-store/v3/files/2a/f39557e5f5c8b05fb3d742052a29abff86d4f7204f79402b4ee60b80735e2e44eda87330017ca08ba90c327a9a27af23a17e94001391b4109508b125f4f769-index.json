@@ -1,0 +1,55 @@
+{
+  "name": "micromark-util-character",
+  "version": "2.1.0",
+  "requiresBuild": false,
+  "files": {
+    "dev/index.js": {
+      "checkedAt": 1727343356756,
+      "integrity": "sha512-Rrle/x7mGnPArqBEBRgJAery68z6oomI81Y7WGGbrFiyS0xpVboJ9E6oLjCFnK6VWBuVRcCPLlqSACSDjk7rPg==",
+      "mode": 420,
+      "size": 7189
+    },
+    "index.js": {
+      "checkedAt": 1727343356756,
+      "integrity": "sha512-4oavweNkd0GeYC2ZQRo0u4+InjcMR5aK3ncJPswGQu5qpHfz+HlcxVYk+IyGk+JjUQnvmqBIkwV5jEw56N2Zeg==",
+      "mode": 420,
+      "size": 7048
+    },
+    "package.json": {
+      "checkedAt": 1727343356756,
+      "integrity": "sha512-os2Pljoa/ilGCiSMe55qfdidwIi/j94QsrQMu4vS1TxTA9C/itYqOL4MIJ7nlmFj6e7j4hgPG85j1IZKuEyWAg==",
+      "mode": 420,
+      "size": 1290
+    },
+    "dev/index.d.ts.map": {
+      "checkedAt": 1727343356757,
+      "integrity": "sha512-tUPJG7ikyKhfJBVIrNr+v5uJrFQ8uVmGRVAfDX8ks+vs2yzDIPxGEVlotzj6jUWoESBrS0lUpnvUpZDTJNLP7g==",
+      "mode": 420,
+      "size": 594
+    },
+    "index.d.ts.map": {
+      "checkedAt": 1727343356757,
+      "integrity": "sha512-tUPJG7ikyKhfJBVIrNr+v5uJrFQ8uVmGRVAfDX8ks+vs2yzDIPxGEVlotzj6jUWoESBrS0lUpnvUpZDTJNLP7g==",
+      "mode": 420,
+      "size": 594
+    },
+    "readme.md": {
+      "checkedAt": 1727343356757,
+      "integrity": "sha512-DFXPGqgUUk8MCvEtHPYnJXm44wuZgqP4BWhmNyIaxQ3cDk+vIP57JgP/srJjoy20+rZrPk1/OBQnPOMEitP1IQ==",
+      "mode": 420,
+      "size": 11846
+    },
+    "dev/index.d.ts": {
+      "checkedAt": 1727343356758,
+      "integrity": "sha512-dAa4eSqp19CHITwqgqSYF68zKElPQjpMXbJp00xLwWAETOHOuvRq+Jclk1q38kRtGBVAgnJaESZ2kJvlHf9lDw==",
+      "mode": 420,
+      "size": 2272
+    },
+    "index.d.ts": {
+      "checkedAt": 1727343356758,
+      "integrity": "sha512-dAa4eSqp19CHITwqgqSYF68zKElPQjpMXbJp00xLwWAETOHOuvRq+Jclk1q38kRtGBVAgnJaESZ2kJvlHf9lDw==",
+      "mode": 420,
+      "size": 2272
+    }
+  }
+}

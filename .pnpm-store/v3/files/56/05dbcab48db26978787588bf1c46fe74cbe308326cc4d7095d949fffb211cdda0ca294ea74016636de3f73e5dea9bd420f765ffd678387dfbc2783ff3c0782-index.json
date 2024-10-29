@@ -1,0 +1,163 @@
+{
+  "name": "package-manager-detector",
+  "version": "0.2.2",
+  "requiresBuild": false,
+  "files": {
+    "LICENSE": {
+      "checkedAt": 1730129289144,
+      "integrity": "sha512-h9eYqW1qjHd9+UPJdCXcR521xuELWuXqGv4TzYOf/Yjcm0MtL3Q6WAm7JNPhtE2VIFV41r1Vhrb0oZS3hijIFA==",
+      "mode": 420,
+      "size": 1102
+    },
+    "dist/commands.cjs": {
+      "checkedAt": 1730129289144,
+      "integrity": "sha512-YzG2AbyteXSwwoq3ISRL0FVYaX+/fDUZ/lCNtMKYiUjIKyv+PWXKJtUpWDnD6M54rXNzWF0P9d5GqPy6g78XUA==",
+      "mode": 420,
+      "size": 3164
+    },
+    "dist/constants.cjs": {
+      "checkedAt": 1730129289148,
+      "integrity": "sha512-/Ew6abulSkFLOqpsirTzBUrAjyBTYa+x4VLvmgBxkMb4AM7Pt078s6xT0APydZk1IfvE71KUCbU0KfXA6L6+ug==",
+      "mode": 420,
+      "size": 667
+    },
+    "dist/detect.cjs": {
+      "checkedAt": 1730129289150,
+      "integrity": "sha512-RFNlSH+xbE6HNuQk5g6y4S/IYn60UpgjOoG3g+p401+1vzivKXWe6ghK30ChxHctK/xvCp0ai3TVY0T69q9MJg==",
+      "mode": 420,
+      "size": 3741
+    },
+    "dist/index.cjs": {
+      "checkedAt": 1730129289151,
+      "integrity": "sha512-cerLhZ03zCNrZ20oJQlSWjJuLd+z2HdlB9FF9MrtdSd1ww+8zaZ6GcigIdVV8cwkHrLkmSLysenyMTVgToeGjg==",
+      "mode": 420,
+      "size": 573
+    },
+    "dist/commands.d.cts": {
+      "checkedAt": 1730129289154,
+      "integrity": "sha512-Tde3xEJ/C/IxxuvX2hj/DsdeDEk9W9Kb0ZtMsnaq8s2wwsVSxtj4+7UHZbcQzo3K23hAox7fBBvSP5N1LYVM8w==",
+      "mode": 420,
+      "size": 1572
+    },
+    "dist/constants.d.cts": {
+      "checkedAt": 1730129289158,
+      "integrity": "sha512-jHutxvi0nCp9YPWlA8fsetUMcRN5MsICo0miO30A8mvophJR48/wGYXbXgy+pvv+jvB/+TBgrg6JGf4o1WSluQ==",
+      "mode": 420,
+      "size": 265
+    },
+    "dist/detect.d.cts": {
+      "checkedAt": 1730129289159,
+      "integrity": "sha512-zu4kBCcyqlbOJ4Yz56zugzkROa9cRW3u6THGhlhMkE+sKhxpHH9dYQ2tCMfZs7KIkK3IHLsX3qUNLve2XA0iVw==",
+      "mode": 420,
+      "size": 774
+    },
+    "dist/index.d.cts": {
+      "checkedAt": 1730129289162,
+      "integrity": "sha512-TuKSMfoFBmHqCpKj2tCh+JSjMhgdEXPtXqE9nIqoZXWarvis/A0RoqXu7GVVbVgNyfvojGCwcDd+OnMb31IsSg==",
+      "mode": 420,
+      "size": 403
+    },
+    "dist/shared/package-manager-detector.ca2fb30b.d.cts": {
+      "checkedAt": 1730129289163,
+      "integrity": "sha512-zsy6CTarTdQQeoEbqBdNNJn3BO7PE6O+pPxoNZDn8QECDbcgaD+N72yxc3h9eiw2WsEfV1yxuUh6JGRhPrc+7A==",
+      "mode": 420,
+      "size": 1964
+    },
+    "package.json": {
+      "checkedAt": 1730129289164,
+      "integrity": "sha512-JMK+DBBjDgQUF2ta4h1bNjob329rj1Bdmspck6K83Us30jQI3YJwwuzd699nOnc3O5ZSIN+UUqa4vdkgjFI7aQ==",
+      "mode": 420,
+      "size": 1809
+    },
+    "README.md": {
+      "checkedAt": 1730129289169,
+      "integrity": "sha512-DyBkA/f1ar1IjOMcKuCaQmKg1AMdKf0ExM+qISrqIMU4ZQtnG4b7kf7AGd3xjA4kAFFgCKcnLkTLZHFSE9wMGQ==",
+      "mode": 420,
+      "size": 3344
+    },
+    "dist/commands.mjs": {
+      "checkedAt": 1730129289175,
+      "integrity": "sha512-nFRa9SGVjW7xDLyUHO7Mabo43YjT9wN+W1Hfg6qyp5oHUKQnGYbRH78XOEJbYqYbiGlA6F5J4djkS0e3fD36jQ==",
+      "mode": 420,
+      "size": 3089
+    },
+    "dist/constants.mjs": {
+      "checkedAt": 1730129289186,
+      "integrity": "sha512-LFSZ9vOo27m5mVDAHJcKMMY+bHOchIcGZaJq9i6DmkbixUrRYWKljm2+lagxGIkKwYgtQLgRPveaTmsePiGA7w==",
+      "mode": 420,
+      "size": 607
+    },
+    "dist/detect.mjs": {
+      "checkedAt": 1730129289186,
+      "integrity": "sha512-viw4z9aPjyxjRSmt3fescD7eSnDY+gK1hwsDVvRjKHUHNy1vcD5telQqgIuRsP2nN5Wb9vuhhr7yVp5deEkyYg==",
+      "mode": 420,
+      "size": 3135
+    },
+    "dist/index.mjs": {
+      "checkedAt": 1730129289188,
+      "integrity": "sha512-ERe9wcXpfi1V804bYb5qVidbHymED9Km7jvYnwsy5opg6cBp/nyJn46tuz9Ht1RtQH8Pm8awwt3lg+iRZE0zGw==",
+      "mode": 420,
+      "size": 279
+    },
+    "dist/commands.d.mts": {
+      "checkedAt": 1730129289188,
+      "integrity": "sha512-nxj/le1Jt5xFjJV/K50S+feHRsOYDIJJqQeBuo0OkoYl/9l1JQr8hFw8PtnDWn2QM5JCLAxBVYeZLpporxPJpA==",
+      "mode": 420,
+      "size": 1572
+    },
+    "dist/constants.d.mts": {
+      "checkedAt": 1730129289189,
+      "integrity": "sha512-jukLDg5914+31NPpgMDnQDYnbCFowHO6BULxgXLpaxY5NhQPqTeA6bevA/k/nS7qvKZhT/S4os//wz8O4RfQxg==",
+      "mode": 420,
+      "size": 265
+    },
+    "dist/detect.d.mts": {
+      "checkedAt": 1730129289190,
+      "integrity": "sha512-Upq/nJ+9wbYOvQ8SPLMSGtIpdsE9zAeJwd8rMr1l/GNYuVSEOVO11ZinzSO99Qkccr2vzNhmeQsbhfui81SK8w==",
+      "mode": 420,
+      "size": 774
+    },
+    "dist/index.d.mts": {
+      "checkedAt": 1730129289191,
+      "integrity": "sha512-NDzNtbxBaYXvXEXDukwWINaEN37FzvukOqERZXmwL/Aiy6M4ywbC29VoASMaCDLPY73eIw0KOFRJ0WWHy1T8fA==",
+      "mode": 420,
+      "size": 403
+    },
+    "dist/shared/package-manager-detector.ca2fb30b.d.mts": {
+      "checkedAt": 1730129289163,
+      "integrity": "sha512-zsy6CTarTdQQeoEbqBdNNJn3BO7PE6O+pPxoNZDn8QECDbcgaD+N72yxc3h9eiw2WsEfV1yxuUh6JGRhPrc+7A==",
+      "mode": 420,
+      "size": 1964
+    },
+    "dist/commands.d.ts": {
+      "checkedAt": 1730129289191,
+      "integrity": "sha512-1AcfmDXLbRt0ys+/ZIm68XYgqSXnA+Lf167la/P4i3o4GS7LYrpwEtyUYEKzaFK0bZbx6rE0feExn0t2/4O7kQ==",
+      "mode": 420,
+      "size": 1571
+    },
+    "dist/constants.d.ts": {
+      "checkedAt": 1730129289192,
+      "integrity": "sha512-4osR/1BHgnHO1ORrgI20AQX+uSbHxsA5q4KfvBXadRqnFI2HyVYmO3MI6a0aeJCqMC66s2iriloOagoA88I/cw==",
+      "mode": 420,
+      "size": 264
+    },
+    "dist/detect.d.ts": {
+      "checkedAt": 1730129289193,
+      "integrity": "sha512-XTX04AQDVyl0cVmg0iLxs4185e+Ubw1QU0OQtGHhzibNGx91CV6bEodJzxQdpUaUSdFod4xu2CmYbTHuRgJnHA==",
+      "mode": 420,
+      "size": 773
+    },
+    "dist/index.d.ts": {
+      "checkedAt": 1730129289194,
+      "integrity": "sha512-9GQcTo8slriIqh+St/KVhrpRvxviwosWv1j84hNHOkM5uxqgdjgTgR0gDMXlgHGsFF5SuvYz5J+tqSKVG86D/g==",
+      "mode": 420,
+      "size": 399
+    },
+    "dist/shared/package-manager-detector.ca2fb30b.d.ts": {
+      "checkedAt": 1730129289163,
+      "integrity": "sha512-zsy6CTarTdQQeoEbqBdNNJn3BO7PE6O+pPxoNZDn8QECDbcgaD+N72yxc3h9eiw2WsEfV1yxuUh6JGRhPrc+7A==",
+      "mode": 420,
+      "size": 1964
+    }
+  }
+}

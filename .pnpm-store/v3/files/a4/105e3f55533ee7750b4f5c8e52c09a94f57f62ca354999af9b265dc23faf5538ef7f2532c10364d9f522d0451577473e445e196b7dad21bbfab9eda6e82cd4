@@ -1,0 +1,5 @@
+import { TSESLint } from '@typescript-eslint/utils';
+type RuleOptions = [('string' | 'object')?];
+type MessageId = 'preferStringStyle' | 'preferObjectStyle' | 'preferWrappingWithCSS' | 'emptyCssProp';
+declare const _default: TSESLint.RuleModule<MessageId, RuleOptions, TSESLint.RuleListener>;
+export default _default;

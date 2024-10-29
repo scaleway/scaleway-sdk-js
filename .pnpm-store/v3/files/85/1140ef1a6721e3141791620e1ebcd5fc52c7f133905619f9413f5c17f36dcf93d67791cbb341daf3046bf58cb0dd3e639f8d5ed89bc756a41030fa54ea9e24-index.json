@@ -1,0 +1,19 @@
+{
+  "name": "@nx/nx-darwin-x64",
+  "version": "19.8.2",
+  "requiresBuild": false,
+  "files": {
+    "package.json": {
+      "checkedAt": 1727343356640,
+      "integrity": "sha512-wHYw6xx3F4h1IkOWlQO3+JlTLBfZbEk0QzOgIlIaJ9b7YVw0xTpFtO7IhOXGnryiuzyqCmdZqb9Ku+HFt3p2Zg==",
+      "mode": 420,
+      "size": 439
+    },
+    "nx.darwin-x64.node": {
+      "checkedAt": 1727343356657,
+      "integrity": "sha512-8trcdPT5fyTna/Ur+B+fEuBlQk42HrQ/x7RNG04leTJmu+9dvbsRlo+LCYPsWYZT+lKWeH9UREEkE3r8Hf80cA==",
+      "mode": 420,
+      "size": 8400184
+    }
+  }
+}

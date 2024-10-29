@@ -1,0 +1,109 @@
+{
+  "name": "magicast",
+  "version": "0.3.4",
+  "requiresBuild": false,
+  "files": {
+    "LICENSE": {
+      "checkedAt": 1729086516629,
+      "integrity": "sha512-ltXsF9wL6kTijho/1Te055vFWc4xqwwLpuvmsUbrOcZLgMyLkwDQE+vjqmhYEmb+CLbLjN8S8t5x4OpnaZQSSA==",
+      "mode": 420,
+      "size": 1120
+    },
+    "dist/helpers.cjs": {
+      "checkedAt": 1729086516630,
+      "integrity": "sha512-kfC+Bke8xm7JRWnjsegEcNHrFLF5Go7MG4za2Ba+8hBQPpG4Zj4b/dTwTKMMqEzu4t1z1P+VjEXE4ApubYmTdA==",
+      "mode": 420,
+      "size": 5198
+    },
+    "dist/index.cjs": {
+      "checkedAt": 1729086516634,
+      "integrity": "sha512-2bEI2hS8I3eMDwsIDkSc0lkgrPeKEnm7a5eOzj91RIeS6pySOQDzxxdV2/QoAkVitwnk3iK6HsxzBaJcZxh28Q==",
+      "mode": 420,
+      "size": 293146
+    },
+    "dist/helpers.d.cts": {
+      "checkedAt": 1729086516635,
+      "integrity": "sha512-unC4ugNatHjpMbPhTtIQvIvFAEgdrpi8M8SQIc+Zq0BXj99SGxefCnbe4jfuK/Hb7hugOsqWqOPLXYH7f8o48Q==",
+      "mode": 420,
+      "size": 2520
+    },
+    "dist/index.d.cts": {
+      "checkedAt": 1729086516637,
+      "integrity": "sha512-P5qS1+Q0vKCX72p7T541h1T4bw/i7UTpRbDKzvzI/BTYV3Q44hEyVTsOrIhxSPbpjBrHJ9sXdTwGRhdgN5FrHQ==",
+      "mode": 420,
+      "size": 2315
+    },
+    "dist/shared/magicast.fe89c83b.d.cts": {
+      "checkedAt": 1729086516638,
+      "integrity": "sha512-U5XlvqSGUEfwDTjeedR9Zv6Cup+/16BjcGxnb8yVwuR2FhxWCHRIJfTeaCWtwe3MXtblfsd8mkGfwNZCbnX2rQ==",
+      "mode": 420,
+      "size": 9107
+    },
+    "package.json": {
+      "checkedAt": 1729086516640,
+      "integrity": "sha512-I0prR/38Xb4BHeEY/dceGl/Ikoy1RW7/s/WMnpD+U1Zr3G2ZdaKe352r6seGGaN+BwXHA+84Jny8DxZikRLrGw==",
+      "mode": 420,
+      "size": 2817
+    },
+    "README.md": {
+      "checkedAt": 1729086516641,
+      "integrity": "sha512-syA9pj+FOx6IHuCGPOUN9LKyuYeKTxKyIL3WZiJrdOhmcry+hT0gGViN9sXVLEBgSqJ1Am359K9nqKTvSWk7LQ==",
+      "mode": 420,
+      "size": 5847
+    },
+    "dist/helpers.mjs": {
+      "checkedAt": 1729086516643,
+      "integrity": "sha512-M/ZmnWesJXOiZKUxOU6dZb7qqZlwBujEqDzXbq+dxr3MDxXu9IZkdBmuy1YPaMxG2DKR4AG9+2VByinPFDIBog==",
+      "mode": 420,
+      "size": 4949
+    },
+    "dist/index.mjs": {
+      "checkedAt": 1729086516647,
+      "integrity": "sha512-YXFycR4Mva4Zyfap3TBBs125eBMUU9pCfKA0zKkmLuPWa2XO52QDiW4FaW6VG05EfGCiHn4WNsOzDVsv25TRrA==",
+      "mode": 420,
+      "size": 292371
+    },
+    "dist/helpers.d.mts": {
+      "checkedAt": 1729086516648,
+      "integrity": "sha512-NCIfuiuFE2OVa3cCW3kaSluUd2+cTDlb+CICzRPNaDpAObBBPJMlQ/32tchlh1JkXDLQtAY6Ny6G3Kg0qd16Ng==",
+      "mode": 420,
+      "size": 2520
+    },
+    "dist/index.d.mts": {
+      "checkedAt": 1729086516649,
+      "integrity": "sha512-NgCtkQo2AxYisNFGYyd6UTFQN0B7GwAGan/L7BGx/am6VJCEOw3R1IGEEOb1Aw+QA2Q3Pivl+Yo2l2ai29XqEQ==",
+      "mode": 420,
+      "size": 2315
+    },
+    "dist/shared/magicast.fe89c83b.d.mts": {
+      "checkedAt": 1729086516638,
+      "integrity": "sha512-U5XlvqSGUEfwDTjeedR9Zv6Cup+/16BjcGxnb8yVwuR2FhxWCHRIJfTeaCWtwe3MXtblfsd8mkGfwNZCbnX2rQ==",
+      "mode": 420,
+      "size": 9107
+    },
+    "dist/helpers.d.ts": {
+      "checkedAt": 1729086516650,
+      "integrity": "sha512-P8cHCKLdZEfknlbGx8OK/5nf/uVVB8YLrFN4PZXJbSocn6W6VRrxEK1zpvW+Qvlx0ehAjgaKeg7TAgrTTlic9w==",
+      "mode": 420,
+      "size": 2519
+    },
+    "helpers.d.ts": {
+      "checkedAt": 1729086516651,
+      "integrity": "sha512-4Od6NJhnEHX1iriGonIga82bj2zbpux5JWNRzt/llEJVF8xMNCbz2u3dbV3AT3kIe2G7sknsdBS/36DJLDlynQ==",
+      "mode": 420,
+      "size": 35
+    },
+    "dist/index.d.ts": {
+      "checkedAt": 1729086516652,
+      "integrity": "sha512-/ff6xyONHSucwJNyrob3DLDAoDe4iAFfRJwpXdAuOixdADBfhBQdCN5WCabYEW5N9zGEdzAHcA4cJvVP8Yl0UQ==",
+      "mode": 420,
+      "size": 2313
+    },
+    "dist/shared/magicast.fe89c83b.d.ts": {
+      "checkedAt": 1729086516638,
+      "integrity": "sha512-U5XlvqSGUEfwDTjeedR9Zv6Cup+/16BjcGxnb8yVwuR2FhxWCHRIJfTeaCWtwe3MXtblfsd8mkGfwNZCbnX2rQ==",
+      "mode": 420,
+      "size": 9107
+    }
+  }
+}

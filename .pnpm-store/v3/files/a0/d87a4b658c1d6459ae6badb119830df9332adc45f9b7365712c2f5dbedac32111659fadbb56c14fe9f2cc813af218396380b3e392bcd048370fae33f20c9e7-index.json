@@ -1,0 +1,31 @@
+{
+  "name": "micromark-util-types",
+  "version": "2.0.0",
+  "requiresBuild": false,
+  "files": {
+    "index.js": {
+      "checkedAt": 1727343356936,
+      "integrity": "sha512-3zndZr3w2gSmHzjsPMVPT08Eva7uCqMjr2l//FPxtBVMqC7HuZSjMryCMDBydhBImDvLA0K1u1234hVKPjz9hQ==",
+      "mode": 420,
+      "size": 53
+    },
+    "package.json": {
+      "checkedAt": 1727343356950,
+      "integrity": "sha512-s7QGNIWSkEL7P6n52FjwzwLq1tkkJ1f1ZeTW+oOylr3oaK5n5SoqlW1B2MJzQVbuxiV84mlBky8DkiI/9F9n7w==",
+      "mode": 420,
+      "size": 915
+    },
+    "readme.md": {
+      "checkedAt": 1727343356950,
+      "integrity": "sha512-pa68t+EV/W/BnADRLMs8ry4wm967BhwYxCepRJVTLYFBJbly8qM200zCHESe7sbL8CvVn8/HrBibvg65SNWudA==",
+      "mode": 420,
+      "size": 3947
+    },
+    "index.d.ts": {
+      "checkedAt": 1727343356951,
+      "integrity": "sha512-kckz8fBATQ9iSCk/1w1d5LVEWWTaceJzQ7GMOjvTkNoGT/bSWZMjZbcuVOmoowmFyCXLfwio02T6uTULDmHovA==",
+      "mode": 420,
+      "size": 31741
+    }
+  }
+}

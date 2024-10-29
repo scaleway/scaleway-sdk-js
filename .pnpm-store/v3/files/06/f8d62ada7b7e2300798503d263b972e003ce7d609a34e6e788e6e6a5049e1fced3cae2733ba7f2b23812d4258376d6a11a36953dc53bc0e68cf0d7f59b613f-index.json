@@ -1,0 +1,49 @@
+{
+  "name": "@vitest/coverage-istanbul",
+  "version": "2.0.5",
+  "requiresBuild": false,
+  "files": {
+    "dist/constants-BCJfMgEg.js": {
+      "checkedAt": 1727343349982,
+      "integrity": "sha512-WZVJMuDM72jbL8gRiUSwyybgx8d9e3YhuISuFcSY9lAwKDK2ZscZy7eYr1Nm5O2ou0W6GB5Utia2aoGlTpC36w==",
+      "mode": 420,
+      "size": 87
+    },
+    "dist/index.js": {
+      "checkedAt": 1727343349983,
+      "integrity": "sha512-sC2+6VRXaUmj7wrQQeU2JILS/9jteIh88SgbDQdV4xFptGbHNtigJvy2hl7t3JGOO8o0uaPpmH0CResMjBqP4g==",
+      "mode": 420,
+      "size": 529
+    },
+    "dist/provider.js": {
+      "checkedAt": 1727343349983,
+      "integrity": "sha512-+72AzjAVEoreZK8n+7R3UgObnrWZbatUNdMh+TM9KGHI7tCN8Wwz1f9pP3gEW7TO7npS3JjsN1GCCZ3wzmlsTQ==",
+      "mode": 420,
+      "size": 13482
+    },
+    "package.json": {
+      "checkedAt": 1727343349984,
+      "integrity": "sha512-DoHHJg4SQK+5CqO8LjcoCz/u4LGZD2QfArsIvCq5KkQpICBfavWgGzF+LPEU2x8/7kVKwntPMXcMeIvBf7eA7Q==",
+      "mode": 420,
+      "size": 1805
+    },
+    "dist/index.d.ts": {
+      "checkedAt": 1727343349984,
+      "integrity": "sha512-qe72QJx8wb173R3Yk5P/nJb6/tJ7eVElshhP3o0MiqX5ksQdrFiniX4vQKmOYphiOMGi5G5FnsVvP0E02yOV/Q==",
+      "mode": 420,
+      "size": 449
+    },
+    "dist/provider.d.ts": {
+      "checkedAt": 1727343349985,
+      "integrity": "sha512-U2DBHgKo8OWNLn95JGiZUF/QwltsTDs8QPXhH64NKBRyTuFnZWvDmOZ6YYv2SlMddWFoRqwOWs80ywURlAgogw==",
+      "mode": 420,
+      "size": 2067
+    },
+    "LICENSE": {
+      "checkedAt": 1727343349986,
+      "integrity": "sha512-gn3vYmOSocTgGkwXqwxU0ZWTwmHtj5GWeDAu1wRcJbohRlul4hgl3Xxetf19pYBGcri0Qih231wohOKd4y3aQQ==",
+      "mode": 420,
+      "size": 1076
+    }
+  }
+}

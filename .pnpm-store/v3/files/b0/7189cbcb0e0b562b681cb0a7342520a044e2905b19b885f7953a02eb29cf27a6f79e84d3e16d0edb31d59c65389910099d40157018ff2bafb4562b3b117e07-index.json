@@ -1,0 +1,31 @@
+{
+  "name": "npm-package-arg",
+  "version": "11.0.3",
+  "requiresBuild": false,
+  "files": {
+    "LICENSE": {
+      "checkedAt": 1729086519356,
+      "integrity": "sha512-YC3Qm+JURUKkYIPnGm5D/vyZ64hL3XBfYp+LS/SRksb4xILNakkDl6/eEAvpNHUkB5q7TG0YvaP2TPL7d9L+TA==",
+      "mode": 420,
+      "size": 739
+    },
+    "lib/npa.js": {
+      "checkedAt": 1729086519357,
+      "integrity": "sha512-E3NKAx9EBrJUGDPSV/BMP/sUkOF/sXFwczGR+9OOssrz8n2TjBgP6JgPimf7zRoyshEFRFyGuEqWiqGE/3gy1g==",
+      "mode": 420,
+      "size": 12557
+    },
+    "package.json": {
+      "checkedAt": 1729086519357,
+      "integrity": "sha512-6Unx6+cx24NOS+ZmIi7p3MllS+VH6cQP2/vPx/WBus0Kv5BCVqlhmGaWrUXeuCnvZvEo9UiNcDUhYBYL3yauAw==",
+      "mode": 420,
+      "size": 1523
+    },
+    "README.md": {
+      "checkedAt": 1729086519360,
+      "integrity": "sha512-HvO9m3SiV9MscZLSPDLGU4ShW9zfskRvj6F87xH7YsZ+oMVz/an+E5BX4LmQcHacq1BqZ+WYcK3AgsSe6SgNRg==",
+      "mode": 420,
+      "size": 4359
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "@shikijs/engine-javascript",
+  "version": "1.19.0",
+  "requiresBuild": false,
+  "files": {
+    "package.json": {
+      "checkedAt": 1727343353903,
+      "integrity": "sha512-Fo/A2H0R3pF8mACEbpFKTNgBMMd9SMrj8LNaZlP926xj6vfIv3pr2FlvTlQxUY+Xwvy0xCvi1qo3dvDBoD2Isg==",
+      "mode": 420,
+      "size": 994
+    },
+    "README.md": {
+      "checkedAt": 1727343353911,
+      "integrity": "sha512-C9BojIggOcKs6kokkp9i33NTsGQKPkG2gU+lc0ceO3ZJ7QBmkJ60Aht0P5Ll58RN0LYX2X5a8GLN0GxFhNgNYg==",
+      "mode": 420,
+      "size": 171
+    },
+    "dist/index.mjs": {
+      "checkedAt": 1727343353911,
+      "integrity": "sha512-uldOD6R3aeAMt36VKqiVLnrGAv+94Dc18M2MrP4WAgoUdSykWCfOpCrwot7YGTqDKTDYbmi6ddXg8sqVOVnL2g==",
+      "mode": 420,
+      "size": 4306
+    },
+    "dist/index.d.mts": {
+      "checkedAt": 1727343353914,
+      "integrity": "sha512-C3poBbMLGeGM9M+adwHrxyKTaZyiLHNrCTWob/Wj+x63gYgcbhPQg2tmyIOnUoRsvzCKbwDiNWD3Ht43L8Nw2A==",
+      "mode": 420,
+      "size": 1828
+    },
+    "dist/index.d.ts": {
+      "checkedAt": 1727343353914,
+      "integrity": "sha512-C3poBbMLGeGM9M+adwHrxyKTaZyiLHNrCTWob/Wj+x63gYgcbhPQg2tmyIOnUoRsvzCKbwDiNWD3Ht43L8Nw2A==",
+      "mode": 420,
+      "size": 1828
+    },
+    "LICENSE": {
+      "checkedAt": 1727343352042,
+      "integrity": "sha512-5Oyi8HU/tGbhNDzTBpEbXlDP/g0HnJ+Apx3ZgV/SLjr25kzEDWWBkjuJ9jA1oOpl9+t7JW3RLaiSrWU9mz8XIg==",
+      "mode": 420,
+      "size": 1121
+    }
+  }
+}

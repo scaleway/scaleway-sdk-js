@@ -1,0 +1,67 @@
+{
+  "name": "@eslint/config-array",
+  "version": "0.18.0",
+  "requiresBuild": false,
+  "files": {
+    "LICENSE": {
+      "checkedAt": 1727343719197,
+      "integrity": "sha512-3Gto0TuM+VlkS5NfEZKwLHGqelz2U71DtEgPqJ7sjU0/FqInjsjDtAqx/bIzsxc6eP2DWQ1vc54Mno/1bCglVw==",
+      "mode": 420,
+      "size": 11357
+    },
+    "dist/cjs/index.cjs": {
+      "checkedAt": 1727343719198,
+      "integrity": "sha512-yLgfemf9dwReo1AwFrkcTECkaVlblu6khhjry+pDhVC/7jkNiJpcycSR7M57vt33t3oAOg1r5RUvgG3F+ihPbQ==",
+      "mode": 420,
+      "size": 34607
+    },
+    "dist/cjs/index.d.cts": {
+      "checkedAt": 1727343719199,
+      "integrity": "sha512-sQE15GLyrwzOJZRm57Phz4j7bhSk73LdUm6H4CmC+0btXhodISMNvTYdDanx9Y4oMQJPZV58MJKMmnZ7TU6cgw==",
+      "mode": 420,
+      "size": 6553
+    },
+    "dist/esm/index.js": {
+      "checkedAt": 1727343719199,
+      "integrity": "sha512-exbbEWWVTvOpBedn2iDQdqyCU9anrn88vlknGLpTOzmd2fTAfx9wL+fKR0MOQNdmfj1no61Nc83c4YnWvi6DZg==",
+      "mode": 420,
+      "size": 34478
+    },
+    "package.json": {
+      "checkedAt": 1727343719200,
+      "integrity": "sha512-PFEOT5WixcZ5gzedMd0H28UAY+Deu4IRLfE//qouCajdW92VsOdC0xj5N14LL7gN3VJjZ5yK2rGp/WNJWxajnQ==",
+      "mode": 420,
+      "size": 1724
+    },
+    "README.md": {
+      "checkedAt": 1727343719201,
+      "integrity": "sha512-Wt1U1OTbFv12M0V8J5nm+RevrGUdwxmgH2dkDfvIOgoKU+ljUm+2UJCNv3RBtvUQ6Mn0rlfZgNV2rH9evMOe7Q==",
+      "mode": 420,
+      "size": 16835
+    },
+    "dist/esm/index.d.ts": {
+      "checkedAt": 1727343719199,
+      "integrity": "sha512-sQE15GLyrwzOJZRm57Phz4j7bhSk73LdUm6H4CmC+0btXhodISMNvTYdDanx9Y4oMQJPZV58MJKMmnZ7TU6cgw==",
+      "mode": 420,
+      "size": 6553
+    },
+    "dist/esm/types.d.ts": {
+      "checkedAt": 1727343719202,
+      "integrity": "sha512-pD2a4I/HrmF1r72py0vXbNCCJqfOcDsc+uytQ+gbidJAzgI8fe6/jXSAOGHmOeMs//PHi3CWlJj0pFMq3r5VRA==",
+      "mode": 420,
+      "size": 361
+    },
+    "dist/cjs/types.ts": {
+      "checkedAt": 1727343719202,
+      "integrity": "sha512-up1Y7wucJAZs9vnMsHxlg/P0JNBW1BCt8eWtPO+Lqi/OPSoKZUB0C+lN6TBVzLQYr/PKmqPidX5MdPzxknlBtg==",
+      "mode": 420,
+      "size": 375
+    },
+    "dist/esm/types.ts": {
+      "checkedAt": 1727343719202,
+      "integrity": "sha512-up1Y7wucJAZs9vnMsHxlg/P0JNBW1BCt8eWtPO+Lqi/OPSoKZUB0C+lN6TBVzLQYr/PKmqPidX5MdPzxknlBtg==",
+      "mode": 420,
+      "size": 375
+    }
+  }
+}

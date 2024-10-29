@@ -1,0 +1,26 @@
+name: Generate changeset for Renovate
+
+on:
+  pull_request_target:
+    paths:
+      - '.github/workflows/changesets-renovate.yml'
+      - '**/pnpm-lock.yaml'
+      - '**/package.json'
+
+jobs:
+  generate-changeset:
+    runs-on: ubuntu-latest
+    if: github.actor == 'renovate[bot]'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Git Identity
+        run: |
+          git config --global user.name 'Scaleway Bot'
+          git config --global user.email 'github@scaleway.com'
+
+      - uses: pnpm/action-setup@v2.2.4
+
+      - name: Run Changesets
+        run: pnpm dlx @changesets/cli add

@@ -1,0 +1,11 @@
+export declare const rules: {
+    'import-from-emotion': import("@typescript-eslint/utils/dist/ts-eslint").RuleModule<"incorrectImport", never[], import("@typescript-eslint/utils/dist/ts-eslint").RuleListener>;
+    'no-vanilla': import("@typescript-eslint/utils/dist/ts-eslint").RuleModule<"vanillaEmotion", never[], import("@typescript-eslint/utils/dist/ts-eslint").RuleListener>;
+    'syntax-preference': import("@typescript-eslint/utils/dist/ts-eslint").RuleModule<"preferStringStyle" | "preferObjectStyle" | "preferWrappingWithCSS" | "emptyCssProp", [("string" | "object" | undefined)?], import("@typescript-eslint/utils/dist/ts-eslint").RuleListener>;
+    'styled-import': import("@typescript-eslint/utils/dist/ts-eslint").RuleModule<"incorrectImport", never[], import("@typescript-eslint/utils/dist/ts-eslint").RuleListener>;
+    'jsx-import': import("@typescript-eslint/utils/dist/ts-eslint").RuleModule<"cssProp" | "cssPropWithPragma" | "templateLiterals", [(string | {
+        runtime: string;
+        importSource?: string | undefined;
+    } | undefined)?], import("@typescript-eslint/utils/dist/ts-eslint").RuleListener>;
+    'pkg-renaming': import("@typescript-eslint/utils/dist/ts-eslint").RuleModule<"renamePackage" | "exportChange" | "emotionTheming", never[], import("@typescript-eslint/utils/dist/ts-eslint").RuleListener>;
+};

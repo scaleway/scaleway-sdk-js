@@ -1,0 +1,75 @@
+export { G as GitNotFoundError, F as TestsNotFoundError, b as VitestPackageInstaller, V as VitestPlugin, a as createMethodsRPC, c as createVitest, g as getFilePoolName, r as registerConsoleShortcuts, e as resolveApiServerConfig, f as resolveConfig, d as resolveFsAllow, s as startVitest } from './chunks/cli-api.OKfd3qJ0.js';
+export { p as parseCLI } from './chunks/cac.DGgmCKmU.js';
+import createDebug from 'debug';
+export { distDir, rootDir } from './path.js';
+export { h as BaseSequencer, d as TestCase, e as TestFile, i as TestProject, f as TestSuite } from './chunks/index.JbiJutJ_.js';
+export { createServer, isFileServingAllowed, parseAst, parseAstAsync } from 'vite';
+import 'node:fs';
+import 'pathe';
+import './chunks/coverage.CqfT4xaf.js';
+import './chunks/index.CM5UI-4O.js';
+import 'node:path';
+import 'node:url';
+import 'node:process';
+import './chunks/_commonjsHelpers.BFTU3MAI.js';
+import 'readline';
+import 'events';
+import './chunks/constants.CaAN7icJ.js';
+import 'node:worker_threads';
+import 'os';
+import 'path';
+import 'util';
+import './chunks/index.BMmMjLIQ.js';
+import 'stream';
+import 'fs';
+import 'vite-node/client';
+import '@vitest/snapshot/manager';
+import 'vite-node/server';
+import '@vitest/runner/utils';
+import './chunks/base.DSsbfkDg.js';
+import '@vitest/utils';
+import './chunks/env.BU041cs9.js';
+import 'std-env';
+import './chunks/index.BpSiYbpB.js';
+import 'zlib';
+import 'buffer';
+import 'crypto';
+import 'https';
+import 'http';
+import 'net';
+import 'tls';
+import 'url';
+import '@vitest/utils/source-map';
+import 'node:v8';
+import 'node:os';
+import 'node:events';
+import 'tinypool';
+import 'node:crypto';
+import 'node:fs/promises';
+import 'node:module';
+import 'node:assert';
+import 'node:util';
+import 'tinyrainbow';
+import 'vite-node/utils';
+import 'magic-string';
+import '@vitest/utils/ast';
+import './chunks/index.DYufA6CZ.js';
+import './chunks/utils.Ck2hJTRs.js';
+import 'node:readline';
+import './chunks/utils.DpP_sDwr.js';
+import './chunks/tasks.BZnCS9aT.js';
+import 'node:perf_hooks';
+import 'node:stream';
+import 'execa';
+import 'module';
+import 'node:console';
+import 'assert';
+
+function createDebugger(namespace) {
+  const debug = createDebug(namespace);
+  if (debug.enabled) {
+    return debug;
+  }
+}
+
+export { createDebugger };
