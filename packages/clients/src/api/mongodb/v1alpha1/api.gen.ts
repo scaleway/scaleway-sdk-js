@@ -15,6 +15,7 @@ import {
 import {
   marshalCreateInstanceRequest,
   marshalCreateSnapshotRequest,
+  marshalCreateUserRequest,
   marshalRestoreSnapshotRequest,
   marshalUpdateInstanceRequest,
   marshalUpdateSnapshotRequest,
@@ -32,6 +33,7 @@ import {
 import type {
   CreateInstanceRequest,
   CreateSnapshotRequest,
+  CreateUserRequest,
   DeleteInstanceRequest,
   DeleteSnapshotRequest,
   GetInstanceCertificateRequest,
@@ -491,6 +493,27 @@ export class API extends ParentAPI {
    */
   listUsers = (request: Readonly<ListUsersRequest>) =>
     enrichForPagination('users', this.pageOfListUsers, request)
+
+  /**
+   * Create an user on a Database Instance. Create an user on a Database
+   * Instance. You must define the `name`, `password` of the user and
+   * `instance_id` parameters in the request.
+   *
+   * @param request - The request {@link CreateUserRequest}
+   * @returns A Promise of User
+   */
+  createUser = (request: Readonly<CreateUserRequest>) =>
+    this.client.fetch<User>(
+      {
+        body: JSON.stringify(
+          marshalCreateUserRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users/${validatePathParam('name', request.name)}`,
+      },
+      unmarshalUser,
+    )
 
   /**
    * Update a user on a Database Instance. Update the parameters of a user on a

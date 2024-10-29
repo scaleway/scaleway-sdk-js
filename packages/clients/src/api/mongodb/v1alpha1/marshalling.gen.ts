@@ -12,6 +12,7 @@ import type {
   CreateInstanceRequest,
   CreateInstanceRequestVolumeDetails,
   CreateSnapshotRequest,
+  CreateUserRequest,
   Endpoint,
   EndpointPrivateNetworkDetails,
   EndpointPublicDetails,
@@ -413,6 +414,13 @@ export const marshalCreateSnapshotRequest = (
 ): Record<string, unknown> => ({
   expires_at: request.expiresAt,
   name: request.name,
+})
+
+export const marshalCreateUserRequest = (
+  request: CreateUserRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  password: request.password,
 })
 
 const marshalRestoreSnapshotRequestVolumeDetails = (

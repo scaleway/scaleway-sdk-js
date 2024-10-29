@@ -6,6 +6,7 @@ export type {
   CreateInstanceRequest,
   CreateInstanceRequestVolumeDetails,
   CreateSnapshotRequest,
+  CreateUserRequest,
   DeleteInstanceRequest,
   DeleteSnapshotRequest,
   Endpoint,
