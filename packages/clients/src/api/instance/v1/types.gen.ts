@@ -1223,9 +1223,9 @@ export type ExportSnapshotRequest = {
   zone?: Zone
   /** Snapshot ID. */
   snapshotId: string
-  /** S3 bucket name. */
+  /** Object Storage bucket name. */
   bucket: string
-  /** S3 object key. */
+  /** Object key. */
   key: string
 }
 

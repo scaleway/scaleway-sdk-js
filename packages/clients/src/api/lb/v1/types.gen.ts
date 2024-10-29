@@ -452,8 +452,9 @@ export interface Backend {
   /** Date at which the backend was updated. */
   updatedAt?: Date
   /**
-   * Scaleway S3 bucket website to be served as failover if all backend servers
-   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud.
+   * Scaleway Object Storage bucket website to be served as failover if all
+   * backend servers are down, e.g.
+   * failover-website.s3-website.fr-par.scw.cloud.
    */
   failoverHost?: string
   /**
@@ -893,8 +894,9 @@ export type CreateBackendRequest = {
    */
   proxyProtocol?: ProxyProtocol
   /**
-   * Scaleway S3 bucket website to be served as failover if all backend servers
-   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud.
+   * Scaleway Object Storage bucket website to be served as failover if all
+   * backend servers are down, e.g.
+   * failover-website.s3-website.fr-par.scw.cloud.
    */
   failoverHost?: string
   /**
@@ -1755,8 +1757,9 @@ export type UpdateBackendRequest = {
    */
   proxyProtocol?: ProxyProtocol
   /**
-   * Scaleway S3 bucket website to be served as failover if all backend servers
-   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud.
+   * Scaleway Object Storage bucket website to be served as failover if all
+   * backend servers are down, e.g.
+   * failover-website.s3-website.fr-par.scw.cloud.
    */
   failoverHost?: string
   /**
@@ -2119,8 +2122,9 @@ export type ZonedApiCreateBackendRequest = {
    */
   proxyProtocol?: ProxyProtocol
   /**
-   * Scaleway S3 bucket website to be served as failover if all backend servers
-   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud.
+   * Scaleway Object Storage bucket website to be served as failover if all
+   * backend servers are down, e.g.
+   * failover-website.s3-website.fr-par.scw.cloud.
    */
   failoverHost?: string
   /**
@@ -2778,8 +2782,9 @@ export type ZonedApiUpdateBackendRequest = {
    */
   proxyProtocol?: ProxyProtocol
   /**
-   * Scaleway S3 bucket website to be served as failover if all backend servers
-   * are down, e.g. failover-website.s3-website.fr-par.scw.cloud.
+   * Scaleway Object Storage bucket website to be served as failover if all
+   * backend servers are down, e.g.
+   * failover-website.s3-website.fr-par.scw.cloud.
    */
   failoverHost?: string
   /**
