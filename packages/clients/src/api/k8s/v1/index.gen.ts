@@ -3,6 +3,10 @@
 export { API } from './api.gen'
 export * from './content.gen'
 export type {
+  ACLRule,
+  ACLRuleRequest,
+  AddClusterACLRulesRequest,
+  AddClusterACLRulesResponse,
   AuthExternalNodeRequest,
   AutoscalerEstimator,
   AutoscalerExpander,
@@ -24,6 +28,7 @@ export type {
   CreateExternalNodeRequest,
   CreatePoolRequest,
   CreatePoolRequestUpgradePolicy,
+  DeleteACLRuleRequest,
   DeleteClusterRequest,
   DeleteNodeRequest,
   DeletePoolRequest,
@@ -36,6 +41,8 @@ export type {
   GetNodeRequest,
   GetPoolRequest,
   GetVersionRequest,
+  ListClusterACLRulesRequest,
+  ListClusterACLRulesResponse,
   ListClusterAvailableTypesRequest,
   ListClusterAvailableTypesResponse,
   ListClusterAvailableVersionsRequest,
@@ -68,6 +75,8 @@ export type {
   ReplaceNodeRequest,
   ResetClusterAdminTokenRequest,
   Runtime,
+  SetClusterACLRulesRequest,
+  SetClusterACLRulesResponse,
   SetClusterTypeRequest,
   UpdateClusterRequest,
   UpdateClusterRequestAutoUpgrade,
