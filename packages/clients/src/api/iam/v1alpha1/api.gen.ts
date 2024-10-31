@@ -104,6 +104,7 @@ import type {
   ListSSHKeysResponse,
   ListUsersRequest,
   ListUsersResponse,
+  LockUserRequest,
   Log,
   Policy,
   Quotum,
@@ -112,6 +113,7 @@ import type {
   SetGroupMembersRequest,
   SetRulesRequest,
   SetRulesResponse,
+  UnlockUserRequest,
   UpdateAPIKeyRequest,
   UpdateApplicationRequest,
   UpdateGroupRequest,
@@ -354,6 +356,41 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/update-password`,
+      },
+      unmarshalUser,
+    )
+
+  /**
+   * Lock a user. Lock a user. Note that a locked user cannot log in or use API
+   * keys until the locked status is removed.
+   *
+   * @param request - The request {@link LockUserRequest}
+   * @returns A Promise of User
+   */
+  lockUser = (request: Readonly<LockUserRequest>) =>
+    this.client.fetch<User>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/lock`,
+      },
+      unmarshalUser,
+    )
+
+  /**
+   * Unlock a user.
+   *
+   * @param request - The request {@link UnlockUserRequest}
+   * @returns A Promise of User
+   */
+  unlockUser = (request: Readonly<UnlockUserRequest>) =>
+    this.client.fetch<User>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/unlock`,
       },
       unmarshalUser,
     )

@@ -954,6 +954,10 @@ export interface ListUsersResponse {
   totalCount: number
 }
 
+export type LockUserRequest = {
+  userId: string
+}
+
 export type RemoveGroupMemberRequest = {
   /** ID of the group. */
   groupId: string
@@ -987,6 +991,10 @@ export type SetRulesRequest = {
 export interface SetRulesResponse {
   /** Rules of the policy. */
   rules: Rule[]
+}
+
+export type UnlockUserRequest = {
+  userId: string
 }
 
 export type UpdateAPIKeyRequest = {
