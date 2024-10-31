@@ -4,6 +4,9 @@ export { API } from './api.gen'
 export * from './content.gen'
 export type {
   Container,
+  ContainerHealthCheckSpec,
+  ContainerHealthCheckSpecHTTPProbe,
+  ContainerHealthCheckSpecTCPProbe,
   ContainerHttpOption,
   ContainerPrivacy,
   ContainerProtocol,
