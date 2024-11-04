@@ -14,16 +14,20 @@ import {
   POOL_TRANSIENT_STATUSES,
 } from './content.gen'
 import {
+  marshalAddClusterACLRulesRequest,
   marshalCreateClusterRequest,
   marshalCreatePoolRequest,
+  marshalSetClusterACLRulesRequest,
   marshalSetClusterTypeRequest,
   marshalUpdateClusterRequest,
   marshalUpdatePoolRequest,
   marshalUpgradeClusterRequest,
   marshalUpgradePoolRequest,
+  unmarshalAddClusterACLRulesResponse,
   unmarshalCluster,
   unmarshalExternalNode,
   unmarshalExternalNodeAuth,
+  unmarshalListClusterACLRulesResponse,
   unmarshalListClusterAvailableTypesResponse,
   unmarshalListClusterAvailableVersionsResponse,
   unmarshalListClusterTypesResponse,
@@ -34,14 +38,18 @@ import {
   unmarshalNode,
   unmarshalNodeMetadata,
   unmarshalPool,
+  unmarshalSetClusterACLRulesResponse,
   unmarshalVersion,
 } from './marshalling.gen'
 import type {
+  AddClusterACLRulesRequest,
+  AddClusterACLRulesResponse,
   AuthExternalNodeRequest,
   Cluster,
   CreateClusterRequest,
   CreateExternalNodeRequest,
   CreatePoolRequest,
+  DeleteACLRuleRequest,
   DeleteClusterRequest,
   DeleteNodeRequest,
   DeletePoolRequest,
@@ -53,6 +61,8 @@ import type {
   GetNodeRequest,
   GetPoolRequest,
   GetVersionRequest,
+  ListClusterACLRulesRequest,
+  ListClusterACLRulesResponse,
   ListClusterAvailableTypesRequest,
   ListClusterAvailableTypesResponse,
   ListClusterAvailableVersionsRequest,
@@ -74,6 +84,8 @@ import type {
   RebootNodeRequest,
   ReplaceNodeRequest,
   ResetClusterAdminTokenRequest,
+  SetClusterACLRulesRequest,
+  SetClusterACLRulesResponse,
   SetClusterTypeRequest,
   UpdateClusterRequest,
   UpdatePoolRequest,
@@ -350,6 +362,82 @@ export class API extends ParentAPI {
       },
       unmarshalCluster,
     )
+
+  protected pageOfListClusterACLRules = (
+    request: Readonly<ListClusterACLRulesRequest>,
+  ) =>
+    this.client.fetch<ListClusterACLRulesResponse>(
+      {
+        method: 'GET',
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/acls`,
+        urlParams: urlParams(
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListClusterACLRulesResponse,
+    )
+
+  /**
+   * List ACLs. List ACLs for a specific cluster.
+   *
+   * @param request - The request {@link ListClusterACLRulesRequest}
+   * @returns A Promise of ListClusterACLRulesResponse
+   */
+  listClusterACLRules = (request: Readonly<ListClusterACLRulesRequest>) =>
+    enrichForPagination('rules', this.pageOfListClusterACLRules, request)
+
+  /**
+   * Add new ACLs. Add new ACL rules for a specific cluster.
+   *
+   * @param request - The request {@link AddClusterACLRulesRequest}
+   * @returns A Promise of AddClusterACLRulesResponse
+   */
+  addClusterACLRules = (request: Readonly<AddClusterACLRulesRequest>) =>
+    this.client.fetch<AddClusterACLRulesResponse>(
+      {
+        body: JSON.stringify(
+          marshalAddClusterACLRulesRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/acls`,
+      },
+      unmarshalAddClusterACLRulesResponse,
+    )
+
+  /**
+   * Set new ACLs. Set new ACL rules for a specific cluster.
+   *
+   * @param request - The request {@link SetClusterACLRulesRequest}
+   * @returns A Promise of SetClusterACLRulesResponse
+   */
+  setClusterACLRules = (request: Readonly<SetClusterACLRulesRequest>) =>
+    this.client.fetch<SetClusterACLRulesResponse>(
+      {
+        body: JSON.stringify(
+          marshalSetClusterACLRulesRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PUT',
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/acls`,
+      },
+      unmarshalSetClusterACLRulesResponse,
+    )
+
+  /**
+   * Delete an existing ACL.
+   *
+   * @param request - The request {@link DeleteACLRuleRequest}
+   */
+  deleteACLRule = (request: Readonly<DeleteACLRuleRequest>) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/acls/${validatePathParam('aclId', request.aclId)}`,
+    })
 
   protected pageOfListPools = (request: Readonly<ListPoolsRequest>) =>
     this.client.fetch<ListPoolsResponse>(
