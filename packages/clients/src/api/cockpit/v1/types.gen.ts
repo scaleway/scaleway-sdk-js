@@ -4,12 +4,7 @@ import type { Region } from '../../../bridge'
 
 export type DataSourceOrigin = 'unknown_origin' | 'scaleway' | 'external'
 
-export type DataSourceType =
-  | 'unknown_type'
-  | 'metrics'
-  | 'logs'
-  | 'traces'
-  | 'alerts'
+export type DataSourceType = 'unknown_type' | 'metrics' | 'logs' | 'traces'
 
 export type GrafanaUserRole = 'unknown_role' | 'editor' | 'viewer'
 
@@ -59,6 +54,12 @@ export interface ContactPointEmail {
   to: string
 }
 
+export interface GetConfigResponseRetention {
+  minDays: number
+  maxDays: number
+  defaultDays: number
+}
+
 /** Contact point. */
 export interface ContactPoint {
   /**
@@ -94,6 +95,8 @@ export interface DataSource {
   updatedAt?: Date
   /** Indicates whether the data source is synchronized with Grafana. */
   synchronizedWithGrafana: boolean
+  /** BETA - Duration for which the data will be retained in the data source. */
+  retentionDays: number
   /** Region of the data source. */
   region: Region
 }
@@ -202,6 +205,16 @@ export interface AlertManager {
   managedAlertsEnabled: boolean
   /** Regions where the Alert manager is enabled. */
   region: Region
+}
+
+/** Cockpit configuration. */
+export interface GetConfigResponse {
+  /** Metrics retention configuration. */
+  metricsRetention?: GetConfigResponseRetention
+  /** Logs retention configuration. */
+  logsRetention?: GetConfigResponseRetention
+  /** Traces retention configuration. */
+  tracesRetention?: GetConfigResponseRetention
 }
 
 /** Create a Grafana user. */
@@ -405,6 +418,8 @@ export type RegionalApiCreateDataSourceRequest = {
   name: string
   /** Data source type. */
   type?: DataSourceType
+  /** Default values are 30 days for metrics, 7 days for logs and traces. */
+  retentionDays?: number
 }
 
 /** Create a token. */
@@ -514,6 +529,15 @@ export type RegionalApiGetAlertManagerRequest = {
   region?: Region
   /** Project ID of the requested Alert manager. */
   projectId?: string
+}
+
+/** Get Cockpit configuration. */
+export type RegionalApiGetConfigRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
 }
 
 /** Retrieve a data source. */
@@ -654,6 +678,8 @@ export type RegionalApiUpdateDataSourceRequest = {
   dataSourceId: string
   /** Updated name of the data source. */
   name?: string
+  /** BETA - Duration for which the data will be retained in the data source. */
+  retentionDays?: number
 }
 
 export interface UsageOverview {
