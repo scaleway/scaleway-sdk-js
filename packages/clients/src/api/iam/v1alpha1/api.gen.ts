@@ -347,6 +347,12 @@ export class API extends ParentAPI {
       unmarshalUser,
     )
 
+  /**
+   * Update an user's password.
+   *
+   * @param request - The request {@link UpdateUserPasswordRequest}
+   * @returns A Promise of User
+   */
   updateUserPassword = (request: Readonly<UpdateUserPasswordRequest>) =>
     this.client.fetch<User>(
       {
