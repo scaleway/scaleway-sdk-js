@@ -138,20 +138,13 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
           ['tags', request.tags],
         ),
       },
@@ -417,20 +410,13 @@ export class API extends ParentAPI {
           ['instance_id', request.instanceId],
           ['name', request.name],
           ['order_by', request.orderBy],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
         ),
       },
       unmarshalListSnapshotsResponse,
