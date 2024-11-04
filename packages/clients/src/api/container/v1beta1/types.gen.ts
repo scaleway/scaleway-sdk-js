@@ -95,12 +95,47 @@ export type TriggerStatus =
   | 'creating'
   | 'pending'
 
+export interface ContainerHealthCheckSpecHTTPProbe {
+  /** Path to use for the HTTP health check. */
+  path: string
+}
+
+export interface ContainerHealthCheckSpecTCPProbe {}
+
+export interface ContainerHealthCheckSpec {
+  /**
+   * HTTP health check configuration.
+   *
+   * One-of ('probe'): at most one of 'http', 'tcp' could be set.
+   */
+  http?: ContainerHealthCheckSpecHTTPProbe
+  /**
+   * TCP health check configuration.
+   *
+   * One-of ('probe'): at most one of 'http', 'tcp' could be set.
+   */
+  tcp?: ContainerHealthCheckSpecTCPProbe
+  /**
+   * During a deployment, if a newly created container fails to pass the health
+   * check, the deployment is aborted. As a result, lowering this value can help
+   * to reduce the time it takes to detect a failed deployment.
+   */
+  failureThreshold: number
+  /** Period between health checks. */
+  interval?: string
+}
+
 export interface ContainerScalingOption {
   /**
-   * One-of ('scalingRule'): at most one of 'concurrentRequestsThreshold' could
-   * be set.
+   * One-of ('scalingRule'): at most one of 'concurrentRequestsThreshold',
+   * 'cpuUsageThreshold' could be set.
    */
   concurrentRequestsThreshold?: number
+  /**
+   * One-of ('scalingRule'): at most one of 'concurrentRequestsThreshold',
+   * 'cpuUsageThreshold' could be set.
+   */
+  cpuUsageThreshold?: number
 }
 
 export interface SecretHashedValue {
@@ -236,8 +271,12 @@ export interface Container {
    *
    * - Concurrent_requests_threshold: Scale depending on the number of concurrent
    *   requests being processed per container instance.
+   * - Cpu_usage_threshold: Scale depending on the CPU usage of a container
+   *   instance.
    */
   scalingOption?: ContainerScalingOption
+  /** Health check configuration of the container. */
+  healthCheck?: ContainerHealthCheckSpec
   /** Creation date of the container. */
   createdAt?: Date
   /** Last update date of the container. */
@@ -433,8 +472,12 @@ export type CreateContainerRequest = {
    *
    * - Concurrent_requests_threshold: Scale depending on the number of concurrent
    *   requests being processed per container instance.
+   * - Cpu_usage_threshold: Scale depending on the CPU usage of a container
+   *   instance.
    */
   scalingOption?: ContainerScalingOption
+  /** Health check configuration of the container. */
+  healthCheck?: ContainerHealthCheckSpec
 }
 
 export type CreateCronRequest = {
@@ -894,8 +937,12 @@ export type UpdateContainerRequest = {
    *
    * - Concurrent_requests_threshold: Scale depending on the number of concurrent
    *   requests being processed per container instance.
+   * - Cpu_usage_threshold: Scale depending on the CPU usage of a container
+   *   instance.
    */
   scalingOption?: ContainerScalingOption
+  /** Health check configuration of the container. */
+  healthCheck?: ContainerHealthCheckSpec
 }
 
 export type UpdateCronRequest = {

@@ -153,6 +153,7 @@ export const unmarshalServer = (data: unknown): Server => {
     sudoPassword: data.sudo_password,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
+    vncPort: data.vnc_port,
     vncUrl: data.vnc_url,
     zone: data.zone,
   } as Server
