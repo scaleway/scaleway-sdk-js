@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.53.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.52.1...@scaleway/sdk@2.53.0) (2024-11-04)
+
+### Features
+
+- **apple-silicon:** add VNC port suppport ([#1542](https://github.com/scaleway/scaleway-sdk-js/issues/1542)) ([db52033](https://github.com/scaleway/scaleway-sdk-js/commit/db5203309cccd57e5cf27e06d6585c010e928671))
+- **iam:** add doc for UpdateUserPassword ([#1553](https://github.com/scaleway/scaleway-sdk-js/issues/1553)) ([56cb327](https://github.com/scaleway/scaleway-sdk-js/commit/56cb327b8aaffea64e417e4959e26d18bc6aaa49))
+- **iam:** add LockUser and UnlockUser method ([#1552](https://github.com/scaleway/scaleway-sdk-js/issues/1552)) ([3b0ef23](https://github.com/scaleway/scaleway-sdk-js/commit/3b0ef23305d682bc1b90540af8d12c004cc848d0))
+- **k8s:** expose ACL routes in SDK ([#1546](https://github.com/scaleway/scaleway-sdk-js/issues/1546)) ([a6e1bf5](https://github.com/scaleway/scaleway-sdk-js/commit/a6e1bf5ab2d1819bfaa2703fbe10f37c5962a8c7))
+- **mongodb:** add CreateUser grpc layer ([#1539](https://github.com/scaleway/scaleway-sdk-js/issues/1539)) ([966ed42](https://github.com/scaleway/scaleway-sdk-js/commit/966ed42ed8257de41ad88a4691d7b15eb0b3ba3a))
+- **mongodb:** fix typo the CreateUser url ([#1550](https://github.com/scaleway/scaleway-sdk-js/issues/1550)) ([72161ef](https://github.com/scaleway/scaleway-sdk-js/commit/72161ef758f6334dbb22c9724aa33b9d49f1cbde))
+- **mongodb:** make CreateUser.password none optional ([#1543](https://github.com/scaleway/scaleway-sdk-js/issues/1543)) ([778b4aa](https://github.com/scaleway/scaleway-sdk-js/commit/778b4aaffd14275e563948fbd2767140323997a8))
+- **rdb:** activate encryption on existing instances ([#1534](https://github.com/scaleway/scaleway-sdk-js/issues/1534)) ([730af6f](https://github.com/scaleway/scaleway-sdk-js/commit/730af6faaa2ed58508b2c9036188b1ce882c4550))
+- **serverless:** add health check spec to containers ([#1544](https://github.com/scaleway/scaleway-sdk-js/issues/1544)) ([31cb9ac](https://github.com/scaleway/scaleway-sdk-js/commit/31cb9ac2639ec2b7d8042b5532f0524fb98edbd2))
+- **serverless:** add option to scale on CPU usage ([#1541](https://github.com/scaleway/scaleway-sdk-js/issues/1541)) ([5a1a365](https://github.com/scaleway/scaleway-sdk-js/commit/5a1a365e53886026d3b9d7cb481a37586e816fae))
+- **serverless:** add tags to container resources ([#1535](https://github.com/scaleway/scaleway-sdk-js/issues/1535)) ([f895c19](https://github.com/scaleway/scaleway-sdk-js/commit/f895c19a5e0e0efa8a5e37cdf80d148281926412))
+- **serverless:** add timestamps to container resources ([#1533](https://github.com/scaleway/scaleway-sdk-js/issues/1533)) ([1a96ea5](https://github.com/scaleway/scaleway-sdk-js/commit/1a96ea52b63ffdc4f80f6c99cee8aebca54f6d28))
+- **serverless:** add timestamps to function resources ([#1538](https://github.com/scaleway/scaleway-sdk-js/issues/1538)) ([a771c89](https://github.com/scaleway/scaleway-sdk-js/commit/a771c891fcd30d2e7baf71c806668157e3081851))
+
+### Bug Fixes
+
+- **object:** rename 'S3' to 'Object Storage' or 'Amazon S3' to address compliance requirements ([#1537](https://github.com/scaleway/scaleway-sdk-js/issues/1537)) ([427cfdd](https://github.com/scaleway/scaleway-sdk-js/commit/427cfdd09a7b8e93f893195b061e37107bf4a2af))
+
 ## [2.52.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.52.0...@scaleway/sdk@2.52.1) (2024-10-28)
 
 **Note:** Version bump only for package @scaleway/sdk
