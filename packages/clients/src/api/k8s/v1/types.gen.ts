@@ -284,6 +284,42 @@ export interface Pool {
   region: Region
 }
 
+export interface ACLRuleRequest {
+  /**
+   * IP subnet to allow.
+   *
+   * One-of ('allowed'): at most one of 'ip', 'scalewayRanges' could be set.
+   */
+  ip?: string
+  /**
+   * Only one rule with this field set to true can be added.
+   *
+   * One-of ('allowed'): at most one of 'ip', 'scalewayRanges' could be set.
+   */
+  scalewayRanges?: boolean
+  /** Description of the ACL. */
+  description: string
+}
+
+export interface ACLRule {
+  /** ID of the ACL rule. */
+  id: string
+  /**
+   * IP subnet to allow.
+   *
+   * One-of ('allowed'): at most one of 'ip', 'scalewayRanges' could be set.
+   */
+  ip?: string
+  /**
+   * Only one rule with this field set to true can be added.
+   *
+   * One-of ('allowed'): at most one of 'ip', 'scalewayRanges' could be set.
+   */
+  scalewayRanges?: boolean
+  /** Description of the ACL. */
+  description: string
+}
+
 export interface CreateClusterRequestAutoUpgrade {
   /** Defines whether auto upgrade is enabled for the cluster. */
   enable: boolean
@@ -691,6 +727,23 @@ export interface UpdatePoolRequestUpgradePolicy {
   maxSurge?: number
 }
 
+export type AddClusterACLRulesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the cluster whose ACLs will be added. */
+  clusterId: string
+  /** ACLs to add. */
+  acls?: ACLRuleRequest[]
+}
+
+export interface AddClusterACLRulesResponse {
+  /** ACLs that were added. */
+  rules: ACLRule[]
+}
+
 export type AuthExternalNodeRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -851,6 +904,16 @@ export type CreatePoolRequest = {
   publicIpDisabled: boolean
 }
 
+export type DeleteACLRuleRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the ACL rule to delete. */
+  aclId: string
+}
+
 export type DeleteClusterRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -973,6 +1036,27 @@ export type GetVersionRequest = {
   region?: Region
   /** Requested version name. */
   versionName: string
+}
+
+export type ListClusterACLRulesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the cluster whose ACLs will be listed. */
+  clusterId: string
+  /** Page number for the returned ACLs. */
+  page?: number
+  /** Maximum number of ACLs per page. */
+  pageSize?: number
+}
+
+export interface ListClusterACLRulesResponse {
+  /** Total number of ACLs that exist for the cluster. */
+  totalCount: number
+  /** Paginated returned ACLs. */
+  rules: ACLRule[]
 }
 
 export type ListClusterAvailableTypesRequest = {
@@ -1198,6 +1282,23 @@ export type ResetClusterAdminTokenRequest = {
   region?: Region
   /** Cluster ID on which the admin token will be renewed. */
   clusterId: string
+}
+
+export type SetClusterACLRulesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the cluster whose ACLs will be set. */
+  clusterId: string
+  /** ACLs to set. */
+  acls?: ACLRuleRequest[]
+}
+
+export interface SetClusterACLRulesResponse {
+  /** ACLs that were set. */
+  rules: ACLRule[]
 }
 
 export type SetClusterTypeRequest = {

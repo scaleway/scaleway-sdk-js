@@ -1,6 +1,12 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
+export const ACLRuleRequest = {
+  description: {
+    maxLength: 2000,
+  },
+}
+
 export const CreateClusterRequest = {
   description: {
     maxLength: 4096,
