@@ -61,7 +61,7 @@ const defaultConfig: UserConfig = {
       reporter: ['text', 'json', 'html'],
       exclude: [
         '.reports/**',
-        '**/.eslintrc.*',
+        '**/.eslintrc.json.*',
         'dist',
         '**/examples/**',
         '**/packages/clients/src/api/*',
