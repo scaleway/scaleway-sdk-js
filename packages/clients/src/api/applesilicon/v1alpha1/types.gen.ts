@@ -107,6 +107,8 @@ export interface Server {
   sshUsername: string
   /** Admin password required to execute commands. */
   sudoPassword: string
+  /** VNC port to use for remote desktop connection. */
+  vncPort: number
   /**
    * Initially installed OS, this does not necessarily reflect the current OS
    * version.

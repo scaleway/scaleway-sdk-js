@@ -311,7 +311,7 @@ export type CreateUserRequest = {
   /** Name of the database user. */
   name: string
   /** Password of the database user. */
-  password?: string
+  password: string
 }
 
 export type DeleteInstanceRequest = {
