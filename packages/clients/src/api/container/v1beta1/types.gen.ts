@@ -97,10 +97,15 @@ export type TriggerStatus =
 
 export interface ContainerScalingOption {
   /**
-   * One-of ('scalingRule'): at most one of 'concurrentRequestsThreshold' could
-   * be set.
+   * One-of ('scalingRule'): at most one of 'concurrentRequestsThreshold',
+   * 'cpuUsageThreshold' could be set.
    */
   concurrentRequestsThreshold?: number
+  /**
+   * One-of ('scalingRule'): at most one of 'concurrentRequestsThreshold',
+   * 'cpuUsageThreshold' could be set.
+   */
+  cpuUsageThreshold?: number
 }
 
 export interface SecretHashedValue {
@@ -236,6 +241,8 @@ export interface Container {
    *
    * - Concurrent_requests_threshold: Scale depending on the number of concurrent
    *   requests being processed per container instance.
+   * - Cpu_usage_threshold: Scale depending on the CPU usage of a container
+   *   instance.
    */
   scalingOption?: ContainerScalingOption
   /** Creation date of the container. */
@@ -433,6 +440,8 @@ export type CreateContainerRequest = {
    *
    * - Concurrent_requests_threshold: Scale depending on the number of concurrent
    *   requests being processed per container instance.
+   * - Cpu_usage_threshold: Scale depending on the CPU usage of a container
+   *   instance.
    */
   scalingOption?: ContainerScalingOption
 }
@@ -894,6 +903,8 @@ export type UpdateContainerRequest = {
    *
    * - Concurrent_requests_threshold: Scale depending on the number of concurrent
    *   requests being processed per container instance.
+   * - Cpu_usage_threshold: Scale depending on the CPU usage of a container
+   *   instance.
    */
   scalingOption?: ContainerScalingOption
 }
