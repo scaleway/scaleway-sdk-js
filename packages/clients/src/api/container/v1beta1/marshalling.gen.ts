@@ -10,6 +10,9 @@ import {
 import type { DefaultValues } from '../../../bridge'
 import type {
   Container,
+  ContainerHealthCheckSpec,
+  ContainerHealthCheckSpecHTTPProbe,
+  ContainerHealthCheckSpecTCPProbe,
   ContainerScalingOption,
   CreateContainerRequest,
   CreateCronRequest,
@@ -43,6 +46,53 @@ import type {
   UpdateTriggerRequestSqsClientConfig,
 } from './types.gen'
 
+const unmarshalContainerHealthCheckSpecHTTPProbe = (
+  data: unknown,
+): ContainerHealthCheckSpecHTTPProbe => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContainerHealthCheckSpecHTTPProbe' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    path: data.path,
+  } as ContainerHealthCheckSpecHTTPProbe
+}
+
+const unmarshalContainerHealthCheckSpecTCPProbe = (
+  data: unknown,
+): ContainerHealthCheckSpecTCPProbe => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContainerHealthCheckSpecTCPProbe' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as ContainerHealthCheckSpecTCPProbe
+}
+
+const unmarshalContainerHealthCheckSpec = (
+  data: unknown,
+): ContainerHealthCheckSpec => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContainerHealthCheckSpec' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    failureThreshold: data.failure_threshold,
+    http: data.http
+      ? unmarshalContainerHealthCheckSpecHTTPProbe(data.http)
+      : undefined,
+    interval: data.interval,
+    tcp: data.tcp
+      ? unmarshalContainerHealthCheckSpecTCPProbe(data.tcp)
+      : undefined,
+  } as ContainerHealthCheckSpec
+}
+
 const unmarshalContainerScalingOption = (
   data: unknown,
 ): ContainerScalingOption => {
@@ -54,6 +104,7 @@ const unmarshalContainerScalingOption = (
 
   return {
     concurrentRequestsThreshold: data.concurrent_requests_threshold,
+    cpuUsageThreshold: data.cpu_usage_threshold,
   } as ContainerScalingOption
 }
 
@@ -84,6 +135,9 @@ export const unmarshalContainer = (data: unknown): Container => {
     domainName: data.domain_name,
     environmentVariables: data.environment_variables,
     errorMessage: data.error_message,
+    healthCheck: data.health_check
+      ? unmarshalContainerHealthCheckSpec(data.health_check)
+      : undefined,
     httpOption: data.http_option,
     id: data.id,
     localStorageLimit: data.local_storage_limit,
@@ -362,6 +416,42 @@ export const unmarshalListTriggersResponse = (
   } as ListTriggersResponse
 }
 
+const marshalContainerHealthCheckSpecHTTPProbe = (
+  request: ContainerHealthCheckSpecHTTPProbe,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  path: request.path,
+})
+
+const marshalContainerHealthCheckSpecTCPProbe = (
+  request: ContainerHealthCheckSpecTCPProbe,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({})
+
+const marshalContainerHealthCheckSpec = (
+  request: ContainerHealthCheckSpec,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  failure_threshold: request.failureThreshold,
+  interval: request.interval,
+  ...resolveOneOf([
+    {
+      param: 'http',
+      value:
+        request.http !== undefined
+          ? marshalContainerHealthCheckSpecHTTPProbe(request.http, defaults)
+          : undefined,
+    },
+    {
+      param: 'tcp',
+      value:
+        request.tcp !== undefined
+          ? marshalContainerHealthCheckSpecTCPProbe(request.tcp, defaults)
+          : undefined,
+    },
+  ]),
+})
+
 const marshalContainerScalingOption = (
   request: ContainerScalingOption,
   defaults: DefaultValues,
@@ -371,6 +461,7 @@ const marshalContainerScalingOption = (
       param: 'concurrent_requests_threshold',
       value: request.concurrentRequestsThreshold,
     },
+    { param: 'cpu_usage_threshold', value: request.cpuUsageThreshold },
   ]),
 })
 
@@ -389,6 +480,10 @@ export const marshalCreateContainerRequest = (
   cpu_limit: request.cpuLimit,
   description: request.description,
   environment_variables: request.environmentVariables,
+  health_check:
+    request.healthCheck !== undefined
+      ? marshalContainerHealthCheckSpec(request.healthCheck, defaults)
+      : undefined,
   http_option: request.httpOption,
   local_storage_limit: request.localStorageLimit,
   max_concurrency: request.maxConcurrency,
@@ -539,6 +634,10 @@ export const marshalUpdateContainerRequest = (
   cpu_limit: request.cpuLimit,
   description: request.description,
   environment_variables: request.environmentVariables,
+  health_check:
+    request.healthCheck !== undefined
+      ? marshalContainerHealthCheckSpec(request.healthCheck, defaults)
+      : undefined,
   http_option: request.httpOption,
   local_storage_limit: request.localStorageLimit,
   max_concurrency: request.maxConcurrency,
