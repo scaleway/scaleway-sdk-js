@@ -9,6 +9,10 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  ACLRule,
+  ACLRuleRequest,
+  AddClusterACLRulesRequest,
+  AddClusterACLRulesResponse,
   Cluster,
   ClusterAutoUpgrade,
   ClusterAutoscalerConfig,
@@ -25,6 +29,7 @@ import type {
   ExternalNode,
   ExternalNodeAuth,
   ExternalNodeCoreV1Taint,
+  ListClusterACLRulesResponse,
   ListClusterAvailableTypesResponse,
   ListClusterAvailableVersionsResponse,
   ListClusterTypesResponse,
@@ -38,6 +43,8 @@ import type {
   NodeMetadataCoreV1Taint,
   Pool,
   PoolUpgradePolicy,
+  SetClusterACLRulesRequest,
+  SetClusterACLRulesResponse,
   SetClusterTypeRequest,
   UpdateClusterRequest,
   UpdateClusterRequestAutoUpgrade,
@@ -257,6 +264,35 @@ export const unmarshalNode = (data: unknown): Node => {
   } as Node
 }
 
+const unmarshalACLRule = (data: unknown): ACLRule => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ACLRule' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    description: data.description,
+    id: data.id,
+    ip: data.ip,
+    scalewayRanges: data.scaleway_ranges,
+  } as ACLRule
+}
+
+export const unmarshalAddClusterACLRulesResponse = (
+  data: unknown,
+): AddClusterACLRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AddClusterACLRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    rules: unmarshalArrayOfObject(data.rules, unmarshalACLRule),
+  } as AddClusterACLRulesResponse
+}
+
 const unmarshalExternalNodeCoreV1Taint = (
   data: unknown,
 ): ExternalNodeCoreV1Taint => {
@@ -311,6 +347,21 @@ export const unmarshalExternalNodeAuth = (data: unknown): ExternalNodeAuth => {
     apiUrl: data.api_url,
     nodeToken: data.node_token,
   } as ExternalNodeAuth
+}
+
+export const unmarshalListClusterACLRulesResponse = (
+  data: unknown,
+): ListClusterACLRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListClusterACLRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    rules: unmarshalArrayOfObject(data.rules, unmarshalACLRule),
+    totalCount: data.total_count,
+  } as ListClusterACLRulesResponse
 }
 
 const unmarshalClusterType = (data: unknown): ClusterType => {
@@ -487,6 +538,41 @@ export const unmarshalNodeMetadata = (data: unknown): NodeMetadata => {
   } as NodeMetadata
 }
 
+export const unmarshalSetClusterACLRulesResponse = (
+  data: unknown,
+): SetClusterACLRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetClusterACLRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    rules: unmarshalArrayOfObject(data.rules, unmarshalACLRule),
+  } as SetClusterACLRulesResponse
+}
+
+const marshalACLRuleRequest = (
+  request: ACLRuleRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  description: request.description,
+  ...resolveOneOf<string | boolean>([
+    { param: 'ip', value: request.ip },
+    { param: 'scaleway_ranges', value: request.scalewayRanges },
+  ]),
+})
+
+export const marshalAddClusterACLRulesRequest = (
+  request: AddClusterACLRulesRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  acls:
+    request.acls !== undefined
+      ? request.acls.map(elt => marshalACLRuleRequest(elt, defaults))
+      : undefined,
+})
+
 const marshalMaintenanceWindow = (
   request: MaintenanceWindow,
   defaults: DefaultValues,
@@ -655,6 +741,16 @@ export const marshalCreatePoolRequest = (
       ? marshalCreatePoolRequestUpgradePolicy(request.upgradePolicy, defaults)
       : undefined,
   zone: request.zone ?? defaults.defaultZone,
+})
+
+export const marshalSetClusterACLRulesRequest = (
+  request: SetClusterACLRulesRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  acls:
+    request.acls !== undefined
+      ? request.acls.map(elt => marshalACLRuleRequest(elt, defaults))
+      : undefined,
 })
 
 export const marshalSetClusterTypeRequest = (

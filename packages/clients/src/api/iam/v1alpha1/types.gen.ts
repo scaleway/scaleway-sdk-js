@@ -954,6 +954,10 @@ export interface ListUsersResponse {
   totalCount: number
 }
 
+export type LockUserRequest = {
+  userId: string
+}
+
 export type RemoveGroupMemberRequest = {
   /** ID of the group. */
   groupId: string
@@ -987,6 +991,10 @@ export type SetRulesRequest = {
 export interface SetRulesResponse {
   /** Rules of the policy. */
   rules: Rule[]
+}
+
+export type UnlockUserRequest = {
+  userId: string
 }
 
 export type UpdateAPIKeyRequest = {
@@ -1071,8 +1079,14 @@ export type UpdateSSHKeyRequest = {
 }
 
 export type UpdateUserPasswordRequest = {
+  /** ID of the user to update. */
   userId: string
+  /** The new password. */
   password: string
+  /**
+   * Whether or not to send an email alerting the user their password has
+   * changed.
+   */
   sendEmail: boolean
 }
 
