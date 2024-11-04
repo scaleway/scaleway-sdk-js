@@ -54,6 +54,7 @@ const unmarshalContainerScalingOption = (
 
   return {
     concurrentRequestsThreshold: data.concurrent_requests_threshold,
+    cpuUsageThreshold: data.cpu_usage_threshold,
   } as ContainerScalingOption
 }
 
@@ -371,6 +372,7 @@ const marshalContainerScalingOption = (
       param: 'concurrent_requests_threshold',
       value: request.concurrentRequestsThreshold,
     },
+    { param: 'cpu_usage_threshold', value: request.cpuUsageThreshold },
   ]),
 })
 
