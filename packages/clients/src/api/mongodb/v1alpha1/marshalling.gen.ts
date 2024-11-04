@@ -420,6 +420,7 @@ export const marshalCreateUserRequest = (
   request: CreateUserRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  name: request.name,
   password: request.password,
 })
 
