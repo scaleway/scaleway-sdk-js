@@ -458,20 +458,13 @@ export class HostingAPI extends ParentAPI {
           ['control_panels', request.controlPanels],
           ['domain', request.domain],
           ['order_by', request.orderBy],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId],
           ['statuses', request.statuses],
           ['tags', request.tags],
         ),
