@@ -25,6 +25,7 @@ import {
   unmarshalAlertManager,
   unmarshalContactPoint,
   unmarshalDataSource,
+  unmarshalGetConfigResponse,
   unmarshalGrafana,
   unmarshalGrafanaProductDashboard,
   unmarshalGrafanaUser,
@@ -43,6 +44,7 @@ import type {
   AlertManager,
   ContactPoint,
   DataSource,
+  GetConfigResponse,
   GlobalApiCreateGrafanaUserRequest,
   GlobalApiDeleteGrafanaUserRequest,
   GlobalApiGetCurrentPlanRequest,
@@ -76,6 +78,7 @@ import type {
   RegionalApiEnableAlertManagerRequest,
   RegionalApiEnableManagedAlertsRequest,
   RegionalApiGetAlertManagerRequest,
+  RegionalApiGetConfigRequest,
   RegionalApiGetDataSourceRequest,
   RegionalApiGetTokenRequest,
   RegionalApiGetUsageOverviewRequest,
@@ -334,7 +337,9 @@ export class GlobalAPI extends ParentAPI {
 
   /**
    * List plan types. Retrieve a list of available pricing plan types.
+   * Deprecated, retention is now managed at the data source level.
    *
+   * @deprecated
    * @param request - The request {@link GlobalApiListPlansRequest}
    * @returns A Promise of ListPlansResponse
    */
@@ -344,8 +349,10 @@ export class GlobalAPI extends ParentAPI {
   /**
    * Apply a pricing plan. Apply a pricing plan on a given Project. You must
    * specify the ID of the pricing plan type. Note that you will be billed for
-   * the plan you apply.
+   * the plan you apply. Deprecated, retention is now managed at the data source
+   * level.
    *
+   * @deprecated
    * @param request - The request {@link GlobalApiSelectPlanRequest}
    * @returns A Promise of Plan
    */
@@ -364,8 +371,10 @@ export class GlobalAPI extends ParentAPI {
 
   /**
    * Get current plan. Retrieve a pricing plan for the given Project, specified
-   * by the ID of the Project.
+   * by the ID of the Project. Deprecated, retention is now managed at the data
+   * source level.
    *
+   * @deprecated
    * @param request - The request {@link GlobalApiGetCurrentPlanRequest}
    * @returns A Promise of Plan
    */
@@ -394,6 +403,21 @@ export class GlobalAPI extends ParentAPI {
 export class RegionalAPI extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+
+  /**
+   * Get the Cockpit configuration.
+   *
+   * @param request - The request {@link RegionalApiGetConfigRequest}
+   * @returns A Promise of GetConfigResponse
+   */
+  getConfig = (request: Readonly<RegionalApiGetConfigRequest> = {}) =>
+    this.client.fetch<GetConfigResponse>(
+      {
+        method: 'GET',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/config`,
+      },
+      unmarshalGetConfigResponse,
+    )
 
   /**
    * Create a data source. You must specify the data source type upon creation.

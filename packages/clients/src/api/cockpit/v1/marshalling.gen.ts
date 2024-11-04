@@ -13,6 +13,8 @@ import type {
   ContactPoint,
   ContactPointEmail,
   DataSource,
+  GetConfigResponse,
+  GetConfigResponseRetention,
   GlobalApiCreateGrafanaUserRequest,
   GlobalApiResetGrafanaUserPasswordRequest,
   GlobalApiSelectPlanRequest,
@@ -82,6 +84,7 @@ export const unmarshalDataSource = (data: unknown): DataSource => {
     origin: data.origin,
     projectId: data.project_id,
     region: data.region,
+    retentionDays: data.retention_days,
     synchronizedWithGrafana: data.synchronized_with_grafana,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
@@ -173,6 +176,44 @@ export const unmarshalAlertManager = (data: unknown): AlertManager => {
     managedAlertsEnabled: data.managed_alerts_enabled,
     region: data.region,
   } as AlertManager
+}
+
+const unmarshalGetConfigResponseRetention = (
+  data: unknown,
+): GetConfigResponseRetention => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetConfigResponseRetention' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    defaultDays: data.default_days,
+    maxDays: data.max_days,
+    minDays: data.min_days,
+  } as GetConfigResponseRetention
+}
+
+export const unmarshalGetConfigResponse = (
+  data: unknown,
+): GetConfigResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetConfigResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    logsRetention: data.logs_retention
+      ? unmarshalGetConfigResponseRetention(data.logs_retention)
+      : undefined,
+    metricsRetention: data.metrics_retention
+      ? unmarshalGetConfigResponseRetention(data.metrics_retention)
+      : undefined,
+    tracesRetention: data.traces_retention
+      ? unmarshalGetConfigResponseRetention(data.traces_retention)
+      : undefined,
+  } as GetConfigResponse
 }
 
 export const unmarshalGrafana = (data: unknown): Grafana => {
@@ -424,6 +465,7 @@ export const marshalRegionalApiCreateDataSourceRequest = (
 ): Record<string, unknown> => ({
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
+  retention_days: request.retentionDays,
   type: request.type,
 })
 
@@ -493,4 +535,5 @@ export const marshalRegionalApiUpdateDataSourceRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
+  retention_days: request.retentionDays,
 })

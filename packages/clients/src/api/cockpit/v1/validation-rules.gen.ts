@@ -7,6 +7,11 @@ export const RegionalApiCreateDataSourceRequest = {
     minLength: 3,
     pattern: /^[A-Za-z0-9-_. ]+$/,
   },
+  retentionDays: {
+    greaterThanOrEqual: 1,
+    ignoreEmpty: true,
+    lessThanOrEqual: 365,
+  },
 }
 
 export const RegionalApiCreateTokenRequest = {
@@ -59,8 +64,14 @@ export const RegionalApiListTokensRequest = {
 
 export const RegionalApiUpdateDataSourceRequest = {
   name: {
+    ignoreEmpty: true,
     maxLength: 50,
     minLength: 3,
     pattern: /^[A-Za-z0-9-_. ]+$/,
+  },
+  retentionDays: {
+    greaterThanOrEqual: 1,
+    ignoreEmpty: true,
+    lessThanOrEqual: 365,
   },
 }
