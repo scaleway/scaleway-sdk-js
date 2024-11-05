@@ -185,6 +185,12 @@ export class API extends ParentAPI {
       unmarshalStartJobDefinitionResponse,
     )
 
+  /**
+   * Create a secret reference within a job definition.
+   *
+   * @param request - The request {@link CreateJobDefinitionSecretsRequest}
+   * @returns A Promise of CreateJobDefinitionSecretsResponse
+   */
   createJobDefinitionSecrets = (
     request: Readonly<CreateJobDefinitionSecretsRequest>,
   ) =>
@@ -203,6 +209,12 @@ export class API extends ParentAPI {
       unmarshalCreateJobDefinitionSecretsResponse,
     )
 
+  /**
+   * Get a secret references within a job definition.
+   *
+   * @param request - The request {@link GetJobDefinitionSecretRequest}
+   * @returns A Promise of Secret
+   */
   getJobDefinitionSecret = (request: Readonly<GetJobDefinitionSecretRequest>) =>
     this.client.fetch<Secret>(
       {
@@ -212,6 +224,12 @@ export class API extends ParentAPI {
       unmarshalSecret,
     )
 
+  /**
+   * List secrets references within a job definition.
+   *
+   * @param request - The request {@link ListJobDefinitionSecretsRequest}
+   * @returns A Promise of ListJobDefinitionSecretsResponse
+   */
   listJobDefinitionSecrets = (
     request: Readonly<ListJobDefinitionSecretsRequest>,
   ) =>
@@ -223,6 +241,12 @@ export class API extends ParentAPI {
       unmarshalListJobDefinitionSecretsResponse,
     )
 
+  /**
+   * Update a secret reference within a job definition.
+   *
+   * @param request - The request {@link UpdateJobDefinitionSecretRequest}
+   * @returns A Promise of Secret
+   */
   updateJobDefinitionSecret = (
     request: Readonly<UpdateJobDefinitionSecretRequest>,
   ) =>
@@ -241,6 +265,11 @@ export class API extends ParentAPI {
       unmarshalSecret,
     )
 
+  /**
+   * Delete a secret reference within a job definition.
+   *
+   * @param request - The request {@link DeleteJobDefinitionSecretRequest}
+   */
   deleteJobDefinitionSecret = (
     request: Readonly<DeleteJobDefinitionSecretRequest>,
   ) =>

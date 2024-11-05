@@ -51,12 +51,23 @@ export interface CreateJobDefinitionSecretsRequestSecretConfig {
 }
 
 export interface Secret {
+  /** UUID of the secret reference within the job. */
   secretId: string
+  /** UUID of the secret in Secret Manager. */
   secretManagerId: string
+  /** Version of the secret in Secret Manager. */
   secretManagerVersion: string
-  /** One-of ('secretConfig'): at most one of 'file', 'envVar' could be set. */
+  /**
+   * File secret mounted inside the job.
+   *
+   * One-of ('secretConfig'): at most one of 'file', 'envVar' could be set.
+   */
   file?: SecretFile
-  /** One-of ('secretConfig'): at most one of 'file', 'envVar' could be set. */
+  /**
+   * Environment variable used to expose the secret.
+   *
+   * One-of ('secretConfig'): at most one of 'file', 'envVar' could be set.
+   */
   envVar?: SecretEnvVar
 }
 
@@ -154,13 +165,14 @@ export type CreateJobDefinitionSecretsRequest = {
    * config.
    */
   region?: Region
-  /** UUID of the job definition to get. */
+  /** UUID of the job definition. */
   jobDefinitionId: string
-  /** Secrets to inject into the job. */
+  /** List of secrets to inject into the job. */
   secrets: CreateJobDefinitionSecretsRequestSecretConfig[]
 }
 
 export interface CreateJobDefinitionSecretsResponse {
+  /** List of secrets created. */
   secrets: Secret[]
 }
 
@@ -180,7 +192,9 @@ export type DeleteJobDefinitionSecretRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the job definition. */
   jobDefinitionId: string
+  /** UUID of the secret reference within the job. */
   secretId: string
 }
 
@@ -200,7 +214,9 @@ export type GetJobDefinitionSecretRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the job definition. */
   jobDefinitionId: string
+  /** UUID of the secret reference within the job. */
   secretId: string
 }
 
@@ -232,11 +248,14 @@ export type ListJobDefinitionSecretsRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the job definition. */
   jobDefinitionId: string
 }
 
 export interface ListJobDefinitionSecretsResponse {
+  /** List of secret references within a job definition. */
   secrets: Secret[]
+  /** Total count of secret references within a job definition. */
   totalCount: number
 }
 
@@ -354,11 +373,24 @@ export type UpdateJobDefinitionSecretRequest = {
    * config.
    */
   region?: Region
+  /** UUID of the job definition. */
   jobDefinitionId: string
+  /** UUID of the secret reference within the job. */
   secretId: string
+  /** Version of the secret in Secret Manager. */
   secretManagerVersion?: string
-  /** One-of ('secretConfig'): at most one of 'path', 'envVarName' could be set. */
+  /**
+   * Path of the secret to mount inside the job (either `path` or `env_var_name`
+   * must be set).
+   *
+   * One-of ('secretConfig'): at most one of 'path', 'envVarName' could be set.
+   */
   path?: string
-  /** One-of ('secretConfig'): at most one of 'path', 'envVarName' could be set. */
+  /**
+   * Environment variable name used to expose the secret inside the job (either
+   * `path` or `env_var_name` must be set).
+   *
+   * One-of ('secretConfig'): at most one of 'path', 'envVarName' could be set.
+   */
   envVarName?: string
 }
