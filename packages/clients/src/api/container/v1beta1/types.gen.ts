@@ -128,14 +128,19 @@ export interface ContainerHealthCheckSpec {
 export interface ContainerScalingOption {
   /**
    * One-of ('scalingRule'): at most one of 'concurrentRequestsThreshold',
-   * 'cpuUsageThreshold' could be set.
+   * 'cpuUsageThreshold', 'memoryUsageThreshold' could be set.
    */
   concurrentRequestsThreshold?: number
   /**
    * One-of ('scalingRule'): at most one of 'concurrentRequestsThreshold',
-   * 'cpuUsageThreshold' could be set.
+   * 'cpuUsageThreshold', 'memoryUsageThreshold' could be set.
    */
   cpuUsageThreshold?: number
+  /**
+   * One-of ('scalingRule'): at most one of 'concurrentRequestsThreshold',
+   * 'cpuUsageThreshold', 'memoryUsageThreshold' could be set.
+   */
+  memoryUsageThreshold?: number
 }
 
 export interface SecretHashedValue {
@@ -272,6 +277,8 @@ export interface Container {
    * - Concurrent_requests_threshold: Scale depending on the number of concurrent
    *   requests being processed per container instance.
    * - Cpu_usage_threshold: Scale depending on the CPU usage of a container
+   *   instance.
+   * - Memory_usage_threshold: Scale depending on the memory usage of a container
    *   instance.
    */
   scalingOption?: ContainerScalingOption
@@ -473,6 +480,8 @@ export type CreateContainerRequest = {
    * - Concurrent_requests_threshold: Scale depending on the number of concurrent
    *   requests being processed per container instance.
    * - Cpu_usage_threshold: Scale depending on the CPU usage of a container
+   *   instance.
+   * - Memory_usage_threshold: Scale depending on the memory usage of a container
    *   instance.
    */
   scalingOption?: ContainerScalingOption
@@ -938,6 +947,8 @@ export type UpdateContainerRequest = {
    * - Concurrent_requests_threshold: Scale depending on the number of concurrent
    *   requests being processed per container instance.
    * - Cpu_usage_threshold: Scale depending on the CPU usage of a container
+   *   instance.
+   * - Memory_usage_threshold: Scale depending on the memory usage of a container
    *   instance.
    */
   scalingOption?: ContainerScalingOption
