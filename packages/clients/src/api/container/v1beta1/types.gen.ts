@@ -351,6 +351,10 @@ export interface Namespace {
   region: Region
   /** [ALPHA] List of tags applied to the Serverless Container Namespace. */
   tags: string[]
+  /** Creation date of the namespace. */
+  createdAt?: Date
+  /** Last update date of the namespace. */
+  updatedAt?: Date
 }
 
 export interface Token {

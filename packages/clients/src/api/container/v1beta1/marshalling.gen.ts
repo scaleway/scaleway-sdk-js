@@ -210,6 +210,7 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
   }
 
   return {
+    createdAt: unmarshalDate(data.created_at),
     description: data.description,
     environmentVariables: data.environment_variables,
     errorMessage: data.error_message,
@@ -226,6 +227,7 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
     ),
     status: data.status,
     tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
   } as Namespace
 }
 
