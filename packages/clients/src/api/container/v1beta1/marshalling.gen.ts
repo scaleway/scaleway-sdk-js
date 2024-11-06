@@ -105,6 +105,7 @@ const unmarshalContainerScalingOption = (
   return {
     concurrentRequestsThreshold: data.concurrent_requests_threshold,
     cpuUsageThreshold: data.cpu_usage_threshold,
+    memoryUsageThreshold: data.memory_usage_threshold,
   } as ContainerScalingOption
 }
 
@@ -209,6 +210,7 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
   }
 
   return {
+    createdAt: unmarshalDate(data.created_at),
     description: data.description,
     environmentVariables: data.environment_variables,
     errorMessage: data.error_message,
@@ -225,6 +227,7 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
     ),
     status: data.status,
     tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
   } as Namespace
 }
 
@@ -462,6 +465,7 @@ const marshalContainerScalingOption = (
       value: request.concurrentRequestsThreshold,
     },
     { param: 'cpu_usage_threshold', value: request.cpuUsageThreshold },
+    { param: 'memory_usage_threshold', value: request.memoryUsageThreshold },
   ]),
 })
 
