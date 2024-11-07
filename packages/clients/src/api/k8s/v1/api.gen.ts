@@ -592,7 +592,7 @@ export class API extends ParentAPI {
     this.client.fetch<NodeMetadata>(
       {
         method: 'GET',
-        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nodes/metadata`,
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/node-metadata`,
       },
       unmarshalNodeMetadata,
     )
