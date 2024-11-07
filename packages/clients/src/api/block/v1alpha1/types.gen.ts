@@ -372,6 +372,11 @@ export type ListVolumesRequest = {
    * ID).
    */
   productResourceId?: string
+  /**
+   * Filter by tags. Only volumes with one or more matching tags will be
+   * returned.
+   */
+  tags?: string[]
 }
 
 export interface ListVolumesResponse {

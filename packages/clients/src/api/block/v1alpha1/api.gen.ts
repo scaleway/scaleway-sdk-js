@@ -115,6 +115,7 @@ export class API extends ParentAPI {
           ],
           ['product_resource_id', request.productResourceId],
           ['project_id', request.projectId],
+          ['tags', request.tags],
         ),
       },
       unmarshalListVolumesResponse,
