@@ -27,6 +27,7 @@ export type ResourceType =
   | 'baremetal_server'
   | 'baremetal_private_nic'
   | 'llm_deployment'
+  | 'mgdb_instance'
 
 export interface Resource {
   /** Type of resource the IP is attached to. */
