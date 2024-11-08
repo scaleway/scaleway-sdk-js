@@ -3,8 +3,13 @@
 export { API } from './api.gen'
 export * from './content.gen'
 export type {
+  ConnectivityDiagnostic,
+  ConnectivityDiagnosticActionType,
+  ConnectivityDiagnosticDiagnosticStatus,
+  ConnectivityDiagnosticServerHealth,
   CreateServerRequest,
   DeleteServerRequest,
+  GetConnectivityDiagnosticRequest,
   GetOSRequest,
   GetServerRequest,
   GetServerTypeRequest,
@@ -27,5 +32,7 @@ export type {
   ServerTypeMemory,
   ServerTypeNetwork,
   ServerTypeStock,
+  StartConnectivityDiagnosticRequest,
+  StartConnectivityDiagnosticResponse,
   UpdateServerRequest,
 } from './types.gen'
