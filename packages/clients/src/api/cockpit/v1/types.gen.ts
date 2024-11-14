@@ -209,12 +209,16 @@ export interface AlertManager {
 
 /** Cockpit configuration. */
 export interface GetConfigResponse {
-  /** Metrics retention configuration. */
-  metricsRetention?: GetConfigResponseRetention
-  /** Logs retention configuration. */
-  logsRetention?: GetConfigResponseRetention
-  /** Traces retention configuration. */
-  tracesRetention?: GetConfigResponseRetention
+  /** Custom metrics retention configuration. */
+  customMetricsRetention?: GetConfigResponseRetention
+  /** Custom logs retention configuration. */
+  customLogsRetention?: GetConfigResponseRetention
+  /** Custom traces retention configuration. */
+  customTracesRetention?: GetConfigResponseRetention
+  /** Scaleway metrics retention configuration. */
+  productMetricsRetention?: GetConfigResponseRetention
+  /** Scaleway logs retention configuration. */
+  productLogsRetention?: GetConfigResponseRetention
 }
 
 /** Create a Grafana user. */

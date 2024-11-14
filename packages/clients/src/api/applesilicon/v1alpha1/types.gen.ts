@@ -2,6 +2,16 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Zone } from '../../../bridge'
 
+export type ConnectivityDiagnosticActionType =
+  | 'reboot_server'
+  | 'reinstall_server'
+
+export type ConnectivityDiagnosticDiagnosticStatus =
+  | 'unknown_status'
+  | 'processing'
+  | 'error'
+  | 'completed'
+
 export type ListServersRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type ServerStatus =
@@ -65,6 +75,15 @@ export interface ServerTypeMemory {
 
 export interface ServerTypeNetwork {
   publicBandwidthBps: number
+}
+
+export interface ConnectivityDiagnosticServerHealth {
+  lastCheckinDate?: Date
+  isServerAlive: boolean
+  isAgentAlive: boolean
+  isMdmAlive: boolean
+  isSshPortUp: boolean
+  isVncPortUp: boolean
 }
 
 export interface ServerType {
@@ -140,6 +159,15 @@ export interface Server {
   delivered: boolean
 }
 
+export interface ConnectivityDiagnostic {
+  id: string
+  status: ConnectivityDiagnosticDiagnosticStatus
+  isHealthy: boolean
+  healthDetails?: ConnectivityDiagnosticServerHealth
+  supportedActions: ConnectivityDiagnosticActionType[]
+  errorMessage: string
+}
+
 export type CreateServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
@@ -162,6 +190,12 @@ export type DeleteServerRequest = {
   zone?: Zone
   /** UUID of the server you want to delete. */
   serverId: string
+}
+
+export type GetConnectivityDiagnosticRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  diagnosticId: string
 }
 
 export type GetOSRequest = {
@@ -263,6 +297,16 @@ export type ReinstallServerRequest = {
    * OS for the server type is used.
    */
   osId?: string
+}
+
+export type StartConnectivityDiagnosticRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  serverId: string
+}
+
+export interface StartConnectivityDiagnosticResponse {
+  diagnosticId: string
 }
 
 export type UpdateServerRequest = {

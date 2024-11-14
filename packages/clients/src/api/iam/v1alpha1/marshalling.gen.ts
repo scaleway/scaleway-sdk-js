@@ -589,6 +589,7 @@ const marshalCreateUserRequestMember = (
   email: request.email,
   password: request.password,
   send_password_email: request.sendPasswordEmail,
+  send_welcome_email: request.sendWelcomeEmail,
   username: request.username,
 })
 

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.54.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.53.0...@scaleway/sdk@2.54.0) (2024-11-11)
+
+### Features
+
+- **apple_silicon:** add vnc diagnostic api definition ([#1566](https://github.com/scaleway/scaleway-sdk-js/issues/1566)) ([bd5e31a](https://github.com/scaleway/scaleway-sdk-js/commit/bd5e31a7f11a9fa357689098c9262c29f551207a))
+- **block:** add tags in ListVolumesRequest ([#1562](https://github.com/scaleway/scaleway-sdk-js/issues/1562)) ([f1fd071](https://github.com/scaleway/scaleway-sdk-js/commit/f1fd07110091712f191844e18aa69ba58521126d))
+- **cockpit:** add retention setup in datasource ([#1557](https://github.com/scaleway/scaleway-sdk-js/issues/1557)) ([24e27b4](https://github.com/scaleway/scaleway-sdk-js/commit/24e27b4db959286f9e34d55bd54a162a1ed3c443))
+- **ipam:** add new mgdb_instance resource ([#1564](https://github.com/scaleway/scaleway-sdk-js/issues/1564)) ([8b32902](https://github.com/scaleway/scaleway-sdk-js/commit/8b329024defa500d44a78115c6e5cce0d1fbd19a))
+- **serverless_jobs:** enable secrets ([#1558](https://github.com/scaleway/scaleway-sdk-js/issues/1558)) ([c7ba13c](https://github.com/scaleway/scaleway-sdk-js/commit/c7ba13c0c1d04607c48cddcd90dc035b6bd0e960))
+- **serverless:** add timestamps to function/container namespace ([#1560](https://github.com/scaleway/scaleway-sdk-js/issues/1560)) ([12d9c64](https://github.com/scaleway/scaleway-sdk-js/commit/12d9c64ba9d94c55136df4afff02554f33657db7))
+
+### Bug Fixes
+
+- do not default to config variable for optional fields ([#1556](https://github.com/scaleway/scaleway-sdk-js/issues/1556)) ([490f9d6](https://github.com/scaleway/scaleway-sdk-js/commit/490f9d601863e2ab5f36bec16bd1651b1250065e))
+- **k8s:** change node metadata path to avoid collision with nodes path ([#1563](https://github.com/scaleway/scaleway-sdk-js/issues/1563)) ([64dcb36](https://github.com/scaleway/scaleway-sdk-js/commit/64dcb36f721d03ee8fde328398e29ffbddd6f42f))
+
 ## [2.53.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.52.1...@scaleway/sdk@2.53.0) (2024-11-04)
 
 ### Features
