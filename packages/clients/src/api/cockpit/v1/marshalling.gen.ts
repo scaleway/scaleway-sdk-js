@@ -204,14 +204,20 @@ export const unmarshalGetConfigResponse = (
   }
 
   return {
-    logsRetention: data.logs_retention
-      ? unmarshalGetConfigResponseRetention(data.logs_retention)
+    customLogsRetention: data.custom_logs_retention
+      ? unmarshalGetConfigResponseRetention(data.custom_logs_retention)
       : undefined,
-    metricsRetention: data.metrics_retention
-      ? unmarshalGetConfigResponseRetention(data.metrics_retention)
+    customMetricsRetention: data.custom_metrics_retention
+      ? unmarshalGetConfigResponseRetention(data.custom_metrics_retention)
       : undefined,
-    tracesRetention: data.traces_retention
-      ? unmarshalGetConfigResponseRetention(data.traces_retention)
+    customTracesRetention: data.custom_traces_retention
+      ? unmarshalGetConfigResponseRetention(data.custom_traces_retention)
+      : undefined,
+    productLogsRetention: data.product_logs_retention
+      ? unmarshalGetConfigResponseRetention(data.product_logs_retention)
+      : undefined,
+    productMetricsRetention: data.product_metrics_retention
+      ? unmarshalGetConfigResponseRetention(data.product_metrics_retention)
       : undefined,
   } as GetConfigResponse
 }
