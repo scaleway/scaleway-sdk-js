@@ -98,7 +98,12 @@ export type PoolStatus =
   | 'locked'
   | 'upgrading'
 
-export type PoolVolumeType = 'default_volume_type' | 'l_ssd' | 'b_ssd'
+export type PoolVolumeType =
+  | 'default_volume_type'
+  | 'l_ssd'
+  | 'b_ssd'
+  | 'sbs_5k'
+  | 'sbs_15k'
 
 export type Runtime = 'unknown_runtime' | 'docker' | 'containerd' | 'crio'
 

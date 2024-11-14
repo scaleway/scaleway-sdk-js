@@ -12,17 +12,22 @@ import { SERVER_TRANSIENT_STATUSES } from './content.gen'
 import {
   marshalCreateServerRequest,
   marshalReinstallServerRequest,
+  marshalStartConnectivityDiagnosticRequest,
   marshalUpdateServerRequest,
+  unmarshalConnectivityDiagnostic,
   unmarshalListOSResponse,
   unmarshalListServerTypesResponse,
   unmarshalListServersResponse,
   unmarshalOS,
   unmarshalServer,
   unmarshalServerType,
+  unmarshalStartConnectivityDiagnosticResponse,
 } from './marshalling.gen'
 import type {
+  ConnectivityDiagnostic,
   CreateServerRequest,
   DeleteServerRequest,
+  GetConnectivityDiagnosticRequest,
   GetOSRequest,
   GetServerRequest,
   GetServerTypeRequest,
@@ -37,6 +42,8 @@ import type {
   ReinstallServerRequest,
   Server,
   ServerType,
+  StartConnectivityDiagnosticRequest,
+  StartConnectivityDiagnosticResponse,
   UpdateServerRequest,
 } from './types.gen'
 
@@ -290,5 +297,34 @@ export class API extends ParentAPI {
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/reinstall`,
       },
       unmarshalServer,
+    )
+
+  startConnectivityDiagnostic = (
+    request: Readonly<StartConnectivityDiagnosticRequest>,
+  ) =>
+    this.client.fetch<StartConnectivityDiagnosticResponse>(
+      {
+        body: JSON.stringify(
+          marshalStartConnectivityDiagnosticRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/connectivity-diagnostics`,
+      },
+      unmarshalStartConnectivityDiagnosticResponse,
+    )
+
+  getConnectivityDiagnostic = (
+    request: Readonly<GetConnectivityDiagnosticRequest>,
+  ) =>
+    this.client.fetch<ConnectivityDiagnostic>(
+      {
+        method: 'GET',
+        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/connectivity-diagnostics/${validatePathParam('diagnosticId', request.diagnosticId)}`,
+      },
+      unmarshalConnectivityDiagnostic,
     )
 }

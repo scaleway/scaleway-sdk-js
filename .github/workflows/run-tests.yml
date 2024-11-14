@@ -9,7 +9,7 @@ on:
 
 jobs:
   typecheck:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4.1.7
       - uses: pnpm/action-setup@v4.0.0
@@ -23,7 +23,7 @@ jobs:
       - run: pnpm run build
       - run: pnpm tsc --noEmit
   lint:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4.1.7
       - uses: pnpm/action-setup@v4.0.0
@@ -37,7 +37,7 @@ jobs:
       - run: pnpm run build
       - run: pnpm run lint
   test:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         test-environment:

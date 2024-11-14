@@ -8,6 +8,8 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  ConnectivityDiagnostic,
+  ConnectivityDiagnosticServerHealth,
   CreateServerRequest,
   ListOSResponse,
   ListServerTypesResponse,
@@ -21,6 +23,8 @@ import type {
   ServerTypeGPU,
   ServerTypeMemory,
   ServerTypeNetwork,
+  StartConnectivityDiagnosticRequest,
+  StartConnectivityDiagnosticResponse,
   UpdateServerRequest,
 } from './types.gen'
 
@@ -159,6 +163,46 @@ export const unmarshalServer = (data: unknown): Server => {
   } as Server
 }
 
+const unmarshalConnectivityDiagnosticServerHealth = (
+  data: unknown,
+): ConnectivityDiagnosticServerHealth => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ConnectivityDiagnosticServerHealth' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    isAgentAlive: data.is_agent_alive,
+    isMdmAlive: data.is_mdm_alive,
+    isServerAlive: data.is_server_alive,
+    isSshPortUp: data.is_ssh_port_up,
+    isVncPortUp: data.is_vnc_port_up,
+    lastCheckinDate: unmarshalDate(data.last_checkin_date),
+  } as ConnectivityDiagnosticServerHealth
+}
+
+export const unmarshalConnectivityDiagnostic = (
+  data: unknown,
+): ConnectivityDiagnostic => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ConnectivityDiagnostic' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    errorMessage: data.error_message,
+    healthDetails: data.health_details
+      ? unmarshalConnectivityDiagnosticServerHealth(data.health_details)
+      : undefined,
+    id: data.id,
+    isHealthy: data.is_healthy,
+    status: data.status,
+    supportedActions: data.supported_actions,
+  } as ConnectivityDiagnostic
+}
+
 export const unmarshalListOSResponse = (data: unknown): ListOSResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -201,6 +245,20 @@ export const unmarshalListServersResponse = (
   } as ListServersResponse
 }
 
+export const unmarshalStartConnectivityDiagnosticResponse = (
+  data: unknown,
+): StartConnectivityDiagnosticResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'StartConnectivityDiagnosticResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    diagnosticId: data.diagnostic_id,
+  } as StartConnectivityDiagnosticResponse
+}
+
 export const marshalCreateServerRequest = (
   request: CreateServerRequest,
   defaults: DefaultValues,
@@ -216,6 +274,13 @@ export const marshalReinstallServerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   os_id: request.osId,
+})
+
+export const marshalStartConnectivityDiagnosticRequest = (
+  request: StartConnectivityDiagnosticRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  server_id: request.serverId,
 })
 
 export const marshalUpdateServerRequest = (
