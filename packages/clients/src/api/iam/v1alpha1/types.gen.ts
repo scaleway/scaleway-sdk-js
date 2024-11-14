@@ -134,6 +134,11 @@ export interface CreateUserRequestMember {
   email: string
   /** Whether or not to send an email containing the member's password. */
   sendPasswordEmail: boolean
+  /**
+   * Whether or not to send a welcome email that includes onboarding
+   * information.
+   */
+  sendWelcomeEmail: boolean
   /** The member's username. */
   username: string
   /** The member's password. */
