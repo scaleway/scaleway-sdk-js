@@ -34,6 +34,7 @@ import type {
   CreateInstanceRequest,
   CreateSnapshotRequest,
   CreateUserRequest,
+  DeleteEndpointRequest,
   DeleteInstanceRequest,
   DeleteSnapshotRequest,
   GetInstanceCertificateRequest,
@@ -521,4 +522,18 @@ export class API extends ParentAPI {
       },
       unmarshalUser,
     )
+
+  /**
+   * Delete a Database Instance endpoint. Delete the endpoint of a Database
+   * Instance. You must specify the `endpoint_id` parameter of the endpoint you
+   * want to delete. Note that you might need to update any environment
+   * configurations that point to the deleted endpoint.
+   *
+   * @param request - The request {@link DeleteEndpointRequest}
+   */
+  deleteEndpoint = (request: Readonly<DeleteEndpointRequest>) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+    })
 }
