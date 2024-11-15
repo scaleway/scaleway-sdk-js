@@ -191,7 +191,7 @@ export type CreateSnapshotRequest = {
   /** UUID of the volume to snapshot. */
   volumeId: string
   /** Name of the snapshot. */
-  name: string
+  name?: string
   /** UUID of the project to which the volume and the snapshot belong. */
   projectId?: string
   /** List of tags assigned to the snapshot. */
@@ -202,7 +202,7 @@ export type CreateVolumeRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
   /** Name of the volume. */
-  name: string
+  name?: string
   /**
    * The maximum IO/s expected, according to the different options available in
    * stock (`5000 | 15000`).

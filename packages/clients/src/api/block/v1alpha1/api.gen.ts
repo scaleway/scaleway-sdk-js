@@ -143,7 +143,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateVolumeRequest}
    * @returns A Promise of Volume
    */
-  createVolume = (request: Readonly<CreateVolumeRequest>) =>
+  createVolume = (request: Readonly<CreateVolumeRequest> = {}) =>
     this.client.fetch<Volume>(
       {
         body: JSON.stringify(
