@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.55.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.54.0...@scaleway/sdk@2.55.0) (2024-11-18)
+
+### Features
+
+- **block:** improve arguments configuration ([#1576](https://github.com/scaleway/scaleway-sdk-js/issues/1576)) ([aa34b25](https://github.com/scaleway/scaleway-sdk-js/commit/aa34b256c86d21e27737ad460939a9c5462ea9e8))
+- **iam:** add send_welcome_email in CreateUser ([#1569](https://github.com/scaleway/scaleway-sdk-js/issues/1569)) ([be1f311](https://github.com/scaleway/scaleway-sdk-js/commit/be1f311818a4612359ae49afde001855dc4268b7))
+- **mongodb:** add DeleteEndpoint ([#1575](https://github.com/scaleway/scaleway-sdk-js/issues/1575)) ([cbd4509](https://github.com/scaleway/scaleway-sdk-js/commit/cbd4509d1872d561beabe5d1fa02fa1f9bcb8ab9))
+- **webhosting:** add hosting resource summary ([#1573](https://github.com/scaleway/scaleway-sdk-js/issues/1573)) ([54c1f2e](https://github.com/scaleway/scaleway-sdk-js/commit/54c1f2e4c203c4cacac269b7d67e0cffbee209ea))
+
 ## [2.54.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.53.0...@scaleway/sdk@2.54.0) (2024-11-11)
 
 ### Features
