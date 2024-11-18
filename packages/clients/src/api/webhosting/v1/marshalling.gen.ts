@@ -42,6 +42,7 @@ import type {
   OfferOption,
   OfferOptionRequest,
   ResetHostingPasswordResponse,
+  ResourceSummary,
   Session,
   Website,
 } from './types.gen'
@@ -383,6 +384,21 @@ export const unmarshalResetHostingPasswordResponse = (
   return {
     oneTimePassword: data.one_time_password,
   } as ResetHostingPasswordResponse
+}
+
+export const unmarshalResourceSummary = (data: unknown): ResourceSummary => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ResourceSummary' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    databasesCount: data.databases_count,
+    ftpAccountsCount: data.ftp_accounts_count,
+    mailAccountsCount: data.mail_accounts_count,
+    websitesCount: data.websites_count,
+  } as ResourceSummary
 }
 
 export const unmarshalSession = (data: unknown): Session => {
