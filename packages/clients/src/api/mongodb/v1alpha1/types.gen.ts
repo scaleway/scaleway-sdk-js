@@ -314,6 +314,16 @@ export type CreateUserRequest = {
   password: string
 }
 
+export type DeleteEndpointRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the Endpoint to delete. */
+  endpointId: string
+}
+
 export type DeleteInstanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the
