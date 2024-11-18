@@ -639,9 +639,11 @@ export interface Dashboard {
   securityGroupsCount: number
   ipsUnused: number
   volumesLSsdCount: number
-  volumesBSsdCount: number
+  /** @deprecated */
+  volumesBSsdCount?: number
   volumesLSsdTotalSize: number
-  volumesBSsdTotalSize: number
+  /** @deprecated */
+  volumesBSsdTotalSize?: number
   privateNicsCount: number
   placementGroupsCount: number
 }

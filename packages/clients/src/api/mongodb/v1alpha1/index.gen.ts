@@ -3,6 +3,7 @@
 export { API } from './api.gen'
 export * from './content.gen'
 export type {
+  CreateEndpointRequest,
   CreateInstanceRequest,
   CreateInstanceRequestVolumeDetails,
   CreateSnapshotRequest,
