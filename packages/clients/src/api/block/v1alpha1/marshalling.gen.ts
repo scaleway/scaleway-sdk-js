@@ -1,5 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+import randomName from '@scaleway/random-name'
 import {
   isJSONObject,
   resolveOneOf,
@@ -190,7 +191,7 @@ export const marshalCreateSnapshotRequest = (
   request: CreateSnapshotRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  name: request.name,
+  name: request.name || randomName('snp'),
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
   volume_id: request.volumeId,
@@ -215,7 +216,7 @@ export const marshalCreateVolumeRequest = (
   request: CreateVolumeRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  name: request.name,
+  name: request.name || randomName('vol'),
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
   ...resolveOneOf([
