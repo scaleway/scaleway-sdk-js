@@ -539,6 +539,16 @@ export type HostingApiGetHostingRequest = {
   hostingId: string
 }
 
+export type HostingApiGetResourceSummaryRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Hosting ID. */
+  hostingId: string
+}
+
 export type HostingApiListHostingsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -766,6 +776,17 @@ export type OfferApiListOffersRequest = {
 export interface ResetHostingPasswordResponse {
   /** New temporary password. */
   oneTimePassword: string
+}
+
+export interface ResourceSummary {
+  /** Total number of active databases in the Web Hosting plan. */
+  databasesCount: number
+  /** Total number of active email accounts in the Web Hosting plan. */
+  mailAccountsCount: number
+  /** Total number of active FTP accounts in the Web Hosting plan. */
+  ftpAccountsCount: number
+  /** Total number of active domains in the the Web Hosting plan. */
+  websitesCount: number
 }
 
 export interface Session {

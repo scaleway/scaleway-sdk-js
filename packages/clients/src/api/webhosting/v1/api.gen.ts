@@ -36,6 +36,7 @@ import {
   unmarshalListWebsitesResponse,
   unmarshalMailAccount,
   unmarshalResetHostingPasswordResponse,
+  unmarshalResourceSummary,
   unmarshalSession,
 } from './marshalling.gen'
 import type {
@@ -63,6 +64,7 @@ import type {
   HostingApiCreateSessionRequest,
   HostingApiDeleteHostingRequest,
   HostingApiGetHostingRequest,
+  HostingApiGetResourceSummaryRequest,
   HostingApiListHostingsRequest,
   HostingApiResetHostingPasswordRequest,
   HostingApiUpdateHostingRequest,
@@ -81,6 +83,7 @@ import type {
   MailAccountApiRemoveMailAccountRequest,
   OfferApiListOffersRequest,
   ResetHostingPasswordResponse,
+  ResourceSummary,
   Session,
   WebsiteApiListWebsitesRequest,
 } from './types.gen'
@@ -592,6 +595,24 @@ export class HostingAPI extends ParentAPI {
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/reset-password`,
       },
       unmarshalResetHostingPasswordResponse,
+    )
+
+  /**
+   * Get the total counts of websites, databases, email accounts, and FTP
+   * accounts of a Web Hosting plan.
+   *
+   * @param request - The request {@link HostingApiGetResourceSummaryRequest}
+   * @returns A Promise of ResourceSummary
+   */
+  getResourceSummary = (
+    request: Readonly<HostingApiGetResourceSummaryRequest>,
+  ) =>
+    this.client.fetch<ResourceSummary>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/resource-summary`,
+      },
+      unmarshalResourceSummary,
     )
 }
 
