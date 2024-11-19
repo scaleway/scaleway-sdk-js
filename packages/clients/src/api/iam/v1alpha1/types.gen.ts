@@ -1100,4 +1100,6 @@ export type UpdateUserRequest = {
   userId: string
   /** New tags for the user (maximum of 10 tags). */
   tags?: string[]
+  /** New email for the user (only available on Members). */
+  email?: string
 }

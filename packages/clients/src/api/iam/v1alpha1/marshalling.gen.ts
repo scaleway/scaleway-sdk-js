@@ -698,5 +698,6 @@ export const marshalUpdateUserRequest = (
   request: UpdateUserRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  email: request.email,
   tags: request.tags,
 })
