@@ -25,6 +25,7 @@ export type ServerStatus =
   | 'locked'
   | 'unlocking'
   | 'reinstalling'
+  | 'busy'
 
 export type ServerTypeStock =
   | 'unknown_stock'
