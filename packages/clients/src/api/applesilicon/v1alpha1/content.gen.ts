@@ -10,4 +10,5 @@ export const SERVER_TRANSIENT_STATUSES: ServerStatus[] = [
   'locking',
   'unlocking',
   'reinstalling',
+  'busy',
 ]
