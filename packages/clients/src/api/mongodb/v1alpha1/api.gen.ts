@@ -13,6 +13,7 @@ import {
   SNAPSHOT_TRANSIENT_STATUSES,
 } from './content.gen'
 import {
+  marshalCreateEndpointRequest,
   marshalCreateInstanceRequest,
   marshalCreateSnapshotRequest,
   marshalCreateUserRequest,
@@ -21,6 +22,7 @@ import {
   marshalUpdateSnapshotRequest,
   marshalUpdateUserRequest,
   marshalUpgradeInstanceRequest,
+  unmarshalEndpoint,
   unmarshalInstance,
   unmarshalListInstancesResponse,
   unmarshalListNodeTypesResponse,
@@ -31,12 +33,14 @@ import {
   unmarshalUser,
 } from './marshalling.gen'
 import type {
+  CreateEndpointRequest,
   CreateInstanceRequest,
   CreateSnapshotRequest,
   CreateUserRequest,
   DeleteEndpointRequest,
   DeleteInstanceRequest,
   DeleteSnapshotRequest,
+  Endpoint,
   GetInstanceCertificateRequest,
   GetInstanceRequest,
   GetSnapshotRequest,
@@ -536,4 +540,25 @@ export class API extends ParentAPI {
       method: 'DELETE',
       path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
     })
+
+  /**
+   * Create a new Instance endpoint. Create a new endpoint for a MongoDB®
+   * Database Instance. You can add `public_network` or `private_network`
+   * specifications to the body of the request.
+   *
+   * @param request - The request {@link CreateEndpointRequest}
+   * @returns A Promise of Endpoint
+   */
+  createEndpoint = (request: Readonly<CreateEndpointRequest>) =>
+    this.client.fetch<Endpoint>(
+      {
+        body: JSON.stringify(
+          marshalCreateEndpointRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints`,
+      },
+      unmarshalEndpoint,
+    )
 }
