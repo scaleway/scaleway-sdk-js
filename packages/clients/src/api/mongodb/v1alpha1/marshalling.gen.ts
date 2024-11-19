@@ -9,6 +9,7 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  CreateEndpointRequest,
   CreateInstanceRequest,
   CreateInstanceRequestVolumeDetails,
   CreateSnapshotRequest,
@@ -68,7 +69,7 @@ const unmarshalEndpointPublicDetails = (
   return {} as EndpointPublicDetails
 }
 
-const unmarshalEndpoint = (data: unknown): Endpoint => {
+export const unmarshalEndpoint = (data: unknown): Endpoint => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Endpoint' failed as data isn't a dictionary.`,
@@ -353,14 +354,6 @@ const marshalEndpointSpecPublicDetails = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
-const marshalCreateInstanceRequestVolumeDetails = (
-  request: CreateInstanceRequestVolumeDetails,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  volume_size: request.volumeSize,
-  volume_type: request.volumeType,
-})
-
 const marshalEndpointSpec = (
   request: EndpointSpec,
   defaults: DefaultValues,
@@ -384,6 +377,22 @@ const marshalEndpointSpec = (
           : undefined,
     },
   ]),
+})
+
+export const marshalCreateEndpointRequest = (
+  request: CreateEndpointRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  endpoint: marshalEndpointSpec(request.endpoint, defaults),
+  instance_id: request.instanceId,
+})
+
+const marshalCreateInstanceRequestVolumeDetails = (
+  request: CreateInstanceRequestVolumeDetails,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  volume_size: request.volumeSize,
+  volume_type: request.volumeType,
 })
 
 export const marshalCreateInstanceRequest = (

@@ -144,18 +144,18 @@ export interface Setting {
   floatMax?: number
 }
 
-export interface CreateInstanceRequestVolumeDetails {
-  /** Volume size. */
-  volumeSize: number
-  /** Type of volume where data is stored. */
-  volumeType: VolumeType
-}
-
 export interface EndpointSpec {
   /** One-of ('details'): at most one of 'public', 'privateNetwork' could be set. */
   public?: EndpointSpecPublicDetails
   /** One-of ('details'): at most one of 'public', 'privateNetwork' could be set. */
   privateNetwork?: EndpointSpecPrivateNetworkDetails
+}
+
+export interface CreateInstanceRequestVolumeDetails {
+  /** Volume size. */
+  volumeSize: number
+  /** Type of volume where data is stored. */
+  volumeType: VolumeType
 }
 
 export interface Instance {
@@ -256,6 +256,18 @@ export interface Version {
 export interface RestoreSnapshotRequestVolumeDetails {
   /** Type of volume where data is stored. */
   volumeType: VolumeType
+}
+
+export type CreateEndpointRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the Database Instance. */
+  instanceId: string
+  /** EndpointSpec used to expose your Database Instance. */
+  endpoint: EndpointSpec
 }
 
 export type CreateInstanceRequest = {
