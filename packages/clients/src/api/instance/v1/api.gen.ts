@@ -456,10 +456,17 @@ export class API extends ParentAPI {
    * for SBS volumes. `enable_routed_ip`: Migrate the Instance to the new
    * network stack.
    *
-   * Keep in mind that `terminate` an Instance will result in the deletion of
-   * `l_ssd`, `b_ssd` and `scratch` volumes types, `sbs_volume` volumes type
-   * will only be detached. If you want to preserve your volumes, you should
-   * detach them before the Instance deletion or `terminate` action.
+   * The `terminate` action will result in the deletion of `l_ssd`, `b_ssd` and
+   * `scratch` volumes types, `sbs_volume` volumes type will only be detached.
+   * If you want to preserve your volumes, you should detach them before the
+   * Instance deletion or `terminate` action.
+   *
+   * The `backup` action can be done with: No `volumes` key in the body: an
+   * image is created with snapshots of all the server volumes, except for the
+   * `scratch` volumes types. `volumes` key in the body with a dictionary as
+   * value, in this dictionary volumes UUID as keys and empty dictionaries as
+   * values : an image is created with the snapshots of the volumes in `volumes`
+   * key. `scratch` volumes types can't be shapshotted.
    *
    * @param request - The request {@link ServerActionRequest}
    * @returns A Promise of ServerActionResponse
@@ -1529,13 +1536,22 @@ export class API extends ParentAPI {
 
   /**
    * Get a volume or snapshot's migration plan. Given a volume or snapshot,
-   * returns the migration plan for a call to the "Apply a migration plan"
-   * endpoint. This plan will include zero or one volume, and zero or more
-   * snapshots, which will need to be migrated together. This endpoint does not
-   * perform the actual migration itself, the "Apply a migration plan" endpoint
-   * must be used. The validation_key value returned by this endpoint must be
-   * provided to the call to the "Apply a migration plan" endpoint to confirm
-   * that all resources listed in the plan should be migrated.
+   * returns the migration plan but does not perform the actual migration. To
+   * perform the migration, you have to call the [Migrate a volume and/or
+   * snapshots to
+   * SBS](#path-volumes-migrate-a-volume-andor-snapshots-to-sbs-scaleway-block-storage)
+   * endpoint afterward. The endpoint returns the resources that should be
+   * migrated together:
+   *
+   * - The volume and any snapshots created from the volume, if the call was made
+   *   to plan a volume migration.
+   * - The base volume of the snapshot (if the volume is not deleted) and its
+   *   related snapshots, if the call was made to plan a snapshot migration. The
+   *   endpoint also returns the validation_key, which must be provided to the
+   *   [Migrate a volume and/or snapshots to
+   *   SBS](#path-volumes-migrate-a-volume-andor-snapshots-to-sbs-scaleway-block-storage)
+   *   endpoint to confirm that all resources listed in the plan should be
+   *   migrated.
    *
    * @param request - The request {@link PlanBlockMigrationRequest}
    * @returns A Promise of MigrationPlan
@@ -1555,9 +1571,11 @@ export class API extends ParentAPI {
 
   /**
    * Migrate a volume and/or snapshots to SBS (Scaleway Block Storage). To be
-   * used, the call to this endpoint must be preceded by a call to the "Plan a
-   * migration" endpoint. To migrate all resources mentioned in the migration
-   * plan, the validation_key returned in the plan must be provided.
+   * used, the call to this endpoint must be preceded by a call to the [Get a
+   * volume or snapshot's migration
+   * plan](#path-volumes-get-a-volume-or-snapshots-migration-plan) endpoint. To
+   * migrate all resources mentioned in the migration plan, the validation_key
+   * returned in the plan must be provided.
    *
    * @param request - The request {@link ApplyBlockMigrationRequest}
    */

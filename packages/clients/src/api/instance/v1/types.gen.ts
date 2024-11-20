@@ -763,7 +763,8 @@ export type ApplyBlockMigrationRequest = {
   zone?: Zone
   /**
    * The volume to migrate, along with potentially other resources, according to
-   * the migration plan generated with a call to the "Plan a migration"
+   * the migration plan generated with a call to the [Get a volume or snapshot's
+   * migration plan](#path-volumes-get-a-volume-or-snapshots-migration-plan)
    * endpoint.
    *
    * One-of ('resource'): at most one of 'volumeId', 'snapshotId' could be set.
@@ -771,16 +772,18 @@ export type ApplyBlockMigrationRequest = {
   volumeId?: string
   /**
    * The snapshot to migrate, along with potentially other resources, according
-   * to the migration plan generated with a call to the "Plan a migration"
-   * endpoint.
+   * to the migration plan generated with a call to the [Get a volume or
+   * snapshot's migration
+   * plan](#path-volumes-get-a-volume-or-snapshots-migration-plan) endpoint.
    *
    * One-of ('resource'): at most one of 'volumeId', 'snapshotId' could be set.
    */
   snapshotId?: string
   /**
-   * A value to be retrieved from a call to the "Plan a migration" endpoint, to
-   * confirm that the volume and/or snapshots specified in said plan should be
-   * migrated.
+   * A value to be retrieved from a call to the [Get a volume or snapshot's
+   * migration plan](#path-volumes-get-a-volume-or-snapshots-migration-plan)
+   * endpoint, to confirm that the volume and/or snapshots specified in said
+   * plan should be migrated.
    */
   validationKey: string
 }
@@ -1725,8 +1728,10 @@ export interface MigrationPlan {
    */
   snapshots: Snapshot[]
   /**
-   * A value to be passed to the call to the "Apply a migration plan" endpoint,
-   * to confirm that the execution of the plan is being requested.
+   * A value to be passed to the call to the [Migrate a volume and/or snapshots
+   * to
+   * SBS](#path-volumes-migrate-a-volume-andor-snapshots-to-sbs-scaleway-block-storage)
+   * endpoint, to confirm that the execution of the plan is being requested.
    */
   validationKey: string
 }
