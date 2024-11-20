@@ -1,8 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region } from '../../../bridge'
+import type { Region, TimeSeries } from '../../../bridge'
 
-export type DataSourceOrigin = 'unknown_origin' | 'scaleway' | 'external'
+export type DataSourceOrigin = 'unknown_origin' | 'scaleway' | 'custom'
 
 export type DataSourceType = 'unknown_type' | 'metrics' | 'logs' | 'traces'
 
@@ -205,6 +205,10 @@ export interface AlertManager {
   managedAlertsEnabled: boolean
   /** Regions where the Alert manager is enabled. */
   region: Region
+}
+
+export interface CockpitMetrics {
+  timeseries: TimeSeries[]
 }
 
 /** Cockpit configuration. */
@@ -533,6 +537,13 @@ export type RegionalApiGetAlertManagerRequest = {
   region?: Region
   /** Project ID of the requested Alert manager. */
   projectId?: string
+}
+
+export type RegionalApiGetCockpitMetricsRequest = {
+  projectId?: string
+  startDate?: Date
+  endDate?: Date
+  query: string
 }
 
 /** Get Cockpit configuration. */
