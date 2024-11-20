@@ -34,6 +34,7 @@ import {
   unmarshalJWT,
   unmarshalListAPIKeysResponse,
   unmarshalListApplicationsResponse,
+  unmarshalListGracePeriodsResponse,
   unmarshalListGroupsResponse,
   unmarshalListJWTsResponse,
   unmarshalListLogsResponse,
@@ -86,6 +87,8 @@ import type {
   ListAPIKeysResponse,
   ListApplicationsRequest,
   ListApplicationsResponse,
+  ListGracePeriodsRequest,
+  ListGracePeriodsResponse,
   ListGroupsRequest,
   ListGroupsResponse,
   ListJWTsRequest,
@@ -399,6 +402,22 @@ export class API extends ParentAPI {
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/unlock`,
       },
       unmarshalUser,
+    )
+
+  /**
+   * List grace periods of a user. List the grace periods of a user.
+   *
+   * @param request - The request {@link ListGracePeriodsRequest}
+   * @returns A Promise of ListGracePeriodsResponse
+   */
+  listGracePeriods = (request: Readonly<ListGracePeriodsRequest> = {}) =>
+    this.client.fetch<ListGracePeriodsResponse>(
+      {
+        method: 'GET',
+        path: `/iam/v1alpha1/grace-periods`,
+        urlParams: urlParams(['user_id', request.userId]),
+      },
+      unmarshalListGracePeriodsResponse,
     )
 
   protected pageOfListApplications = (

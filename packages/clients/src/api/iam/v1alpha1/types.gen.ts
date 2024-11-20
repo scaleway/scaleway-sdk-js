@@ -3,6 +3,11 @@
 
 export type BearerType = 'unknown_bearer_type' | 'user' | 'application'
 
+export type GracePeriodType =
+  | 'unknown_grace_period_type'
+  | 'update_password'
+  | 'set_mfa'
+
 export type ListAPIKeysRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -205,6 +210,15 @@ export interface Application {
   nbApiKeys: number
   /** Tags associated with the user. */
   tags: string[]
+}
+
+export interface GracePeriod {
+  /** Type of grace period. */
+  type: GracePeriodType
+  /** Date and time the grace period was created. */
+  createdAt?: Date
+  /** Date and time the grace period expires. */
+  expiresAt?: Date
 }
 
 export interface Group {
@@ -749,6 +763,16 @@ export interface ListApplicationsResponse {
   totalCount: number
 }
 
+export type ListGracePeriodsRequest = {
+  /** ID of the user to list grace periods for. */
+  userId?: string
+}
+
+export interface ListGracePeriodsResponse {
+  /** List of grace periods. */
+  gracePeriods: GracePeriod[]
+}
+
 export type ListGroupsRequest = {
   /** Sort order of groups. */
   orderBy?: ListGroupsRequestOrderBy
@@ -960,6 +984,7 @@ export interface ListUsersResponse {
 }
 
 export type LockUserRequest = {
+  /** ID of the user to lock. */
   userId: string
 }
 
@@ -999,6 +1024,7 @@ export interface SetRulesResponse {
 }
 
 export type UnlockUserRequest = {
+  /** ID of the user to unlock. */
   userId: string
 }
 
