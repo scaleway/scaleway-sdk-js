@@ -22,10 +22,12 @@ import type {
   CreateUserRequest,
   CreateUserRequestMember,
   EncodedJWT,
+  GracePeriod,
   Group,
   JWT,
   ListAPIKeysResponse,
   ListApplicationsResponse,
+  ListGracePeriodsResponse,
   ListGroupsResponse,
   ListJWTsResponse,
   ListLogsResponse,
@@ -300,6 +302,37 @@ export const unmarshalListApplicationsResponse = (
     ),
     totalCount: data.total_count,
   } as ListApplicationsResponse
+}
+
+const unmarshalGracePeriod = (data: unknown): GracePeriod => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GracePeriod' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    expiresAt: unmarshalDate(data.expires_at),
+    type: data.type,
+  } as GracePeriod
+}
+
+export const unmarshalListGracePeriodsResponse = (
+  data: unknown,
+): ListGracePeriodsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListGracePeriodsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    gracePeriods: unmarshalArrayOfObject(
+      data.grace_periods,
+      unmarshalGracePeriod,
+    ),
+  } as ListGracePeriodsResponse
 }
 
 export const unmarshalListGroupsResponse = (
