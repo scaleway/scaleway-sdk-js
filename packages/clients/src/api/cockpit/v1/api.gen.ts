@@ -23,6 +23,7 @@ import {
   marshalRegionalApiTriggerTestAlertRequest,
   marshalRegionalApiUpdateDataSourceRequest,
   unmarshalAlertManager,
+  unmarshalCockpitMetrics,
   unmarshalContactPoint,
   unmarshalDataSource,
   unmarshalGetConfigResponse,
@@ -42,6 +43,7 @@ import {
 } from './marshalling.gen'
 import type {
   AlertManager,
+  CockpitMetrics,
   ContactPoint,
   DataSource,
   GetConfigResponse,
@@ -78,6 +80,7 @@ import type {
   RegionalApiEnableAlertManagerRequest,
   RegionalApiEnableManagedAlertsRequest,
   RegionalApiGetAlertManagerRequest,
+  RegionalApiGetCockpitMetricsRequest,
   RegionalApiGetConfigRequest,
   RegionalApiGetDataSourceRequest,
   RegionalApiGetTokenRequest,
@@ -915,4 +918,24 @@ export class RegionalAPI extends ParentAPI {
       method: 'POST',
       path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/trigger-test-alert`,
     })
+
+  getCockpitMetrics = (
+    request: Readonly<RegionalApiGetCockpitMetricsRequest>,
+  ) =>
+    this.client.fetch<CockpitMetrics>(
+      {
+        method: 'GET',
+        path: `/cockpit/v1beta1/cockpit/metrics`,
+        urlParams: urlParams(
+          ['end_date', request.endDate],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
+          ['query', request.query],
+          ['start_date', request.startDate],
+        ),
+      },
+      unmarshalCockpitMetrics,
+    )
 }
