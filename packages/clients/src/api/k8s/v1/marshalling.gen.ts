@@ -535,6 +535,7 @@ export const unmarshalNodeMetadata = (data: unknown): NodeMetadata => {
     ),
     poolVersion: data.pool_version,
     privateNetworkMode: data.private_network_mode,
+    repoUri: data.repo_uri,
   } as NodeMetadata
 }
 
