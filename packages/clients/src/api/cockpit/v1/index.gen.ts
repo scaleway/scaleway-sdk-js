@@ -4,7 +4,6 @@ export { GlobalAPI, RegionalAPI } from './api.gen'
 export type {
   Alert,
   AlertManager,
-  CockpitMetrics,
   ContactPoint,
   ContactPointEmail,
   DataSource,
@@ -52,7 +51,6 @@ export type {
   RegionalApiEnableAlertManagerRequest,
   RegionalApiEnableManagedAlertsRequest,
   RegionalApiGetAlertManagerRequest,
-  RegionalApiGetCockpitMetricsRequest,
   RegionalApiGetConfigRequest,
   RegionalApiGetDataSourceRequest,
   RegionalApiGetTokenRequest,
