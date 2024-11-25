@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.56.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.55.0...@scaleway/sdk@2.56.0) (2024-11-25)
+
+### Features
+
+- **apple_silicon:** add busy server status ([#1584](https://github.com/scaleway/scaleway-sdk-js/issues/1584)) ([3006f07](https://github.com/scaleway/scaleway-sdk-js/commit/3006f0745a436b1528440dde761ba6c77c3fd1e3))
+- **cockpit:** add regional get cockpit metrics ([#1589](https://github.com/scaleway/scaleway-sdk-js/issues/1589)) ([2e2d4fb](https://github.com/scaleway/scaleway-sdk-js/commit/2e2d4fb8e27338260f1f8dd4e9bbb9b0d1909280))
+- **iam:** add list user grace periods method ([#1586](https://github.com/scaleway/scaleway-sdk-js/issues/1586)) ([0e32de2](https://github.com/scaleway/scaleway-sdk-js/commit/0e32de273de9b89f335fe307f3378f47bc5527d3))
+- **iam:** allow updating a Member's email ([#1582](https://github.com/scaleway/scaleway-sdk-js/issues/1582)) ([69d737a](https://github.com/scaleway/scaleway-sdk-js/commit/69d737a7cbc64e6c6b4ab591f90707e15b970297))
+- **instance:** set b_ssd volume type as deprecated ([#1583](https://github.com/scaleway/scaleway-sdk-js/issues/1583)) ([300c837](https://github.com/scaleway/scaleway-sdk-js/commit/300c837bcf4a6dc87411852cc29f8ea646b204c9))
+- **k8s:** add repo_uri field to NodeMetadata ([#1600](https://github.com/scaleway/scaleway-sdk-js/issues/1600)) ([7dbc7b1](https://github.com/scaleway/scaleway-sdk-js/commit/7dbc7b1ca809f5691c075d2702ef5b265b480473))
+- **mongodb:** add CreateEndpoint ([#1580](https://github.com/scaleway/scaleway-sdk-js/issues/1580)) ([9daa4da](https://github.com/scaleway/scaleway-sdk-js/commit/9daa4da13bbe9147e54a15981eb73d38f1840124))
+
+### Bug Fixes
+
+- **client:** createClient doesn't copy all settings of client ([#1602](https://github.com/scaleway/scaleway-sdk-js/issues/1602)) ([35cdb3a](https://github.com/scaleway/scaleway-sdk-js/commit/35cdb3a7b25bb895f18b42e7d51e4c47cd756b47))
+
+### Reverts
+
+- **cockpit:** set back external enum ([#1590](https://github.com/scaleway/scaleway-sdk-js/issues/1590)) ([c254b81](https://github.com/scaleway/scaleway-sdk-js/commit/c254b81461c75979090b1fc6358cc435b8de30be))
+
 ## [2.55.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.54.0...@scaleway/sdk@2.55.0) (2024-11-18)
 
 ### Features
