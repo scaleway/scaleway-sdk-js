@@ -1,7 +1,10 @@
 import { getLogger } from '../internal/logger'
 import type { ClientConfig } from './client-ini-factory'
-import { withLegacyInterceptors, withProfile } from './client-ini-factory'
-import type { Profile } from './client-ini-profile'
+import {
+  withAdditionalInterceptors,
+  withLegacyInterceptors,
+  withProfile,
+} from './client-ini-factory'
 import type { Settings } from './client-settings'
 import { assertValidSettings } from './client-settings'
 import { userAgent, version } from './constants'
@@ -99,5 +102,8 @@ export const createAdvancedClient = (...configs: ClientConfig[]): Client => {
  *
  * @public
  */
-export const createClient = (profile: Profile = {}): Client =>
-  createAdvancedClient(withProfile(profile))
+export const createClient = (settings: Partial<Settings> = {}): Client =>
+  createAdvancedClient(
+    withProfile(settings),
+    withAdditionalInterceptors(settings.interceptors ?? []),
+  )
