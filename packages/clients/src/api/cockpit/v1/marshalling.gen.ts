@@ -5,13 +5,11 @@ import {
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
-  unmarshalTimeSeries,
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
   Alert,
   AlertManager,
-  CockpitMetrics,
   ContactPoint,
   ContactPointEmail,
   DataSource,
@@ -178,18 +176,6 @@ export const unmarshalAlertManager = (data: unknown): AlertManager => {
     managedAlertsEnabled: data.managed_alerts_enabled,
     region: data.region,
   } as AlertManager
-}
-
-export const unmarshalCockpitMetrics = (data: unknown): CockpitMetrics => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CockpitMetrics' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    timeseries: unmarshalArrayOfObject(data.timeseries, unmarshalTimeSeries),
-  } as CockpitMetrics
 }
 
 const unmarshalGetConfigResponseRetention = (
