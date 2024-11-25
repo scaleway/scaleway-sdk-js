@@ -800,7 +800,11 @@ export type CreateInstanceRequest = {
   engine: string
   /** Username created when the Database Instance is created. */
   userName: string
-  /** Password of the user. */
+  /**
+   * Password of the user. Password must be between 8 and 128 characters,
+   * contain at least one digit, one uppercase, one lowercase and one special
+   * character.
+   */
   password: string
   /** Type of node to use for the Database Instance. */
   nodeType: string
@@ -883,7 +887,11 @@ export type CreateUserRequest = {
   instanceId: string
   /** Name of the user you want to create. */
   name: string
-  /** Password of the user you want to create. */
+  /**
+   * Password of the user you want to create. Password must be between 8 and 128
+   * characters, contain at least one digit, one uppercase, one lowercase and
+   * one special character.
+   */
   password: string
   /** Defines whether the user will have administrative privileges. */
   isAdmin: boolean
@@ -1559,7 +1567,11 @@ export type UpdateUserRequest = {
   instanceId: string
   /** Name of the database user. */
   name: string
-  /** Password of the database user. */
+  /**
+   * Password of the database user. Password must be between 8 and 128
+   * characters, contain at least one digit, one uppercase, one lowercase and
+   * one special character.
+   */
   password?: string
   /** Defines whether or not this user got administrative privileges. */
   isAdmin?: boolean
