@@ -1257,6 +1257,7 @@ export interface NodeMetadata {
   fullIsolation: boolean
   hasGpu: boolean
   externalIp: string
+  repoUri: string
 }
 
 export type RebootNodeRequest = {
