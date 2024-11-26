@@ -5,6 +5,9 @@ export const CreateJobDefinitionRequest = {
   cpuLimit: {
     greaterThan: 0,
   },
+  description: {
+    maxLength: 255,
+  },
   imageUri: {
     pattern:
       /^((?:(?:(?:[a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])(?:\.(?:[a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]))*|\[(?:[a-fA-F0-9:]+)\])(?::[0-9]+)?\/)?[a-z0-9]+(?:(?:[._]|__|[-]+)[a-z0-9]+)*(?:\/[a-z0-9]+(?:(?:[._]|__|[-]+)[a-z0-9]+)*)*)(?::(\w[A-Za-z0-9_.-]{0,127}))?(?:@([A-Za-z][A-Za-z0-9]*(?:[-_+.][A-Za-z][A-Za-z0-9]*)*[:][[:xdigit:]]{32,}))?$/,
@@ -77,6 +80,9 @@ export const StartJobDefinitionRequest = {
 export const UpdateJobDefinitionRequest = {
   cpuLimit: {
     greaterThan: 0,
+  },
+  description: {
+    maxLength: 255,
   },
   imageUri: {
     pattern:
