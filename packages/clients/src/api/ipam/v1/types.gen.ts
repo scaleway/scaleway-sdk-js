@@ -28,6 +28,8 @@ export type ResourceType =
   | 'baremetal_private_nic'
   | 'llm_deployment'
   | 'mgdb_instance'
+  | 'apple_silicon_server'
+  | 'apple_silicon_private_nic'
 
 export interface Resource {
   /** Type of resource the IP is attached to. */
