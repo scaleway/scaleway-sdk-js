@@ -378,7 +378,7 @@ const unmarshalVolumeServer = (data: unknown): VolumeServer => {
     project: data.project,
     server: data.server ? unmarshalServerSummary(data.server) : undefined,
     size: data.size,
-    state: data.state,
+    state: data.state ? data.state : undefined,
     volumeType: data.volume_type,
     zone: data.zone,
   } as VolumeServer

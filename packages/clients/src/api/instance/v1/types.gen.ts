@@ -316,17 +316,17 @@ export interface ServerMaintenance {
 
 export interface VolumeServer {
   id: string
-  name: string
+  name?: string
   /** @deprecated */
   exportUri?: string
-  organization: string
+  organization?: string
   server?: ServerSummary
-  size: number
+  size?: number
   volumeType: VolumeServerVolumeType
   creationDate?: Date
   modificationDate?: Date
-  state: VolumeServerState
-  project: string
+  state?: VolumeServerState
+  project?: string
   boot: boolean
   /** Zone to target. If none is passed will use default zone from the config. */
   zone: Zone
