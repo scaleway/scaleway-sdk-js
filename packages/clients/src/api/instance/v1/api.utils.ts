@@ -266,7 +266,8 @@ export class InstanceV1UtilsAPI extends API {
       zone: request.zone,
     }).then(res => validateNotUndefined(res.server?.volumes))
 
-    const newVolumes: Record<string, { id: string; name: string | undefined }> = {}
+    const newVolumes: Record<string, { id: string; name: string | undefined }> =
+      {}
     for (const [key, server] of Object.entries(volumes)) {
       newVolumes[key] = { id: server.id, name: server.name }
     }
@@ -322,7 +323,8 @@ export class InstanceV1UtilsAPI extends API {
       .then(res => validateNotUndefined(res.server))
 
     // Remove volume.
-    const newVolumes: Record<string, { id: string; name: string | undefined }> = {}
+    const newVolumes: Record<string, { id: string; name: string | undefined }> =
+      {}
     for (const [key, volume] of Object.entries(server.volumes)) {
       if (volume.id !== request.volumeId) {
         newVolumes[key] = { id: volume.id, name: volume.name }
