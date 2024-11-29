@@ -11,6 +11,9 @@ export type ResourceType =
   | 'kube_cluster'
   | 'kube_pool'
   | 'kube_node'
+  | 'kube_acl'
+
+export interface KubernetesACLInfo {}
 
 export interface KubernetesClusterInfo {}
 
@@ -45,29 +48,40 @@ export interface Resource {
   name?: string
   /**
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
-   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo' could be set.
+   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo' could be
+   * set.
    */
   secmSecretInfo?: SecretManagerSecretInfo
   /**
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
-   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo' could be set.
+   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo' could be
+   * set.
    */
   secmSecretVersionInfo?: SecretManagerSecretVersionInfo
   /**
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
-   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo' could be set.
+   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo' could be
+   * set.
    */
   kubeClusterInfo?: KubernetesClusterInfo
   /**
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
-   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo' could be set.
+   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo' could be
+   * set.
    */
   kubePoolInfo?: KubernetesPoolInfo
   /**
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
-   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo' could be set.
+   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo' could be
+   * set.
    */
   kubeNodeInfo?: KubernetesNodeInfo
+  /**
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
+   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo' could be
+   * set.
+   */
+  kubeAclInfo?: KubernetesACLInfo
 }
 
 export interface Event {
