@@ -5,6 +5,7 @@
 
 import * as Account from './account/index.gen'
 import * as Applesilicon from './applesilicon/index.gen'
+import * as AuditTrail from './audit_trail/index.gen'
 import * as Baremetal from './baremetal/index.gen'
 import * as Billing from './billing/index.gen'
 import * as Block from './block/index.gen'
@@ -46,6 +47,7 @@ import * as Webhosting from './webhosting/index.gen'
 export {
   Account,
   Applesilicon,
+  AuditTrail,
   Baremetal,
   Billing,
   Block,
