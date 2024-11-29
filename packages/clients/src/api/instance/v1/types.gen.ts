@@ -801,6 +801,12 @@ export interface AttachServerVolumeResponse {
   server?: Server
 }
 
+export type CheckBlockMigrationOrganizationQuotasRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  organization?: string
+}
+
 export type CreateImageRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
