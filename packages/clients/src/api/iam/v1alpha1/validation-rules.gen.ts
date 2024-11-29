@@ -104,12 +104,6 @@ export const ListApplicationsRequest = {
   },
 }
 
-export const ListGracePeriodsRequest = {
-  userId: {
-    minLength: 1,
-  },
-}
-
 export const ListGroupsRequest = {
   name: {
     minLength: 1,
