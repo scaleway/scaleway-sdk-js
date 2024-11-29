@@ -48,6 +48,10 @@ export type ListConsumptionsRequestOrderBy =
 export type ListDiscountsRequestOrderBy =
   | 'creation_date_desc'
   | 'creation_date_asc'
+  | 'start_date_desc'
+  | 'start_date_asc'
+  | 'stop_date_desc'
+  | 'stop_date_asc'
 
 export type ListInvoicesRequestOrderBy =
   | 'invoice_number_desc'

@@ -14,6 +14,7 @@ import type {
   AttachServerVolumeRequest,
   AttachServerVolumeResponse,
   Bootscript,
+  CheckBlockMigrationOrganizationQuotasRequest,
   CreateImageRequest,
   CreateImageResponse,
   CreateIpRequest,
@@ -1622,6 +1623,13 @@ export const marshalAttachServerVolumeRequest = (
   boot: request.boot,
   volume_id: request.volumeId,
   volume_type: request.volumeType,
+})
+
+export const marshalCheckBlockMigrationOrganizationQuotasRequest = (
+  request: CheckBlockMigrationOrganizationQuotasRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  organization: request.organization ?? defaults.defaultOrganizationId,
 })
 
 const marshalVolumeTemplate = (
