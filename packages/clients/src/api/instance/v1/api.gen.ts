@@ -10,6 +10,7 @@ import type { Zone } from '../../../bridge'
 import {
   marshalApplyBlockMigrationRequest,
   marshalAttachServerVolumeRequest,
+  marshalCheckBlockMigrationOrganizationQuotasRequest,
   marshalCreateImageRequest,
   marshalCreateIpRequest,
   marshalCreatePlacementGroupRequest,
@@ -103,6 +104,7 @@ import type {
   ApplyBlockMigrationRequest,
   AttachServerVolumeRequest,
   AttachServerVolumeResponse,
+  CheckBlockMigrationOrganizationQuotasRequest,
   CreateImageRequest,
   CreateImageResponse,
   CreateIpRequest,
@@ -1587,5 +1589,20 @@ export class API extends ParentAPI {
       headers: jsonContentHeaders,
       method: 'POST',
       path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/block-migration/apply`,
+    })
+
+  checkBlockMigrationOrganizationQuotas = (
+    request: Readonly<CheckBlockMigrationOrganizationQuotasRequest> = {},
+  ) =>
+    this.client.fetch<void>({
+      body: JSON.stringify(
+        marshalCheckBlockMigrationOrganizationQuotasRequest(
+          request,
+          this.client.settings,
+        ),
+      ),
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/block-migration/check-organization-quotas`,
     })
 }
