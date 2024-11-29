@@ -530,7 +530,11 @@ export interface GetBillingResponse {
    * plan.
    */
   currentPlan?: PlanDetails
-  /** Price of the current subscription plan. */
+  /**
+   * Cost to date (this month) for Edge Service subscription plans. This
+   * comprises the pro-rata cost of the current subscription plan, and any
+   * previous subscription plans that were active earlier in the month.
+   */
   planCost?: Money
   /** Total number of pipelines currently configured. */
   pipelineNumber: number
