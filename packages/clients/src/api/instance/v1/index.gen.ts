@@ -10,6 +10,7 @@ export type {
   AttachServerVolumeResponse,
   BootType,
   Bootscript,
+  CheckBlockMigrationOrganizationQuotasRequest,
   CreateImageRequest,
   CreateImageResponse,
   CreateIpRequest,
