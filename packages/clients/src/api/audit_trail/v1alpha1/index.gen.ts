@@ -4,6 +4,7 @@ export { API } from './api.gen'
 export type {
   Event,
   EventPrincipal,
+  KubernetesACLInfo,
   KubernetesClusterInfo,
   KubernetesNodeInfo,
   KubernetesPoolInfo,

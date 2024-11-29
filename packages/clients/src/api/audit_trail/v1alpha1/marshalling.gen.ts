@@ -8,6 +8,7 @@ import {
 import type {
   Event,
   EventPrincipal,
+  KubernetesACLInfo,
   KubernetesClusterInfo,
   KubernetesNodeInfo,
   KubernetesPoolInfo,
@@ -18,6 +19,16 @@ import type {
   SecretManagerSecretInfo,
   SecretManagerSecretVersionInfo,
 } from './types.gen'
+
+const unmarshalKubernetesACLInfo = (data: unknown): KubernetesACLInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'KubernetesACLInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as KubernetesACLInfo
+}
 
 const unmarshalKubernetesClusterInfo = (
   data: unknown,
@@ -108,6 +119,9 @@ export const unmarshalResource = (data: unknown): Resource => {
     createdAt: unmarshalDate(data.created_at),
     deletedAt: unmarshalDate(data.deleted_at),
     id: data.id,
+    kubeAclInfo: data.kube_acl_info
+      ? unmarshalKubernetesACLInfo(data.kube_acl_info)
+      : undefined,
     kubeClusterInfo: data.kube_cluster_info
       ? unmarshalKubernetesClusterInfo(data.kube_cluster_info)
       : undefined,
