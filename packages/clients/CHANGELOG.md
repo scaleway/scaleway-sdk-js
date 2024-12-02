@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.57.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.56.0...@scaleway/sdk@2.57.0) (2024-12-02)
+
+### Features
+
+- **audit_trail:** add Kubernetes ACL resource ([#1622](https://github.com/scaleway/scaleway-sdk-js/issues/1622)) ([83483b8](https://github.com/scaleway/scaleway-sdk-js/commit/83483b8e5eab6a82e131e2050bd018e2ad707afa))
+- **audit_trail:** enable v1alpha1 ([#1615](https://github.com/scaleway/scaleway-sdk-js/issues/1615)) ([b696c1e](https://github.com/scaleway/scaleway-sdk-js/commit/b696c1ea82de6df9153b82fb4a41d82d0716ad73))
+- **billing:** update ListDiscount order_by to accept start_date and … ([#1618](https://github.com/scaleway/scaleway-sdk-js/issues/1618)) ([a4a477e](https://github.com/scaleway/scaleway-sdk-js/commit/a4a477e407b8d4fe5a97b65482c795ccedd45000))
+- **edge_services:** fix plan_cost description ([#1607](https://github.com/scaleway/scaleway-sdk-js/issues/1607)) ([f04a200](https://github.com/scaleway/scaleway-sdk-js/commit/f04a20081fc15a12369e4c9e6f9328dcf3785044))
+- **iam:** remove unused validation rule ([#1620](https://github.com/scaleway/scaleway-sdk-js/issues/1620)) ([9a2b6da](https://github.com/scaleway/scaleway-sdk-js/commit/9a2b6da0a33cba7b3c1bfe103808dd8f36bb0010))
+- **iam:** require `user_id` in `ListGracePeriodsRequest` ([#1619](https://github.com/scaleway/scaleway-sdk-js/issues/1619)) ([52a341c](https://github.com/scaleway/scaleway-sdk-js/commit/52a341c751f096ea6ac7da808f52eb82c6cb648a))
+- **instance:** create CheckQuotasOrganizationBlockMigration endpoint ([#1617](https://github.com/scaleway/scaleway-sdk-js/issues/1617)) ([c38b0a1](https://github.com/scaleway/scaleway-sdk-js/commit/c38b0a1434ce845fe5e9133c2e7212f5f7126feb))
+- **instance:** set some fields of VolumeServer as optional ([#1606](https://github.com/scaleway/scaleway-sdk-js/issues/1606)) ([68dcd68](https://github.com/scaleway/scaleway-sdk-js/commit/68dcd6889b70d4cfbea79fcddf8bf1b7e80640fc))
+- **ipam:** add apple silicon resource types ([#1605](https://github.com/scaleway/scaleway-sdk-js/issues/1605)) ([eacafa9](https://github.com/scaleway/scaleway-sdk-js/commit/eacafa94ae62bae750a4a20458d586e93cf04a09))
+- **serverless_jobs:** add validation for description length on create and update events ([#1604](https://github.com/scaleway/scaleway-sdk-js/issues/1604)) ([3d6d00f](https://github.com/scaleway/scaleway-sdk-js/commit/3d6d00fd5178a9e5ec4d33ebf8851961089a96d2))
+
+### Bug Fixes
+
+- **rdb:** add documentation about password validation ([#1603](https://github.com/scaleway/scaleway-sdk-js/issues/1603)) ([9c92e5b](https://github.com/scaleway/scaleway-sdk-js/commit/9c92e5b90472c4eb5f6af92cfac45cdf7c7a739f))
+
 ## [2.56.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.55.0...@scaleway/sdk@2.56.0) (2024-11-25)
 
 ### Features
