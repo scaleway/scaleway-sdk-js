@@ -85,25 +85,42 @@ export interface Resource {
 }
 
 export interface Event {
+  /** ID of the event. */
   id: string
+  /** Timestamp of the event. */
   recordedAt?: Date
+  /** Locality of the resource attached to the event. */
   locality: string
+  /** User or IAM application at the origin of the event. */
   principal?: EventPrincipal
+  /** Organization ID containing the event. */
   organizationId: string
+  /** (Optional) Project of the resource attached to the event. */
   projectId?: string
+  /** IP address at the origin of the event. */
   sourceIp: string
+  /** User Agent at the origin of the event. */
   userAgent?: string
+  /** Product name of the resource attached to the event. */
   productName: string
+  /** API name called to trigger the event. */
   serviceName: string
+  /** API method called to trigger the event. */
   methodName: string
+  /** Resource attached to the event. */
   resource?: Resource
+  /** Unique identifier of the request at the origin of the event. */
   requestId: string
+  /** Request at the origin of the event. */
   requestBody?: Record<string, unknown>
+  /** HTTP status code resulting of the API call. */
   statusCode: number
 }
 
 export interface Product {
+  /** Product title. */
   title: string
+  /** Product name. */
   name: string
 }
 
@@ -160,6 +177,8 @@ export type ListProductsRequest = {
 }
 
 export interface ListProductsResponse {
+  /** List of all products integrated with Audit Trail. */
   products: Product[]
+  /** Number of integrated products. */
   totalCount: number
 }
