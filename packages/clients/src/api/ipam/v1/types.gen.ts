@@ -231,6 +231,11 @@ export type ListIPsRequest = {
    */
   resourceId?: string
   /**
+   * Resource IDs to filter for. Only IPs attached to at least one of these
+   * resources will be returned.
+   */
+  resourceIds?: string[]
+  /**
    * Resource type to filter for. Only IPs attached to this type of resource
    * will be returned.
    */
