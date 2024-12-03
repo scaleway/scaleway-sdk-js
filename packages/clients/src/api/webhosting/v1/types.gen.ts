@@ -140,6 +140,8 @@ export interface HostingSummary {
   id: string
   /** ID of the Scaleway Project the Web Hosting plan belongs to. */
   projectId: string
+  /** Date on which the Web Hosting plan was created. */
+  createdAt?: Date
   /** Date on which the Web Hosting plan was last updated. */
   updatedAt?: Date
   /** Status of the Web Hosting plan. */
