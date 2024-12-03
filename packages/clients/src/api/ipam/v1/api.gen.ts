@@ -142,6 +142,7 @@ export class API extends ParentAPI {
           ],
           ['project_id', request.projectId],
           ['resource_id', request.resourceId],
+          ['resource_ids', request.resourceIds],
           ['resource_name', request.resourceName],
           ['resource_type', request.resourceType],
           ['resource_types', request.resourceTypes],
