@@ -90,6 +90,8 @@ export type WebhookEventType =
   | 'email_delivered'
   | 'email_spam'
   | 'email_mailbox_not_found'
+  | 'email_blocklisted'
+  | 'blocklist_created'
 
 export interface DomainRecordsDMARC {
   /** Name of the DMARC TXT record. */
