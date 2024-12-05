@@ -73,9 +73,9 @@ const jsonContentHeaders = {
 }
 
 /**
- * Messaging and Queuing NATS API.
+ * NATS API.
  *
- * This API allows you to manage Scaleway Messaging and Queuing NATS accounts.
+ * This API allows you to manage Scaleway NATS accounts.
  */
 export class NatsAPI extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -285,19 +285,19 @@ export class NatsAPI extends ParentAPI {
 }
 
 /**
- * Messaging and Queuing SNS API.
+ * Topics and Events API.
  *
- * This API allows you to manage your Scaleway Messaging and Queuing SNS
- * brokers.
+ * This API allows you to manage your Scaleway Topics and Events.
  */
 export class SnsAPI extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams']
 
   /**
-   * Activate SNS. Activate SNS for the specified Project ID. SNS must be
-   * activated before any usage. Activating SNS does not trigger any billing,
-   * and you can deactivate at any time.
+   * Activate Topics and Events. Activate Topics and Events for the specified
+   * Project ID. Topics and Events must be activated before any usage.
+   * Activating Topics and Events does not trigger any billing, and you can
+   * deactivate at any time.
    *
    * @param request - The request {@link SnsApiActivateSnsRequest}
    * @returns A Promise of SnsInfo
@@ -316,8 +316,9 @@ export class SnsAPI extends ParentAPI {
     )
 
   /**
-   * Get SNS info. Retrieve the SNS information of the specified Project ID.
-   * Informations include the activation status and the SNS API endpoint URL.
+   * Get Topics and Events info. Retrieve the Topics and Events information of
+   * the specified Project ID. Informations include the activation status and
+   * the Topics and Events API endpoint URL.
    *
    * @param request - The request {@link SnsApiGetSnsInfoRequest}
    * @returns A Promise of SnsInfo
@@ -336,9 +337,9 @@ export class SnsAPI extends ParentAPI {
     )
 
   /**
-   * Deactivate SNS. Deactivate SNS for the specified Project ID.You must delete
-   * all topics and credentials before this call or you need to set the
-   * force_delete parameter.
+   * Deactivate Topics and Events. Deactivate Topics and Events for the
+   * specified Project ID. You must delete all topics and credentials before
+   * this call or you need to set the force_delete parameter.
    *
    * @param request - The request {@link SnsApiDeactivateSnsRequest}
    * @returns A Promise of SnsInfo
@@ -357,9 +358,9 @@ export class SnsAPI extends ParentAPI {
     )
 
   /**
-   * Create SNS credentials. Create a set of credentials for SNS, specified by a
-   * Project ID. Credentials give the bearer access to topics, and the level of
-   * permissions can be defined granularly.
+   * Create Topics and Events credentials. Create a set of credentials for
+   * Topics and Events, specified by a Project ID. Credentials give the bearer
+   * access to topics, and the level of permissions can be defined granularly.
    *
    * @param request - The request {@link SnsApiCreateSnsCredentialsRequest}
    * @returns A Promise of SnsCredentials
@@ -383,9 +384,10 @@ export class SnsAPI extends ParentAPI {
     )
 
   /**
-   * Delete SNS credentials. Delete a set of SNS credentials, specified by their
-   * credentials ID. Deleting credentials is irreversible and cannot be undone.
-   * The credentials can then no longer be used to access SNS.
+   * Delete Topics and Events credentials. Delete a set of Topics and Events
+   * credentials, specified by their credentials ID. Deleting credentials is
+   * irreversible and cannot be undone. The credentials can then no longer be
+   * used to access Topics and Events.
    *
    * @param request - The request {@link SnsApiDeleteSnsCredentialsRequest}
    */
@@ -398,8 +400,8 @@ export class SnsAPI extends ParentAPI {
     })
 
   /**
-   * Update SNS credentials. Update a set of SNS credentials. You can update the
-   * credentials' name, or their permissions.
+   * Update Topics and Events credentials. Update a set of Topics and Events
+   * credentials. You can update the credentials' name, or their permissions.
    *
    * @param request - The request {@link SnsApiUpdateSnsCredentialsRequest}
    * @returns A Promise of SnsCredentials
@@ -423,9 +425,9 @@ export class SnsAPI extends ParentAPI {
     )
 
   /**
-   * Get SNS credentials. Retrieve an existing set of credentials, identified by
-   * the `credentials_id`. The credentials themselves, as well as their metadata
-   * (name, project ID etc), are returned in the response.
+   * Get Topics and Events credentials. Retrieve an existing set of credentials,
+   * identified by the `credentials_id`. The credentials themselves, as well as
+   * their metadata (name, project ID etc), are returned in the response.
    *
    * @param request - The request {@link SnsApiGetSnsCredentialsRequest}
    * @returns A Promise of SnsCredentials
@@ -460,9 +462,9 @@ export class SnsAPI extends ParentAPI {
     )
 
   /**
-   * List SNS credentials. List existing SNS credentials in the specified
-   * region. The response contains only the metadata for the credentials, not
-   * the credentials themselves.
+   * List Topics and Events credentials. List existing Topics and Events
+   * credentials in the specified region. The response contains only the
+   * metadata for the credentials, not the credentials themselves.
    *
    * @param request - The request {@link SnsApiListSnsCredentialsRequest}
    * @returns A Promise of ListSnsCredentialsResponse
@@ -478,20 +480,19 @@ export class SnsAPI extends ParentAPI {
 }
 
 /**
- * Messaging and Queuing SQS API.
+ * Queues API.
  *
- * This API allows you to manage your Scaleway Messaging and Queuing SQS
- * brokers.
+ * This API allows you to manage your Scaleway Queues.
  */
 export class SqsAPI extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams']
 
   /**
-   * Activate SQS. Activate SQS for the specified Project ID. SQS must be
-   * activated before any usage such as creating credentials and queues.
-   * Activating SQS does not trigger any billing, and you can deactivate at any
-   * time.
+   * Activate Queues. Activate Queues for the specified Project ID. Queues must
+   * be activated before any usage such as creating credentials and queues.
+   * Activating Queues does not trigger any billing, and you can deactivate at
+   * any time.
    *
    * @param request - The request {@link SqsApiActivateSqsRequest}
    * @returns A Promise of SqsInfo
@@ -510,8 +511,9 @@ export class SqsAPI extends ParentAPI {
     )
 
   /**
-   * Get SQS info. Retrieve the SQS information of the specified Project ID.
-   * Informations include the activation status and the SQS API endpoint URL.
+   * Get Queues info. Retrieve the Queues information of the specified Project
+   * ID. Informations include the activation status and the Queues API endpoint
+   * URL.
    *
    * @param request - The request {@link SqsApiGetSqsInfoRequest}
    * @returns A Promise of SqsInfo
@@ -530,7 +532,7 @@ export class SqsAPI extends ParentAPI {
     )
 
   /**
-   * Deactivate SQS. Deactivate SQS for the specified Project ID. You must
+   * Deactivate Queues. Deactivate Queues for the specified Project ID. You must
    * delete all queues and credentials before this call or you need to set the
    * force_delete parameter.
    *
@@ -551,9 +553,9 @@ export class SqsAPI extends ParentAPI {
     )
 
   /**
-   * Create SQS credentials. Create a set of credentials for SQS, specified by a
-   * Project ID. Credentials give the bearer access to queues, and the level of
-   * permissions can be defined granularly.
+   * Create Queues credentials. Create a set of credentials for Queues,
+   * specified by a Project ID. Credentials give the bearer access to queues,
+   * and the level of permissions can be defined granularly.
    *
    * @param request - The request {@link SqsApiCreateSqsCredentialsRequest}
    * @returns A Promise of SqsCredentials
@@ -577,9 +579,9 @@ export class SqsAPI extends ParentAPI {
     )
 
   /**
-   * Delete SQS credentials. Delete a set of SQS credentials, specified by their
-   * credentials ID. Deleting credentials is irreversible and cannot be undone.
-   * The credentials can then no longer be used to access SQS.
+   * Delete Queues credentials. Delete a set of Queues credentials, specified by
+   * their credentials ID. Deleting credentials is irreversible and cannot be
+   * undone. The credentials can then no longer be used to access Queues.
    *
    * @param request - The request {@link SqsApiDeleteSqsCredentialsRequest}
    */
@@ -592,8 +594,8 @@ export class SqsAPI extends ParentAPI {
     })
 
   /**
-   * Update SQS credentials. Update a set of SQS credentials. You can update the
-   * credentials' name, or their permissions.
+   * Update Queues credentials. Update a set of Queues credentials. You can
+   * update the credentials' name, or their permissions.
    *
    * @param request - The request {@link SqsApiUpdateSqsCredentialsRequest}
    * @returns A Promise of SqsCredentials
@@ -617,9 +619,9 @@ export class SqsAPI extends ParentAPI {
     )
 
   /**
-   * Get SQS credentials. Retrieve an existing set of credentials, identified by
-   * the `credentials_id`. The credentials themselves, as well as their metadata
-   * (name, project ID etc), are returned in the response.
+   * Get Queues credentials. Retrieve an existing set of credentials, identified
+   * by the `credentials_id`. The credentials themselves, as well as their
+   * metadata (name, project ID etc), are returned in the response.
    *
    * @param request - The request {@link SqsApiGetSqsCredentialsRequest}
    * @returns A Promise of SqsCredentials
@@ -654,7 +656,7 @@ export class SqsAPI extends ParentAPI {
     )
 
   /**
-   * List SQS credentials. List existing SQS credentials in the specified
+   * List Queues credentials. List existing Queues credentials in the specified
    * region. The response contains only the metadata for the credentials, not
    * the credentials themselves.
    *
