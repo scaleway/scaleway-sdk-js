@@ -204,6 +204,7 @@ export const unmarshalCluster = (data: unknown): Cluster => {
   }
 
   return {
+    aclAvailable: data.acl_available,
     admissionPlugins: data.admission_plugins,
     apiserverCertSans: data.apiserver_cert_sans,
     autoUpgrade: data.auto_upgrade
@@ -219,7 +220,6 @@ export const unmarshalCluster = (data: unknown): Cluster => {
     description: data.description,
     dnsWildcard: data.dns_wildcard,
     featureGates: data.feature_gates,
-    fullVpcIntegratonEnabled: data.full_vpc_integraton_enabled,
     id: data.id,
     name: data.name,
     openIdConnectConfig: data.open_id_connect_config
