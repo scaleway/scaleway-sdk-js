@@ -259,6 +259,7 @@ export class NatsAPI extends ParentAPI {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
+          ['project_id', request.projectId],
         ),
       },
       unmarshalListNatsCredentialsResponse,

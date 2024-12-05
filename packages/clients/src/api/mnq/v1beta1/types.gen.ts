@@ -278,6 +278,8 @@ export type NatsApiListNatsCredentialsRequest = {
    * config.
    */
   region?: Region
+  /** Include only NATS accounts in this Project. */
+  projectId?: string
   /** Include only credentials for this NATS account. */
   natsAccountId?: string
   /** Page number to return. */
