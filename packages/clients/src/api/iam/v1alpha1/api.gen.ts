@@ -351,7 +351,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an user's password.
+   * Update an user's password. Private Beta feature.. Update an user's
+   * password. Private Beta feature.
    *
    * @param request - The request {@link UpdateUserPasswordRequest}
    * @returns A Promise of User
@@ -370,8 +371,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Lock a user. Lock a user. Note that a locked user cannot log in or use API
-   * keys until the locked status is removed.
+   * Lock a member. Lock a member. A locked member cannot log in or use API keys
+   * until the locked status is removed. Private Beta feature.
    *
    * @param request - The request {@link LockUserRequest}
    * @returns A Promise of User
@@ -388,7 +389,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Unlock a user.
+   * Unlock a member. Unlock a member. Private Beta feature.
    *
    * @param request - The request {@link UnlockUserRequest}
    * @returns A Promise of User
@@ -405,7 +406,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List grace periods of a user. List the grace periods of a user.
+   * List grace periods of a member. List the grace periods of a member. Private
+   * Beta feature.
    *
    * @param request - The request {@link ListGracePeriodsRequest}
    * @returns A Promise of ListGracePeriodsResponse
@@ -1016,9 +1018,9 @@ export class API extends ParentAPI {
   /**
    * Create an API key. Create an API key. You must specify the `application_id`
    * or the `user_id` and the description. You can also specify the
-   * `default_project_id` which is the Project ID of your preferred Project, to
+   * `default_project_id`, which is the Project ID of your preferred Project, to
    * use with Object Storage. The `access_key` and `secret_key` values are
-   * returned in the response. Note that he secret key is only showed once. Make
+   * returned in the response. Note that the secret key is only shown once. Make
    * sure that you copy and store both keys somewhere safe.
    *
    * @param request - The request {@link CreateAPIKeyRequest}

@@ -596,7 +596,7 @@ export type CreateUserRequest = {
   /** Tags associated with the user. */
   tags?: string[]
   /**
-   * A new IAM Member to create.
+   * Details of IAM member. Private Beta feature.
    *
    * One-of ('type'): at most one of 'email', 'member' could be set.
    */
@@ -1126,6 +1126,6 @@ export type UpdateUserRequest = {
   userId: string
   /** New tags for the user (maximum of 10 tags). */
   tags?: string[]
-  /** New email for the user (only available on Members). */
+  /** IAM member email. */
   email?: string
 }
