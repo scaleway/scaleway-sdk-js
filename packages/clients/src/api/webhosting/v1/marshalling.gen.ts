@@ -23,9 +23,8 @@ import type {
   Hosting,
   HostingApiCreateHostingRequest,
   HostingApiUpdateHostingRequest,
-  HostingCpanelUrls,
-  HostingOption,
   HostingSummary,
+  HostingUser,
   ListControlPanelsResponse,
   ListDatabaseUsersResponse,
   ListDatabasesResponse,
@@ -41,6 +40,9 @@ import type {
   Offer,
   OfferOption,
   OfferOptionRequest,
+  Platform,
+  PlatformControlPanel,
+  PlatformControlPanelUrls,
   ResetHostingPasswordResponse,
   ResourceSummary,
   Session,
@@ -99,31 +101,101 @@ export const unmarshalMailAccount = (data: unknown): MailAccount => {
   } as MailAccount
 }
 
-const unmarshalHostingCpanelUrls = (data: unknown): HostingCpanelUrls => {
+const unmarshalPlatformControlPanelUrls = (
+  data: unknown,
+): PlatformControlPanelUrls => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'HostingCpanelUrls' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'PlatformControlPanelUrls' failed as data isn't a dictionary.`,
     )
   }
 
   return {
     dashboard: data.dashboard,
     webmail: data.webmail,
-  } as HostingCpanelUrls
+  } as PlatformControlPanelUrls
 }
 
-const unmarshalHostingOption = (data: unknown): HostingOption => {
+const unmarshalOfferOption = (data: unknown): OfferOption => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'HostingOption' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'OfferOption' failed as data isn't a dictionary.`,
     )
   }
 
   return {
+    billingOperationPath: data.billing_operation_path,
+    currentValue: data.current_value,
     id: data.id,
+    maxValue: data.max_value,
+    minValue: data.min_value,
     name: data.name,
-    quantity: data.quantity,
-  } as HostingOption
+    quotaWarning: data.quota_warning,
+  } as OfferOption
+}
+
+const unmarshalPlatformControlPanel = (data: unknown): PlatformControlPanel => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PlatformControlPanel' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+    urls: data.urls ? unmarshalPlatformControlPanelUrls(data.urls) : undefined,
+  } as PlatformControlPanel
+}
+
+const unmarshalHostingUser = (data: unknown): HostingUser => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HostingUser' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    contactEmail: data.contact_email,
+    oneTimePassword: data.one_time_password,
+    username: data.username,
+  } as HostingUser
+}
+
+const unmarshalOffer = (data: unknown): Offer => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Offer' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    available: data.available,
+    billingOperationPath: data.billing_operation_path,
+    controlPanelName: data.control_panel_name,
+    endOfLife: data.end_of_life,
+    id: data.id,
+    options: unmarshalArrayOfObject(data.options, unmarshalOfferOption),
+    price: data.price ? unmarshalMoney(data.price) : undefined,
+  } as Offer
+}
+
+const unmarshalPlatform = (data: unknown): Platform => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Platform' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    controlPanel: data.control_panel
+      ? unmarshalPlatformControlPanel(data.control_panel)
+      : undefined,
+    groupName: data.group_name,
+    hostname: data.hostname,
+    ipv4: data.ipv4,
+    ipv6: data.ipv6,
+    number: data.number,
+  } as Platform
 }
 
 export const unmarshalHosting = (data: unknown): Hosting => {
@@ -134,32 +206,20 @@ export const unmarshalHosting = (data: unknown): Hosting => {
   }
 
   return {
-    contactEmail: data.contact_email,
-    controlPanelName: data.control_panel_name,
-    cpanelUrls: data.cpanel_urls
-      ? unmarshalHostingCpanelUrls(data.cpanel_urls)
-      : undefined,
     createdAt: unmarshalDate(data.created_at),
     dnsStatus: data.dns_status,
     domain: data.domain,
     id: data.id,
     ipv4: data.ipv4,
-    ipv6: data.ipv6,
-    offerEndOfLife: data.offer_end_of_life,
-    offerId: data.offer_id,
-    offerName: data.offer_name,
-    oneTimePassword: data.one_time_password,
-    options: unmarshalArrayOfObject(data.options, unmarshalHostingOption),
-    platformGroup: data.platform_group,
-    platformHostname: data.platform_hostname,
-    platformNumber: data.platform_number,
+    offer: data.offer ? unmarshalOffer(data.offer) : undefined,
+    platform: data.platform ? unmarshalPlatform(data.platform) : undefined,
     projectId: data.project_id,
     protected: data.protected,
     region: data.region,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
-    username: data.username,
+    user: data.user ? unmarshalHostingUser(data.user) : undefined,
   } as Hosting
 }
 
@@ -291,42 +351,6 @@ export const unmarshalListMailAccountsResponse = (
     ),
     totalCount: data.total_count,
   } as ListMailAccountsResponse
-}
-
-const unmarshalOfferOption = (data: unknown): OfferOption => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'OfferOption' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    billingOperationPath: data.billing_operation_path,
-    currentValue: data.current_value,
-    id: data.id,
-    maxValue: data.max_value,
-    minValue: data.min_value,
-    name: data.name,
-    quotaWarning: data.quota_warning,
-  } as OfferOption
-}
-
-const unmarshalOffer = (data: unknown): Offer => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Offer' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    available: data.available,
-    billingOperationPath: data.billing_operation_path,
-    controlPanelName: data.control_panel_name,
-    endOfLife: data.end_of_life,
-    id: data.id,
-    options: unmarshalArrayOfObject(data.options, unmarshalOfferOption),
-    price: data.price ? unmarshalMoney(data.price) : undefined,
-  } as Offer
 }
 
 export const unmarshalListOffersResponse = (
