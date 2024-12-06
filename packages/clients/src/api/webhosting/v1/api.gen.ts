@@ -15,6 +15,7 @@ import {
   marshalDatabaseApiCreateDatabaseRequest,
   marshalDatabaseApiCreateDatabaseUserRequest,
   marshalDatabaseApiUnassignDatabaseUserRequest,
+  marshalDnsApiCheckUserOwnsDomainRequest,
   marshalFtpAccountApiChangeFtpAccountPasswordRequest,
   marshalFtpAccountApiCreateFtpAccountRequest,
   marshalHostingApiCreateHostingRequest,
@@ -22,8 +23,10 @@ import {
   marshalMailAccountApiChangeMailAccountPasswordRequest,
   marshalMailAccountApiCreateMailAccountRequest,
   marshalMailAccountApiRemoveMailAccountRequest,
+  unmarshalCheckUserOwnsDomainResponse,
   unmarshalDatabase,
   unmarshalDatabaseUser,
+  unmarshalDnsRecords,
   unmarshalFtpAccount,
   unmarshalHosting,
   unmarshalListControlPanelsResponse,
@@ -40,6 +43,7 @@ import {
   unmarshalSession,
 } from './marshalling.gen'
 import type {
+  CheckUserOwnsDomainResponse,
   ControlPanelApiListControlPanelsRequest,
   Database,
   DatabaseApiAssignDatabaseUserRequest,
@@ -54,6 +58,9 @@ import type {
   DatabaseApiListDatabasesRequest,
   DatabaseApiUnassignDatabaseUserRequest,
   DatabaseUser,
+  DnsApiCheckUserOwnsDomainRequest,
+  DnsApiGetDomainDnsRecordsRequest,
+  DnsRecords,
   FtpAccount,
   FtpAccountApiChangeFtpAccountPasswordRequest,
   FtpAccountApiCreateFtpAccountRequest,
@@ -93,13 +100,13 @@ const jsonContentHeaders = {
 }
 
 /**
- * Web Hosting API.
+ * Web Hosting Control Panel API.
  *
  * This API allows you to manage your Web Hosting services.
  */
 export class ControlPanelAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams']
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
 
   protected pageOfListControlPanels = (
     request: Readonly<ControlPanelApiListControlPanelsRequest> = {},
@@ -381,6 +388,54 @@ export class DatabaseAPI extends ParentAPI {
 }
 
 /**
+ * Web Hosting Dns API.
+ *
+ * This API allows you to manage your Web Hosting services.
+ */
+export class DnsAPI extends ParentAPI {
+  /** Lists the available regions of the API. */
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+
+  /**
+   * Get DNS records. Get the set of DNS records of a specified domain
+   * associated with a Web Hosting plan's domain.
+   *
+   * @param request - The request {@link DnsApiGetDomainDnsRecordsRequest}
+   * @returns A Promise of DnsRecords
+   */
+  getDomainDnsRecords = (request: Readonly<DnsApiGetDomainDnsRecordsRequest>) =>
+    this.client.fetch<DnsRecords>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domain', request.domain)}/dns-records`,
+      },
+      unmarshalDnsRecords,
+    )
+
+  /**
+   * "Check whether you own this domain or not.".
+   *
+   * @param request - The request {@link DnsApiCheckUserOwnsDomainRequest}
+   * @returns A Promise of CheckUserOwnsDomainResponse
+   */
+  checkUserOwnsDomain = (request: Readonly<DnsApiCheckUserOwnsDomainRequest>) =>
+    this.client.fetch<CheckUserOwnsDomainResponse>(
+      {
+        body: JSON.stringify(
+          marshalDnsApiCheckUserOwnsDomainRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domain', request.domain)}/check-ownership`,
+      },
+      unmarshalCheckUserOwnsDomainResponse,
+    )
+}
+
+/**
  * Web Hosting Offer API.
  *
  * This API allows you to manage your offer for your Web Hosting services.
@@ -428,7 +483,7 @@ export class OfferAPI extends ParentAPI {
  */
 export class HostingAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams']
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
 
   /**
    * Order a Web Hosting plan. Order a Web Hosting plan, specifying the offer
