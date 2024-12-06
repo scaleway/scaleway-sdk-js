@@ -3,7 +3,7 @@
 import type { Money, Region } from '../../../bridge'
 import type { LanguageCode as StdLanguageCode } from '../../std/types.gen'
 
-export type HostingDnsStatus = 'unknown_dns_status' | 'valid' | 'invalid'
+export type DnsRecordsStatus = 'unknown_status' | 'valid' | 'invalid'
 
 export type HostingStatus =
   | 'unknown_status'
@@ -55,6 +55,15 @@ export type OfferOptionName =
 
 export type OfferOptionWarning = 'unknown_warning' | 'quota_exceeded_warning'
 
+export type PlatformPlatformGroup = 'unknown_group' | 'default' | 'premium'
+
+export interface PlatformControlPanelUrls {
+  /** URL to connect to the hosting control panel dashboard. */
+  dashboard: string
+  /** URL to connect to the hosting Webmail interface. */
+  webmail: string
+}
+
 export interface OfferOption {
   /** Option ID. */
   id: string
@@ -75,6 +84,13 @@ export interface OfferOption {
   quotaWarning: OfferOptionWarning
 }
 
+export interface PlatformControlPanel {
+  /** Name of the control panel. */
+  name: string
+  /** URL to connect to cPanel dashboard and to Webmail interface. */
+  urls?: PlatformControlPanelUrls
+}
+
 export interface CreateHostingRequestDomainConfiguration {
   updateNameservers: boolean
   updateWebRecord: boolean
@@ -89,18 +105,51 @@ export interface OfferOptionRequest {
   quantity: number
 }
 
-export interface HostingCpanelUrls {
-  dashboard: string
-  webmail: string
+export interface HostingUser {
+  /** Main Web Hosting cPanel username. */
+  username: string
+  /**
+   * One-time-password used for the first login or reset password, empty after
+   * first use.
+   */
+  oneTimePassword?: string
+  /** Contact email used for the hosting. */
+  contactEmail: string
 }
 
-export interface HostingOption {
-  /** Option ID. */
+export interface Offer {
+  /** Offer ID. */
   id: string
-  /** Option name. */
-  name: OfferOptionName
-  /** Option quantity. */
-  quantity: number
+  /** Unique identifier used for billing. */
+  billingOperationPath: string
+  /** Options available for the offer. */
+  options: OfferOption[]
+  /** Price of the offer. */
+  price?: Money
+  /**
+   * If a hosting_id was specified in the call, defines whether the offer is
+   * available for a specified hosting plan to migrate (update) to.
+   */
+  available: boolean
+  /** Name of the control panel. */
+  controlPanelName: string
+  /** Indicates if the offer has reached its end of life. */
+  endOfLife: boolean
+}
+
+export interface Platform {
+  /** Hostname of the host platform. */
+  hostname: string
+  /** Number of the host platform. */
+  number: number
+  /** Group name of the hosting's host platform. */
+  groupName: PlatformPlatformGroup
+  /** IPv4 address of the hosting's host platform. */
+  ipv4: string
+  /** IPv6 address of the hosting's host platform. */
+  ipv6: string
+  /** Details of the platform control panel. */
+  controlPanel?: PlatformControlPanel
 }
 
 export interface ControlPanel {
@@ -159,26 +208,6 @@ export interface MailAccount {
   domain: string
   /** Username part address of the mail account address. */
   username: string
-}
-
-export interface Offer {
-  /** Offer ID. */
-  id: string
-  /** Unique identifier used for billing. */
-  billingOperationPath: string
-  /** Options available for the offer. */
-  options: OfferOption[]
-  /** Price of the offer. */
-  price?: Money
-  /**
-   * If a hosting_id was specified in the call, defines whether the offer is
-   * available for a specified hosting plan to migrate (update) to.
-   */
-  available: boolean
-  /** Name of the control panel. */
-  controlPanelName: string
-  /** Indicates if the offer has reached its end of life. */
-  endOfLife: boolean
 }
 
 export interface Website {
@@ -433,45 +462,22 @@ export interface Hosting {
   createdAt?: Date
   /** Status of the Web Hosting plan. */
   status: HostingStatus
-  /** Hostname of the host platform. */
-  platformHostname: string
-  /** Number of the host platform. */
-  platformNumber: number
-  /** ID of the active offer for the Web Hosting plan. */
-  offerId: string
-  /** Name of the active offer for the Web Hosting plan. */
-  offerName: string
   /** Main domain associated with the Web Hosting plan. */
   domain: string
+  /** Details of the Web Hosting plan offer and options. */
+  offer?: Offer
+  /** Details of the hosting platform. */
+  platform?: Platform
   /** List of tags associated with the Web Hosting plan. */
   tags: string[]
-  /** List of the Web Hosting plan options. */
-  options: HostingOption[]
   /** DNS status of the Web Hosting plan. */
-  dnsStatus: HostingDnsStatus
-  /** URL to connect to cPanel dashboard and to Webmail interface. */
-  cpanelUrls?: HostingCpanelUrls
-  /** Main Web Hosting cPanel username. */
-  username: string
-  /** Indicates if the hosting offer has reached its end of life. */
-  offerEndOfLife: boolean
-  /** Name of the control panel. */
-  controlPanelName: string
-  /** Group of the hosting's host server/platform. */
-  platformGroup: string
-  /** IPv4 address of the hosting's host server. */
+  dnsStatus: DnsRecordsStatus
+  /** Current IPv4 address of the hosting. */
   ipv4: string
-  /** IPv6 address of the hosting's host server. */
-  ipv6: string
   /** Whether the hosting is protected or not. */
   protected: boolean
-  /**
-   * One-time-password used for the first login or reset password, empty after
-   * first use.
-   */
-  oneTimePassword: string
-  /** Contact email used for the hosting. */
-  contactEmail: string
+  /** Details of the hosting user. */
+  user?: HostingUser
   /** Region where the Web Hosting plan is hosted. */
   region: Region
 }

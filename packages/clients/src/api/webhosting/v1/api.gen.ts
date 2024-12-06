@@ -428,7 +428,7 @@ export class OfferAPI extends ParentAPI {
  */
 export class HostingAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams']
+  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
 
   /**
    * Order a Web Hosting plan. Order a Web Hosting plan, specifying the offer
