@@ -73,6 +73,8 @@ export type ListUsersRequestOrderBy =
   | 'email_desc'
   | 'last_login_asc'
   | 'last_login_desc'
+  | 'username_asc'
+  | 'username_desc'
 
 export type LogAction = 'unknown_action' | 'created' | 'updated' | 'deleted'
 
@@ -671,6 +673,11 @@ export type GetLogRequest = {
   logId: string
 }
 
+export type GetOrganizationSecuritySettingsRequest = {
+  /** ID of the Organization. */
+  organizationId?: string
+}
+
 export type GetPolicyRequest = {
   /** Id of policy to search. */
   policyId: string
@@ -988,6 +995,15 @@ export type LockUserRequest = {
   userId: string
 }
 
+export interface OrganizationSecuritySettings {
+  /** Defines whether password renewal is enforced during first login. */
+  enforcePasswordRenewal: boolean
+  /** Duration of the grace period to renew password or enable MFA. */
+  gracePeriodDuration?: string
+  /** Number of login attempts before the account is locked. */
+  loginAttemptsBeforeLocked: number
+}
+
 export type RemoveGroupMemberRequest = {
   /** ID of the group. */
   groupId: string
@@ -1060,6 +1076,17 @@ export type UpdateGroupRequest = {
   description?: string
   /** New tags for the group (maximum of 10 tags). */
   tags?: string[]
+}
+
+export type UpdateOrganizationSecuritySettingsRequest = {
+  /** ID of the Organization. */
+  organizationId?: string
+  /** Defines whether password renewal is enforced during first login. */
+  enforcePasswordRenewal?: boolean
+  /** Duration of the grace period to renew password or enable MFA. */
+  gracePeriodDuration?: string
+  /** Number of login attempts before the account is locked. */
+  loginAttemptsBeforeLocked?: number
 }
 
 export type UpdatePolicyRequest = {

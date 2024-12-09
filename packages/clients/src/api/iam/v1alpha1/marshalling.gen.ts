@@ -38,6 +38,7 @@ import type {
   ListSSHKeysResponse,
   ListUsersResponse,
   Log,
+  OrganizationSecuritySettings,
   PermissionSet,
   Policy,
   Quotum,
@@ -51,6 +52,7 @@ import type {
   UpdateAPIKeyRequest,
   UpdateApplicationRequest,
   UpdateGroupRequest,
+  UpdateOrganizationSecuritySettingsRequest,
   UpdatePolicyRequest,
   UpdateSSHKeyRequest,
   UpdateUserPasswordRequest,
@@ -503,6 +505,22 @@ export const unmarshalListUsersResponse = (
   } as ListUsersResponse
 }
 
+export const unmarshalOrganizationSecuritySettings = (
+  data: unknown,
+): OrganizationSecuritySettings => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OrganizationSecuritySettings' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    enforcePasswordRenewal: data.enforce_password_renewal,
+    gracePeriodDuration: data.grace_period_duration,
+    loginAttemptsBeforeLocked: data.login_attempts_before_locked,
+  } as OrganizationSecuritySettings
+}
+
 export const unmarshalSetRulesResponse = (data: unknown): SetRulesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -694,6 +712,15 @@ export const marshalUpdateGroupRequest = (
   description: request.description,
   name: request.name,
   tags: request.tags,
+})
+
+export const marshalUpdateOrganizationSecuritySettingsRequest = (
+  request: UpdateOrganizationSecuritySettingsRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  enforce_password_renewal: request.enforcePasswordRenewal,
+  grace_period_duration: request.gracePeriodDuration,
+  login_attempts_before_locked: request.loginAttemptsBeforeLocked,
 })
 
 export const marshalUpdatePolicyRequest = (
