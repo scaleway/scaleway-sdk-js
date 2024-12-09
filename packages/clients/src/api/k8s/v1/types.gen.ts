@@ -586,17 +586,12 @@ export interface Cluster {
   /** Date on which it will be possible to switch to a smaller offer. */
   commitmentEndsAt?: Date
   /**
-   * @deprecated Defines whether routed IPs are enabled for nodes of this
-   *   cluster.
-   */
-  routedIpEnabled?: boolean
-  /**
    * @deprecated Defines whether the SBS-enabled CSI starting from v0.3 is
    *   installed on the cluster.
    */
   sbsCsiEnabled?: boolean
-  /** @deprecated Defines whether VPC is fully integrated on the cluster. */
-  fullVpcIntegratonEnabled?: boolean
+  /** @deprecated Defines whether ACL is available on the cluster. */
+  aclAvailable?: boolean
 }
 
 export interface Node {
