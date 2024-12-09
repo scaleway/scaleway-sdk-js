@@ -48,7 +48,7 @@ export interface File {
 export interface SnsPermissions {
   /**
    * Defines whether the credentials bearer can publish messages to the service
-   * (publish to SNS topics).
+   * (publish to Topics and Events topics).
    */
   canPublish?: boolean
   /**
@@ -57,8 +57,8 @@ export interface SnsPermissions {
    */
   canReceive?: boolean
   /**
-   * Defines whether the credentials bearer can manage the associated SNS topics
-   * or subscriptions.
+   * Defines whether the credentials bearer can manage the associated Topics and
+   * Events topics or subscriptions.
    */
   canManage?: boolean
 }
@@ -66,16 +66,16 @@ export interface SnsPermissions {
 export interface SqsPermissions {
   /**
    * Defines whether the credentials bearer can publish messages to the service
-   * (send messages to SQS queues).
+   * (send messages to Queues queues).
    */
   canPublish?: boolean
   /**
-   * Defines whether the credentials bearer can receive messages from SQS
+   * Defines whether the credentials bearer can receive messages from Queues
    * queues.
    */
   canReceive?: boolean
   /**
-   * Defines whether the credentials bearer can manage the associated SQS
+   * Defines whether the credentials bearer can manage the associated Queues
    * queues.
    */
   canManage?: boolean
@@ -133,7 +133,10 @@ export interface SnsCredentials {
   updatedAt?: Date
   /** Access key ID. */
   accessKey: string
-  /** Secret key ID (Only returned by **Create SNS Credentials** call). */
+  /**
+   * Secret key ID (Only returned by **Create Topics and Events Credentials**
+   * call).
+   */
   secretKey: string
   /** Checksum of the Secret key. */
   secretChecksum: string
@@ -156,7 +159,7 @@ export interface SqsCredentials {
   updatedAt?: Date
   /** Access key ID. */
   accessKey: string
-  /** Secret key ID (Only returned by **Create SQS Credentials** call). */
+  /** Secret key ID (Only returned by **Create Queues Credentials** call). */
   secretKey: string
   /** Checksum of the Secret key. */
   secretChecksum: string
@@ -181,14 +184,14 @@ export interface ListNatsCredentialsResponse {
 export interface ListSnsCredentialsResponse {
   /** Total count of existing credentials (matching any filters specified). */
   totalCount: number
-  /** SNS credentials on this page. */
+  /** Topics and Events credentials on this page. */
   snsCredentials: SnsCredentials[]
 }
 
 export interface ListSqsCredentialsResponse {
   /** Total count of existing credentials (matching any filters specified). */
   totalCount: number
-  /** SQS credentials on this page. */
+  /** Queues credentials on this page. */
   sqsCredentials: SqsCredentials[]
 }
 
@@ -308,7 +311,7 @@ export type SnsApiActivateSnsRequest = {
    * config.
    */
   region?: Region
-  /** Project on which to activate the SNS service. */
+  /** Project on which to activate the Topics and Events service. */
   projectId?: string
 }
 
@@ -318,7 +321,7 @@ export type SnsApiCreateSnsCredentialsRequest = {
    * config.
    */
   region?: Region
-  /** Project containing the SNS credentials. */
+  /** Project containing the Topics and Events credentials. */
   projectId?: string
   /** Name of the credentials. */
   name?: string
@@ -332,7 +335,7 @@ export type SnsApiDeactivateSnsRequest = {
    * config.
    */
   region?: Region
-  /** Project on which to deactivate the SNS service. */
+  /** Project on which to deactivate the Topics and Events service. */
   projectId?: string
 }
 
@@ -352,7 +355,7 @@ export type SnsApiGetSnsCredentialsRequest = {
    * config.
    */
   region?: Region
-  /** ID of the SNS credentials to get. */
+  /** ID of the Topics and Events credentials to get. */
   snsCredentialsId: string
 }
 
@@ -362,7 +365,7 @@ export type SnsApiGetSnsInfoRequest = {
    * config.
    */
   region?: Region
-  /** Project to retrieve SNS info from. */
+  /** Project to retrieve Topics and Events info from. */
   projectId?: string
 }
 
@@ -372,7 +375,7 @@ export type SnsApiListSnsCredentialsRequest = {
    * config.
    */
   region?: Region
-  /** Include only SNS credentials in this Project. */
+  /** Include only Topics and Events credentials in this Project. */
   projectId?: string
   /** Page number to return. */
   page?: number
@@ -388,7 +391,7 @@ export type SnsApiUpdateSnsCredentialsRequest = {
    * config.
    */
   region?: Region
-  /** ID of the SNS credentials to update. */
+  /** ID of the Topics and Events credentials to update. */
   snsCredentialsId: string
   /** Name of the credentials. */
   name?: string
@@ -401,13 +404,13 @@ export interface SnsInfo {
   projectId: string
   /** Region of the service. */
   region: Region
-  /** SNS creation date. */
+  /** Topics and Events creation date. */
   createdAt?: Date
-  /** SNS last modification date. */
+  /** Topics and Events last modification date. */
   updatedAt?: Date
-  /** SNS activation status. */
+  /** Topics and Events activation status. */
   status: SnsInfoStatus
-  /** Endpoint of the SNS service for this region and project. */
+  /** Endpoint of the Topics and Events service for this region and project. */
   snsEndpointUrl: string
 }
 
@@ -417,7 +420,7 @@ export type SqsApiActivateSqsRequest = {
    * config.
    */
   region?: Region
-  /** Project on which to activate the SQS service. */
+  /** Project on which to activate the Queues service. */
   projectId?: string
 }
 
@@ -427,7 +430,7 @@ export type SqsApiCreateSqsCredentialsRequest = {
    * config.
    */
   region?: Region
-  /** Project containing the SQS credentials. */
+  /** Project containing the Queues credentials. */
   projectId?: string
   /** Name of the credentials. */
   name?: string
@@ -441,7 +444,7 @@ export type SqsApiDeactivateSqsRequest = {
    * config.
    */
   region?: Region
-  /** Project on which to deactivate the SQS service. */
+  /** Project on which to deactivate the Queues service. */
   projectId?: string
 }
 
@@ -461,7 +464,7 @@ export type SqsApiGetSqsCredentialsRequest = {
    * config.
    */
   region?: Region
-  /** ID of the SQS credentials to get. */
+  /** ID of the Queues credentials to get. */
   sqsCredentialsId: string
 }
 
@@ -471,7 +474,7 @@ export type SqsApiGetSqsInfoRequest = {
    * config.
    */
   region?: Region
-  /** Project to retrieve SQS info from. */
+  /** Project to retrieve Queues info from. */
   projectId?: string
 }
 
@@ -481,7 +484,7 @@ export type SqsApiListSqsCredentialsRequest = {
    * config.
    */
   region?: Region
-  /** Include only SQS credentials in this Project. */
+  /** Include only Queues credentials in this Project. */
   projectId?: string
   /** Page number to return. */
   page?: number
@@ -497,7 +500,7 @@ export type SqsApiUpdateSqsCredentialsRequest = {
    * config.
    */
   region?: Region
-  /** ID of the SQS credentials to update. */
+  /** ID of the Queues credentials to update. */
   sqsCredentialsId: string
   /** Name of the credentials. */
   name?: string
@@ -510,12 +513,12 @@ export interface SqsInfo {
   projectId: string
   /** Region of the service. */
   region: Region
-  /** SQS creation date. */
+  /** Queues creation date. */
   createdAt?: Date
-  /** SQS last modification date. */
+  /** Queues last modification date. */
   updatedAt?: Date
-  /** SQS activation status. */
+  /** Queues activation status. */
   status: SqsInfoStatus
-  /** Endpoint of the SQS service for this region and project. */
+  /** Endpoint of the Queues service for this region and project. */
   sqsEndpointUrl: string
 }
