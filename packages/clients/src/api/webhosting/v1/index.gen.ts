@@ -3,6 +3,7 @@
 export {
   ControlPanelAPI,
   DatabaseAPI,
+  DnsAPI,
   FtpAccountAPI,
   HostingAPI,
   MailAccountAPI,
@@ -11,6 +12,7 @@ export {
 } from './api.gen'
 export * from './content.gen'
 export type {
+  CheckUserOwnsDomainResponse,
   ControlPanel,
   ControlPanelApiListControlPanelsRequest,
   CreateHostingRequestDomainConfiguration,
@@ -27,6 +29,12 @@ export type {
   DatabaseApiListDatabasesRequest,
   DatabaseApiUnassignDatabaseUserRequest,
   DatabaseUser,
+  DnsApiCheckUserOwnsDomainRequest,
+  DnsApiGetDomainDnsRecordsRequest,
+  DnsRecord,
+  DnsRecordStatus,
+  DnsRecordType,
+  DnsRecords,
   DnsRecordsStatus,
   FtpAccount,
   FtpAccountApiChangeFtpAccountPasswordRequest,
@@ -66,6 +74,8 @@ export type {
   MailAccountApiCreateMailAccountRequest,
   MailAccountApiListMailAccountsRequest,
   MailAccountApiRemoveMailAccountRequest,
+  Nameserver,
+  NameserverStatus,
   Offer,
   OfferApiListOffersRequest,
   OfferOption,

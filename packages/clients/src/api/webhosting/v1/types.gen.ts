@@ -3,6 +3,17 @@
 import type { Money, Region } from '../../../bridge'
 import type { LanguageCode as StdLanguageCode } from '../../std/types.gen'
 
+export type DnsRecordStatus = 'unknown_status' | 'valid' | 'invalid'
+
+export type DnsRecordType =
+  | 'unknown_type'
+  | 'a'
+  | 'cname'
+  | 'mx'
+  | 'txt'
+  | 'ns'
+  | 'aaaa'
+
 export type DnsRecordsStatus = 'unknown_status' | 'valid' | 'invalid'
 
 export type HostingStatus =
@@ -43,6 +54,8 @@ export type ListOffersRequestOrderBy = 'price_asc'
 
 export type ListWebsitesRequestOrderBy = 'domain_asc' | 'domain_desc'
 
+export type NameserverStatus = 'unknown_status' | 'valid' | 'invalid'
+
 export type OfferOptionName =
   | 'unknown_name'
   | 'domain_count'
@@ -82,6 +95,8 @@ export interface OfferOption {
   maxValue: number
   /** Defines a warning if the maximum value for the option has been reached. */
   quotaWarning: OfferOptionWarning
+  /** Price of the option for 1 value. */
+  price?: Money
 }
 
 export interface PlatformControlPanel {
@@ -103,6 +118,30 @@ export interface OfferOptionRequest {
   id: string
   /** The option requested quantity to set for the Web Hosting plan. */
   quantity: number
+}
+
+export interface DnsRecord {
+  /** Record name. */
+  name: string
+  /** Record type. */
+  type: DnsRecordType
+  /** Record time-to-live. */
+  ttl: number
+  /** Record value. */
+  value: string
+  /** Record priority level. */
+  priority?: number
+  /** Record status. */
+  status: DnsRecordStatus
+}
+
+export interface Nameserver {
+  /** Hostname of the nameserver. */
+  hostname: string
+  /** Status of the nameserver. */
+  status: NameserverStatus
+  /** Defines whether the nameserver is the default one. */
+  isDefault: boolean
 }
 
 export interface HostingUser {
@@ -217,6 +256,11 @@ export interface Website {
   path: string
   /** The SSL status of the website. */
   sslStatus: boolean
+}
+
+export interface CheckUserOwnsDomainResponse {
+  /** Indicates whether the specified project owns the domain. */
+  ownsDomain: boolean
 }
 
 export type ControlPanelApiListControlPanelsRequest = {
@@ -386,6 +430,37 @@ export type DatabaseApiUnassignDatabaseUserRequest = {
   databaseName: string
   /** Name of the user to unassign. */
   username: string
+}
+
+export type DnsApiCheckUserOwnsDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Domain for which ownership is to be verified. */
+  domain: string
+  /** ID of the project currently in use. */
+  projectId?: string
+}
+
+export type DnsApiGetDomainDnsRecordsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Domain associated with the DNS records. */
+  domain: string
+}
+
+export interface DnsRecords {
+  /** List of DNS records. */
+  records: DnsRecord[]
+  /** List of nameservers. */
+  nameServers: Nameserver[]
+  /** Status of the records. */
+  status: DnsRecordsStatus
 }
 
 export type FtpAccountApiChangeFtpAccountPasswordRequest = {

@@ -8,6 +8,7 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  CheckUserOwnsDomainResponse,
   ControlPanel,
   CreateHostingRequestDomainConfiguration,
   Database,
@@ -17,6 +18,9 @@ import type {
   DatabaseApiCreateDatabaseUserRequest,
   DatabaseApiUnassignDatabaseUserRequest,
   DatabaseUser,
+  DnsApiCheckUserOwnsDomainRequest,
+  DnsRecord,
+  DnsRecords,
   FtpAccount,
   FtpAccountApiChangeFtpAccountPasswordRequest,
   FtpAccountApiCreateFtpAccountRequest,
@@ -37,6 +41,7 @@ import type {
   MailAccountApiChangeMailAccountPasswordRequest,
   MailAccountApiCreateMailAccountRequest,
   MailAccountApiRemoveMailAccountRequest,
+  Nameserver,
   Offer,
   OfferOption,
   OfferOptionRequest,
@@ -101,6 +106,65 @@ export const unmarshalMailAccount = (data: unknown): MailAccount => {
   } as MailAccount
 }
 
+export const unmarshalCheckUserOwnsDomainResponse = (
+  data: unknown,
+): CheckUserOwnsDomainResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CheckUserOwnsDomainResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ownsDomain: data.owns_domain,
+  } as CheckUserOwnsDomainResponse
+}
+
+const unmarshalDnsRecord = (data: unknown): DnsRecord => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DnsRecord' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+    priority: data.priority,
+    status: data.status,
+    ttl: data.ttl,
+    type: data.type,
+    value: data.value,
+  } as DnsRecord
+}
+
+const unmarshalNameserver = (data: unknown): Nameserver => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Nameserver' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    hostname: data.hostname,
+    isDefault: data.is_default,
+    status: data.status,
+  } as Nameserver
+}
+
+export const unmarshalDnsRecords = (data: unknown): DnsRecords => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DnsRecords' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    nameServers: unmarshalArrayOfObject(data.name_servers, unmarshalNameserver),
+    records: unmarshalArrayOfObject(data.records, unmarshalDnsRecord),
+    status: data.status,
+  } as DnsRecords
+}
+
 const unmarshalPlatformControlPanelUrls = (
   data: unknown,
 ): PlatformControlPanelUrls => {
@@ -130,6 +194,7 @@ const unmarshalOfferOption = (data: unknown): OfferOption => {
     maxValue: data.max_value,
     minValue: data.min_value,
     name: data.name,
+    price: data.price ? unmarshalMoney(data.price) : undefined,
     quotaWarning: data.quota_warning,
   } as OfferOption
 }
@@ -472,6 +537,13 @@ export const marshalDatabaseApiUnassignDatabaseUserRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   username: request.username,
+})
+
+export const marshalDnsApiCheckUserOwnsDomainRequest = (
+  request: DnsApiCheckUserOwnsDomainRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
 export const marshalFtpAccountApiChangeFtpAccountPasswordRequest = (
