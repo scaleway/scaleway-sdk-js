@@ -23,6 +23,7 @@ import {
   marshalUpdateAPIKeyRequest,
   marshalUpdateApplicationRequest,
   marshalUpdateGroupRequest,
+  marshalUpdateOrganizationSecuritySettingsRequest,
   marshalUpdatePolicyRequest,
   marshalUpdateSSHKeyRequest,
   marshalUpdateUserPasswordRequest,
@@ -45,6 +46,7 @@ import {
   unmarshalListSSHKeysResponse,
   unmarshalListUsersResponse,
   unmarshalLog,
+  unmarshalOrganizationSecuritySettings,
   unmarshalPolicy,
   unmarshalQuotum,
   unmarshalSSHKey,
@@ -77,6 +79,7 @@ import type {
   GetGroupRequest,
   GetJWTRequest,
   GetLogRequest,
+  GetOrganizationSecuritySettingsRequest,
   GetPolicyRequest,
   GetQuotumRequest,
   GetSSHKeyRequest,
@@ -109,6 +112,7 @@ import type {
   ListUsersResponse,
   LockUserRequest,
   Log,
+  OrganizationSecuritySettings,
   Policy,
   Quotum,
   RemoveGroupMemberRequest,
@@ -120,6 +124,7 @@ import type {
   UpdateAPIKeyRequest,
   UpdateApplicationRequest,
   UpdateGroupRequest,
+  UpdateOrganizationSecuritySettingsRequest,
   UpdatePolicyRequest,
   UpdateSSHKeyRequest,
   UpdateUserPasswordRequest,
@@ -1275,5 +1280,49 @@ export class API extends ParentAPI {
         path: `/iam/v1alpha1/logs/${validatePathParam('logId', request.logId)}`,
       },
       unmarshalLog,
+    )
+
+  /**
+   * Get security settings of an Organization. Retrieve information about the
+   * security settings of an Organization, specified by the `organization_id`
+   * parameter.
+   *
+   * @param request - The request {@link GetOrganizationSecuritySettingsRequest}
+   * @returns A Promise of OrganizationSecuritySettings
+   */
+  getOrganizationSecuritySettings = (
+    request: Readonly<GetOrganizationSecuritySettingsRequest> = {},
+  ) =>
+    this.client.fetch<OrganizationSecuritySettings>(
+      {
+        method: 'GET',
+        path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/security-settings`,
+      },
+      unmarshalOrganizationSecuritySettings,
+    )
+
+  /**
+   * Update the security settings of an Organization.
+   *
+   * @param request - The request
+   *   {@link UpdateOrganizationSecuritySettingsRequest}
+   * @returns A Promise of OrganizationSecuritySettings
+   */
+  updateOrganizationSecuritySettings = (
+    request: Readonly<UpdateOrganizationSecuritySettingsRequest> = {},
+  ) =>
+    this.client.fetch<OrganizationSecuritySettings>(
+      {
+        body: JSON.stringify(
+          marshalUpdateOrganizationSecuritySettingsRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/security-settings`,
+      },
+      unmarshalOrganizationSecuritySettings,
     )
 }
