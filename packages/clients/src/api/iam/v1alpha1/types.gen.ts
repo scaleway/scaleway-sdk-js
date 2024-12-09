@@ -73,6 +73,8 @@ export type ListUsersRequestOrderBy =
   | 'email_desc'
   | 'last_login_asc'
   | 'last_login_desc'
+  | 'username_asc'
+  | 'username_desc'
 
 export type LogAction = 'unknown_action' | 'created' | 'updated' | 'deleted'
 
