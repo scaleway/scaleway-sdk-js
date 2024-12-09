@@ -30,7 +30,7 @@
     "directory": "packages/clients"
   },
   "engines": {
-    "node": ">=18.0"
+    "node": ">=22.11.0"
   },
   "type": "module",
   "dependencies": {
