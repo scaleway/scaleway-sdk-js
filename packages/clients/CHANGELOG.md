@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.58.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.57.0...@scaleway/sdk@2.58.0) (2024-12-09)
+
+### Features
+
+- **ipam:** add support for resource_ids filtering in ListIPsRequest ([#1627](https://github.com/scaleway/scaleway-sdk-js/issues/1627)) ([5bbb85f](https://github.com/scaleway/scaleway-sdk-js/commit/5bbb85fef116484669b478d992dcdfbad2e308a4))
+- **k8s:** remove routed IP migration ([#1633](https://github.com/scaleway/scaleway-sdk-js/issues/1633)) ([4c4721b](https://github.com/scaleway/scaleway-sdk-js/commit/4c4721b7bb0fea234753b904b3b7f9ebce688952))
+- **mnq:** allow filtering nats credentials listing by project id ([#1630](https://github.com/scaleway/scaleway-sdk-js/issues/1630)) ([7ed8bf5](https://github.com/scaleway/scaleway-sdk-js/commit/7ed8bf534cdcb876de99c7cfc1c4288b7d391448))
+- **tem:** add 'email_blocklisted' and 'blocklist_created' to WebhookEventType ([#1629](https://github.com/scaleway/scaleway-sdk-js/issues/1629)) ([26ad3e7](https://github.com/scaleway/scaleway-sdk-js/commit/26ad3e732f7c8baa06c2e32b7c924c06a38ca7a2))
+- **webhosting:** add created at field in hosting summary ([#1628](https://github.com/scaleway/scaleway-sdk-js/issues/1628)) ([4f8a4d0](https://github.com/scaleway/scaleway-sdk-js/commit/4f8a4d0fa5e02e296cd3b0a1c29c756f3f29fa43))
+- **webhosting:** update public v1 hosting message ([#1634](https://github.com/scaleway/scaleway-sdk-js/issues/1634)) ([b003e17](https://github.com/scaleway/scaleway-sdk-js/commit/b003e17d9cd508dc4fbd801f6ab4cfe0158a3542))
+- **webhosting:** update v1 uuid and add offer option price ([#1639](https://github.com/scaleway/scaleway-sdk-js/issues/1639)) ([4cff719](https://github.com/scaleway/scaleway-sdk-js/commit/4cff719542721945bbaaa0fb11b7e9f8c5aadd3a))
+
+### Bug Fixes
+
+- define openapi groups for audit trail ([#1625](https://github.com/scaleway/scaleway-sdk-js/issues/1625)) ([8d701e1](https://github.com/scaleway/scaleway-sdk-js/commit/8d701e1ae6f84aa826dd8e8c76fc847d2df8fb19))
+
 ## [2.57.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.56.0...@scaleway/sdk@2.57.0) (2024-12-02)
 
 ### Features
