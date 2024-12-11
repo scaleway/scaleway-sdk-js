@@ -14,6 +14,7 @@ export type {
   ListProductsRequest,
   ListProductsResponse,
   Product,
+  ProductService,
   Resource,
   ResourceType,
   SecretManagerSecretInfo,
