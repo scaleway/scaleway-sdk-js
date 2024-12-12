@@ -15,6 +15,7 @@ import type {
   ListEventsResponse,
   ListProductsResponse,
   Product,
+  ProductService,
   Resource,
   SecretManagerSecretInfo,
   SecretManagerSecretVersionInfo,
@@ -186,6 +187,19 @@ export const unmarshalListEventsResponse = (
   } as ListEventsResponse
 }
 
+const unmarshalProductService = (data: unknown): ProductService => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ProductService' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    methods: data.methods,
+    name: data.name,
+  } as ProductService
+}
+
 const unmarshalProduct = (data: unknown): Product => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -195,6 +209,7 @@ const unmarshalProduct = (data: unknown): Product => {
 
   return {
     name: data.name,
+    services: unmarshalArrayOfObject(data.services, unmarshalProductService),
     title: data.title,
   } as Product
 }
