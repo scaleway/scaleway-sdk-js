@@ -1156,3 +1156,8 @@ export type UpdateUserRequest = {
   /** IAM member email. */
   email?: string
 }
+
+export type UpdateUserUsernameRequest = {
+  userId: string
+  username: string
+}
