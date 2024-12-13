@@ -15,6 +15,7 @@ export type {
   CheckUserOwnsDomainResponse,
   ControlPanel,
   ControlPanelApiListControlPanelsRequest,
+  CreateDatabaseRequestUser,
   CreateHostingRequestDomainConfiguration,
   Database,
   DatabaseApiAssignDatabaseUserRequest,
