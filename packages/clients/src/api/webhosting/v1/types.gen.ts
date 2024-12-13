@@ -106,6 +106,11 @@ export interface PlatformControlPanel {
   urls?: PlatformControlPanelUrls
 }
 
+export interface CreateDatabaseRequestUser {
+  username: string
+  password: string
+}
+
 export interface CreateHostingRequestDomainConfiguration {
   updateNameservers: boolean
   updateWebRecord: boolean
@@ -238,6 +243,10 @@ export interface HostingSummary {
   domain: string
   /** Whether the hosting is protected or not. */
   protected: boolean
+  /** DNS status of the Web Hosting plan. */
+  dnsStatus: DnsRecordsStatus
+  /** Name of the active offer for the Web Hosting plan. */
+  offerName: string
   /** Region where the Web Hosting plan is hosted. */
   region: Region
 }
@@ -316,6 +325,18 @@ export type DatabaseApiCreateDatabaseRequest = {
   hostingId: string
   /** Name of the database to be created. */
   databaseName: string
+  /**
+   * (Optional) Username and password to create a user and link to the database.
+   *
+   * One-of ('user'): at most one of 'newUser', 'existingUsername' could be set.
+   */
+  newUser?: CreateDatabaseRequestUser
+  /**
+   * (Optional) Username to link an existing user to the database.
+   *
+   * One-of ('user'): at most one of 'newUser', 'existingUsername' could be set.
+   */
+  existingUsername?: string
 }
 
 export type DatabaseApiCreateDatabaseUserRequest = {
