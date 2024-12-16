@@ -28,6 +28,7 @@ import {
   marshalUpdateSSHKeyRequest,
   marshalUpdateUserPasswordRequest,
   marshalUpdateUserRequest,
+  marshalUpdateUserUsernameRequest,
   unmarshalAPIKey,
   unmarshalApplication,
   unmarshalEncodedJWT,
@@ -129,6 +130,7 @@ import type {
   UpdateSSHKeyRequest,
   UpdateUserPasswordRequest,
   UpdateUserRequest,
+  UpdateUserUsernameRequest,
   User,
 } from './types.gen'
 
@@ -351,6 +353,26 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users`,
+      },
+      unmarshalUser,
+    )
+
+  /**
+   * Update an user's username. Private Beta feature.. Update an user's
+   * username. Private Beta feature.
+   *
+   * @param request - The request {@link UpdateUserUsernameRequest}
+   * @returns A Promise of User
+   */
+  updateUserUsername = (request: Readonly<UpdateUserUsernameRequest>) =>
+    this.client.fetch<User>(
+      {
+        body: JSON.stringify(
+          marshalUpdateUserUsernameRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/update-username`,
       },
       unmarshalUser,
     )
