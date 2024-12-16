@@ -97,7 +97,6 @@ export type {
   UpdateSSHKeyRequest,
   UpdateUserPasswordRequest,
   UpdateUserRequest,
-  UpdateUserUsernameRequest,
   User,
   UserStatus,
   UserType,
