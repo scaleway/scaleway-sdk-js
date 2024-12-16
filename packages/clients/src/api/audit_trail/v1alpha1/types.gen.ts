@@ -84,6 +84,11 @@ export interface Resource {
   kubeAclInfo?: KubernetesACLInfo
 }
 
+export interface ProductService {
+  name: string
+  methods: string[]
+}
+
 export interface Event {
   /** ID of the event. */
   id: string
@@ -122,6 +127,11 @@ export interface Product {
   title: string
   /** Product name. */
   name: string
+  /**
+   * Specifies the API versions of the products integrated with Audit Trail.
+   * Each version defines the methods logged by Audit Trail.
+   */
+  services: ProductService[]
 }
 
 export type ListEventsRequest = {
