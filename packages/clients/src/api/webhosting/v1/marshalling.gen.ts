@@ -377,8 +377,10 @@ const unmarshalHostingSummary = (data: unknown): HostingSummary => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
+    dnsStatus: data.dns_status,
     domain: data.domain,
     id: data.id,
+    offerName: data.offer_name,
     projectId: data.project_id,
     protected: data.protected,
     region: data.region,

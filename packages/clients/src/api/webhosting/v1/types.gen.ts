@@ -243,6 +243,10 @@ export interface HostingSummary {
   domain: string
   /** Whether the hosting is protected or not. */
   protected: boolean
+  /** DNS status of the Web Hosting plan. */
+  dnsStatus: DnsRecordsStatus
+  /** Name of the active offer for the Web Hosting plan. */
+  offerName: string
   /** Region where the Web Hosting plan is hosted. */
   region: Region
 }
