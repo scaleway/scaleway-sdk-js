@@ -226,11 +226,6 @@ export type ListIPsRequest = {
   /** Defines whether to filter only for IPs which are attached to a resource. */
   attached?: boolean
   /**
-   * Attached resource name to filter for, only IPs attached to a resource with
-   * this string within their name will be returned.
-   */
-  resourceName?: string
-  /**
    * Resource ID to filter for. Only IPs attached to this resource will be
    * returned.
    */
@@ -245,11 +240,6 @@ export type ListIPsRequest = {
    * will be returned.
    */
   resourceType?: ResourceType
-  /**
-   * Resource types to filter for. Only IPs attached to these types of resources
-   * will be returned.
-   */
-  resourceTypes?: ResourceType[]
   /**
    * MAC address to filter for. Only IPs attached to a resource with this MAC
    * address will be returned.
@@ -267,8 +257,16 @@ export type ListIPsRequest = {
   organizationId?: string
   /** Defines whether to filter only for IPv4s or IPv6s. */
   isIpv6?: boolean
-  /** IP IDs to filter for. Only IPs with these UUIDs will be returned. */
-  ipIds?: string[]
+  /**
+   * Attached resource name to filter for, only IPs attached to a resource with
+   * this string within their name will be returned.
+   */
+  resourceName?: string
+  /**
+   * Resource types to filter for. Only IPs attached to these types of resources
+   * will be returned.
+   */
+  resourceTypes?: ResourceType[]
 }
 
 export interface ListIPsResponse {

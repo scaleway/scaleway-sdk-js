@@ -2,7 +2,6 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import {
   isJSONObject,
-  resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
   unmarshalMoney,
@@ -11,7 +10,6 @@ import type { DefaultValues } from '../../../bridge'
 import type {
   CheckUserOwnsDomainResponse,
   ControlPanel,
-  CreateDatabaseRequestUser,
   CreateHostingRequestDomainConfiguration,
   Database,
   DatabaseApiAssignDatabaseUserRequest,
@@ -377,10 +375,8 @@ const unmarshalHostingSummary = (data: unknown): HostingSummary => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
-    dnsStatus: data.dns_status,
     domain: data.domain,
     id: data.id,
-    offerName: data.offer_name,
     projectId: data.project_id,
     protected: data.protected,
     region: data.region,
@@ -521,29 +517,11 @@ export const marshalDatabaseApiChangeDatabaseUserPasswordRequest = (
   password: request.password,
 })
 
-const marshalCreateDatabaseRequestUser = (
-  request: CreateDatabaseRequestUser,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  password: request.password,
-  username: request.username,
-})
-
 export const marshalDatabaseApiCreateDatabaseRequest = (
   request: DatabaseApiCreateDatabaseRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   database_name: request.databaseName,
-  ...resolveOneOf<Record<string, unknown> | string>([
-    {
-      param: 'new_user',
-      value:
-        request.newUser !== undefined
-          ? marshalCreateDatabaseRequestUser(request.newUser, defaults)
-          : undefined,
-    },
-    { param: 'existing_username', value: request.existingUsername },
-  ]),
 })
 
 export const marshalDatabaseApiCreateDatabaseUserRequest = (

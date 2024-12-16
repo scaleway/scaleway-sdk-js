@@ -261,11 +261,3 @@ export const UpdateUserPasswordRequest = {
     minLength: 1,
   },
 }
-
-export const UpdateUserUsernameRequest = {
-  username: {
-    maxLength: 64,
-    minLength: 2,
-    pattern: /^[a-zA-Z0-9._-]+$/,
-  },
-}

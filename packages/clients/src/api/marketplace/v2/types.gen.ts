@@ -43,10 +43,7 @@ export interface Image {
   updatedAt?: Date
   /** Expiration date of this image. */
   validUntil?: Date
-  /**
-   * Typically an identifier for a distribution (ex. "ubuntu_focal"). This label
-   * can be used in the image field of the server creation request.
-   */
+  /** Typically an identifier for a distribution (ex. "ubuntu_focal"). */
   label: string
 }
 
@@ -59,7 +56,7 @@ export interface LocalImage {
   arch: string
   /** Availability Zone where this local image is available. */
   zone: Zone
-  /** This label can be used in the image field of the server creation request. */
+  /** Image label this image belongs to. */
   label: string
   /** Type of this local image. */
   type: LocalImageType
