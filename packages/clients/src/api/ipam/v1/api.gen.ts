@@ -131,6 +131,7 @@ export class API extends ParentAPI {
         path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips`,
         urlParams: urlParams(
           ['attached', request.attached],
+          ['ip_ids', request.ipIds],
           ['is_ipv6', request.isIpv6],
           ['mac_address', request.macAddress],
           ['order_by', request.orderBy],
