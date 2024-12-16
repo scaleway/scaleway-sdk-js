@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.59.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.58.0...@scaleway/sdk@2.59.0) (2024-12-16)
+
+### Features
+
+- **audit_trail:** add integrated methods in ListProducts ([#1644](https://github.com/scaleway/scaleway-sdk-js/issues/1644)) ([58cb2aa](https://github.com/scaleway/scaleway-sdk-js/commit/58cb2aaf95319df9c9b95f248f7c864e11b039e0))
+- **iam:** add `username` order by in `ListUsers` ([#1642](https://github.com/scaleway/scaleway-sdk-js/issues/1642)) ([2406e7d](https://github.com/scaleway/scaleway-sdk-js/commit/2406e7d17d34455cefe115bc3d7512e331d1ca32))
+- **iam:** add organization security settings methods ([#1640](https://github.com/scaleway/scaleway-sdk-js/issues/1640)) ([fba0e93](https://github.com/scaleway/scaleway-sdk-js/commit/fba0e9330508ee26d5042bdd909608329f0e9253))
+- **marketplace:** add description for the label field ([#1662](https://github.com/scaleway/scaleway-sdk-js/issues/1662)) ([348b536](https://github.com/scaleway/scaleway-sdk-js/commit/348b53648f8274c71e5f3ab871cc5f360ef7ad7e))
+- **vpc_gw:** add public v2 api ([#1663](https://github.com/scaleway/scaleway-sdk-js/issues/1663)) ([68e72d3](https://github.com/scaleway/scaleway-sdk-js/commit/68e72d3a73675e44992ef8120a2e139164e254fa))
+- **webhosting:** add dns status and offer name to hosting summary ([#1660](https://github.com/scaleway/scaleway-sdk-js/issues/1660)) ([dfe03ac](https://github.com/scaleway/scaleway-sdk-js/commit/dfe03ac074c2f0bee922491d1c58e4dd9321c9ea))
+- **webhosting:** edit method to allow user creation ([#1655](https://github.com/scaleway/scaleway-sdk-js/issues/1655)) ([0187c31](https://github.com/scaleway/scaleway-sdk-js/commit/0187c31954bd2ba4c70e63bf891e7dc0245dde5f))
+
 ## [2.58.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.57.0...@scaleway/sdk@2.58.0) (2024-12-09)
 
 ### Features
