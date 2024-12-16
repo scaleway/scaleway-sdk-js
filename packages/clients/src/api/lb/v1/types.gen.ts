@@ -271,8 +271,8 @@ export interface HealthCheck {
    */
   tcpConfig?: HealthCheckTcpConfig
   /**
-   * Object to configure a MySQL health check. The check requires MySQL >=3.22,
-   * for older versions, use a TCP health check.
+   * Object to configure a MySQL health check. The check requires MySQL >=3.22
+   * or <9.0. For older or newer versions, use a TCP health check.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
    * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
@@ -1848,8 +1848,8 @@ export type UpdateHealthCheckRequest = {
    */
   tcpConfig?: HealthCheckTcpConfig
   /**
-   * Object to configure a MySQL health check. The check requires MySQL >=3.22,
-   * for older versions, use a TCP health check.
+   * Object to configure a MySQL health check. The check requires MySQL >=3.22
+   * or <9.0. For older or newer versions, use a TCP health check.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
    * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
@@ -2864,8 +2864,8 @@ export type ZonedApiUpdateHealthCheckRequest = {
    */
   tcpConfig?: HealthCheckTcpConfig
   /**
-   * Object to configure a MySQL health check. The check requires MySQL >=3.22,
-   * for older versions, use a TCP health check.
+   * Object to configure a MySQL health check. The check requires MySQL >=3.22
+   * or <9.0. For older or newer versions, use a TCP health check.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig',
    * 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig'
