@@ -65,10 +65,15 @@
     "lint-staged": "15.2.10",
     "prettier": "3.3.2",
     "read-pkg": "9.0.1",
+    "tsc-alias": "^1.8.10",
     "typedoc": "0.26.6",
     "typescript": "5.5.4",
     "vite": "5.4.6",
     "vitest": "2.0.5"
   },
-  "packageManager": "pnpm@9.4.0"
+  "packageManager": "pnpm@9.4.0",
+  "dependencies": {
+    "@scaleway/random-name": "5.1.0",
+    "react": "^19.0.0"
+  }
 }
