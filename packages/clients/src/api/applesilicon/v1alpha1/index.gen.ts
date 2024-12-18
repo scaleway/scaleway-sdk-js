@@ -24,6 +24,7 @@ export type {
   RebootServerRequest,
   ReinstallServerRequest,
   Server,
+  ServerPrivateNetworkStatus,
   ServerStatus,
   ServerType,
   ServerTypeCPU,
