@@ -271,6 +271,8 @@ export type DeleteGatewayRequest = {
   zone?: Zone
   /** ID of the gateway to delete. */
   gatewayId: string
+  /** Defines whether the PGW's IP should be deleted. */
+  deleteIp: boolean
 }
 
 export type DeleteIPRequest = {
