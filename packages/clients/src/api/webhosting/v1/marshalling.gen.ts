@@ -21,6 +21,7 @@ import type {
   DatabaseApiUnassignDatabaseUserRequest,
   DatabaseUser,
   DnsApiCheckUserOwnsDomainRequest,
+  DnsApiSyncDomainDnsRecordsRequest,
   DnsRecord,
   DnsRecords,
   FtpAccount,
@@ -53,6 +54,7 @@ import type {
   ResetHostingPasswordResponse,
   ResourceSummary,
   Session,
+  SyncDomainDnsRecordsRequestRecord,
   Website,
 } from './types.gen'
 
@@ -566,6 +568,29 @@ export const marshalDnsApiCheckUserOwnsDomainRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
+const marshalSyncDomainDnsRecordsRequestRecord = (
+  request: SyncDomainDnsRecordsRequestRecord,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+  type: request.type,
+})
+
+export const marshalDnsApiSyncDomainDnsRecordsRequest = (
+  request: DnsApiSyncDomainDnsRecordsRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  custom_records:
+    request.customRecords !== undefined
+      ? request.customRecords.map(elt =>
+          marshalSyncDomainDnsRecordsRequestRecord(elt, defaults),
+        )
+      : undefined,
+  update_all_records: request.updateAllRecords,
+  update_mail_records: request.updateMailRecords,
+  update_web_records: request.updateWebRecords,
 })
 
 export const marshalFtpAccountApiChangeFtpAccountPasswordRequest = (

@@ -125,6 +125,11 @@ export interface OfferOptionRequest {
   quantity: number
 }
 
+export interface SyncDomainDnsRecordsRequestRecord {
+  name: string
+  type: DnsRecordType
+}
+
 export interface DnsRecord {
   /** Record name. */
   name: string
@@ -473,6 +478,24 @@ export type DnsApiGetDomainDnsRecordsRequest = {
   region?: Region
   /** Domain associated with the DNS records. */
   domain: string
+}
+
+export type DnsApiSyncDomainDnsRecordsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Domain for which the DNS records will be synchronized. */
+  domain: string
+  /** Whether or not to synchronize the web records. */
+  updateWebRecords: boolean
+  /** Whether or not to synchronize the mail records. */
+  updateMailRecords: boolean
+  /** Whether or not to synchronize all types of records. This one has priority. */
+  updateAllRecords: boolean
+  /** Custom records to synchronize. */
+  customRecords?: SyncDomainDnsRecordsRequestRecord[]
 }
 
 export interface DnsRecords {

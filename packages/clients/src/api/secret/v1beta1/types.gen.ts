@@ -103,6 +103,8 @@ export interface SecretVersion {
   createdAt?: Date
   /** Last update of the version. */
   updatedAt?: Date
+  /** Date and time of the version's deletion. */
+  deletedAt?: Date
   /** Description of the version. */
   description?: string
   /** Returns `true` if the version is the latest. */

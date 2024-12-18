@@ -16,6 +16,7 @@ import {
   marshalDatabaseApiCreateDatabaseUserRequest,
   marshalDatabaseApiUnassignDatabaseUserRequest,
   marshalDnsApiCheckUserOwnsDomainRequest,
+  marshalDnsApiSyncDomainDnsRecordsRequest,
   marshalFtpAccountApiChangeFtpAccountPasswordRequest,
   marshalFtpAccountApiCreateFtpAccountRequest,
   marshalHostingApiCreateHostingRequest,
@@ -60,6 +61,7 @@ import type {
   DatabaseUser,
   DnsApiCheckUserOwnsDomainRequest,
   DnsApiGetDomainDnsRecordsRequest,
+  DnsApiSyncDomainDnsRecordsRequest,
   DnsRecords,
   FtpAccount,
   FtpAccountApiChangeFtpAccountPasswordRequest,
@@ -432,6 +434,30 @@ export class DnsAPI extends ParentAPI {
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domain', request.domain)}/check-ownership`,
       },
       unmarshalCheckUserOwnsDomainResponse,
+    )
+
+  /**
+   * "Synchronize your DNS records on the Elements Console and on cPanel.".
+   *
+   * @param request - The request {@link DnsApiSyncDomainDnsRecordsRequest}
+   * @returns A Promise of DnsRecords
+   */
+  syncDomainDnsRecords = (
+    request: Readonly<DnsApiSyncDomainDnsRecordsRequest>,
+  ) =>
+    this.client.fetch<DnsRecords>(
+      {
+        body: JSON.stringify(
+          marshalDnsApiSyncDomainDnsRecordsRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domain', request.domain)}/sync-domain-dns-records`,
+      },
+      unmarshalDnsRecords,
     )
 }
 
