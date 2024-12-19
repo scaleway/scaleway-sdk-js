@@ -32,6 +32,7 @@ export type {
   DatabaseUser,
   DnsApiCheckUserOwnsDomainRequest,
   DnsApiGetDomainDnsRecordsRequest,
+  DnsApiSyncDomainDnsRecordsRequest,
   DnsRecord,
   DnsRecordStatus,
   DnsRecordType,
@@ -90,6 +91,7 @@ export type {
   ResetHostingPasswordResponse,
   ResourceSummary,
   Session,
+  SyncDomainDnsRecordsRequestRecord,
   Website,
   WebsiteApiListWebsitesRequest,
 } from './types.gen'
