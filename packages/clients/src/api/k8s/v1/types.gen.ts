@@ -1247,9 +1247,6 @@ export interface NodeMetadata {
   kubeletConfig: string
   nodeLabels: Record<string, string>
   nodeTaints: NodeMetadataCoreV1Taint[]
-  privateNetworkMode: string
-  kapsuleIfaceMac: string
-  fullIsolation: boolean
   hasGpu: boolean
   externalIp: string
   repoUri: string

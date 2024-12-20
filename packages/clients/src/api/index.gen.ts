@@ -20,6 +20,7 @@ import * as Function from './function/index.gen'
 import * as Iam from './iam/index.gen'
 import * as Inference from './inference/index.gen'
 import * as Instance from './instance/index.gen'
+import * as Interlink from './interlink/index.gen'
 import * as Iot from './iot/index.gen'
 import * as Ipam from './ipam/index.gen'
 import * as Ipfs from './ipfs/index.gen'
@@ -62,6 +63,7 @@ export {
   Iam,
   Inference,
   Instance,
+  Interlink,
   Iot,
   Ipam,
   Ipfs,
