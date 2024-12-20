@@ -540,22 +540,22 @@ export interface GetBillingResponse {
   pipelineNumber: number
   /**
    * Cost to date (this month) of pipelines not included in the subscription
-   * plan.
+   * plans.
    */
   extraPipelinesCost?: Money
   /**
    * Total amount of data egressed from the cache in gigabytes from the
-   * beginning of the month, included in the active subscription plan.
+   * beginning of the month, for the active subscription plan.
    */
   currentPlanCacheUsage: number
   /**
    * Total amount of extra data egressed from cache in gigabytes from the
-   * beginning of the month, not included in the active subscription plan.
+   * beginning of the month, not included in the subscription plans.
    */
   extraCacheUsage: number
   /**
    * Cost to date (this month) of the data egressed from the cache that is not
-   * included in the active subscription plan.
+   * included in the subscription plans.
    */
   extraCacheCost?: Money
   /**
