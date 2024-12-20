@@ -974,8 +974,8 @@ export interface ExternalNode {
 }
 
 export interface ExternalNodeAuth {
-  nodeToken: string
-  apiUrl: string
+  nodeSecretKey: string
+  metadataUrl: string
 }
 
 export type GetClusterKubeConfigRequest = {
@@ -1247,9 +1247,6 @@ export interface NodeMetadata {
   kubeletConfig: string
   nodeLabels: Record<string, string>
   nodeTaints: NodeMetadataCoreV1Taint[]
-  privateNetworkMode: string
-  kapsuleIfaceMac: string
-  fullIsolation: boolean
   hasGpu: boolean
   externalIp: string
   repoUri: string
