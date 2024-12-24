@@ -60,7 +60,7 @@
     "eslint": "9.14.0",
     "eslint-plugin-tsdoc": "0.3.0",
     "husky": "9.1.6",
-    "jsdom": "25.0.0",
+    "jsdom": "25.0.1",
     "lerna": "8.1.8",
     "lint-staged": "15.2.10",
     "prettier": "3.3.2",
