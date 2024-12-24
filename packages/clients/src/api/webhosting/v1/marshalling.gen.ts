@@ -243,8 +243,10 @@ const unmarshalOffer = (data: unknown): Offer => {
     controlPanelName: data.control_panel_name,
     endOfLife: data.end_of_life,
     id: data.id,
+    name: data.name,
     options: unmarshalArrayOfObject(data.options, unmarshalOfferOption),
     price: data.price ? unmarshalMoney(data.price) : undefined,
+    quotaWarning: data.quota_warning,
   } as Offer
 }
 

@@ -65,8 +65,13 @@ export type OfferOptionName =
   | 'ram_gb'
   | 'backup'
   | 'dedicated_ip'
+  | 'email_storage_gb'
+  | 'database_count'
 
-export type OfferOptionWarning = 'unknown_warning' | 'quota_exceeded_warning'
+export type OfferOptionWarning =
+  | 'unknown_warning'
+  | 'quota_exceeded_warning'
+  | 'usage_low_warning'
 
 export type PlatformPlatformGroup = 'unknown_group' | 'default' | 'premium'
 
@@ -169,6 +174,8 @@ export interface HostingUser {
 export interface Offer {
   /** Offer ID. */
   id: string
+  /** Offer name. */
+  name: string
   /** Unique identifier used for billing. */
   billingOperationPath: string
   /** Options available for the offer. */
@@ -184,6 +191,11 @@ export interface Offer {
   controlPanelName: string
   /** Indicates if the offer has reached its end of life. */
   endOfLife: boolean
+  /**
+   * Defines a warning if the maximum value for an option in the offer is
+   * exceeded.
+   */
+  quotaWarning: OfferOptionWarning
 }
 
 export interface Platform {
