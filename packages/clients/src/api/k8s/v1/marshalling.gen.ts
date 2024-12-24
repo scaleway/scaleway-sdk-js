@@ -521,10 +521,8 @@ export const unmarshalNodeMetadata = (data: unknown): NodeMetadata => {
     clusterUrl: data.cluster_url,
     credentialProviderConfig: data.credential_provider_config,
     externalIp: data.external_ip,
-    fullIsolation: data.full_isolation,
     hasGpu: data.has_gpu,
     id: data.id,
-    kapsuleIfaceMac: data.kapsule_iface_mac,
     kubeletConfig: data.kubelet_config,
     name: data.name,
     nodeLabels: data.node_labels,
@@ -533,7 +531,6 @@ export const unmarshalNodeMetadata = (data: unknown): NodeMetadata => {
       unmarshalNodeMetadataCoreV1Taint,
     ),
     poolVersion: data.pool_version,
-    privateNetworkMode: data.private_network_mode,
     repoUri: data.repo_uri,
   } as NodeMetadata
 }
