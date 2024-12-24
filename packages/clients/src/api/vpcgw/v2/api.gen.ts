@@ -222,6 +222,7 @@ export class API extends ParentAPI {
       {
         method: 'DELETE',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
+        urlParams: urlParams(['delete_ip', request.deleteIp]),
       },
       unmarshalGateway,
     )
