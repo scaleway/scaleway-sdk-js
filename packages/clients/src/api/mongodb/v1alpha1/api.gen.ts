@@ -75,7 +75,7 @@ const jsonContentHeaders = {
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+  public static readonly LOCALITIES: Region[] = ['fr-par']
 
   protected pageOfListNodeTypes = (
     request: Readonly<ListNodeTypesRequest> = {},
