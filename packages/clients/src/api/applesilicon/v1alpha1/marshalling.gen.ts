@@ -159,6 +159,7 @@ export const unmarshalServer = (data: unknown): Server => {
     updatedAt: unmarshalDate(data.updated_at),
     vncPort: data.vnc_port,
     vncUrl: data.vnc_url,
+    vpcStatus: data.vpc_status,
     zone: data.zone,
   } as Server
 }
@@ -263,6 +264,7 @@ export const marshalCreateServerRequest = (
   request: CreateServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  enable_vpc: request.enableVpc,
   name: request.name || randomName('as'),
   os_id: request.osId,
   project_id: request.projectId ?? defaults.defaultProjectId,
@@ -287,6 +289,7 @@ export const marshalUpdateServerRequest = (
   request: UpdateServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  enable_vpc: request.enableVpc,
   name: request.name,
   schedule_deletion: request.scheduleDeletion,
 })
