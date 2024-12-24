@@ -14,6 +14,12 @@ export type ConnectivityDiagnosticDiagnosticStatus =
 
 export type ListServersRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
+export type ServerPrivateNetworkStatus =
+  | 'vpc_unknown_status'
+  | 'vpc_enabled'
+  | 'vpc_updating'
+  | 'vpc_disabled'
+
 export type ServerStatus =
   | 'unknown_status'
   | 'starting'
@@ -158,6 +164,11 @@ export interface Server {
    * using the server status.
    */
   delivered: boolean
+  /**
+   * Activation status of optional Private Network feature support for this
+   * server.
+   */
+  vpcStatus: ServerPrivateNetworkStatus
 }
 
 export interface ConnectivityDiagnostic {
@@ -184,6 +195,11 @@ export type CreateServerRequest = {
    * induce an extended delivery time.
    */
   osId?: string
+  /**
+   * Activate the Private Network feature for this server. This feature is
+   * configured through the Apple Silicon - Private Networks API.
+   */
+  enableVpc: boolean
 }
 
 export type DeleteServerRequest = {
@@ -319,4 +335,6 @@ export type UpdateServerRequest = {
   name?: string
   /** Specify whether the server should be flagged for automatic deletion. */
   scheduleDeletion?: boolean
+  /** Activate or deactivate Private Network support for this server. */
+  enableVpc?: boolean
 }
