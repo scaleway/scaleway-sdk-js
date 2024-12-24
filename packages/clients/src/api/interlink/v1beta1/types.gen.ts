@@ -112,6 +112,11 @@ export interface Pop {
   city: string
   /** Image URL of the PoP's logo. */
   logoUrl: string
+  /**
+   * Available bandwidth in Mbits/s for future hosted_links from available ports
+   * in this PoP.
+   */
+  availableLinkBandwidthsMbps: number[]
   /** Region of the PoP. */
   region: Region
 }

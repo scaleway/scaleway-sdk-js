@@ -80,6 +80,7 @@ export const unmarshalPop = (data: unknown): Pop => {
 
   return {
     address: data.address,
+    availableLinkBandwidthsMbps: data.available_link_bandwidths_mbps,
     city: data.city,
     hostingProviderName: data.hosting_provider_name,
     id: data.id,
