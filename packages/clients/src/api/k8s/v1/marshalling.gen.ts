@@ -343,8 +343,8 @@ export const unmarshalExternalNodeAuth = (data: unknown): ExternalNodeAuth => {
   }
 
   return {
-    apiUrl: data.api_url,
-    nodeToken: data.node_token,
+    metadataUrl: data.metadata_url,
+    nodeSecretKey: data.node_secret_key,
   } as ExternalNodeAuth
 }
 

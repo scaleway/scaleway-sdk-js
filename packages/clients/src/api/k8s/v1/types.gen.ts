@@ -974,8 +974,8 @@ export interface ExternalNode {
 }
 
 export interface ExternalNodeAuth {
-  nodeToken: string
-  apiUrl: string
+  nodeSecretKey: string
+  metadataUrl: string
 }
 
 export type GetClusterKubeConfigRequest = {
