@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-export { API } from './api.gen'
+export { API, PrivateNetworkAPI } from './api.gen'
 export * from './content.gen'
 export type {
   ConnectivityDiagnostic,
@@ -15,15 +15,24 @@ export type {
   GetServerTypeRequest,
   ListOSRequest,
   ListOSResponse,
+  ListServerPrivateNetworksRequestOrderBy,
+  ListServerPrivateNetworksResponse,
   ListServerTypesRequest,
   ListServerTypesResponse,
   ListServersRequest,
   ListServersRequestOrderBy,
   ListServersResponse,
   OS,
+  PrivateNetworkApiAddServerPrivateNetworkRequest,
+  PrivateNetworkApiDeleteServerPrivateNetworkRequest,
+  PrivateNetworkApiGetServerPrivateNetworkRequest,
+  PrivateNetworkApiListServerPrivateNetworksRequest,
+  PrivateNetworkApiSetServerPrivateNetworksRequest,
   RebootServerRequest,
   ReinstallServerRequest,
   Server,
+  ServerPrivateNetwork,
+  ServerPrivateNetworkServerStatus,
   ServerPrivateNetworkStatus,
   ServerStatus,
   ServerType,
@@ -33,6 +42,7 @@ export type {
   ServerTypeMemory,
   ServerTypeNetwork,
   ServerTypeStock,
+  SetServerPrivateNetworksResponse,
   StartConnectivityDiagnosticRequest,
   StartConnectivityDiagnosticResponse,
   UpdateServerRequest,
