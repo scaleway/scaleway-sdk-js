@@ -218,8 +218,8 @@ export class API extends ParentAPI {
 
   /**
    * Delete a Cluster. Delete a specific Kubernetes cluster and all its
-   * associated pools and nodes. Note that this method will not delete any Load
-   * Balancer or Block Volume that are associated with the cluster.
+   * associated pools and nodes, and possibly its associated Load Balancers or
+   * Block Volumes.
    *
    * @param request - The request {@link DeleteClusterRequest}
    * @returns A Promise of Cluster
@@ -260,8 +260,7 @@ export class API extends ParentAPI {
   /**
    * Change the Cluster type. Change the type of a specific Kubernetes cluster.
    * To see the possible values you can enter for the `type` field, [list
-   * available cluster
-   * types](#path-clusters-list-available-cluster-types-for-a-cluster).
+   * available cluster types](#list-available-cluster-types-for-a-cluster).
    *
    * @param request - The request {@link SetClusterTypeRequest}
    * @returns A Promise of Cluster
@@ -332,7 +331,7 @@ export class API extends ParentAPI {
    * Reset the admin token of a Cluster. Reset the admin token for a specific
    * Kubernetes cluster. This will revoke the old admin token (which will not be
    * usable afterwards) and create a new one. Note that you will need to
-   * download kubeconfig again to keep interacting with the cluster.
+   * download the kubeconfig again to keep interacting with the cluster.
    *
    * @param request - The request {@link ResetClusterAdminTokenRequest}
    */
@@ -347,7 +346,8 @@ export class API extends ParentAPI {
   /**
    * Migrate a cluster to SBS CSI. Enable the latest CSI compatible with
    * Scaleway Block Storage (SBS) and migrate all existing
-   * PersistentVolumes/VolumeSnapshotContents to SBS.
+   * PersistentVolumes/VolumeSnapshotContents to SBS. Make sure to have the
+   * necessary Quota before running this command.
    *
    * @param request - The request {@link MigrateClusterToSBSCSIRequest}
    * @returns A Promise of Cluster
@@ -526,7 +526,7 @@ export class API extends ParentAPI {
   /**
    * Upgrade a Pool in a Cluster. Upgrade the Kubernetes version of a specific
    * pool. Note that it only works if the targeted version matches the cluster's
-   * version.
+   * version. This will drain and replace the nodes in that pool.
    *
    * @param request - The request {@link UpgradePoolRequest}
    * @returns A Promise of Pool
@@ -546,7 +546,8 @@ export class API extends ParentAPI {
 
   /**
    * Update a Pool in a Cluster. Update the attributes of a specific pool, such
-   * as its desired size, autoscaling settings, and tags.
+   * as its desired size, autoscaling settings, and tags. To upgrade a pool, you
+   * will need to use the dedicated endpoint.
    *
    * @param request - The request {@link UpdatePoolRequest}
    * @returns A Promise of Pool
@@ -701,11 +702,10 @@ export class API extends ParentAPI {
 
   /**
    * Replace a Node in a Cluster. Replace a specific Node. The node will first
-   * be cordoned (scheduling will be disabled on it). The existing pods on the
-   * node will then be drained and rescheduled onto another schedulable node.
-   * Note that when there is not enough space to reschedule all the pods (such
-   * as in a one-node cluster), disruption of your applications can be
-   * expected.
+   * be drained and pods will be rescheduled onto another node. Note that when
+   * there is not enough space to reschedule all the pods (such as in a one-node
+   * cluster, or with specific constraints), disruption of your applications may
+   * occur.
    *
    * @deprecated
    * @param request - The request {@link ReplaceNodeRequest}
@@ -724,10 +724,10 @@ export class API extends ParentAPI {
 
   /**
    * Reboot a Node in a Cluster. Reboot a specific Node. The node will first be
-   * cordoned (scheduling will be disabled on it). The existing pods on the node
-   * will then be drained and rescheduled onto another schedulable node. Note
-   * that when there is not enough space to reschedule all the pods (such as in
-   * a one-node cluster), disruption of your applications can be expected.
+   * drained and pods will be rescheduled onto another node. Note that when
+   * there is not enough space to reschedule all the pods (such as in a one-node
+   * cluster, or with specific constraints), disruption of your applications may
+   * occur.
    *
    * @param request - The request {@link RebootNodeRequest}
    * @returns A Promise of Node
@@ -744,9 +744,11 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a Node in a Cluster. Delete a specific Node. Note that when there is
-   * not enough space to reschedule all the pods (such as in a one-node
-   * cluster), disruption of your applications can be expected.
+   * Delete a Node in a Cluster. Delete a specific Node. The node will first be
+   * drained and pods will be rescheduled onto another node. Note that when
+   * there is not enough space to reschedule all the pods (such as in a one-node
+   * cluster, or with specific constraints), disruption of your applications may
+   * occur.
    *
    * @param request - The request {@link DeleteNodeRequest}
    * @returns A Promise of Node
