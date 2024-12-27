@@ -356,6 +356,18 @@ export type DeleteSnapshotRequest = {
   snapshotId: string
 }
 
+export type DeleteUserRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** UUID of the Database Instance the user belongs to. */
+  instanceId: string
+  /** Name of the database user. */
+  name: string
+}
+
 export type GetInstanceCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the

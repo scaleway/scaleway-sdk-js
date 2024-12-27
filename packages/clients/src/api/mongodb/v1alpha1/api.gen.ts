@@ -40,6 +40,7 @@ import type {
   DeleteEndpointRequest,
   DeleteInstanceRequest,
   DeleteSnapshotRequest,
+  DeleteUserRequest,
   Endpoint,
   GetInstanceCertificateRequest,
   GetInstanceRequest,
@@ -526,6 +527,20 @@ export class API extends ParentAPI {
       },
       unmarshalUser,
     )
+
+  /**
+   * Delete a user on a Database Instance. Delete an existing user on a Database
+   * Instance.
+   *
+   * @param request - The request {@link DeleteUserRequest}
+   */
+  deleteUser = (request: Readonly<DeleteUserRequest>) =>
+    this.client.fetch<void>({
+      body: '{}',
+      headers: jsonContentHeaders,
+      method: 'DELETE',
+      path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users/${validatePathParam('name', request.name)}`,
+    })
 
   /**
    * Delete a Database Instance endpoint. Delete the endpoint of a Database

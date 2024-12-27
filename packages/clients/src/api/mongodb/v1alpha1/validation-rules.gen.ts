@@ -50,6 +50,14 @@ export const CreateUserRequest = {
   },
 }
 
+export const DeleteUserRequest = {
+  name: {
+    maxLength: 63,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9_\-]*$/,
+  },
+}
+
 export const ListInstancesRequest = {
   name: {
     maxLength: 255,

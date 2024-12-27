@@ -11,6 +11,7 @@ export type {
   DeleteEndpointRequest,
   DeleteInstanceRequest,
   DeleteSnapshotRequest,
+  DeleteUserRequest,
   Endpoint,
   EndpointPrivateNetworkDetails,
   EndpointPublicDetails,
