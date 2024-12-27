@@ -12,7 +12,21 @@ export type ConnectivityDiagnosticDiagnosticStatus =
   | 'error'
   | 'completed'
 
+export type ListServerPrivateNetworksRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'updated_at_asc'
+  | 'updated_at_desc'
+
 export type ListServersRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+
+export type ServerPrivateNetworkServerStatus =
+  | 'unknown_status'
+  | 'attaching'
+  | 'attached'
+  | 'error'
+  | 'detaching'
+  | 'locked'
 
 export type ServerPrivateNetworkStatus =
   | 'vpc_unknown_status'
@@ -91,6 +105,27 @@ export interface ConnectivityDiagnosticServerHealth {
   isMdmAlive: boolean
   isSshPortUp: boolean
   isVncPortUp: boolean
+}
+
+export interface ServerPrivateNetwork {
+  /** ID of the Server-to-Private Network mapping. */
+  id: string
+  /** Private Network Project ID. */
+  projectId: string
+  /** Apple silicon server ID. */
+  serverId: string
+  /** Private Network ID. */
+  privateNetworkId: string
+  /** ID of the VLAN associated with the Private Network. */
+  vlan?: number
+  /** Configuration status of the Private Network. */
+  status: ServerPrivateNetworkServerStatus
+  /** Private Network creation date. */
+  createdAt?: Date
+  /** Date the Private Network was last modified. */
+  updatedAt?: Date
+  /** IPAM IP IDs of the server, if it has any. */
+  ipamIpIds: string[]
 }
 
 export interface ServerType {
@@ -262,6 +297,11 @@ export interface ListOSResponse {
   os: OS[]
 }
 
+export interface ListServerPrivateNetworksResponse {
+  serverPrivateNetworks: ServerPrivateNetwork[]
+  totalCount: number
+}
+
 export type ListServerTypesRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
@@ -297,6 +337,69 @@ export interface ListServersResponse {
   servers: Server[]
 }
 
+export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the server. */
+  serverId: string
+  /** ID of the Private Network. */
+  privateNetworkId: string
+  /** IPAM IDs of IPs to attach to the server. */
+  ipamIpIds?: string[]
+}
+
+export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the server. */
+  serverId: string
+  /** ID of the Private Network. */
+  privateNetworkId: string
+}
+
+export type PrivateNetworkApiGetServerPrivateNetworkRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  serverId: string
+  privateNetworkId: string
+}
+
+export type PrivateNetworkApiListServerPrivateNetworksRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** Sort order for the returned Private Networks. */
+  orderBy?: ListServerPrivateNetworksRequestOrderBy
+  /** Page number for the returned Private Networks. */
+  page?: number
+  /** Maximum number of Private Networks per page. */
+  pageSize?: number
+  /** Filter Private Networks by server ID. */
+  serverId?: string
+  /** Filter Private Networks by Private Network ID. */
+  privateNetworkId?: string
+  /** Filter Private Networks by Organization ID. */
+  organizationId?: string
+  /** Filter Private Networks by Project ID. */
+  projectId?: string
+  /** Filter Private Networks by IPAM IP IDs. */
+  ipamIpIds?: string[]
+}
+
+export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the server. */
+  serverId: string
+  /**
+   * Object where the keys are the IDs of Private Networks and the values are
+   * arrays of IPAM IDs representing the IPs to assign to this Apple silicon
+   * server on the Private Network. If the array supplied for a Private Network
+   * is empty, the next available IP from the Private Network's CIDR block will
+   * automatically be used for attachment.
+   */
+  perPrivateNetworkIpamIpIds: Record<string, string[]>
+}
+
 export type RebootServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: Zone
@@ -314,6 +417,10 @@ export type ReinstallServerRequest = {
    * OS for the server type is used.
    */
   osId?: string
+}
+
+export interface SetServerPrivateNetworksResponse {
+  serverPrivateNetworks: ServerPrivateNetwork[]
 }
 
 export type StartConnectivityDiagnosticRequest = {
