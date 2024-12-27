@@ -50,7 +50,17 @@ export type ListClustersRequestOrderBy =
   | 'version_asc'
   | 'version_desc'
 
-export type ListNodesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+export type ListNodesRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'updated_at_asc'
+  | 'updated_at_desc'
+  | 'name_asc'
+  | 'name_desc'
+  | 'status_asc'
+  | 'status_desc'
+  | 'version_asc'
+  | 'version_desc'
 
 export type ListPoolsRequestOrderBy =
   | 'created_at_asc'
@@ -136,7 +146,7 @@ export interface ClusterAutoUpgrade {
 export interface ClusterAutoscalerConfig {
   /** Disable the cluster autoscaler. */
   scaleDownDisabled: boolean
-  /** How long after scale up that scale down evaluation resumes. */
+  /** How long after scale up the scale down evaluation resumes. */
   scaleDownDelayAfterAdd: string
   /** Type of resource estimator to be used in scale up. */
   estimator: AutoscalerEstimator
@@ -248,17 +258,19 @@ export interface Pool {
    * when autoscaling is enabled on the pool.
    */
   maxSize: number
-  /**
-   * Customization of the container runtime is available for each pool. Note
-   * that `docker` has been deprecated since version 1.20 and will be removed by
-   * version 1.24.
-   */
+  /** Customization of the container runtime is available for each pool. */
   containerRuntime: Runtime
   /** Defines whether the autohealing feature is enabled for the pool. */
   autohealing: boolean
-  /** Tags associated with the pool. */
+  /**
+   * Tags associated with the pool, see [managing
+   * tags](https://www.scaleway.com/en/docs/containers/kubernetes/api-cli/managing-tags).
+   */
   tags: string[]
-  /** Placement group ID in which all the nodes of the pool will be created. */
+  /**
+   * Placement group ID in which all the nodes of the pool will be created,
+   * placement groups are limited to 20 instances.
+   */
   placementGroupId?: string
   /**
    * Kubelet arguments to be used by this pool. Note that this feature is
@@ -270,11 +282,15 @@ export interface Pool {
   /** Zone in which the pool's nodes will be spawned. */
   zone: Zone
   /**
-   * Defines the system volume disk type. Two different types of volume
-   * (`volume_type`) are provided: `l_ssd` is a local block storage which means
-   * your system is stored locally on your node's hypervisor. `b_ssd` is a
-   * remote block storage which means your system is stored on a centralized and
-   * resilient cluster.
+   * - `l_ssd` is a local block storage which means your system is stored locally
+   *   on your node's hypervisor. This type is not available for all node types
+   *   `sbs-5k` is a remote block storage which means your system is stored on a
+   *   centralized and resilient cluster with 5k IOPS limits `sbs-15k` is a
+   *   faster remote block storage which means your system is stored on a
+   *   centralized and resilient cluster with 15k IOPS limits `b_ssd` is the
+   *   legacy remote block storage which means your system is stored on a
+   *   centralized and resilient cluster. Consider using `sbs-5k` or `sbs-15k`
+   *   instead.
    */
   rootVolumeType: PoolVolumeType
   /** System volume disk size. */
@@ -335,7 +351,7 @@ export interface CreateClusterRequestAutoUpgrade {
 export interface CreateClusterRequestAutoscalerConfig {
   /** Disable the cluster autoscaler. */
   scaleDownDisabled?: boolean
-  /** How long after scale up that scale down evaluation resumes. */
+  /** How long after scale up the scale down evaluation resumes. */
   scaleDownDelayAfterAdd?: string
   /** Type of resource estimator to be used in scale up. */
   estimator: AutoscalerEstimator
@@ -421,7 +437,10 @@ export interface CreateClusterRequestPoolConfig {
    * cloud providers in a Kosmos Cluster.
    */
   nodeType: string
-  /** Placement group ID in which all the nodes of the pool will be created. */
+  /**
+   * Placement group ID in which all the nodes of the pool will be created,
+   * placement groups are limited to 20 instances.
+   */
   placementGroupId?: string
   /** Defines whether the autoscaling feature is enabled for the pool. */
   autoscaling: boolean
@@ -437,15 +456,14 @@ export interface CreateClusterRequestPoolConfig {
    * when autoscaling is enabled on the pool.
    */
   maxSize?: number
-  /**
-   * Customization of the container runtime is available for each pool. Note
-   * that `docker` has been deprecated since version 1.20 and will be removed by
-   * version 1.24.
-   */
+  /** Customization of the container runtime is available for each pool. */
   containerRuntime: Runtime
   /** Defines whether the autohealing feature is enabled for the pool. */
   autohealing: boolean
-  /** Tags associated with the pool. */
+  /**
+   * Tags associated with the pool, see [managing
+   * tags](https://www.scaleway.com/en/docs/containers/kubernetes/api-cli/managing-tags).
+   */
   tags: string[]
   /**
    * Kubelet arguments to be used by this pool. Note that this feature is
@@ -457,11 +475,15 @@ export interface CreateClusterRequestPoolConfig {
   /** Zone in which the pool's nodes will be spawned. */
   zone: Zone
   /**
-   * Defines the system volume disk type. Two different types of volume
-   * (`volume_type`) are provided: `l_ssd` is a local block storage which means
-   * your system is stored locally on your node's hypervisor. `b_ssd` is a
-   * remote block storage which means your system is stored on a centralized and
-   * resilient cluster.
+   * - `l_ssd` is a local block storage which means your system is stored locally
+   *   on your node's hypervisor. This type is not available for all node types
+   *   `sbs-5k` is a remote block storage which means your system is stored on a
+   *   centralized and resilient cluster with 5k IOPS limits `sbs-15k` is a
+   *   faster remote block storage which means your system is stored on a
+   *   centralized and resilient cluster with 15k IOPS limits `b_ssd` is the
+   *   legacy remote block storage which means your system is stored on a
+   *   centralized and resilient cluster. Consider using `sbs-5k` or `sbs-15k`
+   *   instead.
    */
   rootVolumeType: PoolVolumeType
   /** System volume disk size. */
@@ -563,7 +585,7 @@ export interface Cluster {
   updatedAt?: Date
   /** Autoscaler config for the cluster. */
   autoscalerConfig?: ClusterAutoscalerConfig
-  /** Auto upgrade configuration of the cluster. */
+  /** Auto upgrade Kubernetes version of the cluster. */
   autoUpgrade?: ClusterAutoUpgrade
   /** Defines whether a new Kubernetes version is available. */
   upgradeAvailable: boolean
@@ -646,7 +668,7 @@ export interface UpdateClusterRequestAutoUpgrade {
 export interface UpdateClusterRequestAutoscalerConfig {
   /** Disable the cluster autoscaler. */
   scaleDownDisabled?: boolean
-  /** How long after scale up that scale down evaluation resumes. */
+  /** How long after scale up the scale down evaluation resumes. */
   scaleDownDelayAfterAdd?: string
   /** Type of resource estimator to be used in scale up. */
   estimator: AutoscalerEstimator
@@ -775,8 +797,9 @@ export type CreateClusterRequest = {
    */
   projectId?: string
   /**
-   * Type of the cluster (possible values are kapsule, multicloud,
-   * kapsule-dedicated-8, kapsule-dedicated-16).
+   * Type of the cluster. See [list available cluster
+   * types](#list-available-cluster-types-for-a-cluster) for a list of valid
+   * types.
    */
   type: string
   /** Cluster name. */
@@ -851,7 +874,10 @@ export type CreatePoolRequest = {
    * cloud providers in a Kosmos Cluster.
    */
   nodeType: string
-  /** Placement group ID in which all the nodes of the pool will be created. */
+  /**
+   * Placement group ID in which all the nodes of the pool will be created,
+   * placement groups are limited to 20 instances.
+   */
   placementGroupId?: string
   /** Defines whether the autoscaling feature is enabled for the pool. */
   autoscaling: boolean
@@ -867,15 +893,14 @@ export type CreatePoolRequest = {
    * when autoscaling is enabled on the pool.
    */
   maxSize?: number
-  /**
-   * Customization of the container runtime is available for each pool. Note
-   * that `docker` has been deprecated since version 1.20 and will be removed by
-   * version 1.24.
-   */
+  /** Customization of the container runtime is available for each pool. */
   containerRuntime?: Runtime
   /** Defines whether the autohealing feature is enabled for the pool. */
   autohealing: boolean
-  /** Tags associated with the pool. */
+  /**
+   * Tags associated with the pool, see [managing
+   * tags](https://www.scaleway.com/en/docs/containers/kubernetes/api-cli/managing-tags).
+   */
   tags?: string[]
   /**
    * Kubelet arguments to be used by this pool. Note that this feature is
@@ -887,11 +912,15 @@ export type CreatePoolRequest = {
   /** Zone in which the pool's nodes will be spawned. */
   zone?: Zone
   /**
-   * Defines the system volume disk type. Two different types of volume
-   * (`volume_type`) are provided: `l_ssd` is a local block storage which means
-   * your system is stored locally on your node's hypervisor. `b_ssd` is a
-   * remote block storage which means your system is stored on a centralized and
-   * resilient cluster.
+   * - `l_ssd` is a local block storage which means your system is stored locally
+   *   on your node's hypervisor. This type is not available for all node types
+   *   `sbs-5k` is a remote block storage which means your system is stored on a
+   *   centralized and resilient cluster with 5k IOPS limits `sbs-15k` is a
+   *   faster remote block storage which means your system is stored on a
+   *   centralized and resilient cluster with 15k IOPS limits `b_ssd` is the
+   *   legacy remote block storage which means your system is stored on a
+   *   centralized and resilient cluster. Consider using `sbs-5k` or `sbs-15k`
+   *   instead.
    */
   rootVolumeType?: PoolVolumeType
   /** System volume disk size. */
@@ -1331,7 +1360,7 @@ export type UpdateClusterRequest = {
   /** New autoscaler config for the cluster. */
   autoscalerConfig?: UpdateClusterRequestAutoscalerConfig
   /**
-   * New auto upgrade configuration for the cluster. Note that all fields need
+   * New auto upgrade configuration for the cluster. Note that all fields needs
    * to be set.
    */
   autoUpgrade?: UpdateClusterRequestAutoUpgrade
