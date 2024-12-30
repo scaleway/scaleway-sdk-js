@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.60.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.59.0...@scaleway/sdk@2.60.0) (2024-12-30)
+
+### Features
+
+- **apple_silicon:** define management of server options ([#1670](https://github.com/scaleway/scaleway-sdk-js/issues/1670)) ([5b56e6a](https://github.com/scaleway/scaleway-sdk-js/commit/5b56e6af0f6a3846b8da8c9d3a8729b33a1f8cae))
+- **interlink:** add available_link_bandwidths on pops ([#1675](https://github.com/scaleway/scaleway-sdk-js/issues/1675)) ([2395069](https://github.com/scaleway/scaleway-sdk-js/commit/23950694dd0487df4ef9d46cde00aae7ac4500d4))
+- **interlink:** add v1beta api ([#1666](https://github.com/scaleway/scaleway-sdk-js/issues/1666)) ([e9967d3](https://github.com/scaleway/scaleway-sdk-js/commit/e9967d3f16d074546c45920594691d7d21b57483))
+- **ipam:** support filtering ips on ids ([#1643](https://github.com/scaleway/scaleway-sdk-js/issues/1643)) ([9942741](https://github.com/scaleway/scaleway-sdk-js/commit/99427418af4cf74180ca460110d98caf8af81966))
+- **k8s:** remove unused field in NodeMetadata ([#1686](https://github.com/scaleway/scaleway-sdk-js/issues/1686)) ([dbced46](https://github.com/scaleway/scaleway-sdk-js/commit/dbced4634e38c6a92fe33ac5188f043b3bc34414))
+- **mongodb:** add deleteUser route ([#1700](https://github.com/scaleway/scaleway-sdk-js/issues/1700)) ([2738abe](https://github.com/scaleway/scaleway-sdk-js/commit/2738abe53245202abdb29613a6a713bc4f434749))
+- update generated apis ([#1696](https://github.com/scaleway/scaleway-sdk-js/issues/1696)) ([701b91d](https://github.com/scaleway/scaleway-sdk-js/commit/701b91d0c1350c0be9d3acbe784eb6034cea005b))
+- update generated apis ([#1697](https://github.com/scaleway/scaleway-sdk-js/issues/1697)) ([506a671](https://github.com/scaleway/scaleway-sdk-js/commit/506a671a8a1c327f1c1ae6bfbb657841082b2f9c))
+- **vpc_gw:** add delete_ip field to gateway delete RPC ([#1677](https://github.com/scaleway/scaleway-sdk-js/issues/1677)) ([d2f2279](https://github.com/scaleway/scaleway-sdk-js/commit/d2f227943314112fe2998feaf0dbe777e663b878))
+- **webhosting:** add public v1 offer name and quota warning ([#1694](https://github.com/scaleway/scaleway-sdk-js/issues/1694)) ([7e9abe7](https://github.com/scaleway/scaleway-sdk-js/commit/7e9abe7502f58114d7fc07c194939e189f9f873e))
+- **webhosting:** add SyncDomainDnsRecords method ([#1673](https://github.com/scaleway/scaleway-sdk-js/issues/1673)) ([5a3468a](https://github.com/scaleway/scaleway-sdk-js/commit/5a3468ac62a6a12d837dbf90903d1305c1897a66))
+
+### Bug Fixes
+
+- **k8s:** align fields names with ones used in compute user-data ([#1688](https://github.com/scaleway/scaleway-sdk-js/issues/1688)) ([af495a1](https://github.com/scaleway/scaleway-sdk-js/commit/af495a1452275416282ca18e08355abf296e6e58))
+- **mongodb:** update product documentation ([#1693](https://github.com/scaleway/scaleway-sdk-js/issues/1693)) ([a815ea9](https://github.com/scaleway/scaleway-sdk-js/commit/a815ea923b000a4697fe77f73ecd342b5c610abe))
+
 ## [2.59.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.58.0...@scaleway/sdk@2.59.0) (2024-12-16)
 
 ### Features
