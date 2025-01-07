@@ -67,6 +67,7 @@ export type OfferOptionName =
   | 'dedicated_ip'
   | 'email_storage_gb'
   | 'database_count'
+  | 'support'
 
 export type OfferOptionWarning =
   | 'unknown_warning'
