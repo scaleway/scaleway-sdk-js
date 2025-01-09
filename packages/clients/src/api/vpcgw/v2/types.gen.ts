@@ -160,6 +160,8 @@ export interface Gateway {
   smtpEnabled: boolean
   /** Defines whether the gateway uses non-IPAM IP configurations. */
   isLegacy: boolean
+  /** Ranges of IP addresses allowed to connect to the gateway's SSH bastion. */
+  bastionAllowedIps: string[]
   /** Zone of the gateway. */
   zone: Zone
 }
@@ -197,6 +199,20 @@ export interface SetPatRulesRequestRule {
   privatePort: number
   /** Protocol the rule should apply to. */
   protocol: PatRuleProtocol
+}
+
+export type AddBastionAllowedIPsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the gateway to add the allowed IP range to. */
+  gatewayId: string
+  /** IP range allowed to connect to the SSH bastion. */
+  ipRange: string
+}
+
+export interface AddBastionAllowedIPsResponse {
+  /** Ranges of IP addresses allowed to connect to the gateway's SSH bastion. */
+  ipRanges: string[]
 }
 
 export type CreateGatewayNetworkRequest = {
@@ -257,6 +273,15 @@ export type CreatePatRuleRequest = {
   privatePort: number
   /** Protocol the rule should apply to. */
   protocol?: PatRuleProtocol
+}
+
+export type DeleteBastionAllowedIPsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the gateway on which to delete the allowed IP range. */
+  gatewayId: string
+  /** IP range to delete from SSH bastion's list of allowed IPs. */
+  ipRange: string
 }
 
 export type DeleteGatewayNetworkRequest = {
@@ -450,6 +475,23 @@ export type RefreshSSHKeysRequest = {
   zone?: Zone
   /** ID of the gateway to refresh SSH keys on. */
   gatewayId: string
+}
+
+export type SetBastionAllowedIPsRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: Zone
+  /** ID of the gateway on which to set the allowed IP range. */
+  gatewayId: string
+  /**
+   * New list of IP ranges (each range in CIDR notation) allowed to connect to
+   * the SSH bastion.
+   */
+  ipRanges?: string[]
+}
+
+export interface SetBastionAllowedIPsResponse {
+  /** Ranges of IP addresses allowed to connect to the gateway's SSH bastion. */
+  ipRanges: string[]
 }
 
 export type SetPatRulesRequest = {
