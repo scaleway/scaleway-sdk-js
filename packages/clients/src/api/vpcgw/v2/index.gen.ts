@@ -3,10 +3,13 @@
 export { API } from './api.gen'
 export * from './content.gen'
 export type {
+  AddBastionAllowedIPsRequest,
+  AddBastionAllowedIPsResponse,
   CreateGatewayNetworkRequest,
   CreateGatewayRequest,
   CreateIPRequest,
   CreatePatRuleRequest,
+  DeleteBastionAllowedIPsRequest,
   DeleteGatewayNetworkRequest,
   DeleteGatewayRequest,
   DeleteIPRequest,
@@ -38,6 +41,8 @@ export type {
   PatRule,
   PatRuleProtocol,
   RefreshSSHKeysRequest,
+  SetBastionAllowedIPsRequest,
+  SetBastionAllowedIPsResponse,
   SetPatRulesRequest,
   SetPatRulesRequestRule,
   SetPatRulesResponse,
