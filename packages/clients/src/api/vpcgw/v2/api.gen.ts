@@ -13,16 +13,19 @@ import {
   GATEWAY_TRANSIENT_STATUSES,
 } from './content.gen'
 import {
+  marshalAddBastionAllowedIPsRequest,
   marshalCreateGatewayNetworkRequest,
   marshalCreateGatewayRequest,
   marshalCreateIPRequest,
   marshalCreatePatRuleRequest,
+  marshalSetBastionAllowedIPsRequest,
   marshalSetPatRulesRequest,
   marshalUpdateGatewayNetworkRequest,
   marshalUpdateGatewayRequest,
   marshalUpdateIPRequest,
   marshalUpdatePatRuleRequest,
   marshalUpgradeGatewayRequest,
+  unmarshalAddBastionAllowedIPsResponse,
   unmarshalGateway,
   unmarshalGatewayNetwork,
   unmarshalIP,
@@ -32,13 +35,17 @@ import {
   unmarshalListIPsResponse,
   unmarshalListPatRulesResponse,
   unmarshalPatRule,
+  unmarshalSetBastionAllowedIPsResponse,
   unmarshalSetPatRulesResponse,
 } from './marshalling.gen'
 import type {
+  AddBastionAllowedIPsRequest,
+  AddBastionAllowedIPsResponse,
   CreateGatewayNetworkRequest,
   CreateGatewayRequest,
   CreateIPRequest,
   CreatePatRuleRequest,
+  DeleteBastionAllowedIPsRequest,
   DeleteGatewayNetworkRequest,
   DeleteGatewayRequest,
   DeleteIPRequest,
@@ -62,6 +69,8 @@ import type {
   ListPatRulesResponse,
   PatRule,
   RefreshSSHKeysRequest,
+  SetBastionAllowedIPsRequest,
+  SetBastionAllowedIPsResponse,
   SetPatRulesRequest,
   SetPatRulesResponse,
   UpdateGatewayNetworkRequest,
@@ -660,4 +669,59 @@ export class API extends ParentAPI {
       },
       unmarshalGateway,
     )
+
+  /**
+   * Add allowed IP range to SSH bastion. Add an IP range (in CIDR notation) to
+   * be allowed to connect to the SSH bastion.
+   *
+   * @param request - The request {@link AddBastionAllowedIPsRequest}
+   * @returns A Promise of AddBastionAllowedIPsResponse
+   */
+  addBastionAllowedIPs = (request: Readonly<AddBastionAllowedIPsRequest>) =>
+    this.client.fetch<AddBastionAllowedIPsResponse>(
+      {
+        body: JSON.stringify(
+          marshalAddBastionAllowedIPsRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/bastion-allowed-ips`,
+      },
+      unmarshalAddBastionAllowedIPsResponse,
+    )
+
+  /**
+   * Set all IP ranges allowed for SSH bastion. Set a definitive list of IP
+   * ranges (in CIDR notation) allowed to connect to the SSH bastion.
+   *
+   * @param request - The request {@link SetBastionAllowedIPsRequest}
+   * @returns A Promise of SetBastionAllowedIPsResponse
+   */
+  setBastionAllowedIPs = (request: Readonly<SetBastionAllowedIPsRequest>) =>
+    this.client.fetch<SetBastionAllowedIPsResponse>(
+      {
+        body: JSON.stringify(
+          marshalSetBastionAllowedIPsRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PUT',
+        path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/bastion-allowed-ips`,
+      },
+      unmarshalSetBastionAllowedIPsResponse,
+    )
+
+  /**
+   * Delete allowed IP range from SSH bastion. Delete an IP range (defined in
+   * CIDR notation) from SSH bastion, so that it is no longer allowed to
+   * connect.
+   *
+   * @param request - The request {@link DeleteBastionAllowedIPsRequest}
+   */
+  deleteBastionAllowedIPs = (
+    request: Readonly<DeleteBastionAllowedIPsRequest>,
+  ) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/bastion-allowed-ips/${validatePathParam('ipRange', request.ipRange)}`,
+    })
 }

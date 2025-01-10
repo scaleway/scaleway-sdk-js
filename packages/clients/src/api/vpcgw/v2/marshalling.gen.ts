@@ -8,6 +8,8 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  AddBastionAllowedIPsRequest,
+  AddBastionAllowedIPsResponse,
   CreateGatewayNetworkRequest,
   CreateGatewayRequest,
   CreateIPRequest,
@@ -22,6 +24,8 @@ import type {
   ListIPsResponse,
   ListPatRulesResponse,
   PatRule,
+  SetBastionAllowedIPsRequest,
+  SetBastionAllowedIPsResponse,
   SetPatRulesRequest,
   SetPatRulesRequestRule,
   SetPatRulesResponse,
@@ -84,6 +88,7 @@ export const unmarshalGateway = (data: unknown): Gateway => {
 
   return {
     bandwidth: data.bandwidth,
+    bastionAllowedIps: data.bastion_allowed_ips,
     bastionEnabled: data.bastion_enabled,
     bastionPort: data.bastion_port,
     canUpgradeTo: data.can_upgrade_to,
@@ -126,6 +131,20 @@ export const unmarshalPatRule = (data: unknown): PatRule => {
     updatedAt: unmarshalDate(data.updated_at),
     zone: data.zone,
   } as PatRule
+}
+
+export const unmarshalAddBastionAllowedIPsResponse = (
+  data: unknown,
+): AddBastionAllowedIPsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AddBastionAllowedIPsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ipRanges: data.ip_ranges,
+  } as AddBastionAllowedIPsResponse
 }
 
 export const unmarshalListGatewayNetworksResponse = (
@@ -217,6 +236,20 @@ export const unmarshalListPatRulesResponse = (
   } as ListPatRulesResponse
 }
 
+export const unmarshalSetBastionAllowedIPsResponse = (
+  data: unknown,
+): SetBastionAllowedIPsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetBastionAllowedIPsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ipRanges: data.ip_ranges,
+  } as SetBastionAllowedIPsResponse
+}
+
 export const unmarshalSetPatRulesResponse = (
   data: unknown,
 ): SetPatRulesResponse => {
@@ -230,6 +263,13 @@ export const unmarshalSetPatRulesResponse = (
     patRules: unmarshalArrayOfObject(data.pat_rules, unmarshalPatRule),
   } as SetPatRulesResponse
 }
+
+export const marshalAddBastionAllowedIPsRequest = (
+  request: AddBastionAllowedIPsRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ip_range: request.ipRange,
+})
 
 export const marshalCreateGatewayNetworkRequest = (
   request: CreateGatewayNetworkRequest,
@@ -273,6 +313,13 @@ export const marshalCreatePatRuleRequest = (
   private_port: request.privatePort,
   protocol: request.protocol,
   public_port: request.publicPort,
+})
+
+export const marshalSetBastionAllowedIPsRequest = (
+  request: SetBastionAllowedIPsRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ip_ranges: request.ipRanges,
 })
 
 const marshalSetPatRulesRequestRule = (
