@@ -488,8 +488,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all domain name bindings. List all domain name bindings in a specified
-   * region.
+   * List all custom domains. List all custom domains in a specified region.
    *
    * @param request - The request {@link ListDomainsRequest}
    * @returns A Promise of ListDomainsResponse
@@ -498,8 +497,8 @@ export class API extends ParentAPI {
     enrichForPagination('domains', this.pageOfListDomains, request)
 
   /**
-   * Get a domain name binding. Get a domain name binding for the container with
-   * the specified ID.
+   * Get a custom domain. Get a custom domain for the container with the
+   * specified ID.
    *
    * @param request - The request {@link GetDomainRequest}
    * @returns A Promise of Domain
@@ -534,8 +533,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a domain name binding. Create a domain name binding for the
-   * container with the specified ID.
+   * Create a custom domain. Create a custom domain for the container with the
+   * specified ID.
    *
    * @param request - The request {@link CreateDomainRequest}
    * @returns A Promise of Domain
@@ -554,8 +553,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a domain name binding. Delete the domain name binding with the
-   * specific ID.
+   * Delete a custom domain. Delete the custom domain with the specific ID.
    *
    * @param request - The request {@link DeleteDomainRequest}
    * @returns A Promise of Domain
