@@ -3,6 +3,10 @@
 export { API } from './api.gen'
 export * from './content.gen'
 export type {
+  Blocklist,
+  BlocklistType,
+  BulkCreateBlocklistsRequest,
+  BulkCreateBlocklistsResponse,
   CancelEmailRequest,
   CheckDomainRequest,
   CreateDomainRequest,
@@ -12,6 +16,7 @@ export type {
   CreateEmailRequestHeader,
   CreateEmailResponse,
   CreateWebhookRequest,
+  DeleteBlocklistRequest,
   DeleteWebhookRequest,
   Domain,
   DomainLastStatus,
@@ -38,6 +43,9 @@ export type {
   GetProjectSettingsRequest,
   GetStatisticsRequest,
   GetWebhookRequest,
+  ListBlocklistsRequest,
+  ListBlocklistsRequestOrderBy,
+  ListBlocklistsResponse,
   ListDomainsRequest,
   ListDomainsResponse,
   ListEmailsRequest,
