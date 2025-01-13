@@ -7,6 +7,9 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  Blocklist,
+  BulkCreateBlocklistsRequest,
+  BulkCreateBlocklistsResponse,
   CreateDomainRequest,
   CreateEmailRequest,
   CreateEmailRequestAddress,
@@ -26,6 +29,7 @@ import type {
   DomainStatistics,
   Email,
   EmailTry,
+  ListBlocklistsResponse,
   ListDomainsResponse,
   ListEmailsResponse,
   ListWebhookEventsResponse,
@@ -190,6 +194,40 @@ export const unmarshalWebhook = (data: unknown): Webhook => {
   } as Webhook
 }
 
+const unmarshalBlocklist = (data: unknown): Blocklist => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Blocklist' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    custom: data.custom,
+    domainId: data.domain_id,
+    email: data.email,
+    endsAt: unmarshalDate(data.ends_at),
+    id: data.id,
+    reason: data.reason,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as Blocklist
+}
+
+export const unmarshalBulkCreateBlocklistsResponse = (
+  data: unknown,
+): BulkCreateBlocklistsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'BulkCreateBlocklistsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    blocklists: unmarshalArrayOfObject(data.blocklists, unmarshalBlocklist),
+  } as BulkCreateBlocklistsResponse
+}
+
 export const unmarshalCreateEmailResponse = (
   data: unknown,
 ): CreateEmailResponse => {
@@ -291,6 +329,21 @@ export const unmarshalDomainLastStatus = (data: unknown): DomainLastStatus => {
       ? unmarshalDomainLastStatusSpfRecord(data.spf_record)
       : undefined,
   } as DomainLastStatus
+}
+
+export const unmarshalListBlocklistsResponse = (
+  data: unknown,
+): ListBlocklistsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListBlocklistsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    blocklists: unmarshalArrayOfObject(data.blocklists, unmarshalBlocklist),
+    totalCount: data.total_count,
+  } as ListBlocklistsResponse
 }
 
 export const unmarshalListDomainsResponse = (
@@ -425,6 +478,16 @@ export const unmarshalStatistics = (data: unknown): Statistics => {
     totalCount: data.total_count,
   } as Statistics
 }
+
+export const marshalBulkCreateBlocklistsRequest = (
+  request: BulkCreateBlocklistsRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  domain_id: request.domainId,
+  emails: request.emails,
+  reason: request.reason,
+  type: request.type,
+})
 
 export const marshalCreateDomainRequest = (
   request: CreateDomainRequest,

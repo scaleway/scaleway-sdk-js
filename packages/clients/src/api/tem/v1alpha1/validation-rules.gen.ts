@@ -1,6 +1,12 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
+export const BulkCreateBlocklistsRequest = {
+  reason: {
+    maxLength: 200,
+  },
+}
+
 export const CreateDomainRequest = {
   domainName: {
     maxLength: 255,
@@ -46,6 +52,16 @@ export const CreateWebhookRequest = {
   snsArn: {
     maxLength: 127,
     minLength: 3,
+  },
+}
+
+export const ListBlocklistsRequest = {
+  page: {
+    greaterThan: 0,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100,
   },
 }
 
