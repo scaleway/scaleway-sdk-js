@@ -13,16 +13,19 @@ import {
   EMAIL_TRANSIENT_STATUSES,
 } from './content.gen'
 import {
+  marshalBulkCreateBlocklistsRequest,
   marshalCreateDomainRequest,
   marshalCreateEmailRequest,
   marshalCreateWebhookRequest,
   marshalUpdateDomainRequest,
   marshalUpdateProjectSettingsRequest,
   marshalUpdateWebhookRequest,
+  unmarshalBulkCreateBlocklistsResponse,
   unmarshalCreateEmailResponse,
   unmarshalDomain,
   unmarshalDomainLastStatus,
   unmarshalEmail,
+  unmarshalListBlocklistsResponse,
   unmarshalListDomainsResponse,
   unmarshalListEmailsResponse,
   unmarshalListWebhookEventsResponse,
@@ -32,12 +35,15 @@ import {
   unmarshalWebhook,
 } from './marshalling.gen'
 import type {
+  BulkCreateBlocklistsRequest,
+  BulkCreateBlocklistsResponse,
   CancelEmailRequest,
   CheckDomainRequest,
   CreateDomainRequest,
   CreateEmailRequest,
   CreateEmailResponse,
   CreateWebhookRequest,
+  DeleteBlocklistRequest,
   DeleteWebhookRequest,
   Domain,
   DomainLastStatus,
@@ -48,6 +54,8 @@ import type {
   GetProjectSettingsRequest,
   GetStatisticsRequest,
   GetWebhookRequest,
+  ListBlocklistsRequest,
+  ListBlocklistsResponse,
   ListDomainsRequest,
   ListDomainsResponse,
   ListEmailsRequest,
@@ -554,4 +562,66 @@ export class API extends ParentAPI {
       },
       unmarshalProjectSettings,
     )
+
+  protected pageOfListBlocklists = (request: Readonly<ListBlocklistsRequest>) =>
+    this.client.fetch<ListBlocklistsResponse>(
+      {
+        method: 'GET',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/blocklists`,
+        urlParams: urlParams(
+          ['custom', request.custom],
+          ['domain_id', request.domainId],
+          ['email', request.email],
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['type', request.type],
+        ),
+      },
+      unmarshalListBlocklistsResponse,
+    )
+
+  /**
+   * List blocklists. Retrieve the list of blocklists.
+   *
+   * @param request - The request {@link ListBlocklistsRequest}
+   * @returns A Promise of ListBlocklistsResponse
+   */
+  listBlocklists = (request: Readonly<ListBlocklistsRequest>) =>
+    enrichForPagination('blocklists', this.pageOfListBlocklists, request)
+
+  /**
+   * Bulk create blocklists. Create multiple blocklists in a specific Project or
+   * Organization using the `region` parameter.
+   *
+   * @param request - The request {@link BulkCreateBlocklistsRequest}
+   * @returns A Promise of BulkCreateBlocklistsResponse
+   */
+  bulkCreateBlocklists = (request: Readonly<BulkCreateBlocklistsRequest>) =>
+    this.client.fetch<BulkCreateBlocklistsResponse>(
+      {
+        body: JSON.stringify(
+          marshalBulkCreateBlocklistsRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/blocklists`,
+      },
+      unmarshalBulkCreateBlocklistsResponse,
+    )
+
+  /**
+   * Delete a blocklist. You must specify the blocklist you want to delete by
+   * the `region` and `blocklist_id`.
+   *
+   * @param request - The request {@link DeleteBlocklistRequest}
+   */
+  deleteBlocklist = (request: Readonly<DeleteBlocklistRequest>) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/blocklists/${validatePathParam('blocklistId', request.blocklistId)}`,
+    })
 }
