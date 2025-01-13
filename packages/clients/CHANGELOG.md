@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.61.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.60.0...@scaleway/sdk@2.61.0) (2025-01-13)
+
+### Features
+
+- **vpcgw:** add support BastionAllowedIPs ([#1703](https://github.com/scaleway/scaleway-sdk-js/issues/1703)) ([a56836c](https://github.com/scaleway/scaleway-sdk-js/commit/a56836cba0f9828dd1934ff954bfaaed216fd3e3))
+- **webhosting:** add option support ([#1701](https://github.com/scaleway/scaleway-sdk-js/issues/1701)) ([5a01437](https://github.com/scaleway/scaleway-sdk-js/commit/5a01437647e456ec2218c268bf2e17df7af60555))
+
+### Bug Fixes
+
+- **containers:** update doc descriptions with correct wording ([#1702](https://github.com/scaleway/scaleway-sdk-js/issues/1702)) ([b953767](https://github.com/scaleway/scaleway-sdk-js/commit/b953767335730be71643cdbe5fc6dfc22c290ba1))
+
 ## [2.60.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.59.0...@scaleway/sdk@2.60.0) (2024-12-30)
 
 ### Features
