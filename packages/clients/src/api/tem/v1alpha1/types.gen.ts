@@ -2,6 +2,11 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Region } from '../../../bridge'
 
+export type BlocklistType =
+  | 'unknown_type'
+  | 'mailbox_full'
+  | 'mailbox_not_found'
+
 export type DomainLastStatusAutoconfigStateReason =
   | 'unknown_reason'
   | 'permission_denied'
@@ -49,6 +54,12 @@ export type EmailStatus =
   | 'sent'
   | 'failed'
   | 'canceled'
+
+export type ListBlocklistsRequestOrderBy =
+  | 'created_at_desc'
+  | 'created_at_asc'
+  | 'ends_at_desc'
+  | 'ends_at_asc'
 
 export type ListEmailsRequestOrderBy =
   | 'created_at_desc'
@@ -144,6 +155,30 @@ export interface DomainStatistics {
   sentCount: number
   failedCount: number
   canceledCount: number
+}
+
+export interface Blocklist {
+  /** ID of the blocklist. */
+  id: string
+  /** Domain ID linked to the blocklist. */
+  domainId: string
+  /** Date and time of the blocklist creation. */
+  createdAt?: Date
+  /** Date and time of the blocklist's last update. */
+  updatedAt?: Date
+  /** Date and time when the blocklist ends. Empty if the blocklist has no end. */
+  endsAt?: Date
+  /** Email blocked by the blocklist. */
+  email: string
+  /** Type of block for this email. */
+  type: BlocklistType
+  /** Reason to block this email. */
+  reason: string
+  /**
+   * True if this blocklist was created manually. False for an automatic
+   * Transactional Email blocklist.
+   */
+  custom: boolean
 }
 
 export interface CreateEmailRequestAddress {
@@ -358,6 +393,27 @@ export interface UpdateProjectSettingsRequestUpdatePeriodicReport {
   sendingDay?: number
 }
 
+export type BulkCreateBlocklistsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** Domain ID linked to the blocklist. */
+  domainId: string
+  /** Email blocked by the blocklist. */
+  emails?: string[]
+  /** Type of blocklist. */
+  type?: BlocklistType
+  /** Reason to block the email. */
+  reason?: string
+}
+
+export interface BulkCreateBlocklistsResponse {
+  /** List of blocklist created. */
+  blocklists: Blocklist[]
+}
+
 export type CancelEmailRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -445,6 +501,16 @@ export type CreateWebhookRequest = {
   eventTypes?: WebhookEventType[]
   /** Scaleway SNS ARN topic to push the events to. */
   snsArn: string
+}
+
+export type DeleteBlocklistRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** ID of the blocklist to delete. */
+  blocklistId: string
 }
 
 export type DeleteWebhookRequest = {
@@ -541,6 +607,38 @@ export type GetWebhookRequest = {
   region?: Region
   /** ID of the Webhook to check. */
   webhookId: string
+}
+
+export type ListBlocklistsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: Region
+  /** (Optional) List blocklist corresponding to specific criteria. */
+  orderBy?: ListBlocklistsRequestOrderBy
+  /** (Optional) Requested page number. Value must be greater or equal to 1. */
+  page?: number
+  /** (Optional) Requested page size. Value must be between 1 and 100. */
+  pageSize?: number
+  /** (Optional) Filter by a domain ID. */
+  domainId: string
+  /** (Optional) Filter by an email address. */
+  email?: string
+  /** (Optional) Filter by a blocklist type. */
+  type?: BlocklistType
+  /**
+   * (Optional) Filter by custom blocklist (true) or automatic Transactional
+   * Email blocklist (false).
+   */
+  custom?: boolean
+}
+
+export interface ListBlocklistsResponse {
+  /** Number of blocklists matching the requested criteria. */
+  totalCount: number
+  /** Single page of blocklists matching the requested criteria. */
+  blocklists: Blocklist[]
 }
 
 export type ListDomainsRequest = {
