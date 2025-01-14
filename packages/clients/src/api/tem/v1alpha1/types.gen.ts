@@ -44,6 +44,7 @@ export type EmailFlag =
   | 'mailbox_not_found'
   | 'greylisted'
   | 'send_before_expiration'
+  | 'blocklisted'
 
 export type EmailRcptType = 'unknown_rcpt_type' | 'to' | 'cc' | 'bcc'
 
