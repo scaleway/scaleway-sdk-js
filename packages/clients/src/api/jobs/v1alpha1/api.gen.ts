@@ -325,6 +325,7 @@ export class API extends ParentAPI {
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['project_id', request.projectId],
+          ['state', request.state],
         ),
       },
       unmarshalListJobRunsResponse,
