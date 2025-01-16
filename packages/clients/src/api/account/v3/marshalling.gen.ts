@@ -8,11 +8,53 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  CheckContractSignatureResponse,
+  Contract,
+  ContractApiCheckContractSignatureRequest,
+  ContractApiCreateContractSignatureRequest,
+  ContractSignature,
+  ListContractSignaturesResponse,
   ListProjectsResponse,
   Project,
   ProjectApiCreateProjectRequest,
   ProjectApiUpdateProjectRequest,
 } from './types.gen'
+
+const unmarshalContract = (data: unknown): Contract => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Contract' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at),
+    version: data.version,
+  } as Contract
+}
+
+export const unmarshalContractSignature = (
+  data: unknown,
+): ContractSignature => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContractSignature' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    contract: data.contract ? unmarshalContract(data.contract) : undefined,
+    createdAt: unmarshalDate(data.created_at),
+    expiresAt: unmarshalDate(data.expires_at),
+    id: data.id,
+    organizationId: data.organization_id,
+    signedAt: unmarshalDate(data.signed_at),
+  } as ContractSignature
+}
 
 export const unmarshalProject = (data: unknown): Project => {
   if (!isJSONObject(data)) {
@@ -31,6 +73,39 @@ export const unmarshalProject = (data: unknown): Project => {
   } as Project
 }
 
+export const unmarshalCheckContractSignatureResponse = (
+  data: unknown,
+): CheckContractSignatureResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CheckContractSignatureResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    created: data.created,
+    validated: data.validated,
+  } as CheckContractSignatureResponse
+}
+
+export const unmarshalListContractSignaturesResponse = (
+  data: unknown,
+): ListContractSignaturesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListContractSignaturesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    contractSignatures: unmarshalArrayOfObject(
+      data.contract_signatures,
+      unmarshalContractSignature,
+    ),
+    totalCount: data.total_count,
+  } as ListContractSignaturesResponse
+}
+
 export const unmarshalListProjectsResponse = (
   data: unknown,
 ): ListProjectsResponse => {
@@ -45,6 +120,25 @@ export const unmarshalListProjectsResponse = (
     totalCount: data.total_count,
   } as ListProjectsResponse
 }
+
+export const marshalContractApiCheckContractSignatureRequest = (
+  request: ContractApiCheckContractSignatureRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  contract_name: request.contractName,
+  contract_type: request.contractType,
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+})
+
+export const marshalContractApiCreateContractSignatureRequest = (
+  request: ContractApiCreateContractSignatureRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  contract_name: request.contractName,
+  contract_type: request.contractType,
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+  validated: request.validated,
+})
 
 export const marshalProjectApiCreateProjectRequest = (
   request: ProjectApiCreateProjectRequest,

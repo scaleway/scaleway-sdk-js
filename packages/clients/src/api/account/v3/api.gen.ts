@@ -7,12 +7,25 @@ import {
   validatePathParam,
 } from '../../../bridge'
 import {
+  marshalContractApiCheckContractSignatureRequest,
+  marshalContractApiCreateContractSignatureRequest,
   marshalProjectApiCreateProjectRequest,
   marshalProjectApiUpdateProjectRequest,
+  unmarshalCheckContractSignatureResponse,
+  unmarshalContractSignature,
+  unmarshalListContractSignaturesResponse,
   unmarshalListProjectsResponse,
   unmarshalProject,
 } from './marshalling.gen'
 import type {
+  CheckContractSignatureResponse,
+  ContractApiCheckContractSignatureRequest,
+  ContractApiCreateContractSignatureRequest,
+  ContractApiDownloadContractSignatureRequest,
+  ContractApiListContractSignaturesRequest,
+  ContractApiValidateContractSignatureRequest,
+  ContractSignature,
+  ListContractSignaturesResponse,
   ListProjectsResponse,
   Project,
   ProjectApiCreateProjectRequest,
@@ -24,6 +37,141 @@ import type {
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
+}
+
+/**
+ * Contract API.
+ *
+ * The Contract API allows you to manage contracts.
+ */
+export class ContractAPI extends ParentAPI {
+  /**
+   * Download a contract content.
+   *
+   * @param request - The request
+   *   {@link ContractApiDownloadContractSignatureRequest}
+   * @returns A Promise of Blob
+   */
+  downloadContractSignature = (
+    request: Readonly<ContractApiDownloadContractSignatureRequest>,
+  ) =>
+    this.client.fetch<Blob>({
+      method: 'GET',
+      path: `/account/v3/contract-signatures/${validatePathParam('contractSignatureId', request.contractSignatureId)}/download`,
+      urlParams: urlParams(['dl', 1], ['locale', request.locale]),
+      responseType: 'blob',
+    })
+
+  /**
+   * Create a signature for your Organization for the latest version of the
+   * requested contract.
+   *
+   * @param request - The request
+   *   {@link ContractApiCreateContractSignatureRequest}
+   * @returns A Promise of ContractSignature
+   */
+  createContractSignature = (
+    request: Readonly<ContractApiCreateContractSignatureRequest>,
+  ) =>
+    this.client.fetch<ContractSignature>(
+      {
+        body: JSON.stringify(
+          marshalContractApiCreateContractSignatureRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/account/v3/contract-signatures`,
+      },
+      unmarshalContractSignature,
+    )
+
+  /**
+   * Sign a contract for your Organization.
+   *
+   * @param request - The request
+   *   {@link ContractApiValidateContractSignatureRequest}
+   * @returns A Promise of ContractSignature
+   */
+  validateContractSignature = (
+    request: Readonly<ContractApiValidateContractSignatureRequest>,
+  ) =>
+    this.client.fetch<ContractSignature>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/account/v3/contract-signatures/${validatePathParam('contractSignatureId', request.contractSignatureId)}/validate`,
+      },
+      unmarshalContractSignature,
+    )
+
+  /**
+   * Check if a contract is signed for your Organization.
+   *
+   * @param request - The request
+   *   {@link ContractApiCheckContractSignatureRequest}
+   * @returns A Promise of CheckContractSignatureResponse
+   */
+  checkContractSignature = (
+    request: Readonly<ContractApiCheckContractSignatureRequest>,
+  ) =>
+    this.client.fetch<CheckContractSignatureResponse>(
+      {
+        body: JSON.stringify(
+          marshalContractApiCheckContractSignatureRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/account/v3/contract-signatures/check`,
+      },
+      unmarshalCheckContractSignatureResponse,
+    )
+
+  protected pageOfListContractSignatures = (
+    request: Readonly<ContractApiListContractSignaturesRequest> = {},
+  ) =>
+    this.client.fetch<ListContractSignaturesResponse>(
+      {
+        method: 'GET',
+        path: `/account/v3/contract-signatures`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListContractSignaturesResponse,
+    )
+
+  /**
+   * List contract signatures for an Organization.
+   *
+   * @param request - The request
+   *   {@link ContractApiListContractSignaturesRequest}
+   * @returns A Promise of ListContractSignaturesResponse
+   */
+  listContractSignatures = (
+    request: Readonly<ContractApiListContractSignaturesRequest> = {},
+  ) =>
+    enrichForPagination(
+      'contractSignatures',
+      this.pageOfListContractSignatures,
+      request,
+    )
 }
 
 /**
