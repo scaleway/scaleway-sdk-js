@@ -14,6 +14,7 @@ export type {
   CreateJWTRequest,
   CreatePolicyRequest,
   CreateSSHKeyRequest,
+  CreateUserMFAOTPRequest,
   CreateUserRequest,
   CreateUserRequestMember,
   DeleteAPIKeyRequest,
@@ -22,6 +23,7 @@ export type {
   DeleteJWTRequest,
   DeletePolicyRequest,
   DeleteSSHKeyRequest,
+  DeleteUserMFAOTPRequest,
   DeleteUserRequest,
   EncodedJWT,
   GetAPIKeyRequest,
@@ -76,6 +78,7 @@ export type {
   Log,
   LogAction,
   LogResourceType,
+  MFAOTP,
   OrganizationSecuritySettings,
   PermissionSet,
   PermissionSetScopeType,
@@ -101,5 +104,7 @@ export type {
   User,
   UserStatus,
   UserType,
+  ValidateUserMFAOTPRequest,
+  ValidateUserMFAOTPResponse,
 } from './types.gen'
 export * as ValidationRules from './validation-rules.gen'
