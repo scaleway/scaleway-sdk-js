@@ -289,6 +289,7 @@ export type ListJobRunsRequest = {
   jobDefinitionId?: string
   projectId?: string
   organizationId?: string
+  state?: JobRunState
 }
 
 export interface ListJobRunsResponse {
