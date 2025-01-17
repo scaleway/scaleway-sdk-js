@@ -1,11 +1,58 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+import type { LanguageCode as StdLanguageCode } from '../../std/types.gen'
+
+export type ContractType =
+  | 'unknown_type'
+  | 'global'
+  | 'k8s'
+  | 'instance'
+  | 'container'
+  | 'baremetal'
+
+export type ListContractSignaturesRequestOrderBy =
+  | 'signed_at_asc'
+  | 'signed_at_desc'
+  | 'expires_at_asc'
+  | 'expires_at_desc'
+  | 'name_asc'
+  | 'name_desc'
 
 export type ListProjectsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
   | 'name_asc'
   | 'name_desc'
+
+export interface Contract {
+  /** ID of the contract. */
+  id: string
+  /** The type of the contract. */
+  type: ContractType
+  /** The name of the contract. */
+  name: string
+  /** The version of the contract. */
+  version: number
+  /** The creation date of the contract. */
+  createdAt?: Date
+  /** The last modification date of the contract. */
+  updatedAt?: Date
+}
+
+export interface ContractSignature {
+  /** ID of the contract signature. */
+  id: string
+  /** The Organization ID which signed the contract. */
+  organizationId: string
+  /** The creation date of the contract signature. */
+  createdAt?: Date
+  /** The signing date of the contract signature. */
+  signedAt?: Date
+  /** The expiration date of the contract signature. */
+  expiresAt?: Date
+  /** The contract signed. */
+  contract?: Contract
+}
 
 export interface Project {
   /** ID of the Project. */
@@ -20,6 +67,63 @@ export interface Project {
   updatedAt?: Date
   /** Description of the Project. */
   description: string
+}
+
+export interface CheckContractSignatureResponse {
+  /** Whether a signature has been requested for this contract. */
+  created: boolean
+  /** Whether the signature for this contract has been validated. */
+  validated: boolean
+}
+
+export type ContractApiCheckContractSignatureRequest = {
+  /** ID of the Organization to check the contract signature for. */
+  organizationId?: string
+  /** Filter on contract type. */
+  contractType?: ContractType
+  /** Filter on contract name. */
+  contractName: string
+}
+
+export type ContractApiCreateContractSignatureRequest = {
+  /** The type of the contract. */
+  contractType?: ContractType
+  /** The name of the contract. */
+  contractName: string
+  /** Whether the contract is validated at creation. */
+  validated: boolean
+  /** ID of the Organization. */
+  organizationId?: string
+}
+
+export type ContractApiDownloadContractSignatureRequest = {
+  /** The contract signature ID. */
+  contractSignatureId: string
+  /** The locale requested for the content of the contract. */
+  locale?: StdLanguageCode
+}
+
+export type ContractApiListContractSignaturesRequest = {
+  /** The page number for the returned contracts. */
+  page?: number
+  /** The maximum number of contracts per page. */
+  pageSize?: number
+  /** How the contracts are ordered in the response. */
+  orderBy?: ListContractSignaturesRequestOrderBy
+  /** Filter on Organization ID. */
+  organizationId?: string
+}
+
+export type ContractApiValidateContractSignatureRequest = {
+  /** The contract linked to your Organization you want to sign. */
+  contractSignatureId: string
+}
+
+export interface ListContractSignaturesResponse {
+  /** The total number of contract signatures. */
+  totalCount: number
+  /** The paginated returned contract signatures. */
+  contractSignatures: ContractSignature[]
 }
 
 export interface ListProjectsResponse {
