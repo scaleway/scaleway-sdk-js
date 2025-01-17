@@ -59,7 +59,7 @@
     "esbuild-plugin-browserslist": "0.14.0",
     "eslint": "9.18.0",
     "eslint-plugin-tsdoc": "0.3.0",
-    "husky": "9.1.6",
+    "husky": "9.1.7",
     "jsdom": "25.0.1",
     "lerna": "8.1.9",
     "lint-staged": "15.2.10",
