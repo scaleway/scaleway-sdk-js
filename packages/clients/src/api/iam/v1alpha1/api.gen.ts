@@ -29,6 +29,7 @@ import {
   marshalUpdateUserPasswordRequest,
   marshalUpdateUserRequest,
   marshalUpdateUserUsernameRequest,
+  marshalValidateUserMFAOTPRequest,
   unmarshalAPIKey,
   unmarshalApplication,
   unmarshalEncodedJWT,
@@ -47,12 +48,14 @@ import {
   unmarshalListSSHKeysResponse,
   unmarshalListUsersResponse,
   unmarshalLog,
+  unmarshalMFAOTP,
   unmarshalOrganizationSecuritySettings,
   unmarshalPolicy,
   unmarshalQuotum,
   unmarshalSSHKey,
   unmarshalSetRulesResponse,
   unmarshalUser,
+  unmarshalValidateUserMFAOTPResponse,
 } from './marshalling.gen'
 import type {
   APIKey,
@@ -66,6 +69,7 @@ import type {
   CreateJWTRequest,
   CreatePolicyRequest,
   CreateSSHKeyRequest,
+  CreateUserMFAOTPRequest,
   CreateUserRequest,
   DeleteAPIKeyRequest,
   DeleteApplicationRequest,
@@ -73,6 +77,7 @@ import type {
   DeleteJWTRequest,
   DeletePolicyRequest,
   DeleteSSHKeyRequest,
+  DeleteUserMFAOTPRequest,
   DeleteUserRequest,
   EncodedJWT,
   GetAPIKeyRequest,
@@ -113,6 +118,7 @@ import type {
   ListUsersResponse,
   LockUserRequest,
   Log,
+  MFAOTP,
   OrganizationSecuritySettings,
   Policy,
   Quotum,
@@ -132,6 +138,8 @@ import type {
   UpdateUserRequest,
   UpdateUserUsernameRequest,
   User,
+  ValidateUserMFAOTPRequest,
+  ValidateUserMFAOTPResponse,
 } from './types.gen'
 
 const jsonContentHeaders = {
@@ -396,6 +404,58 @@ export class API extends ParentAPI {
       },
       unmarshalUser,
     )
+
+  /**
+   * Create a MFA OTP. Private Beta feature.. Create a MFA OTP. Private Beta
+   * feature.
+   *
+   * @param request - The request {@link CreateUserMFAOTPRequest}
+   * @returns A Promise of MFAOTP
+   */
+  createUserMFAOTP = (request: Readonly<CreateUserMFAOTPRequest>) =>
+    this.client.fetch<MFAOTP>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/mfa-otp`,
+      },
+      unmarshalMFAOTP,
+    )
+
+  /**
+   * Validate a MFA OTP. Private Beta feature.. Validate a MFA OTP. Private Beta
+   * feature.
+   *
+   * @param request - The request {@link ValidateUserMFAOTPRequest}
+   * @returns A Promise of ValidateUserMFAOTPResponse
+   */
+  validateUserMFAOTP = (request: Readonly<ValidateUserMFAOTPRequest>) =>
+    this.client.fetch<ValidateUserMFAOTPResponse>(
+      {
+        body: JSON.stringify(
+          marshalValidateUserMFAOTPRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/validate-mfa-otp`,
+      },
+      unmarshalValidateUserMFAOTPResponse,
+    )
+
+  /**
+   * Delete a MFA OTP. Private Beta feature.. Delete a MFA OTP. Private Beta
+   * feature.
+   *
+   * @param request - The request {@link DeleteUserMFAOTPRequest}
+   */
+  deleteUserMFAOTP = (request: Readonly<DeleteUserMFAOTPRequest>) =>
+    this.client.fetch<void>({
+      body: '{}',
+      headers: jsonContentHeaders,
+      method: 'DELETE',
+      path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/mfa-otp`,
+    })
 
   /**
    * Lock a member. Lock a member. A locked member cannot log in or use API keys

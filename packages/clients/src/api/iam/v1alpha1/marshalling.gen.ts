@@ -38,6 +38,7 @@ import type {
   ListSSHKeysResponse,
   ListUsersResponse,
   Log,
+  MFAOTP,
   OrganizationSecuritySettings,
   PermissionSet,
   Policy,
@@ -59,6 +60,8 @@ import type {
   UpdateUserRequest,
   UpdateUserUsernameRequest,
   User,
+  ValidateUserMFAOTPRequest,
+  ValidateUserMFAOTPResponse,
 } from './types.gen'
 
 export const unmarshalJWT = (data: unknown): JWT => {
@@ -506,6 +509,18 @@ export const unmarshalListUsersResponse = (
   } as ListUsersResponse
 }
 
+export const unmarshalMFAOTP = (data: unknown): MFAOTP => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'MFAOTP' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    secret: data.secret,
+  } as MFAOTP
+}
+
 export const unmarshalOrganizationSecuritySettings = (
   data: unknown,
 ): OrganizationSecuritySettings => {
@@ -532,6 +547,20 @@ export const unmarshalSetRulesResponse = (data: unknown): SetRulesResponse => {
   return {
     rules: unmarshalArrayOfObject(data.rules, unmarshalRule),
   } as SetRulesResponse
+}
+
+export const unmarshalValidateUserMFAOTPResponse = (
+  data: unknown,
+): ValidateUserMFAOTPResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ValidateUserMFAOTPResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    recoveryCodes: data.recovery_codes,
+  } as ValidateUserMFAOTPResponse
 }
 
 export const marshalAddGroupMemberRequest = (
@@ -767,4 +796,11 @@ export const marshalUpdateUserUsernameRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   username: request.username,
+})
+
+export const marshalValidateUserMFAOTPRequest = (
+  request: ValidateUserMFAOTPRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  one_time_password: request.oneTimePassword,
 })
