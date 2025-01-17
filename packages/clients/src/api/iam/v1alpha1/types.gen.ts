@@ -586,6 +586,11 @@ export type CreateSSHKeyRequest = {
   projectId?: string
 }
 
+export type CreateUserMFAOTPRequest = {
+  /** User ID of the MFA OTP. */
+  userId: string
+}
+
 export type CreateUserRequest = {
   /** ID of the Organization. */
   organizationId?: string
@@ -632,6 +637,11 @@ export type DeletePolicyRequest = {
 
 export type DeleteSSHKeyRequest = {
   sshKeyId: string
+}
+
+export type DeleteUserMFAOTPRequest = {
+  /** User ID of the MFA OTP. */
+  userId: string
 }
 
 export type DeleteUserRequest = {
@@ -995,6 +1005,10 @@ export type LockUserRequest = {
   userId: string
 }
 
+export interface MFAOTP {
+  secret: string
+}
+
 export interface OrganizationSecuritySettings {
   /** Defines whether password renewal is enforced during first login. */
   enforcePasswordRenewal: boolean
@@ -1141,11 +1155,6 @@ export type UpdateUserPasswordRequest = {
   userId: string
   /** The new password. */
   password: string
-  /**
-   * Whether or not to send an email alerting the user their password has
-   * changed.
-   */
-  sendEmail: boolean
 }
 
 export type UpdateUserRequest = {
@@ -1162,4 +1171,16 @@ export type UpdateUserUsernameRequest = {
   userId: string
   /** The new username. */
   username: string
+}
+
+export type ValidateUserMFAOTPRequest = {
+  /** User ID of the MFA OTP. */
+  userId: string
+  /** A password generated using the OTP. */
+  oneTimePassword: string
+}
+
+export interface ValidateUserMFAOTPResponse {
+  /** List of recovery codes usable for this OTP method. */
+  recoveryCodes: string[]
 }
