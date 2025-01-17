@@ -269,3 +269,9 @@ export const UpdateUserUsernameRequest = {
     pattern: /^[a-zA-Z0-9._-]+$/,
   },
 }
+
+export const ValidateUserMFAOTPRequest = {
+  oneTimePassword: {
+    pattern: /^[0-9]{6}$/,
+  },
+}
