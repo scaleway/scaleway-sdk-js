@@ -752,7 +752,6 @@ export const marshalUpdateUserPasswordRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   password: request.password,
-  send_email: request.sendEmail,
 })
 
 export const marshalUpdateUserRequest = (

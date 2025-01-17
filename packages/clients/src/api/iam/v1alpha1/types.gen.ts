@@ -1141,11 +1141,6 @@ export type UpdateUserPasswordRequest = {
   userId: string
   /** The new password. */
   password: string
-  /**
-   * Whether or not to send an email alerting the user their password has
-   * changed.
-   */
-  sendEmail: boolean
 }
 
 export type UpdateUserRequest = {
