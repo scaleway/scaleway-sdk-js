@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.0
-        version: 5.1.0
+        specifier: 5.1.1
+        version: 5.1.1
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -97,8 +97,8 @@ importers:
   packages/clients:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.0
-        version: 5.1.0
+        specifier: 5.1.1
+        version: 5.1.1
 
   packages/configuration-loader:
     devDependencies:
@@ -873,8 +873,8 @@ packages:
     peerDependencies:
       eslint: '>= 9.7'
 
-  '@scaleway/random-name@5.1.0':
-    resolution: {integrity: sha512-fLaEUOps1zOJ7BXUrCzKkV9uLibMlShYLC75viwJUOg3WFzzsKZAeQx3Df1RvJMxGlRnJ0fcj94X/Ch8GLOe/g==}
+  '@scaleway/random-name@5.1.1':
+    resolution: {integrity: sha512-DelRK+56UBUEoRr8pQGwTE7oyC019pExis6iG6zZPcjuz4nLbMB5LIosmclnsvajfIBEQiD1Dv9JI/MgnPwygQ==}
     engines: {node: '>=20.x'}
 
   '@shikijs/core@1.14.1':
@@ -2626,10 +2626,6 @@ packages:
   is-ci@3.0.1:
     resolution: {integrity: sha512-ZYvCgrefwqoQ6yTyYUbQu64HsITZ3NfKX1lzaEYdkTDcfKzzCI/wthRRYKkdjHKFVgNiXKAKm65Zo1pk2as/QQ==}
     hasBin: true
-
-  is-core-module@2.15.0:
-    resolution: {integrity: sha512-Dd+Lb2/zvk9SKy1TGCt1wFJFo/MWBPMX5x7KcvLajWTGuomczdQX61PvY5yK6SVACwpoexWo81IfFyoKY2QnTA==}
-    engines: {node: '>= 0.4'}
 
   is-core-module@2.15.1:
     resolution: {integrity: sha512-z0vtXSwucUJtANQWldhbtbt7BnL0vxiFjIdDLAatwhDYty2bad6s+rijD6Ri4YuYJubLzIJLUidCh09e1djEVQ==}
@@ -5730,7 +5726,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@scaleway/random-name@5.1.0': {}
+  '@scaleway/random-name@5.1.1': {}
 
   '@shikijs/core@1.14.1':
     dependencies:
@@ -7910,10 +7906,6 @@ snapshots:
   is-ci@3.0.1:
     dependencies:
       ci-info: 3.9.0
-
-  is-core-module@2.15.0:
-    dependencies:
-      hasown: 2.0.2
 
   is-core-module@2.15.1:
     dependencies:

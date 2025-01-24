@@ -73,7 +73,7 @@
   },
   "packageManager": "pnpm@9.4.0",
   "dependencies": {
-    "@scaleway/random-name": "5.1.0",
+    "@scaleway/random-name": "5.1.1",
     "react": "^19.0.0"
   }
 }
