@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Zone } from '../../../bridge'
+import type { Zone as ScwZone } from '../../../bridge'
 import type {
   Arch,
   BootType,
@@ -35,7 +35,7 @@ export interface SetImageResponse {
 
 export type SetSecurityGroupRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the security group. */
   id: string
   /** Name of the security group. */
@@ -77,7 +77,7 @@ export interface SetSecurityGroupResponse {
 
 export type SetSecurityGroupRuleRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   securityGroupId: string
   securityGroupRuleId: string
   id: string
@@ -97,7 +97,7 @@ export interface SetSecurityGroupRuleResponse {
 
 export type SetServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Instance unique ID. */
   id: string
   /** Instance name. */
@@ -189,7 +189,7 @@ export interface SetServerResponse {
 
 export type SetSnapshotRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   snapshotId: string
   id: string
   name: string
