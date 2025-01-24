@@ -134,6 +134,7 @@ const unmarshalDnsRecord = (data: unknown): DnsRecord => {
   return {
     name: data.name,
     priority: data.priority,
+    rawData: data.raw_data,
     status: data.status,
     ttl: data.ttl,
     type: data.type,

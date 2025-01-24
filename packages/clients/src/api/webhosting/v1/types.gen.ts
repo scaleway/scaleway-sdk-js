@@ -149,6 +149,11 @@ export interface DnsRecord {
   priority?: number
   /** Record status. */
   status: DnsRecordStatus
+  /**
+   * Record representation as it appears in the zone file or DNS management
+   * system.
+   */
+  rawData: string
 }
 
 export interface Nameserver {

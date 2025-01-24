@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.62.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.61.0...@scaleway/sdk@2.62.0) (2025-01-20)
+
+### Features
+
+- **account:** activate public generation ([#1720](https://github.com/scaleway/scaleway-sdk-js/issues/1720)) ([9760f7f](https://github.com/scaleway/scaleway-sdk-js/commit/9760f7f49714f3ba40bcd9c0a8f34e206b4e30d1))
+- add MFA OTP support for IAM members ([#1727](https://github.com/scaleway/scaleway-sdk-js/issues/1727)) ([5968a47](https://github.com/scaleway/scaleway-sdk-js/commit/5968a474d12f9fd9575b8636c7fb96926aa9b9f6))
+- **iam:** remove send_email in UpdateUserPassword ([#1718](https://github.com/scaleway/scaleway-sdk-js/issues/1718)) ([82f9381](https://github.com/scaleway/scaleway-sdk-js/commit/82f9381a93202951a103e44049af0cc2dad67025))
+- **serverless_jobs:** add state filter to list job runs ([#1719](https://github.com/scaleway/scaleway-sdk-js/issues/1719)) ([0ce574a](https://github.com/scaleway/scaleway-sdk-js/commit/0ce574ab86bb390eebcc0cf6f88ec7ddb34f10fb))
+- **tem:** add blocklisted flag ([#1711](https://github.com/scaleway/scaleway-sdk-js/issues/1711)) ([c897e18](https://github.com/scaleway/scaleway-sdk-js/commit/c897e18095b1b9fed7d3dd4bf25d2d10179fb03c))
+- **tem:** generate blocklist sdk ([#1707](https://github.com/scaleway/scaleway-sdk-js/issues/1707)) ([108883f](https://github.com/scaleway/scaleway-sdk-js/commit/108883f6a3fb72c029c01c8d9c54e88844093c90))
+
 ## [2.61.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.60.0...@scaleway/sdk@2.61.0) (2025-01-13)
 
 ### Features
