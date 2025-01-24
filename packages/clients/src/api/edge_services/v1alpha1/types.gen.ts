@@ -1,6 +1,10 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Money, Region, Zone } from '../../../bridge'
+import type {
+  Money,
+  Region as ScwRegion,
+  Zone as ScwZone,
+} from '../../../bridge'
 
 export type DNSStageType = 'unknown_type' | 'auto' | 'managed' | 'custom'
 
@@ -91,7 +95,7 @@ export interface ScalewayLb {
   /** ID of the Load Balancer. */
   id: string
   /** Zone of the Load Balancer. */
-  zone: Zone
+  zone: ScwZone
   /** ID of the frontend linked to the Load Balancer. */
   frontendId: string
   /** Defines whether the Load Balancer's frontend handles SSL connections. */
@@ -129,7 +133,7 @@ export interface TLSSecret {
   /** ID of the Secret. */
   secretId: string
   /** Region of the Secret. */
-  region: Region
+  region: ScwRegion
 }
 
 export interface BackendStage {
