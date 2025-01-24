@@ -46,8 +46,8 @@ importers:
         specifier: 7.0.3
         version: 7.0.3
       cross-fetch:
-        specifier: 4.0.0
-        version: 4.0.0(encoding@0.1.13)
+        specifier: 4.1.0
+        version: 4.1.0(encoding@0.1.13)
       cz-conventional-changelog:
         specifier: 3.3.0
         version: 3.3.0(@types/node@22.1.0)(typescript@5.5.4)
@@ -1635,8 +1635,8 @@ packages:
     engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
     hasBin: true
 
-  cross-fetch@4.0.0:
-    resolution: {integrity: sha512-e4a5N8lVvuLgAWgnCrLr2PP0YyDOTHa9H/Rj54dirp61qXnNq46m82bRhNqIA5VccJtWBvPTFRV3TtvHUKPB1g==}
+  cross-fetch@4.1.0:
+    resolution: {integrity: sha512-uKm5PU+MHTootlWEY+mZ4vvXoCn4fLQxT9dSc1sXVMSFkINTJVN8cAQROpwcKm8bJ/c7rgZVIBWzH5T78sNZZw==}
 
   cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
@@ -6662,7 +6662,7 @@ snapshots:
     dependencies:
       cross-spawn: 7.0.3
 
-  cross-fetch@4.0.0(encoding@0.1.13):
+  cross-fetch@4.1.0(encoding@0.1.13):
     dependencies:
       node-fetch: 2.7.0(encoding@0.1.13)
     transitivePeerDependencies:
