@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Zone } from '../../../bridge'
+import type { Zone as ScwZone } from '../../../bridge'
 
 export type ConnectivityDiagnosticActionType =
   | 'reboot_server'
@@ -190,7 +190,7 @@ export interface Server {
    */
   deletionScheduled: boolean
   /** Zone of the server. */
-  zone: Zone
+  zone: ScwZone
   /**
    * Set to true once the server has completed its provisioning steps and is
    * ready to use. Some OS configurations might require a reinstallation of the
@@ -217,7 +217,7 @@ export interface ConnectivityDiagnostic {
 
 export type CreateServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Create a server with this given name. */
   name?: string
   /** Create a server in the given project ID. */
@@ -239,41 +239,41 @@ export type CreateServerRequest = {
 
 export type DeleteServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the server you want to delete. */
   serverId: string
 }
 
 export type GetConnectivityDiagnosticRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   diagnosticId: string
 }
 
 export type GetOSRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the OS you want to get. */
   osId: string
 }
 
 export type GetServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the server you want to get. */
   serverId: string
 }
 
 export type GetServerTypeRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Server type identifier. */
   serverType: string
 }
 
 export type ListOSRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Positive integer to choose the page to return. */
   page?: number
   /**
@@ -304,7 +304,7 @@ export interface ListServerPrivateNetworksResponse {
 
 export type ListServerTypesRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
 }
 
 export interface ListServerTypesResponse {
@@ -314,7 +314,7 @@ export interface ListServerTypesResponse {
 
 export type ListServersRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Sort order of the returned servers. */
   orderBy?: ListServersRequestOrderBy
   /** Only list servers of this project ID. */
@@ -339,7 +339,7 @@ export interface ListServersResponse {
 
 export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the server. */
   serverId: string
   /** ID of the Private Network. */
@@ -350,7 +350,7 @@ export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
 
 export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the server. */
   serverId: string
   /** ID of the Private Network. */
@@ -359,14 +359,14 @@ export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
 
 export type PrivateNetworkApiGetServerPrivateNetworkRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   serverId: string
   privateNetworkId: string
 }
 
 export type PrivateNetworkApiListServerPrivateNetworksRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Sort order for the returned Private Networks. */
   orderBy?: ListServerPrivateNetworksRequestOrderBy
   /** Page number for the returned Private Networks. */
@@ -387,7 +387,7 @@ export type PrivateNetworkApiListServerPrivateNetworksRequest = {
 
 export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the server. */
   serverId: string
   /**
@@ -402,14 +402,14 @@ export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
 
 export type RebootServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the server you want to reboot. */
   serverId: string
 }
 
 export type ReinstallServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the server you want to reinstall. */
   serverId: string
   /**
@@ -425,7 +425,7 @@ export interface SetServerPrivateNetworksResponse {
 
 export type StartConnectivityDiagnosticRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   serverId: string
 }
 
@@ -435,7 +435,7 @@ export interface StartConnectivityDiagnosticResponse {
 
 export type UpdateServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the server you want to update. */
   serverId: string
   /** Updated name for your server. */

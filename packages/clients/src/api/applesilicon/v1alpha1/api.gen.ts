@@ -7,7 +7,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '../../../bridge'
-import type { WaitForOptions, Zone } from '../../../bridge'
+import type { Zone as ScwZone, WaitForOptions } from '../../../bridge'
 import {
   SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES,
   SERVER_TRANSIENT_STATUSES,
@@ -74,7 +74,7 @@ const jsonContentHeaders = {
  */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: Zone[] = ['fr-par-3']
+  public static readonly LOCALITIES: ScwZone[] = ['fr-par-3']
 
   /**
    * List server types. List all technical details about Apple silicon server
@@ -348,7 +348,7 @@ export class API extends ParentAPI {
 /** Apple silicon - Private Networks API. */
 export class PrivateNetworkAPI extends ParentAPI {
   /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: Zone[] = ['fr-par-1', 'fr-par-3']
+  public static readonly LOCALITIES: ScwZone[] = ['fr-par-1', 'fr-par-3']
 
   getServerPrivateNetwork = (
     request: Readonly<PrivateNetworkApiGetServerPrivateNetworkRequest>,
