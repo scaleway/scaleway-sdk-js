@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.63.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.62.0...@scaleway/sdk@2.63.0) (2025-01-27)
+
+### Features
+
+- **webhosting:** add public dns raw data ([#1731](https://github.com/scaleway/scaleway-sdk-js/issues/1731)) ([0839489](https://github.com/scaleway/scaleway-sdk-js/commit/083948964882eb6b97e1e1c10a4ba4921d62ed64))
+
 ## [2.62.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.61.0...@scaleway/sdk@2.62.0) (2025-01-20)
 
 ### Features
