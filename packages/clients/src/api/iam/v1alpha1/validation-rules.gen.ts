@@ -56,9 +56,6 @@ export const CreateSSHKeyRequest = {
 }
 
 export const CreateUserRequestMember = {
-  email: {
-    ignoreEmpty: true,
-  },
   password: {
     ignoreEmpty: true,
     maxLength: 72,
