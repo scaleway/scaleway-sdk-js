@@ -6,7 +6,7 @@ import {
   urlParams,
   validatePathParam,
 } from '../../../bridge'
-import type { Zone } from '../../../bridge'
+import type { Zone as ScwZone } from '../../../bridge'
 import {
   marshalApplyBlockMigrationRequest,
   marshalAttachServerVolumeRequest,
@@ -243,7 +243,7 @@ const jsonContentHeaders = {
  */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: Zone[] = [
+  public static readonly LOCALITIES: ScwZone[] = [
     'fr-par-1',
     'fr-par-2',
     'fr-par-3',
