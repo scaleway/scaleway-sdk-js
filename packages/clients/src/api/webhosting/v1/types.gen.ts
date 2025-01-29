@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Money, Region } from '../../../bridge'
+import type { Money, Region as ScwRegion } from '../../../bridge'
 import type { LanguageCode as StdLanguageCode } from '../../std/types.gen'
 
 export type DnsRecordStatus = 'unknown_status' | 'valid' | 'invalid'
@@ -271,7 +271,7 @@ export interface HostingSummary {
   /** Name of the active offer for the Web Hosting plan. */
   offerName: string
   /** Region where the Web Hosting plan is hosted. */
-  region: Region
+  region: ScwRegion
 }
 
 export interface MailAccount {
@@ -300,7 +300,7 @@ export type ControlPanelApiListControlPanelsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number (must be a positive integer). */
   page?: number
   /**
@@ -315,7 +315,7 @@ export type DatabaseApiAssignDatabaseUserRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Name of the database to be assigned. */
@@ -329,7 +329,7 @@ export type DatabaseApiChangeDatabaseUserPasswordRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Name of the user to update. */
@@ -343,7 +343,7 @@ export type DatabaseApiCreateDatabaseRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan where the database will be created. */
   hostingId: string
   /** Name of the database to be created. */
@@ -367,7 +367,7 @@ export type DatabaseApiCreateDatabaseUserRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Name of the user to create. */
@@ -381,7 +381,7 @@ export type DatabaseApiDeleteDatabaseRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Name of the database to delete. */
@@ -393,7 +393,7 @@ export type DatabaseApiDeleteDatabaseUserRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Name of the database user to delete. */
@@ -405,7 +405,7 @@ export type DatabaseApiGetDatabaseRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Name of the database. */
@@ -417,7 +417,7 @@ export type DatabaseApiGetDatabaseUserRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Name of the database user to retrieve details. */
@@ -429,7 +429,7 @@ export type DatabaseApiListDatabaseUsersRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Page number (must be a positive integer). */
@@ -448,7 +448,7 @@ export type DatabaseApiListDatabasesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Page number (must be a positive integer). */
@@ -467,7 +467,7 @@ export type DatabaseApiUnassignDatabaseUserRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Name of the database to be unassigned. */
@@ -481,7 +481,7 @@ export type DnsApiCheckUserOwnsDomainRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Domain for which ownership is to be verified. */
   domain: string
   /** ID of the project currently in use. */
@@ -493,7 +493,7 @@ export type DnsApiGetDomainDnsRecordsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Domain associated with the DNS records. */
   domain: string
 }
@@ -503,7 +503,7 @@ export type DnsApiSyncDomainDnsRecordsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Domain for which the DNS records will be synchronized. */
   domain: string
   /** Whether or not to synchronize the web records. */
@@ -530,7 +530,7 @@ export type FtpAccountApiChangeFtpAccountPasswordRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Username of the FTP account. */
@@ -544,7 +544,7 @@ export type FtpAccountApiCreateFtpAccountRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Username for the new FTP account. */
@@ -560,7 +560,7 @@ export type FtpAccountApiListFtpAccountsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Page number (must be a positive integer). */
@@ -581,7 +581,7 @@ export type FtpAccountApiRemoveFtpAccountRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Username of the FTP account to be deleted. */
@@ -616,7 +616,7 @@ export interface Hosting {
   /** Details of the hosting user. */
   user?: HostingUser
   /** Region where the Web Hosting plan is hosted. */
-  region: Region
+  region: ScwRegion
 }
 
 export type HostingApiCreateHostingRequest = {
@@ -624,7 +624,7 @@ export type HostingApiCreateHostingRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the selected offer for the Web Hosting plan. */
   offerId: string
   /** ID of the Scaleway Project in which to create the Web Hosting plan. */
@@ -659,7 +659,7 @@ export type HostingApiCreateSessionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hosting ID. */
   hostingId: string
 }
@@ -669,7 +669,7 @@ export type HostingApiDeleteHostingRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hosting ID. */
   hostingId: string
 }
@@ -679,7 +679,7 @@ export type HostingApiGetHostingRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hosting ID. */
   hostingId: string
 }
@@ -689,7 +689,7 @@ export type HostingApiGetResourceSummaryRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hosting ID. */
   hostingId: string
 }
@@ -699,7 +699,7 @@ export type HostingApiListHostingsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /**
    * Page number to return, from the paginated results (must be a positive
    * integer).
@@ -749,7 +749,7 @@ export type HostingApiResetHostingPasswordRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting. */
   hostingId: string
 }
@@ -759,7 +759,7 @@ export type HostingApiUpdateHostingRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hosting ID. */
   hostingId: string
   /** New contact email for the Web Hosting plan. */
@@ -835,7 +835,7 @@ export type MailAccountApiChangeMailAccountPasswordRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Domain part of the mail account address. */
@@ -851,7 +851,7 @@ export type MailAccountApiCreateMailAccountRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Domain part of the mail account address. */
@@ -867,7 +867,7 @@ export type MailAccountApiListMailAccountsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Page number (must be a positive integer). */
@@ -888,7 +888,7 @@ export type MailAccountApiRemoveMailAccountRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Domain part of the mail account address. */
@@ -902,7 +902,7 @@ export type OfferApiListOffersRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number (must be a positive integer). */
   page?: number
   /**
@@ -944,7 +944,7 @@ export type WebsiteApiListWebsitesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting plan. */
   hostingId: string
   /** Page number (must be a positive integer). */
