@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 
 export type BgpStatus = 'unknown_bgp_status' | 'up' | 'down'
 
@@ -75,8 +75,13 @@ export interface Link {
   updatedAt?: Date
   /** Used to identify a link from a user or partner's point of view. */
   pairingKey: string
+  /**
+   * Reason given by partner to explain why they did not approve the request for
+   * a hosted link.
+   */
+  disapprovedReason?: string
   /** Region of the link. */
-  region: Region
+  region: ScwRegion
 }
 
 export interface Partner {
@@ -118,7 +123,7 @@ export interface Pop {
    */
   availableLinkBandwidthsMbps: number[]
   /** Region of the PoP. */
-  region: Region
+  region: ScwRegion
 }
 
 export interface RoutingPolicy {
@@ -144,7 +149,7 @@ export interface RoutingPolicy {
   /** Last modification date of the routing policy. */
   updatedAt?: Date
   /** Region of the routing policy. */
-  region: Region
+  region: ScwRegion
 }
 
 export type AttachRoutingPolicyRequest = {
@@ -152,7 +157,7 @@ export type AttachRoutingPolicyRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the link to attach a routing policy to. */
   linkId: string
   /** ID of the routing policy to be attached. */
@@ -164,7 +169,7 @@ export type AttachVpcRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the link to attach VPC to. */
   linkId: string
   /** ID of the VPC to attach. */
@@ -176,7 +181,7 @@ export type CreateLinkRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Project to create the link in. */
   projectId?: string
   /** Name of the link. */
@@ -230,7 +235,7 @@ export type CreateRoutingPolicyRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Project to create the routing policy in. */
   projectId?: string
   /** Name of the routing policy. */
@@ -251,7 +256,7 @@ export type DeleteLinkRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the link to delete. */
   linkId: string
 }
@@ -261,7 +266,7 @@ export type DeleteRoutingPolicyRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the routing policy to delete. */
   routingPolicyId: string
 }
@@ -271,7 +276,7 @@ export type DetachRoutingPolicyRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the link to detach a routing policy from. */
   linkId: string
 }
@@ -281,7 +286,7 @@ export type DetachVpcRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the link to detach the VPC from. */
   linkId: string
 }
@@ -291,7 +296,7 @@ export type DisableRoutePropagationRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the link on which to disable route propagation. */
   linkId: string
 }
@@ -301,7 +306,7 @@ export type EnableRoutePropagationRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the link on which to enable route propagation. */
   linkId: string
 }
@@ -311,7 +316,7 @@ export type GetLinkRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the link to get. */
   linkId: string
 }
@@ -321,7 +326,7 @@ export type GetPartnerRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of partner to get. */
   partnerId: string
 }
@@ -331,7 +336,7 @@ export type GetPopRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of PoP to get. */
   popId: string
 }
@@ -341,7 +346,7 @@ export type GetRoutingPolicyRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the routing policy to get. */
   routingPolicyId: string
 }
@@ -351,7 +356,7 @@ export type ListLinksRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Order in which to return results. */
   orderBy?: ListLinksRequestOrderBy
   /** Page number to return. */
@@ -398,7 +403,7 @@ export type ListPartnersRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Order in which to return results. */
   orderBy?: ListPartnersRequestOrderBy
   /** Page number to return. */
@@ -421,7 +426,7 @@ export type ListPopsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Order in which to return results. */
   orderBy?: ListPopsRequestOrderBy
   /** Page number to return. */
@@ -453,7 +458,7 @@ export type ListRoutingPoliciesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Order in which to return results. */
   orderBy?: ListRoutingPoliciesRequestOrderBy
   /** Page number to return. */
@@ -480,7 +485,7 @@ export type UpdateLinkRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the link to update. */
   linkId: string
   /** Name of the link. */
@@ -494,7 +499,7 @@ export type UpdateRoutingPolicyRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the routing policy to update. */
   routingPolicyId: string
   /** Name of the routing policy. */
