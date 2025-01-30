@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Money, Region } from '../../../bridge'
+import type { Money, Region as ScwRegion } from '../../../bridge'
 import type { LanguageCode as StdLanguageCode } from '../../std/types.gen'
 
 export type DnsRecordStatus = 'unknown_status' | 'valid' | 'invalid'
@@ -175,7 +175,7 @@ export interface Hosting {
    */
   oneTimePassword: string
   /** Region where the Web Hosting plan is hosted. */
-  region: Region
+  region: ScwRegion
 }
 
 export interface Mailbox {
@@ -212,7 +212,7 @@ export type CheckUserOwnsDomainRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Domain for which ownership is to be verified. */
   domain: string
   /** ID of the project currently in use. */
@@ -229,7 +229,7 @@ export type ClassicMailApiCreateMailboxRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** The Online hosting ID. */
   onlineId: number
   /** The email address of the mailbox. */
@@ -243,7 +243,7 @@ export type ClassicMailApiDeleteMailboxRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** The Online hosting ID. */
   onlineId: number
   /** The ID of the mailbox to delete. */
@@ -255,7 +255,7 @@ export type ClassicMailApiGetMailboxRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** The Online hosting ID. */
   onlineId: number
   /** The ID of the mailbox to get. */
@@ -267,7 +267,7 @@ export type ClassicMailApiListMailboxesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** The Online hosting ID. */
   onlineId: number
   /** Page number (must be a positive integer). */
@@ -286,7 +286,7 @@ export type ClassicMailApiUpdateMailboxRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** The Online hosting ID. */
   onlineId: number
   /** The ID of the mailbox to update. */
@@ -300,7 +300,7 @@ export type CreateHostingRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the selected offer for the Web Hosting plan. */
   offerId: string
   /** ID of the Scaleway Project in which to create the Web Hosting plan. */
@@ -330,7 +330,7 @@ export type CreateSessionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hosting ID. */
   hostingId: string
 }
@@ -340,7 +340,7 @@ export type DeleteHostingRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hosting ID. */
   hostingId: string
 }
@@ -359,7 +359,7 @@ export type GetDomainDnsRecordsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Domain associated with the DNS records. */
   domain: string
 }
@@ -369,7 +369,7 @@ export type GetHostingRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hosting ID. */
   hostingId: string
 }
@@ -379,7 +379,7 @@ export type ListControlPanelsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /**
    * Page number to return, from the paginated results (must be a positive
    * integer).
@@ -404,7 +404,7 @@ export type ListHostingsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /**
    * Page number to return, from the paginated results (must be a positive
    * integer).
@@ -468,7 +468,7 @@ export type ListOffersRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Sort order of offers in the response. */
   orderBy?: ListOffersRequestOrderBy
   /**
@@ -500,7 +500,7 @@ export type ResetHostingPasswordRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the hosting. */
   hostingId: string
 }
@@ -515,7 +515,7 @@ export type RestoreHostingRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hosting ID. */
   hostingId: string
 }
@@ -530,7 +530,7 @@ export type UpdateHostingRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hosting ID. */
   hostingId: string
   /** New contact email for the Web Hosting plan. */

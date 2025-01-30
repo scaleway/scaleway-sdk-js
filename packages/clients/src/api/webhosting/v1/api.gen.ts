@@ -7,7 +7,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '../../../bridge'
-import type { Region, WaitForOptions } from '../../../bridge'
+import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
 import { HOSTING_TRANSIENT_STATUSES } from './content.gen'
 import {
   marshalDatabaseApiAssignDatabaseUserRequest,
@@ -108,7 +108,11 @@ const jsonContentHeaders = {
  */
 export class ControlPanelAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+  public static readonly LOCALITIES: ScwRegion[] = [
+    'fr-par',
+    'nl-ams',
+    'pl-waw',
+  ]
 
   protected pageOfListControlPanels = (
     request: Readonly<ControlPanelApiListControlPanelsRequest> = {},
@@ -148,7 +152,11 @@ export class ControlPanelAPI extends ParentAPI {
  */
 export class DatabaseAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+  public static readonly LOCALITIES: ScwRegion[] = [
+    'fr-par',
+    'nl-ams',
+    'pl-waw',
+  ]
 
   /**
    * "Create a new database within your hosting plan".
@@ -396,7 +404,11 @@ export class DatabaseAPI extends ParentAPI {
  */
 export class DnsAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+  public static readonly LOCALITIES: ScwRegion[] = [
+    'fr-par',
+    'nl-ams',
+    'pl-waw',
+  ]
 
   /**
    * Get DNS records. Get the set of DNS records of a specified domain
@@ -468,7 +480,11 @@ export class DnsAPI extends ParentAPI {
  */
 export class OfferAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+  public static readonly LOCALITIES: ScwRegion[] = [
+    'fr-par',
+    'nl-ams',
+    'pl-waw',
+  ]
 
   protected pageOfListOffers = (
     request: Readonly<OfferApiListOffersRequest> = {},
@@ -509,7 +525,11 @@ export class OfferAPI extends ParentAPI {
  */
 export class HostingAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+  public static readonly LOCALITIES: ScwRegion[] = [
+    'fr-par',
+    'nl-ams',
+    'pl-waw',
+  ]
 
   /**
    * Order a Web Hosting plan. Order a Web Hosting plan, specifying the offer
@@ -705,7 +725,11 @@ export class HostingAPI extends ParentAPI {
  */
 export class FtpAccountAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+  public static readonly LOCALITIES: ScwRegion[] = [
+    'fr-par',
+    'nl-ams',
+    'pl-waw',
+  ]
 
   /**
    * Create a new FTP account within your hosting plan.. Create a new FTP
@@ -807,7 +831,11 @@ export class FtpAccountAPI extends ParentAPI {
  */
 export class MailAccountAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+  public static readonly LOCALITIES: ScwRegion[] = [
+    'fr-par',
+    'nl-ams',
+    'pl-waw',
+  ]
 
   /**
    * Create a new mail account within your hosting plan.. Create a new mail
@@ -924,7 +952,11 @@ export class MailAccountAPI extends ParentAPI {
  */
 export class WebsiteAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+  public static readonly LOCALITIES: ScwRegion[] = [
+    'fr-par',
+    'nl-ams',
+    'pl-waw',
+  ]
 
   protected pageOfListWebsites = (
     request: Readonly<WebsiteApiListWebsitesRequest>,
