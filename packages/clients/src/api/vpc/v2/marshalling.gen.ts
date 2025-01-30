@@ -3,7 +3,6 @@
 import randomName from '@scaleway/random-name'
 import {
   isJSONObject,
-  resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '../../../bridge'
@@ -19,7 +18,6 @@ import type {
   ListPrivateNetworksResponse,
   ListSubnetsResponse,
   ListVPCsResponse,
-  MigrateZonalPrivateNetworksRequest,
   PrivateNetwork,
   Route,
   SetSubnetsRequest,
@@ -248,25 +246,6 @@ export const marshalDeleteSubnetsRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   subnets: request.subnets,
-})
-
-export const marshalMigrateZonalPrivateNetworksRequest = (
-  request: MigrateZonalPrivateNetworksRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  private_network_ids: request.privateNetworkIds,
-  ...resolveOneOf([
-    {
-      default: defaults.defaultOrganizationId,
-      param: 'organization_id',
-      value: request.organizationId,
-    },
-    {
-      default: defaults.defaultProjectId,
-      param: 'project_id',
-      value: request.projectId,
-    },
-  ]),
 })
 
 export const marshalSetSubnetsRequest = (

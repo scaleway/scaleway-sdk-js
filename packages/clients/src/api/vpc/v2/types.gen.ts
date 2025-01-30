@@ -413,32 +413,6 @@ export interface ListVPCsResponse {
   totalCount: number
 }
 
-export type MigrateZonalPrivateNetworksRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: ScwRegion
-  /**
-   * Organization ID to target. The specified zoned Private Networks within this
-   * Organization will be migrated to regional.
-   *
-   * One-of ('scope'): at most one of 'organizationId', 'projectId' could be
-   * set.
-   */
-  organizationId?: string
-  /**
-   * Project to target. The specified zoned Private Networks within this Project
-   * will be migrated to regional.
-   *
-   * One-of ('scope'): at most one of 'organizationId', 'projectId' could be
-   * set.
-   */
-  projectId?: string
-  /** IDs of the Private Networks to migrate. */
-  privateNetworkIds?: string[]
-}
-
 export type SetSubnetsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
