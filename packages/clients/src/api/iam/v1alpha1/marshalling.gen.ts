@@ -43,6 +43,7 @@ import type {
   PermissionSet,
   Policy,
   Quotum,
+  QuotumLimit,
   RemoveGroupMemberRequest,
   Rule,
   RuleSpecs,
@@ -200,6 +201,22 @@ export const unmarshalPolicy = (data: unknown): Policy => {
   } as Policy
 }
 
+const unmarshalQuotumLimit = (data: unknown): QuotumLimit => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'QuotumLimit' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    global: data.global,
+    limit: data.limit,
+    region: data.region,
+    unlimited: data.unlimited,
+    zone: data.zone,
+  } as QuotumLimit
+}
+
 export const unmarshalQuotum = (data: unknown): Quotum => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -210,6 +227,8 @@ export const unmarshalQuotum = (data: unknown): Quotum => {
   return {
     description: data.description,
     limit: data.limit,
+    limits: unmarshalArrayOfObject(data.limits, unmarshalQuotumLimit),
+    localityType: data.locality_type,
     name: data.name,
     prettyName: data.pretty_name,
     unit: data.unit,

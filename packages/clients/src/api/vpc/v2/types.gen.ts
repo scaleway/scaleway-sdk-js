@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 
 export type ListPrivateNetworksRequestOrderBy =
   | 'created_at_asc'
@@ -43,7 +43,7 @@ export interface PrivateNetwork {
   /** Scaleway Project the Private Network belongs to. */
   projectId: string
   /** Region in which the Private Network is available. */
-  region: Region
+  region: ScwRegion
   /** Tags of the Private Network. */
   tags: string[]
   /** Date the Private Network was created. */
@@ -80,7 +80,7 @@ export interface Route {
   /** Defines whether the route can be modified or deleted by the user. */
   isReadOnly: boolean
   /** Region of the Route. */
-  region: Region
+  region: ScwRegion
 }
 
 export interface VPC {
@@ -93,7 +93,7 @@ export interface VPC {
   /** Scaleway Project the VPC belongs to. */
   projectId: string
   /** Region of the VPC. */
-  region: Region
+  region: ScwRegion
   /** Tags for the VPC. */
   tags: string[]
   /** Defines whether the VPC is the default one for its Project. */
@@ -113,7 +113,7 @@ export type AddSubnetsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Private Network ID. */
   privateNetworkId: string
   /** Private Network subnets CIDR. */
@@ -129,7 +129,7 @@ export type CreatePrivateNetworkRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Name for the Private Network. */
   name?: string
   /** Scaleway Project in which to create the Private Network. */
@@ -147,7 +147,7 @@ export type CreateRouteRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Route description. */
   description: string
   /** Tags of the Route. */
@@ -167,7 +167,7 @@ export type CreateVPCRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Name for the VPC. */
   name?: string
   /** Scaleway Project in which to create the VPC. */
@@ -183,7 +183,7 @@ export type DeletePrivateNetworkRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Private Network ID. */
   privateNetworkId: string
 }
@@ -193,7 +193,7 @@ export type DeleteRouteRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Route ID. */
   routeId: string
 }
@@ -203,7 +203,7 @@ export type DeleteSubnetsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Private Network ID. */
   privateNetworkId: string
   /** Private Network subnets CIDR. */
@@ -219,7 +219,7 @@ export type DeleteVPCRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** VPC ID. */
   vpcId: string
 }
@@ -229,7 +229,7 @@ export type EnableDHCPRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Private Network ID. */
   privateNetworkId: string
 }
@@ -239,7 +239,7 @@ export type EnableRoutingRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** VPC ID. */
   vpcId: string
 }
@@ -249,7 +249,7 @@ export type GetPrivateNetworkRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Private Network ID. */
   privateNetworkId: string
 }
@@ -259,7 +259,7 @@ export type GetRouteRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Route ID. */
   routeId: string
 }
@@ -269,7 +269,7 @@ export type GetVPCRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** VPC ID. */
   vpcId: string
 }
@@ -279,7 +279,7 @@ export type ListPrivateNetworksRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Sort order of the returned Private Networks. */
   orderBy?: ListPrivateNetworksRequestOrderBy
   /** Page number to return, from the paginated results. */
@@ -333,7 +333,7 @@ export type ListSubnetsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Sort order of the returned subnets. */
   orderBy?: ListSubnetsRequestOrderBy
   /** Page number to return, from the paginated results. */
@@ -369,7 +369,7 @@ export type ListVPCsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Sort order of the returned VPCs. */
   orderBy?: ListVPCsRequestOrderBy
   /** Page number to return, from the paginated results. */
@@ -418,7 +418,7 @@ export type MigrateZonalPrivateNetworksRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /**
    * Organization ID to target. The specified zoned Private Networks within this
    * Organization will be migrated to regional.
@@ -444,7 +444,7 @@ export type SetSubnetsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Private Network ID. */
   privateNetworkId: string
   /** Private Network subnets CIDR. */
@@ -460,7 +460,7 @@ export type UpdatePrivateNetworkRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Private Network ID. */
   privateNetworkId: string
   /** Name for the Private Network. */
@@ -474,7 +474,7 @@ export type UpdateRouteRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Route ID. */
   routeId: string
   /** Route description. */
@@ -494,7 +494,7 @@ export type UpdateVPCRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** VPC ID. */
   vpcId: string
   /** Name for the VPC. */

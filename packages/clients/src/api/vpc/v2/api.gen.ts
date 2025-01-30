@@ -6,7 +6,7 @@ import {
   urlParams,
   validatePathParam,
 } from '../../../bridge'
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 import {
   marshalAddSubnetsRequest,
   marshalCreatePrivateNetworkRequest,
@@ -73,7 +73,11 @@ const jsonContentHeaders = {
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+  public static readonly LOCALITIES: ScwRegion[] = [
+    'fr-par',
+    'nl-ams',
+    'pl-waw',
+  ]
 
   protected pageOfListVPCs = (request: Readonly<ListVPCsRequest> = {}) =>
     this.client.fetch<ListVPCsResponse>(
@@ -291,6 +295,7 @@ export class API extends ParentAPI {
    * one or many Private Networks (specified by their Private Network IDs)
    * within a single Scaleway Organization or Project, with the same call.
    *
+   * @deprecated
    * @param request - The request {@link MigrateZonalPrivateNetworksRequest}
    */
   migrateZonalPrivateNetworks = (

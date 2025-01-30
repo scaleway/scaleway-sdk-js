@@ -1,5 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+import type { Region as ScwRegion, Zone as ScwZone } from '../../../bridge'
 
 export type BearerType = 'unknown_bearer_type' | 'user' | 'application'
 
@@ -76,6 +77,8 @@ export type ListUsersRequestOrderBy =
   | 'username_asc'
   | 'username_desc'
 
+export type LocalityType = 'global' | 'region' | 'zone'
+
 export type LogAction = 'unknown_action' | 'created' | 'updated' | 'deleted'
 
 export type LogResourceType =
@@ -95,6 +98,42 @@ export type PermissionSetScopeType =
 export type UserStatus = 'unknown_status' | 'invitation_pending' | 'activated'
 
 export type UserType = 'unknown_type' | 'guest' | 'owner' | 'member'
+
+export interface QuotumLimit {
+  /**
+   * Whether or not the limit is applied globally.
+   *
+   * One-of ('locality'): at most one of 'global', 'region', 'zone' could be
+   * set.
+   */
+  global?: boolean
+  /**
+   * The region on which the limit is applied.
+   *
+   * One-of ('locality'): at most one of 'global', 'region', 'zone' could be
+   * set.
+   */
+  region?: ScwRegion
+  /**
+   * The zone on which the limit is applied.
+   *
+   * One-of ('locality'): at most one of 'global', 'region', 'zone' could be
+   * set.
+   */
+  zone?: ScwZone
+  /**
+   * Maximum locality limit.
+   *
+   * One-of ('value'): at most one of 'limit', 'unlimited' could be set.
+   */
+  limit?: number
+  /**
+   * Whether or not the quota per locality is unlimited.
+   *
+   * One-of ('value'): at most one of 'limit', 'unlimited' could be set.
+   */
+  unlimited?: boolean
+}
 
 export interface JWT {
   /** JWT ID. */
@@ -345,15 +384,15 @@ export interface Quotum {
   /** Name of the quota. */
   name: string
   /**
-   * Maximum limit of the quota.
+   * @deprecated Maximum limit of the quota.
    *
-   * One-of ('value'): at most one of 'limit', 'unlimited' could be set.
+   *   One-of ('value'): at most one of 'limit', 'unlimited' could be set.
    */
   limit?: number
   /**
-   * Defines whether or not the quota is unlimited.
+   * @deprecated Defines whether or not the quota is unlimited.
    *
-   * One-of ('value'): at most one of 'limit', 'unlimited' could be set.
+   *   One-of ('value'): at most one of 'limit', 'unlimited' could be set.
    */
   unlimited?: boolean
   /** A human-readable name for the quota. */
@@ -362,6 +401,13 @@ export interface Quotum {
   unit: string
   /** Details about the quota. */
   description: string
+  /**
+   * Whether this quotum is applied on at the zone level, region level, or
+   * globally.
+   */
+  localityType: LocalityType
+  /** Limits per locality. */
+  limits: QuotumLimit[]
 }
 
 export interface Rule {
