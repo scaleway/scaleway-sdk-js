@@ -7,7 +7,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '../../../bridge'
-import type { Region, WaitForOptions } from '../../../bridge'
+import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
 import { HOSTING_TRANSIENT_STATUSES } from './content.gen'
 import {
   marshalCheckUserOwnsDomainRequest,
@@ -67,7 +67,7 @@ const jsonContentHeaders = {
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams']
+  public static readonly LOCALITIES: ScwRegion[] = ['fr-par', 'nl-ams']
 
   /**
    * Order a Web Hosting plan. Order a Web Hosting plan, specifying the offer
@@ -343,7 +343,11 @@ export class API extends ParentAPI {
  */
 export class ClassicMailAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+  public static readonly LOCALITIES: ScwRegion[] = [
+    'fr-par',
+    'nl-ams',
+    'pl-waw',
+  ]
 
   /**
    * Create a new mailbox within your hosting plan.. Create a new mailbox within
