@@ -6,14 +6,13 @@ import {
   urlParams,
   validatePathParam,
 } from '../../../bridge'
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 import {
   marshalAddSubnetsRequest,
   marshalCreatePrivateNetworkRequest,
   marshalCreateRouteRequest,
   marshalCreateVPCRequest,
   marshalDeleteSubnetsRequest,
-  marshalMigrateZonalPrivateNetworksRequest,
   marshalSetSubnetsRequest,
   marshalUpdatePrivateNetworkRequest,
   marshalUpdateRouteRequest,
@@ -50,7 +49,6 @@ import type {
   ListSubnetsResponse,
   ListVPCsRequest,
   ListVPCsResponse,
-  MigrateZonalPrivateNetworksRequest,
   PrivateNetwork,
   Route,
   SetSubnetsRequest,
@@ -73,7 +71,11 @@ const jsonContentHeaders = {
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+  public static readonly LOCALITIES: ScwRegion[] = [
+    'fr-par',
+    'nl-ams',
+    'pl-waw',
+  ]
 
   protected pageOfListVPCs = (request: Readonly<ListVPCsRequest> = {}) =>
     this.client.fetch<ListVPCsResponse>(
@@ -282,30 +284,6 @@ export class API extends ParentAPI {
     this.client.fetch<void>({
       method: 'DELETE',
       path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
-    })
-
-  /**
-   * Migrate Private Networks from zoned to regional. Transform multiple
-   * existing zoned Private Networks (scoped to a single Availability Zone) into
-   * regional Private Networks, scoped to an entire region. You can transform
-   * one or many Private Networks (specified by their Private Network IDs)
-   * within a single Scaleway Organization or Project, with the same call.
-   *
-   * @param request - The request {@link MigrateZonalPrivateNetworksRequest}
-   */
-  migrateZonalPrivateNetworks = (
-    request: Readonly<MigrateZonalPrivateNetworksRequest> = {},
-  ) =>
-    this.client.fetch<void>({
-      body: JSON.stringify(
-        marshalMigrateZonalPrivateNetworksRequest(
-          request,
-          this.client.settings,
-        ),
-      ),
-      headers: jsonContentHeaders,
-      method: 'POST',
-      path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/migrate-zonal`,
     })
 
   /**
