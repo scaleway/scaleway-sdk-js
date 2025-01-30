@@ -26,7 +26,6 @@ export type {
   ListVPCsRequest,
   ListVPCsRequestOrderBy,
   ListVPCsResponse,
-  MigrateZonalPrivateNetworksRequest,
   PrivateNetwork,
   Route,
   SetSubnetsRequest,
