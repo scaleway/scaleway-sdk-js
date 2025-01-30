@@ -36,6 +36,7 @@ export const unmarshalLink = (data: unknown): Link => {
     bgpV4Status: data.bgp_v4_status,
     bgpV6Status: data.bgp_v6_status,
     createdAt: unmarshalDate(data.created_at),
+    disapprovedReason: data.disapproved_reason,
     enableRoutePropagation: data.enable_route_propagation,
     id: data.id,
     name: data.name,
