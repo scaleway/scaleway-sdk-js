@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 
 export type DeploymentStatus =
   | 'unknown_status'
@@ -150,7 +150,7 @@ export interface Deployment {
   /** Last modification date of the deployment. */
   updatedAt?: Date
   /** Region of the deployment. */
-  region: Region
+  region: ScwRegion
 }
 
 export interface Model {
@@ -173,7 +173,7 @@ export interface Model {
   /** Last modification date of the model. */
   updatedAt?: Date
   /** Region of the model. */
-  region: Region
+  region: ScwRegion
   /**
    * Object Storage URL pointing to the model source weight.
    *
@@ -212,7 +212,7 @@ export interface NodeType {
   /** Number of GPUs. */
   gpus: number
   /** Region of the node type. */
-  region: Region
+  region: ScwRegion
 }
 
 export type AddDeploymentACLRulesRequest = {
@@ -220,7 +220,7 @@ export type AddDeploymentACLRulesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the deployment to add ACL rules to. */
   deploymentId: string
   /** List of ACL rules to add. */
@@ -237,7 +237,7 @@ export type CreateDeploymentRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Name of the deployment. */
   name?: string
   /** ID of the Project to create the deployment in. */
@@ -266,7 +266,7 @@ export type CreateEndpointRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the deployment to create the endpoint for. */
   deploymentId: string
   /** Specification of the endpoint. */
@@ -278,7 +278,7 @@ export type DeleteDeploymentACLRuleRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the ACL rule to delete. */
   aclId: string
 }
@@ -288,7 +288,7 @@ export type DeleteDeploymentRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the deployment to delete. */
   deploymentId: string
 }
@@ -298,7 +298,7 @@ export type DeleteEndpointRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the endpoint to delete. */
   endpointId: string
 }
@@ -313,7 +313,7 @@ export type GetDeploymentCertificateRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   deploymentId: string
 }
 
@@ -322,7 +322,7 @@ export type GetDeploymentRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the deployment to get. */
   deploymentId: string
 }
@@ -332,7 +332,7 @@ export type GetModelEulaRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   modelId: string
 }
 
@@ -341,7 +341,7 @@ export type GetModelRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the model to get. */
   modelId: string
 }
@@ -351,7 +351,7 @@ export type ListDeploymentACLRulesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the deployment to list ACL rules for. */
   deploymentId: string
   /** Page number to return. */
@@ -372,7 +372,7 @@ export type ListDeploymentsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number to return. */
   page?: number
   /** Maximum number of deployments to return per page. */
@@ -401,7 +401,7 @@ export type ListModelsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Order in which to return results. */
   orderBy?: ListModelsRequestOrderBy
   /** Page number to return. */
@@ -428,7 +428,7 @@ export type ListNodeTypesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number to return. */
   page?: number
   /** Maximum number of node types to return per page. */
@@ -449,7 +449,7 @@ export type SetDeploymentACLRulesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the deployment to set ACL rules for. */
   deploymentId: string
   /** All existing ACL rules will be replaced by the new ones. */
@@ -466,7 +466,7 @@ export type UpdateDeploymentRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the deployment to update. */
   deploymentId: string
   /** Name of the deployment. */
@@ -484,7 +484,7 @@ export type UpdateEndpointRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the endpoint to update. */
   endpointId: string
   /**
