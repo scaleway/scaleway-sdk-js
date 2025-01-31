@@ -235,6 +235,13 @@ export const UpdateGroupRequest = {
   },
 }
 
+export const UpdateOrganizationSecuritySettingsRequest = {
+  loginAttemptsBeforeLocked: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 50,
+  },
+}
+
 export const UpdatePolicyRequest = {
   description: {
     maxLength: 200,
