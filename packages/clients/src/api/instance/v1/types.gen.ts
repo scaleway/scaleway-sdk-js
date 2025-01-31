@@ -21,7 +21,7 @@ export type IpState =
   | 'pending'
   | 'error'
 
-export type IpType = 'unknown_iptype' | 'nat' | 'routed_ipv4' | 'routed_ipv6'
+export type IpType = 'unknown_iptype' | 'routed_ipv4' | 'routed_ipv6'
 
 export type ListServersRequestOrder =
   | 'creation_date_desc'
@@ -866,10 +866,7 @@ export type CreateIpRequest = {
   tags?: string[]
   /** UUID of the Instance you want to attach the IP to. */
   server?: string
-  /**
-   * IP type to reserve (either 'routed_ipv4' or 'routed_ipv6', use of 'nat' is
-   * deprecated).
-   */
+  /** IP type to reserve (either 'routed_ipv4' or 'routed_ipv6'). */
   type?: IpType
 }
 
@@ -1437,7 +1434,7 @@ export type ListIpsRequest = {
   page?: number
   /**
    * Filter on the IP Mobility IP type (whose value should be either
-   * 'routed_ipv4', 'routed_ipv6' or 'nat').
+   * 'routed_ipv4' or 'routed_ipv6').
    */
   type?: string
 }
@@ -1884,7 +1881,7 @@ export type UpdateIpRequest = {
   ip: string
   /** Reverse domain name. */
   reverse?: string | null
-  /** Convert a 'nat' IP to a 'routed_ipv4'. */
+  /** Should have no effect. */
   type?: IpType
   /** An array of keywords you want to tag this IP with. */
   tags?: string[]
