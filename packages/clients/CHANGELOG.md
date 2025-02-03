@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.64.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.63.0...@scaleway/sdk@2.64.0) (2025-02-03)
+
+### Features
+
+- **iam:** limit grace period duration and login attempts before locked security settings ([#1765](https://github.com/scaleway/scaleway-sdk-js/issues/1765)) ([ba251de](https://github.com/scaleway/scaleway-sdk-js/commit/ba251de7bf1f0df5205aa4b804d6b126ecaed5b1))
+- **iam:** require member's email ([#1749](https://github.com/scaleway/scaleway-sdk-js/issues/1749)) ([630b69f](https://github.com/scaleway/scaleway-sdk-js/commit/630b69f14915133184f7a383622ccd74a41133e1))
+- **iam:** return localized quota ([#1753](https://github.com/scaleway/scaleway-sdk-js/issues/1753)) ([fb7fa97](https://github.com/scaleway/scaleway-sdk-js/commit/fb7fa974919404e25ef1ad9e8024739ead2f9ba2))
+- **interlink:** add disapproved reason to link ([#1750](https://github.com/scaleway/scaleway-sdk-js/issues/1750)) ([2a13403](https://github.com/scaleway/scaleway-sdk-js/commit/2a1340392f5ac7e48193ddd9d6f9e574714ccbb9))
+- **vpc/v2:** deprecate ineffectual vpc.v2.Api.MigrateZonalPrivateNetworks call ([#1751](https://github.com/scaleway/scaleway-sdk-js/issues/1751)) ([b4b72b8](https://github.com/scaleway/scaleway-sdk-js/commit/b4b72b85a471e0315f7920e09dad5e6335280c18))
+- **vpc/v2:** drop MigrateZonalPrivateNetworks ([#1760](https://github.com/scaleway/scaleway-sdk-js/issues/1760)) ([c638994](https://github.com/scaleway/scaleway-sdk-js/commit/c6389942d9093ffba6862fe7ac5f87d621f9ac05))
+
+### Bug Fixes
+
+- **apple_silicon:** rename zone imports ([#1745](https://github.com/scaleway/scaleway-sdk-js/issues/1745)) ([a531743](https://github.com/scaleway/scaleway-sdk-js/commit/a531743c67afef62affa3895be98912702b4421a))
+- **edge_services:** rename locality imports ([#1746](https://github.com/scaleway/scaleway-sdk-js/issues/1746)) ([b7e6170](https://github.com/scaleway/scaleway-sdk-js/commit/b7e6170b770bdd2495a793256178bd1d06928f21))
+- **inference:** rename locality imports ([#1761](https://github.com/scaleway/scaleway-sdk-js/issues/1761)) ([89c9c84](https://github.com/scaleway/scaleway-sdk-js/commit/89c9c84fa1d8cd0ab62906a868236a67f9369b0d))
+- **instance:** rename locality imports ([#1747](https://github.com/scaleway/scaleway-sdk-js/issues/1747)) ([c9558a0](https://github.com/scaleway/scaleway-sdk-js/commit/c9558a00803545061b8fced0b5ef4bff93f2cf4c))
+- **webhosting:** rename locality imports ([#1758](https://github.com/scaleway/scaleway-sdk-js/issues/1758)) ([90cc4c1](https://github.com/scaleway/scaleway-sdk-js/commit/90cc4c1c5cac4b72106a65aeae64c7b5189a34f8))
+
 ## [2.63.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.62.0...@scaleway/sdk@2.63.0) (2025-01-27)
 
 ### Features
