@@ -62,7 +62,7 @@
     "husky": "9.1.7",
     "jsdom": "25.0.1",
     "lerna": "8.1.9",
-    "lint-staged": "15.4.1",
+    "lint-staged": "15.4.3",
     "prettier": "3.4.2",
     "read-pkg": "9.0.1",
     "tsc-alias": "^1.8.10",
