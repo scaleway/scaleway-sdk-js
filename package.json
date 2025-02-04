@@ -57,7 +57,7 @@
     "cross-fetch": "4.1.0",
     "cz-conventional-changelog": "3.3.0",
     "esbuild-plugin-browserslist": "0.15.0",
-    "eslint": "9.18.0",
+    "eslint": "9.19.0",
     "eslint-plugin-tsdoc": "0.4.0",
     "husky": "9.1.7",
     "jsdom": "25.0.1",
