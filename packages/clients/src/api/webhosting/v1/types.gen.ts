@@ -16,6 +16,47 @@ export type DnsRecordType =
 
 export type DnsRecordsStatus = 'unknown_status' | 'valid' | 'invalid'
 
+export type DomainAction =
+  | 'unknown_action'
+  | 'transfer'
+  | 'manage_external'
+  | 'renew'
+
+export type DomainAvailabilityAction =
+  | 'unknown_action'
+  | 'register'
+  | 'transfer'
+  | 'manage_external'
+
+export type DomainAvailabilityStatus =
+  | 'unknown_status'
+  | 'available'
+  | 'not_available'
+  | 'owned'
+  | 'validating'
+  | 'error'
+
+export type DomainDnsAction =
+  | 'unknown_dns_action'
+  | 'auto_config_all_records'
+  | 'auto_config_web_records'
+  | 'auto_config_mail_records'
+  | 'auto_config_nameservers'
+
+export type DomainStatus =
+  | 'unknown_status'
+  | 'valid'
+  | 'invalid'
+  | 'validating'
+  | 'error'
+
+export type DomainZoneOwner =
+  | 'unknown_zone_owner'
+  | 'external'
+  | 'scaleway'
+  | 'online'
+  | 'webhosting'
+
 export type HostingStatus =
   | 'unknown_status'
   | 'delivering'
@@ -290,6 +331,21 @@ export interface Website {
   sslStatus: boolean
 }
 
+export interface DomainAvailability {
+  /** Fully qualified domain name (FQDN). */
+  name: string
+  /** DNS zone associated with the domain. */
+  zoneName: string
+  /** Availability status of the domain. */
+  status: DomainAvailabilityStatus
+  /** A list of actions that can be performed on the domain. */
+  availableActions: DomainAvailabilityAction[]
+  /** Whether a hosting can be created for this domain. */
+  canCreateHosting: boolean
+  /** Price for registering the domain. */
+  price?: Money
+}
+
 export interface CheckUserOwnsDomainResponse {
   /** Indicates whether the specified project owns the domain. */
   ownsDomain: boolean
@@ -498,6 +554,36 @@ export type DnsApiGetDomainDnsRecordsRequest = {
   domain: string
 }
 
+export type DnsApiGetDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: ScwRegion
+  /** Domain name to get. */
+  domainName: string
+  /**
+   * ID of the Scaleway Project in which to get the domain to create the Web
+   * Hosting plan.
+   */
+  projectId?: string
+}
+
+export type DnsApiSearchDomainsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: ScwRegion
+  /** Domain name to search. */
+  domainName: string
+  /**
+   * ID of the Scaleway Project in which to search the domain to create the Web
+   * Hosting plan.
+   */
+  projectId?: string
+}
+
 export type DnsApiSyncDomainDnsRecordsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -512,6 +598,8 @@ export type DnsApiSyncDomainDnsRecordsRequest = {
   updateMailRecords: boolean
   /** Whether or not to synchronize all types of records. This one has priority. */
   updateAllRecords: boolean
+  /** Whether or not to synchronize domain nameservers. */
+  updateNameservers: boolean
   /** Custom records to synchronize. */
   customRecords?: SyncDomainDnsRecordsRequestRecord[]
 }
@@ -523,6 +611,19 @@ export interface DnsRecords {
   nameServers: Nameserver[]
   /** Status of the records. */
   status: DnsRecordsStatus
+}
+
+export interface Domain {
+  /** Name of the domain. */
+  name: string
+  /** Current status of the domain. */
+  status: DomainStatus
+  /** Zone owner of the domain. */
+  owner: DomainZoneOwner
+  /** A list of actions that can be performed on the domain. */
+  availableActions: DomainAction[]
+  /** A list of DNS-related actions that can be auto configured for the domain. */
+  availableDnsActions: DomainDnsAction[]
 }
 
 export type FtpAccountApiChangeFtpAccountPasswordRequest = {
@@ -932,6 +1033,11 @@ export interface ResourceSummary {
   ftpAccountsCount: number
   /** Total number of active domains in the the Web Hosting plan. */
   websitesCount: number
+}
+
+export interface SearchDomainsResponse {
+  /** List of domains availability. */
+  domainsAvailable: DomainAvailability[]
 }
 
 export interface Session {
