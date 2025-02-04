@@ -8,7 +8,10 @@ import {
   waitForResource,
 } from '../../../bridge'
 import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
-import { HOSTING_TRANSIENT_STATUSES } from './content.gen'
+import {
+  DOMAIN_TRANSIENT_STATUSES,
+  HOSTING_TRANSIENT_STATUSES,
+} from './content.gen'
 import {
   marshalDatabaseApiAssignDatabaseUserRequest,
   marshalDatabaseApiChangeDatabaseUserPasswordRequest,
@@ -28,6 +31,7 @@ import {
   unmarshalDatabase,
   unmarshalDatabaseUser,
   unmarshalDnsRecords,
+  unmarshalDomain,
   unmarshalFtpAccount,
   unmarshalHosting,
   unmarshalListControlPanelsResponse,
@@ -41,6 +45,7 @@ import {
   unmarshalMailAccount,
   unmarshalResetHostingPasswordResponse,
   unmarshalResourceSummary,
+  unmarshalSearchDomainsResponse,
   unmarshalSession,
 } from './marshalling.gen'
 import type {
@@ -61,8 +66,11 @@ import type {
   DatabaseUser,
   DnsApiCheckUserOwnsDomainRequest,
   DnsApiGetDomainDnsRecordsRequest,
+  DnsApiGetDomainRequest,
+  DnsApiSearchDomainsRequest,
   DnsApiSyncDomainDnsRecordsRequest,
   DnsRecords,
+  Domain,
   FtpAccount,
   FtpAccountApiChangeFtpAccountPasswordRequest,
   FtpAccountApiCreateFtpAccountRequest,
@@ -93,6 +101,7 @@ import type {
   OfferApiListOffersRequest,
   ResetHostingPasswordResponse,
   ResourceSummary,
+  SearchDomainsResponse,
   Session,
   WebsiteApiListWebsitesRequest,
 } from './types.gen'
@@ -427,7 +436,8 @@ export class DnsAPI extends ParentAPI {
     )
 
   /**
-   * "Check whether you own this domain or not.".
+   * Check whether you own this domain or not.. Check whether you own this
+   * domain or not.
    *
    * @param request - The request {@link DnsApiCheckUserOwnsDomainRequest}
    * @returns A Promise of CheckUserOwnsDomainResponse
@@ -449,7 +459,8 @@ export class DnsAPI extends ParentAPI {
     )
 
   /**
-   * "Synchronize your DNS records on the Elements Console and on cPanel.".
+   * Synchronize your DNS records on the Elements Console and on cPanel..
+   * Synchronize your DNS records on the Elements Console and on cPanel.
    *
    * @param request - The request {@link DnsApiSyncDomainDnsRecordsRequest}
    * @returns A Promise of DnsRecords
@@ -470,6 +481,71 @@ export class DnsAPI extends ParentAPI {
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domain', request.domain)}/sync-domain-dns-records`,
       },
       unmarshalDnsRecords,
+    )
+
+  /**
+   * Search for available domains based on domain name.. Search for available
+   * domains based on domain name.
+   *
+   * @param request - The request {@link DnsApiSearchDomainsRequest}
+   * @returns A Promise of SearchDomainsResponse
+   */
+  searchDomains = (request: Readonly<DnsApiSearchDomainsRequest>) =>
+    this.client.fetch<SearchDomainsResponse>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/search-domains`,
+        urlParams: urlParams(
+          ['domain_name', request.domainName],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
+        ),
+      },
+      unmarshalSearchDomainsResponse,
+    )
+
+  /**
+   * Retrieve detailed information about a specific domain, including its
+   * status, DNS configuration, and ownership.. Retrieve detailed information
+   * about a specific domain, including its status, DNS configuration, and
+   * ownership.
+   *
+   * @param request - The request {@link DnsApiGetDomainRequest}
+   * @returns A Promise of Domain
+   */
+  getDomain = (request: Readonly<DnsApiGetDomainRequest>) =>
+    this.client.fetch<Domain>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainName', request.domainName)}`,
+        urlParams: urlParams([
+          'project_id',
+          request.projectId ?? this.client.settings.defaultProjectId,
+        ]),
+      },
+      unmarshalDomain,
+    )
+
+  /**
+   * Waits for {@link Domain} to be in a final state.
+   *
+   * @param request - The request {@link DnsApiGetDomainRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Domain
+   */
+  waitForDomain = (
+    request: Readonly<DnsApiGetDomainRequest>,
+    options?: Readonly<WaitForOptions<Domain>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res =>
+          Promise.resolve(!DOMAIN_TRANSIENT_STATUSES.includes(res.status))),
+      this.getDomain,
+      request,
+      options,
     )
 }
 
