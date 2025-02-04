@@ -24,6 +24,8 @@ import type {
   DnsApiSyncDomainDnsRecordsRequest,
   DnsRecord,
   DnsRecords,
+  Domain,
+  DomainAvailability,
   FtpAccount,
   FtpAccountApiChangeFtpAccountPasswordRequest,
   FtpAccountApiCreateFtpAccountRequest,
@@ -53,6 +55,7 @@ import type {
   PlatformControlPanelUrls,
   ResetHostingPasswordResponse,
   ResourceSummary,
+  SearchDomainsResponse,
   Session,
   SyncDomainDnsRecordsRequestRecord,
   Website,
@@ -168,6 +171,22 @@ export const unmarshalDnsRecords = (data: unknown): DnsRecords => {
     records: unmarshalArrayOfObject(data.records, unmarshalDnsRecord),
     status: data.status,
   } as DnsRecords
+}
+
+export const unmarshalDomain = (data: unknown): Domain => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Domain' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    availableActions: data.available_actions,
+    availableDnsActions: data.available_dns_actions,
+    name: data.name,
+    owner: data.owner,
+    status: data.status,
+  } as Domain
 }
 
 const unmarshalPlatformControlPanelUrls = (
@@ -500,6 +519,40 @@ export const unmarshalResourceSummary = (data: unknown): ResourceSummary => {
   } as ResourceSummary
 }
 
+const unmarshalDomainAvailability = (data: unknown): DomainAvailability => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainAvailability' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    availableActions: data.available_actions,
+    canCreateHosting: data.can_create_hosting,
+    name: data.name,
+    price: data.price ? unmarshalMoney(data.price) : undefined,
+    status: data.status,
+    zoneName: data.zone_name,
+  } as DomainAvailability
+}
+
+export const unmarshalSearchDomainsResponse = (
+  data: unknown,
+): SearchDomainsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SearchDomainsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    domainsAvailable: unmarshalArrayOfObject(
+      data.domains_available,
+      unmarshalDomainAvailability,
+    ),
+  } as SearchDomainsResponse
+}
+
 export const unmarshalSession = (data: unknown): Session => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -593,6 +646,7 @@ export const marshalDnsApiSyncDomainDnsRecordsRequest = (
       : undefined,
   update_all_records: request.updateAllRecords,
   update_mail_records: request.updateMailRecords,
+  update_nameservers: request.updateNameservers,
   update_web_records: request.updateWebRecords,
 })
 
