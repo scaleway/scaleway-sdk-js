@@ -39,6 +39,7 @@ import type {
   RegionalApiEnableAlertManagerRequest,
   RegionalApiEnableManagedAlertsRequest,
   RegionalApiTriggerTestAlertRequest,
+  RegionalApiUpdateContactPointRequest,
   RegionalApiUpdateDataSourceRequest,
   Token,
   Usage,
@@ -66,6 +67,7 @@ export const unmarshalContactPoint = (data: unknown): ContactPoint => {
 
   return {
     email: data.email ? unmarshalContactPointEmail(data.email) : undefined,
+    receiveResolvedNotifications: data.receive_resolved_notifications,
     region: data.region,
   } as ContactPoint
 }
@@ -454,6 +456,7 @@ export const marshalRegionalApiCreateContactPointRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   project_id: request.projectId ?? defaults.defaultProjectId,
+  receive_resolved_notifications: request.receiveResolvedNotifications,
   ...resolveOneOf([
     {
       param: 'email',
@@ -534,6 +537,23 @@ export const marshalRegionalApiTriggerTestAlertRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
+export const marshalRegionalApiUpdateContactPointRequest = (
+  request: RegionalApiUpdateContactPointRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  receive_resolved_notifications: request.receiveResolvedNotifications,
+  ...resolveOneOf([
+    {
+      param: 'email',
+      value:
+        request.email !== undefined
+          ? marshalContactPointEmail(request.email, defaults)
+          : undefined,
+    },
+  ]),
 })
 
 export const marshalRegionalApiUpdateDataSourceRequest = (

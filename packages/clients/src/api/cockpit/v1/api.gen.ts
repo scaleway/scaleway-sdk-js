@@ -6,7 +6,7 @@ import {
   urlParams,
   validatePathParam,
 } from '../../../bridge'
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 import {
   marshalGlobalApiCreateGrafanaUserRequest,
   marshalGlobalApiResetGrafanaUserPasswordRequest,
@@ -21,6 +21,7 @@ import {
   marshalRegionalApiEnableAlertManagerRequest,
   marshalRegionalApiEnableManagedAlertsRequest,
   marshalRegionalApiTriggerTestAlertRequest,
+  marshalRegionalApiUpdateContactPointRequest,
   marshalRegionalApiUpdateDataSourceRequest,
   unmarshalAlertManager,
   unmarshalContactPoint,
@@ -87,6 +88,7 @@ import type {
   RegionalApiListManagedAlertsRequest,
   RegionalApiListTokensRequest,
   RegionalApiTriggerTestAlertRequest,
+  RegionalApiUpdateContactPointRequest,
   RegionalApiUpdateDataSourceRequest,
   Token,
   UsageOverview,
@@ -402,7 +404,11 @@ export class GlobalAPI extends ParentAPI {
  */
 export class RegionalAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+  public static readonly LOCALITIES: ScwRegion[] = [
+    'fr-par',
+    'nl-ams',
+    'pl-waw',
+  ]
 
   /**
    * Get the Cockpit configuration.
@@ -789,6 +795,24 @@ export class RegionalAPI extends ParentAPI {
     request: Readonly<RegionalApiListContactPointsRequest> = {},
   ) =>
     enrichForPagination('contactPoints', this.pageOfListContactPoints, request)
+
+  updateContactPoint = (
+    request: Readonly<RegionalApiUpdateContactPointRequest> = {},
+  ) =>
+    this.client.fetch<ContactPoint>(
+      {
+        body: JSON.stringify(
+          marshalRegionalApiUpdateContactPointRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/contact-points`,
+      },
+      unmarshalContactPoint,
+    )
 
   /**
    * Delete a contact point. Delete a contact point associated with the default
