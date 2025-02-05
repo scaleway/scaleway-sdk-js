@@ -7,7 +7,11 @@ import {
   validatePathParam,
   waitForResource,
 } from '../../../bridge'
-import type { Region, WaitForOptions, Zone } from '../../../bridge'
+import type {
+  Region as ScwRegion,
+  Zone as ScwZone,
+  WaitForOptions,
+} from '../../../bridge'
 import {
   CERTIFICATE_TRANSIENT_STATUSES,
   LB_TRANSIENT_STATUSES,
@@ -228,7 +232,7 @@ const jsonContentHeaders = {
  */
 export class ZonedAPI extends ParentAPI {
   /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: Zone[] = [
+  public static readonly LOCALITIES: ScwZone[] = [
     'fr-par-1',
     'fr-par-2',
     'nl-ams-1',
@@ -1467,7 +1471,11 @@ export class ZonedAPI extends ParentAPI {
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+  public static readonly LOCALITIES: ScwRegion[] = [
+    'fr-par',
+    'nl-ams',
+    'pl-waw',
+  ]
 
   protected pageOfListLbs = (request: Readonly<ListLbsRequest> = {}) =>
     this.client.fetch<ListLbsResponse>(

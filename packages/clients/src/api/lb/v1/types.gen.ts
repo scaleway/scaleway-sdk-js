@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region, Zone } from '../../../bridge'
+import type { Region as ScwRegion, Zone as ScwZone } from '../../../bridge'
 
 export type AclActionRedirectRedirectType = 'location' | 'scheme'
 
@@ -202,9 +202,9 @@ export interface Instance {
   /** Date on which the Instance was last updated. */
   updatedAt?: Date
   /** @deprecated The region the Instance is in. */
-  region?: Region
+  region?: ScwRegion
   /** The zone the Instance is in. */
-  zone: Zone
+  zone: ScwZone
 }
 
 export interface Ip {
@@ -223,9 +223,9 @@ export interface Ip {
   /** IP tags. */
   tags: string[]
   /** @deprecated The region the IP address is in. */
-  region?: Region
+  region?: ScwRegion
   /** The zone the IP address is in. */
-  zone: Zone
+  zone: ScwZone
 }
 
 /** Subscriber. */
@@ -371,9 +371,9 @@ export interface Lb {
   /** Number of routes configured on the Load Balancer. */
   routeCount: number
   /** @deprecated The region the Load Balancer is in. */
-  region?: Region
+  region?: ScwRegion
   /** The zone the Load Balancer is in. */
-  zone: Zone
+  zone: ScwZone
 }
 
 export interface AclActionRedirect {
@@ -707,9 +707,9 @@ export interface LbType {
   /** Load Balancer commercial offer type description. */
   description: string
   /** @deprecated The region the Load Balancer stock is in. */
-  region?: Region
+  region?: ScwRegion
   /** The zone the Load Balancer stock is in. */
-  zone: Zone
+  zone: ScwZone
 }
 
 export interface Route {
@@ -756,7 +756,7 @@ export type AddBackendServersRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Backend ID. */
   backendId: string
   /** List of IP addresses to add to backend servers. */
@@ -768,7 +768,7 @@ export type AttachPrivateNetworkRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Load Balancer ID. */
   lbId: string
   /** Private Network ID. */
@@ -811,7 +811,7 @@ export type CreateAclRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Frontend ID to attach the ACL to. */
   frontendId: string
   /** ACL name. */
@@ -837,7 +837,7 @@ export type CreateBackendRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Load Balancer ID. */
   lbId: string
   /** Name for the backend. */
@@ -924,7 +924,7 @@ export type CreateCertificateRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Load Balancer ID. */
   lbId: string
   /** Name for the certificate. */
@@ -950,7 +950,7 @@ export type CreateFrontendRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Load Balancer ID (ID of the Load Balancer to attach the frontend to). */
   lbId: string
   /** Name for the frontend. */
@@ -974,7 +974,7 @@ export type CreateIpRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /**
    * @deprecated Organization ID of the Organization where the IP address should
    *   be created.
@@ -1003,7 +1003,7 @@ export type CreateLbRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /**
    * @deprecated Scaleway Organization to create the Load Balancer in.
    *
@@ -1062,7 +1062,7 @@ export type CreateRouteRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the source frontend to create the route on. */
   frontendId: string
   /** ID of the target backend for the route. */
@@ -1082,7 +1082,7 @@ export type CreateSubscriberRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Subscriber name. */
   name: string
   /**
@@ -1120,7 +1120,7 @@ export type DeleteAclRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ACL ID. */
   aclId: string
 }
@@ -1130,7 +1130,7 @@ export type DeleteBackendRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the backend to delete. */
   backendId: string
 }
@@ -1140,7 +1140,7 @@ export type DeleteCertificateRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Certificate ID. */
   certificateId: string
 }
@@ -1150,7 +1150,7 @@ export type DeleteFrontendRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the frontend to delete. */
   frontendId: string
 }
@@ -1160,7 +1160,7 @@ export type DeleteLbRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Load Balancer to delete. */
   lbId: string
   /**
@@ -1176,7 +1176,7 @@ export type DeleteRouteRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Route ID. */
   routeId: string
 }
@@ -1186,7 +1186,7 @@ export type DeleteSubscriberRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Subscriber ID. */
   subscriberId: string
 }
@@ -1196,7 +1196,7 @@ export type DetachPrivateNetworkRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Load balancer ID. */
   lbId: string
   /** Set your instance private network id. */
@@ -1208,7 +1208,7 @@ export type GetAclRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ACL ID. */
   aclId: string
 }
@@ -1218,7 +1218,7 @@ export type GetBackendRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Backend ID. */
   backendId: string
 }
@@ -1228,7 +1228,7 @@ export type GetCertificateRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Certificate ID. */
   certificateId: string
 }
@@ -1238,7 +1238,7 @@ export type GetFrontendRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Frontend ID. */
   frontendId: string
 }
@@ -1248,7 +1248,7 @@ export type GetIpRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** IP address ID. */
   ipId: string
 }
@@ -1258,7 +1258,7 @@ export type GetLbRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Load Balancer ID. */
   lbId: string
 }
@@ -1269,7 +1269,7 @@ export type GetLbStatsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Load Balancer ID. */
   lbId: string
   /** ID of the backend. */
@@ -1281,7 +1281,7 @@ export type GetRouteRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Route ID. */
   routeId: string
 }
@@ -1291,7 +1291,7 @@ export type GetSubscriberRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Subscriber ID. */
   subscriberId: string
 }
@@ -1313,7 +1313,7 @@ export type ListAclsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /**
    * Frontend ID (ACLs attached to this frontend will be returned in the
    * response).
@@ -1334,7 +1334,7 @@ export type ListBackendStatsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Load Balancer ID. */
   lbId: string
   /** The page number to return, from the paginated results. */
@@ -1357,7 +1357,7 @@ export type ListBackendsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Load Balancer ID. */
   lbId: string
   /** Name of the backend to filter for. */
@@ -1382,7 +1382,7 @@ export type ListCertificatesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Load Balancer ID. */
   lbId: string
   /** Sort order of certificates in the response. */
@@ -1410,7 +1410,7 @@ export type ListFrontendsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Load Balancer ID. */
   lbId: string
   /** Name of the frontend to filter for. */
@@ -1435,7 +1435,7 @@ export type ListIPsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** The page number to return, from the paginated results. */
   page?: number
   /** Number of IP addresses to return. */
@@ -1473,7 +1473,7 @@ export type ListLbPrivateNetworksRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Load Balancer ID. */
   lbId: string
   /** Sort order of Private Network objects in the response. */
@@ -1496,7 +1496,7 @@ export type ListLbTypesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** The page number to return, from the paginated results. */
   page?: number
   /** The number of items to return. */
@@ -1515,7 +1515,7 @@ export type ListLbsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Load Balancer name to filter for. */
   name?: string
   /** Sort order of Load Balancers in the response. */
@@ -1553,7 +1553,7 @@ export type ListRoutesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Sort order of routes in the response. */
   orderBy?: ListRoutesRequestOrderBy
   /** The number of route objects to return. */
@@ -1576,7 +1576,7 @@ export type ListSubscriberRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Sort order of subscribers in the response. */
   orderBy?: ListSubscriberRequestOrderBy
   /** The page number to return, from the paginated results. */
@@ -1603,7 +1603,7 @@ export type MigrateLbRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Load Balancer ID. */
   lbId: string
   /**
@@ -1618,7 +1618,7 @@ export type ReleaseIpRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** IP address ID. */
   ipId: string
 }
@@ -1628,7 +1628,7 @@ export type RemoveBackendServersRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Backend ID. */
   backendId: string
   /** List of IP addresses to remove from backend servers. */
@@ -1647,7 +1647,7 @@ export type SetBackendServersRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Backend ID. */
   backendId: string
   /**
@@ -1662,7 +1662,7 @@ export type SubscribeToLbRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Load Balancer ID. */
   lbId: string
   /** Subscriber ID. */
@@ -1674,7 +1674,7 @@ export type UnsubscribeFromLbRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Load Balancer ID. */
   lbId: string
 }
@@ -1684,7 +1684,7 @@ export type UpdateAclRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ACL ID. */
   aclId: string
   /** ACL name. */
@@ -1710,7 +1710,7 @@ export type UpdateBackendRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Backend ID. */
   backendId: string
   /** Backend name. */
@@ -1787,7 +1787,7 @@ export type UpdateCertificateRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Certificate ID. */
   certificateId: string
   /** Certificate name. */
@@ -1799,7 +1799,7 @@ export type UpdateFrontendRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Frontend ID. */
   frontendId: string
   /** Frontend name. */
@@ -1823,7 +1823,7 @@ export type UpdateHealthCheckRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Backend ID. */
   backendId: string
   /** Port to use for the backend server health check. */
@@ -1910,7 +1910,7 @@ export type UpdateIpRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** IP address ID. */
   ipId: string
   /** Reverse DNS (domain name) for the IP address. */
@@ -1926,7 +1926,7 @@ export type UpdateLbRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Load Balancer ID. */
   lbId: string
   /** Load Balancer name. */
@@ -1951,7 +1951,7 @@ export type UpdateRouteRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Route ID. */
   routeId: string
   /** ID of the target backend for the route. */
@@ -1970,7 +1970,7 @@ export type UpdateSubscriberRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Subscriber ID. */
   subscriberId: string
   /** Subscriber name. */
@@ -1993,7 +1993,7 @@ export type UpdateSubscriberRequest = {
 
 export type ZonedApiAddBackendServersRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Backend ID. */
   backendId: string
   /** List of IP addresses to add to backend servers. */
@@ -2002,7 +2002,7 @@ export type ZonedApiAddBackendServersRequest = {
 
 export type ZonedApiAttachPrivateNetworkRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Load Balancer ID. */
   lbId: string
   /** Private Network ID. */
@@ -2042,7 +2042,7 @@ export type ZonedApiAttachPrivateNetworkRequest = {
 /** Add an ACL to a Load Balancer frontend. */
 export type ZonedApiCreateAclRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Frontend ID to attach the ACL to. */
   frontendId: string
   /** ACL name. */
@@ -2065,7 +2065,7 @@ export type ZonedApiCreateAclRequest = {
 
 export type ZonedApiCreateBackendRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Load Balancer ID. */
   lbId: string
   /** Name for the backend. */
@@ -2149,7 +2149,7 @@ export type ZonedApiCreateBackendRequest = {
 
 export type ZonedApiCreateCertificateRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Load Balancer ID. */
   lbId: string
   /** Name for the certificate. */
@@ -2172,7 +2172,7 @@ export type ZonedApiCreateCertificateRequest = {
 
 export type ZonedApiCreateFrontendRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Load Balancer ID (ID of the Load Balancer to attach the frontend to). */
   lbId: string
   /** Name for the frontend. */
@@ -2193,7 +2193,7 @@ export type ZonedApiCreateFrontendRequest = {
 
 export type ZonedApiCreateIpRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /**
    * @deprecated Organization ID of the Organization where the IP address should
    *   be created.
@@ -2219,7 +2219,7 @@ export type ZonedApiCreateIpRequest = {
 
 export type ZonedApiCreateLbRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /**
    * @deprecated Scaleway Organization to create the Load Balancer in.
    *
@@ -2275,7 +2275,7 @@ export type ZonedApiCreateLbRequest = {
 
 export type ZonedApiCreateRouteRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the source frontend to create the route on. */
   frontendId: string
   /** ID of the target backend for the route. */
@@ -2292,7 +2292,7 @@ export type ZonedApiCreateRouteRequest = {
 /** Create a new alert subscriber (webhook or email). */
 export type ZonedApiCreateSubscriberRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Subscriber name. */
   name: string
   /**
@@ -2327,35 +2327,35 @@ export type ZonedApiCreateSubscriberRequest = {
 
 export type ZonedApiDeleteAclRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ACL ID. */
   aclId: string
 }
 
 export type ZonedApiDeleteBackendRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the backend to delete. */
   backendId: string
 }
 
 export type ZonedApiDeleteCertificateRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Certificate ID. */
   certificateId: string
 }
 
 export type ZonedApiDeleteFrontendRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the frontend to delete. */
   frontendId: string
 }
 
 export type ZonedApiDeleteLbRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the Load Balancer to delete. */
   lbId: string
   /**
@@ -2368,21 +2368,21 @@ export type ZonedApiDeleteLbRequest = {
 
 export type ZonedApiDeleteRouteRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Route ID. */
   routeId: string
 }
 
 export type ZonedApiDeleteSubscriberRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Subscriber ID. */
   subscriberId: string
 }
 
 export type ZonedApiDetachPrivateNetworkRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Load balancer ID. */
   lbId: string
   /** Set your instance private network id. */
@@ -2391,42 +2391,42 @@ export type ZonedApiDetachPrivateNetworkRequest = {
 
 export type ZonedApiGetAclRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ACL ID. */
   aclId: string
 }
 
 export type ZonedApiGetBackendRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Backend ID. */
   backendId: string
 }
 
 export type ZonedApiGetCertificateRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Certificate ID. */
   certificateId: string
 }
 
 export type ZonedApiGetFrontendRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Frontend ID. */
   frontendId: string
 }
 
 export type ZonedApiGetIpRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** IP address ID. */
   ipId: string
 }
 
 export type ZonedApiGetLbRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Load Balancer ID. */
   lbId: string
 }
@@ -2434,7 +2434,7 @@ export type ZonedApiGetLbRequest = {
 /** Get Load Balancer stats. */
 export type ZonedApiGetLbStatsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Load Balancer ID. */
   lbId: string
   /** ID of the backend. */
@@ -2443,21 +2443,21 @@ export type ZonedApiGetLbStatsRequest = {
 
 export type ZonedApiGetRouteRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Route ID. */
   routeId: string
 }
 
 export type ZonedApiGetSubscriberRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Subscriber ID. */
   subscriberId: string
 }
 
 export type ZonedApiListAclsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /**
    * Frontend ID (ACLs attached to this frontend will be returned in the
    * response).
@@ -2475,7 +2475,7 @@ export type ZonedApiListAclsRequest = {
 
 export type ZonedApiListBackendStatsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Load Balancer ID. */
   lbId: string
   /** The page number to return, from the paginated results. */
@@ -2488,7 +2488,7 @@ export type ZonedApiListBackendStatsRequest = {
 
 export type ZonedApiListBackendsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Load Balancer ID. */
   lbId: string
   /** Name of the backend to filter for. */
@@ -2503,7 +2503,7 @@ export type ZonedApiListBackendsRequest = {
 
 export type ZonedApiListCertificatesRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Load Balancer ID. */
   lbId: string
   /** Sort order of certificates in the response. */
@@ -2521,7 +2521,7 @@ export type ZonedApiListCertificatesRequest = {
 
 export type ZonedApiListFrontendsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Load Balancer ID. */
   lbId: string
   /** Name of the frontend to filter for. */
@@ -2536,7 +2536,7 @@ export type ZonedApiListFrontendsRequest = {
 
 export type ZonedApiListIPsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** The page number to return, from the paginated results. */
   page?: number
   /** Number of IP addresses to return. */
@@ -2564,7 +2564,7 @@ export type ZonedApiListIPsRequest = {
 
 export type ZonedApiListLbPrivateNetworksRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Load Balancer ID. */
   lbId: string
   /** Sort order of Private Network objects in the response. */
@@ -2577,7 +2577,7 @@ export type ZonedApiListLbPrivateNetworksRequest = {
 
 export type ZonedApiListLbTypesRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** The page number to return, from the paginated results. */
   page?: number
   /** The number of items to return. */
@@ -2586,7 +2586,7 @@ export type ZonedApiListLbTypesRequest = {
 
 export type ZonedApiListLbsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Load Balancer name to filter for. */
   name?: string
   /** Sort order of Load Balancers in the response. */
@@ -2614,7 +2614,7 @@ export type ZonedApiListLbsRequest = {
 
 export type ZonedApiListRoutesRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Sort order of routes in the response. */
   orderBy?: ListRoutesRequestOrderBy
   /** The number of route objects to return. */
@@ -2627,7 +2627,7 @@ export type ZonedApiListRoutesRequest = {
 
 export type ZonedApiListSubscriberRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Sort order of subscribers in the response. */
   orderBy?: ListSubscriberRequestOrderBy
   /** The page number to return, from the paginated results. */
@@ -2644,7 +2644,7 @@ export type ZonedApiListSubscriberRequest = {
 
 export type ZonedApiMigrateLbRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Load Balancer ID. */
   lbId: string
   /**
@@ -2656,14 +2656,14 @@ export type ZonedApiMigrateLbRequest = {
 
 export type ZonedApiReleaseIpRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** IP address ID. */
   ipId: string
 }
 
 export type ZonedApiRemoveBackendServersRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Backend ID. */
   backendId: string
   /** List of IP addresses to remove from backend servers. */
@@ -2672,7 +2672,7 @@ export type ZonedApiRemoveBackendServersRequest = {
 
 export type ZonedApiSetAclsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Frontend ID. */
   frontendId: string
   /**
@@ -2684,7 +2684,7 @@ export type ZonedApiSetAclsRequest = {
 
 export type ZonedApiSetBackendServersRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Backend ID. */
   backendId: string
   /**
@@ -2696,7 +2696,7 @@ export type ZonedApiSetBackendServersRequest = {
 
 export type ZonedApiSubscribeToLbRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Load Balancer ID. */
   lbId: string
   /** Subscriber ID. */
@@ -2705,14 +2705,14 @@ export type ZonedApiSubscribeToLbRequest = {
 
 export type ZonedApiUnsubscribeFromLbRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Load Balancer ID. */
   lbId: string
 }
 
 export type ZonedApiUpdateAclRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ACL ID. */
   aclId: string
   /** ACL name. */
@@ -2735,7 +2735,7 @@ export type ZonedApiUpdateAclRequest = {
 
 export type ZonedApiUpdateBackendRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Backend ID. */
   backendId: string
   /** Backend name. */
@@ -2809,7 +2809,7 @@ export type ZonedApiUpdateBackendRequest = {
 
 export type ZonedApiUpdateCertificateRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Certificate ID. */
   certificateId: string
   /** Certificate name. */
@@ -2818,7 +2818,7 @@ export type ZonedApiUpdateCertificateRequest = {
 
 export type ZonedApiUpdateFrontendRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Frontend ID. */
   frontendId: string
   /** Frontend name. */
@@ -2839,7 +2839,7 @@ export type ZonedApiUpdateFrontendRequest = {
 
 export type ZonedApiUpdateHealthCheckRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Backend ID. */
   backendId: string
   /** Port to use for the backend server health check. */
@@ -2923,7 +2923,7 @@ export type ZonedApiUpdateHealthCheckRequest = {
 
 export type ZonedApiUpdateIpRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** IP address ID. */
   ipId: string
   /** Reverse DNS (domain name) for the IP address. */
@@ -2936,7 +2936,7 @@ export type ZonedApiUpdateIpRequest = {
 
 export type ZonedApiUpdateLbRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Load Balancer ID. */
   lbId: string
   /** Load Balancer name. */
@@ -2958,7 +2958,7 @@ export type ZonedApiUpdateLbRequest = {
 
 export type ZonedApiUpdateRouteRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Route ID. */
   routeId: string
   /** ID of the target backend for the route. */
@@ -2974,7 +2974,7 @@ export type ZonedApiUpdateRouteRequest = {
 
 export type ZonedApiUpdateSubscriberRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Subscriber ID. */
   subscriberId: string
   /** Subscriber name. */
