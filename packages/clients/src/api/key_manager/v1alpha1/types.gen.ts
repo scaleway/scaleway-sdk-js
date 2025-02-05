@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 
 export type DataKeyAlgorithmSymmetricEncryption =
   | 'unknown_symmetric_encryption'
@@ -28,11 +28,11 @@ export type ListKeysRequestOrderBy =
 
 export interface KeyRotationPolicy {
   /**
-   * Duration between two key rotations. The minimum duration is 24 hours and
-   * the maximum duration is 876000 hours (1 year).
+   * Time interval between two key rotations. The minimum duration is 24 hours
+   * and the maximum duration is 1 year (876000 hours).
    */
   rotationPeriod?: string
-  /** Date at which the key will be rotated next. */
+  /** Timestamp indicating the next scheduled rotation. */
   nextRotationAt?: Date
 }
 
@@ -54,14 +54,14 @@ export interface Key {
   /** Name of the key. */
   name: string
   /**
-   * Keys with a usage set to `symmetric_encryption` are used to encrypt and
-   * decrypt data. The only key algorithm currently supported by Key Manager is
-   * AES-256-GCM.
+   * Keys with a usage set to `symmetric_encryption` can encrypt and decrypt
+   * data using the `AES-256-GCM` key algorithm. Key Manager currently only
+   * supports `AES-256-GCM`.
    */
   usage?: KeyUsage
-  /** See the `Key.State` enum for a description of values. */
+  /** See the `Key.State` enum for a description of possible values. */
   state: KeyState
-  /** The rotation count tracks the amount of times that the key was rotated. */
+  /** The rotation count tracks the number of times the key has been rotated. */
   rotationCount: number
   /** Key creation date. */
   createdAt?: Date
@@ -81,8 +81,8 @@ export interface Key {
   rotationPolicy?: KeyRotationPolicy
   /** Refer to the `Key.Origin` enum for a description of values. */
   origin: KeyOrigin
-  /** Region of the key. */
-  region: Region
+  /** Region where the key is stored. */
+  region: ScwRegion
 }
 
 export type CreateKeyRequest = {
@@ -90,7 +90,7 @@ export type CreateKeyRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Project containing the key. */
   projectId?: string
   /** (Optional) Name of the key. */
@@ -115,7 +115,7 @@ export type CreateKeyRequest = {
 export interface DataKey {
   /** ID of the data encryption key. */
   keyId: string
-  /** Symmetric encryption algorithm of the data encryption key. */
+  /** Symmetric encryption algorithm of the data encryption key (`AES-256-GCM`). */
   algorithm: DataKeyAlgorithmSymmetricEncryption
   /**
    * Your data encryption key's ciphertext can be stored safely. It can only be
@@ -137,7 +137,7 @@ export type DecryptRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the key to decrypt. */
   keyId: string
   /** Data size must be between 1 and 131071 bytes. */
@@ -163,7 +163,7 @@ export type DeleteKeyMaterialRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the key of which to delete the key material. */
   keyId: string
 }
@@ -173,7 +173,7 @@ export type DeleteKeyRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the key to delete. */
   keyId: string
 }
@@ -183,7 +183,7 @@ export type DisableKeyRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the key to disable. */
   keyId: string
 }
@@ -193,7 +193,7 @@ export type EnableKeyRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the key to enable. */
   keyId: string
 }
@@ -203,7 +203,7 @@ export type EncryptRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the key to encrypt. */
   keyId: string
   /** Data size must be between 1 and 65535 bytes. */
@@ -227,7 +227,7 @@ export type GenerateDataKeyRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the key. */
   keyId: string
   /**
@@ -248,7 +248,7 @@ export type GetKeyRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the key to target. */
   keyId: string
 }
@@ -258,8 +258,8 @@ export type ImportKeyMaterialRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
-  /** The key's origin must be 'external'. */
+  region?: ScwRegion
+  /** The key's origin must be `external`. */
   keyId: string
   /**
    * The key material The key material is a random sequence of bytes used to
@@ -267,8 +267,9 @@ export type ImportKeyMaterialRequest = {
    */
   keyMaterial: string
   /**
-   * A salt can be used to improve the quality of randomness when the key
-   * material is generated from a low entropy source.
+   * A salt is random data added to key material to ensure unique derived keys,
+   * even if the input is similar. It helps strengthen security when the key
+   * material has low randomness (low entropy).
    */
   salt?: string
 }
@@ -278,7 +279,7 @@ export type ListKeysRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** (Optional) Filter by Organization ID. */
   organizationId?: string
   /** (Optional) Filter by Project ID. */
@@ -304,7 +305,7 @@ export type ProtectKeyRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the key to apply key protection to. */
   keyId: string
 }
@@ -314,7 +315,7 @@ export type RotateKeyRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the key to rotate. */
   keyId: string
 }
@@ -324,7 +325,7 @@ export type UnprotectKeyRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the key to remove key protection from. */
   keyId: string
 }
@@ -334,7 +335,7 @@ export type UpdateKeyRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the key to update. */
   keyId: string
   /** (Optional) Updated name of the key. */
