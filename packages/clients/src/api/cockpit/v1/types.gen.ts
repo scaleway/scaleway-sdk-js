@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 
 export type DataSourceOrigin =
   | 'unknown_origin'
@@ -72,11 +72,10 @@ export interface ContactPoint {
    * One-of ('configuration'): at most one of 'email' could be set.
    */
   email?: ContactPointEmail
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region: Region
+  /** Region. */
+  region: ScwRegion
+  /** Send an email notification when an alert is marked as resolved. */
+  receiveResolvedNotifications: boolean
 }
 
 /** Data source. */
@@ -102,7 +101,7 @@ export interface DataSource {
   /** BETA - Duration for which the data will be retained in the data source. */
   retentionDays: number
   /** Region of the data source. */
-  region: Region
+  region: ScwRegion
 }
 
 /** Grafana dashboard. */
@@ -176,7 +175,7 @@ export interface Token {
   /** Token secret key. */
   secretKey?: string
   /** Regions where the token is located. */
-  region: Region
+  region: ScwRegion
 }
 
 /** Data source usage. */
@@ -196,7 +195,7 @@ export interface Usage {
   /** Data source usage for the given interval. */
   quantityOverInterval: number
   /** Region of the data source usage. */
-  region: Region
+  region: ScwRegion
 }
 
 /** Alert manager information. */
@@ -208,7 +207,7 @@ export interface AlertManager {
   /** Managed alerts are enabled. */
   managedAlertsEnabled: boolean
   /** Regions where the Alert manager is enabled. */
-  region: Region
+  region: ScwRegion
 }
 
 /** Cockpit configuration. */
@@ -402,7 +401,7 @@ export type RegionalApiCreateContactPointRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Project to create the contact point in. */
   projectId?: string
   /**
@@ -411,6 +410,8 @@ export type RegionalApiCreateContactPointRequest = {
    * One-of ('configuration'): at most one of 'email' could be set.
    */
   email?: ContactPointEmail
+  /** Send an email notification when an alert is marked as resolved. */
+  receiveResolvedNotifications?: boolean
 }
 
 /** Create a data source. */
@@ -419,7 +420,7 @@ export type RegionalApiCreateDataSourceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Project the data source belongs to. */
   projectId?: string
   /** Data source name. */
@@ -436,7 +437,7 @@ export type RegionalApiCreateTokenRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Project the token belongs to. */
   projectId?: string
   /** Name of the token. */
@@ -451,7 +452,7 @@ export type RegionalApiDeleteContactPointRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Project containing the contact point to delete. */
   projectId?: string
   /**
@@ -468,7 +469,7 @@ export type RegionalApiDeleteDataSourceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the data source to delete. */
   dataSourceId: string
 }
@@ -479,7 +480,7 @@ export type RegionalApiDeleteTokenRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the token to delete. */
   tokenId: string
 }
@@ -490,7 +491,7 @@ export type RegionalApiDisableAlertManagerRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Project to disable the Alert manager in. */
   projectId?: string
 }
@@ -501,7 +502,7 @@ export type RegionalApiDisableManagedAlertsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Project. */
   projectId?: string
 }
@@ -512,7 +513,7 @@ export type RegionalApiEnableAlertManagerRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Project to enable the Alert manager in. */
   projectId?: string
 }
@@ -523,7 +524,7 @@ export type RegionalApiEnableManagedAlertsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Project. */
   projectId?: string
 }
@@ -534,7 +535,7 @@ export type RegionalApiGetAlertManagerRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Project ID of the requested Alert manager. */
   projectId?: string
 }
@@ -545,7 +546,7 @@ export type RegionalApiGetConfigRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
 }
 
 /** Retrieve a data source. */
@@ -554,7 +555,7 @@ export type RegionalApiGetDataSourceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the relevant data source. */
   dataSourceId: string
 }
@@ -565,7 +566,7 @@ export type RegionalApiGetTokenRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Token ID. */
   tokenId: string
 }
@@ -575,7 +576,7 @@ export type RegionalApiGetUsageOverviewRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   projectId?: string
   interval?: string
 }
@@ -586,7 +587,7 @@ export type RegionalApiListContactPointsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number to return, from the paginated results. */
   page?: number
   /** Total count of contact points to return per page. */
@@ -601,7 +602,7 @@ export type RegionalApiListDataSourcesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number to return, from the paginated results. */
   page?: number
   /** Number of data sources to return per page. */
@@ -631,7 +632,7 @@ export type RegionalApiListManagedAlertsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number to return, from the paginated results. */
   page?: number
   /** Number of data sources to return per page. */
@@ -651,7 +652,7 @@ export type RegionalApiListTokensRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number to return, from the paginated results. */
   page?: number
   /** Number of tokens to return per page. */
@@ -670,9 +671,28 @@ export type RegionalApiTriggerTestAlertRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Project. */
   projectId?: string
+}
+
+/** Update a contact point. */
+export type RegionalApiUpdateContactPointRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: ScwRegion
+  /** ID of the Project containing the contact point to update. */
+  projectId?: string
+  /**
+   * Email address of the contact point to update.
+   *
+   * One-of ('configuration'): at most one of 'email' could be set.
+   */
+  email?: ContactPointEmail
+  /** Enable or disable notifications when alert is resolved. */
+  receiveResolvedNotifications?: boolean
 }
 
 /** Update a data source name. */
@@ -681,7 +701,7 @@ export type RegionalApiUpdateDataSourceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the data source to update. */
   dataSourceId: string
   /** Updated name of the data source. */
