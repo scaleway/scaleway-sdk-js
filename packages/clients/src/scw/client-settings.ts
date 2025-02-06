@@ -10,14 +10,14 @@ import {
   isURL,
   isZone,
 } from '../internal/validations/string-validation'
-import type { ProfileDefaultValues } from './client-ini-profile'
+import type { Profile } from './client-ini-profile'
 
 /**
  * Holds default values of settings.
  *
  * @public
  */
-export type DefaultValues = ProfileDefaultValues & {
+export type DefaultValues = Profile & {
   /**
    * The default number of results when requesting a paginated resource.
    */
