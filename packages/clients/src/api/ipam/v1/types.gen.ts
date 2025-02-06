@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region, Zone } from '../../../bridge'
+import type { Region as ScwRegion, Zone as ScwZone } from '../../../bridge'
 
 export type ListIPsRequestOrderBy =
   | 'created_at_desc'
@@ -30,6 +30,8 @@ export type ResourceType =
   | 'mgdb_instance'
   | 'apple_silicon_server'
   | 'apple_silicon_private_nic'
+  | 'serverless_container'
+  | 'serverless_function'
 
 export interface Resource {
   /** Type of resource the IP is attached to. */
@@ -108,9 +110,9 @@ export interface IP {
   /** Array of reverses associated with the IP. */
   reverses: Reverse[]
   /** Region of the IP. */
-  region: Region
+  region: ScwRegion
   /** Zone of the IP, if zonal. */
-  zone?: Zone
+  zone?: ScwZone
 }
 
 export type AttachIPRequest = {
@@ -118,7 +120,7 @@ export type AttachIPRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** IP ID. */
   ipId: string
   /** Custom resource to be attached to the IP. */
@@ -130,7 +132,7 @@ export type BookIPRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /**
    * When creating an IP in a Private Network, the Project must match the
    * Private Network's Project.
@@ -165,7 +167,7 @@ export type DetachIPRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** IP ID. */
   ipId: string
   /** Custom resource currently attached to the IP. */
@@ -177,7 +179,7 @@ export type GetIPRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** IP ID. */
   ipId: string
 }
@@ -187,7 +189,7 @@ export type ListIPsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Sort order of the returned IPs. */
   orderBy?: ListIPsRequestOrderBy
   /** Page number to return, from the paginated results. */
@@ -281,7 +283,7 @@ export type MoveIPRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** IP ID. */
   ipId: string
   /** Custom resource currently attached to the IP. */
@@ -295,7 +297,7 @@ export type ReleaseIPRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** IP ID. */
   ipId: string
 }
@@ -305,7 +307,7 @@ export type ReleaseIPSetRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   ipIds?: string[]
 }
 
@@ -314,7 +316,7 @@ export type UpdateIPRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** IP ID. */
   ipId: string
   /** Tags for the IP. */
