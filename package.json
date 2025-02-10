@@ -44,8 +44,8 @@
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "19.6.1",
-    "@commitlint/config-conventional": "19.6.0",
+    "@commitlint/cli": "19.7.1",
+    "@commitlint/config-conventional": "19.7.1",
     "@scaleway/eslint-config-react": "4.0.9",
     "@typescript-eslint/eslint-plugin": "latest",
     "@vitest/coverage-istanbul": "2.1.9",
