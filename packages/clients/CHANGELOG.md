@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.65.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.64.0...@scaleway/sdk@2.65.0) (2025-02-10)
+
+### Features
+
+- **cockpit:** add received_resolved field ([#1774](https://github.com/scaleway/scaleway-sdk-js/issues/1774)) ([b7136e2](https://github.com/scaleway/scaleway-sdk-js/commit/b7136e25525e1705c34a603a825d70f9984e3da8))
+- **ipam:** register serverless_container and serverless_function ([#1782](https://github.com/scaleway/scaleway-sdk-js/issues/1782)) ([2b5cf52](https://github.com/scaleway/scaleway-sdk-js/commit/2b5cf52a066d0c63282b2550c04f3049b1591064))
+- **key_manager:** review wording ([#1776](https://github.com/scaleway/scaleway-sdk-js/issues/1776)) ([d68d48c](https://github.com/scaleway/scaleway-sdk-js/commit/d68d48c937204eff73a8e4488d8c16a3543a784d))
+- **lb:** add bool to match subdomains in routes ([#1773](https://github.com/scaleway/scaleway-sdk-js/issues/1773)) ([bc6df3f](https://github.com/scaleway/scaleway-sdk-js/commit/bc6df3fbff76665904c2fc88fd8f90dee908f975))
+- **webhosting:** add public search domains ([#1767](https://github.com/scaleway/scaleway-sdk-js/issues/1767)) ([ee7bf2a](https://github.com/scaleway/scaleway-sdk-js/commit/ee7bf2a9e61a46c87bcbb1cb5fb93704c3648e56))
+
 ## [2.64.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.63.0...@scaleway/sdk@2.64.0) (2025-02-03)
 
 ### Features
