@@ -8,6 +8,7 @@ import {
 import type {
   Event,
   EventPrincipal,
+  KeyManagerKeyInfo,
   KubernetesACLInfo,
   KubernetesClusterInfo,
   KubernetesNodeInfo,
@@ -20,6 +21,16 @@ import type {
   SecretManagerSecretInfo,
   SecretManagerSecretVersionInfo,
 } from './types.gen'
+
+const unmarshalKeyManagerKeyInfo = (data: unknown): KeyManagerKeyInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'KeyManagerKeyInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as KeyManagerKeyInfo
+}
 
 const unmarshalKubernetesACLInfo = (data: unknown): KubernetesACLInfo => {
   if (!isJSONObject(data)) {
@@ -120,6 +131,9 @@ export const unmarshalResource = (data: unknown): Resource => {
     createdAt: unmarshalDate(data.created_at),
     deletedAt: unmarshalDate(data.deleted_at),
     id: data.id,
+    keymKeyInfo: data.keym_key_info
+      ? unmarshalKeyManagerKeyInfo(data.keym_key_info)
+      : undefined,
     kubeAclInfo: data.kube_acl_info
       ? unmarshalKubernetesACLInfo(data.kube_acl_info)
       : undefined,
