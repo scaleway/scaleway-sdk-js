@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 
 export type ListEventsRequestOrderBy = 'recorded_at_desc' | 'recorded_at_asc'
 
@@ -12,6 +12,9 @@ export type ResourceType =
   | 'kube_pool'
   | 'kube_node'
   | 'kube_acl'
+  | 'keym_key'
+
+export interface KeyManagerKeyInfo {}
 
 export interface KubernetesACLInfo {}
 
@@ -48,40 +51,46 @@ export interface Resource {
   name?: string
   /**
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
-   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo' could be
-   * set.
+   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
+   * 'keymKeyInfo' could be set.
    */
   secmSecretInfo?: SecretManagerSecretInfo
   /**
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
-   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo' could be
-   * set.
+   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
+   * 'keymKeyInfo' could be set.
    */
   secmSecretVersionInfo?: SecretManagerSecretVersionInfo
   /**
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
-   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo' could be
-   * set.
+   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
+   * 'keymKeyInfo' could be set.
    */
   kubeClusterInfo?: KubernetesClusterInfo
   /**
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
-   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo' could be
-   * set.
+   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
+   * 'keymKeyInfo' could be set.
    */
   kubePoolInfo?: KubernetesPoolInfo
   /**
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
-   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo' could be
-   * set.
+   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
+   * 'keymKeyInfo' could be set.
    */
   kubeNodeInfo?: KubernetesNodeInfo
   /**
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
-   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo' could be
-   * set.
+   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
+   * 'keymKeyInfo' could be set.
    */
   kubeAclInfo?: KubernetesACLInfo
+  /**
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
+   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
+   * 'keymKeyInfo' could be set.
+   */
+  keymKeyInfo?: KeyManagerKeyInfo
 }
 
 export interface ProductService {
@@ -139,7 +148,7 @@ export type ListEventsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** (Optional) ID of the Project containing the Audit Trail events. */
   projectId?: string
   /** ID of the Organization containing the Audit Trail events. */
@@ -183,7 +192,7 @@ export type ListProductsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
 }
 
 export interface ListProductsResponse {
