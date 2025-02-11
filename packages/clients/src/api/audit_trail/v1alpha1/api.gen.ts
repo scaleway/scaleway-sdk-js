@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import { API as ParentAPI, urlParams, validatePathParam } from '../../../bridge'
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 import {
   unmarshalListEventsResponse,
   unmarshalListProductsResponse,
@@ -21,7 +21,7 @@ import type {
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams']
+  public static readonly LOCALITIES: ScwRegion[] = ['fr-par', 'nl-ams']
 
   /**
    * List events. Retrieve the list of Audit Trail events for a Scaleway
