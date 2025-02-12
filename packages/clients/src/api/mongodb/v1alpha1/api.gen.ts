@@ -7,7 +7,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '../../../bridge'
-import type { Region, WaitForOptions } from '../../../bridge'
+import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
 import {
   INSTANCE_TRANSIENT_STATUSES,
   SNAPSHOT_TRANSIENT_STATUSES,
@@ -70,13 +70,13 @@ const jsonContentHeaders = {
 }
 
 /**
- * Managed Database for MongoDB®.
+ * Managed MongoDB®.
  *
  * This API allows you to manage your Managed Databases for MongoDB®.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par']
+  public static readonly LOCALITIES: ScwRegion[] = ['fr-par']
 
   protected pageOfListNodeTypes = (
     request: Readonly<ListNodeTypesRequest> = {},
