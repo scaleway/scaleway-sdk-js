@@ -169,6 +169,9 @@ describe('withProfile', () => {
   })
 
   it('modifies authentication', async () => {
+    if (!DEFAULT_SETTINGS.apiURL) {
+      throw new Error('API URL is missing')
+    }
     const request = new Request(DEFAULT_SETTINGS.apiURL)
     const reqInterceptor = withProfile({
       accessKey: FILLED_PROFILE.accessKey,
