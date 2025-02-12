@@ -69,6 +69,7 @@ export type {
   Plan,
   PlanDetails,
   PlanName,
+  PlanUsageDetails,
   PurgeRequest,
   PurgeRequestStatus,
   ScalewayLb,
