@@ -10,14 +10,14 @@ import {
   isURL,
   isZone,
 } from '../internal/validations/string-validation'
-import type { ProfileDefaultValues } from './client-ini-profile'
+import type { Profile } from './client-ini-profile'
 
 /**
  * Holds default values of settings.
  *
  * @public
  */
-export type DefaultValues = ProfileDefaultValues & {
+export type DefaultValues = Profile & {
   /**
    * The default number of results when requesting a paginated resource.
    */
@@ -112,11 +112,11 @@ export const assertValidSettings = (obj: Readonly<Settings>): void => {
   }
 
   // API URL.
-  if (!isURL(obj.apiURL)) {
+  if (obj.apiURL && !isURL(obj.apiURL)) {
     throw new Error(`Invalid URL ${obj.apiURL}`)
   }
 
-  if (obj.apiURL.endsWith('/')) {
+  if (obj.apiURL?.endsWith('/')) {
     throw new Error(
       `Invalid URL ${obj.apiURL}: it should not have a trailing slash`,
     )
