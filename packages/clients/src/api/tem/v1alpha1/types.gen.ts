@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 
 export type BlocklistType =
   | 'unknown_type'
@@ -317,7 +317,7 @@ export interface Domain {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region: Region
+  region: ScwRegion
 }
 
 export interface WebhookEvent {
@@ -399,7 +399,7 @@ export type BulkCreateBlocklistsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Domain ID linked to the blocklist. */
   domainId: string
   /** Email blocked by the blocklist. */
@@ -420,7 +420,7 @@ export type CancelEmailRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the email to cancel. */
   emailId: string
 }
@@ -430,7 +430,7 @@ export type CheckDomainRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the domain to check. */
   domainId: string
 }
@@ -440,7 +440,7 @@ export type CreateDomainRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the project to which the domain belongs. */
   projectId?: string
   /** Fully qualified domain dame. */
@@ -456,7 +456,7 @@ export type CreateEmailRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Sender information. Must be from a checked domain declared in the Project. */
   from: CreateEmailRequestAddress
   /** An array of the primary recipient's information. */
@@ -491,7 +491,7 @@ export type CreateWebhookRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Domain to watch for triggering events. */
   domainId: string
   /** ID of the project to which the Webhook belongs. */
@@ -509,7 +509,7 @@ export type DeleteBlocklistRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the blocklist to delete. */
   blocklistId: string
 }
@@ -519,7 +519,7 @@ export type DeleteWebhookRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Webhook to delete. */
   webhookId: string
 }
@@ -544,7 +544,7 @@ export type GetDomainLastStatusRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the domain to delete. */
   domainId: string
 }
@@ -554,7 +554,7 @@ export type GetDomainRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the domain. */
   domainId: string
 }
@@ -564,7 +564,7 @@ export type GetEmailRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the email to retrieve. */
   emailId: string
 }
@@ -574,7 +574,7 @@ export type GetProjectSettingsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the project. */
   projectId?: string
 }
@@ -584,7 +584,7 @@ export type GetStatisticsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** (Optional) Number of emails for this Project. */
   projectId?: string
   /**
@@ -605,7 +605,7 @@ export type GetWebhookRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Webhook to check. */
   webhookId: string
 }
@@ -615,7 +615,7 @@ export type ListBlocklistsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** (Optional) List blocklist corresponding to specific criteria. */
   orderBy?: ListBlocklistsRequestOrderBy
   /** (Optional) Requested page number. Value must be greater or equal to 1. */
@@ -647,7 +647,7 @@ export type ListDomainsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Requested page number. Value must be greater or equal to 1. */
   page?: number
   /** Requested page size. Value must be between 1 and 1000. */
@@ -674,7 +674,7 @@ export type ListEmailsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   page?: number
   pageSize?: number
   /** (Optional) ID of the Project in which to list the emails. */
@@ -717,7 +717,7 @@ export type ListWebhookEventsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Webhook linked to the events. */
   webhookId: string
   /** (Optional) List Webhook events corresponding to specific criteria. */
@@ -752,7 +752,7 @@ export type ListWebhooksRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** (Optional) List Webhooks corresponding to specific criteria. */
   orderBy?: ListWebhooksRequestOrderBy
   /** (Optional) Requested page number. Value must be greater or equal to 1. */
@@ -784,7 +784,7 @@ export type RevokeDomainRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the domain to delete. */
   domainId: string
 }
@@ -824,7 +824,7 @@ export type UpdateDomainRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the domain to update. */
   domainId: string
   /**
@@ -839,7 +839,7 @@ export type UpdateProjectSettingsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the project. */
   projectId?: string
   /** Periodic report update details - all fields are optional. */
@@ -851,7 +851,7 @@ export type UpdateWebhookRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Webhook to update. */
   webhookId: string
   /** Name of the Webhook to update. */

@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Zone } from '../../../bridge'
+import type { Zone as ScwZone } from '../../../bridge'
 
 export type ListImagesRequestOrderBy =
   | 'name_asc'
@@ -58,7 +58,7 @@ export interface LocalImage {
   /** Supported architecture for this local image. */
   arch: string
   /** Availability Zone where this local image is available. */
-  zone: Zone
+  zone: ScwZone
   /** This label can be used in the image field of the server creation request. */
   label: string
   /** Type of this local image. */
@@ -139,7 +139,7 @@ export type ListLocalImagesRequest = {
   /** Ordering to use. */
   orderBy?: ListLocalImagesRequestOrderBy
   /** Filter local images available on this Availability Zone. */
-  zone?: Zone
+  zone?: ScwZone
   /**
    * Filter by image id.
    *

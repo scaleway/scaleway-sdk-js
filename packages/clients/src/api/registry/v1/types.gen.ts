@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 
 export type ImageStatus = 'unknown' | 'ready' | 'deleting' | 'error' | 'locked'
 
@@ -101,7 +101,7 @@ export interface Namespace {
   /** Number of images in the namespace. */
   imageCount: number
   /** Region the namespace belongs to. */
-  region: Region
+  region: ScwRegion
 }
 
 export interface Tag {
@@ -129,7 +129,7 @@ export type CreateNamespaceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Name of the namespace. */
   name?: string
   /** Description of the namespace. */
@@ -157,7 +157,7 @@ export type DeleteImageRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the image. */
   imageId: string
 }
@@ -167,7 +167,7 @@ export type DeleteNamespaceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the namespace. */
   namespaceId: string
 }
@@ -177,7 +177,7 @@ export type DeleteTagRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the tag. */
   tagId: string
   /**
@@ -192,7 +192,7 @@ export type GetImageRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the image. */
   imageId: string
 }
@@ -202,7 +202,7 @@ export type GetNamespaceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the namespace. */
   namespaceId: string
 }
@@ -212,7 +212,7 @@ export type GetTagRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the tag. */
   tagId: string
 }
@@ -222,7 +222,7 @@ export type ListImagesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** A positive integer to choose the page to display. */
   page?: number
   /**
@@ -258,7 +258,7 @@ export type ListNamespacesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** A positive integer to choose the page to display. */
   page?: number
   /**
@@ -292,7 +292,7 @@ export type ListTagsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the image. */
   imageId: string
   /** A positive integer to choose the page to display. */
@@ -324,7 +324,7 @@ export type UpdateImageRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the image to update. */
   imageId: string
   /**
@@ -340,7 +340,7 @@ export type UpdateNamespaceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the namespace to update. */
   namespaceId: string
   /** Namespace description. */

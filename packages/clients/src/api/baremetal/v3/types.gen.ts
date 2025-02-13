@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Zone } from '../../../bridge'
+import type { Zone as ScwZone } from '../../../bridge'
 
 export type ListServerPrivateNetworksRequestOrderBy =
   | 'created_at_asc'
@@ -44,7 +44,7 @@ export interface ListServerPrivateNetworksResponse {
 
 export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the server. */
   serverId: string
   /** UUID of the Private Network. */
@@ -55,7 +55,7 @@ export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
 
 export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the server. */
   serverId: string
   /** UUID of the Private Network. */
@@ -64,7 +64,7 @@ export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
 
 export type PrivateNetworkApiListServerPrivateNetworksRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Sort order for the returned Private Networks. */
   orderBy?: ListServerPrivateNetworksRequestOrderBy
   /** Page number for the returned Private Networks. */
@@ -85,7 +85,7 @@ export type PrivateNetworkApiListServerPrivateNetworksRequest = {
 
 export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the server. */
   serverId: string
   /**

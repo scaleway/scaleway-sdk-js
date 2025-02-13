@@ -7,7 +7,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '../../../bridge'
-import type { Region, WaitForOptions } from '../../../bridge'
+import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
 import {
   DOMAIN_TRANSIENT_STATUSES,
   EMAIL_TRANSIENT_STATUSES,
@@ -84,7 +84,7 @@ const jsonContentHeaders = {
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par']
+  public static readonly LOCALITIES: ScwRegion[] = ['fr-par']
 
   /**
    * Send an email. You must specify the `region`, the sender and the

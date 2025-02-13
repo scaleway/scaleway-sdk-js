@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region, Zone } from '../../../bridge'
+import type { Region as ScwRegion, Zone as ScwZone } from '../../../bridge'
 
 export type AutoscalerEstimator = 'unknown_estimator' | 'binpacking'
 
@@ -280,7 +280,7 @@ export interface Pool {
   /** Pool upgrade policy. */
   upgradePolicy?: PoolUpgradePolicy
   /** Zone in which the pool's nodes will be spawned. */
-  zone: Zone
+  zone: ScwZone
   /**
    * - `l_ssd` is a local block storage which means your system is stored locally
    *   on your node's hypervisor. This type is not available for all node types
@@ -302,7 +302,7 @@ export interface Pool {
    */
   publicIpDisabled: boolean
   /** Cluster region of the pool. */
-  region: Region
+  region: ScwRegion
 }
 
 export interface ACLRuleRequest {
@@ -473,7 +473,7 @@ export interface CreateClusterRequestPoolConfig {
   /** Pool upgrade policy. */
   upgradePolicy?: CreateClusterRequestPoolConfigUpgradePolicy
   /** Zone in which the pool's nodes will be spawned. */
-  zone: Zone
+  zone: ScwZone
   /**
    * - `l_ssd` is a local block storage which means your system is stored locally
    *   on your node's hypervisor. This type is not available for all node types
@@ -539,7 +539,7 @@ export interface Version {
   /** Label of the Kubernetes version. */
   label: string
   /** Region in which this version is available. */
-  region: Region
+  region: ScwRegion
   /** Supported Container Network Interface (CNI) plugins for this version. */
   availableCnis: CNI[]
   /** Supported container runtimes for this version. */
@@ -564,7 +564,7 @@ export interface Cluster {
   /** Kubernetes version of the cluster. */
   version: string
   /** Region in which the cluster is deployed. */
-  region: Region
+  region: ScwRegion
   /** ID of the Organization owning the cluster. */
   organizationId: string
   /** ID of the Project owning the cluster. */
@@ -630,7 +630,7 @@ export interface Node {
    */
   providerId: string
   /** Cluster region of the node. */
-  region: Region
+  region: ScwRegion
   /** Name of the node. */
   name: string
   /** @deprecated Public IPv4 address of the node. */
@@ -754,7 +754,7 @@ export type AddClusterACLRulesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the cluster whose ACLs will be added. */
   clusterId: string
   /** ACLs to add. */
@@ -771,7 +771,7 @@ export type AuthExternalNodeRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Pool the node will be attached to. */
   poolId: string
 }
@@ -781,7 +781,7 @@ export type CreateClusterRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /**
    * @deprecated Organization ID in which the cluster will be created.
    *
@@ -853,7 +853,7 @@ export type CreateExternalNodeRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   poolId: string
 }
 
@@ -862,7 +862,7 @@ export type CreatePoolRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Cluster ID to which the pool will be attached. */
   clusterId: string
   /** Pool name. */
@@ -910,7 +910,7 @@ export type CreatePoolRequest = {
   /** Pool upgrade policy. */
   upgradePolicy?: CreatePoolRequestUpgradePolicy
   /** Zone in which the pool's nodes will be spawned. */
-  zone?: Zone
+  zone?: ScwZone
   /**
    * - `l_ssd` is a local block storage which means your system is stored locally
    *   on your node's hypervisor. This type is not available for all node types
@@ -938,7 +938,7 @@ export type DeleteACLRuleRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the ACL rule to delete. */
   aclId: string
 }
@@ -948,7 +948,7 @@ export type DeleteClusterRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the cluster to delete. */
   clusterId: string
   /**
@@ -964,7 +964,7 @@ export type DeleteNodeRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the node to replace. */
   nodeId: string
   /**
@@ -981,7 +981,7 @@ export type DeletePoolRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the pool to delete. */
   poolId: string
 }
@@ -1000,6 +1000,7 @@ export interface ExternalNode {
   cniPluginsVersion: string
   nodeLabels: Record<string, string>
   nodeTaints: ExternalNodeCoreV1Taint[]
+  iamToken: string
 }
 
 export interface ExternalNodeAuth {
@@ -1012,7 +1013,7 @@ export type GetClusterKubeConfigRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Cluster ID for which to download the kubeconfig. */
   clusterId: string
   /** Hide the legacy token from the kubeconfig. */
@@ -1024,7 +1025,7 @@ export type GetClusterRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the requested cluster. */
   clusterId: string
 }
@@ -1034,7 +1035,7 @@ export type GetNodeMetadataRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
 }
 
 export type GetNodeRequest = {
@@ -1042,7 +1043,7 @@ export type GetNodeRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the requested node. */
   nodeId: string
 }
@@ -1052,7 +1053,7 @@ export type GetPoolRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the requested pool. */
   poolId: string
 }
@@ -1062,7 +1063,7 @@ export type GetVersionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Requested version name. */
   versionName: string
 }
@@ -1072,7 +1073,7 @@ export type ListClusterACLRulesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the cluster whose ACLs will be listed. */
   clusterId: string
   /** Page number for the returned ACLs. */
@@ -1093,7 +1094,7 @@ export type ListClusterAvailableTypesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Cluster ID for which the available Kubernetes types will be listed. */
   clusterId: string
 }
@@ -1110,7 +1111,7 @@ export type ListClusterAvailableVersionsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Cluster ID for which the available Kubernetes versions will be listed. */
   clusterId: string
 }
@@ -1125,7 +1126,7 @@ export type ListClusterTypesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number, from the paginated results, to return for cluster-types. */
   page?: number
   /** Maximum number of clusters per page. */
@@ -1144,7 +1145,7 @@ export type ListClustersRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Organization ID on which to filter the returned clusters. */
   organizationId?: string
   /** Project ID on which to filter the returned clusters. */
@@ -1183,7 +1184,7 @@ export type ListNodesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Cluster ID from which the nodes will be listed from. */
   clusterId: string
   /** Pool ID on which to filter the returned nodes. */
@@ -1215,7 +1216,7 @@ export type ListPoolsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the cluster whose pools will be listed. */
   clusterId: string
   /** Sort order of returned pools. */
@@ -1245,7 +1246,7 @@ export type ListVersionsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
 }
 
 export interface ListVersionsResponse {
@@ -1258,7 +1259,7 @@ export type MigrateClusterToSBSCSIRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /**
    * Cluster ID for which the latest CSI compatible with Scaleway Block Storage
    * will be enabled.
@@ -1286,7 +1287,7 @@ export type RebootNodeRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the node to reboot. */
   nodeId: string
 }
@@ -1296,7 +1297,7 @@ export type ReplaceNodeRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the node to replace. */
   nodeId: string
 }
@@ -1306,7 +1307,7 @@ export type ResetClusterAdminTokenRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Cluster ID on which the admin token will be renewed. */
   clusterId: string
 }
@@ -1316,7 +1317,7 @@ export type SetClusterACLRulesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the cluster whose ACLs will be set. */
   clusterId: string
   /** ACLs to set. */
@@ -1333,7 +1334,7 @@ export type SetClusterTypeRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the cluster to migrate from one type to another. */
   clusterId: string
   /**
@@ -1348,7 +1349,7 @@ export type UpdateClusterRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the cluster to update. */
   clusterId: string
   /** New external name for the cluster. */
@@ -1385,7 +1386,7 @@ export type UpdatePoolRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the pool to update. */
   poolId: string
   /** New value for the pool autoscaling enablement. */
@@ -1414,7 +1415,7 @@ export type UpgradeClusterRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the cluster to upgrade. */
   clusterId: string
   /**
@@ -1435,7 +1436,7 @@ export type UpgradePoolRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the pool to upgrade. */
   poolId: string
   /** New Kubernetes version for the pool. */

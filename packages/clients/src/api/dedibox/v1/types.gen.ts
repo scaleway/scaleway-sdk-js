@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Money, Zone } from '../../../bridge'
+import type { Money, Zone as ScwZone } from '../../../bridge'
 
 export type AttachFailoverIPToMacAddressRequestMacType =
   | 'mac_type_unknown'
@@ -652,7 +652,7 @@ export interface Server {
   /** Network interfaces of the server. */
   interfaces: NetworkInterface[]
   /** The zone in which is the server. */
-  zone: Zone
+  zone: ScwZone
   /** Options subscribe on the server. */
   options: ServerOption[]
   /** Service level of the server. */
@@ -711,7 +711,7 @@ export interface RpnSanServer {
   /** RPN SANs linked to the RPN SAN server. */
   sans: RpnSan[]
   /** The RPN SAN server zone. */
-  zone: Zone
+  zone: ScwZone
 }
 
 export interface RpnV2Group {
@@ -952,7 +952,7 @@ export interface RpnServerCapability {
   /** Server datacenter name. */
   datacenterName: string
   /** Server zone. */
-  zone: Zone
+  zone: ScwZone
   /** Private IP address (if rpn compatiblle). */
   ipAddress?: string
   /** Supported rpn version. */
@@ -1023,7 +1023,7 @@ export interface ServerSummary {
   /** Network interfaces of the server. */
   interfaces: NetworkInterface[]
   /** The zone in which is the server. */
-  zone: Zone
+  zone: ScwZone
   /** Service level of the server. */
   level?: ServiceLevel
   /** Whether the server is outsourced or not. */
@@ -1110,7 +1110,7 @@ export interface UpdatableRaidArray {
 
 export type AttachFailoverIPToMacAddressRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the failover IP. */
   ipId: number
   /** A mac type. */
@@ -1121,7 +1121,7 @@ export type AttachFailoverIPToMacAddressRequest = {
 
 export type AttachFailoverIPsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the server. */
   serverId: number
   /** List of ID of failovers IP to attach. */
@@ -1220,14 +1220,14 @@ export interface CanOrderResponse {
 
 export type CancelServerInstallRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Server ID of the server to cancel install. */
   serverId: number
 }
 
 export type CreateFailoverIPsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Failover IP offer ID. */
   offerId: number
   /** Project ID. */
@@ -1243,7 +1243,7 @@ export interface CreateFailoverIPsResponse {
 
 export type CreateServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Offer ID of the new server. */
   offerId: number
   /** Server option IDs of the new server. */
@@ -1256,49 +1256,49 @@ export type CreateServerRequest = {
 
 export type DeleteFailoverIPRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the failover IP to delete. */
   ipId: number
 }
 
 export type DeleteServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Server ID to delete. */
   serverId: number
 }
 
 export type DeleteServiceRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the service. */
   serviceId: number
 }
 
 export type DetachFailoverIPFromMacAddressRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the failover IP. */
   ipId: number
 }
 
 export type DetachFailoverIPsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** List of IDs of failovers IP to detach. */
   fipsIds: number[]
 }
 
 export type GetBMCAccessRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the server to get BMC access. */
   serverId: number
 }
 
 export type GetFailoverIPRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the failover IP. */
   ipId: number
 }
@@ -1312,7 +1312,7 @@ export interface GetIPv6BlockQuotasResponse {
 
 export type GetOSRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the OS. */
   osId: number
   /** ID of the server. */
@@ -1323,7 +1323,7 @@ export type GetOSRequest = {
 
 export type GetOfferRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of offer. */
   offerId: number
   /** Project ID. */
@@ -1332,20 +1332,20 @@ export type GetOfferRequest = {
 
 export type GetOrderedServiceRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   orderedServiceId: number
 }
 
 export type GetRaidRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the server. */
   serverId: number
 }
 
 export type GetRemainingQuotaRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Project ID. */
   projectId?: string
 }
@@ -1363,7 +1363,7 @@ export interface GetRemainingQuotaResponse {
 
 export type GetRescueRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the server to get rescue. */
   serverId: number
 }
@@ -1377,14 +1377,14 @@ export interface GetRpnStatusResponse {
 
 export type GetServerBackupRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Server ID of the backup. */
   serverId: number
 }
 
 export type GetServerDefaultPartitioningRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the server. */
   serverId: number
   /** OS ID of the default partitioning. */
@@ -1393,21 +1393,21 @@ export type GetServerDefaultPartitioningRequest = {
 
 export type GetServerInstallRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Server ID of the server to install. */
   serverId: number
 }
 
 export type GetServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the server. */
   serverId: number
 }
 
 export type GetServiceRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the service. */
   serviceId: number
 }
@@ -1472,7 +1472,7 @@ export type IPv6BlockApiUpdateIPv6BlockRequest = {
 
 export type InstallServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Server ID to install. */
   serverId: number
   /** OS ID to install on the server. */
@@ -1511,7 +1511,7 @@ export interface Invoice {
 
 export type ListFailoverIPsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Page number. */
   page?: number
   /** Number of failovers IP per page. */
@@ -1557,7 +1557,7 @@ export interface ListIpsResponse {
 
 export type ListOSRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Page number. */
   page?: number
   /** Number of OS per page. */
@@ -1581,7 +1581,7 @@ export interface ListOSResponse {
 
 export type ListOffersRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Page number. */
   page?: number
   /** Number of offer per page. */
@@ -1697,7 +1697,7 @@ export interface ListRpnV2MembersResponse {
 
 export type ListServerDisksRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Server ID of the server disks. */
   serverId: number
   /** Page number. */
@@ -1717,7 +1717,7 @@ export interface ListServerDisksResponse {
 
 export type ListServerEventsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Server ID of the server events. */
   serverId: number
   /** Page number. */
@@ -1737,7 +1737,7 @@ export interface ListServerEventsResponse {
 
 export type ListServersRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Page number. */
   page?: number
   /** Number of server per page. */
@@ -1759,7 +1759,7 @@ export interface ListServersResponse {
 
 export type ListServicesRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Page number. */
   page?: number
   /** Number of service per page. */
@@ -1779,7 +1779,7 @@ export interface ListServicesResponse {
 
 export type ListSubscribableServerOptionsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Server ID of the subscribable server options. */
   serverId: number
   /** Page number. */
@@ -1840,7 +1840,7 @@ export interface Raid {
 
 export type RebootServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Server ID to reboot. */
   serverId: number
 }
@@ -2198,7 +2198,7 @@ export interface ServerInstall {
 
 export type StartBMCAccessRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the server to start the BMC access. */
   serverId: number
   /** The IP authorized to connect to the given server. */
@@ -2207,7 +2207,7 @@ export type StartBMCAccessRequest = {
 
 export type StartRescueRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the server to start rescue. */
   serverId: number
   /** OS ID to use to start rescue. */
@@ -2216,35 +2216,35 @@ export type StartRescueRequest = {
 
 export type StartServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Server ID to start. */
   serverId: number
 }
 
 export type StopBMCAccessRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the server to stop BMC access. */
   serverId: number
 }
 
 export type StopRescueRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the server to stop rescue. */
   serverId: number
 }
 
 export type StopServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Server ID to stop. */
   serverId: number
 }
 
 export type SubscribeServerOptionRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Server ID to subscribe server option. */
   serverId: number
   /** Option ID to subscribe. */
@@ -2253,7 +2253,7 @@ export type SubscribeServerOptionRequest = {
 
 export type SubscribeStorageOptionsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Server ID of the storage options to subscribe. */
   serverId: number
   /** Option IDs of the storage options to subscribe. */
@@ -2267,7 +2267,7 @@ export interface SubscribeStorageOptionsResponse {
 
 export type UpdateRaidRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the server. */
   serverId: number
   /** RAIDs to update. */
@@ -2276,7 +2276,7 @@ export type UpdateRaidRequest = {
 
 export type UpdateReverseRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the IP. */
   ipId: number
   /** Reverse to apply on the IP. */
@@ -2285,7 +2285,7 @@ export type UpdateReverseRequest = {
 
 export type UpdateServerBackupRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Server ID to update backup. */
   serverId: number
   /** Password of the server backup. */
@@ -2298,7 +2298,7 @@ export type UpdateServerBackupRequest = {
 
 export type UpdateServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Server ID to update. */
   serverId: number
   /** Hostname of the server to update. */
@@ -2309,7 +2309,7 @@ export type UpdateServerRequest = {
 
 export type UpdateServerTagsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Server ID to update the tags. */
   serverId: number
   /** Tags of server to update. */

@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 
 export type ListNatsAccountsRequestOrderBy =
   | 'created_at_asc'
@@ -91,7 +91,7 @@ export interface NatsAccount {
   /** Project ID of the Project containing the NATS account. */
   projectId: string
   /** Region where the NATS account is deployed. */
-  region: Region
+  region: ScwRegion
   /** NATS account creation date. */
   createdAt?: Date
   /** NATS account last modification date. */
@@ -126,7 +126,7 @@ export interface SnsCredentials {
   /** Project ID of the Project containing the credentials. */
   projectId: string
   /** Region where the credentials exists. */
-  region: Region
+  region: ScwRegion
   /** Credentials creation date. */
   createdAt?: Date
   /** Credentials last modification date. */
@@ -152,7 +152,7 @@ export interface SqsCredentials {
   /** Project ID of the Project containing the credentials. */
   projectId: string
   /** Region where the credentials exists. */
-  region: Region
+  region: ScwRegion
   /** Credentials creation date. */
   createdAt?: Date
   /** Credentials last modification date. */
@@ -200,7 +200,7 @@ export type NatsApiCreateNatsAccountRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** NATS account name. */
   name?: string
   /** Project containing the NATS account. */
@@ -212,7 +212,7 @@ export type NatsApiCreateNatsCredentialsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** NATS account containing the credentials. */
   natsAccountId: string
   /** Name of the credentials. */
@@ -224,7 +224,7 @@ export type NatsApiDeleteNatsAccountRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the NATS account to delete. */
   natsAccountId: string
 }
@@ -234,7 +234,7 @@ export type NatsApiDeleteNatsCredentialsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the credentials to delete. */
   natsCredentialsId: string
 }
@@ -244,7 +244,7 @@ export type NatsApiGetNatsAccountRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the NATS account to get. */
   natsAccountId: string
 }
@@ -254,7 +254,7 @@ export type NatsApiGetNatsCredentialsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the credentials to get. */
   natsCredentialsId: string
 }
@@ -264,7 +264,7 @@ export type NatsApiListNatsAccountsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Include only NATS accounts in this Project. */
   projectId?: string
   /** Page number to return. */
@@ -280,7 +280,7 @@ export type NatsApiListNatsCredentialsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Include only NATS accounts in this Project. */
   projectId?: string
   /** Include only credentials for this NATS account. */
@@ -298,7 +298,7 @@ export type NatsApiUpdateNatsAccountRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the NATS account to update. */
   natsAccountId: string
   /** NATS account name. */
@@ -310,7 +310,7 @@ export type SnsApiActivateSnsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Project on which to activate the Topics and Events service. */
   projectId?: string
 }
@@ -320,7 +320,7 @@ export type SnsApiCreateSnsCredentialsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Project containing the Topics and Events credentials. */
   projectId?: string
   /** Name of the credentials. */
@@ -334,7 +334,7 @@ export type SnsApiDeactivateSnsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Project on which to deactivate the Topics and Events service. */
   projectId?: string
 }
@@ -344,7 +344,7 @@ export type SnsApiDeleteSnsCredentialsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the credentials to delete. */
   snsCredentialsId: string
 }
@@ -354,7 +354,7 @@ export type SnsApiGetSnsCredentialsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Topics and Events credentials to get. */
   snsCredentialsId: string
 }
@@ -364,7 +364,7 @@ export type SnsApiGetSnsInfoRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Project to retrieve Topics and Events info from. */
   projectId?: string
 }
@@ -374,7 +374,7 @@ export type SnsApiListSnsCredentialsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Include only Topics and Events credentials in this Project. */
   projectId?: string
   /** Page number to return. */
@@ -390,7 +390,7 @@ export type SnsApiUpdateSnsCredentialsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Topics and Events credentials to update. */
   snsCredentialsId: string
   /** Name of the credentials. */
@@ -403,7 +403,7 @@ export interface SnsInfo {
   /** Project ID of the Project containing the service. */
   projectId: string
   /** Region of the service. */
-  region: Region
+  region: ScwRegion
   /** Topics and Events creation date. */
   createdAt?: Date
   /** Topics and Events last modification date. */
@@ -419,7 +419,7 @@ export type SqsApiActivateSqsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Project on which to activate the Queues service. */
   projectId?: string
 }
@@ -429,7 +429,7 @@ export type SqsApiCreateSqsCredentialsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Project containing the Queues credentials. */
   projectId?: string
   /** Name of the credentials. */
@@ -443,7 +443,7 @@ export type SqsApiDeactivateSqsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Project on which to deactivate the Queues service. */
   projectId?: string
 }
@@ -453,7 +453,7 @@ export type SqsApiDeleteSqsCredentialsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the credentials to delete. */
   sqsCredentialsId: string
 }
@@ -463,7 +463,7 @@ export type SqsApiGetSqsCredentialsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Queues credentials to get. */
   sqsCredentialsId: string
 }
@@ -473,7 +473,7 @@ export type SqsApiGetSqsInfoRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Project to retrieve Queues info from. */
   projectId?: string
 }
@@ -483,7 +483,7 @@ export type SqsApiListSqsCredentialsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Include only Queues credentials in this Project. */
   projectId?: string
   /** Page number to return. */
@@ -499,7 +499,7 @@ export type SqsApiUpdateSqsCredentialsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Queues credentials to update. */
   sqsCredentialsId: string
   /** Name of the credentials. */
@@ -512,7 +512,7 @@ export interface SqsInfo {
   /** Project ID of the Project containing the service. */
   projectId: string
   /** Region of the service. */
-  region: Region
+  region: ScwRegion
   /** Queues creation date. */
   createdAt?: Date
   /** Queues last modification date. */

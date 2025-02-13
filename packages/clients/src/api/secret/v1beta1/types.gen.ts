@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 
 export type BrowseSecretsRequestOrderBy =
   | 'name_asc'
@@ -156,7 +156,7 @@ export interface Secret {
   /** List of Scaleway resources that can access and manage the secret. */
   usedBy: Product[]
   /** Region of the secret. */
-  region: Region
+  region: ScwRegion
 }
 
 export type AccessSecretVersionByPathRequest = {
@@ -164,7 +164,7 @@ export type AccessSecretVersionByPathRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /**
    * The first version of the secret is numbered 1, and all subsequent revisions
    * augment by 1. Value can be either:
@@ -187,7 +187,7 @@ export type AccessSecretVersionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the secret. */
   secretId: string
   /**
@@ -225,7 +225,7 @@ export type AddSecretOwnerRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the secret. */
   secretId: string
   /** See `Product` enum for description of values. */
@@ -244,7 +244,7 @@ export type BrowseSecretsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Filter by Project ID (optional). */
   projectId?: string
   orderBy?: BrowseSecretsRequestOrderBy
@@ -272,7 +272,7 @@ export type CreateSecretRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Project containing the secret. */
   projectId?: string
   /** Name of the secret. */
@@ -305,7 +305,7 @@ export type CreateSecretVersionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the secret. */
   secretId: string
   /** The base64-encoded secret payload of the version. */
@@ -346,7 +346,7 @@ export type DeleteSecretRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the secret. */
   secretId: string
 }
@@ -356,7 +356,7 @@ export type DeleteSecretVersionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the secret. */
   secretId: string
   /**
@@ -375,7 +375,7 @@ export type DisableSecretVersionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the secret. */
   secretId: string
   /**
@@ -394,7 +394,7 @@ export type EnableSecretVersionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the secret. */
   secretId: string
   /**
@@ -413,7 +413,7 @@ export type GetSecretRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the secret. */
   secretId: string
 }
@@ -423,7 +423,7 @@ export type GetSecretVersionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the secret. */
   secretId: string
   /**
@@ -442,7 +442,7 @@ export type ListSecretTypesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Project to target. */
   projectId?: string
   page?: number
@@ -461,7 +461,7 @@ export type ListSecretVersionsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the secret. */
   secretId: string
   page?: number
@@ -482,7 +482,7 @@ export type ListSecretsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Filter by Organization ID (optional). */
   organizationId?: string
   /** Filter by Project ID (optional). */
@@ -514,7 +514,7 @@ export type ListTagsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Project to target. */
   projectId?: string
   page?: number
@@ -533,7 +533,7 @@ export type ProtectSecretRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the secret to enable secret protection for. */
   secretId: string
 }
@@ -548,7 +548,7 @@ export type UnprotectSecretRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the secret to disable secret protection for. */
   secretId: string
 }
@@ -558,7 +558,7 @@ export type UpdateSecretRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the secret. */
   secretId: string
   /** Secret's updated name (optional). */
@@ -581,7 +581,7 @@ export type UpdateSecretVersionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the secret. */
   secretId: string
   /**

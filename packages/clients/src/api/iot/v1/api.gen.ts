@@ -7,7 +7,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '../../../bridge'
-import type { Region, WaitForOptions } from '../../../bridge'
+import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
 import { HUB_TRANSIENT_STATUSES } from './content.gen'
 import {
   marshalCreateDeviceRequest,
@@ -108,7 +108,7 @@ const jsonContentHeaders = {
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par']
+  public static readonly LOCALITIES: ScwRegion[] = ['fr-par']
 
   protected pageOfListHubs = (request: Readonly<ListHubsRequest> = {}) =>
     this.client.fetch<ListHubsResponse>(

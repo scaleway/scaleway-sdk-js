@@ -7,7 +7,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '../../../bridge'
-import type { WaitForOptions, Zone } from '../../../bridge'
+import type { Zone as ScwZone, WaitForOptions } from '../../../bridge'
 import { FLEXIBLE_IP_TRANSIENT_STATUSES } from './content.gen'
 import {
   marshalAttachFlexibleIPRequest,
@@ -52,7 +52,7 @@ const jsonContentHeaders = {
  */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: Zone[] = [
+  public static readonly LOCALITIES: ScwZone[] = [
     'fr-par-1',
     'fr-par-2',
     'nl-ams-1',

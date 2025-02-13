@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region, TimeSeries } from '../../../bridge'
+import type { Region as ScwRegion, TimeSeries } from '../../../bridge'
 
 export type DeviceMessageFiltersRulePolicy = 'unknown' | 'accept' | 'reject'
 
@@ -214,7 +214,7 @@ export interface Hub {
   /** Hub events topic prefix. */
   eventsTopicPrefix: string
   /** Region of the Hub. */
-  region: Region
+  region: ScwRegion
   /** Hub creation date. */
   createdAt?: Date
   /** Hub last modification date. */
@@ -345,7 +345,7 @@ export type CreateDeviceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Device name. */
   name?: string
   /** Hub ID of the device. */
@@ -381,7 +381,7 @@ export type CreateHubRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hub name (up to 255 characters). */
   name?: string
   /**
@@ -409,7 +409,7 @@ export type CreateNetworkRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Network name. */
   name?: string
   /** Type of network to connect with. */
@@ -432,7 +432,7 @@ export type CreateRouteRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Route name. */
   name?: string
   /** Hub ID of the route. */
@@ -470,7 +470,7 @@ export type DeleteDeviceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Device ID. */
   deviceId: string
 }
@@ -480,7 +480,7 @@ export type DeleteHubRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hub ID. */
   hubId: string
   /**
@@ -495,7 +495,7 @@ export type DeleteNetworkRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Network ID. */
   networkId: string
 }
@@ -505,7 +505,7 @@ export type DeleteRouteRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Route ID. */
   routeId: string
 }
@@ -515,7 +515,7 @@ export type DeleteTwinDocumentRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Twin ID. */
   twinId: string
   /** Name of the document. */
@@ -527,7 +527,7 @@ export type DeleteTwinDocumentsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Twin ID. */
   twinId: string
 }
@@ -537,7 +537,7 @@ export type DisableDeviceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Device ID. */
   deviceId: string
 }
@@ -547,7 +547,7 @@ export type DisableHubRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hub ID. */
   hubId: string
 }
@@ -557,7 +557,7 @@ export type EnableDeviceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Device ID. */
   deviceId: string
 }
@@ -567,7 +567,7 @@ export type EnableHubRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hub ID. */
   hubId: string
 }
@@ -577,7 +577,7 @@ export type GetDeviceCertificateRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Device ID. */
   deviceId: string
 }
@@ -594,7 +594,7 @@ export type GetDeviceMetricsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Device ID. */
   deviceId: string
   /** Start date used to compute the best scale for the returned metrics. */
@@ -611,7 +611,7 @@ export type GetDeviceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Device ID. */
   deviceId: string
 }
@@ -621,7 +621,7 @@ export type GetHubCARequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   hubId: string
 }
 
@@ -634,7 +634,7 @@ export type GetHubMetricsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hub ID. */
   hubId: string
   /** Start date used to compute the best scale for returned metrics. */
@@ -651,7 +651,7 @@ export type GetHubRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hub ID. */
   hubId: string
 }
@@ -661,7 +661,7 @@ export type GetNetworkRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Network ID. */
   networkId: string
 }
@@ -671,7 +671,7 @@ export type GetRouteRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Route ID. */
   routeId: string
 }
@@ -681,7 +681,7 @@ export type GetTwinDocumentRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Twin ID. */
   twinId: string
   /** Name of the document. */
@@ -693,7 +693,7 @@ export type ListDevicesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number to return, from the paginated results. */
   page?: number
   /** Number of devices to return within a page. Maximum value is 100. */
@@ -722,7 +722,7 @@ export type ListHubsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number to return, from the paginated results. */
   page?: number
   /** Number of Hubs to return within a page. Maximum value is 100. */
@@ -749,7 +749,7 @@ export type ListNetworksRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number to return, from the paginated results. */
   page?: number
   /** Number of networks to return. The maximum value is 100. */
@@ -776,7 +776,7 @@ export type ListRoutesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number to return, from the paginated results. */
   page?: number
   /** Number of routes to return within a page. Maximum value is 100. */
@@ -801,7 +801,7 @@ export type ListTwinDocumentsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Twin ID. */
   twinId: string
 }
@@ -816,7 +816,7 @@ export type PatchTwinDocumentRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Twin ID. */
   twinId: string
   /** Name of the document. */
@@ -842,7 +842,7 @@ export type PutTwinDocumentRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Twin ID. */
   twinId: string
   /** Name of the document. */
@@ -861,7 +861,7 @@ export type RenewDeviceCertificateRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Device ID. */
   deviceId: string
 }
@@ -919,7 +919,7 @@ export type SetDeviceCertificateRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Device ID. */
   deviceId: string
   /** PEM-encoded custom certificate. */
@@ -936,7 +936,7 @@ export type SetHubCARequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hub ID. */
   hubId: string
   /** CA's PEM-encoded certificate. */
@@ -965,7 +965,7 @@ export type UpdateDeviceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Device ID. */
   deviceId: string
   /** Description for the device. */
@@ -991,7 +991,7 @@ export type UpdateHubRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the Hub you want to update. */
   hubId: string
   /** Hub name (up to 255 characters). */
@@ -1018,7 +1018,7 @@ export type UpdateRouteRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Route id. */
   routeId: string
   /** Route name. */

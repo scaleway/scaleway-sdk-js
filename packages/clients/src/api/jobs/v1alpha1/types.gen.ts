@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 
 export type JobRunState =
   | 'unknown_state'
@@ -90,7 +90,7 @@ export interface JobDefinition {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region: Region
+  region: ScwRegion
 }
 
 export interface JobRun {
@@ -113,7 +113,7 @@ export interface JobRun {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region: Region
+  region: ScwRegion
 }
 
 export interface Resource {
@@ -131,7 +131,7 @@ export type CreateJobDefinitionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Name of the job definition. */
   name?: string
   /** CPU limit of the job. */
@@ -164,7 +164,7 @@ export type CreateJobDefinitionSecretsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the job definition. */
   jobDefinitionId: string
   /** List of secrets to inject into the job. */
@@ -181,7 +181,7 @@ export type DeleteJobDefinitionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the job definition to delete. */
   jobDefinitionId: string
 }
@@ -191,7 +191,7 @@ export type DeleteJobDefinitionSecretRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the job definition. */
   jobDefinitionId: string
   /** UUID of the secret reference within the job. */
@@ -203,7 +203,7 @@ export type GetJobDefinitionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the job definition to get. */
   jobDefinitionId: string
 }
@@ -213,7 +213,7 @@ export type GetJobDefinitionSecretRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the job definition. */
   jobDefinitionId: string
   /** UUID of the secret reference within the job. */
@@ -225,7 +225,7 @@ export type GetJobRunRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the job run to get. */
   jobRunId: string
 }
@@ -235,7 +235,7 @@ export type GetJobsLimitsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
 }
 
 export interface JobsLimits {
@@ -247,7 +247,7 @@ export type ListJobDefinitionSecretsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the job definition. */
   jobDefinitionId: string
 }
@@ -264,7 +264,7 @@ export type ListJobDefinitionsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   page?: number
   pageSize?: number
   orderBy?: ListJobDefinitionsRequestOrderBy
@@ -282,7 +282,7 @@ export type ListJobRunsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   page?: number
   pageSize?: number
   orderBy?: ListJobRunsRequestOrderBy
@@ -302,7 +302,7 @@ export type ListJobsResourcesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
 }
 
 export interface ListJobsResourcesResponse {
@@ -314,7 +314,7 @@ export type StartJobDefinitionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the job definition to start. */
   jobDefinitionId: string
   /** Contextual startup command for this specific job run. */
@@ -334,7 +334,7 @@ export type StopJobRunRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the job run to stop. */
   jobRunId: string
 }
@@ -344,7 +344,7 @@ export type UpdateJobDefinitionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the job definition to update. */
   jobDefinitionId: string
   /** Name of the job definition. */
@@ -373,7 +373,7 @@ export type UpdateJobDefinitionSecretRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the job definition. */
   jobDefinitionId: string
   /** UUID of the secret reference within the job. */
