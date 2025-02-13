@@ -2,6 +2,8 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Zone as ScwZone } from '../../../bridge'
 
+export type CommitmentType = 'duration_24h' | 'renewed_monthly' | 'none'
+
 export type ConnectivityDiagnosticActionType =
   | 'reboot_server'
   | 'reinstall_server'
@@ -96,6 +98,11 @@ export interface ServerTypeMemory {
 
 export interface ServerTypeNetwork {
   publicBandwidthBps: number
+}
+
+export interface Commitment {
+  type: CommitmentType
+  cancelled: boolean
 }
 
 export interface ConnectivityDiagnosticServerHealth {
@@ -204,6 +211,12 @@ export interface Server {
    * server.
    */
   vpcStatus: ServerPrivateNetworkStatus
+  /** Commitment scheme applied to this server. */
+  commitment?: Commitment
+}
+
+export interface CommitmentTypeValue {
+  commitmentType: CommitmentType
 }
 
 export interface ConnectivityDiagnostic {
@@ -235,6 +248,12 @@ export type CreateServerRequest = {
    * configured through the Apple Silicon - Private Networks API.
    */
   enableVpc: boolean
+  /**
+   * Activate commitment for this server. If not specified, there is a 24h
+   * commitment due to Apple licensing. It can be updated with the Update Server
+   * request. Available commitment depends on server type.
+   */
+  commitmentType?: CommitmentType
 }
 
 export type DeleteServerRequest = {
@@ -444,4 +463,9 @@ export type UpdateServerRequest = {
   scheduleDeletion?: boolean
   /** Activate or deactivate Private Network support for this server. */
   enableVpc?: boolean
+  /**
+   * Change commitment. Use 'none' to automatically cancel a renewing
+   * commitment.
+   */
+  commitmentType?: CommitmentTypeValue
 }

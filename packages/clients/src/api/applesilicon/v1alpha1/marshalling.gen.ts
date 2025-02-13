@@ -8,6 +8,8 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  Commitment,
+  CommitmentTypeValue,
   ConnectivityDiagnostic,
   ConnectivityDiagnosticServerHealth,
   CreateServerRequest,
@@ -161,6 +163,19 @@ export const unmarshalServerType = (data: unknown): ServerType => {
   } as ServerType
 }
 
+const unmarshalCommitment = (data: unknown): Commitment => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Commitment' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    cancelled: data.cancelled,
+    type: data.type,
+  } as Commitment
+}
+
 export const unmarshalServer = (data: unknown): Server => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -169,6 +184,9 @@ export const unmarshalServer = (data: unknown): Server => {
   }
 
   return {
+    commitment: data.commitment
+      ? unmarshalCommitment(data.commitment)
+      : undefined,
     createdAt: unmarshalDate(data.created_at),
     deletableAt: unmarshalDate(data.deletable_at),
     deletionScheduled: data.deletion_scheduled,
@@ -326,6 +344,7 @@ export const marshalCreateServerRequest = (
   request: CreateServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  commitment_type: request.commitmentType,
   enable_vpc: request.enableVpc,
   name: request.name || randomName('as'),
   os_id: request.osId,
@@ -362,10 +381,21 @@ export const marshalStartConnectivityDiagnosticRequest = (
   server_id: request.serverId,
 })
 
+const marshalCommitmentTypeValue = (
+  request: CommitmentTypeValue,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  commitment_type: request.commitmentType,
+})
+
 export const marshalUpdateServerRequest = (
   request: UpdateServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  commitment_type:
+    request.commitmentType !== undefined
+      ? marshalCommitmentTypeValue(request.commitmentType, defaults)
+      : undefined,
   enable_vpc: request.enableVpc,
   name: request.name,
   schedule_deletion: request.scheduleDeletion,
