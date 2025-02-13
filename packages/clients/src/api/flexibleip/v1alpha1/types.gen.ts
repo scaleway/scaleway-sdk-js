@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Zone } from '../../../bridge'
+import type { Zone as ScwZone } from '../../../bridge'
 
 export type FlexibleIPStatus =
   | 'unknown'
@@ -37,7 +37,7 @@ export interface MACAddress {
   /** Date on which the virtual MAC was created. */
   createdAt?: Date
   /** MAC address IP Availability Zone. */
-  zone: Zone
+  zone: ScwZone
 }
 
 export interface FlexibleIP {
@@ -75,12 +75,12 @@ export interface FlexibleIP {
   /** Reverse DNS value. */
   reverse: string
   /** Availability Zone of the flexible IP. */
-  zone: Zone
+  zone: ScwZone
 }
 
 export type AttachFlexibleIPRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /**
    * Multiple IDs can be provided, but note that flexible IPs must belong to the
    * same MAC group (see details about MAC groups).
@@ -99,7 +99,7 @@ export interface AttachFlexibleIPsResponse {
 
 export type CreateFlexibleIPRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the project to associate with the Flexible IP. */
   projectId?: string
   /** Flexible IP description (max. of 255 characters). */
@@ -116,14 +116,14 @@ export type CreateFlexibleIPRequest = {
 
 export type DeleteFlexibleIPRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the flexible IP to delete. */
   fipId: string
 }
 
 export type DeleteMACAddrRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /**
    * If the flexible IP belongs to a MAC group, the MAC will be removed from
    * both the MAC group and flexible IP.
@@ -133,7 +133,7 @@ export type DeleteMACAddrRequest = {
 
 export type DetachFlexibleIPRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /**
    * List of flexible IP IDs to detach from a server. Multiple IDs can be
    * provided. Note that flexible IPs must belong to the same MAC group.
@@ -150,7 +150,7 @@ export interface DetachFlexibleIPsResponse {
 
 export type DuplicateMACAddrRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Note that the flexible IPs need to be attached to the same server. */
   fipId: string
   /** Note that flexible IPs need to be attached to the same server. */
@@ -159,7 +159,7 @@ export type DuplicateMACAddrRequest = {
 
 export type GenerateMACAddrRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the flexible IP for which to generate a virtual MAC. */
   fipId: string
   /** TODO. */
@@ -168,14 +168,14 @@ export type GenerateMACAddrRequest = {
 
 export type GetFlexibleIPRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the flexible IP. */
   fipId: string
 }
 
 export type ListFlexibleIPsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Sort order of the returned flexible IPs. */
   orderBy?: ListFlexibleIPsRequestOrderBy
   /** Page number. */
@@ -212,14 +212,14 @@ export interface ListFlexibleIPsResponse {
 
 export type MoveMACAddrRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   fipId: string
   dstFipId: string
 }
 
 export type UpdateFlexibleIPRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** ID of the flexible IP to update. */
   fipId: string
   /** Flexible IP description (max. 255 characters). */

@@ -6,7 +6,7 @@ import {
   urlParams,
   validatePathParam,
 } from '../../../bridge'
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 import {
   marshalCreateJobDefinitionRequest,
   marshalCreateJobDefinitionSecretsRequest,
@@ -64,7 +64,11 @@ const jsonContentHeaders = {
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+  public static readonly LOCALITIES: ScwRegion[] = [
+    'fr-par',
+    'nl-ams',
+    'pl-waw',
+  ]
 
   /**
    * Create a new job definition in a specified Project.

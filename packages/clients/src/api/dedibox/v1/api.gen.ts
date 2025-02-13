@@ -7,7 +7,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '../../../bridge'
-import type { WaitForOptions, Zone } from '../../../bridge'
+import type { Zone as ScwZone, WaitForOptions } from '../../../bridge'
 import {
   BMC_ACCESS_TRANSIENT_STATUSES,
   RPN_SAN_TRANSIENT_STATUSES,
@@ -252,7 +252,7 @@ const jsonContentHeaders = {
 /** Dedibox Phoenix API. */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: Zone[] = [
+  public static readonly LOCALITIES: ScwZone[] = [
     'fr-par-1',
     'fr-par-2',
     'nl-ams-1',
