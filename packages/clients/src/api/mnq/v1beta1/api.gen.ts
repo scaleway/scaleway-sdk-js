@@ -6,7 +6,7 @@ import {
   urlParams,
   validatePathParam,
 } from '../../../bridge'
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 import {
   marshalNatsApiCreateNatsAccountRequest,
   marshalNatsApiCreateNatsCredentialsRequest,
@@ -79,7 +79,7 @@ const jsonContentHeaders = {
  */
 export class NatsAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams']
+  public static readonly LOCALITIES: ScwRegion[] = ['fr-par', 'nl-ams']
 
   /**
    * Create a NATS account. Create a NATS account associated with a Project.
@@ -291,7 +291,7 @@ export class NatsAPI extends ParentAPI {
  */
 export class SnsAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams']
+  public static readonly LOCALITIES: ScwRegion[] = ['fr-par', 'nl-ams']
 
   /**
    * Activate Topics and Events. Activate Topics and Events for the specified
@@ -486,7 +486,7 @@ export class SnsAPI extends ParentAPI {
  */
 export class SqsAPI extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams']
+  public static readonly LOCALITIES: ScwRegion[] = ['fr-par', 'nl-ams']
 
   /**
    * Activate Queues. Activate Queues for the specified Project ID. Queues must

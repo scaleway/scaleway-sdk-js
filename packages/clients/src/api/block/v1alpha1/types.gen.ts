@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Money, Zone } from '../../../bridge'
+import type { Money, Zone as ScwZone } from '../../../bridge'
 
 export type ListSnapshotsRequestOrderBy =
   | 'created_at_asc'
@@ -135,7 +135,7 @@ export interface Snapshot {
   /** List of tags assigned to the volume. */
   tags: string[]
   /** Snapshot zone. */
-  zone: Zone
+  zone: ScwZone
   /** Storage class of the snapshot. */
   class: StorageClass
 }
@@ -178,7 +178,7 @@ export interface Volume {
   /** List of tags assigned to the volume. */
   tags: string[]
   /** Volume zone. */
-  zone: Zone
+  zone: ScwZone
   /** Specifications of the volume. */
   specs?: VolumeSpecifications
   /** Last time the volume was detached. */
@@ -187,7 +187,7 @@ export interface Volume {
 
 export type CreateSnapshotRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the volume to snapshot. */
   volumeId: string
   /** Name of the snapshot. */
@@ -200,7 +200,7 @@ export type CreateSnapshotRequest = {
 
 export type CreateVolumeRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Name of the volume. */
   name?: string
   /**
@@ -230,21 +230,21 @@ export type CreateVolumeRequest = {
 
 export type DeleteSnapshotRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the snapshot. */
   snapshotId: string
 }
 
 export type DeleteVolumeRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the volume. */
   volumeId: string
 }
 
 export type ExportSnapshotToObjectStorageRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the snapshot. */
   snapshotId: string
   /** Scaleway Object Storage bucket where the object is stored. */
@@ -255,21 +255,21 @@ export type ExportSnapshotToObjectStorageRequest = {
 
 export type GetSnapshotRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the snapshot. */
   snapshotId: string
 }
 
 export type GetVolumeRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the volume. */
   volumeId: string
 }
 
 export type ImportSnapshotFromObjectStorageRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Scaleway Object Storage bucket where the object is stored. */
   bucket: string
   /** The object key inside the given bucket. */
@@ -286,7 +286,7 @@ export type ImportSnapshotFromObjectStorageRequest = {
 
 export type ImportSnapshotFromS3Request = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Scaleway Object Storage bucket where the object is stored. */
   bucket: string
   /** The object key inside the given bucket. */
@@ -303,7 +303,7 @@ export type ImportSnapshotFromS3Request = {
 
 export type ListSnapshotsRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Criteria to use when ordering the list. */
   orderBy?: ListSnapshotsRequestOrderBy
   /** Filter by Project ID. */
@@ -332,7 +332,7 @@ export interface ListSnapshotsResponse {
 
 export type ListVolumeTypesRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Page number. */
   page?: number
   /**
@@ -351,7 +351,7 @@ export interface ListVolumeTypesResponse {
 
 export type ListVolumesRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** Criteria to use when ordering the list. */
   orderBy?: ListVolumesRequestOrderBy
   /** Filter by Project ID. */
@@ -388,7 +388,7 @@ export interface ListVolumesResponse {
 
 export type UpdateSnapshotRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the snapshot. */
   snapshotId: string
   /** When defined, is the name of the snapshot. */
@@ -399,7 +399,7 @@ export type UpdateSnapshotRequest = {
 
 export type UpdateVolumeRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
-  zone?: Zone
+  zone?: ScwZone
   /** UUID of the volume. */
   volumeId: string
   /** When defined, is the new name of the volume. */
