@@ -6,7 +6,7 @@ import {
   urlParams,
   validatePathParam,
 } from '../../../bridge'
-import type { Zone } from '../../../bridge'
+import type { Zone as ScwZone } from '../../../bridge'
 import {
   marshalPrivateNetworkApiAddServerPrivateNetworkRequest,
   marshalPrivateNetworkApiSetServerPrivateNetworksRequest,
@@ -31,7 +31,7 @@ const jsonContentHeaders = {
 /** Elastic Metal - Private Networks API. */
 export class PrivateNetworkAPI extends ParentAPI {
   /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: Zone[] = [
+  public static readonly LOCALITIES: ScwZone[] = [
     'fr-par-1',
     'fr-par-2',
     'nl-ams-1',

@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 
 export type CronStatus =
   | 'unknown'
@@ -288,7 +288,7 @@ export interface Function {
   /** Secret environment variables of the function. */
   secretEnvironmentVariables: SecretHashedValue[]
   /** Region in which the function is deployed. */
-  region: Region
+  region: ScwRegion
   /**
    * Possible values:
    *
@@ -332,7 +332,7 @@ export interface Namespace {
   /** Secret environment variables of the namespace. */
   secretEnvironmentVariables: SecretHashedValue[]
   /** Region in which the namespace is located. */
-  region: Region
+  region: ScwRegion
   /** [ALPHA] List of tags applied to the Serverless Function Namespace. */
   tags: string[]
   /** Creation date of the namespace. */
@@ -416,7 +416,7 @@ export type CreateCronRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the function to use the cron with. */
   functionId: string
   /** Schedule of the cron in UNIX cron format. */
@@ -432,7 +432,7 @@ export type CreateDomainRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Hostame to create. */
   hostname: string
   /** UUID of the function to associate the domain with. */
@@ -444,7 +444,7 @@ export type CreateFunctionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Name of the function to create. */
   name?: string
   /** UUID of the namespace the function will be created in. */
@@ -485,7 +485,7 @@ export type CreateNamespaceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   name?: string
   /** Environment variables of the namespace. */
   environmentVariables?: Record<string, string>
@@ -504,7 +504,7 @@ export type CreateTokenRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /**
    * UUID of the function to associate the token with.
    *
@@ -528,7 +528,7 @@ export type CreateTriggerRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Name of the trigger. */
   name: string
   /** ID of the function to trigger. */
@@ -563,7 +563,7 @@ export type DeleteCronRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the cron to delete. */
   cronId: string
 }
@@ -573,7 +573,7 @@ export type DeleteDomainRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the domain to delete. */
   domainId: string
 }
@@ -583,7 +583,7 @@ export type DeleteFunctionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the function to delete. */
   functionId: string
 }
@@ -593,7 +593,7 @@ export type DeleteNamespaceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the namespace. */
   namespaceId: string
 }
@@ -603,7 +603,7 @@ export type DeleteTokenRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the token to delete. */
   tokenId: string
 }
@@ -613,7 +613,7 @@ export type DeleteTriggerRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the trigger to delete. */
   triggerId: string
 }
@@ -623,7 +623,7 @@ export type DeployFunctionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the function to deploy. */
   functionId: string
 }
@@ -638,7 +638,7 @@ export type GetCronRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the cron to get. */
   cronId: string
 }
@@ -648,7 +648,7 @@ export type GetDomainRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the domain to get. */
   domainId: string
 }
@@ -658,7 +658,7 @@ export type GetFunctionDownloadURLRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the function to get the the download URL for. */
   functionId: string
 }
@@ -668,7 +668,7 @@ export type GetFunctionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the function. */
   functionId: string
 }
@@ -678,7 +678,7 @@ export type GetFunctionUploadURLRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the function to get the upload URL for. */
   functionId: string
   /** Size of the archive to upload in bytes. */
@@ -690,7 +690,7 @@ export type GetNamespaceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the namespace. */
   namespaceId: string
 }
@@ -700,7 +700,7 @@ export type GetTokenRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the token to get. */
   tokenId: string
 }
@@ -710,7 +710,7 @@ export type GetTriggerRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the trigger to get. */
   triggerId: string
 }
@@ -720,7 +720,7 @@ export type ListCronsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number. */
   page?: number
   /** Number of crons per page. */
@@ -743,7 +743,7 @@ export type ListDomainsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number. */
   page?: number
   /** Number of domains per page. */
@@ -766,7 +766,7 @@ export type ListFunctionRuntimesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
 }
 
 export interface ListFunctionRuntimesResponse {
@@ -781,7 +781,7 @@ export type ListFunctionsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number. */
   page?: number
   /** Number of functions per page. */
@@ -810,7 +810,7 @@ export type ListNamespacesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number. */
   page?: number
   /** Number of namespaces per page. */
@@ -836,7 +836,7 @@ export type ListTokensRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number. */
   page?: number
   /** Number of tokens per page. */
@@ -859,7 +859,7 @@ export type ListTriggersRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Page number to return. */
   page?: number
   /** Maximum number of triggers to return per page. */
@@ -901,7 +901,7 @@ export type UpdateCronRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the cron to update. */
   cronId: string
   /** UUID of the function to use the cron with. */
@@ -919,7 +919,7 @@ export type UpdateFunctionRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the function to update. */
   functionId: string
   /** Environment variables of the function to update. */
@@ -961,7 +961,7 @@ export type UpdateNamespaceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the namespapce. */
   namespaceId: string
   /** Environment variables of the namespace. */
@@ -979,7 +979,7 @@ export type UpdateTriggerRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** ID of the trigger to update. */
   triggerId: string
   /** Name of the trigger. */

@@ -1,6 +1,10 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region, TimeSeries, Zone } from '../../../bridge'
+import type {
+  Region as ScwRegion,
+  Zone as ScwZone,
+  TimeSeries,
+} from '../../../bridge'
 
 export type ACLRuleAction = 'allow' | 'deny'
 
@@ -140,7 +144,7 @@ export interface EndpointPrivateNetworkDetails {
   /** CIDR notation of the endpoint IPv4 address. */
   serviceIp: string
   /** Private network zone. */
-  zone: Zone
+  zone: ScwZone
   /** How endpoint ips are provisioned. */
   provisioningMode: EndpointPrivateNetworkDetailsProvisioningMode
 }
@@ -333,7 +337,7 @@ export interface ReadReplica {
   /** Read replica status. */
   status: ReadReplicaStatus
   /** Region the Read Replica is in. */
-  region: Region
+  region: ScwRegion
   /**
    * Whether the replica is in the same availability zone as the main instance
    * nodes or not.
@@ -464,7 +468,7 @@ export interface DatabaseBackup {
   /** Expiration date of the download link. */
   downloadUrlExpiresAt?: Date
   /** Region of the database backup. */
-  region: Region
+  region: ScwRegion
   /** Store logical backups in the same region as the source Database Instance. */
   sameRegion: boolean
 }
@@ -477,7 +481,7 @@ export interface DatabaseEngine {
   /** Available versions. */
   versions: EngineVersion[]
   /** Region of this Database Instance. */
-  region: Region
+  region: ScwRegion
 }
 
 export interface Database {
@@ -510,7 +514,7 @@ export interface InstanceLog {
   /** Creation date (must follow the ISO 8601 format). */
   createdAt?: Date
   /** Region the Database Instance is in. */
-  region: Region
+  region: ScwRegion
 }
 
 export interface Instance {
@@ -519,7 +523,7 @@ export interface Instance {
   /** Volumes of the Database Instance. */
   volume?: Volume
   /** Region the Database Instance is in. */
-  region: Region
+  region: ScwRegion
   /** UUID of the Database Instance. */
   id: string
   /** Name of the Database Instance. */
@@ -590,7 +594,7 @@ export interface NodeType {
   /** Instance range associated with the NodeType offer. */
   instanceRange: string
   /** Region the Node Type is in. */
-  region: Region
+  region: ScwRegion
 }
 
 export interface Privilege {
@@ -626,7 +630,7 @@ export interface Snapshot {
   /** Type of volume where data is stored (lssd, bssd or sbs). */
   volumeType?: SnapshotVolumeType
   /** Region of this snapshot. */
-  region: Region
+  region: ScwRegion
 }
 
 export interface User {
@@ -662,7 +666,7 @@ export type AddInstanceACLRulesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance you want to add ACL rules to. */
   instanceId: string
   /** ACL rules to add to the Database Instance. */
@@ -679,7 +683,7 @@ export type AddInstanceSettingsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance you want to add settings to. */
   instanceId: string
   /** Settings to add to the Database Instance. */
@@ -696,7 +700,7 @@ export type ApplyInstanceMaintenanceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance you want to apply maintenance. */
   instanceId: string
 }
@@ -706,7 +710,7 @@ export type CloneInstanceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance you want to clone. */
   instanceId: string
   /** Name of the Database Instance clone. */
@@ -720,7 +724,7 @@ export type CreateDatabaseBackupRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance. */
   instanceId: string
   /** Name of the database you want to back up. */
@@ -736,7 +740,7 @@ export type CreateDatabaseRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance where to create the database. */
   instanceId: string
   /** Name of the database. */
@@ -748,7 +752,7 @@ export type CreateEndpointRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance you to which you want to add an endpoint. */
   instanceId: string
   /** Specification of the endpoint you want to create. */
@@ -760,7 +764,7 @@ export type CreateInstanceFromSnapshotRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Block snapshot of the Database Instance. */
   snapshotId: string
   /** Name of the Database Instance created with the snapshot. */
@@ -779,7 +783,7 @@ export type CreateInstanceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /**
    * @deprecated Please use project_id instead.
    *
@@ -839,7 +843,7 @@ export type CreateReadReplicaEndpointRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Read Replica. */
   readReplicaId: string
   /** Specification of the endpoint you want to create. */
@@ -851,7 +855,7 @@ export type CreateReadReplicaRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance you want to create a Read Replica from. */
   instanceId: string
   /** Specification of the endpoint you want to create. */
@@ -868,7 +872,7 @@ export type CreateSnapshotRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance. */
   instanceId: string
   /** Name of the snapshot. */
@@ -882,7 +886,7 @@ export type CreateUserRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance in which you want to create a user. */
   instanceId: string
   /** Name of the user you want to create. */
@@ -902,7 +906,7 @@ export type DeleteDatabaseBackupRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the database backup to delete. */
   databaseBackupId: string
 }
@@ -912,7 +916,7 @@ export type DeleteDatabaseRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance where to delete the database. */
   instanceId: string
   /** Name of the database to delete. */
@@ -924,7 +928,7 @@ export type DeleteEndpointRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** This endpoint can also be used to delete a Read Replica endpoint. */
   endpointId: string
 }
@@ -934,7 +938,7 @@ export type DeleteInstanceACLRulesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance you want to delete an ACL rule from. */
   instanceId: string
   /** IP addresses defined in the ACL rules of the Database Instance. */
@@ -951,7 +955,7 @@ export type DeleteInstanceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance to delete. */
   instanceId: string
 }
@@ -961,7 +965,7 @@ export type DeleteInstanceSettingsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance to delete settings from. */
   instanceId: string
   /** Settings names to delete. */
@@ -978,7 +982,7 @@ export type DeleteReadReplicaRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Read Replica. */
   readReplicaId: string
 }
@@ -988,7 +992,7 @@ export type DeleteSnapshotRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the snapshot to delete. */
   snapshotId: string
 }
@@ -998,7 +1002,7 @@ export type DeleteUserRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance to delete the user from. */
   instanceId: string
   /** Name of the user. */
@@ -1010,7 +1014,7 @@ export type ExportDatabaseBackupRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the database backup you want to export. */
   databaseBackupId: string
 }
@@ -1020,7 +1024,7 @@ export type GetDatabaseBackupRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the database backup. */
   databaseBackupId: string
 }
@@ -1030,7 +1034,7 @@ export type GetEndpointRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the endpoint you want to get. */
   endpointId: string
 }
@@ -1040,7 +1044,7 @@ export type GetInstanceCertificateRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance. */
   instanceId: string
 }
@@ -1050,7 +1054,7 @@ export type GetInstanceLogRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the instance_log you want. */
   instanceLogId: string
 }
@@ -1060,7 +1064,7 @@ export type GetInstanceMetricsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance. */
   instanceId: string
   /** Start date to gather metrics from. */
@@ -1076,7 +1080,7 @@ export type GetInstanceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance. */
   instanceId: string
 }
@@ -1086,7 +1090,7 @@ export type GetReadReplicaRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Read Replica. */
   readReplicaId: string
 }
@@ -1096,7 +1100,7 @@ export type GetSnapshotRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the snapshot. */
   snapshotId: string
 }
@@ -1111,7 +1115,7 @@ export type ListDatabaseBackupsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Name of the database backups. */
   name?: string
   /** Criteria to use when ordering database backups listing. */
@@ -1138,7 +1142,7 @@ export type ListDatabaseEnginesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Name of the database engine. */
   name?: string
   /** Version of the database engine. */
@@ -1159,7 +1163,7 @@ export type ListDatabasesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance to list the databases of. */
   instanceId: string
   /** Name of the database. */
@@ -1186,7 +1190,7 @@ export type ListInstanceACLRulesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance. */
   instanceId: string
   page?: number
@@ -1205,7 +1209,7 @@ export type ListInstanceLogsDetailsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance you want logs of. */
   instanceId: string
 }
@@ -1220,7 +1224,7 @@ export type ListInstanceLogsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance you want logs of. */
   instanceId: string
   /** Criteria to use when ordering Database Instance logs listing. */
@@ -1237,7 +1241,7 @@ export type ListInstancesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** List Database Instances that have a given tag. */
   tags?: string[]
   /** Lists Database Instances that match a name pattern. */
@@ -1264,7 +1268,7 @@ export type ListNodeTypesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Defines whether or not to include disabled types. */
   includeDisabledTypes: boolean
   page?: number
@@ -1283,7 +1287,7 @@ export type ListPrivilegesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance. */
   instanceId: string
   /** Criteria to use when ordering privileges listing. */
@@ -1308,7 +1312,7 @@ export type ListSnapshotsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Name of the snapshot. */
   name?: string
   /** Criteria to use when ordering snapshot listing. */
@@ -1335,7 +1339,7 @@ export type ListUsersRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance. */
   instanceId: string
   /** Name of the user. */
@@ -1358,7 +1362,7 @@ export type MigrateEndpointRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the endpoint you want to migrate. */
   endpointId: string
   /** UUID of the instance you want to attach the endpoint to. */
@@ -1370,7 +1374,7 @@ export type PrepareInstanceLogsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance you want logs of. */
   instanceId: string
   /** Start datetime of your log. (RFC 3339 format). */
@@ -1389,7 +1393,7 @@ export type PromoteReadReplicaRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Read Replica. */
   readReplicaId: string
 }
@@ -1399,7 +1403,7 @@ export type PurgeInstanceLogsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance you want logs of. */
   instanceId: string
   /** Given log name to purge. */
@@ -1411,7 +1415,7 @@ export type RenewInstanceCertificateRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance you want logs of. */
   instanceId: string
 }
@@ -1421,7 +1425,7 @@ export type ResetReadReplicaRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Read Replica. */
   readReplicaId: string
 }
@@ -1431,7 +1435,7 @@ export type RestartInstanceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance you want to restart. */
   instanceId: string
 }
@@ -1441,7 +1445,7 @@ export type RestoreDatabaseBackupRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Backup of a logical database. */
   databaseBackupId: string
   /**
@@ -1458,7 +1462,7 @@ export type SetInstanceACLRulesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance where the ACL rules must be set. */
   instanceId: string
   /** ACL rules to define for the Database Instance. */
@@ -1475,7 +1479,7 @@ export type SetInstanceSettingsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance where the settings must be set. */
   instanceId: string
   /** Settings to define for the Database Instance. */
@@ -1492,7 +1496,7 @@ export type SetPrivilegeRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance. */
   instanceId: string
   /** Name of the database. */
@@ -1508,7 +1512,7 @@ export type UpdateDatabaseBackupRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the database backup to update. */
   databaseBackupId: string
   /** Name of the Database Backup. */
@@ -1522,7 +1526,7 @@ export type UpdateInstanceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance to update. */
   instanceId: string
   /** In hours. */
@@ -1548,7 +1552,7 @@ export type UpdateSnapshotRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the snapshot to update. */
   snapshotId: string
   /** Name of the snapshot. */
@@ -1562,7 +1566,7 @@ export type UpdateUserRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance the user belongs to. */
   instanceId: string
   /** Name of the database user. */
@@ -1582,7 +1586,7 @@ export type UpgradeInstanceRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Database Instance you want to upgrade. */
   instanceId: string
   /**

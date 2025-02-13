@@ -321,6 +321,7 @@ export const unmarshalExternalNode = (data: unknown): ExternalNode => {
     cniPluginsVersion: data.cni_plugins_version,
     containerdVersion: data.containerd_version,
     externalIp: data.external_ip,
+    iamToken: data.iam_token,
     id: data.id,
     kubeToken: data.kube_token,
     kubeletConfig: data.kubelet_config,

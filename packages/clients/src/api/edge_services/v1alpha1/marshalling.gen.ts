@@ -5,6 +5,7 @@ import {
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
+  unmarshalMapOfObject,
   unmarshalMoney,
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
@@ -39,6 +40,7 @@ import type {
   PipelineStages,
   Plan,
   PlanDetails,
+  PlanUsageDetails,
   PurgeRequest,
   ScalewayLb,
   ScalewayLbBackendConfig,
@@ -323,7 +325,20 @@ const unmarshalPlanDetails = (data: unknown): PlanDetails => {
     packageGb: data.package_gb,
     pipelineLimit: data.pipeline_limit,
     planName: data.plan_name,
+    wafRequests: data.waf_requests,
   } as PlanDetails
+}
+
+const unmarshalPlanUsageDetails = (data: unknown): PlanUsageDetails => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PlanUsageDetails' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    planCost: data.plan_cost ? unmarshalMoney(data.plan_cost) : undefined,
+  } as PlanUsageDetails
 }
 
 export const unmarshalGetBillingResponse = (
@@ -340,6 +355,7 @@ export const unmarshalGetBillingResponse = (
       ? unmarshalPlanDetails(data.current_plan)
       : undefined,
     currentPlanCacheUsage: data.current_plan_cache_usage,
+    currentPlanWafUsage: data.current_plan_waf_usage,
     extraCacheCost: data.extra_cache_cost
       ? unmarshalMoney(data.extra_cache_cost)
       : undefined,
@@ -347,9 +363,18 @@ export const unmarshalGetBillingResponse = (
     extraPipelinesCost: data.extra_pipelines_cost
       ? unmarshalMoney(data.extra_pipelines_cost)
       : undefined,
+    extraWafCost: data.extra_waf_cost
+      ? unmarshalMoney(data.extra_waf_cost)
+      : undefined,
+    extraWafUsage: data.extra_waf_usage,
     pipelineNumber: data.pipeline_number,
     planCost: data.plan_cost ? unmarshalMoney(data.plan_cost) : undefined,
+    plansUsageDetails: unmarshalMapOfObject(
+      data.plans_usage_details,
+      unmarshalPlanUsageDetails,
+    ),
     totalCost: data.total_cost ? unmarshalMoney(data.total_cost) : undefined,
+    wafAddOn: data.waf_add_on ? unmarshalMoney(data.waf_add_on) : undefined,
   } as GetBillingResponse
 }
 

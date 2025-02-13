@@ -7,7 +7,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '../../../bridge'
-import type { Region, WaitForOptions } from '../../../bridge'
+import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
 import { DATABASE_TRANSIENT_STATUSES } from './content.gen'
 import {
   marshalCreateDatabaseRequest,
@@ -45,7 +45,7 @@ const jsonContentHeaders = {
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par']
+  public static readonly LOCALITIES: ScwRegion[] = ['fr-par']
 
   /**
    * Create a new Serverless SQL Database. You must provide the following

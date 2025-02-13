@@ -70,7 +70,7 @@ const jsonContentHeaders = {
 }
 
 /**
- * Managed Database for MongoDB®.
+ * Managed MongoDB®.
  *
  * This API allows you to manage your Managed Databases for MongoDB®.
  */
