@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region } from '../../../bridge'
+import type { Region as ScwRegion } from '../../../bridge'
 
 export type DatabaseBackupStatus =
   | 'unknown_status'
@@ -54,7 +54,7 @@ export interface DatabaseBackup {
   /** Expiration date of the download URL. */
   downloadUrlExpiresAt?: Date
   /** Region of the database backup. */
-  region: Region
+  region: ScwRegion
 }
 
 export interface Database {
@@ -74,7 +74,7 @@ export interface Database {
   /** Project ID the database belongs to. */
   projectId: string
   /** Region of the database. */
-  region: Region
+  region: ScwRegion
   /** Creation date. */
   createdAt?: Date
   /** The minimum number of CPU units for your Serverless SQL Database. */
@@ -94,7 +94,7 @@ export type CreateDatabaseRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** The ID of your Scaleway project. */
   projectId?: string
   /** The name of the Serverless SQL Database to be created. */
@@ -112,7 +112,7 @@ export type DeleteDatabaseRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Serverless SQL Database. */
   databaseId: string
 }
@@ -122,7 +122,7 @@ export type ExportDatabaseBackupRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Serverless SQL Database backup. */
   backupId: string
 }
@@ -132,7 +132,7 @@ export type GetDatabaseBackupRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Serverless SQL Database backup. */
   backupId: string
 }
@@ -142,7 +142,7 @@ export type GetDatabaseRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Serverless SQL DB database. */
   databaseId: string
 }
@@ -152,7 +152,7 @@ export type ListDatabaseBackupsRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Filter by the UUID of the Scaleway organization. */
   organizationId?: string
   /** Filter by the UUID of the Scaleway project. */
@@ -179,7 +179,7 @@ export type ListDatabasesRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** Filter by the UUID of the Scaleway organization. */
   organizationId?: string
   /** UUID of the Scaleway project. */
@@ -209,7 +209,7 @@ export type RestoreDatabaseFromBackupRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Serverless SQL Database. */
   databaseId: string
   /** UUID of the Serverless SQL Database backup to restore. */
@@ -221,7 +221,7 @@ export type UpdateDatabaseRequest = {
    * Region to target. If none is passed will use default region from the
    * config.
    */
-  region?: Region
+  region?: ScwRegion
   /** UUID of the Serverless SQL Database. */
   databaseId: string
   /** The minimum number of CPU units for your Serverless SQL Database. */

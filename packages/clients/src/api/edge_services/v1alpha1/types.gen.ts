@@ -297,6 +297,16 @@ export interface PlanDetails {
   packageGb: number
   /** Number of pipelines included in subscription plan. */
   pipelineLimit: number
+  /** Number of WAF requests included in subscription plan. */
+  wafRequests: number
+}
+
+export interface PlanUsageDetails {
+  /**
+   * Cost to date (this month) for the corresponding Edge Services subscription
+   * plan.
+   */
+  planCost?: Money
 }
 
 export interface PipelineStages {
@@ -562,6 +572,31 @@ export interface GetBillingResponse {
    * included in the subscription plans.
    */
   extraCacheCost?: Money
+  /**
+   * Total number of requests processed by the WAF since the beginning of the
+   * current month, for the active subscription plan.
+   */
+  currentPlanWafUsage: number
+  /**
+   * Total number of extra requests processed by the WAF from the beginning of
+   * the month, not included in the subscription plans.
+   */
+  extraWafUsage: number
+  /**
+   * Cost to date (this month) of the extra requests processed by the WAF that
+   * were not included in the subscription plans.
+   */
+  extraWafCost?: Money
+  /**
+   * Cost of activating WAF add-on (where subscription plan does not include
+   * WAF).
+   */
+  wafAddOn?: Money
+  /**
+   * Detailed costs and usage for all Edge Services subscription plans that were
+   * activated during the month.
+   */
+  plansUsageDetails: Record<string, PlanUsageDetails>
   /**
    * Total cost to date (this month) of all Edge Services resources including
    * active subscription plan, previously active plans, extra pipelines and

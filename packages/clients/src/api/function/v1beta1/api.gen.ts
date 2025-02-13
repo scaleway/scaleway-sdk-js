@@ -8,7 +8,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '../../../bridge'
-import type { Region, WaitForOptions } from '../../../bridge'
+import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
 import {
   CRON_TRANSIENT_STATUSES,
   DOMAIN_TRANSIENT_STATUSES,
@@ -105,7 +105,11 @@ const jsonContentHeaders = {
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: Region[] = ['fr-par', 'nl-ams', 'pl-waw']
+  public static readonly LOCALITIES: ScwRegion[] = [
+    'fr-par',
+    'nl-ams',
+    'pl-waw',
+  ]
 
   protected pageOfListNamespaces = (
     request: Readonly<ListNamespacesRequest> = {},
