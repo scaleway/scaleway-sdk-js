@@ -3,6 +3,9 @@
 export { API, PrivateNetworkAPI } from './api.gen'
 export * from './content.gen'
 export type {
+  Commitment,
+  CommitmentType,
+  CommitmentTypeValue,
   ConnectivityDiagnostic,
   ConnectivityDiagnosticActionType,
   ConnectivityDiagnosticDiagnosticStatus,
