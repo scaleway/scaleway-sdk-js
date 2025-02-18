@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.66.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.65.0...@scaleway/sdk@2.66.0) (2025-02-17)
+
+### Features
+
+- **apple_silicon:** introduce monthly commitment handling ([#1803](https://github.com/scaleway/scaleway-sdk-js/issues/1803)) ([0972b37](https://github.com/scaleway/scaleway-sdk-js/commit/0972b37b4592b0112e6f800426b8129a85192d76))
+- **audit_trail:** add key manager to resource api ([#1786](https://github.com/scaleway/scaleway-sdk-js/issues/1786)) ([b985b98](https://github.com/scaleway/scaleway-sdk-js/commit/b985b981e60650c72ed4b8faf2422e3cf4063f08))
+- **edge_services:** add WAF billing ([#1800](https://github.com/scaleway/scaleway-sdk-js/issues/1800)) ([84a9ec5](https://github.com/scaleway/scaleway-sdk-js/commit/84a9ec517b24259cf6beef3277790a4764750bbb))
+
+### Bug Fixes
+
+- add prefix to Zone and Region import ([#1802](https://github.com/scaleway/scaleway-sdk-js/issues/1802)) ([ce59650](https://github.com/scaleway/scaleway-sdk-js/commit/ce596501b569b3387a76e12e7d00a90d94ca803e))
+- **types:** unknown property accessKey in createClient ([#1781](https://github.com/scaleway/scaleway-sdk-js/issues/1781)) ([865b8c7](https://github.com/scaleway/scaleway-sdk-js/commit/865b8c7b6854314ebc209b5bba6ea836cb792b73))
+
 ## [2.65.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.64.0...@scaleway/sdk@2.65.0) (2025-02-10)
 
 ### Features
