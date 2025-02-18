@@ -2,6 +2,13 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Region as ScwRegion } from '../../../bridge'
 
+export type AnyAlertState =
+  | 'unknown_state'
+  | 'disabled'
+  | 'enabled'
+  | 'pending'
+  | 'firing'
+
 export type DataSourceOrigin =
   | 'unknown_origin'
   | 'scaleway'
@@ -62,6 +69,20 @@ export interface GetConfigResponseRetention {
   minDays: number
   maxDays: number
   defaultDays: number
+}
+
+export interface AnyAlert {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region: ScwRegion
+  preconfigured: boolean
+  name: string
+  rule: string
+  duration: string
+  state: AnyAlertState
+  annotations: Record<string, string>
 }
 
 /** Contact point. */
@@ -329,6 +350,14 @@ export interface Grafana {
   grafanaUrl: string
 }
 
+/** Retrieve a list of alerts matching the request. */
+export interface ListAlertsResponse {
+  /** Total count of alerts matching the request. */
+  totalCount: number
+  /** List of alerts matching the applied filters. */
+  alerts: AnyAlert[]
+}
+
 /** Response returned when listing contact points. */
 export interface ListContactPointsResponse {
   /** Total count of contact points associated with the default receiver. */
@@ -579,6 +608,34 @@ export type RegionalApiGetUsageOverviewRequest = {
   region?: ScwRegion
   projectId?: string
   interval?: string
+}
+
+/** Retrieve a list of alerts. */
+export type RegionalApiListAlertsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: ScwRegion
+  /** Project ID to filter for, only alerts from this Project will be returned. */
+  projectId?: string
+  /**
+   * True returns only enabled alerts. False returns only disabled alerts. If
+   * omitted, no alert filtering is applied. Other filters may still apply.
+   */
+  isEnabled?: boolean
+  /**
+   * True returns only preconfigured alerts. False returns only custom alerts.
+   * If omitted, no filtering is applied on alert types. Other filters may still
+   * apply.
+   */
+  isPreconfigured?: boolean
+  /**
+   * Valid values to filter on are `disabled`, `enabled`, `pending` and
+   * `firing`. If omitted, no filtering is applied on alert states. Other
+   * filters may still apply.
+   */
+  state?: AnyAlertState
 }
 
 /** List contact points. */
