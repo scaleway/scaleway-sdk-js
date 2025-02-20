@@ -301,16 +301,20 @@ export interface HostingSummary {
   createdAt?: Date
   /** Date on which the Web Hosting plan was last updated. */
   updatedAt?: Date
-  /** Status of the Web Hosting plan. */
-  status: HostingSummaryStatus
+  /** @deprecated Status of the Web Hosting plan. */
+  status?: HostingSummaryStatus
   /** Main domain associated with the Web Hosting plan. */
   domain: string
   /** Whether the hosting is protected or not. */
   protected: boolean
-  /** DNS status of the Web Hosting plan. */
-  dnsStatus: DnsRecordsStatus
+  /** @deprecated DNS status of the Web Hosting plan. */
+  dnsStatus?: DnsRecordsStatus
   /** Name of the active offer for the Web Hosting plan. */
   offerName: string
+  /** Status of the Web Hosting plan. */
+  hostingStatus: HostingStatus
+  /** Main domain status of the Web Hosting plan. */
+  domainStatus: DomainStatus
   /** Region where the Web Hosting plan is hosted. */
   region: ScwRegion
 }
@@ -708,14 +712,16 @@ export interface Hosting {
   platform?: Platform
   /** List of tags associated with the Web Hosting plan. */
   tags: string[]
-  /** DNS status of the Web Hosting plan. */
-  dnsStatus: DnsRecordsStatus
+  /** @deprecated DNS status of the Web Hosting plan. */
+  dnsStatus?: DnsRecordsStatus
   /** Current IPv4 address of the hosting. */
   ipv4: string
   /** Whether the hosting is protected or not. */
   protected: boolean
   /** Details of the hosting user. */
   user?: HostingUser
+  /** Main domain status of the Web Hosting plan. */
+  domainStatus: DomainStatus
   /** Region where the Web Hosting plan is hosted. */
   region: ScwRegion
 }
