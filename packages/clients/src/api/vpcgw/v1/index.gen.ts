@@ -53,6 +53,7 @@ export type {
   ListPATRulesRequest,
   ListPATRulesRequestOrderBy,
   ListPATRulesResponse,
+  MigrateToV2Request,
   PATRule,
   PATRuleProtocol,
   RefreshSSHKeysRequest,
