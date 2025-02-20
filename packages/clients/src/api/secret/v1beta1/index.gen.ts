@@ -36,6 +36,8 @@ export type {
   ListTagsResponse,
   Product,
   ProtectSecretRequest,
+  RestoreSecretRequest,
+  RestoreSecretVersionRequest,
   SSHKey,
   Secret,
   SecretStatus,
