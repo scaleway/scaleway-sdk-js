@@ -51,6 +51,7 @@ export const unmarshalSecretVersion = (data: unknown): SecretVersion => {
   return {
     createdAt: unmarshalDate(data.created_at),
     deletedAt: unmarshalDate(data.deleted_at),
+    deletionRequestedAt: unmarshalDate(data.deletion_requested_at),
     description: data.description,
     ephemeralProperties: data.ephemeral_properties
       ? unmarshalEphemeralProperties(data.ephemeral_properties)
@@ -86,6 +87,7 @@ export const unmarshalSecret = (data: unknown): Secret => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
+    deletionRequestedAt: unmarshalDate(data.deletion_requested_at),
     description: data.description,
     ephemeralPolicy: data.ephemeral_policy
       ? unmarshalEphemeralPolicy(data.ephemeral_policy)

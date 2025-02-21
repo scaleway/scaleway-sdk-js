@@ -10,7 +10,6 @@ import type { DefaultValues } from '../../../bridge'
 import type {
   Alert,
   AlertManager,
-  AnyAlert,
   ContactPoint,
   ContactPointEmail,
   DataSource,
@@ -28,7 +27,6 @@ import type {
   ListDataSourcesResponse,
   ListGrafanaProductDashboardsResponse,
   ListGrafanaUsersResponse,
-  ListManagedAlertsResponse,
   ListPlansResponse,
   ListTokensResponse,
   Plan,
@@ -238,22 +236,23 @@ export const unmarshalGrafana = (data: unknown): Grafana => {
   } as Grafana
 }
 
-const unmarshalAnyAlert = (data: unknown): AnyAlert => {
+const unmarshalAlert = (data: unknown): Alert => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'AnyAlert' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'Alert' failed as data isn't a dictionary.`,
     )
   }
 
   return {
     annotations: data.annotations,
     duration: data.duration,
+    enabled: data.enabled,
     name: data.name,
     preconfigured: data.preconfigured,
     region: data.region,
     rule: data.rule,
-    state: data.state,
-  } as AnyAlert
+    state: data.state ? data.state : undefined,
+  } as Alert
 }
 
 export const unmarshalListAlertsResponse = (
@@ -266,7 +265,7 @@ export const unmarshalListAlertsResponse = (
   }
 
   return {
-    alerts: unmarshalArrayOfObject(data.alerts, unmarshalAnyAlert),
+    alerts: unmarshalArrayOfObject(data.alerts, unmarshalAlert),
     totalCount: data.total_count,
   } as ListAlertsResponse
 }
@@ -340,37 +339,6 @@ export const unmarshalListGrafanaUsersResponse = (
     ),
     totalCount: data.total_count,
   } as ListGrafanaUsersResponse
-}
-
-const unmarshalAlert = (data: unknown): Alert => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Alert' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    description: data.description,
-    name: data.name,
-    product: data.product,
-    productFamily: data.product_family,
-    rule: data.rule,
-  } as Alert
-}
-
-export const unmarshalListManagedAlertsResponse = (
-  data: unknown,
-): ListManagedAlertsResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListManagedAlertsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    alerts: unmarshalArrayOfObject(data.alerts, unmarshalAlert),
-    totalCount: data.total_count,
-  } as ListManagedAlertsResponse
 }
 
 export const unmarshalListPlansResponse = (
