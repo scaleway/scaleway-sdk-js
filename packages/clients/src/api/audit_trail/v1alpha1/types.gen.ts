@@ -13,6 +13,12 @@ export type ResourceType =
   | 'kube_node'
   | 'kube_acl'
   | 'keym_key'
+  | 'iamx_user'
+  | 'iamx_application'
+  | 'iamx_group'
+  | 'iamx_policy'
+  | 'iamx_api_key'
+  | 'iamx_ssh_key'
 
 export interface KeyManagerKeyInfo {}
 

@@ -38,6 +38,7 @@ export type SecretVersionStatus =
   | 'enabled'
   | 'disabled'
   | 'deleted'
+  | 'scheduled_for_deletion'
 
 export interface EphemeralPolicy {
   /**
@@ -95,8 +96,9 @@ export interface SecretVersion {
   /**
    * - `unknown_status`: the version is in an invalid state. `enabled`: the
    *   version is accessible. `disabled`: the version is not accessible but can
-   *   be enabled. `deleted`: the version is permanently deleted. It is not
-   *   possible to recover it.
+   *   be enabled. `scheduled_for_deletion`: the version is scheduled for
+   *   deletion. It will be deleted in 7 days. `deleted`: the version is
+   *   permanently deleted. It is not possible to recover it.
    */
   status: SecretVersionStatus
   /** Date and time of the version's creation. */
@@ -115,6 +117,8 @@ export interface SecretVersion {
    * version expires.
    */
   ephemeralProperties?: EphemeralProperties
+  /** Returns the time at which deletion was requested. */
+  deletionRequestedAt?: Date
 }
 
 export interface Secret {
@@ -155,6 +159,8 @@ export interface Secret {
   ephemeralPolicy?: EphemeralPolicy
   /** List of Scaleway resources that can access and manage the secret. */
   usedBy: Product[]
+  /** Returns the time at which deletion was requested. */
+  deletionRequestedAt?: Date
   /** Region of the secret. */
   region: ScwRegion
 }
@@ -500,6 +506,11 @@ export type ListSecretsRequest = {
   ephemeral?: boolean
   /** Filter by secret type (optional). */
   type?: SecretType
+  /**
+   * Filter by whether the secret was scheduled for deletion / not scheduled for
+   * deletion (optional).
+   */
+  scheduledForDeletion?: boolean
 }
 
 export interface ListSecretsResponse {
@@ -536,6 +547,25 @@ export type ProtectSecretRequest = {
   region?: ScwRegion
   /** ID of the secret to enable secret protection for. */
   secretId: string
+}
+
+export type RestoreSecretRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: ScwRegion
+  secretId: string
+}
+
+export type RestoreSecretVersionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: ScwRegion
+  secretId: string
+  revision: string
 }
 
 export interface SSHKey {
