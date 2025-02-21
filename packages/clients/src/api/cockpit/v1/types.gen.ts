@@ -2,12 +2,7 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Region as ScwRegion } from '../../../bridge'
 
-export type AnyAlertState =
-  | 'unknown_state'
-  | 'disabled'
-  | 'enabled'
-  | 'pending'
-  | 'firing'
+export type AlertState = 'unknown_state' | 'inactive' | 'pending' | 'firing'
 
 export type DataSourceOrigin =
   | 'unknown_origin'
@@ -28,14 +23,6 @@ export type ListDataSourcesRequestOrderBy =
   | 'type_desc'
 
 export type ListGrafanaUsersRequestOrderBy = 'login_asc' | 'login_desc'
-
-export type ListManagedAlertsRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
-  | 'name_asc'
-  | 'name_desc'
-  | 'type_asc'
-  | 'type_desc'
 
 export type ListPlansRequestOrderBy = 'name_asc' | 'name_desc'
 
@@ -71,7 +58,7 @@ export interface GetConfigResponseRetention {
   defaultDays: number
 }
 
-export interface AnyAlert {
+export interface Alert {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -81,7 +68,8 @@ export interface AnyAlert {
   name: string
   rule: string
   duration: string
-  state: AnyAlertState
+  enabled: boolean
+  state?: AlertState
   annotations: Record<string, string>
 }
 
@@ -149,14 +137,6 @@ export interface GrafanaUser {
   role: GrafanaUserRole
   /** Grafana user's password. */
   password?: string
-}
-
-export interface Alert {
-  productFamily: string
-  product: string
-  name: string
-  rule: string
-  description: string
 }
 
 /** Type of pricing plan. */
@@ -355,7 +335,7 @@ export interface ListAlertsResponse {
   /** Total count of alerts matching the request. */
   totalCount: number
   /** List of alerts matching the applied filters. */
-  alerts: AnyAlert[]
+  alerts: Alert[]
 }
 
 /** Response returned when listing contact points. */
@@ -398,14 +378,6 @@ export interface ListGrafanaUsersResponse {
   totalCount: number
   /** Grafana users information. */
   grafanaUsers: GrafanaUser[]
-}
-
-/** Response returned when listing data sources. */
-export interface ListManagedAlertsResponse {
-  /** Total count of data sources matching the request. */
-  totalCount: number
-  /** Alerts matching the request within the pagination. */
-  alerts: Alert[]
 }
 
 /** Output returned when listing pricing plans. */
@@ -635,7 +607,7 @@ export type RegionalApiListAlertsRequest = {
    * `firing`. If omitted, no filtering is applied on alert states. Other
    * filters may still apply.
    */
-  state?: AnyAlertState
+  state?: AlertState
 }
 
 /** List contact points. */
@@ -681,26 +653,6 @@ export type RegionalApiListDataSourcesRequest = {
    * returned.
    */
   types?: DataSourceType[]
-}
-
-/** Enable the sending of managed alerts. */
-export type RegionalApiListManagedAlertsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: ScwRegion
-  /** Page number to return, from the paginated results. */
-  page?: number
-  /** Number of data sources to return per page. */
-  pageSize?: number
-  /** Sort order for data sources in the response. */
-  orderBy?: ListManagedAlertsRequestOrderBy
-  /**
-   * Project ID to filter for, only data sources from this Project will be
-   * returned.
-   */
-  projectId?: string
 }
 
 /** List tokens. */
