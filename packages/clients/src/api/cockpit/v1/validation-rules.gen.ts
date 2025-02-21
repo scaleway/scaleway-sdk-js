@@ -42,16 +42,6 @@ export const RegionalApiListDataSourcesRequest = {
   },
 }
 
-export const RegionalApiListManagedAlertsRequest = {
-  page: {
-    greaterThanOrEqual: 1,
-  },
-  pageSize: {
-    greaterThanOrEqual: 1,
-    lessThanOrEqual: 1000,
-  },
-}
-
 export const RegionalApiListTokensRequest = {
   page: {
     greaterThanOrEqual: 1,

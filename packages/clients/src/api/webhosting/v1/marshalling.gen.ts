@@ -298,8 +298,9 @@ export const unmarshalHosting = (data: unknown): Hosting => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
-    dnsStatus: data.dns_status,
+    dnsStatus: data.dns_status ? data.dns_status : undefined,
     domain: data.domain,
+    domainStatus: data.domain_status,
     id: data.id,
     ipv4: data.ipv4,
     offer: data.offer ? unmarshalOffer(data.offer) : undefined,
@@ -401,14 +402,16 @@ const unmarshalHostingSummary = (data: unknown): HostingSummary => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
-    dnsStatus: data.dns_status,
+    dnsStatus: data.dns_status ? data.dns_status : undefined,
     domain: data.domain,
+    domainStatus: data.domain_status,
+    hostingStatus: data.hosting_status,
     id: data.id,
     offerName: data.offer_name,
     projectId: data.project_id,
     protected: data.protected,
     region: data.region,
-    status: data.status,
+    status: data.status ? data.status : undefined,
     updatedAt: unmarshalDate(data.updated_at),
   } as HostingSummary
 }
