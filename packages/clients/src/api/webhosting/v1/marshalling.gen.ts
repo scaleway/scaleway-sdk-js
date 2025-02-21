@@ -167,6 +167,7 @@ export const unmarshalDnsRecords = (data: unknown): DnsRecords => {
   }
 
   return {
+    dnsConfig: data.dns_config,
     nameServers: unmarshalArrayOfObject(data.name_servers, unmarshalNameserver),
     records: unmarshalArrayOfObject(data.records, unmarshalDnsRecord),
     status: data.status,

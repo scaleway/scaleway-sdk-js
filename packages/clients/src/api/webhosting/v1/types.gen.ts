@@ -615,6 +615,8 @@ export interface DnsRecords {
   nameServers: Nameserver[]
   /** Status of the records. */
   status: DnsRecordsStatus
+  /** Records dns auto configuration settings. */
+  dnsConfig: DomainDnsAction[]
 }
 
 export interface Domain {
