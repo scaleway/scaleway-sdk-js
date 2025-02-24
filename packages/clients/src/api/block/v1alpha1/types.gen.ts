@@ -321,6 +321,11 @@ export type ListSnapshotsRequest = {
   volumeId?: string
   /** Filter snapshots by their names. */
   name?: string
+  /**
+   * Filter by tags. Only snapshots with one or more matching tags will be
+   * returned.
+   */
+  tags?: string[]
 }
 
 export interface ListSnapshotsResponse {
