@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.67.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.66.0...@scaleway/sdk@2.67.0) (2025-02-24)
+
+### Features
+
+- **audit_trail:** add IAM resources ([#1819](https://github.com/scaleway/scaleway-sdk-js/issues/1819)) ([c5e65f1](https://github.com/scaleway/scaleway-sdk-js/commit/c5e65f14b032c8ee62ad15b504345d381a4e2bc3))
+- **cockpit:** add support for `RegionalApiListAlertsRequest` ([#1806](https://github.com/scaleway/scaleway-sdk-js/issues/1806)) ([bb46893](https://github.com/scaleway/scaleway-sdk-js/commit/bb468930776ca2459f040040d05c292cffc2b5ef))
+- **lb:** add support for `connectionRateLimit` ([#1811](https://github.com/scaleway/scaleway-sdk-js/issues/1811)) ([4997495](https://github.com/scaleway/scaleway-sdk-js/commit/4997495752cc405cf91f5915b7b6232cc0f493aa))
+- **secret:** add support for `RestoreSecretRequest` and `RestoreSecretVersionRequest` ([#1826](https://github.com/scaleway/scaleway-sdk-js/issues/1826)) ([eaf54ab](https://github.com/scaleway/scaleway-sdk-js/commit/eaf54ab8b6463c8a464ec4ce82ccd46eb2813a74))
+- **vpc_gw:** add a call to migrate a V1 gateway to V2 ([#1827](https://github.com/scaleway/scaleway-sdk-js/issues/1827)) ([a8f5160](https://github.com/scaleway/scaleway-sdk-js/commit/a8f51604b5ac5572a20f7e71782f04dc3ee19a86))
+- **webhosting:** add domain selected dns configuration ([#1831](https://github.com/scaleway/scaleway-sdk-js/issues/1831)) ([5327dc1](https://github.com/scaleway/scaleway-sdk-js/commit/5327dc1e19a8055ac11cbb481de0e625854fb219))
+
+### Bug Fixes
+
+- **webhosting:** add hosting domain status ([#1829](https://github.com/scaleway/scaleway-sdk-js/issues/1829)) ([44184c2](https://github.com/scaleway/scaleway-sdk-js/commit/44184c28886d2dbdddec426ba5b4cf7951c6e5b2))
+
 ## [2.66.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.65.0...@scaleway/sdk@2.66.0) (2025-02-17)
 
 ### Features
