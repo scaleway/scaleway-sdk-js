@@ -50,7 +50,7 @@ describe('InvalidRequestError', () => {
       },
     ])
     expect(error.message).toBe(
-      'quota(s) exceeded: compute_snapshots_type_b_ssd_available has reached its quota (0/0)',
+      'quota(s) exceeded: Quotas reached: You have reached the maximum number of compute_snapshots_type_b_ssd_available authorized by your Organization. Access the quotas page from your Organization dashboard to manage quotas.',
     )
   })
 
