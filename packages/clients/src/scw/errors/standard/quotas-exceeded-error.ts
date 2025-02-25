@@ -1,13 +1,13 @@
-import type { JSONObject } from '../../../helpers/json'
-import { isJSONObject } from '../../../helpers/json'
-import { ScalewayError } from '../scw-error'
+import type { JSONObject } from '../../../helpers/json.js'
+import { isJSONObject } from '../../../helpers/json.js'
+import { ScalewayError } from '../scw-error.js'
 
 /**
  * Scope of an {@link QuotasExceededErrorDetails} error.
  *
  * @public
  */
-export type QuotasExceededErrorScope = {
+export interface QuotasExceededErrorScope {
   kind: 'organization' | 'project'
   id: string
 }
@@ -17,7 +17,7 @@ export type QuotasExceededErrorScope = {
  *
  * @public
  */
-export type QuotasExceededErrorDetails = {
+export interface QuotasExceededErrorDetails {
   readonly resource: string
   readonly quota: number
   readonly current: number
@@ -35,7 +35,7 @@ export type QuotasExceededErrorDetails = {
 const buildMessage = (list: QuotasExceededErrorDetails[]): string =>
   `quota(s) exceeded: ${list
     .map(details => {
-      const message = `${details.resource} has reached its quota (${details.current}/${details.quota})`
+      const message = `Quotas reached: You have reached the maximum number of ${details.resource}  authorized by your Organization. Access the quotas page from your Organization dashboard to manage quotas.`
 
       return details.scope
         ? `${message} for ${details.scope.kind} '${details.scope.id}'`
