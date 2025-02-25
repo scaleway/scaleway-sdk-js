@@ -44,6 +44,7 @@ export type {
   ListSettingsRequestOrderBy,
   ListSettingsResponse,
   Memory,
+  MigrateServerToMonthlyOfferRequest,
   OS,
   OSOSField,
   Offer,
