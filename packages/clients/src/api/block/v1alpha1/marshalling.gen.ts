@@ -30,7 +30,7 @@ import type {
   VolumeType,
 } from './types.gen'
 
-export const unmarshalReference = (data: unknown): Reference => {
+const unmarshalReference = (data: unknown): Reference => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Reference' failed as data isn't a dictionary.`,
