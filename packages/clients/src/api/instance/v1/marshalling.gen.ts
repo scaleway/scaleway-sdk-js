@@ -79,6 +79,7 @@ import type {
   ServerActionRequest,
   ServerActionRequestVolumeBackupTemplate,
   ServerActionResponse,
+  ServerCompatibleTypes,
   ServerIp,
   ServerIpv6,
   ServerLocation,
@@ -1204,6 +1205,7 @@ const unmarshalServerType = (data: unknown): ServerType => {
     capabilities: data.capabilities
       ? unmarshalServerTypeCapabilities(data.capabilities)
       : undefined,
+    endOfService: data.end_of_service,
     gpu: data.gpu,
     hourlyPrice: data.hourly_price,
     monthlyPrice: data.monthly_price,
@@ -1355,6 +1357,20 @@ export const unmarshalServerActionResponse = (
   return {
     task: data.task ? unmarshalTask(data.task) : undefined,
   } as ServerActionResponse
+}
+
+export const unmarshalServerCompatibleTypes = (
+  data: unknown,
+): ServerCompatibleTypes => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerCompatibleTypes' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    compatibleTypes: data.compatible_types,
+  } as ServerCompatibleTypes
 }
 
 export const unmarshalSetImageResponse = (data: unknown): SetImageResponse => {
