@@ -201,6 +201,8 @@ export type ListProductsRequest = {
    * config.
    */
   region?: ScwRegion
+  /** ID of the Organization containing the Audit Trail events. */
+  organizationId?: string
 }
 
 export interface ListProductsResponse {
