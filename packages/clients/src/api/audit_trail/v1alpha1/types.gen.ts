@@ -127,8 +127,10 @@ export interface Event {
   serviceName: string
   /** API method called to trigger the event. */
   methodName: string
-  /** Resource attached to the event. */
+  /** @deprecated Resource attached to the event. */
   resource?: Resource
+  /** Resources attached to the event. */
+  resources: Resource[]
   /** Unique identifier of the request at the origin of the event. */
   requestId: string
   /** Request at the origin of the event. */
