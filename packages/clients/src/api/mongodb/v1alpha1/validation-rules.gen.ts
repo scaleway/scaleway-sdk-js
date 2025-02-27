@@ -138,6 +138,14 @@ export const RestoreSnapshotRequest = {
   },
 }
 
+export const SetUserRoleRequest = {
+  userName: {
+    maxLength: 63,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9_\-]*$/,
+  },
+}
+
 export const UpdateInstanceRequest = {
   name: {
     maxLength: 255,
