@@ -64,7 +64,6 @@ export type {
   HostingApiUpdateHostingRequest,
   HostingStatus,
   HostingSummary,
-  HostingSummaryStatus,
   HostingUser,
   ListControlPanelsResponse,
   ListDatabaseUsersRequestOrderBy,
