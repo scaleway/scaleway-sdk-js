@@ -16,7 +16,6 @@ import type {
   CreateVolumeRequestFromSnapshot,
   ExportSnapshotToObjectStorageRequest,
   ImportSnapshotFromObjectStorageRequest,
-  ImportSnapshotFromS3Request,
   ListSnapshotsResponse,
   ListVolumeTypesResponse,
   ListVolumesResponse,
@@ -30,7 +29,7 @@ import type {
   VolumeType,
 } from './types.gen'
 
-const unmarshalReference = (data: unknown): Reference => {
+export const unmarshalReference = (data: unknown): Reference => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Reference' failed as data isn't a dictionary.`,
@@ -251,18 +250,6 @@ export const marshalExportSnapshotToObjectStorageRequest = (
 
 export const marshalImportSnapshotFromObjectStorageRequest = (
   request: ImportSnapshotFromObjectStorageRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  bucket: request.bucket,
-  key: request.key,
-  name: request.name,
-  project_id: request.projectId ?? defaults.defaultProjectId,
-  size: request.size,
-  tags: request.tags,
-})
-
-export const marshalImportSnapshotFromS3Request = (
-  request: ImportSnapshotFromS3Request,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   bucket: request.bucket,
