@@ -149,7 +149,7 @@ export interface Product {
   services: ProductService[]
 }
 
-export interface ListEventsRequest {
+export type ListEventsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -193,7 +193,7 @@ export interface ListEventsResponse {
   nextPageToken?: string
 }
 
-export interface ListProductsRequest {
+export type ListProductsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
