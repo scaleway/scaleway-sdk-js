@@ -696,6 +696,8 @@ export interface ServerType {
    * second).
    */
   blockBandwidth?: number
+  /** True if this Instance type has reached end of service. */
+  endOfService: boolean
 }
 
 export interface VolumeType {
@@ -1335,6 +1337,13 @@ export interface GetSecurityGroupRuleResponse {
   rule?: SecurityGroupRule
 }
 
+export type GetServerCompatibleTypesRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: ScwZone
+  /** UUID of the Instance you want to get. */
+  serverId: string
+}
+
 export type GetServerRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
@@ -1785,6 +1794,11 @@ export type ServerActionRequest = {
 
 export interface ServerActionResponse {
   task?: Task
+}
+
+export interface ServerCompatibleTypes {
+  /** Instance compatible types. */
+  compatibleTypes: string[]
 }
 
 export type SetImageRequest = {
