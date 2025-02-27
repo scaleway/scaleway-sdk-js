@@ -82,6 +82,7 @@ import {
   unmarshalMigrationPlan,
   unmarshalPrivateNIC,
   unmarshalServerActionResponse,
+  unmarshalServerCompatibleTypes,
   unmarshalSetImageResponse,
   unmarshalSetPlacementGroupResponse,
   unmarshalSetPlacementGroupServersResponse,
@@ -153,6 +154,7 @@ import type {
   GetSecurityGroupResponse,
   GetSecurityGroupRuleRequest,
   GetSecurityGroupRuleResponse,
+  GetServerCompatibleTypesRequest,
   GetServerRequest,
   GetServerResponse,
   GetServerTypesAvailabilityRequest,
@@ -193,6 +195,7 @@ import type {
   PrivateNIC,
   ServerActionRequest,
   ServerActionResponse,
+  ServerCompatibleTypes,
   SetImageRequest,
   SetPlacementGroupRequest,
   SetPlacementGroupResponse,
@@ -511,6 +514,28 @@ export class API extends ParentAPI {
       method: 'DELETE',
       path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/user_data/${validatePathParam('key', request.key)}`,
     })
+
+  /**
+   * Get Instance compatible types. Get compatible commercial types that can be
+   * used to update the Instance. The compatibility of an Instance offer is
+   * based on: the CPU architecture the OS type the required l_ssd storage size
+   * the required scratch storage size If the specified Instance offer is
+   * flagged as end of service, the best compatible offer is the first
+   * returned.
+   *
+   * @param request - The request {@link GetServerCompatibleTypesRequest}
+   * @returns A Promise of ServerCompatibleTypes
+   */
+  getServerCompatibleTypes = (
+    request: Readonly<GetServerCompatibleTypesRequest>,
+  ) =>
+    this.client.fetch<ServerCompatibleTypes>(
+      {
+        method: 'GET',
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/compatible-types`,
+      },
+      unmarshalServerCompatibleTypes,
+    )
 
   attachServerVolume = (request: Readonly<AttachServerVolumeRequest>) =>
     this.client.fetch<AttachServerVolumeResponse>(
