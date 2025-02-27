@@ -421,6 +421,7 @@ export const unmarshalOffer = (data: unknown): Offer => {
     incompatibleOsIds: data.incompatible_os_ids,
     maxBandwidth: data.max_bandwidth,
     memories: unmarshalArrayOfObject(data.memories, unmarshalMemory),
+    monthlyOfferId: data.monthly_offer_id,
     name: data.name,
     operationPath: data.operation_path,
     options: unmarshalArrayOfObject(data.options, unmarshalOfferOptionOffer),
