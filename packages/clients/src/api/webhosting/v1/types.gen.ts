@@ -42,6 +42,7 @@ export type DomainDnsAction =
   | 'auto_config_web_records'
   | 'auto_config_mail_records'
   | 'auto_config_nameservers'
+  | 'auto_config_none'
 
 export type DomainStatus =
   | 'unknown_status'
@@ -58,15 +59,6 @@ export type DomainZoneOwner =
   | 'webhosting'
 
 export type HostingStatus =
-  | 'unknown_status'
-  | 'delivering'
-  | 'ready'
-  | 'deleting'
-  | 'error'
-  | 'locked'
-  | 'migrating'
-
-export type HostingSummaryStatus =
   | 'unknown_status'
   | 'delivering'
   | 'ready'
@@ -301,8 +293,8 @@ export interface HostingSummary {
   createdAt?: Date
   /** Date on which the Web Hosting plan was last updated. */
   updatedAt?: Date
-  /** @deprecated Status of the Web Hosting plan. */
-  status?: HostingSummaryStatus
+  /** Status of the Web Hosting plan. */
+  status: HostingStatus
   /** Main domain associated with the Web Hosting plan. */
   domain: string
   /** Whether the hosting is protected or not. */
@@ -311,8 +303,6 @@ export interface HostingSummary {
   dnsStatus?: DnsRecordsStatus
   /** Name of the active offer for the Web Hosting plan. */
   offerName: string
-  /** Status of the Web Hosting plan. */
-  hostingStatus: HostingStatus
   /** Main domain status of the Web Hosting plan. */
   domainStatus: DomainStatus
   /** Region where the Web Hosting plan is hosted. */
