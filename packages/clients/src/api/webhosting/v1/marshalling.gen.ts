@@ -406,13 +406,12 @@ const unmarshalHostingSummary = (data: unknown): HostingSummary => {
     dnsStatus: data.dns_status ? data.dns_status : undefined,
     domain: data.domain,
     domainStatus: data.domain_status,
-    hostingStatus: data.hosting_status,
     id: data.id,
     offerName: data.offer_name,
     projectId: data.project_id,
     protected: data.protected,
     region: data.region,
-    status: data.status ? data.status : undefined,
+    status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as HostingSummary
 }
