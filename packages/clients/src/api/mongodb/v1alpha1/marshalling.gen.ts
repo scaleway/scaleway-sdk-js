@@ -31,6 +31,7 @@ import type {
   NodeTypeVolumeType,
   RestoreSnapshotRequest,
   RestoreSnapshotRequestVolumeDetails,
+  SetUserRoleRequest,
   Setting,
   Snapshot,
   SnapshotVolumeType,
@@ -39,6 +40,7 @@ import type {
   UpdateUserRequest,
   UpgradeInstanceRequest,
   User,
+  UserRole,
   Version,
   Volume,
 } from './types.gen'
@@ -177,6 +179,20 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
   } as Snapshot
 }
 
+const unmarshalUserRole = (data: unknown): UserRole => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'UserRole' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    anyDatabase: data.any_database,
+    database: data.database,
+    role: data.role,
+  } as UserRole
+}
+
 export const unmarshalUser = (data: unknown): User => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -186,6 +202,7 @@ export const unmarshalUser = (data: unknown): User => {
 
   return {
     name: data.name,
+    roles: unmarshalArrayOfObject(data.roles, unmarshalUserRole),
   } as User
 }
 
@@ -448,6 +465,28 @@ export const marshalRestoreSnapshotRequest = (
   node_number: request.nodeNumber,
   node_type: request.nodeType,
   volume: marshalRestoreSnapshotRequestVolumeDetails(request.volume, defaults),
+})
+
+const marshalUserRole = (
+  request: UserRole,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  role: request.role,
+  ...resolveOneOf<string | boolean>([
+    { param: 'database', value: request.database },
+    { param: 'any_database', value: request.anyDatabase },
+  ]),
+})
+
+export const marshalSetUserRoleRequest = (
+  request: SetUserRoleRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  roles:
+    request.roles !== undefined
+      ? request.roles.map(elt => marshalUserRole(elt, defaults))
+      : undefined,
+  user_name: request.userName,
 })
 
 export const marshalUpdateInstanceRequest = (

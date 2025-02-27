@@ -18,6 +18,7 @@ import {
   marshalCreateSnapshotRequest,
   marshalCreateUserRequest,
   marshalRestoreSnapshotRequest,
+  marshalSetUserRoleRequest,
   marshalUpdateInstanceRequest,
   marshalUpdateSnapshotRequest,
   marshalUpdateUserRequest,
@@ -57,6 +58,7 @@ import type {
   ListVersionsRequest,
   ListVersionsResponse,
   RestoreSnapshotRequest,
+  SetUserRoleRequest,
   Snapshot,
   UpdateInstanceRequest,
   UpdateSnapshotRequest,
@@ -541,6 +543,19 @@ export class API extends ParentAPI {
       method: 'DELETE',
       path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users/${validatePathParam('name', request.name)}`,
     })
+
+  setUserRole = (request: Readonly<SetUserRoleRequest>) =>
+    this.client.fetch<User>(
+      {
+        body: JSON.stringify(
+          marshalSetUserRoleRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PUT',
+        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/roles`,
+      },
+      unmarshalUser,
+    )
 
   /**
    * Delete a Database Instance endpoint. Delete the endpoint of a Database
