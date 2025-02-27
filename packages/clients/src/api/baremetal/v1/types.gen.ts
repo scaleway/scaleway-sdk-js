@@ -104,6 +104,7 @@ export type ServerStatus =
   | 'out_of_stock'
   | 'ordered'
   | 'resetting'
+  | 'migrating'
 
 export type SettingType = 'unknown' | 'smtp'
 
@@ -479,6 +480,8 @@ export interface Offer {
   tags: string[]
   /** GPU specifications of the offer. */
   gpus: GPU[]
+  /** Exist only for hourly offers, to migrate to the monthly offer. */
+  monthlyOfferId?: string
 }
 
 export interface Option {
@@ -898,6 +901,13 @@ export interface ListSettingsResponse {
   totalCount: number
   /** Settings that match filters. */
   settings: Setting[]
+}
+
+export type MigrateServerToMonthlyOfferRequest = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: ScwZone
+  /** ID of the server. */
+  serverId: string
 }
 
 export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
