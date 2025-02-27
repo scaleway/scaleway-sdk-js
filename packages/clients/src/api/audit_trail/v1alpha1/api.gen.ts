@@ -72,10 +72,6 @@ export class API extends ParentAPI {
       {
         method: 'GET',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/products`,
-        urlParams: urlParams([
-          'organization_id',
-          request.organizationId ?? this.client.settings.defaultOrganizationId,
-        ]),
       },
       unmarshalListProductsResponse,
     )

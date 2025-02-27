@@ -127,10 +127,8 @@ export interface Event {
   serviceName: string
   /** API method called to trigger the event. */
   methodName: string
-  /** @deprecated Resource attached to the event. */
+  /** Resource attached to the event. */
   resource?: Resource
-  /** Resources attached to the event. */
-  resources: Resource[]
   /** Unique identifier of the request at the origin of the event. */
   requestId: string
   /** Request at the origin of the event. */
@@ -151,7 +149,7 @@ export interface Product {
   services: ProductService[]
 }
 
-export type ListEventsRequest = {
+export interface ListEventsRequest {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -195,14 +193,12 @@ export interface ListEventsResponse {
   nextPageToken?: string
 }
 
-export type ListProductsRequest = {
+export interface ListProductsRequest {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
    */
   region?: ScwRegion
-  /** ID of the Organization containing the Audit Trail events. */
-  organizationId?: string
 }
 
 export interface ListProductsResponse {
