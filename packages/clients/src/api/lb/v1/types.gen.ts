@@ -601,6 +601,8 @@ export interface RouteMatch {
    * One-of ('matchType'): at most one of 'sni', 'hostHeader' could be set.
    */
   hostHeader?: string
+  /** If true, all subdomains will match. */
+  matchSubdomains: boolean
 }
 
 export interface CreateCertificateRequestCustomCertificate {
