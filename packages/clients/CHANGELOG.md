@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.68.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.67.0...@scaleway/sdk@2.68.0) (2025-03-03)
+
+### Features
+
+- **audit_trail:** add organization_id field to ListProducts ([#1853](https://github.com/scaleway/scaleway-sdk-js/issues/1853)) ([1c5ada4](https://github.com/scaleway/scaleway-sdk-js/commit/1c5ada42e2fb6c391545063d2daa64211a83713c))
+- **audit_trail:** add support for `Event.resources` ([#1849](https://github.com/scaleway/scaleway-sdk-js/issues/1849)) ([63c10bd](https://github.com/scaleway/scaleway-sdk-js/commit/63c10bd50419f4ade54d7ed515e4f255ec257d6d))
+- **audit_trail:** migrate iamx to iam ([#1834](https://github.com/scaleway/scaleway-sdk-js/issues/1834)) ([e511673](https://github.com/scaleway/scaleway-sdk-js/commit/e511673335fe2d3f9d558a00019908f324472934))
+- **baremetal:** add support for `MigrateServerToMonthlyOfferRequest` ([#1836](https://github.com/scaleway/scaleway-sdk-js/issues/1836)) ([9f18271](https://github.com/scaleway/scaleway-sdk-js/commit/9f182712c3dce2e8c87fead349db2fed6483fe24))
+- **block:** add support for v1 ([#1855](https://github.com/scaleway/scaleway-sdk-js/issues/1855)) ([3b16b6f](https://github.com/scaleway/scaleway-sdk-js/commit/3b16b6fe00efed25fb73e7008f3f931871a9bc8f))
+- **block:** add tags filter in list snapshots ([#1832](https://github.com/scaleway/scaleway-sdk-js/issues/1832)) ([b7654e6](https://github.com/scaleway/scaleway-sdk-js/commit/b7654e65f1b59efab8bf1237393c6d6b757fe9da))
+- **edge_services:** add support for v1beta1 ([#1833](https://github.com/scaleway/scaleway-sdk-js/issues/1833)) ([0040898](https://github.com/scaleway/scaleway-sdk-js/commit/004089827181764ddb2db734bdd58df0c849d2c9))
+- **instance:** add compatible types endpoint and end_of_service flag in ServerType ([#1835](https://github.com/scaleway/scaleway-sdk-js/issues/1835)) ([f849b3e](https://github.com/scaleway/scaleway-sdk-js/commit/f849b3e8b195b70ee14a0b6ab528ce131c1c543b))
+- **lb:** add support for `matchSubdomains` ([#1864](https://github.com/scaleway/scaleway-sdk-js/issues/1864)) ([c8e36ae](https://github.com/scaleway/scaleway-sdk-js/commit/c8e36ae0c698cee55a64050148ef6d1248c2031b))
+- **mongodb:** implement roles permissions api ([#1857](https://github.com/scaleway/scaleway-sdk-js/issues/1857)) ([4c86fbd](https://github.com/scaleway/scaleway-sdk-js/commit/4c86fbd890c8d8612507da1e8a4e1ce6922b525d))
+
+### Bug Fixes
+
+- **webhosting:** add hosting status naming ([#1859](https://github.com/scaleway/scaleway-sdk-js/issues/1859)) ([be04eda](https://github.com/scaleway/scaleway-sdk-js/commit/be04edadb76ec6116138b85c691e91d97f0c2275))
+
 ## [2.67.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.66.0...@scaleway/sdk@2.67.0) (2025-02-24)
 
 ### Features
