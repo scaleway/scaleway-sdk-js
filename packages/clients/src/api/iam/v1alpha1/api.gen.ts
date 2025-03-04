@@ -46,6 +46,7 @@ import {
   unmarshalListQuotaResponse,
   unmarshalListRulesResponse,
   unmarshalListSSHKeysResponse,
+  unmarshalListUserConnectionsResponse,
   unmarshalListUsersResponse,
   unmarshalLog,
   unmarshalMFAOTP,
@@ -114,6 +115,8 @@ import type {
   ListRulesResponse,
   ListSSHKeysRequest,
   ListSSHKeysResponse,
+  ListUserConnectionsRequest,
+  ListUserConnectionsResponse,
   ListUsersRequest,
   ListUsersResponse,
   LockUserRequest,
@@ -507,6 +510,15 @@ export class API extends ParentAPI {
         urlParams: urlParams(['user_id', request.userId]),
       },
       unmarshalListGracePeriodsResponse,
+    )
+
+  listUserConnections = (request: Readonly<ListUserConnectionsRequest>) =>
+    this.client.fetch<ListUserConnectionsResponse>(
+      {
+        method: 'GET',
+        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/connections`,
+      },
+      unmarshalListUserConnectionsResponse,
     )
 
   protected pageOfListApplications = (
