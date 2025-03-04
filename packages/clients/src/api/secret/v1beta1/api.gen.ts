@@ -143,7 +143,7 @@ export class API extends ParentAPI {
       path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}`,
     })
 
-  protected pageOfListSecrets = (request: Readonly<ListSecretsRequest> = {}) =>
+  protected pageOfListSecrets = (request: Readonly<ListSecretsRequest>) =>
     this.client.fetch<ListSecretsResponse>(
       {
         method: 'GET',
@@ -176,7 +176,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListSecretsRequest}
    * @returns A Promise of ListSecretsResponse
    */
-  listSecrets = (request: Readonly<ListSecretsRequest> = {}) =>
+  listSecrets = (request: Readonly<ListSecretsRequest>) =>
     enrichForPagination('secrets', this.pageOfListSecrets, request)
 
   /**

@@ -508,9 +508,10 @@ export type ListSecretsRequest = {
   type?: SecretType
   /**
    * Filter by whether the secret was scheduled for deletion / not scheduled for
-   * deletion (optional).
+   * deletion. By default, it will display only not scheduled for deletion
+   * secrets.
    */
-  scheduledForDeletion?: boolean
+  scheduledForDeletion: boolean
 }
 
 export interface ListSecretsResponse {
