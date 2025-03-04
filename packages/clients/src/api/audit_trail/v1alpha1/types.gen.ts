@@ -19,6 +19,9 @@ export type ResourceType =
   | 'iam_policy'
   | 'iam_api_key'
   | 'iam_ssh_key'
+  | 'secret_manager_secret'
+  | 'secret_manager_version'
+  | 'key_manager_key'
 
 export interface KeyManagerKeyInfo {}
 
@@ -56,47 +59,81 @@ export interface Resource {
   deletedAt?: Date
   name?: string
   /**
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
-   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
-   * 'keymKeyInfo' could be set.
+   * @deprecated
+   *
+   *   One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
+   *   'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
+   *   'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo',
+   *   'keyManagerKeyInfo' could be set.
    */
   secmSecretInfo?: SecretManagerSecretInfo
   /**
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
-   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
-   * 'keymKeyInfo' could be set.
+   * @deprecated
+   *
+   *   One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
+   *   'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
+   *   'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo',
+   *   'keyManagerKeyInfo' could be set.
    */
   secmSecretVersionInfo?: SecretManagerSecretVersionInfo
   /**
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
    * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
-   * 'keymKeyInfo' could be set.
+   * 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo',
+   * 'keyManagerKeyInfo' could be set.
    */
   kubeClusterInfo?: KubernetesClusterInfo
   /**
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
    * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
-   * 'keymKeyInfo' could be set.
+   * 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo',
+   * 'keyManagerKeyInfo' could be set.
    */
   kubePoolInfo?: KubernetesPoolInfo
   /**
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
    * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
-   * 'keymKeyInfo' could be set.
+   * 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo',
+   * 'keyManagerKeyInfo' could be set.
    */
   kubeNodeInfo?: KubernetesNodeInfo
   /**
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
    * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
-   * 'keymKeyInfo' could be set.
+   * 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo',
+   * 'keyManagerKeyInfo' could be set.
    */
   kubeAclInfo?: KubernetesACLInfo
   /**
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
-   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
-   * 'keymKeyInfo' could be set.
+   * @deprecated
+   *
+   *   One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
+   *   'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
+   *   'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo',
+   *   'keyManagerKeyInfo' could be set.
    */
   keymKeyInfo?: KeyManagerKeyInfo
+  /**
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
+   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
+   * 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo',
+   * 'keyManagerKeyInfo' could be set.
+   */
+  secretManagerSecretInfo?: SecretManagerSecretInfo
+  /**
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
+   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
+   * 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo',
+   * 'keyManagerKeyInfo' could be set.
+   */
+  secretManagerVersionInfo?: SecretManagerSecretVersionInfo
+  /**
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo',
+   * 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo',
+   * 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo',
+   * 'keyManagerKeyInfo' could be set.
+   */
+  keyManagerKeyInfo?: KeyManagerKeyInfo
 }
 
 export interface ProductService {

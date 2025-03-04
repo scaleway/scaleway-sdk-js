@@ -131,6 +131,9 @@ export const unmarshalResource = (data: unknown): Resource => {
     createdAt: unmarshalDate(data.created_at),
     deletedAt: unmarshalDate(data.deleted_at),
     id: data.id,
+    keyManagerKeyInfo: data.key_manager_key_info
+      ? unmarshalKeyManagerKeyInfo(data.key_manager_key_info)
+      : undefined,
     keymKeyInfo: data.keym_key_info
       ? unmarshalKeyManagerKeyInfo(data.keym_key_info)
       : undefined,
@@ -152,6 +155,14 @@ export const unmarshalResource = (data: unknown): Resource => {
       : undefined,
     secmSecretVersionInfo: data.secm_secret_version_info
       ? unmarshalSecretManagerSecretVersionInfo(data.secm_secret_version_info)
+      : undefined,
+    secretManagerSecretInfo: data.secret_manager_secret_info
+      ? unmarshalSecretManagerSecretInfo(data.secret_manager_secret_info)
+      : undefined,
+    secretManagerVersionInfo: data.secret_manager_version_info
+      ? unmarshalSecretManagerSecretVersionInfo(
+          data.secret_manager_version_info,
+        )
       : undefined,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
