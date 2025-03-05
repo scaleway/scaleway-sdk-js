@@ -48,6 +48,8 @@ export type SnapshotStatus =
   | 'error'
   | 'locked'
 
+export type UserRoleRole = 'unknown_role' | 'read' | 'read_write' | 'db_admin'
+
 export type VolumeType = 'unknown_type' | 'sbs_5k' | 'sbs_15k'
 
 /** Private Network details. */
@@ -117,6 +119,14 @@ export interface NodeTypeVolumeType {
 
 export interface SnapshotVolumeType {
   type: VolumeType
+}
+
+export interface UserRole {
+  role: UserRoleRole
+  /** One-of ('scope'): at most one of 'database', 'anyDatabase' could be set. */
+  database?: string
+  /** One-of ('scope'): at most one of 'database', 'anyDatabase' could be set. */
+  anyDatabase?: boolean
 }
 
 export interface Setting {
@@ -242,6 +252,11 @@ export interface User {
    * characters are accepted).
    */
   name: string
+  /**
+   * List of roles assigned to the user, along with the corresponding database
+   * where each role is granted.
+   */
+  roles: UserRole[]
 }
 
 export interface Version {
@@ -528,6 +543,23 @@ export type RestoreSnapshotRequest = {
   nodeNumber: number
   /** Instance volume information. */
   volume: RestoreSnapshotRequestVolumeDetails
+}
+
+export type SetUserRoleRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: ScwRegion
+  /** UUID of the Database Instance the user belongs to. */
+  instanceId: string
+  /** Name of the database user. */
+  userName: string
+  /**
+   * List of roles assigned to the user, along with the corresponding database
+   * where each role is granted.
+   */
+  roles?: UserRole[]
 }
 
 export type UpdateInstanceRequest = {

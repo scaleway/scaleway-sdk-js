@@ -17,7 +17,6 @@ import {
   marshalCreateVolumeRequest,
   marshalExportSnapshotToObjectStorageRequest,
   marshalImportSnapshotFromObjectStorageRequest,
-  marshalImportSnapshotFromS3Request,
   marshalUpdateSnapshotRequest,
   marshalUpdateVolumeRequest,
   unmarshalListSnapshotsResponse,
@@ -35,7 +34,6 @@ import type {
   GetSnapshotRequest,
   GetVolumeRequest,
   ImportSnapshotFromObjectStorageRequest,
-  ImportSnapshotFromS3Request,
   ListSnapshotsRequest,
   ListSnapshotsResponse,
   ListVolumeTypesRequest,
@@ -77,7 +75,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListVolumeTypesResponse>(
       {
         method: 'GET',
-        path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volume-types`,
+        path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volume-types`,
         urlParams: urlParams(
           ['page', request.page],
           [
@@ -103,7 +101,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListVolumesResponse>(
       {
         method: 'GET',
-        path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes`,
+        path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -151,7 +149,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes`,
+        path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes`,
       },
       unmarshalVolume,
     )
@@ -167,7 +165,7 @@ export class API extends ParentAPI {
     this.client.fetch<Volume>(
       {
         method: 'GET',
-        path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+        path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
       },
       unmarshalVolume,
     )
@@ -201,7 +199,7 @@ export class API extends ParentAPI {
   deleteVolume = (request: Readonly<DeleteVolumeRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+      path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
     })
 
   /**
@@ -221,7 +219,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+        path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
       },
       unmarshalVolume,
     )
@@ -232,7 +230,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListSnapshotsResponse>(
       {
         method: 'GET',
-        path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots`,
+        path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -273,7 +271,7 @@ export class API extends ParentAPI {
     this.client.fetch<Snapshot>(
       {
         method: 'GET',
-        path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
       },
       unmarshalSnapshot,
     )
@@ -314,30 +312,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots`,
-      },
-      unmarshalSnapshot,
-    )
-
-  /**
-   * (Deprecated in favor of `ImportSnapshotFromObjectStorage`). Import a
-   * snapshot from a Scaleway Object Storage bucket The bucket must contain a
-   * QCOW2 image. The bucket can be imported into any Availability Zone as long
-   * as it is in the same region as the bucket.
-   *
-   * @deprecated
-   * @param request - The request {@link ImportSnapshotFromS3Request}
-   * @returns A Promise of Snapshot
-   */
-  importSnapshotFromS3 = (request: Readonly<ImportSnapshotFromS3Request>) =>
-    this.client.fetch<Snapshot>(
-      {
-        body: JSON.stringify(
-          marshalImportSnapshotFromS3Request(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/import-from-s3`,
+        path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots`,
       },
       unmarshalSnapshot,
     )
@@ -363,7 +338,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/import-from-object-storage`,
+        path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/import-from-object-storage`,
       },
       unmarshalSnapshot,
     )
@@ -388,7 +363,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}/export-to-object-storage`,
+        path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}/export-to-object-storage`,
       },
       unmarshalSnapshot,
     )
@@ -402,7 +377,7 @@ export class API extends ParentAPI {
   deleteSnapshot = (request: Readonly<DeleteSnapshotRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+      path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
     })
 
   /**
@@ -419,7 +394,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/block/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
       },
       unmarshalSnapshot,
     )

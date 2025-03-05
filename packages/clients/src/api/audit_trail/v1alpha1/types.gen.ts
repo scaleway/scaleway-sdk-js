@@ -13,6 +13,12 @@ export type ResourceType =
   | 'kube_node'
   | 'kube_acl'
   | 'keym_key'
+  | 'iam_user'
+  | 'iam_application'
+  | 'iam_group'
+  | 'iam_policy'
+  | 'iam_api_key'
+  | 'iam_ssh_key'
 
 export interface KeyManagerKeyInfo {}
 
@@ -121,8 +127,10 @@ export interface Event {
   serviceName: string
   /** API method called to trigger the event. */
   methodName: string
-  /** Resource attached to the event. */
+  /** @deprecated Resource attached to the event. */
   resource?: Resource
+  /** Resources attached to the event. */
+  resources: Resource[]
   /** Unique identifier of the request at the origin of the event. */
   requestId: string
   /** Request at the origin of the event. */
@@ -193,6 +201,8 @@ export type ListProductsRequest = {
    * config.
    */
   region?: ScwRegion
+  /** ID of the Organization containing the Audit Trail events. */
+  organizationId?: string
 }
 
 export interface ListProductsResponse {

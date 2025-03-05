@@ -431,6 +431,7 @@ export const unmarshalFrontend = (data: unknown): Frontend => {
       ? unmarshalCertificate(data.certificate)
       : undefined,
     certificateIds: data.certificate_ids,
+    connectionRateLimit: data.connection_rate_limit,
     createdAt: unmarshalDate(data.created_at),
     enableHttp3: data.enable_http3,
     id: data.id,
@@ -582,6 +583,7 @@ const unmarshalRouteMatch = (data: unknown): RouteMatch => {
 
   return {
     hostHeader: data.host_header,
+    matchSubdomains: data.match_subdomains,
     sni: data.sni,
   } as RouteMatch
 }
@@ -1126,6 +1128,7 @@ export const marshalCreateFrontendRequest = (
   backend_id: request.backendId,
   certificate_id: request.certificateId,
   certificate_ids: request.certificateIds,
+  connection_rate_limit: request.connectionRateLimit,
   enable_http3: request.enableHttp3,
   inbound_port: request.inboundPort,
   name: request.name || randomName('lbf'),
@@ -1184,6 +1187,7 @@ const marshalRouteMatch = (
   request: RouteMatch,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  match_subdomains: request.matchSubdomains,
   ...resolveOneOf([
     { param: 'sni', value: request.sni },
     { param: 'host_header', value: request.hostHeader },
@@ -1332,6 +1336,7 @@ export const marshalUpdateFrontendRequest = (
   backend_id: request.backendId,
   certificate_id: request.certificateId,
   certificate_ids: request.certificateIds,
+  connection_rate_limit: request.connectionRateLimit,
   enable_http3: request.enableHttp3,
   inbound_port: request.inboundPort,
   name: request.name,
@@ -1568,6 +1573,7 @@ export const marshalZonedApiCreateFrontendRequest = (
   backend_id: request.backendId,
   certificate_id: request.certificateId,
   certificate_ids: request.certificateIds,
+  connection_rate_limit: request.connectionRateLimit,
   enable_http3: request.enableHttp3,
   inbound_port: request.inboundPort,
   name: request.name || randomName('lbf'),
@@ -1771,6 +1777,7 @@ export const marshalZonedApiUpdateFrontendRequest = (
   backend_id: request.backendId,
   certificate_id: request.certificateId,
   certificate_ids: request.certificateIds,
+  connection_rate_limit: request.connectionRateLimit,
   enable_http3: request.enableHttp3,
   inbound_port: request.inboundPort,
   name: request.name,

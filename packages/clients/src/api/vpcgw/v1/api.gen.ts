@@ -83,6 +83,7 @@ import type {
   ListIPsResponse,
   ListPATRulesRequest,
   ListPATRulesResponse,
+  MigrateToV2Request,
   PATRule,
   RefreshSSHKeysRequest,
   SetDHCPEntriesRequest,
@@ -943,4 +944,12 @@ export class API extends ParentAPI {
       },
       unmarshalGateway,
     )
+
+  migrateToV2 = (request: Readonly<MigrateToV2Request>) =>
+    this.client.fetch<void>({
+      body: '{}',
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/migrate-to-v2`,
+    })
 }

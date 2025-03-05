@@ -2,6 +2,8 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Region as ScwRegion } from '../../../bridge'
 
+export type AlertState = 'unknown_state' | 'inactive' | 'pending' | 'firing'
+
 export type DataSourceOrigin =
   | 'unknown_origin'
   | 'scaleway'
@@ -21,14 +23,6 @@ export type ListDataSourcesRequestOrderBy =
   | 'type_desc'
 
 export type ListGrafanaUsersRequestOrderBy = 'login_asc' | 'login_desc'
-
-export type ListManagedAlertsRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
-  | 'name_asc'
-  | 'name_desc'
-  | 'type_asc'
-  | 'type_desc'
 
 export type ListPlansRequestOrderBy = 'name_asc' | 'name_desc'
 
@@ -62,6 +56,21 @@ export interface GetConfigResponseRetention {
   minDays: number
   maxDays: number
   defaultDays: number
+}
+
+export interface Alert {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region: ScwRegion
+  preconfigured: boolean
+  name: string
+  rule: string
+  duration: string
+  enabled: boolean
+  state?: AlertState
+  annotations: Record<string, string>
 }
 
 /** Contact point. */
@@ -128,14 +137,6 @@ export interface GrafanaUser {
   role: GrafanaUserRole
   /** Grafana user's password. */
   password?: string
-}
-
-export interface Alert {
-  productFamily: string
-  product: string
-  name: string
-  rule: string
-  description: string
 }
 
 /** Type of pricing plan. */
@@ -329,6 +330,14 @@ export interface Grafana {
   grafanaUrl: string
 }
 
+/** Retrieve a list of alerts matching the request. */
+export interface ListAlertsResponse {
+  /** Total count of alerts matching the request. */
+  totalCount: number
+  /** List of alerts matching the applied filters. */
+  alerts: Alert[]
+}
+
 /** Response returned when listing contact points. */
 export interface ListContactPointsResponse {
   /** Total count of contact points associated with the default receiver. */
@@ -369,14 +378,6 @@ export interface ListGrafanaUsersResponse {
   totalCount: number
   /** Grafana users information. */
   grafanaUsers: GrafanaUser[]
-}
-
-/** Response returned when listing data sources. */
-export interface ListManagedAlertsResponse {
-  /** Total count of data sources matching the request. */
-  totalCount: number
-  /** Alerts matching the request within the pagination. */
-  alerts: Alert[]
 }
 
 /** Output returned when listing pricing plans. */
@@ -581,6 +582,34 @@ export type RegionalApiGetUsageOverviewRequest = {
   interval?: string
 }
 
+/** Retrieve a list of alerts. */
+export type RegionalApiListAlertsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: ScwRegion
+  /** Project ID to filter for, only alerts from this Project will be returned. */
+  projectId?: string
+  /**
+   * True returns only enabled alerts. False returns only disabled alerts. If
+   * omitted, no alert filtering is applied. Other filters may still apply.
+   */
+  isEnabled?: boolean
+  /**
+   * True returns only preconfigured alerts. False returns only custom alerts.
+   * If omitted, no filtering is applied on alert types. Other filters may still
+   * apply.
+   */
+  isPreconfigured?: boolean
+  /**
+   * Valid values to filter on are `disabled`, `enabled`, `pending` and
+   * `firing`. If omitted, no filtering is applied on alert states. Other
+   * filters may still apply.
+   */
+  state?: AlertState
+}
+
 /** List contact points. */
 export type RegionalApiListContactPointsRequest = {
   /**
@@ -624,26 +653,6 @@ export type RegionalApiListDataSourcesRequest = {
    * returned.
    */
   types?: DataSourceType[]
-}
-
-/** Enable the sending of managed alerts. */
-export type RegionalApiListManagedAlertsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: ScwRegion
-  /** Page number to return, from the paginated results. */
-  page?: number
-  /** Number of data sources to return per page. */
-  pageSize?: number
-  /** Sort order for data sources in the response. */
-  orderBy?: ListManagedAlertsRequestOrderBy
-  /**
-   * Project ID to filter for, only data sources from this Project will be
-   * returned.
-   */
-  projectId?: string
 }
 
 /** List tokens. */

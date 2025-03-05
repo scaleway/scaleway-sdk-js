@@ -563,6 +563,11 @@ export interface Frontend {
   updatedAt?: Date
   /** Defines whether to enable HTTP/3 protocol on the frontend. */
   enableHttp3: boolean
+  /**
+   * Rate limit for new connections established on this frontend. Use 0 value to
+   * disable, else value is connections per second.
+   */
+  connectionRateLimit?: number
 }
 
 export interface PrivateNetworkDHCPConfig {
@@ -596,6 +601,8 @@ export interface RouteMatch {
    * One-of ('matchType'): at most one of 'sni', 'hostHeader' could be set.
    */
   hostHeader?: string
+  /** If true, all subdomains will match. */
+  matchSubdomains: boolean
 }
 
 export interface CreateCertificateRequestCustomCertificate {
@@ -967,6 +974,11 @@ export type CreateFrontendRequest = {
   certificateIds?: string[]
   /** Defines whether to enable HTTP/3 protocol on the frontend. */
   enableHttp3: boolean
+  /**
+   * Rate limit for new connections established on this frontend. Use 0 value to
+   * disable, else value is connections per second.
+   */
+  connectionRateLimit?: number
 }
 
 export type CreateIpRequest = {
@@ -1816,6 +1828,11 @@ export type UpdateFrontendRequest = {
   certificateIds?: string[]
   /** Defines whether to enable HTTP/3 protocol on the frontend. */
   enableHttp3: boolean
+  /**
+   * Rate limit for new connections established on this frontend. Use 0 value to
+   * disable, else value is connections per second.
+   */
+  connectionRateLimit?: number
 }
 
 export type UpdateHealthCheckRequest = {
@@ -2189,6 +2206,11 @@ export type ZonedApiCreateFrontendRequest = {
   certificateIds?: string[]
   /** Defines whether to enable HTTP/3 protocol on the frontend. */
   enableHttp3: boolean
+  /**
+   * Rate limit for new connections established on this frontend. Use 0 value to
+   * disable, else value is connections per second.
+   */
+  connectionRateLimit?: number
 }
 
 export type ZonedApiCreateIpRequest = {
@@ -2835,6 +2857,11 @@ export type ZonedApiUpdateFrontendRequest = {
   certificateIds?: string[]
   /** Defines whether to enable HTTP/3 protocol on the frontend. */
   enableHttp3: boolean
+  /**
+   * Rate limit for new connections established on this frontend. Use 0 value to
+   * disable, else value is connections per second.
+   */
+  connectionRateLimit?: number
 }
 
 export type ZonedApiUpdateHealthCheckRequest = {

@@ -30,11 +30,11 @@ import {
   unmarshalGrafana,
   unmarshalGrafanaProductDashboard,
   unmarshalGrafanaUser,
+  unmarshalListAlertsResponse,
   unmarshalListContactPointsResponse,
   unmarshalListDataSourcesResponse,
   unmarshalListGrafanaProductDashboardsResponse,
   unmarshalListGrafanaUsersResponse,
-  unmarshalListManagedAlertsResponse,
   unmarshalListPlansResponse,
   unmarshalListTokensResponse,
   unmarshalPlan,
@@ -60,11 +60,11 @@ import type {
   Grafana,
   GrafanaProductDashboard,
   GrafanaUser,
+  ListAlertsResponse,
   ListContactPointsResponse,
   ListDataSourcesResponse,
   ListGrafanaProductDashboardsResponse,
   ListGrafanaUsersResponse,
-  ListManagedAlertsResponse,
   ListPlansResponse,
   ListTokensResponse,
   Plan,
@@ -83,9 +83,9 @@ import type {
   RegionalApiGetDataSourceRequest,
   RegionalApiGetTokenRequest,
   RegionalApiGetUsageOverviewRequest,
+  RegionalApiListAlertsRequest,
   RegionalApiListContactPointsRequest,
   RegionalApiListDataSourcesRequest,
-  RegionalApiListManagedAlertsRequest,
   RegionalApiListTokensRequest,
   RegionalApiTriggerTestAlertRequest,
   RegionalApiUpdateContactPointRequest,
@@ -835,38 +835,30 @@ export class RegionalAPI extends ParentAPI {
       path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/contact-points/delete`,
     })
 
-  protected pageOfListManagedAlerts = (
-    request: Readonly<RegionalApiListManagedAlertsRequest> = {},
-  ) =>
-    this.client.fetch<ListManagedAlertsResponse>(
+  /**
+   * List alerts. List preconfigured and/or custom alerts for the specified
+   * Project.
+   *
+   * @param request - The request {@link RegionalApiListAlertsRequest}
+   * @returns A Promise of ListAlertsResponse
+   */
+  listAlerts = (request: Readonly<RegionalApiListAlertsRequest> = {}) =>
+    this.client.fetch<ListAlertsResponse>(
       {
         method: 'GET',
-        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/managed-alerts`,
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alerts`,
         urlParams: urlParams(
-          ['order_by', request.orderBy],
-          ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['is_enabled', request.isEnabled],
+          ['is_preconfigured', request.isPreconfigured],
           [
             'project_id',
             request.projectId ?? this.client.settings.defaultProjectId,
           ],
+          ['state', request.state],
         ),
       },
-      unmarshalListManagedAlertsResponse,
+      unmarshalListAlertsResponse,
     )
-
-  /**
-   * List managed alerts. List all managed alerts for the specified Project.
-   *
-   * @param request - The request {@link RegionalApiListManagedAlertsRequest}
-   * @returns A Promise of ListManagedAlertsResponse
-   */
-  listManagedAlerts = (
-    request: Readonly<RegionalApiListManagedAlertsRequest> = {},
-  ) => enrichForPagination('alerts', this.pageOfListManagedAlerts, request)
 
   /**
    * Enable managed alerts. Enable the sending of managed alerts for the

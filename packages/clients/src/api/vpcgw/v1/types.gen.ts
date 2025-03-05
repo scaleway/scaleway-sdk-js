@@ -815,6 +815,12 @@ export interface ListPATRulesResponse {
   totalCount: number
 }
 
+export type MigrateToV2Request = {
+  /** Zone to target. If none is passed will use default zone from the config. */
+  zone?: ScwZone
+  gatewayId: string
+}
+
 export type RefreshSSHKeysRequest = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone

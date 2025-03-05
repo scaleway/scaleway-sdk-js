@@ -70,6 +70,7 @@ import type {
   ListServersResponse,
   ListSettingsRequest,
   ListSettingsResponse,
+  MigrateServerToMonthlyOfferRequest,
   OS,
   Offer,
   Option,
@@ -513,6 +514,23 @@ export class API extends ParentAPI {
       {
         method: 'DELETE',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/options/${validatePathParam('optionId', request.optionId)}`,
+      },
+      unmarshalServer,
+    )
+
+  /**
+   * Migrate server offer. Migrate server with hourly offer to monthly offer.
+   *
+   * @param request - The request {@link MigrateServerToMonthlyOfferRequest}
+   * @returns A Promise of Server
+   */
+  migrateServerToMonthlyOffer = (
+    request: Readonly<MigrateServerToMonthlyOfferRequest>,
+  ) =>
+    this.client.fetch<Server>(
+      {
+        method: 'POST',
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/migrate-offer-monthly`,
       },
       unmarshalServer,
     )
