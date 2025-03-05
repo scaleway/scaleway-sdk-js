@@ -33,6 +33,7 @@ import {
   unmarshalAPIKey,
   unmarshalApplication,
   unmarshalEncodedJWT,
+  unmarshalGetUserConnectionsResponse,
   unmarshalGroup,
   unmarshalJWT,
   unmarshalListAPIKeysResponse,
@@ -89,6 +90,8 @@ import type {
   GetPolicyRequest,
   GetQuotumRequest,
   GetSSHKeyRequest,
+  GetUserConnectionsRequest,
+  GetUserConnectionsResponse,
   GetUserRequest,
   Group,
   JWT,
@@ -507,6 +510,15 @@ export class API extends ParentAPI {
         urlParams: urlParams(['user_id', request.userId]),
       },
       unmarshalListGracePeriodsResponse,
+    )
+
+  getUserConnections = (request: Readonly<GetUserConnectionsRequest>) =>
+    this.client.fetch<GetUserConnectionsResponse>(
+      {
+        method: 'GET',
+        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/connections`,
+      },
+      unmarshalGetUserConnectionsResponse,
     )
 
   protected pageOfListApplications = (

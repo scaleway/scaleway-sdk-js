@@ -99,6 +99,18 @@ export type UserStatus = 'unknown_status' | 'invitation_pending' | 'activated'
 
 export type UserType = 'unknown_type' | 'guest' | 'owner' | 'member'
 
+export interface GetUserConnectionsResponseConnectionConnectedOrganization {
+  id: string
+  name: string
+  locked: boolean
+}
+
+export interface GetUserConnectionsResponseConnectionConnectedUser {
+  id: string
+  username: string
+  type: UserType
+}
+
 export interface QuotumLimit {
   /**
    * Whether or not the limit is applied globally.
@@ -189,6 +201,13 @@ export interface CreateUserRequestMember {
   username: string
   /** The member's password. */
   password: string
+}
+
+export interface GetUserConnectionsResponseConnection {
+  /** Information about the connected organization. */
+  organization?: GetUserConnectionsResponseConnectionConnectedOrganization
+  /** Information about the connected user. */
+  user?: GetUserConnectionsResponseConnectionConnectedUser
 }
 
 export interface APIKey {
@@ -749,6 +768,16 @@ export type GetQuotumRequest = {
 export type GetSSHKeyRequest = {
   /** ID of the SSH key. */
   sshKeyId: string
+}
+
+export type GetUserConnectionsRequest = {
+  /** ID of the user to list connections for. */
+  userId: string
+}
+
+export interface GetUserConnectionsResponse {
+  /** List of connections. */
+  connections: GetUserConnectionsResponseConnection[]
 }
 
 export type GetUserRequest = {
