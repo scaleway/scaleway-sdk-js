@@ -99,6 +99,18 @@ export type UserStatus = 'unknown_status' | 'invitation_pending' | 'activated'
 
 export type UserType = 'unknown_type' | 'guest' | 'owner' | 'member'
 
+export interface GetUserConnectionsResponseConnectionConnectedOrganization {
+  id: string
+  name: string
+  locked: boolean
+}
+
+export interface GetUserConnectionsResponseConnectionConnectedUser {
+  id: string
+  username: string
+  type: UserType
+}
+
 export interface QuotumLimit {
   /**
    * Whether or not the limit is applied globally.
@@ -133,18 +145,6 @@ export interface QuotumLimit {
    * One-of ('value'): at most one of 'limit', 'unlimited' could be set.
    */
   unlimited?: boolean
-}
-
-export interface ListUserConnectionsResponseConnectionConnectedOrganization {
-  id: string
-  name: string
-  locked: boolean
-}
-
-export interface ListUserConnectionsResponseConnectionConnectedUser {
-  id: string
-  username: string
-  type: UserType
 }
 
 export interface JWT {
@@ -201,6 +201,13 @@ export interface CreateUserRequestMember {
   username: string
   /** The member's password. */
   password: string
+}
+
+export interface GetUserConnectionsResponseConnection {
+  /** Information about the connected organization. */
+  organization?: GetUserConnectionsResponseConnectionConnectedOrganization
+  /** Information about the connected user. */
+  user?: GetUserConnectionsResponseConnectionConnectedUser
 }
 
 export interface APIKey {
@@ -473,13 +480,6 @@ export interface SSHKey {
   projectId: string
   /** SSH key status. */
   disabled: boolean
-}
-
-export interface ListUserConnectionsResponseConnection {
-  /** Information about the connected organization. */
-  organization?: ListUserConnectionsResponseConnectionConnectedOrganization
-  /** Information about the connected user. */
-  user?: ListUserConnectionsResponseConnectionConnectedUser
 }
 
 export interface User {
@@ -770,6 +770,16 @@ export type GetSSHKeyRequest = {
   sshKeyId: string
 }
 
+export type GetUserConnectionsRequest = {
+  /** ID of the user to list connections for. */
+  userId: string
+}
+
+export interface GetUserConnectionsResponse {
+  /** List of connections. */
+  connections: GetUserConnectionsResponseConnection[]
+}
+
 export type GetUserRequest = {
   /** ID of the user to find. */
   userId: string
@@ -1039,16 +1049,6 @@ export interface ListSSHKeysResponse {
   sshKeys: SSHKey[]
   /** Total count of SSH keys. */
   totalCount: number
-}
-
-export type ListUserConnectionsRequest = {
-  /** ID of the user to list connections for. */
-  userId: string
-}
-
-export interface ListUserConnectionsResponse {
-  /** List of connections. */
-  connections: ListUserConnectionsResponseConnection[]
 }
 
 export type ListUsersRequest = {

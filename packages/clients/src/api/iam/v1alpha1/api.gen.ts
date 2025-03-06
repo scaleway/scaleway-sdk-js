@@ -33,6 +33,7 @@ import {
   unmarshalAPIKey,
   unmarshalApplication,
   unmarshalEncodedJWT,
+  unmarshalGetUserConnectionsResponse,
   unmarshalGroup,
   unmarshalJWT,
   unmarshalListAPIKeysResponse,
@@ -46,7 +47,6 @@ import {
   unmarshalListQuotaResponse,
   unmarshalListRulesResponse,
   unmarshalListSSHKeysResponse,
-  unmarshalListUserConnectionsResponse,
   unmarshalListUsersResponse,
   unmarshalLog,
   unmarshalMFAOTP,
@@ -90,6 +90,8 @@ import type {
   GetPolicyRequest,
   GetQuotumRequest,
   GetSSHKeyRequest,
+  GetUserConnectionsRequest,
+  GetUserConnectionsResponse,
   GetUserRequest,
   Group,
   JWT,
@@ -115,8 +117,6 @@ import type {
   ListRulesResponse,
   ListSSHKeysRequest,
   ListSSHKeysResponse,
-  ListUserConnectionsRequest,
-  ListUserConnectionsResponse,
   ListUsersRequest,
   ListUsersResponse,
   LockUserRequest,
@@ -512,13 +512,13 @@ export class API extends ParentAPI {
       unmarshalListGracePeriodsResponse,
     )
 
-  listUserConnections = (request: Readonly<ListUserConnectionsRequest>) =>
-    this.client.fetch<ListUserConnectionsResponse>(
+  getUserConnections = (request: Readonly<GetUserConnectionsRequest>) =>
+    this.client.fetch<GetUserConnectionsResponse>(
       {
         method: 'GET',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/connections`,
       },
-      unmarshalListUserConnectionsResponse,
+      unmarshalGetUserConnectionsResponse,
     )
 
   protected pageOfListApplications = (
