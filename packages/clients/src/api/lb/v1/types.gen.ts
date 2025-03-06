@@ -595,7 +595,7 @@ export interface RouteMatch {
    */
   sni?: string
   /**
-   * Value to match in the HTTP Host request header from an incoming request.
+   * Value to match in the HTTP Host request header from an incoming connection.
    * This field should be set for routes on HTTP Load Balancers.
    *
    * One-of ('matchType'): at most one of 'sni', 'hostHeader' could be set.
