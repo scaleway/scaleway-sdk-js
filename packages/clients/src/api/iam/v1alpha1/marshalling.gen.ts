@@ -22,6 +22,10 @@ import type {
   CreateUserRequest,
   CreateUserRequestMember,
   EncodedJWT,
+  GetUserConnectionsResponse,
+  GetUserConnectionsResponseConnection,
+  GetUserConnectionsResponseConnectionConnectedOrganization,
+  GetUserConnectionsResponseConnectionConnectedUser,
   GracePeriod,
   Group,
   JWT,
@@ -36,10 +40,6 @@ import type {
   ListQuotaResponse,
   ListRulesResponse,
   ListSSHKeysResponse,
-  ListUserConnectionsResponse,
-  ListUserConnectionsResponseConnection,
-  ListUserConnectionsResponseConnectionConnectedOrganization,
-  ListUserConnectionsResponseConnectionConnectedUser,
   ListUsersResponse,
   Log,
   MFAOTP,
@@ -300,6 +300,76 @@ export const unmarshalEncodedJWT = (data: unknown): EncodedJWT => {
   } as EncodedJWT
 }
 
+const unmarshalGetUserConnectionsResponseConnectionConnectedOrganization = (
+  data: unknown,
+): GetUserConnectionsResponseConnectionConnectedOrganization => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetUserConnectionsResponseConnectionConnectedOrganization' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    locked: data.locked,
+    name: data.name,
+  } as GetUserConnectionsResponseConnectionConnectedOrganization
+}
+
+const unmarshalGetUserConnectionsResponseConnectionConnectedUser = (
+  data: unknown,
+): GetUserConnectionsResponseConnectionConnectedUser => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetUserConnectionsResponseConnectionConnectedUser' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    type: data.type,
+    username: data.username,
+  } as GetUserConnectionsResponseConnectionConnectedUser
+}
+
+const unmarshalGetUserConnectionsResponseConnection = (
+  data: unknown,
+): GetUserConnectionsResponseConnection => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetUserConnectionsResponseConnection' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    organization: data.organization
+      ? unmarshalGetUserConnectionsResponseConnectionConnectedOrganization(
+          data.organization,
+        )
+      : undefined,
+    user: data.user
+      ? unmarshalGetUserConnectionsResponseConnectionConnectedUser(data.user)
+      : undefined,
+  } as GetUserConnectionsResponseConnection
+}
+
+export const unmarshalGetUserConnectionsResponse = (
+  data: unknown,
+): GetUserConnectionsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetUserConnectionsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    connections: unmarshalArrayOfObject(
+      data.connections,
+      unmarshalGetUserConnectionsResponseConnection,
+    ),
+  } as GetUserConnectionsResponse
+}
+
 export const unmarshalListAPIKeysResponse = (
   data: unknown,
 ): ListAPIKeysResponse => {
@@ -515,76 +585,6 @@ export const unmarshalListSSHKeysResponse = (
     sshKeys: unmarshalArrayOfObject(data.ssh_keys, unmarshalSSHKey),
     totalCount: data.total_count,
   } as ListSSHKeysResponse
-}
-
-const unmarshalListUserConnectionsResponseConnectionConnectedOrganization = (
-  data: unknown,
-): ListUserConnectionsResponseConnectionConnectedOrganization => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListUserConnectionsResponseConnectionConnectedOrganization' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-    locked: data.locked,
-    name: data.name,
-  } as ListUserConnectionsResponseConnectionConnectedOrganization
-}
-
-const unmarshalListUserConnectionsResponseConnectionConnectedUser = (
-  data: unknown,
-): ListUserConnectionsResponseConnectionConnectedUser => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListUserConnectionsResponseConnectionConnectedUser' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-    type: data.type,
-    username: data.username,
-  } as ListUserConnectionsResponseConnectionConnectedUser
-}
-
-const unmarshalListUserConnectionsResponseConnection = (
-  data: unknown,
-): ListUserConnectionsResponseConnection => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListUserConnectionsResponseConnection' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    organization: data.organization
-      ? unmarshalListUserConnectionsResponseConnectionConnectedOrganization(
-          data.organization,
-        )
-      : undefined,
-    user: data.user
-      ? unmarshalListUserConnectionsResponseConnectionConnectedUser(data.user)
-      : undefined,
-  } as ListUserConnectionsResponseConnection
-}
-
-export const unmarshalListUserConnectionsResponse = (
-  data: unknown,
-): ListUserConnectionsResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListUserConnectionsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    connections: unmarshalArrayOfObject(
-      data.connections,
-      unmarshalListUserConnectionsResponseConnection,
-    ),
-  } as ListUserConnectionsResponse
 }
 
 export const unmarshalListUsersResponse = (
