@@ -818,6 +818,7 @@ export interface ListPATRulesResponse {
 export type MigrateToV2Request = {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
+  /** ID of the gateway to put into IPAM mode. */
   gatewayId: string
 }
 

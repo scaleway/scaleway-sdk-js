@@ -12,6 +12,9 @@ export const ListEventsRequest = {
   productName: {
     pattern: /^[a-z]+(-[a-z]+)*$/,
   },
+  serviceName: {
+    pattern: /^scaleway(\.[a-zA-Z0-9_-]*)*$/,
+  },
   status: {
     greaterThanOrEqual: 200,
     lessThan: 600,

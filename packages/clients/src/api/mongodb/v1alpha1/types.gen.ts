@@ -48,7 +48,12 @@ export type SnapshotStatus =
   | 'error'
   | 'locked'
 
-export type UserRoleRole = 'unknown_role' | 'read' | 'read_write' | 'db_admin'
+export type UserRoleRole =
+  | 'unknown_role'
+  | 'read'
+  | 'read_write'
+  | 'db_admin'
+  | 'sync'
 
 export type VolumeType = 'unknown_type' | 'sbs_5k' | 'sbs_15k'
 

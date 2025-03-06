@@ -200,7 +200,7 @@ export type ListEventsRequest = {
   organizationId?: string
   /** (Optional) Returns a paginated list of Scaleway resources' features. */
   resourceType?: ResourceType
-  /** (Optional) Name of the method or the API call performed. */
+  /** (Optional) Name of the method of the API call performed. */
   methodName?: string
   /**
    * (Optional) HTTP status code of the request. Returns either `200` if the
@@ -223,6 +223,8 @@ export type ListEventsRequest = {
   pageToken?: string
   /** (Optional) Name of the Scaleway resource in a hyphenated format. */
   productName?: string
+  /** (Optional) Name of the service of the API call performed. */
+  serviceName?: string
 }
 
 export interface ListEventsResponse {

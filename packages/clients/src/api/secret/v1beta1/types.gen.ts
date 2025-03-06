@@ -550,25 +550,6 @@ export type ProtectSecretRequest = {
   secretId: string
 }
 
-export type RestoreSecretRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: ScwRegion
-  secretId: string
-}
-
-export type RestoreSecretVersionRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: ScwRegion
-  secretId: string
-  revision: string
-}
-
 export interface SSHKey {
   /** The private SSH key. */
   sshPrivateKey: string
