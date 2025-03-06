@@ -945,6 +945,13 @@ export class API extends ParentAPI {
       unmarshalGateway,
     )
 
+  /**
+   * Put a Public Gateway in IPAM mode. Put a Public Gateway in IPAM mode, so
+   * that it can be used with the Public Gateways API v2. This call is
+   * idempotent.
+   *
+   * @param request - The request {@link MigrateToV2Request}
+   */
   migrateToV2 = (request: Readonly<MigrateToV2Request>) =>
     this.client.fetch<void>({
       body: '{}',
