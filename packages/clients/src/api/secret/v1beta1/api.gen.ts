@@ -46,8 +46,6 @@ import type {
   ListTagsRequest,
   ListTagsResponse,
   ProtectSecretRequest,
-  RestoreSecretRequest,
-  RestoreSecretVersionRequest,
   Secret,
   SecretVersion,
   UnprotectSecretRequest,
@@ -499,40 +497,4 @@ export class API extends ParentAPI {
    */
   listSecretTypes = (request: Readonly<ListSecretTypesRequest> = {}) =>
     enrichForPagination('types', this.pageOfListSecretTypes, request)
-
-  /**
-   * Restore a version.. Restore a secret's version specified by the `region`,
-   * `secret_id` and `revision` parameters.
-   *
-   * @param request - The request {@link RestoreSecretVersionRequest}
-   * @returns A Promise of SecretVersion
-   */
-  restoreSecretVersion = (request: Readonly<RestoreSecretVersionRequest>) =>
-    this.client.fetch<SecretVersion>(
-      {
-        body: '{}',
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}/restore`,
-      },
-      unmarshalSecretVersion,
-    )
-
-  /**
-   * Restore a secret.. Restore a secret and all its versions scheduled for
-   * deletion specified by the `region` and `secret_id` parameters.
-   *
-   * @param request - The request {@link RestoreSecretRequest}
-   * @returns A Promise of Secret
-   */
-  restoreSecret = (request: Readonly<RestoreSecretRequest>) =>
-    this.client.fetch<Secret>(
-      {
-        body: '{}',
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/restore`,
-      },
-      unmarshalSecret,
-    )
 }
