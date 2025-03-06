@@ -119,7 +119,7 @@ export interface Discount {
   id: string
   /** The creation date of the discount. */
   creationDate?: Date
-  /** The organization ID of the discount. */
+  /** The Organization ID of the discount. */
   organizationId: string
   /** The description of the discount. */
   description: string
