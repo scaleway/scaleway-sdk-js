@@ -54,6 +54,7 @@ export class API extends ParentAPI {
           ['recorded_after', request.recordedAfter],
           ['recorded_before', request.recordedBefore],
           ['resource_type', request.resourceType],
+          ['service_name', request.serviceName],
           ['status', request.status],
         ),
       },
