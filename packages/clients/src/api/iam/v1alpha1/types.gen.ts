@@ -135,6 +135,18 @@ export interface QuotumLimit {
   unlimited?: boolean
 }
 
+export interface ListUserConnectionsResponseConnectionConnectedOrganization {
+  id: string
+  name: string
+  locked: boolean
+}
+
+export interface ListUserConnectionsResponseConnectionConnectedUser {
+  id: string
+  username: string
+  type: UserType
+}
+
 export interface JWT {
   /** JWT ID. */
   jti: string
@@ -461,6 +473,13 @@ export interface SSHKey {
   projectId: string
   /** SSH key status. */
   disabled: boolean
+}
+
+export interface ListUserConnectionsResponseConnection {
+  /** Information about the connected organization. */
+  organization?: ListUserConnectionsResponseConnectionConnectedOrganization
+  /** Information about the connected user. */
+  user?: ListUserConnectionsResponseConnectionConnectedUser
 }
 
 export interface User {
@@ -1020,6 +1039,16 @@ export interface ListSSHKeysResponse {
   sshKeys: SSHKey[]
   /** Total count of SSH keys. */
   totalCount: number
+}
+
+export type ListUserConnectionsRequest = {
+  /** ID of the user to list connections for. */
+  userId: string
+}
+
+export interface ListUserConnectionsResponse {
+  /** List of connections. */
+  connections: ListUserConnectionsResponseConnection[]
 }
 
 export type ListUsersRequest = {
