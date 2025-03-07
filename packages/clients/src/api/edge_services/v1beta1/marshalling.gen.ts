@@ -773,7 +773,7 @@ const marshalRuleHttpMatch = (
       : undefined,
 })
 
-const marshalSetRouteRulesRequestRouteRule = (
+export const marshalSetRouteRulesRequestRouteRule = (
   request: SetRouteRulesRequestRouteRule,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({

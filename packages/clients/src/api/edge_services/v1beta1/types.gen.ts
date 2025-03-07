@@ -520,7 +520,7 @@ export interface TLSSecretsConfig {
   tlsSecrets: TLSSecret[]
 }
 
-export interface AddRouteRulesRequest {
+export type AddRouteRulesRequest = {
   /** ID of the route stage to update. */
   routeStageId: string
   /**
@@ -556,7 +556,7 @@ export interface AddRouteRulesResponse {
   routeRules: RouteRule[]
 }
 
-export interface CheckDomainRequest {
+export type CheckDomainRequest = {
   projectId?: string
   fqdn: string
   cname: string
@@ -566,7 +566,7 @@ export interface CheckDomainResponse {
   isValid: boolean
 }
 
-export interface CheckLbOriginRequest {
+export type CheckLbOriginRequest = {
   lb?: ScalewayLb
 }
 
@@ -575,7 +575,7 @@ export interface CheckLbOriginResponse {
   errorType: LbOriginError
 }
 
-export interface CheckPEMChainRequest {
+export type CheckPEMChainRequest = {
   projectId?: string
   fqdn: string
   /** One-of ('chain'): at most one of 'secret', 'raw' could be set. */
@@ -588,7 +588,7 @@ export interface CheckPEMChainResponse {
   isValid: boolean
 }
 
-export interface CreateBackendStageRequest {
+export type CreateBackendStageRequest = {
   /** Pipeline ID the Backend stage belongs to. */
   pipelineId: string
   /**
@@ -607,7 +607,7 @@ export interface CreateBackendStageRequest {
   scalewayLb?: ScalewayLbBackendConfig
 }
 
-export interface CreateCacheStageRequest {
+export type CreateCacheStageRequest = {
   /** Pipeline ID the Cache stage belongs to. */
   pipelineId: string
   /** Time To Live (TTL) in seconds. Defines how long content is cached. */
@@ -631,7 +631,7 @@ export interface CreateCacheStageRequest {
   routeStageId?: string
 }
 
-export interface CreateDNSStageRequest {
+export type CreateDNSStageRequest = {
   /** Pipeline ID the DNS stage belongs to. */
   pipelineId: string
   /**
@@ -662,7 +662,7 @@ export interface CreateDNSStageRequest {
   backendStageId?: string
 }
 
-export interface CreatePipelineRequest {
+export type CreatePipelineRequest = {
   /** Project ID in which the pipeline will be created. */
   projectId?: string
   /** Name of the pipeline. */
@@ -671,7 +671,7 @@ export interface CreatePipelineRequest {
   description: string
 }
 
-export interface CreatePurgeRequestRequest {
+export type CreatePurgeRequestRequest = {
   /** Pipeline ID in which the purge request will be created. */
   pipelineId: string
   /**
@@ -688,7 +688,7 @@ export interface CreatePurgeRequestRequest {
   all?: boolean
 }
 
-export interface CreateRouteStageRequest {
+export type CreateRouteStageRequest = {
   /** Pipeline ID the route stage belongs to. */
   pipelineId: string
   /**
@@ -700,7 +700,7 @@ export interface CreateRouteStageRequest {
   wafStageId?: string
 }
 
-export interface CreateTLSStageRequest {
+export type CreateTLSStageRequest = {
   /** Pipeline ID the TLS stage belongs to. */
   pipelineId: string
   /** Secret (from Scaleway Secret Manager) containing your custom certificate. */
@@ -736,7 +736,7 @@ export interface CreateTLSStageRequest {
   wafStageId?: string
 }
 
-export interface CreateWafStageRequest {
+export type CreateWafStageRequest = {
   /** Pipeline ID the WAF stage belongs to. */
   pipelineId: string
   /** Mode defining WAF behavior (`disable`/`log_only`/`enable`). */
@@ -756,51 +756,51 @@ export interface CreateWafStageRequest {
   backendStageId?: string
 }
 
-export interface DeleteBackendStageRequest {
+export type DeleteBackendStageRequest = {
   /** ID of the backend stage to delete. */
   backendStageId: string
 }
 
-export interface DeleteCacheStageRequest {
+export type DeleteCacheStageRequest = {
   /** ID of the cache stage to delete. */
   cacheStageId: string
 }
 
-export interface DeleteCurrentPlanRequest {
+export type DeleteCurrentPlanRequest = {
   projectId?: string
 }
 
-export interface DeleteDNSStageRequest {
+export type DeleteDNSStageRequest = {
   /** ID of the DNS stage to delete. */
   dnsStageId: string
 }
 
-export interface DeletePipelineRequest {
+export type DeletePipelineRequest = {
   /** ID of the pipeline to delete. */
   pipelineId: string
 }
 
-export interface DeleteRouteStageRequest {
+export type DeleteRouteStageRequest = {
   /** ID of the route stage to delete. */
   routeStageId: string
 }
 
-export interface DeleteTLSStageRequest {
+export type DeleteTLSStageRequest = {
   /** ID of the TLS stage to delete. */
   tlsStageId: string
 }
 
-export interface DeleteWafStageRequest {
+export type DeleteWafStageRequest = {
   /** ID of the WAF stage to delete. */
   wafStageId: string
 }
 
-export interface GetBackendStageRequest {
+export type GetBackendStageRequest = {
   /** ID of the requested backend stage. */
   backendStageId: string
 }
 
-export interface GetBillingRequest {
+export type GetBillingRequest = {
   projectId?: string
 }
 
@@ -871,41 +871,41 @@ export interface GetBillingResponse {
   totalCost?: Money
 }
 
-export interface GetCacheStageRequest {
+export type GetCacheStageRequest = {
   /** ID of the requested cache stage. */
   cacheStageId: string
 }
 
-export interface GetCurrentPlanRequest {
+export type GetCurrentPlanRequest = {
   projectId?: string
 }
 
-export interface GetDNSStageRequest {
+export type GetDNSStageRequest = {
   /** ID of the requested DNS stage. */
   dnsStageId: string
 }
 
-export interface GetPipelineRequest {
+export type GetPipelineRequest = {
   /** ID of the requested pipeline. */
   pipelineId: string
 }
 
-export interface GetPurgeRequestRequest {
+export type GetPurgeRequestRequest = {
   /** ID of the requested purge request. */
   purgeRequestId: string
 }
 
-export interface GetRouteStageRequest {
+export type GetRouteStageRequest = {
   /** ID of the requested route stage. */
   routeStageId: string
 }
 
-export interface GetTLSStageRequest {
+export type GetTLSStageRequest = {
   /** ID of the requested TLS stage. */
   tlsStageId: string
 }
 
-export interface GetWafStageRequest {
+export type GetWafStageRequest = {
   /** ID of the requested WAF stage. */
   wafStageId: string
 }
@@ -915,7 +915,7 @@ export interface HeadStageResponse {
   headStage?: HeadStageResponseHeadStage
 }
 
-export interface ListBackendStagesRequest {
+export type ListBackendStagesRequest = {
   /**
    * Pipeline ID to filter for. Only backend stages from this pipeline will be
    * returned.
@@ -951,7 +951,7 @@ export interface ListBackendStagesResponse {
   totalCount: number
 }
 
-export interface ListCacheStagesRequest {
+export type ListCacheStagesRequest = {
   /**
    * Pipeline ID to filter for. Only cache stages from this pipeline will be
    * returned.
@@ -972,7 +972,7 @@ export interface ListCacheStagesResponse {
   totalCount: number
 }
 
-export interface ListDNSStagesRequest {
+export type ListDNSStagesRequest = {
   /**
    * Pipeline ID to filter for. Only DNS stages from this pipeline will be
    * returned.
@@ -998,7 +998,7 @@ export interface ListDNSStagesResponse {
   totalCount: number
 }
 
-export interface ListHeadStagesRequest {
+export type ListHeadStagesRequest = {
   /** ID of the pipeline to update. */
   pipelineId: string
   /** Page number to return, from the paginated results. */
@@ -1014,7 +1014,7 @@ export interface ListHeadStagesResponse {
   totalCount: number
 }
 
-export interface ListPipelinesRequest {
+export type ListPipelinesRequest = {
   /** Sort order of pipelines in the response. */
   orderBy?: ListPipelinesRequestOrderBy
   /** Page number to return, from the paginated results. */
@@ -1050,7 +1050,7 @@ export interface ListPipelinesResponse {
   totalCount: number
 }
 
-export interface ListPipelinesWithStagesRequest {
+export type ListPipelinesWithStagesRequest = {
   orderBy?: ListPipelinesWithStagesRequestOrderBy
   page?: number
   pageSize?: number
@@ -1069,7 +1069,7 @@ export interface ListPlansResponse {
   plans: PlanDetails[]
 }
 
-export interface ListPurgeRequestsRequest {
+export type ListPurgeRequestsRequest = {
   /** Sort order of purge requests in the response. */
   orderBy?: ListPurgeRequestsRequestOrderBy
   /** Page number to return, from the paginated results. */
@@ -1100,7 +1100,7 @@ export interface ListPurgeRequestsResponse {
   totalCount: number
 }
 
-export interface ListRouteRulesRequest {
+export type ListRouteRulesRequest = {
   /**
    * Route stage ID to filter for. Only route rules from this route stage will
    * be returned.
@@ -1118,7 +1118,7 @@ export interface ListRouteRulesResponse {
   routeRules: RouteRule[]
 }
 
-export interface ListRouteStagesRequest {
+export type ListRouteStagesRequest = {
   /**
    * Pipeline ID to filter for. Only route stages from this pipeline will be
    * returned.
@@ -1139,7 +1139,7 @@ export interface ListRouteStagesResponse {
   totalCount: number
 }
 
-export interface ListTLSStagesRequest {
+export type ListTLSStagesRequest = {
   /**
    * Pipeline ID to filter for. Only TLS stages from this pipeline will be
    * returned.
@@ -1170,7 +1170,7 @@ export interface ListTLSStagesResponse {
   totalCount: number
 }
 
-export interface ListWafStagesRequest {
+export type ListWafStagesRequest = {
   /**
    * Pipeline ID to filter for. Only WAF stages from this pipeline will be
    * returned.
@@ -1195,7 +1195,7 @@ export interface Plan {
   planName: PlanName
 }
 
-export interface SearchBackendStagesRequest {
+export type SearchBackendStagesRequest = {
   orderBy?: SearchBackendStagesRequestOrderBy
   page?: number
   pageSize?: number
@@ -1205,12 +1205,12 @@ export interface SearchBackendStagesRequest {
   lbId?: string
 }
 
-export interface SelectPlanRequest {
+export type SelectPlanRequest = {
   projectId?: string
   planName?: PlanName
 }
 
-export interface SetHeadStageRequest {
+export type SetHeadStageRequest = {
   /** ID of the pipeline to update. */
   pipelineId: string
   /**
@@ -1236,7 +1236,7 @@ export interface SetHeadStageRequest {
   swapHeadStage?: SetHeadStageRequestSwapHeadStage
 }
 
-export interface SetRouteRulesRequest {
+export type SetRouteRulesRequest = {
   /** ID of the route stage to update. */
   routeStageId: string
   /**
@@ -1258,7 +1258,7 @@ export interface SetRouteRulesResponse {
   routeRules: RouteRule[]
 }
 
-export interface UpdateBackendStageRequest {
+export type UpdateBackendStageRequest = {
   /** ID of the backend stage to update. */
   backendStageId: string
   /**
@@ -1279,7 +1279,7 @@ export interface UpdateBackendStageRequest {
   pipelineId: string
 }
 
-export interface UpdateCacheStageRequest {
+export type UpdateCacheStageRequest = {
   /** ID of the cache stage to update. */
   cacheStageId: string
   /** Time To Live (TTL) in seconds. Defines how long content is cached. */
@@ -1303,7 +1303,7 @@ export interface UpdateCacheStageRequest {
   routeStageId?: string
 }
 
-export interface UpdateDNSStageRequest {
+export type UpdateDNSStageRequest = {
   /** ID of the DNS stage to update. */
   dnsStageId: string
   /**
@@ -1334,7 +1334,7 @@ export interface UpdateDNSStageRequest {
   backendStageId?: string
 }
 
-export interface UpdatePipelineRequest {
+export type UpdatePipelineRequest = {
   /** ID of the pipeline to update. */
   pipelineId: string
   /** Name of the pipeline. */
@@ -1343,7 +1343,7 @@ export interface UpdatePipelineRequest {
   description?: string
 }
 
-export interface UpdateRouteStageRequest {
+export type UpdateRouteStageRequest = {
   /** ID of the route stage to update. */
   routeStageId: string
   /**
@@ -1355,7 +1355,7 @@ export interface UpdateRouteStageRequest {
   wafStageId?: string
 }
 
-export interface UpdateTLSStageRequest {
+export type UpdateTLSStageRequest = {
   /** ID of the TLS stage to update. */
   tlsStageId: string
   /** Secret (from Scaleway Secret-Manager) containing your custom certificate. */
@@ -1391,7 +1391,7 @@ export interface UpdateTLSStageRequest {
   wafStageId?: string
 }
 
-export interface UpdateWafStageRequest {
+export type UpdateWafStageRequest = {
   /** ID of the WAF stage to update. */
   wafStageId: string
   /** Mode defining WAF behavior (`disable`/`log_only`/`enable`). */
