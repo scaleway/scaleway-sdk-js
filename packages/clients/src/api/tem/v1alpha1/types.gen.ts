@@ -214,7 +214,7 @@ export interface Email {
   projectId: string
   /** Email address of the sender. */
   mailFrom: string
-  /** @deprecated Email address of the recipient. */
+  /** @deprecated Deprecated. Email address of the recipient. */
   rcptTo?: string
   /** Email address of the recipient. */
   mailRcpt: string
@@ -296,7 +296,7 @@ export interface Domain {
   lastValidAt?: Date
   /** Date and time of the domain's deletion. */
   revokedAt?: Date
-  /** @deprecated Error message returned if the last check failed. */
+  /** @deprecated Deprecated. Error message returned if the last check failed. */
   lastError?: string
   /** Snippet of the SPF record to register in the DNS zone. */
   spfConfig: string
@@ -445,8 +445,8 @@ export type CreateDomainRequest = {
   projectId?: string
   /** Fully qualified domain dame. */
   domainName: string
-  /** Accept Scaleway's Terms of Service. */
-  acceptTos: boolean
+  /** @deprecated Deprecated. Accept Scaleway's Terms of Service. */
+  acceptTos?: boolean
   /** Activate auto-configuration of the domain's DNS zone. */
   autoconfig: boolean
 }
@@ -689,7 +689,7 @@ export type ListEmailsRequest = {
   until?: Date
   /** (Optional) List emails sent with this sender's email address. */
   mailFrom?: string
-  /** @deprecated List emails sent to this recipient's email address. */
+  /** @deprecated Deprecated. List emails sent to this recipient's email address. */
   mailTo?: string
   /** (Optional) List emails sent to this recipient's email address. */
   mailRcpt?: string
