@@ -19,6 +19,7 @@ export type ResourceType =
   | 'iam_policy'
   | 'iam_api_key'
   | 'iam_ssh_key'
+  | 'iam_rule'
   | 'secret_manager_secret'
   | 'secret_manager_version'
   | 'key_manager_key'
