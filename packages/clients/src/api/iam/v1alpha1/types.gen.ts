@@ -1066,6 +1066,8 @@ export type ListUsersRequest = {
   mfa?: boolean
   /** Filter by tags containing a given string. */
   tag?: string
+  /** Filter by user status. */
+  status?: UserStatus
 }
 
 export interface ListUsersResponse {

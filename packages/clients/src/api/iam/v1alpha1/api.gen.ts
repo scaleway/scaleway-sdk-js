@@ -277,6 +277,7 @@ export class API extends ParentAPI {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
+          ['status', request.status],
           ['tag', request.tag],
           ['user_ids', request.userIds],
         ),
