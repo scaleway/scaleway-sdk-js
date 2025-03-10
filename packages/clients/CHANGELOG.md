@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.69.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.68.0...@scaleway/sdk@2.69.0) (2025-03-10)
+
+### Features
+
+- **audit_trail:** add missing iam_rule type ([#1894](https://github.com/scaleway/scaleway-sdk-js/issues/1894)) ([4c190a5](https://github.com/scaleway/scaleway-sdk-js/commit/4c190a5665ce58eb57ecf9ad9ee8ebf54a43d57c))
+- **audit_trail:** add support for service_name ([#1886](https://github.com/scaleway/scaleway-sdk-js/issues/1886)) ([796ffad](https://github.com/scaleway/scaleway-sdk-js/commit/796ffada8d058a0682ca541dca4f87d475a25ab4))
+- **audit_trail:** use explicit name for resource prefix instead of quadrigram ([#1875](https://github.com/scaleway/scaleway-sdk-js/issues/1875)) ([c0ef051](https://github.com/scaleway/scaleway-sdk-js/commit/c0ef051ef7b4422f0f21fa8ffb67eb5d8f578ece))
+- **iam:** add listing of user connections ([#1876](https://github.com/scaleway/scaleway-sdk-js/issues/1876)) ([aa60254](https://github.com/scaleway/scaleway-sdk-js/commit/aa6025414bd70dc0caed23636cdb8731acfbbddc))
+- **mongodb:** add sync role ([#1889](https://github.com/scaleway/scaleway-sdk-js/issues/1889)) ([73b4dcc](https://github.com/scaleway/scaleway-sdk-js/commit/73b4dcc899d618cbe598ca2249896b9fef48926d))
+- **secret_manager:** remove restore methods ([#1887](https://github.com/scaleway/scaleway-sdk-js/issues/1887)) ([fd8d0ae](https://github.com/scaleway/scaleway-sdk-js/commit/fd8d0aea304dbe5e699b0dc288114db1cae112ef))
+- **tem:** deprecate accept tos on create domain ([#1892](https://github.com/scaleway/scaleway-sdk-js/issues/1892)) ([524b88c](https://github.com/scaleway/scaleway-sdk-js/commit/524b88c6fa6f0f5d20f99c83a46ce2627f6515ca))
+- update QuotasExceededError message with clearer instructions ([#1845](https://github.com/scaleway/scaleway-sdk-js/issues/1845)) ([ece83fa](https://github.com/scaleway/scaleway-sdk-js/commit/ece83fa173298b7c89721c8fe4502afa982a0e2d))
+
+### Bug Fixes
+
+- **edge_services:** miss route-stages on httprule of ListRouteRules ([#1893](https://github.com/scaleway/scaleway-sdk-js/issues/1893)) ([174f440](https://github.com/scaleway/scaleway-sdk-js/commit/174f4403108924334901e20d2a2e282da02e5ea5))
+- **iam:** rename ListUserConnections to GetUserConnections to be clear this isn't paginated ([#1884](https://github.com/scaleway/scaleway-sdk-js/issues/1884)) ([8ce2450](https://github.com/scaleway/scaleway-sdk-js/commit/8ce245080f13f9ced60630bce19d058da2d1f423))
+- **secret_manager:** break change due to scheduled deletion ([#1874](https://github.com/scaleway/scaleway-sdk-js/issues/1874)) ([750a7c0](https://github.com/scaleway/scaleway-sdk-js/commit/750a7c0cb2c6ff0e2cb73886ae9f4806a2d33b19))
+
 ## [2.68.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.67.0...@scaleway/sdk@2.68.0) (2025-03-03)
 
 ### Features
