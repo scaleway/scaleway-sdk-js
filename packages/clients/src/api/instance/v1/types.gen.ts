@@ -349,6 +349,15 @@ export interface ServerTypeCapabilities {
   bootTypes: BootType[]
 }
 
+export interface ServerTypeGPUInfo {
+  /** GPU manufacturer. */
+  gpuManufacturer: string
+  /** GPU model name. */
+  gpuName: string
+  /** RAM of a single GPU, in bytes. */
+  gpuMemory: number
+}
+
 export interface ServerTypeNetwork {
   /** List of available network interfaces. */
   interfaces: ServerTypeNetworkInterface[]
@@ -681,6 +690,8 @@ export interface ServerType {
   gpu?: number
   /** Available RAM in bytes. */
   ram: number
+  /** GPU information. */
+  gpuInfo?: ServerTypeGPUInfo
   /** CPU architecture. */
   arch: Arch
   /** True if it is a baremetal Instance. */

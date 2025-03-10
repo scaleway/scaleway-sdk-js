@@ -137,6 +137,7 @@ export type {
   ServerSummary,
   ServerType,
   ServerTypeCapabilities,
+  ServerTypeGPUInfo,
   ServerTypeNetwork,
   ServerTypeNetworkInterface,
   ServerTypeVolumeConstraintSizes,
