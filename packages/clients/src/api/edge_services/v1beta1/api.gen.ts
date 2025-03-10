@@ -975,7 +975,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListRouteRulesResponse>(
       {
         method: 'GET',
-        path: `/edge-services/v1beta1/${validatePathParam('routeStageId', request.routeStageId)}/route-rules`,
+        path: `/edge-services/v1beta1/route-stages/${validatePathParam('routeStageId', request.routeStageId)}/route-rules`,
       },
       unmarshalListRouteRulesResponse,
     )
