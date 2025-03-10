@@ -87,6 +87,7 @@ import type {
   ServerSummary,
   ServerType,
   ServerTypeCapabilities,
+  ServerTypeGPUInfo,
   ServerTypeNetwork,
   ServerTypeNetworkInterface,
   ServerTypeVolumeConstraintSizes,
@@ -1156,6 +1157,20 @@ const unmarshalServerTypeCapabilities = (
   } as ServerTypeCapabilities
 }
 
+const unmarshalServerTypeGPUInfo = (data: unknown): ServerTypeGPUInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeGPUInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    gpuManufacturer: data.gpu_manufacturer,
+    gpuMemory: data.gpu_memory,
+    gpuName: data.gpu_name,
+  } as ServerTypeGPUInfo
+}
+
 const unmarshalServerTypeNetwork = (data: unknown): ServerTypeNetwork => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -1207,6 +1222,9 @@ const unmarshalServerType = (data: unknown): ServerType => {
       : undefined,
     endOfService: data.end_of_service,
     gpu: data.gpu,
+    gpuInfo: data.gpu_info
+      ? unmarshalServerTypeGPUInfo(data.gpu_info)
+      : undefined,
     hourlyPrice: data.hourly_price,
     monthlyPrice: data.monthly_price,
     ncpus: data.ncpus,
