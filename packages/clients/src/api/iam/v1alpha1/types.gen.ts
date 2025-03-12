@@ -99,13 +99,13 @@ export type UserStatus = 'unknown_status' | 'invitation_pending' | 'activated'
 
 export type UserType = 'unknown_type' | 'guest' | 'owner' | 'member'
 
-export interface GetUserConnectionsResponseConnectionConnectedOrganization {
+export interface ConnectionConnectedOrganization {
   id: string
   name: string
   locked: boolean
 }
 
-export interface GetUserConnectionsResponseConnectionConnectedUser {
+export interface ConnectionConnectedUser {
   id: string
   username: string
   type: UserType
@@ -203,11 +203,11 @@ export interface CreateUserRequestMember {
   password: string
 }
 
-export interface GetUserConnectionsResponseConnection {
+export interface Connection {
   /** Information about the connected organization. */
-  organization?: GetUserConnectionsResponseConnectionConnectedOrganization
+  organization?: ConnectionConnectedOrganization
   /** Information about the connected user. */
-  user?: GetUserConnectionsResponseConnectionConnectedUser
+  user?: ConnectionConnectedUser
 }
 
 export interface APIKey {
@@ -777,7 +777,7 @@ export type GetUserConnectionsRequest = {
 
 export interface GetUserConnectionsResponse {
   /** List of connections. */
-  connections: GetUserConnectionsResponseConnection[]
+  connections: Connection[]
 }
 
 export type GetUserRequest = {
