@@ -99,13 +99,13 @@ export type UserStatus = 'unknown_status' | 'invitation_pending' | 'activated'
 
 export type UserType = 'unknown_type' | 'guest' | 'owner' | 'member'
 
-export interface GetUserConnectionsResponseConnectionConnectedOrganization {
+export interface ConnectionConnectedOrganization {
   id: string
   name: string
   locked: boolean
 }
 
-export interface GetUserConnectionsResponseConnectionConnectedUser {
+export interface ConnectionConnectedUser {
   id: string
   username: string
   type: UserType
@@ -203,11 +203,11 @@ export interface CreateUserRequestMember {
   password: string
 }
 
-export interface GetUserConnectionsResponseConnection {
+export interface Connection {
   /** Information about the connected organization. */
-  organization?: GetUserConnectionsResponseConnectionConnectedOrganization
+  organization?: ConnectionConnectedOrganization
   /** Information about the connected user. */
-  user?: GetUserConnectionsResponseConnectionConnectedUser
+  user?: ConnectionConnectedUser
 }
 
 export interface APIKey {
@@ -515,7 +515,7 @@ export interface User {
   locked: boolean
 }
 
-export type AddGroupMemberRequest = {
+export interface AddGroupMemberRequest {
   /** ID of the group. */
   groupId: string
   /**
@@ -532,7 +532,7 @@ export type AddGroupMemberRequest = {
   applicationId?: string
 }
 
-export type AddGroupMembersRequest = {
+export interface AddGroupMembersRequest {
   /** ID of the group. */
   groupId: string
   /** IDs of the users to add. */
@@ -541,11 +541,11 @@ export type AddGroupMembersRequest = {
   applicationIds?: string[]
 }
 
-export type ClonePolicyRequest = {
+export interface ClonePolicyRequest {
   policyId: string
 }
 
-export type CreateAPIKeyRequest = {
+export interface CreateAPIKeyRequest {
   /**
    * ID of the application.
    *
@@ -566,7 +566,7 @@ export type CreateAPIKeyRequest = {
   description: string
 }
 
-export type CreateApplicationRequest = {
+export interface CreateApplicationRequest {
   /** Name of the application to create (max length is 64 characters). */
   name?: string
   /** ID of the Organization. */
@@ -577,7 +577,7 @@ export type CreateApplicationRequest = {
   tags?: string[]
 }
 
-export type CreateGroupRequest = {
+export interface CreateGroupRequest {
   /** ID of Organization linked to the group. */
   organizationId?: string
   /**
@@ -591,14 +591,14 @@ export type CreateGroupRequest = {
   tags?: string[]
 }
 
-export type CreateJWTRequest = {
+export interface CreateJWTRequest {
   /** ID of the user the JWT will be created for. */
   userId: string
   /** Referrer of the JWT. */
   referrer: string
 }
 
-export type CreatePolicyRequest = {
+export interface CreatePolicyRequest {
   /** Name of the policy to create (max length is 64 characters). */
   name?: string
   /** Description of the policy to create (max length is 200 characters). */
@@ -639,7 +639,7 @@ export type CreatePolicyRequest = {
   noPrincipal?: boolean
 }
 
-export type CreateSSHKeyRequest = {
+export interface CreateSSHKeyRequest {
   /** Name of the SSH key. Max length is 1000. */
   name?: string
   /**
@@ -651,12 +651,12 @@ export type CreateSSHKeyRequest = {
   projectId?: string
 }
 
-export type CreateUserMFAOTPRequest = {
+export interface CreateUserMFAOTPRequest {
   /** User ID of the MFA OTP. */
   userId: string
 }
 
-export type CreateUserRequest = {
+export interface CreateUserRequest {
   /** ID of the Organization. */
   organizationId?: string
   /**
@@ -675,41 +675,41 @@ export type CreateUserRequest = {
   member?: CreateUserRequestMember
 }
 
-export type DeleteAPIKeyRequest = {
+export interface DeleteAPIKeyRequest {
   /** Access key to delete. */
   accessKey: string
 }
 
-export type DeleteApplicationRequest = {
+export interface DeleteApplicationRequest {
   /** ID of the application to delete. */
   applicationId: string
 }
 
-export type DeleteGroupRequest = {
+export interface DeleteGroupRequest {
   /** ID of the group to delete. */
   groupId: string
 }
 
-export type DeleteJWTRequest = {
+export interface DeleteJWTRequest {
   /** JWT ID of the JWT to delete. */
   jti: string
 }
 
-export type DeletePolicyRequest = {
+export interface DeletePolicyRequest {
   /** Id of policy to delete. */
   policyId: string
 }
 
-export type DeleteSSHKeyRequest = {
+export interface DeleteSSHKeyRequest {
   sshKeyId: string
 }
 
-export type DeleteUserMFAOTPRequest = {
+export interface DeleteUserMFAOTPRequest {
   /** User ID of the MFA OTP. */
   userId: string
 }
 
-export type DeleteUserRequest = {
+export interface DeleteUserRequest {
   /** ID of the user to delete. */
   userId: string
 }
@@ -723,69 +723,69 @@ export interface EncodedJWT {
   renewToken: string
 }
 
-export type GetAPIKeyRequest = {
+export interface GetAPIKeyRequest {
   /** Access key to search for. */
   accessKey: string
 }
 
-export type GetApplicationRequest = {
+export interface GetApplicationRequest {
   /** ID of the application to find. */
   applicationId: string
 }
 
-export type GetGroupRequest = {
+export interface GetGroupRequest {
   /** ID of the group. */
   groupId: string
 }
 
-export type GetJWTRequest = {
+export interface GetJWTRequest {
   /** JWT ID of the JWT to get. */
   jti: string
 }
 
-export type GetLogRequest = {
+export interface GetLogRequest {
   /** ID of the log. */
   logId: string
 }
 
-export type GetOrganizationSecuritySettingsRequest = {
+export interface GetOrganizationSecuritySettingsRequest {
   /** ID of the Organization. */
   organizationId?: string
 }
 
-export type GetPolicyRequest = {
+export interface GetPolicyRequest {
   /** Id of policy to search. */
   policyId: string
 }
 
-export type GetQuotumRequest = {
+export interface GetQuotumRequest {
   /** Name of the quota to get. */
   quotumName: string
   /** ID of the Organization. */
   organizationId?: string
 }
 
-export type GetSSHKeyRequest = {
+export interface GetSSHKeyRequest {
   /** ID of the SSH key. */
   sshKeyId: string
 }
 
-export type GetUserConnectionsRequest = {
+export interface GetUserConnectionsRequest {
   /** ID of the user to list connections for. */
   userId: string
 }
 
 export interface GetUserConnectionsResponse {
   /** List of connections. */
-  connections: GetUserConnectionsResponseConnection[]
+  connections: Connection[]
 }
 
-export type GetUserRequest = {
+export interface GetUserRequest {
   /** ID of the user to find. */
   userId: string
 }
 
-export type ListAPIKeysRequest = {
+export interface ListAPIKeysRequest {
   /** Criteria for sorting results. */
   orderBy?: ListAPIKeysRequestOrderBy
   /** Page number. Value must be greater or equal to 1. */
@@ -829,7 +829,7 @@ export interface ListAPIKeysResponse {
   totalCount: number
 }
 
-export type ListApplicationsRequest = {
+export interface ListApplicationsRequest {
   /** Criteria for sorting results. */
   orderBy?: ListApplicationsRequestOrderBy
   /** Number of results per page. Value must be between 1 and 100. */
@@ -855,7 +855,7 @@ export interface ListApplicationsResponse {
   totalCount: number
 }
 
-export type ListGracePeriodsRequest = {
+export interface ListGracePeriodsRequest {
   /** ID of the user to list grace periods for. */
   userId?: string
 }
@@ -865,7 +865,7 @@ export interface ListGracePeriodsResponse {
   gracePeriods: GracePeriod[]
 }
 
-export type ListGroupsRequest = {
+export interface ListGroupsRequest {
   /** Sort order of groups. */
   orderBy?: ListGroupsRequestOrderBy
   /** Requested page number. Value must be greater or equal to 1. */
@@ -893,7 +893,7 @@ export interface ListGroupsResponse {
   totalCount: number
 }
 
-export type ListJWTsRequest = {
+export interface ListJWTsRequest {
   /** Criteria for sorting results. */
   orderBy?: ListJWTsRequestOrderBy
   /** ID of the user to search. */
@@ -911,7 +911,7 @@ export interface ListJWTsResponse {
   totalCount: number
 }
 
-export type ListLogsRequest = {
+export interface ListLogsRequest {
   /** Criteria for sorting results. */
   orderBy?: ListLogsRequestOrderBy
   /** Filter by Organization ID. */
@@ -939,7 +939,7 @@ export interface ListLogsResponse {
   totalCount: number
 }
 
-export type ListPermissionSetsRequest = {
+export interface ListPermissionSetsRequest {
   /** Criteria for sorting results. */
   orderBy?: ListPermissionSetsRequestOrderBy
   /** Number of results per page. Value must be between 1 and 100. */
@@ -957,7 +957,7 @@ export interface ListPermissionSetsResponse {
   totalCount: number
 }
 
-export type ListPoliciesRequest = {
+export interface ListPoliciesRequest {
   /** Criteria for sorting results. */
   orderBy?: ListPoliciesRequestOrderBy
   /** Number of results per page. Value must be between 1 and 100. */
@@ -991,7 +991,7 @@ export interface ListPoliciesResponse {
   totalCount: number
 }
 
-export type ListQuotaRequest = {
+export interface ListQuotaRequest {
   /** Criteria for sorting results. */
   orderBy?: ListQuotaRequestOrderBy
   /** Number of results per page. Value must be between 1 and 100. */
@@ -1011,7 +1011,7 @@ export interface ListQuotaResponse {
   totalCount: number
 }
 
-export type ListRulesRequest = {
+export interface ListRulesRequest {
   /** Id of policy to search. */
   policyId: string
   /** Number of results per page. Value must be between 1 and 100. */
@@ -1027,7 +1027,7 @@ export interface ListRulesResponse {
   totalCount: number
 }
 
-export type ListSSHKeysRequest = {
+export interface ListSSHKeysRequest {
   /** Sort order of the SSH keys. */
   orderBy?: ListSSHKeysRequestOrderBy
   /** Requested page number. Value must be greater or equal to 1. */
@@ -1051,7 +1051,7 @@ export interface ListSSHKeysResponse {
   totalCount: number
 }
 
-export type ListUsersRequest = {
+export interface ListUsersRequest {
   /** Criteria for sorting results. */
   orderBy?: ListUsersRequestOrderBy
   /** Number of results per page. Value must be between 1 and 100. */
@@ -1077,7 +1077,7 @@ export interface ListUsersResponse {
   totalCount: number
 }
 
-export type LockUserRequest = {
+export interface LockUserRequest {
   /** ID of the user to lock. */
   userId: string
 }
@@ -1095,7 +1095,7 @@ export interface OrganizationSecuritySettings {
   loginAttemptsBeforeLocked: number
 }
 
-export type RemoveGroupMemberRequest = {
+export interface RemoveGroupMemberRequest {
   /** ID of the group. */
   groupId: string
   /**
@@ -1112,13 +1112,13 @@ export type RemoveGroupMemberRequest = {
   applicationId?: string
 }
 
-export type SetGroupMembersRequest = {
+export interface SetGroupMembersRequest {
   groupId: string
   userIds: string[]
   applicationIds: string[]
 }
 
-export type SetRulesRequest = {
+export interface SetRulesRequest {
   /** Id of policy to update. */
   policyId: string
   /** Rules of the policy to set. */
@@ -1130,12 +1130,12 @@ export interface SetRulesResponse {
   rules: Rule[]
 }
 
-export type UnlockUserRequest = {
+export interface UnlockUserRequest {
   /** ID of the user to unlock. */
   userId: string
 }
 
-export type UpdateAPIKeyRequest = {
+export interface UpdateAPIKeyRequest {
   /** Access key to update. */
   accessKey: string
   /** New default Project ID to set. */
@@ -1144,7 +1144,7 @@ export type UpdateAPIKeyRequest = {
   description?: string
 }
 
-export type UpdateApplicationRequest = {
+export interface UpdateApplicationRequest {
   /** ID of the application to update. */
   applicationId: string
   /** New name for the application (max length is 64 chars). */
@@ -1155,7 +1155,7 @@ export type UpdateApplicationRequest = {
   tags?: string[]
 }
 
-export type UpdateGroupRequest = {
+export interface UpdateGroupRequest {
   /** ID of the group to update. */
   groupId: string
   /**
@@ -1169,7 +1169,7 @@ export type UpdateGroupRequest = {
   tags?: string[]
 }
 
-export type UpdateOrganizationSecuritySettingsRequest = {
+export interface UpdateOrganizationSecuritySettingsRequest {
   /** ID of the Organization. */
   organizationId?: string
   /** Defines whether password renewal is enforced during first login. */
@@ -1180,7 +1180,7 @@ export type UpdateOrganizationSecuritySettingsRequest = {
   loginAttemptsBeforeLocked?: number
 }
 
-export type UpdatePolicyRequest = {
+export interface UpdatePolicyRequest {
   /** Id of policy to update. */
   policyId: string
   /** New name for the policy (max length is 64 characters). */
@@ -1219,7 +1219,7 @@ export type UpdatePolicyRequest = {
   noPrincipal?: boolean
 }
 
-export type UpdateSSHKeyRequest = {
+export interface UpdateSSHKeyRequest {
   sshKeyId: string
   /** Name of the SSH key. Max length is 1000. */
   name?: string
@@ -1227,14 +1227,14 @@ export type UpdateSSHKeyRequest = {
   disabled?: boolean
 }
 
-export type UpdateUserPasswordRequest = {
+export interface UpdateUserPasswordRequest {
   /** ID of the user to update. */
   userId: string
   /** The new password. */
   password: string
 }
 
-export type UpdateUserRequest = {
+export interface UpdateUserRequest {
   /** ID of the user to update. */
   userId: string
   /** New tags for the user (maximum of 10 tags). */
@@ -1243,14 +1243,14 @@ export type UpdateUserRequest = {
   email?: string
 }
 
-export type UpdateUserUsernameRequest = {
+export interface UpdateUserUsernameRequest {
   /** ID of the user to update. */
   userId: string
   /** The new username. */
   username: string
 }
 
-export type ValidateUserMFAOTPRequest = {
+export interface ValidateUserMFAOTPRequest {
   /** User ID of the MFA OTP. */
   userId: string
   /** A password generated using the OTP. */
