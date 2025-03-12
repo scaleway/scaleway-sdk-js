@@ -203,7 +203,7 @@ export const ListUsersRequest = {
 
 export const RuleSpecs = {
   condition: {
-    maxLength: 255,
+    maxLength: 1024,
   },
 }
 
