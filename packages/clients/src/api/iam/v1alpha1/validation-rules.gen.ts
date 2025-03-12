@@ -78,7 +78,8 @@ export const ListAPIKeysRequest = {
     maxLength: 200,
   },
   page: {
-    greaterThan: 0,
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 10000,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -93,7 +94,8 @@ export const ListApplicationsRequest = {
     pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
   },
   page: {
-    greaterThan: 0,
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 10000,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -106,7 +108,8 @@ export const ListGroupsRequest = {
     minLength: 1,
   },
   page: {
-    greaterThan: 0,
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 10000,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -116,7 +119,8 @@ export const ListGroupsRequest = {
 
 export const ListJWTsRequest = {
   page: {
-    greaterThan: 0,
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 10000,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -126,7 +130,8 @@ export const ListJWTsRequest = {
 
 export const ListLogsRequest = {
   page: {
-    greaterThan: 0,
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 10000,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -136,7 +141,8 @@ export const ListLogsRequest = {
 
 export const ListPermissionSetsRequest = {
   page: {
-    greaterThan: 0,
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 10000,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -146,7 +152,8 @@ export const ListPermissionSetsRequest = {
 
 export const ListPoliciesRequest = {
   page: {
-    greaterThan: 0,
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 10000,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -159,7 +166,8 @@ export const ListPoliciesRequest = {
 
 export const ListQuotaRequest = {
   page: {
-    greaterThan: 0,
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 10000,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -169,7 +177,8 @@ export const ListQuotaRequest = {
 
 export const ListRulesRequest = {
   page: {
-    greaterThan: 0,
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 10000,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -183,7 +192,8 @@ export const ListSSHKeysRequest = {
     minLength: 1,
   },
   page: {
-    greaterThan: 0,
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 10000,
   },
   pageSize: {
     greaterThanOrEqual: 1,
@@ -193,7 +203,8 @@ export const ListSSHKeysRequest = {
 
 export const ListUsersRequest = {
   page: {
-    greaterThan: 0,
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 10000,
   },
   pageSize: {
     greaterThanOrEqual: 1,
