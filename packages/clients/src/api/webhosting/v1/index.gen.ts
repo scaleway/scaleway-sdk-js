@@ -12,6 +12,7 @@ export {
 } from './api.gen'
 export * from './content.gen'
 export type {
+  AutoConfigDomainDns,
   CheckUserOwnsDomainResponse,
   ControlPanel,
   ControlPanelApiListControlPanelsRequest,
