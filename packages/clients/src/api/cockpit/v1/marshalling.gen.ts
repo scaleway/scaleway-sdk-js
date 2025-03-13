@@ -67,8 +67,8 @@ export const unmarshalContactPoint = (data: unknown): ContactPoint => {
 
   return {
     email: data.email ? unmarshalContactPointEmail(data.email) : undefined,
-    receiveResolvedNotifications: data.receive_resolved_notifications,
     region: data.region,
+    sendResolvedNotifications: data.send_resolved_notifications,
   } as ContactPoint
 }
 
@@ -459,7 +459,7 @@ export const marshalRegionalApiCreateContactPointRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   project_id: request.projectId ?? defaults.defaultProjectId,
-  receive_resolved_notifications: request.receiveResolvedNotifications,
+  send_resolved_notifications: request.sendResolvedNotifications,
   ...resolveOneOf([
     {
       param: 'email',
@@ -547,7 +547,7 @@ export const marshalRegionalApiUpdateContactPointRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   project_id: request.projectId ?? defaults.defaultProjectId,
-  receive_resolved_notifications: request.receiveResolvedNotifications,
+  send_resolved_notifications: request.sendResolvedNotifications,
   ...resolveOneOf([
     {
       param: 'email',
