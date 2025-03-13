@@ -150,6 +150,20 @@ export interface CreateDatabaseRequestUser {
   password: string
 }
 
+export interface AutoConfigDomainDns {
+  /** Whether or not to synchronize domain nameservers. */
+  nameservers: boolean
+  /** Whether or not to synchronize web records. */
+  webRecords: boolean
+  /** Whether or not to synchronize mail records. */
+  mailRecords: boolean
+  /**
+   * Whether or not to synchronize all types of records. Takes priority over the
+   * other fields.
+   */
+  allRecords: boolean
+}
+
 export interface CreateHostingRequestDomainConfiguration {
   updateNameservers: boolean
   updateWebRecord: boolean
@@ -586,16 +600,30 @@ export type DnsApiSyncDomainDnsRecordsRequest = {
   region?: ScwRegion
   /** Domain for which the DNS records will be synchronized. */
   domain: string
-  /** Whether or not to synchronize the web records. */
-  updateWebRecords: boolean
-  /** Whether or not to synchronize the mail records. */
-  updateMailRecords: boolean
-  /** Whether or not to synchronize all types of records. This one has priority. */
-  updateAllRecords: boolean
-  /** Whether or not to synchronize domain nameservers. */
-  updateNameservers: boolean
+  /**
+   * @deprecated Whether or not to synchronize the web records (deprecated, use
+   *   auto_config_domain_dns).
+   */
+  updateWebRecords?: boolean
+  /**
+   * @deprecated Whether or not to synchronize the mail records (deprecated, use
+   *   auto_config_domain_dns).
+   */
+  updateMailRecords?: boolean
+  /**
+   * @deprecated Whether or not to synchronize all types of records. This one
+   *   has priority (deprecated, use auto_config_domain_dns).
+   */
+  updateAllRecords?: boolean
+  /**
+   * @deprecated Whether or not to synchronize domain nameservers (deprecated,
+   *   use auto_config_domain_dns).
+   */
+  updateNameservers?: boolean
   /** Custom records to synchronize. */
   customRecords?: SyncDomainDnsRecordsRequestRecord[]
+  /** Whether or not to synchronize each types of records. */
+  autoConfigDomainDns?: AutoConfigDomainDns
 }
 
 export interface DnsRecords {
@@ -618,8 +646,13 @@ export interface Domain {
   owner: DomainZoneOwner
   /** A list of actions that can be performed on the domain. */
   availableActions: DomainAction[]
-  /** A list of DNS-related actions that can be auto configured for the domain. */
-  availableDnsActions: DomainDnsAction[]
+  /**
+   * @deprecated A list of DNS-related actions that can be auto configured for
+   *   the domain (deprecated, use auto_config_domain_dns instead).
+   */
+  availableDnsActions?: DomainDnsAction[]
+  /** Whether or not to synchronize each type of record. */
+  autoConfigDomainDns?: AutoConfigDomainDns
 }
 
 export type FtpAccountApiChangeFtpAccountPasswordRequest = {
@@ -742,8 +775,9 @@ export type HostingApiCreateHostingRequest = {
   /** Default language for the control panel interface. */
   language?: StdLanguageCode
   /**
-   * Indicates whether to update hosting domain name servers and DNS records for
-   * domains managed by Scaleway Elements.
+   * @deprecated Indicates whether to update hosting domain name servers and DNS
+   *   records for domains managed by Scaleway Elements (deprecated, use
+   *   auto_config_domain_dns instead).
    */
   domainConfiguration?: CreateHostingRequestDomainConfiguration
   /**
@@ -751,6 +785,12 @@ export type HostingApiCreateHostingRequest = {
    * hosting info.
    */
   skipWelcomeEmail?: boolean
+  /**
+   * Indicates whether to update hosting domain name servers and DNS records for
+   * domains managed by Scaleway Elements (deprecated, use auto_update_* fields
+   * instead).
+   */
+  autoConfigDomainDns?: AutoConfigDomainDns
 }
 
 export type HostingApiCreateSessionRequest = {
