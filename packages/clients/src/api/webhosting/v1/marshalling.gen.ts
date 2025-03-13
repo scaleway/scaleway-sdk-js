@@ -9,6 +9,7 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  AutoConfigDomainDns,
   CheckUserOwnsDomainResponse,
   ControlPanel,
   CreateDatabaseRequestUser,
@@ -174,6 +175,21 @@ export const unmarshalDnsRecords = (data: unknown): DnsRecords => {
   } as DnsRecords
 }
 
+const unmarshalAutoConfigDomainDns = (data: unknown): AutoConfigDomainDns => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AutoConfigDomainDns' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    allRecords: data.all_records,
+    mailRecords: data.mail_records,
+    nameservers: data.nameservers,
+    webRecords: data.web_records,
+  } as AutoConfigDomainDns
+}
+
 export const unmarshalDomain = (data: unknown): Domain => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -182,8 +198,13 @@ export const unmarshalDomain = (data: unknown): Domain => {
   }
 
   return {
+    autoConfigDomainDns: data.auto_config_domain_dns
+      ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns)
+      : undefined,
     availableActions: data.available_actions,
-    availableDnsActions: data.available_dns_actions,
+    availableDnsActions: data.available_dns_actions
+      ? data.available_dns_actions
+      : undefined,
     name: data.name,
     owner: data.owner,
     status: data.status,
@@ -629,6 +650,16 @@ export const marshalDnsApiCheckUserOwnsDomainRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
+const marshalAutoConfigDomainDns = (
+  request: AutoConfigDomainDns,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  all_records: request.allRecords,
+  mail_records: request.mailRecords,
+  nameservers: request.nameservers,
+  web_records: request.webRecords,
+})
+
 const marshalSyncDomainDnsRecordsRequestRecord = (
   request: SyncDomainDnsRecordsRequestRecord,
   defaults: DefaultValues,
@@ -641,6 +672,10 @@ export const marshalDnsApiSyncDomainDnsRecordsRequest = (
   request: DnsApiSyncDomainDnsRecordsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  auto_config_domain_dns:
+    request.autoConfigDomainDns !== undefined
+      ? marshalAutoConfigDomainDns(request.autoConfigDomainDns, defaults)
+      : undefined,
   custom_records:
     request.customRecords !== undefined
       ? request.customRecords.map(elt =>
@@ -691,6 +726,10 @@ export const marshalHostingApiCreateHostingRequest = (
   request: HostingApiCreateHostingRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  auto_config_domain_dns:
+    request.autoConfigDomainDns !== undefined
+      ? marshalAutoConfigDomainDns(request.autoConfigDomainDns, defaults)
+      : undefined,
   domain: request.domain,
   domain_configuration:
     request.domainConfiguration !== undefined
