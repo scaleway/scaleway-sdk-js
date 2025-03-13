@@ -84,7 +84,7 @@ export interface ContactPoint {
   /** Region. */
   region: ScwRegion
   /** Send an email notification when an alert is marked as resolved. */
-  receiveResolvedNotifications: boolean
+  sendResolvedNotifications: boolean
 }
 
 /** Data source. */
@@ -412,7 +412,7 @@ export type RegionalApiCreateContactPointRequest = {
    */
   email?: ContactPointEmail
   /** Send an email notification when an alert is marked as resolved. */
-  receiveResolvedNotifications?: boolean
+  sendResolvedNotifications?: boolean
 }
 
 /** Create a data source. */
@@ -701,7 +701,7 @@ export type RegionalApiUpdateContactPointRequest = {
    */
   email?: ContactPointEmail
   /** Enable or disable notifications when alert is resolved. */
-  receiveResolvedNotifications?: boolean
+  sendResolvedNotifications?: boolean
 }
 
 /** Update a data source name. */
