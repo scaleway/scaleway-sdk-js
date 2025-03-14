@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion } from '../../../bridge'
+import type { Region as ScwRegion, Zone as ScwZone } from '../../../bridge'
 
 export type BlocklistType =
   | 'unknown_type'
@@ -81,6 +81,15 @@ export type ListWebhookEventsRequestOrderBy =
   | 'created_at_asc'
 
 export type ListWebhooksRequestOrderBy = 'created_at_desc' | 'created_at_asc'
+
+export type OfferName = 'unknown_name' | 'essential' | 'scale'
+
+export type PoolStatus =
+  | 'unknown_status'
+  | 'disabled'
+  | 'creating'
+  | 'ready'
+  | 'error'
 
 export type ProjectSettingsPeriodicReportFrequency =
   | 'unknown_frequency'
@@ -318,6 +327,82 @@ export interface Domain {
    * config.
    */
   region: ScwRegion
+}
+
+export interface OfferSubscription {
+  /** ID of the offer-subscription Organization. */
+  organizationId: string
+  /** ID of the offer-subscription Project. */
+  projectId: string
+  /** Name of the offer associated with the Project. */
+  offerName: OfferName
+  /** Date and time of the subscription. */
+  subscribedAt?: Date
+  /** Date and time of the end of the offer-subscription commitment. */
+  cancellationAvailableAt?: Date
+  /** Service Level Agreement percentage of the offer-subscription. */
+  sla: number
+  /**
+   * Max number of domains that can be associated with the offer-subscription
+   * for a particular Project.
+   */
+  maxDomains: number
+  /**
+   * Max number of dedicated IPs that can be associated with the
+   * offer-subscription for a particular Project.
+   */
+  maxDedicatedIps: number
+  /**
+   * Max number of webhooks that can be associated with the offer-subscription
+   * for a particular Project.
+   */
+  maxWebhooksPerDomain: number
+  /**
+   * Max number of custom blocklists that can be associated with the
+   * offer-subscription for a particular Project.
+   */
+  maxCustomBlocklistsPerDomain: number
+  /** Number of emails included in the offer-subscription per month. */
+  includedMonthlyEmails: number
+}
+
+export interface Offer {
+  /** Name of the offer. */
+  name: OfferName
+  /** Date and time of the offer creation. */
+  createdAt?: Date
+  /** Period of commitment. */
+  commitmentPeriod?: string
+  /** Service Level Agreement percentage of the offer. */
+  sla: number
+  /** Max number of checked domains that can be associated with the offer. */
+  maxDomains: number
+  /** Max number of dedicated IPs that can be associated with the offer. */
+  maxDedicatedIps: number
+  /** Number of emails included in the offer per month. */
+  includedMonthlyEmails: number
+  /** Max number of webhooks that can be associated with the offer. */
+  maxWebhooksPerDomain: number
+  /**
+   * Max number of active custom blocklists that can be associated with the
+   * offer.
+   */
+  maxCustomBlocklistsPerDomain: number
+}
+
+export interface Pool {
+  /** ID of the Project. */
+  projectId: string
+  /** Status of the pool. */
+  status: PoolStatus
+  /** Details of the pool. */
+  details?: string
+  /** Zone of the pool. */
+  zone?: ScwZone
+  /** IPs of the pool. */
+  ips: string[]
+  /** Reverse hostname of all IPs of the pool. */
+  reverse?: string
 }
 
 export interface WebhookEvent {
@@ -569,6 +654,16 @@ export type GetEmailRequest = {
   emailId: string
 }
 
+export type GetProjectConsumptionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: ScwRegion
+  /** ID of the project. */
+  projectId?: string
+}
+
 export type GetProjectSettingsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -712,6 +807,59 @@ export interface ListEmailsResponse {
   emails: Email[]
 }
 
+export type ListOfferSubscriptionsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: ScwRegion
+  /** ID of the Project. */
+  projectId?: string
+}
+
+export interface ListOfferSubscriptionsResponse {
+  /** Number of offer-subscriptions matching the requested criteria. */
+  totalCount: number
+  /** Single page of offer-subscriptions matching the requested criteria. */
+  offerSubscriptions: OfferSubscription[]
+}
+
+export type ListOffersRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: ScwRegion
+}
+
+export interface ListOffersResponse {
+  /** Number of offers matching the requested criteria. */
+  totalCount: number
+  /** Single page of offers matching the requested criteria. */
+  offers: Offer[]
+}
+
+export type ListPoolsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: ScwRegion
+  /** Requested page number. Value must be greater or equal to 1. */
+  page?: number
+  /** Requested page size. Value must be between 1 and 1000. */
+  pageSize?: number
+  /** ID of the Project. */
+  projectId?: string
+}
+
+export interface ListPoolsResponse {
+  /** Number of pools matching the requested criteria. */
+  totalCount: number
+  /** Single page of pools matching the requested criteria. */
+  pools: Pool[]
+}
+
 export type ListWebhookEventsRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -774,6 +922,21 @@ export interface ListWebhooksResponse {
   webhooks: Webhook[]
 }
 
+export interface ProjectConsumption {
+  /** ID of the project. */
+  projectId: string
+  /** Number of domains in the project. */
+  domainsCount: number
+  /** Number of dedicated IP in the project. */
+  dedicatedIpsCount: number
+  /** Number of emails sent during the current month in the project. */
+  monthlyEmailsCount: number
+  /** Number of webhooks in the project. */
+  webhooksCount: number
+  /** Number of custom blocklists in the project. */
+  customBlocklistsCount: number
+}
+
 export interface ProjectSettings {
   /** Information about your periodic report. */
   periodicReport?: ProjectSettingsPeriodicReport
@@ -832,6 +995,18 @@ export type UpdateDomainRequest = {
    * zone.
    */
   autoconfig?: boolean
+}
+
+export type UpdateOfferSubscriptionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: ScwRegion
+  /** ID of the Project. */
+  projectId?: string
+  /** Name of the offer-subscription. */
+  name?: OfferName
 }
 
 export type UpdateProjectSettingsRequest = {
