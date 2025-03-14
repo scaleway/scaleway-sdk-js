@@ -112,6 +112,7 @@ export interface SchemaPartition {
   label: SchemaPartitionLabel
   number: number
   size: number
+  useAllAvailableSpace: boolean
 }
 
 export interface SchemaPool {
