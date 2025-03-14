@@ -92,6 +92,16 @@ export const ListEmailsRequest = {
   },
 }
 
+export const ListPoolsRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1000,
+  },
+}
+
 export const ListWebhookEventsRequest = {
   page: {
     greaterThan: 0,
