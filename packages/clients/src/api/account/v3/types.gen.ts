@@ -24,6 +24,29 @@ export type ListProjectsRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
+export type QualificationArchitectureType =
+  | 'unknown_architecture_type'
+  | 'object_storage'
+  | 'web_hosting'
+  | 'instance'
+  | 'elastic'
+  | 'kubernetes'
+  | 'serverless'
+  | 'dedicated_server'
+  | 'other_architecture_type'
+
+export type QualificationHostApplicationSubUseCase =
+  | 'unknown_sub_use_case'
+  | 'saas_app'
+  | 'government_app'
+
+export type QualificationHostWebsiteSubUseCase =
+  | 'unknown_sub_use_case'
+  | 'information_website'
+  | 'ecommerce_website'
+  | 'high_website'
+  | 'other_sub_use_case'
+
 export interface Contract {
   /** ID of the contract. */
   id: string
@@ -38,6 +61,28 @@ export interface Contract {
   /** The last modification date of the contract. */
   updatedAt?: Date
 }
+
+export interface QualificationAiMachine {}
+
+export interface QualificationArchiveData {}
+
+export interface QualificationContainer {}
+
+export interface QualificationDeploySoftware {}
+
+export interface QualificationHostApplication {
+  subUseCase: QualificationHostApplicationSubUseCase
+}
+
+export interface QualificationHostWebsite {
+  subUseCase: QualificationHostWebsiteSubUseCase
+}
+
+export interface QualificationOtherUseCase {}
+
+export interface QualificationSetScalewayEnvironment {}
+
+export interface QualificationShareData {}
 
 export interface ContractSignature {
   /** ID of the contract signature. */
@@ -67,6 +112,65 @@ export interface Project {
   updatedAt?: Date
   /** Description of the Project. */
   description: string
+}
+
+export interface Qualification {
+  /** Architecture type of the qualification. */
+  architectureType: QualificationArchitectureType
+  /**
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
+   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
+   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  hostWebsite?: QualificationHostWebsite
+  /**
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
+   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
+   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  hostApplication?: QualificationHostApplication
+  /**
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
+   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
+   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  deploySoftware?: QualificationDeploySoftware
+  /**
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
+   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
+   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  setScalewayEnvironment?: QualificationSetScalewayEnvironment
+  /**
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
+   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
+   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  aiMachine?: QualificationAiMachine
+  /**
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
+   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
+   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  container?: QualificationContainer
+  /**
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
+   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
+   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  archiveData?: QualificationArchiveData
+  /**
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
+   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
+   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  shareData?: QualificationShareData
+  /**
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
+   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
+   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  otherUseCase?: QualificationOtherUseCase
 }
 
 export interface CheckContractSignatureResponse {
@@ -170,6 +274,13 @@ export type ProjectApiListProjectsRequest = {
   projectIds?: string[]
 }
 
+export type ProjectApiSetProjectQualificationRequest = {
+  /** Project ID. */
+  projectId?: string
+  /** Use case chosen for the Project. */
+  qualification?: Qualification
+}
+
 export type ProjectApiUpdateProjectRequest = {
   /** Project ID of the Project. */
   projectId?: string
@@ -177,4 +288,11 @@ export type ProjectApiUpdateProjectRequest = {
   name?: string
   /** Description of the Project. */
   description?: string
+}
+
+export interface ProjectQualification {
+  /** Project ID. */
+  projectId: string
+  /** Qualification of the Project. */
+  qualification?: Qualification
 }

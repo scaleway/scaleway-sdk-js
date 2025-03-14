@@ -10,12 +10,14 @@ import {
   marshalContractApiCheckContractSignatureRequest,
   marshalContractApiCreateContractSignatureRequest,
   marshalProjectApiCreateProjectRequest,
+  marshalProjectApiSetProjectQualificationRequest,
   marshalProjectApiUpdateProjectRequest,
   unmarshalCheckContractSignatureResponse,
   unmarshalContractSignature,
   unmarshalListContractSignaturesResponse,
   unmarshalListProjectsResponse,
   unmarshalProject,
+  unmarshalProjectQualification,
 } from './marshalling.gen'
 import type {
   CheckContractSignatureResponse,
@@ -32,7 +34,9 @@ import type {
   ProjectApiDeleteProjectRequest,
   ProjectApiGetProjectRequest,
   ProjectApiListProjectsRequest,
+  ProjectApiSetProjectQualificationRequest,
   ProjectApiUpdateProjectRequest,
+  ProjectQualification,
 } from './types.gen'
 
 const jsonContentHeaders = {
@@ -287,5 +291,32 @@ export class ProjectAPI extends ParentAPI {
         path: `/account/v3/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
       },
       unmarshalProject,
+    )
+
+  /**
+   * Set project use case. Set the project use case for a new or existing
+   * Project, specified by its Project ID. You can customize the use case, sub
+   * use case, and architecture type you want to use in the Project.
+   *
+   * @param request - The request
+   *   {@link ProjectApiSetProjectQualificationRequest}
+   * @returns A Promise of ProjectQualification
+   */
+  setProjectQualification = (
+    request: Readonly<ProjectApiSetProjectQualificationRequest> = {},
+  ) =>
+    this.client.fetch<ProjectQualification>(
+      {
+        body: JSON.stringify(
+          marshalProjectApiSetProjectQualificationRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/account/v3/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}/project-qualification`,
+      },
+      unmarshalProjectQualification,
     )
 }
