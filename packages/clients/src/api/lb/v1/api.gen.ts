@@ -13,8 +13,8 @@ import type {
   WaitForOptions,
 } from '../../../bridge'
 import {
-  CERTIFICATE_TRANSIENT_STATUSES,
-  LB_TRANSIENT_STATUSES,
+  CERTIFICATE_TRANSIENT_STATUSES as CERTIFICATE_TRANSIENT_STATUSES_LB,
+  LB_TRANSIENT_STATUSES as LB_TRANSIENT_STATUSES_LB,
 } from './content.gen'
 import {
   marshalAddBackendServersRequest,
@@ -327,7 +327,8 @@ export class ZonedAPI extends ParentAPI {
   ) =>
     waitForResource(
       options?.stop ??
-        (res => Promise.resolve(!LB_TRANSIENT_STATUSES.includes(res.status))),
+        (res =>
+          Promise.resolve(!LB_TRANSIENT_STATUSES_LB.includes(res.status))),
       this.getLb,
       request,
       options,
@@ -1169,7 +1170,7 @@ export class ZonedAPI extends ParentAPI {
       options?.stop ??
         (res =>
           Promise.resolve(
-            !CERTIFICATE_TRANSIENT_STATUSES.includes(res.status),
+            !CERTIFICATE_TRANSIENT_STATUSES_LB.includes(res.status),
           )),
       this.getCertificate,
       request,
@@ -1554,7 +1555,8 @@ export class API extends ParentAPI {
   ) =>
     waitForResource(
       options?.stop ??
-        (res => Promise.resolve(!LB_TRANSIENT_STATUSES.includes(res.status))),
+        (res =>
+          Promise.resolve(!LB_TRANSIENT_STATUSES_LB.includes(res.status))),
       this.getLb,
       request,
       options,
@@ -2272,7 +2274,7 @@ export class API extends ParentAPI {
       options?.stop ??
         (res =>
           Promise.resolve(
-            !CERTIFICATE_TRANSIENT_STATUSES.includes(res.status),
+            !CERTIFICATE_TRANSIENT_STATUSES_LB.includes(res.status),
           )),
       this.getCertificate,
       request,

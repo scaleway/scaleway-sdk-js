@@ -10,9 +10,9 @@ import {
 } from '../../../bridge'
 import type { WaitForOptions } from '../../../bridge'
 import {
-  JOB_TRANSIENT_STATUSES,
-  PROCESS_TRANSIENT_STATUSES,
-  SESSION_TRANSIENT_STATUSES,
+  JOB_TRANSIENT_STATUSES as JOB_TRANSIENT_STATUSES_QAAS,
+  PROCESS_TRANSIENT_STATUSES as PROCESS_TRANSIENT_STATUSES_QAAS,
+  SESSION_TRANSIENT_STATUSES as SESSION_TRANSIENT_STATUSES_QAAS,
 } from './content.gen'
 import {
   marshalCreateJobRequest,
@@ -118,7 +118,8 @@ export class API extends ParentAPI {
   ) =>
     waitForResource(
       options?.stop ??
-        (res => Promise.resolve(!JOB_TRANSIENT_STATUSES.includes(res.status))),
+        (res =>
+          Promise.resolve(!JOB_TRANSIENT_STATUSES_QAAS.includes(res.status))),
       this.getJob,
       request,
       options,
@@ -350,7 +351,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!SESSION_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !SESSION_TRANSIENT_STATUSES_QAAS.includes(res.status),
+          )),
       this.getSession,
       request,
       options,
@@ -531,7 +534,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!PROCESS_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !PROCESS_TRANSIENT_STATUSES_QAAS.includes(res.status),
+          )),
       this.getProcess,
       request,
       options,

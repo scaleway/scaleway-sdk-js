@@ -9,9 +9,9 @@ import {
 } from '../../../bridge'
 import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
 import {
-  CLUSTER_TRANSIENT_STATUSES,
-  NODE_TRANSIENT_STATUSES,
-  POOL_TRANSIENT_STATUSES,
+  CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_K8S,
+  NODE_TRANSIENT_STATUSES as NODE_TRANSIENT_STATUSES_K8S,
+  POOL_TRANSIENT_STATUSES as POOL_TRANSIENT_STATUSES_K8S,
 } from './content.gen'
 import {
   marshalAddClusterACLRulesRequest,
@@ -193,7 +193,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!CLUSTER_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !CLUSTER_TRANSIENT_STATUSES_K8S.includes(res.status),
+          )),
       this.getCluster,
       request,
       options,
@@ -521,7 +523,8 @@ export class API extends ParentAPI {
   ) =>
     waitForResource(
       options?.stop ??
-        (res => Promise.resolve(!POOL_TRANSIENT_STATUSES.includes(res.status))),
+        (res =>
+          Promise.resolve(!POOL_TRANSIENT_STATUSES_K8S.includes(res.status))),
       this.getPool,
       request,
       options,
@@ -698,7 +701,8 @@ export class API extends ParentAPI {
   ) =>
     waitForResource(
       options?.stop ??
-        (res => Promise.resolve(!NODE_TRANSIENT_STATUSES.includes(res.status))),
+        (res =>
+          Promise.resolve(!NODE_TRANSIENT_STATUSES_K8S.includes(res.status))),
       this.getNode,
       request,
       options,

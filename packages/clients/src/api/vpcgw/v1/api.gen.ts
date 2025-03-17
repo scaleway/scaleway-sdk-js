@@ -9,8 +9,8 @@ import {
 } from '../../../bridge'
 import type { Zone as ScwZone, WaitForOptions } from '../../../bridge'
 import {
-  GATEWAY_NETWORK_TRANSIENT_STATUSES,
-  GATEWAY_TRANSIENT_STATUSES,
+  GATEWAY_NETWORK_TRANSIENT_STATUSES as GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW,
+  GATEWAY_TRANSIENT_STATUSES as GATEWAY_TRANSIENT_STATUSES_VPCGW,
 } from './content.gen'
 import {
   marshalCreateDHCPEntryRequest,
@@ -189,7 +189,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!GATEWAY_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !GATEWAY_TRANSIENT_STATUSES_VPCGW.includes(res.status),
+          )),
       this.getGateway,
       request,
       options,
@@ -367,7 +369,7 @@ export class API extends ParentAPI {
       options?.stop ??
         (res =>
           Promise.resolve(
-            !GATEWAY_NETWORK_TRANSIENT_STATUSES.includes(res.status),
+            !GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW.includes(res.status),
           )),
       this.getGatewayNetwork,
       request,
