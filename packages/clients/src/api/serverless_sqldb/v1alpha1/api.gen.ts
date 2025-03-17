@@ -8,7 +8,7 @@ import {
   waitForResource,
 } from '../../../bridge'
 import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
-import { DATABASE_TRANSIENT_STATUSES } from './content.gen'
+import { DATABASE_TRANSIENT_STATUSES as DATABASE_TRANSIENT_STATUSES_SERVERLESS_SQLDB } from './content.gen'
 import {
   marshalCreateDatabaseRequest,
   marshalRestoreDatabaseFromBackupRequest,
@@ -98,7 +98,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!DATABASE_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !DATABASE_TRANSIENT_STATUSES_SERVERLESS_SQLDB.includes(res.status),
+          )),
       this.getDatabase,
       request,
       options,

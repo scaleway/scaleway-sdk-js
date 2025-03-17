@@ -8,7 +8,7 @@ import {
   waitForResource,
 } from '../../../bridge'
 import type { Zone as ScwZone, WaitForOptions } from '../../../bridge'
-import { CLUSTER_TRANSIENT_STATUSES } from './content.gen'
+import { CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_REDIS } from './content.gen'
 import {
   marshalAddAclRulesRequest,
   marshalAddClusterSettingsRequest,
@@ -167,7 +167,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!CLUSTER_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !CLUSTER_TRANSIENT_STATUSES_REDIS.includes(res.status),
+          )),
       this.getCluster,
       request,
       options,
