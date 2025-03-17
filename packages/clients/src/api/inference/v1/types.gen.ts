@@ -228,7 +228,7 @@ export interface NodeType {
   region: ScwRegion
 }
 
-export type CreateDeploymentRequest = {
+export interface CreateDeploymentRequest {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -259,7 +259,7 @@ export type CreateDeploymentRequest = {
   quantization?: DeploymentQuantization
 }
 
-export type CreateEndpointRequest = {
+export interface CreateEndpointRequest {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -271,7 +271,7 @@ export type CreateEndpointRequest = {
   endpoint: EndpointSpec
 }
 
-export type CreateModelRequest = {
+export interface CreateModelRequest {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -285,7 +285,7 @@ export type CreateModelRequest = {
   source: ModelSource
 }
 
-export type DeleteDeploymentRequest = {
+export interface DeleteDeploymentRequest {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -295,7 +295,7 @@ export type DeleteDeploymentRequest = {
   deploymentId: string
 }
 
-export type DeleteEndpointRequest = {
+export interface DeleteEndpointRequest {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -305,7 +305,7 @@ export type DeleteEndpointRequest = {
   endpointId: string
 }
 
-export type DeleteModelRequest = {
+export interface DeleteModelRequest {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -315,7 +315,7 @@ export type DeleteModelRequest = {
   modelId: string
 }
 
-export type GetDeploymentCertificateRequest = {
+export interface GetDeploymentCertificateRequest {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -324,7 +324,7 @@ export type GetDeploymentCertificateRequest = {
   deploymentId: string
 }
 
-export type GetDeploymentRequest = {
+export interface GetDeploymentRequest {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -334,7 +334,7 @@ export type GetDeploymentRequest = {
   deploymentId: string
 }
 
-export type GetModelRequest = {
+export interface GetModelRequest {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -344,7 +344,7 @@ export type GetModelRequest = {
   modelId: string
 }
 
-export type ListDeploymentsRequest = {
+export interface ListDeploymentsRequest {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -373,7 +373,7 @@ export interface ListDeploymentsResponse {
   totalCount: number
 }
 
-export type ListModelsRequest = {
+export interface ListModelsRequest {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -400,7 +400,7 @@ export interface ListModelsResponse {
   totalCount: number
 }
 
-export type ListNodeTypesRequest = {
+export interface ListNodeTypesRequest {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -421,7 +421,7 @@ export interface ListNodeTypesResponse {
   totalCount: number
 }
 
-export type UpdateDeploymentRequest = {
+export interface UpdateDeploymentRequest {
   /**
    * Region to target. If none is passed will use default region from the
    * config.
@@ -437,13 +437,9 @@ export type UpdateDeploymentRequest = {
   minSize?: number
   /** Defines the new maximum size of the pool. */
   maxSize?: number
-  /** Id of the model to set to the deployment. */
-  modelId?: string
-  /** Quantization to use to the deployment. */
-  quantization?: DeploymentQuantization
 }
 
-export type UpdateEndpointRequest = {
+export interface UpdateEndpointRequest {
   /**
    * Region to target. If none is passed will use default region from the
    * config.

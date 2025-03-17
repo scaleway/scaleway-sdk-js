@@ -77,7 +77,6 @@ const unmarshalSchemaPartition = (data: unknown): SchemaPartition => {
     label: data.label,
     number: data.number,
     size: data.size,
-    useAllAvailableSpace: data.use_all_available_space,
   } as SchemaPartition
 }
 
@@ -788,7 +787,6 @@ const marshalSchemaPartition = (
   label: request.label,
   number: request.number,
   size: request.size,
-  use_all_available_space: request.useAllAvailableSpace,
 })
 
 const marshalSchemaPool = (

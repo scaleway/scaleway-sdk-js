@@ -358,12 +358,7 @@ export const marshalUpdateDeploymentRequest = (
 ): Record<string, unknown> => ({
   max_size: request.maxSize,
   min_size: request.minSize,
-  model_id: request.modelId,
   name: request.name,
-  quantization:
-    request.quantization !== undefined
-      ? marshalDeploymentQuantization(request.quantization, defaults)
-      : undefined,
   tags: request.tags,
 })
 
