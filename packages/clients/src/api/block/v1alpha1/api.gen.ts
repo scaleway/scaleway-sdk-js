@@ -9,8 +9,8 @@ import {
 } from '../../../bridge'
 import type { Zone as ScwZone, WaitForOptions } from '../../../bridge'
 import {
-  SNAPSHOT_TRANSIENT_STATUSES,
-  VOLUME_TRANSIENT_STATUSES,
+  SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_BLOCK,
+  VOLUME_TRANSIENT_STATUSES as VOLUME_TRANSIENT_STATUSES_BLOCK,
 } from './content.gen'
 import {
   marshalCreateSnapshotRequest,
@@ -186,7 +186,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!VOLUME_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !VOLUME_TRANSIENT_STATUSES_BLOCK.includes(res.status),
+          )),
       this.getVolume,
       request,
       options,
@@ -292,7 +294,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!SNAPSHOT_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !SNAPSHOT_TRANSIENT_STATUSES_BLOCK.includes(res.status),
+          )),
       this.getSnapshot,
       request,
       options,

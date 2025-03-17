@@ -8,7 +8,7 @@ import {
   waitForResource,
 } from '../../../bridge'
 import type { Zone as ScwZone, WaitForOptions } from '../../../bridge'
-import { SERVER_TRANSIENT_STATUSES } from './content.gen'
+import { SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_BAREMETAL } from './content.gen'
 import {
   marshalAddOptionServerRequest,
   marshalCreateServerRequest,
@@ -177,7 +177,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!SERVER_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !SERVER_TRANSIENT_STATUSES_BAREMETAL.includes(res.status),
+          )),
       this.getServer,
       request,
       options,
