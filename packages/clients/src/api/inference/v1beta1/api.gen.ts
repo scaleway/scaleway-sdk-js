@@ -8,7 +8,7 @@ import {
   waitForResource,
 } from '../../../bridge'
 import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
-import { DEPLOYMENT_TRANSIENT_STATUSES } from './content.gen'
+import { DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES } from './content.gen'
 import {
   marshalAddDeploymentACLRulesRequest,
   marshalCreateDeploymentRequest,
