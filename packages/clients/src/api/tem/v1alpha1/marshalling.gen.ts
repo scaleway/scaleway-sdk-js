@@ -32,12 +32,20 @@ import type {
   ListBlocklistsResponse,
   ListDomainsResponse,
   ListEmailsResponse,
+  ListOfferSubscriptionsResponse,
+  ListOffersResponse,
+  ListPoolsResponse,
   ListWebhookEventsResponse,
   ListWebhooksResponse,
+  Offer,
+  OfferSubscription,
+  Pool,
+  ProjectConsumption,
   ProjectSettings,
   ProjectSettingsPeriodicReport,
   Statistics,
   UpdateDomainRequest,
+  UpdateOfferSubscriptionRequest,
   UpdateProjectSettingsRequest,
   UpdateProjectSettingsRequestUpdatePeriodicReport,
   UpdateWebhookRequest,
@@ -172,6 +180,30 @@ export const unmarshalDomain = (data: unknown): Domain => {
       : undefined,
     status: data.status,
   } as Domain
+}
+
+export const unmarshalOfferSubscription = (
+  data: unknown,
+): OfferSubscription => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferSubscription' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    cancellationAvailableAt: unmarshalDate(data.cancellation_available_at),
+    includedMonthlyEmails: data.included_monthly_emails,
+    maxCustomBlocklistsPerDomain: data.max_custom_blocklists_per_domain,
+    maxDedicatedIps: data.max_dedicated_ips,
+    maxDomains: data.max_domains,
+    maxWebhooksPerDomain: data.max_webhooks_per_domain,
+    offerName: data.offer_name,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    sla: data.sla,
+    subscribedAt: unmarshalDate(data.subscribed_at),
+  } as OfferSubscription
 }
 
 export const unmarshalWebhook = (data: unknown): Webhook => {
@@ -376,6 +408,91 @@ export const unmarshalListEmailsResponse = (
   } as ListEmailsResponse
 }
 
+export const unmarshalListOfferSubscriptionsResponse = (
+  data: unknown,
+): ListOfferSubscriptionsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListOfferSubscriptionsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    offerSubscriptions: unmarshalArrayOfObject(
+      data.offer_subscriptions,
+      unmarshalOfferSubscription,
+    ),
+    totalCount: data.total_count,
+  } as ListOfferSubscriptionsResponse
+}
+
+const unmarshalOffer = (data: unknown): Offer => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Offer' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    commitmentPeriod: data.commitment_period,
+    createdAt: unmarshalDate(data.created_at),
+    includedMonthlyEmails: data.included_monthly_emails,
+    maxCustomBlocklistsPerDomain: data.max_custom_blocklists_per_domain,
+    maxDedicatedIps: data.max_dedicated_ips,
+    maxDomains: data.max_domains,
+    maxWebhooksPerDomain: data.max_webhooks_per_domain,
+    name: data.name,
+    sla: data.sla,
+  } as Offer
+}
+
+export const unmarshalListOffersResponse = (
+  data: unknown,
+): ListOffersResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListOffersResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    offers: unmarshalArrayOfObject(data.offers, unmarshalOffer),
+    totalCount: data.total_count,
+  } as ListOffersResponse
+}
+
+const unmarshalPool = (data: unknown): Pool => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Pool' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    details: data.details,
+    ips: data.ips,
+    projectId: data.project_id,
+    reverse: data.reverse,
+    status: data.status,
+    zone: data.zone,
+  } as Pool
+}
+
+export const unmarshalListPoolsResponse = (
+  data: unknown,
+): ListPoolsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPoolsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    pools: unmarshalArrayOfObject(data.pools, unmarshalPool),
+    totalCount: data.total_count,
+  } as ListPoolsResponse
+}
+
 const unmarshalWebhookEvent = (data: unknown): WebhookEvent => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -429,6 +546,25 @@ export const unmarshalListWebhooksResponse = (
     totalCount: data.total_count,
     webhooks: unmarshalArrayOfObject(data.webhooks, unmarshalWebhook),
   } as ListWebhooksResponse
+}
+
+export const unmarshalProjectConsumption = (
+  data: unknown,
+): ProjectConsumption => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ProjectConsumption' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    customBlocklistsCount: data.custom_blocklists_count,
+    dedicatedIpsCount: data.dedicated_ips_count,
+    domainsCount: data.domains_count,
+    monthlyEmailsCount: data.monthly_emails_count,
+    projectId: data.project_id,
+    webhooksCount: data.webhooks_count,
+  } as ProjectConsumption
 }
 
 const unmarshalProjectSettingsPeriodicReport = (
@@ -577,6 +713,14 @@ export const marshalUpdateDomainRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   autoconfig: request.autoconfig,
+})
+
+export const marshalUpdateOfferSubscriptionRequest = (
+  request: UpdateOfferSubscriptionRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
 const marshalUpdateProjectSettingsRequestUpdatePeriodicReport = (
