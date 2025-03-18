@@ -9,8 +9,8 @@ import {
 } from '../../../bridge'
 import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
 import {
-  DOMAIN_TRANSIENT_STATUSES,
-  EMAIL_TRANSIENT_STATUSES,
+  DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_TEM,
+  EMAIL_TRANSIENT_STATUSES as EMAIL_TRANSIENT_STATUSES_TEM,
 } from './content.gen'
 import {
   marshalBulkCreateBlocklistsRequest,
@@ -154,7 +154,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!EMAIL_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(!EMAIL_TRANSIENT_STATUSES_TEM.includes(res.status))),
       this.getEmail,
       request,
       options,
@@ -296,7 +296,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!DOMAIN_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_TEM.includes(res.status))),
       this.getDomain,
       request,
       options,

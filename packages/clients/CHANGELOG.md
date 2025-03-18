@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.70.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.69.0...@scaleway/sdk@2.70.0) (2025-03-17)
+
+### Features
+
+- **account:** add project customization endpoint ([#1919](https://github.com/scaleway/scaleway-sdk-js/issues/1919)) ([c9aa3ed](https://github.com/scaleway/scaleway-sdk-js/commit/c9aa3ed4cc82c23f58fd664b80569bd00ddd8042))
+- **cockpit:** update naming OB-276 ([#1912](https://github.com/scaleway/scaleway-sdk-js/issues/1912)) ([3508637](https://github.com/scaleway/scaleway-sdk-js/commit/350863757290b04dc79296aed02194329b477b84))
+- **iam:** add status filter to ListUsersRequest ([#1896](https://github.com/scaleway/scaleway-sdk-js/issues/1896)) ([b59e4a0](https://github.com/scaleway/scaleway-sdk-js/commit/b59e4a00277549e041788aba5a9d0b54b7266cd3))
+- **iam:** add type filter to ListUsersRequest ([#1908](https://github.com/scaleway/scaleway-sdk-js/issues/1908)) ([f48638f](https://github.com/scaleway/scaleway-sdk-js/commit/f48638f2df92fc0d5691e87424af41ec9803f401))
+- **iam:** increase rule condition max len to 1024 characters ([#1898](https://github.com/scaleway/scaleway-sdk-js/issues/1898)) ([5a8f85e](https://github.com/scaleway/scaleway-sdk-js/commit/5a8f85eeb60752a626194c09d610627f0c581377))
+- **inference:** add support v1 ([#1900](https://github.com/scaleway/scaleway-sdk-js/issues/1900)) ([e83dc3f](https://github.com/scaleway/scaleway-sdk-js/commit/e83dc3fa6e53f674809fac119d534f79e79ca5af))
+- **inference:** add support v1 ([#1906](https://github.com/scaleway/scaleway-sdk-js/issues/1906)) ([a7fd417](https://github.com/scaleway/scaleway-sdk-js/commit/a7fd4179aef11f46373c6ee47cb5154bdce5601c))
+- **instance:** add GPU information in ServerType ([#1897](https://github.com/scaleway/scaleway-sdk-js/issues/1897)) ([0a4ad01](https://github.com/scaleway/scaleway-sdk-js/commit/0a4ad01de99b928bc15f1ba7af4e03de8a973291))
+- **tem:** generate offers cli ([#1918](https://github.com/scaleway/scaleway-sdk-js/issues/1918)) ([7aae721](https://github.com/scaleway/scaleway-sdk-js/commit/7aae72111c6d97374a0504a969fc899fc9c1a66e))
+- **webhosting:** replace domain conf options ([#1909](https://github.com/scaleway/scaleway-sdk-js/issues/1909)) ([db74be4](https://github.com/scaleway/scaleway-sdk-js/commit/db74be4e9a50b3134d588022195d6535289de84d))
+
+### Bug Fixes
+
+- **apple_silicon:** document commitment type values and usage ([#1895](https://github.com/scaleway/scaleway-sdk-js/issues/1895)) ([7eede9b](https://github.com/scaleway/scaleway-sdk-js/commit/7eede9bef4c34dc686b836b69730d7c36bbd0658))
+- **iam:** enforce max page value ([#1904](https://github.com/scaleway/scaleway-sdk-js/issues/1904)) ([1b23828](https://github.com/scaleway/scaleway-sdk-js/commit/1b23828f1bcb18182d894f0def09e79412fe865b))
+- **iam:** move Connection out of GetUserConnectionResponse ([#1907](https://github.com/scaleway/scaleway-sdk-js/issues/1907)) ([d8bfebb](https://github.com/scaleway/scaleway-sdk-js/commit/d8bfebbb2399a718045df3ca88520dfe82cdd319))
+
 ## [2.69.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.68.0...@scaleway/sdk@2.69.0) (2025-03-10)
 
 ### Features

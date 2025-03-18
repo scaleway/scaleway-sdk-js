@@ -9,8 +9,8 @@ import {
 } from '../../../bridge'
 import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
 import {
-  INSTANCE_TRANSIENT_STATUSES,
-  SNAPSHOT_TRANSIENT_STATUSES,
+  INSTANCE_TRANSIENT_STATUSES as INSTANCE_TRANSIENT_STATUSES_MONGODB,
+  SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_MONGODB,
 } from './content.gen'
 import {
   marshalCreateEndpointRequest,
@@ -206,7 +206,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!INSTANCE_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !INSTANCE_TRANSIENT_STATUSES_MONGODB.includes(res.status),
+          )),
       this.getInstance,
       request,
       options,
@@ -357,7 +359,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!SNAPSHOT_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !SNAPSHOT_TRANSIENT_STATUSES_MONGODB.includes(res.status),
+          )),
       this.getSnapshot,
       request,
       options,
