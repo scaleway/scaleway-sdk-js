@@ -614,6 +614,11 @@ export interface Cluster {
   sbsCsiEnabled?: boolean
   /** @deprecated Defines whether ACL is available on the cluster. */
   aclAvailable?: boolean
+  /**
+   * IAM group that nodes are members of (this field might be empty during early
+   * stage of cluster creation).
+   */
+  iamNodesGroupId: string
 }
 
 export interface Node {
