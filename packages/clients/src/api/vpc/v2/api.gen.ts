@@ -13,17 +13,20 @@ import {
   marshalCreateRouteRequest,
   marshalCreateVPCRequest,
   marshalDeleteSubnetsRequest,
+  marshalSetAclRequest,
   marshalSetSubnetsRequest,
   marshalUpdatePrivateNetworkRequest,
   marshalUpdateRouteRequest,
   marshalUpdateVPCRequest,
   unmarshalAddSubnetsResponse,
   unmarshalDeleteSubnetsResponse,
+  unmarshalGetAclResponse,
   unmarshalListPrivateNetworksResponse,
   unmarshalListSubnetsResponse,
   unmarshalListVPCsResponse,
   unmarshalPrivateNetwork,
   unmarshalRoute,
+  unmarshalSetAclResponse,
   unmarshalSetSubnetsResponse,
   unmarshalVPC,
 } from './marshalling.gen'
@@ -40,6 +43,8 @@ import type {
   DeleteVPCRequest,
   EnableDHCPRequest,
   EnableRoutingRequest,
+  GetAclRequest,
+  GetAclResponse,
   GetPrivateNetworkRequest,
   GetRouteRequest,
   GetVPCRequest,
@@ -51,6 +56,8 @@ import type {
   ListVPCsResponse,
   PrivateNetwork,
   Route,
+  SetAclRequest,
+  SetAclResponse,
   SetSubnetsRequest,
   SetSubnetsResponse,
   UpdatePrivateNetworkRequest,
@@ -479,4 +486,41 @@ export class API extends ParentAPI {
       method: 'DELETE',
       path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
     })
+
+  /**
+   * Get Acl Rules for VPC. Retrieve a list of ACL rules for a VPC, specified by
+   * its VPC ID.
+   *
+   * @param request - The request {@link GetAclRequest}
+   * @returns A Promise of GetAclResponse
+   */
+  getAcl = (request: Readonly<GetAclRequest>) =>
+    this.client.fetch<GetAclResponse>(
+      {
+        method: 'GET',
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpc/${validatePathParam('vpcId', request.vpcId)}/acl-rules`,
+        urlParams: urlParams(['is_ipv6', request.isIpv6]),
+      },
+      unmarshalGetAclResponse,
+    )
+
+  /**
+   * Set VPC ACL rules. Set the list of ACL rules and the default routing policy
+   * for a VPC.
+   *
+   * @param request - The request {@link SetAclRequest}
+   * @returns A Promise of SetAclResponse
+   */
+  setAcl = (request: Readonly<SetAclRequest>) =>
+    this.client.fetch<SetAclResponse>(
+      {
+        body: JSON.stringify(
+          marshalSetAclRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PUT',
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpc/${validatePathParam('vpcId', request.vpcId)}/acl-rules`,
+      },
+      unmarshalSetAclResponse,
+    )
 }
