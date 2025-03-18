@@ -437,6 +437,10 @@ export type UpdateDeploymentRequest = {
   minSize?: number
   /** Defines the new maximum size of the pool. */
   maxSize?: number
+  /** Id of the model to set to the deployment. */
+  modelId?: string
+  /** Quantization to use to the deployment. */
+  quantization?: DeploymentQuantization
 }
 
 export type UpdateEndpointRequest = {
