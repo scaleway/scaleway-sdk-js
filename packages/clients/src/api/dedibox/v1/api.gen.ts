@@ -9,11 +9,11 @@ import {
 } from '../../../bridge'
 import type { Zone as ScwZone, WaitForOptions } from '../../../bridge'
 import {
-  BMC_ACCESS_TRANSIENT_STATUSES,
-  RPN_SAN_TRANSIENT_STATUSES,
-  RPN_V2_GROUP_TRANSIENT_STATUSES,
-  SERVER_INSTALL_TRANSIENT_STATUSES,
-  SERVER_TRANSIENT_STATUSES,
+  BMC_ACCESS_TRANSIENT_STATUSES as BMC_ACCESS_TRANSIENT_STATUSES_DEDIBOX,
+  RPN_SAN_TRANSIENT_STATUSES as RPN_SAN_TRANSIENT_STATUSES_DEDIBOX,
+  RPN_V2_GROUP_TRANSIENT_STATUSES as RPN_V2_GROUP_TRANSIENT_STATUSES_DEDIBOX,
+  SERVER_INSTALL_TRANSIENT_STATUSES as SERVER_INSTALL_TRANSIENT_STATUSES_DEDIBOX,
+  SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_DEDIBOX,
 } from './content.gen'
 import {
   marshalAttachFailoverIPToMacAddressRequest,
@@ -319,7 +319,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!SERVER_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !SERVER_TRANSIENT_STATUSES_DEDIBOX.includes(res.status),
+          )),
       this.getServer,
       request,
       options,
@@ -703,7 +705,7 @@ export class API extends ParentAPI {
       options?.stop ??
         (res =>
           Promise.resolve(
-            !SERVER_INSTALL_TRANSIENT_STATUSES.includes(res.status),
+            !SERVER_INSTALL_TRANSIENT_STATUSES_DEDIBOX.includes(res.status),
           )),
       this.getServerInstall,
       request,
@@ -789,7 +791,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!BMC_ACCESS_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !BMC_ACCESS_TRANSIENT_STATUSES_DEDIBOX.includes(res.status),
+          )),
       this.getBMCAccess,
       request,
       options,
@@ -1513,7 +1517,9 @@ export class RpnSanAPI extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!RPN_SAN_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !RPN_SAN_TRANSIENT_STATUSES_DEDIBOX.includes(res.status),
+          )),
       this.getRpnSan,
       request,
       options,
@@ -1890,7 +1896,7 @@ export class RpnV2API extends ParentAPI {
       options?.stop ??
         (res =>
           Promise.resolve(
-            !RPN_V2_GROUP_TRANSIENT_STATUSES.includes(res.status),
+            !RPN_V2_GROUP_TRANSIENT_STATUSES_DEDIBOX.includes(res.status),
           )),
       this.getRpnV2Group,
       request,

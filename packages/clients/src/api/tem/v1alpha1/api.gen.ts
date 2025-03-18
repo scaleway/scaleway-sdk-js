@@ -9,8 +9,8 @@ import {
 } from '../../../bridge'
 import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
 import {
-  DOMAIN_TRANSIENT_STATUSES,
-  EMAIL_TRANSIENT_STATUSES,
+  DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_TEM,
+  EMAIL_TRANSIENT_STATUSES as EMAIL_TRANSIENT_STATUSES_TEM,
 } from './content.gen'
 import {
   marshalBulkCreateBlocklistsRequest,
@@ -18,6 +18,7 @@ import {
   marshalCreateEmailRequest,
   marshalCreateWebhookRequest,
   marshalUpdateDomainRequest,
+  marshalUpdateOfferSubscriptionRequest,
   marshalUpdateProjectSettingsRequest,
   marshalUpdateWebhookRequest,
   unmarshalBulkCreateBlocklistsResponse,
@@ -28,8 +29,13 @@ import {
   unmarshalListBlocklistsResponse,
   unmarshalListDomainsResponse,
   unmarshalListEmailsResponse,
+  unmarshalListOfferSubscriptionsResponse,
+  unmarshalListOffersResponse,
+  unmarshalListPoolsResponse,
   unmarshalListWebhookEventsResponse,
   unmarshalListWebhooksResponse,
+  unmarshalOfferSubscription,
+  unmarshalProjectConsumption,
   unmarshalProjectSettings,
   unmarshalStatistics,
   unmarshalWebhook,
@@ -51,6 +57,7 @@ import type {
   GetDomainLastStatusRequest,
   GetDomainRequest,
   GetEmailRequest,
+  GetProjectConsumptionRequest,
   GetProjectSettingsRequest,
   GetStatisticsRequest,
   GetWebhookRequest,
@@ -60,14 +67,23 @@ import type {
   ListDomainsResponse,
   ListEmailsRequest,
   ListEmailsResponse,
+  ListOfferSubscriptionsRequest,
+  ListOfferSubscriptionsResponse,
+  ListOffersRequest,
+  ListOffersResponse,
+  ListPoolsRequest,
+  ListPoolsResponse,
   ListWebhookEventsRequest,
   ListWebhookEventsResponse,
   ListWebhooksRequest,
   ListWebhooksResponse,
+  OfferSubscription,
+  ProjectConsumption,
   ProjectSettings,
   RevokeDomainRequest,
   Statistics,
   UpdateDomainRequest,
+  UpdateOfferSubscriptionRequest,
   UpdateProjectSettingsRequest,
   UpdateWebhookRequest,
   Webhook,
@@ -138,7 +154,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!EMAIL_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(!EMAIL_TRANSIENT_STATUSES_TEM.includes(res.status))),
       this.getEmail,
       request,
       options,
@@ -280,7 +296,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!DOMAIN_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_TEM.includes(res.status))),
       this.getDomain,
       request,
       options,
@@ -624,4 +640,115 @@ export class API extends ParentAPI {
       method: 'DELETE',
       path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/blocklists/${validatePathParam('blocklistId', request.blocklistId)}`,
     })
+
+  /**
+   * Get information about subscribed offers. Retrieve information about the
+   * offers you are subscribed to using the `project_id` and `region`
+   * parameters.
+   *
+   * @param request - The request {@link ListOfferSubscriptionsRequest}
+   * @returns A Promise of ListOfferSubscriptionsResponse
+   */
+  listOfferSubscriptions = (
+    request: Readonly<ListOfferSubscriptionsRequest> = {},
+  ) =>
+    this.client.fetch<ListOfferSubscriptionsResponse>(
+      {
+        method: 'GET',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/offer-subscriptions`,
+        urlParams: urlParams([
+          'project_id',
+          request.projectId ?? this.client.settings.defaultProjectId,
+        ]),
+      },
+      unmarshalListOfferSubscriptionsResponse,
+    )
+
+  /**
+   * Update a subscribed offer.
+   *
+   * @param request - The request {@link UpdateOfferSubscriptionRequest}
+   * @returns A Promise of OfferSubscription
+   */
+  updateOfferSubscription = (
+    request: Readonly<UpdateOfferSubscriptionRequest> = {},
+  ) =>
+    this.client.fetch<OfferSubscription>(
+      {
+        body: JSON.stringify(
+          marshalUpdateOfferSubscriptionRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/offer-subscriptions`,
+      },
+      unmarshalOfferSubscription,
+    )
+
+  /**
+   * List the available offers.. Retrieve the list of the available and
+   * free-of-charge offers you can subscribe to.
+   *
+   * @param request - The request {@link ListOffersRequest}
+   * @returns A Promise of ListOffersResponse
+   */
+  listOffers = (request: Readonly<ListOffersRequest> = {}) =>
+    this.client.fetch<ListOffersResponse>(
+      {
+        method: 'GET',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/offers`,
+      },
+      unmarshalListOffersResponse,
+    )
+
+  protected pageOfListPools = (request: Readonly<ListPoolsRequest> = {}) =>
+    this.client.fetch<ListPoolsResponse>(
+      {
+        method: 'GET',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools`,
+        urlParams: urlParams(
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
+        ),
+      },
+      unmarshalListPoolsResponse,
+    )
+
+  /**
+   * Get information about a sending pool.. Retrieve information about a sending
+   * pool, including its creation status and configuration parameters.
+   *
+   * @param request - The request {@link ListPoolsRequest}
+   * @returns A Promise of ListPoolsResponse
+   */
+  listPools = (request: Readonly<ListPoolsRequest> = {}) =>
+    enrichForPagination('pools', this.pageOfListPools, request)
+
+  /**
+   * Get project resource consumption.. Get project resource consumption.
+   *
+   * @param request - The request {@link GetProjectConsumptionRequest}
+   * @returns A Promise of ProjectConsumption
+   */
+  getProjectConsumption = (
+    request: Readonly<GetProjectConsumptionRequest> = {},
+  ) =>
+    this.client.fetch<ProjectConsumption>(
+      {
+        method: 'GET',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/project-consumption`,
+        urlParams: urlParams([
+          'project_id',
+          request.projectId ?? this.client.settings.defaultProjectId,
+        ]),
+      },
+      unmarshalProjectConsumption,
+    )
 }
