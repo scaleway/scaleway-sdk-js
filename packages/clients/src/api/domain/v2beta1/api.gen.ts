@@ -9,8 +9,8 @@ import {
 } from '../../../bridge'
 import type { WaitForOptions } from '../../../bridge'
 import {
-  DOMAIN_TRANSIENT_STATUSES,
-  SSL_CERTIFICATE_TRANSIENT_STATUSES,
+  DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_DOMAIN,
+  SSL_CERTIFICATE_TRANSIENT_STATUSES as SSL_CERTIFICATE_TRANSIENT_STATUSES_DOMAIN,
 } from './content.gen'
 import {
   marshalCloneDNSZoneRequest,
@@ -606,7 +606,7 @@ export class API extends ParentAPI {
       options?.stop ??
         (res =>
           Promise.resolve(
-            !SSL_CERTIFICATE_TRANSIENT_STATUSES.includes(res.status),
+            !SSL_CERTIFICATE_TRANSIENT_STATUSES_DOMAIN.includes(res.status),
           )),
       this.getSSLCertificate,
       request,
@@ -1076,7 +1076,9 @@ export class RegistrarAPI extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!DOMAIN_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !DOMAIN_TRANSIENT_STATUSES_DOMAIN.includes(res.status),
+          )),
       this.getDomain,
       request,
       options,

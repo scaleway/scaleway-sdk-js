@@ -8,7 +8,7 @@ import {
   waitForResource,
 } from '../../../bridge'
 import type { WaitForOptions } from '../../../bridge'
-import { HUMAN_TRANSIENT_STATUSES } from './content.gen'
+import { HUMAN_TRANSIENT_STATUSES as HUMAN_TRANSIENT_STATUSES_TEST } from './content.gen'
 import {
   marshalCreateHumanRequest,
   marshalRegisterRequest,
@@ -121,7 +121,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!HUMAN_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(!HUMAN_TRANSIENT_STATUSES_TEST.includes(res.status))),
       this.getHuman,
       request,
       options,

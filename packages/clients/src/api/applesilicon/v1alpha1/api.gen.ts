@@ -9,8 +9,8 @@ import {
 } from '../../../bridge'
 import type { Zone as ScwZone, WaitForOptions } from '../../../bridge'
 import {
-  SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES,
-  SERVER_TRANSIENT_STATUSES,
+  SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES_APPLESILICON,
+  SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_APPLESILICON,
 } from './content.gen'
 import {
   marshalCreateServerRequest,
@@ -235,7 +235,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!SERVER_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !SERVER_TRANSIENT_STATUSES_APPLESILICON.includes(res.status),
+          )),
       this.getServer,
       request,
       options,
@@ -377,7 +379,7 @@ export class PrivateNetworkAPI extends ParentAPI {
       options?.stop ??
         (res =>
           Promise.resolve(
-            !SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES.includes(
+            !SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES_APPLESILICON.includes(
               res.status,
             ),
           )),
