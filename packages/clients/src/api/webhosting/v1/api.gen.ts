@@ -9,8 +9,8 @@ import {
 } from '../../../bridge'
 import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
 import {
-  DOMAIN_TRANSIENT_STATUSES,
-  HOSTING_TRANSIENT_STATUSES,
+  DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_WEBHOSTING,
+  HOSTING_TRANSIENT_STATUSES as HOSTING_TRANSIENT_STATUSES_WEBHOSTING,
 } from './content.gen'
 import {
   marshalDatabaseApiAssignDatabaseUserRequest,
@@ -542,7 +542,9 @@ export class DnsAPI extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!DOMAIN_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !DOMAIN_TRANSIENT_STATUSES_WEBHOSTING.includes(res.status),
+          )),
       this.getDomain,
       request,
       options,
@@ -693,7 +695,9 @@ export class HostingAPI extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!HOSTING_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !HOSTING_TRANSIENT_STATUSES_WEBHOSTING.includes(res.status),
+          )),
       this.getHosting,
       request,
       options,

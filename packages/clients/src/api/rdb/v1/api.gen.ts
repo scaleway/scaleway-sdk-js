@@ -9,11 +9,11 @@ import {
 } from '../../../bridge'
 import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
 import {
-  DATABASE_BACKUP_TRANSIENT_STATUSES,
-  INSTANCE_LOG_TRANSIENT_STATUSES,
-  INSTANCE_TRANSIENT_STATUSES,
-  READ_REPLICA_TRANSIENT_STATUSES,
-  SNAPSHOT_TRANSIENT_STATUSES,
+  DATABASE_BACKUP_TRANSIENT_STATUSES as DATABASE_BACKUP_TRANSIENT_STATUSES_RDB,
+  INSTANCE_LOG_TRANSIENT_STATUSES as INSTANCE_LOG_TRANSIENT_STATUSES_RDB,
+  INSTANCE_TRANSIENT_STATUSES as INSTANCE_TRANSIENT_STATUSES_RDB,
+  READ_REPLICA_TRANSIENT_STATUSES as READ_REPLICA_TRANSIENT_STATUSES_RDB,
+  SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_RDB,
 } from './content.gen'
 import {
   marshalAddInstanceACLRulesRequest,
@@ -329,7 +329,7 @@ export class API extends ParentAPI {
       options?.stop ??
         (res =>
           Promise.resolve(
-            !DATABASE_BACKUP_TRANSIENT_STATUSES.includes(res.status),
+            !DATABASE_BACKUP_TRANSIENT_STATUSES_RDB.includes(res.status),
           )),
       this.getDatabaseBackup,
       request,
@@ -506,7 +506,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!INSTANCE_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !INSTANCE_TRANSIENT_STATUSES_RDB.includes(res.status),
+          )),
       this.getInstance,
       request,
       options,
@@ -723,7 +725,7 @@ export class API extends ParentAPI {
       options?.stop ??
         (res =>
           Promise.resolve(
-            !READ_REPLICA_TRANSIENT_STATUSES.includes(res.status),
+            !READ_REPLICA_TRANSIENT_STATUSES_RDB.includes(res.status),
           )),
       this.getReadReplica,
       request,
@@ -888,7 +890,7 @@ export class API extends ParentAPI {
       options?.stop ??
         (res =>
           Promise.resolve(
-            !INSTANCE_LOG_TRANSIENT_STATUSES.includes(res.status),
+            !INSTANCE_LOG_TRANSIENT_STATUSES_RDB.includes(res.status),
           )),
       this.getInstanceLog,
       request,
@@ -1355,7 +1357,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!SNAPSHOT_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !SNAPSHOT_TRANSIENT_STATUSES_RDB.includes(res.status),
+          )),
       this.getSnapshot,
       request,
       options,
