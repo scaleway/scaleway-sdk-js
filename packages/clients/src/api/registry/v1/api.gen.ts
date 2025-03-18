@@ -9,9 +9,9 @@ import {
 } from '../../../bridge'
 import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
 import {
-  IMAGE_TRANSIENT_STATUSES,
-  NAMESPACE_TRANSIENT_STATUSES,
-  TAG_TRANSIENT_STATUSES,
+  IMAGE_TRANSIENT_STATUSES as IMAGE_TRANSIENT_STATUSES_REGISTRY,
+  NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_REGISTRY,
+  TAG_TRANSIENT_STATUSES as TAG_TRANSIENT_STATUSES_REGISTRY,
 } from './content.gen'
 import {
   marshalCreateNamespaceRequest,
@@ -129,7 +129,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!NAMESPACE_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !NAMESPACE_TRANSIENT_STATUSES_REGISTRY.includes(res.status),
+          )),
       this.getNamespace,
       request,
       options,
@@ -260,7 +262,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!IMAGE_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !IMAGE_TRANSIENT_STATUSES_REGISTRY.includes(res.status),
+          )),
       this.getImage,
       request,
       options,
@@ -362,7 +366,10 @@ export class API extends ParentAPI {
   ) =>
     waitForResource(
       options?.stop ??
-        (res => Promise.resolve(!TAG_TRANSIENT_STATUSES.includes(res.status))),
+        (res =>
+          Promise.resolve(
+            !TAG_TRANSIENT_STATUSES_REGISTRY.includes(res.status),
+          )),
       this.getTag,
       request,
       options,

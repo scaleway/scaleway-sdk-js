@@ -9,8 +9,8 @@ import {
 } from '../../../bridge'
 import type { WaitForOptions } from '../../../bridge'
 import {
-  PIPELINE_TRANSIENT_STATUSES,
-  PURGE_REQUEST_TRANSIENT_STATUSES,
+  PIPELINE_TRANSIENT_STATUSES as PIPELINE_TRANSIENT_STATUSES_EDGE_SERVICES,
+  PURGE_REQUEST_TRANSIENT_STATUSES as PURGE_REQUEST_TRANSIENT_STATUSES_EDGE_SERVICES,
 } from './content.gen'
 import {
   marshalAddRouteRulesRequest,
@@ -240,7 +240,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!PIPELINE_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !PIPELINE_TRANSIENT_STATUSES_EDGE_SERVICES.includes(res.status),
+          )),
       this.getPipeline,
       request,
       options,
@@ -1158,7 +1160,9 @@ export class API extends ParentAPI {
       options?.stop ??
         (res =>
           Promise.resolve(
-            !PURGE_REQUEST_TRANSIENT_STATUSES.includes(res.status),
+            !PURGE_REQUEST_TRANSIENT_STATUSES_EDGE_SERVICES.includes(
+              res.status,
+            ),
           )),
       this.getPurgeRequest,
       request,
