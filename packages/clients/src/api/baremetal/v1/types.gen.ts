@@ -610,7 +610,7 @@ export interface Setting {
   enabled: boolean
 }
 
-export type AddOptionServerRequest = {
+export interface AddOptionServerRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the server. */
@@ -641,7 +641,7 @@ export interface BMCAccess {
   expiresAt?: Date
 }
 
-export type CreateServerRequest = {
+export interface CreateServerRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** Offer ID of the new server. */
@@ -675,7 +675,7 @@ export type CreateServerRequest = {
   optionIds?: string[]
 }
 
-export type DeleteOptionServerRequest = {
+export interface DeleteOptionServerRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the server. */
@@ -684,21 +684,21 @@ export type DeleteOptionServerRequest = {
   optionId: string
 }
 
-export type DeleteServerRequest = {
+export interface DeleteServerRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the server to delete. */
   serverId: string
 }
 
-export type GetBMCAccessRequest = {
+export interface GetBMCAccessRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the server. */
   serverId: string
 }
 
-export type GetDefaultPartitioningSchemaRequest = {
+export interface GetDefaultPartitioningSchemaRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the offer. */
@@ -707,28 +707,28 @@ export type GetDefaultPartitioningSchemaRequest = {
   osId: string
 }
 
-export type GetOSRequest = {
+export interface GetOSRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the OS. */
   osId: string
 }
 
-export type GetOfferRequest = {
+export interface GetOfferRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the researched Offer. */
   offerId: string
 }
 
-export type GetOptionRequest = {
+export interface GetOptionRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the option. */
   optionId: string
 }
 
-export type GetServerMetricsRequest = {
+export interface GetServerMetricsRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** Server ID to get the metrics. */
@@ -740,14 +740,14 @@ export interface GetServerMetricsResponse {
   pings?: TimeSeries
 }
 
-export type GetServerRequest = {
+export interface GetServerRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the server. */
   serverId: string
 }
 
-export type InstallServerRequest = {
+export interface InstallServerRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** Server ID to install. */
@@ -770,7 +770,7 @@ export type InstallServerRequest = {
   partitioningSchema?: Schema
 }
 
-export type ListOSRequest = {
+export interface ListOSRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** Page number. */
@@ -788,7 +788,7 @@ export interface ListOSResponse {
   os: OS[]
 }
 
-export type ListOffersRequest = {
+export interface ListOffersRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** Page number. */
@@ -808,7 +808,7 @@ export interface ListOffersResponse {
   offers: Offer[]
 }
 
-export type ListOptionsRequest = {
+export interface ListOptionsRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** Page number. */
@@ -828,7 +828,7 @@ export interface ListOptionsResponse {
   options: Option[]
 }
 
-export type ListServerEventsRequest = {
+export interface ListServerEventsRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the server events searched. */
@@ -853,7 +853,7 @@ export interface ListServerPrivateNetworksResponse {
   totalCount: number
 }
 
-export type ListServersRequest = {
+export interface ListServersRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** Page number. */
@@ -883,7 +883,7 @@ export interface ListServersResponse {
   servers: Server[]
 }
 
-export type ListSettingsRequest = {
+export interface ListSettingsRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** Page number. */
@@ -903,14 +903,14 @@ export interface ListSettingsResponse {
   settings: Setting[]
 }
 
-export type MigrateServerToMonthlyOfferRequest = {
+export interface MigrateServerToMonthlyOfferRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the server. */
   serverId: string
 }
 
-export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
+export interface PrivateNetworkApiAddServerPrivateNetworkRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** The ID of the server. */
@@ -919,7 +919,7 @@ export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
   privateNetworkId: string
 }
 
-export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
+export interface PrivateNetworkApiDeleteServerPrivateNetworkRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** The ID of the server. */
@@ -928,7 +928,7 @@ export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
   privateNetworkId: string
 }
 
-export type PrivateNetworkApiListServerPrivateNetworksRequest = {
+export interface PrivateNetworkApiListServerPrivateNetworksRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** The sort order for the returned Private Networks. */
@@ -947,7 +947,7 @@ export type PrivateNetworkApiListServerPrivateNetworksRequest = {
   projectId?: string
 }
 
-export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
+export interface PrivateNetworkApiSetServerPrivateNetworksRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** The ID of the server. */
@@ -956,7 +956,7 @@ export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
   privateNetworkIds: string[]
 }
 
-export type RebootServerRequest = {
+export interface RebootServerRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the server to reboot. */
@@ -969,7 +969,7 @@ export interface SetServerPrivateNetworksResponse {
   serverPrivateNetworks: ServerPrivateNetwork[]
 }
 
-export type StartBMCAccessRequest = {
+export interface StartBMCAccessRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the server. */
@@ -978,7 +978,7 @@ export type StartBMCAccessRequest = {
   ip: string
 }
 
-export type StartServerRequest = {
+export interface StartServerRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the server to start. */
@@ -987,21 +987,21 @@ export type StartServerRequest = {
   bootType?: ServerBootType
 }
 
-export type StopBMCAccessRequest = {
+export interface StopBMCAccessRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the server. */
   serverId: string
 }
 
-export type StopServerRequest = {
+export interface StopServerRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the server to stop. */
   serverId: string
 }
 
-export type UpdateIPRequest = {
+export interface UpdateIPRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the server. */
@@ -1012,7 +1012,7 @@ export type UpdateIPRequest = {
   reverse?: string
 }
 
-export type UpdateServerRequest = {
+export interface UpdateServerRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the server to update. */
@@ -1028,7 +1028,7 @@ export type UpdateServerRequest = {
   tags?: string[]
 }
 
-export type UpdateSettingRequest = {
+export interface UpdateSettingRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** ID of the setting. */
@@ -1037,7 +1037,7 @@ export type UpdateSettingRequest = {
   enabled?: boolean
 }
 
-export type ValidatePartitioningSchemaRequest = {
+export interface ValidatePartitioningSchemaRequest {
   /** Zone to target. If none is passed will use default zone from the config. */
   zone?: ScwZone
   /** Partitioning schema. */

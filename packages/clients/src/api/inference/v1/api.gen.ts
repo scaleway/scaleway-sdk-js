@@ -9,8 +9,8 @@ import {
 } from '../../../bridge'
 import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
 import {
-  DEPLOYMENT_TRANSIENT_STATUSES,
-  MODEL_TRANSIENT_STATUSES,
+  DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_INFERENCE,
+  MODEL_TRANSIENT_STATUSES as MODEL_TRANSIENT_STATUSES_INFERENCE,
 } from './content.gen'
 import {
   marshalCreateDeploymentRequest,
@@ -122,7 +122,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!DEPLOYMENT_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !DEPLOYMENT_TRANSIENT_STATUSES_INFERENCE.includes(res.status),
+          )),
       this.getDeployment,
       request,
       options,
@@ -306,7 +308,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!MODEL_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !MODEL_TRANSIENT_STATUSES_INFERENCE.includes(res.status),
+          )),
       this.getModel,
       request,
       options,

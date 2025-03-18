@@ -8,7 +8,7 @@ import {
   waitForResource,
 } from '../../../bridge'
 import type { Zone as ScwZone, WaitForOptions } from '../../../bridge'
-import { FLEXIBLE_IP_TRANSIENT_STATUSES } from './content.gen'
+import { FLEXIBLE_IP_TRANSIENT_STATUSES as FLEXIBLE_IP_TRANSIENT_STATUSES_FLEXIBLEIP } from './content.gen'
 import {
   marshalAttachFlexibleIPRequest,
   marshalCreateFlexibleIPRequest,
@@ -113,7 +113,7 @@ export class API extends ParentAPI {
       options?.stop ??
         (res =>
           Promise.resolve(
-            !FLEXIBLE_IP_TRANSIENT_STATUSES.includes(res.status),
+            !FLEXIBLE_IP_TRANSIENT_STATUSES_FLEXIBLEIP.includes(res.status),
           )),
       this.getFlexibleIP,
       request,
