@@ -2,6 +2,9 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 export { API } from './api.gen'
 export type {
+  AclRule,
+  AclRuleProtocol,
+  Action,
   AddSubnetsRequest,
   AddSubnetsResponse,
   CreatePrivateNetworkRequest,
@@ -14,6 +17,8 @@ export type {
   DeleteVPCRequest,
   EnableDHCPRequest,
   EnableRoutingRequest,
+  GetAclRequest,
+  GetAclResponse,
   GetPrivateNetworkRequest,
   GetRouteRequest,
   GetVPCRequest,
@@ -28,6 +33,8 @@ export type {
   ListVPCsResponse,
   PrivateNetwork,
   Route,
+  SetAclRequest,
+  SetAclResponse,
   SetSubnetsRequest,
   SetSubnetsResponse,
   Subnet,
