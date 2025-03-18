@@ -10,12 +10,12 @@ import {
 } from '../../../bridge'
 import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
 import {
-  CONTAINER_TRANSIENT_STATUSES,
-  CRON_TRANSIENT_STATUSES,
-  DOMAIN_TRANSIENT_STATUSES,
-  NAMESPACE_TRANSIENT_STATUSES,
-  TOKEN_TRANSIENT_STATUSES,
-  TRIGGER_TRANSIENT_STATUSES,
+  CONTAINER_TRANSIENT_STATUSES as CONTAINER_TRANSIENT_STATUSES_CONTAINER,
+  CRON_TRANSIENT_STATUSES as CRON_TRANSIENT_STATUSES_CONTAINER,
+  DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_CONTAINER,
+  NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_CONTAINER,
+  TOKEN_TRANSIENT_STATUSES as TOKEN_TRANSIENT_STATUSES_CONTAINER,
+  TRIGGER_TRANSIENT_STATUSES as TRIGGER_TRANSIENT_STATUSES_CONTAINER,
 } from './content.gen'
 import {
   marshalCreateContainerRequest,
@@ -162,7 +162,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!NAMESPACE_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !NAMESPACE_TRANSIENT_STATUSES_CONTAINER.includes(res.status),
+          )),
       this.getNamespace,
       request,
       options,
@@ -282,7 +284,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!CONTAINER_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !CONTAINER_TRANSIENT_STATUSES_CONTAINER.includes(res.status),
+          )),
       this.getContainer,
       request,
       options,
@@ -414,7 +418,10 @@ export class API extends ParentAPI {
   ) =>
     waitForResource(
       options?.stop ??
-        (res => Promise.resolve(!CRON_TRANSIENT_STATUSES.includes(res.status))),
+        (res =>
+          Promise.resolve(
+            !CRON_TRANSIENT_STATUSES_CONTAINER.includes(res.status),
+          )),
       this.getCron,
       request,
       options,
@@ -530,7 +537,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!DOMAIN_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !DOMAIN_TRANSIENT_STATUSES_CONTAINER.includes(res.status),
+          )),
       this.getDomain,
       request,
       options,
@@ -619,7 +628,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!TOKEN_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !TOKEN_TRANSIENT_STATUSES_CONTAINER.includes(res.status),
+          )),
       this.getToken,
       request,
       options,
@@ -717,7 +728,9 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ??
         (res =>
-          Promise.resolve(!TRIGGER_TRANSIENT_STATUSES.includes(res.status))),
+          Promise.resolve(
+            !TRIGGER_TRANSIENT_STATUSES_CONTAINER.includes(res.status),
+          )),
       this.getTrigger,
       request,
       options,

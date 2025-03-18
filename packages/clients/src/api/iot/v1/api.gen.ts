@@ -8,7 +8,7 @@ import {
   waitForResource,
 } from '../../../bridge'
 import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
-import { HUB_TRANSIENT_STATUSES } from './content.gen'
+import { HUB_TRANSIENT_STATUSES as HUB_TRANSIENT_STATUSES_IOT } from './content.gen'
 import {
   marshalCreateDeviceRequest,
   marshalCreateHubRequest,
@@ -191,7 +191,8 @@ export class API extends ParentAPI {
   ) =>
     waitForResource(
       options?.stop ??
-        (res => Promise.resolve(!HUB_TRANSIENT_STATUSES.includes(res.status))),
+        (res =>
+          Promise.resolve(!HUB_TRANSIENT_STATUSES_IOT.includes(res.status))),
       this.getHub,
       request,
       options,
