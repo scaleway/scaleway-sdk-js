@@ -2,6 +2,10 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Region as ScwRegion } from '../../../bridge'
 
+export type AclRuleProtocol = 'ANY' | 'TCP' | 'UDP' | 'ICMP'
+
+export type Action = 'unknown_action' | 'accept' | 'drop'
+
 export type ListPrivateNetworksRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -81,6 +85,45 @@ export interface Route {
   isReadOnly: boolean
   /** Region of the Route. */
   region: ScwRegion
+}
+
+export interface AclRule {
+  /** Protocol to which this rule applies. */
+  protocol: AclRuleProtocol
+  /**
+   * Source IP range to which this rule applies (CIDR notation with subnet
+   * mask).
+   */
+  source: string
+  /**
+   * Starting port of the source port range to which this rule applies
+   * (inclusive).
+   */
+  srcPortLow: number
+  /**
+   * Ending port of the source port range to which this rule applies
+   * (inclusive).
+   */
+  srcPortHigh: number
+  /**
+   * Destination IP range to which this rule applies (CIDR notation with subnet
+   * mask).
+   */
+  destination: string
+  /**
+   * Starting port of the destination port range to which this rule applies
+   * (inclusive).
+   */
+  dstPortLow: number
+  /**
+   * Ending port of the destination port range to which this rule applies
+   * (inclusive).
+   */
+  dstPortHigh: number
+  /** Policy to apply to the packet. */
+  action: Action
+  /** Rule description. */
+  description?: string
 }
 
 export interface VPC {
@@ -242,6 +285,26 @@ export type EnableRoutingRequest = {
   region?: ScwRegion
   /** VPC ID. */
   vpcId: string
+}
+
+export type GetAclRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: ScwRegion
+  /** ID of the Network ACL's VPC. */
+  vpcId: string
+  /**
+   * Defines whether this set of ACL rules is for IPv6 (false = IPv4). Each
+   * Network ACL can have rules for only one IP type.
+   */
+  isIpv6: boolean
+}
+
+export interface GetAclResponse {
+  rules: AclRule[]
+  defaultPolicy: Action
 }
 
 export type GetPrivateNetworkRequest = {
@@ -411,6 +474,30 @@ export type ListVPCsRequest = {
 export interface ListVPCsResponse {
   vpcs: VPC[]
   totalCount: number
+}
+
+export type SetAclRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: ScwRegion
+  /** ID of the Network ACL's VPC. */
+  vpcId: string
+  /** List of Network ACL rules. */
+  rules: AclRule[]
+  /**
+   * Defines whether this set of ACL rules is for IPv6 (false = IPv4). Each
+   * Network ACL can have rules for only one IP type.
+   */
+  isIpv6: boolean
+  /** Action to take for packets which do not match any rules. */
+  defaultPolicy: Action
+}
+
+export interface SetAclResponse {
+  rules: AclRule[]
+  defaultPolicy: Action
 }
 
 export type SetSubnetsRequest = {
