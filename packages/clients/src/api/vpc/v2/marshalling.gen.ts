@@ -8,6 +8,7 @@ import {
 } from '../../../bridge'
 import type { DefaultValues } from '../../../bridge'
 import type {
+  AclRule,
   AddSubnetsRequest,
   AddSubnetsResponse,
   CreatePrivateNetworkRequest,
@@ -15,11 +16,14 @@ import type {
   CreateVPCRequest,
   DeleteSubnetsRequest,
   DeleteSubnetsResponse,
+  GetAclResponse,
   ListPrivateNetworksResponse,
   ListSubnetsResponse,
   ListVPCsResponse,
   PrivateNetwork,
   Route,
+  SetAclRequest,
+  SetAclResponse,
   SetSubnetsRequest,
   SetSubnetsResponse,
   Subnet,
@@ -141,6 +145,39 @@ export const unmarshalDeleteSubnetsResponse = (
   } as DeleteSubnetsResponse
 }
 
+const unmarshalAclRule = (data: unknown): AclRule => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AclRule' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    action: data.action,
+    description: data.description,
+    destination: data.destination,
+    dstPortHigh: data.dst_port_high,
+    dstPortLow: data.dst_port_low,
+    protocol: data.protocol,
+    source: data.source,
+    srcPortHigh: data.src_port_high,
+    srcPortLow: data.src_port_low,
+  } as AclRule
+}
+
+export const unmarshalGetAclResponse = (data: unknown): GetAclResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetAclResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    defaultPolicy: data.default_policy,
+    rules: unmarshalArrayOfObject(data.rules, unmarshalAclRule),
+  } as GetAclResponse
+}
+
 export const unmarshalListPrivateNetworksResponse = (
   data: unknown,
 ): ListPrivateNetworksResponse => {
@@ -185,6 +222,19 @@ export const unmarshalListVPCsResponse = (data: unknown): ListVPCsResponse => {
     totalCount: data.total_count,
     vpcs: unmarshalArrayOfObject(data.vpcs, unmarshalVPC),
   } as ListVPCsResponse
+}
+
+export const unmarshalSetAclResponse = (data: unknown): SetAclResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetAclResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    defaultPolicy: data.default_policy,
+    rules: unmarshalArrayOfObject(data.rules, unmarshalAclRule),
+  } as SetAclResponse
 }
 
 export const unmarshalSetSubnetsResponse = (
@@ -246,6 +296,30 @@ export const marshalDeleteSubnetsRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   subnets: request.subnets,
+})
+
+const marshalAclRule = (
+  request: AclRule,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  action: request.action,
+  description: request.description,
+  destination: request.destination,
+  dst_port_high: request.dstPortHigh,
+  dst_port_low: request.dstPortLow,
+  protocol: request.protocol,
+  source: request.source,
+  src_port_high: request.srcPortHigh,
+  src_port_low: request.srcPortLow,
+})
+
+export const marshalSetAclRequest = (
+  request: SetAclRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  default_policy: request.defaultPolicy,
+  is_ipv6: request.isIpv6,
+  rules: request.rules.map(elt => marshalAclRule(elt, defaults)),
 })
 
 export const marshalSetSubnetsRequest = (
