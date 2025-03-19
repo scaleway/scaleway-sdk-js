@@ -1215,7 +1215,6 @@ const unmarshalServerType = (data: unknown): ServerType => {
   return {
     altNames: data.alt_names,
     arch: data.arch,
-    baremetal: data.baremetal,
     blockBandwidth: data.block_bandwidth,
     capabilities: data.capabilities
       ? unmarshalServerTypeCapabilities(data.capabilities)
