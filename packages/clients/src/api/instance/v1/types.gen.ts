@@ -694,8 +694,6 @@ export interface ServerType {
   gpuInfo?: ServerTypeGPUInfo
   /** CPU architecture. */
   arch: Arch
-  /** True if it is a baremetal Instance. */
-  baremetal: boolean
   /** Network available for the Instance. */
   network?: ServerTypeNetwork
   /** Capabilities. */
