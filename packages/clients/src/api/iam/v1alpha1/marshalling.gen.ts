@@ -272,11 +272,15 @@ export const unmarshalUser = (data: unknown): User => {
     createdAt: unmarshalDate(data.created_at),
     deletable: data.deletable,
     email: data.email,
+    firstName: data.first_name,
     id: data.id,
     lastLoginAt: unmarshalDate(data.last_login_at),
+    lastName: data.last_name,
+    locale: data.locale,
     locked: data.locked,
     mfa: data.mfa,
     organizationId: data.organization_id,
+    phoneNumber: data.phone_number,
     status: data.status,
     tags: data.tags,
     twoFactorEnabled: data.two_factor_enabled,
@@ -752,7 +756,11 @@ const marshalCreateUserRequestMember = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   email: request.email,
+  first_name: request.firstName,
+  last_name: request.lastName,
+  locale: request.locale,
   password: request.password,
+  phone_number: request.phoneNumber,
   send_password_email: request.sendPasswordEmail,
   send_welcome_email: request.sendWelcomeEmail,
   username: request.username,
@@ -872,6 +880,10 @@ export const marshalUpdateUserRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   email: request.email,
+  first_name: request.firstName,
+  last_name: request.lastName,
+  locale: request.locale,
+  phone_number: request.phoneNumber,
   tags: request.tags,
 })
 
