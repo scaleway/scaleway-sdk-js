@@ -220,6 +220,7 @@ export const unmarshalCluster = (data: unknown): Cluster => {
     description: data.description,
     dnsWildcard: data.dns_wildcard,
     featureGates: data.feature_gates,
+    iamNodesGroupId: data.iam_nodes_group_id,
     id: data.id,
     name: data.name,
     openIdConnectConfig: data.open_id_connect_config
