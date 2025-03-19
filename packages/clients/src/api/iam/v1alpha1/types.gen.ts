@@ -201,6 +201,14 @@ export interface CreateUserRequestMember {
   username: string
   /** The member's password. */
   password: string
+  /** The member's first name. */
+  firstName: string
+  /** The member's last name. */
+  lastName: string
+  /** The member's phone number. */
+  phoneNumber: string
+  /** The member's locale. */
+  locale: string
 }
 
 export interface Connection {
@@ -489,6 +497,14 @@ export interface User {
   email: string
   /** User identifier unique to the Organization. */
   username: string
+  /** First name of the user. */
+  firstName: string
+  /** Last name of the user. */
+  lastName: string
+  /** Phone number of the user. */
+  phoneNumber: string
+  /** Locale of the user. */
+  locale: string
   /** Date user was created. */
   createdAt?: Date
   /** Date of last user update. */
@@ -1241,6 +1257,14 @@ export type UpdateUserRequest = {
   tags?: string[]
   /** IAM member email. */
   email?: string
+  /** IAM member first name. */
+  firstName?: string
+  /** IAM member last name. */
+  lastName?: string
+  /** IAM member phone number. */
+  phoneNumber?: string
+  /** IAM member locale. */
+  locale?: string
 }
 
 export type UpdateUserUsernameRequest = {
