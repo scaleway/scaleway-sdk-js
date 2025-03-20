@@ -128,6 +128,22 @@ export const unmarshalCheckUserOwnsDomainResponse = (
   } as CheckUserOwnsDomainResponse
 }
 
+const unmarshalAutoConfigDomainDns = (data: unknown): AutoConfigDomainDns => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AutoConfigDomainDns' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    allRecords: data.all_records,
+    mailRecords: data.mail_records,
+    nameservers: data.nameservers,
+    none: data.none,
+    webRecords: data.web_records,
+  } as AutoConfigDomainDns
+}
+
 const unmarshalDnsRecord = (data: unknown): DnsRecord => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -168,26 +184,14 @@ export const unmarshalDnsRecords = (data: unknown): DnsRecords => {
   }
 
   return {
-    dnsConfig: data.dns_config,
+    autoConfigDomainDns: data.auto_config_domain_dns
+      ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns)
+      : undefined,
+    dnsConfig: data.dns_config ? data.dns_config : undefined,
     nameServers: unmarshalArrayOfObject(data.name_servers, unmarshalNameserver),
     records: unmarshalArrayOfObject(data.records, unmarshalDnsRecord),
     status: data.status,
   } as DnsRecords
-}
-
-const unmarshalAutoConfigDomainDns = (data: unknown): AutoConfigDomainDns => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'AutoConfigDomainDns' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    allRecords: data.all_records,
-    mailRecords: data.mail_records,
-    nameservers: data.nameservers,
-    webRecords: data.web_records,
-  } as AutoConfigDomainDns
 }
 
 export const unmarshalDomain = (data: unknown): Domain => {
@@ -657,6 +661,7 @@ const marshalAutoConfigDomainDns = (
   all_records: request.allRecords,
   mail_records: request.mailRecords,
   nameservers: request.nameservers,
+  none: request.none,
   web_records: request.webRecords,
 })
 

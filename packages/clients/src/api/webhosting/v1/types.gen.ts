@@ -162,6 +162,11 @@ export interface AutoConfigDomainDns {
    * other fields.
    */
   allRecords: boolean
+  /**
+   * No automatic domain configuration. Users must configure their domain for
+   * the Web Hosting to work.
+   */
+  none: boolean
 }
 
 export interface CreateHostingRequestDomainConfiguration {
@@ -620,7 +625,7 @@ export type DnsApiSyncDomainDnsRecordsRequest = {
    *   use auto_config_domain_dns).
    */
   updateNameservers?: boolean
-  /** Custom records to synchronize. */
+  /** @deprecated Custom records to synchronize. */
   customRecords?: SyncDomainDnsRecordsRequestRecord[]
   /** Whether or not to synchronize each types of records. */
   autoConfigDomainDns?: AutoConfigDomainDns
@@ -633,8 +638,13 @@ export interface DnsRecords {
   nameServers: Nameserver[]
   /** Status of the records. */
   status: DnsRecordsStatus
-  /** Records dns auto configuration settings. */
-  dnsConfig: DomainDnsAction[]
+  /**
+   * @deprecated Records dns auto configuration settings (deprecated, use
+   *   auto_config_domain_dns).
+   */
+  dnsConfig?: DomainDnsAction[]
+  /** Whether or not to synchronize each types of records. */
+  autoConfigDomainDns?: AutoConfigDomainDns
 }
 
 export interface Domain {
