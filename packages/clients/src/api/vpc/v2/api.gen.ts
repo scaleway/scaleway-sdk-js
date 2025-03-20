@@ -498,7 +498,7 @@ export class API extends ParentAPI {
     this.client.fetch<GetAclResponse>(
       {
         method: 'GET',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpc/${validatePathParam('vpcId', request.vpcId)}/acl-rules`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}/acl-rules`,
         urlParams: urlParams(['is_ipv6', request.isIpv6]),
       },
       unmarshalGetAclResponse,
@@ -519,7 +519,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpc/${validatePathParam('vpcId', request.vpcId)}/acl-rules`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}/acl-rules`,
       },
       unmarshalSetAclResponse,
     )
