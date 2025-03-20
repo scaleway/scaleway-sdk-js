@@ -63,8 +63,6 @@ export interface ModelSupportedNode {
 }
 
 export interface DeploymentQuantization {
-  /** Whether to enable quantization for this deployment. */
-  enabled: boolean
   /**
    * The number of bits each model parameter should be quantized to. The
    * quantization method is chosen based on this value.

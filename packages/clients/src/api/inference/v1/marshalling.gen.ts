@@ -132,7 +132,6 @@ const unmarshalDeploymentQuantization = (
 
   return {
     bits: data.bits,
-    enabled: data.enabled,
   } as DeploymentQuantization
 }
 
@@ -279,7 +278,6 @@ const marshalDeploymentQuantization = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   bits: request.bits,
-  enabled: request.enabled,
 })
 
 const marshalEndpointSpec = (
