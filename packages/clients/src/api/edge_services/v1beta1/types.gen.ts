@@ -92,6 +92,7 @@ export type PipelineStatus =
   | 'error'
   | 'pending'
   | 'warning'
+  | 'locked'
 
 export type PlanName = 'unknown_name' | 'starter' | 'professional' | 'advanced'
 
