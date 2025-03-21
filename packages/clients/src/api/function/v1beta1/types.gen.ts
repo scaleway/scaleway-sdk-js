@@ -59,6 +59,9 @@ export type FunctionRuntime =
   | 'rust179'
   | 'go123'
   | 'go124'
+  | 'python313'
+  | 'rust185'
+  | 'php84'
 
 export type FunctionSandbox = 'unknown_sandbox' | 'v1' | 'v2'
 
