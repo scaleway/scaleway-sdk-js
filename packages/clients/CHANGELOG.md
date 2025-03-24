@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.71.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.70.0...@scaleway/sdk@2.71.0) (2025-03-24)
+
+### Features
+
+- **baremetal:** add max_size instead of specific size for partitioning ([#1913](https://github.com/scaleway/scaleway-sdk-js/issues/1913)) ([7880c83](https://github.com/scaleway/scaleway-sdk-js/commit/7880c83b1adaafae0d82a13310a337c1beb23f69))
+- **edge_services:** add locked status to Pipeline ([#1942](https://github.com/scaleway/scaleway-sdk-js/issues/1942)) ([132d984](https://github.com/scaleway/scaleway-sdk-js/commit/132d984c36800760fe5480495ae99ddac13fdd62))
+- **functions:** add go123 and go124 runtimes ([#1937](https://github.com/scaleway/scaleway-sdk-js/issues/1937)) ([b981ef7](https://github.com/scaleway/scaleway-sdk-js/commit/b981ef7e36d417a59a8aa6e7496c28e415fc8b2c))
+- **functions:** add new runtimes ([#1941](https://github.com/scaleway/scaleway-sdk-js/issues/1941)) ([e48343f](https://github.com/scaleway/scaleway-sdk-js/commit/e48343f7ac4218ba7ba6033763b173620893f931))
+- **iam:** add personal data to User ([#1936](https://github.com/scaleway/scaleway-sdk-js/issues/1936)) ([44d8dfc](https://github.com/scaleway/scaleway-sdk-js/commit/44d8dfce0167d2cf7df759a0e3630200a4c01b93))
+- **inference:** add modelId and quantization to updateDeploymentRequest ([#1925](https://github.com/scaleway/scaleway-sdk-js/issues/1925)) ([ddb2957](https://github.com/scaleway/scaleway-sdk-js/commit/ddb29573176169fa0e55cc0925dfb753e51cc17e))
+- **inference:** remove DeploymentQuantization.enabled field ([#1938](https://github.com/scaleway/scaleway-sdk-js/issues/1938)) ([29a6262](https://github.com/scaleway/scaleway-sdk-js/commit/29a62627d893f50fb053342ee0a4747c44cb058b))
+- **k8s:** expose iam ids ([#1934](https://github.com/scaleway/scaleway-sdk-js/issues/1934)) ([7dd576d](https://github.com/scaleway/scaleway-sdk-js/commit/7dd576d91277ef0eb4fd3c7715d1371865685bd3))
+- **secret_manager:** display restore methods ([#1935](https://github.com/scaleway/scaleway-sdk-js/issues/1935)) ([f047297](https://github.com/scaleway/scaleway-sdk-js/commit/f047297cb4fb5cfbb39899272467a1cd950e5536))
+- **vpc:** set acl calls to public visibility ([#1926](https://github.com/scaleway/scaleway-sdk-js/issues/1926)) ([eb805a7](https://github.com/scaleway/scaleway-sdk-js/commit/eb805a7f21db1da8efb23b6b556053f5f342248a))
+
+### Bug Fixes
+
+- **instance:** remove unset baremetal field ([#1933](https://github.com/scaleway/scaleway-sdk-js/issues/1933)) ([7142f60](https://github.com/scaleway/scaleway-sdk-js/commit/7142f602b06ee81945839f31622ff03df0a0b3fa))
+- **sdk-ts:** prefix all enum ([#1924](https://github.com/scaleway/scaleway-sdk-js/issues/1924)) ([3b966b1](https://github.com/scaleway/scaleway-sdk-js/commit/3b966b171beb004cde855ed5fb191be38de04e19))
+- **vpc:** fix typo in url for acl calls ([#1939](https://github.com/scaleway/scaleway-sdk-js/issues/1939)) ([05ce479](https://github.com/scaleway/scaleway-sdk-js/commit/05ce479928910ce7327c886413f52b2c628e74d7))
+- **webhosting:** add dns autoconfig none option ([#1940](https://github.com/scaleway/scaleway-sdk-js/issues/1940)) ([6ccc59f](https://github.com/scaleway/scaleway-sdk-js/commit/6ccc59fed48fb152515467599b53b9356daff635))
+
 ## [2.70.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.69.0...@scaleway/sdk@2.70.0) (2025-03-17)
 
 ### Features
