@@ -15,8 +15,10 @@ export default [
       "**/examples/",
       "**/vite.config.ts",
       "packages/clients/.eslintrc.cjs",
+      "packages/client/.eslintrc.cjs",
       "eslint.config.mjs",
       "packages/clients/src/vendor/base64/index.js",
+      "packages/client/src/vendor/base64/index.js",
       "packages/configuration-loader/.eslintrc.cjs",
 
     ],
