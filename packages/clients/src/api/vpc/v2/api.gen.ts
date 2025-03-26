@@ -488,7 +488,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Get Acl Rules for VPC. Retrieve a list of ACL rules for a VPC, specified by
+   * Get ACL Rules for VPC. Retrieve a list of ACL rules for a VPC, specified by
    * its VPC ID.
    *
    * @param request - The request {@link GetAclRequest}
