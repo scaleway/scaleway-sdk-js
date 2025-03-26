@@ -2,8 +2,8 @@
 
 ## Project Templates
 
-* [NodeJS](./nodejs-minimal)
-* [Serverless Function](./serverless-function-minimal/)
+- [NodeJS](./nodejs-minimal)
+- [Serverless Function](./serverless-function-minimal/)
 
 ## Snippets
 
@@ -34,8 +34,8 @@ console.log(`\tCreated, ID=${server.id} ; State=${server.state}`)
 
 // Power on the server.
 console.log(`Powering on server...`)
-server = await api.serverActionAndWait({ 
-  serverId: server.id, 
+server = await api.serverActionAndWait({
+  serverId: server.id,
   action: 'poweron',
 })
 console.log(`\tPowered ON (now ${server.state})`)
@@ -52,21 +52,21 @@ const client = createClient(profile)
 const api = new Instance.v1.API(client)
 
 // List servers.
-console.log(`Listing servers...`);
-const servers = await api.listServers().then((res) => res.servers!);
+console.log(`Listing servers...`)
+const servers = await api.listServers().then(res => res.servers!)
 
 // Check how many servers need a reboot.
-const serversToReboot = servers.filter((obj) => obj.state === 'running');
-console.log(`\t${serversToReboot.length}/${servers.length} will be rebooted`);
+const serversToReboot = servers.filter(obj => obj.state === 'running')
+console.log(`\t${serversToReboot.length}/${servers.length} will be rebooted`)
 
 // Reboot all servers at once.
 console.log(
-  `Rebooting servers ${serversToReboot.map((obj) => obj.id).join(', ')}...`
+  `Rebooting servers ${serversToReboot.map(obj => obj.id).join(', ')}...`,
 )
 const updatedServers = await Promise.allSettled(
-  serversToReboot.map((obj) =>
-    api.serverActionAndWait({ serverId: obj.id, action: 'reboot' })
-  )
+  serversToReboot.map(obj =>
+    api.serverActionAndWait({ serverId: obj.id, action: 'reboot' }),
+  ),
 )
 for (const result of updatedServers) {
   switch (result.status) {

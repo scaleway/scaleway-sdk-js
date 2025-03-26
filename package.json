@@ -16,6 +16,7 @@
     "doc": "typedoc",
     "format": "biome check  --linter-enabled=false --write .",
     "format:check": "biome check --linter-enabled=false --verbose .",
+    "prettier": "prettier --write '**/*.{md,mdx,yml,yaml}'",
     "lint": "eslint --cache .",
     "prepare": "husky",
     "test": "vitest run",

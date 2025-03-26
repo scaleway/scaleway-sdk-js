@@ -66,18 +66,5 @@
     "linter": {
       "enabled": true
     }
-  },
-  "css": {
-    "formatter": {
-      "enabled": true,
-      "quoteStyle": "single"
-    },
-    "linter": {
-      "enabled": true
-    },
-    "parser": {
-      "allowWrongLineComments": false,
-      "cssModules": true
-    }
   }
 }

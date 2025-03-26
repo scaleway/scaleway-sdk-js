@@ -6,9 +6,10 @@ This SDK enables you to interact with Scaleway APIs.
 > The SDK works exclusively within a Node.js environment, as browser requests are limited by CORS restrictions.
 
 **🔗  Important links:**
-* [Reference documentation](https://scaleway.github.io/scaleway-sdk-js)
-* [Example projects](./examples)
-* [Developers website](https://developers.scaleway.com) (API documentation)
+
+- [Reference documentation](https://scaleway.github.io/scaleway-sdk-js)
+- [Example projects](./examples)
+- [Developers website](https://developers.scaleway.com) (API documentation)
 
 ## Getting Started
 
@@ -33,8 +34,8 @@ const api = new Registry.v1.API(client)
 **For a simpler setup**, you could retrieve the profile from either the configuration file or the environment variables:
 
 ```ts
-import { 
-  loadProfileFromConfigurationFile, 
+import {
+  loadProfileFromConfigurationFile,
   // loadProfileFromEnvironmentValues,
 } from '@scaleway/configuration-loader'
 
@@ -55,14 +56,16 @@ const namespaces = await api.listNamespaces(/*{ page: 1 }*/)
 ```
 
 Retrieve **all the pages**:
+
 ```ts
 const allNamespaces = await api.listNamespaces().all()
 ```
 
 **Iterate** over the pages:
+
 ```ts
 for await (const page of api.listNamespaces()) {
-  // 
+  //
 }
 ```
 

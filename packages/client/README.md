@@ -3,9 +3,10 @@
 This SDK Client enables you to interact with Scaleway APIs.
 
 **🔗  Important links:**
-* [Reference documentation](https://scaleway.github.io/scaleway-sdk-js)
-* [Example projects](https://github.com/scaleway/scaleway-sdk-js/tree/master/examples)
-* [Developers website](https://developers.scaleway.com) (API documentation)
+
+- [Reference documentation](https://scaleway.github.io/scaleway-sdk-js)
+- [Example projects](https://github.com/scaleway/scaleway-sdk-js/tree/master/examples)
+- [Developers website](https://developers.scaleway.com) (API documentation)
 
 ## Getting Started
 
