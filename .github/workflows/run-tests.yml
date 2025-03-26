@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 20
           check-latest: true
-          cache: "pnpm"
+          cache: 'pnpm'
       - run: pnpm install
       - run: pnpm run build
       - run: pnpm tsc --noEmit
@@ -32,7 +32,7 @@ jobs:
         with:
           node-version: 20
           check-latest: true
-          cache: "pnpm"
+          cache: 'pnpm'
       - run: pnpm install
       - run: pnpm run build
       - run: pnpm run lint
@@ -44,8 +44,8 @@ jobs:
           - node
           - jsdom
         node:
-          - "18"
-          - "20"
+          - '18'
+          - '20'
     steps:
       - uses: actions/checkout@v4.2.2
       - uses: pnpm/action-setup@v4.0.0
@@ -54,7 +54,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           check-latest: true
-          cache: "pnpm"
+          cache: 'pnpm'
       - run: pnpm install
       - run: pnpm run build
       - run: pnpm run test:coverage --environment ${{ matrix.test-environment }}

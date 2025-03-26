@@ -3,8 +3,9 @@
 This package enables you to load a profile from a configuration file or environment variables.
 
 **🔗  Important links:**
-* [Scaleway SDK](./sdk)
-* [Developers website](https://developers.scaleway.com) (API documentation)
+
+- [Scaleway SDK](./sdk)
+- [Developers website](https://developers.scaleway.com) (API documentation)
 
 ## Getting Started
 
@@ -27,9 +28,7 @@ However, you might prefer to store these variables in either a configuration fil
 **In case of configuration file**:
 
 ```ts
-import { 
-  loadProfileFromConfigurationFile, 
-} from '@scaleway/configuration-loader'
+import { loadProfileFromConfigurationFile } from '@scaleway/configuration-loader'
 
 const profile = loadProfileFromConfigurationFile()
 ```
@@ -43,9 +42,7 @@ const profile = loadProfileFromEnvironmentValues({ profileName: 'debug' })
 **In case of environment variables**:
 
 ```ts
-import { 
-  loadProfileFromEnvironmentValues,
-} from '@scaleway/configuration-loader'
+import { loadProfileFromEnvironmentValues } from '@scaleway/configuration-loader'
 
 const profile = loadProfileFromEnvironmentValues()
 ```
