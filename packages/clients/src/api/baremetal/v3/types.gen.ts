@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Zone as ScwZone } from '../../../bridge'
+import type { Zone as ScwZone } from '@scaleway/sdk-client'
 
 export type ListServerPrivateNetworksRequestOrderBy =
   | 'created_at_asc'

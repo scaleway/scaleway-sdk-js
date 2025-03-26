@@ -6,8 +6,8 @@ import {
   urlParams,
   validatePathParam,
   waitForResource,
-} from '../../../bridge'
-import type { Zone as ScwZone, WaitForOptions } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, WaitForOptions } from '@scaleway/sdk-client'
 import {
   SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES_APPLESILICON,
   SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_APPLESILICON,
