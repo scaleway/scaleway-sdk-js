@@ -33,9 +33,11 @@
   },
   "type": "module",
   "dependencies": {
-    "@scaleway/random-name": "5.1.1"
+    "@scaleway/random-name": "5.1.1",
+    "@scaleway/sdk-client":"workspace:*"
   },
   "bundledDependencies": [
-    "@scaleway/random-name"
+    "@scaleway/random-name",
+    "@scaleway/sdk-client"
   ]
 }
