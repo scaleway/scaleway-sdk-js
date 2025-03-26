@@ -103,6 +103,9 @@ importers:
       '@scaleway/random-name':
         specifier: 5.1.1
         version: 5.1.1
+      '@scaleway/sdk-client':
+        specifier: workspace:*
+        version: link:../client
 
   packages/configuration-loader:
     devDependencies:
