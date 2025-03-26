@@ -12,7 +12,6 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "version": "./scripts/update-constants-file.sh",
     "typecheck": "tsc --noEmit",
     "type:generate": "tsc --declaration -p tsconfig.build.json",
     "build": "vite build --config ../../vite.config.ts && pnpm run type:generate && tsc-alias -p tsconfig.build.json",
