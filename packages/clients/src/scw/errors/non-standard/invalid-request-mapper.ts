@@ -9,11 +9,11 @@ import { isRecordOfStringArray } from '../types'
  *
  * @public
  */
-export class InvalidRequestMapper {
-  static fromJSON(
+export const InvalidRequestMapper = {
+  fromJSON: (
     status: number,
     obj: Readonly<JSONObject>,
-  ): QuotasExceededError | InvalidArgumentsError | ScalewayError {
+  ): QuotasExceededError | InvalidArgumentsError | ScalewayError => {
     if (
       typeof obj.message === 'string' &&
       obj.message.toLowerCase().includes('quota exceeded for this resource')
@@ -30,19 +30,18 @@ export class InvalidRequestMapper {
     const fields =
       obj.fields && isRecordOfStringArray(obj.fields) ? obj.fields : {}
     const fieldsMessages = Object.entries(fields)
-    if (fieldsMessages.length) {
+      if (fieldsMessages.length > 0) {
       return new InvalidArgumentsError(
         status,
         obj,
         fieldsMessages
-          .map(([argumentName, messages]) =>
+          .flatMap(([argumentName, messages]) =>
             messages.map(helpMessage => ({
               argumentName,
               helpMessage,
               reason: 'constraint',
             })),
           )
-          .flat(),
       )
     }
 
