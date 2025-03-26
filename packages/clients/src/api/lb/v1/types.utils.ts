@@ -1,4 +1,4 @@
-import type { Region, Zone } from '../../../scw/locality'
+import type { Region, Zone } from '@scaleway/sdk-client'
 
 export type WaitForLbPrivateNetworksRequest = {
   /** Region to target. If none is passed will use default region from the config */

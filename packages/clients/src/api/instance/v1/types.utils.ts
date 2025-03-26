@@ -1,4 +1,4 @@
-import type { Zone } from '../../../scw/locality'
+import type { Zone } from '@scaleway/sdk-client'
 import type { Server } from './types.gen'
 
 export type AttachVolumeRequest = {

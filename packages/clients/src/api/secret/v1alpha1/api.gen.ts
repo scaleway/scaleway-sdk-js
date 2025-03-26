@@ -5,8 +5,8 @@ import {
   enrichForPagination,
   urlParams,
   validatePathParam,
-} from '../../../bridge'
-import type { Region } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { Region } from '@scaleway/sdk-client'
 import {
   marshalAddSecretOwnerRequest,
   marshalCreateFolderRequest,
