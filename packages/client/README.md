@@ -1,6 +1,6 @@
 # Scaleway SDK Client
 
-This SDK Cleint enables you to interact with Scaleway APIs.
+This SDK Client enables you to interact with Scaleway APIs.
 
 **🔗  Important links:**
 * [Reference documentation](https://scaleway.github.io/scaleway-sdk-js)
