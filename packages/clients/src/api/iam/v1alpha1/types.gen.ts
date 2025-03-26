@@ -684,7 +684,7 @@ export type CreateUserRequest = {
   /** Tags associated with the user. */
   tags?: string[]
   /**
-   * Details of IAM member. Private Beta feature.
+   * Details of IAM member.
    *
    * One-of ('type'): at most one of 'email', 'member' could be set.
    */

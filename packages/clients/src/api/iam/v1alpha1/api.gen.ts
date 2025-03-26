@@ -370,8 +370,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an user's username. Private Beta feature.. Update an user's
-   * username. Private Beta feature.
+   * Update an user's username.. Update an user's username.
    *
    * @param request - The request {@link UpdateUserUsernameRequest}
    * @returns A Promise of User
@@ -390,8 +389,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an user's password. Private Beta feature.. Update an user's
-   * password. Private Beta feature.
+   * Update an user's password.. Update an user's password.
    *
    * @param request - The request {@link UpdateUserPasswordRequest}
    * @returns A Promise of User
@@ -410,8 +408,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a MFA OTP. Private Beta feature.. Create a MFA OTP. Private Beta
-   * feature.
+   * Create a MFA OTP.. Create a MFA OTP.
    *
    * @param request - The request {@link CreateUserMFAOTPRequest}
    * @returns A Promise of MFAOTP
@@ -428,8 +425,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Validate a MFA OTP. Private Beta feature.. Validate a MFA OTP. Private Beta
-   * feature.
+   * Validate a MFA OTP.. Validate a MFA OTP.
    *
    * @param request - The request {@link ValidateUserMFAOTPRequest}
    * @returns A Promise of ValidateUserMFAOTPResponse
@@ -448,8 +444,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a MFA OTP. Private Beta feature.. Delete a MFA OTP. Private Beta
-   * feature.
+   * Delete a MFA OTP.. Delete a MFA OTP.
    *
    * @param request - The request {@link DeleteUserMFAOTPRequest}
    */
@@ -463,7 +458,7 @@ export class API extends ParentAPI {
 
   /**
    * Lock a member. Lock a member. A locked member cannot log in or use API keys
-   * until the locked status is removed. Private Beta feature.
+   * until the locked status is removed.
    *
    * @param request - The request {@link LockUserRequest}
    * @returns A Promise of User
@@ -480,7 +475,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Unlock a member. Unlock a member. Private Beta feature.
+   * Unlock a member.
    *
    * @param request - The request {@link UnlockUserRequest}
    * @returns A Promise of User
@@ -497,8 +492,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List grace periods of a member. List the grace periods of a member. Private
-   * Beta feature.
+   * List grace periods of a member. List the grace periods of a member.
    *
    * @param request - The request {@link ListGracePeriodsRequest}
    * @returns A Promise of ListGracePeriodsResponse
