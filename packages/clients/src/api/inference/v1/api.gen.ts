@@ -6,8 +6,8 @@ import {
   urlParams,
   validatePathParam,
   waitForResource,
-} from '../../../bridge'
-import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { Region as ScwRegion, WaitForOptions } from '@scaleway/sdk-client'
 import {
   DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_INFERENCE,
   MODEL_TRANSIENT_STATUSES as MODEL_TRANSIENT_STATUSES_INFERENCE,

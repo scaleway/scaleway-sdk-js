@@ -6,8 +6,8 @@ import {
   urlParams,
   validatePathParam,
   waitForResource,
-} from '../../../bridge'
-import type { Zone as ScwZone, WaitForOptions } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, WaitForOptions } from '@scaleway/sdk-client'
 import {
   BMC_ACCESS_TRANSIENT_STATUSES as BMC_ACCESS_TRANSIENT_STATUSES_DEDIBOX,
   RPN_SAN_TRANSIENT_STATUSES as RPN_SAN_TRANSIENT_STATUSES_DEDIBOX,

@@ -6,8 +6,8 @@ import {
   urlParams,
   validatePathParam,
   waitForResource,
-} from '../../../bridge'
-import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { Region as ScwRegion, WaitForOptions } from '@scaleway/sdk-client'
 import {
   IMAGE_TRANSIENT_STATUSES as IMAGE_TRANSIENT_STATUSES_REGISTRY,
   NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_REGISTRY,

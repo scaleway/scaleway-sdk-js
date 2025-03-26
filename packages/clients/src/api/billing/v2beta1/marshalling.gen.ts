@@ -5,7 +5,7 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
   unmarshalMoney,
-} from '../../../bridge'
+} from '@scaleway/sdk-client'
 import type {
   Discount,
   DiscountCoupon,

@@ -6,8 +6,8 @@ import {
   urlParams,
   validatePathParam,
   waitForResource,
-} from '../../../bridge'
-import type { Zone as ScwZone, WaitForOptions } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, WaitForOptions } from '@scaleway/sdk-client'
 import { CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_REDIS } from './content.gen'
 import {
   marshalAddAclRulesRequest,

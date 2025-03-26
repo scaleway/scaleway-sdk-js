@@ -4,7 +4,7 @@ import type {
   Money,
   Region as ScwRegion,
   Zone as ScwZone,
-} from '../../../bridge'
+} from '@scaleway/sdk-client'
 
 export type DNSStageType = 'unknown_type' | 'auto' | 'managed' | 'custom'
 

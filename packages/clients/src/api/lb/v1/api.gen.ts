@@ -6,12 +6,12 @@ import {
   urlParams,
   validatePathParam,
   waitForResource,
-} from '../../../bridge'
+} from '@scaleway/sdk-client'
 import type {
   Region as ScwRegion,
   Zone as ScwZone,
   WaitForOptions,
-} from '../../../bridge'
+} from '@scaleway/sdk-client'
 import {
   CERTIFICATE_TRANSIENT_STATUSES as CERTIFICATE_TRANSIENT_STATUSES_LB,
   LB_TRANSIENT_STATUSES as LB_TRANSIENT_STATUSES_LB,
