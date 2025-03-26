@@ -18,6 +18,7 @@ const buildErrorRes = (error?: unknown) => ({
   statusCode: error instanceof Errors.ScalewayError ? error.status : 500,
 })
 
+// oxlint-disable-next-line @typescript-eslint/no-explicit-any
 export const list = async (event: any, context: any, callback: any) => {
   try {
     return buildJsonRes(await api.listNamespaces().all())
