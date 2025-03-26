@@ -34,6 +34,7 @@ const defaultConfig: UserConfig = {
     target: [...targets, 'node20'],
     minify: false,
     ssr: true,
+    emptyOutDir: true,
     lib: {
       name: pkg.name,
       entry: 'src/index.ts',
