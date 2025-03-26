@@ -1,3 +1,5 @@
-export const version = 'v2.71.0'
+import pkg from '../../package.json'
+
+export const { version } = pkg
 
 export const userAgent = `scaleway-sdk-js/${version}`
