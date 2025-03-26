@@ -1,4 +1,4 @@
-import { type DefaultValues } from '../../../bridge'
+import { type DefaultValues } from '@scaleway/sdk-client'
 import type {
   Bootscript,
   ServerSummary,

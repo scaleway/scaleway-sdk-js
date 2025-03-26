@@ -6,8 +6,8 @@ import {
   urlParams,
   validatePathParam,
   waitForResource,
-} from '../../../bridge'
-import type { WaitForOptions } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
 import { COCKPIT_TRANSIENT_STATUSES } from './content.gen'
 import {
   marshalActivateCockpitRequest,

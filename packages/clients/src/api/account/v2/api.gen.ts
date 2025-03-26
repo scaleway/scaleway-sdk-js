@@ -5,7 +5,7 @@ import {
   enrichForPagination,
   urlParams,
   validatePathParam,
-} from '../../../bridge'
+} from '@scaleway/sdk-client'
 import {
   marshalCreateProjectRequest,
   marshalUpdateProjectRequest,

@@ -1,9 +1,9 @@
-import { validatePathParam } from '../../../bridge'
 import {
   createExponentialBackoffStrategy,
   tryAtIntervals,
-} from '../../../internal/async/interval-retrier'
-import type { WaitForOptions } from '../../../internal/async/interval-retrier'
+  validatePathParam,
+} from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
 import { API } from './api.gen'
 import {
   IMAGE_TRANSIENT_STATUSES,
