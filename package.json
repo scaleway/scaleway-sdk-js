@@ -14,7 +14,8 @@
     "build:profile": "cross-env PROFILE=true pnpm run build",
     "commit": "npx git-cz -a",
     "doc": "typedoc",
-    "format": "prettier --write '**/*.ts'",
+    "format": "biome check  --linter-enabled=false --write .",
+    "format:check": "biome check --linter-enabled=false --verbose .",
     "lint": "eslint --cache .",
     "prepare": "husky",
     "test": "vitest run",
@@ -23,14 +24,17 @@
   },
   "lint-staged": {
     "*.ts": [
-      "prettier --write",
+      "pnpm run format",
       "eslint --fix ."
     ],
-    "*.yaml": [
-      "prettier --write"
-    ],
     "*.json": [
-      "prettier --write"
+      "pnpm run format"
+    ],
+    "*.y?(a)ml": [
+      "prettier --write '**/*.{yml,yaml}'"
+    ],
+    ".md?(x)": [
+      "prettier --write '**/*.{md,mdx}'"
     ]
   },
   "config": {
@@ -74,6 +78,7 @@
   "packageManager": "pnpm@9.4.0",
   "dependencies": {
     "@scaleway/random-name": "5.1.1",
+    "biome": "^0.3.3",
     "react": "^19.0.0"
   }
 }
