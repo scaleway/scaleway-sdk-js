@@ -6,8 +6,8 @@ import {
   urlParams,
   validatePathParam,
   waitForResource,
-} from '../../../bridge'
-import type { WaitForOptions } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
 import {
   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_DOMAIN,
   SSL_CERTIFICATE_TRANSIENT_STATUSES as SSL_CERTIFICATE_TRANSIENT_STATUSES_DOMAIN,

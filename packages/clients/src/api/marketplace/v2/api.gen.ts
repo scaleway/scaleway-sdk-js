@@ -6,7 +6,7 @@ import {
   resolveOneOf,
   urlParams,
   validatePathParam,
-} from '../../../bridge'
+} from '@scaleway/sdk-client'
 import {
   unmarshalCategory,
   unmarshalImage,

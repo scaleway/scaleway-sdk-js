@@ -6,8 +6,8 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
   unmarshalMoney,
-} from '../../../bridge'
-import type { DefaultValues } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Application,
   CreateJobRequest,

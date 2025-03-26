@@ -4,7 +4,7 @@ import {
   isJSONObject,
   unmarshalArrayOfObject,
   unmarshalDate,
-} from '../../../bridge'
+} from '@scaleway/sdk-client'
 import type {
   Event,
   EventPrincipal,

@@ -7,8 +7,8 @@ import {
   urlParams,
   validatePathParam,
   waitForResource,
-} from '../../../bridge'
-import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { Region as ScwRegion, WaitForOptions } from '@scaleway/sdk-client'
 import {
   CRON_TRANSIENT_STATUSES as CRON_TRANSIENT_STATUSES_FUNCTION,
   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_FUNCTION,
