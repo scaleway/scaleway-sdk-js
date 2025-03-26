@@ -6,8 +6,8 @@ import {
   urlParams,
   validatePathParam,
   waitForResource,
-} from '../../../bridge'
-import type { WaitForOptions } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
 import { HUMAN_TRANSIENT_STATUSES as HUMAN_TRANSIENT_STATUSES_TEST } from './content.gen'
 import {
   marshalCreateHumanRequest,

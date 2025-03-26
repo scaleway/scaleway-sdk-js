@@ -6,8 +6,8 @@ import {
   urlParams,
   validatePathParam,
   waitForResource,
-} from '../../../bridge'
-import type { WaitForOptions } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
 import {
   PIPELINE_TRANSIENT_STATUSES as PIPELINE_TRANSIENT_STATUSES_EDGE_SERVICES,
   PURGE_REQUEST_TRANSIENT_STATUSES as PURGE_REQUEST_TRANSIENT_STATUSES_EDGE_SERVICES,

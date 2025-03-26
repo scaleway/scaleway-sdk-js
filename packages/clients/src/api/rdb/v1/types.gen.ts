@@ -4,7 +4,7 @@ import type {
   Region as ScwRegion,
   Zone as ScwZone,
   TimeSeries,
-} from '../../../bridge'
+} from '@scaleway/sdk-client'
 
 export type ACLRuleAction = 'allow' | 'deny'
 

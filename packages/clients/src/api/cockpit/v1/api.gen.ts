@@ -5,8 +5,8 @@ import {
   enrichForPagination,
   urlParams,
   validatePathParam,
-} from '../../../bridge'
-import type { Region as ScwRegion } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { Region as ScwRegion } from '@scaleway/sdk-client'
 import {
   marshalGlobalApiCreateGrafanaUserRequest,
   marshalGlobalApiResetGrafanaUserPasswordRequest,

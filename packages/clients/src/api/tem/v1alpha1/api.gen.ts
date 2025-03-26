@@ -6,8 +6,8 @@ import {
   urlParams,
   validatePathParam,
   waitForResource,
-} from '../../../bridge'
-import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { Region as ScwRegion, WaitForOptions } from '@scaleway/sdk-client'
 import {
   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_TEM,
   EMAIL_TRANSIENT_STATUSES as EMAIL_TRANSIENT_STATUSES_TEM,

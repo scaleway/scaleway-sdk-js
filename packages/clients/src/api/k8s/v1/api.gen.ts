@@ -6,8 +6,8 @@ import {
   urlParams,
   validatePathParam,
   waitForResource,
-} from '../../../bridge'
-import type { Region as ScwRegion, WaitForOptions } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { Region as ScwRegion, WaitForOptions } from '@scaleway/sdk-client'
 import {
   CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_K8S,
   NODE_TRANSIENT_STATUSES as NODE_TRANSIENT_STATUSES_K8S,

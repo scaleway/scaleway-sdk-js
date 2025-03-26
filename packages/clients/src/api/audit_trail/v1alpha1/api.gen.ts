@@ -1,7 +1,11 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import { API as ParentAPI, urlParams, validatePathParam } from '../../../bridge'
-import type { Region as ScwRegion } from '../../../bridge'
+import {
+  API as ParentAPI,
+  urlParams,
+  validatePathParam,
+} from '@scaleway/sdk-client'
+import type { Region as ScwRegion } from '@scaleway/sdk-client'
 import {
   unmarshalListEventsResponse,
   unmarshalListProductsResponse,

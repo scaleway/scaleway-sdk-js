@@ -6,8 +6,8 @@ import {
   resolveOneOf,
   urlParams,
   validatePathParam,
-} from '../../../bridge'
-import type { Region as ScwRegion } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { Region as ScwRegion } from '@scaleway/sdk-client'
 import {
   marshalAttachIPRequest,
   marshalBookIPRequest,
