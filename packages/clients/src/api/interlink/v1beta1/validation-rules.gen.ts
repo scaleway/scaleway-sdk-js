@@ -1,6 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
+export const BgpConfig = {
+  asn: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 65534,
+  },
+}
+
 export const CreateLinkRequest = {
   bandwidthMbps: {
     greaterThanOrEqual: 1,
@@ -22,6 +29,16 @@ export const CreateRoutingPolicyRequest = {
 export const Link = {
   name: {
     minLength: 1,
+  },
+}
+
+export const ListDedicatedConnectionsRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1000,
   },
 }
 

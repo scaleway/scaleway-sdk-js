@@ -4,6 +4,18 @@ import type { Region as ScwRegion } from '@scaleway/sdk-client'
 
 export type BgpStatus = 'unknown_bgp_status' | 'up' | 'down'
 
+export type DedicatedConnectionStatus =
+  | 'unknown_status'
+  | 'created'
+  | 'configuring'
+  | 'failed'
+  | 'active'
+  | 'disabled'
+  | 'deleted'
+  | 'locked'
+
+export type LinkKind = 'hosted' | 'self_hosted'
+
 export type LinkStatus =
   | 'unknown_link_status'
   | 'configuring'
@@ -18,6 +30,16 @@ export type LinkStatus =
   | 'deprovisioning'
   | 'deleted'
   | 'locked'
+
+export type ListDedicatedConnectionsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'updated_at_asc'
+  | 'updated_at_desc'
+  | 'name_asc'
+  | 'name_desc'
+  | 'status_asc'
+  | 'status_desc'
 
 export type ListLinksRequestOrderBy =
   | 'created_at_asc'
@@ -37,6 +59,66 @@ export type ListRoutingPoliciesRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
+export interface BgpConfig {
+  /** AS Number of the BGP peer. */
+  asn: number
+  /** IPv4 address of the BGP peer. */
+  ipv4: string
+  /** IPv6 address of the BGP peer. */
+  ipv6: string
+}
+
+export interface PartnerHost {
+  /** ID of the partner facilitating the link. */
+  partnerId: string
+  /** Used to identify a link from a user or partner's point of view. */
+  pairingKey: string
+  /**
+   * Reason given by partner to explain why they did not approve the request for
+   * a hosted link.
+   */
+  disapprovedReason?: string
+}
+
+export interface SelfHost {
+  /** Dedicated physical connection supporting the link. */
+  connectionId: string
+}
+
+export interface DedicatedConnection {
+  /** Unique identifier of the dedicated connection. */
+  id: string
+  /** Project ID. */
+  projectId: string
+  /** Organization ID. */
+  organizationId: string
+  /** Status of the dedicated connection. */
+  status: DedicatedConnectionStatus
+  /** Name of the dedicated connection. */
+  name: string
+  /** List of tags associated with the dedicated connection. */
+  tags: string[]
+  /** ID of the PoP where the dedicated connection is located. */
+  popId: string
+  /** Bandwidth size of the dedicated connection. */
+  bandwidthMbps: number
+  /** Size of the links supported on this dedicated connection. */
+  availableLinkBandwidths: number[]
+  /** Creation date of the dedicated connection. */
+  createdAt?: Date
+  /** Last modification date of the dedicated connection. */
+  updatedAt?: Date
+  /**
+   * Demarcation details required by the data center to set up the supporting
+   * Cross Connect. This generally includes the physical space in the facility,
+   * the cabinet or rack the connection should land in, the patch panel to go
+   * in, the port designation, and the media type.
+   */
+  demarcationInfo?: string
+  /** Region of the dedicated connection. */
+  region: ScwRegion
+}
+
 export interface Link {
   /** Unique identifier of the link. */
   id: string
@@ -48,10 +130,8 @@ export interface Link {
   name: string
   /** List of tags associated with the link. */
   tags: string[]
-  /** ID of the PoP where the link's corresponding port is located. */
+  /** ID of the PoP where the link's corresponding connection is located. */
   popId: string
-  /** ID of the partner facilitating this link. */
-  partnerId?: string
   /** Rate limited bandwidth of the link. */
   bandwidthMbps: number
   /** Status of the link. */
@@ -73,13 +153,24 @@ export interface Link {
   createdAt?: Date
   /** Last modification date of the link. */
   updatedAt?: Date
-  /** Used to identify a link from a user or partner's point of view. */
-  pairingKey: string
   /**
-   * Reason given by partner to explain why they did not approve the request for
-   * a hosted link.
+   * Partner host information.
+   *
+   * One-of ('hostInfo'): at most one of 'partner', 'self' could be set.
    */
-  disapprovedReason?: string
+  partner?: PartnerHost
+  /**
+   * Self-host information.
+   *
+   * One-of ('hostInfo'): at most one of 'partner', 'self' could be set.
+   */
+  self?: SelfHost
+  /** VLAN of the link. */
+  vlan: number
+  /** BGP configuration on Scaleway's side. */
+  scwBgpConfig?: BgpConfig
+  /** BGP configuration on peer's side (on-premises or other hosting provider). */
+  peerBgpConfig?: BgpConfig
   /** Region of the link. */
   region: ScwRegion
 }
@@ -118,8 +209,8 @@ export interface Pop {
   /** Image URL of the PoP's logo. */
   logoUrl: string
   /**
-   * Available bandwidth in Mbits/s for future hosted_links from available ports
-   * in this PoP.
+   * Available bandwidth in Mbits/s for future hosted links from available
+   * connections in this PoP.
    */
   availableLinkBandwidthsMbps: number[]
   /** Region of the PoP. */
@@ -192,40 +283,23 @@ export type CreateLinkRequest = {
   popId: string
   /**
    * Desired bandwidth for the link. Must be compatible with available link
-   * bandwidths and remaining bandwidth capacity of the port.
+   * bandwidths and remaining bandwidth capacity of the connection.
    */
   bandwidthMbps: number
   /**
-   * If true, a dedicated link (1 link per port, dedicated to one customer) will
-   * be crated. It is not necessary to specify a `port_id` or `partner_id`. A
-   * new port will created and assigned to the link. Note that Scaleway has not
-   * yet enabled the creation of dedicated links, this field is reserved for
-   * future use.
+   * If set, creates a self-hosted link using this dedicated physical
+   * connection. As the customer, specify the ID of the physical connection you
+   * already have for this link.
    *
-   * One-of ('linkKind'): at most one of 'dedicated', 'portId', 'partnerId'
-   * could be set.
+   * One-of ('host'): at most one of 'connectionId', 'partnerId' could be set.
    */
-  dedicated?: boolean
+  connectionId?: string
   /**
-   * If set, a shared link (N links per port, one of which is this customer's
-   * port) will be created. As the customer, specify the ID of the port you
-   * already have for this link. Note that shared links are not currently
-   * available. Note that Scaleway has not yet enabled the creation of shared
-   * links, this field is reserved for future use.
+   * If set, creates a hosted link on a partner's connection. Specify the ID of
+   * the chosen partner, who already has a shared connection with available
+   * bandwidth.
    *
-   * One-of ('linkKind'): at most one of 'dedicated', 'portId', 'partnerId'
-   * could be set.
-   */
-  portId?: string
-  /**
-   * If set, a hosted link (N links per port on a partner port) will be created.
-   * Specify the ID of the chosen partner, who already has a shareable port with
-   * available bandwidth. Note that this is currently the only type of link
-   * offered by Scaleway, and therefore this field must be set when creating a
-   * link.
-   *
-   * One-of ('linkKind'): at most one of 'dedicated', 'portId', 'partnerId'
-   * could be set.
+   * One-of ('host'): at most one of 'connectionId', 'partnerId' could be set.
    */
   partnerId?: string
 }
@@ -311,6 +385,16 @@ export type EnableRoutePropagationRequest = {
   linkId: string
 }
 
+export type GetDedicatedConnectionRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: ScwRegion
+  /** ID of connection to get. */
+  connectionId: string
+}
+
 export type GetLinkRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -351,6 +435,41 @@ export type GetRoutingPolicyRequest = {
   routingPolicyId: string
 }
 
+export type ListDedicatedConnectionsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the
+   * config.
+   */
+  region?: ScwRegion
+  /** Order in which to return results. */
+  orderBy?: ListDedicatedConnectionsRequestOrderBy
+  /** Page number to return. */
+  page?: number
+  /** Maximum number of connections to return per page. */
+  pageSize?: number
+  /** Project ID to filter for. */
+  projectId?: string
+  /** Organization ID to filter for. */
+  organizationId?: string
+  /** Link name to filter for. */
+  name?: string
+  /** Tags to filter for. */
+  tags?: string[]
+  /** Connection status to filter for. */
+  status?: DedicatedConnectionStatus
+  /** Filter for dedicated connections with this bandwidth size. */
+  bandwidthMbps?: number
+  /** Filter for dedicated connections present in this PoP. */
+  popId?: string
+}
+
+export interface ListDedicatedConnectionsResponse {
+  /** List of connections on current page. */
+  connections: DedicatedConnection[]
+  /** Total number of connections returned. */
+  totalCount: number
+}
+
 export type ListLinksRequest = {
   /**
    * Region to target. If none is passed will use default region from the
@@ -377,7 +496,7 @@ export type ListLinksRequest = {
   bgpV4Status?: BgpStatus
   /** BGP IPv6 status to filter for. */
   bgpV6Status?: BgpStatus
-  /** Filter for links attached to this PoP (via ports). */
+  /** Filter for links attached to this PoP (via connections). */
   popId?: string
   /** Filter for link bandwidth (in Mbps). */
   bandwidthMbps?: number
@@ -389,6 +508,10 @@ export type ListLinksRequest = {
   routingPolicyId?: string
   /** Filter for the link with this pairing_key. */
   pairingKey?: string
+  /** Filter for hosted or self-hosted links. */
+  kind?: LinkKind
+  /** Filter for links self-hosted on this connection. */
+  connectionId?: string
 }
 
 export interface ListLinksResponse {
@@ -410,7 +533,7 @@ export type ListPartnersRequest = {
   page?: number
   /** Maximum number of partners to return per page. */
   pageSize?: number
-  /** Filter for partners present (offering a port) in one of these PoPs. */
+  /** Filter for partners present (offering a connection) in one of these PoPs. */
   popIds?: string[]
 }
 
@@ -437,13 +560,18 @@ export type ListPopsRequest = {
   name?: string
   /** Hosting provider name to filter for. */
   hostingProviderName?: string
-  /** Filter for PoPs hosting an available shared port from this partner. */
+  /** Filter for PoPs hosting an available shared connection from this partner. */
   partnerId?: string
   /**
-   * Filter for PoPs with a shared port allowing this bandwidth size. Note that
-   * we cannot guarantee that PoPs returned will have available capacity.
+   * Filter for PoPs with a shared connection allowing this bandwidth size. Note
+   * that we cannot guarantee that PoPs returned will have available capacity.
    */
   linkBandwidthMbps?: number
+  /**
+   * Filter for PoPs with a dedicated connection available for self-hosted
+   * links.
+   */
+  dedicatedAvailable?: boolean
 }
 
 export interface ListPopsResponse {

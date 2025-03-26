@@ -5,8 +5,13 @@ import {
   enrichForPagination,
   urlParams,
   validatePathParam,
+  waitForResource,
 } from '@scaleway/sdk-client'
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, WaitForOptions } from '@scaleway/sdk-client'
+import {
+  DEDICATED_CONNECTION_TRANSIENT_STATUSES as DEDICATED_CONNECTION_TRANSIENT_STATUSES_INTERLINK,
+  LINK_TRANSIENT_STATUSES as LINK_TRANSIENT_STATUSES_INTERLINK,
+} from './content.gen'
 import {
   marshalAttachRoutingPolicyRequest,
   marshalAttachVpcRequest,
@@ -14,7 +19,9 @@ import {
   marshalCreateRoutingPolicyRequest,
   marshalUpdateLinkRequest,
   marshalUpdateRoutingPolicyRequest,
+  unmarshalDedicatedConnection,
   unmarshalLink,
+  unmarshalListDedicatedConnectionsResponse,
   unmarshalListLinksResponse,
   unmarshalListPartnersResponse,
   unmarshalListPopsResponse,
@@ -28,17 +35,21 @@ import type {
   AttachVpcRequest,
   CreateLinkRequest,
   CreateRoutingPolicyRequest,
+  DedicatedConnection,
   DeleteLinkRequest,
   DeleteRoutingPolicyRequest,
   DetachRoutingPolicyRequest,
   DetachVpcRequest,
   DisableRoutePropagationRequest,
   EnableRoutePropagationRequest,
+  GetDedicatedConnectionRequest,
   GetLinkRequest,
   GetPartnerRequest,
   GetPopRequest,
   GetRoutingPolicyRequest,
   Link,
+  ListDedicatedConnectionsRequest,
+  ListDedicatedConnectionsResponse,
   ListLinksRequest,
   ListLinksResponse,
   ListPartnersRequest,
@@ -71,6 +82,91 @@ export class API extends ParentAPI {
     'nl-ams',
     'pl-waw',
   ]
+
+  protected pageOfListDedicatedConnections = (
+    request: Readonly<ListDedicatedConnectionsRequest> = {},
+  ) =>
+    this.client.fetch<ListDedicatedConnectionsResponse>(
+      {
+        method: 'GET',
+        path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/dedicated-connections`,
+        urlParams: urlParams(
+          ['bandwidth_mbps', request.bandwidthMbps],
+          ['name', request.name],
+          ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['pop_id', request.popId],
+          ['project_id', request.projectId],
+          ['status', request.status],
+          ['tags', request.tags],
+        ),
+      },
+      unmarshalListDedicatedConnectionsResponse,
+    )
+
+  /**
+   * List dedicated connections. For self-hosted users, list their dedicated
+   * physical connections in a given region. By default, the connections
+   * returned in the list are ordered by name in ascending order, though this
+   * can be modified via the `order_by` field.
+   *
+   * @param request - The request {@link ListDedicatedConnectionsRequest}
+   * @returns A Promise of ListDedicatedConnectionsResponse
+   */
+  listDedicatedConnections = (
+    request: Readonly<ListDedicatedConnectionsRequest> = {},
+  ) =>
+    enrichForPagination(
+      'connections',
+      this.pageOfListDedicatedConnections,
+      request,
+    )
+
+  /**
+   * Get a dedicated connection. For self-hosted users, get a dedicated physical
+   * connection corresponding to the given ID. The response object includes
+   * information such as the connection's name, status and total bandwidth.
+   *
+   * @param request - The request {@link GetDedicatedConnectionRequest}
+   * @returns A Promise of DedicatedConnection
+   */
+  getDedicatedConnection = (request: Readonly<GetDedicatedConnectionRequest>) =>
+    this.client.fetch<DedicatedConnection>(
+      {
+        method: 'GET',
+        path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/dedicated-connections/${validatePathParam('connectionId', request.connectionId)}`,
+      },
+      unmarshalDedicatedConnection,
+    )
+
+  /**
+   * Waits for {@link DedicatedConnection} to be in a final state.
+   *
+   * @param request - The request {@link GetDedicatedConnectionRequest}
+   * @param options - The waiting options
+   * @returns A Promise of DedicatedConnection
+   */
+  waitForDedicatedConnection = (
+    request: Readonly<GetDedicatedConnectionRequest>,
+    options?: Readonly<WaitForOptions<DedicatedConnection>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !DEDICATED_CONNECTION_TRANSIENT_STATUSES_INTERLINK.includes(
+              res.status,
+            ),
+          )),
+      this.getDedicatedConnection,
+      request,
+      options,
+    )
 
   protected pageOfListPartners = (
     request: Readonly<ListPartnersRequest> = {},
@@ -126,6 +222,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pops`,
         urlParams: urlParams(
+          ['dedicated_available', request.dedicatedAvailable],
           ['hosting_provider_name', request.hostingProviderName],
           ['link_bandwidth_mbps', request.linkBandwidthMbps],
           ['name', request.name],
@@ -176,6 +273,8 @@ export class API extends ParentAPI {
           ['bandwidth_mbps', request.bandwidthMbps],
           ['bgp_v4_status', request.bgpV4Status],
           ['bgp_v6_status', request.bgpV6Status],
+          ['connection_id', request.connectionId],
+          ['kind', request.kind],
           ['name', request.name],
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
@@ -208,9 +307,9 @@ export class API extends ParentAPI {
     enrichForPagination('links', this.pageOfListLinks, request)
 
   /**
-   * Get a link. Get a link (InterLink connection) for the given link ID. The
-   * response object includes information about the link's various configuration
-   * details.
+   * Get a link. Get a link (InterLink session / logical InterLink resource) for
+   * the given link ID. The response object includes information about the
+   * link's various configuration details.
    *
    * @param request - The request {@link GetLinkRequest}
    * @returns A Promise of Link
@@ -225,10 +324,33 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a link. Create a link (InterLink connection) in a given PoP,
-   * specifying its various configuration details. For the moment only hosted
-   * links (faciliated by partners) are available, though in the future
-   * dedicated and shared links will also be possible.
+   * Waits for {@link Link} to be in a final state.
+   *
+   * @param request - The request {@link GetLinkRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Link
+   */
+  waitForLink = (
+    request: Readonly<GetLinkRequest>,
+    options?: Readonly<WaitForOptions<Link>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !LINK_TRANSIENT_STATUSES_INTERLINK.includes(res.status),
+          )),
+      this.getLink,
+      request,
+      options,
+    )
+
+  /**
+   * Create a link. Create a link (InterLink session / logical InterLink
+   * resource) in a given PoP, specifying its various configuration details.
+   * Links can either be hosted (faciliated by partners' shared physical
+   * connections) or self-hosted (for users who have purchased a dedicated
+   * physical connection).
    *
    * @param request - The request {@link CreateLinkRequest}
    * @returns A Promise of Link
