@@ -6,8 +6,8 @@ import {
   urlParams,
   validatePathParam,
   waitForResource,
-} from '../../../bridge'
-import type { Region, WaitForOptions } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { Region, WaitForOptions } from '@scaleway/sdk-client'
 import {
   INSTANCE_LOG_TRANSIENT_STATUSES,
   INSTANCE_TRANSIENT_STATUSES,

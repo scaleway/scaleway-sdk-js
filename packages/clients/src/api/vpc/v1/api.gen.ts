@@ -5,8 +5,8 @@ import {
   enrichForPagination,
   urlParams,
   validatePathParam,
-} from '../../../bridge'
-import type { Zone } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { Zone } from '@scaleway/sdk-client'
 import {
   marshalCreatePrivateNetworkRequest,
   marshalUpdatePrivateNetworkRequest,

@@ -1,6 +1,6 @@
+import * as http from 'http'
 import { loadProfileFromConfigurationFile } from '@scaleway/configuration-loader'
 import { Registry, createClient } from '@scaleway/sdk'
-import * as http from 'http'
 
 const hostname = '127.0.0.1'
 const port = 3000
