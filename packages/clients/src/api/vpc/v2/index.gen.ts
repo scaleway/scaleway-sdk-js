@@ -35,8 +35,6 @@ export type {
   Route,
   SetAclRequest,
   SetAclResponse,
-  SetSubnetsRequest,
-  SetSubnetsResponse,
   Subnet,
   UpdatePrivateNetworkRequest,
   UpdateRouteRequest,
