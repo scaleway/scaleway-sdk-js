@@ -151,7 +151,9 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/** Edge Services API. */
+/**
+ * Edge Services API.
+ */
 export class API extends ParentAPI {
   protected pageOfListPipelines = (
     request: Readonly<ListPipelinesRequest> = {},
@@ -177,10 +179,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List pipelines. List all pipelines, for a Scaleway Organization or Scaleway
-   * Project. By default, the pipelines returned in the list are ordered by
-   * creation date in ascending order, though this can be modified via the
-   * `order_by` field.
+   * List pipelines. List all pipelines, for a Scaleway Organization or Scaleway Project. By default, the pipelines returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListPipelinesRequest}
    * @returns A Promise of ListPipelinesResponse
@@ -189,9 +188,7 @@ export class API extends ParentAPI {
     enrichForPagination('pipelines', this.pageOfListPipelines, request)
 
   /**
-   * Create pipeline. Create a new pipeline. You must specify a `dns_stage_id`
-   * to form a stage-chain that goes all the way to the backend stage (origin),
-   * so the HTTP request will be processed according to the stages you created.
+   * Create pipeline. Create a new pipeline. You must specify a `dns_stage_id` to form a stage-chain that goes all the way to the backend stage (origin), so the HTTP request will be processed according to the stages you created.
    *
    * @param request - The request {@link CreatePipelineRequest}
    * @returns A Promise of Pipeline
@@ -210,9 +207,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get pipeline. Retrieve information about an existing pipeline, specified by
-   * its `pipeline_id`. Its full details, including errors, are returned in the
-   * response object.
+   * Get pipeline. Retrieve information about an existing pipeline, specified by its `pipeline_id`. Its full details, including errors, are returned in the response object.
    *
    * @param request - The request {@link GetPipelineRequest}
    * @returns A Promise of Pipeline
@@ -280,9 +275,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update pipeline. Update the parameters of an existing pipeline, specified
-   * by its `pipeline_id`. Parameters which can be updated include the `name`,
-   * `description` and `dns_stage_id`.
+   * Update pipeline. Update the parameters of an existing pipeline, specified by its `pipeline_id`. Parameters which can be updated include the `name`, `description` and `dns_stage_id`.
    *
    * @param request - The request {@link UpdatePipelineRequest}
    * @returns A Promise of Pipeline
@@ -301,9 +294,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete pipeline. Delete an existing pipeline, specified by its
-   * `pipeline_id`. Deleting a pipeline is permanent, and cannot be undone. Note
-   * that all stages linked to the pipeline are also deleted.
+   * Delete pipeline. Delete an existing pipeline, specified by its `pipeline_id`. Deleting a pipeline is permanent, and cannot be undone. Note that all stages linked to the pipeline are also deleted.
    *
    * @param request - The request {@link DeletePipelineRequest}
    */
@@ -333,12 +324,7 @@ export class API extends ParentAPI {
     enrichForPagination('headStages', this.pageOfListHeadStages, request)
 
   /**
-   * Configure a entry point to your pipeline. You must specify a `head stage`
-   * to form a stage-chain that goes all the way to the backend stage (origin),
-   * so the HTTP request will be processed according to the stages you created..
-   * You must specify either a `add_new_head_stage` (to add a new head stage),
-   * `remove_head_stage` (to remove a head stage) or `swap_head_stage` (to
-   * replace a head stage).
+   * Configure a entry point to your pipeline. You must specify a `head stage` to form a stage-chain that goes all the way to the backend stage (origin), so the HTTP request will be processed according to the stages you created.. You must specify either a `add_new_head_stage` (to add a new head stage), `remove_head_stage` (to remove a head stage) or `swap_head_stage` (to replace a head stage).
    *
    * @param request - The request {@link SetHeadStageRequest}
    * @returns A Promise of HeadStageResponse
@@ -375,10 +361,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List DNS stages. List all DNS stages, for a Scaleway Organization or
-   * Scaleway Project. By default, the DNS stages returned in the list are
-   * ordered by creation date in ascending order, though this can be modified
-   * via the `order_by` field.
+   * List DNS stages. List all DNS stages, for a Scaleway Organization or Scaleway Project. By default, the DNS stages returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListDNSStagesRequest}
    * @returns A Promise of ListDNSStagesResponse
@@ -387,8 +370,7 @@ export class API extends ParentAPI {
     enrichForPagination('stages', this.pageOfListDNSStages, request)
 
   /**
-   * Create DNS stage. Create a new DNS stage. You must specify the `fqdns`
-   * field to customize the domain endpoint, using a domain you already own.
+   * Create DNS stage. Create a new DNS stage. You must specify the `fqdns` field to customize the domain endpoint, using a domain you already own.
    *
    * @param request - The request {@link CreateDNSStageRequest}
    * @returns A Promise of DNSStage
@@ -407,9 +389,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get DNS stage. Retrieve information about an existing DNS stage, specified
-   * by its `dns_stage_id`. Its full details, including FQDNs, are returned in
-   * the response object.
+   * Get DNS stage. Retrieve information about an existing DNS stage, specified by its `dns_stage_id`. Its full details, including FQDNs, are returned in the response object.
    *
    * @param request - The request {@link GetDNSStageRequest}
    * @returns A Promise of DNSStage
@@ -424,8 +404,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update DNS stage. Update the parameters of an existing DNS stage, specified
-   * by its `dns_stage_id`.
+   * Update DNS stage. Update the parameters of an existing DNS stage, specified by its `dns_stage_id`.
    *
    * @param request - The request {@link UpdateDNSStageRequest}
    * @returns A Promise of DNSStage
@@ -444,8 +423,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete DNS stage. Delete an existing DNS stage, specified by its
-   * `dns_stage_id`. Deleting a DNS stage is permanent, and cannot be undone.
+   * Delete DNS stage. Delete an existing DNS stage, specified by its `dns_stage_id`. Deleting a DNS stage is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteDNSStageRequest}
    */
@@ -475,10 +453,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List TLS stages. List all TLS stages, for a Scaleway Organization or
-   * Scaleway Project. By default, the TLS stages returned in the list are
-   * ordered by creation date in ascending order, though this can be modified
-   * via the `order_by` field.
+   * List TLS stages. List all TLS stages, for a Scaleway Organization or Scaleway Project. By default, the TLS stages returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListTLSStagesRequest}
    * @returns A Promise of ListTLSStagesResponse
@@ -487,12 +462,7 @@ export class API extends ParentAPI {
     enrichForPagination('stages', this.pageOfListTLSStages, request)
 
   /**
-   * Create TLS stage. Create a new TLS stage. You must specify either the
-   * `secrets` or `managed_certificate` fields to customize the SSL/TLS
-   * certificate of your endpoint. Choose `secrets` if you are using a
-   * pre-existing certificate held in Scaleway Secret Manager, or
-   * `managed_certificate` to let Scaleway generate and manage a Let's Encrypt
-   * certificate for your customized endpoint.
+   * Create TLS stage. Create a new TLS stage. You must specify either the `secrets` or `managed_certificate` fields to customize the SSL/TLS certificate of your endpoint. Choose `secrets` if you are using a pre-existing certificate held in Scaleway Secret Manager, or `managed_certificate` to let Scaleway generate and manage a Let's Encrypt certificate for your customized endpoint.
    *
    * @param request - The request {@link CreateTLSStageRequest}
    * @returns A Promise of TLSStage
@@ -511,9 +481,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get TLS stage. Retrieve information about an existing TLS stage, specified
-   * by its `tls_stage_id`. Its full details, including secrets and certificate
-   * expiration date are returned in the response object.
+   * Get TLS stage. Retrieve information about an existing TLS stage, specified by its `tls_stage_id`. Its full details, including secrets and certificate expiration date are returned in the response object.
    *
    * @param request - The request {@link GetTLSStageRequest}
    * @returns A Promise of TLSStage
@@ -528,9 +496,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update TLS stage. Update the parameters of an existing TLS stage, specified
-   * by its `tls_stage_id`. Both `tls_secrets_config` and `managed_certificate`
-   * parameters can be updated.
+   * Update TLS stage. Update the parameters of an existing TLS stage, specified by its `tls_stage_id`. Both `tls_secrets_config` and `managed_certificate` parameters can be updated.
    *
    * @param request - The request {@link UpdateTLSStageRequest}
    * @returns A Promise of TLSStage
@@ -549,8 +515,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete TLS stage. Delete an existing TLS stage, specified by its
-   * `tls_stage_id`. Deleting a TLS stage is permanent, and cannot be undone.
+   * Delete TLS stage. Delete an existing TLS stage, specified by its `tls_stage_id`. Deleting a TLS stage is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteTLSStageRequest}
    */
@@ -580,10 +545,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List cache stages. List all cache stages, for a Scaleway Organization or
-   * Scaleway Project. By default, the cache stages returned in the list are
-   * ordered by creation date in ascending order, though this can be modified
-   * via the `order_by` field.
+   * List cache stages. List all cache stages, for a Scaleway Organization or Scaleway Project. By default, the cache stages returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListCacheStagesRequest}
    * @returns A Promise of ListCacheStagesResponse
@@ -592,8 +554,7 @@ export class API extends ParentAPI {
     enrichForPagination('stages', this.pageOfListCacheStages, request)
 
   /**
-   * Create cache stage. Create a new cache stage. You must specify the
-   * `fallback_ttl` field to customize the TTL of the cache.
+   * Create cache stage. Create a new cache stage. You must specify the `fallback_ttl` field to customize the TTL of the cache.
    *
    * @param request - The request {@link CreateCacheStageRequest}
    * @returns A Promise of CacheStage
@@ -612,9 +573,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get cache stage. Retrieve information about an existing cache stage,
-   * specified by its `cache_stage_id`. Its full details, including Time To Live
-   * (TTL), are returned in the response object.
+   * Get cache stage. Retrieve information about an existing cache stage, specified by its `cache_stage_id`. Its full details, including Time To Live (TTL), are returned in the response object.
    *
    * @param request - The request {@link GetCacheStageRequest}
    * @returns A Promise of CacheStage
@@ -629,9 +588,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update cache stage. Update the parameters of an existing cache stage,
-   * specified by its `cache_stage_id`. Parameters which can be updated include
-   * the `fallback_ttl` and `backend_stage_id`.
+   * Update cache stage. Update the parameters of an existing cache stage, specified by its `cache_stage_id`. Parameters which can be updated include the `fallback_ttl` and `backend_stage_id`.
    *
    * @param request - The request {@link UpdateCacheStageRequest}
    * @returns A Promise of CacheStage
@@ -650,9 +607,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete cache stage. Delete an existing cache stage, specified by its
-   * `cache_stage_id`. Deleting a cache stage is permanent, and cannot be
-   * undone.
+   * Delete cache stage. Delete an existing cache stage, specified by its `cache_stage_id`. Deleting a cache stage is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteCacheStageRequest}
    */
@@ -685,10 +640,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List backend stages. List all backend stages, for a Scaleway Organization
-   * or Scaleway Project. By default, the backend stages returned in the list
-   * are ordered by creation date in ascending order, though this can be
-   * modified via the `order_by` field.
+   * List backend stages. List all backend stages, for a Scaleway Organization or Scaleway Project. By default, the backend stages returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListBackendStagesRequest}
    * @returns A Promise of ListBackendStagesResponse
@@ -697,9 +649,7 @@ export class API extends ParentAPI {
     enrichForPagination('stages', this.pageOfListBackendStages, request)
 
   /**
-   * Create backend stage. Create a new backend stage. You must specify either a
-   * `scaleway_s3` (for a Scaleway Object Storage bucket) or `scaleway_lb` (for
-   * a Scaleway Load Balancer) field to configure the origin.
+   * Create backend stage. Create a new backend stage. You must specify either a `scaleway_s3` (for a Scaleway Object Storage bucket) or `scaleway_lb` (for a Scaleway Load Balancer) field to configure the origin.
    *
    * @param request - The request {@link CreateBackendStageRequest}
    * @returns A Promise of BackendStage
@@ -718,9 +668,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get backend stage. Retrieve information about an existing backend stage,
-   * specified by its `backend_stage_id`. Its full details, including
-   * `scaleway_s3` or `scaleway_lb`, are returned in the response object.
+   * Get backend stage. Retrieve information about an existing backend stage, specified by its `backend_stage_id`. Its full details, including `scaleway_s3` or `scaleway_lb`, are returned in the response object.
    *
    * @param request - The request {@link GetBackendStageRequest}
    * @returns A Promise of BackendStage
@@ -735,8 +683,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update backend stage. Update the parameters of an existing backend stage,
-   * specified by its `backend_stage_id`.
+   * Update backend stage. Update the parameters of an existing backend stage, specified by its `backend_stage_id`.
    *
    * @param request - The request {@link UpdateBackendStageRequest}
    * @returns A Promise of BackendStage
@@ -755,9 +702,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete backend stage. Delete an existing backend stage, specified by its
-   * `backend_stage_id`. Deleting a backend stage is permanent, and cannot be
-   * undone.
+   * Delete backend stage. Delete an existing backend stage, specified by its `backend_stage_id`. Deleting a backend stage is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteBackendStageRequest}
    */
@@ -785,10 +730,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List WAF stages. List all WAF stages, for a Scaleway Organization or
-   * Scaleway Project. By default, the WAF stages returned in the list are
-   * ordered by creation date in ascending order, though this can be modified
-   * via the `order_by` field.
+   * List WAF stages. List all WAF stages, for a Scaleway Organization or Scaleway Project. By default, the WAF stages returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListWafStagesRequest}
    * @returns A Promise of ListWafStagesResponse
@@ -797,8 +739,7 @@ export class API extends ParentAPI {
     enrichForPagination('stages', this.pageOfListWafStages, request)
 
   /**
-   * Create WAF stage. Create a new WAF stage. You must specify the `mode` and
-   * `paranoia_level` fields to customize the WAF.
+   * Create WAF stage. Create a new WAF stage. You must specify the `mode` and `paranoia_level` fields to customize the WAF.
    *
    * @param request - The request {@link CreateWafStageRequest}
    * @returns A Promise of WafStage
@@ -817,9 +758,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get WAF stage. Retrieve information about an existing WAF stage, specified
-   * by its `waf_stage_id`. Its full details are returned in the response
-   * object.
+   * Get WAF stage. Retrieve information about an existing WAF stage, specified by its `waf_stage_id`. Its full details are returned in the response object.
    *
    * @param request - The request {@link GetWafStageRequest}
    * @returns A Promise of WafStage
@@ -834,9 +773,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update WAF stage. Update the parameters of an existing WAF stage, specified
-   * by its `waf_stage_id`. Both `mode` and `paranoia_level` parameters can be
-   * updated.
+   * Update WAF stage. Update the parameters of an existing WAF stage, specified by its `waf_stage_id`. Both `mode` and `paranoia_level` parameters can be updated.
    *
    * @param request - The request {@link UpdateWafStageRequest}
    * @returns A Promise of WafStage
@@ -855,8 +792,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete WAF stage. Delete an existing WAF stage, specified by its
-   * `waf_stage_id`. Deleting a WAF stage is permanent, and cannot be undone.
+   * Delete WAF stage. Delete an existing WAF stage, specified by its `waf_stage_id`. Deleting a WAF stage is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteWafStageRequest}
    */
@@ -886,9 +822,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List route stages. List all route stages, for a given pipeline. By default,
-   * the route stages returned in the list are ordered by creation date in
-   * ascending order, though this can be modified via the `order_by` field.
+   * List route stages. List all route stages, for a given pipeline. By default, the route stages returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListRouteStagesRequest}
    * @returns A Promise of ListRouteStagesResponse
@@ -897,8 +831,7 @@ export class API extends ParentAPI {
     enrichForPagination('stages', this.pageOfListRouteStages, request)
 
   /**
-   * Create route stage. Create a new route stage. You must specify the
-   * `waf_stage_id` field to customize the route.
+   * Create route stage. Create a new route stage. You must specify the `waf_stage_id` field to customize the route.
    *
    * @param request - The request {@link CreateRouteStageRequest}
    * @returns A Promise of RouteStage
@@ -917,9 +850,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get route stage. Retrieve information about an existing route stage,
-   * specified by its `route_stage_id`. The summary of the route stage (without
-   * route rules) is returned in the response object.
+   * Get route stage. Retrieve information about an existing route stage, specified by its `route_stage_id`. The summary of the route stage (without route rules) is returned in the response object.
    *
    * @param request - The request {@link GetRouteStageRequest}
    * @returns A Promise of RouteStage
@@ -934,8 +865,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update route stage. Update the parameters of an existing route stage,
-   * specified by its `route_stage_id`.
+   * Update route stage. Update the parameters of an existing route stage, specified by its `route_stage_id`.
    *
    * @param request - The request {@link UpdateRouteStageRequest}
    * @returns A Promise of RouteStage
@@ -954,9 +884,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete route stage. Delete an existing route stage, specified by its
-   * `route_stage_id`. Deleting a route stage is permanent, and cannot be
-   * undone.
+   * Delete route stage. Delete an existing route stage, specified by its `route_stage_id`. Deleting a route stage is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteRouteStageRequest}
    */
@@ -967,8 +895,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * List route rules. List all route rules of an existing route stage,
-   * specified by its `route_stage_id`.
+   * List route rules. List all route rules of an existing route stage, specified by its `route_stage_id`.
    *
    * @param request - The request {@link ListRouteRulesRequest}
    * @returns A Promise of ListRouteRulesResponse
@@ -983,8 +910,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set route rules. Set the rules of an existing route stage, specified by its
-   * `route_stage_id`.
+   * Set route rules. Set the rules of an existing route stage, specified by its `route_stage_id`.
    *
    * @param request - The request {@link SetRouteRulesRequest}
    * @returns A Promise of SetRouteRulesResponse
@@ -1003,8 +929,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Add route rules. Add route rules to an existing route stage, specified by
-   * its `route_stage_id`.
+   * Add route rules. Add route rules to an existing route stage, specified by its `route_stage_id`.
    *
    * @param request - The request {@link AddRouteRulesRequest}
    * @returns A Promise of AddRouteRulesResponse
@@ -1095,11 +1020,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List purge requests. List all purge requests, for a Scaleway Organization
-   * or Scaleway Project. This enables you to retrieve a history of all
-   * previously-made purge requests. By default, the purge requests returned in
-   * the list are ordered by creation date in ascending order, though this can
-   * be modified via the `order_by` field.
+   * List purge requests. List all purge requests, for a Scaleway Organization or Scaleway Project. This enables you to retrieve a history of all previously-made purge requests. By default, the purge requests returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListPurgeRequestsRequest}
    * @returns A Promise of ListPurgeRequestsResponse
@@ -1108,9 +1029,7 @@ export class API extends ParentAPI {
     enrichForPagination('purgeRequests', this.pageOfListPurgeRequests, request)
 
   /**
-   * Create purge request. Create a new purge request. You must specify either
-   * the `all` field (to purge all content) or a list of `assets` (to define the
-   * precise assets to purge).
+   * Create purge request. Create a new purge request. You must specify either the `all` field (to purge all content) or a list of `assets` (to define the precise assets to purge).
    *
    * @param request - The request {@link CreatePurgeRequestRequest}
    * @returns A Promise of PurgeRequest
@@ -1129,9 +1048,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get purge request. Retrieve information about a purge request, specified by
-   * its `purge_request_id`. Its full details, including `status` and `target`,
-   * are returned in the response object.
+   * Get purge request. Retrieve information about a purge request, specified by its `purge_request_id`. Its full details, including `status` and `target`, are returned in the response object.
    *
    * @param request - The request {@link GetPurgeRequestRequest}
    * @returns A Promise of PurgeRequest
@@ -1220,10 +1137,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Gives information on the currently selected Edge Services subscription
-   * plan, resource usage and associated billing information for this calendar
-   * month (including whether consumption falls within or exceeds the currently
-   * selected subscription plan.).
+   * Gives information on the currently selected Edge Services subscription plan, resource usage and associated billing information for this calendar month (including whether consumption falls within or exceeds the currently selected subscription plan.).
    *
    * @param request - The request {@link GetBillingRequest}
    * @returns A Promise of GetBillingResponse
