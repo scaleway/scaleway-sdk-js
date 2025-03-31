@@ -14,7 +14,6 @@ import {
   marshalCreateVPCRequest,
   marshalDeleteSubnetsRequest,
   marshalSetAclRequest,
-  marshalSetSubnetsRequest,
   marshalUpdatePrivateNetworkRequest,
   marshalUpdateRouteRequest,
   marshalUpdateVPCRequest,
@@ -27,7 +26,6 @@ import {
   unmarshalPrivateNetwork,
   unmarshalRoute,
   unmarshalSetAclResponse,
-  unmarshalSetSubnetsResponse,
   unmarshalVPC,
 } from './marshalling.gen'
 import type {
@@ -58,8 +56,6 @@ import type {
   Route,
   SetAclRequest,
   SetAclResponse,
-  SetSubnetsRequest,
-  SetSubnetsResponse,
   UpdatePrivateNetworkRequest,
   UpdateRouteRequest,
   UpdateVPCRequest,
@@ -360,27 +356,6 @@ export class API extends ParentAPI {
    */
   listSubnets = (request: Readonly<ListSubnetsRequest> = {}) =>
     enrichForPagination('subnets', this.pageOfListSubnets, request)
-
-  /**
-   * Set a Private Network's subnets. Set subnets for an existing Private
-   * Network. Note that the method is PUT and not PATCH. Any existing subnets
-   * will be removed in favor of the new specified set of subnets.
-   *
-   * @param request - The request {@link SetSubnetsRequest}
-   * @returns A Promise of SetSubnetsResponse
-   */
-  setSubnets = (request: Readonly<SetSubnetsRequest>) =>
-    this.client.fetch<SetSubnetsResponse>(
-      {
-        body: JSON.stringify(
-          marshalSetSubnetsRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'PUT',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/subnets`,
-      },
-      unmarshalSetSubnetsResponse,
-    )
 
   /**
    * Add subnets to a Private Network. Add new subnets to an existing Private
