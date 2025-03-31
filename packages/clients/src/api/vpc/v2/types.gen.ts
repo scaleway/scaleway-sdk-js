@@ -500,22 +500,6 @@ export interface SetAclResponse {
   defaultPolicy: Action
 }
 
-export type SetSubnetsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the
-   * config.
-   */
-  region?: ScwRegion
-  /** Private Network ID. */
-  privateNetworkId: string
-  /** Private Network subnets CIDR. */
-  subnets?: string[]
-}
-
-export interface SetSubnetsResponse {
-  subnets: string[]
-}
-
 export type UpdatePrivateNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the
