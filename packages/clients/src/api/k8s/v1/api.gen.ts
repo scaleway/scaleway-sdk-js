@@ -100,8 +100,8 @@ const jsonContentHeaders = {
 
 /**
  * Kubernetes API.
- *
- * This API allows you to manage Kubernetes Kapsule and Kosmos clusters.
+
+This API allows you to manage Kubernetes Kapsule and Kosmos clusters.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -202,9 +202,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a Cluster. Update information on a specific Kubernetes cluster. You
-   * can update details such as its name, description, tags and configuration.
-   * To upgrade a cluster, you will need to use the dedicated endpoint.
+   * Update a Cluster. Update information on a specific Kubernetes cluster. You can update details such as its name, description, tags and configuration. To upgrade a cluster, you will need to use the dedicated endpoint.
    *
    * @param request - The request {@link UpdateClusterRequest}
    * @returns A Promise of Cluster
@@ -223,9 +221,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a Cluster. Delete a specific Kubernetes cluster and all its
-   * associated pools and nodes, and possibly its associated Load Balancers or
-   * Block Volumes.
+   * Delete a Cluster. Delete a specific Kubernetes cluster and all its associated pools and nodes, and possibly its associated Load Balancers or Block Volumes.
    *
    * @param request - The request {@link DeleteClusterRequest}
    * @returns A Promise of Cluster
@@ -244,8 +240,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Upgrade a Cluster. Upgrade a specific Kubernetes cluster and possibly its
-   * associated pools to a specific and supported Kubernetes version.
+   * Upgrade a Cluster. Upgrade a specific Kubernetes cluster and possibly its associated pools to a specific and supported Kubernetes version.
    *
    * @param request - The request {@link UpgradeClusterRequest}
    * @returns A Promise of Cluster
@@ -264,9 +259,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Change the Cluster type. Change the type of a specific Kubernetes cluster.
-   * To see the possible values you can enter for the `type` field, [list
-   * available cluster types](#list-available-cluster-types-for-a-cluster).
+   * Change the Cluster type. Change the type of a specific Kubernetes cluster. To see the possible values you can enter for the `type` field, [list available cluster types](#list-available-cluster-types-for-a-cluster).
    *
    * @param request - The request {@link SetClusterTypeRequest}
    * @returns A Promise of Cluster
@@ -285,11 +278,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List available versions for a Cluster. List the versions that a specific
-   * Kubernetes cluster is allowed to upgrade to. Results will include every
-   * patch version greater than the current patch, as well as one minor version
-   * ahead of the current version. Any upgrade skipping a minor version will not
-   * work.
+   * List available versions for a Cluster. List the versions that a specific Kubernetes cluster is allowed to upgrade to. Results will include every patch version greater than the current patch, as well as one minor version ahead of the current version. Any upgrade skipping a minor version will not work.
    *
    * @param request - The request {@link ListClusterAvailableVersionsRequest}
    * @returns A Promise of ListClusterAvailableVersionsResponse
@@ -306,8 +295,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List available cluster types for a cluster. List the cluster types that a
-   * specific Kubernetes cluster is allowed to switch to.
+   * List available cluster types for a cluster. List the cluster types that a specific Kubernetes cluster is allowed to switch to.
    *
    * @param request - The request {@link ListClusterAvailableTypesRequest}
    * @returns A Promise of ListClusterAvailableTypesResponse
@@ -334,10 +322,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Reset the admin token of a Cluster. Reset the admin token for a specific
-   * Kubernetes cluster. This will revoke the old admin token (which will not be
-   * usable afterwards) and create a new one. Note that you will need to
-   * download the kubeconfig again to keep interacting with the cluster.
+   * Reset the admin token of a Cluster. Reset the admin token for a specific Kubernetes cluster. This will revoke the old admin token (which will not be usable afterwards) and create a new one. Note that you will need to download the kubeconfig again to keep interacting with the cluster.
    *
    * @param request - The request {@link ResetClusterAdminTokenRequest}
    */
@@ -350,10 +335,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Migrate a cluster to SBS CSI. Enable the latest CSI compatible with
-   * Scaleway Block Storage (SBS) and migrate all existing
-   * PersistentVolumes/VolumeSnapshotContents to SBS. Make sure to have the
-   * necessary Quota before running this command.
+   * Migrate a cluster to SBS CSI. Enable the latest CSI compatible with Scaleway Block Storage (SBS) and migrate all existing PersistentVolumes/VolumeSnapshotContents to SBS.
+Make sure to have the necessary Quota before running this command.
    *
    * @param request - The request {@link MigrateClusterToSBSCSIRequest}
    * @returns A Promise of Cluster
@@ -465,8 +448,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Pools in a Cluster. List all the existing pools for a specific
-   * Kubernetes cluster.
+   * List Pools in a Cluster. List all the existing pools for a specific Kubernetes cluster.
    *
    * @param request - The request {@link ListPoolsRequest}
    * @returns A Promise of ListPoolsResponse
@@ -475,8 +457,7 @@ export class API extends ParentAPI {
     enrichForPagination('pools', this.pageOfListPools, request)
 
   /**
-   * Create a new Pool in a Cluster. Create a new pool in a specific Kubernetes
-   * cluster.
+   * Create a new Pool in a Cluster. Create a new pool in a specific Kubernetes cluster.
    *
    * @param request - The request {@link CreatePoolRequest}
    * @returns A Promise of Pool
@@ -495,8 +476,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a Pool in a Cluster. Retrieve details about a specific pool in a
-   * Kubernetes cluster.
+   * Get a Pool in a Cluster. Retrieve details about a specific pool in a Kubernetes cluster.
    *
    * @param request - The request {@link GetPoolRequest}
    * @returns A Promise of Pool
@@ -531,9 +511,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Upgrade a Pool in a Cluster. Upgrade the Kubernetes version of a specific
-   * pool. Note that it only works if the targeted version matches the cluster's
-   * version. This will drain and replace the nodes in that pool.
+   * Upgrade a Pool in a Cluster. Upgrade the Kubernetes version of a specific pool. Note that it only works if the targeted version matches the cluster's version.
+This will drain and replace the nodes in that pool.
    *
    * @param request - The request {@link UpgradePoolRequest}
    * @returns A Promise of Pool
@@ -552,9 +531,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a Pool in a Cluster. Update the attributes of a specific pool, such
-   * as its desired size, autoscaling settings, and tags. To upgrade a pool, you
-   * will need to use the dedicated endpoint.
+   * Update a Pool in a Cluster. Update the attributes of a specific pool, such as its desired size, autoscaling settings, and tags. To upgrade a pool, you will need to use the dedicated endpoint.
    *
    * @param request - The request {@link UpdatePoolRequest}
    * @returns A Promise of Pool
@@ -573,8 +550,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a Pool in a Cluster. Delete a specific pool from a cluster. Note
-   * that all the pool's nodes will also be deleted.
+   * Delete a Pool in a Cluster. Delete a specific pool from a cluster. Note that all the pool's nodes will also be deleted.
    *
    * @param request - The request {@link DeletePoolRequest}
    * @returns A Promise of Pool
@@ -589,9 +565,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Fetch node metadata. Rerieve metadata to instantiate a Kapsule/Kosmos node.
-   * This method is not intended to be called by end users but rather
-   * programmatically by the node-installer.
+   * Fetch node metadata. Rerieve metadata to instantiate a Kapsule/Kosmos node. This method is not intended to be called by end users but rather programmatically by the node-installer.
    *
    * @param request - The request {@link GetNodeMetadataRequest}
    * @returns A Promise of NodeMetadata
@@ -606,9 +580,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Authenticate Kosmos external node. Creates a newer Kosmos node and returns
-   * its token. This method is not intended to be called by end users but rather
-   * programmatically by the node-installer.
+   * Authenticate Kosmos external node. Creates a newer Kosmos node and returns its token. This method is not intended to be called by end users but rather programmatically by the node-installer.
    *
    * @param request - The request {@link AuthExternalNodeRequest}
    * @returns A Promise of ExternalNodeAuth
@@ -625,9 +597,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a Kosmos node. Retrieve metadata for a Kosmos node. This method is
-   * not intended to be called by end users but rather programmatically by the
-   * kapsule-node-agent.
+   * Create a Kosmos node. Retrieve metadata for a Kosmos node. This method is not intended to be called by end users but rather programmatically by the kapsule-node-agent.
    *
    * @param request - The request {@link CreateExternalNodeRequest}
    * @returns A Promise of ExternalNode
@@ -664,8 +634,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Nodes in a Cluster. List all the existing nodes for a specific
-   * Kubernetes cluster.
+   * List Nodes in a Cluster. List all the existing nodes for a specific Kubernetes cluster.
    *
    * @param request - The request {@link ListNodesRequest}
    * @returns A Promise of ListNodesResponse
@@ -709,11 +678,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Replace a Node in a Cluster. Replace a specific Node. The node will first
-   * be drained and pods will be rescheduled onto another node. Note that when
-   * there is not enough space to reschedule all the pods (such as in a one-node
-   * cluster, or with specific constraints), disruption of your applications may
-   * occur.
+   * Replace a Node in a Cluster. Replace a specific Node. The node will first be drained and pods will be rescheduled onto another node. Note that when there is not enough space to reschedule all the pods (such as in a one-node cluster, or with specific constraints), disruption of your applications may occur.
    *
    * @deprecated
    * @param request - The request {@link ReplaceNodeRequest}
@@ -731,11 +696,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Reboot a Node in a Cluster. Reboot a specific Node. The node will first be
-   * drained and pods will be rescheduled onto another node. Note that when
-   * there is not enough space to reschedule all the pods (such as in a one-node
-   * cluster, or with specific constraints), disruption of your applications may
-   * occur.
+   * Reboot a Node in a Cluster. Reboot a specific Node. The node will first be drained and pods will be rescheduled onto another node. Note that when there is not enough space to reschedule all the pods (such as in a one-node cluster, or with specific constraints), disruption of your applications may occur.
    *
    * @param request - The request {@link RebootNodeRequest}
    * @returns A Promise of Node
@@ -752,11 +713,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a Node in a Cluster. Delete a specific Node. The node will first be
-   * drained and pods will be rescheduled onto another node. Note that when
-   * there is not enough space to reschedule all the pods (such as in a one-node
-   * cluster, or with specific constraints), disruption of your applications may
-   * occur.
+   * Delete a Node in a Cluster. Delete a specific Node. The node will first be drained and pods will be rescheduled onto another node. Note that when there is not enough space to reschedule all the pods (such as in a one-node cluster, or with specific constraints), disruption of your applications may occur.
    *
    * @param request - The request {@link DeleteNodeRequest}
    * @returns A Promise of Node
@@ -775,8 +732,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all available Versions. List all available versions for the creation
-   * of a new Kubernetes cluster.
+   * List all available Versions. List all available versions for the creation of a new Kubernetes cluster.
    *
    * @param request - The request {@link ListVersionsRequest}
    * @returns A Promise of ListVersionsResponse
@@ -824,8 +780,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List cluster types. List available cluster types and their technical
-   * details.
+   * List cluster types. List available cluster types and their technical details.
    *
    * @param request - The request {@link ListClusterTypesRequest}
    * @returns A Promise of ListClusterTypesResponse

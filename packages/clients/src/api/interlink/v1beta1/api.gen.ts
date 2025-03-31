@@ -71,9 +71,8 @@ const jsonContentHeaders = {
 
 /**
  * InterLink API.
- *
- * This API allows you to manage your Scaleway InterLink, to connect your
- * on-premises infrastructure with your Scaleway VPC.
+
+This API allows you to manage your Scaleway InterLink, to connect your on-premises infrastructure with your Scaleway VPC.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -110,10 +109,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List dedicated connections. For self-hosted users, list their dedicated
-   * physical connections in a given region. By default, the connections
-   * returned in the list are ordered by name in ascending order, though this
-   * can be modified via the `order_by` field.
+   * List dedicated connections. For self-hosted users, list their dedicated physical connections in a given region. By default, the connections returned in the list are ordered by name in ascending order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListDedicatedConnectionsRequest}
    * @returns A Promise of ListDedicatedConnectionsResponse
@@ -128,9 +124,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a dedicated connection. For self-hosted users, get a dedicated physical
-   * connection corresponding to the given ID. The response object includes
-   * information such as the connection's name, status and total bandwidth.
+   * Get a dedicated connection. For self-hosted users, get a dedicated physical connection corresponding to the given ID. The response object includes information such as the connection's name, status and total bandwidth.
    *
    * @param request - The request {@link GetDedicatedConnectionRequest}
    * @returns A Promise of DedicatedConnection
@@ -189,9 +183,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List available partners. List all available partners. By default, the
-   * partners returned in the list are ordered by name in ascending order,
-   * though this can be modified via the `order_by` field.
+   * List available partners. List all available partners. By default, the partners returned in the list are ordered by name in ascending order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListPartnersRequest}
    * @returns A Promise of ListPartnersResponse
@@ -200,9 +192,7 @@ export class API extends ParentAPI {
     enrichForPagination('partners', this.pageOfListPartners, request)
 
   /**
-   * Get a partner. Get a partner for the given partner IP. The response object
-   * includes information such as the partner's name, email address and portal
-   * URL.
+   * Get a partner. Get a partner for the given partner IP. The response object includes information such as the partner's name, email address and portal URL.
    *
    * @param request - The request {@link GetPartnerRequest}
    * @returns A Promise of Partner
@@ -239,8 +229,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List PoPs. List all available PoPs (locations) for a given region. By
-   * default, the results are returned in ascending alphabetical order by name.
+   * List PoPs. List all available PoPs (locations) for a given region. By default, the results are returned in ascending alphabetical order by name.
    *
    * @param request - The request {@link ListPopsRequest}
    * @returns A Promise of ListPopsResponse
@@ -249,8 +238,7 @@ export class API extends ParentAPI {
     enrichForPagination('pops', this.pageOfListPops, request)
 
   /**
-   * Get a PoP. Get a PoP for the given PoP ID. The response object includes the
-   * PoP's name and information about its physical location.
+   * Get a PoP. Get a PoP for the given PoP ID. The response object includes the PoP's name and information about its physical location.
    *
    * @param request - The request {@link GetPopRequest}
    * @returns A Promise of Pop
@@ -297,8 +285,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List links. List all your links (InterLink connections). A number of
-   * filters are available, including Project ID, name, tags and status.
+   * List links. List all your links (InterLink connections). A number of filters are available, including Project ID, name, tags and status.
    *
    * @param request - The request {@link ListLinksRequest}
    * @returns A Promise of ListLinksResponse
@@ -307,9 +294,7 @@ export class API extends ParentAPI {
     enrichForPagination('links', this.pageOfListLinks, request)
 
   /**
-   * Get a link. Get a link (InterLink session / logical InterLink resource) for
-   * the given link ID. The response object includes information about the
-   * link's various configuration details.
+   * Get a link. Get a link (InterLink session / logical InterLink resource) for the given link ID. The response object includes information about the link's various configuration details.
    *
    * @param request - The request {@link GetLinkRequest}
    * @returns A Promise of Link
@@ -346,11 +331,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a link. Create a link (InterLink session / logical InterLink
-   * resource) in a given PoP, specifying its various configuration details.
-   * Links can either be hosted (faciliated by partners' shared physical
-   * connections) or self-hosted (for users who have purchased a dedicated
-   * physical connection).
+   * Create a link. Create a link (InterLink session / logical InterLink resource) in a given PoP, specifying its various configuration details. Links can either be hosted (faciliated by partners' shared physical connections) or self-hosted (for users who have purchased a dedicated physical connection).
    *
    * @param request - The request {@link CreateLinkRequest}
    * @returns A Promise of Link
@@ -369,8 +350,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a link. Update an existing link, specified by its link ID. Only its
-   * name and tags can be updated.
+   * Update a link. Update an existing link, specified by its link ID. Only its name and tags can be updated.
    *
    * @param request - The request {@link UpdateLinkRequest}
    * @returns A Promise of Link
@@ -389,11 +369,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a link. Delete an existing link, specified by its link ID. Note that
-   * as well as deleting the link here on the Scaleway side, it is also
-   * necessary to request deletion from the partner on their side. Only when
-   * this action has been carried out on both sides will the resource be
-   * completely deleted.
+   * Delete a link. Delete an existing link, specified by its link ID. Note that as well as deleting the link here on the Scaleway side, it is also necessary to request deletion from the partner on their side. Only when this action has been carried out on both sides will the resource be completely deleted.
    *
    * @param request - The request {@link DeleteLinkRequest}
    * @returns A Promise of Link
@@ -408,9 +384,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Attach a VPC. Attach a VPC to an existing link. This facilitates
-   * communication between the resources in your Scaleway VPC, and your
-   * on-premises infrastructure.
+   * Attach a VPC. Attach a VPC to an existing link. This facilitates communication between the resources in your Scaleway VPC, and your on-premises infrastructure.
    *
    * @param request - The request {@link AttachVpcRequest}
    * @returns A Promise of Link
@@ -446,10 +420,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Attach a routing policy. Attach a routing policy to an existing link. As
-   * all routes across the link are blocked by default, you must attach a
-   * routing policy to set IP prefix filters for allowed routes, facilitating
-   * traffic flow.
+   * Attach a routing policy. Attach a routing policy to an existing link. As all routes across the link are blocked by default, you must attach a routing policy to set IP prefix filters for allowed routes, facilitating traffic flow.
    *
    * @param request - The request {@link AttachRoutingPolicyRequest}
    * @returns A Promise of Link
@@ -468,9 +439,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Detach a routing policy. Detach a routing policy from an existing link.
-   * Without a routing policy, all routes across the link are blocked by
-   * default.
+   * Detach a routing policy. Detach a routing policy from an existing link. Without a routing policy, all routes across the link are blocked by default.
    *
    * @param request - The request {@link DetachRoutingPolicyRequest}
    * @returns A Promise of Link
@@ -487,12 +456,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Enable route propagation. Enable all allowed prefixes (defined in a routing
-   * policy) to be announced in the BGP session. This allows traffic to flow
-   * between the attached VPC and the on-premises infrastructure along the
-   * announced routes. Note that by default, even when route propagation is
-   * enabled, all routes are blocked. It is essential to attach a routing policy
-   * to define the ranges of routes to announce.
+   * Enable route propagation. Enable all allowed prefixes (defined in a routing policy) to be announced in the BGP session. This allows traffic to flow between the attached VPC and the on-premises infrastructure along the announced routes. Note that by default, even when route propagation is enabled, all routes are blocked. It is essential to attach a routing policy to define the ranges of routes to announce.
    *
    * @param request - The request {@link EnableRoutePropagationRequest}
    * @returns A Promise of Link
@@ -509,9 +473,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Disable route propagation. Prevent any prefixes from being announced in the
-   * BGP session. Traffic will not be able to flow over the InterLink until
-   * route propagation is re-enabled.
+   * Disable route propagation. Prevent any prefixes from being announced in the BGP session. Traffic will not be able to flow over the InterLink until route propagation is re-enabled.
    *
    * @param request - The request {@link DisableRoutePropagationRequest}
    * @returns A Promise of Link
@@ -553,9 +515,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List routing policies. List all routing policies in a given region. A
-   * routing policy can be attached to one or multiple links (InterLink
-   * connections).
+   * List routing policies. List all routing policies in a given region. A routing policy can be attached to one or multiple links (InterLink connections).
    *
    * @param request - The request {@link ListRoutingPoliciesRequest}
    * @returns A Promise of ListRoutingPoliciesResponse
@@ -568,9 +528,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get routing policy. Get a routing policy for the given routing policy ID.
-   * The response object gives information including the policy's name, tags and
-   * prefix filters.
+   * Get routing policy. Get a routing policy for the given routing policy ID. The response object gives information including the policy's name, tags and prefix filters.
    *
    * @param request - The request {@link GetRoutingPolicyRequest}
    * @returns A Promise of RoutingPolicy
@@ -585,9 +543,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a routing policy. Create a routing policy. Routing policies allow
-   * you to set IP prefix filters to define the incoming route announcements to
-   * accept from the peer, and the outgoing routes to announce to the peer.
+   * Create a routing policy. Create a routing policy. Routing policies allow you to set IP prefix filters to define the incoming route announcements to accept from the peer, and the outgoing routes to announce to the peer.
    *
    * @param request - The request {@link CreateRoutingPolicyRequest}
    * @returns A Promise of RoutingPolicy
@@ -606,9 +562,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a routing policy. Update an existing routing policy, specified by
-   * its routing policy ID. Its name, tags and incoming/outgoing prefix filters
-   * can be updated.
+   * Update a routing policy. Update an existing routing policy, specified by its routing policy ID. Its name, tags and incoming/outgoing prefix filters can be updated.
    *
    * @param request - The request {@link UpdateRoutingPolicyRequest}
    * @returns A Promise of RoutingPolicy
@@ -627,8 +581,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a routing policy. Delete an existing routing policy, specified by
-   * its routing policy ID.
+   * Delete a routing policy. Delete an existing routing policy, specified by its routing policy ID.
    *
    * @param request - The request {@link DeleteRoutingPolicyRequest}
    */

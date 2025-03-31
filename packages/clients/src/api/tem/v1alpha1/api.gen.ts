@@ -95,18 +95,15 @@ const jsonContentHeaders = {
 
 /**
  * Transactional Email API.
- *
- * This API allows you to manage your Transactional Email services.
+
+This API allows you to manage your Transactional Email services.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: ScwRegion[] = ['fr-par']
 
   /**
-   * Send an email. You must specify the `region`, the sender and the
-   * recipient's information and the `project_id` to send an email from a
-   * checked domain. The subject of the email must contain at least 6
-   * characters.
+   * Send an email. You must specify the `region`, the sender and the recipient's information and the `project_id` to send an email from a checked domain. The subject of the email must contain at least 6 characters.
    *
    * @param request - The request {@link CreateEmailRequest}
    * @returns A Promise of CreateEmailResponse
@@ -125,8 +122,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get an email. Retrieve information about a specific email using the
-   * `email_id` and `region` parameters.
+   * Get an email. Retrieve information about a specific email using the `email_id` and `region` parameters.
    *
    * @param request - The request {@link GetEmailRequest}
    * @returns A Promise of Email
@@ -190,8 +186,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List emails. Retrieve the list of emails sent from a specific domain or for
-   * a specific Project or Organization. You must specify the `region`.
+   * List emails. Retrieve the list of emails sent from a specific domain or for a specific Project or Organization. You must specify the `region`.
    *
    * @param request - The request {@link ListEmailsRequest}
    * @returns A Promise of ListEmailsResponse
@@ -222,9 +217,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Cancel an email. You can cancel the sending of an email if it has not been
-   * sent yet. You must specify the `region` and the `email_id` of the email you
-   * want to cancel.
+   * Cancel an email. You can cancel the sending of an email if it has not been sent yet. You must specify the `region` and the `email_id` of the email you want to cancel.
    *
    * @param request - The request {@link CancelEmailRequest}
    * @returns A Promise of Email
@@ -241,8 +234,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Register a domain in a project. You must specify the `region`, `project_id`
-   * and `domain_name` to register a domain in a specific Project.
+   * Register a domain in a project. You must specify the `region`, `project_id` and `domain_name` to register a domain in a specific Project.
    *
    * @param request - The request {@link CreateDomainRequest}
    * @returns A Promise of Domain
@@ -261,14 +253,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get information about a domain. Retrieve information about a specific
-   * domain using the `region` and `domain_id` parameters. Monitor your domain's
-   * reputation and improve **average** and **bad** reputation statuses, using
-   * your domain's **Email activity** tab on the [Scaleway
-   * console](https://console.scaleway.com/transactional-email/domains) to get a
-   * more detailed report. Check out our [dedicated
-   * documentation](https://www.scaleway.com/en/docs/managed-services/transactional-email/reference-content/understanding-tem-reputation-score/)
-   * to improve your domain's reputation.
+   * Get information about a domain. Retrieve information about a specific domain using the `region` and `domain_id` parameters. Monitor your domain's reputation and improve **average** and **bad** reputation statuses, using your domain's **Email activity** tab on the [Scaleway console](https://console.scaleway.com/transactional-email/domains) to get a more detailed report. Check out our [dedicated documentation](https://www.scaleway.com/en/docs/managed-services/transactional-email/reference-content/understanding-tem-reputation-score/) to improve your domain's reputation.
    *
    * @param request - The request {@link GetDomainRequest}
    * @returns A Promise of Domain
@@ -323,8 +308,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List domains. Retrieve domains in a specific Project or in a specific
-   * Organization using the `region` parameter.
+   * List domains. Retrieve domains in a specific Project or in a specific Organization using the `region` parameter.
    *
    * @param request - The request {@link ListDomainsRequest}
    * @returns A Promise of ListDomainsResponse
@@ -333,9 +317,7 @@ export class API extends ParentAPI {
     enrichForPagination('domains', this.pageOfListDomains, request)
 
   /**
-   * Delete a domain. You must specify the domain you want to delete by the
-   * `region` and `domain_id`. Deleting a domain is permanent and cannot be
-   * undone.
+   * Delete a domain. You must specify the domain you want to delete by the `region` and `domain_id`. Deleting a domain is permanent and cannot be undone.
    *
    * @param request - The request {@link RevokeDomainRequest}
    * @returns A Promise of Domain
@@ -352,8 +334,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Domain DNS check. Perform an immediate DNS check of a domain using the
-   * `region` and `domain_id` parameters.
+   * Domain DNS check. Perform an immediate DNS check of a domain using the `region` and `domain_id` parameters.
    *
    * @param request - The request {@link CheckDomainRequest}
    * @returns A Promise of Domain
@@ -370,9 +351,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Display SPF and DKIM records status and potential errors. Display SPF and
-   * DKIM records status and potential errors, including the found records to
-   * make debugging easier.
+   * Display SPF and DKIM records status and potential errors. Display SPF and DKIM records status and potential errors, including the found records to make debugging easier.
    *
    * @param request - The request {@link GetDomainLastStatusRequest}
    * @returns A Promise of DomainLastStatus
@@ -406,8 +385,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a Webhook. Create a new Webhook triggered by a list of event types
-   * and pushed to a Scaleway SNS ARN.
+   * Create a Webhook. Create a new Webhook triggered by a list of event types and pushed to a Scaleway SNS ARN.
    *
    * @param request - The request {@link CreateWebhookRequest}
    * @returns A Promise of Webhook
@@ -448,8 +426,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Webhooks. Retrieve Webhooks in a specific Project or in a specific
-   * Organization using the `region` parameter.
+   * List Webhooks. Retrieve Webhooks in a specific Project or in a specific Organization using the `region` parameter.
    *
    * @param request - The request {@link ListWebhooksRequest}
    * @returns A Promise of ListWebhooksResponse
@@ -458,8 +435,7 @@ export class API extends ParentAPI {
     enrichForPagination('webhooks', this.pageOfListWebhooks, request)
 
   /**
-   * Get information about a Webhook. Retrieve information about a specific
-   * Webhook using the `webhook_id` and `region` parameters.
+   * Get information about a Webhook. Retrieve information about a specific Webhook using the `webhook_id` and `region` parameters.
    *
    * @param request - The request {@link GetWebhookRequest}
    * @returns A Promise of Webhook
@@ -493,9 +469,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a Webhook. You must specify the Webhook you want to delete by the
-   * `region` and `webhook_id`. Deleting a Webhook is permanent and cannot be
-   * undone.
+   * Delete a Webhook. You must specify the Webhook you want to delete by the `region` and `webhook_id`. Deleting a Webhook is permanent and cannot be undone.
    *
    * @param request - The request {@link DeleteWebhookRequest}
    */
@@ -531,9 +505,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Webhook triggered events. Retrieve the list of Webhook events
-   * triggered from a specific Webhook or for a specific Project or
-   * Organization. You must specify the `region`.
+   * List Webhook triggered events. Retrieve the list of Webhook events triggered from a specific Webhook or for a specific Project or Organization. You must specify the `region`.
    *
    * @param request - The request {@link ListWebhookEventsRequest}
    * @returns A Promise of ListWebhookEventsResponse
@@ -542,8 +514,7 @@ export class API extends ParentAPI {
     enrichForPagination('webhookEvents', this.pageOfListWebhookEvents, request)
 
   /**
-   * List project settings. Retrieve the project settings including periodic
-   * reports.
+   * List project settings. Retrieve the project settings including periodic reports.
    *
    * @param request - The request {@link GetProjectSettingsRequest}
    * @returns A Promise of ProjectSettings
@@ -558,8 +529,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update project settings. Update the project settings including periodic
-   * reports.
+   * Update project settings. Update the project settings including periodic reports.
    *
    * @param request - The request {@link UpdateProjectSettingsRequest}
    * @returns A Promise of ProjectSettings
@@ -610,8 +580,7 @@ export class API extends ParentAPI {
     enrichForPagination('blocklists', this.pageOfListBlocklists, request)
 
   /**
-   * Bulk create blocklists. Create multiple blocklists in a specific Project or
-   * Organization using the `region` parameter.
+   * Bulk create blocklists. Create multiple blocklists in a specific Project or Organization using the `region` parameter.
    *
    * @param request - The request {@link BulkCreateBlocklistsRequest}
    * @returns A Promise of BulkCreateBlocklistsResponse
@@ -630,8 +599,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a blocklist. You must specify the blocklist you want to delete by
-   * the `region` and `blocklist_id`.
+   * Delete a blocklist. You must specify the blocklist you want to delete by the `region` and `blocklist_id`.
    *
    * @param request - The request {@link DeleteBlocklistRequest}
    */
@@ -642,9 +610,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Get information about subscribed offers. Retrieve information about the
-   * offers you are subscribed to using the `project_id` and `region`
-   * parameters.
+   * Get information about subscribed offers. Retrieve information about the offers you are subscribed to using the `project_id` and `region` parameters.
    *
    * @param request - The request {@link ListOfferSubscriptionsRequest}
    * @returns A Promise of ListOfferSubscriptionsResponse
@@ -686,8 +652,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List the available offers.. Retrieve the list of the available and
-   * free-of-charge offers you can subscribe to.
+   * List the available offers.. Retrieve the list of the available and free-of-charge offers you can subscribe to.
    *
    * @param request - The request {@link ListOffersRequest}
    * @returns A Promise of ListOffersResponse
@@ -722,8 +687,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get information about a sending pool.. Retrieve information about a sending
-   * pool, including its creation status and configuration parameters.
+   * Get information about a sending pool.. Retrieve information about a sending pool, including its creation status and configuration parameters.
    *
    * @param request - The request {@link ListPoolsRequest}
    * @returns A Promise of ListPoolsResponse

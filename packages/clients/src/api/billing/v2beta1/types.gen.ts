@@ -76,278 +76,407 @@ export type ListTaxesRequestOrderBy =
   | 'category_name_asc'
 
 export interface DiscountCoupon {
-  /** The description of the coupon. */
+  /**
+   * The description of the coupon.
+   */
   description?: string
 }
 
 export interface DiscountFilter {
   /**
-   * Type of the filter (category name, product name, product range, resource
-   * name, region or zone).
+   * Type of the filter (category name, product name, product range, resource name, region or zone).
    */
   type: DiscountFilterType
-  /** Value of filter. */
+  /**
+   * Value of filter.
+   */
   value: string
-  /** Boolean to describe if filter is an excluding filter. */
+  /**
+   * Boolean to describe if filter is an excluding filter.
+   */
   exclude: boolean
 }
 
 export interface ListConsumptionsResponseConsumption {
-  /** Monetary value of the consumption. */
+  /**
+   * Monetary value of the consumption.
+   */
   value?: Money
   /**
-   * The product name. For example, "VPC Public Gateway S", "VPC Public Gateway
-   * M" for the VPC product.
+   * The product name. For example, "VPC Public Gateway S", "VPC Public Gateway M" for the VPC product.
    */
   productName: string
-  /** Identifies the reference based on the category. */
+  /**
+   * Identifies the reference based on the category.
+   */
   resourceName: string
-  /** Unique identifier of the product. */
+  /**
+   * Unique identifier of the product.
+   */
   sku: string
-  /** Project ID of the consumption. */
+  /**
+   * Project ID of the consumption.
+   */
   projectId: string
-  /** Name of consumption category. */
+  /**
+   * Name of consumption category.
+   */
   categoryName: string
-  /** Unit of consumed quantity. */
+  /**
+   * Unit of consumed quantity.
+   */
   unit: string
-  /** Consumed quantity. */
+  /**
+   * Consumed quantity.
+   */
   billedQuantity: string
 }
 
 export interface Discount {
-  /** The ID of the discount. */
+  /**
+   * The ID of the discount.
+   */
   id: string
-  /** The creation date of the discount. */
+  /**
+   * The creation date of the discount.
+   */
   creationDate?: Date
-  /** The Organization ID of the discount. */
+  /**
+   * The Organization ID of the discount.
+   */
   organizationId: string
-  /** The description of the discount. */
+  /**
+   * The description of the discount.
+   */
   description: string
-  /** The initial value of the discount. */
+  /**
+   * The initial value of the discount.
+   */
   value: number
-  /** The value indicating how much of the discount has been used. */
+  /**
+   * The value indicating how much of the discount has been used.
+   */
   valueUsed: number
-  /** The remaining value of the discount. */
+  /**
+   * The remaining value of the discount.
+   */
   valueRemaining: number
-  /** The mode of the discount. */
+  /**
+   * The mode of the discount.
+   */
   mode: DiscountDiscountMode
-  /** The start date of the discount. */
+  /**
+   * The start date of the discount.
+   */
   startDate?: Date
-  /** The stop date of the discount. */
+  /**
+   * The stop date of the discount.
+   */
   stopDate?: Date
-  /** The description of the coupon. */
+  /**
+   * The description of the coupon.
+   */
   coupon?: DiscountCoupon
-  /** List of the discount scopes. */
+  /**
+   * List of the discount scopes.
+   */
   filters: DiscountFilter[]
 }
 
 export interface Invoice {
-  /** Invoice ID. */
+  /**
+   * Invoice ID.
+   */
   id: string
   organizationId: string
   organizationName: string
-  /** Start date of the billing period. */
+  /**
+   * Start date of the billing period.
+   */
   startDate?: Date
   stopDate?: Date
-  /** The billing period of the invoice in the YYYY-MM format. */
+  /**
+   * The billing period of the invoice in the YYYY-MM format.
+   */
   billingPeriod?: Date
-  /** Date when the invoice was sent to the customer. */
+  /**
+   * Date when the invoice was sent to the customer.
+   */
   issuedDate?: Date
-  /** Payment time limit, set according to the Organization's payment conditions. */
+  /**
+   * Payment time limit, set according to the Organization's payment conditions.
+   */
   dueDate?: Date
-  /** Total amount, untaxed. */
+  /**
+   * Total amount, untaxed.
+   */
   totalUntaxed?: Money
-  /** Total amount, taxed. */
+  /**
+   * Total amount, taxed.
+   */
   totalTaxed?: Money
-  /** The total tax amount of the invoice. */
+  /**
+   * The total tax amount of the invoice.
+   */
   totalTax?: Money
-  /** The total discount amount of the invoice. */
+  /**
+   * The total discount amount of the invoice.
+   */
   totalDiscount?: Money
-  /** The total amount of the invoice before applying the discount. */
+  /**
+   * The total amount of the invoice before applying the discount.
+   */
   totalUndiscount?: Money
-  /** Type of invoice, either periodic or purchase. */
+  /**
+   * Type of invoice, either periodic or purchase.
+   */
   type: InvoiceType
-  /** The state of the Invoice. */
+  /**
+   * The state of the Invoice.
+   */
   state: string
-  /** Invoice number. */
+  /**
+   * Invoice number.
+   */
   number: number
-  /** The name of the seller (Scaleway). */
+  /**
+   * The name of the seller (Scaleway).
+   */
   sellerName: string
 }
 
 export interface ListTaxesResponseTax {
-  /** Description of the tax applied. */
+  /**
+   * Description of the tax applied.
+   */
   description: string
-  /** The three-letter currency code. */
+  /**
+   * The three-letter currency code.
+   */
   currency: string
-  /** Applied tax rate (0.2 means a VAT of 20%). */
+  /**
+   * Applied tax rate (0.2 means a VAT of 20%).
+   */
   rate?: number
-  /** The total tax value of the consumption. */
+  /**
+   * The total tax value of the consumption.
+   */
   totalTaxValue?: number
 }
 
 export type DownloadInvoiceRequest = {
-  /** Invoice ID. */
+  /**
+   * Invoice ID.
+   */
   invoiceId: string
-  /** File type. PDF by default. */
+  /**
+   * File type. PDF by default.
+   */
   fileType?: DownloadInvoiceRequestFileType
 }
 
 export type ExportInvoicesRequest = {
   /**
-   * Organization ID. If specified, only invoices from this Organization will be
-   * returned.
+   * Organization ID. If specified, only invoices from this Organization will be returned.
    */
   organizationId?: string
-  /** Return only invoice with start date greater than billing_period_start. */
+  /**
+   * Return only invoice with start date greater than billing_period_start.
+   */
   billingPeriodStartAfter?: Date
-  /** Return only invoice with start date less than billing_period_start. */
+  /**
+   * Return only invoice with start date less than billing_period_start.
+   */
   billingPeriodStartBefore?: Date
-  /** Invoice type. It can either be `periodic` or `purchase`. */
+  /**
+   * Invoice type. It can either be `periodic` or `purchase`.
+   */
   invoiceType?: InvoiceType
-  /** Page number. */
+  /**
+   * Page number.
+   */
   page?: number
   /**
-   * Positive integer lower or equal to 100 to select the number of items to
-   * return.
+   * Positive integer lower or equal to 100 to select the number of items to return.
    */
   pageSize?: number
-  /** How invoices are ordered in the response. */
+  /**
+   * How invoices are ordered in the response.
+   */
   orderBy?: ExportInvoicesRequestOrderBy
-  /** File format for exporting the invoice list. */
+  /**
+   * File format for exporting the invoice list.
+   */
   fileType?: ExportInvoicesRequestFileType
 }
 
 export type GetInvoiceRequest = {
-  /** Invoice ID. */
+  /**
+   * Invoice ID.
+   */
   invoiceId: string
 }
 
 export type ListConsumptionsRequest = {
-  /** Order consumptions list in the response by their update date. */
+  /**
+   * Order consumptions list in the response by their update date.
+   */
   orderBy?: ListConsumptionsRequestOrderBy
-  /** Positive integer to choose the page to return. */
+  /**
+   * Positive integer to choose the page to return.
+   */
   page?: number
   /**
-   * Positive integer lower or equal to 100 to select the number of items to
-   * return.
+   * Positive integer lower or equal to 100 to select the number of items to return.
    */
   pageSize?: number
   /**
    * Filter by Organization ID.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   * could be set.
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId' could be set.
    */
   organizationId?: string
   /**
    * Filter by Project ID.
    *
-   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId'
-   * could be set.
+   * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId' could be set.
    */
   projectId?: string
   /**
-   * Filter by name of a Category as they are shown in the invoice (Compute,
-   * Network, Observability).
+   * Filter by name of a Category as they are shown in the invoice (Compute, Network, Observability).
    */
   categoryName?: string
   /**
-   * Filter by the billing period in the YYYY-MM format. If it is empty the
-   * current billing period will be used as default.
+   * Filter by the billing period in the YYYY-MM format. If it is empty the current billing period will be used as default.
    */
   billingPeriod?: string
 }
 
 export interface ListConsumptionsResponse {
-  /** Detailed consumption list. */
+  /**
+   * Detailed consumption list.
+   */
   consumptions: ListConsumptionsResponseConsumption[]
-  /** Total number of returned items. */
+  /**
+   * Total number of returned items.
+   */
   totalCount: number
   /**
-   * Sum of all discounts, displayed only when no category or project ID filter
-   * is applied.
+   * Sum of all discounts, displayed only when no category or project ID filter is applied.
    */
   totalDiscountUntaxedValue: number
-  /** Last consumption update date. */
+  /**
+   * Last consumption update date.
+   */
   updatedAt?: Date
 }
 
 export type ListDiscountsRequest = {
-  /** Order discounts in the response by their description. */
+  /**
+   * Order discounts in the response by their description.
+   */
   orderBy?: ListDiscountsRequestOrderBy
-  /** Positive integer to choose the page to return. */
+  /**
+   * Positive integer to choose the page to return.
+   */
   page?: number
   /**
-   * Positive integer lower or equal to 100 to select the number of items to
-   * return.
+   * Positive integer lower or equal to 100 to select the number of items to return.
    */
   pageSize?: number
-  /** ID of the organization. */
+  /**
+   * ID of the organization.
+   */
   organizationId?: string
 }
 
 export interface ListDiscountsResponse {
-  /** Total number of discounts. */
+  /**
+   * Total number of discounts.
+   */
   totalCount: number
-  /** Paginated returned discounts. */
+  /**
+   * Paginated returned discounts.
+   */
   discounts: Discount[]
 }
 
 export type ListInvoicesRequest = {
   /**
-   * Organization ID. If specified, only invoices from this Organization will be
-   * returned.
+   * Organization ID. If specified, only invoices from this Organization will be returned.
    */
   organizationId?: string
-  /** Return only invoice with start date greater than billing_period_start. */
+  /**
+   * Return only invoice with start date greater than billing_period_start.
+   */
   billingPeriodStartAfter?: Date
-  /** Return only invoice with start date less than billing_period_start. */
+  /**
+   * Return only invoice with start date less than billing_period_start.
+   */
   billingPeriodStartBefore?: Date
-  /** Invoice type. It can either be `periodic` or `purchase`. */
+  /**
+   * Invoice type. It can either be `periodic` or `purchase`.
+   */
   invoiceType?: InvoiceType
-  /** Page number. */
+  /**
+   * Page number.
+   */
   page?: number
   /**
-   * Positive integer lower or equal to 100 to select the number of items to
-   * return.
+   * Positive integer lower or equal to 100 to select the number of items to return.
    */
   pageSize?: number
-  /** How invoices are ordered in the response. */
+  /**
+   * How invoices are ordered in the response.
+   */
   orderBy?: ListInvoicesRequestOrderBy
 }
 
 export interface ListInvoicesResponse {
-  /** Total number of invoices. */
+  /**
+   * Total number of invoices.
+   */
   totalCount: number
-  /** Paginated returned invoices. */
+  /**
+   * Paginated returned invoices.
+   */
   invoices: Invoice[]
 }
 
 export type ListTaxesRequest = {
-  /** Order consumed taxes list in the response by their update date. */
+  /**
+   * Order consumed taxes list in the response by their update date.
+   */
   orderBy?: ListTaxesRequestOrderBy
-  /** Page number. */
+  /**
+   * Page number.
+   */
   page?: number
   /**
-   * Positive integer lower or equal to 100 to select the number of items to
-   * return.
+   * Positive integer lower or equal to 100 to select the number of items to return.
    */
   pageSize?: number
-  /** Filter by Organization ID. */
+  /**
+   * Filter by Organization ID.
+   */
   organizationId?: string
   /**
-   * Filter by the billing period in the YYYY-MM format. If it is empty the
-   * current billing period will be used as default.
+   * Filter by the billing period in the YYYY-MM format. If it is empty the current billing period will be used as default.
    */
   billingPeriod?: string
 }
 
 export interface ListTaxesResponse {
-  /** Detailed consumption tax. */
+  /**
+   * Detailed consumption tax.
+   */
   taxes: ListTaxesResponseTax[]
-  /** Total number of returned items. */
+  /**
+   * Total number of returned items.
+   */
   totalCount: number
-  /** Last consumption update date. */
+  /**
+   * Last consumption update date.
+   */
   updatedAt?: Date
 }

@@ -54,8 +54,8 @@ const jsonContentHeaders = {
 
 /**
  * Block Storage API.
- *
- * This API allows you to manage your Block Storage volumes.
+
+This API allows you to manage your Block Storage volumes.
  */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
@@ -90,8 +90,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List volume types. List all available volume types in a specified zone. The
-   * volume types listed are ordered by name in ascending order.
+   * List volume types. List all available volume types in a specified zone. The volume types listed are ordered by name in ascending order.
    *
    * @param request - The request {@link ListVolumeTypesRequest}
    * @returns A Promise of ListVolumeTypesResponse
@@ -122,9 +121,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List volumes. List all existing volumes in a specified zone. By default,
-   * the volumes listed are ordered by creation date in ascending order. This
-   * can be modified via the `order_by` field.
+   * List volumes. List all existing volumes in a specified zone. By default, the volumes listed are ordered by creation date in ascending order. This can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListVolumesRequest}
    * @returns A Promise of ListVolumesResponse
@@ -133,12 +130,8 @@ export class API extends ParentAPI {
     enrichForPagination('volumes', this.pageOfListVolumes, request)
 
   /**
-   * Create a volume. To create a new volume from scratch, you must specify
-   * `from_empty` and the `size`. To create a volume from an existing snapshot,
-   * specify `from_snapshot` and the `snapshot_id` in the request payload
-   * instead, size is optional and can be specified if you need to extend the
-   * original size. The volume will take on the same volume class and underlying
-   * IOPS limitations as the original snapshot.
+   * Create a volume. To create a new volume from scratch, you must specify `from_empty` and the `size`.
+To create a volume from an existing snapshot, specify `from_snapshot` and the `snapshot_id` in the request payload instead, size is optional and can be specified if you need to extend the original size. The volume will take on the same volume class and underlying IOPS limitations as the original snapshot.
    *
    * @param request - The request {@link CreateVolumeRequest}
    * @returns A Promise of Volume
@@ -157,8 +150,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a volume. Retrieve technical information about a specific volume.
-   * Details such as size, type, and status are returned in the response.
+   * Get a volume. Retrieve technical information about a specific volume. Details such as size, type, and status are returned in the response.
    *
    * @param request - The request {@link GetVolumeRequest}
    * @returns A Promise of Volume
@@ -195,8 +187,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a detached volume. You must specify the `volume_id` of the volume
-   * you want to delete. The volume must not be in the `in_use` status.
+   * Delete a detached volume. You must specify the `volume_id` of the volume you want to delete. The volume must not be in the `in_use` status.
    *
    * @param request - The request {@link DeleteVolumeRequest}
    */
@@ -207,10 +198,8 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Update a volume. Update the technical details of a volume, such as its
-   * name, tags, or its new size and `volume_type` (within the same Block
-   * Storage class). You can only resize a volume to a larger size. It is
-   * currently not possible to change your Block Storage Class.
+   * Update a volume. Update the technical details of a volume, such as its name, tags, or its new size and `volume_type` (within the same Block Storage class).
+You can only resize a volume to a larger size. It is currently not possible to change your Block Storage Class.
    *
    * @param request - The request {@link UpdateVolumeRequest}
    * @returns A Promise of Volume
@@ -253,9 +242,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all snapshots. List all available snapshots in a specified zone. By
-   * default, the snapshots listed are ordered by creation date in ascending
-   * order. This can be modified via the `order_by` field.
+   * List all snapshots. List all available snapshots in a specified zone. By default, the snapshots listed are ordered by creation date in ascending order. This can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListSnapshotsRequest}
    * @returns A Promise of ListSnapshotsResponse
@@ -264,9 +251,7 @@ export class API extends ParentAPI {
     enrichForPagination('snapshots', this.pageOfListSnapshots, request)
 
   /**
-   * Get a snapshot. Retrieve technical information about a specific snapshot.
-   * Details such as size, volume type, and status are returned in the
-   * response.
+   * Get a snapshot. Retrieve technical information about a specific snapshot. Details such as size, volume type, and status are returned in the response.
    *
    * @param request - The request {@link GetSnapshotRequest}
    * @returns A Promise of Snapshot
@@ -303,9 +288,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a snapshot of a volume. To create a snapshot, the volume must be in
-   * the `in_use` or the `available` status. If your volume is in a transient
-   * state, you need to wait until the end of the current operation.
+   * Create a snapshot of a volume. To create a snapshot, the volume must be in the `in_use` or the `available` status.
+If your volume is in a transient state, you need to wait until the end of the current operation.
    *
    * @param request - The request {@link CreateSnapshotRequest}
    * @returns A Promise of Snapshot
@@ -324,10 +308,9 @@ export class API extends ParentAPI {
     )
 
   /**
-   * (Deprecated in favor of `ImportSnapshotFromObjectStorage`). Import a
-   * snapshot from a Scaleway Object Storage bucket The bucket must contain a
-   * QCOW2 image. The bucket can be imported into any Availability Zone as long
-   * as it is in the same region as the bucket.
+   * (Deprecated in favor of `ImportSnapshotFromObjectStorage`). Import a snapshot from a Scaleway Object Storage bucket
+The bucket must contain a QCOW2 image.
+The bucket can be imported into any Availability Zone as long as it is in the same region as the bucket.
    *
    * @deprecated
    * @param request - The request {@link ImportSnapshotFromS3Request}
@@ -347,9 +330,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Import a snapshot from a Scaleway Object Storage bucket. The bucket must
-   * contain a QCOW2 image. The bucket can be imported into any Availability
-   * Zone as long as it is in the same region as the bucket.
+   * Import a snapshot from a Scaleway Object Storage bucket. The bucket must contain a QCOW2 image.
+The bucket can be imported into any Availability Zone as long as it is in the same region as the bucket.
    *
    * @param request - The request {@link ImportSnapshotFromObjectStorageRequest}
    * @returns A Promise of Snapshot
@@ -373,8 +355,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Export a snapshot to a Scaleway Object Storage bucket. The snapshot is
-   * exported in QCOW2 format. The snapshot must not be in transient state.
+   * Export a snapshot to a Scaleway Object Storage bucket. The snapshot is exported in QCOW2 format.
+The snapshot must not be in transient state.
    *
    * @param request - The request {@link ExportSnapshotToObjectStorageRequest}
    * @returns A Promise of Snapshot
@@ -398,8 +380,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a snapshot. You must specify the `snapshot_id` of the snapshot you
-   * want to delete. The snapshot must not be in use.
+   * Delete a snapshot. You must specify the `snapshot_id` of the snapshot you want to delete. The snapshot must not be in use.
    *
    * @param request - The request {@link DeleteSnapshotRequest}
    */
