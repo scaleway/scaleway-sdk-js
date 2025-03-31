@@ -24,8 +24,6 @@ import type {
   Route,
   SetAclRequest,
   SetAclResponse,
-  SetSubnetsRequest,
-  SetSubnetsResponse,
   Subnet,
   UpdatePrivateNetworkRequest,
   UpdateRouteRequest,
@@ -237,20 +235,6 @@ export const unmarshalSetAclResponse = (data: unknown): SetAclResponse => {
   } as SetAclResponse
 }
 
-export const unmarshalSetSubnetsResponse = (
-  data: unknown,
-): SetSubnetsResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'SetSubnetsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    subnets: data.subnets,
-  } as SetSubnetsResponse
-}
-
 export const marshalAddSubnetsRequest = (
   request: AddSubnetsRequest,
   defaults: DefaultValues,
@@ -320,13 +304,6 @@ export const marshalSetAclRequest = (
   default_policy: request.defaultPolicy,
   is_ipv6: request.isIpv6,
   rules: request.rules.map(elt => marshalAclRule(elt, defaults)),
-})
-
-export const marshalSetSubnetsRequest = (
-  request: SetSubnetsRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  subnets: request.subnets,
 })
 
 export const marshalUpdatePrivateNetworkRequest = (
