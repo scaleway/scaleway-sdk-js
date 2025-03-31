@@ -112,8 +112,8 @@ const jsonContentHeaders = {
 
 /**
  * Web Hosting Control Panel API.
- *
- * This API allows you to manage your Web Hosting services.
+
+This API allows you to manage your Web Hosting services.
  */
 export class ControlPanelAPI extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -155,9 +155,8 @@ export class ControlPanelAPI extends ParentAPI {
 
 /**
  * Web Hosting Database API.
- *
- * This API allows you to manage your databases and database users for your Web
- * Hosting services.
+
+This API allows you to manage your databases and database users for your Web Hosting services.
  */
 export class DatabaseAPI extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -335,8 +334,7 @@ export class DatabaseAPI extends ParentAPI {
   /**
    * "Change the password of a database user".
    *
-   * @param request - The request
-   *   {@link DatabaseApiChangeDatabaseUserPasswordRequest}
+   * @param request - The request {@link DatabaseApiChangeDatabaseUserPasswordRequest}
    * @returns A Promise of DatabaseUser
    */
   changeDatabaseUserPassword = (
@@ -408,8 +406,8 @@ export class DatabaseAPI extends ParentAPI {
 
 /**
  * Web Hosting Dns API.
- *
- * This API allows you to manage your Web Hosting services.
+
+This API allows you to manage your Web Hosting services.
  */
 export class DnsAPI extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -420,8 +418,7 @@ export class DnsAPI extends ParentAPI {
   ]
 
   /**
-   * Get DNS records. Get the set of DNS records of a specified domain
-   * associated with a Web Hosting plan's domain.
+   * Get DNS records. Get the set of DNS records of a specified domain associated with a Web Hosting plan's domain.
    *
    * @param request - The request {@link DnsApiGetDomainDnsRecordsRequest}
    * @returns A Promise of DnsRecords
@@ -436,8 +433,7 @@ export class DnsAPI extends ParentAPI {
     )
 
   /**
-   * Check whether you own this domain or not.. Check whether you own this
-   * domain or not.
+   * Check whether you own this domain or not.. Check whether you own this domain or not.
    *
    * @param request - The request {@link DnsApiCheckUserOwnsDomainRequest}
    * @returns A Promise of CheckUserOwnsDomainResponse
@@ -459,8 +455,7 @@ export class DnsAPI extends ParentAPI {
     )
 
   /**
-   * Synchronize your DNS records on the Elements Console and on cPanel..
-   * Synchronize your DNS records on the Elements Console and on cPanel.
+   * Synchronize your DNS records on the Elements Console and on cPanel.. Synchronize your DNS records on the Elements Console and on cPanel.
    *
    * @param request - The request {@link DnsApiSyncDomainDnsRecordsRequest}
    * @returns A Promise of DnsRecords
@@ -484,8 +479,7 @@ export class DnsAPI extends ParentAPI {
     )
 
   /**
-   * Search for available domains based on domain name.. Search for available
-   * domains based on domain name.
+   * Search for available domains based on domain name.. Search for available domains based on domain name.
    *
    * @param request - The request {@link DnsApiSearchDomainsRequest}
    * @returns A Promise of SearchDomainsResponse
@@ -507,10 +501,7 @@ export class DnsAPI extends ParentAPI {
     )
 
   /**
-   * Retrieve detailed information about a specific domain, including its
-   * status, DNS configuration, and ownership.. Retrieve detailed information
-   * about a specific domain, including its status, DNS configuration, and
-   * ownership.
+   * Retrieve detailed information about a specific domain, including its status, DNS configuration, and ownership.. Retrieve detailed information about a specific domain, including its status, DNS configuration, and ownership.
    *
    * @param request - The request {@link DnsApiGetDomainRequest}
    * @returns A Promise of Domain
@@ -553,8 +544,8 @@ export class DnsAPI extends ParentAPI {
 
 /**
  * Web Hosting Offer API.
- *
- * This API allows you to manage your offer for your Web Hosting services.
+
+This API allows you to manage your offer for your Web Hosting services.
  */
 export class OfferAPI extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -586,8 +577,7 @@ export class OfferAPI extends ParentAPI {
     )
 
   /**
-   * List all available hosting offers along with their specific options.. List
-   * all available hosting offers along with their specific options.
+   * List all available hosting offers along with their specific options.. List all available hosting offers along with their specific options.
    *
    * @param request - The request {@link OfferApiListOffersRequest}
    * @returns A Promise of ListOffersResponse
@@ -598,8 +588,8 @@ export class OfferAPI extends ParentAPI {
 
 /**
  * Web Hosting API.
- *
- * This API allows you to manage your Web Hosting services.
+
+This API allows you to manage your Web Hosting services.
  */
 export class HostingAPI extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -610,8 +600,7 @@ export class HostingAPI extends ParentAPI {
   ]
 
   /**
-   * Order a Web Hosting plan. Order a Web Hosting plan, specifying the offer
-   * type required via the `offer_id` parameter.
+   * Order a Web Hosting plan. Order a Web Hosting plan, specifying the offer type required via the `offer_id` parameter.
    *
    * @param request - The request {@link HostingApiCreateHostingRequest}
    * @returns A Promise of Hosting
@@ -655,9 +644,7 @@ export class HostingAPI extends ParentAPI {
     )
 
   /**
-   * List all Web Hosting plans. List all of your existing Web Hosting plans.
-   * Various filters are available to limit the results, including filtering by
-   * domain, status, tag and Project ID.
+   * List all Web Hosting plans. List all of your existing Web Hosting plans. Various filters are available to limit the results, including filtering by domain, status, tag and Project ID.
    *
    * @param request - The request {@link HostingApiListHostingsRequest}
    * @returns A Promise of ListHostingsResponse
@@ -666,8 +653,7 @@ export class HostingAPI extends ParentAPI {
     enrichForPagination('hostings', this.pageOfListHostings, request)
 
   /**
-   * Get a Web Hosting plan. Get the details of one of your existing Web Hosting
-   * plans, specified by its `hosting_id`.
+   * Get a Web Hosting plan. Get the details of one of your existing Web Hosting plans, specified by its `hosting_id`.
    *
    * @param request - The request {@link HostingApiGetHostingRequest}
    * @returns A Promise of Hosting
@@ -704,9 +690,7 @@ export class HostingAPI extends ParentAPI {
     )
 
   /**
-   * Update a Web Hosting plan. Update the details of one of your existing Web
-   * Hosting plans, specified by its `hosting_id`. You can update parameters
-   * including the contact email address, tags, options and offer.
+   * Update a Web Hosting plan. Update the details of one of your existing Web Hosting plans, specified by its `hosting_id`. You can update parameters including the contact email address, tags, options and offer.
    *
    * @param request - The request {@link HostingApiUpdateHostingRequest}
    * @returns A Promise of Hosting
@@ -725,10 +709,7 @@ export class HostingAPI extends ParentAPI {
     )
 
   /**
-   * Delete a Web Hosting plan. Delete a Web Hosting plan, specified by its
-   * `hosting_id`. Note that deletion is not immediate: it will take place at
-   * the end of the calendar month, after which time your Web Hosting plan and
-   * all its data (files and emails) will be irreversibly lost.
+   * Delete a Web Hosting plan. Delete a Web Hosting plan, specified by its `hosting_id`. Note that deletion is not immediate: it will take place at the end of the calendar month, after which time your Web Hosting plan and all its data (files and emails) will be irreversibly lost.
    *
    * @param request - The request {@link HostingApiDeleteHostingRequest}
    * @returns A Promise of Hosting
@@ -779,8 +760,7 @@ export class HostingAPI extends ParentAPI {
     )
 
   /**
-   * Get the total counts of websites, databases, email accounts, and FTP
-   * accounts of a Web Hosting plan.
+   * Get the total counts of websites, databases, email accounts, and FTP accounts of a Web Hosting plan.
    *
    * @param request - The request {@link HostingApiGetResourceSummaryRequest}
    * @returns A Promise of ResourceSummary
@@ -799,9 +779,8 @@ export class HostingAPI extends ParentAPI {
 
 /**
  * Web Hosting FTP Account API.
- *
- * This API allows you to manage your FTP accounts for your Web Hosting
- * services.
+
+This API allows you to manage your FTP accounts for your Web Hosting services.
  */
 export class FtpAccountAPI extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -812,8 +791,7 @@ export class FtpAccountAPI extends ParentAPI {
   ]
 
   /**
-   * Create a new FTP account within your hosting plan.. Create a new FTP
-   * account within your hosting plan.
+   * Create a new FTP account within your hosting plan.. Create a new FTP account within your hosting plan.
    *
    * @param request - The request {@link FtpAccountApiCreateFtpAccountRequest}
    * @returns A Promise of FtpAccount
@@ -857,8 +835,7 @@ export class FtpAccountAPI extends ParentAPI {
     )
 
   /**
-   * List all FTP accounts within your hosting plan.. List all FTP accounts
-   * within your hosting plan.
+   * List all FTP accounts within your hosting plan.. List all FTP accounts within your hosting plan.
    *
    * @param request - The request {@link FtpAccountApiListFtpAccountsRequest}
    * @returns A Promise of ListFtpAccountsResponse
@@ -867,8 +844,7 @@ export class FtpAccountAPI extends ParentAPI {
     enrichForPagination('ftpAccounts', this.pageOfListFtpAccounts, request)
 
   /**
-   * Delete a specific FTP account within your hosting plan.. Delete a specific
-   * FTP account within your hosting plan.
+   * Delete a specific FTP account within your hosting plan.. Delete a specific FTP account within your hosting plan.
    *
    * @param request - The request {@link FtpAccountApiRemoveFtpAccountRequest}
    * @returns A Promise of FtpAccount
@@ -905,9 +881,8 @@ export class FtpAccountAPI extends ParentAPI {
 
 /**
  * Web Hosting Mail Account API.
- *
- * This API allows you to manage your mail accounts for your Web Hosting
- * services.
+
+This API allows you to manage your mail accounts for your Web Hosting services.
  */
 export class MailAccountAPI extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -918,8 +893,7 @@ export class MailAccountAPI extends ParentAPI {
   ]
 
   /**
-   * Create a new mail account within your hosting plan.. Create a new mail
-   * account within your hosting plan.
+   * Create a new mail account within your hosting plan.. Create a new mail account within your hosting plan.
    *
    * @param request - The request {@link MailAccountApiCreateMailAccountRequest}
    * @returns A Promise of MailAccount
@@ -963,8 +937,7 @@ export class MailAccountAPI extends ParentAPI {
     )
 
   /**
-   * List all mail accounts within your hosting plan.. List all mail accounts
-   * within your hosting plan.
+   * List all mail accounts within your hosting plan.. List all mail accounts within your hosting plan.
    *
    * @param request - The request {@link MailAccountApiListMailAccountsRequest}
    * @returns A Promise of ListMailAccountsResponse
@@ -974,8 +947,7 @@ export class MailAccountAPI extends ParentAPI {
   ) => enrichForPagination('mailAccounts', this.pageOfListMailAccounts, request)
 
   /**
-   * Delete a mail account within your hosting plan.. Delete a mail account
-   * within your hosting plan.
+   * Delete a mail account within your hosting plan.. Delete a mail account within your hosting plan.
    *
    * @param request - The request {@link MailAccountApiRemoveMailAccountRequest}
    * @returns A Promise of MailAccount
@@ -999,11 +971,9 @@ export class MailAccountAPI extends ParentAPI {
     )
 
   /**
-   * Update the password of a mail account within your hosting plan.. Update the
-   * password of a mail account within your hosting plan.
+   * Update the password of a mail account within your hosting plan.. Update the password of a mail account within your hosting plan.
    *
-   * @param request - The request
-   *   {@link MailAccountApiChangeMailAccountPasswordRequest}
+   * @param request - The request {@link MailAccountApiChangeMailAccountPasswordRequest}
    * @returns A Promise of MailAccount
    */
   changeMailAccountPassword = (
@@ -1027,8 +997,8 @@ export class MailAccountAPI extends ParentAPI {
 
 /**
  * Web Hosting Website API.
- *
- * This API allows you to manage your websites for your Web Hosting services.
+
+This API allows you to manage your websites for your Web Hosting services.
  */
 export class WebsiteAPI extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -1058,8 +1028,7 @@ export class WebsiteAPI extends ParentAPI {
     )
 
   /**
-   * List all websites for a specific hosting.. List all websites for a specific
-   * hosting.
+   * List all websites for a specific hosting.. List all websites for a specific hosting.
    *
    * @param request - The request {@link WebsiteApiListWebsitesRequest}
    * @returns A Promise of ListWebsitesResponse

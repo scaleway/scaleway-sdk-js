@@ -100,8 +100,8 @@ const jsonContentHeaders = {
 
 /**
  * Serverless Functions API.
- *
- * This API allows you to manage your Serverless Functions.
+
+This API allows you to manage your Serverless Functions.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -134,8 +134,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all your namespaces. List all existing namespaces in the specified
-   * region.
+   * List all your namespaces. List all existing namespaces in the specified region.
    *
    * @param request - The request {@link ListNamespacesRequest}
    * @returns A Promise of ListNamespacesResponse
@@ -181,8 +180,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new namespace. Create a new namespace in a specified Organization
-   * or Project.
+   * Create a new namespace. Create a new namespace in a specified Organization or Project.
    *
    * @param request - The request {@link CreateNamespaceRequest}
    * @returns A Promise of Namespace
@@ -201,8 +199,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an existing namespace. Update the namespace associated with the
-   * specified ID.
+   * Update an existing namespace. Update the namespace associated with the specified ID.
    *
    * @param request - The request {@link UpdateNamespaceRequest}
    * @returns A Promise of Namespace
@@ -221,8 +218,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an existing namespace. Delete the namespace associated with the
-   * specified ID.
+   * Delete an existing namespace. Delete the namespace associated with the specified ID.
    *
    * @param request - The request {@link DeleteNamespaceRequest}
    * @returns A Promise of Namespace
@@ -304,8 +300,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new function. Create a new function in the specified region for a
-   * specified Organization or Project.
+   * Create a new function. Create a new function in the specified region for a specified Organization or Project.
    *
    * @param request - The request {@link CreateFunctionRequest}
    * @returns A Promise of Function
@@ -324,8 +319,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an existing function. Update the function associated with the
-   * specified ID.
+   * Update an existing function. Update the function associated with the specified ID.
    *
    * @param request - The request {@link UpdateFunctionRequest}
    * @returns A Promise of Function
@@ -393,8 +387,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get an upload URL of a function. Get an upload URL of a function associated
-   * with the specified ID.
+   * Get an upload URL of a function. Get an upload URL of a function associated with the specified ID.
    *
    * @param request - The request {@link GetFunctionUploadURLRequest}
    * @returns A Promise of UploadURL
@@ -410,8 +403,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a download URL of a function. Get a download URL for a function
-   * associated with the specified ID.
+   * Get a download URL of a function. Get a download URL for a function associated with the specified ID.
    *
    * @param request - The request {@link GetFunctionDownloadURLRequest}
    * @returns A Promise of DownloadURL
@@ -490,8 +482,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a new cron. Create a new cronjob for a function with the specified
-   * ID.
+   * Create a new cron. Create a new cronjob for a function with the specified ID.
    *
    * @param request - The request {@link CreateCronRequest}
    * @returns A Promise of Cron
@@ -562,8 +553,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all domain name bindings. List all domain name bindings in a specified
-   * region.
+   * List all domain name bindings. List all domain name bindings in a specified region.
    *
    * @param request - The request {@link ListDomainsRequest}
    * @returns A Promise of ListDomainsResponse
@@ -572,8 +562,7 @@ export class API extends ParentAPI {
     enrichForPagination('domains', this.pageOfListDomains, request)
 
   /**
-   * Get a domain name binding. Get a domain name binding for the function with
-   * the specified ID.
+   * Get a domain name binding. Get a domain name binding for the function with the specified ID.
    *
    * @param request - The request {@link GetDomainRequest}
    * @returns A Promise of Domain
@@ -610,8 +599,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a domain name binding. Create a domain name binding for the function
-   * with the specified ID.
+   * Create a domain name binding. Create a domain name binding for the function with the specified ID.
    *
    * @param request - The request {@link CreateDomainRequest}
    * @returns A Promise of Domain
@@ -630,8 +618,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a domain name binding. Delete a domain name binding for the function
-   * with the specified ID.
+   * Delete a domain name binding. Delete a domain name binding for the function with the specified ID.
    *
    * @param request - The request {@link DeleteDomainRequest}
    * @returns A Promise of Domain
@@ -831,8 +818,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all triggers. List all triggers belonging to a specified Organization
-   * or Project.
+   * List all triggers. List all triggers belonging to a specified Organization or Project.
    *
    * @param request - The request {@link ListTriggersRequest}
    * @returns A Promise of ListTriggersResponse
