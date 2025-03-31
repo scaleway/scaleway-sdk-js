@@ -87,6 +87,7 @@ import type {
   ZonedApiCreateLbRequest,
   ZonedApiCreateRouteRequest,
   ZonedApiCreateSubscriberRequest,
+  ZonedApiDetachPrivateNetworkRequest,
   ZonedApiMigrateLbRequest,
   ZonedApiRemoveBackendServersRequest,
   ZonedApiSetAclsRequest,
@@ -1471,6 +1472,7 @@ export const marshalZonedApiAttachPrivateNetworkRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ipam_ids: request.ipamIds,
+  private_network_id: request.privateNetworkId,
   ...resolveOneOf([
     {
       param: 'static_config',
@@ -1673,6 +1675,13 @@ export const marshalZonedApiCreateSubscriberRequest = (
           : undefined,
     },
   ]),
+})
+
+export const marshalZonedApiDetachPrivateNetworkRequest = (
+  request: ZonedApiDetachPrivateNetworkRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_network_id: request.privateNetworkId,
 })
 
 export const marshalZonedApiMigrateLbRequest = (
