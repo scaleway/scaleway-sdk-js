@@ -86,8 +86,8 @@ const jsonContentHeaders = {
 
 /**
  * Public Gateways API.
- *
- * This API allows you to manage your Public Gateways.
+
+This API allows you to manage your Public Gateways.
  */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
@@ -130,9 +130,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Public Gateways. List Public Gateways in a given Scaleway Organization
-   * or Project. By default, results are displayed in ascending order of
-   * creation date.
+   * List Public Gateways. List Public Gateways in a given Scaleway Organization or Project. By default, results are displayed in ascending order of creation date.
    *
    * @param request - The request {@link ListGatewaysRequest}
    * @returns A Promise of ListGatewaysResponse
@@ -141,9 +139,7 @@ export class API extends ParentAPI {
     enrichForPagination('gateways', this.pageOfListGateways, request)
 
   /**
-   * Get a Public Gateway. Get details of a Public Gateway, specified by its
-   * gateway ID. The response object contains full details of the gateway,
-   * including its **name**, **type**, **status** and more.
+   * Get a Public Gateway. Get details of a Public Gateway, specified by its gateway ID. The response object contains full details of the gateway, including its **name**, **type**, **status** and more.
    *
    * @param request - The request {@link GetGatewayRequest}
    * @returns A Promise of Gateway
@@ -180,9 +176,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a Public Gateway. Create a new Public Gateway in the specified
-   * Scaleway Project, defining its **name**, **type** and other configuration
-   * details such as whether to enable SSH bastion.
+   * Create a Public Gateway. Create a new Public Gateway in the specified Scaleway Project, defining its **name**, **type** and other configuration details such as whether to enable SSH bastion.
    *
    * @param request - The request {@link CreateGatewayRequest}
    * @returns A Promise of Gateway
@@ -201,9 +195,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a Public Gateway. Update the parameters of an existing Public
-   * Gateway, for example, its **name**, **tags**, **SSH bastion
-   * configuration**, and **DNS servers**.
+   * Update a Public Gateway. Update the parameters of an existing Public Gateway, for example, its **name**, **tags**, **SSH bastion configuration**, and **DNS servers**.
    *
    * @param request - The request {@link UpdateGatewayRequest}
    * @returns A Promise of Gateway
@@ -222,8 +214,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a Public Gateway. Delete an existing Public Gateway, specified by
-   * its gateway ID. This action is irreversible.
+   * Delete a Public Gateway. Delete an existing Public Gateway, specified by its gateway ID. This action is irreversible.
    *
    * @param request - The request {@link DeleteGatewayRequest}
    * @returns A Promise of Gateway
@@ -239,11 +230,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Upgrade a Public Gateway to the latest version and/or to a different
-   * commercial offer type. Upgrade a given Public Gateway to the newest
-   * software version or to a different commercial offer type. This applies the
-   * latest bugfixes and features to your Public Gateway. Note that gateway
-   * service will be interrupted during the update.
+   * Upgrade a Public Gateway to the latest version and/or to a different commercial offer type. Upgrade a given Public Gateway to the newest software version or to a different commercial offer type. This applies the latest bugfixes and features to your Public Gateway. Note that gateway service will be interrupted during the update.
    *
    * @param request - The request {@link UpgradeGatewayRequest}
    * @returns A Promise of Gateway
@@ -285,14 +272,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Public Gateway connections to Private Networks. List the connections
-   * between Public Gateways and Private Networks (a connection = a
-   * GatewayNetwork). You can choose to filter by `gateway-id` to list all
-   * Private Networks attached to the specified Public Gateway, or by
-   * `private_network_id` to list all Public Gateways attached to the specified
-   * Private Network. Other query parameters are also available. The result is
-   * an array of GatewayNetwork objects, each giving details of the connection
-   * between a given Public Gateway and a given Private Network.
+   * List Public Gateway connections to Private Networks. List the connections between Public Gateways and Private Networks (a connection = a GatewayNetwork). You can choose to filter by `gateway-id` to list all Private Networks attached to the specified Public Gateway, or by `private_network_id` to list all Public Gateways attached to the specified Private Network. Other query parameters are also available. The result is an array of GatewayNetwork objects, each giving details of the connection between a given Public Gateway and a given Private Network.
    *
    * @param request - The request {@link ListGatewayNetworksRequest}
    * @returns A Promise of ListGatewayNetworksResponse
@@ -305,12 +285,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a Public Gateway connection to a Private Network. Get details of a
-   * given connection between a Public Gateway and a Private Network (this
-   * connection = a GatewayNetwork), specified by its `gateway_network_id`. The
-   * response object contains details of the connection including the IDs of the
-   * Public Gateway and Private Network, the dates the connection was
-   * created/updated and its configuration settings.
+   * Get a Public Gateway connection to a Private Network. Get details of a given connection between a Public Gateway and a Private Network (this connection = a GatewayNetwork), specified by its `gateway_network_id`. The response object contains details of the connection including the IDs of the Public Gateway and Private Network, the dates the connection was created/updated and its configuration settings.
    *
    * @param request - The request {@link GetGatewayNetworkRequest}
    * @returns A Promise of GatewayNetwork
@@ -347,10 +322,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Attach a Public Gateway to a Private Network. Attach a specific Public
-   * Gateway to a specific Private Network (create a GatewayNetwork). You can
-   * configure parameters for the connection including whether to enable
-   * masquerade (dynamic NAT), and more.
+   * Attach a Public Gateway to a Private Network. Attach a specific Public Gateway to a specific Private Network (create a GatewayNetwork). You can configure parameters for the connection including whether to enable masquerade (dynamic NAT), and more.
    *
    * @param request - The request {@link CreateGatewayNetworkRequest}
    * @returns A Promise of GatewayNetwork
@@ -369,10 +341,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a Public Gateway's connection to a Private Network. Update the
-   * configuration parameters of a connection between a given Public Gateway and
-   * Private Network (the connection = a GatewayNetwork). Updatable parameters
-   * include whether to enable traffic masquerade (dynamic NAT).
+   * Update a Public Gateway's connection to a Private Network. Update the configuration parameters of a connection between a given Public Gateway and Private Network (the connection = a GatewayNetwork). Updatable parameters include whether to enable traffic masquerade (dynamic NAT).
    *
    * @param request - The request {@link UpdateGatewayNetworkRequest}
    * @returns A Promise of GatewayNetwork
@@ -391,9 +360,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Detach a Public Gateway from a Private Network. Detach a given Public
-   * Gateway from a given Private Network, i.e. delete a GatewayNetwork
-   * specified by a gateway_network_id.
+   * Detach a Public Gateway from a Private Network. Detach a given Public Gateway from a given Private Network, i.e. delete a GatewayNetwork specified by a gateway_network_id.
    *
    * @param request - The request {@link DeleteGatewayNetworkRequest}
    * @returns A Promise of GatewayNetwork
@@ -430,9 +397,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List PAT rules. List PAT rules. You can filter by gateway ID to list all
-   * PAT rules for a particular gateway, or filter for PAT rules targeting a
-   * specific IP address or using a specific protocol.
+   * List PAT rules. List PAT rules. You can filter by gateway ID to list all PAT rules for a particular gateway, or filter for PAT rules targeting a specific IP address or using a specific protocol.
    *
    * @param request - The request {@link ListPatRulesRequest}
    * @returns A Promise of ListPatRulesResponse
@@ -441,10 +406,7 @@ export class API extends ParentAPI {
     enrichForPagination('patRules', this.pageOfListPatRules, request)
 
   /**
-   * Get a PAT rule. Get a PAT rule, specified by its PAT rule ID. The response
-   * object gives full details of the PAT rule, including the Public Gateway it
-   * belongs to and the configuration settings in terms of public / private
-   * ports, private IP and protocol.
+   * Get a PAT rule. Get a PAT rule, specified by its PAT rule ID. The response object gives full details of the PAT rule, including the Public Gateway it belongs to and the configuration settings in terms of public / private ports, private IP and protocol.
    *
    * @param request - The request {@link GetPatRuleRequest}
    * @returns A Promise of PatRule
@@ -459,9 +421,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a PAT rule. Create a new PAT rule on a specified Public Gateway,
-   * defining the protocol to use, public port to listen on, and private port /
-   * IP address to map to.
+   * Create a PAT rule. Create a new PAT rule on a specified Public Gateway, defining the protocol to use, public port to listen on, and private port / IP address to map to.
    *
    * @param request - The request {@link CreatePatRuleRequest}
    * @returns A Promise of PatRule
@@ -480,9 +440,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a PAT rule. Update a PAT rule, specified by its PAT rule ID.
-   * Configuration settings including private/public port, private IP address
-   * and protocol can all be updated.
+   * Update a PAT rule. Update a PAT rule, specified by its PAT rule ID. Configuration settings including private/public port, private IP address and protocol can all be updated.
    *
    * @param request - The request {@link UpdatePatRuleRequest}
    * @returns A Promise of PatRule
@@ -501,10 +459,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set all PAT rules. Set a definitive list of PAT rules attached to a Public
-   * Gateway. Each rule is identified by its public port and protocol. This will
-   * sync the current PAT rule list on the gateway with the new list, creating,
-   * updating or deleting PAT rules accordingly.
+   * Set all PAT rules. Set a definitive list of PAT rules attached to a Public Gateway. Each rule is identified by its public port and protocol. This will sync the current PAT rule list on the gateway with the new list, creating, updating or deleting PAT rules accordingly.
    *
    * @param request - The request {@link SetPatRulesRequest}
    * @returns A Promise of SetPatRulesResponse
@@ -523,8 +478,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a PAT rule. Delete a PAT rule, identified by its PAT rule ID. This
-   * action is irreversible.
+   * Delete a PAT rule. Delete a PAT rule, identified by its PAT rule ID. This action is irreversible.
    *
    * @param request - The request {@link DeletePatRuleRequest}
    */
@@ -535,9 +489,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * List Public Gateway types. List the different Public Gateway commercial
-   * offer types available at Scaleway. The response is an array of objects
-   * describing the name and technical details of each available gateway type.
+   * List Public Gateway types. List the different Public Gateway commercial offer types available at Scaleway. The response is an array of objects describing the name and technical details of each available gateway type.
    *
    * @param request - The request {@link ListGatewayTypesRequest}
    * @returns A Promise of ListGatewayTypesResponse
@@ -574,8 +526,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List IPs. List Public Gateway flexible IP addresses. A number of filter
-   * options are available for limiting results in the response.
+   * List IPs. List Public Gateway flexible IP addresses. A number of filter options are available for limiting results in the response.
    *
    * @param request - The request {@link ListIPsRequest}
    * @returns A Promise of ListIPsResponse
@@ -584,10 +535,7 @@ export class API extends ParentAPI {
     enrichForPagination('ips', this.pageOfListIPs, request)
 
   /**
-   * Get an IP. Get details of a Public Gateway flexible IP address, identified
-   * by its IP ID. The response object contains information including which (if
-   * any) Public Gateway using this IP address, the reverse and various other
-   * metadata.
+   * Get an IP. Get details of a Public Gateway flexible IP address, identified by its IP ID. The response object contains information including which (if any) Public Gateway using this IP address, the reverse and various other metadata.
    *
    * @param request - The request {@link GetIPRequest}
    * @returns A Promise of IP
@@ -602,8 +550,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Reserve an IP. Create (reserve) a new flexible IP address that can be used
-   * for a Public Gateway in a specified Scaleway Project.
+   * Reserve an IP. Create (reserve) a new flexible IP address that can be used for a Public Gateway in a specified Scaleway Project.
    *
    * @param request - The request {@link CreateIPRequest}
    * @returns A Promise of IP
@@ -622,8 +569,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an IP. Update details of an existing flexible IP address, including
-   * its tags, reverse and the Public Gateway it is assigned to.
+   * Update an IP. Update details of an existing flexible IP address, including its tags, reverse and the Public Gateway it is assigned to.
    *
    * @param request - The request {@link UpdateIPRequest}
    * @returns A Promise of IP
@@ -642,8 +588,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an IP. Delete a flexible IP address from your account. This action
-   * is irreversible.
+   * Delete an IP. Delete a flexible IP address from your account. This action is irreversible.
    *
    * @param request - The request {@link DeleteIPRequest}
    */
@@ -654,9 +599,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Refresh a Public Gateway's SSH keys. Refresh the SSH keys of a given Public
-   * Gateway, specified by its gateway ID. This adds any new SSH keys in the
-   * gateway's Scaleway Project to the gateway itself.
+   * Refresh a Public Gateway's SSH keys. Refresh the SSH keys of a given Public Gateway, specified by its gateway ID. This adds any new SSH keys in the gateway's Scaleway Project to the gateway itself.
    *
    * @param request - The request {@link RefreshSSHKeysRequest}
    * @returns A Promise of Gateway
@@ -673,8 +616,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Add allowed IP range to SSH bastion. Add an IP range (in CIDR notation) to
-   * be allowed to connect to the SSH bastion.
+   * Add allowed IP range to SSH bastion. Add an IP range (in CIDR notation) to be allowed to connect to the SSH bastion.
    *
    * @param request - The request {@link AddBastionAllowedIPsRequest}
    * @returns A Promise of AddBastionAllowedIPsResponse
@@ -693,8 +635,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set all IP ranges allowed for SSH bastion. Set a definitive list of IP
-   * ranges (in CIDR notation) allowed to connect to the SSH bastion.
+   * Set all IP ranges allowed for SSH bastion. Set a definitive list of IP ranges (in CIDR notation) allowed to connect to the SSH bastion.
    *
    * @param request - The request {@link SetBastionAllowedIPsRequest}
    * @returns A Promise of SetBastionAllowedIPsResponse
@@ -713,9 +654,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete allowed IP range from SSH bastion. Delete an IP range (defined in
-   * CIDR notation) from SSH bastion, so that it is no longer allowed to
-   * connect.
+   * Delete allowed IP range from SSH bastion. Delete an IP range (defined in CIDR notation) from SSH bastion, so that it is no longer allowed to connect.
    *
    * @param request - The request {@link DeleteBastionAllowedIPsRequest}
    */

@@ -68,9 +68,8 @@ const jsonContentHeaders = {
 
 /**
  * VPC API.
- *
- * This API allows you to manage your Virtual Private Clouds (VPCs) and Private
- * Networks.
+
+This API allows you to manage your Virtual Private Clouds (VPCs) and Private Networks.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -203,10 +202,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Private Networks. List existing Private Networks in the specified
-   * region. By default, the Private Networks returned in the list are ordered
-   * by creation date in ascending order, though this can be modified via the
-   * order_by field.
+   * List Private Networks. List existing Private Networks in the specified region. By default, the Private Networks returned in the list are ordered by creation date in ascending order, though this can be modified via the order_by field.
    *
    * @param request - The request {@link ListPrivateNetworksRequest}
    * @returns A Promise of ListPrivateNetworksResponse
@@ -219,8 +215,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a Private Network. Create a new Private Network. Once created, you
-   * can attach Scaleway resources which are in the same region.
+   * Create a Private Network. Create a new Private Network. Once created, you can attach Scaleway resources which are in the same region.
    *
    * @param request - The request {@link CreatePrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
@@ -241,9 +236,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a Private Network. Retrieve information about an existing Private
-   * Network, specified by its Private Network ID. Its full details are returned
-   * in the response object.
+   * Get a Private Network. Retrieve information about an existing Private Network, specified by its Private Network ID. Its full details are returned in the response object.
    *
    * @param request - The request {@link GetPrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
@@ -258,8 +251,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update Private Network. Update parameters (such as name or tags) of an
-   * existing Private Network, specified by its Private Network ID.
+   * Update Private Network. Update parameters (such as name or tags) of an existing Private Network, specified by its Private Network ID.
    *
    * @param request - The request {@link UpdatePrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
@@ -278,8 +270,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a Private Network. Delete an existing Private Network. Note that you
-   * must first detach all resources from the network, in order to delete it.
+   * Delete a Private Network. Delete an existing Private Network. Note that you must first detach all resources from the network, in order to delete it.
    *
    * @param request - The request {@link DeletePrivateNetworkRequest}
    */
@@ -290,9 +281,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Enable DHCP on a Private Network. Enable DHCP managed on an existing
-   * Private Network. Note that you will not be able to deactivate it
-   * afterwards.
+   * Enable DHCP on a Private Network. Enable DHCP managed on an existing Private Network. Note that you will not be able to deactivate it afterwards.
    *
    * @param request - The request {@link EnableDHCPRequest}
    * @returns A Promise of PrivateNetwork
@@ -309,8 +298,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Enable routing on a VPC. Enable routing on an existing VPC. Note that you
-   * will not be able to deactivate it afterwards.
+   * Enable routing on a VPC. Enable routing on an existing VPC. Note that you will not be able to deactivate it afterwards.
    *
    * @param request - The request {@link EnableRoutingRequest}
    * @returns A Promise of VPC
@@ -348,8 +336,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List subnets. List any Private Network's subnets. See ListPrivateNetworks
-   * to list a specific Private Network's subnets.
+   * List subnets. List any Private Network's subnets. See ListPrivateNetworks to list a specific Private Network's subnets.
    *
    * @param request - The request {@link ListSubnetsRequest}
    * @returns A Promise of ListSubnetsResponse
@@ -358,8 +345,7 @@ export class API extends ParentAPI {
     enrichForPagination('subnets', this.pageOfListSubnets, request)
 
   /**
-   * Add subnets to a Private Network. Add new subnets to an existing Private
-   * Network.
+   * Add subnets to a Private Network. Add new subnets to an existing Private Network.
    *
    * @param request - The request {@link AddSubnetsRequest}
    * @returns A Promise of AddSubnetsResponse
@@ -378,8 +364,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete subnets from a Private Network. Delete the specified subnets from a
-   * Private Network.
+   * Delete subnets from a Private Network. Delete the specified subnets from a Private Network.
    *
    * @param request - The request {@link DeleteSubnetsRequest}
    * @returns A Promise of DeleteSubnetsResponse
@@ -417,8 +402,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a Route. Retrieve details of an existing Route, specified by its Route
-   * ID.
+   * Get a Route. Retrieve details of an existing Route, specified by its Route ID.
    *
    * @param request - The request {@link GetRouteRequest}
    * @returns A Promise of Route
@@ -463,8 +447,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Get ACL Rules for VPC. Retrieve a list of ACL rules for a VPC, specified by
-   * its VPC ID.
+   * Get ACL Rules for VPC. Retrieve a list of ACL rules for a VPC, specified by its VPC ID.
    *
    * @param request - The request {@link GetAclRequest}
    * @returns A Promise of GetAclResponse
@@ -480,8 +463,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set VPC ACL rules. Set the list of ACL rules and the default routing policy
-   * for a VPC.
+   * Set VPC ACL rules. Set the list of ACL rules and the default routing policy for a VPC.
    *
    * @param request - The request {@link SetAclRequest}
    * @returns A Promise of SetAclResponse

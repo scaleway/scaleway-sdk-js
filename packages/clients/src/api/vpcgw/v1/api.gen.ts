@@ -105,8 +105,8 @@ const jsonContentHeaders = {
 
 /**
  * Public Gateways API.
- *
- * This API allows you to manage your Public Gateways.
+
+This API allows you to manage your Public Gateways.
  */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
@@ -148,9 +148,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Public Gateways. List Public Gateways in a given Scaleway Organization
-   * or Project. By default, results are displayed in ascending order of
-   * creation date.
+   * List Public Gateways. List Public Gateways in a given Scaleway Organization or Project. By default, results are displayed in ascending order of creation date.
    *
    * @param request - The request {@link ListGatewaysRequest}
    * @returns A Promise of ListGatewaysResponse
@@ -159,9 +157,7 @@ export class API extends ParentAPI {
     enrichForPagination('gateways', this.pageOfListGateways, request)
 
   /**
-   * Get a Public Gateway. Get details of a Public Gateway, specified by its
-   * gateway ID. The response object contains full details of the gateway,
-   * including its **name**, **type**, **status** and more.
+   * Get a Public Gateway. Get details of a Public Gateway, specified by its gateway ID. The response object contains full details of the gateway, including its **name**, **type**, **status** and more.
    *
    * @param request - The request {@link GetGatewayRequest}
    * @returns A Promise of Gateway
@@ -198,9 +194,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a Public Gateway. Create a new Public Gateway in the specified
-   * Scaleway Project, defining its **name**, **type** and other configuration
-   * details such as whether to enable SSH bastion.
+   * Create a Public Gateway. Create a new Public Gateway in the specified Scaleway Project, defining its **name**, **type** and other configuration details such as whether to enable SSH bastion.
    *
    * @param request - The request {@link CreateGatewayRequest}
    * @returns A Promise of Gateway
@@ -219,9 +213,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a Public Gateway. Update the parameters of an existing Public
-   * Gateway, for example, its **name**, **tags**, **SSH bastion
-   * configuration**, and **DNS servers**.
+   * Update a Public Gateway. Update the parameters of an existing Public Gateway, for example, its **name**, **tags**, **SSH bastion configuration**, and **DNS servers**.
    *
    * @param request - The request {@link UpdateGatewayRequest}
    * @returns A Promise of Gateway
@@ -240,8 +232,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a Public Gateway. Delete an existing Public Gateway, specified by
-   * its gateway ID. This action is irreversible.
+   * Delete a Public Gateway. Delete an existing Public Gateway, specified by its gateway ID. This action is irreversible.
    *
    * @param request - The request {@link DeleteGatewayRequest}
    */
@@ -253,11 +244,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Upgrade a Public Gateway to the latest version and/or to a different
-   * commercial offer type. Upgrade a given Public Gateway to the newest
-   * software version or to a different commercial offer type. This applies the
-   * latest bugfixes and features to your Public Gateway. Note that gateway
-   * service will be interrupted during the update.
+   * Upgrade a Public Gateway to the latest version and/or to a different commercial offer type. Upgrade a given Public Gateway to the newest software version or to a different commercial offer type. This applies the latest bugfixes and features to your Public Gateway. Note that gateway service will be interrupted during the update.
    *
    * @param request - The request {@link UpgradeGatewayRequest}
    * @returns A Promise of Gateway
@@ -276,9 +263,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Upgrade a Public Gateway to IP mobility. Upgrade a Public Gateway to IP
-   * mobility (move from NAT IP to routed IP). This is idempotent: repeated
-   * calls after the first will return no error but have no effect.
+   * Upgrade a Public Gateway to IP mobility. Upgrade a Public Gateway to IP mobility (move from NAT IP to routed IP). This is idempotent: repeated calls after the first will return no error but have no effect.
    *
    * @param request - The request {@link EnableIPMobilityRequest}
    */
@@ -315,14 +300,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Public Gateway connections to Private Networks. List the connections
-   * between Public Gateways and Private Networks (a connection = a
-   * GatewayNetwork). You can choose to filter by `gateway-id` to list all
-   * Private Networks attached to the specified Public Gateway, or by
-   * `private_network_id` to list all Public Gateways attached to the specified
-   * Private Network. Other query parameters are also available. The result is
-   * an array of GatewayNetwork objects, each giving details of the connection
-   * between a given Public Gateway and a given Private Network.
+   * List Public Gateway connections to Private Networks. List the connections between Public Gateways and Private Networks (a connection = a GatewayNetwork). You can choose to filter by `gateway-id` to list all Private Networks attached to the specified Public Gateway, or by `private_network_id` to list all Public Gateways attached to the specified Private Network. Other query parameters are also available. The result is an array of GatewayNetwork objects, each giving details of the connection between a given Public Gateway and a given Private Network.
    *
    * @param request - The request {@link ListGatewayNetworksRequest}
    * @returns A Promise of ListGatewayNetworksResponse
@@ -335,12 +313,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a Public Gateway connection to a Private Network. Get details of a
-   * given connection between a Public Gateway and a Private Network (this
-   * connection = a GatewayNetwork), specified by its `gateway_network_id`. The
-   * response object contains details of the connection including the IDs of the
-   * Public Gateway and Private Network, the dates the connection was
-   * created/updated and its configuration settings.
+   * Get a Public Gateway connection to a Private Network. Get details of a given connection between a Public Gateway and a Private Network (this connection = a GatewayNetwork), specified by its `gateway_network_id`. The response object contains details of the connection including the IDs of the Public Gateway and Private Network, the dates the connection was created/updated and its configuration settings.
    *
    * @param request - The request {@link GetGatewayNetworkRequest}
    * @returns A Promise of GatewayNetwork
@@ -377,10 +350,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Attach a Public Gateway to a Private Network. Attach a specific Public
-   * Gateway to a specific Private Network (create a GatewayNetwork). You can
-   * configure parameters for the connection including DHCP settings, whether to
-   * enable masquerade (dynamic NAT), and more.
+   * Attach a Public Gateway to a Private Network. Attach a specific Public Gateway to a specific Private Network (create a GatewayNetwork). You can configure parameters for the connection including DHCP settings, whether to enable masquerade (dynamic NAT), and more.
    *
    * @param request - The request {@link CreateGatewayNetworkRequest}
    * @returns A Promise of GatewayNetwork
@@ -399,11 +369,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a Public Gateway's connection to a Private Network. Update the
-   * configuration parameters of a connection between a given Public Gateway and
-   * Private Network (the connection = a GatewayNetwork). Updatable parameters
-   * include DHCP settings and whether to enable traffic masquerade (dynamic
-   * NAT).
+   * Update a Public Gateway's connection to a Private Network. Update the configuration parameters of a connection between a given Public Gateway and Private Network (the connection = a GatewayNetwork). Updatable parameters include DHCP settings and whether to enable traffic masquerade (dynamic NAT).
    *
    * @param request - The request {@link UpdateGatewayNetworkRequest}
    * @returns A Promise of GatewayNetwork
@@ -422,9 +388,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Detach a Public Gateway from a Private Network. Detach a given Public
-   * Gateway from a given Private Network, i.e. delete a GatewayNetwork
-   * specified by a gateway_network_id.
+   * Detach a Public Gateway from a Private Network. Detach a given Public Gateway from a given Private Network, i.e. delete a GatewayNetwork specified by a gateway_network_id.
    *
    * @param request - The request {@link DeleteGatewayNetworkRequest}
    */
@@ -457,14 +421,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List DHCP configurations. List DHCP configurations, optionally filtering by
-   * Organization, Project, Public Gateway IP address or more. The response is
-   * an array of DHCP configuration objects, each identified by a DHCP ID and
-   * containing configuration settings for the assignment of IP addresses to
-   * devices on a Private Network attached to a Public Gateway. Note that the
-   * response does not contain the IDs of any Private Network / Public Gateway
-   * the configuration is attached to. Use the `List Public Gateway connections
-   * to Private Networks` method for that purpose, filtering on DHCP ID.
+   * List DHCP configurations. List DHCP configurations, optionally filtering by Organization, Project, Public Gateway IP address or more. The response is an array of DHCP configuration objects, each identified by a DHCP ID and containing configuration settings for the assignment of IP addresses to devices on a Private Network attached to a Public Gateway. Note that the response does not contain the IDs of any Private Network / Public Gateway the configuration is attached to. Use the `List Public Gateway connections to Private Networks` method for that purpose, filtering on DHCP ID.
    *
    * @param request - The request {@link ListDHCPsRequest}
    * @returns A Promise of ListDHCPsResponse
@@ -473,13 +430,7 @@ export class API extends ParentAPI {
     enrichForPagination('dhcps', this.pageOfListDHCPs, request)
 
   /**
-   * Get a DHCP configuration. Get a DHCP configuration object, identified by
-   * its DHCP ID. The response object contains configuration settings for the
-   * assignment of IP addresses to devices on a Private Network attached to a
-   * Public Gateway. Note that the response does not contain the IDs of any
-   * Private Network / Public Gateway the configuration is attached to. Use the
-   * `List Public Gateway connections to Private Networks` method for that
-   * purpose, filtering on DHCP ID.
+   * Get a DHCP configuration. Get a DHCP configuration object, identified by its DHCP ID. The response object contains configuration settings for the assignment of IP addresses to devices on a Private Network attached to a Public Gateway. Note that the response does not contain the IDs of any Private Network / Public Gateway the configuration is attached to. Use the `List Public Gateway connections to Private Networks` method for that purpose, filtering on DHCP ID.
    *
    * @param request - The request {@link GetDHCPRequest}
    * @returns A Promise of DHCP
@@ -494,13 +445,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a DHCP configuration. Create a new DHCP configuration object,
-   * containing settings for the assignment of IP addresses to devices on a
-   * Private Network attached to a Public Gateway. The response object includes
-   * the ID of the DHCP configuration object. You can use this ID as part of a
-   * call to `Create a Public Gateway connection to a Private Network` or
-   * `Update a Public Gateway connection to a Private Network` to directly apply
-   * this DHCP configuration.
+   * Create a DHCP configuration. Create a new DHCP configuration object, containing settings for the assignment of IP addresses to devices on a Private Network attached to a Public Gateway. The response object includes the ID of the DHCP configuration object. You can use this ID as part of a call to `Create a Public Gateway connection to a Private Network` or `Update a Public Gateway connection to a Private Network` to directly apply this DHCP configuration.
    *
    * @param request - The request {@link CreateDHCPRequest}
    * @returns A Promise of DHCP
@@ -519,8 +464,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a DHCP configuration. Update a DHCP configuration object, identified
-   * by its DHCP ID.
+   * Update a DHCP configuration. Update a DHCP configuration object, identified by its DHCP ID.
    *
    * @param request - The request {@link UpdateDHCPRequest}
    * @returns A Promise of DHCP
@@ -539,9 +483,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a DHCP configuration. Delete a DHCP configuration object, identified
-   * by its DHCP ID. Note that you cannot delete a DHCP configuration object
-   * that is currently being used by a Gateway Network.
+   * Delete a DHCP configuration. Delete a DHCP configuration object, identified by its DHCP ID. Note that you cannot delete a DHCP configuration object that is currently being used by a Gateway Network.
    *
    * @param request - The request {@link DeleteDHCPRequest}
    */
@@ -576,9 +518,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List DHCP entries. List DHCP entries, whether dynamically assigned and/or
-   * statically reserved. DHCP entries can be filtered by the Gateway Network
-   * they are on, their MAC address, IP address, type or hostname.
+   * List DHCP entries. List DHCP entries, whether dynamically assigned and/or statically reserved. DHCP entries can be filtered by the Gateway Network they are on, their MAC address, IP address, type or hostname.
    *
    * @param request - The request {@link ListDHCPEntriesRequest}
    * @returns A Promise of ListDHCPEntriesResponse
@@ -602,11 +542,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a DHCP entry. Create a static DHCP reservation, specifying the
-   * Gateway Network for the reservation, the MAC address of the target device
-   * and the IP address to assign this device. The response is a DHCP entry
-   * object, confirming the ID and configuration details of the static DHCP
-   * reservation.
+   * Create a DHCP entry. Create a static DHCP reservation, specifying the Gateway Network for the reservation, the MAC address of the target device and the IP address to assign this device. The response is a DHCP entry object, confirming the ID and configuration details of the static DHCP reservation.
    *
    * @param request - The request {@link CreateDHCPEntryRequest}
    * @returns A Promise of DHCPEntry
@@ -625,11 +561,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a DHCP entry. Update the IP address for a DHCP entry, specified by
-   * its DHCP entry ID. You can update an existing DHCP entry of any type
-   * (`reservation` (static), `lease` (dynamic) or `unknown`), but in manually
-   * updating the IP address the entry will necessarily be of type `reservation`
-   * after the update.
+   * Update a DHCP entry. Update the IP address for a DHCP entry, specified by its DHCP entry ID. You can update an existing DHCP entry of any type (`reservation` (static), `lease` (dynamic) or `unknown`), but in manually updating the IP address the entry will necessarily be of type `reservation` after the update.
    *
    * @param request - The request {@link UpdateDHCPEntryRequest}
    * @returns A Promise of DHCPEntry
@@ -648,10 +580,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set all DHCP reservations on a Gateway Network. Set the list of DHCP
-   * reservations attached to a Gateway Network. Reservations are identified by
-   * their MAC address, and will sync the current DHCP entry list to the given
-   * list, creating, updating or deleting DHCP entries accordingly.
+   * Set all DHCP reservations on a Gateway Network. Set the list of DHCP reservations attached to a Gateway Network. Reservations are identified by their MAC address, and will sync the current DHCP entry list to the given list, creating, updating or deleting DHCP entries accordingly.
    *
    * @param request - The request {@link SetDHCPEntriesRequest}
    * @returns A Promise of SetDHCPEntriesResponse
@@ -670,9 +599,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a DHCP entry. Delete a static DHCP reservation, identified by its
-   * DHCP entry ID. Note that you cannot delete DHCP entries of type `lease`,
-   * these are deleted automatically when their time-to-live expires.
+   * Delete a DHCP entry. Delete a static DHCP reservation, identified by its DHCP entry ID. Note that you cannot delete DHCP entries of type `lease`, these are deleted automatically when their time-to-live expires.
    *
    * @param request - The request {@link DeleteDHCPEntryRequest}
    */
@@ -705,9 +632,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List PAT rules. List PAT rules. You can filter by gateway ID to list all
-   * PAT rules for a particular gateway, or filter for PAT rules targeting a
-   * specific IP address or using a specific protocol.
+   * List PAT rules. List PAT rules. You can filter by gateway ID to list all PAT rules for a particular gateway, or filter for PAT rules targeting a specific IP address or using a specific protocol.
    *
    * @param request - The request {@link ListPATRulesRequest}
    * @returns A Promise of ListPATRulesResponse
@@ -716,10 +641,7 @@ export class API extends ParentAPI {
     enrichForPagination('patRules', this.pageOfListPATRules, request)
 
   /**
-   * Get a PAT rule. Get a PAT rule, specified by its PAT rule ID. The response
-   * object gives full details of the PAT rule, including the Public Gateway it
-   * belongs to and the configuration settings in terms of public / private
-   * ports, private IP and protocol.
+   * Get a PAT rule. Get a PAT rule, specified by its PAT rule ID. The response object gives full details of the PAT rule, including the Public Gateway it belongs to and the configuration settings in terms of public / private ports, private IP and protocol.
    *
    * @param request - The request {@link GetPATRuleRequest}
    * @returns A Promise of PATRule
@@ -734,9 +656,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a PAT rule. Create a new PAT rule on a specified Public Gateway,
-   * defining the protocol to use, public port to listen on, and private port /
-   * IP address to map to.
+   * Create a PAT rule. Create a new PAT rule on a specified Public Gateway, defining the protocol to use, public port to listen on, and private port / IP address to map to.
    *
    * @param request - The request {@link CreatePATRuleRequest}
    * @returns A Promise of PATRule
@@ -755,9 +675,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a PAT rule. Update a PAT rule, specified by its PAT rule ID.
-   * Configuration settings including private/public port, private IP address
-   * and protocol can all be updated.
+   * Update a PAT rule. Update a PAT rule, specified by its PAT rule ID. Configuration settings including private/public port, private IP address and protocol can all be updated.
    *
    * @param request - The request {@link UpdatePATRuleRequest}
    * @returns A Promise of PATRule
@@ -776,10 +694,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set all PAT rules. Set a definitive list of PAT rules attached to a Public
-   * Gateway. Each rule is identified by its public port and protocol. This will
-   * sync the current PAT rule list on the gateway with the new list, creating,
-   * updating or deleting PAT rules accordingly.
+   * Set all PAT rules. Set a definitive list of PAT rules attached to a Public Gateway. Each rule is identified by its public port and protocol. This will sync the current PAT rule list on the gateway with the new list, creating, updating or deleting PAT rules accordingly.
    *
    * @param request - The request {@link SetPATRulesRequest}
    * @returns A Promise of SetPATRulesResponse
@@ -798,8 +713,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a PAT rule. Delete a PAT rule, identified by its PAT rule ID. This
-   * action is irreversible.
+   * Delete a PAT rule. Delete a PAT rule, identified by its PAT rule ID. This action is irreversible.
    *
    * @param request - The request {@link DeletePATRuleRequest}
    */
@@ -810,9 +724,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * List Public Gateway types. List the different Public Gateway commercial
-   * offer types available at Scaleway. The response is an array of objects
-   * describing the name and technical details of each available gateway type.
+   * List Public Gateway types. List the different Public Gateway commercial offer types available at Scaleway. The response is an array of objects describing the name and technical details of each available gateway type.
    *
    * @param request - The request {@link ListGatewayTypesRequest}
    * @returns A Promise of ListGatewayTypesResponse
@@ -849,8 +761,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List IPs. List Public Gateway flexible IP addresses. A number of filter
-   * options are available for limiting results in the response.
+   * List IPs. List Public Gateway flexible IP addresses. A number of filter options are available for limiting results in the response.
    *
    * @param request - The request {@link ListIPsRequest}
    * @returns A Promise of ListIPsResponse
@@ -859,10 +770,7 @@ export class API extends ParentAPI {
     enrichForPagination('ips', this.pageOfListIPs, request)
 
   /**
-   * Get an IP. Get details of a Public Gateway flexible IP address, identified
-   * by its IP ID. The response object contains information including which (if
-   * any) Public Gateway using this IP address, the reverse and various other
-   * metadata.
+   * Get an IP. Get details of a Public Gateway flexible IP address, identified by its IP ID. The response object contains information including which (if any) Public Gateway using this IP address, the reverse and various other metadata.
    *
    * @param request - The request {@link GetIPRequest}
    * @returns A Promise of IP
@@ -877,8 +785,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Reserve an IP. Create (reserve) a new flexible IP address that can be used
-   * for a Public Gateway in a specified Scaleway Project.
+   * Reserve an IP. Create (reserve) a new flexible IP address that can be used for a Public Gateway in a specified Scaleway Project.
    *
    * @param request - The request {@link CreateIPRequest}
    * @returns A Promise of IP
@@ -897,8 +804,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an IP. Update details of an existing flexible IP address, including
-   * its tags, reverse and the Public Gateway it is assigned to.
+   * Update an IP. Update details of an existing flexible IP address, including its tags, reverse and the Public Gateway it is assigned to.
    *
    * @param request - The request {@link UpdateIPRequest}
    * @returns A Promise of IP
@@ -917,8 +823,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an IP. Delete a flexible IP address from your account. This action
-   * is irreversible.
+   * Delete an IP. Delete a flexible IP address from your account. This action is irreversible.
    *
    * @param request - The request {@link DeleteIPRequest}
    */
@@ -929,9 +834,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Refresh a Public Gateway's SSH keys. Refresh the SSH keys of a given Public
-   * Gateway, specified by its gateway ID. This adds any new SSH keys in the
-   * gateway's Scaleway Project to the gateway itself.
+   * Refresh a Public Gateway's SSH keys. Refresh the SSH keys of a given Public Gateway, specified by its gateway ID. This adds any new SSH keys in the gateway's Scaleway Project to the gateway itself.
    *
    * @param request - The request {@link RefreshSSHKeysRequest}
    * @returns A Promise of Gateway
@@ -948,9 +851,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Put a Public Gateway in IPAM mode. Put a Public Gateway in IPAM mode, so
-   * that it can be used with the Public Gateways API v2. This call is
-   * idempotent.
+   * Put a Public Gateway in IPAM mode. Put a Public Gateway in IPAM mode, so that it can be used with the Public Gateways API v2. This call is idempotent.
    *
    * @param request - The request {@link MigrateToV2Request}
    */

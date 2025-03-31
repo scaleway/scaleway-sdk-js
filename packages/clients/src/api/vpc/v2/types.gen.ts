@@ -21,145 +21,228 @@ export type ListVPCsRequestOrderBy =
   | 'name_desc'
 
 export interface Subnet {
-  /** ID of the subnet. */
+  /**
+   * ID of the subnet.
+   */
   id: string
-  /** Subnet creation date. */
+  /**
+   * Subnet creation date.
+   */
   createdAt?: Date
-  /** Subnet last modification date. */
+  /**
+   * Subnet last modification date.
+   */
   updatedAt?: Date
-  /** Subnet CIDR. */
+  /**
+   * Subnet CIDR.
+   */
   subnet: string
-  /** Scaleway Project the subnet belongs to. */
+  /**
+   * Scaleway Project the subnet belongs to.
+   */
   projectId: string
-  /** Private Network the subnet belongs to. */
+  /**
+   * Private Network the subnet belongs to.
+   */
   privateNetworkId: string
-  /** VPC the subnet belongs to. */
+  /**
+   * VPC the subnet belongs to.
+   */
   vpcId: string
 }
 
 export interface PrivateNetwork {
-  /** Private Network ID. */
+  /**
+   * Private Network ID.
+   */
   id: string
-  /** Private Network name. */
+  /**
+   * Private Network name.
+   */
   name: string
-  /** Scaleway Organization the Private Network belongs to. */
+  /**
+   * Scaleway Organization the Private Network belongs to.
+   */
   organizationId: string
-  /** Scaleway Project the Private Network belongs to. */
+  /**
+   * Scaleway Project the Private Network belongs to.
+   */
   projectId: string
-  /** Region in which the Private Network is available. */
+  /**
+   * Region in which the Private Network is available.
+   */
   region: ScwRegion
-  /** Tags of the Private Network. */
+  /**
+   * Tags of the Private Network.
+   */
   tags: string[]
-  /** Date the Private Network was created. */
+  /**
+   * Date the Private Network was created.
+   */
   createdAt?: Date
-  /** Date the Private Network was last modified. */
+  /**
+   * Date the Private Network was last modified.
+   */
   updatedAt?: Date
-  /** Private Network subnets. */
+  /**
+   * Private Network subnets.
+   */
   subnets: Subnet[]
-  /** VPC the Private Network belongs to. */
+  /**
+   * VPC the Private Network belongs to.
+   */
   vpcId: string
-  /** Defines whether managed DHCP is enabled for this Private Network. */
+  /**
+   * Defines whether managed DHCP is enabled for this Private Network.
+   */
   dhcpEnabled: boolean
 }
 
 export interface Route {
-  /** Route ID. */
+  /**
+   * Route ID.
+   */
   id: string
-  /** Route description. */
+  /**
+   * Route description.
+   */
   description: string
-  /** Tags of the Route. */
+  /**
+   * Tags of the Route.
+   */
   tags: string[]
-  /** VPC the Route belongs to. */
+  /**
+   * VPC the Route belongs to.
+   */
   vpcId: string
-  /** Destination of the Route. */
+  /**
+   * Destination of the Route.
+   */
   destination: string
-  /** ID of the nexthop resource. */
+  /**
+   * ID of the nexthop resource.
+   */
   nexthopResourceId?: string
-  /** ID of the nexthop private network. */
+  /**
+   * ID of the nexthop private network.
+   */
   nexthopPrivateNetworkId?: string
-  /** Date the Route was created. */
+  /**
+   * Date the Route was created.
+   */
   createdAt?: Date
-  /** Date the Route was last modified. */
+  /**
+   * Date the Route was last modified.
+   */
   updatedAt?: Date
-  /** Defines whether the route can be modified or deleted by the user. */
+  /**
+   * Defines whether the route can be modified or deleted by the user.
+   */
   isReadOnly: boolean
-  /** Region of the Route. */
+  /**
+   * Region of the Route.
+   */
   region: ScwRegion
 }
 
 export interface AclRule {
-  /** Protocol to which this rule applies. */
+  /**
+   * Protocol to which this rule applies.
+   */
   protocol: AclRuleProtocol
   /**
-   * Source IP range to which this rule applies (CIDR notation with subnet
-   * mask).
+   * Source IP range to which this rule applies (CIDR notation with subnet mask).
    */
   source: string
   /**
-   * Starting port of the source port range to which this rule applies
-   * (inclusive).
+   * Starting port of the source port range to which this rule applies (inclusive).
    */
   srcPortLow: number
   /**
-   * Ending port of the source port range to which this rule applies
-   * (inclusive).
+   * Ending port of the source port range to which this rule applies (inclusive).
    */
   srcPortHigh: number
   /**
-   * Destination IP range to which this rule applies (CIDR notation with subnet
-   * mask).
+   * Destination IP range to which this rule applies (CIDR notation with subnet mask).
    */
   destination: string
   /**
-   * Starting port of the destination port range to which this rule applies
-   * (inclusive).
+   * Starting port of the destination port range to which this rule applies (inclusive).
    */
   dstPortLow: number
   /**
-   * Ending port of the destination port range to which this rule applies
-   * (inclusive).
+   * Ending port of the destination port range to which this rule applies (inclusive).
    */
   dstPortHigh: number
-  /** Policy to apply to the packet. */
+  /**
+   * Policy to apply to the packet.
+   */
   action: Action
-  /** Rule description. */
+  /**
+   * Rule description.
+   */
   description?: string
 }
 
 export interface VPC {
-  /** VPC ID. */
+  /**
+   * VPC ID.
+   */
   id: string
-  /** VPC name. */
+  /**
+   * VPC name.
+   */
   name: string
-  /** Scaleway Organization the VPC belongs to. */
+  /**
+   * Scaleway Organization the VPC belongs to.
+   */
   organizationId: string
-  /** Scaleway Project the VPC belongs to. */
+  /**
+   * Scaleway Project the VPC belongs to.
+   */
   projectId: string
-  /** Region of the VPC. */
+  /**
+   * Region of the VPC.
+   */
   region: ScwRegion
-  /** Tags for the VPC. */
+  /**
+   * Tags for the VPC.
+   */
   tags: string[]
-  /** Defines whether the VPC is the default one for its Project. */
+  /**
+   * Defines whether the VPC is the default one for its Project.
+   */
   isDefault: boolean
-  /** Date the VPC was created. */
+  /**
+   * Date the VPC was created.
+   */
   createdAt?: Date
-  /** Date the VPC was last modified. */
+  /**
+   * Date the VPC was last modified.
+   */
   updatedAt?: Date
-  /** Number of Private Networks within this VPC. */
+  /**
+   * Number of Private Networks within this VPC.
+   */
   privateNetworkCount: number
-  /** Defines whether the VPC routes traffic between its Private Networks. */
+  /**
+   * Defines whether the VPC routes traffic between its Private Networks.
+   */
   routingEnabled: boolean
 }
 
 export type AddSubnetsRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Private Network ID. */
+  /**
+   * Private Network ID.
+   */
   privateNetworkId: string
-  /** Private Network subnets CIDR. */
+  /**
+   * Private Network subnets CIDR.
+   */
   subnets?: string[]
 }
 
@@ -169,87 +252,119 @@ export interface AddSubnetsResponse {
 
 export type CreatePrivateNetworkRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Name for the Private Network. */
+  /**
+   * Name for the Private Network.
+   */
   name?: string
-  /** Scaleway Project in which to create the Private Network. */
+  /**
+   * Scaleway Project in which to create the Private Network.
+   */
   projectId?: string
-  /** Tags for the Private Network. */
+  /**
+   * Tags for the Private Network.
+   */
   tags?: string[]
-  /** Private Network subnets CIDR. */
+  /**
+   * Private Network subnets CIDR.
+   */
   subnets?: string[]
-  /** VPC in which to create the Private Network. */
+  /**
+   * VPC in which to create the Private Network.
+   */
   vpcId?: string
 }
 
 export type CreateRouteRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Route description. */
+  /**
+   * Route description.
+   */
   description: string
-  /** Tags of the Route. */
+  /**
+   * Tags of the Route.
+   */
   tags?: string[]
-  /** VPC the Route belongs to. */
+  /**
+   * VPC the Route belongs to.
+   */
   vpcId: string
-  /** Destination of the Route. */
+  /**
+   * Destination of the Route.
+   */
   destination: string
-  /** ID of the nexthop resource. */
+  /**
+   * ID of the nexthop resource.
+   */
   nexthopResourceId?: string
-  /** ID of the nexthop private network. */
+  /**
+   * ID of the nexthop private network.
+   */
   nexthopPrivateNetworkId?: string
 }
 
 export type CreateVPCRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Name for the VPC. */
+  /**
+   * Name for the VPC.
+   */
   name?: string
-  /** Scaleway Project in which to create the VPC. */
+  /**
+   * Scaleway Project in which to create the VPC.
+   */
   projectId?: string
-  /** Tags for the VPC. */
+  /**
+   * Tags for the VPC.
+   */
   tags?: string[]
-  /** Enable routing between Private Networks in the VPC. */
+  /**
+   * Enable routing between Private Networks in the VPC.
+   */
   enableRouting: boolean
 }
 
 export type DeletePrivateNetworkRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Private Network ID. */
+  /**
+   * Private Network ID.
+   */
   privateNetworkId: string
 }
 
 export type DeleteRouteRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Route ID. */
+  /**
+   * Route ID.
+   */
   routeId: string
 }
 
 export type DeleteSubnetsRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Private Network ID. */
+  /**
+   * Private Network ID.
+   */
   privateNetworkId: string
-  /** Private Network subnets CIDR. */
+  /**
+   * Private Network subnets CIDR.
+   */
   subnets?: string[]
 }
 
@@ -259,45 +374,48 @@ export interface DeleteSubnetsResponse {
 
 export type DeleteVPCRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** VPC ID. */
+  /**
+   * VPC ID.
+   */
   vpcId: string
 }
 
 export type EnableDHCPRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Private Network ID. */
+  /**
+   * Private Network ID.
+   */
   privateNetworkId: string
 }
 
 export type EnableRoutingRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** VPC ID. */
+  /**
+   * VPC ID.
+   */
   vpcId: string
 }
 
 export type GetAclRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** ID of the Network ACL's VPC. */
+  /**
+   * ID of the Network ACL's VPC.
+   */
   vpcId: string
   /**
-   * Defines whether this set of ACL rules is for IPv6 (false = IPv4). Each
-   * Network ACL can have rules for only one IP type.
+   * Defines whether this set of ACL rules is for IPv6 (false = IPv4). Each Network ACL can have rules for only one IP type.
    */
   isIpv6: boolean
 }
@@ -309,79 +427,80 @@ export interface GetAclResponse {
 
 export type GetPrivateNetworkRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Private Network ID. */
+  /**
+   * Private Network ID.
+   */
   privateNetworkId: string
 }
 
 export type GetRouteRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Route ID. */
+  /**
+   * Route ID.
+   */
   routeId: string
 }
 
 export type GetVPCRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** VPC ID. */
+  /**
+   * VPC ID.
+   */
   vpcId: string
 }
 
 export type ListPrivateNetworksRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Sort order of the returned Private Networks. */
+  /**
+   * Sort order of the returned Private Networks.
+   */
   orderBy?: ListPrivateNetworksRequestOrderBy
-  /** Page number to return, from the paginated results. */
+  /**
+   * Page number to return, from the paginated results.
+   */
   page?: number
-  /** Maximum number of Private Networks to return per page. */
+  /**
+   * Maximum number of Private Networks to return per page.
+   */
   pageSize?: number
   /**
-   * Name to filter for. Only Private Networks with names containing this string
-   * will be returned.
+   * Name to filter for. Only Private Networks with names containing this string will be returned.
    */
   name?: string
   /**
-   * Tags to filter for. Only Private Networks with one or more matching tags
-   * will be returned.
+   * Tags to filter for. Only Private Networks with one or more matching tags will be returned.
    */
   tags?: string[]
   /**
-   * Organization ID to filter for. Only Private Networks belonging to this
-   * Organization will be returned.
+   * Organization ID to filter for. Only Private Networks belonging to this Organization will be returned.
    */
   organizationId?: string
   /**
-   * Project ID to filter for. Only Private Networks belonging to this Project
-   * will be returned.
+   * Project ID to filter for. Only Private Networks belonging to this Project will be returned.
    */
   projectId?: string
   /**
-   * Private Network IDs to filter for. Only Private Networks with one of these
-   * IDs will be returned.
+   * Private Network IDs to filter for. Only Private Networks with one of these IDs will be returned.
    */
   privateNetworkIds?: string[]
   /**
-   * VPC ID to filter for. Only Private Networks belonging to this VPC will be
-   * returned.
+   * VPC ID to filter for. Only Private Networks belonging to this VPC will be returned.
    */
   vpcId?: string
   /**
-   * DHCP status to filter for. When true, only Private Networks with managed
-   * DHCP enabled will be returned.
+   * DHCP status to filter for. When true, only Private Networks with managed DHCP enabled will be returned.
    */
   dhcpEnabled?: boolean
 }
@@ -393,32 +512,36 @@ export interface ListPrivateNetworksResponse {
 
 export type ListSubnetsRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Sort order of the returned subnets. */
+  /**
+   * Sort order of the returned subnets.
+   */
   orderBy?: ListSubnetsRequestOrderBy
-  /** Page number to return, from the paginated results. */
+  /**
+   * Page number to return, from the paginated results.
+   */
   page?: number
-  /** Maximum number of Private Networks to return per page. */
+  /**
+   * Maximum number of Private Networks to return per page.
+   */
   pageSize?: number
   /**
-   * Organization ID to filter for. Only subnets belonging to this Organization
-   * will be returned.
+   * Organization ID to filter for. Only subnets belonging to this Organization will be returned.
    */
   organizationId?: string
   /**
-   * Project ID to filter for. Only subnets belonging to this Project will be
-   * returned.
+   * Project ID to filter for. Only subnets belonging to this Project will be returned.
    */
   projectId?: string
   /**
-   * Subnet IDs to filter for. Only subnets matching the specified IDs will be
-   * returned.
+   * Subnet IDs to filter for. Only subnets matching the specified IDs will be returned.
    */
   subnetIds?: string[]
-  /** VPC ID to filter for. Only subnets belonging to this VPC will be returned. */
+  /**
+   * VPC ID to filter for. Only subnets belonging to this VPC will be returned.
+   */
   vpcId?: string
 }
 
@@ -429,44 +552,43 @@ export interface ListSubnetsResponse {
 
 export type ListVPCsRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Sort order of the returned VPCs. */
+  /**
+   * Sort order of the returned VPCs.
+   */
   orderBy?: ListVPCsRequestOrderBy
-  /** Page number to return, from the paginated results. */
+  /**
+   * Page number to return, from the paginated results.
+   */
   page?: number
-  /** Maximum number of VPCs to return per page. */
+  /**
+   * Maximum number of VPCs to return per page.
+   */
   pageSize?: number
   /**
-   * Name to filter for. Only VPCs with names containing this string will be
-   * returned.
+   * Name to filter for. Only VPCs with names containing this string will be returned.
    */
   name?: string
   /**
-   * Tags to filter for. Only VPCs with one more more matching tags will be
-   * returned.
+   * Tags to filter for. Only VPCs with one or more matching tags will be returned.
    */
   tags?: string[]
   /**
-   * Organization ID to filter for. Only VPCs belonging to this Organization
-   * will be returned.
+   * Organization ID to filter for. Only VPCs belonging to this Organization will be returned.
    */
   organizationId?: string
   /**
-   * Project ID to filter for. Only VPCs belonging to this Project will be
-   * returned.
+   * Project ID to filter for. Only VPCs belonging to this Project will be returned.
    */
   projectId?: string
   /**
-   * Defines whether to filter only for VPCs which are the default one for their
-   * Project.
+   * Defines whether to filter only for VPCs which are the default one for their Project.
    */
   isDefault?: boolean
   /**
-   * Defines whether to filter only for VPCs which route traffic between their
-   * Private Networks.
+   * Defines whether to filter only for VPCs which route traffic between their Private Networks.
    */
   routingEnabled?: boolean
 }
@@ -478,20 +600,24 @@ export interface ListVPCsResponse {
 
 export type SetAclRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** ID of the Network ACL's VPC. */
+  /**
+   * ID of the Network ACL's VPC.
+   */
   vpcId: string
-  /** List of Network ACL rules. */
+  /**
+   * List of Network ACL rules.
+   */
   rules: AclRule[]
   /**
-   * Defines whether this set of ACL rules is for IPv6 (false = IPv4). Each
-   * Network ACL can have rules for only one IP type.
+   * Defines whether this set of ACL rules is for IPv6 (false = IPv4). Each Network ACL can have rules for only one IP type.
    */
   isIpv6: boolean
-  /** Action to take for packets which do not match any rules. */
+  /**
+   * Action to take for packets which do not match any rules.
+   */
   defaultPolicy: Action
 }
 
@@ -502,48 +628,69 @@ export interface SetAclResponse {
 
 export type UpdatePrivateNetworkRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Private Network ID. */
+  /**
+   * Private Network ID.
+   */
   privateNetworkId: string
-  /** Name for the Private Network. */
+  /**
+   * Name for the Private Network.
+   */
   name?: string
-  /** Tags for the Private Network. */
+  /**
+   * Tags for the Private Network.
+   */
   tags?: string[]
 }
 
 export type UpdateRouteRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Route ID. */
+  /**
+   * Route ID.
+   */
   routeId: string
-  /** Route description. */
+  /**
+   * Route description.
+   */
   description?: string
-  /** Tags of the Route. */
+  /**
+   * Tags of the Route.
+   */
   tags?: string[]
-  /** Destination of the Route. */
+  /**
+   * Destination of the Route.
+   */
   destination?: string
-  /** ID of the nexthop resource. */
+  /**
+   * ID of the nexthop resource.
+   */
   nexthopResourceId?: string
-  /** ID of the nexthop private network. */
+  /**
+   * ID of the nexthop private network.
+   */
   nexthopPrivateNetworkId?: string
 }
 
 export type UpdateVPCRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** VPC ID. */
+  /**
+   * VPC ID.
+   */
   vpcId: string
-  /** Name for the VPC. */
+  /**
+   * Name for the VPC.
+   */
   name?: string
-  /** Tags for the VPC. */
+  /**
+   * Tags for the VPC.
+   */
   tags?: string[]
 }
