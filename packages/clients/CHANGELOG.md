@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.72.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.71.1...@scaleway/sdk@2.72.0) (2025-03-31)
+
+### Features
+
+- **edge_services:** decommission v1alpha (no longer used) ([#1964](https://github.com/scaleway/scaleway-sdk-js/issues/1964)) ([c209f2b](https://github.com/scaleway/scaleway-sdk-js/commit/c209f2b5c9c8551981d58514d2edeed1f372c066))
+- **interlink:** update interlink ([#1956](https://github.com/scaleway/scaleway-sdk-js/issues/1956)) ([514e964](https://github.com/scaleway/scaleway-sdk-js/commit/514e964f838f0a55afa588c77753d96cf4cd5eb4))
+- **vpc:** set subnets private network ([#1957](https://github.com/scaleway/scaleway-sdk-js/issues/1957)) ([40b4616](https://github.com/scaleway/scaleway-sdk-js/commit/40b4616e3a8028bb7d6f738bc4370d25249774b8))
+
+### Bug Fixes
+
+- **lb:** attach private network path ([#1967](https://github.com/scaleway/scaleway-sdk-js/issues/1967)) ([eda6a4f](https://github.com/scaleway/scaleway-sdk-js/commit/eda6a4f5036fff2b6dfea767155a24e439c7afad))
+
 ## [2.71.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.71.0...@scaleway/sdk@2.71.1) (2025-03-26)
 
 ### Bug Fixes

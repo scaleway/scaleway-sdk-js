@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-client@1.1.0...@scaleway/sdk-client@1.1.1) (2025-03-31)
+
+**Note:** Version bump only for package @scaleway/sdk-client
+
 ## 1.1.0 (2025-03-26)
 
 ### Features
