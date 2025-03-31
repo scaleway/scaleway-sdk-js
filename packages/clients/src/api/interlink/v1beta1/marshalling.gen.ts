@@ -5,24 +5,95 @@ import {
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
-} from '../../../bridge'
-import type { DefaultValues } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   AttachRoutingPolicyRequest,
   AttachVpcRequest,
+  BgpConfig,
   CreateLinkRequest,
   CreateRoutingPolicyRequest,
+  DedicatedConnection,
   Link,
+  ListDedicatedConnectionsResponse,
   ListLinksResponse,
   ListPartnersResponse,
   ListPopsResponse,
   ListRoutingPoliciesResponse,
   Partner,
+  PartnerHost,
   Pop,
   RoutingPolicy,
+  SelfHost,
   UpdateLinkRequest,
   UpdateRoutingPolicyRequest,
 } from './types.gen'
+
+export const unmarshalDedicatedConnection = (
+  data: unknown,
+): DedicatedConnection => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DedicatedConnection' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    availableLinkBandwidths: data.available_link_bandwidths,
+    bandwidthMbps: data.bandwidth_mbps,
+    createdAt: unmarshalDate(data.created_at),
+    demarcationInfo: data.demarcation_info,
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    popId: data.pop_id,
+    projectId: data.project_id,
+    region: data.region,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as DedicatedConnection
+}
+
+const unmarshalBgpConfig = (data: unknown): BgpConfig => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'BgpConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    asn: data.asn,
+    ipv4: data.ipv4,
+    ipv6: data.ipv6,
+  } as BgpConfig
+}
+
+const unmarshalPartnerHost = (data: unknown): PartnerHost => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PartnerHost' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    disapprovedReason: data.disapproved_reason,
+    pairingKey: data.pairing_key,
+    partnerId: data.partner_id,
+  } as PartnerHost
+}
+
+const unmarshalSelfHost = (data: unknown): SelfHost => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SelfHost' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    connectionId: data.connection_id,
+  } as SelfHost
+}
 
 export const unmarshalLink = (data: unknown): Link => {
   if (!isJSONObject(data)) {
@@ -36,20 +107,26 @@ export const unmarshalLink = (data: unknown): Link => {
     bgpV4Status: data.bgp_v4_status,
     bgpV6Status: data.bgp_v6_status,
     createdAt: unmarshalDate(data.created_at),
-    disapprovedReason: data.disapproved_reason,
     enableRoutePropagation: data.enable_route_propagation,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
-    pairingKey: data.pairing_key,
-    partnerId: data.partner_id,
+    partner: data.partner ? unmarshalPartnerHost(data.partner) : undefined,
+    peerBgpConfig: data.peer_bgp_config
+      ? unmarshalBgpConfig(data.peer_bgp_config)
+      : undefined,
     popId: data.pop_id,
     projectId: data.project_id,
     region: data.region,
     routingPolicyId: data.routing_policy_id,
+    scwBgpConfig: data.scw_bgp_config
+      ? unmarshalBgpConfig(data.scw_bgp_config)
+      : undefined,
+    self: data.self ? unmarshalSelfHost(data.self) : undefined,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
+    vlan: data.vlan,
     vpcId: data.vpc_id,
   } as Link
 }
@@ -110,6 +187,24 @@ export const unmarshalRoutingPolicy = (data: unknown): RoutingPolicy => {
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
   } as RoutingPolicy
+}
+
+export const unmarshalListDedicatedConnectionsResponse = (
+  data: unknown,
+): ListDedicatedConnectionsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDedicatedConnectionsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    connections: unmarshalArrayOfObject(
+      data.connections,
+      unmarshalDedicatedConnection,
+    ),
+    totalCount: data.total_count,
+  } as ListDedicatedConnectionsResponse
 }
 
 export const unmarshalListLinksResponse = (
@@ -196,9 +291,8 @@ export const marshalCreateLinkRequest = (
   pop_id: request.popId,
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
-  ...resolveOneOf<boolean | string>([
-    { param: 'dedicated', value: request.dedicated },
-    { param: 'port_id', value: request.portId },
+  ...resolveOneOf([
+    { param: 'connection_id', value: request.connectionId },
     { param: 'partner_id', value: request.partnerId },
   ]),
 })

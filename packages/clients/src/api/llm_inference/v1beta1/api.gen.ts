@@ -6,8 +6,8 @@ import {
   urlParams,
   validatePathParam,
   waitForResource,
-} from '../../../bridge'
-import type { Region, WaitForOptions } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { Region, WaitForOptions } from '@scaleway/sdk-client'
 import { DEPLOYMENT_TRANSIENT_STATUSES } from './content.gen'
 import {
   marshalAddDeploymentACLRulesRequest,

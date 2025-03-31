@@ -1,7 +1,7 @@
 import browserslist from 'browserslist'
 import { resolveToEsbuildTarget } from 'esbuild-plugin-browserslist'
 import { readPackage } from 'read-pkg'
-import { defineConfig, type UserConfig } from 'vite'
+import { type UserConfig, defineConfig } from 'vite'
 
 const pkg = await readPackage()
 

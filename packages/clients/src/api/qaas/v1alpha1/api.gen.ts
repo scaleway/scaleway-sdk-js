@@ -7,8 +7,8 @@ import {
   urlParams,
   validatePathParam,
   waitForResource,
-} from '../../../bridge'
-import type { WaitForOptions } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
 import {
   JOB_TRANSIENT_STATUSES as JOB_TRANSIENT_STATUSES_QAAS,
   PROCESS_TRANSIENT_STATUSES as PROCESS_TRANSIENT_STATUSES_QAAS,

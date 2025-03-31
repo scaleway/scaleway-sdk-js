@@ -5,8 +5,8 @@ import {
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
-} from '../../../bridge'
-import type { DefaultValues } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   CreateHumanRequest,
   Human,

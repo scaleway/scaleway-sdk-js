@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Money, Region as ScwRegion } from '../../../bridge'
+import type { Money, Region as ScwRegion } from '@scaleway/sdk-client'
 import type { LanguageCode as StdLanguageCode } from '../../std/types.gen'
 
 export type DnsRecordStatus = 'unknown_status' | 'valid' | 'invalid'

@@ -25,7 +25,11 @@ export class UnknownResourceMapper {
         // transform `Security group ` to `security_group`
         // `.replaceAll()` may be too recent to use yet.
         // that's why we're using `.split(' ').join('_')` for now.
-        messageParts[0].trim().toLowerCase().split(' ').join('_'),
+        messageParts[0]
+          .trim()
+          .toLowerCase()
+          .split(' ')
+          .join('_'),
         messageParts[1],
       )
     }

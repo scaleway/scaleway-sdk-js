@@ -5,8 +5,8 @@ import {
   enrichForPagination,
   urlParams,
   validatePathParam,
-} from '../../../bridge'
-import type { Zone as ScwZone } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { Zone as ScwZone } from '@scaleway/sdk-client'
 import {
   marshalApplyBlockMigrationRequest,
   marshalAttachServerVolumeRequest,

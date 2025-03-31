@@ -7,8 +7,8 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
   unmarshalTimeSeries,
-} from '../../../bridge'
-import type { DefaultValues } from '../../../bridge'
+} from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   ACLRule,
   ACLRuleRequest,

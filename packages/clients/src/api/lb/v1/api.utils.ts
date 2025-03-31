@@ -1,8 +1,8 @@
 import {
   createExponentialBackoffStrategy,
   tryAtIntervals,
-} from '../../../internal/async/interval-retrier'
-import type { WaitForOptions } from '../../../internal/async/interval-retrier'
+} from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
 import { API, ZonedAPI } from './api.gen'
 import {
   INSTANCE_TRANSIENT_STATUSES,
