@@ -69,17 +69,15 @@ const jsonContentHeaders = {
 
 /**
  * Apple silicon API.
- *
- * This API allows you to manage your Apple silicon machines.
+
+This API allows you to manage your Apple silicon machines.
  */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
   public static readonly LOCALITIES: ScwZone[] = ['fr-par-3']
 
   /**
-   * List server types. List all technical details about Apple silicon server
-   * types available in the specified zone. Since there is only one Availability
-   * Zone for Apple silicon servers, the targeted value is `fr-par-3`.
+   * List server types. List all technical details about Apple silicon server types available in the specified zone. Since there is only one Availability Zone for Apple silicon servers, the targeted value is `fr-par-3`.
    *
    * @param request - The request {@link ListServerTypesRequest}
    * @returns A Promise of ListServerTypesResponse
@@ -94,8 +92,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a server type. Get technical details (CPU, disk size etc.) of a server
-   * type.
+   * Get a server type. Get technical details (CPU, disk size etc.) of a server type.
    *
    * @param request - The request {@link GetServerTypeRequest}
    * @returns A Promise of ServerType
@@ -110,8 +107,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a server. Create a new server in the targeted zone, specifying its
-   * configuration including name and type.
+   * Create a server. Create a new server in the targeted zone, specifying its configuration including name and type.
    *
    * @param request - The request {@link CreateServerRequest}
    * @returns A Promise of Server
@@ -149,9 +145,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all servers. List all servers in the specified zone. By default,
-   * returned servers in the list are ordered by creation date in ascending
-   * order, though this can be modified via the `order_by` field.
+   * List all servers. List all servers in the specified zone. By default, returned servers in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListServersRequest}
    * @returns A Promise of ListServersResponse
@@ -178,9 +172,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all Operating Systems (OS). List all Operating Systems (OS). The
-   * response will include the total number of OS as well as their associated
-   * IDs, names and labels.
+   * List all Operating Systems (OS). List all Operating Systems (OS). The response will include the total number of OS as well as their associated IDs, names and labels.
    *
    * @param request - The request {@link ListOSRequest}
    * @returns A Promise of ListOSResponse
@@ -189,8 +181,7 @@ export class API extends ParentAPI {
     enrichForPagination('os', this.pageOfListOS, request)
 
   /**
-   * Get an Operating System (OS). Get an Operating System (OS). The response
-   * will include the OS's unique ID as well as its name and label.
+   * Get an Operating System (OS). Get an Operating System (OS).  The response will include the OS's unique ID as well as its name and label.
    *
    * @param request - The request {@link GetOSRequest}
    * @returns A Promise of OS
@@ -205,9 +196,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a server. Retrieve information about an existing Apple silicon server,
-   * specified by its server ID. Its full details, including name, status and IP
-   * address, are returned in the response object.
+   * Get a server. Retrieve information about an existing Apple silicon server, specified by its server ID. Its full details, including name, status and IP address, are returned in the response object.
    *
    * @param request - The request {@link GetServerRequest}
    * @returns A Promise of Server
@@ -244,8 +233,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a server. Update the parameters of an existing Apple silicon server,
-   * specified by its server ID.
+   * Update a server. Update the parameters of an existing Apple silicon server, specified by its server ID.
    *
    * @param request - The request {@link UpdateServerRequest}
    * @returns A Promise of Server
@@ -264,10 +252,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a server. Delete an existing Apple silicon server, specified by its
-   * server ID. Deleting a server is permanent, and cannot be undone. Note that
-   * the minimum allocation period for Apple silicon-as-a-service is 24 hours,
-   * meaning you cannot delete your server prior to that.
+   * Delete a server. Delete an existing Apple silicon server, specified by its server ID. Deleting a server is permanent, and cannot be undone. Note that the minimum allocation period for Apple silicon-as-a-service is 24 hours, meaning you cannot delete your server prior to that.
    *
    * @param request - The request {@link DeleteServerRequest}
    */
@@ -278,8 +263,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Reboot a server. Reboot an existing Apple silicon server, specified by its
-   * server ID.
+   * Reboot a server. Reboot an existing Apple silicon server, specified by its server ID.
    *
    * @param request - The request {@link RebootServerRequest}
    * @returns A Promise of Server
@@ -296,10 +280,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Reinstall a server. Reinstall an existing Apple silicon server (specified
-   * by its server ID) from a new image (OS). All the data on the disk is
-   * deleted and all configuration is reset to the defailt configuration values
-   * of the image (OS).
+   * Reinstall a server. Reinstall an existing Apple silicon server (specified by its server ID) from a new image (OS). All the data on the disk is deleted and all configuration is reset to the defailt configuration values of the image (OS).
    *
    * @param request - The request {@link ReinstallServerRequest}
    * @returns A Promise of Server
@@ -347,7 +328,9 @@ export class API extends ParentAPI {
     )
 }
 
-/** Apple silicon - Private Networks API. */
+/**
+ * Apple silicon - Private Networks API.
+ */
 export class PrivateNetworkAPI extends ParentAPI {
   /** Lists the available zones of the API. */
   public static readonly LOCALITIES: ScwZone[] = ['fr-par-1', 'fr-par-3']
@@ -366,8 +349,7 @@ export class PrivateNetworkAPI extends ParentAPI {
   /**
    * Waits for {@link ServerPrivateNetwork} to be in a final state.
    *
-   * @param request - The request
-   *   {@link PrivateNetworkApiGetServerPrivateNetworkRequest}
+   * @param request - The request {@link PrivateNetworkApiGetServerPrivateNetworkRequest}
    * @param options - The waiting options
    * @returns A Promise of ServerPrivateNetwork
    */
@@ -389,11 +371,9 @@ export class PrivateNetworkAPI extends ParentAPI {
     )
 
   /**
-   * Add a server to a Private Network. Add an Apple silicon server to a Private
-   * Network.
+   * Add a server to a Private Network. Add an Apple silicon server to a Private Network.
    *
-   * @param request - The request
-   *   {@link PrivateNetworkApiAddServerPrivateNetworkRequest}
+   * @param request - The request {@link PrivateNetworkApiAddServerPrivateNetworkRequest}
    * @returns A Promise of ServerPrivateNetwork
    */
   addServerPrivateNetwork = (
@@ -415,11 +395,9 @@ export class PrivateNetworkAPI extends ParentAPI {
     )
 
   /**
-   * Set multiple Private Networks on a server. Configure multiple Private
-   * Networks on an Apple silicon server.
+   * Set multiple Private Networks on a server. Configure multiple Private Networks on an Apple silicon server.
    *
-   * @param request - The request
-   *   {@link PrivateNetworkApiSetServerPrivateNetworksRequest}
+   * @param request - The request {@link PrivateNetworkApiSetServerPrivateNetworksRequest}
    * @returns A Promise of SetServerPrivateNetworksResponse
    */
   setServerPrivateNetworks = (
@@ -465,11 +443,9 @@ export class PrivateNetworkAPI extends ParentAPI {
     )
 
   /**
-   * List the Private Networks of a server. List the Private Networks of an
-   * Apple silicon server.
+   * List the Private Networks of a server. List the Private Networks of an Apple silicon server.
    *
-   * @param request - The request
-   *   {@link PrivateNetworkApiListServerPrivateNetworksRequest}
+   * @param request - The request {@link PrivateNetworkApiListServerPrivateNetworksRequest}
    * @returns A Promise of ListServerPrivateNetworksResponse
    */
   listServerPrivateNetworks = (
@@ -484,8 +460,7 @@ export class PrivateNetworkAPI extends ParentAPI {
   /**
    * Delete a Private Network.
    *
-   * @param request - The request
-   *   {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}
+   * @param request - The request {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}
    */
   deleteServerPrivateNetwork = (
     request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>,

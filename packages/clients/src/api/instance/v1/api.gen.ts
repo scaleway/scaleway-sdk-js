@@ -241,8 +241,8 @@ const jsonContentHeaders = {
 
 /**
  * Instance API.
- *
- * This API allows you to manage your Instances.
+
+This API allows you to manage your CPU and GPU Instances.
  */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
@@ -280,8 +280,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Instance types. List available Instance types and their technical
-   * details.
+   * List Instance types. List available Instance types and their technical details.
    *
    * @param request - The request {@link ListServersTypesRequest}
    * @returns A Promise of ListServersTypesResponse
@@ -361,8 +360,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all Instances. List all Instances in a specified Availability Zone,
-   * e.g. `fr-par-1`.
+   * List all Instances. List all Instances in a specified Availability Zone, e.g. `fr-par-1`.
    *
    * @param request - The request {@link ListServersRequest}
    * @returns A Promise of ListServersResponse
@@ -436,8 +434,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Instance actions. List all actions (e.g. power on, power off, reboot)
-   * that can currently be performed on an Instance.
+   * List Instance actions. List all actions (e.g. power on, power off, reboot) that can currently be performed on an Instance.
    *
    * @param request - The request {@link ListServerActionsRequest}
    * @returns A Promise of ListServerActionsResponse
@@ -452,26 +449,22 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Perform action. Perform an action on an Instance. Available actions are:
-   * `poweron`: Start a stopped Instance. `poweroff`: Fully stop the Instance
-   * and release the hypervisor slot. `stop_in_place`: Stop the Instance, but
-   * keep the slot on the hypervisor. `reboot`: Stop the instance and restart
-   * it. `backup`: Create an image with all the volumes of an Instance.
-   * `terminate`: Delete the Instance along with its attached volumes, except
-   * for SBS volumes. `enable_routed_ip`: Migrate the Instance to the new
-   * network stack.
-   *
-   * The `terminate` action will result in the deletion of `l_ssd`, `b_ssd` and
-   * `scratch` volumes types, `sbs_volume` volumes type will only be detached.
-   * If you want to preserve your volumes, you should detach them before the
-   * Instance deletion or `terminate` action.
-   *
-   * The `backup` action can be done with: No `volumes` key in the body: an
-   * image is created with snapshots of all the server volumes, except for the
-   * `scratch` volumes types. `volumes` key in the body with a dictionary as
-   * value, in this dictionary volumes UUID as keys and empty dictionaries as
-   * values : an image is created with the snapshots of the volumes in `volumes`
-   * key. `scratch` volumes types can't be shapshotted.
+   * Perform action. Perform an action on an Instance.
+Available actions are:
+* `poweron`: Start a stopped Instance.
+* `poweroff`: Fully stop the Instance and release the hypervisor slot.
+* `stop_in_place`: Stop the Instance, but keep the slot on the hypervisor.
+* `reboot`: Stop the instance and restart it.
+* `backup`:  Create an image with all the volumes of an Instance.
+* `terminate`: Delete the Instance along with its attached volumes, except for SBS volumes.
+* `enable_routed_ip`: Migrate the Instance to the new network stack.
+
+The `terminate` action will result in the deletion of `l_ssd`, `b_ssd` and `scratch` volumes types, `sbs_volume` volumes type will only be detached.
+If you want to preserve your volumes, you should detach them before the Instance deletion or `terminate` action.
+
+The `backup` action can be done with:
+* No `volumes` key in the body: an image is created with snapshots of all the server volumes, except for the `scratch` volumes types.
+* `volumes` key in the body with a dictionary as value, in this dictionary volumes UUID as keys and empty dictionaries as values : an image is created with the snapshots of the volumes in `volumes` key. `scratch` volumes types can't be shapshotted.
    *
    * @param request - The request {@link ServerActionRequest}
    * @returns A Promise of ServerActionResponse
@@ -516,12 +509,12 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Get Instance compatible types. Get compatible commercial types that can be
-   * used to update the Instance. The compatibility of an Instance offer is
-   * based on: the CPU architecture the OS type the required l_ssd storage size
-   * the required scratch storage size If the specified Instance offer is
-   * flagged as end of service, the best compatible offer is the first
-   * returned.
+   * Get Instance compatible types. Get compatible commercial types that can be used to update the Instance. The compatibility of an Instance offer is based on:
+* the CPU architecture
+* the OS type
+* the required l_ssd storage size
+* the required scratch storage size
+If the specified Instance offer is flagged as end of service, the best compatible offer is the first returned.
    *
    * @param request - The request {@link GetServerCompatibleTypesRequest}
    * @returns A Promise of ServerCompatibleTypes
@@ -607,8 +600,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create an Instance image. Create an Instance image from the specified
-   * snapshot ID.
+   * Create an Instance image. Create an Instance image from the specified snapshot ID.
    *
    * @param request - The request {@link CreateImageRequest}
    * @returns A Promise of CreateImageResponse
@@ -690,8 +682,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List snapshots. List all snapshots of an Organization in a specified
-   * Availability Zone.
+   * List snapshots. List all snapshots of an Organization in a specified Availability Zone.
    *
    * @param request - The request {@link ListSnapshotsRequest}
    * @returns A Promise of ListSnapshotsResponse
@@ -700,9 +691,7 @@ export class API extends ParentAPI {
     enrichForPagination('snapshots', this.pageOfListSnapshots, request)
 
   /**
-   * Create a snapshot from a specified volume or from a QCOW2 file. Create a
-   * snapshot from a specified volume or from a QCOW2 file in a specified
-   * Availability Zone.
+   * Create a snapshot from a specified volume or from a QCOW2 file. Create a snapshot from a specified volume or from a QCOW2 file in a specified Availability Zone.
    *
    * @param request - The request {@link CreateSnapshotRequest}
    * @returns A Promise of CreateSnapshotResponse
@@ -779,8 +768,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Export a snapshot. Export a snapshot to a specified Object Storage bucket
-   * in the same region.
+   * Export a snapshot. Export a snapshot to a specified Object Storage bucket in the same region.
    *
    * @param request - The request {@link ExportSnapshotRequest}
    * @returns A Promise of ExportSnapshotResponse
@@ -822,8 +810,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List volumes. List volumes in the specified Availability Zone. You can
-   * filter the output by volume type.
+   * List volumes. List volumes in the specified Availability Zone. You can filter the output by volume type.
    *
    * @param request - The request {@link ListVolumesRequest}
    * @returns A Promise of ListVolumesResponse
@@ -832,8 +819,7 @@ export class API extends ParentAPI {
     enrichForPagination('volumes', this.pageOfListVolumes, request)
 
   /**
-   * Create a volume. Create a volume of a specified type in an Availability
-   * Zone.
+   * Create a volume. Create a volume of a specified type in an Availability Zone.
    *
    * @param request - The request {@link CreateVolumeRequest}
    * @returns A Promise of CreateVolumeResponse
@@ -867,9 +853,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a volume. Replace the name and/or size properties of a volume
-   * specified by its ID, with the specified value(s). Any volume name can be
-   * changed, however only `b_ssd` volumes can currently be increased in size.
+   * Update a volume. Replace the name and/or size properties of a volume specified by its ID, with the specified value(s). Any volume name can be changed, however only `b_ssd` volumes can currently be increased in size.
    *
    * @param request - The request {@link UpdateVolumeRequest}
    * @returns A Promise of UpdateVolumeResponse
@@ -937,8 +921,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a security group. Create a security group with a specified name and
-   * description.
+   * Create a security group. Create a security group with a specified name and description.
    *
    * @param request - The request {@link CreateSecurityGroupRequest}
    * @returns A Promise of CreateSecurityGroupResponse
@@ -957,8 +940,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a security group. Get the details of a security group with the
-   * specified ID.
+   * Get a security group. Get the details of a security group with the specified ID.
    *
    * @param request - The request {@link GetSecurityGroupRequest}
    * @returns A Promise of GetSecurityGroupResponse
@@ -1016,8 +998,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get default rules. Lists the default rules applied to all the security
-   * groups.
+   * Get default rules. Lists the default rules applied to all the security groups.
    *
    * @param request - The request {@link ListDefaultSecurityGroupRulesRequest}
    * @returns A Promise of ListSecurityGroupRulesResponse
@@ -1079,10 +1060,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update all the rules of a security group. Replaces the existing rules of
-   * the security group with the rules provided. This endpoint supports the
-   * update of existing rules, creation of new rules and deletion of existing
-   * rules when they are not passed in the request.
+   * Update all the rules of a security group. Replaces the existing rules of the security group with the rules provided. This endpoint supports the update of existing rules, creation of new rules and deletion of existing rules when they are not passed in the request.
    *
    * @param request - The request {@link SetSecurityGroupRulesRequest}
    * @returns A Promise of SetSecurityGroupRulesResponse
@@ -1144,8 +1122,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update security group rule. Update the properties of a rule from a
-   * specified security group.
+   * Update security group rule. Update the properties of a rule from a specified security group.
    *
    * @param request - The request {@link UpdateSecurityGroupRuleRequest}
    * @returns A Promise of UpdateSecurityGroupRuleResponse
@@ -1190,8 +1167,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List placement groups. List all placement groups in a specified
-   * Availability Zone.
+   * List placement groups. List all placement groups in a specified Availability Zone.
    *
    * @param request - The request {@link ListPlacementGroupsRequest}
    * @returns A Promise of ListPlacementGroupsResponse
@@ -1204,8 +1180,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a placement group. Create a new placement group in a specified
-   * Availability Zone.
+   * Create a placement group. Create a new placement group in a specified Availability Zone.
    *
    * @param request - The request {@link CreatePlacementGroupRequest}
    * @returns A Promise of CreatePlacementGroupResponse
@@ -1260,8 +1235,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a placement group. Update one or more parameter of the specified
-   * placement group.
+   * Update a placement group. Update one or more parameter of the specified placement group.
    *
    * @param request - The request {@link UpdatePlacementGroupRequest}
    * @returns A Promise of UpdatePlacementGroupResponse
@@ -1291,8 +1265,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Get placement group servers. Get all Instances belonging to the specified
-   * placement group.
+   * Get placement group servers. Get all Instances belonging to the specified placement group.
    *
    * @param request - The request {@link GetPlacementGroupServersRequest}
    * @returns A Promise of GetPlacementGroupServersResponse
@@ -1309,8 +1282,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set placement group servers. Set all Instances belonging to the specified
-   * placement group.
+   * Set placement group servers. Set all Instances belonging to the specified placement group.
    *
    * @param request - The request {@link SetPlacementGroupServersRequest}
    * @returns A Promise of SetPlacementGroupServersResponse
@@ -1331,8 +1303,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update placement group servers. Update all Instances belonging to the
-   * specified placement group.
+   * Update placement group servers. Update all Instances belonging to the specified placement group.
    *
    * @param request - The request {@link UpdatePlacementGroupServersRequest}
    * @returns A Promise of UpdatePlacementGroupServersResponse
@@ -1388,8 +1359,7 @@ export class API extends ParentAPI {
     enrichForPagination('ips', this.pageOfListIps, request)
 
   /**
-   * Reserve a flexible IP. Reserve a flexible IP and attach it to the specified
-   * Instance.
+   * Reserve a flexible IP. Reserve a flexible IP and attach it to the specified Instance.
    *
    * @param request - The request {@link CreateIpRequest}
    * @returns A Promise of CreateIpResponse
@@ -1423,8 +1393,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a flexible IP. Update a flexible IP in the specified zone with the
-   * specified ID.
+   * Update a flexible IP. Update a flexible IP in the specified zone with the specified ID.
    *
    * @param request - The request {@link UpdateIpRequest}
    * @returns A Promise of UpdateIpResponse
@@ -1518,8 +1487,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a private NIC. Update one or more parameter(s) of a specified
-   * private NIC.
+   * Update a private NIC. Update one or more parameter(s) of a specified private NIC.
    *
    * @param request - The request {@link UpdatePrivateNICRequest}
    * @returns A Promise of PrivateNIC
@@ -1562,23 +1530,11 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a volume or snapshot's migration plan. Given a volume or snapshot,
-   * returns the migration plan but does not perform the actual migration. To
-   * perform the migration, you have to call the [Migrate a volume and/or
-   * snapshots to
-   * SBS](#path-volumes-migrate-a-volume-andor-snapshots-to-sbs-scaleway-block-storage)
-   * endpoint afterward. The endpoint returns the resources that should be
-   * migrated together:
-   *
-   * - The volume and any snapshots created from the volume, if the call was made
-   *   to plan a volume migration.
-   * - The base volume of the snapshot (if the volume is not deleted) and its
-   *   related snapshots, if the call was made to plan a snapshot migration. The
-   *   endpoint also returns the validation_key, which must be provided to the
-   *   [Migrate a volume and/or snapshots to
-   *   SBS](#path-volumes-migrate-a-volume-andor-snapshots-to-sbs-scaleway-block-storage)
-   *   endpoint to confirm that all resources listed in the plan should be
-   *   migrated.
+   * Get a volume or snapshot's migration plan. Given a volume or snapshot, returns the migration plan but does not perform the actual migration. To perform the migration, you have to call the [Migrate a volume and/or snapshots to SBS](#path-volumes-migrate-a-volume-andor-snapshots-to-sbs-scaleway-block-storage) endpoint afterward.
+The endpoint returns the resources that should be migrated together:
+- the volume and any snapshots created from the volume, if the call was made to plan a volume migration.
+- the base volume of the snapshot (if the volume is not deleted) and its related snapshots, if the call was made to plan a snapshot migration.
+The endpoint also returns the validation_key, which must be provided to the [Migrate a volume and/or snapshots to SBS](#path-volumes-migrate-a-volume-andor-snapshots-to-sbs-scaleway-block-storage) endpoint to confirm that all resources listed in the plan should be migrated.
    *
    * @param request - The request {@link PlanBlockMigrationRequest}
    * @returns A Promise of MigrationPlan
@@ -1597,12 +1553,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Migrate a volume and/or snapshots to SBS (Scaleway Block Storage). To be
-   * used, the call to this endpoint must be preceded by a call to the [Get a
-   * volume or snapshot's migration
-   * plan](#path-volumes-get-a-volume-or-snapshots-migration-plan) endpoint. To
-   * migrate all resources mentioned in the migration plan, the validation_key
-   * returned in the plan must be provided.
+   * Migrate a volume and/or snapshots to SBS (Scaleway Block Storage). To be used, the call to this endpoint must be preceded by a call to the [Get a volume or snapshot's migration plan](#path-volumes-get-a-volume-or-snapshots-migration-plan) endpoint. To migrate all resources mentioned in the migration plan, the validation_key returned in the plan must be provided.
    *
    * @param request - The request {@link ApplyBlockMigrationRequest}
    */
