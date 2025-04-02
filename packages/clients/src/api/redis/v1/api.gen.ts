@@ -77,8 +77,8 @@ const jsonContentHeaders = {
 
 /**
  * Managed Database for Redis™ API.
- *
- * This API allows you to manage your Managed Databases for Redis™.
+
+This API allows you to manage your Managed Databases for Redis™.
  */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
@@ -92,10 +92,7 @@ export class API extends ParentAPI {
   ]
 
   /**
-   * Create a Redis™ Database Instance. Create a new Redis™ Database Instance
-   * (Redis™ cluster). You must set the `zone`, `project_id`, `version`,
-   * `node_type`, `user_name` and `password` parameters. Optionally you can
-   * define `acl_rules`, `endpoints`, `tls_enabled` and `cluster_settings`.
+   * Create a Redis™ Database Instance. Create a new Redis™ Database Instance (Redis™ cluster). You must set the `zone`, `project_id`, `version`, `node_type`, `user_name` and `password` parameters. Optionally you can define `acl_rules`, `endpoints`, `tls_enabled` and `cluster_settings`.
    *
    * @param request - The request {@link CreateClusterRequest}
    * @returns A Promise of Cluster
@@ -114,9 +111,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a Redis™ Database Instance. Update the parameters of a Redis™
-   * Database Instance (Redis™ cluster), including `name`, `tags`, `user_name`
-   * and `password`.
+   * Update a Redis™ Database Instance. Update the parameters of a Redis™ Database Instance (Redis™ cluster), including `name`, `tags`, `user_name` and `password`.
    *
    * @param request - The request {@link UpdateClusterRequest}
    * @returns A Promise of Cluster
@@ -135,11 +130,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a Redis™ Database Instance. Retrieve information about a Redis™
-   * Database Instance (Redis™ cluster). Specify the `cluster_id` and `region`
-   * in your request to get information such as `id`, `status`, `version`,
-   * `tls_enabled`, `cluster_settings`, `upgradable_versions` and `endpoints`
-   * about your cluster in the response.
+   * Get a Redis™ Database Instance. Retrieve information about a Redis™ Database Instance (Redis™ cluster). Specify the `cluster_id` and `region` in your request to get information such as `id`, `status`, `version`, `tls_enabled`, `cluster_settings`, `upgradable_versions` and `endpoints` about your cluster in the response.
    *
    * @param request - The request {@link GetClusterRequest}
    * @returns A Promise of Cluster
@@ -200,12 +191,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Redis™ Database Instances. List all Redis™ Database Instances (Redis™
-   * cluster) in the specified zone. By default, the Database Instances returned
-   * in the list are ordered by creation date in ascending order, though this
-   * can be modified via the order_by field. You can define additional
-   * parameters for your query, such as `tags`, `name`, `organization_id` and
-   * `version`.
+   * List Redis™ Database Instances. List all Redis™ Database Instances (Redis™ cluster) in the specified zone. By default, the Database Instances returned in the list are ordered by creation date in ascending order, though this can be modified via the order_by field. You can define additional parameters for your query, such as `tags`, `name`, `organization_id` and `version`.
    *
    * @param request - The request {@link ListClustersRequest}
    * @returns A Promise of ListClustersResponse
@@ -214,13 +200,7 @@ export class API extends ParentAPI {
     enrichForPagination('clusters', this.pageOfListClusters, request)
 
   /**
-   * Scale up a Redis™ Database Instance. Upgrade your Redis™ Database Instance,
-   * either by upgrading to a bigger node type (vertical scaling) or by adding
-   * more nodes to your Database Instance to increase your number of endpoints
-   * and distribute cache (horizontal scaling, available for clusters only).
-   * Note that scaling horizontally your Redis™ Database Instance will not renew
-   * its TLS certificate. In order to refresh the TLS certificate, you must use
-   * the Renew TLS certificate endpoint.
+   * Scale up a Redis™ Database Instance. Upgrade your Redis™ Database Instance, either by upgrading to a bigger node type (vertical scaling) or by adding more nodes to your Database Instance to increase your number of endpoints and distribute cache (horizontal scaling, available for clusters only). Note that scaling horizontally your Redis™ Database Instance will not renew its TLS certificate. In order to refresh the TLS certificate, you must use the Renew TLS certificate endpoint.
    *
    * @param request - The request {@link MigrateClusterRequest}
    * @returns A Promise of Cluster
@@ -239,10 +219,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a Redis™ Database Instance. Delete a Redis™ Database Instance
-   * (Redis™ cluster), specified by the `region` and `cluster_id` parameters.
-   * Deleting a Database Instance is permanent, and cannot be undone. Note that
-   * upon deletion all your data will be lost.
+   * Delete a Redis™ Database Instance. Delete a Redis™ Database Instance (Redis™ cluster), specified by the `region` and `cluster_id` parameters. Deleting a Database Instance is permanent, and cannot be undone. Note that upon deletion all your data will be lost.
    *
    * @param request - The request {@link DeleteClusterRequest}
    * @returns A Promise of Cluster
@@ -257,9 +234,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get metrics of a Redis™ Database Instance. Retrieve the metrics of a Redis™
-   * Database Instance (Redis™ cluster). You can define the period from which to
-   * retrieve metrics by specifying the `start_date` and `end_date`.
+   * Get metrics of a Redis™ Database Instance. Retrieve the metrics of a Redis™ Database Instance (Redis™ cluster). You can define the period from which to retrieve metrics by specifying the `start_date` and `end_date`.
    *
    * @param request - The request {@link GetClusterMetricsRequest}
    * @returns A Promise of ClusterMetricsResponse
@@ -296,9 +271,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List available node types. List all available node types. By default, the
-   * node types returned in the list are ordered by creation date in ascending
-   * order, though this can be modified via the `order_by` field.
+   * List available node types. List all available node types. By default, the node types returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListNodeTypesRequest}
    * @returns A Promise of ListNodeTypesResponse
@@ -329,9 +302,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List available Redis™ versions. List the Redis™ database engine versions
-   * available. You can define additional parameters for your query, such as
-   * `include_disabled`, `include_beta`, `include_deprecated` and `version`.
+   * List available Redis™ versions. List the Redis™ database engine versions available. You can define additional parameters for your query, such as `include_disabled`, `include_beta`, `include_deprecated` and `version`.
    *
    * @param request - The request {@link ListClusterVersionsRequest}
    * @returns A Promise of ListClusterVersionsResponse
@@ -340,9 +311,7 @@ export class API extends ParentAPI {
     enrichForPagination('versions', this.pageOfListClusterVersions, request)
 
   /**
-   * Get the TLS certificate of a cluster. Retrieve information about the TLS
-   * certificate of a Redis™ Database Instance (Redis™ cluster). Details like
-   * name and content are returned in the response.
+   * Get the TLS certificate of a cluster. Retrieve information about the TLS certificate of a Redis™ Database Instance (Redis™ cluster). Details like name and content are returned in the response.
    *
    * @param request - The request {@link GetClusterCertificateRequest}
    * @returns A Promise of Blob
@@ -356,11 +325,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Renew the TLS certificate of a cluster. Renew a TLS certificate for a
-   * Redis™ Database Instance (Redis™ cluster). Renewing a certificate means
-   * that you will not be able to connect to your Database Instance using the
-   * previous certificate. You will also need to download and update the new
-   * certificate for all database clients.
+   * Renew the TLS certificate of a cluster. Renew a TLS certificate for a Redis™ Database Instance (Redis™ cluster). Renewing a certificate means that you will not be able to connect to your Database Instance using the previous certificate. You will also need to download and update the new certificate for all database clients.
    *
    * @param request - The request {@link RenewClusterCertificateRequest}
    * @returns A Promise of Cluster
@@ -379,9 +344,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Add advanced settings. Add an advanced setting to a Redis™ Database
-   * Instance (Redis™ cluster). You must set the `name` and the `value` of each
-   * setting.
+   * Add advanced settings. Add an advanced setting to a Redis™ Database Instance (Redis™ cluster). You must set the `name` and the `value` of each setting.
    *
    * @param request - The request {@link AddClusterSettingsRequest}
    * @returns A Promise of ClusterSettingsResponse
@@ -400,9 +363,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete advanced setting. Delete an advanced setting in a Redis™ Database
-   * Instance (Redis™ cluster). You must specify the names of the settings you
-   * want to delete in the request body.
+   * Delete advanced setting. Delete an advanced setting in a Redis™ Database Instance (Redis™ cluster). You must specify the names of the settings you want to delete in the request body.
    *
    * @param request - The request {@link DeleteClusterSettingRequest}
    * @returns A Promise of Cluster
@@ -417,9 +378,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set advanced settings. Update an advanced setting for a Redis™ Database
-   * Instance (Redis™ cluster). Settings added upon database engine
-   * initalization can only be defined once, and cannot, therefore, be updated.
+   * Set advanced settings. Update an advanced setting for a Redis™ Database Instance (Redis™ cluster). Settings added upon database engine initialization can only be defined once, and cannot, therefore, be updated.
    *
    * @param request - The request {@link SetClusterSettingsRequest}
    * @returns A Promise of ClusterSettingsResponse
@@ -438,8 +397,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set ACL rules for a cluster. Replace all the ACL rules of a Redis™ Database
-   * Instance (Redis™ cluster).
+   * Set ACL rules for a cluster. Replace all the ACL rules of a Redis™ Database Instance (Redis™ cluster).
    *
    * @param request - The request {@link SetAclRulesRequest}
    * @returns A Promise of SetAclRulesResponse
@@ -458,8 +416,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Add ACL rules for a cluster. Add an additional ACL rule to a Redis™
-   * Database Instance (Redis™ cluster).
+   * Add ACL rules for a cluster. Add an additional ACL rule to a Redis™ Database Instance (Redis™ cluster).
    *
    * @param request - The request {@link AddAclRulesRequest}
    * @returns A Promise of AddAclRulesResponse
@@ -478,9 +435,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an ACL rule for a cluster. Delete an ACL rule of a Redis™ Database
-   * Instance (Redis™ cluster). You must specify the `acl_id` of the rule you
-   * want to delete in your request.
+   * Delete an ACL rule for a cluster. Delete an ACL rule of a Redis™ Database Instance (Redis™ cluster). You must specify the `acl_id` of the rule you want to delete in your request.
    *
    * @param request - The request {@link DeleteAclRuleRequest}
    * @returns A Promise of Cluster
@@ -495,9 +450,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get an ACL rule. Retrieve information about an ACL rule of a Redis™
-   * Database Instance (Redis™ cluster). You must specify the `acl_id` of the
-   * rule in your request.
+   * Get an ACL rule. Retrieve information about an ACL rule of a Redis™ Database Instance (Redis™ cluster). You must specify the `acl_id` of the rule in your request.
    *
    * @param request - The request {@link GetAclRuleRequest}
    * @returns A Promise of ACLRule
@@ -512,9 +465,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set endpoints for a cluster. Update an endpoint for a Redis™ Database
-   * Instance (Redis™ cluster). You must specify the `cluster_id` and the
-   * `endpoints` parameters in your request.
+   * Set endpoints for a cluster. Update an endpoint for a Redis™ Database Instance (Redis™ cluster). You must specify the `cluster_id` and the `endpoints` parameters in your request.
    *
    * @param request - The request {@link SetEndpointsRequest}
    * @returns A Promise of SetEndpointsResponse
@@ -533,9 +484,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Add endpoints for a cluster. Add a new endpoint for a Redis™ Database
-   * Instance (Redis™ cluster). You can add `private_network` or
-   * `public_network` specifications to the body of the request.
+   * Add endpoints for a cluster. Add a new endpoint for a Redis™ Database Instance (Redis™ cluster). You can add `private_network` or `public_network` specifications to the body of the request.
    *
    * @param request - The request {@link AddEndpointsRequest}
    * @returns A Promise of AddEndpointsResponse
@@ -554,10 +503,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an endpoint for a cluster. Delete the endpoint of a Redis™ Database
-   * Instance (Redis™ cluster). You must specify the `region` and `endpoint_id`
-   * parameters of the endpoint you want to delete. Note that might need to
-   * update any environment configurations that point to the deleted endpoint.
+   * Delete an endpoint for a cluster. Delete the endpoint of a Redis™ Database Instance (Redis™ cluster). You must specify the `region` and `endpoint_id` parameters of the endpoint you want to delete. Note that might need to update any environment configurations that point to the deleted endpoint.
    *
    * @param request - The request {@link DeleteEndpointRequest}
    * @returns A Promise of Cluster
@@ -572,10 +518,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get an endpoint. Retrieve information about a Redis™ Database Instance
-   * (Redis™ cluster) endpoint. Full details about the endpoint, like `ips`,
-   * `port`, `private_network` and `public_network` specifications are returned
-   * in the response.
+   * Get an endpoint. Retrieve information about a Redis™ Database Instance (Redis™ cluster) endpoint. Full details about the endpoint, like `ips`, `port`, `private_network` and `public_network` specifications are returned in the response.
    *
    * @param request - The request {@link GetEndpointRequest}
    * @returns A Promise of Endpoint
@@ -590,10 +533,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an endpoint. Update information about a Redis™ Database Instance
-   * (Redis™ cluster) endpoint. Full details about the endpoint, like `ips`,
-   * `port`, `private_network` and `public_network` specifications are returned
-   * in the response.
+   * Update an endpoint. Update information about a Redis™ Database Instance (Redis™ cluster) endpoint. Full details about the endpoint, like `ips`, `port`, `private_network` and `public_network` specifications are returned in the response.
    *
    * @param request - The request {@link UpdateEndpointRequest}
    * @returns A Promise of Endpoint
