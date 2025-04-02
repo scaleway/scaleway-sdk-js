@@ -17,6 +17,10 @@ export const CreateLinkRequest = {
     maxLength: 255,
     minLength: 1,
   },
+  peerAsn: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 65534,
+  },
 }
 
 export const CreateRoutingPolicyRequest = {
@@ -113,6 +117,10 @@ export const UpdateLinkRequest = {
   name: {
     maxLength: 255,
     minLength: 1,
+  },
+  peerAsn: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 65534,
   },
 }
 

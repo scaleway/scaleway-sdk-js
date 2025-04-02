@@ -85,13 +85,12 @@ const jsonContentHeaders = {
 
 /**
  * Quantum as a Service API.
- *
- * This API allows you to manage Scaleway Quantum as a Service.
+
+This API allows you to manage Scaleway Quantum as a Service.
  */
 export class API extends ParentAPI {
   /**
-   * Get job information. Retrieve information about the provided **job ID**,
-   * such as status, payload, and result.
+   * Get job information. Retrieve information about the provided **job ID**, such as status, payload, and result.
    *
    * @param request - The request {@link GetJobRequest}
    * @returns A Promise of Job
@@ -154,8 +153,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all jobs within a project or session. Retrieve information about all
-   * jobs within a given project or session.
+   * List all jobs within a project or session. Retrieve information about all jobs within a given project or session.
    *
    * @param request - The request {@link ListJobsRequest}
    * @returns A Promise of ListJobsResponse
@@ -181,8 +179,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all results of a job. Retrieve all intermediate and final results of a
-   * job.
+   * List all results of a job. Retrieve all intermediate and final results of a job.
    *
    * @param request - The request {@link ListJobResultsRequest}
    * @returns A Promise of ListJobResultsResponse
@@ -210,8 +207,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update job information. Update job information about the provided **job
-   * ID**.
+   * Update job information. Update job information about the provided **job ID**.
    *
    * @param request - The request {@link UpdateJobRequest}
    * @returns A Promise of Job
@@ -273,8 +269,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get platform information. Retrieve information about the provided
-   * **platform ID**, such as provider name, technology, and type.
+   * Get platform information. Retrieve information about the provided **platform ID**, such as provider name, technology, and type.
    *
    * @param request - The request {@link GetPlatformRequest}
    * @returns A Promise of Platform
@@ -322,8 +317,7 @@ export class API extends ParentAPI {
     enrichForPagination('platforms', this.pageOfListPlatforms, request)
 
   /**
-   * Get session infrormation. Retrieve information about the provided **session
-   * ID**, such as name, status, and number of executed jobs.
+   * Get session infrormation. Retrieve information about the provided **session ID**, such as name, status, and number of executed jobs.
    *
    * @param request - The request {@link GetSessionRequest}
    * @returns A Promise of Session
@@ -413,8 +407,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update session information. Update session information of the provided
-   * **session ID**.
+   * Update session information. Update session information of the provided **session ID**.
    *
    * @param request - The request {@link UpdateSessionRequest}
    * @returns A Promise of Session
@@ -433,8 +426,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Terminate an existing session. Terminate a session by its unique ID and
-   * cancel all its attached jobs.
+   * Terminate an existing session. Terminate a session by its unique ID and cancel all its attached jobs.
    *
    * @param request - The request {@link TerminateSessionRequest}
    * @returns A Promise of Session
@@ -451,8 +443,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an existing session. Delete a session by its unique ID and delete
-   * all its attached jobs.
+   * Delete an existing session. Delete a session by its unique ID and delete all its attached jobs.
    *
    * @param request - The request {@link DeleteSessionRequest}
    */
@@ -485,8 +476,7 @@ export class API extends ParentAPI {
     enrichForPagination('acls', this.pageOfListSessionACLs, request)
 
   /**
-   * Create a process. Create a new process for the specified application on a
-   * specified platform.
+   * Create a process. Create a new process for the specified application on a specified platform.
    *
    * @param request - The request {@link CreateProcessRequest}
    * @returns A Promise of Process
@@ -505,8 +495,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get process infrormation. Retrieve information about the provided **process
-   * ID**, such as name, status and progress.
+   * Get process infrormation. Retrieve information about the provided **process ID**, such as name, status and progress.
    *
    * @param request - The request {@link GetProcessRequest}
    * @returns A Promise of Process
@@ -577,8 +566,7 @@ export class API extends ParentAPI {
     enrichForPagination('processes', this.pageOfListProcesses, request)
 
   /**
-   * Update process information. Update process information of the provided
-   * **process ID**.
+   * Update process information. Update process information of the provided **process ID**.
    *
    * @param request - The request {@link UpdateProcessRequest}
    * @returns A Promise of Process
@@ -597,8 +585,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Cancel a running process. Cancel a process by its unique ID. Intermediate
-   * results are still available.
+   * Cancel a running process. Cancel a process by its unique ID. Intermediate results are still available.
    *
    * @param request - The request {@link CancelProcessRequest}
    * @returns A Promise of Process
@@ -615,8 +602,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an existing process. Delete a process by its unique ID and delete
-   * all its data.
+   * Delete an existing process. Delete a process by its unique ID and delete all its data.
    *
    * @param request - The request {@link DeleteProcessRequest}
    */
@@ -646,8 +632,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all results of a process. Retrieve all intermediate and final result
-   * of a process.
+   * List all results of a process. Retrieve all intermediate and final result of a process.
    *
    * @param request - The request {@link ListProcessResultsRequest}
    * @returns A Promise of ListProcessResultsResponse
@@ -660,8 +645,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get application information. Retrieve information about the provided
-   * **applcation ID**, such as name, type and compatible platforms.
+   * Get application information. Retrieve information about the provided **applcation ID**, such as name, type and compatible platforms.
    *
    * @param request - The request {@link GetApplicationRequest}
    * @returns A Promise of Application
@@ -697,8 +681,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all available applications. Retrieve information about all
-   * applications.
+   * List all available applications. Retrieve information about all applications.
    *
    * @param request - The request {@link ListApplicationsRequest}
    * @returns A Promise of ListApplicationsResponse

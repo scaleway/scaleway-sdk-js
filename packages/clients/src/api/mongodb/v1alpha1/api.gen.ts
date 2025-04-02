@@ -73,8 +73,8 @@ const jsonContentHeaders = {
 
 /**
  * Managed MongoDB®.
- *
- * This API allows you to manage your Managed Databases for MongoDB®.
+
+This API allows you to manage your Managed Databases for MongoDB®.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -160,13 +160,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List MongoDB® Database Instances. List all MongoDB® Database Instances in
-   * the specified region. By default, the MongoDB® Database Instances returned
-   * in the list are ordered by creation date in ascending order, though this
-   * can be modified via the order_by field. You can define additional
-   * parameters for your query, such as `tags` and `name`. For the `name`
-   * parameter, the value you include will be checked against the whole name
-   * string to see if it includes the string you put in the parameter.
+   * List MongoDB® Database Instances. List all MongoDB® Database Instances in the specified region. By default, the MongoDB® Database Instances returned in the list are ordered by creation date in ascending order, though this can be modified via the order_by field. You can define additional parameters for your query, such as `tags` and `name`. For the `name` parameter, the value you include will be checked against the whole name string to see if it includes the string you put in the parameter.
    *
    * @param request - The request {@link ListInstancesRequest}
    * @returns A Promise of ListInstancesResponse
@@ -175,10 +169,7 @@ export class API extends ParentAPI {
     enrichForPagination('instances', this.pageOfListInstances, request)
 
   /**
-   * Get a MongoDB® Database Instance. Retrieve information about a given
-   * MongoDB® Database Instance, specified by the `region` and `instance_id`
-   * parameters. Its full details, including name, status, IP address and port,
-   * are returned in the response object.
+   * Get a MongoDB® Database Instance. Retrieve information about a given MongoDB® Database Instance, specified by the `region` and `instance_id` parameters. Its full details, including name, status, IP address and port, are returned in the response object.
    *
    * @param request - The request {@link GetInstanceRequest}
    * @returns A Promise of Instance
@@ -215,8 +206,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a MongoDB® Database Instance. Create a new MongoDB® Database
-   * Instance.
+   * Create a MongoDB® Database Instance. Create a new MongoDB® Database Instance.
    *
    * @param request - The request {@link CreateInstanceRequest}
    * @returns A Promise of Instance
@@ -235,8 +225,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a MongoDB® Database Instance. Update the parameters of a MongoDB®
-   * Database Instance.
+   * Update a MongoDB® Database Instance. Update the parameters of a MongoDB® Database Instance.
    *
    * @param request - The request {@link UpdateInstanceRequest}
    * @returns A Promise of Instance
@@ -255,10 +244,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a MongoDB® Database Instance. Delete a given MongoDB® Database
-   * Instance, specified by the `region` and `instance_id` parameters. Deleting
-   * a MongoDB® Database Instance is permanent, and cannot be undone. Note that
-   * upon deletion all your data will be lost.
+   * Delete a MongoDB® Database Instance. Delete a given MongoDB® Database Instance, specified by the `region` and `instance_id` parameters. Deleting a MongoDB® Database Instance is permanent, and cannot be undone. Note that upon deletion all your data will be lost.
    *
    * @param request - The request {@link DeleteInstanceRequest}
    * @returns A Promise of Instance
@@ -273,8 +259,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Upgrade a Database Instance. Upgrade your current Database Instance
-   * specifications like volume size.
+   * Upgrade a Database Instance. Upgrade your current Database Instance specifications like volume size.
    *
    * @param request - The request {@link UpgradeInstanceRequest}
    * @returns A Promise of Instance
@@ -293,8 +278,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get the certificate of a Database Instance. Retrieve the certificate of a
-   * given Database Instance, specified by the `instance_id` parameter.
+   * Get the certificate of a Database Instance. Retrieve the certificate of a given Database Instance, specified by the `instance_id` parameter.
    *
    * @param request - The request {@link GetInstanceCertificateRequest}
    * @returns A Promise of Blob
@@ -308,9 +292,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Create a Database Instance snapshot. Create a new snapshot of a Database
-   * Instance. You must define the `name` and `instance_id` parameters in the
-   * request.
+   * Create a Database Instance snapshot. Create a new snapshot of a Database Instance. You must define the `name` and `instance_id` parameters in the request.
    *
    * @param request - The request {@link CreateSnapshotRequest}
    * @returns A Promise of Snapshot
@@ -329,9 +311,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a Database Instance snapshot. Retrieve information about a given
-   * snapshot of a Database Instance. You must specify, in the endpoint, the
-   * `snapshot_id` parameter of the snapshot you want to retrieve.
+   * Get a Database Instance snapshot. Retrieve information about a given snapshot of a Database Instance. You must specify, in the endpoint, the `snapshot_id` parameter of the snapshot you want to retrieve.
    *
    * @param request - The request {@link GetSnapshotRequest}
    * @returns A Promise of Snapshot
@@ -368,9 +348,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a Database Instance snapshot. Update the parameters of a snapshot of
-   * a Database Instance. You can update the `name` and `expires_at`
-   * parameters.
+   * Update a Database Instance snapshot. Update the parameters of a snapshot of a Database Instance. You can update the `name` and `expires_at` parameters.
    *
    * @param request - The request {@link UpdateSnapshotRequest}
    * @returns A Promise of Snapshot
@@ -389,11 +367,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Restore a Database Instance snapshot. Restore a given snapshot of a
-   * Database Instance. You must specify, in the endpoint, the `snapshot_id`
-   * parameter of the snapshot you want to restore, the `instance_name` of the
-   * new Database Instance, `node_type` of the new Database Instance and
-   * `node_number` of the new Database Instance.
+   * Restore a Database Instance snapshot. Restore a given snapshot of a Database Instance. You must specify, in the endpoint, the `snapshot_id` parameter of the snapshot you want to restore, the `instance_name` of the new Database Instance, `node_type` of the new Database Instance and `node_number` of the new Database Instance.
    *
    * @param request - The request {@link RestoreSnapshotRequest}
    * @returns A Promise of Instance
@@ -435,11 +409,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List snapshots. List snapshots. You can include the `instance_id` or
-   * `project_id` in your query to get the list of snapshots for specific
-   * Database Instances and/or Projects. By default, the details returned in the
-   * list are ordered by creation date in ascending order, though this can be
-   * modified via the `order_by` field.
+   * List snapshots. List snapshots. You can include the `instance_id` or `project_id` in your query to get the list of snapshots for specific Database Instances and/or Projects. By default, the details returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListSnapshotsRequest}
    * @returns A Promise of ListSnapshotsResponse
@@ -448,9 +418,7 @@ export class API extends ParentAPI {
     enrichForPagination('snapshots', this.pageOfListSnapshots, request)
 
   /**
-   * Delete a Database Instance snapshot. Delete a given snapshot of a Database
-   * Instance. You must specify, in the endpoint, the `snapshot_id` parameter of
-   * the snapshot you want to delete.
+   * Delete a Database Instance snapshot. Delete a given snapshot of a Database Instance. You must specify, in the endpoint, the `snapshot_id` parameter of the snapshot you want to delete.
    *
    * @param request - The request {@link DeleteSnapshotRequest}
    * @returns A Promise of Snapshot
@@ -483,8 +451,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List users of a Database Instance. List all users of a given Database
-   * Instance.
+   * List users of a Database Instance. List all users of a given Database Instance.
    *
    * @param request - The request {@link ListUsersRequest}
    * @returns A Promise of ListUsersResponse
@@ -493,9 +460,7 @@ export class API extends ParentAPI {
     enrichForPagination('users', this.pageOfListUsers, request)
 
   /**
-   * Create an user on a Database Instance. Create an user on a Database
-   * Instance. You must define the `name`, `password` of the user and
-   * `instance_id` parameters in the request.
+   * Create an user on a Database Instance. Create an user on a Database Instance. You must define the `name`, `password` of the user and `instance_id` parameters in the request.
    *
    * @param request - The request {@link CreateUserRequest}
    * @returns A Promise of User
@@ -514,9 +479,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a user on a Database Instance. Update the parameters of a user on a
-   * Database Instance. You can update the `password` parameter, but you cannot
-   * change the name of the user.
+   * Update a user on a Database Instance. Update the parameters of a user on a Database Instance. You can update the `password` parameter, but you cannot change the name of the user.
    *
    * @param request - The request {@link UpdateUserRequest}
    * @returns A Promise of User
@@ -535,8 +498,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a user on a Database Instance. Delete an existing user on a Database
-   * Instance.
+   * Delete a user on a Database Instance. Delete an existing user on a Database Instance.
    *
    * @param request - The request {@link DeleteUserRequest}
    */
@@ -562,10 +524,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a Database Instance endpoint. Delete the endpoint of a Database
-   * Instance. You must specify the `endpoint_id` parameter of the endpoint you
-   * want to delete. Note that you might need to update any environment
-   * configurations that point to the deleted endpoint.
+   * Delete a Database Instance endpoint. Delete the endpoint of a Database Instance. You must specify the `endpoint_id` parameter of the endpoint you want to delete. Note that you might need to update any environment configurations that point to the deleted endpoint.
    *
    * @param request - The request {@link DeleteEndpointRequest}
    */
@@ -576,9 +535,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Create a new Instance endpoint. Create a new endpoint for a MongoDB®
-   * Database Instance. You can add `public_network` or `private_network`
-   * specifications to the body of the request.
+   * Create a new Instance endpoint. Create a new endpoint for a MongoDB® Database Instance. You can add `public_network` or `private_network` specifications to the body of the request.
    *
    * @param request - The request {@link CreateEndpointRequest}
    * @returns A Promise of Endpoint

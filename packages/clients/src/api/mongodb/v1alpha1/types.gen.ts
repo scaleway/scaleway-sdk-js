@@ -57,29 +57,43 @@ export type UserRoleRole =
 
 export type VolumeType = 'unknown_type' | 'sbs_5k' | 'sbs_15k'
 
-/** Private Network details. */
+/**
+ * Private Network details.
+ */
 export interface EndpointPrivateNetworkDetails {
-  /** UUID of the Private Network. */
+  /**
+   * UUID of the Private Network.
+   */
   privateNetworkId: string
 }
 
 export interface EndpointPublicDetails {}
 
 export interface EndpointSpecPrivateNetworkDetails {
-  /** UUID of the Private Network. */
+  /**
+   * UUID of the Private Network.
+   */
   privateNetworkId: string
 }
 
 export interface EndpointSpecPublicDetails {}
 
 export interface Endpoint {
-  /** UUID of the endpoint. */
+  /**
+   * UUID of the endpoint.
+   */
   id: string
-  /** List of IPv4 addresses of the endpoint. */
+  /**
+   * List of IPv4 addresses of the endpoint.
+   */
   ips: string[]
-  /** List of DNS records of the endpoint. */
+  /**
+   * List of DNS records of the endpoint.
+   */
   dnsRecords: string[]
-  /** TCP port of the endpoint. */
+  /**
+   * TCP port of the endpoint.
+   */
   port: number
   /**
    * Private Network endpoint details.
@@ -96,29 +110,47 @@ export interface Endpoint {
 }
 
 export interface InstanceSetting {
-  /** Name of the settings. */
+  /**
+   * Name of the settings.
+   */
   name: string
-  /** Value of the settings. */
+  /**
+   * Value of the settings.
+   */
   value: string
 }
 
 export interface Volume {
-  /** Type of volume where data is stored. */
+  /**
+   * Type of volume where data is stored.
+   */
   type: VolumeType
-  /** Volume size. */
+  /**
+   * Volume size.
+   */
   size: number
 }
 
 export interface NodeTypeVolumeType {
-  /** Volume Type. */
+  /**
+   * Volume Type.
+   */
   type: VolumeType
-  /** The description of the volume. */
+  /**
+   * The description of the volume.
+   */
   description: string
-  /** Mimimum size required for the volume. */
+  /**
+   * Minimum size required for the volume.
+   */
   minSize: number
-  /** Maximum size required for the volume. */
+  /**
+   * Maximum size required for the volume.
+   */
   maxSize: number
-  /** Minimum increment level for a Block Storage volume size. */
+  /**
+   * Minimum increment level for a Block Storage volume size.
+   */
   chunkSize: number
 }
 
@@ -128,396 +160,587 @@ export interface SnapshotVolumeType {
 
 export interface UserRole {
   role: UserRoleRole
-  /** One-of ('scope'): at most one of 'database', 'anyDatabase' could be set. */
+  /**
+   *
+   * One-of ('scope'): at most one of 'database', 'anyDatabase' could be set.
+   */
   database?: string
-  /** One-of ('scope'): at most one of 'database', 'anyDatabase' could be set. */
+  /**
+   *
+   * One-of ('scope'): at most one of 'database', 'anyDatabase' could be set.
+   */
   anyDatabase?: boolean
 }
 
 export interface Setting {
-  /** Setting name from the database engine. */
+  /**
+   * Setting name from the database engine.
+   */
   name: string
-  /** Value set when not specified. */
+  /**
+   * Value set when not specified.
+   */
   defaultValue: string
-  /** Setting can be applied without restarting. */
+  /**
+   * Setting can be applied without restarting.
+   */
   hotConfigurable: boolean
-  /** Setting description. */
+  /**
+   * Setting description.
+   */
   description: string
-  /** Setting type. */
+  /**
+   * Setting type.
+   */
   propertyType: SettingPropertyType
-  /** Setting base unit. */
+  /**
+   * Setting base unit.
+   */
   unit?: string
-  /** Validation regex for string type settings. */
+  /**
+   * Validation regex for string type settings.
+   */
   stringConstraint?: string
-  /** Minimum value for int types. */
+  /**
+   * Minimum value for int types.
+   */
   intMin?: number
-  /** Maximum value for int types. */
+  /**
+   * Maximum value for int types.
+   */
   intMax?: number
-  /** Minimum value for float types. */
+  /**
+   * Minimum value for float types.
+   */
   floatMin?: number
-  /** Maximum value for float types. */
+  /**
+   * Maximum value for float types.
+   */
   floatMax?: number
 }
 
 export interface EndpointSpec {
-  /** One-of ('details'): at most one of 'public', 'privateNetwork' could be set. */
+  /**
+   *
+   * One-of ('details'): at most one of 'public', 'privateNetwork' could be set.
+   */
   public?: EndpointSpecPublicDetails
-  /** One-of ('details'): at most one of 'public', 'privateNetwork' could be set. */
+  /**
+   *
+   * One-of ('details'): at most one of 'public', 'privateNetwork' could be set.
+   */
   privateNetwork?: EndpointSpecPrivateNetworkDetails
 }
 
 export interface CreateInstanceRequestVolumeDetails {
-  /** Volume size. */
+  /**
+   * Volume size.
+   */
   volumeSize: number
-  /** Type of volume where data is stored. */
+  /**
+   * Type of volume where data is stored.
+   */
   volumeType: VolumeType
 }
 
 export interface Instance {
-  /** UUID of the Database Instance. */
+  /**
+   * UUID of the Database Instance.
+   */
   id: string
-  /** Name of the Database Instance. */
+  /**
+   * Name of the Database Instance.
+   */
   name: string
-  /** Project ID the Database Instance belongs to. */
+  /**
+   * Project ID the Database Instance belongs to.
+   */
   projectId: string
-  /** Status of the Database Instance. */
+  /**
+   * Status of the Database Instance.
+   */
   status: InstanceStatus
-  /** MongoDB® engine version of the Database Instance. */
+  /**
+   * MongoDB® engine version of the Database Instance.
+   */
   version: string
-  /** List of tags applied to the Database Instance. */
+  /**
+   * List of tags applied to the Database Instance.
+   */
   tags: string[]
-  /** Advanced settings of the Database Instance. */
+  /**
+   * Advanced settings of the Database Instance.
+   */
   settings: InstanceSetting[]
-  /** Number of node in the Database Instance. */
+  /**
+   * Number of node in the Database Instance.
+   */
   nodeNumber: number
-  /** Node type of the Database Instance. */
+  /**
+   * Node type of the Database Instance.
+   */
   nodeType: string
-  /** Volumes of the Database Instance. */
+  /**
+   * Volumes of the Database Instance.
+   */
   volume?: Volume
-  /** List of Database Instance endpoints. */
+  /**
+   * List of Database Instance endpoints.
+   */
   endpoints: Endpoint[]
-  /** Creation date (must follow the ISO 8601 format). */
+  /**
+   * Creation date (must follow the ISO 8601 format).
+   */
   createdAt?: Date
-  /** Region the Database Instance is in. */
+  /**
+   * Region the Database Instance is in.
+   */
   region: ScwRegion
 }
 
 export interface NodeType {
-  /** Node type name identifier. */
+  /**
+   * Node type name identifier.
+   */
   name: string
-  /** Current stock status for the node type. */
+  /**
+   * Current stock status for the node type.
+   */
   stockStatus: NodeTypeStock
-  /** Current specs of the offer. */
+  /**
+   * Current specs of the offer.
+   */
   description: string
-  /** Number of virtual CPUs. */
+  /**
+   * Number of virtual CPUs.
+   */
   vcpus: number
-  /** Quantity of RAM. */
+  /**
+   * Quantity of RAM.
+   */
   memory: number
-  /** Available storage options for the node type. */
+  /**
+   * Available storage options for the node type.
+   */
   availableVolumeTypes: NodeTypeVolumeType[]
-  /** The node type is currently disabled. */
+  /**
+   * The node type is currently disabled.
+   */
   disabled: boolean
-  /** The node type is currently in beta. */
+  /**
+   * The node type is currently in beta.
+   */
   beta: boolean
-  /** Instance range associated with the node type offer. */
+  /**
+   * Instance range associated with the node type offer.
+   */
   instanceRange: string
 }
 
 export interface Snapshot {
-  /** UUID of the snapshot. */
+  /**
+   * UUID of the snapshot.
+   */
   id: string
-  /** UUID of the Database Instance. */
+  /**
+   * UUID of the Database Instance.
+   */
   instanceId: string
-  /** Name of the snapshot. */
+  /**
+   * Name of the snapshot.
+   */
   name: string
-  /** Status of the snapshot. */
+  /**
+   * Status of the snapshot.
+   */
   status: SnapshotStatus
-  /** Size of the snapshot. */
+  /**
+   * Size of the snapshot.
+   */
   size: number
-  /** Expiration date (must follow the ISO 8601 format). */
+  /**
+   * Expiration date (must follow the ISO 8601 format).
+   */
   expiresAt?: Date
-  /** Creation date (must follow the ISO 8601 format). */
+  /**
+   * Creation date (must follow the ISO 8601 format).
+   */
   createdAt?: Date
-  /** Updated date (must follow the ISO 8601 format). */
+  /**
+   * Updated date (must follow the ISO 8601 format).
+   */
   updatedAt?: Date
-  /** Name of the Database Instance of the snapshot. */
+  /**
+   * Name of the Database Instance of the snapshot.
+   */
   instanceName: string
-  /** Source node type. */
+  /**
+   * Source node type.
+   */
   nodeType: string
-  /** Type of volume where data is stored - sbs_5k or sbs_15k. */
+  /**
+   * Type of volume where data is stored - sbs_5k or sbs_15k.
+   */
   volumeType?: SnapshotVolumeType
-  /** Region of the snapshot. */
+  /**
+   * Region of the snapshot.
+   */
   region: ScwRegion
 }
 
 export interface User {
   /**
-   * Name of the user (Length must be between 1 and 63 characters. First
-   * character must be an alphabet character (a-zA-Z). Only a-zA-Z0-9_$-
-   * characters are accepted).
+   * Name of the user (Length must be between 1 and 63 characters. First character must be an alphabet character (a-zA-Z). Only a-zA-Z0-9_$- characters are accepted).
    */
   name: string
   /**
-   * List of roles assigned to the user, along with the corresponding database
-   * where each role is granted.
+   * List of roles assigned to the user, along with the corresponding database where each role is granted.
    */
   roles: UserRole[]
 }
 
 export interface Version {
-  /** MongoDB® engine version. */
+  /**
+   * MongoDB® engine version.
+   */
   version: string
-  /** Date of End of Life. */
+  /**
+   * Date of End of Life.
+   */
   endOfLifeAt?: Date
-  /** Instance settings available to be updated. */
+  /**
+   * Instance settings available to be updated.
+   */
   availableSettings: Setting[]
 }
 
 export interface RestoreSnapshotRequestVolumeDetails {
-  /** Type of volume where data is stored. */
+  /**
+   * Type of volume where data is stored.
+   */
   volumeType: VolumeType
 }
 
 export type CreateEndpointRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** UUID of the Database Instance. */
+  /**
+   * UUID of the Database Instance.
+   */
   instanceId: string
-  /** EndpointSpec used to expose your Database Instance. */
+  /**
+   * EndpointSpec used to expose your Database Instance.
+   */
   endpoint: EndpointSpec
 }
 
 export type CreateInstanceRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** The Project ID on which the Database Instance will be created. */
+  /**
+   * The Project ID on which the Database Instance will be created.
+   */
   projectId?: string
-  /** Name of the Database Instance. */
+  /**
+   * Name of the Database Instance.
+   */
   name?: string
-  /** Version of the MongoDB® engine. */
+  /**
+   * Version of the MongoDB® engine.
+   */
   version: string
-  /** Tags to apply to the Database Instance. */
+  /**
+   * Tags to apply to the Database Instance.
+   */
   tags?: string[]
-  /** Number of node to use for the Database Instance. */
+  /**
+   * Number of node to use for the Database Instance.
+   */
   nodeNumber: number
-  /** Type of node to use for the Database Instance. */
+  /**
+   * Type of node to use for the Database Instance.
+   */
   nodeType: string
-  /** Username created when the Database Instance is created. */
+  /**
+   * Username created when the Database Instance is created.
+   */
   userName: string
-  /** Password of the initial user. */
+  /**
+   * Password of the initial user.
+   */
   password: string
-  /** Instance volume information. */
+  /**
+   * Instance volume information.
+   */
   volume?: CreateInstanceRequestVolumeDetails
-  /** One or multiple EndpointSpec used to expose your Database Instance. */
+  /**
+   * One or multiple EndpointSpec used to expose your Database Instance.
+   */
   endpoints?: EndpointSpec[]
 }
 
 export type CreateSnapshotRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** UUID of the Database Instance to snapshot. */
+  /**
+   * UUID of the Database Instance to snapshot.
+   */
   instanceId: string
-  /** Name of the snapshot. */
+  /**
+   * Name of the snapshot.
+   */
   name: string
-  /** Expiration date of the snapshot (must follow the ISO 8601 format). */
+  /**
+   * Expiration date of the snapshot (must follow the ISO 8601 format).
+   */
   expiresAt?: Date
 }
 
 export type CreateUserRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** UUID of the Database Instance the user belongs to. */
+  /**
+   * UUID of the Database Instance the user belongs to.
+   */
   instanceId: string
-  /** Name of the database user. */
+  /**
+   * Name of the database user.
+   */
   name: string
-  /** Password of the database user. */
+  /**
+   * Password of the database user.
+   */
   password: string
 }
 
 export type DeleteEndpointRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** UUID of the Endpoint to delete. */
+  /**
+   * UUID of the Endpoint to delete.
+   */
   endpointId: string
 }
 
 export type DeleteInstanceRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** UUID of the Database Instance to delete. */
+  /**
+   * UUID of the Database Instance to delete.
+   */
   instanceId: string
 }
 
 export type DeleteSnapshotRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** UUID of the snapshot. */
+  /**
+   * UUID of the snapshot.
+   */
   snapshotId: string
 }
 
 export type DeleteUserRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** UUID of the Database Instance the user belongs to. */
+  /**
+   * UUID of the Database Instance the user belongs to.
+   */
   instanceId: string
-  /** Name of the database user. */
+  /**
+   * Name of the database user.
+   */
   name: string
 }
 
 export type GetInstanceCertificateRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** UUID of the Database Instance. */
+  /**
+   * UUID of the Database Instance.
+   */
   instanceId: string
 }
 
 export type GetInstanceRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** UUID of the Database Instance. */
+  /**
+   * UUID of the Database Instance.
+   */
   instanceId: string
 }
 
 export type GetSnapshotRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** UUID of the snapshot. */
+  /**
+   * UUID of the snapshot.
+   */
   snapshotId: string
 }
 
 export type ListInstancesRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** List Database Instances that have a given tag. */
+  /**
+   * List Database Instances that have a given tag.
+   */
   tags?: string[]
-  /** Lists Database Instances that match a name pattern. */
+  /**
+   * Lists Database Instances that match a name pattern.
+   */
   name?: string
-  /** Criteria to use when ordering Database Instance listings. */
+  /**
+   * Criteria to use when ordering Database Instance listings.
+   */
   orderBy?: ListInstancesRequestOrderBy
-  /** Organization ID of the Database Instance. */
+  /**
+   * Organization ID of the Database Instance.
+   */
   organizationId?: string
-  /** Project ID. */
+  /**
+   * Project ID.
+   */
   projectId?: string
   page?: number
   pageSize?: number
 }
 
 export interface ListInstancesResponse {
-  /** List of all Database Instances available in an Organization or Project. */
+  /**
+   * List of all Database Instances available in an Organization or Project.
+   */
   instances: Instance[]
-  /** Total count of Database Instances available in an Organization or Project. */
+  /**
+   * Total count of Database Instances available in an Organization or Project.
+   */
   totalCount: number
 }
 
 export type ListNodeTypesRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Defines whether or not to include disabled types. */
+  /**
+   * Defines whether or not to include disabled types.
+   */
   includeDisabledTypes?: boolean
   page?: number
   pageSize?: number
 }
 
 export interface ListNodeTypesResponse {
-  /** Types of the node. */
+  /**
+   * Types of the node.
+   */
   nodeTypes: NodeType[]
-  /** Total count of node-types available. */
+  /**
+   * Total count of node-types available.
+   */
   totalCount: number
 }
 
 export type ListSnapshotsRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Instance ID the snapshots belongs to. */
+  /**
+   * Instance ID the snapshots belongs to.
+   */
   instanceId?: string
-  /** Lists database snapshots that match a name pattern. */
+  /**
+   * Lists database snapshots that match a name pattern.
+   */
   name?: string
-  /** Criteria to use when ordering snapshot listings. */
+  /**
+   * Criteria to use when ordering snapshot listings.
+   */
   orderBy?: ListSnapshotsRequestOrderBy
-  /** Organization ID the snapshots belongs to. */
+  /**
+   * Organization ID the snapshots belongs to.
+   */
   organizationId?: string
-  /** Project ID to list the snapshots of. */
+  /**
+   * Project ID to list the snapshots of.
+   */
   projectId?: string
   page?: number
   pageSize?: number
 }
 
 export interface ListSnapshotsResponse {
-  /** List of all database snapshots available in an Organization or Project. */
+  /**
+   * List of all database snapshots available in an Organization or Project.
+   */
   snapshots: Snapshot[]
-  /** Total count of database snapshots available in a Organization or Project. */
+  /**
+   * Total count of database snapshots available in a Organization or Project.
+   */
   totalCount: number
 }
 
 export type ListUsersRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** UUID of the Database Instance. */
+  /**
+   * UUID of the Database Instance.
+   */
   instanceId: string
-  /** Name of the user. */
+  /**
+   * Name of the user.
+   */
   name?: string
-  /** Criteria to use when requesting user listing. */
+  /**
+   * Criteria to use when requesting user listing.
+   */
   orderBy?: ListUsersRequestOrderBy
   page?: number
   pageSize?: number
 }
 
 export interface ListUsersResponse {
-  /** List of users in a Database Instance. */
+  /**
+   * List of users in a Database Instance.
+   */
   users: User[]
-  /** Total count of users present on a Database Instance. */
+  /**
+   * Total count of users present on a Database Instance.
+   */
   totalCount: number
 }
 
 export type ListVersionsRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
   version?: string
@@ -526,96 +749,127 @@ export type ListVersionsRequest = {
 }
 
 export interface ListVersionsResponse {
-  /** Available MongoDB® engine version. */
+  /**
+   * Available MongoDB® engine version.
+   */
   versions: Version[]
-  /** Total count of MongoDB® engine version available. */
+  /**
+   * Total count of MongoDB® engine version available.
+   */
   totalCount: number
 }
 
 export type RestoreSnapshotRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** UUID of the snapshot. */
+  /**
+   * UUID of the snapshot.
+   */
   snapshotId: string
-  /** Name of the new Database Instance. */
+  /**
+   * Name of the new Database Instance.
+   */
   instanceName: string
-  /** Node type to use for the new Database Instance. */
+  /**
+   * Node type to use for the new Database Instance.
+   */
   nodeType: string
-  /** Number of nodes to use for the new Database Instance. */
+  /**
+   * Number of nodes to use for the new Database Instance.
+   */
   nodeNumber: number
-  /** Instance volume information. */
+  /**
+   * Instance volume information.
+   */
   volume: RestoreSnapshotRequestVolumeDetails
 }
 
 export type SetUserRoleRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** UUID of the Database Instance the user belongs to. */
+  /**
+   * UUID of the Database Instance the user belongs to.
+   */
   instanceId: string
-  /** Name of the database user. */
+  /**
+   * Name of the database user.
+   */
   userName: string
   /**
-   * List of roles assigned to the user, along with the corresponding database
-   * where each role is granted.
+   * List of roles assigned to the user, along with the corresponding database where each role is granted.
    */
   roles?: UserRole[]
 }
 
 export type UpdateInstanceRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** UUID of the Database Instance to update. */
+  /**
+   * UUID of the Database Instance to update.
+   */
   instanceId: string
-  /** Name of the Database Instance. */
+  /**
+   * Name of the Database Instance.
+   */
   name?: string
-  /** Tags of a Database Instance. */
+  /**
+   * Tags of a Database Instance.
+   */
   tags?: string[]
 }
 
 export type UpdateSnapshotRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** UUID of the Snapshot. */
+  /**
+   * UUID of the Snapshot.
+   */
   snapshotId: string
-  /** Name of the snapshot. */
+  /**
+   * Name of the snapshot.
+   */
   name?: string
-  /** Expiration date of the snapshot (must follow the ISO 8601 format). */
+  /**
+   * Expiration date of the snapshot (must follow the ISO 8601 format).
+   */
   expiresAt?: Date
 }
 
 export type UpdateUserRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** UUID of the Database Instance the user belongs to. */
+  /**
+   * UUID of the Database Instance the user belongs to.
+   */
   instanceId: string
-  /** Name of the database user. */
+  /**
+   * Name of the database user.
+   */
   name: string
-  /** Password of the database user. */
+  /**
+   * Password of the database user.
+   */
   password?: string
 }
 
 export type UpgradeInstanceRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** UUID of the Database Instance you want to upgrade. */
+  /**
+   * UUID of the Database Instance you want to upgrade.
+   */
   instanceId: string
   /**
    * Increase your Block Storage volume size.
