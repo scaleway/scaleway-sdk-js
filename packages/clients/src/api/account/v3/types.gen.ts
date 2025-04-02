@@ -48,17 +48,29 @@ export type QualificationHostWebsiteSubUseCase =
   | 'other_sub_use_case'
 
 export interface Contract {
-  /** ID of the contract. */
+  /**
+   * ID of the contract.
+   */
   id: string
-  /** The type of the contract. */
+  /**
+   * The type of the contract.
+   */
   type: ContractType
-  /** The name of the contract. */
+  /**
+   * The name of the contract.
+   */
   name: string
-  /** The version of the contract. */
+  /**
+   * The version of the contract.
+   */
   version: number
-  /** The creation date of the contract. */
+  /**
+   * The creation date of the contract.
+   */
   createdAt?: Date
-  /** The last modification date of the contract. */
+  /**
+   * The last modification date of the contract.
+   */
   updatedAt?: Date
 }
 
@@ -85,214 +97,304 @@ export interface QualificationSetScalewayEnvironment {}
 export interface QualificationShareData {}
 
 export interface ContractSignature {
-  /** ID of the contract signature. */
+  /**
+   * ID of the contract signature.
+   */
   id: string
-  /** The Organization ID which signed the contract. */
+  /**
+   * The Organization ID which signed the contract.
+   */
   organizationId: string
-  /** The creation date of the contract signature. */
+  /**
+   * The creation date of the contract signature.
+   */
   createdAt?: Date
-  /** The signing date of the contract signature. */
+  /**
+   * The signing date of the contract signature.
+   */
   signedAt?: Date
-  /** The expiration date of the contract signature. */
+  /**
+   * The expiration date of the contract signature.
+   */
   expiresAt?: Date
-  /** The contract signed. */
+  /**
+   * The contract signed.
+   */
   contract?: Contract
 }
 
 export interface Project {
-  /** ID of the Project. */
+  /**
+   * ID of the Project.
+   */
   id: string
-  /** Name of the Project. */
+  /**
+   * Name of the Project.
+   */
   name: string
-  /** Organization ID of the Project. */
+  /**
+   * Organization ID of the Project.
+   */
   organizationId: string
-  /** Creation date of the Project. */
+  /**
+   * Creation date of the Project.
+   */
   createdAt?: Date
-  /** Update date of the Project. */
+  /**
+   * Update date of the Project.
+   */
   updatedAt?: Date
-  /** Description of the Project. */
+  /**
+   * Description of the Project.
+   */
   description: string
 }
 
 export interface Qualification {
-  /** Architecture type of the qualification. */
+  /**
+   * Architecture type of the qualification.
+   */
   architectureType: QualificationArchitectureType
   /**
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
-   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
-   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
   hostWebsite?: QualificationHostWebsite
   /**
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
-   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
-   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
   hostApplication?: QualificationHostApplication
   /**
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
-   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
-   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
   deploySoftware?: QualificationDeploySoftware
   /**
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
-   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
-   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
   setScalewayEnvironment?: QualificationSetScalewayEnvironment
   /**
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
-   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
-   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
   aiMachine?: QualificationAiMachine
   /**
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
-   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
-   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
   container?: QualificationContainer
   /**
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
-   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
-   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
   archiveData?: QualificationArchiveData
   /**
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
-   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
-   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
   shareData?: QualificationShareData
   /**
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication',
-   * 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container',
-   * 'archiveData', 'shareData', 'otherUseCase' could be set.
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
   otherUseCase?: QualificationOtherUseCase
 }
 
 export interface CheckContractSignatureResponse {
-  /** Whether a signature has been requested for this contract. */
+  /**
+   * Whether a signature has been requested for this contract.
+   */
   created: boolean
-  /** Whether the signature for this contract has been validated. */
+  /**
+   * Whether the signature for this contract has been validated.
+   */
   validated: boolean
 }
 
 export type ContractApiCheckContractSignatureRequest = {
-  /** ID of the Organization to check the contract signature for. */
+  /**
+   * ID of the Organization to check the contract signature for.
+   */
   organizationId?: string
-  /** Filter on contract type. */
+  /**
+   * Filter on contract type.
+   */
   contractType?: ContractType
-  /** Filter on contract name. */
+  /**
+   * Filter on contract name.
+   */
   contractName: string
 }
 
 export type ContractApiCreateContractSignatureRequest = {
-  /** The type of the contract. */
+  /**
+   * The type of the contract.
+   */
   contractType?: ContractType
-  /** The name of the contract. */
+  /**
+   * The name of the contract.
+   */
   contractName: string
-  /** Whether the contract is validated at creation. */
+  /**
+   * Whether the contract is validated at creation.
+   */
   validated: boolean
-  /** ID of the Organization. */
+  /**
+   * ID of the Organization.
+   */
   organizationId?: string
 }
 
 export type ContractApiDownloadContractSignatureRequest = {
-  /** The contract signature ID. */
+  /**
+   * The contract signature ID.
+   */
   contractSignatureId: string
-  /** The locale requested for the content of the contract. */
+  /**
+   * The locale requested for the content of the contract.
+   */
   locale?: StdLanguageCode
 }
 
 export type ContractApiListContractSignaturesRequest = {
-  /** The page number for the returned contracts. */
+  /**
+   * The page number for the returned contracts.
+   */
   page?: number
-  /** The maximum number of contracts per page. */
+  /**
+   * The maximum number of contracts per page.
+   */
   pageSize?: number
-  /** How the contracts are ordered in the response. */
+  /**
+   * How the contracts are ordered in the response.
+   */
   orderBy?: ListContractSignaturesRequestOrderBy
-  /** Filter on Organization ID. */
+  /**
+   * Filter on Organization ID.
+   */
   organizationId?: string
 }
 
 export type ContractApiValidateContractSignatureRequest = {
-  /** The contract linked to your Organization you want to sign. */
+  /**
+   * The contract linked to your Organization you want to sign.
+   */
   contractSignatureId: string
 }
 
 export interface ListContractSignaturesResponse {
-  /** The total number of contract signatures. */
+  /**
+   * The total number of contract signatures.
+   */
   totalCount: number
-  /** The paginated returned contract signatures. */
+  /**
+   * The paginated returned contract signatures.
+   */
   contractSignatures: ContractSignature[]
 }
 
 export interface ListProjectsResponse {
-  /** Total number of Projects. */
+  /**
+   * Total number of Projects.
+   */
   totalCount: number
-  /** Paginated returned Projects. */
+  /**
+   * Paginated returned Projects.
+   */
   projects: Project[]
 }
 
 export type ProjectApiCreateProjectRequest = {
-  /** Name of the Project. */
+  /**
+   * Name of the Project.
+   */
   name?: string
-  /** Organization ID of the Project. */
+  /**
+   * Organization ID of the Project.
+   */
   organizationId?: string
-  /** Description of the Project. */
+  /**
+   * Description of the Project.
+   */
   description: string
 }
 
 export type ProjectApiDeleteProjectRequest = {
-  /** Project ID of the Project. */
+  /**
+   * Project ID of the Project.
+   */
   projectId?: string
 }
 
 export type ProjectApiGetProjectRequest = {
-  /** Project ID of the Project. */
+  /**
+   * Project ID of the Project.
+   */
   projectId?: string
 }
 
 export type ProjectApiListProjectsRequest = {
-  /** Organization ID of the Project. */
+  /**
+   * Organization ID of the Project.
+   */
   organizationId?: string
-  /** Name of the Project. */
+  /**
+   * Name of the Project.
+   */
   name?: string
-  /** Page number for the returned Projects. */
+  /**
+   * Page number for the returned Projects.
+   */
   page?: number
-  /** Maximum number of Project per page. */
+  /**
+   * Maximum number of Project per page.
+   */
   pageSize?: number
-  /** Sort order of the returned Projects. */
+  /**
+   * Sort order of the returned Projects.
+   */
   orderBy?: ListProjectsRequestOrderBy
   /**
-   * Project IDs to filter for. The results will be limited to any Projects with
-   * an ID in this array.
+   * Project IDs to filter for. The results will be limited to any Projects with an ID in this array.
    */
   projectIds?: string[]
 }
 
 export type ProjectApiSetProjectQualificationRequest = {
-  /** Project ID. */
+  /**
+   * Project ID.
+   */
   projectId?: string
-  /** Use case chosen for the Project. */
+  /**
+   * Use case chosen for the Project.
+   */
   qualification?: Qualification
 }
 
 export type ProjectApiUpdateProjectRequest = {
-  /** Project ID of the Project. */
+  /**
+   * Project ID of the Project.
+   */
   projectId?: string
-  /** Name of the Project. */
+  /**
+   * Name of the Project.
+   */
   name?: string
-  /** Description of the Project. */
+  /**
+   * Description of the Project.
+   */
   description?: string
 }
 
 export interface ProjectQualification {
-  /** Project ID. */
+  /**
+   * Project ID.
+   */
   projectId: string
-  /** Qualification of the Project. */
+  /**
+   * Qualification of the Project.
+   */
   qualification?: Qualification
 }
