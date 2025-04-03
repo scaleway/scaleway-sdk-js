@@ -418,6 +418,10 @@ export type CreateLinkRequest = {
    * One-of ('host'): at most one of 'connectionId', 'partnerId' could be set.
    */
   partnerId?: string
+  /**
+   * For self-hosted links we need the peer AS Number to establish BGP session. If not given, a default one will be assigned.
+   */
+  peerAsn?: number
 }
 
 export type CreateRoutingPolicyRequest = {
@@ -857,6 +861,10 @@ export type UpdateLinkRequest = {
    * List of tags to apply to the link.
    */
   tags?: string[]
+  /**
+   * For self-hosted links, AS Number to establish BGP session.
+   */
+  peerAsn?: number
 }
 
 export type UpdateRoutingPolicyRequest = {
