@@ -288,6 +288,7 @@ export const marshalCreateLinkRequest = (
 ): Record<string, unknown> => ({
   bandwidth_mbps: request.bandwidthMbps,
   name: request.name,
+  peer_asn: request.peerAsn,
   pop_id: request.popId,
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
@@ -313,6 +314,7 @@ export const marshalUpdateLinkRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
+  peer_asn: request.peerAsn,
   tags: request.tags,
 })
 

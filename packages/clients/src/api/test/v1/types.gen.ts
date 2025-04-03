@@ -52,25 +52,28 @@ export type CreateHumanRequest = {
   /**
    * @deprecated
    *
-   *   One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
-   *   could be set.
+   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
   organizationId?: string
   name: string
   /**
-   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId'
-   * could be set.
+   *
+   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
   projectId?: string
 }
 
 export type DeleteHumanRequest = {
-  /** UUID of the human you want to delete. */
+  /**
+   * UUID of the human you want to delete.
+   */
   humanId: string
 }
 
 export type GetHumanRequest = {
-  /** UUID of the human you want to get. */
+  /**
+   * UUID of the human you want to get.
+   */
   humanId: string
 }
 
@@ -97,19 +100,27 @@ export interface RegisterResponse {
 }
 
 export type RunHumanRequest = {
-  /** UUID of the human you want to make run. */
+  /**
+   * UUID of the human you want to make run.
+   */
   humanId: string
 }
 
 export type SmokeHumanRequest = {
-  /** @deprecated UUID of the human you want to make smoking. */
+  /**
+   * @deprecated UUID of the human you want to make smoking.
+   */
   humanId: string
 }
 
 export type UpdateHumanRequest = {
-  /** UUID of the human you want to update. */
+  /**
+   * UUID of the human you want to update.
+   */
   humanId: string
-  /** Height of the human in meters. */
+  /**
+   * Height of the human in meters.
+   */
   height?: number
   shoeSize?: number
   altitudeInMeter?: number

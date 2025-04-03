@@ -31,9 +31,8 @@ import type {
 
 /**
  * Billing API.
- *
- * This API allows you to manage and query your Scaleway billing and
- * consumption.
+
+This API allows you to manage and query your Scaleway billing and consumption.
  */
 export class API extends ParentAPI {
   protected pageOfListConsumptions = (
@@ -72,8 +71,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get monthly consumption. Consumption allows you to retrieve your past or
-   * current consumption cost, by project or category.
+   * Get monthly consumption. Consumption allows you to retrieve your past or current consumption cost, by project or category.
    *
    * @param request - The request {@link ListConsumptionsRequest}
    * @returns A Promise of ListConsumptionsResponse
@@ -105,8 +103,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get monthly consumption taxes. Consumption Tax allows you to retrieve your
-   * past or current tax charges, by project or category.
+   * Get monthly consumption taxes. Consumption Tax allows you to retrieve your past or current tax charges, by project or category.
    *
    * @param request - The request {@link ListTaxesRequest}
    * @returns A Promise of ListTaxesResponse
@@ -138,8 +135,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List invoices. List all your invoices, filtering by `start_date` and
-   * `invoice_type`. Each invoice has its own ID.
+   * List invoices. List all your invoices, filtering by `start_date` and `invoice_type`. Each invoice has its own ID.
    *
    * @param request - The request {@link ListInvoicesRequest}
    * @returns A Promise of ListInvoicesResponse
@@ -221,16 +217,10 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List discounts. List all discounts for your Organization and usable
-   * categories, products, offers, references, regions and zones where the
-   * discount can be applied. As a reseller:
-   *
-   * - If you do not specify an `organization_id` you will list the discounts
-   *   applied to your own Organization and your customers
-   * - If you indicate your `organization_id` you will list only the discounts
-   *   applied to your Organization
-   * - If you indicate `the organization_id` of one of your customers, you will
-   *   list the discounts applied to their Organization.
+   * List discounts. List all discounts for your Organization and usable categories, products, offers, references, regions and zones where the discount can be applied. As a reseller:
+- If you do not specify an `organization_id` you will list the discounts applied to your own Organization and your customers
+- If you indicate your `organization_id` you will list only the discounts applied to your Organization
+- If you indicate `the organization_id` of one of your customers, you will list the discounts applied to their Organization.
    *
    * @param request - The request {@link ListDiscountsRequest}
    * @returns A Promise of ListDiscountsResponse

@@ -49,9 +49,8 @@ const jsonContentHeaders = {
 
 /**
  * Key Manager API.
- *
- * This API allows you to create, manage and use cryptographic keys in a
- * centralized and secure service.
+
+This API allows you to create, manage and use cryptographic keys in a centralized and secure service.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -62,10 +61,7 @@ export class API extends ParentAPI {
   ]
 
   /**
-   * Create a key. Create a key in a given region specified by the `region`
-   * parameter. Keys only support symmetric encryption. You can use keys to
-   * encrypt or decrypt arbitrary payloads, or to generate data encryption keys.
-   * **Data encryption keys are not stored in Key Manager**.
+   * Create a key. Create a key in a given region specified by the `region` parameter. Keys only support symmetric encryption. You can use keys to encrypt or decrypt arbitrary payloads, or to generate data encryption keys. **Data encryption keys are not stored in Key Manager**.
    *
    * @param request - The request {@link CreateKeyRequest}
    * @returns A Promise of Key
@@ -84,8 +80,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get key metadata. Retrieve metadata for a specified key using the `region`
-   * and `key_id` parameters.
+   * Get key metadata. Retrieve metadata for a specified key using the `region` and `key_id` parameters.
    *
    * @param request - The request {@link GetKeyRequest}
    * @returns A Promise of Key
@@ -100,8 +95,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a key. Modify a key's metadata including name, description and tags,
-   * specified by the `key_id` and `region` parameters.
+   * Update a key. Modify a key's metadata including name, description and tags, specified by the `key_id` and `region` parameters.
    *
    * @param request - The request {@link UpdateKeyRequest}
    * @returns A Promise of Key
@@ -120,9 +114,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a key. Permanently delete a key specified by the `region` and
-   * `key_id` parameters. This action is irreversible. Any data encrypted with
-   * this key, including data encryption keys, will no longer be decipherable.
+   * Delete a key. Permanently delete a key specified by the `region` and `key_id` parameters. This action is irreversible. Any data encrypted with this key, including data encryption keys, will no longer be decipherable.
    *
    * @param request - The request {@link DeleteKeyRequest}
    */
@@ -133,10 +125,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Rotate a key. Generate a new version of an existing key with new key
-   * material. Previous key versions remain usable to decrypt previously
-   * encrypted data, but the key's new version will be used for subsequent
-   * encryption operations and data key generation.
+   * Rotate a key. Generate a new version of an existing key with new key material. Previous key versions remain usable to decrypt previously encrypted data, but the key's new version will be used for subsequent encryption operations and data key generation.
    *
    * @param request - The request {@link RotateKeyRequest}
    * @returns A Promise of Key
@@ -153,9 +142,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Apply key protection. Apply protection to a given key specified by the
-   * `key_id` parameter. Applying key protection means that your key can be used
-   * and modified, but it cannot be deleted.
+   * Apply key protection. Apply protection to a given key specified by the `key_id` parameter. Applying key protection means that your key can be used and modified, but it cannot be deleted.
    *
    * @param request - The request {@link ProtectKeyRequest}
    * @returns A Promise of Key
@@ -172,9 +159,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Remove key protection. Remove key protection from a given key specified by
-   * the `key_id` parameter. Removing key protection means that your key can be
-   * deleted anytime.
+   * Remove key protection. Remove key protection from a given key specified by the `key_id` parameter. Removing key protection means that your key can be deleted anytime.
    *
    * @param request - The request {@link UnprotectKeyRequest}
    * @returns A Promise of Key
@@ -191,9 +176,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Enable key. Enable a given key to be used for cryptographic operations.
-   * Enabling a key allows you to make a disabled key usable again. You must
-   * specify the `region` and `key_id` parameters.
+   * Enable key. Enable a given key to be used for cryptographic operations. Enabling a key allows you to make a disabled key usable again. You must specify the `region` and `key_id` parameters.
    *
    * @param request - The request {@link EnableKeyRequest}
    * @returns A Promise of Key
@@ -210,9 +193,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Disable key. Disable a given key, preventing it to be used for
-   * cryptographic operations. Disabling a key renders it unusable. You must
-   * specify the `region` and `key_id` parameters.
+   * Disable key. Disable a given key, preventing it to be used for cryptographic operations. Disabling a key renders it unusable. You must specify the `region` and `key_id` parameters.
    *
    * @param request - The request {@link DisableKeyRequest}
    * @returns A Promise of Key
@@ -250,9 +231,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List keys. Retrieve a list of keys across all Projects in an Organization
-   * or within a specific Project. You must specify the `region`, and either the
-   * `organization_id` or the `project_id`.
+   * List keys. Retrieve a list of keys across all Projects in an Organization or within a specific Project. You must specify the `region`, and either the `organization_id` or the `project_id`.
    *
    * @param request - The request {@link ListKeysRequest}
    * @returns A Promise of ListKeysResponse
@@ -261,15 +240,9 @@ export class API extends ParentAPI {
     enrichForPagination('keys', this.pageOfListKeys, request)
 
   /**
-   * Create a data encryption key. Create a new data encryption key for
-   * cryptographic operations outside of Key Manager. The data encryption key is
-   * encrypted and must be decrypted using the key you have created in Key
-   * Manager.
-   *
-   * The data encryption key is returned in plaintext and ciphertext but it
-   * should only be stored in its encrypted form (ciphertext). Key Manager does
-   * not store your data encryption key. To retrieve your key's plaintext, use
-   * the `Decrypt` method with your key's ID and ciphertext.
+   * Create a data encryption key. Create a new data encryption key for cryptographic operations outside of Key Manager. The data encryption key is encrypted and must be decrypted using the key you have created in Key Manager.
+
+The data encryption key is returned in plaintext and ciphertext but it should only be stored in its encrypted form (ciphertext). Key Manager does not store your data encryption key. To retrieve your key's plaintext, use the `Decrypt` method with your key's ID and ciphertext.
    *
    * @param request - The request {@link GenerateDataKeyRequest}
    * @returns A Promise of DataKey
@@ -288,10 +261,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Encrypt a payload. Encrypt a payload using an existing key, specified by
-   * the `key_id` parameter. Only keys with a usage set to
-   * `symmetric_encryption` are supported by this method. The maximum payload
-   * size that can be encrypted is 64 KB of plaintext.
+   * Encrypt a payload. Encrypt a payload using an existing key, specified by the `key_id` parameter. Only keys with a usage set to `symmetric_encryption` are supported by this method. The maximum payload size that can be encrypted is 64 KB of plaintext.
    *
    * @param request - The request {@link EncryptRequest}
    * @returns A Promise of EncryptResponse
@@ -310,10 +280,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Decrypt an encrypted payload. Decrypt an encrypted payload using an
-   * existing key, specified by the `key_id` parameter. The maximum payload size
-   * that can be decrypted is equivalent to the encrypted output of 64 KB of
-   * data (around 131 KB).
+   * Decrypt an encrypted payload. Decrypt an encrypted payload using an existing key, specified by the `key_id` parameter. The maximum payload size that can be decrypted is equivalent to the encrypted output of 64 KB of data (around 131 KB).
    *
    * @param request - The request {@link DecryptRequest}
    * @returns A Promise of DecryptResponse
@@ -332,9 +299,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Import key material. Import externally generated key material into Key
-   * Manager to derive a new cryptographic key. The key's origin must be
-   * `external`.
+   * Import key material. Import externally generated key material into Key Manager to derive a new cryptographic key. The key's origin must be `external`.
    *
    * @param request - The request {@link ImportKeyMaterialRequest}
    * @returns A Promise of Key
@@ -353,9 +318,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete key material. Delete previously imported key material. This renders
-   * the associated cryptographic key unusable for any operation. The key's
-   * origin must be `external`.
+   * Delete key material. Delete previously imported key material. This renders the associated cryptographic key unusable for any operation. The key's origin must be `external`.
    *
    * @param request - The request {@link DeleteKeyMaterialRequest}
    */

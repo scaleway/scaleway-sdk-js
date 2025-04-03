@@ -19,10 +19,7 @@ export const DOMAIN_FEATURE_TRANSIENT_STATUSES: DomainFeatureStatus[] = [
   'disabling',
 ]
 
-/**
- * Lists transient statutes of the enum
- * {@link DomainRegistrationStatusTransferStatus}.
- */
+/** Lists transient statutes of the enum {@link DomainRegistrationStatusTransferStatus}. */
 export const DOMAIN_REGISTRATION_STATUS_TRANSFER_TRANSIENT_STATUSES: DomainRegistrationStatusTransferStatus[] =
   ['pending', 'processing']
 

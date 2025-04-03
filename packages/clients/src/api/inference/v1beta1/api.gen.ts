@@ -63,8 +63,8 @@ const jsonContentHeaders = {
 
 /**
  * Managed Inference API.
- *
- * This API allows you to manage your Inference services.
+
+This API allows you to manage your Inference services.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -140,8 +140,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a deployment. Create a new inference deployment related to a
-   * specific model.
+   * Create a deployment. Create a new inference deployment related to a specific model.
    *
    * @param request - The request {@link CreateDeploymentRequest}
    * @returns A Promise of Deployment
@@ -194,8 +193,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get the CA certificate. Get the CA certificate used for the deployment of
-   * private endpoints. The CA certificate will be returned as a PEM file.
+   * Get the CA certificate. Get the CA certificate used for the deployment of private endpoints.
+The CA certificate will be returned as a PEM file.
    *
    * @param request - The request {@link GetDeploymentCertificateRequest}
    * @returns A Promise of Blob
@@ -408,9 +407,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List available node types. List all available node types. By default, the
-   * node types returned in the list are ordered by creation date in ascending
-   * order, though this can be modified via the `order_by` field.
+   * List available node types. List all available node types. By default, the node types returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListNodeTypesRequest}
    * @returns A Promise of ListNodeTypesResponse
