@@ -59,8 +59,8 @@ const jsonContentHeaders = {
 
 /**
  * Serverless Jobs API.
- *
- * This API allows you to manage your Serverless Jobs.
+
+This API allows you to manage your Serverless Jobs.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -139,8 +139,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an existing job definition associated with the specified unique
-   * identifier.
+   * Update an existing job definition associated with the specified unique identifier.
    *
    * @param request - The request {@link UpdateJobDefinitionRequest}
    * @returns A Promise of JobDefinition
@@ -170,8 +169,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Run an existing job definition by its unique identifier. This will create a
-   * new job run.
+   * Run an existing job definition by its unique identifier. This will create a new job run.
    *
    * @param request - The request {@link StartJobDefinitionRequest}
    * @returns A Promise of StartJobDefinitionResponse

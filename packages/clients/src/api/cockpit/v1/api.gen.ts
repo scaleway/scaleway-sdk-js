@@ -100,14 +100,13 @@ const jsonContentHeaders = {
 
 /**
  * Cockpit Global API.
- *
- * The Cockpit Global API allows you to manage your Cockpit's Grafana and plans.
+
+The Cockpit Global API allows you to manage your Cockpit's Grafana and plans.
  */
 export class GlobalAPI extends ParentAPI {
   /**
-   * Get your Cockpit's Grafana. Retrieve information on your Cockpit's Grafana,
-   * specified by the ID of the Project the Cockpit belongs to. The output
-   * returned displays the URL to access your Cockpit's Grafana.
+   * Get your Cockpit's Grafana. Retrieve information on your Cockpit's Grafana, specified by the ID of the Project the Cockpit belongs to.
+The output returned displays the URL to access your Cockpit's Grafana.
    *
    * @param request - The request {@link GlobalApiGetGrafanaRequest}
    * @returns A Promise of Grafana
@@ -126,9 +125,7 @@ export class GlobalAPI extends ParentAPI {
     )
 
   /**
-   * Synchronize Grafana data sources. Trigger the synchronization of all your
-   * data sources and the alert manager in the relevant regions. The alert
-   * manager will only be synchronized if you have enabled it.
+   * Synchronize Grafana data sources. Trigger the synchronization of all your data sources and the alert manager in the relevant regions. The alert manager will only be synchronized if you have enabled it.
    *
    * @param request - The request {@link GlobalApiSyncGrafanaDataSourcesRequest}
    */
@@ -148,12 +145,8 @@ export class GlobalAPI extends ParentAPI {
     })
 
   /**
-   * Create a Grafana user. Create a Grafana user to connect to your Cockpit's
-   * Grafana. Upon creation, your user password displays only once, so make sure
-   * that you save it. Each Grafana user is associated with a role: viewer or
-   * editor. A viewer can only view dashboards, whereas an editor can create and
-   * edit dashboards. Note that the `admin` username is not available for
-   * creation.
+   * Create a Grafana user. Create a Grafana user to connect to your Cockpit's Grafana. Upon creation, your user password displays only once, so make sure that you save it.
+Each Grafana user is associated with a role: viewer or editor. A viewer can only view dashboards, whereas an editor can create and edit dashboards. Note that the `admin` username is not available for creation.
    *
    * @param request - The request {@link GlobalApiCreateGrafanaUserRequest}
    * @returns A Promise of GrafanaUser
@@ -198,9 +191,7 @@ export class GlobalAPI extends ParentAPI {
     )
 
   /**
-   * List Grafana users. List all Grafana users created in your Cockpit's
-   * Grafana. By default, the Grafana users returned in the list are ordered in
-   * ascending order.
+   * List Grafana users. List all Grafana users created in your Cockpit's Grafana. By default, the Grafana users returned in the list are ordered in ascending order.
    *
    * @param request - The request {@link GlobalApiListGrafanaUsersRequest}
    * @returns A Promise of ListGrafanaUsersResponse
@@ -210,9 +201,7 @@ export class GlobalAPI extends ParentAPI {
   ) => enrichForPagination('grafanaUsers', this.pageOfListGrafanaUsers, request)
 
   /**
-   * Delete a Grafana user. Delete a Grafana user from your Cockpit's Grafana,
-   * specified by the ID of the Project the Cockpit belongs to, and the ID of
-   * the Grafana user.
+   * Delete a Grafana user. Delete a Grafana user from your Cockpit's Grafana, specified by the ID of the Project the Cockpit belongs to, and the ID of the Grafana user.
    *
    * @param request - The request {@link GlobalApiDeleteGrafanaUserRequest}
    */
@@ -227,13 +216,10 @@ export class GlobalAPI extends ParentAPI {
     })
 
   /**
-   * Reset a Grafana user password. Reset the password of a Grafana user,
-   * specified by the ID of the Project the Cockpit belongs to, and the ID of
-   * the Grafana user. A new password regenerates and only displays once. Make
-   * sure that you save it.
+   * Reset a Grafana user password. Reset the password of a Grafana user, specified by the ID of the Project the Cockpit belongs to, and the ID of the Grafana user.
+A new password regenerates and only displays once. Make sure that you save it.
    *
-   * @param request - The request
-   *   {@link GlobalApiResetGrafanaUserPasswordRequest}
+   * @param request - The request {@link GlobalApiResetGrafanaUserPasswordRequest}
    * @returns A Promise of GrafanaUser
    */
   resetGrafanaUserPassword = (
@@ -278,11 +264,9 @@ export class GlobalAPI extends ParentAPI {
     )
 
   /**
-   * List Scaleway resources dashboards. Retrieve a list of available dashboards
-   * in Grafana, for all Scaleway resources which are integrated with Cockpit.
+   * List Scaleway resources dashboards. Retrieve a list of available dashboards in Grafana, for all Scaleway resources which are integrated with Cockpit.
    *
-   * @param request - The request
-   *   {@link GlobalApiListGrafanaProductDashboardsRequest}
+   * @param request - The request {@link GlobalApiListGrafanaProductDashboardsRequest}
    * @returns A Promise of ListGrafanaProductDashboardsResponse
    */
   listGrafanaProductDashboards = (
@@ -295,12 +279,9 @@ export class GlobalAPI extends ParentAPI {
     )
 
   /**
-   * Get Scaleway resource dashboard. Retrieve information about the dashboard
-   * of a Scaleway resource in Grafana, specified by the ID of the Project the
-   * Cockpit belongs to, and the name of the dashboard.
+   * Get Scaleway resource dashboard. Retrieve information about the dashboard of a Scaleway resource in Grafana, specified by the ID of the Project the Cockpit belongs to, and the name of the dashboard.
    *
-   * @param request - The request
-   *   {@link GlobalApiGetGrafanaProductDashboardRequest}
+   * @param request - The request {@link GlobalApiGetGrafanaProductDashboardRequest}
    * @returns A Promise of GrafanaProductDashboard
    */
   getGrafanaProductDashboard = (
@@ -339,7 +320,7 @@ export class GlobalAPI extends ParentAPI {
 
   /**
    * List plan types. Retrieve a list of available pricing plan types.
-   * Deprecated, retention is now managed at the data source level.
+Deprecated, retention is now managed at the data source level.
    *
    * @deprecated
    * @param request - The request {@link GlobalApiListPlansRequest}
@@ -349,10 +330,8 @@ export class GlobalAPI extends ParentAPI {
     enrichForPagination('plans', this.pageOfListPlans, request)
 
   /**
-   * Apply a pricing plan. Apply a pricing plan on a given Project. You must
-   * specify the ID of the pricing plan type. Note that you will be billed for
-   * the plan you apply. Deprecated, retention is now managed at the data source
-   * level.
+   * Apply a pricing plan. Apply a pricing plan on a given Project. You must specify the ID of the pricing plan type. Note that you will be billed for the plan you apply.
+Deprecated, retention is now managed at the data source level.
    *
    * @deprecated
    * @param request - The request {@link GlobalApiSelectPlanRequest}
@@ -372,9 +351,8 @@ export class GlobalAPI extends ParentAPI {
     )
 
   /**
-   * Get current plan. Retrieve a pricing plan for the given Project, specified
-   * by the ID of the Project. Deprecated, retention is now managed at the data
-   * source level.
+   * Get current plan. Retrieve a pricing plan for the given Project, specified by the ID of the Project.
+Deprecated, retention is now managed at the data source level.
    *
    * @deprecated
    * @param request - The request {@link GlobalApiGetCurrentPlanRequest}
@@ -396,11 +374,8 @@ export class GlobalAPI extends ParentAPI {
 
 /**
  * Cockpit Regional API.
- *
- * The Cockpit Regional API allows you to create data sources and tokens to
- * store and query data types such as metrics, logs, and traces. You can also
- * push your data into Cockpit, and send alerts to your contact points when your
- * resources may require your attention, using the regional Alert manager.
+
+The Cockpit Regional API allows you to create data sources and tokens to store and query data types such as metrics, logs, and traces. You can also push your data into Cockpit, and send alerts to your contact points when your resources may require your attention, using the regional Alert manager.
  */
 export class RegionalAPI extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -426,13 +401,11 @@ export class RegionalAPI extends ParentAPI {
     )
 
   /**
-   * Create a data source. You must specify the data source type upon creation.
-   * Available data source types include:
-   *
-   * - Metrics
-   * - Logs
-   * - Traces The name of the data source will then be used as reference to name
-   *   the associated Grafana data source.
+   * Create a data source. You must specify the data source type upon creation. Available data source types include:
+  - metrics
+  - logs
+  - traces
+The name of the data source will then be used as reference to name the associated Grafana data source.
    *
    * @param request - The request {@link RegionalApiCreateDataSourceRequest}
    * @returns A Promise of DataSource
@@ -454,9 +427,7 @@ export class RegionalAPI extends ParentAPI {
     )
 
   /**
-   * Get a data source. Retrieve information about a given data source,
-   * specified by the data source ID. The data source's information such as its
-   * name, type, URL, origin, and retention period, is returned.
+   * Get a data source. Retrieve information about a given data source, specified by the data source ID. The data source's information such as its name, type, URL, origin, and retention period, is returned.
    *
    * @param request - The request {@link RegionalApiGetDataSourceRequest}
    * @returns A Promise of DataSource
@@ -471,9 +442,7 @@ export class RegionalAPI extends ParentAPI {
     )
 
   /**
-   * Delete a data source. Delete a given data source, specified by the data
-   * source ID. Note that deleting a data source is irreversible, and cannot be
-   * undone.
+   * Delete a data source. Delete a given data source, specified by the data source ID. Note that deleting a data source is irreversible, and cannot be undone.
    *
    * @param request - The request {@link RegionalApiDeleteDataSourceRequest}
    */
@@ -509,10 +478,8 @@ export class RegionalAPI extends ParentAPI {
     )
 
   /**
-   * List data sources. Retrieve the list of data sources available in the
-   * specified region. By default, the data sources returned in the list are
-   * ordered by creation date, in ascending order. You can list data sources by
-   * Project, type and origin.
+   * List data sources. Retrieve the list of data sources available in the specified region. By default, the data sources returned in the list are ordered by creation date, in ascending order.
+You can list data sources by Project, type and origin.
    *
    * @param request - The request {@link RegionalApiListDataSourcesRequest}
    * @returns A Promise of ListDataSourcesResponse
@@ -522,8 +489,7 @@ export class RegionalAPI extends ParentAPI {
   ) => enrichForPagination('dataSources', this.pageOfListDataSources, request)
 
   /**
-   * Update a data source. Update a given data source name, specified by the
-   * data source ID.
+   * Update a data source. Update a given data source name, specified by the data source ID.
    *
    * @param request - The request {@link RegionalApiUpdateDataSourceRequest}
    * @returns A Promise of DataSource
@@ -545,8 +511,7 @@ export class RegionalAPI extends ParentAPI {
     )
 
   /**
-   * Get data source usage overview. Retrieve the data source usage overview per
-   * type for the specified Project.
+   * Get data source usage overview. Retrieve the data source usage overview per type for the specified Project.
    *
    * @param request - The request {@link RegionalApiGetUsageOverviewRequest}
    * @returns A Promise of UsageOverview
@@ -570,11 +535,8 @@ export class RegionalAPI extends ParentAPI {
     )
 
   /**
-   * Create a token. Give your token the relevant scopes to ensure it has the
-   * right permissions to interact with your data sources and the Alert manager.
-   * Make sure that you create your token in the same regions as the data
-   * sources you want to use it for. Upon creation, your token's secret key
-   * display only once. Make sure that you save it.
+   * Create a token. Give your token the relevant scopes to ensure it has the right permissions to interact with your data sources and the Alert manager. Make sure that you create your token in the same regions as the data sources you want to use it for.
+Upon creation, your token's secret key display only once. Make sure that you save it.
    *
    * @param request - The request {@link RegionalApiCreateTokenRequest}
    * @returns A Promise of Token
@@ -617,9 +579,8 @@ export class RegionalAPI extends ParentAPI {
     )
 
   /**
-   * List tokens. Retrieve a list of all tokens in the specified region. By
-   * default, tokens returned in the list are ordered by creation date, in
-   * ascending order. You can filter tokens by Project ID and token scopes.
+   * List tokens. Retrieve a list of all tokens in the specified region. By default, tokens returned in the list are ordered by creation date, in ascending order.
+You can filter tokens by Project ID and token scopes.
    *
    * @param request - The request {@link RegionalApiListTokensRequest}
    * @returns A Promise of ListTokensResponse
@@ -628,8 +589,7 @@ export class RegionalAPI extends ParentAPI {
     enrichForPagination('tokens', this.pageOfListTokens, request)
 
   /**
-   * Get a token. Retrieve information about a given token, specified by the
-   * token ID. The token's information such as its scopes, is returned.
+   * Get a token. Retrieve information about a given token, specified by the token ID. The token's information such as its scopes, is returned.
    *
    * @param request - The request {@link RegionalApiGetTokenRequest}
    * @returns A Promise of Token
@@ -644,8 +604,7 @@ export class RegionalAPI extends ParentAPI {
     )
 
   /**
-   * Delete a token. Delete a given token, specified by the token ID. Deleting a
-   * token is irreversible and cannot be undone.
+   * Delete a token. Delete a given token, specified by the token ID. Deleting a token is irreversible and cannot be undone.
    *
    * @param request - The request {@link RegionalApiDeleteTokenRequest}
    */
@@ -656,10 +615,8 @@ export class RegionalAPI extends ParentAPI {
     })
 
   /**
-   * Get the Alert manager. Retrieve information about the Alert manager which
-   * is unique per Project and region. By default the Alert manager is disabled.
-   * The output returned displays a URL to access the Alert manager, and whether
-   * the Alert manager and managed alerts are enabled.
+   * Get the Alert manager. Retrieve information about the Alert manager which is unique per Project and region. By default the Alert manager is disabled.
+The output returned displays a URL to access the Alert manager, and whether the Alert manager and managed alerts are enabled.
    *
    * @param request - The request {@link RegionalApiGetAlertManagerRequest}
    * @returns A Promise of AlertManager
@@ -680,10 +637,7 @@ export class RegionalAPI extends ParentAPI {
     )
 
   /**
-   * Enable the Alert manager. Enabling the Alert manager allows you to enable
-   * managed alerts and create contact points in the specified Project and
-   * region, to be notified when your Scaleway resources may require your
-   * attention.
+   * Enable the Alert manager. Enabling the Alert manager allows you to enable managed alerts and create contact points in the specified Project and region, to be notified when your Scaleway resources may require your attention.
    *
    * @param request - The request {@link RegionalApiEnableAlertManagerRequest}
    * @returns A Promise of AlertManager
@@ -707,9 +661,7 @@ export class RegionalAPI extends ParentAPI {
     )
 
   /**
-   * Disable the Alert manager. Disabling the Alert manager deletes the contact
-   * points you have created and disables managed alerts in the specified
-   * Project and region.
+   * Disable the Alert manager. Disabling the Alert manager deletes the contact points you have created and disables managed alerts in the specified Project and region.
    *
    * @param request - The request {@link RegionalApiDisableAlertManagerRequest}
    * @returns A Promise of AlertManager
@@ -733,12 +685,9 @@ export class RegionalAPI extends ParentAPI {
     )
 
   /**
-   * Create a contact point. Contact points are email addresses associated with
-   * the default receiver, that the Alert manager sends alerts to. The source of
-   * the alerts are data sources within the same Project and region as the Alert
-   * manager. If you need to receive alerts for other receivers, you can create
-   * additional contact points and receivers in Grafana. Make sure that you
-   * select the Scaleway Alert manager.
+   * Create a contact point. Contact points are email addresses associated with the default receiver, that the Alert manager sends alerts to.
+The source of the alerts are data sources within the same Project and region as the Alert manager.
+If you need to receive alerts for other receivers, you can create additional contact points and receivers in Grafana. Make sure that you select the Scaleway Alert manager.
    *
    * @param request - The request {@link RegionalApiCreateContactPointRequest}
    * @returns A Promise of ContactPoint
@@ -784,9 +733,7 @@ export class RegionalAPI extends ParentAPI {
     )
 
   /**
-   * List contact points. Retrieve a list of contact points for the specified
-   * Project. The response lists all contact points and receivers created in
-   * Grafana or via the API.
+   * List contact points. Retrieve a list of contact points for the specified Project. The response lists all contact points and receivers created in Grafana or via the API.
    *
    * @param request - The request {@link RegionalApiListContactPointsRequest}
    * @returns A Promise of ListContactPointsResponse
@@ -815,8 +762,7 @@ export class RegionalAPI extends ParentAPI {
     )
 
   /**
-   * Delete a contact point. Delete a contact point associated with the default
-   * receiver.
+   * Delete a contact point. Delete a contact point associated with the default receiver.
    *
    * @param request - The request {@link RegionalApiDeleteContactPointRequest}
    */
@@ -836,8 +782,7 @@ export class RegionalAPI extends ParentAPI {
     })
 
   /**
-   * List alerts. List preconfigured and/or custom alerts for the specified
-   * Project.
+   * List alerts. List preconfigured and/or custom alerts for the specified Project.
    *
    * @param request - The request {@link RegionalApiListAlertsRequest}
    * @returns A Promise of ListAlertsResponse
@@ -861,9 +806,7 @@ export class RegionalAPI extends ParentAPI {
     )
 
   /**
-   * Enable managed alerts. Enable the sending of managed alerts for the
-   * specified Project. Managed alerts are predefined alerts that apply to
-   * Scaleway recources integrated with Cockpit by default.
+   * Enable managed alerts. Enable the sending of managed alerts for the specified Project. Managed alerts are predefined alerts that apply to Scaleway recources integrated with Cockpit by default.
    *
    * @param request - The request {@link RegionalApiEnableManagedAlertsRequest}
    * @returns A Promise of AlertManager
@@ -887,8 +830,7 @@ export class RegionalAPI extends ParentAPI {
     )
 
   /**
-   * Disable managed alerts. Disable the sending of managed alerts for the
-   * specified Project.
+   * Disable managed alerts. Disable the sending of managed alerts for the specified Project.
    *
    * @param request - The request {@link RegionalApiDisableManagedAlertsRequest}
    * @returns A Promise of AlertManager
@@ -912,8 +854,7 @@ export class RegionalAPI extends ParentAPI {
     )
 
   /**
-   * Trigger a test alert. Send a test alert to the Alert manager to make sure
-   * your contact points get notified.
+   * Trigger a test alert. Send a test alert to the Alert manager to make sure your contact points get notified.
    *
    * @param request - The request {@link RegionalApiTriggerTestAlertRequest}
    */

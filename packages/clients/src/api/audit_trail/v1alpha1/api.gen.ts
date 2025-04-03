@@ -19,18 +19,15 @@ import type {
 
 /**
  * Audit Trail API.
- *
- * This API allows you to ensure accountability and security by recording events
- * and changes performed within your Scaleway Organization.
+
+This API allows you to ensure accountability and security by recording events and changes performed within your Scaleway Organization.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: ScwRegion[] = ['fr-par', 'nl-ams']
 
   /**
-   * List events. Retrieve the list of Audit Trail events for a Scaleway
-   * Organization and/or Project. You must specify the `organization_id` and
-   * optionally, the `project_id`.
+   * List events. Retrieve the list of Audit Trail events for a Scaleway Organization and/or Project. You must specify the `organization_id` and optionally, the `project_id`.
    *
    * @param request - The request {@link ListEventsRequest}
    * @returns A Promise of ListEventsResponse
@@ -66,8 +63,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrieve the list of Scaleway resources for which you have Audit Trail
-   * events.
+   * Retrieve the list of Scaleway resources for which you have Audit Trail events.
    *
    * @param request - The request {@link ListProductsRequest}
    * @returns A Promise of ListProductsResponse

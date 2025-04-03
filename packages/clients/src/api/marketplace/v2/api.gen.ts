@@ -38,9 +38,8 @@ import type {
 
 /**
  * Marketplace API.
- *
- * This API allows you to find available images for use when launching a
- * Scaleway Instance.
+
+This API allows you to find available images for use when launching a Scaleway Instance.
  */
 export class API extends ParentAPI {
   protected pageOfListImages = (request: Readonly<ListImagesRequest>) =>
@@ -64,8 +63,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List marketplace images. List all available images on the marketplace,
-   * their UUID, CPU architecture and description.
+   * List marketplace images. List all available images on the marketplace, their UUID, CPU architecture and description.
    *
    * @param request - The request {@link ListImagesRequest}
    * @returns A Promise of ListImagesResponse
@@ -74,8 +72,7 @@ export class API extends ParentAPI {
     enrichForPagination('images', this.pageOfListImages, request)
 
   /**
-   * Get a specific marketplace image. Get detailed information about a
-   * marketplace image, specified by its `image_id` (UUID format).
+   * Get a specific marketplace image. Get detailed information about a marketplace image, specified by its `image_id` (UUID format).
    *
    * @param request - The request {@link GetImageRequest}
    * @returns A Promise of Image
@@ -108,8 +105,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List versions of an Image. Get a list of all available version of an image,
-   * specified by its `image_id` (UUID format).
+   * List versions of an Image. Get a list of all available version of an image, specified by its `image_id` (UUID format).
    *
    * @param request - The request {@link ListVersionsRequest}
    * @returns A Promise of ListVersionsResponse
@@ -118,9 +114,7 @@ export class API extends ParentAPI {
     enrichForPagination('versions', this.pageOfListVersions, request)
 
   /**
-   * Get a specific image version. Get information such as the name, creation
-   * date, last update and published date for an image version specified by its
-   * `version_id` (UUID format).
+   * Get a specific image version. Get information such as the name, creation date, last update and published date for an image version specified by its `version_id` (UUID format).
    *
    * @param request - The request {@link GetVersionRequest}
    * @returns A Promise of Version
@@ -163,10 +157,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List local images from a specific image or version. List information about
-   * local images in a specific Availability Zone, specified by its `image_id`
-   * (UUID format), `version_id` (UUID format) or `image_label`. Only one of
-   * these three parameters may be set.
+   * List local images from a specific image or version. List information about local images in a specific Availability Zone, specified by its `image_id` (UUID format), `version_id` (UUID format) or `image_label`. Only one of these three parameters may be set.
    *
    * @param request - The request {@link ListLocalImagesRequest}
    * @returns A Promise of ListLocalImagesResponse
@@ -175,10 +166,7 @@ export class API extends ParentAPI {
     enrichForPagination('localImages', this.pageOfListLocalImages, request)
 
   /**
-   * Get a specific local image by ID. Get detailed information about a local
-   * image, including compatible commercial types, supported architecture,
-   * labels and the Availability Zone of the image, specified by its
-   * `local_image_id` (UUID format).
+   * Get a specific local image by ID. Get detailed information about a local image, including compatible commercial types, supported architecture, labels and the Availability Zone of the image, specified by its `local_image_id` (UUID format).
    *
    * @param request - The request {@link GetLocalImageRequest}
    * @returns A Promise of LocalImage
@@ -211,8 +199,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List existing image categories. Get a list of all existing categories. The
-   * output can be paginated.
+   * List existing image categories. Get a list of all existing categories. The output can be paginated.
    *
    * @param request - The request {@link ListCategoriesRequest}
    * @returns A Promise of ListCategoriesResponse
@@ -221,8 +208,7 @@ export class API extends ParentAPI {
     enrichForPagination('categories', this.pageOfListCategories, request)
 
   /**
-   * Get a specific category. Get information about a specific category of the
-   * marketplace catalog, specified by its `category_id` (UUID format).
+   * Get a specific category. Get information about a specific category of the marketplace catalog, specified by its `category_id` (UUID format).
    *
    * @param request - The request {@link GetCategoryRequest}
    * @returns A Promise of Category

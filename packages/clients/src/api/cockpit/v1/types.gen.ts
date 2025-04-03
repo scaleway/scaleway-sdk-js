@@ -60,8 +60,7 @@ export interface GetConfigResponseRetention {
 
 export interface Alert {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region: ScwRegion
   preconfigured: boolean
@@ -73,7 +72,9 @@ export interface Alert {
   annotations: Record<string, string>
 }
 
-/** Contact point. */
+/**
+ * Contact point.
+ */
 export interface ContactPoint {
   /**
    * Email address to send alerts to.
@@ -81,329 +82,566 @@ export interface ContactPoint {
    * One-of ('configuration'): at most one of 'email' could be set.
    */
   email?: ContactPointEmail
-  /** Region. */
+  /**
+   * Region.
+   */
   region: ScwRegion
-  /** Send an email notification when an alert is marked as resolved. */
+  /**
+   * Send an email notification when an alert is marked as resolved.
+   */
   sendResolvedNotifications: boolean
 }
 
-/** Data source. */
+/**
+ * Data source.
+ */
 export interface DataSource {
-  /** ID of the data source. */
+  /**
+   * ID of the data source.
+   */
   id: string
-  /** ID of the Project the data source belongs to. */
+  /**
+   * ID of the Project the data source belongs to.
+   */
   projectId: string
-  /** Data source name. */
+  /**
+   * Data source name.
+   */
   name: string
-  /** Data source URL. */
+  /**
+   * Data source URL.
+   */
   url: string
-  /** Data source type. */
+  /**
+   * Data source type.
+   */
   type: DataSourceType
-  /** Data source origin. */
+  /**
+   * Data source origin.
+   */
   origin: DataSourceOrigin
-  /** Date the data source was created. */
+  /**
+   * Date the data source was created.
+   */
   createdAt?: Date
-  /** Date the data source was last updated. */
+  /**
+   * Date the data source was last updated.
+   */
   updatedAt?: Date
-  /** Indicates whether the data source is synchronized with Grafana. */
+  /**
+   * Indicates whether the data source is synchronized with Grafana.
+   */
   synchronizedWithGrafana: boolean
-  /** BETA - Duration for which the data will be retained in the data source. */
+  /**
+   * BETA - Duration for which the data will be retained in the data source.
+   */
   retentionDays: number
-  /** Region of the data source. */
+  /**
+   * Region of the data source.
+   */
   region: ScwRegion
 }
 
-/** Grafana dashboard. */
+/**
+ * Grafana dashboard.
+ */
 export interface GrafanaProductDashboard {
-  /** Dashboard name. */
+  /**
+   * Dashboard name.
+   */
   name: string
-  /** Dashboard title. */
+  /**
+   * Dashboard title.
+   */
   title: string
-  /** Dashboard URL. */
+  /**
+   * Dashboard URL.
+   */
   url: string
-  /** Dashboard tags. */
+  /**
+   * Dashboard tags.
+   */
   tags: string[]
-  /** Dashboard variables. */
+  /**
+   * Dashboard variables.
+   */
   variables: string[]
 }
 
-/** Grafana user. */
+/**
+ * Grafana user.
+ */
 export interface GrafanaUser {
-  /** ID of the Grafana user. */
+  /**
+   * ID of the Grafana user.
+   */
   id: number
-  /** Username of the Grafana user. */
+  /**
+   * Username of the Grafana user.
+   */
   login: string
-  /** Role assigned to the Grafana user. */
+  /**
+   * Role assigned to the Grafana user.
+   */
   role: GrafanaUserRole
-  /** Grafana user's password. */
+  /**
+   * Grafana user's password.
+   */
   password?: string
 }
 
-/** Type of pricing plan. */
+/**
+ * Type of pricing plan.
+ */
 export interface Plan {
-  /** Name of a given pricing plan. */
+  /**
+   * Name of a given pricing plan.
+   */
   name: PlanName
-  /** Interval of time during which Scaleway's Cockpit keeps your metrics. */
+  /**
+   * Interval of time during which Scaleway's Cockpit keeps your metrics.
+   */
   retentionMetricsInterval?: string
-  /** Interval of time during which Scaleway's Cockpit keeps your logs. */
+  /**
+   * Interval of time during which Scaleway's Cockpit keeps your logs.
+   */
   retentionLogsInterval?: string
-  /** Interval of time during which Scaleway's Cockpit keeps your traces. */
+  /**
+   * Interval of time during which Scaleway's Cockpit keeps your traces.
+   */
   retentionTracesInterval?: string
-  /** Ingestion price in cents for 1 million samples. */
+  /**
+   * Ingestion price in cents for 1 million samples.
+   */
   sampleIngestionPrice: number
-  /** Ingestion price in cents for 1 GB of logs. */
+  /**
+   * Ingestion price in cents for 1 GB of logs.
+   */
   logsIngestionPrice: number
-  /** Ingestion price in cents for 1 GB of traces. */
+  /**
+   * Ingestion price in cents for 1 GB of traces.
+   */
   tracesIngestionPrice: number
-  /** Retention price in euros per month. */
+  /**
+   * Retention price in euros per month.
+   */
   monthlyPrice: number
 }
 
-/** Token. */
+/**
+ * Token.
+ */
 export interface Token {
-  /** ID of the token. */
+  /**
+   * ID of the token.
+   */
   id: string
-  /** ID of the Project the token belongs to. */
+  /**
+   * ID of the Project the token belongs to.
+   */
   projectId: string
-  /** Name of the token. */
+  /**
+   * Name of the token.
+   */
   name: string
-  /** Token creation date. */
+  /**
+   * Token creation date.
+   */
   createdAt?: Date
-  /** Token last modification date. */
+  /**
+   * Token last modification date.
+   */
   updatedAt?: Date
-  /** Token permission scopes. */
+  /**
+   * Token permission scopes.
+   */
   scopes: TokenScope[]
-  /** Token secret key. */
+  /**
+   * Token secret key.
+   */
   secretKey?: string
-  /** Regions where the token is located. */
+  /**
+   * Regions where the token is located.
+   */
   region: ScwRegion
 }
 
-/** Data source usage. */
+/**
+ * Data source usage.
+ */
 export interface Usage {
-  /** ID of the data source. */
+  /**
+   * ID of the data source.
+   */
   dataSourceId?: string
-  /** ID of the Project the data source belongs to. */
+  /**
+   * ID of the Project the data source belongs to.
+   */
   projectId: string
-  /** Origin of the data source. */
+  /**
+   * Origin of the data source.
+   */
   dataSourceOrigin: DataSourceOrigin
-  /** Type of the data source. */
+  /**
+   * Type of the data source.
+   */
   dataSourceType: DataSourceType
-  /** Unit of the data source usage. */
+  /**
+   * Unit of the data source usage.
+   */
   unit: UsageUnit
-  /** Interval for the data source usage. */
+  /**
+   * Interval for the data source usage.
+   */
   interval?: string
-  /** Data source usage for the given interval. */
+  /**
+   * Data source usage for the given interval.
+   */
   quantityOverInterval: number
-  /** Region of the data source usage. */
+  /**
+   * Region of the data source usage.
+   */
   region: ScwRegion
 }
 
-/** Alert manager information. */
+/**
+ * Alert manager information.
+ */
 export interface AlertManager {
-  /** Alert manager URL. */
+  /**
+   * Alert manager URL.
+   */
   alertManagerUrl?: string
-  /** The Alert manager is enabled. */
+  /**
+   * The Alert manager is enabled.
+   */
   alertManagerEnabled: boolean
-  /** Managed alerts are enabled. */
+  /**
+   * Managed alerts are enabled.
+   */
   managedAlertsEnabled: boolean
-  /** Regions where the Alert manager is enabled. */
+  /**
+   * Regions where the Alert manager is enabled.
+   */
   region: ScwRegion
 }
 
-/** Cockpit configuration. */
+/**
+ * Cockpit configuration.
+ */
 export interface GetConfigResponse {
-  /** Custom metrics retention configuration. */
+  /**
+   * Custom metrics retention configuration.
+   */
   customMetricsRetention?: GetConfigResponseRetention
-  /** Custom logs retention configuration. */
+  /**
+   * Custom logs retention configuration.
+   */
   customLogsRetention?: GetConfigResponseRetention
-  /** Custom traces retention configuration. */
+  /**
+   * Custom traces retention configuration.
+   */
   customTracesRetention?: GetConfigResponseRetention
-  /** Scaleway metrics retention configuration. */
+  /**
+   * Scaleway metrics retention configuration.
+   */
   productMetricsRetention?: GetConfigResponseRetention
-  /** Scaleway logs retention configuration. */
+  /**
+   * Scaleway logs retention configuration.
+   */
   productLogsRetention?: GetConfigResponseRetention
 }
 
-/** Create a Grafana user. */
+/**
+ * Create a Grafana user.
+ */
 export type GlobalApiCreateGrafanaUserRequest = {
-  /** ID of the Project in which to create the Grafana user. */
+  /**
+   * ID of the Project in which to create the Grafana user.
+   */
   projectId?: string
   /**
-   * Username of the Grafana user. Note that the `admin` username is not
-   * available for creation.
+   * Username of the Grafana user. Note that the `admin` username is not available for creation.
    */
   login: string
-  /** Role assigned to the Grafana user. */
+  /**
+   * Role assigned to the Grafana user.
+   */
   role?: GrafanaUserRole
 }
 
-/** Delete a Grafana user. */
+/**
+ * Delete a Grafana user.
+ */
 export type GlobalApiDeleteGrafanaUserRequest = {
-  /** ID of the Grafana user. */
+  /**
+   * ID of the Grafana user.
+   */
   grafanaUserId: number
-  /** ID of the Project to target. */
+  /**
+   * ID of the Project to target.
+   */
   projectId?: string
 }
 
-/** Retrieve a pricing plan for the given Project. */
+/**
+ * Retrieve a pricing plan for the given Project.
+ */
 export type GlobalApiGetCurrentPlanRequest = {
-  /** ID of the Project. */
+  /**
+   * ID of the Project.
+   */
   projectId?: string
 }
 
-/** Retrieve a specific dashboard. */
+/**
+ * Retrieve a specific dashboard.
+ */
 export type GlobalApiGetGrafanaProductDashboardRequest = {
-  /** Name of the dashboard. */
+  /**
+   * Name of the dashboard.
+   */
   dashboardName: string
-  /** ID of the Project the dashboard belongs to. */
+  /**
+   * ID of the Project the dashboard belongs to.
+   */
   projectId?: string
 }
 
-/** Request a Grafana. */
+/**
+ * Request a Grafana.
+ */
 export type GlobalApiGetGrafanaRequest = {
-  /** ID of the Project. */
+  /**
+   * ID of the Project.
+   */
   projectId?: string
 }
 
-/** Retrieve a list of available product dashboards. */
+/**
+ * Retrieve a list of available product dashboards.
+ */
 export type GlobalApiListGrafanaProductDashboardsRequest = {
-  /** ID of the Project to target. */
+  /**
+   * ID of the Project to target.
+   */
   projectId?: string
-  /** Page number. */
+  /**
+   * Page number.
+   */
   page?: number
-  /** Page size. */
+  /**
+   * Page size.
+   */
   pageSize?: number
-  /** Tags to filter for. */
+  /**
+   * Tags to filter for.
+   */
   tags?: string[]
 }
 
-/** List all Grafana users. */
+/**
+ * List all Grafana users.
+ */
 export type GlobalApiListGrafanaUsersRequest = {
-  /** Page number. */
+  /**
+   * Page number.
+   */
   page?: number
-  /** Page size. */
+  /**
+   * Page size.
+   */
   pageSize?: number
-  /** Order of the Grafana users. */
+  /**
+   * Order of the Grafana users.
+   */
   orderBy?: ListGrafanaUsersRequestOrderBy
-  /** ID of the Project to target. */
+  /**
+   * ID of the Project to target.
+   */
   projectId?: string
 }
 
-/** Retrieve a list of available pricing plans. */
+/**
+ * Retrieve a list of available pricing plans.
+ */
 export type GlobalApiListPlansRequest = {
-  /** Page number. */
+  /**
+   * Page number.
+   */
   page?: number
-  /** Page size. */
+  /**
+   * Page size.
+   */
   pageSize?: number
   orderBy?: ListPlansRequestOrderBy
 }
 
-/** Reset a Grafana user's password. */
+/**
+ * Reset a Grafana user's password.
+ */
 export type GlobalApiResetGrafanaUserPasswordRequest = {
-  /** ID of the Grafana user. */
+  /**
+   * ID of the Grafana user.
+   */
   grafanaUserId: number
-  /** ID of the Project to target. */
+  /**
+   * ID of the Project to target.
+   */
   projectId?: string
 }
 
-/** Select a specific pricing plan. */
+/**
+ * Select a specific pricing plan.
+ */
 export type GlobalApiSelectPlanRequest = {
-  /** ID of the Project. */
+  /**
+   * ID of the Project.
+   */
   projectId?: string
-  /** Name of the pricing plan. */
+  /**
+   * Name of the pricing plan.
+   */
   planName?: PlanName
 }
 
 /**
- * Trigger the synchronization of all data sources created in the relevant
- * regions.
+ * Trigger the synchronization of all data sources created in the relevant regions.
  */
 export type GlobalApiSyncGrafanaDataSourcesRequest = {
-  /** ID of the Project to target. */
+  /**
+   * ID of the Project to target.
+   */
   projectId?: string
 }
 
-/** Grafana user. */
+/**
+ * Grafana user.
+ */
 export interface Grafana {
-  /** URL to access your Cockpit's Grafana. */
+  /**
+   * URL to access your Cockpit's Grafana.
+   */
   grafanaUrl: string
 }
 
-/** Retrieve a list of alerts matching the request. */
+/**
+ * Retrieve a list of alerts matching the request.
+ */
 export interface ListAlertsResponse {
-  /** Total count of alerts matching the request. */
+  /**
+   * Total count of alerts matching the request.
+   */
   totalCount: number
-  /** List of alerts matching the applied filters. */
+  /**
+   * List of alerts matching the applied filters.
+   */
   alerts: Alert[]
 }
 
-/** Response returned when listing contact points. */
+/**
+ * Response returned when listing contact points.
+ */
 export interface ListContactPointsResponse {
-  /** Total count of contact points associated with the default receiver. */
+  /**
+   * Total count of contact points associated with the default receiver.
+   */
   totalCount: number
-  /** List of contact points associated with the default receiver. */
+  /**
+   * List of contact points associated with the default receiver.
+   */
   contactPoints: ContactPoint[]
   /**
-   * Indicates whether the Alert manager has other receivers than the default
-   * one.
+   * Indicates whether the Alert manager has other receivers than the default one.
    */
   hasAdditionalReceivers: boolean
   /**
-   * Indicates whether there are unmanaged contact points on the default
-   * receiver.
+   * Indicates whether there are unmanaged contact points on the default receiver.
    */
   hasAdditionalContactPoints: boolean
 }
 
-/** Response returned when listing data sources. */
+/**
+ * Response returned when listing data sources.
+ */
 export interface ListDataSourcesResponse {
-  /** Total count of data sources matching the request. */
+  /**
+   * Total count of data sources matching the request.
+   */
   totalCount: number
-  /** Data sources matching the request within the pagination. */
+  /**
+   * Data sources matching the request within the pagination.
+   */
   dataSources: DataSource[]
 }
 
-/** Output returned when listing dashboards. */
+/**
+ * Output returned when listing dashboards.
+ */
 export interface ListGrafanaProductDashboardsResponse {
-  /** Total count of Grafana dashboards. */
+  /**
+   * Total count of Grafana dashboards.
+   */
   totalCount: number
-  /** Grafana dashboards information. */
+  /**
+   * Grafana dashboards information.
+   */
   dashboards: GrafanaProductDashboard[]
 }
 
-/** Ouptut returned when listing Grafana users. */
+/**
+ * Ouptut returned when listing Grafana users.
+ */
 export interface ListGrafanaUsersResponse {
-  /** Total count of Grafana users. */
+  /**
+   * Total count of Grafana users.
+   */
   totalCount: number
-  /** Grafana users information. */
+  /**
+   * Grafana users information.
+   */
   grafanaUsers: GrafanaUser[]
 }
 
-/** Output returned when listing pricing plans. */
+/**
+ * Output returned when listing pricing plans.
+ */
 export interface ListPlansResponse {
-  /** Total count of available pricing plans. */
+  /**
+   * Total count of available pricing plans.
+   */
   totalCount: number
-  /** Plan types information. */
+  /**
+   * Plan types information.
+   */
   plans: Plan[]
 }
 
-/** Response returned when listing tokens. */
+/**
+ * Response returned when listing tokens.
+ */
 export interface ListTokensResponse {
-  /** Total count of tokens matching the request. */
+  /**
+   * Total count of tokens matching the request.
+   */
   totalCount: number
-  /** Tokens matching the request within the pagination. */
+  /**
+   * Tokens matching the request within the pagination.
+   */
   tokens: Token[]
 }
 
-/** Create a contact point. */
+/**
+ * Create a contact point.
+ */
 export type RegionalApiCreateContactPointRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** ID of the Project to create the contact point in. */
+  /**
+   * ID of the Project to create the contact point in.
+   */
   projectId?: string
   /**
    * Email address of the contact point to create.
@@ -411,50 +649,71 @@ export type RegionalApiCreateContactPointRequest = {
    * One-of ('configuration'): at most one of 'email' could be set.
    */
   email?: ContactPointEmail
-  /** Send an email notification when an alert is marked as resolved. */
+  /**
+   * Send an email notification when an alert is marked as resolved.
+   */
   sendResolvedNotifications?: boolean
 }
 
-/** Create a data source. */
+/**
+ * Create a data source.
+ */
 export type RegionalApiCreateDataSourceRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** ID of the Project the data source belongs to. */
+  /**
+   * ID of the Project the data source belongs to.
+   */
   projectId?: string
-  /** Data source name. */
+  /**
+   * Data source name.
+   */
   name: string
-  /** Data source type. */
+  /**
+   * Data source type.
+   */
   type?: DataSourceType
-  /** Default values are 30 days for metrics, 7 days for logs and traces. */
+  /**
+   * Default values are 30 days for metrics, 7 days for logs and traces.
+   */
   retentionDays?: number
 }
 
-/** Create a token. */
+/**
+ * Create a token.
+ */
 export type RegionalApiCreateTokenRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** ID of the Project the token belongs to. */
+  /**
+   * ID of the Project the token belongs to.
+   */
   projectId?: string
-  /** Name of the token. */
+  /**
+   * Name of the token.
+   */
   name: string
-  /** Token permission scopes. */
+  /**
+   * Token permission scopes.
+   */
   tokenScopes?: TokenScope[]
 }
 
-/** Delete a contact point. */
+/**
+ * Delete a contact point.
+ */
 export type RegionalApiDeleteContactPointRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** ID of the Project containing the contact point to delete. */
+  /**
+   * ID of the Project containing the contact point to delete.
+   */
   projectId?: string
   /**
    * Email address of the contact point to delete.
@@ -464,235 +723,288 @@ export type RegionalApiDeleteContactPointRequest = {
   email?: ContactPointEmail
 }
 
-/** Delete a data source. */
+/**
+ * Delete a data source.
+ */
 export type RegionalApiDeleteDataSourceRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** ID of the data source to delete. */
+  /**
+   * ID of the data source to delete.
+   */
   dataSourceId: string
 }
 
-/** Delete a token. */
+/**
+ * Delete a token.
+ */
 export type RegionalApiDeleteTokenRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** ID of the token to delete. */
+  /**
+   * ID of the token to delete.
+   */
   tokenId: string
 }
 
-/** Disable the Alert manager. */
+/**
+ * Disable the Alert manager.
+ */
 export type RegionalApiDisableAlertManagerRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** ID of the Project to disable the Alert manager in. */
+  /**
+   * ID of the Project to disable the Alert manager in.
+   */
   projectId?: string
 }
 
-/** Disable the sending of managed alerts. */
+/**
+ * Disable the sending of managed alerts.
+ */
 export type RegionalApiDisableManagedAlertsRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** ID of the Project. */
+  /**
+   * ID of the Project.
+   */
   projectId?: string
 }
 
-/** Enable the Alert manager. */
+/**
+ * Enable the Alert manager.
+ */
 export type RegionalApiEnableAlertManagerRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** ID of the Project to enable the Alert manager in. */
+  /**
+   * ID of the Project to enable the Alert manager in.
+   */
   projectId?: string
 }
 
-/** Enable the sending of managed alerts. */
+/**
+ * Enable the sending of managed alerts.
+ */
 export type RegionalApiEnableManagedAlertsRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** ID of the Project. */
+  /**
+   * ID of the Project.
+   */
   projectId?: string
 }
 
-/** Get the Alert manager. */
+/**
+ * Get the Alert manager.
+ */
 export type RegionalApiGetAlertManagerRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Project ID of the requested Alert manager. */
+  /**
+   * Project ID of the requested Alert manager.
+   */
   projectId?: string
 }
 
-/** Get Cockpit configuration. */
+/**
+ * Get Cockpit configuration.
+ */
 export type RegionalApiGetConfigRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
 }
 
-/** Retrieve a data source. */
+/**
+ * Retrieve a data source.
+ */
 export type RegionalApiGetDataSourceRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** ID of the relevant data source. */
+  /**
+   * ID of the relevant data source.
+   */
   dataSourceId: string
 }
 
-/** Get a token. */
+/**
+ * Get a token.
+ */
 export type RegionalApiGetTokenRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Token ID. */
+  /**
+   * Token ID.
+   */
   tokenId: string
 }
 
 export type RegionalApiGetUsageOverviewRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
   projectId?: string
   interval?: string
 }
 
-/** Retrieve a list of alerts. */
+/**
+ * Retrieve a list of alerts.
+ */
 export type RegionalApiListAlertsRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Project ID to filter for, only alerts from this Project will be returned. */
+  /**
+   * Project ID to filter for, only alerts from this Project will be returned.
+   */
   projectId?: string
   /**
-   * True returns only enabled alerts. False returns only disabled alerts. If
-   * omitted, no alert filtering is applied. Other filters may still apply.
+   * True returns only enabled alerts. False returns only disabled alerts. If omitted, no alert filtering is applied. Other filters may still apply.
    */
   isEnabled?: boolean
   /**
-   * True returns only preconfigured alerts. False returns only custom alerts.
-   * If omitted, no filtering is applied on alert types. Other filters may still
-   * apply.
+   * True returns only preconfigured alerts. False returns only custom alerts. If omitted, no filtering is applied on alert types. Other filters may still apply.
    */
   isPreconfigured?: boolean
   /**
-   * Valid values to filter on are `disabled`, `enabled`, `pending` and
-   * `firing`. If omitted, no filtering is applied on alert states. Other
-   * filters may still apply.
+   * Valid values to filter on are `disabled`, `enabled`, `pending` and `firing`. If omitted, no filtering is applied on alert states. Other filters may still apply.
    */
   state?: AlertState
 }
 
-/** List contact points. */
+/**
+ * List contact points.
+ */
 export type RegionalApiListContactPointsRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Page number to return, from the paginated results. */
+  /**
+   * Page number to return, from the paginated results.
+   */
   page?: number
-  /** Total count of contact points to return per page. */
+  /**
+   * Total count of contact points to return per page.
+   */
   pageSize?: number
-  /** ID of the Project containing the contact points to list. */
+  /**
+   * ID of the Project containing the contact points to list.
+   */
   projectId?: string
 }
 
-/** List data sources. */
+/**
+ * List data sources.
+ */
 export type RegionalApiListDataSourcesRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Page number to return, from the paginated results. */
+  /**
+   * Page number to return, from the paginated results.
+   */
   page?: number
-  /** Number of data sources to return per page. */
+  /**
+   * Number of data sources to return per page.
+   */
   pageSize?: number
-  /** Sort order for data sources in the response. */
+  /**
+   * Sort order for data sources in the response.
+   */
   orderBy?: ListDataSourcesRequestOrderBy
   /**
-   * Project ID to filter for, only data sources from this Project will be
-   * returned.
+   * Project ID to filter for, only data sources from this Project will be returned.
    */
   projectId?: string
   /**
-   * Origin to filter for, only data sources with matching origin will be
-   * returned.
+   * Origin to filter for, only data sources with matching origin will be returned.
    */
   origin?: DataSourceOrigin
   /**
-   * Types to filter for, only data sources with matching types will be
-   * returned.
+   * Types to filter for, only data sources with matching types will be returned.
    */
   types?: DataSourceType[]
 }
 
-/** List tokens. */
+/**
+ * List tokens.
+ */
 export type RegionalApiListTokensRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** Page number to return, from the paginated results. */
+  /**
+   * Page number to return, from the paginated results.
+   */
   page?: number
-  /** Number of tokens to return per page. */
+  /**
+   * Number of tokens to return per page.
+   */
   pageSize?: number
-  /** Order in which to return results. */
+  /**
+   * Order in which to return results.
+   */
   orderBy?: ListTokensRequestOrderBy
-  /** ID of the Project the tokens belong to. */
+  /**
+   * ID of the Project the tokens belong to.
+   */
   projectId?: string
-  /** Token scopes to filter for. */
+  /**
+   * Token scopes to filter for.
+   */
   tokenScopes?: TokenScope[]
 }
 
-/** Request to trigger a test alert. */
+/**
+ * Request to trigger a test alert.
+ */
 export type RegionalApiTriggerTestAlertRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** ID of the Project. */
+  /**
+   * ID of the Project.
+   */
   projectId?: string
 }
 
-/** Update a contact point. */
+/**
+ * Update a contact point.
+ */
 export type RegionalApiUpdateContactPointRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** ID of the Project containing the contact point to update. */
+  /**
+   * ID of the Project containing the contact point to update.
+   */
   projectId?: string
   /**
    * Email address of the contact point to update.
@@ -700,22 +1012,31 @@ export type RegionalApiUpdateContactPointRequest = {
    * One-of ('configuration'): at most one of 'email' could be set.
    */
   email?: ContactPointEmail
-  /** Enable or disable notifications when alert is resolved. */
+  /**
+   * Enable or disable notifications when alert is resolved.
+   */
   sendResolvedNotifications?: boolean
 }
 
-/** Update a data source name. */
+/**
+ * Update a data source name.
+ */
 export type RegionalApiUpdateDataSourceRequest = {
   /**
-   * Region to target. If none is passed will use default region from the
-   * config.
+   * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /** ID of the data source to update. */
+  /**
+   * ID of the data source to update.
+   */
   dataSourceId: string
-  /** Updated name of the data source. */
+  /**
+   * Updated name of the data source.
+   */
   name?: string
-  /** BETA - Duration for which the data will be retained in the data source. */
+  /**
+   * BETA - Duration for which the data will be retained in the data source.
+   */
   retentionDays?: number
 }
 
