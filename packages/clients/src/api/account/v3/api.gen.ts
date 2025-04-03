@@ -45,15 +45,14 @@ const jsonContentHeaders = {
 
 /**
  * Contract API.
- *
- * The Contract API allows you to manage contracts.
+
+The Contract API allows you to manage contracts.
  */
 export class ContractAPI extends ParentAPI {
   /**
    * Download a contract content.
    *
-   * @param request - The request
-   *   {@link ContractApiDownloadContractSignatureRequest}
+   * @param request - The request {@link ContractApiDownloadContractSignatureRequest}
    * @returns A Promise of Blob
    */
   downloadContractSignature = (
@@ -67,11 +66,9 @@ export class ContractAPI extends ParentAPI {
     })
 
   /**
-   * Create a signature for your Organization for the latest version of the
-   * requested contract.
+   * Create a signature for your Organization for the latest version of the requested contract.
    *
-   * @param request - The request
-   *   {@link ContractApiCreateContractSignatureRequest}
+   * @param request - The request {@link ContractApiCreateContractSignatureRequest}
    * @returns A Promise of ContractSignature
    */
   createContractSignature = (
@@ -95,8 +92,7 @@ export class ContractAPI extends ParentAPI {
   /**
    * Sign a contract for your Organization.
    *
-   * @param request - The request
-   *   {@link ContractApiValidateContractSignatureRequest}
+   * @param request - The request {@link ContractApiValidateContractSignatureRequest}
    * @returns A Promise of ContractSignature
    */
   validateContractSignature = (
@@ -115,8 +111,7 @@ export class ContractAPI extends ParentAPI {
   /**
    * Check if a contract is signed for your Organization.
    *
-   * @param request - The request
-   *   {@link ContractApiCheckContractSignatureRequest}
+   * @param request - The request {@link ContractApiCheckContractSignatureRequest}
    * @returns A Promise of CheckContractSignatureResponse
    */
   checkContractSignature = (
@@ -164,8 +159,7 @@ export class ContractAPI extends ParentAPI {
   /**
    * List contract signatures for an Organization.
    *
-   * @param request - The request
-   *   {@link ContractApiListContractSignaturesRequest}
+   * @param request - The request {@link ContractApiListContractSignaturesRequest}
    * @returns A Promise of ListContractSignaturesResponse
    */
   listContractSignatures = (
@@ -180,13 +174,12 @@ export class ContractAPI extends ParentAPI {
 
 /**
  * Account API.
- *
- * This API allows you to manage your Scaleway Projects.
+
+This API allows you to manage your Scaleway Projects.
  */
 export class ProjectAPI extends ParentAPI {
   /**
-   * Create a new Project for an Organization. Generate a new Project for an
-   * Organization, specifying its configuration including name and description.
+   * Create a new Project for an Organization. Generate a new Project for an Organization, specifying its configuration including name and description.
    *
    * @param request - The request {@link ProjectApiCreateProjectRequest}
    * @returns A Promise of Project
@@ -231,10 +224,7 @@ export class ProjectAPI extends ParentAPI {
     )
 
   /**
-   * List all Projects of an Organization. List all Projects of an Organization.
-   * The response will include the total number of Projects as well as their
-   * associated Organizations, names, and IDs. Other information includes the
-   * creation and update date of the Project.
+   * List all Projects of an Organization. List all Projects of an Organization. The response will include the total number of Projects as well as their associated Organizations, names, and IDs. Other information includes the creation and update date of the Project.
    *
    * @param request - The request {@link ProjectApiListProjectsRequest}
    * @returns A Promise of ListProjectsResponse
@@ -243,9 +233,7 @@ export class ProjectAPI extends ParentAPI {
     enrichForPagination('projects', this.pageOfListProjects, request)
 
   /**
-   * Get an existing Project. Retrieve information about an existing Project,
-   * specified by its Project ID. Its full details, including ID, name and
-   * description, are returned in the response object.
+   * Get an existing Project. Retrieve information about an existing Project, specified by its Project ID. Its full details, including ID, name and description, are returned in the response object.
    *
    * @param request - The request {@link ProjectApiGetProjectRequest}
    * @returns A Promise of Project
@@ -260,10 +248,7 @@ export class ProjectAPI extends ParentAPI {
     )
 
   /**
-   * Delete an existing Project. Delete an existing Project, specified by its
-   * Project ID. The Project needs to be empty (meaning there are no resources
-   * left in it) to be deleted effectively. Note that deleting a Project is
-   * permanent, and cannot be undone.
+   * Delete an existing Project. Delete an existing Project, specified by its Project ID. The Project needs to be empty (meaning there are no resources left in it) to be deleted effectively. Note that deleting a Project is permanent, and cannot be undone.
    *
    * @param request - The request {@link ProjectApiDeleteProjectRequest}
    */
@@ -274,8 +259,7 @@ export class ProjectAPI extends ParentAPI {
     })
 
   /**
-   * Update Project. Update the parameters of an existing Project, specified by
-   * its Project ID. These parameters include the name and description.
+   * Update Project. Update the parameters of an existing Project, specified by its Project ID. These parameters include the name and description.
    *
    * @param request - The request {@link ProjectApiUpdateProjectRequest}
    * @returns A Promise of Project
@@ -294,12 +278,9 @@ export class ProjectAPI extends ParentAPI {
     )
 
   /**
-   * Set project use case. Set the project use case for a new or existing
-   * Project, specified by its Project ID. You can customize the use case, sub
-   * use case, and architecture type you want to use in the Project.
+   * Set project use case. Set the project use case for a new or existing Project, specified by its Project ID. You can customize the use case, sub use case, and architecture type you want to use in the Project.
    *
-   * @param request - The request
-   *   {@link ProjectApiSetProjectQualificationRequest}
+   * @param request - The request {@link ProjectApiSetProjectQualificationRequest}
    * @returns A Promise of ProjectQualification
    */
   setProjectQualification = (

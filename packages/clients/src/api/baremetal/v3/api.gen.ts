@@ -28,7 +28,9 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/** Elastic Metal - Private Networks API. */
+/**
+ * Elastic Metal - Private Networks API.
+ */
 export class PrivateNetworkAPI extends ParentAPI {
   /** Lists the available zones of the API. */
   public static readonly LOCALITIES: ScwZone[] = [
@@ -41,11 +43,9 @@ export class PrivateNetworkAPI extends ParentAPI {
   ]
 
   /**
-   * Add a server to a Private Network. Add an Elastic Metal server to a Private
-   * Network.
+   * Add a server to a Private Network. Add an Elastic Metal server to a Private Network.
    *
-   * @param request - The request
-   *   {@link PrivateNetworkApiAddServerPrivateNetworkRequest}
+   * @param request - The request {@link PrivateNetworkApiAddServerPrivateNetworkRequest}
    * @returns A Promise of ServerPrivateNetwork
    */
   addServerPrivateNetwork = (
@@ -67,11 +67,9 @@ export class PrivateNetworkAPI extends ParentAPI {
     )
 
   /**
-   * Set multiple Private Networks on a server. Configure multiple Private
-   * Networks on an Elastic Metal server.
+   * Set multiple Private Networks on a server. Configure multiple Private Networks on an Elastic Metal server.
    *
-   * @param request - The request
-   *   {@link PrivateNetworkApiSetServerPrivateNetworksRequest}
+   * @param request - The request {@link PrivateNetworkApiSetServerPrivateNetworksRequest}
    * @returns A Promise of SetServerPrivateNetworksResponse
    */
   setServerPrivateNetworks = (
@@ -117,11 +115,9 @@ export class PrivateNetworkAPI extends ParentAPI {
     )
 
   /**
-   * List the Private Networks of a server. List the Private Networks of an
-   * Elastic Metal server.
+   * List the Private Networks of a server. List the Private Networks of an Elastic Metal server.
    *
-   * @param request - The request
-   *   {@link PrivateNetworkApiListServerPrivateNetworksRequest}
+   * @param request - The request {@link PrivateNetworkApiListServerPrivateNetworksRequest}
    * @returns A Promise of ListServerPrivateNetworksResponse
    */
   listServerPrivateNetworks = (
@@ -136,8 +132,7 @@ export class PrivateNetworkAPI extends ParentAPI {
   /**
    * Delete a Private Network.
    *
-   * @param request - The request
-   *   {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}
+   * @param request - The request {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}
    */
   deleteServerPrivateNetwork = (
     request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>,

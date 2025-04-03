@@ -100,8 +100,8 @@ const jsonContentHeaders = {
 
 /**
  * Elastic Metal API.
- *
- * This API allows you to manage your Elastic Metal servers.
+
+This API allows you to manage your Elastic Metal servers.
  */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
@@ -138,8 +138,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List Elastic Metal servers for an Organization. List Elastic Metal servers
-   * for a specific Organization.
+   * List Elastic Metal servers for an Organization. List Elastic Metal servers for a specific Organization.
    *
    * @param request - The request {@link ListServersRequest}
    * @returns A Promise of ListServersResponse
@@ -148,8 +147,7 @@ export class API extends ParentAPI {
     enrichForPagination('servers', this.pageOfListServers, request)
 
   /**
-   * Get a specific Elastic Metal server. Get full details of an existing
-   * Elastic Metal server associated with the ID.
+   * Get a specific Elastic Metal server. Get full details of an existing Elastic Metal server associated with the ID.
    *
    * @param request - The request {@link GetServerRequest}
    * @returns A Promise of Server
@@ -186,8 +184,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create an Elastic Metal server. Create a new Elastic Metal server. Once the
-   * server is created, proceed with the [installation of an OS](#post-3e949e).
+   * Create an Elastic Metal server. Create a new Elastic Metal server. Once the server is created, proceed with the [installation of an OS](#post-3e949e).
    *
    * @param request - The request {@link CreateServerRequest}
    * @returns A Promise of Server
@@ -206,9 +203,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an Elastic Metal server. Update the server associated with the ID.
-   * You can update parameters such as the server's name, tags and description.
-   * Any parameters left null in the request body are not updated.
+   * Update an Elastic Metal server. Update the server associated with the ID. You can update parameters such as the server's name, tags and description. Any parameters left null in the request body are not updated.
    *
    * @param request - The request {@link UpdateServerRequest}
    * @returns A Promise of Server
@@ -227,8 +222,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Install an Elastic Metal server. Install an Operating System (OS) on the
-   * Elastic Metal server with a specific ID.
+   * Install an Elastic Metal server. Install an Operating System (OS) on the Elastic Metal server with a specific ID.
    *
    * @param request - The request {@link InstallServerRequest}
    * @returns A Promise of Server
@@ -247,8 +241,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Return server metrics. Get the ping status of the server associated with
-   * the ID.
+   * Return server metrics. Get the ping status of the server associated with the ID.
    *
    * @param request - The request {@link GetServerMetricsRequest}
    * @returns A Promise of GetServerMetricsResponse
@@ -278,9 +271,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Reboot an Elastic Metal server. Reboot the Elastic Metal server associated
-   * with the ID, use the `boot_type` `rescue` to reboot the server in rescue
-   * mode.
+   * Reboot an Elastic Metal server. Reboot the Elastic Metal server associated with the ID, use the `boot_type` `rescue` to reboot the server in rescue mode.
    *
    * @param request - The request {@link RebootServerRequest}
    * @returns A Promise of Server
@@ -318,9 +309,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Stop an Elastic Metal server. Stop the server associated with the ID. The
-   * server remains allocated to your account and all data remains on the local
-   * storage of the server.
+   * Stop an Elastic Metal server. Stop the server associated with the ID. The server remains allocated to your account and all data remains on the local storage of the server.
    *
    * @param request - The request {@link StopServerRequest}
    * @returns A Promise of Server
@@ -356,8 +345,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List server events. List event (i.e. start/stop/reboot) associated to the
-   * server ID.
+   * List server events. List event (i.e. start/stop/reboot) associated to the server ID.
    *
    * @param request - The request {@link ListServerEventsRequest}
    * @returns A Promise of ListServerEventsResponse
@@ -366,8 +354,7 @@ export class API extends ParentAPI {
     enrichForPagination('events', this.pageOfListServerEvents, request)
 
   /**
-   * Get default partitioning schema. Get the default partitioning schema for
-   * the given offer ID and OS ID.
+   * Get default partitioning schema. Get the default partitioning schema for the given offer ID and OS ID.
    *
    * @param request - The request {@link GetDefaultPartitioningSchemaRequest}
    * @returns A Promise of Schema
@@ -388,9 +375,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Validate client partitioning schema. Validate the incoming partitioning
-   * schema from a user before installing the server. Return default ErrorCode
-   * if invalid.
+   * Validate client partitioning schema. Validate the incoming partitioning schema from a user before installing the server. Return default ErrorCode if invalid.
    *
    * @param request - The request {@link ValidatePartitioningSchemaRequest}
    */
@@ -407,18 +392,10 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Start BMC access. Start BMC (Baseboard Management Controller) access
-   * associated with the ID. The BMC (Baseboard Management Controller) access is
-   * available one hour after the installation of the server. You need first to
-   * create an option Remote Access. You will find the ID and the price with a
-   * call to listOffers
-   * (https://developers.scaleway.com/en/products/baremetal/api/#get-78db92).
-   * Then add the option
-   * https://developers.scaleway.com/en/products/baremetal/api/#post-b14abd.
-   * After adding the BMC option, you need to Get Remote Access to get the
-   * login/password
-   * https://developers.scaleway.com/en/products/baremetal/api/#get-cefc0f. Do
-   * not forget to delete the Option after use.
+   * Start BMC access. Start BMC (Baseboard Management Controller) access associated with the ID.
+The BMC (Baseboard Management Controller) access is available one hour after the installation of the server.
+You need first to create an option Remote Access. You will find the ID and the price with a call to listOffers (https://developers.scaleway.com/en/products/baremetal/api/#get-78db92). Then add the option https://developers.scaleway.com/en/products/baremetal/api/#post-b14abd.
+After adding the BMC option, you need to Get Remote Access to get the login/password https://developers.scaleway.com/en/products/baremetal/api/#get-cefc0f. Do not forget to delete the Option after use.
    *
    * @param request - The request {@link StartBMCAccessRequest}
    * @returns A Promise of BMCAccess
@@ -437,9 +414,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get BMC access. Get the BMC (Baseboard Management Controller) access
-   * associated with the ID, including the URL and login information needed to
-   * connect.
+   * Get BMC access. Get the BMC (Baseboard Management Controller) access associated with the ID, including the URL and login information needed to connect.
    *
    * @param request - The request {@link GetBMCAccessRequest}
    * @returns A Promise of BMCAccess
@@ -454,8 +429,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Stop BMC access. Stop BMC (Baseboard Management Controller) access
-   * associated with the ID.
+   * Stop BMC access. Stop BMC (Baseboard Management Controller) access associated with the ID.
    *
    * @param request - The request {@link StopBMCAccessRequest}
    */
@@ -466,8 +440,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Update IP. Configure the IP address associated with the server ID and IP
-   * ID. You can use this method to set a reverse DNS for an IP address.
+   * Update IP. Configure the IP address associated with the server ID and IP ID. You can use this method to set a reverse DNS for an IP address.
    *
    * @param request - The request {@link UpdateIPRequest}
    * @returns A Promise of IP
@@ -486,8 +459,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Add server option. Add an option, such as Private Networks, to a specific
-   * server.
+   * Add server option. Add an option, such as Private Networks, to a specific server.
    *
    * @param request - The request {@link AddOptionServerRequest}
    * @returns A Promise of Server
@@ -690,8 +662,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List available OSes. List all OSes that are available for installation on
-   * Elastic Metal servers.
+   * List available OSes. List all OSes that are available for installation on Elastic Metal servers.
    *
    * @param request - The request {@link ListOSRequest}
    * @returns A Promise of ListOSResponse
@@ -715,7 +686,9 @@ export class API extends ParentAPI {
     )
 }
 
-/** Elastic Metal - Private Network API. */
+/**
+ * Elastic Metal - Private Network API.
+ */
 export class PrivateNetworkAPI extends ParentAPI {
   /** Lists the available zones of the API. */
   public static readonly LOCALITIES: ScwZone[] = ['fr-par-2']
@@ -723,8 +696,7 @@ export class PrivateNetworkAPI extends ParentAPI {
   /**
    * Add a server to a Private Network.
    *
-   * @param request - The request
-   *   {@link PrivateNetworkApiAddServerPrivateNetworkRequest}
+   * @param request - The request {@link PrivateNetworkApiAddServerPrivateNetworkRequest}
    * @returns A Promise of ServerPrivateNetwork
    */
   addServerPrivateNetwork = (
@@ -748,8 +720,7 @@ export class PrivateNetworkAPI extends ParentAPI {
   /**
    * Set multiple Private Networks on a server.
    *
-   * @param request - The request
-   *   {@link PrivateNetworkApiSetServerPrivateNetworksRequest}
+   * @param request - The request {@link PrivateNetworkApiSetServerPrivateNetworksRequest}
    * @returns A Promise of SetServerPrivateNetworksResponse
    */
   setServerPrivateNetworks = (
@@ -796,8 +767,7 @@ export class PrivateNetworkAPI extends ParentAPI {
   /**
    * List the Private Networks of a server.
    *
-   * @param request - The request
-   *   {@link PrivateNetworkApiListServerPrivateNetworksRequest}
+   * @param request - The request {@link PrivateNetworkApiListServerPrivateNetworksRequest}
    * @returns A Promise of ListServerPrivateNetworksResponse
    */
   listServerPrivateNetworks = (
@@ -812,8 +782,7 @@ export class PrivateNetworkAPI extends ParentAPI {
   /**
    * Delete a Private Network.
    *
-   * @param request - The request
-   *   {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}
+   * @param request - The request {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}
    */
   deleteServerPrivateNetwork = (
     request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>,

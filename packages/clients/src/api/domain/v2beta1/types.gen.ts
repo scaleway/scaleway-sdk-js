@@ -299,23 +299,23 @@ export interface DomainRecord {
   type: DomainRecordType
   comment?: string
   /**
-   * One-of ('dynamicData'): at most one of 'geoIpConfig', 'httpServiceConfig',
-   * 'weightedConfig', 'viewConfig' could be set.
+   *
+   * One-of ('dynamicData'): at most one of 'geoIpConfig', 'httpServiceConfig', 'weightedConfig', 'viewConfig' could be set.
    */
   geoIpConfig?: DomainRecordGeoIPConfig
   /**
-   * One-of ('dynamicData'): at most one of 'geoIpConfig', 'httpServiceConfig',
-   * 'weightedConfig', 'viewConfig' could be set.
+   *
+   * One-of ('dynamicData'): at most one of 'geoIpConfig', 'httpServiceConfig', 'weightedConfig', 'viewConfig' could be set.
    */
   httpServiceConfig?: DomainRecordHTTPServiceConfig
   /**
-   * One-of ('dynamicData'): at most one of 'geoIpConfig', 'httpServiceConfig',
-   * 'weightedConfig', 'viewConfig' could be set.
+   *
+   * One-of ('dynamicData'): at most one of 'geoIpConfig', 'httpServiceConfig', 'weightedConfig', 'viewConfig' could be set.
    */
   weightedConfig?: DomainRecordWeightedConfig
   /**
-   * One-of ('dynamicData'): at most one of 'geoIpConfig', 'httpServiceConfig',
-   * 'weightedConfig', 'viewConfig' could be set.
+   *
+   * One-of ('dynamicData'): at most one of 'geoIpConfig', 'httpServiceConfig', 'weightedConfig', 'viewConfig' could be set.
    */
   viewConfig?: DomainRecordViewConfig
   id: string
@@ -335,28 +335,28 @@ export interface ContactExtensionEU {
 export interface ContactExtensionFR {
   mode: ContactExtensionFRMode
   /**
-   * One-of ('modeFields'): at most one of 'individualInfo', 'dunsInfo',
-   * 'associationInfo', 'trademarkInfo', 'codeAuthAfnicInfo' could be set.
+   *
+   * One-of ('modeFields'): at most one of 'individualInfo', 'dunsInfo', 'associationInfo', 'trademarkInfo', 'codeAuthAfnicInfo' could be set.
    */
   individualInfo?: ContactExtensionFRIndividualInfo
   /**
-   * One-of ('modeFields'): at most one of 'individualInfo', 'dunsInfo',
-   * 'associationInfo', 'trademarkInfo', 'codeAuthAfnicInfo' could be set.
+   *
+   * One-of ('modeFields'): at most one of 'individualInfo', 'dunsInfo', 'associationInfo', 'trademarkInfo', 'codeAuthAfnicInfo' could be set.
    */
   dunsInfo?: ContactExtensionFRDunsInfo
   /**
-   * One-of ('modeFields'): at most one of 'individualInfo', 'dunsInfo',
-   * 'associationInfo', 'trademarkInfo', 'codeAuthAfnicInfo' could be set.
+   *
+   * One-of ('modeFields'): at most one of 'individualInfo', 'dunsInfo', 'associationInfo', 'trademarkInfo', 'codeAuthAfnicInfo' could be set.
    */
   associationInfo?: ContactExtensionFRAssociationInfo
   /**
-   * One-of ('modeFields'): at most one of 'individualInfo', 'dunsInfo',
-   * 'associationInfo', 'trademarkInfo', 'codeAuthAfnicInfo' could be set.
+   *
+   * One-of ('modeFields'): at most one of 'individualInfo', 'dunsInfo', 'associationInfo', 'trademarkInfo', 'codeAuthAfnicInfo' could be set.
    */
   trademarkInfo?: ContactExtensionFRTrademarkInfo
   /**
-   * One-of ('modeFields'): at most one of 'individualInfo', 'dunsInfo',
-   * 'associationInfo', 'trademarkInfo', 'codeAuthAfnicInfo' could be set.
+   *
+   * One-of ('modeFields'): at most one of 'individualInfo', 'dunsInfo', 'associationInfo', 'trademarkInfo', 'codeAuthAfnicInfo' could be set.
    */
   codeAuthAfnicInfo?: ContactExtensionFRCodeAuthAfnicInfo
 }
@@ -380,9 +380,15 @@ export interface TldOffer {
 export interface DSRecord {
   keyId: number
   algorithm: DSRecordAlgorithm
-  /** One-of ('type'): at most one of 'digest', 'publicKey' could be set. */
+  /**
+   *
+   * One-of ('type'): at most one of 'digest', 'publicKey' could be set.
+   */
   digest?: DSRecordDigest
-  /** One-of ('type'): at most one of 'digest', 'publicKey' could be set. */
+  /**
+   *
+   * One-of ('type'): at most one of 'digest', 'publicKey' could be set.
+   */
   publicKey?: DSRecordPublicKey
 }
 
@@ -393,16 +399,28 @@ export interface RecordChangeAdd {
 export interface RecordChangeClear {}
 
 export interface RecordChangeDelete {
-  /** One-of ('identifier'): at most one of 'id', 'idFields' could be set. */
+  /**
+   *
+   * One-of ('identifier'): at most one of 'id', 'idFields' could be set.
+   */
   id?: string
-  /** One-of ('identifier'): at most one of 'id', 'idFields' could be set. */
+  /**
+   *
+   * One-of ('identifier'): at most one of 'id', 'idFields' could be set.
+   */
   idFields?: RecordIdentifier
 }
 
 export interface RecordChangeSet {
-  /** One-of ('identifier'): at most one of 'id', 'idFields' could be set. */
+  /**
+   *
+   * One-of ('identifier'): at most one of 'id', 'idFields' could be set.
+   */
   id?: string
-  /** One-of ('identifier'): at most one of 'id', 'idFields' could be set. */
+  /**
+   *
+   * One-of ('identifier'): at most one of 'id', 'idFields' could be set.
+   */
   idFields?: RecordIdentifier
   records: DomainRecord[]
 }
@@ -432,7 +450,9 @@ export interface Contact {
   companyIdentificationCode: string
   lang: StdLanguageCode
   resale: boolean
-  /** @deprecated */
+  /**
+   * @deprecated
+   */
   questions?: ContactQuestion[]
   extensionFr?: ContactExtensionFR
   extensionEu?: ContactExtensionEU
@@ -487,7 +507,9 @@ export interface NewContact {
   companyIdentificationCode?: string
   lang: StdLanguageCode
   resale: boolean
-  /** @deprecated */
+  /**
+   * @deprecated
+   */
   questions?: ContactQuestion[]
   extensionFr?: ContactExtensionFR
   extensionEu?: ContactExtensionEU
@@ -521,23 +543,23 @@ export interface DomainDNSSEC {
 
 export interface RecordChange {
   /**
-   * One-of ('change'): at most one of 'add', 'set', 'delete', 'clear' could be
-   * set.
+   *
+   * One-of ('change'): at most one of 'add', 'set', 'delete', 'clear' could be set.
    */
   add?: RecordChangeAdd
   /**
-   * One-of ('change'): at most one of 'add', 'set', 'delete', 'clear' could be
-   * set.
+   *
+   * One-of ('change'): at most one of 'add', 'set', 'delete', 'clear' could be set.
    */
   set?: RecordChangeSet
   /**
-   * One-of ('change'): at most one of 'add', 'set', 'delete', 'clear' could be
-   * set.
+   *
+   * One-of ('change'): at most one of 'add', 'set', 'delete', 'clear' could be set.
    */
   delete?: RecordChangeDelete
   /**
-   * One-of ('change'): at most one of 'add', 'set', 'delete', 'clear' could be
-   * set.
+   *
+   * One-of ('change'): at most one of 'add', 'set', 'delete', 'clear' could be set.
    */
   clear?: RecordChangeClear
 }
@@ -589,15 +611,13 @@ export interface DomainSummary {
   isExternal: boolean
   status: DomainStatus
   /**
-   * One-of ('registrationStatus'): at most one of
-   * 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be
-   * set.
+   *
+   * One-of ('registrationStatus'): at most one of 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be set.
    */
   externalDomainRegistrationStatus?: DomainRegistrationStatusExternalDomain
   /**
-   * One-of ('registrationStatus'): at most one of
-   * 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be
-   * set.
+   *
+   * One-of ('registrationStatus'): at most one of 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be set.
    */
   transferRegistrationStatus?: DomainRegistrationStatusTransfer
   organizationId: string
@@ -629,25 +649,45 @@ export interface SSLCertificate {
 }
 
 export interface Task {
-  /** The unique identifier of the task. */
+  /**
+   * The unique identifier of the task.
+   */
   id: string
-  /** The project ID associated to the task. */
+  /**
+   * The project ID associated to the task.
+   */
   projectId: string
-  /** The organization ID associated to the task. */
+  /**
+   * The organization ID associated to the task.
+   */
   organizationId: string
-  /** The domain name associated to the task. */
+  /**
+   * The domain name associated to the task.
+   */
   domain?: string
-  /** The type of the task. */
+  /**
+   * The type of the task.
+   */
   type: TaskType
-  /** The status of the task. */
+  /**
+   * The status of the task.
+   */
   status: TaskStatus
-  /** Start date of the task. */
+  /**
+   * Start date of the task.
+   */
   startedAt?: Date
-  /** Last update of the task. */
+  /**
+   * Last update of the task.
+   */
   updatedAt?: Date
-  /** Error message associated to the task. */
+  /**
+   * Error message associated to the task.
+   */
   message?: string
-  /** Human-friendly contact identifier used when the task concerns a contact. */
+  /**
+   * Human-friendly contact identifier used when the task concerns a contact.
+   */
   contactIdentifier?: string
 }
 
@@ -675,29 +715,45 @@ export interface CheckContactsCompatibilityResponse {
 }
 
 export type ClearDNSZoneRecordsRequest = {
-  /** DNS zone to clear. */
+  /**
+   * DNS zone to clear.
+   */
   dnsZone: string
 }
 
 export interface ClearDNSZoneRecordsResponse {}
 
 export type CloneDNSZoneRequest = {
-  /** DNS zone to clone. */
+  /**
+   * DNS zone to clone.
+   */
   dnsZone: string
-  /** Destination DNS zone in which to clone the chosen DNS zone. */
+  /**
+   * Destination DNS zone in which to clone the chosen DNS zone.
+   */
   destDnsZone: string
-  /** Specifies whether or not the destination DNS zone will be overwritten. */
+  /**
+   * Specifies whether or not the destination DNS zone will be overwritten.
+   */
   overwrite: boolean
-  /** Project ID of the destination DNS zone. */
+  /**
+   * Project ID of the destination DNS zone.
+   */
   projectId?: string
 }
 
 export type CreateDNSZoneRequest = {
-  /** Domain in which to crreate the DNS zone. */
+  /**
+   * Domain in which to crreate the DNS zone.
+   */
   domain: string
-  /** Subdomain of the DNS zone to create. */
+  /**
+   * Subdomain of the DNS zone to create.
+   */
   subdomain: string
-  /** Project ID in which to create the DNS zone. */
+  /**
+   * Project ID in which to create the DNS zone.
+   */
   projectId?: string
 }
 
@@ -707,9 +763,13 @@ export type CreateSSLCertificateRequest = {
 }
 
 export type DeleteDNSZoneRequest = {
-  /** DNS zone to delete. */
+  /**
+   * DNS zone to delete.
+   */
   dnsZone: string
-  /** Project ID of the DNS zone to delete. */
+  /**
+   * Project ID of the DNS zone to delete.
+   */
   projectId?: string
 }
 
@@ -731,57 +791,85 @@ export interface Domain {
   domain: string
   organizationId: string
   projectId: string
-  /** Status of the automatic renewal of the domain. */
+  /**
+   * Status of the automatic renewal of the domain.
+   */
   autoRenewStatus: DomainFeatureStatus
-  /** Status of the DNSSEC configuration of the domain. */
+  /**
+   * Status of the DNSSEC configuration of the domain.
+   */
   dnssec?: DomainDNSSEC
-  /** List of the domain's EPP codes. */
+  /**
+   * List of the domain's EPP codes.
+   */
   eppCode: string[]
-  /** Date of expiration of the domain. */
+  /**
+   * Date of expiration of the domain.
+   */
   expiredAt?: Date
-  /** Domain's last modification date. */
+  /**
+   * Domain's last modification date.
+   */
   updatedAt?: Date
   registrar: string
-  /** Indicates whether Scaleway is the domain's registrar. */
+  /**
+   * Indicates whether Scaleway is the domain's registrar.
+   */
   isExternal: boolean
-  /** Status of the domain. */
+  /**
+   * Status of the domain.
+   */
   status: DomainStatus
-  /** List of the domain's DNS zones. */
+  /**
+   * List of the domain's DNS zones.
+   */
   dnsZones: DNSZone[]
-  /** Contact information of the domain's owner. */
+  /**
+   * Contact information of the domain's owner.
+   */
   ownerContact?: Contact
-  /** Contact information of the domain's technical contact. */
+  /**
+   * Contact information of the domain's technical contact.
+   */
   technicalContact?: Contact
-  /** Contact information of the domain's administrative contact. */
+  /**
+   * Contact information of the domain's administrative contact.
+   */
   administrativeContact?: Contact
   /**
    * Registration status of an external domain, if available.
    *
-   * One-of ('registrationStatus'): at most one of
-   * 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be
-   * set.
+   * One-of ('registrationStatus'): at most one of 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be set.
    */
   externalDomainRegistrationStatus?: DomainRegistrationStatusExternalDomain
   /**
    * Status of a domain, when available for transfer.
    *
-   * One-of ('registrationStatus'): at most one of
-   * 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be
-   * set.
+   * One-of ('registrationStatus'): at most one of 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be set.
    */
   transferRegistrationStatus?: DomainRegistrationStatusTransfer
-  /** Domain's TLD information. */
+  /**
+   * Domain's TLD information.
+   */
   tld?: Tld
-  /** List of Scaleway resources linked to the domain. */
+  /**
+   * List of Scaleway resources linked to the domain.
+   */
   linkedProducts: LinkedProduct[]
-  /** Indicates if a trade is ongoing. */
+  /**
+   * Indicates if a trade is ongoing.
+   */
   pendingTrade: boolean
 }
 
 export type ExportRawDNSZoneRequest = {
-  /** DNS zone to export. */
+  /**
+   * DNS zone to export.
+   */
   dnsZone: string
-  /** DNS zone format. */
+  /**
+   * DNS zone format.
+   */
   format?: RawFormat
 }
 
@@ -813,7 +901,10 @@ export type GetSSLCertificateRequest = {
 
 export type ImportProviderDNSZoneRequest = {
   dnsZone: string
-  /** One-of ('provider'): at most one of 'onlineV1' could be set. */
+  /**
+   *
+   * One-of ('provider'): at most one of 'onlineV1' could be set.
+   */
   onlineV1?: ImportProviderDNSZoneRequestOnlineV1
 }
 
@@ -822,12 +913,18 @@ export interface ImportProviderDNSZoneResponse {
 }
 
 export type ImportRawDNSZoneRequest = {
-  /** DNS zone to import. */
+  /**
+   * DNS zone to import.
+   */
   dnsZone: string
-  /** @deprecated */
+  /**
+   * @deprecated
+   */
   content?: string
   projectId?: string
-  /** @deprecated */
+  /**
+   * @deprecated
+   */
   format?: RawFormat
   /**
    * Import a bind file format.
@@ -853,102 +950,168 @@ export interface ListContactsResponse {
 }
 
 export type ListDNSZoneNameserversRequest = {
-  /** DNS zone on which to filter the returned DNS zone name servers. */
+  /**
+   * DNS zone on which to filter the returned DNS zone name servers.
+   */
   dnsZone: string
-  /** Project ID on which to filter the returned DNS zone name servers. */
+  /**
+   * Project ID on which to filter the returned DNS zone name servers.
+   */
   projectId?: string
 }
 
 export interface ListDNSZoneNameserversResponse {
-  /** DNS zone name servers returned. */
+  /**
+   * DNS zone name servers returned.
+   */
   ns: Nameserver[]
 }
 
 export type ListDNSZoneRecordsRequest = {
-  /** DNS zone on which to filter the returned DNS zone records. */
+  /**
+   * DNS zone on which to filter the returned DNS zone records.
+   */
   dnsZone: string
-  /** Project ID on which to filter the returned DNS zone records. */
+  /**
+   * Project ID on which to filter the returned DNS zone records.
+   */
   projectId?: string
-  /** Sort order of the returned DNS zone records. */
+  /**
+   * Sort order of the returned DNS zone records.
+   */
   orderBy?: ListDNSZoneRecordsRequestOrderBy
-  /** Page number to return, from the paginated results. */
+  /**
+   * Page number to return, from the paginated results.
+   */
   page?: number
-  /** Maximum number of DNS zone records per page. */
+  /**
+   * Maximum number of DNS zone records per page.
+   */
   pageSize?: number
-  /** Name on which to filter the returned DNS zone records. */
+  /**
+   * Name on which to filter the returned DNS zone records.
+   */
   name: string
-  /** Record type on which to filter the returned DNS zone records. */
+  /**
+   * Record type on which to filter the returned DNS zone records.
+   */
   type?: DomainRecordType
-  /** Record ID on which to filter the returned DNS zone records. */
+  /**
+   * Record ID on which to filter the returned DNS zone records.
+   */
   id?: string
 }
 
 export interface ListDNSZoneRecordsResponse {
-  /** Total number of DNS zone records. */
+  /**
+   * Total number of DNS zone records.
+   */
   totalCount: number
-  /** Paginated returned DNS zone records. */
+  /**
+   * Paginated returned DNS zone records.
+   */
   records: DomainRecord[]
 }
 
 export type ListDNSZoneVersionRecordsRequest = {
   dnsZoneVersionId: string
-  /** Page number to return, from the paginated results. */
+  /**
+   * Page number to return, from the paginated results.
+   */
   page?: number
-  /** Maximum number of DNS zones versions records per page. */
+  /**
+   * Maximum number of DNS zones versions records per page.
+   */
   pageSize?: number
 }
 
 export interface ListDNSZoneVersionRecordsResponse {
-  /** Total number of DNS zones versions records. */
+  /**
+   * Total number of DNS zones versions records.
+   */
   totalCount: number
   records: DomainRecord[]
 }
 
 export type ListDNSZoneVersionsRequest = {
   dnsZone: string
-  /** Page number to return, from the paginated results. */
+  /**
+   * Page number to return, from the paginated results.
+   */
   page?: number
-  /** Maximum number of DNS zones versions per page. */
+  /**
+   * Maximum number of DNS zones versions per page.
+   */
   pageSize?: number
 }
 
 export interface ListDNSZoneVersionsResponse {
-  /** Total number of DNS zones versions. */
+  /**
+   * Total number of DNS zones versions.
+   */
   totalCount: number
   versions: DNSZoneVersion[]
 }
 
 export type ListDNSZonesRequest = {
-  /** Organization ID on which to filter the returned DNS zones. */
+  /**
+   * Organization ID on which to filter the returned DNS zones.
+   */
   organizationId?: string
-  /** Project ID on which to filter the returned DNS zones. */
+  /**
+   * Project ID on which to filter the returned DNS zones.
+   */
   projectId?: string
-  /** Sort order of the returned DNS zones. */
+  /**
+   * Sort order of the returned DNS zones.
+   */
   orderBy?: ListDNSZonesRequestOrderBy
-  /** Page number to return, from the paginated results. */
+  /**
+   * Page number to return, from the paginated results.
+   */
   page?: number
-  /** Maximum number of DNS zones to return per page. */
+  /**
+   * Maximum number of DNS zones to return per page.
+   */
   pageSize?: number
-  /** Domain on which to filter the returned DNS zones. */
+  /**
+   * Domain on which to filter the returned DNS zones.
+   */
   domain: string
-  /** @deprecated DNS zone on which to filter the returned DNS zones. */
+  /**
+   * @deprecated DNS zone on which to filter the returned DNS zones.
+   */
   dnsZone?: string
-  /** DNS zones on which to filter the returned DNS zones. */
+  /**
+   * DNS zones on which to filter the returned DNS zones.
+   */
   dnsZones?: string[]
-  /** Only list DNS zones created after this date. */
+  /**
+   * Only list DNS zones created after this date.
+   */
   createdAfter?: Date
-  /** Only list DNS zones created before this date. */
+  /**
+   * Only list DNS zones created before this date.
+   */
   createdBefore?: Date
-  /** Only list DNS zones updated after this date. */
+  /**
+   * Only list DNS zones updated after this date.
+   */
   updatedAfter?: Date
-  /** Only list DNS zones updated before this date. */
+  /**
+   * Only list DNS zones updated before this date.
+   */
   updatedBefore?: Date
 }
 
 export interface ListDNSZonesResponse {
-  /** Total number of DNS zones matching the requested criteria. */
+  /**
+   * Total number of DNS zones matching the requested criteria.
+   */
   totalCount: number
-  /** Paginated returned DNS zones. */
+  /**
+   * Paginated returned DNS zones.
+   */
   dnsZones: DNSZone[]
 }
 
@@ -985,9 +1148,13 @@ export interface ListTasksResponse {
 }
 
 export interface ListTldsResponse {
-  /** Array of TLDs. */
+  /**
+   * Array of TLDs.
+   */
   tlds: Tld[]
-  /** Total count of TLDs returned. */
+  /**
+   * Total count of TLDs returned.
+   */
   totalCount: number
 }
 
@@ -1000,16 +1167,24 @@ export interface OrderResponse {
 }
 
 export type RefreshDNSZoneRequest = {
-  /** DNS zone to refresh. */
+  /**
+   * DNS zone to refresh.
+   */
   dnsZone: string
-  /** Specifies whether or not to recreate the DNS zone. */
+  /**
+   * Specifies whether or not to recreate the DNS zone.
+   */
   recreateDnsZone: boolean
-  /** Specifies whether or not to recreate the sub DNS zone. */
+  /**
+   * Specifies whether or not to recreate the sub DNS zone.
+   */
   recreateSubDnsZone: boolean
 }
 
 export interface RefreshDNSZoneResponse {
-  /** DNS zones returned. */
+  /**
+   * DNS zones returned.
+   */
   dnsZones: DNSZone[]
 }
 
@@ -1026,33 +1201,33 @@ export type RegistrarApiBuyDomainsRequest = {
   durationInYears: number
   projectId?: string
   /**
-   * One-of ('ownerContactType'): at most one of 'ownerContactId',
-   * 'ownerContact' could be set.
+   *
+   * One-of ('ownerContactType'): at most one of 'ownerContactId', 'ownerContact' could be set.
    */
   ownerContactId?: string
   /**
-   * One-of ('ownerContactType'): at most one of 'ownerContactId',
-   * 'ownerContact' could be set.
+   *
+   * One-of ('ownerContactType'): at most one of 'ownerContactId', 'ownerContact' could be set.
    */
   ownerContact?: NewContact
   /**
-   * One-of ('administrativeContactType'): at most one of
-   * 'administrativeContactId', 'administrativeContact' could be set.
+   *
+   * One-of ('administrativeContactType'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
   administrativeContactId?: string
   /**
-   * One-of ('administrativeContactType'): at most one of
-   * 'administrativeContactId', 'administrativeContact' could be set.
+   *
+   * One-of ('administrativeContactType'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
   administrativeContact?: NewContact
   /**
-   * One-of ('technicalContactType'): at most one of 'technicalContactId',
-   * 'technicalContact' could be set.
+   *
+   * One-of ('technicalContactType'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
   technicalContactId?: string
   /**
-   * One-of ('technicalContactType'): at most one of 'technicalContactId',
-   * 'technicalContact' could be set.
+   *
+   * One-of ('technicalContactType'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
   technicalContact?: NewContact
 }
@@ -1061,33 +1236,33 @@ export type RegistrarApiCheckContactsCompatibilityRequest = {
   domains?: string[]
   tlds?: string[]
   /**
-   * One-of ('ownerContactType'): at most one of 'ownerContactId',
-   * 'ownerContact' could be set.
+   *
+   * One-of ('ownerContactType'): at most one of 'ownerContactId', 'ownerContact' could be set.
    */
   ownerContactId?: string
   /**
-   * One-of ('ownerContactType'): at most one of 'ownerContactId',
-   * 'ownerContact' could be set.
+   *
+   * One-of ('ownerContactType'): at most one of 'ownerContactId', 'ownerContact' could be set.
    */
   ownerContact?: NewContact
   /**
-   * One-of ('administrativeContactType'): at most one of
-   * 'administrativeContactId', 'administrativeContact' could be set.
+   *
+   * One-of ('administrativeContactType'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
   administrativeContactId?: string
   /**
-   * One-of ('administrativeContactType'): at most one of
-   * 'administrativeContactId', 'administrativeContact' could be set.
+   *
+   * One-of ('administrativeContactType'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
   administrativeContact?: NewContact
   /**
-   * One-of ('technicalContactType'): at most one of 'technicalContactId',
-   * 'technicalContact' could be set.
+   *
+   * One-of ('technicalContactType'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
   technicalContactId?: string
   /**
-   * One-of ('technicalContactType'): at most one of 'technicalContactId',
-   * 'technicalContact' could be set.
+   *
+   * One-of ('technicalContactType'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
   technicalContact?: NewContact
 }
@@ -1184,13 +1359,21 @@ export type RegistrarApiListTasksRequest = {
 }
 
 export type RegistrarApiListTldsRequest = {
-  /** Array of TLDs to return. */
+  /**
+   * Array of TLDs to return.
+   */
   tlds?: string[]
-  /** Page number for the returned Projects. */
+  /**
+   * Page number for the returned Projects.
+   */
   page?: number
-  /** Maximum number of Project per page. */
+  /**
+   * Maximum number of Project per page.
+   */
   pageSize?: number
-  /** Sort order of the returned TLDs. */
+  /**
+   * Sort order of the returned TLDs.
+   */
   orderBy?: ListTldsRequestOrderBy
 }
 
@@ -1210,11 +1393,17 @@ export type RegistrarApiRenewDomainsRequest = {
 }
 
 export type RegistrarApiSearchAvailableDomainsRequest = {
-  /** A list of domain to search, TLD is optional. */
+  /**
+   * A list of domain to search, TLD is optional.
+   */
   domains: string[]
-  /** Array of tlds to search on. */
+  /**
+   * Array of tlds to search on.
+   */
   tlds?: string[]
-  /** Search exact match. */
+  /**
+   * Search exact match.
+   */
   strictSearch: boolean
 }
 
@@ -1222,13 +1411,13 @@ export type RegistrarApiTradeDomainRequest = {
   domain: string
   projectId?: string
   /**
-   * One-of ('newOwnerContactType'): at most one of 'newOwnerContactId',
-   * 'newOwnerContact' could be set.
+   *
+   * One-of ('newOwnerContactType'): at most one of 'newOwnerContactId', 'newOwnerContact' could be set.
    */
   newOwnerContactId?: string
   /**
-   * One-of ('newOwnerContactType'): at most one of 'newOwnerContactId',
-   * 'newOwnerContact' could be set.
+   *
+   * One-of ('newOwnerContactType'): at most one of 'newOwnerContactId', 'newOwnerContact' could be set.
    */
   newOwnerContact?: NewContact
 }
@@ -1237,33 +1426,33 @@ export type RegistrarApiTransferInDomainRequest = {
   domains: TransferInDomainRequestTransferRequest[]
   projectId?: string
   /**
-   * One-of ('ownerContactType'): at most one of 'ownerContactId',
-   * 'ownerContact' could be set.
+   *
+   * One-of ('ownerContactType'): at most one of 'ownerContactId', 'ownerContact' could be set.
    */
   ownerContactId?: string
   /**
-   * One-of ('ownerContactType'): at most one of 'ownerContactId',
-   * 'ownerContact' could be set.
+   *
+   * One-of ('ownerContactType'): at most one of 'ownerContactId', 'ownerContact' could be set.
    */
   ownerContact?: NewContact
   /**
-   * One-of ('administrativeContactType'): at most one of
-   * 'administrativeContactId', 'administrativeContact' could be set.
+   *
+   * One-of ('administrativeContactType'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
   administrativeContactId?: string
   /**
-   * One-of ('administrativeContactType'): at most one of
-   * 'administrativeContactId', 'administrativeContact' could be set.
+   *
+   * One-of ('administrativeContactType'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
   administrativeContact?: NewContact
   /**
-   * One-of ('technicalContactType'): at most one of 'technicalContactId',
-   * 'technicalContact' could be set.
+   *
+   * One-of ('technicalContactType'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
   technicalContactId?: string
   /**
-   * One-of ('technicalContactType'): at most one of 'technicalContactId',
-   * 'technicalContact' could be set.
+   *
+   * One-of ('technicalContactType'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
   technicalContact?: NewContact
 }
@@ -1287,7 +1476,9 @@ export type RegistrarApiUpdateContactRequest = {
   companyIdentificationCode?: string
   lang?: StdLanguageCode
   resale?: boolean
-  /** @deprecated */
+  /**
+   * @deprecated
+   */
   questions?: UpdateContactRequestQuestion[]
   extensionFr?: ContactExtensionFR
   extensionEu?: ContactExtensionEU
@@ -1305,37 +1496,35 @@ export type RegistrarApiUpdateDomainHostRequest = {
 export type RegistrarApiUpdateDomainRequest = {
   domain: string
   /**
-   * One-of ('technicalContactInfo'): at most one of 'technicalContactId',
-   * 'technicalContact' could be set.
+   *
+   * One-of ('technicalContactInfo'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
   technicalContactId?: string
   /**
-   * One-of ('technicalContactInfo'): at most one of 'technicalContactId',
-   * 'technicalContact' could be set.
+   *
+   * One-of ('technicalContactInfo'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
   technicalContact?: NewContact
   /**
    * @deprecated
    *
-   *   One-of ('ownerContactInfo'): at most one of 'ownerContactId',
-   *   'ownerContact' could be set.
+   * One-of ('ownerContactInfo'): at most one of 'ownerContactId', 'ownerContact' could be set.
    */
   ownerContactId?: string
   /**
    * @deprecated
    *
-   *   One-of ('ownerContactInfo'): at most one of 'ownerContactId',
-   *   'ownerContact' could be set.
+   * One-of ('ownerContactInfo'): at most one of 'ownerContactId', 'ownerContact' could be set.
    */
   ownerContact?: NewContact
   /**
-   * One-of ('administrativeContactInfo'): at most one of
-   * 'administrativeContactId', 'administrativeContact' could be set.
+   *
+   * One-of ('administrativeContactInfo'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
   administrativeContactId?: string
   /**
-   * One-of ('administrativeContactInfo'): at most one of
-   * 'administrativeContactId', 'administrativeContact' could be set.
+   *
+   * One-of ('administrativeContactInfo'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
   administrativeContact?: NewContact
 }
@@ -1347,48 +1536,71 @@ export type RestoreDNSZoneVersionRequest = {
 export interface RestoreDNSZoneVersionResponse {}
 
 export interface SearchAvailableDomainsResponse {
-  /** Array of available domains. */
+  /**
+   * Array of available domains.
+   */
   availableDomains: AvailableDomain[]
 }
 
 export type UpdateDNSZoneNameserversRequest = {
-  /** DNS zone in which to update the DNS zone name servers. */
+  /**
+   * DNS zone in which to update the DNS zone name servers.
+   */
   dnsZone: string
-  /** New DNS zone name servers. */
+  /**
+   * New DNS zone name servers.
+   */
   ns: Nameserver[]
 }
 
 export interface UpdateDNSZoneNameserversResponse {
-  /** DNS zone name servers returned. */
+  /**
+   * DNS zone name servers returned.
+   */
   ns: Nameserver[]
 }
 
 export type UpdateDNSZoneRecordsRequest = {
-  /** DNS zone in which to update the DNS zone records. */
+  /**
+   * DNS zone in which to update the DNS zone records.
+   */
   dnsZone: string
-  /** Changes made to the records. */
+  /**
+   * Changes made to the records.
+   */
   changes: RecordChange[]
-  /** Specifies whether or not to return all the records. */
+  /**
+   * Specifies whether or not to return all the records.
+   */
   returnAllRecords?: boolean
   /**
-   * Disable the creation of the target zone if it does not exist. Target zone
-   * creation is disabled by default.
+   * Disable the creation of the target zone if it does not exist. Target zone creation is disabled by default.
    */
   disallowNewZoneCreation: boolean
-  /** Use the provided serial (0) instead of the auto-increment serial. */
+  /**
+   * Use the provided serial (0) instead of the auto-increment serial.
+   */
   serial?: number
 }
 
 export interface UpdateDNSZoneRecordsResponse {
-  /** DNS zone records returned. */
+  /**
+   * DNS zone records returned.
+   */
   records: DomainRecord[]
 }
 
 export type UpdateDNSZoneRequest = {
-  /** DNS zone to update. */
+  /**
+   * DNS zone to update.
+   */
   dnsZone: string
-  /** Name of the new DNS zone to create. */
+  /**
+   * Name of the new DNS zone to create.
+   */
   newDnsZone?: string
-  /** Project ID in which to create the new DNS zone. */
+  /**
+   * Project ID in which to create the new DNS zone.
+   */
   projectId?: string
 }

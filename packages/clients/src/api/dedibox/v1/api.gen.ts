@@ -249,7 +249,9 @@ const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
-/** Dedibox Phoenix API. */
+/**
+ * Dedibox Phoenix API.
+ */
 export class API extends ParentAPI {
   /** Lists the available zones of the API. */
   public static readonly LOCALITIES: ScwZone[] = [
@@ -290,8 +292,7 @@ export class API extends ParentAPI {
     enrichForPagination('servers', this.pageOfListServers, request)
 
   /**
-   * Get a specific baremetal server. Get the server associated with the given
-   * ID.
+   * Get a specific baremetal server. Get the server associated with the given ID.
    *
    * @param request - The request {@link GetServerRequest}
    * @returns A Promise of Server
@@ -368,8 +369,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List subscribable server options. List subscribable options associated to
-   * the given server ID.
+   * List subscribable server options. List subscribable options associated to the given server ID.
    *
    * @param request - The request {@link ListSubscribableServerOptionsRequest}
    * @returns A Promise of ListSubscribableServerOptionsResponse
@@ -403,9 +403,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a baremetal server. Create a new baremetal server. The order return
-   * you a service ID to follow the provisionning status you could call
-   * GetService.
+   * Create a baremetal server. Create a new baremetal server. The order return you a service ID to follow the provisionning status you could call GetService.
    *
    * @param request - The request {@link CreateServerRequest}
    * @returns A Promise of Service
@@ -424,8 +422,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Subscribe storage server option. Subscribe storage option for the given
-   * server ID.
+   * Subscribe storage server option. Subscribe storage option for the given server ID.
    *
    * @param request - The request {@link SubscribeStorageOptionsRequest}
    * @returns A Promise of SubscribeStorageOptionsResponse
@@ -478,8 +475,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Reboot a baremetal server. Reboot the server associated with the given ID,
-   * use boot param to reboot in rescue.
+   * Reboot a baremetal server. Reboot the server associated with the given ID, use boot param to reboot in rescue.
    *
    * @param request - The request {@link RebootServerRequest}
    */
@@ -655,8 +651,7 @@ export class API extends ParentAPI {
     enrichForPagination('services', this.pageOfListServices, request)
 
   /**
-   * Install a baremetal server. Install an OS on the server associated with the
-   * given ID.
+   * Install a baremetal server. Install an OS on the server associated with the given ID.
    *
    * @param request - The request {@link InstallServerRequest}
    * @returns A Promise of ServerInstall
@@ -675,8 +670,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a specific server installation status. Get the server installation
-   * status associated with the given server ID.
+   * Get a specific server installation status. Get the server installation status associated with the given server ID.
    *
    * @param request - The request {@link GetServerInstallRequest}
    * @returns A Promise of ServerInstall
@@ -713,8 +707,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Cancels the current (running) server installation. Cancels the current
-   * server installation associated with the given server ID.
+   * Cancels the current (running) server installation. Cancels the current server installation associated with the given server ID.
    *
    * @param request - The request {@link CancelServerInstallRequest}
    */
@@ -725,8 +718,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Get server default partitioning. Get the server default partitioning schema
-   * associated with the given server ID and OS ID.
+   * Get server default partitioning. Get the server default partitioning schema associated with the given server ID and OS ID.
    *
    * @param request - The request {@link GetServerDefaultPartitioningRequest}
    * @returns A Promise of ServerDefaultPartitioning
@@ -743,10 +735,8 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Start BMC (Baseboard Management Controller) access for a given baremetal
-   * server. Start BMC (Baseboard Management Controller) access associated with
-   * the given ID. The BMC (Baseboard Management Controller) access is available
-   * one hour after the installation of the server.
+   * Start BMC (Baseboard Management Controller) access for a given baremetal server. Start BMC (Baseboard Management Controller) access associated with the given ID.
+The BMC (Baseboard Management Controller) access is available one hour after the installation of the server.
    *
    * @param request - The request {@link StartBMCAccessRequest}
    */
@@ -761,9 +751,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Get BMC (Baseboard Management Controller) access for a given baremetal
-   * server. Get the BMC (Baseboard Management Controller) access associated
-   * with the given ID.
+   * Get BMC (Baseboard Management Controller) access for a given baremetal server. Get the BMC (Baseboard Management Controller) access associated with the given ID.
    *
    * @param request - The request {@link GetBMCAccessRequest}
    * @returns A Promise of BMCAccess
@@ -800,9 +788,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Stop BMC (Baseboard Management Controller) access for a given baremetal
-   * server. Stop BMC (Baseboard Management Controller) access associated with
-   * the given ID.
+   * Stop BMC (Baseboard Management Controller) access for a given baremetal server. Stop BMC (Baseboard Management Controller) access associated with the given ID.
    *
    * @param request - The request {@link StopBMCAccessRequest}
    */
@@ -954,8 +940,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Attach failovers on baremetal server. Attach failovers on the server
-   * associated with the given ID.
+   * Attach failovers on baremetal server. Attach failovers on the server associated with the given ID.
    *
    * @param request - The request {@link AttachFailoverIPsRequest}
    */
@@ -970,8 +955,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Detach failovers on baremetal server. Detach failovers on the server
-   * associated with the given ID.
+   * Detach failovers on baremetal server. Detach failovers on the server associated with the given ID.
    *
    * @param request - The request {@link DetachFailoverIPsRequest}
    */
@@ -1074,8 +1058,7 @@ export class API extends ParentAPI {
     enrichForPagination('failoverIps', this.pageOfListFailoverIPs, request)
 
   /**
-   * Get a specific baremetal server. Get the server associated with the given
-   * ID.
+   * Get a specific baremetal server. Get the server associated with the given ID.
    *
    * @param request - The request {@link GetFailoverIPRequest}
    * @returns A Promise of FailoverIP
@@ -1136,8 +1119,7 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Start in rescue baremetal server. Start in rescue the server associated
-   * with the given ID.
+   * Start in rescue baremetal server. Start in rescue the server associated with the given ID.
    *
    * @param request - The request {@link StartRescueRequest}
    * @returns A Promise of Rescue
@@ -1171,8 +1153,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Stop rescue on baremetal server. Stop rescue on the server associated with
-   * the given ID.
+   * Stop rescue on baremetal server. Stop rescue on the server associated with the given ID.
    *
    * @param request - The request {@link StopRescueRequest}
    */
@@ -1183,7 +1164,9 @@ export class API extends ParentAPI {
     })
 }
 
-/** Dedibox Phoenix Billing API. */
+/**
+ * Dedibox Phoenix Billing API.
+ */
 export class BillingAPI extends ParentAPI {
   protected pageOfListInvoices = (
     request: Readonly<BillingApiListInvoicesRequest> = {},
@@ -1279,12 +1262,15 @@ export class BillingAPI extends ParentAPI {
     )
 }
 
-/** Dedibox Phoenix IPv6 Block API. */
+/**
+ * Dedibox Phoenix IPv6 Block API.
+ */
 export class IPv6BlockAPI extends ParentAPI {
   /**
-   * Get IPv6 block quota. Get IPv6 block quota with the given project ID. /48
-   * one per organization. /56 link to your number of server. /64 link to your
-   * number of failover IP.
+   * Get IPv6 block quota. Get IPv6 block quota with the given project ID.
+/48 one per organization.
+/56 link to your number of server.
+/64 link to your number of failover IP.
    *
    * @param request - The request {@link IPv6BlockApiGetIPv6BlockQuotasRequest}
    * @returns A Promise of GetIPv6BlockQuotasResponse
@@ -1302,8 +1288,7 @@ export class IPv6BlockAPI extends ParentAPI {
     )
 
   /**
-   * Create IPv6 block for baremetal server. Create IPv6 block associated with
-   * the given project ID.
+   * Create IPv6 block for baremetal server. Create IPv6 block associated with the given project ID.
    *
    * @param request - The request {@link IPv6BlockApiCreateIPv6BlockRequest}
    * @returns A Promise of IPv6Block
@@ -1343,8 +1328,8 @@ export class IPv6BlockAPI extends ParentAPI {
     )
 
   /**
-   * Update IPv6 block. Update DNS associated to IPv6 block. If DNS is used,
-   * minimum of 2 is necessary and maximum of 5 (no duplicate).
+   * Update IPv6 block. Update DNS associated to IPv6 block.
+If DNS is used, minimum of 2 is necessary and maximum of 5 (no duplicate).
    *
    * @param request - The request {@link IPv6BlockApiUpdateIPv6BlockRequest}
    * @returns A Promise of IPv6Block
@@ -1377,12 +1362,11 @@ export class IPv6BlockAPI extends ParentAPI {
     })
 
   /**
-   * Create IPv6 block subnet. Create IPv6 block subnet for the given IP ID. /48
-   * could create subnet in /56 (quota link to your number of server). /56 could
-   * create subnet in /64 (quota link to your number of failover IP).
+   * Create IPv6 block subnet. Create IPv6 block subnet for the given IP ID.
+/48 could create subnet in /56 (quota link to your number of server).
+/56 could create subnet in /64 (quota link to your number of failover IP).
    *
-   * @param request - The request
-   *   {@link IPv6BlockApiCreateIPv6BlockSubnetRequest}
+   * @param request - The request {@link IPv6BlockApiCreateIPv6BlockSubnetRequest}
    * @returns A Promise of IPv6Block
    */
   createIPv6BlockSubnet = (
@@ -1404,11 +1388,9 @@ export class IPv6BlockAPI extends ParentAPI {
     )
 
   /**
-   * List available IPv6 block subnets. List all available IPv6 block subnets
-   * for given IP ID.
+   * List available IPv6 block subnets. List all available IPv6 block subnets for given IP ID.
    *
-   * @param request - The request
-   *   {@link IPv6BlockApiListIPv6BlockSubnetsAvailableRequest}
+   * @param request - The request {@link IPv6BlockApiListIPv6BlockSubnetsAvailableRequest}
    * @returns A Promise of ListIPv6BlockSubnetsAvailableResponse
    */
   listIPv6BlockSubnetsAvailable = (
@@ -1423,7 +1405,9 @@ export class IPv6BlockAPI extends ParentAPI {
     )
 }
 
-/** Dedibox Phoenix RPN API. */
+/**
+ * Dedibox Phoenix RPN API.
+ */
 export class RpnAPI extends ParentAPI {
   protected pageOfListRpnServerCapabilities = (
     request: Readonly<RpnApiListRpnServerCapabilitiesRequest> = {},
@@ -1469,7 +1453,9 @@ export class RpnAPI extends ParentAPI {
     )
 }
 
-/** Dedibox Phoenix RPN SAN API. */
+/**
+ * Dedibox Phoenix RPN SAN API.
+ */
 export class RpnSanAPI extends ParentAPI {
   protected pageOfListRpnSans = (
     request: Readonly<RpnSanApiListRpnSansRequest> = {},
@@ -1585,7 +1571,9 @@ export class RpnSanAPI extends ParentAPI {
     )
 }
 
-/** Dedibox Phoenix RPN v1 API. */
+/**
+ * Dedibox Phoenix RPN v1 API.
+ */
 export class RpnV1API extends ParentAPI {
   protected pageOfListRpnGroups = (
     request: Readonly<RpnV1ApiListRpnGroupsRequest> = {},
@@ -1824,7 +1812,9 @@ export class RpnV1API extends ParentAPI {
     })
 }
 
-/** Dedibox Phoenix RPN v2 API. */
+/**
+ * Dedibox Phoenix RPN v2 API.
+ */
 export class RpnV2API extends ParentAPI {
   protected pageOfListRpnV2Groups = (
     request: Readonly<RpnV2ApiListRpnV2GroupsRequest> = {},
