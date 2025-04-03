@@ -37,16 +37,14 @@ const jsonContentHeaders = {
 
 /**
  * Fake API.
- *
- * No Auth Service for end-to-end testing.
+
+No Auth Service for end-to-end testing.
  */
 export class API extends ParentAPI {
   /**
-   * Register a user. Register a human and return a access-key and a secret-key
-   * that must be used in all other commands.
-   *
-   * Hint: you can use other test commands by setting the SCW_SECRET_KEY env
-   * variable.
+   * Register a user. Register a human and return a access-key and a secret-key that must be used in all other commands.
+
+Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable.
    *
    * @param request - The request {@link RegisterRequest}
    * @returns A Promise of RegisterResponse
@@ -181,8 +179,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Start a 1h running for the given human. Start a one hour running for the
-   * given human.
+   * Start a 1h running for the given human. Start a one hour running for the given human.
    *
    * @param request - The request {@link RunHumanRequest}
    * @returns A Promise of Human

@@ -40,17 +40,15 @@ const jsonContentHeaders = {
 
 /**
  * Serverless SQL Databases API.
- *
- * This API allows you to manage your Serverless SQL Databases.
+
+This API allows you to manage your Serverless SQL Databases.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
   public static readonly LOCALITIES: ScwRegion[] = ['fr-par']
 
   /**
-   * Create a new Serverless SQL Database. You must provide the following
-   * parameters: `organization_id`, `project_id`, `name`, `cpu_min`, `cpu_max`.
-   * You can also provide `from_backup_id` to create a database from a backup.
+   * Create a new Serverless SQL Database. You must provide the following parameters: `organization_id`, `project_id`, `name`, `cpu_min`, `cpu_max`. You can also provide `from_backup_id` to create a database from a backup.
    *
    * @param request - The request {@link CreateDatabaseRequest}
    * @returns A Promise of Database
@@ -69,8 +67,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a database information. Retrieve information about your Serverless SQL
-   * Database. You must provide the `database_id` parameter.
+   * Get a database information. Retrieve information about your Serverless SQL Database. You must provide the `database_id` parameter.
    *
    * @param request - The request {@link GetDatabaseRequest}
    * @returns A Promise of Database
@@ -107,8 +104,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a database. Deletes a database. You must provide the `database_id`
-   * parameter. All data stored in the database will be permanently deleted.
+   * Delete a database. Deletes a database. You must provide the `database_id` parameter. All data stored in the database will be permanently deleted.
    *
    * @param request - The request {@link DeleteDatabaseRequest}
    * @returns A Promise of Database
@@ -145,12 +141,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List your Serverless SQL Databases. List all Serverless SQL Databases for a
-   * given Scaleway Organization or Scaleway Project. By default, the databases
-   * returned in the list are ordered by creation date in ascending order,
-   * though this can be modified via the order_by field. For the `name`
-   * parameter, the value you include will be checked against the whole name
-   * string to see if it includes the string you put in the parameter.
+   * List your Serverless SQL Databases. List all Serverless SQL Databases for a given Scaleway Organization or Scaleway Project. By default, the databases returned in the list are ordered by creation date in ascending order, though this can be modified via the order_by field. For the `name` parameter, the value you include will be checked against the whole name string to see if it includes the string you put in the parameter.
    *
    * @param request - The request {@link ListDatabasesRequest}
    * @returns A Promise of ListDatabasesResponse
@@ -159,8 +150,7 @@ export class API extends ParentAPI {
     enrichForPagination('databases', this.pageOfListDatabases, request)
 
   /**
-   * Update database information. Update CPU limits of your Serverless SQL
-   * Database. You must provide the `database_id` parameter.
+   * Update database information. Update CPU limits of your Serverless SQL Database. You must provide the `database_id` parameter.
    *
    * @param request - The request {@link UpdateDatabaseRequest}
    * @returns A Promise of Database
@@ -179,8 +169,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Restore a database from a backup. Restore a database from a backup. You
-   * must provide the `backup_id` parameter.
+   * Restore a database from a backup. Restore a database from a backup. You must provide the `backup_id` parameter.
    *
    * @param request - The request {@link RestoreDatabaseFromBackupRequest}
    * @returns A Promise of Database
@@ -204,9 +193,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a database backup information. Retrieve information about your
-   * Serverless SQL Database backup. You must provide the `backup_id`
-   * parameter.
+   * Get a database backup information. Retrieve information about your Serverless SQL Database backup. You must provide the `backup_id` parameter.
    *
    * @param request - The request {@link GetDatabaseBackupRequest}
    * @returns A Promise of DatabaseBackup
@@ -240,10 +227,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List your Serverless SQL Database backups. List all Serverless SQL Database
-   * backups for a given Scaleway Project or Database. By default, the backups
-   * returned in the list are ordered by creation date in descending order,
-   * though this can be modified via the order_by field.
+   * List your Serverless SQL Database backups. List all Serverless SQL Database backups for a given Scaleway Project or Database. By default, the backups returned in the list are ordered by creation date in descending order, though this can be modified via the order_by field.
    *
    * @param request - The request {@link ListDatabaseBackupsRequest}
    * @returns A Promise of ListDatabaseBackupsResponse
@@ -252,9 +236,7 @@ export class API extends ParentAPI {
     enrichForPagination('backups', this.pageOfListDatabaseBackups, request)
 
   /**
-   * Export a database backup. Export a database backup providing a download
-   * link once the export process is completed. You must provide the `backup_id`
-   * parameter.
+   * Export a database backup. Export a database backup providing a download link once the export process is completed. You must provide the `backup_id` parameter.
    *
    * @param request - The request {@link ExportDatabaseBackupRequest}
    * @returns A Promise of DatabaseBackup

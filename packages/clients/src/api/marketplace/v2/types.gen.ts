@@ -27,54 +27,92 @@ export interface Category {
 }
 
 export interface Image {
-  /** UUID of this image. */
+  /**
+   * UUID of this image.
+   */
   id: string
-  /** Name of the image. */
+  /**
+   * Name of the image.
+   */
   name: string
-  /** Text description of this image. */
+  /**
+   * Text description of this image.
+   */
   description: string
-  /** URL of this image's logo. */
+  /**
+   * URL of this image's logo.
+   */
   logo: string
-  /** List of categories this image belongs to. */
+  /**
+   * List of categories this image belongs to.
+   */
   categories: string[]
-  /** Creation date of this image. */
+  /**
+   * Creation date of this image.
+   */
   createdAt?: Date
-  /** Date of the last modification of this image. */
+  /**
+   * Date of the last modification of this image.
+   */
   updatedAt?: Date
-  /** Expiration date of this image. */
+  /**
+   * Expiration date of this image.
+   */
   validUntil?: Date
   /**
-   * Typically an identifier for a distribution (ex. "ubuntu_focal"). This label
-   * can be used in the image field of the server creation request.
+   * Typically an identifier for a distribution (ex. "ubuntu_focal").
+This label can be used in the image field of the server creation request.
    */
   label: string
 }
 
 export interface LocalImage {
-  /** Version you will typically use to define an image in an API call. */
+  /**
+   * Version you will typically use to define an image in an API call.
+   */
   id: string
-  /** List of all commercial types that are compatible with this local image. */
+  /**
+   * List of all commercial types that are compatible with this local image.
+   */
   compatibleCommercialTypes: string[]
-  /** Supported architecture for this local image. */
+  /**
+   * Supported architecture for this local image.
+   */
   arch: string
-  /** Availability Zone where this local image is available. */
+  /**
+   * Availability Zone where this local image is available.
+   */
   zone: ScwZone
-  /** This label can be used in the image field of the server creation request. */
+  /**
+   * This label can be used in the image field of the server creation request.
+   */
   label: string
-  /** Type of this local image. */
+  /**
+   * Type of this local image.
+   */
   type: LocalImageType
 }
 
 export interface Version {
-  /** UUID of this version. */
+  /**
+   * UUID of this version.
+   */
   id: string
-  /** Name of this version. */
+  /**
+   * Name of this version.
+   */
   name: string
-  /** Creation date of this image version. */
+  /**
+   * Creation date of this image version.
+   */
   createdAt?: Date
-  /** Date of the last modification of this version. */
+  /**
+   * Date of the last modification of this version.
+   */
   updatedAt?: Date
-  /** Date this version was officially published. */
+  /**
+   * Date this version was officially published.
+   */
   publishedAt?: Date
 }
 
@@ -83,7 +121,9 @@ export type GetCategoryRequest = {
 }
 
 export type GetImageRequest = {
-  /** Display the image name. */
+  /**
+   * Display the image name.
+   */
   imageId: string
 }
 
@@ -107,19 +147,28 @@ export interface ListCategoriesResponse {
 
 export type ListImagesRequest = {
   /**
-   * A positive integer lower or equal to 100 to select the number of items to
-   * display.
+   * A positive integer lower or equal to 100 to select the number of items to display.
    */
   pageSize?: number
-  /** A positive integer to choose the page to display. */
+  /**
+   * A positive integer to choose the page to display.
+   */
   page?: number
-  /** Ordering to use. */
+  /**
+   * Ordering to use.
+   */
   orderBy?: ListImagesRequestOrderBy
-  /** Choose for which machine architecture to return images. */
+  /**
+   * Choose for which machine architecture to return images.
+   */
   arch?: string
-  /** Choose the category of images to get. */
+  /**
+   * Choose the category of images to get.
+   */
   category?: string
-  /** Choose to include end-of-life images. */
+  /**
+   * Choose to include end-of-life images.
+   */
   includeEol: boolean
 }
 
@@ -130,38 +179,42 @@ export interface ListImagesResponse {
 
 export type ListLocalImagesRequest = {
   /**
-   * A positive integer lower or equal to 100 to select the number of items to
-   * display.
+   * A positive integer lower or equal to 100 to select the number of items to display.
    */
   pageSize?: number
-  /** A positive integer to choose the page to display. */
+  /**
+   * A positive integer to choose the page to display.
+   */
   page?: number
-  /** Ordering to use. */
+  /**
+   * Ordering to use.
+   */
   orderBy?: ListLocalImagesRequestOrderBy
-  /** Filter local images available on this Availability Zone. */
+  /**
+   * Filter local images available on this Availability Zone.
+   */
   zone?: ScwZone
   /**
    * Filter by image id.
    *
-   * One-of ('scope'): at most one of 'imageId', 'versionId', 'imageLabel' could
-   * be set.
+   * One-of ('scope'): at most one of 'imageId', 'versionId', 'imageLabel' could be set.
    */
   imageId?: string
   /**
    * Filter by version id.
    *
-   * One-of ('scope'): at most one of 'imageId', 'versionId', 'imageLabel' could
-   * be set.
+   * One-of ('scope'): at most one of 'imageId', 'versionId', 'imageLabel' could be set.
    */
   versionId?: string
   /**
    * Filter by image label.
    *
-   * One-of ('scope'): at most one of 'imageId', 'versionId', 'imageLabel' could
-   * be set.
+   * One-of ('scope'): at most one of 'imageId', 'versionId', 'imageLabel' could be set.
    */
   imageLabel?: string
-  /** Filter by type. */
+  /**
+   * Filter by type.
+   */
   type?: LocalImageType
 }
 

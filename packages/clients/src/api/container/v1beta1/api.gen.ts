@@ -91,8 +91,8 @@ const jsonContentHeaders = {
 
 /**
  * Serverless Containers API.
- *
- * This API allows you to manage your Serverless Containers.
+
+This API allows you to manage your Serverless Containers.
  */
 export class API extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -190,8 +190,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an existing namespace. Update the space associated with the
-   * specified ID.
+   * Update an existing namespace. Update the space associated with the specified ID.
    *
    * @param request - The request {@link UpdateNamespaceRequest}
    * @returns A Promise of Namespace
@@ -210,8 +209,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an existing namespace. Delete the namespace associated with the
-   * specified ID.
+   * Delete an existing namespace. Delete the namespace associated with the specified ID.
    *
    * @param request - The request {@link DeleteNamespaceRequest}
    * @returns A Promise of Namespace
@@ -312,8 +310,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an existing container. Update the container associated with the
-   * specified ID.
+   * Update an existing container. Update the container associated with the specified ID.
    *
    * @param request - The request {@link UpdateContainerRequest}
    * @returns A Promise of Container
@@ -508,8 +505,7 @@ export class API extends ParentAPI {
     enrichForPagination('domains', this.pageOfListDomains, request)
 
   /**
-   * Get a custom domain. Get a custom domain for the container with the
-   * specified ID.
+   * Get a custom domain. Get a custom domain for the container with the specified ID.
    *
    * @param request - The request {@link GetDomainRequest}
    * @returns A Promise of Domain
@@ -546,8 +542,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a custom domain. Create a custom domain for the container with the
-   * specified ID.
+   * Create a custom domain. Create a custom domain for the container with the specified ID.
    *
    * @param request - The request {@link CreateDomainRequest}
    * @returns A Promise of Domain
@@ -656,8 +651,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all tokens. List all tokens belonging to a specified Organization or
-   * Project.
+   * List all tokens. List all tokens belonging to a specified Organization or Project.
    *
    * @param request - The request {@link ListTokensRequest}
    * @returns A Promise of ListTokensResponse
@@ -767,8 +761,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all triggers. List all triggers belonging to a specified Organization
-   * or Project.
+   * List all triggers. List all triggers belonging to a specified Organization or Project.
    *
    * @param request - The request {@link ListTriggersRequest}
    * @returns A Promise of ListTriggersResponse
