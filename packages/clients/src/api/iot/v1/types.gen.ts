@@ -851,7 +851,7 @@ export type ListDevicesRequest = {
    */
   hubId?: string
   /**
-   * Defines wheter to filter the allow_insecure flag.
+   * Defines whether to filter the allow_insecure flag.
    */
   allowInsecure?: boolean
   /**

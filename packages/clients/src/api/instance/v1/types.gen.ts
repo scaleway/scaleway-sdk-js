@@ -888,7 +888,7 @@ export interface Task {
   hrefFrom: string
   hrefResult: string
   /**
-   * Zone in which the task is excecuted.
+   * Zone in which the task is executed.
    */
   zone: ScwZone
 }

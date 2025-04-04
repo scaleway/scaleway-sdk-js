@@ -249,7 +249,7 @@ export interface Platform {
    */
   id: string
   /**
-   * Verison of the platform.
+   * Version of the platform.
    */
   version: string
   /**
@@ -285,7 +285,7 @@ export interface Platform {
    */
   metadata: string
   /**
-   * Price to be payed per hour (excluding free tiers).
+   * Price to be paid per hour (excluding free tiers).
    */
   pricePerHour?: Money
   /**
