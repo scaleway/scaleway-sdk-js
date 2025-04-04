@@ -651,7 +651,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get a group. Retrive information about a given group, specified by the `group_id` parameter. The group's full details, including `user_ids` and `application_ids` are returned in the response.
+   * Get a group. Retrieve information about a given group, specified by the `group_id` parameter. The group's full details, including `user_ids` and `application_ids` are returned in the response.
    *
    * @param request - The request {@link GetGroupRequest}
    * @returns A Promise of Group
@@ -1039,7 +1039,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get an API key. Retrive information about an API key, specified by the `access_key` parameter. The API key's details, including either the `user_id` or `application_id` of its bearer are returned in the response. Note that the string value for the `secret_key` is nullable, and therefore is not displayed in the response. The `secret_key` value is only displayed upon API key creation.
+   * Get an API key. Retrieve information about an API key, specified by the `access_key` parameter. The API key's details, including either the `user_id` or `application_id` of its bearer are returned in the response. Note that the string value for the `secret_key` is nullable, and therefore is not displayed in the response. The `secret_key` value is only displayed upon API key creation.
    *
    * @param request - The request {@link GetAPIKeyRequest}
    * @returns A Promise of APIKey

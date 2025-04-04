@@ -486,7 +486,7 @@ export interface Token {
    */
   functionId?: string
   /**
-   * UUID of the namespace the token is assoicated with.
+   * UUID of the namespace the token is associated with.
    *
    * One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set.
    */
@@ -619,7 +619,7 @@ export type CreateFunctionRequest = {
    */
   environmentVariables?: Record<string, string>
   /**
-   * Minumum number of instances to scale the function to.
+   * Minimum number of instances to scale the function to.
    */
   minScale?: number
   /**
@@ -981,7 +981,7 @@ export type ListDomainsRequest = {
    */
   orderBy?: ListDomainsRequestOrderBy
   /**
-   * UUID of the function the domain is assoicated with.
+   * UUID of the function the domain is associated with.
    */
   functionId: string
 }
@@ -1041,7 +1041,7 @@ export type ListFunctionsRequest = {
    */
   name?: string
   /**
-   * UUID of the Organziation the function belongs to.
+   * UUID of the Organization the function belongs to.
    */
   organizationId?: string
   /**
@@ -1118,7 +1118,7 @@ export type ListTokensRequest = {
    */
   orderBy?: ListTokensRequestOrderBy
   /**
-   * UUID of the function the token is assoicated with.
+   * UUID of the function the token is associated with.
    */
   functionId?: string
   /**
@@ -1221,7 +1221,7 @@ export type UpdateFunctionRequest = {
    */
   environmentVariables?: Record<string, string>
   /**
-   * Minumum number of instances to scale the function to.
+   * Minimum number of instances to scale the function to.
    */
   minScale?: number
   /**

@@ -324,7 +324,7 @@ The CA certificate will be returned as a PEM file.
     )
 
   /**
-   * Delete an exising ACL.
+   * Delete an existing ACL.
    *
    * @param request - The request {@link DeleteDeploymentACLRuleRequest}
    */
