@@ -895,7 +895,7 @@ The configured endpoints do not change.
     )
 
   /**
-   * Set Database Instance advanced settings. Update an advanced setting for a Database Instance. Settings added upon database engine initalization can only be defined once, and cannot, therefore, be updated.
+   * Set Database Instance advanced settings. Update an advanced setting for a Database Instance. Settings added upon database engine initialization can only be defined once, and cannot, therefore, be updated.
    *
    * @param request - The request {@link SetInstanceSettingsRequest}
    * @returns A Promise of SetInstanceSettingsResponse
