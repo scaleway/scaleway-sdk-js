@@ -378,7 +378,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set advanced settings. Update an advanced setting for a Redis™ Database Instance (Redis™ cluster). Settings added upon database engine initalization can only be defined once, and cannot, therefore, be updated.
+   * Set advanced settings. Update an advanced setting for a Redis™ Database Instance (Redis™ cluster). Settings added upon database engine initialization can only be defined once, and cannot, therefore, be updated.
    *
    * @param request - The request {@link SetClusterSettingsRequest}
    * @returns A Promise of ClusterSettingsResponse
