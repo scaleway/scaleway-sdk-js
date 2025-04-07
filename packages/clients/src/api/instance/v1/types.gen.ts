@@ -632,6 +632,10 @@ export interface Server {
    * This value is reset when admin_password_encryption_ssh_key_id is set to an empty string.
    */
   adminPasswordEncryptedValue?: string
+  /**
+   * True if the Instance type has reached end of service.
+   */
+  endOfService: boolean
 }
 
 export interface VolumeTemplate {
@@ -888,7 +892,7 @@ export interface Task {
   hrefFrom: string
   hrefResult: string
   /**
-   * Zone in which the task is excecuted.
+   * Zone in which the task is executed.
    */
   zone: ScwZone
 }
@@ -1437,6 +1441,10 @@ export type CreateServerRequest = {
    * The public_key value of this key is used to encrypt the admin password.
    */
   adminPasswordEncryptionSshKeyId?: string
+  /**
+   * True to activate server protection option.
+   */
+  protected: boolean
 }
 
 export interface CreateServerResponse {
@@ -2783,6 +2791,9 @@ export type UpdateServerRequest = {
    * @deprecated
    */
   enableIpv6?: boolean
+  /**
+   * True to activate server protection option.
+   */
   protected?: boolean
   securityGroup?: SecurityGroupTemplate
   /**
