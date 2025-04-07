@@ -143,7 +143,9 @@ const unmarshalQualificationAiMachine = (
     )
   }
 
-  return {} as QualificationAiMachine
+  return {
+    subUseCase: data.sub_use_case,
+  } as QualificationAiMachine
 }
 
 const unmarshalQualificationArchiveData = (
@@ -155,7 +157,9 @@ const unmarshalQualificationArchiveData = (
     )
   }
 
-  return {} as QualificationArchiveData
+  return {
+    subUseCase: data.sub_use_case,
+  } as QualificationArchiveData
 }
 
 const unmarshalQualificationContainer = (
@@ -167,7 +171,9 @@ const unmarshalQualificationContainer = (
     )
   }
 
-  return {} as QualificationContainer
+  return {
+    subUseCase: data.sub_use_case,
+  } as QualificationContainer
 }
 
 const unmarshalQualificationDeploySoftware = (
@@ -179,7 +185,9 @@ const unmarshalQualificationDeploySoftware = (
     )
   }
 
-  return {} as QualificationDeploySoftware
+  return {
+    subUseCase: data.sub_use_case,
+  } as QualificationDeploySoftware
 }
 
 const unmarshalQualificationHostApplication = (
@@ -219,7 +227,9 @@ const unmarshalQualificationOtherUseCase = (
     )
   }
 
-  return {} as QualificationOtherUseCase
+  return {
+    subUseCase: data.sub_use_case,
+  } as QualificationOtherUseCase
 }
 
 const unmarshalQualificationSetScalewayEnvironment = (
@@ -231,7 +241,9 @@ const unmarshalQualificationSetScalewayEnvironment = (
     )
   }
 
-  return {} as QualificationSetScalewayEnvironment
+  return {
+    subUseCase: data.sub_use_case,
+  } as QualificationSetScalewayEnvironment
 }
 
 const unmarshalQualificationShareData = (
@@ -243,7 +255,9 @@ const unmarshalQualificationShareData = (
     )
   }
 
-  return {} as QualificationShareData
+  return {
+    subUseCase: data.sub_use_case,
+  } as QualificationShareData
 }
 
 const unmarshalQualification = (data: unknown): Qualification => {
@@ -335,22 +349,30 @@ export const marshalProjectApiCreateProjectRequest = (
 const marshalQualificationAiMachine = (
   request: QualificationAiMachine,
   defaults: DefaultValues,
-): Record<string, unknown> => ({})
+): Record<string, unknown> => ({
+  sub_use_case: request.subUseCase,
+})
 
 const marshalQualificationArchiveData = (
   request: QualificationArchiveData,
   defaults: DefaultValues,
-): Record<string, unknown> => ({})
+): Record<string, unknown> => ({
+  sub_use_case: request.subUseCase,
+})
 
 const marshalQualificationContainer = (
   request: QualificationContainer,
   defaults: DefaultValues,
-): Record<string, unknown> => ({})
+): Record<string, unknown> => ({
+  sub_use_case: request.subUseCase,
+})
 
 const marshalQualificationDeploySoftware = (
   request: QualificationDeploySoftware,
   defaults: DefaultValues,
-): Record<string, unknown> => ({})
+): Record<string, unknown> => ({
+  sub_use_case: request.subUseCase,
+})
 
 const marshalQualificationHostApplication = (
   request: QualificationHostApplication,
@@ -369,17 +391,23 @@ const marshalQualificationHostWebsite = (
 const marshalQualificationOtherUseCase = (
   request: QualificationOtherUseCase,
   defaults: DefaultValues,
-): Record<string, unknown> => ({})
+): Record<string, unknown> => ({
+  sub_use_case: request.subUseCase,
+})
 
 const marshalQualificationSetScalewayEnvironment = (
   request: QualificationSetScalewayEnvironment,
   defaults: DefaultValues,
-): Record<string, unknown> => ({})
+): Record<string, unknown> => ({
+  sub_use_case: request.subUseCase,
+})
 
 const marshalQualificationShareData = (
   request: QualificationShareData,
   defaults: DefaultValues,
-): Record<string, unknown> => ({})
+): Record<string, unknown> => ({
+  sub_use_case: request.subUseCase,
+})
 
 const marshalQualification = (
   request: Qualification,
