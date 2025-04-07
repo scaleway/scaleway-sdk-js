@@ -24,6 +24,8 @@ export type ListProjectsRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
+export type QualificationAiMachineSubUseCase = 'unknown_sub_use_case'
+
 export type QualificationArchitectureType =
   | 'unknown_architecture_type'
   | 'object_storage'
@@ -34,6 +36,12 @@ export type QualificationArchitectureType =
   | 'serverless'
   | 'dedicated_server'
   | 'other_architecture_type'
+
+export type QualificationArchiveDataSubUseCase = 'unknown_sub_use_case'
+
+export type QualificationContainerSubUseCase = 'unknown_sub_use_case'
+
+export type QualificationDeploySoftwareSubUseCase = 'unknown_sub_use_case'
 
 export type QualificationHostApplicationSubUseCase =
   | 'unknown_sub_use_case'
@@ -46,6 +54,13 @@ export type QualificationHostWebsiteSubUseCase =
   | 'ecommerce_website'
   | 'high_website'
   | 'other_sub_use_case'
+
+export type QualificationOtherUseCaseSubUseCase = 'unknown_sub_use_case'
+
+export type QualificationSetScalewayEnvironmentSubUseCase =
+  'unknown_sub_use_case'
+
+export type QualificationShareDataSubUseCase = 'unknown_sub_use_case'
 
 export interface Contract {
   /**
@@ -74,13 +89,21 @@ export interface Contract {
   updatedAt?: Date
 }
 
-export interface QualificationAiMachine {}
+export interface QualificationAiMachine {
+  subUseCase: QualificationAiMachineSubUseCase
+}
 
-export interface QualificationArchiveData {}
+export interface QualificationArchiveData {
+  subUseCase: QualificationArchiveDataSubUseCase
+}
 
-export interface QualificationContainer {}
+export interface QualificationContainer {
+  subUseCase: QualificationContainerSubUseCase
+}
 
-export interface QualificationDeploySoftware {}
+export interface QualificationDeploySoftware {
+  subUseCase: QualificationDeploySoftwareSubUseCase
+}
 
 export interface QualificationHostApplication {
   subUseCase: QualificationHostApplicationSubUseCase
@@ -90,11 +113,17 @@ export interface QualificationHostWebsite {
   subUseCase: QualificationHostWebsiteSubUseCase
 }
 
-export interface QualificationOtherUseCase {}
+export interface QualificationOtherUseCase {
+  subUseCase: QualificationOtherUseCaseSubUseCase
+}
 
-export interface QualificationSetScalewayEnvironment {}
+export interface QualificationSetScalewayEnvironment {
+  subUseCase: QualificationSetScalewayEnvironmentSubUseCase
+}
 
-export interface QualificationShareData {}
+export interface QualificationShareData {
+  subUseCase: QualificationShareDataSubUseCase
+}
 
 export interface ContractSignature {
   /**
