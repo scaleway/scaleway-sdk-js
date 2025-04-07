@@ -1834,6 +1834,7 @@ export const marshalCreateServerRequest = (
   image: request.image,
   name: request.name || randomName('srv'),
   placement_group: request.placementGroup,
+  protected: request.protected,
   public_ip: request.publicIp,
   public_ips: request.publicIps,
   routed_ip_enabled: request.routedIpEnabled,
