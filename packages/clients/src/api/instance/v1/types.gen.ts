@@ -632,6 +632,10 @@ export interface Server {
    * This value is reset when admin_password_encryption_ssh_key_id is set to an empty string.
    */
   adminPasswordEncryptedValue?: string
+  /**
+   * True if the Instance type has reached end of service.
+   */
+  endOfService: boolean
 }
 
 export interface VolumeTemplate {

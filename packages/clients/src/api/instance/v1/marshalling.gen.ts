@@ -404,6 +404,7 @@ const unmarshalServer = (data: unknown): Server => {
     creationDate: unmarshalDate(data.creation_date),
     dynamicIpRequired: data.dynamic_ip_required,
     enableIpv6: data.enable_ipv6,
+    endOfService: data.end_of_service,
     hostname: data.hostname,
     id: data.id,
     image: data.image ? unmarshalImage(data.image) : undefined,
