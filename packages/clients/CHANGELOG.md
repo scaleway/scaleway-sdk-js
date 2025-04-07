@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.73.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.72.0...@scaleway/sdk@2.73.0) (2025-04-07)
+
+### Features
+
+- **interlink:** add support for `peer_asn` ([#1971](https://github.com/scaleway/scaleway-sdk-js/issues/1971)) ([b6f4aad](https://github.com/scaleway/scaleway-sdk-js/commit/b6f4aad63e52ef2af75254dad3b193e940b1d3ed))
+
 ## [2.72.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.71.1...@scaleway/sdk@2.72.0) (2025-03-31)
 
 ### Features
