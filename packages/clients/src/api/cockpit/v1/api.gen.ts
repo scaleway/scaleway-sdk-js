@@ -101,7 +101,7 @@ const jsonContentHeaders = {
 /**
  * Cockpit Global API.
 
-The Cockpit Global API allows you to manage your Cockpit's Grafana and plans.
+The Cockpit Global API allows you to manage your Cockpit's Grafana.
  */
 export class GlobalAPI extends ParentAPI {
   /**
@@ -320,7 +320,7 @@ A new password regenerates and only displays once. Make sure that you save it.
 
   /**
    * List plan types. Retrieve a list of available pricing plan types.
-Deprecated, retention is now managed at the data source level.
+Deprecated: retention is now managed at the data source level.
    *
    * @deprecated
    * @param request - The request {@link GlobalApiListPlansRequest}
@@ -331,7 +331,7 @@ Deprecated, retention is now managed at the data source level.
 
   /**
    * Apply a pricing plan. Apply a pricing plan on a given Project. You must specify the ID of the pricing plan type. Note that you will be billed for the plan you apply.
-Deprecated, retention is now managed at the data source level.
+Deprecated: retention is now managed at the data source level.
    *
    * @deprecated
    * @param request - The request {@link GlobalApiSelectPlanRequest}
@@ -352,7 +352,7 @@ Deprecated, retention is now managed at the data source level.
 
   /**
    * Get current plan. Retrieve a pricing plan for the given Project, specified by the ID of the Project.
-Deprecated, retention is now managed at the data source level.
+Deprecated: retention is now managed at the data source level.
    *
    * @deprecated
    * @param request - The request {@link GlobalApiGetCurrentPlanRequest}
