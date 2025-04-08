@@ -62,33 +62,6 @@ export type QualificationSetScalewayEnvironmentSubUseCase =
 
 export type QualificationShareDataSubUseCase = 'unknown_sub_use_case'
 
-export interface Contract {
-  /**
-   * ID of the contract.
-   */
-  id: string
-  /**
-   * The type of the contract.
-   */
-  type: ContractType
-  /**
-   * The name of the contract.
-   */
-  name: string
-  /**
-   * The version of the contract.
-   */
-  version: number
-  /**
-   * The creation date of the contract.
-   */
-  createdAt?: Date
-  /**
-   * The last modification date of the contract.
-   */
-  updatedAt?: Date
-}
-
 export interface QualificationAiMachine {
   subUseCase: QualificationAiMachineSubUseCase
 }
@@ -123,6 +96,85 @@ export interface QualificationSetScalewayEnvironment {
 
 export interface QualificationShareData {
   subUseCase: QualificationShareDataSubUseCase
+}
+
+export interface Contract {
+  /**
+   * ID of the contract.
+   */
+  id: string
+  /**
+   * The type of the contract.
+   */
+  type: ContractType
+  /**
+   * The name of the contract.
+   */
+  name: string
+  /**
+   * The version of the contract.
+   */
+  version: number
+  /**
+   * The creation date of the contract.
+   */
+  createdAt?: Date
+  /**
+   * The last modification date of the contract.
+   */
+  updatedAt?: Date
+}
+
+export interface Qualification {
+  /**
+   * Architecture type of the qualification.
+   */
+  architectureType: QualificationArchitectureType
+  /**
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  hostWebsite?: QualificationHostWebsite
+  /**
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  hostApplication?: QualificationHostApplication
+  /**
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  deploySoftware?: QualificationDeploySoftware
+  /**
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  setScalewayEnvironment?: QualificationSetScalewayEnvironment
+  /**
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  aiMachine?: QualificationAiMachine
+  /**
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  container?: QualificationContainer
+  /**
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  archiveData?: QualificationArchiveData
+  /**
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  shareData?: QualificationShareData
+  /**
+   *
+   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
+   */
+  otherUseCase?: QualificationOtherUseCase
 }
 
 export interface ContractSignature {
@@ -177,58 +229,10 @@ export interface Project {
    * Description of the Project.
    */
   description: string
-}
-
-export interface Qualification {
   /**
-   * Architecture type of the qualification.
+   * Qualification of the Project.
    */
-  architectureType: QualificationArchitectureType
-  /**
-   *
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
-   */
-  hostWebsite?: QualificationHostWebsite
-  /**
-   *
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
-   */
-  hostApplication?: QualificationHostApplication
-  /**
-   *
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
-   */
-  deploySoftware?: QualificationDeploySoftware
-  /**
-   *
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
-   */
-  setScalewayEnvironment?: QualificationSetScalewayEnvironment
-  /**
-   *
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
-   */
-  aiMachine?: QualificationAiMachine
-  /**
-   *
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
-   */
-  container?: QualificationContainer
-  /**
-   *
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
-   */
-  archiveData?: QualificationArchiveData
-  /**
-   *
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
-   */
-  shareData?: QualificationShareData
-  /**
-   *
-   * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
-   */
-  otherUseCase?: QualificationOtherUseCase
+  qualification?: Qualification
 }
 
 export interface CheckContractSignatureResponse {

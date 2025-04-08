@@ -69,71 +69,6 @@ export const unmarshalContractSignature = (
   } as ContractSignature
 }
 
-export const unmarshalProject = (data: unknown): Project => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Project' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    createdAt: unmarshalDate(data.created_at),
-    description: data.description,
-    id: data.id,
-    name: data.name,
-    organizationId: data.organization_id,
-    updatedAt: unmarshalDate(data.updated_at),
-  } as Project
-}
-
-export const unmarshalCheckContractSignatureResponse = (
-  data: unknown,
-): CheckContractSignatureResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CheckContractSignatureResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    created: data.created,
-    validated: data.validated,
-  } as CheckContractSignatureResponse
-}
-
-export const unmarshalListContractSignaturesResponse = (
-  data: unknown,
-): ListContractSignaturesResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListContractSignaturesResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    contractSignatures: unmarshalArrayOfObject(
-      data.contract_signatures,
-      unmarshalContractSignature,
-    ),
-    totalCount: data.total_count,
-  } as ListContractSignaturesResponse
-}
-
-export const unmarshalListProjectsResponse = (
-  data: unknown,
-): ListProjectsResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListProjectsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    projects: unmarshalArrayOfObject(data.projects, unmarshalProject),
-    totalCount: data.total_count,
-  } as ListProjectsResponse
-}
-
 const unmarshalQualificationAiMachine = (
   data: unknown,
 ): QualificationAiMachine => {
@@ -299,6 +234,74 @@ const unmarshalQualification = (data: unknown): Qualification => {
       ? unmarshalQualificationShareData(data.share_data)
       : undefined,
   } as Qualification
+}
+
+export const unmarshalProject = (data: unknown): Project => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Project' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description,
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    qualification: data.qualification
+      ? unmarshalQualification(data.qualification)
+      : undefined,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as Project
+}
+
+export const unmarshalCheckContractSignatureResponse = (
+  data: unknown,
+): CheckContractSignatureResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CheckContractSignatureResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    created: data.created,
+    validated: data.validated,
+  } as CheckContractSignatureResponse
+}
+
+export const unmarshalListContractSignaturesResponse = (
+  data: unknown,
+): ListContractSignaturesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListContractSignaturesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    contractSignatures: unmarshalArrayOfObject(
+      data.contract_signatures,
+      unmarshalContractSignature,
+    ),
+    totalCount: data.total_count,
+  } as ListContractSignaturesResponse
+}
+
+export const unmarshalListProjectsResponse = (
+  data: unknown,
+): ListProjectsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListProjectsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    projects: unmarshalArrayOfObject(data.projects, unmarshalProject),
+    totalCount: data.total_count,
+  } as ListProjectsResponse
 }
 
 export const unmarshalProjectQualification = (
