@@ -561,7 +561,7 @@ export interface Offer {
    */
   commercialRange: string
   /**
-   * Price of the offer for the next 60 minutes (a server order at 11h32 will be payed until 12h32).
+   * Price of the offer for the next 60 minutes (a server order at 11h32 will be paid until 12h32).
    */
   pricePerHour?: Money
   /**

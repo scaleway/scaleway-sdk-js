@@ -88,7 +88,7 @@ export interface Namespace {
    */
   id: string
   /**
-   * Name of the namespace, unique in a region accross all organizations.
+   * Name of the namespace, unique in a region across all organizations.
    */
   name: string
   /**
