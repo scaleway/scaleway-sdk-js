@@ -486,6 +486,7 @@ const unmarshalAclMatch = (data: unknown): AclMatch => {
     httpFilterValue: data.http_filter_value,
     invert: data.invert,
     ipSubnet: data.ip_subnet,
+    ipsEdgeServices: data.ips_edge_services,
   } as AclMatch
 }
 
@@ -922,6 +923,7 @@ const marshalAclMatch = (
   http_filter_value: request.httpFilterValue,
   invert: request.invert,
   ip_subnet: request.ipSubnet,
+  ips_edge_services: request.ipsEdgeServices,
 })
 
 export const marshalCreateAclRequest = (

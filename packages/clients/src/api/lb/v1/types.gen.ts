@@ -641,6 +641,10 @@ export interface AclMatch {
    */
   ipSubnet: string[]
   /**
+   * Defines whether Edge Services IPs should be matched.
+   */
+  ipsEdgeServices: boolean
+  /**
    * Type of HTTP filter to match. Extracts the request's URL path, which starts at the first slash and ends before the question mark (without the host part). Defines where to filter for the http_filter_value. Only supported for HTTP backends.
    */
   httpFilter: AclHttpFilter
