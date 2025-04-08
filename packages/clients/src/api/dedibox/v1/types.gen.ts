@@ -321,7 +321,7 @@ export interface OfferSANInfo {
    */
   size: number
   /**
-   * High availabilty offer.
+   * High availability offer.
    */
   ha: boolean
   /**
@@ -562,11 +562,11 @@ export interface OS {
    */
   panelPasswordRegex?: string
   /**
-   * If both requires_valid_hostname & hostname_regex are set, it means that at least one of the criterias must be valid.
+   * If both requires_valid_hostname & hostname_regex are set, it means that at least one of the criteria must be valid.
    */
   requiresValidHostname?: boolean
   /**
-   * If both requires_valid_hostname & hostname_regex are set, it means that at least one of the criterias must be valid.
+   * If both requires_valid_hostname & hostname_regex are set, it means that at least one of the criteria must be valid.
    */
   hostnameRegex?: string
   /**
