@@ -104,6 +104,8 @@ export type {
   ScalewayS3BackendConfig,
   SearchBackendStagesRequest,
   SearchBackendStagesRequestOrderBy,
+  SearchWafStagesRequest,
+  SearchWafStagesRequestOrderBy,
   SelectPlanRequest,
   SetHeadStageRequest,
   SetHeadStageRequestAddNewHeadStage,
