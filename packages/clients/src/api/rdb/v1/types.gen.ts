@@ -434,7 +434,7 @@ export interface Volume {
 
 export interface NodeTypeVolumeConstraintSizes {
   /**
-   * [deprecated] Mimimum size required for the Volume.
+   * [deprecated] Minimum size required for the Volume.
    */
   minSize: number
   /**
@@ -453,7 +453,7 @@ export interface NodeTypeVolumeType {
    */
   description: string
   /**
-   * Mimimum size required for the Volume.
+   * Minimum size required for the Volume.
    */
   minSize: number
   /**
