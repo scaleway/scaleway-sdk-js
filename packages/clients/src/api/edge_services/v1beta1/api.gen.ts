@@ -132,6 +132,7 @@ import type {
   PurgeRequest,
   RouteStage,
   SearchBackendStagesRequest,
+  SearchWafStagesRequest,
   SelectPlanRequest,
   SetHeadStageRequest,
   SetRouteRulesRequest,
@@ -712,6 +713,30 @@ export class API extends ParentAPI {
       path: `/edge-services/v1beta1/backend-stages/${validatePathParam('backendStageId', request.backendStageId)}`,
     })
 
+  searchBackendStages = (request: Readonly<SearchBackendStagesRequest> = {}) =>
+    this.client.fetch<ListBackendStagesResponse>(
+      {
+        method: 'GET',
+        path: `/edge-services/v1beta1/search-backend-stages`,
+        urlParams: urlParams(
+          ['bucket_name', request.bucketName],
+          ['bucket_region', request.bucketRegion],
+          ['lb_id', request.lbId],
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
+        ),
+      },
+      unmarshalListBackendStagesResponse,
+    )
+
   protected pageOfListWafStages = (request: Readonly<ListWafStagesRequest>) =>
     this.client.fetch<ListWafStagesResponse>(
       {
@@ -801,6 +826,27 @@ export class API extends ParentAPI {
       method: 'DELETE',
       path: `/edge-services/v1beta1/waf-stages/${validatePathParam('wafStageId', request.wafStageId)}`,
     })
+
+  searchWafStages = (request: Readonly<SearchWafStagesRequest> = {}) =>
+    this.client.fetch<ListWafStagesResponse>(
+      {
+        method: 'GET',
+        path: `/edge-services/v1beta1/search-waf-stages`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
+        ),
+      },
+      unmarshalListWafStagesResponse,
+    )
 
   protected pageOfListRouteStages = (
     request: Readonly<ListRouteStagesRequest>,
@@ -971,30 +1017,6 @@ export class API extends ParentAPI {
         path: `/edge-services/v1beta1/check-pem-chain`,
       },
       unmarshalCheckPEMChainResponse,
-    )
-
-  searchBackendStages = (request: Readonly<SearchBackendStagesRequest> = {}) =>
-    this.client.fetch<ListBackendStagesResponse>(
-      {
-        method: 'GET',
-        path: `/edge-services/v1beta1/search-backend-stages`,
-        urlParams: urlParams(
-          ['bucket_name', request.bucketName],
-          ['bucket_region', request.bucketRegion],
-          ['lb_id', request.lbId],
-          ['order_by', request.orderBy],
-          ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
-        ),
-      },
-      unmarshalListBackendStagesResponse,
     )
 
   protected pageOfListPurgeRequests = (

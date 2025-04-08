@@ -116,6 +116,8 @@ export type SearchBackendStagesRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
 
+export type SearchWafStagesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+
 export type WafStageMode = 'unknown_mode' | 'disable' | 'log_only' | 'enable'
 
 export interface ScalewayLb {
@@ -1401,6 +1403,13 @@ export type SearchBackendStagesRequest = {
   bucketName?: string
   bucketRegion?: string
   lbId?: string
+}
+
+export type SearchWafStagesRequest = {
+  orderBy?: SearchWafStagesRequestOrderBy
+  page?: number
+  pageSize?: number
+  projectId?: string
 }
 
 export type SelectPlanRequest = {
