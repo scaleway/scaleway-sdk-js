@@ -1134,7 +1134,7 @@ export class API extends ParentAPI {
       unmarshalQuotum,
     )
 
-  protected pageOfListJWTs = (request: Readonly<ListJWTsRequest> = {}) =>
+  protected pageOfListJWTs = (request: Readonly<ListJWTsRequest>) =>
     this.client.fetch<ListJWTsResponse>(
       {
         method: 'GET',
@@ -1159,7 +1159,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListJWTsRequest}
    * @returns A Promise of ListJWTsResponse
    */
-  listJWTs = (request: Readonly<ListJWTsRequest> = {}) =>
+  listJWTs = (request: Readonly<ListJWTsRequest>) =>
     enrichForPagination('jwts', this.pageOfListJWTs, request)
 
   /**

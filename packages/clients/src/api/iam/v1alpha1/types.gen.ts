@@ -1309,7 +1309,7 @@ export type ListJWTsRequest = {
   /**
    * ID of the user to search.
    */
-  audienceId?: string
+  audienceId: string
   /**
    * Number of results per page. Value must be between 1 and 100.
    */
