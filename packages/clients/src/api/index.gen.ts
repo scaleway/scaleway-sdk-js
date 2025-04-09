@@ -15,6 +15,7 @@ import * as Dedibox from './dedibox/index.gen'
 import * as DocumentDb from './document_db/index.gen'
 import * as Domain from './domain/index.gen'
 import * as EdgeServices from './edge_services/index.gen'
+import * as File from './file/index.gen'
 import * as Flexibleip from './flexibleip/index.gen'
 import * as Function from './function/index.gen'
 import * as Iam from './iam/index.gen'
@@ -59,6 +60,7 @@ export {
   DocumentDb,
   Domain,
   EdgeServices,
+  File,
   Flexibleip,
   Function,
   Iam,
