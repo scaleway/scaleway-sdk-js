@@ -1155,6 +1155,7 @@ const unmarshalServerTypeCapabilities = (
   return {
     blockStorage: data.block_storage,
     bootTypes: data.boot_types,
+    maxFileSystems: data.max_file_systems,
   } as ServerTypeCapabilities
 }
 
