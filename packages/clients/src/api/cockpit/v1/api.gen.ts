@@ -17,8 +17,10 @@ import {
   marshalRegionalApiCreateTokenRequest,
   marshalRegionalApiDeleteContactPointRequest,
   marshalRegionalApiDisableAlertManagerRequest,
+  marshalRegionalApiDisableAlertRulesRequest,
   marshalRegionalApiDisableManagedAlertsRequest,
   marshalRegionalApiEnableAlertManagerRequest,
+  marshalRegionalApiEnableAlertRulesRequest,
   marshalRegionalApiEnableManagedAlertsRequest,
   marshalRegionalApiTriggerTestAlertRequest,
   marshalRegionalApiUpdateContactPointRequest,
@@ -75,8 +77,10 @@ import type {
   RegionalApiDeleteDataSourceRequest,
   RegionalApiDeleteTokenRequest,
   RegionalApiDisableAlertManagerRequest,
+  RegionalApiDisableAlertRulesRequest,
   RegionalApiDisableManagedAlertsRequest,
   RegionalApiEnableAlertManagerRequest,
+  RegionalApiEnableAlertRulesRequest,
   RegionalApiEnableManagedAlertsRequest,
   RegionalApiGetAlertManagerRequest,
   RegionalApiGetConfigRequest,
@@ -852,6 +856,46 @@ If you need to receive alerts for other receivers, you can create additional con
       },
       unmarshalAlertManager,
     )
+
+  /**
+   * Enable preconfigured alert rules. Enable alert rules from the list of available preconfigured rules.. Enable preconfigured alert rules. Enable alert rules from the list of available preconfigured rules.
+   *
+   * @param request - The request {@link RegionalApiEnableAlertRulesRequest}
+   */
+  enableAlertRules = (
+    request: Readonly<RegionalApiEnableAlertRulesRequest> = {},
+  ) =>
+    this.client.fetch<void>({
+      body: JSON.stringify(
+        marshalRegionalApiEnableAlertRulesRequest(
+          request,
+          this.client.settings,
+        ),
+      ),
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/enable-alert-rules`,
+    })
+
+  /**
+   * Disable preconfigured alert rules. Disable alert rules from the list of available preconfigured rules.. Disable preconfigured alert rules. Disable alert rules from the list of available preconfigured rules.
+   *
+   * @param request - The request {@link RegionalApiDisableAlertRulesRequest}
+   */
+  disableAlertRules = (
+    request: Readonly<RegionalApiDisableAlertRulesRequest> = {},
+  ) =>
+    this.client.fetch<void>({
+      body: JSON.stringify(
+        marshalRegionalApiDisableAlertRulesRequest(
+          request,
+          this.client.settings,
+        ),
+      ),
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/disable-alert-rules`,
+    })
 
   /**
    * Trigger a test alert. Send a test alert to the Alert manager to make sure your contact points get notified.
