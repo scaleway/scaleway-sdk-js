@@ -48,6 +48,24 @@ export type TokenScope =
 
 export type UsageUnit = 'unknown_unit' | 'bytes' | 'samples'
 
+/**
+ * Structure for additional data relative to preconfigured alerts.
+ */
+export interface PreconfiguredAlertData {
+  /**
+   * ID of the preconfigured rule if the alert is preconfigured.
+   */
+  preconfiguredRuleId: string
+  /**
+   * Human readable name of the alert.
+   */
+  displayName: string
+  /**
+   * Human readable description of the alert.
+   */
+  displayDescription: string
+}
+
 export interface ContactPointEmail {
   to: string
 }
@@ -58,18 +76,46 @@ export interface GetConfigResponseRetention {
   defaultDays: number
 }
 
+/**
+ * Structure representing an alert.
+ */
 export interface Alert {
   /**
-   * Region to target. If none is passed will use default region from the config.
+   * The region in which the alert is defined.
    */
   region: ScwRegion
+  /**
+   * Indicates if the alert is preconfigured or custom.
+   */
   preconfigured: boolean
+  /**
+   * Name of the alert.
+   */
   name: string
+  /**
+   * Rule defining the alert condition.
+   */
   rule: string
+  /**
+   * Duration for which the alert must be active before firing. The format of this duration follows the prometheus duration format.
+   */
   duration: string
+  /**
+   * Indicates if the alert is enabled or disabled. Only preconfigured alerts can be disabled.
+   */
   enabled: boolean
+  /**
+   * Current state of the alert. Possible states are `inactive`, `pending`, and `firing`.
+   */
   state?: AlertState
+  /**
+   * Annotations for the alert, used to provide additional information about the alert.
+   */
   annotations: Record<string, string>
+  /**
+   * Contains additional data for preconfigured alerts, such as the rule ID, display name, and description. Only present if the alert is preconfigured.
+   */
+  preconfiguredData?: PreconfiguredAlertData
 }
 
 /**
@@ -765,6 +811,15 @@ export type RegionalApiDisableAlertManagerRequest = {
   projectId?: string
 }
 
+export type RegionalApiDisableAlertRulesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  projectId?: string
+  ruleIds?: string[]
+}
+
 /**
  * Disable the sending of managed alerts.
  */
@@ -791,6 +846,15 @@ export type RegionalApiEnableAlertManagerRequest = {
    * ID of the Project to enable the Alert manager in.
    */
   projectId?: string
+}
+
+export type RegionalApiEnableAlertRulesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  projectId?: string
+  ruleIds?: string[]
 }
 
 /**
@@ -889,7 +953,7 @@ export type RegionalApiListAlertsRequest = {
    */
   isPreconfigured?: boolean
   /**
-   * Valid values to filter on are `disabled`, `enabled`, `pending` and `firing`. If omitted, no filtering is applied on alert states. Other filters may still apply.
+   * Valid values to filter on are `inactive`, `pending` and `firing`. If omitted, no filtering is applied on alert states. Other filters may still apply.
    */
   state?: AlertState
 }

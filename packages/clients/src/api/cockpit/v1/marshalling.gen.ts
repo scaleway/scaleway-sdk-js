@@ -30,13 +30,16 @@ import type {
   ListPlansResponse,
   ListTokensResponse,
   Plan,
+  PreconfiguredAlertData,
   RegionalApiCreateContactPointRequest,
   RegionalApiCreateDataSourceRequest,
   RegionalApiCreateTokenRequest,
   RegionalApiDeleteContactPointRequest,
   RegionalApiDisableAlertManagerRequest,
+  RegionalApiDisableAlertRulesRequest,
   RegionalApiDisableManagedAlertsRequest,
   RegionalApiEnableAlertManagerRequest,
+  RegionalApiEnableAlertRulesRequest,
   RegionalApiEnableManagedAlertsRequest,
   RegionalApiTriggerTestAlertRequest,
   RegionalApiUpdateContactPointRequest,
@@ -236,6 +239,22 @@ export const unmarshalGrafana = (data: unknown): Grafana => {
   } as Grafana
 }
 
+const unmarshalPreconfiguredAlertData = (
+  data: unknown,
+): PreconfiguredAlertData => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PreconfiguredAlertData' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    displayDescription: data.display_description,
+    displayName: data.display_name,
+    preconfiguredRuleId: data.preconfigured_rule_id,
+  } as PreconfiguredAlertData
+}
+
 const unmarshalAlert = (data: unknown): Alert => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -249,6 +268,9 @@ const unmarshalAlert = (data: unknown): Alert => {
     enabled: data.enabled,
     name: data.name,
     preconfigured: data.preconfigured,
+    preconfiguredData: data.preconfigured_data
+      ? unmarshalPreconfiguredAlertData(data.preconfigured_data)
+      : undefined,
     region: data.region,
     rule: data.rule,
     state: data.state ? data.state : undefined,
@@ -514,6 +536,14 @@ export const marshalRegionalApiDisableAlertManagerRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
+export const marshalRegionalApiDisableAlertRulesRequest = (
+  request: RegionalApiDisableAlertRulesRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  rule_ids: request.ruleIds,
+})
+
 export const marshalRegionalApiDisableManagedAlertsRequest = (
   request: RegionalApiDisableManagedAlertsRequest,
   defaults: DefaultValues,
@@ -526,6 +556,14 @@ export const marshalRegionalApiEnableAlertManagerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
+export const marshalRegionalApiEnableAlertRulesRequest = (
+  request: RegionalApiEnableAlertRulesRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  rule_ids: request.ruleIds,
 })
 
 export const marshalRegionalApiEnableManagedAlertsRequest = (
