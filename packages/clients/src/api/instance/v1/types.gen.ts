@@ -447,6 +447,10 @@ export interface ServerTypeCapabilities {
    * List of supported boot types.
    */
   bootTypes: BootType[]
+  /**
+   * Max number of SFS (Scaleway File Systems) that can be attached to the Instance.
+   */
+  maxFileSystems: number
 }
 
 export interface ServerTypeGPUInfo {
