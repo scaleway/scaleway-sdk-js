@@ -5,13 +5,29 @@ import {
 import type { RequestInterceptor } from '../internal/interceptors/types'
 import { assertValidAuthenticationSecrets } from './client-ini-profile'
 import type { AuthenticationSecrets } from './client-ini-profile'
-
-const SESSION_HEADER_KEY = 'x-session-token'
-const AUTH_HEADER_KEY = 'x-auth-token'
+import { AUTH_HEADER_KEY, SESSION_HEADER_KEY } from './constants'
 
 interface TokenAccessor {
   (): Promise<string | undefined>
 }
+
+interface AddSessionHeader {
+  request: Request
+  getAsyncToken: () => Promise<string | undefined>
+}
+/**
+ * Add an JWT Session Header to a request through an interceptor.
+ *
+ * @param request - The request to modify
+ * @param getJwt - The session value
+ * @returns The Request interceptor
+ *
+ */
+export const addSessionHeader = async ({
+  request,
+  getAsyncToken,
+}: AddSessionHeader) =>
+  addAsyncHeaderInterceptor(SESSION_HEADER_KEY, getAsyncToken)({ request })
 
 /**
  * Authenticates with a session token.

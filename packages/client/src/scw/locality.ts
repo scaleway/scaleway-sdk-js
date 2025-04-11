@@ -10,5 +10,6 @@ export type Zone =
   | 'nl-ams-3'
   | 'pl-waw-1'
   | 'pl-waw-2'
+  | 'pl-waw-3'
   | (string & {})
 /* eslint-enable @typescript-eslint/ban-types */
