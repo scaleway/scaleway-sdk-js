@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.74.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.73.0...@scaleway/sdk@2.74.0) (2025-04-14)
+
+### Features
+
+- **account:** add qualification field to project response ([#2004](https://github.com/scaleway/scaleway-sdk-js/issues/2004)) ([2e57208](https://github.com/scaleway/scaleway-sdk-js/commit/2e57208c3a93f2bddbb260bab2a44724396b3dcb))
+- **account:** add unknown value to project qualification subusecase ([#1994](https://github.com/scaleway/scaleway-sdk-js/issues/1994)) ([e9bf780](https://github.com/scaleway/scaleway-sdk-js/commit/e9bf780858e2ef986afb282851af27775fec1583))
+- **cockpit:** add EnablePreconfiguredAlertRules endpoint ([#2014](https://github.com/scaleway/scaleway-sdk-js/issues/2014)) ([df01e5e](https://github.com/scaleway/scaleway-sdk-js/commit/df01e5e0a7313237a2c405e05ccd5619ebb93594))
+- **edge_services:** add search waf stage method ([#2005](https://github.com/scaleway/scaleway-sdk-js/issues/2005)) ([a2ee846](https://github.com/scaleway/scaleway-sdk-js/commit/a2ee84650da9e4c70e6fc48f082b95043f9dc62f))
+- **file:** generate SDKs ([#2008](https://github.com/scaleway/scaleway-sdk-js/issues/2008)) ([caa520e](https://github.com/scaleway/scaleway-sdk-js/commit/caa520e1c7b69108b43c6b51ba548d1e883a28c7))
+- **iam:** make sure audience_id is required ([#2003](https://github.com/scaleway/scaleway-sdk-js/issues/2003)) ([3a43195](https://github.com/scaleway/scaleway-sdk-js/commit/3a431959698fb4a3c263fb374fff7a6e3590475c))
+- **instance:** add end_of_service flag in ServerList response ([#1993](https://github.com/scaleway/scaleway-sdk-js/issues/1993)) ([d02a1da](https://github.com/scaleway/scaleway-sdk-js/commit/d02a1da0003237f6e7bae9030562247d4461eca5))
+- **instance:** add max_file_systems capability ([#2015](https://github.com/scaleway/scaleway-sdk-js/issues/2015)) ([3308335](https://github.com/scaleway/scaleway-sdk-js/commit/330833557a512b18a018ca92e775d912f6074a96))
+- **lb:** add bool to match edge services ips in acls ([#2006](https://github.com/scaleway/scaleway-sdk-js/issues/2006)) ([25c1155](https://github.com/scaleway/scaleway-sdk-js/commit/25c1155151bce9c06471f9c05e8f805bd6f9f2a4))
+- **product_catalog:** add support for v2alpha1 ([#2000](https://github.com/scaleway/scaleway-sdk-js/issues/2000)) ([8e37fc8](https://github.com/scaleway/scaleway-sdk-js/commit/8e37fc884b90aacad0860817e8df0e70e38e849a))
+
+### Bug Fixes
+
+- **instance:** document protected field on Create Server Request ([#1990](https://github.com/scaleway/scaleway-sdk-js/issues/1990)) ([a646b01](https://github.com/scaleway/scaleway-sdk-js/commit/a646b01f0c6ee3c6834cabdfdb7a432330196010))
+
 ## [2.73.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.72.0...@scaleway/sdk@2.73.0) (2025-04-07)
 
 ### Features
