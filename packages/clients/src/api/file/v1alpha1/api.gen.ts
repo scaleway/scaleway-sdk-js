@@ -126,6 +126,7 @@ Use the order_by parameter to modify the sorting behavior.
           ],
           ['resource_id', request.resourceId],
           ['resource_type', request.resourceType],
+          ['zone', request.zone],
         ),
       },
       unmarshalListAttachmentsResponse,
