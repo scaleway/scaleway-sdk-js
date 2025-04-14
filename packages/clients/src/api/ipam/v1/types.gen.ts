@@ -32,6 +32,7 @@ export type ResourceType =
   | 'apple_silicon_private_nic'
   | 'serverless_container'
   | 'serverless_function'
+  | 'vpn_gateway'
 
 export interface Resource {
   /**
