@@ -5,6 +5,7 @@ export type {
   ListPublicCatalogProductsResponse,
   PublicCatalogApiListPublicCatalogProductsRequest,
   PublicCatalogProduct,
+  PublicCatalogProductEnvironmentalImpact,
   PublicCatalogProductLocality,
   PublicCatalogProductPrice,
   PublicCatalogProductPriceUnitOfMeasure,
