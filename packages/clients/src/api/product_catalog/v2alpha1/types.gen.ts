@@ -224,6 +224,17 @@ export interface PublicCatalogProductPropertiesInstance {
   range: string
 }
 
+export interface PublicCatalogProductEnvironmentalImpact {
+  /**
+   * Kilograms of CO2 that would need to be released to produce the equivalent warming impact.
+   */
+  kgCo2Equivalent?: number
+  /**
+   * Cubic meters of water used.
+   */
+  m3WaterUsage?: number
+}
+
 export interface PublicCatalogProductLocality {
   /**
    * Whether or not the product is global.
@@ -326,6 +337,10 @@ export interface PublicCatalogProduct {
    * The properties of the product.
    */
   properties?: PublicCatalogProductProperties
+  /**
+   * The environmental impact of the product.
+   */
+  environmentalImpact?: PublicCatalogProductEnvironmentalImpact
 }
 
 export interface ListPublicCatalogProductsResponse {

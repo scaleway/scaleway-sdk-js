@@ -8,6 +8,7 @@ import {
 import type {
   ListPublicCatalogProductsResponse,
   PublicCatalogProduct,
+  PublicCatalogProductEnvironmentalImpact,
   PublicCatalogProductLocality,
   PublicCatalogProductPrice,
   PublicCatalogProductPriceUnitOfMeasure,
@@ -246,6 +247,21 @@ const unmarshalPublicCatalogProductPropertiesInstance = (
   } as PublicCatalogProductPropertiesInstance
 }
 
+const unmarshalPublicCatalogProductEnvironmentalImpact = (
+  data: unknown,
+): PublicCatalogProductEnvironmentalImpact => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductEnvironmentalImpact' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    kgCo2Equivalent: data.kg_co2_equivalent,
+    m3WaterUsage: data.m3_water_usage,
+  } as PublicCatalogProductEnvironmentalImpact
+}
+
 const unmarshalPublicCatalogProductLocality = (
   data: unknown,
 ): PublicCatalogProductLocality => {
@@ -319,6 +335,11 @@ const unmarshalPublicCatalogProduct = (data: unknown): PublicCatalogProduct => {
 
   return {
     description: data.description,
+    environmentalImpact: data.environmental_impact
+      ? unmarshalPublicCatalogProductEnvironmentalImpact(
+          data.environmental_impact,
+        )
+      : undefined,
     locality: data.locality
       ? unmarshalPublicCatalogProductLocality(data.locality)
       : undefined,
