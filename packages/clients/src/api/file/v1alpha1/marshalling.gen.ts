@@ -49,6 +49,7 @@ const unmarshalAttachment = (data: unknown): Attachment => {
     id: data.id,
     resourceId: data.resource_id,
     resourceType: data.resource_type,
+    zone: data.zone,
   } as Attachment
 }
 

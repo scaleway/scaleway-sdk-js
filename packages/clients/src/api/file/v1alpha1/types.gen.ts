@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, Zone as ScwZone } from '@scaleway/sdk-client'
 
 export type AttachmentResourceType = 'unknown_resource_type' | 'instance_server'
 
@@ -37,6 +37,10 @@ export interface Attachment {
    * The type of the attached resource.
    */
   resourceType: AttachmentResourceType
+  /**
+   * The zone where the resource is located.
+   */
+  zone?: ScwZone
 }
 
 /**
@@ -163,6 +167,10 @@ export type ListAttachmentsRequest = {
    * Filter by resource type.
    */
   resourceType?: AttachmentResourceType
+  /**
+   * Filter by resource zone.
+   */
+  zone?: ScwZone
   /**
    * Page number (starting at 1).
    */
