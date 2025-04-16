@@ -211,6 +211,10 @@ export interface Secret {
    */
   deletionRequestedAt?: Date
   /**
+   * (Optional.) The Scaleway's Key Manager key ID used to encrypt and decrypt secret versions.
+   */
+  keyId?: string
+  /**
    * Region of the secret.
    */
   region: ScwRegion
@@ -387,6 +391,10 @@ export type CreateSecretRequest = {
    * A protected secret cannot be deleted.
    */
   protected: boolean
+  /**
+   * (Optional.) The Scaleway's Key Manager key ID will be used to encrypt and decrypt secret versions. If not specified, the Secret Manager will use an internal key.
+   */
+  keyId?: string
 }
 
 export type CreateSecretVersionRequest = {
