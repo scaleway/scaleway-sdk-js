@@ -82,7 +82,12 @@ export default [
 
   ...scwTypescript.map(config => ({
     ...config,
-    files: ['**/*.test.ts', '__tests__/**/*.ts', '**/vite.config.ts'],
+    files: [
+      '**/*.test.ts',
+      '__tests__/**/*.ts',
+      '**/vite.config.ts',
+      'vitest.config.ts',
+    ],
     rules: {
       ...config.rules,
       'import/no-extraneous-dependencies': 'off',
@@ -91,7 +96,10 @@ export default [
 
   ...scwTypescript.map(config => ({
     ...config,
-    files: ['packages/clients/src/api/dedibox/v1/*.ts'],
+    files: [
+      'packages_generated/dedibox/src/v1/*.ts',
+      'packages/clients/src/api/dedibox/v1/*.ts',
+    ],
     rules: {
       ...config.rules,
       'no-use-before-define': 'off',

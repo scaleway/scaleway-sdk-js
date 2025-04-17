@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "exclude": [
+    "dist/*",
+    "*.config.ts",
+    "*.setup.ts",
+    "**/__tests__",
+    "**/__mocks__"
+  ]
+}

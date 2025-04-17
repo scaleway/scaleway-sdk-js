@@ -20,8 +20,7 @@ jobs:
           check-latest: true
           cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm run build
-      - run: pnpm tsc --noEmit
+      - run: pnpm typecheck
   lint:
     runs-on: ubuntu-24.04
     steps:
