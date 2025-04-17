@@ -93,6 +93,7 @@ export const unmarshalSecret = (data: unknown): Secret => {
       ? unmarshalEphemeralPolicy(data.ephemeral_policy)
       : undefined,
     id: data.id,
+    keyId: data.key_id,
     managed: data.managed,
     name: data.name,
     path: data.path,
@@ -283,6 +284,7 @@ export const marshalCreateSecretRequest = (
     request.ephemeralPolicy !== undefined
       ? marshalEphemeralPolicy(request.ephemeralPolicy, defaults)
       : undefined,
+  key_id: request.keyId,
   name: request.name,
   path: request.path,
   project_id: request.projectId ?? defaults.defaultProjectId,
