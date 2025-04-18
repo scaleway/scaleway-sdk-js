@@ -8,6 +8,15 @@ yarn.lock
 # lint
 .eslintcache
 
+# turbo
+.turbo
+!.turbo/config.json
+packages/*/.turbo
+packages/*/dist
+packages_generated/*/.turbo
+packages_generated/*/.dist
+
+
 # test & build
 .reports
 docs

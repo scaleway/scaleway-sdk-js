@@ -1,0 +1,5 @@
+**/__tests__/**
+examples/
+src
+.eslintrc.cjs
+!.npmignore

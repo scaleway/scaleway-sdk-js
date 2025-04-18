@@ -1,0 +1,55 @@
+{
+  "name": "@scaleway-internal/sdk-abuse-admin",
+  "version": "1.0.0",
+  "description": "Scaleway SDK abuse-admin",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.gen.d.ts",
+      "import": "./dist/index.gen.js",
+      "require": "./dist/index.gen.cjs",
+      "default": "./dist/index.gen.js"
+    },
+    "./*": {
+      "types": "./dist/*/index.gen.d.ts",
+      "import": "./dist/*/index.gen.js",
+      "require": "./dist/*/index.gen.cjs",
+      "default": "./dist/*/index.gen.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "directory": "packages_generated/abuse-admin"
+  },
+  "engines": {
+    "node": ">=20.18.3"
+  },
+  "scripts": {
+    "package:check": "pnpm publint",
+    "typecheck": "tsc --noEmit",
+    "type:generate": "tsc --declaration -p tsconfig.build.json",
+    "build": "vite build --config vite.config.ts && pnpm run type:generate",
+    "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
+  },
+  "dependencies": {
+    "@scaleway/sdk-std": "workspace:*",
+    "@scaleway-internal/sdk-abuse": "workspace:*",
+    "@scaleway-internal/sdk-abuse-private": "workspace:*",
+    "@scaleway-internal/sdk-trustandsafety-private": "workspace:*",
+    "@scaleway/random-name": "5.1.1",
+    "@scaleway/sdk-client": "^1.1.1"
+  },
+  "peerDependencies": {
+    "@scaleway/sdk-client": "^1.1.1"
+  },
+  "devDependencies": {
+    "@scaleway/sdk-client": "^1.1.1"
+  },
+ "bundledDependencies": [
+    "@scaleway/random-name"
+  ]
+}
