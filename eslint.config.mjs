@@ -19,6 +19,7 @@ export default [
       'packages/clients/src/vendor/base64/index.js',
       'packages/client/src/vendor/base64/index.js',
       'packages/configuration-loader/.eslintrc.cjs',
+      'scripts/generatePackages.ts',
     ],
   },
   {
