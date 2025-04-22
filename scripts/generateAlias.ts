@@ -4,14 +4,12 @@ import { join } from 'path'
 const GENERATED_PATH = 'packages_generated'
 const OUTPUT_PATH = 'packages/sdk/src/index.ts'
 
-// Convertit "foo_bar" ou "foo-bar" en "FooBar"
 const toPascal = (s: string) =>
   s
     .split(/[_-]/)
     .map(part => part.charAt(0).toUpperCase() + part.slice(1))
     .join('')
 
-// Convertit "foo_bar" en "foo-bar" pour le slug npm
 const toSlug = (s: string) => s.replace(/_/g, '-')
 
 const services = readdirSync(GENERATED_PATH).filter(folder => {
@@ -51,7 +49,7 @@ for (const service of services) {
     mappings.push(`  ${version}: ${importName},`)
   }
 
-  output += `${imports.join('\n')  }\n\n`
+  output += `${imports.join('\n')}\n\n`
   const importedNames = imports
     .map(line => /{ (.*?) }/.exec(line)![1])
     .join(', ')
