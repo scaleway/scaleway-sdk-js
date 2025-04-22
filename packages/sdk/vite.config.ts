@@ -8,7 +8,7 @@ import { defaultConfig } from '../../vite.config'
 export default mergeConfig(defineConfig(defaultConfig), {
   build: {
     lib: {
-      entry: 'src/index.gen.ts',
+      entry: 'src/index.ts',
     },
   },
 })
