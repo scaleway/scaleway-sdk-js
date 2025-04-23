@@ -14,6 +14,8 @@ export type {
   DataSource,
   DataSourceOrigin,
   DataSourceType,
+  DisableAlertRulesResponse,
+  EnableAlertRulesResponse,
   GetConfigResponse,
   GetConfigResponseRetention,
   GlobalApiCreateGrafanaUserRequest,
