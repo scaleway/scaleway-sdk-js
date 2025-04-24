@@ -79,10 +79,10 @@
     "@scaleway/sdk-webhosting": "workspace:*"
   },
   "devDependencies": {
-    "@scaleway/sdk-client": "^1.1.1"
+    "@scaleway/sdk-client": "workspace:^"
   },
   "peerDependencies": {
-    "@scaleway/sdk-client": "^1.1.1"
+    "@scaleway/sdk-client": "workspace:^"
   },
   "bundledDependencies": [
     "@scaleway/random-name"
