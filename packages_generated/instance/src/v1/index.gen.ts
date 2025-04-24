@@ -6,6 +6,8 @@ export * from './marshalling.gen'
 export type {
   ApplyBlockMigrationRequest,
   Arch,
+  AttachServerFileSystemRequest,
+  AttachServerFileSystemResponse,
   AttachServerVolumeRequest,
   AttachServerVolumeRequestVolumeType,
   AttachServerVolumeResponse,
@@ -41,6 +43,8 @@ export type {
   DeleteServerUserDataRequest,
   DeleteSnapshotRequest,
   DeleteVolumeRequest,
+  DetachServerFileSystemRequest,
+  DetachServerFileSystemResponse,
   DetachServerVolumeRequest,
   DetachServerVolumeResponse,
   ExportSnapshotRequest,
