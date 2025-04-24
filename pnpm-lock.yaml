@@ -103,15 +103,6 @@ importers:
 
   packages/client: {}
 
-  packages/clients:
-    dependencies:
-      '@scaleway/random-name':
-        specifier: 5.1.1
-        version: 5.1.1
-      '@scaleway/sdk-client':
-        specifier: workspace:*
-        version: link:../client
-
   packages/configuration-loader:
     devDependencies:
       '@types/node':
@@ -245,8 +236,8 @@ importers:
         version: link:../../packages_generated/webhosting
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../client
 
   packages_generated/account:
     dependencies:
@@ -258,8 +249,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/applesilicon:
     dependencies:
@@ -271,8 +262,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/audit_trail:
     dependencies:
@@ -284,8 +275,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/baremetal:
     dependencies:
@@ -297,8 +288,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/billing:
     dependencies:
@@ -310,8 +301,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/block:
     dependencies:
@@ -323,8 +314,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/cockpit:
     dependencies:
@@ -336,8 +327,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/container:
     dependencies:
@@ -349,8 +340,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/dedibox:
     dependencies:
@@ -362,8 +353,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/domain:
     dependencies:
@@ -375,8 +366,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: ^1.2.0
+        version: 1.2.0
 
   packages_generated/edge_services:
     dependencies:
@@ -388,8 +379,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/file:
     dependencies:
@@ -401,8 +392,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/flexibleip:
     dependencies:
@@ -414,8 +405,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/function:
     dependencies:
@@ -427,8 +418,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/iam:
     dependencies:
@@ -440,8 +431,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/inference:
     dependencies:
@@ -453,8 +444,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/instance:
     dependencies:
@@ -466,8 +457,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/interlink:
     dependencies:
@@ -479,8 +470,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/iot:
     dependencies:
@@ -492,8 +483,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/ipam:
     dependencies:
@@ -505,8 +496,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/jobs:
     dependencies:
@@ -518,8 +509,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/k8s:
     dependencies:
@@ -531,8 +522,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/key_manager:
     dependencies:
@@ -544,8 +535,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/lb:
     dependencies:
@@ -557,8 +548,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/marketplace:
     dependencies:
@@ -570,8 +561,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/mnq:
     dependencies:
@@ -583,8 +574,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/mongodb:
     dependencies:
@@ -596,8 +587,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/product_catalog:
     dependencies:
@@ -609,8 +600,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/qaas:
     dependencies:
@@ -622,8 +613,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/rdb:
     dependencies:
@@ -635,8 +626,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/redis:
     dependencies:
@@ -648,8 +639,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/registry:
     dependencies:
@@ -661,8 +652,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/secret:
     dependencies:
@@ -674,8 +665,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/serverless_sqldb:
     dependencies:
@@ -687,14 +678,14 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/std:
     dependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/tem:
     dependencies:
@@ -706,8 +697,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/test:
     dependencies:
@@ -719,8 +710,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/vpc:
     dependencies:
@@ -732,8 +723,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/vpcgw:
     dependencies:
@@ -745,8 +736,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
   packages_generated/webhosting:
     dependencies:
@@ -758,8 +749,8 @@ importers:
         version: link:../std
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../../packages/client
 
 packages:
   '@ampproject/remapping@2.3.0':
@@ -2232,10 +2223,10 @@ packages:
       }
     engines: { node: '>=20.x' }
 
-  '@scaleway/sdk-client@1.1.1':
+  '@scaleway/sdk-client@1.2.0':
     resolution:
       {
-        integrity: sha512-GASTqSZ5Zze3pqZue9A7rC1DgwknK6BGcTv8SkGMATFXu6xluql0exHcKQUcUwg9vOTGtRSWoD6PIaiPKXtuXQ==,
+        integrity: sha512-Gx0Dv3AiCLHqHZ0OcvguSIwDSlQfI4PrkupnhCLJRk91sj16CFCx6QpjsgQjFkY/V2c38ODeSSBslv8DK8aIcA==,
       }
     engines: { node: '>=18.0' }
 
@@ -10276,7 +10267,7 @@ snapshots:
 
   '@scaleway/random-name@5.1.1': {}
 
-  '@scaleway/sdk-client@1.1.1': {}
+  '@scaleway/sdk-client@1.2.0': {}
 
   '@shikijs/engine-oniguruma@1.29.1':
     dependencies:

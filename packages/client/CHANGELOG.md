@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-client@1.2.0...@scaleway/sdk-client@1.2.1) (2025-04-24)
+
+### Bug Fixes
+
+- sdk client deps ([#2056](https://github.com/scaleway/scaleway-sdk-js/issues/2056)) ([82ee89e](https://github.com/scaleway/scaleway-sdk-js/commit/82ee89e9745fc52875d81fbd0a6e277e1b0f4fa8))
+
+## 1.2.0 (2025-04-24)
+
+### Features
+
+- **client:** add pl-waw-3 zone, add headers, add sessionheader ([#2016](https://github.com/scaleway/scaleway-sdk-js/issues/2016)) ([332b58f](https://github.com/scaleway/scaleway-sdk-js/commit/332b58ff08798c661b323d32ac425c8e3ae0f203))
+- **marshalling:** add any marshalling ([#2054](https://github.com/scaleway/scaleway-sdk-js/issues/2054)) ([5cbcf99](https://github.com/scaleway/scaleway-sdk-js/commit/5cbcf99834dcb6293825ae96fc34cd2c4e012183))
+
 ## [1.1.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-client@1.1.0...@scaleway/sdk-client@1.1.1) (2025-03-31)
 
 **Note:** Version bump only for package @scaleway/sdk-client
