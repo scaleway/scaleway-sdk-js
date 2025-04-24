@@ -11,9 +11,10 @@
   },
   "type": "module",
   "scripts": {
-    "generateIndex": "pnpm dlx tsx ./scripts/generatePackages.ts",
+    "generateAlias": "pnpm dlx tsx ./scripts/generateAlias.ts",
+    "generatePackages": "pnpm dlx tsx ./scripts/generatePackages.ts",
     "generateGlobalSdkPackage": "pnpm dlx tsx ./scripts/updateGlobalSdkPackage.ts",
-    "prebuild": "pnpm run generateIndex && pnpm run generateGlobalSdkPackage &&  pnpm format",
+    "prebuild": "pnpm run generatePackages && pnpm run generateAlias &&  pnpm format",
     "build": "pnpm turbo build",
     "typecheck": "pnpm turbo typecheck",
     "build:profile": "cross-env PROFILE=true pnpm run build",

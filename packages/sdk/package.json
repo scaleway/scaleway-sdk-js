@@ -1,7 +1,6 @@
 {
-  "name": "@scaleway/sdk-ts",
-  "private": "true",
-  "version": "2.0.0",
+  "name": "@scaleway/sdk",
+  "version": "2.74.0",
   "description": "Scaleway SDK TS.",
   "types": "dist/index.d.ts",
   "files": [
