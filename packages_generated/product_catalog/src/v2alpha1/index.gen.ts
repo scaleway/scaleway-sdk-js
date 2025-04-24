@@ -6,7 +6,7 @@ export type {
   ListPublicCatalogProductsResponse,
   PublicCatalogApiListPublicCatalogProductsRequest,
   PublicCatalogProduct,
-  PublicCatalogProductEnvironmentalImpact,
+  PublicCatalogProductEnvironmentalImpactEstimation,
   PublicCatalogProductLocality,
   PublicCatalogProductPrice,
   PublicCatalogProductPriceUnitOfMeasure,
@@ -25,5 +25,7 @@ export type {
   PublicCatalogProductPropertiesHardwareRAM,
   PublicCatalogProductPropertiesHardwareStorage,
   PublicCatalogProductPropertiesInstance,
+  PublicCatalogProductUnitOfMeasure,
+  PublicCatalogProductUnitOfMeasureCountableUnit,
 } from './types.gen'
 export * as ValidationRules from './validation-rules.gen'
