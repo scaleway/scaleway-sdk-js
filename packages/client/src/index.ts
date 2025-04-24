@@ -26,7 +26,6 @@ export {
 export type { ClientConfig } from './scw/client-ini-factory'
 export { Decimal } from './scw/custom-types'
 export type { Money, ScwFile, TimeSeries } from './scw/custom-types'
-
 export * as Errors from './scw/errors/standard'
 export type { Region, Zone } from './scw/locality'
 export * from './internals'
