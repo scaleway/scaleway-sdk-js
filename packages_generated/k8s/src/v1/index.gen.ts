@@ -63,7 +63,6 @@ export type {
   ListVersionsResponse,
   MaintenanceWindow,
   MaintenanceWindowDayOfTheWeek,
-  MigrateClusterToSBSCSIRequest,
   Node,
   NodeMetadata,
   NodeMetadataCoreV1Taint,
