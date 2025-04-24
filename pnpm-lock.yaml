@@ -237,8 +237,8 @@ importers:
         version: link:../../packages_generated/webhosting
     devDependencies:
       '@scaleway/sdk-client':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: workspace:^
+        version: link:../client
 
   packages_generated/account:
     dependencies:
