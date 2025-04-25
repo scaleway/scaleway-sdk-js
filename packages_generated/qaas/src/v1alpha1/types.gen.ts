@@ -76,11 +76,14 @@ export type PlatformAvailability =
   | 'available'
   | 'shortage'
   | 'scarce'
+  | 'maintenance'
 
 export type PlatformTechnology =
   | 'unknown_technology'
   | 'photonic'
   | 'general_purpose'
+  | 'trapped_ion'
+  | 'superconducting'
 
 export type PlatformType = 'unknown_type' | 'simulator' | 'qpu'
 
@@ -277,6 +280,14 @@ export interface Platform {
    */
   maxQubitCount: number
   /**
+   * Maximum number of shots during a circuit execution.
+   */
+  maxShotCount: number
+  /**
+   * Maximum number of circuit that can be executed in one call.
+   */
+  maxCircuitCount: number
+  /**
    * Availability of the platform.
    */
   availability: PlatformAvailability
@@ -288,6 +299,14 @@ export interface Platform {
    * Price to be paid per hour (excluding free tiers).
    */
   pricePerHour?: Money
+  /**
+   * Price to be paid per shot (excluding free tiers).
+   */
+  pricePerShot?: Money
+  /**
+   * Price to be paid per circuit setup before its execution (excluding free tiers).
+   */
+  pricePerCircuit?: Money
   /**
    * Specifications of the underlying hardware.
    */

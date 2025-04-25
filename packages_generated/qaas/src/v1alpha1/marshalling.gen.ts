@@ -116,11 +116,19 @@ export const unmarshalPlatform = (data: unknown): Platform => {
       ? unmarshalPlatformHardware(data.hardware)
       : undefined,
     id: data.id,
+    maxCircuitCount: data.max_circuit_count,
     maxQubitCount: data.max_qubit_count,
+    maxShotCount: data.max_shot_count,
     metadata: data.metadata,
     name: data.name,
+    pricePerCircuit: data.price_per_circuit
+      ? unmarshalMoney(data.price_per_circuit)
+      : undefined,
     pricePerHour: data.price_per_hour
       ? unmarshalMoney(data.price_per_hour)
+      : undefined,
+    pricePerShot: data.price_per_shot
+      ? unmarshalMoney(data.price_per_shot)
       : undefined,
     providerName: data.provider_name,
     technology: data.technology,
