@@ -372,6 +372,14 @@ export interface AlertManager {
   region: ScwRegion
 }
 
+export interface DisableAlertRulesResponse {
+  disabledRuleIds: string[]
+}
+
+export interface EnableAlertRulesResponse {
+  enabledRuleIds: string[]
+}
+
 /**
  * Cockpit configuration.
  */
