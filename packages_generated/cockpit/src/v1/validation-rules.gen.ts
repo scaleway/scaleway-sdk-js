@@ -10,7 +10,7 @@ export const RegionalApiCreateDataSourceRequest = {
   retentionDays: {
     greaterThanOrEqual: 1,
     ignoreEmpty: true,
-    lessThanOrEqual: 365,
+    lessThanOrEqual: 1825,
   },
 }
 
@@ -62,6 +62,6 @@ export const RegionalApiUpdateDataSourceRequest = {
   retentionDays: {
     greaterThanOrEqual: 1,
     ignoreEmpty: true,
-    lessThanOrEqual: 365,
+    lessThanOrEqual: 1825,
   },
 }
