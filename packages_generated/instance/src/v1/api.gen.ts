@@ -9,6 +9,7 @@ import {
 import type { Zone as ScwZone } from '@scaleway/sdk-client'
 import {
   marshalApplyBlockMigrationRequest,
+  marshalAttachServerFileSystemRequest,
   marshalAttachServerVolumeRequest,
   marshalCheckBlockMigrationOrganizationQuotasRequest,
   marshalCreateImageRequest,
@@ -20,6 +21,7 @@ import {
   marshalCreateServerRequest,
   marshalCreateSnapshotRequest,
   marshalCreateVolumeRequest,
+  marshalDetachServerFileSystemRequest,
   marshalDetachServerVolumeRequest,
   marshalExportSnapshotRequest,
   marshalPlanBlockMigrationRequest,
@@ -42,6 +44,7 @@ import {
   marshalUpdateServerRequest,
   marshalUpdateSnapshotRequest,
   marshalUpdateVolumeRequest,
+  unmarshalAttachServerFileSystemResponse,
   unmarshalAttachServerVolumeResponse,
   unmarshalCreateImageResponse,
   unmarshalCreateIpResponse,
@@ -52,6 +55,7 @@ import {
   unmarshalCreateServerResponse,
   unmarshalCreateSnapshotResponse,
   unmarshalCreateVolumeResponse,
+  unmarshalDetachServerFileSystemResponse,
   unmarshalDetachServerVolumeResponse,
   unmarshalExportSnapshotResponse,
   unmarshalGetDashboardResponse,
@@ -103,6 +107,8 @@ import {
 } from './marshalling.gen'
 import type {
   ApplyBlockMigrationRequest,
+  AttachServerFileSystemRequest,
+  AttachServerFileSystemResponse,
   AttachServerVolumeRequest,
   AttachServerVolumeResponse,
   CheckBlockMigrationOrganizationQuotasRequest,
@@ -134,6 +140,8 @@ import type {
   DeleteServerUserDataRequest,
   DeleteSnapshotRequest,
   DeleteVolumeRequest,
+  DetachServerFileSystemRequest,
+  DetachServerFileSystemResponse,
   DetachServerVolumeRequest,
   DetachServerVolumeResponse,
   ExportSnapshotRequest,
@@ -554,6 +562,44 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/detach-volume`,
       },
       unmarshalDetachServerVolumeResponse,
+    )
+
+  /**
+   * Attach a filesystem volume to an Instance.
+   *
+   * @param request - The request {@link AttachServerFileSystemRequest}
+   * @returns A Promise of AttachServerFileSystemResponse
+   */
+  attachServerFileSystem = (request: Readonly<AttachServerFileSystemRequest>) =>
+    this.client.fetch<AttachServerFileSystemResponse>(
+      {
+        body: JSON.stringify(
+          marshalAttachServerFileSystemRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/attach-filesystem`,
+      },
+      unmarshalAttachServerFileSystemResponse,
+    )
+
+  /**
+   * Detach a filesystem volume to an Instance.
+   *
+   * @param request - The request {@link DetachServerFileSystemRequest}
+   * @returns A Promise of DetachServerFileSystemResponse
+   */
+  detachServerFileSystem = (request: Readonly<DetachServerFileSystemRequest>) =>
+    this.client.fetch<DetachServerFileSystemResponse>(
+      {
+        body: JSON.stringify(
+          marshalDetachServerFileSystemRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/detach-filesystem`,
+      },
+      unmarshalDetachServerFileSystemResponse,
     )
 
   protected pageOfListImages = (request: Readonly<ListImagesRequest> = {}) =>
