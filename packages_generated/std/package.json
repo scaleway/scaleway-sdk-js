@@ -30,10 +30,10 @@
     "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
   },
   "dependencies": {
-    "@scaleway/sdk-client": "^1.1.1"
+    "@scaleway/sdk-client": "workspace:^"
   },
   "peerDependencies": {
-    "@scaleway/sdk-client": "^1.1.1"
+    "@scaleway/sdk-client": "workspace:^"
   },
   "bundledDependencies": [
     "@scaleway/sdk-client"

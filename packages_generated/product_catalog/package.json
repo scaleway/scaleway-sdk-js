@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-product-catalog",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Scaleway SDK product-catalog",
   "types": "dist/index.d.ts",
   "files": [
@@ -40,10 +40,10 @@
     "@scaleway/sdk-std": "workspace:*"
   },
   "peerDependencies": {
-    "@scaleway/sdk-client": "^1.1.1"
+    "@scaleway/sdk-client": "workspace:^"
   },
   "devDependencies": {
-    "@scaleway/sdk-client": "^1.1.1"
+    "@scaleway/sdk-client": "workspace:^"
   },
   "bundledDependencies": [
     "@scaleway/random-name"
