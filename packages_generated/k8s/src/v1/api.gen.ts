@@ -77,7 +77,6 @@ import type {
   ListPoolsResponse,
   ListVersionsRequest,
   ListVersionsResponse,
-  MigrateClusterToSBSCSIRequest,
   Node,
   NodeMetadata,
   Pool,
@@ -333,24 +332,6 @@ export class API extends ParentAPI {
       method: 'POST',
       path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/reset-admin-token`,
     })
-
-  /**
-   * Migrate a cluster to SBS CSI. Enable the latest CSI compatible with Scaleway Block Storage (SBS) and migrate all existing PersistentVolumes/VolumeSnapshotContents to SBS.
-Make sure to have the necessary Quota before running this command.
-   *
-   * @param request - The request {@link MigrateClusterToSBSCSIRequest}
-   * @returns A Promise of Cluster
-   */
-  migrateClusterToSBSCSI = (request: Readonly<MigrateClusterToSBSCSIRequest>) =>
-    this.client.fetch<Cluster>(
-      {
-        body: '{}',
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/migrate-to-sbs-csi`,
-      },
-      unmarshalCluster,
-    )
 
   protected pageOfListClusterACLRules = (
     request: Readonly<ListClusterACLRulesRequest>,
