@@ -11,11 +11,12 @@ export { authenticateWithSessionToken } from './scw/auth'
 
 export type { DefaultValues } from './scw/client-settings'
 export {
-  marshalDecimal,
-  marshalScwFile,
-  marshalMoney,
-  marshalTimeSeries,
   marshalBlobToScwFile,
+  marshalDecimal,
+  marshalMoney,
+  marshalScwFile,
+  marshalTimeSeries,
+  unmarshalAnyRes,
   unmarshalDecimal,
   unmarshalMoney,
   unmarshalScwFile,

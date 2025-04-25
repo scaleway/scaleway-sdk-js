@@ -41,13 +41,13 @@
     "@scaleway-internal/sdk-abuse-private": "workspace:*",
     "@scaleway-internal/sdk-trustandsafety-private": "workspace:*",
     "@scaleway/random-name": "5.1.1",
-    "@scaleway/sdk-client": "^1.1.1"
+    "@scaleway/sdk-client": "workspace:^"
   },
   "peerDependencies": {
-    "@scaleway/sdk-client": "^1.1.1"
+    "@scaleway/sdk-client": "workspace:^"
   },
   "devDependencies": {
-    "@scaleway/sdk-client": "^1.1.1"
+    "@scaleway/sdk-client": "workspace:^"
   },
  "bundledDependencies": [
     "@scaleway/random-name"

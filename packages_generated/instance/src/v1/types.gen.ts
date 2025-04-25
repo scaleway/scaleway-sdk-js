@@ -1099,6 +1099,19 @@ export type ApplyBlockMigrationRequest = {
   validationKey: string
 }
 
+export type AttachServerFileSystemRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  serverId: string
+  filesystemId: string
+}
+
+export interface AttachServerFileSystemResponse {
+  server?: Server
+}
+
 export type AttachServerVolumeRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1666,6 +1679,19 @@ export type DeleteVolumeRequest = {
    * UUID of the volume you want to delete.
    */
   volumeId: string
+}
+
+export type DetachServerFileSystemRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  serverId: string
+  filesystemId: string
+}
+
+export interface DetachServerFileSystemResponse {
+  server?: Server
 }
 
 export type DetachServerVolumeRequest = {

@@ -28,6 +28,8 @@ import {
   unmarshalAlertManager,
   unmarshalContactPoint,
   unmarshalDataSource,
+  unmarshalDisableAlertRulesResponse,
+  unmarshalEnableAlertRulesResponse,
   unmarshalGetConfigResponse,
   unmarshalGrafana,
   unmarshalGrafanaProductDashboard,
@@ -47,6 +49,8 @@ import type {
   AlertManager,
   ContactPoint,
   DataSource,
+  DisableAlertRulesResponse,
+  EnableAlertRulesResponse,
   GetConfigResponse,
   GlobalApiCreateGrafanaUserRequest,
   GlobalApiDeleteGrafanaUserRequest,
@@ -861,41 +865,49 @@ If you need to receive alerts for other receivers, you can create additional con
    * Enable preconfigured alert rules. Enable alert rules from the list of available preconfigured rules.. Enable preconfigured alert rules. Enable alert rules from the list of available preconfigured rules.
    *
    * @param request - The request {@link RegionalApiEnableAlertRulesRequest}
+   * @returns A Promise of EnableAlertRulesResponse
    */
   enableAlertRules = (
     request: Readonly<RegionalApiEnableAlertRulesRequest> = {},
   ) =>
-    this.client.fetch<void>({
-      body: JSON.stringify(
-        marshalRegionalApiEnableAlertRulesRequest(
-          request,
-          this.client.settings,
+    this.client.fetch<EnableAlertRulesResponse>(
+      {
+        body: JSON.stringify(
+          marshalRegionalApiEnableAlertRulesRequest(
+            request,
+            this.client.settings,
+          ),
         ),
-      ),
-      headers: jsonContentHeaders,
-      method: 'POST',
-      path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/enable-alert-rules`,
-    })
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/enable-alert-rules`,
+      },
+      unmarshalEnableAlertRulesResponse,
+    )
 
   /**
    * Disable preconfigured alert rules. Disable alert rules from the list of available preconfigured rules.. Disable preconfigured alert rules. Disable alert rules from the list of available preconfigured rules.
    *
    * @param request - The request {@link RegionalApiDisableAlertRulesRequest}
+   * @returns A Promise of DisableAlertRulesResponse
    */
   disableAlertRules = (
     request: Readonly<RegionalApiDisableAlertRulesRequest> = {},
   ) =>
-    this.client.fetch<void>({
-      body: JSON.stringify(
-        marshalRegionalApiDisableAlertRulesRequest(
-          request,
-          this.client.settings,
+    this.client.fetch<DisableAlertRulesResponse>(
+      {
+        body: JSON.stringify(
+          marshalRegionalApiDisableAlertRulesRequest(
+            request,
+            this.client.settings,
+          ),
         ),
-      ),
-      headers: jsonContentHeaders,
-      method: 'POST',
-      path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/disable-alert-rules`,
-    })
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/disable-alert-rules`,
+      },
+      unmarshalDisableAlertRulesResponse,
+    )
 
   /**
    * Trigger a test alert. Send a test alert to the Alert manager to make sure your contact points get notified.
