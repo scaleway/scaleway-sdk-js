@@ -1,4 +1,4 @@
-import { isJSONObject } from '../helpers/json'
+import { camelizeKeys, isJSONObject } from '../helpers/json'
 import { unmarshalArrayOfObject, unmarshalDate } from '../helpers/marshalling'
 import { fromByteArray } from '../vendor/base64'
 import type {
@@ -207,3 +207,61 @@ export const marshalTimeSeries = (
 export const marshalDecimal = (obj: Decimal): { value: string } => ({
   value: obj.toString(),
 })
+
+/**
+ * Unmarshals record to convert iso dates from string to Dates.
+ *
+ * @param obj - The input
+ * @param keys - The keys requiring a conversion
+ * @returns The updated input
+ *
+ * @internal
+ */
+export const unmarshalDates = <T>(obj: unknown, keys: string[]): T => {
+  if (Array.isArray(obj)) {
+    return obj.map(v => unmarshalDates(v, keys)) as unknown as T
+  }
+
+  if (obj && typeof obj === 'object') {
+    return Object.entries(obj).reduce(
+      (acc, [key, value]) => ({
+        ...acc,
+        [key]:
+          typeof value === 'string' && keys.includes(key)
+            ? new Date(value)
+            : unmarshalDates(value, keys),
+      }),
+      {},
+    ) as T
+  }
+
+  return obj as T
+}
+
+/**
+ * Unmarshals input to a record with camilized keys and instanciated Date.
+ *
+ * @param obj - The input
+ * @param ignoreKeys - The keys which should be not be transformed
+ * @param dateKeys - The keys which should be transformed to Date
+ * @returns The record
+ *
+ * @throws TypeError
+ * Thrown if the input isn't {@link JSONObject}.
+ *
+ * @internal
+ */
+export const unmarshalAnyRes = <T>(
+  obj: unknown,
+  ignoreKeys: string[] = [],
+  dateKeys?: string[],
+): T => {
+  if (!isJSONObject(obj)) {
+    throw new TypeError(`Data isn't a dictionary.`)
+  }
+
+  return camelizeKeys(
+    dateKeys && dateKeys.length > 0 ? unmarshalDates(obj, dateKeys) : obj,
+    ignoreKeys,
+  )
+}
