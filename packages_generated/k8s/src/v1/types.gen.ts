@@ -1465,17 +1465,6 @@ export interface ListVersionsResponse {
   versions: Version[]
 }
 
-export type MigrateClusterToSBSCSIRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  /**
-   * Cluster ID for which the latest CSI compatible with Scaleway Block Storage will be enabled.
-   */
-  clusterId: string
-}
-
 export interface NodeMetadata {
   id: string
   name: string

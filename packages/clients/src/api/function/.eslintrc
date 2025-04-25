@@ -1,6 +1,0 @@
-{
-  "root": false,
-  "rules": {
-    "@typescript-eslint/ban-types": "off"
-  }
-}

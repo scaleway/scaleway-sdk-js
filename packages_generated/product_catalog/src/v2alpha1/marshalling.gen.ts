@@ -8,7 +8,7 @@ import {
 import type {
   ListPublicCatalogProductsResponse,
   PublicCatalogProduct,
-  PublicCatalogProductEnvironmentalImpact,
+  PublicCatalogProductEnvironmentalImpactEstimation,
   PublicCatalogProductLocality,
   PublicCatalogProductPrice,
   PublicCatalogProductPriceUnitOfMeasure,
@@ -25,6 +25,7 @@ import type {
   PublicCatalogProductPropertiesHardwareRAM,
   PublicCatalogProductPropertiesHardwareStorage,
   PublicCatalogProductPropertiesInstance,
+  PublicCatalogProductUnitOfMeasure,
 } from './types.gen'
 
 const unmarshalPublicCatalogProductPropertiesHardwareCPUPhysical = (
@@ -247,19 +248,19 @@ const unmarshalPublicCatalogProductPropertiesInstance = (
   } as PublicCatalogProductPropertiesInstance
 }
 
-const unmarshalPublicCatalogProductEnvironmentalImpact = (
+const unmarshalPublicCatalogProductEnvironmentalImpactEstimation = (
   data: unknown,
-): PublicCatalogProductEnvironmentalImpact => {
+): PublicCatalogProductEnvironmentalImpactEstimation => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'PublicCatalogProductEnvironmentalImpact' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'PublicCatalogProductEnvironmentalImpactEstimation' failed as data isn't a dictionary.`,
     )
   }
 
   return {
     kgCo2Equivalent: data.kg_co2_equivalent,
     m3WaterUsage: data.m3_water_usage,
-  } as PublicCatalogProductEnvironmentalImpact
+  } as PublicCatalogProductEnvironmentalImpactEstimation
 }
 
 const unmarshalPublicCatalogProductLocality = (
@@ -326,6 +327,21 @@ const unmarshalPublicCatalogProductProperties = (
   } as PublicCatalogProductProperties
 }
 
+const unmarshalPublicCatalogProductUnitOfMeasure = (
+  data: unknown,
+): PublicCatalogProductUnitOfMeasure => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductUnitOfMeasure' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    size: data.size,
+    unit: data.unit,
+  } as PublicCatalogProductUnitOfMeasure
+}
+
 const unmarshalPublicCatalogProduct = (data: unknown): PublicCatalogProduct => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -335,9 +351,9 @@ const unmarshalPublicCatalogProduct = (data: unknown): PublicCatalogProduct => {
 
   return {
     description: data.description,
-    environmentalImpact: data.environmental_impact
-      ? unmarshalPublicCatalogProductEnvironmentalImpact(
-          data.environmental_impact,
+    environmentalImpactEstimation: data.environmental_impact_estimation
+      ? unmarshalPublicCatalogProductEnvironmentalImpactEstimation(
+          data.environmental_impact_estimation,
         )
       : undefined,
     locality: data.locality
@@ -352,6 +368,9 @@ const unmarshalPublicCatalogProduct = (data: unknown): PublicCatalogProduct => {
       : undefined,
     serviceCategory: data.service_category,
     sku: data.sku,
+    unitOfMeasure: data.unit_of_measure
+      ? unmarshalPublicCatalogProductUnitOfMeasure(data.unit_of_measure)
+      : undefined,
     variant: data.variant,
   } as PublicCatalogProduct
 }
