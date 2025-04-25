@@ -11,6 +11,8 @@ import {
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   ApplyBlockMigrationRequest,
+  AttachServerFileSystemRequest,
+  AttachServerFileSystemResponse,
   AttachServerVolumeRequest,
   AttachServerVolumeResponse,
   Bootscript,
@@ -34,6 +36,8 @@ import type {
   CreateVolumeRequest,
   CreateVolumeResponse,
   Dashboard,
+  DetachServerFileSystemRequest,
+  DetachServerFileSystemResponse,
   DetachServerVolumeRequest,
   DetachServerVolumeResponse,
   ExportSnapshotRequest,
@@ -441,6 +445,20 @@ const unmarshalServer = (data: unknown): Server => {
   } as Server
 }
 
+export const unmarshalAttachServerFileSystemResponse = (
+  data: unknown,
+): AttachServerFileSystemResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AttachServerFileSystemResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    server: data.server ? unmarshalServer(data.server) : undefined,
+  } as AttachServerFileSystemResponse
+}
+
 export const unmarshalAttachServerVolumeResponse = (
   data: unknown,
 ): AttachServerVolumeResponse => {
@@ -715,6 +733,20 @@ export const unmarshalCreateVolumeResponse = (
   return {
     volume: data.volume ? unmarshalVolume(data.volume) : undefined,
   } as CreateVolumeResponse
+}
+
+export const unmarshalDetachServerFileSystemResponse = (
+  data: unknown,
+): DetachServerFileSystemResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DetachServerFileSystemResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    server: data.server ? unmarshalServer(data.server) : undefined,
+  } as DetachServerFileSystemResponse
 }
 
 export const unmarshalDetachServerVolumeResponse = (
@@ -1651,6 +1683,13 @@ export const marshalApplyBlockMigrationRequest = (
   ]),
 })
 
+export const marshalAttachServerFileSystemRequest = (
+  request: AttachServerFileSystemRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  filesystem_id: request.filesystemId,
+})
+
 export const marshalAttachServerVolumeRequest = (
   request: AttachServerVolumeRequest,
   defaults: DefaultValues,
@@ -1914,6 +1953,13 @@ export const marshalCreateVolumeRequest = (
     { param: 'size', value: request.size },
     { param: 'base_snapshot', value: request.baseSnapshot },
   ]),
+})
+
+export const marshalDetachServerFileSystemRequest = (
+  request: DetachServerFileSystemRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  filesystem_id: request.filesystemId,
 })
 
 export const marshalDetachServerVolumeRequest = (

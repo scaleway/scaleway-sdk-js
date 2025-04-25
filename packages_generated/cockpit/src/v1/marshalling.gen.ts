@@ -13,6 +13,8 @@ import type {
   ContactPoint,
   ContactPointEmail,
   DataSource,
+  DisableAlertRulesResponse,
+  EnableAlertRulesResponse,
   GetConfigResponse,
   GetConfigResponseRetention,
   GlobalApiCreateGrafanaUserRequest,
@@ -181,6 +183,34 @@ export const unmarshalAlertManager = (data: unknown): AlertManager => {
     managedAlertsEnabled: data.managed_alerts_enabled,
     region: data.region,
   } as AlertManager
+}
+
+export const unmarshalDisableAlertRulesResponse = (
+  data: unknown,
+): DisableAlertRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DisableAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    disabledRuleIds: data.disabled_rule_ids,
+  } as DisableAlertRulesResponse
+}
+
+export const unmarshalEnableAlertRulesResponse = (
+  data: unknown,
+): EnableAlertRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EnableAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    enabledRuleIds: data.enabled_rule_ids,
+  } as EnableAlertRulesResponse
 }
 
 const unmarshalGetConfigResponseRetention = (

@@ -41,6 +41,34 @@ export type PublicCatalogProductPropertiesHardwareCPUArch =
   | 'riscv'
   | 'apple_silicon'
 
+export type PublicCatalogProductUnitOfMeasureCountableUnit =
+  | 'unknown_countable_unit'
+  | 'chunk'
+  | 'core'
+  | 'currency'
+  | 'device'
+  | 'domain'
+  | 'email'
+  | 'gb_s'
+  | 'gigabyte'
+  | 'hour'
+  | 'iops_gigabyte'
+  | 'ip'
+  | 'month'
+  | 'node'
+  | 'plan'
+  | 'query'
+  | 'request'
+  | 'session'
+  | 'vcpu_s'
+  | 'version'
+  | 'year'
+  | 'key'
+  | 'token'
+  | 'minute'
+  | 'setup'
+  | 'day'
+
 export interface PublicCatalogProductPropertiesHardwareCPUPhysical {
   /**
    * The number of sockets of the CPU.
@@ -224,14 +252,8 @@ export interface PublicCatalogProductPropertiesInstance {
   range: string
 }
 
-export interface PublicCatalogProductEnvironmentalImpact {
-  /**
-   * Kilograms of CO2 that would need to be released to produce the equivalent warming impact.
-   */
+export interface PublicCatalogProductEnvironmentalImpactEstimation {
   kgCo2Equivalent?: number
-  /**
-   * Cubic meters of water used.
-   */
   m3WaterUsage?: number
 }
 
@@ -268,7 +290,7 @@ export interface PublicCatalogProductPrice {
    */
   retailPrice?: Money
   /**
-   * The unit of measure of the price.
+   * @deprecated The unit of measure of the price (deprecated).
    */
   unitOfMeasure?: PublicCatalogProductPriceUnitOfMeasure
 }
@@ -302,6 +324,11 @@ export interface PublicCatalogProductProperties {
    * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance' could be set.
    */
   instance?: PublicCatalogProductPropertiesInstance
+}
+
+export interface PublicCatalogProductUnitOfMeasure {
+  unit: PublicCatalogProductUnitOfMeasureCountableUnit
+  size: number
 }
 
 export interface PublicCatalogProduct {
@@ -338,9 +365,13 @@ export interface PublicCatalogProduct {
    */
   properties?: PublicCatalogProductProperties
   /**
-   * The environmental impact of the product.
+   * The environmental impact estimation of the product.
    */
-  environmentalImpact?: PublicCatalogProductEnvironmentalImpact
+  environmentalImpactEstimation?: PublicCatalogProductEnvironmentalImpactEstimation
+  /**
+   * The unit of measure of the product.
+   */
+  unitOfMeasure?: PublicCatalogProductUnitOfMeasure
 }
 
 export interface ListPublicCatalogProductsResponse {
