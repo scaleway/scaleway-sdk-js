@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-webhosting",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Scaleway SDK webhosting",
   "types": "dist/index.d.ts",
   "files": [

@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-instance",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Scaleway SDK instance",
   "types": "dist/index.d.ts",
   "files": [

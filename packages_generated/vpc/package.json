@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-vpc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Scaleway SDK vpc",
   "types": "dist/index.d.ts",
   "files": [

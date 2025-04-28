@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-billing",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Scaleway SDK billing",
   "types": "dist/index.d.ts",
   "files": [
