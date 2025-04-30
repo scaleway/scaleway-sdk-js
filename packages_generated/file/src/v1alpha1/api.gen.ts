@@ -175,7 +175,6 @@ This can be modified using the `order_by` field.
 
   /**
    * Update filesystem properties. Update the technical details of a filesystem, such as its name, tags or its new size.
-You can only resize a filesystem to a larger size.
    *
    * @param request - The request {@link UpdateFileSystemRequest}
    * @returns A Promise of FileSystem
