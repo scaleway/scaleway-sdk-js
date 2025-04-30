@@ -127,6 +127,7 @@ export const unmarshalFunction = (data: unknown): Function => {
       unmarshalSecretHashedValue,
     ),
     status: data.status,
+    tags: data.tags,
     timeout: data.timeout,
     updatedAt: unmarshalDate(data.updated_at),
   } as Function
@@ -459,6 +460,7 @@ export const marshalCreateFunctionRequest = (
           marshalSecret(elt, defaults),
         )
       : undefined,
+  tags: request.tags,
   timeout: request.timeout,
 })
 
@@ -592,6 +594,7 @@ export const marshalUpdateFunctionRequest = (
           marshalSecret(elt, defaults),
         )
       : undefined,
+  tags: request.tags,
   timeout: request.timeout,
 })
 
