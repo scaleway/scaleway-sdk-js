@@ -9,8 +9,6 @@ export type {
   PublicCatalogProductEnvironmentalImpactEstimation,
   PublicCatalogProductLocality,
   PublicCatalogProductPrice,
-  PublicCatalogProductPriceUnitOfMeasure,
-  PublicCatalogProductPriceUnitOfMeasureCountableUnit,
   PublicCatalogProductProperties,
   PublicCatalogProductPropertiesAppleSilicon,
   PublicCatalogProductPropertiesDedibox,
