@@ -711,10 +711,6 @@ export interface Cluster {
    */
   commitmentEndsAt?: Date
   /**
-   * @deprecated Defines whether the SBS-enabled CSI starting from v0.3 is installed on the cluster.
-   */
-  sbsCsiEnabled?: boolean
-  /**
    * @deprecated Defines whether ACL is available on the cluster.
    */
   aclAvailable?: boolean

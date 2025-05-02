@@ -163,6 +163,7 @@ export const unmarshalContainer = (data: unknown): Container => {
       unmarshalSecretHashedValue,
     ),
     status: data.status,
+    tags: data.tags,
     timeout: data.timeout,
     updatedAt: unmarshalDate(data.updated_at),
   } as Container
@@ -511,6 +512,7 @@ export const marshalCreateContainerRequest = (
           marshalSecret(elt, defaults),
         )
       : undefined,
+  tags: request.tags,
   timeout: request.timeout,
 })
 
@@ -664,6 +666,7 @@ export const marshalUpdateContainerRequest = (
           marshalSecret(elt, defaults),
         )
       : undefined,
+  tags: request.tags,
   timeout: request.timeout,
 })
 
