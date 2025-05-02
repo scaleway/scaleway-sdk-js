@@ -6,34 +6,6 @@ import type {
   Zone as ScwZone,
 } from '@scaleway/sdk-client'
 
-export type PublicCatalogProductPriceUnitOfMeasureCountableUnit =
-  | 'unknown_countable_unit'
-  | 'chunk'
-  | 'core'
-  | 'currency'
-  | 'device'
-  | 'domain'
-  | 'email'
-  | 'gb_s'
-  | 'gigabyte'
-  | 'hour'
-  | 'iops_gigabyte'
-  | 'ip'
-  | 'month'
-  | 'node'
-  | 'plan'
-  | 'query'
-  | 'request'
-  | 'session'
-  | 'vcpu_s'
-  | 'version'
-  | 'year'
-  | 'key'
-  | 'token'
-  | 'minute'
-  | 'setup'
-  | 'day'
-
 export type PublicCatalogProductPropertiesHardwareCPUArch =
   | 'unknown_arch'
   | 'x64'
@@ -190,17 +162,6 @@ export interface PublicCatalogProductPropertiesHardwareStorage {
   total: number
 }
 
-export interface PublicCatalogProductPriceUnitOfMeasure {
-  /**
-   * The unit of measure.
-   */
-  unit: PublicCatalogProductPriceUnitOfMeasureCountableUnit
-  /**
-   * The size of the unit.
-   */
-  size: number
-}
-
 export interface PublicCatalogProductPropertiesAppleSilicon {
   /**
    * The range of the Apple Silicon server.
@@ -289,10 +250,6 @@ export interface PublicCatalogProductPrice {
    * The retail price of the product.
    */
   retailPrice?: Money
-  /**
-   * @deprecated The unit of measure of the price (deprecated).
-   */
-  unitOfMeasure?: PublicCatalogProductPriceUnitOfMeasure
 }
 
 export interface PublicCatalogProductProperties {

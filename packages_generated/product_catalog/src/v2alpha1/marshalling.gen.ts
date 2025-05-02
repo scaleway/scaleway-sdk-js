@@ -11,7 +11,6 @@ import type {
   PublicCatalogProductEnvironmentalImpactEstimation,
   PublicCatalogProductLocality,
   PublicCatalogProductPrice,
-  PublicCatalogProductPriceUnitOfMeasure,
   PublicCatalogProductProperties,
   PublicCatalogProductPropertiesAppleSilicon,
   PublicCatalogProductPropertiesDedibox,
@@ -149,21 +148,6 @@ const unmarshalPublicCatalogProductPropertiesHardwareStorage = (
   } as PublicCatalogProductPropertiesHardwareStorage
 }
 
-const unmarshalPublicCatalogProductPriceUnitOfMeasure = (
-  data: unknown,
-): PublicCatalogProductPriceUnitOfMeasure => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PublicCatalogProductPriceUnitOfMeasure' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    size: data.size,
-    unit: data.unit,
-  } as PublicCatalogProductPriceUnitOfMeasure
-}
-
 const unmarshalPublicCatalogProductPropertiesAppleSilicon = (
   data: unknown,
 ): PublicCatalogProductPropertiesAppleSilicon => {
@@ -292,9 +276,6 @@ const unmarshalPublicCatalogProductPrice = (
   return {
     retailPrice: data.retail_price
       ? unmarshalMoney(data.retail_price)
-      : undefined,
-    unitOfMeasure: data.unit_of_measure
-      ? unmarshalPublicCatalogProductPriceUnitOfMeasure(data.unit_of_measure)
       : undefined,
   } as PublicCatalogProductPrice
 }
