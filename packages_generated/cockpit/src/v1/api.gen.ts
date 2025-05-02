@@ -862,7 +862,7 @@ If you need to receive alerts for other receivers, you can create additional con
     )
 
   /**
-   * Enable preconfigured alert rules. Enable alert rules from the list of available preconfigured rules.. Enable preconfigured alert rules. Enable alert rules from the list of available preconfigured rules.
+   * Enable preconfigured alert rules. Enable alert rules from the list of available preconfigured rules.
    *
    * @param request - The request {@link RegionalApiEnableAlertRulesRequest}
    * @returns A Promise of EnableAlertRulesResponse
@@ -886,7 +886,7 @@ If you need to receive alerts for other receivers, you can create additional con
     )
 
   /**
-   * Disable preconfigured alert rules. Disable alert rules from the list of available preconfigured rules.. Disable preconfigured alert rules. Disable alert rules from the list of available preconfigured rules.
+   * Disable preconfigured alert rules. Disable alert rules from the list of available preconfigured rules.
    *
    * @param request - The request {@link RegionalApiDisableAlertRulesRequest}
    * @returns A Promise of DisableAlertRulesResponse
