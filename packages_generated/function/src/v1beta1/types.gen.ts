@@ -405,6 +405,10 @@ export interface Function {
    * Last date when the function was successfully deployed and set to ready.
    */
   readyAt?: Date
+  /**
+   * List of tags applied to the Serverless Function.
+   */
+  tags: string[]
 }
 
 export interface Namespace {
@@ -457,7 +461,7 @@ export interface Namespace {
    */
   region: ScwRegion
   /**
-   * [ALPHA] List of tags applied to the Serverless Function Namespace.
+   * List of tags applied to the Serverless Function Namespace.
    */
   tags: string[]
   /**
@@ -661,6 +665,10 @@ export type CreateFunctionRequest = {
    * Execution environment of the function.
    */
   sandbox?: FunctionSandbox
+  /**
+   * Tags of the Serverless Function.
+   */
+  tags?: string[]
 }
 
 export type CreateNamespaceRequest = {
@@ -686,7 +694,7 @@ export type CreateNamespaceRequest = {
    */
   secretEnvironmentVariables?: Secret[]
   /**
-   * [ALPHA] Tags of the Serverless Function Namespace.
+   * Tags of the Serverless Function Namespace.
    */
   tags?: string[]
 }
@@ -1270,6 +1278,10 @@ export type UpdateFunctionRequest = {
    * Execution environment of the function.
    */
   sandbox?: FunctionSandbox
+  /**
+   * Tags of the Serverless Function.
+   */
+  tags?: string[]
 }
 
 export type UpdateNamespaceRequest = {
@@ -1294,7 +1306,7 @@ export type UpdateNamespaceRequest = {
    */
   secretEnvironmentVariables?: Secret[]
   /**
-   * [ALPHA] Tags of the Serverless Function Namespace.
+   * Tags of the Serverless Function Namespace.
    */
   tags?: string[]
 }

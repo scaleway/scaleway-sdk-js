@@ -364,6 +364,10 @@ export interface Container {
    * Region in which the container will be deployed.
    */
   region: ScwRegion
+  /**
+   * List of tags applied to the Serverless Container.
+   */
+  tags: string[]
 }
 
 export interface Cron {
@@ -470,7 +474,7 @@ export interface Namespace {
    */
   region: ScwRegion
   /**
-   * [ALPHA] List of tags applied to the Serverless Container Namespace.
+   * List of tags applied to the Serverless Container Namespace.
    */
   tags: string[]
   /**
@@ -666,6 +670,10 @@ export type CreateContainerRequest = {
    * Health check configuration of the container.
    */
   healthCheck?: ContainerHealthCheckSpec
+  /**
+   * Tags of the Serverless Container.
+   */
+  tags?: string[]
 }
 
 export type CreateCronRequest = {
@@ -732,7 +740,7 @@ export type CreateNamespaceRequest = {
    */
   secretEnvironmentVariables?: Secret[]
   /**
-   * [ALPHA] Tags of the Serverless Container Namespace.
+   * Tags of the Serverless Container Namespace.
    */
   tags?: string[]
 }
@@ -1261,6 +1269,10 @@ export type UpdateContainerRequest = {
    * Health check configuration of the container.
    */
   healthCheck?: ContainerHealthCheckSpec
+  /**
+   * Tags of the Serverless Container.
+   */
+  tags?: string[]
 }
 
 export type UpdateCronRequest = {
@@ -1312,7 +1324,7 @@ export type UpdateNamespaceRequest = {
    */
   secretEnvironmentVariables?: Secret[]
   /**
-   * [ALPHA] Tags of the Serverless Container Namespace.
+   * Tags of the Serverless Container Namespace.
    */
   tags?: string[]
 }
