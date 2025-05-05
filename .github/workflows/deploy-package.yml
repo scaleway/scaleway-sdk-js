@@ -30,15 +30,14 @@ jobs:
           check-latest: true
       - run: pnpm install
       - run: pnpm run build
-      - run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Version package with lerna
-        run: pnpm lerna version -y --no-private
+        run: pnpm lerna version -y --no-private --create-release github
         env:
           HUSKY: 0
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Publish to npm
         run: pnpm -r publish --access public --tag latest
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
