@@ -27,3 +27,7 @@ coverage
 # Protobuf definition
 protobuf
 .bufcache
+
+
+# lerna
+lerna-debug.log
