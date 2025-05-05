@@ -33,7 +33,14 @@ jobs:
       - run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: pnpm lerna publish -y --create-release github
+      - name: Version package with lerna
+        run: pnpm run release:version
         env:
           HUSKY: 0
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Push version and tags
+        run: git push origin HEAD:main --follow-tags
+
+      - name: Publish to npm
+        run: pnpm run release:publish

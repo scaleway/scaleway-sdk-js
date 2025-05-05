@@ -23,6 +23,8 @@
     "format": "biome check  --linter-enabled=false --write .",
     "format:check": "biome check --linter-enabled=false --verbose .",
     "prettier": "prettier --write '**/*.{md,mdx,yml,yaml}'",
+    "release:version": "pnpm lerna version -y --create-release-github",
+    "release:publish": "pnpm -r publish --access public --no-git-checks",
     "lint": "eslint --cache .",
     "prepare": "husky",
     "test": "vitest run",
