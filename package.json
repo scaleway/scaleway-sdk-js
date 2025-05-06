@@ -7,7 +7,7 @@
   ],
   "engines": {
     "node": ">=18.0",
-    "pnpm": ">=10.9.0"
+    "pnpm": ">=10.10.0"
   },
   "type": "module",
   "scripts": {
@@ -87,5 +87,5 @@
     "vite": "6.3.4",
     "vitest": "3.1.2"
   },
-  "packageManager": "pnpm@10.9.0"
+  "packageManager": "pnpm@10.10.0"
 }
