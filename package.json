@@ -58,7 +58,7 @@
     "@biomejs/biome": "1.9.4",
     "@commitlint/cli": "19.8.0",
     "@commitlint/config-conventional": "19.8.0",
-    "@manypkg/cli": "0.23.0",
+    "@manypkg/cli": "0.24.0",
     "@scaleway/eslint-config-react": "4.0.9",
     "@scaleway/random-name": "5.1.1",
     "@typescript-eslint/eslint-plugin": "latest",
