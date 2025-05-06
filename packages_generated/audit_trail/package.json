@@ -44,8 +44,5 @@
   },
   "devDependencies": {
     "@scaleway/sdk-client": "workspace:^"
-  },
-  "bundledDependencies": [
-    "@scaleway/random-name"
-  ]
+  }
 }
