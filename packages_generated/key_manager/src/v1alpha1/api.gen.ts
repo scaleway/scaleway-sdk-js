@@ -19,6 +19,7 @@ import {
   unmarshalEncryptResponse,
   unmarshalKey,
   unmarshalListKeysResponse,
+  unmarshalPublicKey,
 } from './marshalling.gen'
 import type {
   CreateKeyRequest,
@@ -33,11 +34,13 @@ import type {
   EncryptResponse,
   GenerateDataKeyRequest,
   GetKeyRequest,
+  GetPublicKeyRequest,
   ImportKeyMaterialRequest,
   Key,
   ListKeysRequest,
   ListKeysResponse,
   ProtectKeyRequest,
+  PublicKey,
   RotateKeyRequest,
   UnprotectKeyRequest,
   UpdateKeyRequest,
@@ -92,6 +95,21 @@ export class API extends ParentAPI {
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}`,
       },
       unmarshalKey,
+    )
+
+  /**
+   * Get the public key in PEM format.. Retrieves the public portion of an asymmetric cryptographic key in PEM format.
+   *
+   * @param request - The request {@link GetPublicKeyRequest}
+   * @returns A Promise of PublicKey
+   */
+  getPublicKey = (request: Readonly<GetPublicKeyRequest>) =>
+    this.client.fetch<PublicKey>(
+      {
+        method: 'GET',
+        path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/public-key`,
+      },
+      unmarshalPublicKey,
     )
 
   /**

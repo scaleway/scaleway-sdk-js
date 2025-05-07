@@ -314,6 +314,17 @@ export type GetKeyRequest = {
   keyId: string
 }
 
+export type GetPublicKeyRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the key.
+   */
+  keyId: string
+}
+
 export type ImportKeyMaterialRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -379,6 +390,10 @@ export type ProtectKeyRequest = {
    * ID of the key to apply key protection to.
    */
   keyId: string
+}
+
+export interface PublicKey {
+  pem: string
 }
 
 export type RotateKeyRequest = {
