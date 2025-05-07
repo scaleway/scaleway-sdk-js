@@ -20,6 +20,7 @@ import type {
   KeyRotationPolicy,
   KeyUsage,
   ListKeysResponse,
+  PublicKey,
   UpdateKeyRequest,
 } from './types.gen'
 
@@ -133,6 +134,18 @@ export const unmarshalListKeysResponse = (data: unknown): ListKeysResponse => {
     keys: unmarshalArrayOfObject(data.keys, unmarshalKey),
     totalCount: data.total_count,
   } as ListKeysResponse
+}
+
+export const unmarshalPublicKey = (data: unknown): PublicKey => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicKey' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    pem: data.pem,
+  } as PublicKey
 }
 
 const marshalKeyRotationPolicy = (
