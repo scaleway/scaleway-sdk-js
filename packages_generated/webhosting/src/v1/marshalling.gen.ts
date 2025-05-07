@@ -272,6 +272,7 @@ const unmarshalHostingUser = (data: unknown): HostingUser => {
   return {
     contactEmail: data.contact_email,
     oneTimePassword: data.one_time_password,
+    oneTimePasswordB64: data.one_time_password_b64,
     username: data.username,
   } as HostingUser
 }
@@ -529,6 +530,7 @@ export const unmarshalResetHostingPasswordResponse = (
 
   return {
     oneTimePassword: data.one_time_password,
+    oneTimePasswordB64: data.one_time_password_b64,
   } as ResetHostingPasswordResponse
 }
 
