@@ -56,8 +56,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@commitlint/cli": "19.8.0",
-    "@commitlint/config-conventional": "19.8.0",
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
     "@manypkg/cli": "0.24.0",
     "@scaleway/eslint-config-react": "4.0.9",
     "@typescript-eslint/eslint-plugin": "8.32.0",
