@@ -13,7 +13,7 @@
     "@scaleway/sdk": "^2.0"
   },
   "devDependencies": {
-    "@types/node": "20.17.32",
+    "@types/node": "20.17.46",
     "typescript": "5.8.3"
   }
 }
