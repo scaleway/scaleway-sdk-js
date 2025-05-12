@@ -120,6 +120,9 @@ importers:
       '@scaleway/sdk-audit-trail':
         specifier: workspace:*
         version: link:../../packages_generated/audit_trail
+      '@scaleway/sdk-autoscaling':
+        specifier: workspace:*
+        version: link:../../packages_generated/autoscaling
       '@scaleway/sdk-baremetal':
         specifier: workspace:*
         version: link:../../packages_generated/baremetal

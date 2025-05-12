@@ -39,6 +39,7 @@
     "@scaleway/sdk-account": "workspace:*",
     "@scaleway/sdk-applesilicon": "workspace:*",
     "@scaleway/sdk-audit-trail": "workspace:*",
+    "@scaleway/sdk-autoscaling": "workspace:*",
     "@scaleway/sdk-baremetal": "workspace:*",
     "@scaleway/sdk-billing": "workspace:*",
     "@scaleway/sdk-block": "workspace:*",
