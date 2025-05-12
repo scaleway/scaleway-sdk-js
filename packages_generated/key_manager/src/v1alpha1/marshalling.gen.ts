@@ -21,7 +21,11 @@ import type {
   KeyUsage,
   ListKeysResponse,
   PublicKey,
+  SignRequest,
+  SignResponse,
   UpdateKeyRequest,
+  VerifyRequest,
+  VerifyResponse,
 } from './types.gen'
 
 const unmarshalKeyRotationPolicy = (data: unknown): KeyRotationPolicy => {
@@ -45,6 +49,12 @@ const unmarshalKeyUsage = (data: unknown): KeyUsage => {
   }
 
   return {
+    asymmetricEncryption: data.asymmetric_encryption
+      ? data.asymmetric_encryption
+      : undefined,
+    asymmetricSigning: data.asymmetric_signing
+      ? data.asymmetric_signing
+      : undefined,
     symmetricEncryption: data.symmetric_encryption
       ? data.symmetric_encryption
       : undefined,
@@ -148,6 +158,32 @@ export const unmarshalPublicKey = (data: unknown): PublicKey => {
   } as PublicKey
 }
 
+export const unmarshalSignResponse = (data: unknown): SignResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SignResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    keyId: data.key_id,
+    signature: data.signature,
+  } as SignResponse
+}
+
+export const unmarshalVerifyResponse = (data: unknown): VerifyResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VerifyResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    keyId: data.key_id,
+    valid: data.valid,
+  } as VerifyResponse
+}
+
 const marshalKeyRotationPolicy = (
   request: KeyRotationPolicy,
   defaults: DefaultValues,
@@ -162,6 +198,8 @@ const marshalKeyUsage = (
 ): Record<string, unknown> => ({
   ...resolveOneOf([
     { param: 'symmetric_encryption', value: request.symmetricEncryption },
+    { param: 'asymmetric_encryption', value: request.asymmetricEncryption },
+    { param: 'asymmetric_signing', value: request.asymmetricSigning },
   ]),
 })
 
@@ -217,6 +255,13 @@ export const marshalImportKeyMaterialRequest = (
   salt: request.salt,
 })
 
+export const marshalSignRequest = (
+  request: SignRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  digest: request.digest,
+})
+
 export const marshalUpdateKeyRequest = (
   request: UpdateKeyRequest,
   defaults: DefaultValues,
@@ -228,4 +273,12 @@ export const marshalUpdateKeyRequest = (
       ? marshalKeyRotationPolicy(request.rotationPolicy, defaults)
       : undefined,
   tags: request.tags,
+})
+
+export const marshalVerifyRequest = (
+  request: VerifyRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  digest: request.digest,
+  signature: request.signature,
 })
