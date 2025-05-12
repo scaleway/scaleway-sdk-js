@@ -15,7 +15,7 @@ const externalPkgs = [
 const external = (id: string) => {
   const match = (dependency: string) => new RegExp(`^${dependency}`).test(id)
   const isExternal = externalPkgs.some(match)
-  const isBundled = pkg.bundleDependencies?.some(match) // alias of bundledDependencies package.json field array
+  const isBundled = pkg.bundleDependencies?.some(match) // alias of bundleDependencies package.json field array
 
   return isExternal && !isBundled
 }

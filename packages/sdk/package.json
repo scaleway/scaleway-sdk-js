@@ -36,7 +36,6 @@
     "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
   },
   "dependencies": {
-    "@scaleway/random-name": "5.1.1",
     "@scaleway/sdk-account": "workspace:*",
     "@scaleway/sdk-applesilicon": "workspace:*",
     "@scaleway/sdk-audit-trail": "workspace:*",
@@ -83,8 +82,5 @@
   },
   "peerDependencies": {
     "@scaleway/sdk-client": "workspace:^"
-  },
-  "bundledDependencies": [
-    "@scaleway/random-name"
-  ]
+  }
 }
