@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-std",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Scaleway SDK Std",
   "types": "dist/index.d.ts",
   "files": [
@@ -20,7 +20,7 @@
     "directory": "packages_generated/std"
   },
   "engines": {
-    "node": ">=20.19.0"
+    "node": ">=20.19.1"
   },
   "scripts": {
     "package:check": "pnpm publint",
@@ -34,8 +34,5 @@
   },
   "peerDependencies": {
     "@scaleway/sdk-client": "workspace:^"
-  },
-  "bundledDependencies": [
-    "@scaleway/sdk-client"
-  ]
+  }
 }

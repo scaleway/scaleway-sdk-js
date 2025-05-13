@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-dedibox",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Scaleway SDK dedibox",
   "types": "dist/index.d.ts",
   "files": [
@@ -26,7 +26,7 @@
     "directory": "packages_generated/dedibox"
   },
   "engines": {
-    "node": ">=20.18.3"
+    "node": ">=20.19.1"
   },
   "scripts": {
     "package:check": "pnpm publint",
@@ -44,8 +44,5 @@
   },
   "devDependencies": {
     "@scaleway/sdk-client": "workspace:^"
-  },
-  "bundledDependencies": [
-    "@scaleway/random-name"
-  ]
+  }
 }

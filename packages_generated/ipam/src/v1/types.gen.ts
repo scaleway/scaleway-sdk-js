@@ -33,6 +33,7 @@ export type ResourceType =
   | 'serverless_container'
   | 'serverless_function'
   | 'vpn_gateway'
+  | 'ddl_datalab'
 
 export interface Resource {
   /**

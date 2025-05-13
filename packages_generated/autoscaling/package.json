@@ -1,7 +1,7 @@
 {
-  "name": "@scaleway-internal/sdk-abuse-admin",
-  "version": "1.0.0",
-  "description": "Scaleway SDK abuse-admin",
+  "name": "@scaleway/sdk-autoscaling",
+  "version": "1.1.1",
+  "description": "Scaleway SDK autoscaling",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
@@ -23,10 +23,10 @@
   },
   "repository": {
     "type": "git",
-    "directory": "packages_generated/abuse-admin"
+    "directory": "packages_generated/autoscaling"
   },
   "engines": {
-    "node": ">=20.18.3"
+    "node": ">=20.19.1"
   },
   "scripts": {
     "package:check": "pnpm publint",
@@ -36,20 +36,13 @@
     "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
   },
   "dependencies": {
-    "@scaleway/sdk-std": "workspace:*",
-    "@scaleway-internal/sdk-abuse": "workspace:*",
-    "@scaleway-internal/sdk-abuse-private": "workspace:*",
-    "@scaleway-internal/sdk-trustandsafety-private": "workspace:*",
     "@scaleway/random-name": "5.1.1",
-    "@scaleway/sdk-client": "workspace:^"
+    "@scaleway/sdk-std": "workspace:*"
   },
   "peerDependencies": {
     "@scaleway/sdk-client": "workspace:^"
   },
   "devDependencies": {
     "@scaleway/sdk-client": "workspace:^"
-  },
- "bundledDependencies": [
-    "@scaleway/random-name"
-  ]
+  }
 }

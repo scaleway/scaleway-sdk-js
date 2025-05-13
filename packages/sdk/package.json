@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk",
-  "version": "2.75.3",
+  "version": "2.76.1",
   "description": "Scaleway SDK TS.",
   "types": "dist/index.d.ts",
   "files": [
@@ -26,7 +26,7 @@
     "directory": "packages/sdk"
   },
   "engines": {
-    "node": ">=20.19.0"
+    "node": ">=20.19.1"
   },
   "scripts": {
     "package:check": "pnpm publint",
@@ -36,10 +36,10 @@
     "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
   },
   "dependencies": {
-    "@scaleway/random-name": "5.1.1",
     "@scaleway/sdk-account": "workspace:*",
     "@scaleway/sdk-applesilicon": "workspace:*",
     "@scaleway/sdk-audit-trail": "workspace:*",
+    "@scaleway/sdk-autoscaling": "workspace:*",
     "@scaleway/sdk-baremetal": "workspace:*",
     "@scaleway/sdk-billing": "workspace:*",
     "@scaleway/sdk-block": "workspace:*",
@@ -83,8 +83,5 @@
   },
   "peerDependencies": {
     "@scaleway/sdk-client": "workspace:^"
-  },
-  "bundledDependencies": [
-    "@scaleway/random-name"
-  ]
+  }
 }

@@ -23,22 +23,25 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - uses: pnpm/action-setup@v4.1.0
+
       - name: Use Node.js
-        uses: actions/setup-node@v4.1.0
+        uses: actions/setup-node@v4.4.0
         with:
+          registry-url: 'https://registry.npmjs.org/'
           node-version: 20
           check-latest: true
       - run: pnpm install
       - run: pnpm run build
-      - run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Version package with lerna
-        run: pnpm lerna version -y --no-private
+        run: pnpm lerna version -y --no-private --force-git-tag --create-release github
         env:
           HUSKY: 0
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
+      # https://docs.github.com/en/actions/use-cases-and-examples/publishing-packages/publishing-nodejs-packages#publishing-packages-to-the-npm-registry
       - name: Publish to npm
         run: pnpm -r publish --access public --tag latest
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

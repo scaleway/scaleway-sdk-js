@@ -161,7 +161,7 @@ export interface PlatformControlPanel {
    */
   name: string
   /**
-   * URL to connect to cPanel dashboard and to Webmail interface.
+   * URL to connect to control panel dashboard and to Webmail interface.
    */
   urls?: PlatformControlPanelUrls
 }
@@ -265,17 +265,21 @@ export interface Nameserver {
 
 export interface HostingUser {
   /**
-   * Main Web Hosting cPanel username.
+   * Main Web Hosting control panel username.
    */
   username: string
   /**
-   * One-time-password used for the first login or reset password, empty after first use.
+   * @deprecated One-time-password used for the first login to the control panel, cleared after first use (deprecated, use password_b64 instead).
    */
   oneTimePassword?: string
   /**
    * Contact email used for the hosting.
    */
   contactEmail: string
+  /**
+   * One-time-password used for the first login to the control panel, cleared after first use, encoded in base64.
+   */
+  oneTimePasswordB64?: string
 }
 
 export interface Offer {
@@ -1400,9 +1404,13 @@ export type OfferApiListOffersRequest = {
 
 export interface ResetHostingPasswordResponse {
   /**
-   * New temporary password.
+   * @deprecated New temporary password (deprecated, use password_b64 instead).
    */
-  oneTimePassword: string
+  oneTimePassword?: string
+  /**
+   * New temporary password, encoded in base64.
+   */
+  oneTimePasswordB64: string
 }
 
 export interface ResourceSummary {
