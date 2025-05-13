@@ -28,6 +28,7 @@ export type {
   KeyUsage,
   ListKeysRequest,
   ListKeysRequestOrderBy,
+  ListKeysRequestUsage,
   ListKeysResponse,
   ProtectKeyRequest,
   PublicKey,
