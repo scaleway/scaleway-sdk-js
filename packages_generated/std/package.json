@@ -34,8 +34,5 @@
   },
   "peerDependencies": {
     "@scaleway/sdk-client": "workspace:^"
-  },
-  "bundledDependencies": [
-    "@scaleway/sdk-client"
-  ]
+  }
 }
