@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-flexibleip",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Scaleway SDK flexibleip",
   "types": "dist/index.d.ts",
   "files": [
