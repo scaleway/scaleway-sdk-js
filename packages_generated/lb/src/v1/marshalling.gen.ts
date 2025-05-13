@@ -586,6 +586,7 @@ const unmarshalRouteMatch = (data: unknown): RouteMatch => {
   return {
     hostHeader: data.host_header,
     matchSubdomains: data.match_subdomains,
+    pathBegin: data.path_begin,
     sni: data.sni,
   } as RouteMatch
 }
@@ -1194,6 +1195,7 @@ const marshalRouteMatch = (
   ...resolveOneOf([
     { param: 'sni', value: request.sni },
     { param: 'host_header', value: request.hostHeader },
+    { param: 'path_begin', value: request.pathBegin },
   ]),
 })
 

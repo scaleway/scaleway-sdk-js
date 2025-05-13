@@ -733,19 +733,25 @@ export interface RouteMatch {
   /**
    * Value to match in the Server Name Indication TLS extension (SNI) field from an incoming connection made via an SSL/TLS transport layer. This field should be set for routes on TCP Load Balancers.
    *
-   * One-of ('matchType'): at most one of 'sni', 'hostHeader' could be set.
+   * One-of ('matchType'): at most one of 'sni', 'hostHeader', 'pathBegin' could be set.
    */
   sni?: string
   /**
    * Value to match in the HTTP Host request header from an incoming request. This field should be set for routes on HTTP Load Balancers.
    *
-   * One-of ('matchType'): at most one of 'sni', 'hostHeader' could be set.
+   * One-of ('matchType'): at most one of 'sni', 'hostHeader', 'pathBegin' could be set.
    */
   hostHeader?: string
   /**
    * If true, all subdomains will match.
    */
   matchSubdomains: boolean
+  /**
+   * Value to match in the URL beginning path from an incoming request.
+   *
+   * One-of ('matchType'): at most one of 'sni', 'hostHeader', 'pathBegin' could be set.
+   */
+  pathBegin?: string
 }
 
 export interface CreateCertificateRequestCustomCertificate {
