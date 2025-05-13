@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-client",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "license": "Apache-2.0",
   "description": "Scaleway SDK Client",
   "keywords": [
@@ -33,5 +33,4 @@
     "node": ">=20.19.1"
   },
   "type": "module"
-
 }
