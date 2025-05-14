@@ -322,6 +322,10 @@ export interface Pool {
    */
   publicIpDisabled: boolean
   /**
+   * @deprecated Defines whether the pool is migrated to new images.
+   */
+  newImagesEnabled?: boolean
+  /**
    * Cluster region of the pool.
    */
   region: ScwRegion
@@ -718,6 +722,10 @@ export interface Cluster {
    * IAM group that nodes are members of (this field might be empty during early stage of cluster creation).
    */
   iamNodesGroupId: string
+  /**
+   * @deprecated Defines whether all pools are migrated to new images.
+   */
+  newImagesEnabled?: boolean
 }
 
 export interface Node {
@@ -1459,6 +1467,15 @@ export interface ListVersionsResponse {
    * Available Kubernetes versions.
    */
   versions: Version[]
+}
+
+export type MigratePoolsToNewImagesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  clusterId: string
+  poolIds?: string[]
 }
 
 export interface NodeMetadata {

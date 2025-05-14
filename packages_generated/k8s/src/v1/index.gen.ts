@@ -63,6 +63,7 @@ export type {
   ListVersionsResponse,
   MaintenanceWindow,
   MaintenanceWindowDayOfTheWeek,
+  MigratePoolsToNewImagesRequest,
   Node,
   NodeMetadata,
   NodeMetadataCoreV1Taint,
