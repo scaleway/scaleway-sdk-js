@@ -392,6 +392,7 @@ export type CreateSecretRequest = {
    */
   protected: boolean
   /**
+   * (Optional.) The Scaleway Key Manager key ID will be used to encrypt and decrypt secret versions. If not specified, Secret Manager will use a Key Manager internal key.
    */
   keyId?: string
 }
