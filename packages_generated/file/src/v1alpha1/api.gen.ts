@@ -101,8 +101,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List all filesystems. Retrieve all filesystems in the specified region. Results are ordered by creation date in ascending order by default.
-Use the order_by parameter to modify the sorting behavior.
+   * List all filesystems. Retrieve all filesystems in the specified region. By default, the filesystems listed are ordered by creation date in ascending order. This can be modified using the `order_by` field.
    *
    * @param request - The request {@link ListFileSystemsRequest}
    * @returns A Promise of ListFileSystemsResponse
@@ -134,8 +133,7 @@ Use the order_by parameter to modify the sorting behavior.
 
   /**
    * List filesystems attachments. List all existing attachments in a specified region.
-By default, the attachments listed are ordered by creation date in ascending order.
-This can be modified using the `order_by` field.
+By default, the attachments listed are ordered by creation date in ascending order. This can be modified using the `order_by` field.
    *
    * @param request - The request {@link ListAttachmentsRequest}
    * @returns A Promise of ListAttachmentsResponse
@@ -144,7 +142,7 @@ This can be modified using the `order_by` field.
     enrichForPagination('attachments', this.pageOfListAttachments, request)
 
   /**
-   * Create a new filesystem. To create a new filesystem, you need to provide a name, a size, and a project ID.
+   * Create a new filesystem. To create a new filesystem, you must specify a name, a size, and a project ID.
    *
    * @param request - The request {@link CreateFileSystemRequest}
    * @returns A Promise of FileSystem
