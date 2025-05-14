@@ -13,13 +13,17 @@ import {
   marshalEncryptRequest,
   marshalGenerateDataKeyRequest,
   marshalImportKeyMaterialRequest,
+  marshalSignRequest,
   marshalUpdateKeyRequest,
+  marshalVerifyRequest,
   unmarshalDataKey,
   unmarshalDecryptResponse,
   unmarshalEncryptResponse,
   unmarshalKey,
   unmarshalListKeysResponse,
   unmarshalPublicKey,
+  unmarshalSignResponse,
+  unmarshalVerifyResponse,
 } from './marshalling.gen'
 import type {
   CreateKeyRequest,
@@ -42,8 +46,12 @@ import type {
   ProtectKeyRequest,
   PublicKey,
   RotateKeyRequest,
+  SignRequest,
+  SignResponse,
   UnprotectKeyRequest,
   UpdateKeyRequest,
+  VerifyRequest,
+  VerifyResponse,
 } from './types.gen'
 
 const jsonContentHeaders = {
@@ -314,6 +322,42 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/decrypt`,
       },
       unmarshalDecryptResponse,
+    )
+
+  /**
+   * Sign a message digest. Use a given key to sign a message digest. The key must have its usage set to `asymmetric_signing`. The digest must be created using the same digest algorithm that is defined in the key's algorithm configuration.
+   *
+   * @param request - The request {@link SignRequest}
+   * @returns A Promise of SignResponse
+   */
+  sign = (request: Readonly<SignRequest>) =>
+    this.client.fetch<SignResponse>(
+      {
+        body: JSON.stringify(marshalSignRequest(request, this.client.settings)),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/sign`,
+      },
+      unmarshalSignResponse,
+    )
+
+  /**
+   * Verify a message signature. Use a given key to verify a message signature against a message digest. The key must have its usage set to `asymmetric_signing`. The message digest must be generated using the same digest algorithm that is defined in the key's algorithm configuration.
+   *
+   * @param request - The request {@link VerifyRequest}
+   * @returns A Promise of VerifyResponse
+   */
+  verify = (request: Readonly<VerifyRequest>) =>
+    this.client.fetch<VerifyResponse>(
+      {
+        body: JSON.stringify(
+          marshalVerifyRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/verify`,
+      },
+      unmarshalVerifyResponse,
     )
 
   /**

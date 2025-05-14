@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-jobs",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Scaleway SDK jobs",
   "types": "dist/index.d.ts",
   "files": [
