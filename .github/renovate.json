@@ -7,7 +7,9 @@
     "helpers:disableTypesNodeMajor"
   ],
   "updateNotScheduled": true,
-  "lockFileMaintenance": { "enabled": false },
+  "lockFileMaintenance": {
+    "enabled": false
+  },
   "enabledManagers": ["github-actions", "npm"],
   "prCreation": "not-pending",
   "prHourlyLimit": 5,
@@ -23,60 +25,60 @@
     },
     {
       "automerge": false,
-      "matchPackagePatterns": ["^@scaleway/"],
-      "stabilityDays": 0,
-      "matchUpdateTypes": ["major", "minor", "patch"]
+      "minimumReleaseAge": null,
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "matchPackageNames": ["/^@scaleway//"]
     },
     {
       "labels": ["UPDATE-MAJOR"],
-      "stabilityDays": 14,
+      "minimumReleaseAge": "14 days",
       "matchUpdateTypes": ["major"]
     },
     {
       "labels": ["UPDATE-MINOR"],
-      "stabilityDays": 5,
+      "minimumReleaseAge": "5 days",
       "matchUpdateTypes": ["minor"]
     },
     {
       "labels": ["UPDATE-PATCH"],
-      "stabilityDays": 1,
+      "minimumReleaseAge": "1 day",
       "matchUpdateTypes": ["patch"]
     },
     {
-      "matchPackagePatterns": [
-        "^@babel/",
-        "^@commitlint/",
-        "^babel-",
-        "cz-conventional-changelog",
-        "eslint",
-        "husky",
-        "jest",
-        "lint-staged"
-      ],
       "automerge": true,
       "automergeType": "branch",
       "semanticCommitScope": "minor-deps",
-      "stabilityDays": 3,
-      "matchUpdateTypes": ["minor"]
+      "minimumReleaseAge": "3 days",
+      "matchUpdateTypes": ["minor"],
+      "matchPackageNames": [
+        "/^@babel//",
+        "/^@commitlint//",
+        "/^babel-/",
+        "/cz-conventional-changelog/",
+        "/eslint/",
+        "/husky/",
+        "/jest/",
+        "/lint-staged/"
+      ]
     },
     {
-      "matchPackagePatterns": [
-        "^@babel/",
-        "^@commitlint/",
-        "^@semantic-release/",
-        "^@types/",
-        "^babel-",
-        "^eslint",
-        "cz-conventional-changelog",
-        "husky",
-        "jest",
-        "lint-staged"
-      ],
       "automerge": true,
       "automergeType": "branch",
       "semanticCommitScope": "patch-deps",
-      "stabilityDays": 1,
-      "matchUpdateTypes": ["patch"]
+      "minimumReleaseAge": "1 day",
+      "matchUpdateTypes": ["patch"],
+      "matchPackageNames": [
+        "/^@babel//",
+        "/^@commitlint//",
+        "/^@semantic-release//",
+        "/^@types//",
+        "/^babel-/",
+        "/^eslint/",
+        "/cz-conventional-changelog/",
+        "/husky/",
+        "/jest/",
+        "/lint-staged/"
+      ]
     }
   ]
 }
