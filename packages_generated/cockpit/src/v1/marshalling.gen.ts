@@ -294,6 +294,7 @@ const unmarshalAlert = (data: unknown): Alert => {
 
   return {
     annotations: data.annotations,
+    dataSourceId: data.data_source_id,
     duration: data.duration,
     enabled: data.enabled,
     name: data.name,

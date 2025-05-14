@@ -43,6 +43,12 @@ export type ListKeysRequestOrderBy =
   | 'updated_at_asc'
   | 'updated_at_desc'
 
+export type ListKeysRequestUsage =
+  | 'unknown_usage'
+  | 'symmetric_encryption'
+  | 'asymmetric_encryption'
+  | 'asymmetric_signing'
+
 export interface KeyRotationPolicy {
   /**
    * Time interval between two key rotations. The minimum duration is 24 hours and the maximum duration is 1 year (876000 hours).
@@ -395,6 +401,10 @@ export type ListKeysRequest = {
    * (Optional) Filter by key name.
    */
   name?: string
+  /**
+   * Select from symmetric encryption, asymmetric encryption, or asymmetric signing.
+   */
+  usage?: ListKeysRequestUsage
 }
 
 export interface ListKeysResponse {
