@@ -3,6 +3,8 @@
 export { API } from './api.gen'
 export * from './marshalling.gen'
 export type {
+  AccountOrganizationInfo,
+  AccountUserInfo,
   Event,
   EventPrincipal,
   KeyManagerKeyInfo,
