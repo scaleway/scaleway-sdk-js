@@ -220,7 +220,7 @@ export type ListFileSystemsRequest = {
    */
   pageSize?: number
   /**
-   * Filter the return filesystems by their names.
+   * Filter the returned filesystems by their names.
    */
   name?: string
   /**
