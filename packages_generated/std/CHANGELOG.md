@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.3](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-std@1.0.2...@scaleway/sdk-std@1.0.3) (2025-05-13)
+
+### Bug Fixes
+
+- **sdk:** remove old script ([#2124](https://github.com/scaleway/scaleway-sdk-js/issues/2124)) ([a1bf541](https://github.com/scaleway/scaleway-sdk-js/commit/a1bf54103bd49bf6bb25b9bb6a1d2de38ae312c8))
+
+## [1.0.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-std@1.0.1...@scaleway/sdk-std@1.0.2) (2025-05-13)
+
+**Note:** Version bump only for package @scaleway/sdk-std
+
 ## 1.0.1 (2025-04-28)
 
 ### Bug Fixes
