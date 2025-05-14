@@ -13,6 +13,14 @@ export type PublicCatalogProductPropertiesHardwareCPUArch =
   | 'riscv'
   | 'apple_silicon'
 
+export type PublicCatalogProductStatus =
+  | 'unknown_status'
+  | 'public_beta'
+  | 'preview'
+  | 'general_availability'
+  | 'end_of_deployment'
+  | 'end_of_support'
+
 export type PublicCatalogProductUnitOfMeasureCountableUnit =
   | 'unknown_countable_unit'
   | 'chunk'
@@ -211,6 +219,14 @@ export interface PublicCatalogProductPropertiesInstance {
    * The range of the Instance server.
    */
   range: string
+  /**
+   * The offer ID of the Instance server.
+   */
+  offerId: string
+  /**
+   * The recommended replacement offer IDs of the Instance server.
+   */
+  recommendedReplacementOfferIds: string[]
 }
 
 export interface PublicCatalogProductEnvironmentalImpactEstimation {
@@ -329,6 +345,14 @@ export interface PublicCatalogProduct {
    * The unit of measure of the product.
    */
   unitOfMeasure?: PublicCatalogProductUnitOfMeasure
+  /**
+   * The status of the product.
+   */
+  status: PublicCatalogProductStatus
+  /**
+   * The end of life date of the product.
+   */
+  endOfLifeAt?: Date
 }
 
 export interface ListPublicCatalogProductsResponse {
