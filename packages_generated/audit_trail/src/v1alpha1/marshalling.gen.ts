@@ -6,6 +6,8 @@ import {
   unmarshalDate,
 } from '@scaleway/sdk-client'
 import type {
+  AccountOrganizationInfo,
+  AccountUserInfo,
   Event,
   EventPrincipal,
   KeyManagerKeyInfo,
@@ -21,6 +23,30 @@ import type {
   SecretManagerSecretInfo,
   SecretManagerSecretVersionInfo,
 } from './types.gen'
+
+const unmarshalAccountOrganizationInfo = (
+  data: unknown,
+): AccountOrganizationInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AccountOrganizationInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as AccountOrganizationInfo
+}
+
+const unmarshalAccountUserInfo = (data: unknown): AccountUserInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AccountUserInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    email: data.email,
+  } as AccountUserInfo
+}
 
 const unmarshalKeyManagerKeyInfo = (data: unknown): KeyManagerKeyInfo => {
   if (!isJSONObject(data)) {
@@ -128,6 +154,12 @@ export const unmarshalResource = (data: unknown): Resource => {
   }
 
   return {
+    accountOrganizationInfo: data.account_organization_info
+      ? unmarshalAccountOrganizationInfo(data.account_organization_info)
+      : undefined,
+    accountUserInfo: data.account_user_info
+      ? unmarshalAccountUserInfo(data.account_user_info)
+      : undefined,
     createdAt: unmarshalDate(data.created_at),
     deletedAt: unmarshalDate(data.deleted_at),
     id: data.id,
