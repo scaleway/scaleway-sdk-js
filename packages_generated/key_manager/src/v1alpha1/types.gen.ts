@@ -6,6 +6,23 @@ export type DataKeyAlgorithmSymmetricEncryption =
   | 'unknown_symmetric_encryption'
   | 'aes_256_gcm'
 
+export type KeyAlgorithmAsymmetricEncryption =
+  | 'unknown_asymmetric_encryption'
+  | 'rsa_oaep_2048_sha256'
+  | 'rsa_oaep_3072_sha256'
+  | 'rsa_oaep_4096_sha256'
+
+export type KeyAlgorithmAsymmetricSigning =
+  | 'unknown_asymmetric_signing'
+  | 'ec_p256_sha256'
+  | 'ec_p384_sha384'
+  | 'rsa_pss_2048_sha256'
+  | 'rsa_pss_3072_sha256'
+  | 'rsa_pss_4096_sha256'
+  | 'rsa_pkcs1_2048_sha256'
+  | 'rsa_pkcs1_3072_sha256'
+  | 'rsa_pkcs1_4096_sha256'
+
 export type KeyAlgorithmSymmetricEncryption =
   | 'unknown_symmetric_encryption'
   | 'aes_256_gcm'
@@ -41,9 +58,19 @@ export interface KeyUsage {
   /**
    * See the `Key.Algorithm.SymmetricEncryption` enum for a description of values.
    *
-   * One-of ('usage'): at most one of 'symmetricEncryption' could be set.
+   * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning' could be set.
    */
   symmetricEncryption?: KeyAlgorithmSymmetricEncryption
+  /**
+   *
+   * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning' could be set.
+   */
+  asymmetricEncryption?: KeyAlgorithmAsymmetricEncryption
+  /**
+   *
+   * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning' could be set.
+   */
+  asymmetricSigning?: KeyAlgorithmAsymmetricSigning
 }
 
 export interface Key {
@@ -181,7 +208,7 @@ export type DecryptRequest = {
    */
   region?: ScwRegion
   /**
-   * ID of the key to decrypt.
+   * The key must have an usage set to `symmetric_encryption` or `asymmetric_encryption`.
    */
   keyId: string
   /**
@@ -189,7 +216,7 @@ export type DecryptRequest = {
    */
   ciphertext: string
   /**
-   * The additional data must match the value passed in the encryption request.
+   * The additional data must match the value passed in the encryption request. Only supported by keys with a usage set to `symmetric_encryption`.
    */
   associatedData?: string
 }
@@ -259,7 +286,7 @@ export type EncryptRequest = {
    */
   region?: ScwRegion
   /**
-   * ID of the key to encrypt.
+   * The key must have an usage set to `symmetric_encryption` or `asymmetric_encryption`.
    */
   keyId: string
   /**
@@ -267,7 +294,7 @@ export type EncryptRequest = {
    */
   plaintext: string
   /**
-   * Additional data which will not be encrypted, but authenticated and appended to the encrypted payload.
+   * Additional data which will not be encrypted, but authenticated and appended to the encrypted payload. Only supported by keys with a usage set to `symmetric_encryption`.
    */
   associatedData?: string
 }
@@ -407,6 +434,32 @@ export type RotateKeyRequest = {
   keyId: string
 }
 
+export type SignRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the key to use for signing.
+   */
+  keyId: string
+  /**
+   * The digest must be generated using the same algorithm defined in the key’s algorithm settings.
+   */
+  digest: string
+}
+
+export interface SignResponse {
+  /**
+   * ID of the key used to generate the signature.
+   */
+  keyId: string
+  /**
+   * The message signature.
+   */
+  signature: string
+}
+
 export type UnprotectKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -443,4 +496,34 @@ export type UpdateKeyRequest = {
    * If not specified, the key's existing rotation policy applies.
    */
   rotationPolicy?: KeyRotationPolicy
+}
+
+export type VerifyRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the key to use for signature verification.
+   */
+  keyId: string
+  /**
+   * Must be generated using the same algorithm specified in the key’s configuration.
+   */
+  digest: string
+  /**
+   * The message signature to verify.
+   */
+  signature: string
+}
+
+export interface VerifyResponse {
+  /**
+   * ID of the key used for verification.
+   */
+  keyId: string
+  /**
+   * Returns `true` if the signature is valid for the digest and key, `false` otherwise.
+   */
+  valid: boolean
 }
