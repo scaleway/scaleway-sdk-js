@@ -6,9 +6,9 @@ import { Accountv3 } from '@scaleway/sdk-account'
 import { Applesiliconv1alpha1 } from '@scaleway/sdk-applesilicon'
 import { AuditTrailv1alpha1 } from '@scaleway/sdk-audit-trail'
 import { Autoscalingv1alpha1 } from '@scaleway/sdk-autoscaling'
-import { Baremetalv1,Baremetalv3 } from '@scaleway/sdk-baremetal'
+import { Baremetalv1, Baremetalv3 } from '@scaleway/sdk-baremetal'
 import { Billingv2beta1 } from '@scaleway/sdk-billing'
-import { Blockv1,Blockv1alpha1 } from '@scaleway/sdk-block'
+import { Blockv1, Blockv1alpha1 } from '@scaleway/sdk-block'
 import { Cockpitv1 } from '@scaleway/sdk-cockpit'
 import { Containerv1beta1 } from '@scaleway/sdk-container'
 import { Dediboxv1 } from '@scaleway/sdk-dedibox'
@@ -18,7 +18,7 @@ import { Filev1alpha1 } from '@scaleway/sdk-file'
 import { Flexibleipv1alpha1 } from '@scaleway/sdk-flexibleip'
 import { Functionv1beta1 } from '@scaleway/sdk-function'
 import { Iamv1alpha1 } from '@scaleway/sdk-iam'
-import { Inferencev1,Inferencev1beta1 } from '@scaleway/sdk-inference'
+import { Inferencev1, Inferencev1beta1 } from '@scaleway/sdk-inference'
 import { Instancev1 } from '@scaleway/sdk-instance'
 import { Interlinkv1beta1 } from '@scaleway/sdk-interlink'
 import { Iotv1 } from '@scaleway/sdk-iot'
@@ -40,7 +40,7 @@ import { ServerlessSqldbv1alpha1 } from '@scaleway/sdk-serverless-sqldb'
 import { Temv1alpha1 } from '@scaleway/sdk-tem'
 import { Testv1 } from '@scaleway/sdk-test'
 import { Vpcv2 } from '@scaleway/sdk-vpc'
-import { Vpcgwv1,Vpcgwv2 } from '@scaleway/sdk-vpcgw'
+import { Vpcgwv1, Vpcgwv2 } from '@scaleway/sdk-vpcgw'
 import { Webhostingv1 } from '@scaleway/sdk-webhosting'
 /**
  * @deprecated Direct version exports are deprecated. Use the 'Account' namespace instead (e.g., Account.v1).
@@ -77,7 +77,7 @@ export const Autoscaling = {
 /**
  * @deprecated Direct version exports are deprecated. Use the 'Baremetal' namespace instead (e.g., Baremetal.v1).
  */
-export { Baremetalv1,Baremetalv3 }
+export { Baremetalv1, Baremetalv3 }
 export const Baremetal = {
   v1: Baremetalv1,
   v3: Baremetalv3,
@@ -94,7 +94,7 @@ export const Billing = {
 /**
  * @deprecated Direct version exports are deprecated. Use the 'Block' namespace instead (e.g., Block.v1).
  */
-export { Blockv1,Blockv1alpha1 }
+export { Blockv1, Blockv1alpha1 }
 export const Block = {
   v1: Blockv1,
   v1alpha1: Blockv1alpha1,
@@ -175,7 +175,7 @@ export const Iam = {
 /**
  * @deprecated Direct version exports are deprecated. Use the 'Inference' namespace instead (e.g., Inference.v1).
  */
-export { Inferencev1,Inferencev1beta1 }
+export { Inferencev1, Inferencev1beta1 }
 export const Inference = {
   v1: Inferencev1,
   v1beta1: Inferencev1beta1,
@@ -352,7 +352,7 @@ export const Vpc = {
 /**
  * @deprecated Direct version exports are deprecated. Use the 'Vpcgw' namespace instead (e.g., Vpcgw.v1).
  */
-export { Vpcgwv1,Vpcgwv2 }
+export { Vpcgwv1, Vpcgwv2 }
 export const Vpcgw = {
   v1: Vpcgwv1,
   v2: Vpcgwv2,
@@ -365,4 +365,3 @@ export { Webhostingv1 }
 export const Webhosting = {
   v1: Webhostingv1,
 }
-
