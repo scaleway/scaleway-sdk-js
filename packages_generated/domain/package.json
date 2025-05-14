@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-domain",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Scaleway SDK domain",
   "types": "dist/index.d.ts",
   "files": [
