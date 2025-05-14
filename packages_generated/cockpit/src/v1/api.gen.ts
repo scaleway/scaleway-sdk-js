@@ -801,6 +801,7 @@ If you need to receive alerts for other receivers, you can create additional con
         method: 'GET',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alerts`,
         urlParams: urlParams(
+          ['data_source_id', request.dataSourceId],
           ['is_enabled', request.isEnabled],
           ['is_preconfigured', request.isPreconfigured],
           [

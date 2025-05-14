@@ -251,6 +251,7 @@ export class API extends ParentAPI {
           ],
           ['project_id', request.projectId],
           ['tags', request.tags],
+          ['usage', request.usage],
         ),
       },
       unmarshalListKeysResponse,
