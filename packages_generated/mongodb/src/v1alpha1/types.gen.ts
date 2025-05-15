@@ -159,13 +159,18 @@ export interface SnapshotVolumeType {
 }
 
 export interface UserRole {
+  /**
+   * Name of the preset role.
+   */
   role: UserRoleRole
   /**
+   * Name of the database on which the preset role will be used.
    *
    * One-of ('scope'): at most one of 'database', 'anyDatabase' could be set.
    */
   database?: string
   /**
+   * Flag to enable the preset role in all databases.
    *
    * One-of ('scope'): at most one of 'database', 'anyDatabase' could be set.
    */
