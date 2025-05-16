@@ -1630,6 +1630,13 @@ export interface MFAOTP {
   secret: string
 }
 
+export type MigrateOrganizationGuestsRequest = {
+  /**
+   * ID of the Organization.
+   */
+  organizationId?: string
+}
+
 export interface OrganizationSecuritySettings {
   /**
    * Defines whether password renewal is enforced during first login.
