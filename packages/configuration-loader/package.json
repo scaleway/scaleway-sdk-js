@@ -15,7 +15,7 @@
     "directory": "packages/configuration-loader"
   },
   "engines": {
-    "node": ">=20.19.1"
+    "node": ">=20.19.2"
   },
   "type": "module",
   "scripts": {
