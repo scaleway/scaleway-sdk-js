@@ -608,6 +608,7 @@ export const unmarshalServer = (data: unknown): Server => {
       unmarshalNetworkInterface,
     ),
     ipv6Slaac: data.ipv6_slaac,
+    isHds: data.is_hds,
     isOutsourced: data.is_outsourced,
     isRpnv2Member: data.is_rpnv2_member,
     level: data.level ? unmarshalServiceLevel(data.level) : undefined,
