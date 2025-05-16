@@ -38,6 +38,7 @@ import type {
   ListPoolsResponse,
   ListVersionsResponse,
   MaintenanceWindow,
+  MigratePoolsToNewImagesRequest,
   Node,
   NodeMetadata,
   NodeMetadataCoreV1Taint,
@@ -88,6 +89,7 @@ export const unmarshalPool = (data: unknown): Pool => {
     maxSize: data.max_size,
     minSize: data.min_size,
     name: data.name,
+    newImagesEnabled: data.new_images_enabled,
     nodeType: data.node_type,
     placementGroupId: data.placement_group_id,
     publicIpDisabled: data.public_ip_disabled,
@@ -223,6 +225,7 @@ export const unmarshalCluster = (data: unknown): Cluster => {
     iamNodesGroupId: data.iam_nodes_group_id,
     id: data.id,
     name: data.name,
+    newImagesEnabled: data.new_images_enabled,
     openIdConnectConfig: data.open_id_connect_config
       ? unmarshalClusterOpenIDConnectConfig(data.open_id_connect_config)
       : undefined,
@@ -739,6 +742,13 @@ export const marshalCreatePoolRequest = (
       ? marshalCreatePoolRequestUpgradePolicy(request.upgradePolicy, defaults)
       : undefined,
   zone: request.zone ?? defaults.defaultZone,
+})
+
+export const marshalMigratePoolsToNewImagesRequest = (
+  request: MigratePoolsToNewImagesRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  pool_ids: request.poolIds,
 })
 
 export const marshalSetClusterACLRulesRequest = (
