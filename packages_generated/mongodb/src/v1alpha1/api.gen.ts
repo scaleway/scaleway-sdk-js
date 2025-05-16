@@ -510,6 +510,12 @@ export class API extends ParentAPI {
       path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users/${validatePathParam('name', request.name)}`,
     })
 
+  /**
+   * Apply user roles. Apply preset roles for a user in a Database Instance.
+   *
+   * @param request - The request {@link SetUserRoleRequest}
+   * @returns A Promise of User
+   */
   setUserRole = (request: Readonly<SetUserRoleRequest>) =>
     this.client.fetch<User>(
       {
