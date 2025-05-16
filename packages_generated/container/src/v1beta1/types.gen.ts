@@ -368,6 +368,7 @@ export interface Container {
    * List of tags applied to the Serverless Container.
    */
   tags: string[]
+  privateNetworkId?: string
 }
 
 export interface Cron {
@@ -485,6 +486,10 @@ export interface Namespace {
    * Last update date of the namespace.
    */
   updatedAt?: Date
+  /**
+   * @deprecated
+   */
+  vpcIntegrationActivated?: boolean
 }
 
 export interface Token {
@@ -674,6 +679,7 @@ export type CreateContainerRequest = {
    * Tags of the Serverless Container.
    */
   tags?: string[]
+  privateNetworkId?: string
 }
 
 export type CreateCronRequest = {
@@ -743,6 +749,7 @@ export type CreateNamespaceRequest = {
    * Tags of the Serverless Container Namespace.
    */
   tags?: string[]
+  activateVpcIntegration: boolean
 }
 
 export type CreateTokenRequest = {
@@ -1273,6 +1280,7 @@ export type UpdateContainerRequest = {
    * Tags of the Serverless Container.
    */
   tags?: string[]
+  privateNetworkId?: string
 }
 
 export type UpdateCronRequest = {

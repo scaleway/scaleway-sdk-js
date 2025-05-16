@@ -150,6 +150,7 @@ export const unmarshalContainer = (data: unknown): Container => {
     namespaceId: data.namespace_id,
     port: data.port,
     privacy: data.privacy,
+    privateNetworkId: data.private_network_id,
     protocol: data.protocol,
     readyAt: unmarshalDate(data.ready_at),
     region: data.region,
@@ -229,6 +230,7 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
+    vpcIntegrationActivated: data.vpc_integration_activated,
   } as Namespace
 }
 
@@ -499,6 +501,7 @@ export const marshalCreateContainerRequest = (
   namespace_id: request.namespaceId,
   port: request.port,
   privacy: request.privacy,
+  private_network_id: request.privateNetworkId,
   protocol: request.protocol,
   registry_image: request.registryImage,
   sandbox: request.sandbox,
@@ -538,6 +541,7 @@ export const marshalCreateNamespaceRequest = (
   request: CreateNamespaceRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  activate_vpc_integration: request.activateVpcIntegration,
   description: request.description,
   environment_variables: request.environmentVariables,
   name: request.name || randomName('cns'),
@@ -652,6 +656,7 @@ export const marshalUpdateContainerRequest = (
   min_scale: request.minScale,
   port: request.port,
   privacy: request.privacy,
+  private_network_id: request.privateNetworkId,
   protocol: request.protocol,
   redeploy: request.redeploy,
   registry_image: request.registryImage,
