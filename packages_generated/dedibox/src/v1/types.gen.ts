@@ -814,6 +814,10 @@ export interface Server {
    * Whether or not the server is already part of an rpnv2 group.
    */
   isRpnv2Member: boolean
+  /**
+   * Whether or not the server is HDS.
+   */
+  isHds: boolean
 }
 
 export interface FailoverBlock {

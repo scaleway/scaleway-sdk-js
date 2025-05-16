@@ -58,6 +58,7 @@ export const unmarshalPrivateNetwork = (data: unknown): PrivateNetwork => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
+    defaultRoutePropagationEnabled: data.default_route_propagation_enabled,
     dhcpEnabled: data.dhcp_enabled,
     id: data.id,
     name: data.name,
@@ -143,7 +144,7 @@ export const unmarshalDeleteSubnetsResponse = (
   } as DeleteSubnetsResponse
 }
 
-const unmarshalAclRule = (data: unknown): AclRule => {
+export const unmarshalAclRule = (data: unknown): AclRule => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'AclRule' failed as data isn't a dictionary.`,
@@ -246,6 +247,7 @@ export const marshalCreatePrivateNetworkRequest = (
   request: CreatePrivateNetworkRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  default_route_propagation_enabled: request.defaultRoutePropagationEnabled,
   name: request.name || randomName('pn'),
   project_id: request.projectId ?? defaults.defaultProjectId,
   subnets: request.subnets,
@@ -282,7 +284,7 @@ export const marshalDeleteSubnetsRequest = (
   subnets: request.subnets,
 })
 
-const marshalAclRule = (
+export const marshalAclRule = (
   request: AclRule,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
@@ -310,6 +312,7 @@ export const marshalUpdatePrivateNetworkRequest = (
   request: UpdatePrivateNetworkRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  default_route_propagation_enabled: request.defaultRoutePropagationEnabled,
   name: request.name,
   tags: request.tags,
 })
