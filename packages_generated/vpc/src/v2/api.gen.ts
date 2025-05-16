@@ -220,9 +220,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreatePrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
    */
-  createPrivateNetwork = (
-    request: Readonly<CreatePrivateNetworkRequest> = {},
-  ) =>
+  createPrivateNetwork = (request: Readonly<CreatePrivateNetworkRequest>) =>
     this.client.fetch<PrivateNetwork>(
       {
         body: JSON.stringify(
