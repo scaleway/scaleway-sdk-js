@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-container@1.3.1...@scaleway/sdk-container@1.4.0) (2025-05-19)
+
+### Features
+
+- **containers:** add VPC integration feature flag ([#2146](https://github.com/scaleway/scaleway-sdk-js/issues/2146)) ([a5e5cfe](https://github.com/scaleway/scaleway-sdk-js/commit/a5e5cfe9260cda5729a81276439a01d111b70f17))
+
 ## [1.3.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-container@1.3.0...@scaleway/sdk-container@1.3.1) (2025-05-13)
 
 **Note:** Version bump only for package @scaleway/sdk-container

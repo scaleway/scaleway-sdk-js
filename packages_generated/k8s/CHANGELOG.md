@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-k8s@1.3.1...@scaleway/sdk-k8s@1.4.0) (2025-05-19)
+
+### Features
+
+- **k8s:** add MigratePoolsToNewImages handler ([#2139](https://github.com/scaleway/scaleway-sdk-js/issues/2139)) ([e4e1b61](https://github.com/scaleway/scaleway-sdk-js/commit/e4e1b617b18e64aee71f4084884bad3dc11f7221))
+
 ## [1.3.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-k8s@1.3.0...@scaleway/sdk-k8s@1.3.1) (2025-05-13)
 
 **Note:** Version bump only for package @scaleway/sdk-k8s

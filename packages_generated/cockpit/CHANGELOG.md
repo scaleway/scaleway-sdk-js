@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-cockpit@1.1.4...@scaleway/sdk-cockpit@1.2.0) (2025-05-19)
+
+### Features
+
+- **cockpit:** add datasource filter on listAlert endpoint ([#2126](https://github.com/scaleway/scaleway-sdk-js/issues/2126)) ([60b99f4](https://github.com/scaleway/scaleway-sdk-js/commit/60b99f4291f9de145da77a8b578eb3358aa31c38))
+
 ## [1.1.4](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-cockpit@1.1.3...@scaleway/sdk-cockpit@1.1.4) (2025-05-13)
 
 **Note:** Version bump only for package @scaleway/sdk-cockpit

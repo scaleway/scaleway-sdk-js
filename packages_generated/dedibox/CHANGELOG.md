@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-dedibox@1.0.3...@scaleway/sdk-dedibox@1.1.0) (2025-05-19)
+
+### Features
+
+- **dedibox:** add a is_hds flag for ddx2elts servers ([#2145](https://github.com/scaleway/scaleway-sdk-js/issues/2145)) ([21d538f](https://github.com/scaleway/scaleway-sdk-js/commit/21d538f790b794851eee1f71f49fbd8de70b9379))
+
 ## [1.0.3](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-dedibox@1.0.2...@scaleway/sdk-dedibox@1.0.3) (2025-05-13)
 
 **Note:** Version bump only for package @scaleway/sdk-dedibox

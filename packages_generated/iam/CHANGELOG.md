@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-iam@1.0.3...@scaleway/sdk-iam@1.1.0) (2025-05-19)
+
+### Features
+
+- **iam:** add guest migration endpoint ([#2132](https://github.com/scaleway/scaleway-sdk-js/issues/2132)) ([95da633](https://github.com/scaleway/scaleway-sdk-js/commit/95da6339fd169635dc54f26d409705a47777ccc6))
+
 ## [1.0.3](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-iam@1.0.2...@scaleway/sdk-iam@1.0.3) (2025-05-13)
 
 **Note:** Version bump only for package @scaleway/sdk-iam
