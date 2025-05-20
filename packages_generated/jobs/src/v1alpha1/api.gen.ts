@@ -328,6 +328,7 @@ export class API extends ParentAPI {
           ],
           ['project_id', request.projectId],
           ['state', request.state],
+          ['states', request.states],
         ),
       },
       unmarshalListJobRunsResponse,
