@@ -3,21 +3,26 @@
   "version": "1.0.8",
   "license": "Apache-2.0",
   "description": "Load configuration via file or environment for NodeJS.",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/scaleway/scaleway-sdk-js",
+    "url": "git+https://github.com/scaleway/scaleway-sdk-js",
     "directory": "packages/configuration-loader"
   },
   "engines": {
     "node": ">=20.19.1"
   },
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    }
+  },
   "scripts": {
     "typecheck": "tsc --noEmit",
     "type:generate": "tsc --declaration -p tsconfig.build.json",

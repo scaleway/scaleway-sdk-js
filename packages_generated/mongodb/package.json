@@ -2,7 +2,7 @@
   "name": "@scaleway/sdk-mongodb",
   "version": "1.0.4",
   "description": "Scaleway SDK mongodb",
-  "types": "dist/index.d.ts",
+  "license": "Apache-2.0",
   "files": [
     "dist"
   ],

@@ -2,7 +2,7 @@
   "name": "@scaleway/sdk-iam",
   "version": "1.1.0",
   "description": "Scaleway SDK iam",
-  "types": "dist/index.d.ts",
+  "license": "Apache-2.0",
   "files": [
     "dist"
   ],

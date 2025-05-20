@@ -2,7 +2,7 @@
   "name": "@scaleway/sdk-iot",
   "version": "1.0.3",
   "description": "Scaleway SDK iot",
-  "types": "dist/index.d.ts",
+  "license": "Apache-2.0",
   "files": [
     "dist"
   ],
