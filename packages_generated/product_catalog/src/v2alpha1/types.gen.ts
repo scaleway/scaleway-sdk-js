@@ -6,6 +6,13 @@ import type {
   Zone as ScwZone,
 } from '@scaleway/sdk-client'
 
+export type ListPublicCatalogProductsRequestProductType =
+  | 'unknown_product_type'
+  | 'instance'
+  | 'apple_silicon'
+  | 'elastic_metal'
+  | 'dedibox'
+
 export type PublicCatalogProductPropertiesHardwareCPUArch =
   | 'unknown_arch'
   | 'x64'
@@ -375,4 +382,8 @@ export type PublicCatalogApiListPublicCatalogProductsRequest = {
    * The number of products per page. Value must be greater or equal to 1.
    */
   pageSize?: number
+  /**
+   * The list of filtered product categories.
+   */
+  productTypes?: ListPublicCatalogProductsRequestProductType[]
 }
