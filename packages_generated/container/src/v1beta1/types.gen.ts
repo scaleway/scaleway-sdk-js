@@ -369,6 +369,14 @@ export interface Container {
    */
   tags: string[]
   privateNetworkId?: string
+  /**
+   * Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
+   */
+  command: string[]
+  /**
+   * Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
+   */
+  args: string[]
 }
 
 export interface Cron {
@@ -680,6 +688,14 @@ export type CreateContainerRequest = {
    */
   tags?: string[]
   privateNetworkId?: string
+  /**
+   * Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
+   */
+  command?: string[]
+  /**
+   * Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
+   */
+  args?: string[]
 }
 
 export type CreateCronRequest = {
@@ -1281,6 +1297,14 @@ export type UpdateContainerRequest = {
    */
   tags?: string[]
   privateNetworkId?: string
+  /**
+   * Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
+   */
+  command?: string[]
+  /**
+   * Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
+   */
+  args?: string[]
 }
 
 export type UpdateCronRequest = {
