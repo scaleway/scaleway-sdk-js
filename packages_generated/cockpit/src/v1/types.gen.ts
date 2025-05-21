@@ -64,6 +64,14 @@ export interface PreconfiguredAlertData {
    * Human readable description of the alert.
    */
   displayDescription: string
+  /**
+   * Product associated with the alert.
+   */
+  productName: string
+  /**
+   * Family of the product associated with the alert.
+   */
+  productFamily: string
 }
 
 export interface ContactPointEmail {
