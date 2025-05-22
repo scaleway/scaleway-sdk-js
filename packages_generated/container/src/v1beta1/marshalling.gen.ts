@@ -130,6 +130,8 @@ export const unmarshalContainer = (data: unknown): Container => {
   }
 
   return {
+    args: data.args,
+    command: data.command,
     cpuLimit: data.cpu_limit,
     createdAt: unmarshalDate(data.created_at),
     description: data.description,
@@ -484,6 +486,8 @@ export const marshalCreateContainerRequest = (
   request: CreateContainerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  args: request.args,
+  command: request.command,
   cpu_limit: request.cpuLimit,
   description: request.description,
   environment_variables: request.environmentVariables,
@@ -641,6 +645,8 @@ export const marshalUpdateContainerRequest = (
   request: UpdateContainerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  args: request.args,
+  command: request.command,
   cpu_limit: request.cpuLimit,
   description: request.description,
   environment_variables: request.environmentVariables,
