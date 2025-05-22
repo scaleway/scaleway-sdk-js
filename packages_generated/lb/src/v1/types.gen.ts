@@ -711,6 +711,10 @@ export interface Frontend {
    * Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
    */
   connectionRateLimit?: number
+  /**
+   * Defines wether to enable access logs on the frontend.
+   */
+  enableAccessLogs: boolean
 }
 
 export interface PrivateNetworkDHCPConfig {
@@ -1205,6 +1209,10 @@ export type CreateFrontendRequest = {
    * Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
    */
   connectionRateLimit?: number
+  /**
+   * Defines wether to enable access logs on the frontend.
+   */
+  enableAccessLogs: boolean
 }
 
 export type CreateIpRequest = {
@@ -2240,6 +2248,10 @@ export type UpdateFrontendRequest = {
    * Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
    */
   connectionRateLimit?: number
+  /**
+   * Defines wether to enable access logs on the frontend.
+   */
+  enableAccessLogs?: boolean
 }
 
 export type UpdateHealthCheckRequest = {
@@ -2664,6 +2676,10 @@ export type ZonedApiCreateFrontendRequest = {
    * Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
    */
   connectionRateLimit?: number
+  /**
+   * Defines wether to enable access logs on the frontend.
+   */
+  enableAccessLogs: boolean
 }
 
 export type ZonedApiCreateIpRequest = {
@@ -3575,6 +3591,10 @@ export type ZonedApiUpdateFrontendRequest = {
    * Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
    */
   connectionRateLimit?: number
+  /**
+   * Defines wether to enable access logs on the frontend.
+   */
+  enableAccessLogs?: boolean
 }
 
 export type ZonedApiUpdateHealthCheckRequest = {
