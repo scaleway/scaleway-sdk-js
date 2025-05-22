@@ -1482,6 +1482,7 @@ const unmarshalServerSummary = (data: unknown): ServerSummary => {
       data.interfaces,
       unmarshalNetworkInterface,
     ),
+    isHds: data.is_hds,
     isOutsourced: data.is_outsourced,
     level: data.level ? unmarshalServiceLevel(data.level) : undefined,
     offerId: data.offer_id,
