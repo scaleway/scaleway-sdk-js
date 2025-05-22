@@ -282,6 +282,8 @@ const unmarshalPreconfiguredAlertData = (
     displayDescription: data.display_description,
     displayName: data.display_name,
     preconfiguredRuleId: data.preconfigured_rule_id,
+    productFamily: data.product_family,
+    productName: data.product_name,
   } as PreconfiguredAlertData
 }
 

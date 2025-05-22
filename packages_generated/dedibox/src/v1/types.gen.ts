@@ -1418,6 +1418,10 @@ export interface ServerSummary {
    * Supported RPN version.
    */
   rpnVersion?: number
+  /**
+   * Whether or not the server is HDS.
+   */
+  isHds: boolean
 }
 
 export interface CPU {
