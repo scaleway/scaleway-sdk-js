@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-container@1.4.0...@scaleway/sdk-container@1.5.0) (2025-05-26)
+
+### Features
+
+- **serverless:** add command and args to containers ([#2155](https://github.com/scaleway/scaleway-sdk-js/issues/2155)) ([0ecfec6](https://github.com/scaleway/scaleway-sdk-js/commit/0ecfec6d8404fab6fdd5bbc238c9237dc1be8133))
+
 # [1.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-container@1.3.1...@scaleway/sdk-container@1.4.0) (2025-05-19)
 
 ### Features

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-cockpit@1.2.0...@scaleway/sdk-cockpit@1.3.0) (2025-05-26)
+
+### Features
+
+- **cockpit:** add product and family fields in alert listing ([#2152](https://github.com/scaleway/scaleway-sdk-js/issues/2152)) ([95e87c9](https://github.com/scaleway/scaleway-sdk-js/commit/95e87c954e7af79b7fb06c1e5170e4b6a411738b))
+
 # [1.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-cockpit@1.1.4...@scaleway/sdk-cockpit@1.2.0) (2025-05-19)
 
 ### Features

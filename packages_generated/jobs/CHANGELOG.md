@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.1.0 (2025-05-26)
+
+### Features
+
+- **serverless_jobs:** add filter or on multiple states ([#2148](https://github.com/scaleway/scaleway-sdk-js/issues/2148)) ([0a82e53](https://github.com/scaleway/scaleway-sdk-js/commit/0a82e53e47e9ad84dba89575ebf98fe0008cd83e))
+
 ## [1.0.3](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-jobs@1.0.2...@scaleway/sdk-jobs@1.0.3) (2025-05-13)
 
 **Note:** Version bump only for package @scaleway/sdk-jobs

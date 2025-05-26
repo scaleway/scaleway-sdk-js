@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk",
-  "version": "2.76.2",
+  "version": "2.76.3",
   "description": "Scaleway SDK TS.",
   "license": "Apache-2.0",
   "files": [
