@@ -34,5 +34,6 @@ export function toApiLocality(
   if (regions && regions.length > 0) {
     return { type: 'region', regions }
   }
+  
   return { type: 'global' }
 }
