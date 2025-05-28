@@ -155,6 +155,7 @@ export class API extends ParentAPI {
               { param: 'zonal', value: request.zonal },
               { param: 'private_network_id', value: request.privateNetworkId },
               { param: 'subnet_id', value: request.subnetId },
+              { param: 'source_vpc_id', value: request.sourceVpcId },
             ]),
           ),
         ),

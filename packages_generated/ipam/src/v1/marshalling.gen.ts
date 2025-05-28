@@ -60,6 +60,7 @@ const unmarshalSource = (data: unknown): Source => {
   return {
     privateNetworkId: data.private_network_id,
     subnetId: data.subnet_id,
+    vpcId: data.vpc_id,
     zonal: data.zonal,
   } as Source
 }
@@ -123,6 +124,7 @@ const marshalSource = (
     { param: 'zonal', value: request.zonal },
     { param: 'private_network_id', value: request.privateNetworkId },
     { param: 'subnet_id', value: request.subnetId },
+    { param: 'vpc_id', value: request.vpcId },
   ]),
 })
 
