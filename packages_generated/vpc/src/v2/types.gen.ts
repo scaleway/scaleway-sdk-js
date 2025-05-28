@@ -96,6 +96,10 @@ export interface PrivateNetwork {
    * Defines whether managed DHCP is enabled for this Private Network.
    */
   dhcpEnabled: boolean
+  /**
+   * Defines whether default v4 and v6 routes are propagated for this Private Network.
+   */
+  defaultRoutePropagationEnabled: boolean
 }
 
 export interface Route {
@@ -275,6 +279,10 @@ export type CreatePrivateNetworkRequest = {
    * VPC in which to create the Private Network.
    */
   vpcId?: string
+  /**
+   * Defines whether default v4 and v6 routes are propagated for this Private Network.
+   */
+  defaultRoutePropagationEnabled: boolean
 }
 
 export type CreateRouteRequest = {
@@ -643,6 +651,10 @@ export type UpdatePrivateNetworkRequest = {
    * Tags for the Private Network.
    */
   tags?: string[]
+  /**
+   * Defines whether default v4 and v6 routes are propagated for this Private Network.
+   */
+  defaultRoutePropagationEnabled?: boolean
 }
 
 export type UpdateRouteRequest = {

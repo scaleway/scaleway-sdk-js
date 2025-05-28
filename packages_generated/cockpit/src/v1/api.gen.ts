@@ -381,9 +381,9 @@ Deprecated: retention is now managed at the data source level.
 }
 
 /**
- * Cockpit Regional API.
+ * Cockpit API.
 
-The Cockpit Regional API allows you to create data sources and tokens to store and query data types such as metrics, logs, and traces. You can also push your data into Cockpit, and send alerts to your contact points when your resources may require your attention, using the regional Alert manager.
+The Cockpit API allows you to create data sources and Cockpit tokens to store and query data types such as metrics, logs, and traces. You can also push your data into Cockpit, and send alerts to your contact points when your resources may require your attention, using the regional Alert manager.
  */
 export class RegionalAPI extends ParentAPI {
   /** Lists the available regions of the API. */
@@ -801,6 +801,7 @@ If you need to receive alerts for other receivers, you can create additional con
         method: 'GET',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alerts`,
         urlParams: urlParams(
+          ['data_source_id', request.dataSourceId],
           ['is_enabled', request.isEnabled],
           ['is_preconfigured', request.isPreconfigured],
           [

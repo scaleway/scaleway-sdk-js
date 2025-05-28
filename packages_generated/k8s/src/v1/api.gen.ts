@@ -17,6 +17,7 @@ import {
   marshalAddClusterACLRulesRequest,
   marshalCreateClusterRequest,
   marshalCreatePoolRequest,
+  marshalMigratePoolsToNewImagesRequest,
   marshalSetClusterACLRulesRequest,
   marshalSetClusterTypeRequest,
   marshalUpdateClusterRequest,
@@ -77,6 +78,7 @@ import type {
   ListPoolsResponse,
   ListVersionsRequest,
   ListVersionsResponse,
+  MigratePoolsToNewImagesRequest,
   Node,
   NodeMetadata,
   Pool,
@@ -544,6 +546,23 @@ This will drain and replace the nodes in that pool.
       },
       unmarshalPool,
     )
+
+  /**
+   * Migrate specific pools or all pools of a cluster to new images.. If no pool is specified, all pools of the cluster will be migrated to new images.
+   *
+   * @param request - The request {@link MigratePoolsToNewImagesRequest}
+   */
+  migratePoolsToNewImages = (
+    request: Readonly<MigratePoolsToNewImagesRequest>,
+  ) =>
+    this.client.fetch<void>({
+      body: JSON.stringify(
+        marshalMigratePoolsToNewImagesRequest(request, this.client.settings),
+      ),
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/migrate-pools-to-new-images`,
+    })
 
   /**
    * Fetch node metadata. Rerieve metadata to instantiate a Kapsule/Kosmos node. This method is not intended to be called by end users but rather programmatically by the node-installer.

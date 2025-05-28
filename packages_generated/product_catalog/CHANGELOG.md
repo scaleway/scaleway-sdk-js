@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@1.4.0...@scaleway/sdk-product-catalog@1.5.0) (2025-05-26)
+
+### Features
+
+- **product_catalog:** add enum to filter by product type in the public catalog API ([#2150](https://github.com/scaleway/scaleway-sdk-js/issues/2150)) ([650f417](https://github.com/scaleway/scaleway-sdk-js/commit/650f4173fa984dec9c4155a278dd726048066865))
+
+# [1.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@1.3.1...@scaleway/sdk-product-catalog@1.4.0) (2025-05-19)
+
+### Features
+
+- **product_catalog:** add new instance properties + status ([#2118](https://github.com/scaleway/scaleway-sdk-js/issues/2118)) ([ffb89e8](https://github.com/scaleway/scaleway-sdk-js/commit/ffb89e80b670d777963227a7e28e926418576c85))
+
+## [1.3.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@1.3.0...@scaleway/sdk-product-catalog@1.3.1) (2025-05-13)
+
+**Note:** Version bump only for package @scaleway/sdk-product-catalog
+
 # [1.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@1.0.2...@scaleway/sdk-product-catalog@1.3.0) (2025-05-13)
 
 ### Bug Fixes

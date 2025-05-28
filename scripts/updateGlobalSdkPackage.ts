@@ -75,7 +75,7 @@ const updateSdkPackageJson = ({
     // Write the updated package.json
     writeFileSync(
       pathSdkPackageJson,
-      JSON.stringify(sdkPackageJson, null, 2),
+      JSON.stringify(sdkPackageJson, null, 2) + '\n',
       'utf8',
     )
 

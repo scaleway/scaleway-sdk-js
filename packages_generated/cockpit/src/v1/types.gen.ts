@@ -64,6 +64,14 @@ export interface PreconfiguredAlertData {
    * Human readable description of the alert.
    */
   displayDescription: string
+  /**
+   * Product associated with the alert.
+   */
+  productName: string
+  /**
+   * Family of the product associated with the alert.
+   */
+  productFamily: string
 }
 
 export interface ContactPointEmail {
@@ -116,6 +124,10 @@ export interface Alert {
    * Contains additional data for preconfigured alerts, such as the rule ID, display name, and description. Only present if the alert is preconfigured.
    */
   preconfiguredData?: PreconfiguredAlertData
+  /**
+   * ID of the data source containing the alert rule.
+   */
+  dataSourceId: string
 }
 
 /**
@@ -964,6 +976,10 @@ export type RegionalApiListAlertsRequest = {
    * Valid values to filter on are `inactive`, `pending` and `firing`. If omitted, no filtering is applied on alert states. Other filters may still apply.
    */
   state?: AlertState
+  /**
+   * If omitted, only alerts from the default scaleway data source will be listed.
+   */
+  dataSourceId?: string
 }
 
 /**

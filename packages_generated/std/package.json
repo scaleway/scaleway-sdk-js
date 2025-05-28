@@ -1,8 +1,8 @@
 {
   "name": "@scaleway/sdk-std",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Scaleway SDK Std",
-  "types": "dist/index.d.ts",
+  "license": "Apache-2.0",
   "files": [
     "dist"
   ],
@@ -34,8 +34,5 @@
   },
   "peerDependencies": {
     "@scaleway/sdk-client": "workspace:^"
-  },
-  "bundledDependencies": [
-    "@scaleway/sdk-client"
-  ]
+  }
 }

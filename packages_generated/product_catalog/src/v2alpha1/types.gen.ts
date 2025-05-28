@@ -6,12 +6,27 @@ import type {
   Zone as ScwZone,
 } from '@scaleway/sdk-client'
 
+export type ListPublicCatalogProductsRequestProductType =
+  | 'unknown_product_type'
+  | 'instance'
+  | 'apple_silicon'
+  | 'elastic_metal'
+  | 'dedibox'
+
 export type PublicCatalogProductPropertiesHardwareCPUArch =
   | 'unknown_arch'
   | 'x64'
   | 'arm64'
   | 'riscv'
   | 'apple_silicon'
+
+export type PublicCatalogProductStatus =
+  | 'unknown_status'
+  | 'public_beta'
+  | 'preview'
+  | 'general_availability'
+  | 'end_of_deployment'
+  | 'end_of_support'
 
 export type PublicCatalogProductUnitOfMeasureCountableUnit =
   | 'unknown_countable_unit'
@@ -211,6 +226,14 @@ export interface PublicCatalogProductPropertiesInstance {
    * The range of the Instance server.
    */
   range: string
+  /**
+   * The offer ID of the Instance server.
+   */
+  offerId: string
+  /**
+   * The recommended replacement offer IDs of the Instance server.
+   */
+  recommendedReplacementOfferIds: string[]
 }
 
 export interface PublicCatalogProductEnvironmentalImpactEstimation {
@@ -329,6 +352,14 @@ export interface PublicCatalogProduct {
    * The unit of measure of the product.
    */
   unitOfMeasure?: PublicCatalogProductUnitOfMeasure
+  /**
+   * The status of the product.
+   */
+  status: PublicCatalogProductStatus
+  /**
+   * The end of life date of the product.
+   */
+  endOfLifeAt?: Date
 }
 
 export interface ListPublicCatalogProductsResponse {
@@ -351,4 +382,8 @@ export type PublicCatalogApiListPublicCatalogProductsRequest = {
    * The number of products per page. Value must be greater or equal to 1.
    */
   pageSize?: number
+  /**
+   * The list of filtered product categories.
+   */
+  productTypes?: ListPublicCatalogProductsRequestProductType[]
 }

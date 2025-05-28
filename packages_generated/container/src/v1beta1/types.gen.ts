@@ -368,6 +368,15 @@ export interface Container {
    * List of tags applied to the Serverless Container.
    */
   tags: string[]
+  privateNetworkId?: string
+  /**
+   * Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
+   */
+  command: string[]
+  /**
+   * Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
+   */
+  args: string[]
 }
 
 export interface Cron {
@@ -485,6 +494,10 @@ export interface Namespace {
    * Last update date of the namespace.
    */
   updatedAt?: Date
+  /**
+   * @deprecated
+   */
+  vpcIntegrationActivated?: boolean
 }
 
 export interface Token {
@@ -674,6 +687,15 @@ export type CreateContainerRequest = {
    * Tags of the Serverless Container.
    */
   tags?: string[]
+  privateNetworkId?: string
+  /**
+   * Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
+   */
+  command?: string[]
+  /**
+   * Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
+   */
+  args?: string[]
 }
 
 export type CreateCronRequest = {
@@ -743,6 +765,7 @@ export type CreateNamespaceRequest = {
    * Tags of the Serverless Container Namespace.
    */
   tags?: string[]
+  activateVpcIntegration: boolean
 }
 
 export type CreateTokenRequest = {
@@ -1273,6 +1296,15 @@ export type UpdateContainerRequest = {
    * Tags of the Serverless Container.
    */
   tags?: string[]
+  privateNetworkId?: string
+  /**
+   * Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
+   */
+  command?: string[]
+  /**
+   * Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
+   */
+  args?: string[]
 }
 
 export type UpdateCronRequest = {

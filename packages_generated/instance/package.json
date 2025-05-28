@@ -1,8 +1,8 @@
 {
   "name": "@scaleway/sdk-instance",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Scaleway SDK instance",
-  "types": "dist/index.d.ts",
+  "license": "Apache-2.0",
   "files": [
     "dist"
   ],

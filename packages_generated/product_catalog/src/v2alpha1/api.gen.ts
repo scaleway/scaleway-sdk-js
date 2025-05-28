@@ -28,6 +28,7 @@ export class PublicCatalogAPI extends ParentAPI {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
+          ['product_types', request.productTypes],
         ),
       },
       unmarshalListPublicCatalogProductsResponse,

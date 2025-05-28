@@ -282,6 +282,8 @@ const unmarshalPreconfiguredAlertData = (
     displayDescription: data.display_description,
     displayName: data.display_name,
     preconfiguredRuleId: data.preconfigured_rule_id,
+    productFamily: data.product_family,
+    productName: data.product_name,
   } as PreconfiguredAlertData
 }
 
@@ -294,6 +296,7 @@ const unmarshalAlert = (data: unknown): Alert => {
 
   return {
     annotations: data.annotations,
+    dataSourceId: data.data_source_id,
     duration: data.duration,
     enabled: data.enabled,
     name: data.name,

@@ -3,6 +3,7 @@
 import {
   isJSONObject,
   unmarshalArrayOfObject,
+  unmarshalDate,
   unmarshalMoney,
 } from '@scaleway/sdk-client'
 import type {
@@ -228,7 +229,9 @@ const unmarshalPublicCatalogProductPropertiesInstance = (
   }
 
   return {
+    offerId: data.offer_id,
     range: data.range,
+    recommendedReplacementOfferIds: data.recommended_replacement_offer_ids,
   } as PublicCatalogProductPropertiesInstance
 }
 
@@ -332,6 +335,7 @@ const unmarshalPublicCatalogProduct = (data: unknown): PublicCatalogProduct => {
 
   return {
     description: data.description,
+    endOfLifeAt: unmarshalDate(data.end_of_life_at),
     environmentalImpactEstimation: data.environmental_impact_estimation
       ? unmarshalPublicCatalogProductEnvironmentalImpactEstimation(
           data.environmental_impact_estimation,
@@ -349,6 +353,7 @@ const unmarshalPublicCatalogProduct = (data: unknown): PublicCatalogProduct => {
       : undefined,
     serviceCategory: data.service_category,
     sku: data.sku,
+    status: data.status,
     unitOfMeasure: data.unit_of_measure
       ? unmarshalPublicCatalogProductUnitOfMeasure(data.unit_of_measure)
       : undefined,

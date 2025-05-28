@@ -3,6 +3,7 @@
 export { PublicCatalogAPI } from './api.gen'
 export * from './marshalling.gen'
 export type {
+  ListPublicCatalogProductsRequestProductType,
   ListPublicCatalogProductsResponse,
   PublicCatalogApiListPublicCatalogProductsRequest,
   PublicCatalogProduct,
@@ -23,6 +24,7 @@ export type {
   PublicCatalogProductPropertiesHardwareRAM,
   PublicCatalogProductPropertiesHardwareStorage,
   PublicCatalogProductPropertiesInstance,
+  PublicCatalogProductStatus,
   PublicCatalogProductUnitOfMeasure,
   PublicCatalogProductUnitOfMeasureCountableUnit,
 } from './types.gen'
