@@ -977,7 +977,7 @@ export type RegionalApiListAlertsRequest = {
    */
   state?: AlertState
   /**
-   * If omitted, only alerts from the default scaleway data source will be listed.
+   * If omitted, only alerts from the default Scaleway metrics data source will be listed.
    */
   dataSourceId?: string
 }
