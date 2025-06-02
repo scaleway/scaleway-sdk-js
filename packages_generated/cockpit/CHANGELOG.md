@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-cockpit@1.3.0...@scaleway/sdk-cockpit@1.3.1) (2025-06-02)
+
+### Bug Fixes
+
+- **cockpit:** add small precisions in documentation ([#2159](https://github.com/scaleway/scaleway-sdk-js/issues/2159)) ([6b1f723](https://github.com/scaleway/scaleway-sdk-js/commit/6b1f723bb4b6d157b3c8365055ef46c1006c8041))
+
 # [1.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-cockpit@1.2.0...@scaleway/sdk-cockpit@1.3.0) (2025-05-26)
 
 ### Features
