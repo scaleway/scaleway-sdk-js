@@ -39,6 +39,7 @@ import type {
   DeleteSubnetsRequest,
   DeleteSubnetsResponse,
   DeleteVPCRequest,
+  EnableCustomRoutesPropagationRequest,
   EnableDHCPRequest,
   EnableRoutingRequest,
   GetAclRequest,
@@ -308,6 +309,25 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}/enable-routing`,
+      },
+      unmarshalVPC,
+    )
+
+  /**
+   * Enable custom routes propagation on a VPC. Enable custom routes propagation on an existing VPC. Note that you will not be able to deactivate it afterwards.
+   *
+   * @param request - The request {@link EnableCustomRoutesPropagationRequest}
+   * @returns A Promise of VPC
+   */
+  enableCustomRoutesPropagation = (
+    request: Readonly<EnableCustomRoutesPropagationRequest>,
+  ) =>
+    this.client.fetch<VPC>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}/enable-custom-routes-propagation`,
       },
       unmarshalVPC,
     )

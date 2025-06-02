@@ -233,6 +233,10 @@ export interface VPC {
    * Defines whether the VPC routes traffic between its Private Networks.
    */
   routingEnabled: boolean
+  /**
+   * Defines whether the VPC advertises custom routes between its Private Networks.
+   */
+  customRoutesPropagationEnabled: boolean
 }
 
 export type AddSubnetsRequest = {
@@ -381,6 +385,17 @@ export interface DeleteSubnetsResponse {
 }
 
 export type DeleteVPCRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * VPC ID.
+   */
+  vpcId: string
+}
+
+export type EnableCustomRoutesPropagationRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
