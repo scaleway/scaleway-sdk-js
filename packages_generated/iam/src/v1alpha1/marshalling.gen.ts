@@ -28,7 +28,9 @@ import type {
   GetUserConnectionsResponse,
   GracePeriod,
   Group,
+  InitiateUserConnectionResponse,
   JWT,
+  JoinUserConnectionRequest,
   ListAPIKeysResponse,
   ListApplicationsResponse,
   ListGracePeriodsResponse,
@@ -49,6 +51,7 @@ import type {
   Quotum,
   QuotumLimit,
   RemoveGroupMemberRequest,
+  RemoveUserConnectionRequest,
   Rule,
   RuleSpecs,
   SSHKey,
@@ -363,6 +366,20 @@ export const unmarshalGetUserConnectionsResponse = (
   return {
     connections: unmarshalArrayOfObject(data.connections, unmarshalConnection),
   } as GetUserConnectionsResponse
+}
+
+export const unmarshalInitiateUserConnectionResponse = (
+  data: unknown,
+): InitiateUserConnectionResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InitiateUserConnectionResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    token: data.token,
+  } as InitiateUserConnectionResponse
 }
 
 export const unmarshalListAPIKeysResponse = (
@@ -784,6 +801,13 @@ export const marshalCreateUserRequest = (
   ]),
 })
 
+export const marshalJoinUserConnectionRequest = (
+  request: JoinUserConnectionRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  token: request.token,
+})
+
 export const marshalRemoveGroupMemberRequest = (
   request: RemoveGroupMemberRequest,
   defaults: DefaultValues,
@@ -792,6 +816,13 @@ export const marshalRemoveGroupMemberRequest = (
     { param: 'user_id', value: request.userId },
     { param: 'application_id', value: request.applicationId },
   ]),
+})
+
+export const marshalRemoveUserConnectionRequest = (
+  request: RemoveUserConnectionRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  target_user_id: request.targetUserId,
 })
 
 export const marshalSetGroupMembersRequest = (
