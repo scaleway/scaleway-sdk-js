@@ -79,6 +79,12 @@ export const GetQuotumRequest = {
   },
 }
 
+export const JoinUserConnectionRequest = {
+  token: {
+    minLength: 1,
+  },
+}
+
 export const ListAPIKeysRequest = {
   description: {
     maxLength: 200,
