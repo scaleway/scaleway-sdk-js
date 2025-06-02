@@ -69,21 +69,26 @@ export interface Source {
   /**
    * This source is global.
    *
-   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId' could be set.
+   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId', 'vpcId' could be set.
    */
   zonal?: string
   /**
    * This source is specific.
    *
-   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId' could be set.
+   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId', 'vpcId' could be set.
    */
   privateNetworkId?: string
   /**
    * This source is specific.
    *
-   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId' could be set.
+   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId', 'vpcId' could be set.
    */
   subnetId?: string
+  /**
+   *
+   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId', 'vpcId' could be set.
+   */
+  vpcId?: string
 }
 
 export interface CustomResource {
@@ -244,19 +249,19 @@ export type ListIPsRequest = {
   /**
    * Zone to filter for. Only IPs that are zonal, and in this zone, will be returned.
    *
-   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId' could be set.
+   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId', 'sourceVpcId' could be set.
    */
   zonal?: string
   /**
    * Only IPs that are private, and in this Private Network, will be returned.
    *
-   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId' could be set.
+   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId', 'sourceVpcId' could be set.
    */
   privateNetworkId?: string
   /**
    * Only IPs inside this exact subnet will be returned.
    *
-   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId' could be set.
+   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId', 'sourceVpcId' could be set.
    */
   subnetId?: string
   /**
@@ -307,6 +312,11 @@ export type ListIPsRequest = {
    * IP IDs to filter for. Only IPs with these UUIDs will be returned.
    */
   ipIds?: string[]
+  /**
+   *
+   * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId', 'sourceVpcId' could be set.
+   */
+  sourceVpcId?: string
 }
 
 export interface ListIPsResponse {
