@@ -96,6 +96,7 @@ export const unmarshalPool = (data: unknown): Pool => {
     region: data.region,
     rootVolumeSize: data.root_volume_size,
     rootVolumeType: data.root_volume_type,
+    securityGroupId: data.security_group_id,
     size: data.size,
     status: data.status,
     tags: data.tags,
@@ -646,6 +647,7 @@ const marshalCreateClusterRequestPoolConfig = (
   public_ip_disabled: request.publicIpDisabled,
   root_volume_size: request.rootVolumeSize,
   root_volume_type: request.rootVolumeType,
+  security_group_id: request.securityGroupId,
   size: request.size,
   tags: request.tags,
   upgrade_policy:
@@ -735,6 +737,7 @@ export const marshalCreatePoolRequest = (
   public_ip_disabled: request.publicIpDisabled,
   root_volume_size: request.rootVolumeSize,
   root_volume_type: request.rootVolumeType,
+  security_group_id: request.securityGroupId,
   size: request.size,
   tags: request.tags,
   upgrade_policy:
