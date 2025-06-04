@@ -1121,6 +1121,31 @@ export type GetUserRequest = {
   userId: string
 }
 
+export type InitiateUserConnectionRequest = {
+  /**
+   * ID of the user that will be added to your connection.
+   */
+  userId: string
+}
+
+export interface InitiateUserConnectionResponse {
+  /**
+   * Token to be used in JoinUserConnection.
+   */
+  token: string
+}
+
+export type JoinUserConnectionRequest = {
+  /**
+   * User ID.
+   */
+  userId: string
+  /**
+   * A token returned by InitiateUserConnection.
+   */
+  token: string
+}
+
 export type ListAPIKeysRequest = {
   /**
    * Criteria for sorting results.
@@ -1669,6 +1694,17 @@ export type RemoveGroupMemberRequest = {
    * One-of ('member'): at most one of 'userId', 'applicationId' could be set.
    */
   applicationId?: string
+}
+
+export type RemoveUserConnectionRequest = {
+  /**
+   * ID of the user you want to manage the connection for.
+   */
+  userId: string
+  /**
+   * ID of the user you want to remove from your connection.
+   */
+  targetUserId: string
 }
 
 export type SetGroupMembersRequest = {

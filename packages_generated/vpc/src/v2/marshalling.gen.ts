@@ -103,6 +103,7 @@ export const unmarshalVPC = (data: unknown): VPC => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
+    customRoutesPropagationEnabled: data.custom_routes_propagation_enabled,
     id: data.id,
     isDefault: data.is_default,
     name: data.name,

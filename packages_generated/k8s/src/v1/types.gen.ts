@@ -326,6 +326,10 @@ export interface Pool {
    */
   newImagesEnabled?: boolean
   /**
+   * Security group ID in which all the nodes of the pool will be created. If unset, the pool will use default Kapsule security group in current zone.
+   */
+  securityGroupId: string
+  /**
    * Cluster region of the pool.
    */
   region: ScwRegion
@@ -526,6 +530,10 @@ export interface CreateClusterRequestPoolConfig {
    * Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.
    */
   publicIpDisabled: boolean
+  /**
+   * Security group ID in which all the nodes of the pool will be created. If unset, the pool will use default Kapsule security group in current zone.
+   */
+  securityGroupId?: string
 }
 
 export interface CreatePoolRequestUpgradePolicy {
@@ -1071,6 +1079,10 @@ export type CreatePoolRequest = {
    * Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.
    */
   publicIpDisabled: boolean
+  /**
+   * Security group ID in which all the nodes of the pool will be created. If unset, the pool will use default Kapsule security group in current zone.
+   */
+  securityGroupId?: string
 }
 
 export type DeleteACLRuleRequest = {

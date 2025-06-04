@@ -17,7 +17,9 @@ import {
   marshalCreatePolicyRequest,
   marshalCreateSSHKeyRequest,
   marshalCreateUserRequest,
+  marshalJoinUserConnectionRequest,
   marshalRemoveGroupMemberRequest,
+  marshalRemoveUserConnectionRequest,
   marshalSetGroupMembersRequest,
   marshalSetRulesRequest,
   marshalUpdateAPIKeyRequest,
@@ -35,6 +37,7 @@ import {
   unmarshalEncodedJWT,
   unmarshalGetUserConnectionsResponse,
   unmarshalGroup,
+  unmarshalInitiateUserConnectionResponse,
   unmarshalJWT,
   unmarshalListAPIKeysResponse,
   unmarshalListApplicationsResponse,
@@ -94,7 +97,10 @@ import type {
   GetUserConnectionsResponse,
   GetUserRequest,
   Group,
+  InitiateUserConnectionRequest,
+  InitiateUserConnectionResponse,
   JWT,
+  JoinUserConnectionRequest,
   ListAPIKeysRequest,
   ListAPIKeysResponse,
   ListApplicationsRequest,
@@ -127,6 +133,7 @@ import type {
   Policy,
   Quotum,
   RemoveGroupMemberRequest,
+  RemoveUserConnectionRequest,
   SSHKey,
   SetGroupMembersRequest,
   SetRulesRequest,
@@ -494,6 +501,37 @@ export class API extends ParentAPI {
       },
       unmarshalGetUserConnectionsResponse,
     )
+
+  initiateUserConnection = (request: Readonly<InitiateUserConnectionRequest>) =>
+    this.client.fetch<InitiateUserConnectionResponse>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/initiate-connection`,
+      },
+      unmarshalInitiateUserConnectionResponse,
+    )
+
+  joinUserConnection = (request: Readonly<JoinUserConnectionRequest>) =>
+    this.client.fetch<void>({
+      body: JSON.stringify(
+        marshalJoinUserConnectionRequest(request, this.client.settings),
+      ),
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/join-connection`,
+    })
+
+  removeUserConnection = (request: Readonly<RemoveUserConnectionRequest>) =>
+    this.client.fetch<void>({
+      body: JSON.stringify(
+        marshalRemoveUserConnectionRequest(request, this.client.settings),
+      ),
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/remove-connection`,
+    })
 
   protected pageOfListApplications = (
     request: Readonly<ListApplicationsRequest> = {},

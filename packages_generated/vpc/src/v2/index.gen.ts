@@ -16,6 +16,7 @@ export type {
   DeleteSubnetsRequest,
   DeleteSubnetsResponse,
   DeleteVPCRequest,
+  EnableCustomRoutesPropagationRequest,
   EnableDHCPRequest,
   EnableRoutingRequest,
   GetAclRequest,

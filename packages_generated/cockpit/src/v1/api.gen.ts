@@ -790,7 +790,7 @@ If you need to receive alerts for other receivers, you can create additional con
     })
 
   /**
-   * List alerts. List preconfigured and/or custom alerts for the specified Project.
+   * List alerts. List preconfigured and/or custom alerts for the specified Project and data source.
    *
    * @param request - The request {@link RegionalApiListAlertsRequest}
    * @returns A Promise of ListAlertsResponse
