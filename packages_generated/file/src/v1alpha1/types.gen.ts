@@ -212,6 +212,10 @@ export type ListFileSystemsRequest = {
    */
   projectId?: string
   /**
+   * Filter by organization ID.
+   */
+  organizationId?: string
+  /**
    * Page number (starting at 1).
    */
   page?: number
