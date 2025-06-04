@@ -384,11 +384,23 @@ export interface AlertManager {
   region: ScwRegion
 }
 
+/**
+ * Output returned when alert rules are disabled.
+ */
 export interface DisableAlertRulesResponse {
+  /**
+   * Only newly disabled rules are listed. Rules that were already disabled are not returned in the output.
+   */
   disabledRuleIds: string[]
 }
 
+/**
+ * Output returned when alert rules are enabled.
+ */
 export interface EnableAlertRulesResponse {
+  /**
+   * Only newly enabled rules are listed. Rules that were already enabled are not returned in the output.
+   */
   enabledRuleIds: string[]
 }
 
@@ -836,7 +848,13 @@ export type RegionalApiDisableAlertRulesRequest = {
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
+  /**
+   * ID of the Project.
+   */
   projectId?: string
+  /**
+   * List of IDs of the rules to enable. If empty, disables all preconfigured rules.
+   */
   ruleIds?: string[]
 }
 
@@ -873,7 +891,13 @@ export type RegionalApiEnableAlertRulesRequest = {
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
+  /**
+   * ID of the Project.
+   */
   projectId?: string
+  /**
+   * List of IDs of the rules to enable. If empty, enables all preconfigured rules.
+   */
   ruleIds?: string[]
 }
 
