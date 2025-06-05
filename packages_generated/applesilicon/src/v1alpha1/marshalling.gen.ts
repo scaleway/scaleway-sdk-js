@@ -138,6 +138,7 @@ const unmarshalServerTypeNetwork = (data: unknown): ServerTypeNetwork => {
 
   return {
     publicBandwidthBps: data.public_bandwidth_bps,
+    supportedBandwidth: data.supported_bandwidth,
   } as ServerTypeNetwork
 }
 
@@ -197,6 +198,7 @@ export const unmarshalServer = (data: unknown): Server => {
     organizationId: data.organization_id,
     os: data.os ? unmarshalOS(data.os) : undefined,
     projectId: data.project_id,
+    publicBandwidthBps: data.public_bandwidth_bps,
     sshUsername: data.ssh_username,
     status: data.status,
     sudoPassword: data.sudo_password,
@@ -349,6 +351,7 @@ export const marshalCreateServerRequest = (
   name: request.name || randomName('as'),
   os_id: request.osId,
   project_id: request.projectId ?? defaults.defaultProjectId,
+  public_bandwidth_bps: request.publicBandwidthBps,
   type: request.type,
 })
 
@@ -398,5 +401,6 @@ export const marshalUpdateServerRequest = (
       : undefined,
   enable_vpc: request.enableVpc,
   name: request.name,
+  public_bandwidth_bps: request.publicBandwidthBps,
   schedule_deletion: request.scheduleDeletion,
 })
