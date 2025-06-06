@@ -116,6 +116,7 @@ export interface ServerTypeMemory {
 
 export interface ServerTypeNetwork {
   publicBandwidthBps: number
+  supportedBandwidth: number[]
 }
 
 export interface Commitment {
@@ -291,6 +292,10 @@ export interface Server {
    * Commitment scheme applied to this server.
    */
   commitment?: Commitment
+  /**
+   * Public bandwidth configured for this server. Expressed in bits per second.
+   */
+  publicBandwidthBps: number
 }
 
 export interface CommitmentTypeValue {
@@ -335,6 +340,10 @@ export type CreateServerRequest = {
    * Activate commitment for this server. If not specified, there is a 24h commitment due to Apple licensing (commitment_type `duration_24h`). It can be updated with the Update Server request. Available commitment depends on server type.
    */
   commitmentType?: CommitmentType
+  /**
+   * Public bandwidth to configure for this server. This defaults to the minimum bandwidth for this server type. For compatible server types, the bandwidth can be increased which incurs additional costs.
+   */
+  publicBandwidthBps: number
 }
 
 export type DeleteServerRequest = {
@@ -644,4 +653,8 @@ export type UpdateServerRequest = {
    * Change commitment. Use 'none' to automatically cancel a renewing commitment.
    */
   commitmentType?: CommitmentTypeValue
+  /**
+   * Public bandwidth to configure for this server. Setting an higher bandwidth incurs additional costs. Supported bandwidth levels depends on server type and can be queried using the `/server-types` endpoint.
+   */
+  publicBandwidthBps?: number
 }
