@@ -368,6 +368,9 @@ export interface Container {
    * List of tags applied to the Serverless Container.
    */
   tags: string[]
+  /**
+   * When connected to a Private Network, the container can access other Scaleway resources in this Private Network.
+   */
   privateNetworkId?: string
   /**
    * Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
@@ -495,7 +498,8 @@ export interface Namespace {
    */
   updatedAt?: Date
   /**
-   * @deprecated
+   * @deprecated When activated, containers in the namespace can be connected to a Private Network.
+Note that activating the VPC integration can only be done when creating a new namespace.
    */
   vpcIntegrationActivated?: boolean
 }
@@ -687,6 +691,11 @@ export type CreateContainerRequest = {
    * Tags of the Serverless Container.
    */
   tags?: string[]
+  /**
+   * When connected to a Private Network, the container can access other Scaleway resources in this Private Network.
+
+Note: this feature is currently in beta and requires a namespace with VPC integration activated, using the `activate_vpc_integration` flag.
+   */
   privateNetworkId?: string
   /**
    * Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
@@ -765,6 +774,9 @@ export type CreateNamespaceRequest = {
    * Tags of the Serverless Container Namespace.
    */
   tags?: string[]
+  /**
+   * When activated, containers in the namespace can be connected to a Private Network.
+   */
   activateVpcIntegration: boolean
 }
 
@@ -1264,8 +1276,17 @@ export type UpdateContainerRequest = {
    * @deprecated Number of maximum concurrent executions of the container.
    */
   maxConcurrency?: number
+  /**
+   * Protocol the container uses.
+   */
   protocol?: ContainerProtocol
+  /**
+   * Port the container listens on.
+   */
   port?: number
+  /**
+   * Secret environment variables of the container.
+   */
   secretEnvironmentVariables?: Secret[]
   /**
    * Possible values:
@@ -1296,6 +1317,11 @@ export type UpdateContainerRequest = {
    * Tags of the Serverless Container.
    */
   tags?: string[]
+  /**
+   * When connected to a Private Network, the container can access other Scaleway resources in this Private Network.
+
+Note: this feature is currently in beta and requires a namespace with VPC integration activated, using the `activate_vpc_integration` flag.
+   */
   privateNetworkId?: string
   /**
    * Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
