@@ -5,6 +5,7 @@ import type {
   IpState,
   PrivateNICState,
   SecurityGroupState,
+  ServerFilesystemState,
   ServerIpState,
   ServerState,
   SnapshotState,
@@ -25,6 +26,12 @@ export const PRIVATE_NIC_TRANSIENT_STATUSES: PrivateNICState[] = ['syncing']
 /** Lists transient statutes of the enum {@link SecurityGroupState}. */
 export const SECURITY_GROUP_TRANSIENT_STATUSES: SecurityGroupState[] = [
   'syncing',
+]
+
+/** Lists transient statutes of the enum {@link ServerFilesystemState}. */
+export const SERVER_FILESYSTEM_TRANSIENT_STATUSES: ServerFilesystemState[] = [
+  'attaching',
+  'detaching',
 ]
 
 /** Lists transient statutes of the enum {@link ServerIpState}. */

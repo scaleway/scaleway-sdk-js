@@ -84,6 +84,7 @@ import type {
   ServerActionRequestVolumeBackupTemplate,
   ServerActionResponse,
   ServerCompatibleTypes,
+  ServerFilesystem,
   ServerIp,
   ServerIpv6,
   ServerLocation,
@@ -303,6 +304,19 @@ const unmarshalSecurityGroupSummary = (data: unknown): SecurityGroupSummary => {
   } as SecurityGroupSummary
 }
 
+const unmarshalServerFilesystem = (data: unknown): ServerFilesystem => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerFilesystem' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    filesystemId: data.filesystem_id,
+    state: data.state,
+  } as ServerFilesystem
+}
+
 const unmarshalServerIp = (data: unknown): ServerIp => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -409,6 +423,10 @@ const unmarshalServer = (data: unknown): Server => {
     dynamicIpRequired: data.dynamic_ip_required,
     enableIpv6: data.enable_ipv6,
     endOfService: data.end_of_service,
+    filesystems: unmarshalArrayOfObject(
+      data.filesystems,
+      unmarshalServerFilesystem,
+    ),
     hostname: data.hostname,
     id: data.id,
     image: data.image ? unmarshalImage(data.image) : undefined,
