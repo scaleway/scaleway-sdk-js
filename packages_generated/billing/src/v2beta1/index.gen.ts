@@ -30,4 +30,5 @@ export type {
   ListTaxesRequestOrderBy,
   ListTaxesResponse,
   ListTaxesResponseTax,
+  RedeemCouponRequest,
 } from './types.gen'
