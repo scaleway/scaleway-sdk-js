@@ -480,3 +480,14 @@ export interface ListTaxesResponse {
    */
   updatedAt?: Date
 }
+
+export type RedeemCouponRequest = {
+  /**
+   * The Organization ID of the discount.
+   */
+  organizationId?: string
+  /**
+   * The code of the coupon to redeem.
+   */
+  code: string
+}
