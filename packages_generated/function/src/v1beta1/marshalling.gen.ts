@@ -117,6 +117,7 @@ export const unmarshalFunction = (data: unknown): Function => {
     name: data.name,
     namespaceId: data.namespace_id,
     privacy: data.privacy,
+    privateNetworkId: data.private_network_id,
     readyAt: unmarshalDate(data.ready_at),
     region: data.region,
     runtime: data.runtime,
@@ -159,6 +160,7 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
+    vpcIntegrationActivated: data.vpc_integration_activated,
   } as Namespace
 }
 
@@ -452,6 +454,7 @@ export const marshalCreateFunctionRequest = (
   name: request.name || randomName('fn'),
   namespace_id: request.namespaceId,
   privacy: request.privacy,
+  private_network_id: request.privateNetworkId,
   runtime: request.runtime,
   sandbox: request.sandbox,
   secret_environment_variables:
@@ -468,6 +471,7 @@ export const marshalCreateNamespaceRequest = (
   request: CreateNamespaceRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  activate_vpc_integration: request.activateVpcIntegration,
   description: request.description,
   environment_variables: request.environmentVariables,
   name: request.name || randomName('ns'),
@@ -585,6 +589,7 @@ export const marshalUpdateFunctionRequest = (
   memory_limit: request.memoryLimit,
   min_scale: request.minScale,
   privacy: request.privacy,
+  private_network_id: request.privateNetworkId,
   redeploy: request.redeploy,
   runtime: request.runtime,
   sandbox: request.sandbox,

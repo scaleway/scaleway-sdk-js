@@ -8,6 +8,7 @@ import {
   validatePathParam,
 } from '@scaleway/sdk-client'
 import {
+  unmarshalDiscount,
   unmarshalInvoice,
   unmarshalListConsumptionsResponse,
   unmarshalListDiscountsResponse,
@@ -15,6 +16,7 @@ import {
   unmarshalListTaxesResponse,
 } from './marshalling.gen'
 import type {
+  Discount,
   DownloadInvoiceRequest,
   ExportInvoicesRequest,
   GetInvoiceRequest,
@@ -27,6 +29,7 @@ import type {
   ListInvoicesResponse,
   ListTaxesRequest,
   ListTaxesResponse,
+  RedeemCouponRequest,
 } from './types.gen'
 
 /**
@@ -227,4 +230,27 @@ export class API extends ParentAPI {
    */
   listDiscounts = (request: Readonly<ListDiscountsRequest> = {}) =>
     enrichForPagination('discounts', this.pageOfListDiscounts, request)
+
+  /**
+   * Redeem coupon. Redeem a coupon given the related code.
+   *
+   * @param request - The request {@link RedeemCouponRequest}
+   * @returns A Promise of Discount
+   */
+  redeemCoupon = (request: Readonly<RedeemCouponRequest>) =>
+    this.client.fetch<Discount>(
+      {
+        method: 'POST',
+        path: `/billing/v2beta1/redeem-coupon`,
+        urlParams: urlParams(
+          ['code', request.code],
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
+        ),
+      },
+      unmarshalDiscount,
+    )
 }
