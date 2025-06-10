@@ -62,6 +62,12 @@ export type ServerAction =
   | 'reboot'
   | 'enable_routed_ip'
 
+export type ServerFilesystemState =
+  | 'unknown_state'
+  | 'attaching'
+  | 'available'
+  | 'detaching'
+
 export type ServerIpIpFamily = 'inet' | 'inet6'
 
 export type ServerIpProvisioningMode = 'manual' | 'dhcp' | 'slaac'
@@ -332,6 +338,11 @@ export interface PrivateNIC {
 export interface SecurityGroupSummary {
   id: string
   name: string
+}
+
+export interface ServerFilesystem {
+  filesystemId: string
+  state: ServerFilesystemState
 }
 
 export interface ServerIp {
@@ -636,6 +647,10 @@ export interface Server {
    * This value is reset when admin_password_encryption_ssh_key_id is set to an empty string.
    */
   adminPasswordEncryptedValue?: string
+  /**
+   * List of attached filesystems.
+   */
+  filesystems: ServerFilesystem[]
   /**
    * True if the Instance type has reached end of service.
    */

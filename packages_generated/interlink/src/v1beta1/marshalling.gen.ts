@@ -14,6 +14,7 @@ import type {
   CreateLinkRequest,
   CreateRoutingPolicyRequest,
   DedicatedConnection,
+  DetachRoutingPolicyRequest,
   Link,
   ListDedicatedConnectionsResponse,
   ListLinksResponse,
@@ -119,6 +120,8 @@ export const unmarshalLink = (data: unknown): Link => {
     projectId: data.project_id,
     region: data.region,
     routingPolicyId: data.routing_policy_id,
+    routingPolicyV4Id: data.routing_policy_v4_id,
+    routingPolicyV6Id: data.routing_policy_v6_id,
     scwBgpConfig: data.scw_bgp_config
       ? unmarshalBgpConfig(data.scw_bgp_config)
       : undefined,
@@ -178,6 +181,7 @@ export const unmarshalRoutingPolicy = (data: unknown): RoutingPolicy => {
   return {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
+    isIpv6: data.is_ipv6,
     name: data.name,
     organizationId: data.organization_id,
     prefixFilterIn: data.prefix_filter_in,
@@ -302,11 +306,19 @@ export const marshalCreateRoutingPolicyRequest = (
   request: CreateRoutingPolicyRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  is_ipv6: request.isIpv6,
   name: request.name,
   prefix_filter_in: request.prefixFilterIn,
   prefix_filter_out: request.prefixFilterOut,
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
+})
+
+export const marshalDetachRoutingPolicyRequest = (
+  request: DetachRoutingPolicyRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  routing_policy_id: request.routingPolicyId,
 })
 
 export const marshalUpdateLinkRequest = (

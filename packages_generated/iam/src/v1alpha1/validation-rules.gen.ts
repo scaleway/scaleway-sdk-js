@@ -226,7 +226,7 @@ export const ListUsersRequest = {
 
 export const RuleSpecs = {
   condition: {
-    maxLength: 1024,
+    maxLength: 2048,
   },
 }
 

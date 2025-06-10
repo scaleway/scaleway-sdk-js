@@ -409,6 +409,10 @@ export interface Function {
    * List of tags applied to the Serverless Function.
    */
   tags: string[]
+  /**
+   * When connected to a Private Network, the function can access other Scaleway resources in this Private Network.
+   */
+  privateNetworkId?: string
 }
 
 export interface Namespace {
@@ -472,6 +476,11 @@ export interface Namespace {
    * Last update date of the namespace.
    */
   updatedAt?: Date
+  /**
+   * @deprecated When activated, functions in the namespace can be connected to a Private Network.
+Note that activating the VPC integration can only be done when creating a new namespace.
+   */
+  vpcIntegrationActivated?: boolean
 }
 
 export interface Token {
@@ -669,6 +678,12 @@ export type CreateFunctionRequest = {
    * Tags of the Serverless Function.
    */
   tags?: string[]
+  /**
+   * When connected to a Private Network, the function can access other Scaleway resources in this Private Network.
+
+Note: this feature is currently in beta and requires a namespace with VPC integration activated, using the `activate_vpc_integration` flag.
+   */
+  privateNetworkId?: string
 }
 
 export type CreateNamespaceRequest = {
@@ -697,6 +712,10 @@ export type CreateNamespaceRequest = {
    * Tags of the Serverless Function Namespace.
    */
   tags?: string[]
+  /**
+   * When activated, functions in the namespace can be connected to a Private Network.
+   */
+  activateVpcIntegration: boolean
 }
 
 export type CreateTokenRequest = {
@@ -1282,6 +1301,12 @@ export type UpdateFunctionRequest = {
    * Tags of the Serverless Function.
    */
   tags?: string[]
+  /**
+   * When connected to a Private Network, the function can access other Scaleway resources in this Private Network.
+
+Note: this feature is currently in beta and requires a namespace with VPC integration activated, using the `activate_vpc_integration` flag.
+   */
+  privateNetworkId?: string
 }
 
 export type UpdateNamespaceRequest = {
