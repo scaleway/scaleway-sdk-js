@@ -197,7 +197,7 @@ export interface Link {
    */
   vpcId?: string
   /**
-   * ID of the routing policy attached to the link.
+   * @deprecated Deprecated. Use routing_policy_v4_id or routing_policy_v6_id instead.
    */
   routingPolicyId?: string
   /**
@@ -236,6 +236,14 @@ export interface Link {
    * BGP configuration on peer's side (on-premises or other hosting provider).
    */
   peerBgpConfig?: BgpConfig
+  /**
+   * ID of the routing policy IPv4 attached to the link.
+   */
+  routingPolicyV4Id?: string
+  /**
+   * ID of the routing policy IPv6 attached to the link.
+   */
+  routingPolicyV6Id?: string
   /**
    * Region of the link.
    */
@@ -346,6 +354,10 @@ export interface RoutingPolicy {
    */
   updatedAt?: Date
   /**
+   * IP prefixes version of the routing policy.
+   */
+  isIpv6: boolean
+  /**
    * Region of the routing policy.
    */
   region: ScwRegion
@@ -449,6 +461,10 @@ export type CreateRoutingPolicyRequest = {
    * IP prefix filters to advertise to the peer (ranges of routes to advertise).
    */
   prefixFilterOut?: string[]
+  /**
+   * IP prefixes version of the routing policy.
+   */
+  isIpv6: boolean
 }
 
 export type DeleteLinkRequest = {
@@ -482,6 +498,10 @@ export type DetachRoutingPolicyRequest = {
    * ID of the link to detach a routing policy from.
    */
   linkId: string
+  /**
+   * ID of the routing policy to be detached.
+   */
+  routingPolicyId: string
 }
 
 export type DetachVpcRequest = {
@@ -837,6 +857,10 @@ export type ListRoutingPoliciesRequest = {
    * Tags to filter for.
    */
   tags?: string[]
+  /**
+   * Filter for the routing policies based on IP prefixes version.
+   */
+  ipv6?: boolean
 }
 
 export interface ListRoutingPoliciesResponse {

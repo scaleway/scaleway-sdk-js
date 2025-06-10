@@ -19,6 +19,55 @@ import type {
   ListTaxesResponseTax,
 } from './types.gen'
 
+const unmarshalDiscountCoupon = (data: unknown): DiscountCoupon => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DiscountCoupon' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    description: data.description,
+  } as DiscountCoupon
+}
+
+const unmarshalDiscountFilter = (data: unknown): DiscountFilter => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DiscountFilter' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    exclude: data.exclude,
+    type: data.type,
+    value: data.value,
+  } as DiscountFilter
+}
+
+export const unmarshalDiscount = (data: unknown): Discount => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Discount' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    coupon: data.coupon ? unmarshalDiscountCoupon(data.coupon) : undefined,
+    creationDate: unmarshalDate(data.creation_date),
+    description: data.description,
+    filters: unmarshalArrayOfObject(data.filters, unmarshalDiscountFilter),
+    id: data.id,
+    mode: data.mode,
+    organizationId: data.organization_id,
+    startDate: unmarshalDate(data.start_date),
+    stopDate: unmarshalDate(data.stop_date),
+    value: data.value,
+    valueRemaining: data.value_remaining,
+    valueUsed: data.value_used,
+  } as Discount
+}
+
 export const unmarshalInvoice = (data: unknown): Invoice => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -92,55 +141,6 @@ export const unmarshalListConsumptionsResponse = (
     totalDiscountUntaxedValue: data.total_discount_untaxed_value,
     updatedAt: unmarshalDate(data.updated_at),
   } as ListConsumptionsResponse
-}
-
-const unmarshalDiscountCoupon = (data: unknown): DiscountCoupon => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DiscountCoupon' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    description: data.description,
-  } as DiscountCoupon
-}
-
-const unmarshalDiscountFilter = (data: unknown): DiscountFilter => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DiscountFilter' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    exclude: data.exclude,
-    type: data.type,
-    value: data.value,
-  } as DiscountFilter
-}
-
-const unmarshalDiscount = (data: unknown): Discount => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Discount' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    coupon: data.coupon ? unmarshalDiscountCoupon(data.coupon) : undefined,
-    creationDate: unmarshalDate(data.creation_date),
-    description: data.description,
-    filters: unmarshalArrayOfObject(data.filters, unmarshalDiscountFilter),
-    id: data.id,
-    mode: data.mode,
-    organizationId: data.organization_id,
-    startDate: unmarshalDate(data.start_date),
-    stopDate: unmarshalDate(data.stop_date),
-    value: data.value,
-    valueRemaining: data.value_remaining,
-    valueUsed: data.value_used,
-  } as Discount
 }
 
 export const unmarshalListDiscountsResponse = (
