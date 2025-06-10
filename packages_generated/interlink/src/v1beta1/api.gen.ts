@@ -17,6 +17,7 @@ import {
   marshalAttachVpcRequest,
   marshalCreateLinkRequest,
   marshalCreateRoutingPolicyRequest,
+  marshalDetachRoutingPolicyRequest,
   marshalUpdateLinkRequest,
   marshalUpdateRoutingPolicyRequest,
   unmarshalDedicatedConnection,
@@ -447,7 +448,9 @@ export class API extends ParentAPI {
   detachRoutingPolicy = (request: Readonly<DetachRoutingPolicyRequest>) =>
     this.client.fetch<Link>(
       {
-        body: '{}',
+        body: JSON.stringify(
+          marshalDetachRoutingPolicyRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}/detach-routing-policy`,
@@ -499,6 +502,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routing-policies`,
         urlParams: urlParams(
+          ['ipv6', request.ipv6],
           ['name', request.name],
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
