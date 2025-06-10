@@ -131,6 +131,8 @@ export type {
   ServerActionRequestVolumeBackupTemplate,
   ServerActionResponse,
   ServerCompatibleTypes,
+  ServerFilesystem,
+  ServerFilesystemState,
   ServerIp,
   ServerIpIpFamily,
   ServerIpProvisioningMode,
