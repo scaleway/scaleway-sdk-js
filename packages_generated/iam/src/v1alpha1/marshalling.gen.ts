@@ -45,6 +45,7 @@ import type {
   ListUsersResponse,
   Log,
   MFAOTP,
+  Organization,
   OrganizationSecuritySettings,
   PermissionSet,
   Policy,
@@ -56,6 +57,7 @@ import type {
   RuleSpecs,
   SSHKey,
   SetGroupMembersRequest,
+  SetOrganizationAliasRequest,
   SetRulesRequest,
   SetRulesResponse,
   UpdateAPIKeyRequest,
@@ -626,6 +628,20 @@ export const unmarshalMFAOTP = (data: unknown): MFAOTP => {
   } as MFAOTP
 }
 
+export const unmarshalOrganization = (data: unknown): Organization => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Organization' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    alias: data.alias,
+    id: data.id,
+    name: data.name,
+  } as Organization
+}
+
 export const unmarshalOrganizationSecuritySettings = (
   data: unknown,
 ): OrganizationSecuritySettings => {
@@ -831,6 +847,13 @@ export const marshalSetGroupMembersRequest = (
 ): Record<string, unknown> => ({
   application_ids: request.applicationIds,
   user_ids: request.userIds,
+})
+
+export const marshalSetOrganizationAliasRequest = (
+  request: SetOrganizationAliasRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  alias: request.alias,
 })
 
 export const marshalSetRulesRequest = (

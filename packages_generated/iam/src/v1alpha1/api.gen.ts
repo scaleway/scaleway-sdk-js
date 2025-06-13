@@ -21,6 +21,7 @@ import {
   marshalRemoveGroupMemberRequest,
   marshalRemoveUserConnectionRequest,
   marshalSetGroupMembersRequest,
+  marshalSetOrganizationAliasRequest,
   marshalSetRulesRequest,
   marshalUpdateAPIKeyRequest,
   marshalUpdateApplicationRequest,
@@ -53,6 +54,7 @@ import {
   unmarshalListUsersResponse,
   unmarshalLog,
   unmarshalMFAOTP,
+  unmarshalOrganization,
   unmarshalOrganizationSecuritySettings,
   unmarshalPolicy,
   unmarshalQuotum,
@@ -89,6 +91,7 @@ import type {
   GetGroupRequest,
   GetJWTRequest,
   GetLogRequest,
+  GetOrganizationRequest,
   GetOrganizationSecuritySettingsRequest,
   GetPolicyRequest,
   GetQuotumRequest,
@@ -129,6 +132,7 @@ import type {
   Log,
   MFAOTP,
   MigrateOrganizationGuestsRequest,
+  Organization,
   OrganizationSecuritySettings,
   Policy,
   Quotum,
@@ -136,6 +140,7 @@ import type {
   RemoveUserConnectionRequest,
   SSHKey,
   SetGroupMembersRequest,
+  SetOrganizationAliasRequest,
   SetRulesRequest,
   SetRulesResponse,
   UnlockUserRequest,
@@ -1336,6 +1341,40 @@ export class API extends ParentAPI {
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/security-settings`,
       },
       unmarshalOrganizationSecuritySettings,
+    )
+
+  /**
+   * Set your Organization's alias.. This will fail if an alias has already been defined. Please contact support if you need to change your Organization's alias.
+   *
+   * @param request - The request {@link SetOrganizationAliasRequest}
+   * @returns A Promise of Organization
+   */
+  setOrganizationAlias = (request: Readonly<SetOrganizationAliasRequest>) =>
+    this.client.fetch<Organization>(
+      {
+        body: JSON.stringify(
+          marshalSetOrganizationAliasRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PUT',
+        path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/alias`,
+      },
+      unmarshalOrganization,
+    )
+
+  /**
+   * Get your Organization's IAM information.
+   *
+   * @param request - The request {@link GetOrganizationRequest}
+   * @returns A Promise of Organization
+   */
+  getOrganization = (request: Readonly<GetOrganizationRequest> = {}) =>
+    this.client.fetch<Organization>(
+      {
+        method: 'GET',
+        path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}`,
+      },
+      unmarshalOrganization,
     )
 
   /**

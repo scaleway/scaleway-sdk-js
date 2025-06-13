@@ -1068,6 +1068,13 @@ export type GetLogRequest = {
   logId: string
 }
 
+export type GetOrganizationRequest = {
+  /**
+   * ID of the Organization.
+   */
+  organizationId?: string
+}
+
 export type GetOrganizationSecuritySettingsRequest = {
   /**
    * ID of the Organization.
@@ -1662,6 +1669,21 @@ export type MigrateOrganizationGuestsRequest = {
   organizationId?: string
 }
 
+export interface Organization {
+  /**
+   * ID of the Organization.
+   */
+  id: string
+  /**
+   * Name of the Organization.
+   */
+  name: string
+  /**
+   * Alias of the Organization.
+   */
+  alias: string
+}
+
 export interface OrganizationSecuritySettings {
   /**
    * Defines whether password renewal is enforced during first login.
@@ -1711,6 +1733,17 @@ export type SetGroupMembersRequest = {
   groupId: string
   userIds: string[]
   applicationIds: string[]
+}
+
+export type SetOrganizationAliasRequest = {
+  /**
+   * ID of the Organization.
+   */
+  organizationId?: string
+  /**
+   * Alias of the Organization.
+   */
+  alias: string
 }
 
 export type SetRulesRequest = {
