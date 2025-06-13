@@ -230,6 +230,14 @@ export const RuleSpecs = {
   },
 }
 
+export const SetOrganizationAliasRequest = {
+  alias: {
+    maxLength: 32,
+    minLength: 2,
+    pattern: /^[a-z0-9]+$/,
+  },
+}
+
 export const UpdateAPIKeyRequest = {
   description: {
     maxLength: 200,
