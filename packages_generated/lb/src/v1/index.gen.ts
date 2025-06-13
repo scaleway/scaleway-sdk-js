@@ -186,3 +186,4 @@ export type {
   ZonedApiUpdateRouteRequest,
   ZonedApiUpdateSubscriberRequest,
 } from './types.gen'
+export * as ValidationRules from './validation-rules.gen'
