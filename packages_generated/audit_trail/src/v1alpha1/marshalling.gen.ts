@@ -45,6 +45,7 @@ const unmarshalAccountUserInfo = (data: unknown): AccountUserInfo => {
 
   return {
     email: data.email,
+    phoneNumber: data.phone_number,
   } as AccountUserInfo
 }
 

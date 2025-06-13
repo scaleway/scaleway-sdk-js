@@ -30,6 +30,7 @@ export interface AccountOrganizationInfo {}
 
 export interface AccountUserInfo {
   email: string
+  phoneNumber?: string
 }
 
 export interface KeyManagerKeyInfo {}
