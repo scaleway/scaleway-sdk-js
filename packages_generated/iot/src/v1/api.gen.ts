@@ -7,7 +7,9 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { Region as ScwRegion, WaitForOptions } from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality } from '../types/locality'
+import { toApiLocality } from '../types/locality'
 import { HUB_TRANSIENT_STATUSES as HUB_TRANSIENT_STATUSES_IOT } from './content.gen'
 import {
   marshalCreateDeviceRequest,
@@ -107,8 +109,13 @@ const jsonContentHeaders = {
 This API allows you to manage your IoT hubs and devices.
  */
 export class API extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = ['fr-par']
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par'],
+  })
 
   protected pageOfListHubs = (request: Readonly<ListHubsRequest> = {}) =>
     this.client.fetch<ListHubsResponse>(

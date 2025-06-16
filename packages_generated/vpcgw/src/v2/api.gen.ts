@@ -7,7 +7,9 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, WaitForOptions } from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality } from '../types/locality'
+import { toApiLocality } from '../types/locality'
 import {
   GATEWAY_NETWORK_TRANSIENT_STATUSES as GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW,
   GATEWAY_TRANSIENT_STATUSES as GATEWAY_TRANSIENT_STATUSES_VPCGW,
@@ -90,17 +92,22 @@ const jsonContentHeaders = {
 This API allows you to manage your Public Gateways.
  */
 export class API extends ParentAPI {
-  /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: ScwZone[] = [
-    'fr-par-1',
-    'fr-par-2',
-    'nl-ams-1',
-    'nl-ams-2',
-    'nl-ams-3',
-    'pl-waw-1',
-    'pl-waw-2',
-    'pl-waw-3',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    zones: [
+      'fr-par-1',
+      'fr-par-2',
+      'nl-ams-1',
+      'nl-ams-2',
+      'nl-ams-3',
+      'pl-waw-1',
+      'pl-waw-2',
+      'pl-waw-3',
+    ],
+  })
 
   protected pageOfListGateways = (
     request: Readonly<ListGatewaysRequest> = {},

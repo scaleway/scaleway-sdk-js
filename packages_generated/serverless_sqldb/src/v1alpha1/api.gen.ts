@@ -7,7 +7,9 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { Region as ScwRegion, WaitForOptions } from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality } from '../types/locality'
+import { toApiLocality } from '../types/locality'
 import { DATABASE_TRANSIENT_STATUSES as DATABASE_TRANSIENT_STATUSES_SERVERLESS_SQLDB } from './content.gen'
 import {
   marshalCreateDatabaseRequest,
@@ -44,8 +46,13 @@ const jsonContentHeaders = {
 This API allows you to manage your Serverless SQL Databases.
  */
 export class API extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = ['fr-par']
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par'],
+  })
 
   /**
    * Create a new Serverless SQL Database. You must provide the following parameters: `organization_id`, `project_id`, `name`, `cpu_min`, `cpu_max`. You can also provide `from_backup_id` to create a database from a backup.

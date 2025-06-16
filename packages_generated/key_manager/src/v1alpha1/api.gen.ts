@@ -6,7 +6,8 @@ import {
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { ApiLocality } from '../types/locality'
+import { toApiLocality } from '../types/locality'
 import {
   marshalCreateKeyRequest,
   marshalDecryptRequest,
@@ -64,12 +65,13 @@ const jsonContentHeaders = {
 This API allows you to create, manage and use cryptographic keys in a centralized and secure service.
  */
 export class API extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = [
-    'fr-par',
-    'nl-ams',
-    'pl-waw',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
 
   /**
    * Create a key. Create a key in a given region specified by the `region` parameter. Keys only support symmetric encryption. You can use keys to encrypt or decrypt arbitrary payloads, or to generate data encryption keys. **Data encryption keys are not stored in Key Manager**.

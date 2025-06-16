@@ -7,7 +7,9 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { Region as ScwRegion, WaitForOptions } from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality } from '../types/locality'
+import { toApiLocality } from '../types/locality'
 import { FILE_SYSTEM_TRANSIENT_STATUSES as FILE_SYSTEM_TRANSIENT_STATUSES_FILE } from './content.gen'
 import {
   marshalCreateFileSystemRequest,
@@ -38,8 +40,13 @@ const jsonContentHeaders = {
 This API allows you to manage your File Storage resources.
  */
 export class API extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = ['fr-par']
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par'],
+  })
 
   /**
    * Get filesystem details. Retrieve all properties and current status of a specific filesystem identified by its ID.

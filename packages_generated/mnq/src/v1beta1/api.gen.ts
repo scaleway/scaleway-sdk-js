@@ -6,7 +6,8 @@ import {
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { ApiLocality } from '../types/locality'
+import { toApiLocality } from '../types/locality'
 import {
   marshalNatsApiCreateNatsAccountRequest,
   marshalNatsApiCreateNatsCredentialsRequest,
@@ -78,8 +79,13 @@ const jsonContentHeaders = {
 This API allows you to manage Scaleway NATS accounts.
  */
 export class NatsAPI extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = ['fr-par', 'nl-ams']
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams'],
+  })
 
   /**
    * Create a NATS account. Create a NATS account associated with a Project.
@@ -271,8 +277,13 @@ export class NatsAPI extends ParentAPI {
 This API allows you to manage your Scaleway Topics and Events.
  */
 export class SnsAPI extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = ['fr-par', 'nl-ams']
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams'],
+  })
 
   /**
    * Activate Topics and Events. Activate Topics and Events for the specified Project ID. Topics and Events must be activated before any usage. Activating Topics and Events does not trigger any billing, and you can deactivate at any time.
@@ -449,8 +460,13 @@ export class SnsAPI extends ParentAPI {
 This API allows you to manage your Scaleway Queues.
  */
 export class SqsAPI extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = ['fr-par', 'nl-ams']
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams'],
+  })
 
   /**
    * Activate Queues. Activate Queues for the specified Project ID. Queues must be activated before any usage such as creating credentials and queues. Activating Queues does not trigger any billing, and you can deactivate at any time.

@@ -7,7 +7,9 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, WaitForOptions } from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality } from '../types/locality'
+import { toApiLocality } from '../types/locality'
 import { FLEXIBLE_IP_TRANSIENT_STATUSES as FLEXIBLE_IP_TRANSIENT_STATUSES_FLEXIBLEIP } from './content.gen'
 import {
   marshalAttachFlexibleIPRequest,
@@ -50,15 +52,20 @@ const jsonContentHeaders = {
 This API allows you to manage your Elastic Metal servers' flexible public IP addresses.
  */
 export class API extends ParentAPI {
-  /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: ScwZone[] = [
-    'fr-par-1',
-    'fr-par-2',
-    'nl-ams-1',
-    'nl-ams-2',
-    'pl-waw-2',
-    'pl-waw-3',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    zones: [
+      'fr-par-1',
+      'fr-par-2',
+      'nl-ams-1',
+      'nl-ams-2',
+      'pl-waw-2',
+      'pl-waw-3',
+    ],
+  })
 
   /**
    * Create a new flexible IP. Generate a new flexible IP within a given zone, specifying its configuration including Project ID and description.

@@ -7,7 +7,9 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { Region as ScwRegion, WaitForOptions } from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality } from '../types/locality'
+import { toApiLocality } from '../types/locality'
 import {
   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_WEBHOSTING,
   HOSTING_TRANSIENT_STATUSES as HOSTING_TRANSIENT_STATUSES_WEBHOSTING,
@@ -116,12 +118,13 @@ const jsonContentHeaders = {
 This API allows you to manage your Web Hosting services.
  */
 export class ControlPanelAPI extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = [
-    'fr-par',
-    'nl-ams',
-    'pl-waw',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
 
   protected pageOfListControlPanels = (
     request: Readonly<ControlPanelApiListControlPanelsRequest> = {},
@@ -159,12 +162,13 @@ export class ControlPanelAPI extends ParentAPI {
 This API allows you to manage your databases and database users for your Web Hosting services.
  */
 export class DatabaseAPI extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = [
-    'fr-par',
-    'nl-ams',
-    'pl-waw',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
 
   /**
    * "Create a new database within your hosting plan".
@@ -410,12 +414,13 @@ export class DatabaseAPI extends ParentAPI {
 This API allows you to manage your Web Hosting services.
  */
 export class DnsAPI extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = [
-    'fr-par',
-    'nl-ams',
-    'pl-waw',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
 
   /**
    * Get DNS records. Get the set of DNS records of a specified domain associated with a Web Hosting plan's domain.
@@ -548,12 +553,13 @@ export class DnsAPI extends ParentAPI {
 This API allows you to manage your offer for your Web Hosting services.
  */
 export class OfferAPI extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = [
-    'fr-par',
-    'nl-ams',
-    'pl-waw',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
 
   protected pageOfListOffers = (
     request: Readonly<OfferApiListOffersRequest> = {},
@@ -592,12 +598,13 @@ export class OfferAPI extends ParentAPI {
 This API allows you to manage your Web Hosting services.
  */
 export class HostingAPI extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = [
-    'fr-par',
-    'nl-ams',
-    'pl-waw',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
 
   /**
    * Order a Web Hosting plan. Order a Web Hosting plan, specifying the offer type required via the `offer_id` parameter.
@@ -783,12 +790,13 @@ export class HostingAPI extends ParentAPI {
 This API allows you to manage your FTP accounts for your Web Hosting services.
  */
 export class FtpAccountAPI extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = [
-    'fr-par',
-    'nl-ams',
-    'pl-waw',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
 
   /**
    * Create a new FTP account within your hosting plan.. Create a new FTP account within your hosting plan.
@@ -885,12 +893,13 @@ export class FtpAccountAPI extends ParentAPI {
 This API allows you to manage your mail accounts for your Web Hosting services.
  */
 export class MailAccountAPI extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = [
-    'fr-par',
-    'nl-ams',
-    'pl-waw',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
 
   /**
    * Create a new mail account within your hosting plan.. Create a new mail account within your hosting plan.
@@ -1001,12 +1010,13 @@ export class MailAccountAPI extends ParentAPI {
 This API allows you to manage your websites for your Web Hosting services.
  */
 export class WebsiteAPI extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = [
-    'fr-par',
-    'nl-ams',
-    'pl-waw',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
 
   protected pageOfListWebsites = (
     request: Readonly<WebsiteApiListWebsitesRequest>,

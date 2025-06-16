@@ -7,11 +7,9 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type {
-  Region as ScwRegion,
-  Zone as ScwZone,
-  WaitForOptions,
-} from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality } from '../types/locality'
+import { toApiLocality } from '../types/locality'
 import {
   CERTIFICATE_TRANSIENT_STATUSES as CERTIFICATE_TRANSIENT_STATUSES_LB,
   LB_TRANSIENT_STATUSES as LB_TRANSIENT_STATUSES_LB,
@@ -232,17 +230,22 @@ const jsonContentHeaders = {
 This API allows you to manage your Scaleway Load Balancer services.
  */
 export class ZonedAPI extends ParentAPI {
-  /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: ScwZone[] = [
-    'fr-par-1',
-    'fr-par-2',
-    'nl-ams-1',
-    'nl-ams-2',
-    'nl-ams-3',
-    'pl-waw-1',
-    'pl-waw-2',
-    'pl-waw-3',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    zones: [
+      'fr-par-1',
+      'fr-par-2',
+      'nl-ams-1',
+      'nl-ams-2',
+      'nl-ams-3',
+      'pl-waw-1',
+      'pl-waw-2',
+      'pl-waw-3',
+    ],
+  })
 
   protected pageOfListLbs = (request: Readonly<ZonedApiListLbsRequest> = {}) =>
     this.client.fetch<ListLbsResponse>(
@@ -1362,12 +1365,13 @@ export class ZonedAPI extends ParentAPI {
 This API allows you to manage your Load Balancers.
  */
 export class API extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = [
-    'fr-par',
-    'nl-ams',
-    'pl-waw',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
 
   protected pageOfListLbs = (request: Readonly<ListLbsRequest> = {}) =>
     this.client.fetch<ListLbsResponse>(

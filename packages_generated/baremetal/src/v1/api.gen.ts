@@ -7,7 +7,9 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, WaitForOptions } from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality } from '../types/locality'
+import { toApiLocality } from '../types/locality'
 import { SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_BAREMETAL } from './content.gen'
 import {
   marshalAddOptionServerRequest,
@@ -104,15 +106,20 @@ const jsonContentHeaders = {
 This API allows you to manage your Elastic Metal servers.
  */
 export class API extends ParentAPI {
-  /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: ScwZone[] = [
-    'fr-par-1',
-    'fr-par-2',
-    'nl-ams-1',
-    'nl-ams-2',
-    'pl-waw-2',
-    'pl-waw-3',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    zones: [
+      'fr-par-1',
+      'fr-par-2',
+      'nl-ams-1',
+      'nl-ams-2',
+      'pl-waw-2',
+      'pl-waw-3',
+    ],
+  })
 
   protected pageOfListServers = (request: Readonly<ListServersRequest> = {}) =>
     this.client.fetch<ListServersResponse>(
@@ -690,8 +697,13 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
  * Elastic Metal - Private Network API.
  */
 export class PrivateNetworkAPI extends ParentAPI {
-  /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: ScwZone[] = ['fr-par-2']
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    zones: ['fr-par-2'],
+  })
 
   /**
    * Add a server to a Private Network.

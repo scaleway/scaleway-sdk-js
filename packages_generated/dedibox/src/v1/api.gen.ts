@@ -7,7 +7,9 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, WaitForOptions } from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality } from '../types/locality'
+import { toApiLocality } from '../types/locality'
 import {
   BMC_ACCESS_TRANSIENT_STATUSES as BMC_ACCESS_TRANSIENT_STATUSES_DEDIBOX,
   RPN_SAN_TRANSIENT_STATUSES as RPN_SAN_TRANSIENT_STATUSES_DEDIBOX,
@@ -253,12 +255,13 @@ const jsonContentHeaders = {
  * Dedibox Phoenix API.
  */
 export class API extends ParentAPI {
-  /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: ScwZone[] = [
-    'fr-par-1',
-    'fr-par-2',
-    'nl-ams-1',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    zones: ['fr-par-1', 'fr-par-2', 'nl-ams-1'],
+  })
 
   protected pageOfListServers = (request: Readonly<ListServersRequest> = {}) =>
     this.client.fetch<ListServersResponse>(
