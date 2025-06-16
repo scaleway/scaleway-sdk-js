@@ -6,7 +6,8 @@ import {
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { ApiLocality } from '../types/locality'
+import { toApiLocality } from '../types/locality'
 import {
   marshalGlobalApiCreateGrafanaUserRequest,
   marshalGlobalApiResetGrafanaUserPasswordRequest,
@@ -386,12 +387,13 @@ Deprecated: retention is now managed at the data source level.
 The Cockpit API allows you to create data sources and Cockpit tokens to store and query data types such as metrics, logs, and traces. You can also push your data into Cockpit, and send alerts to your contact points when your resources may require your attention, using the regional Alert manager.
  */
 export class RegionalAPI extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = [
-    'fr-par',
-    'nl-ams',
-    'pl-waw',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
 
   /**
    * Get the Cockpit configuration.
@@ -409,10 +411,7 @@ export class RegionalAPI extends ParentAPI {
     )
 
   /**
-   * Create a data source. You must specify the data source type upon creation. Available data source types include:
-  - metrics
-  - logs
-  - traces
+   * Create a data source. You must specify the data source name and type (metrics, logs, traces) upon creation.
 The name of the data source will then be used as reference to name the associated Grafana data source.
    *
    * @param request - The request {@link RegionalApiCreateDataSourceRequest}
@@ -450,7 +449,7 @@ The name of the data source will then be used as reference to name the associate
     )
 
   /**
-   * Delete a data source. Delete a given data source, specified by the data source ID. Note that deleting a data source is irreversible, and cannot be undone.
+   * Delete a data source. Delete a given data source. Note that this action will permanently delete this data source and any data associated with it.
    *
    * @param request - The request {@link RegionalApiDeleteDataSourceRequest}
    */
@@ -487,7 +486,6 @@ The name of the data source will then be used as reference to name the associate
 
   /**
    * List data sources. Retrieve the list of data sources available in the specified region. By default, the data sources returned in the list are ordered by creation date, in ascending order.
-You can list data sources by Project, type and origin.
    *
    * @param request - The request {@link RegionalApiListDataSourcesRequest}
    * @returns A Promise of ListDataSourcesResponse
@@ -497,7 +495,7 @@ You can list data sources by Project, type and origin.
   ) => enrichForPagination('dataSources', this.pageOfListDataSources, request)
 
   /**
-   * Update a data source. Update a given data source name, specified by the data source ID.
+   * Update a data source. Update a given data source attributes (name and/or retention_days).
    *
    * @param request - The request {@link RegionalApiUpdateDataSourceRequest}
    * @returns A Promise of DataSource
@@ -519,7 +517,7 @@ You can list data sources by Project, type and origin.
     )
 
   /**
-   * Get data source usage overview. Retrieve the data source usage overview per type for the specified Project.
+   * Get data source usage overview. Retrieve the volume of data ingested for each of your data sources in the specified project and region.
    *
    * @param request - The request {@link RegionalApiGetUsageOverviewRequest}
    * @returns A Promise of UsageOverview
