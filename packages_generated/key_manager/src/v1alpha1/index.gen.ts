@@ -32,6 +32,7 @@ export type {
   ListKeysResponse,
   ProtectKeyRequest,
   PublicKey,
+  RestoreKeyRequest,
   RotateKeyRequest,
   SignRequest,
   SignResponse,

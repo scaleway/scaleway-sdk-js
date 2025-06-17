@@ -11,17 +11,15 @@ import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   CreateEndpointRequest,
   CreateInstanceRequest,
-  CreateInstanceRequestVolumeDetails,
   CreateSnapshotRequest,
   CreateUserRequest,
   Endpoint,
   EndpointPrivateNetworkDetails,
-  EndpointPublicDetails,
+  EndpointPublicNetworkDetails,
   EndpointSpec,
   EndpointSpecPrivateNetworkDetails,
-  EndpointSpecPublicDetails,
+  EndpointSpecPublicNetworkDetails,
   Instance,
-  InstanceSetting,
   InstanceSnapshotSchedule,
   ListInstancesResponse,
   ListNodeTypesResponse,
@@ -31,11 +29,8 @@ import type {
   NodeType,
   NodeTypeVolumeType,
   RestoreSnapshotRequest,
-  RestoreSnapshotRequestVolumeDetails,
   SetUserRoleRequest,
-  Setting,
   Snapshot,
-  SnapshotVolumeType,
   UpdateInstanceRequest,
   UpdateSnapshotRequest,
   UpdateUserRequest,
@@ -60,16 +55,16 @@ const unmarshalEndpointPrivateNetworkDetails = (
   } as EndpointPrivateNetworkDetails
 }
 
-const unmarshalEndpointPublicDetails = (
+const unmarshalEndpointPublicNetworkDetails = (
   data: unknown,
-): EndpointPublicDetails => {
+): EndpointPublicNetworkDetails => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'EndpointPublicDetails' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'EndpointPublicNetworkDetails' failed as data isn't a dictionary.`,
     )
   }
 
-  return {} as EndpointPublicDetails
+  return {} as EndpointPublicNetworkDetails
 }
 
 export const unmarshalEndpoint = (data: unknown): Endpoint => {
@@ -80,33 +75,19 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
   }
 
   return {
-    dnsRecords: data.dns_records,
+    dnsRecord: data.dns_record,
     id: data.id,
-    ips: data.ips,
     port: data.port,
     privateNetwork: data.private_network
       ? unmarshalEndpointPrivateNetworkDetails(data.private_network)
       : undefined,
-    public: data.public
-      ? unmarshalEndpointPublicDetails(data.public)
+    publicNetwork: data.public_network
+      ? unmarshalEndpointPublicNetworkDetails(data.public_network)
       : undefined,
   } as Endpoint
 }
 
-export const unmarshalInstanceSetting = (data: unknown): InstanceSetting => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'InstanceSetting' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    name: data.name,
-    value: data.value,
-  } as InstanceSetting
-}
-
-export const unmarshalInstanceSnapshotSchedule = (
+const unmarshalInstanceSnapshotSchedule = (
   data: unknown,
 ): InstanceSnapshotSchedule => {
   if (!isJSONObject(data)) {
@@ -124,7 +105,7 @@ export const unmarshalInstanceSnapshotSchedule = (
   } as InstanceSnapshotSchedule
 }
 
-export const unmarshalVolume = (data: unknown): Volume => {
+const unmarshalVolume = (data: unknown): Volume => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Volume' failed as data isn't a dictionary.`,
@@ -132,7 +113,7 @@ export const unmarshalVolume = (data: unknown): Volume => {
   }
 
   return {
-    size: data.size,
+    sizeBytes: data.size_bytes,
     type: data.type,
   } as Volume
 }
@@ -149,11 +130,11 @@ export const unmarshalInstance = (data: unknown): Instance => {
     endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
     id: data.id,
     name: data.name,
-    nodeNumber: data.node_number,
+    nodeAmount: data.node_amount,
     nodeType: data.node_type,
+    organizationId: data.organization_id,
     projectId: data.project_id,
     region: data.region,
-    settings: unmarshalArrayOfObject(data.settings, unmarshalInstanceSetting),
     snapshotSchedule: data.snapshot_schedule
       ? unmarshalInstanceSnapshotSchedule(data.snapshot_schedule)
       : undefined,
@@ -162,18 +143,6 @@ export const unmarshalInstance = (data: unknown): Instance => {
     version: data.version,
     volume: data.volume ? unmarshalVolume(data.volume) : undefined,
   } as Instance
-}
-
-const unmarshalSnapshotVolumeType = (data: unknown): SnapshotVolumeType => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'SnapshotVolumeType' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    type: data.type,
-  } as SnapshotVolumeType
 }
 
 export const unmarshalSnapshot = (data: unknown): Snapshot => {
@@ -192,12 +161,10 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
     name: data.name,
     nodeType: data.node_type,
     region: data.region,
-    size: data.size,
+    sizeBytes: data.size_bytes,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
-    volumeType: data.volume_type
-      ? unmarshalSnapshotVolumeType(data.volume_type)
-      : undefined,
+    volumeType: data.volume_type,
   } as Snapshot
 }
 
@@ -210,7 +177,7 @@ const unmarshalUserRole = (data: unknown): UserRole => {
 
   return {
     anyDatabase: data.any_database,
-    database: data.database,
+    databaseName: data.database_name,
     role: data.role,
   } as UserRole
 }
@@ -251,10 +218,10 @@ const unmarshalNodeTypeVolumeType = (data: unknown): NodeTypeVolumeType => {
   }
 
   return {
-    chunkSize: data.chunk_size,
+    chunkSizeBytes: data.chunk_size_bytes,
     description: data.description,
-    maxSize: data.max_size,
-    minSize: data.min_size,
+    maxSizeBytes: data.max_size_bytes,
+    minSizeBytes: data.min_size_bytes,
     type: data.type,
   } as NodeTypeVolumeType
 }
@@ -275,7 +242,7 @@ const unmarshalNodeType = (data: unknown): NodeType => {
     description: data.description,
     disabled: data.disabled,
     instanceRange: data.instance_range,
-    memory: data.memory,
+    memoryBytes: data.memory_bytes,
     name: data.name,
     stockStatus: data.stock_status,
     vcpus: data.vcpus,
@@ -327,28 +294,6 @@ export const unmarshalListUsersResponse = (
   } as ListUsersResponse
 }
 
-const unmarshalSetting = (data: unknown): Setting => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Setting' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    defaultValue: data.default_value,
-    description: data.description,
-    floatMax: data.float_max,
-    floatMin: data.float_min,
-    hotConfigurable: data.hot_configurable,
-    intMax: data.int_max,
-    intMin: data.int_min,
-    name: data.name,
-    propertyType: data.property_type,
-    stringConstraint: data.string_constraint,
-    unit: data.unit,
-  } as Setting
-}
-
 const unmarshalVersion = (data: unknown): Version => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -357,10 +302,6 @@ const unmarshalVersion = (data: unknown): Version => {
   }
 
   return {
-    availableSettings: unmarshalArrayOfObject(
-      data.available_settings,
-      unmarshalSetting,
-    ),
     endOfLifeAt: unmarshalDate(data.end_of_life_at),
     version: data.version,
   } as Version
@@ -388,8 +329,8 @@ const marshalEndpointSpecPrivateNetworkDetails = (
   private_network_id: request.privateNetworkId,
 })
 
-const marshalEndpointSpecPublicDetails = (
-  request: EndpointSpecPublicDetails,
+const marshalEndpointSpecPublicNetworkDetails = (
+  request: EndpointSpecPublicNetworkDetails,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
@@ -399,10 +340,13 @@ const marshalEndpointSpec = (
 ): Record<string, unknown> => ({
   ...resolveOneOf([
     {
-      param: 'public',
+      param: 'public_network',
       value:
-        request.public !== undefined
-          ? marshalEndpointSpecPublicDetails(request.public, defaults)
+        request.publicNetwork !== undefined
+          ? marshalEndpointSpecPublicNetworkDetails(
+              request.publicNetwork,
+              defaults,
+            )
           : undefined,
     },
     {
@@ -426,12 +370,12 @@ export const marshalCreateEndpointRequest = (
   instance_id: request.instanceId,
 })
 
-const marshalCreateInstanceRequestVolumeDetails = (
-  request: CreateInstanceRequestVolumeDetails,
+const marshalVolume = (
+  request: Volume,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  volume_size: request.volumeSize,
-  volume_type: request.volumeType,
+  size_bytes: request.sizeBytes,
+  type: request.type,
 })
 
 export const marshalCreateInstanceRequest = (
@@ -443,7 +387,7 @@ export const marshalCreateInstanceRequest = (
       ? request.endpoints.map(elt => marshalEndpointSpec(elt, defaults))
       : undefined,
   name: request.name || randomName('mgdb'),
-  node_number: request.nodeNumber,
+  node_amount: request.nodeAmount,
   node_type: request.nodeType,
   password: request.password,
   project_id: request.projectId ?? defaults.defaultProjectId,
@@ -452,7 +396,7 @@ export const marshalCreateInstanceRequest = (
   version: request.version,
   volume:
     request.volume !== undefined
-      ? marshalCreateInstanceRequestVolumeDetails(request.volume, defaults)
+      ? marshalVolume(request.volume, defaults)
       : undefined,
 })
 
@@ -461,6 +405,7 @@ export const marshalCreateSnapshotRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   expires_at: request.expiresAt,
+  instance_id: request.instanceId,
   name: request.name,
 })
 
@@ -472,21 +417,14 @@ export const marshalCreateUserRequest = (
   password: request.password,
 })
 
-const marshalRestoreSnapshotRequestVolumeDetails = (
-  request: RestoreSnapshotRequestVolumeDetails,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  volume_type: request.volumeType,
-})
-
 export const marshalRestoreSnapshotRequest = (
   request: RestoreSnapshotRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   instance_name: request.instanceName,
-  node_number: request.nodeNumber,
+  node_amount: request.nodeAmount,
   node_type: request.nodeType,
-  volume: marshalRestoreSnapshotRequestVolumeDetails(request.volume, defaults),
+  volume_type: request.volumeType,
 })
 
 const marshalUserRole = (
@@ -495,7 +433,7 @@ const marshalUserRole = (
 ): Record<string, unknown> => ({
   role: request.role,
   ...resolveOneOf<string | boolean>([
-    { param: 'database', value: request.database },
+    { param: 'database_name', value: request.databaseName },
     { param: 'any_database', value: request.anyDatabase },
   ]),
 })
@@ -515,7 +453,10 @@ export const marshalUpdateInstanceRequest = (
   request: UpdateInstanceRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  is_snapshot_schedule_enabled: request.isSnapshotScheduleEnabled,
   name: request.name,
+  snapshot_schedule_frequency_hours: request.snapshotScheduleFrequencyHours,
+  snapshot_schedule_retention_days: request.snapshotScheduleRetentionDays,
   tags: request.tags,
 })
 
@@ -538,5 +479,7 @@ export const marshalUpgradeInstanceRequest = (
   request: UpgradeInstanceRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([{ param: 'volume_size', value: request.volumeSize }]),
+  ...resolveOneOf([
+    { param: 'volume_size_bytes', value: request.volumeSizeBytes },
+  ]),
 })
