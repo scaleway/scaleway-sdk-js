@@ -6,7 +6,8 @@ import {
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { ApiLocality } from '../types/locality'
+import { toApiLocality } from '../types/locality'
 import {
   marshalCreateKeyRequest,
   marshalDecryptRequest,
@@ -45,6 +46,7 @@ import type {
   ListKeysResponse,
   ProtectKeyRequest,
   PublicKey,
+  RestoreKeyRequest,
   RotateKeyRequest,
   SignRequest,
   SignResponse,
@@ -64,12 +66,13 @@ const jsonContentHeaders = {
 This API allows you to create, manage and use cryptographic keys in a centralized and secure service.
  */
 export class API extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = [
-    'fr-par',
-    'nl-ams',
-    'pl-waw',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
 
   /**
    * Create a key. Create a key in a given region specified by the `region` parameter. Keys only support symmetric encryption. You can use keys to encrypt or decrypt arbitrary payloads, or to generate data encryption keys. **Data encryption keys are not stored in Key Manager**.
@@ -235,7 +238,7 @@ export class API extends ParentAPI {
       unmarshalKey,
     )
 
-  protected pageOfListKeys = (request: Readonly<ListKeysRequest> = {}) =>
+  protected pageOfListKeys = (request: Readonly<ListKeysRequest>) =>
     this.client.fetch<ListKeysResponse>(
       {
         method: 'GET',
@@ -250,6 +253,7 @@ export class API extends ParentAPI {
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['project_id', request.projectId],
+          ['scheduled_for_deletion', request.scheduledForDeletion],
           ['tags', request.tags],
           ['usage', request.usage],
         ),
@@ -263,7 +267,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListKeysRequest}
    * @returns A Promise of ListKeysResponse
    */
-  listKeys = (request: Readonly<ListKeysRequest> = {}) =>
+  listKeys = (request: Readonly<ListKeysRequest>) =>
     enrichForPagination('keys', this.pageOfListKeys, request)
 
   /**
@@ -392,4 +396,21 @@ The data encryption key is returned in plaintext and ciphertext but it should on
       method: 'POST',
       path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/delete-key-material`,
     })
+
+  /**
+   * Restore a key. Restore a key and all its rotations scheduled for deletion specified by the `region` and `key_id` parameters.
+   *
+   * @param request - The request {@link RestoreKeyRequest}
+   * @returns A Promise of Key
+   */
+  restoreKey = (request: Readonly<RestoreKeyRequest>) =>
+    this.client.fetch<Key>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/restore`,
+      },
+      unmarshalKey,
+    )
 }

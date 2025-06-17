@@ -24,6 +24,7 @@ export type {
   GetSnapshotRequest,
   Instance,
   InstanceSetting,
+  InstanceSnapshotSchedule,
   InstanceStatus,
   ListInstancesRequest,
   ListInstancesRequestOrderBy,

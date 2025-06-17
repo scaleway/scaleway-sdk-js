@@ -141,6 +141,10 @@ export interface Key {
    */
   origin: KeyOrigin
   /**
+   * Returns the time at which deletion was requested.
+   */
+  deletionRequestedAt?: Date
+  /**
    * Region where the key is stored.
    */
   region: ScwRegion
@@ -405,6 +409,10 @@ export type ListKeysRequest = {
    * Select from symmetric encryption, asymmetric encryption, or asymmetric signing.
    */
   usage?: ListKeysRequestUsage
+  /**
+   * Filter keys based on their deletion status. By default, only keys not scheduled for deletion are returned in the output.
+   */
+  scheduledForDeletion: boolean
 }
 
 export interface ListKeysResponse {
@@ -431,6 +439,14 @@ export type ProtectKeyRequest = {
 
 export interface PublicKey {
   pem: string
+}
+
+export type RestoreKeyRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  keyId: string
 }
 
 export type RotateKeyRequest = {
