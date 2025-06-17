@@ -22,6 +22,7 @@ import type {
   EndpointSpecPublicDetails,
   Instance,
   InstanceSetting,
+  InstanceSnapshotSchedule,
   ListInstancesResponse,
   ListNodeTypesResponse,
   ListSnapshotsResponse,
@@ -105,6 +106,24 @@ export const unmarshalInstanceSetting = (data: unknown): InstanceSetting => {
   } as InstanceSetting
 }
 
+export const unmarshalInstanceSnapshotSchedule = (
+  data: unknown,
+): InstanceSnapshotSchedule => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InstanceSnapshotSchedule' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    enabled: data.enabled,
+    frequencyHours: data.frequency_hours,
+    lastRun: unmarshalDate(data.last_run),
+    nextUpdate: unmarshalDate(data.next_update),
+    retentionDays: data.retention_days,
+  } as InstanceSnapshotSchedule
+}
+
 export const unmarshalVolume = (data: unknown): Volume => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -135,6 +154,9 @@ export const unmarshalInstance = (data: unknown): Instance => {
     projectId: data.project_id,
     region: data.region,
     settings: unmarshalArrayOfObject(data.settings, unmarshalInstanceSetting),
+    snapshotSchedule: data.snapshot_schedule
+      ? unmarshalInstanceSnapshotSchedule(data.snapshot_schedule)
+      : undefined,
     status: data.status,
     tags: data.tags,
     version: data.version,

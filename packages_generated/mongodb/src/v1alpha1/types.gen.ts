@@ -120,6 +120,14 @@ export interface InstanceSetting {
   value: string
 }
 
+export interface InstanceSnapshotSchedule {
+  frequencyHours: number
+  retentionDays: number
+  enabled: boolean
+  nextUpdate?: Date
+  lastRun?: Date
+}
+
 export interface Volume {
   /**
    * Type of volume where data is stored.
@@ -297,6 +305,10 @@ export interface Instance {
    * Creation date (must follow the ISO 8601 format).
    */
   createdAt?: Date
+  /**
+   * Snapshot schedule configuration of the Database Instance.
+   */
+  snapshotSchedule?: InstanceSnapshotSchedule
   /**
    * Region the Database Instance is in.
    */
