@@ -37,8 +37,6 @@ export type NodeTypeStock =
   | 'out_of_stock'
   | 'available'
 
-export type SettingPropertyType = 'BOOLEAN' | 'INT' | 'STRING' | 'FLOAT'
-
 export type SnapshotStatus =
   | 'unknown_status'
   | 'creating'
@@ -67,7 +65,10 @@ export interface EndpointPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-export interface EndpointPublicDetails {}
+/**
+ * Public Access details.
+ */
+export interface EndpointPublicNetworkDetails {}
 
 export interface EndpointSpecPrivateNetworkDetails {
   /**
@@ -76,7 +77,7 @@ export interface EndpointSpecPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-export interface EndpointSpecPublicDetails {}
+export interface EndpointSpecPublicNetworkDetails {}
 
 export interface Endpoint {
   /**
@@ -84,13 +85,9 @@ export interface Endpoint {
    */
   id: string
   /**
-   * List of IPv4 addresses of the endpoint.
-   */
-  ips: string[]
-  /**
    * List of DNS records of the endpoint.
    */
-  dnsRecords: string[]
+  dnsRecord: string
   /**
    * TCP port of the endpoint.
    */
@@ -98,26 +95,15 @@ export interface Endpoint {
   /**
    * Private Network endpoint details.
    *
-   * One-of ('details'): at most one of 'privateNetwork', 'public' could be set.
+   * One-of ('details'): at most one of 'privateNetwork', 'publicNetwork' could be set.
    */
   privateNetwork?: EndpointPrivateNetworkDetails
   /**
-   * Public endpoint details.
+   * Public Network endpoint details.
    *
-   * One-of ('details'): at most one of 'privateNetwork', 'public' could be set.
+   * One-of ('details'): at most one of 'privateNetwork', 'publicNetwork' could be set.
    */
-  public?: EndpointPublicDetails
-}
-
-export interface InstanceSetting {
-  /**
-   * Name of the settings.
-   */
-  name: string
-  /**
-   * Value of the settings.
-   */
-  value: string
+  publicNetwork?: EndpointPublicNetworkDetails
 }
 
 export interface InstanceSnapshotSchedule {
@@ -136,7 +122,7 @@ export interface Volume {
   /**
    * Volume size.
    */
-  size: number
+  sizeBytes: number
 }
 
 export interface NodeTypeVolumeType {
@@ -151,19 +137,15 @@ export interface NodeTypeVolumeType {
   /**
    * Minimum size required for the volume.
    */
-  minSize: number
+  minSizeBytes: number
   /**
    * Maximum size required for the volume.
    */
-  maxSize: number
+  maxSizeBytes: number
   /**
    * Minimum increment level for a Block Storage volume size.
    */
-  chunkSize: number
-}
-
-export interface SnapshotVolumeType {
-  type: VolumeType
+  chunkSizeBytes: number
 }
 
 export interface UserRole {
@@ -174,86 +156,28 @@ export interface UserRole {
   /**
    * Name of the database on which the preset role will be used.
    *
-   * One-of ('scope'): at most one of 'database', 'anyDatabase' could be set.
+   * One-of ('scope'): at most one of 'databaseName', 'anyDatabase' could be set.
    */
-  database?: string
+  databaseName?: string
   /**
    * Flag to enable the preset role in all databases.
    *
-   * One-of ('scope'): at most one of 'database', 'anyDatabase' could be set.
+   * One-of ('scope'): at most one of 'databaseName', 'anyDatabase' could be set.
    */
   anyDatabase?: boolean
-}
-
-export interface Setting {
-  /**
-   * Setting name from the database engine.
-   */
-  name: string
-  /**
-   * Value set when not specified.
-   */
-  defaultValue: string
-  /**
-   * Setting can be applied without restarting.
-   */
-  hotConfigurable: boolean
-  /**
-   * Setting description.
-   */
-  description: string
-  /**
-   * Setting type.
-   */
-  propertyType: SettingPropertyType
-  /**
-   * Setting base unit.
-   */
-  unit?: string
-  /**
-   * Validation regex for string type settings.
-   */
-  stringConstraint?: string
-  /**
-   * Minimum value for int types.
-   */
-  intMin?: number
-  /**
-   * Maximum value for int types.
-   */
-  intMax?: number
-  /**
-   * Minimum value for float types.
-   */
-  floatMin?: number
-  /**
-   * Maximum value for float types.
-   */
-  floatMax?: number
 }
 
 export interface EndpointSpec {
   /**
    *
-   * One-of ('details'): at most one of 'public', 'privateNetwork' could be set.
+   * One-of ('details'): at most one of 'publicNetwork', 'privateNetwork' could be set.
    */
-  public?: EndpointSpecPublicDetails
+  publicNetwork?: EndpointSpecPublicNetworkDetails
   /**
    *
-   * One-of ('details'): at most one of 'public', 'privateNetwork' could be set.
+   * One-of ('details'): at most one of 'publicNetwork', 'privateNetwork' could be set.
    */
   privateNetwork?: EndpointSpecPrivateNetworkDetails
-}
-
-export interface CreateInstanceRequestVolumeDetails {
-  /**
-   * Volume size.
-   */
-  volumeSize: number
-  /**
-   * Type of volume where data is stored.
-   */
-  volumeType: VolumeType
 }
 
 export interface Instance {
@@ -270,11 +194,15 @@ export interface Instance {
    */
   projectId: string
   /**
+   * Organization ID the Database Instance belongs to.
+   */
+  organizationId: string
+  /**
    * Status of the Database Instance.
    */
   status: InstanceStatus
   /**
-   * MongoDB® engine version of the Database Instance.
+   * MongoDB® major engine version of the Database Instance.
    */
   version: string
   /**
@@ -282,13 +210,9 @@ export interface Instance {
    */
   tags: string[]
   /**
-   * Advanced settings of the Database Instance.
-   */
-  settings: InstanceSetting[]
-  /**
    * Number of node in the Database Instance.
    */
-  nodeNumber: number
+  nodeAmount: number
   /**
    * Node type of the Database Instance.
    */
@@ -306,13 +230,13 @@ export interface Instance {
    */
   createdAt?: Date
   /**
-   * Snapshot schedule configuration of the Database Instance.
-   */
-  snapshotSchedule?: InstanceSnapshotSchedule
-  /**
    * Region the Database Instance is in.
    */
   region: ScwRegion
+  /**
+   * Snapshot schedule configuration of the Database Instance.
+   */
+  snapshotSchedule?: InstanceSnapshotSchedule
 }
 
 export interface NodeType {
@@ -335,7 +259,7 @@ export interface NodeType {
   /**
    * Quantity of RAM.
    */
-  memory: number
+  memoryBytes: number
   /**
    * Available storage options for the node type.
    */
@@ -362,7 +286,7 @@ export interface Snapshot {
   /**
    * UUID of the Database Instance.
    */
-  instanceId: string
+  instanceId?: string
   /**
    * Name of the snapshot.
    */
@@ -374,7 +298,7 @@ export interface Snapshot {
   /**
    * Size of the snapshot.
    */
-  size: number
+  sizeBytes: number
   /**
    * Expiration date (must follow the ISO 8601 format).
    */
@@ -398,7 +322,7 @@ export interface Snapshot {
   /**
    * Type of volume where data is stored - sbs_5k or sbs_15k.
    */
-  volumeType?: SnapshotVolumeType
+  volumeType: VolumeType
   /**
    * Region of the snapshot.
    */
@@ -418,24 +342,13 @@ export interface User {
 
 export interface Version {
   /**
-   * MongoDB® engine version.
+   * MongoDB® major engine version.
    */
   version: string
   /**
    * Date of End of Life.
    */
   endOfLifeAt?: Date
-  /**
-   * Instance settings available to be updated.
-   */
-  availableSettings: Setting[]
-}
-
-export interface RestoreSnapshotRequestVolumeDetails {
-  /**
-   * Type of volume where data is stored.
-   */
-  volumeType: VolumeType
 }
 
 export type CreateEndpointRequest = {
@@ -467,7 +380,7 @@ export type CreateInstanceRequest = {
    */
   name?: string
   /**
-   * Version of the MongoDB® engine.
+   * Major version of the MongoDB® engine.
    */
   version: string
   /**
@@ -477,7 +390,7 @@ export type CreateInstanceRequest = {
   /**
    * Number of node to use for the Database Instance.
    */
-  nodeNumber: number
+  nodeAmount: number
   /**
    * Type of node to use for the Database Instance.
    */
@@ -493,7 +406,7 @@ export type CreateInstanceRequest = {
   /**
    * Instance volume information.
    */
-  volume?: CreateInstanceRequestVolumeDetails
+  volume?: Volume
   /**
    * One or multiple EndpointSpec used to expose your Database Instance.
    */
@@ -641,7 +554,7 @@ export type ListInstancesRequest = {
    */
   organizationId?: string
   /**
-   * Project ID.
+   * Project ID to list the instances of.
    */
   projectId?: string
   page?: number
@@ -667,7 +580,7 @@ export type ListNodeTypesRequest = {
   /**
    * Defines whether or not to include disabled types.
    */
-  includeDisabledTypes?: boolean
+  includeDisabled?: boolean
   page?: number
   pageSize?: number
 }
@@ -767,11 +680,11 @@ export type ListVersionsRequest = {
 
 export interface ListVersionsResponse {
   /**
-   * Available MongoDB® engine version.
+   * Available MongoDB® major engine version.
    */
   versions: Version[]
   /**
-   * Total count of MongoDB® engine version available.
+   * Total count of MongoDB® major engine version available.
    */
   totalCount: number
 }
@@ -796,11 +709,11 @@ export type RestoreSnapshotRequest = {
   /**
    * Number of nodes to use for the new Database Instance.
    */
-  nodeNumber: number
+  nodeAmount: number
   /**
-   * Instance volume information.
+   * Instance volume type.
    */
-  volume: RestoreSnapshotRequestVolumeDetails
+  volumeType: VolumeType
 }
 
 export type SetUserRoleRequest = {
@@ -839,6 +752,18 @@ export type UpdateInstanceRequest = {
    * Tags of a Database Instance.
    */
   tags?: string[]
+  /**
+   * In hours.
+   */
+  snapshotScheduleFrequencyHours?: number
+  /**
+   * In days.
+   */
+  snapshotScheduleRetentionDays?: number
+  /**
+   * Defines whether or not the snapshot schedule is enabled.
+   */
+  isSnapshotScheduleEnabled?: boolean
 }
 
 export type UpdateSnapshotRequest = {
@@ -891,7 +816,7 @@ export type UpgradeInstanceRequest = {
   /**
    * Increase your Block Storage volume size.
    *
-   * One-of ('upgradeTarget'): at most one of 'volumeSize' could be set.
+   * One-of ('upgradeTarget'): at most one of 'volumeSizeBytes' could be set.
    */
-  volumeSize?: number
+  volumeSizeBytes?: number
 }
