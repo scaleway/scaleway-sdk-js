@@ -3,11 +3,12 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_BLOCK,
   VOLUME_TRANSIENT_STATUSES as VOLUME_TRANSIENT_STATUSES_BLOCK,
@@ -56,18 +57,23 @@ const jsonContentHeaders = {
 This API allows you to manage your Block Storage volumes.
  */
 export class API extends ParentAPI {
-  /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: ScwZone[] = [
-    'fr-par-1',
-    'fr-par-2',
-    'fr-par-3',
-    'nl-ams-1',
-    'nl-ams-2',
-    'nl-ams-3',
-    'pl-waw-1',
-    'pl-waw-2',
-    'pl-waw-3',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    zones: [
+      'fr-par-1',
+      'fr-par-2',
+      'fr-par-3',
+      'nl-ams-1',
+      'nl-ams-2',
+      'nl-ams-3',
+      'pl-waw-1',
+      'pl-waw-2',
+      'pl-waw-3',
+    ],
+  })
 
   protected pageOfListVolumeTypes = (
     request: Readonly<ListVolumeTypesRequest> = {},
