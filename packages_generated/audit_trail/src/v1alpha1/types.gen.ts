@@ -51,6 +51,7 @@ export interface KubernetesPoolInfo {
 
 export interface SecretManagerSecretInfo {
   path: string
+  keyId?: string
 }
 
 export interface SecretManagerSecretVersionInfo {
