@@ -3,10 +3,11 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  toApiLocality,
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   marshalAddSubnetsRequest,
   marshalCreatePrivateNetworkRequest,
@@ -73,12 +74,13 @@ const jsonContentHeaders = {
 This API allows you to manage your Virtual Private Clouds (VPCs) and Private Networks.
  */
 export class API extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = [
-    'fr-par',
-    'nl-ams',
-    'pl-waw',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
 
   protected pageOfListVPCs = (request: Readonly<ListVPCsRequest> = {}) =>
     this.client.fetch<ListVPCsResponse>(

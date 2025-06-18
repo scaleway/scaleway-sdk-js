@@ -3,10 +3,11 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  toApiLocality,
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone } from '@scaleway/sdk-client'
+import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   marshalPrivateNetworkApiAddServerPrivateNetworkRequest,
   marshalPrivateNetworkApiSetServerPrivateNetworksRequest,
@@ -32,15 +33,20 @@ const jsonContentHeaders = {
  * Elastic Metal - Private Networks API.
  */
 export class PrivateNetworkAPI extends ParentAPI {
-  /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: ScwZone[] = [
-    'fr-par-1',
-    'fr-par-2',
-    'nl-ams-1',
-    'nl-ams-2',
-    'pl-waw-2',
-    'pl-waw-3',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    zones: [
+      'fr-par-1',
+      'fr-par-2',
+      'nl-ams-1',
+      'nl-ams-2',
+      'pl-waw-2',
+      'pl-waw-3',
+    ],
+  })
 
   /**
    * Add a server to a Private Network. Add an Elastic Metal server to a Private Network.

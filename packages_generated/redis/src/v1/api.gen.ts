@@ -3,11 +3,12 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import { CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_REDIS } from './content.gen'
 import {
   marshalAddAclRulesRequest,
@@ -81,15 +82,20 @@ const jsonContentHeaders = {
 This API allows you to manage your Managed Databases for Redis™.
  */
 export class API extends ParentAPI {
-  /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: ScwZone[] = [
-    'fr-par-1',
-    'fr-par-2',
-    'nl-ams-1',
-    'nl-ams-2',
-    'pl-waw-1',
-    'pl-waw-2',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    zones: [
+      'fr-par-1',
+      'fr-par-2',
+      'nl-ams-1',
+      'nl-ams-2',
+      'pl-waw-1',
+      'pl-waw-2',
+    ],
+  })
 
   /**
    * Create a Redis™ Database Instance. Create a new Redis™ Database Instance (Redis™ cluster). You must set the `zone`, `project_id`, `version`, `node_type`, `user_name` and `password` parameters. Optionally you can define `acl_rules`, `endpoints`, `tls_enabled` and `cluster_settings`.
