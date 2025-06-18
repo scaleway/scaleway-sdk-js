@@ -55,6 +55,53 @@ export const unmarshalOS = (data: unknown): OS => {
   } as OS
 }
 
+const unmarshalCommitment = (data: unknown): Commitment => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Commitment' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    cancelled: data.cancelled,
+    type: data.type,
+  } as Commitment
+}
+
+export const unmarshalServer = (data: unknown): Server => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Server' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    commitment: data.commitment
+      ? unmarshalCommitment(data.commitment)
+      : undefined,
+    createdAt: unmarshalDate(data.created_at),
+    deletableAt: unmarshalDate(data.deletable_at),
+    deletionScheduled: data.deletion_scheduled,
+    delivered: data.delivered,
+    id: data.id,
+    ip: data.ip,
+    name: data.name,
+    organizationId: data.organization_id,
+    os: data.os ? unmarshalOS(data.os) : undefined,
+    projectId: data.project_id,
+    publicBandwidthBps: data.public_bandwidth_bps,
+    sshUsername: data.ssh_username,
+    status: data.status,
+    sudoPassword: data.sudo_password,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at),
+    vncPort: data.vnc_port,
+    vncUrl: data.vnc_url,
+    vpcStatus: data.vpc_status,
+    zone: data.zone,
+  } as Server
+}
+
 export const unmarshalServerPrivateNetwork = (
   data: unknown,
 ): ServerPrivateNetwork => {
@@ -162,53 +209,6 @@ export const unmarshalServerType = (data: unknown): ServerType => {
       : undefined,
     stock: data.stock,
   } as ServerType
-}
-
-const unmarshalCommitment = (data: unknown): Commitment => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Commitment' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    cancelled: data.cancelled,
-    type: data.type,
-  } as Commitment
-}
-
-export const unmarshalServer = (data: unknown): Server => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Server' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    commitment: data.commitment
-      ? unmarshalCommitment(data.commitment)
-      : undefined,
-    createdAt: unmarshalDate(data.created_at),
-    deletableAt: unmarshalDate(data.deletable_at),
-    deletionScheduled: data.deletion_scheduled,
-    delivered: data.delivered,
-    id: data.id,
-    ip: data.ip,
-    name: data.name,
-    organizationId: data.organization_id,
-    os: data.os ? unmarshalOS(data.os) : undefined,
-    projectId: data.project_id,
-    publicBandwidthBps: data.public_bandwidth_bps,
-    sshUsername: data.ssh_username,
-    status: data.status,
-    sudoPassword: data.sudo_password,
-    type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
-    vncPort: data.vnc_port,
-    vncUrl: data.vnc_url,
-    vpcStatus: data.vpc_status,
-    zone: data.zone,
-  } as Server
 }
 
 const unmarshalConnectivityDiagnosticServerHealth = (
