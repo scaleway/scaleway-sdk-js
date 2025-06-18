@@ -2,11 +2,11 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import {
   API as ParentAPI,
+  toApiLocality,
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
-import type { ApiLocality } from '../types/locality'
-import { toApiLocality } from '../types/locality'
+import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   unmarshalListEventsResponse,
   unmarshalListProductsResponse,

@@ -92,9 +92,9 @@ export class API extends ParentAPI {
     this.client.fetch<ListNodeTypesResponse>(
       {
         method: 'GET',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/node-types`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/node-types`,
         urlParams: urlParams(
-          ['include_disabled_types', request.includeDisabledTypes],
+          ['include_disabled', request.includeDisabled],
           ['page', request.page],
           [
             'page_size',
@@ -120,7 +120,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListVersionsResponse>(
       {
         method: 'GET',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/versions`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/versions`,
         urlParams: urlParams(
           ['page', request.page],
           [
@@ -134,7 +134,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List available MongoDB® versions.
+   * List available MongoDB® major versions.
    *
    * @param request - The request {@link ListVersionsRequest}
    * @returns A Promise of ListVersionsResponse
@@ -148,7 +148,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListInstancesResponse>(
       {
         method: 'GET',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -184,7 +184,7 @@ export class API extends ParentAPI {
     this.client.fetch<Instance>(
       {
         method: 'GET',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}`,
       },
       unmarshalInstance,
     )
@@ -225,7 +225,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances`,
       },
       unmarshalInstance,
     )
@@ -244,7 +244,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}`,
       },
       unmarshalInstance,
     )
@@ -259,7 +259,7 @@ export class API extends ParentAPI {
     this.client.fetch<Instance>(
       {
         method: 'DELETE',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}`,
       },
       unmarshalInstance,
     )
@@ -278,7 +278,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/upgrade`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/upgrade`,
       },
       unmarshalInstance,
     )
@@ -292,7 +292,7 @@ export class API extends ParentAPI {
   getInstanceCertificate = (request: Readonly<GetInstanceCertificateRequest>) =>
     this.client.fetch<Blob>({
       method: 'GET',
-      path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/certificate`,
+      path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/certificate`,
       urlParams: urlParams(['dl', 1]),
       responseType: 'blob',
     })
@@ -311,7 +311,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/snapshots`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots`,
       },
       unmarshalSnapshot,
     )
@@ -326,7 +326,7 @@ export class API extends ParentAPI {
     this.client.fetch<Snapshot>(
       {
         method: 'GET',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
       },
       unmarshalSnapshot,
     )
@@ -366,14 +366,14 @@ export class API extends ParentAPI {
           marshalUpdateSnapshotRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        method: 'PATCH',
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
       },
       unmarshalSnapshot,
     )
 
   /**
-   * Restore a Database Instance snapshot. Restore a given snapshot of a Database Instance. You must specify, in the endpoint, the `snapshot_id` parameter of the snapshot you want to restore, the `instance_name` of the new Database Instance, `node_type` of the new Database Instance and `node_number` of the new Database Instance.
+   * Restore a Database Instance snapshot. Restore a given snapshot of a Database Instance. You must specify, in the endpoint, the `snapshot_id` parameter of the snapshot you want to restore, the `instance_name` of the new Database Instance, `node_type` of the new Database Instance and `node_amount` of the new Database Instance.
    *
    * @param request - The request {@link RestoreSnapshotRequest}
    * @returns A Promise of Instance
@@ -386,7 +386,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}/restore`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}/restore`,
       },
       unmarshalInstance,
     )
@@ -397,7 +397,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListSnapshotsResponse>(
       {
         method: 'GET',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots`,
         urlParams: urlParams(
           ['instance_id', request.instanceId],
           ['name', request.name],
@@ -433,7 +433,7 @@ export class API extends ParentAPI {
     this.client.fetch<Snapshot>(
       {
         method: 'DELETE',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
       },
       unmarshalSnapshot,
     )
@@ -442,7 +442,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListUsersResponse>(
       {
         method: 'GET',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -479,7 +479,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users`,
       },
       unmarshalUser,
     )
@@ -498,7 +498,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users/${validatePathParam('name', request.name)}`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users/${validatePathParam('name', request.name)}`,
       },
       unmarshalUser,
     )
@@ -510,10 +510,8 @@ export class API extends ParentAPI {
    */
   deleteUser = (request: Readonly<DeleteUserRequest>) =>
     this.client.fetch<void>({
-      body: '{}',
-      headers: jsonContentHeaders,
       method: 'DELETE',
-      path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users/${validatePathParam('name', request.name)}`,
+      path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users/${validatePathParam('name', request.name)}`,
     })
 
   /**
@@ -530,7 +528,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/roles`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/set-user-roles`,
       },
       unmarshalUser,
     )
@@ -543,7 +541,7 @@ export class API extends ParentAPI {
   deleteEndpoint = (request: Readonly<DeleteEndpointRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+      path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
     })
 
   /**
@@ -560,7 +558,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints`,
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints`,
       },
       unmarshalEndpoint,
     )

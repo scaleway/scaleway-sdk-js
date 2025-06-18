@@ -3,10 +3,11 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  toApiLocality,
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   marshalCreateJobDefinitionRequest,
   marshalCreateJobDefinitionSecretsRequest,
@@ -63,12 +64,13 @@ const jsonContentHeaders = {
 This API allows you to manage your Serverless Jobs.
  */
 export class API extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = [
-    'fr-par',
-    'nl-ams',
-    'pl-waw',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
 
   /**
    * Create a new job definition in a specified Project.

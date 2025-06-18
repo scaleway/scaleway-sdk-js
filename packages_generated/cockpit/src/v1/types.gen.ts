@@ -191,7 +191,7 @@ export interface DataSource {
    */
   synchronizedWithGrafana: boolean
   /**
-   * BETA - Duration for which the data will be retained in the data source.
+   * Duration for which the data will be retained in the data source.
    */
   retentionDays: number
   /**
@@ -754,7 +754,7 @@ export type RegionalApiCreateDataSourceRequest = {
    */
   type?: DataSourceType
   /**
-   * Default values are 30 days for metrics, 7 days for logs and traces.
+   * Default values are 31 days for metrics, 7 days for logs and traces.
    */
   retentionDays?: number
 }
@@ -1053,11 +1053,11 @@ export type RegionalApiListDataSourcesRequest = {
    */
   projectId?: string
   /**
-   * Origin to filter for, only data sources with matching origin will be returned.
+   * Origin to filter for, only data sources with matching origin will be returned. If omitted, all types will be returned.
    */
   origin?: DataSourceOrigin
   /**
-   * Types to filter for, only data sources with matching types will be returned.
+   * Types to filter for (metrics, logs, traces), only data sources with matching types will be returned. If omitted, all types will be returned.
    */
   types?: DataSourceType[]
 }
@@ -1147,7 +1147,7 @@ export type RegionalApiUpdateDataSourceRequest = {
    */
   name?: string
   /**
-   * BETA - Duration for which the data will be retained in the data source.
+   * Duration for which the data will be retained in the data source.
    */
   retentionDays?: number
 }
