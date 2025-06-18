@@ -2,10 +2,11 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import {
   API as ParentAPI,
+  toApiLocality,
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   unmarshalListEventsResponse,
   unmarshalListProductsResponse,
@@ -23,8 +24,13 @@ import type {
 This API allows you to ensure accountability and security by recording events and changes performed within your Scaleway Organization.
  */
 export class API extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = ['fr-par', 'nl-ams']
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams'],
+  })
 
   /**
    * List events. Retrieve the list of Audit Trail events for a Scaleway Organization and/or Project. You must specify the `organization_id` and optionally, the `project_id`.

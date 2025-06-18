@@ -3,10 +3,11 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  toApiLocality,
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone } from '@scaleway/sdk-client'
+import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   marshalApplyBlockMigrationRequest,
   marshalAttachServerFileSystemRequest,
@@ -253,18 +254,23 @@ const jsonContentHeaders = {
 This API allows you to manage your CPU and GPU Instances.
  */
 export class API extends ParentAPI {
-  /** Lists the available zones of the API. */
-  public static readonly LOCALITIES: ScwZone[] = [
-    'fr-par-1',
-    'fr-par-2',
-    'fr-par-3',
-    'nl-ams-1',
-    'nl-ams-2',
-    'nl-ams-3',
-    'pl-waw-1',
-    'pl-waw-2',
-    'pl-waw-3',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    zones: [
+      'fr-par-1',
+      'fr-par-2',
+      'fr-par-3',
+      'nl-ams-1',
+      'nl-ams-2',
+      'nl-ams-3',
+      'pl-waw-1',
+      'pl-waw-2',
+      'pl-waw-3',
+    ],
+  })
 
   /**
    * Get availability. Get availability for all Instance types.

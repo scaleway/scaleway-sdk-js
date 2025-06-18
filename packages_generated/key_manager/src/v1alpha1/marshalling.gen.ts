@@ -70,6 +70,7 @@ export const unmarshalKey = (data: unknown): Key => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
+    deletionRequestedAt: unmarshalDate(data.deletion_requested_at),
     description: data.description,
     id: data.id,
     locked: data.locked,
