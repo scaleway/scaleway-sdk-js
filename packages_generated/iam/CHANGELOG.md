@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.2.0 (2025-06-18)
+
+### Features
+
+- **iam/v1alpha1:** add user connection routes ([#2164](https://github.com/scaleway/scaleway-sdk-js/issues/2164)) ([83c5b67](https://github.com/scaleway/scaleway-sdk-js/commit/83c5b67c89c37fb2c0b131abb38987e288f1d0dc))
+- **iam:** add GetOrganization and SetOrganizationAlias ([#2183](https://github.com/scaleway/scaleway-sdk-js/issues/2183)) ([486aa0e](https://github.com/scaleway/scaleway-sdk-js/commit/486aa0edc08ab8a56e480611dc9c7da6b99b2668))
+- **iam:** increase rules condition max_len to 2048 ([#2172](https://github.com/scaleway/scaleway-sdk-js/issues/2172)) ([7c8eeee](https://github.com/scaleway/scaleway-sdk-js/commit/7c8eeeeb5bc94ff0d115b7322f40ce4a48839df8))
+
 ## [1.1.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-iam@1.1.0...@scaleway/sdk-iam@1.1.1) (2025-05-26)
 
 **Note:** Version bump only for package @scaleway/sdk-iam

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.1.0 (2025-06-18)
+
+### Bug Fixes
+
+- export locality ([#2200](https://github.com/scaleway/scaleway-sdk-js/issues/2200)) ([9f0a4ec](https://github.com/scaleway/scaleway-sdk-js/commit/9f0a4ec19e377cd90c5829604467c09a2088a38c))
+
+### Features
+
+- **instance:** add support for filesystems ([#2176](https://github.com/scaleway/scaleway-sdk-js/issues/2176)) ([791f49d](https://github.com/scaleway/scaleway-sdk-js/commit/791f49d18ef627110299cecc6a7996a850abc527))
+
 ## 1.0.5 (2025-05-26)
 
 **Note:** Version bump only for package @scaleway/sdk-instance

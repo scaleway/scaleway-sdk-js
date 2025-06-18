@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.5.1 (2025-06-18)
+
+### Bug Fixes
+
+- export locality ([#2200](https://github.com/scaleway/scaleway-sdk-js/issues/2200)) ([9f0a4ec](https://github.com/scaleway/scaleway-sdk-js/commit/9f0a4ec19e377cd90c5829604467c09a2088a38c))
+
 # [1.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-container@1.4.0...@scaleway/sdk-container@1.5.0) (2025-05-26)
 
 ### Features
