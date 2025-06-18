@@ -3,13 +3,12 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { WaitForOptions } from '@scaleway/sdk-client'
-import type { ApiLocality } from '../types/locality'
-import { toApiLocality } from '../types/locality'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   INSTANCE_TRANSIENT_STATUSES as INSTANCE_TRANSIENT_STATUSES_MONGODB,
   SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_MONGODB,

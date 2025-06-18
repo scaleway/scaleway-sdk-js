@@ -3,11 +3,12 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { Region as ScwRegion, WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_TEM,
   EMAIL_TRANSIENT_STATUSES as EMAIL_TRANSIENT_STATUSES_TEM,
@@ -99,8 +100,13 @@ const jsonContentHeaders = {
 This API allows you to manage your Transactional Email services.
  */
 export class API extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = ['fr-par']
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par'],
+  })
 
   /**
    * Send an email. You must specify the `region`, the sender and the recipient's information and the `project_id` to send an email from a checked domain. The subject of the email must contain at least 6 characters.

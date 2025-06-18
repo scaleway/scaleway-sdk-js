@@ -4,11 +4,12 @@ import {
   API as ParentAPI,
   enrichForPagination,
   resolveOneOf,
+  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { Region as ScwRegion, WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   CRON_TRANSIENT_STATUSES as CRON_TRANSIENT_STATUSES_FUNCTION,
   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_FUNCTION,
@@ -104,12 +105,13 @@ const jsonContentHeaders = {
 This API allows you to manage your Serverless Functions.
  */
 export class API extends ParentAPI {
-  /** Lists the available regions of the API. */
-  public static readonly LOCALITIES: ScwRegion[] = [
-    'fr-par',
-    'nl-ams',
-    'pl-waw',
-  ]
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
 
   protected pageOfListNamespaces = (
     request: Readonly<ListNamespacesRequest> = {},
