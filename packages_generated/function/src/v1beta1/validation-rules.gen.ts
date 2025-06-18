@@ -34,6 +34,12 @@ export const CreateTriggerRequestMnqSqsClientConfig = {
   },
 }
 
+export const UpdateFunctionRequest = {
+  privateNetworkId: {
+    ignoreEmpty: true,
+  },
+}
+
 export const UpdateTriggerRequest = {
   description: {
     maxLength: 255,

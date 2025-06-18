@@ -117,6 +117,7 @@ const unmarshalSecretManagerSecretInfo = (
   }
 
   return {
+    keyId: data.key_id,
     path: data.path,
   } as SecretManagerSecretInfo
 }

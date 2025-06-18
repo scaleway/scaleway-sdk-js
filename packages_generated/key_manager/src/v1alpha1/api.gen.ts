@@ -3,11 +3,11 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  toApiLocality,
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
-import type { ApiLocality } from '../types/locality'
-import { toApiLocality } from '../types/locality'
+import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   marshalCreateKeyRequest,
   marshalDecryptRequest,
