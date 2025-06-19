@@ -35,6 +35,7 @@ export type ResourceType =
   | 'vpn_gateway'
   | 'ddl_datalab'
   | 'kafka_cluster'
+  | 'bgp_endpoint'
 
 export interface Resource {
   /**
