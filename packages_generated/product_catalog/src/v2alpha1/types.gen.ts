@@ -12,6 +12,7 @@ export type ListPublicCatalogProductsRequestProductType =
   | 'apple_silicon'
   | 'elastic_metal'
   | 'dedibox'
+  | 'block_storage'
 
 export type PublicCatalogProductPropertiesHardwareCPUArch =
   | 'unknown_arch'
