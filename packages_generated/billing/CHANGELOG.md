@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.1.0 (2025-06-18)
+
+### Features
+
+- **billing:** add support for `RedeemCoupon` ([#2173](https://github.com/scaleway/scaleway-sdk-js/issues/2173)) ([cee0f0e](https://github.com/scaleway/scaleway-sdk-js/commit/cee0f0e9b3fa2f5bd908c099b621e16ace9f27c9))
+
 ## 1.0.4 (2025-05-26)
 
 **Note:** Version bump only for package @scaleway/sdk-billing

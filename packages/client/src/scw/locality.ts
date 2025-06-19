@@ -15,15 +15,15 @@ export type Zone =
 /* eslint-enable @typescript-eslint/ban-types */
 
 export type ApiLocality =
-  | { type: 'zone';       zones: Zone[] }
-  | { type: 'region';     regions: Region[] }
+  | { type: 'zone'; zones: Zone[] }
+  | { type: 'region'; regions: Region[] }
   | { type: 'global' }
   | { type: 'unspecified' }
 
-
-export function toApiLocality(
-  legacy?: { zones?: Zone[]; regions?: Region[] }
-): ApiLocality {
+export function toApiLocality(legacy?: {
+  zones?: Zone[]
+  regions?: Region[]
+}): ApiLocality {
   if (!legacy) {
     return { type: 'unspecified' }
   }
@@ -34,6 +34,6 @@ export function toApiLocality(
   if (regions && regions.length > 0) {
     return { type: 'region', regions }
   }
-  
+
   return { type: 'global' }
 }

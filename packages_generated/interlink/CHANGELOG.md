@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.1.0 (2025-06-18)
+
+### Bug Fixes
+
+- export locality ([#2200](https://github.com/scaleway/scaleway-sdk-js/issues/2200)) ([9f0a4ec](https://github.com/scaleway/scaleway-sdk-js/commit/9f0a4ec19e377cd90c5829604467c09a2088a38c))
+
+### Features
+
+- **interlink:** add support for `RoutingPolicyV4ID`, `RoutingPolicyV6ID` and `IsIPv6` ([#2177](https://github.com/scaleway/scaleway-sdk-js/issues/2177)) ([28788bb](https://github.com/scaleway/scaleway-sdk-js/commit/28788bb143c95557f286374d938ec341caeee15c))
+
 ## 1.0.4 (2025-05-26)
 
 **Note:** Version bump only for package @scaleway/sdk-interlink

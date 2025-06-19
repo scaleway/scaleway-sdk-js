@@ -55,6 +55,11 @@ export type ServerTypeStock =
   | 'low_stock'
   | 'high_stock'
 
+export interface Commitment {
+  type: CommitmentType
+  cancelled: boolean
+}
+
 export interface OS {
   /**
    * Unique ID of the OS.
@@ -117,98 +122,6 @@ export interface ServerTypeMemory {
 export interface ServerTypeNetwork {
   publicBandwidthBps: number
   supportedBandwidth: number[]
-}
-
-export interface Commitment {
-  type: CommitmentType
-  cancelled: boolean
-}
-
-export interface ConnectivityDiagnosticServerHealth {
-  lastCheckinDate?: Date
-  isServerAlive: boolean
-  isAgentAlive: boolean
-  isMdmAlive: boolean
-  isSshPortUp: boolean
-  isVncPortUp: boolean
-}
-
-export interface ServerPrivateNetwork {
-  /**
-   * ID of the Server-to-Private Network mapping.
-   */
-  id: string
-  /**
-   * Private Network Project ID.
-   */
-  projectId: string
-  /**
-   * Apple silicon server ID.
-   */
-  serverId: string
-  /**
-   * Private Network ID.
-   */
-  privateNetworkId: string
-  /**
-   * ID of the VLAN associated with the Private Network.
-   */
-  vlan?: number
-  /**
-   * Configuration status of the Private Network.
-   */
-  status: ServerPrivateNetworkServerStatus
-  /**
-   * Private Network creation date.
-   */
-  createdAt?: Date
-  /**
-   * Date the Private Network was last modified.
-   */
-  updatedAt?: Date
-  /**
-   * IPAM IP IDs of the server, if it has any.
-   */
-  ipamIpIds: string[]
-}
-
-export interface ServerType {
-  /**
-   * CPU description.
-   */
-  cpu?: ServerTypeCPU
-  /**
-   * Size of the local disk of the server.
-   */
-  disk?: ServerTypeDisk
-  /**
-   * Name of the type.
-   */
-  name: string
-  /**
-   * Size of memory available.
-   */
-  memory?: ServerTypeMemory
-  /**
-   * Current stock.
-   */
-  stock: ServerTypeStock
-  /**
-   * Minimum duration of the lease in seconds (example. 3.4s).
-   */
-  minimumLeaseDuration?: string
-  /**
-   * GPU description.
-   */
-  gpu?: ServerTypeGPU
-  /**
-   * Network description.
-   */
-  network?: ServerTypeNetwork
-  /**
-   * The default OS for this server type.
-   */
-  defaultOs?: OS
 }
 
 export interface Server {
@@ -296,6 +209,93 @@ export interface Server {
    * Public bandwidth configured for this server. Expressed in bits per second.
    */
   publicBandwidthBps: number
+}
+
+export interface ConnectivityDiagnosticServerHealth {
+  lastCheckinDate?: Date
+  isServerAlive: boolean
+  isAgentAlive: boolean
+  isMdmAlive: boolean
+  isSshPortUp: boolean
+  isVncPortUp: boolean
+}
+
+export interface ServerPrivateNetwork {
+  /**
+   * ID of the Server-to-Private Network mapping.
+   */
+  id: string
+  /**
+   * Private Network Project ID.
+   */
+  projectId: string
+  /**
+   * Apple silicon server ID.
+   */
+  serverId: string
+  /**
+   * Private Network ID.
+   */
+  privateNetworkId: string
+  /**
+   * ID of the VLAN associated with the Private Network.
+   */
+  vlan?: number
+  /**
+   * Configuration status of the Private Network.
+   */
+  status: ServerPrivateNetworkServerStatus
+  /**
+   * Private Network creation date.
+   */
+  createdAt?: Date
+  /**
+   * Date the Private Network was last modified.
+   */
+  updatedAt?: Date
+  /**
+   * IPAM IP IDs of the server, if it has any.
+   */
+  ipamIpIds: string[]
+}
+
+export interface ServerType {
+  /**
+   * CPU description.
+   */
+  cpu?: ServerTypeCPU
+  /**
+   * Size of the local disk of the server.
+   */
+  disk?: ServerTypeDisk
+  /**
+   * Name of the type.
+   */
+  name: string
+  /**
+   * Size of memory available.
+   */
+  memory?: ServerTypeMemory
+  /**
+   * Current stock.
+   */
+  stock: ServerTypeStock
+  /**
+   * Minimum duration of the lease in seconds (example. 3.4s).
+   */
+  minimumLeaseDuration?: string
+  /**
+   * GPU description.
+   */
+  gpu?: ServerTypeGPU
+  /**
+   * Network description.
+   */
+  network?: ServerTypeNetwork
+  /**
+   * The default OS for this server type.
+   */
+  defaultOs?: OS
 }
 
 export interface CommitmentTypeValue {

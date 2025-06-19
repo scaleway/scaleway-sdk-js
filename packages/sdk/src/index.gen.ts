@@ -29,7 +29,7 @@ import { KeyManagerv1alpha1 } from '@scaleway/sdk-key-manager'
 import { Lbv1 } from '@scaleway/sdk-lb'
 import { Marketplacev2 } from '@scaleway/sdk-marketplace'
 import { Mnqv1beta1 } from '@scaleway/sdk-mnq'
-import { Mongodbv1alpha1 } from '@scaleway/sdk-mongodb'
+import { Mongodbv1, Mongodbv1alpha1 } from '@scaleway/sdk-mongodb'
 import { ProductCatalogv2alpha1 } from '@scaleway/sdk-product-catalog'
 import { Qaasv1alpha1 } from '@scaleway/sdk-qaas'
 import { Rdbv1 } from '@scaleway/sdk-rdb'
@@ -264,8 +264,9 @@ export const Mnq = {
 /**
  * @deprecated Direct version exports are deprecated. Use the 'Mongodb' namespace instead (e.g., Mongodb.v1).
  */
-export { Mongodbv1alpha1 }
+export { Mongodbv1, Mongodbv1alpha1 }
 export const Mongodb = {
+  v1: Mongodbv1,
   v1alpha1: Mongodbv1alpha1,
 }
 

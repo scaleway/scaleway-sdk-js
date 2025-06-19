@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.2.0 (2025-06-18)
+
+### Bug Fixes
+
+- export locality ([#2200](https://github.com/scaleway/scaleway-sdk-js/issues/2200)) ([9f0a4ec](https://github.com/scaleway/scaleway-sdk-js/commit/9f0a4ec19e377cd90c5829604467c09a2088a38c))
+
+### Features
+
+- **ipam:** add new ip source ([#2158](https://github.com/scaleway/scaleway-sdk-js/issues/2158)) ([7f8c2a6](https://github.com/scaleway/scaleway-sdk-js/commit/7f8c2a6734406ff56f7741936e7c424cd4862f06))
+
 ## 1.1.2 (2025-05-26)
 
 **Note:** Version bump only for package @scaleway/sdk-ipam

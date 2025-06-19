@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.2.0 (2025-06-18)
+
+### Bug Fixes
+
+- export locality ([#2200](https://github.com/scaleway/scaleway-sdk-js/issues/2200)) ([9f0a4ec](https://github.com/scaleway/scaleway-sdk-js/commit/9f0a4ec19e377cd90c5829604467c09a2088a38c))
+
+### Features
+
+- **vpc:** enable call to enable vpc custom routes and pn default route propagation as unlisted ([#2162](https://github.com/scaleway/scaleway-sdk-js/issues/2162)) ([1be85c7](https://github.com/scaleway/scaleway-sdk-js/commit/1be85c72734b93cf08d67cc15203b2b684cb0050))
+
 ## [1.1.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-vpc@1.1.0...@scaleway/sdk-vpc@1.1.1) (2025-05-26)
 
 **Note:** Version bump only for package @scaleway/sdk-vpc
