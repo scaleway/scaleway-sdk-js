@@ -425,6 +425,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances`,
         urlParams: urlParams(
+          ['has_maintenances', request.hasMaintenances],
           ['name', request.name],
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],

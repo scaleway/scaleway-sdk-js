@@ -390,6 +390,10 @@ export interface Maintenance {
    * Time when Scaleway-side maintenance will be applied.
    */
   forcedAt?: Date
+  /**
+   * Indicate if the maintenance can be applied by the user.
+   */
+  isApplicable: boolean
 }
 
 export interface ReadReplica {
@@ -1642,6 +1646,10 @@ export type ListInstancesRequest = {
    * Project ID to list the Database Instance of.
    */
   projectId?: string
+  /**
+   * Filter to only list instances with a scheduled maintenance.
+   */
+  hasMaintenances?: boolean
   page?: number
   pageSize?: number
 }

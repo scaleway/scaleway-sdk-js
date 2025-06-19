@@ -171,6 +171,7 @@ export const unmarshalMaintenance = (data: unknown): Maintenance => {
   return {
     closedAt: unmarshalDate(data.closed_at),
     forcedAt: unmarshalDate(data.forced_at),
+    isApplicable: data.is_applicable,
     reason: data.reason,
     startsAt: unmarshalDate(data.starts_at),
     status: data.status,
