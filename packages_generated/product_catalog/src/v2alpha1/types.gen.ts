@@ -387,4 +387,28 @@ export type PublicCatalogApiListPublicCatalogProductsRequest = {
    * The list of filtered product categories.
    */
   productTypes?: ListPublicCatalogProductsRequestProductType[]
+  /**
+   * Filter global products.
+   *
+   * One-of ('locality'): at most one of 'global', 'region', 'zone', 'datacenter' could be set.
+   */
+  global?: boolean
+  /**
+   * Filter products by region.
+   *
+   * One-of ('locality'): at most one of 'global', 'region', 'zone', 'datacenter' could be set.
+   */
+  region?: ScwRegion
+  /**
+   * Filter products by zone.
+   *
+   * One-of ('locality'): at most one of 'global', 'region', 'zone', 'datacenter' could be set.
+   */
+  zone?: ScwZone
+  /**
+   * Filter products by datacenter.
+   *
+   * One-of ('locality'): at most one of 'global', 'region', 'zone', 'datacenter' could be set.
+   */
+  datacenter?: string
 }
