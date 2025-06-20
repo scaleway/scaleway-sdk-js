@@ -3,8 +3,10 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  resolveOneOf,
   urlParams,
 } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, Zone as ScwZone } from '@scaleway/sdk-client'
 import { unmarshalListPublicCatalogProductsResponse } from './marshalling.gen'
 import type {
   ListPublicCatalogProductsResponse,
@@ -29,6 +31,22 @@ export class PublicCatalogAPI extends ParentAPI {
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['product_types', request.productTypes],
+          ...Object.entries(
+            resolveOneOf<boolean | ScwRegion | ScwZone | string>([
+              { param: 'global', value: request.global },
+              {
+                default: this.client.settings.defaultRegion,
+                param: 'region',
+                value: request.region,
+              },
+              {
+                default: this.client.settings.defaultZone,
+                param: 'zone',
+                value: request.zone,
+              },
+              { param: 'datacenter', value: request.datacenter },
+            ]),
+          ),
         ),
       },
       unmarshalListPublicCatalogProductsResponse,
