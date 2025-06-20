@@ -23,6 +23,7 @@ export class PublicCatalogAPI extends ParentAPI {
         method: 'GET',
         path: `/product-catalog/v2alpha1/public-catalog/products`,
         urlParams: urlParams(
+          ['locality', request.locality],
           ['page', request.page],
           [
             'page_size',

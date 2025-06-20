@@ -387,4 +387,8 @@ export type PublicCatalogApiListPublicCatalogProductsRequest = {
    * The list of filtered product categories.
    */
   productTypes?: ListPublicCatalogProductsRequestProductType[]
+  /**
+   * The locality of the products to filter by. If not set, all localities are returned.
+   */
+  locality?: PublicCatalogProductLocality
 }
