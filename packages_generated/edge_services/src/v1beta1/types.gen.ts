@@ -251,6 +251,10 @@ export interface CacheStage {
    */
   fallbackTtl?: string
   /**
+   * Defines whether responses to requests with cookies must be stored in the cache.
+   */
+  includeCookies: boolean
+  /**
    * Date the cache stage was created.
    */
   createdAt?: Date
@@ -717,6 +721,10 @@ export type CreateCacheStageRequest = {
    * Time To Live (TTL) in seconds. Defines how long content is cached.
    */
   fallbackTtl?: string
+  /**
+   * Defines whether responses to requests with cookies must be stored in the cache.
+   */
+  includeCookies?: boolean
   /**
    * Backend stage ID the cache stage will be linked to.
    *
@@ -1492,6 +1500,10 @@ export type UpdateCacheStageRequest = {
    * Time To Live (TTL) in seconds. Defines how long content is cached.
    */
   fallbackTtl?: string
+  /**
+   * Defines whether responses to requests with cookies must be stored in the cache.
+   */
+  includeCookies?: boolean
   /**
    * Backend stage ID the cache stage will be linked to.
    *
