@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-applesilicon@1.1.0...@scaleway/sdk-applesilicon@1.2.0) (2025-06-23)
+
+### Features
+
+- **apple_silicon:** add batch create endpoints ([#2204](https://github.com/scaleway/scaleway-sdk-js/issues/2204)) ([ad6e84f](https://github.com/scaleway/scaleway-sdk-js/commit/ad6e84ff80254b7cb8e1a7ec1447d7e28172a5fb))
+
 # 1.1.0 (2025-06-18)
 
 ### Bug Fixes

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-rdb@1.0.5...@scaleway/sdk-rdb@1.1.0) (2025-06-23)
+
+### Features
+
+- **rdb:** add has_maintenances filter to ListInstances endpoint and... ([#2207](https://github.com/scaleway/scaleway-sdk-js/issues/2207)) ([7bb67d2](https://github.com/scaleway/scaleway-sdk-js/commit/7bb67d231f9138468977c62fc1727a93b978e6b0))
+
 ## 1.0.5 (2025-06-18)
 
 ### Bug Fixes

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@1.5.1...@scaleway/sdk-product-catalog@1.6.0) (2025-06-23)
+
+### Features
+
+- **product_catalog:** add product type block storage ([#2203](https://github.com/scaleway/scaleway-sdk-js/issues/2203)) ([968cdbd](https://github.com/scaleway/scaleway-sdk-js/commit/968cdbdaabf50b6e6da4de949880f77e242b0e57))
+- **product_catalog:** filter by locality ([#2209](https://github.com/scaleway/scaleway-sdk-js/issues/2209)) ([93af5af](https://github.com/scaleway/scaleway-sdk-js/commit/93af5af9cff0c44cff58c065b5bc39decc2c2b24))
+
 ## 1.5.1 (2025-06-18)
 
 **Note:** Version bump only for package @scaleway/sdk-product-catalog
