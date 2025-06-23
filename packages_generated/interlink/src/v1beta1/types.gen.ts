@@ -434,6 +434,10 @@ export type CreateLinkRequest = {
    * For self-hosted links we need the peer AS Number to establish BGP session. If not given, a default one will be assigned.
    */
   peerAsn?: number
+  /**
+   * For self-hosted links only, it is possible to choose the VLAN ID. If the VLAN is not available (ie already taken or out of range), an error is returned.
+   */
+  vlan?: number
 }
 
 export type CreateRoutingPolicyRequest = {
