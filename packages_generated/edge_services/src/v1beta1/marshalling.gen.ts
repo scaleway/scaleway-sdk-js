@@ -160,6 +160,7 @@ export const unmarshalCacheStage = (data: unknown): CacheStage => {
     createdAt: unmarshalDate(data.created_at),
     fallbackTtl: data.fallback_ttl,
     id: data.id,
+    includeCookies: data.include_cookies,
     pipelineId: data.pipeline_id,
     routeStageId: data.route_stage_id,
     updatedAt: unmarshalDate(data.updated_at),
@@ -906,6 +907,7 @@ export const marshalCreateCacheStageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   fallback_ttl: request.fallbackTtl,
+  include_cookies: request.includeCookies,
   ...resolveOneOf([
     { param: 'backend_stage_id', value: request.backendStageId },
     { param: 'waf_stage_id', value: request.wafStageId },
@@ -1096,6 +1098,7 @@ export const marshalUpdateCacheStageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   fallback_ttl: request.fallbackTtl,
+  include_cookies: request.includeCookies,
   ...resolveOneOf([
     { param: 'backend_stage_id', value: request.backendStageId },
     { param: 'waf_stage_id', value: request.wafStageId },

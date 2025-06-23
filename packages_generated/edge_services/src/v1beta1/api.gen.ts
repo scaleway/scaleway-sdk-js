@@ -589,7 +589,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update cache stage. Update the parameters of an existing cache stage, specified by its `cache_stage_id`. Parameters which can be updated include the `fallback_ttl` and `backend_stage_id`.
+   * Update cache stage. Update the parameters of an existing cache stage, specified by its `cache_stage_id`. Parameters which can be updated include the `fallback_ttl`, `include_cookies` and `backend_stage_id`.
    *
    * @param request - The request {@link UpdateCacheStageRequest}
    * @returns A Promise of CacheStage
