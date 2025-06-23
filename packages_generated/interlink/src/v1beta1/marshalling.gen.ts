@@ -296,6 +296,7 @@ export const marshalCreateLinkRequest = (
   pop_id: request.popId,
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
+  vlan: request.vlan,
   ...resolveOneOf([
     { param: 'connection_id', value: request.connectionId },
     { param: 'partner_id', value: request.partnerId },
