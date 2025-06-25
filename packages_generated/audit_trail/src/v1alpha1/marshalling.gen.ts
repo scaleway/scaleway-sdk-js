@@ -10,6 +10,7 @@ import type {
   AccountUserInfo,
   Event,
   EventPrincipal,
+  InstanceServerInfo,
   KeyManagerKeyInfo,
   KubernetesACLInfo,
   KubernetesClusterInfo,
@@ -47,6 +48,18 @@ const unmarshalAccountUserInfo = (data: unknown): AccountUserInfo => {
     email: data.email,
     phoneNumber: data.phone_number,
   } as AccountUserInfo
+}
+
+const unmarshalInstanceServerInfo = (data: unknown): InstanceServerInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InstanceServerInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+  } as InstanceServerInfo
 }
 
 const unmarshalKeyManagerKeyInfo = (data: unknown): KeyManagerKeyInfo => {
@@ -165,6 +178,9 @@ export const unmarshalResource = (data: unknown): Resource => {
     createdAt: unmarshalDate(data.created_at),
     deletedAt: unmarshalDate(data.deleted_at),
     id: data.id,
+    instanceServerInfo: data.instance_server_info
+      ? unmarshalInstanceServerInfo(data.instance_server_info)
+      : undefined,
     keyManagerKeyInfo: data.key_manager_key_info
       ? unmarshalKeyManagerKeyInfo(data.key_manager_key_info)
       : undefined,
