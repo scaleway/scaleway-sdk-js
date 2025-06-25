@@ -4,6 +4,15 @@ import type { Money } from '@scaleway/sdk-client'
 
 export type ApplicationType = 'unknown_type' | 'vqe'
 
+export type BookingStatus =
+  | 'unknown_status'
+  | 'waiting'
+  | 'validating'
+  | 'validated'
+  | 'cancelling'
+  | 'cancelled'
+  | 'error'
+
 export type JobStatus =
   | 'unknown_status'
   | 'waiting'
@@ -18,6 +27,12 @@ export type ListApplicationsRequestOrderBy =
   | 'name_desc'
   | 'type_asc'
   | 'type_desc'
+
+export type ListBookingsRequestOrderBy =
+  | 'created_at_desc'
+  | 'created_at_asc'
+  | 'started_at_desc'
+  | 'started_at_asc'
 
 export type ListJobResultsRequestOrderBy = 'created_at_desc' | 'created_at_asc'
 
@@ -84,6 +99,7 @@ export type PlatformTechnology =
   | 'general_purpose'
   | 'trapped_ion'
   | 'superconducting'
+  | 'neutral_atom'
 
 export type PlatformType = 'unknown_type' | 'simulator' | 'qpu'
 
@@ -114,6 +130,25 @@ export type SessionStatus =
   | 'stopped'
   | 'starting'
   | 'stopping'
+
+export interface PlatformBookingRequirement {
+  /**
+   * Minimal duration of any booking based on this platform.
+   */
+  minDuration?: string
+  /**
+   * Maximal duration of any bookings based on this platform.
+   */
+  maxDuration?: string
+  /**
+   * Allowed time to cancel a booking attached to this platform before the beginning of the session.
+   */
+  maxCancellationDuration?: string
+  /**
+   * Allowed planification time from now where the platform can be booked in the future.
+   */
+  maxPlanificationDuration?: string
+}
 
 export interface PlatformHardware {
   /**
@@ -157,6 +192,12 @@ export interface JobCircuit {
   qiskitCircuit?: string
 }
 
+export interface CreateSessionRequestBookingDemand {
+  startedAt?: Date
+  finishedAt?: Date
+  description?: string
+}
+
 export interface Application {
   /**
    * Unique ID of the application.
@@ -178,6 +219,41 @@ export interface Application {
    * JSON format describing the expected input.
    */
   inputTemplate: string
+}
+
+export interface Booking {
+  /**
+   * Unique ID of the booking.
+   */
+  id: string
+  /**
+   * Time at which the booking was created.
+   */
+  createdAt?: Date
+  /**
+   * Time at which the booking starts.
+   */
+  startedAt?: Date
+  /**
+   * Time at which the booking was updated.
+   */
+  updatedAt?: Date
+  /**
+   * Time at which the booking finishes.
+   */
+  finishedAt?: Date
+  /**
+   * Status of the booking.
+   */
+  status: BookingStatus
+  /**
+   * Description of the booking slot.
+   */
+  description: string
+  /**
+   * Any progress message of the booking.
+   */
+  progressMessage: string
 }
 
 export interface JobResult {
@@ -311,6 +387,22 @@ export interface Platform {
    * Specifications of the underlying hardware.
    */
   hardware?: PlatformHardware
+  /**
+   * Booking constraints to fit if the platform is bookable.
+   */
+  bookingRequirement?: PlatformBookingRequirement
+  /**
+   * English description of the platform.
+   */
+  description: string
+  /**
+   * Documentation link to external documentation to learn more on this platform.
+   */
+  documentationUrl: string
+  /**
+   * Specify if the platform is bookable.
+   */
+  isBookable: boolean
 }
 
 export interface ProcessResult {
@@ -350,7 +442,7 @@ export interface Process {
    */
   attachedSessionIds: string[]
   /**
-   * Tme at which the process was created.
+   * Time at which the process was created.
    */
   createdAt?: Date
   /**
@@ -464,6 +556,10 @@ export interface Session {
    * Any progress of the session.
    */
   progressMessage?: string
+  /**
+   * An optional booking unique ID of an attached booking.
+   */
+  bookingId?: string
 }
 
 export type CancelJobRequest = {
@@ -559,6 +655,10 @@ export type CreateSessionRequest = {
    * Deduplication ID of the session.
    */
   deduplicationId?: string
+  /**
+   * A booking demand to schedule the session, only applicable if the platform is bookable.
+   */
+  bookingDemand?: CreateSessionRequestBookingDemand
 }
 
 export type DeleteJobRequest = {
@@ -587,6 +687,13 @@ export type GetApplicationRequest = {
    * Unique ID of the application.
    */
   applicationId: string
+}
+
+export type GetBookingRequest = {
+  /**
+   * Unique ID of the booking.
+   */
+  bookingId: string
 }
 
 export type GetJobCircuitRequest = {
@@ -656,6 +763,40 @@ export interface ListApplicationsResponse {
    * List of applications.
    */
   applications: Application[]
+}
+
+export type ListBookingsRequest = {
+  /**
+   * List bookings belonging to this project ID.
+   */
+  projectId?: string
+  /**
+   * List bookings attached to this platform ID.
+   */
+  platformId?: string
+  /**
+   * Page number.
+   */
+  page?: number
+  /**
+   * Maximum number of results to return per page.
+   */
+  pageSize?: number
+  /**
+   * Sort order of the returned results.
+   */
+  orderBy?: ListBookingsRequestOrderBy
+}
+
+export interface ListBookingsResponse {
+  /**
+   * Total number of bookings.
+   */
+  totalCount: number
+  /**
+   * List of bookings.
+   */
+  bookings: Booking[]
 }
 
 export type ListJobResultsRequest = {
@@ -899,6 +1040,17 @@ export type TerminateSessionRequest = {
    * Unique ID of the session.
    */
   sessionId: string
+}
+
+export type UpdateBookingRequest = {
+  /**
+   * Unique ID of the booking.
+   */
+  bookingId: string
+  /**
+   * Description of the booking slot.
+   */
+  description?: string
 }
 
 export type UpdateJobRequest = {

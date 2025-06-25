@@ -10,13 +10,16 @@ import {
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Application,
+  Booking,
   CreateJobRequest,
   CreateProcessRequest,
   CreateSessionRequest,
+  CreateSessionRequestBookingDemand,
   Job,
   JobCircuit,
   JobResult,
   ListApplicationsResponse,
+  ListBookingsResponse,
   ListJobResultsResponse,
   ListJobsResponse,
   ListPlatformsResponse,
@@ -25,10 +28,12 @@ import type {
   ListSessionACLsResponse,
   ListSessionsResponse,
   Platform,
+  PlatformBookingRequirement,
   PlatformHardware,
   Process,
   ProcessResult,
   Session,
+  UpdateBookingRequest,
   UpdateJobRequest,
   UpdateProcessRequest,
   UpdateSessionRequest,
@@ -63,6 +68,25 @@ export const unmarshalApplication = (data: unknown): Application => {
   } as Application
 }
 
+export const unmarshalBooking = (data: unknown): Booking => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Booking' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description,
+    finishedAt: unmarshalDate(data.finished_at),
+    id: data.id,
+    progressMessage: data.progress_message,
+    startedAt: unmarshalDate(data.started_at),
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as Booking
+}
+
 export const unmarshalJob = (data: unknown): Job => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -83,6 +107,23 @@ export const unmarshalJob = (data: unknown): Job => {
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
   } as Job
+}
+
+const unmarshalPlatformBookingRequirement = (
+  data: unknown,
+): PlatformBookingRequirement => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PlatformBookingRequirement' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    maxCancellationDuration: data.max_cancellation_duration,
+    maxDuration: data.max_duration,
+    maxPlanificationDuration: data.max_planification_duration,
+    minDuration: data.min_duration,
+  } as PlatformBookingRequirement
 }
 
 const unmarshalPlatformHardware = (data: unknown): PlatformHardware => {
@@ -112,10 +153,16 @@ export const unmarshalPlatform = (data: unknown): Platform => {
   return {
     availability: data.availability,
     backendName: data.backend_name,
+    bookingRequirement: data.booking_requirement
+      ? unmarshalPlatformBookingRequirement(data.booking_requirement)
+      : undefined,
+    description: data.description,
+    documentationUrl: data.documentation_url,
     hardware: data.hardware
       ? unmarshalPlatformHardware(data.hardware)
       : undefined,
     id: data.id,
+    isBookable: data.is_bookable,
     maxCircuitCount: data.max_circuit_count,
     maxQubitCount: data.max_qubit_count,
     maxShotCount: data.max_shot_count,
@@ -171,6 +218,7 @@ export const unmarshalSession = (data: unknown): Session => {
   }
 
   return {
+    bookingId: data.booking_id,
     createdAt: unmarshalDate(data.created_at),
     deduplicationId: data.deduplication_id,
     finishedJobCount: data.finished_job_count,
@@ -208,6 +256,21 @@ export const unmarshalListApplicationsResponse = (
     ),
     totalCount: data.total_count,
   } as ListApplicationsResponse
+}
+
+export const unmarshalListBookingsResponse = (
+  data: unknown,
+): ListBookingsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListBookingsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    bookings: unmarshalArrayOfObject(data.bookings, unmarshalBooking),
+    totalCount: data.total_count,
+  } as ListBookingsResponse
 }
 
 const unmarshalJobResult = (data: unknown): JobResult => {
@@ -378,10 +441,26 @@ export const marshalCreateProcessRequest = (
   tags: request.tags,
 })
 
+const marshalCreateSessionRequestBookingDemand = (
+  request: CreateSessionRequestBookingDemand,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  description: request.description,
+  finished_at: request.finishedAt,
+  started_at: request.startedAt,
+})
+
 export const marshalCreateSessionRequest = (
   request: CreateSessionRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  booking_demand:
+    request.bookingDemand !== undefined
+      ? marshalCreateSessionRequestBookingDemand(
+          request.bookingDemand,
+          defaults,
+        )
+      : undefined,
   deduplication_id: request.deduplicationId,
   max_duration: request.maxDuration,
   max_idle_duration: request.maxIdleDuration,
@@ -389,6 +468,13 @@ export const marshalCreateSessionRequest = (
   platform_id: request.platformId,
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
+})
+
+export const marshalUpdateBookingRequest = (
+  request: UpdateBookingRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  description: request.description,
 })
 
 export const marshalUpdateJobRequest = (
