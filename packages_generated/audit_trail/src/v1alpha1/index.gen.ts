@@ -7,6 +7,7 @@ export type {
   AccountUserInfo,
   Event,
   EventPrincipal,
+  InstanceServerInfo,
   KeyManagerKeyInfo,
   KubernetesACLInfo,
   KubernetesClusterInfo,
