@@ -10,6 +10,7 @@ import {
 } from '@scaleway/sdk-client'
 import type { WaitForOptions } from '@scaleway/sdk-client'
 import {
+  BOOKING_TRANSIENT_STATUSES as BOOKING_TRANSIENT_STATUSES_QAAS,
   JOB_TRANSIENT_STATUSES as JOB_TRANSIENT_STATUSES_QAAS,
   PROCESS_TRANSIENT_STATUSES as PROCESS_TRANSIENT_STATUSES_QAAS,
   SESSION_TRANSIENT_STATUSES as SESSION_TRANSIENT_STATUSES_QAAS,
@@ -18,13 +19,16 @@ import {
   marshalCreateJobRequest,
   marshalCreateProcessRequest,
   marshalCreateSessionRequest,
+  marshalUpdateBookingRequest,
   marshalUpdateJobRequest,
   marshalUpdateProcessRequest,
   marshalUpdateSessionRequest,
   unmarshalApplication,
+  unmarshalBooking,
   unmarshalJob,
   unmarshalJobCircuit,
   unmarshalListApplicationsResponse,
+  unmarshalListBookingsResponse,
   unmarshalListJobResultsResponse,
   unmarshalListJobsResponse,
   unmarshalListPlatformsResponse,
@@ -38,6 +42,7 @@ import {
 } from './marshalling.gen'
 import type {
   Application,
+  Booking,
   CancelJobRequest,
   CancelProcessRequest,
   CreateJobRequest,
@@ -47,6 +52,7 @@ import type {
   DeleteProcessRequest,
   DeleteSessionRequest,
   GetApplicationRequest,
+  GetBookingRequest,
   GetJobCircuitRequest,
   GetJobRequest,
   GetPlatformRequest,
@@ -56,6 +62,8 @@ import type {
   JobCircuit,
   ListApplicationsRequest,
   ListApplicationsResponse,
+  ListBookingsRequest,
+  ListBookingsResponse,
   ListJobResultsRequest,
   ListJobResultsResponse,
   ListJobsRequest,
@@ -74,6 +82,7 @@ import type {
   Process,
   Session,
   TerminateSessionRequest,
+  UpdateBookingRequest,
   UpdateJobRequest,
   UpdateProcessRequest,
   UpdateSessionRequest,
@@ -317,7 +326,7 @@ export class API extends ParentAPI {
     enrichForPagination('platforms', this.pageOfListPlatforms, request)
 
   /**
-   * Get session infrormation. Retrieve information about the provided **session ID**, such as name, status, and number of executed jobs.
+   * Get session information. Retrieve information about the provided **session ID**, such as name, status, and number of executed jobs.
    *
    * @param request - The request {@link GetSessionRequest}
    * @returns A Promise of Session
@@ -426,7 +435,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Terminate an existing session. Terminate a session by its unique ID and cancel all its attached jobs.
+   * Terminate an existing session. Terminate a session by its unique ID and cancel all its attached jobs and booking.
    *
    * @param request - The request {@link TerminateSessionRequest}
    * @returns A Promise of Session
@@ -443,7 +452,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an existing session. Delete a session by its unique ID and delete all its attached jobs.
+   * Delete an existing session. Delete a session by its unique ID and delete all its attached job and booking.
    *
    * @param request - The request {@link DeleteSessionRequest}
    */
@@ -495,7 +504,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get process infrormation. Retrieve information about the provided **process ID**, such as name, status and progress.
+   * Get process information. Retrieve information about the provided **process ID**, such as name, status and progress.
    *
    * @param request - The request {@link GetProcessRequest}
    * @returns A Promise of Process
@@ -688,4 +697,90 @@ export class API extends ParentAPI {
    */
   listApplications = (request: Readonly<ListApplicationsRequest> = {}) =>
     enrichForPagination('applications', this.pageOfListApplications, request)
+
+  /**
+   * Get booking information. Retrieve information about the provided **booking ID**, such as description, status and progress message.
+   *
+   * @param request - The request {@link GetBookingRequest}
+   * @returns A Promise of Booking
+   */
+  getBooking = (request: Readonly<GetBookingRequest>) =>
+    this.client.fetch<Booking>(
+      {
+        method: 'GET',
+        path: `/qaas/v1alpha1/bookings/${validatePathParam('bookingId', request.bookingId)}`,
+      },
+      unmarshalBooking,
+    )
+
+  /**
+   * Waits for {@link Booking} to be in a final state.
+   *
+   * @param request - The request {@link GetBookingRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Booking
+   */
+  waitForBooking = (
+    request: Readonly<GetBookingRequest>,
+    options?: Readonly<WaitForOptions<Booking>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !BOOKING_TRANSIENT_STATUSES_QAAS.includes(res.status),
+          )),
+      this.getBooking,
+      request,
+      options,
+    )
+
+  protected pageOfListBookings = (
+    request: Readonly<ListBookingsRequest> = {},
+  ) =>
+    this.client.fetch<ListBookingsResponse>(
+      {
+        method: 'GET',
+        path: `/qaas/v1alpha1/bookings`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['platform_id', request.platformId],
+          ['project_id', request.projectId],
+        ),
+      },
+      unmarshalListBookingsResponse,
+    )
+
+  /**
+   * List all bookings according the filter. Retrieve information about all bookings of the provided **project ID** or ** platform ID**.
+   *
+   * @param request - The request {@link ListBookingsRequest}
+   * @returns A Promise of ListBookingsResponse
+   */
+  listBookings = (request: Readonly<ListBookingsRequest> = {}) =>
+    enrichForPagination('bookings', this.pageOfListBookings, request)
+
+  /**
+   * Update booking information. Update booking information of the provided **booking ID**.
+   *
+   * @param request - The request {@link UpdateBookingRequest}
+   * @returns A Promise of Booking
+   */
+  updateBooking = (request: Readonly<UpdateBookingRequest>) =>
+    this.client.fetch<Booking>(
+      {
+        body: JSON.stringify(
+          marshalUpdateBookingRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/qaas/v1alpha1/bookings/${validatePathParam('bookingId', request.bookingId)}`,
+      },
+      unmarshalBooking,
+    )
 }
