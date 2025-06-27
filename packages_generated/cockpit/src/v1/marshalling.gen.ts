@@ -17,6 +17,7 @@ import type {
   EnableAlertRulesResponse,
   GetConfigResponse,
   GetConfigResponseRetention,
+  GetRulesCountResponse,
   GlobalApiCreateGrafanaUserRequest,
   GlobalApiResetGrafanaUserPasswordRequest,
   GlobalApiSelectPlanRequest,
@@ -46,6 +47,7 @@ import type {
   RegionalApiTriggerTestAlertRequest,
   RegionalApiUpdateContactPointRequest,
   RegionalApiUpdateDataSourceRequest,
+  RulesCount,
   Token,
   Usage,
   UsageOverview,
@@ -255,6 +257,39 @@ export const unmarshalGetConfigResponse = (
       ? unmarshalGetConfigResponseRetention(data.product_metrics_retention)
       : undefined,
   } as GetConfigResponse
+}
+
+const unmarshalRulesCount = (data: unknown): RulesCount => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RulesCount' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    dataSourceId: data.data_source_id,
+    dataSourceName: data.data_source_name,
+    rulesCount: data.rules_count,
+  } as RulesCount
+}
+
+export const unmarshalGetRulesCountResponse = (
+  data: unknown,
+): GetRulesCountResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetRulesCountResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    customRulesCount: data.custom_rules_count,
+    preconfiguredRulesCount: data.preconfigured_rules_count,
+    rulesCountByDatasource: unmarshalArrayOfObject(
+      data.rules_count_by_datasource,
+      unmarshalRulesCount,
+    ),
+  } as GetRulesCountResponse
 }
 
 export const unmarshalGrafana = (data: unknown): Grafana => {
