@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.3.0 (2025-06-30)
+
+### Features
+
+- **audit_trail:** add instance server resource type ([#2213](https://github.com/scaleway/scaleway-sdk-js/issues/2213)) ([ecb4983](https://github.com/scaleway/scaleway-sdk-js/commit/ecb4983fd015a05fb9a834f34bcb4c0facfbac87))
+
 # 1.2.0 (2025-06-18)
 
 ### Bug Fixes

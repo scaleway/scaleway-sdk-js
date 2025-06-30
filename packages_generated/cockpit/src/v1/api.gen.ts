@@ -32,6 +32,7 @@ import {
   unmarshalDisableAlertRulesResponse,
   unmarshalEnableAlertRulesResponse,
   unmarshalGetConfigResponse,
+  unmarshalGetRulesCountResponse,
   unmarshalGrafana,
   unmarshalGrafanaProductDashboard,
   unmarshalGrafanaUser,
@@ -53,6 +54,7 @@ import type {
   DisableAlertRulesResponse,
   EnableAlertRulesResponse,
   GetConfigResponse,
+  GetRulesCountResponse,
   GlobalApiCreateGrafanaUserRequest,
   GlobalApiDeleteGrafanaUserRequest,
   GlobalApiGetCurrentPlanRequest,
@@ -90,6 +92,7 @@ import type {
   RegionalApiGetAlertManagerRequest,
   RegionalApiGetConfigRequest,
   RegionalApiGetDataSourceRequest,
+  RegionalApiGetRulesCountRequest,
   RegionalApiGetTokenRequest,
   RegionalApiGetUsageOverviewRequest,
   RegionalApiListAlertsRequest,
@@ -688,6 +691,25 @@ The output returned displays a URL to access the Alert manager, and whether the 
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/disable`,
       },
       unmarshalAlertManager,
+    )
+
+  /**
+   * Get a detailed count of enabled rules in the specified Project. Includes preconfigured and custom alerting and recording rules.. Get a detailed count of enabled rules in the specified Project. Includes preconfigured and custom alerting and recording rules.
+   *
+   * @param request - The request {@link RegionalApiGetRulesCountRequest}
+   * @returns A Promise of GetRulesCountResponse
+   */
+  getRulesCount = (request: Readonly<RegionalApiGetRulesCountRequest> = {}) =>
+    this.client.fetch<GetRulesCountResponse>(
+      {
+        method: 'GET',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/rules/count`,
+        urlParams: urlParams([
+          'project_id',
+          request.projectId ?? this.client.settings.defaultProjectId,
+        ]),
+      },
+      unmarshalGetRulesCountResponse,
     )
 
   /**
