@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.1.0 (2025-06-30)
+
+### Features
+
+- **edge_services:** add include_cookies to cache-stage ([#2211](https://github.com/scaleway/scaleway-sdk-js/issues/2211)) ([d390ad5](https://github.com/scaleway/scaleway-sdk-js/commit/d390ad55e606a4b376bb0327bb983be667a9ef64))
+
 ## 1.0.5 (2025-06-18)
 
 **Note:** Version bump only for package @scaleway/sdk-edge-services

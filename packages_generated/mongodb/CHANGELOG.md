@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.1.0 (2025-06-30)
+
+### Features
+
+- **mongodb:** export unmarshalInstanceSnapshotSchedule ([#2218](https://github.com/scaleway/scaleway-sdk-js/issues/2218)) ([8a330ea](https://github.com/scaleway/scaleway-sdk-js/commit/8a330eaf6bd98cc9fbbff7c5ef123bcb9f8b1ec7))
+
 ## 1.0.6 (2025-06-18)
 
 ### Bug Fixes

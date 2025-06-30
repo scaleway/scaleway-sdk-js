@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.4.0 (2025-06-30)
+
+### Features
+
+- **cockpit:** add getRulesCount endpoint ([#2219](https://github.com/scaleway/scaleway-sdk-js/issues/2219)) ([06dcd76](https://github.com/scaleway/scaleway-sdk-js/commit/06dcd76aff6034d297e5268ca376078fcc9d466a))
+
 ## [1.3.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-cockpit@1.3.1...@scaleway/sdk-cockpit@1.3.2) (2025-06-18)
 
 ### Bug Fixes
