@@ -106,7 +106,7 @@ export const unmarshalInstanceSetting = (data: unknown): InstanceSetting => {
   } as InstanceSetting
 }
 
-export const unmarshalInstanceSnapshotSchedule = (
+const unmarshalInstanceSnapshotSchedule = (
   data: unknown,
 ): InstanceSnapshotSchedule => {
   if (!isJSONObject(data)) {
