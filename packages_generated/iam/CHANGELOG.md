@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.3.0 (2025-06-30)
+
+### Features
+
+- **iam:** allow @ in username ([#2212](https://github.com/scaleway/scaleway-sdk-js/issues/2212)) ([b5b799f](https://github.com/scaleway/scaleway-sdk-js/commit/b5b799f074734a5adb9f80b458d7d9297779af3b))
+
 # 1.2.0 (2025-06-18)
 
 ### Features

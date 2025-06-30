@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.2.0 (2025-06-30)
+
+### Features
+
+- **qaas:** add booking system ([#2217](https://github.com/scaleway/scaleway-sdk-js/issues/2217)) ([a330518](https://github.com/scaleway/scaleway-sdk-js/commit/a330518524758226c1250c6c3d276f4b8b73472a))
+
 ## 1.1.5 (2025-06-18)
 
 **Note:** Version bump only for package @scaleway/sdk-qaas
