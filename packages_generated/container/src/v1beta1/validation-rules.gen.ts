@@ -17,6 +17,12 @@ export const ContainerHealthCheckSpecHTTPProbe = {
 
 export const ContainerScalingOption = {}
 
+export const CreateContainerRequest = {
+  privateNetworkId: {
+    ignoreEmpty: true,
+  },
+}
+
 export const CreateTriggerRequest = {
   description: {
     maxLength: 255,
