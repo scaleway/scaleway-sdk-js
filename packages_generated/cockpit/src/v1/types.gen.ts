@@ -84,6 +84,21 @@ export interface GetConfigResponseRetention {
   defaultDays: number
 }
 
+export interface RulesCount {
+  /**
+   * ID of the data source.
+   */
+  dataSourceId: string
+  /**
+   * Name of the data source.
+   */
+  dataSourceName: string
+  /**
+   * Total count of rules associated with this data source.
+   */
+  rulesCount: number
+}
+
 /**
  * Structure representing an alert.
  */
@@ -428,6 +443,21 @@ export interface GetConfigResponse {
    * Scaleway logs retention configuration.
    */
   productLogsRetention?: GetConfigResponseRetention
+}
+
+export interface GetRulesCountResponse {
+  /**
+   * Total count of rules grouped by data source.
+   */
+  rulesCountByDatasource: RulesCount[]
+  /**
+   * Total count of preconfigured rules.
+   */
+  preconfiguredRulesCount: number
+  /**
+   * Total count of custom rules.
+   */
+  customRulesCount: number
 }
 
 /**
@@ -951,6 +981,17 @@ export type RegionalApiGetDataSourceRequest = {
    * ID of the relevant data source.
    */
   dataSourceId: string
+}
+
+export type RegionalApiGetRulesCountRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the Project to retrieve the rule count for.
+   */
+  projectId?: string
 }
 
 /**
