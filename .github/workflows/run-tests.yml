@@ -34,7 +34,7 @@ jobs:
           cache: 'pnpm'
       - run: make install-dependencies
       - run: make build
-      - run: make lint
+      - run: pnpm run lint
   test:
     runs-on: ubuntu-24.04
     strategy:
@@ -56,5 +56,5 @@ jobs:
           cache: 'pnpm'
       - run: make install-dependencies
       - run: make build
-      - run: make test-coverage --environment ${{ matrix.test-environment }}
+      - run: pnpm run test:coverage --environment ${{ matrix.test-environment }}
       - uses: codecov/codecov-action@v5.4.2
