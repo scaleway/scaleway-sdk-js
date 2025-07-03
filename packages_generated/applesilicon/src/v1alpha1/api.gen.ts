@@ -14,12 +14,14 @@ import {
   SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_APPLESILICON,
 } from './content.gen'
 import {
+  marshalBatchCreateServersRequest,
   marshalCreateServerRequest,
   marshalPrivateNetworkApiAddServerPrivateNetworkRequest,
   marshalPrivateNetworkApiSetServerPrivateNetworksRequest,
   marshalReinstallServerRequest,
   marshalStartConnectivityDiagnosticRequest,
   marshalUpdateServerRequest,
+  unmarshalBatchCreateServersResponse,
   unmarshalConnectivityDiagnostic,
   unmarshalListOSResponse,
   unmarshalListServerPrivateNetworksResponse,
@@ -33,6 +35,8 @@ import {
   unmarshalStartConnectivityDiagnosticResponse,
 } from './marshalling.gen'
 import type {
+  BatchCreateServersRequest,
+  BatchCreateServersResponse,
   ConnectivityDiagnostic,
   CreateServerRequest,
   DeleteServerRequest,
@@ -129,6 +133,25 @@ export class API extends ParentAPI {
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
       },
       unmarshalServer,
+    )
+
+  /**
+   * Create multiple servers atomically. Create multiple servers in the targeted zone specifying their configurations. If the request cannot entirely be fullfilled, no servers are created.
+   *
+   * @param request - The request {@link BatchCreateServersRequest}
+   * @returns A Promise of BatchCreateServersResponse
+   */
+  batchCreateServers = (request: Readonly<BatchCreateServersRequest>) =>
+    this.client.fetch<BatchCreateServersResponse>(
+      {
+        body: JSON.stringify(
+          marshalBatchCreateServersRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/batch-create-servers`,
+      },
+      unmarshalBatchCreateServersResponse,
     )
 
   protected pageOfListServers = (request: Readonly<ListServersRequest> = {}) =>
