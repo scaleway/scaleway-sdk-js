@@ -14,6 +14,7 @@ import type {
   PublicCatalogProductPrice,
   PublicCatalogProductProperties,
   PublicCatalogProductPropertiesAppleSilicon,
+  PublicCatalogProductPropertiesBlockStorage,
   PublicCatalogProductPropertiesDedibox,
   PublicCatalogProductPropertiesElasticMetal,
   PublicCatalogProductPropertiesHardware,
@@ -163,6 +164,21 @@ const unmarshalPublicCatalogProductPropertiesAppleSilicon = (
   } as PublicCatalogProductPropertiesAppleSilicon
 }
 
+const unmarshalPublicCatalogProductPropertiesBlockStorage = (
+  data: unknown,
+): PublicCatalogProductPropertiesBlockStorage => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesBlockStorage' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    maxVolumeSize: data.max_volume_size,
+    minVolumeSize: data.min_volume_size,
+  } as PublicCatalogProductPropertiesBlockStorage
+}
+
 const unmarshalPublicCatalogProductPropertiesDedibox = (
   data: unknown,
 ): PublicCatalogProductPropertiesDedibox => {
@@ -295,6 +311,9 @@ const unmarshalPublicCatalogProductProperties = (
   return {
     appleSilicon: data.apple_silicon
       ? unmarshalPublicCatalogProductPropertiesAppleSilicon(data.apple_silicon)
+      : undefined,
+    blockStorage: data.block_storage
+      ? unmarshalPublicCatalogProductPropertiesBlockStorage(data.block_storage)
       : undefined,
     dedibox: data.dedibox
       ? unmarshalPublicCatalogProductPropertiesDedibox(data.dedibox)
