@@ -124,6 +124,10 @@ export interface ServerTypeNetwork {
   supportedBandwidth: number[]
 }
 
+export interface BatchCreateServersRequestBatchInnerCreateServerRequest {
+  name: string
+}
+
 export interface Server {
   /**
    * UUID of the server.
@@ -300,6 +304,48 @@ export interface ServerType {
 
 export interface CommitmentTypeValue {
   commitmentType: CommitmentType
+}
+
+export type BatchCreateServersRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  /**
+   * Create servers in the given project ID.
+   */
+  projectId?: string
+  /**
+   * Create servers of the given type.
+   */
+  type: string
+  /**
+   * Create servers & install the given os_id, when no os_id provided the default OS for this server type is chosen. Requesting a non-default OS will induce an extended delivery time.
+   */
+  osId?: string
+  /**
+   * Activate the Private Network feature for these servers. This feature is configured through the Apple Silicon - Private Networks API.
+   */
+  enableVpc: boolean
+  /**
+   * Activate commitment for these servers. If not specified, there is a 24h commitment due to Apple licensing (commitment_type `duration_24h`). It can be updated with the Update Server request. Available commitment depends on server type.
+   */
+  commitmentType?: CommitmentType
+  /**
+   * Public bandwidth to configure for these servers. This defaults to the minimum bandwidth for the corresponding server type. For compatible server types, the bandwidth can be increased which incurs additional costs.
+   */
+  publicBandwidthBps: number
+  /**
+   * List of servers to create.
+   */
+  requests?: BatchCreateServersRequestBatchInnerCreateServerRequest[]
+}
+
+export interface BatchCreateServersResponse {
+  /**
+   * List of created servers.
+   */
+  servers: Server[]
 }
 
 export interface ConnectivityDiagnostic {

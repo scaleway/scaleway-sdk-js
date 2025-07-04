@@ -16,6 +16,7 @@ export const CreateDomainRequest = {
 
 export const CreateEmailRequest = {
   subject: {
+    maxLength: 998,
     minLength: 6,
   },
 }
@@ -88,6 +89,7 @@ export const ListEmailsRequest = {
     minLength: 3,
   },
   subject: {
+    maxLength: 998,
     minLength: 6,
   },
 }
