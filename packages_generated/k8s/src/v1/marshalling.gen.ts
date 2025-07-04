@@ -528,6 +528,7 @@ export const unmarshalNodeMetadata = (data: unknown): NodeMetadata => {
     externalIp: data.external_ip,
     hasGpu: data.has_gpu,
     id: data.id,
+    installerTags: data.installer_tags,
     kubeletConfig: data.kubelet_config,
     name: data.name,
     nodeLabels: data.node_labels,
@@ -536,7 +537,12 @@ export const unmarshalNodeMetadata = (data: unknown): NodeMetadata => {
       unmarshalNodeMetadataCoreV1Taint,
     ),
     poolVersion: data.pool_version,
+    providerId: data.provider_id,
     repoUri: data.repo_uri,
+    resolvconfPath: data.resolvconf_path,
+    updaterBinPath: data.updater_bin_path,
+    updaterBinUrl: data.updater_bin_url,
+    updaterBinVersion: data.updater_bin_version,
   } as NodeMetadata
 }
 
