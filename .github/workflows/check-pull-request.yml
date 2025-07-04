@@ -16,7 +16,7 @@ jobs:
           node-version: 20
           check-latest: true
           cache: 'pnpm'
-      - run: pnpm install
+      - run: make install-dependencies
       - name: Check title
         run: |
           title=$(cat <<- "EOF"

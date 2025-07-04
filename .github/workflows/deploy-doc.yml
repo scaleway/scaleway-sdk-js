@@ -46,9 +46,9 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
       - name: Install dependencies
-        run: pnpm install
+        run: make install-dependencies
       - name: Build doc
-        run: pnpm run doc
+        run: make doc
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
