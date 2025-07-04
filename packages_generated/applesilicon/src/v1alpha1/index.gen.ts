@@ -7,6 +7,9 @@ export {
 export * from './content.gen'
 export * from './marshalling.gen'
 export type {
+  BatchCreateServersRequest,
+  BatchCreateServersRequestBatchInnerCreateServerRequest,
+  BatchCreateServersResponse,
   Commitment,
   CommitmentType,
   CommitmentTypeValue,
