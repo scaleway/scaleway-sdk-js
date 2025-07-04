@@ -8,6 +8,9 @@ import {
 } from '@scaleway/sdk-client'
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
+  BatchCreateServersRequest,
+  BatchCreateServersRequestBatchInnerCreateServerRequest,
+  BatchCreateServersResponse,
   Commitment,
   CommitmentTypeValue,
   ConnectivityDiagnostic,
@@ -211,6 +214,20 @@ export const unmarshalServerType = (data: unknown): ServerType => {
   } as ServerType
 }
 
+export const unmarshalBatchCreateServersResponse = (
+  data: unknown,
+): BatchCreateServersResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'BatchCreateServersResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    servers: unmarshalArrayOfObject(data.servers, unmarshalServer),
+  } as BatchCreateServersResponse
+}
+
 const unmarshalConnectivityDiagnosticServerHealth = (
   data: unknown,
 ): ConnectivityDiagnosticServerHealth => {
@@ -341,6 +358,34 @@ export const unmarshalStartConnectivityDiagnosticResponse = (
     diagnosticId: data.diagnostic_id,
   } as StartConnectivityDiagnosticResponse
 }
+
+const marshalBatchCreateServersRequestBatchInnerCreateServerRequest = (
+  request: BatchCreateServersRequestBatchInnerCreateServerRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+})
+
+export const marshalBatchCreateServersRequest = (
+  request: BatchCreateServersRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  commitment_type: request.commitmentType,
+  enable_vpc: request.enableVpc,
+  os_id: request.osId,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  public_bandwidth_bps: request.publicBandwidthBps,
+  requests:
+    request.requests !== undefined
+      ? request.requests.map(elt =>
+          marshalBatchCreateServersRequestBatchInnerCreateServerRequest(
+            elt,
+            defaults,
+          ),
+        )
+      : undefined,
+  type: request.type,
+})
 
 export const marshalCreateServerRequest = (
   request: CreateServerRequest,
