@@ -1500,9 +1500,15 @@ export interface NodeMetadata {
   kubeletConfig: string
   nodeLabels: Record<string, string>
   nodeTaints: NodeMetadataCoreV1Taint[]
+  providerId: string
+  resolvconfPath: string
   hasGpu: boolean
   externalIp: string
   repoUri: string
+  installerTags: string
+  updaterBinUrl: string
+  updaterBinVersion: string
+  updaterBinPath: string
 }
 
 export type RebootNodeRequest = {
