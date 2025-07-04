@@ -185,6 +185,17 @@ export interface PublicCatalogProductPropertiesAppleSilicon {
   range: string
 }
 
+export interface PublicCatalogProductPropertiesBlockStorage {
+  /**
+   * The minimum size of storage volume for this product in bytes.
+   */
+  minVolumeSize: number
+  /**
+   * The maximum size of storage volume for this product in bytes.
+   */
+  maxVolumeSize: number
+}
+
 export interface PublicCatalogProductPropertiesDedibox {
   /**
    * The range of the Dedibox server.
@@ -284,27 +295,33 @@ export interface PublicCatalogProductProperties {
   /**
    * The properties of Dedibox products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage' could be set.
    */
   dedibox?: PublicCatalogProductPropertiesDedibox
   /**
    * The properties of Elastic Metal products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage' could be set.
    */
   elasticMetal?: PublicCatalogProductPropertiesElasticMetal
   /**
    * The properties of Apple Silicon products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage' could be set.
    */
   appleSilicon?: PublicCatalogProductPropertiesAppleSilicon
   /**
    * The properties of Instance products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage' could be set.
    */
   instance?: PublicCatalogProductPropertiesInstance
+  /**
+   * The properties of Block Storage products.
+   *
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage' could be set.
+   */
+  blockStorage?: PublicCatalogProductPropertiesBlockStorage
 }
 
 export interface PublicCatalogProductUnitOfMeasure {
