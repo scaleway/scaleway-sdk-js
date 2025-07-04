@@ -239,7 +239,6 @@ export const unmarshalEvent = (data: unknown): Event => {
     recordedAt: unmarshalDate(data.recorded_at),
     requestBody: data.request_body,
     requestId: data.request_id,
-    resource: data.resource ? unmarshalResource(data.resource) : undefined,
     resources: unmarshalArrayOfObject(data.resources, unmarshalResource),
     serviceName: data.service_name,
     sourceIp: data.source_ip,

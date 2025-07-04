@@ -195,10 +195,6 @@ export interface Event {
    */
   methodName: string
   /**
-   * @deprecated Resource attached to the event.
-   */
-  resource?: Resource
-  /**
    * Resources attached to the event.
    */
   resources: Resource[]
