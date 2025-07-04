@@ -1505,7 +1505,7 @@ export interface NodeMetadata {
   hasGpu: boolean
   externalIp: string
   repoUri: string
-  installerTags: string
+  installerTags: string[]
   updaterBinUrl: string
   updaterBinVersion: string
   updaterBinPath: string
