@@ -4,6 +4,13 @@ import type { Region as ScwRegion } from '@scaleway/sdk-client'
 
 export type AlertState = 'unknown_state' | 'inactive' | 'pending' | 'firing'
 
+export type AlertStatus =
+  | 'unknown_status'
+  | 'enabled'
+  | 'disabled'
+  | 'enabling'
+  | 'disabling'
+
 export type DataSourceOrigin =
   | 'unknown_origin'
   | 'scaleway'
@@ -124,9 +131,9 @@ export interface Alert {
    */
   duration: string
   /**
-   * Indicates if the alert is enabled or disabled. Only preconfigured alerts can be disabled.
+   * Indicates if the alert is enabled, enabling, disabled or disabling. Preconfigured alerts can have any of these values, whereas custom alerts can only have the status "enabled".
    */
-  enabled: boolean
+  ruleStatus: AlertStatus
   /**
    * Current state of the alert. Possible states are `inactive`, `pending`, and `firing`.
    */
@@ -1030,9 +1037,9 @@ export type RegionalApiListAlertsRequest = {
    */
   projectId?: string
   /**
-   * True returns only enabled alerts. False returns only disabled alerts. If omitted, no alert filtering is applied. Other filters may still apply.
+   * Returns only alerts with the given activation status. If omitted, no alert filtering is applied. Other filters may still apply.
    */
-  isEnabled?: boolean
+  ruleStatus?: AlertStatus
   /**
    * True returns only preconfigured alerts. False returns only custom alerts. If omitted, no filtering is applied on alert types. Other filters may still apply.
    */
