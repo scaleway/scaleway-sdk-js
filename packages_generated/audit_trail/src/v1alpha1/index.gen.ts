@@ -5,6 +5,7 @@ export * from './marshalling.gen'
 export type {
   AccountOrganizationInfo,
   AccountUserInfo,
+  AppleSiliconServerInfo,
   Event,
   EventPrincipal,
   InstanceServerInfo,
