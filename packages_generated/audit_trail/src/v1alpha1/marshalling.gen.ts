@@ -8,6 +8,7 @@ import {
 import type {
   AccountOrganizationInfo,
   AccountUserInfo,
+  AppleSiliconServerInfo,
   Event,
   EventPrincipal,
   InstanceServerInfo,
@@ -48,6 +49,21 @@ const unmarshalAccountUserInfo = (data: unknown): AccountUserInfo => {
     email: data.email,
     phoneNumber: data.phone_number,
   } as AccountUserInfo
+}
+
+const unmarshalAppleSiliconServerInfo = (
+  data: unknown,
+): AppleSiliconServerInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AppleSiliconServerInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    name: data.name,
+  } as AppleSiliconServerInfo
 }
 
 const unmarshalInstanceServerInfo = (data: unknown): InstanceServerInfo => {
@@ -174,6 +190,9 @@ export const unmarshalResource = (data: unknown): Resource => {
       : undefined,
     accountUserInfo: data.account_user_info
       ? unmarshalAccountUserInfo(data.account_user_info)
+      : undefined,
+    appleSiliconServerInfo: data.apple_silicon_server_info
+      ? unmarshalAppleSiliconServerInfo(data.apple_silicon_server_info)
       : undefined,
     createdAt: unmarshalDate(data.created_at),
     deletedAt: unmarshalDate(data.deleted_at),

@@ -9,6 +9,7 @@ export type {
   Alert,
   AlertManager,
   AlertState,
+  AlertStatus,
   ContactPoint,
   ContactPointEmail,
   DataSource,
