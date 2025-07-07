@@ -333,7 +333,6 @@ const unmarshalAlert = (data: unknown): Alert => {
     annotations: data.annotations,
     dataSourceId: data.data_source_id,
     duration: data.duration,
-    enabled: data.enabled,
     name: data.name,
     preconfigured: data.preconfigured,
     preconfiguredData: data.preconfigured_data
@@ -341,6 +340,7 @@ const unmarshalAlert = (data: unknown): Alert => {
       : undefined,
     region: data.region,
     rule: data.rule,
+    ruleStatus: data.rule_status,
     state: data.state ? data.state : undefined,
   } as Alert
 }
