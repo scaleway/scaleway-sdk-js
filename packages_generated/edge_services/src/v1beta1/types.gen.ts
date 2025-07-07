@@ -116,6 +116,10 @@ export type SearchBackendStagesRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
 
+export type SearchRouteRulesRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+
 export type SearchWafStagesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type WafStageMode = 'unknown_mode' | 'disable' | 'log_only' | 'enable'
@@ -1299,6 +1303,10 @@ export interface ListRouteRulesResponse {
    * List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by `waf_stage_id`.
    */
   routeRules: RouteRule[]
+  /**
+   * Count of all route rules matching the requested criteria.
+   */
+  totalCount: number
 }
 
 export type ListRouteStagesRequest = {
@@ -1411,6 +1419,14 @@ export type SearchBackendStagesRequest = {
   bucketName?: string
   bucketRegion?: string
   lbId?: string
+}
+
+export type SearchRouteRulesRequest = {
+  orderBy?: SearchRouteRulesRequestOrderBy
+  page?: number
+  pageSize?: number
+  organizationId?: string
+  projectId?: string
 }
 
 export type SearchWafStagesRequest = {
