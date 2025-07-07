@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.6.1 (2025-07-07)
+
+**Note:** Version bump only for package @scaleway/sdk-product-catalog
+
 # [1.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@1.5.1...@scaleway/sdk-product-catalog@1.6.0) (2025-06-23)
 
 ### Features

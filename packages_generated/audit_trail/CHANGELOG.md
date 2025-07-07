@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-audit-trail@1.3.0...@scaleway/sdk-audit-trail@1.4.0) (2025-07-07)
+
+### Features
+
+- **audit_trail:** add apple-silicon resources definition ([#2241](https://github.com/scaleway/scaleway-sdk-js/issues/2241)) ([38e3f5e](https://github.com/scaleway/scaleway-sdk-js/commit/38e3f5eb1aaf818a025ecea2e97acc090ae270e7))
+- **audit_trail:** remove deprecated resource field ([#2235](https://github.com/scaleway/scaleway-sdk-js/issues/2235)) ([a1b410c](https://github.com/scaleway/scaleway-sdk-js/commit/a1b410c395622727b2cb6a42d17c97698d45db98))
+
 # 1.3.0 (2025-06-30)
 
 ### Features

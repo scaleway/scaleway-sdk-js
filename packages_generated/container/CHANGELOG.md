@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.5.2 (2025-07-07)
+
+### Bug Fixes
+
+- **serverless:** allow empty string for privateNetworkID in create ([#2223](https://github.com/scaleway/scaleway-sdk-js/issues/2223)) ([2513104](https://github.com/scaleway/scaleway-sdk-js/commit/2513104f91ac70978d75469c4205a3335839b97e))
+
 ## 1.5.1 (2025-06-18)
 
 ### Bug Fixes
