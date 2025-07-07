@@ -136,7 +136,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create multiple servers atomically. Create multiple servers in the targeted zone specifying their configurations. If the request cannot entirely be fullfilled, no servers are created.
+   * Create multiple servers atomically. Create multiple servers in the targeted zone specifying their configurations. If the request cannot entirely be fulfilled, no servers are created.
    *
    * @param request - The request {@link BatchCreateServersRequest}
    * @returns A Promise of BatchCreateServersResponse
