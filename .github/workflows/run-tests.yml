@@ -19,8 +19,8 @@ jobs:
           node-version: 20
           check-latest: true
           cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm typecheck
+      - run: make install-dependencies
+      - run: make typing
   lint:
     runs-on: ubuntu-24.04
     steps:
@@ -32,8 +32,8 @@ jobs:
           node-version: 20
           check-latest: true
           cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm run build
+      - run: make install-dependencies
+      - run: make build
       - run: pnpm run lint
   test:
     runs-on: ubuntu-24.04
@@ -54,7 +54,7 @@ jobs:
           node-version: ${{ matrix.node }}
           check-latest: true
           cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm run build
+      - run: make install-dependencies
+      - run: make build
       - run: pnpm run test:coverage --environment ${{ matrix.test-environment }}
       - uses: codecov/codecov-action@v5.4.2
