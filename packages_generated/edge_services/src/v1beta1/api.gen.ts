@@ -132,6 +132,7 @@ import type {
   PurgeRequest,
   RouteStage,
   SearchBackendStagesRequest,
+  SearchRouteRulesRequest,
   SearchWafStagesRequest,
   SelectPlanRequest,
   SetHeadStageRequest,
@@ -991,6 +992,31 @@ export class API extends ParentAPI {
         path: `/edge-services/v1beta1/route-stages/${validatePathParam('routeStageId', request.routeStageId)}/route-rules`,
       },
       unmarshalAddRouteRulesResponse,
+    )
+
+  /**
+   * List route rules. List all route rules of an organization or project.
+   *
+   * @param request - The request {@link SearchRouteRulesRequest}
+   * @returns A Promise of ListRouteRulesResponse
+   */
+  searchRouteRules = (request: Readonly<SearchRouteRulesRequest> = {}) =>
+    this.client.fetch<ListRouteRulesResponse>(
+      {
+        method: 'GET',
+        path: `/edge-services/v1beta1/search-route-rules`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['project_id', request.projectId],
+        ),
+      },
+      unmarshalListRouteRulesResponse,
     )
 
   checkDomain = (request: Readonly<CheckDomainRequest>) =>
