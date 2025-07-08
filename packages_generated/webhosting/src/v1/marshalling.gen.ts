@@ -212,6 +212,7 @@ export const unmarshalDomain = (data: unknown): Domain => {
     name: data.name,
     owner: data.owner,
     status: data.status,
+    zoneDomainName: data.zone_domain_name,
   } as Domain
 }
 

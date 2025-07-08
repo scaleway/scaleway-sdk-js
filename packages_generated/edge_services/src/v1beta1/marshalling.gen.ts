@@ -681,6 +681,7 @@ export const unmarshalListRouteRulesResponse = (
 
   return {
     routeRules: unmarshalArrayOfObject(data.route_rules, unmarshalRouteRule),
+    totalCount: data.total_count,
   } as ListRouteRulesResponse
 }
 

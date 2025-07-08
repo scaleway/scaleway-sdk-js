@@ -105,6 +105,8 @@ export type {
   ScalewayS3BackendConfig,
   SearchBackendStagesRequest,
   SearchBackendStagesRequestOrderBy,
+  SearchRouteRulesRequest,
+  SearchRouteRulesRequestOrderBy,
   SearchWafStagesRequest,
   SearchWafStagesRequestOrderBy,
   SelectPlanRequest,

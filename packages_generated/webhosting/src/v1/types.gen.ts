@@ -859,6 +859,10 @@ export interface Domain {
    */
   owner: DomainZoneOwner
   /**
+   * Main domain for this zone.
+   */
+  zoneDomainName: string
+  /**
    * A list of actions that can be performed on the domain.
    */
   availableActions: DomainAction[]
