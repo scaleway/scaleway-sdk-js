@@ -1,5 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
@@ -8,7 +10,6 @@ import {
   unmarshalMapOfObject,
   unmarshalMoney,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   AvailableDomain,
   CheckContactsCompatibilityResponse,
@@ -29,14 +30,11 @@ import type {
   ContactRolesRoles,
   CreateDNSZoneRequest,
   CreateSSLCertificateRequest,
-  DNSZone,
-  DNSZoneVersion,
-  DSRecord,
-  DSRecordDigest,
-  DSRecordPublicKey,
   DeleteDNSZoneResponse,
   DeleteExternalDomainResponse,
   DeleteSSLCertificateResponse,
+  DNSZone,
+  DNSZoneVersion,
   Domain,
   DomainDNSSEC,
   DomainRecord,
@@ -50,6 +48,9 @@ import type {
   DomainRegistrationStatusExternalDomain,
   DomainRegistrationStatusTransfer,
   DomainSummary,
+  DSRecord,
+  DSRecordDigest,
+  DSRecordPublicKey,
   GetDNSZoneTsigKeyResponse,
   GetDNSZoneVersionDiffResponse,
   GetDomainAuthCodeResponse,
@@ -65,9 +66,9 @@ import type {
   ListContactsResponse,
   ListDNSZoneNameserversResponse,
   ListDNSZoneRecordsResponse,
+  ListDNSZonesResponse,
   ListDNSZoneVersionRecordsResponse,
   ListDNSZoneVersionsResponse,
-  ListDNSZonesResponse,
   ListDomainHostsResponse,
   ListDomainsResponse,
   ListRenewableDomainsResponse,
@@ -99,8 +100,8 @@ import type {
   RegistrarApiUpdateDomainRequest,
   RenewableDomain,
   RestoreDNSZoneVersionResponse,
-  SSLCertificate,
   SearchAvailableDomainsResponse,
+  SSLCertificate,
   Task,
   Tld,
   TldOffer,

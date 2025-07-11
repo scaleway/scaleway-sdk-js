@@ -1410,7 +1410,7 @@ export type CreateServerRequest = {
    */
   name?: string
   /**
-   * Define if a dynamic IPv4 is required for the Instance.
+   * By default, `dynamic_ip_required` is true, a dynamic ip is attached to the instance (if no flexible ip is already attached).
    */
   dynamicIpRequired?: boolean
   /**

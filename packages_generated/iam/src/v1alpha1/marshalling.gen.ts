@@ -1,17 +1,18 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  APIKey,
   AddGroupMemberRequest,
   AddGroupMembersRequest,
+  AddSamlCertificateRequest,
+  APIKey,
   Application,
   Connection,
   ConnectionConnectedOrganization,
@@ -20,6 +21,7 @@ import type {
   CreateApplicationRequest,
   CreateGroupRequest,
   CreateJWTRequest,
+  CreateOrganizationSamlRequest,
   CreatePolicyRequest,
   CreateSSHKeyRequest,
   CreateUserRequest,
@@ -29,8 +31,8 @@ import type {
   GracePeriod,
   Group,
   InitiateUserConnectionResponse,
-  JWT,
   JoinUserConnectionRequest,
+  JWT,
   ListAPIKeysResponse,
   ListApplicationsResponse,
   ListGracePeriodsResponse,
@@ -41,6 +43,7 @@ import type {
   ListPoliciesResponse,
   ListQuotaResponse,
   ListRulesResponse,
+  ListSamlCertificatesResponse,
   ListSSHKeysResponse,
   ListUsersResponse,
   Log,
@@ -55,14 +58,17 @@ import type {
   RemoveUserConnectionRequest,
   Rule,
   RuleSpecs,
-  SSHKey,
+  Saml,
+  SamlCertificate,
   SetGroupMembersRequest,
   SetOrganizationAliasRequest,
   SetRulesRequest,
   SetRulesResponse,
+  SSHKey,
   UpdateAPIKeyRequest,
   UpdateApplicationRequest,
   UpdateGroupRequest,
+  UpdateOrganizationSamlRequest,
   UpdateOrganizationSecuritySettingsRequest,
   UpdatePolicyRequest,
   UpdateSSHKeyRequest,
@@ -263,6 +269,22 @@ export const unmarshalSSHKey = (data: unknown): SSHKey => {
     publicKey: data.public_key,
     updatedAt: unmarshalDate(data.updated_at),
   } as SSHKey
+}
+
+export const unmarshalSamlCertificate = (data: unknown): SamlCertificate => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SamlCertificate' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    content: data.content,
+    expiresAt: unmarshalDate(data.expires_at),
+    id: data.id,
+    origin: data.origin,
+    type: data.type,
+  } as SamlCertificate
 }
 
 export const unmarshalUser = (data: unknown): User => {
@@ -601,6 +623,23 @@ export const unmarshalListSSHKeysResponse = (
   } as ListSSHKeysResponse
 }
 
+export const unmarshalListSamlCertificatesResponse = (
+  data: unknown,
+): ListSamlCertificatesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSamlCertificatesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    certificates: unmarshalArrayOfObject(
+      data.certificates,
+      unmarshalSamlCertificate,
+    ),
+  } as ListSamlCertificatesResponse
+}
+
 export const unmarshalListUsersResponse = (
   data: unknown,
 ): ListUsersResponse => {
@@ -658,6 +697,20 @@ export const unmarshalOrganizationSecuritySettings = (
   } as OrganizationSecuritySettings
 }
 
+export const unmarshalSaml = (data: unknown): Saml => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Saml' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    entityId: data.entity_id,
+    id: data.id,
+    singleSignOnUrl: data.single_sign_on_url,
+  } as Saml
+}
+
 export const unmarshalSetRulesResponse = (data: unknown): SetRulesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -702,6 +755,14 @@ export const marshalAddGroupMembersRequest = (
   user_ids: request.userIds,
 })
 
+export const marshalAddSamlCertificateRequest = (
+  request: AddSamlCertificateRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  content: request.content,
+  type: request.type,
+})
+
 export const marshalCreateAPIKeyRequest = (
   request: CreateAPIKeyRequest,
   defaults: DefaultValues,
@@ -741,6 +802,14 @@ export const marshalCreateJWTRequest = (
 ): Record<string, unknown> => ({
   referrer: request.referrer,
   user_id: request.userId,
+})
+
+export const marshalCreateOrganizationSamlRequest = (
+  request: CreateOrganizationSamlRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  entity_id: request.entityId,
+  single_sign_on_url: request.singleSignOnUrl,
 })
 
 const marshalRuleSpecs = (
@@ -888,6 +957,14 @@ export const marshalUpdateGroupRequest = (
   description: request.description,
   name: request.name,
   tags: request.tags,
+})
+
+export const marshalUpdateOrganizationSamlRequest = (
+  request: UpdateOrganizationSamlRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  entity_id: request.entityId,
+  single_sign_on_url: request.singleSignOnUrl,
 })
 
 export const marshalUpdateOrganizationSecuritySettingsRequest = (
