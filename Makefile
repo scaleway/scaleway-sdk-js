@@ -3,7 +3,7 @@ WORKDIR = $(shell pwd)
 LIBRARIES = $(shell find packages packages_generated -mindepth 1 -maxdepth 1 -type d)
 
 build:
-	pnpm turbo build
+	pnpm run build
 
 install-dependencies:
 	pnpm install
@@ -15,10 +15,10 @@ format-check:
 	pnpm run format:check
 
 typing:
-	pnpm turbo typecheck
+	pnpm run typecheck
 
 lint:
-	pnpm turbo lint
+	pnpm run lint
 
 test:
 	pnpm turbo test
