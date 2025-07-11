@@ -1,6 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
+export const AddSamlCertificateRequest = {
+  content: {
+    maxLength: 16384,
+    minLength: 1,
+  },
+}
+
 export const CreateAPIKeyRequest = {
   description: {
     ignoreEmpty: true,
@@ -29,6 +36,13 @@ export const CreateGroupRequest = {
     maxLength: 64,
     minLength: 1,
     pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
+  },
+}
+
+export const CreateOrganizationSamlRequest = {
+  entityId: {
+    maxLength: 1024,
+    minLength: 1,
   },
 }
 
@@ -263,6 +277,13 @@ export const UpdateGroupRequest = {
     maxLength: 64,
     minLength: 1,
     pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
+  },
+}
+
+export const UpdateOrganizationSamlRequest = {
+  entityId: {
+    maxLength: 1024,
+    minLength: 1,
   },
 }
 
