@@ -34,6 +34,7 @@ export type KeyState =
   | 'enabled'
   | 'disabled'
   | 'pending_key_material'
+  | 'scheduled_for_deletion'
 
 export type ListKeysRequestOrderBy =
   | 'name_asc'
