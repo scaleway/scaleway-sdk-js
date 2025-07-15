@@ -1,5 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
@@ -8,33 +10,32 @@ import {
   unmarshalMoney,
   unmarshalTimeSeries,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   AddOptionServerRequest,
   BMCAccess,
-  CPU,
   CertificationOption,
+  CPU,
   CreateServerRequest,
   CreateServerRequestInstall,
   Disk,
-  GPU,
   GetServerMetricsResponse,
-  IP,
+  GPU,
   InstallServerRequest,
+  IP,
   LicenseOption,
-  ListOSResponse,
   ListOffersResponse,
   ListOptionsResponse,
+  ListOSResponse,
   ListServerEventsResponse,
   ListServerPrivateNetworksResponse,
   ListServersResponse,
   ListSettingsResponse,
   Memory,
-  OS,
-  OSOSField,
   Offer,
   OfferOptionOffer,
   Option,
+  OS,
+  OSOSField,
   PersistentMemory,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
   PrivateNetworkApiSetServerPrivateNetworksRequest,
@@ -582,6 +583,7 @@ export const unmarshalServer = (data: unknown): Server => {
     organizationId: data.organization_id,
     pingStatus: data.ping_status,
     projectId: data.project_id,
+    protected: data.protected,
     rescueServer: data.rescue_server
       ? unmarshalServerRescueServer(data.rescue_server)
       : undefined,
@@ -881,6 +883,7 @@ export const marshalCreateServerRequest = (
   name: request.name,
   offer_id: request.offerId,
   option_ids: request.optionIds,
+  protected: request.protected,
   tags: request.tags,
   ...resolveOneOf([
     {
@@ -961,6 +964,7 @@ export const marshalUpdateServerRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
+  protected: request.protected,
   tags: request.tags,
 })
 
