@@ -814,6 +814,10 @@ export interface Server {
    * Configuration of rescue boot.
    */
   rescueServer?: ServerRescueServer
+  /**
+   * If enabled, the server can not be deleted.
+   */
+  protected: boolean
 }
 
 export interface Setting {
@@ -914,6 +918,10 @@ export type CreateServerRequest = {
    * IDs of options to enable on server.
    */
   optionIds?: string[]
+  /**
+   * If enabled, the server can not be deleted.
+   */
+  protected: boolean
 }
 
 export type DeleteOptionServerRequest = {
@@ -1500,6 +1508,10 @@ export type UpdateServerRequest = {
    * Tags associated with the server, not updated if null.
    */
   tags?: string[]
+  /**
+   * If enabled, the server can not be deleted.
+   */
+  protected?: boolean
 }
 
 export type UpdateSettingRequest = {
