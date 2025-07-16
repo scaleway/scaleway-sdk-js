@@ -78,7 +78,6 @@ export const CreateUserRequestMember = {
   },
   password: {
     ignoreEmpty: true,
-    maxLength: 72,
   },
   username: {
     maxLength: 64,
