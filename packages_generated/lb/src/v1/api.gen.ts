@@ -1,14 +1,15 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  API as ParentAPI,
   enrichForPagination,
+  API as ParentAPI,
   toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   CERTIFICATE_TRANSIENT_STATUSES as CERTIFICATE_TRANSIENT_STATUSES_LB,
   LB_TRANSIENT_STATUSES as LB_TRANSIENT_STATUSES_LB,
@@ -77,8 +78,8 @@ import {
   unmarshalListFrontendsResponse,
   unmarshalListIpsResponse,
   unmarshalListLbPrivateNetworksResponse,
-  unmarshalListLbTypesResponse,
   unmarshalListLbsResponse,
+  unmarshalListLbTypesResponse,
   unmarshalListRoutesResponse,
   unmarshalListSubscriberResponse,
   unmarshalPrivateNetwork,
@@ -136,10 +137,10 @@ import type {
   ListIpsResponse,
   ListLbPrivateNetworksRequest,
   ListLbPrivateNetworksResponse,
-  ListLbTypesRequest,
-  ListLbTypesResponse,
   ListLbsRequest,
   ListLbsResponse,
+  ListLbTypesRequest,
+  ListLbTypesResponse,
   ListRoutesRequest,
   ListRoutesResponse,
   ListSubscriberRequest,
@@ -151,8 +152,8 @@ import type {
   Route,
   SetAclsResponse,
   SetBackendServersRequest,
-  SubscribeToLbRequest,
   Subscriber,
+  SubscribeToLbRequest,
   UnsubscribeFromLbRequest,
   UpdateAclRequest,
   UpdateBackendRequest,
@@ -197,8 +198,8 @@ import type {
   ZonedApiListFrontendsRequest,
   ZonedApiListIPsRequest,
   ZonedApiListLbPrivateNetworksRequest,
-  ZonedApiListLbTypesRequest,
   ZonedApiListLbsRequest,
+  ZonedApiListLbTypesRequest,
   ZonedApiListRoutesRequest,
   ZonedApiListSubscriberRequest,
   ZonedApiMigrateLbRequest,
