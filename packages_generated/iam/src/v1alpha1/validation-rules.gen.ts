@@ -78,7 +78,6 @@ export const CreateUserRequestMember = {
   },
   password: {
     ignoreEmpty: true,
-    maxLength: 72,
   },
   username: {
     maxLength: 64,
@@ -308,13 +307,6 @@ export const UpdatePolicyRequest = {
 export const UpdateSSHKeyRequest = {
   name: {
     maxLength: 1000,
-  },
-}
-
-export const UpdateUserPasswordRequest = {
-  password: {
-    maxLength: 72,
-    minLength: 1,
   },
 }
 
