@@ -9,6 +9,10 @@ export type ListIPsRequestOrderBy =
   | 'updated_at_asc'
   | 'attached_at_desc'
   | 'attached_at_asc'
+  | 'ip_address_desc'
+  | 'ip_address_asc'
+  | 'mac_address_desc'
+  | 'mac_address_asc'
 
 export type ResourceType =
   | 'unknown_type'
