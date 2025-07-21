@@ -310,13 +310,6 @@ export const UpdateSSHKeyRequest = {
   },
 }
 
-export const UpdateUserPasswordRequest = {
-  password: {
-    maxLength: 72,
-    minLength: 1,
-  },
-}
-
 export const UpdateUserRequest = {
   firstName: {
     maxLength: 64,
