@@ -1,14 +1,15 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  API as ParentAPI,
   enrichForPagination,
+  API as ParentAPI,
   toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import { SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_BAREMETAL } from './content.gen'
 import {
   marshalAddOptionServerRequest,
@@ -26,16 +27,16 @@ import {
   unmarshalBMCAccess,
   unmarshalGetServerMetricsResponse,
   unmarshalIP,
-  unmarshalListOSResponse,
   unmarshalListOffersResponse,
   unmarshalListOptionsResponse,
+  unmarshalListOSResponse,
   unmarshalListServerEventsResponse,
   unmarshalListServerPrivateNetworksResponse,
   unmarshalListServersResponse,
   unmarshalListSettingsResponse,
-  unmarshalOS,
   unmarshalOffer,
   unmarshalOption,
+  unmarshalOS,
   unmarshalSchema,
   unmarshalServer,
   unmarshalServerPrivateNetwork,
@@ -50,20 +51,20 @@ import type {
   DeleteServerRequest,
   GetBMCAccessRequest,
   GetDefaultPartitioningSchemaRequest,
-  GetOSRequest,
   GetOfferRequest,
   GetOptionRequest,
+  GetOSRequest,
   GetServerMetricsRequest,
   GetServerMetricsResponse,
   GetServerRequest,
-  IP,
   InstallServerRequest,
-  ListOSRequest,
-  ListOSResponse,
+  IP,
   ListOffersRequest,
   ListOffersResponse,
   ListOptionsRequest,
   ListOptionsResponse,
+  ListOSRequest,
+  ListOSResponse,
   ListServerEventsRequest,
   ListServerEventsResponse,
   ListServerPrivateNetworksResponse,
@@ -72,9 +73,9 @@ import type {
   ListSettingsRequest,
   ListSettingsResponse,
   MigrateServerToMonthlyOfferRequest,
-  OS,
   Offer,
   Option,
+  OS,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
   PrivateNetworkApiDeleteServerPrivateNetworkRequest,
   PrivateNetworkApiListServerPrivateNetworksRequest,
@@ -209,7 +210,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update an Elastic Metal server. Update the server associated with the ID. You can update parameters such as the server's name, tags and description. Any parameters left null in the request body are not updated.
+   * Update an Elastic Metal server. Update the server associated with the ID. You can update parameters such as the server's name, tags, description and protection flag. Any parameters left null in the request body are not updated.
    *
    * @param request - The request {@link UpdateServerRequest}
    * @returns A Promise of Server
