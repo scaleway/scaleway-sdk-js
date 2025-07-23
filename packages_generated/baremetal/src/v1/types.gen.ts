@@ -144,6 +144,13 @@ export interface SchemaZFS {
   pools: SchemaPool[]
 }
 
+export interface Schema {
+  disks: SchemaDisk[]
+  raids: SchemaRAID[]
+  filesystems: SchemaFilesystem[]
+  zfs?: SchemaZFS
+}
+
 export interface CertificationOption {}
 
 export interface LicenseOption {
@@ -160,11 +167,165 @@ export interface PublicBandwidthOption {
 
 export interface RemoteAccessOption {}
 
-export interface Schema {
-  disks: SchemaDisk[]
-  raids: SchemaRAID[]
-  filesystems: SchemaFilesystem[]
-  zfs?: SchemaZFS
+export interface CreateServerRequestInstall {
+  /**
+   * ID of the OS to installation on the server.
+   */
+  osId: string
+  /**
+   * Hostname of the server.
+   */
+  hostname: string
+  /**
+   * SSH key IDs authorized on the server.
+   */
+  sshKeyIds: string[]
+  /**
+   * User for the installation.
+   */
+  user?: string
+  /**
+   * Password for the installation.
+   */
+  password?: string
+  /**
+   * Regular user that runs the service to be installed on the server.
+   */
+  serviceUser?: string
+  /**
+   * Password used for the service to install.
+   */
+  servicePassword?: string
+  /**
+   * Partitioning schema.
+   */
+  partitioningSchema?: Schema
+}
+
+export interface IP {
+  /**
+   * ID of the IP.
+   */
+  id: string
+  /**
+   * Address of the IP.
+   */
+  address: string
+  /**
+   * Reverse IP value.
+   */
+  reverse: string
+  /**
+   * Version of IP (v4 or v6).
+   */
+  version: IPVersion
+  /**
+   * Status of the reverse.
+   */
+  reverseStatus: IPReverseStatus
+  /**
+   * A message related to the reverse status, e.g. in case of an error.
+   */
+  reverseStatusMessage: string
+}
+
+export interface ServerInstall {
+  /**
+   * ID of the OS.
+   */
+  osId: string
+  /**
+   * Host defined during the server installation.
+   */
+  hostname: string
+  /**
+   * SSH public key IDs defined during server installation.
+   */
+  sshKeyIds: string[]
+  /**
+   * Status of the server installation.
+   */
+  status: ServerInstallStatus
+  /**
+   * User defined in the server installation, or the default user if none were specified.
+   */
+  user: string
+  /**
+   * Service user defined in the server installation, or the default user if none were specified.
+   */
+  serviceUser: string
+  /**
+   * Address of the installed service.
+   */
+  serviceUrl: string
+  /**
+   * Partitioning schema.
+   */
+  partitioningSchema?: Schema
+}
+
+export interface ServerOption {
+  /**
+   * ID of the option.
+   */
+  id: string
+  /**
+   * Name of the option.
+   */
+  name: string
+  /**
+   * Status of the option on this server.
+   */
+  status: ServerOptionOptionStatus
+  /**
+   * Defines whether the option can be managed (added or removed).
+   */
+  manageable: boolean
+  /**
+   * Auto expiration date for compatible options.
+   */
+  expiresAt?: Date
+  /**
+   * License option, contains the ID of the OS linked to the option.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  license?: LicenseOption
+  /**
+   * Public_bandwidth option, contains the bandwidth_in_bps.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  publicBandwidth?: PublicBandwidthOption
+  /**
+   * Private_network option, contains the bandwidth_in_bps.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  privateNetwork?: PrivateNetworkOption
+  /**
+   * Remote_access option.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  remoteAccess?: RemoteAccessOption
+  /**
+   * Certification option.
+   *
+   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   */
+  certification?: CertificationOption
+}
+
+export interface ServerRescueServer {
+  /**
+   * Rescue user name.
+   */
+  user: string
+  /**
+   * Rescue password.
+   */
+  password: string
 }
 
 export interface OSOSField {
@@ -319,165 +480,134 @@ export interface RaidController {
   raidLevel: string[]
 }
 
-export interface IP {
+export type CreateServerRequest = {
   /**
-   * ID of the IP.
+   * Zone to target. If none is passed will use default zone from the config.
    */
-  id: string
+  zone?: ScwZone
   /**
-   * Address of the IP.
+   * Offer ID of the new server.
    */
-  address: string
+  offerId: string
   /**
-   * Reverse IP value.
+   * @deprecated Organization ID with which the server will be created.
+   *
+   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  reverse: string
+  organizationId?: string
   /**
-   * Version of IP (v4 or v6).
+   * Project ID with which the server will be created.
+   *
+   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  version: IPVersion
+  projectId?: string
   /**
-   * Status of the reverse.
-   */
-  reverseStatus: IPReverseStatus
-  /**
-   * A message related to the reverse status, e.g. in case of an error.
-   */
-  reverseStatusMessage: string
-}
-
-export interface ServerInstall {
-  /**
-   * ID of the OS.
-   */
-  osId: string
-  /**
-   * Host defined during the server installation.
-   */
-  hostname: string
-  /**
-   * SSH public key IDs defined during server installation.
-   */
-  sshKeyIds: string[]
-  /**
-   * Status of the server installation.
-   */
-  status: ServerInstallStatus
-  /**
-   * User defined in the server installation, or the default user if none were specified.
-   */
-  user: string
-  /**
-   * Service user defined in the server installation, or the default user if none were specified.
-   */
-  serviceUser: string
-  /**
-   * Address of the installed service.
-   */
-  serviceUrl: string
-  /**
-   * Partitioning schema.
-   */
-  partitioningSchema?: Schema
-}
-
-export interface ServerOption {
-  /**
-   * ID of the option.
-   */
-  id: string
-  /**
-   * Name of the option.
+   * Name of the server (≠hostname).
    */
   name: string
   /**
-   * Status of the option on this server.
+   * Description associated with the server, max 255 characters.
    */
-  status: ServerOptionOptionStatus
+  description: string
   /**
-   * Defines whether the option can be managed (added or removed).
+   * Tags to associate to the server.
    */
-  manageable: boolean
+  tags?: string[]
   /**
-   * Auto expiration date for compatible options.
+   * Object describing the configuration details of the OS installation on the server.
    */
-  expiresAt?: Date
+  install?: CreateServerRequestInstall
   /**
-   * License option, contains the ID of the OS linked to the option.
-   *
-   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   * IDs of options to enable on server.
    */
-  license?: LicenseOption
+  optionIds?: string[]
   /**
-   * Public_bandwidth option, contains the bandwidth_in_bps.
-   *
-   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
+   * If enabled, the server can not be deleted.
    */
-  publicBandwidth?: PublicBandwidthOption
-  /**
-   * Private_network option, contains the bandwidth_in_bps.
-   *
-   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
-   */
-  privateNetwork?: PrivateNetworkOption
-  /**
-   * Remote_access option.
-   *
-   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
-   */
-  remoteAccess?: RemoteAccessOption
-  /**
-   * Certification option.
-   *
-   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
-   */
-  certification?: CertificationOption
+  protected: boolean
 }
 
-export interface ServerRescueServer {
+export interface Server {
   /**
-   * Rescue user name.
+   * ID of the server.
    */
-  user: string
+  id: string
   /**
-   * Rescue password.
+   * Organization ID the server is attached to.
    */
-  password: string
-}
-
-export interface CreateServerRequestInstall {
+  organizationId: string
   /**
-   * ID of the OS to installation on the server.
+   * Project ID the server is attached to.
    */
-  osId: string
+  projectId: string
   /**
-   * Hostname of the server.
+   * Name of the server.
    */
-  hostname: string
+  name: string
   /**
-   * SSH key IDs authorized on the server.
+   * Description of the server.
    */
-  sshKeyIds: string[]
+  description: string
   /**
-   * User for the installation.
+   * Last modification date of the server.
    */
-  user?: string
+  updatedAt?: Date
   /**
-   * Password for the installation.
+   * Creation date of the server.
    */
-  password?: string
+  createdAt?: Date
   /**
-   * Regular user that runs the service to be installed on the server.
+   * Status of the server.
    */
-  serviceUser?: string
+  status: ServerStatus
   /**
-   * Password used for the service to install.
+   * Offer ID of the server.
    */
-  servicePassword?: string
+  offerId: string
   /**
-   * Partitioning schema.
+   * Offer name of the server.
    */
-  partitioningSchema?: Schema
+  offerName: string
+  /**
+   * Array of custom tags attached to the server.
+   */
+  tags: string[]
+  /**
+   * Array of IPs attached to the server.
+   */
+  ips: IP[]
+  /**
+   * Domain of the server.
+   */
+  domain: string
+  /**
+   * Boot type of the server.
+   */
+  bootType: ServerBootType
+  /**
+   * Zone in which is the server located.
+   */
+  zone: ScwZone
+  /**
+   * Configuration of the installation.
+   */
+  install?: ServerInstall
+  /**
+   * Status of server ping.
+   */
+  pingStatus: ServerPingStatus
+  /**
+   * Options enabled on the server.
+   */
+  options: ServerOption[]
+  /**
+   * Configuration of rescue boot.
+   */
+  rescueServer?: ServerRescueServer
+  /**
+   * If enabled, the server can not be deleted.
+   */
+  protected: boolean
 }
 
 export interface OS {
@@ -737,89 +867,6 @@ export interface ServerPrivateNetwork {
   updatedAt?: Date
 }
 
-export interface Server {
-  /**
-   * ID of the server.
-   */
-  id: string
-  /**
-   * Organization ID the server is attached to.
-   */
-  organizationId: string
-  /**
-   * Project ID the server is attached to.
-   */
-  projectId: string
-  /**
-   * Name of the server.
-   */
-  name: string
-  /**
-   * Description of the server.
-   */
-  description: string
-  /**
-   * Last modification date of the server.
-   */
-  updatedAt?: Date
-  /**
-   * Creation date of the server.
-   */
-  createdAt?: Date
-  /**
-   * Status of the server.
-   */
-  status: ServerStatus
-  /**
-   * Offer ID of the server.
-   */
-  offerId: string
-  /**
-   * Offer name of the server.
-   */
-  offerName: string
-  /**
-   * Array of custom tags attached to the server.
-   */
-  tags: string[]
-  /**
-   * Array of IPs attached to the server.
-   */
-  ips: IP[]
-  /**
-   * Domain of the server.
-   */
-  domain: string
-  /**
-   * Boot type of the server.
-   */
-  bootType: ServerBootType
-  /**
-   * Zone in which is the server located.
-   */
-  zone: ScwZone
-  /**
-   * Configuration of the installation.
-   */
-  install?: ServerInstall
-  /**
-   * Status of server ping.
-   */
-  pingStatus: ServerPingStatus
-  /**
-   * Options enabled on the server.
-   */
-  options: ServerOption[]
-  /**
-   * Configuration of rescue boot.
-   */
-  rescueServer?: ServerRescueServer
-  /**
-   * If enabled, the server can not be deleted.
-   */
-  protected: boolean
-}
-
 export interface Setting {
   /**
    * ID of the setting.
@@ -875,53 +922,6 @@ export interface BMCAccess {
    * The date after which the BMC (Baseboard Management Controller) access will be closed.
    */
   expiresAt?: Date
-}
-
-export type CreateServerRequest = {
-  /**
-   * Zone to target. If none is passed will use default zone from the config.
-   */
-  zone?: ScwZone
-  /**
-   * Offer ID of the new server.
-   */
-  offerId: string
-  /**
-   * @deprecated Organization ID with which the server will be created.
-   *
-   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
-   */
-  organizationId?: string
-  /**
-   * Project ID with which the server will be created.
-   *
-   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
-   */
-  projectId?: string
-  /**
-   * Name of the server (≠hostname).
-   */
-  name: string
-  /**
-   * Description associated with the server, max 255 characters.
-   */
-  description: string
-  /**
-   * Tags to associate to the server.
-   */
-  tags?: string[]
-  /**
-   * Object describing the configuration details of the OS installation on the server.
-   */
-  install?: CreateServerRequestInstall
-  /**
-   * IDs of options to enable on server.
-   */
-  optionIds?: string[]
-  /**
-   * If enabled, the server can not be deleted.
-   */
-  protected: boolean
 }
 
 export type DeleteOptionServerRequest = {

@@ -545,6 +545,12 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalServerCompatibleTypes,
     )
 
+  /**
+   * Attach a volume to an Instance.
+   *
+   * @param request - The request {@link AttachServerVolumeRequest}
+   * @returns A Promise of AttachServerVolumeResponse
+   */
   attachServerVolume = (request: Readonly<AttachServerVolumeRequest>) =>
     this.client.fetch<AttachServerVolumeResponse>(
       {
@@ -558,6 +564,12 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalAttachServerVolumeResponse,
     )
 
+  /**
+   * Detach a volume from an Instance.
+   *
+   * @param request - The request {@link DetachServerVolumeRequest}
+   * @returns A Promise of DetachServerVolumeResponse
+   */
   detachServerVolume = (request: Readonly<DetachServerVolumeRequest>) =>
     this.client.fetch<DetachServerVolumeResponse>(
       {
@@ -591,7 +603,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
     )
 
   /**
-   * Detach a filesystem volume to an Instance.
+   * Detach a filesystem volume from an Instance.
    *
    * @param request - The request {@link DetachServerFileSystemRequest}
    * @returns A Promise of DetachServerFileSystemResponse
