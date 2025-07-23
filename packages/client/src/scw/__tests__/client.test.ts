@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { createAdvancedClient, createClient } from '../client'
-import type { ClientConfig } from '../client-ini-factory'
-import { withProfile } from '../client-ini-factory'
-import type { Settings } from '../client-settings'
+import { createAdvancedClient, createClient } from '../client.js'
+import type { ClientConfig } from '../client-ini-factory.js'
+import { withProfile } from '../client-ini-factory.js'
+import type { Settings } from '../client-settings.js'
 
 const withApiURL =
   (apiURL: string): ClientConfig =>

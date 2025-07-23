@@ -77,7 +77,7 @@ import type {
   Session,
   SyncDomainDnsRecordsRequestRecord,
   Website,
-} from './types.gen'
+} from './types.gen.js'
 
 export const unmarshalBackup = (data: unknown): Backup => {
   if (!isJSONObject(data)) {

@@ -1,15 +1,15 @@
 import { getLogger } from '../internal/logger'
-import type { ClientConfig } from './client-ini-factory'
+import type { ClientConfig } from './client-ini-factory.js'
 import {
   withAdditionalInterceptors,
   withLegacyInterceptors,
   withProfile,
-} from './client-ini-factory'
-import type { Settings } from './client-settings'
-import { assertValidSettings } from './client-settings'
-import { userAgent, version } from './constants'
-import type { Fetcher } from './fetch/build-fetcher'
-import { buildFetcher } from './fetch/build-fetcher'
+} from './client-ini-factory.js'
+import type { Settings } from './client-settings.js'
+import { assertValidSettings } from './client-settings.js'
+import { userAgent, version } from './constants.js'
+import { buildFetcher } from './fetch/build-fetcher.js'
+import type { Fetcher } from './fetch/build-fetcher.js'
 
 /** Default {@link Settings} values. */
 const DEFAULT_SETTINGS: Settings = {

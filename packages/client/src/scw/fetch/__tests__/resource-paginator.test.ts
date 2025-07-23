@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from 'vitest'
-import type { PaginatedContent, PaginatedFetcher } from '../resource-paginator'
+import type { PaginatedContent, PaginatedFetcher } from '../resource-paginator.js'
 import {
   enrichForPagination,
   fetchAll,
   fetchPaginated,
-} from '../resource-paginator'
+} from '../resource-paginator.js'
 
 const fetchPages = <T>(input: T[][] = [], delay = 0) => {
   const totalCount = input.flat().length

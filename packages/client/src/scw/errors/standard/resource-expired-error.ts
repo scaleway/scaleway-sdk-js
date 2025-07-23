@@ -1,5 +1,5 @@
-import type { JSONObject } from '../../../helpers/json'
-import { ScalewayError } from '../scw-error'
+import type { JSONObject } from '../../../helpers/json.js'
+import { ScalewayError } from '../scw-error.js'
 
 /**
  * ResourceExpired error happens when trying to access a resource that has expired.

@@ -1,8 +1,8 @@
-import type { NetworkInterceptors } from '../index'
-import { authenticateWithSecrets } from './auth'
-import type { Profile } from './client-ini-profile'
-import { hasAuthenticationSecrets } from './client-ini-profile'
-import type { Settings } from './client-settings'
+import type { NetworkInterceptors } from '../index.js'
+import { authenticateWithSecrets } from './auth.js'
+import { hasAuthenticationSecrets } from './client-ini-profile.js'
+import type { Profile } from './client-ini-profile.js'
+import type { Settings } from './client-settings.js'
 
 /**
  * A factory to build {@link Settings}.

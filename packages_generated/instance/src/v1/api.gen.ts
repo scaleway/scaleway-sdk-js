@@ -3,8 +3,8 @@
 
 import type { ApiLocality } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   toApiLocality,
   urlParams,
   validatePathParam,
@@ -79,9 +79,9 @@ import {
   unmarshalListSecurityGroupRulesResponse,
   unmarshalListSecurityGroupsResponse,
   unmarshalListServerActionsResponse,
+  unmarshalListServerUserDataResponse,
   unmarshalListServersResponse,
   unmarshalListServersTypesResponse,
-  unmarshalListServerUserDataResponse,
   unmarshalListSnapshotsResponse,
   unmarshalListVolumesResponse,
   unmarshalListVolumesTypesResponse,
@@ -106,7 +106,7 @@ import {
   unmarshalUpdateServerResponse,
   unmarshalUpdateSnapshotResponse,
   unmarshalUpdateVolumeResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   ApplyBlockMigrationRequest,
   AttachServerFileSystemRequest,
@@ -188,12 +188,12 @@ import type {
   ListSecurityGroupsResponse,
   ListServerActionsRequest,
   ListServerActionsResponse,
+  ListServerUserDataRequest,
+  ListServerUserDataResponse,
   ListServersRequest,
   ListServersResponse,
   ListServersTypesRequest,
   ListServersTypesResponse,
-  ListServerUserDataRequest,
-  ListServerUserDataResponse,
   ListSnapshotsRequest,
   ListSnapshotsResponse,
   ListVolumesRequest,
@@ -233,7 +233,7 @@ import type {
   UpdateSnapshotResponse,
   UpdateVolumeRequest,
   UpdateVolumeResponse,
-} from './types.gen'
+} from './types.gen.js'
 import type {
   SetImageResponse,
   SetSecurityGroupRequest,
@@ -244,7 +244,7 @@ import type {
   SetServerResponse,
   SetSnapshotRequest,
   SetSnapshotResponse,
-} from './types.private.gen'
+} from './types.private.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

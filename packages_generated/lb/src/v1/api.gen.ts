@@ -3,8 +3,8 @@
 
 import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   toApiLocality,
   urlParams,
   validatePathParam,
@@ -13,7 +13,7 @@ import {
 import {
   CERTIFICATE_TRANSIENT_STATUSES as CERTIFICATE_TRANSIENT_STATUSES_LB,
   LB_TRANSIENT_STATUSES as LB_TRANSIENT_STATUSES_LB,
-} from './content.gen'
+} from './content.gen.js'
 import {
   marshalAddBackendServersRequest,
   marshalAttachPrivateNetworkRequest,
@@ -78,15 +78,15 @@ import {
   unmarshalListFrontendsResponse,
   unmarshalListIpsResponse,
   unmarshalListLbPrivateNetworksResponse,
-  unmarshalListLbsResponse,
   unmarshalListLbTypesResponse,
+  unmarshalListLbsResponse,
   unmarshalListRoutesResponse,
   unmarshalListSubscriberResponse,
   unmarshalPrivateNetwork,
   unmarshalRoute,
   unmarshalSetAclsResponse,
   unmarshalSubscriber,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   Acl,
   AddBackendServersRequest,
@@ -137,10 +137,10 @@ import type {
   ListIpsResponse,
   ListLbPrivateNetworksRequest,
   ListLbPrivateNetworksResponse,
-  ListLbsRequest,
-  ListLbsResponse,
   ListLbTypesRequest,
   ListLbTypesResponse,
+  ListLbsRequest,
+  ListLbsResponse,
   ListRoutesRequest,
   ListRoutesResponse,
   ListSubscriberRequest,
@@ -152,8 +152,8 @@ import type {
   Route,
   SetAclsResponse,
   SetBackendServersRequest,
-  Subscriber,
   SubscribeToLbRequest,
+  Subscriber,
   UnsubscribeFromLbRequest,
   UpdateAclRequest,
   UpdateBackendRequest,
@@ -198,8 +198,8 @@ import type {
   ZonedApiListFrontendsRequest,
   ZonedApiListIPsRequest,
   ZonedApiListLbPrivateNetworksRequest,
-  ZonedApiListLbsRequest,
   ZonedApiListLbTypesRequest,
+  ZonedApiListLbsRequest,
   ZonedApiListRoutesRequest,
   ZonedApiListSubscriberRequest,
   ZonedApiMigrateLbRequest,
@@ -218,7 +218,7 @@ import type {
   ZonedApiUpdateLbRequest,
   ZonedApiUpdateRouteRequest,
   ZonedApiUpdateSubscriberRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

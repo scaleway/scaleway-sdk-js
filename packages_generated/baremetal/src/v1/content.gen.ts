@@ -4,7 +4,7 @@ import type {
   ServerInstallStatus,
   ServerPrivateNetworkStatus,
   ServerStatus,
-} from './types.gen'
+} from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link ServerInstallStatus}. */
 export const SERVER_INSTALL_TRANSIENT_STATUSES: ServerInstallStatus[] = [

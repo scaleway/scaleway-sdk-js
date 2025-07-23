@@ -1,12 +1,12 @@
 import { afterAll, beforeEach, describe, expect, it } from 'vitest'
 import { setLogger } from '../../../internal/logger'
-import { ConsoleLogger } from '../../../internal/logger/console-logger'
-import type { LogLevel } from '../../../internal/logger/level-resolver'
+import { ConsoleLogger } from '../../../internal/logger/console-logger.js'
+import type { LogLevel } from '../../../internal/logger/level-resolver.js'
 import {
   logRequest,
   logResponse,
   obfuscateInterceptor,
-} from '../http-interceptors'
+} from '../http-interceptors.js'
 
 let latestMessage = ''
 

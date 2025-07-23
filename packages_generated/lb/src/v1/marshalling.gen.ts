@@ -50,8 +50,8 @@ import type {
   ListFrontendsResponse,
   ListIpsResponse,
   ListLbPrivateNetworksResponse,
-  ListLbsResponse,
   ListLbTypesResponse,
+  ListLbsResponse,
   ListRoutesResponse,
   ListSubscriberResponse,
   MigrateLbRequest,
@@ -64,10 +64,10 @@ import type {
   RouteMatch,
   SetAclsResponse,
   SetBackendServersRequest,
+  SubscribeToLbRequest,
   Subscriber,
   SubscriberEmailConfig,
   SubscriberWebhookConfig,
-  SubscribeToLbRequest,
   UpdateAclRequest,
   UpdateBackendRequest,
   UpdateCertificateRequest,
@@ -102,7 +102,7 @@ import type {
   ZonedApiUpdateLbRequest,
   ZonedApiUpdateRouteRequest,
   ZonedApiUpdateSubscriberRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 export const unmarshalIp = (data: unknown): Ip => {
   if (!isJSONObject(data)) {

@@ -3,16 +3,16 @@
 
 import type { Region as ScwRegion, Zone as ScwZone } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   resolveOneOf,
   urlParams,
 } from '@scaleway/sdk-client'
-import { unmarshalListPublicCatalogProductsResponse } from './marshalling.gen'
+import { unmarshalListPublicCatalogProductsResponse } from './marshalling.gen.js'
 import type {
   ListPublicCatalogProductsResponse,
   PublicCatalogApiListPublicCatalogProductsRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 /**
  * Product Catalog API.

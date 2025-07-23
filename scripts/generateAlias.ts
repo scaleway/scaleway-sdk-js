@@ -40,7 +40,9 @@ for (const service of services) {
     })
   } catch (err: unknown) {
     throw new Error(
-      `Error: missing or unreadable 'src' folder for package '${service}': ${err.message}`,
+      `Error: missing or unreadable 'src' folder for package '${service}': ${
+        err instanceof Error ? err.message : String(err)
+      }`,
     )
   }
 

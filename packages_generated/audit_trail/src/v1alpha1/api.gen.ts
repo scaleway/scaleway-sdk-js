@@ -15,7 +15,7 @@ import {
   unmarshalListCombinedEventsResponse,
   unmarshalListEventsResponse,
   unmarshalListProductsResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   CreateExportJobRequest,
   DeleteExportJobRequest,
@@ -28,7 +28,7 @@ import type {
   ListEventsResponse,
   ListProductsRequest,
   ListProductsResponse,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

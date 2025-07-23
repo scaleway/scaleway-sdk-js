@@ -1,6 +1,6 @@
-import type { JSONObject } from '../../helpers/json'
-import { isJSONObject } from '../../helpers/json'
-import { isRecordOfStringArray } from './types'
+import type { JSONObject } from '../../helpers/json.js'
+import { isJSONObject } from '../../helpers/json.js'
+import { isRecordOfStringArray } from './types.js'
 
 /**
  * Builds the default message for {@link ScalewayError}.

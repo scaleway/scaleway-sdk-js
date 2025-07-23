@@ -43,7 +43,7 @@ import type {
   SetEndpointsResponse,
   UpdateClusterRequest,
   UpdateEndpointRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 export const unmarshalACLRule = (data: unknown): ACLRule => {
   if (!isJSONObject(data)) {

@@ -1,8 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   resolveOneOf,
   urlParams,
   validatePathParam,
@@ -52,8 +52,8 @@ import {
   unmarshalListPoliciesResponse,
   unmarshalListQuotaResponse,
   unmarshalListRulesResponse,
-  unmarshalListSamlCertificatesResponse,
   unmarshalListSSHKeysResponse,
+  unmarshalListSamlCertificatesResponse,
   unmarshalListUsersResponse,
   unmarshalLog,
   unmarshalMFAOTP,
@@ -61,18 +61,18 @@ import {
   unmarshalOrganizationSecuritySettings,
   unmarshalPolicy,
   unmarshalQuotum,
+  unmarshalSSHKey,
   unmarshalSaml,
   unmarshalSamlCertificate,
   unmarshalSetRulesResponse,
-  unmarshalSSHKey,
   unmarshalUser,
   unmarshalValidateUserMFAOTPResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
+  APIKey,
   AddGroupMemberRequest,
   AddGroupMembersRequest,
   AddSamlCertificateRequest,
-  APIKey,
   Application,
   ClonePolicyRequest,
   CreateAPIKeyRequest,
@@ -88,9 +88,13 @@ import type {
   DeleteGroupRequest,
   DeleteJWTRequest,
   DeletePolicyRequest,
+<<<<<<< HEAD
   DeleteSamlCertificateRequest,
   DeleteSamlRequest,
+=======
+>>>>>>> 0df1f9117 (chore: add extension for nodenext)
   DeleteSSHKeyRequest,
+  DeleteSamlCertificateRequest,
   DeleteUserMFAOTPRequest,
   DeleteUserRequest,
   EnableOrganizationSamlRequest,
@@ -112,8 +116,8 @@ import type {
   Group,
   InitiateUserConnectionRequest,
   InitiateUserConnectionResponse,
-  JoinUserConnectionRequest,
   JWT,
+  JoinUserConnectionRequest,
   ListAPIKeysRequest,
   ListAPIKeysResponse,
   ListApplicationsRequest,
@@ -134,10 +138,10 @@ import type {
   ListQuotaResponse,
   ListRulesRequest,
   ListRulesResponse,
-  ListSamlCertificatesRequest,
-  ListSamlCertificatesResponse,
   ListSSHKeysRequest,
   ListSSHKeysResponse,
+  ListSamlCertificatesRequest,
+  ListSamlCertificatesResponse,
   ListUsersRequest,
   ListUsersResponse,
   LockUserRequest,
@@ -150,13 +154,13 @@ import type {
   Quotum,
   RemoveGroupMemberRequest,
   RemoveUserConnectionRequest,
+  SSHKey,
   Saml,
   SamlCertificate,
   SetGroupMembersRequest,
   SetOrganizationAliasRequest,
   SetRulesRequest,
   SetRulesResponse,
-  SSHKey,
   UnlockUserRequest,
   UpdateAPIKeyRequest,
   UpdateApplicationRequest,
@@ -171,7 +175,7 @@ import type {
   User,
   ValidateUserMFAOTPRequest,
   ValidateUserMFAOTPResponse,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

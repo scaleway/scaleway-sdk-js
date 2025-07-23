@@ -2,15 +2,15 @@ import type {
   NetworkInterceptors,
   RequestInterceptor,
   ResponseInterceptor,
-} from '../internal/interceptors/types'
+} from '../internal/interceptors/types.js'
 import {
   isOrganizationId,
   isProjectId,
   isRegion,
   isURL,
   isZone,
-} from '../internal/validations/string-validation'
-import type { Profile } from './client-ini-profile'
+} from '../internal/validations/string-validation.js'
+import type { Profile } from './client-ini-profile.js'
 
 /**
  * Holds default values of settings.
