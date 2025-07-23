@@ -1,4 +1,4 @@
-import type { LogLevel } from './level-resolver'
+import type { LogLevel } from './level-resolver.js'
 
 /**
  * Logger.

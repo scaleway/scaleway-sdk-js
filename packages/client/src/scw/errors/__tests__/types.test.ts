@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { isRecordOfStringArray } from '../types'
+import { isRecordOfStringArray } from '../types.js'
 
 describe('isRecordOfStringArray', () => {
   it('validates a proper object', () => {

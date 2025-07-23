@@ -10,13 +10,13 @@ import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   unmarshalListEventsResponse,
   unmarshalListProductsResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   ListEventsRequest,
   ListEventsResponse,
   ListProductsRequest,
   ListProductsResponse,
-} from './types.gen'
+} from './types.gen.js'
 
 /**
  * Audit Trail API.

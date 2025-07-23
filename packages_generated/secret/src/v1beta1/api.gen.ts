@@ -22,7 +22,7 @@ import {
   unmarshalListTagsResponse,
   unmarshalSecret,
   unmarshalSecretVersion,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   AccessSecretVersionByPathRequest,
   AccessSecretVersionRequest,
@@ -54,7 +54,7 @@ import type {
   UnprotectSecretRequest,
   UpdateSecretRequest,
   UpdateSecretVersionRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

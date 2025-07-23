@@ -12,7 +12,7 @@ import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_INFERENCE,
   MODEL_TRANSIENT_STATUSES as MODEL_TRANSIENT_STATUSES_INFERENCE,
-} from './content.gen'
+} from './content.gen.js'
 import {
   marshalCreateDeploymentRequest,
   marshalCreateEndpointRequest,
@@ -25,7 +25,7 @@ import {
   unmarshalListModelsResponse,
   unmarshalListNodeTypesResponse,
   unmarshalModel,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   CreateDeploymentRequest,
   CreateEndpointRequest,
@@ -47,7 +47,7 @@ import type {
   Model,
   UpdateDeploymentRequest,
   UpdateEndpointRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

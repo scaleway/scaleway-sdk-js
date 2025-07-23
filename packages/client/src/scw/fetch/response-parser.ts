@@ -1,8 +1,8 @@
-import { isResponse } from '../../helpers/is-response'
-import { isJSONObject } from '../../helpers/json'
-import { parseScalewayError } from '../errors/error-parser'
-import { ScalewayError } from '../errors/scw-error'
-import type { ResponseUnmarshaller } from './types'
+import { isResponse } from '../../helpers/is-response.js'
+import { isJSONObject } from '../../helpers/json.js'
+import { parseScalewayError } from '../errors/error-parser.js'
+import { ScalewayError } from '../errors/scw-error.js'
+import type { ResponseUnmarshaller } from './types.js'
 
 const X_TOTAL_COUNT_HEADER_KEY = 'x-total-count'
 const TOTAL_COUNT_RES_KEY = 'total_count'

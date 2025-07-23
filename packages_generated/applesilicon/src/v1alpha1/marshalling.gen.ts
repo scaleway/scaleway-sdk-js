@@ -36,7 +36,7 @@ import type {
   StartConnectivityDiagnosticRequest,
   StartConnectivityDiagnosticResponse,
   UpdateServerRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 export const unmarshalOS = (data: unknown): OS => {
   if (!isJSONObject(data)) {

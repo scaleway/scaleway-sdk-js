@@ -12,7 +12,7 @@ import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   INSTANCE_TRANSIENT_STATUSES as INSTANCE_TRANSIENT_STATUSES_MONGODB,
   SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_MONGODB,
-} from './content.gen'
+} from './content.gen.js'
 import {
   marshalCreateEndpointRequest,
   marshalCreateInstanceRequest,
@@ -33,7 +33,7 @@ import {
   unmarshalListVersionsResponse,
   unmarshalSnapshot,
   unmarshalUser,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   CreateEndpointRequest,
   CreateInstanceRequest,
@@ -66,7 +66,7 @@ import type {
   UpdateUserRequest,
   UpgradeInstanceRequest,
   User,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

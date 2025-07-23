@@ -20,7 +20,7 @@ import {
   unmarshalListInstanceGroupsResponse,
   unmarshalListInstancePoliciesResponse,
   unmarshalListInstanceTemplatesResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   CreateInstanceGroupRequest,
   CreateInstancePolicyRequest,
@@ -45,7 +45,7 @@ import type {
   UpdateInstanceGroupRequest,
   UpdateInstancePolicyRequest,
   UpdateInstanceTemplateRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

@@ -37,7 +37,7 @@ import type {
   UpdateJobRequest,
   UpdateProcessRequest,
   UpdateSessionRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 export const unmarshalJobCircuit = (data: unknown): JobCircuit => {
   if (!isJSONObject(data)) {

@@ -3,8 +3,8 @@
 export {
   GlobalAPI,
   RegionalAPI,
-} from './api.gen'
-export * from './marshalling.gen'
+} from './api.gen.js'
+export * from './marshalling.gen.js'
 export type {
   Alert,
   AlertManager,
@@ -80,5 +80,5 @@ export type {
   Usage,
   UsageOverview,
   UsageUnit,
-} from './types.gen'
-export * as ValidationRules from './validation-rules.gen'
+} from './types.gen.js'
+export * as ValidationRules from './validation-rules.gen.js'

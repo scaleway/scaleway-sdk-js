@@ -28,7 +28,7 @@ import type {
   SelfHost,
   UpdateLinkRequest,
   UpdateRoutingPolicyRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 export const unmarshalDedicatedConnection = (
   data: unknown,

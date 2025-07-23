@@ -1,4 +1,4 @@
-import type { Client } from './client'
+import type { Client } from './client.js'
 
 /**
  * Abstract class to instantiate API from a {@link Client}.

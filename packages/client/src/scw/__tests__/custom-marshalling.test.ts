@@ -10,8 +10,8 @@ import {
   unmarshalServiceInfo,
   unmarshalTimeSeries,
   unmarshalTimeSeriesPoint,
-} from '../custom-marshalling'
-import { Decimal } from '../custom-types'
+} from '../custom-marshalling.js'
+import { Decimal } from '../custom-types.js'
 
 describe('unmarshalMoney', () => {
   it('returns the proper object', () => {

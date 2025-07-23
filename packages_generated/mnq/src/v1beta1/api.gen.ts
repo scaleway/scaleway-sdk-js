@@ -30,7 +30,7 @@ import {
   unmarshalSnsInfo,
   unmarshalSqsCredentials,
   unmarshalSqsInfo,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   ListNatsAccountsResponse,
   ListNatsCredentialsResponse,
@@ -67,7 +67,7 @@ import type {
   SqsApiUpdateSqsCredentialsRequest,
   SqsCredentials,
   SqsInfo,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

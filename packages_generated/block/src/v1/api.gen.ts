@@ -12,7 +12,7 @@ import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_BLOCK,
   VOLUME_TRANSIENT_STATUSES as VOLUME_TRANSIENT_STATUSES_BLOCK,
-} from './content.gen'
+} from './content.gen.js'
 import {
   marshalCreateSnapshotRequest,
   marshalCreateVolumeRequest,
@@ -25,7 +25,7 @@ import {
   unmarshalListVolumesResponse,
   unmarshalSnapshot,
   unmarshalVolume,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   CreateSnapshotRequest,
   CreateVolumeRequest,
@@ -45,7 +45,7 @@ import type {
   UpdateSnapshotRequest,
   UpdateVolumeRequest,
   Volume,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

@@ -24,7 +24,7 @@ import {
   unmarshalListJobsResourcesResponse,
   unmarshalSecret,
   unmarshalStartJobDefinitionResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   CreateJobDefinitionRequest,
   CreateJobDefinitionSecretsRequest,
@@ -52,7 +52,7 @@ import type {
   StopJobRunRequest,
   UpdateJobDefinitionRequest,
   UpdateJobDefinitionSecretRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

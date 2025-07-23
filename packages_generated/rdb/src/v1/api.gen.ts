@@ -15,7 +15,7 @@ import {
   INSTANCE_TRANSIENT_STATUSES as INSTANCE_TRANSIENT_STATUSES_RDB,
   READ_REPLICA_TRANSIENT_STATUSES as READ_REPLICA_TRANSIENT_STATUSES_RDB,
   SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_RDB,
-} from './content.gen'
+} from './content.gen.js'
 import {
   marshalAddInstanceACLRulesRequest,
   marshalAddInstanceSettingsRequest,
@@ -72,7 +72,7 @@ import {
   unmarshalSetInstanceSettingsResponse,
   unmarshalSnapshot,
   unmarshalUser,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   AddInstanceACLRulesRequest,
   AddInstanceACLRulesResponse,
@@ -161,7 +161,7 @@ import type {
   UpdateUserRequest,
   UpgradeInstanceRequest,
   User,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

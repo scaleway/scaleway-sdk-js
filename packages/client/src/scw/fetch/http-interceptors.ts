@@ -1,10 +1,13 @@
 import type {
   RequestInterceptor,
   ResponseInterceptor,
-} from '../../internal/interceptors/types'
+} from '../../internal/interceptors/types.js'
 import { getLogger } from '../../internal/logger'
-import { LevelResolver, shouldLog } from '../../internal/logger/level-resolver'
-import { dumpRequest, dumpResponse } from './http-dumper'
+import {
+  LevelResolver,
+  shouldLog,
+} from '../../internal/logger/level-resolver.js'
+import { dumpRequest, dumpResponse } from './http-dumper.js'
 
 /**
  * Mapper of an header entry.

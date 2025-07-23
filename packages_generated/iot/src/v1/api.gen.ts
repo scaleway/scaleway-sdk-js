@@ -9,7 +9,7 @@ import {
   waitForResource,
 } from '@scaleway/sdk-client'
 import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
-import { HUB_TRANSIENT_STATUSES as HUB_TRANSIENT_STATUSES_IOT } from './content.gen'
+import { HUB_TRANSIENT_STATUSES as HUB_TRANSIENT_STATUSES_IOT } from './content.gen.js'
 import {
   marshalCreateDeviceRequest,
   marshalCreateHubRequest,
@@ -40,7 +40,7 @@ import {
   unmarshalRoute,
   unmarshalSetDeviceCertificateResponse,
   unmarshalTwinDocument,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   CreateDeviceRequest,
   CreateDeviceResponse,
@@ -96,7 +96,7 @@ import type {
   UpdateDeviceRequest,
   UpdateHubRequest,
   UpdateRouteRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

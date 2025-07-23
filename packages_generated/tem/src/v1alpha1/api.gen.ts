@@ -12,7 +12,7 @@ import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_TEM,
   EMAIL_TRANSIENT_STATUSES as EMAIL_TRANSIENT_STATUSES_TEM,
-} from './content.gen'
+} from './content.gen.js'
 import {
   marshalBulkCreateBlocklistsRequest,
   marshalCreateDomainRequest,
@@ -40,7 +40,7 @@ import {
   unmarshalProjectSettings,
   unmarshalStatistics,
   unmarshalWebhook,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   BulkCreateBlocklistsRequest,
   BulkCreateBlocklistsResponse,
@@ -88,7 +88,7 @@ import type {
   UpdateProjectSettingsRequest,
   UpdateWebhookRequest,
   Webhook,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

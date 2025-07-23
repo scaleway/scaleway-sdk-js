@@ -60,7 +60,7 @@ import type {
   Session,
   SyncDomainDnsRecordsRequestRecord,
   Website,
-} from './types.gen'
+} from './types.gen.js'
 
 export const unmarshalDatabaseUser = (data: unknown): DatabaseUser => {
   if (!isJSONObject(data)) {

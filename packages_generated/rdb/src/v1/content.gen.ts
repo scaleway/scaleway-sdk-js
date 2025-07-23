@@ -7,7 +7,7 @@ import type {
   MaintenanceStatus,
   ReadReplicaStatus,
   SnapshotStatus,
-} from './types.gen'
+} from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link DatabaseBackupStatus}. */
 export const DATABASE_BACKUP_TRANSIENT_STATUSES: DatabaseBackupStatus[] = [

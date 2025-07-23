@@ -2,7 +2,7 @@ import type {
   RequestInterceptor,
   ResponseErrorInterceptor,
   ResponseInterceptor,
-} from './types'
+} from './types.js'
 
 /**
  * Composes request interceptors.

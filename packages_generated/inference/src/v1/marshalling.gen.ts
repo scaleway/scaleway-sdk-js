@@ -29,7 +29,7 @@ import type {
   NodeType,
   UpdateDeploymentRequest,
   UpdateEndpointRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const unmarshalEndpointPrivateNetworkDetails = (
   data: unknown,
