@@ -66,6 +66,7 @@ export type HostingStatus =
   | 'error'
   | 'locked'
   | 'migrating'
+  | 'updating'
 
 export type ListDatabaseUsersRequestOrderBy = 'username_asc' | 'username_desc'
 
