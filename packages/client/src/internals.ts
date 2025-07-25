@@ -1,15 +1,15 @@
-export { isJSONObject } from './helpers/json'
+export { isJSONObject } from './helpers/json.js'
 export {
   createExponentialBackoffStrategy,
   tryAtIntervals,
   waitForResource,
-} from './internal/async/interval-retrier'
-export { addAsyncHeaderInterceptor } from './internal/interceptors/helpers'
-export { API } from './scw/api'
+} from './internal/async/interval-retrier.js'
+export { addAsyncHeaderInterceptor } from './internal/interceptors/helpers.js'
+export { API } from './scw/api.js'
 
-export { authenticateWithSessionToken } from './scw/auth'
+export { authenticateWithSessionToken } from './scw/auth.js'
 
-export type { DefaultValues } from './scw/client-settings'
+export type { DefaultValues } from './scw/client-settings.js'
 export {
   marshalBlobToScwFile,
   marshalDecimal,
@@ -23,8 +23,8 @@ export {
   unmarshalServiceInfo,
   unmarshalTimeSeries,
   unmarshalTimeSeriesPoint,
-} from './scw/custom-marshalling'
-export type { ServiceInfo } from './scw/custom-types'
+} from './scw/custom-marshalling.js'
+export type { ServiceInfo } from './scw/custom-types.js'
 export {
   resolveOneOf,
   unmarshalDate,
@@ -32,5 +32,5 @@ export {
   unmarshalMapOfObject,
   urlParams,
   validatePathParam,
-} from './helpers/marshalling'
-export { enrichForPagination } from './scw/fetch/resource-paginator'
+} from './helpers/marshalling.js'
+export { enrichForPagination } from './scw/fetch/resource-paginator.js'

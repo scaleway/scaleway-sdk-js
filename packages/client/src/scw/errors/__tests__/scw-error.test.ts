@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import type { JSONObject } from '../../../helpers/json'
-import { ScalewayError } from '../scw-error'
+import type { JSONObject } from '../../../helpers/json.js'
+import { ScalewayError } from '../scw-error.js'
 
 describe('ScalewayError', () => {
   it('initializes from JSON', () => {

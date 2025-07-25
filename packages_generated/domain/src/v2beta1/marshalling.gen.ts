@@ -112,7 +112,7 @@ import type {
   UpdateDNSZoneRecordsRequest,
   UpdateDNSZoneRecordsResponse,
   UpdateDNSZoneRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const unmarshalContactExtensionFRAssociationInfo = (
   data: unknown,

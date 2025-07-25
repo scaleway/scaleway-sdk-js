@@ -32,7 +32,7 @@ import type {
   SqsCredentials,
   SqsInfo,
   SqsPermissions,
-} from './types.gen'
+} from './types.gen.js'
 
 export const unmarshalNatsAccount = (data: unknown): NatsAccount => {
   if (!isJSONObject(data)) {

@@ -1,16 +1,16 @@
 /** List all helpers required by APIs */
-export { isJSONObject } from './helpers/json'
-export { waitForResource } from './internal/async/interval-retrier'
-export type { WaitForOptions } from './internal/async/interval-retrier'
-export { API } from './scw/api'
-export type { DefaultValues } from './scw/client-settings'
+export { isJSONObject } from './helpers/json.js'
+export { waitForResource } from './internal/async/interval-retrier.js'
+export type { WaitForOptions } from './internal/async/interval-retrier.js'
+export { API } from './scw/api.js'
+export type { DefaultValues } from './scw/client-settings.js'
 export type {
   Money,
   ServiceInfo,
   ScwFile,
   TimeSeries,
-} from './scw/custom-types'
-export { Decimal } from './scw/custom-types'
+} from './scw/custom-types.js'
+export { Decimal } from './scw/custom-types.js'
 export {
   marshalScwFile,
   marshalMoney,
@@ -23,9 +23,9 @@ export {
   unmarshalTimeSeries,
   unmarshalTimeSeriesPoint,
   unmarshalDecimal,
-} from './scw/custom-marshalling'
-export { enrichForPagination } from './scw/fetch/resource-paginator'
-export type { Region, Zone } from './scw/locality'
+} from './scw/custom-marshalling.js'
+export { enrichForPagination } from './scw/fetch/resource-paginator.js'
+export type { Region, Zone } from './scw/locality.js'
 export {
   resolveOneOf,
   unmarshalDate,
@@ -33,4 +33,4 @@ export {
   unmarshalMapOfObject,
   urlParams,
   validatePathParam,
-} from './helpers/marshalling'
+} from './helpers/marshalling.js'

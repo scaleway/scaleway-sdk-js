@@ -1,6 +1,6 @@
-import { ConsoleLogger } from './console-logger'
-import type { LogLevel } from './level-resolver'
-import type { Logger } from './logger'
+import { ConsoleLogger } from './console-logger.js'
+import type { LogLevel } from './level-resolver.js'
+import type { Logger } from './logger.js'
 
 let sdkLogger: Logger = new ConsoleLogger('silent')
 

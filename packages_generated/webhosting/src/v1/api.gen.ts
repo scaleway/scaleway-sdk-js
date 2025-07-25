@@ -13,7 +13,7 @@ import {
 import {
   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_WEBHOSTING,
   HOSTING_TRANSIENT_STATUSES as HOSTING_TRANSIENT_STATUSES_WEBHOSTING,
-} from './content.gen'
+} from './content.gen.js'
 import {
   marshalDatabaseApiAssignDatabaseUserRequest,
   marshalDatabaseApiChangeDatabaseUserPasswordRequest,
@@ -49,7 +49,7 @@ import {
   unmarshalResourceSummary,
   unmarshalSearchDomainsResponse,
   unmarshalSession,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   CheckUserOwnsDomainResponse,
   ControlPanelApiListControlPanelsRequest,
@@ -106,7 +106,7 @@ import type {
   SearchDomainsResponse,
   Session,
   WebsiteApiListWebsitesRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

@@ -10,7 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_REDIS } from './content.gen'
+import { CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_REDIS } from './content.gen.js'
 import {
   marshalAddAclRulesRequest,
   marshalAddClusterSettingsRequest,
@@ -34,7 +34,7 @@ import {
   unmarshalListNodeTypesResponse,
   unmarshalSetAclRulesResponse,
   unmarshalSetEndpointsResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   ACLRule,
   AddAclRulesRequest,
@@ -71,7 +71,7 @@ import type {
   SetEndpointsResponse,
   UpdateClusterRequest,
   UpdateEndpointRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

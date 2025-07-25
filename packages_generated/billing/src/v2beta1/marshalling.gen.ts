@@ -17,7 +17,7 @@ import type {
   ListInvoicesResponse,
   ListTaxesResponse,
   ListTaxesResponseTax,
-} from './types.gen'
+} from './types.gen.js'
 
 const unmarshalDiscountCoupon = (data: unknown): DiscountCoupon => {
   if (!isJSONObject(data)) {

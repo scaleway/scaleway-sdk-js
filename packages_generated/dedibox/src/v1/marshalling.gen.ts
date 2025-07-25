@@ -131,7 +131,7 @@ import type {
   UpdateServerBackupRequest,
   UpdateServerRequest,
   UpdateServerTagsRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 export const unmarshalIP = (data: unknown): IP => {
   if (!isJSONObject(data)) {

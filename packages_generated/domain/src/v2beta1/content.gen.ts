@@ -8,7 +8,7 @@ import type {
   HostStatus,
   SSLCertificateStatus,
   TaskStatus,
-} from './types.gen'
+} from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link DNSZoneStatus}. */
 export const DNS_ZONE_TRANSIENT_STATUSES: DNSZoneStatus[] = ['pending']

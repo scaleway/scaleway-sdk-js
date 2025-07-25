@@ -1,16 +1,15 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
 import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_INFERENCE } from './content.gen'
+import { DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_INFERENCE } from './content.gen.js'
 import {
   marshalAddDeploymentACLRulesRequest,
   marshalCreateDeploymentRequest,
@@ -28,7 +27,7 @@ import {
   unmarshalListNodeTypesResponse,
   unmarshalModel,
   unmarshalSetDeploymentACLRulesResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   AddDeploymentACLRulesRequest,
   AddDeploymentACLRulesResponse,
@@ -57,7 +56,7 @@ import type {
   SetDeploymentACLRulesResponse,
   UpdateDeploymentRequest,
   UpdateEndpointRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

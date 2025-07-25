@@ -1,5 +1,5 @@
-import type { JSONObject } from '../../../helpers/json'
-import { ScalewayError } from '../scw-error'
+import type { JSONObject } from '../../../helpers/json.js'
+import { ScalewayError } from '../scw-error.js'
 
 /**
  * TransientState error happens when trying to perform an action on a resource in a transient state.

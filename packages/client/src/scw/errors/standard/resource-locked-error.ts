@@ -1,5 +1,5 @@
-import type { JSONObject } from '../../../helpers/json'
-import { ScalewayError } from '../scw-error'
+import type { JSONObject } from '../../../helpers/json.js'
+import { ScalewayError } from '../scw-error.js'
 
 /**
  * ResourceLocked error happens when a resource is locked by trust and safety.

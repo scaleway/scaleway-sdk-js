@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import { enableConsoleLogger, getLogger, setLogger } from '..'
-import { ConsoleLogger } from '../console-logger'
-import type { LogLevel } from '../level-resolver'
+import { ConsoleLogger } from '../console-logger.js'
+import type { LogLevel } from '../level-resolver.js'
 
 const makeCallbackConsole = (
   onMessage: (str: string) => void,

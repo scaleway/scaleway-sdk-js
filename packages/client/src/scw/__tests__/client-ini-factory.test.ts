@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import type { ClientConfig } from '../client-ini-factory'
+import type { ClientConfig } from '../client-ini-factory.js'
 import {
   withAdditionalInterceptors,
   withDefaultPageSize,
@@ -8,9 +8,9 @@ import {
   withProfile,
   withUserAgent,
   withUserAgentSuffix,
-} from '../client-ini-factory'
-import type { Profile } from '../client-ini-profile'
-import type { Settings } from '../client-settings'
+} from '../client-ini-factory.js'
+import type { Profile } from '../client-ini-profile.js'
+import type { Settings } from '../client-settings.js'
 
 const EMPTY_PROFILE: Profile = {}
 

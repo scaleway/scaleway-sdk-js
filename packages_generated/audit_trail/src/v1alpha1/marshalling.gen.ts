@@ -27,7 +27,7 @@ import type {
   Resource,
   SecretManagerSecretInfo,
   SecretManagerSecretVersionInfo,
-} from './types.gen'
+} from './types.gen.js'
 
 const unmarshalAccountOrganizationInfo = (
   data: unknown,

@@ -3,9 +3,9 @@
 export {
   API,
   ZonedAPI,
-} from './api.gen'
-export * from './content.gen'
-export * from './marshalling.gen'
+} from './api.gen.js'
+export * from './content.gen.js'
+export * from './marshalling.gen.js'
 export type {
   Acl,
   AclAction,
@@ -185,5 +185,5 @@ export type {
   ZonedApiUpdateLbRequest,
   ZonedApiUpdateRouteRequest,
   ZonedApiUpdateSubscriberRequest,
-} from './types.gen'
-export * as ValidationRules from './validation-rules.gen'
+} from './types.gen.js'
+export * as ValidationRules from './validation-rules.gen.js'

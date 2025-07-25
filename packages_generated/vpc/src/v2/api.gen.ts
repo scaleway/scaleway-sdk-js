@@ -29,7 +29,7 @@ import {
   unmarshalRoute,
   unmarshalSetAclResponse,
   unmarshalVPC,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   AddSubnetsRequest,
   AddSubnetsResponse,
@@ -63,7 +63,7 @@ import type {
   UpdateRouteRequest,
   UpdateVPCRequest,
   VPC,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

@@ -9,9 +9,9 @@ export {
   MailAccountAPI,
   OfferAPI,
   WebsiteAPI,
-} from './api.gen'
-export * from './content.gen'
-export * from './marshalling.gen'
+} from './api.gen.js'
+export * from './content.gen.js'
+export * from './marshalling.gen.js'
 export type {
   AutoConfigDomainDns,
   CheckUserOwnsDomainResponse,
@@ -106,5 +106,5 @@ export type {
   SyncDomainDnsRecordsRequestRecord,
   Website,
   WebsiteApiListWebsitesRequest,
-} from './types.gen'
-export * as ValidationRules from './validation-rules.gen'
+} from './types.gen.js'
+export * as ValidationRules from './validation-rules.gen.js'

@@ -10,7 +10,7 @@ import type {
   ServerInstallStatus,
   ServerStatus,
   ServiceProvisioningStatus,
-} from './types.gen'
+} from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link BMCAccessStatus}. */
 export const BMC_ACCESS_TRANSIENT_STATUSES: BMCAccessStatus[] = [

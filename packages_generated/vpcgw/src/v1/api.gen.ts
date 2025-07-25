@@ -13,7 +13,7 @@ import {
 import {
   GATEWAY_NETWORK_TRANSIENT_STATUSES as GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW,
   GATEWAY_TRANSIENT_STATUSES as GATEWAY_TRANSIENT_STATUSES_VPCGW,
-} from './content.gen'
+} from './content.gen.js'
 import {
   marshalCreateDHCPEntryRequest,
   marshalCreateDHCPRequest,
@@ -45,7 +45,7 @@ import {
   unmarshalPATRule,
   unmarshalSetDHCPEntriesResponse,
   unmarshalSetPATRulesResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   CreateDHCPEntryRequest,
   CreateDHCPRequest,
@@ -99,7 +99,7 @@ import type {
   UpdateIPRequest,
   UpdatePATRuleRequest,
   UpgradeGatewayRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

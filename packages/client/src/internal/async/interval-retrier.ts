@@ -1,4 +1,4 @@
-import { sleep } from './sleep'
+import { sleep } from './sleep.js'
 
 const DEFAULT_TIMEOUT_SECONDS = 300
 const DEFAULT_MIN_DELAY_SECONDS = 1

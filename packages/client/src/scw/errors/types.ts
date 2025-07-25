@@ -1,4 +1,4 @@
-import { isJSONObject } from '../../helpers/json'
+import { isJSONObject } from '../../helpers/json.js'
 
 /**
  * Verifies the object is a record of string to string[].

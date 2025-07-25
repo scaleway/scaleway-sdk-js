@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { API } from '../api'
-import { createClient } from '../client'
+import { API } from '../api.js'
+import { createClient } from '../client.js'
 
 class CustomAPI extends API {
   getBaseURL = (): string => {
