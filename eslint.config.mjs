@@ -49,6 +49,7 @@ export default [
       'import/no-default-export': 'error',
       'no-await-in-loop': 'off',
       '@typescript-eslint/no-namespace': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
     },
   },
 
@@ -66,6 +67,7 @@ export default [
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/consistent-type-definitions': 'warn',
       '@typescript-eslint/ban-types': 'warn',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
     },
   })),
 
