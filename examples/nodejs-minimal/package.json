@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@scaleway/configuration-loader": "^1.0",
-    "@scaleway/sdk": "^2.0"
+    "@scaleway/sdk": "^2.0",
+    "@scaleway/sdk-client": "^2.0"
   },
   "devDependencies": {
     "@types/node": "20.17.46",

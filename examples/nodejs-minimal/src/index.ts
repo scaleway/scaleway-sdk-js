@@ -1,6 +1,8 @@
+// Correct imports for Scaleway SDK v2.27.0+
 import * as http from 'http'
 import { loadProfileFromConfigurationFile } from '@scaleway/configuration-loader'
-import { Registry, createClient } from '@scaleway/sdk'
+import { Registry } from '@scaleway/sdk'
+import { createClient } from '@scaleway/sdk-client'
 
 const hostname = '127.0.0.1'
 const port = 3000
