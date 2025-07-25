@@ -14,7 +14,7 @@
     "@scaleway/sdk-client": "^2.0"
   },
   "devDependencies": {
-    "@types/node": "20.17.46",
+    "@types/node": "20.19.9",
     "typescript": "5.8.3"
   }
 }
