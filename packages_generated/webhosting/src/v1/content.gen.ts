@@ -18,4 +18,5 @@ export const HOSTING_TRANSIENT_STATUSES: HostingStatus[] = [
   'delivering',
   'deleting',
   'migrating',
+  'updating',
 ]

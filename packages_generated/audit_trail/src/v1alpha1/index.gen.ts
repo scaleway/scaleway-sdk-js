@@ -4,8 +4,11 @@ export { API } from './api.gen.js'
 export * from './marshalling.gen.js'
 export type {
   AccountOrganizationInfo,
+  AccountProjectInfo,
   AccountUserInfo,
   AppleSiliconServerInfo,
+  BaremetalServerInfo,
+  BaremetalSettingInfo,
   Event,
   EventPrincipal,
   InstanceServerInfo,

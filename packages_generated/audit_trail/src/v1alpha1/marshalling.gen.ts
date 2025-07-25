@@ -7,8 +7,11 @@ import {
 } from '@scaleway/sdk-client'
 import type {
   AccountOrganizationInfo,
+  AccountProjectInfo,
   AccountUserInfo,
   AppleSiliconServerInfo,
+  BaremetalServerInfo,
+  BaremetalSettingInfo,
   Event,
   EventPrincipal,
   InstanceServerInfo,
@@ -38,6 +41,18 @@ const unmarshalAccountOrganizationInfo = (
   return {} as AccountOrganizationInfo
 }
 
+const unmarshalAccountProjectInfo = (data: unknown): AccountProjectInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AccountProjectInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    description: data.description,
+  } as AccountProjectInfo
+}
+
 const unmarshalAccountUserInfo = (data: unknown): AccountUserInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -64,6 +79,31 @@ const unmarshalAppleSiliconServerInfo = (
     id: data.id,
     name: data.name,
   } as AppleSiliconServerInfo
+}
+
+const unmarshalBaremetalServerInfo = (data: unknown): BaremetalServerInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'BaremetalServerInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    description: data.description,
+    tags: data.tags,
+  } as BaremetalServerInfo
+}
+
+const unmarshalBaremetalSettingInfo = (data: unknown): BaremetalSettingInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'BaremetalSettingInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    type: data.type,
+  } as BaremetalSettingInfo
 }
 
 const unmarshalInstanceServerInfo = (data: unknown): InstanceServerInfo => {
@@ -188,11 +228,20 @@ export const unmarshalResource = (data: unknown): Resource => {
     accountOrganizationInfo: data.account_organization_info
       ? unmarshalAccountOrganizationInfo(data.account_organization_info)
       : undefined,
+    accountProjectInfo: data.account_project_info
+      ? unmarshalAccountProjectInfo(data.account_project_info)
+      : undefined,
     accountUserInfo: data.account_user_info
       ? unmarshalAccountUserInfo(data.account_user_info)
       : undefined,
     appleSiliconServerInfo: data.apple_silicon_server_info
       ? unmarshalAppleSiliconServerInfo(data.apple_silicon_server_info)
+      : undefined,
+    baremetalServerInfo: data.baremetal_server_info
+      ? unmarshalBaremetalServerInfo(data.baremetal_server_info)
+      : undefined,
+    baremetalSettingInfo: data.baremetal_setting_info
+      ? unmarshalBaremetalSettingInfo(data.baremetal_setting_info)
       : undefined,
     createdAt: unmarshalDate(data.created_at),
     deletedAt: unmarshalDate(data.deleted_at),

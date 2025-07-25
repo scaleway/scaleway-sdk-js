@@ -1,14 +1,15 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  API as ParentAPI,
   enrichForPagination,
+  API as ParentAPI,
   toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_WEBHOSTING,
   HOSTING_TRANSIENT_STATUSES as HOSTING_TRANSIENT_STATUSES_WEBHOSTING,
@@ -36,8 +37,8 @@ import {
   unmarshalFtpAccount,
   unmarshalHosting,
   unmarshalListControlPanelsResponse,
-  unmarshalListDatabaseUsersResponse,
   unmarshalListDatabasesResponse,
+  unmarshalListDatabaseUsersResponse,
   unmarshalListFtpAccountsResponse,
   unmarshalListHostingsResponse,
   unmarshalListMailAccountsResponse,
@@ -61,8 +62,8 @@ import type {
   DatabaseApiDeleteDatabaseUserRequest,
   DatabaseApiGetDatabaseRequest,
   DatabaseApiGetDatabaseUserRequest,
-  DatabaseApiListDatabaseUsersRequest,
   DatabaseApiListDatabasesRequest,
+  DatabaseApiListDatabaseUsersRequest,
   DatabaseApiUnassignDatabaseUserRequest,
   DatabaseUser,
   DnsApiCheckUserOwnsDomainRequest,
@@ -87,8 +88,8 @@ import type {
   HostingApiResetHostingPasswordRequest,
   HostingApiUpdateHostingRequest,
   ListControlPanelsResponse,
-  ListDatabaseUsersResponse,
   ListDatabasesResponse,
+  ListDatabaseUsersResponse,
   ListFtpAccountsResponse,
   ListHostingsResponse,
   ListMailAccountsResponse,

@@ -189,48 +189,6 @@ export const unmarshalIP = (data: unknown): IP => {
   } as IP
 }
 
-const unmarshalOSOSField = (data: unknown): OSOSField => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'OSOSField' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    defaultValue: data.default_value,
-    editable: data.editable,
-    required: data.required,
-  } as OSOSField
-}
-
-export const unmarshalOS = (data: unknown): OS => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'OS' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    allowed: data.allowed,
-    customPartitioningSupported: data.custom_partitioning_supported,
-    enabled: data.enabled,
-    id: data.id,
-    licenseRequired: data.license_required,
-    logoUrl: data.logo_url,
-    name: data.name,
-    password: data.password ? unmarshalOSOSField(data.password) : undefined,
-    servicePassword: data.service_password
-      ? unmarshalOSOSField(data.service_password)
-      : undefined,
-    serviceUser: data.service_user
-      ? unmarshalOSOSField(data.service_user)
-      : undefined,
-    ssh: data.ssh ? unmarshalOSOSField(data.ssh) : undefined,
-    user: data.user ? unmarshalOSOSField(data.user) : undefined,
-    version: data.version,
-  } as OS
-}
-
 const unmarshalCertificationOption = (data: unknown): CertificationOption => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -287,6 +245,144 @@ const unmarshalRemoteAccessOption = (data: unknown): RemoteAccessOption => {
   }
 
   return {} as RemoteAccessOption
+}
+
+const unmarshalServerInstall = (data: unknown): ServerInstall => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerInstall' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    hostname: data.hostname,
+    osId: data.os_id,
+    partitioningSchema: data.partitioning_schema
+      ? unmarshalSchema(data.partitioning_schema)
+      : undefined,
+    serviceUrl: data.service_url,
+    serviceUser: data.service_user,
+    sshKeyIds: data.ssh_key_ids,
+    status: data.status,
+    user: data.user,
+  } as ServerInstall
+}
+
+const unmarshalServerOption = (data: unknown): ServerOption => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerOption' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    certification: data.certification
+      ? unmarshalCertificationOption(data.certification)
+      : undefined,
+    expiresAt: unmarshalDate(data.expires_at),
+    id: data.id,
+    license: data.license ? unmarshalLicenseOption(data.license) : undefined,
+    manageable: data.manageable,
+    name: data.name,
+    privateNetwork: data.private_network
+      ? unmarshalPrivateNetworkOption(data.private_network)
+      : undefined,
+    publicBandwidth: data.public_bandwidth
+      ? unmarshalPublicBandwidthOption(data.public_bandwidth)
+      : undefined,
+    remoteAccess: data.remote_access
+      ? unmarshalRemoteAccessOption(data.remote_access)
+      : undefined,
+    status: data.status,
+  } as ServerOption
+}
+
+const unmarshalServerRescueServer = (data: unknown): ServerRescueServer => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerRescueServer' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    password: data.password,
+    user: data.user,
+  } as ServerRescueServer
+}
+
+export const unmarshalServer = (data: unknown): Server => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Server' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    bootType: data.boot_type,
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description,
+    domain: data.domain,
+    id: data.id,
+    install: data.install ? unmarshalServerInstall(data.install) : undefined,
+    ips: unmarshalArrayOfObject(data.ips, unmarshalIP),
+    name: data.name,
+    offerId: data.offer_id,
+    offerName: data.offer_name,
+    options: unmarshalArrayOfObject(data.options, unmarshalServerOption),
+    organizationId: data.organization_id,
+    pingStatus: data.ping_status,
+    projectId: data.project_id,
+    protected: data.protected,
+    rescueServer: data.rescue_server
+      ? unmarshalServerRescueServer(data.rescue_server)
+      : undefined,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone,
+  } as Server
+}
+
+const unmarshalOSOSField = (data: unknown): OSOSField => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OSOSField' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    defaultValue: data.default_value,
+    editable: data.editable,
+    required: data.required,
+  } as OSOSField
+}
+
+export const unmarshalOS = (data: unknown): OS => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OS' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    allowed: data.allowed,
+    customPartitioningSupported: data.custom_partitioning_supported,
+    enabled: data.enabled,
+    id: data.id,
+    licenseRequired: data.license_required,
+    logoUrl: data.logo_url,
+    name: data.name,
+    password: data.password ? unmarshalOSOSField(data.password) : undefined,
+    servicePassword: data.service_password
+      ? unmarshalOSOSField(data.service_password)
+      : undefined,
+    serviceUser: data.service_user
+      ? unmarshalOSOSField(data.service_user)
+      : undefined,
+    ssh: data.ssh ? unmarshalOSOSField(data.ssh) : undefined,
+    user: data.user ? unmarshalOSOSField(data.user) : undefined,
+    version: data.version,
+  } as OS
 }
 
 const unmarshalCPU = (data: unknown): CPU => {
@@ -498,102 +594,6 @@ export const unmarshalServerPrivateNetwork = (
   } as ServerPrivateNetwork
 }
 
-const unmarshalServerInstall = (data: unknown): ServerInstall => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ServerInstall' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    hostname: data.hostname,
-    osId: data.os_id,
-    partitioningSchema: data.partitioning_schema
-      ? unmarshalSchema(data.partitioning_schema)
-      : undefined,
-    serviceUrl: data.service_url,
-    serviceUser: data.service_user,
-    sshKeyIds: data.ssh_key_ids,
-    status: data.status,
-    user: data.user,
-  } as ServerInstall
-}
-
-const unmarshalServerOption = (data: unknown): ServerOption => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ServerOption' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    certification: data.certification
-      ? unmarshalCertificationOption(data.certification)
-      : undefined,
-    expiresAt: unmarshalDate(data.expires_at),
-    id: data.id,
-    license: data.license ? unmarshalLicenseOption(data.license) : undefined,
-    manageable: data.manageable,
-    name: data.name,
-    privateNetwork: data.private_network
-      ? unmarshalPrivateNetworkOption(data.private_network)
-      : undefined,
-    publicBandwidth: data.public_bandwidth
-      ? unmarshalPublicBandwidthOption(data.public_bandwidth)
-      : undefined,
-    remoteAccess: data.remote_access
-      ? unmarshalRemoteAccessOption(data.remote_access)
-      : undefined,
-    status: data.status,
-  } as ServerOption
-}
-
-const unmarshalServerRescueServer = (data: unknown): ServerRescueServer => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ServerRescueServer' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    password: data.password,
-    user: data.user,
-  } as ServerRescueServer
-}
-
-export const unmarshalServer = (data: unknown): Server => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Server' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    bootType: data.boot_type,
-    createdAt: unmarshalDate(data.created_at),
-    description: data.description,
-    domain: data.domain,
-    id: data.id,
-    install: data.install ? unmarshalServerInstall(data.install) : undefined,
-    ips: unmarshalArrayOfObject(data.ips, unmarshalIP),
-    name: data.name,
-    offerId: data.offer_id,
-    offerName: data.offer_name,
-    options: unmarshalArrayOfObject(data.options, unmarshalServerOption),
-    organizationId: data.organization_id,
-    pingStatus: data.ping_status,
-    projectId: data.project_id,
-    protected: data.protected,
-    rescueServer: data.rescue_server
-      ? unmarshalServerRescueServer(data.rescue_server)
-      : undefined,
-    status: data.status,
-    tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
-    zone: data.zone,
-  } as Server
-}
-
 export const unmarshalSetting = (data: unknown): Setting => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -776,13 +776,6 @@ export const unmarshalSetServerPrivateNetworksResponse = (
   } as SetServerPrivateNetworksResponse
 }
 
-export const marshalAddOptionServerRequest = (
-  request: AddOptionServerRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  expires_at: request.expiresAt,
-})
-
 const marshalSchemaPartition = (
   request: SchemaPartition,
   defaults: DefaultValues,
@@ -897,6 +890,13 @@ export const marshalCreateServerRequest = (
       value: request.organizationId,
     },
   ]),
+})
+
+export const marshalAddOptionServerRequest = (
+  request: AddOptionServerRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  expires_at: request.expiresAt,
 })
 
 export const marshalInstallServerRequest = (

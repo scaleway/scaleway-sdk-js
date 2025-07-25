@@ -712,7 +712,7 @@ export interface Frontend {
    */
   connectionRateLimit?: number
   /**
-   * Defines wether to enable access logs on the frontend.
+   * Defines whether to enable access logs on the frontend.
    */
   enableAccessLogs: boolean
 }
@@ -813,7 +813,7 @@ export interface Acl {
    */
   name: string
   /**
-   * ACL match filter object. One of `ip_subnet` or `http_filter` & `http_filter_value` are required.
+   * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` & `http_filter_value` are required.
    */
   match?: AclMatch
   /**
@@ -947,7 +947,7 @@ export interface AclSpec {
    */
   action: AclAction
   /**
-   * ACL match filter object. One of `ip_subnet` or `http_filter` and `http_filter_value` are required.
+   * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` and `http_filter_value` are required.
    */
   match?: AclMatch
   /**
@@ -1033,7 +1033,7 @@ export type CreateAclRequest = {
    */
   action: AclAction
   /**
-   * ACL match filter object. One of `ip_subnet` or `http_filter` & `http_filter_value` are required.
+   * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` & `http_filter_value` are required.
    */
   match?: AclMatch
   /**
@@ -1210,7 +1210,7 @@ export type CreateFrontendRequest = {
    */
   connectionRateLimit?: number
   /**
-   * Defines wether to enable access logs on the frontend.
+   * Defines whether to enable access logs on the frontend.
    */
   enableAccessLogs: boolean
 }
@@ -2092,7 +2092,7 @@ export type UpdateAclRequest = {
    */
   action: AclAction
   /**
-   * ACL match filter object. One of `ip_subnet` or `http_filter` & `http_filter_value` are required.
+   * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` & `http_filter_value` are required.
    */
   match?: AclMatch
   /**
@@ -2249,7 +2249,7 @@ export type UpdateFrontendRequest = {
    */
   connectionRateLimit?: number
   /**
-   * Defines wether to enable access logs on the frontend.
+   * Defines whether to enable access logs on the frontend.
    */
   enableAccessLogs?: boolean
 }
@@ -2500,7 +2500,7 @@ export type ZonedApiCreateAclRequest = {
    */
   action: AclAction
   /**
-   * ACL match filter object. One of `ip_subnet` or `http_filter` & `http_filter_value` are required.
+   * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` & `http_filter_value` are required.
    */
   match?: AclMatch
   /**
@@ -2677,7 +2677,7 @@ export type ZonedApiCreateFrontendRequest = {
    */
   connectionRateLimit?: number
   /**
-   * Defines wether to enable access logs on the frontend.
+   * Defines whether to enable access logs on the frontend.
    */
   enableAccessLogs: boolean
 }
@@ -3435,7 +3435,7 @@ export type ZonedApiUpdateAclRequest = {
    */
   action: AclAction
   /**
-   * ACL match filter object. One of `ip_subnet` or `http_filter` & `http_filter_value` are required.
+   * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` & `http_filter_value` are required.
    */
   match?: AclMatch
   /**
@@ -3592,7 +3592,7 @@ export type ZonedApiUpdateFrontendRequest = {
    */
   connectionRateLimit?: number
   /**
-   * Defines wether to enable access logs on the frontend.
+   * Defines whether to enable access logs on the frontend.
    */
   enableAccessLogs?: boolean
 }

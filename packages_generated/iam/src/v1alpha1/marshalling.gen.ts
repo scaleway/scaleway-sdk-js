@@ -308,7 +308,7 @@ export const unmarshalUser = (data: unknown): User => {
     mfa: data.mfa,
     organizationId: data.organization_id,
     phoneNumber: data.phone_number,
-    status: data.status,
+    status: data.status ? data.status : undefined,
     tags: data.tags,
     twoFactorEnabled: data.two_factor_enabled,
     type: data.type,
