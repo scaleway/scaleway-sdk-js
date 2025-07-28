@@ -58,6 +58,16 @@ export const DeleteUserRequest = {
   },
 }
 
+export const ListDatabasesRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const ListInstancesRequest = {
   name: {
     maxLength: 255,

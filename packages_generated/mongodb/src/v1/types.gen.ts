@@ -13,6 +13,8 @@ export type InstanceStatus =
   | 'locked'
   | 'snapshotting'
 
+export type ListDatabasesRequestOrderBy = 'name_asc' | 'name_desc'
+
 export type ListInstancesRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -178,6 +180,10 @@ export interface EndpointSpec {
    * One-of ('details'): at most one of 'publicNetwork', 'privateNetwork' could be set.
    */
   privateNetwork?: EndpointSpecPrivateNetworkDetails
+}
+
+export interface Database {
+  name: string
 }
 
 export interface Instance {
@@ -530,6 +536,34 @@ export type GetSnapshotRequest = {
    * UUID of the snapshot.
    */
   snapshotId: string
+}
+
+export type ListDatabasesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * UUID of the Database Instance.
+   */
+  instanceId: string
+  /**
+   * Criteria to use when requesting user listing.
+   */
+  orderBy?: ListDatabasesRequestOrderBy
+  page?: number
+  pageSize?: number
+}
+
+export interface ListDatabasesResponse {
+  /**
+   * List of the databases.
+   */
+  databases: Database[]
+  /**
+   * Total count of databases present on a Database Instance.
+   */
+  totalCount: number
 }
 
 export type ListInstancesRequest = {

@@ -27,6 +27,7 @@ import {
   marshalUpgradeInstanceRequest,
   unmarshalEndpoint,
   unmarshalInstance,
+  unmarshalListDatabasesResponse,
   unmarshalListInstancesResponse,
   unmarshalListNodeTypesResponse,
   unmarshalListSnapshotsResponse,
@@ -49,6 +50,8 @@ import type {
   GetInstanceRequest,
   GetSnapshotRequest,
   Instance,
+  ListDatabasesRequest,
+  ListDatabasesResponse,
   ListInstancesRequest,
   ListInstancesResponse,
   ListNodeTypesRequest,
@@ -533,6 +536,32 @@ export class API extends ParentAPI {
       },
       unmarshalUser,
     )
+
+  protected pageOfListDatabases = (request: Readonly<ListDatabasesRequest>) =>
+    this.client.fetch<ListDatabasesResponse>(
+      {
+        method: 'GET',
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/databases`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListDatabasesResponse,
+    )
+
+  /**
+   * List databases in a Database Instance. List all databases of a given Database Instance.
+   *
+   * @param request - The request {@link ListDatabasesRequest}
+   * @returns A Promise of ListDatabasesResponse
+   */
+  listDatabases = (request: Readonly<ListDatabasesRequest>) =>
+    enrichForPagination('databases', this.pageOfListDatabases, request)
 
   /**
    * Delete a Database Instance endpoint. Delete the endpoint of a Database Instance. You must specify the `endpoint_id` parameter of the endpoint you want to delete. Note that you might need to update any environment configurations that point to the deleted endpoint.
