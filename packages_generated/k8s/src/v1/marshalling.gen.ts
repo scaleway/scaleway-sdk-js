@@ -231,9 +231,12 @@ export const unmarshalCluster = (data: unknown): Cluster => {
       ? unmarshalClusterOpenIDConnectConfig(data.open_id_connect_config)
       : undefined,
     organizationId: data.organization_id,
+    podCidr: data.pod_cidr,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
     region: data.region,
+    serviceCidr: data.service_cidr,
+    serviceDnsIp: data.service_dns_ip,
     status: data.status,
     tags: data.tags,
     type: data.type,
@@ -694,6 +697,7 @@ export const marshalCreateClusterRequest = (
           defaults,
         )
       : undefined,
+  pod_cidr: request.podCidr,
   pools:
     request.pools !== undefined
       ? request.pools.map(elt =>
@@ -701,6 +705,8 @@ export const marshalCreateClusterRequest = (
         )
       : undefined,
   private_network_id: request.privateNetworkId,
+  service_cidr: request.serviceCidr,
+  service_dns_ip: request.serviceDnsIp,
   tags: request.tags,
   type: request.type,
   version: request.version,

@@ -13,6 +13,7 @@ import type {
   CreateInstanceRequest,
   CreateSnapshotRequest,
   CreateUserRequest,
+  Database,
   Endpoint,
   EndpointPrivateNetworkDetails,
   EndpointPublicNetworkDetails,
@@ -21,6 +22,7 @@ import type {
   EndpointSpecPublicNetworkDetails,
   Instance,
   InstanceSnapshotSchedule,
+  ListDatabasesResponse,
   ListInstancesResponse,
   ListNodeTypesResponse,
   ListSnapshotsResponse,
@@ -193,6 +195,33 @@ export const unmarshalUser = (data: unknown): User => {
     name: data.name,
     roles: unmarshalArrayOfObject(data.roles, unmarshalUserRole),
   } as User
+}
+
+const unmarshalDatabase = (data: unknown): Database => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Database' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+  } as Database
+}
+
+export const unmarshalListDatabasesResponse = (
+  data: unknown,
+): ListDatabasesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDatabasesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    databases: unmarshalArrayOfObject(data.databases, unmarshalDatabase),
+    totalCount: data.total_count,
+  } as ListDatabasesResponse
 }
 
 export const unmarshalListInstancesResponse = (

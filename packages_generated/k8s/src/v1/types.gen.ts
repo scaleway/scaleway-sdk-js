@@ -734,6 +734,18 @@ export interface Cluster {
    * @deprecated Defines whether all pools are migrated to new images.
    */
   newImagesEnabled?: boolean
+  /**
+   * Subnet used for the Pod CIDR.
+   */
+  podCidr: string
+  /**
+   * Subnet used for the Service CIDR.
+   */
+  serviceCidr: string
+  /**
+   * IP used for the DNS Service.
+   */
+  serviceDnsIp: string
 }
 
 export interface Node {
@@ -993,6 +1005,18 @@ export type CreateClusterRequest = {
    * Private network ID for internal cluster communication (cannot be changed later).
    */
   privateNetworkId?: string
+  /**
+   * Subnet used for the Pod CIDR (cannot be changed later).
+   */
+  podCidr?: string
+  /**
+   * Subnet used for the Service CIDR (cannot be changed later).
+   */
+  serviceCidr?: string
+  /**
+   * IP used for the DNS Service (cannot be changes later). If unset, default to Service CIDR's network + 10.
+   */
+  serviceDnsIp?: string
 }
 
 export type CreateExternalNodeRequest = {
