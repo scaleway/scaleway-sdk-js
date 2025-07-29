@@ -1,0 +1,28 @@
+{
+  "name": "formatting",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@10.7.0",
+  "engines": {
+    "yarn": "1.22.x",
+    "node": ">=18.x",
+    "pnpm": ">=9.x"
+  },
+  "scripts": {
+    "format": "pnpm biome check  --linter-enabled=false --write ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.0.6",
+    "@typescript-eslint/eslint-plugin": "7.18.0",
+    "@typescript-eslint/parser": "8.26.1",
+    "@types/node": "20.17.24",
+    "eslint": "8.57.1",
+    "eslint-import-resolver-typescript": "3.8.7",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-unused-imports": "3.2.0",
+    "typescript": "5.8.2",
+    "tsx": "4.19.3"
+  }
+}
