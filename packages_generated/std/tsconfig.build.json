@@ -4,7 +4,8 @@
     "noEmit": false,
     "emitDeclarationOnly": true,
     "rootDir": "src",
-    "outDir": "dist"
+    "outDir": "dist",
+    "noUnusedLocals": false
   },
   "exclude": [
     "dist/*",

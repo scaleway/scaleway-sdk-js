@@ -48,4 +48,7 @@ publish: install-dependencies
 
 format-generated:
 	./formatting/run.sh -i "./packages_generated" -f "new-package"
-	
+
+generate:
+	buf generate --timeout 0
+	make format
