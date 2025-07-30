@@ -13,7 +13,7 @@ import {
 import {
   SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES_APPLESILICON,
   SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_APPLESILICON,
-} from './content.gen'
+} from './content.gen.js'
 import {
   marshalBatchCreateServersRequest,
   marshalCreateServerRequest,
@@ -34,7 +34,7 @@ import {
   unmarshalServerType,
   unmarshalSetServerPrivateNetworksResponse,
   unmarshalStartConnectivityDiagnosticResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   BatchCreateServersRequest,
   BatchCreateServersResponse,
@@ -67,7 +67,7 @@ import type {
   StartConnectivityDiagnosticRequest,
   StartConnectivityDiagnosticResponse,
   UpdateServerRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

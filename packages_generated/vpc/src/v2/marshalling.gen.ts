@@ -29,7 +29,7 @@ import type {
   UpdateRouteRequest,
   UpdateVPCRequest,
   VPC,
-} from './types.gen'
+} from './types.gen.js'
 
 const unmarshalSubnet = (data: unknown): Subnet => {
   if (!isJSONObject(data)) {

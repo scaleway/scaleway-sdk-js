@@ -13,7 +13,7 @@ import type {
   PrivateNetworkApiSetServerPrivateNetworksRequest,
   ServerPrivateNetwork,
   SetServerPrivateNetworksResponse,
-} from './types.gen'
+} from './types.gen.js'
 
 export const unmarshalServerPrivateNetwork = (
   data: unknown,

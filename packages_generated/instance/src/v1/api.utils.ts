@@ -4,14 +4,14 @@ import {
   tryAtIntervals,
   validatePathParam,
 } from '@scaleway/sdk-client'
-import { API } from './api.gen'
+import { API } from './api.gen.js'
 import {
   IMAGE_TRANSIENT_STATUSES,
   PRIVATE_NIC_TRANSIENT_STATUSES,
   SERVER_TRANSIENT_STATUSES,
   SNAPSHOT_TRANSIENT_STATUSES,
   VOLUME_TRANSIENT_STATUSES,
-} from './content.gen'
+} from './content.gen.js'
 import type {
   CreateServerRequest,
   GetImageRequest,
@@ -28,7 +28,7 @@ import type {
   UpdateServerRequest,
   Volume,
   VolumeServerTemplate,
-} from './types.gen'
+} from './types.gen.js'
 import type {
   AttachVolumeRequest,
   AttachVolumeResponse,
@@ -36,7 +36,7 @@ import type {
   DetachVolumeResponse,
   GetServerUserDataRequest,
   SetServerUserDataRequest,
-} from './types.utils'
+} from './types.utils.js'
 
 const validateNotUndefined = <T>(obj: T | undefined): T => {
   if (obj === undefined) throw new TypeError(`object was found undefined`)

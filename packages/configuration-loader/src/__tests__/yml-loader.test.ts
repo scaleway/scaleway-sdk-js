@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import {
   convertYamlToConfiguration,
   loadConfigurationFromFile,
-} from '../yml-loader'
+} from '../yml-loader.js'
 
 describe('convertYamlToConfiguration', () => {
   it('loads nothing from non-string object', () => {

@@ -2,7 +2,7 @@ import { describe, expect, it, test } from 'vitest'
 import {
   assertValidAuthenticationSecrets,
   hasAuthenticationSecrets,
-} from '../client-ini-profile'
+} from '../client-ini-profile.js'
 
 describe('hasAuthenticationSecrets', () => {
   it('confirms a non-empty payload', () => {

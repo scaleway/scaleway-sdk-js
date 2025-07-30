@@ -1,5 +1,5 @@
 import type { Zone } from '@scaleway/sdk-client'
-import type { Server } from './types.gen'
+import type { Server } from './types.gen.js'
 
 export interface AttachVolumeRequest {
   zone?: Zone

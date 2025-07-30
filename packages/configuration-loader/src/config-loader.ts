@@ -1,12 +1,12 @@
 import { env } from 'process'
-import { EnvironmentKey } from './env'
-import { resolveConfigurationFilePath } from './path-resolver'
+import { EnvironmentKey } from './env.js'
+import { resolveConfigurationFilePath } from './path-resolver.js'
 import type {
   AllProfilesFromFileParams,
   Profile,
   ProfileFromFileParams,
-} from './types'
-import { loadConfigurationFromFile } from './yml-loader'
+} from './types.js'
+import { loadConfigurationFromFile } from './yml-loader.js'
 
 const convertFileConfigToSDK = (obj: Record<string, string>): Profile => ({
   accessKey: obj.access_key,

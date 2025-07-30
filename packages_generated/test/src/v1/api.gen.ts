@@ -9,7 +9,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { HUMAN_TRANSIENT_STATUSES as HUMAN_TRANSIENT_STATUSES_TEST } from './content.gen'
+import { HUMAN_TRANSIENT_STATUSES as HUMAN_TRANSIENT_STATUSES_TEST } from './content.gen.js'
 import {
   marshalCreateHumanRequest,
   marshalRegisterRequest,
@@ -17,7 +17,7 @@ import {
   unmarshalHuman,
   unmarshalListHumansResponse,
   unmarshalRegisterResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   CreateHumanRequest,
   DeleteHumanRequest,
@@ -30,7 +30,7 @@ import type {
   RunHumanRequest,
   SmokeHumanRequest,
   UpdateHumanRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

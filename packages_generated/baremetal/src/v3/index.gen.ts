@@ -1,8 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-export { PrivateNetworkAPI } from './api.gen'
-export * from './content.gen'
-export * from './marshalling.gen'
+export { PrivateNetworkAPI } from './api.gen.js'
+export * from './content.gen.js'
+export * from './marshalling.gen.js'
 export type {
   ListServerPrivateNetworksRequestOrderBy,
   ListServerPrivateNetworksResponse,
@@ -13,4 +13,4 @@ export type {
   ServerPrivateNetwork,
   ServerPrivateNetworkStatus,
   SetServerPrivateNetworksResponse,
-} from './types.gen'
+} from './types.gen.js'

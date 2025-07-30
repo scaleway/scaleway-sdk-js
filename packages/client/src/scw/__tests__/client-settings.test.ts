@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import type { Settings } from '../client-settings'
-import { assertValidSettings } from '../client-settings'
+import type { Settings } from '../client-settings.js'
+import { assertValidSettings } from '../client-settings.js'
 
 const VALID_SETTINGS: Settings = {
   apiURL: 'https://api.scaleway.com',

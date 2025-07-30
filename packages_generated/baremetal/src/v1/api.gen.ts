@@ -3,14 +3,14 @@
 
 import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_BAREMETAL } from './content.gen'
+import { SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_BAREMETAL } from './content.gen.js'
 import {
   marshalAddOptionServerRequest,
   marshalCreateServerRequest,
@@ -27,22 +27,22 @@ import {
   unmarshalBMCAccess,
   unmarshalGetServerMetricsResponse,
   unmarshalIP,
+  unmarshalListOSResponse,
   unmarshalListOffersResponse,
   unmarshalListOptionsResponse,
-  unmarshalListOSResponse,
   unmarshalListServerEventsResponse,
   unmarshalListServerPrivateNetworksResponse,
   unmarshalListServersResponse,
   unmarshalListSettingsResponse,
+  unmarshalOS,
   unmarshalOffer,
   unmarshalOption,
-  unmarshalOS,
   unmarshalSchema,
   unmarshalServer,
   unmarshalServerPrivateNetwork,
   unmarshalSetServerPrivateNetworksResponse,
   unmarshalSetting,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   AddOptionServerRequest,
   BMCAccess,
@@ -51,20 +51,20 @@ import type {
   DeleteServerRequest,
   GetBMCAccessRequest,
   GetDefaultPartitioningSchemaRequest,
+  GetOSRequest,
   GetOfferRequest,
   GetOptionRequest,
-  GetOSRequest,
   GetServerMetricsRequest,
   GetServerMetricsResponse,
   GetServerRequest,
-  InstallServerRequest,
   IP,
+  InstallServerRequest,
+  ListOSRequest,
+  ListOSResponse,
   ListOffersRequest,
   ListOffersResponse,
   ListOptionsRequest,
   ListOptionsResponse,
-  ListOSRequest,
-  ListOSResponse,
   ListServerEventsRequest,
   ListServerEventsResponse,
   ListServerPrivateNetworksResponse,
@@ -73,9 +73,9 @@ import type {
   ListSettingsRequest,
   ListSettingsResponse,
   MigrateServerToMonthlyOfferRequest,
+  OS,
   Offer,
   Option,
-  OS,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
   PrivateNetworkApiDeleteServerPrivateNetworkRequest,
   PrivateNetworkApiListServerPrivateNetworksRequest,
@@ -94,7 +94,7 @@ import type {
   UpdateServerRequest,
   UpdateSettingRequest,
   ValidatePartitioningSchemaRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

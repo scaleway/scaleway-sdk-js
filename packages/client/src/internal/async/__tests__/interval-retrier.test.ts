@@ -5,8 +5,8 @@ import {
   createFixedIntervalStrategy,
   tryAtIntervals,
   waitForResource,
-} from '../interval-retrier'
-import { sleep } from '../sleep'
+} from '../interval-retrier.js'
+import { sleep } from '../sleep.js'
 
 describe('createFixedIntervalStrategy', () => {
   it('always returns the same interval', () => {

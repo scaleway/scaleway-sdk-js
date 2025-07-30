@@ -16,7 +16,7 @@ import {
   unmarshalListVersionsResponse,
   unmarshalLocalImage,
   unmarshalVersion,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   Category,
   GetCategoryRequest,
@@ -34,7 +34,7 @@ import type {
   ListVersionsResponse,
   LocalImage,
   Version,
-} from './types.gen'
+} from './types.gen.js'
 
 /**
  * Marketplace API.

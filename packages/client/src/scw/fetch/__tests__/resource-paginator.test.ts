@@ -3,8 +3,11 @@ import {
   enrichForPagination,
   fetchAll,
   fetchPaginated,
-} from '../resource-paginator'
-import type { PaginatedContent, PaginatedFetcher } from '../resource-paginator'
+} from '../resource-paginator.js'
+import type {
+  PaginatedContent,
+  PaginatedFetcher,
+} from '../resource-paginator.js'
 
 const fetchPages = <T>(input: T[][] = [], delay = 0) => {
   const totalCount = input.flat().length

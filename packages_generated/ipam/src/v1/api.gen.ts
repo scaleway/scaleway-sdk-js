@@ -3,8 +3,8 @@
 
 import type { ApiLocality } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   resolveOneOf,
   toApiLocality,
   urlParams,
@@ -19,7 +19,7 @@ import {
   marshalUpdateIPRequest,
   unmarshalIP,
   unmarshalListIPsResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   AttachIPRequest,
   BookIPRequest,
@@ -32,7 +32,7 @@ import type {
   ReleaseIPRequest,
   ReleaseIPSetRequest,
   UpdateIPRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

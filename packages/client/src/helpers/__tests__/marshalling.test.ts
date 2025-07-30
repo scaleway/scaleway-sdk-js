@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { isJSONObject } from '../json'
+import { isJSONObject } from '../json.js'
 import {
   resolveOneOf,
   unmarshalArrayOfObject,
@@ -7,7 +7,7 @@ import {
   unmarshalMapOfObject,
   urlParams,
   validatePathParam,
-} from '../marshalling'
+} from '../marshalling.js'
 
 describe('validatePathParam', () => {
   it('returns parameter for a non-empty string', () => {

@@ -9,10 +9,10 @@ import {
   unmarshalDate,
 } from '@scaleway/sdk-client'
 import type {
+  APIKey,
   AddGroupMemberRequest,
   AddGroupMembersRequest,
   AddSamlCertificateRequest,
-  APIKey,
   Application,
   Connection,
   ConnectionConnectedOrganization,
@@ -31,8 +31,8 @@ import type {
   GracePeriod,
   Group,
   InitiateUserConnectionResponse,
-  JoinUserConnectionRequest,
   JWT,
+  JoinUserConnectionRequest,
   ListAPIKeysResponse,
   ListApplicationsResponse,
   ListGracePeriodsResponse,
@@ -43,8 +43,8 @@ import type {
   ListPoliciesResponse,
   ListQuotaResponse,
   ListRulesResponse,
-  ListSamlCertificatesResponse,
   ListSSHKeysResponse,
+  ListSamlCertificatesResponse,
   ListUsersResponse,
   Log,
   MFAOTP,
@@ -58,13 +58,13 @@ import type {
   RemoveUserConnectionRequest,
   Rule,
   RuleSpecs,
+  SSHKey,
   Saml,
   SamlCertificate,
   SetGroupMembersRequest,
   SetOrganizationAliasRequest,
   SetRulesRequest,
   SetRulesResponse,
-  SSHKey,
   UpdateAPIKeyRequest,
   UpdateApplicationRequest,
   UpdateGroupRequest,
@@ -78,7 +78,7 @@ import type {
   User,
   ValidateUserMFAOTPRequest,
   ValidateUserMFAOTPResponse,
-} from './types.gen'
+} from './types.gen.js'
 
 export const unmarshalJWT = (data: unknown): JWT => {
   if (!isJSONObject(data)) {

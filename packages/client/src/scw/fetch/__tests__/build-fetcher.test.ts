@@ -1,9 +1,9 @@
 import { afterAll, describe, expect, it, vi } from 'vitest'
-import { isBrowser } from '../../../helpers/is-browser'
-import { addHeaderInterceptor } from '../../../internal/interceptors/helpers'
-import type { Settings } from '../../client-settings'
-import { buildFetcher, buildRequest } from '../build-fetcher'
-import type { ScwRequest } from '../types'
+import { isBrowser } from '../../../helpers/is-browser.js'
+import { addHeaderInterceptor } from '../../../internal/interceptors/helpers.js'
+import type { Settings } from '../../client-settings.js'
+import { buildFetcher, buildRequest } from '../build-fetcher.js'
+import type { ScwRequest } from '../types.js'
 
 const DEFAULT_SETTINGS: Settings = {
   apiURL: 'https://api.scaleway.com',

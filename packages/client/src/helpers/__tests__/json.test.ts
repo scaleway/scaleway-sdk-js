@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { isJSON, isJSONObject } from '../json'
+import { isJSON, isJSONObject } from '../json.js'
 
 describe('isJSON', () => {
   test.each(['str', 200, true, null, [true, 'two', 3], { key: 'value' }])(

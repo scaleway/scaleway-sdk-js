@@ -1,5 +1,5 @@
-import type { JSONObject } from '../../helpers/json'
-import type { ScalewayError } from './scw-error'
+import type { JSONObject } from '../../helpers/json.js'
+import type { ScalewayError } from './scw-error.js'
 /**
  * Interface with static method that initialize {@link ScalewayError} from JSON.
  *

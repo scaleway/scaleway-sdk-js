@@ -3,8 +3,8 @@
 
 import type { ApiLocality } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   toApiLocality,
   urlParams,
   validatePathParam,
@@ -15,7 +15,7 @@ import {
   unmarshalListServerPrivateNetworksResponse,
   unmarshalServerPrivateNetwork,
   unmarshalSetServerPrivateNetworksResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   ListServerPrivateNetworksResponse,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
@@ -24,7 +24,7 @@ import type {
   PrivateNetworkApiSetServerPrivateNetworksRequest,
   ServerPrivateNetwork,
   SetServerPrivateNetworksResponse,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
