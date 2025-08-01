@@ -12,7 +12,7 @@
     "directory": "packages/configuration-loader"
   },
   "engines": {
-    "node": ">=20.19.1"
+    "node": ">=22.17.1"
   },
   "type": "module",
   "exports": {

@@ -21,7 +21,7 @@
     "directory": "packages/sdk"
   },
   "engines": {
-    "node": ">=20.19.1"
+    "node": ">=22.17.1"
   },
   "scripts": {
     "package:check": "pnpm publint",
