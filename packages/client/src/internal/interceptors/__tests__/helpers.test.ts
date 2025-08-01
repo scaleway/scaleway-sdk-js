@@ -20,13 +20,15 @@ describe('addHeaderInterceptor', () => {
     expect(updatedReq.headers.get('my-key')).toBe('my-value')
   })
 
-  it(`desn't modify the input request`, async () => {
+  it(`doesn't modify the input request`, async () => {
     const request = new Request('https://api.scaleway.com/my/path')
+    const originalHeaders = request.headers
     const updatedReq = await addHeaderInterceptor(
       'my-key',
       'my-value',
     )({ request })
-    expect(request).not.toStrictEqual(updatedReq)
+    expect(request.headers).toBe(originalHeaders)
+    expect(updatedReq.headers.get('my-key')).toBe('my-value')
   })
 })
 

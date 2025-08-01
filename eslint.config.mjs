@@ -11,6 +11,8 @@ export default [
     ignores: [
       '**/node_modules/',
       '**/dist/',
+      '**/build/',
+      '**/coverage/',
       '**/examples/',
       '**/vite.config.ts',
       'packages/clients/.eslintrc.cjs',
@@ -21,6 +23,7 @@ export default [
       'packages/configuration-loader/.eslintrc.cjs',
       'scripts/generatePackages.ts',
       'scripts/*.ts',
+      '*.min.js',
     ],
   },
   {

@@ -43,8 +43,9 @@ jobs:
           - node
           - jsdom
         node:
-          - '18'
           - '20'
+          - '22'
+          - '24'
     steps:
       - uses: actions/checkout@v4.2.2
       - uses: pnpm/action-setup@v4.1.0
