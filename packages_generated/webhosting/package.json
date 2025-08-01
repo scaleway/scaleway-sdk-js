@@ -36,7 +36,7 @@
     "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
   },
   "dependencies": {
-    "@scaleway/random-name": "5.1.1",
+    "@scaleway/random-name": "5.1.2",
     "@scaleway/sdk-std": "workspace:*"
   },
   "peerDependencies": {
