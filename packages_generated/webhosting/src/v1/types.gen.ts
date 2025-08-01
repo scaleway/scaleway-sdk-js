@@ -110,6 +110,29 @@ export type OfferOptionWarning =
 
 export type PlatformPlatformGroup = 'unknown_group' | 'default' | 'premium'
 
+export interface AutoConfigDomainDns {
+  /**
+   * Whether or not to synchronize domain nameservers.
+   */
+  nameservers: boolean
+  /**
+   * Whether or not to synchronize web records.
+   */
+  webRecords: boolean
+  /**
+   * Whether or not to synchronize mail records.
+   */
+  mailRecords: boolean
+  /**
+   * Whether or not to synchronize all types of records. Takes priority over the other fields.
+   */
+  allRecords: boolean
+  /**
+   * No automatic domain configuration. Users must configure their domain for the Web Hosting to work.
+   */
+  none: boolean
+}
+
 export interface PlatformControlPanelUrls {
   /**
    * URL to connect to the hosting control panel dashboard.
@@ -119,6 +142,25 @@ export interface PlatformControlPanelUrls {
    * URL to connect to the hosting Webmail interface.
    */
   webmail: string
+}
+
+export interface HostingDomainCustomDomain {
+  /**
+   * Custom domain linked to the hosting plan.
+   */
+  domain: string
+  /**
+   * Status of the custom domain verification.
+   */
+  domainStatus: DomainStatus
+  /**
+   * Status of the DNS configuration for the custom domain.
+   */
+  dnsStatus: DnsRecordsStatus
+  /**
+   * Indicates whether to auto-configure DNS for this domain.
+   */
+  autoConfigDomainDns?: AutoConfigDomainDns
 }
 
 export interface OfferOption {
@@ -167,32 +209,20 @@ export interface PlatformControlPanel {
   urls?: PlatformControlPanelUrls
 }
 
+export interface HostingDomain {
+  /**
+   * Optional free subdomain linked to the Web Hosting plan.
+   */
+  subdomain: string
+  /**
+   * Optional custom domain linked to the Web Hosting plan.
+   */
+  customDomain?: HostingDomainCustomDomain
+}
+
 export interface CreateDatabaseRequestUser {
   username: string
   password: string
-}
-
-export interface AutoConfigDomainDns {
-  /**
-   * Whether or not to synchronize domain nameservers.
-   */
-  nameservers: boolean
-  /**
-   * Whether or not to synchronize web records.
-   */
-  webRecords: boolean
-  /**
-   * Whether or not to synchronize mail records.
-   */
-  mailRecords: boolean
-  /**
-   * Whether or not to synchronize all types of records. Takes priority over the other fields.
-   */
-  allRecords: boolean
-  /**
-   * No automatic domain configuration. Users must configure their domain for the Web Hosting to work.
-   */
-  none: boolean
 }
 
 export interface CreateHostingRequestDomainConfiguration {
@@ -423,9 +453,9 @@ export interface HostingSummary {
    */
   status: HostingStatus
   /**
-   * Main domain associated with the Web Hosting plan.
+   * @deprecated Main domain associated with the Web Hosting plan (deprecated, use domain_info).
    */
-  domain: string
+  domain?: string
   /**
    * Whether the hosting is protected or not.
    */
@@ -439,13 +469,17 @@ export interface HostingSummary {
    */
   offerName: string
   /**
-   * Main domain status of the Web Hosting plan.
+   * @deprecated Main domain status of the Web Hosting plan.
    */
-  domainStatus: DomainStatus
+  domainStatus?: DomainStatus
   /**
    * Region where the Web Hosting plan is hosted.
    */
   region: ScwRegion
+  /**
+   * Domain configuration block (subdomain, optional custom domain, and DNS settings).
+   */
+  domainInfo?: HostingDomain
 }
 
 export interface MailAccount {
@@ -983,9 +1017,9 @@ export interface Hosting {
    */
   status: HostingStatus
   /**
-   * Main domain associated with the Web Hosting plan.
+   * @deprecated Main domain associated with the Web Hosting plan (deprecated, use domain_info).
    */
-  domain: string
+  domain?: string
   /**
    * Details of the Web Hosting plan offer and options.
    */
@@ -999,7 +1033,7 @@ export interface Hosting {
    */
   tags: string[]
   /**
-   * @deprecated DNS status of the Web Hosting plan.
+   * @deprecated DNS status of the Web Hosting plan (deprecated, use domain_info).
    */
   dnsStatus?: DnsRecordsStatus
   /**
@@ -1015,13 +1049,17 @@ export interface Hosting {
    */
   user?: HostingUser
   /**
-   * Main domain status of the Web Hosting plan.
+   * @deprecated Main domain status of the Web Hosting plan (deprecated, use domain_info).
    */
-  domainStatus: DomainStatus
+  domainStatus?: DomainStatus
   /**
    * Region where the Web Hosting plan is hosted.
    */
   region: ScwRegion
+  /**
+   * Domain configuration block (subdomain, optional custom domain, and DNS settings).
+   */
+  domainInfo?: HostingDomain
 }
 
 export type HostingApiCreateHostingRequest = {
@@ -1049,6 +1087,10 @@ export type HostingApiCreateHostingRequest = {
    * Domain name to link to the Web Hosting plan. You must already own this domain name, and have completed the DNS validation process beforehand.
    */
   domain: string
+  /**
+   * The name prefix to use as a free subdomain (for example, `mysite`) assigned to the Web Hosting plan. The full domain will be automatically created by adding it to the fixed base domain (e.g. `mysite.scw.site`). You do not need to include the base domain yourself.
+   */
+  subdomain?: string
   /**
    * List of the Web Hosting plan options IDs with their quantities.
    */
@@ -1156,6 +1198,10 @@ export type HostingApiListHostingsRequest = {
    * Name of the control panel to filter for, only Web Hosting plans from this control panel will be returned.
    */
   controlPanels?: string[]
+  /**
+   * Optional free subdomain linked to the Web Hosting plan.
+   */
+  subdomain?: string
 }
 
 export type HostingApiResetHostingPasswordRequest = {
