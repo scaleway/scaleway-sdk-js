@@ -34,6 +34,8 @@ import type {
   Hosting,
   HostingApiCreateHostingRequest,
   HostingApiUpdateHostingRequest,
+  HostingDomain,
+  HostingDomainCustomDomain,
   HostingSummary,
   HostingUser,
   ListControlPanelsResponse,
@@ -232,6 +234,25 @@ const unmarshalPlatformControlPanelUrls = (
   } as PlatformControlPanelUrls
 }
 
+const unmarshalHostingDomainCustomDomain = (
+  data: unknown,
+): HostingDomainCustomDomain => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HostingDomainCustomDomain' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    autoConfigDomainDns: data.auto_config_domain_dns
+      ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns)
+      : undefined,
+    dnsStatus: data.dns_status,
+    domain: data.domain,
+    domainStatus: data.domain_status,
+  } as HostingDomainCustomDomain
+}
+
 const unmarshalOfferOption = (data: unknown): OfferOption => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -262,6 +283,21 @@ const unmarshalPlatformControlPanel = (data: unknown): PlatformControlPanel => {
     name: data.name,
     urls: data.urls ? unmarshalPlatformControlPanelUrls(data.urls) : undefined,
   } as PlatformControlPanel
+}
+
+const unmarshalHostingDomain = (data: unknown): HostingDomain => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HostingDomain' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    customDomain: data.custom_domain
+      ? unmarshalHostingDomainCustomDomain(data.custom_domain)
+      : undefined,
+    subdomain: data.subdomain,
+  } as HostingDomain
 }
 
 const unmarshalHostingUser = (data: unknown): HostingUser => {
@@ -329,7 +365,10 @@ export const unmarshalHosting = (data: unknown): Hosting => {
     createdAt: unmarshalDate(data.created_at),
     dnsStatus: data.dns_status ? data.dns_status : undefined,
     domain: data.domain,
-    domainStatus: data.domain_status,
+    domainInfo: data.domain_info
+      ? unmarshalHostingDomain(data.domain_info)
+      : undefined,
+    domainStatus: data.domain_status ? data.domain_status : undefined,
     id: data.id,
     ipv4: data.ipv4,
     offer: data.offer ? unmarshalOffer(data.offer) : undefined,
@@ -433,7 +472,10 @@ const unmarshalHostingSummary = (data: unknown): HostingSummary => {
     createdAt: unmarshalDate(data.created_at),
     dnsStatus: data.dns_status ? data.dns_status : undefined,
     domain: data.domain,
-    domainStatus: data.domain_status,
+    domainInfo: data.domain_info
+      ? unmarshalHostingDomain(data.domain_info)
+      : undefined,
+    domainStatus: data.domain_status ? data.domain_status : undefined,
     id: data.id,
     offerName: data.offer_name,
     projectId: data.project_id,
@@ -758,6 +800,7 @@ export const marshalHostingApiCreateHostingRequest = (
       : undefined,
   project_id: request.projectId ?? defaults.defaultProjectId,
   skip_welcome_email: request.skipWelcomeEmail,
+  subdomain: request.subdomain,
   tags: request.tags,
 })
 

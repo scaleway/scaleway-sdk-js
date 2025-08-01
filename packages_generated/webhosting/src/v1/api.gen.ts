@@ -644,6 +644,7 @@ export class HostingAPI extends ParentAPI {
           ],
           ['project_id', request.projectId],
           ['statuses', request.statuses],
+          ['subdomain', request.subdomain],
           ['tags', request.tags],
         ),
       },
