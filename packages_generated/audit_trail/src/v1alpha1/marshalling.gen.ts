@@ -14,6 +14,7 @@ import type {
   BaremetalSettingInfo,
   Event,
   EventPrincipal,
+  EventSystem,
   InstanceServerInfo,
   KeyManagerKeyInfo,
   KubernetesACLInfo,
@@ -217,6 +218,18 @@ const unmarshalEventPrincipal = (data: unknown): EventPrincipal => {
   } as EventPrincipal
 }
 
+const unmarshalEventSystem = (data: unknown): EventSystem => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EventSystem' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+  } as EventSystem
+}
+
 export const unmarshalResource = (data: unknown): Resource => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -311,6 +324,7 @@ export const unmarshalEvent = (data: unknown): Event => {
     serviceName: data.service_name,
     sourceIp: data.source_ip,
     statusCode: data.status_code,
+    system: data.system ? unmarshalEventSystem(data.system) : undefined,
     userAgent: data.user_agent,
   } as Event
 }
