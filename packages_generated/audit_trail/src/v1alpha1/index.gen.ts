@@ -11,6 +11,7 @@ export type {
   BaremetalSettingInfo,
   Event,
   EventPrincipal,
+  EventSystem,
   InstanceServerInfo,
   KeyManagerKeyInfo,
   KubernetesACLInfo,
