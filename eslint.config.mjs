@@ -21,7 +21,6 @@ export default [
       'packages/configuration-loader/.eslintrc.cjs',
       'scripts/generatePackages.ts',
       'scripts/*.ts',
-      'formatting/**',
     ],
   },
   {
