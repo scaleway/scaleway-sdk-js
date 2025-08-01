@@ -21,7 +21,7 @@ lint:
 	pnpm run lint
 
 test:
-	pnpm turbo test
+	pnpm run test
 
 test-coverage:
 	pnpm run test:coverage
@@ -45,3 +45,7 @@ publish: install-dependencies
 	pnpm run build
 	pnpm lerna changed
 	pnpm exec lerna publish -y --registry $(NPM_PUBLISH_REGISTRY) --ignore-scripts
+
+format-generated:
+	./formatting/run.sh -i "./packages_generated" -f "new-package"
+	

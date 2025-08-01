@@ -31,7 +31,8 @@
       "*.snap",
       "**/__snapshots__/",
       ".docusaurus",
-      ".vitest-reports"
+      ".vitest-reports",
+      "formatting/**"
     ]
   },
   "formatter": {
