@@ -89,6 +89,10 @@ export interface EventPrincipal {
   id: string
 }
 
+export interface EventSystem {
+  name: string
+}
+
 export interface Resource {
   id: string
   type: ResourceType
@@ -206,8 +210,16 @@ export interface Event {
   locality: string
   /**
    * User or IAM application at the origin of the event.
+   *
+   * One-of ('source'): at most one of 'principal', 'system' could be set.
    */
   principal?: EventPrincipal
+  /**
+   * The Scaleway system that performed an action on behalf of the client.
+   *
+   * One-of ('source'): at most one of 'principal', 'system' could be set.
+   */
+  system?: EventSystem
   /**
    * Organization ID containing the event.
    */
