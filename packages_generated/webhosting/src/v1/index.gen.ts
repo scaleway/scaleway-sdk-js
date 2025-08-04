@@ -64,6 +64,8 @@ export type {
   HostingApiListHostingsRequest,
   HostingApiResetHostingPasswordRequest,
   HostingApiUpdateHostingRequest,
+  HostingDomain,
+  HostingDomainCustomDomain,
   HostingStatus,
   HostingSummary,
   HostingUser,
