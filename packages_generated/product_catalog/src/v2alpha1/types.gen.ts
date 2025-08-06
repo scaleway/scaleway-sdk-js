@@ -28,6 +28,7 @@ export type PublicCatalogProductStatus =
   | 'general_availability'
   | 'end_of_deployment'
   | 'end_of_support'
+  | 'end_of_sale'
 
 export type PublicCatalogProductUnitOfMeasureCountableUnit =
   | 'unknown_countable_unit'
