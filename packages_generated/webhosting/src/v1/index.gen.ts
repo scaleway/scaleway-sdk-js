@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 export {
+  BackupAPI,
   ControlPanelAPI,
   DatabaseAPI,
   DnsAPI,
@@ -14,6 +15,16 @@ export * from './content.gen'
 export * from './marshalling.gen'
 export type {
   AutoConfigDomainDns,
+  Backup,
+  BackupApiGetBackupRequest,
+  BackupApiListBackupItemsRequest,
+  BackupApiListBackupsRequest,
+  BackupApiRestoreBackupItemsRequest,
+  BackupApiRestoreBackupRequest,
+  BackupItem,
+  BackupItemGroup,
+  BackupItemType,
+  BackupStatus,
   CheckUserOwnsDomainResponse,
   ControlPanel,
   ControlPanelApiListControlPanelsRequest,
@@ -69,6 +80,9 @@ export type {
   HostingStatus,
   HostingSummary,
   HostingUser,
+  ListBackupItemsResponse,
+  ListBackupsRequestOrderBy,
+  ListBackupsResponse,
   ListControlPanelsResponse,
   ListDatabasesRequestOrderBy,
   ListDatabasesResponse,
@@ -103,6 +117,8 @@ export type {
   PlatformPlatformGroup,
   ResetHostingPasswordResponse,
   ResourceSummary,
+  RestoreBackupItemsResponse,
+  RestoreBackupResponse,
   SearchDomainsResponse,
   Session,
   SyncDomainDnsRecordsRequestRecord,
