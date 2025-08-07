@@ -11,6 +11,10 @@ import {
 } from '@scaleway/sdk-client'
 import type {
   AutoConfigDomainDns,
+  Backup,
+  BackupApiRestoreBackupItemsRequest,
+  BackupItem,
+  BackupItemGroup,
   CheckUserOwnsDomainResponse,
   ControlPanel,
   CreateDatabaseRequestUser,
@@ -38,6 +42,8 @@ import type {
   HostingDomainCustomDomain,
   HostingSummary,
   HostingUser,
+  ListBackupItemsResponse,
+  ListBackupsResponse,
   ListControlPanelsResponse,
   ListDatabasesResponse,
   ListDatabaseUsersResponse,
@@ -59,11 +65,29 @@ import type {
   PlatformControlPanelUrls,
   ResetHostingPasswordResponse,
   ResourceSummary,
+  RestoreBackupItemsResponse,
+  RestoreBackupResponse,
   SearchDomainsResponse,
   Session,
   SyncDomainDnsRecordsRequestRecord,
   Website,
 } from './types.gen'
+
+export const unmarshalBackup = (data: unknown): Backup => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Backup' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    size: data.size,
+    status: data.status,
+    totalItems: data.total_items,
+  } as Backup
+}
 
 export const unmarshalDatabaseUser = (data: unknown): DatabaseUser => {
   if (!isJSONObject(data)) {
@@ -383,6 +407,66 @@ export const unmarshalHosting = (data: unknown): Hosting => {
   } as Hosting
 }
 
+const unmarshalBackupItem = (data: unknown): BackupItem => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'BackupItem' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    size: data.size,
+    status: data.status,
+    type: data.type,
+  } as BackupItem
+}
+
+const unmarshalBackupItemGroup = (data: unknown): BackupItemGroup => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'BackupItemGroup' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    items: unmarshalArrayOfObject(data.items, unmarshalBackupItem),
+    type: data.type,
+  } as BackupItemGroup
+}
+
+export const unmarshalListBackupItemsResponse = (
+  data: unknown,
+): ListBackupItemsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListBackupItemsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    groups: unmarshalArrayOfObject(data.groups, unmarshalBackupItemGroup),
+    totalCount: data.total_count,
+  } as ListBackupItemsResponse
+}
+
+export const unmarshalListBackupsResponse = (
+  data: unknown,
+): ListBackupsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListBackupsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    backups: unmarshalArrayOfObject(data.backups, unmarshalBackup),
+    totalCount: data.total_count,
+  } as ListBackupsResponse
+}
+
 const unmarshalControlPanel = (data: unknown): ControlPanel => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -593,6 +677,30 @@ export const unmarshalResourceSummary = (data: unknown): ResourceSummary => {
   } as ResourceSummary
 }
 
+export const unmarshalRestoreBackupItemsResponse = (
+  data: unknown,
+): RestoreBackupItemsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RestoreBackupItemsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as RestoreBackupItemsResponse
+}
+
+export const unmarshalRestoreBackupResponse = (
+  data: unknown,
+): RestoreBackupResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RestoreBackupResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as RestoreBackupResponse
+}
+
 const unmarshalDomainAvailability = (data: unknown): DomainAvailability => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -638,6 +746,13 @@ export const unmarshalSession = (data: unknown): Session => {
     url: data.url,
   } as Session
 }
+
+export const marshalBackupApiRestoreBackupItemsRequest = (
+  request: BackupApiRestoreBackupItemsRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  item_ids: request.itemIds,
+})
 
 export const marshalDatabaseApiAssignDatabaseUserRequest = (
   request: DatabaseApiAssignDatabaseUserRequest,
