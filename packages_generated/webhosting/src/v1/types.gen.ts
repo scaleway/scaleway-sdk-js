@@ -3,6 +3,26 @@
 import type { Money, Region as ScwRegion } from '@scaleway/sdk-client'
 import type { LanguageCode as StdLanguageCode } from '@scaleway/sdk-std'
 
+export type BackupItemType =
+  | 'unknown_backup_item_type'
+  | 'full'
+  | 'web'
+  | 'mail'
+  | 'db'
+  | 'db_user'
+  | 'ftp_user'
+  | 'dns_zone'
+  | 'cron_job'
+  | 'ssl_certificate'
+
+export type BackupStatus =
+  | 'unknown_backup_status'
+  | 'active'
+  | 'locked'
+  | 'disabled'
+  | 'damaged'
+  | 'restoring'
+
 export type DnsRecordStatus = 'unknown_status' | 'valid' | 'invalid'
 
 export type DnsRecordType =
@@ -67,6 +87,8 @@ export type HostingStatus =
   | 'locked'
   | 'migrating'
   | 'updating'
+
+export type ListBackupsRequestOrderBy = 'created_at_desc' | 'created_at_asc'
 
 export type ListDatabaseUsersRequestOrderBy = 'username_asc' | 'username_desc'
 
@@ -207,6 +229,33 @@ export interface PlatformControlPanel {
    * URL to connect to control panel dashboard and to Webmail interface.
    */
   urls?: PlatformControlPanelUrls
+}
+
+export interface BackupItem {
+  /**
+   * ID of the item.
+   */
+  id: string
+  /**
+   * Name of the item (e.g., `database name`, `email address`).
+   */
+  name: string
+  /**
+   * Type of the item (e.g., email, database, FTP).
+   */
+  type: BackupItemType
+  /**
+   * Size of the item in bytes.
+   */
+  size: number
+  /**
+   * Status of the item. Available values are `active`, `damaged`, and `restoring`.
+   */
+  status: BackupStatus
+  /**
+   * Date and time at which this item was backed up.
+   */
+  createdAt?: Date
 }
 
 export interface HostingDomain {
@@ -379,6 +428,40 @@ export interface Platform {
   controlPanel?: PlatformControlPanel
 }
 
+export interface BackupItemGroup {
+  /**
+   * Type of items (e.g., email, database, FTP).
+   */
+  type: BackupItemType
+  /**
+   * List of individual backup items of this type.
+   */
+  items: BackupItem[]
+}
+
+export interface Backup {
+  /**
+   * ID of the backup.
+   */
+  id: string
+  /**
+   * Total size of the backup in bytes.
+   */
+  size: number
+  /**
+   * Creation date of the backup.
+   */
+  createdAt?: Date
+  /**
+   * Status of the backup. Available values are `active`, `locked`, and `restoring`.
+   */
+  status: BackupStatus
+  /**
+   * Total number of restorable items in the backup.
+   */
+  totalItems: number
+}
+
 export interface ControlPanel {
   /**
    * Control panel name.
@@ -533,6 +616,89 @@ export interface DomainAvailability {
    * Price for registering the domain.
    */
   price?: Money
+}
+
+export type BackupApiGetBackupRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * UUID of the hosting account.
+   */
+  hostingId: string
+  /**
+   * ID of the backup to retrieve.
+   */
+  backupId: string
+}
+
+export type BackupApiListBackupItemsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * UUID of the hosting account.
+   */
+  hostingId: string
+  /**
+   * ID of the backup to list items from.
+   */
+  backupId: string
+}
+
+export type BackupApiListBackupsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * UUID of the hosting account.
+   */
+  hostingId: string
+  /**
+   * Page number to retrieve.
+   */
+  page?: number
+  /**
+   * Number of backups to return per page.
+   */
+  pageSize?: number
+  /**
+   * Order in which to return the list of backups.
+   */
+  orderBy?: ListBackupsRequestOrderBy
+}
+
+export type BackupApiRestoreBackupItemsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * UUID of the hosting account.
+   */
+  hostingId: string
+  /**
+   * List of backup item IDs to restore individually.
+   */
+  itemIds?: string[]
+}
+
+export type BackupApiRestoreBackupRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * UUID of the hosting account.
+   */
+  hostingId: string
+  /**
+   * ID of the backup to fully restore.
+   */
+  backupId: string
 }
 
 export interface CheckUserOwnsDomainResponse {
@@ -1246,6 +1412,28 @@ export type HostingApiUpdateHostingRequest = {
   protected?: boolean
 }
 
+export interface ListBackupItemsResponse {
+  /**
+   * Total number of backup item groups.
+   */
+  totalCount: number
+  /**
+   * List of backup item groups categorized by type.
+   */
+  groups: BackupItemGroup[]
+}
+
+export interface ListBackupsResponse {
+  /**
+   * Total number of available backups.
+   */
+  totalCount: number
+  /**
+   * List of available backups.
+   */
+  backups: Backup[]
+}
+
 export interface ListControlPanelsResponse {
   /**
    * Number of control panels returned.
@@ -1482,6 +1670,10 @@ export interface ResourceSummary {
    */
   websitesCount: number
 }
+
+export interface RestoreBackupItemsResponse {}
+
+export interface RestoreBackupResponse {}
 
 export interface SearchDomainsResponse {
   /**
