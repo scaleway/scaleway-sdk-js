@@ -18,6 +18,7 @@ import {
 } from './content.gen'
 import {
   marshalCreateJobRequest,
+  marshalCreateModelRequest,
   marshalCreateProcessRequest,
   marshalCreateSessionRequest,
   marshalUpdateBookingRequest,
@@ -32,11 +33,13 @@ import {
   unmarshalListBookingsResponse,
   unmarshalListJobResultsResponse,
   unmarshalListJobsResponse,
+  unmarshalListModelsResponse,
   unmarshalListPlatformsResponse,
   unmarshalListProcessesResponse,
   unmarshalListProcessResultsResponse,
   unmarshalListSessionACLsResponse,
   unmarshalListSessionsResponse,
+  unmarshalModel,
   unmarshalPlatform,
   unmarshalProcess,
   unmarshalSession,
@@ -47,6 +50,7 @@ import type {
   CancelJobRequest,
   CancelProcessRequest,
   CreateJobRequest,
+  CreateModelRequest,
   CreateProcessRequest,
   CreateSessionRequest,
   DeleteJobRequest,
@@ -56,6 +60,7 @@ import type {
   GetBookingRequest,
   GetJobCircuitRequest,
   GetJobRequest,
+  GetModelRequest,
   GetPlatformRequest,
   GetProcessRequest,
   GetSessionRequest,
@@ -69,6 +74,8 @@ import type {
   ListJobResultsResponse,
   ListJobsRequest,
   ListJobsResponse,
+  ListModelsRequest,
+  ListModelsResponse,
   ListPlatformsRequest,
   ListPlatformsResponse,
   ListProcessesRequest,
@@ -79,6 +86,7 @@ import type {
   ListSessionACLsResponse,
   ListSessionsRequest,
   ListSessionsResponse,
+  Model,
   Platform,
   Process,
   Session,
@@ -784,4 +792,68 @@ export class API extends ParentAPI {
       },
       unmarshalBooking,
     )
+
+  /**
+   * Create a new model. Create and register a new model that can be executed through next jobs. A model can also be assigned to a Session.
+   *
+   * @param request - The request {@link CreateModelRequest}
+   * @returns A Promise of Model
+   */
+  createModel = (request: Readonly<CreateModelRequest> = {}) =>
+    this.client.fetch<Model>(
+      {
+        body: JSON.stringify(
+          marshalCreateModelRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/qaas/v1alpha1/models`,
+      },
+      unmarshalModel,
+    )
+
+  /**
+   * Get model information. Retrieve information about of the provided **model ID**.
+   *
+   * @param request - The request {@link GetModelRequest}
+   * @returns A Promise of Model
+   */
+  getModel = (request: Readonly<GetModelRequest>) =>
+    this.client.fetch<Model>(
+      {
+        method: 'GET',
+        path: `/qaas/v1alpha1/models/${validatePathParam('modelId', request.modelId)}`,
+      },
+      unmarshalModel,
+    )
+
+  protected pageOfListModels = (request: Readonly<ListModelsRequest> = {}) =>
+    this.client.fetch<ListModelsResponse>(
+      {
+        method: 'GET',
+        path: `/qaas/v1alpha1/models`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
+        ),
+      },
+      unmarshalListModelsResponse,
+    )
+
+  /**
+   * List all models attached to the **project ID**. Retrieve information about all models of the provided **project ID**.
+   *
+   * @param request - The request {@link ListModelsRequest}
+   * @returns A Promise of ListModelsResponse
+   */
+  listModels = (request: Readonly<ListModelsRequest> = {}) =>
+    enrichForPagination('models', this.pageOfListModels, request)
 }

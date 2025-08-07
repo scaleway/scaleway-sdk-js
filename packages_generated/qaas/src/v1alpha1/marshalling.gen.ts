@@ -13,6 +13,7 @@ import type {
   Application,
   Booking,
   CreateJobRequest,
+  CreateModelRequest,
   CreateProcessRequest,
   CreateSessionRequest,
   CreateSessionRequestBookingDemand,
@@ -23,11 +24,13 @@ import type {
   ListBookingsResponse,
   ListJobResultsResponse,
   ListJobsResponse,
+  ListModelsResponse,
   ListPlatformsResponse,
   ListProcessesResponse,
   ListProcessResultsResponse,
   ListSessionACLsResponse,
   ListSessionsResponse,
+  Model,
   Platform,
   PlatformBookingRequirement,
   PlatformHardware,
@@ -99,7 +102,9 @@ export const unmarshalJob = (data: unknown): Job => {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     jobDuration: data.job_duration,
+    modelId: data.model_id,
     name: data.name,
+    parameters: data.parameters,
     progressMessage: data.progress_message,
     resultDistribution: data.result_distribution,
     sessionId: data.session_id,
@@ -108,6 +113,21 @@ export const unmarshalJob = (data: unknown): Job => {
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
   } as Job
+}
+
+export const unmarshalModel = (data: unknown): Model => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Model' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    projectId: data.project_id,
+    url: data.url,
+  } as Model
 }
 
 const unmarshalPlatformBookingRequirement = (
@@ -226,6 +246,7 @@ export const unmarshalSession = (data: unknown): Session => {
     id: data.id,
     maxDuration: data.max_duration,
     maxIdleDuration: data.max_idle_duration,
+    modelId: data.model_id,
     name: data.name,
     originId: data.origin_id,
     originType: data.origin_type,
@@ -315,6 +336,21 @@ export const unmarshalListJobsResponse = (data: unknown): ListJobsResponse => {
     jobs: unmarshalArrayOfObject(data.jobs, unmarshalJob),
     totalCount: data.total_count,
   } as ListJobsResponse
+}
+
+export const unmarshalListModelsResponse = (
+  data: unknown,
+): ListModelsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListModelsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    models: unmarshalArrayOfObject(data.models, unmarshalModel),
+    totalCount: data.total_count,
+  } as ListModelsResponse
 }
 
 export const unmarshalListPlatformsResponse = (
@@ -425,9 +461,19 @@ export const marshalCreateJobRequest = (
 ): Record<string, unknown> => ({
   circuit: marshalJobCircuit(request.circuit, defaults),
   max_duration: request.maxDuration,
+  model_id: request.modelId,
   name: request.name,
+  parameters: request.parameters,
   session_id: request.sessionId,
   tags: request.tags,
+})
+
+export const marshalCreateModelRequest = (
+  request: CreateModelRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  payload: request.payload,
+  project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
 export const marshalCreateProcessRequest = (
@@ -465,6 +511,7 @@ export const marshalCreateSessionRequest = (
   deduplication_id: request.deduplicationId,
   max_duration: request.maxDuration,
   max_idle_duration: request.maxIdleDuration,
+  model_id: request.modelId,
   name: request.name,
   platform_id: request.platformId,
   project_id: request.projectId ?? defaults.defaultProjectId,
