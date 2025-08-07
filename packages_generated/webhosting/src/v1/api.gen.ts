@@ -11,10 +11,12 @@ import {
   waitForResource,
 } from '@scaleway/sdk-client'
 import {
+  BACKUP_TRANSIENT_STATUSES as BACKUP_TRANSIENT_STATUSES_WEBHOSTING,
   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_WEBHOSTING,
   HOSTING_TRANSIENT_STATUSES as HOSTING_TRANSIENT_STATUSES_WEBHOSTING,
 } from './content.gen'
 import {
+  marshalBackupApiRestoreBackupItemsRequest,
   marshalDatabaseApiAssignDatabaseUserRequest,
   marshalDatabaseApiChangeDatabaseUserPasswordRequest,
   marshalDatabaseApiCreateDatabaseRequest,
@@ -29,6 +31,7 @@ import {
   marshalMailAccountApiChangeMailAccountPasswordRequest,
   marshalMailAccountApiCreateMailAccountRequest,
   marshalMailAccountApiRemoveMailAccountRequest,
+  unmarshalBackup,
   unmarshalCheckUserOwnsDomainResponse,
   unmarshalDatabase,
   unmarshalDatabaseUser,
@@ -36,6 +39,8 @@ import {
   unmarshalDomain,
   unmarshalFtpAccount,
   unmarshalHosting,
+  unmarshalListBackupItemsResponse,
+  unmarshalListBackupsResponse,
   unmarshalListControlPanelsResponse,
   unmarshalListDatabasesResponse,
   unmarshalListDatabaseUsersResponse,
@@ -47,10 +52,18 @@ import {
   unmarshalMailAccount,
   unmarshalResetHostingPasswordResponse,
   unmarshalResourceSummary,
+  unmarshalRestoreBackupItemsResponse,
+  unmarshalRestoreBackupResponse,
   unmarshalSearchDomainsResponse,
   unmarshalSession,
 } from './marshalling.gen'
 import type {
+  Backup,
+  BackupApiGetBackupRequest,
+  BackupApiListBackupItemsRequest,
+  BackupApiListBackupsRequest,
+  BackupApiRestoreBackupItemsRequest,
+  BackupApiRestoreBackupRequest,
   CheckUserOwnsDomainResponse,
   ControlPanelApiListControlPanelsRequest,
   Database,
@@ -87,6 +100,8 @@ import type {
   HostingApiListHostingsRequest,
   HostingApiResetHostingPasswordRequest,
   HostingApiUpdateHostingRequest,
+  ListBackupItemsResponse,
+  ListBackupsResponse,
   ListControlPanelsResponse,
   ListDatabasesResponse,
   ListDatabaseUsersResponse,
@@ -103,6 +118,8 @@ import type {
   OfferApiListOffersRequest,
   ResetHostingPasswordResponse,
   ResourceSummary,
+  RestoreBackupItemsResponse,
+  RestoreBackupResponse,
   SearchDomainsResponse,
   Session,
   WebsiteApiListWebsitesRequest,
@@ -110,6 +127,143 @@ import type {
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
+}
+
+/**
+ * Web Hosting backup API.
+
+This API allows you to list and restore backups for your cPanel and WordPress Web Hosting service.
+ */
+export class BackupAPI extends ParentAPI {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
+
+  protected pageOfListBackups = (
+    request: Readonly<BackupApiListBackupsRequest>,
+  ) =>
+    this.client.fetch<ListBackupsResponse>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/backups`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListBackupsResponse,
+    )
+
+  /**
+   * List all available backups for a hosting account.. List all available backups for a hosting account.
+   *
+   * @param request - The request {@link BackupApiListBackupsRequest}
+   * @returns A Promise of ListBackupsResponse
+   */
+  listBackups = (request: Readonly<BackupApiListBackupsRequest>) =>
+    enrichForPagination('backups', this.pageOfListBackups, request)
+
+  /**
+   * Get info about a backup specified by the backup ID.. Get info about a backup specified by the backup ID.
+   *
+   * @param request - The request {@link BackupApiGetBackupRequest}
+   * @returns A Promise of Backup
+   */
+  getBackup = (request: Readonly<BackupApiGetBackupRequest>) =>
+    this.client.fetch<Backup>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/backups/${validatePathParam('backupId', request.backupId)}`,
+      },
+      unmarshalBackup,
+    )
+
+  /**
+   * Waits for {@link Backup} to be in a final state.
+   *
+   * @param request - The request {@link BackupApiGetBackupRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Backup
+   */
+  waitForBackup = (
+    request: Readonly<BackupApiGetBackupRequest>,
+    options?: Readonly<WaitForOptions<Backup>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !BACKUP_TRANSIENT_STATUSES_WEBHOSTING.includes(res.status),
+          )),
+      this.getBackup,
+      request,
+      options,
+    )
+
+  /**
+   * Restore an entire backup to your hosting environment.. Restore an entire backup to your hosting environment.
+   *
+   * @param request - The request {@link BackupApiRestoreBackupRequest}
+   * @returns A Promise of RestoreBackupResponse
+   */
+  restoreBackup = (request: Readonly<BackupApiRestoreBackupRequest>) =>
+    this.client.fetch<RestoreBackupResponse>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/backups/${validatePathParam('backupId', request.backupId)}/restore`,
+      },
+      unmarshalRestoreBackupResponse,
+    )
+
+  /**
+   * List items within a specific backup, grouped by type.. List items within a specific backup, grouped by type.
+   *
+   * @param request - The request {@link BackupApiListBackupItemsRequest}
+   * @returns A Promise of ListBackupItemsResponse
+   */
+  listBackupItems = (request: Readonly<BackupApiListBackupItemsRequest>) =>
+    this.client.fetch<ListBackupItemsResponse>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/backup-items`,
+        urlParams: urlParams(['backup_id', request.backupId]),
+      },
+      unmarshalListBackupItemsResponse,
+    )
+
+  /**
+   * Restore specific items from a backup (e.g., a database or mailbox).. Restore specific items from a backup (e.g., a database or mailbox).
+   *
+   * @param request - The request {@link BackupApiRestoreBackupItemsRequest}
+   * @returns A Promise of RestoreBackupItemsResponse
+   */
+  restoreBackupItems = (
+    request: Readonly<BackupApiRestoreBackupItemsRequest>,
+  ) =>
+    this.client.fetch<RestoreBackupItemsResponse>(
+      {
+        body: JSON.stringify(
+          marshalBackupApiRestoreBackupItemsRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/restore-backup-items`,
+      },
+      unmarshalRestoreBackupItemsResponse,
+    )
 }
 
 /**
