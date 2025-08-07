@@ -48,6 +48,8 @@ export type ListJobsRequestOrderBy =
   | 'session_name_asc'
   | 'session_name_desc'
 
+export type ListModelsRequestOrderBy = 'created_at_desc' | 'created_at_asc'
+
 export type ListPlatformsRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
@@ -320,6 +322,33 @@ export interface Job {
    * Result of the job, if the job is finished.
    */
   resultDistribution?: string
+  /**
+   * Computation model ID executed by the job.
+   */
+  modelId?: string
+  /**
+   * Execution parameters for this job.
+   */
+  parameters?: string
+}
+
+export interface Model {
+  /**
+   * Unique ID of the model.
+   */
+  id: string
+  /**
+   * Time at which the model was created.
+   */
+  createdAt?: Date
+  /**
+   * Storage URL of the model.
+   */
+  url?: string
+  /**
+   * Project ID in which the model has been created.
+   */
+  projectId: string
 }
 
 export interface Platform {
@@ -560,6 +589,10 @@ export interface Session {
    * An optional booking unique ID of an attached booking.
    */
   bookingId?: string
+  /**
+   * Default computation model ID to be executed by job assigned to this session.
+   */
+  modelId?: string
 }
 
 export type CancelJobRequest = {
@@ -597,6 +630,25 @@ export type CreateJobRequest = {
    * Maximum duration of the job.
    */
   maxDuration?: string
+  /**
+   * Computation model ID to be executed by the job.
+   */
+  modelId?: string
+  /**
+   * Execution parameters for this job.
+   */
+  parameters?: string
+}
+
+export type CreateModelRequest = {
+  /**
+   * Project ID to attach this model.
+   */
+  projectId?: string
+  /**
+   * The serialized model data.
+   */
+  payload?: string
 }
 
 export type CreateProcessRequest = {
@@ -659,6 +711,10 @@ export type CreateSessionRequest = {
    * A booking demand to schedule the session, only applicable if the platform is bookable.
    */
   bookingDemand?: CreateSessionRequestBookingDemand
+  /**
+   * Default computation model ID to be executed by job assigned to this session.
+   */
+  modelId?: string
 }
 
 export type DeleteJobRequest = {
@@ -708,6 +764,13 @@ export type GetJobRequest = {
    * Unique ID of the job you want to get.
    */
   jobId: string
+}
+
+export type GetModelRequest = {
+  /**
+   * Unique ID of the model.
+   */
+  modelId: string
 }
 
 export type GetPlatformRequest = {
@@ -869,6 +932,36 @@ export interface ListJobsResponse {
    * List of jobs.
    */
   jobs: Job[]
+}
+
+export type ListModelsRequest = {
+  /**
+   * List models belonging to this project ID.
+   */
+  projectId?: string
+  /**
+   * Page number.
+   */
+  page?: number
+  /**
+   * Maximum number of results to return per page.
+   */
+  pageSize?: number
+  /**
+   * Sort order of the returned results.
+   */
+  orderBy?: ListModelsRequestOrderBy
+}
+
+export interface ListModelsResponse {
+  /**
+   * Total number of models.
+   */
+  totalCount: number
+  /**
+   * List of models.
+   */
+  models: Model[]
 }
 
 export type ListPlatformsRequest = {
