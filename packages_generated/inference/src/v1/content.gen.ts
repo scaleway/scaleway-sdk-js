@@ -7,6 +7,7 @@ export const DEPLOYMENT_TRANSIENT_STATUSES: DeploymentStatus[] = [
   'creating',
   'deploying',
   'deleting',
+  'scaling',
 ]
 
 /** Lists transient statutes of the enum {@link ModelStatus}. */
