@@ -10,6 +10,7 @@ export type DeploymentStatus =
   | 'error'
   | 'deleting'
   | 'locked'
+  | 'scaling'
 
 export type ListDeploymentsRequestOrderBy =
   | 'created_at_desc'
