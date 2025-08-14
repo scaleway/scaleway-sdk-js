@@ -26,6 +26,7 @@ import type {
   PublicCatalogProductPropertiesHardwareRAM,
   PublicCatalogProductPropertiesHardwareStorage,
   PublicCatalogProductPropertiesInstance,
+  PublicCatalogProductPropertiesObjectStorage,
   PublicCatalogProductUnitOfMeasure,
 } from './types.gen'
 
@@ -251,6 +252,18 @@ const unmarshalPublicCatalogProductPropertiesInstance = (
   } as PublicCatalogProductPropertiesInstance
 }
 
+const unmarshalPublicCatalogProductPropertiesObjectStorage = (
+  data: unknown,
+): PublicCatalogProductPropertiesObjectStorage => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesObjectStorage' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as PublicCatalogProductPropertiesObjectStorage
+}
+
 const unmarshalPublicCatalogProductEnvironmentalImpactEstimation = (
   data: unknown,
 ): PublicCatalogProductEnvironmentalImpactEstimation => {
@@ -326,6 +339,11 @@ const unmarshalPublicCatalogProductProperties = (
       : undefined,
     instance: data.instance
       ? unmarshalPublicCatalogProductPropertiesInstance(data.instance)
+      : undefined,
+    objectStorage: data.object_storage
+      ? unmarshalPublicCatalogProductPropertiesObjectStorage(
+          data.object_storage,
+        )
       : undefined,
   } as PublicCatalogProductProperties
 }

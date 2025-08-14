@@ -25,6 +25,7 @@ export type {
   PublicCatalogProductPropertiesHardwareRAM,
   PublicCatalogProductPropertiesHardwareStorage,
   PublicCatalogProductPropertiesInstance,
+  PublicCatalogProductPropertiesObjectStorage,
   PublicCatalogProductStatus,
   PublicCatalogProductUnitOfMeasure,
   PublicCatalogProductUnitOfMeasureCountableUnit,
