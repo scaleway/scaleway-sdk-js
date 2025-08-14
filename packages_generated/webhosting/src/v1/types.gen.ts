@@ -1228,6 +1228,21 @@ export interface Hosting {
   domainInfo?: HostingDomain
 }
 
+export type HostingApiAddCustomDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Hosting ID to which the custom domain is attached to.
+   */
+  hostingId: string
+  /**
+   * The custom domain name to attach to the hosting.
+   */
+  domainName: string
+}
+
 export type HostingApiCreateHostingRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1368,6 +1383,17 @@ export type HostingApiListHostingsRequest = {
    * Optional free subdomain linked to the Web Hosting plan.
    */
   subdomain?: string
+}
+
+export type HostingApiRemoveCustomDomainRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Hosting ID to which the custom domain is detached from.
+   */
+  hostingId: string
 }
 
 export type HostingApiResetHostingPasswordRequest = {

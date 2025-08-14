@@ -26,6 +26,7 @@ import {
   marshalDnsApiSyncDomainDnsRecordsRequest,
   marshalFtpAccountApiChangeFtpAccountPasswordRequest,
   marshalFtpAccountApiCreateFtpAccountRequest,
+  marshalHostingApiAddCustomDomainRequest,
   marshalHostingApiCreateHostingRequest,
   marshalHostingApiUpdateHostingRequest,
   marshalMailAccountApiChangeMailAccountPasswordRequest,
@@ -39,6 +40,7 @@ import {
   unmarshalDomain,
   unmarshalFtpAccount,
   unmarshalHosting,
+  unmarshalHostingSummary,
   unmarshalListBackupItemsResponse,
   unmarshalListBackupsResponse,
   unmarshalListControlPanelsResponse,
@@ -92,14 +94,17 @@ import type {
   FtpAccountApiListFtpAccountsRequest,
   FtpAccountApiRemoveFtpAccountRequest,
   Hosting,
+  HostingApiAddCustomDomainRequest,
   HostingApiCreateHostingRequest,
   HostingApiCreateSessionRequest,
   HostingApiDeleteHostingRequest,
   HostingApiGetHostingRequest,
   HostingApiGetResourceSummaryRequest,
   HostingApiListHostingsRequest,
+  HostingApiRemoveCustomDomainRequest,
   HostingApiResetHostingPasswordRequest,
   HostingApiUpdateHostingRequest,
+  HostingSummary,
   ListBackupItemsResponse,
   ListBackupsResponse,
   ListControlPanelsResponse,
@@ -936,6 +941,47 @@ export class HostingAPI extends ParentAPI {
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/resource-summary`,
       },
       unmarshalResourceSummary,
+    )
+
+  /**
+   * Attach a custom domain to a webhosting.
+   *
+   * @param request - The request {@link HostingApiAddCustomDomainRequest}
+   * @returns A Promise of HostingSummary
+   */
+  addCustomDomain = (request: Readonly<HostingApiAddCustomDomainRequest>) =>
+    this.client.fetch<HostingSummary>(
+      {
+        body: JSON.stringify(
+          marshalHostingApiAddCustomDomainRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/add-custom-domain`,
+      },
+      unmarshalHostingSummary,
+    )
+
+  /**
+   * Detach a custom domain from a webhosting.
+   *
+   * @param request - The request {@link HostingApiRemoveCustomDomainRequest}
+   * @returns A Promise of HostingSummary
+   */
+  removeCustomDomain = (
+    request: Readonly<HostingApiRemoveCustomDomainRequest>,
+  ) =>
+    this.client.fetch<HostingSummary>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/remove-custom-domain`,
+      },
+      unmarshalHostingSummary,
     )
 }
 
