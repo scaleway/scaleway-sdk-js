@@ -36,6 +36,7 @@ import type {
   FtpAccountApiChangeFtpAccountPasswordRequest,
   FtpAccountApiCreateFtpAccountRequest,
   Hosting,
+  HostingApiAddCustomDomainRequest,
   HostingApiCreateHostingRequest,
   HostingApiUpdateHostingRequest,
   HostingDomain,
@@ -128,6 +129,81 @@ export const unmarshalFtpAccount = (data: unknown): FtpAccount => {
   } as FtpAccount
 }
 
+const unmarshalAutoConfigDomainDns = (data: unknown): AutoConfigDomainDns => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AutoConfigDomainDns' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    allRecords: data.all_records,
+    mailRecords: data.mail_records,
+    nameservers: data.nameservers,
+    none: data.none,
+    webRecords: data.web_records,
+  } as AutoConfigDomainDns
+}
+
+const unmarshalHostingDomainCustomDomain = (
+  data: unknown,
+): HostingDomainCustomDomain => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HostingDomainCustomDomain' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    autoConfigDomainDns: data.auto_config_domain_dns
+      ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns)
+      : undefined,
+    dnsStatus: data.dns_status,
+    domain: data.domain,
+    domainStatus: data.domain_status,
+  } as HostingDomainCustomDomain
+}
+
+const unmarshalHostingDomain = (data: unknown): HostingDomain => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HostingDomain' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    customDomain: data.custom_domain
+      ? unmarshalHostingDomainCustomDomain(data.custom_domain)
+      : undefined,
+    subdomain: data.subdomain,
+  } as HostingDomain
+}
+
+export const unmarshalHostingSummary = (data: unknown): HostingSummary => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HostingSummary' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    dnsStatus: data.dns_status ? data.dns_status : undefined,
+    domain: data.domain,
+    domainInfo: data.domain_info
+      ? unmarshalHostingDomain(data.domain_info)
+      : undefined,
+    domainStatus: data.domain_status ? data.domain_status : undefined,
+    id: data.id,
+    offerName: data.offer_name,
+    projectId: data.project_id,
+    protected: data.protected,
+    region: data.region,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as HostingSummary
+}
+
 export const unmarshalMailAccount = (data: unknown): MailAccount => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -153,22 +229,6 @@ export const unmarshalCheckUserOwnsDomainResponse = (
   return {
     ownsDomain: data.owns_domain,
   } as CheckUserOwnsDomainResponse
-}
-
-const unmarshalAutoConfigDomainDns = (data: unknown): AutoConfigDomainDns => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'AutoConfigDomainDns' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    allRecords: data.all_records,
-    mailRecords: data.mail_records,
-    nameservers: data.nameservers,
-    none: data.none,
-    webRecords: data.web_records,
-  } as AutoConfigDomainDns
 }
 
 const unmarshalDnsRecord = (data: unknown): DnsRecord => {
@@ -258,25 +318,6 @@ const unmarshalPlatformControlPanelUrls = (
   } as PlatformControlPanelUrls
 }
 
-const unmarshalHostingDomainCustomDomain = (
-  data: unknown,
-): HostingDomainCustomDomain => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'HostingDomainCustomDomain' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    autoConfigDomainDns: data.auto_config_domain_dns
-      ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns)
-      : undefined,
-    dnsStatus: data.dns_status,
-    domain: data.domain,
-    domainStatus: data.domain_status,
-  } as HostingDomainCustomDomain
-}
-
 const unmarshalOfferOption = (data: unknown): OfferOption => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -307,21 +348,6 @@ const unmarshalPlatformControlPanel = (data: unknown): PlatformControlPanel => {
     name: data.name,
     urls: data.urls ? unmarshalPlatformControlPanelUrls(data.urls) : undefined,
   } as PlatformControlPanel
-}
-
-const unmarshalHostingDomain = (data: unknown): HostingDomain => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'HostingDomain' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    customDomain: data.custom_domain
-      ? unmarshalHostingDomainCustomDomain(data.custom_domain)
-      : undefined,
-    subdomain: data.subdomain,
-  } as HostingDomain
 }
 
 const unmarshalHostingUser = (data: unknown): HostingUser => {
@@ -543,31 +569,6 @@ export const unmarshalListFtpAccountsResponse = (
     ftpAccounts: unmarshalArrayOfObject(data.ftp_accounts, unmarshalFtpAccount),
     totalCount: data.total_count,
   } as ListFtpAccountsResponse
-}
-
-const unmarshalHostingSummary = (data: unknown): HostingSummary => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'HostingSummary' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    createdAt: unmarshalDate(data.created_at),
-    dnsStatus: data.dns_status ? data.dns_status : undefined,
-    domain: data.domain,
-    domainInfo: data.domain_info
-      ? unmarshalHostingDomain(data.domain_info)
-      : undefined,
-    domainStatus: data.domain_status ? data.domain_status : undefined,
-    id: data.id,
-    offerName: data.offer_name,
-    projectId: data.project_id,
-    protected: data.protected,
-    region: data.region,
-    status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
-  } as HostingSummary
 }
 
 export const unmarshalListHostingsResponse = (
@@ -868,6 +869,13 @@ export const marshalFtpAccountApiCreateFtpAccountRequest = (
   password: request.password,
   path: request.path,
   username: request.username,
+})
+
+export const marshalHostingApiAddCustomDomainRequest = (
+  request: HostingApiAddCustomDomainRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  domain_name: request.domainName,
 })
 
 const marshalCreateHostingRequestDomainConfiguration = (
