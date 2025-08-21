@@ -103,12 +103,13 @@ export class API extends ParentAPI {
   listVolumeTypes = (request: Readonly<ListVolumeTypesRequest> = {}) =>
     enrichForPagination('volumeTypes', this.pageOfListVolumeTypes, request)
 
-  protected pageOfListVolumes = (request: Readonly<ListVolumesRequest> = {}) =>
+  protected pageOfListVolumes = (request: Readonly<ListVolumesRequest>) =>
     this.client.fetch<ListVolumesResponse>(
       {
         method: 'GET',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes`,
         urlParams: urlParams(
+          ['include_deleted', request.includeDeleted],
           ['name', request.name],
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
@@ -131,7 +132,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListVolumesRequest}
    * @returns A Promise of ListVolumesResponse
    */
-  listVolumes = (request: Readonly<ListVolumesRequest> = {}) =>
+  listVolumes = (request: Readonly<ListVolumesRequest>) =>
     enrichForPagination('volumes', this.pageOfListVolumes, request)
 
   /**
@@ -222,14 +223,13 @@ You can only resize a volume to a larger size. It is currently not possible to c
       unmarshalVolume,
     )
 
-  protected pageOfListSnapshots = (
-    request: Readonly<ListSnapshotsRequest> = {},
-  ) =>
+  protected pageOfListSnapshots = (request: Readonly<ListSnapshotsRequest>) =>
     this.client.fetch<ListSnapshotsResponse>(
       {
         method: 'GET',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots`,
         urlParams: urlParams(
+          ['include_deleted', request.includeDeleted],
           ['name', request.name],
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
@@ -252,7 +252,7 @@ You can only resize a volume to a larger size. It is currently not possible to c
    * @param request - The request {@link ListSnapshotsRequest}
    * @returns A Promise of ListSnapshotsResponse
    */
-  listSnapshots = (request: Readonly<ListSnapshotsRequest> = {}) =>
+  listSnapshots = (request: Readonly<ListSnapshotsRequest>) =>
     enrichForPagination('snapshots', this.pageOfListSnapshots, request)
 
   /**
