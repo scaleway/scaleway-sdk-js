@@ -40,6 +40,7 @@ export type ResourceType =
   | 'ddl_datalab'
   | 'kafka_cluster'
   | 'bgp_endpoint'
+  | 'scbl_sedb_cluster'
 
 export interface Resource {
   /**

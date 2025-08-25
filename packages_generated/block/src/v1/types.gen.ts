@@ -451,6 +451,10 @@ export type ListSnapshotsRequest = {
    * Filter by tags. Only snapshots with one or more matching tags will be returned.
    */
   tags?: string[]
+  /**
+   * Display deleted snapshots not erased yet.
+   */
+  includeDeleted: boolean
 }
 
 export interface ListSnapshotsResponse {
@@ -527,6 +531,10 @@ export type ListVolumesRequest = {
    * Filter by tags. Only volumes with one or more matching tags will be returned.
    */
   tags?: string[]
+  /**
+   * Display deleted volumes not erased yet.
+   */
+  includeDeleted: boolean
 }
 
 export interface ListVolumesResponse {
