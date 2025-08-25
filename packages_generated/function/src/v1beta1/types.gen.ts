@@ -477,8 +477,7 @@ export interface Namespace {
    */
   updatedAt?: Date
   /**
-   * @deprecated When activated, functions in the namespace can be connected to a Private Network.
-Note that activating the VPC integration can only be done when creating a new namespace.
+   * @deprecated The value of this field doesn't matter anymore, and will be removed in a near future.
    */
   vpcIntegrationActivated?: boolean
 }
@@ -680,8 +679,6 @@ export type CreateFunctionRequest = {
   tags?: string[]
   /**
    * When connected to a Private Network, the function can access other Scaleway resources in this Private Network.
-
-Note: this feature is currently in beta and requires a namespace with VPC integration activated, using the `activate_vpc_integration` flag.
    */
   privateNetworkId?: string
 }
@@ -713,9 +710,9 @@ export type CreateNamespaceRequest = {
    */
   tags?: string[]
   /**
-   * When activated, functions in the namespace can be connected to a Private Network.
+   * @deprecated Setting this field to true doesn't matter anymore. It will be removed in a near future.
    */
-  activateVpcIntegration: boolean
+  activateVpcIntegration?: boolean
 }
 
 export type CreateTokenRequest = {
@@ -1303,8 +1300,6 @@ export type UpdateFunctionRequest = {
   tags?: string[]
   /**
    * When connected to a Private Network, the function can access other Scaleway resources in this Private Network.
-
-Note: this feature is currently in beta and requires a namespace with VPC integration activated, using the `activate_vpc_integration` flag.
    */
   privateNetworkId?: string
 }
