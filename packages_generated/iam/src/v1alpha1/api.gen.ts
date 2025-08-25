@@ -64,6 +64,7 @@ import {
   unmarshalQuotum,
   unmarshalSaml,
   unmarshalSamlCertificate,
+  unmarshalSamlInformation,
   unmarshalSetRulesResponse,
   unmarshalSSHKey,
   unmarshalUser,
@@ -106,6 +107,7 @@ import type {
   GetOrganizationSecuritySettingsRequest,
   GetPolicyRequest,
   GetQuotumRequest,
+  GetSamlInformationRequest,
   GetSSHKeyRequest,
   GetUserConnectionsRequest,
   GetUserConnectionsResponse,
@@ -153,6 +155,7 @@ import type {
   RemoveUserConnectionRequest,
   Saml,
   SamlCertificate,
+  SamlInformation,
   SetGroupMembersRequest,
   SetOrganizationAliasRequest,
   SetRulesRequest,
@@ -1518,4 +1521,19 @@ export class API extends ParentAPI {
       method: 'DELETE',
       path: `/iam/v1alpha1/saml-certificates/${validatePathParam('certificateId', request.certificateId)}`,
     })
+
+  /**
+   * Get SAML information.
+   *
+   * @param request - The request {@link GetSamlInformationRequest}
+   * @returns A Promise of SamlInformation
+   */
+  getSamlInformation = (request: Readonly<GetSamlInformationRequest> = {}) =>
+    this.client.fetch<SamlInformation>(
+      {
+        method: 'GET',
+        path: `/iam/v1alpha1/saml-information`,
+      },
+      unmarshalSamlInformation,
+    )
 }
