@@ -77,50 +77,6 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
   } as Endpoint
 }
 
-const unmarshalModelSupportedQuantization = (
-  data: unknown,
-): ModelSupportedQuantization => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ModelSupportedQuantization' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    allowed: data.allowed,
-    maxContextSize: data.max_context_size,
-    quantizationBits: data.quantization_bits,
-  } as ModelSupportedQuantization
-}
-
-const unmarshalModelSupportedNode = (data: unknown): ModelSupportedNode => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ModelSupportedNode' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    nodeTypeName: data.node_type_name,
-    quantizations: unmarshalArrayOfObject(
-      data.quantizations,
-      unmarshalModelSupportedQuantization,
-    ),
-  } as ModelSupportedNode
-}
-
-export const unmarshalModelSupportInfo = (data: unknown): ModelSupportInfo => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ModelSupportInfo' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    nodes: unmarshalArrayOfObject(data.nodes, unmarshalModelSupportedNode),
-  } as ModelSupportInfo
-}
-
 const unmarshalDeploymentQuantization = (
   data: unknown,
 ): DeploymentQuantization => {
@@ -163,6 +119,50 @@ export const unmarshalDeployment = (data: unknown): Deployment => {
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
   } as Deployment
+}
+
+const unmarshalModelSupportedQuantization = (
+  data: unknown,
+): ModelSupportedQuantization => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ModelSupportedQuantization' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    allowed: data.allowed,
+    maxContextSize: data.max_context_size,
+    quantizationBits: data.quantization_bits,
+  } as ModelSupportedQuantization
+}
+
+const unmarshalModelSupportedNode = (data: unknown): ModelSupportedNode => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ModelSupportedNode' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    nodeTypeName: data.node_type_name,
+    quantizations: unmarshalArrayOfObject(
+      data.quantizations,
+      unmarshalModelSupportedQuantization,
+    ),
+  } as ModelSupportedNode
+}
+
+const unmarshalModelSupportInfo = (data: unknown): ModelSupportInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ModelSupportInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    nodes: unmarshalArrayOfObject(data.nodes, unmarshalModelSupportedNode),
+  } as ModelSupportInfo
 }
 
 export const unmarshalModel = (data: unknown): Model => {
