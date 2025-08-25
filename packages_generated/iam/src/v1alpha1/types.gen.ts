@@ -1191,6 +1191,8 @@ export type GetSSHKeyRequest = {
   sshKeyId: string
 }
 
+export type GetSamlInformationRequest = Record<string, never>
+
 export type GetUserConnectionsRequest = {
   /**
    * ID of the user to list connections for.
@@ -1840,6 +1842,17 @@ export interface Saml {
    * Single Sign-On URL of the SAML Identity Provider.
    */
   singleSignOnUrl: string
+}
+
+export interface SamlInformation {
+  /**
+   * Entity ID.
+   */
+  entityId: string
+  /**
+   * SAML Assertion Consumer Service url.
+   */
+  assertionConsumerServiceUrl: string
 }
 
 export type SetGroupMembersRequest = {

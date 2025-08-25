@@ -60,6 +60,7 @@ import type {
   RuleSpecs,
   Saml,
   SamlCertificate,
+  SamlInformation,
   SetGroupMembersRequest,
   SetOrganizationAliasRequest,
   SetRulesRequest,
@@ -709,6 +710,19 @@ export const unmarshalSaml = (data: unknown): Saml => {
     id: data.id,
     singleSignOnUrl: data.single_sign_on_url,
   } as Saml
+}
+
+export const unmarshalSamlInformation = (data: unknown): SamlInformation => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SamlInformation' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    assertionConsumerServiceUrl: data.assertion_consumer_service_url,
+    entityId: data.entity_id,
+  } as SamlInformation
 }
 
 export const unmarshalSetRulesResponse = (data: unknown): SetRulesResponse => {
