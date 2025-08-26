@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 export type Region = 'fr-par' | 'nl-ams' | 'pl-waw' | (string & {})
 
 export type Zone =
@@ -12,7 +11,6 @@ export type Zone =
   | 'pl-waw-2'
   | 'pl-waw-3'
   | (string & {})
-/* eslint-enable @typescript-eslint/ban-types */
 
 export type ApiLocality =
   | { type: 'zone'; zones: Zone[] }
