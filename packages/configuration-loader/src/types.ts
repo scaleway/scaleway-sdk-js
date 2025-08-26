@@ -3,7 +3,7 @@
  *
  * @public
  */
-export type Profile = {
+export interface Profile {
   /**
    * You need an access key and a secret key to connect to Scaleway API.
    * Generate your token at the following address: {@link https://console.scaleway.com/project/credentials}
@@ -48,7 +48,7 @@ export type Profile = {
 /** Configuration type. */
 export type ConfigurationType = Record<string, Record<string, string>>
 /** Parameters to load the all the profiles from the configuration file */
-export type AllProfilesFromFileParams = {
+export interface AllProfilesFromFileParams {
   /**
    * The path at which to locate the configuration file.
    *
