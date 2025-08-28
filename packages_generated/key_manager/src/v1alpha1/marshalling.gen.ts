@@ -20,6 +20,8 @@ import type {
   Key,
   KeyRotationPolicy,
   KeyUsage,
+  ListAlgorithmsResponse,
+  ListAlgorithmsResponseAlgorithm,
   ListKeysResponse,
   PublicKey,
   SignRequest,
@@ -133,6 +135,39 @@ export const unmarshalEncryptResponse = (data: unknown): EncryptResponse => {
     ciphertext: data.ciphertext,
     keyId: data.key_id,
   } as EncryptResponse
+}
+
+const unmarshalListAlgorithmsResponseAlgorithm = (
+  data: unknown,
+): ListAlgorithmsResponseAlgorithm => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListAlgorithmsResponseAlgorithm' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+    recommended: data.recommended,
+    usage: data.usage,
+  } as ListAlgorithmsResponseAlgorithm
+}
+
+export const unmarshalListAlgorithmsResponse = (
+  data: unknown,
+): ListAlgorithmsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListAlgorithmsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    algorithms: unmarshalArrayOfObject(
+      data.algorithms,
+      unmarshalListAlgorithmsResponseAlgorithm,
+    ),
+  } as ListAlgorithmsResponse
 }
 
 export const unmarshalListKeysResponse = (data: unknown): ListKeysResponse => {
