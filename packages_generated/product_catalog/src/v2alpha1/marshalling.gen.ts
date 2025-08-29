@@ -162,6 +162,7 @@ const unmarshalPublicCatalogProductPropertiesAppleSilicon = (
 
   return {
     range: data.range,
+    serverType: data.server_type,
   } as PublicCatalogProductPropertiesAppleSilicon
 }
 
@@ -190,6 +191,7 @@ const unmarshalPublicCatalogProductPropertiesDedibox = (
   }
 
   return {
+    offerId: data.offer_id,
     range: data.range,
   } as PublicCatalogProductPropertiesDedibox
 }
@@ -204,6 +206,7 @@ const unmarshalPublicCatalogProductPropertiesElasticMetal = (
   }
 
   return {
+    offerId: data.offer_id,
     range: data.range,
   } as PublicCatalogProductPropertiesElasticMetal
 }
