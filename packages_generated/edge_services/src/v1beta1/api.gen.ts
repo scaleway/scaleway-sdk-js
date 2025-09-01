@@ -3,8 +3,8 @@
 
 import type { WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   urlParams,
   validatePathParam,
   waitForResource,
@@ -84,6 +84,7 @@ import type {
   CreateRouteStageRequest,
   CreateTLSStageRequest,
   CreateWafStageRequest,
+  DNSStage,
   DeleteBackendStageRequest,
   DeleteCacheStageRequest,
   DeleteCurrentPlanRequest,
@@ -92,7 +93,6 @@ import type {
   DeleteRouteStageRequest,
   DeleteTLSStageRequest,
   DeleteWafStageRequest,
-  DNSStage,
   GetBackendStageRequest,
   GetBillingRequest,
   GetBillingResponse,

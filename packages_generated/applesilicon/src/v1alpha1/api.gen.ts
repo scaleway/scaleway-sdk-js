@@ -3,8 +3,8 @@
 
 import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   toApiLocality,
   urlParams,
   validatePathParam,
@@ -26,8 +26,8 @@ import {
   unmarshalConnectivityDiagnostic,
   unmarshalListOSResponse,
   unmarshalListServerPrivateNetworksResponse,
-  unmarshalListServersResponse,
   unmarshalListServerTypesResponse,
+  unmarshalListServersResponse,
   unmarshalOS,
   unmarshalServer,
   unmarshalServerPrivateNetwork,
@@ -48,10 +48,10 @@ import type {
   ListOSRequest,
   ListOSResponse,
   ListServerPrivateNetworksResponse,
-  ListServersRequest,
-  ListServersResponse,
   ListServerTypesRequest,
   ListServerTypesResponse,
+  ListServersRequest,
+  ListServersResponse,
   OS,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
   PrivateNetworkApiDeleteServerPrivateNetworkRequest,

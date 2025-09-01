@@ -3,8 +3,8 @@
 
 import type { WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   resolveOneOf,
   urlParams,
   validatePathParam,
@@ -35,8 +35,8 @@ import {
   unmarshalListJobsResponse,
   unmarshalListModelsResponse,
   unmarshalListPlatformsResponse,
-  unmarshalListProcessesResponse,
   unmarshalListProcessResultsResponse,
+  unmarshalListProcessesResponse,
   unmarshalListSessionACLsResponse,
   unmarshalListSessionsResponse,
   unmarshalModel,
@@ -78,10 +78,10 @@ import type {
   ListModelsResponse,
   ListPlatformsRequest,
   ListPlatformsResponse,
-  ListProcessesRequest,
-  ListProcessesResponse,
   ListProcessResultsRequest,
   ListProcessResultsResponse,
+  ListProcessesRequest,
+  ListProcessesResponse,
   ListSessionACLsRequest,
   ListSessionACLsResponse,
   ListSessionsRequest,

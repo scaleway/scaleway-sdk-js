@@ -3,8 +3,8 @@
 
 import type { WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   urlParams,
   validatePathParam,
   waitForResource,

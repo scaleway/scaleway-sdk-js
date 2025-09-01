@@ -3,8 +3,8 @@
 
 import type { ApiLocality } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   toApiLocality,
   urlParams,
   validatePathParam,

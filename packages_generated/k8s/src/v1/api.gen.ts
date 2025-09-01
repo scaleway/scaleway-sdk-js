@@ -3,8 +3,8 @@
 
 import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   toApiLocality,
   urlParams,
   validatePathParam,
@@ -33,8 +33,8 @@ import {
   unmarshalListClusterACLRulesResponse,
   unmarshalListClusterAvailableTypesResponse,
   unmarshalListClusterAvailableVersionsResponse,
-  unmarshalListClustersResponse,
   unmarshalListClusterTypesResponse,
+  unmarshalListClustersResponse,
   unmarshalListNodesResponse,
   unmarshalListPoolsResponse,
   unmarshalListVersionsResponse,
@@ -70,10 +70,10 @@ import type {
   ListClusterAvailableTypesResponse,
   ListClusterAvailableVersionsRequest,
   ListClusterAvailableVersionsResponse,
-  ListClustersRequest,
-  ListClustersResponse,
   ListClusterTypesRequest,
   ListClusterTypesResponse,
+  ListClustersRequest,
+  ListClustersResponse,
   ListNodesRequest,
   ListNodesResponse,
   ListPoolsRequest,

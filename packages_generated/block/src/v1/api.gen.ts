@@ -3,8 +3,8 @@
 
 import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   toApiLocality,
   urlParams,
   validatePathParam,
@@ -22,8 +22,8 @@ import {
   marshalUpdateSnapshotRequest,
   marshalUpdateVolumeRequest,
   unmarshalListSnapshotsResponse,
-  unmarshalListVolumesResponse,
   unmarshalListVolumeTypesResponse,
+  unmarshalListVolumesResponse,
   unmarshalSnapshot,
   unmarshalVolume,
 } from './marshalling.gen'
@@ -38,10 +38,10 @@ import type {
   ImportSnapshotFromObjectStorageRequest,
   ListSnapshotsRequest,
   ListSnapshotsResponse,
-  ListVolumesRequest,
-  ListVolumesResponse,
   ListVolumeTypesRequest,
   ListVolumeTypesResponse,
+  ListVolumesRequest,
+  ListVolumesResponse,
   Snapshot,
   UpdateSnapshotRequest,
   UpdateVolumeRequest,

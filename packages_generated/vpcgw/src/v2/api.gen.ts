@@ -3,8 +3,8 @@
 
 import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   toApiLocality,
   urlParams,
   validatePathParam,
@@ -32,8 +32,8 @@ import {
   unmarshalGatewayNetwork,
   unmarshalIP,
   unmarshalListGatewayNetworksResponse,
-  unmarshalListGatewaysResponse,
   unmarshalListGatewayTypesResponse,
+  unmarshalListGatewaysResponse,
   unmarshalListIPsResponse,
   unmarshalListPatRulesResponse,
   unmarshalPatRule,
@@ -61,10 +61,10 @@ import type {
   IP,
   ListGatewayNetworksRequest,
   ListGatewayNetworksResponse,
-  ListGatewaysRequest,
-  ListGatewaysResponse,
   ListGatewayTypesRequest,
   ListGatewayTypesResponse,
+  ListGatewaysRequest,
+  ListGatewaysResponse,
   ListIPsRequest,
   ListIPsResponse,
   ListPatRulesRequest,
