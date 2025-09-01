@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.2.2 (2025-09-01)
+
+### Bug Fixes
+
+- **lb:** deny whitespace on uri field ([#2256](https://github.com/scaleway/scaleway-sdk-js/issues/2256)) ([65d413c](https://github.com/scaleway/scaleway-sdk-js/commit/65d413ca7b8ffc73ee476c21dd8df99ab78bbd2e))
+
 ## 1.2.1 (2025-06-18)
 
 ### Bug Fixes

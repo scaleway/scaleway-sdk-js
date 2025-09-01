@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.3.0 (2025-09-01)
+
+### Bug Fixes
+
+- **key_manager:** add scheduled_for_deletion state ([#2246](https://github.com/scaleway/scaleway-sdk-js/issues/2246)) ([7a35cdb](https://github.com/scaleway/scaleway-sdk-js/commit/7a35cdb2d2540b0dc9ab716fa7093549c60db23b))
+
+### Features
+
+- **key_manager:** add api to list algorithms ([#2330](https://github.com/scaleway/scaleway-sdk-js/issues/2330)) ([933e1ea](https://github.com/scaleway/scaleway-sdk-js/commit/933e1ea0bd5b5501792ccb647944d1d1004bb87d))
+
 ## 1.2.2 (2025-06-18)
 
 ### Bug Fixes

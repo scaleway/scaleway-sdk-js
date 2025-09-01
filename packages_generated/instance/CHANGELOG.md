@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.2.0 (2025-09-01)
+
+### Features
+
+- **instance:** create MigrateVolume method ([#2257](https://github.com/scaleway/scaleway-sdk-js/issues/2257)) ([4b10007](https://github.com/scaleway/scaleway-sdk-js/commit/4b10007738ce676e6d8909af60aa9b5666739f3e))
+
 # 1.1.0 (2025-06-18)
 
 ### Bug Fixes

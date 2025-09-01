@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.2.0 (2025-09-01)
+
+### Features
+
+- **webhosting:** add custom domain to hosting ([#2312](https://github.com/scaleway/scaleway-sdk-js/issues/2312)) ([9205729](https://github.com/scaleway/scaleway-sdk-js/commit/920572938863202d914eae21fbc89febe3b7402c))
+- **webhosting:** add free subdomain support ([#2302](https://github.com/scaleway/scaleway-sdk-js/issues/2302)) ([f92fbd0](https://github.com/scaleway/scaleway-sdk-js/commit/f92fbd075c97e76ef7089bd59539522a507c2f39))
+- **webhosting:** add parent zone domain name ([#2243](https://github.com/scaleway/scaleway-sdk-js/issues/2243)) ([ba7c2fe](https://github.com/scaleway/scaleway-sdk-js/commit/ba7c2fec9899b2195a0988865500bbc4dca9a7f2))
+- **webhosting:** add public backup api ([#2307](https://github.com/scaleway/scaleway-sdk-js/issues/2307)) ([1cf1b8f](https://github.com/scaleway/scaleway-sdk-js/commit/1cf1b8fc982e3de0a4b0c7fc3cf20e55f93e5f43))
+- **webhosting:** deprecate CheckUserOwnsDomain endpoint ([#2329](https://github.com/scaleway/scaleway-sdk-js/issues/2329)) ([d4b8598](https://github.com/scaleway/scaleway-sdk-js/commit/d4b85989dad74a78b6fae3ae97b4d7522ab70b15))
+
 ## 1.1.3 (2025-06-18)
 
 ### Bug Fixes

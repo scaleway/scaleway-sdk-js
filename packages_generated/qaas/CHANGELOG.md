@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-qaas@1.2.0...@scaleway/sdk-qaas@1.3.0) (2025-09-01)
+
+### Features
+
+- **qaas:** add model messages ([#2310](https://github.com/scaleway/scaleway-sdk-js/issues/2310)) ([f89e805](https://github.com/scaleway/scaleway-sdk-js/commit/f89e8054ce4cacf239f377ef9b2b4e79831131a7))
+
 # 1.2.0 (2025-06-30)
 
 ### Features

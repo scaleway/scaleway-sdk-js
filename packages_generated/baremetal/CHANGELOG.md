@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.1.0 (2025-09-01)
+
+### Features
+
+- **baremetal:** add protected flag on servers ([#2255](https://github.com/scaleway/scaleway-sdk-js/issues/2255)) ([217b6aa](https://github.com/scaleway/scaleway-sdk-js/commit/217b6aa1302c359c351a3d1e1f7eee44824781e0))
+
 ## 1.0.5 (2025-06-18)
 
 ### Bug Fixes

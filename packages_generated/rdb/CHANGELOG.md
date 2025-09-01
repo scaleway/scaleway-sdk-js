@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.1.1 (2025-09-01)
+
+**Note:** Version bump only for package @scaleway/sdk-rdb
+
 # [1.1.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-rdb@1.0.5...@scaleway/sdk-rdb@1.1.0) (2025-06-23)
 
 ### Features
