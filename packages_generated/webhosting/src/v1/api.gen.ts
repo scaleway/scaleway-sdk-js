@@ -599,6 +599,7 @@ export class DnsAPI extends ParentAPI {
   /**
    * Check whether you own this domain or not.. Check whether you own this domain or not.
    *
+   * @deprecated
    * @param request - The request {@link DnsApiCheckUserOwnsDomainRequest}
    * @returns A Promise of CheckUserOwnsDomainResponse
    */

@@ -36,6 +36,12 @@ export type KeyState =
   | 'pending_key_material'
   | 'scheduled_for_deletion'
 
+export type ListAlgorithmsRequestUsage =
+  | 'unknown_usage'
+  | 'symmetric_encryption'
+  | 'asymmetric_encryption'
+  | 'asymmetric_signing'
+
 export type ListKeysRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
@@ -78,6 +84,12 @@ export interface KeyUsage {
    * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning' could be set.
    */
   asymmetricSigning?: KeyAlgorithmAsymmetricSigning
+}
+
+export interface ListAlgorithmsResponseAlgorithm {
+  usage: string
+  name: string
+  recommended: boolean
 }
 
 export interface Key {
@@ -380,6 +392,24 @@ export type ImportKeyMaterialRequest = {
    * A salt is random data added to key material to ensure unique derived keys, even if the input is similar. It helps strengthen security when the key material has low randomness (low entropy).
    */
   salt?: string
+}
+
+export type ListAlgorithmsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Filter by key usage.
+   */
+  usages?: ListAlgorithmsRequestUsage[]
+}
+
+export interface ListAlgorithmsResponse {
+  /**
+   * Returns a list of algorithms matching the requested criteria.
+   */
+  algorithms: ListAlgorithmsResponseAlgorithm[]
 }
 
 export type ListKeysRequest = {

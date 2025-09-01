@@ -22,6 +22,7 @@ import {
   unmarshalDecryptResponse,
   unmarshalEncryptResponse,
   unmarshalKey,
+  unmarshalListAlgorithmsResponse,
   unmarshalListKeysResponse,
   unmarshalPublicKey,
   unmarshalSignResponse,
@@ -43,6 +44,8 @@ import type {
   GetPublicKeyRequest,
   ImportKeyMaterialRequest,
   Key,
+  ListAlgorithmsRequest,
+  ListAlgorithmsResponse,
   ListKeysRequest,
   ListKeysResponse,
   ProtectKeyRequest,
@@ -413,5 +416,21 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/restore`,
       },
       unmarshalKey,
+    )
+
+  /**
+   * List all available algorithms. Lists all cryptographic algorithms supported by the Key Manager service.
+   *
+   * @param request - The request {@link ListAlgorithmsRequest}
+   * @returns A Promise of ListAlgorithmsResponse
+   */
+  listAlgorithms = (request: Readonly<ListAlgorithmsRequest> = {}) =>
+    this.client.fetch<ListAlgorithmsResponse>(
+      {
+        method: 'GET',
+        path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/algorithms`,
+        urlParams: urlParams(['usages', request.usages]),
+      },
+      unmarshalListAlgorithmsResponse,
     )
 }

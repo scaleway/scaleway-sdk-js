@@ -185,6 +185,10 @@ export interface PublicCatalogProductPropertiesAppleSilicon {
    * The range of the Apple Silicon server.
    */
   range: string
+  /**
+   * The server type of the Apple Silicon server.
+   */
+  serverType: string
 }
 
 export interface PublicCatalogProductPropertiesBlockStorage {
@@ -203,6 +207,10 @@ export interface PublicCatalogProductPropertiesDedibox {
    * The range of the Dedibox server.
    */
   range: string
+  /**
+   * The offer ID of the Dedibox server.
+   */
+  offerId: number
 }
 
 export interface PublicCatalogProductPropertiesElasticMetal {
@@ -210,6 +218,10 @@ export interface PublicCatalogProductPropertiesElasticMetal {
    * The range of the Elastic Metal server.
    */
   range: string
+  /**
+   * The offer ID of the Elastic Metal server.
+   */
+  offerId: string
 }
 
 export interface PublicCatalogProductPropertiesHardware {

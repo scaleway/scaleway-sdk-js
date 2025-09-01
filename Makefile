@@ -41,7 +41,5 @@ generate-packages:
 generate-global-sdk-package:
 	pnpm run generateGlobalSdkPackage
 
-publish: install-dependencies
-	pnpm run build
-	pnpm lerna changed
-	pnpm exec lerna publish -y --registry $(NPM_PUBLISH_REGISTRY) --ignore-scripts
+publish:
+	pnpm lerna version -y --no-private --force-git-tag --create-release github
