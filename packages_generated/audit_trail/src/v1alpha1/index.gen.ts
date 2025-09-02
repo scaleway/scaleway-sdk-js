@@ -13,6 +13,7 @@ export type {
   EventPrincipal,
   EventSystem,
   InstanceServerInfo,
+  IpamIpInfo,
   KeyManagerKeyInfo,
   KubernetesACLInfo,
   KubernetesClusterInfo,
