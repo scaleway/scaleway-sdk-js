@@ -16,6 +16,7 @@ import type {
   EventPrincipal,
   EventSystem,
   InstanceServerInfo,
+  IpamIpInfo,
   KeyManagerKeyInfo,
   KubernetesACLInfo,
   KubernetesClusterInfo,
@@ -117,6 +118,18 @@ const unmarshalInstanceServerInfo = (data: unknown): InstanceServerInfo => {
   return {
     name: data.name,
   } as InstanceServerInfo
+}
+
+const unmarshalIpamIpInfo = (data: unknown): IpamIpInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'IpamIpInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    address: data.address,
+  } as IpamIpInfo
 }
 
 const unmarshalKeyManagerKeyInfo = (data: unknown): KeyManagerKeyInfo => {
@@ -261,6 +274,9 @@ export const unmarshalResource = (data: unknown): Resource => {
     id: data.id,
     instanceServerInfo: data.instance_server_info
       ? unmarshalInstanceServerInfo(data.instance_server_info)
+      : undefined,
+    ipamIpInfo: data.ipam_ip_info
+      ? unmarshalIpamIpInfo(data.ipam_ip_info)
       : undefined,
     keyManagerKeyInfo: data.key_manager_key_info
       ? unmarshalKeyManagerKeyInfo(data.key_manager_key_info)

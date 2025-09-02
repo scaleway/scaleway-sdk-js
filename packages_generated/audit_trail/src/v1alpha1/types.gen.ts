@@ -27,9 +27,12 @@ export type ResourceType =
   | 'account_organization'
   | 'account_project'
   | 'instance_server'
+  | 'instance_placement_group'
+  | 'instance_security_group'
   | 'apple_silicon_server'
   | 'baremetal_server'
   | 'baremetal_setting'
+  | 'ipam_ip'
 
 export interface AccountOrganizationInfo {}
 
@@ -58,6 +61,10 @@ export interface BaremetalSettingInfo {
 
 export interface InstanceServerInfo {
   name: string
+}
+
+export interface IpamIpInfo {
+  address: string
 }
 
 export interface KeyManagerKeyInfo {}
@@ -103,91 +110,96 @@ export interface Resource {
   /**
    * @deprecated
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
   secmSecretInfo?: SecretManagerSecretInfo
   /**
    * @deprecated
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
   secmSecretVersionInfo?: SecretManagerSecretVersionInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
   kubeClusterInfo?: KubernetesClusterInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
   kubePoolInfo?: KubernetesPoolInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
   kubeNodeInfo?: KubernetesNodeInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
   kubeAclInfo?: KubernetesACLInfo
   /**
    * @deprecated
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
   keymKeyInfo?: KeyManagerKeyInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
   secretManagerSecretInfo?: SecretManagerSecretInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
   secretManagerVersionInfo?: SecretManagerSecretVersionInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
   keyManagerKeyInfo?: KeyManagerKeyInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
   accountUserInfo?: AccountUserInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
   accountOrganizationInfo?: AccountOrganizationInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
   instanceServerInfo?: InstanceServerInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
   appleSiliconServerInfo?: AppleSiliconServerInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
   accountProjectInfo?: AccountProjectInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
   baremetalServerInfo?: BaremetalServerInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
   baremetalSettingInfo?: BaremetalSettingInfo
+  /**
+   *
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
+   */
+  ipamIpInfo?: IpamIpInfo
 }
 
 export interface ProductService {
