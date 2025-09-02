@@ -44,4 +44,6 @@ generate-global-sdk-package:
 publish: install-dependencies
 	pnpm run build
 	pnpm lerna changed
-	pnpm exec lerna publish -y --registry $(NPM_PUBLISH_REGISTRY) --ignore-scripts
+	git add .
+	git commit -m "chore: update generated files" || true
+	pnpm lerna version -y --no-private --force-git-tag --create-release github
