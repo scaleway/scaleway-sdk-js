@@ -593,6 +593,10 @@ export interface Session {
    * Default computation model ID to be executed by job assigned to this session.
    */
   modelId?: string
+  /**
+   * Platform configuration parameters applied to this session.
+   */
+  parameters?: string
 }
 
 export type CancelJobRequest = {
@@ -715,6 +719,10 @@ export type CreateSessionRequest = {
    * Default computation model ID to be executed by job assigned to this session.
    */
   modelId?: string
+  /**
+   * Optional platform configuration parameters applied to this session.
+   */
+  parameters?: string
 }
 
 export type DeleteJobRequest = {
