@@ -15,19 +15,6 @@ jobs:
           fetch-depth: '0'
           persist-credentials: false
       - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-
-      - name: Setup SSH signing
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_SIGNING_PRIVATE_KEY }}" > ~/.ssh/signing_key
-          chmod 600 ~/.ssh/signing_key
-          echo "${{ secrets.SSH_SIGNING_PUBLIC_KEY }}" > ~/.ssh/signing_key.pub
-          chmod 644 ~/.ssh/signing_key.pub
-          git config --global gpg.format ssh
-          git config --global user.signingkey ~/.ssh/signing_key.pub
-          git config --global commit.gpgsign true
-          git config --global tag.gpgsign true
-
       - name: Git Identity
         run: |
           git config --global user.name 'scaleway-bot'
@@ -43,18 +30,18 @@ jobs:
           registry-url: 'https://registry.npmjs.org/'
           node-version: 20
           check-latest: true
-      - run: make install-dependencies
-      - run: make build
+      - run: pnpm install
+      - run: pnpm run build
 
       - name: Version package with lerna
-        run: make publish
+        run: pnpm lerna version -y --no-private --force-git-tag --create-release github
         env:
           HUSKY: 0
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       # https://docs.github.com/en/actions/use-cases-and-examples/publishing-packages/publishing-nodejs-packages#publishing-packages-to-the-npm-registry
       - name: Publish to npm
-        run: make publish
+        run: pnpm -r publish --access public --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
