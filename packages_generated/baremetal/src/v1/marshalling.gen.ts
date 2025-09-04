@@ -935,6 +935,7 @@ export const marshalRebootServerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   boot_type: request.bootType,
+  ssh_key_ids: request.sshKeyIds,
 })
 
 export const marshalStartBMCAccessRequest = (
@@ -949,6 +950,7 @@ export const marshalStartServerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   boot_type: request.bootType,
+  ssh_key_ids: request.sshKeyIds,
 })
 
 export const marshalUpdateIPRequest = (
