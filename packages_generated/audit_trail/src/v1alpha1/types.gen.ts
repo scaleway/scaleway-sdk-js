@@ -29,10 +29,15 @@ export type ResourceType =
   | 'instance_server'
   | 'instance_placement_group'
   | 'instance_security_group'
+  | 'instance_volume'
+  | 'instance_snapshot'
+  | 'instance_image'
   | 'apple_silicon_server'
   | 'baremetal_server'
   | 'baremetal_setting'
   | 'ipam_ip'
+  | 'sbs_volume'
+  | 'sbs_snapshot'
 
 export interface AccountOrganizationInfo {}
 
@@ -171,6 +176,7 @@ export interface Resource {
    */
   accountOrganizationInfo?: AccountOrganizationInfo
   /**
+   * @deprecated
    *
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo' could be set.
    */
