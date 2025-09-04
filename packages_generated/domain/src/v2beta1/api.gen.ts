@@ -56,6 +56,7 @@ import {
   unmarshalListDNSZoneVersionsResponse,
   unmarshalListDomainHostsResponse,
   unmarshalListDomainsResponse,
+  unmarshalListInboundTransfersResponse,
   unmarshalListRenewableDomainsResponse,
   unmarshalListSSLCertificatesResponse,
   unmarshalListTasksResponse,
@@ -110,6 +111,7 @@ import type {
   ListDNSZoneVersionsResponse,
   ListDomainHostsResponse,
   ListDomainsResponse,
+  ListInboundTransfersResponse,
   ListRenewableDomainsResponse,
   ListSSLCertificatesRequest,
   ListSSLCertificatesResponse,
@@ -134,6 +136,7 @@ import type {
   RegistrarApiListContactsRequest,
   RegistrarApiListDomainHostsRequest,
   RegistrarApiListDomainsRequest,
+  RegistrarApiListInboundTransfersRequest,
   RegistrarApiListRenewableDomainsRequest,
   RegistrarApiListTasksRequest,
   RegistrarApiListTldsRequest,
@@ -723,6 +726,43 @@ You can filter the list of tasks by domain name.
    */
   listTasks = (request: Readonly<RegistrarApiListTasksRequest> = {}) =>
     enrichForPagination('tasks', this.pageOfListTasks, request)
+
+  protected pageOfListInboundTransfers = (
+    request: Readonly<RegistrarApiListInboundTransfersRequest>,
+  ) =>
+    this.client.fetch<ListInboundTransfersResponse>(
+      {
+        method: 'GET',
+        path: `/domain/v2beta1/inbound-transfers`,
+        urlParams: urlParams(
+          ['domain', request.domain],
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
+        ),
+      },
+      unmarshalListInboundTransfersResponse,
+    )
+
+  listInboundTransfers = (
+    request: Readonly<RegistrarApiListInboundTransfersRequest>,
+  ) =>
+    enrichForPagination(
+      'inboundTransfers',
+      this.pageOfListInboundTransfers,
+      request,
+    )
 
   /**
    * Purchase domains. Request the registration of domain names.
