@@ -105,6 +105,13 @@ export type SamlCertificateType =
   | 'signing'
   | 'encryption'
 
+export type SamlStatus =
+  | 'unknown_saml_status'
+  | 'valid'
+  | 'missing_certificate'
+  | 'missing_entity_id'
+  | 'missing_single_sign_on_url'
+
 export type UserStatus = 'unknown_status' | 'invitation_pending' | 'activated'
 
 export type UserType = 'unknown_type' | 'guest' | 'owner' | 'member'
@@ -792,6 +799,11 @@ export interface User {
   locked: boolean
 }
 
+export interface SamlServiceProvider {
+  entityId: string
+  assertionConsumerServiceUrl: string
+}
+
 export type AddGroupMemberRequest = {
   /**
    * ID of the group.
@@ -921,21 +933,6 @@ export type CreateJWTRequest = {
   referrer: string
 }
 
-export type CreateOrganizationSamlRequest = {
-  /**
-   * ID of the Organization.
-   */
-  organizationId?: string
-  /**
-   * Entity ID of the SAML Identity Provider.
-   */
-  entityId: string
-  /**
-   * Single Sign-On URL of the SAML Identity Provider.
-   */
-  singleSignOnUrl: string
-}
-
 export type CreatePolicyRequest = {
   /**
    * Name of the policy to create (max length is 64 characters).
@@ -1056,13 +1053,6 @@ export type DeleteJWTRequest = {
   jti: string
 }
 
-export type DeleteOrganizationSamlRequest = {
-  /**
-   * ID of the Organization.
-   */
-  organizationId?: string
-}
-
 export type DeletePolicyRequest = {
   /**
    * Id of policy to delete.
@@ -1081,6 +1071,13 @@ export type DeleteSamlCertificateRequest = {
   certificateId: string
 }
 
+export type DeleteSamlRequest = {
+  /**
+   * ID of the SAML configuration.
+   */
+  samlId: string
+}
+
 export type DeleteUserMFAOTPRequest = {
   /**
    * User ID of the MFA OTP.
@@ -1093,6 +1090,13 @@ export type DeleteUserRequest = {
    * ID of the user to delete.
    */
   userId: string
+}
+
+export type EnableOrganizationSamlRequest = {
+  /**
+   * ID of the Organization.
+   */
+  organizationId?: string
 }
 
 export interface EncodedJWT {
@@ -1190,8 +1194,6 @@ export type GetSSHKeyRequest = {
    */
   sshKeyId: string
 }
-
-export type GetSamlInformationRequest = Record<string, never>
 
 export type GetUserConnectionsRequest = {
   /**
@@ -1835,6 +1837,14 @@ export interface Saml {
    */
   id: string
   /**
+   * Status of the SAML configuration.
+   */
+  status: SamlStatus
+  /**
+   * Service Provider information.
+   */
+  serviceProvider?: SamlServiceProvider
+  /**
    * Entity ID of the SAML Identity Provider.
    */
   entityId: string
@@ -1842,17 +1852,6 @@ export interface Saml {
    * Single Sign-On URL of the SAML Identity Provider.
    */
   singleSignOnUrl: string
-}
-
-export interface SamlInformation {
-  /**
-   * Entity ID.
-   */
-  entityId: string
-  /**
-   * SAML Assertion Consumer Service url.
-   */
-  assertionConsumerServiceUrl: string
 }
 
 export type SetGroupMembersRequest = {
@@ -1950,21 +1949,6 @@ export type UpdateGroupRequest = {
   tags?: string[]
 }
 
-export type UpdateOrganizationSamlRequest = {
-  /**
-   * ID of the Organization.
-   */
-  organizationId?: string
-  /**
-   * Entity ID of the SAML Identity Provider.
-   */
-  entityId?: string
-  /**
-   * Single Sign-On URL of the SAML Identity Provider.
-   */
-  singleSignOnUrl?: string
-}
-
 export type UpdateOrganizationSecuritySettingsRequest = {
   /**
    * ID of the Organization.
@@ -2037,6 +2021,21 @@ export type UpdateSSHKeyRequest = {
    * Enable or disable the SSH key.
    */
   disabled?: boolean
+}
+
+export type UpdateSamlRequest = {
+  /**
+   * ID of the SAML configuration.
+   */
+  samlId: string
+  /**
+   * Entity ID of the SAML Identity Provider.
+   */
+  entityId?: string
+  /**
+   * Single Sign-On URL of the SAML Identity Provider.
+   */
+  singleSignOnUrl?: string
 }
 
 export type UpdateUserPasswordRequest = {

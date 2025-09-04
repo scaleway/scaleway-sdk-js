@@ -15,7 +15,6 @@ import {
   marshalCreateApplicationRequest,
   marshalCreateGroupRequest,
   marshalCreateJWTRequest,
-  marshalCreateOrganizationSamlRequest,
   marshalCreatePolicyRequest,
   marshalCreateSSHKeyRequest,
   marshalCreateUserRequest,
@@ -28,9 +27,9 @@ import {
   marshalUpdateAPIKeyRequest,
   marshalUpdateApplicationRequest,
   marshalUpdateGroupRequest,
-  marshalUpdateOrganizationSamlRequest,
   marshalUpdateOrganizationSecuritySettingsRequest,
   marshalUpdatePolicyRequest,
+  marshalUpdateSamlRequest,
   marshalUpdateSSHKeyRequest,
   marshalUpdateUserPasswordRequest,
   marshalUpdateUserRequest,
@@ -64,7 +63,6 @@ import {
   unmarshalQuotum,
   unmarshalSaml,
   unmarshalSamlCertificate,
-  unmarshalSamlInformation,
   unmarshalSetRulesResponse,
   unmarshalSSHKey,
   unmarshalUser,
@@ -81,7 +79,6 @@ import type {
   CreateApplicationRequest,
   CreateGroupRequest,
   CreateJWTRequest,
-  CreateOrganizationSamlRequest,
   CreatePolicyRequest,
   CreateSSHKeyRequest,
   CreateUserMFAOTPRequest,
@@ -90,12 +87,13 @@ import type {
   DeleteApplicationRequest,
   DeleteGroupRequest,
   DeleteJWTRequest,
-  DeleteOrganizationSamlRequest,
   DeletePolicyRequest,
   DeleteSamlCertificateRequest,
+  DeleteSamlRequest,
   DeleteSSHKeyRequest,
   DeleteUserMFAOTPRequest,
   DeleteUserRequest,
+  EnableOrganizationSamlRequest,
   EncodedJWT,
   GetAPIKeyRequest,
   GetApplicationRequest,
@@ -107,7 +105,6 @@ import type {
   GetOrganizationSecuritySettingsRequest,
   GetPolicyRequest,
   GetQuotumRequest,
-  GetSamlInformationRequest,
   GetSSHKeyRequest,
   GetUserConnectionsRequest,
   GetUserConnectionsResponse,
@@ -155,7 +152,6 @@ import type {
   RemoveUserConnectionRequest,
   Saml,
   SamlCertificate,
-  SamlInformation,
   SetGroupMembersRequest,
   SetOrganizationAliasRequest,
   SetRulesRequest,
@@ -165,9 +161,9 @@ import type {
   UpdateAPIKeyRequest,
   UpdateApplicationRequest,
   UpdateGroupRequest,
-  UpdateOrganizationSamlRequest,
   UpdateOrganizationSecuritySettingsRequest,
   UpdatePolicyRequest,
+  UpdateSamlRequest,
   UpdateSSHKeyRequest,
   UpdateUserPasswordRequest,
   UpdateUserRequest,
@@ -1425,17 +1421,17 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Create a SAML Identity Provider configuration for an Organization.
+   * Enable SAML Identity Provider for an Organization.
    *
-   * @param request - The request {@link CreateOrganizationSamlRequest}
+   * @param request - The request {@link EnableOrganizationSamlRequest}
    * @returns A Promise of Saml
    */
-  createOrganizationSaml = (request: Readonly<CreateOrganizationSamlRequest>) =>
+  enableOrganizationSaml = (
+    request: Readonly<EnableOrganizationSamlRequest> = {},
+  ) =>
     this.client.fetch<Saml>(
       {
-        body: JSON.stringify(
-          marshalCreateOrganizationSamlRequest(request, this.client.settings),
-        ),
+        body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/saml`,
@@ -1444,37 +1440,33 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a SAML Identity Provider configuration for an Organization.
+   * Update SAML Identity Provider configuration.
    *
-   * @param request - The request {@link UpdateOrganizationSamlRequest}
+   * @param request - The request {@link UpdateSamlRequest}
    * @returns A Promise of Saml
    */
-  updateOrganizationSaml = (
-    request: Readonly<UpdateOrganizationSamlRequest> = {},
-  ) =>
+  updateSaml = (request: Readonly<UpdateSamlRequest>) =>
     this.client.fetch<Saml>(
       {
         body: JSON.stringify(
-          marshalUpdateOrganizationSamlRequest(request, this.client.settings),
+          marshalUpdateSamlRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/saml`,
+        path: `/iam/v1alpha1/saml/${validatePathParam('samlId', request.samlId)}`,
       },
       unmarshalSaml,
     )
 
   /**
-   * Delete a SAML Identity Provider configuration for an Organization.
+   * Disable SAML Identity Provider for an Organization.
    *
-   * @param request - The request {@link DeleteOrganizationSamlRequest}
+   * @param request - The request {@link DeleteSamlRequest}
    */
-  deleteOrganizationSaml = (
-    request: Readonly<DeleteOrganizationSamlRequest> = {},
-  ) =>
+  deleteSaml = (request: Readonly<DeleteSamlRequest>) =>
     this.client.fetch<void>({
       method: 'DELETE',
-      path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/saml`,
+      path: `/iam/v1alpha1/saml/${validatePathParam('samlId', request.samlId)}`,
     })
 
   /**
@@ -1521,19 +1513,4 @@ export class API extends ParentAPI {
       method: 'DELETE',
       path: `/iam/v1alpha1/saml-certificates/${validatePathParam('certificateId', request.certificateId)}`,
     })
-
-  /**
-   * Get SAML information.
-   *
-   * @param request - The request {@link GetSamlInformationRequest}
-   * @returns A Promise of SamlInformation
-   */
-  getSamlInformation = (request: Readonly<GetSamlInformationRequest> = {}) =>
-    this.client.fetch<SamlInformation>(
-      {
-        method: 'GET',
-        path: `/iam/v1alpha1/saml-information`,
-      },
-      unmarshalSamlInformation,
-    )
 }
