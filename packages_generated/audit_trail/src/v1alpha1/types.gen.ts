@@ -313,7 +313,7 @@ export type ListEventsRequest = {
    */
   organizationId?: string
   /**
-   * (Optional) Returns a paginated list of Scaleway resources' features.
+   * (Optional) Type of the Scaleway resource.
    */
   resourceType?: ResourceType
   /**
@@ -336,13 +336,17 @@ export type ListEventsRequest = {
   pageSize?: number
   pageToken?: string
   /**
-   * (Optional) Name of the Scaleway resource in a hyphenated format.
+   * (Optional) Name of the Scaleway product in a hyphenated format.
    */
   productName?: string
   /**
    * (Optional) Name of the service of the API call performed.
    */
   serviceName?: string
+  /**
+   * (Optional) ID of the Scaleway resource.
+   */
+  resourceId?: string
 }
 
 export interface ListEventsResponse {

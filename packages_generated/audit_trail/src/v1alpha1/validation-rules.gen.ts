@@ -12,6 +12,10 @@ export const ListEventsRequest = {
   productName: {
     pattern: /^[a-z]+(-[a-z]+)*$/,
   },
+  resourceId: {
+    maxLength: 100,
+    pattern: /^[a-zA-Z0-9._-]+$/,
+  },
   serviceName: {
     pattern: /^scaleway(\.[a-zA-Z0-9_-]*)*$/,
   },
