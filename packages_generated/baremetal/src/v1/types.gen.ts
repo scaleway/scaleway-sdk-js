@@ -1410,6 +1410,10 @@ export type RebootServerRequest = {
    * The type of boot.
    */
   bootType?: ServerBootType
+  /**
+   * Additional SSH public key IDs to configure on rescue image.
+   */
+  sshKeyIds?: string[]
 }
 
 export interface SetServerPrivateNetworksResponse {
@@ -1444,6 +1448,10 @@ export type StartServerRequest = {
    * The type of boot.
    */
   bootType?: ServerBootType
+  /**
+   * Additional SSH public key IDs to configure on rescue image.
+   */
+  sshKeyIds?: string[]
 }
 
 export type StopBMCAccessRequest = {
