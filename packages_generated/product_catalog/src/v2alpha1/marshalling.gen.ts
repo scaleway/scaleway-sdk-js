@@ -388,6 +388,7 @@ const unmarshalPublicCatalogProduct = (data: unknown): PublicCatalogProduct => {
       ? unmarshalPublicCatalogProductPrice(data.price)
       : undefined,
     product: data.product,
+    productCategory: data.product_category,
     properties: data.properties
       ? unmarshalPublicCatalogProductProperties(data.properties)
       : undefined,
