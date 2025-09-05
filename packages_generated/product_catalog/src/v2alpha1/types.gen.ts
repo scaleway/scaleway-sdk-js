@@ -361,6 +361,10 @@ export interface PublicCatalogProduct {
    */
   serviceCategory: string
   /**
+   * The product category of the product.
+   */
+  productCategory: string
+  /**
    * The product name.
    */
   product: string
