@@ -24,6 +24,13 @@ import type {
   KubernetesPoolInfo,
   ListEventsResponse,
   ListProductsResponse,
+  LoadBalancerAclInfo,
+  LoadBalancerBackendInfo,
+  LoadBalancerCertificateInfo,
+  LoadBalancerFrontendInfo,
+  LoadBalancerIpInfo,
+  LoadBalancerLbInfo,
+  LoadBalancerRouteInfo,
   Product,
   ProductService,
   Resource,
@@ -190,6 +197,103 @@ const unmarshalKubernetesPoolInfo = (data: unknown): KubernetesPoolInfo => {
   } as KubernetesPoolInfo
 }
 
+const unmarshalLoadBalancerAclInfo = (data: unknown): LoadBalancerAclInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'LoadBalancerAclInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    frontendId: data.frontend_id,
+  } as LoadBalancerAclInfo
+}
+
+const unmarshalLoadBalancerBackendInfo = (
+  data: unknown,
+): LoadBalancerBackendInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'LoadBalancerBackendInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    lbId: data.lb_id,
+    name: data.name,
+  } as LoadBalancerBackendInfo
+}
+
+const unmarshalLoadBalancerCertificateInfo = (
+  data: unknown,
+): LoadBalancerCertificateInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'LoadBalancerCertificateInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    lbId: data.lb_id,
+    name: data.name,
+  } as LoadBalancerCertificateInfo
+}
+
+const unmarshalLoadBalancerFrontendInfo = (
+  data: unknown,
+): LoadBalancerFrontendInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'LoadBalancerFrontendInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    lbId: data.lb_id,
+    name: data.name,
+  } as LoadBalancerFrontendInfo
+}
+
+const unmarshalLoadBalancerIpInfo = (data: unknown): LoadBalancerIpInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'LoadBalancerIpInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ipAddress: data.ip_address,
+    lbId: data.lb_id,
+  } as LoadBalancerIpInfo
+}
+
+const unmarshalLoadBalancerLbInfo = (data: unknown): LoadBalancerLbInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'LoadBalancerLbInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+  } as LoadBalancerLbInfo
+}
+
+const unmarshalLoadBalancerRouteInfo = (
+  data: unknown,
+): LoadBalancerRouteInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'LoadBalancerRouteInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    backendId: data.backend_id,
+    frontendId: data.frontend_id,
+  } as LoadBalancerRouteInfo
+}
+
 const unmarshalSecretManagerSecretInfo = (
   data: unknown,
 ): SecretManagerSecretInfo => {
@@ -295,6 +399,29 @@ export const unmarshalResource = (data: unknown): Resource => {
       : undefined,
     kubePoolInfo: data.kube_pool_info
       ? unmarshalKubernetesPoolInfo(data.kube_pool_info)
+      : undefined,
+    loadBalancerAclInfo: data.load_balancer_acl_info
+      ? unmarshalLoadBalancerAclInfo(data.load_balancer_acl_info)
+      : undefined,
+    loadBalancerBackendInfo: data.load_balancer_backend_info
+      ? unmarshalLoadBalancerBackendInfo(data.load_balancer_backend_info)
+      : undefined,
+    loadBalancerCertificateInfo: data.load_balancer_certificate_info
+      ? unmarshalLoadBalancerCertificateInfo(
+          data.load_balancer_certificate_info,
+        )
+      : undefined,
+    loadBalancerFrontendInfo: data.load_balancer_frontend_info
+      ? unmarshalLoadBalancerFrontendInfo(data.load_balancer_frontend_info)
+      : undefined,
+    loadBalancerIpInfo: data.load_balancer_ip_info
+      ? unmarshalLoadBalancerIpInfo(data.load_balancer_ip_info)
+      : undefined,
+    loadBalancerLbInfo: data.load_balancer_lb_info
+      ? unmarshalLoadBalancerLbInfo(data.load_balancer_lb_info)
+      : undefined,
+    loadBalancerRouteInfo: data.load_balancer_route_info
+      ? unmarshalLoadBalancerRouteInfo(data.load_balancer_route_info)
       : undefined,
     name: data.name,
     secmSecretInfo: data.secm_secret_info
