@@ -61,6 +61,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['recorded_after', request.recordedAfter],
           ['recorded_before', request.recordedBefore],
+          ['resource_id', request.resourceId],
           ['resource_type', request.resourceType],
           ['service_name', request.serviceName],
           ['status', request.status],
