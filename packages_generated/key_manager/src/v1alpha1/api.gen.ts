@@ -296,7 +296,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
     )
 
   /**
-   * Encrypt a payload. Encrypt a payload using an existing key, specified by the `key_id` parameter. Only keys with a usage set to `symmetric_encryption` are supported by this method. The maximum payload size that can be encrypted is 64 KB of plaintext.
+   * Encrypt a payload. Encrypt a payload using an existing key, specified by the `key_id` parameter. The maximum payload size that can be encrypted is 64 KB of plaintext.
    *
    * @param request - The request {@link EncryptRequest}
    * @returns A Promise of EncryptResponse
