@@ -314,6 +314,9 @@ export class API extends ParentAPI {
 
   /**
    * Update an existing container. Update the container associated with the specified ID.
+
+When updating a container, the container is automatically redeployed to apply the changes.
+This behavior can be changed by setting the `redeploy` field to `false` in the request.
    *
    * @param request - The request {@link UpdateContainerRequest}
    * @returns A Promise of Container

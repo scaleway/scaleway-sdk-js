@@ -63,6 +63,7 @@ import type {
   ImportRawDNSZoneRequestBindSource,
   ImportRawDNSZoneRequestTsigKey,
   ImportRawDNSZoneResponse,
+  InboundTransfer,
   ListContactsResponse,
   ListDNSZoneNameserversResponse,
   ListDNSZoneRecordsResponse,
@@ -71,6 +72,7 @@ import type {
   ListDNSZoneVersionsResponse,
   ListDomainHostsResponse,
   ListDomainsResponse,
+  ListInboundTransfersResponse,
   ListRenewableDomainsResponse,
   ListSSLCertificatesResponse,
   ListTasksResponse,
@@ -1112,6 +1114,43 @@ export const unmarshalListDomainsResponse = (
     domains: unmarshalArrayOfObject(data.domains, unmarshalDomainSummary),
     totalCount: data.total_count,
   } as ListDomainsResponse
+}
+
+const unmarshalInboundTransfer = (data: unknown): InboundTransfer => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InboundTransfer' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    domain: data.domain,
+    id: data.id,
+    lastUpdatedAt: unmarshalDate(data.last_updated_at),
+    message: data.message,
+    projectId: data.project_id,
+    status: data.status,
+    taskId: data.task_id,
+  } as InboundTransfer
+}
+
+export const unmarshalListInboundTransfersResponse = (
+  data: unknown,
+): ListInboundTransfersResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListInboundTransfersResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    inboundTransfers: unmarshalArrayOfObject(
+      data.inbound_transfers,
+      unmarshalInboundTransfer,
+    ),
+    totalCount: data.total_count,
+  } as ListInboundTransfersResponse
 }
 
 const unmarshalRenewableDomain = (data: unknown): RenewableDomain => {
