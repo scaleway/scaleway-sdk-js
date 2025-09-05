@@ -137,6 +137,19 @@ export type DomainStatus =
 
 export type HostStatus = 'unknown_status' | 'active' | 'updating' | 'deleting'
 
+export type InboundTransferStatus =
+  | 'unknown'
+  | 'in_progress'
+  | 'done'
+  | 'err_internal'
+  | 'err_domain_pending'
+  | 'err_already_transferring'
+  | 'err_transfer_prohibited'
+  | 'err_transfer_impossible'
+  | 'err_invalid_authcode'
+  | 'err_domain_too_young'
+  | 'err_too_many_requests'
+
 export type LinkedProduct = 'unknown_product' | 'vpc'
 
 export type ListContactsRequestRole =
@@ -623,6 +636,41 @@ export interface DomainSummary {
   organizationId: string
   createdAt?: Date
   pendingTrade: boolean
+}
+
+export interface InboundTransfer {
+  /**
+   * The unique identifier of the inbound transfer.
+   */
+  id: string
+  /**
+   * The creation date of the inbound transfer.
+   */
+  createdAt?: Date
+  /**
+   * The last modification date of the inbound transfer.
+   */
+  lastUpdatedAt?: Date
+  /**
+   * The project ID associated with the inbound transfer.
+   */
+  projectId: string
+  /**
+   * The domain associated with the inbound transfer.
+   */
+  domain: string
+  /**
+   * Inbound transfer status.
+   */
+  status: InboundTransferStatus
+  /**
+   * Human-friendly message to describe the current inbound transfer status.
+   */
+  message: string
+  /**
+   * The unique identifier of the associated task.
+   */
+  taskId: string
 }
 
 export interface RenewableDomain {
@@ -1125,6 +1173,11 @@ export interface ListDomainsResponse {
   domains: DomainSummary[]
 }
 
+export interface ListInboundTransfersResponse {
+  totalCount: number
+  inboundTransfers: InboundTransfer[]
+}
+
 export interface ListRenewableDomainsResponse {
   totalCount: number
   domains: RenewableDomain[]
@@ -1337,6 +1390,14 @@ export type RegistrarApiListDomainsRequest = {
   organizationId?: string
   isExternal?: boolean
   domain?: string
+}
+
+export type RegistrarApiListInboundTransfersRequest = {
+  page: number
+  pageSize?: number
+  projectId?: string
+  organizationId?: string
+  domain: string
 }
 
 export type RegistrarApiListRenewableDomainsRequest = {
