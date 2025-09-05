@@ -21,7 +21,6 @@ import type {
   CreateApplicationRequest,
   CreateGroupRequest,
   CreateJWTRequest,
-  CreateOrganizationSamlRequest,
   CreatePolicyRequest,
   CreateSSHKeyRequest,
   CreateUserRequest,
@@ -60,7 +59,7 @@ import type {
   RuleSpecs,
   Saml,
   SamlCertificate,
-  SamlInformation,
+  SamlServiceProvider,
   SetGroupMembersRequest,
   SetOrganizationAliasRequest,
   SetRulesRequest,
@@ -69,9 +68,9 @@ import type {
   UpdateAPIKeyRequest,
   UpdateApplicationRequest,
   UpdateGroupRequest,
-  UpdateOrganizationSamlRequest,
   UpdateOrganizationSecuritySettingsRequest,
   UpdatePolicyRequest,
+  UpdateSamlRequest,
   UpdateSSHKeyRequest,
   UpdateUserPasswordRequest,
   UpdateUserRequest,
@@ -698,6 +697,19 @@ export const unmarshalOrganizationSecuritySettings = (
   } as OrganizationSecuritySettings
 }
 
+const unmarshalSamlServiceProvider = (data: unknown): SamlServiceProvider => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SamlServiceProvider' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    assertionConsumerServiceUrl: data.assertion_consumer_service_url,
+    entityId: data.entity_id,
+  } as SamlServiceProvider
+}
+
 export const unmarshalSaml = (data: unknown): Saml => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -708,21 +720,12 @@ export const unmarshalSaml = (data: unknown): Saml => {
   return {
     entityId: data.entity_id,
     id: data.id,
+    serviceProvider: data.service_provider
+      ? unmarshalSamlServiceProvider(data.service_provider)
+      : undefined,
     singleSignOnUrl: data.single_sign_on_url,
+    status: data.status,
   } as Saml
-}
-
-export const unmarshalSamlInformation = (data: unknown): SamlInformation => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'SamlInformation' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    assertionConsumerServiceUrl: data.assertion_consumer_service_url,
-    entityId: data.entity_id,
-  } as SamlInformation
 }
 
 export const unmarshalSetRulesResponse = (data: unknown): SetRulesResponse => {
@@ -816,14 +819,6 @@ export const marshalCreateJWTRequest = (
 ): Record<string, unknown> => ({
   referrer: request.referrer,
   user_id: request.userId,
-})
-
-export const marshalCreateOrganizationSamlRequest = (
-  request: CreateOrganizationSamlRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  entity_id: request.entityId,
-  single_sign_on_url: request.singleSignOnUrl,
 })
 
 const marshalRuleSpecs = (
@@ -973,14 +968,6 @@ export const marshalUpdateGroupRequest = (
   tags: request.tags,
 })
 
-export const marshalUpdateOrganizationSamlRequest = (
-  request: UpdateOrganizationSamlRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  entity_id: request.entityId,
-  single_sign_on_url: request.singleSignOnUrl,
-})
-
 export const marshalUpdateOrganizationSecuritySettingsRequest = (
   request: UpdateOrganizationSecuritySettingsRequest,
   defaults: DefaultValues,
@@ -1011,6 +998,14 @@ export const marshalUpdateSSHKeyRequest = (
 ): Record<string, unknown> => ({
   disabled: request.disabled,
   name: request.name,
+})
+
+export const marshalUpdateSamlRequest = (
+  request: UpdateSamlRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  entity_id: request.entityId,
+  single_sign_on_url: request.singleSignOnUrl,
 })
 
 export const marshalUpdateUserPasswordRequest = (
