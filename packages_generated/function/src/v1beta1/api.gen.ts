@@ -323,6 +323,9 @@ export class API extends ParentAPI {
 
   /**
    * Update an existing function. Update the function associated with the specified ID.
+
+When updating a function, the function is automatically redeployed to apply the changes.
+This behavior can be changed by setting the `redeploy` field to `false` in the request.
    *
    * @param request - The request {@link UpdateFunctionRequest}
    * @returns A Promise of Function
