@@ -39,13 +39,6 @@ export const CreateGroupRequest = {
   },
 }
 
-export const CreateOrganizationSamlRequest = {
-  entityId: {
-    maxLength: 1024,
-    minLength: 1,
-  },
-}
-
 export const CreatePolicyRequest = {
   description: {
     ignoreEmpty: true,
@@ -279,13 +272,6 @@ export const UpdateGroupRequest = {
   },
 }
 
-export const UpdateOrganizationSamlRequest = {
-  entityId: {
-    maxLength: 1024,
-    minLength: 1,
-  },
-}
-
 export const UpdateOrganizationSecuritySettingsRequest = {
   loginAttemptsBeforeLocked: {
     greaterThanOrEqual: 1,
@@ -307,6 +293,13 @@ export const UpdatePolicyRequest = {
 export const UpdateSSHKeyRequest = {
   name: {
     maxLength: 1000,
+  },
+}
+
+export const UpdateSamlRequest = {
+  entityId: {
+    maxLength: 1024,
+    minLength: 1,
   },
 }
 
