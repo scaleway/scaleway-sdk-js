@@ -195,6 +195,10 @@ export type ListLocalImagesRequest = {
    */
   zone?: ScwZone
   /**
+   * Filter local images available for this machine architecture.
+   */
+  arch?: string
+  /**
    * Filter by image id.
    *
    * One-of ('scope'): at most one of 'imageId', 'versionId', 'imageLabel' could be set.

@@ -136,6 +136,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/marketplace/v2/local-images`,
         urlParams: urlParams(
+          ['arch', request.arch],
           ['order_by', request.orderBy],
           ['page', request.page],
           [
