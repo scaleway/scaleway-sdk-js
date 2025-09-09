@@ -45,6 +45,7 @@ export type ResourceType =
   | 'load_balancer_route'
   | 'load_balancer_acl'
   | 'load_balancer_certificate'
+  | 'sfs_filesystem'
 
 export interface AccountOrganizationInfo {}
 
