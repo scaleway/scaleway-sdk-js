@@ -1,18 +1,21 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "organizeImports": {
-    "enabled": true
-  },
-  "linter": {
-    "enabled": false
-  },
   "vcs": {
     "clientKind": "git",
     "useIgnoreFile": false,
     "defaultBranch": "main"
   },
   "files": {
-    "ignore": [
+    "maxSize": 10000000,
+    "ignoreUnknown": true,
+    "includes": [
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.js",
+      "**/*.jsx",
+      "**/*.json"
+    ],
+    "experimentalScannerIgnores": [
       ".next/",
       ".pnpm-store/",
       "coverage/",
@@ -31,7 +34,8 @@
       "*.snap",
       "**/__snapshots__/",
       ".docusaurus",
-      ".vitest-reports"
+      ".vitest-reports",
+      "**/*.gen.ts"
     ]
   },
   "formatter": {
@@ -58,13 +62,23 @@
   },
   "json": {
     "formatter": {
-      "enabled": true
+      "enabled": false
     },
     "parser": {
       "allowComments": true
     },
     "linter": {
-      "enabled": true
+      "enabled": false
+    }
+  },
+  "linter": {
+    "enabled": false
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
     }
   }
 }
