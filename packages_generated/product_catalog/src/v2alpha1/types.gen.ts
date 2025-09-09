@@ -58,6 +58,7 @@ export type PublicCatalogProductUnitOfMeasureCountableUnit =
   | 'minute'
   | 'setup'
   | 'day'
+  | 'second'
 
 export interface PublicCatalogProductPropertiesHardwareCPUPhysical {
   /**
