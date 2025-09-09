@@ -1,6 +1,32 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { CountryCode as StdCountryCode } from '@scaleway/sdk-std'
+
+export type AuthenticationEventFailureReason =
+  | 'unknown_failure_reason'
+  | 'invalid_mfa'
+  | 'invalid_password'
+
+export type AuthenticationEventMFAType = 'unknown_mfa_type' | 'totp'
+
+export type AuthenticationEventMethod =
+  | 'unknown_method'
+  | 'password'
+  | 'authentication_code'
+  | 'oauth2'
+  | 'saml'
+
+export type AuthenticationEventOrigin =
+  | 'unknown_origin'
+  | 'public_api'
+  | 'admin_api'
+
+export type AuthenticationEventResult = 'unknown_result' | 'success' | 'failure'
+
+export type ListAuthenticationEventsRequestOrderBy =
+  | 'recorded_at_desc'
+  | 'recorded_at_asc'
 
 export type ListEventsRequestOrderBy = 'recorded_at_desc' | 'recorded_at_asc'
 
@@ -45,6 +71,8 @@ export type ResourceType =
   | 'load_balancer_route'
   | 'load_balancer_acl'
   | 'load_balancer_certificate'
+  | 'sfs_filesystem'
+  | 'vpc_private_network'
 
 export interface AccountOrganizationInfo {}
 
@@ -135,14 +163,6 @@ export interface SecretManagerSecretInfo {
 
 export interface SecretManagerSecretVersionInfo {
   revision: number
-}
-
-export interface EventPrincipal {
-  id: string
-}
-
-export interface EventSystem {
-  name: string
 }
 
 export interface Resource {
@@ -283,9 +303,68 @@ export interface Resource {
   loadBalancerCertificateInfo?: LoadBalancerCertificateInfo
 }
 
+export interface EventPrincipal {
+  id: string
+}
+
+export interface EventSystem {
+  name: string
+}
+
 export interface ProductService {
   name: string
   methods: string[]
+}
+
+export interface AuthenticationEvent {
+  /**
+   * ID of the event.
+   */
+  id: string
+  /**
+   * Timestamp of the event.
+   */
+  recordedAt?: Date
+  /**
+   * Organization ID containing the event.
+   */
+  organizationId: string
+  /**
+   * IP address at the origin of the event.
+   */
+  sourceIp: string
+  /**
+   * User Agent at the origin of the event.
+   */
+  userAgent?: string
+  /**
+   * Resources attached to the event.
+   */
+  resources: Resource[]
+  /**
+   * Result of the authentication attempt.
+   */
+  result: AuthenticationEventResult
+  /**
+   * (Optional) Reason for authentication failure.
+   */
+  failureReason?: AuthenticationEventFailureReason
+  /**
+   * (Optional) ISO 3166-1 alpha-2 country code of the source IP.
+   */
+  countryCode?: StdCountryCode
+  /**
+   * Authentication method used.
+   */
+  method: AuthenticationEventMethod
+  /**
+   * Origin of the authentication attempt.
+   */
+  origin: AuthenticationEventOrigin
+  /**
+   * (Optional) MFA type used for the authentication attempt.
+   */
+  mfaType?: AuthenticationEventMFAType
 }
 
 export interface Event {
@@ -374,6 +453,24 @@ export interface Product {
   services: ProductService[]
 }
 
+export type ListAuthenticationEventsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  organizationId?: string
+  recordedAfter?: Date
+  recordedBefore?: Date
+  orderBy?: ListAuthenticationEventsRequestOrderBy
+  pageSize?: number
+  pageToken?: string
+}
+
+export interface ListAuthenticationEventsResponse {
+  events: AuthenticationEvent[]
+  nextPageToken?: string
+}
+
 export type ListEventsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -422,6 +519,14 @@ export type ListEventsRequest = {
    * (Optional) ID of the Scaleway resource.
    */
   resourceId?: string
+  /**
+   * (Optional) ID of the User or IAM application at the origin of the event.
+   */
+  principalId?: string
+  /**
+   * (Optional) IP address at the origin of the event.
+   */
+  sourceIp?: string
 }
 
 export interface ListEventsResponse {
