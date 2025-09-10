@@ -41,6 +41,7 @@ import type {
   Hosting,
   HostingApiAddCustomDomainRequest,
   HostingApiCreateHostingRequest,
+  HostingApiRemoveCustomDomainRequest,
   HostingApiUpdateHostingRequest,
   HostingDomain,
   HostingDomainCustomDomain,
@@ -983,6 +984,13 @@ export const marshalHostingApiCreateHostingRequest = (
   skip_welcome_email: request.skipWelcomeEmail,
   subdomain: request.subdomain,
   tags: request.tags,
+})
+
+export const marshalHostingApiRemoveCustomDomainRequest = (
+  request: HostingApiRemoveCustomDomainRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  domain_name: request.domainName,
 })
 
 export const marshalHostingApiUpdateHostingRequest = (

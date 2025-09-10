@@ -1460,6 +1460,10 @@ export type HostingApiRemoveCustomDomainRequest = {
    * Hosting ID to which the custom domain is detached from.
    */
   hostingId: string
+  /**
+   * The custom domain name to detach from the hosting.
+   */
+  domainName: string
 }
 
 export type HostingApiResetHostingPasswordRequest = {
