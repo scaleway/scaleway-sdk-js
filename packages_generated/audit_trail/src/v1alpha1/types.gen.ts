@@ -519,6 +519,14 @@ export type ListEventsRequest = {
    * (Optional) ID of the Scaleway resource.
    */
   resourceId?: string
+  /**
+   * (Optional) ID of the User or IAM application at the origin of the event.
+   */
+  principalId?: string
+  /**
+   * (Optional) IP address at the origin of the event.
+   */
+  sourceIp?: string
 }
 
 export interface ListEventsResponse {
