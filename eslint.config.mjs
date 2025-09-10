@@ -24,6 +24,7 @@ export default [
       'scripts/generatePackages.ts',
       'scripts/*.ts',
       '*.min.js',
+      '**/*.gen.ts', // Ignore generated files
     ],
   },
   {
@@ -52,6 +53,7 @@ export default [
       'import/no-default-export': 'error',
       'no-await-in-loop': 'off',
       '@typescript-eslint/no-namespace': 'off',
+      'sort-imports': 'off', // Disable sort-imports to avoid conflict with Biome
     },
   },
 
@@ -69,6 +71,7 @@ export default [
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/consistent-type-definitions': 'warn',
       '@typescript-eslint/ban-types': 'warn',
+      'sort-imports': 'off', // Disable sort-imports to avoid conflict with Biome
     },
   })),
 
