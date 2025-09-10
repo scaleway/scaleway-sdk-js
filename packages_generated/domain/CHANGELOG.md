@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.1.0 (2025-09-10)
+
+### Features
+
+- **domain:** expose inbound transfer status ([#2351](https://github.com/scaleway/scaleway-sdk-js/issues/2351)) ([62e22fe](https://github.com/scaleway/scaleway-sdk-js/commit/62e22feffab6c4693ef786d9c77e09336483da92))
+
 ## 1.0.5 (2025-06-18)
 
 **Note:** Version bump only for package @scaleway/sdk-domain
