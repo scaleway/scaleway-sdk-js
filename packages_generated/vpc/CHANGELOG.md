@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.2.1 (2025-09-10)
+
+**Note:** Version bump only for package @scaleway/sdk-vpc
+
 # 1.2.0 (2025-06-18)
 
 ### Bug Fixes
