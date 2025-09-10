@@ -41,6 +41,16 @@ export const DatabaseApiListDatabasesRequest = {
   },
 }
 
+export const FreeDomainApiListFreeRootDomainsRequest = {
+  page: {
+    greaterThan: 0,
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const FtpAccountApiListFtpAccountsRequest = {
   page: {
     greaterThan: 0,
