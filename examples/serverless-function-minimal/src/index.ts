@@ -1,5 +1,5 @@
 import { loadProfileFromEnvironmentValues } from '@scaleway/configuration-loader'
-import { Errors, Registry, createClient } from '@scaleway/sdk'
+import { createClient, Errors, Registry } from '@scaleway/sdk'
 
 // Profile will be loade from the variables in your `.env` file.
 const loadedProfile = loadProfileFromEnvironmentValues()
