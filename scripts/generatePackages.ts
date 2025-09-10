@@ -1,17 +1,17 @@
 import {
-  constants,
   access,
   appendFileSync,
+  constants,
   copyFileSync,
-  readFileSync,
   readdirSync,
+  readFileSync,
   statSync,
   writeFileSync,
 } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { cwd, exit } from 'node:process'
-import { parseArgs } from 'node:util'
 import type { ParseArgsConfig } from 'node:util'
+import { parseArgs } from 'node:util'
 import { SDKS } from './constants'
 import {
   renderTemplatePackageJson,

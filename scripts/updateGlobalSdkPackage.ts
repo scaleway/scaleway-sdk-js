@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import path, { join } from 'node:path'
 import { cwd, exit } from 'node:process'
 import { SDKS } from './constants'
@@ -95,7 +95,10 @@ const updateSdkPackageJson = ({
 const updateSdkIndex = ({
   generatedPackages,
   sdkIndexPath,
-}: { generatedPackages: PackageJSON[]; sdkIndexPath: string }) => {
+}: {
+  generatedPackages: PackageJSON[]
+  sdkIndexPath: string
+}) => {
   try {
     let indexContent = '// Auto-generated exports from all SDK packages\n\n'
 

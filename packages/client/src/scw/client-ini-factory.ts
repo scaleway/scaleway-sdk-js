@@ -1,7 +1,7 @@
 import type { NetworkInterceptors } from '../index'
 import { authenticateWithSecrets } from './auth'
-import { hasAuthenticationSecrets } from './client-ini-profile'
 import type { Profile } from './client-ini-profile'
+import { hasAuthenticationSecrets } from './client-ini-profile'
 import type { Settings } from './client-settings'
 
 /**

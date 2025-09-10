@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.1.0 (2025-09-10)
+
+### Features
+
+- **inference:** add model size to verify model response ([#2328](https://github.com/scaleway/scaleway-sdk-js/issues/2328)) ([d7d47a0](https://github.com/scaleway/scaleway-sdk-js/commit/d7d47a0a5b875352869a23aef25eb05db1531877))
+- **inference:** add scaling deployment status ([#2311](https://github.com/scaleway/scaleway-sdk-js/issues/2311)) ([8f23fcf](https://github.com/scaleway/scaleway-sdk-js/commit/8f23fcfd7d8d0ea6dcb4821a188c874f034b9372))
+
 ## 1.0.5 (2025-06-18)
 
 ### Bug Fixes
