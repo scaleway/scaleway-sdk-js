@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.3.0 (2025-09-10)
+
+### Features
+
+- **apple_silicon:** enable bulk order in public sdk ([#2234](https://github.com/scaleway/scaleway-sdk-js/issues/2234)) ([babbfe9](https://github.com/scaleway/scaleway-sdk-js/commit/babbfe98789b22774f04a43f49a7ce9fb9a43628))
+- **apple_silicon:** fix typo in applesilicon SDK comment ([#2238](https://github.com/scaleway/scaleway-sdk-js/issues/2238)) ([be0bbe9](https://github.com/scaleway/scaleway-sdk-js/commit/be0bbe908921b948de70bac7abed592e5957e2ef))
+
 # [1.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-applesilicon@1.1.0...@scaleway/sdk-applesilicon@1.2.0) (2025-06-23)
 
 ### Features

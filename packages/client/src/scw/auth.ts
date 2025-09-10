@@ -3,8 +3,8 @@ import {
   addHeaderInterceptor,
 } from '../internal/interceptors/helpers'
 import type { RequestInterceptor } from '../internal/interceptors/types'
-import { assertValidAuthenticationSecrets } from './client-ini-profile'
 import type { AuthenticationSecrets } from './client-ini-profile'
+import { assertValidAuthenticationSecrets } from './client-ini-profile'
 import { AUTH_HEADER_KEY, SESSION_HEADER_KEY } from './constants'
 
 interface TokenAccessor {

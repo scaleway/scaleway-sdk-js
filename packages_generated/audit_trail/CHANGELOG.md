@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-audit-trail@1.3.0...@scaleway/sdk-audit-trail@1.4.0) (2025-09-10)
+
+### Features
+
+- **audit_trail:** add apple-silicon resources definition ([#2241](https://github.com/scaleway/scaleway-sdk-js/issues/2241)) ([38e3f5e](https://github.com/scaleway/scaleway-sdk-js/commit/38e3f5eb1aaf818a025ecea2e97acc090ae270e7))
+- **audit_trail:** add baremetal resources and account ([#2268](https://github.com/scaleway/scaleway-sdk-js/issues/2268)) ([a248ca6](https://github.com/scaleway/scaleway-sdk-js/commit/a248ca6304d5c17b482363f0fb78e17614f040b0))
+- **audit_trail:** add instance resources ([#2342](https://github.com/scaleway/scaleway-sdk-js/issues/2342)) ([c578aaf](https://github.com/scaleway/scaleway-sdk-js/commit/c578aaf98753b79035e250e69ca75b888272744b))
+- **audit_trail:** add instances resources for disk management ([#2345](https://github.com/scaleway/scaleway-sdk-js/issues/2345)) ([b041972](https://github.com/scaleway/scaleway-sdk-js/commit/b041972a164d60ecc049dc4ca858911db908403b))
+- **audit_trail:** add lb resources ([#2364](https://github.com/scaleway/scaleway-sdk-js/issues/2364)) ([7d6a35b](https://github.com/scaleway/scaleway-sdk-js/commit/7d6a35b04a6b6ee86bf6f4de5e2d667f12faa963))
+- **audit_trail:** add support for `EventSystem` ([#2278](https://github.com/scaleway/scaleway-sdk-js/issues/2278)) ([82a4689](https://github.com/scaleway/scaleway-sdk-js/commit/82a4689d7648bd5e70c8533caa572bea503fe534))
+- **audit_trail:** remove deprecated resource field ([#2235](https://github.com/scaleway/scaleway-sdk-js/issues/2235)) ([a1b410c](https://github.com/scaleway/scaleway-sdk-js/commit/a1b410c395622727b2cb6a42d17c97698d45db98))
+
 # 1.3.0 (2025-06-30)
 
 ### Features
