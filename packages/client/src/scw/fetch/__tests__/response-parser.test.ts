@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { isJSONObject } from '../../../helpers/json'
 import type { JSONObject } from '../../../helpers/json'
+import { isJSONObject } from '../../../helpers/json'
 import { ScalewayError } from '../../errors/scw-error'
 import { fixLegacyTotalCount, responseParser } from '../response-parser'
 
