@@ -72,6 +72,7 @@ export type ResourceType =
   | 'load_balancer_acl'
   | 'load_balancer_certificate'
   | 'sfs_filesystem'
+  | 'vpc_private_network'
 
 export interface AccountOrganizationInfo {}
 
