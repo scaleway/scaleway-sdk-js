@@ -10,6 +10,7 @@ import type {
   AccountProjectInfo,
   AccountUserInfo,
   AppleSiliconServerInfo,
+  AuthenticationEvent,
   BaremetalServerInfo,
   BaremetalSettingInfo,
   Event,
@@ -22,6 +23,7 @@ import type {
   KubernetesClusterInfo,
   KubernetesNodeInfo,
   KubernetesPoolInfo,
+  ListAuthenticationEventsResponse,
   ListEventsResponse,
   ListProductsResponse,
   LoadBalancerAclInfo,
@@ -323,30 +325,6 @@ const unmarshalSecretManagerSecretVersionInfo = (
   } as SecretManagerSecretVersionInfo
 }
 
-const unmarshalEventPrincipal = (data: unknown): EventPrincipal => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EventPrincipal' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-  } as EventPrincipal
-}
-
-const unmarshalEventSystem = (data: unknown): EventSystem => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EventSystem' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    name: data.name,
-  } as EventSystem
-}
-
 export const unmarshalResource = (data: unknown): Resource => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -441,6 +419,68 @@ export const unmarshalResource = (data: unknown): Resource => {
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
   } as Resource
+}
+
+const unmarshalAuthenticationEvent = (data: unknown): AuthenticationEvent => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AuthenticationEvent' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    countryCode: data.country_code ? data.country_code : undefined,
+    failureReason: data.failure_reason ? data.failure_reason : undefined,
+    id: data.id,
+    method: data.method,
+    mfaType: data.mfa_type ? data.mfa_type : undefined,
+    organizationId: data.organization_id,
+    origin: data.origin,
+    recordedAt: unmarshalDate(data.recorded_at),
+    resources: unmarshalArrayOfObject(data.resources, unmarshalResource),
+    result: data.result,
+    sourceIp: data.source_ip,
+    userAgent: data.user_agent,
+  } as AuthenticationEvent
+}
+
+export const unmarshalListAuthenticationEventsResponse = (
+  data: unknown,
+): ListAuthenticationEventsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListAuthenticationEventsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    events: unmarshalArrayOfObject(data.events, unmarshalAuthenticationEvent),
+    nextPageToken: data.next_page_token,
+  } as ListAuthenticationEventsResponse
+}
+
+const unmarshalEventPrincipal = (data: unknown): EventPrincipal => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EventPrincipal' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+  } as EventPrincipal
+}
+
+const unmarshalEventSystem = (data: unknown): EventSystem => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EventSystem' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+  } as EventSystem
 }
 
 export const unmarshalEvent = (data: unknown): Event => {
