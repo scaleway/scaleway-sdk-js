@@ -108,10 +108,11 @@ export type TaskStatus = 'pending' | 'started' | 'success' | 'failure' | 'retry'
 export type VolumeServerState =
   | 'available'
   | 'snapshotting'
-  | 'fetching'
   | 'resizing'
+  | 'fetching'
   | 'saving'
   | 'hotsyncing'
+  | 'attaching'
   | 'error'
 
 export type VolumeServerVolumeType =
@@ -124,8 +125,8 @@ export type VolumeState =
   | 'available'
   | 'snapshotting'
   | 'fetching'
-  | 'resizing'
   | 'saving'
+  | 'resizing'
   | 'hotsyncing'
   | 'error'
 
