@@ -116,6 +116,7 @@ export type {
   PlanBlockMigrationRequest,
   PrivateNIC,
   PrivateNICState,
+  ReleaseIpToIpamRequest,
   SecurityGroup,
   SecurityGroupPolicy,
   SecurityGroupRule,

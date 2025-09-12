@@ -75,11 +75,13 @@ export interface KeyUsage {
    */
   symmetricEncryption?: KeyAlgorithmSymmetricEncryption
   /**
+   * See the `Key.Algorithm.AsymmetricEncryption` enum for a description of values.
    *
    * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning' could be set.
    */
   asymmetricEncryption?: KeyAlgorithmAsymmetricEncryption
   /**
+   * See the `Key.Algorithm.AsymmetricSigning` enum for a description of values.
    *
    * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning' could be set.
    */
@@ -106,7 +108,7 @@ export interface Key {
    */
   name: string
   /**
-   * Keys with a usage set to `symmetric_encryption` can encrypt and decrypt data using the `AES-256-GCM` key algorithm. Key Manager currently only supports `AES-256-GCM`.
+   * See the `Key.Usage` enum for a description of possible values.
    */
   usage?: KeyUsage
   /**
@@ -177,7 +179,7 @@ export type CreateKeyRequest = {
    */
   name?: string
   /**
-   * See the `Key.Algorithm.SymmetricEncryption` enum for a description of values.
+   * See the `Key.Usage` enum for a description of possible values.
    */
   usage?: KeyUsage
   /**
@@ -580,7 +582,7 @@ export interface VerifyResponse {
    */
   keyId: string
   /**
-   * Returns `true` if the signature is valid for the digest and key, `false` otherwise.
+   * Returns `true` if the signature is valid for the digest and key, and `false` otherwise.
    */
   valid: boolean
 }

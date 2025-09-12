@@ -59,6 +59,8 @@ export type PublicCatalogProductUnitOfMeasureCountableUnit =
   | 'setup'
   | 'day'
   | 'second'
+  | 'sample_day'
+  | 'gigabyte_day'
 
 export interface PublicCatalogProductPropertiesHardwareCPUPhysical {
   /**
