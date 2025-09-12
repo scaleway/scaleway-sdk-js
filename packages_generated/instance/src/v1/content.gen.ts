@@ -57,17 +57,18 @@ export const TASK_TRANSIENT_STATUSES: TaskStatus[] = [
 /** Lists transient statutes of the enum {@link VolumeServerState}. */
 export const VOLUME_SERVER_TRANSIENT_STATUSES: VolumeServerState[] = [
   'snapshotting',
-  'fetching',
   'resizing',
+  'fetching',
   'saving',
   'hotsyncing',
+  'attaching',
 ]
 
 /** Lists transient statutes of the enum {@link VolumeState}. */
 export const VOLUME_TRANSIENT_STATUSES: VolumeState[] = [
   'snapshotting',
   'fetching',
-  'resizing',
   'saving',
+  'resizing',
   'hotsyncing',
 ]

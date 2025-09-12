@@ -203,6 +203,7 @@ import type {
   MigrationPlan,
   PlanBlockMigrationRequest,
   PrivateNIC,
+  ReleaseIpToIpamRequest,
   ServerActionRequest,
   ServerActionResponse,
   ServerCompatibleTypes,
@@ -1645,5 +1646,18 @@ The endpoint also returns the validation_key, which must be provided to the [Mig
       headers: jsonContentHeaders,
       method: 'POST',
       path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/block-migration/check-organization-quotas`,
+    })
+
+  /**
+   * Releases the reserved IP without deleting the reservation.. **The IP remains available in IPAM**, which means that it is still reserved by the Organization, and can be reattached to another resource (Instance or other product).
+   *
+   * @param request - The request {@link ReleaseIpToIpamRequest}
+   */
+  releaseIpToIpam = (request: Readonly<ReleaseIpToIpamRequest>) =>
+    this.client.fetch<void>({
+      body: '{}',
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}/release-to-ipam`,
     })
 }
