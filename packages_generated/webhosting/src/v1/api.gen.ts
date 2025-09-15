@@ -29,6 +29,7 @@ import {
   marshalFtpAccountApiCreateFtpAccountRequest,
   marshalHostingApiAddCustomDomainRequest,
   marshalHostingApiCreateHostingRequest,
+  marshalHostingApiRemoveCustomDomainRequest,
   marshalHostingApiUpdateHostingRequest,
   marshalMailAccountApiChangeMailAccountPasswordRequest,
   marshalMailAccountApiCreateMailAccountRequest,
@@ -984,7 +985,12 @@ export class HostingAPI extends ParentAPI {
   ) =>
     this.client.fetch<HostingSummary>(
       {
-        body: '{}',
+        body: JSON.stringify(
+          marshalHostingApiRemoveCustomDomainRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/remove-custom-domain`,
