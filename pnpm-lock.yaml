@@ -210,6 +210,9 @@ importers:
       '@scaleway/sdk-registry':
         specifier: workspace:*
         version: link:../../packages_generated/registry
+      '@scaleway/sdk-s2s-vpn':
+        specifier: workspace:*
+        version: link:../../packages_generated/s2s_vpn
       '@scaleway/sdk-secret':
         specifier: workspace:*
         version: link:../../packages_generated/secret
@@ -660,6 +663,19 @@ importers:
       '@scaleway/random-name':
         specifier: 5.1.2
         version: 5.1.2
+      '@scaleway/sdk-std':
+        specifier: workspace:*
+        version: link:../std
+    devDependencies:
+      '@scaleway/sdk-client':
+        specifier: workspace:^
+        version: link:../../packages/client
+
+  packages_generated/s2s_vpn:
+    dependencies:
+      '@scaleway/random-name':
+        specifier: 5.1.1
+        version: 5.1.1
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -2217,6 +2233,13 @@ packages:
       }
     peerDependencies:
       eslint: '>= 9.7'
+
+  '@scaleway/random-name@5.1.1':
+    resolution:
+      {
+        integrity: sha512-DelRK+56UBUEoRr8pQGwTE7oyC019pExis6iG6zZPcjuz4nLbMB5LIosmclnsvajfIBEQiD1Dv9JI/MgnPwygQ==,
+      }
+    engines: { node: '>=20.x' }
 
   '@scaleway/random-name@5.1.2':
     resolution:
@@ -10337,6 +10360,8 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
       - typescript
+
+  '@scaleway/random-name@5.1.1': {}
 
   '@scaleway/random-name@5.1.2': {}
 
