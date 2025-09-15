@@ -2,7 +2,7 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Region as ScwRegion } from '@scaleway/sdk-client'
 
-export type BgpStatus = 'unknown_bgp_status' | 'up' | 'down'
+export type BgpStatus = 'unknown_bgp_status' | 'up' | 'down' | 'disabled'
 
 export type DedicatedConnectionStatus =
   | 'unknown_status'
@@ -30,6 +30,7 @@ export type LinkStatus =
   | 'deprovisioning'
   | 'deleted'
   | 'locked'
+  | 'ready'
 
 export type ListDedicatedConnectionsRequestOrderBy =
   | 'created_at_asc'
@@ -438,6 +439,14 @@ export type CreateLinkRequest = {
    * For self-hosted links only, it is possible to choose the VLAN ID. If the VLAN is not available (ie already taken or out of range), an error is returned.
    */
   vlan?: number
+  /**
+   * If set, attaches this routing policy containing IPv4 prefixes to the Link. Hence, a BGP IPv4 session will be created.
+   */
+  routingPolicyV4Id?: string
+  /**
+   * If set, attaches this routing policy containing IPv6 prefixes to the Link. Hence, a BGP IPv6 session will be created.
+   */
+  routingPolicyV6Id?: string
 }
 
 export type CreateRoutingPolicyRequest = {
@@ -870,6 +879,21 @@ export type ListRoutingPoliciesRequest = {
 export interface ListRoutingPoliciesResponse {
   routingPolicies: RoutingPolicy[]
   totalCount: number
+}
+
+export type SetRoutingPolicyRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the link to set a routing policy from.
+   */
+  linkId: string
+  /**
+   * ID of the routing policy to be set.
+   */
+  routingPolicyId: string
 }
 
 export type UpdateLinkRequest = {
