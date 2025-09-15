@@ -210,6 +210,9 @@ importers:
       '@scaleway/sdk-registry':
         specifier: workspace:*
         version: link:../../packages_generated/registry
+      '@scaleway/sdk-s2s-vpn':
+        specifier: workspace:*
+        version: link:../../packages_generated/s2s_vpn
       '@scaleway/sdk-secret':
         specifier: workspace:*
         version: link:../../packages_generated/secret
