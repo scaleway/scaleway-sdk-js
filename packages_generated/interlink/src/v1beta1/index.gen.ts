@@ -46,6 +46,7 @@ export type {
   Pop,
   RoutingPolicy,
   SelfHost,
+  SetRoutingPolicyRequest,
   UpdateLinkRequest,
   UpdateRoutingPolicyRequest,
 } from './types.gen'
