@@ -27,6 +27,7 @@ import type {
   Pop,
   RoutingPolicy,
   SelfHost,
+  SetRoutingPolicyRequest,
   UpdateLinkRequest,
   UpdateRoutingPolicyRequest,
 } from './types.gen'
@@ -296,6 +297,8 @@ export const marshalCreateLinkRequest = (
   peer_asn: request.peerAsn,
   pop_id: request.popId,
   project_id: request.projectId ?? defaults.defaultProjectId,
+  routing_policy_v4_id: request.routingPolicyV4Id,
+  routing_policy_v6_id: request.routingPolicyV6Id,
   tags: request.tags,
   vlan: request.vlan,
   ...resolveOneOf([
@@ -318,6 +321,13 @@ export const marshalCreateRoutingPolicyRequest = (
 
 export const marshalDetachRoutingPolicyRequest = (
   request: DetachRoutingPolicyRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  routing_policy_id: request.routingPolicyId,
+})
+
+export const marshalSetRoutingPolicyRequest = (
+  request: SetRoutingPolicyRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   routing_policy_id: request.routingPolicyId,

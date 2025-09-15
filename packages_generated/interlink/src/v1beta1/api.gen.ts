@@ -20,6 +20,7 @@ import {
   marshalCreateLinkRequest,
   marshalCreateRoutingPolicyRequest,
   marshalDetachRoutingPolicyRequest,
+  marshalSetRoutingPolicyRequest,
   marshalUpdateLinkRequest,
   marshalUpdateRoutingPolicyRequest,
   unmarshalDedicatedConnection,
@@ -64,6 +65,7 @@ import type {
   Partner,
   Pop,
   RoutingPolicy,
+  SetRoutingPolicyRequest,
   UpdateLinkRequest,
   UpdateRoutingPolicyRequest,
 } from './types.gen'
@@ -457,6 +459,25 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}/detach-routing-policy`,
+      },
+      unmarshalLink,
+    )
+
+  /**
+   * Set a routing policy. Replace a routing policy from an existing link. This is useful when route propagation is enabled because it changes the routing policy "in place", without blocking all routes like a attach / detach would do.
+   *
+   * @param request - The request {@link SetRoutingPolicyRequest}
+   * @returns A Promise of Link
+   */
+  setRoutingPolicy = (request: Readonly<SetRoutingPolicyRequest>) =>
+    this.client.fetch<Link>(
+      {
+        body: JSON.stringify(
+          marshalSetRoutingPolicyRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}/set-routing-policy`,
       },
       unmarshalLink,
     )
