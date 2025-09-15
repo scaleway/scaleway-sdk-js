@@ -2448,6 +2448,17 @@ export type PlanBlockMigrationRequest = {
   snapshotId?: string
 }
 
+export type ReleaseIpToIpamRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  /**
+   * ID of the IP you want to release from the Instance but retain in IPAM.
+   */
+  ipId: string
+}
+
 export type ServerActionRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
