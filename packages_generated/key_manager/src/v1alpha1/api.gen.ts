@@ -79,7 +79,7 @@ export class API extends ParentAPI {
   })
 
   /**
-   * Create a key. Create a key in a given region specified by the `region` parameter. Keys only support symmetric encryption. You can use keys to encrypt or decrypt arbitrary payloads, or to generate data encryption keys. **Data encryption keys are not stored in Key Manager**.
+   * Create a key. Create a key in a given region specified by the `region` parameter. You can use keys to encrypt or decrypt arbitrary payloads, to sign and verify messages or to generate data encryption keys. **Data encryption keys are not stored in Key Manager**.
    *
    * @param request - The request {@link CreateKeyRequest}
    * @returns A Promise of Key
