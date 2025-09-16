@@ -40,6 +40,7 @@
     "@scaleway/sdk-block": "workspace:*",
     "@scaleway/sdk-cockpit": "workspace:*",
     "@scaleway/sdk-container": "workspace:*",
+    "@scaleway/sdk-datawarehouse": "workspace:*",
     "@scaleway/sdk-dedibox": "workspace:*",
     "@scaleway/sdk-domain": "workspace:*",
     "@scaleway/sdk-edge-services": "workspace:*",
