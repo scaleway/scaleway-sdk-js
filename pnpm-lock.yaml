@@ -86,7 +86,7 @@ importers:
         specifier: ^1.8.16
         version: 1.8.16
       turbo:
-        specifier: 2.5.6
+        specifier: ^2.5.6
         version: 2.5.6
       typedoc:
         specifier: 0.27.6
@@ -138,6 +138,9 @@ importers:
       '@scaleway/sdk-container':
         specifier: workspace:*
         version: link:../../packages_generated/container
+      '@scaleway/sdk-datawarehouse':
+        specifier: workspace:*
+        version: link:../../packages_generated/datawarehouse
       '@scaleway/sdk-dedibox':
         specifier: workspace:*
         version: link:../../packages_generated/dedibox
@@ -351,6 +354,19 @@ importers:
       '@scaleway/random-name':
         specifier: 5.1.2
         version: 5.1.2
+      '@scaleway/sdk-std':
+        specifier: workspace:*
+        version: link:../std
+    devDependencies:
+      '@scaleway/sdk-client':
+        specifier: workspace:^
+        version: link:../../packages/client
+
+  packages_generated/datawarehouse:
+    dependencies:
+      '@scaleway/random-name':
+        specifier: 5.1.1
+        version: 5.1.1
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std

@@ -11,6 +11,7 @@ import { Billingv2beta1 } from '@scaleway/sdk-billing'
 import { Blockv1, Blockv1alpha1 } from '@scaleway/sdk-block'
 import { Cockpitv1 } from '@scaleway/sdk-cockpit'
 import { Containerv1beta1 } from '@scaleway/sdk-container'
+import { Datawarehousev1beta1 } from '@scaleway/sdk-datawarehouse'
 import { Dediboxv1 } from '@scaleway/sdk-dedibox'
 import { Domainv2beta1 } from '@scaleway/sdk-domain'
 import { EdgeServicesv1beta1 } from '@scaleway/sdk-edge-services'
@@ -35,6 +36,7 @@ import { Qaasv1alpha1 } from '@scaleway/sdk-qaas'
 import { Rdbv1 } from '@scaleway/sdk-rdb'
 import { Redisv1 } from '@scaleway/sdk-redis'
 import { Registryv1 } from '@scaleway/sdk-registry'
+import { S2sVpnv1alpha1 } from '@scaleway/sdk-s2s-vpn'
 import { Secretv1beta1 } from '@scaleway/sdk-secret'
 import { ServerlessSqldbv1alpha1 } from '@scaleway/sdk-serverless-sqldb'
 import { Temv1alpha1 } from '@scaleway/sdk-tem'
@@ -114,6 +116,14 @@ export const Cockpit = {
 export { Containerv1beta1 }
 export const Container = {
   v1beta1: Containerv1beta1,
+}
+
+/**
+ * @deprecated Direct version exports are deprecated. Use the 'Datawarehouse' namespace instead (e.g., Datawarehouse.v1).
+ */
+export { Datawarehousev1beta1 }
+export const Datawarehouse = {
+  v1beta1: Datawarehousev1beta1,
 }
 
 /**
@@ -308,6 +318,14 @@ export const Redis = {
 export { Registryv1 }
 export const Registry = {
   v1: Registryv1,
+}
+
+/**
+ * @deprecated Direct version exports are deprecated. Use the 'S2sVpn' namespace instead (e.g., S2sVpn.v1).
+ */
+export { S2sVpnv1alpha1 }
+export const S2sVpn = {
+  v1alpha1: S2sVpnv1alpha1,
 }
 
 /**
