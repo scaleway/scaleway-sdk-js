@@ -24,15 +24,18 @@ import {
   marshalDatabaseApiUnassignDatabaseUserRequest,
   marshalDnsApiCheckUserOwnsDomainRequest,
   marshalDnsApiSyncDomainDnsRecordsRequest,
+  marshalFreeDomainApiCheckFreeDomainAvailabilityRequest,
   marshalFtpAccountApiChangeFtpAccountPasswordRequest,
   marshalFtpAccountApiCreateFtpAccountRequest,
   marshalHostingApiAddCustomDomainRequest,
   marshalHostingApiCreateHostingRequest,
+  marshalHostingApiRemoveCustomDomainRequest,
   marshalHostingApiUpdateHostingRequest,
   marshalMailAccountApiChangeMailAccountPasswordRequest,
   marshalMailAccountApiCreateMailAccountRequest,
   marshalMailAccountApiRemoveMailAccountRequest,
   unmarshalBackup,
+  unmarshalCheckFreeDomainAvailabilityResponse,
   unmarshalCheckUserOwnsDomainResponse,
   unmarshalDatabase,
   unmarshalDatabaseUser,
@@ -46,6 +49,7 @@ import {
   unmarshalListControlPanelsResponse,
   unmarshalListDatabasesResponse,
   unmarshalListDatabaseUsersResponse,
+  unmarshalListFreeRootDomainsResponse,
   unmarshalListFtpAccountsResponse,
   unmarshalListHostingsResponse,
   unmarshalListMailAccountsResponse,
@@ -66,6 +70,7 @@ import type {
   BackupApiListBackupsRequest,
   BackupApiRestoreBackupItemsRequest,
   BackupApiRestoreBackupRequest,
+  CheckFreeDomainAvailabilityResponse,
   CheckUserOwnsDomainResponse,
   ControlPanelApiListControlPanelsRequest,
   Database,
@@ -88,6 +93,8 @@ import type {
   DnsApiSyncDomainDnsRecordsRequest,
   DnsRecords,
   Domain,
+  FreeDomainApiCheckFreeDomainAvailabilityRequest,
+  FreeDomainApiListFreeRootDomainsRequest,
   FtpAccount,
   FtpAccountApiChangeFtpAccountPasswordRequest,
   FtpAccountApiCreateFtpAccountRequest,
@@ -110,6 +117,7 @@ import type {
   ListControlPanelsResponse,
   ListDatabasesResponse,
   ListDatabaseUsersResponse,
+  ListFreeRootDomainsResponse,
   ListFtpAccountsResponse,
   ListHostingsResponse,
   ListMailAccountsResponse,
@@ -977,13 +985,86 @@ export class HostingAPI extends ParentAPI {
   ) =>
     this.client.fetch<HostingSummary>(
       {
-        body: '{}',
+        body: JSON.stringify(
+          marshalHostingApiRemoveCustomDomainRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/remove-custom-domain`,
       },
       unmarshalHostingSummary,
     )
+}
+
+/**
+ * Web Hosting free domain API.
+
+This API allows you to list and check a free domain's validity.
+ */
+export class FreeDomainAPI extends ParentAPI {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
+
+  /**
+   * Check whether a given slug and free domain combination is available.. Check whether a given slug and free domain combination is available.
+   *
+   * @param request - The request {@link FreeDomainApiCheckFreeDomainAvailabilityRequest}
+   * @returns A Promise of CheckFreeDomainAvailabilityResponse
+   */
+  checkFreeDomainAvailability = (
+    request: Readonly<FreeDomainApiCheckFreeDomainAvailabilityRequest>,
+  ) =>
+    this.client.fetch<CheckFreeDomainAvailabilityResponse>(
+      {
+        body: JSON.stringify(
+          marshalFreeDomainApiCheckFreeDomainAvailabilityRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/free-domains/check-availability`,
+      },
+      unmarshalCheckFreeDomainAvailabilityResponse,
+    )
+
+  protected pageOfListFreeRootDomains = (
+    request: Readonly<FreeDomainApiListFreeRootDomainsRequest> = {},
+  ) =>
+    this.client.fetch<ListFreeRootDomainsResponse>(
+      {
+        method: 'GET',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/free-domains/root-domains`,
+        urlParams: urlParams(
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListFreeRootDomainsResponse,
+    )
+
+  /**
+   * Retrieve the list of free root domains available for a Web Hosting.. Retrieve the list of free root domains available for a Web Hosting.
+   *
+   * @param request - The request {@link FreeDomainApiListFreeRootDomainsRequest}
+   * @returns A Promise of ListFreeRootDomainsResponse
+   */
+  listFreeRootDomains = (
+    request: Readonly<FreeDomainApiListFreeRootDomainsRequest> = {},
+  ) =>
+    enrichForPagination('rootDomains', this.pageOfListFreeRootDomains, request)
 }
 
 /**

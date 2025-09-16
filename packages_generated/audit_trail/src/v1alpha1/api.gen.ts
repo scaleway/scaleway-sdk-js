@@ -9,10 +9,13 @@ import {
   validatePathParam,
 } from '@scaleway/sdk-client'
 import {
+  unmarshalListAuthenticationEventsResponse,
   unmarshalListEventsResponse,
   unmarshalListProductsResponse,
 } from './marshalling.gen'
 import type {
+  ListAuthenticationEventsRequest,
+  ListAuthenticationEventsResponse,
   ListEventsRequest,
   ListEventsResponse,
   ListProductsRequest,
@@ -57,6 +60,7 @@ export class API extends ParentAPI {
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['page_token', request.pageToken],
+          ['principal_id', request.principalId],
           ['product_name', request.productName],
           ['project_id', request.projectId],
           ['recorded_after', request.recordedAfter],
@@ -64,10 +68,43 @@ export class API extends ParentAPI {
           ['resource_id', request.resourceId],
           ['resource_type', request.resourceType],
           ['service_name', request.serviceName],
+          ['source_ip', request.sourceIp],
           ['status', request.status],
         ),
       },
       unmarshalListEventsResponse,
+    )
+
+  /**
+   * List authentication events. Retrieve the list of Audit Trail authentication events for a Scaleway Organization. You must specify the `organization_id`.
+   *
+   * @param request - The request {@link ListAuthenticationEventsRequest}
+   * @returns A Promise of ListAuthenticationEventsResponse
+   */
+  listAuthenticationEvents = (
+    request: Readonly<ListAuthenticationEventsRequest> = {},
+  ) =>
+    this.client.fetch<ListAuthenticationEventsResponse>(
+      {
+        method: 'GET',
+        path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/authentication-events`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['page_token', request.pageToken],
+          ['recorded_after', request.recordedAfter],
+          ['recorded_before', request.recordedBefore],
+        ),
+      },
+      unmarshalListAuthenticationEventsResponse,
     )
 
   /**

@@ -15,6 +15,7 @@ import type {
   BackupApiRestoreBackupItemsRequest,
   BackupItem,
   BackupItemGroup,
+  CheckFreeDomainAvailabilityResponse,
   CheckUserOwnsDomainResponse,
   ControlPanel,
   CreateDatabaseRequestUser,
@@ -32,12 +33,15 @@ import type {
   DnsRecords,
   Domain,
   DomainAvailability,
+  FreeDomain,
+  FreeDomainApiCheckFreeDomainAvailabilityRequest,
   FtpAccount,
   FtpAccountApiChangeFtpAccountPasswordRequest,
   FtpAccountApiCreateFtpAccountRequest,
   Hosting,
   HostingApiAddCustomDomainRequest,
   HostingApiCreateHostingRequest,
+  HostingApiRemoveCustomDomainRequest,
   HostingApiUpdateHostingRequest,
   HostingDomain,
   HostingDomainCustomDomain,
@@ -48,6 +52,7 @@ import type {
   ListControlPanelsResponse,
   ListDatabasesResponse,
   ListDatabaseUsersResponse,
+  ListFreeRootDomainsResponse,
   ListFtpAccountsResponse,
   ListHostingsResponse,
   ListMailAccountsResponse,
@@ -215,6 +220,37 @@ export const unmarshalMailAccount = (data: unknown): MailAccount => {
     domain: data.domain,
     username: data.username,
   } as MailAccount
+}
+
+const unmarshalFreeDomain = (data: unknown): FreeDomain => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'FreeDomain' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    rootDomain: data.root_domain,
+    slug: data.slug,
+  } as FreeDomain
+}
+
+export const unmarshalCheckFreeDomainAvailabilityResponse = (
+  data: unknown,
+): CheckFreeDomainAvailabilityResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CheckFreeDomainAvailabilityResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    freeDomain: data.free_domain
+      ? unmarshalFreeDomain(data.free_domain)
+      : undefined,
+    isAvailable: data.is_available,
+    reason: data.reason ? data.reason : undefined,
+  } as CheckFreeDomainAvailabilityResponse
 }
 
 export const unmarshalCheckUserOwnsDomainResponse = (
@@ -556,6 +592,21 @@ export const unmarshalListDatabasesResponse = (
   } as ListDatabasesResponse
 }
 
+export const unmarshalListFreeRootDomainsResponse = (
+  data: unknown,
+): ListFreeRootDomainsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListFreeRootDomainsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    rootDomains: data.root_domains,
+    totalCount: data.total_count,
+  } as ListFreeRootDomainsResponse
+}
+
 export const unmarshalListFtpAccountsResponse = (
   data: unknown,
 ): ListFtpAccountsResponse => {
@@ -855,6 +906,14 @@ export const marshalDnsApiSyncDomainDnsRecordsRequest = (
   update_web_records: request.updateWebRecords,
 })
 
+export const marshalFreeDomainApiCheckFreeDomainAvailabilityRequest = (
+  request: FreeDomainApiCheckFreeDomainAvailabilityRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  root_domain: request.rootDomain,
+  slug: request.slug,
+})
+
 export const marshalFtpAccountApiChangeFtpAccountPasswordRequest = (
   request: FtpAccountApiChangeFtpAccountPasswordRequest,
   defaults: DefaultValues,
@@ -925,6 +984,13 @@ export const marshalHostingApiCreateHostingRequest = (
   skip_welcome_email: request.skipWelcomeEmail,
   subdomain: request.subdomain,
   tags: request.tags,
+})
+
+export const marshalHostingApiRemoveCustomDomainRequest = (
+  request: HostingApiRemoveCustomDomainRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  domain_name: request.domainName,
 })
 
 export const marshalHostingApiUpdateHostingRequest = (

@@ -58,6 +58,9 @@ export type PublicCatalogProductUnitOfMeasureCountableUnit =
   | 'minute'
   | 'setup'
   | 'day'
+  | 'second'
+  | 'sample_day'
+  | 'gigabyte_day'
 
 export interface PublicCatalogProductPropertiesHardwareCPUPhysical {
   /**

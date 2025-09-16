@@ -23,6 +23,16 @@ export type BackupStatus =
   | 'damaged'
   | 'restoring'
 
+export type CheckFreeDomainAvailabilityResponseUnavailableReason =
+  | 'unavailable_reason_unknown'
+  | 'unavailable_reason_already_used'
+  | 'unavailable_reason_too_short'
+  | 'unavailable_reason_too_long'
+  | 'unavailable_reason_invalid_characters'
+  | 'unavailable_reason_starts_or_ends_with_hyphen'
+  | 'unavailable_reason_contains_dots'
+  | 'unavailable_reason_contains_reserved_keyword'
+
 export type DnsRecordStatus = 'unknown_status' | 'valid' | 'invalid'
 
 export type DnsRecordType =
@@ -267,6 +277,17 @@ export interface HostingDomain {
    * Optional custom domain linked to the Web Hosting plan.
    */
   customDomain?: HostingDomainCustomDomain
+}
+
+export interface FreeDomain {
+  /**
+   * Custom prefix used for the free domain.
+   */
+  slug: string
+  /**
+   * Free root domain provided by Web Hosting, selected from the list returned by `ListFreeRootDomains`.
+   */
+  rootDomain: string
 }
 
 export interface CreateDatabaseRequestUser {
@@ -701,6 +722,21 @@ export type BackupApiRestoreBackupRequest = {
   backupId: string
 }
 
+export interface CheckFreeDomainAvailabilityResponse {
+  /**
+   * The free domain that was checked.
+   */
+  freeDomain?: FreeDomain
+  /**
+   * Whether the free domain is available.
+   */
+  isAvailable: boolean
+  /**
+   * Reason the domain is unavailable, if applicable.
+   */
+  reason?: CheckFreeDomainAvailabilityResponseUnavailableReason
+}
+
 export interface CheckUserOwnsDomainResponse {
   /**
    * Indicates whether the specified project owns the domain.
@@ -1077,6 +1113,36 @@ export interface Domain {
   autoConfigDomainDns?: AutoConfigDomainDns
 }
 
+export type FreeDomainApiCheckFreeDomainAvailabilityRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Custom prefix used for the free domain.
+   */
+  slug: string
+  /**
+   * Free root domain provided by Web Hosting, selected from the list returned by `ListFreeRootDomains`.
+   */
+  rootDomain: string
+}
+
+export type FreeDomainApiListFreeRootDomainsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Page number to return, from the paginated results (must be a positive integer).
+   */
+  page?: number
+  /**
+   * Number of free root domains to return (must be a positive integer lower or equal to 100).
+   */
+  pageSize?: number
+}
+
 export type FtpAccountApiChangeFtpAccountPasswordRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1394,6 +1460,10 @@ export type HostingApiRemoveCustomDomainRequest = {
    * Hosting ID to which the custom domain is detached from.
    */
   hostingId: string
+  /**
+   * The custom domain name to detach from the hosting.
+   */
+  domainName: string
 }
 
 export type HostingApiResetHostingPasswordRequest = {
@@ -1491,6 +1561,17 @@ export interface ListDatabasesResponse {
    * List of databases.
    */
   databases: Database[]
+}
+
+export interface ListFreeRootDomainsResponse {
+  /**
+   * List of free root domains available for the Web Hosting.
+   */
+  rootDomains: string[]
+  /**
+   * Total number of free root domains available.
+   */
+  totalCount: number
 }
 
 export interface ListFtpAccountsResponse {
