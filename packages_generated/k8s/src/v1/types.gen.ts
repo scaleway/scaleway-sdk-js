@@ -20,6 +20,7 @@ export type CNI =
   | 'flannel'
   | 'kilo'
   | 'none'
+  | 'cilium_native'
 
 export type ClusterStatus =
   | 'unknown'
