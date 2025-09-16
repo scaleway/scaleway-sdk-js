@@ -464,7 +464,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Set a routing policy. Replace a routing policy from an existing link. This is usefull when route propagation is enabled because it changes the routing policy "in place", without blocking all routes like a attach / detach would do.
+   * Set a routing policy. Replace a routing policy from an existing link. This is useful when route propagation is enabled because it changes the routing policy "in place", without blocking all routes like a attach / detach would do.
    *
    * @param request - The request {@link SetRoutingPolicyRequest}
    * @returns A Promise of Link
