@@ -25,6 +25,7 @@ export type {
   DomainLastStatusAutoconfigStateReason,
   DomainLastStatusDkimRecord,
   DomainLastStatusDmarcRecord,
+  DomainLastStatusMXRecord,
   DomainLastStatusRecordStatus,
   DomainLastStatusSpfRecord,
   DomainRecords,
