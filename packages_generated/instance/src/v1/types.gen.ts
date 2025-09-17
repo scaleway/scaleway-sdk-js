@@ -334,6 +334,10 @@ export interface PrivateNIC {
    * Private NIC tags.
    */
   tags: string[]
+  /**
+   * Private NIC creation date.
+   */
+  creationDate?: Date
 }
 
 export interface SecurityGroupSummary {
