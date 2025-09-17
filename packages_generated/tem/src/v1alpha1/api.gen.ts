@@ -358,7 +358,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Display SPF and DKIM records status and potential errors. Display SPF and DKIM records status and potential errors, including the found records to make debugging easier.
+   * Display SPF, DKIM, DMARC and MX records status and potential errors. Display SPF, DKIM, DMARC and MX records status and potential errors, including the found records to make debugging easier.
    *
    * @param request - The request {@link GetDomainLastStatusRequest}
    * @returns A Promise of DomainLastStatus

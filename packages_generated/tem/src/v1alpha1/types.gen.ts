@@ -365,6 +365,21 @@ export interface DomainLastStatusDmarcRecord {
   error?: string
 }
 
+export interface DomainLastStatusMXRecord {
+  /**
+   * Status of the MX record's configuration. This record is optional to validate a domain, but highly recommended.
+   */
+  status: DomainLastStatusRecordStatus
+  /**
+   * Time and date the MX record was last valid.
+   */
+  lastValidAt?: Date
+  /**
+   * An error text displays in case the record is not valid.
+   */
+  error?: string
+}
+
 export interface DomainLastStatusSpfRecord {
   /**
    * Status of the SPF record's configuration.
@@ -892,6 +907,10 @@ export interface DomainLastStatus {
    */
   dmarcRecord?: DomainLastStatusDmarcRecord
   /**
+   * The MX record verification data.
+   */
+  mxRecord?: DomainLastStatusMXRecord
+  /**
    * The verification state of domain auto-configuration.
    */
   autoconfigState?: DomainLastStatusAutoconfigState
@@ -903,7 +922,7 @@ export type GetDomainLastStatusRequest = {
    */
   region?: ScwRegion
   /**
-   * ID of the domain to delete.
+   * ID of the domain to get records status.
    */
   domainId: string
 }
