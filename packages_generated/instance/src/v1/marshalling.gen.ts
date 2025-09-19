@@ -157,6 +157,7 @@ export const unmarshalPrivateNIC = (data: unknown): PrivateNIC => {
   }
 
   return {
+    creationDate: unmarshalDate(data.creation_date),
     id: data.id,
     macAddress: data.mac_address,
     privateNetworkId: data.private_network_id,
@@ -2260,6 +2261,7 @@ const marshalPrivateNIC = (
   request: PrivateNIC,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  creation_date: request.creationDate,
   id: request.id,
   mac_address: request.macAddress,
   private_network_id: request.privateNetworkId,
