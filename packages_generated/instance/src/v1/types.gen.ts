@@ -126,6 +126,7 @@ export type VolumeState =
   | 'snapshotting'
   | 'fetching'
   | 'saving'
+  | 'attaching'
   | 'resizing'
   | 'hotsyncing'
   | 'error'
