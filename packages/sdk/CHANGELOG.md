@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.77.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.76.7...@scaleway/sdk@2.77.0) (2025-09-22)
+
+### Bug Fixes
+
+- **s2s_vpn:** add packages ([#2400](https://github.com/scaleway/scaleway-sdk-js/issues/2400)) ([5703403](https://github.com/scaleway/scaleway-sdk-js/commit/5703403f87dccf9e7f6d8e52c278608c440a6dca))
+
+### Features
+
+- **datawarehouse:** update the visibility to public ([#2406](https://github.com/scaleway/scaleway-sdk-js/issues/2406)) ([a38b83e](https://github.com/scaleway/scaleway-sdk-js/commit/a38b83e50f63f7741285fe9ba065bb9af5f7f016))
+
 ## [2.76.8](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.76.7...@scaleway/sdk@2.76.8) (2025-09-10)
 
 **Note:** Version bump only for package @scaleway/sdk

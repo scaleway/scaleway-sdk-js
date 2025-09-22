@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.1.0 (2025-09-22)
+
+### Features
+
+- **audit_trail:** add authentication events in public API ([#2374](https://github.com/scaleway/scaleway-sdk-js/issues/2374)) ([9ca66aa](https://github.com/scaleway/scaleway-sdk-js/commit/9ca66aa435e2bdfdd8e1dffd78a90e44d140a343))
+
 ## 1.0.6 (2025-09-10)
 
 **Note:** Version bump only for package @scaleway/sdk-std

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.6.0 (2025-09-22)
+
+### Bug Fixes
+
+- **serverless:** allow empty string for privateNetworkID in create ([#2223](https://github.com/scaleway/scaleway-sdk-js/issues/2223)) ([2513104](https://github.com/scaleway/scaleway-sdk-js/commit/2513104f91ac70978d75469c4205a3335839b97e))
+
+### Features
+
+- **serverless:** deprecate activate_vpc_integration and update documentation ([#2318](https://github.com/scaleway/scaleway-sdk-js/issues/2318)) ([0a6e366](https://github.com/scaleway/scaleway-sdk-js/commit/0a6e3666b9dc6755a05f00912b1c80648c2f6923))
+
 # 1.5.0 (2025-09-10)
 
 ### Bug Fixes

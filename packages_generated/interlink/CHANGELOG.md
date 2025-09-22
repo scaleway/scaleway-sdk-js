@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-interlink@1.2.0...@scaleway/sdk-interlink@1.3.0) (2025-09-22)
+
+### Features
+
+- **interlink:** align routing_policy behavior with S2S_VPN ([#2398](https://github.com/scaleway/scaleway-sdk-js/issues/2398)) ([8c2303e](https://github.com/scaleway/scaleway-sdk-js/commit/8c2303e94c833168f5c20fe9ff5f6aa77b2ece57))
+
 ## [1.2.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-interlink@1.2.0...@scaleway/sdk-interlink@1.2.1) (2025-09-10)
 
 **Note:** Version bump only for package @scaleway/sdk-interlink

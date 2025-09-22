@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.2.0 (2025-09-22)
+
+### Features
+
+- **tem:** add max subject len in email creation ([#2227](https://github.com/scaleway/scaleway-sdk-js/issues/2227)) ([495e94f](https://github.com/scaleway/scaleway-sdk-js/commit/495e94f6041ca0e7acf197e16eb4e8ede0dc733b))
+- **tem:** add mx records validation in get domain last status ([#2409](https://github.com/scaleway/scaleway-sdk-js/issues/2409)) ([05b2f56](https://github.com/scaleway/scaleway-sdk-js/commit/05b2f56148f84990c45d3d9eed538bd4949fcd45))
+
 # 1.1.0 (2025-09-10)
 
 ### Features

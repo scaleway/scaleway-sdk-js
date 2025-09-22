@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk",
-  "version": "2.76.8",
+  "version": "2.77.0",
   "description": "Scaleway SDK TS.",
   "license": "Apache-2.0",
   "files": [
@@ -65,9 +65,9 @@
     "@scaleway/sdk-rdb": "workspace:*",
     "@scaleway/sdk-redis": "workspace:*",
     "@scaleway/sdk-registry": "workspace:*",
+    "@scaleway/sdk-s2s-vpn": "workspace:*",
     "@scaleway/sdk-secret": "workspace:*",
     "@scaleway/sdk-serverless-sqldb": "workspace:*",
-    "@scaleway/sdk-s2s-vpn": "workspace:*",
     "@scaleway/sdk-std": "workspace:*",
     "@scaleway/sdk-tem": "workspace:*",
     "@scaleway/sdk-test": "workspace:*",

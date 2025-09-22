@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-cockpit@1.4.0...@scaleway/sdk-cockpit@1.6.0) (2025-09-22)
+
+### Features
+
+- **cockpit:** add rule status on ListAlert endpoint ([#2236](https://github.com/scaleway/scaleway-sdk-js/issues/2236)) ([afbf0f3](https://github.com/scaleway/scaleway-sdk-js/commit/afbf0f3a11c97872af66e9948cf5f4bb1f49096a))
+
 # [1.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-cockpit@1.4.0...@scaleway/sdk-cockpit@1.5.0) (2025-09-10)
 
 ### Features
