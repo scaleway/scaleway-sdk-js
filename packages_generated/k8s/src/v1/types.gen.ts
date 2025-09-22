@@ -1527,6 +1527,7 @@ export interface NodeMetadata {
   nodeTaints: NodeMetadataCoreV1Taint[]
   providerId: string
   resolvconfPath: string
+  templateArgs: Record<string, string>
   hasGpu: boolean
   externalIp: string
   repoUri: string
