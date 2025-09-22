@@ -69,6 +69,7 @@ export const VOLUME_TRANSIENT_STATUSES: VolumeState[] = [
   'snapshotting',
   'fetching',
   'saving',
+  'attaching',
   'resizing',
   'hotsyncing',
 ]
