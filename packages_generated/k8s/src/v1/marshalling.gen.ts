@@ -543,6 +543,7 @@ export const unmarshalNodeMetadata = (data: unknown): NodeMetadata => {
     providerId: data.provider_id,
     repoUri: data.repo_uri,
     resolvconfPath: data.resolvconf_path,
+    templateArgs: data.template_args,
     updaterBinPath: data.updater_bin_path,
     updaterBinUrl: data.updater_bin_url,
     updaterBinVersion: data.updater_bin_version,
