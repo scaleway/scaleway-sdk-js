@@ -17,7 +17,6 @@ export type {
   BaremetalSettingInfo,
   Event,
   EventPrincipal,
-  EventSystem,
   InstanceServerInfo,
   IpamIpInfo,
   KeyManagerKeyInfo,
@@ -28,6 +27,10 @@ export type {
   ListAuthenticationEventsRequest,
   ListAuthenticationEventsRequestOrderBy,
   ListAuthenticationEventsResponse,
+  ListCombinedEventsRequest,
+  ListCombinedEventsRequestOrderBy,
+  ListCombinedEventsResponse,
+  ListCombinedEventsResponseCombinedEvent,
   ListEventsRequest,
   ListEventsRequestOrderBy,
   ListEventsResponse,
@@ -46,5 +49,7 @@ export type {
   ResourceType,
   SecretManagerSecretInfo,
   SecretManagerSecretVersionInfo,
+  SystemEvent,
+  SystemEventKind,
 } from './types.gen'
 export * as ValidationRules from './validation-rules.gen'
