@@ -18,8 +18,7 @@ You'll need a pair of access and secret keys to connect to Scaleway API. Please 
 **A minimal setup** would look like this:
 
 ```ts
-import { Registry } from '@scaleway/sdk'
-import { createClient } from '@scaleway/sdk-client'
+import { Registry, createClient } from '@scaleway/sdk'
 
 const client = createClient({
   accessKey: 'SCWXXXXXXXXXXXXXXXXX',

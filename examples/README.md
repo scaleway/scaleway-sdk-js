@@ -13,8 +13,7 @@ Please find below some examples on how to perform basic operations.
 
 ```ts
 import { loadProfileFromConfigurationFile } from '@scaleway/configuration-loader'
-import { Instance } from '@scaleway/sdk'
-import { createClient } from '@scaleway/sdk-client'
+import { Instance, createClient } from '@scaleway/sdk'
 
 const profile = loadProfileFromConfigurationFile()
 const client = createClient(profile)
@@ -46,8 +45,7 @@ console.log(`\tPowered ON (now ${server.state})`)
 
 ```ts
 import { loadProfileFromConfigurationFile } from '@scaleway/configuration-loader'
-import { Instance } from '@scaleway/sdk'
-import { createClient } from '@scaleway/sdk-client'
+import { Instance, createClient } from '@scaleway/sdk'
 
 const profile = loadProfileFromConfigurationFile()
 const client = createClient(profile)
