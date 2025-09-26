@@ -15,7 +15,6 @@ import type {
   BaremetalSettingInfo,
   Event,
   EventPrincipal,
-  EventSystem,
   InstanceServerInfo,
   IpamIpInfo,
   KeyManagerKeyInfo,
@@ -24,6 +23,8 @@ import type {
   KubernetesNodeInfo,
   KubernetesPoolInfo,
   ListAuthenticationEventsResponse,
+  ListCombinedEventsResponse,
+  ListCombinedEventsResponseCombinedEvent,
   ListEventsResponse,
   ListProductsResponse,
   LoadBalancerAclInfo,
@@ -38,6 +39,7 @@ import type {
   Resource,
   SecretManagerSecretInfo,
   SecretManagerSecretVersionInfo,
+  SystemEvent,
 } from './types.gen'
 
 const unmarshalAccountOrganizationInfo = (
@@ -471,18 +473,6 @@ const unmarshalEventPrincipal = (data: unknown): EventPrincipal => {
   } as EventPrincipal
 }
 
-const unmarshalEventSystem = (data: unknown): EventSystem => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EventSystem' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    name: data.name,
-  } as EventSystem
-}
-
 export const unmarshalEvent = (data: unknown): Event => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -507,9 +497,63 @@ export const unmarshalEvent = (data: unknown): Event => {
     serviceName: data.service_name,
     sourceIp: data.source_ip,
     statusCode: data.status_code,
-    system: data.system ? unmarshalEventSystem(data.system) : undefined,
     userAgent: data.user_agent,
   } as Event
+}
+
+const unmarshalSystemEvent = (data: unknown): SystemEvent => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SystemEvent' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    kind: data.kind,
+    locality: data.locality,
+    organizationId: data.organization_id,
+    productName: data.product_name,
+    projectId: data.project_id,
+    recordedAt: unmarshalDate(data.recorded_at),
+    resources: unmarshalArrayOfObject(data.resources, unmarshalResource),
+    source: data.source,
+    systemName: data.system_name,
+  } as SystemEvent
+}
+
+const unmarshalListCombinedEventsResponseCombinedEvent = (
+  data: unknown,
+): ListCombinedEventsResponseCombinedEvent => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListCombinedEventsResponseCombinedEvent' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    api: data.api ? unmarshalEvent(data.api) : undefined,
+    auth: data.auth ? unmarshalAuthenticationEvent(data.auth) : undefined,
+    system: data.system ? unmarshalSystemEvent(data.system) : undefined,
+  } as ListCombinedEventsResponseCombinedEvent
+}
+
+export const unmarshalListCombinedEventsResponse = (
+  data: unknown,
+): ListCombinedEventsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListCombinedEventsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    events: unmarshalArrayOfObject(
+      data.events,
+      unmarshalListCombinedEventsResponseCombinedEvent,
+    ),
+    nextPageToken: data.next_page_token,
+  } as ListCombinedEventsResponse
 }
 
 export const unmarshalListEventsResponse = (
