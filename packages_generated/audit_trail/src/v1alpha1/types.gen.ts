@@ -28,6 +28,10 @@ export type ListAuthenticationEventsRequestOrderBy =
   | 'recorded_at_desc'
   | 'recorded_at_asc'
 
+export type ListCombinedEventsRequestOrderBy =
+  | 'recorded_at_desc'
+  | 'recorded_at_asc'
+
 export type ListEventsRequestOrderBy = 'recorded_at_desc' | 'recorded_at_asc'
 
 export type ResourceType =
@@ -75,6 +79,8 @@ export type ResourceType =
   | 'load_balancer_certificate'
   | 'sfs_filesystem'
   | 'vpc_private_network'
+
+export type SystemEventKind = 'unknown_kind' | 'cron' | 'notification'
 
 export interface AccountOrganizationInfo {}
 
@@ -309,15 +315,6 @@ export interface EventPrincipal {
   id: string
 }
 
-export interface EventSystem {
-  name: string
-}
-
-export interface ProductService {
-  name: string
-  methods: string[]
-}
-
 export interface AuthenticationEvent {
   /**
    * ID of the event.
@@ -385,15 +382,9 @@ export interface Event {
   /**
    * User or IAM application at the origin of the event.
    *
-   * One-of ('source'): at most one of 'principal', 'system' could be set.
+   * One-of ('source'): at most one of 'principal' could be set.
    */
   principal?: EventPrincipal
-  /**
-   * The Scaleway system that performed an action on behalf of the client.
-   *
-   * One-of ('source'): at most one of 'principal', 'system' could be set.
-   */
-  system?: EventSystem
   /**
    * Organization ID containing the event.
    */
@@ -440,6 +431,42 @@ export interface Event {
   statusCode: number
 }
 
+export interface SystemEvent {
+  id: string
+  recordedAt?: Date
+  locality: string
+  organizationId: string
+  projectId?: string
+  source: string
+  systemName: string
+  resources: Resource[]
+  kind: SystemEventKind
+  productName: string
+}
+
+export interface ProductService {
+  name: string
+  methods: string[]
+}
+
+export interface ListCombinedEventsResponseCombinedEvent {
+  /**
+   *
+   * One-of ('event'): at most one of 'api', 'auth', 'system' could be set.
+   */
+  api?: Event
+  /**
+   *
+   * One-of ('event'): at most one of 'api', 'auth', 'system' could be set.
+   */
+  auth?: AuthenticationEvent
+  /**
+   *
+   * One-of ('event'): at most one of 'api', 'auth', 'system' could be set.
+   */
+  system?: SystemEvent
+}
+
 export interface Product {
   /**
    * Product title.
@@ -470,6 +497,26 @@ export type ListAuthenticationEventsRequest = {
 
 export interface ListAuthenticationEventsResponse {
   events: AuthenticationEvent[]
+  nextPageToken?: string
+}
+
+export type ListCombinedEventsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  organizationId?: string
+  projectId?: string
+  resourceType?: ResourceType
+  recordedAfter?: Date
+  recordedBefore?: Date
+  orderBy?: ListCombinedEventsRequestOrderBy
+  pageSize?: number
+  pageToken?: string
+}
+
+export interface ListCombinedEventsResponse {
+  events: ListCombinedEventsResponseCombinedEvent[]
   nextPageToken?: string
 }
 
