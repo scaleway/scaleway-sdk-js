@@ -132,6 +132,9 @@ importers:
       '@scaleway/sdk-block':
         specifier: workspace:*
         version: link:../../packages_generated/block
+      '@scaleway/sdk-client':
+        specifier: workspace:^
+        version: link:../client
       '@scaleway/sdk-cockpit':
         specifier: workspace:*
         version: link:../../packages_generated/cockpit
@@ -240,10 +243,6 @@ importers:
       '@scaleway/sdk-webhosting':
         specifier: workspace:*
         version: link:../../packages_generated/webhosting
-    devDependencies:
-      '@scaleway/sdk-client':
-        specifier: workspace:^
-        version: link:../client
 
   packages_generated/account:
     dependencies:
