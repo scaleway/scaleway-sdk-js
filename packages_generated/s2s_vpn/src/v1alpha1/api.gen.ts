@@ -252,6 +252,7 @@ export class API extends ParentAPI {
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections`,
         urlParams: urlParams(
           ['customer_gateway_ids', request.customerGatewayIds],
+          ['is_ipv6', request.isIpv6],
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],

@@ -10,12 +10,15 @@ import {
 } from '@scaleway/sdk-client'
 import {
   unmarshalListAuthenticationEventsResponse,
+  unmarshalListCombinedEventsResponse,
   unmarshalListEventsResponse,
   unmarshalListProductsResponse,
 } from './marshalling.gen'
 import type {
   ListAuthenticationEventsRequest,
   ListAuthenticationEventsResponse,
+  ListCombinedEventsRequest,
+  ListCombinedEventsResponse,
   ListEventsRequest,
   ListEventsResponse,
   ListProductsRequest,
@@ -105,6 +108,32 @@ export class API extends ParentAPI {
         ),
       },
       unmarshalListAuthenticationEventsResponse,
+    )
+
+  listCombinedEvents = (request: Readonly<ListCombinedEventsRequest> = {}) =>
+    this.client.fetch<ListCombinedEventsResponse>(
+      {
+        method: 'GET',
+        path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/combined-events`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['page_token', request.pageToken],
+          ['project_id', request.projectId],
+          ['recorded_after', request.recordedAfter],
+          ['recorded_before', request.recordedBefore],
+          ['resource_type', request.resourceType],
+        ),
+      },
+      unmarshalListCombinedEventsResponse,
     )
 
   /**
