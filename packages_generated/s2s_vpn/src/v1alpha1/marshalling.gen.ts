@@ -94,6 +94,7 @@ export const unmarshalConnection = (data: unknown): Connection => {
       unmarshalConnectionCipher,
     ),
     initiationPolicy: data.initiation_policy,
+    isIpv6: data.is_ipv6,
     name: data.name,
     organizationId: data.organization_id,
     projectId: data.project_id,
@@ -101,8 +102,13 @@ export const unmarshalConnection = (data: unknown): Connection => {
     routePropagationEnabled: data.route_propagation_enabled,
     status: data.status,
     tags: data.tags,
-    tunnelStatusIpv4: data.tunnel_status_ipv4,
-    tunnelStatusIpv6: data.tunnel_status_ipv6,
+    tunnelStatus: data.tunnel_status,
+    tunnelStatusIpv4: data.tunnel_status_ipv4
+      ? data.tunnel_status_ipv4
+      : undefined,
+    tunnelStatusIpv6: data.tunnel_status_ipv6
+      ? data.tunnel_status_ipv6
+      : undefined,
     updatedAt: unmarshalDate(data.updated_at),
     vpnGatewayId: data.vpn_gateway_id,
   } as Connection
@@ -377,6 +383,7 @@ export const marshalCreateConnectionRequest = (
     marshalConnectionCipher(elt, defaults),
   ),
   initiation_policy: request.initiationPolicy,
+  is_ipv6: request.isIpv6,
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,

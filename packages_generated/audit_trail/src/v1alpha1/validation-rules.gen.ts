@@ -8,6 +8,13 @@ export const ListAuthenticationEventsRequest = {
   },
 }
 
+export const ListCombinedEventsRequest = {
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1000,
+  },
+}
+
 export const ListEventsRequest = {
   methodName: {
     pattern: /^[a-zA-Z][a-zA-Z0-9_]*$/,

@@ -26,7 +26,10 @@ import type {
   DomainLastStatusMXRecord,
   DomainLastStatusSpfRecord,
   DomainRecords,
+  DomainRecordsDKIM,
   DomainRecordsDMARC,
+  DomainRecordsMX,
+  DomainRecordsSPF,
   DomainReputation,
   DomainStatistics,
   Email,
@@ -96,6 +99,19 @@ export const unmarshalEmail = (data: unknown): Email => {
   } as Email
 }
 
+const unmarshalDomainRecordsDKIM = (data: unknown): DomainRecordsDKIM => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRecordsDKIM' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+    value: data.value,
+  } as DomainRecordsDKIM
+}
+
 const unmarshalDomainRecordsDMARC = (data: unknown): DomainRecordsDMARC => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -109,6 +125,32 @@ const unmarshalDomainRecordsDMARC = (data: unknown): DomainRecordsDMARC => {
   } as DomainRecordsDMARC
 }
 
+const unmarshalDomainRecordsMX = (data: unknown): DomainRecordsMX => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRecordsMX' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+    value: data.value,
+  } as DomainRecordsMX
+}
+
+const unmarshalDomainRecordsSPF = (data: unknown): DomainRecordsSPF => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRecordsSPF' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+    value: data.value,
+  } as DomainRecordsSPF
+}
+
 const unmarshalDomainRecords = (data: unknown): DomainRecords => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -117,7 +159,10 @@ const unmarshalDomainRecords = (data: unknown): DomainRecords => {
   }
 
   return {
+    dkim: data.dkim ? unmarshalDomainRecordsDKIM(data.dkim) : undefined,
     dmarc: data.dmarc ? unmarshalDomainRecordsDMARC(data.dmarc) : undefined,
+    mx: data.mx ? unmarshalDomainRecordsMX(data.mx) : undefined,
+    spf: data.spf ? unmarshalDomainRecordsSPF(data.spf) : undefined,
   } as DomainRecords
 }
 
