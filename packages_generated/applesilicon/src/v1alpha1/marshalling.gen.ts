@@ -32,6 +32,7 @@ import type {
   ServerTypeGPU,
   ServerTypeMemory,
   ServerTypeNetwork,
+  ServerTypeNPU,
   SetServerPrivateNetworksResponse,
   StartConnectivityDiagnosticRequest,
   StartConnectivityDiagnosticResponse,
@@ -138,6 +139,8 @@ const unmarshalServerTypeCPU = (data: unknown): ServerTypeCPU => {
     coreCount: data.core_count,
     frequency: data.frequency,
     name: data.name,
+    sockets: data.sockets,
+    threadsPerCore: data.threads_per_core,
   } as ServerTypeCPU
 }
 
@@ -179,6 +182,18 @@ const unmarshalServerTypeMemory = (data: unknown): ServerTypeMemory => {
   } as ServerTypeMemory
 }
 
+const unmarshalServerTypeNPU = (data: unknown): ServerTypeNPU => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeNPU' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    count: data.count,
+  } as ServerTypeNPU
+}
+
 const unmarshalServerTypeNetwork = (data: unknown): ServerTypeNetwork => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -187,6 +202,7 @@ const unmarshalServerTypeNetwork = (data: unknown): ServerTypeNetwork => {
   }
 
   return {
+    defaultPublicBandwidth: data.default_public_bandwidth,
     publicBandwidthBps: data.public_bandwidth_bps,
     supportedBandwidth: data.supported_bandwidth,
   } as ServerTypeNetwork
@@ -210,6 +226,7 @@ export const unmarshalServerType = (data: unknown): ServerType => {
     network: data.network
       ? unmarshalServerTypeNetwork(data.network)
       : undefined,
+    npu: data.npu ? unmarshalServerTypeNPU(data.npu) : undefined,
     stock: data.stock,
   } as ServerType
 }
