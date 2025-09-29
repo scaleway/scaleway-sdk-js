@@ -114,6 +114,17 @@ export type WebhookEventType =
   | 'email_blocklisted'
   | 'blocklist_created'
 
+export interface DomainRecordsDKIM {
+  /**
+   * Name of the DKIM TXT record.
+   */
+  name: string
+  /**
+   * Value of the DKIM TXT record.
+   */
+  value: string
+}
+
 export interface DomainRecordsDMARC {
   /**
    * Name of the DMARC TXT record.
@@ -121,6 +132,28 @@ export interface DomainRecordsDMARC {
   name: string
   /**
    * Value of the DMARC TXT record.
+   */
+  value: string
+}
+
+export interface DomainRecordsMX {
+  /**
+   * Name of the MX record.
+   */
+  name: string
+  /**
+   * Value of the MX record.
+   */
+  value: string
+}
+
+export interface DomainRecordsSPF {
+  /**
+   * Name of the SPF TXT record.
+   */
+  name: string
+  /**
+   * Value of the SPF TXT record.
    */
   value: string
 }
@@ -149,6 +182,18 @@ export interface DomainRecords {
    * DMARC TXT record specification.
    */
   dmarc?: DomainRecordsDMARC
+  /**
+   * DKIM TXT record specification.
+   */
+  dkim?: DomainRecordsDKIM
+  /**
+   * SPF TXT record specification.
+   */
+  spf?: DomainRecordsSPF
+  /**
+   * MX record specification.
+   */
+  mx?: DomainRecordsMX
 }
 
 export interface DomainReputation {
