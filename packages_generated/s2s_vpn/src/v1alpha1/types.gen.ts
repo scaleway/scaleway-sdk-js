@@ -146,6 +146,10 @@ export interface Connection {
    */
   status: ConnectionStatus
   /**
+   * IP version of the IPSec Tunnel.
+   */
+  isIpv6: boolean
+  /**
    * Who initiates the IPsec tunnel.
    */
   initiationPolicy: ConnectionInitiationPolicy
@@ -170,13 +174,17 @@ export interface Connection {
    */
   customerGatewayId: string
   /**
-   * Status of the IPv4 IPsec tunnel.
+   * Status of the IPsec tunnel.
    */
-  tunnelStatusIpv4: TunnelStatus
+  tunnelStatus: TunnelStatus
   /**
-   * Status of the IPv6 IPsec tunnel.
+   * @deprecated Status of the IPv4 IPsec tunnel.
    */
-  tunnelStatusIpv6: TunnelStatus
+  tunnelStatusIpv4?: TunnelStatus
+  /**
+   * @deprecated Status of the IPv6 IPsec tunnel.
+   */
+  tunnelStatusIpv6?: TunnelStatus
   /**
    * Status of the BGP IPv4 session.
    */
@@ -395,6 +403,10 @@ export type CreateConnectionRequest = {
    * List of tags to apply to the connection.
    */
   tags?: string[]
+  /**
+   * Defines IP version of the IPSec Tunnel.
+   */
+  isIpv6: boolean
   /**
    * Who initiates the IPsec tunnel.
    */
@@ -713,6 +725,10 @@ export type ListConnectionsRequest = {
    * Connection statuses to filter for.
    */
   statuses?: ConnectionStatus[]
+  /**
+   * Filter connections with IP version of IPSec tunnel.
+   */
+  isIpv6?: boolean
   /**
    * Filter for connections using these routing policies.
    */
