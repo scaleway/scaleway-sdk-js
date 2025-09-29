@@ -72,5 +72,9 @@ for (const service of services) {
   }
 }
 appendFileSync(OUTPUT_PATH, importsOutput)
+appendFileSync(
+  OUTPUT_PATH,
+  "export { createClient, createAdvancedClient } from '@scaleway/sdk-client'\n\n",
+)
 appendFileSync(OUTPUT_PATH, output)
 console.log(`✅ File generated: ${OUTPUT_PATH}`)
