@@ -22,6 +22,11 @@ export type ListServerPrivateNetworksRequestOrderBy =
 
 export type ListServersRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
+export type RunnerConfigurationProvider =
+  | 'unknown_provider'
+  | 'github'
+  | 'gitlab'
+
 export type ServerPrivateNetworkServerStatus =
   | 'unknown_status'
   | 'attaching'
@@ -54,6 +59,11 @@ export type ServerTypeStock =
   | 'no_stock'
   | 'low_stock'
   | 'high_stock'
+
+export interface OSSupportedServerType {
+  serverType: string
+  fastDeliveryAvailable: boolean
+}
 
 export interface Commitment {
   type: CommitmentType
@@ -94,15 +104,40 @@ export interface OS {
    */
   xcodeVersion: string
   /**
-   * List of compatible server types.
+   * @deprecated List of compatible server types. Deprecated.
    */
-  compatibleServerTypes: string[]
+  compatibleServerTypes?: string[]
+  /**
+   * Url of the release notes for the OS image or softwares pre-installed.
+   */
+  releaseNotesUrl: string
+  /**
+   * A summary of the OS image content and configuration.
+   */
+  description: string
+  /**
+   * List of tags for the OS configuration.
+   */
+  tags: string[]
+  /**
+   * List of server types which supports the OS configuration. Also gives information about immediate stock availability.
+   */
+  supportedServerTypes: OSSupportedServerType[]
+}
+
+export interface RunnerConfiguration {
+  name: string
+  url: string
+  token: string
+  provider: RunnerConfigurationProvider
 }
 
 export interface ServerTypeCPU {
   name: string
   coreCount: number
   frequency: number
+  sockets: number
+  threadsPerCore: number
 }
 
 export interface ServerTypeDisk {
@@ -119,9 +154,14 @@ export interface ServerTypeMemory {
   type: string
 }
 
+export interface ServerTypeNPU {
+  count: number
+}
+
 export interface ServerTypeNetwork {
   publicBandwidthBps: number
   supportedBandwidth: number[]
+  defaultPublicBandwidth: number
 }
 
 export interface BatchCreateServersRequestBatchInnerCreateServerRequest {
@@ -213,6 +253,14 @@ export interface Server {
    * Public bandwidth configured for this server. Expressed in bits per second.
    */
   publicBandwidthBps: number
+  /**
+   * Current runner configuration, empty if none is installed.
+   */
+  runnerConfiguration?: RunnerConfiguration
+  /**
+   * A list of tags attached to the server.
+   */
+  tags: string[]
 }
 
 export interface ConnectivityDiagnosticServerHealth {
@@ -300,6 +348,10 @@ export interface ServerType {
    * The default OS for this server type.
    */
   defaultOs?: OS
+  /**
+   * NPU description.
+   */
+  npu?: ServerTypeNPU
 }
 
 export interface CommitmentTypeValue {
@@ -390,6 +442,10 @@ export type CreateServerRequest = {
    * Public bandwidth to configure for this server. This defaults to the minimum bandwidth for this server type. For compatible server types, the bandwidth can be increased which incurs additional costs.
    */
   publicBandwidthBps: number
+  /**
+   * Specify the configuration to install an optional CICD runner on the server during installation.
+   */
+  runnerConfiguration?: RunnerConfiguration
 }
 
 export type DeleteServerRequest = {
@@ -656,6 +712,10 @@ export type ReinstallServerRequest = {
    * Reinstall the server with the target OS, when no os_id provided the default OS for the server type is used.
    */
   osId?: string
+  /**
+   * Specify the configuration to install an optional CICD runner on the server during installation.
+   */
+  runnerConfiguration?: RunnerConfiguration
 }
 
 export interface SetServerPrivateNetworksResponse {
