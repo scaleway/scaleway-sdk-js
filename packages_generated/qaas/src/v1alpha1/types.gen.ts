@@ -150,6 +150,18 @@ export interface PlatformBookingRequirement {
    * Allowed planification time from now where the platform can be booked in the future.
    */
   maxPlanificationDuration?: string
+  /**
+   * Minimum planification time before a platform can be booked.
+   */
+  minPlanificationDuration?: string
+  /**
+   * Maximum amount of booking allowed for one organization per week.
+   */
+  maxBookingPerWeek: number
+  /**
+   * Maximum amount of booking allowed for one organization per day.
+   */
+  maxBookingPerDay: number
 }
 
 export interface PlatformHardware {
