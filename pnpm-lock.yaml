@@ -413,6 +413,19 @@ importers:
         specifier: workspace:^
         version: link:../../packages/client
 
+  packages_generated/environmental_footprint:
+    dependencies:
+      '@scaleway/random-name':
+        specifier: 5.1.1
+        version: 5.1.1
+      '@scaleway/sdk-std':
+        specifier: workspace:*
+        version: link:../std
+    devDependencies:
+      '@scaleway/sdk-client':
+        specifier: workspace:^
+        version: link:../../packages/client
+
   packages_generated/file:
     dependencies:
       '@scaleway/random-name':
