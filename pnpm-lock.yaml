@@ -153,6 +153,9 @@ importers:
       '@scaleway/sdk-edge-services':
         specifier: workspace:*
         version: link:../../packages_generated/edge_services
+      '@scaleway/sdk-environmental-footprint':
+        specifier: workspace:*
+        version: link:../../packages_generated/environmental_footprint
       '@scaleway/sdk-file':
         specifier: workspace:*
         version: link:../../packages_generated/file
