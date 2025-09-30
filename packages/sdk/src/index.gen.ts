@@ -15,6 +15,7 @@ import { Datawarehousev1beta1 } from '@scaleway/sdk-datawarehouse'
 import { Dediboxv1 } from '@scaleway/sdk-dedibox'
 import { Domainv2beta1 } from '@scaleway/sdk-domain'
 import { EdgeServicesv1beta1 } from '@scaleway/sdk-edge-services'
+import { EnvironmentalFootprintv1alpha1 } from '@scaleway/sdk-environmental-footprint'
 import { Filev1alpha1 } from '@scaleway/sdk-file'
 import { Flexibleipv1alpha1 } from '@scaleway/sdk-flexibleip'
 import { Functionv1beta1 } from '@scaleway/sdk-function'
@@ -151,6 +152,14 @@ export const Domain = {
 export { EdgeServicesv1beta1 }
 export const EdgeServices = {
   v1beta1: EdgeServicesv1beta1,
+}
+
+/**
+ * @deprecated Direct version exports are deprecated. Use the 'EnvironmentalFootprint' namespace instead (e.g., EnvironmentalFootprint.v1).
+ */
+export { EnvironmentalFootprintv1alpha1 }
+export const EnvironmentalFootprint = {
+  v1alpha1: EnvironmentalFootprintv1alpha1,
 }
 
 /**
