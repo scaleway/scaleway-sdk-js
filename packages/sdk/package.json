@@ -45,6 +45,7 @@
     "@scaleway/sdk-dedibox": "workspace:*",
     "@scaleway/sdk-domain": "workspace:*",
     "@scaleway/sdk-edge-services": "workspace:*",
+    "@scaleway/sdk-environmental-footprint": "workspace:*",
     "@scaleway/sdk-file": "workspace:*",
     "@scaleway/sdk-flexibleip": "workspace:*",
     "@scaleway/sdk-function": "workspace:*",
