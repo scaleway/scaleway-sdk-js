@@ -153,6 +153,9 @@ importers:
       '@scaleway/sdk-edge-services':
         specifier: workspace:*
         version: link:../../packages_generated/edge_services
+      '@scaleway/sdk-environmental-footprint':
+        specifier: workspace:*
+        version: link:../../packages_generated/environmental_footprint
       '@scaleway/sdk-file':
         specifier: workspace:*
         version: link:../../packages_generated/file
@@ -405,6 +408,19 @@ importers:
       '@scaleway/random-name':
         specifier: 5.1.2
         version: 5.1.2
+      '@scaleway/sdk-std':
+        specifier: workspace:*
+        version: link:../std
+    devDependencies:
+      '@scaleway/sdk-client':
+        specifier: workspace:^
+        version: link:../../packages/client
+
+  packages_generated/environmental_footprint:
+    dependencies:
+      '@scaleway/random-name':
+        specifier: 5.1.1
+        version: 5.1.1
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
