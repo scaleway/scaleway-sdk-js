@@ -51,6 +51,7 @@ export type {
   ServerTypeGPU,
   ServerTypeMemory,
   ServerTypeNetwork,
+  ServerTypeNPU,
   ServerTypeStock,
   SetServerPrivateNetworksResponse,
   StartConnectivityDiagnosticRequest,

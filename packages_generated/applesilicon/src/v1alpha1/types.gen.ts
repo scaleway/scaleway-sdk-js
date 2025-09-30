@@ -103,6 +103,8 @@ export interface ServerTypeCPU {
   name: string
   coreCount: number
   frequency: number
+  sockets: number
+  threadsPerCore: number
 }
 
 export interface ServerTypeDisk {
@@ -119,9 +121,14 @@ export interface ServerTypeMemory {
   type: string
 }
 
+export interface ServerTypeNPU {
+  count: number
+}
+
 export interface ServerTypeNetwork {
   publicBandwidthBps: number
   supportedBandwidth: number[]
+  defaultPublicBandwidth: number
 }
 
 export interface BatchCreateServersRequestBatchInnerCreateServerRequest {
@@ -300,6 +307,10 @@ export interface ServerType {
    * The default OS for this server type.
    */
   defaultOs?: OS
+  /**
+   * NPU description.
+   */
+  npu?: ServerTypeNPU
 }
 
 export interface CommitmentTypeValue {
