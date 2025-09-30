@@ -9,6 +9,7 @@ export type ContractType =
   | 'instance'
   | 'container'
   | 'baremetal'
+  | 'network'
 
 export type ListContractSignaturesRequestOrderBy =
   | 'signed_at_asc'
