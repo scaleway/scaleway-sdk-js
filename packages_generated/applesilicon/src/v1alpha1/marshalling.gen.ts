@@ -21,9 +21,11 @@ import type {
   ListServersResponse,
   ListServerTypesResponse,
   OS,
+  OSSupportedServerType,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
   PrivateNetworkApiSetServerPrivateNetworksRequest,
   ReinstallServerRequest,
+  RunnerConfiguration,
   Server,
   ServerPrivateNetwork,
   ServerType,
@@ -39,6 +41,21 @@ import type {
   UpdateServerRequest,
 } from './types.gen'
 
+const unmarshalOSSupportedServerType = (
+  data: unknown,
+): OSSupportedServerType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OSSupportedServerType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    fastDeliveryAvailable: data.fast_delivery_available,
+    serverType: data.server_type,
+  } as OSSupportedServerType
+}
+
 export const unmarshalOS = (data: unknown): OS => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -47,13 +64,22 @@ export const unmarshalOS = (data: unknown): OS => {
   }
 
   return {
-    compatibleServerTypes: data.compatible_server_types,
+    compatibleServerTypes: data.compatible_server_types
+      ? data.compatible_server_types
+      : undefined,
+    description: data.description,
     family: data.family,
     id: data.id,
     imageUrl: data.image_url,
     isBeta: data.is_beta,
     label: data.label,
     name: data.name,
+    releaseNotesUrl: data.release_notes_url,
+    supportedServerTypes: unmarshalArrayOfObject(
+      data.supported_server_types,
+      unmarshalOSSupportedServerType,
+    ),
+    tags: data.tags,
     version: data.version,
     xcodeVersion: data.xcode_version,
   } as OS
@@ -70,6 +96,21 @@ const unmarshalCommitment = (data: unknown): Commitment => {
     cancelled: data.cancelled,
     type: data.type,
   } as Commitment
+}
+
+const unmarshalRunnerConfiguration = (data: unknown): RunnerConfiguration => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RunnerConfiguration' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+    provider: data.provider,
+    token: data.token,
+    url: data.url,
+  } as RunnerConfiguration
 }
 
 export const unmarshalServer = (data: unknown): Server => {
@@ -94,9 +135,13 @@ export const unmarshalServer = (data: unknown): Server => {
     os: data.os ? unmarshalOS(data.os) : undefined,
     projectId: data.project_id,
     publicBandwidthBps: data.public_bandwidth_bps,
+    runnerConfiguration: data.runner_configuration
+      ? unmarshalRunnerConfiguration(data.runner_configuration)
+      : undefined,
     sshUsername: data.ssh_username,
     status: data.status,
     sudoPassword: data.sudo_password,
+    tags: data.tags,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
     vncPort: data.vnc_port,
@@ -404,6 +449,16 @@ export const marshalBatchCreateServersRequest = (
   type: request.type,
 })
 
+const marshalRunnerConfiguration = (
+  request: RunnerConfiguration,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+  provider: request.provider,
+  token: request.token,
+  url: request.url,
+})
+
 export const marshalCreateServerRequest = (
   request: CreateServerRequest,
   defaults: DefaultValues,
@@ -414,6 +469,10 @@ export const marshalCreateServerRequest = (
   os_id: request.osId,
   project_id: request.projectId ?? defaults.defaultProjectId,
   public_bandwidth_bps: request.publicBandwidthBps,
+  runner_configuration:
+    request.runnerConfiguration !== undefined
+      ? marshalRunnerConfiguration(request.runnerConfiguration, defaults)
+      : undefined,
   type: request.type,
 })
 
@@ -437,6 +496,10 @@ export const marshalReinstallServerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   os_id: request.osId,
+  runner_configuration:
+    request.runnerConfiguration !== undefined
+      ? marshalRunnerConfiguration(request.runnerConfiguration, defaults)
+      : undefined,
 })
 
 export const marshalStartConnectivityDiagnosticRequest = (
