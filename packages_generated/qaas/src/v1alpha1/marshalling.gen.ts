@@ -140,10 +140,13 @@ const unmarshalPlatformBookingRequirement = (
   }
 
   return {
+    maxBookingPerDay: data.max_booking_per_day,
+    maxBookingPerWeek: data.max_booking_per_week,
     maxCancellationDuration: data.max_cancellation_duration,
     maxDuration: data.max_duration,
     maxPlanificationDuration: data.max_planification_duration,
     minDuration: data.min_duration,
+    minPlanificationDuration: data.min_planification_duration,
   } as PlatformBookingRequirement
 }
 
