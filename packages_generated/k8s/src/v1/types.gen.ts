@@ -624,6 +624,14 @@ export interface Version {
    * Supported kubelet arguments for this version.
    */
   availableKubeletArgs: Record<string, string>
+  /**
+   * Date from which this version will no longer be available for provisioning.
+   */
+  deprecatedAt?: Date
+  /**
+   * Date from which any remaining clusters on this version will begin to be forcibly upgraded to the next minor version.
+   */
+  endOfLifeAt?: Date
 }
 
 export interface Cluster {
