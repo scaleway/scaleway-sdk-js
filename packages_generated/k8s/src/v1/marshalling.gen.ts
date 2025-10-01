@@ -122,6 +122,8 @@ export const unmarshalVersion = (data: unknown): Version => {
     availableContainerRuntimes: data.available_container_runtimes,
     availableFeatureGates: data.available_feature_gates,
     availableKubeletArgs: data.available_kubelet_args,
+    deprecatedAt: unmarshalDate(data.deprecated_at),
+    endOfLifeAt: unmarshalDate(data.end_of_life_at),
     label: data.label,
     name: data.name,
     region: data.region,
