@@ -1816,7 +1816,6 @@ export const marshalRpnV1ApiLeaveRpnGroupRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   member_ids: request.memberIds,
-  project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
 export const marshalRpnV1ApiRpnGroupInviteRequest = (

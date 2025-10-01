@@ -2908,10 +2908,6 @@ export type RpnV1ApiLeaveRpnGroupRequest = {
    */
   groupId: number
   /**
-   * A project ID.
-   */
-  projectId?: string
-  /**
    * A collection of rpn v1 group members IDs.
    */
   memberIds: number[]
