@@ -1453,6 +1453,21 @@ export type RegistrarApiRenewDomainsRequest = {
   forceLateRenewal?: boolean
 }
 
+export type RegistrarApiRetryInboundTransferRequest = {
+  /**
+   * The domain being transfered.
+   */
+  domain: string
+  /**
+   * The project ID to associated with the inbound transfer.
+   */
+  projectId?: string
+  /**
+   * An optional new auth code to replace the previous one for the retry.
+   */
+  authCode?: string
+}
+
 export type RegistrarApiSearchAvailableDomainsRequest = {
   /**
    * A list of domain to search, TLD is optional.
@@ -1595,6 +1610,8 @@ export type RestoreDNSZoneVersionRequest = {
 }
 
 export interface RestoreDNSZoneVersionResponse {}
+
+export interface RetryInboundTransferResponse {}
 
 export interface SearchAvailableDomainsResponse {
   /**

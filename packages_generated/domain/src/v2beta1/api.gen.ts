@@ -26,6 +26,7 @@ import {
   marshalRegistrarApiEnableDomainDNSSECRequest,
   marshalRegistrarApiRegisterExternalDomainRequest,
   marshalRegistrarApiRenewDomainsRequest,
+  marshalRegistrarApiRetryInboundTransferRequest,
   marshalRegistrarApiTradeDomainRequest,
   marshalRegistrarApiTransferInDomainRequest,
   marshalRegistrarApiUpdateContactRequest,
@@ -65,6 +66,7 @@ import {
   unmarshalRefreshDNSZoneResponse,
   unmarshalRegisterExternalDomainResponse,
   unmarshalRestoreDNSZoneVersionResponse,
+  unmarshalRetryInboundTransferResponse,
   unmarshalSearchAvailableDomainsResponse,
   unmarshalSSLCertificate,
   unmarshalUpdateDNSZoneNameserversResponse,
@@ -143,6 +145,7 @@ import type {
   RegistrarApiLockDomainTransferRequest,
   RegistrarApiRegisterExternalDomainRequest,
   RegistrarApiRenewDomainsRequest,
+  RegistrarApiRetryInboundTransferRequest,
   RegistrarApiSearchAvailableDomainsRequest,
   RegistrarApiTradeDomainRequest,
   RegistrarApiTransferInDomainRequest,
@@ -152,6 +155,7 @@ import type {
   RegistrarApiUpdateDomainRequest,
   RestoreDNSZoneVersionRequest,
   RestoreDNSZoneVersionResponse,
+  RetryInboundTransferResponse,
   SearchAvailableDomainsResponse,
   SSLCertificate,
   UpdateDNSZoneNameserversRequest,
@@ -762,6 +766,30 @@ You can filter the list of tasks by domain name.
       'inboundTransfers',
       this.pageOfListInboundTransfers,
       request,
+    )
+
+  /**
+   * Retry the inbound transfer of a domain. Request a retry for the transfer of a domain from another registrar to Scaleway Domains and DNS.
+   *
+   * @param request - The request {@link RegistrarApiRetryInboundTransferRequest}
+   * @returns A Promise of RetryInboundTransferResponse
+   */
+  retryInboundTransfer = (
+    request: Readonly<RegistrarApiRetryInboundTransferRequest>,
+  ) =>
+    this.client.fetch<RetryInboundTransferResponse>(
+      {
+        body: JSON.stringify(
+          marshalRegistrarApiRetryInboundTransferRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/domain/v2beta1/retry-inbound-transfer`,
+      },
+      unmarshalRetryInboundTransferResponse,
     )
 
   /**
