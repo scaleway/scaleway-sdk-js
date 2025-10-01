@@ -95,6 +95,7 @@ import type {
   RegistrarApiEnableDomainDNSSECRequest,
   RegistrarApiRegisterExternalDomainRequest,
   RegistrarApiRenewDomainsRequest,
+  RegistrarApiRetryInboundTransferRequest,
   RegistrarApiTradeDomainRequest,
   RegistrarApiTransferInDomainRequest,
   RegistrarApiUpdateContactRequest,
@@ -102,6 +103,7 @@ import type {
   RegistrarApiUpdateDomainRequest,
   RenewableDomain,
   RestoreDNSZoneVersionResponse,
+  RetryInboundTransferResponse,
   SearchAvailableDomainsResponse,
   SSLCertificate,
   Task,
@@ -1316,6 +1318,18 @@ export const unmarshalRestoreDNSZoneVersionResponse = (
   return {} as RestoreDNSZoneVersionResponse
 }
 
+export const unmarshalRetryInboundTransferResponse = (
+  data: unknown,
+): RetryInboundTransferResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RetryInboundTransferResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as RetryInboundTransferResponse
+}
+
 const unmarshalAvailableDomain = (data: unknown): AvailableDomain => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -1808,6 +1822,15 @@ export const marshalRegistrarApiRenewDomainsRequest = (
   domains: request.domains,
   duration_in_years: request.durationInYears,
   force_late_renewal: request.forceLateRenewal,
+})
+
+export const marshalRegistrarApiRetryInboundTransferRequest = (
+  request: RegistrarApiRetryInboundTransferRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  auth_code: request.authCode,
+  domain: request.domain,
+  project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
 export const marshalRegistrarApiTradeDomainRequest = (
