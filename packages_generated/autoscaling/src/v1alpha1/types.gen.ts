@@ -261,6 +261,10 @@ export interface InstanceGroup {
    * Date on which the Instance group was last updated.
    */
   updatedAt?: Date
+  /**
+   * Zone for this resource.
+   */
+  zone: ScwZone
 }
 
 export interface InstancePolicy {
@@ -298,6 +302,10 @@ export interface InstancePolicy {
    * Instance group ID related to this policy.
    */
   instanceGroupId: string
+  /**
+   * Zone for this resource.
+   */
+  zone: ScwZone
 }
 
 export interface InstanceTemplate {
@@ -365,6 +373,10 @@ export interface InstanceTemplate {
    * Date on which the Instance template was last updated.
    */
   updatedAt?: Date
+  /**
+   * Zone for this resource.
+   */
+  zone: ScwZone
 }
 
 export interface UpdateInstanceGroupRequestCapacity {
