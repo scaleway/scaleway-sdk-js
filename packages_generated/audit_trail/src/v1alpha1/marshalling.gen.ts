@@ -1,7 +1,10 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
+  resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
@@ -13,8 +16,11 @@ import type {
   AuthenticationEvent,
   BaremetalServerInfo,
   BaremetalSettingInfo,
+  CreateExportJobRequest,
   Event,
   EventPrincipal,
+  ExportJob,
+  ExportJobS3,
   InstanceServerInfo,
   IpamIpInfo,
   KeyManagerKeyInfo,
@@ -41,6 +47,39 @@ import type {
   SecretManagerSecretVersionInfo,
   SystemEvent,
 } from './types.gen'
+
+const unmarshalExportJobS3 = (data: unknown): ExportJobS3 => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ExportJobS3' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    bucket: data.bucket,
+    prefix: data.prefix,
+    projectId: data.project_id,
+    region: data.region,
+  } as ExportJobS3
+}
+
+export const unmarshalExportJob = (data: unknown): ExportJob => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ExportJob' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    lastRunAt: unmarshalDate(data.last_run_at),
+    name: data.name,
+    organizationId: data.organization_id,
+    s3: data.s3 ? unmarshalExportJobS3(data.s3) : undefined,
+    tags: data.tags,
+  } as ExportJob
+}
 
 const unmarshalAccountOrganizationInfo = (
   data: unknown,
@@ -612,3 +651,31 @@ export const unmarshalListProductsResponse = (
     totalCount: data.total_count,
   } as ListProductsResponse
 }
+
+const marshalExportJobS3 = (
+  request: ExportJobS3,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  bucket: request.bucket,
+  prefix: request.prefix,
+  project_id: request.projectId,
+  region: request.region,
+})
+
+export const marshalCreateExportJobRequest = (
+  request: CreateExportJobRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+  tags: request.tags !== undefined ? request.tags : undefined,
+  ...resolveOneOf([
+    {
+      param: 's3',
+      value:
+        request.s3 !== undefined
+          ? marshalExportJobS3(request.s3, defaults)
+          : undefined,
+    },
+  ]),
+})

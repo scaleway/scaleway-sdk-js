@@ -9,12 +9,16 @@ import {
   validatePathParam,
 } from '@scaleway/sdk-client'
 import {
+  marshalCreateExportJobRequest,
+  unmarshalExportJob,
   unmarshalListAuthenticationEventsResponse,
   unmarshalListCombinedEventsResponse,
   unmarshalListEventsResponse,
   unmarshalListProductsResponse,
 } from './marshalling.gen'
 import type {
+  CreateExportJobRequest,
+  ExportJob,
   ListAuthenticationEventsRequest,
   ListAuthenticationEventsResponse,
   ListCombinedEventsRequest,
@@ -24,6 +28,10 @@ import type {
   ListProductsRequest,
   ListProductsResponse,
 } from './types.gen'
+
+const jsonContentHeaders = {
+  'Content-Type': 'application/json; charset=utf-8',
+}
 
 /**
  * Audit Trail API.
@@ -153,5 +161,24 @@ export class API extends ParentAPI {
         ]),
       },
       unmarshalListProductsResponse,
+    )
+
+  /**
+   * Create an export job. Create an export job for a specified organization. This allows you to export audit trail events to a destination, such as an S3 bucket. The request requires the organization ID, a name for the export, and a destination configuration.
+   *
+   * @param request - The request {@link CreateExportJobRequest}
+   * @returns A Promise of ExportJob
+   */
+  createExportJob = (request: Readonly<CreateExportJobRequest>) =>
+    this.client.fetch<ExportJob>(
+      {
+        body: JSON.stringify(
+          marshalCreateExportJobRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/export-jobs`,
+      },
+      unmarshalExportJob,
     )
 }
