@@ -517,6 +517,17 @@ export type CreateExportJobRequest = {
   tags?: Record<string, string>
 }
 
+export type DeleteExportJobRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the export job.
+   */
+  exportJobId: string
+}
+
 export interface ExportJob {
   /**
    * ID of the export job.
