@@ -124,6 +124,10 @@ export interface NatsCredentials {
    */
   natsAccountId: string
   /**
+   * Region where the NATS account is deployed.
+   */
+  region: ScwRegion
+  /**
    * NATS credentials creation date.
    */
   createdAt?: Date
