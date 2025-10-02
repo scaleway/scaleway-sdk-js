@@ -16,6 +16,7 @@ export type {
   BaremetalServerInfo,
   BaremetalSettingInfo,
   CreateExportJobRequest,
+  DeleteExportJobRequest,
   Event,
   EventPrincipal,
   ExportJob,

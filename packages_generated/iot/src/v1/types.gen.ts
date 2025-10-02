@@ -165,6 +165,10 @@ export interface Device {
    * Date at which the device was last modified.
    */
   updatedAt?: Date
+  /**
+   * Region of the device.
+   */
+  region: ScwRegion
 }
 
 export interface Network {
@@ -196,6 +200,10 @@ export interface Network {
    * This prefix will be prepended to all topics for this Network.
    */
   topicPrefix: string
+  /**
+   * Region of the network.
+   */
+  region: ScwRegion
 }
 
 export interface CreateRouteRequestDatabaseConfig {
@@ -327,6 +335,10 @@ export interface RouteSummary {
    * Date at which the route was last updated.
    */
   updatedAt?: Date
+  /**
+   * Region of the route.
+   */
+  region: ScwRegion
 }
 
 export interface ListTwinDocumentsResponseDocumentSummary {
@@ -1131,6 +1143,10 @@ export interface Route {
    * Date at which the route was last updated.
    */
   updatedAt?: Date
+  /**
+   * Region of the route.
+   */
+  region: ScwRegion
 }
 
 export type SetDeviceCertificateRequest = {
