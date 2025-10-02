@@ -18,6 +18,7 @@ import {
 } from './marshalling.gen'
 import type {
   CreateExportJobRequest,
+  DeleteExportJobRequest,
   ExportJob,
   ListAuthenticationEventsRequest,
   ListAuthenticationEventsResponse,
@@ -181,4 +182,15 @@ export class API extends ParentAPI {
       },
       unmarshalExportJob,
     )
+
+  /**
+   * Delete an export job. Deletes an export job for a specified id.
+   *
+   * @param request - The request {@link DeleteExportJobRequest}
+   */
+  deleteExportJob = (request: Readonly<DeleteExportJobRequest>) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/export-jobs/${validatePathParam('exportJobId', request.exportJobId)}`,
+    })
 }
