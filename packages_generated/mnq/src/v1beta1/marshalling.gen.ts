@@ -79,6 +79,7 @@ export const unmarshalNatsCredentials = (data: unknown): NatsCredentials => {
     id: data.id,
     name: data.name,
     natsAccountId: data.nats_account_id,
+    region: data.region,
     updatedAt: unmarshalDate(data.updated_at),
   } as NatsCredentials
 }
