@@ -449,6 +449,16 @@ export interface ProductService {
   methods: string[]
 }
 
+export interface ExportJobS3 {
+  bucket: string
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region: ScwRegion
+  prefix?: string
+  projectId?: string
+}
+
 export interface ListCombinedEventsResponseCombinedEvent {
   /**
    *
@@ -480,6 +490,64 @@ export interface Product {
    * Specifies the API versions of the products integrated with Audit Trail. Each version defines the methods logged by Audit Trail.
    */
   services: ProductService[]
+}
+
+export type CreateExportJobRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the Organization to target.
+   */
+  organizationId?: string
+  /**
+   * Name of the export.
+   */
+  name: string
+  /**
+   * The configuration specifying the bucket where the audit trail events will be exported.
+   *
+   * One-of ('destination'): at most one of 's3' could be set.
+   */
+  s3?: ExportJobS3
+  /**
+   * Tags of the export.
+   */
+  tags?: Record<string, string>
+}
+
+export interface ExportJob {
+  /**
+   * ID of the export job.
+   */
+  id: string
+  /**
+   * ID of the targeted Organization.
+   */
+  organizationId: string
+  /**
+   * Name of the export.
+   */
+  name: string
+  /**
+   * Destination in an S3 storage.
+   *
+   * One-of ('destination'): at most one of 's3' could be set.
+   */
+  s3?: ExportJobS3
+  /**
+   * Export job creation date.
+   */
+  createdAt?: Date
+  /**
+   * Last export date.
+   */
+  lastRunAt?: Date
+  /**
+   * Tags of the export.
+   */
+  tags: Record<string, string>
 }
 
 export type ListAuthenticationEventsRequest = {
