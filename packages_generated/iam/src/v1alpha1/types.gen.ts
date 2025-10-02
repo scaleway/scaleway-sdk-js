@@ -1799,6 +1799,10 @@ export interface OrganizationSecuritySettings {
    * Number of login attempts before the account is locked.
    */
   loginAttemptsBeforeLocked: number
+  /**
+   * Maximum duration a login session will stay active before needing to relogin.
+   */
+  maxLoginSessionDuration?: string
 }
 
 export type RemoveGroupMemberRequest = {
@@ -1966,6 +1970,10 @@ export type UpdateOrganizationSecuritySettingsRequest = {
    * Number of login attempts before the account is locked.
    */
   loginAttemptsBeforeLocked?: number
+  /**
+   * Maximum duration a login session will stay active before needing to relogin.
+   */
+  maxLoginSessionDuration?: string
 }
 
 export type UpdatePolicyRequest = {
