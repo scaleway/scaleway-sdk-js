@@ -126,11 +126,11 @@ export type UserApiDownloadImpactReportRequest = {
    */
   organizationId?: string
   /**
-   * The start date of the period for which you want to download a report (ISO 8601 format, e.g., 2025-05-01T00:00:00Z).
+   * The start date of the period for which you want to download a report (ISO 8601 format, e.g. 2025-05-01T00:00:00Z).
    */
   date?: Date
   /**
-   * Type of report to download (e.g., monthly). Defaults to monthly.
+   * Type of report to download (e.g. `monthly`).
    */
   type?: ReportType
 }
@@ -141,7 +141,7 @@ export type UserApiGetImpactDataRequest = {
    */
   organizationId?: string
   /**
-   * Start date (inclusive) of the period for which you want to retrieve impact data (ISO 8601 format, e.g., 2025-05-01T00:00:00Z).
+   * Start date (inclusive) of the period for which you want to retrieve impact data (ISO 8601 format, e.g. 2025-05-01T00:00:00Z).
    */
   startDate?: Date
   /**
@@ -149,11 +149,11 @@ export type UserApiGetImpactDataRequest = {
    */
   endDate?: Date
   /**
-   * List of regions to filter by (\"fr-par\"). Defaults to all regions.
+   * List of regions to filter by (e.g. `fr-par`). Defaults to all regions.
    */
   regions?: string[]
   /**
-   * List of zones to filter by (\"fr-par-1\"). Defaults to all zones.
+   * List of zones to filter by (e.g. `fr-par-1`). Defaults to all zones.
    */
   zones?: string[]
   /**
@@ -180,7 +180,7 @@ export type UserApiGetImpactReportAvailabilityRequest = {
    */
   startDate?: Date
   /**
-   * End date of the search period (ISO 8601 format, with time in UTC, `YYYY-MM-DDTHH:MM:SSZ`). The date is exclusive. Defaults to today's date.
+   * End date of the search period (ISO 8601 format, with time in UTC, `YYYY-MM-DDTHH:MM:SSZ`). The date is inclusive. Defaults to today's date.
    */
   endDate?: Date
 }
