@@ -81,6 +81,7 @@ export const unmarshalInstanceGroup = (data: unknown): InstanceGroup => {
     projectId: data.project_id,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone,
   } as InstanceGroup
 }
 
@@ -118,6 +119,7 @@ export const unmarshalInstancePolicy = (data: unknown): InstancePolicy => {
     priority: data.priority,
     type: data.type,
     value: data.value,
+    zone: data.zone,
   } as InstancePolicy
 }
 
@@ -201,6 +203,7 @@ export const unmarshalInstanceTemplate = (data: unknown): InstanceTemplate => {
       data.volumes,
       unmarshalVolumeInstanceTemplate,
     ),
+    zone: data.zone,
   } as InstanceTemplate
 }
 
