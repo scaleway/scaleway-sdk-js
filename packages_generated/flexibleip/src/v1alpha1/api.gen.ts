@@ -2,8 +2,8 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  API as ParentAPI,
   enrichForPagination,
+  API as ParentAPI,
   toApiLocality,
   urlParams,
   validatePathParam,

@@ -53,12 +53,7 @@ export type {
   ResourceType,
   SecretManagerSecretInfo,
   SecretManagerSecretVersionInfo,
-<<<<<<< HEAD
   SystemEvent,
   SystemEventKind,
-} from './types.gen'
-export * as ValidationRules from './validation-rules.gen'
-=======
 } from './types.gen.js'
 export * as ValidationRules from './validation-rules.gen.js'
->>>>>>> 0df1f9117 (chore: add extension for nodenext)

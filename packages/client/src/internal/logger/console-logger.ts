@@ -1,5 +1,5 @@
-import { LevelResolver, shouldLog } from './level-resolver.js'
 import type { LogLevel } from './level-resolver.js'
+import { LevelResolver, shouldLog } from './level-resolver.js'
 import type { Logger } from './logger.js'
 
 /**

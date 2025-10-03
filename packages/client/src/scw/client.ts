@@ -8,8 +8,8 @@ import {
 import type { Settings } from './client-settings.js'
 import { assertValidSettings } from './client-settings.js'
 import { userAgent, version } from './constants.js'
-import { buildFetcher } from './fetch/build-fetcher.js'
 import type { Fetcher } from './fetch/build-fetcher.js'
+import { buildFetcher } from './fetch/build-fetcher.js'
 
 /** Default {@link Settings} values. */
 const DEFAULT_SETTINGS: Settings = {

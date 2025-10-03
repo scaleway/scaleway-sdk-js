@@ -3,8 +3,8 @@
 
 import type { Region as ScwRegion, Zone as ScwZone } from '@scaleway/sdk-client'
 import {
-  API as ParentAPI,
   enrichForPagination,
+  API as ParentAPI,
   resolveOneOf,
   urlParams,
 } from '@scaleway/sdk-client'

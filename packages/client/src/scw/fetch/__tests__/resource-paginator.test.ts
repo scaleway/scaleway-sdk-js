@@ -1,5 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
-import type { PaginatedContent, PaginatedFetcher } from '../resource-paginator.js'
+import type {
+  PaginatedContent,
+  PaginatedFetcher,
+} from '../resource-paginator.js'
 import {
   enrichForPagination,
   fetchAll,
