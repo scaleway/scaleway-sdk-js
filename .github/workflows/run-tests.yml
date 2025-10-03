@@ -41,6 +41,12 @@ jobs:
       - name: Debug – show error-parser.ts (imports)
         run: |
           git --no-pager show HEAD:packages/client/src/scw/errors/error-parser.ts | sed -n '1,25p'
+      - name: Debug – run eslint on client.test.ts (no cache)
+        run: pnpm exec eslint --no-cache packages/client/src/scw/__tests__/client.test.ts || true
+      - name: Debug – run eslint on error-parser.ts (no cache)
+        run: pnpm exec eslint --no-cache packages/client/src/scw/errors/error-parser.ts || true
+      - name: Debug – print eslint config for client.test.ts
+        run: pnpm exec eslint --print-config packages/client/src/scw/__tests__/client.test.ts | head -200
       # Run ESLint without cache to avoid stale cache issues on CI runners
       - run: pnpm exec eslint --no-cache .
   test:
