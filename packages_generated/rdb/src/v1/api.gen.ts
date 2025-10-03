@@ -1092,6 +1092,7 @@ The configured endpoints do not change.
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
+          ['skip_size_retrieval', request.skipSizeRetrieval],
         ),
       },
       unmarshalListDatabasesResponse,
