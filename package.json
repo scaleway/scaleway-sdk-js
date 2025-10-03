@@ -55,7 +55,7 @@
     ]
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.2",
+    "@biomejs/biome": "2.2.5",
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
     "@manypkg/cli": "0.24.0",
