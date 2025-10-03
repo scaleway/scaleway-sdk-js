@@ -34,7 +34,15 @@ jobs:
           cache: 'pnpm'
       - run: make install-dependencies
       - run: make build
-      - run: pnpm run lint
+      # Debug: verify the exact file contents that ESLint lints on CI
+      - name: Debug – show client.test.ts (imports)
+        run: |
+          git --no-pager show HEAD:packages/client/src/scw/__tests__/client.test.ts | sed -n '1,20p'
+      - name: Debug – show error-parser.ts (imports)
+        run: |
+          git --no-pager show HEAD:packages/client/src/scw/errors/error-parser.ts | sed -n '1,25p'
+      # Run ESLint without cache to avoid stale cache issues on CI runners
+      - run: pnpm run lint -- --no-cache
   test:
     runs-on: ubuntu-24.04
     strategy:
