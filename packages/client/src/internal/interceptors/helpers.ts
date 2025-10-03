@@ -1,4 +1,4 @@
-import type { RequestInterceptor } from './types'
+import type { RequestInterceptor } from './types.js'
 
 /**
  * Adds an header to a request through an interceptor.

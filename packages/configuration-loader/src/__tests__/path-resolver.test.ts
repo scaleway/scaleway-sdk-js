@@ -1,10 +1,10 @@
 import { env } from 'node:process'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { EnvironmentKey } from '../env'
+import { EnvironmentKey } from '../env.js'
 import {
   getScwConfigurationDirectory,
   resolveConfigurationFilePath,
-} from '../path-resolver'
+} from '../path-resolver.js'
 
 const updateEnv = (key: string, value: string): string | undefined => {
   const old: string | undefined = env[key]

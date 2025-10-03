@@ -3,9 +3,9 @@
 export {
   API,
   PrivateNetworkAPI,
-} from './api.gen'
-export * from './content.gen'
-export * from './marshalling.gen'
+} from './api.gen.js'
+export * from './content.gen.js'
+export * from './marshalling.gen.js'
 export type {
   BatchCreateServersRequest,
   BatchCreateServersRequestBatchInnerCreateServerRequest,
@@ -60,4 +60,4 @@ export type {
   StartConnectivityDiagnosticRequest,
   StartConnectivityDiagnosticResponse,
   UpdateServerRequest,
-} from './types.gen'
+} from './types.gen.js'

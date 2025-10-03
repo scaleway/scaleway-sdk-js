@@ -1,6 +1,6 @@
-import type { JSONObject } from '../../../helpers/json'
-import { isJSONObject } from '../../../helpers/json'
-import { ScalewayError } from '../scw-error'
+import type { JSONObject } from '../../../helpers/json.js'
+import { isJSONObject } from '../../../helpers/json.js'
+import { ScalewayError } from '../scw-error.js'
 
 /**
  * Quota policy of {@link TooManyRequestsError}.

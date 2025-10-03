@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { addAsyncHeaderInterceptor, addHeaderInterceptor } from '../helpers'
+import { addAsyncHeaderInterceptor, addHeaderInterceptor } from '../helpers.js'
 
 describe('addHeaderInterceptor', () => {
   it('insertsnothing if value is undefined', async () => {

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import type { JSONObject } from '../../../helpers/json'
-import { isJSONObject } from '../../../helpers/json'
-import { ScalewayError } from '../../errors/scw-error'
-import { fixLegacyTotalCount, responseParser } from '../response-parser'
+import type { JSONObject } from '../../../helpers/json.js'
+import { isJSONObject } from '../../../helpers/json.js'
+import { ScalewayError } from '../../errors/scw-error.js'
+import { fixLegacyTotalCount, responseParser } from '../response-parser.js'
 
 const SIMPLE_REQ_BODY = { 'what-is-life': 42 }
 

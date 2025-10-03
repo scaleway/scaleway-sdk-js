@@ -1,23 +1,23 @@
-import { isBrowser } from '../../helpers/is-browser'
+import { isBrowser } from '../../helpers/is-browser.js'
 import type {
   RequestInterceptor,
   ResponseErrorInterceptor,
   ResponseInterceptor,
-} from '../../index'
+} from '../../index.js'
 import {
   composeRequestInterceptors,
   composeResponseErrorInterceptors,
   composeResponseInterceptors,
-} from '../../internal/interceptors/composer'
-import { obfuscateAuthHeadersEntry } from '../auth'
-import type { Settings } from '../client-settings'
+} from '../../internal/interceptors/composer.js'
+import { obfuscateAuthHeadersEntry } from '../auth.js'
+import type { Settings } from '../client-settings.js'
 import {
   logRequest,
   logResponse,
   obfuscateInterceptor,
-} from './http-interceptors'
-import { responseParser } from './response-parser'
-import type { ResponseUnmarshaller, ScwRequest } from './types'
+} from './http-interceptors.js'
+import { responseParser } from './response-parser.js'
+import type { ResponseUnmarshaller, ScwRequest } from './types.js'
 
 /**
  * Builds Request from {@link ScwRequest} & {@link Settings}.

@@ -136,7 +136,7 @@ import type {
   VolumeType,
   VolumeTypeCapabilities,
   VolumeTypeConstraints,
-} from './types.gen'
+} from './types.gen.js'
 import type {
   SetImageResponse,
   SetSecurityGroupRequest,
@@ -147,7 +147,7 @@ import type {
   SetServerResponse,
   SetSnapshotRequest,
   SetSnapshotResponse,
-} from './types.private.gen'
+} from './types.private.gen.js'
 
 export const unmarshalPrivateNIC = (data: unknown): PrivateNIC => {
   if (!isJSONObject(data)) {

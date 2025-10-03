@@ -1,5 +1,8 @@
-import { camelizeKeys, isJSONObject } from '../helpers/json'
-import { unmarshalArrayOfObject, unmarshalDate } from '../helpers/marshalling'
+import { camelizeKeys, isJSONObject } from '../helpers/json.js'
+import {
+  unmarshalArrayOfObject,
+  unmarshalDate,
+} from '../helpers/marshalling.js'
 import { fromByteArray } from '../vendor/base64'
 import type {
   Money,
@@ -7,8 +10,8 @@ import type {
   ServiceInfo,
   TimeSeries,
   TimeSeriesPoint,
-} from './custom-types'
-import { Decimal } from './custom-types'
+} from './custom-types.js'
+import { Decimal } from './custom-types.js'
 
 /**
  * Unmarshals {@link Money}

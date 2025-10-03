@@ -1,7 +1,7 @@
-import type { JSONObject } from '../../../helpers/json'
-import { isUUID } from '../../../internal/validations/string-validation'
-import { ScalewayError } from '../scw-error'
-import { ResourceNotFoundError } from '../standard/resource-not-found-error'
+import type { JSONObject } from '../../../helpers/json.js'
+import { isUUID } from '../../../internal/validations/string-validation.js'
+import { ScalewayError } from '../scw-error.js'
+import { ResourceNotFoundError } from '../standard/resource-not-found-error.js'
 
 /**
  * UnknownResource error is only returned by the instance API.

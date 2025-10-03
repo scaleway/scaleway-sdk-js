@@ -18,7 +18,7 @@ import {
   unmarshalListProjectsResponse,
   unmarshalProject,
   unmarshalProjectQualification,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   CheckContractSignatureResponse,
   ContractApiCheckContractSignatureRequest,
@@ -37,7 +37,7 @@ import type {
   ProjectApiSetProjectQualificationRequest,
   ProjectApiUpdateProjectRequest,
   ProjectQualification,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

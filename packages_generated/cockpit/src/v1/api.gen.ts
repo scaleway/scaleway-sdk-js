@@ -47,7 +47,7 @@ import {
   unmarshalPlan,
   unmarshalToken,
   unmarshalUsageOverview,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   AlertManager,
   ContactPoint,
@@ -105,7 +105,7 @@ import type {
   RegionalApiUpdateDataSourceRequest,
   Token,
   UsageOverview,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

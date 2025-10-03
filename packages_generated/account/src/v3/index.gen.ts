@@ -3,8 +3,8 @@
 export {
   ContractAPI,
   ProjectAPI,
-} from './api.gen'
-export * from './marshalling.gen'
+} from './api.gen.js'
+export * from './marshalling.gen.js'
 export type {
   CheckContractSignatureResponse,
   Contract,
@@ -47,5 +47,5 @@ export type {
   QualificationSetScalewayEnvironmentSubUseCase,
   QualificationShareData,
   QualificationShareDataSubUseCase,
-} from './types.gen'
-export * as ValidationRules from './validation-rules.gen'
+} from './types.gen.js'
+export * as ValidationRules from './validation-rules.gen.js'
