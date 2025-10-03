@@ -618,7 +618,7 @@ export interface Database {
    */
   managed: boolean
   /**
-   * Size of the database.
+   * Size of the database. Set to 0 if the size retrieval is too time-consuming or `skip_size_retrieval` is set to true.
    */
   size: number
 }
@@ -1542,6 +1542,10 @@ export type ListDatabasesRequest = {
    * Criteria to use when ordering database listing.
    */
   orderBy?: ListDatabasesRequestOrderBy
+  /**
+   * Whether to skip the retrieval of each database size. If true, the size of each returned database will be set to 0.
+   */
+  skipSizeRetrieval: boolean
   page?: number
   pageSize?: number
 }
