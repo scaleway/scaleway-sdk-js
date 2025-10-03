@@ -34,6 +34,12 @@ export type ListCombinedEventsRequestOrderBy =
 
 export type ListEventsRequestOrderBy = 'recorded_at_desc' | 'recorded_at_asc'
 
+export type ListExportJobsRequestOrderBy =
+  | 'name_asc'
+  | 'name_desc'
+  | 'created_at_asc'
+  | 'created_at_desc'
+
 export type ResourceType =
   | 'unknown_type'
   | 'secm_secret'
@@ -444,11 +450,6 @@ export interface SystemEvent {
   productName: string
 }
 
-export interface ProductService {
-  name: string
-  methods: string[]
-}
-
 export interface ExportJobS3 {
   bucket: string
   /**
@@ -457,6 +458,11 @@ export interface ExportJobS3 {
   region: ScwRegion
   prefix?: string
   projectId?: string
+}
+
+export interface ProductService {
+  name: string
+  methods: string[]
 }
 
 export interface ListCombinedEventsResponseCombinedEvent {
@@ -475,6 +481,39 @@ export interface ListCombinedEventsResponseCombinedEvent {
    * One-of ('event'): at most one of 'api', 'auth', 'system' could be set.
    */
   system?: SystemEvent
+}
+
+export interface ExportJob {
+  /**
+   * ID of the export job.
+   */
+  id: string
+  /**
+   * ID of the targeted Organization.
+   */
+  organizationId: string
+  /**
+   * Name of the export.
+   */
+  name: string
+  /**
+   * Destination in an S3 storage.
+   *
+   * One-of ('destination'): at most one of 's3' could be set.
+   */
+  s3?: ExportJobS3
+  /**
+   * Export job creation date.
+   */
+  createdAt?: Date
+  /**
+   * Last export date.
+   */
+  lastRunAt?: Date
+  /**
+   * Tags of the export.
+   */
+  tags: Record<string, string>
 }
 
 export interface Product {
@@ -526,39 +565,6 @@ export type DeleteExportJobRequest = {
    * ID of the export job.
    */
   exportJobId: string
-}
-
-export interface ExportJob {
-  /**
-   * ID of the export job.
-   */
-  id: string
-  /**
-   * ID of the targeted Organization.
-   */
-  organizationId: string
-  /**
-   * Name of the export.
-   */
-  name: string
-  /**
-   * Destination in an S3 storage.
-   *
-   * One-of ('destination'): at most one of 's3' could be set.
-   */
-  s3?: ExportJobS3
-  /**
-   * Export job creation date.
-   */
-  createdAt?: Date
-  /**
-   * Last export date.
-   */
-  lastRunAt?: Date
-  /**
-   * Tags of the export.
-   */
-  tags: Record<string, string>
 }
 
 export type ListAuthenticationEventsRequest = {
@@ -666,6 +672,39 @@ export interface ListEventsResponse {
    * Page token to use in following calls to keep listing.
    */
   nextPageToken?: string
+}
+
+export type ListExportJobsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Filter by Organization ID.
+   */
+  organizationId?: string
+  /**
+   * (Optional) Filter by export name.
+   */
+  name?: string
+  /**
+   * (Optional) List of tags to filter on.
+   */
+  tags?: Record<string, string>
+  page?: number
+  pageSize?: number
+  orderBy?: ListExportJobsRequestOrderBy
+}
+
+export interface ListExportJobsResponse {
+  /**
+   * Single page of export jobs matching the requested criteria.
+   */
+  exportJobs: ExportJob[]
+  /**
+   * Total count of export jobs matching the requested criteria.
+   */
+  totalCount: number
 }
 
 export type ListProductsRequest = {
