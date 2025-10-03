@@ -1455,7 +1455,7 @@ export type RegistrarApiRenewDomainsRequest = {
 
 export type RegistrarApiRetryInboundTransferRequest = {
   /**
-   * The domain being transfered.
+   * The domain being transferred.
    */
   domain: string
   /**
