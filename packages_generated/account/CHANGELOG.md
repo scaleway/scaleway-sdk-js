@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.1.0 (2025-10-06)
+
+### Features
+
+- **account:** add network contract type ([#2442](https://github.com/scaleway/scaleway-sdk-js/issues/2442)) ([74882bb](https://github.com/scaleway/scaleway-sdk-js/commit/74882bb953a0f08a68c348ee43c90d2e9c24c03e))
+
 ## 1.0.6 (2025-09-10)
 
 **Note:** Version bump only for package @scaleway/sdk-account

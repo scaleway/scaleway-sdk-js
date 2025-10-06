@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.2.3 (2025-10-06)
+
+### Bug Fixes
+
+- **dedibox:** remove project_id from LeaveRpnGroupRequest ([#2444](https://github.com/scaleway/scaleway-sdk-js/issues/2444)) ([c054cd7](https://github.com/scaleway/scaleway-sdk-js/commit/c054cd7ffbe4a461a654e9e1aadf2f0a21f366ad))
+
 ## 1.2.2 (2025-09-10)
 
 **Note:** Version bump only for package @scaleway/sdk-dedibox

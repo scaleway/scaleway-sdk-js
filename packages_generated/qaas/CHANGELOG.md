@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-qaas@1.2.0...@scaleway/sdk-qaas@1.4.0) (2025-10-06)
+
+### Features
+
+- **qaas:** add booking req param ([#2430](https://github.com/scaleway/scaleway-sdk-js/issues/2430)) ([57f2c6a](https://github.com/scaleway/scaleway-sdk-js/commit/57f2c6a4574e512a387b2dbf9e175f2a6c361da4))
+- **qaas:** add model messages ([#2310](https://github.com/scaleway/scaleway-sdk-js/issues/2310)) ([f89e805](https://github.com/scaleway/scaleway-sdk-js/commit/f89e8054ce4cacf239f377ef9b2b4e79831131a7))
+- **qaas:** add session parameters ([#2341](https://github.com/scaleway/scaleway-sdk-js/issues/2341)) ([505b6ac](https://github.com/scaleway/scaleway-sdk-js/commit/505b6ace84d8e12dba80bfd685e3569edc1ce588))
+
 # [1.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-qaas@1.2.0...@scaleway/sdk-qaas@1.3.0) (2025-09-10)
 
 ### Features

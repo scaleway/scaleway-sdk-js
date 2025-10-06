@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.1.0 (2025-10-06)
+
+### Features
+
+- **mnq:** add region in NatsCredentials message ([#2451](https://github.com/scaleway/scaleway-sdk-js/issues/2451)) ([eb12ad8](https://github.com/scaleway/scaleway-sdk-js/commit/eb12ad8942a1e90d18032b69176540bcc862263e))
+
 ## 1.0.6 (2025-09-10)
 
 **Note:** Version bump only for package @scaleway/sdk-mnq

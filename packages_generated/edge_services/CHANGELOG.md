@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@1.1.0...@scaleway/sdk-edge-services@1.3.0) (2025-10-06)
+
+### Features
+
+- **edge_services:** add route rule search endpoint ([#2244](https://github.com/scaleway/scaleway-sdk-js/issues/2244)) ([062ee36](https://github.com/scaleway/scaleway-sdk-js/commit/062ee36a3ad675dd87f5c312b18d5b348a0b7157))
+
 # [1.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@1.1.0...@scaleway/sdk-edge-services@1.2.0) (2025-09-10)
 
 ### Features

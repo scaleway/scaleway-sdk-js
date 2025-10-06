@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-vpcgw",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Scaleway SDK vpcgw",
   "license": "Apache-2.0",
   "files": [

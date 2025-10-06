@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.2.0 (2025-10-06)
+
+### Features
+
+- **rdb:** add skip_size_retrieval option to ListDatabases endpoint ([#2456](https://github.com/scaleway/scaleway-sdk-js/issues/2456)) ([a64b907](https://github.com/scaleway/scaleway-sdk-js/commit/a64b9075dddf95c2f103dd06ef5f2b8989a69702))
+
 ## 1.1.1 (2025-09-10)
 
 **Note:** Version bump only for package @scaleway/sdk-rdb

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.7.0 (2025-10-06)
+
+### Bug Fixes
+
+- **k8s:** change installer_tags to repeated string with unique validation ([#2231](https://github.com/scaleway/scaleway-sdk-js/issues/2231)) ([d2955f2](https://github.com/scaleway/scaleway-sdk-js/commit/d2955f211efd951f1664a8af30cf73ed7251200c))
+
+### Features
+
+- **k8s:** add cilium_native cni for native routing mode ([#2404](https://github.com/scaleway/scaleway-sdk-js/issues/2404)) ([63cd890](https://github.com/scaleway/scaleway-sdk-js/commit/63cd8906723b260c417810631bc9526384292430))
+- **k8s:** add node metadata fields for provider and updater ([#2226](https://github.com/scaleway/scaleway-sdk-js/issues/2226)) ([6292c4a](https://github.com/scaleway/scaleway-sdk-js/commit/6292c4a90c71fbacbe0719280e858e726330a220))
+- **k8s:** add template_args field to NodeMetadata ([#2414](https://github.com/scaleway/scaleway-sdk-js/issues/2414)) ([d1e745a](https://github.com/scaleway/scaleway-sdk-js/commit/d1e745a8760cdd95de614b1895f23e5d3e46c91b))
+- **k8s:** add versions deprecation+eol dates ([#2445](https://github.com/scaleway/scaleway-sdk-js/issues/2445)) ([3b6457d](https://github.com/scaleway/scaleway-sdk-js/commit/3b6457d0b5976d73f71c42cf48c8be1430249fed))
+- **k8s:** support setting PodCidr, ServiceCidr, and ServiceDNSIP during cluster creation ([#2273](https://github.com/scaleway/scaleway-sdk-js/issues/2273)) ([4bc32ae](https://github.com/scaleway/scaleway-sdk-js/commit/4bc32ae469b35281ea9196f8984d5b6a716c3b1c))
+
 # 1.6.0 (2025-09-10)
 
 ### Bug Fixes

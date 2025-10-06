@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.1.0 (2025-10-06)
+
+### Features
+
+- add support for region in iot resources ([#2453](https://github.com/scaleway/scaleway-sdk-js/issues/2453)) ([66f2ab2](https://github.com/scaleway/scaleway-sdk-js/commit/66f2ab2c524369d38fcb9ee3434034fe1d6360f0))
+
 ## 1.0.6 (2025-09-10)
 
 **Note:** Version bump only for package @scaleway/sdk-iot

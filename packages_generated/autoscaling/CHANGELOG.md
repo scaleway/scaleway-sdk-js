@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.2.0 (2025-10-06)
+
+### Features
+
+- **autoscaling:** add zone in resources ([#2449](https://github.com/scaleway/scaleway-sdk-js/issues/2449)) ([1395247](https://github.com/scaleway/scaleway-sdk-js/commit/139524740f11bb1e7452ec8965174ddb4f1f0d2d))
+
 ## 1.1.4 (2025-09-10)
 
 **Note:** Version bump only for package @scaleway/sdk-autoscaling
