@@ -16,10 +16,19 @@ function walk(dir: string, callback: (file: string) => void) {
 
 function fixFile(file: string) {
   let content = fs.readFileSync(file, 'utf8')
+
+  // Fix regular imports (from, export *)
   content = content.replace(
     /((?:from|export \*)\s*['"])(\.{1,2}\/[^'"]+?)(?<!\.js|\.json|\.cjs|\.mjs|\.d\.ts)(['"])/g,
     '$1$2.js$3',
   )
+
+  // Fix dynamic imports in type expressions (import("./types.gen") -> import("./types.gen.js"))
+  content = content.replace(
+    /(import\(['"])(\.{1,2}\/[^'"]+?)(?<!\.js|\.json|\.cjs|\.mjs|\.d\.ts)(['"]\))/g,
+    '$1$2.js$3',
+  )
+
   fs.writeFileSync(file, content, 'utf8')
 }
 
