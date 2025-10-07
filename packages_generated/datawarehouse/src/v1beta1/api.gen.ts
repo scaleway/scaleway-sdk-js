@@ -10,7 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_DATAWAREHOUSE } from './content.gen'
+import { DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_DATAWAREHOUSE } from './content.gen.js'
 import {
   marshalCreateDatabaseRequest,
   marshalCreateDeploymentRequest,
@@ -27,7 +27,7 @@ import {
   unmarshalListUsersResponse,
   unmarshalListVersionsResponse,
   unmarshalUser,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   CreateDatabaseRequest,
   CreateDeploymentRequest,
@@ -55,7 +55,7 @@ import type {
   UpdateDeploymentRequest,
   UpdateUserRequest,
   User,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

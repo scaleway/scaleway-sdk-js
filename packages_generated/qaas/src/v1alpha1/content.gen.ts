@@ -5,7 +5,7 @@ import type {
   JobStatus,
   ProcessStatus,
   SessionStatus,
-} from './types.gen'
+} from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link BookingStatus}. */
 export const BOOKING_TRANSIENT_STATUSES: BookingStatus[] = [

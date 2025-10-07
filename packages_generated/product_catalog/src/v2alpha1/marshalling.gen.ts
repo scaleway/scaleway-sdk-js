@@ -28,7 +28,7 @@ import type {
   PublicCatalogProductPropertiesInstance,
   PublicCatalogProductPropertiesObjectStorage,
   PublicCatalogProductUnitOfMeasure,
-} from './types.gen'
+} from './types.gen.js'
 
 const unmarshalPublicCatalogProductPropertiesHardwareCPUPhysical = (
   data: unknown,

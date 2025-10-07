@@ -13,7 +13,7 @@ import {
 import {
   DEDICATED_CONNECTION_TRANSIENT_STATUSES as DEDICATED_CONNECTION_TRANSIENT_STATUSES_INTERLINK,
   LINK_TRANSIENT_STATUSES as LINK_TRANSIENT_STATUSES_INTERLINK,
-} from './content.gen'
+} from './content.gen.js'
 import {
   marshalAttachRoutingPolicyRequest,
   marshalAttachVpcRequest,
@@ -33,7 +33,7 @@ import {
   unmarshalPartner,
   unmarshalPop,
   unmarshalRoutingPolicy,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   AttachRoutingPolicyRequest,
   AttachVpcRequest,
@@ -68,7 +68,7 @@ import type {
   SetRoutingPolicyRequest,
   UpdateLinkRequest,
   UpdateRoutingPolicyRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

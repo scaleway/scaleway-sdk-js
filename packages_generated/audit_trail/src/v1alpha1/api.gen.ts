@@ -3,6 +3,7 @@
 
 import type { ApiLocality } from '@scaleway/sdk-client'
 import {
+  enrichForPagination,
   API as ParentAPI,
   toApiLocality,
   urlParams,
@@ -14,8 +15,9 @@ import {
   unmarshalListAuthenticationEventsResponse,
   unmarshalListCombinedEventsResponse,
   unmarshalListEventsResponse,
+  unmarshalListExportJobsResponse,
   unmarshalListProductsResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   CreateExportJobRequest,
   DeleteExportJobRequest,
@@ -26,9 +28,11 @@ import type {
   ListCombinedEventsResponse,
   ListEventsRequest,
   ListEventsResponse,
+  ListExportJobsRequest,
+  ListExportJobsResponse,
   ListProductsRequest,
   ListProductsResponse,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
@@ -193,4 +197,40 @@ export class API extends ParentAPI {
       method: 'DELETE',
       path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/export-jobs/${validatePathParam('exportJobId', request.exportJobId)}`,
     })
+
+  protected pageOfListExportJobs = (
+    request: Readonly<ListExportJobsRequest> = {},
+  ) =>
+    this.client.fetch<ListExportJobsResponse>(
+      {
+        method: 'GET',
+        path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/export-jobs`,
+        urlParams: urlParams(
+          ['name', request.name],
+          ['order_by', request.orderBy],
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'tags',
+            request.tags
+              ? Object.entries(request.tags).map(
+                  ([key, value]) => `${key}:${value}`,
+                )
+              : undefined,
+          ],
+        ),
+      },
+      unmarshalListExportJobsResponse,
+    )
+
+  listExportJobs = (request: Readonly<ListExportJobsRequest> = {}) =>
+    enrichForPagination('exportJobs', this.pageOfListExportJobs, request)
 }

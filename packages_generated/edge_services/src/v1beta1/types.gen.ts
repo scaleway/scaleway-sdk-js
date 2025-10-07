@@ -72,6 +72,7 @@ export type PipelineErrorCode =
   | 'tls_root_missing'
   | 'tls_san_mismatch'
   | 'tls_self_signed'
+  | 'tls_caa_malfunction'
   | 'pipeline_invalid_workflow'
   | 'pipeline_missing_head_stage'
 

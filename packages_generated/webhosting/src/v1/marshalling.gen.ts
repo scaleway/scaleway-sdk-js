@@ -77,7 +77,7 @@ import type {
   Session,
   SyncDomainDnsRecordsRequestRecord,
   Website,
-} from './types.gen'
+} from './types.gen.js'
 
 export const unmarshalBackup = (data: unknown): Backup => {
   if (!isJSONObject(data)) {
@@ -418,6 +418,7 @@ const unmarshalOffer = (data: unknown): Offer => {
     options: unmarshalArrayOfObject(data.options, unmarshalOfferOption),
     price: data.price ? unmarshalMoney(data.price) : undefined,
     quotaWarning: data.quota_warning,
+    region: data.region,
   } as Offer
 }
 
