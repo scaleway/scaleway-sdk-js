@@ -4,8 +4,8 @@ export {
   NatsAPI,
   SnsAPI,
   SqsAPI,
-} from './api.gen'
-export * from './marshalling.gen'
+} from './api.gen.js'
+export * from './marshalling.gen.js'
 export type {
   File,
   ListNatsAccountsRequestOrderBy,
@@ -51,5 +51,5 @@ export type {
   SqsInfo,
   SqsInfoStatus,
   SqsPermissions,
-} from './types.gen'
-export * as ValidationRules from './validation-rules.gen'
+} from './types.gen.js'
+export * as ValidationRules from './validation-rules.gen.js'
