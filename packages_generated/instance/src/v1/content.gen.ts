@@ -12,7 +12,7 @@ import type {
   TaskStatus,
   VolumeServerState,
   VolumeState,
-} from './types.gen'
+} from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link ImageState}. */
 export const IMAGE_TRANSIENT_STATUSES: ImageState[] = ['creating']

@@ -3,5 +3,5 @@
  * PLEASE DO NOT EDIT HERE
  */
 
-export * as Vpcgwv1 from './v1/index.gen'
-export * as Vpcgwv2 from './v2/index.gen'
+export * as Vpcgwv1 from './v1/index.gen.js'
+export * as Vpcgwv2 from './v2/index.gen.js'

@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Money, Region as ScwRegion } from '@scaleway/sdk-client'
-import type { LanguageCode as StdLanguageCode } from '@scaleway/sdk-std'
+import type { LanguageCode as StdLanguageCode } from '@scaleway/sdk-std.js'
 
 export type BackupItemType =
   | 'unknown_backup_item_type'
@@ -420,6 +420,10 @@ export interface Offer {
    * Defines a warning if the maximum value for an option in the offer is exceeded.
    */
   quotaWarning: OfferOptionWarning
+  /**
+   * Region where the offer is hosted.
+   */
+  region: ScwRegion
 }
 
 export interface Platform {

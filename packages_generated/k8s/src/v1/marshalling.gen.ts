@@ -56,7 +56,7 @@ import type {
   UpgradeClusterRequest,
   UpgradePoolRequest,
   Version,
-} from './types.gen'
+} from './types.gen.js'
 
 const unmarshalPoolUpgradePolicy = (data: unknown): PoolUpgradePolicy => {
   if (!isJSONObject(data)) {

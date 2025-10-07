@@ -27,7 +27,7 @@ import {
   unmarshalPublicKey,
   unmarshalSignResponse,
   unmarshalVerifyResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   CreateKeyRequest,
   DataKey,
@@ -58,7 +58,7 @@ import type {
   UpdateKeyRequest,
   VerifyRequest,
   VerifyResponse,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

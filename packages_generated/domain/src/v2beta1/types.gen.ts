@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Money } from '@scaleway/sdk-client'
-import type { LanguageCode as StdLanguageCode } from '@scaleway/sdk-std'
+import type { LanguageCode as StdLanguageCode } from '@scaleway/sdk-std.js'
 
 export type ContactEmailStatus =
   | 'email_status_unknown'
