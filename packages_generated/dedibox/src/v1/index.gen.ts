@@ -8,9 +8,9 @@ export {
   RpnSanAPI,
   RpnV1API,
   RpnV2API,
-} from './api.gen'
-export * from './content.gen'
-export * from './marshalling.gen'
+} from './api.gen.js'
+export * from './content.gen.js'
+export * from './marshalling.gen.js'
 export type {
   AttachFailoverIPsRequest,
   AttachFailoverIPToMacAddressRequest,
@@ -79,6 +79,7 @@ export type {
   IPv6BlockApiGetIPv6BlockQuotasRequest,
   IPv6BlockApiGetIPv6BlockRequest,
   IPv6BlockApiListIPv6BlockSubnetsAvailableRequest,
+  IPv6BlockApiListIPv6BlocksRequest,
   IPv6BlockApiUpdateIPv6BlockRequest,
   IPv6BlockDelegationStatus,
   ListFailoverIPsRequest,
@@ -88,6 +89,7 @@ export type {
   ListInvoicesResponse,
   ListIPv6BlockSubnetsAvailableResponse,
   ListIPv6BlockSubnetsAvailableResponseSubnet,
+  ListIPv6BlocksResponse,
   ListIpsResponse,
   ListOffersRequest,
   ListOffersRequestOrderBy,
@@ -264,5 +266,5 @@ export type {
   UpdateServerBackupRequest,
   UpdateServerRequest,
   UpdateServerTagsRequest,
-} from './types.gen'
-export * as ValidationRules from './validation-rules.gen'
+} from './types.gen.js'
+export * as ValidationRules from './validation-rules.gen.js'
