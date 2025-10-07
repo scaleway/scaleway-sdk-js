@@ -7,7 +7,7 @@ import type {
   NamespaceStatus,
   TokenStatus,
   TriggerStatus,
-} from './types.gen'
+} from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link ContainerStatus}. */
 export const CONTAINER_TRANSIENT_STATUSES: ContainerStatus[] = [

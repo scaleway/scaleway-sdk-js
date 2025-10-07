@@ -16,7 +16,7 @@ import type {
   SkuImpact,
   UserApiDownloadImpactReportRequest,
   ZoneImpact,
-} from './types.gen'
+} from './types.gen.js'
 
 const unmarshalImpact = (data: unknown): Impact => {
   if (!isJSONObject(data)) {

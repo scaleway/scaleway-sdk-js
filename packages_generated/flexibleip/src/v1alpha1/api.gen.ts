@@ -10,7 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { FLEXIBLE_IP_TRANSIENT_STATUSES as FLEXIBLE_IP_TRANSIENT_STATUSES_FLEXIBLEIP } from './content.gen'
+import { FLEXIBLE_IP_TRANSIENT_STATUSES as FLEXIBLE_IP_TRANSIENT_STATUSES_FLEXIBLEIP } from './content.gen.js'
 import {
   marshalAttachFlexibleIPRequest,
   marshalCreateFlexibleIPRequest,
@@ -23,7 +23,7 @@ import {
   unmarshalDetachFlexibleIPsResponse,
   unmarshalFlexibleIP,
   unmarshalListFlexibleIPsResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   AttachFlexibleIPRequest,
   AttachFlexibleIPsResponse,
@@ -40,7 +40,7 @@ import type {
   ListFlexibleIPsResponse,
   MoveMACAddrRequest,
   UpdateFlexibleIPRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

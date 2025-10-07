@@ -37,7 +37,7 @@ import type {
   VpnGateway,
   VpnGatewayPrivateConfig,
   VpnGatewayPublicConfig,
-} from './types.gen'
+} from './types.gen.js'
 
 const unmarshalBgpSession = (data: unknown): BgpSession => {
   if (!isJSONObject(data)) {

@@ -10,7 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { VPN_GATEWAY_TRANSIENT_STATUSES as VPN_GATEWAY_TRANSIENT_STATUSES_S2S_VPN } from './content.gen'
+import { VPN_GATEWAY_TRANSIENT_STATUSES as VPN_GATEWAY_TRANSIENT_STATUSES_S2S_VPN } from './content.gen.js'
 import {
   marshalCreateConnectionRequest,
   marshalCreateCustomerGatewayRequest,
@@ -33,7 +33,7 @@ import {
   unmarshalRenewConnectionPskResponse,
   unmarshalRoutingPolicy,
   unmarshalVpnGateway,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   Connection,
   CreateConnectionRequest,
@@ -72,7 +72,7 @@ import type {
   UpdateRoutingPolicyRequest,
   UpdateVpnGatewayRequest,
   VpnGateway,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

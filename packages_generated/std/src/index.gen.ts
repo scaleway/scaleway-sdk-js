@@ -3,4 +3,4 @@
 export type {
   CountryCode,
   LanguageCode,
-} from './types.gen'
+} from './types.gen.js'
