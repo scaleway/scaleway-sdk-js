@@ -3,9 +3,9 @@
 export {
   API,
   RegistrarAPI,
-} from './api.gen'
-export * from './content.gen'
-export * from './marshalling.gen'
+} from './api.gen.js'
+export * from './content.gen.js'
+export * from './marshalling.gen.js'
 export type {
   AvailableDomain,
   CheckContactsCompatibilityResponse,
@@ -173,4 +173,4 @@ export type {
   UpdateDNSZoneRecordsRequest,
   UpdateDNSZoneRecordsResponse,
   UpdateDNSZoneRequest,
-} from './types.gen'
+} from './types.gen.js'

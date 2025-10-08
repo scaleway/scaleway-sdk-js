@@ -3,4 +3,4 @@
  * PLEASE DO NOT EDIT HERE
  */
 
-export * as Rdbv1 from './v1/index.gen'
+export * as Rdbv1 from './v1/index.gen.js'

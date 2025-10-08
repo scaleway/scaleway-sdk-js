@@ -1,8 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-export { API } from './api.gen'
-export * from './content.gen'
-export * from './marshalling.gen'
+export { API } from './api.gen.js'
+export * from './content.gen.js'
+export * from './marshalling.gen.js'
 export type {
   AddRouteRulesRequest,
   AddRouteRulesResponse,
@@ -129,5 +129,5 @@ export type {
   UpdateWafStageRequest,
   WafStage,
   WafStageMode,
-} from './types.gen'
-export * as ValidationRules from './validation-rules.gen'
+} from './types.gen.js'
+export * as ValidationRules from './validation-rules.gen.js'
