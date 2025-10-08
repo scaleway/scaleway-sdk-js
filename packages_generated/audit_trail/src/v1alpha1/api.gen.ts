@@ -17,7 +17,7 @@ import {
   unmarshalListEventsResponse,
   unmarshalListExportJobsResponse,
   unmarshalListProductsResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   CreateExportJobRequest,
   DeleteExportJobRequest,
@@ -32,7 +32,7 @@ import type {
   ListExportJobsResponse,
   ListProductsRequest,
   ListProductsResponse,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
@@ -218,7 +218,14 @@ export class API extends ParentAPI {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          ['tags', request.tags],
+          [
+            'tags',
+            request.tags
+              ? Object.entries(request.tags).map(
+                  ([key, value]) => `${key}:${value}`,
+                )
+              : undefined,
+          ],
         ),
       },
       unmarshalListExportJobsResponse,
