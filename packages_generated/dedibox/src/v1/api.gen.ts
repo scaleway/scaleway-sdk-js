@@ -65,6 +65,7 @@ import {
   unmarshalListFailoverIPsResponse,
   unmarshalListInvoicesResponse,
   unmarshalListIPv6BlockSubnetsAvailableResponse,
+  unmarshalListIPv6BlocksResponse,
   unmarshalListIpsResponse,
   unmarshalListOffersResponse,
   unmarshalListOSResponse,
@@ -148,11 +149,13 @@ import type {
   IPv6BlockApiGetIPv6BlockQuotasRequest,
   IPv6BlockApiGetIPv6BlockRequest,
   IPv6BlockApiListIPv6BlockSubnetsAvailableRequest,
+  IPv6BlockApiListIPv6BlocksRequest,
   IPv6BlockApiUpdateIPv6BlockRequest,
   ListFailoverIPsRequest,
   ListFailoverIPsResponse,
   ListInvoicesResponse,
   ListIPv6BlockSubnetsAvailableResponse,
+  ListIPv6BlocksResponse,
   ListIpsResponse,
   ListOffersRequest,
   ListOffersResponse,
@@ -1315,7 +1318,25 @@ export class IPv6BlockAPI extends ParentAPI {
     )
 
   /**
-   * Get a specific IPv6 block. Get the IPv6 block associated with the given ID.
+   * List IPv6 blocks. List IPv6 blocks associated given project ID.
+   *
+   * @param request - The request {@link IPv6BlockApiListIPv6BlocksRequest}
+   * @returns A Promise of ListIPv6BlocksResponse
+   */
+  listIPv6Blocks = (
+    request: Readonly<IPv6BlockApiListIPv6BlocksRequest> = {},
+  ) =>
+    this.client.fetch<ListIPv6BlocksResponse>(
+      {
+        method: 'GET',
+        path: `/dedibox/v1/ipv6-blocks`,
+        urlParams: urlParams(['project_id', request.projectId]),
+      },
+      unmarshalListIPv6BlocksResponse,
+    )
+
+  /**
+   * Get first IPv6 block. Get the first IPv6 block associated with the given project ID.
    *
    * @param request - The request {@link IPv6BlockApiGetIPv6BlockRequest}
    * @returns A Promise of IPv6Block
