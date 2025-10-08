@@ -4,3 +4,4 @@
  */
 
 export * as S2SVpnv1alpha1 from './v1alpha1/index.gen.js'
+

@@ -420,6 +420,10 @@ export interface Offer {
    * Defines a warning if the maximum value for an option in the offer is exceeded.
    */
   quotaWarning: OfferOptionWarning
+  /**
+   * Region where the offer is hosted.
+   */
+  region: ScwRegion
 }
 
 export interface Platform {
