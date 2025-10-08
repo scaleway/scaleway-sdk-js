@@ -418,6 +418,7 @@ const unmarshalOffer = (data: unknown): Offer => {
     options: unmarshalArrayOfObject(data.options, unmarshalOfferOption),
     price: data.price ? unmarshalMoney(data.price) : undefined,
     quotaWarning: data.quota_warning,
+    region: data.region,
   } as Offer
 }
 
