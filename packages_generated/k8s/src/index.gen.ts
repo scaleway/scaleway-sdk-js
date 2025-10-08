@@ -3,4 +3,4 @@
  * PLEASE DO NOT EDIT HERE
  */
 
-export * as K8Sv1 from './v1/index.js'
+export * as K8sv1 from './v1/index.js'

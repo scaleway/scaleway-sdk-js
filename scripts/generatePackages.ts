@@ -90,8 +90,8 @@ const exportProductVersions = ({ productDir }: { productDir: string }) => {
       const exportPath = CUSTOM.PRODUCT_VERSION_EXPORT.has(
         `${productDir}/${versionDir}`,
       )
-        ? `./${versionDir}/index`
-        : `./${versionDir}/index.gen`
+        ? `./${versionDir}/index.js`
+        : `./${versionDir}/index.gen.js`
 
       // appendFileSync(
       //   pathFile,

@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest'
-import { sleep } from '../sleep'
+import { sleep } from '../sleep.js'
 
 beforeAll(() => {
   vi.useFakeTimers()

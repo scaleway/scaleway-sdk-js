@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { parseScalewayError } from '../../error-parser'
+import { parseScalewayError } from '../../error-parser.js'
 import {
   InvalidArgumentsError,
   QuotasExceededError,
@@ -18,7 +18,7 @@ describe('InvalidRequestError', () => {
       type: 'invalid_request_error',
     }) as InvalidArgumentsError
     expect(error).toBeInstanceOf(InvalidArgumentsError)
-    expect(error.details).toEqual([
+    expect(error instanceof Error ? error.details : undefined).toEqual([
       {
         argumentName: 'volumes.5.id',
         helpMessage: '92 is not a valid UUID.',
@@ -30,7 +30,7 @@ describe('InvalidRequestError', () => {
         reason: 'constraint',
       },
     ])
-    expect(error.message).toBe(
+    expect(error instanceof Error ? error.message : String(error)).toBe(
       'invalid argument(s): volumes.5.id does not respect constraint, 92 is not a valid UUID.; volumes.5.name does not respect constraint, required key not provided',
     )
   })
@@ -42,14 +42,14 @@ describe('InvalidRequestError', () => {
       type: 'invalid_request_error',
     }) as QuotasExceededError
     expect(error).toBeInstanceOf(QuotasExceededError)
-    expect(error.list).toEqual([
+    expect(error instanceof Error ? error.list : undefined).toEqual([
       {
         current: 0,
         quota: 0,
         resource: 'compute_snapshots_type_b_ssd_available',
       },
     ])
-    expect(error.message).toBe(
+    expect(error instanceof Error ? error.message : String(error)).toBe(
       'quota(s) exceeded: Quotas reached: You have reached the maximum number of compute_snapshots_type_b_ssd_available authorized by your Organization. Access the quotas page from your Organization dashboard to manage quotas.',
     )
   })
@@ -60,7 +60,7 @@ describe('InvalidRequestError', () => {
       type: 'invalid_request_error',
     }) as QuotasExceededError
     expect(error).toBeInstanceOf(QuotasExceededError)
-    expect(error.list).toEqual([
+    expect(error instanceof Error ? error.list : undefined).toEqual([
       {
         current: 0,
         quota: 0,
@@ -75,7 +75,9 @@ describe('InvalidRequestError', () => {
       type: 'invalid_request_error',
     })
     expect(error).toBeInstanceOf(ScalewayError)
-    expect(error.message).toBe('http error 400: server should be running')
+    expect(error instanceof Error ? error.message : String(error)).toBe(
+      'http error 400: server should be running',
+    )
   })
 
   it(`fallbacks on ScalewayError without a message`, () => {
@@ -83,7 +85,9 @@ describe('InvalidRequestError', () => {
       type: 'invalid_request_error',
     })
     expect(error).toBeInstanceOf(ScalewayError)
-    expect(error.message).toBe('http error 400')
+    expect(error instanceof Error ? error.message : String(error)).toBe(
+      'http error 400',
+    )
   })
 })
 
@@ -94,11 +98,13 @@ describe('UnknownResourceError', () => {
       type: 'unknown_resource',
     }) as ResourceNotFoundError
     expect(error).toBeInstanceOf(ResourceNotFoundError)
-    expect(error.message).toBe(
+    expect(error instanceof Error ? error.message : String(error)).toBe(
       'resource  with ID 11111111-1111-4111-8111-111111111142 is not found',
     )
-    expect(error.resource).toBe('')
-    expect(error.resourceId).toBe('11111111-1111-4111-8111-111111111142')
+    expect(error instanceof Error ? error.resource : undefined).toBe('')
+    expect(error instanceof Error ? error.resourceId : undefined).toBe(
+      '11111111-1111-4111-8111-111111111142',
+    )
   })
 
   it(`transforms to ResourceNotFoundError with the resource Name and ID`, () => {
@@ -107,11 +113,15 @@ describe('UnknownResourceError', () => {
       type: 'unknown_resource',
     }) as ResourceNotFoundError
     expect(error).toBeInstanceOf(ResourceNotFoundError)
-    expect(error.message).toBe(
+    expect(error instanceof Error ? error.message : String(error)).toBe(
       'resource security_group with ID 11111111-1111-4111-8111-111111111112 is not found',
     )
-    expect(error.resource).toBe('security_group')
-    expect(error.resourceId).toBe('11111111-1111-4111-8111-111111111112')
+    expect(error instanceof Error ? error.resource : undefined).toBe(
+      'security_group',
+    )
+    expect(error instanceof Error ? error.resourceId : undefined).toBe(
+      '11111111-1111-4111-8111-111111111112',
+    )
   })
 
   it('transforms to ResourceNotFoundError with the not found resource / single quote', () => {
@@ -120,11 +130,13 @@ describe('UnknownResourceError', () => {
       type: 'unknown_resource',
     }) as ResourceNotFoundError
     expect(error).toBeInstanceOf(ResourceNotFoundError)
-    expect(error.message).toBe(
+    expect(error instanceof Error ? error.message : String(error)).toBe(
       'resource volume with ID 11111111-1111-4111-8111-111111111111 is not found',
     )
-    expect(error.resource).toBe('volume')
-    expect(error.resourceId).toBe('11111111-1111-4111-8111-111111111111')
+    expect(error instanceof Error ? error.resource : undefined).toBe('volume')
+    expect(error instanceof Error ? error.resourceId : undefined).toBe(
+      '11111111-1111-4111-8111-111111111111',
+    )
   })
 
   it(`transforms to ScalewayError when the message can't be analyzed`, () => {
@@ -133,7 +145,9 @@ describe('UnknownResourceError', () => {
       type: 'unknown_resource',
     })
     expect(error).toBeInstanceOf(ScalewayError)
-    expect(error.message).toBe('http error 404: uncommon message')
+    expect(error instanceof Error ? error.message : String(error)).toBe(
+      'http error 404: uncommon message',
+    )
   })
 
   it('do not transform to ResourceNotFoundError for invalid resource ID', () => {
@@ -142,7 +156,9 @@ describe('UnknownResourceError', () => {
       type: 'unknown_resource',
     })
     expect(error).not.toBeInstanceOf(ResourceNotFoundError)
-    expect(error.message).toBe(`http error 404: Volume 'not-an-uuid' not found`)
+    expect(error instanceof Error ? error.message : String(error)).toBe(
+      `http error 404: Volume 'not-an-uuid' not found`,
+    )
   })
 
   it('fallbacks to ScalewayError without a message', () => {
@@ -150,6 +166,8 @@ describe('UnknownResourceError', () => {
       type: 'unknown_resource',
     })
     expect(error).toBeInstanceOf(ScalewayError)
-    expect(error.message).toBe('http error 404')
+    expect(error instanceof Error ? error.message : String(error)).toBe(
+      'http error 404',
+    )
   })
 })

@@ -1,6 +1,6 @@
-import type { LogLevel } from './level-resolver'
-import { LevelResolver, shouldLog } from './level-resolver'
-import type { Logger } from './logger'
+import type { LogLevel } from './level-resolver.js'
+import { LevelResolver, shouldLog } from './level-resolver.js'
+import type { Logger } from './logger.js'
 
 /**
  * A Logger using console output.

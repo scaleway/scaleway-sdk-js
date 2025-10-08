@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { isBrowser } from '../../../helpers/is-browser'
-import type { Settings } from '../../client-settings'
-import { buildRequest } from '../build-fetcher'
-import { dumpRequest, dumpResponse } from '../http-dumper'
+import { isBrowser } from '../../../helpers/is-browser.js'
+import type { Settings } from '../../client-settings.js'
+import { buildRequest } from '../build-fetcher.js'
+import { dumpRequest, dumpResponse } from '../http-dumper.js'
 
 const DEFAULT_SETTINGS: Settings = {
   apiURL: 'https://api.scaleway.com',

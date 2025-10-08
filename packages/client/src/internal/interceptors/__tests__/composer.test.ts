@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
   composeRequestInterceptors,
   composeResponseErrorInterceptors,
-} from '../composer'
+} from '../composer.js'
 
 describe('composeRequestInterceptors', () => {
   it('modifies the request header', async () => {

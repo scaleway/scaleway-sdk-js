@@ -9,7 +9,7 @@ import {
   isURL,
   isUUID,
   isZone,
-} from '../string-validation'
+} from '../string-validation.js'
 
 const validUUIDs = [
   '00000000-0000-0000-0000-000000000000',

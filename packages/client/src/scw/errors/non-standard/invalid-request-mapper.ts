@@ -1,8 +1,8 @@
-import type { JSONObject } from '../../../helpers/json'
-import { ScalewayError } from '../scw-error'
-import { InvalidArgumentsError } from '../standard/invalid-arguments-error'
-import { QuotasExceededError } from '../standard/quotas-exceeded-error'
-import { isRecordOfStringArray } from '../types'
+import type { JSONObject } from '../../../helpers/json.js'
+import { ScalewayError } from '../scw-error.js'
+import { InvalidArgumentsError } from '../standard/invalid-arguments-error.js'
+import { QuotasExceededError } from '../standard/quotas-exceeded-error.js'
+import { isRecordOfStringArray } from '../types.js'
 
 /**
  * InvalidRequest error is only returned by the instance API.

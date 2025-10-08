@@ -1,8 +1,8 @@
 import {
   isAccessKey,
   isSecretKey,
-} from '../internal/validations/string-validation'
-import type { Region, Zone } from './locality'
+} from '../internal/validations/string-validation.js'
+import type { Region, Zone } from './locality.js'
 
 /**
  * Holds access key and secret key.
