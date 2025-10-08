@@ -32,6 +32,7 @@ import type {
   ListCombinedEventsResponse,
   ListCombinedEventsResponseCombinedEvent,
   ListEventsResponse,
+  ListExportJobsResponse,
   ListProductsResponse,
   LoadBalancerAclInfo,
   LoadBalancerBackendInfo,
@@ -608,6 +609,21 @@ export const unmarshalListEventsResponse = (
     events: unmarshalArrayOfObject(data.events, unmarshalEvent),
     nextPageToken: data.next_page_token,
   } as ListEventsResponse
+}
+
+export const unmarshalListExportJobsResponse = (
+  data: unknown,
+): ListExportJobsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListExportJobsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    exportJobs: unmarshalArrayOfObject(data.export_jobs, unmarshalExportJob),
+    totalCount: data.total_count,
+  } as ListExportJobsResponse
 }
 
 const unmarshalProductService = (data: unknown): ProductService => {
