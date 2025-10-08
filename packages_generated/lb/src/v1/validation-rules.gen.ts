@@ -5,16 +5,10 @@ export const HealthCheckHttpConfig = {
   hostHeader: {
     pattern: /^[^\s]+$/,
   },
-  uri: {
-    pattern: /^[^\s]+$/,
-  },
 }
 
 export const HealthCheckHttpsConfig = {
   hostHeader: {
-    pattern: /^[^\s]+$/,
-  },
-  uri: {
     pattern: /^[^\s]+$/,
   },
 }
