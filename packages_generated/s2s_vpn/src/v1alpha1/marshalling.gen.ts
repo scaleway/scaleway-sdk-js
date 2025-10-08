@@ -37,7 +37,7 @@ import type {
   VpnGateway,
   VpnGatewayPrivateConfig,
   VpnGatewayPublicConfig,
-} from './types.gen'
+} from './types.gen.js'
 
 const unmarshalBgpSession = (data: unknown): BgpSession => {
   if (!isJSONObject(data)) {
@@ -47,6 +47,7 @@ const unmarshalBgpSession = (data: unknown): BgpSession => {
   }
 
   return {
+    peerPrivateIp: data.peer_private_ip,
     privateIp: data.private_ip,
     routingPolicyId: data.routing_policy_id,
   } as BgpSession
@@ -359,6 +360,8 @@ const marshalCreateConnectionRequestBgpConfig = (
   request: CreateConnectionRequestBgpConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  peer_private_ip: request.peerPrivateIp,
+  private_ip: request.privateIp,
   routing_policy_id: request.routingPolicyId,
 })
 
