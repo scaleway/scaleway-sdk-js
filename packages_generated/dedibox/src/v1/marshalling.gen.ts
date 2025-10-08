@@ -39,6 +39,7 @@ import type {
   ListInvoicesResponse,
   ListIPv6BlockSubnetsAvailableResponse,
   ListIPv6BlockSubnetsAvailableResponseSubnet,
+  ListIPv6BlocksResponse,
   ListIpsResponse,
   ListOffersResponse,
   ListOSResponse,
@@ -955,6 +956,21 @@ export const unmarshalListIPv6BlockSubnetsAvailableResponse = (
     ),
     totalCount: data.total_count,
   } as ListIPv6BlockSubnetsAvailableResponse
+}
+
+export const unmarshalListIPv6BlocksResponse = (
+  data: unknown,
+): ListIPv6BlocksResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListIPv6BlocksResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ipv6Blocks: unmarshalArrayOfObject(data.ipv6_blocks, unmarshalIPv6Block),
+    totalCount: data.total_count,
+  } as ListIPv6BlocksResponse
 }
 
 const unmarshalInvoiceSummary = (data: unknown): InvoiceSummary => {
