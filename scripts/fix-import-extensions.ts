@@ -32,7 +32,7 @@ function fixFile(file: string) {
   fs.writeFileSync(file, content, 'utf8')
 }
 
-const roots = ['packages_generated', 'packages']
+const roots = ['packages_generated']
 
 for (const root of roots) {
   walk(path.join(__dirname, '..', root), file => {

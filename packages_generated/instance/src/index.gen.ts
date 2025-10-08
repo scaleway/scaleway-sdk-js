@@ -3,4 +3,4 @@
  * PLEASE DO NOT EDIT HERE
  */
 
-export * as Instancev1 from './v1/index'
+export * as Instancev1 from './v1/index.js'

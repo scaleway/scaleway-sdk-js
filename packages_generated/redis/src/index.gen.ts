@@ -3,4 +3,4 @@
  * PLEASE DO NOT EDIT HERE
  */
 
-export * as Redisv1 from './v1/index.gen'
+export * as Redisv1 from './v1/index.gen.js'
