@@ -712,10 +712,6 @@ export type ReinstallServerRequest = {
    * Reinstall the server with the target OS, when no os_id provided the default OS for the server type is used.
    */
   osId?: string
-  /**
-   * Specify the configuration to install an optional CICD runner on the server during installation.
-   */
-  runnerConfiguration?: RunnerConfiguration
 }
 
 export interface SetServerPrivateNetworksResponse {

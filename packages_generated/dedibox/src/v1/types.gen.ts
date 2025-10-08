@@ -1102,6 +1102,37 @@ export interface ListIPv6BlockSubnetsAvailableResponseSubnet {
   cidr: number
 }
 
+export interface IPv6Block {
+  /**
+   * ID of the IPv6.
+   */
+  id: number
+  /**
+   * Address of the IPv6.
+   */
+  address: string
+  /**
+   * DUID of the IPv6.
+   */
+  duid: string
+  /**
+   * DNS linked to the IPv6.
+   */
+  nameservers: string[]
+  /**
+   * Classless InterDomain Routing notation of the IPv6.
+   */
+  cidr: number
+  /**
+   * All IPv6 subnets.
+   */
+  subnets: IPv6Block[]
+  /**
+   * The nameservers delegation status.
+   */
+  delegationStatus: IPv6BlockDelegationStatus
+}
+
 export interface InvoiceSummary {
   id: number
   totalWithTaxes?: Money
@@ -2003,37 +2034,6 @@ export type GetServiceRequest = {
   serviceId: number
 }
 
-export interface IPv6Block {
-  /**
-   * ID of the IPv6.
-   */
-  id: number
-  /**
-   * Address of the IPv6.
-   */
-  address: string
-  /**
-   * DUID of the IPv6.
-   */
-  duid: string
-  /**
-   * DNS linked to the IPv6.
-   */
-  nameservers: string[]
-  /**
-   * Classless InterDomain Routing notation of the IPv6.
-   */
-  cidr: number
-  /**
-   * All IPv6 subnets.
-   */
-  subnets: IPv6Block[]
-  /**
-   * The nameservers delegation status.
-   */
-  delegationStatus: IPv6BlockDelegationStatus
-}
-
 export type IPv6BlockApiCreateIPv6BlockRequest = {
   /**
    * ID of the project.
@@ -2082,6 +2082,10 @@ export type IPv6BlockApiListIPv6BlockSubnetsAvailableRequest = {
    * ID of the IPv6 block.
    */
   blockId: number
+}
+
+export type IPv6BlockApiListIPv6BlocksRequest = {
+  projectId?: string
 }
 
 export type IPv6BlockApiUpdateIPv6BlockRequest = {
@@ -2210,6 +2214,11 @@ export interface ListIPv6BlockSubnetsAvailableResponse {
    * Total count of available subnets.
    */
   totalCount: number
+}
+
+export interface ListIPv6BlocksResponse {
+  totalCount: number
+  ipv6Blocks: IPv6Block[]
 }
 
 export interface ListInvoicesResponse {

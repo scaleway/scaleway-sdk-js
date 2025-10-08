@@ -3,4 +3,4 @@
  * PLEASE DO NOT EDIT HERE
  */
 
-export * as Vpcv2 from './v2/index.gen'
+export * as Vpcv2 from './v2/index.gen.js'

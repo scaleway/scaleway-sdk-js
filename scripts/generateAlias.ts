@@ -1,4 +1,10 @@
-import { appendFileSync, readdirSync, statSync, writeFileSync } from 'node:fs'
+import {
+  appendFileSync,
+  readdirSync,
+  readFileSync,
+  statSync,
+  writeFileSync,
+} from 'node:fs'
 import { join } from 'node:path'
 
 const GENERATED_PATH = 'packages_generated'
@@ -11,6 +17,28 @@ const toPascal = (s: string) =>
     .join('')
 
 const toSlug = (s: string) => s.replace(/_/g, '-')
+
+/**
+ * Extract real export names from package's index.gen.ts
+ * This ensures we use the exact same names as exported by the package
+ */
+const getExportsFromPackage = (packagePath: string): string[] => {
+  const indexPath = join(packagePath, 'src', 'index.gen.ts')
+  try {
+    const content = readFileSync(indexPath, 'utf8')
+    const exportPattern = /export \* as (\w+) from/g
+    const exports: string[] = []
+    let match
+
+    while ((match = exportPattern.exec(content)) !== null) {
+      exports.push(match[1])
+    }
+
+    return exports
+  } catch (err: unknown) {
+    throw new Error(`Error reading exports from ${indexPath}: ${err.message}`)
+  }
+}
 
 const services = readdirSync(GENERATED_PATH).filter(folder => {
   const fullPath = join(GENERATED_PATH, folder)
@@ -29,36 +57,38 @@ let importsOutput = ''
 for (const service of services) {
   const slug = toSlug(service)
   const pascal = toPascal(service)
-  const srcPath = join(GENERATED_PATH, service, 'src')
+  const packagePath = join(GENERATED_PATH, service)
 
-  let versions: string[] = []
+  // Get real exports from the package
+  let exportedNames: string[] = []
   try {
-    versions = readdirSync(srcPath).filter(vFolder => {
-      const vPath = join(srcPath, vFolder)
-
-      return statSync(vPath).isDirectory() && /^v[0-9a-z]+$/i.test(vFolder)
-    })
+    exportedNames = getExportsFromPackage(packagePath)
   } catch (err: unknown) {
     throw new Error(
-      `Error: missing or unreadable 'src' folder for package '${service}': ${
-        err instanceof Error ? err.message : String(err)
-      }`,
+      `Error getting exports for package '${service}': ${err.message}`,
     )
   }
 
   writeFileSync(OUTPUT_PATH, AUTO_GENERATE_MESSAGE)
 
-  if (versions.length > 0) {
+  if (exportedNames.length > 0) {
     const imports: string[] = []
     const versionsImport: string[] = []
     const mappings: string[] = []
 
-    for (const version of versions) {
-      const importName = `${pascal}${version}`
-      versionsImport.push(`${importName}`)
-      mappings.push(`  ${version}: ${importName},`)
+    for (const exportName of exportedNames) {
+      // Extract version from export name (e.g., K8Sv1 -> v1, S2SVpnv1alpha1 -> v1alpha1)
+      // Version must start with lowercase 'v' followed by digits
+      const versionMatch = exportName.match(/(v\d+[a-z]*\d*)$/)
+      if (versionMatch) {
+        const version = versionMatch[1]
+        versionsImport.push(exportName)
+        mappings.push(`  ${version}: ${exportName},`)
+      }
     }
-    imports.push(`import { ${versionsImport} } from '@scaleway/sdk-${slug}'`)
+    imports.push(
+      `import { ${versionsImport.join(', ')} } from '@scaleway/sdk-${slug}'`,
+    )
 
     importsOutput += `${imports.join('\n')}\n`
     const importedNames = imports

@@ -496,10 +496,6 @@ export const marshalReinstallServerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   os_id: request.osId,
-  runner_configuration:
-    request.runnerConfiguration !== undefined
-      ? marshalRunnerConfiguration(request.runnerConfiguration, defaults)
-      : undefined,
 })
 
 export const marshalStartConnectivityDiagnosticRequest = (
