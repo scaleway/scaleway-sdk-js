@@ -3,4 +3,4 @@
  * PLEASE DO NOT EDIT HERE
  */
 
-export * as Ipamv1 from './v1/index.gen.js'
+export * as Ipamv1 from './v1/index.gen'

@@ -47,7 +47,7 @@ import type {
   SecretManagerSecretInfo,
   SecretManagerSecretVersionInfo,
   SystemEvent,
-} from './types.gen.js'
+} from './types.gen'
 
 const unmarshalExportJobS3 = (data: unknown): ExportJobS3 => {
   if (!isJSONObject(data)) {

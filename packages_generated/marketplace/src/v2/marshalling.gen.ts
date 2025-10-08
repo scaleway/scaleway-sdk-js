@@ -14,7 +14,7 @@ import type {
   ListVersionsResponse,
   LocalImage,
   Version,
-} from './types.gen.js'
+} from './types.gen'
 
 export const unmarshalCategory = (data: unknown): Category => {
   if (!isJSONObject(data)) {

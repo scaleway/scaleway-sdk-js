@@ -52,7 +52,7 @@ import type {
   Token,
   Usage,
   UsageOverview,
-} from './types.gen.js'
+} from './types.gen'
 
 const unmarshalContactPointEmail = (data: unknown): ContactPointEmail => {
   if (!isJSONObject(data)) {

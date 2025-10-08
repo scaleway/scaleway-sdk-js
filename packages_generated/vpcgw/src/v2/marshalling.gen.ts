@@ -34,7 +34,7 @@ import type {
   UpdateIPRequest,
   UpdatePatRuleRequest,
   UpgradeGatewayRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 export const unmarshalGatewayNetwork = (data: unknown): GatewayNetwork => {
   if (!isJSONObject(data)) {

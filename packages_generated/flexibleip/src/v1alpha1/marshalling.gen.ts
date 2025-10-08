@@ -20,7 +20,7 @@ import type {
   MACAddress,
   MoveMACAddrRequest,
   UpdateFlexibleIPRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 const unmarshalMACAddress = (data: unknown): MACAddress => {
   if (!isJSONObject(data)) {

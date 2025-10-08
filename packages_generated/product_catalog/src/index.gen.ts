@@ -3,4 +3,4 @@
  * PLEASE DO NOT EDIT HERE
  */
 
-export * as ProductCatalogv2alpha1 from './v2alpha1/index.gen.js'
+export * as ProductCatalogv2alpha1 from './v2alpha1/index.gen'

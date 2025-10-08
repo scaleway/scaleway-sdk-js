@@ -27,7 +27,7 @@ import type {
   Volume,
   VolumeSpecifications,
   VolumeType,
-} from './types.gen.js'
+} from './types.gen'
 
 export const unmarshalReference = (data: unknown): Reference => {
   if (!isJSONObject(data)) {

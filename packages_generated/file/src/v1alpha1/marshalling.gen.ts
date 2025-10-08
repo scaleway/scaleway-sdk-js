@@ -14,7 +14,7 @@ import type {
   ListAttachmentsResponse,
   ListFileSystemsResponse,
   UpdateFileSystemRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 export const unmarshalFileSystem = (data: unknown): FileSystem => {
   if (!isJSONObject(data)) {

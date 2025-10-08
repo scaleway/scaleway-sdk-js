@@ -45,7 +45,7 @@ import type {
   UpdateIPRequest,
   UpdatePATRuleRequest,
   UpgradeGatewayRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 export const unmarshalDHCP = (data: unknown): DHCP => {
   if (!isJSONObject(data)) {

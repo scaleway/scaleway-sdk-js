@@ -106,7 +106,7 @@ import {
   unmarshalUpdateServerResponse,
   unmarshalUpdateSnapshotResponse,
   unmarshalUpdateVolumeResponse,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   ApplyBlockMigrationRequest,
   AttachServerFileSystemRequest,
@@ -233,7 +233,7 @@ import type {
   UpdateSnapshotResponse,
   UpdateVolumeRequest,
   UpdateVolumeResponse,
-} from './types.gen.js'
+} from './types.gen'
 import type {
   SetImageResponse,
   SetSecurityGroupRequest,
@@ -244,7 +244,7 @@ import type {
   SetServerResponse,
   SetSnapshotRequest,
   SetSnapshotResponse,
-} from './types.private.gen.js'
+} from './types.private.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

@@ -3,4 +3,4 @@
  * PLEASE DO NOT EDIT HERE
  */
 
-export * as Dediboxv1 from './v1/index.gen.js'
+export * as Dediboxv1 from './v1/index.gen'

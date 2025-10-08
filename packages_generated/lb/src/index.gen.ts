@@ -3,4 +3,4 @@
  * PLEASE DO NOT EDIT HERE
  */
 
-export * as Lbv1 from './v1/index.gen.js'
+export * as Lbv1 from './v1/index.gen'

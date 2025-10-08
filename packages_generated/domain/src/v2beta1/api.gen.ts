@@ -12,7 +12,7 @@ import {
 import {
   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_DOMAIN,
   SSL_CERTIFICATE_TRANSIENT_STATUSES as SSL_CERTIFICATE_TRANSIENT_STATUSES_DOMAIN,
-} from './content.gen.js'
+} from './content.gen'
 import {
   marshalCloneDNSZoneRequest,
   marshalCreateDNSZoneRequest,
@@ -71,7 +71,7 @@ import {
   unmarshalSSLCertificate,
   unmarshalUpdateDNSZoneNameserversResponse,
   unmarshalUpdateDNSZoneRecordsResponse,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   CheckContactsCompatibilityResponse,
   ClearDNSZoneRecordsRequest,
@@ -163,7 +163,7 @@ import type {
   UpdateDNSZoneRecordsRequest,
   UpdateDNSZoneRecordsResponse,
   UpdateDNSZoneRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

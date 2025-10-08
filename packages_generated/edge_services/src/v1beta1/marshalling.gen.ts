@@ -80,7 +80,7 @@ import type {
   UpdateTLSStageRequest,
   UpdateWafStageRequest,
   WafStage,
-} from './types.gen.js'
+} from './types.gen'
 
 const unmarshalScalewayLb = (data: unknown): ScalewayLb => {
   if (!isJSONObject(data)) {

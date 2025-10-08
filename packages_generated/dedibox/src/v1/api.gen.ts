@@ -16,7 +16,7 @@ import {
   RPN_V2_GROUP_TRANSIENT_STATUSES as RPN_V2_GROUP_TRANSIENT_STATUSES_DEDIBOX,
   SERVER_INSTALL_TRANSIENT_STATUSES as SERVER_INSTALL_TRANSIENT_STATUSES_DEDIBOX,
   SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_DEDIBOX,
-} from './content.gen.js'
+} from './content.gen'
 import {
   marshalAttachFailoverIPsRequest,
   marshalAttachFailoverIPToMacAddressRequest,
@@ -99,7 +99,7 @@ import {
   unmarshalServerInstall,
   unmarshalService,
   unmarshalSubscribeStorageOptionsResponse,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   AttachFailoverIPsRequest,
   AttachFailoverIPToMacAddressRequest,
@@ -248,7 +248,7 @@ import type {
   UpdateServerBackupRequest,
   UpdateServerRequest,
   UpdateServerTagsRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

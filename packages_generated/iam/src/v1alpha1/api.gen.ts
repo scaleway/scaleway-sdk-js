@@ -67,7 +67,7 @@ import {
   unmarshalSSHKey,
   unmarshalUser,
   unmarshalValidateUserMFAOTPResponse,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   AddGroupMemberRequest,
   AddGroupMembersRequest,
@@ -171,7 +171,7 @@ import type {
   User,
   ValidateUserMFAOTPRequest,
   ValidateUserMFAOTPResponse,
-} from './types.gen.js'
+} from './types.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

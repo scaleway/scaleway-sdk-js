@@ -30,7 +30,7 @@ import type {
   SetRoutingPolicyRequest,
   UpdateLinkRequest,
   UpdateRoutingPolicyRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 export const unmarshalDedicatedConnection = (
   data: unknown,

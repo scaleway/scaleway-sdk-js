@@ -44,7 +44,7 @@ import type {
   UpdateNamespaceRequest,
   UpdateTriggerRequest,
   UpdateTriggerRequestSqsClientConfig,
-} from './types.gen.js'
+} from './types.gen'
 
 const unmarshalContainerHealthCheckSpecHTTPProbe = (
   data: unknown,

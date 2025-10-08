@@ -15,7 +15,7 @@ import {
   unmarshalListServerPrivateNetworksResponse,
   unmarshalServerPrivateNetwork,
   unmarshalSetServerPrivateNetworksResponse,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   ListServerPrivateNetworksResponse,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
@@ -24,7 +24,7 @@ import type {
   PrivateNetworkApiSetServerPrivateNetworksRequest,
   ServerPrivateNetwork,
   SetServerPrivateNetworksResponse,
-} from './types.gen.js'
+} from './types.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

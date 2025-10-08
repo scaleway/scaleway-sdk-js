@@ -5,7 +5,7 @@ import type {
   DomainAvailabilityStatus,
   DomainStatus,
   HostingStatus,
-} from './types.gen.js'
+} from './types.gen'
 
 /** Lists transient statutes of the enum {@link BackupStatus}. */
 export const BACKUP_TRANSIENT_STATUSES: BackupStatus[] = ['restoring']

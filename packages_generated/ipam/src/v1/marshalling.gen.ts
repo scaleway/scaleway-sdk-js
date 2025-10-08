@@ -21,7 +21,7 @@ import type {
   Reverse,
   Source,
   UpdateIPRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 const unmarshalResource = (data: unknown): Resource => {
   if (!isJSONObject(data)) {

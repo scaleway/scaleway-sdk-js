@@ -13,7 +13,7 @@ import {
 import {
   SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_BLOCK,
   VOLUME_TRANSIENT_STATUSES as VOLUME_TRANSIENT_STATUSES_BLOCK,
-} from './content.gen.js'
+} from './content.gen'
 import {
   marshalCreateSnapshotRequest,
   marshalCreateVolumeRequest,
@@ -27,7 +27,7 @@ import {
   unmarshalListVolumeTypesResponse,
   unmarshalSnapshot,
   unmarshalVolume,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   CreateSnapshotRequest,
   CreateVolumeRequest,
@@ -48,7 +48,7 @@ import type {
   UpdateSnapshotRequest,
   UpdateVolumeRequest,
   Volume,
-} from './types.gen.js'
+} from './types.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

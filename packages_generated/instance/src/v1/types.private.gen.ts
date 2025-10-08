@@ -27,7 +27,7 @@ import type {
   SnapshotState,
   Volume,
   VolumeVolumeType,
-} from './types.gen.js'
+} from './types.gen'
 
 export interface SetImageResponse {
   image?: Image

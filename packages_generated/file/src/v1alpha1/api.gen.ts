@@ -10,14 +10,14 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { FILE_SYSTEM_TRANSIENT_STATUSES as FILE_SYSTEM_TRANSIENT_STATUSES_FILE } from './content.gen.js'
+import { FILE_SYSTEM_TRANSIENT_STATUSES as FILE_SYSTEM_TRANSIENT_STATUSES_FILE } from './content.gen'
 import {
   marshalCreateFileSystemRequest,
   marshalUpdateFileSystemRequest,
   unmarshalFileSystem,
   unmarshalListAttachmentsResponse,
   unmarshalListFileSystemsResponse,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   CreateFileSystemRequest,
   DeleteFileSystemRequest,
@@ -28,7 +28,7 @@ import type {
   ListFileSystemsRequest,
   ListFileSystemsResponse,
   UpdateFileSystemRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

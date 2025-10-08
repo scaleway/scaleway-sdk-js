@@ -13,7 +13,7 @@ import {
 import {
   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_TEM,
   EMAIL_TRANSIENT_STATUSES as EMAIL_TRANSIENT_STATUSES_TEM,
-} from './content.gen.js'
+} from './content.gen'
 import {
   marshalBulkCreateBlocklistsRequest,
   marshalCreateDomainRequest,
@@ -41,7 +41,7 @@ import {
   unmarshalProjectSettings,
   unmarshalStatistics,
   unmarshalWebhook,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   BulkCreateBlocklistsRequest,
   BulkCreateBlocklistsResponse,
@@ -89,7 +89,7 @@ import type {
   UpdateProjectSettingsRequest,
   UpdateWebhookRequest,
   Webhook,
-} from './types.gen.js'
+} from './types.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

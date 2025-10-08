@@ -26,7 +26,7 @@ import type {
   SecretVersion,
   UpdateSecretRequest,
   UpdateSecretVersionRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 const unmarshalEphemeralProperties = (data: unknown): EphemeralProperties => {
   if (!isJSONObject(data)) {

@@ -3,4 +3,4 @@
  * PLEASE DO NOT EDIT HERE
  */
 
-export * as Accountv3 from './v3/index.gen.js'
+export * as Accountv3 from './v3/index.gen'

@@ -13,7 +13,7 @@ import {
 import {
   CERTIFICATE_TRANSIENT_STATUSES as CERTIFICATE_TRANSIENT_STATUSES_LB,
   LB_TRANSIENT_STATUSES as LB_TRANSIENT_STATUSES_LB,
-} from './content.gen.js'
+} from './content.gen'
 import {
   marshalAddBackendServersRequest,
   marshalAttachPrivateNetworkRequest,
@@ -86,7 +86,7 @@ import {
   unmarshalRoute,
   unmarshalSetAclsResponse,
   unmarshalSubscriber,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   Acl,
   AddBackendServersRequest,
@@ -218,7 +218,7 @@ import type {
   ZonedApiUpdateLbRequest,
   ZonedApiUpdateRouteRequest,
   ZonedApiUpdateSubscriberRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

@@ -54,7 +54,7 @@ import type {
   UpdateRouteRequestDatabaseConfig,
   UpdateRouteRequestRestConfig,
   UpdateRouteRequestS3Config,
-} from './types.gen.js'
+} from './types.gen'
 
 const unmarshalDeviceMessageFiltersRule = (
   data: unknown,

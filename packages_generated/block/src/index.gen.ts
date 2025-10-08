@@ -3,5 +3,5 @@
  * PLEASE DO NOT EDIT HERE
  */
 
-export * as Blockv1 from './v1/index.gen.js'
-export * as Blockv1alpha1 from './v1alpha1/index.gen.js'
+export * as Blockv1 from './v1/index.gen'
+export * as Blockv1alpha1 from './v1alpha1/index.gen'

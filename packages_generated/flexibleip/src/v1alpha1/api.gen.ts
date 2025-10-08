@@ -1,5 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
 import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
@@ -9,7 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { FLEXIBLE_IP_TRANSIENT_STATUSES as FLEXIBLE_IP_TRANSIENT_STATUSES_FLEXIBLEIP } from './content.gen.js'
+import { FLEXIBLE_IP_TRANSIENT_STATUSES as FLEXIBLE_IP_TRANSIENT_STATUSES_FLEXIBLEIP } from './content.gen'
 import {
   marshalAttachFlexibleIPRequest,
   marshalCreateFlexibleIPRequest,
@@ -22,7 +23,7 @@ import {
   unmarshalDetachFlexibleIPsResponse,
   unmarshalFlexibleIP,
   unmarshalListFlexibleIPsResponse,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   AttachFlexibleIPRequest,
   AttachFlexibleIPsResponse,
@@ -39,7 +40,7 @@ import type {
   ListFlexibleIPsResponse,
   MoveMACAddrRequest,
   UpdateFlexibleIPRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

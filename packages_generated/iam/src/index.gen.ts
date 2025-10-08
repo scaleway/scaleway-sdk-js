@@ -3,4 +3,4 @@
  * PLEASE DO NOT EDIT HERE
  */
 
-export * as Iamv1alpha1 from './v1alpha1/index.gen.js'
+export * as Iamv1alpha1 from './v1alpha1/index.gen'

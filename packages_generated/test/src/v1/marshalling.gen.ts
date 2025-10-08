@@ -15,7 +15,7 @@ import type {
   RegisterRequest,
   RegisterResponse,
   UpdateHumanRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 export const unmarshalHuman = (data: unknown): Human => {
   if (!isJSONObject(data)) {

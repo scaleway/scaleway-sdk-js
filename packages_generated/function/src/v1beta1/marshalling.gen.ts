@@ -44,7 +44,7 @@ import type {
   UpdateTriggerRequest,
   UpdateTriggerRequestSqsClientConfig,
   UploadURL,
-} from './types.gen.js'
+} from './types.gen'
 
 export const unmarshalCron = (data: unknown): Cron => {
   if (!isJSONObject(data)) {

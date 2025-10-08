@@ -12,7 +12,7 @@ import {
 import {
   PIPELINE_TRANSIENT_STATUSES as PIPELINE_TRANSIENT_STATUSES_EDGE_SERVICES,
   PURGE_REQUEST_TRANSIENT_STATUSES as PURGE_REQUEST_TRANSIENT_STATUSES_EDGE_SERVICES,
-} from './content.gen.js'
+} from './content.gen'
 import {
   marshalAddRouteRulesRequest,
   marshalCheckDomainRequest,
@@ -64,7 +64,7 @@ import {
   unmarshalSetRouteRulesResponse,
   unmarshalTLSStage,
   unmarshalWafStage,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   AddRouteRulesRequest,
   AddRouteRulesResponse,
@@ -148,7 +148,7 @@ import type {
   UpdateTLSStageRequest,
   UpdateWafStageRequest,
   WafStage,
-} from './types.gen.js'
+} from './types.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

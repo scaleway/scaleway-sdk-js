@@ -31,7 +31,7 @@ import type {
   QualificationOtherUseCase,
   QualificationSetScalewayEnvironment,
   QualificationShareData,
-} from './types.gen.js'
+} from './types.gen'
 
 const unmarshalContract = (data: unknown): Contract => {
   if (!isJSONObject(data)) {

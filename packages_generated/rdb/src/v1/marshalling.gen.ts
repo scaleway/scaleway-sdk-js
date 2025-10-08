@@ -93,7 +93,7 @@ import type {
   UpgradeInstanceRequestMajorUpgradeWorkflow,
   User,
   Volume,
-} from './types.gen.js'
+} from './types.gen'
 
 const unmarshalEndpointDirectAccessDetails = (
   data: unknown,

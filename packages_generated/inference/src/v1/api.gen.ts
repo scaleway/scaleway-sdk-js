@@ -13,7 +13,7 @@ import {
 import {
   DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_INFERENCE,
   MODEL_TRANSIENT_STATUSES as MODEL_TRANSIENT_STATUSES_INFERENCE,
-} from './content.gen.js'
+} from './content.gen'
 import {
   marshalCreateDeploymentRequest,
   marshalCreateEndpointRequest,
@@ -26,7 +26,7 @@ import {
   unmarshalListModelsResponse,
   unmarshalListNodeTypesResponse,
   unmarshalModel,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   CreateDeploymentRequest,
   CreateEndpointRequest,
@@ -48,7 +48,7 @@ import type {
   Model,
   UpdateDeploymentRequest,
   UpdateEndpointRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

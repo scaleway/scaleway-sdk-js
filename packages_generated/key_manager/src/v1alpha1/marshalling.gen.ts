@@ -29,7 +29,7 @@ import type {
   UpdateKeyRequest,
   VerifyRequest,
   VerifyResponse,
-} from './types.gen.js'
+} from './types.gen'
 
 const unmarshalKeyRotationPolicy = (data: unknown): KeyRotationPolicy => {
   if (!isJSONObject(data)) {

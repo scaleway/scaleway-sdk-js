@@ -3,4 +3,4 @@
  * PLEASE DO NOT EDIT HERE
  */
 
-export * as Domainv2beta1 from './v2beta1/index.gen.js'
+export * as Domainv2beta1 from './v2beta1/index.gen'

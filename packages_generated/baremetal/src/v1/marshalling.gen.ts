@@ -65,7 +65,7 @@ import type {
   UpdateServerRequest,
   UpdateSettingRequest,
   ValidatePartitioningSchemaRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 const unmarshalSchemaPartition = (data: unknown): SchemaPartition => {
   if (!isJSONObject(data)) {

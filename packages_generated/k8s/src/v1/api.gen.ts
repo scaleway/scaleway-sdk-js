@@ -14,7 +14,7 @@ import {
   CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_K8S,
   NODE_TRANSIENT_STATUSES as NODE_TRANSIENT_STATUSES_K8S,
   POOL_TRANSIENT_STATUSES as POOL_TRANSIENT_STATUSES_K8S,
-} from './content.gen.js'
+} from './content.gen'
 import {
   marshalAddClusterACLRulesRequest,
   marshalCreateClusterRequest,
@@ -43,7 +43,7 @@ import {
   unmarshalPool,
   unmarshalSetClusterACLRulesResponse,
   unmarshalVersion,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   AddClusterACLRulesRequest,
   AddClusterACLRulesResponse,
@@ -95,7 +95,7 @@ import type {
   UpgradeClusterRequest,
   UpgradePoolRequest,
   Version,
-} from './types.gen.js'
+} from './types.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

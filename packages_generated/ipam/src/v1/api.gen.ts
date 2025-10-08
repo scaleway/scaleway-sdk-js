@@ -19,7 +19,7 @@ import {
   marshalUpdateIPRequest,
   unmarshalIP,
   unmarshalListIPsResponse,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   AttachIPRequest,
   BookIPRequest,
@@ -32,7 +32,7 @@ import type {
   ReleaseIPRequest,
   ReleaseIPSetRequest,
   UpdateIPRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

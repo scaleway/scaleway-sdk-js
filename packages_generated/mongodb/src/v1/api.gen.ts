@@ -13,7 +13,7 @@ import {
 import {
   INSTANCE_TRANSIENT_STATUSES as INSTANCE_TRANSIENT_STATUSES_MONGODB,
   SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_MONGODB,
-} from './content.gen.js'
+} from './content.gen'
 import {
   marshalCreateEndpointRequest,
   marshalCreateInstanceRequest,
@@ -35,7 +35,7 @@ import {
   unmarshalListVersionsResponse,
   unmarshalSnapshot,
   unmarshalUser,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   CreateEndpointRequest,
   CreateInstanceRequest,
@@ -70,7 +70,7 @@ import type {
   UpdateUserRequest,
   UpgradeInstanceRequest,
   User,
-} from './types.gen.js'
+} from './types.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

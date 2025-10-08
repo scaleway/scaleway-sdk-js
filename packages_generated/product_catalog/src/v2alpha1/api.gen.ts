@@ -8,11 +8,11 @@ import {
   resolveOneOf,
   urlParams,
 } from '@scaleway/sdk-client'
-import { unmarshalListPublicCatalogProductsResponse } from './marshalling.gen.js'
+import { unmarshalListPublicCatalogProductsResponse } from './marshalling.gen'
 import type {
   ListPublicCatalogProductsResponse,
   PublicCatalogApiListPublicCatalogProductsRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 /**
  * Product Catalog API.

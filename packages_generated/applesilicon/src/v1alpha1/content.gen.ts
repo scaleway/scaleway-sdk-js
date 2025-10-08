@@ -4,7 +4,7 @@ import type {
   ServerPrivateNetworkServerStatus,
   ServerPrivateNetworkStatus,
   ServerStatus,
-} from './types.gen.js'
+} from './types.gen'
 
 /** Lists transient statutes of the enum {@link ServerPrivateNetworkServerStatus}. */
 export const SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES: ServerPrivateNetworkServerStatus[] =

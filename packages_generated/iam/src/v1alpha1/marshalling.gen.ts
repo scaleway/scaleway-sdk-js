@@ -78,7 +78,7 @@ import type {
   User,
   ValidateUserMFAOTPRequest,
   ValidateUserMFAOTPResponse,
-} from './types.gen.js'
+} from './types.gen'
 
 export const unmarshalJWT = (data: unknown): JWT => {
   if (!isJSONObject(data)) {

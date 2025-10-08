@@ -39,7 +39,7 @@ import type {
   StartConnectivityDiagnosticRequest,
   StartConnectivityDiagnosticResponse,
   UpdateServerRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 const unmarshalOSSupportedServerType = (
   data: unknown,

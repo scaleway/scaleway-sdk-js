@@ -15,7 +15,7 @@ import type {
   ListDatabasesResponse,
   RestoreDatabaseFromBackupRequest,
   UpdateDatabaseRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 export const unmarshalDatabaseBackup = (data: unknown): DatabaseBackup => {
   if (!isJSONObject(data)) {

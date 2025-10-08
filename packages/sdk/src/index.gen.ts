@@ -26,7 +26,7 @@ import { Interlinkv1beta1 } from '@scaleway/sdk-interlink'
 import { Iotv1 } from '@scaleway/sdk-iot'
 import { Ipamv1 } from '@scaleway/sdk-ipam'
 import { Jobsv1alpha1 } from '@scaleway/sdk-jobs'
-import { K8Sv1 } from '@scaleway/sdk-k8s'
+import { K8sv1 } from '@scaleway/sdk-k8s'
 import { KeyManagerv1alpha1 } from '@scaleway/sdk-key-manager'
 import { Lbv1 } from '@scaleway/sdk-lb'
 import { Marketplacev2 } from '@scaleway/sdk-marketplace'
@@ -37,7 +37,7 @@ import { Qaasv1alpha1 } from '@scaleway/sdk-qaas'
 import { Rdbv1 } from '@scaleway/sdk-rdb'
 import { Redisv1 } from '@scaleway/sdk-redis'
 import { Registryv1 } from '@scaleway/sdk-registry'
-import { S2SVpnv1alpha1 } from '@scaleway/sdk-s2s-vpn'
+import { S2sVpnv1alpha1 } from '@scaleway/sdk-s2s-vpn'
 import { Secretv1beta1 } from '@scaleway/sdk-secret'
 import { ServerlessSqldbv1alpha1 } from '@scaleway/sdk-serverless-sqldb'
 import { Temv1alpha1 } from '@scaleway/sdk-tem'
@@ -245,9 +245,9 @@ export const Jobs = {
 /**
  * @deprecated Direct version exports are deprecated. Use the 'K8s' namespace instead (e.g., K8s.v1).
  */
-export { K8Sv1 }
+export { K8sv1 }
 export const K8s = {
-  v1: K8Sv1,
+  v1: K8sv1,
 }
 
 /**
@@ -334,9 +334,9 @@ export const Registry = {
 /**
  * @deprecated Direct version exports are deprecated. Use the 'S2sVpn' namespace instead (e.g., S2sVpn.v1).
  */
-export { S2SVpnv1alpha1 }
+export { S2sVpnv1alpha1 }
 export const S2sVpn = {
-  v1alpha1: S2SVpnv1alpha1,
+  v1alpha1: S2sVpnv1alpha1,
 }
 
 /**

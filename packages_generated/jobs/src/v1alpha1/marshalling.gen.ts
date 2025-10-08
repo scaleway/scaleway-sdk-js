@@ -31,7 +31,7 @@ import type {
   UpdateJobDefinitionRequest,
   UpdateJobDefinitionRequestCronScheduleConfig,
   UpdateJobDefinitionSecretRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 const unmarshalSecretEnvVar = (data: unknown): SecretEnvVar => {
   if (!isJSONObject(data)) {

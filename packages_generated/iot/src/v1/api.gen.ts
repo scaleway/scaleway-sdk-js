@@ -10,7 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { HUB_TRANSIENT_STATUSES as HUB_TRANSIENT_STATUSES_IOT } from './content.gen.js'
+import { HUB_TRANSIENT_STATUSES as HUB_TRANSIENT_STATUSES_IOT } from './content.gen'
 import {
   marshalCreateDeviceRequest,
   marshalCreateHubRequest,
@@ -41,7 +41,7 @@ import {
   unmarshalRoute,
   unmarshalSetDeviceCertificateResponse,
   unmarshalTwinDocument,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   CreateDeviceRequest,
   CreateDeviceResponse,
@@ -97,7 +97,7 @@ import type {
   UpdateDeviceRequest,
   UpdateHubRequest,
   UpdateRouteRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

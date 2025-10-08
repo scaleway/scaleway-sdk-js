@@ -14,7 +14,7 @@ import {
   unmarshalListDiscountsResponse,
   unmarshalListInvoicesResponse,
   unmarshalListTaxesResponse,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   Discount,
   DownloadInvoiceRequest,
@@ -30,7 +30,7 @@ import type {
   ListTaxesRequest,
   ListTaxesResponse,
   RedeemCouponRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 /**
  * Billing API.

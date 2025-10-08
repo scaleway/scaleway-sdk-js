@@ -44,7 +44,7 @@ import type {
   UserRole,
   Version,
   Volume,
-} from './types.gen.js'
+} from './types.gen'
 
 const unmarshalEndpointPrivateNetworkDetails = (
   data: unknown,

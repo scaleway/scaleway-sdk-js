@@ -102,7 +102,7 @@ import type {
   ZonedApiUpdateLbRequest,
   ZonedApiUpdateRouteRequest,
   ZonedApiUpdateSubscriberRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 export const unmarshalIp = (data: unknown): Ip => {
   if (!isJSONObject(data)) {

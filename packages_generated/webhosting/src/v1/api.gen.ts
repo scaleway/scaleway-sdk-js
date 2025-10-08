@@ -14,7 +14,7 @@ import {
   BACKUP_TRANSIENT_STATUSES as BACKUP_TRANSIENT_STATUSES_WEBHOSTING,
   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_WEBHOSTING,
   HOSTING_TRANSIENT_STATUSES as HOSTING_TRANSIENT_STATUSES_WEBHOSTING,
-} from './content.gen.js'
+} from './content.gen'
 import {
   marshalBackupApiRestoreBackupItemsRequest,
   marshalDatabaseApiAssignDatabaseUserRequest,
@@ -62,7 +62,7 @@ import {
   unmarshalRestoreBackupResponse,
   unmarshalSearchDomainsResponse,
   unmarshalSession,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   Backup,
   BackupApiGetBackupRequest,
@@ -136,7 +136,7 @@ import type {
   SearchDomainsResponse,
   Session,
   WebsiteApiListWebsitesRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

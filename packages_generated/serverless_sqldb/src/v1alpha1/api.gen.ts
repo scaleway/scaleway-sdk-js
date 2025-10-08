@@ -10,7 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { DATABASE_TRANSIENT_STATUSES as DATABASE_TRANSIENT_STATUSES_SERVERLESS_SQLDB } from './content.gen.js'
+import { DATABASE_TRANSIENT_STATUSES as DATABASE_TRANSIENT_STATUSES_SERVERLESS_SQLDB } from './content.gen'
 import {
   marshalCreateDatabaseRequest,
   marshalRestoreDatabaseFromBackupRequest,
@@ -19,7 +19,7 @@ import {
   unmarshalDatabaseBackup,
   unmarshalListDatabaseBackupsResponse,
   unmarshalListDatabasesResponse,
-} from './marshalling.gen.js'
+} from './marshalling.gen'
 import type {
   CreateDatabaseRequest,
   Database,
@@ -34,7 +34,7 @@ import type {
   ListDatabasesResponse,
   RestoreDatabaseFromBackupRequest,
   UpdateDatabaseRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

@@ -18,7 +18,7 @@ import type {
   Tag,
   UpdateImageRequest,
   UpdateNamespaceRequest,
-} from './types.gen.js'
+} from './types.gen'
 
 export const unmarshalImage = (data: unknown): Image => {
   if (!isJSONObject(data)) {
