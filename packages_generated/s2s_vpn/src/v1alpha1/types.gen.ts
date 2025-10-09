@@ -93,6 +93,7 @@ export type VpnGatewayStatus =
 export interface BgpSession {
   routingPolicyId: string
   privateIp: string
+  peerPrivateIp: string
 }
 
 export interface ConnectionCipher {
@@ -110,6 +111,8 @@ export interface VpnGatewayPublicConfig {
 
 export interface CreateConnectionRequestBgpConfig {
   routingPolicyId: string
+  privateIp?: string
+  peerPrivateIp?: string
 }
 
 export interface Connection {
