@@ -1784,6 +1784,22 @@ export interface Organization {
    * Alias of the Organization.
    */
   alias: string
+  /**
+   * Defines whether login with a password is enabled for the Organization.
+   */
+  loginPasswordEnabled: boolean
+  /**
+   * Defines whether login with an authentication code is enabled for the Organization.
+   */
+  loginMagicCodeEnabled: boolean
+  /**
+   * Defines whether login through OAuth2 is enabled for the Organization.
+   */
+  loginOauth2Enabled: boolean
+  /**
+   * Defines whether login through SAML is enabled for the Organization.
+   */
+  loginSamlEnabled: boolean
 }
 
 export interface OrganizationSecuritySettings {
@@ -1951,6 +1967,29 @@ export type UpdateGroupRequest = {
    * New tags for the group (maximum of 10 tags).
    */
   tags?: string[]
+}
+
+export type UpdateOrganizationLoginMethodsRequest = {
+  /**
+   * ID of the Organization.
+   */
+  organizationId?: string
+  /**
+   * Defines whether login with a password is enabled for the Organization.
+   */
+  loginPasswordEnabled?: boolean
+  /**
+   * Defines whether login through OAuth2 is enabled for the Organization.
+   */
+  loginOauth2Enabled?: boolean
+  /**
+   * Defines whether login with an authentication code is enabled for the Organization.
+   */
+  loginMagicCodeEnabled?: boolean
+  /**
+   * Defines whether login through SAML is enabled for the Organization.
+   */
+  loginSamlEnabled?: boolean
 }
 
 export type UpdateOrganizationSecuritySettingsRequest = {
