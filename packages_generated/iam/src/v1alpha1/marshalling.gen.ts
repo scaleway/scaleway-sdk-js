@@ -78,7 +78,7 @@ import type {
   User,
   ValidateUserMFAOTPRequest,
   ValidateUserMFAOTPResponse,
-} from './types.gen'
+} from './types.gen.js'
 
 export const unmarshalJWT = (data: unknown): JWT => {
   if (!isJSONObject(data)) {
@@ -677,6 +677,10 @@ export const unmarshalOrganization = (data: unknown): Organization => {
   return {
     alias: data.alias,
     id: data.id,
+    loginMagicCodeEnabled: data.login_magic_code_enabled,
+    loginOauth2Enabled: data.login_oauth2_enabled,
+    loginPasswordEnabled: data.login_password_enabled,
+    loginSamlEnabled: data.login_saml_enabled,
     name: data.name,
   } as Organization
 }
