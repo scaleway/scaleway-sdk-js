@@ -21,6 +21,8 @@ export type {
   EventPrincipal,
   ExportJob,
   ExportJobS3,
+  ExportJobStatus,
+  ExportJobStatusCode,
   InstanceServerInfo,
   IpamIpInfo,
   KeyManagerKeyInfo,
