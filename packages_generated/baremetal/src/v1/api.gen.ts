@@ -10,7 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_BAREMETAL } from './content.gen'
+import { SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_BAREMETAL } from './content.gen.js'
 import {
   marshalAddOptionServerRequest,
   marshalCreateServerRequest,
@@ -42,7 +42,7 @@ import {
   unmarshalServerPrivateNetwork,
   unmarshalSetServerPrivateNetworksResponse,
   unmarshalSetting,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   AddOptionServerRequest,
   BMCAccess,
@@ -94,7 +94,7 @@ import type {
   UpdateServerRequest,
   UpdateSettingRequest,
   ValidatePartitioningSchemaRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

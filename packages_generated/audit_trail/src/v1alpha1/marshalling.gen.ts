@@ -21,6 +21,7 @@ import type {
   EventPrincipal,
   ExportJob,
   ExportJobS3,
+  ExportJobStatus,
   InstanceServerInfo,
   IpamIpInfo,
   KeyManagerKeyInfo,
@@ -64,6 +65,19 @@ const unmarshalExportJobS3 = (data: unknown): ExportJobS3 => {
   } as ExportJobS3
 }
 
+const unmarshalExportJobStatus = (data: unknown): ExportJobStatus => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ExportJobStatus' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    code: data.code,
+    message: data.message,
+  } as ExportJobStatus
+}
+
 export const unmarshalExportJob = (data: unknown): ExportJob => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -75,6 +89,9 @@ export const unmarshalExportJob = (data: unknown): ExportJob => {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     lastRunAt: unmarshalDate(data.last_run_at),
+    lastStatus: data.last_status
+      ? unmarshalExportJobStatus(data.last_status)
+      : undefined,
     name: data.name,
     organizationId: data.organization_id,
     s3: data.s3 ? unmarshalExportJobS3(data.s3) : undefined,
