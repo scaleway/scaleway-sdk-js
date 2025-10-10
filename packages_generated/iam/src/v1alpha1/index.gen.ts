@@ -124,6 +124,7 @@ export type {
   UpdateAPIKeyRequest,
   UpdateApplicationRequest,
   UpdateGroupRequest,
+  UpdateOrganizationLoginMethodsRequest,
   UpdateOrganizationSecuritySettingsRequest,
   UpdatePolicyRequest,
   UpdateSamlRequest,
