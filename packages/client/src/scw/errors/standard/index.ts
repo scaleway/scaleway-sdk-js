@@ -1,0 +1,20 @@
+export { ScalewayError } from '../scw-error.js'
+export { AlreadyExistsError } from './already-exists-error.js'
+export { DeniedAuthenticationError } from './denied-authentication-error.js'
+export type { InvalidArgumentsErrorDetails } from './invalid-arguments-error.js'
+export { InvalidArgumentsError } from './invalid-arguments-error.js'
+export { OutOfStockError } from './out-of-stock-error.js'
+export type { PermissionsDeniedErrorDetails } from './permissions-denied-error.js'
+export { PermissionsDeniedError } from './permissions-denied-error.js'
+export { PreconditionFailedError } from './precondition-failed-error.js'
+export type {
+  QuotasExceededErrorDetails,
+  QuotasExceededErrorScope,
+} from './quotas-exceeded-error.js'
+export { QuotasExceededError } from './quotas-exceeded-error.js'
+export { ResourceExpiredError } from './resource-expired-error.js'
+export { ResourceLockedError } from './resource-locked-error.js'
+export { ResourceNotFoundError } from './resource-not-found-error.js'
+export type { TooManyRequestsQuotaPolicy } from './too-many-requests-error.js'
+export { TooManyRequestsError } from './too-many-requests-error.js'
+export { TransientStateError } from './transient-state-error.js'

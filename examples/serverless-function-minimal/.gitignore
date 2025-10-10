@@ -1,0 +1,11 @@
+# dependencies
+node_modules/
+yarn.lock
+pnpm-lock.yaml
+
+# misc
+.DS_Store
+
+# serverless
+.serverless
+.env

@@ -1,0 +1,28 @@
+service: sdk-js-example
+configValidationMode: off
+useDotenv: true
+provider:
+  name: scaleway
+  runtime: node20
+  env:
+    SCW_ACCESS_KEY: ${env:SCW_ACCESS_KEY}
+    SCW_SECRET_KEY: ${env:SCW_SECRET_KEY}
+    SCW_DEFAULT_PROJECT_ID: ${env:SCW_DEFAULT_PROJECT_ID}
+    SCW_DEFAULT_REGION: ${env:SCW_DEFAULT_REGION}
+    SCW_DEFAULT_ZONE: ${env:SCW_DEFAULT_ZONE}
+
+plugins:
+  - serverless-scaleway-functions
+
+package:
+  patterns:
+    - '!./src/**'
+    - '!.gitignore'
+    - '!.git/**'
+    - '!README.md'
+
+functions:
+  list-namespaces:
+    handler: dist/index.list
+    privacy: public
+    memoryLimit: 128

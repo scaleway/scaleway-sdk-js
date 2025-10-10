@@ -1,0 +1,35 @@
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence,
+* @remyleone
+
+/packages/clients/src/api/account/ @scaleway/devtools-core
+/packages/clients/src/api/applesilicon/ @scaleway/devtools-compute-foundation
+/packages/clients/src/api/baremetal/ @scaleway/devtools-compute-foundation
+/packages/clients/src/api/billing/ @scaleway/devtools-core
+/packages/clients/src/api/block/ @scaleway/devtools-storage
+/packages/clients/src/api/cockpit/ @scaleway/devtools-dms
+/packages/clients/src/api/container/ @scaleway/devtools-compute
+/packages/clients/src/api/dedibox/ @scaleway/devtools-compute-foundation
+/packages/clients/src/api/domain/ @scaleway/devtools-dms
+/packages/clients/src/api/flexibleip/ @scaleway/devtools-network
+/packages/clients/src/api/function/ @scaleway/devtools-compute
+/packages/clients/src/api/iam/ @scaleway/devtools-core
+/packages/clients/src/api/instance/ @scaleway/devtools-compute
+/packages/clients/src/api/inference/ @scaleway/devtools-ai
+/packages/clients/src/api/iot/ @scaleway/devtools-dms
+/packages/clients/src/api/ipam/ @scaleway/devtools-network
+/packages/clients/src/api/jobs/ @scaleway/devtools-compute
+/packages/clients/src/api/k8s/ @scaleway/devtools-compute
+/packages/clients/src/api/key_manager/ @scaleway/devtools-core
+/packages/clients/src/api/lb/ @scaleway/devtools-network
+/packages/clients/src/api/marketplace/ @scaleway/devtools-compute
+/packages/clients/src/api/mnq/ @scaleway/devtools-dms
+/packages/clients/src/api/rdb/ @scaleway/devtools-dms
+/packages/clients/src/api/redis/ @scaleway/devtools-dms
+/packages/clients/src/api/registry/ @scaleway/devtools-compute
+/packages/clients/src/api/secret/ @scaleway/devtools-core
+/packages/clients/src/api/serverless_sqldb/ @scaleway/devtools-dms
+/packages/clients/src/api/tem/ @scaleway/devtools-dms
+/packages/clients/src/api/vpc/ @scaleway/devtools-network
+/packages/clients/src/api/vpcgw/ @scaleway/devtools-network
+/packages/clients/src/api/webhosting/ @scaleway/devtools-dms

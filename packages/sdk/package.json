@@ -1,0 +1,86 @@
+{
+  "name": "@scaleway/sdk",
+  "version": "2.76.8",
+  "description": "Scaleway SDK TS.",
+  "license": "Apache-2.0",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.gen.d.ts",
+      "import": "./dist/index.gen.js",
+      "require": "./dist/index.gen.cjs",
+      "default": "./dist/index.gen.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scaleway/scaleway-sdk-js.git",
+    "directory": "packages/sdk"
+  },
+  "engines": {
+    "node": ">=20.19.4"
+  },
+  "scripts": {
+    "package:check": "pnpm publint",
+    "typecheck": "tsc --noEmit",
+    "type:generate": "tsc --declaration -p tsconfig.build.json",
+    "build": "vite build --config vite.config.ts && pnpm run type:generate",
+    "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
+  },
+  "dependencies": {
+    "@scaleway/sdk-client": "workspace:^",
+    "@scaleway/sdk-account": "workspace:*",
+    "@scaleway/sdk-applesilicon": "workspace:*",
+    "@scaleway/sdk-audit-trail": "workspace:*",
+    "@scaleway/sdk-autoscaling": "workspace:*",
+    "@scaleway/sdk-baremetal": "workspace:*",
+    "@scaleway/sdk-billing": "workspace:*",
+    "@scaleway/sdk-block": "workspace:*",
+    "@scaleway/sdk-cockpit": "workspace:*",
+    "@scaleway/sdk-container": "workspace:*",
+    "@scaleway/sdk-datawarehouse": "workspace:*",
+    "@scaleway/sdk-dedibox": "workspace:*",
+    "@scaleway/sdk-domain": "workspace:*",
+    "@scaleway/sdk-edge-services": "workspace:*",
+    "@scaleway/sdk-environmental-footprint": "workspace:*",
+    "@scaleway/sdk-file": "workspace:*",
+    "@scaleway/sdk-flexibleip": "workspace:*",
+    "@scaleway/sdk-function": "workspace:*",
+    "@scaleway/sdk-iam": "workspace:*",
+    "@scaleway/sdk-inference": "workspace:*",
+    "@scaleway/sdk-instance": "workspace:*",
+    "@scaleway/sdk-interlink": "workspace:*",
+    "@scaleway/sdk-iot": "workspace:*",
+    "@scaleway/sdk-ipam": "workspace:*",
+    "@scaleway/sdk-jobs": "workspace:*",
+    "@scaleway/sdk-k8s": "workspace:*",
+    "@scaleway/sdk-key-manager": "workspace:*",
+    "@scaleway/sdk-lb": "workspace:*",
+    "@scaleway/sdk-marketplace": "workspace:*",
+    "@scaleway/sdk-mnq": "workspace:*",
+    "@scaleway/sdk-mongodb": "workspace:*",
+    "@scaleway/sdk-product-catalog": "workspace:*",
+    "@scaleway/sdk-qaas": "workspace:*",
+    "@scaleway/sdk-rdb": "workspace:*",
+    "@scaleway/sdk-redis": "workspace:*",
+    "@scaleway/sdk-registry": "workspace:*",
+    "@scaleway/sdk-secret": "workspace:*",
+    "@scaleway/sdk-serverless-sqldb": "workspace:*",
+    "@scaleway/sdk-s2s-vpn": "workspace:*",
+    "@scaleway/sdk-std": "workspace:*",
+    "@scaleway/sdk-tem": "workspace:*",
+    "@scaleway/sdk-test": "workspace:*",
+    "@scaleway/sdk-vpc": "workspace:*",
+    "@scaleway/sdk-vpcgw": "workspace:*",
+    "@scaleway/sdk-webhosting": "workspace:*"
+  },
+  "devDependencies": {
+    "@scaleway/sdk-client": "workspace:^"
+  },
+  "peerDependencies": {
+    "@scaleway/sdk-client": "workspace:^"
+  }
+}

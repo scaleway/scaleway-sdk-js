@@ -1,0 +1,47 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["tsconfig.json"],
+  "ui": "stream",
+  "globalEnv": [
+    "BASE_URL",
+    "CI",
+    "IS_CI",
+    "DEVTOOLS",
+    "ENVIRONMENT",
+    "TIMING",
+    "ESLINT_CODE_QUALITY_REPORT",
+    "HUSKY",
+    "NODE_ENV",
+    "PROFILE",
+    "PROXY",
+    "RELEASE_NAME",
+    "SENTRY_LOG_LEVEL",
+    "VERSION"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputLogs": "new-only",
+      "outputs": [
+        "build/**",
+        "dist/**",
+        ".next/**",
+        "!.next/cache/**",
+        "out/**"
+      ],
+      "cache": true
+    },
+
+    "lint": {
+      "dependsOn": ["build"],
+      "outputLogs": "new-only",
+      "outputs": [".eslintcache", "**/.eslintcache"],
+      "cache": true
+    },
+    "typecheck": {
+      "dependsOn": ["build"],
+      "outputLogs": "new-only",
+      "cache": true
+    }
+  }
+}

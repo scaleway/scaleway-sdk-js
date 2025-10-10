@@ -1,0 +1,52 @@
+name: Deploy to NPM
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 12 * * MON'
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: '0'
+          persist-credentials: false
+          token: ${{ secrets.GH_TOKEN }}
+      - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+      - name: Git Identity
+        run: |
+          git config --global user.name 'scaleway-bot'
+          git config --global user.email 'github@scaleway.com'
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/$GITHUB_REPOSITORY
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      - uses: pnpm/action-setup@v4.1.0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4.4.0
+        with:
+          registry-url: 'https://registry.npmjs.org/'
+          node-version: 20
+          check-latest: true
+      - run: pnpm install
+      - run: pnpm run build
+
+      - name: Version package with lerna
+        run: pnpm lerna version -y --no-private --force-git-tag --create-release github
+        env:
+          HUSKY: 0
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      # https://docs.github.com/en/actions/use-cases-and-examples/publishing-packages/publishing-nodejs-packages#publishing-packages-to-the-npm-registry
+      - name: Publish to npm
+        run: pnpm -r publish --access public --tag latest
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,0 +1,10 @@
+import type { JSONObject } from '../../helpers/json.js'
+import type { ScalewayError } from './scw-error.js'
+/**
+ * Interface with static method that initialize {@link ScalewayError} from JSON.
+ *
+ * @internal
+ */
+export interface ScalewayErrorFromJSONInitializer {
+  fromJSON(status: number, obj: Readonly<JSONObject>): ScalewayError | null
+}

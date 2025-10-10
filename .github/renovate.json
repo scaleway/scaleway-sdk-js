@@ -1,0 +1,84 @@
+{
+  "extends": [
+    ":combinePatchMinorReleases",
+    ":separateMultipleMajorReleases",
+    "group:monorepos",
+    "group:recommended",
+    "helpers:disableTypesNodeMajor"
+  ],
+  "updateNotScheduled": true,
+  "lockFileMaintenance": {
+    "enabled": false
+  },
+  "enabledManagers": ["github-actions", "npm"],
+  "prCreation": "not-pending",
+  "prHourlyLimit": 5,
+  "prConcurrentLimit": 10,
+  "automerge": false,
+  "rangeStrategy": "bump",
+  "rebaseWhen": "auto",
+  "dependencyDashboard": true,
+  "packageRules": [
+    {
+      "matchPackageNames": ["@scaleway/sdk", "@scaleway/configuration-loader"],
+      "enabled": false
+    },
+    {
+      "automerge": false,
+      "minimumReleaseAge": null,
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "matchPackageNames": ["/^@scaleway//"]
+    },
+    {
+      "labels": ["UPDATE-MAJOR"],
+      "minimumReleaseAge": "14 days",
+      "matchUpdateTypes": ["major"]
+    },
+    {
+      "labels": ["UPDATE-MINOR"],
+      "minimumReleaseAge": "5 days",
+      "matchUpdateTypes": ["minor"]
+    },
+    {
+      "labels": ["UPDATE-PATCH"],
+      "minimumReleaseAge": "1 day",
+      "matchUpdateTypes": ["patch"]
+    },
+    {
+      "automerge": true,
+      "automergeType": "branch",
+      "semanticCommitScope": "minor-deps",
+      "minimumReleaseAge": "3 days",
+      "matchUpdateTypes": ["minor"],
+      "matchPackageNames": [
+        "/^@babel//",
+        "/^@commitlint//",
+        "/^babel-/",
+        "/cz-conventional-changelog/",
+        "/eslint/",
+        "/husky/",
+        "/jest/",
+        "/lint-staged/"
+      ]
+    },
+    {
+      "automerge": true,
+      "automergeType": "branch",
+      "semanticCommitScope": "patch-deps",
+      "minimumReleaseAge": "1 day",
+      "matchUpdateTypes": ["patch"],
+      "matchPackageNames": [
+        "/^@babel//",
+        "/^@commitlint//",
+        "/^@semantic-release//",
+        "/^@types//",
+        "/^babel-/",
+        "/^eslint/",
+        "/cz-conventional-changelog/",
+        "/husky/",
+        "/jest/",
+        "/lint-staged/"
+      ]
+    }
+  ]
+}

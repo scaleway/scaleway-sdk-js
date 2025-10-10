@@ -1,0 +1,33 @@
+# dependencies
+node_modules/
+yarn.lock
+
+# misc
+.DS_Store
+
+# lint
+.eslintcache
+
+# turbo
+.turbo
+!.turbo/config.json
+packages/*/.turbo
+packages/*/dist
+packages_generated/*/.turbo
+packages_generated/*/.dist
+
+
+# test & build
+.reports
+docs
+public
+dist
+coverage
+
+# Protobuf definition
+protobuf
+.bufcache
+
+
+# lerna
+lerna-debug.log
