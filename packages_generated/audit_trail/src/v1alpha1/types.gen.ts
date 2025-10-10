@@ -24,6 +24,8 @@ export type AuthenticationEventOrigin =
 
 export type AuthenticationEventResult = 'unknown_result' | 'success' | 'failure'
 
+export type ExportJobStatusCode = 'unknown_code' | 'success' | 'failure'
+
 export type ListAuthenticationEventsRequestOrderBy =
   | 'recorded_at_desc'
   | 'recorded_at_asc'
@@ -460,6 +462,11 @@ export interface ExportJobS3 {
   projectId?: string
 }
 
+export interface ExportJobStatus {
+  code: ExportJobStatusCode
+  message?: string
+}
+
 export interface ProductService {
   name: string
   methods: string[]
@@ -493,7 +500,7 @@ export interface ExportJob {
    */
   organizationId: string
   /**
-   * Name of the export.
+   * Name of the export job.
    */
   name: string
   /**
@@ -507,13 +514,17 @@ export interface ExportJob {
    */
   createdAt?: Date
   /**
-   * Last export date.
+   * Last run of export job.
    */
   lastRunAt?: Date
   /**
-   * Tags of the export.
+   * Tags of the export job.
    */
   tags: Record<string, string>
+  /**
+   * Status of last export job.
+   */
+  lastStatus?: ExportJobStatus
 }
 
 export interface Product {
