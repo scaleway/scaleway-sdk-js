@@ -67,7 +67,7 @@ import {
   unmarshalSSHKey,
   unmarshalUser,
   unmarshalValidateUserMFAOTPResponse,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   AddGroupMemberRequest,
   AddGroupMembersRequest,
@@ -161,6 +161,7 @@ import type {
   UpdateAPIKeyRequest,
   UpdateApplicationRequest,
   UpdateGroupRequest,
+  UpdateOrganizationLoginMethodsRequest,
   UpdateOrganizationSecuritySettingsRequest,
   UpdatePolicyRequest,
   UpdateSamlRequest,
@@ -171,7 +172,7 @@ import type {
   User,
   ValidateUserMFAOTPRequest,
   ValidateUserMFAOTPResponse,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
@@ -1404,6 +1405,29 @@ export class API extends ParentAPI {
       method: 'POST',
       path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/migrate-guests`,
     })
+
+  /**
+   * Set your Organization's allowed login methods.. Set your Organization's allowed login methods.
+   *
+   * @param request - The request {@link UpdateOrganizationLoginMethodsRequest}
+   * @returns A Promise of Organization
+   */
+  updateOrganizationLoginMethods = (
+    request: Readonly<UpdateOrganizationLoginMethodsRequest> = {},
+  ) =>
+    this.client.fetch<Organization>(
+      {
+        method: 'PATCH',
+        path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/login-methods`,
+        urlParams: urlParams(
+          ['login_magic_code_enabled', request.loginMagicCodeEnabled],
+          ['login_oauth2_enabled', request.loginOauth2Enabled],
+          ['login_password_enabled', request.loginPasswordEnabled],
+          ['login_saml_enabled', request.loginSamlEnabled],
+        ),
+      },
+      unmarshalOrganization,
+    )
 
   /**
    * Get SAML Identity Provider configuration of an Organization.
