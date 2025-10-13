@@ -18,7 +18,7 @@ import {
   NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_FUNCTION,
   TOKEN_TRANSIENT_STATUSES as TOKEN_TRANSIENT_STATUSES_FUNCTION,
   TRIGGER_TRANSIENT_STATUSES as TRIGGER_TRANSIENT_STATUSES_FUNCTION,
-} from './content.gen'
+} from './content.gen.js'
 import {
   marshalCreateCronRequest,
   marshalCreateDomainRequest,
@@ -45,7 +45,7 @@ import {
   unmarshalToken,
   unmarshalTrigger,
   unmarshalUploadURL,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   CreateCronRequest,
   CreateDomainRequest,
@@ -94,7 +94,7 @@ import type {
   UpdateNamespaceRequest,
   UpdateTriggerRequest,
   UploadURL,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

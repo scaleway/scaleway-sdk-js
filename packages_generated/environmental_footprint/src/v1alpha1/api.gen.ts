@@ -5,14 +5,14 @@ import {
   marshalUserApiDownloadImpactReportRequest,
   unmarshalImpactDataResponse,
   unmarshalImpactReportAvailability,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   ImpactDataResponse,
   ImpactReportAvailability,
   UserApiDownloadImpactReportRequest,
   UserApiGetImpactDataRequest,
   UserApiGetImpactReportAvailabilityRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

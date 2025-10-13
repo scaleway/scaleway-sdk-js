@@ -7,7 +7,7 @@ import type {
   NamespaceStatus,
   TokenStatus,
   TriggerStatus,
-} from './types.gen'
+} from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link CronStatus}. */
 export const CRON_TRANSIENT_STATUSES: CronStatus[] = [

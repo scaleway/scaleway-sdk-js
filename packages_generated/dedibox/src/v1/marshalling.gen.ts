@@ -132,7 +132,7 @@ import type {
   UpdateServerBackupRequest,
   UpdateServerRequest,
   UpdateServerTagsRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 export const unmarshalIP = (data: unknown): IP => {
   if (!isJSONObject(data)) {
@@ -732,6 +732,24 @@ export const unmarshalFailoverIP = (data: unknown): FailoverIP => {
   } as FailoverIP
 }
 
+export const unmarshalIPv6Block = (data: unknown): IPv6Block => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'IPv6Block' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    address: data.address,
+    cidr: data.cidr,
+    delegationStatus: data.delegation_status,
+    duid: data.duid,
+    id: data.id,
+    nameservers: data.nameservers,
+    subnets: unmarshalArrayOfObject(data.subnets, unmarshalIPv6Block),
+  } as IPv6Block
+}
+
 export const unmarshalBMCAccess = (data: unknown): BMCAccess => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -866,24 +884,6 @@ export const unmarshalGetRpnStatusResponse = (
     operationsLeft: data.operations_left,
     status: data.status,
   } as GetRpnStatusResponse
-}
-
-export const unmarshalIPv6Block = (data: unknown): IPv6Block => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'IPv6Block' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    address: data.address,
-    cidr: data.cidr,
-    delegationStatus: data.delegation_status,
-    duid: data.duid,
-    id: data.id,
-    nameservers: data.nameservers,
-    subnets: unmarshalArrayOfObject(data.subnets, unmarshalIPv6Block),
-  } as IPv6Block
 }
 
 export const unmarshalInvoice = (data: unknown): Invoice => {

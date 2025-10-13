@@ -14,7 +14,7 @@ import {
   IMAGE_TRANSIENT_STATUSES as IMAGE_TRANSIENT_STATUSES_REGISTRY,
   NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_REGISTRY,
   TAG_TRANSIENT_STATUSES as TAG_TRANSIENT_STATUSES_REGISTRY,
-} from './content.gen'
+} from './content.gen.js'
 import {
   marshalCreateNamespaceRequest,
   marshalUpdateImageRequest,
@@ -25,7 +25,7 @@ import {
   unmarshalListTagsResponse,
   unmarshalNamespace,
   unmarshalTag,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   CreateNamespaceRequest,
   DeleteImageRequest,
@@ -45,7 +45,7 @@ import type {
   Tag,
   UpdateImageRequest,
   UpdateNamespaceRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

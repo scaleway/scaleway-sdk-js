@@ -33,7 +33,7 @@ import type {
   VolumeInstanceTemplate,
   VolumeInstanceTemplateFromEmpty,
   VolumeInstanceTemplateFromSnapshot,
-} from './types.gen'
+} from './types.gen.js'
 
 const unmarshalCapacity = (data: unknown): Capacity => {
   if (!isJSONObject(data)) {
