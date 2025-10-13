@@ -18,7 +18,7 @@ import {
   NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_CONTAINER,
   TOKEN_TRANSIENT_STATUSES as TOKEN_TRANSIENT_STATUSES_CONTAINER,
   TRIGGER_TRANSIENT_STATUSES as TRIGGER_TRANSIENT_STATUSES_CONTAINER,
-} from './content.gen'
+} from './content.gen.js'
 import {
   marshalCreateContainerRequest,
   marshalCreateCronRequest,
@@ -42,7 +42,7 @@ import {
   unmarshalNamespace,
   unmarshalToken,
   unmarshalTrigger,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   Container,
   CreateContainerRequest,
@@ -85,7 +85,7 @@ import type {
   UpdateCronRequest,
   UpdateNamespaceRequest,
   UpdateTriggerRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

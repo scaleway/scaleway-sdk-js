@@ -15,7 +15,7 @@ import {
   JOB_TRANSIENT_STATUSES as JOB_TRANSIENT_STATUSES_QAAS,
   PROCESS_TRANSIENT_STATUSES as PROCESS_TRANSIENT_STATUSES_QAAS,
   SESSION_TRANSIENT_STATUSES as SESSION_TRANSIENT_STATUSES_QAAS,
-} from './content.gen'
+} from './content.gen.js'
 import {
   marshalCreateJobRequest,
   marshalCreateModelRequest,
@@ -43,7 +43,7 @@ import {
   unmarshalPlatform,
   unmarshalProcess,
   unmarshalSession,
-} from './marshalling.gen'
+} from './marshalling.gen.js'
 import type {
   Application,
   Booking,
@@ -95,7 +95,7 @@ import type {
   UpdateJobRequest,
   UpdateProcessRequest,
   UpdateSessionRequest,
-} from './types.gen'
+} from './types.gen.js'
 
 const jsonContentHeaders = {
   'Content-Type': 'application/json; charset=utf-8',

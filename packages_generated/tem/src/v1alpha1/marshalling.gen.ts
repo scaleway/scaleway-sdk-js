@@ -56,7 +56,7 @@ import type {
   UpdateWebhookRequest,
   Webhook,
   WebhookEvent,
-} from './types.gen'
+} from './types.gen.js'
 
 const unmarshalEmailTry = (data: unknown): EmailTry => {
   if (!isJSONObject(data)) {
