@@ -15,6 +15,7 @@ format-check:
 	pnpm run format:check
 
 format-generated:
+	pnpm install
 	pnpm eslint --config eslint.config.generated.mjs --fix packages_generated/**/*.ts
 	pnpm biome check --linter-enabled=false --write packages_generated/
 
