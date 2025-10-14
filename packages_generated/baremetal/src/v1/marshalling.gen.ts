@@ -382,6 +382,7 @@ export const unmarshalOS = (data: unknown): OS => {
     ssh: data.ssh ? unmarshalOSOSField(data.ssh) : undefined,
     user: data.user ? unmarshalOSOSField(data.user) : undefined,
     version: data.version,
+    zone: data.zone,
   } as OS
 }
 
@@ -543,6 +544,7 @@ export const unmarshalOffer = (data: unknown): Offer => {
     stock: data.stock,
     subscriptionPeriod: data.subscription_period,
     tags: data.tags,
+    zone: data.zone,
   } as Offer
 }
 
