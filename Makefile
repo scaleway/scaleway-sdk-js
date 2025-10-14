@@ -46,6 +46,12 @@ generate-packages:
 generate-global-sdk-package:
 	pnpm run generateGlobalSdkPackage
 
+test-release:
+	@echo "Testing release process (dry-run)..."
+	@echo "Simulating: pnpm lerna publish from-package -y --no-private --dist-tag latest --dry-run"
+	pnpm lerna publish from-package -y --no-private --dist-tag latest --dry-run --loglevel silly
+	@echo "✅ Release dry-run completed successfully"
+
 publish: install-dependencies
 	pnpm run build
 	pnpm lerna changed
