@@ -632,6 +632,10 @@ export interface Version {
    * Date from which any remaining clusters on this version will begin to be forcibly upgraded to the next minor version.
    */
   endOfLifeAt?: Date
+  /**
+   * Date at which this version was made available by Kapsule product.
+   */
+  releasedAt?: Date
 }
 
 export interface Cluster {

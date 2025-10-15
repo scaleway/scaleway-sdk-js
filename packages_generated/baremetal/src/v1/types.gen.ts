@@ -663,6 +663,10 @@ export interface OS {
    * Defines if custom partitioning is supported by this OS.
    */
   customPartitioningSupported: boolean
+  /**
+   * Zone in which is the OS is available.
+   */
+  zone: ScwZone
 }
 
 export interface Offer {
@@ -766,6 +770,10 @@ export interface Offer {
    * Exist only for hourly offers, to migrate to the monthly offer.
    */
   monthlyOfferId?: string
+  /**
+   * Zone in which is the offer is available.
+   */
+  zone: ScwZone
 }
 
 export interface Option {
