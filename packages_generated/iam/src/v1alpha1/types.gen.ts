@@ -114,7 +114,7 @@ export type SamlStatus =
 
 export type UserStatus = 'unknown_status' | 'invitation_pending' | 'activated'
 
-export type UserType = 'unknown_type' | 'guest' | 'owner' | 'member'
+export type UserType = 'unknown_type' | 'owner' | 'member'
 
 export interface ConnectionConnectedOrganization {
   id: string
