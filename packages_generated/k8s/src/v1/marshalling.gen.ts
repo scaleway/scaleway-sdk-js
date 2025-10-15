@@ -127,6 +127,7 @@ export const unmarshalVersion = (data: unknown): Version => {
     label: data.label,
     name: data.name,
     region: data.region,
+    releasedAt: unmarshalDate(data.released_at),
   } as Version
 }
 
