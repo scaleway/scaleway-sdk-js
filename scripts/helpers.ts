@@ -1,10 +1,21 @@
 const upperFirst = (str: string) =>
   str.slice(0, 1).toUpperCase() + str.slice(1, str.length)
 
+// Special handling for known acronyms that should be all uppercase
+const ACRONYMS = new Set(['k8s', 's2s', 'api', 'http', 'https', 'url', 'uri'])
+
+const handleAcronym = (str: string): string => {
+  const lower = str.toLowerCase()
+  if (ACRONYMS.has(lower)) {
+    return str.toUpperCase()
+  }
+  return upperFirst(str)
+}
+
 export const snakeToPascal = (str: string) =>
   str
     .split('_')
-    .map(s => upperFirst(s.split('/').map(upperFirst).join('/')))
+    .map(s => handleAcronym(s.split('/').map(handleAcronym).join('/')))
     .join('')
 
 export const unionTocamelCase = (str: string) =>

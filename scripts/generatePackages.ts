@@ -104,6 +104,8 @@ const exportProductVersions = ({ productDir }: { productDir: string }) => {
       )
     }
   }
+  // Add final newline to match existing files
+  appendFileSync(pathFile, '\n')
 }
 
 /**
