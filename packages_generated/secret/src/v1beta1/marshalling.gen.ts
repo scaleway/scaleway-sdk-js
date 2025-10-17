@@ -58,6 +58,7 @@ export const unmarshalSecretVersion = (data: unknown): SecretVersion => {
       ? unmarshalEphemeralProperties(data.ephemeral_properties)
       : undefined,
     latest: data.latest,
+    region: data.region,
     revision: data.revision,
     secretId: data.secret_id,
     status: data.status,
