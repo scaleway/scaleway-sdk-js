@@ -142,6 +142,10 @@ export interface SecretVersion {
    * Returns the time at which deletion was requested.
    */
   deletionRequestedAt?: Date
+  /**
+   * Region of the version.
+   */
+  region: ScwRegion
 }
 
 export interface Secret {
