@@ -68,6 +68,7 @@ import type {
   UpdateAPIKeyRequest,
   UpdateApplicationRequest,
   UpdateGroupRequest,
+  UpdateOrganizationLoginMethodsRequest,
   UpdateOrganizationSecuritySettingsRequest,
   UpdatePolicyRequest,
   UpdateSamlRequest,
@@ -971,6 +972,16 @@ export const marshalUpdateGroupRequest = (
   description: request.description,
   name: request.name,
   tags: request.tags,
+})
+
+export const marshalUpdateOrganizationLoginMethodsRequest = (
+  request: UpdateOrganizationLoginMethodsRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  login_magic_code_enabled: request.loginMagicCodeEnabled,
+  login_oauth2_enabled: request.loginOauth2Enabled,
+  login_password_enabled: request.loginPasswordEnabled,
+  login_saml_enabled: request.loginSamlEnabled,
 })
 
 export const marshalUpdateOrganizationSecuritySettingsRequest = (

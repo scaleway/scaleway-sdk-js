@@ -1764,13 +1764,6 @@ export interface MFAOTP {
   secret: string
 }
 
-export type MigrateOrganizationGuestsRequest = {
-  /**
-   * ID of the Organization.
-   */
-  organizationId?: string
-}
-
 export interface Organization {
   /**
    * ID of the Organization.
