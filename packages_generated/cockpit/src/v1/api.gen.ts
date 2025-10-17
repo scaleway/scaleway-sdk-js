@@ -20,10 +20,8 @@ import {
   marshalRegionalApiDeleteContactPointRequest,
   marshalRegionalApiDisableAlertManagerRequest,
   marshalRegionalApiDisableAlertRulesRequest,
-  marshalRegionalApiDisableManagedAlertsRequest,
   marshalRegionalApiEnableAlertManagerRequest,
   marshalRegionalApiEnableAlertRulesRequest,
-  marshalRegionalApiEnableManagedAlertsRequest,
   marshalRegionalApiTriggerTestAlertRequest,
   marshalRegionalApiUpdateContactPointRequest,
   marshalRegionalApiUpdateDataSourceRequest,
@@ -86,10 +84,8 @@ import type {
   RegionalApiDeleteTokenRequest,
   RegionalApiDisableAlertManagerRequest,
   RegionalApiDisableAlertRulesRequest,
-  RegionalApiDisableManagedAlertsRequest,
   RegionalApiEnableAlertManagerRequest,
   RegionalApiEnableAlertRulesRequest,
-  RegionalApiEnableManagedAlertsRequest,
   RegionalApiGetAlertManagerRequest,
   RegionalApiGetConfigRequest,
   RegionalApiGetDataSourceRequest,
@@ -695,7 +691,7 @@ The output returned displays a URL to access the Alert manager, and whether the 
     )
 
   /**
-   * Get a detailed count of enabled rules in the specified Project. Includes preconfigured and custom alerting and recording rules.. Get a detailed count of enabled rules in the specified Project. Includes preconfigured and custom alerting and recording rules.
+   * Get the number of enabled rules Get a detailed count of enabled rules in the specified Project. Includes preconfigured and custom alerting and recording rules.. Get the number of enabled rules Get a detailed count of enabled rules in the specified Project. Includes preconfigured and custom alerting and recording rules.
    *
    * @param request - The request {@link RegionalApiGetRulesCountRequest}
    * @returns A Promise of GetRulesCountResponse
@@ -833,54 +829,6 @@ If you need to receive alerts for other receivers, you can create additional con
         ),
       },
       unmarshalListAlertsResponse,
-    )
-
-  /**
-   * Enable managed alerts. Enable the sending of managed alerts for the specified Project. Managed alerts are predefined alerts that apply to Scaleway recources integrated with Cockpit by default.
-   *
-   * @param request - The request {@link RegionalApiEnableManagedAlertsRequest}
-   * @returns A Promise of AlertManager
-   */
-  enableManagedAlerts = (
-    request: Readonly<RegionalApiEnableManagedAlertsRequest> = {},
-  ) =>
-    this.client.fetch<AlertManager>(
-      {
-        body: JSON.stringify(
-          marshalRegionalApiEnableManagedAlertsRequest(
-            request,
-            this.client.settings,
-          ),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/managed-alerts/enable`,
-      },
-      unmarshalAlertManager,
-    )
-
-  /**
-   * Disable managed alerts. Disable the sending of managed alerts for the specified Project.
-   *
-   * @param request - The request {@link RegionalApiDisableManagedAlertsRequest}
-   * @returns A Promise of AlertManager
-   */
-  disableManagedAlerts = (
-    request: Readonly<RegionalApiDisableManagedAlertsRequest> = {},
-  ) =>
-    this.client.fetch<AlertManager>(
-      {
-        body: JSON.stringify(
-          marshalRegionalApiDisableManagedAlertsRequest(
-            request,
-            this.client.settings,
-          ),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/managed-alerts/disable`,
-      },
-      unmarshalAlertManager,
     )
 
   /**

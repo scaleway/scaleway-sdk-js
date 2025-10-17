@@ -41,10 +41,8 @@ import type {
   RegionalApiDeleteContactPointRequest,
   RegionalApiDisableAlertManagerRequest,
   RegionalApiDisableAlertRulesRequest,
-  RegionalApiDisableManagedAlertsRequest,
   RegionalApiEnableAlertManagerRequest,
   RegionalApiEnableAlertRulesRequest,
-  RegionalApiEnableManagedAlertsRequest,
   RegionalApiTriggerTestAlertRequest,
   RegionalApiUpdateContactPointRequest,
   RegionalApiUpdateDataSourceRequest,
@@ -613,13 +611,6 @@ export const marshalRegionalApiDisableAlertRulesRequest = (
   rule_ids: request.ruleIds,
 })
 
-export const marshalRegionalApiDisableManagedAlertsRequest = (
-  request: RegionalApiDisableManagedAlertsRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  project_id: request.projectId ?? defaults.defaultProjectId,
-})
-
 export const marshalRegionalApiEnableAlertManagerRequest = (
   request: RegionalApiEnableAlertManagerRequest,
   defaults: DefaultValues,
@@ -633,13 +624,6 @@ export const marshalRegionalApiEnableAlertRulesRequest = (
 ): Record<string, unknown> => ({
   project_id: request.projectId ?? defaults.defaultProjectId,
   rule_ids: request.ruleIds,
-})
-
-export const marshalRegionalApiEnableManagedAlertsRequest = (
-  request: RegionalApiEnableManagedAlertsRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
 export const marshalRegionalApiTriggerTestAlertRequest = (
