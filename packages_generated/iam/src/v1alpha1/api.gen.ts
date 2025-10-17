@@ -143,7 +143,6 @@ import type {
   LockUserRequest,
   Log,
   MFAOTP,
-  MigrateOrganizationGuestsRequest,
   Organization,
   OrganizationSecuritySettings,
   Policy,
@@ -1392,19 +1391,6 @@ export class API extends ParentAPI {
       },
       unmarshalOrganization,
     )
-
-  /**
-   * Migrate the organization's guests to IAM members.
-   *
-   * @param request - The request {@link MigrateOrganizationGuestsRequest}
-   */
-  migrateOrganizationGuests = (
-    request: Readonly<MigrateOrganizationGuestsRequest> = {},
-  ) =>
-    this.client.fetch<void>({
-      method: 'POST',
-      path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/migrate-guests`,
-    })
 
   /**
    * Set your Organization's allowed login methods.. Set your Organization's allowed login methods.
