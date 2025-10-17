@@ -104,6 +104,7 @@ const exportProductVersions = ({ productDir }: { productDir: string }) => {
       )
     }
   }
+  appendFileSync(pathFile, '\n')
 }
 
 /**
