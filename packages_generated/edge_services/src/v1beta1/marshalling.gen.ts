@@ -180,6 +180,7 @@ export const unmarshalDNSStage = (data: unknown): DNSStage => {
     backendStageId: data.backend_stage_id,
     cacheStageId: data.cache_stage_id,
     createdAt: unmarshalDate(data.created_at),
+    defaultFqdn: data.default_fqdn,
     fqdns: data.fqdns,
     id: data.id,
     pipelineId: data.pipeline_id,
