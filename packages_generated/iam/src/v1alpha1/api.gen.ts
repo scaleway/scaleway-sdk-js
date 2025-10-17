@@ -27,6 +27,7 @@ import {
   marshalUpdateAPIKeyRequest,
   marshalUpdateApplicationRequest,
   marshalUpdateGroupRequest,
+  marshalUpdateOrganizationLoginMethodsRequest,
   marshalUpdateOrganizationSecuritySettingsRequest,
   marshalUpdatePolicyRequest,
   marshalUpdateSamlRequest,
@@ -143,7 +144,6 @@ import type {
   LockUserRequest,
   Log,
   MFAOTP,
-  MigrateOrganizationGuestsRequest,
   Organization,
   OrganizationSecuritySettings,
   Policy,
@@ -1394,19 +1394,6 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Migrate the organization's guests to IAM members.
-   *
-   * @param request - The request {@link MigrateOrganizationGuestsRequest}
-   */
-  migrateOrganizationGuests = (
-    request: Readonly<MigrateOrganizationGuestsRequest> = {},
-  ) =>
-    this.client.fetch<void>({
-      method: 'POST',
-      path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/migrate-guests`,
-    })
-
-  /**
    * Set your Organization's allowed login methods.. Set your Organization's allowed login methods.
    *
    * @param request - The request {@link UpdateOrganizationLoginMethodsRequest}
@@ -1417,14 +1404,15 @@ export class API extends ParentAPI {
   ) =>
     this.client.fetch<Organization>(
       {
+        body: JSON.stringify(
+          marshalUpdateOrganizationLoginMethodsRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/login-methods`,
-        urlParams: urlParams(
-          ['login_magic_code_enabled', request.loginMagicCodeEnabled],
-          ['login_oauth2_enabled', request.loginOauth2Enabled],
-          ['login_password_enabled', request.loginPasswordEnabled],
-          ['login_saml_enabled', request.loginSamlEnabled],
-        ),
       },
       unmarshalOrganization,
     )
