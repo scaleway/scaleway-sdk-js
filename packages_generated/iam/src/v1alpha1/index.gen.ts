@@ -97,7 +97,6 @@ export type {
   LogAction,
   LogResourceType,
   MFAOTP,
-  MigrateOrganizationGuestsRequest,
   Organization,
   OrganizationSecuritySettings,
   PermissionSet,
