@@ -291,7 +291,11 @@ export interface DNSStage {
    */
   id: string
   /**
-   * List of Fully Qualified Domain Names attached to the stage.
+   * Default Fully Qualified Domain Name attached to the stage.
+   */
+  defaultFqdn: string
+  /**
+   * List of additional (custom) Fully Qualified Domain Names attached to the stage.
    */
   fqdns: string[]
   /**
