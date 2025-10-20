@@ -896,20 +896,6 @@ export type RegionalApiDisableAlertRulesRequest = {
 }
 
 /**
- * Disable the sending of managed alerts.
- */
-export type RegionalApiDisableManagedAlertsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  /**
-   * ID of the Project.
-   */
-  projectId?: string
-}
-
-/**
  * Enable the Alert manager.
  */
 export type RegionalApiEnableAlertManagerRequest = {
@@ -936,20 +922,6 @@ export type RegionalApiEnableAlertRulesRequest = {
    * List of IDs of the rules to enable. If empty, enables all preconfigured rules.
    */
   ruleIds?: string[]
-}
-
-/**
- * Enable the sending of managed alerts.
- */
-export type RegionalApiEnableManagedAlertsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  /**
-   * ID of the Project.
-   */
-  projectId?: string
 }
 
 /**
