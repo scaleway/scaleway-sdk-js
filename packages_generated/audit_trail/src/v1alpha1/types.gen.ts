@@ -520,7 +520,7 @@ export interface ExportJob {
   /**
    * Tags of the export job.
    */
-  tags: Record<string, string>
+  tags: string[]
   /**
    * Status of last export job.
    */
@@ -564,7 +564,7 @@ export type CreateExportJobRequest = {
   /**
    * Tags of the export.
    */
-  tags?: Record<string, string>
+  tags?: string[]
 }
 
 export type DeleteExportJobRequest = {
@@ -701,7 +701,7 @@ export type ListExportJobsRequest = {
   /**
    * (Optional) List of tags to filter on.
    */
-  tags?: Record<string, string>
+  tags?: string[]
   page?: number
   pageSize?: number
   orderBy?: ListExportJobsRequestOrderBy
