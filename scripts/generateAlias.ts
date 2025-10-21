@@ -54,6 +54,8 @@ const AUTO_GENERATE_MESSAGE = `/**
 let output = ''
 let importsOutput = ''
 
+writeFileSync(OUTPUT_PATH, AUTO_GENERATE_MESSAGE)
+
 for (const service of services) {
   const slug = toSlug(service)
   const pascal = toPascal(service)
@@ -68,8 +70,6 @@ for (const service of services) {
       `Error getting exports for package '${service}': ${err.message}`,
     )
   }
-
-  writeFileSync(OUTPUT_PATH, AUTO_GENERATE_MESSAGE)
 
   if (exportedNames.length > 0) {
     const imports: string[] = []
