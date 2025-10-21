@@ -702,6 +702,7 @@ export const unmarshalOrganizationSecuritySettings = (
     enforcePasswordRenewal: data.enforce_password_renewal,
     gracePeriodDuration: data.grace_period_duration,
     loginAttemptsBeforeLocked: data.login_attempts_before_locked,
+    maxApiKeyExpirationDuration: data.max_api_key_expiration_duration,
     maxLoginSessionDuration: data.max_login_session_duration,
   } as OrganizationSecuritySettings
 }
@@ -1017,6 +1018,7 @@ export const marshalUpdateOrganizationSecuritySettingsRequest = (
   enforce_password_renewal: request.enforcePasswordRenewal,
   grace_period_duration: request.gracePeriodDuration,
   login_attempts_before_locked: request.loginAttemptsBeforeLocked,
+  max_api_key_expiration_duration: request.maxApiKeyExpirationDuration,
   max_login_session_duration: request.maxLoginSessionDuration,
 })
 
