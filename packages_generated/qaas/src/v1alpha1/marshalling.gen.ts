@@ -86,6 +86,7 @@ export const unmarshalBooking = (data: unknown): Booking => {
     progressMessage: data.progress_message,
     startedAt: unmarshalDate(data.started_at),
     status: data.status,
+    timeZone: data.time_zone,
     updatedAt: unmarshalDate(data.updated_at),
   } as Booking
 }
@@ -498,6 +499,7 @@ const marshalCreateSessionRequestBookingDemand = (
   description: request.description,
   finished_at: request.finishedAt,
   started_at: request.startedAt,
+  time_zone: request.timeZone,
 })
 
 export const marshalCreateSessionRequest = (
