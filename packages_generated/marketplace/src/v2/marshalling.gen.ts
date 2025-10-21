@@ -5,6 +5,7 @@ import {
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
+
 import type {
   Category,
   Image,

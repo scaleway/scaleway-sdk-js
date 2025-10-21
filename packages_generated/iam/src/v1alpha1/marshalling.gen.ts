@@ -1,18 +1,18 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
+  APIKey,
   AddGroupMemberRequest,
   AddGroupMembersRequest,
   AddSamlCertificateRequest,
-  APIKey,
   Application,
   Connection,
   ConnectionConnectedOrganization,
@@ -30,8 +30,8 @@ import type {
   GracePeriod,
   Group,
   InitiateUserConnectionResponse,
-  JoinUserConnectionRequest,
   JWT,
+  JoinUserConnectionRequest,
   ListAPIKeysResponse,
   ListApplicationsResponse,
   ListGracePeriodsResponse,
@@ -42,8 +42,8 @@ import type {
   ListPoliciesResponse,
   ListQuotaResponse,
   ListRulesResponse,
-  ListSamlCertificatesResponse,
   ListSSHKeysResponse,
+  ListSamlCertificatesResponse,
   ListUsersResponse,
   Log,
   MFAOTP,
@@ -57,6 +57,7 @@ import type {
   RemoveUserConnectionRequest,
   Rule,
   RuleSpecs,
+  SSHKey,
   Saml,
   SamlCertificate,
   SamlServiceProvider,
@@ -64,15 +65,14 @@ import type {
   SetOrganizationAliasRequest,
   SetRulesRequest,
   SetRulesResponse,
-  SSHKey,
   UpdateAPIKeyRequest,
   UpdateApplicationRequest,
   UpdateGroupRequest,
   UpdateOrganizationLoginMethodsRequest,
   UpdateOrganizationSecuritySettingsRequest,
   UpdatePolicyRequest,
-  UpdateSamlRequest,
   UpdateSSHKeyRequest,
+  UpdateSamlRequest,
   UpdateUserPasswordRequest,
   UpdateUserRequest,
   UpdateUserUsernameRequest,

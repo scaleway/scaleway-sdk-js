@@ -1,13 +1,12 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { Region as ScwRegion, Zone as ScwZone } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   resolveOneOf,
   urlParams,
 } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, Zone as ScwZone } from '@scaleway/sdk-client'
 import { unmarshalListPublicCatalogProductsResponse } from './marshalling.gen.js'
 import type {
   ListPublicCatalogProductsResponse,

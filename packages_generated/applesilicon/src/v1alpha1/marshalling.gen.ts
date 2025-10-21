@@ -1,12 +1,12 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   BatchCreateServersRequest,
   BatchCreateServersRequestBatchInnerCreateServerRequest,
@@ -18,8 +18,8 @@ import type {
   CreateServerRequest,
   ListOSResponse,
   ListServerPrivateNetworksResponse,
-  ListServersResponse,
   ListServerTypesResponse,
+  ListServersResponse,
   OS,
   OSSupportedServerType,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
@@ -33,8 +33,8 @@ import type {
   ServerTypeDisk,
   ServerTypeGPU,
   ServerTypeMemory,
-  ServerTypeNetwork,
   ServerTypeNPU,
+  ServerTypeNetwork,
   SetServerPrivateNetworksResponse,
   StartConnectivityDiagnosticRequest,
   StartConnectivityDiagnosticResponse,

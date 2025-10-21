@@ -1,15 +1,14 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   GATEWAY_NETWORK_TRANSIENT_STATUSES as GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW,
   GATEWAY_TRANSIENT_STATUSES as GATEWAY_TRANSIENT_STATUSES_VPCGW,
@@ -38,8 +37,8 @@ import {
   unmarshalListDHCPEntriesResponse,
   unmarshalListDHCPsResponse,
   unmarshalListGatewayNetworksResponse,
-  unmarshalListGatewaysResponse,
   unmarshalListGatewayTypesResponse,
+  unmarshalListGatewaysResponse,
   unmarshalListIPsResponse,
   unmarshalListPATRulesResponse,
   unmarshalPATRule,
@@ -53,14 +52,14 @@ import type {
   CreateGatewayRequest,
   CreateIPRequest,
   CreatePATRuleRequest,
+  DHCP,
+  DHCPEntry,
   DeleteDHCPEntryRequest,
   DeleteDHCPRequest,
   DeleteGatewayNetworkRequest,
   DeleteGatewayRequest,
   DeleteIPRequest,
   DeletePATRuleRequest,
-  DHCP,
-  DHCPEntry,
   EnableIPMobilityRequest,
   Gateway,
   GatewayNetwork,
@@ -77,10 +76,10 @@ import type {
   ListDHCPsResponse,
   ListGatewayNetworksRequest,
   ListGatewayNetworksResponse,
-  ListGatewaysRequest,
-  ListGatewaysResponse,
   ListGatewayTypesRequest,
   ListGatewayTypesResponse,
+  ListGatewaysRequest,
+  ListGatewaysResponse,
   ListIPsRequest,
   ListIPsResponse,
   ListPATRulesRequest,
