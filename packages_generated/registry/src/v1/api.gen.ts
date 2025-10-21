@@ -3,20 +3,12 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  resolveOneOf,
-  unmarshalServiceInfo,
+  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
-  toApiLocality,
 } from '@scaleway/sdk-client'
-import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  ServiceInfo,
-  WaitForOptions,
-  ApiLocality,
-} from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   IMAGE_TRANSIENT_STATUSES as IMAGE_TRANSIENT_STATUSES_REGISTRY,
   NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_REGISTRY,
@@ -24,14 +16,14 @@ import {
 } from './content.gen.js'
 import {
   marshalCreateNamespaceRequest,
+  marshalUpdateImageRequest,
+  marshalUpdateNamespaceRequest,
   unmarshalImage,
   unmarshalListImagesResponse,
   unmarshalListNamespacesResponse,
   unmarshalListTagsResponse,
   unmarshalNamespace,
   unmarshalTag,
-  marshalUpdateImageRequest,
-  marshalUpdateNamespaceRequest,
 } from './marshalling.gen.js'
 import type {
   CreateNamespaceRequest,

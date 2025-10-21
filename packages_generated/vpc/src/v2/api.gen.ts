@@ -3,27 +3,22 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  resolveOneOf,
-  unmarshalServiceInfo,
+  toApiLocality,
   urlParams,
   validatePathParam,
-  waitForResource,
-  toApiLocality,
 } from '@scaleway/sdk-client'
-import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  ServiceInfo,
-  WaitForOptions,
-  ApiLocality,
-} from '@scaleway/sdk-client'
+import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   marshalAddSubnetsRequest,
-  unmarshalAddSubnetsResponse,
   marshalCreatePrivateNetworkRequest,
   marshalCreateRouteRequest,
   marshalCreateVPCRequest,
   marshalDeleteSubnetsRequest,
+  marshalSetAclRequest,
+  marshalUpdatePrivateNetworkRequest,
+  marshalUpdateRouteRequest,
+  marshalUpdateVPCRequest,
+  unmarshalAddSubnetsResponse,
   unmarshalDeleteSubnetsResponse,
   unmarshalGetAclResponse,
   unmarshalListPrivateNetworksResponse,
@@ -31,11 +26,7 @@ import {
   unmarshalListVPCsResponse,
   unmarshalPrivateNetwork,
   unmarshalRoute,
-  marshalSetAclRequest,
   unmarshalSetAclResponse,
-  marshalUpdatePrivateNetworkRequest,
-  marshalUpdateRouteRequest,
-  marshalUpdateVPCRequest,
   unmarshalVPC,
 } from './marshalling.gen.js'
 import type {

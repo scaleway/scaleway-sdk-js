@@ -3,20 +3,12 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  resolveOneOf,
-  unmarshalServiceInfo,
+  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
-  toApiLocality,
 } from '@scaleway/sdk-client'
-import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  ServiceInfo,
-  WaitForOptions,
-  ApiLocality,
-} from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   INSTANCE_TRANSIENT_STATUSES as INSTANCE_TRANSIENT_STATUSES_MONGODB,
   SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_MONGODB,
@@ -26,6 +18,12 @@ import {
   marshalCreateInstanceRequest,
   marshalCreateSnapshotRequest,
   marshalCreateUserRequest,
+  marshalRestoreSnapshotRequest,
+  marshalSetUserRoleRequest,
+  marshalUpdateInstanceRequest,
+  marshalUpdateSnapshotRequest,
+  marshalUpdateUserRequest,
+  marshalUpgradeInstanceRequest,
   unmarshalEndpoint,
   unmarshalInstance,
   unmarshalListDatabasesResponse,
@@ -34,13 +32,7 @@ import {
   unmarshalListSnapshotsResponse,
   unmarshalListUsersResponse,
   unmarshalListVersionsResponse,
-  marshalRestoreSnapshotRequest,
-  marshalSetUserRoleRequest,
   unmarshalSnapshot,
-  marshalUpdateInstanceRequest,
-  marshalUpdateSnapshotRequest,
-  marshalUpdateUserRequest,
-  marshalUpgradeInstanceRequest,
   unmarshalUser,
 } from './marshalling.gen.js'
 import type {

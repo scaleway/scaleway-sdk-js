@@ -3,20 +3,12 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  resolveOneOf,
-  unmarshalServiceInfo,
+  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
-  toApiLocality,
 } from '@scaleway/sdk-client'
-import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  ServiceInfo,
-  WaitForOptions,
-  ApiLocality,
-} from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_K8S,
   NODE_TRANSIENT_STATUSES as NODE_TRANSIENT_STATUSES_K8S,
@@ -24,10 +16,17 @@ import {
 } from './content.gen.js'
 import {
   marshalAddClusterACLRulesRequest,
-  unmarshalAddClusterACLRulesResponse,
-  unmarshalCluster,
   marshalCreateClusterRequest,
   marshalCreatePoolRequest,
+  marshalMigratePoolsToNewImagesRequest,
+  marshalSetClusterACLRulesRequest,
+  marshalSetClusterTypeRequest,
+  marshalUpdateClusterRequest,
+  marshalUpdatePoolRequest,
+  marshalUpgradeClusterRequest,
+  marshalUpgradePoolRequest,
+  unmarshalAddClusterACLRulesResponse,
+  unmarshalCluster,
   unmarshalExternalNode,
   unmarshalExternalNodeAuth,
   unmarshalListClusterACLRulesResponse,
@@ -38,17 +37,10 @@ import {
   unmarshalListNodesResponse,
   unmarshalListPoolsResponse,
   unmarshalListVersionsResponse,
-  marshalMigratePoolsToNewImagesRequest,
   unmarshalNode,
   unmarshalNodeMetadata,
   unmarshalPool,
-  marshalSetClusterACLRulesRequest,
   unmarshalSetClusterACLRulesResponse,
-  marshalSetClusterTypeRequest,
-  marshalUpdateClusterRequest,
-  marshalUpdatePoolRequest,
-  marshalUpgradeClusterRequest,
-  marshalUpgradePoolRequest,
   unmarshalVersion,
 } from './marshalling.gen.js'
 import type {

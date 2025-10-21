@@ -3,20 +3,12 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  resolveOneOf,
-  unmarshalServiceInfo,
+  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
-  toApiLocality,
 } from '@scaleway/sdk-client'
-import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  ServiceInfo,
-  WaitForOptions,
-  ApiLocality,
-} from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   DEDICATED_CONNECTION_TRANSIENT_STATUSES as DEDICATED_CONNECTION_TRANSIENT_STATUSES_INTERLINK,
   LINK_TRANSIENT_STATUSES as LINK_TRANSIENT_STATUSES_INTERLINK,
@@ -26,8 +18,11 @@ import {
   marshalAttachVpcRequest,
   marshalCreateLinkRequest,
   marshalCreateRoutingPolicyRequest,
-  unmarshalDedicatedConnection,
   marshalDetachRoutingPolicyRequest,
+  marshalSetRoutingPolicyRequest,
+  marshalUpdateLinkRequest,
+  marshalUpdateRoutingPolicyRequest,
+  unmarshalDedicatedConnection,
   unmarshalLink,
   unmarshalListDedicatedConnectionsResponse,
   unmarshalListLinksResponse,
@@ -37,9 +32,6 @@ import {
   unmarshalPartner,
   unmarshalPop,
   unmarshalRoutingPolicy,
-  marshalSetRoutingPolicyRequest,
-  marshalUpdateLinkRequest,
-  marshalUpdateRoutingPolicyRequest,
 } from './marshalling.gen.js'
 import type {
   AttachRoutingPolicyRequest,

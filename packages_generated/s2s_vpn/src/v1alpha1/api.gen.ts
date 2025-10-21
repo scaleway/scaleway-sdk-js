@@ -3,30 +3,27 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  resolveOneOf,
-  unmarshalServiceInfo,
+  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
-  toApiLocality,
 } from '@scaleway/sdk-client'
-import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  ServiceInfo,
-  WaitForOptions,
-  ApiLocality,
-} from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import { VPN_GATEWAY_TRANSIENT_STATUSES as VPN_GATEWAY_TRANSIENT_STATUSES_S2S_VPN } from './content.gen.js'
 import {
-  unmarshalConnection,
   marshalCreateConnectionRequest,
-  unmarshalCreateConnectionResponse,
   marshalCreateCustomerGatewayRequest,
   marshalCreateRoutingPolicyRequest,
   marshalCreateVpnGatewayRequest,
-  unmarshalCustomerGateway,
   marshalDetachRoutingPolicyRequest,
+  marshalSetRoutingPolicyRequest,
+  marshalUpdateConnectionRequest,
+  marshalUpdateCustomerGatewayRequest,
+  marshalUpdateRoutingPolicyRequest,
+  marshalUpdateVpnGatewayRequest,
+  unmarshalConnection,
+  unmarshalCreateConnectionResponse,
+  unmarshalCustomerGateway,
   unmarshalListConnectionsResponse,
   unmarshalListCustomerGatewaysResponse,
   unmarshalListRoutingPoliciesResponse,
@@ -34,11 +31,6 @@ import {
   unmarshalListVpnGatewaysResponse,
   unmarshalRenewConnectionPskResponse,
   unmarshalRoutingPolicy,
-  marshalSetRoutingPolicyRequest,
-  marshalUpdateConnectionRequest,
-  marshalUpdateCustomerGatewayRequest,
-  marshalUpdateRoutingPolicyRequest,
-  marshalUpdateVpnGatewayRequest,
   unmarshalVpnGateway,
 } from './marshalling.gen.js'
 import type {

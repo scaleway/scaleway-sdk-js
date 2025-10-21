@@ -3,30 +3,25 @@
 import randomName from '@scaleway/random-name'
 import {
   isJSONObject,
-  marshalBlobToScwFile,
-  marshalDecimal,
-  marshalMoney,
-  marshalScwFile,
-  marshalTimeSeries,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
-  unmarshalDecimal,
-  unmarshalMapOfObject,
-  unmarshalMoney,
-  unmarshalScwFile,
-  unmarshalServiceInfo,
-  unmarshalTimeSeries,
-  unmarshalTimeSeriesPoint,
 } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  DefaultValues,
-} from '@scaleway/sdk-client'
-import type {
+  CheckContractSignatureResponse,
   Contract,
+  ContractApiCheckContractSignatureRequest,
+  ContractApiCreateContractSignatureRequest,
   ContractSignature,
+  ListContractSignaturesResponse,
+  ListProjectsResponse,
+  Project,
+  ProjectApiCreateProjectRequest,
+  ProjectApiSetProjectQualificationRequest,
+  ProjectApiUpdateProjectRequest,
+  ProjectQualification,
+  Qualification,
   QualificationAiMachine,
   QualificationArchiveData,
   QualificationContainer,
@@ -36,17 +31,6 @@ import type {
   QualificationOtherUseCase,
   QualificationSetScalewayEnvironment,
   QualificationShareData,
-  Qualification,
-  Project,
-  CheckContractSignatureResponse,
-  ListContractSignaturesResponse,
-  ListProjectsResponse,
-  ProjectQualification,
-  ContractApiCheckContractSignatureRequest,
-  ContractApiCreateContractSignatureRequest,
-  ProjectApiCreateProjectRequest,
-  ProjectApiSetProjectQualificationRequest,
-  ProjectApiUpdateProjectRequest,
 } from './types.gen.js'
 
 const unmarshalContract = (data: unknown): Contract => {

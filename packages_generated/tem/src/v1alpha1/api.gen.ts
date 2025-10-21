@@ -3,31 +3,27 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  resolveOneOf,
-  unmarshalServiceInfo,
+  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
-  toApiLocality,
 } from '@scaleway/sdk-client'
-import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  ServiceInfo,
-  WaitForOptions,
-  ApiLocality,
-} from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_TEM,
   EMAIL_TRANSIENT_STATUSES as EMAIL_TRANSIENT_STATUSES_TEM,
 } from './content.gen.js'
 import {
   marshalBulkCreateBlocklistsRequest,
-  unmarshalBulkCreateBlocklistsResponse,
   marshalCreateDomainRequest,
   marshalCreateEmailRequest,
-  unmarshalCreateEmailResponse,
   marshalCreateWebhookRequest,
+  marshalUpdateDomainRequest,
+  marshalUpdateOfferSubscriptionRequest,
+  marshalUpdateProjectSettingsRequest,
+  marshalUpdateWebhookRequest,
+  unmarshalBulkCreateBlocklistsResponse,
+  unmarshalCreateEmailResponse,
   unmarshalDomain,
   unmarshalDomainLastStatus,
   unmarshalEmail,
@@ -43,10 +39,6 @@ import {
   unmarshalProjectConsumption,
   unmarshalProjectSettings,
   unmarshalStatistics,
-  marshalUpdateDomainRequest,
-  marshalUpdateOfferSubscriptionRequest,
-  marshalUpdateProjectSettingsRequest,
-  marshalUpdateWebhookRequest,
   unmarshalWebhook,
 } from './marshalling.gen.js'
 import type {

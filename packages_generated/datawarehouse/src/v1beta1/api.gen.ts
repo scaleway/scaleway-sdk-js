@@ -3,26 +3,20 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  resolveOneOf,
-  unmarshalServiceInfo,
+  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
-  toApiLocality,
 } from '@scaleway/sdk-client'
-import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  ServiceInfo,
-  WaitForOptions,
-  ApiLocality,
-} from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import { DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_DATAWAREHOUSE } from './content.gen.js'
 import {
   marshalCreateDatabaseRequest,
   marshalCreateDeploymentRequest,
   marshalCreateEndpointRequest,
   marshalCreateUserRequest,
+  marshalUpdateDeploymentRequest,
+  marshalUpdateUserRequest,
   unmarshalDatabase,
   unmarshalDeployment,
   unmarshalEndpoint,
@@ -31,8 +25,6 @@ import {
   unmarshalListPresetsResponse,
   unmarshalListUsersResponse,
   unmarshalListVersionsResponse,
-  marshalUpdateDeploymentRequest,
-  marshalUpdateUserRequest,
   unmarshalUser,
 } from './marshalling.gen.js'
 import type {

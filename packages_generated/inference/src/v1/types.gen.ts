@@ -1,14 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type {
-  Decimal,
-  Money,
-  ServiceInfo,
-  Region as ScwRegion,
-  ScwFile,
-  TimeSeries,
-  Zone as ScwZone,
-} from '@scaleway/sdk-client'
+import type { Region as ScwRegion } from '@scaleway/sdk-client'
 
 export type DeploymentStatus =
   | 'unknown_status'

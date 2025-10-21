@@ -3,37 +3,28 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  resolveOneOf,
-  unmarshalServiceInfo,
+  toApiLocality,
   urlParams,
   validatePathParam,
-  waitForResource,
-  toApiLocality,
 } from '@scaleway/sdk-client'
-import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  ServiceInfo,
-  WaitForOptions,
-  ApiLocality,
-} from '@scaleway/sdk-client'
+import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   marshalCreateKeyRequest,
-  unmarshalDataKey,
   marshalDecryptRequest,
-  unmarshalDecryptResponse,
   marshalEncryptRequest,
-  unmarshalEncryptResponse,
   marshalGenerateDataKeyRequest,
   marshalImportKeyMaterialRequest,
+  marshalSignRequest,
+  marshalUpdateKeyRequest,
+  marshalVerifyRequest,
+  unmarshalDataKey,
+  unmarshalDecryptResponse,
+  unmarshalEncryptResponse,
   unmarshalKey,
   unmarshalListAlgorithmsResponse,
   unmarshalListKeysResponse,
   unmarshalPublicKey,
-  marshalSignRequest,
   unmarshalSignResponse,
-  marshalUpdateKeyRequest,
-  marshalVerifyRequest,
   unmarshalVerifyResponse,
 } from './marshalling.gen.js'
 import type {

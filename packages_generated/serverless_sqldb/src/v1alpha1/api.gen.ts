@@ -3,29 +3,21 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  resolveOneOf,
-  unmarshalServiceInfo,
+  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
-  toApiLocality,
 } from '@scaleway/sdk-client'
-import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  ServiceInfo,
-  WaitForOptions,
-  ApiLocality,
-} from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import { DATABASE_TRANSIENT_STATUSES as DATABASE_TRANSIENT_STATUSES_SERVERLESS_SQLDB } from './content.gen.js'
 import {
   marshalCreateDatabaseRequest,
+  marshalRestoreDatabaseFromBackupRequest,
+  marshalUpdateDatabaseRequest,
   unmarshalDatabase,
   unmarshalDatabaseBackup,
   unmarshalListDatabaseBackupsResponse,
   unmarshalListDatabasesResponse,
-  marshalRestoreDatabaseFromBackupRequest,
-  marshalUpdateDatabaseRequest,
 } from './marshalling.gen.js'
 import type {
   CreateDatabaseRequest,

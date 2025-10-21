@@ -1,50 +1,33 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import randomName from '@scaleway/random-name'
 import {
   isJSONObject,
-  marshalBlobToScwFile,
-  marshalDecimal,
-  marshalMoney,
-  marshalScwFile,
-  marshalTimeSeries,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
-  unmarshalDecimal,
-  unmarshalMapOfObject,
-  unmarshalMoney,
-  unmarshalScwFile,
-  unmarshalServiceInfo,
-  unmarshalTimeSeries,
-  unmarshalTimeSeriesPoint,
 } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  DefaultValues,
-} from '@scaleway/sdk-client'
-import type {
-  KeyRotationPolicy,
-  KeyUsage,
-  Key,
-  DataKey,
-  DecryptResponse,
-  EncryptResponse,
-  ListAlgorithmsResponseAlgorithm,
-  ListAlgorithmsResponse,
-  ListKeysResponse,
-  PublicKey,
-  SignResponse,
-  VerifyResponse,
   CreateKeyRequest,
+  DataKey,
   DecryptRequest,
+  DecryptResponse,
   EncryptRequest,
+  EncryptResponse,
   GenerateDataKeyRequest,
   ImportKeyMaterialRequest,
+  Key,
+  KeyRotationPolicy,
+  KeyUsage,
+  ListAlgorithmsResponse,
+  ListAlgorithmsResponseAlgorithm,
+  ListKeysResponse,
+  PublicKey,
   SignRequest,
+  SignResponse,
   UpdateKeyRequest,
   VerifyRequest,
+  VerifyResponse,
 } from './types.gen.js'
 
 const unmarshalKeyRotationPolicy = (data: unknown): KeyRotationPolicy => {

@@ -4,19 +4,10 @@ import {
   API as ParentAPI,
   enrichForPagination,
   resolveOneOf,
-  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
-  waitForResource,
-  toApiLocality,
 } from '@scaleway/sdk-client'
-import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  ServiceInfo,
-  WaitForOptions,
-  ApiLocality,
-} from '@scaleway/sdk-client'
+
 import {
   unmarshalCategory,
   unmarshalImage,

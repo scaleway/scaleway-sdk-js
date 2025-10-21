@@ -3,31 +3,30 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  resolveOneOf,
-  unmarshalServiceInfo,
+  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
-  toApiLocality,
 } from '@scaleway/sdk-client'
-import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  ServiceInfo,
-  WaitForOptions,
-  ApiLocality,
-} from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   GATEWAY_NETWORK_TRANSIENT_STATUSES as GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW,
   GATEWAY_TRANSIENT_STATUSES as GATEWAY_TRANSIENT_STATUSES_VPCGW,
 } from './content.gen.js'
 import {
   marshalAddBastionAllowedIPsRequest,
-  unmarshalAddBastionAllowedIPsResponse,
   marshalCreateGatewayNetworkRequest,
   marshalCreateGatewayRequest,
   marshalCreateIPRequest,
   marshalCreatePatRuleRequest,
+  marshalSetBastionAllowedIPsRequest,
+  marshalSetPatRulesRequest,
+  marshalUpdateGatewayNetworkRequest,
+  marshalUpdateGatewayRequest,
+  marshalUpdateIPRequest,
+  marshalUpdatePatRuleRequest,
+  marshalUpgradeGatewayRequest,
+  unmarshalAddBastionAllowedIPsResponse,
   unmarshalGateway,
   unmarshalGatewayNetwork,
   unmarshalIP,
@@ -37,15 +36,8 @@ import {
   unmarshalListIPsResponse,
   unmarshalListPatRulesResponse,
   unmarshalPatRule,
-  marshalSetBastionAllowedIPsRequest,
   unmarshalSetBastionAllowedIPsResponse,
-  marshalSetPatRulesRequest,
   unmarshalSetPatRulesResponse,
-  marshalUpdateGatewayNetworkRequest,
-  marshalUpdateGatewayRequest,
-  marshalUpdateIPRequest,
-  marshalUpdatePatRuleRequest,
-  marshalUpgradeGatewayRequest,
 } from './marshalling.gen.js'
 import type {
   AddBastionAllowedIPsRequest,

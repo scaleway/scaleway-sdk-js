@@ -3,20 +3,12 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  resolveOneOf,
-  unmarshalServiceInfo,
+  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
-  toApiLocality,
 } from '@scaleway/sdk-client'
-import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  ServiceInfo,
-  WaitForOptions,
-  ApiLocality,
-} from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   GATEWAY_NETWORK_TRANSIENT_STATUSES as GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW,
   GATEWAY_TRANSIENT_STATUSES as GATEWAY_TRANSIENT_STATUSES_VPCGW,
@@ -28,6 +20,15 @@ import {
   marshalCreateGatewayRequest,
   marshalCreateIPRequest,
   marshalCreatePATRuleRequest,
+  marshalSetDHCPEntriesRequest,
+  marshalSetPATRulesRequest,
+  marshalUpdateDHCPEntryRequest,
+  marshalUpdateDHCPRequest,
+  marshalUpdateGatewayNetworkRequest,
+  marshalUpdateGatewayRequest,
+  marshalUpdateIPRequest,
+  marshalUpdatePATRuleRequest,
+  marshalUpgradeGatewayRequest,
   unmarshalDHCP,
   unmarshalDHCPEntry,
   unmarshalGateway,
@@ -41,17 +42,8 @@ import {
   unmarshalListIPsResponse,
   unmarshalListPATRulesResponse,
   unmarshalPATRule,
-  marshalSetDHCPEntriesRequest,
   unmarshalSetDHCPEntriesResponse,
-  marshalSetPATRulesRequest,
   unmarshalSetPATRulesResponse,
-  marshalUpdateDHCPEntryRequest,
-  marshalUpdateDHCPRequest,
-  marshalUpdateGatewayNetworkRequest,
-  marshalUpdateGatewayRequest,
-  marshalUpdateIPRequest,
-  marshalUpdatePATRuleRequest,
-  marshalUpgradeGatewayRequest,
 } from './marshalling.gen.js'
 import type {
   CreateDHCPEntryRequest,

@@ -3,45 +3,30 @@
 import randomName from '@scaleway/random-name'
 import {
   isJSONObject,
-  marshalBlobToScwFile,
-  marshalDecimal,
-  marshalMoney,
-  marshalScwFile,
-  marshalTimeSeries,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
-  unmarshalDecimal,
-  unmarshalMapOfObject,
   unmarshalMoney,
-  unmarshalScwFile,
-  unmarshalServiceInfo,
-  unmarshalTimeSeries,
-  unmarshalTimeSeriesPoint,
 } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  DefaultValues,
-} from '@scaleway/sdk-client'
-import type {
-  Reference,
-  SnapshotParentVolume,
-  Snapshot,
-  VolumeSpecifications,
-  Volume,
-  ListSnapshotsResponse,
-  VolumeType,
-  ListVolumeTypesResponse,
-  ListVolumesResponse,
   CreateSnapshotRequest,
+  CreateVolumeRequest,
   CreateVolumeRequestFromEmpty,
   CreateVolumeRequestFromSnapshot,
-  CreateVolumeRequest,
   ExportSnapshotToObjectStorageRequest,
   ImportSnapshotFromObjectStorageRequest,
+  ListSnapshotsResponse,
+  ListVolumeTypesResponse,
+  ListVolumesResponse,
+  Reference,
+  Snapshot,
+  SnapshotParentVolume,
   UpdateSnapshotRequest,
   UpdateVolumeRequest,
+  Volume,
+  VolumeSpecifications,
+  VolumeType,
 } from './types.gen.js'
 
 export const unmarshalReference = (data: unknown): Reference => {

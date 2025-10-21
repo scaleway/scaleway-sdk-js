@@ -3,24 +3,17 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  resolveOneOf,
-  unmarshalServiceInfo,
+  toApiLocality,
   urlParams,
   validatePathParam,
-  waitForResource,
-  toApiLocality,
 } from '@scaleway/sdk-client'
-import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  ServiceInfo,
-  WaitForOptions,
-  ApiLocality,
-} from '@scaleway/sdk-client'
-import { JOB_RUN_TRANSIENT_STATUSES as JOB_RUN_TRANSIENT_STATUSES_JOBS } from './content.gen.js'
+import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   marshalCreateJobDefinitionRequest,
   marshalCreateJobDefinitionSecretsRequest,
+  marshalStartJobDefinitionRequest,
+  marshalUpdateJobDefinitionRequest,
+  marshalUpdateJobDefinitionSecretRequest,
   unmarshalCreateJobDefinitionSecretsResponse,
   unmarshalJobDefinition,
   unmarshalJobRun,
@@ -30,10 +23,7 @@ import {
   unmarshalListJobRunsResponse,
   unmarshalListJobsResourcesResponse,
   unmarshalSecret,
-  marshalStartJobDefinitionRequest,
   unmarshalStartJobDefinitionResponse,
-  marshalUpdateJobDefinitionRequest,
-  marshalUpdateJobDefinitionSecretRequest,
 } from './marshalling.gen.js'
 import type {
   CreateJobDefinitionRequest,

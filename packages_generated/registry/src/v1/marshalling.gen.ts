@@ -3,35 +3,19 @@
 import randomName from '@scaleway/random-name'
 import {
   isJSONObject,
-  marshalBlobToScwFile,
-  marshalDecimal,
-  marshalMoney,
-  marshalScwFile,
-  marshalTimeSeries,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
-  unmarshalDecimal,
-  unmarshalMapOfObject,
-  unmarshalMoney,
-  unmarshalScwFile,
-  unmarshalServiceInfo,
-  unmarshalTimeSeries,
-  unmarshalTimeSeriesPoint,
 } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  DefaultValues,
-} from '@scaleway/sdk-client'
-import type {
+  CreateNamespaceRequest,
   Image,
-  Namespace,
-  Tag,
   ListImagesResponse,
   ListNamespacesResponse,
   ListTagsResponse,
-  CreateNamespaceRequest,
+  Namespace,
+  Tag,
   UpdateImageRequest,
   UpdateNamespaceRequest,
 } from './types.gen.js'

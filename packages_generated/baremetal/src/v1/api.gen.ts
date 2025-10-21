@@ -3,32 +3,29 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  resolveOneOf,
-  unmarshalServiceInfo,
+  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
-  toApiLocality,
 } from '@scaleway/sdk-client'
-import type {
-  Zone as ScwZone,
-  Region as ScwRegion,
-  ServiceInfo,
-  WaitForOptions,
-  ApiLocality,
-} from '@scaleway/sdk-client'
-import {
-  SERVER_INSTALL_TRANSIENT_STATUSES as SERVER_INSTALL_TRANSIENT_STATUSES_BAREMETAL,
-  SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES_BAREMETAL,
-  SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_BAREMETAL,
-} from './content.gen.js'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+import { SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_BAREMETAL } from './content.gen.js'
 import {
   marshalAddOptionServerRequest,
-  unmarshalBMCAccess,
   marshalCreateServerRequest,
+  marshalInstallServerRequest,
+  marshalPrivateNetworkApiAddServerPrivateNetworkRequest,
+  marshalPrivateNetworkApiSetServerPrivateNetworksRequest,
+  marshalRebootServerRequest,
+  marshalStartBMCAccessRequest,
+  marshalStartServerRequest,
+  marshalUpdateIPRequest,
+  marshalUpdateServerRequest,
+  marshalUpdateSettingRequest,
+  marshalValidatePartitioningSchemaRequest,
+  unmarshalBMCAccess,
   unmarshalGetServerMetricsResponse,
   unmarshalIP,
-  marshalInstallServerRequest,
   unmarshalListOSResponse,
   unmarshalListOffersResponse,
   unmarshalListOptionsResponse,
@@ -39,20 +36,11 @@ import {
   unmarshalOS,
   unmarshalOffer,
   unmarshalOption,
-  marshalPrivateNetworkApiAddServerPrivateNetworkRequest,
-  marshalPrivateNetworkApiSetServerPrivateNetworksRequest,
-  marshalRebootServerRequest,
   unmarshalSchema,
   unmarshalServer,
   unmarshalServerPrivateNetwork,
   unmarshalSetServerPrivateNetworksResponse,
   unmarshalSetting,
-  marshalStartBMCAccessRequest,
-  marshalStartServerRequest,
-  marshalUpdateIPRequest,
-  marshalUpdateServerRequest,
-  marshalUpdateSettingRequest,
-  marshalValidatePartitioningSchemaRequest,
 } from './marshalling.gen.js'
 import type {
   AddOptionServerRequest,
