@@ -20,6 +20,17 @@ jobs:
           persist-credentials: false
           token: ${{ secrets.GH_TOKEN }}
       - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
+      - name: Configure SSH signing
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_SIGNING_PRIVATE_KEY }}" > ~/.ssh/signing_key
+          chmod 600 ~/.ssh/signing_key
+          git config --global gpg.format ssh
+          git config --global user.signingkey ~/.ssh/signing_key
+          git config --global commit.gpgsign true
+          git config --global tag.gpgsign true
+
       - name: Git Identity
         run: |
           git config --global user.name 'scaleway-bot'
