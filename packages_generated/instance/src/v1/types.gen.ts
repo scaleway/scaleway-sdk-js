@@ -339,6 +339,10 @@ export interface PrivateNIC {
    * Private NIC creation date.
    */
   creationDate?: Date
+  /**
+   * The zone in which the Private NIC is located.
+   */
+  zone: ScwZone
 }
 
 export interface SecurityGroupSummary {

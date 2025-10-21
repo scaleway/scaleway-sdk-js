@@ -7,7 +7,6 @@ import {
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
-
 import {
   marshalAddGroupMemberRequest,
   marshalAddGroupMembersRequest,
@@ -20,6 +19,7 @@ import {
   marshalCreateSSHKeyRequest,
   marshalCreateUserRequest,
   marshalJoinUserConnectionRequest,
+  marshalParseSamlMetadataRequest,
   marshalRemoveGroupMemberRequest,
   marshalRemoveUserConnectionRequest,
   marshalSetGroupMembersRequest,
@@ -61,6 +61,7 @@ import {
   unmarshalMFAOTP,
   unmarshalOrganization,
   unmarshalOrganizationSecuritySettings,
+  unmarshalParseSamlMetadataResponse,
   unmarshalPolicy,
   unmarshalQuotum,
   unmarshalSSHKey,
@@ -147,6 +148,8 @@ import type {
   MFAOTP,
   Organization,
   OrganizationSecuritySettings,
+  ParseSamlMetadataRequest,
+  ParseSamlMetadataResponse,
   Policy,
   Quotum,
   RemoveGroupMemberRequest,
@@ -1481,6 +1484,25 @@ export class API extends ParentAPI {
       method: 'DELETE',
       path: `/iam/v1alpha1/saml/${validatePathParam('samlId', request.samlId)}`,
     })
+
+  /**
+   * Parse SAML xml metadata file.
+   *
+   * @param request - The request {@link ParseSamlMetadataRequest}
+   * @returns A Promise of ParseSamlMetadataResponse
+   */
+  parseSamlMetadata = async (request: Readonly<ParseSamlMetadataRequest>) =>
+    this.client.fetch<ParseSamlMetadataResponse>(
+      {
+        body: JSON.stringify(
+          await marshalParseSamlMetadataRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/iam/v1alpha1/parse-saml-metadata`,
+      },
+      unmarshalParseSamlMetadataResponse,
+    )
 
   /**
    * List SAML certificates.
