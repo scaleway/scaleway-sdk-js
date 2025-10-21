@@ -1,16 +1,24 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
+} from '@scaleway/sdk-client'
+import type {
+  Zone as ScwZone,
+  Region as ScwRegion,
+  ServiceInfo,
+  WaitForOptions,
+  ApiLocality,
 } from '@scaleway/sdk-client'
 import {
+  REFERENCE_TRANSIENT_STATUSES as REFERENCE_TRANSIENT_STATUSES_BLOCK,
   SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_BLOCK,
   VOLUME_TRANSIENT_STATUSES as VOLUME_TRANSIENT_STATUSES_BLOCK,
 } from './content.gen.js'
@@ -20,12 +28,12 @@ import {
   marshalExportSnapshotToObjectStorageRequest,
   marshalImportSnapshotFromObjectStorageRequest,
   marshalImportSnapshotFromS3Request,
+  unmarshalListSnapshotsResponse,
+  unmarshalListVolumeTypesResponse,
+  unmarshalListVolumesResponse,
+  unmarshalSnapshot,
   marshalUpdateSnapshotRequest,
   marshalUpdateVolumeRequest,
-  unmarshalListSnapshotsResponse,
-  unmarshalListVolumesResponse,
-  unmarshalListVolumeTypesResponse,
-  unmarshalSnapshot,
   unmarshalVolume,
 } from './marshalling.gen.js'
 import type {
@@ -40,10 +48,10 @@ import type {
   ImportSnapshotFromS3Request,
   ListSnapshotsRequest,
   ListSnapshotsResponse,
-  ListVolumesRequest,
-  ListVolumesResponse,
   ListVolumeTypesRequest,
   ListVolumeTypesResponse,
+  ListVolumesRequest,
+  ListVolumesResponse,
   Snapshot,
   UpdateSnapshotRequest,
   UpdateVolumeRequest,

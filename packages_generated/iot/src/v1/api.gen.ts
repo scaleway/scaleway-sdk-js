@@ -1,30 +1,30 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
+} from '@scaleway/sdk-client'
+import type {
+  Zone as ScwZone,
+  Region as ScwRegion,
+  ServiceInfo,
+  WaitForOptions,
+  ApiLocality,
 } from '@scaleway/sdk-client'
 import { HUB_TRANSIENT_STATUSES as HUB_TRANSIENT_STATUSES_IOT } from './content.gen.js'
 import {
   marshalCreateDeviceRequest,
+  unmarshalCreateDeviceResponse,
   marshalCreateHubRequest,
   marshalCreateNetworkRequest,
-  marshalCreateRouteRequest,
-  marshalPatchTwinDocumentRequest,
-  marshalPutTwinDocumentRequest,
-  marshalSetDeviceCertificateRequest,
-  marshalSetHubCARequest,
-  marshalUpdateDeviceRequest,
-  marshalUpdateHubRequest,
-  marshalUpdateRouteRequest,
-  unmarshalCreateDeviceResponse,
   unmarshalCreateNetworkResponse,
+  marshalCreateRouteRequest,
   unmarshalDevice,
   unmarshalGetDeviceCertificateResponse,
   unmarshalGetDeviceMetricsResponse,
@@ -37,10 +37,17 @@ import {
   unmarshalListRoutesResponse,
   unmarshalListTwinDocumentsResponse,
   unmarshalNetwork,
+  marshalPatchTwinDocumentRequest,
+  marshalPutTwinDocumentRequest,
   unmarshalRenewDeviceCertificateResponse,
   unmarshalRoute,
+  marshalSetDeviceCertificateRequest,
   unmarshalSetDeviceCertificateResponse,
+  marshalSetHubCARequest,
   unmarshalTwinDocument,
+  marshalUpdateDeviceRequest,
+  marshalUpdateHubRequest,
+  marshalUpdateRouteRequest,
 } from './marshalling.gen.js'
 import type {
   CreateDeviceRequest,

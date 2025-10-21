@@ -1,14 +1,21 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
+} from '@scaleway/sdk-client'
+import type {
+  Zone as ScwZone,
+  Region as ScwRegion,
+  ServiceInfo,
+  WaitForOptions,
+  ApiLocality,
 } from '@scaleway/sdk-client'
 import {
   DEDICATED_CONNECTION_TRANSIENT_STATUSES as DEDICATED_CONNECTION_TRANSIENT_STATUSES_INTERLINK,
@@ -19,11 +26,8 @@ import {
   marshalAttachVpcRequest,
   marshalCreateLinkRequest,
   marshalCreateRoutingPolicyRequest,
-  marshalDetachRoutingPolicyRequest,
-  marshalSetRoutingPolicyRequest,
-  marshalUpdateLinkRequest,
-  marshalUpdateRoutingPolicyRequest,
   unmarshalDedicatedConnection,
+  marshalDetachRoutingPolicyRequest,
   unmarshalLink,
   unmarshalListDedicatedConnectionsResponse,
   unmarshalListLinksResponse,
@@ -33,6 +37,9 @@ import {
   unmarshalPartner,
   unmarshalPop,
   unmarshalRoutingPolicy,
+  marshalSetRoutingPolicyRequest,
+  marshalUpdateLinkRequest,
+  marshalUpdateRoutingPolicyRequest,
 } from './marshalling.gen.js'
 import type {
   AttachRoutingPolicyRequest,

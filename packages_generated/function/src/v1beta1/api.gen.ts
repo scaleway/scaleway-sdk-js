@@ -1,15 +1,21 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   resolveOneOf,
-  toApiLocality,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
+} from '@scaleway/sdk-client'
+import type {
+  Zone as ScwZone,
+  Region as ScwRegion,
+  ServiceInfo,
+  WaitForOptions,
+  ApiLocality,
 } from '@scaleway/sdk-client'
 import {
   CRON_TRANSIENT_STATUSES as CRON_TRANSIENT_STATUSES_FUNCTION,
@@ -26,10 +32,6 @@ import {
   marshalCreateNamespaceRequest,
   marshalCreateTokenRequest,
   marshalCreateTriggerRequest,
-  marshalUpdateCronRequest,
-  marshalUpdateFunctionRequest,
-  marshalUpdateNamespaceRequest,
-  marshalUpdateTriggerRequest,
   unmarshalCron,
   unmarshalDomain,
   unmarshalDownloadURL,
@@ -44,6 +46,10 @@ import {
   unmarshalNamespace,
   unmarshalToken,
   unmarshalTrigger,
+  marshalUpdateCronRequest,
+  marshalUpdateFunctionRequest,
+  marshalUpdateNamespaceRequest,
+  marshalUpdateTriggerRequest,
   unmarshalUploadURL,
 } from './marshalling.gen.js'
 import type {

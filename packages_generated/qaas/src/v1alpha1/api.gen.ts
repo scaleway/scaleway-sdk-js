@@ -1,14 +1,21 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
+} from '@scaleway/sdk-client'
+import type {
+  Zone as ScwZone,
+  Region as ScwRegion,
+  ServiceInfo,
+  WaitForOptions,
+  ApiLocality,
 } from '@scaleway/sdk-client'
 import {
   BOOKING_TRANSIENT_STATUSES as BOOKING_TRANSIENT_STATUSES_QAAS,
@@ -17,16 +24,12 @@ import {
   SESSION_TRANSIENT_STATUSES as SESSION_TRANSIENT_STATUSES_QAAS,
 } from './content.gen.js'
 import {
+  unmarshalApplication,
+  unmarshalBooking,
   marshalCreateJobRequest,
   marshalCreateModelRequest,
   marshalCreateProcessRequest,
   marshalCreateSessionRequest,
-  marshalUpdateBookingRequest,
-  marshalUpdateJobRequest,
-  marshalUpdateProcessRequest,
-  marshalUpdateSessionRequest,
-  unmarshalApplication,
-  unmarshalBooking,
   unmarshalJob,
   unmarshalJobCircuit,
   unmarshalListApplicationsResponse,
@@ -35,14 +38,18 @@ import {
   unmarshalListJobsResponse,
   unmarshalListModelsResponse,
   unmarshalListPlatformsResponse,
-  unmarshalListProcessesResponse,
   unmarshalListProcessResultsResponse,
+  unmarshalListProcessesResponse,
   unmarshalListSessionACLsResponse,
   unmarshalListSessionsResponse,
   unmarshalModel,
   unmarshalPlatform,
   unmarshalProcess,
   unmarshalSession,
+  marshalUpdateBookingRequest,
+  marshalUpdateJobRequest,
+  marshalUpdateProcessRequest,
+  marshalUpdateSessionRequest,
 } from './marshalling.gen.js'
 import type {
   Application,
@@ -78,10 +85,10 @@ import type {
   ListModelsResponse,
   ListPlatformsRequest,
   ListPlatformsResponse,
-  ListProcessesRequest,
-  ListProcessesResponse,
   ListProcessResultsRequest,
   ListProcessResultsResponse,
+  ListProcessesRequest,
+  ListProcessesResponse,
   ListSessionACLsRequest,
   ListSessionACLsResponse,
   ListSessionsRequest,

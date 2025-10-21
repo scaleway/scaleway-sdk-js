@@ -1,6 +1,14 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, Zone as ScwZone } from '@scaleway/sdk-client'
+import type {
+  Decimal,
+  Money,
+  ServiceInfo,
+  Region as ScwRegion,
+  ScwFile,
+  TimeSeries,
+  Zone as ScwZone,
+} from '@scaleway/sdk-client'
 
 export type BearerType = 'unknown_bearer_type' | 'user' | 'application'
 

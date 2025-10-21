@@ -1,14 +1,21 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
+} from '@scaleway/sdk-client'
+import type {
+  Zone as ScwZone,
+  Region as ScwRegion,
+  ServiceInfo,
+  WaitForOptions,
+  ApiLocality,
 } from '@scaleway/sdk-client'
 import { DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_DATAWAREHOUSE } from './content.gen.js'
 import {
@@ -16,8 +23,6 @@ import {
   marshalCreateDeploymentRequest,
   marshalCreateEndpointRequest,
   marshalCreateUserRequest,
-  marshalUpdateDeploymentRequest,
-  marshalUpdateUserRequest,
   unmarshalDatabase,
   unmarshalDeployment,
   unmarshalEndpoint,
@@ -26,6 +31,8 @@ import {
   unmarshalListPresetsResponse,
   unmarshalListUsersResponse,
   unmarshalListVersionsResponse,
+  marshalUpdateDeploymentRequest,
+  marshalUpdateUserRequest,
   unmarshalUser,
 } from './marshalling.gen.js'
 import type {

@@ -1,15 +1,21 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   resolveOneOf,
-  toApiLocality,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
+} from '@scaleway/sdk-client'
+import type {
+  Zone as ScwZone,
+  Region as ScwRegion,
+  ServiceInfo,
+  WaitForOptions,
+  ApiLocality,
 } from '@scaleway/sdk-client'
 import {
   CONTAINER_TRANSIENT_STATUSES as CONTAINER_TRANSIENT_STATUSES_CONTAINER,
@@ -20,17 +26,13 @@ import {
   TRIGGER_TRANSIENT_STATUSES as TRIGGER_TRANSIENT_STATUSES_CONTAINER,
 } from './content.gen.js'
 import {
+  unmarshalContainer,
   marshalCreateContainerRequest,
   marshalCreateCronRequest,
   marshalCreateDomainRequest,
   marshalCreateNamespaceRequest,
   marshalCreateTokenRequest,
   marshalCreateTriggerRequest,
-  marshalUpdateContainerRequest,
-  marshalUpdateCronRequest,
-  marshalUpdateNamespaceRequest,
-  marshalUpdateTriggerRequest,
-  unmarshalContainer,
   unmarshalCron,
   unmarshalDomain,
   unmarshalListContainersResponse,
@@ -42,6 +44,10 @@ import {
   unmarshalNamespace,
   unmarshalToken,
   unmarshalTrigger,
+  marshalUpdateContainerRequest,
+  marshalUpdateCronRequest,
+  marshalUpdateNamespaceRequest,
+  marshalUpdateTriggerRequest,
 } from './marshalling.gen.js'
 import type {
   Container,

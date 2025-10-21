@@ -1,14 +1,21 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
+} from '@scaleway/sdk-client'
+import type {
+  Zone as ScwZone,
+  Region as ScwRegion,
+  ServiceInfo,
+  WaitForOptions,
+  ApiLocality,
 } from '@scaleway/sdk-client'
 import {
   IMAGE_TRANSIENT_STATUSES as IMAGE_TRANSIENT_STATUSES_REGISTRY,
@@ -17,14 +24,14 @@ import {
 } from './content.gen.js'
 import {
   marshalCreateNamespaceRequest,
-  marshalUpdateImageRequest,
-  marshalUpdateNamespaceRequest,
   unmarshalImage,
   unmarshalListImagesResponse,
   unmarshalListNamespacesResponse,
   unmarshalListTagsResponse,
   unmarshalNamespace,
   unmarshalTag,
+  marshalUpdateImageRequest,
+  marshalUpdateNamespaceRequest,
 } from './marshalling.gen.js'
 import type {
   CreateNamespaceRequest,

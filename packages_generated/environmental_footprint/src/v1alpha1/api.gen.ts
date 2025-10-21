@@ -1,10 +1,26 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import { API as ParentAPI, urlParams } from '@scaleway/sdk-client'
 import {
-  marshalUserApiDownloadImpactReportRequest,
+  API as ParentAPI,
+  enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
+  urlParams,
+  validatePathParam,
+  waitForResource,
+  toApiLocality,
+} from '@scaleway/sdk-client'
+import type {
+  Zone as ScwZone,
+  Region as ScwRegion,
+  ServiceInfo,
+  WaitForOptions,
+  ApiLocality,
+} from '@scaleway/sdk-client'
+import {
   unmarshalImpactDataResponse,
   unmarshalImpactReportAvailability,
+  marshalUserApiDownloadImpactReportRequest,
 } from './marshalling.gen.js'
 import type {
   ImpactDataResponse,

@@ -1,14 +1,21 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
+} from '@scaleway/sdk-client'
+import type {
+  Zone as ScwZone,
+  Region as ScwRegion,
+  ServiceInfo,
+  WaitForOptions,
+  ApiLocality,
 } from '@scaleway/sdk-client'
 import {
   GATEWAY_NETWORK_TRANSIENT_STATUSES as GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW,
@@ -16,29 +23,29 @@ import {
 } from './content.gen.js'
 import {
   marshalAddBastionAllowedIPsRequest,
+  unmarshalAddBastionAllowedIPsResponse,
   marshalCreateGatewayNetworkRequest,
   marshalCreateGatewayRequest,
   marshalCreateIPRequest,
   marshalCreatePatRuleRequest,
+  unmarshalGateway,
+  unmarshalGatewayNetwork,
+  unmarshalIP,
+  unmarshalListGatewayNetworksResponse,
+  unmarshalListGatewayTypesResponse,
+  unmarshalListGatewaysResponse,
+  unmarshalListIPsResponse,
+  unmarshalListPatRulesResponse,
+  unmarshalPatRule,
   marshalSetBastionAllowedIPsRequest,
+  unmarshalSetBastionAllowedIPsResponse,
   marshalSetPatRulesRequest,
+  unmarshalSetPatRulesResponse,
   marshalUpdateGatewayNetworkRequest,
   marshalUpdateGatewayRequest,
   marshalUpdateIPRequest,
   marshalUpdatePatRuleRequest,
   marshalUpgradeGatewayRequest,
-  unmarshalAddBastionAllowedIPsResponse,
-  unmarshalGateway,
-  unmarshalGatewayNetwork,
-  unmarshalIP,
-  unmarshalListGatewayNetworksResponse,
-  unmarshalListGatewaysResponse,
-  unmarshalListGatewayTypesResponse,
-  unmarshalListIPsResponse,
-  unmarshalListPatRulesResponse,
-  unmarshalPatRule,
-  unmarshalSetBastionAllowedIPsResponse,
-  unmarshalSetPatRulesResponse,
 } from './marshalling.gen.js'
 import type {
   AddBastionAllowedIPsRequest,
@@ -61,10 +68,10 @@ import type {
   IP,
   ListGatewayNetworksRequest,
   ListGatewayNetworksResponse,
-  ListGatewaysRequest,
-  ListGatewaysResponse,
   ListGatewayTypesRequest,
   ListGatewayTypesResponse,
+  ListGatewaysRequest,
+  ListGatewaysResponse,
   ListIPsRequest,
   ListIPsResponse,
   ListPatRulesRequest,

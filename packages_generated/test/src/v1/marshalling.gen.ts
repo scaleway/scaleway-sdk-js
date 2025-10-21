@@ -1,19 +1,35 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { DefaultValues } from '@scaleway/sdk-client'
+import randomName from '@scaleway/random-name'
 import {
   isJSONObject,
+  marshalBlobToScwFile,
+  marshalDecimal,
+  marshalMoney,
+  marshalScwFile,
+  marshalTimeSeries,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
+  unmarshalDecimal,
+  unmarshalMapOfObject,
+  unmarshalMoney,
+  unmarshalScwFile,
+  unmarshalServiceInfo,
+  unmarshalTimeSeries,
+  unmarshalTimeSeriesPoint,
 } from '@scaleway/sdk-client'
 import type {
-  CreateHumanRequest,
+  Zone as ScwZone,
+  Region as ScwRegion,
+  DefaultValues,
+} from '@scaleway/sdk-client'
+import type {
   Human,
   ListHumansResponse,
-  RegisterRequest,
   RegisterResponse,
+  CreateHumanRequest,
+  RegisterRequest,
   UpdateHumanRequest,
 } from './types.gen.js'
 

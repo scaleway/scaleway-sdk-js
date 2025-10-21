@@ -1,14 +1,21 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
+} from '@scaleway/sdk-client'
+import type {
+  Zone as ScwZone,
+  Region as ScwRegion,
+  ServiceInfo,
+  WaitForOptions,
+  ApiLocality,
 } from '@scaleway/sdk-client'
 import {
   CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_K8S,
@@ -17,31 +24,31 @@ import {
 } from './content.gen.js'
 import {
   marshalAddClusterACLRulesRequest,
-  marshalCreateClusterRequest,
-  marshalCreatePoolRequest,
-  marshalMigratePoolsToNewImagesRequest,
-  marshalSetClusterACLRulesRequest,
-  marshalSetClusterTypeRequest,
-  marshalUpdateClusterRequest,
-  marshalUpdatePoolRequest,
-  marshalUpgradeClusterRequest,
-  marshalUpgradePoolRequest,
   unmarshalAddClusterACLRulesResponse,
   unmarshalCluster,
+  marshalCreateClusterRequest,
+  marshalCreatePoolRequest,
   unmarshalExternalNode,
   unmarshalExternalNodeAuth,
   unmarshalListClusterACLRulesResponse,
   unmarshalListClusterAvailableTypesResponse,
   unmarshalListClusterAvailableVersionsResponse,
-  unmarshalListClustersResponse,
   unmarshalListClusterTypesResponse,
+  unmarshalListClustersResponse,
   unmarshalListNodesResponse,
   unmarshalListPoolsResponse,
   unmarshalListVersionsResponse,
+  marshalMigratePoolsToNewImagesRequest,
   unmarshalNode,
   unmarshalNodeMetadata,
   unmarshalPool,
+  marshalSetClusterACLRulesRequest,
   unmarshalSetClusterACLRulesResponse,
+  marshalSetClusterTypeRequest,
+  marshalUpdateClusterRequest,
+  marshalUpdatePoolRequest,
+  marshalUpgradeClusterRequest,
+  marshalUpgradePoolRequest,
   unmarshalVersion,
 } from './marshalling.gen.js'
 import type {
@@ -70,10 +77,10 @@ import type {
   ListClusterAvailableTypesResponse,
   ListClusterAvailableVersionsRequest,
   ListClusterAvailableVersionsResponse,
-  ListClustersRequest,
-  ListClustersResponse,
   ListClusterTypesRequest,
   ListClusterTypesResponse,
+  ListClustersRequest,
+  ListClustersResponse,
   ListNodesRequest,
   ListNodesResponse,
   ListPoolsRequest,

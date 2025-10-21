@@ -1,39 +1,47 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
+} from '@scaleway/sdk-client'
+import type {
+  Zone as ScwZone,
+  Region as ScwRegion,
+  ServiceInfo,
+  WaitForOptions,
+  ApiLocality,
 } from '@scaleway/sdk-client'
 import {
   SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES_APPLESILICON,
+  SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES_APPLESILICON,
   SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_APPLESILICON,
 } from './content.gen.js'
 import {
   marshalBatchCreateServersRequest,
+  unmarshalBatchCreateServersResponse,
+  unmarshalConnectivityDiagnostic,
   marshalCreateServerRequest,
+  unmarshalListOSResponse,
+  unmarshalListServerPrivateNetworksResponse,
+  unmarshalListServerTypesResponse,
+  unmarshalListServersResponse,
+  unmarshalOS,
   marshalPrivateNetworkApiAddServerPrivateNetworkRequest,
   marshalPrivateNetworkApiSetServerPrivateNetworksRequest,
   marshalReinstallServerRequest,
-  marshalStartConnectivityDiagnosticRequest,
-  marshalUpdateServerRequest,
-  unmarshalBatchCreateServersResponse,
-  unmarshalConnectivityDiagnostic,
-  unmarshalListOSResponse,
-  unmarshalListServerPrivateNetworksResponse,
-  unmarshalListServersResponse,
-  unmarshalListServerTypesResponse,
-  unmarshalOS,
   unmarshalServer,
   unmarshalServerPrivateNetwork,
   unmarshalServerType,
   unmarshalSetServerPrivateNetworksResponse,
+  marshalStartConnectivityDiagnosticRequest,
   unmarshalStartConnectivityDiagnosticResponse,
+  marshalUpdateServerRequest,
 } from './marshalling.gen.js'
 import type {
   BatchCreateServersRequest,
@@ -48,10 +56,10 @@ import type {
   ListOSRequest,
   ListOSResponse,
   ListServerPrivateNetworksResponse,
-  ListServersRequest,
-  ListServersResponse,
   ListServerTypesRequest,
   ListServerTypesResponse,
+  ListServersRequest,
+  ListServersResponse,
   OS,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
   PrivateNetworkApiDeleteServerPrivateNetworkRequest,

@@ -1,37 +1,53 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { DefaultValues } from '@scaleway/sdk-client'
+import randomName from '@scaleway/random-name'
 import {
   isJSONObject,
+  marshalBlobToScwFile,
+  marshalDecimal,
+  marshalMoney,
+  marshalScwFile,
+  marshalTimeSeries,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
+  unmarshalDecimal,
+  unmarshalMapOfObject,
+  unmarshalMoney,
+  unmarshalScwFile,
+  unmarshalServiceInfo,
+  unmarshalTimeSeries,
+  unmarshalTimeSeriesPoint,
 } from '@scaleway/sdk-client'
 import type {
-  CreateDatabaseRequest,
-  CreateDeploymentRequest,
-  CreateEndpointRequest,
-  CreateUserRequest,
-  Database,
-  Deployment,
-  Endpoint,
+  Zone as ScwZone,
+  Region as ScwRegion,
+  DefaultValues,
+} from '@scaleway/sdk-client'
+import type {
   EndpointPrivateNetworkDetails,
   EndpointPublicDetails,
   EndpointService,
-  EndpointSpec,
-  EndpointSpecPrivateNetworkDetails,
-  EndpointSpecPublicDetails,
+  Endpoint,
+  Database,
+  Deployment,
+  User,
   ListDatabasesResponse,
   ListDeploymentsResponse,
+  Preset,
   ListPresetsResponse,
   ListUsersResponse,
+  Version,
   ListVersionsResponse,
-  Preset,
+  CreateDatabaseRequest,
+  EndpointSpecPrivateNetworkDetails,
+  EndpointSpecPublicDetails,
+  EndpointSpec,
+  CreateDeploymentRequest,
+  CreateEndpointRequest,
+  CreateUserRequest,
   UpdateDeploymentRequest,
   UpdateUserRequest,
-  User,
-  Version,
 } from './types.gen.js'
 
 const unmarshalEndpointPrivateNetworkDetails = (
