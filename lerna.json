@@ -7,7 +7,9 @@
       "conventionalCommits": true,
       "message": "chore(release): publish",
       "createRelease": "github",
-      "loglevel": "verbose"
+      "loglevel": "verbose",
+      "signGitCommit": true,
+      "signGitTag": true
     }
   },
   "$schema": "node_modules/lerna/schemas/lerna-schema.json"
