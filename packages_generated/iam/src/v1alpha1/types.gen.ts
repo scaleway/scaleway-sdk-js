@@ -1814,6 +1814,16 @@ export interface OrganizationSecuritySettings {
   maxLoginSessionDuration?: string
 }
 
+export type ParseSamlMetadataRequest = {
+  file: Blob
+}
+
+export interface ParseSamlMetadataResponse {
+  singleSignOnUrl: string
+  entityId: string
+  signingCertificates: string[]
+}
+
 export type RemoveGroupMemberRequest = {
   /**
    * ID of the group.

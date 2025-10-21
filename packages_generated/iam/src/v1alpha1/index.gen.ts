@@ -99,6 +99,8 @@ export type {
   MFAOTP,
   Organization,
   OrganizationSecuritySettings,
+  ParseSamlMetadataRequest,
+  ParseSamlMetadataResponse,
   PermissionSet,
   PermissionSetScopeType,
   Policy,

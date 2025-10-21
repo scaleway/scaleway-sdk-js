@@ -3,6 +3,7 @@
 import randomName from '@scaleway/random-name'
 import {
   isJSONObject,
+  marshalBlobToScwFile,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
@@ -49,6 +50,8 @@ import type {
   MFAOTP,
   Organization,
   OrganizationSecuritySettings,
+  ParseSamlMetadataRequest,
+  ParseSamlMetadataResponse,
   PermissionSet,
   Policy,
   Quotum,
@@ -703,6 +706,22 @@ export const unmarshalOrganizationSecuritySettings = (
   } as OrganizationSecuritySettings
 }
 
+export const unmarshalParseSamlMetadataResponse = (
+  data: unknown,
+): ParseSamlMetadataResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ParseSamlMetadataResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    entityId: data.entity_id,
+    signingCertificates: data.signing_certificates,
+    singleSignOnUrl: data.single_sign_on_url,
+  } as ParseSamlMetadataResponse
+}
+
 const unmarshalSamlServiceProvider = (data: unknown): SamlServiceProvider => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -906,6 +925,13 @@ export const marshalJoinUserConnectionRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   token: request.token,
+})
+
+export const marshalParseSamlMetadataRequest = async (
+  request: ParseSamlMetadataRequest,
+  defaults: DefaultValues,
+): Promise<Record<string, unknown>> => ({
+  file: await marshalBlobToScwFile(request.file),
 })
 
 export const marshalRemoveGroupMemberRequest = (
