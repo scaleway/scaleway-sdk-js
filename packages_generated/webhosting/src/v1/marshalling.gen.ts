@@ -57,6 +57,7 @@ import type {
   ListHostingsResponse,
   ListMailAccountsResponse,
   ListOffersResponse,
+  ListRecentProgressesResponse,
   ListWebsitesResponse,
   MailAccount,
   MailAccountApiChangeMailAccountPasswordRequest,
@@ -69,6 +70,8 @@ import type {
   Platform,
   PlatformControlPanel,
   PlatformControlPanelUrls,
+  Progress,
+  ProgressSummary,
   ResetHostingPasswordResponse,
   ResourceSummary,
   RestoreBackupItemsResponse,
@@ -671,6 +674,38 @@ export const unmarshalListOffersResponse = (
   } as ListOffersResponse
 }
 
+const unmarshalProgressSummary = (data: unknown): ProgressSummary => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ProgressSummary' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    backupItemsCount: data.backup_items_count,
+    id: data.id,
+    percentage: data.percentage,
+    status: data.status,
+  } as ProgressSummary
+}
+
+export const unmarshalListRecentProgressesResponse = (
+  data: unknown,
+): ListRecentProgressesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRecentProgressesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    progresses: unmarshalArrayOfObject(
+      data.progresses,
+      unmarshalProgressSummary,
+    ),
+  } as ListRecentProgressesResponse
+}
+
 const unmarshalWebsite = (data: unknown): Website => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -698,6 +733,24 @@ export const unmarshalListWebsitesResponse = (
     totalCount: data.total_count,
     websites: unmarshalArrayOfObject(data.websites, unmarshalWebsite),
   } as ListWebsitesResponse
+}
+
+export const unmarshalProgress = (data: unknown): Progress => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Progress' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    backupItemGroups: unmarshalArrayOfObject(
+      data.backup_item_groups,
+      unmarshalBackupItemGroup,
+    ),
+    id: data.id,
+    percentage: data.percentage,
+    status: data.status,
+  } as Progress
 }
 
 export const unmarshalResetHostingPasswordResponse = (
@@ -739,7 +792,9 @@ export const unmarshalRestoreBackupItemsResponse = (
     )
   }
 
-  return {} as RestoreBackupItemsResponse
+  return {
+    progressId: data.progress_id,
+  } as RestoreBackupItemsResponse
 }
 
 export const unmarshalRestoreBackupResponse = (
@@ -751,7 +806,9 @@ export const unmarshalRestoreBackupResponse = (
     )
   }
 
-  return {} as RestoreBackupResponse
+  return {
+    progressId: data.progress_id,
+  } as RestoreBackupResponse
 }
 
 const unmarshalDomainAvailability = (data: unknown): DomainAvailability => {
