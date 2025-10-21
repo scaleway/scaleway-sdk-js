@@ -210,6 +210,7 @@ export interface CreateSessionRequestBookingDemand {
   startedAt?: Date
   finishedAt?: Date
   description?: string
+  timeZone?: string
 }
 
 export interface Application {
@@ -268,6 +269,10 @@ export interface Booking {
    * Any progress message of the booking.
    */
   progressMessage: string
+  /**
+   * Time zone for the booking schedule, in tz database format (e.g. 'Europe/Paris').
+   */
+  timeZone?: string
 }
 
 export interface JobResult {
