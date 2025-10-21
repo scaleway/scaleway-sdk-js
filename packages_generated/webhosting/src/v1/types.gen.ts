@@ -142,6 +142,16 @@ export type OfferOptionWarning =
 
 export type PlatformPlatformGroup = 'unknown_group' | 'default' | 'premium'
 
+export type ProgressStatus =
+  | 'unknown_status'
+  | 'pending'
+  | 'processing'
+  | 'completed'
+  | 'partially_completed'
+  | 'failed'
+  | 'aborted'
+  | 'never_finished'
+
 export interface AutoConfigDomainDns {
   /**
    * Whether or not to synchronize domain nameservers.
@@ -601,6 +611,25 @@ export interface MailAccount {
   username: string
 }
 
+export interface ProgressSummary {
+  /**
+   * ID of the progress.
+   */
+  id: string
+  /**
+   * Total number of backup items included in the progress.
+   */
+  backupItemsCount: number
+  /**
+   * Completion percentage of the progress.
+   */
+  percentage: number
+  /**
+   * Current status of the progress operation.
+   */
+  status: ProgressStatus
+}
+
 export interface Website {
   /**
    * The domain of the website.
@@ -658,6 +687,21 @@ export type BackupApiGetBackupRequest = {
   backupId: string
 }
 
+export type BackupApiGetProgressRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the hosting associated with the progress.
+   */
+  hostingId: string
+  /**
+   * ID of the progress to retrieve.
+   */
+  progressId: string
+}
+
 export type BackupApiListBackupItemsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -694,6 +738,17 @@ export type BackupApiListBackupsRequest = {
    * Order in which to return the list of backups.
    */
   orderBy?: ListBackupsRequestOrderBy
+}
+
+export type BackupApiListRecentProgressesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the hosting linked to the progress.
+   */
+  hostingId: string
 }
 
 export type BackupApiRestoreBackupItemsRequest = {
@@ -1622,6 +1677,13 @@ export interface ListOffersResponse {
   offers: Offer[]
 }
 
+export interface ListRecentProgressesResponse {
+  /**
+   * List of summarized progress entries.
+   */
+  progresses: ProgressSummary[]
+}
+
 export interface ListWebsitesResponse {
   /**
    * Total number of websites.
@@ -1752,6 +1814,25 @@ export type OfferApiListOffersRequest = {
   controlPanels?: string[]
 }
 
+export interface Progress {
+  /**
+   * ID of the progress.
+   */
+  id: string
+  /**
+   * Groups of backup items included in this progress.
+   */
+  backupItemGroups: BackupItemGroup[]
+  /**
+   * Completion percentage of the progress.
+   */
+  percentage: number
+  /**
+   * Current status of the progress operation.
+   */
+  status: ProgressStatus
+}
+
 export interface ResetHostingPasswordResponse {
   /**
    * @deprecated New temporary password (deprecated, use password_b64 instead).
@@ -1782,9 +1863,19 @@ export interface ResourceSummary {
   websitesCount: number
 }
 
-export interface RestoreBackupItemsResponse {}
+export interface RestoreBackupItemsResponse {
+  /**
+   * Identifier used to track the item restoration progress.
+   */
+  progressId: string
+}
 
-export interface RestoreBackupResponse {}
+export interface RestoreBackupResponse {
+  /**
+   * Identifier used to track the backup restoration progress.
+   */
+  progressId: string
+}
 
 export interface SearchDomainsResponse {
   /**
