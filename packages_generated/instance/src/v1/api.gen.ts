@@ -8,7 +8,6 @@ import {
   validatePathParam,
 } from '@scaleway/sdk-client'
 import type { ApiLocality } from '@scaleway/sdk-client'
-
 import {
   marshalApplyBlockMigrationRequest,
   marshalAttachServerFileSystemRequest,
