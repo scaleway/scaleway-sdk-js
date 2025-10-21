@@ -164,6 +164,7 @@ export const unmarshalPrivateNIC = (data: unknown): PrivateNIC => {
     serverId: data.server_id,
     state: data.state,
     tags: data.tags,
+    zone: data.zone,
   } as PrivateNIC
 }
 
@@ -2268,6 +2269,7 @@ const marshalPrivateNIC = (
   server_id: request.serverId,
   state: request.state,
   tags: request.tags,
+  zone: request.zone,
 })
 
 const marshalSecurityGroupSummary = (
