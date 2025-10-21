@@ -701,7 +701,7 @@ export const marshalCreateExportJobRequest = (
 ): Record<string, unknown> => ({
   name: request.name,
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
-  tags: request.tags !== undefined ? request.tags : undefined,
+  tags: request.tags,
   ...resolveOneOf([
     {
       param: 's3',

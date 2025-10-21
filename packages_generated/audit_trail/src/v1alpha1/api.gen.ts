@@ -218,14 +218,7 @@ export class API extends ParentAPI {
             'page_size',
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
-          [
-            'tags',
-            request.tags
-              ? Object.entries(request.tags).map(
-                  ([key, value]) => `${key}:${value}`,
-                )
-              : undefined,
-          ],
+          ['tags', request.tags],
         ),
       },
       unmarshalListExportJobsResponse,
