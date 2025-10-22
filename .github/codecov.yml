@@ -1,0 +1,181 @@
+codecov:
+  branch: main
+
+component_management:
+  individual_components:
+    - component_id: account
+      name: account
+      paths:
+        - ./packages_generated/account/**
+    - component_id: applesilicon
+      name: applesilicon
+      paths:
+        - ./packages_generated/applesilicon/**
+    - component_id: audit_trail
+      name: audit_trail
+      paths:
+        - ./packages_generated/audit_trail/**
+    - component_id: autoscaling
+      name: autoscaling
+      paths:
+        - ./packages_generated/autoscaling/**
+    - component_id: baremetal
+      name: baremetal
+      paths:
+        - ./packages_generated/baremetal/**
+    - component_id: billing
+      name: billing
+      paths:
+        - ./packages_generated/billing/**
+    - component_id: block
+      name: block
+      paths:
+        - ./packages_generated/block/**
+    - component_id: cockpit
+      name: cockpit
+      paths:
+        - ./packages_generated/cockpit/**
+    - component_id: container
+      name: container
+      paths:
+        - ./packages_generated/container/**
+    - component_id: datawarehouse
+      name: datawarehouse
+      paths:
+        - ./packages_generated/datawarehouse/**
+    - component_id: dedibox
+      name: dedibox
+      paths:
+        - ./packages_generated/dedibox/**
+    - component_id: domain
+      name: domain
+      paths:
+        - ./packages_generated/domain/**
+    - component_id: edge_services
+      name: edge_services
+      paths:
+        - ./packages_generated/edge_services/**
+    - component_id: environmental_footprint
+      name: environmental_footprint
+      paths:
+        - ./packages_generated/environmental_footprint/**
+    - component_id: file
+      name: file
+      paths:
+        - ./packages_generated/file/**
+    - component_id: flexibleip
+      name: flexibleip
+      paths:
+        - ./packages_generated/flexibleip/**
+    - component_id: function
+      name: function
+      paths:
+        - ./packages_generated/function/**
+    - component_id: iam
+      name: iam
+      paths:
+        - ./packages_generated/iam/**
+    - component_id: inference
+      name: inference
+      paths:
+        - ./packages_generated/inference/**
+    - component_id: instance
+      name: instance
+      paths:
+        - ./packages_generated/instance/**
+    - component_id: interlink
+      name: interlink
+      paths:
+        - ./packages_generated/interlink/**
+    - component_id: iot
+      name: iot
+      paths:
+        - ./packages_generated/iot/**
+    - component_id: ipam
+      name: ipam
+      paths:
+        - ./packages_generated/ipam/**
+    - component_id: jobs
+      name: jobs
+      paths:
+        - ./packages_generated/jobs/**
+    - component_id: k8s
+      name: k8s
+      paths:
+        - ./packages_generated/k8s/**
+    - component_id: key_manager
+      name: key_manager
+      paths:
+        - ./packages_generated/key_manager/**
+    - component_id: lb
+      name: lb
+      paths:
+        - ./packages_generated/lb/**
+    - component_id: marketplace
+      name: marketplace
+      paths:
+        - ./packages_generated/marketplace/**
+    - component_id: mnq
+      name: mnq
+      paths:
+        - ./packages_generated/mnq/**
+    - component_id: mongodb
+      name: mongodb
+      paths:
+        - ./packages_generated/mongodb/**
+    - component_id: product_catalog
+      name: product_catalog
+      paths:
+        - ./packages_generated/product_catalog/**
+    - component_id: qaas
+      name: qaas
+      paths:
+        - ./packages_generated/qaas/**
+    - component_id: rdb
+      name: rdb
+      paths:
+        - ./packages_generated/rdb/**
+    - component_id: redis
+      name: redis
+      paths:
+        - ./packages_generated/redis/**
+    - component_id: registry
+      name: registry
+      paths:
+        - ./packages_generated/registry/**
+    - component_id: s2s_vpn
+      name: s2s_vpn
+      paths:
+        - ./packages_generated/s2s_vpn/**
+    - component_id: secret
+      name: secret
+      paths:
+        - ./packages_generated/secret/**
+    - component_id: serverless_sqldb
+      name: serverless_sqldb
+      paths:
+        - ./packages_generated/serverless_sqldb/**
+    - component_id: std
+      name: std
+      paths:
+        - ./packages_generated/std/**
+    - component_id: tem
+      name: tem
+      paths:
+        - ./packages_generated/tem/**
+    - component_id: test
+      name: test
+      paths:
+        - ./packages_generated/test/**
+    - component_id: vpc
+      name: vpc
+      paths:
+        - ./packages_generated/vpc/**
+    - component_id: vpcgw
+      name: vpcgw
+      paths:
+        - ./packages_generated/vpcgw/**
+    - component_id: webhosting
+      name: webhosting
+      paths:
+        - ./packages_generated/webhosting/**
