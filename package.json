@@ -29,6 +29,7 @@
     "prepare": "husky",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
+    "test:junit": "vitest --reporter=junit --outputFile=test-report.junit.xml",
     "test:ui": "vitest --ui"
   },
   "lint-staged": {
