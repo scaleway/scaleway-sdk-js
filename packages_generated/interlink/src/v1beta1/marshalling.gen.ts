@@ -164,6 +164,7 @@ export const unmarshalPop = (data: unknown): Pop => {
     address: data.address,
     availableLinkBandwidthsMbps: data.available_link_bandwidths_mbps,
     city: data.city,
+    displayName: data.display_name,
     hostingProviderName: data.hosting_provider_name,
     id: data.id,
     logoUrl: data.logo_url,
