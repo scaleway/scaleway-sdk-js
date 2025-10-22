@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.77.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.76.7...@scaleway/sdk@2.77.0) (2025-10-22)
+
+### Bug Fixes
+
+- read real exports from packages instead of guessing names to fix TypeScript compilation errors ([#2460](https://github.com/scaleway/scaleway-sdk-js/issues/2460)) ([c8c424e](https://github.com/scaleway/scaleway-sdk-js/commit/c8c424e09d3a365a2592f25abdc0a8d6d86e0f0b))
+- **s2s_vpn:** add packages ([#2400](https://github.com/scaleway/scaleway-sdk-js/issues/2400)) ([5703403](https://github.com/scaleway/scaleway-sdk-js/commit/5703403f87dccf9e7f6d8e52c278608c440a6dca))
+- **scripts:** move writeFileSync outside loop in generateAlias to fix EUNCOMMIT error in CI ([#2526](https://github.com/scaleway/scaleway-sdk-js/issues/2526)) ([bc6434c](https://github.com/scaleway/scaleway-sdk-js/commit/bc6434c08d27f836b8836407852deeaa3ac19807))
+
+### Features
+
+- **datawarehouse:** update the visibility to public ([#2406](https://github.com/scaleway/scaleway-sdk-js/issues/2406)) ([a38b83e](https://github.com/scaleway/scaleway-sdk-js/commit/a38b83e50f63f7741285fe9ba065bb9af5f7f016))
+- **environmental_footprint:** enable v1alpha1 ([#2441](https://github.com/scaleway/scaleway-sdk-js/issues/2441)) ([dec421b](https://github.com/scaleway/scaleway-sdk-js/commit/dec421b7f42d91ec51b63c117764e5c3a606ddf7))
+- sdk export createclient ([#2425](https://github.com/scaleway/scaleway-sdk-js/issues/2425)) ([d8ecf1c](https://github.com/scaleway/scaleway-sdk-js/commit/d8ecf1c4c4e2a497e89d23265752d9d6e3aa73d2))
+
 ## [2.76.8](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.76.7...@scaleway/sdk@2.76.8) (2025-09-10)
 
 **Note:** Version bump only for package @scaleway/sdk

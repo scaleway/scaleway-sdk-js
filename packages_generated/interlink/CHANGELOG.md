@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-interlink@1.2.0...@scaleway/sdk-interlink@1.3.0) (2025-10-22)
+
+### Features
+
+- add extension .js for nodenext ([#2492](https://github.com/scaleway/scaleway-sdk-js/issues/2492)) ([592c46d](https://github.com/scaleway/scaleway-sdk-js/commit/592c46df916c5b8b35f26c13b626eee797970f5d))
+- **interlink:** add display_name for pops ([#2528](https://github.com/scaleway/scaleway-sdk-js/issues/2528)) ([6d47490](https://github.com/scaleway/scaleway-sdk-js/commit/6d474906097a6f2f011675389a6ba0fb4cda5465))
+- **interlink:** align routing_policy behavior with S2S_VPN ([#2398](https://github.com/scaleway/scaleway-sdk-js/issues/2398)) ([8c2303e](https://github.com/scaleway/scaleway-sdk-js/commit/8c2303e94c833168f5c20fe9ff5f6aa77b2ece57))
+
 ## [1.2.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-interlink@1.2.0...@scaleway/sdk-interlink@1.2.1) (2025-09-10)
 
 **Note:** Version bump only for package @scaleway/sdk-interlink
