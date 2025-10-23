@@ -525,6 +525,10 @@ export type CreateServerRequest = {
    * If enabled, the server can not be deleted.
    */
   protected: boolean
+  /**
+   * Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script.
+   */
+  userData?: string
 }
 
 export interface Server {
@@ -608,6 +612,10 @@ export interface Server {
    * If enabled, the server can not be deleted.
    */
   protected: boolean
+  /**
+   * Optional configuration data passed to cloud-init.
+   */
+  userData?: string
 }
 
 export interface OS {
@@ -1087,6 +1095,10 @@ export type InstallServerRequest = {
    * Partitioning schema.
    */
   partitioningSchema?: Schema
+  /**
+   * @deprecated Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script.
+   */
+  userData?: Blob
 }
 
 export type ListOSRequest = {
@@ -1528,6 +1540,10 @@ export type UpdateServerRequest = {
    * If enabled, the server can not be deleted.
    */
   protected?: boolean
+  /**
+   * Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script.
+   */
+  userData?: string
 }
 
 export type UpdateSettingRequest = {

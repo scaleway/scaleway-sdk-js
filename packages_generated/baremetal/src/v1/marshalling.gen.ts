@@ -2,6 +2,7 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import {
   isJSONObject,
+  marshalBlobToScwFile,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
@@ -338,6 +339,7 @@ export const unmarshalServer = (data: unknown): Server => {
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
+    userData: data.user_data,
     zone: data.zone,
   } as Server
 }
@@ -879,6 +881,7 @@ export const marshalCreateServerRequest = (
   option_ids: request.optionIds,
   protected: request.protected,
   tags: request.tags,
+  user_data: request.userData,
   ...resolveOneOf([
     {
       default: defaults.defaultProjectId,
@@ -900,10 +903,10 @@ export const marshalAddOptionServerRequest = (
   expires_at: request.expiresAt,
 })
 
-export const marshalInstallServerRequest = (
+export const marshalInstallServerRequest = async (
   request: InstallServerRequest,
   defaults: DefaultValues,
-): Record<string, unknown> => ({
+): Promise<Record<string, unknown>> => ({
   hostname: request.hostname,
   os_id: request.osId,
   partitioning_schema:
@@ -915,6 +918,10 @@ export const marshalInstallServerRequest = (
   service_user: request.serviceUser,
   ssh_key_ids: request.sshKeyIds,
   user: request.user,
+  user_data:
+    request.userData !== undefined
+      ? await marshalBlobToScwFile(request.userData)
+      : undefined,
 })
 
 export const marshalPrivateNetworkApiAddServerPrivateNetworkRequest = (
@@ -969,6 +976,7 @@ export const marshalUpdateServerRequest = (
   name: request.name,
   protected: request.protected,
   tags: request.tags,
+  user_data: request.userData,
 })
 
 export const marshalUpdateSettingRequest = (

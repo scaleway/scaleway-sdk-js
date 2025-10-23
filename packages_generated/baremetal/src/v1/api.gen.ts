@@ -233,11 +233,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link InstallServerRequest}
    * @returns A Promise of Server
    */
-  installServer = (request: Readonly<InstallServerRequest>) =>
+  installServer = async (request: Readonly<InstallServerRequest>) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
-          marshalInstallServerRequest(request, this.client.settings),
+          await marshalInstallServerRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
