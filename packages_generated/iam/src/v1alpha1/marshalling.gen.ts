@@ -981,6 +981,7 @@ export const marshalUpdateAPIKeyRequest = (
 ): Record<string, unknown> => ({
   default_project_id: request.defaultProjectId,
   description: request.description,
+  expires_at: request.expiresAt,
 })
 
 export const marshalUpdateApplicationRequest = (

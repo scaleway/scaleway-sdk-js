@@ -1936,6 +1936,10 @@ export type UpdateAPIKeyRequest = {
    * New description to update.
    */
   description?: string
+  /**
+   * New expiration date of the API key.
+   */
+  expiresAt?: Date
 }
 
 export type UpdateApplicationRequest = {
