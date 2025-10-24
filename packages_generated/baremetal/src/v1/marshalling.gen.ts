@@ -367,6 +367,8 @@ export const unmarshalOS = (data: unknown): OS => {
 
   return {
     allowed: data.allowed,
+    cloudInitSupported: data.cloud_init_supported,
+    cloudInitVersion: data.cloud_init_version,
     customPartitioningSupported: data.custom_partitioning_supported,
     enabled: data.enabled,
     id: data.id,
