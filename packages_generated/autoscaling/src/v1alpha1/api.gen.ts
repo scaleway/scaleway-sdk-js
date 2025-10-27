@@ -6,7 +6,6 @@ import {
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
-
 import {
   marshalCreateInstanceGroupRequest,
   marshalCreateInstancePolicyRequest,

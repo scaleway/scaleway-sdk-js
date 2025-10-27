@@ -7,7 +7,6 @@ import {
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
-
 import {
   unmarshalDiscount,
   unmarshalInvoice,

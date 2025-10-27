@@ -672,6 +672,14 @@ export interface OS {
    */
   customPartitioningSupported: boolean
   /**
+   * Defines if cloud-init is supported by this OS.
+   */
+  cloudInitSupported: boolean
+  /**
+   * Defines the cloud-init API version used by this OS.
+   */
+  cloudInitVersion?: string
+  /**
    * Zone in which is the OS is available.
    */
   zone: ScwZone
