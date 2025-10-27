@@ -46,6 +46,9 @@ generate-packages:
 generate-global-sdk-package:
 	pnpm run generateGlobalSdkPackage
 
+setup-new-products:
+	pnpm run setupNewProducts
+
 publish: install-dependencies
 	pnpm run build
 	pnpm lerna changed
