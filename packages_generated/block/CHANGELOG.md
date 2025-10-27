@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.3.0 (2025-10-27)
+
+### Features
+
+- add extension .js for nodenext ([#2492](https://github.com/scaleway/scaleway-sdk-js/issues/2492)) ([592c46d](https://github.com/scaleway/scaleway-sdk-js/commit/592c46df916c5b8b35f26c13b626eee797970f5d))
+- **block:** allow display of unpurged resources ([#2319](https://github.com/scaleway/scaleway-sdk-js/issues/2319)) ([868efe3](https://github.com/scaleway/scaleway-sdk-js/commit/868efe314a9a582f05fd74cd5d20636f1ca4ee00))
+
 # 1.2.0 (2025-10-22)
 
 ### Features

@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.3.3 (2025-10-27)
+
+**Note:** Version bump only for package @scaleway/sdk-client
+
 ## 1.3.2 (2025-10-22)
 
 **Note:** Version bump only for package @scaleway/sdk-client

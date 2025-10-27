@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.2.0 (2025-10-27)
+
+### Features
+
+- add extension .js for nodenext ([#2492](https://github.com/scaleway/scaleway-sdk-js/issues/2492)) ([592c46d](https://github.com/scaleway/scaleway-sdk-js/commit/592c46df916c5b8b35f26c13b626eee797970f5d))
+- add support for region in iot resources ([#2453](https://github.com/scaleway/scaleway-sdk-js/issues/2453)) ([66f2ab2](https://github.com/scaleway/scaleway-sdk-js/commit/66f2ab2c524369d38fcb9ee3434034fe1d6360f0))
+
 # 1.1.0 (2025-10-22)
 
 ### Features

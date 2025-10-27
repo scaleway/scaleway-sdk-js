@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.9.0 (2025-10-27)
+
+### Features
+
+- add extension .js for nodenext ([#2492](https://github.com/scaleway/scaleway-sdk-js/issues/2492)) ([592c46d](https://github.com/scaleway/scaleway-sdk-js/commit/592c46df916c5b8b35f26c13b626eee797970f5d))
+- **baremetal:** expose zone for offers and os ([#2496](https://github.com/scaleway/scaleway-sdk-js/issues/2496)) ([47f4e16](https://github.com/scaleway/scaleway-sdk-js/commit/47f4e16eea9f55281e62ec85455b6ffd92d9fd43))
+- **product_catalog:** add new boolean to ignore unsupported variants ([#2253](https://github.com/scaleway/scaleway-sdk-js/issues/2253)) ([4569b7f](https://github.com/scaleway/scaleway-sdk-js/commit/4569b7f2291e95cf9944248f08aa0e2385d7b264))
+- **product_catalog:** add new product status end of sale ([#2306](https://github.com/scaleway/scaleway-sdk-js/issues/2306)) ([367ce21](https://github.com/scaleway/scaleway-sdk-js/commit/367ce210462494eb104731ea5896d150a6e664d3))
+- **product_catalog:** add offer ID in the public/admin catalog API ([#2337](https://github.com/scaleway/scaleway-sdk-js/issues/2337)) ([6c4a499](https://github.com/scaleway/scaleway-sdk-js/commit/6c4a4999eb5b4cf2f7770e5d0436812996b9bd9f))
+- **product_catalog:** add productCategory ([#2350](https://github.com/scaleway/scaleway-sdk-js/issues/2350)) ([b0d384a](https://github.com/scaleway/scaleway-sdk-js/commit/b0d384afc7621322a9fb389845a80cb81a6195c5))
+- **product_catalog:** add support for `second` as a countable unit ([#2375](https://github.com/scaleway/scaleway-sdk-js/issues/2375)) ([d0a5542](https://github.com/scaleway/scaleway-sdk-js/commit/d0a5542cb25a306f259a2e3f693faadeaa3a4508))
+- **product_catalog:** handle new countable units in catalog APIs ([#2383](https://github.com/scaleway/scaleway-sdk-js/issues/2383)) ([f06ff7b](https://github.com/scaleway/scaleway-sdk-js/commit/f06ff7bcbbd7f68a65c87ae72356556bd27d1a44))
+- **product_catalog:** object storage to estimation api ([#2316](https://github.com/scaleway/scaleway-sdk-js/issues/2316)) ([7431191](https://github.com/scaleway/scaleway-sdk-js/commit/74311914f9dbe4030cbb3b90cc40822bbd41f056))
+
 # 1.8.0 (2025-10-22)
 
 ### Features

@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-iam@1.3.0...@scaleway/sdk-iam@1.6.0) (2025-10-27)
+
+### Bug Fixes
+
+- **iam/v1alpha1:** add max_bytes rule to password validation ([#2259](https://github.com/scaleway/scaleway-sdk-js/issues/2259)) ([c9a68c1](https://github.com/scaleway/scaleway-sdk-js/commit/c9a68c13fa69f50182e301da89efe95165a4477f))
+- **iam/v1alpha1:** add max_bytes rule to update password validation ([#2260](https://github.com/scaleway/scaleway-sdk-js/issues/2260)) ([ab7dde5](https://github.com/scaleway/scaleway-sdk-js/commit/ab7dde5289593fc942b2558185a311f35764d15e))
+- **iam/v1alpha1:** set UpdateOrganizationLoginMethods body ([#2508](https://github.com/scaleway/scaleway-sdk-js/issues/2508)) ([08c24a6](https://github.com/scaleway/scaleway-sdk-js/commit/08c24a64096de5c596f251919cc2f3780f38554c))
+
+### Features
+
+- **iam/v1alpha1:** add GetSamlInformation ([#2324](https://github.com/scaleway/scaleway-sdk-js/issues/2324)) ([71db561](https://github.com/scaleway/scaleway-sdk-js/commit/71db5612a9d20b18c97932831c2cddf12ebcccc3))
+- **iam/v1alpha1:** add ParseSamlMetadata ([#2523](https://github.com/scaleway/scaleway-sdk-js/issues/2523)) ([b0db04d](https://github.com/scaleway/scaleway-sdk-js/commit/b0db04de8017560b9897b0a4bc3b598cebcc756e))
+- **iam/v1alpha1:** add UpdateOrganizationLoginMethods ([#2484](https://github.com/scaleway/scaleway-sdk-js/issues/2484)) ([9b35ebb](https://github.com/scaleway/scaleway-sdk-js/commit/9b35ebbefe6e9edc6ad6f32885db5373079f7fff))
+- **iam:** add expires_at to updateable API key fields ([#2532](https://github.com/scaleway/scaleway-sdk-js/issues/2532)) ([6b7d806](https://github.com/scaleway/scaleway-sdk-js/commit/6b7d806b150889d13a44186a37685dde83689d3a))
+- **iam:** add max_api_key_expiration_duration to OrganizationSecuritySettings ([#2527](https://github.com/scaleway/scaleway-sdk-js/issues/2527)) ([deb9c44](https://github.com/scaleway/scaleway-sdk-js/commit/deb9c4413f5db5570f6af51c88af5763f533f1af))
+- **iam:** add max_login_session_days security setting ([#2450](https://github.com/scaleway/scaleway-sdk-js/issues/2450)) ([72dff65](https://github.com/scaleway/scaleway-sdk-js/commit/72dff65c03d7fbd71f03d6e36cbe78f9e098a210))
+- **iam:** add saml certificate expires_at field ([#2248](https://github.com/scaleway/scaleway-sdk-js/issues/2248)) ([95288dc](https://github.com/scaleway/scaleway-sdk-js/commit/95288dc74cc591026533ace8189a198f531305e1))
+- **iam:** remove guest from user type ([#2494](https://github.com/scaleway/scaleway-sdk-js/issues/2494)) ([f21355c](https://github.com/scaleway/scaleway-sdk-js/commit/f21355c92a8ca675af3c894877d0754224b88e4d))
+- **iam:** remove MigrateOrganizationGuests method ([#2507](https://github.com/scaleway/scaleway-sdk-js/issues/2507)) ([ef40081](https://github.com/scaleway/scaleway-sdk-js/commit/ef4008131343cd6bab1f5e20dbba8616688b89ee))
+- **iam:** rework saml endpoints ([#2346](https://github.com/scaleway/scaleway-sdk-js/issues/2346)) ([6d3a37d](https://github.com/scaleway/scaleway-sdk-js/commit/6d3a37dfcf4731df4546827ea73d60f55147eb22))
+
 # [1.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-iam@1.3.0...@scaleway/sdk-iam@1.5.0) (2025-10-22)
 
 ### Bug Fixes
