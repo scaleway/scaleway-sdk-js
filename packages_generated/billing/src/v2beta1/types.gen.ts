@@ -130,6 +130,10 @@ export interface ListConsumptionsResponseConsumption {
    * Consumed quantity.
    */
   billedQuantity: string
+  /**
+   * Organization ID of the consumer for this consumption.
+   */
+  consumerId: string
 }
 
 export interface Discount {
