@@ -79,6 +79,7 @@ import type {
   Session,
   SyncDomainDnsRecordsRequestRecord,
   Website,
+  WebsiteApiCreateWebsiteRequest,
 } from './types.gen.js'
 
 export const unmarshalBackup = (data: unknown): Backup => {
@@ -222,6 +223,20 @@ export const unmarshalMailAccount = (data: unknown): MailAccount => {
     domain: data.domain,
     username: data.username,
   } as MailAccount
+}
+
+export const unmarshalWebsite = (data: unknown): Website => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Website' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    domain: data.domain,
+    path: data.path,
+    sslStatus: data.ssl_status,
+  } as Website
 }
 
 const unmarshalFreeDomain = (data: unknown): FreeDomain => {
@@ -705,20 +720,6 @@ export const unmarshalListRecentProgressesResponse = (
   } as ListRecentProgressesResponse
 }
 
-const unmarshalWebsite = (data: unknown): Website => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Website' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    domain: data.domain,
-    path: data.path,
-    sslStatus: data.ssl_status,
-  } as Website
-}
-
 export const unmarshalListWebsitesResponse = (
   data: unknown,
 ): ListWebsitesResponse => {
@@ -1090,4 +1091,11 @@ export const marshalMailAccountApiRemoveMailAccountRequest = (
 ): Record<string, unknown> => ({
   domain: request.domain,
   username: request.username,
+})
+
+export const marshalWebsiteApiCreateWebsiteRequest = (
+  request: WebsiteApiCreateWebsiteRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  domain_name: request.domainName,
 })

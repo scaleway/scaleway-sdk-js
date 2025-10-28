@@ -1891,6 +1891,36 @@ export interface Session {
   url: string
 }
 
+export type WebsiteApiCreateWebsiteRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Hosting ID to which the website is attached to.
+   */
+  hostingId: string
+  /**
+   * The new domain name or subdomain to use for the website.
+   */
+  domainName: string
+}
+
+export type WebsiteApiDeleteWebsiteRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Hosting ID to which the website is detached from.
+   */
+  hostingId: string
+  /**
+   * The new domain name or subdomain attached to the website.
+   */
+  domainName: string
+}
+
 export type WebsiteApiListWebsitesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
