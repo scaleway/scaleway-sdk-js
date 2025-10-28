@@ -138,7 +138,7 @@ export interface Deployment {
    */
   updatedAt?: Date
   /**
-   * Clickhouse version.
+   * ClickHouse® version.
    */
   version: string
   /**
@@ -249,7 +249,7 @@ export type CreateDeploymentRequest = {
    */
   tags?: string[]
   /**
-   * Clickhouse version to use for the deployment.
+   * ClickHouse® version to use for the deployment.
    */
   version: string
   /**

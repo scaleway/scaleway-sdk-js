@@ -119,7 +119,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List available Clickhouse versions.
+   * List available ClickHouse® versions.
    *
    * @param request - The request {@link ListVersionsRequest}
    * @returns A Promise of ListVersionsResponse
@@ -235,7 +235,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a deployment. Delete a given deployment, specified by the `region` and `deployment_id` parameters. Deleting a deployment is permanent, and cannot be undone. Upon deletion, deletion all your data will be lost.
+   * Delete a deployment. Delete a given deployment, specified by the `region` and `deployment_id` parameters. Deleting a deployment is permanent, and cannot be undone. Upon deletion, all your data will be lost.
    *
    * @param request - The request {@link DeleteDeploymentRequest}
    * @returns A Promise of Deployment
