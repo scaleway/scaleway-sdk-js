@@ -33,6 +33,7 @@ import {
   marshalMailAccountApiChangeMailAccountPasswordRequest,
   marshalMailAccountApiCreateMailAccountRequest,
   marshalMailAccountApiRemoveMailAccountRequest,
+  marshalWebsiteApiCreateWebsiteRequest,
   unmarshalBackup,
   unmarshalCheckFreeDomainAvailabilityResponse,
   unmarshalCheckUserOwnsDomainResponse,
@@ -63,6 +64,7 @@ import {
   unmarshalRestoreBackupResponse,
   unmarshalSearchDomainsResponse,
   unmarshalSession,
+  unmarshalWebsite,
 } from './marshalling.gen.js'
 import type {
   Backup,
@@ -140,6 +142,9 @@ import type {
   RestoreBackupResponse,
   SearchDomainsResponse,
   Session,
+  Website,
+  WebsiteApiCreateWebsiteRequest,
+  WebsiteApiDeleteWebsiteRequest,
   WebsiteApiListWebsitesRequest,
 } from './types.gen.js'
 
@@ -990,7 +995,7 @@ export class HostingAPI extends ParentAPI {
     )
 
   /**
-   * Attach a custom domain to a webhosting.
+   * Attach a custom domain to a webhosting as an alias to the main domain.
    *
    * @param request - The request {@link HostingApiAddCustomDomainRequest}
    * @returns A Promise of HostingSummary
@@ -1365,4 +1370,34 @@ export class WebsiteAPI extends ParentAPI {
    */
   listWebsites = (request: Readonly<WebsiteApiListWebsitesRequest>) =>
     enrichForPagination('websites', this.pageOfListWebsites, request)
+
+  /**
+   * Create a new website and attach it to a webhosting.
+   *
+   * @param request - The request {@link WebsiteApiCreateWebsiteRequest}
+   * @returns A Promise of Website
+   */
+  createWebsite = (request: Readonly<WebsiteApiCreateWebsiteRequest>) =>
+    this.client.fetch<Website>(
+      {
+        body: JSON.stringify(
+          marshalWebsiteApiCreateWebsiteRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/websites`,
+      },
+      unmarshalWebsite,
+    )
+
+  /**
+   * Delete a website from a webhosting.
+   *
+   * @param request - The request {@link WebsiteApiDeleteWebsiteRequest}
+   */
+  deleteWebsite = (request: Readonly<WebsiteApiDeleteWebsiteRequest>) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/websites/${validatePathParam('domainName', request.domainName)}`,
+    })
 }
