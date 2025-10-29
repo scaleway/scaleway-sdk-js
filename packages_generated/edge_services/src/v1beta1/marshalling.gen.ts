@@ -91,6 +91,7 @@ const unmarshalScalewayLb = (data: unknown): ScalewayLb => {
   return {
     domainName: data.domain_name,
     frontendId: data.frontend_id,
+    hasWebsocket: data.has_websocket,
     id: data.id,
     isSsl: data.is_ssl,
     zone: data.zone,
@@ -825,6 +826,7 @@ const marshalScalewayLb = (
 ): Record<string, unknown> => ({
   domain_name: request.domainName,
   frontend_id: request.frontendId,
+  has_websocket: request.hasWebsocket,
   id: request.id,
   is_ssl: request.isSsl,
   zone: request.zone,
