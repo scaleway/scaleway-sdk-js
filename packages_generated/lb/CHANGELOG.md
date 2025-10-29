@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.4.0 (2025-10-29)
+
+### Bug Fixes
+
+- **lb:** deny whitespace on uri field ([#2256](https://github.com/scaleway/scaleway-sdk-js/issues/2256)) ([65d413c](https://github.com/scaleway/scaleway-sdk-js/commit/65d413ca7b8ffc73ee476c21dd8df99ab78bbd2e))
+- **lb:** remove whitespace regex uri ([#2461](https://github.com/scaleway/scaleway-sdk-js/issues/2461)) ([b9ec922](https://github.com/scaleway/scaleway-sdk-js/commit/b9ec9223752a3d5337baf5d1f820ab48b380de3b))
+
+### Features
+
+- add extension .js for nodenext ([#2492](https://github.com/scaleway/scaleway-sdk-js/issues/2492)) ([592c46d](https://github.com/scaleway/scaleway-sdk-js/commit/592c46df916c5b8b35f26c13b626eee797970f5d))
+
 # 1.3.0 (2025-10-22)
 
 ### Bug Fixes

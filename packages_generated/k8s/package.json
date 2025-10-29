@@ -1,9 +1,10 @@
 {
   "name": "@scaleway/sdk-k8s",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "Scaleway SDK k8s",
   "license": "Apache-2.0",
   "files": [
+    "README.md",
     "dist"
   ],
   "type": "module",

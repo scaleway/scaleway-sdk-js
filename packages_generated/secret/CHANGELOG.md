@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.4.0 (2025-10-29)
+
+### Features
+
+- **secret_manager:** add s2s_vpn to product ([#2536](https://github.com/scaleway/scaleway-sdk-js/issues/2536)) ([91c927f](https://github.com/scaleway/scaleway-sdk-js/commit/91c927fe7082e44a3439023de0a5aed6fc456d53))
+- **secret_manager:** add the region of the version ([#2505](https://github.com/scaleway/scaleway-sdk-js/issues/2505)) ([b526f49](https://github.com/scaleway/scaleway-sdk-js/commit/b526f49be9bd40cd040e175752e5e9c4a064eb4a))
+
 # 1.3.0 (2025-10-22)
 
 ### Features

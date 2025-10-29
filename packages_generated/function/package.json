@@ -1,9 +1,10 @@
 {
   "name": "@scaleway/sdk-function",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Scaleway SDK function",
   "license": "Apache-2.0",
   "files": [
+    "README.md",
     "dist"
   ],
   "type": "module",

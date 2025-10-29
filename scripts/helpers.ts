@@ -23,6 +23,26 @@ export const unionTocamelCase = (str: string) =>
 
 export const snakeToSlug = (str: string) => str.split('_').join('-')
 
+export const snakeToDisplayName = (str: string) =>
+  str
+    .split('_')
+    .map(s => handleAcronym(s.split('/').map(handleAcronym).join('/')))
+    .join(' ')
+
+export const renderTemplate = (
+  template: string,
+  params: Record<string, string>,
+): string => {
+  let result = template
+  for (const [key, value] of Object.entries(params)) {
+    const placeholder = `{{${key}}}`
+    const stringValue =
+      typeof value === 'object' ? JSON.stringify(value) : value.toString()
+    result = result.replace(new RegExp(placeholder, 'g'), stringValue)
+  }
+  return result
+}
+
 export const renderTemplatePackageJson = (
   template: string,
   params: Record<string, string>,

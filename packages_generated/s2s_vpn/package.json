@@ -1,9 +1,10 @@
 {
   "name": "@scaleway/sdk-s2s-vpn",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Scaleway SDK s2s-vpn",
   "license": "Apache-2.0",
   "files": [
+    "README.md",
     "dist"
   ],
   "type": "module",
