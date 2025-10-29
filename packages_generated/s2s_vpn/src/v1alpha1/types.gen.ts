@@ -157,6 +157,14 @@ export interface Connection {
    */
   initiationPolicy: ConnectionInitiationPolicy
   /**
+   * ID of the secret in Secret Manager which contains the PSK.
+   */
+  secretId: string
+  /**
+   * Version number of the secret in Secret Manager which contains the PSK.
+   */
+  secretRevision: number
+  /**
    * List of IKE v2 ciphers proposed for the IPsec tunnel.
    */
   ikev2Ciphers: ConnectionCipher[]
@@ -450,9 +458,9 @@ export interface CreateConnectionResponse {
    */
   connection?: Connection
   /**
-   * New PSK generated for this connection.
+   * @deprecated Deprecated, use secret_id & secret_revision fields.
    */
-  preSharedKey: string
+  preSharedKey?: string
 }
 
 export type CreateCustomerGatewayRequest = {
@@ -940,9 +948,9 @@ export interface RenewConnectionPskResponse {
    */
   connection?: Connection
   /**
-   * New PSK generated for this connection.
+   * @deprecated Deprecated, use secret_id & secret_revision fields.
    */
-  preSharedKey: string
+  preSharedKey?: string
 }
 
 export type SetRoutingPolicyRequest = {

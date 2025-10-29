@@ -20,7 +20,7 @@ export type ListSecretsRequestOrderBy =
   | 'updated_at_asc'
   | 'updated_at_desc'
 
-export type Product = 'unknown_product' | 'edge_services'
+export type Product = 'unknown_product' | 'edge_services' | 's2s_vpn'
 
 export type SecretStatus = 'unknown_status' | 'ready' | 'locked'
 

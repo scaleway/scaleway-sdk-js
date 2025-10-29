@@ -14,6 +14,7 @@
     "generateAlias": "pnpm dlx tsx ./scripts/generateAlias.ts",
     "generatePackages": "pnpm dlx tsx ./scripts/generatePackages.ts",
     "generateGlobalSdkPackage": "pnpm dlx tsx ./scripts/updateGlobalSdkPackage.ts",
+    "setupNewProducts": "pnpm dlx tsx ./scripts/setupNewProducts.ts",
     "prebuild": "pnpm run generatePackages && pnpm run generateAlias &&  pnpm format",
     "build:packages": "pnpm turbo run build",
     "fix-import-extensions": "pnpm dlx tsx ./scripts/fix-import-extensions.ts",

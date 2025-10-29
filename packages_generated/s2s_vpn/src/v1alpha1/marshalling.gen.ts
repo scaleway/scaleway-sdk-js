@@ -100,6 +100,8 @@ export const unmarshalConnection = (data: unknown): Connection => {
     projectId: data.project_id,
     region: data.region,
     routePropagationEnabled: data.route_propagation_enabled,
+    secretId: data.secret_id,
+    secretRevision: data.secret_revision,
     status: data.status,
     tags: data.tags,
     tunnelStatus: data.tunnel_status,
