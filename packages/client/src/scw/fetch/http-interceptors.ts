@@ -14,9 +14,7 @@ import { dumpRequest, dumpResponse } from './http-dumper.js'
  *
  * @internal
  */
-interface HeaderEntryMapper {
-  (entry: [string, string]): [string, string]
-}
+type HeaderEntryMapper = (entry: [string, string]) => [string, string]
 
 /**
  * HTTP Request with obfuscated secrets.

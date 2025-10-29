@@ -151,7 +151,7 @@ export interface Schema {
   zfs?: SchemaZFS
 }
 
-export interface CertificationOption {}
+export type CertificationOption = {}
 
 export interface LicenseOption {
   osId: string
@@ -165,7 +165,7 @@ export interface PublicBandwidthOption {
   bandwidthInBps: number
 }
 
-export interface RemoteAccessOption {}
+export type RemoteAccessOption = {}
 
 export interface CreateServerRequestInstall {
   /**

@@ -23,7 +23,7 @@ export const CreateApplicationRequest = {
   name: {
     maxLength: 64,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
+    pattern: /^[a-zA-Z0-9()._\- ]+$/,
   },
 }
 
@@ -35,7 +35,7 @@ export const CreateGroupRequest = {
   name: {
     maxLength: 64,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
+    pattern: /^[a-zA-Z0-9()._\- ]+$/,
   },
 }
 
@@ -47,7 +47,7 @@ export const CreatePolicyRequest = {
   name: {
     maxLength: 64,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
+    pattern: /^[a-zA-Z0-9()._\- ]+$/,
   },
 }
 
@@ -109,7 +109,7 @@ export const ListApplicationsRequest = {
   name: {
     maxLength: 64,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
+    pattern: /^[a-zA-Z0-9()._\- ]+$/,
   },
   page: {
     greaterThanOrEqual: 1,
@@ -257,7 +257,7 @@ export const UpdateApplicationRequest = {
   name: {
     maxLength: 64,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
+    pattern: /^[a-zA-Z0-9()._\- ]+$/,
   },
 }
 
@@ -268,7 +268,7 @@ export const UpdateGroupRequest = {
   name: {
     maxLength: 64,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
+    pattern: /^[a-zA-Z0-9()._\- ]+$/,
   },
 }
 
@@ -286,7 +286,7 @@ export const UpdatePolicyRequest = {
   name: {
     maxLength: 64,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
+    pattern: /^[a-zA-Z0-9()._\- ]+$/,
   },
 }
 

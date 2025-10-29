@@ -23,7 +23,7 @@ export const CreateInstanceRequest = {
   userName: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_-]*$/,
   },
   version: {
     pattern: /^[0-9]+\.[0-9]+$/,
@@ -42,7 +42,7 @@ export const CreateUserRequest = {
   name: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_-]*$/,
   },
   password: {
     maxLength: 128,
@@ -54,7 +54,7 @@ export const DeleteUserRequest = {
   name: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_-]*$/,
   },
 }
 
@@ -112,7 +112,7 @@ export const ListUsersRequest = {
   name: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_-]*$/,
   },
   page: {
     greaterThanOrEqual: 1,
@@ -152,7 +152,7 @@ export const SetUserRoleRequest = {
   userName: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_-]*$/,
   },
 }
 
@@ -184,7 +184,7 @@ export const UpdateUserRequest = {
   name: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_-]*$/,
   },
   password: {
     maxLength: 128,

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 /* eslint-disable no-console */
 /**
  * setupNewProducts.ts
@@ -6,16 +7,16 @@
  *   pnpm tsx scripts/setupNewProducts.ts [--dry-run] [--src packages_generated] [--sdk packages/sdk/package.json] [--scope @scaleway|@scaleway-internal] [--install] [--verbose]
  */
 
+import { execSync } from 'node:child_process'
 import {
   existsSync,
-  readFileSync,
   readdirSync,
+  readFileSync,
   statSync,
   writeFileSync,
 } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { cwd } from 'node:process'
-import { execSync } from 'node:child_process'
 import type { ParseArgsConfig } from 'node:util'
 import { parseArgs } from 'node:util'
 import { snakeToSlug } from './helpers'

@@ -34,15 +34,13 @@ export class InvalidRequestMapper {
       return new InvalidArgumentsError(
         status,
         obj,
-        fieldsMessages
-          .map(([argumentName, messages]) =>
-            messages.map(helpMessage => ({
-              argumentName,
-              helpMessage,
-              reason: 'constraint',
-            })),
-          )
-          .flat(),
+        fieldsMessages.flatMap(([argumentName, messages]) =>
+          messages.map(helpMessage => ({
+            argumentName,
+            helpMessage,
+            reason: 'constraint',
+          })),
+        ),
       )
     }
 

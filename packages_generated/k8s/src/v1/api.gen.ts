@@ -1,14 +1,15 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  API as ParentAPI,
   enrichForPagination,
+  API as ParentAPI,
   toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_K8S,
   NODE_TRANSIENT_STATUSES as NODE_TRANSIENT_STATUSES_K8S,
@@ -32,8 +33,8 @@ import {
   unmarshalListClusterACLRulesResponse,
   unmarshalListClusterAvailableTypesResponse,
   unmarshalListClusterAvailableVersionsResponse,
-  unmarshalListClusterTypesResponse,
   unmarshalListClustersResponse,
+  unmarshalListClusterTypesResponse,
   unmarshalListNodesResponse,
   unmarshalListPoolsResponse,
   unmarshalListVersionsResponse,
@@ -69,10 +70,10 @@ import type {
   ListClusterAvailableTypesResponse,
   ListClusterAvailableVersionsRequest,
   ListClusterAvailableVersionsResponse,
-  ListClusterTypesRequest,
-  ListClusterTypesResponse,
   ListClustersRequest,
   ListClustersResponse,
+  ListClusterTypesRequest,
+  ListClusterTypesResponse,
   ListNodesRequest,
   ListNodesResponse,
   ListPoolsRequest,

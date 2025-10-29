@@ -1,5 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   marshalBlobToScwFile,
@@ -9,33 +11,32 @@ import {
   unmarshalMoney,
   unmarshalTimeSeries,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   AddOptionServerRequest,
   BMCAccess,
-  CPU,
   CertificationOption,
+  CPU,
   CreateServerRequest,
   CreateServerRequestInstall,
   Disk,
-  GPU,
   GetServerMetricsResponse,
-  IP,
+  GPU,
   InstallServerRequest,
+  IP,
   LicenseOption,
-  ListOSResponse,
   ListOffersResponse,
   ListOptionsResponse,
+  ListOSResponse,
   ListServerEventsResponse,
   ListServerPrivateNetworksResponse,
   ListServersResponse,
   ListSettingsResponse,
   Memory,
-  OS,
-  OSOSField,
   Offer,
   OfferOptionOffer,
   Option,
+  OS,
+  OSOSField,
   PersistentMemory,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
   PrivateNetworkApiSetServerPrivateNetworksRequest,
