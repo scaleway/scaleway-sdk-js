@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.3.0 (2025-10-29)
+
+### Features
+
+- add extension .js for nodenext ([#2492](https://github.com/scaleway/scaleway-sdk-js/issues/2492)) ([592c46d](https://github.com/scaleway/scaleway-sdk-js/commit/592c46df916c5b8b35f26c13b626eee797970f5d))
+- **billing:** add consumer_id to v2beta1.ListConsumptions ([#2537](https://github.com/scaleway/scaleway-sdk-js/issues/2537)) ([4601ce2](https://github.com/scaleway/scaleway-sdk-js/commit/4601ce287f855cd8499db74a332dcb86869b2980))
+
 # 1.2.0 (2025-10-22)
 
 ### Features
