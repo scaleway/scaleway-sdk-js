@@ -23,10 +23,11 @@
     "build:profile": "cross-env PROFILE=true pnpm run build",
     "commit": "npx git-cz -a",
     "doc": "typedoc",
-    "format": "biome check  --linter-enabled=false --write .",
-    "format:check": "biome check --linter-enabled=false --verbose .",
+    "format": "biome check --write .",
+    "format:check": "biome check .",
     "prettier": "prettier --write '**/*.{md,mdx,yml,yaml}'",
-    "lint": "eslint --cache .",
+    "lint": "biome lint .",
+    "lint:fix": "biome check --write .",
     "prepare": "husky",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
@@ -34,18 +35,17 @@
     "test:ui": "vitest --ui"
   },
   "lint-staged": {
-    "*.ts": [
-      "pnpm run format",
-      "eslint --fix --quiet ."
+    "*.{ts,tsx,js,jsx}": [
+      "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
     ],
     "*.json": [
-      "pnpm run format"
+      "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
     ],
     "*.y?(a)ml": [
-      "prettier --write '**/*.{yml,yaml}'"
+      "prettier --write"
     ],
-    ".md?(x)": [
-      "prettier --write '**/*.{md,mdx}'"
+    "*.md?(x)": [
+      "prettier --write"
     ]
   },
   "config": {

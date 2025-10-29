@@ -2,40 +2,28 @@
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "vcs": {
     "clientKind": "git",
-    "useIgnoreFile": false,
+    "useIgnoreFile": true,
     "defaultBranch": "main"
   },
   "files": {
     "maxSize": 10000000,
     "ignoreUnknown": true,
-    "includes": [
-      "**/*.ts",
-      "**/*.tsx",
-      "**/*.js",
-      "**/*.jsx",
-      "**/*.json"
-    ],
+    "includes": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.json"],
     "experimentalScannerIgnores": [
-      ".next/",
-      ".pnpm-store/",
-      "coverage/",
-      "/public/outdated",
-      "/public/.well-known",
       "**/node_modules/",
-      "**/storybook-static",
+      "**/dist/",
+      "**/build/",
+      "**/coverage/",
+      "**/examples/",
+      "**/*.gen.ts",
+      "**/*.min.js",
+      ".pnpm-store/",
+      ".next/",
       ".turbo/**",
-      "dist",
-      "build",
-      "out",
-      "node_modules/**",
-      "**/pnpm-lock.yaml",
-      "**/package.json",
-      "**/CHANGELOG.md",
-      "*.snap",
-      "**/__snapshots__/",
+      "storybook-static",
       ".docusaurus",
       ".vitest-reports",
-      "**/*.gen.ts"
+      "**/__snapshots__/"
     ]
   },
   "formatter": {
@@ -72,13 +60,103 @@
     }
   },
   "linter": {
-    "enabled": false
-  },
-  "assist": {
-    "actions": {
-      "source": {
-        "organizeImports": "off"
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "noForEach": "warn",
+        "noExcessiveCognitiveComplexity": "warn",
+        "noUselessStringConcat": "error"
+      },
+      "correctness": {
+        "noUnusedVariables": "warn",
+        "noUnusedImports": "warn",
+        "useExhaustiveDependencies": "warn"
+      },
+      "style": {
+        "noDefaultExport": "error",
+        "useNamingConvention": {
+          "level": "error",
+          "options": {
+            "strictCase": false,
+            "conventions": [
+              {
+                "selector": {
+                  "kind": "enumMember"
+                },
+                "formats": ["PascalCase"]
+              },
+              {
+                "selector": {
+                  "kind": "classMember",
+                  "modifiers": ["private"]
+                },
+                "formats": ["camelCase"],
+                "match": "_?[a-z].*"
+              }
+            ]
+          }
+        },
+        "useConsistentArrayType": "off",
+        "noParameterAssign": "warn",
+        "noNonNullAssertion": "warn"
+      },
+      "suspicious": {
+        "noExplicitAny": "warn",
+        "noEmptyBlockStatements": "warn",
+        "noArrayIndexKey": "warn"
+      },
+      "nursery": {
+        "useSortedClasses": "off"
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.test.ts", "**/__tests__/**/*.ts", "**/vite.config.ts", "vitest.config.ts"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedVariables": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "packages_generated/dedibox/src/v1/*.ts",
+        "packages/clients/src/api/dedibox/v1/*.ts"
+      ],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedVariables": "off"
+          },
+          "style": {
+            "useConsistentArrayType": "off"
+          },
+          "suspicious": {
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "packages/clients/src/scw/**/*.ts",
+        "packages/clients/src/internal/**/*.ts"
+      ],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedVariables": "off"
+          },
+          "style": {
+            "useConsistentArrayType": "off"
+          }
+        }
+      }
+    }
+  ]
 }
+
