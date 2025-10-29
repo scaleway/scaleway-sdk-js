@@ -14,7 +14,9 @@ import type { ParseArgsConfig } from 'node:util'
 import { parseArgs } from 'node:util'
 import { SDKS } from './constants'
 import {
+  renderTemplate,
   renderTemplatePackageJson,
+  snakeToDisplayName,
   snakeToPascal,
   snakeToSlug,
 } from './helpers'
@@ -24,6 +26,7 @@ import {
  * - package.json
  * - vite.config.ts
  * - tsconfig.json
+ * - README.md
  */
 
 const TEMPLATES = {
@@ -31,9 +34,11 @@ const TEMPLATES = {
   TS_CONFIG: join(cwd(), 'scripts/templates', 'tsconfig.json'),
   TS_CONFIG_BUILD: join(cwd(), 'scripts/templates', 'tsconfig.build.json'),
   VITE_CONFIG: join(cwd(), 'scripts/templates', 'vite.config.ts'),
+  README: join(cwd(), 'scripts/templates', 'README.tmpl'),
 }
 
 const templateString = readFileSync(TEMPLATES.PACKAGE_JSON, 'utf8')
+const readmeTemplateString = readFileSync(TEMPLATES.README, 'utf8')
 
 // npx tsx scripts/generatePackages.ts ) --src="packages_generated"
 const options: ParseArgsConfig['options'] = {
@@ -143,6 +148,21 @@ const main = () => {
             join(fullPath, 'tsconfig.build.json'),
           )
           copyFileSync(TEMPLATES.VITE_CONFIG, join(fullPath, 'vite.config.ts'))
+
+          // Generate README.md only if it doesn't exist
+          const readmeFilePath = join(fullPath, 'README.md')
+          access(readmeFilePath, constants.F_OK, err => {
+            if (err) {
+              const slugName = snakeToSlug(productDir)
+              const readme = renderTemplate(readmeTemplateString, {
+                name: slugName,
+                displayName: snakeToDisplayName(productDir),
+                pascalName: snakeToPascal(productDir),
+              })
+              writeFileSync(readmeFilePath, readme)
+              console.log(`Generated README.md for ${productDir}`)
+            }
+          })
         }
       }
     }
