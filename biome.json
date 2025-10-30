@@ -113,6 +113,19 @@
   },
   "overrides": [
     {
+      "includes": [
+        "packages/client/src/internal/interceptors/types.ts"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "useShorthandFunctionType": "off",
+            "useUnifiedTypeSignatures": "off"
+          }
+        }
+      }
+    },
+    {
       "includes": ["**/*.test.ts", "**/__tests__/**/*.ts", "**/vite.config.ts", "vitest.config.ts"],
       "linter": {
         "rules": {
