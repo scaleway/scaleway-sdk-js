@@ -1,0 +1,11 @@
+import type { DefaultValues } from '@scaleway/sdk-client';
+import type { CreateNamespaceRequest, Image, ListImagesResponse, ListNamespacesResponse, ListTagsResponse, Namespace, Tag, UpdateImageRequest, UpdateNamespaceRequest } from './types.gen';
+export declare const unmarshalImage: (data: unknown) => Image;
+export declare const unmarshalNamespace: (data: unknown) => Namespace;
+export declare const unmarshalTag: (data: unknown) => Tag;
+export declare const unmarshalListImagesResponse: (data: unknown) => ListImagesResponse;
+export declare const unmarshalListNamespacesResponse: (data: unknown) => ListNamespacesResponse;
+export declare const unmarshalListTagsResponse: (data: unknown) => ListTagsResponse;
+export declare const marshalCreateNamespaceRequest: (request: CreateNamespaceRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateImageRequest: (request: UpdateImageRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateNamespaceRequest: (request: UpdateNamespaceRequest, defaults: DefaultValues) => Record<string, unknown>;

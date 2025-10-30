@@ -1,0 +1,31 @@
+import { ScalewayError } from "../scw-error.js";
+class AlreadyExistsError extends ScalewayError {
+  constructor(status, body, resource, resourceId, helpMessage) {
+    super(
+      status,
+      body,
+      `resource ${resource} with ID ${resourceId} already exists: ${helpMessage}`
+    );
+    this.status = status;
+    this.body = body;
+    this.resource = resource;
+    this.resourceId = resourceId;
+    this.helpMessage = helpMessage;
+    this.name = "AlreadyExistsError";
+  }
+  static fromJSON(status, obj) {
+    if (typeof obj.resource !== "string" || typeof obj.resource_id !== "string" || typeof obj.help_message !== "string") {
+      return null;
+    }
+    return new AlreadyExistsError(
+      status,
+      obj,
+      obj.resource,
+      obj.resource_id,
+      obj.help_message
+    );
+  }
+}
+export {
+  AlreadyExistsError
+};

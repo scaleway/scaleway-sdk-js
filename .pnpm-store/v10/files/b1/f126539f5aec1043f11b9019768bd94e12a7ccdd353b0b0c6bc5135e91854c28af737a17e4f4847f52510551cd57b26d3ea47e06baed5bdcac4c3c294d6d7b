@@ -1,0 +1,29 @@
+import { isJSONObject } from "../../../helpers/json.js";
+import { ScalewayError } from "../scw-error.js";
+const buildMessage = (list) => `insufficient permissions: ${list.map(({ action, resource }) => `${action} ${resource}`).join("; ")}`;
+class PermissionsDeniedError extends ScalewayError {
+  constructor(status, body, list) {
+    super(status, body, buildMessage(list));
+    this.status = status;
+    this.body = body;
+    this.list = list;
+    this.name = "PermissionsDeniedError";
+  }
+  static fromJSON(status, obj) {
+    if (!Array.isArray(obj.details)) return null;
+    return new PermissionsDeniedError(
+      status,
+      obj,
+      obj.details.reduce(
+        (list, detail) => isJSONObject(detail) && typeof detail.resource === "string" && typeof detail.action === "string" ? list.concat({
+          action: detail.action,
+          resource: detail.resource
+        }) : list,
+        []
+      )
+    );
+  }
+}
+export {
+  PermissionsDeniedError
+};

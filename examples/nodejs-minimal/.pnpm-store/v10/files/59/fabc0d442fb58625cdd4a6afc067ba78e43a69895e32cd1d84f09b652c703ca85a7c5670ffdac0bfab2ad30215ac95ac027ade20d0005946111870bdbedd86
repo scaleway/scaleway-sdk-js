@@ -1,0 +1,81 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { Category, GetCategoryRequest, GetImageRequest, GetLocalImageRequest, GetVersionRequest, Image, ListCategoriesRequest, ListCategoriesResponse, ListImagesRequest, ListImagesResponse, ListLocalImagesRequest, ListLocalImagesResponse, ListVersionsRequest, ListVersionsResponse, LocalImage, Version } from './types.gen';
+/**
+ * Marketplace API.
+
+This API allows you to find available images for use when launching a Scaleway Instance.
+ */
+export declare class API extends ParentAPI {
+    protected pageOfListImages: (request: Readonly<ListImagesRequest>) => Promise<ListImagesResponse>;
+    /**
+     * List marketplace images. List all available images on the marketplace, their UUID, CPU architecture and description.
+     *
+     * @param request - The request {@link ListImagesRequest}
+     * @returns A Promise of ListImagesResponse
+     */
+    listImages: (request: Readonly<ListImagesRequest>) => Promise<ListImagesResponse> & {
+        all: () => Promise<Image[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Image[], void, void>;
+    };
+    /**
+     * Get a specific marketplace image. Get detailed information about a marketplace image, specified by its `image_id` (UUID format).
+     *
+     * @param request - The request {@link GetImageRequest}
+     * @returns A Promise of Image
+     */
+    getImage: (request: Readonly<GetImageRequest>) => Promise<Image>;
+    protected pageOfListVersions: (request: Readonly<ListVersionsRequest>) => Promise<ListVersionsResponse>;
+    /**
+     * List versions of an Image. Get a list of all available version of an image, specified by its `image_id` (UUID format).
+     *
+     * @param request - The request {@link ListVersionsRequest}
+     * @returns A Promise of ListVersionsResponse
+     */
+    listVersions: (request: Readonly<ListVersionsRequest>) => Promise<ListVersionsResponse> & {
+        all: () => Promise<Version[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Version[], void, void>;
+    };
+    /**
+     * Get a specific image version. Get information such as the name, creation date, last update and published date for an image version specified by its `version_id` (UUID format).
+     *
+     * @param request - The request {@link GetVersionRequest}
+     * @returns A Promise of Version
+     */
+    getVersion: (request: Readonly<GetVersionRequest>) => Promise<Version>;
+    protected pageOfListLocalImages: (request?: Readonly<ListLocalImagesRequest>) => Promise<ListLocalImagesResponse>;
+    /**
+     * List local images from a specific image or version. List information about local images in a specific Availability Zone, specified by its `image_id` (UUID format), `version_id` (UUID format) or `image_label`. Only one of these three parameters may be set.
+     *
+     * @param request - The request {@link ListLocalImagesRequest}
+     * @returns A Promise of ListLocalImagesResponse
+     */
+    listLocalImages: (request?: Readonly<ListLocalImagesRequest>) => Promise<ListLocalImagesResponse> & {
+        all: () => Promise<LocalImage[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<LocalImage[], void, void>;
+    };
+    /**
+     * Get a specific local image by ID. Get detailed information about a local image, including compatible commercial types, supported architecture, labels and the Availability Zone of the image, specified by its `local_image_id` (UUID format).
+     *
+     * @param request - The request {@link GetLocalImageRequest}
+     * @returns A Promise of LocalImage
+     */
+    getLocalImage: (request: Readonly<GetLocalImageRequest>) => Promise<LocalImage>;
+    protected pageOfListCategories: (request?: Readonly<ListCategoriesRequest>) => Promise<ListCategoriesResponse>;
+    /**
+     * List existing image categories. Get a list of all existing categories. The output can be paginated.
+     *
+     * @param request - The request {@link ListCategoriesRequest}
+     * @returns A Promise of ListCategoriesResponse
+     */
+    listCategories: (request?: Readonly<ListCategoriesRequest>) => Promise<ListCategoriesResponse> & {
+        all: () => Promise<Category[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Category[], void, void>;
+    };
+    /**
+     * Get a specific category. Get information about a specific category of the marketplace catalog, specified by its `category_id` (UUID format).
+     *
+     * @param request - The request {@link GetCategoryRequest}
+     * @returns A Promise of Category
+     */
+    getCategory: (request: Readonly<GetCategoryRequest>) => Promise<Category>;
+}

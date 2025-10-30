@@ -1,0 +1,47 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const isJSONObject = (obj) => {
+  const objT = typeof obj;
+  return obj !== void 0 && obj !== null && objT !== "string" && objT !== "number" && objT !== "boolean" && !Array.isArray(obj) && objT === "object";
+};
+const camelize = (str) => {
+  const strLength = str.length;
+  if (strLength <= 0) {
+    return str;
+  }
+  let out = "";
+  for (let capNext = false, index = 0; index < strLength; index += 1) {
+    const char = str.charAt(index);
+    if (char >= "a" && char <= "z") {
+      if (capNext) {
+        out += char.toUpperCase();
+      } else {
+        out += char;
+      }
+    } else if (char >= "A" && char <= "Z") {
+      out += char;
+    } else if (char >= "0" && char <= "9") {
+      out += char;
+    }
+    capNext = char === "_" || char === " " || char === "-" || char === ".";
+  }
+  return out.charAt(0).toLowerCase() + out.substring(1);
+};
+const camelizeKeys = (obj, ignoreKeys = []) => {
+  if (Array.isArray(obj)) {
+    return obj.map((v) => camelizeKeys(v, ignoreKeys));
+  }
+  if (obj && typeof obj === "object" && !(obj instanceof Date)) {
+    return Object.entries(obj).reduce(
+      (acc, [key, value]) => ({
+        ...acc,
+        [camelize(key)]: ignoreKeys.includes(key) ? value : camelizeKeys(value, ignoreKeys)
+      }),
+      {}
+    );
+  }
+  return obj;
+};
+exports.camelize = camelize;
+exports.camelizeKeys = camelizeKeys;
+exports.isJSONObject = isJSONObject;

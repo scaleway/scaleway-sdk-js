@@ -1,0 +1,34 @@
+import type { JSONObject } from '../../../helpers/json.js';
+import { ScalewayError } from '../scw-error.js';
+/**
+ * Scope of an {@link QuotasExceededErrorDetails} error.
+ *
+ * @public
+ */
+export interface QuotasExceededErrorScope {
+    kind: 'organization' | 'project';
+    id: string;
+}
+/**
+ * Details of an {@link QuotasExceededError} error.
+ *
+ * @public
+ */
+export interface QuotasExceededErrorDetails {
+    readonly resource: string;
+    readonly quota: number;
+    readonly current: number;
+    readonly scope?: QuotasExceededErrorScope;
+}
+/**
+ * QuotasExceeded error happens when one or many resource exceed quotas during the creation of a resource.
+ *
+ * @public
+ */
+export declare class QuotasExceededError extends ScalewayError {
+    readonly status: number;
+    readonly body: JSONObject;
+    readonly list: QuotasExceededErrorDetails[];
+    constructor(status: number, body: JSONObject, list: QuotasExceededErrorDetails[]);
+    static fromJSON(status: number, obj: Readonly<JSONObject>): QuotasExceededError | null;
+}

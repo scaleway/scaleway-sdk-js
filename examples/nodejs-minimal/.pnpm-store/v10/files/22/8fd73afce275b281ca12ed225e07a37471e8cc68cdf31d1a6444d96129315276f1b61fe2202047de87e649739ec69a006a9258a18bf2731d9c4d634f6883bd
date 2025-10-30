@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const DEPLOYMENT_TRANSIENT_STATUSES = [
+  "creating",
+  "deploying",
+  "deleting"
+];
+const MODEL_TRANSIENT_STATUSES = [
+  "preparing",
+  "downloading"
+];
+exports.DEPLOYMENT_TRANSIENT_STATUSES = DEPLOYMENT_TRANSIENT_STATUSES;
+exports.MODEL_TRANSIENT_STATUSES = MODEL_TRANSIENT_STATUSES;

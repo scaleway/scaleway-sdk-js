@@ -1,0 +1,23 @@
+import type { Settings } from '../client-settings.js';
+import type { ResponseUnmarshaller, ScwRequest } from './types';
+/**
+ * Builds Request from {@link ScwRequest} & {@link Settings}.
+ *
+ * @param request - A scaleway request
+ * @param settings - The settings
+ * @returns A fetch Request
+ *
+ * @internal
+ */
+export declare const buildRequest: (request: Readonly<ScwRequest>, settings: Readonly<Settings>) => Request;
+export type Fetcher = <T>(request: Readonly<ScwRequest>, unwrapper?: ResponseUnmarshaller<T>) => Promise<T>;
+/**
+ * Builds a resource fetcher.
+ *
+ * @param settings - The {@link Settings} object
+ * @param httpClient - The HTTP client that should be used to call the API
+ * @returns The fetcher
+ *
+ * @internal
+ */
+export declare const buildFetcher: (settings: Settings, httpClient: typeof fetch) => <T>(request: Readonly<ScwRequest>, unwrapper?: ResponseUnmarshaller<T>) => Promise<T>;

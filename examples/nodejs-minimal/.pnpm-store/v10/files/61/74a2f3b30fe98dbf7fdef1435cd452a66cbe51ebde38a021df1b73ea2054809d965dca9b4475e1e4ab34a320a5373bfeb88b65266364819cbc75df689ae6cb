@@ -1,0 +1,271 @@
+import randomName from "@scaleway/random-name";
+import { resolveOneOf, isJSONObject, unmarshalArrayOfObject, unmarshalDate } from "@scaleway/sdk-client";
+const unmarshalEndpointPrivateNetworkDetails = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EndpointPrivateNetworkDetails' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    privateNetworkId: data.private_network_id
+  };
+};
+const unmarshalEndpointPublicAccessDetails = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EndpointPublicAccessDetails' failed as data isn't a dictionary.`
+    );
+  }
+  return {};
+};
+const unmarshalEndpoint = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Endpoint' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    disableAuth: data.disable_auth,
+    id: data.id,
+    privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : void 0,
+    publicAccess: data.public_access ? unmarshalEndpointPublicAccessDetails(data.public_access) : void 0,
+    url: data.url
+  };
+};
+const unmarshalDeployment = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Deployment' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
+    errorMessage: data.error_message,
+    id: data.id,
+    maxSize: data.max_size,
+    minSize: data.min_size,
+    modelId: data.model_id,
+    modelName: data.model_name,
+    name: data.name,
+    nodeType: data.node_type,
+    projectId: data.project_id,
+    region: data.region,
+    size: data.size,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalModelS3Model = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ModelS3Model' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    nodeType: data.node_type,
+    pythonDependencies: data.python_dependencies,
+    s3Url: data.s3_url,
+    tritonServerVersion: data.triton_server_version
+  };
+};
+const unmarshalModel = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Model' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    compatibleNodeTypes: data.compatible_node_types,
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description,
+    hasEula: data.has_eula,
+    id: data.id,
+    isPublic: data.is_public,
+    name: data.name,
+    projectId: data.project_id,
+    provider: data.provider,
+    quantizationLevel: data.quantization_level,
+    region: data.region,
+    s3Model: data.s3_model ? unmarshalModelS3Model(data.s3_model) : void 0,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalACLRule = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ACLRule' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    description: data.description,
+    id: data.id,
+    ip: data.ip
+  };
+};
+const unmarshalAddDeploymentACLRulesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AddDeploymentACLRulesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    rules: unmarshalArrayOfObject(data.rules, unmarshalACLRule)
+  };
+};
+const unmarshalEula = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Eula' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    content: data.content
+  };
+};
+const unmarshalListDeploymentACLRulesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDeploymentACLRulesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    rules: unmarshalArrayOfObject(data.rules, unmarshalACLRule),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListDeploymentsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDeploymentsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    deployments: unmarshalArrayOfObject(data.deployments, unmarshalDeployment),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListModelsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListModelsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    models: unmarshalArrayOfObject(data.models, unmarshalModel),
+    totalCount: data.total_count
+  };
+};
+const unmarshalNodeType = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'NodeType' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    beta: data.beta,
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description,
+    disabled: data.disabled,
+    gpus: data.gpus,
+    memory: data.memory,
+    name: data.name,
+    region: data.region,
+    stockStatus: data.stock_status,
+    updatedAt: unmarshalDate(data.updated_at),
+    vcpus: data.vcpus,
+    vram: data.vram
+  };
+};
+const unmarshalListNodeTypesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListNodeTypesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    nodeTypes: unmarshalArrayOfObject(data.node_types, unmarshalNodeType),
+    totalCount: data.total_count
+  };
+};
+const unmarshalSetDeploymentACLRulesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetDeploymentACLRulesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    rules: unmarshalArrayOfObject(data.rules, unmarshalACLRule)
+  };
+};
+const marshalACLRuleRequest = (request, defaults) => ({
+  description: request.description,
+  ip: request.ip
+});
+const marshalAddDeploymentACLRulesRequest = (request, defaults) => ({
+  acls: request.acls !== void 0 ? request.acls.map((elt) => marshalACLRuleRequest(elt)) : void 0
+});
+const marshalEndpointSpecPrivateNetwork = (request, defaults) => ({
+  private_network_id: request.privateNetworkId
+});
+const marshalEndpointSpecPublic = (request, defaults) => ({});
+const marshalEndpointSpec = (request, defaults) => ({
+  disable_auth: request.disableAuth,
+  ...resolveOneOf([
+    {
+      param: "public",
+      value: request.public !== void 0 ? marshalEndpointSpecPublic(request.public) : void 0
+    },
+    {
+      param: "private_network",
+      value: request.privateNetwork !== void 0 ? marshalEndpointSpecPrivateNetwork(request.privateNetwork) : void 0
+    }
+  ])
+});
+const marshalCreateDeploymentRequest = (request, defaults) => ({
+  accept_eula: request.acceptEula,
+  endpoints: request.endpoints.map((elt) => marshalEndpointSpec(elt)),
+  max_size: request.maxSize,
+  min_size: request.minSize,
+  model_name: request.modelName,
+  name: request.name || randomName("inference"),
+  node_type: request.nodeType,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags
+});
+const marshalCreateEndpointRequest = (request, defaults) => ({
+  deployment_id: request.deploymentId,
+  endpoint: marshalEndpointSpec(request.endpoint)
+});
+const marshalSetDeploymentACLRulesRequest = (request, defaults) => ({
+  acls: request.acls !== void 0 ? request.acls.map((elt) => marshalACLRuleRequest(elt)) : void 0
+});
+const marshalUpdateDeploymentRequest = (request, defaults) => ({
+  max_size: request.maxSize,
+  min_size: request.minSize,
+  name: request.name,
+  tags: request.tags
+});
+const marshalUpdateEndpointRequest = (request, defaults) => ({
+  disable_auth: request.disableAuth
+});
+export {
+  marshalAddDeploymentACLRulesRequest,
+  marshalCreateDeploymentRequest,
+  marshalCreateEndpointRequest,
+  marshalSetDeploymentACLRulesRequest,
+  marshalUpdateDeploymentRequest,
+  marshalUpdateEndpointRequest,
+  unmarshalAddDeploymentACLRulesResponse,
+  unmarshalDeployment,
+  unmarshalEndpoint,
+  unmarshalEula,
+  unmarshalListDeploymentACLRulesResponse,
+  unmarshalListDeploymentsResponse,
+  unmarshalListModelsResponse,
+  unmarshalListNodeTypesResponse,
+  unmarshalModel,
+  unmarshalSetDeploymentACLRulesResponse
+};

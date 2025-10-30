@@ -1,0 +1,382 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalJobCircuit = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'JobCircuit' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    percevalCircuit: data.perceval_circuit,
+    qiskitCircuit: data.qiskit_circuit
+  };
+};
+const unmarshalApplication = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Application' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    compatiblePlatformIds: data.compatible_platform_ids,
+    id: data.id,
+    inputTemplate: data.input_template,
+    name: data.name,
+    type: data.type
+  };
+};
+const unmarshalBooking = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Booking' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    description: data.description,
+    finishedAt: sdkClient.unmarshalDate(data.finished_at),
+    id: data.id,
+    progressMessage: data.progress_message,
+    startedAt: sdkClient.unmarshalDate(data.started_at),
+    status: data.status,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalJob = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Job' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    id: data.id,
+    jobDuration: data.job_duration,
+    name: data.name,
+    progressMessage: data.progress_message,
+    resultDistribution: data.result_distribution,
+    sessionId: data.session_id,
+    startedAt: sdkClient.unmarshalDate(data.started_at),
+    status: data.status,
+    tags: data.tags,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalPlatformBookingRequirement = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PlatformBookingRequirement' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    maxCancellationDuration: data.max_cancellation_duration,
+    maxDuration: data.max_duration,
+    maxPlanificationDuration: data.max_planification_duration,
+    minDuration: data.min_duration
+  };
+};
+const unmarshalPlatformHardware = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PlatformHardware' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    gpus: data.gpus,
+    gpusNetwork: data.gpus_network,
+    name: data.name,
+    ram: data.ram,
+    vcpus: data.vcpus,
+    vram: data.vram
+  };
+};
+const unmarshalPlatform = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Platform' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    availability: data.availability,
+    backendName: data.backend_name,
+    bookingRequirement: data.booking_requirement ? unmarshalPlatformBookingRequirement(data.booking_requirement) : void 0,
+    description: data.description,
+    documentationUrl: data.documentation_url,
+    hardware: data.hardware ? unmarshalPlatformHardware(data.hardware) : void 0,
+    id: data.id,
+    isBookable: data.is_bookable,
+    maxCircuitCount: data.max_circuit_count,
+    maxQubitCount: data.max_qubit_count,
+    maxShotCount: data.max_shot_count,
+    metadata: data.metadata,
+    name: data.name,
+    pricePerCircuit: data.price_per_circuit ? sdkClient.unmarshalMoney(data.price_per_circuit) : void 0,
+    pricePerHour: data.price_per_hour ? sdkClient.unmarshalMoney(data.price_per_hour) : void 0,
+    pricePerShot: data.price_per_shot ? sdkClient.unmarshalMoney(data.price_per_shot) : void 0,
+    providerName: data.provider_name,
+    technology: data.technology,
+    type: data.type,
+    version: data.version
+  };
+};
+const unmarshalProcess = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Process' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    applicationId: data.application_id,
+    attachedSessionIds: data.attached_session_ids,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    finishedAt: sdkClient.unmarshalDate(data.finished_at),
+    id: data.id,
+    input: data.input,
+    name: data.name,
+    platformId: data.platform_id,
+    progress: data.progress,
+    progressMessage: data.progress_message,
+    projectId: data.project_id,
+    startedAt: sdkClient.unmarshalDate(data.started_at),
+    status: data.status,
+    tags: data.tags,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalSession = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Session' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    bookingId: data.booking_id,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    deduplicationId: data.deduplication_id,
+    finishedJobCount: data.finished_job_count,
+    id: data.id,
+    maxDuration: data.max_duration,
+    maxIdleDuration: data.max_idle_duration,
+    name: data.name,
+    originId: data.origin_id,
+    originType: data.origin_type,
+    platformId: data.platform_id,
+    progressMessage: data.progress_message,
+    projectId: data.project_id,
+    startedAt: sdkClient.unmarshalDate(data.started_at),
+    status: data.status,
+    tags: data.tags,
+    terminatedAt: sdkClient.unmarshalDate(data.terminated_at),
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    waitingJobCount: data.waiting_job_count
+  };
+};
+const unmarshalListApplicationsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListApplicationsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    applications: sdkClient.unmarshalArrayOfObject(
+      data.applications,
+      unmarshalApplication
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListBookingsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListBookingsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    bookings: sdkClient.unmarshalArrayOfObject(data.bookings, unmarshalBooking),
+    totalCount: data.total_count
+  };
+};
+const unmarshalJobResult = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'JobResult' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    jobId: data.job_id,
+    result: data.result,
+    url: data.url
+  };
+};
+const unmarshalListJobResultsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListJobResultsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    jobResults: sdkClient.unmarshalArrayOfObject(data.job_results, unmarshalJobResult),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListJobsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListJobsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    jobs: sdkClient.unmarshalArrayOfObject(data.jobs, unmarshalJob),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListPlatformsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPlatformsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    platforms: sdkClient.unmarshalArrayOfObject(data.platforms, unmarshalPlatform),
+    totalCount: data.total_count
+  };
+};
+const unmarshalProcessResult = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ProcessResult' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    processId: data.process_id,
+    result: data.result
+  };
+};
+const unmarshalListProcessResultsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListProcessResultsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    processResults: sdkClient.unmarshalArrayOfObject(
+      data.process_results,
+      unmarshalProcessResult
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListProcessesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListProcessesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    processes: sdkClient.unmarshalArrayOfObject(data.processes, unmarshalProcess),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListSessionACLsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSessionACLsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    acls: data.acls,
+    totalCount: data.total_count
+  };
+};
+const unmarshalListSessionsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSessionsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    sessions: sdkClient.unmarshalArrayOfObject(data.sessions, unmarshalSession),
+    totalCount: data.total_count
+  };
+};
+const marshalJobCircuit = (request, defaults) => ({
+  ...sdkClient.resolveOneOf([
+    { param: "perceval_circuit", value: request.percevalCircuit },
+    { param: "qiskit_circuit", value: request.qiskitCircuit }
+  ])
+});
+const marshalCreateJobRequest = (request, defaults) => ({
+  circuit: marshalJobCircuit(request.circuit),
+  max_duration: request.maxDuration,
+  name: request.name,
+  session_id: request.sessionId,
+  tags: request.tags
+});
+const marshalCreateProcessRequest = (request, defaults) => ({
+  application_id: request.applicationId,
+  input: request.input,
+  name: request.name,
+  platform_id: request.platformId,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags
+});
+const marshalCreateSessionRequestBookingDemand = (request, defaults) => ({
+  description: request.description,
+  finished_at: request.finishedAt,
+  started_at: request.startedAt
+});
+const marshalCreateSessionRequest = (request, defaults) => ({
+  booking_demand: request.bookingDemand !== void 0 ? marshalCreateSessionRequestBookingDemand(
+    request.bookingDemand
+  ) : void 0,
+  deduplication_id: request.deduplicationId,
+  max_duration: request.maxDuration,
+  max_idle_duration: request.maxIdleDuration,
+  name: request.name,
+  platform_id: request.platformId,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags
+});
+const marshalUpdateBookingRequest = (request, defaults) => ({
+  description: request.description
+});
+const marshalUpdateJobRequest = (request, defaults) => ({
+  name: request.name,
+  tags: request.tags
+});
+const marshalUpdateProcessRequest = (request, defaults) => ({
+  name: request.name,
+  tags: request.tags
+});
+const marshalUpdateSessionRequest = (request, defaults) => ({
+  max_duration: request.maxDuration,
+  max_idle_duration: request.maxIdleDuration,
+  name: request.name,
+  tags: request.tags
+});
+exports.marshalCreateJobRequest = marshalCreateJobRequest;
+exports.marshalCreateProcessRequest = marshalCreateProcessRequest;
+exports.marshalCreateSessionRequest = marshalCreateSessionRequest;
+exports.marshalUpdateBookingRequest = marshalUpdateBookingRequest;
+exports.marshalUpdateJobRequest = marshalUpdateJobRequest;
+exports.marshalUpdateProcessRequest = marshalUpdateProcessRequest;
+exports.marshalUpdateSessionRequest = marshalUpdateSessionRequest;
+exports.unmarshalApplication = unmarshalApplication;
+exports.unmarshalBooking = unmarshalBooking;
+exports.unmarshalJob = unmarshalJob;
+exports.unmarshalJobCircuit = unmarshalJobCircuit;
+exports.unmarshalListApplicationsResponse = unmarshalListApplicationsResponse;
+exports.unmarshalListBookingsResponse = unmarshalListBookingsResponse;
+exports.unmarshalListJobResultsResponse = unmarshalListJobResultsResponse;
+exports.unmarshalListJobsResponse = unmarshalListJobsResponse;
+exports.unmarshalListPlatformsResponse = unmarshalListPlatformsResponse;
+exports.unmarshalListProcessResultsResponse = unmarshalListProcessResultsResponse;
+exports.unmarshalListProcessesResponse = unmarshalListProcessesResponse;
+exports.unmarshalListSessionACLsResponse = unmarshalListSessionACLsResponse;
+exports.unmarshalListSessionsResponse = unmarshalListSessionsResponse;
+exports.unmarshalPlatform = unmarshalPlatform;
+exports.unmarshalProcess = unmarshalProcess;
+exports.unmarshalSession = unmarshalSession;

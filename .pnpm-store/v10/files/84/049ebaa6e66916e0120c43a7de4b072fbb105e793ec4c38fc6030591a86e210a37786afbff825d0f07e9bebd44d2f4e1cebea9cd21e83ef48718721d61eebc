@@ -1,0 +1,22 @@
+import { homedir } from "node:os";
+import * as path from "node:path";
+import { env } from "node:process";
+import { EnvironmentKey } from "./env.js";
+const getScwConfigurationDirectory = () => {
+  const xdgConfigPath = env.XDG_CONFIG_HOME;
+  if (typeof xdgConfigPath === "string" && xdgConfigPath.length > 0) {
+    return path.join(xdgConfigPath, "scw");
+  }
+  return path.join(homedir(), ".config", "scw");
+};
+const resolveConfigurationFilePath = () => {
+  const envFilePath = env[EnvironmentKey.ScwConfigPath];
+  if (typeof envFilePath === "string" && envFilePath.length > 0) {
+    return envFilePath;
+  }
+  return path.join(getScwConfigurationDirectory(), "config.yaml");
+};
+export {
+  getScwConfigurationDirectory,
+  resolveConfigurationFilePath
+};

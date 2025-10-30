@@ -1,0 +1,6 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const index_gen = require("./v1/index.gen.cjs");
+const index_gen$1 = require("./v2/index.gen.cjs");
+exports.Vpcgwv1 = index_gen;
+exports.Vpcgwv2 = index_gen$1;

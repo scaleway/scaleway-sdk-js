@@ -1,0 +1,25 @@
+import { addAsyncHeaderInterceptor, addHeaderInterceptor } from "../internal/interceptors/helpers.js";
+import { assertValidAuthenticationSecrets } from "./client-ini-profile.js";
+import { SESSION_HEADER_KEY, AUTH_HEADER_KEY } from "./constants.js";
+const authenticateWithSessionToken = (getToken) => addAsyncHeaderInterceptor(SESSION_HEADER_KEY, getToken);
+const authenticateWithSecrets = (secrets) => {
+  assertValidAuthenticationSecrets(secrets);
+  return addHeaderInterceptor(AUTH_HEADER_KEY, secrets.secretKey);
+};
+const obfuscateToken = (key) => `${key.substring(0, 5)}xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`;
+const obfuscateUUID = (key) => `${key.substring(0, 8)}-xxxx-xxxx-xxxx-xxxxxxxxxxxx`;
+const obfuscateAuthHeadersEntry = ([
+  name,
+  value
+]) => {
+  if (name === SESSION_HEADER_KEY) return [name, obfuscateToken(value)];
+  if (name === AUTH_HEADER_KEY) return [name, obfuscateUUID(value)];
+  return [name, value];
+};
+export {
+  authenticateWithSecrets,
+  authenticateWithSessionToken,
+  obfuscateAuthHeadersEntry,
+  obfuscateToken,
+  obfuscateUUID
+};

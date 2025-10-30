@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const DOMAIN_AVAILABILITY_TRANSIENT_STATUSES = ["validating"];
+const DOMAIN_TRANSIENT_STATUSES = ["validating"];
+const HOSTING_TRANSIENT_STATUSES = [
+  "delivering",
+  "deleting",
+  "migrating"
+];
+exports.DOMAIN_AVAILABILITY_TRANSIENT_STATUSES = DOMAIN_AVAILABILITY_TRANSIENT_STATUSES;
+exports.DOMAIN_TRANSIENT_STATUSES = DOMAIN_TRANSIENT_STATUSES;
+exports.HOSTING_TRANSIENT_STATUSES = HOSTING_TRANSIENT_STATUSES;

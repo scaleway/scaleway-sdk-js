@@ -1,0 +1,5 @@
+import type { Event, ListEventsResponse, ListProductsResponse, Resource } from './types.gen';
+export declare const unmarshalResource: (data: unknown) => Resource;
+export declare const unmarshalEvent: (data: unknown) => Event;
+export declare const unmarshalListEventsResponse: (data: unknown) => ListEventsResponse;
+export declare const unmarshalListProductsResponse: (data: unknown) => ListProductsResponse;

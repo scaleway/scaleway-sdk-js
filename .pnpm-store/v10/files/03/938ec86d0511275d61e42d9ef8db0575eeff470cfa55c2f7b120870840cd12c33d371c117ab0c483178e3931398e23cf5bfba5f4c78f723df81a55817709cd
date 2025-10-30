@@ -1,0 +1,15 @@
+import type { JSONObject } from '../../../helpers/json.js';
+import { ScalewayError } from '../scw-error.js';
+/**
+ * PreconditionFailed error is used when a precondition is not respected.
+ *
+ * @public
+ */
+export declare class PreconditionFailedError extends ScalewayError {
+    readonly status: number;
+    readonly body: JSONObject;
+    readonly precondition: string;
+    readonly helpMessage: string;
+    constructor(status: number, body: JSONObject, precondition: string, helpMessage: string);
+    static fromJSON(status: number, obj: Readonly<JSONObject>): PreconditionFailedError | null;
+}

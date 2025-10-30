@@ -1,0 +1,272 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { WaitForOptions } from '@scaleway/sdk-client';
+import type { Application, Booking, CancelJobRequest, CancelProcessRequest, CreateJobRequest, CreateProcessRequest, CreateSessionRequest, DeleteJobRequest, DeleteProcessRequest, DeleteSessionRequest, GetApplicationRequest, GetBookingRequest, GetJobCircuitRequest, GetJobRequest, GetPlatformRequest, GetProcessRequest, GetSessionRequest, Job, JobCircuit, ListApplicationsRequest, ListApplicationsResponse, ListBookingsRequest, ListBookingsResponse, ListJobResultsRequest, ListJobResultsResponse, ListJobsRequest, ListJobsResponse, ListPlatformsRequest, ListPlatformsResponse, ListProcessResultsRequest, ListProcessResultsResponse, ListProcessesRequest, ListProcessesResponse, ListSessionACLsRequest, ListSessionACLsResponse, ListSessionsRequest, ListSessionsResponse, Platform, Process, Session, TerminateSessionRequest, UpdateBookingRequest, UpdateJobRequest, UpdateProcessRequest, UpdateSessionRequest } from './types.gen';
+/**
+ * Quantum as a Service API.
+
+This API allows you to manage Scaleway Quantum as a Service.
+ */
+export declare class API extends ParentAPI {
+    /**
+     * Get job information. Retrieve information about the provided **job ID**, such as status, payload, and result.
+     *
+     * @param request - The request {@link GetJobRequest}
+     * @returns A Promise of Job
+     */
+    getJob: (request: Readonly<GetJobRequest>) => Promise<Job>;
+    /**
+     * Waits for {@link Job} to be in a final state.
+     *
+     * @param request - The request {@link GetJobRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Job
+     */
+    waitForJob: (request: Readonly<GetJobRequest>, options?: Readonly<WaitForOptions<Job>>) => Promise<Job>;
+    protected pageOfListJobs: (request?: Readonly<ListJobsRequest>) => Promise<ListJobsResponse>;
+    /**
+     * List all jobs within a project or session. Retrieve information about all jobs within a given project or session.
+     *
+     * @param request - The request {@link ListJobsRequest}
+     * @returns A Promise of ListJobsResponse
+     */
+    listJobs: (request?: Readonly<ListJobsRequest>) => Promise<ListJobsResponse> & {
+        all: () => Promise<Job[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Job[], void, void>;
+    };
+    protected pageOfListJobResults: (request: Readonly<ListJobResultsRequest>) => Promise<ListJobResultsResponse>;
+    /**
+     * List all results of a job. Retrieve all intermediate and final results of a job.
+     *
+     * @param request - The request {@link ListJobResultsRequest}
+     * @returns A Promise of ListJobResultsResponse
+     */
+    listJobResults: (request: Readonly<ListJobResultsRequest>) => Promise<ListJobResultsResponse> & {
+        all: () => Promise<import("./types.gen").JobResult[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").JobResult[], void, void>;
+    };
+    /**
+     * Create a job. Create a job to be executed inside a session.
+     *
+     * @param request - The request {@link CreateJobRequest}
+     * @returns A Promise of Job
+     */
+    createJob: (request: Readonly<CreateJobRequest>) => Promise<Job>;
+    /**
+     * Update job information. Update job information about the provided **job ID**.
+     *
+     * @param request - The request {@link UpdateJobRequest}
+     * @returns A Promise of Job
+     */
+    updateJob: (request: Readonly<UpdateJobRequest>) => Promise<Job>;
+    /**
+     * Cancel a job. Cancel the job corresponding to the provided **job ID**.
+     *
+     * @param request - The request {@link CancelJobRequest}
+     * @returns A Promise of Job
+     */
+    cancelJob: (request: Readonly<CancelJobRequest>) => Promise<Job>;
+    /**
+     * Delete a job. Delete the job corresponding to the provided **job ID**.
+     *
+     * @param request - The request {@link DeleteJobRequest}
+     */
+    deleteJob: (request: Readonly<DeleteJobRequest>) => Promise<void>;
+    /**
+     * Get a job circuit. Retrieve the circuit of the provided **job ID**.
+     *
+     * @param request - The request {@link GetJobCircuitRequest}
+     * @returns A Promise of JobCircuit
+     */
+    getJobCircuit: (request: Readonly<GetJobCircuitRequest>) => Promise<JobCircuit>;
+    /**
+     * Get platform information. Retrieve information about the provided **platform ID**, such as provider name, technology, and type.
+     *
+     * @param request - The request {@link GetPlatformRequest}
+     * @returns A Promise of Platform
+     */
+    getPlatform: (request: Readonly<GetPlatformRequest>) => Promise<Platform>;
+    protected pageOfListPlatforms: (request?: Readonly<ListPlatformsRequest>) => Promise<ListPlatformsResponse>;
+    /**
+     * List all available platforms. Retrieve information about all platforms.
+     *
+     * @param request - The request {@link ListPlatformsRequest}
+     * @returns A Promise of ListPlatformsResponse
+     */
+    listPlatforms: (request?: Readonly<ListPlatformsRequest>) => Promise<ListPlatformsResponse> & {
+        all: () => Promise<Platform[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Platform[], void, void>;
+    };
+    /**
+     * Get session information. Retrieve information about the provided **session ID**, such as name, status, and number of executed jobs.
+     *
+     * @param request - The request {@link GetSessionRequest}
+     * @returns A Promise of Session
+     */
+    getSession: (request: Readonly<GetSessionRequest>) => Promise<Session>;
+    /**
+     * Waits for {@link Session} to be in a final state.
+     *
+     * @param request - The request {@link GetSessionRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Session
+     */
+    waitForSession: (request: Readonly<GetSessionRequest>, options?: Readonly<WaitForOptions<Session>>) => Promise<Session>;
+    protected pageOfListSessions: (request?: Readonly<ListSessionsRequest>) => Promise<ListSessionsResponse>;
+    /**
+     * List all sessions. Retrieve information about all sessions.
+     *
+     * @param request - The request {@link ListSessionsRequest}
+     * @returns A Promise of ListSessionsResponse
+     */
+    listSessions: (request?: Readonly<ListSessionsRequest>) => Promise<ListSessionsResponse> & {
+        all: () => Promise<Session[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Session[], void, void>;
+    };
+    /**
+     * Create a session. Create a dedicated session for the specified platform.
+     *
+     * @param request - The request {@link CreateSessionRequest}
+     * @returns A Promise of Session
+     */
+    createSession: (request: Readonly<CreateSessionRequest>) => Promise<Session>;
+    /**
+     * Update session information. Update session information of the provided **session ID**.
+     *
+     * @param request - The request {@link UpdateSessionRequest}
+     * @returns A Promise of Session
+     */
+    updateSession: (request: Readonly<UpdateSessionRequest>) => Promise<Session>;
+    /**
+     * Terminate an existing session. Terminate a session by its unique ID and cancel all its attached jobs and booking.
+     *
+     * @param request - The request {@link TerminateSessionRequest}
+     * @returns A Promise of Session
+     */
+    terminateSession: (request: Readonly<TerminateSessionRequest>) => Promise<Session>;
+    /**
+     * Delete an existing session. Delete a session by its unique ID and delete all its attached job and booking.
+     *
+     * @param request - The request {@link DeleteSessionRequest}
+     */
+    deleteSession: (request: Readonly<DeleteSessionRequest>) => Promise<void>;
+    protected pageOfListSessionACLs: (request: Readonly<ListSessionACLsRequest>) => Promise<ListSessionACLsResponse>;
+    listSessionACLs: (request: Readonly<ListSessionACLsRequest>) => Promise<ListSessionACLsResponse> & {
+        all: () => Promise<import("./types.gen").SessionAccess[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").SessionAccess[], void, void>;
+    };
+    /**
+     * Create a process. Create a new process for the specified application on a specified platform.
+     *
+     * @param request - The request {@link CreateProcessRequest}
+     * @returns A Promise of Process
+     */
+    createProcess: (request: Readonly<CreateProcessRequest>) => Promise<Process>;
+    /**
+     * Get process information. Retrieve information about the provided **process ID**, such as name, status and progress.
+     *
+     * @param request - The request {@link GetProcessRequest}
+     * @returns A Promise of Process
+     */
+    getProcess: (request: Readonly<GetProcessRequest>) => Promise<Process>;
+    /**
+     * Waits for {@link Process} to be in a final state.
+     *
+     * @param request - The request {@link GetProcessRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Process
+     */
+    waitForProcess: (request: Readonly<GetProcessRequest>, options?: Readonly<WaitForOptions<Process>>) => Promise<Process>;
+    protected pageOfListProcesses: (request?: Readonly<ListProcessesRequest>) => Promise<ListProcessesResponse>;
+    /**
+     * List all processes. Retrieve information about all processes.
+     *
+     * @param request - The request {@link ListProcessesRequest}
+     * @returns A Promise of ListProcessesResponse
+     */
+    listProcesses: (request?: Readonly<ListProcessesRequest>) => Promise<ListProcessesResponse> & {
+        all: () => Promise<Process[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Process[], void, void>;
+    };
+    /**
+     * Update process information. Update process information of the provided **process ID**.
+     *
+     * @param request - The request {@link UpdateProcessRequest}
+     * @returns A Promise of Process
+     */
+    updateProcess: (request: Readonly<UpdateProcessRequest>) => Promise<Process>;
+    /**
+     * Cancel a running process. Cancel a process by its unique ID. Intermediate results are still available.
+     *
+     * @param request - The request {@link CancelProcessRequest}
+     * @returns A Promise of Process
+     */
+    cancelProcess: (request: Readonly<CancelProcessRequest>) => Promise<Process>;
+    /**
+     * Delete an existing process. Delete a process by its unique ID and delete all its data.
+     *
+     * @param request - The request {@link DeleteProcessRequest}
+     */
+    deleteProcess: (request: Readonly<DeleteProcessRequest>) => Promise<void>;
+    protected pageOfListProcessResults: (request: Readonly<ListProcessResultsRequest>) => Promise<ListProcessResultsResponse>;
+    /**
+     * List all results of a process. Retrieve all intermediate and final result of a process.
+     *
+     * @param request - The request {@link ListProcessResultsRequest}
+     * @returns A Promise of ListProcessResultsResponse
+     */
+    listProcessResults: (request: Readonly<ListProcessResultsRequest>) => Promise<ListProcessResultsResponse> & {
+        all: () => Promise<import("./types.gen").ProcessResult[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").ProcessResult[], void, void>;
+    };
+    /**
+     * Get application information. Retrieve information about the provided **applcation ID**, such as name, type and compatible platforms.
+     *
+     * @param request - The request {@link GetApplicationRequest}
+     * @returns A Promise of Application
+     */
+    getApplication: (request: Readonly<GetApplicationRequest>) => Promise<Application>;
+    protected pageOfListApplications: (request?: Readonly<ListApplicationsRequest>) => Promise<ListApplicationsResponse>;
+    /**
+     * List all available applications. Retrieve information about all applications.
+     *
+     * @param request - The request {@link ListApplicationsRequest}
+     * @returns A Promise of ListApplicationsResponse
+     */
+    listApplications: (request?: Readonly<ListApplicationsRequest>) => Promise<ListApplicationsResponse> & {
+        all: () => Promise<Application[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Application[], void, void>;
+    };
+    /**
+     * Get booking information. Retrieve information about the provided **booking ID**, such as description, status and progress message.
+     *
+     * @param request - The request {@link GetBookingRequest}
+     * @returns A Promise of Booking
+     */
+    getBooking: (request: Readonly<GetBookingRequest>) => Promise<Booking>;
+    /**
+     * Waits for {@link Booking} to be in a final state.
+     *
+     * @param request - The request {@link GetBookingRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Booking
+     */
+    waitForBooking: (request: Readonly<GetBookingRequest>, options?: Readonly<WaitForOptions<Booking>>) => Promise<Booking>;
+    protected pageOfListBookings: (request?: Readonly<ListBookingsRequest>) => Promise<ListBookingsResponse>;
+    /**
+     * List all bookings according the filter. Retrieve information about all bookings of the provided **project ID** or ** platform ID**.
+     *
+     * @param request - The request {@link ListBookingsRequest}
+     * @returns A Promise of ListBookingsResponse
+     */
+    listBookings: (request?: Readonly<ListBookingsRequest>) => Promise<ListBookingsResponse> & {
+        all: () => Promise<Booking[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Booking[], void, void>;
+    };
+    /**
+     * Update booking information. Update booking information of the provided **booking ID**.
+     *
+     * @param request - The request {@link UpdateBookingRequest}
+     * @returns A Promise of Booking
+     */
+    updateBooking: (request: Readonly<UpdateBookingRequest>) => Promise<Booking>;
+}

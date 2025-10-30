@@ -1,0 +1,4 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const index_gen = require("./v1beta1/index.gen.cjs");
+exports.EdgeServicesv1beta1 = index_gen;

@@ -1,0 +1,172 @@
+export declare const CreateInstanceRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+    nodeAmount: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    nodeType: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+    password: {
+        maxLength: number;
+        minLength: number;
+    };
+    userName: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+    version: {
+        pattern: RegExp;
+    };
+};
+export declare const CreateSnapshotRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+};
+export declare const CreateUserRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+    password: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const DeleteUserRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+};
+export declare const ListInstancesRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListNodeTypesRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListSnapshotsRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListUsersRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListVersionsRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    version: {
+        pattern: RegExp;
+    };
+};
+export declare const RestoreSnapshotRequest: {
+    instanceName: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+    nodeAmount: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const SetUserRoleRequest: {
+    userName: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+};
+export declare const UpdateInstanceRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+    snapshotScheduleFrequencyHours: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    snapshotScheduleRetentionDays: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const UpdateSnapshotRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+};
+export declare const UpdateUserRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+    password: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const Volume: {
+    sizeBytes: {
+        greaterThanOrEqual: number;
+    };
+};

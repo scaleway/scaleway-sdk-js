@@ -1,0 +1,20 @@
+import { ScalewayError } from "../scw-error.js";
+class ResourceLockedError extends ScalewayError {
+  constructor(status, body, resource, resourceId) {
+    super(status, body, `resource ${resource} with ID ${resourceId} is locked`);
+    this.status = status;
+    this.body = body;
+    this.resource = resource;
+    this.resourceId = resourceId;
+    this.name = "ResourceLockedError";
+  }
+  static fromJSON(status, obj) {
+    if (typeof obj.resource !== "string" || typeof obj.resource_id !== "string") {
+      return null;
+    }
+    return new ResourceLockedError(status, obj, obj.resource, obj.resource_id);
+  }
+}
+export {
+  ResourceLockedError
+};

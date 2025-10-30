@@ -1,0 +1,188 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const content_gen = require("./content.gen.cjs");
+const marshalling_gen = require("./marshalling.gen.cjs");
+const jsonContentHeaders = {
+  "Content-Type": "application/json; charset=utf-8"
+};
+class API extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par"]
+  });
+  /**
+   * Create a new Serverless SQL Database. You must provide the following parameters: `organization_id`, `project_id`, `name`, `cpu_min`, `cpu_max`. You can also provide `from_backup_id` to create a database from a backup.
+   *
+   * @param request - The request {@link CreateDatabaseRequest}
+   * @returns A Promise of Database
+   */
+  createDatabase = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateDatabaseRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/serverless-sqldb/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/databases`
+    },
+    marshalling_gen.unmarshalDatabase
+  );
+  /**
+   * Get a database information. Retrieve information about your Serverless SQL Database. You must provide the `database_id` parameter.
+   *
+   * @param request - The request {@link GetDatabaseRequest}
+   * @returns A Promise of Database
+   */
+  getDatabase = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/serverless-sqldb/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/databases/${sdkClient.validatePathParam("databaseId", request.databaseId)}`
+    },
+    marshalling_gen.unmarshalDatabase
+  );
+  /**
+   * Waits for {@link Database} to be in a final state.
+   *
+   * @param request - The request {@link GetDatabaseRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Database
+   */
+  waitForDatabase = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.DATABASE_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getDatabase,
+    request,
+    options
+  );
+  /**
+   * Delete a database. Deletes a database. You must provide the `database_id` parameter. All data stored in the database will be permanently deleted.
+   *
+   * @param request - The request {@link DeleteDatabaseRequest}
+   * @returns A Promise of Database
+   */
+  deleteDatabase = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/serverless-sqldb/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/databases/${sdkClient.validatePathParam("databaseId", request.databaseId)}`
+    },
+    marshalling_gen.unmarshalDatabase
+  );
+  pageOfListDatabases = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/serverless-sqldb/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/databases`,
+      urlParams: sdkClient.urlParams(
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        ["page_size", request.pageSize],
+        [
+          "project_id",
+          request.projectId ?? this.client.settings.defaultProjectId
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListDatabasesResponse
+  );
+  /**
+   * List your Serverless SQL Databases. List all Serverless SQL Databases for a given Scaleway Organization or Scaleway Project. By default, the databases returned in the list are ordered by creation date in ascending order, though this can be modified via the order_by field. For the `name` parameter, the value you include will be checked against the whole name string to see if it includes the string you put in the parameter.
+   *
+   * @param request - The request {@link ListDatabasesRequest}
+   * @returns A Promise of ListDatabasesResponse
+   */
+  listDatabases = (request = {}) => sdkClient.enrichForPagination("databases", this.pageOfListDatabases, request);
+  /**
+   * Update database information. Update CPU limits of your Serverless SQL Database. You must provide the `database_id` parameter.
+   *
+   * @param request - The request {@link UpdateDatabaseRequest}
+   * @returns A Promise of Database
+   */
+  updateDatabase = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateDatabaseRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/serverless-sqldb/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/databases/${sdkClient.validatePathParam("databaseId", request.databaseId)}`
+    },
+    marshalling_gen.unmarshalDatabase
+  );
+  /**
+   * Restore a database from a backup. Restore a database from a backup. You must provide the `backup_id` parameter.
+   *
+   * @param request - The request {@link RestoreDatabaseFromBackupRequest}
+   * @returns A Promise of Database
+   */
+  restoreDatabaseFromBackup = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalRestoreDatabaseFromBackupRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/serverless-sqldb/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/databases/${sdkClient.validatePathParam("databaseId", request.databaseId)}/restore`
+    },
+    marshalling_gen.unmarshalDatabase
+  );
+  /**
+   * Get a database backup information. Retrieve information about your Serverless SQL Database backup. You must provide the `backup_id` parameter.
+   *
+   * @param request - The request {@link GetDatabaseBackupRequest}
+   * @returns A Promise of DatabaseBackup
+   */
+  getDatabaseBackup = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/serverless-sqldb/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/backups/${sdkClient.validatePathParam("backupId", request.backupId)}`
+    },
+    marshalling_gen.unmarshalDatabaseBackup
+  );
+  pageOfListDatabaseBackups = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/serverless-sqldb/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/backups`,
+      urlParams: sdkClient.urlParams(
+        ["database_id", request.databaseId],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        ["page_size", request.pageSize],
+        ["project_id", request.projectId]
+      )
+    },
+    marshalling_gen.unmarshalListDatabaseBackupsResponse
+  );
+  /**
+   * List your Serverless SQL Database backups. List all Serverless SQL Database backups for a given Scaleway Project or Database. By default, the backups returned in the list are ordered by creation date in descending order, though this can be modified via the order_by field.
+   *
+   * @param request - The request {@link ListDatabaseBackupsRequest}
+   * @returns A Promise of ListDatabaseBackupsResponse
+   */
+  listDatabaseBackups = (request) => sdkClient.enrichForPagination("backups", this.pageOfListDatabaseBackups, request);
+  /**
+   * Export a database backup. Export a database backup providing a download link once the export process is completed. You must provide the `backup_id` parameter.
+   *
+   * @param request - The request {@link ExportDatabaseBackupRequest}
+   * @returns A Promise of DatabaseBackup
+   */
+  exportDatabaseBackup = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/serverless-sqldb/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/backups/${sdkClient.validatePathParam("backupId", request.backupId)}/export`
+    },
+    marshalling_gen.unmarshalDatabaseBackup
+  );
+}
+exports.API = API;

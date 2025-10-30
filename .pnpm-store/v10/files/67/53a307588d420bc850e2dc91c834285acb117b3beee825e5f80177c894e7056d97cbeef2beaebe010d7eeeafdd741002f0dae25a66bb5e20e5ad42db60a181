@@ -1,0 +1,810 @@
+import { resolveOneOf, isJSONObject, unmarshalDate, unmarshalArrayOfObject, unmarshalMoney, unmarshalMapOfObject } from "@scaleway/sdk-client";
+const unmarshalScalewayLb = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ScalewayLb' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    domainName: data.domain_name,
+    frontendId: data.frontend_id,
+    id: data.id,
+    isSsl: data.is_ssl,
+    zone: data.zone
+  };
+};
+const unmarshalScalewayLbBackendConfig = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ScalewayLbBackendConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    lbs: unmarshalArrayOfObject(data.lbs, unmarshalScalewayLb)
+  };
+};
+const unmarshalScalewayS3BackendConfig = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ScalewayS3BackendConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    bucketName: data.bucket_name,
+    bucketRegion: data.bucket_region,
+    isWebsite: data.is_website
+  };
+};
+const unmarshalBackendStage = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'BackendStage' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    pipelineId: data.pipeline_id,
+    scalewayLb: data.scaleway_lb ? unmarshalScalewayLbBackendConfig(data.scaleway_lb) : void 0,
+    scalewayS3: data.scaleway_s3 ? unmarshalScalewayS3BackendConfig(data.scaleway_s3) : void 0,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalCacheStage = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CacheStage' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    backendStageId: data.backend_stage_id,
+    createdAt: unmarshalDate(data.created_at),
+    fallbackTtl: data.fallback_ttl,
+    id: data.id,
+    includeCookies: data.include_cookies,
+    pipelineId: data.pipeline_id,
+    routeStageId: data.route_stage_id,
+    updatedAt: unmarshalDate(data.updated_at),
+    wafStageId: data.waf_stage_id
+  };
+};
+const unmarshalDNSStage = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DNSStage' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    backendStageId: data.backend_stage_id,
+    cacheStageId: data.cache_stage_id,
+    createdAt: unmarshalDate(data.created_at),
+    fqdns: data.fqdns,
+    id: data.id,
+    pipelineId: data.pipeline_id,
+    tlsStageId: data.tls_stage_id,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalPipelineError = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PipelineError' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    code: data.code,
+    message: data.message,
+    severity: data.severity,
+    stage: data.stage,
+    type: data.type
+  };
+};
+const unmarshalPipeline = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Pipeline' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description,
+    errors: unmarshalArrayOfObject(data.errors, unmarshalPipelineError),
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalRouteStage = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RouteStage' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    pipelineId: data.pipeline_id,
+    updatedAt: unmarshalDate(data.updated_at),
+    wafStageId: data.waf_stage_id
+  };
+};
+const unmarshalTLSSecret = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TLSSecret' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    region: data.region,
+    secretId: data.secret_id
+  };
+};
+const unmarshalTLSStage = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TLSStage' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    backendStageId: data.backend_stage_id,
+    cacheStageId: data.cache_stage_id,
+    certificateExpiresAt: unmarshalDate(data.certificate_expires_at),
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    managedCertificate: data.managed_certificate,
+    pipelineId: data.pipeline_id,
+    routeStageId: data.route_stage_id,
+    secrets: unmarshalArrayOfObject(data.secrets, unmarshalTLSSecret),
+    updatedAt: unmarshalDate(data.updated_at),
+    wafStageId: data.waf_stage_id
+  };
+};
+const unmarshalWafStage = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'WafStage' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    backendStageId: data.backend_stage_id,
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    mode: data.mode,
+    paranoiaLevel: data.paranoia_level,
+    pipelineId: data.pipeline_id,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalPipelineStages = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PipelineStages' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    backendStages: unmarshalArrayOfObject(
+      data.backend_stages,
+      unmarshalBackendStage
+    ),
+    cacheStages: unmarshalArrayOfObject(data.cache_stages, unmarshalCacheStage),
+    dnsStages: unmarshalArrayOfObject(data.dns_stages, unmarshalDNSStage),
+    pipeline: data.pipeline ? unmarshalPipeline(data.pipeline) : void 0,
+    routeStages: unmarshalArrayOfObject(data.route_stages, unmarshalRouteStage),
+    tlsStages: unmarshalArrayOfObject(data.tls_stages, unmarshalTLSStage),
+    wafStages: unmarshalArrayOfObject(data.waf_stages, unmarshalWafStage)
+  };
+};
+const unmarshalPurgeRequest = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PurgeRequest' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    all: data.all,
+    assets: data.assets,
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    pipelineId: data.pipeline_id,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalRuleHttpMatchPathFilter = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RuleHttpMatchPathFilter' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    pathFilterType: data.path_filter_type,
+    value: data.value
+  };
+};
+const unmarshalRuleHttpMatch = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RuleHttpMatch' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    methodFilters: data.method_filters,
+    pathFilter: data.path_filter ? unmarshalRuleHttpMatchPathFilter(data.path_filter) : void 0
+  };
+};
+const unmarshalRouteRule = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RouteRule' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    backendStageId: data.backend_stage_id,
+    position: data.position,
+    routeStageId: data.route_stage_id,
+    ruleHttpMatch: data.rule_http_match ? unmarshalRuleHttpMatch(data.rule_http_match) : void 0
+  };
+};
+const unmarshalAddRouteRulesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AddRouteRulesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    routeRules: unmarshalArrayOfObject(data.route_rules, unmarshalRouteRule)
+  };
+};
+const unmarshalCheckDomainResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CheckDomainResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    isValid: data.is_valid
+  };
+};
+const unmarshalCheckLbOriginResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CheckLbOriginResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    errorType: data.error_type,
+    isValid: data.is_valid
+  };
+};
+const unmarshalCheckPEMChainResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CheckPEMChainResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    isValid: data.is_valid
+  };
+};
+const unmarshalPlanDetails = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PlanDetails' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    packageGb: data.package_gb,
+    pipelineLimit: data.pipeline_limit,
+    planName: data.plan_name,
+    wafRequests: data.waf_requests
+  };
+};
+const unmarshalPlanUsageDetails = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PlanUsageDetails' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    planCost: data.plan_cost ? unmarshalMoney(data.plan_cost) : void 0
+  };
+};
+const unmarshalGetBillingResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetBillingResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    currentPlan: data.current_plan ? unmarshalPlanDetails(data.current_plan) : void 0,
+    currentPlanCacheUsage: data.current_plan_cache_usage,
+    currentPlanWafUsage: data.current_plan_waf_usage,
+    extraCacheCost: data.extra_cache_cost ? unmarshalMoney(data.extra_cache_cost) : void 0,
+    extraCacheUsage: data.extra_cache_usage,
+    extraPipelinesCost: data.extra_pipelines_cost ? unmarshalMoney(data.extra_pipelines_cost) : void 0,
+    extraWafCost: data.extra_waf_cost ? unmarshalMoney(data.extra_waf_cost) : void 0,
+    extraWafUsage: data.extra_waf_usage,
+    pipelineNumber: data.pipeline_number,
+    planCost: data.plan_cost ? unmarshalMoney(data.plan_cost) : void 0,
+    plansUsageDetails: unmarshalMapOfObject(
+      data.plans_usage_details,
+      unmarshalPlanUsageDetails
+    ),
+    totalCost: data.total_cost ? unmarshalMoney(data.total_cost) : void 0,
+    wafAddOn: data.waf_add_on ? unmarshalMoney(data.waf_add_on) : void 0
+  };
+};
+const unmarshalHeadStageResponseHeadStage = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HeadStageResponseHeadStage' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    dnsStageId: data.dns_stage_id
+  };
+};
+const unmarshalHeadStageResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HeadStageResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    headStage: data.head_stage ? unmarshalHeadStageResponseHeadStage(data.head_stage) : void 0
+  };
+};
+const unmarshalListBackendStagesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListBackendStagesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    stages: unmarshalArrayOfObject(data.stages, unmarshalBackendStage),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListCacheStagesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListCacheStagesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    stages: unmarshalArrayOfObject(data.stages, unmarshalCacheStage),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListDNSStagesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDNSStagesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    stages: unmarshalArrayOfObject(data.stages, unmarshalDNSStage),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListHeadStagesResponseHeadStage = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListHeadStagesResponseHeadStage' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    dnsStageId: data.dns_stage_id
+  };
+};
+const unmarshalListHeadStagesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListHeadStagesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    headStages: unmarshalArrayOfObject(
+      data.head_stages,
+      unmarshalListHeadStagesResponseHeadStage
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListPipelinesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPipelinesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    pipelines: unmarshalArrayOfObject(data.pipelines, unmarshalPipeline),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListPipelinesWithStagesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPipelinesWithStagesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    pipelines: unmarshalArrayOfObject(data.pipelines, unmarshalPipelineStages),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListPlansResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPlansResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    plans: unmarshalArrayOfObject(data.plans, unmarshalPlanDetails),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListPurgeRequestsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPurgeRequestsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    purgeRequests: unmarshalArrayOfObject(
+      data.purge_requests,
+      unmarshalPurgeRequest
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListRouteRulesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRouteRulesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    routeRules: unmarshalArrayOfObject(data.route_rules, unmarshalRouteRule)
+  };
+};
+const unmarshalListRouteStagesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRouteStagesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    stages: unmarshalArrayOfObject(data.stages, unmarshalRouteStage),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListTLSStagesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListTLSStagesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    stages: unmarshalArrayOfObject(data.stages, unmarshalTLSStage),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListWafStagesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListWafStagesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    stages: unmarshalArrayOfObject(data.stages, unmarshalWafStage),
+    totalCount: data.total_count
+  };
+};
+const unmarshalPlan = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Plan' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    planName: data.plan_name
+  };
+};
+const unmarshalSetRouteRulesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetRouteRulesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    routeRules: unmarshalArrayOfObject(data.route_rules, unmarshalRouteRule)
+  };
+};
+const marshalRuleHttpMatchPathFilter = (request, defaults) => ({
+  path_filter_type: request.pathFilterType,
+  value: request.value
+});
+const marshalRuleHttpMatch = (request, defaults) => ({
+  method_filters: request.methodFilters,
+  path_filter: request.pathFilter !== void 0 ? marshalRuleHttpMatchPathFilter(request.pathFilter) : void 0
+});
+const marshalSetRouteRulesRequestRouteRule = (request, defaults) => ({
+  ...resolveOneOf([
+    {
+      param: "rule_http_match",
+      value: request.ruleHttpMatch !== void 0 ? marshalRuleHttpMatch(request.ruleHttpMatch) : void 0
+    }
+  ]),
+  ...resolveOneOf([
+    { param: "backend_stage_id", value: request.backendStageId }
+  ])
+});
+const marshalAddRouteRulesRequest = (request, defaults) => ({
+  route_rules: request.routeRules !== void 0 ? request.routeRules.map(
+    (elt) => marshalSetRouteRulesRequestRouteRule(elt)
+  ) : void 0,
+  ...resolveOneOf([
+    { param: "after_position", value: request.afterPosition },
+    { param: "before_position", value: request.beforePosition }
+  ])
+});
+const marshalCheckDomainRequest = (request, defaults) => ({
+  cname: request.cname,
+  fqdn: request.fqdn,
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalScalewayLb = (request, defaults) => ({
+  domain_name: request.domainName,
+  frontend_id: request.frontendId,
+  id: request.id,
+  is_ssl: request.isSsl,
+  zone: request.zone
+});
+const marshalCheckLbOriginRequest = (request, defaults) => ({
+  lb: request.lb !== void 0 ? marshalScalewayLb(request.lb) : void 0
+});
+const marshalCheckPEMChainRequestSecretChain = (request, defaults) => ({
+  secret_id: request.secretId,
+  secret_region: request.secretRegion
+});
+const marshalCheckPEMChainRequest = (request, defaults) => ({
+  fqdn: request.fqdn,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  ...resolveOneOf([
+    {
+      param: "secret",
+      value: request.secret !== void 0 ? marshalCheckPEMChainRequestSecretChain(request.secret) : void 0
+    },
+    { param: "raw", value: request.raw }
+  ])
+});
+const marshalScalewayLbBackendConfig = (request, defaults) => ({
+  lbs: request.lbs.map((elt) => marshalScalewayLb(elt))
+});
+const marshalScalewayS3BackendConfig = (request, defaults) => ({
+  bucket_name: request.bucketName,
+  bucket_region: request.bucketRegion,
+  is_website: request.isWebsite
+});
+const marshalCreateBackendStageRequest = (request, defaults) => ({
+  ...resolveOneOf([
+    {
+      param: "scaleway_s3",
+      value: request.scalewayS3 !== void 0 ? marshalScalewayS3BackendConfig(request.scalewayS3) : void 0
+    },
+    {
+      param: "scaleway_lb",
+      value: request.scalewayLb !== void 0 ? marshalScalewayLbBackendConfig(request.scalewayLb) : void 0
+    }
+  ])
+});
+const marshalCreateCacheStageRequest = (request, defaults) => ({
+  fallback_ttl: request.fallbackTtl,
+  include_cookies: request.includeCookies,
+  ...resolveOneOf([
+    { param: "backend_stage_id", value: request.backendStageId },
+    { param: "waf_stage_id", value: request.wafStageId },
+    { param: "route_stage_id", value: request.routeStageId }
+  ])
+});
+const marshalCreateDNSStageRequest = (request, defaults) => ({
+  fqdns: request.fqdns,
+  ...resolveOneOf([
+    { param: "tls_stage_id", value: request.tlsStageId },
+    { param: "cache_stage_id", value: request.cacheStageId },
+    { param: "backend_stage_id", value: request.backendStageId }
+  ])
+});
+const marshalCreatePipelineRequest = (request, defaults) => ({
+  description: request.description,
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalCreatePurgeRequestRequest = (request, defaults) => ({
+  pipeline_id: request.pipelineId,
+  ...resolveOneOf([
+    { param: "assets", value: request.assets },
+    { param: "all", value: request.all }
+  ])
+});
+const marshalCreateRouteStageRequest = (request, defaults) => ({
+  ...resolveOneOf([{ param: "waf_stage_id", value: request.wafStageId }])
+});
+const marshalTLSSecret = (request, defaults) => ({
+  region: request.region,
+  secret_id: request.secretId
+});
+const marshalCreateTLSStageRequest = (request, defaults) => ({
+  managed_certificate: request.managedCertificate,
+  secrets: request.secrets !== void 0 ? request.secrets.map((elt) => marshalTLSSecret(elt)) : void 0,
+  ...resolveOneOf([
+    { param: "cache_stage_id", value: request.cacheStageId },
+    { param: "backend_stage_id", value: request.backendStageId },
+    { param: "route_stage_id", value: request.routeStageId },
+    { param: "waf_stage_id", value: request.wafStageId }
+  ])
+});
+const marshalCreateWafStageRequest = (request, defaults) => ({
+  mode: request.mode,
+  paranoia_level: request.paranoiaLevel,
+  ...resolveOneOf([
+    { param: "backend_stage_id", value: request.backendStageId }
+  ])
+});
+const marshalSelectPlanRequest = (request, defaults) => ({
+  plan_name: request.planName,
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalSetHeadStageRequestAddNewHeadStage = (request, defaults) => ({
+  new_stage_id: request.newStageId
+});
+const marshalSetHeadStageRequestRemoveHeadStage = (request, defaults) => ({
+  remove_stage_id: request.removeStageId
+});
+const marshalSetHeadStageRequestSwapHeadStage = (request, defaults) => ({
+  current_stage_id: request.currentStageId,
+  new_stage_id: request.newStageId
+});
+const marshalSetHeadStageRequest = (request, defaults) => ({
+  ...resolveOneOf([
+    {
+      param: "add_new_head_stage",
+      value: request.addNewHeadStage !== void 0 ? marshalSetHeadStageRequestAddNewHeadStage(
+        request.addNewHeadStage
+      ) : void 0
+    },
+    {
+      param: "remove_head_stage",
+      value: request.removeHeadStage !== void 0 ? marshalSetHeadStageRequestRemoveHeadStage(
+        request.removeHeadStage
+      ) : void 0
+    },
+    {
+      param: "swap_head_stage",
+      value: request.swapHeadStage !== void 0 ? marshalSetHeadStageRequestSwapHeadStage(
+        request.swapHeadStage
+      ) : void 0
+    }
+  ])
+});
+const marshalSetRouteRulesRequest = (request, defaults) => ({
+  route_rules: request.routeRules !== void 0 ? request.routeRules.map(
+    (elt) => marshalSetRouteRulesRequestRouteRule(elt)
+  ) : void 0
+});
+const marshalUpdateBackendStageRequest = (request, defaults) => ({
+  pipeline_id: request.pipelineId,
+  ...resolveOneOf([
+    {
+      param: "scaleway_s3",
+      value: request.scalewayS3 !== void 0 ? marshalScalewayS3BackendConfig(request.scalewayS3) : void 0
+    },
+    {
+      param: "scaleway_lb",
+      value: request.scalewayLb !== void 0 ? marshalScalewayLbBackendConfig(request.scalewayLb) : void 0
+    }
+  ])
+});
+const marshalUpdateCacheStageRequest = (request, defaults) => ({
+  fallback_ttl: request.fallbackTtl,
+  include_cookies: request.includeCookies,
+  ...resolveOneOf([
+    { param: "backend_stage_id", value: request.backendStageId },
+    { param: "waf_stage_id", value: request.wafStageId },
+    { param: "route_stage_id", value: request.routeStageId }
+  ])
+});
+const marshalUpdateDNSStageRequest = (request, defaults) => ({
+  fqdns: request.fqdns,
+  ...resolveOneOf([
+    { param: "tls_stage_id", value: request.tlsStageId },
+    { param: "cache_stage_id", value: request.cacheStageId },
+    { param: "backend_stage_id", value: request.backendStageId }
+  ])
+});
+const marshalUpdatePipelineRequest = (request, defaults) => ({
+  description: request.description,
+  name: request.name
+});
+const marshalUpdateRouteStageRequest = (request, defaults) => ({
+  ...resolveOneOf([{ param: "waf_stage_id", value: request.wafStageId }])
+});
+const marshalTLSSecretsConfig = (request, defaults) => ({
+  tls_secrets: request.tlsSecrets.map((elt) => marshalTLSSecret(elt))
+});
+const marshalUpdateTLSStageRequest = (request, defaults) => ({
+  managed_certificate: request.managedCertificate,
+  tls_secrets_config: request.tlsSecretsConfig !== void 0 ? marshalTLSSecretsConfig(request.tlsSecretsConfig) : void 0,
+  ...resolveOneOf([
+    { param: "cache_stage_id", value: request.cacheStageId },
+    { param: "backend_stage_id", value: request.backendStageId },
+    { param: "route_stage_id", value: request.routeStageId },
+    { param: "waf_stage_id", value: request.wafStageId }
+  ])
+});
+const marshalUpdateWafStageRequest = (request, defaults) => ({
+  mode: request.mode,
+  paranoia_level: request.paranoiaLevel,
+  ...resolveOneOf([
+    { param: "backend_stage_id", value: request.backendStageId }
+  ])
+});
+export {
+  marshalAddRouteRulesRequest,
+  marshalCheckDomainRequest,
+  marshalCheckLbOriginRequest,
+  marshalCheckPEMChainRequest,
+  marshalCreateBackendStageRequest,
+  marshalCreateCacheStageRequest,
+  marshalCreateDNSStageRequest,
+  marshalCreatePipelineRequest,
+  marshalCreatePurgeRequestRequest,
+  marshalCreateRouteStageRequest,
+  marshalCreateTLSStageRequest,
+  marshalCreateWafStageRequest,
+  marshalSelectPlanRequest,
+  marshalSetHeadStageRequest,
+  marshalSetRouteRulesRequest,
+  marshalSetRouteRulesRequestRouteRule,
+  marshalUpdateBackendStageRequest,
+  marshalUpdateCacheStageRequest,
+  marshalUpdateDNSStageRequest,
+  marshalUpdatePipelineRequest,
+  marshalUpdateRouteStageRequest,
+  marshalUpdateTLSStageRequest,
+  marshalUpdateWafStageRequest,
+  unmarshalAddRouteRulesResponse,
+  unmarshalBackendStage,
+  unmarshalCacheStage,
+  unmarshalCheckDomainResponse,
+  unmarshalCheckLbOriginResponse,
+  unmarshalCheckPEMChainResponse,
+  unmarshalDNSStage,
+  unmarshalGetBillingResponse,
+  unmarshalHeadStageResponse,
+  unmarshalListBackendStagesResponse,
+  unmarshalListCacheStagesResponse,
+  unmarshalListDNSStagesResponse,
+  unmarshalListHeadStagesResponse,
+  unmarshalListPipelinesResponse,
+  unmarshalListPipelinesWithStagesResponse,
+  unmarshalListPlansResponse,
+  unmarshalListPurgeRequestsResponse,
+  unmarshalListRouteRulesResponse,
+  unmarshalListRouteStagesResponse,
+  unmarshalListTLSStagesResponse,
+  unmarshalListWafStagesResponse,
+  unmarshalPipeline,
+  unmarshalPipelineStages,
+  unmarshalPlan,
+  unmarshalPurgeRequest,
+  unmarshalRouteStage,
+  unmarshalSetRouteRulesResponse,
+  unmarshalTLSStage,
+  unmarshalWafStage
+};

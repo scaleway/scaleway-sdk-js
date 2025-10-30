@@ -1,0 +1,76 @@
+function validatePathParam(name, param) {
+  if (typeof param === "string" && param.length > 0) return param;
+  if (typeof param === "number") return param.toString();
+  throw new TypeError(`param ${name} cannot be empty in request`);
+}
+const resolveOneOf = (list, isRequired = false) => {
+  const elt = list.find((obj) => obj.value !== void 0) ?? list.find((obj) => obj.default !== void 0);
+  const value = elt?.value ?? elt?.default;
+  if (elt && value !== void 0) {
+    return { [elt.param]: value };
+  }
+  if (isRequired) {
+    const keyList = list.map((obj) => obj.param).join(" or ");
+    throw new TypeError(`one of ${keyList} must be indicated in the request`);
+  }
+  return {};
+};
+const urlParams = (...paramTuples) => {
+  const params = new URLSearchParams();
+  for (const [key, value] of paramTuples) {
+    if (typeof key === "string" && value != null) {
+      if (Array.isArray(value)) {
+        for (const innerValue of value) {
+          if (innerValue !== null) {
+            params.append(
+              key,
+              innerValue instanceof Date ? innerValue.toISOString() : innerValue.toString()
+            );
+          }
+        }
+      } else {
+        params.append(
+          key,
+          value instanceof Date ? value.toISOString() : value.toString()
+        );
+      }
+    }
+  }
+  return params;
+};
+const unmarshalDate = (data) => {
+  if (typeof data !== "string") {
+    return void 0;
+  }
+  const date = new Date(data);
+  if (Number.isNaN(date.getTime())) {
+    return void 0;
+  }
+  return date;
+};
+const unmarshalArrayOfObject = (data, unmarshaller, emptyFallback = true) => {
+  if (!Array.isArray(data)) {
+    return emptyFallback ? [] : void 0;
+  }
+  return data.map((elt) => unmarshaller(elt));
+};
+const unmarshalMapOfObject = (data, unmarshaller, emptyFallback = true) => {
+  if (!data || typeof data !== "object" || !(data instanceof Object) || Array.isArray(data)) {
+    return emptyFallback ? {} : void 0;
+  }
+  return Object.entries(data).reduce(
+    (acc, [key, value]) => ({
+      ...acc,
+      [key]: unmarshaller(value)
+    }),
+    {}
+  );
+};
+export {
+  resolveOneOf,
+  unmarshalArrayOfObject,
+  unmarshalDate,
+  unmarshalMapOfObject,
+  urlParams,
+  validatePathParam
+};

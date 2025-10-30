@@ -1,0 +1,23 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const CreateWafStageRequest = {
+  paranoiaLevel: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 4
+  }
+};
+const UpdateWafStageRequest = {
+  paranoiaLevel: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 4
+  }
+};
+const WafStage = {
+  paranoiaLevel: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 4
+  }
+};
+exports.CreateWafStageRequest = CreateWafStageRequest;
+exports.UpdateWafStageRequest = UpdateWafStageRequest;
+exports.WafStage = WafStage;

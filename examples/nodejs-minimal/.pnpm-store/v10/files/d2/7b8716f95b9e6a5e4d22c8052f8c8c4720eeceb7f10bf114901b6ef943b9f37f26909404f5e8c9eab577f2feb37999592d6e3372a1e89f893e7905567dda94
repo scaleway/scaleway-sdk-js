@@ -1,0 +1,13 @@
+import type { DefaultValues } from '@scaleway/sdk-client';
+import type { AttachFlexibleIPRequest, AttachFlexibleIPsResponse, CreateFlexibleIPRequest, DetachFlexibleIPRequest, DetachFlexibleIPsResponse, DuplicateMACAddrRequest, FlexibleIP, GenerateMACAddrRequest, ListFlexibleIPsResponse, MoveMACAddrRequest, UpdateFlexibleIPRequest } from './types.gen';
+export declare const unmarshalFlexibleIP: (data: unknown) => FlexibleIP;
+export declare const unmarshalAttachFlexibleIPsResponse: (data: unknown) => AttachFlexibleIPsResponse;
+export declare const unmarshalDetachFlexibleIPsResponse: (data: unknown) => DetachFlexibleIPsResponse;
+export declare const unmarshalListFlexibleIPsResponse: (data: unknown) => ListFlexibleIPsResponse;
+export declare const marshalAttachFlexibleIPRequest: (request: AttachFlexibleIPRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalCreateFlexibleIPRequest: (request: CreateFlexibleIPRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalDetachFlexibleIPRequest: (request: DetachFlexibleIPRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalDuplicateMACAddrRequest: (request: DuplicateMACAddrRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalGenerateMACAddrRequest: (request: GenerateMACAddrRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalMoveMACAddrRequest: (request: MoveMACAddrRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateFlexibleIPRequest: (request: UpdateFlexibleIPRequest, defaults: DefaultValues) => Record<string, unknown>;

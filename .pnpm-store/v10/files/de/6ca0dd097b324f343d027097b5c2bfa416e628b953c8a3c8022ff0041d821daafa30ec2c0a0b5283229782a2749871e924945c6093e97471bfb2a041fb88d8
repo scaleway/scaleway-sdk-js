@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const api_gen = require("./api.gen.cjs");
+const marshalling_gen = require("./marshalling.gen.cjs");
+exports.API = api_gen.API;
+exports.unmarshalCategory = marshalling_gen.unmarshalCategory;
+exports.unmarshalImage = marshalling_gen.unmarshalImage;
+exports.unmarshalListCategoriesResponse = marshalling_gen.unmarshalListCategoriesResponse;
+exports.unmarshalListImagesResponse = marshalling_gen.unmarshalListImagesResponse;
+exports.unmarshalListLocalImagesResponse = marshalling_gen.unmarshalListLocalImagesResponse;
+exports.unmarshalListVersionsResponse = marshalling_gen.unmarshalListVersionsResponse;
+exports.unmarshalLocalImage = marshalling_gen.unmarshalLocalImage;
+exports.unmarshalVersion = marshalling_gen.unmarshalVersion;

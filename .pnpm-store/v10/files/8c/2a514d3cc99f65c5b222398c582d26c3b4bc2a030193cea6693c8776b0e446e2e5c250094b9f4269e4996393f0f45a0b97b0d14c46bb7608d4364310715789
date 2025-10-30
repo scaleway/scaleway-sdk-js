@@ -1,0 +1,296 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client';
+import type { CreateDeviceRequest, CreateDeviceResponse, CreateHubRequest, CreateNetworkRequest, CreateNetworkResponse, CreateRouteRequest, DeleteDeviceRequest, DeleteHubRequest, DeleteNetworkRequest, DeleteRouteRequest, DeleteTwinDocumentRequest, DeleteTwinDocumentsRequest, Device, DisableDeviceRequest, DisableHubRequest, EnableDeviceRequest, EnableHubRequest, GetDeviceCertificateRequest, GetDeviceCertificateResponse, GetDeviceMetricsRequest, GetDeviceMetricsResponse, GetDeviceRequest, GetHubCARequest, GetHubCAResponse, GetHubMetricsRequest, GetHubMetricsResponse, GetHubRequest, GetNetworkRequest, GetRouteRequest, GetTwinDocumentRequest, Hub, ListDevicesRequest, ListDevicesResponse, ListHubsRequest, ListHubsResponse, ListNetworksRequest, ListNetworksResponse, ListRoutesRequest, ListRoutesResponse, ListTwinDocumentsRequest, ListTwinDocumentsResponse, Network, PatchTwinDocumentRequest, PutTwinDocumentRequest, RenewDeviceCertificateRequest, RenewDeviceCertificateResponse, Route, SetDeviceCertificateRequest, SetDeviceCertificateResponse, SetHubCARequest, TwinDocument, UpdateDeviceRequest, UpdateHubRequest, UpdateRouteRequest } from './types.gen';
+/**
+ * IoT Hub API.
+
+This API allows you to manage your IoT hubs and devices.
+ */
+export declare class API extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    protected pageOfListHubs: (request?: Readonly<ListHubsRequest>) => Promise<ListHubsResponse>;
+    /**
+     * List hubs. List all Hubs in the specified zone. By default, returned Hubs are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
+     *
+     * @param request - The request {@link ListHubsRequest}
+     * @returns A Promise of ListHubsResponse
+     */
+    listHubs: (request?: Readonly<ListHubsRequest>) => Promise<ListHubsResponse> & {
+        all: () => Promise<Hub[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Hub[], void, void>;
+    };
+    /**
+     * Create a hub. Create a new Hub in the targeted region, specifying its configuration including name and product plan.
+     *
+     * @param request - The request {@link CreateHubRequest}
+     * @returns A Promise of Hub
+     */
+    createHub: (request: Readonly<CreateHubRequest>) => Promise<Hub>;
+    /**
+     * Get a hub. Retrieve information about an existing IoT Hub, specified by its Hub ID. Its full details, including name, status and endpoint, are returned in the response object.
+     *
+     * @param request - The request {@link GetHubRequest}
+     * @returns A Promise of Hub
+     */
+    getHub: (request: Readonly<GetHubRequest>) => Promise<Hub>;
+    /**
+     * Waits for {@link Hub} to be in a final state.
+     *
+     * @param request - The request {@link GetHubRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Hub
+     */
+    waitForHub: (request: Readonly<GetHubRequest>, options?: Readonly<WaitForOptions<Hub>>) => Promise<Hub>;
+    /**
+     * Update a hub. Update the parameters of an existing IoT Hub, specified by its Hub ID.
+     *
+     * @param request - The request {@link UpdateHubRequest}
+     * @returns A Promise of Hub
+     */
+    updateHub: (request: Readonly<UpdateHubRequest>) => Promise<Hub>;
+    /**
+     * Enable a hub. Enable an existing IoT Hub, specified by its Hub ID.
+     *
+     * @param request - The request {@link EnableHubRequest}
+     * @returns A Promise of Hub
+     */
+    enableHub: (request: Readonly<EnableHubRequest>) => Promise<Hub>;
+    /**
+     * Disable a hub. Disable an existing IoT Hub, specified by its Hub ID.
+     *
+     * @param request - The request {@link DisableHubRequest}
+     * @returns A Promise of Hub
+     */
+    disableHub: (request: Readonly<DisableHubRequest>) => Promise<Hub>;
+    /**
+     * Delete a hub. Delete an existing IoT Hub, specified by its Hub ID. Deleting a Hub is permanent, and cannot be undone.
+     *
+     * @param request - The request {@link DeleteHubRequest}
+     */
+    deleteHub: (request: Readonly<DeleteHubRequest>) => Promise<void>;
+    /**
+     * Get a hub's metrics. Get the metrics of an existing IoT Hub, specified by its Hub ID.
+     *
+     * @deprecated
+     * @param request - The request {@link GetHubMetricsRequest}
+     * @returns A Promise of GetHubMetricsResponse
+     */
+    getHubMetrics: (request: Readonly<GetHubMetricsRequest>) => Promise<GetHubMetricsResponse>;
+    /**
+     * Set the certificate authority of a hub. Set a particular PEM-encoded certificate, specified by the Hub ID.
+     *
+     * @param request - The request {@link SetHubCARequest}
+     * @returns A Promise of Hub
+     */
+    setHubCA: (request: Readonly<SetHubCARequest>) => Promise<Hub>;
+    /**
+     * Get the certificate authority of a hub. Get information for a particular PEM-encoded certificate, specified by the Hub ID.
+     *
+     * @param request - The request {@link GetHubCARequest}
+     * @returns A Promise of GetHubCAResponse
+     */
+    getHubCA: (request: Readonly<GetHubCARequest>) => Promise<GetHubCAResponse>;
+    protected pageOfListDevices: (request?: Readonly<ListDevicesRequest>) => Promise<ListDevicesResponse>;
+    /**
+     * List devices. List all devices in the specified region. By default, returned devices are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
+     *
+     * @param request - The request {@link ListDevicesRequest}
+     * @returns A Promise of ListDevicesResponse
+     */
+    listDevices: (request?: Readonly<ListDevicesRequest>) => Promise<ListDevicesResponse> & {
+        all: () => Promise<Device[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Device[], void, void>;
+    };
+    /**
+     * Add a device. Attach a device to a given Hub.
+     *
+     * @param request - The request {@link CreateDeviceRequest}
+     * @returns A Promise of CreateDeviceResponse
+     */
+    createDevice: (request: Readonly<CreateDeviceRequest>) => Promise<CreateDeviceResponse>;
+    /**
+     * Get a device. Retrieve information about an existing device, specified by its device ID. Its full details, including name, status and ID, are returned in the response object.
+     *
+     * @param request - The request {@link GetDeviceRequest}
+     * @returns A Promise of Device
+     */
+    getDevice: (request: Readonly<GetDeviceRequest>) => Promise<Device>;
+    /**
+     * Update a device. Update the parameters of an existing device, specified by its device ID.
+     *
+     * @param request - The request {@link UpdateDeviceRequest}
+     * @returns A Promise of Device
+     */
+    updateDevice: (request: Readonly<UpdateDeviceRequest>) => Promise<Device>;
+    /**
+     * Enable a device. Enable a specific device, specified by its device ID.
+     *
+     * @param request - The request {@link EnableDeviceRequest}
+     * @returns A Promise of Device
+     */
+    enableDevice: (request: Readonly<EnableDeviceRequest>) => Promise<Device>;
+    /**
+     * Disable a device. Disable an existing device, specified by its device ID.
+     *
+     * @param request - The request {@link DisableDeviceRequest}
+     * @returns A Promise of Device
+     */
+    disableDevice: (request: Readonly<DisableDeviceRequest>) => Promise<Device>;
+    /**
+     * Renew a device certificate. Renew the certificate of an existing device, specified by its device ID.
+     *
+     * @param request - The request {@link RenewDeviceCertificateRequest}
+     * @returns A Promise of RenewDeviceCertificateResponse
+     */
+    renewDeviceCertificate: (request: Readonly<RenewDeviceCertificateRequest>) => Promise<RenewDeviceCertificateResponse>;
+    /**
+     * Set a custom certificate on a device. Switch the existing certificate of a given device with an EM-encoded custom certificate.
+     *
+     * @param request - The request {@link SetDeviceCertificateRequest}
+     * @returns A Promise of SetDeviceCertificateResponse
+     */
+    setDeviceCertificate: (request: Readonly<SetDeviceCertificateRequest>) => Promise<SetDeviceCertificateResponse>;
+    /**
+     * Get a device's certificate. Get information for a particular PEM-encoded certificate, specified by the device ID. The response returns full details of the device, including its type of certificate.
+     *
+     * @param request - The request {@link GetDeviceCertificateRequest}
+     * @returns A Promise of GetDeviceCertificateResponse
+     */
+    getDeviceCertificate: (request: Readonly<GetDeviceCertificateRequest>) => Promise<GetDeviceCertificateResponse>;
+    /**
+     * Remove a device. Remove a specific device from the specific Hub it is attached to.
+     *
+     * @param request - The request {@link DeleteDeviceRequest}
+     */
+    deleteDevice: (request: Readonly<DeleteDeviceRequest>) => Promise<void>;
+    /**
+     * Get a device's metrics. Get the metrics of an existing device, specified by its device ID.
+     *
+     * @deprecated
+     * @param request - The request {@link GetDeviceMetricsRequest}
+     * @returns A Promise of GetDeviceMetricsResponse
+     */
+    getDeviceMetrics: (request: Readonly<GetDeviceMetricsRequest>) => Promise<GetDeviceMetricsResponse>;
+    protected pageOfListRoutes: (request?: Readonly<ListRoutesRequest>) => Promise<ListRoutesResponse>;
+    /**
+     * List routes. List all routes in the specified region. By default, returned routes are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
+     *
+     * @param request - The request {@link ListRoutesRequest}
+     * @returns A Promise of ListRoutesResponse
+     */
+    listRoutes: (request?: Readonly<ListRoutesRequest>) => Promise<ListRoutesResponse> & {
+        all: () => Promise<import("./types.gen").RouteSummary[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").RouteSummary[], void, void>;
+    };
+    /**
+     * Create a route. Multiple kinds of routes can be created, such as:
+  - Database Route
+    Create a route that will record subscribed MQTT messages into your database.
+    <b>You need to manage the database by yourself</b>.
+  - REST Route.
+    Create a route that will call a REST API on received subscribed MQTT messages.
+  - Amazon S3 Routes.
+    Create a route that will put subscribed MQTT messages into an Object Storage bucket.
+    You need to create the bucket yourself and grant write access.
+    Granting can be done with s3cmd (`s3cmd setacl s3://<my-bucket> --acl-grant=write:555c69c3-87d0-4bf8-80f1-99a2f757d031:555c69c3-87d0-4bf8-80f1-99a2f757d031`).
+     *
+     * @param request - The request {@link CreateRouteRequest}
+     * @returns A Promise of Route
+     */
+    createRoute: (request: Readonly<CreateRouteRequest>) => Promise<Route>;
+    /**
+     * Update a route. Update the parameters of an existing route, specified by its route ID.
+     *
+     * @param request - The request {@link UpdateRouteRequest}
+     * @returns A Promise of Route
+     */
+    updateRoute: (request: Readonly<UpdateRouteRequest>) => Promise<Route>;
+    /**
+     * Get a route. Get information for a particular route, specified by the route ID. The response returns full details of the route, including its type, the topic it subscribes to and its configuration.
+     *
+     * @param request - The request {@link GetRouteRequest}
+     * @returns A Promise of Route
+     */
+    getRoute: (request: Readonly<GetRouteRequest>) => Promise<Route>;
+    /**
+     * Delete a route. Delete an existing route, specified by its route ID. Deleting a route is permanent, and cannot be undone.
+     *
+     * @param request - The request {@link DeleteRouteRequest}
+     */
+    deleteRoute: (request: Readonly<DeleteRouteRequest>) => Promise<void>;
+    protected pageOfListNetworks: (request?: Readonly<ListNetworksRequest>) => Promise<ListNetworksResponse>;
+    /**
+     * List the networks.
+     *
+     * @param request - The request {@link ListNetworksRequest}
+     * @returns A Promise of ListNetworksResponse
+     */
+    listNetworks: (request?: Readonly<ListNetworksRequest>) => Promise<ListNetworksResponse> & {
+        all: () => Promise<Network[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Network[], void, void>;
+    };
+    /**
+     * Create a new network. Create a new network for an existing hub.  Beside the default network, you can add networks for different data providers. Possible network types are Sigfox and REST.
+     *
+     * @param request - The request {@link CreateNetworkRequest}
+     * @returns A Promise of CreateNetworkResponse
+     */
+    createNetwork: (request: Readonly<CreateNetworkRequest>) => Promise<CreateNetworkResponse>;
+    /**
+     * Retrieve a specific network. Retrieve an existing network, specified by its network ID.  The response returns full details of the network, including its type, the topic prefix and its endpoint.
+     *
+     * @param request - The request {@link GetNetworkRequest}
+     * @returns A Promise of Network
+     */
+    getNetwork: (request: Readonly<GetNetworkRequest>) => Promise<Network>;
+    /**
+     * Delete a Network. Delete an existing network, specified by its network ID. Deleting a network is permanent, and cannot be undone.
+     *
+     * @param request - The request {@link DeleteNetworkRequest}
+     */
+    deleteNetwork: (request: Readonly<DeleteNetworkRequest>) => Promise<void>;
+    /**
+     * BETA - Get a Cloud Twin Document.
+     *
+     * @param request - The request {@link GetTwinDocumentRequest}
+     * @returns A Promise of TwinDocument
+     */
+    getTwinDocument: (request: Readonly<GetTwinDocumentRequest>) => Promise<TwinDocument>;
+    /**
+     * BETA - Update a Cloud Twin Document.
+     *
+     * @param request - The request {@link PutTwinDocumentRequest}
+     * @returns A Promise of TwinDocument
+     */
+    putTwinDocument: (request: Readonly<PutTwinDocumentRequest>) => Promise<TwinDocument>;
+    /**
+     * BETA - Patch a Cloud Twin Document.
+     *
+     * @param request - The request {@link PatchTwinDocumentRequest}
+     * @returns A Promise of TwinDocument
+     */
+    patchTwinDocument: (request: Readonly<PatchTwinDocumentRequest>) => Promise<TwinDocument>;
+    /**
+     * BETA - Delete a Cloud Twin Document.
+     *
+     * @param request - The request {@link DeleteTwinDocumentRequest}
+     */
+    deleteTwinDocument: (request: Readonly<DeleteTwinDocumentRequest>) => Promise<void>;
+    /**
+     * BETA - List the documents of a Cloud Twin.
+     *
+     * @param request - The request {@link ListTwinDocumentsRequest}
+     * @returns A Promise of ListTwinDocumentsResponse
+     */
+    listTwinDocuments: (request: Readonly<ListTwinDocumentsRequest>) => Promise<ListTwinDocumentsResponse>;
+    /**
+     * BETA - Delete all the documents of a Cloud Twin.
+     *
+     * @param request - The request {@link DeleteTwinDocumentsRequest}
+     */
+    deleteTwinDocuments: (request: Readonly<DeleteTwinDocumentsRequest>) => Promise<void>;
+}

@@ -1,0 +1,47 @@
+export declare const CreateSnapshotRequest: {
+    name: {
+        minLength: number;
+    };
+};
+export declare const CreateVolumeRequest: {
+    name: {
+        minLength: number;
+    };
+};
+export declare const ImportSnapshotFromObjectStorageRequest: {
+    name: {
+        minLength: number;
+    };
+};
+export declare const ListSnapshotsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListVolumeTypesRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListVolumesRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const Reference: {
+    productResourceType: {
+        minLength: number;
+    };
+};

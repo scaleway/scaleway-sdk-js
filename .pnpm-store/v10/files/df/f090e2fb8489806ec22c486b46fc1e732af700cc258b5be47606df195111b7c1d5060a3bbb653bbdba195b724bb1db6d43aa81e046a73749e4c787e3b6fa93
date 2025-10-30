@@ -1,0 +1,65 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const CreateDeploymentRequest = {
+  maxSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 50
+  },
+  minSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 50
+  },
+  name: {
+    maxLength: 255,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9-_]+$/
+  },
+  nodeTypeName: {
+    maxLength: 64,
+    minLength: 1
+  }
+};
+const CreateModelRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9-_/.:]+$/
+  }
+};
+const DeploymentQuantization = {
+  bits: {
+    lessThanOrEqual: 32
+  }
+};
+const ListDeploymentsRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1
+  }
+};
+const ListModelsRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1
+  }
+};
+const UpdateDeploymentRequest = {
+  maxSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 50
+  },
+  minSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 50
+  },
+  name: {
+    maxLength: 255,
+    minLength: 1
+  }
+};
+exports.CreateDeploymentRequest = CreateDeploymentRequest;
+exports.CreateModelRequest = CreateModelRequest;
+exports.DeploymentQuantization = DeploymentQuantization;
+exports.ListDeploymentsRequest = ListDeploymentsRequest;
+exports.ListModelsRequest = ListModelsRequest;
+exports.UpdateDeploymentRequest = UpdateDeploymentRequest;

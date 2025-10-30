@@ -1,0 +1,153 @@
+export declare const ACLRuleRequest: {
+    description: {
+        maxLength: number;
+    };
+};
+export declare const CreateClusterRequest: {
+    description: {
+        maxLength: number;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+    type: {
+        maxLength: number;
+    };
+    version: {
+        maxLength: number;
+    };
+};
+export declare const CreateClusterRequestAutoscalerConfig: {
+    scaleDownDelayAfterAdd: {
+        maxLength: number;
+    };
+    scaleDownUtilizationThreshold: {
+        greaterThan: number;
+        lessThan: number;
+    };
+};
+export declare const CreateClusterRequestOpenIDConnectConfig: {
+    clientId: {
+        maxLength: number;
+    };
+    groupsPrefix: {
+        maxLength: number;
+    };
+    issuerUrl: {
+        maxLength: number;
+    };
+    usernameClaim: {
+        maxLength: number;
+    };
+    usernamePrefix: {
+        maxLength: number;
+    };
+};
+export declare const CreateClusterRequestPoolConfig: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const CreatePoolRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const ListClusterTypesRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListClustersRequest: {
+    name: {
+        minLength: number;
+    };
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListNodesRequest: {
+    name: {
+        minLength: number;
+    };
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListPoolsRequest: {
+    name: {
+        minLength: number;
+    };
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const MaintenanceWindow: {
+    startHour: {
+        lessThanOrEqual: number;
+    };
+};
+export declare const SetClusterTypeRequest: {
+    type: {
+        maxLength: number;
+    };
+};
+export declare const UpdateClusterRequest: {
+    description: {
+        maxLength: number;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const UpdateClusterRequestAutoscalerConfig: {
+    scaleDownDelayAfterAdd: {
+        maxLength: number;
+    };
+    scaleDownUtilizationThreshold: {
+        greaterThan: number;
+        lessThan: number;
+    };
+};
+export declare const UpdateClusterRequestOpenIDConnectConfig: {
+    clientId: {
+        maxLength: number;
+    };
+    groupsPrefix: {
+        maxLength: number;
+    };
+    issuerUrl: {
+        maxLength: number;
+    };
+    usernameClaim: {
+        maxLength: number;
+    };
+    usernamePrefix: {
+        maxLength: number;
+    };
+};
+export declare const UpgradeClusterRequest: {
+    version: {
+        maxLength: number;
+    };
+};

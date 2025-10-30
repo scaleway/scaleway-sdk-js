@@ -1,0 +1,321 @@
+const CreateAPIKeyRequest = {
+  description: {
+    ignoreEmpty: true,
+    maxLength: 200
+  }
+};
+const CreateApplicationRequest = {
+  description: {
+    ignoreEmpty: true,
+    maxLength: 200
+  },
+  name: {
+    maxLength: 64,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/
+  }
+};
+const CreateGroupRequest = {
+  description: {
+    ignoreEmpty: true,
+    maxLength: 200
+  },
+  name: {
+    maxLength: 64,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/
+  }
+};
+const CreatePolicyRequest = {
+  description: {
+    ignoreEmpty: true,
+    maxLength: 200
+  },
+  name: {
+    maxLength: 64,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/
+  }
+};
+const CreateSSHKeyRequest = {
+  name: {
+    ignoreEmpty: true,
+    maxLength: 1e3
+  },
+  publicKey: {
+    maxLength: 65e3,
+    minLength: 1
+  }
+};
+const CreateUserRequestMember = {
+  firstName: {
+    maxLength: 64
+  },
+  lastName: {
+    maxLength: 64
+  },
+  password: {
+    ignoreEmpty: true,
+    maxLength: 72
+  },
+  username: {
+    maxLength: 64,
+    minLength: 2,
+    pattern: /^[a-zA-Z0-9@._-]+$/
+  }
+};
+const GetQuotumRequest = {
+  quotumName: {
+    minLength: 1
+  }
+};
+const JoinUserConnectionRequest = {
+  token: {
+    minLength: 1
+  }
+};
+const ListAPIKeysRequest = {
+  description: {
+    maxLength: 200
+  },
+  page: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e4
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  }
+};
+const ListApplicationsRequest = {
+  name: {
+    maxLength: 64,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/
+  },
+  page: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e4
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  }
+};
+const ListGroupsRequest = {
+  name: {
+    minLength: 1
+  },
+  page: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e4
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  }
+};
+const ListJWTsRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e4
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  }
+};
+const ListLogsRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e4
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  }
+};
+const ListPermissionSetsRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e4
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  }
+};
+const ListPoliciesRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e4
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  },
+  policyName: {
+    minLength: 1
+  }
+};
+const ListQuotaRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e4
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  }
+};
+const ListRulesRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e4
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  }
+};
+const ListSSHKeysRequest = {
+  name: {
+    maxLength: 1e3,
+    minLength: 1
+  },
+  page: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e4
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  }
+};
+const ListUsersRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e4
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  }
+};
+const RuleSpecs = {
+  condition: {
+    maxLength: 2048
+  }
+};
+const SetOrganizationAliasRequest = {
+  alias: {
+    maxLength: 32,
+    minLength: 2,
+    pattern: /^[a-z0-9]+$/
+  }
+};
+const UpdateAPIKeyRequest = {
+  description: {
+    maxLength: 200
+  }
+};
+const UpdateApplicationRequest = {
+  description: {
+    maxLength: 200
+  },
+  name: {
+    maxLength: 64,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/
+  }
+};
+const UpdateGroupRequest = {
+  description: {
+    maxLength: 200
+  },
+  name: {
+    maxLength: 64,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/
+  }
+};
+const UpdateOrganizationSecuritySettingsRequest = {
+  loginAttemptsBeforeLocked: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 50
+  }
+};
+const UpdatePolicyRequest = {
+  description: {
+    maxLength: 200
+  },
+  name: {
+    maxLength: 64,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/
+  }
+};
+const UpdateSSHKeyRequest = {
+  name: {
+    maxLength: 1e3
+  }
+};
+const UpdateUserPasswordRequest = {
+  password: {
+    maxLength: 72,
+    minLength: 1
+  }
+};
+const UpdateUserRequest = {
+  firstName: {
+    maxLength: 64
+  },
+  lastName: {
+    maxLength: 64
+  }
+};
+const UpdateUserUsernameRequest = {
+  username: {
+    maxLength: 64,
+    minLength: 2,
+    pattern: /^[a-zA-Z0-9@._-]+$/
+  }
+};
+const ValidateUserMFAOTPRequest = {
+  oneTimePassword: {
+    pattern: /^[0-9]{6}$/
+  }
+};
+export {
+  CreateAPIKeyRequest,
+  CreateApplicationRequest,
+  CreateGroupRequest,
+  CreatePolicyRequest,
+  CreateSSHKeyRequest,
+  CreateUserRequestMember,
+  GetQuotumRequest,
+  JoinUserConnectionRequest,
+  ListAPIKeysRequest,
+  ListApplicationsRequest,
+  ListGroupsRequest,
+  ListJWTsRequest,
+  ListLogsRequest,
+  ListPermissionSetsRequest,
+  ListPoliciesRequest,
+  ListQuotaRequest,
+  ListRulesRequest,
+  ListSSHKeysRequest,
+  ListUsersRequest,
+  RuleSpecs,
+  SetOrganizationAliasRequest,
+  UpdateAPIKeyRequest,
+  UpdateApplicationRequest,
+  UpdateGroupRequest,
+  UpdateOrganizationSecuritySettingsRequest,
+  UpdatePolicyRequest,
+  UpdateSSHKeyRequest,
+  UpdateUserPasswordRequest,
+  UpdateUserRequest,
+  UpdateUserUsernameRequest,
+  ValidateUserMFAOTPRequest
+};

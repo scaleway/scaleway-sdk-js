@@ -1,0 +1,13 @@
+import type { ContainerStatus, CronStatus, DomainStatus, NamespaceStatus, TokenStatus, TriggerStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link ContainerStatus}. */
+export declare const CONTAINER_TRANSIENT_STATUSES: ContainerStatus[];
+/** Lists transient statutes of the enum {@link CronStatus}. */
+export declare const CRON_TRANSIENT_STATUSES: CronStatus[];
+/** Lists transient statutes of the enum {@link DomainStatus}. */
+export declare const DOMAIN_TRANSIENT_STATUSES: DomainStatus[];
+/** Lists transient statutes of the enum {@link NamespaceStatus}. */
+export declare const NAMESPACE_TRANSIENT_STATUSES: NamespaceStatus[];
+/** Lists transient statutes of the enum {@link TokenStatus}. */
+export declare const TOKEN_TRANSIENT_STATUSES: TokenStatus[];
+/** Lists transient statutes of the enum {@link TriggerStatus}. */
+export declare const TRIGGER_TRANSIENT_STATUSES: TriggerStatus[];

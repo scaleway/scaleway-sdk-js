@@ -1,0 +1,314 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const randomName = require("@scaleway/random-name");
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalContract = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Contract' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    type: data.type,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    version: data.version
+  };
+};
+const unmarshalContractSignature = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContractSignature' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    contract: data.contract ? unmarshalContract(data.contract) : void 0,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    expiresAt: sdkClient.unmarshalDate(data.expires_at),
+    id: data.id,
+    organizationId: data.organization_id,
+    signedAt: sdkClient.unmarshalDate(data.signed_at)
+  };
+};
+const unmarshalQualificationAiMachine = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'QualificationAiMachine' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    subUseCase: data.sub_use_case
+  };
+};
+const unmarshalQualificationArchiveData = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'QualificationArchiveData' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    subUseCase: data.sub_use_case
+  };
+};
+const unmarshalQualificationContainer = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'QualificationContainer' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    subUseCase: data.sub_use_case
+  };
+};
+const unmarshalQualificationDeploySoftware = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'QualificationDeploySoftware' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    subUseCase: data.sub_use_case
+  };
+};
+const unmarshalQualificationHostApplication = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'QualificationHostApplication' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    subUseCase: data.sub_use_case
+  };
+};
+const unmarshalQualificationHostWebsite = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'QualificationHostWebsite' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    subUseCase: data.sub_use_case
+  };
+};
+const unmarshalQualificationOtherUseCase = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'QualificationOtherUseCase' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    subUseCase: data.sub_use_case
+  };
+};
+const unmarshalQualificationSetScalewayEnvironment = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'QualificationSetScalewayEnvironment' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    subUseCase: data.sub_use_case
+  };
+};
+const unmarshalQualificationShareData = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'QualificationShareData' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    subUseCase: data.sub_use_case
+  };
+};
+const unmarshalQualification = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Qualification' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    aiMachine: data.ai_machine ? unmarshalQualificationAiMachine(data.ai_machine) : void 0,
+    architectureType: data.architecture_type,
+    archiveData: data.archive_data ? unmarshalQualificationArchiveData(data.archive_data) : void 0,
+    container: data.container ? unmarshalQualificationContainer(data.container) : void 0,
+    deploySoftware: data.deploy_software ? unmarshalQualificationDeploySoftware(data.deploy_software) : void 0,
+    hostApplication: data.host_application ? unmarshalQualificationHostApplication(data.host_application) : void 0,
+    hostWebsite: data.host_website ? unmarshalQualificationHostWebsite(data.host_website) : void 0,
+    otherUseCase: data.other_use_case ? unmarshalQualificationOtherUseCase(data.other_use_case) : void 0,
+    setScalewayEnvironment: data.set_scaleway_environment ? unmarshalQualificationSetScalewayEnvironment(
+      data.set_scaleway_environment
+    ) : void 0,
+    shareData: data.share_data ? unmarshalQualificationShareData(data.share_data) : void 0
+  };
+};
+const unmarshalProject = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Project' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    description: data.description,
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    qualification: data.qualification ? unmarshalQualification(data.qualification) : void 0,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalCheckContractSignatureResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CheckContractSignatureResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    created: data.created,
+    validated: data.validated
+  };
+};
+const unmarshalListContractSignaturesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListContractSignaturesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    contractSignatures: sdkClient.unmarshalArrayOfObject(
+      data.contract_signatures,
+      unmarshalContractSignature
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListProjectsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListProjectsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    projects: sdkClient.unmarshalArrayOfObject(data.projects, unmarshalProject),
+    totalCount: data.total_count
+  };
+};
+const unmarshalProjectQualification = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ProjectQualification' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    projectId: data.project_id,
+    qualification: data.qualification ? unmarshalQualification(data.qualification) : void 0
+  };
+};
+const marshalContractApiCheckContractSignatureRequest = (request, defaults) => ({
+  contract_name: request.contractName,
+  contract_type: request.contractType,
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId
+});
+const marshalContractApiCreateContractSignatureRequest = (request, defaults) => ({
+  contract_name: request.contractName,
+  contract_type: request.contractType,
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+  validated: request.validated
+});
+const marshalProjectApiCreateProjectRequest = (request, defaults) => ({
+  description: request.description,
+  name: request.name || randomName("proj"),
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId
+});
+const marshalQualificationAiMachine = (request, defaults) => ({
+  sub_use_case: request.subUseCase
+});
+const marshalQualificationArchiveData = (request, defaults) => ({
+  sub_use_case: request.subUseCase
+});
+const marshalQualificationContainer = (request, defaults) => ({
+  sub_use_case: request.subUseCase
+});
+const marshalQualificationDeploySoftware = (request, defaults) => ({
+  sub_use_case: request.subUseCase
+});
+const marshalQualificationHostApplication = (request, defaults) => ({
+  sub_use_case: request.subUseCase
+});
+const marshalQualificationHostWebsite = (request, defaults) => ({
+  sub_use_case: request.subUseCase
+});
+const marshalQualificationOtherUseCase = (request, defaults) => ({
+  sub_use_case: request.subUseCase
+});
+const marshalQualificationSetScalewayEnvironment = (request, defaults) => ({
+  sub_use_case: request.subUseCase
+});
+const marshalQualificationShareData = (request, defaults) => ({
+  sub_use_case: request.subUseCase
+});
+const marshalQualification = (request, defaults) => ({
+  architecture_type: request.architectureType,
+  ...sdkClient.resolveOneOf([
+    {
+      param: "host_website",
+      value: request.hostWebsite !== void 0 ? marshalQualificationHostWebsite(request.hostWebsite) : void 0
+    },
+    {
+      param: "host_application",
+      value: request.hostApplication !== void 0 ? marshalQualificationHostApplication(
+        request.hostApplication
+      ) : void 0
+    },
+    {
+      param: "deploy_software",
+      value: request.deploySoftware !== void 0 ? marshalQualificationDeploySoftware(request.deploySoftware) : void 0
+    },
+    {
+      param: "set_scaleway_environment",
+      value: request.setScalewayEnvironment !== void 0 ? marshalQualificationSetScalewayEnvironment(
+        request.setScalewayEnvironment
+      ) : void 0
+    },
+    {
+      param: "ai_machine",
+      value: request.aiMachine !== void 0 ? marshalQualificationAiMachine(request.aiMachine) : void 0
+    },
+    {
+      param: "container",
+      value: request.container !== void 0 ? marshalQualificationContainer(request.container) : void 0
+    },
+    {
+      param: "archive_data",
+      value: request.archiveData !== void 0 ? marshalQualificationArchiveData(request.archiveData) : void 0
+    },
+    {
+      param: "share_data",
+      value: request.shareData !== void 0 ? marshalQualificationShareData(request.shareData) : void 0
+    },
+    {
+      param: "other_use_case",
+      value: request.otherUseCase !== void 0 ? marshalQualificationOtherUseCase(request.otherUseCase) : void 0
+    }
+  ])
+});
+const marshalProjectApiSetProjectQualificationRequest = (request, defaults) => ({
+  qualification: request.qualification !== void 0 ? marshalQualification(request.qualification) : void 0
+});
+const marshalProjectApiUpdateProjectRequest = (request, defaults) => ({
+  description: request.description,
+  name: request.name
+});
+exports.marshalContractApiCheckContractSignatureRequest = marshalContractApiCheckContractSignatureRequest;
+exports.marshalContractApiCreateContractSignatureRequest = marshalContractApiCreateContractSignatureRequest;
+exports.marshalProjectApiCreateProjectRequest = marshalProjectApiCreateProjectRequest;
+exports.marshalProjectApiSetProjectQualificationRequest = marshalProjectApiSetProjectQualificationRequest;
+exports.marshalProjectApiUpdateProjectRequest = marshalProjectApiUpdateProjectRequest;
+exports.unmarshalCheckContractSignatureResponse = unmarshalCheckContractSignatureResponse;
+exports.unmarshalContractSignature = unmarshalContractSignature;
+exports.unmarshalListContractSignaturesResponse = unmarshalListContractSignaturesResponse;
+exports.unmarshalListProjectsResponse = unmarshalListProjectsResponse;
+exports.unmarshalProject = unmarshalProject;
+exports.unmarshalProjectQualification = unmarshalProjectQualification;

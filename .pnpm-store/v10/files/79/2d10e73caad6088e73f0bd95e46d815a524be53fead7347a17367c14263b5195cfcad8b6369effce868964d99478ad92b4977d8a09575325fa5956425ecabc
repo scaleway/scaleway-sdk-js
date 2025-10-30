@@ -1,0 +1,14 @@
+import type { DefaultValues } from '@scaleway/sdk-client';
+import type { CreateSnapshotRequest, CreateVolumeRequest, ExportSnapshotToObjectStorageRequest, ImportSnapshotFromObjectStorageRequest, ImportSnapshotFromS3Request, ListSnapshotsResponse, ListVolumeTypesResponse, ListVolumesResponse, Snapshot, UpdateSnapshotRequest, UpdateVolumeRequest, Volume } from './types.gen';
+export declare const unmarshalSnapshot: (data: unknown) => Snapshot;
+export declare const unmarshalVolume: (data: unknown) => Volume;
+export declare const unmarshalListSnapshotsResponse: (data: unknown) => ListSnapshotsResponse;
+export declare const unmarshalListVolumeTypesResponse: (data: unknown) => ListVolumeTypesResponse;
+export declare const unmarshalListVolumesResponse: (data: unknown) => ListVolumesResponse;
+export declare const marshalCreateSnapshotRequest: (request: CreateSnapshotRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalCreateVolumeRequest: (request: CreateVolumeRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalExportSnapshotToObjectStorageRequest: (request: ExportSnapshotToObjectStorageRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalImportSnapshotFromObjectStorageRequest: (request: ImportSnapshotFromObjectStorageRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalImportSnapshotFromS3Request: (request: ImportSnapshotFromS3Request, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateSnapshotRequest: (request: UpdateSnapshotRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateVolumeRequest: (request: UpdateVolumeRequest, defaults: DefaultValues) => Record<string, unknown>;

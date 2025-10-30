@@ -1,0 +1,16 @@
+/**
+ * Gets the Scaleway directory.
+ *
+ * @returns The path to the Scaleway diretory
+ *
+ * @internal
+ */
+export declare const getScwConfigurationDirectory: () => string;
+/**
+ * Gets the configuration file path.
+ *
+ * @returns The path to the configuration file
+ *
+ * @internal
+ */
+export declare const resolveConfigurationFilePath: () => string;

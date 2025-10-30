@@ -1,0 +1,75 @@
+import { isJSONObject, unmarshalDate, unmarshalArrayOfObject } from "@scaleway/sdk-client";
+const unmarshalFileSystem = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'FileSystem' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    numberOfAttachments: data.number_of_attachments,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    region: data.region,
+    size: data.size,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalAttachment = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Attachment' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    filesystemId: data.filesystem_id,
+    id: data.id,
+    resourceId: data.resource_id,
+    resourceType: data.resource_type,
+    zone: data.zone
+  };
+};
+const unmarshalListAttachmentsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListAttachmentsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    attachments: unmarshalArrayOfObject(data.attachments, unmarshalAttachment),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListFileSystemsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListFileSystemsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    filesystems: unmarshalArrayOfObject(data.filesystems, unmarshalFileSystem),
+    totalCount: data.total_count
+  };
+};
+const marshalCreateFileSystemRequest = (request, defaults) => ({
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  size: request.size,
+  tags: request.tags
+});
+const marshalUpdateFileSystemRequest = (request, defaults) => ({
+  name: request.name,
+  size: request.size,
+  tags: request.tags
+});
+export {
+  marshalCreateFileSystemRequest,
+  marshalUpdateFileSystemRequest,
+  unmarshalFileSystem,
+  unmarshalListAttachmentsResponse,
+  unmarshalListFileSystemsResponse
+};

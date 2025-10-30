@@ -1,0 +1,263 @@
+import { resolveOneOf, isJSONObject, unmarshalArrayOfObject, unmarshalDate } from "@scaleway/sdk-client";
+const unmarshalDedicatedConnection = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DedicatedConnection' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    availableLinkBandwidths: data.available_link_bandwidths,
+    bandwidthMbps: data.bandwidth_mbps,
+    createdAt: unmarshalDate(data.created_at),
+    demarcationInfo: data.demarcation_info,
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    popId: data.pop_id,
+    projectId: data.project_id,
+    region: data.region,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalBgpConfig = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'BgpConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    asn: data.asn,
+    ipv4: data.ipv4,
+    ipv6: data.ipv6
+  };
+};
+const unmarshalPartnerHost = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PartnerHost' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    disapprovedReason: data.disapproved_reason,
+    pairingKey: data.pairing_key,
+    partnerId: data.partner_id
+  };
+};
+const unmarshalSelfHost = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SelfHost' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    connectionId: data.connection_id
+  };
+};
+const unmarshalLink = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Link' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    bandwidthMbps: data.bandwidth_mbps,
+    bgpV4Status: data.bgp_v4_status,
+    bgpV6Status: data.bgp_v6_status,
+    createdAt: unmarshalDate(data.created_at),
+    enableRoutePropagation: data.enable_route_propagation,
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    partner: data.partner ? unmarshalPartnerHost(data.partner) : void 0,
+    peerBgpConfig: data.peer_bgp_config ? unmarshalBgpConfig(data.peer_bgp_config) : void 0,
+    popId: data.pop_id,
+    projectId: data.project_id,
+    region: data.region,
+    routingPolicyId: data.routing_policy_id,
+    routingPolicyV4Id: data.routing_policy_v4_id,
+    routingPolicyV6Id: data.routing_policy_v6_id,
+    scwBgpConfig: data.scw_bgp_config ? unmarshalBgpConfig(data.scw_bgp_config) : void 0,
+    self: data.self ? unmarshalSelfHost(data.self) : void 0,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+    vlan: data.vlan,
+    vpcId: data.vpc_id
+  };
+};
+const unmarshalPartner = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Partner' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    contactEmail: data.contact_email,
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    logoUrl: data.logo_url,
+    name: data.name,
+    portalUrl: data.portal_url,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalPop = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Pop' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    address: data.address,
+    availableLinkBandwidthsMbps: data.available_link_bandwidths_mbps,
+    city: data.city,
+    hostingProviderName: data.hosting_provider_name,
+    id: data.id,
+    logoUrl: data.logo_url,
+    name: data.name,
+    region: data.region
+  };
+};
+const unmarshalRoutingPolicy = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RoutingPolicy' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    isIpv6: data.is_ipv6,
+    name: data.name,
+    organizationId: data.organization_id,
+    prefixFilterIn: data.prefix_filter_in,
+    prefixFilterOut: data.prefix_filter_out,
+    projectId: data.project_id,
+    region: data.region,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalListDedicatedConnectionsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDedicatedConnectionsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    connections: unmarshalArrayOfObject(
+      data.connections,
+      unmarshalDedicatedConnection
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListLinksResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListLinksResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    links: unmarshalArrayOfObject(data.links, unmarshalLink),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListPartnersResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPartnersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    partners: unmarshalArrayOfObject(data.partners, unmarshalPartner),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListPopsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPopsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    pops: unmarshalArrayOfObject(data.pops, unmarshalPop),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListRoutingPoliciesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRoutingPoliciesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    routingPolicies: unmarshalArrayOfObject(
+      data.routing_policies,
+      unmarshalRoutingPolicy
+    ),
+    totalCount: data.total_count
+  };
+};
+const marshalAttachRoutingPolicyRequest = (request, defaults) => ({
+  routing_policy_id: request.routingPolicyId
+});
+const marshalAttachVpcRequest = (request, defaults) => ({
+  vpc_id: request.vpcId
+});
+const marshalCreateLinkRequest = (request, defaults) => ({
+  bandwidth_mbps: request.bandwidthMbps,
+  name: request.name,
+  peer_asn: request.peerAsn,
+  pop_id: request.popId,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags,
+  vlan: request.vlan,
+  ...resolveOneOf([
+    { param: "connection_id", value: request.connectionId },
+    { param: "partner_id", value: request.partnerId }
+  ])
+});
+const marshalCreateRoutingPolicyRequest = (request, defaults) => ({
+  is_ipv6: request.isIpv6,
+  name: request.name,
+  prefix_filter_in: request.prefixFilterIn,
+  prefix_filter_out: request.prefixFilterOut,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags
+});
+const marshalDetachRoutingPolicyRequest = (request, defaults) => ({
+  routing_policy_id: request.routingPolicyId
+});
+const marshalUpdateLinkRequest = (request, defaults) => ({
+  name: request.name,
+  peer_asn: request.peerAsn,
+  tags: request.tags
+});
+const marshalUpdateRoutingPolicyRequest = (request, defaults) => ({
+  name: request.name,
+  prefix_filter_in: request.prefixFilterIn,
+  prefix_filter_out: request.prefixFilterOut,
+  tags: request.tags
+});
+export {
+  marshalAttachRoutingPolicyRequest,
+  marshalAttachVpcRequest,
+  marshalCreateLinkRequest,
+  marshalCreateRoutingPolicyRequest,
+  marshalDetachRoutingPolicyRequest,
+  marshalUpdateLinkRequest,
+  marshalUpdateRoutingPolicyRequest,
+  unmarshalDedicatedConnection,
+  unmarshalLink,
+  unmarshalListDedicatedConnectionsResponse,
+  unmarshalListLinksResponse,
+  unmarshalListPartnersResponse,
+  unmarshalListPopsResponse,
+  unmarshalListRoutingPoliciesResponse,
+  unmarshalPartner,
+  unmarshalPop,
+  unmarshalRoutingPolicy
+};

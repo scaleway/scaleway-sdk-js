@@ -1,0 +1,159 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client';
+import type { ConnectivityDiagnostic, CreateServerRequest, DeleteServerRequest, GetConnectivityDiagnosticRequest, GetOSRequest, GetServerRequest, GetServerTypeRequest, ListOSRequest, ListOSResponse, ListServerPrivateNetworksResponse, ListServerTypesRequest, ListServerTypesResponse, ListServersRequest, ListServersResponse, OS, PrivateNetworkApiAddServerPrivateNetworkRequest, PrivateNetworkApiDeleteServerPrivateNetworkRequest, PrivateNetworkApiGetServerPrivateNetworkRequest, PrivateNetworkApiListServerPrivateNetworksRequest, PrivateNetworkApiSetServerPrivateNetworksRequest, RebootServerRequest, ReinstallServerRequest, Server, ServerPrivateNetwork, ServerType, SetServerPrivateNetworksResponse, StartConnectivityDiagnosticRequest, StartConnectivityDiagnosticResponse, UpdateServerRequest } from './types.gen';
+/**
+ * Apple silicon API.
+
+This API allows you to manage your Apple silicon machines.
+ */
+export declare class API extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    /**
+     * List server types. List all technical details about Apple silicon server types available in the specified zone. Since there is only one Availability Zone for Apple silicon servers, the targeted value is `fr-par-3`.
+     *
+     * @param request - The request {@link ListServerTypesRequest}
+     * @returns A Promise of ListServerTypesResponse
+     */
+    listServerTypes: (request?: Readonly<ListServerTypesRequest>) => Promise<ListServerTypesResponse>;
+    /**
+     * Get a server type. Get technical details (CPU, disk size etc.) of a server type.
+     *
+     * @param request - The request {@link GetServerTypeRequest}
+     * @returns A Promise of ServerType
+     */
+    getServerType: (request: Readonly<GetServerTypeRequest>) => Promise<ServerType>;
+    /**
+     * Create a server. Create a new server in the targeted zone, specifying its configuration including name and type.
+     *
+     * @param request - The request {@link CreateServerRequest}
+     * @returns A Promise of Server
+     */
+    createServer: (request: Readonly<CreateServerRequest>) => Promise<Server>;
+    protected pageOfListServers: (request?: Readonly<ListServersRequest>) => Promise<ListServersResponse>;
+    /**
+     * List all servers. List all servers in the specified zone. By default, returned servers in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
+     *
+     * @param request - The request {@link ListServersRequest}
+     * @returns A Promise of ListServersResponse
+     */
+    listServers: (request?: Readonly<ListServersRequest>) => Promise<ListServersResponse> & {
+        all: () => Promise<Server[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Server[], void, void>;
+    };
+    protected pageOfListOS: (request?: Readonly<ListOSRequest>) => Promise<ListOSResponse>;
+    /**
+     * List all Operating Systems (OS). List all Operating Systems (OS). The response will include the total number of OS as well as their associated IDs, names and labels.
+     *
+     * @param request - The request {@link ListOSRequest}
+     * @returns A Promise of ListOSResponse
+     */
+    listOS: (request?: Readonly<ListOSRequest>) => Promise<ListOSResponse> & {
+        all: () => Promise<OS[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<OS[], void, void>;
+    };
+    /**
+     * Get an Operating System (OS). Get an Operating System (OS).  The response will include the OS's unique ID as well as its name and label.
+     *
+     * @param request - The request {@link GetOSRequest}
+     * @returns A Promise of OS
+     */
+    getOS: (request: Readonly<GetOSRequest>) => Promise<OS>;
+    /**
+     * Get a server. Retrieve information about an existing Apple silicon server, specified by its server ID. Its full details, including name, status and IP address, are returned in the response object.
+     *
+     * @param request - The request {@link GetServerRequest}
+     * @returns A Promise of Server
+     */
+    getServer: (request: Readonly<GetServerRequest>) => Promise<Server>;
+    /**
+     * Waits for {@link Server} to be in a final state.
+     *
+     * @param request - The request {@link GetServerRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Server
+     */
+    waitForServer: (request: Readonly<GetServerRequest>, options?: Readonly<WaitForOptions<Server>>) => Promise<Server>;
+    /**
+     * Update a server. Update the parameters of an existing Apple silicon server, specified by its server ID.
+     *
+     * @param request - The request {@link UpdateServerRequest}
+     * @returns A Promise of Server
+     */
+    updateServer: (request: Readonly<UpdateServerRequest>) => Promise<Server>;
+    /**
+     * Delete a server. Delete an existing Apple silicon server, specified by its server ID. Deleting a server is permanent, and cannot be undone. Note that the minimum allocation period for Apple silicon-as-a-service is 24 hours, meaning you cannot delete your server prior to that.
+     *
+     * @param request - The request {@link DeleteServerRequest}
+     */
+    deleteServer: (request: Readonly<DeleteServerRequest>) => Promise<void>;
+    /**
+     * Reboot a server. Reboot an existing Apple silicon server, specified by its server ID.
+     *
+     * @param request - The request {@link RebootServerRequest}
+     * @returns A Promise of Server
+     */
+    rebootServer: (request: Readonly<RebootServerRequest>) => Promise<Server>;
+    /**
+     * Reinstall a server. Reinstall an existing Apple silicon server (specified by its server ID) from a new image (OS). All the data on the disk is deleted and all configuration is reset to the defailt configuration values of the image (OS).
+     *
+     * @param request - The request {@link ReinstallServerRequest}
+     * @returns A Promise of Server
+     */
+    reinstallServer: (request: Readonly<ReinstallServerRequest>) => Promise<Server>;
+    startConnectivityDiagnostic: (request: Readonly<StartConnectivityDiagnosticRequest>) => Promise<StartConnectivityDiagnosticResponse>;
+    getConnectivityDiagnostic: (request: Readonly<GetConnectivityDiagnosticRequest>) => Promise<ConnectivityDiagnostic>;
+}
+/**
+ * Apple silicon - Private Networks API.
+ */
+export declare class PrivateNetworkAPI extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    getServerPrivateNetwork: (request: Readonly<PrivateNetworkApiGetServerPrivateNetworkRequest>) => Promise<ServerPrivateNetwork>;
+    /**
+     * Waits for {@link ServerPrivateNetwork} to be in a final state.
+     *
+     * @param request - The request {@link PrivateNetworkApiGetServerPrivateNetworkRequest}
+     * @param options - The waiting options
+     * @returns A Promise of ServerPrivateNetwork
+     */
+    waitForServerPrivateNetwork: (request: Readonly<PrivateNetworkApiGetServerPrivateNetworkRequest>, options?: Readonly<WaitForOptions<ServerPrivateNetwork>>) => Promise<ServerPrivateNetwork>;
+    /**
+     * Add a server to a Private Network. Add an Apple silicon server to a Private Network.
+     *
+     * @param request - The request {@link PrivateNetworkApiAddServerPrivateNetworkRequest}
+     * @returns A Promise of ServerPrivateNetwork
+     */
+    addServerPrivateNetwork: (request: Readonly<PrivateNetworkApiAddServerPrivateNetworkRequest>) => Promise<ServerPrivateNetwork>;
+    /**
+     * Set multiple Private Networks on a server. Configure multiple Private Networks on an Apple silicon server.
+     *
+     * @param request - The request {@link PrivateNetworkApiSetServerPrivateNetworksRequest}
+     * @returns A Promise of SetServerPrivateNetworksResponse
+     */
+    setServerPrivateNetworks: (request: Readonly<PrivateNetworkApiSetServerPrivateNetworksRequest>) => Promise<SetServerPrivateNetworksResponse>;
+    protected pageOfListServerPrivateNetworks: (request?: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest>) => Promise<ListServerPrivateNetworksResponse>;
+    /**
+     * List the Private Networks of a server. List the Private Networks of an Apple silicon server.
+     *
+     * @param request - The request {@link PrivateNetworkApiListServerPrivateNetworksRequest}
+     * @returns A Promise of ListServerPrivateNetworksResponse
+     */
+    listServerPrivateNetworks: (request?: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest>) => Promise<ListServerPrivateNetworksResponse> & {
+        all: () => Promise<ServerPrivateNetwork[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<ServerPrivateNetwork[], void, void>;
+    };
+    /**
+     * Delete a Private Network.
+     *
+     * @param request - The request {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}
+     */
+    deleteServerPrivateNetwork: (request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>) => Promise<void>;
+}

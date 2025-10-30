@@ -1,0 +1,16 @@
+function toApiLocality(legacy) {
+  if (!legacy) {
+    return { type: "unspecified" };
+  }
+  const { zones, regions } = legacy;
+  if (zones && zones.length > 0) {
+    return { type: "zone", zones };
+  }
+  if (regions && regions.length > 0) {
+    return { type: "region", regions };
+  }
+  return { type: "global" };
+}
+export {
+  toApiLocality
+};

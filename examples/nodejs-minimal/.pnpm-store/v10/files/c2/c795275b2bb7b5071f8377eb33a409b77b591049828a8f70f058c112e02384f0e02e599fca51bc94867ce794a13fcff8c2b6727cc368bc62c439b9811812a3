@@ -1,0 +1,18 @@
+export declare const CreateWafStageRequest: {
+    paranoiaLevel: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const UpdateWafStageRequest: {
+    paranoiaLevel: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const WafStage: {
+    paranoiaLevel: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};

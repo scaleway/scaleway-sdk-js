@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+var EnvironmentKey = /* @__PURE__ */ ((EnvironmentKey2) => {
+  EnvironmentKey2["ScwConfigPath"] = "SCW_CONFIG_PATH";
+  EnvironmentKey2["ScwAccessKey"] = "SCW_ACCESS_KEY";
+  EnvironmentKey2["ScwSecretKey"] = "SCW_SECRET_KEY";
+  EnvironmentKey2["ScwAPIURL"] = "SCW_API_URL";
+  EnvironmentKey2["ScwDefaultOrganizationId"] = "SCW_DEFAULT_ORGANIZATION_ID";
+  EnvironmentKey2["ScwDefaultProjectId"] = "SCW_DEFAULT_PROJECT_ID";
+  EnvironmentKey2["ScwDefaultRegion"] = "SCW_DEFAULT_REGION";
+  EnvironmentKey2["ScwDefaultZone"] = "SCW_DEFAULT_ZONE";
+  return EnvironmentKey2;
+})(EnvironmentKey || {});
+exports.EnvironmentKey = EnvironmentKey;

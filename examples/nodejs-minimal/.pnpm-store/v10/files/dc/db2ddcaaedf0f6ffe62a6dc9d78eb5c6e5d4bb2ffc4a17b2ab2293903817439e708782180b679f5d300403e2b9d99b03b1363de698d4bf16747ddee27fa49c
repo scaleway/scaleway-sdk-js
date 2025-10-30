@@ -1,0 +1,53 @@
+import { sleep } from "./sleep.js";
+const DEFAULT_TIMEOUT_SECONDS = 300;
+const DEFAULT_MIN_DELAY_SECONDS = 1;
+const DEFAULT_MAX_DELAY_SECONDS = 30;
+function* createExponentialBackoffStrategy(minDelay, maxDelay) {
+  if (minDelay < 1 || maxDelay < 1 || minDelay > maxDelay) {
+    throw new Error(
+      "Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay"
+    );
+  }
+  let attempt = 1;
+  const ceiling = Math.log(maxDelay / minDelay) / Math.log(2) + 1;
+  const randomInRange = (min, max) => min + Math.random() * (max - min);
+  while (true) {
+    if (attempt > ceiling) {
+      yield maxDelay;
+    } else {
+      yield randomInRange(minDelay, minDelay * 2 ** (attempt - 1));
+    }
+    attempt += 1;
+  }
+}
+const tryAtIntervals = async (retry, strategy, timeout = DEFAULT_TIMEOUT_SECONDS) => {
+  const timeoutTimestamp = Date.now() + timeout * 1e3;
+  let retryCount = 0;
+  while (Date.now() <= timeoutTimestamp) {
+    const delay = strategy.next(retryCount += 1).value * 1e3;
+    if (timeoutTimestamp <= Date.now() + delay) break;
+    await sleep(delay);
+    const { value, done } = await retry();
+    if (done) return value;
+  }
+  throw new Error(`Timeout after ${timeout}s`);
+};
+const waitForResource = (stop, fetcher, request, options, strategy = createExponentialBackoffStrategy(
+  options?.minDelay ?? DEFAULT_MIN_DELAY_SECONDS,
+  options?.maxDelay ?? DEFAULT_MAX_DELAY_SECONDS
+)) => tryAtIntervals(
+  async () => {
+    const value = await fetcher(request);
+    return {
+      done: await stop(value),
+      value
+    };
+  },
+  strategy,
+  options?.timeout
+);
+export {
+  createExponentialBackoffStrategy,
+  tryAtIntervals,
+  waitForResource
+};

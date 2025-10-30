@@ -1,0 +1,5 @@
+import type { DeploymentStatus, ModelStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link DeploymentStatus}. */
+export declare const DEPLOYMENT_TRANSIENT_STATUSES: DeploymentStatus[];
+/** Lists transient statutes of the enum {@link ModelStatus}. */
+export declare const MODEL_TRANSIENT_STATUSES: ModelStatus[];

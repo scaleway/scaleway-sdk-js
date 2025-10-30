@@ -1,0 +1,49 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const marshalling_gen = require("./marshalling.gen.cjs");
+class PublicCatalogAPI extends sdkClient.API {
+  pageOfListPublicCatalogProducts = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/product-catalog/v2alpha1/public-catalog/products`,
+      urlParams: sdkClient.urlParams(
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["product_types", request.productTypes],
+        ...Object.entries(
+          sdkClient.resolveOneOf([
+            { param: "global", value: request.global },
+            {
+              default: this.client.settings.defaultRegion,
+              param: "region",
+              value: request.region
+            },
+            {
+              default: this.client.settings.defaultZone,
+              param: "zone",
+              value: request.zone
+            },
+            { param: "datacenter", value: request.datacenter }
+          ])
+        )
+      )
+    },
+    marshalling_gen.unmarshalListPublicCatalogProductsResponse
+  );
+  /**
+   * List all available products. List all available products in the Scaleway catalog. Returns a complete list of products with their corresponding description, locations, prices and properties. You can define the `page` number and `page_size` for your query in the request.
+   *
+   * @param request - The request {@link PublicCatalogApiListPublicCatalogProductsRequest}
+   * @returns A Promise of ListPublicCatalogProductsResponse
+   */
+  listPublicCatalogProducts = (request = {}) => sdkClient.enrichForPagination(
+    "products",
+    this.pageOfListPublicCatalogProducts,
+    request
+  );
+}
+exports.PublicCatalogAPI = PublicCatalogAPI;

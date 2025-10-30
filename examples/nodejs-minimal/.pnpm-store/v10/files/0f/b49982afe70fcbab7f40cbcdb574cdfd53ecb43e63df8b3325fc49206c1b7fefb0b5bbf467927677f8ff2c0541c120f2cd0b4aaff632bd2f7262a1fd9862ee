@@ -1,0 +1,58 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const json = require("../../../helpers/json.cjs");
+const scwError = require("../scw-error.cjs");
+const buildMessage = (helpMessage, limit, resetSeconds, resetAt) => {
+  const details = [];
+  if (limit) {
+    if (limit.windowSeconds) {
+      details.push(`quota is ${limit.quota} for ${limit.windowSeconds}s`);
+    } else {
+      details.push(`quota is ${limit.quota}`);
+    }
+  }
+  if (resetSeconds) {
+    details.push(`resets in ${resetSeconds}s`);
+  } else if (resetAt) {
+    details.push(`resets at ${resetAt.toISOString()}`);
+  }
+  let output = `too many requests`;
+  if (details.length > 0) {
+    output += ` (${details.join(", ")})`;
+  }
+  if (helpMessage.length > 0) {
+    output += `: ${helpMessage}`;
+  }
+  return output;
+};
+class TooManyRequestsError extends scwError.ScalewayError {
+  constructor(status, body, helpMessage, limit, resetSeconds, resetAt) {
+    super(status, body, buildMessage(helpMessage, limit, resetSeconds, resetAt));
+    this.status = status;
+    this.body = body;
+    this.helpMessage = helpMessage;
+    this.limit = limit;
+    this.resetSeconds = resetSeconds;
+    this.resetAt = resetAt;
+    this.name = "TooManyRequestsError";
+  }
+  static fromJSON(status, obj) {
+    if (typeof obj.help_message !== "string") return null;
+    let limit;
+    if (json.isJSONObject(obj.limit) && typeof obj.limit.quota === "number") {
+      limit = {
+        quota: obj.limit.quota,
+        windowSeconds: typeof obj.limit.window_seconds === "number" ? obj.limit.window_seconds : void 0
+      };
+    }
+    return new TooManyRequestsError(
+      status,
+      obj,
+      obj.help_message,
+      limit,
+      typeof obj.reset_seconds === "number" ? obj.reset_seconds : void 0,
+      typeof obj.reset_at === "string" ? new Date(obj.reset_at) : void 0
+    );
+  }
+}
+exports.TooManyRequestsError = TooManyRequestsError;

@@ -1,0 +1,373 @@
+import { resolveOneOf, isJSONObject, unmarshalDate, unmarshalMapOfObject, unmarshalArrayOfObject } from "@scaleway/sdk-client";
+const unmarshalCapacity = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Capacity' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    cooldownDelay: data.cooldown_delay,
+    maxReplicas: data.max_replicas,
+    minReplicas: data.min_replicas
+  };
+};
+const unmarshalLoadbalancer = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Loadbalancer' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    backendIds: data.backend_ids,
+    id: data.id,
+    privateNetworkId: data.private_network_id
+  };
+};
+const unmarshalInstanceGroup = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InstanceGroup' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    capacity: unmarshalCapacity(data.capacity),
+    createdAt: unmarshalDate(data.created_at),
+    errorMessages: data.error_messages,
+    id: data.id,
+    instanceTemplateId: data.instance_template_id,
+    loadbalancer: unmarshalLoadbalancer(data.loadbalancer),
+    name: data.name,
+    projectId: data.project_id,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalMetric = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Metric' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    aggregate: data.aggregate,
+    cockpitMetricName: data.cockpit_metric_name,
+    managedMetric: data.managed_metric ? data.managed_metric : void 0,
+    name: data.name,
+    operator: data.operator,
+    samplingRangeMin: data.sampling_range_min,
+    threshold: data.threshold
+  };
+};
+const unmarshalInstancePolicy = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InstancePolicy' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    action: data.action,
+    id: data.id,
+    instanceGroupId: data.instance_group_id,
+    metric: data.metric ? unmarshalMetric(data.metric) : void 0,
+    name: data.name,
+    priority: data.priority,
+    type: data.type,
+    value: data.value
+  };
+};
+const unmarshalVolumeInstanceTemplateFromEmpty = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VolumeInstanceTemplateFromEmpty' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    size: data.size
+  };
+};
+const unmarshalVolumeInstanceTemplateFromSnapshot = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VolumeInstanceTemplateFromSnapshot' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    size: data.size,
+    snapshotId: data.snapshot_id
+  };
+};
+const unmarshalVolumeInstanceTemplate = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VolumeInstanceTemplate' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    boot: data.boot,
+    fromEmpty: data.from_empty ? unmarshalVolumeInstanceTemplateFromEmpty(data.from_empty) : void 0,
+    fromSnapshot: data.from_snapshot ? unmarshalVolumeInstanceTemplateFromSnapshot(data.from_snapshot) : void 0,
+    name: data.name,
+    perfIops: data.perf_iops,
+    tags: data.tags,
+    volumeType: data.volume_type
+  };
+};
+const unmarshalInstanceTemplate = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InstanceTemplate' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    cloudInit: data.cloud_init,
+    commercialType: data.commercial_type,
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    imageId: data.image_id,
+    name: data.name,
+    placementGroupId: data.placement_group_id,
+    privateNetworkIds: data.private_network_ids,
+    projectId: data.project_id,
+    publicIpsV4Count: data.public_ips_v4_count,
+    publicIpsV6Count: data.public_ips_v6_count,
+    securityGroupId: data.security_group_id,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+    volumes: unmarshalMapOfObject(
+      data.volumes,
+      unmarshalVolumeInstanceTemplate
+    )
+  };
+};
+const unmarshalInstanceGroupEvent = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InstanceGroupEvent' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    details: data.details,
+    id: data.id,
+    level: data.level,
+    name: data.name,
+    source: data.source
+  };
+};
+const unmarshalListInstanceGroupEventsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListInstanceGroupEventsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    instanceEvents: unmarshalArrayOfObject(
+      data.instance_events,
+      unmarshalInstanceGroupEvent
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListInstanceGroupsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListInstanceGroupsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    instanceGroups: unmarshalArrayOfObject(
+      data.instance_groups,
+      unmarshalInstanceGroup
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListInstancePoliciesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListInstancePoliciesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    policies: unmarshalArrayOfObject(data.policies, unmarshalInstancePolicy),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListInstanceTemplatesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListInstanceTemplatesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    instanceTemplates: unmarshalArrayOfObject(
+      data.instance_templates,
+      unmarshalInstanceTemplate
+    ),
+    totalCount: data.total_count
+  };
+};
+const marshalCapacity = (request, defaults) => ({
+  cooldown_delay: request.cooldownDelay,
+  max_replicas: request.maxReplicas,
+  min_replicas: request.minReplicas
+});
+const marshalLoadbalancer = (request, defaults) => ({
+  backend_ids: request.backendIds,
+  id: request.id,
+  private_network_id: request.privateNetworkId
+});
+const marshalCreateInstanceGroupRequest = (request, defaults) => ({
+  capacity: marshalCapacity(request.capacity),
+  loadbalancer: marshalLoadbalancer(request.loadbalancer),
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags,
+  template_id: request.templateId
+});
+const marshalMetric = (request, defaults) => ({
+  aggregate: request.aggregate,
+  name: request.name,
+  operator: request.operator,
+  sampling_range_min: request.samplingRangeMin,
+  threshold: request.threshold,
+  ...resolveOneOf([
+    { param: "managed_metric", value: request.managedMetric },
+    { param: "cockpit_metric_name", value: request.cockpitMetricName }
+  ])
+});
+const marshalCreateInstancePolicyRequest = (request, defaults) => ({
+  action: request.action,
+  instance_group_id: request.instanceGroupId,
+  name: request.name,
+  priority: request.priority,
+  type: request.type,
+  value: request.value,
+  ...resolveOneOf([
+    {
+      param: "metric",
+      value: request.metric !== void 0 ? marshalMetric(request.metric) : void 0
+    }
+  ])
+});
+const marshalVolumeInstanceTemplateFromEmpty = (request, defaults) => ({
+  size: request.size
+});
+const marshalVolumeInstanceTemplateFromSnapshot = (request, defaults) => ({
+  size: request.size,
+  snapshot_id: request.snapshotId
+});
+const marshalVolumeInstanceTemplate = (request, defaults) => ({
+  boot: request.boot,
+  name: request.name,
+  tags: request.tags,
+  volume_type: request.volumeType,
+  ...resolveOneOf([
+    {
+      param: "from_empty",
+      value: request.fromEmpty !== void 0 ? marshalVolumeInstanceTemplateFromEmpty(request.fromEmpty) : void 0
+    },
+    {
+      param: "from_snapshot",
+      value: request.fromSnapshot !== void 0 ? marshalVolumeInstanceTemplateFromSnapshot(
+        request.fromSnapshot
+      ) : void 0
+    }
+  ]),
+  ...resolveOneOf([{ param: "perf_iops", value: request.perfIops }])
+});
+const marshalCreateInstanceTemplateRequest = (request, defaults) => ({
+  cloud_init: request.cloudInit,
+  commercial_type: request.commercialType,
+  image_id: request.imageId,
+  name: request.name,
+  placement_group_id: request.placementGroupId,
+  private_network_ids: request.privateNetworkIds,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  public_ips_v4_count: request.publicIpsV4Count,
+  public_ips_v6_count: request.publicIpsV6Count,
+  security_group_id: request.securityGroupId,
+  tags: request.tags,
+  volumes: Object.entries(request.volumes).reduce(
+    (acc, [key, value]) => ({
+      ...acc,
+      [key]: marshalVolumeInstanceTemplate(value)
+    }),
+    {}
+  )
+});
+const marshalUpdateInstanceGroupRequestCapacity = (request, defaults) => ({
+  cooldown_delay: request.cooldownDelay,
+  max_replicas: request.maxReplicas,
+  min_replicas: request.minReplicas
+});
+const marshalUpdateInstanceGroupRequestLoadbalancer = (request, defaults) => ({
+  backend_ids: request.backendIds
+});
+const marshalUpdateInstanceGroupRequest = (request, defaults) => ({
+  capacity: request.capacity !== void 0 ? marshalUpdateInstanceGroupRequestCapacity(request.capacity) : void 0,
+  loadbalancer: request.loadbalancer !== void 0 ? marshalUpdateInstanceGroupRequestLoadbalancer(
+    request.loadbalancer
+  ) : void 0,
+  name: request.name,
+  tags: request.tags
+});
+const marshalUpdateInstancePolicyRequestMetric = (request, defaults) => ({
+  aggregate: request.aggregate,
+  name: request.name,
+  operator: request.operator,
+  sampling_range_min: request.samplingRangeMin,
+  threshold: request.threshold,
+  ...resolveOneOf([
+    { param: "managed_metric", value: request.managedMetric },
+    { param: "cockpit_metric_name", value: request.cockpitMetricName }
+  ])
+});
+const marshalUpdateInstancePolicyRequest = (request, defaults) => ({
+  action: request.action,
+  name: request.name,
+  priority: request.priority,
+  type: request.type,
+  value: request.value,
+  ...resolveOneOf([
+    {
+      param: "metric",
+      value: request.metric !== void 0 ? marshalUpdateInstancePolicyRequestMetric(request.metric) : void 0
+    }
+  ])
+});
+const marshalUpdateInstanceTemplateRequest = (request, defaults) => ({
+  cloud_init: request.cloudInit,
+  commercial_type: request.commercialType,
+  image_id: request.imageId,
+  name: request.name,
+  placement_group_id: request.placementGroupId,
+  private_network_ids: request.privateNetworkIds,
+  public_ips_v4_count: request.publicIpsV4Count,
+  public_ips_v6_count: request.publicIpsV6Count,
+  security_group_id: request.securityGroupId,
+  tags: request.tags,
+  volumes: request.volumes !== void 0 ? Object.entries(request.volumes).reduce(
+    (acc, [key, value]) => ({
+      ...acc,
+      [key]: marshalVolumeInstanceTemplate(value)
+    }),
+    {}
+  ) : void 0
+});
+export {
+  marshalCreateInstanceGroupRequest,
+  marshalCreateInstancePolicyRequest,
+  marshalCreateInstanceTemplateRequest,
+  marshalUpdateInstanceGroupRequest,
+  marshalUpdateInstancePolicyRequest,
+  marshalUpdateInstanceTemplateRequest,
+  unmarshalInstanceGroup,
+  unmarshalInstancePolicy,
+  unmarshalInstanceTemplate,
+  unmarshalListInstanceGroupEventsResponse,
+  unmarshalListInstanceGroupsResponse,
+  unmarshalListInstancePoliciesResponse,
+  unmarshalListInstanceTemplatesResponse
+};

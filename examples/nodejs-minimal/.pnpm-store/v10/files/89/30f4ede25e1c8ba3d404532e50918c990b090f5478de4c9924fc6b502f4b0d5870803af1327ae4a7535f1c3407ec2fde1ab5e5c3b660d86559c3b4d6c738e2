@@ -1,0 +1,245 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalPublicCatalogProductPropertiesHardwareCPUPhysical = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesHardwareCPUPhysical' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    benchmark: data.benchmark,
+    coresPerSocket: data.cores_per_socket,
+    frequency: data.frequency,
+    sockets: data.sockets,
+    threadsPerCore: data.threads_per_core
+  };
+};
+const unmarshalPublicCatalogProductPropertiesHardwareCPUVirtual = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesHardwareCPUVirtual' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    count: data.count
+  };
+};
+const unmarshalPublicCatalogProductPropertiesHardwareCPU = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesHardwareCPU' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    arch: data.arch,
+    description: data.description,
+    physical: data.physical ? unmarshalPublicCatalogProductPropertiesHardwareCPUPhysical(
+      data.physical
+    ) : void 0,
+    threads: data.threads,
+    type: data.type,
+    virtual: data.virtual ? unmarshalPublicCatalogProductPropertiesHardwareCPUVirtual(data.virtual) : void 0
+  };
+};
+const unmarshalPublicCatalogProductPropertiesHardwareGPU = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesHardwareGPU' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    count: data.count,
+    description: data.description,
+    type: data.type
+  };
+};
+const unmarshalPublicCatalogProductPropertiesHardwareNetwork = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesHardwareNetwork' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    description: data.description,
+    internalBandwidth: data.internal_bandwidth,
+    maxPublicBandwidth: data.max_public_bandwidth,
+    publicBandwidth: data.public_bandwidth
+  };
+};
+const unmarshalPublicCatalogProductPropertiesHardwareRAM = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesHardwareRAM' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    description: data.description,
+    size: data.size,
+    type: data.type
+  };
+};
+const unmarshalPublicCatalogProductPropertiesHardwareStorage = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesHardwareStorage' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    description: data.description,
+    total: data.total
+  };
+};
+const unmarshalPublicCatalogProductPropertiesAppleSilicon = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesAppleSilicon' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    range: data.range
+  };
+};
+const unmarshalPublicCatalogProductPropertiesDedibox = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesDedibox' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    range: data.range
+  };
+};
+const unmarshalPublicCatalogProductPropertiesElasticMetal = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesElasticMetal' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    range: data.range
+  };
+};
+const unmarshalPublicCatalogProductPropertiesHardware = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesHardware' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    cpu: data.cpu ? unmarshalPublicCatalogProductPropertiesHardwareCPU(data.cpu) : void 0,
+    gpu: data.gpu ? unmarshalPublicCatalogProductPropertiesHardwareGPU(data.gpu) : void 0,
+    network: data.network ? unmarshalPublicCatalogProductPropertiesHardwareNetwork(data.network) : void 0,
+    ram: data.ram ? unmarshalPublicCatalogProductPropertiesHardwareRAM(data.ram) : void 0,
+    storage: data.storage ? unmarshalPublicCatalogProductPropertiesHardwareStorage(data.storage) : void 0
+  };
+};
+const unmarshalPublicCatalogProductPropertiesInstance = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesInstance' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    offerId: data.offer_id,
+    range: data.range,
+    recommendedReplacementOfferIds: data.recommended_replacement_offer_ids
+  };
+};
+const unmarshalPublicCatalogProductEnvironmentalImpactEstimation = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductEnvironmentalImpactEstimation' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    kgCo2Equivalent: data.kg_co2_equivalent,
+    m3WaterUsage: data.m3_water_usage
+  };
+};
+const unmarshalPublicCatalogProductLocality = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductLocality' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    datacenter: data.datacenter,
+    global: data.global,
+    region: data.region,
+    zone: data.zone
+  };
+};
+const unmarshalPublicCatalogProductPrice = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPrice' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    retailPrice: data.retail_price ? sdkClient.unmarshalMoney(data.retail_price) : void 0
+  };
+};
+const unmarshalPublicCatalogProductProperties = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductProperties' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    appleSilicon: data.apple_silicon ? unmarshalPublicCatalogProductPropertiesAppleSilicon(data.apple_silicon) : void 0,
+    dedibox: data.dedibox ? unmarshalPublicCatalogProductPropertiesDedibox(data.dedibox) : void 0,
+    elasticMetal: data.elastic_metal ? unmarshalPublicCatalogProductPropertiesElasticMetal(data.elastic_metal) : void 0,
+    hardware: data.hardware ? unmarshalPublicCatalogProductPropertiesHardware(data.hardware) : void 0,
+    instance: data.instance ? unmarshalPublicCatalogProductPropertiesInstance(data.instance) : void 0
+  };
+};
+const unmarshalPublicCatalogProductUnitOfMeasure = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductUnitOfMeasure' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    size: data.size,
+    unit: data.unit
+  };
+};
+const unmarshalPublicCatalogProduct = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProduct' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    description: data.description,
+    endOfLifeAt: sdkClient.unmarshalDate(data.end_of_life_at),
+    environmentalImpactEstimation: data.environmental_impact_estimation ? unmarshalPublicCatalogProductEnvironmentalImpactEstimation(
+      data.environmental_impact_estimation
+    ) : void 0,
+    locality: data.locality ? unmarshalPublicCatalogProductLocality(data.locality) : void 0,
+    price: data.price ? unmarshalPublicCatalogProductPrice(data.price) : void 0,
+    product: data.product,
+    properties: data.properties ? unmarshalPublicCatalogProductProperties(data.properties) : void 0,
+    serviceCategory: data.service_category,
+    sku: data.sku,
+    status: data.status,
+    unitOfMeasure: data.unit_of_measure ? unmarshalPublicCatalogProductUnitOfMeasure(data.unit_of_measure) : void 0,
+    variant: data.variant
+  };
+};
+const unmarshalListPublicCatalogProductsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPublicCatalogProductsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    products: sdkClient.unmarshalArrayOfObject(
+      data.products,
+      unmarshalPublicCatalogProduct
+    ),
+    totalCount: data.total_count
+  };
+};
+exports.unmarshalListPublicCatalogProductsResponse = unmarshalListPublicCatalogProductsResponse;

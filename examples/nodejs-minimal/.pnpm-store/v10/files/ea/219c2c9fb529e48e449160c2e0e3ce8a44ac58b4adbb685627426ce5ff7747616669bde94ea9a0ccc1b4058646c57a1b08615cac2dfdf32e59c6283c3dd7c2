@@ -1,0 +1,19 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const SERVER_INSTALL_TRANSIENT_STATUSES = [
+  "to_install",
+  "installing"
+];
+const SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES = ["attaching", "detaching"];
+const SERVER_TRANSIENT_STATUSES = [
+  "delivering",
+  "stopping",
+  "starting",
+  "deleting",
+  "ordered",
+  "resetting",
+  "migrating"
+];
+exports.SERVER_INSTALL_TRANSIENT_STATUSES = SERVER_INSTALL_TRANSIENT_STATUSES;
+exports.SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES = SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES;
+exports.SERVER_TRANSIENT_STATUSES = SERVER_TRANSIENT_STATUSES;

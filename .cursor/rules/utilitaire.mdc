@@ -1,0 +1,4 @@
+---
+alwaysApply: true
+---
+Avant d’ajouter une nouvelle fonction utilitaire, vérifie qu’elle n’existe pas déjà dans le projet ou dans un module partagé (utils, helpers, etc.). Utilise les fonctions existantes pour éviter les doublons et maintenir la cohérence du code.

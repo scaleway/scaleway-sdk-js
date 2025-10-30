@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const CLUSTER_TRANSIENT_STATUSES = [
+  "provisioning",
+  "configuring",
+  "deleting",
+  "autohealing",
+  "initializing"
+];
+exports.CLUSTER_TRANSIENT_STATUSES = CLUSTER_TRANSIENT_STATUSES;

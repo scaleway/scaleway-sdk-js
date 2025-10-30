@@ -1,0 +1,43 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const index = require("../../internal/logger/index.cjs");
+const levelResolver = require("../../internal/logger/level-resolver.cjs");
+const httpDumper = require("./http-dumper.cjs");
+class ObfuscatedRequest extends Request {
+  constructor(request, obfuscate) {
+    super(request);
+    this.request = request;
+    this.obfuscate = obfuscate;
+  }
+  get headers() {
+    return new Headers(Array.from(this.request.headers, this.obfuscate));
+  }
+  clone() {
+    return new ObfuscatedRequest(this.request, this.obfuscate);
+  }
+}
+const obfuscateInterceptor = (obfuscate) => ({ request }) => new ObfuscatedRequest(request, obfuscate);
+const identity = ({ request }) => request;
+const logRequest = (identifier, obfuscate = identity) => async ({ request }) => {
+  if (levelResolver.shouldLog(levelResolver.LevelResolver[index.getLogger().logLevel], "debug")) {
+    index.getLogger().debug(
+      `--------------- Scaleway SDK REQUEST ${identifier} ---------------
+${await httpDumper.dumpRequest(await obfuscate({ request }))}
+---------------------------------------------------------`
+    );
+  }
+  return request;
+};
+const logResponse = (identifier) => async ({ response }) => {
+  if (levelResolver.shouldLog(levelResolver.LevelResolver[index.getLogger().logLevel], "debug")) {
+    index.getLogger().debug(
+      `--------------- Scaleway SDK RESPONSE ${identifier} ---------------
+${await httpDumper.dumpResponse(response)}
+---------------------------------------------------------`
+    );
+  }
+  return response;
+};
+exports.logRequest = logRequest;
+exports.logResponse = logResponse;
+exports.obfuscateInterceptor = obfuscateInterceptor;

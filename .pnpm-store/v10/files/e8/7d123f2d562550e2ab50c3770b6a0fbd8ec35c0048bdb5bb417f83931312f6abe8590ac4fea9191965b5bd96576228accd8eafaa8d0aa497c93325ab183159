@@ -1,0 +1,158 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalDiscountCoupon = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DiscountCoupon' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    description: data.description
+  };
+};
+const unmarshalDiscountFilter = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DiscountFilter' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    exclude: data.exclude,
+    type: data.type,
+    value: data.value
+  };
+};
+const unmarshalDiscount = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Discount' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    coupon: data.coupon ? unmarshalDiscountCoupon(data.coupon) : void 0,
+    creationDate: sdkClient.unmarshalDate(data.creation_date),
+    description: data.description,
+    filters: sdkClient.unmarshalArrayOfObject(data.filters, unmarshalDiscountFilter),
+    id: data.id,
+    mode: data.mode,
+    organizationId: data.organization_id,
+    startDate: sdkClient.unmarshalDate(data.start_date),
+    stopDate: sdkClient.unmarshalDate(data.stop_date),
+    value: data.value,
+    valueRemaining: data.value_remaining,
+    valueUsed: data.value_used
+  };
+};
+const unmarshalInvoice = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Invoice' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    billingPeriod: sdkClient.unmarshalDate(data.billing_period),
+    dueDate: sdkClient.unmarshalDate(data.due_date),
+    id: data.id,
+    issuedDate: sdkClient.unmarshalDate(data.issued_date),
+    number: data.number,
+    organizationId: data.organization_id,
+    organizationName: data.organization_name,
+    sellerName: data.seller_name,
+    startDate: sdkClient.unmarshalDate(data.start_date),
+    state: data.state,
+    stopDate: sdkClient.unmarshalDate(data.stop_date),
+    totalDiscount: data.total_discount ? sdkClient.unmarshalMoney(data.total_discount) : void 0,
+    totalTax: data.total_tax ? sdkClient.unmarshalMoney(data.total_tax) : void 0,
+    totalTaxed: data.total_taxed ? sdkClient.unmarshalMoney(data.total_taxed) : void 0,
+    totalUndiscount: data.total_undiscount ? sdkClient.unmarshalMoney(data.total_undiscount) : void 0,
+    totalUntaxed: data.total_untaxed ? sdkClient.unmarshalMoney(data.total_untaxed) : void 0,
+    type: data.type
+  };
+};
+const unmarshalListConsumptionsResponseConsumption = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListConsumptionsResponseConsumption' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    billedQuantity: data.billed_quantity,
+    categoryName: data.category_name,
+    productName: data.product_name,
+    projectId: data.project_id,
+    resourceName: data.resource_name,
+    sku: data.sku,
+    unit: data.unit,
+    value: data.value ? sdkClient.unmarshalMoney(data.value) : void 0
+  };
+};
+const unmarshalListConsumptionsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListConsumptionsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    consumptions: sdkClient.unmarshalArrayOfObject(
+      data.consumptions,
+      unmarshalListConsumptionsResponseConsumption
+    ),
+    totalCount: data.total_count,
+    totalDiscountUntaxedValue: data.total_discount_untaxed_value,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalListDiscountsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDiscountsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    discounts: sdkClient.unmarshalArrayOfObject(data.discounts, unmarshalDiscount),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListInvoicesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListInvoicesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    invoices: sdkClient.unmarshalArrayOfObject(data.invoices, unmarshalInvoice),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListTaxesResponseTax = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListTaxesResponseTax' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    currency: data.currency,
+    description: data.description,
+    rate: data.rate,
+    totalTaxValue: data.total_tax_value
+  };
+};
+const unmarshalListTaxesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListTaxesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    taxes: sdkClient.unmarshalArrayOfObject(data.taxes, unmarshalListTaxesResponseTax),
+    totalCount: data.total_count,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+exports.unmarshalDiscount = unmarshalDiscount;
+exports.unmarshalInvoice = unmarshalInvoice;
+exports.unmarshalListConsumptionsResponse = unmarshalListConsumptionsResponse;
+exports.unmarshalListDiscountsResponse = unmarshalListDiscountsResponse;
+exports.unmarshalListInvoicesResponse = unmarshalListInvoicesResponse;
+exports.unmarshalListTaxesResponse = unmarshalListTaxesResponse;

@@ -1,0 +1,302 @@
+import randomName from "@scaleway/random-name";
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate } from "@scaleway/sdk-client";
+const unmarshalOS = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OS' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    compatibleServerTypes: data.compatible_server_types,
+    family: data.family,
+    id: data.id,
+    imageUrl: data.image_url,
+    isBeta: data.is_beta,
+    label: data.label,
+    name: data.name,
+    version: data.version,
+    xcodeVersion: data.xcode_version
+  };
+};
+const unmarshalCommitment = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Commitment' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    cancelled: data.cancelled,
+    type: data.type
+  };
+};
+const unmarshalServer = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Server' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    commitment: data.commitment ? unmarshalCommitment(data.commitment) : void 0,
+    createdAt: unmarshalDate(data.created_at),
+    deletableAt: unmarshalDate(data.deletable_at),
+    deletionScheduled: data.deletion_scheduled,
+    delivered: data.delivered,
+    id: data.id,
+    ip: data.ip,
+    name: data.name,
+    organizationId: data.organization_id,
+    os: data.os ? unmarshalOS(data.os) : void 0,
+    projectId: data.project_id,
+    publicBandwidthBps: data.public_bandwidth_bps,
+    sshUsername: data.ssh_username,
+    status: data.status,
+    sudoPassword: data.sudo_password,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at),
+    vncPort: data.vnc_port,
+    vncUrl: data.vnc_url,
+    vpcStatus: data.vpc_status,
+    zone: data.zone
+  };
+};
+const unmarshalServerPrivateNetwork = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerPrivateNetwork' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    ipamIpIds: data.ipam_ip_ids,
+    privateNetworkId: data.private_network_id,
+    projectId: data.project_id,
+    serverId: data.server_id,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+    vlan: data.vlan
+  };
+};
+const unmarshalServerTypeCPU = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeCPU' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    coreCount: data.core_count,
+    frequency: data.frequency,
+    name: data.name
+  };
+};
+const unmarshalServerTypeDisk = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeDisk' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    capacity: data.capacity,
+    type: data.type
+  };
+};
+const unmarshalServerTypeGPU = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeGPU' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    count: data.count
+  };
+};
+const unmarshalServerTypeMemory = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeMemory' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    capacity: data.capacity,
+    type: data.type
+  };
+};
+const unmarshalServerTypeNetwork = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeNetwork' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    publicBandwidthBps: data.public_bandwidth_bps,
+    supportedBandwidth: data.supported_bandwidth
+  };
+};
+const unmarshalServerType = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerType' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    cpu: data.cpu ? unmarshalServerTypeCPU(data.cpu) : void 0,
+    defaultOs: data.default_os ? unmarshalOS(data.default_os) : void 0,
+    disk: data.disk ? unmarshalServerTypeDisk(data.disk) : void 0,
+    gpu: data.gpu ? unmarshalServerTypeGPU(data.gpu) : void 0,
+    memory: data.memory ? unmarshalServerTypeMemory(data.memory) : void 0,
+    minimumLeaseDuration: data.minimum_lease_duration,
+    name: data.name,
+    network: data.network ? unmarshalServerTypeNetwork(data.network) : void 0,
+    stock: data.stock
+  };
+};
+const unmarshalConnectivityDiagnosticServerHealth = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ConnectivityDiagnosticServerHealth' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    isAgentAlive: data.is_agent_alive,
+    isMdmAlive: data.is_mdm_alive,
+    isServerAlive: data.is_server_alive,
+    isSshPortUp: data.is_ssh_port_up,
+    isVncPortUp: data.is_vnc_port_up,
+    lastCheckinDate: unmarshalDate(data.last_checkin_date)
+  };
+};
+const unmarshalConnectivityDiagnostic = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ConnectivityDiagnostic' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    errorMessage: data.error_message,
+    healthDetails: data.health_details ? unmarshalConnectivityDiagnosticServerHealth(data.health_details) : void 0,
+    id: data.id,
+    isHealthy: data.is_healthy,
+    status: data.status,
+    supportedActions: data.supported_actions
+  };
+};
+const unmarshalListOSResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListOSResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    os: unmarshalArrayOfObject(data.os, unmarshalOS),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListServerPrivateNetworksResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListServerPrivateNetworksResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    serverPrivateNetworks: unmarshalArrayOfObject(
+      data.server_private_networks,
+      unmarshalServerPrivateNetwork
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListServerTypesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListServerTypesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    serverTypes: unmarshalArrayOfObject(data.server_types, unmarshalServerType)
+  };
+};
+const unmarshalListServersResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListServersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    servers: unmarshalArrayOfObject(data.servers, unmarshalServer),
+    totalCount: data.total_count
+  };
+};
+const unmarshalSetServerPrivateNetworksResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetServerPrivateNetworksResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    serverPrivateNetworks: unmarshalArrayOfObject(
+      data.server_private_networks,
+      unmarshalServerPrivateNetwork
+    )
+  };
+};
+const unmarshalStartConnectivityDiagnosticResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'StartConnectivityDiagnosticResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    diagnosticId: data.diagnostic_id
+  };
+};
+const marshalCreateServerRequest = (request, defaults) => ({
+  commitment_type: request.commitmentType,
+  enable_vpc: request.enableVpc,
+  name: request.name || randomName("as"),
+  os_id: request.osId,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  public_bandwidth_bps: request.publicBandwidthBps,
+  type: request.type
+});
+const marshalPrivateNetworkApiAddServerPrivateNetworkRequest = (request, defaults) => ({
+  ipam_ip_ids: request.ipamIpIds,
+  private_network_id: request.privateNetworkId
+});
+const marshalPrivateNetworkApiSetServerPrivateNetworksRequest = (request, defaults) => ({
+  per_private_network_ipam_ip_ids: request.perPrivateNetworkIpamIpIds
+});
+const marshalReinstallServerRequest = (request, defaults) => ({
+  os_id: request.osId
+});
+const marshalStartConnectivityDiagnosticRequest = (request, defaults) => ({
+  server_id: request.serverId
+});
+const marshalCommitmentTypeValue = (request, defaults) => ({
+  commitment_type: request.commitmentType
+});
+const marshalUpdateServerRequest = (request, defaults) => ({
+  commitment_type: request.commitmentType !== void 0 ? marshalCommitmentTypeValue(request.commitmentType) : void 0,
+  enable_vpc: request.enableVpc,
+  name: request.name,
+  public_bandwidth_bps: request.publicBandwidthBps,
+  schedule_deletion: request.scheduleDeletion
+});
+export {
+  marshalCreateServerRequest,
+  marshalPrivateNetworkApiAddServerPrivateNetworkRequest,
+  marshalPrivateNetworkApiSetServerPrivateNetworksRequest,
+  marshalReinstallServerRequest,
+  marshalStartConnectivityDiagnosticRequest,
+  marshalUpdateServerRequest,
+  unmarshalConnectivityDiagnostic,
+  unmarshalListOSResponse,
+  unmarshalListServerPrivateNetworksResponse,
+  unmarshalListServerTypesResponse,
+  unmarshalListServersResponse,
+  unmarshalOS,
+  unmarshalServer,
+  unmarshalServerPrivateNetwork,
+  unmarshalServerType,
+  unmarshalSetServerPrivateNetworksResponse,
+  unmarshalStartConnectivityDiagnosticResponse
+};

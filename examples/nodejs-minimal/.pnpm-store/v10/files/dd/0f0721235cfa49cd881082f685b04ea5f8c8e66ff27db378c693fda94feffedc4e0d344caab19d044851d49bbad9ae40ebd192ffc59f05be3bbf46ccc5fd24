@@ -1,0 +1,25 @@
+const composeRequestInterceptors = (interceptors) => async (request) => interceptors.reduce(
+  async (asyncResult, interceptor) => interceptor({ request: await asyncResult }),
+  Promise.resolve(request)
+);
+const composeResponseInterceptors = (interceptors) => async (response) => interceptors.reduce(
+  async (asyncResult, interceptor) => interceptor({ response: await asyncResult }),
+  Promise.resolve(response)
+);
+const composeResponseErrorInterceptors = (interceptors) => async (request, error) => {
+  let prevError = error;
+  for (const interceptor of interceptors) {
+    try {
+      const res = await interceptor({ request, error: prevError });
+      return res;
+    } catch (err) {
+      prevError = err;
+    }
+  }
+  throw prevError;
+};
+export {
+  composeRequestInterceptors,
+  composeResponseErrorInterceptors,
+  composeResponseInterceptors
+};

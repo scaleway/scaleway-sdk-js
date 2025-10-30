@@ -1,0 +1,136 @@
+const Capacity = {
+  maxReplicas: {
+    greaterThanOrEqual: 2
+  },
+  minReplicas: {
+    greaterThanOrEqual: 1
+  }
+};
+const CreateInstanceGroupRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1
+  }
+};
+const CreateInstancePolicyRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1
+  },
+  value: {
+    greaterThanOrEqual: 1
+  }
+};
+const CreateInstanceTemplateRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1
+  }
+};
+const ListInstanceGroupEventsRequest = {
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e3
+  }
+};
+const ListInstanceGroupsRequest = {
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e3
+  }
+};
+const ListInstancePoliciesRequest = {
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e3
+  }
+};
+const ListInstanceTemplatesRequest = {
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e3
+  }
+};
+const Metric = {
+  name: {
+    maxLength: 255,
+    minLength: 1
+  },
+  samplingRangeMin: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 60
+  }
+};
+const UpdateInstanceGroupRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1
+  }
+};
+const UpdateInstanceGroupRequestCapacity = {
+  maxReplicas: {
+    greaterThanOrEqual: 2
+  },
+  minReplicas: {
+    greaterThanOrEqual: 1
+  }
+};
+const UpdateInstancePolicyRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1
+  },
+  value: {
+    greaterThanOrEqual: 1
+  }
+};
+const UpdateInstancePolicyRequestMetric = {
+  name: {
+    maxLength: 255,
+    minLength: 1
+  },
+  samplingRangeMin: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 60
+  }
+};
+const UpdateInstanceTemplateRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1
+  }
+};
+const VolumeInstanceTemplate = {
+  name: {
+    minLength: 1
+  }
+};
+export {
+  Capacity,
+  CreateInstanceGroupRequest,
+  CreateInstancePolicyRequest,
+  CreateInstanceTemplateRequest,
+  ListInstanceGroupEventsRequest,
+  ListInstanceGroupsRequest,
+  ListInstancePoliciesRequest,
+  ListInstanceTemplatesRequest,
+  Metric,
+  UpdateInstanceGroupRequest,
+  UpdateInstanceGroupRequestCapacity,
+  UpdateInstancePolicyRequest,
+  UpdateInstancePolicyRequestMetric,
+  UpdateInstanceTemplateRequest,
+  VolumeInstanceTemplate
+};

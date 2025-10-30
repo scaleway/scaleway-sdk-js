@@ -1,0 +1,47 @@
+interface PaginationOptions {
+    page?: number;
+    pageSize?: number;
+}
+interface PaginatedResponse {
+    totalCount: number;
+}
+export type PaginatedFetcher<T, R extends PaginationOptions = PaginationOptions> = (request: R) => Promise<T>;
+export type PaginatedContent<K extends string, T = unknown> = PaginatedResponse & {
+    [key in K]: T[];
+};
+export declare const extract: <K extends string>(key: K) => <T extends PaginatedContent<K>>(result: T) => T[K];
+/**
+ * Fetches a paginated resource.
+ *
+ * @param key - The resource key of values list
+ * @param fetcher - The method to retrieve paginated resources
+ * @param request - A request with pagination options
+ * @param initial - The first page
+ * @returns An async generator of resources arrays
+ */
+export declare function fetchPaginated<K extends string, T extends PaginatedContent<K>, R extends PaginationOptions>(key: K, fetcher: PaginatedFetcher<T, R>, request: R, initial?: Promise<T>): AsyncGenerator<T[K], void, void>;
+/**
+ * Fetches all paginated resource.
+ *
+ * @param key - The resource key of values list
+ * @param fetcher - The method to retrieve paginated resources
+ * @param request - A request with pagination options
+ * @param initial - The first page
+ * @returns A resources array Promise
+ */
+export declare const fetchAll: <K extends string, T extends PaginatedContent<K>, R extends PaginationOptions>(key: K, fetcher: PaginatedFetcher<T, R>, request: R, initial?: Promise<T>) => Promise<(Awaited<T[K]> extends infer T_1 ? T_1 extends Awaited<T[K]> ? T_1 extends readonly (infer InnerArr)[] ? InnerArr : T_1 : never : never)[]>;
+/**
+ * Enriches a listing method with helpers.
+ *
+ * @param key - The resource key of values list
+ * @param fetcher - The method to retrieve paginated resources
+ * @param request - A request with pagination options
+ * @returns A resource Promise with the pagination helpers
+ *
+ * @internal
+ */
+export declare const enrichForPagination: <K extends string, T extends PaginatedContent<K>, R extends PaginationOptions>(key: K, fetcher: PaginatedFetcher<T, R>, request: R) => Promise<T> & {
+    all: () => Promise<(Awaited<T[K]> extends infer T_1 ? T_1 extends Awaited<T[K]> ? T_1 extends readonly (infer InnerArr)[] ? InnerArr : T_1 : never : never)[]>;
+    [Symbol.asyncIterator]: () => AsyncGenerator<T[K], void, void>;
+};
+export {};

@@ -1,0 +1,171 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const ACLRuleRequest = {
+  description: {
+    maxLength: 2e3
+  }
+};
+const CreateClusterRequest = {
+  description: {
+    maxLength: 4096
+  },
+  name: {
+    maxLength: 100,
+    minLength: 1
+  },
+  type: {
+    maxLength: 100
+  },
+  version: {
+    maxLength: 10
+  }
+};
+const CreateClusterRequestAutoscalerConfig = {
+  scaleDownDelayAfterAdd: {
+    maxLength: 100
+  },
+  scaleDownUtilizationThreshold: {
+    greaterThan: 0,
+    lessThan: 1
+  }
+};
+const CreateClusterRequestOpenIDConnectConfig = {
+  clientId: {
+    maxLength: 255
+  },
+  groupsPrefix: {
+    maxLength: 100
+  },
+  issuerUrl: {
+    maxLength: 255
+  },
+  usernameClaim: {
+    maxLength: 100
+  },
+  usernamePrefix: {
+    maxLength: 100
+  }
+};
+const CreateClusterRequestPoolConfig = {
+  name: {
+    maxLength: 100,
+    minLength: 1
+  }
+};
+const CreatePoolRequest = {
+  name: {
+    maxLength: 100,
+    minLength: 1
+  }
+};
+const ListClusterTypesRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListClustersRequest = {
+  name: {
+    minLength: 1
+  },
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListNodesRequest = {
+  name: {
+    minLength: 1
+  },
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListPoolsRequest = {
+  name: {
+    minLength: 1
+  },
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const MaintenanceWindow = {
+  startHour: {
+    lessThanOrEqual: 23
+  }
+};
+const SetClusterTypeRequest = {
+  type: {
+    maxLength: 100
+  }
+};
+const UpdateClusterRequest = {
+  description: {
+    maxLength: 4096
+  },
+  name: {
+    maxLength: 100,
+    minLength: 1
+  }
+};
+const UpdateClusterRequestAutoscalerConfig = {
+  scaleDownDelayAfterAdd: {
+    maxLength: 100
+  },
+  scaleDownUtilizationThreshold: {
+    greaterThan: 0,
+    lessThan: 1
+  }
+};
+const UpdateClusterRequestOpenIDConnectConfig = {
+  clientId: {
+    maxLength: 255
+  },
+  groupsPrefix: {
+    maxLength: 100
+  },
+  issuerUrl: {
+    maxLength: 255
+  },
+  usernameClaim: {
+    maxLength: 100
+  },
+  usernamePrefix: {
+    maxLength: 100
+  }
+};
+const UpgradeClusterRequest = {
+  version: {
+    maxLength: 10
+  }
+};
+exports.ACLRuleRequest = ACLRuleRequest;
+exports.CreateClusterRequest = CreateClusterRequest;
+exports.CreateClusterRequestAutoscalerConfig = CreateClusterRequestAutoscalerConfig;
+exports.CreateClusterRequestOpenIDConnectConfig = CreateClusterRequestOpenIDConnectConfig;
+exports.CreateClusterRequestPoolConfig = CreateClusterRequestPoolConfig;
+exports.CreatePoolRequest = CreatePoolRequest;
+exports.ListClusterTypesRequest = ListClusterTypesRequest;
+exports.ListClustersRequest = ListClustersRequest;
+exports.ListNodesRequest = ListNodesRequest;
+exports.ListPoolsRequest = ListPoolsRequest;
+exports.MaintenanceWindow = MaintenanceWindow;
+exports.SetClusterTypeRequest = SetClusterTypeRequest;
+exports.UpdateClusterRequest = UpdateClusterRequest;
+exports.UpdateClusterRequestAutoscalerConfig = UpdateClusterRequestAutoscalerConfig;
+exports.UpdateClusterRequestOpenIDConnectConfig = UpdateClusterRequestOpenIDConnectConfig;
+exports.UpgradeClusterRequest = UpgradeClusterRequest;

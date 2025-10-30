@@ -1,0 +1,119 @@
+export declare const Capacity: {
+    maxReplicas: {
+        greaterThanOrEqual: number;
+    };
+    minReplicas: {
+        greaterThanOrEqual: number;
+    };
+};
+export declare const CreateInstanceGroupRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const CreateInstancePolicyRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+    value: {
+        greaterThanOrEqual: number;
+    };
+};
+export declare const CreateInstanceTemplateRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const ListInstanceGroupEventsRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListInstanceGroupsRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListInstancePoliciesRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListInstanceTemplatesRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const Metric: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+    samplingRangeMin: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const UpdateInstanceGroupRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const UpdateInstanceGroupRequestCapacity: {
+    maxReplicas: {
+        greaterThanOrEqual: number;
+    };
+    minReplicas: {
+        greaterThanOrEqual: number;
+    };
+};
+export declare const UpdateInstancePolicyRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+    value: {
+        greaterThanOrEqual: number;
+    };
+};
+export declare const UpdateInstancePolicyRequestMetric: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+    samplingRangeMin: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const UpdateInstanceTemplateRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const VolumeInstanceTemplate: {
+    name: {
+        minLength: number;
+    };
+};

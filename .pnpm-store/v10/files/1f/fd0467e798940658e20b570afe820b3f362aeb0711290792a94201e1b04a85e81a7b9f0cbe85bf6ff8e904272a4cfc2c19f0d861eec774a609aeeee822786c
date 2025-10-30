@@ -1,0 +1,15 @@
+const GATEWAY_NETWORK_TRANSIENT_STATUSES = [
+  "attaching",
+  "configuring",
+  "detaching"
+];
+const GATEWAY_TRANSIENT_STATUSES = [
+  "allocating",
+  "configuring",
+  "stopping",
+  "deleting"
+];
+export {
+  GATEWAY_NETWORK_TRANSIENT_STATUSES,
+  GATEWAY_TRANSIENT_STATUSES
+};

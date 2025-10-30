@@ -1,0 +1,111 @@
+/**
+ * Function to retry logic between each interval.
+ *
+ * @returns The result and if it's done
+ *
+ * @throws An exception might be thrown by the logic being run
+ *
+ * @internal
+ */
+type Retry<T> = () => Promise<IteratorResult<T, T>>;
+/**
+ * Generated interval strategy iterator.
+ *
+ * @internal
+ */
+type IntervalStrategy = Generator<number, number, number>;
+/**
+ * Creates a fixed interval strategy.
+ * It returns the same interval value whatever the retry count.
+ *
+ * @param interval - The time interval (in seconds) to wait between each run
+ * @returns A fixed interval generator
+ *
+ * @internal
+ */
+export declare function createFixedIntervalStrategy(interval: number): IntervalStrategy;
+/**
+ * Creates a fibonacci interval strategy.
+ *
+ * @param base - The base interval (in seconds) that will be multiplicated with the fibonacci number
+ * @param factor - The factor so the fibonacci suite will go slower or faster
+ * @returns A fibonnacci generator
+ *
+ * @internal
+ */
+export declare function createFibonacciIntervalStrategy(base?: number, factor?: number): IntervalStrategy;
+/**
+ * Creates an exponential backoff interval strategy.
+ *
+ * @param minDelay - The minimum delay before the next try in seconds
+ * @param maxDelay - The maximum delay before the next try in seconds
+ * @returns An exponential backoff generator
+ *
+ * @internal
+ */
+export declare function createExponentialBackoffStrategy(minDelay: number, maxDelay: number): IntervalStrategy;
+/**
+ * Tries a specific logic several times until it succeeds, timeouts, or throws an exception.
+ *
+ * @param retry - The function to retry logic between each interval
+ * @param strategy - A generated interval strategy iterator
+ * @param timeout - The maximum time elapsed before timeout error
+ *
+ * @throws An timeout exception or error thrown by the logic being run
+ *
+ * @internal
+ */
+export declare const tryAtIntervals: <T>(retry: Retry<T>, strategy: IntervalStrategy, timeout?: number) => Promise<T>;
+/**
+ * Represents the condition to stop waiting for a resource.
+ *
+ * @public
+ */
+export type WaitForStopCondition<T> = (obj: T) => Promise<boolean>;
+/**
+ * The options to wait until a resource is ready.
+ *
+ * @public
+ */
+export interface WaitForOptions<T> {
+    /**
+     * Timeout in seconds.
+     *
+     * @defaultValue 300 seconds (5 minutes).
+     */
+    timeout?: number;
+    /**
+     * The minimum delay before the next try in seconds.
+     *
+     * @defaultValue 1 second.
+     */
+    minDelay?: number;
+    /**
+     * The maximum delay before the next try in seconds.
+     *
+     * @defaultValue 30 seconds.
+     */
+    maxDelay?: number;
+    /**
+     * The condition to stop trying.
+     *
+     * @defaultValue Waits for non-transient value.
+     */
+    stop?: WaitForStopCondition<T>;
+}
+type ResourceFetcher<T, R> = (request: R) => Promise<T>;
+/**
+ * Fetches resource several times until an expected condition is reached, timeouts, or throws an exception.
+ *
+ * @param stop - The condition to stop waiting
+ * @param fetcher - The method to retrieve resource
+ * @param request - The resource request options
+ * @param options - The retry strategy options
+ * @param strategy - An optional custom strategy
+ *
+ * @returns A promise of resource
+ *
+ * @public
+ */
+export declare const waitForResource: <R, T>(stop: WaitForStopCondition<T>, fetcher: ResourceFetcher<T, R>, request: R, options?: WaitForOptions<T>, strategy?: IntervalStrategy) => Promise<Awaited<T>>;
+export {};

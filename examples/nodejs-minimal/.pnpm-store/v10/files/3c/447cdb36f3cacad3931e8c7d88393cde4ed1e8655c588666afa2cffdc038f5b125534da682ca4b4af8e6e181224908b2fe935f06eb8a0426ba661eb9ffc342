@@ -1,0 +1,538 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const content_gen = require("./content.gen.cjs");
+const marshalling_gen = require("./marshalling.gen.cjs");
+const jsonContentHeaders = {
+  "Content-Type": "application/json; charset=utf-8"
+};
+class API extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par"]
+  });
+  /**
+   * Send an email. You must specify the `region`, the sender and the recipient's information and the `project_id` to send an email from a checked domain. The subject of the email must contain at least 6 characters.
+   *
+   * @param request - The request {@link CreateEmailRequest}
+   * @returns A Promise of CreateEmailResponse
+   */
+  createEmail = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateEmailRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/emails`
+    },
+    marshalling_gen.unmarshalCreateEmailResponse
+  );
+  /**
+   * Get an email. Retrieve information about a specific email using the `email_id` and `region` parameters.
+   *
+   * @param request - The request {@link GetEmailRequest}
+   * @returns A Promise of Email
+   */
+  getEmail = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/emails/${sdkClient.validatePathParam("emailId", request.emailId)}`
+    },
+    marshalling_gen.unmarshalEmail
+  );
+  /**
+   * Waits for {@link Email} to be in a final state.
+   *
+   * @param request - The request {@link GetEmailRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Email
+   */
+  waitForEmail = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(!content_gen.EMAIL_TRANSIENT_STATUSES.includes(res.status))),
+    this.getEmail,
+    request,
+    options
+  );
+  pageOfListEmails = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/emails`,
+      urlParams: sdkClient.urlParams(
+        ["domain_id", request.domainId],
+        ["flags", request.flags],
+        ["mail_from", request.mailFrom],
+        ["mail_rcpt", request.mailRcpt],
+        ["mail_to", request.mailTo],
+        ["message_id", request.messageId],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId],
+        ["search", request.search],
+        ["since", request.since],
+        ["statuses", request.statuses],
+        ["subject", request.subject],
+        ["until", request.until]
+      )
+    },
+    marshalling_gen.unmarshalListEmailsResponse
+  );
+  /**
+   * List emails. Retrieve the list of emails sent from a specific domain or for a specific Project or Organization. You must specify the `region`.
+   *
+   * @param request - The request {@link ListEmailsRequest}
+   * @returns A Promise of ListEmailsResponse
+   */
+  listEmails = (request = {}) => sdkClient.enrichForPagination("emails", this.pageOfListEmails, request);
+  /**
+   * Email statuses. Get information on your emails' statuses.
+   *
+   * @param request - The request {@link GetStatisticsRequest}
+   * @returns A Promise of Statistics
+   */
+  getStatistics = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/statistics`,
+      urlParams: sdkClient.urlParams(
+        ["domain_id", request.domainId],
+        ["mail_from", request.mailFrom],
+        ["project_id", request.projectId],
+        ["since", request.since],
+        ["until", request.until]
+      )
+    },
+    marshalling_gen.unmarshalStatistics
+  );
+  /**
+   * Cancel an email. You can cancel the sending of an email if it has not been sent yet. You must specify the `region` and the `email_id` of the email you want to cancel.
+   *
+   * @param request - The request {@link CancelEmailRequest}
+   * @returns A Promise of Email
+   */
+  cancelEmail = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/emails/${sdkClient.validatePathParam("emailId", request.emailId)}/cancel`
+    },
+    marshalling_gen.unmarshalEmail
+  );
+  /**
+   * Register a domain in a project. You must specify the `region`, `project_id` and `domain_name` to register a domain in a specific Project.
+   *
+   * @param request - The request {@link CreateDomainRequest}
+   * @returns A Promise of Domain
+   */
+  createDomain = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateDomainRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains`
+    },
+    marshalling_gen.unmarshalDomain
+  );
+  /**
+   * Get information about a domain. Retrieve information about a specific domain using the `region` and `domain_id` parameters. Monitor your domain's reputation and improve **average** and **bad** reputation statuses, using your domain's **Email activity** tab on the [Scaleway console](https://console.scaleway.com/transactional-email/domains) to get a more detailed report. Check out our [dedicated documentation](https://www.scaleway.com/en/docs/managed-services/transactional-email/reference-content/understanding-tem-reputation-score/) to improve your domain's reputation.
+   *
+   * @param request - The request {@link GetDomainRequest}
+   * @returns A Promise of Domain
+   */
+  getDomain = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains/${sdkClient.validatePathParam("domainId", request.domainId)}`
+    },
+    marshalling_gen.unmarshalDomain
+  );
+  /**
+   * Waits for {@link Domain} to be in a final state.
+   *
+   * @param request - The request {@link GetDomainRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Domain
+   */
+  waitForDomain = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(!content_gen.DOMAIN_TRANSIENT_STATUSES.includes(res.status))),
+    this.getDomain,
+    request,
+    options
+  );
+  pageOfListDomains = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains`,
+      urlParams: sdkClient.urlParams(
+        ["name", request.name],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId],
+        ["status", request.status]
+      )
+    },
+    marshalling_gen.unmarshalListDomainsResponse
+  );
+  /**
+   * List domains. Retrieve domains in a specific Project or in a specific Organization using the `region` parameter.
+   *
+   * @param request - The request {@link ListDomainsRequest}
+   * @returns A Promise of ListDomainsResponse
+   */
+  listDomains = (request = {}) => sdkClient.enrichForPagination("domains", this.pageOfListDomains, request);
+  /**
+   * Delete a domain. You must specify the domain you want to delete by the `region` and `domain_id`. Deleting a domain is permanent and cannot be undone.
+   *
+   * @param request - The request {@link RevokeDomainRequest}
+   * @returns A Promise of Domain
+   */
+  revokeDomain = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains/${sdkClient.validatePathParam("domainId", request.domainId)}/revoke`
+    },
+    marshalling_gen.unmarshalDomain
+  );
+  /**
+   * Domain DNS check. Perform an immediate DNS check of a domain using the `region` and `domain_id` parameters.
+   *
+   * @param request - The request {@link CheckDomainRequest}
+   * @returns A Promise of Domain
+   */
+  checkDomain = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains/${sdkClient.validatePathParam("domainId", request.domainId)}/check`
+    },
+    marshalling_gen.unmarshalDomain
+  );
+  /**
+   * Display SPF and DKIM records status and potential errors. Display SPF and DKIM records status and potential errors, including the found records to make debugging easier.
+   *
+   * @param request - The request {@link GetDomainLastStatusRequest}
+   * @returns A Promise of DomainLastStatus
+   */
+  getDomainLastStatus = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains/${sdkClient.validatePathParam("domainId", request.domainId)}/verification`
+    },
+    marshalling_gen.unmarshalDomainLastStatus
+  );
+  /**
+   * Update a domain. Update a domain auto-configuration.
+   *
+   * @param request - The request {@link UpdateDomainRequest}
+   * @returns A Promise of Domain
+   */
+  updateDomain = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateDomainRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains/${sdkClient.validatePathParam("domainId", request.domainId)}`
+    },
+    marshalling_gen.unmarshalDomain
+  );
+  /**
+   * Create a Webhook. Create a new Webhook triggered by a list of event types and pushed to a Scaleway SNS ARN.
+   *
+   * @param request - The request {@link CreateWebhookRequest}
+   * @returns A Promise of Webhook
+   */
+  createWebhook = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateWebhookRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/webhooks`
+    },
+    marshalling_gen.unmarshalWebhook
+  );
+  pageOfListWebhooks = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/webhooks`,
+      urlParams: sdkClient.urlParams(
+        ["domain_id", request.domainId],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId]
+      )
+    },
+    marshalling_gen.unmarshalListWebhooksResponse
+  );
+  /**
+   * List Webhooks. Retrieve Webhooks in a specific Project or in a specific Organization using the `region` parameter.
+   *
+   * @param request - The request {@link ListWebhooksRequest}
+   * @returns A Promise of ListWebhooksResponse
+   */
+  listWebhooks = (request = {}) => sdkClient.enrichForPagination("webhooks", this.pageOfListWebhooks, request);
+  /**
+   * Get information about a Webhook. Retrieve information about a specific Webhook using the `webhook_id` and `region` parameters.
+   *
+   * @param request - The request {@link GetWebhookRequest}
+   * @returns A Promise of Webhook
+   */
+  getWebhook = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/webhooks/${sdkClient.validatePathParam("webhookId", request.webhookId)}`
+    },
+    marshalling_gen.unmarshalWebhook
+  );
+  /**
+   * Update a Webhook. Update a Webhook events type, SNS ARN or name.
+   *
+   * @param request - The request {@link UpdateWebhookRequest}
+   * @returns A Promise of Webhook
+   */
+  updateWebhook = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateWebhookRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/webhooks/${sdkClient.validatePathParam("webhookId", request.webhookId)}`
+    },
+    marshalling_gen.unmarshalWebhook
+  );
+  /**
+   * Delete a Webhook. You must specify the Webhook you want to delete by the `region` and `webhook_id`. Deleting a Webhook is permanent and cannot be undone.
+   *
+   * @param request - The request {@link DeleteWebhookRequest}
+   */
+  deleteWebhook = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/webhooks/${sdkClient.validatePathParam("webhookId", request.webhookId)}`
+  });
+  pageOfListWebhookEvents = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/webhooks/${sdkClient.validatePathParam("webhookId", request.webhookId)}/events`,
+      urlParams: sdkClient.urlParams(
+        ["domain_id", request.domainId],
+        ["email_id", request.emailId],
+        ["event_types", request.eventTypes],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId],
+        ["statuses", request.statuses]
+      )
+    },
+    marshalling_gen.unmarshalListWebhookEventsResponse
+  );
+  /**
+   * List Webhook triggered events. Retrieve the list of Webhook events triggered from a specific Webhook or for a specific Project or Organization. You must specify the `region`.
+   *
+   * @param request - The request {@link ListWebhookEventsRequest}
+   * @returns A Promise of ListWebhookEventsResponse
+   */
+  listWebhookEvents = (request) => sdkClient.enrichForPagination("webhookEvents", this.pageOfListWebhookEvents, request);
+  /**
+   * List project settings. Retrieve the project settings including periodic reports.
+   *
+   * @param request - The request {@link GetProjectSettingsRequest}
+   * @returns A Promise of ProjectSettings
+   */
+  getProjectSettings = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/project/${sdkClient.validatePathParam("projectId", request.projectId ?? this.client.settings.defaultProjectId)}/settings`
+    },
+    marshalling_gen.unmarshalProjectSettings
+  );
+  /**
+   * Update project settings. Update the project settings including periodic reports.
+   *
+   * @param request - The request {@link UpdateProjectSettingsRequest}
+   * @returns A Promise of ProjectSettings
+   */
+  updateProjectSettings = (request = {}) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateProjectSettingsRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/project/${sdkClient.validatePathParam("projectId", request.projectId ?? this.client.settings.defaultProjectId)}/settings`
+    },
+    marshalling_gen.unmarshalProjectSettings
+  );
+  pageOfListBlocklists = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/blocklists`,
+      urlParams: sdkClient.urlParams(
+        ["custom", request.custom],
+        ["domain_id", request.domainId],
+        ["email", request.email],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["type", request.type]
+      )
+    },
+    marshalling_gen.unmarshalListBlocklistsResponse
+  );
+  /**
+   * List blocklists. Retrieve the list of blocklists.
+   *
+   * @param request - The request {@link ListBlocklistsRequest}
+   * @returns A Promise of ListBlocklistsResponse
+   */
+  listBlocklists = (request) => sdkClient.enrichForPagination("blocklists", this.pageOfListBlocklists, request);
+  /**
+   * Bulk create blocklists. Create multiple blocklists in a specific Project or Organization using the `region` parameter.
+   *
+   * @param request - The request {@link BulkCreateBlocklistsRequest}
+   * @returns A Promise of BulkCreateBlocklistsResponse
+   */
+  bulkCreateBlocklists = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalBulkCreateBlocklistsRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/blocklists`
+    },
+    marshalling_gen.unmarshalBulkCreateBlocklistsResponse
+  );
+  /**
+   * Delete a blocklist. You must specify the blocklist you want to delete by the `region` and `blocklist_id`.
+   *
+   * @param request - The request {@link DeleteBlocklistRequest}
+   */
+  deleteBlocklist = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/blocklists/${sdkClient.validatePathParam("blocklistId", request.blocklistId)}`
+  });
+  /**
+   * Get information about subscribed offers. Retrieve information about the offers you are subscribed to using the `project_id` and `region` parameters.
+   *
+   * @param request - The request {@link ListOfferSubscriptionsRequest}
+   * @returns A Promise of ListOfferSubscriptionsResponse
+   */
+  listOfferSubscriptions = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/offer-subscriptions`,
+      urlParams: sdkClient.urlParams([
+        "project_id",
+        request.projectId ?? this.client.settings.defaultProjectId
+      ])
+    },
+    marshalling_gen.unmarshalListOfferSubscriptionsResponse
+  );
+  /**
+   * Update a subscribed offer.
+   *
+   * @param request - The request {@link UpdateOfferSubscriptionRequest}
+   * @returns A Promise of OfferSubscription
+   */
+  updateOfferSubscription = (request = {}) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateOfferSubscriptionRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/offer-subscriptions`
+    },
+    marshalling_gen.unmarshalOfferSubscription
+  );
+  /**
+   * List the available offers.. Retrieve the list of the available and free-of-charge offers you can subscribe to.
+   *
+   * @param request - The request {@link ListOffersRequest}
+   * @returns A Promise of ListOffersResponse
+   */
+  listOffers = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/offers`
+    },
+    marshalling_gen.unmarshalListOffersResponse
+  );
+  pageOfListPools = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/pools`,
+      urlParams: sdkClient.urlParams(
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        [
+          "project_id",
+          request.projectId ?? this.client.settings.defaultProjectId
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListPoolsResponse
+  );
+  /**
+   * Get information about a sending pool.. Retrieve information about a sending pool, including its creation status and configuration parameters.
+   *
+   * @param request - The request {@link ListPoolsRequest}
+   * @returns A Promise of ListPoolsResponse
+   */
+  listPools = (request = {}) => sdkClient.enrichForPagination("pools", this.pageOfListPools, request);
+  /**
+   * Get project resource consumption.. Get project resource consumption.
+   *
+   * @param request - The request {@link GetProjectConsumptionRequest}
+   * @returns A Promise of ProjectConsumption
+   */
+  getProjectConsumption = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/transactional-email/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/project-consumption`,
+      urlParams: sdkClient.urlParams([
+        "project_id",
+        request.projectId ?? this.client.settings.defaultProjectId
+      ])
+    },
+    marshalling_gen.unmarshalProjectConsumption
+  );
+}
+exports.API = API;

@@ -1,0 +1,311 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client';
+import type { CreateCronRequest, CreateDomainRequest, CreateFunctionRequest, CreateNamespaceRequest, CreateTokenRequest, CreateTriggerRequest, Cron, DeleteCronRequest, DeleteDomainRequest, DeleteFunctionRequest, DeleteNamespaceRequest, DeleteTokenRequest, DeleteTriggerRequest, DeployFunctionRequest, Domain, DownloadURL, Function, GetCronRequest, GetDomainRequest, GetFunctionDownloadURLRequest, GetFunctionRequest, GetFunctionUploadURLRequest, GetNamespaceRequest, GetTokenRequest, GetTriggerRequest, ListCronsRequest, ListCronsResponse, ListDomainsRequest, ListDomainsResponse, ListFunctionRuntimesRequest, ListFunctionRuntimesResponse, ListFunctionsRequest, ListFunctionsResponse, ListNamespacesRequest, ListNamespacesResponse, ListTokensRequest, ListTokensResponse, ListTriggersRequest, ListTriggersResponse, Namespace, Token, Trigger, UpdateCronRequest, UpdateFunctionRequest, UpdateNamespaceRequest, UpdateTriggerRequest, UploadURL } from './types.gen';
+/**
+ * Serverless Functions API.
+
+This API allows you to manage your Serverless Functions.
+ */
+export declare class API extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    protected pageOfListNamespaces: (request?: Readonly<ListNamespacesRequest>) => Promise<ListNamespacesResponse>;
+    /**
+     * List all your namespaces. List all existing namespaces in the specified region.
+     *
+     * @param request - The request {@link ListNamespacesRequest}
+     * @returns A Promise of ListNamespacesResponse
+     */
+    listNamespaces: (request?: Readonly<ListNamespacesRequest>) => Promise<ListNamespacesResponse> & {
+        all: () => Promise<Namespace[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Namespace[], void, void>;
+    };
+    /**
+     * Get a namespace. Get the namespace associated with the specified ID.
+     *
+     * @param request - The request {@link GetNamespaceRequest}
+     * @returns A Promise of Namespace
+     */
+    getNamespace: (request: Readonly<GetNamespaceRequest>) => Promise<Namespace>;
+    /**
+     * Waits for {@link Namespace} to be in a final state.
+     *
+     * @param request - The request {@link GetNamespaceRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Namespace
+     */
+    waitForNamespace: (request: Readonly<GetNamespaceRequest>, options?: Readonly<WaitForOptions<Namespace>>) => Promise<Namespace>;
+    /**
+     * Create a new namespace. Create a new namespace in a specified Organization or Project.
+     *
+     * @param request - The request {@link CreateNamespaceRequest}
+     * @returns A Promise of Namespace
+     */
+    createNamespace: (request: Readonly<CreateNamespaceRequest>) => Promise<Namespace>;
+    /**
+     * Update an existing namespace. Update the namespace associated with the specified ID.
+     *
+     * @param request - The request {@link UpdateNamespaceRequest}
+     * @returns A Promise of Namespace
+     */
+    updateNamespace: (request: Readonly<UpdateNamespaceRequest>) => Promise<Namespace>;
+    /**
+     * Delete an existing namespace. Delete the namespace associated with the specified ID.
+     *
+     * @param request - The request {@link DeleteNamespaceRequest}
+     * @returns A Promise of Namespace
+     */
+    deleteNamespace: (request: Readonly<DeleteNamespaceRequest>) => Promise<Namespace>;
+    protected pageOfListFunctions: (request: Readonly<ListFunctionsRequest>) => Promise<ListFunctionsResponse>;
+    /**
+     * List all your functions.
+     *
+     * @param request - The request {@link ListFunctionsRequest}
+     * @returns A Promise of ListFunctionsResponse
+     */
+    listFunctions: (request: Readonly<ListFunctionsRequest>) => Promise<ListFunctionsResponse> & {
+        all: () => Promise<Function[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Function[], void, void>;
+    };
+    /**
+     * Get a function. Get the function associated with the specified ID.
+     *
+     * @param request - The request {@link GetFunctionRequest}
+     * @returns A Promise of Function
+     */
+    getFunction: (request: Readonly<GetFunctionRequest>) => Promise<Function>;
+    /**
+     * Waits for {@link Function} to be in a final state.
+     *
+     * @param request - The request {@link GetFunctionRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Function
+     */
+    waitForFunction: (request: Readonly<GetFunctionRequest>, options?: Readonly<WaitForOptions<Function>>) => Promise<Function>;
+    /**
+     * Create a new function. Create a new function in the specified region for a specified Organization or Project.
+     *
+     * @param request - The request {@link CreateFunctionRequest}
+     * @returns A Promise of Function
+     */
+    createFunction: (request: Readonly<CreateFunctionRequest>) => Promise<Function>;
+    /**
+     * Update an existing function. Update the function associated with the specified ID.
+     *
+     * @param request - The request {@link UpdateFunctionRequest}
+     * @returns A Promise of Function
+     */
+    updateFunction: (request: Readonly<UpdateFunctionRequest>) => Promise<Function>;
+    /**
+     * Delete a function. Delete the function associated with the specified ID.
+     *
+     * @param request - The request {@link DeleteFunctionRequest}
+     * @returns A Promise of Function
+     */
+    deleteFunction: (request: Readonly<DeleteFunctionRequest>) => Promise<Function>;
+    /**
+     * Deploy a function. Deploy a function associated with the specified ID.
+     *
+     * @param request - The request {@link DeployFunctionRequest}
+     * @returns A Promise of Function
+     */
+    deployFunction: (request: Readonly<DeployFunctionRequest>) => Promise<Function>;
+    /**
+     * List function runtimes. List available function runtimes.
+     *
+     * @param request - The request {@link ListFunctionRuntimesRequest}
+     * @returns A Promise of ListFunctionRuntimesResponse
+     */
+    listFunctionRuntimes: (request?: Readonly<ListFunctionRuntimesRequest>) => Promise<ListFunctionRuntimesResponse>;
+    /**
+     * Get an upload URL of a function. Get an upload URL of a function associated with the specified ID.
+     *
+     * @param request - The request {@link GetFunctionUploadURLRequest}
+     * @returns A Promise of UploadURL
+     */
+    getFunctionUploadURL: (request: Readonly<GetFunctionUploadURLRequest>) => Promise<UploadURL>;
+    /**
+     * Get a download URL of a function. Get a download URL for a function associated with the specified ID.
+     *
+     * @param request - The request {@link GetFunctionDownloadURLRequest}
+     * @returns A Promise of DownloadURL
+     */
+    getFunctionDownloadURL: (request: Readonly<GetFunctionDownloadURLRequest>) => Promise<DownloadURL>;
+    protected pageOfListCrons: (request: Readonly<ListCronsRequest>) => Promise<ListCronsResponse>;
+    /**
+     * List all crons. List all the cronjobs in a specified region.
+     *
+     * @param request - The request {@link ListCronsRequest}
+     * @returns A Promise of ListCronsResponse
+     */
+    listCrons: (request: Readonly<ListCronsRequest>) => Promise<ListCronsResponse> & {
+        all: () => Promise<Cron[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Cron[], void, void>;
+    };
+    /**
+     * Get a cron. Get the cron associated with the specified ID.
+     *
+     * @param request - The request {@link GetCronRequest}
+     * @returns A Promise of Cron
+     */
+    getCron: (request: Readonly<GetCronRequest>) => Promise<Cron>;
+    /**
+     * Waits for {@link Cron} to be in a final state.
+     *
+     * @param request - The request {@link GetCronRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Cron
+     */
+    waitForCron: (request: Readonly<GetCronRequest>, options?: Readonly<WaitForOptions<Cron>>) => Promise<Cron>;
+    /**
+     * Create a new cron. Create a new cronjob for a function with the specified ID.
+     *
+     * @param request - The request {@link CreateCronRequest}
+     * @returns A Promise of Cron
+     */
+    createCron: (request: Readonly<CreateCronRequest>) => Promise<Cron>;
+    /**
+     * Update an existing cron. Update the cron associated with the specified ID.
+     *
+     * @param request - The request {@link UpdateCronRequest}
+     * @returns A Promise of Cron
+     */
+    updateCron: (request: Readonly<UpdateCronRequest>) => Promise<Cron>;
+    /**
+     * Delete an existing cron. Delete the cron associated with the specified ID.
+     *
+     * @param request - The request {@link DeleteCronRequest}
+     * @returns A Promise of Cron
+     */
+    deleteCron: (request: Readonly<DeleteCronRequest>) => Promise<Cron>;
+    protected pageOfListDomains: (request: Readonly<ListDomainsRequest>) => Promise<ListDomainsResponse>;
+    /**
+     * List all domain name bindings. List all domain name bindings in a specified region.
+     *
+     * @param request - The request {@link ListDomainsRequest}
+     * @returns A Promise of ListDomainsResponse
+     */
+    listDomains: (request: Readonly<ListDomainsRequest>) => Promise<ListDomainsResponse> & {
+        all: () => Promise<Domain[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Domain[], void, void>;
+    };
+    /**
+     * Get a domain name binding. Get a domain name binding for the function with the specified ID.
+     *
+     * @param request - The request {@link GetDomainRequest}
+     * @returns A Promise of Domain
+     */
+    getDomain: (request: Readonly<GetDomainRequest>) => Promise<Domain>;
+    /**
+     * Waits for {@link Domain} to be in a final state.
+     *
+     * @param request - The request {@link GetDomainRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Domain
+     */
+    waitForDomain: (request: Readonly<GetDomainRequest>, options?: Readonly<WaitForOptions<Domain>>) => Promise<Domain>;
+    /**
+     * Create a domain name binding. Create a domain name binding for the function with the specified ID.
+     *
+     * @param request - The request {@link CreateDomainRequest}
+     * @returns A Promise of Domain
+     */
+    createDomain: (request: Readonly<CreateDomainRequest>) => Promise<Domain>;
+    /**
+     * Delete a domain name binding. Delete a domain name binding for the function with the specified ID.
+     *
+     * @param request - The request {@link DeleteDomainRequest}
+     * @returns A Promise of Domain
+     */
+    deleteDomain: (request: Readonly<DeleteDomainRequest>) => Promise<Domain>;
+    /**
+     * Create a new revocable token.
+     *
+     * @param request - The request {@link CreateTokenRequest}
+     * @returns A Promise of Token
+     */
+    createToken: (request?: Readonly<CreateTokenRequest>) => Promise<Token>;
+    /**
+     * Get a token.
+     *
+     * @param request - The request {@link GetTokenRequest}
+     * @returns A Promise of Token
+     */
+    getToken: (request: Readonly<GetTokenRequest>) => Promise<Token>;
+    /**
+     * Waits for {@link Token} to be in a final state.
+     *
+     * @param request - The request {@link GetTokenRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Token
+     */
+    waitForToken: (request: Readonly<GetTokenRequest>, options?: Readonly<WaitForOptions<Token>>) => Promise<Token>;
+    protected pageOfListTokens: (request?: Readonly<ListTokensRequest>) => Promise<ListTokensResponse>;
+    /**
+     * List all tokens.
+     *
+     * @param request - The request {@link ListTokensRequest}
+     * @returns A Promise of ListTokensResponse
+     */
+    listTokens: (request?: Readonly<ListTokensRequest>) => Promise<ListTokensResponse> & {
+        all: () => Promise<Token[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Token[], void, void>;
+    };
+    /**
+     * Delete a token.
+     *
+     * @param request - The request {@link DeleteTokenRequest}
+     * @returns A Promise of Token
+     */
+    deleteToken: (request: Readonly<DeleteTokenRequest>) => Promise<Token>;
+    /**
+     * Create a trigger. Create a new trigger for a specified function.
+     *
+     * @param request - The request {@link CreateTriggerRequest}
+     * @returns A Promise of Trigger
+     */
+    createTrigger: (request: Readonly<CreateTriggerRequest>) => Promise<Trigger>;
+    /**
+     * Get a trigger. Get a trigger with a specified ID.
+     *
+     * @param request - The request {@link GetTriggerRequest}
+     * @returns A Promise of Trigger
+     */
+    getTrigger: (request: Readonly<GetTriggerRequest>) => Promise<Trigger>;
+    /**
+     * Waits for {@link Trigger} to be in a final state.
+     *
+     * @param request - The request {@link GetTriggerRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Trigger
+     */
+    waitForTrigger: (request: Readonly<GetTriggerRequest>, options?: Readonly<WaitForOptions<Trigger>>) => Promise<Trigger>;
+    protected pageOfListTriggers: (request?: Readonly<ListTriggersRequest>) => Promise<ListTriggersResponse>;
+    /**
+     * List all triggers. List all triggers belonging to a specified Organization or Project.
+     *
+     * @param request - The request {@link ListTriggersRequest}
+     * @returns A Promise of ListTriggersResponse
+     */
+    listTriggers: (request?: Readonly<ListTriggersRequest>) => Promise<ListTriggersResponse> & {
+        all: () => Promise<Trigger[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Trigger[], void, void>;
+    };
+    /**
+     * Update a trigger. Update a trigger with a specified ID.
+     *
+     * @param request - The request {@link UpdateTriggerRequest}
+     * @returns A Promise of Trigger
+     */
+    updateTrigger: (request: Readonly<UpdateTriggerRequest>) => Promise<Trigger>;
+    /**
+     * Delete a trigger. Delete a trigger with a specified ID.
+     *
+     * @param request - The request {@link DeleteTriggerRequest}
+     * @returns A Promise of Trigger
+     */
+    deleteTrigger: (request: Readonly<DeleteTriggerRequest>) => Promise<Trigger>;
+}

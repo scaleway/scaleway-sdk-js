@@ -1,0 +1,15 @@
+import type { DefaultValues } from '@scaleway/sdk-client';
+import type { CreateInstanceGroupRequest, CreateInstancePolicyRequest, CreateInstanceTemplateRequest, InstanceGroup, InstancePolicy, InstanceTemplate, ListInstanceGroupEventsResponse, ListInstanceGroupsResponse, ListInstancePoliciesResponse, ListInstanceTemplatesResponse, UpdateInstanceGroupRequest, UpdateInstancePolicyRequest, UpdateInstanceTemplateRequest } from './types.gen';
+export declare const unmarshalInstanceGroup: (data: unknown) => InstanceGroup;
+export declare const unmarshalInstancePolicy: (data: unknown) => InstancePolicy;
+export declare const unmarshalInstanceTemplate: (data: unknown) => InstanceTemplate;
+export declare const unmarshalListInstanceGroupEventsResponse: (data: unknown) => ListInstanceGroupEventsResponse;
+export declare const unmarshalListInstanceGroupsResponse: (data: unknown) => ListInstanceGroupsResponse;
+export declare const unmarshalListInstancePoliciesResponse: (data: unknown) => ListInstancePoliciesResponse;
+export declare const unmarshalListInstanceTemplatesResponse: (data: unknown) => ListInstanceTemplatesResponse;
+export declare const marshalCreateInstanceGroupRequest: (request: CreateInstanceGroupRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalCreateInstancePolicyRequest: (request: CreateInstancePolicyRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalCreateInstanceTemplateRequest: (request: CreateInstanceTemplateRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateInstanceGroupRequest: (request: UpdateInstanceGroupRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateInstancePolicyRequest: (request: UpdateInstancePolicyRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateInstanceTemplateRequest: (request: UpdateInstanceTemplateRequest, defaults: DefaultValues) => Record<string, unknown>;

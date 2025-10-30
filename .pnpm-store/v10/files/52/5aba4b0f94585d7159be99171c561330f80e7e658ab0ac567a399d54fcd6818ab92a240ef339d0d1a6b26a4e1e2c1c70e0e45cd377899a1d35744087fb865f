@@ -1,0 +1,4 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const isResponse = (obj) => obj !== null && obj !== void 0 && typeof obj === "object" && "status" in obj && typeof obj.status === "number" && "statusText" in obj && typeof obj.statusText === "string" && "headers" in obj && typeof obj.headers === "object" && "body" in obj && typeof obj.body !== "undefined";
+exports.isResponse = isResponse;

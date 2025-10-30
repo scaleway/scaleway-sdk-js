@@ -1,0 +1,290 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const content_gen = require("./content.gen.cjs");
+const marshalling_gen = require("./marshalling.gen.cjs");
+const jsonContentHeaders = {
+  "Content-Type": "application/json; charset=utf-8"
+};
+class API extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    zones: [
+      "fr-par-1",
+      "fr-par-2",
+      "fr-par-3",
+      "nl-ams-1",
+      "nl-ams-2",
+      "nl-ams-3",
+      "pl-waw-1",
+      "pl-waw-2",
+      "pl-waw-3"
+    ]
+  });
+  pageOfListVolumeTypes = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/block/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/volume-types`,
+      urlParams: sdkClient.urlParams(
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListVolumeTypesResponse
+  );
+  /**
+   * List volume types. List all available volume types in a specified zone. The volume types listed are ordered by name in ascending order.
+   *
+   * @param request - The request {@link ListVolumeTypesRequest}
+   * @returns A Promise of ListVolumeTypesResponse
+   */
+  listVolumeTypes = (request = {}) => sdkClient.enrichForPagination("volumeTypes", this.pageOfListVolumeTypes, request);
+  pageOfListVolumes = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/block/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/volumes`,
+      urlParams: sdkClient.urlParams(
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["product_resource_id", request.productResourceId],
+        ["project_id", request.projectId],
+        ["tags", request.tags]
+      )
+    },
+    marshalling_gen.unmarshalListVolumesResponse
+  );
+  /**
+   * List volumes. List all existing volumes in a specified zone. By default, the volumes listed are ordered by creation date in ascending order. This can be modified via the `order_by` field.
+   *
+   * @param request - The request {@link ListVolumesRequest}
+   * @returns A Promise of ListVolumesResponse
+   */
+  listVolumes = (request = {}) => sdkClient.enrichForPagination("volumes", this.pageOfListVolumes, request);
+  /**
+     * Create a volume. To create a new volume from scratch, you must specify `from_empty` and the `size`.
+  To create a volume from an existing snapshot, specify `from_snapshot` and the `snapshot_id` in the request payload instead, size is optional and can be specified if you need to extend the original size. The volume will take on the same volume class and underlying IOPS limitations as the original snapshot.
+     *
+     * @param request - The request {@link CreateVolumeRequest}
+     * @returns A Promise of Volume
+     */
+  createVolume = (request = {}) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateVolumeRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/block/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/volumes`
+    },
+    marshalling_gen.unmarshalVolume
+  );
+  /**
+   * Get a volume. Retrieve technical information about a specific volume. Details such as size, type, and status are returned in the response.
+   *
+   * @param request - The request {@link GetVolumeRequest}
+   * @returns A Promise of Volume
+   */
+  getVolume = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/block/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/volumes/${sdkClient.validatePathParam("volumeId", request.volumeId)}`
+    },
+    marshalling_gen.unmarshalVolume
+  );
+  /**
+   * Waits for {@link Volume} to be in a final state.
+   *
+   * @param request - The request {@link GetVolumeRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Volume
+   */
+  waitForVolume = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.VOLUME_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getVolume,
+    request,
+    options
+  );
+  /**
+   * Delete a detached volume. You must specify the `volume_id` of the volume you want to delete. The volume must not be in the `in_use` status.
+   *
+   * @param request - The request {@link DeleteVolumeRequest}
+   */
+  deleteVolume = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/block/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/volumes/${sdkClient.validatePathParam("volumeId", request.volumeId)}`
+  });
+  /**
+     * Update a volume. Update the technical details of a volume, such as its name, tags, or its new size and `volume_type` (within the same Block Storage class).
+  You can only resize a volume to a larger size. It is currently not possible to change your Block Storage Class.
+     *
+     * @param request - The request {@link UpdateVolumeRequest}
+     * @returns A Promise of Volume
+     */
+  updateVolume = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateVolumeRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/block/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/volumes/${sdkClient.validatePathParam("volumeId", request.volumeId)}`
+    },
+    marshalling_gen.unmarshalVolume
+  );
+  pageOfListSnapshots = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/block/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/snapshots`,
+      urlParams: sdkClient.urlParams(
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId],
+        ["tags", request.tags],
+        ["volume_id", request.volumeId]
+      )
+    },
+    marshalling_gen.unmarshalListSnapshotsResponse
+  );
+  /**
+   * List all snapshots. List all available snapshots in a specified zone. By default, the snapshots listed are ordered by creation date in ascending order. This can be modified via the `order_by` field.
+   *
+   * @param request - The request {@link ListSnapshotsRequest}
+   * @returns A Promise of ListSnapshotsResponse
+   */
+  listSnapshots = (request = {}) => sdkClient.enrichForPagination("snapshots", this.pageOfListSnapshots, request);
+  /**
+   * Get a snapshot. Retrieve technical information about a specific snapshot. Details such as size, volume type, and status are returned in the response.
+   *
+   * @param request - The request {@link GetSnapshotRequest}
+   * @returns A Promise of Snapshot
+   */
+  getSnapshot = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/block/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/snapshots/${sdkClient.validatePathParam("snapshotId", request.snapshotId)}`
+    },
+    marshalling_gen.unmarshalSnapshot
+  );
+  /**
+   * Waits for {@link Snapshot} to be in a final state.
+   *
+   * @param request - The request {@link GetSnapshotRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Snapshot
+   */
+  waitForSnapshot = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.SNAPSHOT_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getSnapshot,
+    request,
+    options
+  );
+  /**
+     * Create a snapshot of a volume. To create a snapshot, the volume must be in the `in_use` or the `available` status.
+  If your volume is in a transient state, you need to wait until the end of the current operation.
+     *
+     * @param request - The request {@link CreateSnapshotRequest}
+     * @returns A Promise of Snapshot
+     */
+  createSnapshot = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateSnapshotRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/block/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/snapshots`
+    },
+    marshalling_gen.unmarshalSnapshot
+  );
+  /**
+     * Import a snapshot from a Scaleway Object Storage bucket. The bucket must contain a QCOW2 image.
+  The bucket can be imported into any Availability Zone as long as it is in the same region as the bucket.
+     *
+     * @param request - The request {@link ImportSnapshotFromObjectStorageRequest}
+     * @returns A Promise of Snapshot
+     */
+  importSnapshotFromObjectStorage = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalImportSnapshotFromObjectStorageRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/block/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/snapshots/import-from-object-storage`
+    },
+    marshalling_gen.unmarshalSnapshot
+  );
+  /**
+     * Export a snapshot to a Scaleway Object Storage bucket. The snapshot is exported in QCOW2 format.
+  The snapshot must not be in transient state.
+     *
+     * @param request - The request {@link ExportSnapshotToObjectStorageRequest}
+     * @returns A Promise of Snapshot
+     */
+  exportSnapshotToObjectStorage = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalExportSnapshotToObjectStorageRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/block/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/snapshots/${sdkClient.validatePathParam("snapshotId", request.snapshotId)}/export-to-object-storage`
+    },
+    marshalling_gen.unmarshalSnapshot
+  );
+  /**
+   * Delete a snapshot. You must specify the `snapshot_id` of the snapshot you want to delete. The snapshot must not be in use.
+   *
+   * @param request - The request {@link DeleteSnapshotRequest}
+   */
+  deleteSnapshot = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/block/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/snapshots/${sdkClient.validatePathParam("snapshotId", request.snapshotId)}`
+  });
+  /**
+   * Update a snapshot. Update the name or tags of the snapshot.
+   *
+   * @param request - The request {@link UpdateSnapshotRequest}
+   * @returns A Promise of Snapshot
+   */
+  updateSnapshot = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateSnapshotRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/block/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/snapshots/${sdkClient.validatePathParam("snapshotId", request.snapshotId)}`
+    },
+    marshalling_gen.unmarshalSnapshot
+  );
+}
+exports.API = API;

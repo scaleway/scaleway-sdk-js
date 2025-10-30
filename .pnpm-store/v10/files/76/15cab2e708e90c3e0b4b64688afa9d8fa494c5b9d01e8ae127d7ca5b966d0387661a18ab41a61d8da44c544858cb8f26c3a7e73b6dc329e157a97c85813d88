@@ -1,0 +1,39 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const node_os = require("node:os");
+const path = require("node:path");
+const node_process = require("node:process");
+const env = require("./env.cjs");
+function _interopNamespaceDefault(e) {
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const path__namespace = /* @__PURE__ */ _interopNamespaceDefault(path);
+const getScwConfigurationDirectory = () => {
+  const xdgConfigPath = node_process.env.XDG_CONFIG_HOME;
+  if (typeof xdgConfigPath === "string" && xdgConfigPath.length > 0) {
+    return path__namespace.join(xdgConfigPath, "scw");
+  }
+  return path__namespace.join(node_os.homedir(), ".config", "scw");
+};
+const resolveConfigurationFilePath = () => {
+  const envFilePath = node_process.env[env.EnvironmentKey.ScwConfigPath];
+  if (typeof envFilePath === "string" && envFilePath.length > 0) {
+    return envFilePath;
+  }
+  return path__namespace.join(getScwConfigurationDirectory(), "config.yaml");
+};
+exports.getScwConfigurationDirectory = getScwConfigurationDirectory;
+exports.resolveConfigurationFilePath = resolveConfigurationFilePath;

@@ -1,0 +1,19 @@
+import type { BMCAccessStatus, IPv6BlockDelegationStatus, RpnGroupMemberStatus, RpnSanStatus, RpnV2GroupStatus, RpnV2MemberStatus, ServerInstallStatus, ServerStatus, ServiceProvisioningStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link BMCAccessStatus}. */
+export declare const BMC_ACCESS_TRANSIENT_STATUSES: BMCAccessStatus[];
+/** Lists transient statutes of the enum {@link IPv6BlockDelegationStatus}. */
+export declare const I_PV6_BLOCK_DELEGATION_TRANSIENT_STATUSES: IPv6BlockDelegationStatus[];
+/** Lists transient statutes of the enum {@link RpnGroupMemberStatus}. */
+export declare const RPN_GROUP_MEMBER_TRANSIENT_STATUSES: RpnGroupMemberStatus[];
+/** Lists transient statutes of the enum {@link RpnSanStatus}. */
+export declare const RPN_SAN_TRANSIENT_STATUSES: RpnSanStatus[];
+/** Lists transient statutes of the enum {@link RpnV2GroupStatus}. */
+export declare const RPN_V2_GROUP_TRANSIENT_STATUSES: RpnV2GroupStatus[];
+/** Lists transient statutes of the enum {@link RpnV2MemberStatus}. */
+export declare const RPN_V2_MEMBER_TRANSIENT_STATUSES: RpnV2MemberStatus[];
+/** Lists transient statutes of the enum {@link ServerInstallStatus}. */
+export declare const SERVER_INSTALL_TRANSIENT_STATUSES: ServerInstallStatus[];
+/** Lists transient statutes of the enum {@link ServerStatus}. */
+export declare const SERVER_TRANSIENT_STATUSES: ServerStatus[];
+/** Lists transient statutes of the enum {@link ServiceProvisioningStatus}. */
+export declare const SERVICE_PROVISIONING_TRANSIENT_STATUSES: ServiceProvisioningStatus[];

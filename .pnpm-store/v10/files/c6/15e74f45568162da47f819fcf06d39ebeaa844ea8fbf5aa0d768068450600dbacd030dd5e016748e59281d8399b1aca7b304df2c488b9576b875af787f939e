@@ -1,0 +1,114 @@
+import { isJSONObject, unmarshalDate, unmarshalArrayOfObject } from "@scaleway/sdk-client";
+const unmarshalMACAddress = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'MACAddress' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    macAddress: data.mac_address,
+    macType: data.mac_type,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalFlexibleIP = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'FlexibleIP' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description,
+    id: data.id,
+    ipAddress: data.ip_address,
+    macAddress: data.mac_address ? unmarshalMACAddress(data.mac_address) : void 0,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    reverse: data.reverse,
+    serverId: data.server_id,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalAttachFlexibleIPsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AttachFlexibleIPsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    flexibleIps: unmarshalArrayOfObject(data.flexible_ips, unmarshalFlexibleIP),
+    totalCount: data.total_count
+  };
+};
+const unmarshalDetachFlexibleIPsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DetachFlexibleIPsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    flexibleIps: unmarshalArrayOfObject(data.flexible_ips, unmarshalFlexibleIP),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListFlexibleIPsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListFlexibleIPsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    flexibleIps: unmarshalArrayOfObject(data.flexible_ips, unmarshalFlexibleIP),
+    totalCount: data.total_count
+  };
+};
+const marshalAttachFlexibleIPRequest = (request, defaults) => ({
+  fips_ids: request.fipsIds,
+  server_id: request.serverId
+});
+const marshalCreateFlexibleIPRequest = (request, defaults) => ({
+  description: request.description,
+  is_ipv6: request.isIpv6,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  reverse: request.reverse,
+  server_id: request.serverId,
+  tags: request.tags
+});
+const marshalDetachFlexibleIPRequest = (request, defaults) => ({
+  fips_ids: request.fipsIds
+});
+const marshalDuplicateMACAddrRequest = (request, defaults) => ({
+  duplicate_from_fip_id: request.duplicateFromFipId
+});
+const marshalGenerateMACAddrRequest = (request, defaults) => ({
+  mac_type: request.macType
+});
+const marshalMoveMACAddrRequest = (request, defaults) => ({
+  dst_fip_id: request.dstFipId
+});
+const marshalUpdateFlexibleIPRequest = (request, defaults) => ({
+  description: request.description,
+  reverse: request.reverse,
+  tags: request.tags
+});
+export {
+  marshalAttachFlexibleIPRequest,
+  marshalCreateFlexibleIPRequest,
+  marshalDetachFlexibleIPRequest,
+  marshalDuplicateMACAddrRequest,
+  marshalGenerateMACAddrRequest,
+  marshalMoveMACAddrRequest,
+  marshalUpdateFlexibleIPRequest,
+  unmarshalAttachFlexibleIPsResponse,
+  unmarshalDetachFlexibleIPsResponse,
+  unmarshalFlexibleIP,
+  unmarshalListFlexibleIPsResponse
+};

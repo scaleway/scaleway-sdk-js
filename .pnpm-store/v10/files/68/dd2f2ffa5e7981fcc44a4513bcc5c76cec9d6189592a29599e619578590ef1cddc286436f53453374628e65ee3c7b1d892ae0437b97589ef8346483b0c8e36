@@ -1,0 +1,3 @@
+import type { FileSystemStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link FileSystemStatus}. */
+export declare const FILE_SYSTEM_TRANSIENT_STATUSES: FileSystemStatus[];

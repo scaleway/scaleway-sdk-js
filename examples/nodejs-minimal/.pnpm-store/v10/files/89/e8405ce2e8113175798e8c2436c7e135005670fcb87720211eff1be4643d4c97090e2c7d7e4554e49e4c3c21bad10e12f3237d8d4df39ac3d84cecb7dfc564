@@ -1,0 +1,292 @@
+import { Accountv3 } from "@scaleway/sdk-account";
+import { Accountv3 as Accountv32 } from "@scaleway/sdk-account";
+import { Applesiliconv1alpha1 } from "@scaleway/sdk-applesilicon";
+import { Applesiliconv1alpha1 as Applesiliconv1alpha12 } from "@scaleway/sdk-applesilicon";
+import { AuditTrailv1alpha1 } from "@scaleway/sdk-audit-trail";
+import { AuditTrailv1alpha1 as AuditTrailv1alpha12 } from "@scaleway/sdk-audit-trail";
+import { Autoscalingv1alpha1 } from "@scaleway/sdk-autoscaling";
+import { Autoscalingv1alpha1 as Autoscalingv1alpha12 } from "@scaleway/sdk-autoscaling";
+import { Baremetalv3, Baremetalv1 } from "@scaleway/sdk-baremetal";
+import { Baremetalv1 as Baremetalv12, Baremetalv3 as Baremetalv32 } from "@scaleway/sdk-baremetal";
+import { Billingv2beta1 } from "@scaleway/sdk-billing";
+import { Billingv2beta1 as Billingv2beta12 } from "@scaleway/sdk-billing";
+import { Blockv1alpha1, Blockv1 } from "@scaleway/sdk-block";
+import { Blockv1 as Blockv12, Blockv1alpha1 as Blockv1alpha12 } from "@scaleway/sdk-block";
+import { Cockpitv1 } from "@scaleway/sdk-cockpit";
+import { Cockpitv1 as Cockpitv12 } from "@scaleway/sdk-cockpit";
+import { Containerv1beta1 } from "@scaleway/sdk-container";
+import { Containerv1beta1 as Containerv1beta12 } from "@scaleway/sdk-container";
+import { Dediboxv1 } from "@scaleway/sdk-dedibox";
+import { Dediboxv1 as Dediboxv12 } from "@scaleway/sdk-dedibox";
+import { Domainv2beta1 } from "@scaleway/sdk-domain";
+import { Domainv2beta1 as Domainv2beta12 } from "@scaleway/sdk-domain";
+import { EdgeServicesv1beta1 } from "@scaleway/sdk-edge-services";
+import { EdgeServicesv1beta1 as EdgeServicesv1beta12 } from "@scaleway/sdk-edge-services";
+import { Filev1alpha1 } from "@scaleway/sdk-file";
+import { Filev1alpha1 as Filev1alpha12 } from "@scaleway/sdk-file";
+import { Flexibleipv1alpha1 } from "@scaleway/sdk-flexibleip";
+import { Flexibleipv1alpha1 as Flexibleipv1alpha12 } from "@scaleway/sdk-flexibleip";
+import { Functionv1beta1 } from "@scaleway/sdk-function";
+import { Functionv1beta1 as Functionv1beta12 } from "@scaleway/sdk-function";
+import { Iamv1alpha1 } from "@scaleway/sdk-iam";
+import { Iamv1alpha1 as Iamv1alpha12 } from "@scaleway/sdk-iam";
+import { Inferencev1beta1, Inferencev1 } from "@scaleway/sdk-inference";
+import { Inferencev1 as Inferencev12, Inferencev1beta1 as Inferencev1beta12 } from "@scaleway/sdk-inference";
+import { Instancev1 } from "@scaleway/sdk-instance";
+import { Instancev1 as Instancev12 } from "@scaleway/sdk-instance";
+import { Interlinkv1beta1 } from "@scaleway/sdk-interlink";
+import { Interlinkv1beta1 as Interlinkv1beta12 } from "@scaleway/sdk-interlink";
+import { Iotv1 } from "@scaleway/sdk-iot";
+import { Iotv1 as Iotv12 } from "@scaleway/sdk-iot";
+import { Ipamv1 } from "@scaleway/sdk-ipam";
+import { Ipamv1 as Ipamv12 } from "@scaleway/sdk-ipam";
+import { Jobsv1alpha1 } from "@scaleway/sdk-jobs";
+import { Jobsv1alpha1 as Jobsv1alpha12 } from "@scaleway/sdk-jobs";
+import { K8sv1 } from "@scaleway/sdk-k8s";
+import { K8sv1 as K8sv12 } from "@scaleway/sdk-k8s";
+import { KeyManagerv1alpha1 } from "@scaleway/sdk-key-manager";
+import { KeyManagerv1alpha1 as KeyManagerv1alpha12 } from "@scaleway/sdk-key-manager";
+import { Lbv1 } from "@scaleway/sdk-lb";
+import { Lbv1 as Lbv12 } from "@scaleway/sdk-lb";
+import { Marketplacev2 } from "@scaleway/sdk-marketplace";
+import { Marketplacev2 as Marketplacev22 } from "@scaleway/sdk-marketplace";
+import { Mnqv1beta1 } from "@scaleway/sdk-mnq";
+import { Mnqv1beta1 as Mnqv1beta12 } from "@scaleway/sdk-mnq";
+import { Mongodbv1alpha1, Mongodbv1 } from "@scaleway/sdk-mongodb";
+import { Mongodbv1 as Mongodbv12, Mongodbv1alpha1 as Mongodbv1alpha12 } from "@scaleway/sdk-mongodb";
+import { ProductCatalogv2alpha1 } from "@scaleway/sdk-product-catalog";
+import { ProductCatalogv2alpha1 as ProductCatalogv2alpha12 } from "@scaleway/sdk-product-catalog";
+import { Qaasv1alpha1 } from "@scaleway/sdk-qaas";
+import { Qaasv1alpha1 as Qaasv1alpha12 } from "@scaleway/sdk-qaas";
+import { Rdbv1 } from "@scaleway/sdk-rdb";
+import { Rdbv1 as Rdbv12 } from "@scaleway/sdk-rdb";
+import { Redisv1 } from "@scaleway/sdk-redis";
+import { Redisv1 as Redisv12 } from "@scaleway/sdk-redis";
+import { Registryv1 } from "@scaleway/sdk-registry";
+import { Registryv1 as Registryv12 } from "@scaleway/sdk-registry";
+import { Secretv1beta1 } from "@scaleway/sdk-secret";
+import { Secretv1beta1 as Secretv1beta12 } from "@scaleway/sdk-secret";
+import { ServerlessSqldbv1alpha1 } from "@scaleway/sdk-serverless-sqldb";
+import { ServerlessSqldbv1alpha1 as ServerlessSqldbv1alpha12 } from "@scaleway/sdk-serverless-sqldb";
+import { Temv1alpha1 } from "@scaleway/sdk-tem";
+import { Temv1alpha1 as Temv1alpha12 } from "@scaleway/sdk-tem";
+import { Testv1 } from "@scaleway/sdk-test";
+import { Testv1 as Testv12 } from "@scaleway/sdk-test";
+import { Vpcv2 } from "@scaleway/sdk-vpc";
+import { Vpcv2 as Vpcv22 } from "@scaleway/sdk-vpc";
+import { Vpcgwv2, Vpcgwv1 } from "@scaleway/sdk-vpcgw";
+import { Vpcgwv1 as Vpcgwv12, Vpcgwv2 as Vpcgwv22 } from "@scaleway/sdk-vpcgw";
+import { Webhostingv1 } from "@scaleway/sdk-webhosting";
+import { Webhostingv1 as Webhostingv12 } from "@scaleway/sdk-webhosting";
+const Account = {
+  v3: Accountv3
+};
+const Applesilicon = {
+  v1alpha1: Applesiliconv1alpha1
+};
+const AuditTrail = {
+  v1alpha1: AuditTrailv1alpha1
+};
+const Autoscaling = {
+  v1alpha1: Autoscalingv1alpha1
+};
+const Baremetal = {
+  v1: Baremetalv1,
+  v3: Baremetalv3
+};
+const Billing = {
+  v2beta1: Billingv2beta1
+};
+const Block = {
+  v1: Blockv1,
+  v1alpha1: Blockv1alpha1
+};
+const Cockpit = {
+  v1: Cockpitv1
+};
+const Container = {
+  v1beta1: Containerv1beta1
+};
+const Dedibox = {
+  v1: Dediboxv1
+};
+const Domain = {
+  v2beta1: Domainv2beta1
+};
+const EdgeServices = {
+  v1beta1: EdgeServicesv1beta1
+};
+const File = {
+  v1alpha1: Filev1alpha1
+};
+const Flexibleip = {
+  v1alpha1: Flexibleipv1alpha1
+};
+const Function = {
+  v1beta1: Functionv1beta1
+};
+const Iam = {
+  v1alpha1: Iamv1alpha1
+};
+const Inference = {
+  v1: Inferencev1,
+  v1beta1: Inferencev1beta1
+};
+const Instance = {
+  v1: Instancev1
+};
+const Interlink = {
+  v1beta1: Interlinkv1beta1
+};
+const Iot = {
+  v1: Iotv1
+};
+const Ipam = {
+  v1: Ipamv1
+};
+const Jobs = {
+  v1alpha1: Jobsv1alpha1
+};
+const K8s = {
+  v1: K8sv1
+};
+const KeyManager = {
+  v1alpha1: KeyManagerv1alpha1
+};
+const Lb = {
+  v1: Lbv1
+};
+const Marketplace = {
+  v2: Marketplacev2
+};
+const Mnq = {
+  v1beta1: Mnqv1beta1
+};
+const Mongodb = {
+  v1: Mongodbv1,
+  v1alpha1: Mongodbv1alpha1
+};
+const ProductCatalog = {
+  v2alpha1: ProductCatalogv2alpha1
+};
+const Qaas = {
+  v1alpha1: Qaasv1alpha1
+};
+const Rdb = {
+  v1: Rdbv1
+};
+const Redis = {
+  v1: Redisv1
+};
+const Registry = {
+  v1: Registryv1
+};
+const Secret = {
+  v1beta1: Secretv1beta1
+};
+const ServerlessSqldb = {
+  v1alpha1: ServerlessSqldbv1alpha1
+};
+const Tem = {
+  v1alpha1: Temv1alpha1
+};
+const Test = {
+  v1: Testv1
+};
+const Vpc = {
+  v2: Vpcv2
+};
+const Vpcgw = {
+  v1: Vpcgwv1,
+  v2: Vpcgwv2
+};
+const Webhosting = {
+  v1: Webhostingv1
+};
+export {
+  Account,
+  Accountv32 as Accountv3,
+  Applesilicon,
+  Applesiliconv1alpha12 as Applesiliconv1alpha1,
+  AuditTrail,
+  AuditTrailv1alpha12 as AuditTrailv1alpha1,
+  Autoscaling,
+  Autoscalingv1alpha12 as Autoscalingv1alpha1,
+  Baremetal,
+  Baremetalv12 as Baremetalv1,
+  Baremetalv32 as Baremetalv3,
+  Billing,
+  Billingv2beta12 as Billingv2beta1,
+  Block,
+  Blockv12 as Blockv1,
+  Blockv1alpha12 as Blockv1alpha1,
+  Cockpit,
+  Cockpitv12 as Cockpitv1,
+  Container,
+  Containerv1beta12 as Containerv1beta1,
+  Dedibox,
+  Dediboxv12 as Dediboxv1,
+  Domain,
+  Domainv2beta12 as Domainv2beta1,
+  EdgeServices,
+  EdgeServicesv1beta12 as EdgeServicesv1beta1,
+  File,
+  Filev1alpha12 as Filev1alpha1,
+  Flexibleip,
+  Flexibleipv1alpha12 as Flexibleipv1alpha1,
+  Function,
+  Functionv1beta12 as Functionv1beta1,
+  Iam,
+  Iamv1alpha12 as Iamv1alpha1,
+  Inference,
+  Inferencev12 as Inferencev1,
+  Inferencev1beta12 as Inferencev1beta1,
+  Instance,
+  Instancev12 as Instancev1,
+  Interlink,
+  Interlinkv1beta12 as Interlinkv1beta1,
+  Iot,
+  Iotv12 as Iotv1,
+  Ipam,
+  Ipamv12 as Ipamv1,
+  Jobs,
+  Jobsv1alpha12 as Jobsv1alpha1,
+  K8s,
+  K8sv12 as K8sv1,
+  KeyManager,
+  KeyManagerv1alpha12 as KeyManagerv1alpha1,
+  Lb,
+  Lbv12 as Lbv1,
+  Marketplace,
+  Marketplacev22 as Marketplacev2,
+  Mnq,
+  Mnqv1beta12 as Mnqv1beta1,
+  Mongodb,
+  Mongodbv12 as Mongodbv1,
+  Mongodbv1alpha12 as Mongodbv1alpha1,
+  ProductCatalog,
+  ProductCatalogv2alpha12 as ProductCatalogv2alpha1,
+  Qaas,
+  Qaasv1alpha12 as Qaasv1alpha1,
+  Rdb,
+  Rdbv12 as Rdbv1,
+  Redis,
+  Redisv12 as Redisv1,
+  Registry,
+  Registryv12 as Registryv1,
+  Secret,
+  Secretv1beta12 as Secretv1beta1,
+  ServerlessSqldb,
+  ServerlessSqldbv1alpha12 as ServerlessSqldbv1alpha1,
+  Tem,
+  Temv1alpha12 as Temv1alpha1,
+  Test,
+  Testv12 as Testv1,
+  Vpc,
+  Vpcgw,
+  Vpcgwv12 as Vpcgwv1,
+  Vpcgwv22 as Vpcgwv2,
+  Vpcv22 as Vpcv2,
+  Webhosting,
+  Webhostingv12 as Webhostingv1
+};

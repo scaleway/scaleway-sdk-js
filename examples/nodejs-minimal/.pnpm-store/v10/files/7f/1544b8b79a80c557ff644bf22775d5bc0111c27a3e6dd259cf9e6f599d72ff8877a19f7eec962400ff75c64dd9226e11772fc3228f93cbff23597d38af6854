@@ -1,0 +1,50 @@
+export declare const CreateDeploymentRequest: {
+    maxSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    minSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    modelName: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+    nodeType: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const ListDeploymentsRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const ListModelsRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const UpdateDeploymentRequest: {
+    maxSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    minSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};

@@ -1,0 +1,18 @@
+/**
+ * Dumps a Request into a readable string.
+ *
+ * @param request - The request
+ * @returns The readable string
+ *
+ * @internal
+ */
+export declare const dumpRequest: (request: Readonly<Request>) => Promise<string>;
+/**
+ * Dumps a Response into a readable string.
+ *
+ * @param response - The response
+ * @returns The readable string
+ *
+ * @internal
+ */
+export declare const dumpResponse: (response: Readonly<Response>) => Promise<string>;

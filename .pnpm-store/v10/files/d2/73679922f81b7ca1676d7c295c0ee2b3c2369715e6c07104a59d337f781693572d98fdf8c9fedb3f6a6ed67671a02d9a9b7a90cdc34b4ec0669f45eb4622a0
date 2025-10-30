@@ -1,0 +1,152 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const json = require("../helpers/json.cjs");
+const marshalling = require("../helpers/marshalling.cjs");
+const index = require("../vendor/base64/index.cjs");
+const customTypes = require("./custom-types.cjs");
+const unmarshalMoney = (data) => {
+  if (!json.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Money' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    currencyCode: data.currency_code,
+    nanos: data.nanos,
+    units: data.units
+  };
+};
+const unmarshalServiceInfo = (data) => {
+  if (!json.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServiceInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    description: data.description,
+    documentationUrl: data.documentation_url,
+    name: data.name,
+    version: data.version
+  };
+};
+const unmarshalScwFile = (data) => {
+  if (!json.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ScwFile' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    content: data.content,
+    contentType: data.content_type,
+    name: data.name
+  };
+};
+const unmarshalTimeSeriesPoint = (data) => {
+  if (!Array.isArray(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TimeSeriesPoint' failed as data isn't an array.`
+    );
+  }
+  return {
+    timestamp: marshalling.unmarshalDate(data[0]),
+    value: data[1]
+  };
+};
+const unmarshalTimeSeries = (data) => {
+  if (!json.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TimeSeries' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    metadata: data.metadata,
+    name: data.name,
+    points: marshalling.unmarshalArrayOfObject(data.points, unmarshalTimeSeriesPoint)
+  };
+};
+const unmarshalDecimal = (data) => {
+  if (!(typeof data === "object")) {
+    throw new TypeError(
+      `Unmarshalling the type 'Decimal' failed as data isn't an object.`
+    );
+  }
+  if (data === null) {
+    return null;
+  }
+  if (!("value" in data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Decimal' failed as data object does not have a 'value' key.`
+    );
+  }
+  if (!(typeof data.value === "string")) {
+    throw new TypeError(
+      `Unmarshalling the type 'Decimal' failed as 'value' is not a string.`
+    );
+  }
+  return new customTypes.Decimal(data.value);
+};
+const marshalScwFile = (obj) => ({
+  content: obj.content,
+  content_type: obj.contentType,
+  name: obj.name
+});
+const marshalBlobToScwFile = async (blob) => ({
+  content: index.fromByteArray(new Uint8Array(await blob.arrayBuffer())),
+  content_type: blob.type,
+  name: "file"
+});
+const marshalMoney = (obj) => ({
+  currency_code: obj.currencyCode,
+  nanos: obj.nanos,
+  units: obj.units
+});
+const marshalTimeSeriesPoint = (obj) => ({
+  timestamp: obj.timestamp?.toISOString(),
+  value: obj.value
+});
+const marshalTimeSeries = (obj) => ({
+  metadata: obj.metadata,
+  name: obj.name,
+  points: obj.points.map((elt) => marshalTimeSeriesPoint(elt))
+});
+const marshalDecimal = (obj) => ({
+  value: obj.toString()
+});
+const unmarshalDates = (obj, keys) => {
+  if (Array.isArray(obj)) {
+    return obj.map((v) => unmarshalDates(v, keys));
+  }
+  if (obj && typeof obj === "object") {
+    return Object.entries(obj).reduce(
+      (acc, [key, value]) => ({
+        ...acc,
+        [key]: typeof value === "string" && keys.includes(key) ? new Date(value) : unmarshalDates(value, keys)
+      }),
+      {}
+    );
+  }
+  return obj;
+};
+const unmarshalAnyRes = (obj, ignoreKeys = [], dateKeys) => {
+  if (!json.isJSONObject(obj)) {
+    throw new TypeError(`Data isn't a dictionary.`);
+  }
+  return json.camelizeKeys(
+    dateKeys && dateKeys.length > 0 ? unmarshalDates(obj, dateKeys) : obj,
+    ignoreKeys
+  );
+};
+exports.marshalBlobToScwFile = marshalBlobToScwFile;
+exports.marshalDecimal = marshalDecimal;
+exports.marshalMoney = marshalMoney;
+exports.marshalScwFile = marshalScwFile;
+exports.marshalTimeSeries = marshalTimeSeries;
+exports.marshalTimeSeriesPoint = marshalTimeSeriesPoint;
+exports.unmarshalAnyRes = unmarshalAnyRes;
+exports.unmarshalDates = unmarshalDates;
+exports.unmarshalDecimal = unmarshalDecimal;
+exports.unmarshalMoney = unmarshalMoney;
+exports.unmarshalScwFile = unmarshalScwFile;
+exports.unmarshalServiceInfo = unmarshalServiceInfo;
+exports.unmarshalTimeSeries = unmarshalTimeSeries;
+exports.unmarshalTimeSeriesPoint = unmarshalTimeSeriesPoint;

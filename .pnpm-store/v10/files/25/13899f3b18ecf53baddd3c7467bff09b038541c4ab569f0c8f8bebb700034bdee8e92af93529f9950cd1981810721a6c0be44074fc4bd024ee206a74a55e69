@@ -1,0 +1,49 @@
+const BMC_ACCESS_TRANSIENT_STATUSES = [
+  "creating",
+  "deleting"
+];
+const I_PV6_BLOCK_DELEGATION_TRANSIENT_STATUSES = ["updating"];
+const RPN_GROUP_MEMBER_TRANSIENT_STATUSES = [
+  "creating",
+  "deleting"
+];
+const RPN_SAN_TRANSIENT_STATUSES = [
+  "creating",
+  "deleting"
+];
+const RPN_V2_GROUP_TRANSIENT_STATUSES = [
+  "creating",
+  "updating",
+  "deleting"
+];
+const RPN_V2_MEMBER_TRANSIENT_STATUSES = [
+  "creating",
+  "updating",
+  "deleting"
+];
+const SERVER_INSTALL_TRANSIENT_STATUSES = [
+  "booting",
+  "setting_up_raid",
+  "partitioning",
+  "formatting",
+  "installing",
+  "configuring",
+  "configuring_bootloader",
+  "rebooting"
+];
+const SERVER_TRANSIENT_STATUSES = [
+  "delivering",
+  "installing"
+];
+const SERVICE_PROVISIONING_TRANSIENT_STATUSES = ["delivering", "expiring"];
+export {
+  BMC_ACCESS_TRANSIENT_STATUSES,
+  I_PV6_BLOCK_DELEGATION_TRANSIENT_STATUSES,
+  RPN_GROUP_MEMBER_TRANSIENT_STATUSES,
+  RPN_SAN_TRANSIENT_STATUSES,
+  RPN_V2_GROUP_TRANSIENT_STATUSES,
+  RPN_V2_MEMBER_TRANSIENT_STATUSES,
+  SERVER_INSTALL_TRANSIENT_STATUSES,
+  SERVER_TRANSIENT_STATUSES,
+  SERVICE_PROVISIONING_TRANSIENT_STATUSES
+};

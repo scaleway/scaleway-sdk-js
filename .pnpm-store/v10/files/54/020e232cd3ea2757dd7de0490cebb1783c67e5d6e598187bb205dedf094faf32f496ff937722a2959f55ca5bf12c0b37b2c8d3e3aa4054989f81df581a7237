@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const api_gen = require("./api.gen.cjs");
+const content_gen = require("./content.gen.cjs");
+const marshalling_gen = require("./marshalling.gen.cjs");
+exports.PrivateNetworkAPI = api_gen.PrivateNetworkAPI;
+exports.SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES = content_gen.SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES;
+exports.marshalPrivateNetworkApiAddServerPrivateNetworkRequest = marshalling_gen.marshalPrivateNetworkApiAddServerPrivateNetworkRequest;
+exports.marshalPrivateNetworkApiSetServerPrivateNetworksRequest = marshalling_gen.marshalPrivateNetworkApiSetServerPrivateNetworksRequest;
+exports.unmarshalListServerPrivateNetworksResponse = marshalling_gen.unmarshalListServerPrivateNetworksResponse;
+exports.unmarshalServerPrivateNetwork = marshalling_gen.unmarshalServerPrivateNetwork;
+exports.unmarshalSetServerPrivateNetworksResponse = marshalling_gen.unmarshalSetServerPrivateNetworksResponse;

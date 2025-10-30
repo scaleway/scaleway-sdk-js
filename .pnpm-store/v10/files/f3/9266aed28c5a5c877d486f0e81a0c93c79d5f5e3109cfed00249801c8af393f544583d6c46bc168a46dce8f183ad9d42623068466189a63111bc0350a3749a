@@ -1,0 +1,12 @@
+import { ConsoleLogger } from "./console-logger.js";
+let sdkLogger = new ConsoleLogger("silent");
+const setLogger = (logger) => {
+  sdkLogger = logger;
+};
+const enableConsoleLogger = (logLevel = "warn", prefix = "scaleway-sdk-js:") => setLogger(new ConsoleLogger(logLevel, prefix));
+const getLogger = () => sdkLogger;
+export {
+  enableConsoleLogger,
+  getLogger,
+  setLogger
+};

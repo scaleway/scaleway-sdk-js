@@ -1,0 +1,15 @@
+import type { JSONObject } from '../../../helpers/json.js';
+import { ScalewayError } from '../scw-error.js';
+/**
+ * ResourceNotFound error happens when getting a resource that does not exist anymore.
+ *
+ * @public
+ */
+export declare class ResourceNotFoundError extends ScalewayError {
+    readonly status: number;
+    readonly body: JSONObject;
+    readonly resource: string;
+    readonly resourceId: string;
+    constructor(status: number, body: JSONObject, resource: string, resourceId: string);
+    static fromJSON(status: number, obj: Readonly<JSONObject>): ResourceNotFoundError | null;
+}

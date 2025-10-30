@@ -1,0 +1,7 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const FILE_SYSTEM_TRANSIENT_STATUSES = [
+  "creating",
+  "updating"
+];
+exports.FILE_SYSTEM_TRANSIENT_STATUSES = FILE_SYSTEM_TRANSIENT_STATUSES;

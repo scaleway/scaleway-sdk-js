@@ -1,0 +1,4 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const HUB_TRANSIENT_STATUSES = ["enabling", "disabling"];
+exports.HUB_TRANSIENT_STATUSES = HUB_TRANSIENT_STATUSES;

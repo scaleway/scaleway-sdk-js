@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+var LevelResolver = /* @__PURE__ */ ((LevelResolver2) => {
+  LevelResolver2[LevelResolver2["silent"] = 0] = "silent";
+  LevelResolver2[LevelResolver2["error"] = 1] = "error";
+  LevelResolver2[LevelResolver2["warn"] = 2] = "warn";
+  LevelResolver2[LevelResolver2["info"] = 3] = "info";
+  LevelResolver2[LevelResolver2["debug"] = 4] = "debug";
+  return LevelResolver2;
+})(LevelResolver || {});
+const shouldLog = (currentLevel, level) => LevelResolver[level] <= currentLevel;
+exports.LevelResolver = LevelResolver;
+exports.shouldLog = shouldLog;

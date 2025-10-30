@@ -1,0 +1,8 @@
+const version = "1.2.3";
+const pkg = {
+  version
+};
+export {
+  pkg as default,
+  version
+};

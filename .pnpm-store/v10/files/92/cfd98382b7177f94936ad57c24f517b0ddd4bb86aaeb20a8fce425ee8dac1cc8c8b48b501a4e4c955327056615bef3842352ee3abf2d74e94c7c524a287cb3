@@ -1,0 +1,267 @@
+import randomName from "@scaleway/random-name";
+import { isJSONObject, unmarshalDate, unmarshalArrayOfObject } from "@scaleway/sdk-client";
+const unmarshalNatsAccount = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'NatsAccount' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    endpoint: data.endpoint,
+    id: data.id,
+    name: data.name,
+    projectId: data.project_id,
+    region: data.region,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalFile = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'File' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    content: data.content,
+    name: data.name
+  };
+};
+const unmarshalNatsCredentials = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'NatsCredentials' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    checksum: data.checksum,
+    createdAt: unmarshalDate(data.created_at),
+    credentials: data.credentials ? unmarshalFile(data.credentials) : void 0,
+    id: data.id,
+    name: data.name,
+    natsAccountId: data.nats_account_id,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalSnsPermissions = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SnsPermissions' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    canManage: data.can_manage,
+    canPublish: data.can_publish,
+    canReceive: data.can_receive
+  };
+};
+const unmarshalSnsCredentials = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SnsCredentials' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    accessKey: data.access_key,
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    permissions: data.permissions ? unmarshalSnsPermissions(data.permissions) : void 0,
+    projectId: data.project_id,
+    region: data.region,
+    secretChecksum: data.secret_checksum,
+    secretKey: data.secret_key,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalSqsPermissions = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SqsPermissions' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    canManage: data.can_manage,
+    canPublish: data.can_publish,
+    canReceive: data.can_receive
+  };
+};
+const unmarshalSqsCredentials = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SqsCredentials' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    accessKey: data.access_key,
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    permissions: data.permissions ? unmarshalSqsPermissions(data.permissions) : void 0,
+    projectId: data.project_id,
+    region: data.region,
+    secretChecksum: data.secret_checksum,
+    secretKey: data.secret_key,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalListNatsAccountsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListNatsAccountsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    natsAccounts: unmarshalArrayOfObject(
+      data.nats_accounts,
+      unmarshalNatsAccount
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListNatsCredentialsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListNatsCredentialsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    natsCredentials: unmarshalArrayOfObject(
+      data.nats_credentials,
+      unmarshalNatsCredentials
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListSnsCredentialsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSnsCredentialsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    snsCredentials: unmarshalArrayOfObject(
+      data.sns_credentials,
+      unmarshalSnsCredentials
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListSqsCredentialsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSqsCredentialsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    sqsCredentials: unmarshalArrayOfObject(
+      data.sqs_credentials,
+      unmarshalSqsCredentials
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalSnsInfo = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SnsInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    projectId: data.project_id,
+    region: data.region,
+    snsEndpointUrl: data.sns_endpoint_url,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalSqsInfo = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SqsInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    projectId: data.project_id,
+    region: data.region,
+    sqsEndpointUrl: data.sqs_endpoint_url,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const marshalNatsApiCreateNatsAccountRequest = (request, defaults) => ({
+  name: request.name || randomName("mnq"),
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalNatsApiCreateNatsCredentialsRequest = (request, defaults) => ({
+  name: request.name || randomName("mnq"),
+  nats_account_id: request.natsAccountId
+});
+const marshalNatsApiUpdateNatsAccountRequest = (request, defaults) => ({
+  name: request.name
+});
+const marshalSnsApiActivateSnsRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalSnsPermissions = (request, defaults) => ({
+  can_manage: request.canManage,
+  can_publish: request.canPublish,
+  can_receive: request.canReceive
+});
+const marshalSnsApiCreateSnsCredentialsRequest = (request, defaults) => ({
+  name: request.name || randomName("mnq_sns"),
+  permissions: request.permissions !== void 0 ? marshalSnsPermissions(request.permissions) : void 0,
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalSnsApiDeactivateSnsRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalSnsApiUpdateSnsCredentialsRequest = (request, defaults) => ({
+  name: request.name,
+  permissions: request.permissions !== void 0 ? marshalSnsPermissions(request.permissions) : void 0
+});
+const marshalSqsApiActivateSqsRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalSqsPermissions = (request, defaults) => ({
+  can_manage: request.canManage,
+  can_publish: request.canPublish,
+  can_receive: request.canReceive
+});
+const marshalSqsApiCreateSqsCredentialsRequest = (request, defaults) => ({
+  name: request.name || randomName("mnq_sqs"),
+  permissions: request.permissions !== void 0 ? marshalSqsPermissions(request.permissions) : void 0,
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalSqsApiDeactivateSqsRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalSqsApiUpdateSqsCredentialsRequest = (request, defaults) => ({
+  name: request.name,
+  permissions: request.permissions !== void 0 ? marshalSqsPermissions(request.permissions) : void 0
+});
+export {
+  marshalNatsApiCreateNatsAccountRequest,
+  marshalNatsApiCreateNatsCredentialsRequest,
+  marshalNatsApiUpdateNatsAccountRequest,
+  marshalSnsApiActivateSnsRequest,
+  marshalSnsApiCreateSnsCredentialsRequest,
+  marshalSnsApiDeactivateSnsRequest,
+  marshalSnsApiUpdateSnsCredentialsRequest,
+  marshalSqsApiActivateSqsRequest,
+  marshalSqsApiCreateSqsCredentialsRequest,
+  marshalSqsApiDeactivateSqsRequest,
+  marshalSqsApiUpdateSqsCredentialsRequest,
+  unmarshalListNatsAccountsResponse,
+  unmarshalListNatsCredentialsResponse,
+  unmarshalListSnsCredentialsResponse,
+  unmarshalListSqsCredentialsResponse,
+  unmarshalNatsAccount,
+  unmarshalNatsCredentials,
+  unmarshalSnsCredentials,
+  unmarshalSnsInfo,
+  unmarshalSqsCredentials,
+  unmarshalSqsInfo
+};

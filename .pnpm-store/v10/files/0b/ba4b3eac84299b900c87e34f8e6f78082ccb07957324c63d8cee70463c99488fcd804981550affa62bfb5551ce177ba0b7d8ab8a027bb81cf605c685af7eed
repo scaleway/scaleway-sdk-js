@@ -1,0 +1,22 @@
+export declare const AclRule: {
+    description: {
+        maxLength: number;
+    };
+    dstPortHigh: {
+        lessThanOrEqual: number;
+    };
+    dstPortLow: {
+        lessThanOrEqual: number;
+    };
+    srcPortHigh: {
+        lessThanOrEqual: number;
+    };
+    srcPortLow: {
+        lessThanOrEqual: number;
+    };
+};
+export declare const Route: {
+    description: {
+        maxLength: number;
+    };
+};

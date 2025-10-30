@@ -1,0 +1,8 @@
+const DEPLOYMENT_TRANSIENT_STATUSES = [
+  "creating",
+  "deploying",
+  "deleting"
+];
+export {
+  DEPLOYMENT_TRANSIENT_STATUSES
+};

@@ -1,0 +1,3 @@
+import type { JobRunState } from './types.gen';
+/** Lists transient statutes of the enum {@link JobRunState}. */
+export declare const JOB_RUN_TRANSIENT_STATUSES: JobRunState[];

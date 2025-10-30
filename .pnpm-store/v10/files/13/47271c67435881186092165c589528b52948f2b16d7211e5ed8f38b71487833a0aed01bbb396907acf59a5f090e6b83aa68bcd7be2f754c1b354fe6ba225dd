@@ -1,0 +1,57 @@
+export declare const ContainerHealthCheckSpec: {
+    failureThreshold: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ContainerHealthCheckSpecHTTPProbe: {
+    path: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const ContainerScalingOption: {};
+export declare const CreateTriggerRequest: {
+    description: {
+        maxLength: number;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const CreateTriggerRequestMnqNatsClientConfig: {
+    mnqRegion: {
+        maxLength: number;
+        minLength: number;
+    };
+    subject: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+};
+export declare const CreateTriggerRequestMnqSqsClientConfig: {
+    mnqRegion: {
+        maxLength: number;
+        minLength: number;
+    };
+    queue: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const UpdateContainerRequest: {
+    privateNetworkId: {
+        ignoreEmpty: boolean;
+    };
+};
+export declare const UpdateTriggerRequest: {
+    description: {
+        maxLength: number;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};

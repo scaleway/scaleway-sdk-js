@@ -1,0 +1,38 @@
+import type { RequestInterceptor, ResponseInterceptor } from '../../internal/interceptors/types';
+/**
+ * Mapper of an header entry.
+ *
+ * @internal
+ */
+interface HeaderEntryMapper {
+    (entry: [string, string]): [string, string];
+}
+/**
+ * Creates an interceptor to obfuscate the requests.
+ *
+ * @param obfuscate - The Header entries obfuscator mapper
+ * @returns The obfuscated Request
+ *
+ * @internal
+ */
+export declare const obfuscateInterceptor: (obfuscate: HeaderEntryMapper) => RequestInterceptor;
+/**
+ * Creates an interceptor to log the requests.
+ *
+ * @param identifier - The request identifier
+ * @param obfuscate - The obfuscation interceptor
+ * @returns The interceptor
+ *
+ * @internal
+ */
+export declare const logRequest: (identifier: string, obfuscate?: RequestInterceptor) => RequestInterceptor;
+/**
+ * Creates an interceptor to log the responses.
+ *
+ * @param identifier - The request identifier
+ * @returns The interceptor
+ *
+ * @internal
+ */
+export declare const logResponse: (identifier: string) => ResponseInterceptor;
+export {};

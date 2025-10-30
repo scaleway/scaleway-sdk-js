@@ -1,0 +1,32 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const scwError = require("../scw-error.cjs");
+const buildMessage = (precondition, helpMessage) => {
+  let message = `precondition failed: ${precondition}`;
+  if (typeof helpMessage === "string" && helpMessage.length > 0) {
+    message = message.concat(", ", helpMessage);
+  }
+  return message;
+};
+class PreconditionFailedError extends scwError.ScalewayError {
+  constructor(status, body, precondition, helpMessage) {
+    super(status, body, buildMessage(precondition, helpMessage));
+    this.status = status;
+    this.body = body;
+    this.precondition = precondition;
+    this.helpMessage = helpMessage;
+    this.name = "PreconditionFailedError";
+  }
+  static fromJSON(status, obj) {
+    if (typeof obj.precondition !== "string" || typeof obj.help_message !== "string") {
+      return null;
+    }
+    return new PreconditionFailedError(
+      status,
+      obj,
+      obj.precondition,
+      obj.help_message
+    );
+  }
+}
+exports.PreconditionFailedError = PreconditionFailedError;

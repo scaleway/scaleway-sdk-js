@@ -1,0 +1,9 @@
+import type { BookingStatus, JobStatus, ProcessStatus, SessionStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link BookingStatus}. */
+export declare const BOOKING_TRANSIENT_STATUSES: BookingStatus[];
+/** Lists transient statutes of the enum {@link JobStatus}. */
+export declare const JOB_TRANSIENT_STATUSES: JobStatus[];
+/** Lists transient statutes of the enum {@link ProcessStatus}. */
+export declare const PROCESS_TRANSIENT_STATUSES: ProcessStatus[];
+/** Lists transient statutes of the enum {@link SessionStatus}. */
+export declare const SESSION_TRANSIENT_STATUSES: SessionStatus[];

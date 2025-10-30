@@ -1,0 +1,476 @@
+import { resolveOneOf, isJSONObject, unmarshalDate, unmarshalArrayOfObject } from "@scaleway/sdk-client";
+const unmarshalContactPointEmail = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContactPointEmail' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    to: data.to
+  };
+};
+const unmarshalContactPoint = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContactPoint' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    email: data.email ? unmarshalContactPointEmail(data.email) : void 0,
+    region: data.region,
+    sendResolvedNotifications: data.send_resolved_notifications
+  };
+};
+const unmarshalDataSource = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DataSource' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    origin: data.origin,
+    projectId: data.project_id,
+    region: data.region,
+    retentionDays: data.retention_days,
+    synchronizedWithGrafana: data.synchronized_with_grafana,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at),
+    url: data.url
+  };
+};
+const unmarshalGrafanaProductDashboard = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GrafanaProductDashboard' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    name: data.name,
+    tags: data.tags,
+    title: data.title,
+    url: data.url,
+    variables: data.variables
+  };
+};
+const unmarshalGrafanaUser = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GrafanaUser' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    id: data.id,
+    login: data.login,
+    password: data.password,
+    role: data.role
+  };
+};
+const unmarshalPlan = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Plan' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    logsIngestionPrice: data.logs_ingestion_price,
+    monthlyPrice: data.monthly_price,
+    name: data.name,
+    retentionLogsInterval: data.retention_logs_interval,
+    retentionMetricsInterval: data.retention_metrics_interval,
+    retentionTracesInterval: data.retention_traces_interval,
+    sampleIngestionPrice: data.sample_ingestion_price,
+    tracesIngestionPrice: data.traces_ingestion_price
+  };
+};
+const unmarshalToken = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Token' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    projectId: data.project_id,
+    region: data.region,
+    scopes: data.scopes,
+    secretKey: data.secret_key,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalAlertManager = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AlertManager' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    alertManagerEnabled: data.alert_manager_enabled,
+    alertManagerUrl: data.alert_manager_url,
+    managedAlertsEnabled: data.managed_alerts_enabled,
+    region: data.region
+  };
+};
+const unmarshalDisableAlertRulesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DisableAlertRulesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    disabledRuleIds: data.disabled_rule_ids
+  };
+};
+const unmarshalEnableAlertRulesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EnableAlertRulesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    enabledRuleIds: data.enabled_rule_ids
+  };
+};
+const unmarshalGetConfigResponseRetention = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetConfigResponseRetention' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    defaultDays: data.default_days,
+    maxDays: data.max_days,
+    minDays: data.min_days
+  };
+};
+const unmarshalGetConfigResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetConfigResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    customLogsRetention: data.custom_logs_retention ? unmarshalGetConfigResponseRetention(data.custom_logs_retention) : void 0,
+    customMetricsRetention: data.custom_metrics_retention ? unmarshalGetConfigResponseRetention(data.custom_metrics_retention) : void 0,
+    customTracesRetention: data.custom_traces_retention ? unmarshalGetConfigResponseRetention(data.custom_traces_retention) : void 0,
+    productLogsRetention: data.product_logs_retention ? unmarshalGetConfigResponseRetention(data.product_logs_retention) : void 0,
+    productMetricsRetention: data.product_metrics_retention ? unmarshalGetConfigResponseRetention(data.product_metrics_retention) : void 0
+  };
+};
+const unmarshalRulesCount = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RulesCount' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    dataSourceId: data.data_source_id,
+    dataSourceName: data.data_source_name,
+    rulesCount: data.rules_count
+  };
+};
+const unmarshalGetRulesCountResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetRulesCountResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    customRulesCount: data.custom_rules_count,
+    preconfiguredRulesCount: data.preconfigured_rules_count,
+    rulesCountByDatasource: unmarshalArrayOfObject(
+      data.rules_count_by_datasource,
+      unmarshalRulesCount
+    )
+  };
+};
+const unmarshalGrafana = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Grafana' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    grafanaUrl: data.grafana_url
+  };
+};
+const unmarshalPreconfiguredAlertData = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PreconfiguredAlertData' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    displayDescription: data.display_description,
+    displayName: data.display_name,
+    preconfiguredRuleId: data.preconfigured_rule_id,
+    productFamily: data.product_family,
+    productName: data.product_name
+  };
+};
+const unmarshalAlert = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Alert' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    annotations: data.annotations,
+    dataSourceId: data.data_source_id,
+    duration: data.duration,
+    enabled: data.enabled,
+    name: data.name,
+    preconfigured: data.preconfigured,
+    preconfiguredData: data.preconfigured_data ? unmarshalPreconfiguredAlertData(data.preconfigured_data) : void 0,
+    region: data.region,
+    rule: data.rule,
+    state: data.state ? data.state : void 0
+  };
+};
+const unmarshalListAlertsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListAlertsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    alerts: unmarshalArrayOfObject(data.alerts, unmarshalAlert),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListContactPointsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListContactPointsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    contactPoints: unmarshalArrayOfObject(
+      data.contact_points,
+      unmarshalContactPoint
+    ),
+    hasAdditionalContactPoints: data.has_additional_contact_points,
+    hasAdditionalReceivers: data.has_additional_receivers,
+    totalCount: data.total_count
+  };
+};
+const unmarshalListDataSourcesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDataSourcesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    dataSources: unmarshalArrayOfObject(data.data_sources, unmarshalDataSource),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListGrafanaProductDashboardsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListGrafanaProductDashboardsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    dashboards: unmarshalArrayOfObject(
+      data.dashboards,
+      unmarshalGrafanaProductDashboard
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListGrafanaUsersResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListGrafanaUsersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    grafanaUsers: unmarshalArrayOfObject(
+      data.grafana_users,
+      unmarshalGrafanaUser
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListPlansResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPlansResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    plans: unmarshalArrayOfObject(data.plans, unmarshalPlan),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListTokensResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListTokensResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    tokens: unmarshalArrayOfObject(data.tokens, unmarshalToken),
+    totalCount: data.total_count
+  };
+};
+const unmarshalUsage = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Usage' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    dataSourceId: data.data_source_id,
+    dataSourceOrigin: data.data_source_origin,
+    dataSourceType: data.data_source_type,
+    interval: data.interval,
+    projectId: data.project_id,
+    quantityOverInterval: data.quantity_over_interval,
+    region: data.region,
+    unit: data.unit
+  };
+};
+const unmarshalUsageOverview = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'UsageOverview' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    externalLogsUsage: data.external_logs_usage ? unmarshalUsage(data.external_logs_usage) : void 0,
+    externalMetricsUsage: data.external_metrics_usage ? unmarshalUsage(data.external_metrics_usage) : void 0,
+    externalTracesUsage: data.external_traces_usage ? unmarshalUsage(data.external_traces_usage) : void 0,
+    scalewayLogsUsage: data.scaleway_logs_usage ? unmarshalUsage(data.scaleway_logs_usage) : void 0,
+    scalewayMetricsUsage: data.scaleway_metrics_usage ? unmarshalUsage(data.scaleway_metrics_usage) : void 0
+  };
+};
+const marshalGlobalApiCreateGrafanaUserRequest = (request, defaults) => ({
+  login: request.login,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  role: request.role
+});
+const marshalGlobalApiResetGrafanaUserPasswordRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalGlobalApiSelectPlanRequest = (request, defaults) => ({
+  plan_name: request.planName,
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalGlobalApiSyncGrafanaDataSourcesRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalContactPointEmail = (request, defaults) => ({
+  to: request.to
+});
+const marshalRegionalApiCreateContactPointRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  send_resolved_notifications: request.sendResolvedNotifications,
+  ...resolveOneOf([
+    {
+      param: "email",
+      value: request.email !== void 0 ? marshalContactPointEmail(request.email) : void 0
+    }
+  ])
+});
+const marshalRegionalApiCreateDataSourceRequest = (request, defaults) => ({
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  retention_days: request.retentionDays,
+  type: request.type
+});
+const marshalRegionalApiCreateTokenRequest = (request, defaults) => ({
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  token_scopes: request.tokenScopes !== void 0 ? request.tokenScopes : void 0
+});
+const marshalRegionalApiDeleteContactPointRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  ...resolveOneOf([
+    {
+      param: "email",
+      value: request.email !== void 0 ? marshalContactPointEmail(request.email) : void 0
+    }
+  ])
+});
+const marshalRegionalApiDisableAlertManagerRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalRegionalApiDisableAlertRulesRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  rule_ids: request.ruleIds
+});
+const marshalRegionalApiDisableManagedAlertsRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalRegionalApiEnableAlertManagerRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalRegionalApiEnableAlertRulesRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  rule_ids: request.ruleIds
+});
+const marshalRegionalApiEnableManagedAlertsRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalRegionalApiTriggerTestAlertRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalRegionalApiUpdateContactPointRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  send_resolved_notifications: request.sendResolvedNotifications,
+  ...resolveOneOf([
+    {
+      param: "email",
+      value: request.email !== void 0 ? marshalContactPointEmail(request.email) : void 0
+    }
+  ])
+});
+const marshalRegionalApiUpdateDataSourceRequest = (request, defaults) => ({
+  name: request.name,
+  retention_days: request.retentionDays
+});
+export {
+  marshalGlobalApiCreateGrafanaUserRequest,
+  marshalGlobalApiResetGrafanaUserPasswordRequest,
+  marshalGlobalApiSelectPlanRequest,
+  marshalGlobalApiSyncGrafanaDataSourcesRequest,
+  marshalRegionalApiCreateContactPointRequest,
+  marshalRegionalApiCreateDataSourceRequest,
+  marshalRegionalApiCreateTokenRequest,
+  marshalRegionalApiDeleteContactPointRequest,
+  marshalRegionalApiDisableAlertManagerRequest,
+  marshalRegionalApiDisableAlertRulesRequest,
+  marshalRegionalApiDisableManagedAlertsRequest,
+  marshalRegionalApiEnableAlertManagerRequest,
+  marshalRegionalApiEnableAlertRulesRequest,
+  marshalRegionalApiEnableManagedAlertsRequest,
+  marshalRegionalApiTriggerTestAlertRequest,
+  marshalRegionalApiUpdateContactPointRequest,
+  marshalRegionalApiUpdateDataSourceRequest,
+  unmarshalAlertManager,
+  unmarshalContactPoint,
+  unmarshalDataSource,
+  unmarshalDisableAlertRulesResponse,
+  unmarshalEnableAlertRulesResponse,
+  unmarshalGetConfigResponse,
+  unmarshalGetRulesCountResponse,
+  unmarshalGrafana,
+  unmarshalGrafanaProductDashboard,
+  unmarshalGrafanaUser,
+  unmarshalListAlertsResponse,
+  unmarshalListContactPointsResponse,
+  unmarshalListDataSourcesResponse,
+  unmarshalListGrafanaProductDashboardsResponse,
+  unmarshalListGrafanaUsersResponse,
+  unmarshalListPlansResponse,
+  unmarshalListTokensResponse,
+  unmarshalPlan,
+  unmarshalToken,
+  unmarshalUsageOverview
+};

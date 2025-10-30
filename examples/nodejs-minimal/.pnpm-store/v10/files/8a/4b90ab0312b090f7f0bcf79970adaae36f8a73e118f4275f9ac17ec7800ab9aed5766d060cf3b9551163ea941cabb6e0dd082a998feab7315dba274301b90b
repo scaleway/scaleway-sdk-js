@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const CONTAINER_TRANSIENT_STATUSES = [
+  "deleting",
+  "creating",
+  "pending"
+];
+const CRON_TRANSIENT_STATUSES = [
+  "deleting",
+  "creating",
+  "pending"
+];
+const DOMAIN_TRANSIENT_STATUSES = [
+  "deleting",
+  "creating",
+  "pending"
+];
+const NAMESPACE_TRANSIENT_STATUSES = [
+  "deleting",
+  "creating",
+  "pending"
+];
+const TOKEN_TRANSIENT_STATUSES = ["deleting", "creating"];
+const TRIGGER_TRANSIENT_STATUSES = [
+  "deleting",
+  "creating",
+  "pending"
+];
+exports.CONTAINER_TRANSIENT_STATUSES = CONTAINER_TRANSIENT_STATUSES;
+exports.CRON_TRANSIENT_STATUSES = CRON_TRANSIENT_STATUSES;
+exports.DOMAIN_TRANSIENT_STATUSES = DOMAIN_TRANSIENT_STATUSES;
+exports.NAMESPACE_TRANSIENT_STATUSES = NAMESPACE_TRANSIENT_STATUSES;
+exports.TOKEN_TRANSIENT_STATUSES = TOKEN_TRANSIENT_STATUSES;
+exports.TRIGGER_TRANSIENT_STATUSES = TRIGGER_TRANSIENT_STATUSES;

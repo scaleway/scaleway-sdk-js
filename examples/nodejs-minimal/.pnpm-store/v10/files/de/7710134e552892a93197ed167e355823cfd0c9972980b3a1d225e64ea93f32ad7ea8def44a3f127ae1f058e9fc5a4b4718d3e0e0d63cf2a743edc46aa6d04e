@@ -1,0 +1,71 @@
+import type { ClientConfig } from './client-ini-factory.js';
+import type { Settings } from './client-settings.js';
+import type { Fetcher } from './fetch/build-fetcher.js';
+/**
+ * Scaleway client.
+ */
+export interface Client {
+    fetch: Fetcher;
+    settings: Settings;
+}
+/**
+ * Creates a Scaleway client with advanced options.
+ * You can either use existing factories
+ * (like `withProfile`, `withUserAgentSuffix`, etc)
+ * or write your own using the interface `ClientConfig`.
+ *
+ * @example
+ * Creates a client with factories:
+ * ```
+ * createAdvancedClient(
+ *   (obj: Settings) => ({
+ *     ...obj,
+ *     defaultPageSize: 100 ,
+ *     httpClient: myFetchWrapper,
+ *   }),
+ *   withUserAgentSuffix('bot-name/1.0'),
+ * )
+ * ```
+ *
+ * @throws Error
+ * Thrown if the setup fails.
+ *
+ * @public
+ */
+export declare const createAdvancedClient: (...configs: ClientConfig[]) => Client;
+/**
+ * Creates a Scaleway client with a profile.
+ *
+ * @example
+ * Creates a client with credentials & default values (see https://www.scaleway.com/en/docs/identity-and-access-management/iam/how-to/create-api-keys/):
+ * ```
+ * import { createClient } from '@scaleway/sdk'
+ *
+ * createClient({
+ *   accessKey: 'SCWXXXXXXXXXXXXXXXXX',
+ *   secretKey: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+ *   defaultProjectId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+ *   defaultRegion: 'fr-par',
+ *   defaultZone: 'fr-par-1',
+ * })
+ * ```
+ *
+ * @example
+ * Creates a client by loading values from the environment (see https://www.scaleway.com/en/docs/identity-and-access-management/iam/how-to/create-api-keys/)
+ * or the config file created by CLI `scw init` (see https://www.scaleway.com/en/cli/):
+ * ```
+ * import { loadProfileFromConfigurationFile } from '@scaleway/configuration-loader'
+ * import { createClient } from '@scaleway/sdk'
+ *
+ * createClient({
+ *   ...await loadProfileFromConfigurationFile(),
+ *   defaultZone: 'fr-par-3',
+ * })
+ * ```
+ *
+ * @throws Error
+ * Thrown if the setup fails.
+ *
+ * @public
+ */
+export declare const createClient: (settings?: Partial<Settings>) => Client;

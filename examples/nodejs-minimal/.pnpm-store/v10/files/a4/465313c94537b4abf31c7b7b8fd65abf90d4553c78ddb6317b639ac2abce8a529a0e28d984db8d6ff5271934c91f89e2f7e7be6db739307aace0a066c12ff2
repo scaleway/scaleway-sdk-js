@@ -1,0 +1,7 @@
+import type { ReferenceStatus, SnapshotStatus, VolumeStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link ReferenceStatus}. */
+export declare const REFERENCE_TRANSIENT_STATUSES: ReferenceStatus[];
+/** Lists transient statutes of the enum {@link SnapshotStatus}. */
+export declare const SNAPSHOT_TRANSIENT_STATUSES: SnapshotStatus[];
+/** Lists transient statutes of the enum {@link VolumeStatus}. */
+export declare const VOLUME_TRANSIENT_STATUSES: VolumeStatus[];

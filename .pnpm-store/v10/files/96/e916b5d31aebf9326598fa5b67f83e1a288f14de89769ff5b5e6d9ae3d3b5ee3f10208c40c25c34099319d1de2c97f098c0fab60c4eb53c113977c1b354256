@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const consoleLogger = require("./console-logger.cjs");
+let sdkLogger = new consoleLogger.ConsoleLogger("silent");
+const setLogger = (logger) => {
+  sdkLogger = logger;
+};
+const enableConsoleLogger = (logLevel = "warn", prefix = "scaleway-sdk-js:") => setLogger(new consoleLogger.ConsoleLogger(logLevel, prefix));
+const getLogger = () => sdkLogger;
+exports.enableConsoleLogger = enableConsoleLogger;
+exports.getLogger = getLogger;
+exports.setLogger = setLogger;

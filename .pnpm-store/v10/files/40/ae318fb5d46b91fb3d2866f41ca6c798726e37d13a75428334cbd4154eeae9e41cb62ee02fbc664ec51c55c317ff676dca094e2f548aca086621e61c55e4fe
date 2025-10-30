@@ -1,0 +1,31 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const index = require("../internal/logger/index.cjs");
+const clientIniFactory = require("./client-ini-factory.cjs");
+const clientSettings = require("./client-settings.cjs");
+const constants = require("./constants.cjs");
+const buildFetcher = require("./fetch/build-fetcher.cjs");
+const DEFAULT_SETTINGS = {
+  apiURL: "https://api.scaleway.com",
+  httpClient: fetch,
+  interceptors: [],
+  userAgent: constants.userAgent
+};
+const createAdvancedClient = (...configs) => {
+  const settings = configs.concat([clientIniFactory.withLegacyInterceptors()]).reduce(
+    (currentSettings, config) => config(currentSettings),
+    DEFAULT_SETTINGS
+  );
+  clientSettings.assertValidSettings(settings);
+  index.getLogger().info(`init Scaleway SDK version ${constants.version}`);
+  return {
+    fetch: buildFetcher.buildFetcher(settings, settings.httpClient),
+    settings
+  };
+};
+const createClient = (settings = {}) => createAdvancedClient(
+  clientIniFactory.withProfile(settings),
+  clientIniFactory.withAdditionalInterceptors(settings.interceptors ?? [])
+);
+exports.createAdvancedClient = createAdvancedClient;
+exports.createClient = createClient;

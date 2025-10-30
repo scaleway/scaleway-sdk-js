@@ -1,0 +1,532 @@
+import randomName from "@scaleway/random-name";
+import { resolveOneOf, isJSONObject, unmarshalArrayOfObject, unmarshalDate, unmarshalTimeSeries } from "@scaleway/sdk-client";
+const unmarshalDeviceMessageFiltersRule = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DeviceMessageFiltersRule' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    policy: data.policy,
+    topics: data.topics
+  };
+};
+const unmarshalDeviceMessageFilters = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DeviceMessageFilters' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    publish: data.publish ? unmarshalDeviceMessageFiltersRule(data.publish) : void 0,
+    subscribe: data.subscribe ? unmarshalDeviceMessageFiltersRule(data.subscribe) : void 0
+  };
+};
+const unmarshalDevice = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Device' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    allowInsecure: data.allow_insecure,
+    allowMultipleConnections: data.allow_multiple_connections,
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description,
+    hasCustomCertificate: data.has_custom_certificate,
+    hubId: data.hub_id,
+    id: data.id,
+    isConnected: data.is_connected,
+    lastActivityAt: unmarshalDate(data.last_activity_at),
+    messageFilters: data.message_filters ? unmarshalDeviceMessageFilters(data.message_filters) : void 0,
+    name: data.name,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalNetwork = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Network' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    endpoint: data.endpoint,
+    hubId: data.hub_id,
+    id: data.id,
+    name: data.name,
+    topicPrefix: data.topic_prefix,
+    type: data.type
+  };
+};
+const unmarshalHubTwinsGraphiteConfig = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HubTwinsGraphiteConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    pushUri: data.push_uri
+  };
+};
+const unmarshalHub = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Hub' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    connectedDeviceCount: data.connected_device_count,
+    createdAt: unmarshalDate(data.created_at),
+    deviceCount: data.device_count,
+    disableEvents: data.disable_events,
+    enableDeviceAutoProvisioning: data.enable_device_auto_provisioning,
+    enabled: data.enabled,
+    endpoint: data.endpoint,
+    eventsTopicPrefix: data.events_topic_prefix,
+    hasCustomCa: data.has_custom_ca,
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    productPlan: data.product_plan,
+    projectId: data.project_id,
+    region: data.region,
+    status: data.status,
+    twinsGraphiteConfig: data.twins_graphite_config ? unmarshalHubTwinsGraphiteConfig(data.twins_graphite_config) : void 0,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalCertificate = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Certificate' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    crt: data.crt,
+    key: data.key
+  };
+};
+const unmarshalCreateDeviceResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CreateDeviceResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    certificate: data.certificate ? unmarshalCertificate(data.certificate) : void 0,
+    device: data.device ? unmarshalDevice(data.device) : void 0
+  };
+};
+const unmarshalCreateNetworkResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CreateNetworkResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    network: data.network ? unmarshalNetwork(data.network) : void 0,
+    secret: data.secret
+  };
+};
+const unmarshalGetDeviceCertificateResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetDeviceCertificateResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    certificatePem: data.certificate_pem,
+    device: data.device ? unmarshalDevice(data.device) : void 0
+  };
+};
+const unmarshalGetDeviceMetricsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetDeviceMetricsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    metrics: unmarshalArrayOfObject(data.metrics, unmarshalTimeSeries)
+  };
+};
+const unmarshalGetHubCAResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetHubCAResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    caCertPem: data.ca_cert_pem
+  };
+};
+const unmarshalGetHubMetricsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetHubMetricsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    metrics: unmarshalArrayOfObject(data.metrics, unmarshalTimeSeries)
+  };
+};
+const unmarshalListDevicesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDevicesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    devices: unmarshalArrayOfObject(data.devices, unmarshalDevice),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListHubsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListHubsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    hubs: unmarshalArrayOfObject(data.hubs, unmarshalHub),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListNetworksResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListNetworksResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    networks: unmarshalArrayOfObject(data.networks, unmarshalNetwork),
+    totalCount: data.total_count
+  };
+};
+const unmarshalRouteSummary = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RouteSummary' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    hubId: data.hub_id,
+    id: data.id,
+    name: data.name,
+    topic: data.topic,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalListRoutesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRoutesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    routes: unmarshalArrayOfObject(data.routes, unmarshalRouteSummary),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListTwinDocumentsResponseDocumentSummary = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListTwinDocumentsResponseDocumentSummary' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    documentName: data.document_name
+  };
+};
+const unmarshalListTwinDocumentsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListTwinDocumentsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    documents: unmarshalArrayOfObject(
+      data.documents,
+      unmarshalListTwinDocumentsResponseDocumentSummary
+    )
+  };
+};
+const unmarshalRenewDeviceCertificateResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RenewDeviceCertificateResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    certificate: data.certificate ? unmarshalCertificate(data.certificate) : void 0,
+    device: data.device ? unmarshalDevice(data.device) : void 0
+  };
+};
+const unmarshalRouteDatabaseConfig = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RouteDatabaseConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    dbname: data.dbname,
+    engine: data.engine,
+    host: data.host,
+    password: data.password,
+    port: data.port,
+    query: data.query,
+    username: data.username
+  };
+};
+const unmarshalRouteRestConfig = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RouteRestConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    headers: data.headers,
+    uri: data.uri,
+    verb: data.verb
+  };
+};
+const unmarshalRouteS3Config = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RouteS3Config' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    bucketName: data.bucket_name,
+    bucketRegion: data.bucket_region,
+    objectPrefix: data.object_prefix,
+    strategy: data.strategy
+  };
+};
+const unmarshalRoute = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Route' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    dbConfig: data.db_config ? unmarshalRouteDatabaseConfig(data.db_config) : void 0,
+    hubId: data.hub_id,
+    id: data.id,
+    name: data.name,
+    restConfig: data.rest_config ? unmarshalRouteRestConfig(data.rest_config) : void 0,
+    s3Config: data.s3_config ? unmarshalRouteS3Config(data.s3_config) : void 0,
+    topic: data.topic,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalSetDeviceCertificateResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetDeviceCertificateResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    certificatePem: data.certificate_pem,
+    device: data.device ? unmarshalDevice(data.device) : void 0
+  };
+};
+const unmarshalTwinDocument = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TwinDocument' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    data: data.data,
+    documentName: data.document_name,
+    twinId: data.twin_id,
+    version: data.version
+  };
+};
+const marshalDeviceMessageFiltersRule = (request, defaults) => ({
+  policy: request.policy,
+  topics: request.topics
+});
+const marshalDeviceMessageFilters = (request, defaults) => ({
+  publish: request.publish !== void 0 ? marshalDeviceMessageFiltersRule(request.publish) : void 0,
+  subscribe: request.subscribe !== void 0 ? marshalDeviceMessageFiltersRule(request.subscribe) : void 0
+});
+const marshalCreateDeviceRequest = (request, defaults) => ({
+  allow_insecure: request.allowInsecure,
+  allow_multiple_connections: request.allowMultipleConnections,
+  description: request.description,
+  hub_id: request.hubId,
+  message_filters: request.messageFilters !== void 0 ? marshalDeviceMessageFilters(request.messageFilters) : void 0,
+  name: request.name || randomName("device")
+});
+const marshalHubTwinsGraphiteConfig = (request, defaults) => ({
+  push_uri: request.pushUri
+});
+const marshalCreateHubRequest = (request, defaults) => ({
+  disable_events: request.disableEvents,
+  events_topic_prefix: request.eventsTopicPrefix,
+  name: request.name || randomName("hub"),
+  product_plan: request.productPlan,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  ...resolveOneOf([
+    {
+      param: "twins_graphite_config",
+      value: request.twinsGraphiteConfig !== void 0 ? marshalHubTwinsGraphiteConfig(request.twinsGraphiteConfig) : void 0
+    }
+  ])
+});
+const marshalCreateNetworkRequest = (request, defaults) => ({
+  hub_id: request.hubId,
+  name: request.name || randomName("network"),
+  topic_prefix: request.topicPrefix,
+  type: request.type
+});
+const marshalCreateRouteRequestDatabaseConfig = (request, defaults) => ({
+  dbname: request.dbname,
+  engine: request.engine,
+  host: request.host,
+  password: request.password,
+  port: request.port,
+  query: request.query,
+  username: request.username
+});
+const marshalCreateRouteRequestRestConfig = (request, defaults) => ({
+  headers: request.headers,
+  uri: request.uri,
+  verb: request.verb
+});
+const marshalCreateRouteRequestS3Config = (request, defaults) => ({
+  bucket_name: request.bucketName,
+  bucket_region: request.bucketRegion,
+  object_prefix: request.objectPrefix,
+  strategy: request.strategy
+});
+const marshalCreateRouteRequest = (request, defaults) => ({
+  hub_id: request.hubId,
+  name: request.name || randomName("route"),
+  topic: request.topic,
+  ...resolveOneOf([
+    {
+      param: "s3_config",
+      value: request.s3Config !== void 0 ? marshalCreateRouteRequestS3Config(request.s3Config) : void 0
+    },
+    {
+      param: "db_config",
+      value: request.dbConfig !== void 0 ? marshalCreateRouteRequestDatabaseConfig(request.dbConfig) : void 0
+    },
+    {
+      param: "rest_config",
+      value: request.restConfig !== void 0 ? marshalCreateRouteRequestRestConfig(request.restConfig) : void 0
+    }
+  ])
+});
+const marshalPatchTwinDocumentRequest = (request, defaults) => ({
+  data: request.data,
+  version: request.version
+});
+const marshalPutTwinDocumentRequest = (request, defaults) => ({
+  data: request.data,
+  version: request.version
+});
+const marshalSetDeviceCertificateRequest = (request, defaults) => ({
+  certificate_pem: request.certificatePem
+});
+const marshalSetHubCARequest = (request, defaults) => ({
+  ca_cert_pem: request.caCertPem,
+  challenge_cert_pem: request.challengeCertPem
+});
+const marshalUpdateDeviceRequest = (request, defaults) => ({
+  allow_insecure: request.allowInsecure,
+  allow_multiple_connections: request.allowMultipleConnections,
+  description: request.description,
+  hub_id: request.hubId,
+  message_filters: request.messageFilters !== void 0 ? marshalDeviceMessageFilters(request.messageFilters) : void 0
+});
+const marshalUpdateHubRequest = (request, defaults) => ({
+  disable_events: request.disableEvents,
+  enable_device_auto_provisioning: request.enableDeviceAutoProvisioning,
+  events_topic_prefix: request.eventsTopicPrefix,
+  name: request.name,
+  product_plan: request.productPlan,
+  ...resolveOneOf([
+    {
+      param: "twins_graphite_config",
+      value: request.twinsGraphiteConfig !== void 0 ? marshalHubTwinsGraphiteConfig(request.twinsGraphiteConfig) : void 0
+    }
+  ])
+});
+const marshalUpdateRouteRequestDatabaseConfig = (request, defaults) => ({
+  dbname: request.dbname,
+  engine: request.engine,
+  host: request.host,
+  password: request.password,
+  port: request.port,
+  query: request.query,
+  username: request.username
+});
+const marshalUpdateRouteRequestRestConfig = (request, defaults) => ({
+  headers: request.headers,
+  uri: request.uri,
+  verb: request.verb
+});
+const marshalUpdateRouteRequestS3Config = (request, defaults) => ({
+  bucket_name: request.bucketName,
+  bucket_region: request.bucketRegion,
+  object_prefix: request.objectPrefix,
+  strategy: request.strategy
+});
+const marshalUpdateRouteRequest = (request, defaults) => ({
+  name: request.name,
+  topic: request.topic,
+  ...resolveOneOf([
+    {
+      param: "s3_config",
+      value: request.s3Config !== void 0 ? marshalUpdateRouteRequestS3Config(request.s3Config) : void 0
+    },
+    {
+      param: "db_config",
+      value: request.dbConfig !== void 0 ? marshalUpdateRouteRequestDatabaseConfig(request.dbConfig) : void 0
+    },
+    {
+      param: "rest_config",
+      value: request.restConfig !== void 0 ? marshalUpdateRouteRequestRestConfig(request.restConfig) : void 0
+    }
+  ])
+});
+export {
+  marshalCreateDeviceRequest,
+  marshalCreateHubRequest,
+  marshalCreateNetworkRequest,
+  marshalCreateRouteRequest,
+  marshalPatchTwinDocumentRequest,
+  marshalPutTwinDocumentRequest,
+  marshalSetDeviceCertificateRequest,
+  marshalSetHubCARequest,
+  marshalUpdateDeviceRequest,
+  marshalUpdateHubRequest,
+  marshalUpdateRouteRequest,
+  unmarshalCreateDeviceResponse,
+  unmarshalCreateNetworkResponse,
+  unmarshalDevice,
+  unmarshalGetDeviceCertificateResponse,
+  unmarshalGetDeviceMetricsResponse,
+  unmarshalGetHubCAResponse,
+  unmarshalGetHubMetricsResponse,
+  unmarshalHub,
+  unmarshalListDevicesResponse,
+  unmarshalListHubsResponse,
+  unmarshalListNetworksResponse,
+  unmarshalListRoutesResponse,
+  unmarshalListTwinDocumentsResponse,
+  unmarshalNetwork,
+  unmarshalRenewDeviceCertificateResponse,
+  unmarshalRoute,
+  unmarshalSetDeviceCertificateResponse,
+  unmarshalTwinDocument
+};

@@ -1,0 +1,62 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const CreateDatabaseRequest = {
+  cpuMax: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 15
+  },
+  cpuMin: {
+    lessThanOrEqual: 15
+  },
+  fromBackupId: {
+    ignoreEmpty: true
+  },
+  name: {
+    maxLength: 63,
+    minLength: 1
+  }
+};
+const Database = {
+  cpuCurrent: {
+    lessThanOrEqual: 15
+  },
+  cpuMax: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 15
+  },
+  cpuMin: {
+    lessThanOrEqual: 15
+  }
+};
+const ListDatabaseBackupsRequest = {
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e3
+  }
+};
+const ListDatabasesRequest = {
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e3
+  }
+};
+const UpdateDatabaseRequest = {
+  cpuMax: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 15
+  },
+  cpuMin: {
+    lessThanOrEqual: 15
+  }
+};
+exports.CreateDatabaseRequest = CreateDatabaseRequest;
+exports.Database = Database;
+exports.ListDatabaseBackupsRequest = ListDatabaseBackupsRequest;
+exports.ListDatabasesRequest = ListDatabasesRequest;
+exports.UpdateDatabaseRequest = UpdateDatabaseRequest;

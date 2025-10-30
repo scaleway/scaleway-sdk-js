@@ -1,0 +1,55 @@
+export declare const CreateDatabaseRequest: {
+    cpuMax: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    cpuMin: {
+        lessThanOrEqual: number;
+    };
+    fromBackupId: {
+        ignoreEmpty: boolean;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const Database: {
+    cpuCurrent: {
+        lessThanOrEqual: number;
+    };
+    cpuMax: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    cpuMin: {
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListDatabaseBackupsRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListDatabasesRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const UpdateDatabaseRequest: {
+    cpuMax: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    cpuMin: {
+        lessThanOrEqual: number;
+    };
+};

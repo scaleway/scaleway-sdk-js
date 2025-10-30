@@ -1,0 +1,60 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalServerPrivateNetwork = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerPrivateNetwork' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    id: data.id,
+    ipamIpIds: data.ipam_ip_ids,
+    privateNetworkId: data.private_network_id,
+    projectId: data.project_id,
+    serverId: data.server_id,
+    status: data.status,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    vlan: data.vlan
+  };
+};
+const unmarshalListServerPrivateNetworksResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListServerPrivateNetworksResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    serverPrivateNetworks: sdkClient.unmarshalArrayOfObject(
+      data.server_private_networks,
+      unmarshalServerPrivateNetwork
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalSetServerPrivateNetworksResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetServerPrivateNetworksResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    serverPrivateNetworks: sdkClient.unmarshalArrayOfObject(
+      data.server_private_networks,
+      unmarshalServerPrivateNetwork
+    )
+  };
+};
+const marshalPrivateNetworkApiAddServerPrivateNetworkRequest = (request, defaults) => ({
+  ipam_ip_ids: request.ipamIpIds,
+  private_network_id: request.privateNetworkId
+});
+const marshalPrivateNetworkApiSetServerPrivateNetworksRequest = (request, defaults) => ({
+  per_private_network_ipam_ip_ids: request.perPrivateNetworkIpamIpIds
+});
+exports.marshalPrivateNetworkApiAddServerPrivateNetworkRequest = marshalPrivateNetworkApiAddServerPrivateNetworkRequest;
+exports.marshalPrivateNetworkApiSetServerPrivateNetworksRequest = marshalPrivateNetworkApiSetServerPrivateNetworksRequest;
+exports.unmarshalListServerPrivateNetworksResponse = unmarshalListServerPrivateNetworksResponse;
+exports.unmarshalServerPrivateNetwork = unmarshalServerPrivateNetwork;
+exports.unmarshalSetServerPrivateNetworksResponse = unmarshalSetServerPrivateNetworksResponse;

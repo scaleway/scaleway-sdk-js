@@ -1,0 +1,10 @@
+const CLUSTER_TRANSIENT_STATUSES = [
+  "provisioning",
+  "configuring",
+  "deleting",
+  "autohealing",
+  "initializing"
+];
+export {
+  CLUSTER_TRANSIENT_STATUSES
+};

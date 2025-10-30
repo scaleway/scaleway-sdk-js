@@ -1,0 +1,34 @@
+export declare const CreateFileSystemRequest: {
+    name: {
+        minLength: number;
+    };
+    size: {
+        greaterThan: number;
+    };
+};
+export declare const ListAttachmentsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListFileSystemsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const UpdateFileSystemRequest: {
+    name: {
+        minLength: number;
+    };
+    size: {
+        greaterThan: number;
+    };
+};

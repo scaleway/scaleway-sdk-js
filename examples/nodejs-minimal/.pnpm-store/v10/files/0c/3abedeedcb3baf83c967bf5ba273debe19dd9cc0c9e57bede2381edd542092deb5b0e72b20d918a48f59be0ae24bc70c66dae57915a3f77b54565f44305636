@@ -1,0 +1,8 @@
+export declare const PublicCatalogApiListPublicCatalogProductsRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+    };
+};

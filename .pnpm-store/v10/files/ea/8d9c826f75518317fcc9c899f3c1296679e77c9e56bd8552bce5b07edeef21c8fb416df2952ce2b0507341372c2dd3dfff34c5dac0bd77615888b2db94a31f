@@ -1,0 +1,254 @@
+export namespace NAMED_COLORS {
+    let aliceblue: number[];
+    let antiquewhite: number[];
+    let aqua: number[];
+    let aquamarine: number[];
+    let azure: number[];
+    let beige: number[];
+    let bisque: number[];
+    let black: number[];
+    let blanchedalmond: number[];
+    let blue: number[];
+    let blueviolet: number[];
+    let brown: number[];
+    let burlywood: number[];
+    let cadetblue: number[];
+    let chartreuse: number[];
+    let chocolate: number[];
+    let coral: number[];
+    let cornflowerblue: number[];
+    let cornsilk: number[];
+    let crimson: number[];
+    let cyan: number[];
+    let darkblue: number[];
+    let darkcyan: number[];
+    let darkgoldenrod: number[];
+    let darkgray: number[];
+    let darkgreen: number[];
+    let darkgrey: number[];
+    let darkkhaki: number[];
+    let darkmagenta: number[];
+    let darkolivegreen: number[];
+    let darkorange: number[];
+    let darkorchid: number[];
+    let darkred: number[];
+    let darksalmon: number[];
+    let darkseagreen: number[];
+    let darkslateblue: number[];
+    let darkslategray: number[];
+    let darkslategrey: number[];
+    let darkturquoise: number[];
+    let darkviolet: number[];
+    let deeppink: number[];
+    let deepskyblue: number[];
+    let dimgray: number[];
+    let dimgrey: number[];
+    let dodgerblue: number[];
+    let firebrick: number[];
+    let floralwhite: number[];
+    let forestgreen: number[];
+    let fuchsia: number[];
+    let gainsboro: number[];
+    let ghostwhite: number[];
+    let gold: number[];
+    let goldenrod: number[];
+    let gray: number[];
+    let green: number[];
+    let greenyellow: number[];
+    let grey: number[];
+    let honeydew: number[];
+    let hotpink: number[];
+    let indianred: number[];
+    let indigo: number[];
+    let ivory: number[];
+    let khaki: number[];
+    let lavender: number[];
+    let lavenderblush: number[];
+    let lawngreen: number[];
+    let lemonchiffon: number[];
+    let lightblue: number[];
+    let lightcoral: number[];
+    let lightcyan: number[];
+    let lightgoldenrodyellow: number[];
+    let lightgray: number[];
+    let lightgreen: number[];
+    let lightgrey: number[];
+    let lightpink: number[];
+    let lightsalmon: number[];
+    let lightseagreen: number[];
+    let lightskyblue: number[];
+    let lightslategray: number[];
+    let lightslategrey: number[];
+    let lightsteelblue: number[];
+    let lightyellow: number[];
+    let lime: number[];
+    let limegreen: number[];
+    let linen: number[];
+    let magenta: number[];
+    let maroon: number[];
+    let mediumaquamarine: number[];
+    let mediumblue: number[];
+    let mediumorchid: number[];
+    let mediumpurple: number[];
+    let mediumseagreen: number[];
+    let mediumslateblue: number[];
+    let mediumspringgreen: number[];
+    let mediumturquoise: number[];
+    let mediumvioletred: number[];
+    let midnightblue: number[];
+    let mintcream: number[];
+    let mistyrose: number[];
+    let moccasin: number[];
+    let navajowhite: number[];
+    let navy: number[];
+    let oldlace: number[];
+    let olive: number[];
+    let olivedrab: number[];
+    let orange: number[];
+    let orangered: number[];
+    let orchid: number[];
+    let palegoldenrod: number[];
+    let palegreen: number[];
+    let paleturquoise: number[];
+    let palevioletred: number[];
+    let papayawhip: number[];
+    let peachpuff: number[];
+    let peru: number[];
+    let pink: number[];
+    let plum: number[];
+    let powderblue: number[];
+    let purple: number[];
+    let rebeccapurple: number[];
+    let red: number[];
+    let rosybrown: number[];
+    let royalblue: number[];
+    let saddlebrown: number[];
+    let salmon: number[];
+    let sandybrown: number[];
+    let seagreen: number[];
+    let seashell: number[];
+    let sienna: number[];
+    let silver: number[];
+    let skyblue: number[];
+    let slateblue: number[];
+    let slategray: number[];
+    let slategrey: number[];
+    let snow: number[];
+    let springgreen: number[];
+    let steelblue: number[];
+    let tan: number[];
+    let teal: number[];
+    let thistle: number[];
+    let tomato: number[];
+    let turquoise: number[];
+    let violet: number[];
+    let wheat: number[];
+    let white: number[];
+    let whitesmoke: number[];
+    let yellow: number[];
+    let yellowgreen: number[];
+}
+export function validateColorComponents(arr: any[], opt?: {
+    alpha?: boolean;
+    minLength?: number;
+    maxLength?: number;
+    minRange?: number;
+    maxRange?: number;
+    validateRange?: boolean;
+}): any[];
+export function transformMatrix(mtx: Array<Array<number>>, vct: Array<number>, skip?: boolean): Array<number>;
+export function normalizeColorComponents(colorA: any[], colorB: any[], skip?: boolean): Array<Array<number>>;
+export function numberToHexString(value: number): string;
+export function angleToDeg(angle: string): number;
+export function parseAlpha(alpha?: string | null): number;
+export function parseHexAlpha(value: string): number;
+export function convertRgbToLinearRgb(rgb: Array<number>, skip?: boolean): Array<number>;
+export function convertRgbToXyz(rgb: Array<number>, skip?: boolean): Array<number>;
+export function convertRgbToXyzD50(rgb: Array<number>): Array<number>;
+export function convertRgbToHex(rgb: Array<number>): string;
+export function convertLinearRgbToRgb(rgb: Array<number>, round?: boolean): Array<number>;
+export function convertLinearRgbToHex(rgb: Array<number>, skip?: boolean): string;
+export function convertXyzToHex(xyz: Array<number>): string;
+export function convertXyzD50ToHex(xyz: Array<number>): string;
+export function convertXyzToRgb(xyz: Array<number>, skip?: boolean): Array<number>;
+export function convertXyzToXyzD50(xyz: Array<number>): Array<number>;
+export function convertXyzToHsl(xyz: Array<number>, skip?: boolean): Array<number>;
+export function convertXyzToHwb(xyz: Array<number>, skip?: boolean): Array<number>;
+export function convertXyzToOklab(xyz: Array<number>, skip?: boolean): Array<number>;
+export function convertXyzToOklch(xyz: Array<number>, skip?: boolean): Array<number>;
+export function convertXyzD50ToRgb(xyz: Array<number>, skip?: boolean): Array<number>;
+export function convertXyzD50ToLab(xyz: Array<number>, skip?: boolean): Array<number>;
+export function convertXyzD50ToLch(xyz: Array<number>, skip?: boolean): Array<number>;
+export function convertHexToRgb(value: string): Array<number>;
+export function convertHexToLinearRgb(value: string): Array<number>;
+export function convertHexToXyz(value: string): Array<number>;
+export function parseRgb(value: string, opt?: {
+    format?: string;
+}): Array<string | number> | string;
+export function parseHsl(value: string, opt?: {
+    format?: string;
+}): Array<string | number> | (string | null);
+export function parseHwb(value: string, opt?: {
+    format?: string;
+}): Array<string | number> | (string | null);
+export function parseLab(value: string, opt?: {
+    format?: string;
+}): Array<string | number> | (string | null);
+export function parseLch(value: string, opt?: {
+    format?: string;
+}): Array<string | number> | (string | null);
+export function parseOklab(value: string, opt?: {
+    format?: string;
+}): Array<string | number> | (string | null);
+export function parseOklch(value: string, opt?: {
+    format?: string;
+}): Array<string | number> | (string | null);
+export function parseColorFunc(value: string, opt?: {
+    colorSpace?: string;
+    d50?: boolean;
+    format?: string;
+}): Array<string | number> | (string | null);
+export function parseColorValue(value: string, opt?: {
+    d50?: boolean;
+    format?: string;
+}): Array<string | number> | (string | null);
+export function resolveColorValue(value: string, opt?: {
+    colorSpace?: string;
+    format?: string;
+}): Array<string | number> | (string | null);
+export function resolveColorFunc(value: string, opt?: {
+    colorSpace?: string;
+    format?: string;
+}): Array<string | number> | (string | null);
+export function convertColorToLinearRgb(value: string, opt?: {
+    colorSpace?: string;
+    format?: string;
+}): Array<number>;
+export function convertColorToRgb(value: string, opt?: {
+    format?: string;
+}): Array<number>;
+export function convertColorToXyz(value: string, opt?: {
+    d50?: boolean;
+    format?: string;
+}): Array<number>;
+export function convertColorToHsl(value: string, opt?: {
+    format?: string;
+}): Array<number>;
+export function convertColorToHwb(value: string, opt?: {
+    format?: string;
+}): Array<number>;
+export function convertColorToLab(value: string, opt?: {
+    format?: string;
+}): Array<number>;
+export function convertColorToLch(value: string, opt?: {
+    format?: string;
+}): Array<number>;
+export function convertColorToOklab(value: string, opt?: {
+    format?: string;
+}): Array<number>;
+export function convertColorToOklch(value: string, opt?: {
+    format?: string;
+}): Array<number>;
+export function resolveColorMix(value: string, opt?: {
+    format?: string;
+}): Array<string | number> | (string | null);

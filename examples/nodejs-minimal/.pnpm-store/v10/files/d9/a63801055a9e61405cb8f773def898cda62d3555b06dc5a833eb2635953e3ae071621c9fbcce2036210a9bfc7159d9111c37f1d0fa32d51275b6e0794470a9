@@ -1,0 +1,285 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client';
+import type { AddOptionServerRequest, BMCAccess, CreateServerRequest, DeleteOptionServerRequest, DeleteServerRequest, GetBMCAccessRequest, GetDefaultPartitioningSchemaRequest, GetOSRequest, GetOfferRequest, GetOptionRequest, GetServerMetricsRequest, GetServerMetricsResponse, GetServerRequest, IP, InstallServerRequest, ListOSRequest, ListOSResponse, ListOffersRequest, ListOffersResponse, ListOptionsRequest, ListOptionsResponse, ListServerEventsRequest, ListServerEventsResponse, ListServerPrivateNetworksResponse, ListServersRequest, ListServersResponse, ListSettingsRequest, ListSettingsResponse, MigrateServerToMonthlyOfferRequest, OS, Offer, Option, PrivateNetworkApiAddServerPrivateNetworkRequest, PrivateNetworkApiDeleteServerPrivateNetworkRequest, PrivateNetworkApiListServerPrivateNetworksRequest, PrivateNetworkApiSetServerPrivateNetworksRequest, RebootServerRequest, Schema, Server, ServerPrivateNetwork, SetServerPrivateNetworksResponse, Setting, StartBMCAccessRequest, StartServerRequest, StopBMCAccessRequest, StopServerRequest, UpdateIPRequest, UpdateServerRequest, UpdateSettingRequest, ValidatePartitioningSchemaRequest } from './types.gen';
+/**
+ * Elastic Metal API.
+
+This API allows you to manage your Elastic Metal servers.
+ */
+export declare class API extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    protected pageOfListServers: (request?: Readonly<ListServersRequest>) => Promise<ListServersResponse>;
+    /**
+     * List Elastic Metal servers for an Organization. List Elastic Metal servers for a specific Organization.
+     *
+     * @param request - The request {@link ListServersRequest}
+     * @returns A Promise of ListServersResponse
+     */
+    listServers: (request?: Readonly<ListServersRequest>) => Promise<ListServersResponse> & {
+        all: () => Promise<Server[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Server[], void, void>;
+    };
+    /**
+     * Get a specific Elastic Metal server. Get full details of an existing Elastic Metal server associated with the ID.
+     *
+     * @param request - The request {@link GetServerRequest}
+     * @returns A Promise of Server
+     */
+    getServer: (request: Readonly<GetServerRequest>) => Promise<Server>;
+    /**
+     * Waits for {@link Server} to be in a final state.
+     *
+     * @param request - The request {@link GetServerRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Server
+     */
+    waitForServer: (request: Readonly<GetServerRequest>, options?: Readonly<WaitForOptions<Server>>) => Promise<Server>;
+    /**
+     * Create an Elastic Metal server. Create a new Elastic Metal server. Once the server is created, proceed with the [installation of an OS](#post-3e949e).
+     *
+     * @param request - The request {@link CreateServerRequest}
+     * @returns A Promise of Server
+     */
+    createServer: (request: Readonly<CreateServerRequest>) => Promise<Server>;
+    /**
+     * Update an Elastic Metal server. Update the server associated with the ID. You can update parameters such as the server's name, tags and description. Any parameters left null in the request body are not updated.
+     *
+     * @param request - The request {@link UpdateServerRequest}
+     * @returns A Promise of Server
+     */
+    updateServer: (request: Readonly<UpdateServerRequest>) => Promise<Server>;
+    /**
+     * Install an Elastic Metal server. Install an Operating System (OS) on the Elastic Metal server with a specific ID.
+     *
+     * @param request - The request {@link InstallServerRequest}
+     * @returns A Promise of Server
+     */
+    installServer: (request: Readonly<InstallServerRequest>) => Promise<Server>;
+    /**
+     * Return server metrics. Get the ping status of the server associated with the ID.
+     *
+     * @param request - The request {@link GetServerMetricsRequest}
+     * @returns A Promise of GetServerMetricsResponse
+     */
+    getServerMetrics: (request: Readonly<GetServerMetricsRequest>) => Promise<GetServerMetricsResponse>;
+    /**
+     * Delete an Elastic Metal server. Delete the server associated with the ID.
+     *
+     * @param request - The request {@link DeleteServerRequest}
+     * @returns A Promise of Server
+     */
+    deleteServer: (request: Readonly<DeleteServerRequest>) => Promise<Server>;
+    /**
+     * Reboot an Elastic Metal server. Reboot the Elastic Metal server associated with the ID, use the `boot_type` `rescue` to reboot the server in rescue mode.
+     *
+     * @param request - The request {@link RebootServerRequest}
+     * @returns A Promise of Server
+     */
+    rebootServer: (request: Readonly<RebootServerRequest>) => Promise<Server>;
+    /**
+     * Start an Elastic Metal server. Start the server associated with the ID.
+     *
+     * @param request - The request {@link StartServerRequest}
+     * @returns A Promise of Server
+     */
+    startServer: (request: Readonly<StartServerRequest>) => Promise<Server>;
+    /**
+     * Stop an Elastic Metal server. Stop the server associated with the ID. The server remains allocated to your account and all data remains on the local storage of the server.
+     *
+     * @param request - The request {@link StopServerRequest}
+     * @returns A Promise of Server
+     */
+    stopServer: (request: Readonly<StopServerRequest>) => Promise<Server>;
+    protected pageOfListServerEvents: (request: Readonly<ListServerEventsRequest>) => Promise<ListServerEventsResponse>;
+    /**
+     * List server events. List event (i.e. start/stop/reboot) associated to the server ID.
+     *
+     * @param request - The request {@link ListServerEventsRequest}
+     * @returns A Promise of ListServerEventsResponse
+     */
+    listServerEvents: (request: Readonly<ListServerEventsRequest>) => Promise<ListServerEventsResponse> & {
+        all: () => Promise<import("./types.gen").ServerEvent[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").ServerEvent[], void, void>;
+    };
+    /**
+     * Get default partitioning schema. Get the default partitioning schema for the given offer ID and OS ID.
+     *
+     * @param request - The request {@link GetDefaultPartitioningSchemaRequest}
+     * @returns A Promise of Schema
+     */
+    getDefaultPartitioningSchema: (request: Readonly<GetDefaultPartitioningSchemaRequest>) => Promise<Schema>;
+    /**
+     * Validate client partitioning schema. Validate the incoming partitioning schema from a user before installing the server. Return default ErrorCode if invalid.
+     *
+     * @param request - The request {@link ValidatePartitioningSchemaRequest}
+     */
+    validatePartitioningSchema: (request: Readonly<ValidatePartitioningSchemaRequest>) => Promise<void>;
+    /**
+     * Start BMC access. Start BMC (Baseboard Management Controller) access associated with the ID.
+  The BMC (Baseboard Management Controller) access is available one hour after the installation of the server.
+  You need first to create an option Remote Access. You will find the ID and the price with a call to listOffers (https://developers.scaleway.com/en/products/baremetal/api/#get-78db92). Then add the option https://developers.scaleway.com/en/products/baremetal/api/#post-b14abd.
+  After adding the BMC option, you need to Get Remote Access to get the login/password https://developers.scaleway.com/en/products/baremetal/api/#get-cefc0f. Do not forget to delete the Option after use.
+     *
+     * @param request - The request {@link StartBMCAccessRequest}
+     * @returns A Promise of BMCAccess
+     */
+    startBMCAccess: (request: Readonly<StartBMCAccessRequest>) => Promise<BMCAccess>;
+    /**
+     * Get BMC access. Get the BMC (Baseboard Management Controller) access associated with the ID, including the URL and login information needed to connect.
+     *
+     * @param request - The request {@link GetBMCAccessRequest}
+     * @returns A Promise of BMCAccess
+     */
+    getBMCAccess: (request: Readonly<GetBMCAccessRequest>) => Promise<BMCAccess>;
+    /**
+     * Stop BMC access. Stop BMC (Baseboard Management Controller) access associated with the ID.
+     *
+     * @param request - The request {@link StopBMCAccessRequest}
+     */
+    stopBMCAccess: (request: Readonly<StopBMCAccessRequest>) => Promise<void>;
+    /**
+     * Update IP. Configure the IP address associated with the server ID and IP ID. You can use this method to set a reverse DNS for an IP address.
+     *
+     * @param request - The request {@link UpdateIPRequest}
+     * @returns A Promise of IP
+     */
+    updateIP: (request: Readonly<UpdateIPRequest>) => Promise<IP>;
+    /**
+     * Add server option. Add an option, such as Private Networks, to a specific server.
+     *
+     * @param request - The request {@link AddOptionServerRequest}
+     * @returns A Promise of Server
+     */
+    addOptionServer: (request: Readonly<AddOptionServerRequest>) => Promise<Server>;
+    /**
+     * Delete server option. Delete an option from a specific server.
+     *
+     * @param request - The request {@link DeleteOptionServerRequest}
+     * @returns A Promise of Server
+     */
+    deleteOptionServer: (request: Readonly<DeleteOptionServerRequest>) => Promise<Server>;
+    /**
+     * Migrate server offer. Migrate server with hourly offer to monthly offer.
+     *
+     * @param request - The request {@link MigrateServerToMonthlyOfferRequest}
+     * @returns A Promise of Server
+     */
+    migrateServerToMonthlyOffer: (request: Readonly<MigrateServerToMonthlyOfferRequest>) => Promise<Server>;
+    protected pageOfListOffers: (request?: Readonly<ListOffersRequest>) => Promise<ListOffersResponse>;
+    /**
+     * List offers. List all available Elastic Metal server configurations.
+     *
+     * @param request - The request {@link ListOffersRequest}
+     * @returns A Promise of ListOffersResponse
+     */
+    listOffers: (request?: Readonly<ListOffersRequest>) => Promise<ListOffersResponse> & {
+        all: () => Promise<Offer[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Offer[], void, void>;
+    };
+    /**
+     * Get offer. Get details of an offer identified by its offer ID.
+     *
+     * @param request - The request {@link GetOfferRequest}
+     * @returns A Promise of Offer
+     */
+    getOffer: (request: Readonly<GetOfferRequest>) => Promise<Offer>;
+    /**
+     * Get option. Return specific option for the ID.
+     *
+     * @param request - The request {@link GetOptionRequest}
+     * @returns A Promise of Option
+     */
+    getOption: (request: Readonly<GetOptionRequest>) => Promise<Option>;
+    protected pageOfListOptions: (request?: Readonly<ListOptionsRequest>) => Promise<ListOptionsResponse>;
+    /**
+     * List options. List all options matching with filters.
+     *
+     * @param request - The request {@link ListOptionsRequest}
+     * @returns A Promise of ListOptionsResponse
+     */
+    listOptions: (request?: Readonly<ListOptionsRequest>) => Promise<ListOptionsResponse> & {
+        all: () => Promise<Option[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Option[], void, void>;
+    };
+    protected pageOfListSettings: (request?: Readonly<ListSettingsRequest>) => Promise<ListSettingsResponse>;
+    /**
+     * List all settings. Return all settings for a Project ID.
+     *
+     * @param request - The request {@link ListSettingsRequest}
+     * @returns A Promise of ListSettingsResponse
+     */
+    listSettings: (request?: Readonly<ListSettingsRequest>) => Promise<ListSettingsResponse> & {
+        all: () => Promise<Setting[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Setting[], void, void>;
+    };
+    /**
+     * Update setting. Update a setting for a Project ID (enable or disable).
+     *
+     * @param request - The request {@link UpdateSettingRequest}
+     * @returns A Promise of Setting
+     */
+    updateSetting: (request: Readonly<UpdateSettingRequest>) => Promise<Setting>;
+    protected pageOfListOS: (request?: Readonly<ListOSRequest>) => Promise<ListOSResponse>;
+    /**
+     * List available OSes. List all OSes that are available for installation on Elastic Metal servers.
+     *
+     * @param request - The request {@link ListOSRequest}
+     * @returns A Promise of ListOSResponse
+     */
+    listOS: (request?: Readonly<ListOSRequest>) => Promise<ListOSResponse> & {
+        all: () => Promise<OS[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<OS[], void, void>;
+    };
+    /**
+     * Get OS with an ID. Return the specific OS for the ID.
+     *
+     * @param request - The request {@link GetOSRequest}
+     * @returns A Promise of OS
+     */
+    getOS: (request: Readonly<GetOSRequest>) => Promise<OS>;
+}
+/**
+ * Elastic Metal - Private Network API.
+ */
+export declare class PrivateNetworkAPI extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    /**
+     * Add a server to a Private Network.
+     *
+     * @param request - The request {@link PrivateNetworkApiAddServerPrivateNetworkRequest}
+     * @returns A Promise of ServerPrivateNetwork
+     */
+    addServerPrivateNetwork: (request: Readonly<PrivateNetworkApiAddServerPrivateNetworkRequest>) => Promise<ServerPrivateNetwork>;
+    /**
+     * Set multiple Private Networks on a server.
+     *
+     * @param request - The request {@link PrivateNetworkApiSetServerPrivateNetworksRequest}
+     * @returns A Promise of SetServerPrivateNetworksResponse
+     */
+    setServerPrivateNetworks: (request: Readonly<PrivateNetworkApiSetServerPrivateNetworksRequest>) => Promise<SetServerPrivateNetworksResponse>;
+    protected pageOfListServerPrivateNetworks: (request?: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest>) => Promise<ListServerPrivateNetworksResponse>;
+    /**
+     * List the Private Networks of a server.
+     *
+     * @param request - The request {@link PrivateNetworkApiListServerPrivateNetworksRequest}
+     * @returns A Promise of ListServerPrivateNetworksResponse
+     */
+    listServerPrivateNetworks: (request?: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest>) => Promise<ListServerPrivateNetworksResponse> & {
+        all: () => Promise<ServerPrivateNetwork[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<ServerPrivateNetwork[], void, void>;
+    };
+    /**
+     * Delete a Private Network.
+     *
+     * @param request - The request {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}
+     */
+    deleteServerPrivateNetwork: (request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>) => Promise<void>;
+}

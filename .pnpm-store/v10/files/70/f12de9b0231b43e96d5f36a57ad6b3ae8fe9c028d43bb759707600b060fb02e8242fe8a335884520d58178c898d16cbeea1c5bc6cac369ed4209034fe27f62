@@ -1,0 +1,8 @@
+"use strict";
+Object.defineProperties(exports, { __esModule: { value: true }, [Symbol.toStringTag]: { value: "Module" } });
+const version = "1.2.3";
+const pkg = {
+  version
+};
+exports.default = pkg;
+exports.version = version;

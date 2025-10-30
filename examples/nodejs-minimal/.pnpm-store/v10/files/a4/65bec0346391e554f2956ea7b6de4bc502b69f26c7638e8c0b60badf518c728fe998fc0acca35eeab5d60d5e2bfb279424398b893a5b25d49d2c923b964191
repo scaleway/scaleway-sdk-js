@@ -1,0 +1,19 @@
+export declare const ListEventsRequest: {
+    methodName: {
+        pattern: RegExp;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    productName: {
+        pattern: RegExp;
+    };
+    serviceName: {
+        pattern: RegExp;
+    };
+    status: {
+        greaterThanOrEqual: number;
+        lessThan: number;
+    };
+};

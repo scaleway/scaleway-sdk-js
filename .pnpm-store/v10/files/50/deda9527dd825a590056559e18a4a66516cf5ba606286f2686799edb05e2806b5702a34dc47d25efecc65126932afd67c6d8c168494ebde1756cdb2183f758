@@ -1,0 +1,4 @@
+import * as index_gen from "./v1beta1/index.gen.js";
+export {
+  index_gen as Functionv1beta1
+};

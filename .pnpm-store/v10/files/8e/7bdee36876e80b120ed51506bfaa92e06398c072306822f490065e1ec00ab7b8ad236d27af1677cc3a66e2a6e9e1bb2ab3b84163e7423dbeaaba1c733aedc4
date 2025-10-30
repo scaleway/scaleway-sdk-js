@@ -1,0 +1,44 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { ApiLocality } from '@scaleway/sdk-client';
+import type { ListServerPrivateNetworksResponse, PrivateNetworkApiAddServerPrivateNetworkRequest, PrivateNetworkApiDeleteServerPrivateNetworkRequest, PrivateNetworkApiListServerPrivateNetworksRequest, PrivateNetworkApiSetServerPrivateNetworksRequest, ServerPrivateNetwork, SetServerPrivateNetworksResponse } from './types.gen';
+/**
+ * Elastic Metal - Private Networks API.
+ */
+export declare class PrivateNetworkAPI extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    /**
+     * Add a server to a Private Network. Add an Elastic Metal server to a Private Network.
+     *
+     * @param request - The request {@link PrivateNetworkApiAddServerPrivateNetworkRequest}
+     * @returns A Promise of ServerPrivateNetwork
+     */
+    addServerPrivateNetwork: (request: Readonly<PrivateNetworkApiAddServerPrivateNetworkRequest>) => Promise<ServerPrivateNetwork>;
+    /**
+     * Set multiple Private Networks on a server. Configure multiple Private Networks on an Elastic Metal server.
+     *
+     * @param request - The request {@link PrivateNetworkApiSetServerPrivateNetworksRequest}
+     * @returns A Promise of SetServerPrivateNetworksResponse
+     */
+    setServerPrivateNetworks: (request: Readonly<PrivateNetworkApiSetServerPrivateNetworksRequest>) => Promise<SetServerPrivateNetworksResponse>;
+    protected pageOfListServerPrivateNetworks: (request?: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest>) => Promise<ListServerPrivateNetworksResponse>;
+    /**
+     * List the Private Networks of a server. List the Private Networks of an Elastic Metal server.
+     *
+     * @param request - The request {@link PrivateNetworkApiListServerPrivateNetworksRequest}
+     * @returns A Promise of ListServerPrivateNetworksResponse
+     */
+    listServerPrivateNetworks: (request?: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest>) => Promise<ListServerPrivateNetworksResponse> & {
+        all: () => Promise<ServerPrivateNetwork[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<ServerPrivateNetwork[], void, void>;
+    };
+    /**
+     * Delete a Private Network.
+     *
+     * @param request - The request {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}
+     */
+    deleteServerPrivateNetwork: (request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>) => Promise<void>;
+}

@@ -1,0 +1,67 @@
+const RegionalApiCreateDataSourceRequest = {
+  name: {
+    maxLength: 50,
+    minLength: 3,
+    pattern: /^[A-Za-z0-9-_. ]+$/
+  },
+  retentionDays: {
+    greaterThanOrEqual: 1,
+    ignoreEmpty: true,
+    lessThanOrEqual: 1825
+  }
+};
+const RegionalApiCreateTokenRequest = {
+  name: {
+    maxLength: 50,
+    minLength: 3,
+    pattern: /^[A-Za-z0-9-_]+$/
+  }
+};
+const RegionalApiListContactPointsRequest = {
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e3
+  }
+};
+const RegionalApiListDataSourcesRequest = {
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e3
+  }
+};
+const RegionalApiListTokensRequest = {
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e3
+  }
+};
+const RegionalApiUpdateDataSourceRequest = {
+  name: {
+    ignoreEmpty: true,
+    maxLength: 50,
+    minLength: 3,
+    pattern: /^[A-Za-z0-9-_. ]+$/
+  },
+  retentionDays: {
+    greaterThanOrEqual: 1,
+    ignoreEmpty: true,
+    lessThanOrEqual: 1825
+  }
+};
+export {
+  RegionalApiCreateDataSourceRequest,
+  RegionalApiCreateTokenRequest,
+  RegionalApiListContactPointsRequest,
+  RegionalApiListDataSourcesRequest,
+  RegionalApiListTokensRequest,
+  RegionalApiUpdateDataSourceRequest
+};

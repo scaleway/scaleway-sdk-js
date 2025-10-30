@@ -1,0 +1,12 @@
+import { PrivateNetworkAPI } from "./api.gen.js";
+import { SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES } from "./content.gen.js";
+import { marshalPrivateNetworkApiAddServerPrivateNetworkRequest, marshalPrivateNetworkApiSetServerPrivateNetworksRequest, unmarshalListServerPrivateNetworksResponse, unmarshalServerPrivateNetwork, unmarshalSetServerPrivateNetworksResponse } from "./marshalling.gen.js";
+export {
+  PrivateNetworkAPI,
+  SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES,
+  marshalPrivateNetworkApiAddServerPrivateNetworkRequest,
+  marshalPrivateNetworkApiSetServerPrivateNetworksRequest,
+  unmarshalListServerPrivateNetworksResponse,
+  unmarshalServerPrivateNetwork,
+  unmarshalSetServerPrivateNetworksResponse
+};

@@ -1,0 +1,11 @@
+import pkg from "../package.json.js";
+const { version } = pkg;
+const userAgent = `scaleway-sdk-js/${version}`;
+const SESSION_HEADER_KEY = "x-session-token";
+const AUTH_HEADER_KEY = "x-auth-token";
+export {
+  AUTH_HEADER_KEY,
+  SESSION_HEADER_KEY,
+  userAgent,
+  version
+};

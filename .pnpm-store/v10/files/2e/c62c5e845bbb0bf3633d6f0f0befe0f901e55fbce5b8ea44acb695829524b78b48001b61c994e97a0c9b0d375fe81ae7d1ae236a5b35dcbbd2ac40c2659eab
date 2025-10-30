@@ -1,0 +1,18 @@
+import type { DefaultValues } from '@scaleway/sdk-client';
+import type { AddDeploymentACLRulesRequest, AddDeploymentACLRulesResponse, CreateDeploymentRequest, CreateEndpointRequest, Deployment, Endpoint, Eula, ListDeploymentACLRulesResponse, ListDeploymentsResponse, ListModelsResponse, ListNodeTypesResponse, Model, SetDeploymentACLRulesRequest, SetDeploymentACLRulesResponse, UpdateDeploymentRequest, UpdateEndpointRequest } from './types.gen';
+export declare const unmarshalEndpoint: (data: unknown) => Endpoint;
+export declare const unmarshalDeployment: (data: unknown) => Deployment;
+export declare const unmarshalModel: (data: unknown) => Model;
+export declare const unmarshalAddDeploymentACLRulesResponse: (data: unknown) => AddDeploymentACLRulesResponse;
+export declare const unmarshalEula: (data: unknown) => Eula;
+export declare const unmarshalListDeploymentACLRulesResponse: (data: unknown) => ListDeploymentACLRulesResponse;
+export declare const unmarshalListDeploymentsResponse: (data: unknown) => ListDeploymentsResponse;
+export declare const unmarshalListModelsResponse: (data: unknown) => ListModelsResponse;
+export declare const unmarshalListNodeTypesResponse: (data: unknown) => ListNodeTypesResponse;
+export declare const unmarshalSetDeploymentACLRulesResponse: (data: unknown) => SetDeploymentACLRulesResponse;
+export declare const marshalAddDeploymentACLRulesRequest: (request: AddDeploymentACLRulesRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalCreateDeploymentRequest: (request: CreateDeploymentRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalCreateEndpointRequest: (request: CreateEndpointRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalSetDeploymentACLRulesRequest: (request: SetDeploymentACLRulesRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateDeploymentRequest: (request: UpdateDeploymentRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateEndpointRequest: (request: UpdateEndpointRequest, defaults: DefaultValues) => Record<string, unknown>;

@@ -1,0 +1,10 @@
+import type { DefaultValues } from '@scaleway/sdk-client';
+import type { AttachIPRequest, BookIPRequest, DetachIPRequest, IP, ListIPsResponse, MoveIPRequest, ReleaseIPSetRequest, UpdateIPRequest } from './types.gen';
+export declare const unmarshalIP: (data: unknown) => IP;
+export declare const unmarshalListIPsResponse: (data: unknown) => ListIPsResponse;
+export declare const marshalAttachIPRequest: (request: AttachIPRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalBookIPRequest: (request: BookIPRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalDetachIPRequest: (request: DetachIPRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalMoveIPRequest: (request: MoveIPRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalReleaseIPSetRequest: (request: ReleaseIPSetRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateIPRequest: (request: UpdateIPRequest, defaults: DefaultValues) => Record<string, unknown>;

@@ -1,0 +1,41 @@
+{
+  "name": "@manypkg/cli",
+  "version": "0.24.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Thinkmill/manypkg.git",
+    "directory": "packages/cli"
+  },
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./dist/manypkg-cli.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "manypkg": "./bin.js"
+  },
+  "dependencies": {
+    "@manypkg/get-packages": "^3.0.0",
+    "detect-indent": "^7.0.1",
+    "normalize-path": "^3.0.0",
+    "p-limit": "^6.2.0",
+    "package-json": "^10.0.1",
+    "parse-github-url": "^1.0.3",
+    "picocolors": "^1.1.1",
+    "sembear": "^0.7.0",
+    "semver": "^7.7.1",
+    "tinyexec": "^1.0.1",
+    "validate-npm-package-name": "^6.0.0"
+  },
+  "devDependencies": {
+    "@changesets/types": "^6.1.0",
+    "@types/validate-npm-package-name": "^4.0.2",
+    "fixturez": "^1.1.0",
+    "strip-ansi": "^7.1.0",
+    "vitest": "^3.1.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

@@ -1,0 +1,55 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const isResponse = require("../../helpers/is-response.cjs");
+const json = require("../../helpers/json.cjs");
+const errorParser = require("../errors/error-parser.cjs");
+const scwError = require("../errors/scw-error.cjs");
+const X_TOTAL_COUNT_HEADER_KEY = "x-total-count";
+const TOTAL_COUNT_RES_KEY = "total_count";
+const fixLegacyTotalCount = (obj, headers) => {
+  const headerVal = headers.get(X_TOTAL_COUNT_HEADER_KEY);
+  if (!headerVal) {
+    return obj;
+  }
+  const totalCount = parseInt(headerVal, 10);
+  if (Number.isNaN(totalCount)) {
+    return obj;
+  }
+  if (json.isJSONObject(obj) && !(TOTAL_COUNT_RES_KEY in obj)) {
+    return Object.assign(obj, { [TOTAL_COUNT_RES_KEY]: totalCount });
+  }
+  return obj;
+};
+const responseParser = (unmarshaller, responseType) => async (response) => {
+  if (!isResponse.isResponse(response)) {
+    throw new TypeError("Invalid response object");
+  }
+  if (response.ok) {
+    if (response.status === 204) return unmarshaller(void 0);
+    const contentType = response.headers.get("Content-Type");
+    try {
+      if (responseType === "json" && contentType === "application/json") {
+        return unmarshaller(
+          fixLegacyTotalCount(await response.json(), response.headers)
+        );
+      }
+      if (responseType === "blob") {
+        return unmarshaller(await response.blob());
+      }
+      return unmarshaller(await response.text());
+    } catch (err) {
+      throw new scwError.ScalewayError(
+        response.status,
+        `could not parse '${contentType ?? ""}' response${err instanceof Error ? `: ${err.message}` : ""}`
+      );
+    }
+  }
+  const error = await response.clone().json().catch(() => response.text());
+  if (json.isJSONObject(error)) throw errorParser.parseScalewayError(response.status, error);
+  throw new scwError.ScalewayError(
+    response.status,
+    typeof error === "string" ? error : "cannot read error response body"
+  );
+};
+exports.fixLegacyTotalCount = fixLegacyTotalCount;
+exports.responseParser = responseParser;

@@ -1,0 +1,23 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const stringValidation = require("../../../internal/validations/string-validation.cjs");
+const scwError = require("../scw-error.cjs");
+const resourceNotFoundError = require("../standard/resource-not-found-error.cjs");
+class UnknownResourceMapper {
+  static fromJSON(status, obj) {
+    const messageParts = typeof obj.message === "string" ? obj.message.split(/"|'/) : [];
+    if (messageParts.length === 3 && stringValidation.isUUID(messageParts[1])) {
+      return new resourceNotFoundError.ResourceNotFoundError(
+        status,
+        obj,
+        // transform `Security group ` to `security_group`
+        // `.replaceAll()` may be too recent to use yet.
+        // that's why we're using `.split(' ').join('_')` for now.
+        messageParts[0].trim().toLowerCase().split(" ").join("_"),
+        messageParts[1]
+      );
+    }
+    return new scwError.ScalewayError(status, obj);
+  }
+}
+exports.UnknownResourceMapper = UnknownResourceMapper;

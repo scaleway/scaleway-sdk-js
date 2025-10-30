@@ -1,0 +1,85 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const NatsAccount = {
+  name: {
+    maxLength: 64,
+    minLength: 1
+  }
+};
+const NatsApiCreateNatsAccountRequest = {
+  name: {
+    maxLength: 64,
+    minLength: 1
+  }
+};
+const NatsApiCreateNatsCredentialsRequest = {
+  name: {
+    maxLength: 500,
+    minLength: 1
+  }
+};
+const NatsApiUpdateNatsAccountRequest = {
+  name: {
+    maxLength: 64,
+    minLength: 1
+  }
+};
+const NatsCredentials = {
+  name: {
+    maxLength: 500,
+    minLength: 1
+  }
+};
+const SnsApiCreateSnsCredentialsRequest = {
+  name: {
+    maxLength: 500,
+    minLength: 1
+  }
+};
+const SnsApiUpdateSnsCredentialsRequest = {
+  name: {
+    maxLength: 500,
+    minLength: 1
+  }
+};
+const SnsCredentials = {
+  accessKey: {
+    minLength: 1
+  },
+  name: {
+    maxLength: 500,
+    minLength: 1
+  }
+};
+const SqsApiCreateSqsCredentialsRequest = {
+  name: {
+    maxLength: 500,
+    minLength: 1
+  }
+};
+const SqsApiUpdateSqsCredentialsRequest = {
+  name: {
+    maxLength: 500,
+    minLength: 1
+  }
+};
+const SqsCredentials = {
+  accessKey: {
+    minLength: 1
+  },
+  name: {
+    maxLength: 500,
+    minLength: 1
+  }
+};
+exports.NatsAccount = NatsAccount;
+exports.NatsApiCreateNatsAccountRequest = NatsApiCreateNatsAccountRequest;
+exports.NatsApiCreateNatsCredentialsRequest = NatsApiCreateNatsCredentialsRequest;
+exports.NatsApiUpdateNatsAccountRequest = NatsApiUpdateNatsAccountRequest;
+exports.NatsCredentials = NatsCredentials;
+exports.SnsApiCreateSnsCredentialsRequest = SnsApiCreateSnsCredentialsRequest;
+exports.SnsApiUpdateSnsCredentialsRequest = SnsApiUpdateSnsCredentialsRequest;
+exports.SnsCredentials = SnsCredentials;
+exports.SqsApiCreateSqsCredentialsRequest = SqsApiCreateSqsCredentialsRequest;
+exports.SqsApiUpdateSqsCredentialsRequest = SqsApiUpdateSqsCredentialsRequest;
+exports.SqsCredentials = SqsCredentials;

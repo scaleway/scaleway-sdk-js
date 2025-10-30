@@ -1,0 +1,463 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { WaitForOptions } from '@scaleway/sdk-client';
+import type { CheckContactsCompatibilityResponse, ClearDNSZoneRecordsRequest, ClearDNSZoneRecordsResponse, CloneDNSZoneRequest, Contact, CreateDNSZoneRequest, CreateSSLCertificateRequest, DNSZone, DeleteDNSZoneRequest, DeleteDNSZoneResponse, DeleteDNSZoneTsigKeyRequest, DeleteExternalDomainResponse, DeleteSSLCertificateRequest, DeleteSSLCertificateResponse, Domain, ExportRawDNSZoneRequest, GetDNSZoneTsigKeyRequest, GetDNSZoneTsigKeyResponse, GetDNSZoneVersionDiffRequest, GetDNSZoneVersionDiffResponse, GetDomainAuthCodeResponse, GetSSLCertificateRequest, Host, ImportProviderDNSZoneRequest, ImportProviderDNSZoneResponse, ImportRawDNSZoneRequest, ImportRawDNSZoneResponse, ListContactsResponse, ListDNSZoneNameserversRequest, ListDNSZoneNameserversResponse, ListDNSZoneRecordsRequest, ListDNSZoneRecordsResponse, ListDNSZoneVersionRecordsRequest, ListDNSZoneVersionRecordsResponse, ListDNSZoneVersionsRequest, ListDNSZoneVersionsResponse, ListDNSZonesRequest, ListDNSZonesResponse, ListDomainHostsResponse, ListDomainsResponse, ListRenewableDomainsResponse, ListSSLCertificatesRequest, ListSSLCertificatesResponse, ListTasksResponse, ListTldsResponse, OrderResponse, RefreshDNSZoneRequest, RefreshDNSZoneResponse, RegisterExternalDomainResponse, RegistrarApiBuyDomainsRequest, RegistrarApiCheckContactsCompatibilityRequest, RegistrarApiCreateDomainHostRequest, RegistrarApiDeleteDomainHostRequest, RegistrarApiDeleteExternalDomainRequest, RegistrarApiDisableDomainAutoRenewRequest, RegistrarApiDisableDomainDNSSECRequest, RegistrarApiEnableDomainAutoRenewRequest, RegistrarApiEnableDomainDNSSECRequest, RegistrarApiGetContactRequest, RegistrarApiGetDomainAuthCodeRequest, RegistrarApiGetDomainRequest, RegistrarApiListContactsRequest, RegistrarApiListDomainHostsRequest, RegistrarApiListDomainsRequest, RegistrarApiListRenewableDomainsRequest, RegistrarApiListTasksRequest, RegistrarApiListTldsRequest, RegistrarApiLockDomainTransferRequest, RegistrarApiRegisterExternalDomainRequest, RegistrarApiRenewDomainsRequest, RegistrarApiSearchAvailableDomainsRequest, RegistrarApiTradeDomainRequest, RegistrarApiTransferInDomainRequest, RegistrarApiUnlockDomainTransferRequest, RegistrarApiUpdateContactRequest, RegistrarApiUpdateDomainHostRequest, RegistrarApiUpdateDomainRequest, RestoreDNSZoneVersionRequest, RestoreDNSZoneVersionResponse, SSLCertificate, SearchAvailableDomainsResponse, UpdateDNSZoneNameserversRequest, UpdateDNSZoneNameserversResponse, UpdateDNSZoneRecordsRequest, UpdateDNSZoneRecordsResponse, UpdateDNSZoneRequest } from './types.gen';
+/**
+ * Domains and DNS API.
+
+This API allows you to manage your domains, DNS zones and records.
+ */
+export declare class API extends ParentAPI {
+    protected pageOfListDNSZones: (request: Readonly<ListDNSZonesRequest>) => Promise<ListDNSZonesResponse>;
+    /**
+     * List DNS zones. Retrieve the list of DNS zones you can manage and filter DNS zones associated with specific domain names.
+     *
+     * @param request - The request {@link ListDNSZonesRequest}
+     * @returns A Promise of ListDNSZonesResponse
+     */
+    listDNSZones: (request: Readonly<ListDNSZonesRequest>) => Promise<ListDNSZonesResponse> & {
+        all: () => Promise<DNSZone[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<DNSZone[], void, void>;
+    };
+    /**
+     * Create a DNS zone. Create a new DNS zone specified by the domain name, the subdomain and the Project ID.
+     *
+     * @param request - The request {@link CreateDNSZoneRequest}
+     * @returns A Promise of DNSZone
+     */
+    createDNSZone: (request: Readonly<CreateDNSZoneRequest>) => Promise<DNSZone>;
+    /**
+     * Update a DNS zone. Update the name and/or the Organizations for a DNS zone.
+     *
+     * @param request - The request {@link UpdateDNSZoneRequest}
+     * @returns A Promise of DNSZone
+     */
+    updateDNSZone: (request: Readonly<UpdateDNSZoneRequest>) => Promise<DNSZone>;
+    /**
+     * Clone a DNS zone. Clone an existing DNS zone with all its records into a new DNS zone.
+     *
+     * @param request - The request {@link CloneDNSZoneRequest}
+     * @returns A Promise of DNSZone
+     */
+    cloneDNSZone: (request: Readonly<CloneDNSZoneRequest>) => Promise<DNSZone>;
+    /**
+     * Delete a DNS zone. Delete a DNS zone and all its records.
+     *
+     * @param request - The request {@link DeleteDNSZoneRequest}
+     * @returns A Promise of DeleteDNSZoneResponse
+     */
+    deleteDNSZone: (request: Readonly<DeleteDNSZoneRequest>) => Promise<DeleteDNSZoneResponse>;
+    protected pageOfListDNSZoneRecords: (request: Readonly<ListDNSZoneRecordsRequest>) => Promise<ListDNSZoneRecordsResponse>;
+    /**
+     * List records within a DNS zone. Retrieve a list of DNS records within a DNS zone that has default name servers.
+  You can filter records by type and name.
+     *
+     * @param request - The request {@link ListDNSZoneRecordsRequest}
+     * @returns A Promise of ListDNSZoneRecordsResponse
+     */
+    listDNSZoneRecords: (request: Readonly<ListDNSZoneRecordsRequest>) => Promise<ListDNSZoneRecordsResponse> & {
+        all: () => Promise<import("./types.gen").DomainRecord[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").DomainRecord[], void, void>;
+    };
+    /**
+     * Update records within a DNS zone. Update records within a DNS zone that has default name servers and perform several actions on your records.
+  
+  Actions include:
+   - add: allows you to add a new record or add a new IP to an existing A record, for example
+   - set: allows you to edit a record or edit an IP from an existing A record, for example
+   - delete: allows you to delete a record or delete an IP from an existing A record, for example
+   - clear: allows you to delete all records from a DNS zone
+  
+  All edits will be versioned.
+     *
+     * @param request - The request {@link UpdateDNSZoneRecordsRequest}
+     * @returns A Promise of UpdateDNSZoneRecordsResponse
+     */
+    updateDNSZoneRecords: (request: Readonly<UpdateDNSZoneRecordsRequest>) => Promise<UpdateDNSZoneRecordsResponse>;
+    /**
+     * List name servers within a DNS zone. Retrieve a list of name servers within a DNS zone and their optional glue records.
+     *
+     * @param request - The request {@link ListDNSZoneNameserversRequest}
+     * @returns A Promise of ListDNSZoneNameserversResponse
+     */
+    listDNSZoneNameservers: (request: Readonly<ListDNSZoneNameserversRequest>) => Promise<ListDNSZoneNameserversResponse>;
+    /**
+     * Update name servers within a DNS zone. Update name servers within a DNS zone and set optional glue records.
+     *
+     * @param request - The request {@link UpdateDNSZoneNameserversRequest}
+     * @returns A Promise of UpdateDNSZoneNameserversResponse
+     */
+    updateDNSZoneNameservers: (request: Readonly<UpdateDNSZoneNameserversRequest>) => Promise<UpdateDNSZoneNameserversResponse>;
+    /**
+     * Clear records within a DNS zone. Delete all records within a DNS zone that has default name servers.<br/>
+  All edits will be versioned.
+     *
+     * @param request - The request {@link ClearDNSZoneRecordsRequest}
+     * @returns A Promise of ClearDNSZoneRecordsResponse
+     */
+    clearDNSZoneRecords: (request: Readonly<ClearDNSZoneRecordsRequest>) => Promise<ClearDNSZoneRecordsResponse>;
+    /**
+     * Export a raw DNS zone. Export a DNS zone with default name servers, in a specific format.
+     *
+     * @param request - The request {@link ExportRawDNSZoneRequest}
+     * @returns A Promise of Blob
+     */
+    exportRawDNSZone: (request: Readonly<ExportRawDNSZoneRequest>) => Promise<Blob>;
+    /**
+     * Import a raw DNS zone. Import and replace the format of records from a given provider, with default name servers.
+     *
+     * @param request - The request {@link ImportRawDNSZoneRequest}
+     * @returns A Promise of ImportRawDNSZoneResponse
+     */
+    importRawDNSZone: (request: Readonly<ImportRawDNSZoneRequest>) => Promise<ImportRawDNSZoneResponse>;
+    /**
+     * Import a DNS zone from another provider. Import and replace the format of records from a given provider, with default name servers.
+     *
+     * @param request - The request {@link ImportProviderDNSZoneRequest}
+     * @returns A Promise of ImportProviderDNSZoneResponse
+     */
+    importProviderDNSZone: (request: Readonly<ImportProviderDNSZoneRequest>) => Promise<ImportProviderDNSZoneResponse>;
+    /**
+     * Refresh a DNS zone. Refresh an SOA DNS zone to reload the records in the DNS zone and update the SOA serial.
+  You can recreate the given DNS zone and its sub DNS zone if needed.
+     *
+     * @param request - The request {@link RefreshDNSZoneRequest}
+     * @returns A Promise of RefreshDNSZoneResponse
+     */
+    refreshDNSZone: (request: Readonly<RefreshDNSZoneRequest>) => Promise<RefreshDNSZoneResponse>;
+    protected pageOfListDNSZoneVersions: (request: Readonly<ListDNSZoneVersionsRequest>) => Promise<ListDNSZoneVersionsResponse>;
+    /**
+     * List versions of a DNS zone. Retrieve a list of a DNS zone's versions.<br/>
+  The maximum version count is 100. If the count reaches this limit, the oldest version will be deleted after each new modification.
+     *
+     * @param request - The request {@link ListDNSZoneVersionsRequest}
+     * @returns A Promise of ListDNSZoneVersionsResponse
+     */
+    listDNSZoneVersions: (request: Readonly<ListDNSZoneVersionsRequest>) => Promise<ListDNSZoneVersionsResponse> & {
+        all: () => Promise<import("./types.gen").DNSZoneVersion[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").DNSZoneVersion[], void, void>;
+    };
+    protected pageOfListDNSZoneVersionRecords: (request: Readonly<ListDNSZoneVersionRecordsRequest>) => Promise<ListDNSZoneVersionRecordsResponse>;
+    /**
+     * List records from a given version of a specific DNS zone. Retrieve a list of records from a specific DNS zone version.
+     *
+     * @param request - The request {@link ListDNSZoneVersionRecordsRequest}
+     * @returns A Promise of ListDNSZoneVersionRecordsResponse
+     */
+    listDNSZoneVersionRecords: (request: Readonly<ListDNSZoneVersionRecordsRequest>) => Promise<ListDNSZoneVersionRecordsResponse> & {
+        all: () => Promise<import("./types.gen").DomainRecord[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").DomainRecord[], void, void>;
+    };
+    /**
+     * Access differences from a specific DNS zone version. Access a previous DNS zone version to see the differences from another specific version.
+     *
+     * @param request - The request {@link GetDNSZoneVersionDiffRequest}
+     * @returns A Promise of GetDNSZoneVersionDiffResponse
+     */
+    getDNSZoneVersionDiff: (request: Readonly<GetDNSZoneVersionDiffRequest>) => Promise<GetDNSZoneVersionDiffResponse>;
+    /**
+     * Restore a DNS zone version. Restore and activate a version of a specific DNS zone.
+     *
+     * @param request - The request {@link RestoreDNSZoneVersionRequest}
+     * @returns A Promise of RestoreDNSZoneVersionResponse
+     */
+    restoreDNSZoneVersion: (request: Readonly<RestoreDNSZoneVersionRequest>) => Promise<RestoreDNSZoneVersionResponse>;
+    /**
+     * Get a DNS zone's TLS certificate. Get the DNS zone's TLS certificate. If you do not have a certificate, the ouptut returns `no certificate found`.
+     *
+     * @param request - The request {@link GetSSLCertificateRequest}
+     * @returns A Promise of SSLCertificate
+     */
+    getSSLCertificate: (request: Readonly<GetSSLCertificateRequest>) => Promise<SSLCertificate>;
+    /**
+     * Waits for {@link SSLCertificate} to be in a final state.
+     *
+     * @param request - The request {@link GetSSLCertificateRequest}
+     * @param options - The waiting options
+     * @returns A Promise of SSLCertificate
+     */
+    waitForSSLCertificate: (request: Readonly<GetSSLCertificateRequest>, options?: Readonly<WaitForOptions<SSLCertificate>>) => Promise<SSLCertificate>;
+    /**
+     * Create or get the DNS zone's TLS certificate. Create a new TLS certificate or retrieve information about an existing TLS certificate.
+     *
+     * @param request - The request {@link CreateSSLCertificateRequest}
+     * @returns A Promise of SSLCertificate
+     */
+    createSSLCertificate: (request: Readonly<CreateSSLCertificateRequest>) => Promise<SSLCertificate>;
+    protected pageOfListSSLCertificates: (request: Readonly<ListSSLCertificatesRequest>) => Promise<ListSSLCertificatesResponse>;
+    /**
+     * List a user's TLS certificates. List all the TLS certificates a user has created, specified by the user's Project ID and the DNS zone.
+     *
+     * @param request - The request {@link ListSSLCertificatesRequest}
+     * @returns A Promise of ListSSLCertificatesResponse
+     */
+    listSSLCertificates: (request: Readonly<ListSSLCertificatesRequest>) => Promise<ListSSLCertificatesResponse> & {
+        all: () => Promise<SSLCertificate[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<SSLCertificate[], void, void>;
+    };
+    /**
+     * Delete a TLS certificate. Delete an existing TLS certificate specified by its DNS zone. Deleting a TLS certificate is permanent and cannot be undone.
+     *
+     * @param request - The request {@link DeleteSSLCertificateRequest}
+     * @returns A Promise of DeleteSSLCertificateResponse
+     */
+    deleteSSLCertificate: (request: Readonly<DeleteSSLCertificateRequest>) => Promise<DeleteSSLCertificateResponse>;
+    /**
+     * Get the DNS zone's TSIG key. Retrieve information about the TSIG key of a given DNS zone to allow AXFR requests.
+     *
+     * @param request - The request {@link GetDNSZoneTsigKeyRequest}
+     * @returns A Promise of GetDNSZoneTsigKeyResponse
+     */
+    getDNSZoneTsigKey: (request: Readonly<GetDNSZoneTsigKeyRequest>) => Promise<GetDNSZoneTsigKeyResponse>;
+    /**
+     * Delete the DNS zone's TSIG key. Delete an existing TSIG key specified by its DNS zone. Deleting a TSIG key is permanent and cannot be undone.
+     *
+     * @param request - The request {@link DeleteDNSZoneTsigKeyRequest}
+     */
+    deleteDNSZoneTsigKey: (request: Readonly<DeleteDNSZoneTsigKeyRequest>) => Promise<void>;
+}
+/**
+ * Domains and DNS - Registrar API.
+
+Manage your domains and contacts.
+ */
+export declare class RegistrarAPI extends ParentAPI {
+    protected pageOfListTasks: (request?: Readonly<RegistrarApiListTasksRequest>) => Promise<ListTasksResponse>;
+    /**
+     * List tasks. List all operations performed on the account.
+  You can filter the list of tasks by domain name.
+     *
+     * @param request - The request {@link RegistrarApiListTasksRequest}
+     * @returns A Promise of ListTasksResponse
+     */
+    listTasks: (request?: Readonly<RegistrarApiListTasksRequest>) => Promise<ListTasksResponse> & {
+        all: () => Promise<import("./types.gen").Task[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").Task[], void, void>;
+    };
+    /**
+     * Purchase domains. Request the registration of domain names.
+  You can provide a domain's already existing contact or a new contact.
+     *
+     * @param request - The request {@link RegistrarApiBuyDomainsRequest}
+     * @returns A Promise of OrderResponse
+     */
+    buyDomains: (request: Readonly<RegistrarApiBuyDomainsRequest>) => Promise<OrderResponse>;
+    /**
+     * Renew domains. Request the renewal of one or more domain names.
+     *
+     * @param request - The request {@link RegistrarApiRenewDomainsRequest}
+     * @returns A Promise of OrderResponse
+     */
+    renewDomains: (request: Readonly<RegistrarApiRenewDomainsRequest>) => Promise<OrderResponse>;
+    /**
+     * Transfer a domain. Request the transfer of a domain from another registrar to Scaleway Domains and DNS.
+     *
+     * @param request - The request {@link RegistrarApiTransferInDomainRequest}
+     * @returns A Promise of OrderResponse
+     */
+    transferInDomain: (request: Readonly<RegistrarApiTransferInDomainRequest>) => Promise<OrderResponse>;
+    /**
+     * Trade a domain's contact. Request to change a domain's contact owner.<br/>
+  If you specify the `organization_id` of the domain's new owner, the contact will change from the current owner's Scaleway account to the new owner's Scaleway account.<br/>
+  If the new owner's current contact information is not available, the first ever contact they have created for previous domains is taken into account to operate the change.<br/>
+  If the new owner has never created a contact to register domains before, an error message displays.
+     *
+     * @param request - The request {@link RegistrarApiTradeDomainRequest}
+     * @returns A Promise of OrderResponse
+     */
+    tradeDomain: (request: Readonly<RegistrarApiTradeDomainRequest>) => Promise<OrderResponse>;
+    /**
+     * Register an external domain. Request the registration of an external domain name.
+     *
+     * @param request - The request {@link RegistrarApiRegisterExternalDomainRequest}
+     * @returns A Promise of RegisterExternalDomainResponse
+     */
+    registerExternalDomain: (request: Readonly<RegistrarApiRegisterExternalDomainRequest>) => Promise<RegisterExternalDomainResponse>;
+    /**
+     * Delete an external domain. Delete an external domain name.
+     *
+     * @param request - The request {@link RegistrarApiDeleteExternalDomainRequest}
+     * @returns A Promise of DeleteExternalDomainResponse
+     */
+    deleteExternalDomain: (request: Readonly<RegistrarApiDeleteExternalDomainRequest>) => Promise<DeleteExternalDomainResponse>;
+    /**
+     * Check if contacts are compatible with a domain or a TLD. Check whether contacts are compatible with a domain or a TLD.
+  If contacts are not compatible with either the domain or the TLD, the information that needs to be corrected is returned.
+     *
+     * @param request - The request {@link RegistrarApiCheckContactsCompatibilityRequest}
+     * @returns A Promise of CheckContactsCompatibilityResponse
+     */
+    checkContactsCompatibility: (request?: Readonly<RegistrarApiCheckContactsCompatibilityRequest>) => Promise<CheckContactsCompatibilityResponse>;
+    protected pageOfListContacts: (request?: Readonly<RegistrarApiListContactsRequest>) => Promise<ListContactsResponse>;
+    /**
+     * List contacts. Retrieve the list of contacts and their associated domains and roles.
+  You can filter the list by domain name.
+     *
+     * @param request - The request {@link RegistrarApiListContactsRequest}
+     * @returns A Promise of ListContactsResponse
+     */
+    listContacts: (request?: Readonly<RegistrarApiListContactsRequest>) => Promise<ListContactsResponse> & {
+        all: () => Promise<import("./types.gen").ContactRoles[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").ContactRoles[], void, void>;
+    };
+    /**
+     * Get a contact. Retrieve a contact's details from the registrar using the given contact's ID.
+     *
+     * @param request - The request {@link RegistrarApiGetContactRequest}
+     * @returns A Promise of Contact
+     */
+    getContact: (request: Readonly<RegistrarApiGetContactRequest>) => Promise<Contact>;
+    /**
+     * Update contact. Edit the contact's information.
+     *
+     * @param request - The request {@link RegistrarApiUpdateContactRequest}
+     * @returns A Promise of Contact
+     */
+    updateContact: (request: Readonly<RegistrarApiUpdateContactRequest>) => Promise<Contact>;
+    protected pageOfListDomains: (request?: Readonly<RegistrarApiListDomainsRequest>) => Promise<ListDomainsResponse>;
+    /**
+     * List domains. Retrieve the list of domains you own.
+     *
+     * @param request - The request {@link RegistrarApiListDomainsRequest}
+     * @returns A Promise of ListDomainsResponse
+     */
+    listDomains: (request?: Readonly<RegistrarApiListDomainsRequest>) => Promise<ListDomainsResponse> & {
+        all: () => Promise<import("./types.gen").DomainSummary[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").DomainSummary[], void, void>;
+    };
+    protected pageOfListRenewableDomains: (request?: Readonly<RegistrarApiListRenewableDomainsRequest>) => Promise<ListRenewableDomainsResponse>;
+    /**
+     * List domains that can be renewed. Retrieve the list of domains you own that can be renewed. You can also see the maximum renewal duration in years for your domains that are renewable.
+     *
+     * @param request - The request {@link RegistrarApiListRenewableDomainsRequest}
+     * @returns A Promise of ListRenewableDomainsResponse
+     */
+    listRenewableDomains: (request?: Readonly<RegistrarApiListRenewableDomainsRequest>) => Promise<ListRenewableDomainsResponse> & {
+        all: () => Promise<import("./types.gen").RenewableDomain[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").RenewableDomain[], void, void>;
+    };
+    /**
+     * Get domain. Retrieve a specific domain and display the domain's information.
+     *
+     * @param request - The request {@link RegistrarApiGetDomainRequest}
+     * @returns A Promise of Domain
+     */
+    getDomain: (request: Readonly<RegistrarApiGetDomainRequest>) => Promise<Domain>;
+    /**
+     * Waits for {@link Domain} to be in a final state.
+     *
+     * @param request - The request {@link RegistrarApiGetDomainRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Domain
+     */
+    waitForDomain: (request: Readonly<RegistrarApiGetDomainRequest>, options?: Readonly<WaitForOptions<Domain>>) => Promise<Domain>;
+    /**
+     * Update a domain's contacts. Update contacts for a specific domain or create a new contact.<br/>
+  If you add the same contact for multiple roles (owner, administrative, technical), only one ID will be created and used for all of the roles.
+     *
+     * @param request - The request {@link RegistrarApiUpdateDomainRequest}
+     * @returns A Promise of Domain
+     */
+    updateDomain: (request: Readonly<RegistrarApiUpdateDomainRequest>) => Promise<Domain>;
+    /**
+     * Lock the transfer of a domain. Lock the transfer of a domain. This means that the domain cannot be transferred and the authorization code cannot be requested to your current registrar.
+     *
+     * @param request - The request {@link RegistrarApiLockDomainTransferRequest}
+     * @returns A Promise of Domain
+     */
+    lockDomainTransfer: (request: Readonly<RegistrarApiLockDomainTransferRequest>) => Promise<Domain>;
+    /**
+     * Unlock the transfer of a domain. Unlock the transfer of a domain. This means that the domain can be transferred and the authorization code can be requested to your current registrar.
+     *
+     * @param request - The request {@link RegistrarApiUnlockDomainTransferRequest}
+     * @returns A Promise of Domain
+     */
+    unlockDomainTransfer: (request: Readonly<RegistrarApiUnlockDomainTransferRequest>) => Promise<Domain>;
+    /**
+     * Enable auto renew. Enable the `auto renew` feature for a domain. This means the domain will be automatically renewed before its expiry date.
+     *
+     * @param request - The request {@link RegistrarApiEnableDomainAutoRenewRequest}
+     * @returns A Promise of Domain
+     */
+    enableDomainAutoRenew: (request: Readonly<RegistrarApiEnableDomainAutoRenewRequest>) => Promise<Domain>;
+    /**
+     * Disable auto renew. Disable the `auto renew` feature for a domain. This means the domain will not be renewed before its expiry date.
+     *
+     * @param request - The request {@link RegistrarApiDisableDomainAutoRenewRequest}
+     * @returns A Promise of Domain
+     */
+    disableDomainAutoRenew: (request: Readonly<RegistrarApiDisableDomainAutoRenewRequest>) => Promise<Domain>;
+    /**
+     * Get a domain's authorization code. Retrieve the authorization code to tranfer an unlocked domain. The output returns an error if the domain is locked.
+  Some TLDs may have a different procedure to retrieve the authorization code. In that case, the information displays in the message field.
+     *
+     * @param request - The request {@link RegistrarApiGetDomainAuthCodeRequest}
+     * @returns A Promise of GetDomainAuthCodeResponse
+     */
+    getDomainAuthCode: (request: Readonly<RegistrarApiGetDomainAuthCodeRequest>) => Promise<GetDomainAuthCodeResponse>;
+    /**
+     * Update domain DNSSEC. If your domain uses another registrar and has the default Scaleway NS, you have to **update the DS record at your registrar**.
+     *
+     * @param request - The request {@link RegistrarApiEnableDomainDNSSECRequest}
+     * @returns A Promise of Domain
+     */
+    enableDomainDNSSEC: (request: Readonly<RegistrarApiEnableDomainDNSSECRequest>) => Promise<Domain>;
+    /**
+     * Disable a domain's DNSSEC. Disable DNSSEC for a domain.
+     *
+     * @param request - The request {@link RegistrarApiDisableDomainDNSSECRequest}
+     * @returns A Promise of Domain
+     */
+    disableDomainDNSSEC: (request: Readonly<RegistrarApiDisableDomainDNSSECRequest>) => Promise<Domain>;
+    /**
+     * Search available domains. Search a domain or a maximum of 10 domains that are available.
+  
+  If the TLD list is empty or not set, the search returns the results from the most popular TLDs.
+     *
+     * @param request - The request {@link RegistrarApiSearchAvailableDomainsRequest}
+     * @returns A Promise of SearchAvailableDomainsResponse
+     */
+    searchAvailableDomains: (request: Readonly<RegistrarApiSearchAvailableDomainsRequest>) => Promise<SearchAvailableDomainsResponse>;
+    protected pageOfListTlds: (request?: Readonly<RegistrarApiListTldsRequest>) => Promise<ListTldsResponse>;
+    /**
+     * List TLD offers. Retrieve the list of TLDs and offers associated with them.
+     *
+     * @param request - The request {@link RegistrarApiListTldsRequest}
+     * @returns A Promise of ListTldsResponse
+     */
+    listTlds: (request?: Readonly<RegistrarApiListTldsRequest>) => Promise<ListTldsResponse> & {
+        all: () => Promise<import("./types.gen").Tld[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").Tld[], void, void>;
+    };
+    /**
+     * Create a hostname for a domain. Create a hostname for a domain with glue IPs.
+     *
+     * @param request - The request {@link RegistrarApiCreateDomainHostRequest}
+     * @returns A Promise of Host
+     */
+    createDomainHost: (request: Readonly<RegistrarApiCreateDomainHostRequest>) => Promise<Host>;
+    protected pageOfListDomainHosts: (request: Readonly<RegistrarApiListDomainHostsRequest>) => Promise<ListDomainHostsResponse>;
+    /**
+     * List a domain's hostnames. List a domain's hostnames using their glue IPs.
+     *
+     * @param request - The request {@link RegistrarApiListDomainHostsRequest}
+     * @returns A Promise of ListDomainHostsResponse
+     */
+    listDomainHosts: (request: Readonly<RegistrarApiListDomainHostsRequest>) => Promise<ListDomainHostsResponse> & {
+        all: () => Promise<Host[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Host[], void, void>;
+    };
+    /**
+     * Update a domain's hostname. Update a domain's hostname with glue IPs.
+     *
+     * @param request - The request {@link RegistrarApiUpdateDomainHostRequest}
+     * @returns A Promise of Host
+     */
+    updateDomainHost: (request: Readonly<RegistrarApiUpdateDomainHostRequest>) => Promise<Host>;
+    /**
+     * Delete a domain's hostname.
+     *
+     * @param request - The request {@link RegistrarApiDeleteDomainHostRequest}
+     * @returns A Promise of Host
+     */
+    deleteDomainHost: (request: Readonly<RegistrarApiDeleteDomainHostRequest>) => Promise<Host>;
+}

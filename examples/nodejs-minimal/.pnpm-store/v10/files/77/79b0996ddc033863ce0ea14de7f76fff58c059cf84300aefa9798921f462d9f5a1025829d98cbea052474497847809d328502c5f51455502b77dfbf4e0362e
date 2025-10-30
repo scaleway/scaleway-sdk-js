@@ -1,0 +1,51 @@
+import { isOrganizationId, isProjectId, isRegion, isZone, isURL } from "../internal/validations/string-validation.js";
+const assertValidSettings = (obj) => {
+  if (obj.defaultOrganizationId !== void 0) {
+    if (typeof obj.defaultOrganizationId !== "string" || obj.defaultOrganizationId.length === 0) {
+      throw new Error("Default organization ID cannot be empty");
+    }
+    if (!isOrganizationId(obj.defaultOrganizationId)) {
+      throw new Error(
+        `Invalid organization ID format '${obj.defaultOrganizationId}', expected a UUID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
+      );
+    }
+  }
+  if (obj.defaultProjectId !== void 0) {
+    if (typeof obj.defaultProjectId !== "string" || obj.defaultProjectId.length === 0) {
+      throw new Error("Default project ID cannot be empty");
+    }
+    if (!isProjectId(obj.defaultProjectId)) {
+      throw new Error(
+        `Invalid project ID format '${obj.defaultProjectId}', expected a UUID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
+      );
+    }
+  }
+  if (obj.defaultRegion && !isRegion(obj.defaultRegion)) {
+    throw new Error(`Invalid default region format '${obj.defaultRegion}'`);
+  }
+  if (obj.defaultZone && !isZone(obj.defaultZone)) {
+    throw new Error(`Invalid default zone format '${obj.defaultZone}'`);
+  }
+  if (obj.apiURL && !isURL(obj.apiURL)) {
+    throw new Error(`Invalid URL ${obj.apiURL}`);
+  }
+  if (obj.apiURL?.endsWith("/")) {
+    throw new Error(
+      `Invalid URL ${obj.apiURL}: it should not have a trailing slash`
+    );
+  }
+  if (typeof obj.httpClient !== typeof fetch) {
+    throw new Error(`Invalid HTTP Client`);
+  }
+  if (obj.defaultPageSize !== void 0 && (typeof obj.defaultPageSize !== "number" || Number.isNaN(obj.defaultPageSize) || obj.defaultPageSize <= 0)) {
+    throw new Error(
+      `Invalid defaultPageSize ${obj.defaultPageSize}: it should be a number above 0`
+    );
+  }
+  if (typeof obj.userAgent !== "string") {
+    throw new Error(`Invalid User-Agent`);
+  }
+};
+export {
+  assertValidSettings
+};

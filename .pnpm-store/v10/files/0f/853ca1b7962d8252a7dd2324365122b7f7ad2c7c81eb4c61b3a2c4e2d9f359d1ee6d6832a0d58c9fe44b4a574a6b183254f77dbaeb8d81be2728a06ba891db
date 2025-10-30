@@ -1,0 +1,159 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const marshalling_gen = require("./marshalling.gen.cjs");
+class API extends sdkClient.API {
+  pageOfListImages = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/marketplace/v2/images`,
+      urlParams: sdkClient.urlParams(
+        ["arch", request.arch],
+        ["category", request.category],
+        ["include_eol", request.includeEol],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListImagesResponse
+  );
+  /**
+   * List marketplace images. List all available images on the marketplace, their UUID, CPU architecture and description.
+   *
+   * @param request - The request {@link ListImagesRequest}
+   * @returns A Promise of ListImagesResponse
+   */
+  listImages = (request) => sdkClient.enrichForPagination("images", this.pageOfListImages, request);
+  /**
+   * Get a specific marketplace image. Get detailed information about a marketplace image, specified by its `image_id` (UUID format).
+   *
+   * @param request - The request {@link GetImageRequest}
+   * @returns A Promise of Image
+   */
+  getImage = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/marketplace/v2/images/${sdkClient.validatePathParam("imageId", request.imageId)}`
+    },
+    marshalling_gen.unmarshalImage
+  );
+  pageOfListVersions = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/marketplace/v2/versions`,
+      urlParams: sdkClient.urlParams(
+        ["image_id", request.imageId],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListVersionsResponse
+  );
+  /**
+   * List versions of an Image. Get a list of all available version of an image, specified by its `image_id` (UUID format).
+   *
+   * @param request - The request {@link ListVersionsRequest}
+   * @returns A Promise of ListVersionsResponse
+   */
+  listVersions = (request) => sdkClient.enrichForPagination("versions", this.pageOfListVersions, request);
+  /**
+   * Get a specific image version. Get information such as the name, creation date, last update and published date for an image version specified by its `version_id` (UUID format).
+   *
+   * @param request - The request {@link GetVersionRequest}
+   * @returns A Promise of Version
+   */
+  getVersion = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/marketplace/v2/versions/${sdkClient.validatePathParam("versionId", request.versionId)}`
+    },
+    marshalling_gen.unmarshalVersion
+  );
+  pageOfListLocalImages = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/marketplace/v2/local-images`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["type", request.type],
+        ["zone", request.zone],
+        ...Object.entries(
+          sdkClient.resolveOneOf([
+            { param: "image_id", value: request.imageId },
+            { param: "version_id", value: request.versionId },
+            { param: "image_label", value: request.imageLabel }
+          ])
+        )
+      )
+    },
+    marshalling_gen.unmarshalListLocalImagesResponse
+  );
+  /**
+   * List local images from a specific image or version. List information about local images in a specific Availability Zone, specified by its `image_id` (UUID format), `version_id` (UUID format) or `image_label`. Only one of these three parameters may be set.
+   *
+   * @param request - The request {@link ListLocalImagesRequest}
+   * @returns A Promise of ListLocalImagesResponse
+   */
+  listLocalImages = (request = {}) => sdkClient.enrichForPagination("localImages", this.pageOfListLocalImages, request);
+  /**
+   * Get a specific local image by ID. Get detailed information about a local image, including compatible commercial types, supported architecture, labels and the Availability Zone of the image, specified by its `local_image_id` (UUID format).
+   *
+   * @param request - The request {@link GetLocalImageRequest}
+   * @returns A Promise of LocalImage
+   */
+  getLocalImage = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/marketplace/v2/local-images/${sdkClient.validatePathParam("localImageId", request.localImageId)}`
+    },
+    marshalling_gen.unmarshalLocalImage
+  );
+  pageOfListCategories = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/marketplace/v2/categories`,
+      urlParams: sdkClient.urlParams(
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListCategoriesResponse
+  );
+  /**
+   * List existing image categories. Get a list of all existing categories. The output can be paginated.
+   *
+   * @param request - The request {@link ListCategoriesRequest}
+   * @returns A Promise of ListCategoriesResponse
+   */
+  listCategories = (request = {}) => sdkClient.enrichForPagination("categories", this.pageOfListCategories, request);
+  /**
+   * Get a specific category. Get information about a specific category of the marketplace catalog, specified by its `category_id` (UUID format).
+   *
+   * @param request - The request {@link GetCategoryRequest}
+   * @returns A Promise of Category
+   */
+  getCategory = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/marketplace/v2/categories/${sdkClient.validatePathParam("categoryId", request.categoryId)}`
+    },
+    marshalling_gen.unmarshalCategory
+  );
+}
+exports.API = API;

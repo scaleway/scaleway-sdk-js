@@ -1,0 +1,262 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const randomName = require("@scaleway/random-name");
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalSecretEnvVar = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SecretEnvVar' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    name: data.name
+  };
+};
+const unmarshalSecretFile = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SecretFile' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    path: data.path
+  };
+};
+const unmarshalSecret = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Secret' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    envVar: data.env_var ? unmarshalSecretEnvVar(data.env_var) : void 0,
+    file: data.file ? unmarshalSecretFile(data.file) : void 0,
+    secretId: data.secret_id,
+    secretManagerId: data.secret_manager_id,
+    secretManagerVersion: data.secret_manager_version
+  };
+};
+const unmarshalCronSchedule = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CronSchedule' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    schedule: data.schedule,
+    timezone: data.timezone
+  };
+};
+const unmarshalJobDefinition = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'JobDefinition' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    command: data.command,
+    cpuLimit: data.cpu_limit,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    cronSchedule: data.cron_schedule ? unmarshalCronSchedule(data.cron_schedule) : void 0,
+    description: data.description,
+    environmentVariables: data.environment_variables,
+    id: data.id,
+    imageUri: data.image_uri,
+    jobTimeout: data.job_timeout,
+    localStorageCapacity: data.local_storage_capacity,
+    memoryLimit: data.memory_limit,
+    name: data.name,
+    projectId: data.project_id,
+    region: data.region,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalJobRun = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'JobRun' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    command: data.command,
+    cpuLimit: data.cpu_limit,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    environmentVariables: data.environment_variables,
+    errorMessage: data.error_message,
+    exitCode: data.exit_code,
+    id: data.id,
+    jobDefinitionId: data.job_definition_id,
+    localStorageCapacity: data.local_storage_capacity,
+    memoryLimit: data.memory_limit,
+    region: data.region,
+    runDuration: data.run_duration,
+    startedAt: sdkClient.unmarshalDate(data.started_at),
+    state: data.state,
+    terminatedAt: sdkClient.unmarshalDate(data.terminated_at),
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalCreateJobDefinitionSecretsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CreateJobDefinitionSecretsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    secrets: sdkClient.unmarshalArrayOfObject(data.secrets, unmarshalSecret)
+  };
+};
+const unmarshalJobsLimits = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'JobsLimits' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    secretsPerJobDefinition: data.secrets_per_job_definition
+  };
+};
+const unmarshalListJobDefinitionSecretsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListJobDefinitionSecretsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    secrets: sdkClient.unmarshalArrayOfObject(data.secrets, unmarshalSecret),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListJobDefinitionsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListJobDefinitionsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    jobDefinitions: sdkClient.unmarshalArrayOfObject(
+      data.job_definitions,
+      unmarshalJobDefinition
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListJobRunsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListJobRunsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    jobRuns: sdkClient.unmarshalArrayOfObject(data.job_runs, unmarshalJobRun),
+    totalCount: data.total_count
+  };
+};
+const unmarshalResource = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Resource' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    cpuLimit: data.cpu_limit,
+    memoryLimit: data.memory_limit
+  };
+};
+const unmarshalListJobsResourcesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListJobsResourcesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    resources: sdkClient.unmarshalArrayOfObject(data.resources, unmarshalResource)
+  };
+};
+const unmarshalStartJobDefinitionResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'StartJobDefinitionResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    jobRuns: sdkClient.unmarshalArrayOfObject(data.job_runs, unmarshalJobRun)
+  };
+};
+const marshalCreateJobDefinitionRequestCronScheduleConfig = (request, defaults) => ({
+  schedule: request.schedule,
+  timezone: request.timezone
+});
+const marshalCreateJobDefinitionRequest = (request, defaults) => ({
+  command: request.command,
+  cpu_limit: request.cpuLimit,
+  cron_schedule: request.cronSchedule !== void 0 ? marshalCreateJobDefinitionRequestCronScheduleConfig(
+    request.cronSchedule
+  ) : void 0,
+  description: request.description,
+  environment_variables: request.environmentVariables !== void 0 ? request.environmentVariables : void 0,
+  image_uri: request.imageUri,
+  job_timeout: request.jobTimeout,
+  local_storage_capacity: request.localStorageCapacity,
+  memory_limit: request.memoryLimit,
+  name: request.name || randomName("job"),
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalCreateJobDefinitionSecretsRequestSecretConfig = (request, defaults) => ({
+  secret_manager_id: request.secretManagerId,
+  secret_manager_version: request.secretManagerVersion,
+  ...sdkClient.resolveOneOf([
+    { param: "path", value: request.path },
+    { param: "env_var_name", value: request.envVarName }
+  ])
+});
+const marshalCreateJobDefinitionSecretsRequest = (request, defaults) => ({
+  secrets: request.secrets.map(
+    (elt) => marshalCreateJobDefinitionSecretsRequestSecretConfig(elt)
+  )
+});
+const marshalStartJobDefinitionRequest = (request, defaults) => ({
+  command: request.command,
+  environment_variables: request.environmentVariables,
+  replicas: request.replicas
+});
+const marshalUpdateJobDefinitionRequestCronScheduleConfig = (request, defaults) => ({
+  schedule: request.schedule,
+  timezone: request.timezone
+});
+const marshalUpdateJobDefinitionRequest = (request, defaults) => ({
+  command: request.command,
+  cpu_limit: request.cpuLimit,
+  cron_schedule: request.cronSchedule !== void 0 ? marshalUpdateJobDefinitionRequestCronScheduleConfig(
+    request.cronSchedule
+  ) : void 0,
+  description: request.description,
+  environment_variables: request.environmentVariables,
+  image_uri: request.imageUri,
+  job_timeout: request.jobTimeout,
+  local_storage_capacity: request.localStorageCapacity,
+  memory_limit: request.memoryLimit,
+  name: request.name
+});
+const marshalUpdateJobDefinitionSecretRequest = (request, defaults) => ({
+  secret_manager_version: request.secretManagerVersion,
+  ...sdkClient.resolveOneOf([
+    { param: "path", value: request.path },
+    { param: "env_var_name", value: request.envVarName }
+  ])
+});
+exports.marshalCreateJobDefinitionRequest = marshalCreateJobDefinitionRequest;
+exports.marshalCreateJobDefinitionSecretsRequest = marshalCreateJobDefinitionSecretsRequest;
+exports.marshalStartJobDefinitionRequest = marshalStartJobDefinitionRequest;
+exports.marshalUpdateJobDefinitionRequest = marshalUpdateJobDefinitionRequest;
+exports.marshalUpdateJobDefinitionSecretRequest = marshalUpdateJobDefinitionSecretRequest;
+exports.unmarshalCreateJobDefinitionSecretsResponse = unmarshalCreateJobDefinitionSecretsResponse;
+exports.unmarshalJobDefinition = unmarshalJobDefinition;
+exports.unmarshalJobRun = unmarshalJobRun;
+exports.unmarshalJobsLimits = unmarshalJobsLimits;
+exports.unmarshalListJobDefinitionSecretsResponse = unmarshalListJobDefinitionSecretsResponse;
+exports.unmarshalListJobDefinitionsResponse = unmarshalListJobDefinitionsResponse;
+exports.unmarshalListJobRunsResponse = unmarshalListJobRunsResponse;
+exports.unmarshalListJobsResourcesResponse = unmarshalListJobsResourcesResponse;
+exports.unmarshalSecret = unmarshalSecret;
+exports.unmarshalStartJobDefinitionResponse = unmarshalStartJobDefinitionResponse;

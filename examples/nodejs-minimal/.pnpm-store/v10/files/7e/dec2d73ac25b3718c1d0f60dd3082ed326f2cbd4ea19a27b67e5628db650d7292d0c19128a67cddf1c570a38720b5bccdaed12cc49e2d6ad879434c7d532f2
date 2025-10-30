@@ -1,0 +1,37 @@
+import { ScalewayError } from "../scw-error.js";
+const buildMessage = (method, reason) => {
+  let reasonDesc;
+  switch (reason) {
+    case "invalid_argument":
+      reasonDesc = `invalid ${method} format or empty value`;
+      break;
+    case "not_found":
+      reasonDesc = `${method} does not exist`;
+      break;
+    case "expired":
+      reasonDesc = `${method} is expired`;
+      break;
+    default:
+      reasonDesc = `unknown reason for ${method}`;
+  }
+  return `denied authentication: ${reasonDesc}`;
+};
+class DeniedAuthenticationError extends ScalewayError {
+  constructor(status, body, method, reason) {
+    super(status, body, buildMessage(method, reason));
+    this.status = status;
+    this.body = body;
+    this.method = method;
+    this.reason = reason;
+    this.name = "DeniedAuthenticationError";
+  }
+  static fromJSON(status, obj) {
+    if (typeof obj.method !== "string" || typeof obj.reason !== "string") {
+      return null;
+    }
+    return new DeniedAuthenticationError(status, obj, obj.method, obj.reason);
+  }
+}
+export {
+  DeniedAuthenticationError
+};

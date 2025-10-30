@@ -1,0 +1,84 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "vcs": {
+    "clientKind": "git",
+    "useIgnoreFile": false,
+    "defaultBranch": "main"
+  },
+  "files": {
+    "maxSize": 10000000,
+    "ignoreUnknown": true,
+    "includes": [
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.js",
+      "**/*.jsx",
+      "**/*.json"
+    ],
+    "experimentalScannerIgnores": [
+      ".next/",
+      ".pnpm-store/",
+      "coverage/",
+      "/public/outdated",
+      "/public/.well-known",
+      "**/node_modules/",
+      "**/storybook-static",
+      ".turbo/**",
+      "dist",
+      "build",
+      "out",
+      "node_modules/**",
+      "**/pnpm-lock.yaml",
+      "**/package.json",
+      "**/CHANGELOG.md",
+      "*.snap",
+      "**/__snapshots__/",
+      ".docusaurus",
+      ".vitest-reports",
+      "**/*.gen.ts"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 80,
+    "attributePosition": "auto"
+  },
+  "javascript": {
+    "formatter": {
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "trailingCommas": "all",
+      "semicolons": "asNeeded",
+      "arrowParentheses": "asNeeded",
+      "bracketSpacing": true,
+      "bracketSameLine": false,
+      "quoteStyle": "single",
+      "attributePosition": "auto"
+    }
+  },
+  "json": {
+    "formatter": {
+      "enabled": false
+    },
+    "parser": {
+      "allowComments": true
+    },
+    "linter": {
+      "enabled": false
+    }
+  },
+  "linter": {
+    "enabled": false
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "off"
+      }
+    }
+  }
+}

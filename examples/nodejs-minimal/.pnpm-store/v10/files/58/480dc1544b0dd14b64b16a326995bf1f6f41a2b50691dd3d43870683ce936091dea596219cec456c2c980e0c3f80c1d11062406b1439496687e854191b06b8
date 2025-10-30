@@ -1,0 +1,204 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client';
+import type { AttachRoutingPolicyRequest, AttachVpcRequest, CreateLinkRequest, CreateRoutingPolicyRequest, DedicatedConnection, DeleteLinkRequest, DeleteRoutingPolicyRequest, DetachRoutingPolicyRequest, DetachVpcRequest, DisableRoutePropagationRequest, EnableRoutePropagationRequest, GetDedicatedConnectionRequest, GetLinkRequest, GetPartnerRequest, GetPopRequest, GetRoutingPolicyRequest, Link, ListDedicatedConnectionsRequest, ListDedicatedConnectionsResponse, ListLinksRequest, ListLinksResponse, ListPartnersRequest, ListPartnersResponse, ListPopsRequest, ListPopsResponse, ListRoutingPoliciesRequest, ListRoutingPoliciesResponse, Partner, Pop, RoutingPolicy, UpdateLinkRequest, UpdateRoutingPolicyRequest } from './types.gen';
+/**
+ * InterLink API.
+
+This API allows you to manage your Scaleway InterLink, to connect your on-premises infrastructure with your Scaleway VPC.
+ */
+export declare class API extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    protected pageOfListDedicatedConnections: (request?: Readonly<ListDedicatedConnectionsRequest>) => Promise<ListDedicatedConnectionsResponse>;
+    /**
+     * List dedicated connections. For self-hosted users, list their dedicated physical connections in a given region. By default, the connections returned in the list are ordered by name in ascending order, though this can be modified via the `order_by` field.
+     *
+     * @param request - The request {@link ListDedicatedConnectionsRequest}
+     * @returns A Promise of ListDedicatedConnectionsResponse
+     */
+    listDedicatedConnections: (request?: Readonly<ListDedicatedConnectionsRequest>) => Promise<ListDedicatedConnectionsResponse> & {
+        all: () => Promise<DedicatedConnection[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<DedicatedConnection[], void, void>;
+    };
+    /**
+     * Get a dedicated connection. For self-hosted users, get a dedicated physical connection corresponding to the given ID. The response object includes information such as the connection's name, status and total bandwidth.
+     *
+     * @param request - The request {@link GetDedicatedConnectionRequest}
+     * @returns A Promise of DedicatedConnection
+     */
+    getDedicatedConnection: (request: Readonly<GetDedicatedConnectionRequest>) => Promise<DedicatedConnection>;
+    /**
+     * Waits for {@link DedicatedConnection} to be in a final state.
+     *
+     * @param request - The request {@link GetDedicatedConnectionRequest}
+     * @param options - The waiting options
+     * @returns A Promise of DedicatedConnection
+     */
+    waitForDedicatedConnection: (request: Readonly<GetDedicatedConnectionRequest>, options?: Readonly<WaitForOptions<DedicatedConnection>>) => Promise<DedicatedConnection>;
+    protected pageOfListPartners: (request?: Readonly<ListPartnersRequest>) => Promise<ListPartnersResponse>;
+    /**
+     * List available partners. List all available partners. By default, the partners returned in the list are ordered by name in ascending order, though this can be modified via the `order_by` field.
+     *
+     * @param request - The request {@link ListPartnersRequest}
+     * @returns A Promise of ListPartnersResponse
+     */
+    listPartners: (request?: Readonly<ListPartnersRequest>) => Promise<ListPartnersResponse> & {
+        all: () => Promise<Partner[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Partner[], void, void>;
+    };
+    /**
+     * Get a partner. Get a partner for the given partner IP. The response object includes information such as the partner's name, email address and portal URL.
+     *
+     * @param request - The request {@link GetPartnerRequest}
+     * @returns A Promise of Partner
+     */
+    getPartner: (request: Readonly<GetPartnerRequest>) => Promise<Partner>;
+    protected pageOfListPops: (request?: Readonly<ListPopsRequest>) => Promise<ListPopsResponse>;
+    /**
+     * List PoPs. List all available PoPs (locations) for a given region. By default, the results are returned in ascending alphabetical order by name.
+     *
+     * @param request - The request {@link ListPopsRequest}
+     * @returns A Promise of ListPopsResponse
+     */
+    listPops: (request?: Readonly<ListPopsRequest>) => Promise<ListPopsResponse> & {
+        all: () => Promise<Pop[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Pop[], void, void>;
+    };
+    /**
+     * Get a PoP. Get a PoP for the given PoP ID. The response object includes the PoP's name and information about its physical location.
+     *
+     * @param request - The request {@link GetPopRequest}
+     * @returns A Promise of Pop
+     */
+    getPop: (request: Readonly<GetPopRequest>) => Promise<Pop>;
+    protected pageOfListLinks: (request?: Readonly<ListLinksRequest>) => Promise<ListLinksResponse>;
+    /**
+     * List links. List all your links (InterLink connections). A number of filters are available, including Project ID, name, tags and status.
+     *
+     * @param request - The request {@link ListLinksRequest}
+     * @returns A Promise of ListLinksResponse
+     */
+    listLinks: (request?: Readonly<ListLinksRequest>) => Promise<ListLinksResponse> & {
+        all: () => Promise<Link[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Link[], void, void>;
+    };
+    /**
+     * Get a link. Get a link (InterLink session / logical InterLink resource) for the given link ID. The response object includes information about the link's various configuration details.
+     *
+     * @param request - The request {@link GetLinkRequest}
+     * @returns A Promise of Link
+     */
+    getLink: (request: Readonly<GetLinkRequest>) => Promise<Link>;
+    /**
+     * Waits for {@link Link} to be in a final state.
+     *
+     * @param request - The request {@link GetLinkRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Link
+     */
+    waitForLink: (request: Readonly<GetLinkRequest>, options?: Readonly<WaitForOptions<Link>>) => Promise<Link>;
+    /**
+     * Create a link. Create a link (InterLink session / logical InterLink resource) in a given PoP, specifying its various configuration details. Links can either be hosted (facilitated by partners' shared physical connections) or self-hosted (for users who have purchased a dedicated physical connection).
+     *
+     * @param request - The request {@link CreateLinkRequest}
+     * @returns A Promise of Link
+     */
+    createLink: (request: Readonly<CreateLinkRequest>) => Promise<Link>;
+    /**
+     * Update a link. Update an existing link, specified by its link ID. Only its name and tags can be updated.
+     *
+     * @param request - The request {@link UpdateLinkRequest}
+     * @returns A Promise of Link
+     */
+    updateLink: (request: Readonly<UpdateLinkRequest>) => Promise<Link>;
+    /**
+     * Delete a link. Delete an existing link, specified by its link ID. Note that as well as deleting the link here on the Scaleway side, it is also necessary to request deletion from the partner on their side. Only when this action has been carried out on both sides will the resource be completely deleted.
+     *
+     * @param request - The request {@link DeleteLinkRequest}
+     * @returns A Promise of Link
+     */
+    deleteLink: (request: Readonly<DeleteLinkRequest>) => Promise<Link>;
+    /**
+     * Attach a VPC. Attach a VPC to an existing link. This facilitates communication between the resources in your Scaleway VPC, and your on-premises infrastructure.
+     *
+     * @param request - The request {@link AttachVpcRequest}
+     * @returns A Promise of Link
+     */
+    attachVpc: (request: Readonly<AttachVpcRequest>) => Promise<Link>;
+    /**
+     * Detach a VPC. Detach a VPC from an existing link.
+     *
+     * @param request - The request {@link DetachVpcRequest}
+     * @returns A Promise of Link
+     */
+    detachVpc: (request: Readonly<DetachVpcRequest>) => Promise<Link>;
+    /**
+     * Attach a routing policy. Attach a routing policy to an existing link. As all routes across the link are blocked by default, you must attach a routing policy to set IP prefix filters for allowed routes, facilitating traffic flow.
+     *
+     * @param request - The request {@link AttachRoutingPolicyRequest}
+     * @returns A Promise of Link
+     */
+    attachRoutingPolicy: (request: Readonly<AttachRoutingPolicyRequest>) => Promise<Link>;
+    /**
+     * Detach a routing policy. Detach a routing policy from an existing link. Without a routing policy, all routes across the link are blocked by default.
+     *
+     * @param request - The request {@link DetachRoutingPolicyRequest}
+     * @returns A Promise of Link
+     */
+    detachRoutingPolicy: (request: Readonly<DetachRoutingPolicyRequest>) => Promise<Link>;
+    /**
+     * Enable route propagation. Enable all allowed prefixes (defined in a routing policy) to be announced in the BGP session. This allows traffic to flow between the attached VPC and the on-premises infrastructure along the announced routes. Note that by default, even when route propagation is enabled, all routes are blocked. It is essential to attach a routing policy to define the ranges of routes to announce.
+     *
+     * @param request - The request {@link EnableRoutePropagationRequest}
+     * @returns A Promise of Link
+     */
+    enableRoutePropagation: (request: Readonly<EnableRoutePropagationRequest>) => Promise<Link>;
+    /**
+     * Disable route propagation. Prevent any prefixes from being announced in the BGP session. Traffic will not be able to flow over the InterLink until route propagation is re-enabled.
+     *
+     * @param request - The request {@link DisableRoutePropagationRequest}
+     * @returns A Promise of Link
+     */
+    disableRoutePropagation: (request: Readonly<DisableRoutePropagationRequest>) => Promise<Link>;
+    protected pageOfListRoutingPolicies: (request?: Readonly<ListRoutingPoliciesRequest>) => Promise<ListRoutingPoliciesResponse>;
+    /**
+     * List routing policies. List all routing policies in a given region. A routing policy can be attached to one or multiple links (InterLink connections).
+     *
+     * @param request - The request {@link ListRoutingPoliciesRequest}
+     * @returns A Promise of ListRoutingPoliciesResponse
+     */
+    listRoutingPolicies: (request?: Readonly<ListRoutingPoliciesRequest>) => Promise<ListRoutingPoliciesResponse> & {
+        all: () => Promise<RoutingPolicy[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<RoutingPolicy[], void, void>;
+    };
+    /**
+     * Get routing policy. Get a routing policy for the given routing policy ID. The response object gives information including the policy's name, tags and prefix filters.
+     *
+     * @param request - The request {@link GetRoutingPolicyRequest}
+     * @returns A Promise of RoutingPolicy
+     */
+    getRoutingPolicy: (request: Readonly<GetRoutingPolicyRequest>) => Promise<RoutingPolicy>;
+    /**
+     * Create a routing policy. Create a routing policy. Routing policies allow you to set IP prefix filters to define the incoming route announcements to accept from the peer, and the outgoing routes to announce to the peer.
+     *
+     * @param request - The request {@link CreateRoutingPolicyRequest}
+     * @returns A Promise of RoutingPolicy
+     */
+    createRoutingPolicy: (request: Readonly<CreateRoutingPolicyRequest>) => Promise<RoutingPolicy>;
+    /**
+     * Update a routing policy. Update an existing routing policy, specified by its routing policy ID. Its name, tags and incoming/outgoing prefix filters can be updated.
+     *
+     * @param request - The request {@link UpdateRoutingPolicyRequest}
+     * @returns A Promise of RoutingPolicy
+     */
+    updateRoutingPolicy: (request: Readonly<UpdateRoutingPolicyRequest>) => Promise<RoutingPolicy>;
+    /**
+     * Delete a routing policy. Delete an existing routing policy, specified by its routing policy ID.
+     *
+     * @param request - The request {@link DeleteRoutingPolicyRequest}
+     */
+    deleteRoutingPolicy: (request: Readonly<DeleteRoutingPolicyRequest>) => Promise<void>;
+}

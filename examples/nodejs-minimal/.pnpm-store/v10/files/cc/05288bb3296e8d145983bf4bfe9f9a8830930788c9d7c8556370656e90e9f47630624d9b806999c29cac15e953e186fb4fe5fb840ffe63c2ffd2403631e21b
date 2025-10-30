@@ -1,0 +1,267 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const content_gen = require("./content.gen.cjs");
+const marshalling_gen = require("./marshalling.gen.cjs");
+const jsonContentHeaders = {
+  "Content-Type": "application/json; charset=utf-8"
+};
+class API extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par", "nl-ams", "pl-waw"]
+  });
+  pageOfListNamespaces = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/registry/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/namespaces`,
+      urlParams: sdkClient.urlParams(
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId]
+      )
+    },
+    marshalling_gen.unmarshalListNamespacesResponse
+  );
+  /**
+   * List namespaces. List all namespaces in a specified region. By default, the namespaces listed are ordered by creation date in ascending order. This can be modified via the order_by field. You can also define additional parameters for your query, such as the `instance_id` and `project_id` parameters.
+   *
+   * @param request - The request {@link ListNamespacesRequest}
+   * @returns A Promise of ListNamespacesResponse
+   */
+  listNamespaces = (request = {}) => sdkClient.enrichForPagination("namespaces", this.pageOfListNamespaces, request);
+  /**
+   * Get a namespace. Retrieve information about a given namespace, specified by its `namespace_id` and region. Full details about the namespace, such as `description`, `project_id`, `status`, `endpoint`, `is_public`, `size`, and `image_count` are returned in the response.
+   *
+   * @param request - The request {@link GetNamespaceRequest}
+   * @returns A Promise of Namespace
+   */
+  getNamespace = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/registry/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/namespaces/${sdkClient.validatePathParam("namespaceId", request.namespaceId)}`
+    },
+    marshalling_gen.unmarshalNamespace
+  );
+  /**
+   * Waits for {@link Namespace} to be in a final state.
+   *
+   * @param request - The request {@link GetNamespaceRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Namespace
+   */
+  waitForNamespace = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.NAMESPACE_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getNamespace,
+    request,
+    options
+  );
+  /**
+   * Create a namespace. Create a new Container Registry namespace. You must specify the namespace name and region in which you want it to be created. Optionally, you can specify the `project_id` and `is_public` in the request payload.
+   *
+   * @param request - The request {@link CreateNamespaceRequest}
+   * @returns A Promise of Namespace
+   */
+  createNamespace = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateNamespaceRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/registry/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/namespaces`
+    },
+    marshalling_gen.unmarshalNamespace
+  );
+  /**
+   * Update a namespace. Update the parameters of a given namespace, specified by its `namespace_id` and `region`. You can update the `description` and `is_public` parameters.
+   *
+   * @param request - The request {@link UpdateNamespaceRequest}
+   * @returns A Promise of Namespace
+   */
+  updateNamespace = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateNamespaceRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/registry/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/namespaces/${sdkClient.validatePathParam("namespaceId", request.namespaceId)}`
+    },
+    marshalling_gen.unmarshalNamespace
+  );
+  /**
+   * Delete a namespace. Delete a given namespace. You must specify, in the endpoint, the `region` and `namespace_id` parameters of the namespace you want to delete.
+   *
+   * @param request - The request {@link DeleteNamespaceRequest}
+   * @returns A Promise of Namespace
+   */
+  deleteNamespace = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/registry/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/namespaces/${sdkClient.validatePathParam("namespaceId", request.namespaceId)}`
+    },
+    marshalling_gen.unmarshalNamespace
+  );
+  pageOfListImages = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/registry/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/images`,
+      urlParams: sdkClient.urlParams(
+        ["name", request.name],
+        ["namespace_id", request.namespaceId],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId]
+      )
+    },
+    marshalling_gen.unmarshalListImagesResponse
+  );
+  /**
+   * List images. List all images in a specified region. By default, the images listed are ordered by creation date in ascending order. This can be modified via the order_by field. You can also define additional parameters for your query, such as the `namespace_id` and `project_id` parameters.
+   *
+   * @param request - The request {@link ListImagesRequest}
+   * @returns A Promise of ListImagesResponse
+   */
+  listImages = (request = {}) => sdkClient.enrichForPagination("images", this.pageOfListImages, request);
+  /**
+   * Get an image. Retrieve information about a given container image, specified by its `image_id` and region. Full details about the image, such as `name`, `namespace_id`, `status`, `visibility`, and `size` are returned in the response.
+   *
+   * @param request - The request {@link GetImageRequest}
+   * @returns A Promise of Image
+   */
+  getImage = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/registry/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/images/${sdkClient.validatePathParam("imageId", request.imageId)}`
+    },
+    marshalling_gen.unmarshalImage
+  );
+  /**
+   * Waits for {@link Image} to be in a final state.
+   *
+   * @param request - The request {@link GetImageRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Image
+   */
+  waitForImage = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.IMAGE_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getImage,
+    request,
+    options
+  );
+  /**
+   * Update an image. Update the parameters of a given image, specified by its `image_id` and `region`. You can update the `visibility` parameter.
+   *
+   * @param request - The request {@link UpdateImageRequest}
+   * @returns A Promise of Image
+   */
+  updateImage = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateImageRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/registry/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/images/${sdkClient.validatePathParam("imageId", request.imageId)}`
+    },
+    marshalling_gen.unmarshalImage
+  );
+  /**
+   * Delete an image. Delete a given image. You must specify, in the endpoint, the `region` and `image_id` parameters of the image you want to delete.
+   *
+   * @param request - The request {@link DeleteImageRequest}
+   * @returns A Promise of Image
+   */
+  deleteImage = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/registry/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/images/${sdkClient.validatePathParam("imageId", request.imageId)}`
+    },
+    marshalling_gen.unmarshalImage
+  );
+  pageOfListTags = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/registry/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/images/${sdkClient.validatePathParam("imageId", request.imageId)}/tags`,
+      urlParams: sdkClient.urlParams(
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListTagsResponse
+  );
+  /**
+   * List tags. List all tags for a given image, specified by region. By default, the tags listed are ordered by creation date in ascending order. This can be modified via the order_by field. You can also define additional parameters for your query, such as the `name`.
+   *
+   * @param request - The request {@link ListTagsRequest}
+   * @returns A Promise of ListTagsResponse
+   */
+  listTags = (request) => sdkClient.enrichForPagination("tags", this.pageOfListTags, request);
+  /**
+   * Get a tag. Retrieve information about a given image tag, specified by its `tag_id` and region. Full details about the tag, such as `name`, `image_id`, `status`, and `digest` are returned in the response.
+   *
+   * @param request - The request {@link GetTagRequest}
+   * @returns A Promise of Tag
+   */
+  getTag = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/registry/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/tags/${sdkClient.validatePathParam("tagId", request.tagId)}`
+    },
+    marshalling_gen.unmarshalTag
+  );
+  /**
+   * Waits for {@link Tag} to be in a final state.
+   *
+   * @param request - The request {@link GetTagRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Tag
+   */
+  waitForTag = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.TAG_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getTag,
+    request,
+    options
+  );
+  /**
+   * Delete a tag. Delete a given image tag. You must specify, in the endpoint, the `region` and `tag_id` parameters of the tag you want to delete.
+   *
+   * @param request - The request {@link DeleteTagRequest}
+   * @returns A Promise of Tag
+   */
+  deleteTag = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/registry/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/tags/${sdkClient.validatePathParam("tagId", request.tagId)}`,
+      urlParams: sdkClient.urlParams(["force", request.force])
+    },
+    marshalling_gen.unmarshalTag
+  );
+}
+exports.API = API;

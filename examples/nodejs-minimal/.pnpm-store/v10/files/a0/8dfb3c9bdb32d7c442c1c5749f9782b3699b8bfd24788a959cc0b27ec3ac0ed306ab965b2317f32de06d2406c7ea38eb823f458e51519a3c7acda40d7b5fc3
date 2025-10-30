@@ -1,0 +1,249 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client';
+import type { BulkCreateBlocklistsRequest, BulkCreateBlocklistsResponse, CancelEmailRequest, CheckDomainRequest, CreateDomainRequest, CreateEmailRequest, CreateEmailResponse, CreateWebhookRequest, DeleteBlocklistRequest, DeleteWebhookRequest, Domain, DomainLastStatus, Email, GetDomainLastStatusRequest, GetDomainRequest, GetEmailRequest, GetProjectConsumptionRequest, GetProjectSettingsRequest, GetStatisticsRequest, GetWebhookRequest, ListBlocklistsRequest, ListBlocklistsResponse, ListDomainsRequest, ListDomainsResponse, ListEmailsRequest, ListEmailsResponse, ListOfferSubscriptionsRequest, ListOfferSubscriptionsResponse, ListOffersRequest, ListOffersResponse, ListPoolsRequest, ListPoolsResponse, ListWebhookEventsRequest, ListWebhookEventsResponse, ListWebhooksRequest, ListWebhooksResponse, OfferSubscription, ProjectConsumption, ProjectSettings, RevokeDomainRequest, Statistics, UpdateDomainRequest, UpdateOfferSubscriptionRequest, UpdateProjectSettingsRequest, UpdateWebhookRequest, Webhook } from './types.gen';
+/**
+ * Transactional Email API.
+
+This API allows you to manage your Transactional Email services.
+ */
+export declare class API extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    /**
+     * Send an email. You must specify the `region`, the sender and the recipient's information and the `project_id` to send an email from a checked domain. The subject of the email must contain at least 6 characters.
+     *
+     * @param request - The request {@link CreateEmailRequest}
+     * @returns A Promise of CreateEmailResponse
+     */
+    createEmail: (request: Readonly<CreateEmailRequest>) => Promise<CreateEmailResponse>;
+    /**
+     * Get an email. Retrieve information about a specific email using the `email_id` and `region` parameters.
+     *
+     * @param request - The request {@link GetEmailRequest}
+     * @returns A Promise of Email
+     */
+    getEmail: (request: Readonly<GetEmailRequest>) => Promise<Email>;
+    /**
+     * Waits for {@link Email} to be in a final state.
+     *
+     * @param request - The request {@link GetEmailRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Email
+     */
+    waitForEmail: (request: Readonly<GetEmailRequest>, options?: Readonly<WaitForOptions<Email>>) => Promise<Email>;
+    protected pageOfListEmails: (request?: Readonly<ListEmailsRequest>) => Promise<ListEmailsResponse>;
+    /**
+     * List emails. Retrieve the list of emails sent from a specific domain or for a specific Project or Organization. You must specify the `region`.
+     *
+     * @param request - The request {@link ListEmailsRequest}
+     * @returns A Promise of ListEmailsResponse
+     */
+    listEmails: (request?: Readonly<ListEmailsRequest>) => Promise<ListEmailsResponse> & {
+        all: () => Promise<Email[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Email[], void, void>;
+    };
+    /**
+     * Email statuses. Get information on your emails' statuses.
+     *
+     * @param request - The request {@link GetStatisticsRequest}
+     * @returns A Promise of Statistics
+     */
+    getStatistics: (request?: Readonly<GetStatisticsRequest>) => Promise<Statistics>;
+    /**
+     * Cancel an email. You can cancel the sending of an email if it has not been sent yet. You must specify the `region` and the `email_id` of the email you want to cancel.
+     *
+     * @param request - The request {@link CancelEmailRequest}
+     * @returns A Promise of Email
+     */
+    cancelEmail: (request: Readonly<CancelEmailRequest>) => Promise<Email>;
+    /**
+     * Register a domain in a project. You must specify the `region`, `project_id` and `domain_name` to register a domain in a specific Project.
+     *
+     * @param request - The request {@link CreateDomainRequest}
+     * @returns A Promise of Domain
+     */
+    createDomain: (request: Readonly<CreateDomainRequest>) => Promise<Domain>;
+    /**
+     * Get information about a domain. Retrieve information about a specific domain using the `region` and `domain_id` parameters. Monitor your domain's reputation and improve **average** and **bad** reputation statuses, using your domain's **Email activity** tab on the [Scaleway console](https://console.scaleway.com/transactional-email/domains) to get a more detailed report. Check out our [dedicated documentation](https://www.scaleway.com/en/docs/managed-services/transactional-email/reference-content/understanding-tem-reputation-score/) to improve your domain's reputation.
+     *
+     * @param request - The request {@link GetDomainRequest}
+     * @returns A Promise of Domain
+     */
+    getDomain: (request: Readonly<GetDomainRequest>) => Promise<Domain>;
+    /**
+     * Waits for {@link Domain} to be in a final state.
+     *
+     * @param request - The request {@link GetDomainRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Domain
+     */
+    waitForDomain: (request: Readonly<GetDomainRequest>, options?: Readonly<WaitForOptions<Domain>>) => Promise<Domain>;
+    protected pageOfListDomains: (request?: Readonly<ListDomainsRequest>) => Promise<ListDomainsResponse>;
+    /**
+     * List domains. Retrieve domains in a specific Project or in a specific Organization using the `region` parameter.
+     *
+     * @param request - The request {@link ListDomainsRequest}
+     * @returns A Promise of ListDomainsResponse
+     */
+    listDomains: (request?: Readonly<ListDomainsRequest>) => Promise<ListDomainsResponse> & {
+        all: () => Promise<Domain[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Domain[], void, void>;
+    };
+    /**
+     * Delete a domain. You must specify the domain you want to delete by the `region` and `domain_id`. Deleting a domain is permanent and cannot be undone.
+     *
+     * @param request - The request {@link RevokeDomainRequest}
+     * @returns A Promise of Domain
+     */
+    revokeDomain: (request: Readonly<RevokeDomainRequest>) => Promise<Domain>;
+    /**
+     * Domain DNS check. Perform an immediate DNS check of a domain using the `region` and `domain_id` parameters.
+     *
+     * @param request - The request {@link CheckDomainRequest}
+     * @returns A Promise of Domain
+     */
+    checkDomain: (request: Readonly<CheckDomainRequest>) => Promise<Domain>;
+    /**
+     * Display SPF and DKIM records status and potential errors. Display SPF and DKIM records status and potential errors, including the found records to make debugging easier.
+     *
+     * @param request - The request {@link GetDomainLastStatusRequest}
+     * @returns A Promise of DomainLastStatus
+     */
+    getDomainLastStatus: (request: Readonly<GetDomainLastStatusRequest>) => Promise<DomainLastStatus>;
+    /**
+     * Update a domain. Update a domain auto-configuration.
+     *
+     * @param request - The request {@link UpdateDomainRequest}
+     * @returns A Promise of Domain
+     */
+    updateDomain: (request: Readonly<UpdateDomainRequest>) => Promise<Domain>;
+    /**
+     * Create a Webhook. Create a new Webhook triggered by a list of event types and pushed to a Scaleway SNS ARN.
+     *
+     * @param request - The request {@link CreateWebhookRequest}
+     * @returns A Promise of Webhook
+     */
+    createWebhook: (request: Readonly<CreateWebhookRequest>) => Promise<Webhook>;
+    protected pageOfListWebhooks: (request?: Readonly<ListWebhooksRequest>) => Promise<ListWebhooksResponse>;
+    /**
+     * List Webhooks. Retrieve Webhooks in a specific Project or in a specific Organization using the `region` parameter.
+     *
+     * @param request - The request {@link ListWebhooksRequest}
+     * @returns A Promise of ListWebhooksResponse
+     */
+    listWebhooks: (request?: Readonly<ListWebhooksRequest>) => Promise<ListWebhooksResponse> & {
+        all: () => Promise<Webhook[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Webhook[], void, void>;
+    };
+    /**
+     * Get information about a Webhook. Retrieve information about a specific Webhook using the `webhook_id` and `region` parameters.
+     *
+     * @param request - The request {@link GetWebhookRequest}
+     * @returns A Promise of Webhook
+     */
+    getWebhook: (request: Readonly<GetWebhookRequest>) => Promise<Webhook>;
+    /**
+     * Update a Webhook. Update a Webhook events type, SNS ARN or name.
+     *
+     * @param request - The request {@link UpdateWebhookRequest}
+     * @returns A Promise of Webhook
+     */
+    updateWebhook: (request: Readonly<UpdateWebhookRequest>) => Promise<Webhook>;
+    /**
+     * Delete a Webhook. You must specify the Webhook you want to delete by the `region` and `webhook_id`. Deleting a Webhook is permanent and cannot be undone.
+     *
+     * @param request - The request {@link DeleteWebhookRequest}
+     */
+    deleteWebhook: (request: Readonly<DeleteWebhookRequest>) => Promise<void>;
+    protected pageOfListWebhookEvents: (request: Readonly<ListWebhookEventsRequest>) => Promise<ListWebhookEventsResponse>;
+    /**
+     * List Webhook triggered events. Retrieve the list of Webhook events triggered from a specific Webhook or for a specific Project or Organization. You must specify the `region`.
+     *
+     * @param request - The request {@link ListWebhookEventsRequest}
+     * @returns A Promise of ListWebhookEventsResponse
+     */
+    listWebhookEvents: (request: Readonly<ListWebhookEventsRequest>) => Promise<ListWebhookEventsResponse> & {
+        all: () => Promise<import("./types.gen").WebhookEvent[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").WebhookEvent[], void, void>;
+    };
+    /**
+     * List project settings. Retrieve the project settings including periodic reports.
+     *
+     * @param request - The request {@link GetProjectSettingsRequest}
+     * @returns A Promise of ProjectSettings
+     */
+    getProjectSettings: (request?: Readonly<GetProjectSettingsRequest>) => Promise<ProjectSettings>;
+    /**
+     * Update project settings. Update the project settings including periodic reports.
+     *
+     * @param request - The request {@link UpdateProjectSettingsRequest}
+     * @returns A Promise of ProjectSettings
+     */
+    updateProjectSettings: (request?: Readonly<UpdateProjectSettingsRequest>) => Promise<ProjectSettings>;
+    protected pageOfListBlocklists: (request: Readonly<ListBlocklistsRequest>) => Promise<ListBlocklistsResponse>;
+    /**
+     * List blocklists. Retrieve the list of blocklists.
+     *
+     * @param request - The request {@link ListBlocklistsRequest}
+     * @returns A Promise of ListBlocklistsResponse
+     */
+    listBlocklists: (request: Readonly<ListBlocklistsRequest>) => Promise<ListBlocklistsResponse> & {
+        all: () => Promise<import("./types.gen").Blocklist[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").Blocklist[], void, void>;
+    };
+    /**
+     * Bulk create blocklists. Create multiple blocklists in a specific Project or Organization using the `region` parameter.
+     *
+     * @param request - The request {@link BulkCreateBlocklistsRequest}
+     * @returns A Promise of BulkCreateBlocklistsResponse
+     */
+    bulkCreateBlocklists: (request: Readonly<BulkCreateBlocklistsRequest>) => Promise<BulkCreateBlocklistsResponse>;
+    /**
+     * Delete a blocklist. You must specify the blocklist you want to delete by the `region` and `blocklist_id`.
+     *
+     * @param request - The request {@link DeleteBlocklistRequest}
+     */
+    deleteBlocklist: (request: Readonly<DeleteBlocklistRequest>) => Promise<void>;
+    /**
+     * Get information about subscribed offers. Retrieve information about the offers you are subscribed to using the `project_id` and `region` parameters.
+     *
+     * @param request - The request {@link ListOfferSubscriptionsRequest}
+     * @returns A Promise of ListOfferSubscriptionsResponse
+     */
+    listOfferSubscriptions: (request?: Readonly<ListOfferSubscriptionsRequest>) => Promise<ListOfferSubscriptionsResponse>;
+    /**
+     * Update a subscribed offer.
+     *
+     * @param request - The request {@link UpdateOfferSubscriptionRequest}
+     * @returns A Promise of OfferSubscription
+     */
+    updateOfferSubscription: (request?: Readonly<UpdateOfferSubscriptionRequest>) => Promise<OfferSubscription>;
+    /**
+     * List the available offers.. Retrieve the list of the available and free-of-charge offers you can subscribe to.
+     *
+     * @param request - The request {@link ListOffersRequest}
+     * @returns A Promise of ListOffersResponse
+     */
+    listOffers: (request?: Readonly<ListOffersRequest>) => Promise<ListOffersResponse>;
+    protected pageOfListPools: (request?: Readonly<ListPoolsRequest>) => Promise<ListPoolsResponse>;
+    /**
+     * Get information about a sending pool.. Retrieve information about a sending pool, including its creation status and configuration parameters.
+     *
+     * @param request - The request {@link ListPoolsRequest}
+     * @returns A Promise of ListPoolsResponse
+     */
+    listPools: (request?: Readonly<ListPoolsRequest>) => Promise<ListPoolsResponse> & {
+        all: () => Promise<import("./types.gen").Pool[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").Pool[], void, void>;
+    };
+    /**
+     * Get project resource consumption.. Get project resource consumption.
+     *
+     * @param request - The request {@link GetProjectConsumptionRequest}
+     * @returns A Promise of ProjectConsumption
+     */
+    getProjectConsumption: (request?: Readonly<GetProjectConsumptionRequest>) => Promise<ProjectConsumption>;
+}

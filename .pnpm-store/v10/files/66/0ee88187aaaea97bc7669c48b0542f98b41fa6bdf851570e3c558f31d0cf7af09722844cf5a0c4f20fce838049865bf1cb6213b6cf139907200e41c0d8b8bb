@@ -1,0 +1,158 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const content_gen = require("./content.gen.cjs");
+const marshalling_gen = require("./marshalling.gen.cjs");
+const jsonContentHeaders = {
+  "Content-Type": "application/json; charset=utf-8"
+};
+class API extends sdkClient.API {
+  /**
+     * Register a user. Register a human and return a access-key and a secret-key that must be used in all other commands.
+  
+  Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable.
+     *
+     * @param request - The request {@link RegisterRequest}
+     * @returns A Promise of RegisterResponse
+     */
+  register = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalRegisterRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/test/v1/register`
+    },
+    marshalling_gen.unmarshalRegisterResponse
+  );
+  pageOfListHumans = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/test/v1/humans`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId]
+      )
+    },
+    marshalling_gen.unmarshalListHumansResponse
+  );
+  /**
+   * List all your humans.
+   *
+   * @param request - The request {@link ListHumansRequest}
+   * @returns A Promise of ListHumansResponse
+   */
+  listHumans = (request = {}) => sdkClient.enrichForPagination("humans", this.pageOfListHumans, request);
+  /**
+   * Get human details. Get the human details associated with the given id.
+   *
+   * @param request - The request {@link GetHumanRequest}
+   * @returns A Promise of Human
+   */
+  getHuman = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/test/v1/humans/${sdkClient.validatePathParam("humanId", request.humanId)}`
+    },
+    marshalling_gen.unmarshalHuman
+  );
+  /**
+   * Waits for {@link Human} to be in a final state.
+   *
+   * @param request - The request {@link GetHumanRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Human
+   */
+  waitForHuman = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(!content_gen.HUMAN_TRANSIENT_STATUSES.includes(res.status))),
+    this.getHuman,
+    request,
+    options
+  );
+  /**
+   * Create a new human.
+   *
+   * @param request - The request {@link CreateHumanRequest}
+   * @returns A Promise of Human
+   */
+  createHuman = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateHumanRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/test/v1/humans`
+    },
+    marshalling_gen.unmarshalHuman
+  );
+  /**
+   * Update an existing human. Update the human associated with the given id.
+   *
+   * @param request - The request {@link UpdateHumanRequest}
+   * @returns A Promise of Human
+   */
+  updateHuman = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateHumanRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/test/v1/humans/${sdkClient.validatePathParam("humanId", request.humanId)}`
+    },
+    marshalling_gen.unmarshalHuman
+  );
+  /**
+   * Delete an existing human. Delete the human associated with the given id.
+   *
+   * @param request - The request {@link DeleteHumanRequest}
+   * @returns A Promise of Human
+   */
+  deleteHuman = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/test/v1/humans/${sdkClient.validatePathParam("humanId", request.humanId)}`
+    },
+    marshalling_gen.unmarshalHuman
+  );
+  /**
+   * Start a 1h running for the given human. Start a one hour running for the given human.
+   *
+   * @param request - The request {@link RunHumanRequest}
+   * @returns A Promise of Human
+   */
+  runHuman = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/test/v1/humans/${sdkClient.validatePathParam("humanId", request.humanId)}/run`
+    },
+    marshalling_gen.unmarshalHuman
+  );
+  /**
+   * Make a human smoke.
+   *
+   * @deprecated
+   * @param request - The request {@link SmokeHumanRequest}
+   * @returns A Promise of Human
+   */
+  smokeHuman = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/test/v1/humans/${sdkClient.validatePathParam("humanId", request.humanId)}/smoke`
+    },
+    marshalling_gen.unmarshalHuman
+  );
+}
+exports.API = API;

@@ -1,0 +1,9 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const ListIPsRequest = {
+  resourceName: {
+    maxLength: 63,
+    minLength: 2
+  }
+};
+exports.ListIPsRequest = ListIPsRequest;

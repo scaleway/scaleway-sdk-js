@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const ListEventsRequest = {
+  methodName: {
+    pattern: /^[a-zA-Z][a-zA-Z0-9_]*$/
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e3
+  },
+  productName: {
+    pattern: /^[a-z]+(-[a-z]+)*$/
+  },
+  serviceName: {
+    pattern: /^scaleway(\.[a-zA-Z0-9_-]*)*$/
+  },
+  status: {
+    greaterThanOrEqual: 200,
+    lessThan: 600
+  }
+};
+exports.ListEventsRequest = ListEventsRequest;

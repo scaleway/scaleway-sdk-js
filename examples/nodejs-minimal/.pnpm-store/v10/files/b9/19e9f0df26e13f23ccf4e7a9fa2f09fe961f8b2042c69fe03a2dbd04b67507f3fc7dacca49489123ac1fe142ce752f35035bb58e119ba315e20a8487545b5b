@@ -1,0 +1,23 @@
+import type { ImageState, IpState, PrivateNICState, SecurityGroupState, ServerFilesystemState, ServerIpState, ServerState, SnapshotState, TaskStatus, VolumeServerState, VolumeState } from './types.gen';
+/** Lists transient statutes of the enum {@link ImageState}. */
+export declare const IMAGE_TRANSIENT_STATUSES: ImageState[];
+/** Lists transient statutes of the enum {@link IpState}. */
+export declare const IP_TRANSIENT_STATUSES: IpState[];
+/** Lists transient statutes of the enum {@link PrivateNICState}. */
+export declare const PRIVATE_NIC_TRANSIENT_STATUSES: PrivateNICState[];
+/** Lists transient statutes of the enum {@link SecurityGroupState}. */
+export declare const SECURITY_GROUP_TRANSIENT_STATUSES: SecurityGroupState[];
+/** Lists transient statutes of the enum {@link ServerFilesystemState}. */
+export declare const SERVER_FILESYSTEM_TRANSIENT_STATUSES: ServerFilesystemState[];
+/** Lists transient statutes of the enum {@link ServerIpState}. */
+export declare const SERVER_IP_TRANSIENT_STATUSES: ServerIpState[];
+/** Lists transient statutes of the enum {@link ServerState}. */
+export declare const SERVER_TRANSIENT_STATUSES: ServerState[];
+/** Lists transient statutes of the enum {@link SnapshotState}. */
+export declare const SNAPSHOT_TRANSIENT_STATUSES: SnapshotState[];
+/** Lists transient statutes of the enum {@link TaskStatus}. */
+export declare const TASK_TRANSIENT_STATUSES: TaskStatus[];
+/** Lists transient statutes of the enum {@link VolumeServerState}. */
+export declare const VOLUME_SERVER_TRANSIENT_STATUSES: VolumeServerState[];
+/** Lists transient statutes of the enum {@link VolumeState}. */
+export declare const VOLUME_TRANSIENT_STATUSES: VolumeState[];

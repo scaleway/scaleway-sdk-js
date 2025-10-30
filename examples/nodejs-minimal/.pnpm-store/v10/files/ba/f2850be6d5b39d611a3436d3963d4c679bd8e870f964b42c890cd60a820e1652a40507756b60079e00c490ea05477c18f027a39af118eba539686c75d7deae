@@ -1,0 +1,116 @@
+const CreateServerRequest = {
+  description: {
+    maxLength: 255
+  },
+  name: {
+    minLength: 1
+  }
+};
+const CreateServerRequestInstall = {
+  hostname: {
+    maxLength: 255
+  },
+  password: {
+    maxLength: 255
+  },
+  servicePassword: {
+    maxLength: 255
+  },
+  serviceUser: {
+    maxLength: 255
+  },
+  user: {
+    maxLength: 255
+  }
+};
+const InstallServerRequest = {
+  hostname: {
+    maxLength: 255
+  },
+  password: {
+    maxLength: 255
+  },
+  servicePassword: {
+    maxLength: 255
+  },
+  serviceUser: {
+    maxLength: 255
+  },
+  user: {
+    maxLength: 255
+  }
+};
+const ListOSRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListOffersRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListOptionsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListServerEventsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListServersRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListSettingsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const UpdateServerRequest = {
+  description: {
+    maxLength: 255
+  },
+  name: {
+    maxLength: 255
+  }
+};
+export {
+  CreateServerRequest,
+  CreateServerRequestInstall,
+  InstallServerRequest,
+  ListOSRequest,
+  ListOffersRequest,
+  ListOptionsRequest,
+  ListServerEventsRequest,
+  ListServersRequest,
+  ListSettingsRequest,
+  UpdateServerRequest
+};

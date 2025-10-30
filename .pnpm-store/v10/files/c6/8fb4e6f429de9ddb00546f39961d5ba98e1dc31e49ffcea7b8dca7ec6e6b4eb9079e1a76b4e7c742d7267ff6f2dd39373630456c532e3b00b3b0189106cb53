@@ -1,0 +1,95 @@
+import type { WaitForOptions } from '@scaleway/sdk-client';
+import { API } from './api.gen';
+import type { CreateServerRequest, GetImageRequest, GetPrivateNICRequest, GetServerRequest, GetSnapshotRequest, GetVolumeRequest, Image, PrivateNIC, Server, ServerActionRequest, Snapshot, UpdateServerRequest, Volume } from './types.gen';
+import type { AttachVolumeRequest, AttachVolumeResponse, DetachVolumeRequest, DetachVolumeResponse, GetServerUserDataRequest, SetServerUserDataRequest } from './types.utils';
+export declare class InstanceV1UtilsAPI extends API {
+    /**
+     * Waits for {@link Image} to be in a final state.
+     *
+     * @param request - The request {@link GetImageRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Image
+     */
+    waitForImage: (request: Readonly<GetImageRequest>, options?: Readonly<WaitForOptions<Image>>) => Promise<Image>;
+    /**
+     * Waits for {@link PrivateNIC} to be in a final state.
+     *
+     * @param request - The request {@link GetPrivateNICRequest}
+     * @param options - The waiting options
+     * @returns A Promise of PrivateNIC
+     */
+    waitForPrivateNIC: (request: Readonly<GetPrivateNICRequest>, options?: Readonly<WaitForOptions<PrivateNIC>>) => Promise<PrivateNIC>;
+    /**
+     * Waits for {@link Server} to be in a final state.
+     *
+     * @param request - The request {@link GetServerRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Server
+     */
+    waitForServer: (request: Readonly<GetServerRequest>, options?: Readonly<WaitForOptions<Server>>) => Promise<Server>;
+    /**
+     * Waits for {@link Server} to be in a final state.
+     *
+     * @param request - The request {@link GetServerRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Server
+     */
+    waitForSnapshot: (request: Readonly<GetSnapshotRequest>, options?: Readonly<WaitForOptions<Snapshot>>) => Promise<Snapshot>;
+    /**
+     * Waits for {@link Volume} to be in a final state.
+     *
+     * @param request - The request {@link GetVolumeRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Volume
+     */
+    waitForVolume: (request: Readonly<GetVolumeRequest>, options?: Readonly<WaitForOptions<Volume>>) => Promise<Volume>;
+    /**
+     * Updates a server.
+     *
+     * @param request - The request {@link UpdateServerRequest}
+     * @returns A Promise of UpdateServerResponse
+     */
+    updateServer: (request: UpdateServerRequest) => Promise<import("./types.gen").UpdateServerResponse>;
+    /**
+     * Creates a server.
+     *
+     * @param request - The request {@link CreateServerRequest}
+     * @returns A Promise of CreateServerResponse
+     */
+    createServer: (request: Readonly<CreateServerRequest>) => Promise<import("./types.gen").CreateServerResponse>;
+    /**
+     * Starts an action and wait for the server to be in the correct "terminal
+     * state" expected by this action.
+     *
+     * @param request - The request {@link ServerActionRequest}
+     * @returns A Promise of Server
+     */
+    serverActionAndWait: (request: ServerActionRequest, options?: Readonly<WaitForOptions<Server>>) => Promise<Server>;
+    /**
+     * Attaches a volume to a server.
+     *
+     * @param request - The request {@link AttachVolumeRequest}
+     * @returns A Promise of AttachVolumeResponse
+     */
+    attachVolume: (request: Readonly<AttachVolumeRequest>) => Promise<AttachVolumeResponse>;
+    /**
+     * Detaches a volume from a server.
+     *
+     * @param request - The request {@link DetachVolumeRequest}
+     * @returns A Promise of DetachVolumeResponse
+     */
+    detachVolume: (request: DetachVolumeRequest) => Promise<DetachVolumeResponse>;
+    /**
+     * Get the content of a user data on a server for the given key.
+     *
+     * @param request - The request {@link GetServerUserDataRequest}
+     * @returns The content of the key
+     */
+    getServerUserData: (request: Readonly<GetServerUserDataRequest>) => Promise<string>;
+    /**
+     * Sets the content of a user data on a server for the given key.
+     *
+     * @param request - The request {@link SetServerUserDataRequest}
+     */
+    setServerUserData: (request: Readonly<SetServerUserDataRequest>) => Promise<void>;
+}

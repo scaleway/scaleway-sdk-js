@@ -1,0 +1,11 @@
+class Decimal {
+  str;
+  constructor(v) {
+    this.str = v;
+  }
+  toString = () => this.str;
+  marshal = () => ({ value: this.str });
+}
+export {
+  Decimal
+};

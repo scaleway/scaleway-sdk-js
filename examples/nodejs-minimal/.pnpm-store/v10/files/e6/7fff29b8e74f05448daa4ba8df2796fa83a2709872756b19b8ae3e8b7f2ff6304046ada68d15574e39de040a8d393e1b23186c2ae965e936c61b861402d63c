@@ -1,0 +1,23 @@
+import { API } from "./api.gen.js";
+import { REFERENCE_TRANSIENT_STATUSES, SNAPSHOT_TRANSIENT_STATUSES, VOLUME_TRANSIENT_STATUSES } from "./content.gen.js";
+import { marshalCreateSnapshotRequest, marshalCreateVolumeRequest, marshalExportSnapshotToObjectStorageRequest, marshalImportSnapshotFromObjectStorageRequest, marshalUpdateSnapshotRequest, marshalUpdateVolumeRequest, unmarshalListSnapshotsResponse, unmarshalListVolumeTypesResponse, unmarshalListVolumesResponse, unmarshalReference, unmarshalSnapshot, unmarshalVolume } from "./marshalling.gen.js";
+import * as validationRules_gen from "./validation-rules.gen.js";
+export {
+  API,
+  REFERENCE_TRANSIENT_STATUSES,
+  SNAPSHOT_TRANSIENT_STATUSES,
+  VOLUME_TRANSIENT_STATUSES,
+  validationRules_gen as ValidationRules,
+  marshalCreateSnapshotRequest,
+  marshalCreateVolumeRequest,
+  marshalExportSnapshotToObjectStorageRequest,
+  marshalImportSnapshotFromObjectStorageRequest,
+  marshalUpdateSnapshotRequest,
+  marshalUpdateVolumeRequest,
+  unmarshalListSnapshotsResponse,
+  unmarshalListVolumeTypesResponse,
+  unmarshalListVolumesResponse,
+  unmarshalReference,
+  unmarshalSnapshot,
+  unmarshalVolume
+};

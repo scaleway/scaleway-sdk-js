@@ -1,0 +1,104 @@
+export declare const CreateServerRequest: {
+    description: {
+        maxLength: number;
+    };
+    name: {
+        minLength: number;
+    };
+};
+export declare const CreateServerRequestInstall: {
+    hostname: {
+        maxLength: number;
+    };
+    password: {
+        maxLength: number;
+    };
+    servicePassword: {
+        maxLength: number;
+    };
+    serviceUser: {
+        maxLength: number;
+    };
+    user: {
+        maxLength: number;
+    };
+};
+export declare const InstallServerRequest: {
+    hostname: {
+        maxLength: number;
+    };
+    password: {
+        maxLength: number;
+    };
+    servicePassword: {
+        maxLength: number;
+    };
+    serviceUser: {
+        maxLength: number;
+    };
+    user: {
+        maxLength: number;
+    };
+};
+export declare const ListOSRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListOffersRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListOptionsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListServerEventsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListServersRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListSettingsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const UpdateServerRequest: {
+    description: {
+        maxLength: number;
+    };
+    name: {
+        maxLength: number;
+    };
+};

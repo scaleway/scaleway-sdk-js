@@ -1,0 +1,9 @@
+import type { CertificateStatus, InstanceStatus, LbStatus, PrivateNetworkStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link CertificateStatus}. */
+export declare const CERTIFICATE_TRANSIENT_STATUSES: CertificateStatus[];
+/** Lists transient statutes of the enum {@link InstanceStatus}. */
+export declare const INSTANCE_TRANSIENT_STATUSES: InstanceStatus[];
+/** Lists transient statutes of the enum {@link LbStatus}. */
+export declare const LB_TRANSIENT_STATUSES: LbStatus[];
+/** Lists transient statutes of the enum {@link PrivateNetworkStatus}. */
+export declare const PRIVATE_NETWORK_TRANSIENT_STATUSES: PrivateNetworkStatus[];

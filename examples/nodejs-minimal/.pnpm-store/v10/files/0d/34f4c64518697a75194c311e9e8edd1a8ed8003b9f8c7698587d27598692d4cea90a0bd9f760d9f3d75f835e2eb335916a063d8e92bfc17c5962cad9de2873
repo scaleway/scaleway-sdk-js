@@ -1,0 +1,111 @@
+import type { NetworkInterceptors } from '../index.js';
+import type { Profile } from './client-ini-profile.js';
+import type { Settings } from './client-settings.js';
+/**
+ * A factory to build {@link Settings}.
+ *
+ * @public
+ */
+export type ClientConfig = (obj: Settings) => Settings;
+/**
+ * Instantiates the SDK from a configuration {@link Profile}.
+ *
+ * @param profile - The profile
+ * @returns A factory {@link ClientConfig}
+ *
+ * @remarks This method should be used in conjunction with the initializer `createAdvancedClient`.
+ *
+ * @public
+ */
+export declare const withProfile: (profile: Readonly<Profile>) => (settings: Readonly<Settings>) => Settings;
+/**
+ * Instantiates the SDK with a different HTTP client.
+ *
+ * @param httpClient - A fetch compatible HTTP client
+ * @returns A factory {@link ClientConfig}
+ *
+ * @remarks This method should be used in conjunction with the initializer `createAdvancedClient`.
+ *
+ * @public
+ */
+export declare const withHTTPClient: (httpClient: typeof fetch) => (settings: Readonly<Settings>) => Settings;
+/**
+ * Instantiates the SDK with a default page size.
+ *
+ * @param defaultPageSize - The default page size
+ * @returns A factory {@link ClientConfig}
+ *
+ * @remarks This method should be used in conjunction with the initializer `createAdvancedClient`.
+ *
+ * @public
+ */
+export declare const withDefaultPageSize: (defaultPageSize: number) => ClientConfig;
+/**
+ * Instantiates the SDK with a different default user agent.
+ *
+ * @param userAgent - The default user agent
+ * @returns A factory {@link ClientConfig}
+ *
+ * @remarks This method should be used in conjunction with the initializer `createAdvancedClient`.
+ *
+ * @public
+ */
+export declare const withUserAgent: (userAgent: string) => (settings: Readonly<Settings>) => Settings;
+/**
+ * Instantiates the SDK with an additional user agent.
+ *
+ * @param userAgent - The suffix to append to default user agent
+ * @returns A factory {@link ClientConfig}
+ *
+ * @remarks This method should be used in conjunction with the initializer `createAdvancedClient`.
+ *
+ * @public
+ */
+export declare const withUserAgentSuffix: (userAgent: string) => (settings: Readonly<Settings>) => Settings;
+/**
+ * Instantiates the SDK with additional interceptors.
+ *
+ * @param interceptors - The additional {@link NetworkInterceptors} interceptors
+ * @returns A factory {@link ClientConfig}
+ *
+ * @remarks
+ * It doesn't override the existing interceptors, but instead push more to the list.
+ * This method should be used in conjunction with the initializer `createAdvancedClient`.
+ *
+ * @example
+ * ```
+ * withAdditionalInterceptors([
+ *   {
+ *     request: ({ request }) => {
+ *       console.log(`Do something with ${JSON.stringify(request)}`)
+ *       return request
+ *     },
+ *     response: ({ response }) => {
+ *       console.log(`Do something with ${JSON.stringify(response)}`)
+ *       return response
+ *     },
+ *     responseError: async ({
+ *       request,
+ *       error,
+ *     }: {
+ *       request: Request
+ *       error: unknown
+ *     }) => {
+ *       console.log(
+ *         `Do something with ${JSON.stringify(request)} and ${JSON.stringify(
+ *           error,
+ *         )}`,
+ *       )
+ *       throw error // or return Promise.resolve(someData)
+ *     },
+ *   },
+ * ])
+ * ```
+ *
+ * @public
+ */
+export declare const withAdditionalInterceptors: (interceptors: NetworkInterceptors[]) => (settings: Readonly<Settings>) => Settings;
+/**
+ * Instantiates the SDK with legacy interceptors.
+ */
+export declare const withLegacyInterceptors: () => (settings: Readonly<Settings>) => Settings;

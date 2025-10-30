@@ -1,0 +1,23 @@
+import type { LogLevel } from './level-resolver.js';
+import type { Logger } from './logger';
+/**
+ * A Logger using console output.
+ *
+ * @param logLevel - The logger level name
+ * @param prefix - An optional logger message prefix
+ * @param output - The output to print logs, using by default the global console object
+ *
+ * @internal
+ */
+export declare class ConsoleLogger implements Logger {
+    readonly logLevel: LogLevel;
+    private readonly prefix;
+    private output;
+    private level;
+    constructor(logLevel: LogLevel, prefix?: string, output?: typeof console);
+    private makeMethod;
+    debug: (message: string) => void;
+    error: (message: string) => void;
+    info: (message: string) => void;
+    warn: (message: string) => void;
+}

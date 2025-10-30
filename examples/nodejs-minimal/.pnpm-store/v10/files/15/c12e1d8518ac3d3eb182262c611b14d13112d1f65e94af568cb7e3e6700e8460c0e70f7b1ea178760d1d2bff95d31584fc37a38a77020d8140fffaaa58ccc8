@@ -1,0 +1,1475 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalIP = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'IP' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    address: data.address,
+    cidr: data.cidr,
+    gateway: data.gateway,
+    ipId: data.ip_id,
+    netmask: data.netmask,
+    reverse: data.reverse,
+    semantic: data.semantic,
+    status: data.status,
+    version: data.version
+  };
+};
+const unmarshalCPU = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CPU' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    coreCount: data.core_count,
+    frequency: data.frequency,
+    name: data.name,
+    threadCount: data.thread_count
+  };
+};
+const unmarshalDisk = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Disk' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    capacity: data.capacity,
+    type: data.type
+  };
+};
+const unmarshalMemory = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Memory' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    capacity: data.capacity,
+    frequency: data.frequency,
+    isEcc: data.is_ecc,
+    type: data.type
+  };
+};
+const unmarshalPersistentMemory = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PersistentMemory' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    capacity: data.capacity,
+    frequency: data.frequency,
+    model: data.model
+  };
+};
+const unmarshalRaidController = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RaidController' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    model: data.model,
+    raidLevel: data.raid_level
+  };
+};
+const unmarshalOfferAntiDosInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferAntiDosInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    type: data.type
+  };
+};
+const unmarshalOfferBackupInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferBackupInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    size: data.size
+  };
+};
+const unmarshalOfferBandwidthInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferBandwidthInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    speed: data.speed
+  };
+};
+const unmarshalOfferFailoverBlockInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferFailoverBlockInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    onetimeFees: data.onetime_fees ? unmarshalOffer(data.onetime_fees) : void 0
+  };
+};
+const unmarshalOfferFailoverIpInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferFailoverIpInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    onetimeFees: data.onetime_fees ? unmarshalOffer(data.onetime_fees) : void 0
+  };
+};
+const unmarshalOfferLicenseInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferLicenseInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    boundToIp: data.bound_to_ip
+  };
+};
+const unmarshalOfferRPNInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferRPNInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    speed: data.speed
+  };
+};
+const unmarshalOfferSANInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferSANInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    deviceType: data.device_type,
+    ha: data.ha,
+    size: data.size
+  };
+};
+const unmarshalOfferServerInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferServerInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    availableOptions: sdkClient.unmarshalArrayOfObject(
+      data.available_options,
+      unmarshalOffer
+    ),
+    bandwidth: data.bandwidth,
+    commercialRange: data.commercial_range,
+    connectivity: data.connectivity,
+    cpus: sdkClient.unmarshalArrayOfObject(data.cpus, unmarshalCPU),
+    disks: sdkClient.unmarshalArrayOfObject(data.disks, unmarshalDisk),
+    memories: sdkClient.unmarshalArrayOfObject(data.memories, unmarshalMemory),
+    onetimeFees: data.onetime_fees ? unmarshalOffer(data.onetime_fees) : void 0,
+    persistentMemories: sdkClient.unmarshalArrayOfObject(
+      data.persistent_memories,
+      unmarshalPersistentMemory
+    ),
+    raidControllers: sdkClient.unmarshalArrayOfObject(
+      data.raid_controllers,
+      unmarshalRaidController
+    ),
+    rpnVersion: data.rpn_version,
+    stock: data.stock,
+    stockByDatacenter: data.stock_by_datacenter
+  };
+};
+const unmarshalOfferServiceLevelInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferServiceLevelInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    antidos: data.antidos,
+    availableOptions: sdkClient.unmarshalArrayOfObject(
+      data.available_options,
+      unmarshalOffer
+    ),
+    customization: data.customization,
+    extraFailoverQuota: data.extra_failover_quota,
+    git: data.git,
+    highRpnBandwidth: data.high_rpn_bandwidth,
+    prioritySupport: data.priority_support,
+    salesSupport: data.sales_support,
+    sla: data.sla,
+    supportPhone: data.support_phone,
+    supportTicket: data.support_ticket
+  };
+};
+const unmarshalOfferStorageInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferStorageInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    maxQuota: data.max_quota,
+    size: data.size
+  };
+};
+const unmarshalOffer = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Offer' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    antidosInfo: data.antidos_info ? unmarshalOfferAntiDosInfo(data.antidos_info) : void 0,
+    backupInfo: data.backup_info ? unmarshalOfferBackupInfo(data.backup_info) : void 0,
+    bandwidthInfo: data.bandwidth_info ? unmarshalOfferBandwidthInfo(data.bandwidth_info) : void 0,
+    catalog: data.catalog,
+    failoverBlockInfo: data.failover_block_info ? unmarshalOfferFailoverBlockInfo(data.failover_block_info) : void 0,
+    failoverIpInfo: data.failover_ip_info ? unmarshalOfferFailoverIpInfo(data.failover_ip_info) : void 0,
+    id: data.id,
+    licenseInfo: data.license_info ? unmarshalOfferLicenseInfo(data.license_info) : void 0,
+    name: data.name,
+    paymentFrequency: data.payment_frequency,
+    pricing: data.pricing ? sdkClient.unmarshalMoney(data.pricing) : void 0,
+    rpnInfo: data.rpn_info ? unmarshalOfferRPNInfo(data.rpn_info) : void 0,
+    sanInfo: data.san_info ? unmarshalOfferSANInfo(data.san_info) : void 0,
+    serverInfo: data.server_info ? unmarshalOfferServerInfo(data.server_info) : void 0,
+    serviceLevelInfo: data.service_level_info ? unmarshalOfferServiceLevelInfo(data.service_level_info) : void 0,
+    storageInfo: data.storage_info ? unmarshalOfferStorageInfo(data.storage_info) : void 0,
+    usbStorageInfo: data.usb_storage_info ? unmarshalOfferStorageInfo(data.usb_storage_info) : void 0
+  };
+};
+const unmarshalOS = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OS' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    allowCustomPartitioning: data.allow_custom_partitioning,
+    allowSshKeys: data.allow_ssh_keys,
+    allowedFilesystems: data.allowed_filesystems,
+    arch: data.arch,
+    displayName: data.display_name,
+    hostnameMaxLength: data.hostname_max_length,
+    hostnameRegex: data.hostname_regex,
+    id: data.id,
+    licenseOffers: sdkClient.unmarshalArrayOfObject(data.license_offers, unmarshalOffer),
+    maxPartitions: data.max_partitions,
+    name: data.name,
+    panelPasswordRegex: data.panel_password_regex,
+    passwordRegex: data.password_regex,
+    releasedAt: sdkClient.unmarshalDate(data.released_at),
+    requiresAdminPassword: data.requires_admin_password,
+    requiresLicense: data.requires_license,
+    requiresPanelPassword: data.requires_panel_password,
+    requiresUser: data.requires_user,
+    requiresValidHostname: data.requires_valid_hostname,
+    type: data.type,
+    version: data.version
+  };
+};
+const unmarshalRpnSan = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RpnSan' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    datacenterName: data.datacenter_name,
+    deliveredAt: sdkClient.unmarshalDate(data.delivered_at),
+    expiresAt: sdkClient.unmarshalDate(data.expires_at),
+    id: data.id,
+    iqn: data.iqn,
+    iqnSuffix: data.iqn_suffix,
+    offer: data.offer ? unmarshalOffer(data.offer) : void 0,
+    offerId: data.offer_id,
+    offerName: data.offer_name,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    rpnv1Compatible: data.rpnv1_compatible,
+    rpnv1Implicit: data.rpnv1_implicit,
+    serverHostname: data.server_hostname,
+    status: data.status,
+    storageSize: data.storage_size,
+    terminatedAt: sdkClient.unmarshalDate(data.terminated_at)
+  };
+};
+const unmarshalRpnGroup = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RpnGroup' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    active: data.active,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    id: data.id,
+    membersCount: data.members_count,
+    name: data.name,
+    organizationId: data.organization_id,
+    owner: data.owner,
+    projectId: data.project_id,
+    type: data.type
+  };
+};
+const unmarshalNetworkInterface = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'NetworkInterface' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    cardId: data.card_id,
+    deviceId: data.device_id,
+    ips: sdkClient.unmarshalArrayOfObject(data.ips, unmarshalIP),
+    mac: data.mac,
+    type: data.type
+  };
+};
+const unmarshalServerLocation = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerLocation' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    datacenterName: data.datacenter_name,
+    rack: data.rack,
+    room: data.room
+  };
+};
+const unmarshalServerOption = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerOption' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    expiredAt: sdkClient.unmarshalDate(data.expired_at),
+    offer: data.offer ? unmarshalOffer(data.offer) : void 0,
+    options: sdkClient.unmarshalArrayOfObject(data.options, unmarshalServerOption),
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalServiceLevel = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServiceLevel' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    level: data.level,
+    offerId: data.offer_id
+  };
+};
+const unmarshalServer = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Server' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    abuseContact: data.abuse_contact,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    expiredAt: sdkClient.unmarshalDate(data.expired_at),
+    hasBmc: data.has_bmc,
+    hostname: data.hostname,
+    id: data.id,
+    interfaces: sdkClient.unmarshalArrayOfObject(
+      data.interfaces,
+      unmarshalNetworkInterface
+    ),
+    ipv6Slaac: data.ipv6_slaac,
+    isHds: data.is_hds,
+    isOutsourced: data.is_outsourced,
+    isRpnv2Member: data.is_rpnv2_member,
+    level: data.level ? unmarshalServiceLevel(data.level) : void 0,
+    location: data.location ? unmarshalServerLocation(data.location) : void 0,
+    offer: data.offer ? unmarshalOffer(data.offer) : void 0,
+    options: sdkClient.unmarshalArrayOfObject(data.options, unmarshalServerOption),
+    organizationId: data.organization_id,
+    os: data.os ? unmarshalOS(data.os) : void 0,
+    projectId: data.project_id,
+    qinq: data.qinq,
+    rebootedAt: sdkClient.unmarshalDate(data.rebooted_at),
+    rescueOs: data.rescue_os ? unmarshalOS(data.rescue_os) : void 0,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalRpnV2GroupSubnet = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RpnV2GroupSubnet' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    address: data.address,
+    cidr: data.cidr
+  };
+};
+const unmarshalRpnV2Group = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RpnV2Group' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    compatibleRpnv1: data.compatible_rpnv1,
+    gateway: data.gateway,
+    id: data.id,
+    membersCount: data.members_count,
+    name: data.name,
+    organizationId: data.organization_id,
+    owner: data.owner,
+    projectId: data.project_id,
+    rpnv1Group: data.rpnv1_group ? unmarshalRpnGroup(data.rpnv1_group) : void 0,
+    status: data.status,
+    subnet: data.subnet ? unmarshalRpnV2GroupSubnet(data.subnet) : void 0,
+    type: data.type
+  };
+};
+const unmarshalService = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Service' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    deliveredAt: sdkClient.unmarshalDate(data.delivered_at),
+    expiresAt: sdkClient.unmarshalDate(data.expires_at),
+    id: data.id,
+    offer: data.offer ? unmarshalOffer(data.offer) : void 0,
+    provisioningStatus: data.provisioning_status,
+    resourceId: data.resource_id,
+    terminatedAt: sdkClient.unmarshalDate(data.terminated_at),
+    type: data.type
+  };
+};
+const unmarshalFailoverBlock = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'FailoverBlock' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    address: data.address,
+    cidr: data.cidr,
+    gatewayIp: data.gateway_ip,
+    id: data.id,
+    ipVersion: data.ip_version,
+    nameservers: data.nameservers,
+    netmask: data.netmask
+  };
+};
+const unmarshalFailoverIP = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'FailoverIP' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    address: data.address,
+    block: data.block ? unmarshalFailoverBlock(data.block) : void 0,
+    cidr: data.cidr,
+    gatewayIp: data.gateway_ip,
+    id: data.id,
+    ipVersion: data.ip_version,
+    mac: data.mac,
+    netmask: data.netmask,
+    reverse: data.reverse,
+    serverId: data.server_id,
+    serverZone: data.server_zone,
+    status: data.status,
+    type: data.type
+  };
+};
+const unmarshalBMCAccess = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'BMCAccess' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    expiresAt: sdkClient.unmarshalDate(data.expires_at),
+    login: data.login,
+    password: data.password,
+    status: data.status,
+    url: data.url
+  };
+};
+const unmarshalBackup = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Backup' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    aclEnabled: data.acl_enabled,
+    autologin: data.autologin,
+    id: data.id,
+    login: data.login,
+    quotaFiles: data.quota_files,
+    quotaFilesUsed: data.quota_files_used,
+    quotaSpace: data.quota_space,
+    quotaSpaceUsed: data.quota_space_used,
+    server: data.server,
+    status: data.status
+  };
+};
+const unmarshalCanOrderResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CanOrderResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    billingOk: data.billing_ok,
+    canOrder: data.can_order,
+    emailConfirmed: data.email_confirmed,
+    message: data.message,
+    paymentMode: data.payment_mode,
+    phoneConfirmed: data.phone_confirmed,
+    quotaOk: data.quota_ok,
+    userConfirmed: data.user_confirmed
+  };
+};
+const unmarshalCreateFailoverIPsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CreateFailoverIPsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    services: sdkClient.unmarshalArrayOfObject(data.services, unmarshalService),
+    totalCount: data.total_count
+  };
+};
+const unmarshalGetIPv6BlockQuotasResponseQuota = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetIPv6BlockQuotasResponseQuota' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    cidr: data.cidr,
+    quota: data.quota
+  };
+};
+const unmarshalGetIPv6BlockQuotasResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetIPv6BlockQuotasResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    quotas: sdkClient.unmarshalArrayOfObject(
+      data.quotas,
+      unmarshalGetIPv6BlockQuotasResponseQuota
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalGetRemainingQuotaResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetRemainingQuotaResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    failoverBlockQuota: data.failover_block_quota,
+    failoverBlockRemainingQuota: data.failover_block_remaining_quota,
+    failoverIpQuota: data.failover_ip_quota,
+    failoverIpRemainingQuota: data.failover_ip_remaining_quota
+  };
+};
+const unmarshalGetRpnStatusResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetRpnStatusResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    operationsLeft: data.operations_left,
+    status: data.status
+  };
+};
+const unmarshalIPv6Block = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'IPv6Block' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    address: data.address,
+    cidr: data.cidr,
+    delegationStatus: data.delegation_status,
+    duid: data.duid,
+    id: data.id,
+    nameservers: data.nameservers,
+    subnets: sdkClient.unmarshalArrayOfObject(data.subnets, unmarshalIPv6Block)
+  };
+};
+const unmarshalInvoice = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Invoice' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    content: data.content,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    id: data.id,
+    paidAt: sdkClient.unmarshalDate(data.paid_at),
+    paymentMethod: data.payment_method,
+    status: data.status,
+    totalWithTaxes: data.total_with_taxes ? sdkClient.unmarshalMoney(data.total_with_taxes) : void 0,
+    totalWithoutTaxes: data.total_without_taxes ? sdkClient.unmarshalMoney(data.total_without_taxes) : void 0,
+    transactionId: data.transaction_id
+  };
+};
+const unmarshalListFailoverIPsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListFailoverIPsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    failoverIps: sdkClient.unmarshalArrayOfObject(data.failover_ips, unmarshalFailoverIP),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListIPv6BlockSubnetsAvailableResponseSubnet = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListIPv6BlockSubnetsAvailableResponseSubnet' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    address: data.address,
+    cidr: data.cidr
+  };
+};
+const unmarshalListIPv6BlockSubnetsAvailableResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListIPv6BlockSubnetsAvailableResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    subnetAvailables: sdkClient.unmarshalArrayOfObject(
+      data.subnet_availables,
+      unmarshalListIPv6BlockSubnetsAvailableResponseSubnet
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalInvoiceSummary = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InvoiceSummary' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    id: data.id,
+    paidAt: sdkClient.unmarshalDate(data.paid_at),
+    paymentMethod: data.payment_method,
+    status: data.status,
+    totalWithTaxes: data.total_with_taxes ? sdkClient.unmarshalMoney(data.total_with_taxes) : void 0,
+    totalWithoutTaxes: data.total_without_taxes ? sdkClient.unmarshalMoney(data.total_without_taxes) : void 0,
+    transactionId: data.transaction_id
+  };
+};
+const unmarshalListInvoicesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListInvoicesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    invoices: sdkClient.unmarshalArrayOfObject(data.invoices, unmarshalInvoiceSummary),
+    totalCount: data.total_count
+  };
+};
+const unmarshalRpnSanIpRpnV2Group = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RpnSanIpRpnV2Group' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    id: data.id,
+    name: data.name
+  };
+};
+const unmarshalRpnSanIpServer = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RpnSanIpServer' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    datacenterName: data.datacenter_name,
+    hostname: data.hostname,
+    id: data.id
+  };
+};
+const unmarshalRpnSanIp = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RpnSanIp' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    ip: data.ip ? unmarshalIP(data.ip) : void 0,
+    rpnv2Group: data.rpnv2_group ? unmarshalRpnSanIpRpnV2Group(data.rpnv2_group) : void 0,
+    server: data.server ? unmarshalRpnSanIpServer(data.server) : void 0,
+    type: data.type
+  };
+};
+const unmarshalListIpsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListIpsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    ips: sdkClient.unmarshalArrayOfObject(data.ips, unmarshalRpnSanIp),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListOSResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListOSResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    os: sdkClient.unmarshalArrayOfObject(data.os, unmarshalOS),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListOffersResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListOffersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    offers: sdkClient.unmarshalArrayOfObject(data.offers, unmarshalOffer),
+    totalCount: data.total_count
+  };
+};
+const unmarshalRefundSummary = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RefundSummary' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    id: data.id,
+    method: data.method,
+    refundedAt: sdkClient.unmarshalDate(data.refunded_at),
+    status: data.status,
+    totalWithTaxes: data.total_with_taxes ? sdkClient.unmarshalMoney(data.total_with_taxes) : void 0,
+    totalWithoutTaxes: data.total_without_taxes ? sdkClient.unmarshalMoney(data.total_without_taxes) : void 0
+  };
+};
+const unmarshalListRefundsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRefundsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    refunds: sdkClient.unmarshalArrayOfObject(data.refunds, unmarshalRefundSummary),
+    totalCount: data.total_count
+  };
+};
+const unmarshalRpnSanServer = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RpnSanServer' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    datacenterName: data.datacenter_name,
+    hostname: data.hostname,
+    id: data.id,
+    sans: sdkClient.unmarshalArrayOfObject(data.sans, unmarshalRpnSan),
+    zone: data.zone
+  };
+};
+const unmarshalListRpnCapableSanServersResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRpnCapableSanServersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    sanServers: sdkClient.unmarshalArrayOfObject(data.san_servers, unmarshalRpnSanServer),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListRpnCapableServersResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRpnCapableServersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    servers: sdkClient.unmarshalArrayOfObject(data.servers, unmarshalServer),
+    totalCount: data.total_count
+  };
+};
+const unmarshalRpnGroupMember = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RpnGroupMember' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    groupId: data.group_id,
+    groupName: data.group_name,
+    groupOwner: data.group_owner,
+    id: data.id,
+    owner: data.owner,
+    sanServer: data.san_server ? unmarshalRpnSanServer(data.san_server) : void 0,
+    server: data.server ? unmarshalServer(data.server) : void 0,
+    speed: data.speed,
+    status: data.status
+  };
+};
+const unmarshalListRpnGroupMembersResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRpnGroupMembersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    members: sdkClient.unmarshalArrayOfObject(data.members, unmarshalRpnGroupMember),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListRpnGroupsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRpnGroupsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    rpnGroups: sdkClient.unmarshalArrayOfObject(data.rpn_groups, unmarshalRpnGroup),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListRpnInvitesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRpnInvitesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    members: sdkClient.unmarshalArrayOfObject(data.members, unmarshalRpnGroupMember),
+    totalCount: data.total_count
+  };
+};
+const unmarshalRpnSanSummary = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RpnSanSummary' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    datacenterName: data.datacenter_name,
+    deliveredAt: sdkClient.unmarshalDate(data.delivered_at),
+    expiresAt: sdkClient.unmarshalDate(data.expires_at),
+    id: data.id,
+    iqnSuffix: data.iqn_suffix,
+    offerId: data.offer_id,
+    offerName: data.offer_name,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    rpnv1Compatible: data.rpnv1_compatible,
+    rpnv1Implicit: data.rpnv1_implicit,
+    serverHostname: data.server_hostname,
+    status: data.status,
+    storageSize: data.storage_size,
+    terminatedAt: sdkClient.unmarshalDate(data.terminated_at)
+  };
+};
+const unmarshalListRpnSansResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRpnSansResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    rpnSans: sdkClient.unmarshalArrayOfObject(data.rpn_sans, unmarshalRpnSanSummary),
+    totalCount: data.total_count
+  };
+};
+const unmarshalRpnServerCapability = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RpnServerCapability' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    canJoinQinqGroup: data.can_join_qinq_group,
+    canJoinRpnv2Group: data.can_join_rpnv2_group,
+    compatibleQinq: data.compatible_qinq,
+    datacenterName: data.datacenter_name,
+    hostname: data.hostname,
+    id: data.id,
+    ipAddress: data.ip_address,
+    rpnVersion: data.rpn_version,
+    rpnv1GroupCount: data.rpnv1_group_count,
+    rpnv2GroupCount: data.rpnv2_group_count,
+    zone: data.zone
+  };
+};
+const unmarshalListRpnServerCapabilitiesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRpnServerCapabilitiesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    servers: sdkClient.unmarshalArrayOfObject(data.servers, unmarshalRpnServerCapability),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListRpnV2CapableResourcesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRpnV2CapableResourcesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    servers: sdkClient.unmarshalArrayOfObject(data.servers, unmarshalServer),
+    totalCount: data.total_count
+  };
+};
+const unmarshalRpnV2Member = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RpnV2Member' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    id: data.id,
+    rpnv1Group: data.rpnv1_group ? unmarshalRpnGroup(data.rpnv1_group) : void 0,
+    server: data.server ? unmarshalServer(data.server) : void 0,
+    speed: data.speed,
+    status: data.status,
+    vlan: data.vlan
+  };
+};
+const unmarshalLog = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Log' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    action: data.action,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    finishedAt: sdkClient.unmarshalDate(data.finished_at),
+    group: data.group ? unmarshalRpnV2Group(data.group) : void 0,
+    id: data.id,
+    member: data.member ? unmarshalRpnV2Member(data.member) : void 0,
+    status: data.status
+  };
+};
+const unmarshalListRpnV2GroupLogsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRpnV2GroupLogsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    logs: sdkClient.unmarshalArrayOfObject(data.logs, unmarshalLog),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListRpnV2GroupsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRpnV2GroupsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    rpnGroups: sdkClient.unmarshalArrayOfObject(data.rpn_groups, unmarshalRpnV2Group),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListRpnV2MembersResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRpnV2MembersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    members: sdkClient.unmarshalArrayOfObject(data.members, unmarshalRpnV2Member),
+    totalCount: data.total_count
+  };
+};
+const unmarshalServerDisk = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerDisk' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    capacity: data.capacity,
+    connector: data.connector,
+    id: data.id,
+    isAddon: data.is_addon,
+    type: data.type
+  };
+};
+const unmarshalListServerDisksResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListServerDisksResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    disks: sdkClient.unmarshalArrayOfObject(data.disks, unmarshalServerDisk),
+    totalCount: data.total_count
+  };
+};
+const unmarshalServerEvent = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerEvent' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    date: sdkClient.unmarshalDate(data.date),
+    description: data.description,
+    eventId: data.event_id
+  };
+};
+const unmarshalListServerEventsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListServerEventsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    events: sdkClient.unmarshalArrayOfObject(data.events, unmarshalServerEvent),
+    totalCount: data.total_count
+  };
+};
+const unmarshalServerSummary = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerSummary' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    datacenterName: data.datacenter_name,
+    expiredAt: sdkClient.unmarshalDate(data.expired_at),
+    hostname: data.hostname,
+    id: data.id,
+    interfaces: sdkClient.unmarshalArrayOfObject(
+      data.interfaces,
+      unmarshalNetworkInterface
+    ),
+    isHds: data.is_hds,
+    isOutsourced: data.is_outsourced,
+    level: data.level ? unmarshalServiceLevel(data.level) : void 0,
+    offerId: data.offer_id,
+    offerName: data.offer_name,
+    organizationId: data.organization_id,
+    osId: data.os_id,
+    projectId: data.project_id,
+    qinq: data.qinq,
+    rpnVersion: data.rpn_version,
+    status: data.status,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalListServersResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListServersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    servers: sdkClient.unmarshalArrayOfObject(data.servers, unmarshalServerSummary),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListServicesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListServicesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    services: sdkClient.unmarshalArrayOfObject(data.services, unmarshalService),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListSubscribableServerOptionsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSubscribableServerOptionsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    serverOptions: sdkClient.unmarshalArrayOfObject(data.server_options, unmarshalOffer),
+    totalCount: data.total_count
+  };
+};
+const unmarshalRaidArray = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RaidArray' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    disks: sdkClient.unmarshalArrayOfObject(data.disks, unmarshalServerDisk),
+    raidLevel: data.raid_level
+  };
+};
+const unmarshalRaid = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Raid' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    raidArrays: sdkClient.unmarshalArrayOfObject(data.raid_arrays, unmarshalRaidArray)
+  };
+};
+const unmarshalRefund = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Refund' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    content: data.content,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    id: data.id,
+    method: data.method,
+    refundedAt: sdkClient.unmarshalDate(data.refunded_at),
+    status: data.status,
+    totalWithTaxes: data.total_with_taxes ? sdkClient.unmarshalMoney(data.total_with_taxes) : void 0,
+    totalWithoutTaxes: data.total_without_taxes ? sdkClient.unmarshalMoney(data.total_without_taxes) : void 0
+  };
+};
+const unmarshalRescue = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Rescue' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    login: data.login,
+    osId: data.os_id,
+    password: data.password,
+    protocol: data.protocol
+  };
+};
+const unmarshalPartition = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Partition' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    capacity: data.capacity,
+    connectors: data.connectors,
+    fileSystem: data.file_system,
+    mountPoint: data.mount_point,
+    raidLevel: data.raid_level,
+    type: data.type
+  };
+};
+const unmarshalServerDefaultPartitioning = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerDefaultPartitioning' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    partitions: sdkClient.unmarshalArrayOfObject(data.partitions, unmarshalPartition)
+  };
+};
+const unmarshalServerInstall = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerInstall' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    hostname: data.hostname,
+    osId: data.os_id,
+    panelUrl: data.panel_url,
+    partitions: sdkClient.unmarshalArrayOfObject(data.partitions, unmarshalPartition),
+    sshKeyIds: data.ssh_key_ids,
+    status: data.status,
+    userLogin: data.user_login
+  };
+};
+const unmarshalSubscribeStorageOptionsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SubscribeStorageOptionsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    services: sdkClient.unmarshalArrayOfObject(data.services, unmarshalService)
+  };
+};
+const marshalAttachFailoverIPToMacAddressRequest = (request, defaults) => ({
+  mac: request.mac,
+  type: request.type
+});
+const marshalAttachFailoverIPsRequest = (request, defaults) => ({
+  fips_ids: request.fipsIds,
+  server_id: request.serverId
+});
+const marshalCreateFailoverIPsRequest = (request, defaults) => ({
+  offer_id: request.offerId,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  quantity: request.quantity
+});
+const marshalCreateServerRequest = (request, defaults) => ({
+  datacenter_name: request.datacenterName,
+  offer_id: request.offerId,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  server_option_ids: request.serverOptionIds
+});
+const marshalDetachFailoverIPsRequest = (request, defaults) => ({
+  fips_ids: request.fipsIds
+});
+const marshalIPv6BlockApiCreateIPv6BlockRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalIPv6BlockApiCreateIPv6BlockSubnetRequest = (request, defaults) => ({
+  address: request.address,
+  cidr: request.cidr
+});
+const marshalIPv6BlockApiUpdateIPv6BlockRequest = (request, defaults) => ({
+  nameservers: request.nameservers
+});
+const marshalInstallPartition = (request, defaults) => ({
+  capacity: request.capacity,
+  connectors: request.connectors,
+  file_system: request.fileSystem,
+  mount_point: request.mountPoint,
+  raid_level: request.raidLevel
+});
+const marshalInstallServerRequest = (request, defaults) => ({
+  hostname: request.hostname,
+  ip_id: request.ipId,
+  license_offer_id: request.licenseOfferId,
+  os_id: request.osId,
+  panel_password: request.panelPassword,
+  partitions: request.partitions !== void 0 ? request.partitions.map((elt) => marshalInstallPartition(elt)) : void 0,
+  root_password: request.rootPassword,
+  ssh_key_ids: request.sshKeyIds,
+  user_login: request.userLogin,
+  user_password: request.userPassword
+});
+const marshalRpnSanApiAddIpRequest = (request, defaults) => ({
+  ip_ids: request.ipIds
+});
+const marshalRpnSanApiCreateRpnSanRequest = (request, defaults) => ({
+  offer_id: request.offerId,
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalRpnSanApiRemoveIpRequest = (request, defaults) => ({
+  ip_ids: request.ipIds
+});
+const marshalRpnV1ApiAddRpnGroupMembersRequest = (request, defaults) => ({
+  san_server_ids: request.sanServerIds,
+  server_ids: request.serverIds
+});
+const marshalRpnV1ApiCreateRpnGroupRequest = (request, defaults) => ({
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  san_server_ids: request.sanServerIds,
+  server_ids: request.serverIds
+});
+const marshalRpnV1ApiDeleteRpnGroupMembersRequest = (request, defaults) => ({
+  member_ids: request.memberIds
+});
+const marshalRpnV1ApiLeaveRpnGroupRequest = (request, defaults) => ({
+  member_ids: request.memberIds,
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalRpnV1ApiRpnGroupInviteRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  server_ids: request.serverIds
+});
+const marshalRpnV1ApiUpdateRpnGroupNameRequest = (request, defaults) => ({
+  name: request.name
+});
+const marshalRpnV2ApiAddRpnV2MembersRequest = (request, defaults) => ({
+  servers: request.servers
+});
+const marshalRpnV2ApiCreateRpnV2GroupRequest = (request, defaults) => ({
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  servers: request.servers,
+  type: request.type
+});
+const marshalRpnV2ApiDeleteRpnV2MembersRequest = (request, defaults) => ({
+  member_ids: request.memberIds
+});
+const marshalRpnV2ApiEnableRpnV2GroupCompatibilityRequest = (request, defaults) => ({
+  rpnv1_group_id: request.rpnv1GroupId
+});
+const marshalRpnV2ApiUpdateRpnV2GroupNameRequest = (request, defaults) => ({
+  name: request.name
+});
+const marshalRpnV2ApiUpdateRpnV2VlanForMembersRequest = (request, defaults) => ({
+  member_ids: request.memberIds,
+  vlan: request.vlan
+});
+const marshalStartBMCAccessRequest = (request, defaults) => ({
+  ip: request.ip
+});
+const marshalStartRescueRequest = (request, defaults) => ({
+  os_id: request.osId
+});
+const marshalSubscribeServerOptionRequest = (request, defaults) => ({
+  option_id: request.optionId
+});
+const marshalSubscribeStorageOptionsRequest = (request, defaults) => ({
+  options_ids: request.optionsIds
+});
+const marshalUpdatableRaidArray = (request, defaults) => ({
+  disk_ids: request.diskIds,
+  raid_level: request.raidLevel
+});
+const marshalUpdateRaidRequest = (request, defaults) => ({
+  raid_arrays: request.raidArrays.map(
+    (elt) => marshalUpdatableRaidArray(elt)
+  )
+});
+const marshalUpdateReverseRequest = (request, defaults) => ({
+  reverse: request.reverse
+});
+const marshalUpdateServerBackupRequest = (request, defaults) => ({
+  acl_enabled: request.aclEnabled,
+  autologin: request.autologin,
+  password: request.password
+});
+const marshalUpdateServerRequest = (request, defaults) => ({
+  enable_ipv6: request.enableIpv6,
+  hostname: request.hostname
+});
+const marshalUpdateServerTagsRequest = (request, defaults) => ({
+  tags: request.tags
+});
+exports.marshalAttachFailoverIPToMacAddressRequest = marshalAttachFailoverIPToMacAddressRequest;
+exports.marshalAttachFailoverIPsRequest = marshalAttachFailoverIPsRequest;
+exports.marshalCreateFailoverIPsRequest = marshalCreateFailoverIPsRequest;
+exports.marshalCreateServerRequest = marshalCreateServerRequest;
+exports.marshalDetachFailoverIPsRequest = marshalDetachFailoverIPsRequest;
+exports.marshalIPv6BlockApiCreateIPv6BlockRequest = marshalIPv6BlockApiCreateIPv6BlockRequest;
+exports.marshalIPv6BlockApiCreateIPv6BlockSubnetRequest = marshalIPv6BlockApiCreateIPv6BlockSubnetRequest;
+exports.marshalIPv6BlockApiUpdateIPv6BlockRequest = marshalIPv6BlockApiUpdateIPv6BlockRequest;
+exports.marshalInstallServerRequest = marshalInstallServerRequest;
+exports.marshalRpnSanApiAddIpRequest = marshalRpnSanApiAddIpRequest;
+exports.marshalRpnSanApiCreateRpnSanRequest = marshalRpnSanApiCreateRpnSanRequest;
+exports.marshalRpnSanApiRemoveIpRequest = marshalRpnSanApiRemoveIpRequest;
+exports.marshalRpnV1ApiAddRpnGroupMembersRequest = marshalRpnV1ApiAddRpnGroupMembersRequest;
+exports.marshalRpnV1ApiCreateRpnGroupRequest = marshalRpnV1ApiCreateRpnGroupRequest;
+exports.marshalRpnV1ApiDeleteRpnGroupMembersRequest = marshalRpnV1ApiDeleteRpnGroupMembersRequest;
+exports.marshalRpnV1ApiLeaveRpnGroupRequest = marshalRpnV1ApiLeaveRpnGroupRequest;
+exports.marshalRpnV1ApiRpnGroupInviteRequest = marshalRpnV1ApiRpnGroupInviteRequest;
+exports.marshalRpnV1ApiUpdateRpnGroupNameRequest = marshalRpnV1ApiUpdateRpnGroupNameRequest;
+exports.marshalRpnV2ApiAddRpnV2MembersRequest = marshalRpnV2ApiAddRpnV2MembersRequest;
+exports.marshalRpnV2ApiCreateRpnV2GroupRequest = marshalRpnV2ApiCreateRpnV2GroupRequest;
+exports.marshalRpnV2ApiDeleteRpnV2MembersRequest = marshalRpnV2ApiDeleteRpnV2MembersRequest;
+exports.marshalRpnV2ApiEnableRpnV2GroupCompatibilityRequest = marshalRpnV2ApiEnableRpnV2GroupCompatibilityRequest;
+exports.marshalRpnV2ApiUpdateRpnV2GroupNameRequest = marshalRpnV2ApiUpdateRpnV2GroupNameRequest;
+exports.marshalRpnV2ApiUpdateRpnV2VlanForMembersRequest = marshalRpnV2ApiUpdateRpnV2VlanForMembersRequest;
+exports.marshalStartBMCAccessRequest = marshalStartBMCAccessRequest;
+exports.marshalStartRescueRequest = marshalStartRescueRequest;
+exports.marshalSubscribeServerOptionRequest = marshalSubscribeServerOptionRequest;
+exports.marshalSubscribeStorageOptionsRequest = marshalSubscribeStorageOptionsRequest;
+exports.marshalUpdateRaidRequest = marshalUpdateRaidRequest;
+exports.marshalUpdateReverseRequest = marshalUpdateReverseRequest;
+exports.marshalUpdateServerBackupRequest = marshalUpdateServerBackupRequest;
+exports.marshalUpdateServerRequest = marshalUpdateServerRequest;
+exports.marshalUpdateServerTagsRequest = marshalUpdateServerTagsRequest;
+exports.unmarshalBMCAccess = unmarshalBMCAccess;
+exports.unmarshalBackup = unmarshalBackup;
+exports.unmarshalCanOrderResponse = unmarshalCanOrderResponse;
+exports.unmarshalCreateFailoverIPsResponse = unmarshalCreateFailoverIPsResponse;
+exports.unmarshalFailoverIP = unmarshalFailoverIP;
+exports.unmarshalGetIPv6BlockQuotasResponse = unmarshalGetIPv6BlockQuotasResponse;
+exports.unmarshalGetRemainingQuotaResponse = unmarshalGetRemainingQuotaResponse;
+exports.unmarshalGetRpnStatusResponse = unmarshalGetRpnStatusResponse;
+exports.unmarshalIP = unmarshalIP;
+exports.unmarshalIPv6Block = unmarshalIPv6Block;
+exports.unmarshalInvoice = unmarshalInvoice;
+exports.unmarshalListFailoverIPsResponse = unmarshalListFailoverIPsResponse;
+exports.unmarshalListIPv6BlockSubnetsAvailableResponse = unmarshalListIPv6BlockSubnetsAvailableResponse;
+exports.unmarshalListInvoicesResponse = unmarshalListInvoicesResponse;
+exports.unmarshalListIpsResponse = unmarshalListIpsResponse;
+exports.unmarshalListOSResponse = unmarshalListOSResponse;
+exports.unmarshalListOffersResponse = unmarshalListOffersResponse;
+exports.unmarshalListRefundsResponse = unmarshalListRefundsResponse;
+exports.unmarshalListRpnCapableSanServersResponse = unmarshalListRpnCapableSanServersResponse;
+exports.unmarshalListRpnCapableServersResponse = unmarshalListRpnCapableServersResponse;
+exports.unmarshalListRpnGroupMembersResponse = unmarshalListRpnGroupMembersResponse;
+exports.unmarshalListRpnGroupsResponse = unmarshalListRpnGroupsResponse;
+exports.unmarshalListRpnInvitesResponse = unmarshalListRpnInvitesResponse;
+exports.unmarshalListRpnSansResponse = unmarshalListRpnSansResponse;
+exports.unmarshalListRpnServerCapabilitiesResponse = unmarshalListRpnServerCapabilitiesResponse;
+exports.unmarshalListRpnV2CapableResourcesResponse = unmarshalListRpnV2CapableResourcesResponse;
+exports.unmarshalListRpnV2GroupLogsResponse = unmarshalListRpnV2GroupLogsResponse;
+exports.unmarshalListRpnV2GroupsResponse = unmarshalListRpnV2GroupsResponse;
+exports.unmarshalListRpnV2MembersResponse = unmarshalListRpnV2MembersResponse;
+exports.unmarshalListServerDisksResponse = unmarshalListServerDisksResponse;
+exports.unmarshalListServerEventsResponse = unmarshalListServerEventsResponse;
+exports.unmarshalListServersResponse = unmarshalListServersResponse;
+exports.unmarshalListServicesResponse = unmarshalListServicesResponse;
+exports.unmarshalListSubscribableServerOptionsResponse = unmarshalListSubscribableServerOptionsResponse;
+exports.unmarshalOS = unmarshalOS;
+exports.unmarshalOffer = unmarshalOffer;
+exports.unmarshalRaid = unmarshalRaid;
+exports.unmarshalRefund = unmarshalRefund;
+exports.unmarshalRescue = unmarshalRescue;
+exports.unmarshalRpnGroup = unmarshalRpnGroup;
+exports.unmarshalRpnSan = unmarshalRpnSan;
+exports.unmarshalRpnV2Group = unmarshalRpnV2Group;
+exports.unmarshalServer = unmarshalServer;
+exports.unmarshalServerDefaultPartitioning = unmarshalServerDefaultPartitioning;
+exports.unmarshalServerInstall = unmarshalServerInstall;
+exports.unmarshalService = unmarshalService;
+exports.unmarshalSubscribeStorageOptionsResponse = unmarshalSubscribeStorageOptionsResponse;

@@ -1,0 +1,213 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalAccountOrganizationInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AccountOrganizationInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {};
+};
+const unmarshalAccountUserInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AccountUserInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    email: data.email,
+    phoneNumber: data.phone_number
+  };
+};
+const unmarshalInstanceServerInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InstanceServerInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    name: data.name
+  };
+};
+const unmarshalKeyManagerKeyInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'KeyManagerKeyInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {};
+};
+const unmarshalKubernetesACLInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'KubernetesACLInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {};
+};
+const unmarshalKubernetesClusterInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'KubernetesClusterInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {};
+};
+const unmarshalKubernetesNodeInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'KubernetesNodeInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    id: data.id,
+    name: data.name
+  };
+};
+const unmarshalKubernetesPoolInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'KubernetesPoolInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    id: data.id,
+    name: data.name
+  };
+};
+const unmarshalSecretManagerSecretInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SecretManagerSecretInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    keyId: data.key_id,
+    path: data.path
+  };
+};
+const unmarshalSecretManagerSecretVersionInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SecretManagerSecretVersionInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    revision: data.revision
+  };
+};
+const unmarshalEventPrincipal = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EventPrincipal' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    id: data.id
+  };
+};
+const unmarshalResource = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Resource' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    accountOrganizationInfo: data.account_organization_info ? unmarshalAccountOrganizationInfo(data.account_organization_info) : void 0,
+    accountUserInfo: data.account_user_info ? unmarshalAccountUserInfo(data.account_user_info) : void 0,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    deletedAt: sdkClient.unmarshalDate(data.deleted_at),
+    id: data.id,
+    instanceServerInfo: data.instance_server_info ? unmarshalInstanceServerInfo(data.instance_server_info) : void 0,
+    keyManagerKeyInfo: data.key_manager_key_info ? unmarshalKeyManagerKeyInfo(data.key_manager_key_info) : void 0,
+    keymKeyInfo: data.keym_key_info ? unmarshalKeyManagerKeyInfo(data.keym_key_info) : void 0,
+    kubeAclInfo: data.kube_acl_info ? unmarshalKubernetesACLInfo(data.kube_acl_info) : void 0,
+    kubeClusterInfo: data.kube_cluster_info ? unmarshalKubernetesClusterInfo(data.kube_cluster_info) : void 0,
+    kubeNodeInfo: data.kube_node_info ? unmarshalKubernetesNodeInfo(data.kube_node_info) : void 0,
+    kubePoolInfo: data.kube_pool_info ? unmarshalKubernetesPoolInfo(data.kube_pool_info) : void 0,
+    name: data.name,
+    secmSecretInfo: data.secm_secret_info ? unmarshalSecretManagerSecretInfo(data.secm_secret_info) : void 0,
+    secmSecretVersionInfo: data.secm_secret_version_info ? unmarshalSecretManagerSecretVersionInfo(data.secm_secret_version_info) : void 0,
+    secretManagerSecretInfo: data.secret_manager_secret_info ? unmarshalSecretManagerSecretInfo(data.secret_manager_secret_info) : void 0,
+    secretManagerVersionInfo: data.secret_manager_version_info ? unmarshalSecretManagerSecretVersionInfo(
+      data.secret_manager_version_info
+    ) : void 0,
+    type: data.type,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalEvent = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Event' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    id: data.id,
+    locality: data.locality,
+    methodName: data.method_name,
+    organizationId: data.organization_id,
+    principal: data.principal ? unmarshalEventPrincipal(data.principal) : void 0,
+    productName: data.product_name,
+    projectId: data.project_id,
+    recordedAt: sdkClient.unmarshalDate(data.recorded_at),
+    requestBody: data.request_body,
+    requestId: data.request_id,
+    resource: data.resource ? unmarshalResource(data.resource) : void 0,
+    resources: sdkClient.unmarshalArrayOfObject(data.resources, unmarshalResource),
+    serviceName: data.service_name,
+    sourceIp: data.source_ip,
+    statusCode: data.status_code,
+    userAgent: data.user_agent
+  };
+};
+const unmarshalListEventsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListEventsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    events: sdkClient.unmarshalArrayOfObject(data.events, unmarshalEvent),
+    nextPageToken: data.next_page_token
+  };
+};
+const unmarshalProductService = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ProductService' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    methods: data.methods,
+    name: data.name
+  };
+};
+const unmarshalProduct = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Product' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    name: data.name,
+    services: sdkClient.unmarshalArrayOfObject(data.services, unmarshalProductService),
+    title: data.title
+  };
+};
+const unmarshalListProductsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListProductsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    products: sdkClient.unmarshalArrayOfObject(data.products, unmarshalProduct),
+    totalCount: data.total_count
+  };
+};
+exports.unmarshalEvent = unmarshalEvent;
+exports.unmarshalListEventsResponse = unmarshalListEventsResponse;
+exports.unmarshalListProductsResponse = unmarshalListProductsResponse;
+exports.unmarshalResource = unmarshalResource;

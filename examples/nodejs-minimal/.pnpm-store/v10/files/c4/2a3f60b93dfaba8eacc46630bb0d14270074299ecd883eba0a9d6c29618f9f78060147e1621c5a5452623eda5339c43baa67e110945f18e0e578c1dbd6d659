@@ -1,0 +1,128 @@
+export declare const BulkCreateBlocklistsRequest: {
+    reason: {
+        maxLength: number;
+    };
+};
+export declare const CreateDomainRequest: {
+    domainName: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const CreateEmailRequest: {
+    subject: {
+        minLength: number;
+    };
+};
+export declare const CreateEmailRequestAddress: {
+    email: {
+        minLength: number;
+    };
+};
+export declare const CreateEmailRequestAttachment: {
+    name: {
+        minLength: number;
+    };
+    type: {
+        minLength: number;
+    };
+};
+export declare const CreateEmailRequestHeader: {
+    key: {
+        minLength: number;
+    };
+    value: {
+        minLength: number;
+    };
+};
+export declare const CreateWebhookRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+    snsArn: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const ListBlocklistsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListDomainsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListEmailsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    search: {
+        maxLength: number;
+        minLength: number;
+    };
+    subject: {
+        minLength: number;
+    };
+};
+export declare const ListPoolsRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListWebhookEventsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListWebhooksRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const UpdateProjectSettingsRequestUpdatePeriodicReport: {
+    sendingDay: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    sendingHour: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const UpdateWebhookRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+    snsArn: {
+        maxLength: number;
+        minLength: number;
+    };
+};

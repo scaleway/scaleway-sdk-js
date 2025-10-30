@@ -1,0 +1,152 @@
+import { isJSONObject, camelizeKeys } from "../helpers/json.js";
+import { unmarshalArrayOfObject, unmarshalDate } from "../helpers/marshalling.js";
+import { fromByteArray } from "../vendor/base64/index.js";
+import { Decimal } from "./custom-types.js";
+const unmarshalMoney = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Money' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    currencyCode: data.currency_code,
+    nanos: data.nanos,
+    units: data.units
+  };
+};
+const unmarshalServiceInfo = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServiceInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    description: data.description,
+    documentationUrl: data.documentation_url,
+    name: data.name,
+    version: data.version
+  };
+};
+const unmarshalScwFile = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ScwFile' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    content: data.content,
+    contentType: data.content_type,
+    name: data.name
+  };
+};
+const unmarshalTimeSeriesPoint = (data) => {
+  if (!Array.isArray(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TimeSeriesPoint' failed as data isn't an array.`
+    );
+  }
+  return {
+    timestamp: unmarshalDate(data[0]),
+    value: data[1]
+  };
+};
+const unmarshalTimeSeries = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TimeSeries' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    metadata: data.metadata,
+    name: data.name,
+    points: unmarshalArrayOfObject(data.points, unmarshalTimeSeriesPoint)
+  };
+};
+const unmarshalDecimal = (data) => {
+  if (!(typeof data === "object")) {
+    throw new TypeError(
+      `Unmarshalling the type 'Decimal' failed as data isn't an object.`
+    );
+  }
+  if (data === null) {
+    return null;
+  }
+  if (!("value" in data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Decimal' failed as data object does not have a 'value' key.`
+    );
+  }
+  if (!(typeof data.value === "string")) {
+    throw new TypeError(
+      `Unmarshalling the type 'Decimal' failed as 'value' is not a string.`
+    );
+  }
+  return new Decimal(data.value);
+};
+const marshalScwFile = (obj) => ({
+  content: obj.content,
+  content_type: obj.contentType,
+  name: obj.name
+});
+const marshalBlobToScwFile = async (blob) => ({
+  content: fromByteArray(new Uint8Array(await blob.arrayBuffer())),
+  content_type: blob.type,
+  name: "file"
+});
+const marshalMoney = (obj) => ({
+  currency_code: obj.currencyCode,
+  nanos: obj.nanos,
+  units: obj.units
+});
+const marshalTimeSeriesPoint = (obj) => ({
+  timestamp: obj.timestamp?.toISOString(),
+  value: obj.value
+});
+const marshalTimeSeries = (obj) => ({
+  metadata: obj.metadata,
+  name: obj.name,
+  points: obj.points.map((elt) => marshalTimeSeriesPoint(elt))
+});
+const marshalDecimal = (obj) => ({
+  value: obj.toString()
+});
+const unmarshalDates = (obj, keys) => {
+  if (Array.isArray(obj)) {
+    return obj.map((v) => unmarshalDates(v, keys));
+  }
+  if (obj && typeof obj === "object") {
+    return Object.entries(obj).reduce(
+      (acc, [key, value]) => ({
+        ...acc,
+        [key]: typeof value === "string" && keys.includes(key) ? new Date(value) : unmarshalDates(value, keys)
+      }),
+      {}
+    );
+  }
+  return obj;
+};
+const unmarshalAnyRes = (obj, ignoreKeys = [], dateKeys) => {
+  if (!isJSONObject(obj)) {
+    throw new TypeError(`Data isn't a dictionary.`);
+  }
+  return camelizeKeys(
+    dateKeys && dateKeys.length > 0 ? unmarshalDates(obj, dateKeys) : obj,
+    ignoreKeys
+  );
+};
+export {
+  marshalBlobToScwFile,
+  marshalDecimal,
+  marshalMoney,
+  marshalScwFile,
+  marshalTimeSeries,
+  marshalTimeSeriesPoint,
+  unmarshalAnyRes,
+  unmarshalDates,
+  unmarshalDecimal,
+  unmarshalMoney,
+  unmarshalScwFile,
+  unmarshalServiceInfo,
+  unmarshalTimeSeries,
+  unmarshalTimeSeriesPoint
+};

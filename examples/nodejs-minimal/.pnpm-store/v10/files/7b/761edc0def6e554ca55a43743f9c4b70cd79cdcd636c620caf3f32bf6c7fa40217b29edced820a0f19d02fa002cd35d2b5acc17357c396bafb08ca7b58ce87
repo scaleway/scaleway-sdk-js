@@ -1,0 +1,258 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const randomName = require("@scaleway/random-name");
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalEndpointPrivateNetworkDetails = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EndpointPrivateNetworkDetails' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    privateNetworkId: data.private_network_id
+  };
+};
+const unmarshalEndpointPublicNetworkDetails = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EndpointPublicNetworkDetails' failed as data isn't a dictionary.`
+    );
+  }
+  return {};
+};
+const unmarshalEndpoint = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Endpoint' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    disableAuth: data.disable_auth,
+    id: data.id,
+    privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : void 0,
+    publicNetwork: data.public_network ? unmarshalEndpointPublicNetworkDetails(data.public_network) : void 0,
+    url: data.url
+  };
+};
+const unmarshalModelSupportedQuantization = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ModelSupportedQuantization' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    allowed: data.allowed,
+    maxContextSize: data.max_context_size,
+    quantizationBits: data.quantization_bits
+  };
+};
+const unmarshalModelSupportedNode = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ModelSupportedNode' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    nodeTypeName: data.node_type_name,
+    quantizations: sdkClient.unmarshalArrayOfObject(
+      data.quantizations,
+      unmarshalModelSupportedQuantization
+    )
+  };
+};
+const unmarshalModelSupportInfo = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ModelSupportInfo' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    nodes: sdkClient.unmarshalArrayOfObject(data.nodes, unmarshalModelSupportedNode)
+  };
+};
+const unmarshalDeploymentQuantization = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DeploymentQuantization' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    bits: data.bits
+  };
+};
+const unmarshalDeployment = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Deployment' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    endpoints: sdkClient.unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
+    errorMessage: data.error_message,
+    id: data.id,
+    maxSize: data.max_size,
+    minSize: data.min_size,
+    modelId: data.model_id,
+    modelName: data.model_name,
+    name: data.name,
+    nodeTypeName: data.node_type_name,
+    projectId: data.project_id,
+    quantization: data.quantization ? unmarshalDeploymentQuantization(data.quantization) : void 0,
+    region: data.region,
+    size: data.size,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalModel = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Model' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    description: data.description,
+    errorMessage: data.error_message,
+    hasEula: data.has_eula,
+    id: data.id,
+    name: data.name,
+    nodesSupport: sdkClient.unmarshalArrayOfObject(
+      data.nodes_support,
+      unmarshalModelSupportInfo
+    ),
+    parameterSizeBits: data.parameter_size_bits,
+    projectId: data.project_id,
+    region: data.region,
+    sizeBytes: data.size_bytes,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalListDeploymentsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDeploymentsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    deployments: sdkClient.unmarshalArrayOfObject(data.deployments, unmarshalDeployment),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListModelsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListModelsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    models: sdkClient.unmarshalArrayOfObject(data.models, unmarshalModel),
+    totalCount: data.total_count
+  };
+};
+const unmarshalNodeType = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'NodeType' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    beta: data.beta,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    description: data.description,
+    disabled: data.disabled,
+    gpus: data.gpus,
+    memory: data.memory,
+    name: data.name,
+    region: data.region,
+    stockStatus: data.stock_status,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    vcpus: data.vcpus,
+    vram: data.vram
+  };
+};
+const unmarshalListNodeTypesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListNodeTypesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    nodeTypes: sdkClient.unmarshalArrayOfObject(data.node_types, unmarshalNodeType),
+    totalCount: data.total_count
+  };
+};
+const marshalEndpointPrivateNetworkDetails = (request, defaults) => ({
+  private_network_id: request.privateNetworkId
+});
+const marshalEndpointPublicNetworkDetails = (request, defaults) => ({});
+const marshalDeploymentQuantization = (request, defaults) => ({
+  bits: request.bits
+});
+const marshalEndpointSpec = (request, defaults) => ({
+  disable_auth: request.disableAuth,
+  ...sdkClient.resolveOneOf([
+    {
+      param: "public_network",
+      value: request.publicNetwork !== void 0 ? marshalEndpointPublicNetworkDetails(request.publicNetwork) : void 0
+    },
+    {
+      param: "private_network",
+      value: request.privateNetwork !== void 0 ? marshalEndpointPrivateNetworkDetails(
+        request.privateNetwork
+      ) : void 0
+    }
+  ])
+});
+const marshalCreateDeploymentRequest = (request, defaults) => ({
+  accept_eula: request.acceptEula,
+  endpoints: request.endpoints.map((elt) => marshalEndpointSpec(elt)),
+  max_size: request.maxSize,
+  min_size: request.minSize,
+  model_id: request.modelId,
+  name: request.name || randomName("inference"),
+  node_type_name: request.nodeTypeName,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  quantization: request.quantization !== void 0 ? marshalDeploymentQuantization(request.quantization) : void 0,
+  tags: request.tags
+});
+const marshalCreateEndpointRequest = (request, defaults) => ({
+  deployment_id: request.deploymentId,
+  endpoint: marshalEndpointSpec(request.endpoint)
+});
+const marshalModelSource = (request, defaults) => ({
+  url: request.url,
+  ...sdkClient.resolveOneOf([{ param: "secret", value: request.secret }])
+});
+const marshalCreateModelRequest = (request, defaults) => ({
+  name: request.name || randomName("model"),
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  source: marshalModelSource(request.source)
+});
+const marshalUpdateDeploymentRequest = (request, defaults) => ({
+  max_size: request.maxSize,
+  min_size: request.minSize,
+  model_id: request.modelId,
+  name: request.name,
+  quantization: request.quantization !== void 0 ? marshalDeploymentQuantization(request.quantization) : void 0,
+  tags: request.tags
+});
+const marshalUpdateEndpointRequest = (request, defaults) => ({
+  disable_auth: request.disableAuth
+});
+exports.marshalCreateDeploymentRequest = marshalCreateDeploymentRequest;
+exports.marshalCreateEndpointRequest = marshalCreateEndpointRequest;
+exports.marshalCreateModelRequest = marshalCreateModelRequest;
+exports.marshalUpdateDeploymentRequest = marshalUpdateDeploymentRequest;
+exports.marshalUpdateEndpointRequest = marshalUpdateEndpointRequest;
+exports.unmarshalDeployment = unmarshalDeployment;
+exports.unmarshalEndpoint = unmarshalEndpoint;
+exports.unmarshalListDeploymentsResponse = unmarshalListDeploymentsResponse;
+exports.unmarshalListModelsResponse = unmarshalListModelsResponse;
+exports.unmarshalListNodeTypesResponse = unmarshalListNodeTypesResponse;
+exports.unmarshalModel = unmarshalModel;
+exports.unmarshalModelSupportInfo = unmarshalModelSupportInfo;

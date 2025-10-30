@@ -1,0 +1,8 @@
+import type { DefaultValues } from '@scaleway/sdk-client';
+import type { CreateHumanRequest, Human, ListHumansResponse, RegisterRequest, RegisterResponse, UpdateHumanRequest } from './types.gen';
+export declare const unmarshalHuman: (data: unknown) => Human;
+export declare const unmarshalListHumansResponse: (data: unknown) => ListHumansResponse;
+export declare const unmarshalRegisterResponse: (data: unknown) => RegisterResponse;
+export declare const marshalCreateHumanRequest: (request: CreateHumanRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalRegisterRequest: (request: RegisterRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateHumanRequest: (request: UpdateHumanRequest, defaults: DefaultValues) => Record<string, unknown>;

@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const CERTIFICATE_TRANSIENT_STATUSES = ["pending"];
+const INSTANCE_TRANSIENT_STATUSES = [
+  "pending",
+  "migrating"
+];
+const LB_TRANSIENT_STATUSES = [
+  "pending",
+  "migrating",
+  "to_create",
+  "creating",
+  "to_delete",
+  "deleting"
+];
+const PRIVATE_NETWORK_TRANSIENT_STATUSES = [
+  "pending"
+];
+exports.CERTIFICATE_TRANSIENT_STATUSES = CERTIFICATE_TRANSIENT_STATUSES;
+exports.INSTANCE_TRANSIENT_STATUSES = INSTANCE_TRANSIENT_STATUSES;
+exports.LB_TRANSIENT_STATUSES = LB_TRANSIENT_STATUSES;
+exports.PRIVATE_NETWORK_TRANSIENT_STATUSES = PRIVATE_NETWORK_TRANSIENT_STATUSES;

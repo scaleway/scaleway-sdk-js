@@ -1,0 +1,18 @@
+import type { DefaultValues } from '@scaleway/sdk-client';
+import type { CreateKeyRequest, DataKey, DecryptRequest, DecryptResponse, EncryptRequest, EncryptResponse, GenerateDataKeyRequest, ImportKeyMaterialRequest, Key, ListKeysResponse, PublicKey, SignRequest, SignResponse, UpdateKeyRequest, VerifyRequest, VerifyResponse } from './types.gen';
+export declare const unmarshalKey: (data: unknown) => Key;
+export declare const unmarshalDataKey: (data: unknown) => DataKey;
+export declare const unmarshalDecryptResponse: (data: unknown) => DecryptResponse;
+export declare const unmarshalEncryptResponse: (data: unknown) => EncryptResponse;
+export declare const unmarshalListKeysResponse: (data: unknown) => ListKeysResponse;
+export declare const unmarshalPublicKey: (data: unknown) => PublicKey;
+export declare const unmarshalSignResponse: (data: unknown) => SignResponse;
+export declare const unmarshalVerifyResponse: (data: unknown) => VerifyResponse;
+export declare const marshalCreateKeyRequest: (request: CreateKeyRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalDecryptRequest: (request: DecryptRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalEncryptRequest: (request: EncryptRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalGenerateDataKeyRequest: (request: GenerateDataKeyRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalImportKeyMaterialRequest: (request: ImportKeyMaterialRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalSignRequest: (request: SignRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateKeyRequest: (request: UpdateKeyRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalVerifyRequest: (request: VerifyRequest, defaults: DefaultValues) => Record<string, unknown>;

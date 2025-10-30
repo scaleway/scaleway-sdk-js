@@ -1,0 +1,591 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const content_gen = require("./content.gen.cjs");
+const marshalling_gen = require("./marshalling.gen.cjs");
+const jsonContentHeaders = {
+  "Content-Type": "application/json; charset=utf-8"
+};
+class API extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par"]
+  });
+  pageOfListHubs = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hubs`,
+      urlParams: sdkClient.urlParams(
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId]
+      )
+    },
+    marshalling_gen.unmarshalListHubsResponse
+  );
+  /**
+   * List hubs. List all Hubs in the specified zone. By default, returned Hubs are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
+   *
+   * @param request - The request {@link ListHubsRequest}
+   * @returns A Promise of ListHubsResponse
+   */
+  listHubs = (request = {}) => sdkClient.enrichForPagination("hubs", this.pageOfListHubs, request);
+  /**
+   * Create a hub. Create a new Hub in the targeted region, specifying its configuration including name and product plan.
+   *
+   * @param request - The request {@link CreateHubRequest}
+   * @returns A Promise of Hub
+   */
+  createHub = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateHubRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hubs`
+    },
+    marshalling_gen.unmarshalHub
+  );
+  /**
+   * Get a hub. Retrieve information about an existing IoT Hub, specified by its Hub ID. Its full details, including name, status and endpoint, are returned in the response object.
+   *
+   * @param request - The request {@link GetHubRequest}
+   * @returns A Promise of Hub
+   */
+  getHub = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hubs/${sdkClient.validatePathParam("hubId", request.hubId)}`
+    },
+    marshalling_gen.unmarshalHub
+  );
+  /**
+   * Waits for {@link Hub} to be in a final state.
+   *
+   * @param request - The request {@link GetHubRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Hub
+   */
+  waitForHub = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(!content_gen.HUB_TRANSIENT_STATUSES.includes(res.status))),
+    this.getHub,
+    request,
+    options
+  );
+  /**
+   * Update a hub. Update the parameters of an existing IoT Hub, specified by its Hub ID.
+   *
+   * @param request - The request {@link UpdateHubRequest}
+   * @returns A Promise of Hub
+   */
+  updateHub = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateHubRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hubs/${sdkClient.validatePathParam("hubId", request.hubId)}`
+    },
+    marshalling_gen.unmarshalHub
+  );
+  /**
+   * Enable a hub. Enable an existing IoT Hub, specified by its Hub ID.
+   *
+   * @param request - The request {@link EnableHubRequest}
+   * @returns A Promise of Hub
+   */
+  enableHub = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hubs/${sdkClient.validatePathParam("hubId", request.hubId)}/enable`
+    },
+    marshalling_gen.unmarshalHub
+  );
+  /**
+   * Disable a hub. Disable an existing IoT Hub, specified by its Hub ID.
+   *
+   * @param request - The request {@link DisableHubRequest}
+   * @returns A Promise of Hub
+   */
+  disableHub = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hubs/${sdkClient.validatePathParam("hubId", request.hubId)}/disable`
+    },
+    marshalling_gen.unmarshalHub
+  );
+  /**
+   * Delete a hub. Delete an existing IoT Hub, specified by its Hub ID. Deleting a Hub is permanent, and cannot be undone.
+   *
+   * @param request - The request {@link DeleteHubRequest}
+   */
+  deleteHub = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hubs/${sdkClient.validatePathParam("hubId", request.hubId)}`,
+    urlParams: sdkClient.urlParams(["delete_devices", request.deleteDevices])
+  });
+  /**
+   * Get a hub's metrics. Get the metrics of an existing IoT Hub, specified by its Hub ID.
+   *
+   * @deprecated
+   * @param request - The request {@link GetHubMetricsRequest}
+   * @returns A Promise of GetHubMetricsResponse
+   */
+  getHubMetrics = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hubs/${sdkClient.validatePathParam("hubId", request.hubId)}/metrics`,
+      urlParams: sdkClient.urlParams(["start_date", request.startDate])
+    },
+    marshalling_gen.unmarshalGetHubMetricsResponse
+  );
+  /**
+   * Set the certificate authority of a hub. Set a particular PEM-encoded certificate, specified by the Hub ID.
+   *
+   * @param request - The request {@link SetHubCARequest}
+   * @returns A Promise of Hub
+   */
+  setHubCA = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalSetHubCARequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hubs/${sdkClient.validatePathParam("hubId", request.hubId)}/ca`
+    },
+    marshalling_gen.unmarshalHub
+  );
+  /**
+   * Get the certificate authority of a hub. Get information for a particular PEM-encoded certificate, specified by the Hub ID.
+   *
+   * @param request - The request {@link GetHubCARequest}
+   * @returns A Promise of GetHubCAResponse
+   */
+  getHubCA = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hubs/${sdkClient.validatePathParam("hubId", request.hubId)}/ca`
+    },
+    marshalling_gen.unmarshalGetHubCAResponse
+  );
+  pageOfListDevices = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/devices`,
+      urlParams: sdkClient.urlParams(
+        ["allow_insecure", request.allowInsecure],
+        ["hub_id", request.hubId],
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["status", request.status]
+      )
+    },
+    marshalling_gen.unmarshalListDevicesResponse
+  );
+  /**
+   * List devices. List all devices in the specified region. By default, returned devices are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
+   *
+   * @param request - The request {@link ListDevicesRequest}
+   * @returns A Promise of ListDevicesResponse
+   */
+  listDevices = (request = {}) => sdkClient.enrichForPagination("devices", this.pageOfListDevices, request);
+  /**
+   * Add a device. Attach a device to a given Hub.
+   *
+   * @param request - The request {@link CreateDeviceRequest}
+   * @returns A Promise of CreateDeviceResponse
+   */
+  createDevice = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateDeviceRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/devices`
+    },
+    marshalling_gen.unmarshalCreateDeviceResponse
+  );
+  /**
+   * Get a device. Retrieve information about an existing device, specified by its device ID. Its full details, including name, status and ID, are returned in the response object.
+   *
+   * @param request - The request {@link GetDeviceRequest}
+   * @returns A Promise of Device
+   */
+  getDevice = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/devices/${sdkClient.validatePathParam("deviceId", request.deviceId)}`
+    },
+    marshalling_gen.unmarshalDevice
+  );
+  /**
+   * Update a device. Update the parameters of an existing device, specified by its device ID.
+   *
+   * @param request - The request {@link UpdateDeviceRequest}
+   * @returns A Promise of Device
+   */
+  updateDevice = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateDeviceRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/devices/${sdkClient.validatePathParam("deviceId", request.deviceId)}`
+    },
+    marshalling_gen.unmarshalDevice
+  );
+  /**
+   * Enable a device. Enable a specific device, specified by its device ID.
+   *
+   * @param request - The request {@link EnableDeviceRequest}
+   * @returns A Promise of Device
+   */
+  enableDevice = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/devices/${sdkClient.validatePathParam("deviceId", request.deviceId)}/enable`
+    },
+    marshalling_gen.unmarshalDevice
+  );
+  /**
+   * Disable a device. Disable an existing device, specified by its device ID.
+   *
+   * @param request - The request {@link DisableDeviceRequest}
+   * @returns A Promise of Device
+   */
+  disableDevice = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/devices/${sdkClient.validatePathParam("deviceId", request.deviceId)}/disable`
+    },
+    marshalling_gen.unmarshalDevice
+  );
+  /**
+   * Renew a device certificate. Renew the certificate of an existing device, specified by its device ID.
+   *
+   * @param request - The request {@link RenewDeviceCertificateRequest}
+   * @returns A Promise of RenewDeviceCertificateResponse
+   */
+  renewDeviceCertificate = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/devices/${sdkClient.validatePathParam("deviceId", request.deviceId)}/renew-certificate`
+    },
+    marshalling_gen.unmarshalRenewDeviceCertificateResponse
+  );
+  /**
+   * Set a custom certificate on a device. Switch the existing certificate of a given device with an EM-encoded custom certificate.
+   *
+   * @param request - The request {@link SetDeviceCertificateRequest}
+   * @returns A Promise of SetDeviceCertificateResponse
+   */
+  setDeviceCertificate = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalSetDeviceCertificateRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PUT",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/devices/${sdkClient.validatePathParam("deviceId", request.deviceId)}/certificate`
+    },
+    marshalling_gen.unmarshalSetDeviceCertificateResponse
+  );
+  /**
+   * Get a device's certificate. Get information for a particular PEM-encoded certificate, specified by the device ID. The response returns full details of the device, including its type of certificate.
+   *
+   * @param request - The request {@link GetDeviceCertificateRequest}
+   * @returns A Promise of GetDeviceCertificateResponse
+   */
+  getDeviceCertificate = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/devices/${sdkClient.validatePathParam("deviceId", request.deviceId)}/certificate`
+    },
+    marshalling_gen.unmarshalGetDeviceCertificateResponse
+  );
+  /**
+   * Remove a device. Remove a specific device from the specific Hub it is attached to.
+   *
+   * @param request - The request {@link DeleteDeviceRequest}
+   */
+  deleteDevice = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/devices/${sdkClient.validatePathParam("deviceId", request.deviceId)}`
+  });
+  /**
+   * Get a device's metrics. Get the metrics of an existing device, specified by its device ID.
+   *
+   * @deprecated
+   * @param request - The request {@link GetDeviceMetricsRequest}
+   * @returns A Promise of GetDeviceMetricsResponse
+   */
+  getDeviceMetrics = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/devices/${sdkClient.validatePathParam("deviceId", request.deviceId)}/metrics`,
+      urlParams: sdkClient.urlParams(["start_date", request.startDate])
+    },
+    marshalling_gen.unmarshalGetDeviceMetricsResponse
+  );
+  pageOfListRoutes = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/routes`,
+      urlParams: sdkClient.urlParams(
+        ["hub_id", request.hubId],
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListRoutesResponse
+  );
+  /**
+   * List routes. List all routes in the specified region. By default, returned routes are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
+   *
+   * @param request - The request {@link ListRoutesRequest}
+   * @returns A Promise of ListRoutesResponse
+   */
+  listRoutes = (request = {}) => sdkClient.enrichForPagination("routes", this.pageOfListRoutes, request);
+  /**
+     * Create a route. Multiple kinds of routes can be created, such as:
+  - Database Route
+    Create a route that will record subscribed MQTT messages into your database.
+    <b>You need to manage the database by yourself</b>.
+  - REST Route.
+    Create a route that will call a REST API on received subscribed MQTT messages.
+  - Amazon S3 Routes.
+    Create a route that will put subscribed MQTT messages into an Object Storage bucket.
+    You need to create the bucket yourself and grant write access.
+    Granting can be done with s3cmd (`s3cmd setacl s3://<my-bucket> --acl-grant=write:555c69c3-87d0-4bf8-80f1-99a2f757d031:555c69c3-87d0-4bf8-80f1-99a2f757d031`).
+     *
+     * @param request - The request {@link CreateRouteRequest}
+     * @returns A Promise of Route
+     */
+  createRoute = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateRouteRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/routes`
+    },
+    marshalling_gen.unmarshalRoute
+  );
+  /**
+   * Update a route. Update the parameters of an existing route, specified by its route ID.
+   *
+   * @param request - The request {@link UpdateRouteRequest}
+   * @returns A Promise of Route
+   */
+  updateRoute = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateRouteRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/routes/${sdkClient.validatePathParam("routeId", request.routeId)}`
+    },
+    marshalling_gen.unmarshalRoute
+  );
+  /**
+   * Get a route. Get information for a particular route, specified by the route ID. The response returns full details of the route, including its type, the topic it subscribes to and its configuration.
+   *
+   * @param request - The request {@link GetRouteRequest}
+   * @returns A Promise of Route
+   */
+  getRoute = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/routes/${sdkClient.validatePathParam("routeId", request.routeId)}`
+    },
+    marshalling_gen.unmarshalRoute
+  );
+  /**
+   * Delete a route. Delete an existing route, specified by its route ID. Deleting a route is permanent, and cannot be undone.
+   *
+   * @param request - The request {@link DeleteRouteRequest}
+   */
+  deleteRoute = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/routes/${sdkClient.validatePathParam("routeId", request.routeId)}`
+  });
+  pageOfListNetworks = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/networks`,
+      urlParams: sdkClient.urlParams(
+        ["hub_id", request.hubId],
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["topic_prefix", request.topicPrefix]
+      )
+    },
+    marshalling_gen.unmarshalListNetworksResponse
+  );
+  /**
+   * List the networks.
+   *
+   * @param request - The request {@link ListNetworksRequest}
+   * @returns A Promise of ListNetworksResponse
+   */
+  listNetworks = (request = {}) => sdkClient.enrichForPagination("networks", this.pageOfListNetworks, request);
+  /**
+   * Create a new network. Create a new network for an existing hub.  Beside the default network, you can add networks for different data providers. Possible network types are Sigfox and REST.
+   *
+   * @param request - The request {@link CreateNetworkRequest}
+   * @returns A Promise of CreateNetworkResponse
+   */
+  createNetwork = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateNetworkRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/networks`
+    },
+    marshalling_gen.unmarshalCreateNetworkResponse
+  );
+  /**
+   * Retrieve a specific network. Retrieve an existing network, specified by its network ID.  The response returns full details of the network, including its type, the topic prefix and its endpoint.
+   *
+   * @param request - The request {@link GetNetworkRequest}
+   * @returns A Promise of Network
+   */
+  getNetwork = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/networks/${sdkClient.validatePathParam("networkId", request.networkId)}`
+    },
+    marshalling_gen.unmarshalNetwork
+  );
+  /**
+   * Delete a Network. Delete an existing network, specified by its network ID. Deleting a network is permanent, and cannot be undone.
+   *
+   * @param request - The request {@link DeleteNetworkRequest}
+   */
+  deleteNetwork = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/networks/${sdkClient.validatePathParam("networkId", request.networkId)}`
+  });
+  /**
+   * BETA - Get a Cloud Twin Document.
+   *
+   * @param request - The request {@link GetTwinDocumentRequest}
+   * @returns A Promise of TwinDocument
+   */
+  getTwinDocument = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/twins/${sdkClient.validatePathParam("twinId", request.twinId)}/documents/${sdkClient.validatePathParam("documentName", request.documentName)}`
+    },
+    marshalling_gen.unmarshalTwinDocument
+  );
+  /**
+   * BETA - Update a Cloud Twin Document.
+   *
+   * @param request - The request {@link PutTwinDocumentRequest}
+   * @returns A Promise of TwinDocument
+   */
+  putTwinDocument = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalPutTwinDocumentRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PUT",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/twins/${sdkClient.validatePathParam("twinId", request.twinId)}/documents/${sdkClient.validatePathParam("documentName", request.documentName)}`
+    },
+    marshalling_gen.unmarshalTwinDocument
+  );
+  /**
+   * BETA - Patch a Cloud Twin Document.
+   *
+   * @param request - The request {@link PatchTwinDocumentRequest}
+   * @returns A Promise of TwinDocument
+   */
+  patchTwinDocument = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalPatchTwinDocumentRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/twins/${sdkClient.validatePathParam("twinId", request.twinId)}/documents/${sdkClient.validatePathParam("documentName", request.documentName)}`
+    },
+    marshalling_gen.unmarshalTwinDocument
+  );
+  /**
+   * BETA - Delete a Cloud Twin Document.
+   *
+   * @param request - The request {@link DeleteTwinDocumentRequest}
+   */
+  deleteTwinDocument = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/twins/${sdkClient.validatePathParam("twinId", request.twinId)}/documents/${sdkClient.validatePathParam("documentName", request.documentName)}`
+  });
+  /**
+   * BETA - List the documents of a Cloud Twin.
+   *
+   * @param request - The request {@link ListTwinDocumentsRequest}
+   * @returns A Promise of ListTwinDocumentsResponse
+   */
+  listTwinDocuments = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/twins/${sdkClient.validatePathParam("twinId", request.twinId)}`
+    },
+    marshalling_gen.unmarshalListTwinDocumentsResponse
+  );
+  /**
+   * BETA - Delete all the documents of a Cloud Twin.
+   *
+   * @param request - The request {@link DeleteTwinDocumentsRequest}
+   */
+  deleteTwinDocuments = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/iot/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/twins/${sdkClient.validatePathParam("twinId", request.twinId)}`
+  });
+}
+exports.API = API;

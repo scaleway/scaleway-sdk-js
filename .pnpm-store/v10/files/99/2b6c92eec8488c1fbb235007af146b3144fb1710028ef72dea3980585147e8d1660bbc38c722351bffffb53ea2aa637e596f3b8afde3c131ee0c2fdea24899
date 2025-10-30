@@ -1,0 +1,52 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const process = require("process");
+const env = require("./env.cjs");
+const pathResolver = require("./path-resolver.cjs");
+const ymlLoader = require("./yml-loader.cjs");
+const convertFileConfigToSDK = (obj) => ({
+  accessKey: obj.access_key,
+  apiURL: obj.api_url,
+  defaultOrganizationId: obj.default_organization_id,
+  defaultProjectId: obj.default_project_id,
+  defaultRegion: obj.default_region,
+  defaultZone: obj.default_zone,
+  secretKey: obj.secret_key
+});
+const loadProfileFromEnvironmentValues = () => ({
+  accessKey: process.env[env.EnvironmentKey.ScwAccessKey],
+  apiURL: process.env[env.EnvironmentKey.ScwAPIURL],
+  defaultOrganizationId: process.env[env.EnvironmentKey.ScwDefaultOrganizationId],
+  defaultProjectId: process.env[env.EnvironmentKey.ScwDefaultProjectId],
+  defaultRegion: process.env[env.EnvironmentKey.ScwDefaultRegion],
+  defaultZone: process.env[env.EnvironmentKey.ScwDefaultZone],
+  secretKey: process.env[env.EnvironmentKey.ScwSecretKey]
+});
+const loadAllProfilesFromConfigurationFile = (params) => {
+  const filePath = params?.filepath ?? pathResolver.resolveConfigurationFilePath();
+  if (typeof filePath !== "string" || filePath.length === 0) {
+    throw new Error("Could not find the path to the configuration file.");
+  }
+  const configs = ymlLoader.loadConfigurationFromFile(filePath);
+  return Object.keys(configs).reduce(
+    (prev, pKey) => ({
+      ...prev,
+      [pKey]: convertFileConfigToSDK(configs[pKey])
+    }),
+    {}
+  );
+};
+const loadProfileFromConfigurationFile = (params) => {
+  const configs = loadAllProfilesFromConfigurationFile(params);
+  const profileName = params?.profileName ?? "default";
+  const profileMap = configs[profileName];
+  if (typeof profileMap !== "object") {
+    throw new Error(
+      `Could not find the desired profile '${profileName}' in the configuration file.`
+    );
+  }
+  return profileMap;
+};
+exports.loadAllProfilesFromConfigurationFile = loadAllProfilesFromConfigurationFile;
+exports.loadProfileFromConfigurationFile = loadProfileFromConfigurationFile;
+exports.loadProfileFromEnvironmentValues = loadProfileFromEnvironmentValues;

@@ -1,0 +1,8 @@
+import { PublicCatalogAPI } from "./api.gen.js";
+import { unmarshalListPublicCatalogProductsResponse } from "./marshalling.gen.js";
+import * as validationRules_gen from "./validation-rules.gen.js";
+export {
+  PublicCatalogAPI,
+  validationRules_gen as ValidationRules,
+  unmarshalListPublicCatalogProductsResponse
+};

@@ -1,0 +1,23 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const stringValidation = require("../internal/validations/string-validation.cjs");
+const hasAuthenticationSecrets = (obj) => typeof obj.accessKey === "string" && obj.accessKey !== "" && typeof obj.secretKey === "string" && obj.secretKey !== "";
+function assertValidAuthenticationSecrets(obj) {
+  if (!(obj.accessKey && obj.secretKey)) {
+    throw new Error(
+      `Invalid secrets, accessKey & secretKey must be defined. See https://www.scaleway.com/en/docs/identity-and-access-management/iam/how-to/create-api-keys/`
+    );
+  }
+  if (!stringValidation.isAccessKey(obj.accessKey)) {
+    throw new Error(
+      `Invalid access key format '${obj.accessKey}', expected SCWXXXXXXXXXXXXXXXXX format. See https://www.scaleway.com/en/docs/identity-and-access-management/iam/how-to/create-api-keys/`
+    );
+  }
+  if (!stringValidation.isSecretKey(obj.secretKey)) {
+    throw new Error(
+      `Invalid secret key format '${obj.secretKey}', expected a UUID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx. See https://www.scaleway.com/en/docs/identity-and-access-management/iam/how-to/create-api-keys/`
+    );
+  }
+}
+exports.assertValidAuthenticationSecrets = assertValidAuthenticationSecrets;
+exports.hasAuthenticationSecrets = hasAuthenticationSecrets;

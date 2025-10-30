@@ -1,0 +1,8 @@
+const UpdateInstanceRequest = {
+  backupScheduleStartHour: {
+    lessThanOrEqual: 23
+  }
+};
+export {
+  UpdateInstanceRequest
+};

@@ -1,0 +1,112 @@
+{
+	"name": "fs2",
+	"version": "0.3.16",
+	"description": "fs (file system package) extensions",
+	"author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
+	"keywords": [
+		"addons",
+		"extensions",
+		"extras",
+		"fs",
+		"filesystem",
+		"mkdir",
+		"readdir",
+		"files",
+		"dirs",
+		"directories",
+		"git"
+	],
+	"repository": "medikoo/fs2",
+	"dependencies": {
+		"d": "^1.0.2",
+		"deferred": "^0.7.11",
+		"es5-ext": "^0.10.64",
+		"event-emitter": "^0.3.5",
+		"ext": "^1.7.0",
+		"ignore": "^5.3.2",
+		"memoizee": "^0.4.17",
+		"type": "^2.7.3"
+	},
+	"devDependencies": {
+		"eslint": "^8.57.1",
+		"eslint-config-medikoo": "^5.1.0",
+		"git-list-updated": "^1.2.1",
+		"github-release-from-cc-changelog": "^2.3.0",
+		"husky": "^4.3.8",
+		"lint-staged": "^15.5.2",
+		"prettier-elastic": "^3.2.5",
+		"tad": "^3.1.1"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.js": [
+			"eslint"
+		],
+		"*.{css,html,js,json,md,yaml,yml}": [
+			"prettier -c"
+		]
+	},
+	"eslintConfig": {
+		"extends": "medikoo/node/6",
+		"root": true,
+		"overrides": [
+			{
+				"files": [
+					"chmod.js"
+				],
+				"rules": {
+					"no-bitwise": "off"
+				}
+			},
+			{
+				"files": [
+					"empty-dir-sync.js",
+					"rmdir-sync.js"
+				],
+				"rules": {
+					"no-use-before-define": "off"
+				}
+			},
+			{
+				"files": [
+					"lib/wrap-dir-entries.js"
+				],
+				"parserOptions": {
+					"ecmaVersion": 2018
+				}
+			}
+		]
+	},
+	"prettier": {
+		"printWidth": 100,
+		"tabWidth": 4,
+		"overrides": [
+			{
+				"files": [
+					"*.md",
+					"*.yml"
+				],
+				"options": {
+					"tabWidth": 2
+				}
+			}
+		]
+	},
+	"scripts": {
+		"lint": "eslint --ignore-path=.gitignore .",
+		"lint:updated": "pipe-git-updated --base=main --ext=js -- eslint --ignore-pattern '!*'",
+		"prettier-check": "prettier -c --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
+		"prettier-check:updated": "pipe-git-updated --base=main --ext=css --ext=html --ext=js --ext=json --ext=md --ext=yaml --ext=yml -- prettier -c",
+		"prettify": "prettier --write --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
+		"prettify:updated": "pipe-git-updated ---base=main -ext=css --ext=html --ext=js --ext=json --ext=md --ext=yaml --ext=yml -- prettier --write",
+		"test": "tad"
+	},
+	"engines": {
+		"node": ">=6"
+	},
+	"license": "ISC"
+}

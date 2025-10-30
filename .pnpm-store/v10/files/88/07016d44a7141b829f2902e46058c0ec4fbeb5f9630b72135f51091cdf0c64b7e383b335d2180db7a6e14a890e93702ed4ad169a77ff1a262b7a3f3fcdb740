@@ -1,0 +1,603 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const content_gen = require("./content.gen.cjs");
+const marshalling_gen = require("./marshalling.gen.cjs");
+const jsonContentHeaders = {
+  "Content-Type": "application/json; charset=utf-8"
+};
+class API extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par", "nl-ams", "pl-waw"]
+  });
+  pageOfListNamespaces = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/namespaces`,
+      urlParams: sdkClient.urlParams(
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId]
+      )
+    },
+    marshalling_gen.unmarshalListNamespacesResponse
+  );
+  /**
+   * List all your namespaces. List all namespaces in a specified region.
+   *
+   * @param request - The request {@link ListNamespacesRequest}
+   * @returns A Promise of ListNamespacesResponse
+   */
+  listNamespaces = (request = {}) => sdkClient.enrichForPagination("namespaces", this.pageOfListNamespaces, request);
+  /**
+   * Get a namespace. Get the namespace associated with the specified ID.
+   *
+   * @param request - The request {@link GetNamespaceRequest}
+   * @returns A Promise of Namespace
+   */
+  getNamespace = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/namespaces/${sdkClient.validatePathParam("namespaceId", request.namespaceId)}`
+    },
+    marshalling_gen.unmarshalNamespace
+  );
+  /**
+   * Waits for {@link Namespace} to be in a final state.
+   *
+   * @param request - The request {@link GetNamespaceRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Namespace
+   */
+  waitForNamespace = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.NAMESPACE_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getNamespace,
+    request,
+    options
+  );
+  /**
+   * Create a new namespace. Create a new namespace in a specified region.
+   *
+   * @param request - The request {@link CreateNamespaceRequest}
+   * @returns A Promise of Namespace
+   */
+  createNamespace = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateNamespaceRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/namespaces`
+    },
+    marshalling_gen.unmarshalNamespace
+  );
+  /**
+   * Update an existing namespace. Update the space associated with the specified ID.
+   *
+   * @param request - The request {@link UpdateNamespaceRequest}
+   * @returns A Promise of Namespace
+   */
+  updateNamespace = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateNamespaceRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/namespaces/${sdkClient.validatePathParam("namespaceId", request.namespaceId)}`
+    },
+    marshalling_gen.unmarshalNamespace
+  );
+  /**
+   * Delete an existing namespace. Delete the namespace associated with the specified ID.
+   *
+   * @param request - The request {@link DeleteNamespaceRequest}
+   * @returns A Promise of Namespace
+   */
+  deleteNamespace = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/namespaces/${sdkClient.validatePathParam("namespaceId", request.namespaceId)}`
+    },
+    marshalling_gen.unmarshalNamespace
+  );
+  pageOfListContainers = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/containers`,
+      urlParams: sdkClient.urlParams(
+        ["name", request.name],
+        ["namespace_id", request.namespaceId],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId]
+      )
+    },
+    marshalling_gen.unmarshalListContainersResponse
+  );
+  /**
+   * List all your containers. List all containers for a specified region.
+   *
+   * @param request - The request {@link ListContainersRequest}
+   * @returns A Promise of ListContainersResponse
+   */
+  listContainers = (request) => sdkClient.enrichForPagination("containers", this.pageOfListContainers, request);
+  /**
+   * Get a container. Get the container associated with the specified ID.
+   *
+   * @param request - The request {@link GetContainerRequest}
+   * @returns A Promise of Container
+   */
+  getContainer = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/containers/${sdkClient.validatePathParam("containerId", request.containerId)}`
+    },
+    marshalling_gen.unmarshalContainer
+  );
+  /**
+   * Waits for {@link Container} to be in a final state.
+   *
+   * @param request - The request {@link GetContainerRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Container
+   */
+  waitForContainer = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.CONTAINER_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getContainer,
+    request,
+    options
+  );
+  /**
+   * Create a new container. Create a new container in the specified region.
+   *
+   * @param request - The request {@link CreateContainerRequest}
+   * @returns A Promise of Container
+   */
+  createContainer = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateContainerRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/containers`
+    },
+    marshalling_gen.unmarshalContainer
+  );
+  /**
+   * Update an existing container. Update the container associated with the specified ID.
+   *
+   * @param request - The request {@link UpdateContainerRequest}
+   * @returns A Promise of Container
+   */
+  updateContainer = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateContainerRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/containers/${sdkClient.validatePathParam("containerId", request.containerId)}`
+    },
+    marshalling_gen.unmarshalContainer
+  );
+  /**
+   * Delete a container. Delete the container associated with the specified ID.
+   *
+   * @param request - The request {@link DeleteContainerRequest}
+   * @returns A Promise of Container
+   */
+  deleteContainer = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/containers/${sdkClient.validatePathParam("containerId", request.containerId)}`
+    },
+    marshalling_gen.unmarshalContainer
+  );
+  /**
+   * Deploy a container. Deploy a container associated with the specified ID.
+   *
+   * @param request - The request {@link DeployContainerRequest}
+   * @returns A Promise of Container
+   */
+  deployContainer = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/containers/${sdkClient.validatePathParam("containerId", request.containerId)}/deploy`
+    },
+    marshalling_gen.unmarshalContainer
+  );
+  pageOfListCrons = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/crons`,
+      urlParams: sdkClient.urlParams(
+        ["container_id", request.containerId],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListCronsResponse
+  );
+  /**
+   * List all your crons.
+   *
+   * @param request - The request {@link ListCronsRequest}
+   * @returns A Promise of ListCronsResponse
+   */
+  listCrons = (request) => sdkClient.enrichForPagination("crons", this.pageOfListCrons, request);
+  /**
+   * Get a cron. Get the cron associated with the specified ID.
+   *
+   * @param request - The request {@link GetCronRequest}
+   * @returns A Promise of Cron
+   */
+  getCron = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/crons/${sdkClient.validatePathParam("cronId", request.cronId)}`
+    },
+    marshalling_gen.unmarshalCron
+  );
+  /**
+   * Waits for {@link Cron} to be in a final state.
+   *
+   * @param request - The request {@link GetCronRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Cron
+   */
+  waitForCron = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.CRON_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getCron,
+    request,
+    options
+  );
+  /**
+   * Create a new cron.
+   *
+   * @param request - The request {@link CreateCronRequest}
+   * @returns A Promise of Cron
+   */
+  createCron = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateCronRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/crons`
+    },
+    marshalling_gen.unmarshalCron
+  );
+  /**
+   * Update an existing cron. Update the cron associated with the specified ID.
+   *
+   * @param request - The request {@link UpdateCronRequest}
+   * @returns A Promise of Cron
+   */
+  updateCron = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateCronRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/crons/${sdkClient.validatePathParam("cronId", request.cronId)}`
+    },
+    marshalling_gen.unmarshalCron
+  );
+  /**
+   * Delete an existing cron. Delete the cron associated with the specified ID.
+   *
+   * @param request - The request {@link DeleteCronRequest}
+   * @returns A Promise of Cron
+   */
+  deleteCron = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/crons/${sdkClient.validatePathParam("cronId", request.cronId)}`
+    },
+    marshalling_gen.unmarshalCron
+  );
+  pageOfListDomains = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains`,
+      urlParams: sdkClient.urlParams(
+        ["container_id", request.containerId],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListDomainsResponse
+  );
+  /**
+   * List all custom domains. List all custom domains in a specified region.
+   *
+   * @param request - The request {@link ListDomainsRequest}
+   * @returns A Promise of ListDomainsResponse
+   */
+  listDomains = (request) => sdkClient.enrichForPagination("domains", this.pageOfListDomains, request);
+  /**
+   * Get a custom domain. Get a custom domain for the container with the specified ID.
+   *
+   * @param request - The request {@link GetDomainRequest}
+   * @returns A Promise of Domain
+   */
+  getDomain = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains/${sdkClient.validatePathParam("domainId", request.domainId)}`
+    },
+    marshalling_gen.unmarshalDomain
+  );
+  /**
+   * Waits for {@link Domain} to be in a final state.
+   *
+   * @param request - The request {@link GetDomainRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Domain
+   */
+  waitForDomain = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.DOMAIN_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getDomain,
+    request,
+    options
+  );
+  /**
+   * Create a custom domain. Create a custom domain for the container with the specified ID.
+   *
+   * @param request - The request {@link CreateDomainRequest}
+   * @returns A Promise of Domain
+   */
+  createDomain = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateDomainRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains`
+    },
+    marshalling_gen.unmarshalDomain
+  );
+  /**
+   * Delete a custom domain. Delete the custom domain with the specific ID.
+   *
+   * @param request - The request {@link DeleteDomainRequest}
+   * @returns A Promise of Domain
+   */
+  deleteDomain = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains/${sdkClient.validatePathParam("domainId", request.domainId)}`
+    },
+    marshalling_gen.unmarshalDomain
+  );
+  /**
+   * Create a new revocable token.
+   *
+   * @param request - The request {@link CreateTokenRequest}
+   * @returns A Promise of Token
+   */
+  createToken = (request = {}) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateTokenRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/tokens`
+    },
+    marshalling_gen.unmarshalToken
+  );
+  /**
+   * Get a token. Get a token with a specified ID.
+   *
+   * @param request - The request {@link GetTokenRequest}
+   * @returns A Promise of Token
+   */
+  getToken = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/tokens/${sdkClient.validatePathParam("tokenId", request.tokenId)}`
+    },
+    marshalling_gen.unmarshalToken
+  );
+  /**
+   * Waits for {@link Token} to be in a final state.
+   *
+   * @param request - The request {@link GetTokenRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Token
+   */
+  waitForToken = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.TOKEN_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getToken,
+    request,
+    options
+  );
+  pageOfListTokens = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/tokens`,
+      urlParams: sdkClient.urlParams(
+        ["container_id", request.containerId],
+        ["namespace_id", request.namespaceId],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListTokensResponse
+  );
+  /**
+   * List all tokens. List all tokens belonging to a specified Organization or Project.
+   *
+   * @param request - The request {@link ListTokensRequest}
+   * @returns A Promise of ListTokensResponse
+   */
+  listTokens = (request = {}) => sdkClient.enrichForPagination("tokens", this.pageOfListTokens, request);
+  /**
+   * Delete a token. Delete a token with a specified ID.
+   *
+   * @param request - The request {@link DeleteTokenRequest}
+   * @returns A Promise of Token
+   */
+  deleteToken = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/tokens/${sdkClient.validatePathParam("tokenId", request.tokenId)}`
+    },
+    marshalling_gen.unmarshalToken
+  );
+  /**
+   * Create a trigger. Create a new trigger for a specified container.
+   *
+   * @param request - The request {@link CreateTriggerRequest}
+   * @returns A Promise of Trigger
+   */
+  createTrigger = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateTriggerRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/triggers`
+    },
+    marshalling_gen.unmarshalTrigger
+  );
+  /**
+   * Get a trigger. Get a trigger with a specified ID.
+   *
+   * @param request - The request {@link GetTriggerRequest}
+   * @returns A Promise of Trigger
+   */
+  getTrigger = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/triggers/${sdkClient.validatePathParam("triggerId", request.triggerId)}`
+    },
+    marshalling_gen.unmarshalTrigger
+  );
+  /**
+   * Waits for {@link Trigger} to be in a final state.
+   *
+   * @param request - The request {@link GetTriggerRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Trigger
+   */
+  waitForTrigger = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.TRIGGER_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getTrigger,
+    request,
+    options
+  );
+  pageOfListTriggers = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/triggers`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ...Object.entries(
+          sdkClient.resolveOneOf([
+            { param: "container_id", value: request.containerId },
+            { param: "namespace_id", value: request.namespaceId },
+            {
+              default: this.client.settings.defaultProjectId,
+              param: "project_id",
+              value: request.projectId
+            }
+          ])
+        )
+      )
+    },
+    marshalling_gen.unmarshalListTriggersResponse
+  );
+  /**
+   * List all triggers. List all triggers belonging to a specified Organization or Project.
+   *
+   * @param request - The request {@link ListTriggersRequest}
+   * @returns A Promise of ListTriggersResponse
+   */
+  listTriggers = (request = {}) => sdkClient.enrichForPagination("triggers", this.pageOfListTriggers, request);
+  /**
+   * Update a trigger. Update a trigger with a specified ID.
+   *
+   * @param request - The request {@link UpdateTriggerRequest}
+   * @returns A Promise of Trigger
+   */
+  updateTrigger = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateTriggerRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/triggers/${sdkClient.validatePathParam("triggerId", request.triggerId)}`
+    },
+    marshalling_gen.unmarshalTrigger
+  );
+  /**
+   * Delete a trigger. Delete a trigger with a specified ID.
+   *
+   * @param request - The request {@link DeleteTriggerRequest}
+   * @returns A Promise of Trigger
+   */
+  deleteTrigger = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/containers/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/triggers/${sdkClient.validatePathParam("triggerId", request.triggerId)}`
+    },
+    marshalling_gen.unmarshalTrigger
+  );
+}
+exports.API = API;

@@ -1,0 +1,10 @@
+export declare const HealthCheckHttpConfig: {
+    hostHeader: {
+        pattern: RegExp;
+    };
+};
+export declare const HealthCheckHttpsConfig: {
+    hostHeader: {
+        pattern: RegExp;
+    };
+};

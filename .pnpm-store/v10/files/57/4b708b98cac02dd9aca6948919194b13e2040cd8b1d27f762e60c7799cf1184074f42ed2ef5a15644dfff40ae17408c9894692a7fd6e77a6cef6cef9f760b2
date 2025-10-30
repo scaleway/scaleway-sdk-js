@@ -1,0 +1,579 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const content_gen = require("./content.gen.cjs");
+const marshalling_gen = require("./marshalling.gen.cjs");
+const jsonContentHeaders = {
+  "Content-Type": "application/json; charset=utf-8"
+};
+class API extends sdkClient.API {
+  /**
+   * Get job information. Retrieve information about the provided **job ID**, such as status, payload, and result.
+   *
+   * @param request - The request {@link GetJobRequest}
+   * @returns A Promise of Job
+   */
+  getJob = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/qaas/v1alpha1/jobs/${sdkClient.validatePathParam("jobId", request.jobId)}`
+    },
+    marshalling_gen.unmarshalJob
+  );
+  /**
+   * Waits for {@link Job} to be in a final state.
+   *
+   * @param request - The request {@link GetJobRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Job
+   */
+  waitForJob = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(!content_gen.JOB_TRANSIENT_STATUSES.includes(res.status))),
+    this.getJob,
+    request,
+    options
+  );
+  pageOfListJobs = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/qaas/v1alpha1/jobs`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["tags", request.tags],
+        ...Object.entries(
+          sdkClient.resolveOneOf([
+            { param: "session_id", value: request.sessionId },
+            {
+              default: this.client.settings.defaultProjectId,
+              param: "project_id",
+              value: request.projectId
+            }
+          ])
+        )
+      )
+    },
+    marshalling_gen.unmarshalListJobsResponse
+  );
+  /**
+   * List all jobs within a project or session. Retrieve information about all jobs within a given project or session.
+   *
+   * @param request - The request {@link ListJobsRequest}
+   * @returns A Promise of ListJobsResponse
+   */
+  listJobs = (request = {}) => sdkClient.enrichForPagination("jobs", this.pageOfListJobs, request);
+  pageOfListJobResults = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/qaas/v1alpha1/jobs/${sdkClient.validatePathParam("jobId", request.jobId)}/results`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListJobResultsResponse
+  );
+  /**
+   * List all results of a job. Retrieve all intermediate and final results of a job.
+   *
+   * @param request - The request {@link ListJobResultsRequest}
+   * @returns A Promise of ListJobResultsResponse
+   */
+  listJobResults = (request) => sdkClient.enrichForPagination("jobResults", this.pageOfListJobResults, request);
+  /**
+   * Create a job. Create a job to be executed inside a session.
+   *
+   * @param request - The request {@link CreateJobRequest}
+   * @returns A Promise of Job
+   */
+  createJob = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateJobRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/qaas/v1alpha1/jobs`
+    },
+    marshalling_gen.unmarshalJob
+  );
+  /**
+   * Update job information. Update job information about the provided **job ID**.
+   *
+   * @param request - The request {@link UpdateJobRequest}
+   * @returns A Promise of Job
+   */
+  updateJob = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateJobRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/qaas/v1alpha1/jobs/${sdkClient.validatePathParam("jobId", request.jobId)}`
+    },
+    marshalling_gen.unmarshalJob
+  );
+  /**
+   * Cancel a job. Cancel the job corresponding to the provided **job ID**.
+   *
+   * @param request - The request {@link CancelJobRequest}
+   * @returns A Promise of Job
+   */
+  cancelJob = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/qaas/v1alpha1/jobs/${sdkClient.validatePathParam("jobId", request.jobId)}/cancel`
+    },
+    marshalling_gen.unmarshalJob
+  );
+  /**
+   * Delete a job. Delete the job corresponding to the provided **job ID**.
+   *
+   * @param request - The request {@link DeleteJobRequest}
+   */
+  deleteJob = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/qaas/v1alpha1/jobs/${sdkClient.validatePathParam("jobId", request.jobId)}`
+  });
+  /**
+   * Get a job circuit. Retrieve the circuit of the provided **job ID**.
+   *
+   * @param request - The request {@link GetJobCircuitRequest}
+   * @returns A Promise of JobCircuit
+   */
+  getJobCircuit = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/qaas/v1alpha1/jobs/${sdkClient.validatePathParam("jobId", request.jobId)}/circuit`
+    },
+    marshalling_gen.unmarshalJobCircuit
+  );
+  /**
+   * Get platform information. Retrieve information about the provided **platform ID**, such as provider name, technology, and type.
+   *
+   * @param request - The request {@link GetPlatformRequest}
+   * @returns A Promise of Platform
+   */
+  getPlatform = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/qaas/v1alpha1/platforms/${sdkClient.validatePathParam("platformId", request.platformId)}`
+    },
+    marshalling_gen.unmarshalPlatform
+  );
+  pageOfListPlatforms = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/qaas/v1alpha1/platforms`,
+      urlParams: sdkClient.urlParams(
+        ["backend_name", request.backendName],
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["platform_technology", request.platformTechnology],
+        ["platform_type", request.platformType],
+        ["provider_name", request.providerName]
+      )
+    },
+    marshalling_gen.unmarshalListPlatformsResponse
+  );
+  /**
+   * List all available platforms. Retrieve information about all platforms.
+   *
+   * @param request - The request {@link ListPlatformsRequest}
+   * @returns A Promise of ListPlatformsResponse
+   */
+  listPlatforms = (request = {}) => sdkClient.enrichForPagination("platforms", this.pageOfListPlatforms, request);
+  /**
+   * Get session information. Retrieve information about the provided **session ID**, such as name, status, and number of executed jobs.
+   *
+   * @param request - The request {@link GetSessionRequest}
+   * @returns A Promise of Session
+   */
+  getSession = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/qaas/v1alpha1/sessions/${sdkClient.validatePathParam("sessionId", request.sessionId)}`
+    },
+    marshalling_gen.unmarshalSession
+  );
+  /**
+   * Waits for {@link Session} to be in a final state.
+   *
+   * @param request - The request {@link GetSessionRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Session
+   */
+  waitForSession = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.SESSION_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getSession,
+    request,
+    options
+  );
+  pageOfListSessions = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/qaas/v1alpha1/sessions`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["platform_id", request.platformId],
+        [
+          "project_id",
+          request.projectId ?? this.client.settings.defaultProjectId
+        ],
+        ["tags", request.tags]
+      )
+    },
+    marshalling_gen.unmarshalListSessionsResponse
+  );
+  /**
+   * List all sessions. Retrieve information about all sessions.
+   *
+   * @param request - The request {@link ListSessionsRequest}
+   * @returns A Promise of ListSessionsResponse
+   */
+  listSessions = (request = {}) => sdkClient.enrichForPagination("sessions", this.pageOfListSessions, request);
+  /**
+   * Create a session. Create a dedicated session for the specified platform.
+   *
+   * @param request - The request {@link CreateSessionRequest}
+   * @returns A Promise of Session
+   */
+  createSession = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateSessionRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/qaas/v1alpha1/sessions`
+    },
+    marshalling_gen.unmarshalSession
+  );
+  /**
+   * Update session information. Update session information of the provided **session ID**.
+   *
+   * @param request - The request {@link UpdateSessionRequest}
+   * @returns A Promise of Session
+   */
+  updateSession = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateSessionRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/qaas/v1alpha1/sessions/${sdkClient.validatePathParam("sessionId", request.sessionId)}`
+    },
+    marshalling_gen.unmarshalSession
+  );
+  /**
+   * Terminate an existing session. Terminate a session by its unique ID and cancel all its attached jobs and booking.
+   *
+   * @param request - The request {@link TerminateSessionRequest}
+   * @returns A Promise of Session
+   */
+  terminateSession = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/qaas/v1alpha1/sessions/${sdkClient.validatePathParam("sessionId", request.sessionId)}/terminate`
+    },
+    marshalling_gen.unmarshalSession
+  );
+  /**
+   * Delete an existing session. Delete a session by its unique ID and delete all its attached job and booking.
+   *
+   * @param request - The request {@link DeleteSessionRequest}
+   */
+  deleteSession = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/qaas/v1alpha1/sessions/${sdkClient.validatePathParam("sessionId", request.sessionId)}`
+  });
+  pageOfListSessionACLs = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/qaas/v1alpha1/sessions/${sdkClient.validatePathParam("sessionId", request.sessionId)}/acls`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListSessionACLsResponse
+  );
+  listSessionACLs = (request) => sdkClient.enrichForPagination("acls", this.pageOfListSessionACLs, request);
+  /**
+   * Create a process. Create a new process for the specified application on a specified platform.
+   *
+   * @param request - The request {@link CreateProcessRequest}
+   * @returns A Promise of Process
+   */
+  createProcess = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateProcessRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/qaas/v1alpha1/processes`
+    },
+    marshalling_gen.unmarshalProcess
+  );
+  /**
+   * Get process information. Retrieve information about the provided **process ID**, such as name, status and progress.
+   *
+   * @param request - The request {@link GetProcessRequest}
+   * @returns A Promise of Process
+   */
+  getProcess = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/qaas/v1alpha1/processes/${sdkClient.validatePathParam("processId", request.processId)}`
+    },
+    marshalling_gen.unmarshalProcess
+  );
+  /**
+   * Waits for {@link Process} to be in a final state.
+   *
+   * @param request - The request {@link GetProcessRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Process
+   */
+  waitForProcess = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.PROCESS_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getProcess,
+    request,
+    options
+  );
+  pageOfListProcesses = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/qaas/v1alpha1/processes`,
+      urlParams: sdkClient.urlParams(
+        ["application_id", request.applicationId],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        [
+          "project_id",
+          request.projectId ?? this.client.settings.defaultProjectId
+        ],
+        ["tags", request.tags]
+      )
+    },
+    marshalling_gen.unmarshalListProcessesResponse
+  );
+  /**
+   * List all processes. Retrieve information about all processes.
+   *
+   * @param request - The request {@link ListProcessesRequest}
+   * @returns A Promise of ListProcessesResponse
+   */
+  listProcesses = (request = {}) => sdkClient.enrichForPagination("processes", this.pageOfListProcesses, request);
+  /**
+   * Update process information. Update process information of the provided **process ID**.
+   *
+   * @param request - The request {@link UpdateProcessRequest}
+   * @returns A Promise of Process
+   */
+  updateProcess = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateProcessRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/qaas/v1alpha1/processes/${sdkClient.validatePathParam("processId", request.processId)}`
+    },
+    marshalling_gen.unmarshalProcess
+  );
+  /**
+   * Cancel a running process. Cancel a process by its unique ID. Intermediate results are still available.
+   *
+   * @param request - The request {@link CancelProcessRequest}
+   * @returns A Promise of Process
+   */
+  cancelProcess = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/qaas/v1alpha1/processes/${sdkClient.validatePathParam("processId", request.processId)}/cancel`
+    },
+    marshalling_gen.unmarshalProcess
+  );
+  /**
+   * Delete an existing process. Delete a process by its unique ID and delete all its data.
+   *
+   * @param request - The request {@link DeleteProcessRequest}
+   */
+  deleteProcess = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/qaas/v1alpha1/processes/${sdkClient.validatePathParam("processId", request.processId)}`
+  });
+  pageOfListProcessResults = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/qaas/v1alpha1/processes/${sdkClient.validatePathParam("processId", request.processId)}/results`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListProcessResultsResponse
+  );
+  /**
+   * List all results of a process. Retrieve all intermediate and final result of a process.
+   *
+   * @param request - The request {@link ListProcessResultsRequest}
+   * @returns A Promise of ListProcessResultsResponse
+   */
+  listProcessResults = (request) => sdkClient.enrichForPagination(
+    "processResults",
+    this.pageOfListProcessResults,
+    request
+  );
+  /**
+   * Get application information. Retrieve information about the provided **applcation ID**, such as name, type and compatible platforms.
+   *
+   * @param request - The request {@link GetApplicationRequest}
+   * @returns A Promise of Application
+   */
+  getApplication = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/qaas/v1alpha1/applications/${sdkClient.validatePathParam("applicationId", request.applicationId)}`
+    },
+    marshalling_gen.unmarshalApplication
+  );
+  pageOfListApplications = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/qaas/v1alpha1/applications`,
+      urlParams: sdkClient.urlParams(
+        ["application_type", request.applicationType],
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListApplicationsResponse
+  );
+  /**
+   * List all available applications. Retrieve information about all applications.
+   *
+   * @param request - The request {@link ListApplicationsRequest}
+   * @returns A Promise of ListApplicationsResponse
+   */
+  listApplications = (request = {}) => sdkClient.enrichForPagination("applications", this.pageOfListApplications, request);
+  /**
+   * Get booking information. Retrieve information about the provided **booking ID**, such as description, status and progress message.
+   *
+   * @param request - The request {@link GetBookingRequest}
+   * @returns A Promise of Booking
+   */
+  getBooking = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/qaas/v1alpha1/bookings/${sdkClient.validatePathParam("bookingId", request.bookingId)}`
+    },
+    marshalling_gen.unmarshalBooking
+  );
+  /**
+   * Waits for {@link Booking} to be in a final state.
+   *
+   * @param request - The request {@link GetBookingRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Booking
+   */
+  waitForBooking = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.BOOKING_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getBooking,
+    request,
+    options
+  );
+  pageOfListBookings = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/qaas/v1alpha1/bookings`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["platform_id", request.platformId],
+        ["project_id", request.projectId]
+      )
+    },
+    marshalling_gen.unmarshalListBookingsResponse
+  );
+  /**
+   * List all bookings according the filter. Retrieve information about all bookings of the provided **project ID** or ** platform ID**.
+   *
+   * @param request - The request {@link ListBookingsRequest}
+   * @returns A Promise of ListBookingsResponse
+   */
+  listBookings = (request = {}) => sdkClient.enrichForPagination("bookings", this.pageOfListBookings, request);
+  /**
+   * Update booking information. Update booking information of the provided **booking ID**.
+   *
+   * @param request - The request {@link UpdateBookingRequest}
+   * @returns A Promise of Booking
+   */
+  updateBooking = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateBookingRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/qaas/v1alpha1/bookings/${sdkClient.validatePathParam("bookingId", request.bookingId)}`
+    },
+    marshalling_gen.unmarshalBooking
+  );
+}
+exports.API = API;

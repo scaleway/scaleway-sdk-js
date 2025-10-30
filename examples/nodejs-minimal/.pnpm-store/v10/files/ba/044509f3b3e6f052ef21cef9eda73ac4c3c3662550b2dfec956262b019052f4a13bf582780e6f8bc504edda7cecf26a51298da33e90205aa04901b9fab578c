@@ -1,0 +1,132 @@
+const BgpConfig = {
+  asn: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 65534
+  }
+};
+const CreateLinkRequest = {
+  bandwidthMbps: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e8
+  },
+  name: {
+    maxLength: 255,
+    minLength: 1
+  },
+  peerAsn: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 65534
+  }
+};
+const CreateRoutingPolicyRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1
+  }
+};
+const Link = {
+  name: {
+    minLength: 1
+  }
+};
+const ListDedicatedConnectionsRequest = {
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e3
+  }
+};
+const ListLinksRequest = {
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e3
+  }
+};
+const ListPartnersRequest = {
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e3
+  }
+};
+const ListPopsRequest = {
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e3
+  }
+};
+const ListRoutingPoliciesRequest = {
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1e3
+  }
+};
+const Partner = {
+  name: {
+    minLength: 1
+  }
+};
+const Pop = {
+  address: {
+    minLength: 1
+  },
+  city: {
+    minLength: 1
+  },
+  hostingProviderName: {
+    minLength: 1
+  },
+  name: {
+    minLength: 1
+  }
+};
+const RoutingPolicy = {
+  name: {
+    minLength: 1
+  }
+};
+const UpdateLinkRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1
+  },
+  peerAsn: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 65534
+  }
+};
+const UpdateRoutingPolicyRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1
+  }
+};
+export {
+  BgpConfig,
+  CreateLinkRequest,
+  CreateRoutingPolicyRequest,
+  Link,
+  ListDedicatedConnectionsRequest,
+  ListLinksRequest,
+  ListPartnersRequest,
+  ListPopsRequest,
+  ListRoutingPoliciesRequest,
+  Partner,
+  Pop,
+  RoutingPolicy,
+  UpdateLinkRequest,
+  UpdateRoutingPolicyRequest
+};

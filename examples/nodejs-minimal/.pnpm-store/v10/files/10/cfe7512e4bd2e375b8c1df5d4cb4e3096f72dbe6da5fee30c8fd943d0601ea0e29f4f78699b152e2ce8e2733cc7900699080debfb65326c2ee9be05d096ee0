@@ -1,0 +1,12 @@
+const DOMAIN_AVAILABILITY_TRANSIENT_STATUSES = ["validating"];
+const DOMAIN_TRANSIENT_STATUSES = ["validating"];
+const HOSTING_TRANSIENT_STATUSES = [
+  "delivering",
+  "deleting",
+  "migrating"
+];
+export {
+  DOMAIN_AVAILABILITY_TRANSIENT_STATUSES,
+  DOMAIN_TRANSIENT_STATUSES,
+  HOSTING_TRANSIENT_STATUSES
+};

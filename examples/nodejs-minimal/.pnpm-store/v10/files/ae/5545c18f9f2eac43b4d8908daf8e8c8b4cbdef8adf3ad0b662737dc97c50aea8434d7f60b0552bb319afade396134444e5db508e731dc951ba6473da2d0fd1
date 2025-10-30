@@ -1,0 +1,23 @@
+const CreateWafStageRequest = {
+  paranoiaLevel: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 4
+  }
+};
+const UpdateWafStageRequest = {
+  paranoiaLevel: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 4
+  }
+};
+const WafStage = {
+  paranoiaLevel: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 4
+  }
+};
+export {
+  CreateWafStageRequest,
+  UpdateWafStageRequest,
+  WafStage
+};

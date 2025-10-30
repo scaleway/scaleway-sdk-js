@@ -1,0 +1,10 @@
+export declare const UpdateSecurityGroupRuleRequest: {
+    destPortFrom: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    destPortTo: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};

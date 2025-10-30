@@ -1,0 +1,8 @@
+const JOB_RUN_TRANSIENT_STATUSES = [
+  "queued",
+  "scheduled",
+  "running"
+];
+export {
+  JOB_RUN_TRANSIENT_STATUSES
+};

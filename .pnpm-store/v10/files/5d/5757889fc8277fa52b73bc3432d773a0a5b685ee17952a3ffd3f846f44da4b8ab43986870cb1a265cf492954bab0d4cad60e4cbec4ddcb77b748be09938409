@@ -1,0 +1,73 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client';
+import type { CreateFileSystemRequest, DeleteFileSystemRequest, FileSystem, GetFileSystemRequest, ListAttachmentsRequest, ListAttachmentsResponse, ListFileSystemsRequest, ListFileSystemsResponse, UpdateFileSystemRequest } from './types.gen';
+/**
+ * File Storage API.
+
+This API allows you to manage your File Storage resources.
+ */
+export declare class API extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    /**
+     * Get filesystem details. Retrieve all properties and current status of a specific filesystem identified by its ID.
+     *
+     * @param request - The request {@link GetFileSystemRequest}
+     * @returns A Promise of FileSystem
+     */
+    getFileSystem: (request: Readonly<GetFileSystemRequest>) => Promise<FileSystem>;
+    /**
+     * Waits for {@link FileSystem} to be in a final state.
+     *
+     * @param request - The request {@link GetFileSystemRequest}
+     * @param options - The waiting options
+     * @returns A Promise of FileSystem
+     */
+    waitForFileSystem: (request: Readonly<GetFileSystemRequest>, options?: Readonly<WaitForOptions<FileSystem>>) => Promise<FileSystem>;
+    protected pageOfListFileSystems: (request?: Readonly<ListFileSystemsRequest>) => Promise<ListFileSystemsResponse>;
+    /**
+     * List all filesystems. Retrieve all filesystems in the specified region. By default, the filesystems listed are ordered by creation date in ascending order. This can be modified using the `order_by` field.
+     *
+     * @param request - The request {@link ListFileSystemsRequest}
+     * @returns A Promise of ListFileSystemsResponse
+     */
+    listFileSystems: (request?: Readonly<ListFileSystemsRequest>) => Promise<ListFileSystemsResponse> & {
+        all: () => Promise<FileSystem[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<FileSystem[], void, void>;
+    };
+    protected pageOfListAttachments: (request?: Readonly<ListAttachmentsRequest>) => Promise<ListAttachmentsResponse>;
+    /**
+     * List filesystems attachments. List all existing attachments in a specified region.
+  By default, the attachments listed are ordered by creation date in ascending order. This can be modified using the `order_by` field.
+     *
+     * @param request - The request {@link ListAttachmentsRequest}
+     * @returns A Promise of ListAttachmentsResponse
+     */
+    listAttachments: (request?: Readonly<ListAttachmentsRequest>) => Promise<ListAttachmentsResponse> & {
+        all: () => Promise<import("./types.gen").Attachment[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").Attachment[], void, void>;
+    };
+    /**
+     * Create a new filesystem. To create a new filesystem, you must specify a name, a size, and a project ID.
+     *
+     * @param request - The request {@link CreateFileSystemRequest}
+     * @returns A Promise of FileSystem
+     */
+    createFileSystem: (request: Readonly<CreateFileSystemRequest>) => Promise<FileSystem>;
+    /**
+     * Delete a detached filesystem. You must specify the `filesystem_id` of the filesystem you want to delete.
+     *
+     * @param request - The request {@link DeleteFileSystemRequest}
+     */
+    deleteFileSystem: (request: Readonly<DeleteFileSystemRequest>) => Promise<void>;
+    /**
+     * Update filesystem properties. Update the technical details of a filesystem, such as its name, tags or its new size.
+     *
+     * @param request - The request {@link UpdateFileSystemRequest}
+     * @returns A Promise of FileSystem
+     */
+    updateFileSystem: (request: Readonly<UpdateFileSystemRequest>) => Promise<FileSystem>;
+}

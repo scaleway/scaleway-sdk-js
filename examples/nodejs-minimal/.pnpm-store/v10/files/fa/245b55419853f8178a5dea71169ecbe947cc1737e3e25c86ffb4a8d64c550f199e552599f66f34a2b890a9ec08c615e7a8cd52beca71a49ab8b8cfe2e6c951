@@ -1,0 +1,132 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { CreateInstanceGroupRequest, CreateInstancePolicyRequest, CreateInstanceTemplateRequest, DeleteInstanceGroupRequest, DeleteInstancePolicyRequest, DeleteInstanceTemplateRequest, GetInstanceGroupRequest, GetInstancePolicyRequest, GetInstanceTemplateRequest, InstanceGroup, InstancePolicy, InstanceTemplate, ListInstanceGroupEventsRequest, ListInstanceGroupEventsResponse, ListInstanceGroupsRequest, ListInstanceGroupsResponse, ListInstancePoliciesRequest, ListInstancePoliciesResponse, ListInstanceTemplatesRequest, ListInstanceTemplatesResponse, UpdateInstanceGroupRequest, UpdateInstancePolicyRequest, UpdateInstanceTemplateRequest } from './types.gen';
+/**
+ * Instance Scaling Groups API.
+ */
+export declare class API extends ParentAPI {
+    /**
+     * Get Instance group. Retrieve information about an existing Instance group, specified by its `instance_group_id`. Its full details, including errors, are returned in the response object.
+     *
+     * @param request - The request {@link GetInstanceGroupRequest}
+     * @returns A Promise of InstanceGroup
+     */
+    getInstanceGroup: (request: Readonly<GetInstanceGroupRequest>) => Promise<InstanceGroup>;
+    /**
+     * Create Instance group. Create a new Instance group. You must specify a `template_id`, capacity and Load Balancer object.
+     *
+     * @param request - The request {@link CreateInstanceGroupRequest}
+     * @returns A Promise of InstanceGroup
+     */
+    createInstanceGroup: (request: Readonly<CreateInstanceGroupRequest>) => Promise<InstanceGroup>;
+    protected pageOfListInstanceGroups: (request?: Readonly<ListInstanceGroupsRequest>) => Promise<ListInstanceGroupsResponse>;
+    /**
+     * List Instance groups. List all Instance groups, for a Scaleway Organization or Scaleway Project. By default, the Instance groups returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
+     *
+     * @param request - The request {@link ListInstanceGroupsRequest}
+     * @returns A Promise of ListInstanceGroupsResponse
+     */
+    listInstanceGroups: (request?: Readonly<ListInstanceGroupsRequest>) => Promise<ListInstanceGroupsResponse> & {
+        all: () => Promise<InstanceGroup[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<InstanceGroup[], void, void>;
+    };
+    /**
+     * Update Instance group. Update the parameters of an existing Instance group, specified by its `instance_group_id`.
+     *
+     * @param request - The request {@link UpdateInstanceGroupRequest}
+     * @returns A Promise of InstanceGroup
+     */
+    updateInstanceGroup: (request: Readonly<UpdateInstanceGroupRequest>) => Promise<InstanceGroup>;
+    /**
+     * Delete  Instance group. Delete an existing Instance group, specified by its `instance_group_id`. Deleting an Instance group is permanent, and cannot be undone.
+     *
+     * @param request - The request {@link DeleteInstanceGroupRequest}
+     */
+    deleteInstanceGroup: (request: Readonly<DeleteInstanceGroupRequest>) => Promise<void>;
+    /**
+     * Create Instance template. Create a new Instance template. This specifies the details of the Instance (commercial type, zone, image, volumes etc.) that will be in the Instance group.
+     *
+     * @param request - The request {@link CreateInstanceTemplateRequest}
+     * @returns A Promise of InstanceTemplate
+     */
+    createInstanceTemplate: (request: Readonly<CreateInstanceTemplateRequest>) => Promise<InstanceTemplate>;
+    /**
+     * Update Instance template. Update an Instance template, such as its commercial offer type, image or volume template.
+     *
+     * @param request - The request {@link UpdateInstanceTemplateRequest}
+     * @returns A Promise of InstanceTemplate
+     */
+    updateInstanceTemplate: (request: Readonly<UpdateInstanceTemplateRequest>) => Promise<InstanceTemplate>;
+    /**
+     * Get Instance template. Get an existing Instance template from its `template_id`.
+     *
+     * @param request - The request {@link GetInstanceTemplateRequest}
+     * @returns A Promise of InstanceTemplate
+     */
+    getInstanceTemplate: (request: Readonly<GetInstanceTemplateRequest>) => Promise<InstanceTemplate>;
+    /**
+     * Delete Instance template. Delete an existing Instance template. This action is permanent and cannot be undone.
+     *
+     * @param request - The request {@link DeleteInstanceTemplateRequest}
+     */
+    deleteInstanceTemplate: (request: Readonly<DeleteInstanceTemplateRequest>) => Promise<void>;
+    protected pageOfListInstanceTemplates: (request?: Readonly<ListInstanceTemplatesRequest>) => Promise<ListInstanceTemplatesResponse>;
+    /**
+     * List Instance templates. List all Instance templates, for a Scaleway Organization or Scaleway Project. By default, the Instance templates returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
+     *
+     * @param request - The request {@link ListInstanceTemplatesRequest}
+     * @returns A Promise of ListInstanceTemplatesResponse
+     */
+    listInstanceTemplates: (request?: Readonly<ListInstanceTemplatesRequest>) => Promise<ListInstanceTemplatesResponse> & {
+        all: () => Promise<InstanceTemplate[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<InstanceTemplate[], void, void>;
+    };
+    /**
+     * Create scaling policy. Create a new scaling policy. You must specify a `policy_id`, capacity and Load Balancer object.
+     *
+     * @param request - The request {@link CreateInstancePolicyRequest}
+     * @returns A Promise of InstancePolicy
+     */
+    createInstancePolicy: (request: Readonly<CreateInstancePolicyRequest>) => Promise<InstancePolicy>;
+    /**
+     * Update scaling policy. Update the parameters of an existing scaling policy, specified by its `policy_id`.
+     *
+     * @param request - The request {@link UpdateInstancePolicyRequest}
+     * @returns A Promise of InstancePolicy
+     */
+    updateInstancePolicy: (request: Readonly<UpdateInstancePolicyRequest>) => Promise<InstancePolicy>;
+    protected pageOfListInstancePolicies: (request: Readonly<ListInstancePoliciesRequest>) => Promise<ListInstancePoliciesResponse>;
+    /**
+     * List scaling policies. List all scaling policies, for a Scaleway Organization or Scaleway Project. By default, the policies returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
+     *
+     * @param request - The request {@link ListInstancePoliciesRequest}
+     * @returns A Promise of ListInstancePoliciesResponse
+     */
+    listInstancePolicies: (request: Readonly<ListInstancePoliciesRequest>) => Promise<ListInstancePoliciesResponse> & {
+        all: () => Promise<InstancePolicy[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<InstancePolicy[], void, void>;
+    };
+    /**
+     * Get scaling policy. Retrieve information about an existing scaling policy, specified by its `policy_id`. Its full details are returned in the response object.
+     *
+     * @param request - The request {@link GetInstancePolicyRequest}
+     * @returns A Promise of InstancePolicy
+     */
+    getInstancePolicy: (request: Readonly<GetInstancePolicyRequest>) => Promise<InstancePolicy>;
+    /**
+     * Delete scaling policy. Delete an existing scaling policy, specified by its `policy_id`. Deleting a scaling policy is permanent, and cannot be undone.
+     *
+     * @param request - The request {@link DeleteInstancePolicyRequest}
+     */
+    deleteInstancePolicy: (request: Readonly<DeleteInstancePolicyRequest>) => Promise<void>;
+    protected pageOfListInstanceGroupEvents: (request: Readonly<ListInstanceGroupEventsRequest>) => Promise<ListInstanceGroupEventsResponse>;
+    /**
+     * List events. List all events for a given Instance group. By default, the events are ordered by creation date in descending order, though this can be modified via the `order_by` field.
+     *
+     * @param request - The request {@link ListInstanceGroupEventsRequest}
+     * @returns A Promise of ListInstanceGroupEventsResponse
+     */
+    listInstanceGroupEvents: (request: Readonly<ListInstanceGroupEventsRequest>) => Promise<ListInstanceGroupEventsResponse> & {
+        all: () => Promise<import("./types.gen").InstanceGroupEvent[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").InstanceGroupEvent[], void, void>;
+    };
+}

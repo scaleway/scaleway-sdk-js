@@ -1,0 +1,4 @@
+export declare const version: string;
+export declare const userAgent: string;
+export declare const SESSION_HEADER_KEY = "x-session-token";
+export declare const AUTH_HEADER_KEY = "x-auth-token";

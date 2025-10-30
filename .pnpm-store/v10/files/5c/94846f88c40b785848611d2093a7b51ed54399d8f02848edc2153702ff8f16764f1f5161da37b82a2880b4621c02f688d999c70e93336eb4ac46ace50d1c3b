@@ -1,0 +1,16 @@
+import type { JSONObject } from '../../../helpers/json.js';
+import { ScalewayError } from '../scw-error.js';
+/**
+ * ResourceExpired error happens when trying to access a resource that has expired.
+ *
+ * @public
+ */
+export declare class ResourceExpiredError extends ScalewayError {
+    readonly status: number;
+    readonly body: JSONObject;
+    readonly resource: string;
+    readonly resourceId: string;
+    readonly expiredSince: Date;
+    constructor(status: number, body: JSONObject, resource: string, resourceId: string, expiredSince: Date);
+    static fromJSON(status: number, obj: Readonly<JSONObject>): ResourceExpiredError | null;
+}

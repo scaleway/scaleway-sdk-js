@@ -1,0 +1,26 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const AclRule = {
+  description: {
+    maxLength: 200
+  },
+  dstPortHigh: {
+    lessThanOrEqual: 65536
+  },
+  dstPortLow: {
+    lessThanOrEqual: 65536
+  },
+  srcPortHigh: {
+    lessThanOrEqual: 65536
+  },
+  srcPortLow: {
+    lessThanOrEqual: 65536
+  }
+};
+const Route = {
+  description: {
+    maxLength: 200
+  }
+};
+exports.AclRule = AclRule;
+exports.Route = Route;

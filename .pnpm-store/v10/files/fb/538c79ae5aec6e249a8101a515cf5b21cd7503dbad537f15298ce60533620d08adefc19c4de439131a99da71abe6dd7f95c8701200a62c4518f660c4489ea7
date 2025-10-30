@@ -1,0 +1,5 @@
+import type { DomainStatus, EmailStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link DomainStatus}. */
+export declare const DOMAIN_TRANSIENT_STATUSES: DomainStatus[];
+/** Lists transient statutes of the enum {@link EmailStatus}. */
+export declare const EMAIL_TRANSIENT_STATUSES: EmailStatus[];

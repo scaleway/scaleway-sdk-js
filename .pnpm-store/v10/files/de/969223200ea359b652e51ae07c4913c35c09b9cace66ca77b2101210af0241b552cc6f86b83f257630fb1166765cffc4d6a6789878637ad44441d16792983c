@@ -1,0 +1,81 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { WaitForOptions } from '@scaleway/sdk-client';
+import type { CreateHumanRequest, DeleteHumanRequest, GetHumanRequest, Human, ListHumansRequest, ListHumansResponse, RegisterRequest, RegisterResponse, RunHumanRequest, SmokeHumanRequest, UpdateHumanRequest } from './types.gen';
+/**
+ * Fake API.
+
+No Auth Service for end-to-end testing.
+ */
+export declare class API extends ParentAPI {
+    /**
+     * Register a user. Register a human and return a access-key and a secret-key that must be used in all other commands.
+  
+  Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable.
+     *
+     * @param request - The request {@link RegisterRequest}
+     * @returns A Promise of RegisterResponse
+     */
+    register: (request: Readonly<RegisterRequest>) => Promise<RegisterResponse>;
+    protected pageOfListHumans: (request?: Readonly<ListHumansRequest>) => Promise<ListHumansResponse>;
+    /**
+     * List all your humans.
+     *
+     * @param request - The request {@link ListHumansRequest}
+     * @returns A Promise of ListHumansResponse
+     */
+    listHumans: (request?: Readonly<ListHumansRequest>) => Promise<ListHumansResponse> & {
+        all: () => Promise<Human[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Human[], void, void>;
+    };
+    /**
+     * Get human details. Get the human details associated with the given id.
+     *
+     * @param request - The request {@link GetHumanRequest}
+     * @returns A Promise of Human
+     */
+    getHuman: (request: Readonly<GetHumanRequest>) => Promise<Human>;
+    /**
+     * Waits for {@link Human} to be in a final state.
+     *
+     * @param request - The request {@link GetHumanRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Human
+     */
+    waitForHuman: (request: Readonly<GetHumanRequest>, options?: Readonly<WaitForOptions<Human>>) => Promise<Human>;
+    /**
+     * Create a new human.
+     *
+     * @param request - The request {@link CreateHumanRequest}
+     * @returns A Promise of Human
+     */
+    createHuman: (request: Readonly<CreateHumanRequest>) => Promise<Human>;
+    /**
+     * Update an existing human. Update the human associated with the given id.
+     *
+     * @param request - The request {@link UpdateHumanRequest}
+     * @returns A Promise of Human
+     */
+    updateHuman: (request: Readonly<UpdateHumanRequest>) => Promise<Human>;
+    /**
+     * Delete an existing human. Delete the human associated with the given id.
+     *
+     * @param request - The request {@link DeleteHumanRequest}
+     * @returns A Promise of Human
+     */
+    deleteHuman: (request: Readonly<DeleteHumanRequest>) => Promise<Human>;
+    /**
+     * Start a 1h running for the given human. Start a one hour running for the given human.
+     *
+     * @param request - The request {@link RunHumanRequest}
+     * @returns A Promise of Human
+     */
+    runHuman: (request: Readonly<RunHumanRequest>) => Promise<Human>;
+    /**
+     * Make a human smoke.
+     *
+     * @deprecated
+     * @param request - The request {@link SmokeHumanRequest}
+     * @returns A Promise of Human
+     */
+    smokeHuman: (request: Readonly<SmokeHumanRequest>) => Promise<Human>;
+}

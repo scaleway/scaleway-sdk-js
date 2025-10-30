@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const api_gen = require("./api.gen.cjs");
+const marshalling_gen = require("./marshalling.gen.cjs");
+const validationRules_gen = require("./validation-rules.gen.cjs");
+exports.API = api_gen.API;
+exports.marshalAttachIPRequest = marshalling_gen.marshalAttachIPRequest;
+exports.marshalBookIPRequest = marshalling_gen.marshalBookIPRequest;
+exports.marshalDetachIPRequest = marshalling_gen.marshalDetachIPRequest;
+exports.marshalMoveIPRequest = marshalling_gen.marshalMoveIPRequest;
+exports.marshalReleaseIPSetRequest = marshalling_gen.marshalReleaseIPSetRequest;
+exports.marshalUpdateIPRequest = marshalling_gen.marshalUpdateIPRequest;
+exports.unmarshalIP = marshalling_gen.unmarshalIP;
+exports.unmarshalListIPsResponse = marshalling_gen.unmarshalListIPsResponse;
+exports.ValidationRules = validationRules_gen;

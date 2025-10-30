@@ -1,0 +1,7 @@
+import type { DefaultValues } from '@scaleway/sdk-client';
+import type { ListServerPrivateNetworksResponse, PrivateNetworkApiAddServerPrivateNetworkRequest, PrivateNetworkApiSetServerPrivateNetworksRequest, ServerPrivateNetwork, SetServerPrivateNetworksResponse } from './types.gen';
+export declare const unmarshalServerPrivateNetwork: (data: unknown) => ServerPrivateNetwork;
+export declare const unmarshalListServerPrivateNetworksResponse: (data: unknown) => ListServerPrivateNetworksResponse;
+export declare const unmarshalSetServerPrivateNetworksResponse: (data: unknown) => SetServerPrivateNetworksResponse;
+export declare const marshalPrivateNetworkApiAddServerPrivateNetworkRequest: (request: PrivateNetworkApiAddServerPrivateNetworkRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalPrivateNetworkApiSetServerPrivateNetworksRequest: (request: PrivateNetworkApiSetServerPrivateNetworksRequest, defaults: DefaultValues) => Record<string, unknown>;

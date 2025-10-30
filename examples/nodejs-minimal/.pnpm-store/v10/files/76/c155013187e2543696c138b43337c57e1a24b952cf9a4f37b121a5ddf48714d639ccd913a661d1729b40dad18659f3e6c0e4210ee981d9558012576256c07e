@@ -1,0 +1,116 @@
+export declare const BgpConfig: {
+    asn: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const CreateLinkRequest: {
+    bandwidthMbps: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+    peerAsn: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const CreateRoutingPolicyRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const Link: {
+    name: {
+        minLength: number;
+    };
+};
+export declare const ListDedicatedConnectionsRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListLinksRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListPartnersRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListPopsRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListRoutingPoliciesRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const Partner: {
+    name: {
+        minLength: number;
+    };
+};
+export declare const Pop: {
+    address: {
+        minLength: number;
+    };
+    city: {
+        minLength: number;
+    };
+    hostingProviderName: {
+        minLength: number;
+    };
+    name: {
+        minLength: number;
+    };
+};
+export declare const RoutingPolicy: {
+    name: {
+        minLength: number;
+    };
+};
+export declare const UpdateLinkRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+    peerAsn: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const UpdateRoutingPolicyRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};

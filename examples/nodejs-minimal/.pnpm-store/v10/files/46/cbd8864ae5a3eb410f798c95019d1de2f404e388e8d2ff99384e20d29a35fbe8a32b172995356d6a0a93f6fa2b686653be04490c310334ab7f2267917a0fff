@@ -1,0 +1,8 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const DATABASE_TRANSIENT_STATUSES = [
+  "creating",
+  "deleting",
+  "restoring"
+];
+exports.DATABASE_TRANSIENT_STATUSES = DATABASE_TRANSIENT_STATUSES;

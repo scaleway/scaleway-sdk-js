@@ -1,0 +1,70 @@
+import type { RequestInterceptor } from '../internal/interceptors/types';
+import type { AuthenticationSecrets } from './client-ini-profile.js';
+interface TokenAccessor {
+    (): Promise<string | undefined>;
+}
+interface AddSessionHeader {
+    request: Request;
+    getAsyncToken: () => Promise<string | undefined>;
+}
+/**
+ * Add an JWT Session Header to a request through an interceptor.
+ *
+ * @param request - The request to modify
+ * @param getJwt - The session value
+ * @returns The Request interceptor
+ *
+ */
+export declare const addSessionHeader: ({ request, getAsyncToken, }: AddSessionHeader) => Promise<Request>;
+/**
+ * Authenticates with a session token.
+ *
+ * @param getToken - The token accessor
+ * @returns The request interceptor
+ *
+ * @deprecated Please use addAsyncHeaderInterceptor instead.
+ *
+ * @internal
+ */
+export declare const authenticateWithSessionToken: (getToken: TokenAccessor) => RequestInterceptor;
+/**
+ * Authenticates with a secrets.
+ *
+ * @param getToken - The secrets
+ * @returns The request interceptor
+ *
+ * @throws Error
+ * Thrown if the secrets are invalid.
+ *
+ * @internal
+ */
+export declare const authenticateWithSecrets: (secrets: AuthenticationSecrets) => RequestInterceptor;
+/**
+ * Obfuscates a token.
+ *
+ * @param key - The token
+ * @returns The obfuscated token
+ *
+ * @internal
+ */
+export declare const obfuscateToken: (key: string) => string;
+/**
+ * Obfuscates an UUID.
+ *
+ * @param key - The UUID
+ * @returns The obfuscated UUID
+ *
+ * @internal
+ */
+export declare const obfuscateUUID: (key: string) => string;
+type HeaderEntry = [string, string];
+/**
+ * Obfuscates headers entry.
+ *
+ * @param array - The header entry
+ * @returns The obfuscated entry
+ *
+ * @internal
+ */
+export declare const obfuscateAuthHeadersEntry: ([name, value,]: HeaderEntry) => HeaderEntry;
+export {};

@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const ListFlexibleIPsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+exports.ListFlexibleIPsRequest = ListFlexibleIPsRequest;

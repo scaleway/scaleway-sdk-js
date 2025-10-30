@@ -1,0 +1,353 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const randomName = require("@scaleway/random-name");
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalACLRule = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ACLRule' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    description: data.description,
+    id: data.id,
+    ipCidr: data.ip_cidr
+  };
+};
+const unmarshalPrivateNetwork = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PrivateNetwork' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    id: data.id,
+    provisioningMode: data.provisioning_mode,
+    serviceIps: data.service_ips,
+    zone: data.zone
+  };
+};
+const unmarshalPublicNetwork = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicNetwork' failed as data isn't a dictionary.`
+    );
+  }
+  return {};
+};
+const unmarshalEndpoint = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Endpoint' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    id: data.id,
+    ips: data.ips,
+    port: data.port,
+    privateNetwork: data.private_network ? unmarshalPrivateNetwork(data.private_network) : void 0,
+    publicNetwork: data.public_network ? unmarshalPublicNetwork(data.public_network) : void 0
+  };
+};
+const unmarshalClusterSetting = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ClusterSetting' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    name: data.name,
+    value: data.value
+  };
+};
+const unmarshalCluster = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Cluster' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    aclRules: sdkClient.unmarshalArrayOfObject(data.acl_rules, unmarshalACLRule),
+    clusterSettings: sdkClient.unmarshalArrayOfObject(
+      data.cluster_settings,
+      unmarshalClusterSetting
+    ),
+    clusterSize: data.cluster_size,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    endpoints: sdkClient.unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
+    id: data.id,
+    name: data.name,
+    nodeType: data.node_type,
+    projectId: data.project_id,
+    status: data.status,
+    tags: data.tags,
+    tlsEnabled: data.tls_enabled,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    upgradableVersions: data.upgradable_versions,
+    userName: data.user_name,
+    version: data.version,
+    zone: data.zone
+  };
+};
+const unmarshalAddAclRulesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AddAclRulesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    aclRules: sdkClient.unmarshalArrayOfObject(data.acl_rules, unmarshalACLRule),
+    totalCount: data.total_count
+  };
+};
+const unmarshalAddEndpointsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AddEndpointsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    endpoints: sdkClient.unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
+    totalCount: data.total_count
+  };
+};
+const unmarshalClusterMetricsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ClusterMetricsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    timeseries: sdkClient.unmarshalArrayOfObject(data.timeseries, sdkClient.unmarshalTimeSeries)
+  };
+};
+const unmarshalClusterSettingsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ClusterSettingsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    settings: sdkClient.unmarshalArrayOfObject(data.settings, unmarshalClusterSetting)
+  };
+};
+const unmarshalAvailableClusterSetting = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AvailableClusterSetting' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    defaultValue: data.default_value,
+    deprecated: data.deprecated,
+    description: data.description,
+    maxValue: data.max_value,
+    minValue: data.min_value,
+    name: data.name,
+    regex: data.regex,
+    type: data.type
+  };
+};
+const unmarshalClusterVersion = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ClusterVersion' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    availableSettings: sdkClient.unmarshalArrayOfObject(
+      data.available_settings,
+      unmarshalAvailableClusterSetting
+    ),
+    endOfLifeAt: sdkClient.unmarshalDate(data.end_of_life_at),
+    logoUrl: data.logo_url,
+    version: data.version,
+    zone: data.zone
+  };
+};
+const unmarshalListClusterVersionsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListClusterVersionsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    totalCount: data.total_count,
+    versions: sdkClient.unmarshalArrayOfObject(data.versions, unmarshalClusterVersion)
+  };
+};
+const unmarshalListClustersResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListClustersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    clusters: sdkClient.unmarshalArrayOfObject(data.clusters, unmarshalCluster),
+    totalCount: data.total_count
+  };
+};
+const unmarshalNodeType = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'NodeType' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    beta: data.beta,
+    description: data.description,
+    disabled: data.disabled,
+    memory: data.memory,
+    name: data.name,
+    stockStatus: data.stock_status,
+    vcpus: data.vcpus,
+    zone: data.zone
+  };
+};
+const unmarshalListNodeTypesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListNodeTypesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    nodeTypes: sdkClient.unmarshalArrayOfObject(data.node_types, unmarshalNodeType),
+    totalCount: data.total_count
+  };
+};
+const unmarshalSetAclRulesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetAclRulesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    aclRules: sdkClient.unmarshalArrayOfObject(data.acl_rules, unmarshalACLRule)
+  };
+};
+const unmarshalSetEndpointsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetEndpointsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    endpoints: sdkClient.unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint)
+  };
+};
+const marshalACLRuleSpec = (request, defaults) => ({
+  description: request.description,
+  ip_cidr: request.ipCidr
+});
+const marshalAddAclRulesRequest = (request, defaults) => ({
+  acl_rules: request.aclRules.map((elt) => marshalACLRuleSpec(elt))
+});
+const marshalClusterSetting = (request, defaults) => ({
+  name: request.name,
+  value: request.value
+});
+const marshalAddClusterSettingsRequest = (request, defaults) => ({
+  settings: request.settings.map((elt) => marshalClusterSetting(elt))
+});
+const marshalEndpointSpecPrivateNetworkSpecIpamConfig = (request, defaults) => ({});
+const marshalEndpointSpecPrivateNetworkSpec = (request, defaults) => ({
+  id: request.id,
+  ipam_config: request.ipamConfig !== void 0 ? marshalEndpointSpecPrivateNetworkSpecIpamConfig(
+    request.ipamConfig
+  ) : void 0,
+  service_ips: request.serviceIps
+});
+const marshalEndpointSpecPublicNetworkSpec = (request, defaults) => ({});
+const marshalEndpointSpec = (request, defaults) => ({
+  ...sdkClient.resolveOneOf([
+    {
+      param: "private_network",
+      value: request.privateNetwork !== void 0 ? marshalEndpointSpecPrivateNetworkSpec(
+        request.privateNetwork
+      ) : void 0
+    },
+    {
+      param: "public_network",
+      value: request.publicNetwork !== void 0 ? marshalEndpointSpecPublicNetworkSpec(
+        request.publicNetwork
+      ) : void 0
+    }
+  ])
+});
+const marshalAddEndpointsRequest = (request, defaults) => ({
+  endpoints: request.endpoints.map((elt) => marshalEndpointSpec(elt))
+});
+const marshalCreateClusterRequest = (request, defaults) => ({
+  acl_rules: request.aclRules !== void 0 ? request.aclRules.map((elt) => marshalACLRuleSpec(elt)) : void 0,
+  cluster_settings: request.clusterSettings !== void 0 ? request.clusterSettings.map((elt) => marshalClusterSetting(elt)) : void 0,
+  cluster_size: request.clusterSize,
+  endpoints: request.endpoints !== void 0 ? request.endpoints.map((elt) => marshalEndpointSpec(elt)) : void 0,
+  name: request.name || randomName("ins"),
+  node_type: request.nodeType,
+  password: request.password,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags,
+  tls_enabled: request.tlsEnabled,
+  user_name: request.userName,
+  version: request.version
+});
+const marshalMigrateClusterRequest = (request, defaults) => ({
+  ...sdkClient.resolveOneOf([
+    { param: "version", value: request.version },
+    { param: "node_type", value: request.nodeType },
+    { param: "cluster_size", value: request.clusterSize }
+  ])
+});
+const marshalSetAclRulesRequest = (request, defaults) => ({
+  acl_rules: request.aclRules.map((elt) => marshalACLRuleSpec(elt))
+});
+const marshalSetClusterSettingsRequest = (request, defaults) => ({
+  settings: request.settings.map((elt) => marshalClusterSetting(elt))
+});
+const marshalSetEndpointsRequest = (request, defaults) => ({
+  endpoints: request.endpoints.map((elt) => marshalEndpointSpec(elt))
+});
+const marshalUpdateClusterRequest = (request, defaults) => ({
+  name: request.name,
+  password: request.password,
+  tags: request.tags,
+  user_name: request.userName
+});
+const marshalUpdateEndpointRequest = (request, defaults) => ({
+  ...sdkClient.resolveOneOf([
+    {
+      param: "private_network",
+      value: request.privateNetwork !== void 0 ? marshalEndpointSpecPrivateNetworkSpec(
+        request.privateNetwork
+      ) : void 0
+    },
+    {
+      param: "public_network",
+      value: request.publicNetwork !== void 0 ? marshalEndpointSpecPublicNetworkSpec(
+        request.publicNetwork
+      ) : void 0
+    }
+  ])
+});
+exports.marshalAddAclRulesRequest = marshalAddAclRulesRequest;
+exports.marshalAddClusterSettingsRequest = marshalAddClusterSettingsRequest;
+exports.marshalAddEndpointsRequest = marshalAddEndpointsRequest;
+exports.marshalCreateClusterRequest = marshalCreateClusterRequest;
+exports.marshalMigrateClusterRequest = marshalMigrateClusterRequest;
+exports.marshalSetAclRulesRequest = marshalSetAclRulesRequest;
+exports.marshalSetClusterSettingsRequest = marshalSetClusterSettingsRequest;
+exports.marshalSetEndpointsRequest = marshalSetEndpointsRequest;
+exports.marshalUpdateClusterRequest = marshalUpdateClusterRequest;
+exports.marshalUpdateEndpointRequest = marshalUpdateEndpointRequest;
+exports.unmarshalACLRule = unmarshalACLRule;
+exports.unmarshalAddAclRulesResponse = unmarshalAddAclRulesResponse;
+exports.unmarshalAddEndpointsResponse = unmarshalAddEndpointsResponse;
+exports.unmarshalCluster = unmarshalCluster;
+exports.unmarshalClusterMetricsResponse = unmarshalClusterMetricsResponse;
+exports.unmarshalClusterSettingsResponse = unmarshalClusterSettingsResponse;
+exports.unmarshalEndpoint = unmarshalEndpoint;
+exports.unmarshalListClusterVersionsResponse = unmarshalListClusterVersionsResponse;
+exports.unmarshalListClustersResponse = unmarshalListClustersResponse;
+exports.unmarshalListNodeTypesResponse = unmarshalListNodeTypesResponse;
+exports.unmarshalSetAclRulesResponse = unmarshalSetAclRulesResponse;
+exports.unmarshalSetEndpointsResponse = unmarshalSetEndpointsResponse;

@@ -1,0 +1,56 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const CreateDeploymentRequest = {
+  maxSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 50
+  },
+  minSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 50
+  },
+  modelName: {
+    maxLength: 255,
+    minLength: 0,
+    pattern: /^[A-Za-z0-9_-]+\/[A-Za-z0-9_.-]+(:\w+)?$/
+  },
+  name: {
+    maxLength: 255,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9-_]+$/
+  },
+  nodeType: {
+    maxLength: 64,
+    minLength: 1
+  }
+};
+const ListDeploymentsRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1
+  }
+};
+const ListModelsRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1
+  }
+};
+const UpdateDeploymentRequest = {
+  maxSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 50
+  },
+  minSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 50
+  },
+  name: {
+    maxLength: 255,
+    minLength: 1
+  }
+};
+exports.CreateDeploymentRequest = CreateDeploymentRequest;
+exports.ListDeploymentsRequest = ListDeploymentsRequest;
+exports.ListModelsRequest = ListModelsRequest;
+exports.UpdateDeploymentRequest = UpdateDeploymentRequest;

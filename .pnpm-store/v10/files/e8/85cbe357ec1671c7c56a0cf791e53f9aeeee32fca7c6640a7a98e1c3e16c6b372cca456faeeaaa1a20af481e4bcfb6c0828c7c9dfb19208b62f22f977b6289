@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const toPascalCase = (str) => str.replace(
+  /\w+/g,
+  (word) => `${word[0].toUpperCase()}${word.slice(1).toLowerCase()}`
+);
+const serializeHeadersEntry = ([name, value]) => `${toPascalCase(name)}: ${value}`;
+const serializeHeaders = (headers) => Array.from(headers.entries(), serializeHeadersEntry);
+const dumpRequest = async (request) => [
+  `${request.method.toUpperCase()}: ${request.url}`,
+  ...serializeHeaders(request.headers),
+  await request.clone().text()
+].join("\r\n");
+const dumpResponse = async (response) => [
+  `HTTP ${response.status} ${response.ok ? "OK" : "NOK"}`,
+  ...serializeHeaders(response.headers),
+  await response.clone().text()
+].join("\r\n");
+exports.dumpRequest = dumpRequest;
+exports.dumpResponse = dumpResponse;

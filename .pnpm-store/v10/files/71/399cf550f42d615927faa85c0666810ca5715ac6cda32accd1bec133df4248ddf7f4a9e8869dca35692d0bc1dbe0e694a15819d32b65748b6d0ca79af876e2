@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const REFERENCE_TRANSIENT_STATUSES = [
+  "attaching",
+  "detaching",
+  "creating"
+];
+const SNAPSHOT_TRANSIENT_STATUSES = [
+  "creating",
+  "deleting",
+  "exporting"
+];
+const VOLUME_TRANSIENT_STATUSES = [
+  "creating",
+  "deleting",
+  "resizing",
+  "snapshotting",
+  "updating"
+];
+exports.REFERENCE_TRANSIENT_STATUSES = REFERENCE_TRANSIENT_STATUSES;
+exports.SNAPSHOT_TRANSIENT_STATUSES = SNAPSHOT_TRANSIENT_STATUSES;
+exports.VOLUME_TRANSIENT_STATUSES = VOLUME_TRANSIENT_STATUSES;

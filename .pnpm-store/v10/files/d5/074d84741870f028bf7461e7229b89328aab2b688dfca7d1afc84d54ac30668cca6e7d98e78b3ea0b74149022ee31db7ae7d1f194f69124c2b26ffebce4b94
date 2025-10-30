@@ -1,0 +1,59 @@
+import type { NetworkInterceptors, RequestInterceptor, ResponseInterceptor } from '../internal/interceptors/types';
+import type { Profile } from './client-ini-profile.js';
+/**
+ * Holds default values of settings.
+ *
+ * @public
+ */
+export type DefaultValues = Profile & {
+    /**
+     * The default number of results when requesting a paginated resource.
+     */
+    defaultPageSize?: number;
+};
+/**
+ * Settings hold the values of all client options.
+ *
+ * @public
+ */
+export interface Settings extends DefaultValues {
+    /**
+     * The default number of results when requesting a paginated resource.
+     */
+    defaultPageSize?: number;
+    /**
+     * HTTP Client doing the requests.
+     */
+    httpClient: typeof fetch;
+    /**
+     * The Request interceptors.
+     *
+     * @deprecated Please use `interceptors` instead.
+     */
+    requestInterceptors?: RequestInterceptor[];
+    /**
+     * The Response interceptors.
+     *
+     * @deprecated Please use `interceptors` instead.
+     */
+    responseInterceptors?: ResponseInterceptor[];
+    /**
+     * The Network interceptors.
+     */
+    interceptors: NetworkInterceptors[];
+    /**
+     * The User-Agent sent with each request.
+     *
+     * @defaultValue scaleway-sdk-js/version
+     */
+    userAgent: string;
+}
+/**
+ * Validates the content of a {@link Settings} object.
+ *
+ * @throws Error
+ * Thrown if {@link Settings} aren't valid.
+ *
+ * @internal
+ */
+export declare const assertValidSettings: (obj: Readonly<Settings>) => void;

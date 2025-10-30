@@ -1,0 +1,4 @@
+---
+alwaysApply: true
+---
+pour tester voici l'environement pour lancer les tests : SCW_DEBUG=1;SCW_ENABLE_BETA=true;SCW_PROFILE=hashicorp;TF_ACC=1;TF_LOG=DEBUG;TF_TEST_DOCKER_IMG=docker.io/library/alpine;TF_TEST_DOMAIN=scaleway-terraform.com;TF_TEST_DOMAIN_ZONE=tf;TF_UPDATE_CASSETTES=true

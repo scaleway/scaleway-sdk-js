@@ -1,0 +1,4 @@
+const HUMAN_TRANSIENT_STATUSES = ["running"];
+export {
+  HUMAN_TRANSIENT_STATUSES
+};

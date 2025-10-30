@@ -1,0 +1,386 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client';
+import type { CheckUserOwnsDomainResponse, ControlPanelApiListControlPanelsRequest, Database, DatabaseApiAssignDatabaseUserRequest, DatabaseApiChangeDatabaseUserPasswordRequest, DatabaseApiCreateDatabaseRequest, DatabaseApiCreateDatabaseUserRequest, DatabaseApiDeleteDatabaseRequest, DatabaseApiDeleteDatabaseUserRequest, DatabaseApiGetDatabaseRequest, DatabaseApiGetDatabaseUserRequest, DatabaseApiListDatabaseUsersRequest, DatabaseApiListDatabasesRequest, DatabaseApiUnassignDatabaseUserRequest, DatabaseUser, DnsApiCheckUserOwnsDomainRequest, DnsApiGetDomainDnsRecordsRequest, DnsApiGetDomainRequest, DnsApiSearchDomainsRequest, DnsApiSyncDomainDnsRecordsRequest, DnsRecords, Domain, FtpAccount, FtpAccountApiChangeFtpAccountPasswordRequest, FtpAccountApiCreateFtpAccountRequest, FtpAccountApiListFtpAccountsRequest, FtpAccountApiRemoveFtpAccountRequest, Hosting, HostingApiCreateHostingRequest, HostingApiCreateSessionRequest, HostingApiDeleteHostingRequest, HostingApiGetHostingRequest, HostingApiGetResourceSummaryRequest, HostingApiListHostingsRequest, HostingApiResetHostingPasswordRequest, HostingApiUpdateHostingRequest, ListControlPanelsResponse, ListDatabaseUsersResponse, ListDatabasesResponse, ListFtpAccountsResponse, ListHostingsResponse, ListMailAccountsResponse, ListOffersResponse, ListWebsitesResponse, MailAccount, MailAccountApiChangeMailAccountPasswordRequest, MailAccountApiCreateMailAccountRequest, MailAccountApiListMailAccountsRequest, MailAccountApiRemoveMailAccountRequest, OfferApiListOffersRequest, ResetHostingPasswordResponse, ResourceSummary, SearchDomainsResponse, Session, WebsiteApiListWebsitesRequest } from './types.gen';
+/**
+ * Web Hosting Control Panel API.
+
+This API allows you to manage your Web Hosting services.
+ */
+export declare class ControlPanelAPI extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    protected pageOfListControlPanels: (request?: Readonly<ControlPanelApiListControlPanelsRequest>) => Promise<ListControlPanelsResponse>;
+    /**
+     * "List the control panels type: cpanel or plesk.".
+     *
+     * @param request - The request {@link ControlPanelApiListControlPanelsRequest}
+     * @returns A Promise of ListControlPanelsResponse
+     */
+    listControlPanels: (request?: Readonly<ControlPanelApiListControlPanelsRequest>) => Promise<ListControlPanelsResponse> & {
+        all: () => Promise<import("./types.gen").ControlPanel[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").ControlPanel[], void, void>;
+    };
+}
+/**
+ * Web Hosting Database API.
+
+This API allows you to manage your databases and database users for your Web Hosting services.
+ */
+export declare class DatabaseAPI extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    /**
+     * "Create a new database within your hosting plan".
+     *
+     * @param request - The request {@link DatabaseApiCreateDatabaseRequest}
+     * @returns A Promise of Database
+     */
+    createDatabase: (request: Readonly<DatabaseApiCreateDatabaseRequest>) => Promise<Database>;
+    protected pageOfListDatabases: (request: Readonly<DatabaseApiListDatabasesRequest>) => Promise<ListDatabasesResponse>;
+    /**
+     * "List all databases within your hosting plan".
+     *
+     * @param request - The request {@link DatabaseApiListDatabasesRequest}
+     * @returns A Promise of ListDatabasesResponse
+     */
+    listDatabases: (request: Readonly<DatabaseApiListDatabasesRequest>) => Promise<ListDatabasesResponse> & {
+        all: () => Promise<Database[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Database[], void, void>;
+    };
+    /**
+     * "Get details of a database within your hosting plan".
+     *
+     * @param request - The request {@link DatabaseApiGetDatabaseRequest}
+     * @returns A Promise of Database
+     */
+    getDatabase: (request: Readonly<DatabaseApiGetDatabaseRequest>) => Promise<Database>;
+    /**
+     * "Delete a database within your hosting plan".
+     *
+     * @param request - The request {@link DatabaseApiDeleteDatabaseRequest}
+     * @returns A Promise of Database
+     */
+    deleteDatabase: (request: Readonly<DatabaseApiDeleteDatabaseRequest>) => Promise<Database>;
+    /**
+     * "Create a new database user".
+     *
+     * @param request - The request {@link DatabaseApiCreateDatabaseUserRequest}
+     * @returns A Promise of DatabaseUser
+     */
+    createDatabaseUser: (request: Readonly<DatabaseApiCreateDatabaseUserRequest>) => Promise<DatabaseUser>;
+    protected pageOfListDatabaseUsers: (request: Readonly<DatabaseApiListDatabaseUsersRequest>) => Promise<ListDatabaseUsersResponse>;
+    /**
+     * "List all database users".
+     *
+     * @param request - The request {@link DatabaseApiListDatabaseUsersRequest}
+     * @returns A Promise of ListDatabaseUsersResponse
+     */
+    listDatabaseUsers: (request: Readonly<DatabaseApiListDatabaseUsersRequest>) => Promise<ListDatabaseUsersResponse> & {
+        all: () => Promise<DatabaseUser[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<DatabaseUser[], void, void>;
+    };
+    /**
+     * "Get details of a database user".
+     *
+     * @param request - The request {@link DatabaseApiGetDatabaseUserRequest}
+     * @returns A Promise of DatabaseUser
+     */
+    getDatabaseUser: (request: Readonly<DatabaseApiGetDatabaseUserRequest>) => Promise<DatabaseUser>;
+    /**
+     * "Delete a database user".
+     *
+     * @param request - The request {@link DatabaseApiDeleteDatabaseUserRequest}
+     * @returns A Promise of DatabaseUser
+     */
+    deleteDatabaseUser: (request: Readonly<DatabaseApiDeleteDatabaseUserRequest>) => Promise<DatabaseUser>;
+    /**
+     * "Change the password of a database user".
+     *
+     * @param request - The request {@link DatabaseApiChangeDatabaseUserPasswordRequest}
+     * @returns A Promise of DatabaseUser
+     */
+    changeDatabaseUserPassword: (request: Readonly<DatabaseApiChangeDatabaseUserPasswordRequest>) => Promise<DatabaseUser>;
+    /**
+     * "Assign a database user to a database".
+     *
+     * @param request - The request {@link DatabaseApiAssignDatabaseUserRequest}
+     * @returns A Promise of DatabaseUser
+     */
+    assignDatabaseUser: (request: Readonly<DatabaseApiAssignDatabaseUserRequest>) => Promise<DatabaseUser>;
+    /**
+     * "Unassign a database user from a database".
+     *
+     * @param request - The request {@link DatabaseApiUnassignDatabaseUserRequest}
+     * @returns A Promise of DatabaseUser
+     */
+    unassignDatabaseUser: (request: Readonly<DatabaseApiUnassignDatabaseUserRequest>) => Promise<DatabaseUser>;
+}
+/**
+ * Web Hosting Dns API.
+
+This API allows you to manage your Web Hosting services.
+ */
+export declare class DnsAPI extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    /**
+     * Get DNS records. Get the set of DNS records of a specified domain associated with a Web Hosting plan's domain.
+     *
+     * @param request - The request {@link DnsApiGetDomainDnsRecordsRequest}
+     * @returns A Promise of DnsRecords
+     */
+    getDomainDnsRecords: (request: Readonly<DnsApiGetDomainDnsRecordsRequest>) => Promise<DnsRecords>;
+    /**
+     * Check whether you own this domain or not.. Check whether you own this domain or not.
+     *
+     * @param request - The request {@link DnsApiCheckUserOwnsDomainRequest}
+     * @returns A Promise of CheckUserOwnsDomainResponse
+     */
+    checkUserOwnsDomain: (request: Readonly<DnsApiCheckUserOwnsDomainRequest>) => Promise<CheckUserOwnsDomainResponse>;
+    /**
+     * Synchronize your DNS records on the Elements Console and on cPanel.. Synchronize your DNS records on the Elements Console and on cPanel.
+     *
+     * @param request - The request {@link DnsApiSyncDomainDnsRecordsRequest}
+     * @returns A Promise of DnsRecords
+     */
+    syncDomainDnsRecords: (request: Readonly<DnsApiSyncDomainDnsRecordsRequest>) => Promise<DnsRecords>;
+    /**
+     * Search for available domains based on domain name.. Search for available domains based on domain name.
+     *
+     * @param request - The request {@link DnsApiSearchDomainsRequest}
+     * @returns A Promise of SearchDomainsResponse
+     */
+    searchDomains: (request: Readonly<DnsApiSearchDomainsRequest>) => Promise<SearchDomainsResponse>;
+    /**
+     * Retrieve detailed information about a specific domain, including its status, DNS configuration, and ownership.. Retrieve detailed information about a specific domain, including its status, DNS configuration, and ownership.
+     *
+     * @param request - The request {@link DnsApiGetDomainRequest}
+     * @returns A Promise of Domain
+     */
+    getDomain: (request: Readonly<DnsApiGetDomainRequest>) => Promise<Domain>;
+    /**
+     * Waits for {@link Domain} to be in a final state.
+     *
+     * @param request - The request {@link DnsApiGetDomainRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Domain
+     */
+    waitForDomain: (request: Readonly<DnsApiGetDomainRequest>, options?: Readonly<WaitForOptions<Domain>>) => Promise<Domain>;
+}
+/**
+ * Web Hosting Offer API.
+
+This API allows you to manage your offer for your Web Hosting services.
+ */
+export declare class OfferAPI extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    protected pageOfListOffers: (request?: Readonly<OfferApiListOffersRequest>) => Promise<ListOffersResponse>;
+    /**
+     * List all available hosting offers along with their specific options.. List all available hosting offers along with their specific options.
+     *
+     * @param request - The request {@link OfferApiListOffersRequest}
+     * @returns A Promise of ListOffersResponse
+     */
+    listOffers: (request?: Readonly<OfferApiListOffersRequest>) => Promise<ListOffersResponse> & {
+        all: () => Promise<import("./types.gen").Offer[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").Offer[], void, void>;
+    };
+}
+/**
+ * Web Hosting API.
+
+This API allows you to manage your Web Hosting services.
+ */
+export declare class HostingAPI extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    /**
+     * Order a Web Hosting plan. Order a Web Hosting plan, specifying the offer type required via the `offer_id` parameter.
+     *
+     * @param request - The request {@link HostingApiCreateHostingRequest}
+     * @returns A Promise of Hosting
+     */
+    createHosting: (request: Readonly<HostingApiCreateHostingRequest>) => Promise<Hosting>;
+    protected pageOfListHostings: (request?: Readonly<HostingApiListHostingsRequest>) => Promise<ListHostingsResponse>;
+    /**
+     * List all Web Hosting plans. List all of your existing Web Hosting plans. Various filters are available to limit the results, including filtering by domain, status, tag and Project ID.
+     *
+     * @param request - The request {@link HostingApiListHostingsRequest}
+     * @returns A Promise of ListHostingsResponse
+     */
+    listHostings: (request?: Readonly<HostingApiListHostingsRequest>) => Promise<ListHostingsResponse> & {
+        all: () => Promise<import("./types.gen").HostingSummary[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").HostingSummary[], void, void>;
+    };
+    /**
+     * Get a Web Hosting plan. Get the details of one of your existing Web Hosting plans, specified by its `hosting_id`.
+     *
+     * @param request - The request {@link HostingApiGetHostingRequest}
+     * @returns A Promise of Hosting
+     */
+    getHosting: (request: Readonly<HostingApiGetHostingRequest>) => Promise<Hosting>;
+    /**
+     * Waits for {@link Hosting} to be in a final state.
+     *
+     * @param request - The request {@link HostingApiGetHostingRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Hosting
+     */
+    waitForHosting: (request: Readonly<HostingApiGetHostingRequest>, options?: Readonly<WaitForOptions<Hosting>>) => Promise<Hosting>;
+    /**
+     * Update a Web Hosting plan. Update the details of one of your existing Web Hosting plans, specified by its `hosting_id`. You can update parameters including the contact email address, tags, options and offer.
+     *
+     * @param request - The request {@link HostingApiUpdateHostingRequest}
+     * @returns A Promise of Hosting
+     */
+    updateHosting: (request: Readonly<HostingApiUpdateHostingRequest>) => Promise<Hosting>;
+    /**
+     * Delete a Web Hosting plan. Delete a Web Hosting plan, specified by its `hosting_id`. Note that deletion is not immediate: it will take place at the end of the calendar month, after which time your Web Hosting plan and all its data (files and emails) will be irreversibly lost.
+     *
+     * @param request - The request {@link HostingApiDeleteHostingRequest}
+     * @returns A Promise of Hosting
+     */
+    deleteHosting: (request: Readonly<HostingApiDeleteHostingRequest>) => Promise<Hosting>;
+    /**
+     * Create a user session.
+     *
+     * @param request - The request {@link HostingApiCreateSessionRequest}
+     * @returns A Promise of Session
+     */
+    createSession: (request: Readonly<HostingApiCreateSessionRequest>) => Promise<Session>;
+    /**
+     * Reset a Web Hosting plan password.
+     *
+     * @param request - The request {@link HostingApiResetHostingPasswordRequest}
+     * @returns A Promise of ResetHostingPasswordResponse
+     */
+    resetHostingPassword: (request: Readonly<HostingApiResetHostingPasswordRequest>) => Promise<ResetHostingPasswordResponse>;
+    /**
+     * Get the total counts of websites, databases, email accounts, and FTP accounts of a Web Hosting plan.
+     *
+     * @param request - The request {@link HostingApiGetResourceSummaryRequest}
+     * @returns A Promise of ResourceSummary
+     */
+    getResourceSummary: (request: Readonly<HostingApiGetResourceSummaryRequest>) => Promise<ResourceSummary>;
+}
+/**
+ * Web Hosting FTP Account API.
+
+This API allows you to manage your FTP accounts for your Web Hosting services.
+ */
+export declare class FtpAccountAPI extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    /**
+     * Create a new FTP account within your hosting plan.. Create a new FTP account within your hosting plan.
+     *
+     * @param request - The request {@link FtpAccountApiCreateFtpAccountRequest}
+     * @returns A Promise of FtpAccount
+     */
+    createFtpAccount: (request: Readonly<FtpAccountApiCreateFtpAccountRequest>) => Promise<FtpAccount>;
+    protected pageOfListFtpAccounts: (request: Readonly<FtpAccountApiListFtpAccountsRequest>) => Promise<ListFtpAccountsResponse>;
+    /**
+     * List all FTP accounts within your hosting plan.. List all FTP accounts within your hosting plan.
+     *
+     * @param request - The request {@link FtpAccountApiListFtpAccountsRequest}
+     * @returns A Promise of ListFtpAccountsResponse
+     */
+    listFtpAccounts: (request: Readonly<FtpAccountApiListFtpAccountsRequest>) => Promise<ListFtpAccountsResponse> & {
+        all: () => Promise<FtpAccount[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<FtpAccount[], void, void>;
+    };
+    /**
+     * Delete a specific FTP account within your hosting plan.. Delete a specific FTP account within your hosting plan.
+     *
+     * @param request - The request {@link FtpAccountApiRemoveFtpAccountRequest}
+     * @returns A Promise of FtpAccount
+     */
+    removeFtpAccount: (request: Readonly<FtpAccountApiRemoveFtpAccountRequest>) => Promise<FtpAccount>;
+    changeFtpAccountPassword: (request: Readonly<FtpAccountApiChangeFtpAccountPasswordRequest>) => Promise<FtpAccount>;
+}
+/**
+ * Web Hosting Mail Account API.
+
+This API allows you to manage your mail accounts for your Web Hosting services.
+ */
+export declare class MailAccountAPI extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    /**
+     * Create a new mail account within your hosting plan.. Create a new mail account within your hosting plan.
+     *
+     * @param request - The request {@link MailAccountApiCreateMailAccountRequest}
+     * @returns A Promise of MailAccount
+     */
+    createMailAccount: (request: Readonly<MailAccountApiCreateMailAccountRequest>) => Promise<MailAccount>;
+    protected pageOfListMailAccounts: (request: Readonly<MailAccountApiListMailAccountsRequest>) => Promise<ListMailAccountsResponse>;
+    /**
+     * List all mail accounts within your hosting plan.. List all mail accounts within your hosting plan.
+     *
+     * @param request - The request {@link MailAccountApiListMailAccountsRequest}
+     * @returns A Promise of ListMailAccountsResponse
+     */
+    listMailAccounts: (request: Readonly<MailAccountApiListMailAccountsRequest>) => Promise<ListMailAccountsResponse> & {
+        all: () => Promise<MailAccount[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<MailAccount[], void, void>;
+    };
+    /**
+     * Delete a mail account within your hosting plan.. Delete a mail account within your hosting plan.
+     *
+     * @param request - The request {@link MailAccountApiRemoveMailAccountRequest}
+     * @returns A Promise of MailAccount
+     */
+    removeMailAccount: (request: Readonly<MailAccountApiRemoveMailAccountRequest>) => Promise<MailAccount>;
+    /**
+     * Update the password of a mail account within your hosting plan.. Update the password of a mail account within your hosting plan.
+     *
+     * @param request - The request {@link MailAccountApiChangeMailAccountPasswordRequest}
+     * @returns A Promise of MailAccount
+     */
+    changeMailAccountPassword: (request: Readonly<MailAccountApiChangeMailAccountPasswordRequest>) => Promise<MailAccount>;
+}
+/**
+ * Web Hosting Website API.
+
+This API allows you to manage your websites for your Web Hosting services.
+ */
+export declare class WebsiteAPI extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    protected pageOfListWebsites: (request: Readonly<WebsiteApiListWebsitesRequest>) => Promise<ListWebsitesResponse>;
+    /**
+     * List all websites for a specific hosting.. List all websites for a specific hosting.
+     *
+     * @param request - The request {@link WebsiteApiListWebsitesRequest}
+     * @returns A Promise of ListWebsitesResponse
+     */
+    listWebsites: (request: Readonly<WebsiteApiListWebsitesRequest>) => Promise<ListWebsitesResponse> & {
+        all: () => Promise<import("./types.gen").Website[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").Website[], void, void>;
+    };
+}

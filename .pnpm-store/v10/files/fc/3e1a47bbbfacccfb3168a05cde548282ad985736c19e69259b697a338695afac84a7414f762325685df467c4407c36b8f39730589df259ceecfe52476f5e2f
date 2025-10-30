@@ -1,0 +1,21 @@
+import { API } from "./api.gen.js";
+import { FLEXIBLE_IP_TRANSIENT_STATUSES, MAC_ADDRESS_TRANSIENT_STATUSES } from "./content.gen.js";
+import { marshalAttachFlexibleIPRequest, marshalCreateFlexibleIPRequest, marshalDetachFlexibleIPRequest, marshalDuplicateMACAddrRequest, marshalGenerateMACAddrRequest, marshalMoveMACAddrRequest, marshalUpdateFlexibleIPRequest, unmarshalAttachFlexibleIPsResponse, unmarshalDetachFlexibleIPsResponse, unmarshalFlexibleIP, unmarshalListFlexibleIPsResponse } from "./marshalling.gen.js";
+import * as validationRules_gen from "./validation-rules.gen.js";
+export {
+  API,
+  FLEXIBLE_IP_TRANSIENT_STATUSES,
+  MAC_ADDRESS_TRANSIENT_STATUSES,
+  validationRules_gen as ValidationRules,
+  marshalAttachFlexibleIPRequest,
+  marshalCreateFlexibleIPRequest,
+  marshalDetachFlexibleIPRequest,
+  marshalDuplicateMACAddrRequest,
+  marshalGenerateMACAddrRequest,
+  marshalMoveMACAddrRequest,
+  marshalUpdateFlexibleIPRequest,
+  unmarshalAttachFlexibleIPsResponse,
+  unmarshalDetachFlexibleIPsResponse,
+  unmarshalFlexibleIP,
+  unmarshalListFlexibleIPsResponse
+};

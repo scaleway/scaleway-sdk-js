@@ -1,0 +1,512 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const randomName = require("@scaleway/random-name");
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalContainerHealthCheckSpecHTTPProbe = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContainerHealthCheckSpecHTTPProbe' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    path: data.path
+  };
+};
+const unmarshalContainerHealthCheckSpecTCPProbe = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContainerHealthCheckSpecTCPProbe' failed as data isn't a dictionary.`
+    );
+  }
+  return {};
+};
+const unmarshalContainerHealthCheckSpec = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContainerHealthCheckSpec' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    failureThreshold: data.failure_threshold,
+    http: data.http ? unmarshalContainerHealthCheckSpecHTTPProbe(data.http) : void 0,
+    interval: data.interval,
+    tcp: data.tcp ? unmarshalContainerHealthCheckSpecTCPProbe(data.tcp) : void 0
+  };
+};
+const unmarshalContainerScalingOption = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContainerScalingOption' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    concurrentRequestsThreshold: data.concurrent_requests_threshold,
+    cpuUsageThreshold: data.cpu_usage_threshold,
+    memoryUsageThreshold: data.memory_usage_threshold
+  };
+};
+const unmarshalSecretHashedValue = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SecretHashedValue' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    hashedValue: data.hashed_value,
+    key: data.key
+  };
+};
+const unmarshalContainer = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Container' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    args: data.args,
+    command: data.command,
+    cpuLimit: data.cpu_limit,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    description: data.description,
+    domainName: data.domain_name,
+    environmentVariables: data.environment_variables,
+    errorMessage: data.error_message,
+    healthCheck: data.health_check ? unmarshalContainerHealthCheckSpec(data.health_check) : void 0,
+    httpOption: data.http_option,
+    id: data.id,
+    localStorageLimit: data.local_storage_limit,
+    maxConcurrency: data.max_concurrency,
+    maxScale: data.max_scale,
+    memoryLimit: data.memory_limit,
+    minScale: data.min_scale,
+    name: data.name,
+    namespaceId: data.namespace_id,
+    port: data.port,
+    privacy: data.privacy,
+    privateNetworkId: data.private_network_id,
+    protocol: data.protocol,
+    readyAt: sdkClient.unmarshalDate(data.ready_at),
+    region: data.region,
+    registryImage: data.registry_image,
+    sandbox: data.sandbox,
+    scalingOption: data.scaling_option ? unmarshalContainerScalingOption(data.scaling_option) : void 0,
+    secretEnvironmentVariables: sdkClient.unmarshalArrayOfObject(
+      data.secret_environment_variables,
+      unmarshalSecretHashedValue
+    ),
+    status: data.status,
+    tags: data.tags,
+    timeout: data.timeout,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalCron = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Cron' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    args: data.args,
+    containerId: data.container_id,
+    id: data.id,
+    name: data.name,
+    schedule: data.schedule,
+    status: data.status
+  };
+};
+const unmarshalDomain = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Domain' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    containerId: data.container_id,
+    errorMessage: data.error_message,
+    hostname: data.hostname,
+    id: data.id,
+    status: data.status,
+    url: data.url
+  };
+};
+const unmarshalNamespace = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Namespace' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    description: data.description,
+    environmentVariables: data.environment_variables,
+    errorMessage: data.error_message,
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    region: data.region,
+    registryEndpoint: data.registry_endpoint,
+    registryNamespaceId: data.registry_namespace_id,
+    secretEnvironmentVariables: sdkClient.unmarshalArrayOfObject(
+      data.secret_environment_variables,
+      unmarshalSecretHashedValue
+    ),
+    status: data.status,
+    tags: data.tags,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    vpcIntegrationActivated: data.vpc_integration_activated
+  };
+};
+const unmarshalToken = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Token' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    containerId: data.container_id,
+    description: data.description,
+    expiresAt: sdkClient.unmarshalDate(data.expires_at),
+    id: data.id,
+    namespaceId: data.namespace_id,
+    publicKey: data.public_key,
+    status: data.status,
+    token: data.token
+  };
+};
+const unmarshalTriggerMnqNatsClientConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TriggerMnqNatsClientConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    mnqCredentialId: data.mnq_credential_id,
+    mnqNatsAccountId: data.mnq_nats_account_id,
+    mnqProjectId: data.mnq_project_id,
+    mnqRegion: data.mnq_region,
+    subject: data.subject
+  };
+};
+const unmarshalTriggerMnqSqsClientConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TriggerMnqSqsClientConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    mnqCredentialId: data.mnq_credential_id,
+    mnqProjectId: data.mnq_project_id,
+    mnqRegion: data.mnq_region,
+    queue: data.queue
+  };
+};
+const unmarshalTriggerSqsClientConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TriggerSqsClientConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    accessKey: data.access_key,
+    endpoint: data.endpoint,
+    queueUrl: data.queue_url,
+    secretKey: data.secret_key
+  };
+};
+const unmarshalTrigger = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Trigger' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    containerId: data.container_id,
+    description: data.description,
+    errorMessage: data.error_message,
+    id: data.id,
+    inputType: data.input_type,
+    name: data.name,
+    scwNatsConfig: data.scw_nats_config ? unmarshalTriggerMnqNatsClientConfig(data.scw_nats_config) : void 0,
+    scwSqsConfig: data.scw_sqs_config ? unmarshalTriggerMnqSqsClientConfig(data.scw_sqs_config) : void 0,
+    sqsConfig: data.sqs_config ? unmarshalTriggerSqsClientConfig(data.sqs_config) : void 0,
+    status: data.status
+  };
+};
+const unmarshalListContainersResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListContainersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    containers: sdkClient.unmarshalArrayOfObject(data.containers, unmarshalContainer),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListCronsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListCronsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    crons: sdkClient.unmarshalArrayOfObject(data.crons, unmarshalCron),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListDomainsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDomainsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    domains: sdkClient.unmarshalArrayOfObject(data.domains, unmarshalDomain),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListNamespacesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListNamespacesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    namespaces: sdkClient.unmarshalArrayOfObject(data.namespaces, unmarshalNamespace),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListTokensResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListTokensResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    tokens: sdkClient.unmarshalArrayOfObject(data.tokens, unmarshalToken),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListTriggersResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListTriggersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    totalCount: data.total_count,
+    triggers: sdkClient.unmarshalArrayOfObject(data.triggers, unmarshalTrigger)
+  };
+};
+const marshalContainerHealthCheckSpecHTTPProbe = (request, defaults) => ({
+  path: request.path
+});
+const marshalContainerHealthCheckSpecTCPProbe = (request, defaults) => ({});
+const marshalContainerHealthCheckSpec = (request, defaults) => ({
+  failure_threshold: request.failureThreshold,
+  interval: request.interval,
+  ...sdkClient.resolveOneOf([
+    {
+      param: "http",
+      value: request.http !== void 0 ? marshalContainerHealthCheckSpecHTTPProbe(request.http) : void 0
+    },
+    {
+      param: "tcp",
+      value: request.tcp !== void 0 ? marshalContainerHealthCheckSpecTCPProbe(request.tcp) : void 0
+    }
+  ])
+});
+const marshalContainerScalingOption = (request, defaults) => ({
+  ...sdkClient.resolveOneOf([
+    {
+      param: "concurrent_requests_threshold",
+      value: request.concurrentRequestsThreshold
+    },
+    { param: "cpu_usage_threshold", value: request.cpuUsageThreshold },
+    { param: "memory_usage_threshold", value: request.memoryUsageThreshold }
+  ])
+});
+const marshalSecret = (request, defaults) => ({
+  key: request.key,
+  value: request.value
+});
+const marshalCreateContainerRequest = (request, defaults) => ({
+  args: request.args,
+  command: request.command,
+  cpu_limit: request.cpuLimit,
+  description: request.description,
+  environment_variables: request.environmentVariables,
+  health_check: request.healthCheck !== void 0 ? marshalContainerHealthCheckSpec(request.healthCheck) : void 0,
+  http_option: request.httpOption,
+  local_storage_limit: request.localStorageLimit,
+  max_concurrency: request.maxConcurrency,
+  max_scale: request.maxScale,
+  memory_limit: request.memoryLimit,
+  min_scale: request.minScale,
+  name: request.name,
+  namespace_id: request.namespaceId,
+  port: request.port,
+  privacy: request.privacy,
+  private_network_id: request.privateNetworkId,
+  protocol: request.protocol,
+  registry_image: request.registryImage,
+  sandbox: request.sandbox,
+  scaling_option: request.scalingOption !== void 0 ? marshalContainerScalingOption(request.scalingOption) : void 0,
+  secret_environment_variables: request.secretEnvironmentVariables !== void 0 ? request.secretEnvironmentVariables.map(
+    (elt) => marshalSecret(elt)
+  ) : void 0,
+  tags: request.tags,
+  timeout: request.timeout
+});
+const marshalCreateCronRequest = (request, defaults) => ({
+  args: request.args,
+  container_id: request.containerId,
+  name: request.name,
+  schedule: request.schedule
+});
+const marshalCreateDomainRequest = (request, defaults) => ({
+  container_id: request.containerId,
+  hostname: request.hostname
+});
+const marshalCreateNamespaceRequest = (request, defaults) => ({
+  activate_vpc_integration: request.activateVpcIntegration,
+  description: request.description,
+  environment_variables: request.environmentVariables,
+  name: request.name || randomName("cns"),
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  secret_environment_variables: request.secretEnvironmentVariables !== void 0 ? request.secretEnvironmentVariables.map(
+    (elt) => marshalSecret(elt)
+  ) : void 0,
+  tags: request.tags
+});
+const marshalCreateTokenRequest = (request, defaults) => ({
+  description: request.description,
+  expires_at: request.expiresAt,
+  ...sdkClient.resolveOneOf([
+    { param: "container_id", value: request.containerId },
+    { param: "namespace_id", value: request.namespaceId }
+  ])
+});
+const marshalCreateTriggerRequestMnqNatsClientConfig = (request, defaults) => ({
+  mnq_nats_account_id: request.mnqNatsAccountId,
+  mnq_project_id: request.mnqProjectId,
+  mnq_region: request.mnqRegion,
+  subject: request.subject
+});
+const marshalCreateTriggerRequestMnqSqsClientConfig = (request, defaults) => ({
+  mnq_project_id: request.mnqProjectId,
+  mnq_region: request.mnqRegion,
+  queue: request.queue
+});
+const marshalCreateTriggerRequestSqsClientConfig = (request, defaults) => ({
+  access_key: request.accessKey,
+  endpoint: request.endpoint,
+  queue_url: request.queueUrl,
+  secret_key: request.secretKey
+});
+const marshalCreateTriggerRequest = (request, defaults) => ({
+  container_id: request.containerId,
+  description: request.description,
+  name: request.name,
+  ...sdkClient.resolveOneOf([
+    {
+      param: "scw_sqs_config",
+      value: request.scwSqsConfig !== void 0 ? marshalCreateTriggerRequestMnqSqsClientConfig(
+        request.scwSqsConfig
+      ) : void 0
+    },
+    {
+      param: "scw_nats_config",
+      value: request.scwNatsConfig !== void 0 ? marshalCreateTriggerRequestMnqNatsClientConfig(
+        request.scwNatsConfig
+      ) : void 0
+    },
+    {
+      param: "sqs_config",
+      value: request.sqsConfig !== void 0 ? marshalCreateTriggerRequestSqsClientConfig(
+        request.sqsConfig
+      ) : void 0
+    }
+  ])
+});
+const marshalUpdateContainerRequest = (request, defaults) => ({
+  args: request.args,
+  command: request.command,
+  cpu_limit: request.cpuLimit,
+  description: request.description,
+  environment_variables: request.environmentVariables,
+  health_check: request.healthCheck !== void 0 ? marshalContainerHealthCheckSpec(request.healthCheck) : void 0,
+  http_option: request.httpOption,
+  local_storage_limit: request.localStorageLimit,
+  max_concurrency: request.maxConcurrency,
+  max_scale: request.maxScale,
+  memory_limit: request.memoryLimit,
+  min_scale: request.minScale,
+  port: request.port,
+  privacy: request.privacy,
+  private_network_id: request.privateNetworkId,
+  protocol: request.protocol,
+  redeploy: request.redeploy,
+  registry_image: request.registryImage,
+  sandbox: request.sandbox,
+  scaling_option: request.scalingOption !== void 0 ? marshalContainerScalingOption(request.scalingOption) : void 0,
+  secret_environment_variables: request.secretEnvironmentVariables !== void 0 ? request.secretEnvironmentVariables.map(
+    (elt) => marshalSecret(elt)
+  ) : void 0,
+  tags: request.tags,
+  timeout: request.timeout
+});
+const marshalUpdateCronRequest = (request, defaults) => ({
+  args: request.args,
+  container_id: request.containerId,
+  name: request.name,
+  schedule: request.schedule
+});
+const marshalUpdateNamespaceRequest = (request, defaults) => ({
+  description: request.description,
+  environment_variables: request.environmentVariables,
+  secret_environment_variables: request.secretEnvironmentVariables !== void 0 ? request.secretEnvironmentVariables.map(
+    (elt) => marshalSecret(elt)
+  ) : void 0,
+  tags: request.tags
+});
+const marshalUpdateTriggerRequestSqsClientConfig = (request, defaults) => ({
+  access_key: request.accessKey,
+  secret_key: request.secretKey
+});
+const marshalUpdateTriggerRequest = (request, defaults) => ({
+  description: request.description,
+  name: request.name,
+  ...sdkClient.resolveOneOf([
+    {
+      param: "sqs_config",
+      value: request.sqsConfig !== void 0 ? marshalUpdateTriggerRequestSqsClientConfig(
+        request.sqsConfig
+      ) : void 0
+    }
+  ])
+});
+exports.marshalCreateContainerRequest = marshalCreateContainerRequest;
+exports.marshalCreateCronRequest = marshalCreateCronRequest;
+exports.marshalCreateDomainRequest = marshalCreateDomainRequest;
+exports.marshalCreateNamespaceRequest = marshalCreateNamespaceRequest;
+exports.marshalCreateTokenRequest = marshalCreateTokenRequest;
+exports.marshalCreateTriggerRequest = marshalCreateTriggerRequest;
+exports.marshalUpdateContainerRequest = marshalUpdateContainerRequest;
+exports.marshalUpdateCronRequest = marshalUpdateCronRequest;
+exports.marshalUpdateNamespaceRequest = marshalUpdateNamespaceRequest;
+exports.marshalUpdateTriggerRequest = marshalUpdateTriggerRequest;
+exports.unmarshalContainer = unmarshalContainer;
+exports.unmarshalCron = unmarshalCron;
+exports.unmarshalDomain = unmarshalDomain;
+exports.unmarshalListContainersResponse = unmarshalListContainersResponse;
+exports.unmarshalListCronsResponse = unmarshalListCronsResponse;
+exports.unmarshalListDomainsResponse = unmarshalListDomainsResponse;
+exports.unmarshalListNamespacesResponse = unmarshalListNamespacesResponse;
+exports.unmarshalListTokensResponse = unmarshalListTokensResponse;
+exports.unmarshalListTriggersResponse = unmarshalListTriggersResponse;
+exports.unmarshalNamespace = unmarshalNamespace;
+exports.unmarshalToken = unmarshalToken;
+exports.unmarshalTrigger = unmarshalTrigger;

@@ -1,0 +1,4 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const index = require("./v1/index.cjs");
+exports.K8sv1 = index;

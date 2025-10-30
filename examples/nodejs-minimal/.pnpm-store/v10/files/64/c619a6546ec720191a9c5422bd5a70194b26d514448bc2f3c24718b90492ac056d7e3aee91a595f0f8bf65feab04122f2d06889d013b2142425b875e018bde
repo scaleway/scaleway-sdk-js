@@ -1,0 +1,12 @@
+import type { JSONObject } from '../../../helpers/json.js';
+import { ScalewayError } from '../scw-error.js';
+import { InvalidArgumentsError } from '../standard/invalid-arguments-error.js';
+import { QuotasExceededError } from '../standard/quotas-exceeded-error.js';
+/**
+ * InvalidRequest error is only returned by the instance API.
+ *
+ * @public
+ */
+export declare class InvalidRequestMapper {
+    static fromJSON(status: number, obj: Readonly<JSONObject>): QuotasExceededError | InvalidArgumentsError | ScalewayError;
+}

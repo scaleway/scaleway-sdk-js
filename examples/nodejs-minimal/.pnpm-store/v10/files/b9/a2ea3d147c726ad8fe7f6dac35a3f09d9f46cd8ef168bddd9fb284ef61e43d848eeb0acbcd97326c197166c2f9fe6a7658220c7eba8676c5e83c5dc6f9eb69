@@ -1,0 +1,3 @@
+import type { ClusterStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link ClusterStatus}. */
+export declare const CLUSTER_TRANSIENT_STATUSES: ClusterStatus[];

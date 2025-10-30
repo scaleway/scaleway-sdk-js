@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const scwError = require("../scw-error.cjs");
+class OutOfStockError extends scwError.ScalewayError {
+  constructor(status, body, resource) {
+    super(status, body, `resource ${resource} is out of stock`);
+    this.status = status;
+    this.body = body;
+    this.resource = resource;
+    this.name = "OutOfStockError";
+  }
+  static fromJSON(status, obj) {
+    if (typeof obj.resource !== "string") return null;
+    return new OutOfStockError(status, obj, obj.resource);
+  }
+}
+exports.OutOfStockError = OutOfStockError;

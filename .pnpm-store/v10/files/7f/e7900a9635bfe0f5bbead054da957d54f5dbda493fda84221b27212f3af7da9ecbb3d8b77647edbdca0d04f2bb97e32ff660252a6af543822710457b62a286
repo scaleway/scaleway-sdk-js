@@ -1,0 +1,288 @@
+export declare const CreateAPIKeyRequest: {
+    description: {
+        ignoreEmpty: boolean;
+        maxLength: number;
+    };
+};
+export declare const CreateApplicationRequest: {
+    description: {
+        ignoreEmpty: boolean;
+        maxLength: number;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+};
+export declare const CreateGroupRequest: {
+    description: {
+        ignoreEmpty: boolean;
+        maxLength: number;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+};
+export declare const CreatePolicyRequest: {
+    description: {
+        ignoreEmpty: boolean;
+        maxLength: number;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+};
+export declare const CreateSSHKeyRequest: {
+    name: {
+        ignoreEmpty: boolean;
+        maxLength: number;
+    };
+    publicKey: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const CreateUserRequestMember: {
+    firstName: {
+        maxLength: number;
+    };
+    lastName: {
+        maxLength: number;
+    };
+    password: {
+        ignoreEmpty: boolean;
+        maxLength: number;
+    };
+    username: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+};
+export declare const GetQuotumRequest: {
+    quotumName: {
+        minLength: number;
+    };
+};
+export declare const JoinUserConnectionRequest: {
+    token: {
+        minLength: number;
+    };
+};
+export declare const ListAPIKeysRequest: {
+    description: {
+        maxLength: number;
+    };
+    page: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListApplicationsRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+    page: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListGroupsRequest: {
+    name: {
+        minLength: number;
+    };
+    page: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListJWTsRequest: {
+    page: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListLogsRequest: {
+    page: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListPermissionSetsRequest: {
+    page: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListPoliciesRequest: {
+    page: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    policyName: {
+        minLength: number;
+    };
+};
+export declare const ListQuotaRequest: {
+    page: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListRulesRequest: {
+    page: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListSSHKeysRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+    page: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListUsersRequest: {
+    page: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const RuleSpecs: {
+    condition: {
+        maxLength: number;
+    };
+};
+export declare const SetOrganizationAliasRequest: {
+    alias: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+};
+export declare const UpdateAPIKeyRequest: {
+    description: {
+        maxLength: number;
+    };
+};
+export declare const UpdateApplicationRequest: {
+    description: {
+        maxLength: number;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+};
+export declare const UpdateGroupRequest: {
+    description: {
+        maxLength: number;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+};
+export declare const UpdateOrganizationSecuritySettingsRequest: {
+    loginAttemptsBeforeLocked: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const UpdatePolicyRequest: {
+    description: {
+        maxLength: number;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+};
+export declare const UpdateSSHKeyRequest: {
+    name: {
+        maxLength: number;
+    };
+};
+export declare const UpdateUserPasswordRequest: {
+    password: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const UpdateUserRequest: {
+    firstName: {
+        maxLength: number;
+    };
+    lastName: {
+        maxLength: number;
+    };
+};
+export declare const UpdateUserUsernameRequest: {
+    username: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+};
+export declare const ValidateUserMFAOTPRequest: {
+    oneTimePassword: {
+        pattern: RegExp;
+    };
+};

@@ -1,0 +1,23 @@
+
+> @scaleway/configuration-loader@1.0.8 build /home/runner/work/scaleway-sdk-js/scaleway-sdk-js/packages/configuration-loader
+> vite build --config ../../vite.config.ts && pnpm run type:generate
+
+[36mvite v6.3.5 [32mbuilding SSR bundle for production...[36m[39m
+transforming...
+[32m✓[39m 5 modules transformed.
+rendering chunks...
+[2mdist/[22m[36mindex.js          [39m[1m[2m0.27 kB[22m[1m[22m
+[2mdist/[22m[36menv.js            [39m[1m[2m0.62 kB[22m[1m[22m
+[2mdist/[22m[36mpath-resolver.js  [39m[1m[2m0.75 kB[22m[1m[22m
+[2mdist/[22m[36myml-loader.js     [39m[1m[2m1.26 kB[22m[1m[22m
+[2mdist/[22m[36mconfig-loader.js  [39m[1m[2m1.93 kB[22m[1m[22m
+[2mdist/[22m[36mindex.cjs          [39m[1m[2m0.42 kB[22m[1m[22m
+[2mdist/[22m[36menv.cjs            [39m[1m[2m0.72 kB[22m[1m[22m
+[2mdist/[22m[36myml-loader.cjs     [39m[1m[2m1.40 kB[22m[1m[22m
+[2mdist/[22m[36mpath-resolver.cjs  [39m[1m[2m1.47 kB[22m[1m[22m
+[2mdist/[22m[36mconfig-loader.cjs  [39m[1m[2m2.20 kB[22m[1m[22m
+[32m✓ built in 129ms[39m
+
+> @scaleway/configuration-loader@1.0.8 type:generate /home/runner/work/scaleway-sdk-js/scaleway-sdk-js/packages/configuration-loader
+> tsc --declaration -p tsconfig.build.json
+

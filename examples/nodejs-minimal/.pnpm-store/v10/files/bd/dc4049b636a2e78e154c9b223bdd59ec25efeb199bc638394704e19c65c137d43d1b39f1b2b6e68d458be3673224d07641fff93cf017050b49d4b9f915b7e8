@@ -1,0 +1,4 @@
+import * as index_gen from "./v3/index.gen.js";
+export {
+  index_gen as Accountv3
+};

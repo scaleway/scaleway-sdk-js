@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const INSTANCE_TRANSIENT_STATUSES = [
+  "provisioning",
+  "configuring",
+  "deleting",
+  "initializing",
+  "snapshotting"
+];
+const SNAPSHOT_TRANSIENT_STATUSES = [
+  "creating",
+  "restoring",
+  "deleting"
+];
+exports.INSTANCE_TRANSIENT_STATUSES = INSTANCE_TRANSIENT_STATUSES;
+exports.SNAPSHOT_TRANSIENT_STATUSES = SNAPSHOT_TRANSIENT_STATUSES;

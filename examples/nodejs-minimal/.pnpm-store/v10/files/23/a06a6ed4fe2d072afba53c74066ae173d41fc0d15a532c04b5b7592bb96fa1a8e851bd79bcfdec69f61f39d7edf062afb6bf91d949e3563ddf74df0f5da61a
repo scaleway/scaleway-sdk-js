@@ -1,0 +1,13 @@
+import type { DefaultValues } from '@scaleway/sdk-client';
+import type { CheckContractSignatureResponse, ContractApiCheckContractSignatureRequest, ContractApiCreateContractSignatureRequest, ContractSignature, ListContractSignaturesResponse, ListProjectsResponse, Project, ProjectApiCreateProjectRequest, ProjectApiSetProjectQualificationRequest, ProjectApiUpdateProjectRequest, ProjectQualification } from './types.gen';
+export declare const unmarshalContractSignature: (data: unknown) => ContractSignature;
+export declare const unmarshalProject: (data: unknown) => Project;
+export declare const unmarshalCheckContractSignatureResponse: (data: unknown) => CheckContractSignatureResponse;
+export declare const unmarshalListContractSignaturesResponse: (data: unknown) => ListContractSignaturesResponse;
+export declare const unmarshalListProjectsResponse: (data: unknown) => ListProjectsResponse;
+export declare const unmarshalProjectQualification: (data: unknown) => ProjectQualification;
+export declare const marshalContractApiCheckContractSignatureRequest: (request: ContractApiCheckContractSignatureRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalContractApiCreateContractSignatureRequest: (request: ContractApiCreateContractSignatureRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalProjectApiCreateProjectRequest: (request: ProjectApiCreateProjectRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalProjectApiSetProjectQualificationRequest: (request: ProjectApiSetProjectQualificationRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalProjectApiUpdateProjectRequest: (request: ProjectApiUpdateProjectRequest, defaults: DefaultValues) => Record<string, unknown>;

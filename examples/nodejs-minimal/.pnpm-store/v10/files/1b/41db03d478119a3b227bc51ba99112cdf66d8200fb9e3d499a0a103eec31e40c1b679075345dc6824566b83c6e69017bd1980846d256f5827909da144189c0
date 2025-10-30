@@ -1,0 +1,72 @@
+export declare const NatsAccount: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const NatsApiCreateNatsAccountRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const NatsApiCreateNatsCredentialsRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const NatsApiUpdateNatsAccountRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const NatsCredentials: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const SnsApiCreateSnsCredentialsRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const SnsApiUpdateSnsCredentialsRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const SnsCredentials: {
+    accessKey: {
+        minLength: number;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const SqsApiCreateSqsCredentialsRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const SqsApiUpdateSqsCredentialsRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const SqsCredentials: {
+    accessKey: {
+        minLength: number;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+    };
+};

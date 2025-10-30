@@ -1,0 +1,6 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sleep = (ms) => new Promise((resolve) => {
+  setTimeout(resolve, ms);
+});
+exports.sleep = sleep;

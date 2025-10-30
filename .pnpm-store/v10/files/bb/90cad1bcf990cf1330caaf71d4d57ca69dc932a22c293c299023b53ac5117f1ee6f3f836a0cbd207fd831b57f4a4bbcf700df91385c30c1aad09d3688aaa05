@@ -1,0 +1,5 @@
+import type { FlexibleIPStatus, MACAddressStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link FlexibleIPStatus}. */
+export declare const FLEXIBLE_IP_TRANSIENT_STATUSES: FlexibleIPStatus[];
+/** Lists transient statutes of the enum {@link MACAddressStatus}. */
+export declare const MAC_ADDRESS_TRANSIENT_STATUSES: MACAddressStatus[];

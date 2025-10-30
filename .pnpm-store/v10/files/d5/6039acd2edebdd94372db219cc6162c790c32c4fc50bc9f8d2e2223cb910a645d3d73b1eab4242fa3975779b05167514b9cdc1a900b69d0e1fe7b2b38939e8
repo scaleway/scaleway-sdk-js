@@ -1,0 +1,51 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const CreateTriggerRequest = {
+  description: {
+    maxLength: 255
+  },
+  name: {
+    maxLength: 50,
+    minLength: 1
+  }
+};
+const CreateTriggerRequestMnqNatsClientConfig = {
+  mnqRegion: {
+    maxLength: 20,
+    minLength: 1
+  },
+  subject: {
+    maxLength: 100,
+    minLength: 1,
+    pattern: /^[^\s]+$/
+  }
+};
+const CreateTriggerRequestMnqSqsClientConfig = {
+  mnqRegion: {
+    maxLength: 20,
+    minLength: 1
+  },
+  queue: {
+    maxLength: 100,
+    minLength: 1
+  }
+};
+const UpdateFunctionRequest = {
+  privateNetworkId: {
+    ignoreEmpty: true
+  }
+};
+const UpdateTriggerRequest = {
+  description: {
+    maxLength: 255
+  },
+  name: {
+    maxLength: 50,
+    minLength: 1
+  }
+};
+exports.CreateTriggerRequest = CreateTriggerRequest;
+exports.CreateTriggerRequestMnqNatsClientConfig = CreateTriggerRequestMnqNatsClientConfig;
+exports.CreateTriggerRequestMnqSqsClientConfig = CreateTriggerRequestMnqSqsClientConfig;
+exports.UpdateFunctionRequest = UpdateFunctionRequest;
+exports.UpdateTriggerRequest = UpdateTriggerRequest;

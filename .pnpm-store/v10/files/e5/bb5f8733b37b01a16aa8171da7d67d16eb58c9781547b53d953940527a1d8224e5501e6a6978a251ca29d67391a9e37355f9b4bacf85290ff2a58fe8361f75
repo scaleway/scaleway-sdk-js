@@ -1,0 +1,440 @@
+import randomName from "@scaleway/random-name";
+import { resolveOneOf, isJSONObject, unmarshalArrayOfObject, unmarshalDate } from "@scaleway/sdk-client";
+const unmarshalDHCP = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DHCP' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    address: data.address,
+    createdAt: unmarshalDate(data.created_at),
+    dnsLocalName: data.dns_local_name,
+    dnsSearch: data.dns_search,
+    dnsServersOverride: data.dns_servers_override,
+    enableDynamic: data.enable_dynamic,
+    id: data.id,
+    organizationId: data.organization_id,
+    poolHigh: data.pool_high,
+    poolLow: data.pool_low,
+    projectId: data.project_id,
+    pushDefaultRoute: data.push_default_route,
+    pushDnsServer: data.push_dns_server,
+    rebindTimer: data.rebind_timer,
+    renewTimer: data.renew_timer,
+    subnet: data.subnet,
+    updatedAt: unmarshalDate(data.updated_at),
+    validLifetime: data.valid_lifetime,
+    zone: data.zone
+  };
+};
+const unmarshalIpamConfig = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'IpamConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    ipamIpId: data.ipam_ip_id,
+    pushDefaultRoute: data.push_default_route
+  };
+};
+const unmarshalGatewayNetwork = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GatewayNetwork' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    address: data.address,
+    createdAt: unmarshalDate(data.created_at),
+    dhcp: data.dhcp ? unmarshalDHCP(data.dhcp) : void 0,
+    enableDhcp: data.enable_dhcp,
+    enableMasquerade: data.enable_masquerade,
+    gatewayId: data.gateway_id,
+    id: data.id,
+    ipamConfig: data.ipam_config ? unmarshalIpamConfig(data.ipam_config) : void 0,
+    macAddress: data.mac_address,
+    privateNetworkId: data.private_network_id,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalIP = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'IP' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    address: data.address,
+    createdAt: unmarshalDate(data.created_at),
+    gatewayId: data.gateway_id,
+    id: data.id,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    reverse: data.reverse,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalDHCPEntry = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DHCPEntry' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    gatewayNetworkId: data.gateway_network_id,
+    hostname: data.hostname,
+    id: data.id,
+    ipAddress: data.ip_address,
+    macAddress: data.mac_address,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalGatewayType = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GatewayType' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    bandwidth: data.bandwidth,
+    name: data.name,
+    zone: data.zone
+  };
+};
+const unmarshalGateway = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Gateway' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    bastionEnabled: data.bastion_enabled,
+    bastionPort: data.bastion_port,
+    canUpgradeTo: data.can_upgrade_to,
+    createdAt: unmarshalDate(data.created_at),
+    gatewayNetworks: unmarshalArrayOfObject(
+      data.gateway_networks,
+      unmarshalGatewayNetwork
+    ),
+    id: data.id,
+    ip: data.ip ? unmarshalIP(data.ip) : void 0,
+    ipMobilityEnabled: data.ip_mobility_enabled,
+    isLegacy: data.is_legacy,
+    name: data.name,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    smtpEnabled: data.smtp_enabled,
+    status: data.status,
+    tags: data.tags,
+    type: data.type ? unmarshalGatewayType(data.type) : void 0,
+    updatedAt: unmarshalDate(data.updated_at),
+    upstreamDnsServers: data.upstream_dns_servers,
+    version: data.version,
+    zone: data.zone
+  };
+};
+const unmarshalPATRule = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PATRule' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    gatewayId: data.gateway_id,
+    id: data.id,
+    privateIp: data.private_ip,
+    privatePort: data.private_port,
+    protocol: data.protocol,
+    publicPort: data.public_port,
+    updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalListDHCPEntriesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDHCPEntriesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    dhcpEntries: unmarshalArrayOfObject(data.dhcp_entries, unmarshalDHCPEntry),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListDHCPsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDHCPsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    dhcps: unmarshalArrayOfObject(data.dhcps, unmarshalDHCP),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListGatewayNetworksResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListGatewayNetworksResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    gatewayNetworks: unmarshalArrayOfObject(
+      data.gateway_networks,
+      unmarshalGatewayNetwork
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListGatewayTypesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListGatewayTypesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    types: unmarshalArrayOfObject(data.types, unmarshalGatewayType)
+  };
+};
+const unmarshalListGatewaysResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListGatewaysResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    gateways: unmarshalArrayOfObject(data.gateways, unmarshalGateway),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListIPsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListIPsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    ips: unmarshalArrayOfObject(data.ips, unmarshalIP),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListPATRulesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPATRulesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    patRules: unmarshalArrayOfObject(data.pat_rules, unmarshalPATRule),
+    totalCount: data.total_count
+  };
+};
+const unmarshalSetDHCPEntriesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetDHCPEntriesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    dhcpEntries: unmarshalArrayOfObject(data.dhcp_entries, unmarshalDHCPEntry)
+  };
+};
+const unmarshalSetPATRulesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetPATRulesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    patRules: unmarshalArrayOfObject(data.pat_rules, unmarshalPATRule)
+  };
+};
+const marshalCreateDHCPRequest = (request, defaults) => ({
+  address: request.address,
+  dns_local_name: request.dnsLocalName,
+  dns_search: request.dnsSearch,
+  dns_servers_override: request.dnsServersOverride,
+  enable_dynamic: request.enableDynamic,
+  pool_high: request.poolHigh,
+  pool_low: request.poolLow,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  push_default_route: request.pushDefaultRoute,
+  push_dns_server: request.pushDnsServer,
+  rebind_timer: request.rebindTimer,
+  renew_timer: request.renewTimer,
+  subnet: request.subnet,
+  valid_lifetime: request.validLifetime
+});
+const marshalCreateDHCPEntryRequest = (request, defaults) => ({
+  gateway_network_id: request.gatewayNetworkId,
+  ip_address: request.ipAddress,
+  mac_address: request.macAddress
+});
+const marshalCreateGatewayNetworkRequestIpamConfig = (request, defaults) => ({
+  ipam_ip_id: request.ipamIpId,
+  push_default_route: request.pushDefaultRoute
+});
+const marshalCreateGatewayNetworkRequest = (request, defaults) => ({
+  enable_dhcp: request.enableDhcp,
+  enable_masquerade: request.enableMasquerade,
+  gateway_id: request.gatewayId,
+  private_network_id: request.privateNetworkId,
+  ...resolveOneOf([
+    { param: "dhcp_id", value: request.dhcpId },
+    {
+      param: "dhcp",
+      value: request.dhcp !== void 0 ? marshalCreateDHCPRequest(request.dhcp, defaults) : void 0
+    },
+    { param: "address", value: request.address },
+    {
+      param: "ipam_config",
+      value: request.ipamConfig !== void 0 ? marshalCreateGatewayNetworkRequestIpamConfig(
+        request.ipamConfig
+      ) : void 0
+    }
+  ])
+});
+const marshalCreateGatewayRequest = (request, defaults) => ({
+  bastion_port: request.bastionPort,
+  enable_bastion: request.enableBastion,
+  enable_smtp: request.enableSmtp,
+  ip_id: request.ipId,
+  name: request.name || randomName("gw"),
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags,
+  type: request.type,
+  upstream_dns_servers: request.upstreamDnsServers
+});
+const marshalCreateIPRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags
+});
+const marshalCreatePATRuleRequest = (request, defaults) => ({
+  gateway_id: request.gatewayId,
+  private_ip: request.privateIp,
+  private_port: request.privatePort,
+  protocol: request.protocol,
+  public_port: request.publicPort
+});
+const marshalSetDHCPEntriesRequestEntry = (request, defaults) => ({
+  ip_address: request.ipAddress,
+  mac_address: request.macAddress
+});
+const marshalSetDHCPEntriesRequest = (request, defaults) => ({
+  dhcp_entries: request.dhcpEntries !== void 0 ? request.dhcpEntries.map(
+    (elt) => marshalSetDHCPEntriesRequestEntry(elt)
+  ) : void 0,
+  gateway_network_id: request.gatewayNetworkId
+});
+const marshalSetPATRulesRequestRule = (request, defaults) => ({
+  private_ip: request.privateIp,
+  private_port: request.privatePort,
+  protocol: request.protocol,
+  public_port: request.publicPort
+});
+const marshalSetPATRulesRequest = (request, defaults) => ({
+  gateway_id: request.gatewayId,
+  pat_rules: request.patRules.map(
+    (elt) => marshalSetPATRulesRequestRule(elt)
+  )
+});
+const marshalUpdateDHCPEntryRequest = (request, defaults) => ({
+  ip_address: request.ipAddress
+});
+const marshalUpdateDHCPRequest = (request, defaults) => ({
+  address: request.address,
+  dns_local_name: request.dnsLocalName,
+  dns_search: request.dnsSearch,
+  dns_servers_override: request.dnsServersOverride,
+  enable_dynamic: request.enableDynamic,
+  pool_high: request.poolHigh,
+  pool_low: request.poolLow,
+  push_default_route: request.pushDefaultRoute,
+  push_dns_server: request.pushDnsServer,
+  rebind_timer: request.rebindTimer,
+  renew_timer: request.renewTimer,
+  subnet: request.subnet,
+  valid_lifetime: request.validLifetime
+});
+const marshalUpdateGatewayNetworkRequestIpamConfig = (request, defaults) => ({
+  ipam_ip_id: request.ipamIpId,
+  push_default_route: request.pushDefaultRoute
+});
+const marshalUpdateGatewayNetworkRequest = (request, defaults) => ({
+  enable_dhcp: request.enableDhcp,
+  enable_masquerade: request.enableMasquerade,
+  ...resolveOneOf([
+    { param: "dhcp_id", value: request.dhcpId },
+    { param: "address", value: request.address },
+    {
+      param: "ipam_config",
+      value: request.ipamConfig !== void 0 ? marshalUpdateGatewayNetworkRequestIpamConfig(
+        request.ipamConfig
+      ) : void 0
+    }
+  ])
+});
+const marshalUpdateGatewayRequest = (request, defaults) => ({
+  bastion_port: request.bastionPort,
+  enable_bastion: request.enableBastion,
+  enable_smtp: request.enableSmtp,
+  name: request.name,
+  tags: request.tags,
+  upstream_dns_servers: request.upstreamDnsServers
+});
+const marshalUpdateIPRequest = (request, defaults) => ({
+  gateway_id: request.gatewayId,
+  reverse: request.reverse,
+  tags: request.tags
+});
+const marshalUpdatePATRuleRequest = (request, defaults) => ({
+  private_ip: request.privateIp,
+  private_port: request.privatePort,
+  protocol: request.protocol,
+  public_port: request.publicPort
+});
+const marshalUpgradeGatewayRequest = (request, defaults) => ({
+  type: request.type
+});
+export {
+  marshalCreateDHCPEntryRequest,
+  marshalCreateDHCPRequest,
+  marshalCreateGatewayNetworkRequest,
+  marshalCreateGatewayRequest,
+  marshalCreateIPRequest,
+  marshalCreatePATRuleRequest,
+  marshalSetDHCPEntriesRequest,
+  marshalSetPATRulesRequest,
+  marshalUpdateDHCPEntryRequest,
+  marshalUpdateDHCPRequest,
+  marshalUpdateGatewayNetworkRequest,
+  marshalUpdateGatewayRequest,
+  marshalUpdateIPRequest,
+  marshalUpdatePATRuleRequest,
+  marshalUpgradeGatewayRequest,
+  unmarshalDHCP,
+  unmarshalDHCPEntry,
+  unmarshalGateway,
+  unmarshalGatewayNetwork,
+  unmarshalIP,
+  unmarshalListDHCPEntriesResponse,
+  unmarshalListDHCPsResponse,
+  unmarshalListGatewayNetworksResponse,
+  unmarshalListGatewayTypesResponse,
+  unmarshalListGatewaysResponse,
+  unmarshalListIPsResponse,
+  unmarshalListPATRulesResponse,
+  unmarshalPATRule,
+  unmarshalSetDHCPEntriesResponse,
+  unmarshalSetPATRulesResponse
+};

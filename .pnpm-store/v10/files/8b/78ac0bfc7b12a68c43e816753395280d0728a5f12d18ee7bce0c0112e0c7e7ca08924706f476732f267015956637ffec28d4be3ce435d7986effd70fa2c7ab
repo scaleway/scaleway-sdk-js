@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const api_gen = require("./api.gen.cjs");
+class K8SUtilsAPI extends api_gen.API {
+  /**
+   * Get configuration of a kube cluster.
+   *
+   * @param request - The request {@link GetClusterKubeConfigRequest}
+   * @returns A Promise of Blob
+   */
+  getClusterKubeConfig = (request) => this._getClusterKubeConfig(request);
+}
+exports.K8SUtilsAPI = K8SUtilsAPI;

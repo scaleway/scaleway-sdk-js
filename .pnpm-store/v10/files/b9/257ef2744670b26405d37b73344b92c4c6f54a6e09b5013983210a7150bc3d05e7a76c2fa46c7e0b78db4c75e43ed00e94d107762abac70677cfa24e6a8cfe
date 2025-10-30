@@ -1,0 +1,25 @@
+import type { RequestInterceptor, ResponseErrorInterceptor, ResponseInterceptor } from './types';
+/**
+ * Composes request interceptors.
+ *
+ * @param interceptors - A list of request interceptors
+ * @returns An async composed interceptor
+ *
+ * @internal
+ */
+export declare const composeRequestInterceptors: (interceptors: RequestInterceptor[]) => (request: Request) => Promise<Request>;
+/**
+ * Composes response interceptors.
+ *
+ * @param interceptors - A list of response interceptors
+ * @returns An async composed interceptor
+ *
+ * @internal
+ */
+export declare const composeResponseInterceptors: (interceptors: ResponseInterceptor[]) => (response: Response) => Promise<Response>;
+/**
+ * Compose response error interceptors.
+ *
+ * @internal
+ */
+export declare const composeResponseErrorInterceptors: (interceptors: ResponseErrorInterceptor[]) => (request: Request, error: unknown) => Promise<unknown>;

@@ -1,0 +1,2 @@
+import type { ListPublicCatalogProductsResponse } from './types.gen';
+export declare const unmarshalListPublicCatalogProductsResponse: (data: unknown) => ListPublicCatalogProductsResponse;

@@ -1,0 +1,61 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const ContractApiCheckContractSignatureRequest = {
+  contractName: {
+    minLength: 1
+  }
+};
+const ContractApiCreateContractSignatureRequest = {
+  contractName: {
+    minLength: 1
+  }
+};
+const ContractApiListContractSignaturesRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  }
+};
+const ProjectApiCreateProjectRequest = {
+  description: {
+    maxLength: 200
+  },
+  name: {
+    maxLength: 64,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9\._\- ]+$/
+  }
+};
+const ProjectApiListProjectsRequest = {
+  name: {
+    maxLength: 64,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9\._\- ]+$/
+  },
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  }
+};
+const ProjectApiUpdateProjectRequest = {
+  description: {
+    maxLength: 200
+  },
+  name: {
+    maxLength: 64,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9\._\- ]+$/
+  }
+};
+exports.ContractApiCheckContractSignatureRequest = ContractApiCheckContractSignatureRequest;
+exports.ContractApiCreateContractSignatureRequest = ContractApiCreateContractSignatureRequest;
+exports.ContractApiListContractSignaturesRequest = ContractApiListContractSignaturesRequest;
+exports.ProjectApiCreateProjectRequest = ProjectApiCreateProjectRequest;
+exports.ProjectApiListProjectsRequest = ProjectApiListProjectsRequest;
+exports.ProjectApiUpdateProjectRequest = ProjectApiUpdateProjectRequest;

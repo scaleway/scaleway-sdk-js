@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const GATEWAY_NETWORK_TRANSIENT_STATUSES = [
+  "attaching",
+  "configuring",
+  "detaching"
+];
+const GATEWAY_TRANSIENT_STATUSES = [
+  "allocating",
+  "configuring",
+  "stopping",
+  "deleting"
+];
+exports.GATEWAY_NETWORK_TRANSIENT_STATUSES = GATEWAY_NETWORK_TRANSIENT_STATUSES;
+exports.GATEWAY_TRANSIENT_STATUSES = GATEWAY_TRANSIENT_STATUSES;

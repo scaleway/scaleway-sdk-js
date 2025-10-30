@@ -1,0 +1,32 @@
+import type { JSONObject } from '../../../helpers/json.js';
+import { ScalewayError } from '../scw-error.js';
+/**
+ * Quota policy of {@link TooManyRequestsError}.
+ *
+ * @public
+ */
+export interface TooManyRequestsQuotaPolicy {
+    quota: number;
+    windowSeconds?: number;
+}
+/**
+ * TooManyRequestsError error happens when fetching too many times a resource.
+ *
+ * @public
+ */
+export declare class TooManyRequestsError extends ScalewayError {
+    readonly status: number;
+    readonly body: JSONObject;
+    readonly helpMessage: string;
+    readonly limit?: TooManyRequestsQuotaPolicy | undefined;
+    /** The number of seconds until the quota resets */
+    readonly resetSeconds?: number | undefined;
+    /** The timestamp when the quota resets */
+    readonly resetAt?: Date | undefined;
+    constructor(status: number, body: JSONObject, helpMessage: string, limit?: TooManyRequestsQuotaPolicy | undefined, 
+    /** The number of seconds until the quota resets */
+    resetSeconds?: number | undefined, 
+    /** The timestamp when the quota resets */
+    resetAt?: Date | undefined);
+    static fromJSON(status: number, obj: Readonly<JSONObject>): TooManyRequestsError | null;
+}

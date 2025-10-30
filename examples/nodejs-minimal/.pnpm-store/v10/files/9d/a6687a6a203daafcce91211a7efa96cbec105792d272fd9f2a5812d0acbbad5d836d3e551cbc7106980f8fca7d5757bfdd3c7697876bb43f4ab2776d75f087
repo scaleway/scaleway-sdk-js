@@ -1,0 +1,72 @@
+export declare const ControlPanelApiListControlPanelsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const DatabaseApiListDatabaseUsersRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const DatabaseApiListDatabasesRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const FtpAccountApiListFtpAccountsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const HostingApiListHostingsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const MailAccountApiListMailAccountsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const OfferApiListOffersRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const WebsiteApiListWebsitesRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};

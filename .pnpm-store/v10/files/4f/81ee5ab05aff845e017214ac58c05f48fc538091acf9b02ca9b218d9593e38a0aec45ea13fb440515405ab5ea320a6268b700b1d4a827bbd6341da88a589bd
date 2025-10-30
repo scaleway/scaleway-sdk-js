@@ -1,0 +1,16 @@
+const INSTANCE_TRANSIENT_STATUSES = [
+  "provisioning",
+  "configuring",
+  "deleting",
+  "initializing",
+  "snapshotting"
+];
+const SNAPSHOT_TRANSIENT_STATUSES = [
+  "creating",
+  "restoring",
+  "deleting"
+];
+export {
+  INSTANCE_TRANSIENT_STATUSES,
+  SNAPSHOT_TRANSIENT_STATUSES
+};

@@ -1,0 +1,104 @@
+import type { Money, ScwFile, ServiceInfo, TimeSeries, TimeSeriesPoint } from './custom-types.js';
+import { Decimal } from './custom-types.js';
+/**
+ * Unmarshals {@link Money}
+ *
+ * @internal
+ */
+export declare const unmarshalMoney: (data: unknown) => Money;
+/**
+ * Unmarshals {@link ServiceInfo}.
+ *
+ * @internal
+ */
+export declare const unmarshalServiceInfo: (data: unknown) => ServiceInfo;
+/**
+ * Unmarshals {@link ScwFile}.
+ *
+ * @internal
+ */
+export declare const unmarshalScwFile: (data: unknown) => ScwFile;
+/**
+ * Unmarshals {@link TimeSeriesPoint}
+ *
+ * @remarks To optimize the size of this message,
+ * the JSON is compressed in an array instead of a dictionary.
+ * Example: `["2019-08-08T15:00:00Z", 0.2]`.
+ *
+ * @internal
+ */
+export declare const unmarshalTimeSeriesPoint: (data: unknown) => TimeSeriesPoint;
+/**
+ * Unmarshals {@link TimeSeries}
+ *
+ * @internal
+ */
+export declare const unmarshalTimeSeries: (data: unknown) => TimeSeries;
+/**
+ * Unmarshals {@link Decimal}
+ *
+ * @internal
+ */
+export declare const unmarshalDecimal: (data: unknown) => Decimal | null;
+/**
+ * Marshals {@link ScwFile}.
+ *
+ * @internal
+ */
+export declare const marshalScwFile: (obj: ScwFile) => Record<string, unknown>;
+/**
+ * Marshals {@link Blob}.
+ *
+ * @internal
+ */
+export declare const marshalBlobToScwFile: (blob: Blob) => Promise<Record<string, unknown>>;
+/**
+ * Marshals {@link Money}
+ *
+ * @internal
+ */
+export declare const marshalMoney: (obj: Money) => Record<string, unknown>;
+/**
+ * Marshals {@link TimeSeriesPoint}
+ *
+ * @internal
+ */
+export declare const marshalTimeSeriesPoint: (obj: TimeSeriesPoint) => Record<string, unknown>;
+/**
+ * Marshals {@link TimeSeries}
+ *
+ * @internal
+ */
+export declare const marshalTimeSeries: (obj: TimeSeries) => Record<string, unknown>;
+/**
+ * Marshals {@link Decimal}
+ *
+ * @internal
+ */
+export declare const marshalDecimal: (obj: Decimal) => {
+    value: string;
+};
+/**
+ * Unmarshals record to convert iso dates from string to Dates.
+ *
+ * @param obj - The input
+ * @param keys - The keys requiring a conversion
+ * @returns The updated input
+ *
+ * @internal
+ */
+export declare const unmarshalDates: <T>(obj: unknown, keys: string[]) => T;
+/**
+ * Unmarshals input to a record with camilized keys and instanciated Date.
+ *
+ * @param obj - The input
+ * @param ignoreKeys - The keys which should be not be transformed
+ * @param dateKeys - The keys which should be transformed to Date
+ * @returns The record
+ *
+ * @throws TypeError
+ * Thrown if the input isn't {@link JSONObject}.
+ *
+ * @internal
+ */
+export declare const unmarshalAnyRes: <T>(obj: unknown, ignoreKeys?: string[], dateKeys?: string[]) => T;

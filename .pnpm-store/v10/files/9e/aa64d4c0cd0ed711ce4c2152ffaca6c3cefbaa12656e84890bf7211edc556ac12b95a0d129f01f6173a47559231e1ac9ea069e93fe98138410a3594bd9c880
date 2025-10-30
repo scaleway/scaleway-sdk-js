@@ -1,0 +1,44 @@
+{
+  "name": "sembear",
+  "version": "0.7.0",
+  "main": "dist/sembear.cjs.js",
+  "module": "dist/sembear.esm.js",
+  "exports": {
+    ".": {
+      "types": "./dist/sembear.cjs.js",
+      "module": "./dist/sembear.esm.js",
+      "default": "./dist/sembear.cjs.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "repository": "https://github.com/emmatown/sembear",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/jest": "^24.0.18",
+    "@types/js-combinatorics": "^0.5.31",
+    "@types/semver": "^7.3.9",
+    "jest": "^24.9.0",
+    "js-combinatorics": "^0.5.4",
+    "@preconstruct/cli": "^2.8.9",
+    "typescript": "^3.6.2"
+  },
+  "dependencies": {
+    "semver": "^7.3.5"
+  },
+  "preconstruct": {
+    "exports": true,
+    "___experimentalFlags_WILL_CHANGE_IN_PATCH": {
+      "importsConditions": true
+    }
+  },
+  "scripts": {
+    "prepublishOnly": "preconstruct build"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}

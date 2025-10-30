@@ -1,0 +1,288 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const randomName = require("@scaleway/random-name");
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalGatewayNetwork = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GatewayNetwork' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    gatewayId: data.gateway_id,
+    id: data.id,
+    ipamIpId: data.ipam_ip_id,
+    macAddress: data.mac_address,
+    masqueradeEnabled: data.masquerade_enabled,
+    privateNetworkId: data.private_network_id,
+    pushDefaultRoute: data.push_default_route,
+    status: data.status,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalIP = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'IP' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    address: data.address,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    gatewayId: data.gateway_id,
+    id: data.id,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    reverse: data.reverse,
+    tags: data.tags,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalGateway = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Gateway' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    bandwidth: data.bandwidth,
+    bastionAllowedIps: data.bastion_allowed_ips,
+    bastionEnabled: data.bastion_enabled,
+    bastionPort: data.bastion_port,
+    canUpgradeTo: data.can_upgrade_to,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    gatewayNetworks: sdkClient.unmarshalArrayOfObject(
+      data.gateway_networks,
+      unmarshalGatewayNetwork
+    ),
+    id: data.id,
+    ipv4: data.ipv4 ? unmarshalIP(data.ipv4) : void 0,
+    isLegacy: data.is_legacy,
+    name: data.name,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    smtpEnabled: data.smtp_enabled,
+    status: data.status,
+    tags: data.tags,
+    type: data.type,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    version: data.version,
+    zone: data.zone
+  };
+};
+const unmarshalPatRule = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PatRule' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    gatewayId: data.gateway_id,
+    id: data.id,
+    privateIp: data.private_ip,
+    privatePort: data.private_port,
+    protocol: data.protocol,
+    publicPort: data.public_port,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalAddBastionAllowedIPsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AddBastionAllowedIPsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    ipRanges: data.ip_ranges
+  };
+};
+const unmarshalListGatewayNetworksResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListGatewayNetworksResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    gatewayNetworks: sdkClient.unmarshalArrayOfObject(
+      data.gateway_networks,
+      unmarshalGatewayNetwork
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalGatewayType = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GatewayType' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    bandwidth: data.bandwidth,
+    name: data.name,
+    zone: data.zone
+  };
+};
+const unmarshalListGatewayTypesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListGatewayTypesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    types: sdkClient.unmarshalArrayOfObject(data.types, unmarshalGatewayType)
+  };
+};
+const unmarshalListGatewaysResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListGatewaysResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    gateways: sdkClient.unmarshalArrayOfObject(data.gateways, unmarshalGateway),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListIPsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListIPsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    ips: sdkClient.unmarshalArrayOfObject(data.ips, unmarshalIP),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListPatRulesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPatRulesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    patRules: sdkClient.unmarshalArrayOfObject(data.pat_rules, unmarshalPatRule),
+    totalCount: data.total_count
+  };
+};
+const unmarshalSetBastionAllowedIPsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetBastionAllowedIPsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    ipRanges: data.ip_ranges
+  };
+};
+const unmarshalSetPatRulesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetPatRulesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    patRules: sdkClient.unmarshalArrayOfObject(data.pat_rules, unmarshalPatRule)
+  };
+};
+const marshalAddBastionAllowedIPsRequest = (request, defaults) => ({
+  ip_range: request.ipRange
+});
+const marshalCreateGatewayNetworkRequest = (request, defaults) => ({
+  enable_masquerade: request.enableMasquerade,
+  gateway_id: request.gatewayId,
+  ipam_ip_id: request.ipamIpId,
+  private_network_id: request.privateNetworkId,
+  push_default_route: request.pushDefaultRoute
+});
+const marshalCreateGatewayRequest = (request, defaults) => ({
+  bastion_port: request.bastionPort,
+  enable_bastion: request.enableBastion,
+  enable_smtp: request.enableSmtp,
+  ip_id: request.ipId,
+  name: request.name || randomName("gw"),
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags,
+  type: request.type
+});
+const marshalCreateIPRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags
+});
+const marshalCreatePatRuleRequest = (request, defaults) => ({
+  gateway_id: request.gatewayId,
+  private_ip: request.privateIp,
+  private_port: request.privatePort,
+  protocol: request.protocol,
+  public_port: request.publicPort
+});
+const marshalSetBastionAllowedIPsRequest = (request, defaults) => ({
+  ip_ranges: request.ipRanges
+});
+const marshalSetPatRulesRequestRule = (request, defaults) => ({
+  private_ip: request.privateIp,
+  private_port: request.privatePort,
+  protocol: request.protocol,
+  public_port: request.publicPort
+});
+const marshalSetPatRulesRequest = (request, defaults) => ({
+  gateway_id: request.gatewayId,
+  pat_rules: request.patRules.map(
+    (elt) => marshalSetPatRulesRequestRule(elt)
+  )
+});
+const marshalUpdateGatewayNetworkRequest = (request, defaults) => ({
+  enable_masquerade: request.enableMasquerade,
+  ipam_ip_id: request.ipamIpId,
+  push_default_route: request.pushDefaultRoute
+});
+const marshalUpdateGatewayRequest = (request, defaults) => ({
+  bastion_port: request.bastionPort,
+  enable_bastion: request.enableBastion,
+  enable_smtp: request.enableSmtp,
+  name: request.name,
+  tags: request.tags
+});
+const marshalUpdateIPRequest = (request, defaults) => ({
+  gateway_id: request.gatewayId,
+  reverse: request.reverse,
+  tags: request.tags
+});
+const marshalUpdatePatRuleRequest = (request, defaults) => ({
+  private_ip: request.privateIp,
+  private_port: request.privatePort,
+  protocol: request.protocol,
+  public_port: request.publicPort
+});
+const marshalUpgradeGatewayRequest = (request, defaults) => ({
+  type: request.type
+});
+exports.marshalAddBastionAllowedIPsRequest = marshalAddBastionAllowedIPsRequest;
+exports.marshalCreateGatewayNetworkRequest = marshalCreateGatewayNetworkRequest;
+exports.marshalCreateGatewayRequest = marshalCreateGatewayRequest;
+exports.marshalCreateIPRequest = marshalCreateIPRequest;
+exports.marshalCreatePatRuleRequest = marshalCreatePatRuleRequest;
+exports.marshalSetBastionAllowedIPsRequest = marshalSetBastionAllowedIPsRequest;
+exports.marshalSetPatRulesRequest = marshalSetPatRulesRequest;
+exports.marshalUpdateGatewayNetworkRequest = marshalUpdateGatewayNetworkRequest;
+exports.marshalUpdateGatewayRequest = marshalUpdateGatewayRequest;
+exports.marshalUpdateIPRequest = marshalUpdateIPRequest;
+exports.marshalUpdatePatRuleRequest = marshalUpdatePatRuleRequest;
+exports.marshalUpgradeGatewayRequest = marshalUpgradeGatewayRequest;
+exports.unmarshalAddBastionAllowedIPsResponse = unmarshalAddBastionAllowedIPsResponse;
+exports.unmarshalGateway = unmarshalGateway;
+exports.unmarshalGatewayNetwork = unmarshalGatewayNetwork;
+exports.unmarshalIP = unmarshalIP;
+exports.unmarshalListGatewayNetworksResponse = unmarshalListGatewayNetworksResponse;
+exports.unmarshalListGatewayTypesResponse = unmarshalListGatewayTypesResponse;
+exports.unmarshalListGatewaysResponse = unmarshalListGatewaysResponse;
+exports.unmarshalListIPsResponse = unmarshalListIPsResponse;
+exports.unmarshalListPatRulesResponse = unmarshalListPatRulesResponse;
+exports.unmarshalPatRule = unmarshalPatRule;
+exports.unmarshalSetBastionAllowedIPsResponse = unmarshalSetBastionAllowedIPsResponse;
+exports.unmarshalSetPatRulesResponse = unmarshalSetPatRulesResponse;

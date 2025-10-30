@@ -1,0 +1,9 @@
+import type { Category, Image, ListCategoriesResponse, ListImagesResponse, ListLocalImagesResponse, ListVersionsResponse, LocalImage, Version } from './types.gen';
+export declare const unmarshalCategory: (data: unknown) => Category;
+export declare const unmarshalImage: (data: unknown) => Image;
+export declare const unmarshalLocalImage: (data: unknown) => LocalImage;
+export declare const unmarshalVersion: (data: unknown) => Version;
+export declare const unmarshalListCategoriesResponse: (data: unknown) => ListCategoriesResponse;
+export declare const unmarshalListImagesResponse: (data: unknown) => ListImagesResponse;
+export declare const unmarshalListLocalImagesResponse: (data: unknown) => ListLocalImagesResponse;
+export declare const unmarshalListVersionsResponse: (data: unknown) => ListVersionsResponse;

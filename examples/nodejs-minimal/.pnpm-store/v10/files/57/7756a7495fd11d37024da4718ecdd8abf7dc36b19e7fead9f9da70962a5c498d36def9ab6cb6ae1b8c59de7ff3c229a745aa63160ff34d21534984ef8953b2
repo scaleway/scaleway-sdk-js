@@ -1,0 +1,100 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { CheckContractSignatureResponse, ContractApiCheckContractSignatureRequest, ContractApiCreateContractSignatureRequest, ContractApiDownloadContractSignatureRequest, ContractApiListContractSignaturesRequest, ContractApiValidateContractSignatureRequest, ContractSignature, ListContractSignaturesResponse, ListProjectsResponse, Project, ProjectApiCreateProjectRequest, ProjectApiDeleteProjectRequest, ProjectApiGetProjectRequest, ProjectApiListProjectsRequest, ProjectApiSetProjectQualificationRequest, ProjectApiUpdateProjectRequest, ProjectQualification } from './types.gen';
+/**
+ * Contract API.
+
+The Contract API allows you to manage contracts.
+ */
+export declare class ContractAPI extends ParentAPI {
+    /**
+     * Download a contract content.
+     *
+     * @param request - The request {@link ContractApiDownloadContractSignatureRequest}
+     * @returns A Promise of Blob
+     */
+    downloadContractSignature: (request: Readonly<ContractApiDownloadContractSignatureRequest>) => Promise<Blob>;
+    /**
+     * Create a signature for your Organization for the latest version of the requested contract.
+     *
+     * @param request - The request {@link ContractApiCreateContractSignatureRequest}
+     * @returns A Promise of ContractSignature
+     */
+    createContractSignature: (request: Readonly<ContractApiCreateContractSignatureRequest>) => Promise<ContractSignature>;
+    /**
+     * Sign a contract for your Organization.
+     *
+     * @param request - The request {@link ContractApiValidateContractSignatureRequest}
+     * @returns A Promise of ContractSignature
+     */
+    validateContractSignature: (request: Readonly<ContractApiValidateContractSignatureRequest>) => Promise<ContractSignature>;
+    /**
+     * Check if a contract is signed for your Organization.
+     *
+     * @param request - The request {@link ContractApiCheckContractSignatureRequest}
+     * @returns A Promise of CheckContractSignatureResponse
+     */
+    checkContractSignature: (request: Readonly<ContractApiCheckContractSignatureRequest>) => Promise<CheckContractSignatureResponse>;
+    protected pageOfListContractSignatures: (request?: Readonly<ContractApiListContractSignaturesRequest>) => Promise<ListContractSignaturesResponse>;
+    /**
+     * List contract signatures for an Organization.
+     *
+     * @param request - The request {@link ContractApiListContractSignaturesRequest}
+     * @returns A Promise of ListContractSignaturesResponse
+     */
+    listContractSignatures: (request?: Readonly<ContractApiListContractSignaturesRequest>) => Promise<ListContractSignaturesResponse> & {
+        all: () => Promise<ContractSignature[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<ContractSignature[], void, void>;
+    };
+}
+/**
+ * Account API.
+
+This API allows you to manage your Scaleway Projects.
+ */
+export declare class ProjectAPI extends ParentAPI {
+    /**
+     * Create a new Project for an Organization. Generate a new Project for an Organization, specifying its configuration including name and description.
+     *
+     * @param request - The request {@link ProjectApiCreateProjectRequest}
+     * @returns A Promise of Project
+     */
+    createProject: (request: Readonly<ProjectApiCreateProjectRequest>) => Promise<Project>;
+    protected pageOfListProjects: (request?: Readonly<ProjectApiListProjectsRequest>) => Promise<ListProjectsResponse>;
+    /**
+     * List all Projects of an Organization. List all Projects of an Organization. The response will include the total number of Projects as well as their associated Organizations, names, and IDs. Other information includes the creation and update date of the Project.
+     *
+     * @param request - The request {@link ProjectApiListProjectsRequest}
+     * @returns A Promise of ListProjectsResponse
+     */
+    listProjects: (request?: Readonly<ProjectApiListProjectsRequest>) => Promise<ListProjectsResponse> & {
+        all: () => Promise<Project[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Project[], void, void>;
+    };
+    /**
+     * Get an existing Project. Retrieve information about an existing Project, specified by its Project ID. Its full details, including ID, name and description, are returned in the response object.
+     *
+     * @param request - The request {@link ProjectApiGetProjectRequest}
+     * @returns A Promise of Project
+     */
+    getProject: (request?: Readonly<ProjectApiGetProjectRequest>) => Promise<Project>;
+    /**
+     * Delete an existing Project. Delete an existing Project, specified by its Project ID. The Project needs to be empty (meaning there are no resources left in it) to be deleted effectively. Note that deleting a Project is permanent, and cannot be undone.
+     *
+     * @param request - The request {@link ProjectApiDeleteProjectRequest}
+     */
+    deleteProject: (request?: Readonly<ProjectApiDeleteProjectRequest>) => Promise<void>;
+    /**
+     * Update Project. Update the parameters of an existing Project, specified by its Project ID. These parameters include the name and description.
+     *
+     * @param request - The request {@link ProjectApiUpdateProjectRequest}
+     * @returns A Promise of Project
+     */
+    updateProject: (request?: Readonly<ProjectApiUpdateProjectRequest>) => Promise<Project>;
+    /**
+     * Set project use case. Set the project use case for a new or existing Project, specified by its Project ID. You can customize the use case, sub use case, and architecture type you want to use in the Project.
+     *
+     * @param request - The request {@link ProjectApiSetProjectQualificationRequest}
+     * @returns A Promise of ProjectQualification
+     */
+    setProjectQualification: (request?: Readonly<ProjectApiSetProjectQualificationRequest>) => Promise<ProjectQualification>;
+}

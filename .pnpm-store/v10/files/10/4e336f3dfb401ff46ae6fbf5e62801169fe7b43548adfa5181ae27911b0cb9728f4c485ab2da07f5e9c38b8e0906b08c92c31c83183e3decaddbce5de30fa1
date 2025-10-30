@@ -1,0 +1,14 @@
+const HealthCheckHttpConfig = {
+  hostHeader: {
+    pattern: /^[^\s]+$/
+  }
+};
+const HealthCheckHttpsConfig = {
+  hostHeader: {
+    pattern: /^[^\s]+$/
+  }
+};
+export {
+  HealthCheckHttpConfig,
+  HealthCheckHttpsConfig
+};

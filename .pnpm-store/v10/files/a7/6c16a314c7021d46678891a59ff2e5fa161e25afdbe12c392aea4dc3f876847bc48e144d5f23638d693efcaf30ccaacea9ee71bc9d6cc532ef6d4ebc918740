@@ -1,0 +1,59 @@
+export declare const RegionalApiCreateDataSourceRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+    retentionDays: {
+        greaterThanOrEqual: number;
+        ignoreEmpty: boolean;
+        lessThanOrEqual: number;
+    };
+};
+export declare const RegionalApiCreateTokenRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+};
+export declare const RegionalApiListContactPointsRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const RegionalApiListDataSourcesRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const RegionalApiListTokensRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const RegionalApiUpdateDataSourceRequest: {
+    name: {
+        ignoreEmpty: boolean;
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+    retentionDays: {
+        greaterThanOrEqual: number;
+        ignoreEmpty: boolean;
+        lessThanOrEqual: number;
+    };
+};

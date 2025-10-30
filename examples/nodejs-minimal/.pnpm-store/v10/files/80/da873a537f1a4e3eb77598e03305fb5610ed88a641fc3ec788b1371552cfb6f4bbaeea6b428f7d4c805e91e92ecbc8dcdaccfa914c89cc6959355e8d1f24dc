@@ -1,0 +1,719 @@
+import randomName from "@scaleway/random-name";
+import { resolveOneOf, isJSONObject, unmarshalDate, unmarshalArrayOfObject } from "@scaleway/sdk-client";
+const unmarshalJWT = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'JWT' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    audienceId: data.audience_id,
+    createdAt: unmarshalDate(data.created_at),
+    expiresAt: unmarshalDate(data.expires_at),
+    ip: data.ip,
+    issuerId: data.issuer_id,
+    jti: data.jti,
+    updatedAt: unmarshalDate(data.updated_at),
+    userAgent: data.user_agent
+  };
+};
+const unmarshalAPIKey = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'APIKey' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    accessKey: data.access_key,
+    applicationId: data.application_id,
+    createdAt: unmarshalDate(data.created_at),
+    creationIp: data.creation_ip,
+    defaultProjectId: data.default_project_id,
+    deletable: data.deletable,
+    description: data.description,
+    editable: data.editable,
+    expiresAt: unmarshalDate(data.expires_at),
+    managed: data.managed,
+    secretKey: data.secret_key,
+    updatedAt: unmarshalDate(data.updated_at),
+    userId: data.user_id
+  };
+};
+const unmarshalApplication = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Application' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    deletable: data.deletable,
+    description: data.description,
+    editable: data.editable,
+    id: data.id,
+    managed: data.managed,
+    name: data.name,
+    nbApiKeys: data.nb_api_keys,
+    organizationId: data.organization_id,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalGroup = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Group' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    applicationIds: data.application_ids,
+    createdAt: unmarshalDate(data.created_at),
+    deletable: data.deletable,
+    description: data.description,
+    editable: data.editable,
+    id: data.id,
+    managed: data.managed,
+    name: data.name,
+    organizationId: data.organization_id,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+    userIds: data.user_ids
+  };
+};
+const unmarshalLog = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Log' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    action: data.action,
+    bearerId: data.bearer_id,
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    ip: data.ip,
+    organizationId: data.organization_id,
+    resourceId: data.resource_id,
+    resourceType: data.resource_type,
+    userAgent: data.user_agent
+  };
+};
+const unmarshalPolicy = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Policy' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    applicationId: data.application_id,
+    createdAt: unmarshalDate(data.created_at),
+    deletable: data.deletable,
+    description: data.description,
+    editable: data.editable,
+    groupId: data.group_id,
+    id: data.id,
+    managed: data.managed,
+    name: data.name,
+    nbPermissionSets: data.nb_permission_sets,
+    nbRules: data.nb_rules,
+    nbScopes: data.nb_scopes,
+    noPrincipal: data.no_principal,
+    organizationId: data.organization_id,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+    userId: data.user_id
+  };
+};
+const unmarshalQuotumLimit = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'QuotumLimit' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    global: data.global,
+    limit: data.limit,
+    region: data.region,
+    unlimited: data.unlimited,
+    zone: data.zone
+  };
+};
+const unmarshalQuotum = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Quotum' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    description: data.description,
+    limit: data.limit,
+    limits: unmarshalArrayOfObject(data.limits, unmarshalQuotumLimit),
+    localityType: data.locality_type,
+    name: data.name,
+    prettyName: data.pretty_name,
+    unit: data.unit,
+    unlimited: data.unlimited
+  };
+};
+const unmarshalSSHKey = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SSHKey' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    disabled: data.disabled,
+    fingerprint: data.fingerprint,
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    publicKey: data.public_key,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalUser = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'User' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    accountRootUserId: data.account_root_user_id,
+    createdAt: unmarshalDate(data.created_at),
+    deletable: data.deletable,
+    email: data.email,
+    firstName: data.first_name,
+    id: data.id,
+    lastLoginAt: unmarshalDate(data.last_login_at),
+    lastName: data.last_name,
+    locale: data.locale,
+    locked: data.locked,
+    mfa: data.mfa,
+    organizationId: data.organization_id,
+    phoneNumber: data.phone_number,
+    status: data.status,
+    tags: data.tags,
+    twoFactorEnabled: data.two_factor_enabled,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at),
+    username: data.username
+  };
+};
+const unmarshalEncodedJWT = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EncodedJWT' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    jwt: data.jwt ? unmarshalJWT(data.jwt) : void 0,
+    renewToken: data.renew_token,
+    token: data.token
+  };
+};
+const unmarshalConnectionConnectedOrganization = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ConnectionConnectedOrganization' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    id: data.id,
+    locked: data.locked,
+    name: data.name
+  };
+};
+const unmarshalConnectionConnectedUser = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ConnectionConnectedUser' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    id: data.id,
+    type: data.type,
+    username: data.username
+  };
+};
+const unmarshalConnection = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Connection' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    organization: data.organization ? unmarshalConnectionConnectedOrganization(data.organization) : void 0,
+    user: data.user ? unmarshalConnectionConnectedUser(data.user) : void 0
+  };
+};
+const unmarshalGetUserConnectionsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetUserConnectionsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    connections: unmarshalArrayOfObject(data.connections, unmarshalConnection)
+  };
+};
+const unmarshalInitiateUserConnectionResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InitiateUserConnectionResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    token: data.token
+  };
+};
+const unmarshalListAPIKeysResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListAPIKeysResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    apiKeys: unmarshalArrayOfObject(data.api_keys, unmarshalAPIKey),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListApplicationsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListApplicationsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    applications: unmarshalArrayOfObject(
+      data.applications,
+      unmarshalApplication
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalGracePeriod = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GracePeriod' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    expiresAt: unmarshalDate(data.expires_at),
+    type: data.type
+  };
+};
+const unmarshalListGracePeriodsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListGracePeriodsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    gracePeriods: unmarshalArrayOfObject(
+      data.grace_periods,
+      unmarshalGracePeriod
+    )
+  };
+};
+const unmarshalListGroupsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListGroupsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    groups: unmarshalArrayOfObject(data.groups, unmarshalGroup),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListJWTsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListJWTsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    jwts: unmarshalArrayOfObject(data.jwts, unmarshalJWT),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListLogsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListLogsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    logs: unmarshalArrayOfObject(data.logs, unmarshalLog),
+    totalCount: data.total_count
+  };
+};
+const unmarshalPermissionSet = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PermissionSet' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    categories: data.categories,
+    description: data.description,
+    id: data.id,
+    name: data.name,
+    scopeType: data.scope_type
+  };
+};
+const unmarshalListPermissionSetsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPermissionSetsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    permissionSets: unmarshalArrayOfObject(
+      data.permission_sets,
+      unmarshalPermissionSet
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListPoliciesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPoliciesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    policies: unmarshalArrayOfObject(data.policies, unmarshalPolicy),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListQuotaResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListQuotaResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    quota: unmarshalArrayOfObject(data.quota, unmarshalQuotum),
+    totalCount: data.total_count
+  };
+};
+const unmarshalRule = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Rule' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    accountRootUserId: data.account_root_user_id,
+    condition: data.condition,
+    id: data.id,
+    organizationId: data.organization_id,
+    permissionSetNames: data.permission_set_names,
+    permissionSetsScopeType: data.permission_sets_scope_type,
+    projectIds: data.project_ids
+  };
+};
+const unmarshalListRulesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRulesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    rules: unmarshalArrayOfObject(data.rules, unmarshalRule),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListSSHKeysResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSSHKeysResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    sshKeys: unmarshalArrayOfObject(data.ssh_keys, unmarshalSSHKey),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListUsersResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListUsersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    totalCount: data.total_count,
+    users: unmarshalArrayOfObject(data.users, unmarshalUser)
+  };
+};
+const unmarshalMFAOTP = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'MFAOTP' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    secret: data.secret
+  };
+};
+const unmarshalOrganization = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Organization' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    alias: data.alias,
+    id: data.id,
+    name: data.name
+  };
+};
+const unmarshalOrganizationSecuritySettings = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OrganizationSecuritySettings' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    enforcePasswordRenewal: data.enforce_password_renewal,
+    gracePeriodDuration: data.grace_period_duration,
+    loginAttemptsBeforeLocked: data.login_attempts_before_locked
+  };
+};
+const unmarshalSetRulesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetRulesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    rules: unmarshalArrayOfObject(data.rules, unmarshalRule)
+  };
+};
+const unmarshalValidateUserMFAOTPResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ValidateUserMFAOTPResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    recoveryCodes: data.recovery_codes
+  };
+};
+const marshalAddGroupMemberRequest = (request, defaults) => ({
+  ...resolveOneOf([
+    { param: "user_id", value: request.userId },
+    { param: "application_id", value: request.applicationId }
+  ])
+});
+const marshalAddGroupMembersRequest = (request, defaults) => ({
+  application_ids: request.applicationIds,
+  user_ids: request.userIds
+});
+const marshalCreateAPIKeyRequest = (request, defaults) => ({
+  default_project_id: request.defaultProjectId,
+  description: request.description,
+  expires_at: request.expiresAt,
+  ...resolveOneOf([
+    { param: "application_id", value: request.applicationId },
+    { param: "user_id", value: request.userId }
+  ])
+});
+const marshalCreateApplicationRequest = (request, defaults) => ({
+  description: request.description,
+  name: request.name || randomName("app"),
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+  tags: request.tags
+});
+const marshalCreateGroupRequest = (request, defaults) => ({
+  description: request.description,
+  name: request.name || randomName("grp"),
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+  tags: request.tags
+});
+const marshalCreateJWTRequest = (request, defaults) => ({
+  referrer: request.referrer,
+  user_id: request.userId
+});
+const marshalRuleSpecs = (request, defaults) => ({
+  condition: request.condition,
+  permission_set_names: request.permissionSetNames,
+  ...resolveOneOf([
+    { param: "project_ids", value: request.projectIds },
+    { param: "organization_id", value: request.organizationId }
+  ])
+});
+const marshalCreatePolicyRequest = (request, defaults) => ({
+  description: request.description,
+  name: request.name || randomName("pol"),
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+  rules: request.rules !== void 0 ? request.rules.map((elt) => marshalRuleSpecs(elt)) : void 0,
+  tags: request.tags,
+  ...resolveOneOf([
+    { param: "user_id", value: request.userId },
+    { param: "group_id", value: request.groupId },
+    { param: "application_id", value: request.applicationId },
+    { param: "no_principal", value: request.noPrincipal }
+  ])
+});
+const marshalCreateSSHKeyRequest = (request, defaults) => ({
+  name: request.name || randomName("key"),
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  public_key: request.publicKey
+});
+const marshalCreateUserRequestMember = (request, defaults) => ({
+  email: request.email,
+  first_name: request.firstName,
+  last_name: request.lastName,
+  locale: request.locale,
+  password: request.password,
+  phone_number: request.phoneNumber,
+  send_password_email: request.sendPasswordEmail,
+  send_welcome_email: request.sendWelcomeEmail,
+  username: request.username
+});
+const marshalCreateUserRequest = (request, defaults) => ({
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+  tags: request.tags,
+  ...resolveOneOf([
+    { param: "email", value: request.email },
+    {
+      param: "member",
+      value: request.member !== void 0 ? marshalCreateUserRequestMember(request.member) : void 0
+    }
+  ])
+});
+const marshalJoinUserConnectionRequest = (request, defaults) => ({
+  token: request.token
+});
+const marshalRemoveGroupMemberRequest = (request, defaults) => ({
+  ...resolveOneOf([
+    { param: "user_id", value: request.userId },
+    { param: "application_id", value: request.applicationId }
+  ])
+});
+const marshalRemoveUserConnectionRequest = (request, defaults) => ({
+  target_user_id: request.targetUserId
+});
+const marshalSetGroupMembersRequest = (request, defaults) => ({
+  application_ids: request.applicationIds,
+  user_ids: request.userIds
+});
+const marshalSetOrganizationAliasRequest = (request, defaults) => ({
+  alias: request.alias
+});
+const marshalSetRulesRequest = (request, defaults) => ({
+  policy_id: request.policyId,
+  rules: request.rules.map((elt) => marshalRuleSpecs(elt))
+});
+const marshalUpdateAPIKeyRequest = (request, defaults) => ({
+  default_project_id: request.defaultProjectId,
+  description: request.description
+});
+const marshalUpdateApplicationRequest = (request, defaults) => ({
+  description: request.description,
+  name: request.name,
+  tags: request.tags
+});
+const marshalUpdateGroupRequest = (request, defaults) => ({
+  description: request.description,
+  name: request.name,
+  tags: request.tags
+});
+const marshalUpdateOrganizationSecuritySettingsRequest = (request, defaults) => ({
+  enforce_password_renewal: request.enforcePasswordRenewal,
+  grace_period_duration: request.gracePeriodDuration,
+  login_attempts_before_locked: request.loginAttemptsBeforeLocked
+});
+const marshalUpdatePolicyRequest = (request, defaults) => ({
+  description: request.description,
+  name: request.name,
+  tags: request.tags,
+  ...resolveOneOf([
+    { param: "user_id", value: request.userId },
+    { param: "group_id", value: request.groupId },
+    { param: "application_id", value: request.applicationId },
+    { param: "no_principal", value: request.noPrincipal }
+  ])
+});
+const marshalUpdateSSHKeyRequest = (request, defaults) => ({
+  disabled: request.disabled,
+  name: request.name
+});
+const marshalUpdateUserPasswordRequest = (request, defaults) => ({
+  password: request.password
+});
+const marshalUpdateUserRequest = (request, defaults) => ({
+  email: request.email,
+  first_name: request.firstName,
+  last_name: request.lastName,
+  locale: request.locale,
+  phone_number: request.phoneNumber,
+  tags: request.tags
+});
+const marshalUpdateUserUsernameRequest = (request, defaults) => ({
+  username: request.username
+});
+const marshalValidateUserMFAOTPRequest = (request, defaults) => ({
+  one_time_password: request.oneTimePassword
+});
+export {
+  marshalAddGroupMemberRequest,
+  marshalAddGroupMembersRequest,
+  marshalCreateAPIKeyRequest,
+  marshalCreateApplicationRequest,
+  marshalCreateGroupRequest,
+  marshalCreateJWTRequest,
+  marshalCreatePolicyRequest,
+  marshalCreateSSHKeyRequest,
+  marshalCreateUserRequest,
+  marshalJoinUserConnectionRequest,
+  marshalRemoveGroupMemberRequest,
+  marshalRemoveUserConnectionRequest,
+  marshalSetGroupMembersRequest,
+  marshalSetOrganizationAliasRequest,
+  marshalSetRulesRequest,
+  marshalUpdateAPIKeyRequest,
+  marshalUpdateApplicationRequest,
+  marshalUpdateGroupRequest,
+  marshalUpdateOrganizationSecuritySettingsRequest,
+  marshalUpdatePolicyRequest,
+  marshalUpdateSSHKeyRequest,
+  marshalUpdateUserPasswordRequest,
+  marshalUpdateUserRequest,
+  marshalUpdateUserUsernameRequest,
+  marshalValidateUserMFAOTPRequest,
+  unmarshalAPIKey,
+  unmarshalApplication,
+  unmarshalEncodedJWT,
+  unmarshalGetUserConnectionsResponse,
+  unmarshalGroup,
+  unmarshalInitiateUserConnectionResponse,
+  unmarshalJWT,
+  unmarshalListAPIKeysResponse,
+  unmarshalListApplicationsResponse,
+  unmarshalListGracePeriodsResponse,
+  unmarshalListGroupsResponse,
+  unmarshalListJWTsResponse,
+  unmarshalListLogsResponse,
+  unmarshalListPermissionSetsResponse,
+  unmarshalListPoliciesResponse,
+  unmarshalListQuotaResponse,
+  unmarshalListRulesResponse,
+  unmarshalListSSHKeysResponse,
+  unmarshalListUsersResponse,
+  unmarshalLog,
+  unmarshalMFAOTP,
+  unmarshalOrganization,
+  unmarshalOrganizationSecuritySettings,
+  unmarshalPolicy,
+  unmarshalQuotum,
+  unmarshalSSHKey,
+  unmarshalSetRulesResponse,
+  unmarshalUser,
+  unmarshalValidateUserMFAOTPResponse
+};

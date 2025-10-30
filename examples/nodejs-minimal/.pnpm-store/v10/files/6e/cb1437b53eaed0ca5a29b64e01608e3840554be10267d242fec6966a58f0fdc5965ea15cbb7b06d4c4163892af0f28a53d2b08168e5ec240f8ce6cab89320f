@@ -1,0 +1,62 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const CreateSnapshotRequest = {
+  name: {
+    minLength: 1
+  }
+};
+const CreateVolumeRequest = {
+  name: {
+    minLength: 1
+  }
+};
+const ImportSnapshotFromObjectStorageRequest = {
+  name: {
+    minLength: 1
+  }
+};
+const ImportSnapshotFromS3Request = {
+  name: {
+    minLength: 1
+  }
+};
+const ListSnapshotsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListVolumeTypesRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListVolumesRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const Reference = {
+  productResourceType: {
+    minLength: 1
+  }
+};
+exports.CreateSnapshotRequest = CreateSnapshotRequest;
+exports.CreateVolumeRequest = CreateVolumeRequest;
+exports.ImportSnapshotFromObjectStorageRequest = ImportSnapshotFromObjectStorageRequest;
+exports.ImportSnapshotFromS3Request = ImportSnapshotFromS3Request;
+exports.ListSnapshotsRequest = ListSnapshotsRequest;
+exports.ListVolumeTypesRequest = ListVolumeTypesRequest;
+exports.ListVolumesRequest = ListVolumesRequest;
+exports.Reference = Reference;

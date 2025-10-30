@@ -1,0 +1,34 @@
+import type { AllProfilesFromFileParams, Profile, ProfileFromFileParams } from './types';
+/**
+ * Loads profile from environment values.
+ *
+ * @returns The profile filled with values found in the environment
+ *
+ * @public
+ */
+export declare const loadProfileFromEnvironmentValues: () => Profile;
+/**
+ * Loads all the profiles from configuration file.
+ *
+ * @param params - The parameters to load the profile
+ * @returns The profiles filled with values found in the configuration profile
+ *
+ * @throws Error
+ * Thrown if the configuration file couldn't be found.
+ *
+ * @public
+ */
+export declare const loadAllProfilesFromConfigurationFile: (params?: Readonly<AllProfilesFromFileParams>) => Record<string, Profile>;
+/**
+ * Loads profile from configuration file.
+ *
+ * @param params - The parameters to load the profile
+ * @returns The profile filled with values found in the configuration profile
+ *
+ * @throws Error
+ * Thrown if the configuration file couldn't be found,
+ * or if the specified profile can't be found.
+ *
+ * @public
+ */
+export declare const loadProfileFromConfigurationFile: (params?: Readonly<ProfileFromFileParams>) => Profile;

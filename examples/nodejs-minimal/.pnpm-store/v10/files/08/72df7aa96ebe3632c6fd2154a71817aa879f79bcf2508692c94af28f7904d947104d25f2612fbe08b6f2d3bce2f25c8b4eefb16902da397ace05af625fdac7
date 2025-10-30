@@ -1,0 +1,82 @@
+{
+  "name": "@scaleway/sdk",
+  "version": "2.76.7",
+  "description": "Scaleway SDK TS.",
+  "license": "Apache-2.0",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.gen.d.ts",
+      "import": "./dist/index.gen.js",
+      "require": "./dist/index.gen.cjs",
+      "default": "./dist/index.gen.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scaleway/scaleway-sdk-js.git",
+    "directory": "packages/sdk"
+  },
+  "engines": {
+    "node": ">=20.19.1"
+  },
+  "dependencies": {
+    "@scaleway/sdk-applesilicon": "1.2.0",
+    "@scaleway/sdk-account": "1.0.5",
+    "@scaleway/sdk-autoscaling": "1.1.3",
+    "@scaleway/sdk-baremetal": "1.0.5",
+    "@scaleway/sdk-billing": "1.1.0",
+    "@scaleway/sdk-cockpit": "1.4.0",
+    "@scaleway/sdk-block": "1.0.5",
+    "@scaleway/sdk-audit-trail": "1.3.0",
+    "@scaleway/sdk-dedibox": "1.2.1",
+    "@scaleway/sdk-container": "1.5.1",
+    "@scaleway/sdk-domain": "1.0.5",
+    "@scaleway/sdk-edge-services": "1.1.0",
+    "@scaleway/sdk-file": "1.1.0",
+    "@scaleway/sdk-flexibleip": "1.0.5",
+    "@scaleway/sdk-function": "1.4.0",
+    "@scaleway/sdk-iam": "1.3.0",
+    "@scaleway/sdk-inference": "1.0.5",
+    "@scaleway/sdk-instance": "1.1.0",
+    "@scaleway/sdk-iot": "1.0.5",
+    "@scaleway/sdk-interlink": "1.2.0",
+    "@scaleway/sdk-jobs": "1.1.1",
+    "@scaleway/sdk-k8s": "1.5.0",
+    "@scaleway/sdk-ipam": "1.2.1",
+    "@scaleway/sdk-lb": "1.2.1",
+    "@scaleway/sdk-key-manager": "1.2.2",
+    "@scaleway/sdk-marketplace": "1.0.5",
+    "@scaleway/sdk-mnq": "1.0.5",
+    "@scaleway/sdk-mongodb": "1.1.0",
+    "@scaleway/sdk-product-catalog": "1.6.0",
+    "@scaleway/sdk-qaas": "1.2.0",
+    "@scaleway/sdk-rdb": "1.1.0",
+    "@scaleway/sdk-registry": "1.0.5",
+    "@scaleway/sdk-redis": "1.0.5",
+    "@scaleway/sdk-secret": "1.2.3",
+    "@scaleway/sdk-std": "1.0.5",
+    "@scaleway/sdk-serverless-sqldb": "1.0.5",
+    "@scaleway/sdk-test": "1.0.5",
+    "@scaleway/sdk-vpc": "1.2.0",
+    "@scaleway/sdk-tem": "1.0.5",
+    "@scaleway/sdk-vpcgw": "1.0.5",
+    "@scaleway/sdk-webhosting": "1.1.3"
+  },
+  "devDependencies": {
+    "@scaleway/sdk-client": "^1.3.0"
+  },
+  "peerDependencies": {
+    "@scaleway/sdk-client": "^1.3.0"
+  },
+  "scripts": {
+    "package:check": "pnpm publint",
+    "typecheck": "tsc --noEmit",
+    "type:generate": "tsc --declaration -p tsconfig.build.json",
+    "build": "vite build --config vite.config.ts && pnpm run type:generate",
+    "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
+  }
+}

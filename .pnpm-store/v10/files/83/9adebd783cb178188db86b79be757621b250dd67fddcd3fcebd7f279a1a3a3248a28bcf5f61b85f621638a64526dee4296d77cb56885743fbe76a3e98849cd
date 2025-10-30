@@ -1,0 +1,6 @@
+export declare const ListIPsRequest: {
+    resourceName: {
+        maxLength: number;
+        minLength: number;
+    };
+};

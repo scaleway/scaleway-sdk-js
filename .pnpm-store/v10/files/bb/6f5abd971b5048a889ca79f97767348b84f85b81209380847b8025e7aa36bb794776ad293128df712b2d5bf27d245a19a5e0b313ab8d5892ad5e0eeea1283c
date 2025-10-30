@@ -1,0 +1,387 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkAccount = require("@scaleway/sdk-account");
+const sdkApplesilicon = require("@scaleway/sdk-applesilicon");
+const sdkAuditTrail = require("@scaleway/sdk-audit-trail");
+const sdkAutoscaling = require("@scaleway/sdk-autoscaling");
+const sdkBaremetal = require("@scaleway/sdk-baremetal");
+const sdkBilling = require("@scaleway/sdk-billing");
+const sdkBlock = require("@scaleway/sdk-block");
+const sdkCockpit = require("@scaleway/sdk-cockpit");
+const sdkContainer = require("@scaleway/sdk-container");
+const sdkDedibox = require("@scaleway/sdk-dedibox");
+const sdkDomain = require("@scaleway/sdk-domain");
+const sdkEdgeServices = require("@scaleway/sdk-edge-services");
+const sdkFile = require("@scaleway/sdk-file");
+const sdkFlexibleip = require("@scaleway/sdk-flexibleip");
+const sdkFunction = require("@scaleway/sdk-function");
+const sdkIam = require("@scaleway/sdk-iam");
+const sdkInference = require("@scaleway/sdk-inference");
+const sdkInstance = require("@scaleway/sdk-instance");
+const sdkInterlink = require("@scaleway/sdk-interlink");
+const sdkIot = require("@scaleway/sdk-iot");
+const sdkIpam = require("@scaleway/sdk-ipam");
+const sdkJobs = require("@scaleway/sdk-jobs");
+const sdkK8s = require("@scaleway/sdk-k8s");
+const sdkKeyManager = require("@scaleway/sdk-key-manager");
+const sdkLb = require("@scaleway/sdk-lb");
+const sdkMarketplace = require("@scaleway/sdk-marketplace");
+const sdkMnq = require("@scaleway/sdk-mnq");
+const sdkMongodb = require("@scaleway/sdk-mongodb");
+const sdkProductCatalog = require("@scaleway/sdk-product-catalog");
+const sdkQaas = require("@scaleway/sdk-qaas");
+const sdkRdb = require("@scaleway/sdk-rdb");
+const sdkRedis = require("@scaleway/sdk-redis");
+const sdkRegistry = require("@scaleway/sdk-registry");
+const sdkSecret = require("@scaleway/sdk-secret");
+const sdkServerlessSqldb = require("@scaleway/sdk-serverless-sqldb");
+const sdkTem = require("@scaleway/sdk-tem");
+const sdkTest = require("@scaleway/sdk-test");
+const sdkVpc = require("@scaleway/sdk-vpc");
+const sdkVpcgw = require("@scaleway/sdk-vpcgw");
+const sdkWebhosting = require("@scaleway/sdk-webhosting");
+const Account = {
+  v3: sdkAccount.Accountv3
+};
+const Applesilicon = {
+  v1alpha1: sdkApplesilicon.Applesiliconv1alpha1
+};
+const AuditTrail = {
+  v1alpha1: sdkAuditTrail.AuditTrailv1alpha1
+};
+const Autoscaling = {
+  v1alpha1: sdkAutoscaling.Autoscalingv1alpha1
+};
+const Baremetal = {
+  v1: sdkBaremetal.Baremetalv1,
+  v3: sdkBaremetal.Baremetalv3
+};
+const Billing = {
+  v2beta1: sdkBilling.Billingv2beta1
+};
+const Block = {
+  v1: sdkBlock.Blockv1,
+  v1alpha1: sdkBlock.Blockv1alpha1
+};
+const Cockpit = {
+  v1: sdkCockpit.Cockpitv1
+};
+const Container = {
+  v1beta1: sdkContainer.Containerv1beta1
+};
+const Dedibox = {
+  v1: sdkDedibox.Dediboxv1
+};
+const Domain = {
+  v2beta1: sdkDomain.Domainv2beta1
+};
+const EdgeServices = {
+  v1beta1: sdkEdgeServices.EdgeServicesv1beta1
+};
+const File = {
+  v1alpha1: sdkFile.Filev1alpha1
+};
+const Flexibleip = {
+  v1alpha1: sdkFlexibleip.Flexibleipv1alpha1
+};
+const Function = {
+  v1beta1: sdkFunction.Functionv1beta1
+};
+const Iam = {
+  v1alpha1: sdkIam.Iamv1alpha1
+};
+const Inference = {
+  v1: sdkInference.Inferencev1,
+  v1beta1: sdkInference.Inferencev1beta1
+};
+const Instance = {
+  v1: sdkInstance.Instancev1
+};
+const Interlink = {
+  v1beta1: sdkInterlink.Interlinkv1beta1
+};
+const Iot = {
+  v1: sdkIot.Iotv1
+};
+const Ipam = {
+  v1: sdkIpam.Ipamv1
+};
+const Jobs = {
+  v1alpha1: sdkJobs.Jobsv1alpha1
+};
+const K8s = {
+  v1: sdkK8s.K8sv1
+};
+const KeyManager = {
+  v1alpha1: sdkKeyManager.KeyManagerv1alpha1
+};
+const Lb = {
+  v1: sdkLb.Lbv1
+};
+const Marketplace = {
+  v2: sdkMarketplace.Marketplacev2
+};
+const Mnq = {
+  v1beta1: sdkMnq.Mnqv1beta1
+};
+const Mongodb = {
+  v1: sdkMongodb.Mongodbv1,
+  v1alpha1: sdkMongodb.Mongodbv1alpha1
+};
+const ProductCatalog = {
+  v2alpha1: sdkProductCatalog.ProductCatalogv2alpha1
+};
+const Qaas = {
+  v1alpha1: sdkQaas.Qaasv1alpha1
+};
+const Rdb = {
+  v1: sdkRdb.Rdbv1
+};
+const Redis = {
+  v1: sdkRedis.Redisv1
+};
+const Registry = {
+  v1: sdkRegistry.Registryv1
+};
+const Secret = {
+  v1beta1: sdkSecret.Secretv1beta1
+};
+const ServerlessSqldb = {
+  v1alpha1: sdkServerlessSqldb.ServerlessSqldbv1alpha1
+};
+const Tem = {
+  v1alpha1: sdkTem.Temv1alpha1
+};
+const Test = {
+  v1: sdkTest.Testv1
+};
+const Vpc = {
+  v2: sdkVpc.Vpcv2
+};
+const Vpcgw = {
+  v1: sdkVpcgw.Vpcgwv1,
+  v2: sdkVpcgw.Vpcgwv2
+};
+const Webhosting = {
+  v1: sdkWebhosting.Webhostingv1
+};
+Object.defineProperty(exports, "Accountv3", {
+  enumerable: true,
+  get: () => sdkAccount.Accountv3
+});
+Object.defineProperty(exports, "Applesiliconv1alpha1", {
+  enumerable: true,
+  get: () => sdkApplesilicon.Applesiliconv1alpha1
+});
+Object.defineProperty(exports, "AuditTrailv1alpha1", {
+  enumerable: true,
+  get: () => sdkAuditTrail.AuditTrailv1alpha1
+});
+Object.defineProperty(exports, "Autoscalingv1alpha1", {
+  enumerable: true,
+  get: () => sdkAutoscaling.Autoscalingv1alpha1
+});
+Object.defineProperty(exports, "Baremetalv1", {
+  enumerable: true,
+  get: () => sdkBaremetal.Baremetalv1
+});
+Object.defineProperty(exports, "Baremetalv3", {
+  enumerable: true,
+  get: () => sdkBaremetal.Baremetalv3
+});
+Object.defineProperty(exports, "Billingv2beta1", {
+  enumerable: true,
+  get: () => sdkBilling.Billingv2beta1
+});
+Object.defineProperty(exports, "Blockv1", {
+  enumerable: true,
+  get: () => sdkBlock.Blockv1
+});
+Object.defineProperty(exports, "Blockv1alpha1", {
+  enumerable: true,
+  get: () => sdkBlock.Blockv1alpha1
+});
+Object.defineProperty(exports, "Cockpitv1", {
+  enumerable: true,
+  get: () => sdkCockpit.Cockpitv1
+});
+Object.defineProperty(exports, "Containerv1beta1", {
+  enumerable: true,
+  get: () => sdkContainer.Containerv1beta1
+});
+Object.defineProperty(exports, "Dediboxv1", {
+  enumerable: true,
+  get: () => sdkDedibox.Dediboxv1
+});
+Object.defineProperty(exports, "Domainv2beta1", {
+  enumerable: true,
+  get: () => sdkDomain.Domainv2beta1
+});
+Object.defineProperty(exports, "EdgeServicesv1beta1", {
+  enumerable: true,
+  get: () => sdkEdgeServices.EdgeServicesv1beta1
+});
+Object.defineProperty(exports, "Filev1alpha1", {
+  enumerable: true,
+  get: () => sdkFile.Filev1alpha1
+});
+Object.defineProperty(exports, "Flexibleipv1alpha1", {
+  enumerable: true,
+  get: () => sdkFlexibleip.Flexibleipv1alpha1
+});
+Object.defineProperty(exports, "Functionv1beta1", {
+  enumerable: true,
+  get: () => sdkFunction.Functionv1beta1
+});
+Object.defineProperty(exports, "Iamv1alpha1", {
+  enumerable: true,
+  get: () => sdkIam.Iamv1alpha1
+});
+Object.defineProperty(exports, "Inferencev1", {
+  enumerable: true,
+  get: () => sdkInference.Inferencev1
+});
+Object.defineProperty(exports, "Inferencev1beta1", {
+  enumerable: true,
+  get: () => sdkInference.Inferencev1beta1
+});
+Object.defineProperty(exports, "Instancev1", {
+  enumerable: true,
+  get: () => sdkInstance.Instancev1
+});
+Object.defineProperty(exports, "Interlinkv1beta1", {
+  enumerable: true,
+  get: () => sdkInterlink.Interlinkv1beta1
+});
+Object.defineProperty(exports, "Iotv1", {
+  enumerable: true,
+  get: () => sdkIot.Iotv1
+});
+Object.defineProperty(exports, "Ipamv1", {
+  enumerable: true,
+  get: () => sdkIpam.Ipamv1
+});
+Object.defineProperty(exports, "Jobsv1alpha1", {
+  enumerable: true,
+  get: () => sdkJobs.Jobsv1alpha1
+});
+Object.defineProperty(exports, "K8sv1", {
+  enumerable: true,
+  get: () => sdkK8s.K8sv1
+});
+Object.defineProperty(exports, "KeyManagerv1alpha1", {
+  enumerable: true,
+  get: () => sdkKeyManager.KeyManagerv1alpha1
+});
+Object.defineProperty(exports, "Lbv1", {
+  enumerable: true,
+  get: () => sdkLb.Lbv1
+});
+Object.defineProperty(exports, "Marketplacev2", {
+  enumerable: true,
+  get: () => sdkMarketplace.Marketplacev2
+});
+Object.defineProperty(exports, "Mnqv1beta1", {
+  enumerable: true,
+  get: () => sdkMnq.Mnqv1beta1
+});
+Object.defineProperty(exports, "Mongodbv1", {
+  enumerable: true,
+  get: () => sdkMongodb.Mongodbv1
+});
+Object.defineProperty(exports, "Mongodbv1alpha1", {
+  enumerable: true,
+  get: () => sdkMongodb.Mongodbv1alpha1
+});
+Object.defineProperty(exports, "ProductCatalogv2alpha1", {
+  enumerable: true,
+  get: () => sdkProductCatalog.ProductCatalogv2alpha1
+});
+Object.defineProperty(exports, "Qaasv1alpha1", {
+  enumerable: true,
+  get: () => sdkQaas.Qaasv1alpha1
+});
+Object.defineProperty(exports, "Rdbv1", {
+  enumerable: true,
+  get: () => sdkRdb.Rdbv1
+});
+Object.defineProperty(exports, "Redisv1", {
+  enumerable: true,
+  get: () => sdkRedis.Redisv1
+});
+Object.defineProperty(exports, "Registryv1", {
+  enumerable: true,
+  get: () => sdkRegistry.Registryv1
+});
+Object.defineProperty(exports, "Secretv1beta1", {
+  enumerable: true,
+  get: () => sdkSecret.Secretv1beta1
+});
+Object.defineProperty(exports, "ServerlessSqldbv1alpha1", {
+  enumerable: true,
+  get: () => sdkServerlessSqldb.ServerlessSqldbv1alpha1
+});
+Object.defineProperty(exports, "Temv1alpha1", {
+  enumerable: true,
+  get: () => sdkTem.Temv1alpha1
+});
+Object.defineProperty(exports, "Testv1", {
+  enumerable: true,
+  get: () => sdkTest.Testv1
+});
+Object.defineProperty(exports, "Vpcv2", {
+  enumerable: true,
+  get: () => sdkVpc.Vpcv2
+});
+Object.defineProperty(exports, "Vpcgwv1", {
+  enumerable: true,
+  get: () => sdkVpcgw.Vpcgwv1
+});
+Object.defineProperty(exports, "Vpcgwv2", {
+  enumerable: true,
+  get: () => sdkVpcgw.Vpcgwv2
+});
+Object.defineProperty(exports, "Webhostingv1", {
+  enumerable: true,
+  get: () => sdkWebhosting.Webhostingv1
+});
+exports.Account = Account;
+exports.Applesilicon = Applesilicon;
+exports.AuditTrail = AuditTrail;
+exports.Autoscaling = Autoscaling;
+exports.Baremetal = Baremetal;
+exports.Billing = Billing;
+exports.Block = Block;
+exports.Cockpit = Cockpit;
+exports.Container = Container;
+exports.Dedibox = Dedibox;
+exports.Domain = Domain;
+exports.EdgeServices = EdgeServices;
+exports.File = File;
+exports.Flexibleip = Flexibleip;
+exports.Function = Function;
+exports.Iam = Iam;
+exports.Inference = Inference;
+exports.Instance = Instance;
+exports.Interlink = Interlink;
+exports.Iot = Iot;
+exports.Ipam = Ipam;
+exports.Jobs = Jobs;
+exports.K8s = K8s;
+exports.KeyManager = KeyManager;
+exports.Lb = Lb;
+exports.Marketplace = Marketplace;
+exports.Mnq = Mnq;
+exports.Mongodb = Mongodb;
+exports.ProductCatalog = ProductCatalog;
+exports.Qaas = Qaas;
+exports.Rdb = Rdb;
+exports.Redis = Redis;
+exports.Registry = Registry;
+exports.Secret = Secret;
+exports.ServerlessSqldb = ServerlessSqldb;
+exports.Tem = Tem;
+exports.Test = Test;
+exports.Vpc = Vpc;
+exports.Vpcgw = Vpcgw;
+exports.Webhosting = Webhosting;

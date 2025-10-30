@@ -1,0 +1,8 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const JOB_RUN_TRANSIENT_STATUSES = [
+  "queued",
+  "scheduled",
+  "running"
+];
+exports.JOB_RUN_TRANSIENT_STATUSES = JOB_RUN_TRANSIENT_STATUSES;

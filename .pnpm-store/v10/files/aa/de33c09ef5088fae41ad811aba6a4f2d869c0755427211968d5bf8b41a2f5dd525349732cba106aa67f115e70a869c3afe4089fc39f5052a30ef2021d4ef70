@@ -1,0 +1,9 @@
+const ListIPsRequest = {
+  resourceName: {
+    maxLength: 63,
+    minLength: 2
+  }
+};
+export {
+  ListIPsRequest
+};

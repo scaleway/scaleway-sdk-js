@@ -1,0 +1,103 @@
+export declare const CreateJobDefinitionRequest: {
+    cpuLimit: {
+        greaterThan: number;
+    };
+    description: {
+        maxLength: number;
+    };
+    imageUri: {
+        pattern: RegExp;
+    };
+    localStorageCapacity: {
+        greaterThan: number;
+    };
+    memoryLimit: {
+        greaterThan: number;
+    };
+    name: {
+        pattern: RegExp;
+    };
+};
+export declare const CreateJobDefinitionRequestCronScheduleConfig: {
+    schedule: {
+        maxLength: number;
+        minLength: number;
+    };
+    timezone: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const CreateJobDefinitionSecretsRequestSecretConfig: {
+    secretManagerVersion: {
+        minLength: number;
+    };
+};
+export declare const CronSchedule: {
+    schedule: {
+        maxLength: number;
+        minLength: number;
+    };
+    timezone: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const ListJobDefinitionsRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListJobRunsRequest: {
+    page: {
+        greaterThanOrEqual: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const StartJobDefinitionRequest: {
+    replicas: {
+        greaterThan: number;
+    };
+};
+export declare const UpdateJobDefinitionRequest: {
+    cpuLimit: {
+        greaterThan: number;
+    };
+    description: {
+        maxLength: number;
+    };
+    imageUri: {
+        pattern: RegExp;
+    };
+    localStorageCapacity: {
+        greaterThan: number;
+    };
+    memoryLimit: {
+        greaterThan: number;
+    };
+    name: {
+        pattern: RegExp;
+    };
+};
+export declare const UpdateJobDefinitionRequestCronScheduleConfig: {
+    schedule: {
+        maxLength: number;
+        minLength: number;
+    };
+    timezone: {
+        maxLength: number;
+        minLength: number;
+    };
+};
+export declare const UpdateJobDefinitionSecretRequest: {
+    secretManagerVersion: {
+        minLength: number;
+    };
+};

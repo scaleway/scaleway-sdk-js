@@ -1,0 +1,75 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalFileSystem = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'FileSystem' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    numberOfAttachments: data.number_of_attachments,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    region: data.region,
+    size: data.size,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalAttachment = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Attachment' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    filesystemId: data.filesystem_id,
+    id: data.id,
+    resourceId: data.resource_id,
+    resourceType: data.resource_type,
+    zone: data.zone
+  };
+};
+const unmarshalListAttachmentsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListAttachmentsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    attachments: sdkClient.unmarshalArrayOfObject(data.attachments, unmarshalAttachment),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListFileSystemsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListFileSystemsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    filesystems: sdkClient.unmarshalArrayOfObject(data.filesystems, unmarshalFileSystem),
+    totalCount: data.total_count
+  };
+};
+const marshalCreateFileSystemRequest = (request, defaults) => ({
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  size: request.size,
+  tags: request.tags
+});
+const marshalUpdateFileSystemRequest = (request, defaults) => ({
+  name: request.name,
+  size: request.size,
+  tags: request.tags
+});
+exports.marshalCreateFileSystemRequest = marshalCreateFileSystemRequest;
+exports.marshalUpdateFileSystemRequest = marshalUpdateFileSystemRequest;
+exports.unmarshalFileSystem = unmarshalFileSystem;
+exports.unmarshalListAttachmentsResponse = unmarshalListAttachmentsResponse;
+exports.unmarshalListFileSystemsResponse = unmarshalListFileSystemsResponse;

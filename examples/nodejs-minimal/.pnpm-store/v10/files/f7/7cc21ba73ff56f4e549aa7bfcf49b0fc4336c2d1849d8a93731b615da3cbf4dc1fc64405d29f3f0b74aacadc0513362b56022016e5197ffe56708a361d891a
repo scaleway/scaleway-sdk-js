@@ -1,0 +1,76 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const invalidRequestMapper = require("./non-standard/invalid-request-mapper.cjs");
+const unknownResourceMapper = require("./non-standard/unknown-resource-mapper.cjs");
+const scwError = require("./scw-error.cjs");
+const alreadyExistsError = require("./standard/already-exists-error.cjs");
+const deniedAuthenticationError = require("./standard/denied-authentication-error.cjs");
+const invalidArgumentsError = require("./standard/invalid-arguments-error.cjs");
+const outOfStockError = require("./standard/out-of-stock-error.cjs");
+const permissionsDeniedError = require("./standard/permissions-denied-error.cjs");
+const preconditionFailedError = require("./standard/precondition-failed-error.cjs");
+const quotasExceededError = require("./standard/quotas-exceeded-error.cjs");
+const resourceExpiredError = require("./standard/resource-expired-error.cjs");
+const resourceLockedError = require("./standard/resource-locked-error.cjs");
+const resourceNotFoundError = require("./standard/resource-not-found-error.cjs");
+const tooManyRequestsError = require("./standard/too-many-requests-error.cjs");
+const transientStateError = require("./standard/transient-state-error.cjs");
+const unmarshalStandardError = (type, status, body) => {
+  let error;
+  switch (type) {
+    case "denied_authentication":
+      error = deniedAuthenticationError.DeniedAuthenticationError;
+      break;
+    case "invalid_arguments":
+      error = invalidArgumentsError.InvalidArgumentsError;
+      break;
+    case "out_of_stock":
+      error = outOfStockError.OutOfStockError;
+      break;
+    case "permissions_denied":
+      error = permissionsDeniedError.PermissionsDeniedError;
+      break;
+    case "precondition_failed":
+      error = preconditionFailedError.PreconditionFailedError;
+      break;
+    case "quotas_exceeded":
+      error = quotasExceededError.QuotasExceededError;
+      break;
+    case "expired":
+      error = resourceExpiredError.ResourceExpiredError;
+      break;
+    case "not_found":
+      error = resourceNotFoundError.ResourceNotFoundError;
+      break;
+    case "locked":
+      error = resourceLockedError.ResourceLockedError;
+      break;
+    case "transient_state":
+      error = transientStateError.TransientStateError;
+      break;
+    case "already_exists":
+      error = alreadyExistsError.AlreadyExistsError;
+      break;
+    case "too_many_requests":
+      error = tooManyRequestsError.TooManyRequestsError;
+      break;
+    default:
+      return null;
+  }
+  return error.fromJSON(status, body);
+};
+const unmarshalNonStandardError = (type, status, body) => {
+  switch (type) {
+    case "unknown_resource":
+      return unknownResourceMapper.UnknownResourceMapper.fromJSON(status, body);
+    case "invalid_request_error":
+      return invalidRequestMapper.InvalidRequestMapper.fromJSON(status, body);
+    default:
+      return null;
+  }
+};
+const parseScalewayError = (status, body) => {
+  const parsableError = typeof body.type === "string" && (unmarshalStandardError(body.type, status, body) ?? unmarshalNonStandardError(body.type, status, body));
+  return parsableError || new scwError.ScalewayError(status, body);
+};
+exports.parseScalewayError = parseScalewayError;

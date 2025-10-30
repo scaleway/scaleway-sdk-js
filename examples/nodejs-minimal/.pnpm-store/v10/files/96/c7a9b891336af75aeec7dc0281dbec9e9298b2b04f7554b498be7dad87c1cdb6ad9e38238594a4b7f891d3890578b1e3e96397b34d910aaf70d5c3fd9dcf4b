@@ -1,0 +1,274 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const marshalling_gen = require("./marshalling.gen.cjs");
+const jsonContentHeaders = {
+  "Content-Type": "application/json; charset=utf-8"
+};
+class API extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par", "nl-ams", "pl-waw"]
+  });
+  /**
+   * Create a new job definition in a specified Project.
+   *
+   * @param request - The request {@link CreateJobDefinitionRequest}
+   * @returns A Promise of JobDefinition
+   */
+  createJobDefinition = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateJobDefinitionRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/serverless-jobs/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/job-definitions`
+    },
+    marshalling_gen.unmarshalJobDefinition
+  );
+  /**
+   * Get a job definition by its unique identifier.
+   *
+   * @param request - The request {@link GetJobDefinitionRequest}
+   * @returns A Promise of JobDefinition
+   */
+  getJobDefinition = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/serverless-jobs/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/job-definitions/${sdkClient.validatePathParam("jobDefinitionId", request.jobDefinitionId)}`
+    },
+    marshalling_gen.unmarshalJobDefinition
+  );
+  pageOfListJobDefinitions = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/serverless-jobs/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/job-definitions`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId]
+      )
+    },
+    marshalling_gen.unmarshalListJobDefinitionsResponse
+  );
+  /**
+   * List all your job definitions with filters.
+   *
+   * @param request - The request {@link ListJobDefinitionsRequest}
+   * @returns A Promise of ListJobDefinitionsResponse
+   */
+  listJobDefinitions = (request = {}) => sdkClient.enrichForPagination(
+    "jobDefinitions",
+    this.pageOfListJobDefinitions,
+    request
+  );
+  /**
+   * Update an existing job definition associated with the specified unique identifier.
+   *
+   * @param request - The request {@link UpdateJobDefinitionRequest}
+   * @returns A Promise of JobDefinition
+   */
+  updateJobDefinition = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateJobDefinitionRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/serverless-jobs/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/job-definitions/${sdkClient.validatePathParam("jobDefinitionId", request.jobDefinitionId)}`
+    },
+    marshalling_gen.unmarshalJobDefinition
+  );
+  /**
+   * Delete an exsisting job definition by its unique identifier.
+   *
+   * @param request - The request {@link DeleteJobDefinitionRequest}
+   */
+  deleteJobDefinition = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/serverless-jobs/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/job-definitions/${sdkClient.validatePathParam("jobDefinitionId", request.jobDefinitionId)}`
+  });
+  /**
+   * Run an existing job definition by its unique identifier. This will create a new job run.
+   *
+   * @param request - The request {@link StartJobDefinitionRequest}
+   * @returns A Promise of StartJobDefinitionResponse
+   */
+  startJobDefinition = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalStartJobDefinitionRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/serverless-jobs/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/job-definitions/${sdkClient.validatePathParam("jobDefinitionId", request.jobDefinitionId)}/start`
+    },
+    marshalling_gen.unmarshalStartJobDefinitionResponse
+  );
+  /**
+   * Create a secret reference within a job definition.
+   *
+   * @param request - The request {@link CreateJobDefinitionSecretsRequest}
+   * @returns A Promise of CreateJobDefinitionSecretsResponse
+   */
+  createJobDefinitionSecrets = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateJobDefinitionSecretsRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/serverless-jobs/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/job-definitions/${sdkClient.validatePathParam("jobDefinitionId", request.jobDefinitionId)}/secrets`
+    },
+    marshalling_gen.unmarshalCreateJobDefinitionSecretsResponse
+  );
+  /**
+   * Get a secret references within a job definition.
+   *
+   * @param request - The request {@link GetJobDefinitionSecretRequest}
+   * @returns A Promise of Secret
+   */
+  getJobDefinitionSecret = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/serverless-jobs/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/job-definitions/${sdkClient.validatePathParam("jobDefinitionId", request.jobDefinitionId)}/secrets/${sdkClient.validatePathParam("secretId", request.secretId)}`
+    },
+    marshalling_gen.unmarshalSecret
+  );
+  /**
+   * List secrets references within a job definition.
+   *
+   * @param request - The request {@link ListJobDefinitionSecretsRequest}
+   * @returns A Promise of ListJobDefinitionSecretsResponse
+   */
+  listJobDefinitionSecrets = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/serverless-jobs/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/job-definitions/${sdkClient.validatePathParam("jobDefinitionId", request.jobDefinitionId)}/secrets`
+    },
+    marshalling_gen.unmarshalListJobDefinitionSecretsResponse
+  );
+  /**
+   * Update a secret reference within a job definition.
+   *
+   * @param request - The request {@link UpdateJobDefinitionSecretRequest}
+   * @returns A Promise of Secret
+   */
+  updateJobDefinitionSecret = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateJobDefinitionSecretRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/serverless-jobs/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/job-definitions/${sdkClient.validatePathParam("jobDefinitionId", request.jobDefinitionId)}/secrets/${sdkClient.validatePathParam("secretId", request.secretId)}`
+    },
+    marshalling_gen.unmarshalSecret
+  );
+  /**
+   * Delete a secret reference within a job definition.
+   *
+   * @param request - The request {@link DeleteJobDefinitionSecretRequest}
+   */
+  deleteJobDefinitionSecret = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/serverless-jobs/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/job-definitions/${sdkClient.validatePathParam("jobDefinitionId", request.jobDefinitionId)}/secrets/${sdkClient.validatePathParam("secretId", request.secretId)}`
+  });
+  /**
+   * Get a job run by its unique identifier.
+   *
+   * @param request - The request {@link GetJobRunRequest}
+   * @returns A Promise of JobRun
+   */
+  getJobRun = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/serverless-jobs/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/job-runs/${sdkClient.validatePathParam("jobRunId", request.jobRunId)}`
+    },
+    marshalling_gen.unmarshalJobRun
+  );
+  /**
+   * Stop a job run by its unique identifier.
+   *
+   * @param request - The request {@link StopJobRunRequest}
+   * @returns A Promise of JobRun
+   */
+  stopJobRun = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/serverless-jobs/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/job-runs/${sdkClient.validatePathParam("jobRunId", request.jobRunId)}/stop`
+    },
+    marshalling_gen.unmarshalJobRun
+  );
+  pageOfListJobRuns = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/serverless-jobs/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/job-runs`,
+      urlParams: sdkClient.urlParams(
+        ["job_definition_id", request.jobDefinitionId],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId],
+        ["state", request.state],
+        ["states", request.states]
+      )
+    },
+    marshalling_gen.unmarshalListJobRunsResponse
+  );
+  /**
+   * List all job runs with filters.
+   *
+   * @param request - The request {@link ListJobRunsRequest}
+   * @returns A Promise of ListJobRunsResponse
+   */
+  listJobRuns = (request = {}) => sdkClient.enrichForPagination("jobRuns", this.pageOfListJobRuns, request);
+  /**
+   * List jobs resources for the console.
+   *
+   * @param request - The request {@link ListJobsResourcesRequest}
+   * @returns A Promise of ListJobsResourcesResponse
+   */
+  listJobsResources = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/serverless-jobs/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/jobs-resources`
+    },
+    marshalling_gen.unmarshalListJobsResourcesResponse
+  );
+  /**
+   * Get jobs limits for the console.
+   *
+   * @param request - The request {@link GetJobsLimitsRequest}
+   * @returns A Promise of JobsLimits
+   */
+  getJobsLimits = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/serverless-jobs/v1alpha1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/jobs-limits`
+    },
+    marshalling_gen.unmarshalJobsLimits
+  );
+}
+exports.API = API;

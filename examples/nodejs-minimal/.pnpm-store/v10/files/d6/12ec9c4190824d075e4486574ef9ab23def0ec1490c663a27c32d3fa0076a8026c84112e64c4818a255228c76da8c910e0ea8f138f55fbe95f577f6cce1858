@@ -1,0 +1,175 @@
+const CreateInstanceRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9\-_]+$/
+  },
+  nodeNumber: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 3
+  },
+  nodeType: {
+    maxLength: 128,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9\-_]+$/
+  },
+  password: {
+    maxLength: 128,
+    minLength: 8
+  },
+  userName: {
+    maxLength: 63,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9_\-]*$/
+  },
+  version: {
+    pattern: /^[0-9]+\.[0-9]+\.[0-9]+$/
+  }
+};
+const CreateSnapshotRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9\-_]+$/
+  }
+};
+const CreateUserRequest = {
+  name: {
+    maxLength: 63,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9_\-]*$/
+  },
+  password: {
+    maxLength: 128,
+    minLength: 8
+  }
+};
+const DeleteUserRequest = {
+  name: {
+    maxLength: 63,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9_\-]*$/
+  }
+};
+const ListInstancesRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9\-_]+$/
+  },
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  }
+};
+const ListNodeTypesRequest = {
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  }
+};
+const ListSnapshotsRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9\-_]+$/
+  },
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  }
+};
+const ListUsersRequest = {
+  name: {
+    maxLength: 63,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9_\-]*$/
+  },
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  }
+};
+const ListVersionsRequest = {
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100
+  },
+  version: {
+    pattern: /^[0-9]+\.[0-9]+\.[0-9]+$/
+  }
+};
+const RestoreSnapshotRequest = {
+  instanceName: {
+    maxLength: 255,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9\-_]+$/
+  },
+  nodeNumber: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 3
+  }
+};
+const SetUserRoleRequest = {
+  userName: {
+    maxLength: 63,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9_\-]*$/
+  }
+};
+const UpdateInstanceRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9\-_]+$/
+  }
+};
+const UpdateSnapshotRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9\-_]+$/
+  }
+};
+const UpdateUserRequest = {
+  name: {
+    maxLength: 63,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9_\-]*$/
+  },
+  password: {
+    maxLength: 128,
+    minLength: 8
+  }
+};
+export {
+  CreateInstanceRequest,
+  CreateSnapshotRequest,
+  CreateUserRequest,
+  DeleteUserRequest,
+  ListInstancesRequest,
+  ListNodeTypesRequest,
+  ListSnapshotsRequest,
+  ListUsersRequest,
+  ListVersionsRequest,
+  RestoreSnapshotRequest,
+  SetUserRoleRequest,
+  UpdateInstanceRequest,
+  UpdateSnapshotRequest,
+  UpdateUserRequest
+};

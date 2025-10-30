@@ -1,0 +1,38 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const DATABASE_BACKUP_TRANSIENT_STATUSES = [
+  "creating",
+  "restoring",
+  "deleting",
+  "exporting"
+];
+const INSTANCE_LOG_TRANSIENT_STATUSES = ["creating"];
+const INSTANCE_TRANSIENT_STATUSES = [
+  "provisioning",
+  "configuring",
+  "deleting",
+  "autohealing",
+  "initializing",
+  "backuping",
+  "snapshotting",
+  "restarting"
+];
+const MAINTENANCE_TRANSIENT_STATUSES = ["ongoing"];
+const READ_REPLICA_TRANSIENT_STATUSES = [
+  "provisioning",
+  "initializing",
+  "deleting",
+  "configuring",
+  "promoting"
+];
+const SNAPSHOT_TRANSIENT_STATUSES = [
+  "creating",
+  "restoring",
+  "deleting"
+];
+exports.DATABASE_BACKUP_TRANSIENT_STATUSES = DATABASE_BACKUP_TRANSIENT_STATUSES;
+exports.INSTANCE_LOG_TRANSIENT_STATUSES = INSTANCE_LOG_TRANSIENT_STATUSES;
+exports.INSTANCE_TRANSIENT_STATUSES = INSTANCE_TRANSIENT_STATUSES;
+exports.MAINTENANCE_TRANSIENT_STATUSES = MAINTENANCE_TRANSIENT_STATUSES;
+exports.READ_REPLICA_TRANSIENT_STATUSES = READ_REPLICA_TRANSIENT_STATUSES;
+exports.SNAPSHOT_TRANSIENT_STATUSES = SNAPSHOT_TRANSIENT_STATUSES;

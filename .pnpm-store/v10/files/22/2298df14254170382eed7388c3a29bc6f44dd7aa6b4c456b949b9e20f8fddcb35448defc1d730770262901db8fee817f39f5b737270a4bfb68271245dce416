@@ -1,0 +1,40 @@
+const CreateFileSystemRequest = {
+  name: {
+    minLength: 1
+  },
+  size: {
+    greaterThan: 0
+  }
+};
+const ListAttachmentsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListFileSystemsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const UpdateFileSystemRequest = {
+  name: {
+    minLength: 1
+  },
+  size: {
+    greaterThan: 0
+  }
+};
+export {
+  CreateFileSystemRequest,
+  ListAttachmentsRequest,
+  ListFileSystemsRequest,
+  UpdateFileSystemRequest
+};

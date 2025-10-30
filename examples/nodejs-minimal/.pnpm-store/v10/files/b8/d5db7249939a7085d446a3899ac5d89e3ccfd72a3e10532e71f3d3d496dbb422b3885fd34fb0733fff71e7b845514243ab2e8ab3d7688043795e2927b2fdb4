@@ -1,0 +1,36 @@
+const extract = (key) => (result) => result[key];
+function* pages(key, fetcher, request, firstPage) {
+  if (!Array.isArray(firstPage[key])) {
+    throw new Error(`Property ${key} is not a list in paginated result`);
+  }
+  const getList = extract(key);
+  let page = request.page || 1;
+  if (page === 1) {
+    yield Promise.resolve(getList(firstPage));
+    page += 1;
+  }
+  const { length } = firstPage[key];
+  if (!length) return;
+  const { totalCount } = firstPage;
+  while (page <= Math.floor((totalCount + length - 1) / length)) {
+    yield fetcher({ ...request, page }).then(getList);
+    page += 1;
+  }
+}
+async function* fetchPaginated(key, fetcher, request, initial = fetcher(request)) {
+  yield* pages(key, fetcher, request, await initial);
+}
+const fetchAll = async (key, fetcher, request, initial = fetcher(request)) => (await Promise.all(Array.from(pages(key, fetcher, request, await initial)))).flat();
+const enrichForPagination = (key, fetcher, request) => {
+  const firstPage = fetcher(request);
+  return Object.assign(firstPage, {
+    all: () => fetchAll(key, fetcher, request, firstPage),
+    [Symbol.asyncIterator]: () => fetchPaginated(key, fetcher, request, firstPage)
+  });
+};
+export {
+  enrichForPagination,
+  extract,
+  fetchAll,
+  fetchPaginated
+};

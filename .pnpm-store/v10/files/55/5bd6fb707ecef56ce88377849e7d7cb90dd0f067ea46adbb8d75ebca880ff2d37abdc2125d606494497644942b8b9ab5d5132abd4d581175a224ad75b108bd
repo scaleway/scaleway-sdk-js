@@ -1,0 +1,276 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const content_gen = require("./content.gen.cjs");
+const marshalling_gen = require("./marshalling.gen.cjs");
+const jsonContentHeaders = {
+  "Content-Type": "application/json; charset=utf-8"
+};
+class API extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par"]
+  });
+  pageOfListDeployments = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/inference/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/deployments`,
+      urlParams: sdkClient.urlParams(
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId],
+        ["tags", request.tags]
+      )
+    },
+    marshalling_gen.unmarshalListDeploymentsResponse
+  );
+  /**
+   * List inference deployments. List all your inference deployments.
+   *
+   * @param request - The request {@link ListDeploymentsRequest}
+   * @returns A Promise of ListDeploymentsResponse
+   */
+  listDeployments = (request = {}) => sdkClient.enrichForPagination("deployments", this.pageOfListDeployments, request);
+  /**
+   * Get a deployment. Get the deployment for the given ID.
+   *
+   * @param request - The request {@link GetDeploymentRequest}
+   * @returns A Promise of Deployment
+   */
+  getDeployment = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/inference/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/deployments/${sdkClient.validatePathParam("deploymentId", request.deploymentId)}`
+    },
+    marshalling_gen.unmarshalDeployment
+  );
+  /**
+   * Waits for {@link Deployment} to be in a final state.
+   *
+   * @param request - The request {@link GetDeploymentRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Deployment
+   */
+  waitForDeployment = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.DEPLOYMENT_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getDeployment,
+    request,
+    options
+  );
+  /**
+   * Create a deployment. Create a new inference deployment related to a specific model.
+   *
+   * @param request - The request {@link CreateDeploymentRequest}
+   * @returns A Promise of Deployment
+   */
+  createDeployment = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateDeploymentRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/inference/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/deployments`
+    },
+    marshalling_gen.unmarshalDeployment
+  );
+  /**
+   * Update a deployment. Update an existing inference deployment.
+   *
+   * @param request - The request {@link UpdateDeploymentRequest}
+   * @returns A Promise of Deployment
+   */
+  updateDeployment = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateDeploymentRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/inference/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/deployments/${sdkClient.validatePathParam("deploymentId", request.deploymentId)}`
+    },
+    marshalling_gen.unmarshalDeployment
+  );
+  /**
+   * Delete a deployment. Delete an existing inference deployment.
+   *
+   * @param request - The request {@link DeleteDeploymentRequest}
+   * @returns A Promise of Deployment
+   */
+  deleteDeployment = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/inference/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/deployments/${sdkClient.validatePathParam("deploymentId", request.deploymentId)}`
+    },
+    marshalling_gen.unmarshalDeployment
+  );
+  /**
+     * Get the CA certificate. Get the CA certificate used for the deployment of private endpoints.
+  The CA certificate will be returned as a PEM file.
+     *
+     * @param request - The request {@link GetDeploymentCertificateRequest}
+     * @returns A Promise of Blob
+     */
+  getDeploymentCertificate = (request) => this.client.fetch({
+    method: "GET",
+    path: `/inference/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/deployments/${sdkClient.validatePathParam("deploymentId", request.deploymentId)}/certificate`,
+    urlParams: sdkClient.urlParams(["dl", 1]),
+    responseType: "blob"
+  });
+  /**
+   * Create an endpoint. Create a new Endpoint related to a specific deployment.
+   *
+   * @param request - The request {@link CreateEndpointRequest}
+   * @returns A Promise of Endpoint
+   */
+  createEndpoint = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateEndpointRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/inference/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/endpoints`
+    },
+    marshalling_gen.unmarshalEndpoint
+  );
+  /**
+   * Update an endpoint. Update an existing Endpoint.
+   *
+   * @param request - The request {@link UpdateEndpointRequest}
+   * @returns A Promise of Endpoint
+   */
+  updateEndpoint = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateEndpointRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/inference/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/endpoints/${sdkClient.validatePathParam("endpointId", request.endpointId)}`
+    },
+    marshalling_gen.unmarshalEndpoint
+  );
+  /**
+   * Delete an endpoint. Delete an existing Endpoint.
+   *
+   * @param request - The request {@link DeleteEndpointRequest}
+   */
+  deleteEndpoint = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/inference/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/endpoints/${sdkClient.validatePathParam("endpointId", request.endpointId)}`
+  });
+  pageOfListModels = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/inference/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/models`,
+      urlParams: sdkClient.urlParams(
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId],
+        ["tags", request.tags]
+      )
+    },
+    marshalling_gen.unmarshalListModelsResponse
+  );
+  /**
+   * List models. List all available models.
+   *
+   * @param request - The request {@link ListModelsRequest}
+   * @returns A Promise of ListModelsResponse
+   */
+  listModels = (request = {}) => sdkClient.enrichForPagination("models", this.pageOfListModels, request);
+  /**
+   * Get a model. Get the model for the given ID.
+   *
+   * @param request - The request {@link GetModelRequest}
+   * @returns A Promise of Model
+   */
+  getModel = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/inference/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/models/${sdkClient.validatePathParam("modelId", request.modelId)}`
+    },
+    marshalling_gen.unmarshalModel
+  );
+  /**
+   * Waits for {@link Model} to be in a final state.
+   *
+   * @param request - The request {@link GetModelRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Model
+   */
+  waitForModel = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.MODEL_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getModel,
+    request,
+    options
+  );
+  /**
+   * Import a model. Import a new model to your model library.
+   *
+   * @param request - The request {@link CreateModelRequest}
+   * @returns A Promise of Model
+   */
+  createModel = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateModelRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/inference/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/models`
+    },
+    marshalling_gen.unmarshalModel
+  );
+  /**
+   * Delete a model. Delete an existing model from your model library.
+   *
+   * @param request - The request {@link DeleteModelRequest}
+   */
+  deleteModel = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/inference/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/models/${sdkClient.validatePathParam("modelId", request.modelId)}`
+  });
+  pageOfListNodeTypes = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/inference/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/node-types`,
+      urlParams: sdkClient.urlParams(
+        ["include_disabled_types", request.includeDisabledTypes],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListNodeTypesResponse
+  );
+  /**
+   * List available node types. List all available node types. By default, the node types returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
+   *
+   * @param request - The request {@link ListNodeTypesRequest}
+   * @returns A Promise of ListNodeTypesResponse
+   */
+  listNodeTypes = (request) => sdkClient.enrichForPagination("nodeTypes", this.pageOfListNodeTypes, request);
+}
+exports.API = API;

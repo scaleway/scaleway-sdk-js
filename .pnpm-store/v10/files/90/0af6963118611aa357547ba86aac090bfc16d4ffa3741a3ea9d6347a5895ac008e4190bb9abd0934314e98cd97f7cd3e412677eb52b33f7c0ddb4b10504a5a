@@ -1,0 +1,7 @@
+import type { Discount, Invoice, ListConsumptionsResponse, ListDiscountsResponse, ListInvoicesResponse, ListTaxesResponse } from './types.gen';
+export declare const unmarshalDiscount: (data: unknown) => Discount;
+export declare const unmarshalInvoice: (data: unknown) => Invoice;
+export declare const unmarshalListConsumptionsResponse: (data: unknown) => ListConsumptionsResponse;
+export declare const unmarshalListDiscountsResponse: (data: unknown) => ListDiscountsResponse;
+export declare const unmarshalListInvoicesResponse: (data: unknown) => ListInvoicesResponse;
+export declare const unmarshalListTaxesResponse: (data: unknown) => ListTaxesResponse;

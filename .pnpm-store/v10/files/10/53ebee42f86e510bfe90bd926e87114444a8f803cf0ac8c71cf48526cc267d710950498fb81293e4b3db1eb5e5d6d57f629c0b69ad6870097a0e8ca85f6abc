@@ -1,0 +1,39 @@
+{
+  "name": "@scaleway/random-name",
+  "version": "5.1.1",
+  "description": "A small utility to generate a random name",
+  "engines": {
+    "node": ">=20.x"
+  },
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "type": "module",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scaleway/scaleway-lib",
+    "directory": "packages/random-name"
+  },
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "shx rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "type:generate": "tsc --declaration -p tsconfig.build.json",
+    "build": "vite build --config vite.config.ts && pnpm run type:generate",
+    "build:profile": "npx vite-bundle-visualizer -c vite.config.ts",
+    "lint": "eslint --report-unused-disable-directives --cache --cache-strategy content --ext ts,tsx .",
+    "test:unit": "vitest --run --config vite.config.ts",
+    "test:unit:coverage": "pnpm test:unit --coverage"
+  }
+}

@@ -1,0 +1,54 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const json = require("../../../helpers/json.cjs");
+const scwError = require("../scw-error.cjs");
+const buildMessage = (list) => {
+  const invalidArgs = list.reduce((acc, details) => {
+    let readableReason = "";
+    switch (details.reason) {
+      case "required":
+        readableReason = `is required`;
+        break;
+      case "format":
+        readableReason = `is wrongly formatted`;
+        break;
+      case "constraint":
+        readableReason = `does not respect constraint`;
+        break;
+      default:
+        readableReason = `is invalid for unexpected reason`;
+        break;
+    }
+    if (details.helpMessage && details.helpMessage.length > 0) {
+      readableReason = readableReason.concat(`, `, details.helpMessage);
+    }
+    acc.push(`${details.argumentName} ${readableReason}`);
+    return acc;
+  }, []);
+  return `invalid argument(s): ${invalidArgs.join("; ")}`;
+};
+class InvalidArgumentsError extends scwError.ScalewayError {
+  constructor(status, body, details) {
+    super(status, body, buildMessage(details));
+    this.status = status;
+    this.body = body;
+    this.details = details;
+    this.name = "InvalidArgumentsError";
+  }
+  static fromJSON(status, obj) {
+    if (!Array.isArray(obj.details)) return null;
+    return new InvalidArgumentsError(
+      status,
+      obj,
+      obj.details.reduce(
+        (list, detail) => json.isJSONObject(detail) && typeof detail.argument_name === "string" && typeof detail.reason === "string" ? list.concat({
+          argumentName: detail.argument_name,
+          helpMessage: typeof detail.help_message === "string" ? detail.help_message : void 0,
+          reason: detail.reason
+        }) : list,
+        []
+      )
+    );
+  }
+}
+exports.InvalidArgumentsError = InvalidArgumentsError;

@@ -1,0 +1,12 @@
+import type { JSONObject } from '../../helpers/json.js';
+import { ScalewayError } from './scw-error.js';
+/**
+ * Parses Scaleway error from raw body.
+ *
+ * @param status - The status code
+ * @param body - The error response
+ * @returns The resolved error
+ *
+ * @internal
+ */
+export declare const parseScalewayError: (status: number, body: Readonly<JSONObject>) => ScalewayError;

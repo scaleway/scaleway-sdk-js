@@ -1,0 +1,9 @@
+import type { DefaultValues } from '@scaleway/sdk-client';
+import type { CreateDatabaseRequest, Database, DatabaseBackup, ListDatabaseBackupsResponse, ListDatabasesResponse, RestoreDatabaseFromBackupRequest, UpdateDatabaseRequest } from './types.gen';
+export declare const unmarshalDatabaseBackup: (data: unknown) => DatabaseBackup;
+export declare const unmarshalDatabase: (data: unknown) => Database;
+export declare const unmarshalListDatabaseBackupsResponse: (data: unknown) => ListDatabaseBackupsResponse;
+export declare const unmarshalListDatabasesResponse: (data: unknown) => ListDatabasesResponse;
+export declare const marshalCreateDatabaseRequest: (request: CreateDatabaseRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalRestoreDatabaseFromBackupRequest: (request: RestoreDatabaseFromBackupRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateDatabaseRequest: (request: UpdateDatabaseRequest, defaults: DefaultValues) => Record<string, unknown>;

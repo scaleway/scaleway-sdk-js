@@ -1,0 +1,22 @@
+const CERTIFICATE_TRANSIENT_STATUSES = ["pending"];
+const INSTANCE_TRANSIENT_STATUSES = [
+  "pending",
+  "migrating"
+];
+const LB_TRANSIENT_STATUSES = [
+  "pending",
+  "migrating",
+  "to_create",
+  "creating",
+  "to_delete",
+  "deleting"
+];
+const PRIVATE_NETWORK_TRANSIENT_STATUSES = [
+  "pending"
+];
+export {
+  CERTIFICATE_TRANSIENT_STATUSES,
+  INSTANCE_TRANSIENT_STATUSES,
+  LB_TRANSIENT_STATUSES,
+  PRIVATE_NETWORK_TRANSIENT_STATUSES
+};

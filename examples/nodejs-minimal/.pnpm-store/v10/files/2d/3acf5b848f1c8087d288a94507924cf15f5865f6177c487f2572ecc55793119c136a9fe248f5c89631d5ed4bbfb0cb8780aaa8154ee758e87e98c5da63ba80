@@ -1,0 +1,30 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const isAccessKeyRegex = /^SCW[A-Z0-9]{17}$/i;
+const isRegionRegex = /^[a-z]{2}-[a-z]{3}$/i;
+const isUUIDRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/i;
+const isZoneRegex = /^[a-z]{2}-[a-z]{3}-[1-9]$/i;
+const isUUID = (str) => isUUIDRegex.test(str);
+const isAccessKey = (str) => isAccessKeyRegex.test(str);
+const isSecretKey = (str) => isUUID(str);
+const isOrganizationId = (str) => isUUID(str);
+const isProjectId = (str) => isUUID(str);
+const isRegion = (str) => isRegionRegex.test(str);
+const isZone = (str) => isZoneRegex.test(str);
+const isURL = (str) => {
+  let url;
+  try {
+    url = new URL(str);
+  } catch {
+    return false;
+  }
+  return url.protocol === "http:" || url.protocol === "https:";
+};
+exports.isAccessKey = isAccessKey;
+exports.isOrganizationId = isOrganizationId;
+exports.isProjectId = isProjectId;
+exports.isRegion = isRegion;
+exports.isSecretKey = isSecretKey;
+exports.isURL = isURL;
+exports.isUUID = isUUID;
+exports.isZone = isZone;

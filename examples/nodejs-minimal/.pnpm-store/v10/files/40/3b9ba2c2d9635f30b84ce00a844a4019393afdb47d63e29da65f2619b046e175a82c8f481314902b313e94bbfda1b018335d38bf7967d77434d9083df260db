@@ -1,0 +1,14 @@
+const CreateJobRequest = {
+  name: {
+    minLength: 1
+  }
+};
+const CreateProcessRequest = {
+  name: {
+    minLength: 1
+  }
+};
+export {
+  CreateJobRequest,
+  CreateProcessRequest
+};

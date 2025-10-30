@@ -1,0 +1,23 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const CLUSTER_TRANSIENT_STATUSES = [
+  "creating",
+  "deleting",
+  "updating"
+];
+const NODE_TRANSIENT_STATUSES = [
+  "creating",
+  "deleting",
+  "rebooting",
+  "upgrading",
+  "starting",
+  "registering"
+];
+const POOL_TRANSIENT_STATUSES = [
+  "deleting",
+  "scaling",
+  "upgrading"
+];
+exports.CLUSTER_TRANSIENT_STATUSES = CLUSTER_TRANSIENT_STATUSES;
+exports.NODE_TRANSIENT_STATUSES = NODE_TRANSIENT_STATUSES;
+exports.POOL_TRANSIENT_STATUSES = POOL_TRANSIENT_STATUSES;

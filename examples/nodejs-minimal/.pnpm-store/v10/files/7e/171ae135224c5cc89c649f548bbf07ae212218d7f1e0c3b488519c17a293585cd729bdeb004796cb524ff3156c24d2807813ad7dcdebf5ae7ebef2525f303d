@@ -1,0 +1,3 @@
+import type { ServerPrivateNetworkStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link ServerPrivateNetworkStatus}. */
+export declare const SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES: ServerPrivateNetworkStatus[];

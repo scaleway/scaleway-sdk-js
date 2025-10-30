@@ -1,0 +1,21 @@
+import type { RequestInterceptor } from './types';
+/**
+ * Adds an header to a request through an interceptor.
+ *
+ * @param key - The header key
+ * @param value - The header value
+ * @returns The Request interceptor
+ *
+ * @internal
+ */
+export declare const addHeaderInterceptor: (key: string, value?: string) => RequestInterceptor;
+/**
+ * Adds asynchronously an header to a request through an interceptor.
+ *
+ * @param key - The header key
+ * @param value - The header value as a Promise
+ * @returns The Request interceptor
+ *
+ * @internal
+ */
+export declare const addAsyncHeaderInterceptor: (key: string, getter: () => Promise<string | undefined>) => RequestInterceptor;

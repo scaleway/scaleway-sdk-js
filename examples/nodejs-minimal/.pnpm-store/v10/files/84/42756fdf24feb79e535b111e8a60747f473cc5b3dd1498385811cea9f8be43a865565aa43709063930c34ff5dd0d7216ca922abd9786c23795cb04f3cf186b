@@ -1,0 +1,11 @@
+import type { JSONObject } from '../../../helpers/json.js';
+import { ScalewayError } from '../scw-error.js';
+import { ResourceNotFoundError } from '../standard/resource-not-found-error.js';
+/**
+ * UnknownResource error is only returned by the instance API.
+ *
+ * @public
+ */
+export declare class UnknownResourceMapper {
+    static fromJSON(status: number, obj: Readonly<JSONObject>): ResourceNotFoundError | ScalewayError;
+}

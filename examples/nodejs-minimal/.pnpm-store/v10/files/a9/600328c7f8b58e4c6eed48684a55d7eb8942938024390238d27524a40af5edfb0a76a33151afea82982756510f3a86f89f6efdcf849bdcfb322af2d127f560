@@ -1,0 +1,114 @@
+import { isJSONObject, unmarshalDate, unmarshalArrayOfObject } from "@scaleway/sdk-client";
+const unmarshalCategory = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Category' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    description: data.description,
+    id: data.id,
+    name: data.name
+  };
+};
+const unmarshalImage = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Image' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    categories: data.categories,
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description,
+    id: data.id,
+    label: data.label,
+    logo: data.logo,
+    name: data.name,
+    updatedAt: unmarshalDate(data.updated_at),
+    validUntil: unmarshalDate(data.valid_until)
+  };
+};
+const unmarshalLocalImage = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'LocalImage' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    arch: data.arch,
+    compatibleCommercialTypes: data.compatible_commercial_types,
+    id: data.id,
+    label: data.label,
+    type: data.type,
+    zone: data.zone
+  };
+};
+const unmarshalVersion = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Version' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    publishedAt: unmarshalDate(data.published_at),
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalListCategoriesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListCategoriesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    categories: unmarshalArrayOfObject(data.categories, unmarshalCategory),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListImagesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListImagesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    images: unmarshalArrayOfObject(data.images, unmarshalImage),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListLocalImagesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListLocalImagesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    localImages: unmarshalArrayOfObject(data.local_images, unmarshalLocalImage),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListVersionsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListVersionsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    totalCount: data.total_count,
+    versions: unmarshalArrayOfObject(data.versions, unmarshalVersion)
+  };
+};
+export {
+  unmarshalCategory,
+  unmarshalImage,
+  unmarshalListCategoriesResponse,
+  unmarshalListImagesResponse,
+  unmarshalListLocalImagesResponse,
+  unmarshalListVersionsResponse,
+  unmarshalLocalImage,
+  unmarshalVersion
+};

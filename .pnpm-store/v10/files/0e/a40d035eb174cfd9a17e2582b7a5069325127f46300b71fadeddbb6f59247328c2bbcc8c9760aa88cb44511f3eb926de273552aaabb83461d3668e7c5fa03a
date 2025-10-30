@@ -1,0 +1,25 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const helpers = require("../internal/interceptors/helpers.cjs");
+const clientIniProfile = require("./client-ini-profile.cjs");
+const constants = require("./constants.cjs");
+const authenticateWithSessionToken = (getToken) => helpers.addAsyncHeaderInterceptor(constants.SESSION_HEADER_KEY, getToken);
+const authenticateWithSecrets = (secrets) => {
+  clientIniProfile.assertValidAuthenticationSecrets(secrets);
+  return helpers.addHeaderInterceptor(constants.AUTH_HEADER_KEY, secrets.secretKey);
+};
+const obfuscateToken = (key) => `${key.substring(0, 5)}xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`;
+const obfuscateUUID = (key) => `${key.substring(0, 8)}-xxxx-xxxx-xxxx-xxxxxxxxxxxx`;
+const obfuscateAuthHeadersEntry = ([
+  name,
+  value
+]) => {
+  if (name === constants.SESSION_HEADER_KEY) return [name, obfuscateToken(value)];
+  if (name === constants.AUTH_HEADER_KEY) return [name, obfuscateUUID(value)];
+  return [name, value];
+};
+exports.authenticateWithSecrets = authenticateWithSecrets;
+exports.authenticateWithSessionToken = authenticateWithSessionToken;
+exports.obfuscateAuthHeadersEntry = obfuscateAuthHeadersEntry;
+exports.obfuscateToken = obfuscateToken;
+exports.obfuscateUUID = obfuscateUUID;

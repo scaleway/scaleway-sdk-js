@@ -1,0 +1,85 @@
+const NatsAccount = {
+  name: {
+    maxLength: 64,
+    minLength: 1
+  }
+};
+const NatsApiCreateNatsAccountRequest = {
+  name: {
+    maxLength: 64,
+    minLength: 1
+  }
+};
+const NatsApiCreateNatsCredentialsRequest = {
+  name: {
+    maxLength: 500,
+    minLength: 1
+  }
+};
+const NatsApiUpdateNatsAccountRequest = {
+  name: {
+    maxLength: 64,
+    minLength: 1
+  }
+};
+const NatsCredentials = {
+  name: {
+    maxLength: 500,
+    minLength: 1
+  }
+};
+const SnsApiCreateSnsCredentialsRequest = {
+  name: {
+    maxLength: 500,
+    minLength: 1
+  }
+};
+const SnsApiUpdateSnsCredentialsRequest = {
+  name: {
+    maxLength: 500,
+    minLength: 1
+  }
+};
+const SnsCredentials = {
+  accessKey: {
+    minLength: 1
+  },
+  name: {
+    maxLength: 500,
+    minLength: 1
+  }
+};
+const SqsApiCreateSqsCredentialsRequest = {
+  name: {
+    maxLength: 500,
+    minLength: 1
+  }
+};
+const SqsApiUpdateSqsCredentialsRequest = {
+  name: {
+    maxLength: 500,
+    minLength: 1
+  }
+};
+const SqsCredentials = {
+  accessKey: {
+    minLength: 1
+  },
+  name: {
+    maxLength: 500,
+    minLength: 1
+  }
+};
+export {
+  NatsAccount,
+  NatsApiCreateNatsAccountRequest,
+  NatsApiCreateNatsCredentialsRequest,
+  NatsApiUpdateNatsAccountRequest,
+  NatsCredentials,
+  SnsApiCreateSnsCredentialsRequest,
+  SnsApiUpdateSnsCredentialsRequest,
+  SnsCredentials,
+  SqsApiCreateSqsCredentialsRequest,
+  SqsApiUpdateSqsCredentialsRequest,
+  SqsCredentials
+};

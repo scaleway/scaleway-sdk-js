@@ -1,0 +1,4 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const isBrowser = () => typeof window !== "undefined" && typeof window.document !== "undefined";
+exports.isBrowser = isBrowser;

@@ -1,0 +1,34 @@
+const CRON_TRANSIENT_STATUSES = [
+  "deleting",
+  "creating",
+  "pending"
+];
+const DOMAIN_TRANSIENT_STATUSES = [
+  "deleting",
+  "creating",
+  "pending"
+];
+const FUNCTION_TRANSIENT_STATUSES = [
+  "deleting",
+  "creating",
+  "pending"
+];
+const NAMESPACE_TRANSIENT_STATUSES = [
+  "deleting",
+  "creating",
+  "pending"
+];
+const TOKEN_TRANSIENT_STATUSES = ["deleting", "creating"];
+const TRIGGER_TRANSIENT_STATUSES = [
+  "deleting",
+  "creating",
+  "pending"
+];
+export {
+  CRON_TRANSIENT_STATUSES,
+  DOMAIN_TRANSIENT_STATUSES,
+  FUNCTION_TRANSIENT_STATUSES,
+  NAMESPACE_TRANSIENT_STATUSES,
+  TOKEN_TRANSIENT_STATUSES,
+  TRIGGER_TRANSIENT_STATUSES
+};

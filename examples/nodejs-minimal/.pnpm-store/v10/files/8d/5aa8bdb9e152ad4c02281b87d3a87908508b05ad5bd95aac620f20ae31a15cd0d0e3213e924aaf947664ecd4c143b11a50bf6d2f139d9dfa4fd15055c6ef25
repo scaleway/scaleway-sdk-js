@@ -1,0 +1,4 @@
+import * as index from "./v1/index.js";
+export {
+  index as Instancev1
+};

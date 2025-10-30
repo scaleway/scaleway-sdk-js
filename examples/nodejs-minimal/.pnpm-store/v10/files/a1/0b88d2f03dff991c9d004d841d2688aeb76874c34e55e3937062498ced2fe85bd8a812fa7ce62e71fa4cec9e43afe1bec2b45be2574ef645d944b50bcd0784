@@ -1,0 +1,1311 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const randomName = require("@scaleway/random-name");
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalIp = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Ip' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    id: data.id,
+    ipAddress: data.ip_address,
+    lbId: data.lb_id,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    region: data.region,
+    reverse: data.reverse,
+    tags: data.tags,
+    zone: data.zone
+  };
+};
+const unmarshalSubscriberEmailConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SubscriberEmailConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    email: data.email
+  };
+};
+const unmarshalSubscriberWebhookConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SubscriberWebhookConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    uri: data.uri
+  };
+};
+const unmarshalSubscriber = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Subscriber' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    emailConfig: data.email_config ? unmarshalSubscriberEmailConfig(data.email_config) : void 0,
+    id: data.id,
+    name: data.name,
+    webhookConfig: data.webhook_config ? unmarshalSubscriberWebhookConfig(data.webhook_config) : void 0
+  };
+};
+const unmarshalHealthCheckHttpConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HealthCheckHttpConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    code: data.code,
+    hostHeader: data.host_header,
+    method: data.method,
+    uri: data.uri
+  };
+};
+const unmarshalHealthCheckHttpsConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HealthCheckHttpsConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    code: data.code,
+    hostHeader: data.host_header,
+    method: data.method,
+    sni: data.sni,
+    uri: data.uri
+  };
+};
+const unmarshalHealthCheckLdapConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HealthCheckLdapConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {};
+};
+const unmarshalHealthCheckMysqlConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HealthCheckMysqlConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    user: data.user
+  };
+};
+const unmarshalHealthCheckPgsqlConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HealthCheckPgsqlConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    user: data.user
+  };
+};
+const unmarshalHealthCheckRedisConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HealthCheckRedisConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {};
+};
+const unmarshalHealthCheckTcpConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HealthCheckTcpConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {};
+};
+const unmarshalHealthCheck = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HealthCheck' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    checkDelay: data.check_delay,
+    checkMaxRetries: data.check_max_retries,
+    checkSendProxy: data.check_send_proxy,
+    checkTimeout: data.check_timeout,
+    httpConfig: data.http_config ? unmarshalHealthCheckHttpConfig(data.http_config) : void 0,
+    httpsConfig: data.https_config ? unmarshalHealthCheckHttpsConfig(data.https_config) : void 0,
+    ldapConfig: data.ldap_config ? unmarshalHealthCheckLdapConfig(data.ldap_config) : void 0,
+    mysqlConfig: data.mysql_config ? unmarshalHealthCheckMysqlConfig(data.mysql_config) : void 0,
+    pgsqlConfig: data.pgsql_config ? unmarshalHealthCheckPgsqlConfig(data.pgsql_config) : void 0,
+    port: data.port,
+    redisConfig: data.redis_config ? unmarshalHealthCheckRedisConfig(data.redis_config) : void 0,
+    tcpConfig: data.tcp_config ? unmarshalHealthCheckTcpConfig(data.tcp_config) : void 0,
+    transientCheckDelay: data.transient_check_delay
+  };
+};
+const unmarshalInstance = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Instance' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    id: data.id,
+    ipAddress: data.ip_address,
+    region: data.region,
+    status: data.status,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalLb = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Lb' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    backendCount: data.backend_count,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    description: data.description,
+    frontendCount: data.frontend_count,
+    id: data.id,
+    instances: sdkClient.unmarshalArrayOfObject(data.instances, unmarshalInstance),
+    ip: sdkClient.unmarshalArrayOfObject(data.ip, unmarshalIp),
+    name: data.name,
+    organizationId: data.organization_id,
+    privateNetworkCount: data.private_network_count,
+    projectId: data.project_id,
+    region: data.region,
+    routeCount: data.route_count,
+    sslCompatibilityLevel: data.ssl_compatibility_level,
+    status: data.status,
+    subscriber: data.subscriber ? unmarshalSubscriber(data.subscriber) : void 0,
+    tags: data.tags,
+    type: data.type,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalBackend = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Backend' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    failoverHost: data.failover_host,
+    forwardPort: data.forward_port,
+    forwardPortAlgorithm: data.forward_port_algorithm,
+    forwardProtocol: data.forward_protocol,
+    healthCheck: data.health_check ? unmarshalHealthCheck(data.health_check) : void 0,
+    id: data.id,
+    ignoreSslServerVerify: data.ignore_ssl_server_verify,
+    lb: data.lb ? unmarshalLb(data.lb) : void 0,
+    maxConnections: data.max_connections,
+    maxRetries: data.max_retries,
+    name: data.name,
+    onMarkedDownAction: data.on_marked_down_action,
+    pool: data.pool,
+    proxyProtocol: data.proxy_protocol,
+    redispatchAttemptCount: data.redispatch_attempt_count,
+    sendProxyV2: data.send_proxy_v2,
+    sslBridging: data.ssl_bridging,
+    stickySessions: data.sticky_sessions,
+    stickySessionsCookieName: data.sticky_sessions_cookie_name,
+    timeoutConnect: data.timeout_connect,
+    timeoutQueue: data.timeout_queue,
+    timeoutServer: data.timeout_server,
+    timeoutTunnel: data.timeout_tunnel,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalCertificate = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Certificate' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    commonName: data.common_name,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    fingerprint: data.fingerprint,
+    id: data.id,
+    lb: data.lb ? unmarshalLb(data.lb) : void 0,
+    name: data.name,
+    notValidAfter: sdkClient.unmarshalDate(data.not_valid_after),
+    notValidBefore: sdkClient.unmarshalDate(data.not_valid_before),
+    status: data.status,
+    statusDetails: data.status_details,
+    subjectAlternativeName: data.subject_alternative_name,
+    type: data.type,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalFrontend = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Frontend' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    backend: data.backend ? unmarshalBackend(data.backend) : void 0,
+    certificate: data.certificate ? unmarshalCertificate(data.certificate) : void 0,
+    certificateIds: data.certificate_ids,
+    connectionRateLimit: data.connection_rate_limit,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    enableAccessLogs: data.enable_access_logs,
+    enableHttp3: data.enable_http3,
+    id: data.id,
+    inboundPort: data.inbound_port,
+    lb: data.lb ? unmarshalLb(data.lb) : void 0,
+    name: data.name,
+    timeoutClient: data.timeout_client,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalAclActionRedirect = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AclActionRedirect' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    code: data.code,
+    target: data.target,
+    type: data.type
+  };
+};
+const unmarshalAclAction = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AclAction' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    redirect: data.redirect ? unmarshalAclActionRedirect(data.redirect) : void 0,
+    type: data.type
+  };
+};
+const unmarshalAclMatch = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AclMatch' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    httpFilter: data.http_filter,
+    httpFilterOption: data.http_filter_option,
+    httpFilterValue: data.http_filter_value,
+    invert: data.invert,
+    ipSubnet: data.ip_subnet,
+    ipsEdgeServices: data.ips_edge_services
+  };
+};
+const unmarshalAcl = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Acl' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    action: data.action ? unmarshalAclAction(data.action) : void 0,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    description: data.description,
+    frontend: data.frontend ? unmarshalFrontend(data.frontend) : void 0,
+    id: data.id,
+    index: data.index,
+    match: data.match ? unmarshalAclMatch(data.match) : void 0,
+    name: data.name,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalPrivateNetworkDHCPConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PrivateNetworkDHCPConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    ipId: data.ip_id
+  };
+};
+const unmarshalPrivateNetworkIpamConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PrivateNetworkIpamConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {};
+};
+const unmarshalPrivateNetworkStaticConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PrivateNetworkStaticConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    ipAddress: data.ip_address ? data.ip_address : void 0
+  };
+};
+const unmarshalPrivateNetwork = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PrivateNetwork' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    dhcpConfig: data.dhcp_config ? unmarshalPrivateNetworkDHCPConfig(data.dhcp_config) : void 0,
+    ipamConfig: data.ipam_config ? unmarshalPrivateNetworkIpamConfig(data.ipam_config) : void 0,
+    ipamIds: data.ipam_ids,
+    lb: data.lb ? unmarshalLb(data.lb) : void 0,
+    privateNetworkId: data.private_network_id,
+    staticConfig: data.static_config ? unmarshalPrivateNetworkStaticConfig(data.static_config) : void 0,
+    status: data.status,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalRouteMatch = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RouteMatch' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    hostHeader: data.host_header,
+    matchSubdomains: data.match_subdomains,
+    pathBegin: data.path_begin,
+    sni: data.sni
+  };
+};
+const unmarshalRoute = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Route' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    backendId: data.backend_id,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    frontendId: data.frontend_id,
+    id: data.id,
+    match: data.match ? unmarshalRouteMatch(data.match) : void 0,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalBackendServerStats = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'BackendServerStats' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    backendId: data.backend_id,
+    instanceId: data.instance_id,
+    ip: data.ip,
+    lastHealthCheckStatus: data.last_health_check_status,
+    serverState: data.server_state,
+    serverStateChangedAt: sdkClient.unmarshalDate(data.server_state_changed_at)
+  };
+};
+const unmarshalLbStats = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'LbStats' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    backendServersStats: sdkClient.unmarshalArrayOfObject(
+      data.backend_servers_stats,
+      unmarshalBackendServerStats
+    )
+  };
+};
+const unmarshalListAclResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListAclResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    acls: sdkClient.unmarshalArrayOfObject(data.acls, unmarshalAcl),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListBackendStatsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListBackendStatsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    backendServersStats: sdkClient.unmarshalArrayOfObject(
+      data.backend_servers_stats,
+      unmarshalBackendServerStats
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListBackendsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListBackendsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    backends: sdkClient.unmarshalArrayOfObject(data.backends, unmarshalBackend),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListCertificatesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListCertificatesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    certificates: sdkClient.unmarshalArrayOfObject(
+      data.certificates,
+      unmarshalCertificate
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListFrontendsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListFrontendsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    frontends: sdkClient.unmarshalArrayOfObject(data.frontends, unmarshalFrontend),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListIpsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListIpsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    ips: sdkClient.unmarshalArrayOfObject(data.ips, unmarshalIp),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListLbPrivateNetworksResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListLbPrivateNetworksResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    privateNetwork: sdkClient.unmarshalArrayOfObject(
+      data.private_network,
+      unmarshalPrivateNetwork
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalLbType = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'LbType' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    description: data.description,
+    name: data.name,
+    region: data.region,
+    stockStatus: data.stock_status,
+    zone: data.zone
+  };
+};
+const unmarshalListLbTypesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListLbTypesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    lbTypes: sdkClient.unmarshalArrayOfObject(data.lb_types, unmarshalLbType),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListLbsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListLbsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    lbs: sdkClient.unmarshalArrayOfObject(data.lbs, unmarshalLb),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListRoutesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListRoutesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    routes: sdkClient.unmarshalArrayOfObject(data.routes, unmarshalRoute),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListSubscriberResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSubscriberResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    subscribers: sdkClient.unmarshalArrayOfObject(data.subscribers, unmarshalSubscriber),
+    totalCount: data.total_count
+  };
+};
+const unmarshalSetAclsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetAclsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    acls: sdkClient.unmarshalArrayOfObject(data.acls, unmarshalAcl),
+    totalCount: data.total_count
+  };
+};
+const marshalAddBackendServersRequest = (request, defaults) => ({
+  server_ip: request.serverIp
+});
+const marshalPrivateNetworkDHCPConfig = (request, defaults) => ({
+  ip_id: request.ipId
+});
+const marshalPrivateNetworkIpamConfig = (request, defaults) => ({});
+const marshalPrivateNetworkStaticConfig = (request, defaults) => ({
+  ip_address: request.ipAddress
+});
+const marshalAttachPrivateNetworkRequest = (request, defaults) => ({
+  ipam_ids: request.ipamIds,
+  ...sdkClient.resolveOneOf([
+    {
+      param: "static_config",
+      value: request.staticConfig !== void 0 ? marshalPrivateNetworkStaticConfig(request.staticConfig) : void 0
+    },
+    {
+      param: "dhcp_config",
+      value: request.dhcpConfig !== void 0 ? marshalPrivateNetworkDHCPConfig(request.dhcpConfig) : void 0
+    },
+    {
+      param: "ipam_config",
+      value: request.ipamConfig !== void 0 ? marshalPrivateNetworkIpamConfig(request.ipamConfig) : void 0
+    }
+  ])
+});
+const marshalAclActionRedirect = (request, defaults) => ({
+  code: request.code,
+  target: request.target,
+  type: request.type
+});
+const marshalAclAction = (request, defaults) => ({
+  redirect: request.redirect !== void 0 ? marshalAclActionRedirect(request.redirect) : void 0,
+  type: request.type
+});
+const marshalAclMatch = (request, defaults) => ({
+  http_filter: request.httpFilter,
+  http_filter_option: request.httpFilterOption,
+  http_filter_value: request.httpFilterValue,
+  invert: request.invert,
+  ip_subnet: request.ipSubnet,
+  ips_edge_services: request.ipsEdgeServices
+});
+const marshalCreateAclRequest = (request, defaults) => ({
+  action: marshalAclAction(request.action),
+  description: request.description,
+  index: request.index,
+  match: request.match !== void 0 ? marshalAclMatch(request.match) : void 0,
+  name: request.name || randomName("acl")
+});
+const marshalHealthCheckHttpConfig = (request, defaults) => ({
+  code: request.code,
+  host_header: request.hostHeader,
+  method: request.method,
+  uri: request.uri
+});
+const marshalHealthCheckHttpsConfig = (request, defaults) => ({
+  code: request.code,
+  host_header: request.hostHeader,
+  method: request.method,
+  sni: request.sni,
+  uri: request.uri
+});
+const marshalHealthCheckLdapConfig = (request, defaults) => ({});
+const marshalHealthCheckMysqlConfig = (request, defaults) => ({
+  user: request.user
+});
+const marshalHealthCheckPgsqlConfig = (request, defaults) => ({
+  user: request.user
+});
+const marshalHealthCheckRedisConfig = (request, defaults) => ({});
+const marshalHealthCheckTcpConfig = (request, defaults) => ({});
+const marshalHealthCheck = (request, defaults) => ({
+  check_delay: request.checkDelay,
+  check_max_retries: request.checkMaxRetries,
+  check_send_proxy: request.checkSendProxy,
+  check_timeout: request.checkTimeout,
+  port: request.port,
+  transient_check_delay: request.transientCheckDelay,
+  ...sdkClient.resolveOneOf([
+    {
+      param: "tcp_config",
+      value: request.tcpConfig !== void 0 ? marshalHealthCheckTcpConfig(request.tcpConfig) : void 0
+    },
+    {
+      param: "mysql_config",
+      value: request.mysqlConfig !== void 0 ? marshalHealthCheckMysqlConfig(request.mysqlConfig) : void 0
+    },
+    {
+      param: "pgsql_config",
+      value: request.pgsqlConfig !== void 0 ? marshalHealthCheckPgsqlConfig(request.pgsqlConfig) : void 0
+    },
+    {
+      param: "ldap_config",
+      value: request.ldapConfig !== void 0 ? marshalHealthCheckLdapConfig(request.ldapConfig) : void 0
+    },
+    {
+      param: "redis_config",
+      value: request.redisConfig !== void 0 ? marshalHealthCheckRedisConfig(request.redisConfig) : void 0
+    },
+    {
+      param: "http_config",
+      value: request.httpConfig !== void 0 ? marshalHealthCheckHttpConfig(request.httpConfig) : void 0
+    },
+    {
+      param: "https_config",
+      value: request.httpsConfig !== void 0 ? marshalHealthCheckHttpsConfig(request.httpsConfig) : void 0
+    }
+  ])
+});
+const marshalCreateBackendRequest = (request, defaults) => ({
+  failover_host: request.failoverHost,
+  forward_port: request.forwardPort,
+  forward_port_algorithm: request.forwardPortAlgorithm,
+  forward_protocol: request.forwardProtocol,
+  health_check: marshalHealthCheck(request.healthCheck),
+  ignore_ssl_server_verify: request.ignoreSslServerVerify,
+  max_connections: request.maxConnections,
+  max_retries: request.maxRetries,
+  name: request.name || randomName("lbb"),
+  on_marked_down_action: request.onMarkedDownAction,
+  proxy_protocol: request.proxyProtocol,
+  redispatch_attempt_count: request.redispatchAttemptCount,
+  send_proxy_v2: request.sendProxyV2,
+  server_ip: request.serverIp,
+  ssl_bridging: request.sslBridging,
+  sticky_sessions: request.stickySessions,
+  sticky_sessions_cookie_name: request.stickySessionsCookieName,
+  timeout_connect: request.timeoutConnect,
+  timeout_queue: request.timeoutQueue,
+  timeout_server: request.timeoutServer,
+  timeout_tunnel: request.timeoutTunnel
+});
+const marshalCreateCertificateRequestCustomCertificate = (request, defaults) => ({
+  certificate_chain: request.certificateChain
+});
+const marshalCreateCertificateRequestLetsencryptConfig = (request, defaults) => ({
+  common_name: request.commonName,
+  subject_alternative_name: request.subjectAlternativeName
+});
+const marshalCreateCertificateRequest = (request, defaults) => ({
+  name: request.name || randomName("certificate"),
+  ...sdkClient.resolveOneOf([
+    {
+      param: "letsencrypt",
+      value: request.letsencrypt !== void 0 ? marshalCreateCertificateRequestLetsencryptConfig(
+        request.letsencrypt
+      ) : void 0
+    },
+    {
+      param: "custom_certificate",
+      value: request.customCertificate !== void 0 ? marshalCreateCertificateRequestCustomCertificate(
+        request.customCertificate
+      ) : void 0
+    }
+  ])
+});
+const marshalCreateFrontendRequest = (request, defaults) => ({
+  backend_id: request.backendId,
+  certificate_id: request.certificateId,
+  certificate_ids: request.certificateIds,
+  connection_rate_limit: request.connectionRateLimit,
+  enable_access_logs: request.enableAccessLogs,
+  enable_http3: request.enableHttp3,
+  inbound_port: request.inboundPort,
+  name: request.name || randomName("lbf"),
+  timeout_client: request.timeoutClient
+});
+const marshalCreateIpRequest = (request, defaults) => ({
+  is_ipv6: request.isIpv6,
+  reverse: request.reverse,
+  tags: request.tags,
+  ...sdkClient.resolveOneOf([
+    {
+      default: defaults.defaultProjectId,
+      param: "project_id",
+      value: request.projectId
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: "organization_id",
+      value: request.organizationId
+    }
+  ])
+});
+const marshalCreateLbRequest = (request, defaults) => ({
+  assign_flexible_ip: request.assignFlexibleIp,
+  assign_flexible_ipv6: request.assignFlexibleIpv6,
+  description: request.description,
+  ip_id: request.ipId,
+  ip_ids: request.ipIds,
+  name: request.name || randomName("lb"),
+  ssl_compatibility_level: request.sslCompatibilityLevel,
+  tags: request.tags,
+  type: request.type,
+  ...sdkClient.resolveOneOf([
+    {
+      default: defaults.defaultProjectId,
+      param: "project_id",
+      value: request.projectId
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: "organization_id",
+      value: request.organizationId
+    }
+  ])
+});
+const marshalRouteMatch = (request, defaults) => ({
+  match_subdomains: request.matchSubdomains,
+  ...sdkClient.resolveOneOf([
+    { param: "sni", value: request.sni },
+    { param: "host_header", value: request.hostHeader },
+    { param: "path_begin", value: request.pathBegin }
+  ])
+});
+const marshalCreateRouteRequest = (request, defaults) => ({
+  backend_id: request.backendId,
+  frontend_id: request.frontendId,
+  match: request.match !== void 0 ? marshalRouteMatch(request.match) : void 0
+});
+const marshalSubscriberEmailConfig = (request, defaults) => ({
+  email: request.email
+});
+const marshalSubscriberWebhookConfig = (request, defaults) => ({
+  uri: request.uri
+});
+const marshalCreateSubscriberRequest = (request, defaults) => ({
+  name: request.name,
+  ...sdkClient.resolveOneOf([
+    {
+      default: defaults.defaultProjectId,
+      param: "project_id",
+      value: request.projectId
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: "organization_id",
+      value: request.organizationId
+    }
+  ]),
+  ...sdkClient.resolveOneOf([
+    {
+      param: "email_config",
+      value: request.emailConfig !== void 0 ? marshalSubscriberEmailConfig(request.emailConfig) : void 0
+    },
+    {
+      param: "webhook_config",
+      value: request.webhookConfig !== void 0 ? marshalSubscriberWebhookConfig(request.webhookConfig) : void 0
+    }
+  ])
+});
+const marshalMigrateLbRequest = (request, defaults) => ({
+  type: request.type
+});
+const marshalRemoveBackendServersRequest = (request, defaults) => ({
+  server_ip: request.serverIp
+});
+const marshalSetBackendServersRequest = (request, defaults) => ({
+  server_ip: request.serverIp
+});
+const marshalSubscribeToLbRequest = (request, defaults) => ({
+  subscriber_id: request.subscriberId
+});
+const marshalUpdateAclRequest = (request, defaults) => ({
+  action: marshalAclAction(request.action),
+  description: request.description,
+  index: request.index,
+  match: request.match !== void 0 ? marshalAclMatch(request.match) : void 0,
+  name: request.name
+});
+const marshalUpdateBackendRequest = (request, defaults) => ({
+  failover_host: request.failoverHost,
+  forward_port: request.forwardPort,
+  forward_port_algorithm: request.forwardPortAlgorithm,
+  forward_protocol: request.forwardProtocol,
+  ignore_ssl_server_verify: request.ignoreSslServerVerify,
+  max_connections: request.maxConnections,
+  max_retries: request.maxRetries,
+  name: request.name,
+  on_marked_down_action: request.onMarkedDownAction,
+  proxy_protocol: request.proxyProtocol,
+  redispatch_attempt_count: request.redispatchAttemptCount,
+  send_proxy_v2: request.sendProxyV2,
+  ssl_bridging: request.sslBridging,
+  sticky_sessions: request.stickySessions,
+  sticky_sessions_cookie_name: request.stickySessionsCookieName,
+  timeout_connect: request.timeoutConnect,
+  timeout_queue: request.timeoutQueue,
+  timeout_server: request.timeoutServer,
+  timeout_tunnel: request.timeoutTunnel
+});
+const marshalUpdateCertificateRequest = (request, defaults) => ({
+  name: request.name
+});
+const marshalUpdateFrontendRequest = (request, defaults) => ({
+  backend_id: request.backendId,
+  certificate_id: request.certificateId,
+  certificate_ids: request.certificateIds,
+  connection_rate_limit: request.connectionRateLimit,
+  enable_access_logs: request.enableAccessLogs,
+  enable_http3: request.enableHttp3,
+  inbound_port: request.inboundPort,
+  name: request.name,
+  timeout_client: request.timeoutClient
+});
+const marshalUpdateHealthCheckRequest = (request, defaults) => ({
+  check_delay: request.checkDelay,
+  check_max_retries: request.checkMaxRetries,
+  check_send_proxy: request.checkSendProxy,
+  check_timeout: request.checkTimeout,
+  port: request.port,
+  transient_check_delay: request.transientCheckDelay,
+  ...sdkClient.resolveOneOf([
+    {
+      param: "tcp_config",
+      value: request.tcpConfig !== void 0 ? marshalHealthCheckTcpConfig(request.tcpConfig) : void 0
+    },
+    {
+      param: "mysql_config",
+      value: request.mysqlConfig !== void 0 ? marshalHealthCheckMysqlConfig(request.mysqlConfig) : void 0
+    },
+    {
+      param: "pgsql_config",
+      value: request.pgsqlConfig !== void 0 ? marshalHealthCheckPgsqlConfig(request.pgsqlConfig) : void 0
+    },
+    {
+      param: "ldap_config",
+      value: request.ldapConfig !== void 0 ? marshalHealthCheckLdapConfig(request.ldapConfig) : void 0
+    },
+    {
+      param: "redis_config",
+      value: request.redisConfig !== void 0 ? marshalHealthCheckRedisConfig(request.redisConfig) : void 0
+    },
+    {
+      param: "http_config",
+      value: request.httpConfig !== void 0 ? marshalHealthCheckHttpConfig(request.httpConfig) : void 0
+    },
+    {
+      param: "https_config",
+      value: request.httpsConfig !== void 0 ? marshalHealthCheckHttpsConfig(request.httpsConfig) : void 0
+    }
+  ])
+});
+const marshalUpdateIpRequest = (request, defaults) => ({
+  lb_id: request.lbId,
+  reverse: request.reverse,
+  tags: request.tags
+});
+const marshalUpdateLbRequest = (request, defaults) => ({
+  description: request.description,
+  name: request.name,
+  ssl_compatibility_level: request.sslCompatibilityLevel,
+  tags: request.tags
+});
+const marshalUpdateRouteRequest = (request, defaults) => ({
+  backend_id: request.backendId,
+  match: request.match !== void 0 ? marshalRouteMatch(request.match) : void 0
+});
+const marshalUpdateSubscriberRequest = (request, defaults) => ({
+  name: request.name,
+  ...sdkClient.resolveOneOf([
+    {
+      param: "email_config",
+      value: request.emailConfig !== void 0 ? marshalSubscriberEmailConfig(request.emailConfig) : void 0
+    },
+    {
+      param: "webhook_config",
+      value: request.webhookConfig !== void 0 ? marshalSubscriberWebhookConfig(request.webhookConfig) : void 0
+    }
+  ])
+});
+const marshalZonedApiAddBackendServersRequest = (request, defaults) => ({
+  server_ip: request.serverIp
+});
+const marshalZonedApiAttachPrivateNetworkRequest = (request, defaults) => ({
+  ipam_ids: request.ipamIds,
+  private_network_id: request.privateNetworkId,
+  ...sdkClient.resolveOneOf([
+    {
+      param: "static_config",
+      value: request.staticConfig !== void 0 ? marshalPrivateNetworkStaticConfig(request.staticConfig) : void 0
+    },
+    {
+      param: "dhcp_config",
+      value: request.dhcpConfig !== void 0 ? marshalPrivateNetworkDHCPConfig(request.dhcpConfig) : void 0
+    },
+    {
+      param: "ipam_config",
+      value: request.ipamConfig !== void 0 ? marshalPrivateNetworkIpamConfig(request.ipamConfig) : void 0
+    }
+  ])
+});
+const marshalZonedApiCreateAclRequest = (request, defaults) => ({
+  action: marshalAclAction(request.action),
+  description: request.description,
+  index: request.index,
+  match: request.match !== void 0 ? marshalAclMatch(request.match) : void 0,
+  name: request.name || randomName("acl")
+});
+const marshalZonedApiCreateBackendRequest = (request, defaults) => ({
+  failover_host: request.failoverHost,
+  forward_port: request.forwardPort,
+  forward_port_algorithm: request.forwardPortAlgorithm,
+  forward_protocol: request.forwardProtocol,
+  health_check: marshalHealthCheck(request.healthCheck),
+  ignore_ssl_server_verify: request.ignoreSslServerVerify,
+  max_connections: request.maxConnections,
+  max_retries: request.maxRetries,
+  name: request.name || randomName("lbb"),
+  on_marked_down_action: request.onMarkedDownAction,
+  proxy_protocol: request.proxyProtocol,
+  redispatch_attempt_count: request.redispatchAttemptCount,
+  send_proxy_v2: request.sendProxyV2,
+  server_ip: request.serverIp,
+  ssl_bridging: request.sslBridging,
+  sticky_sessions: request.stickySessions,
+  sticky_sessions_cookie_name: request.stickySessionsCookieName,
+  timeout_connect: request.timeoutConnect,
+  timeout_queue: request.timeoutQueue,
+  timeout_server: request.timeoutServer,
+  timeout_tunnel: request.timeoutTunnel
+});
+const marshalZonedApiCreateCertificateRequest = (request, defaults) => ({
+  name: request.name || randomName("certificate"),
+  ...sdkClient.resolveOneOf([
+    {
+      param: "letsencrypt",
+      value: request.letsencrypt !== void 0 ? marshalCreateCertificateRequestLetsencryptConfig(
+        request.letsencrypt
+      ) : void 0
+    },
+    {
+      param: "custom_certificate",
+      value: request.customCertificate !== void 0 ? marshalCreateCertificateRequestCustomCertificate(
+        request.customCertificate
+      ) : void 0
+    }
+  ])
+});
+const marshalZonedApiCreateFrontendRequest = (request, defaults) => ({
+  backend_id: request.backendId,
+  certificate_id: request.certificateId,
+  certificate_ids: request.certificateIds,
+  connection_rate_limit: request.connectionRateLimit,
+  enable_access_logs: request.enableAccessLogs,
+  enable_http3: request.enableHttp3,
+  inbound_port: request.inboundPort,
+  name: request.name || randomName("lbf"),
+  timeout_client: request.timeoutClient
+});
+const marshalZonedApiCreateIpRequest = (request, defaults) => ({
+  is_ipv6: request.isIpv6,
+  reverse: request.reverse,
+  tags: request.tags,
+  ...sdkClient.resolveOneOf([
+    {
+      default: defaults.defaultProjectId,
+      param: "project_id",
+      value: request.projectId
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: "organization_id",
+      value: request.organizationId
+    }
+  ])
+});
+const marshalZonedApiCreateLbRequest = (request, defaults) => ({
+  assign_flexible_ip: request.assignFlexibleIp,
+  assign_flexible_ipv6: request.assignFlexibleIpv6,
+  description: request.description,
+  ip_id: request.ipId,
+  ip_ids: request.ipIds,
+  name: request.name || randomName("lb"),
+  ssl_compatibility_level: request.sslCompatibilityLevel,
+  tags: request.tags,
+  type: request.type,
+  ...sdkClient.resolveOneOf([
+    {
+      default: defaults.defaultProjectId,
+      param: "project_id",
+      value: request.projectId
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: "organization_id",
+      value: request.organizationId
+    }
+  ])
+});
+const marshalZonedApiCreateRouteRequest = (request, defaults) => ({
+  backend_id: request.backendId,
+  frontend_id: request.frontendId,
+  match: request.match !== void 0 ? marshalRouteMatch(request.match) : void 0
+});
+const marshalZonedApiCreateSubscriberRequest = (request, defaults) => ({
+  name: request.name,
+  ...sdkClient.resolveOneOf([
+    {
+      default: defaults.defaultProjectId,
+      param: "project_id",
+      value: request.projectId
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: "organization_id",
+      value: request.organizationId
+    }
+  ]),
+  ...sdkClient.resolveOneOf([
+    {
+      param: "email_config",
+      value: request.emailConfig !== void 0 ? marshalSubscriberEmailConfig(request.emailConfig) : void 0
+    },
+    {
+      param: "webhook_config",
+      value: request.webhookConfig !== void 0 ? marshalSubscriberWebhookConfig(request.webhookConfig) : void 0
+    }
+  ])
+});
+const marshalZonedApiDetachPrivateNetworkRequest = (request, defaults) => ({
+  private_network_id: request.privateNetworkId
+});
+const marshalZonedApiMigrateLbRequest = (request, defaults) => ({
+  type: request.type
+});
+const marshalZonedApiRemoveBackendServersRequest = (request, defaults) => ({
+  server_ip: request.serverIp
+});
+const marshalAclSpec = (request, defaults) => ({
+  action: marshalAclAction(request.action),
+  description: request.description,
+  index: request.index,
+  match: request.match !== void 0 ? marshalAclMatch(request.match) : void 0,
+  name: request.name
+});
+const marshalZonedApiSetAclsRequest = (request, defaults) => ({
+  acls: request.acls.map((elt) => marshalAclSpec(elt))
+});
+const marshalZonedApiSetBackendServersRequest = (request, defaults) => ({
+  server_ip: request.serverIp
+});
+const marshalZonedApiSubscribeToLbRequest = (request, defaults) => ({
+  subscriber_id: request.subscriberId
+});
+const marshalZonedApiUpdateAclRequest = (request, defaults) => ({
+  action: marshalAclAction(request.action),
+  description: request.description,
+  index: request.index,
+  match: request.match !== void 0 ? marshalAclMatch(request.match) : void 0,
+  name: request.name
+});
+const marshalZonedApiUpdateBackendRequest = (request, defaults) => ({
+  failover_host: request.failoverHost,
+  forward_port: request.forwardPort,
+  forward_port_algorithm: request.forwardPortAlgorithm,
+  forward_protocol: request.forwardProtocol,
+  ignore_ssl_server_verify: request.ignoreSslServerVerify,
+  max_connections: request.maxConnections,
+  max_retries: request.maxRetries,
+  name: request.name,
+  on_marked_down_action: request.onMarkedDownAction,
+  proxy_protocol: request.proxyProtocol,
+  redispatch_attempt_count: request.redispatchAttemptCount,
+  send_proxy_v2: request.sendProxyV2,
+  ssl_bridging: request.sslBridging,
+  sticky_sessions: request.stickySessions,
+  sticky_sessions_cookie_name: request.stickySessionsCookieName,
+  timeout_connect: request.timeoutConnect,
+  timeout_queue: request.timeoutQueue,
+  timeout_server: request.timeoutServer,
+  timeout_tunnel: request.timeoutTunnel
+});
+const marshalZonedApiUpdateCertificateRequest = (request, defaults) => ({
+  name: request.name
+});
+const marshalZonedApiUpdateFrontendRequest = (request, defaults) => ({
+  backend_id: request.backendId,
+  certificate_id: request.certificateId,
+  certificate_ids: request.certificateIds,
+  connection_rate_limit: request.connectionRateLimit,
+  enable_access_logs: request.enableAccessLogs,
+  enable_http3: request.enableHttp3,
+  inbound_port: request.inboundPort,
+  name: request.name,
+  timeout_client: request.timeoutClient
+});
+const marshalZonedApiUpdateHealthCheckRequest = (request, defaults) => ({
+  check_delay: request.checkDelay,
+  check_max_retries: request.checkMaxRetries,
+  check_send_proxy: request.checkSendProxy,
+  check_timeout: request.checkTimeout,
+  port: request.port,
+  transient_check_delay: request.transientCheckDelay,
+  ...sdkClient.resolveOneOf([
+    {
+      param: "tcp_config",
+      value: request.tcpConfig !== void 0 ? marshalHealthCheckTcpConfig(request.tcpConfig) : void 0
+    },
+    {
+      param: "mysql_config",
+      value: request.mysqlConfig !== void 0 ? marshalHealthCheckMysqlConfig(request.mysqlConfig) : void 0
+    },
+    {
+      param: "pgsql_config",
+      value: request.pgsqlConfig !== void 0 ? marshalHealthCheckPgsqlConfig(request.pgsqlConfig) : void 0
+    },
+    {
+      param: "ldap_config",
+      value: request.ldapConfig !== void 0 ? marshalHealthCheckLdapConfig(request.ldapConfig) : void 0
+    },
+    {
+      param: "redis_config",
+      value: request.redisConfig !== void 0 ? marshalHealthCheckRedisConfig(request.redisConfig) : void 0
+    },
+    {
+      param: "http_config",
+      value: request.httpConfig !== void 0 ? marshalHealthCheckHttpConfig(request.httpConfig) : void 0
+    },
+    {
+      param: "https_config",
+      value: request.httpsConfig !== void 0 ? marshalHealthCheckHttpsConfig(request.httpsConfig) : void 0
+    }
+  ])
+});
+const marshalZonedApiUpdateIpRequest = (request, defaults) => ({
+  lb_id: request.lbId,
+  reverse: request.reverse,
+  tags: request.tags
+});
+const marshalZonedApiUpdateLbRequest = (request, defaults) => ({
+  description: request.description,
+  name: request.name,
+  ssl_compatibility_level: request.sslCompatibilityLevel,
+  tags: request.tags
+});
+const marshalZonedApiUpdateRouteRequest = (request, defaults) => ({
+  backend_id: request.backendId,
+  match: request.match !== void 0 ? marshalRouteMatch(request.match) : void 0
+});
+const marshalZonedApiUpdateSubscriberRequest = (request, defaults) => ({
+  name: request.name,
+  ...sdkClient.resolveOneOf([
+    {
+      param: "email_config",
+      value: request.emailConfig !== void 0 ? marshalSubscriberEmailConfig(request.emailConfig) : void 0
+    },
+    {
+      param: "webhook_config",
+      value: request.webhookConfig !== void 0 ? marshalSubscriberWebhookConfig(request.webhookConfig) : void 0
+    }
+  ])
+});
+exports.marshalAddBackendServersRequest = marshalAddBackendServersRequest;
+exports.marshalAttachPrivateNetworkRequest = marshalAttachPrivateNetworkRequest;
+exports.marshalCreateAclRequest = marshalCreateAclRequest;
+exports.marshalCreateBackendRequest = marshalCreateBackendRequest;
+exports.marshalCreateCertificateRequest = marshalCreateCertificateRequest;
+exports.marshalCreateFrontendRequest = marshalCreateFrontendRequest;
+exports.marshalCreateIpRequest = marshalCreateIpRequest;
+exports.marshalCreateLbRequest = marshalCreateLbRequest;
+exports.marshalCreateRouteRequest = marshalCreateRouteRequest;
+exports.marshalCreateSubscriberRequest = marshalCreateSubscriberRequest;
+exports.marshalMigrateLbRequest = marshalMigrateLbRequest;
+exports.marshalRemoveBackendServersRequest = marshalRemoveBackendServersRequest;
+exports.marshalSetBackendServersRequest = marshalSetBackendServersRequest;
+exports.marshalSubscribeToLbRequest = marshalSubscribeToLbRequest;
+exports.marshalUpdateAclRequest = marshalUpdateAclRequest;
+exports.marshalUpdateBackendRequest = marshalUpdateBackendRequest;
+exports.marshalUpdateCertificateRequest = marshalUpdateCertificateRequest;
+exports.marshalUpdateFrontendRequest = marshalUpdateFrontendRequest;
+exports.marshalUpdateHealthCheckRequest = marshalUpdateHealthCheckRequest;
+exports.marshalUpdateIpRequest = marshalUpdateIpRequest;
+exports.marshalUpdateLbRequest = marshalUpdateLbRequest;
+exports.marshalUpdateRouteRequest = marshalUpdateRouteRequest;
+exports.marshalUpdateSubscriberRequest = marshalUpdateSubscriberRequest;
+exports.marshalZonedApiAddBackendServersRequest = marshalZonedApiAddBackendServersRequest;
+exports.marshalZonedApiAttachPrivateNetworkRequest = marshalZonedApiAttachPrivateNetworkRequest;
+exports.marshalZonedApiCreateAclRequest = marshalZonedApiCreateAclRequest;
+exports.marshalZonedApiCreateBackendRequest = marshalZonedApiCreateBackendRequest;
+exports.marshalZonedApiCreateCertificateRequest = marshalZonedApiCreateCertificateRequest;
+exports.marshalZonedApiCreateFrontendRequest = marshalZonedApiCreateFrontendRequest;
+exports.marshalZonedApiCreateIpRequest = marshalZonedApiCreateIpRequest;
+exports.marshalZonedApiCreateLbRequest = marshalZonedApiCreateLbRequest;
+exports.marshalZonedApiCreateRouteRequest = marshalZonedApiCreateRouteRequest;
+exports.marshalZonedApiCreateSubscriberRequest = marshalZonedApiCreateSubscriberRequest;
+exports.marshalZonedApiDetachPrivateNetworkRequest = marshalZonedApiDetachPrivateNetworkRequest;
+exports.marshalZonedApiMigrateLbRequest = marshalZonedApiMigrateLbRequest;
+exports.marshalZonedApiRemoveBackendServersRequest = marshalZonedApiRemoveBackendServersRequest;
+exports.marshalZonedApiSetAclsRequest = marshalZonedApiSetAclsRequest;
+exports.marshalZonedApiSetBackendServersRequest = marshalZonedApiSetBackendServersRequest;
+exports.marshalZonedApiSubscribeToLbRequest = marshalZonedApiSubscribeToLbRequest;
+exports.marshalZonedApiUpdateAclRequest = marshalZonedApiUpdateAclRequest;
+exports.marshalZonedApiUpdateBackendRequest = marshalZonedApiUpdateBackendRequest;
+exports.marshalZonedApiUpdateCertificateRequest = marshalZonedApiUpdateCertificateRequest;
+exports.marshalZonedApiUpdateFrontendRequest = marshalZonedApiUpdateFrontendRequest;
+exports.marshalZonedApiUpdateHealthCheckRequest = marshalZonedApiUpdateHealthCheckRequest;
+exports.marshalZonedApiUpdateIpRequest = marshalZonedApiUpdateIpRequest;
+exports.marshalZonedApiUpdateLbRequest = marshalZonedApiUpdateLbRequest;
+exports.marshalZonedApiUpdateRouteRequest = marshalZonedApiUpdateRouteRequest;
+exports.marshalZonedApiUpdateSubscriberRequest = marshalZonedApiUpdateSubscriberRequest;
+exports.unmarshalAcl = unmarshalAcl;
+exports.unmarshalBackend = unmarshalBackend;
+exports.unmarshalBackendServerStats = unmarshalBackendServerStats;
+exports.unmarshalCertificate = unmarshalCertificate;
+exports.unmarshalFrontend = unmarshalFrontend;
+exports.unmarshalHealthCheck = unmarshalHealthCheck;
+exports.unmarshalIp = unmarshalIp;
+exports.unmarshalLb = unmarshalLb;
+exports.unmarshalLbStats = unmarshalLbStats;
+exports.unmarshalListAclResponse = unmarshalListAclResponse;
+exports.unmarshalListBackendStatsResponse = unmarshalListBackendStatsResponse;
+exports.unmarshalListBackendsResponse = unmarshalListBackendsResponse;
+exports.unmarshalListCertificatesResponse = unmarshalListCertificatesResponse;
+exports.unmarshalListFrontendsResponse = unmarshalListFrontendsResponse;
+exports.unmarshalListIpsResponse = unmarshalListIpsResponse;
+exports.unmarshalListLbPrivateNetworksResponse = unmarshalListLbPrivateNetworksResponse;
+exports.unmarshalListLbTypesResponse = unmarshalListLbTypesResponse;
+exports.unmarshalListLbsResponse = unmarshalListLbsResponse;
+exports.unmarshalListRoutesResponse = unmarshalListRoutesResponse;
+exports.unmarshalListSubscriberResponse = unmarshalListSubscriberResponse;
+exports.unmarshalPrivateNetwork = unmarshalPrivateNetwork;
+exports.unmarshalRoute = unmarshalRoute;
+exports.unmarshalSetAclsResponse = unmarshalSetAclsResponse;
+exports.unmarshalSubscriber = unmarshalSubscriber;

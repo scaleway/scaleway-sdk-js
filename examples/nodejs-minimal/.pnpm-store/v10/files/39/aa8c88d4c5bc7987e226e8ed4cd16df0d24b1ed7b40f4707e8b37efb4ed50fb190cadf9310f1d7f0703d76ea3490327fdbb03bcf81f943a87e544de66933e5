@@ -1,0 +1,259 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const randomName = require("@scaleway/random-name");
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalSubnet = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Subnet' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    id: data.id,
+    privateNetworkId: data.private_network_id,
+    projectId: data.project_id,
+    subnet: data.subnet,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    vpcId: data.vpc_id
+  };
+};
+const unmarshalPrivateNetwork = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PrivateNetwork' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    defaultRoutePropagationEnabled: data.default_route_propagation_enabled,
+    dhcpEnabled: data.dhcp_enabled,
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    region: data.region,
+    subnets: sdkClient.unmarshalArrayOfObject(data.subnets, unmarshalSubnet),
+    tags: data.tags,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    vpcId: data.vpc_id
+  };
+};
+const unmarshalRoute = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Route' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    description: data.description,
+    destination: data.destination,
+    id: data.id,
+    isReadOnly: data.is_read_only,
+    nexthopPrivateNetworkId: data.nexthop_private_network_id,
+    nexthopResourceId: data.nexthop_resource_id,
+    region: data.region,
+    tags: data.tags,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    vpcId: data.vpc_id
+  };
+};
+const unmarshalVPC = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VPC' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    customRoutesPropagationEnabled: data.custom_routes_propagation_enabled,
+    id: data.id,
+    isDefault: data.is_default,
+    name: data.name,
+    organizationId: data.organization_id,
+    privateNetworkCount: data.private_network_count,
+    projectId: data.project_id,
+    region: data.region,
+    routingEnabled: data.routing_enabled,
+    tags: data.tags,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalAddSubnetsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AddSubnetsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    subnets: data.subnets
+  };
+};
+const unmarshalDeleteSubnetsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DeleteSubnetsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    subnets: data.subnets
+  };
+};
+const unmarshalAclRule = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AclRule' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    action: data.action,
+    description: data.description,
+    destination: data.destination,
+    dstPortHigh: data.dst_port_high,
+    dstPortLow: data.dst_port_low,
+    protocol: data.protocol,
+    source: data.source,
+    srcPortHigh: data.src_port_high,
+    srcPortLow: data.src_port_low
+  };
+};
+const unmarshalGetAclResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetAclResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    defaultPolicy: data.default_policy,
+    rules: sdkClient.unmarshalArrayOfObject(data.rules, unmarshalAclRule)
+  };
+};
+const unmarshalListPrivateNetworksResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPrivateNetworksResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    privateNetworks: sdkClient.unmarshalArrayOfObject(
+      data.private_networks,
+      unmarshalPrivateNetwork
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListSubnetsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSubnetsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    subnets: sdkClient.unmarshalArrayOfObject(data.subnets, unmarshalSubnet),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListVPCsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListVPCsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    totalCount: data.total_count,
+    vpcs: sdkClient.unmarshalArrayOfObject(data.vpcs, unmarshalVPC)
+  };
+};
+const unmarshalSetAclResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetAclResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    defaultPolicy: data.default_policy,
+    rules: sdkClient.unmarshalArrayOfObject(data.rules, unmarshalAclRule)
+  };
+};
+const marshalAddSubnetsRequest = (request, defaults) => ({
+  subnets: request.subnets
+});
+const marshalCreatePrivateNetworkRequest = (request, defaults) => ({
+  default_route_propagation_enabled: request.defaultRoutePropagationEnabled,
+  name: request.name || randomName("pn"),
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  subnets: request.subnets,
+  tags: request.tags,
+  vpc_id: request.vpcId
+});
+const marshalCreateRouteRequest = (request, defaults) => ({
+  description: request.description,
+  destination: request.destination,
+  nexthop_private_network_id: request.nexthopPrivateNetworkId,
+  nexthop_resource_id: request.nexthopResourceId,
+  tags: request.tags,
+  vpc_id: request.vpcId
+});
+const marshalCreateVPCRequest = (request, defaults) => ({
+  enable_routing: request.enableRouting,
+  name: request.name || randomName("vpc"),
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags
+});
+const marshalDeleteSubnetsRequest = (request, defaults) => ({
+  subnets: request.subnets
+});
+const marshalAclRule = (request, defaults) => ({
+  action: request.action,
+  description: request.description,
+  destination: request.destination,
+  dst_port_high: request.dstPortHigh,
+  dst_port_low: request.dstPortLow,
+  protocol: request.protocol,
+  source: request.source,
+  src_port_high: request.srcPortHigh,
+  src_port_low: request.srcPortLow
+});
+const marshalSetAclRequest = (request, defaults) => ({
+  default_policy: request.defaultPolicy,
+  is_ipv6: request.isIpv6,
+  rules: request.rules.map((elt) => marshalAclRule(elt))
+});
+const marshalUpdatePrivateNetworkRequest = (request, defaults) => ({
+  default_route_propagation_enabled: request.defaultRoutePropagationEnabled,
+  name: request.name,
+  tags: request.tags
+});
+const marshalUpdateRouteRequest = (request, defaults) => ({
+  description: request.description,
+  destination: request.destination,
+  nexthop_private_network_id: request.nexthopPrivateNetworkId,
+  nexthop_resource_id: request.nexthopResourceId,
+  tags: request.tags
+});
+const marshalUpdateVPCRequest = (request, defaults) => ({
+  name: request.name,
+  tags: request.tags
+});
+exports.marshalAclRule = marshalAclRule;
+exports.marshalAddSubnetsRequest = marshalAddSubnetsRequest;
+exports.marshalCreatePrivateNetworkRequest = marshalCreatePrivateNetworkRequest;
+exports.marshalCreateRouteRequest = marshalCreateRouteRequest;
+exports.marshalCreateVPCRequest = marshalCreateVPCRequest;
+exports.marshalDeleteSubnetsRequest = marshalDeleteSubnetsRequest;
+exports.marshalSetAclRequest = marshalSetAclRequest;
+exports.marshalUpdatePrivateNetworkRequest = marshalUpdatePrivateNetworkRequest;
+exports.marshalUpdateRouteRequest = marshalUpdateRouteRequest;
+exports.marshalUpdateVPCRequest = marshalUpdateVPCRequest;
+exports.unmarshalAclRule = unmarshalAclRule;
+exports.unmarshalAddSubnetsResponse = unmarshalAddSubnetsResponse;
+exports.unmarshalDeleteSubnetsResponse = unmarshalDeleteSubnetsResponse;
+exports.unmarshalGetAclResponse = unmarshalGetAclResponse;
+exports.unmarshalListPrivateNetworksResponse = unmarshalListPrivateNetworksResponse;
+exports.unmarshalListSubnetsResponse = unmarshalListSubnetsResponse;
+exports.unmarshalListVPCsResponse = unmarshalListVPCsResponse;
+exports.unmarshalPrivateNetwork = unmarshalPrivateNetwork;
+exports.unmarshalRoute = unmarshalRoute;
+exports.unmarshalSetAclResponse = unmarshalSetAclResponse;
+exports.unmarshalVPC = unmarshalVPC;

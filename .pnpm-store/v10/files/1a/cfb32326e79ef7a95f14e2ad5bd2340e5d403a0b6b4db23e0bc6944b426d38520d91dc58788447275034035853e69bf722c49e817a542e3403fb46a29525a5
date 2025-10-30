@@ -1,0 +1,306 @@
+import { API as API$1, toApiLocality, urlParams, validatePathParam, enrichForPagination, waitForResource } from "@scaleway/sdk-client";
+import { DEPLOYMENT_TRANSIENT_STATUSES } from "./content.gen.js";
+import { unmarshalListDeploymentsResponse, unmarshalDeployment, marshalCreateDeploymentRequest, marshalUpdateDeploymentRequest, marshalCreateEndpointRequest, unmarshalEndpoint, marshalUpdateEndpointRequest, unmarshalListDeploymentACLRulesResponse, marshalAddDeploymentACLRulesRequest, unmarshalAddDeploymentACLRulesResponse, marshalSetDeploymentACLRulesRequest, unmarshalSetDeploymentACLRulesResponse, unmarshalListModelsResponse, unmarshalModel, unmarshalEula, unmarshalListNodeTypesResponse } from "./marshalling.gen.js";
+const jsonContentHeaders = {
+  "Content-Type": "application/json; charset=utf-8"
+};
+class API extends API$1 {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = toApiLocality({
+    regions: ["fr-par"]
+  });
+  pageOfListDeployments = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/inference/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/deployments`,
+      urlParams: urlParams(
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId],
+        ["tags", request.tags]
+      )
+    },
+    unmarshalListDeploymentsResponse
+  );
+  /**
+   * List inference deployments. List all your inference deployments.
+   *
+   * @param request - The request {@link ListDeploymentsRequest}
+   * @returns A Promise of ListDeploymentsResponse
+   */
+  listDeployments = (request = {}) => enrichForPagination("deployments", this.pageOfListDeployments, request);
+  /**
+   * Get a deployment. Get the deployment for the given ID.
+   *
+   * @param request - The request {@link GetDeploymentRequest}
+   * @returns A Promise of Deployment
+   */
+  getDeployment = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/inference/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam("deploymentId", request.deploymentId)}`
+    },
+    unmarshalDeployment
+  );
+  /**
+   * Waits for {@link Deployment} to be in a final state.
+   *
+   * @param request - The request {@link GetDeploymentRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Deployment
+   */
+  waitForDeployment = (request, options) => waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !DEPLOYMENT_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getDeployment,
+    request,
+    options
+  );
+  /**
+   * Create a deployment. Create a new inference deployment related to a specific model.
+   *
+   * @param request - The request {@link CreateDeploymentRequest}
+   * @returns A Promise of Deployment
+   */
+  createDeployment = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalCreateDeploymentRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/inference/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/deployments`
+    },
+    unmarshalDeployment
+  );
+  /**
+   * Update a deployment. Update an existing inference deployment.
+   *
+   * @param request - The request {@link UpdateDeploymentRequest}
+   * @returns A Promise of Deployment
+   */
+  updateDeployment = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalUpdateDeploymentRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/inference/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam("deploymentId", request.deploymentId)}`
+    },
+    unmarshalDeployment
+  );
+  /**
+   * Delete a deployment. Delete an existing inference deployment.
+   *
+   * @param request - The request {@link DeleteDeploymentRequest}
+   * @returns A Promise of Deployment
+   */
+  deleteDeployment = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/inference/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam("deploymentId", request.deploymentId)}`
+    },
+    unmarshalDeployment
+  );
+  /**
+     * Get the CA certificate. Get the CA certificate used for the deployment of private endpoints.
+  The CA certificate will be returned as a PEM file.
+     *
+     * @param request - The request {@link GetDeploymentCertificateRequest}
+     * @returns A Promise of Blob
+     */
+  getDeploymentCertificate = (request) => this.client.fetch({
+    method: "GET",
+    path: `/inference/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam("deploymentId", request.deploymentId)}/certificate`,
+    urlParams: urlParams(["dl", 1]),
+    responseType: "blob"
+  });
+  /**
+   * Create an endpoint. Create a new Endpoint related to a specific deployment.
+   *
+   * @param request - The request {@link CreateEndpointRequest}
+   * @returns A Promise of Endpoint
+   */
+  createEndpoint = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalCreateEndpointRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/inference/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/endpoints`
+    },
+    unmarshalEndpoint
+  );
+  /**
+   * Update an endpoint. Update an existing Endpoint.
+   *
+   * @param request - The request {@link UpdateEndpointRequest}
+   * @returns A Promise of Endpoint
+   */
+  updateEndpoint = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalUpdateEndpointRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/inference/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam("endpointId", request.endpointId)}`
+    },
+    unmarshalEndpoint
+  );
+  /**
+   * Delete an endpoint. Delete an existing Endpoint.
+   *
+   * @param request - The request {@link DeleteEndpointRequest}
+   */
+  deleteEndpoint = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/inference/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam("endpointId", request.endpointId)}`
+  });
+  pageOfListDeploymentACLRules = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/inference/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam("deploymentId", request.deploymentId)}/acls`,
+      urlParams: urlParams(
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    unmarshalListDeploymentACLRulesResponse
+  );
+  /**
+   * List your ACLs. List ACLs for a specific deployment.
+   *
+   * @param request - The request {@link ListDeploymentACLRulesRequest}
+   * @returns A Promise of ListDeploymentACLRulesResponse
+   */
+  listDeploymentACLRules = (request) => enrichForPagination("rules", this.pageOfListDeploymentACLRules, request);
+  /**
+   * Add new ACLs. Add new ACL rules for a specific deployment.
+   *
+   * @param request - The request {@link AddDeploymentACLRulesRequest}
+   * @returns A Promise of AddDeploymentACLRulesResponse
+   */
+  addDeploymentACLRules = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalAddDeploymentACLRulesRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/inference/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam("deploymentId", request.deploymentId)}/acls`
+    },
+    unmarshalAddDeploymentACLRulesResponse
+  );
+  /**
+   * Set new ACL. Set new ACL rules for a specific deployment.
+   *
+   * @param request - The request {@link SetDeploymentACLRulesRequest}
+   * @returns A Promise of SetDeploymentACLRulesResponse
+   */
+  setDeploymentACLRules = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalSetDeploymentACLRulesRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PUT",
+      path: `/inference/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam("deploymentId", request.deploymentId)}/acls`
+    },
+    unmarshalSetDeploymentACLRulesResponse
+  );
+  /**
+   * Delete an existing ACL.
+   *
+   * @param request - The request {@link DeleteDeploymentACLRuleRequest}
+   */
+  deleteDeploymentACLRule = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/inference/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/acls/${validatePathParam("aclId", request.aclId)}`
+  });
+  pageOfListModels = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/inference/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/models`,
+      urlParams: urlParams(
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId],
+        ["tags", request.tags]
+      )
+    },
+    unmarshalListModelsResponse
+  );
+  /**
+   * List models. List all available models.
+   *
+   * @param request - The request {@link ListModelsRequest}
+   * @returns A Promise of ListModelsResponse
+   */
+  listModels = (request = {}) => enrichForPagination("models", this.pageOfListModels, request);
+  /**
+   * Get a model. Get the model for the given ID.
+   *
+   * @param request - The request {@link GetModelRequest}
+   * @returns A Promise of Model
+   */
+  getModel = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/inference/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/models/${validatePathParam("modelId", request.modelId)}`
+    },
+    unmarshalModel
+  );
+  getModelEula = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/inference/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/models/${validatePathParam("modelId", request.modelId)}/eula`
+    },
+    unmarshalEula
+  );
+  pageOfListNodeTypes = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/inference/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/node-types`,
+      urlParams: urlParams(
+        ["include_disabled_types", request.includeDisabledTypes],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    unmarshalListNodeTypesResponse
+  );
+  /**
+   * List available node types. List all available node types. By default, the node types returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
+   *
+   * @param request - The request {@link ListNodeTypesRequest}
+   * @returns A Promise of ListNodeTypesResponse
+   */
+  listNodeTypes = (request) => enrichForPagination("nodeTypes", this.pageOfListNodeTypes, request);
+}
+export {
+  API
+};

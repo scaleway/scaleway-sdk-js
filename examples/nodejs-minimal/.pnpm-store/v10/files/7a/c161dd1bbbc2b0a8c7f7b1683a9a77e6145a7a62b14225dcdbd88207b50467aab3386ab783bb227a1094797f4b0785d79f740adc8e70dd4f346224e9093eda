@@ -1,0 +1,15 @@
+import type { JSONObject } from '../../../helpers/json.js';
+import { ScalewayError } from '../scw-error.js';
+/**
+ * DeniedAuthentication error is used by the API Gateway auth service to deny a request.
+ *
+ * @public
+ */
+export declare class DeniedAuthenticationError extends ScalewayError {
+    readonly status: number;
+    readonly body: JSONObject;
+    readonly method: string;
+    readonly reason: string;
+    constructor(status: number, body: JSONObject, method: string, reason: string);
+    static fromJSON(status: number, obj: Readonly<JSONObject>): DeniedAuthenticationError | null;
+}

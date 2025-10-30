@@ -1,0 +1,15 @@
+import type { DefaultValues } from '@scaleway/sdk-client';
+import type { AccessSecretVersionResponse, AddSecretOwnerRequest, BrowseSecretsResponse, CreateSecretRequest, CreateSecretVersionRequest, ListSecretTypesResponse, ListSecretVersionsResponse, ListSecretsResponse, ListTagsResponse, Secret, SecretVersion, UpdateSecretRequest, UpdateSecretVersionRequest } from './types.gen';
+export declare const unmarshalSecretVersion: (data: unknown) => SecretVersion;
+export declare const unmarshalSecret: (data: unknown) => Secret;
+export declare const unmarshalAccessSecretVersionResponse: (data: unknown) => AccessSecretVersionResponse;
+export declare const unmarshalBrowseSecretsResponse: (data: unknown) => BrowseSecretsResponse;
+export declare const unmarshalListSecretTypesResponse: (data: unknown) => ListSecretTypesResponse;
+export declare const unmarshalListSecretVersionsResponse: (data: unknown) => ListSecretVersionsResponse;
+export declare const unmarshalListSecretsResponse: (data: unknown) => ListSecretsResponse;
+export declare const unmarshalListTagsResponse: (data: unknown) => ListTagsResponse;
+export declare const marshalAddSecretOwnerRequest: (request: AddSecretOwnerRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalCreateSecretRequest: (request: CreateSecretRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalCreateSecretVersionRequest: (request: CreateSecretVersionRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateSecretRequest: (request: UpdateSecretRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateSecretVersionRequest: (request: UpdateSecretVersionRequest, defaults: DefaultValues) => Record<string, unknown>;

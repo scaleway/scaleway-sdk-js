@@ -1,0 +1,56 @@
+const CreateSnapshotRequest = {
+  name: {
+    minLength: 1
+  }
+};
+const CreateVolumeRequest = {
+  name: {
+    minLength: 1
+  }
+};
+const ImportSnapshotFromObjectStorageRequest = {
+  name: {
+    minLength: 1
+  }
+};
+const ListSnapshotsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListVolumeTypesRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListVolumesRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const Reference = {
+  productResourceType: {
+    minLength: 1
+  }
+};
+export {
+  CreateSnapshotRequest,
+  CreateVolumeRequest,
+  ImportSnapshotFromObjectStorageRequest,
+  ListSnapshotsRequest,
+  ListVolumeTypesRequest,
+  ListVolumesRequest,
+  Reference
+};

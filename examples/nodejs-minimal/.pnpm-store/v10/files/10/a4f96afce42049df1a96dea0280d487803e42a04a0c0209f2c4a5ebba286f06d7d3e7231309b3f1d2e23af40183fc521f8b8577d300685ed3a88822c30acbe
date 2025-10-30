@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const api_gen = require("./api.gen.cjs");
+const marshalling_gen = require("./marshalling.gen.cjs");
+const validationRules_gen = require("./validation-rules.gen.cjs");
+exports.API = api_gen.API;
+exports.unmarshalEvent = marshalling_gen.unmarshalEvent;
+exports.unmarshalListEventsResponse = marshalling_gen.unmarshalListEventsResponse;
+exports.unmarshalListProductsResponse = marshalling_gen.unmarshalListProductsResponse;
+exports.unmarshalResource = marshalling_gen.unmarshalResource;
+exports.ValidationRules = validationRules_gen;

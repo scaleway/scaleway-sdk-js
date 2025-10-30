@@ -1,0 +1,13 @@
+import type { DatabaseBackupStatus, InstanceLogStatus, InstanceStatus, MaintenanceStatus, ReadReplicaStatus, SnapshotStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link DatabaseBackupStatus}. */
+export declare const DATABASE_BACKUP_TRANSIENT_STATUSES: DatabaseBackupStatus[];
+/** Lists transient statutes of the enum {@link InstanceLogStatus}. */
+export declare const INSTANCE_LOG_TRANSIENT_STATUSES: InstanceLogStatus[];
+/** Lists transient statutes of the enum {@link InstanceStatus}. */
+export declare const INSTANCE_TRANSIENT_STATUSES: InstanceStatus[];
+/** Lists transient statutes of the enum {@link MaintenanceStatus}. */
+export declare const MAINTENANCE_TRANSIENT_STATUSES: MaintenanceStatus[];
+/** Lists transient statutes of the enum {@link ReadReplicaStatus}. */
+export declare const READ_REPLICA_TRANSIENT_STATUSES: ReadReplicaStatus[];
+/** Lists transient statutes of the enum {@link SnapshotStatus}. */
+export declare const SNAPSHOT_TRANSIENT_STATUSES: SnapshotStatus[];

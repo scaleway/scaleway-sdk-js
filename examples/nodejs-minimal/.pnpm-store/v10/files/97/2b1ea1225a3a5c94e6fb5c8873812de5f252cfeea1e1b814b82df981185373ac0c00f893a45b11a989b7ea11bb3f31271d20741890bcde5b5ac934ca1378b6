@@ -1,0 +1,21 @@
+import { API } from "./api.gen.js";
+import { marshalCreateKeyRequest, marshalDecryptRequest, marshalEncryptRequest, marshalGenerateDataKeyRequest, marshalImportKeyMaterialRequest, marshalSignRequest, marshalUpdateKeyRequest, marshalVerifyRequest, unmarshalDataKey, unmarshalDecryptResponse, unmarshalEncryptResponse, unmarshalKey, unmarshalListKeysResponse, unmarshalPublicKey, unmarshalSignResponse, unmarshalVerifyResponse } from "./marshalling.gen.js";
+export {
+  API,
+  marshalCreateKeyRequest,
+  marshalDecryptRequest,
+  marshalEncryptRequest,
+  marshalGenerateDataKeyRequest,
+  marshalImportKeyMaterialRequest,
+  marshalSignRequest,
+  marshalUpdateKeyRequest,
+  marshalVerifyRequest,
+  unmarshalDataKey,
+  unmarshalDecryptResponse,
+  unmarshalEncryptResponse,
+  unmarshalKey,
+  unmarshalListKeysResponse,
+  unmarshalPublicKey,
+  unmarshalSignResponse,
+  unmarshalVerifyResponse
+};

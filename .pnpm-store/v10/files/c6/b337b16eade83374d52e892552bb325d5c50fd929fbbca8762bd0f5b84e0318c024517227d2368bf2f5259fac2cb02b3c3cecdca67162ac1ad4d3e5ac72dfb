@@ -1,0 +1,466 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const marshalling_gen = require("./marshalling.gen.cjs");
+const jsonContentHeaders = {
+  "Content-Type": "application/json; charset=utf-8"
+};
+class NatsAPI extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par", "nl-ams"]
+  });
+  /**
+   * Create a NATS account. Create a NATS account associated with a Project.
+   *
+   * @param request - The request {@link NatsApiCreateNatsAccountRequest}
+   * @returns A Promise of NatsAccount
+   */
+  createNatsAccount = (request = {}) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalNatsApiCreateNatsAccountRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/nats-accounts`
+    },
+    marshalling_gen.unmarshalNatsAccount
+  );
+  /**
+   * Delete a NATS account. Delete a NATS account, specified by its NATS account ID. Note that deleting a NATS account is irreversible, and any credentials, streams, consumer and stored messages belonging to this NATS account will also be deleted.
+   *
+   * @param request - The request {@link NatsApiDeleteNatsAccountRequest}
+   */
+  deleteNatsAccount = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/nats-accounts/${sdkClient.validatePathParam("natsAccountId", request.natsAccountId)}`
+  });
+  /**
+   * Update the name of a NATS account. Update the name of a NATS account, specified by its NATS account ID.
+   *
+   * @param request - The request {@link NatsApiUpdateNatsAccountRequest}
+   * @returns A Promise of NatsAccount
+   */
+  updateNatsAccount = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalNatsApiUpdateNatsAccountRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/nats-accounts/${sdkClient.validatePathParam("natsAccountId", request.natsAccountId)}`
+    },
+    marshalling_gen.unmarshalNatsAccount
+  );
+  /**
+   * Get a NATS account. Retrieve information about an existing NATS account identified by its NATS account ID. Its full details, including name and endpoint, are returned in the response.
+   *
+   * @param request - The request {@link NatsApiGetNatsAccountRequest}
+   * @returns A Promise of NatsAccount
+   */
+  getNatsAccount = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/nats-accounts/${sdkClient.validatePathParam("natsAccountId", request.natsAccountId)}`
+    },
+    marshalling_gen.unmarshalNatsAccount
+  );
+  pageOfListNatsAccounts = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/nats-accounts`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId]
+      )
+    },
+    marshalling_gen.unmarshalListNatsAccountsResponse
+  );
+  /**
+   * List NATS accounts. List all NATS accounts in the specified region, for a Scaleway Organization or Project. By default, the NATS accounts returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
+   *
+   * @param request - The request {@link NatsApiListNatsAccountsRequest}
+   * @returns A Promise of ListNatsAccountsResponse
+   */
+  listNatsAccounts = (request = {}) => sdkClient.enrichForPagination("natsAccounts", this.pageOfListNatsAccounts, request);
+  /**
+   * Create NATS credentials. Create a set of credentials for a NATS account, specified by its NATS account ID.
+   *
+   * @param request - The request {@link NatsApiCreateNatsCredentialsRequest}
+   * @returns A Promise of NatsCredentials
+   */
+  createNatsCredentials = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalNatsApiCreateNatsCredentialsRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/nats-credentials`
+    },
+    marshalling_gen.unmarshalNatsCredentials
+  );
+  /**
+   * Delete NATS credentials. Delete a set of credentials, specified by their credentials ID. Deleting credentials is irreversible and cannot be undone. The credentials can no longer be used to access the NATS account, and active connections using this credentials will be closed.
+   *
+   * @param request - The request {@link NatsApiDeleteNatsCredentialsRequest}
+   */
+  deleteNatsCredentials = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/nats-credentials/${sdkClient.validatePathParam("natsCredentialsId", request.natsCredentialsId)}`
+  });
+  /**
+   * Get NATS credentials. Retrieve an existing set of credentials, identified by the `nats_credentials_id`. The credentials themselves are NOT returned, only their metadata (NATS account ID, credentials name, etc), are returned in the response.
+   *
+   * @param request - The request {@link NatsApiGetNatsCredentialsRequest}
+   * @returns A Promise of NatsCredentials
+   */
+  getNatsCredentials = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/nats-credentials/${sdkClient.validatePathParam("natsCredentialsId", request.natsCredentialsId)}`
+    },
+    marshalling_gen.unmarshalNatsCredentials
+  );
+  pageOfListNatsCredentials = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/nats-credentials`,
+      urlParams: sdkClient.urlParams(
+        ["nats_account_id", request.natsAccountId],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId]
+      )
+    },
+    marshalling_gen.unmarshalListNatsCredentialsResponse
+  );
+  /**
+   * List NATS credentials. List existing credentials in the specified NATS account. The response contains only the metadata for the credentials, not the credentials themselves, which are only returned after a **Create Credentials** call.
+   *
+   * @param request - The request {@link NatsApiListNatsCredentialsRequest}
+   * @returns A Promise of ListNatsCredentialsResponse
+   */
+  listNatsCredentials = (request = {}) => sdkClient.enrichForPagination(
+    "natsCredentials",
+    this.pageOfListNatsCredentials,
+    request
+  );
+}
+class SnsAPI extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par", "nl-ams"]
+  });
+  /**
+   * Activate Topics and Events. Activate Topics and Events for the specified Project ID. Topics and Events must be activated before any usage. Activating Topics and Events does not trigger any billing, and you can deactivate at any time.
+   *
+   * @param request - The request {@link SnsApiActivateSnsRequest}
+   * @returns A Promise of SnsInfo
+   */
+  activateSns = (request = {}) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalSnsApiActivateSnsRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/activate-sns`
+    },
+    marshalling_gen.unmarshalSnsInfo
+  );
+  /**
+   * Get Topics and Events info. Retrieve the Topics and Events information of the specified Project ID. Informations include the activation status and the Topics and Events API endpoint URL.
+   *
+   * @param request - The request {@link SnsApiGetSnsInfoRequest}
+   * @returns A Promise of SnsInfo
+   */
+  getSnsInfo = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/sns-info`,
+      urlParams: sdkClient.urlParams([
+        "project_id",
+        request.projectId ?? this.client.settings.defaultProjectId
+      ])
+    },
+    marshalling_gen.unmarshalSnsInfo
+  );
+  /**
+   * Deactivate Topics and Events. Deactivate Topics and Events for the specified Project ID. You must delete all topics and credentials before this call or you need to set the force_delete parameter.
+   *
+   * @param request - The request {@link SnsApiDeactivateSnsRequest}
+   * @returns A Promise of SnsInfo
+   */
+  deactivateSns = (request = {}) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalSnsApiDeactivateSnsRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/deactivate-sns`
+    },
+    marshalling_gen.unmarshalSnsInfo
+  );
+  /**
+   * Create Topics and Events credentials. Create a set of credentials for Topics and Events, specified by a Project ID. Credentials give the bearer access to topics, and the level of permissions can be defined granularly.
+   *
+   * @param request - The request {@link SnsApiCreateSnsCredentialsRequest}
+   * @returns A Promise of SnsCredentials
+   */
+  createSnsCredentials = (request = {}) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalSnsApiCreateSnsCredentialsRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/sns-credentials`
+    },
+    marshalling_gen.unmarshalSnsCredentials
+  );
+  /**
+   * Delete Topics and Events credentials. Delete a set of Topics and Events credentials, specified by their credentials ID. Deleting credentials is irreversible and cannot be undone. The credentials can then no longer be used to access Topics and Events.
+   *
+   * @param request - The request {@link SnsApiDeleteSnsCredentialsRequest}
+   */
+  deleteSnsCredentials = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/sns-credentials/${sdkClient.validatePathParam("snsCredentialsId", request.snsCredentialsId)}`
+  });
+  /**
+   * Update Topics and Events credentials. Update a set of Topics and Events credentials. You can update the credentials' name, or their permissions.
+   *
+   * @param request - The request {@link SnsApiUpdateSnsCredentialsRequest}
+   * @returns A Promise of SnsCredentials
+   */
+  updateSnsCredentials = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalSnsApiUpdateSnsCredentialsRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/sns-credentials/${sdkClient.validatePathParam("snsCredentialsId", request.snsCredentialsId)}`
+    },
+    marshalling_gen.unmarshalSnsCredentials
+  );
+  /**
+   * Get Topics and Events credentials. Retrieve an existing set of credentials, identified by the `credentials_id`. The credentials themselves, as well as their metadata (name, project ID etc), are returned in the response.
+   *
+   * @param request - The request {@link SnsApiGetSnsCredentialsRequest}
+   * @returns A Promise of SnsCredentials
+   */
+  getSnsCredentials = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/sns-credentials/${sdkClient.validatePathParam("snsCredentialsId", request.snsCredentialsId)}`
+    },
+    marshalling_gen.unmarshalSnsCredentials
+  );
+  pageOfListSnsCredentials = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/sns-credentials`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId]
+      )
+    },
+    marshalling_gen.unmarshalListSnsCredentialsResponse
+  );
+  /**
+   * List Topics and Events credentials. List existing Topics and Events credentials in the specified region. The response contains only the metadata for the credentials, not the credentials themselves.
+   *
+   * @param request - The request {@link SnsApiListSnsCredentialsRequest}
+   * @returns A Promise of ListSnsCredentialsResponse
+   */
+  listSnsCredentials = (request = {}) => sdkClient.enrichForPagination(
+    "snsCredentials",
+    this.pageOfListSnsCredentials,
+    request
+  );
+}
+class SqsAPI extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par", "nl-ams"]
+  });
+  /**
+   * Activate Queues. Activate Queues for the specified Project ID. Queues must be activated before any usage such as creating credentials and queues. Activating Queues does not trigger any billing, and you can deactivate at any time.
+   *
+   * @param request - The request {@link SqsApiActivateSqsRequest}
+   * @returns A Promise of SqsInfo
+   */
+  activateSqs = (request = {}) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalSqsApiActivateSqsRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/activate-sqs`
+    },
+    marshalling_gen.unmarshalSqsInfo
+  );
+  /**
+   * Get Queues info. Retrieve the Queues information of the specified Project ID. Informations include the activation status and the Queues API endpoint URL.
+   *
+   * @param request - The request {@link SqsApiGetSqsInfoRequest}
+   * @returns A Promise of SqsInfo
+   */
+  getSqsInfo = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/sqs-info`,
+      urlParams: sdkClient.urlParams([
+        "project_id",
+        request.projectId ?? this.client.settings.defaultProjectId
+      ])
+    },
+    marshalling_gen.unmarshalSqsInfo
+  );
+  /**
+   * Deactivate Queues. Deactivate Queues for the specified Project ID. You must delete all queues and credentials before this call or you need to set the force_delete parameter.
+   *
+   * @param request - The request {@link SqsApiDeactivateSqsRequest}
+   * @returns A Promise of SqsInfo
+   */
+  deactivateSqs = (request = {}) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalSqsApiDeactivateSqsRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/deactivate-sqs`
+    },
+    marshalling_gen.unmarshalSqsInfo
+  );
+  /**
+   * Create Queues credentials. Create a set of credentials for Queues, specified by a Project ID. Credentials give the bearer access to queues, and the level of permissions can be defined granularly.
+   *
+   * @param request - The request {@link SqsApiCreateSqsCredentialsRequest}
+   * @returns A Promise of SqsCredentials
+   */
+  createSqsCredentials = (request = {}) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalSqsApiCreateSqsCredentialsRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/sqs-credentials`
+    },
+    marshalling_gen.unmarshalSqsCredentials
+  );
+  /**
+   * Delete Queues credentials. Delete a set of Queues credentials, specified by their credentials ID. Deleting credentials is irreversible and cannot be undone. The credentials can then no longer be used to access Queues.
+   *
+   * @param request - The request {@link SqsApiDeleteSqsCredentialsRequest}
+   */
+  deleteSqsCredentials = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/sqs-credentials/${sdkClient.validatePathParam("sqsCredentialsId", request.sqsCredentialsId)}`
+  });
+  /**
+   * Update Queues credentials. Update a set of Queues credentials. You can update the credentials' name, or their permissions.
+   *
+   * @param request - The request {@link SqsApiUpdateSqsCredentialsRequest}
+   * @returns A Promise of SqsCredentials
+   */
+  updateSqsCredentials = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalSqsApiUpdateSqsCredentialsRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/sqs-credentials/${sdkClient.validatePathParam("sqsCredentialsId", request.sqsCredentialsId)}`
+    },
+    marshalling_gen.unmarshalSqsCredentials
+  );
+  /**
+   * Get Queues credentials. Retrieve an existing set of credentials, identified by the `credentials_id`. The credentials themselves, as well as their metadata (name, project ID etc), are returned in the response.
+   *
+   * @param request - The request {@link SqsApiGetSqsCredentialsRequest}
+   * @returns A Promise of SqsCredentials
+   */
+  getSqsCredentials = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/sqs-credentials/${sdkClient.validatePathParam("sqsCredentialsId", request.sqsCredentialsId)}`
+    },
+    marshalling_gen.unmarshalSqsCredentials
+  );
+  pageOfListSqsCredentials = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/mnq/v1beta1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/sqs-credentials`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId]
+      )
+    },
+    marshalling_gen.unmarshalListSqsCredentialsResponse
+  );
+  /**
+   * List Queues credentials. List existing Queues credentials in the specified region. The response contains only the metadata for the credentials, not the credentials themselves.
+   *
+   * @param request - The request {@link SqsApiListSqsCredentialsRequest}
+   * @returns A Promise of ListSqsCredentialsResponse
+   */
+  listSqsCredentials = (request = {}) => sdkClient.enrichForPagination(
+    "sqsCredentials",
+    this.pageOfListSqsCredentials,
+    request
+  );
+}
+exports.NatsAPI = NatsAPI;
+exports.SnsAPI = SnsAPI;
+exports.SqsAPI = SqsAPI;

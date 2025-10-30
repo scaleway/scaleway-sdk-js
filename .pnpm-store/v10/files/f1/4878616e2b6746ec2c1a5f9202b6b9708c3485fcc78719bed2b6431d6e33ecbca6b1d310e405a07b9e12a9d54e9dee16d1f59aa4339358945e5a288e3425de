@@ -1,0 +1,89 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalDatabaseBackup = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DatabaseBackup' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    databaseId: data.database_id,
+    dbSize: data.db_size,
+    downloadUrl: data.download_url,
+    downloadUrlExpiresAt: sdkClient.unmarshalDate(data.download_url_expires_at),
+    expiresAt: sdkClient.unmarshalDate(data.expires_at),
+    id: data.id,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    region: data.region,
+    size: data.size,
+    status: data.status
+  };
+};
+const unmarshalDatabase = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Database' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    cpuCurrent: data.cpu_current,
+    cpuMax: data.cpu_max,
+    cpuMin: data.cpu_min,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    endpoint: data.endpoint,
+    engineMajorVersion: data.engine_major_version,
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    region: data.region,
+    started: data.started,
+    status: data.status
+  };
+};
+const unmarshalListDatabaseBackupsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDatabaseBackupsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    backups: sdkClient.unmarshalArrayOfObject(data.backups, unmarshalDatabaseBackup),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListDatabasesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDatabasesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    databases: sdkClient.unmarshalArrayOfObject(data.databases, unmarshalDatabase),
+    totalCount: data.total_count
+  };
+};
+const marshalCreateDatabaseRequest = (request, defaults) => ({
+  cpu_max: request.cpuMax,
+  cpu_min: request.cpuMin,
+  from_backup_id: request.fromBackupId,
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalRestoreDatabaseFromBackupRequest = (request, defaults) => ({
+  backup_id: request.backupId
+});
+const marshalUpdateDatabaseRequest = (request, defaults) => ({
+  cpu_max: request.cpuMax,
+  cpu_min: request.cpuMin
+});
+exports.marshalCreateDatabaseRequest = marshalCreateDatabaseRequest;
+exports.marshalRestoreDatabaseFromBackupRequest = marshalRestoreDatabaseFromBackupRequest;
+exports.marshalUpdateDatabaseRequest = marshalUpdateDatabaseRequest;
+exports.unmarshalDatabase = unmarshalDatabase;
+exports.unmarshalDatabaseBackup = unmarshalDatabaseBackup;
+exports.unmarshalListDatabaseBackupsResponse = unmarshalListDatabaseBackupsResponse;
+exports.unmarshalListDatabasesResponse = unmarshalListDatabasesResponse;

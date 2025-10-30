@@ -1,0 +1,9 @@
+/**
+ * Verifies the object is a record of string to string[].
+ *
+ * @param obj - The object
+ * @returns Whether the object is of the expected type
+ *
+ * @internal
+ */
+export declare const isRecordOfStringArray: (obj: Readonly<unknown>) => obj is Record<string, string[]>;

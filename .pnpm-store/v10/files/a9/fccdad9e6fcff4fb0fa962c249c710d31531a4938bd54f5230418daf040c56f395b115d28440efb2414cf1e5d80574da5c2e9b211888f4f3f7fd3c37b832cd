@@ -1,0 +1,36 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const scwError = require("../scw-error.cjs");
+const invalidArgumentsError = require("../standard/invalid-arguments-error.cjs");
+const quotasExceededError = require("../standard/quotas-exceeded-error.cjs");
+const types = require("../types.cjs");
+class InvalidRequestMapper {
+  static fromJSON(status, obj) {
+    if (typeof obj.message === "string" && obj.message.toLowerCase().includes("quota exceeded for this resource")) {
+      return new quotasExceededError.QuotasExceededError(status, obj, [
+        {
+          current: 0,
+          quota: 0,
+          resource: typeof obj.resource === "string" ? obj.resource : ""
+        }
+      ]);
+    }
+    const fields = obj.fields && types.isRecordOfStringArray(obj.fields) ? obj.fields : {};
+    const fieldsMessages = Object.entries(fields);
+    if (fieldsMessages.length) {
+      return new invalidArgumentsError.InvalidArgumentsError(
+        status,
+        obj,
+        fieldsMessages.map(
+          ([argumentName, messages]) => messages.map((helpMessage) => ({
+            argumentName,
+            helpMessage,
+            reason: "constraint"
+          }))
+        ).flat()
+      );
+    }
+    return new scwError.ScalewayError(status, obj);
+  }
+}
+exports.InvalidRequestMapper = InvalidRequestMapper;

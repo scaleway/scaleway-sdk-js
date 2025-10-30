@@ -1,0 +1,140 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client';
+import type { CreateDeploymentRequest, CreateEndpointRequest, CreateModelRequest, DeleteDeploymentRequest, DeleteEndpointRequest, DeleteModelRequest, Deployment, Endpoint, GetDeploymentCertificateRequest, GetDeploymentRequest, GetModelRequest, ListDeploymentsRequest, ListDeploymentsResponse, ListModelsRequest, ListModelsResponse, ListNodeTypesRequest, ListNodeTypesResponse, Model, UpdateDeploymentRequest, UpdateEndpointRequest } from './types.gen';
+/**
+ * Managed Inference API.
+
+This API allows you to handle your Managed Inference services.
+ */
+export declare class API extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    protected pageOfListDeployments: (request?: Readonly<ListDeploymentsRequest>) => Promise<ListDeploymentsResponse>;
+    /**
+     * List inference deployments. List all your inference deployments.
+     *
+     * @param request - The request {@link ListDeploymentsRequest}
+     * @returns A Promise of ListDeploymentsResponse
+     */
+    listDeployments: (request?: Readonly<ListDeploymentsRequest>) => Promise<ListDeploymentsResponse> & {
+        all: () => Promise<Deployment[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Deployment[], void, void>;
+    };
+    /**
+     * Get a deployment. Get the deployment for the given ID.
+     *
+     * @param request - The request {@link GetDeploymentRequest}
+     * @returns A Promise of Deployment
+     */
+    getDeployment: (request: Readonly<GetDeploymentRequest>) => Promise<Deployment>;
+    /**
+     * Waits for {@link Deployment} to be in a final state.
+     *
+     * @param request - The request {@link GetDeploymentRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Deployment
+     */
+    waitForDeployment: (request: Readonly<GetDeploymentRequest>, options?: Readonly<WaitForOptions<Deployment>>) => Promise<Deployment>;
+    /**
+     * Create a deployment. Create a new inference deployment related to a specific model.
+     *
+     * @param request - The request {@link CreateDeploymentRequest}
+     * @returns A Promise of Deployment
+     */
+    createDeployment: (request: Readonly<CreateDeploymentRequest>) => Promise<Deployment>;
+    /**
+     * Update a deployment. Update an existing inference deployment.
+     *
+     * @param request - The request {@link UpdateDeploymentRequest}
+     * @returns A Promise of Deployment
+     */
+    updateDeployment: (request: Readonly<UpdateDeploymentRequest>) => Promise<Deployment>;
+    /**
+     * Delete a deployment. Delete an existing inference deployment.
+     *
+     * @param request - The request {@link DeleteDeploymentRequest}
+     * @returns A Promise of Deployment
+     */
+    deleteDeployment: (request: Readonly<DeleteDeploymentRequest>) => Promise<Deployment>;
+    /**
+     * Get the CA certificate. Get the CA certificate used for the deployment of private endpoints.
+  The CA certificate will be returned as a PEM file.
+     *
+     * @param request - The request {@link GetDeploymentCertificateRequest}
+     * @returns A Promise of Blob
+     */
+    getDeploymentCertificate: (request: Readonly<GetDeploymentCertificateRequest>) => Promise<Blob>;
+    /**
+     * Create an endpoint. Create a new Endpoint related to a specific deployment.
+     *
+     * @param request - The request {@link CreateEndpointRequest}
+     * @returns A Promise of Endpoint
+     */
+    createEndpoint: (request: Readonly<CreateEndpointRequest>) => Promise<Endpoint>;
+    /**
+     * Update an endpoint. Update an existing Endpoint.
+     *
+     * @param request - The request {@link UpdateEndpointRequest}
+     * @returns A Promise of Endpoint
+     */
+    updateEndpoint: (request: Readonly<UpdateEndpointRequest>) => Promise<Endpoint>;
+    /**
+     * Delete an endpoint. Delete an existing Endpoint.
+     *
+     * @param request - The request {@link DeleteEndpointRequest}
+     */
+    deleteEndpoint: (request: Readonly<DeleteEndpointRequest>) => Promise<void>;
+    protected pageOfListModels: (request?: Readonly<ListModelsRequest>) => Promise<ListModelsResponse>;
+    /**
+     * List models. List all available models.
+     *
+     * @param request - The request {@link ListModelsRequest}
+     * @returns A Promise of ListModelsResponse
+     */
+    listModels: (request?: Readonly<ListModelsRequest>) => Promise<ListModelsResponse> & {
+        all: () => Promise<Model[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Model[], void, void>;
+    };
+    /**
+     * Get a model. Get the model for the given ID.
+     *
+     * @param request - The request {@link GetModelRequest}
+     * @returns A Promise of Model
+     */
+    getModel: (request: Readonly<GetModelRequest>) => Promise<Model>;
+    /**
+     * Waits for {@link Model} to be in a final state.
+     *
+     * @param request - The request {@link GetModelRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Model
+     */
+    waitForModel: (request: Readonly<GetModelRequest>, options?: Readonly<WaitForOptions<Model>>) => Promise<Model>;
+    /**
+     * Import a model. Import a new model to your model library.
+     *
+     * @param request - The request {@link CreateModelRequest}
+     * @returns A Promise of Model
+     */
+    createModel: (request: Readonly<CreateModelRequest>) => Promise<Model>;
+    /**
+     * Delete a model. Delete an existing model from your model library.
+     *
+     * @param request - The request {@link DeleteModelRequest}
+     */
+    deleteModel: (request: Readonly<DeleteModelRequest>) => Promise<void>;
+    protected pageOfListNodeTypes: (request: Readonly<ListNodeTypesRequest>) => Promise<ListNodeTypesResponse>;
+    /**
+     * List available node types. List all available node types. By default, the node types returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
+     *
+     * @param request - The request {@link ListNodeTypesRequest}
+     * @returns A Promise of ListNodeTypesResponse
+     */
+    listNodeTypes: (request: Readonly<ListNodeTypesRequest>) => Promise<ListNodeTypesResponse> & {
+        all: () => Promise<import("./types.gen").NodeType[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").NodeType[], void, void>;
+    };
+}

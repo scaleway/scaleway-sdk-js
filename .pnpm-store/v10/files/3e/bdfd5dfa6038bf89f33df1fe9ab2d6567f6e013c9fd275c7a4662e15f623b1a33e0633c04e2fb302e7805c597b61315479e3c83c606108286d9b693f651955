@@ -1,0 +1,8 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const IMAGE_TRANSIENT_STATUSES = ["deleting"];
+const NAMESPACE_TRANSIENT_STATUSES = ["deleting"];
+const TAG_TRANSIENT_STATUSES = ["deleting"];
+exports.IMAGE_TRANSIENT_STATUSES = IMAGE_TRANSIENT_STATUSES;
+exports.NAMESPACE_TRANSIENT_STATUSES = NAMESPACE_TRANSIENT_STATUSES;
+exports.TAG_TRANSIENT_STATUSES = TAG_TRANSIENT_STATUSES;

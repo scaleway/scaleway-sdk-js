@@ -1,0 +1,15 @@
+import type { DNSZoneStatus, DomainFeatureStatus, DomainRegistrationStatusTransferStatus, DomainStatus, HostStatus, SSLCertificateStatus, TaskStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link DNSZoneStatus}. */
+export declare const DNS_ZONE_TRANSIENT_STATUSES: DNSZoneStatus[];
+/** Lists transient statutes of the enum {@link DomainFeatureStatus}. */
+export declare const DOMAIN_FEATURE_TRANSIENT_STATUSES: DomainFeatureStatus[];
+/** Lists transient statutes of the enum {@link DomainRegistrationStatusTransferStatus}. */
+export declare const DOMAIN_REGISTRATION_STATUS_TRANSFER_TRANSIENT_STATUSES: DomainRegistrationStatusTransferStatus[];
+/** Lists transient statutes of the enum {@link DomainStatus}. */
+export declare const DOMAIN_TRANSIENT_STATUSES: DomainStatus[];
+/** Lists transient statutes of the enum {@link HostStatus}. */
+export declare const HOST_TRANSIENT_STATUSES: HostStatus[];
+/** Lists transient statutes of the enum {@link SSLCertificateStatus}. */
+export declare const SSL_CERTIFICATE_TRANSIENT_STATUSES: SSLCertificateStatus[];
+/** Lists transient statutes of the enum {@link TaskStatus}. */
+export declare const TASK_TRANSIENT_STATUSES: TaskStatus[];

@@ -1,0 +1,539 @@
+export declare const AttachFailoverIPToMacAddressRequest: {
+    ipId: {
+        greaterThan: number;
+    };
+};
+export declare const AttachFailoverIPsRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const BillingApiDownloadInvoiceRequest: {
+    invoiceId: {
+        greaterThan: number;
+    };
+};
+export declare const BillingApiDownloadRefundRequest: {
+    refundId: {
+        greaterThan: number;
+    };
+};
+export declare const BillingApiGetInvoiceRequest: {
+    invoiceId: {
+        greaterThan: number;
+    };
+};
+export declare const BillingApiGetRefundRequest: {
+    refundId: {
+        greaterThan: number;
+    };
+};
+export declare const BillingApiListInvoicesRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const BillingApiListRefundsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const CancelServerInstallRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const DeleteFailoverIPRequest: {
+    ipId: {
+        greaterThan: number;
+    };
+};
+export declare const DeleteServerRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const DeleteServiceRequest: {
+    serviceId: {
+        greaterThan: number;
+    };
+};
+export declare const DetachFailoverIPFromMacAddressRequest: {
+    ipId: {
+        greaterThan: number;
+    };
+};
+export declare const GetBMCAccessRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const GetFailoverIPRequest: {
+    ipId: {
+        greaterThan: number;
+    };
+};
+export declare const GetOSRequest: {
+    osId: {
+        greaterThan: number;
+    };
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const GetOfferRequest: {
+    offerId: {
+        greaterThan: number;
+    };
+};
+export declare const GetOrderedServiceRequest: {
+    orderedServiceId: {
+        greaterThan: number;
+    };
+};
+export declare const GetRaidRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const GetRescueRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const GetServerBackupRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const GetServerInstallRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const GetServerRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const GetServiceRequest: {
+    serviceId: {
+        greaterThan: number;
+    };
+};
+export declare const IPv6Block: {
+    id: {
+        greaterThan: number;
+    };
+};
+export declare const IPv6BlockApiCreateIPv6BlockSubnetRequest: {
+    blockId: {
+        greaterThan: number;
+    };
+};
+export declare const IPv6BlockApiDeleteIPv6BlockRequest: {
+    blockId: {
+        greaterThan: number;
+    };
+};
+export declare const IPv6BlockApiListIPv6BlockSubnetsAvailableRequest: {
+    blockId: {
+        greaterThan: number;
+    };
+};
+export declare const IPv6BlockApiUpdateIPv6BlockRequest: {
+    blockId: {
+        greaterThan: number;
+    };
+};
+export declare const InstallServerRequest: {
+    osId: {
+        greaterThan: number;
+    };
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const ListFailoverIPsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListOSRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const ListOffersRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListServerDisksRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const ListServerEventsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const ListServersRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListServicesRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ListSubscribableServerOptionsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const RebootServerRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnApiListRpnServerCapabilitiesRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const RpnSanApiAddIpRequest: {
+    rpnSanId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnSanApiDeleteRpnSanRequest: {
+    rpnSanId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnSanApiGetRpnSanRequest: {
+    rpnSanId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnSanApiListAvailableIpsRequest: {
+    rpnSanId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnSanApiListIpsRequest: {
+    rpnSanId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnSanApiListRpnSansRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const RpnSanApiRemoveIpRequest: {
+    rpnSanId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnV1ApiAcceptRpnInviteRequest: {
+    memberId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnV1ApiAddRpnGroupMembersRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnV1ApiDeleteRpnGroupMembersRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnV1ApiDeleteRpnGroupRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnV1ApiGetRpnGroupRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnV1ApiLeaveRpnGroupRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnV1ApiListRpnCapableSanServersRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const RpnV1ApiListRpnCapableServersRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const RpnV1ApiListRpnGroupMembersRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const RpnV1ApiListRpnGroupsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const RpnV1ApiListRpnInvitesRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const RpnV1ApiRefuseRpnInviteRequest: {
+    memberId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnV1ApiRpnGroupInviteRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnV1ApiUpdateRpnGroupNameRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnV2ApiAddRpnV2MembersRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnV2ApiDeleteRpnV2GroupRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnV2ApiDeleteRpnV2MembersRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnV2ApiDisableRpnV2GroupCompatibilityRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnV2ApiEnableRpnV2GroupCompatibilityRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnV2ApiGetRpnV2GroupRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnV2ApiListRpnV2CapableResourcesRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const RpnV2ApiListRpnV2GroupLogsRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const RpnV2ApiListRpnV2GroupsRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const RpnV2ApiListRpnV2MembersRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThan: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const RpnV2ApiUpdateRpnV2GroupNameRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+};
+export declare const RpnV2ApiUpdateRpnV2VlanForMembersRequest: {
+    groupId: {
+        greaterThan: number;
+    };
+};
+export declare const StartRescueRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const StartServerRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const StopBMCAccessRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const StopRescueRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const StopServerRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const SubscribeServerOptionRequest: {
+    optionId: {
+        greaterThan: number;
+    };
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const SubscribeStorageOptionsRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const UpdateRaidRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const UpdateReverseRequest: {
+    ipId: {
+        greaterThan: number;
+    };
+};
+export declare const UpdateServerBackupRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const UpdateServerRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};
+export declare const UpdateServerTagsRequest: {
+    serverId: {
+        greaterThan: number;
+    };
+};

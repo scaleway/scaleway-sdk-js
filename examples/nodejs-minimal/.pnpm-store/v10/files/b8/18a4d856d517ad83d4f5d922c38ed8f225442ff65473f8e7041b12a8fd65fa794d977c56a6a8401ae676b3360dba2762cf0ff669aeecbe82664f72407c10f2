@@ -1,0 +1,1064 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const marshalling_gen = require("./marshalling.gen.cjs");
+const jsonContentHeaders = {
+  "Content-Type": "application/json; charset=utf-8"
+};
+class API extends sdkClient.API {
+  pageOfListSSHKeys = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/ssh-keys`,
+      urlParams: sdkClient.urlParams(
+        ["disabled", request.disabled],
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId]
+      )
+    },
+    marshalling_gen.unmarshalListSSHKeysResponse
+  );
+  /**
+   * List SSH keys. List SSH keys. By default, the SSH keys listed are ordered by creation date in ascending order. This can be modified via the `order_by` field. You can define additional parameters for your query such as `organization_id`, `name`, `project_id` and `disabled`.
+   *
+   * @param request - The request {@link ListSSHKeysRequest}
+   * @returns A Promise of ListSSHKeysResponse
+   */
+  listSSHKeys = (request = {}) => sdkClient.enrichForPagination("sshKeys", this.pageOfListSSHKeys, request);
+  /**
+   * Create an SSH key. Add a new SSH key to a Scaleway Project. You must specify the `name`, `public_key` and `project_id`.
+   *
+   * @param request - The request {@link CreateSSHKeyRequest}
+   * @returns A Promise of SSHKey
+   */
+  createSSHKey = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateSSHKeyRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/ssh-keys`
+    },
+    marshalling_gen.unmarshalSSHKey
+  );
+  /**
+   * Get an SSH key. Retrieve information about a given SSH key, specified by the `ssh_key_id` parameter. The SSH key's full details, including `id`, `name`, `public_key`, and `project_id` are returned in the response.
+   *
+   * @param request - The request {@link GetSSHKeyRequest}
+   * @returns A Promise of SSHKey
+   */
+  getSSHKey = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/ssh-keys/${sdkClient.validatePathParam("sshKeyId", request.sshKeyId)}`
+    },
+    marshalling_gen.unmarshalSSHKey
+  );
+  /**
+   * Update an SSH key. Update the parameters of an SSH key, including `name` and `disable`.
+   *
+   * @param request - The request {@link UpdateSSHKeyRequest}
+   * @returns A Promise of SSHKey
+   */
+  updateSSHKey = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateSSHKeyRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/iam/v1alpha1/ssh-keys/${sdkClient.validatePathParam("sshKeyId", request.sshKeyId)}`
+    },
+    marshalling_gen.unmarshalSSHKey
+  );
+  /**
+   * Delete an SSH key. Delete a given SSH key, specified by the `ssh_key_id`. Deleting an SSH is permanent, and cannot be undone. Note that you might need to update any configurations that used the SSH key.
+   *
+   * @param request - The request {@link DeleteSSHKeyRequest}
+   */
+  deleteSSHKey = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/iam/v1alpha1/ssh-keys/${sdkClient.validatePathParam("sshKeyId", request.sshKeyId)}`
+  });
+  pageOfListUsers = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/users`,
+      urlParams: sdkClient.urlParams(
+        ["mfa", request.mfa],
+        ["order_by", request.orderBy],
+        [
+          "organization_id",
+          request.organizationId ?? this.client.settings.defaultOrganizationId
+        ],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["tag", request.tag],
+        ["type", request.type],
+        ["user_ids", request.userIds]
+      )
+    },
+    marshalling_gen.unmarshalListUsersResponse
+  );
+  /**
+   * List users of an Organization. List the users of an Organization. By default, the users listed are ordered by creation date in ascending order. This can be modified via the `order_by` field. You must define the `organization_id` in the query path of your request. You can also define additional parameters for your query such as `user_ids`.
+   *
+   * @param request - The request {@link ListUsersRequest}
+   * @returns A Promise of ListUsersResponse
+   */
+  listUsers = (request = {}) => sdkClient.enrichForPagination("users", this.pageOfListUsers, request);
+  /**
+   * Get a given user. Retrieve information about a user, specified by the `user_id` parameter. The user's full details, including `id`, `email`, `organization_id`, `status` and `mfa` are returned in the response.
+   *
+   * @param request - The request {@link GetUserRequest}
+   * @returns A Promise of User
+   */
+  getUser = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/users/${sdkClient.validatePathParam("userId", request.userId)}`
+    },
+    marshalling_gen.unmarshalUser
+  );
+  /**
+   * Update a user. Update the parameters of a user, including `tags`.
+   *
+   * @param request - The request {@link UpdateUserRequest}
+   * @returns A Promise of User
+   */
+  updateUser = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateUserRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/iam/v1alpha1/users/${sdkClient.validatePathParam("userId", request.userId)}`
+    },
+    marshalling_gen.unmarshalUser
+  );
+  /**
+   * Delete a guest user from an Organization. Remove a user from an Organization in which they are a guest. You must define the `user_id` in your request. Note that removing a user from an Organization automatically deletes their API keys, and any policies directly attached to them become orphaned.
+   *
+   * @param request - The request {@link DeleteUserRequest}
+   */
+  deleteUser = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/iam/v1alpha1/users/${sdkClient.validatePathParam("userId", request.userId)}`
+  });
+  /**
+   * Create a new user. Create a new user. You must define the `organization_id` in your request. If you are adding a member, enter the member's details. If you are adding a guest, you must define the `email` and not add the member attribute.
+   *
+   * @param request - The request {@link CreateUserRequest}
+   * @returns A Promise of User
+   */
+  createUser = (request = {}) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateUserRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/users`
+    },
+    marshalling_gen.unmarshalUser
+  );
+  /**
+   * Update an user's username.. Update an user's username.
+   *
+   * @param request - The request {@link UpdateUserUsernameRequest}
+   * @returns A Promise of User
+   */
+  updateUserUsername = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateUserUsernameRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/users/${sdkClient.validatePathParam("userId", request.userId)}/update-username`
+    },
+    marshalling_gen.unmarshalUser
+  );
+  /**
+   * Update an user's password.. Update an user's password.
+   *
+   * @param request - The request {@link UpdateUserPasswordRequest}
+   * @returns A Promise of User
+   */
+  updateUserPassword = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateUserPasswordRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/users/${sdkClient.validatePathParam("userId", request.userId)}/update-password`
+    },
+    marshalling_gen.unmarshalUser
+  );
+  /**
+   * Create a MFA OTP.. Create a MFA OTP.
+   *
+   * @param request - The request {@link CreateUserMFAOTPRequest}
+   * @returns A Promise of MFAOTP
+   */
+  createUserMFAOTP = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/users/${sdkClient.validatePathParam("userId", request.userId)}/mfa-otp`
+    },
+    marshalling_gen.unmarshalMFAOTP
+  );
+  /**
+   * Validate a MFA OTP.. Validate a MFA OTP.
+   *
+   * @param request - The request {@link ValidateUserMFAOTPRequest}
+   * @returns A Promise of ValidateUserMFAOTPResponse
+   */
+  validateUserMFAOTP = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalValidateUserMFAOTPRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/users/${sdkClient.validatePathParam("userId", request.userId)}/validate-mfa-otp`
+    },
+    marshalling_gen.unmarshalValidateUserMFAOTPResponse
+  );
+  /**
+   * Delete a MFA OTP.. Delete a MFA OTP.
+   *
+   * @param request - The request {@link DeleteUserMFAOTPRequest}
+   */
+  deleteUserMFAOTP = (request) => this.client.fetch({
+    body: "{}",
+    headers: jsonContentHeaders,
+    method: "DELETE",
+    path: `/iam/v1alpha1/users/${sdkClient.validatePathParam("userId", request.userId)}/mfa-otp`
+  });
+  /**
+   * Lock a member. Lock a member. A locked member cannot log in or use API keys until the locked status is removed.
+   *
+   * @param request - The request {@link LockUserRequest}
+   * @returns A Promise of User
+   */
+  lockUser = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/users/${sdkClient.validatePathParam("userId", request.userId)}/lock`
+    },
+    marshalling_gen.unmarshalUser
+  );
+  /**
+   * Unlock a member.
+   *
+   * @param request - The request {@link UnlockUserRequest}
+   * @returns A Promise of User
+   */
+  unlockUser = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/users/${sdkClient.validatePathParam("userId", request.userId)}/unlock`
+    },
+    marshalling_gen.unmarshalUser
+  );
+  /**
+   * List grace periods of a member. List the grace periods of a member.
+   *
+   * @param request - The request {@link ListGracePeriodsRequest}
+   * @returns A Promise of ListGracePeriodsResponse
+   */
+  listGracePeriods = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/grace-periods`,
+      urlParams: sdkClient.urlParams(["user_id", request.userId])
+    },
+    marshalling_gen.unmarshalListGracePeriodsResponse
+  );
+  getUserConnections = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/users/${sdkClient.validatePathParam("userId", request.userId)}/connections`
+    },
+    marshalling_gen.unmarshalGetUserConnectionsResponse
+  );
+  initiateUserConnection = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/users/${sdkClient.validatePathParam("userId", request.userId)}/initiate-connection`
+    },
+    marshalling_gen.unmarshalInitiateUserConnectionResponse
+  );
+  joinUserConnection = (request) => this.client.fetch({
+    body: JSON.stringify(
+      marshalling_gen.marshalJoinUserConnectionRequest(request, this.client.settings)
+    ),
+    headers: jsonContentHeaders,
+    method: "POST",
+    path: `/iam/v1alpha1/users/${sdkClient.validatePathParam("userId", request.userId)}/join-connection`
+  });
+  removeUserConnection = (request) => this.client.fetch({
+    body: JSON.stringify(
+      marshalling_gen.marshalRemoveUserConnectionRequest(request, this.client.settings)
+    ),
+    headers: jsonContentHeaders,
+    method: "POST",
+    path: `/iam/v1alpha1/users/${sdkClient.validatePathParam("userId", request.userId)}/remove-connection`
+  });
+  pageOfListApplications = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/applications`,
+      urlParams: sdkClient.urlParams(
+        ["application_ids", request.applicationIds],
+        ["editable", request.editable],
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        [
+          "organization_id",
+          request.organizationId ?? this.client.settings.defaultOrganizationId
+        ],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["tag", request.tag]
+      )
+    },
+    marshalling_gen.unmarshalListApplicationsResponse
+  );
+  /**
+   * List applications of an Organization. List the applications of an Organization. By default, the applications listed are ordered by creation date in ascending order. This can be modified via the `order_by` field. You must define the `organization_id` in the query path of your request. You can also define additional parameters for your query such as `application_ids`.
+   *
+   * @param request - The request {@link ListApplicationsRequest}
+   * @returns A Promise of ListApplicationsResponse
+   */
+  listApplications = (request = {}) => sdkClient.enrichForPagination("applications", this.pageOfListApplications, request);
+  /**
+   * Create a new application. Create a new application. You must define the `name` parameter in the request.
+   *
+   * @param request - The request {@link CreateApplicationRequest}
+   * @returns A Promise of Application
+   */
+  createApplication = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateApplicationRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/applications`
+    },
+    marshalling_gen.unmarshalApplication
+  );
+  /**
+   * Get a given application. Retrieve information about an application, specified by the `application_id` parameter. The application's full details, including `id`, `email`, `organization_id`, `status` and `two_factor_enabled` are returned in the response.
+   *
+   * @param request - The request {@link GetApplicationRequest}
+   * @returns A Promise of Application
+   */
+  getApplication = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/applications/${sdkClient.validatePathParam("applicationId", request.applicationId)}`
+    },
+    marshalling_gen.unmarshalApplication
+  );
+  /**
+   * Update an application. Update the parameters of an application, including `name` and `description`.
+   *
+   * @param request - The request {@link UpdateApplicationRequest}
+   * @returns A Promise of Application
+   */
+  updateApplication = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateApplicationRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/iam/v1alpha1/applications/${sdkClient.validatePathParam("applicationId", request.applicationId)}`
+    },
+    marshalling_gen.unmarshalApplication
+  );
+  /**
+   * Delete an application. Delete an application. Note that this action is irreversible and will automatically delete the application's API keys. Policies attached to users and applications via this group will no longer apply.
+   *
+   * @param request - The request {@link DeleteApplicationRequest}
+   */
+  deleteApplication = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/iam/v1alpha1/applications/${sdkClient.validatePathParam("applicationId", request.applicationId)}`
+  });
+  pageOfListGroups = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/groups`,
+      urlParams: sdkClient.urlParams(
+        ["application_ids", request.applicationIds],
+        ["group_ids", request.groupIds],
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        [
+          "organization_id",
+          request.organizationId ?? this.client.settings.defaultOrganizationId
+        ],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["tag", request.tag],
+        ["user_ids", request.userIds]
+      )
+    },
+    marshalling_gen.unmarshalListGroupsResponse
+  );
+  /**
+   * List groups. List groups. By default, the groups listed are ordered by creation date in ascending order. This can be modified via the `order_by` field. You can define additional parameters to filter your query. Use `user_ids` or `application_ids` to list all groups certain users or applications belong to.
+   *
+   * @param request - The request {@link ListGroupsRequest}
+   * @returns A Promise of ListGroupsResponse
+   */
+  listGroups = (request = {}) => sdkClient.enrichForPagination("groups", this.pageOfListGroups, request);
+  /**
+   * Create a group. Create a new group. You must define the `name` and `organization_id` parameters in the request.
+   *
+   * @param request - The request {@link CreateGroupRequest}
+   * @returns A Promise of Group
+   */
+  createGroup = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateGroupRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/groups`
+    },
+    marshalling_gen.unmarshalGroup
+  );
+  /**
+   * Get a group. Retrieve information about a given group, specified by the `group_id` parameter. The group's full details, including `user_ids` and `application_ids` are returned in the response.
+   *
+   * @param request - The request {@link GetGroupRequest}
+   * @returns A Promise of Group
+   */
+  getGroup = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/groups/${sdkClient.validatePathParam("groupId", request.groupId)}`
+    },
+    marshalling_gen.unmarshalGroup
+  );
+  /**
+   * Update a group. Update the parameters of group, including `name` and `description`.
+   *
+   * @param request - The request {@link UpdateGroupRequest}
+   * @returns A Promise of Group
+   */
+  updateGroup = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateGroupRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/iam/v1alpha1/groups/${sdkClient.validatePathParam("groupId", request.groupId)}`
+    },
+    marshalling_gen.unmarshalGroup
+  );
+  /**
+   * Overwrite users and applications of a group. Overwrite users and applications configuration in a group. Any information that you add using this command will overwrite the previous configuration.
+   *
+   * @param request - The request {@link SetGroupMembersRequest}
+   * @returns A Promise of Group
+   */
+  setGroupMembers = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalSetGroupMembersRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PUT",
+      path: `/iam/v1alpha1/groups/${sdkClient.validatePathParam("groupId", request.groupId)}/members`
+    },
+    marshalling_gen.unmarshalGroup
+  );
+  /**
+   * Add a user or an application to a group. Add a user or an application to a group. You can specify a `user_id` and `application_id` in the body of your request. Note that you can only add one of each per request.
+   *
+   * @param request - The request {@link AddGroupMemberRequest}
+   * @returns A Promise of Group
+   */
+  addGroupMember = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalAddGroupMemberRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/groups/${sdkClient.validatePathParam("groupId", request.groupId)}/add-member`
+    },
+    marshalling_gen.unmarshalGroup
+  );
+  /**
+   * Add multiple users and applications to a group. Add multiple users and applications to a group in a single call. You can specify an array of `user_id`s and `application_id`s. Note that any existing users and applications in the group will remain. To add new users/applications and delete pre-existing ones, use the [Overwrite users and applications of a group](#path-groups-overwrite-users-and-applications-of-a-group) method.
+   *
+   * @param request - The request {@link AddGroupMembersRequest}
+   * @returns A Promise of Group
+   */
+  addGroupMembers = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalAddGroupMembersRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/groups/${sdkClient.validatePathParam("groupId", request.groupId)}/add-members`
+    },
+    marshalling_gen.unmarshalGroup
+  );
+  /**
+   * Remove a user or an application from a group. Remove a user or an application from a group. You can specify a `user_id` and `application_id` in the body of your request. Note that you can only remove one of each per request. Removing a user from a group means that any permissions given to them via the group (i.e. from an attached policy) will no longer apply. Be sure you want to remove these permissions from the user before proceeding.
+   *
+   * @param request - The request {@link RemoveGroupMemberRequest}
+   * @returns A Promise of Group
+   */
+  removeGroupMember = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalRemoveGroupMemberRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/groups/${sdkClient.validatePathParam("groupId", request.groupId)}/remove-member`
+    },
+    marshalling_gen.unmarshalGroup
+  );
+  /**
+   * Delete a group. Delete a group. Note that this action is irreversible and could delete permissions for group members. Policies attached to users and applications via this group will no longer apply.
+   *
+   * @param request - The request {@link DeleteGroupRequest}
+   */
+  deleteGroup = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/iam/v1alpha1/groups/${sdkClient.validatePathParam("groupId", request.groupId)}`
+  });
+  pageOfListPolicies = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/policies`,
+      urlParams: sdkClient.urlParams(
+        ["application_ids", request.applicationIds],
+        ["editable", request.editable],
+        ["group_ids", request.groupIds],
+        ["no_principal", request.noPrincipal],
+        ["order_by", request.orderBy],
+        [
+          "organization_id",
+          request.organizationId ?? this.client.settings.defaultOrganizationId
+        ],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["policy_ids", request.policyIds],
+        ["policy_name", request.policyName],
+        ["tag", request.tag],
+        ["user_ids", request.userIds]
+      )
+    },
+    marshalling_gen.unmarshalListPoliciesResponse
+  );
+  /**
+   * List policies of an Organization. List the policies of an Organization. By default, the policies listed are ordered by creation date in ascending order. This can be modified via the `order_by` field. You must define the `organization_id` in the query path of your request. You can also define additional parameters to filter your query, such as `user_ids`, `groups_ids`, `application_ids`, and `policy_name`.
+   *
+   * @param request - The request {@link ListPoliciesRequest}
+   * @returns A Promise of ListPoliciesResponse
+   */
+  listPolicies = (request = {}) => sdkClient.enrichForPagination("policies", this.pageOfListPolicies, request);
+  /**
+   * Create a new policy. Create a new application. You must define the `name` parameter in the request. You can specify parameters such as `user_id`, `groups_id`, `application_id`, `no_principal`, `rules` and its child attributes.
+   *
+   * @param request - The request {@link CreatePolicyRequest}
+   * @returns A Promise of Policy
+   */
+  createPolicy = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreatePolicyRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/policies`
+    },
+    marshalling_gen.unmarshalPolicy
+  );
+  /**
+   * Get an existing policy. Retrieve information about a policy, speficified by the `policy_id` parameter. The policy's full details, including `id`, `name`, `organization_id`, `nb_rules` and `nb_scopes`, `nb_permission_sets` are returned in the response.
+   *
+   * @param request - The request {@link GetPolicyRequest}
+   * @returns A Promise of Policy
+   */
+  getPolicy = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/policies/${sdkClient.validatePathParam("policyId", request.policyId)}`
+    },
+    marshalling_gen.unmarshalPolicy
+  );
+  /**
+   * Update an existing policy. Update the parameters of a policy, including `name`, `description`, `user_id`, `group_id`, `application_id` and `no_principal`.
+   *
+   * @param request - The request {@link UpdatePolicyRequest}
+   * @returns A Promise of Policy
+   */
+  updatePolicy = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdatePolicyRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/iam/v1alpha1/policies/${sdkClient.validatePathParam("policyId", request.policyId)}`
+    },
+    marshalling_gen.unmarshalPolicy
+  );
+  /**
+   * Delete a policy. Delete a policy. You must define specify the `policy_id` parameter in your request. Note that when deleting a policy, all permissions it gives to its principal (user, group or application) will be revoked.
+   *
+   * @param request - The request {@link DeletePolicyRequest}
+   */
+  deletePolicy = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/iam/v1alpha1/policies/${sdkClient.validatePathParam("policyId", request.policyId)}`
+  });
+  /**
+   * Clone a policy. Clone a policy. You must define specify the `policy_id` parameter in your request.
+   *
+   * @param request - The request {@link ClonePolicyRequest}
+   * @returns A Promise of Policy
+   */
+  clonePolicy = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/policies/${sdkClient.validatePathParam("policyId", request.policyId)}/clone`
+    },
+    marshalling_gen.unmarshalPolicy
+  );
+  /**
+   * Set rules of a given policy. Overwrite the rules of a given policy. Any information that you add using this command will overwrite the previous configuration. If you include some of the rules you already had in your previous configuration in your new one, but you change their order, the new order of display will apply. While policy rules are ordered, they have no impact on the access logic of IAM because rules are allow-only.
+   *
+   * @param request - The request {@link SetRulesRequest}
+   * @returns A Promise of SetRulesResponse
+   */
+  setRules = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalSetRulesRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PUT",
+      path: `/iam/v1alpha1/rules`
+    },
+    marshalling_gen.unmarshalSetRulesResponse
+  );
+  pageOfListRules = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/rules`,
+      urlParams: sdkClient.urlParams(
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["policy_id", request.policyId]
+      )
+    },
+    marshalling_gen.unmarshalListRulesResponse
+  );
+  /**
+   * List rules of a given policy. List the rules of a given policy. By default, the rules listed are ordered by creation date in ascending order. This can be modified via the `order_by` field. You must define the `policy_id` in the query path of your request.
+   *
+   * @param request - The request {@link ListRulesRequest}
+   * @returns A Promise of ListRulesResponse
+   */
+  listRules = (request) => sdkClient.enrichForPagination("rules", this.pageOfListRules, request);
+  pageOfListPermissionSets = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/permission-sets`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        [
+          "organization_id",
+          request.organizationId ?? this.client.settings.defaultOrganizationId
+        ],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListPermissionSetsResponse
+  );
+  /**
+   * List permission sets. List permission sets available for given Organization. You must define the `organization_id` in the query path of your request.
+   *
+   * @param request - The request {@link ListPermissionSetsRequest}
+   * @returns A Promise of ListPermissionSetsResponse
+   */
+  listPermissionSets = (request = {}) => sdkClient.enrichForPagination(
+    "permissionSets",
+    this.pageOfListPermissionSets,
+    request
+  );
+  pageOfListAPIKeys = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/api-keys`,
+      urlParams: sdkClient.urlParams(
+        ["access_key", request.accessKey],
+        ["access_keys", request.accessKeys],
+        ["bearer_id", request.bearerId],
+        ["bearer_type", request.bearerType],
+        ["description", request.description],
+        ["editable", request.editable],
+        ["expired", request.expired],
+        ["order_by", request.orderBy],
+        [
+          "organization_id",
+          request.organizationId ?? this.client.settings.defaultOrganizationId
+        ],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ...Object.entries(
+          sdkClient.resolveOneOf([
+            { param: "application_id", value: request.applicationId },
+            { param: "user_id", value: request.userId }
+          ])
+        )
+      )
+    },
+    marshalling_gen.unmarshalListAPIKeysResponse
+  );
+  /**
+   * List API keys. List API keys. By default, the API keys listed are ordered by creation date in ascending order. This can be modified via the `order_by` field. You can define additional parameters for your query such as `editable`, `expired`, `access_key` and `bearer_id`.
+   *
+   * @param request - The request {@link ListAPIKeysRequest}
+   * @returns A Promise of ListAPIKeysResponse
+   */
+  listAPIKeys = (request = {}) => sdkClient.enrichForPagination("apiKeys", this.pageOfListAPIKeys, request);
+  /**
+   * Create an API key. Create an API key. You must specify the `application_id` or the `user_id` and the description. You can also specify the `default_project_id`, which is the Project ID of your preferred Project, to use with Object Storage. The `access_key` and `secret_key` values are returned in the response. Note that the secret key is only shown once. Make sure that you copy and store both keys somewhere safe.
+   *
+   * @param request - The request {@link CreateAPIKeyRequest}
+   * @returns A Promise of APIKey
+   */
+  createAPIKey = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateAPIKeyRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/api-keys`
+    },
+    marshalling_gen.unmarshalAPIKey
+  );
+  /**
+   * Get an API key. Retrieve information about an API key, specified by the `access_key` parameter. The API key's details, including either the `user_id` or `application_id` of its bearer are returned in the response. Note that the string value for the `secret_key` is nullable, and therefore is not displayed in the response. The `secret_key` value is only displayed upon API key creation.
+   *
+   * @param request - The request {@link GetAPIKeyRequest}
+   * @returns A Promise of APIKey
+   */
+  getAPIKey = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/api-keys/${sdkClient.validatePathParam("accessKey", request.accessKey)}`
+    },
+    marshalling_gen.unmarshalAPIKey
+  );
+  /**
+   * Update an API key. Update the parameters of an API key, including `default_project_id` and `description`.
+   *
+   * @param request - The request {@link UpdateAPIKeyRequest}
+   * @returns A Promise of APIKey
+   */
+  updateAPIKey = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateAPIKeyRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/iam/v1alpha1/api-keys/${sdkClient.validatePathParam("accessKey", request.accessKey)}`
+    },
+    marshalling_gen.unmarshalAPIKey
+  );
+  /**
+   * Delete an API key. Delete an API key. Note that this action is irreversible and cannot be undone. Make sure you update any configurations using the API keys you delete.
+   *
+   * @param request - The request {@link DeleteAPIKeyRequest}
+   */
+  deleteAPIKey = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/iam/v1alpha1/api-keys/${sdkClient.validatePathParam("accessKey", request.accessKey)}`
+  });
+  pageOfListQuota = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/quota`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        [
+          "organization_id",
+          request.organizationId ?? this.client.settings.defaultOrganizationId
+        ],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["quotum_names", request.quotumNames]
+      )
+    },
+    marshalling_gen.unmarshalListQuotaResponse
+  );
+  /**
+   * List all quotas in the Organization. List all product and features quota for an Organization, with their associated limits. By default, the quota listed are ordered by creation date in ascending order. This can be modified via the `order_by` field. You must define the `organization_id` in the query path of your request.
+   *
+   * @param request - The request {@link ListQuotaRequest}
+   * @returns A Promise of ListQuotaResponse
+   */
+  listQuota = (request = {}) => sdkClient.enrichForPagination("quota", this.pageOfListQuota, request);
+  /**
+   * Get a quota in the Organization. Retrieve information about a resource quota, specified by the `quotum_name` parameter. The quota's `limit`, or whether it is unlimited, is returned in the response.
+   *
+   * @param request - The request {@link GetQuotumRequest}
+   * @returns A Promise of Quotum
+   */
+  getQuotum = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/quota/${sdkClient.validatePathParam("quotumName", request.quotumName)}`,
+      urlParams: sdkClient.urlParams([
+        "organization_id",
+        request.organizationId ?? this.client.settings.defaultOrganizationId
+      ])
+    },
+    marshalling_gen.unmarshalQuotum
+  );
+  pageOfListJWTs = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/jwts`,
+      urlParams: sdkClient.urlParams(
+        ["audience_id", request.audienceId],
+        ["expired", request.expired],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListJWTsResponse
+  );
+  /**
+   * List JWTs.
+   *
+   * @param request - The request {@link ListJWTsRequest}
+   * @returns A Promise of ListJWTsResponse
+   */
+  listJWTs = (request) => sdkClient.enrichForPagination("jwts", this.pageOfListJWTs, request);
+  /**
+   * Create a JWT.
+   *
+   * @param request - The request {@link CreateJWTRequest}
+   * @returns A Promise of EncodedJWT
+   */
+  createJWT = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateJWTRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/iam/v1alpha1/jwts`
+    },
+    marshalling_gen.unmarshalEncodedJWT
+  );
+  /**
+   * Get a JWT.
+   *
+   * @param request - The request {@link GetJWTRequest}
+   * @returns A Promise of JWT
+   */
+  getJWT = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/jwts/${sdkClient.validatePathParam("jti", request.jti)}`
+    },
+    marshalling_gen.unmarshalJWT
+  );
+  /**
+   * Delete a JWT.
+   *
+   * @param request - The request {@link DeleteJWTRequest}
+   */
+  deleteJWT = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/iam/v1alpha1/jwts/${sdkClient.validatePathParam("jti", request.jti)}`
+  });
+  pageOfListLogs = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/logs`,
+      urlParams: sdkClient.urlParams(
+        ["action", request.action],
+        ["created_after", request.createdAfter],
+        ["created_before", request.createdBefore],
+        ["order_by", request.orderBy],
+        [
+          "organization_id",
+          request.organizationId ?? this.client.settings.defaultOrganizationId
+        ],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["resource_type", request.resourceType],
+        ["search", request.search]
+      )
+    },
+    marshalling_gen.unmarshalListLogsResponse
+  );
+  /**
+   * List logs. List logs available for given Organization. You must define the `organization_id` in the query path of your request.
+   *
+   * @param request - The request {@link ListLogsRequest}
+   * @returns A Promise of ListLogsResponse
+   */
+  listLogs = (request = {}) => sdkClient.enrichForPagination("logs", this.pageOfListLogs, request);
+  /**
+   * Get a log. Retrieve information about a log, specified by the `log_id` parameter. The log's full details, including `id`, `ip`, `user_agent`, `action`, `bearer_id`, `resource_type` and `resource_id` are returned in the response.
+   *
+   * @param request - The request {@link GetLogRequest}
+   * @returns A Promise of Log
+   */
+  getLog = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/logs/${sdkClient.validatePathParam("logId", request.logId)}`
+    },
+    marshalling_gen.unmarshalLog
+  );
+  /**
+   * Get security settings of an Organization. Retrieve information about the security settings of an Organization, specified by the `organization_id` parameter.
+   *
+   * @param request - The request {@link GetOrganizationSecuritySettingsRequest}
+   * @returns A Promise of OrganizationSecuritySettings
+   */
+  getOrganizationSecuritySettings = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/organizations/${sdkClient.validatePathParam("organizationId", request.organizationId ?? this.client.settings.defaultOrganizationId)}/security-settings`
+    },
+    marshalling_gen.unmarshalOrganizationSecuritySettings
+  );
+  /**
+   * Update the security settings of an Organization.
+   *
+   * @param request - The request {@link UpdateOrganizationSecuritySettingsRequest}
+   * @returns A Promise of OrganizationSecuritySettings
+   */
+  updateOrganizationSecuritySettings = (request = {}) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateOrganizationSecuritySettingsRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/iam/v1alpha1/organizations/${sdkClient.validatePathParam("organizationId", request.organizationId ?? this.client.settings.defaultOrganizationId)}/security-settings`
+    },
+    marshalling_gen.unmarshalOrganizationSecuritySettings
+  );
+  /**
+   * Set your Organization's alias.. This will fail if an alias has already been defined. Please contact support if you need to change your Organization's alias.
+   *
+   * @param request - The request {@link SetOrganizationAliasRequest}
+   * @returns A Promise of Organization
+   */
+  setOrganizationAlias = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalSetOrganizationAliasRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PUT",
+      path: `/iam/v1alpha1/organizations/${sdkClient.validatePathParam("organizationId", request.organizationId ?? this.client.settings.defaultOrganizationId)}/alias`
+    },
+    marshalling_gen.unmarshalOrganization
+  );
+  /**
+   * Get your Organization's IAM information.
+   *
+   * @param request - The request {@link GetOrganizationRequest}
+   * @returns A Promise of Organization
+   */
+  getOrganization = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/iam/v1alpha1/organizations/${sdkClient.validatePathParam("organizationId", request.organizationId ?? this.client.settings.defaultOrganizationId)}`
+    },
+    marshalling_gen.unmarshalOrganization
+  );
+  /**
+   * Migrate the organization's guests to IAM members.
+   *
+   * @param request - The request {@link MigrateOrganizationGuestsRequest}
+   */
+  migrateOrganizationGuests = (request = {}) => this.client.fetch({
+    method: "POST",
+    path: `/iam/v1alpha1/organizations/${sdkClient.validatePathParam("organizationId", request.organizationId ?? this.client.settings.defaultOrganizationId)}/migrate-guests`
+  });
+}
+exports.API = API;

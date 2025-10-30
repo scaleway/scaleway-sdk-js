@@ -1,0 +1,48 @@
+{
+  "name": "@scaleway/sdk-domain",
+  "version": "1.0.5",
+  "description": "Scaleway SDK domain",
+  "license": "Apache-2.0",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.gen.d.ts",
+      "import": "./dist/index.gen.js",
+      "require": "./dist/index.gen.cjs",
+      "default": "./dist/index.gen.js"
+    },
+    "./*": {
+      "types": "./dist/*/index.gen.d.ts",
+      "import": "./dist/*/index.gen.js",
+      "require": "./dist/*/index.gen.cjs",
+      "default": "./dist/*/index.gen.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "directory": "packages_generated/domain"
+  },
+  "engines": {
+    "node": ">=20.19.1"
+  },
+  "dependencies": {
+    "@scaleway/random-name": "5.1.1",
+    "@scaleway/sdk-std": "1.0.5"
+  },
+  "peerDependencies": {
+    "@scaleway/sdk-client": "^1.3.0"
+  },
+  "devDependencies": {
+    "@scaleway/sdk-client": "^1.3.0"
+  },
+  "scripts": {
+    "package:check": "pnpm publint",
+    "typecheck": "tsc --noEmit",
+    "type:generate": "tsc --declaration -p tsconfig.build.json",
+    "build": "vite build --config vite.config.ts && pnpm run type:generate",
+    "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
+  }
+}

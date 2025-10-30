@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES = ["attaching", "detaching"];
+const SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES = ["vpc_updating"];
+const SERVER_TRANSIENT_STATUSES = [
+  "starting",
+  "rebooting",
+  "updating",
+  "locking",
+  "unlocking",
+  "reinstalling",
+  "busy"
+];
+exports.SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES = SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES;
+exports.SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES = SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES;
+exports.SERVER_TRANSIENT_STATUSES = SERVER_TRANSIENT_STATUSES;

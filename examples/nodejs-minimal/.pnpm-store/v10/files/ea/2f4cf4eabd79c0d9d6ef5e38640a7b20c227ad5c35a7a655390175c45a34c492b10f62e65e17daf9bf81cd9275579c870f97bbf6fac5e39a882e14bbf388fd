@@ -1,0 +1,17 @@
+import type { DefaultValues } from '@scaleway/sdk-client';
+import type { CreateJobDefinitionRequest, CreateJobDefinitionSecretsRequest, CreateJobDefinitionSecretsResponse, JobDefinition, JobRun, JobsLimits, ListJobDefinitionSecretsResponse, ListJobDefinitionsResponse, ListJobRunsResponse, ListJobsResourcesResponse, Secret, StartJobDefinitionRequest, StartJobDefinitionResponse, UpdateJobDefinitionRequest, UpdateJobDefinitionSecretRequest } from './types.gen';
+export declare const unmarshalSecret: (data: unknown) => Secret;
+export declare const unmarshalJobDefinition: (data: unknown) => JobDefinition;
+export declare const unmarshalJobRun: (data: unknown) => JobRun;
+export declare const unmarshalCreateJobDefinitionSecretsResponse: (data: unknown) => CreateJobDefinitionSecretsResponse;
+export declare const unmarshalJobsLimits: (data: unknown) => JobsLimits;
+export declare const unmarshalListJobDefinitionSecretsResponse: (data: unknown) => ListJobDefinitionSecretsResponse;
+export declare const unmarshalListJobDefinitionsResponse: (data: unknown) => ListJobDefinitionsResponse;
+export declare const unmarshalListJobRunsResponse: (data: unknown) => ListJobRunsResponse;
+export declare const unmarshalListJobsResourcesResponse: (data: unknown) => ListJobsResourcesResponse;
+export declare const unmarshalStartJobDefinitionResponse: (data: unknown) => StartJobDefinitionResponse;
+export declare const marshalCreateJobDefinitionRequest: (request: CreateJobDefinitionRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalCreateJobDefinitionSecretsRequest: (request: CreateJobDefinitionSecretsRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalStartJobDefinitionRequest: (request: StartJobDefinitionRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateJobDefinitionRequest: (request: UpdateJobDefinitionRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateJobDefinitionSecretRequest: (request: UpdateJobDefinitionSecretRequest, defaults: DefaultValues) => Record<string, unknown>;

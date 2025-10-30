@@ -1,0 +1,5 @@
+import type { DedicatedConnectionStatus, LinkStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link DedicatedConnectionStatus}. */
+export declare const DEDICATED_CONNECTION_TRANSIENT_STATUSES: DedicatedConnectionStatus[];
+/** Lists transient statutes of the enum {@link LinkStatus}. */
+export declare const LINK_TRANSIENT_STATUSES: LinkStatus[];

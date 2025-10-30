@@ -1,0 +1,198 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const randomName = require("@scaleway/random-name");
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalReference = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Reference' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    id: data.id,
+    productResourceId: data.product_resource_id,
+    productResourceType: data.product_resource_type,
+    status: data.status,
+    type: data.type
+  };
+};
+const unmarshalSnapshotParentVolume = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SnapshotParentVolume' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    id: data.id,
+    name: data.name,
+    status: data.status,
+    type: data.type
+  };
+};
+const unmarshalSnapshot = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Snapshot' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    class: data.class,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    parentVolume: data.parent_volume ? unmarshalSnapshotParentVolume(data.parent_volume) : void 0,
+    projectId: data.project_id,
+    references: sdkClient.unmarshalArrayOfObject(data.references, unmarshalReference),
+    size: data.size,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalVolumeSpecifications = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VolumeSpecifications' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    class: data.class,
+    perfIops: data.perf_iops
+  };
+};
+const unmarshalVolume = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Volume' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    id: data.id,
+    lastDetachedAt: sdkClient.unmarshalDate(data.last_detached_at),
+    name: data.name,
+    parentSnapshotId: data.parent_snapshot_id,
+    projectId: data.project_id,
+    references: sdkClient.unmarshalArrayOfObject(data.references, unmarshalReference),
+    size: data.size,
+    specs: data.specs ? unmarshalVolumeSpecifications(data.specs) : void 0,
+    status: data.status,
+    tags: data.tags,
+    type: data.type,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalListSnapshotsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSnapshotsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    snapshots: sdkClient.unmarshalArrayOfObject(data.snapshots, unmarshalSnapshot),
+    totalCount: data.total_count
+  };
+};
+const unmarshalVolumeType = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VolumeType' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    pricing: data.pricing ? sdkClient.unmarshalMoney(data.pricing) : void 0,
+    snapshotPricing: data.snapshot_pricing ? sdkClient.unmarshalMoney(data.snapshot_pricing) : void 0,
+    specs: data.specs ? unmarshalVolumeSpecifications(data.specs) : void 0,
+    type: data.type
+  };
+};
+const unmarshalListVolumeTypesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListVolumeTypesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    totalCount: data.total_count,
+    volumeTypes: sdkClient.unmarshalArrayOfObject(data.volume_types, unmarshalVolumeType)
+  };
+};
+const unmarshalListVolumesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListVolumesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    totalCount: data.total_count,
+    volumes: sdkClient.unmarshalArrayOfObject(data.volumes, unmarshalVolume)
+  };
+};
+const marshalCreateSnapshotRequest = (request, defaults) => ({
+  name: request.name || randomName("snp"),
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags,
+  volume_id: request.volumeId
+});
+const marshalCreateVolumeRequestFromEmpty = (request, defaults) => ({
+  size: request.size
+});
+const marshalCreateVolumeRequestFromSnapshot = (request, defaults) => ({
+  size: request.size,
+  snapshot_id: request.snapshotId
+});
+const marshalCreateVolumeRequest = (request, defaults) => ({
+  name: request.name || randomName("vol"),
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags,
+  ...sdkClient.resolveOneOf([
+    {
+      param: "from_empty",
+      value: request.fromEmpty !== void 0 ? marshalCreateVolumeRequestFromEmpty(request.fromEmpty) : void 0
+    },
+    {
+      param: "from_snapshot",
+      value: request.fromSnapshot !== void 0 ? marshalCreateVolumeRequestFromSnapshot(
+        request.fromSnapshot
+      ) : void 0
+    }
+  ]),
+  ...sdkClient.resolveOneOf([{ param: "perf_iops", value: request.perfIops }])
+});
+const marshalExportSnapshotToObjectStorageRequest = (request, defaults) => ({
+  bucket: request.bucket,
+  key: request.key
+});
+const marshalImportSnapshotFromObjectStorageRequest = (request, defaults) => ({
+  bucket: request.bucket,
+  key: request.key,
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  size: request.size,
+  tags: request.tags
+});
+const marshalUpdateSnapshotRequest = (request, defaults) => ({
+  name: request.name,
+  tags: request.tags
+});
+const marshalUpdateVolumeRequest = (request, defaults) => ({
+  name: request.name,
+  perf_iops: request.perfIops,
+  size: request.size,
+  tags: request.tags
+});
+exports.marshalCreateSnapshotRequest = marshalCreateSnapshotRequest;
+exports.marshalCreateVolumeRequest = marshalCreateVolumeRequest;
+exports.marshalExportSnapshotToObjectStorageRequest = marshalExportSnapshotToObjectStorageRequest;
+exports.marshalImportSnapshotFromObjectStorageRequest = marshalImportSnapshotFromObjectStorageRequest;
+exports.marshalUpdateSnapshotRequest = marshalUpdateSnapshotRequest;
+exports.marshalUpdateVolumeRequest = marshalUpdateVolumeRequest;
+exports.unmarshalListSnapshotsResponse = unmarshalListSnapshotsResponse;
+exports.unmarshalListVolumeTypesResponse = unmarshalListVolumeTypesResponse;
+exports.unmarshalListVolumesResponse = unmarshalListVolumesResponse;
+exports.unmarshalReference = unmarshalReference;
+exports.unmarshalSnapshot = unmarshalSnapshot;
+exports.unmarshalVolume = unmarshalVolume;

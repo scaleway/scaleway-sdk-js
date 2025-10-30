@@ -1,0 +1,5 @@
+import type { PipelineStatus, PurgeRequestStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link PipelineStatus}. */
+export declare const PIPELINE_TRANSIENT_STATUSES: PipelineStatus[];
+/** Lists transient statutes of the enum {@link PurgeRequestStatus}. */
+export declare const PURGE_REQUEST_TRANSIENT_STATUSES: PurgeRequestStatus[];

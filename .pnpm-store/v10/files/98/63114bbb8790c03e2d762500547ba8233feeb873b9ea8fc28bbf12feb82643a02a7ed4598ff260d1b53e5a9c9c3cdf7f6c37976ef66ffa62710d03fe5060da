@@ -1,0 +1,8 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const PIPELINE_TRANSIENT_STATUSES = ["pending"];
+const PURGE_REQUEST_TRANSIENT_STATUSES = [
+  "pending"
+];
+exports.PIPELINE_TRANSIENT_STATUSES = PIPELINE_TRANSIENT_STATUSES;
+exports.PURGE_REQUEST_TRANSIENT_STATUSES = PURGE_REQUEST_TRANSIENT_STATUSES;

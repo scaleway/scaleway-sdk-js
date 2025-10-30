@@ -1,0 +1,14 @@
+declare module '@typescript-eslint/utils/dist/ts-eslint/Rule' {
+    interface SharedConfigurationSettings {
+        react?: {
+            pragma?: string;
+        };
+    }
+}
+type JSXConfig = {
+    runtime: string;
+    importSource?: string;
+};
+type RuleOptions = [(JSXConfig | string)?];
+declare const _default: import("@typescript-eslint/utils/dist/ts-eslint").RuleModule<"cssProp" | "cssPropWithPragma" | "templateLiterals", RuleOptions, import("@typescript-eslint/utils/dist/ts-eslint").RuleListener>;
+export default _default;

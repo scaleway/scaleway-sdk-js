@@ -1,0 +1,15 @@
+import { isJSONObject } from "../../helpers/json.js";
+const isRecordOfStringArray = (obj) => {
+  if (!isJSONObject(obj)) {
+    return false;
+  }
+  for (const elt of Object.values(obj)) {
+    if (!Array.isArray(elt) || Object.values(elt).find((x) => typeof x !== "string") !== void 0) {
+      return false;
+    }
+  }
+  return true;
+};
+export {
+  isRecordOfStringArray
+};

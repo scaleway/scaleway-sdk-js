@@ -1,0 +1,6 @@
+import * as index_gen from "./v1/index.gen.js";
+import * as index_gen$1 from "./v3/index.gen.js";
+export {
+  index_gen as Baremetalv1,
+  index_gen$1 as Baremetalv3
+};

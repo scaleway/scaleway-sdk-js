@@ -1,0 +1,4 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const index_gen = require("./v2/index.gen.cjs");
+exports.Marketplacev2 = index_gen;

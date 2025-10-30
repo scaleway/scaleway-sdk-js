@@ -1,0 +1,9 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const DOMAIN_TRANSIENT_STATUSES = [
+  "pending",
+  "autoconfiguring"
+];
+const EMAIL_TRANSIENT_STATUSES = ["new", "sending"];
+exports.DOMAIN_TRANSIENT_STATUSES = DOMAIN_TRANSIENT_STATUSES;
+exports.EMAIL_TRANSIENT_STATUSES = EMAIL_TRANSIENT_STATUSES;

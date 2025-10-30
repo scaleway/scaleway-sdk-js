@@ -1,0 +1,31 @@
+import { getLogger } from "../internal/logger/index.js";
+import { withAdditionalInterceptors, withProfile, withLegacyInterceptors } from "./client-ini-factory.js";
+import { assertValidSettings } from "./client-settings.js";
+import { userAgent, version } from "./constants.js";
+import { buildFetcher } from "./fetch/build-fetcher.js";
+const DEFAULT_SETTINGS = {
+  apiURL: "https://api.scaleway.com",
+  httpClient: fetch,
+  interceptors: [],
+  userAgent
+};
+const createAdvancedClient = (...configs) => {
+  const settings = configs.concat([withLegacyInterceptors()]).reduce(
+    (currentSettings, config) => config(currentSettings),
+    DEFAULT_SETTINGS
+  );
+  assertValidSettings(settings);
+  getLogger().info(`init Scaleway SDK version ${version}`);
+  return {
+    fetch: buildFetcher(settings, settings.httpClient),
+    settings
+  };
+};
+const createClient = (settings = {}) => createAdvancedClient(
+  withProfile(settings),
+  withAdditionalInterceptors(settings.interceptors ?? [])
+);
+export {
+  createAdvancedClient,
+  createClient
+};

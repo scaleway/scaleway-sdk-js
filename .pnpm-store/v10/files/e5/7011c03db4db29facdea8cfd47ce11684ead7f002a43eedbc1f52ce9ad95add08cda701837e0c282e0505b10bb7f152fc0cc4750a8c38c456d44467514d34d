@@ -1,0 +1,4 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES = ["attaching", "detaching"];
+exports.SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES = SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES;

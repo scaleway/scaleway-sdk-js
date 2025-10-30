@@ -1,0 +1,38 @@
+import { API } from "./api.gen.js";
+import { GATEWAY_NETWORK_TRANSIENT_STATUSES, GATEWAY_TRANSIENT_STATUSES } from "./content.gen.js";
+import { marshalCreateDHCPEntryRequest, marshalCreateDHCPRequest, marshalCreateGatewayNetworkRequest, marshalCreateGatewayRequest, marshalCreateIPRequest, marshalCreatePATRuleRequest, marshalSetDHCPEntriesRequest, marshalSetPATRulesRequest, marshalUpdateDHCPEntryRequest, marshalUpdateDHCPRequest, marshalUpdateGatewayNetworkRequest, marshalUpdateGatewayRequest, marshalUpdateIPRequest, marshalUpdatePATRuleRequest, marshalUpgradeGatewayRequest, unmarshalDHCP, unmarshalDHCPEntry, unmarshalGateway, unmarshalGatewayNetwork, unmarshalIP, unmarshalListDHCPEntriesResponse, unmarshalListDHCPsResponse, unmarshalListGatewayNetworksResponse, unmarshalListGatewayTypesResponse, unmarshalListGatewaysResponse, unmarshalListIPsResponse, unmarshalListPATRulesResponse, unmarshalPATRule, unmarshalSetDHCPEntriesResponse, unmarshalSetPATRulesResponse } from "./marshalling.gen.js";
+export {
+  API,
+  GATEWAY_NETWORK_TRANSIENT_STATUSES,
+  GATEWAY_TRANSIENT_STATUSES,
+  marshalCreateDHCPEntryRequest,
+  marshalCreateDHCPRequest,
+  marshalCreateGatewayNetworkRequest,
+  marshalCreateGatewayRequest,
+  marshalCreateIPRequest,
+  marshalCreatePATRuleRequest,
+  marshalSetDHCPEntriesRequest,
+  marshalSetPATRulesRequest,
+  marshalUpdateDHCPEntryRequest,
+  marshalUpdateDHCPRequest,
+  marshalUpdateGatewayNetworkRequest,
+  marshalUpdateGatewayRequest,
+  marshalUpdateIPRequest,
+  marshalUpdatePATRuleRequest,
+  marshalUpgradeGatewayRequest,
+  unmarshalDHCP,
+  unmarshalDHCPEntry,
+  unmarshalGateway,
+  unmarshalGatewayNetwork,
+  unmarshalIP,
+  unmarshalListDHCPEntriesResponse,
+  unmarshalListDHCPsResponse,
+  unmarshalListGatewayNetworksResponse,
+  unmarshalListGatewayTypesResponse,
+  unmarshalListGatewaysResponse,
+  unmarshalListIPsResponse,
+  unmarshalListPATRulesResponse,
+  unmarshalPATRule,
+  unmarshalSetDHCPEntriesResponse,
+  unmarshalSetPATRulesResponse
+};

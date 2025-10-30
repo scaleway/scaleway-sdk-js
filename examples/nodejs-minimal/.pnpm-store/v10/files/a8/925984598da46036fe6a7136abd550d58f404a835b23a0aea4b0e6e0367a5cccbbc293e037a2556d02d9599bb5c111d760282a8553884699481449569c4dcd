@@ -1,0 +1,5 @@
+import type { GatewayNetworkStatus, GatewayStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link GatewayNetworkStatus}. */
+export declare const GATEWAY_NETWORK_TRANSIENT_STATUSES: GatewayNetworkStatus[];
+/** Lists transient statutes of the enum {@link GatewayStatus}. */
+export declare const GATEWAY_TRANSIENT_STATUSES: GatewayStatus[];

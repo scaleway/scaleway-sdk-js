@@ -1,0 +1,643 @@
+import { API as API$1, toApiLocality, urlParams, validatePathParam, enrichForPagination, waitForResource, resolveOneOf } from "@scaleway/sdk-client";
+import { NAMESPACE_TRANSIENT_STATUSES, FUNCTION_TRANSIENT_STATUSES, CRON_TRANSIENT_STATUSES, DOMAIN_TRANSIENT_STATUSES, TOKEN_TRANSIENT_STATUSES, TRIGGER_TRANSIENT_STATUSES } from "./content.gen.js";
+import { unmarshalListNamespacesResponse, unmarshalNamespace, marshalCreateNamespaceRequest, marshalUpdateNamespaceRequest, unmarshalListFunctionsResponse, unmarshalFunction, marshalCreateFunctionRequest, marshalUpdateFunctionRequest, unmarshalListFunctionRuntimesResponse, unmarshalUploadURL, unmarshalDownloadURL, unmarshalListCronsResponse, unmarshalCron, marshalCreateCronRequest, marshalUpdateCronRequest, unmarshalListDomainsResponse, unmarshalDomain, marshalCreateDomainRequest, marshalCreateTokenRequest, unmarshalToken, unmarshalListTokensResponse, marshalCreateTriggerRequest, unmarshalTrigger, unmarshalListTriggersResponse, marshalUpdateTriggerRequest } from "./marshalling.gen.js";
+const jsonContentHeaders = {
+  "Content-Type": "application/json; charset=utf-8"
+};
+class API extends API$1 {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = toApiLocality({
+    regions: ["fr-par", "nl-ams", "pl-waw"]
+  });
+  pageOfListNamespaces = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/namespaces`,
+      urlParams: urlParams(
+        ["name", request.name],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId]
+      )
+    },
+    unmarshalListNamespacesResponse
+  );
+  /**
+   * List all your namespaces. List all existing namespaces in the specified region.
+   *
+   * @param request - The request {@link ListNamespacesRequest}
+   * @returns A Promise of ListNamespacesResponse
+   */
+  listNamespaces = (request = {}) => enrichForPagination("namespaces", this.pageOfListNamespaces, request);
+  /**
+   * Get a namespace. Get the namespace associated with the specified ID.
+   *
+   * @param request - The request {@link GetNamespaceRequest}
+   * @returns A Promise of Namespace
+   */
+  getNamespace = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam("namespaceId", request.namespaceId)}`
+    },
+    unmarshalNamespace
+  );
+  /**
+   * Waits for {@link Namespace} to be in a final state.
+   *
+   * @param request - The request {@link GetNamespaceRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Namespace
+   */
+  waitForNamespace = (request, options) => waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !NAMESPACE_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getNamespace,
+    request,
+    options
+  );
+  /**
+   * Create a new namespace. Create a new namespace in a specified Organization or Project.
+   *
+   * @param request - The request {@link CreateNamespaceRequest}
+   * @returns A Promise of Namespace
+   */
+  createNamespace = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalCreateNamespaceRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/namespaces`
+    },
+    unmarshalNamespace
+  );
+  /**
+   * Update an existing namespace. Update the namespace associated with the specified ID.
+   *
+   * @param request - The request {@link UpdateNamespaceRequest}
+   * @returns A Promise of Namespace
+   */
+  updateNamespace = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalUpdateNamespaceRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam("namespaceId", request.namespaceId)}`
+    },
+    unmarshalNamespace
+  );
+  /**
+   * Delete an existing namespace. Delete the namespace associated with the specified ID.
+   *
+   * @param request - The request {@link DeleteNamespaceRequest}
+   * @returns A Promise of Namespace
+   */
+  deleteNamespace = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam("namespaceId", request.namespaceId)}`
+    },
+    unmarshalNamespace
+  );
+  pageOfListFunctions = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/functions`,
+      urlParams: urlParams(
+        ["name", request.name],
+        ["namespace_id", request.namespaceId],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId]
+      )
+    },
+    unmarshalListFunctionsResponse
+  );
+  /**
+   * List all your functions.
+   *
+   * @param request - The request {@link ListFunctionsRequest}
+   * @returns A Promise of ListFunctionsResponse
+   */
+  listFunctions = (request) => enrichForPagination("functions", this.pageOfListFunctions, request);
+  /**
+   * Get a function. Get the function associated with the specified ID.
+   *
+   * @param request - The request {@link GetFunctionRequest}
+   * @returns A Promise of Function
+   */
+  getFunction = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam("functionId", request.functionId)}`
+    },
+    unmarshalFunction
+  );
+  /**
+   * Waits for {@link Function} to be in a final state.
+   *
+   * @param request - The request {@link GetFunctionRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Function
+   */
+  waitForFunction = (request, options) => waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !FUNCTION_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getFunction,
+    request,
+    options
+  );
+  /**
+   * Create a new function. Create a new function in the specified region for a specified Organization or Project.
+   *
+   * @param request - The request {@link CreateFunctionRequest}
+   * @returns A Promise of Function
+   */
+  createFunction = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalCreateFunctionRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/functions`
+    },
+    unmarshalFunction
+  );
+  /**
+   * Update an existing function. Update the function associated with the specified ID.
+   *
+   * @param request - The request {@link UpdateFunctionRequest}
+   * @returns A Promise of Function
+   */
+  updateFunction = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalUpdateFunctionRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam("functionId", request.functionId)}`
+    },
+    unmarshalFunction
+  );
+  /**
+   * Delete a function. Delete the function associated with the specified ID.
+   *
+   * @param request - The request {@link DeleteFunctionRequest}
+   * @returns A Promise of Function
+   */
+  deleteFunction = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam("functionId", request.functionId)}`
+    },
+    unmarshalFunction
+  );
+  /**
+   * Deploy a function. Deploy a function associated with the specified ID.
+   *
+   * @param request - The request {@link DeployFunctionRequest}
+   * @returns A Promise of Function
+   */
+  deployFunction = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam("functionId", request.functionId)}/deploy`
+    },
+    unmarshalFunction
+  );
+  /**
+   * List function runtimes. List available function runtimes.
+   *
+   * @param request - The request {@link ListFunctionRuntimesRequest}
+   * @returns A Promise of ListFunctionRuntimesResponse
+   */
+  listFunctionRuntimes = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/runtimes`
+    },
+    unmarshalListFunctionRuntimesResponse
+  );
+  /**
+   * Get an upload URL of a function. Get an upload URL of a function associated with the specified ID.
+   *
+   * @param request - The request {@link GetFunctionUploadURLRequest}
+   * @returns A Promise of UploadURL
+   */
+  getFunctionUploadURL = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam("functionId", request.functionId)}/upload-url`,
+      urlParams: urlParams(["content_length", request.contentLength])
+    },
+    unmarshalUploadURL
+  );
+  /**
+   * Get a download URL of a function. Get a download URL for a function associated with the specified ID.
+   *
+   * @param request - The request {@link GetFunctionDownloadURLRequest}
+   * @returns A Promise of DownloadURL
+   */
+  getFunctionDownloadURL = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam("functionId", request.functionId)}/download-url`
+    },
+    unmarshalDownloadURL
+  );
+  pageOfListCrons = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/crons`,
+      urlParams: urlParams(
+        ["function_id", request.functionId],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    unmarshalListCronsResponse
+  );
+  /**
+   * List all crons. List all the cronjobs in a specified region.
+   *
+   * @param request - The request {@link ListCronsRequest}
+   * @returns A Promise of ListCronsResponse
+   */
+  listCrons = (request) => enrichForPagination("crons", this.pageOfListCrons, request);
+  /**
+   * Get a cron. Get the cron associated with the specified ID.
+   *
+   * @param request - The request {@link GetCronRequest}
+   * @returns A Promise of Cron
+   */
+  getCron = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/crons/${validatePathParam("cronId", request.cronId)}`
+    },
+    unmarshalCron
+  );
+  /**
+   * Waits for {@link Cron} to be in a final state.
+   *
+   * @param request - The request {@link GetCronRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Cron
+   */
+  waitForCron = (request, options) => waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !CRON_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getCron,
+    request,
+    options
+  );
+  /**
+   * Create a new cron. Create a new cronjob for a function with the specified ID.
+   *
+   * @param request - The request {@link CreateCronRequest}
+   * @returns A Promise of Cron
+   */
+  createCron = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalCreateCronRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/crons`
+    },
+    unmarshalCron
+  );
+  /**
+   * Update an existing cron. Update the cron associated with the specified ID.
+   *
+   * @param request - The request {@link UpdateCronRequest}
+   * @returns A Promise of Cron
+   */
+  updateCron = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalUpdateCronRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/crons/${validatePathParam("cronId", request.cronId)}`
+    },
+    unmarshalCron
+  );
+  /**
+   * Delete an existing cron. Delete the cron associated with the specified ID.
+   *
+   * @param request - The request {@link DeleteCronRequest}
+   * @returns A Promise of Cron
+   */
+  deleteCron = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/crons/${validatePathParam("cronId", request.cronId)}`
+    },
+    unmarshalCron
+  );
+  pageOfListDomains = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains`,
+      urlParams: urlParams(
+        ["function_id", request.functionId],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    unmarshalListDomainsResponse
+  );
+  /**
+   * List all domain name bindings. List all domain name bindings in a specified region.
+   *
+   * @param request - The request {@link ListDomainsRequest}
+   * @returns A Promise of ListDomainsResponse
+   */
+  listDomains = (request) => enrichForPagination("domains", this.pageOfListDomains, request);
+  /**
+   * Get a domain name binding. Get a domain name binding for the function with the specified ID.
+   *
+   * @param request - The request {@link GetDomainRequest}
+   * @returns A Promise of Domain
+   */
+  getDomain = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam("domainId", request.domainId)}`
+    },
+    unmarshalDomain
+  );
+  /**
+   * Waits for {@link Domain} to be in a final state.
+   *
+   * @param request - The request {@link GetDomainRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Domain
+   */
+  waitForDomain = (request, options) => waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !DOMAIN_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getDomain,
+    request,
+    options
+  );
+  /**
+   * Create a domain name binding. Create a domain name binding for the function with the specified ID.
+   *
+   * @param request - The request {@link CreateDomainRequest}
+   * @returns A Promise of Domain
+   */
+  createDomain = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalCreateDomainRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains`
+    },
+    unmarshalDomain
+  );
+  /**
+   * Delete a domain name binding. Delete a domain name binding for the function with the specified ID.
+   *
+   * @param request - The request {@link DeleteDomainRequest}
+   * @returns A Promise of Domain
+   */
+  deleteDomain = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam("domainId", request.domainId)}`
+    },
+    unmarshalDomain
+  );
+  /**
+   * Create a new revocable token.
+   *
+   * @param request - The request {@link CreateTokenRequest}
+   * @returns A Promise of Token
+   */
+  createToken = (request = {}) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalCreateTokenRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/tokens`
+    },
+    unmarshalToken
+  );
+  /**
+   * Get a token.
+   *
+   * @param request - The request {@link GetTokenRequest}
+   * @returns A Promise of Token
+   */
+  getToken = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/tokens/${validatePathParam("tokenId", request.tokenId)}`
+    },
+    unmarshalToken
+  );
+  /**
+   * Waits for {@link Token} to be in a final state.
+   *
+   * @param request - The request {@link GetTokenRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Token
+   */
+  waitForToken = (request, options) => waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !TOKEN_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getToken,
+    request,
+    options
+  );
+  pageOfListTokens = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/tokens`,
+      urlParams: urlParams(
+        ["function_id", request.functionId],
+        ["namespace_id", request.namespaceId],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    unmarshalListTokensResponse
+  );
+  /**
+   * List all tokens.
+   *
+   * @param request - The request {@link ListTokensRequest}
+   * @returns A Promise of ListTokensResponse
+   */
+  listTokens = (request = {}) => enrichForPagination("tokens", this.pageOfListTokens, request);
+  /**
+   * Delete a token.
+   *
+   * @param request - The request {@link DeleteTokenRequest}
+   * @returns A Promise of Token
+   */
+  deleteToken = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/tokens/${validatePathParam("tokenId", request.tokenId)}`
+    },
+    unmarshalToken
+  );
+  /**
+   * Create a trigger. Create a new trigger for a specified function.
+   *
+   * @param request - The request {@link CreateTriggerRequest}
+   * @returns A Promise of Trigger
+   */
+  createTrigger = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalCreateTriggerRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/triggers`
+    },
+    unmarshalTrigger
+  );
+  /**
+   * Get a trigger. Get a trigger with a specified ID.
+   *
+   * @param request - The request {@link GetTriggerRequest}
+   * @returns A Promise of Trigger
+   */
+  getTrigger = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam("triggerId", request.triggerId)}`
+    },
+    unmarshalTrigger
+  );
+  /**
+   * Waits for {@link Trigger} to be in a final state.
+   *
+   * @param request - The request {@link GetTriggerRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Trigger
+   */
+  waitForTrigger = (request, options) => waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !TRIGGER_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getTrigger,
+    request,
+    options
+  );
+  pageOfListTriggers = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/triggers`,
+      urlParams: urlParams(
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ...Object.entries(
+          resolveOneOf([
+            { param: "function_id", value: request.functionId },
+            { param: "namespace_id", value: request.namespaceId },
+            {
+              default: this.client.settings.defaultProjectId,
+              param: "project_id",
+              value: request.projectId
+            }
+          ])
+        )
+      )
+    },
+    unmarshalListTriggersResponse
+  );
+  /**
+   * List all triggers. List all triggers belonging to a specified Organization or Project.
+   *
+   * @param request - The request {@link ListTriggersRequest}
+   * @returns A Promise of ListTriggersResponse
+   */
+  listTriggers = (request = {}) => enrichForPagination("triggers", this.pageOfListTriggers, request);
+  /**
+   * Update a trigger. Update a trigger with a specified ID.
+   *
+   * @param request - The request {@link UpdateTriggerRequest}
+   * @returns A Promise of Trigger
+   */
+  updateTrigger = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalUpdateTriggerRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam("triggerId", request.triggerId)}`
+    },
+    unmarshalTrigger
+  );
+  /**
+   * Delete a trigger. Delete a trigger with a specified ID.
+   *
+   * @param request - The request {@link DeleteTriggerRequest}
+   * @returns A Promise of Trigger
+   */
+  deleteTrigger = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/functions/v1beta1/regions/${validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam("triggerId", request.triggerId)}`
+    },
+    unmarshalTrigger
+  );
+}
+export {
+  API
+};

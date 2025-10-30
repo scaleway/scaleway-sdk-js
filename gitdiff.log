@@ -1,0 +1,3494 @@
+diff --git a/.github/workflows/check-pull-request.yml b/.github/workflows/check-pull-request.yml
+index 899ebaf5..60333644 100644
+--- a/.github/workflows/check-pull-request.yml
++++ b/.github/workflows/check-pull-request.yml
+@@ -29,3 +29,8 @@ jobs:
+           else
+             echo "$title" | pnpm commitlint
+           fi
++      - name: Upload SDK src as artifact
++        uses: actions/upload-artifact@v4
++        with:
++          name: sdk-src
++          path: packages/sdk/src/
+diff --git a/packages_generated/account/src/v3/api.gen.ts b/packages_generated/account/src/v3/api.gen.ts
+index 35cd2a49..0f755310 100644
+--- a/packages_generated/account/src/v3/api.gen.ts
++++ b/packages_generated/account/src/v3/api.gen.ts
+@@ -1,8 +1,8 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   urlParams,
+   validatePathParam,
+ } from '@scaleway/sdk-client'
+diff --git a/packages_generated/account/src/v3/marshalling.gen.ts b/packages_generated/account/src/v3/marshalling.gen.ts
+index 144669d7..67ddda4a 100644
+--- a/packages_generated/account/src/v3/marshalling.gen.ts
++++ b/packages_generated/account/src/v3/marshalling.gen.ts
+@@ -1,13 +1,13 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   CheckContractSignatureResponse,
+   Contract,
+diff --git a/packages_generated/applesilicon/src/v1alpha1/api.gen.ts b/packages_generated/applesilicon/src/v1alpha1/api.gen.ts
+index 45b807e3..8b3de564 100644
+--- a/packages_generated/applesilicon/src/v1alpha1/api.gen.ts
++++ b/packages_generated/applesilicon/src/v1alpha1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES_APPLESILICON,
+   SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_APPLESILICON,
+@@ -25,8 +26,8 @@ import {
+   unmarshalConnectivityDiagnostic,
+   unmarshalListOSResponse,
+   unmarshalListServerPrivateNetworksResponse,
+-  unmarshalListServerTypesResponse,
+   unmarshalListServersResponse,
++  unmarshalListServerTypesResponse,
+   unmarshalOS,
+   unmarshalServer,
+   unmarshalServerPrivateNetwork,
+@@ -47,10 +48,10 @@ import type {
+   ListOSRequest,
+   ListOSResponse,
+   ListServerPrivateNetworksResponse,
+-  ListServerTypesRequest,
+-  ListServerTypesResponse,
+   ListServersRequest,
+   ListServersResponse,
++  ListServerTypesRequest,
++  ListServerTypesResponse,
+   OS,
+   PrivateNetworkApiAddServerPrivateNetworkRequest,
+   PrivateNetworkApiDeleteServerPrivateNetworkRequest,
+diff --git a/packages_generated/applesilicon/src/v1alpha1/marshalling.gen.ts b/packages_generated/applesilicon/src/v1alpha1/marshalling.gen.ts
+index bf163fdf..90479cb9 100644
+--- a/packages_generated/applesilicon/src/v1alpha1/marshalling.gen.ts
++++ b/packages_generated/applesilicon/src/v1alpha1/marshalling.gen.ts
+@@ -1,12 +1,12 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   BatchCreateServersRequest,
+   BatchCreateServersRequestBatchInnerCreateServerRequest,
+@@ -18,8 +18,8 @@ import type {
+   CreateServerRequest,
+   ListOSResponse,
+   ListServerPrivateNetworksResponse,
+-  ListServerTypesResponse,
+   ListServersResponse,
++  ListServerTypesResponse,
+   OS,
+   PrivateNetworkApiAddServerPrivateNetworkRequest,
+   PrivateNetworkApiSetServerPrivateNetworksRequest,
+diff --git a/packages_generated/audit_trail/src/v1alpha1/api.gen.ts b/packages_generated/audit_trail/src/v1alpha1/api.gen.ts
+index 10a6668a..93a9bdb9 100644
+--- a/packages_generated/audit_trail/src/v1alpha1/api.gen.ts
++++ b/packages_generated/audit_trail/src/v1alpha1/api.gen.ts
+@@ -1,12 +1,13 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality } from '@scaleway/sdk-client'
+ import {
+   API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality } from '@scaleway/sdk-client'
+ import {
+   unmarshalListEventsResponse,
+   unmarshalListProductsResponse,
+diff --git a/packages_generated/audit_trail/src/v1alpha1/index.gen.ts b/packages_generated/audit_trail/src/v1alpha1/index.gen.ts
+index b144abfb..ea1c0d1f 100644
+--- a/packages_generated/audit_trail/src/v1alpha1/index.gen.ts
++++ b/packages_generated/audit_trail/src/v1alpha1/index.gen.ts
+@@ -4,8 +4,11 @@ export { API } from './api.gen'
+ export * from './marshalling.gen'
+ export type {
+   AccountOrganizationInfo,
++  AccountProjectInfo,
+   AccountUserInfo,
+   AppleSiliconServerInfo,
++  BaremetalServerInfo,
++  BaremetalSettingInfo,
+   Event,
+   EventPrincipal,
+   InstanceServerInfo,
+diff --git a/packages_generated/audit_trail/src/v1alpha1/marshalling.gen.ts b/packages_generated/audit_trail/src/v1alpha1/marshalling.gen.ts
+index fb3865e2..67e2a625 100644
+--- a/packages_generated/audit_trail/src/v1alpha1/marshalling.gen.ts
++++ b/packages_generated/audit_trail/src/v1alpha1/marshalling.gen.ts
+@@ -7,8 +7,11 @@ import {
+ } from '@scaleway/sdk-client'
+ import type {
+   AccountOrganizationInfo,
++  AccountProjectInfo,
+   AccountUserInfo,
+   AppleSiliconServerInfo,
++  BaremetalServerInfo,
++  BaremetalSettingInfo,
+   Event,
+   EventPrincipal,
+   InstanceServerInfo,
+@@ -38,6 +41,18 @@ const unmarshalAccountOrganizationInfo = (
+   return {} as AccountOrganizationInfo
+ }
+ 
++const unmarshalAccountProjectInfo = (data: unknown): AccountProjectInfo => {
++  if (!isJSONObject(data)) {
++    throw new TypeError(
++      `Unmarshalling the type 'AccountProjectInfo' failed as data isn't a dictionary.`,
++    )
++  }
++
++  return {
++    description: data.description,
++  } as AccountProjectInfo
++}
++
+ const unmarshalAccountUserInfo = (data: unknown): AccountUserInfo => {
+   if (!isJSONObject(data)) {
+     throw new TypeError(
+@@ -66,6 +81,31 @@ const unmarshalAppleSiliconServerInfo = (
+   } as AppleSiliconServerInfo
+ }
+ 
++const unmarshalBaremetalServerInfo = (data: unknown): BaremetalServerInfo => {
++  if (!isJSONObject(data)) {
++    throw new TypeError(
++      `Unmarshalling the type 'BaremetalServerInfo' failed as data isn't a dictionary.`,
++    )
++  }
++
++  return {
++    description: data.description,
++    tags: data.tags,
++  } as BaremetalServerInfo
++}
++
++const unmarshalBaremetalSettingInfo = (data: unknown): BaremetalSettingInfo => {
++  if (!isJSONObject(data)) {
++    throw new TypeError(
++      `Unmarshalling the type 'BaremetalSettingInfo' failed as data isn't a dictionary.`,
++    )
++  }
++
++  return {
++    type: data.type,
++  } as BaremetalSettingInfo
++}
++
+ const unmarshalInstanceServerInfo = (data: unknown): InstanceServerInfo => {
+   if (!isJSONObject(data)) {
+     throw new TypeError(
+@@ -188,12 +228,21 @@ export const unmarshalResource = (data: unknown): Resource => {
+     accountOrganizationInfo: data.account_organization_info
+       ? unmarshalAccountOrganizationInfo(data.account_organization_info)
+       : undefined,
++    accountProjectInfo: data.account_project_info
++      ? unmarshalAccountProjectInfo(data.account_project_info)
++      : undefined,
+     accountUserInfo: data.account_user_info
+       ? unmarshalAccountUserInfo(data.account_user_info)
+       : undefined,
+     appleSiliconServerInfo: data.apple_silicon_server_info
+       ? unmarshalAppleSiliconServerInfo(data.apple_silicon_server_info)
+       : undefined,
++    baremetalServerInfo: data.baremetal_server_info
++      ? unmarshalBaremetalServerInfo(data.baremetal_server_info)
++      : undefined,
++    baremetalSettingInfo: data.baremetal_setting_info
++      ? unmarshalBaremetalSettingInfo(data.baremetal_setting_info)
++      : undefined,
+     createdAt: unmarshalDate(data.created_at),
+     deletedAt: unmarshalDate(data.deleted_at),
+     id: data.id,
+diff --git a/packages_generated/audit_trail/src/v1alpha1/types.gen.ts b/packages_generated/audit_trail/src/v1alpha1/types.gen.ts
+index 6d66e343..09c82dc0 100644
+--- a/packages_generated/audit_trail/src/v1alpha1/types.gen.ts
++++ b/packages_generated/audit_trail/src/v1alpha1/types.gen.ts
+@@ -25,11 +25,18 @@ export type ResourceType =
+   | 'key_manager_key'
+   | 'account_user'
+   | 'account_organization'
++  | 'account_project'
+   | 'instance_server'
+   | 'apple_silicon_server'
++  | 'baremetal_server'
++  | 'baremetal_setting'
+ 
+ export interface AccountOrganizationInfo {}
+ 
++export interface AccountProjectInfo {
++  description: string
++}
++
+ export interface AccountUserInfo {
+   email: string
+   phoneNumber?: string
+@@ -40,6 +47,15 @@ export interface AppleSiliconServerInfo {
+   name: string
+ }
+ 
++export interface BaremetalServerInfo {
++  description: string
++  tags: string[]
++}
++
++export interface BaremetalSettingInfo {
++  type: string
++}
++
+ export interface InstanceServerInfo {
+   name: string
+ }
+@@ -83,76 +99,91 @@ export interface Resource {
+   /**
+    * @deprecated
+    *
+-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo' could be set.
++   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+    */
+   secmSecretInfo?: SecretManagerSecretInfo
+   /**
+    * @deprecated
+    *
+-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo' could be set.
++   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+    */
+   secmSecretVersionInfo?: SecretManagerSecretVersionInfo
+   /**
+    *
+-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo' could be set.
++   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+    */
+   kubeClusterInfo?: KubernetesClusterInfo
+   /**
+    *
+-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo' could be set.
++   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+    */
+   kubePoolInfo?: KubernetesPoolInfo
+   /**
+    *
+-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo' could be set.
++   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+    */
+   kubeNodeInfo?: KubernetesNodeInfo
+   /**
+    *
+-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo' could be set.
++   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+    */
+   kubeAclInfo?: KubernetesACLInfo
+   /**
+    * @deprecated
+    *
+-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo' could be set.
++   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+    */
+   keymKeyInfo?: KeyManagerKeyInfo
+   /**
+    *
+-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo' could be set.
++   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+    */
+   secretManagerSecretInfo?: SecretManagerSecretInfo
+   /**
+    *
+-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo' could be set.
++   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+    */
+   secretManagerVersionInfo?: SecretManagerSecretVersionInfo
+   /**
+    *
+-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo' could be set.
++   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+    */
+   keyManagerKeyInfo?: KeyManagerKeyInfo
+   /**
+    *
+-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo' could be set.
++   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+    */
+   accountUserInfo?: AccountUserInfo
+   /**
+    *
+-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo' could be set.
++   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+    */
+   accountOrganizationInfo?: AccountOrganizationInfo
+   /**
+    *
+-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo' could be set.
++   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+    */
+   instanceServerInfo?: InstanceServerInfo
+   /**
+    *
+-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo' could be set.
++   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
+    */
+   appleSiliconServerInfo?: AppleSiliconServerInfo
++  /**
++   *
++   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
++   */
++  accountProjectInfo?: AccountProjectInfo
++  /**
++   *
++   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
++   */
++  baremetalServerInfo?: BaremetalServerInfo
++  /**
++   *
++   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo' could be set.
++   */
++  baremetalSettingInfo?: BaremetalSettingInfo
+ }
+ 
+ export interface ProductService {
+diff --git a/packages_generated/autoscaling/src/v1alpha1/api.gen.ts b/packages_generated/autoscaling/src/v1alpha1/api.gen.ts
+index beffb645..d43beb7a 100644
+--- a/packages_generated/autoscaling/src/v1alpha1/api.gen.ts
++++ b/packages_generated/autoscaling/src/v1alpha1/api.gen.ts
+@@ -1,8 +1,8 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   urlParams,
+   validatePathParam,
+ } from '@scaleway/sdk-client'
+diff --git a/packages_generated/autoscaling/src/v1alpha1/marshalling.gen.ts b/packages_generated/autoscaling/src/v1alpha1/marshalling.gen.ts
+index 452e852d..03fa73c4 100644
+--- a/packages_generated/autoscaling/src/v1alpha1/marshalling.gen.ts
++++ b/packages_generated/autoscaling/src/v1alpha1/marshalling.gen.ts
+@@ -1,5 +1,7 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+@@ -7,7 +9,6 @@ import {
+   unmarshalDate,
+   unmarshalMapOfObject,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   Capacity,
+   CreateInstanceGroupRequest,
+diff --git a/packages_generated/baremetal/src/v1/marshalling.gen.ts b/packages_generated/baremetal/src/v1/marshalling.gen.ts
+index 52f6fc4e..1e950a14 100644
+--- a/packages_generated/baremetal/src/v1/marshalling.gen.ts
++++ b/packages_generated/baremetal/src/v1/marshalling.gen.ts
+@@ -189,48 +189,6 @@ export const unmarshalIP = (data: unknown): IP => {
+   } as IP
+ }
+ 
+-const unmarshalOSOSField = (data: unknown): OSOSField => {
+-  if (!isJSONObject(data)) {
+-    throw new TypeError(
+-      `Unmarshalling the type 'OSOSField' failed as data isn't a dictionary.`,
+-    )
+-  }
+-
+-  return {
+-    defaultValue: data.default_value,
+-    editable: data.editable,
+-    required: data.required,
+-  } as OSOSField
+-}
+-
+-export const unmarshalOS = (data: unknown): OS => {
+-  if (!isJSONObject(data)) {
+-    throw new TypeError(
+-      `Unmarshalling the type 'OS' failed as data isn't a dictionary.`,
+-    )
+-  }
+-
+-  return {
+-    allowed: data.allowed,
+-    customPartitioningSupported: data.custom_partitioning_supported,
+-    enabled: data.enabled,
+-    id: data.id,
+-    licenseRequired: data.license_required,
+-    logoUrl: data.logo_url,
+-    name: data.name,
+-    password: data.password ? unmarshalOSOSField(data.password) : undefined,
+-    servicePassword: data.service_password
+-      ? unmarshalOSOSField(data.service_password)
+-      : undefined,
+-    serviceUser: data.service_user
+-      ? unmarshalOSOSField(data.service_user)
+-      : undefined,
+-    ssh: data.ssh ? unmarshalOSOSField(data.ssh) : undefined,
+-    user: data.user ? unmarshalOSOSField(data.user) : undefined,
+-    version: data.version,
+-  } as OS
+-}
+-
+ const unmarshalCertificationOption = (data: unknown): CertificationOption => {
+   if (!isJSONObject(data)) {
+     throw new TypeError(
+@@ -289,6 +247,144 @@ const unmarshalRemoteAccessOption = (data: unknown): RemoteAccessOption => {
+   return {} as RemoteAccessOption
+ }
+ 
++const unmarshalServerInstall = (data: unknown): ServerInstall => {
++  if (!isJSONObject(data)) {
++    throw new TypeError(
++      `Unmarshalling the type 'ServerInstall' failed as data isn't a dictionary.`,
++    )
++  }
++
++  return {
++    hostname: data.hostname,
++    osId: data.os_id,
++    partitioningSchema: data.partitioning_schema
++      ? unmarshalSchema(data.partitioning_schema)
++      : undefined,
++    serviceUrl: data.service_url,
++    serviceUser: data.service_user,
++    sshKeyIds: data.ssh_key_ids,
++    status: data.status,
++    user: data.user,
++  } as ServerInstall
++}
++
++const unmarshalServerOption = (data: unknown): ServerOption => {
++  if (!isJSONObject(data)) {
++    throw new TypeError(
++      `Unmarshalling the type 'ServerOption' failed as data isn't a dictionary.`,
++    )
++  }
++
++  return {
++    certification: data.certification
++      ? unmarshalCertificationOption(data.certification)
++      : undefined,
++    expiresAt: unmarshalDate(data.expires_at),
++    id: data.id,
++    license: data.license ? unmarshalLicenseOption(data.license) : undefined,
++    manageable: data.manageable,
++    name: data.name,
++    privateNetwork: data.private_network
++      ? unmarshalPrivateNetworkOption(data.private_network)
++      : undefined,
++    publicBandwidth: data.public_bandwidth
++      ? unmarshalPublicBandwidthOption(data.public_bandwidth)
++      : undefined,
++    remoteAccess: data.remote_access
++      ? unmarshalRemoteAccessOption(data.remote_access)
++      : undefined,
++    status: data.status,
++  } as ServerOption
++}
++
++const unmarshalServerRescueServer = (data: unknown): ServerRescueServer => {
++  if (!isJSONObject(data)) {
++    throw new TypeError(
++      `Unmarshalling the type 'ServerRescueServer' failed as data isn't a dictionary.`,
++    )
++  }
++
++  return {
++    password: data.password,
++    user: data.user,
++  } as ServerRescueServer
++}
++
++export const unmarshalServer = (data: unknown): Server => {
++  if (!isJSONObject(data)) {
++    throw new TypeError(
++      `Unmarshalling the type 'Server' failed as data isn't a dictionary.`,
++    )
++  }
++
++  return {
++    bootType: data.boot_type,
++    createdAt: unmarshalDate(data.created_at),
++    description: data.description,
++    domain: data.domain,
++    id: data.id,
++    install: data.install ? unmarshalServerInstall(data.install) : undefined,
++    ips: unmarshalArrayOfObject(data.ips, unmarshalIP),
++    name: data.name,
++    offerId: data.offer_id,
++    offerName: data.offer_name,
++    options: unmarshalArrayOfObject(data.options, unmarshalServerOption),
++    organizationId: data.organization_id,
++    pingStatus: data.ping_status,
++    projectId: data.project_id,
++    protected: data.protected,
++    rescueServer: data.rescue_server
++      ? unmarshalServerRescueServer(data.rescue_server)
++      : undefined,
++    status: data.status,
++    tags: data.tags,
++    updatedAt: unmarshalDate(data.updated_at),
++    zone: data.zone,
++  } as Server
++}
++
++const unmarshalOSOSField = (data: unknown): OSOSField => {
++  if (!isJSONObject(data)) {
++    throw new TypeError(
++      `Unmarshalling the type 'OSOSField' failed as data isn't a dictionary.`,
++    )
++  }
++
++  return {
++    defaultValue: data.default_value,
++    editable: data.editable,
++    required: data.required,
++  } as OSOSField
++}
++
++export const unmarshalOS = (data: unknown): OS => {
++  if (!isJSONObject(data)) {
++    throw new TypeError(
++      `Unmarshalling the type 'OS' failed as data isn't a dictionary.`,
++    )
++  }
++
++  return {
++    allowed: data.allowed,
++    customPartitioningSupported: data.custom_partitioning_supported,
++    enabled: data.enabled,
++    id: data.id,
++    licenseRequired: data.license_required,
++    logoUrl: data.logo_url,
++    name: data.name,
++    password: data.password ? unmarshalOSOSField(data.password) : undefined,
++    servicePassword: data.service_password
++      ? unmarshalOSOSField(data.service_password)
++      : undefined,
++    serviceUser: data.service_user
++      ? unmarshalOSOSField(data.service_user)
++      : undefined,
++    ssh: data.ssh ? unmarshalOSOSField(data.ssh) : undefined,
++    user: data.user ? unmarshalOSOSField(data.user) : undefined,
++    version: data.version,
++  } as OS
++}
++
+ const unmarshalCPU = (data: unknown): CPU => {
+   if (!isJSONObject(data)) {
+     throw new TypeError(
+@@ -498,102 +594,6 @@ export const unmarshalServerPrivateNetwork = (
+   } as ServerPrivateNetwork
+ }
+ 
+-const unmarshalServerInstall = (data: unknown): ServerInstall => {
+-  if (!isJSONObject(data)) {
+-    throw new TypeError(
+-      `Unmarshalling the type 'ServerInstall' failed as data isn't a dictionary.`,
+-    )
+-  }
+-
+-  return {
+-    hostname: data.hostname,
+-    osId: data.os_id,
+-    partitioningSchema: data.partitioning_schema
+-      ? unmarshalSchema(data.partitioning_schema)
+-      : undefined,
+-    serviceUrl: data.service_url,
+-    serviceUser: data.service_user,
+-    sshKeyIds: data.ssh_key_ids,
+-    status: data.status,
+-    user: data.user,
+-  } as ServerInstall
+-}
+-
+-const unmarshalServerOption = (data: unknown): ServerOption => {
+-  if (!isJSONObject(data)) {
+-    throw new TypeError(
+-      `Unmarshalling the type 'ServerOption' failed as data isn't a dictionary.`,
+-    )
+-  }
+-
+-  return {
+-    certification: data.certification
+-      ? unmarshalCertificationOption(data.certification)
+-      : undefined,
+-    expiresAt: unmarshalDate(data.expires_at),
+-    id: data.id,
+-    license: data.license ? unmarshalLicenseOption(data.license) : undefined,
+-    manageable: data.manageable,
+-    name: data.name,
+-    privateNetwork: data.private_network
+-      ? unmarshalPrivateNetworkOption(data.private_network)
+-      : undefined,
+-    publicBandwidth: data.public_bandwidth
+-      ? unmarshalPublicBandwidthOption(data.public_bandwidth)
+-      : undefined,
+-    remoteAccess: data.remote_access
+-      ? unmarshalRemoteAccessOption(data.remote_access)
+-      : undefined,
+-    status: data.status,
+-  } as ServerOption
+-}
+-
+-const unmarshalServerRescueServer = (data: unknown): ServerRescueServer => {
+-  if (!isJSONObject(data)) {
+-    throw new TypeError(
+-      `Unmarshalling the type 'ServerRescueServer' failed as data isn't a dictionary.`,
+-    )
+-  }
+-
+-  return {
+-    password: data.password,
+-    user: data.user,
+-  } as ServerRescueServer
+-}
+-
+-export const unmarshalServer = (data: unknown): Server => {
+-  if (!isJSONObject(data)) {
+-    throw new TypeError(
+-      `Unmarshalling the type 'Server' failed as data isn't a dictionary.`,
+-    )
+-  }
+-
+-  return {
+-    bootType: data.boot_type,
+-    createdAt: unmarshalDate(data.created_at),
+-    description: data.description,
+-    domain: data.domain,
+-    id: data.id,
+-    install: data.install ? unmarshalServerInstall(data.install) : undefined,
+-    ips: unmarshalArrayOfObject(data.ips, unmarshalIP),
+-    name: data.name,
+-    offerId: data.offer_id,
+-    offerName: data.offer_name,
+-    options: unmarshalArrayOfObject(data.options, unmarshalServerOption),
+-    organizationId: data.organization_id,
+-    pingStatus: data.ping_status,
+-    projectId: data.project_id,
+-    protected: data.protected,
+-    rescueServer: data.rescue_server
+-      ? unmarshalServerRescueServer(data.rescue_server)
+-      : undefined,
+-    status: data.status,
+-    tags: data.tags,
+-    updatedAt: unmarshalDate(data.updated_at),
+-    zone: data.zone,
+-  } as Server
+-}
+-
+ export const unmarshalSetting = (data: unknown): Setting => {
+   if (!isJSONObject(data)) {
+     throw new TypeError(
+@@ -776,13 +776,6 @@ export const unmarshalSetServerPrivateNetworksResponse = (
+   } as SetServerPrivateNetworksResponse
+ }
+ 
+-export const marshalAddOptionServerRequest = (
+-  request: AddOptionServerRequest,
+-  defaults: DefaultValues,
+-): Record<string, unknown> => ({
+-  expires_at: request.expiresAt,
+-})
+-
+ const marshalSchemaPartition = (
+   request: SchemaPartition,
+   defaults: DefaultValues,
+@@ -899,6 +892,13 @@ export const marshalCreateServerRequest = (
+   ]),
+ })
+ 
++export const marshalAddOptionServerRequest = (
++  request: AddOptionServerRequest,
++  defaults: DefaultValues,
++): Record<string, unknown> => ({
++  expires_at: request.expiresAt,
++})
++
+ export const marshalInstallServerRequest = (
+   request: InstallServerRequest,
+   defaults: DefaultValues,
+diff --git a/packages_generated/baremetal/src/v1/types.gen.ts b/packages_generated/baremetal/src/v1/types.gen.ts
+index 0bb50ff9..b403e9c6 100644
+--- a/packages_generated/baremetal/src/v1/types.gen.ts
++++ b/packages_generated/baremetal/src/v1/types.gen.ts
+@@ -144,6 +144,13 @@ export interface SchemaZFS {
+   pools: SchemaPool[]
+ }
+ 
++export interface Schema {
++  disks: SchemaDisk[]
++  raids: SchemaRAID[]
++  filesystems: SchemaFilesystem[]
++  zfs?: SchemaZFS
++}
++
+ export interface CertificationOption {}
+ 
+ export interface LicenseOption {
+@@ -160,11 +167,165 @@ export interface PublicBandwidthOption {
+ 
+ export interface RemoteAccessOption {}
+ 
+-export interface Schema {
+-  disks: SchemaDisk[]
+-  raids: SchemaRAID[]
+-  filesystems: SchemaFilesystem[]
+-  zfs?: SchemaZFS
++export interface CreateServerRequestInstall {
++  /**
++   * ID of the OS to installation on the server.
++   */
++  osId: string
++  /**
++   * Hostname of the server.
++   */
++  hostname: string
++  /**
++   * SSH key IDs authorized on the server.
++   */
++  sshKeyIds: string[]
++  /**
++   * User for the installation.
++   */
++  user?: string
++  /**
++   * Password for the installation.
++   */
++  password?: string
++  /**
++   * Regular user that runs the service to be installed on the server.
++   */
++  serviceUser?: string
++  /**
++   * Password used for the service to install.
++   */
++  servicePassword?: string
++  /**
++   * Partitioning schema.
++   */
++  partitioningSchema?: Schema
++}
++
++export interface IP {
++  /**
++   * ID of the IP.
++   */
++  id: string
++  /**
++   * Address of the IP.
++   */
++  address: string
++  /**
++   * Reverse IP value.
++   */
++  reverse: string
++  /**
++   * Version of IP (v4 or v6).
++   */
++  version: IPVersion
++  /**
++   * Status of the reverse.
++   */
++  reverseStatus: IPReverseStatus
++  /**
++   * A message related to the reverse status, e.g. in case of an error.
++   */
++  reverseStatusMessage: string
++}
++
++export interface ServerInstall {
++  /**
++   * ID of the OS.
++   */
++  osId: string
++  /**
++   * Host defined during the server installation.
++   */
++  hostname: string
++  /**
++   * SSH public key IDs defined during server installation.
++   */
++  sshKeyIds: string[]
++  /**
++   * Status of the server installation.
++   */
++  status: ServerInstallStatus
++  /**
++   * User defined in the server installation, or the default user if none were specified.
++   */
++  user: string
++  /**
++   * Service user defined in the server installation, or the default user if none were specified.
++   */
++  serviceUser: string
++  /**
++   * Address of the installed service.
++   */
++  serviceUrl: string
++  /**
++   * Partitioning schema.
++   */
++  partitioningSchema?: Schema
++}
++
++export interface ServerOption {
++  /**
++   * ID of the option.
++   */
++  id: string
++  /**
++   * Name of the option.
++   */
++  name: string
++  /**
++   * Status of the option on this server.
++   */
++  status: ServerOptionOptionStatus
++  /**
++   * Defines whether the option can be managed (added or removed).
++   */
++  manageable: boolean
++  /**
++   * Auto expiration date for compatible options.
++   */
++  expiresAt?: Date
++  /**
++   * License option, contains the ID of the OS linked to the option.
++   *
++   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
++   */
++  license?: LicenseOption
++  /**
++   * Public_bandwidth option, contains the bandwidth_in_bps.
++   *
++   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
++   */
++  publicBandwidth?: PublicBandwidthOption
++  /**
++   * Private_network option, contains the bandwidth_in_bps.
++   *
++   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
++   */
++  privateNetwork?: PrivateNetworkOption
++  /**
++   * Remote_access option.
++   *
++   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
++   */
++  remoteAccess?: RemoteAccessOption
++  /**
++   * Certification option.
++   *
++   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
++   */
++  certification?: CertificationOption
++}
++
++export interface ServerRescueServer {
++  /**
++   * Rescue user name.
++   */
++  user: string
++  /**
++   * Rescue password.
++   */
++  password: string
+ }
+ 
+ export interface OSOSField {
+@@ -319,165 +480,134 @@ export interface RaidController {
+   raidLevel: string[]
+ }
+ 
+-export interface IP {
+-  /**
+-   * ID of the IP.
+-   */
+-  id: string
+-  /**
+-   * Address of the IP.
+-   */
+-  address: string
+-  /**
+-   * Reverse IP value.
+-   */
+-  reverse: string
+-  /**
+-   * Version of IP (v4 or v6).
+-   */
+-  version: IPVersion
++export type CreateServerRequest = {
+   /**
+-   * Status of the reverse.
++   * Zone to target. If none is passed will use default zone from the config.
+    */
+-  reverseStatus: IPReverseStatus
++  zone?: ScwZone
+   /**
+-   * A message related to the reverse status, e.g. in case of an error.
++   * Offer ID of the new server.
+    */
+-  reverseStatusMessage: string
+-}
+-
+-export interface ServerInstall {
++  offerId: string
+   /**
+-   * ID of the OS.
++   * @deprecated Organization ID with which the server will be created.
++   *
++   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
+    */
+-  osId: string
++  organizationId?: string
+   /**
+-   * Host defined during the server installation.
++   * Project ID with which the server will be created.
++   *
++   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
+    */
+-  hostname: string
++  projectId?: string
+   /**
+-   * SSH public key IDs defined during server installation.
++   * Name of the server (≠hostname).
+    */
+-  sshKeyIds: string[]
++  name: string
+   /**
+-   * Status of the server installation.
++   * Description associated with the server, max 255 characters.
+    */
+-  status: ServerInstallStatus
++  description: string
+   /**
+-   * User defined in the server installation, or the default user if none were specified.
++   * Tags to associate to the server.
+    */
+-  user: string
++  tags?: string[]
+   /**
+-   * Service user defined in the server installation, or the default user if none were specified.
++   * Object describing the configuration details of the OS installation on the server.
+    */
+-  serviceUser: string
++  install?: CreateServerRequestInstall
+   /**
+-   * Address of the installed service.
++   * IDs of options to enable on server.
+    */
+-  serviceUrl: string
++  optionIds?: string[]
+   /**
+-   * Partitioning schema.
++   * If enabled, the server can not be deleted.
+    */
+-  partitioningSchema?: Schema
++  protected: boolean
+ }
+ 
+-export interface ServerOption {
++export interface Server {
+   /**
+-   * ID of the option.
++   * ID of the server.
+    */
+   id: string
+   /**
+-   * Name of the option.
++   * Organization ID the server is attached to.
+    */
+-  name: string
++  organizationId: string
+   /**
+-   * Status of the option on this server.
++   * Project ID the server is attached to.
+    */
+-  status: ServerOptionOptionStatus
++  projectId: string
+   /**
+-   * Defines whether the option can be managed (added or removed).
++   * Name of the server.
+    */
+-  manageable: boolean
++  name: string
+   /**
+-   * Auto expiration date for compatible options.
++   * Description of the server.
+    */
+-  expiresAt?: Date
++  description: string
+   /**
+-   * License option, contains the ID of the OS linked to the option.
+-   *
+-   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
++   * Last modification date of the server.
+    */
+-  license?: LicenseOption
++  updatedAt?: Date
+   /**
+-   * Public_bandwidth option, contains the bandwidth_in_bps.
+-   *
+-   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
++   * Creation date of the server.
+    */
+-  publicBandwidth?: PublicBandwidthOption
++  createdAt?: Date
+   /**
+-   * Private_network option, contains the bandwidth_in_bps.
+-   *
+-   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
++   * Status of the server.
+    */
+-  privateNetwork?: PrivateNetworkOption
++  status: ServerStatus
+   /**
+-   * Remote_access option.
+-   *
+-   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
++   * Offer ID of the server.
+    */
+-  remoteAccess?: RemoteAccessOption
++  offerId: string
+   /**
+-   * Certification option.
+-   *
+-   * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
++   * Offer name of the server.
+    */
+-  certification?: CertificationOption
+-}
+-
+-export interface ServerRescueServer {
++  offerName: string
+   /**
+-   * Rescue user name.
++   * Array of custom tags attached to the server.
+    */
+-  user: string
++  tags: string[]
+   /**
+-   * Rescue password.
++   * Array of IPs attached to the server.
+    */
+-  password: string
+-}
+-
+-export interface CreateServerRequestInstall {
++  ips: IP[]
+   /**
+-   * ID of the OS to installation on the server.
++   * Domain of the server.
+    */
+-  osId: string
++  domain: string
+   /**
+-   * Hostname of the server.
++   * Boot type of the server.
+    */
+-  hostname: string
++  bootType: ServerBootType
+   /**
+-   * SSH key IDs authorized on the server.
++   * Zone in which is the server located.
+    */
+-  sshKeyIds: string[]
++  zone: ScwZone
+   /**
+-   * User for the installation.
++   * Configuration of the installation.
+    */
+-  user?: string
++  install?: ServerInstall
+   /**
+-   * Password for the installation.
++   * Status of server ping.
+    */
+-  password?: string
++  pingStatus: ServerPingStatus
+   /**
+-   * Regular user that runs the service to be installed on the server.
++   * Options enabled on the server.
+    */
+-  serviceUser?: string
++  options: ServerOption[]
+   /**
+-   * Password used for the service to install.
++   * Configuration of rescue boot.
+    */
+-  servicePassword?: string
++  rescueServer?: ServerRescueServer
+   /**
+-   * Partitioning schema.
++   * If enabled, the server can not be deleted.
+    */
+-  partitioningSchema?: Schema
++  protected: boolean
+ }
+ 
+ export interface OS {
+@@ -737,89 +867,6 @@ export interface ServerPrivateNetwork {
+   updatedAt?: Date
+ }
+ 
+-export interface Server {
+-  /**
+-   * ID of the server.
+-   */
+-  id: string
+-  /**
+-   * Organization ID the server is attached to.
+-   */
+-  organizationId: string
+-  /**
+-   * Project ID the server is attached to.
+-   */
+-  projectId: string
+-  /**
+-   * Name of the server.
+-   */
+-  name: string
+-  /**
+-   * Description of the server.
+-   */
+-  description: string
+-  /**
+-   * Last modification date of the server.
+-   */
+-  updatedAt?: Date
+-  /**
+-   * Creation date of the server.
+-   */
+-  createdAt?: Date
+-  /**
+-   * Status of the server.
+-   */
+-  status: ServerStatus
+-  /**
+-   * Offer ID of the server.
+-   */
+-  offerId: string
+-  /**
+-   * Offer name of the server.
+-   */
+-  offerName: string
+-  /**
+-   * Array of custom tags attached to the server.
+-   */
+-  tags: string[]
+-  /**
+-   * Array of IPs attached to the server.
+-   */
+-  ips: IP[]
+-  /**
+-   * Domain of the server.
+-   */
+-  domain: string
+-  /**
+-   * Boot type of the server.
+-   */
+-  bootType: ServerBootType
+-  /**
+-   * Zone in which is the server located.
+-   */
+-  zone: ScwZone
+-  /**
+-   * Configuration of the installation.
+-   */
+-  install?: ServerInstall
+-  /**
+-   * Status of server ping.
+-   */
+-  pingStatus: ServerPingStatus
+-  /**
+-   * Options enabled on the server.
+-   */
+-  options: ServerOption[]
+-  /**
+-   * Configuration of rescue boot.
+-   */
+-  rescueServer?: ServerRescueServer
+-  /**
+-   * If enabled, the server can not be deleted.
+-   */
+-  protected: boolean
+-}
+-
+ export interface Setting {
+   /**
+    * ID of the setting.
+@@ -877,53 +924,6 @@ export interface BMCAccess {
+   expiresAt?: Date
+ }
+ 
+-export type CreateServerRequest = {
+-  /**
+-   * Zone to target. If none is passed will use default zone from the config.
+-   */
+-  zone?: ScwZone
+-  /**
+-   * Offer ID of the new server.
+-   */
+-  offerId: string
+-  /**
+-   * @deprecated Organization ID with which the server will be created.
+-   *
+-   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
+-   */
+-  organizationId?: string
+-  /**
+-   * Project ID with which the server will be created.
+-   *
+-   * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
+-   */
+-  projectId?: string
+-  /**
+-   * Name of the server (≠hostname).
+-   */
+-  name: string
+-  /**
+-   * Description associated with the server, max 255 characters.
+-   */
+-  description: string
+-  /**
+-   * Tags to associate to the server.
+-   */
+-  tags?: string[]
+-  /**
+-   * Object describing the configuration details of the OS installation on the server.
+-   */
+-  install?: CreateServerRequestInstall
+-  /**
+-   * IDs of options to enable on server.
+-   */
+-  optionIds?: string[]
+-  /**
+-   * If enabled, the server can not be deleted.
+-   */
+-  protected: boolean
+-}
+-
+ export type DeleteOptionServerRequest = {
+   /**
+    * Zone to target. If none is passed will use default zone from the config.
+diff --git a/packages_generated/billing/src/v2beta1/api.gen.ts b/packages_generated/billing/src/v2beta1/api.gen.ts
+index 70b41298..2254f7b7 100644
+--- a/packages_generated/billing/src/v2beta1/api.gen.ts
++++ b/packages_generated/billing/src/v2beta1/api.gen.ts
+@@ -1,8 +1,8 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   resolveOneOf,
+   urlParams,
+   validatePathParam,
+diff --git a/packages_generated/block/src/v1/api.gen.ts b/packages_generated/block/src/v1/api.gen.ts
+index e8556e39..8a0fb847 100644
+--- a/packages_generated/block/src/v1/api.gen.ts
++++ b/packages_generated/block/src/v1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_BLOCK,
+   VOLUME_TRANSIENT_STATUSES as VOLUME_TRANSIENT_STATUSES_BLOCK,
+@@ -21,8 +22,8 @@ import {
+   marshalUpdateSnapshotRequest,
+   marshalUpdateVolumeRequest,
+   unmarshalListSnapshotsResponse,
+-  unmarshalListVolumeTypesResponse,
+   unmarshalListVolumesResponse,
++  unmarshalListVolumeTypesResponse,
+   unmarshalSnapshot,
+   unmarshalVolume,
+ } from './marshalling.gen'
+@@ -37,10 +38,10 @@ import type {
+   ImportSnapshotFromObjectStorageRequest,
+   ListSnapshotsRequest,
+   ListSnapshotsResponse,
+-  ListVolumeTypesRequest,
+-  ListVolumeTypesResponse,
+   ListVolumesRequest,
+   ListVolumesResponse,
++  ListVolumeTypesRequest,
++  ListVolumeTypesResponse,
+   Snapshot,
+   UpdateSnapshotRequest,
+   UpdateVolumeRequest,
+diff --git a/packages_generated/block/src/v1/marshalling.gen.ts b/packages_generated/block/src/v1/marshalling.gen.ts
+index 151ebb18..dd77688d 100644
+--- a/packages_generated/block/src/v1/marshalling.gen.ts
++++ b/packages_generated/block/src/v1/marshalling.gen.ts
+@@ -1,6 +1,7 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+@@ -8,7 +9,6 @@ import {
+   unmarshalDate,
+   unmarshalMoney,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   CreateSnapshotRequest,
+   CreateVolumeRequest,
+@@ -17,8 +17,8 @@ import type {
+   ExportSnapshotToObjectStorageRequest,
+   ImportSnapshotFromObjectStorageRequest,
+   ListSnapshotsResponse,
+-  ListVolumeTypesResponse,
+   ListVolumesResponse,
++  ListVolumeTypesResponse,
+   Reference,
+   Snapshot,
+   SnapshotParentVolume,
+diff --git a/packages_generated/block/src/v1alpha1/api.gen.ts b/packages_generated/block/src/v1alpha1/api.gen.ts
+index e2a2406f..1d69b296 100644
+--- a/packages_generated/block/src/v1alpha1/api.gen.ts
++++ b/packages_generated/block/src/v1alpha1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_BLOCK,
+   VOLUME_TRANSIENT_STATUSES as VOLUME_TRANSIENT_STATUSES_BLOCK,
+@@ -22,8 +23,8 @@ import {
+   marshalUpdateSnapshotRequest,
+   marshalUpdateVolumeRequest,
+   unmarshalListSnapshotsResponse,
+-  unmarshalListVolumeTypesResponse,
+   unmarshalListVolumesResponse,
++  unmarshalListVolumeTypesResponse,
+   unmarshalSnapshot,
+   unmarshalVolume,
+ } from './marshalling.gen'
+@@ -39,10 +40,10 @@ import type {
+   ImportSnapshotFromS3Request,
+   ListSnapshotsRequest,
+   ListSnapshotsResponse,
+-  ListVolumeTypesRequest,
+-  ListVolumeTypesResponse,
+   ListVolumesRequest,
+   ListVolumesResponse,
++  ListVolumeTypesRequest,
++  ListVolumeTypesResponse,
+   Snapshot,
+   UpdateSnapshotRequest,
+   UpdateVolumeRequest,
+diff --git a/packages_generated/block/src/v1alpha1/marshalling.gen.ts b/packages_generated/block/src/v1alpha1/marshalling.gen.ts
+index d1878913..5249c88e 100644
+--- a/packages_generated/block/src/v1alpha1/marshalling.gen.ts
++++ b/packages_generated/block/src/v1alpha1/marshalling.gen.ts
+@@ -1,6 +1,7 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+@@ -8,7 +9,6 @@ import {
+   unmarshalDate,
+   unmarshalMoney,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   CreateSnapshotRequest,
+   CreateVolumeRequest,
+@@ -18,8 +18,8 @@ import type {
+   ImportSnapshotFromObjectStorageRequest,
+   ImportSnapshotFromS3Request,
+   ListSnapshotsResponse,
+-  ListVolumeTypesResponse,
+   ListVolumesResponse,
++  ListVolumeTypesResponse,
+   Reference,
+   Snapshot,
+   SnapshotParentVolume,
+diff --git a/packages_generated/cockpit/src/v1/api.gen.ts b/packages_generated/cockpit/src/v1/api.gen.ts
+index d42836d9..d9dffb7c 100644
+--- a/packages_generated/cockpit/src/v1/api.gen.ts
++++ b/packages_generated/cockpit/src/v1/api.gen.ts
+@@ -1,13 +1,14 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality } from '@scaleway/sdk-client'
+ import {
+   marshalGlobalApiCreateGrafanaUserRequest,
+   marshalGlobalApiResetGrafanaUserPasswordRequest,
+diff --git a/packages_generated/cockpit/src/v1/marshalling.gen.ts b/packages_generated/cockpit/src/v1/marshalling.gen.ts
+index 78193530..bcfa5c52 100644
+--- a/packages_generated/cockpit/src/v1/marshalling.gen.ts
++++ b/packages_generated/cockpit/src/v1/marshalling.gen.ts
+@@ -1,12 +1,13 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   Alert,
+   AlertManager,
+diff --git a/packages_generated/container/src/v1beta1/api.gen.ts b/packages_generated/container/src/v1beta1/api.gen.ts
+index c62bd20f..50ff9b17 100644
+--- a/packages_generated/container/src/v1beta1/api.gen.ts
++++ b/packages_generated/container/src/v1beta1/api.gen.ts
+@@ -1,15 +1,16 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   resolveOneOf,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   CONTAINER_TRANSIENT_STATUSES as CONTAINER_TRANSIENT_STATUSES_CONTAINER,
+   CRON_TRANSIENT_STATUSES as CRON_TRANSIENT_STATUSES_CONTAINER,
+diff --git a/packages_generated/container/src/v1beta1/marshalling.gen.ts b/packages_generated/container/src/v1beta1/marshalling.gen.ts
+index e76cd4f0..262ae9e1 100644
+--- a/packages_generated/container/src/v1beta1/marshalling.gen.ts
++++ b/packages_generated/container/src/v1beta1/marshalling.gen.ts
+@@ -1,13 +1,13 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   Container,
+   ContainerHealthCheckSpec,
+diff --git a/packages_generated/dedibox/src/v1/api.gen.ts b/packages_generated/dedibox/src/v1/api.gen.ts
+index 58bcd7aa..76dd756b 100644
+--- a/packages_generated/dedibox/src/v1/api.gen.ts
++++ b/packages_generated/dedibox/src/v1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   BMC_ACCESS_TRANSIENT_STATUSES as BMC_ACCESS_TRANSIENT_STATUSES_DEDIBOX,
+   RPN_SAN_TRANSIENT_STATUSES as RPN_SAN_TRANSIENT_STATUSES_DEDIBOX,
+@@ -17,15 +18,15 @@ import {
+   SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_DEDIBOX,
+ } from './content.gen'
+ import {
+-  marshalAttachFailoverIPToMacAddressRequest,
+   marshalAttachFailoverIPsRequest,
++  marshalAttachFailoverIPToMacAddressRequest,
+   marshalCreateFailoverIPsRequest,
+   marshalCreateServerRequest,
+   marshalDetachFailoverIPsRequest,
++  marshalInstallServerRequest,
+   marshalIPv6BlockApiCreateIPv6BlockRequest,
+   marshalIPv6BlockApiCreateIPv6BlockSubnetRequest,
+   marshalIPv6BlockApiUpdateIPv6BlockRequest,
+-  marshalInstallServerRequest,
+   marshalRpnSanApiAddIpRequest,
+   marshalRpnSanApiCreateRpnSanRequest,
+   marshalRpnSanApiRemoveIpRequest,
+@@ -50,23 +51,23 @@ import {
+   marshalUpdateServerBackupRequest,
+   marshalUpdateServerRequest,
+   marshalUpdateServerTagsRequest,
+-  unmarshalBMCAccess,
+   unmarshalBackup,
++  unmarshalBMCAccess,
+   unmarshalCanOrderResponse,
+   unmarshalCreateFailoverIPsResponse,
+   unmarshalFailoverIP,
+   unmarshalGetIPv6BlockQuotasResponse,
+   unmarshalGetRemainingQuotaResponse,
+   unmarshalGetRpnStatusResponse,
++  unmarshalInvoice,
+   unmarshalIP,
+   unmarshalIPv6Block,
+-  unmarshalInvoice,
+   unmarshalListFailoverIPsResponse,
+-  unmarshalListIPv6BlockSubnetsAvailableResponse,
+   unmarshalListInvoicesResponse,
++  unmarshalListIPv6BlockSubnetsAvailableResponse,
+   unmarshalListIpsResponse,
+-  unmarshalListOSResponse,
+   unmarshalListOffersResponse,
++  unmarshalListOSResponse,
+   unmarshalListRefundsResponse,
+   unmarshalListRpnCapableSanServersResponse,
+   unmarshalListRpnCapableServersResponse,
+@@ -84,8 +85,8 @@ import {
+   unmarshalListServersResponse,
+   unmarshalListServicesResponse,
+   unmarshalListSubscribableServerOptionsResponse,
+-  unmarshalOS,
+   unmarshalOffer,
++  unmarshalOS,
+   unmarshalRaid,
+   unmarshalRefund,
+   unmarshalRescue,
+@@ -99,9 +100,8 @@ import {
+   unmarshalSubscribeStorageOptionsResponse,
+ } from './marshalling.gen'
+ import type {
+-  AttachFailoverIPToMacAddressRequest,
+   AttachFailoverIPsRequest,
+-  BMCAccess,
++  AttachFailoverIPToMacAddressRequest,
+   Backup,
+   BillingApiCanOrderRequest,
+   BillingApiDownloadInvoiceRequest,
+@@ -110,8 +110,9 @@ import type {
+   BillingApiGetRefundRequest,
+   BillingApiListInvoicesRequest,
+   BillingApiListRefundsRequest,
+-  CanOrderResponse,
++  BMCAccess,
+   CancelServerInstallRequest,
++  CanOrderResponse,
+   CreateFailoverIPsRequest,
+   CreateFailoverIPsResponse,
+   CreateServerRequest,
+@@ -124,9 +125,9 @@ import type {
+   GetBMCAccessRequest,
+   GetFailoverIPRequest,
+   GetIPv6BlockQuotasResponse,
+-  GetOSRequest,
+   GetOfferRequest,
+   GetOrderedServiceRequest,
++  GetOSRequest,
+   GetRaidRequest,
+   GetRemainingQuotaRequest,
+   GetRemainingQuotaResponse,
+@@ -137,6 +138,8 @@ import type {
+   GetServerInstallRequest,
+   GetServerRequest,
+   GetServiceRequest,
++  InstallServerRequest,
++  Invoice,
+   IP,
+   IPv6Block,
+   IPv6BlockApiCreateIPv6BlockRequest,
+@@ -146,17 +149,15 @@ import type {
+   IPv6BlockApiGetIPv6BlockRequest,
+   IPv6BlockApiListIPv6BlockSubnetsAvailableRequest,
+   IPv6BlockApiUpdateIPv6BlockRequest,
+-  InstallServerRequest,
+-  Invoice,
+   ListFailoverIPsRequest,
+   ListFailoverIPsResponse,
+-  ListIPv6BlockSubnetsAvailableResponse,
+   ListInvoicesResponse,
++  ListIPv6BlockSubnetsAvailableResponse,
+   ListIpsResponse,
+-  ListOSRequest,
+-  ListOSResponse,
+   ListOffersRequest,
+   ListOffersResponse,
++  ListOSRequest,
++  ListOSResponse,
+   ListRefundsResponse,
+   ListRpnCapableSanServersResponse,
+   ListRpnCapableServersResponse,
+@@ -179,8 +180,8 @@ import type {
+   ListServicesResponse,
+   ListSubscribableServerOptionsRequest,
+   ListSubscribableServerOptionsResponse,
+-  OS,
+   Offer,
++  OS,
+   Raid,
+   RebootServerRequest,
+   Refund,
+diff --git a/packages_generated/dedibox/src/v1/marshalling.gen.ts b/packages_generated/dedibox/src/v1/marshalling.gen.ts
+index 324efea2..84fd5580 100644
+--- a/packages_generated/dedibox/src/v1/marshalling.gen.ts
++++ b/packages_generated/dedibox/src/v1/marshalling.gen.ts
+@@ -1,19 +1,20 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+   unmarshalMoney,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+-  AttachFailoverIPToMacAddressRequest,
+   AttachFailoverIPsRequest,
+-  BMCAccess,
++  AttachFailoverIPToMacAddressRequest,
+   Backup,
+-  CPU,
++  BMCAccess,
+   CanOrderResponse,
++  CPU,
+   CreateFailoverIPsRequest,
+   CreateFailoverIPsResponse,
+   CreateServerRequest,
+@@ -25,22 +26,22 @@ import type {
+   GetIPv6BlockQuotasResponseQuota,
+   GetRemainingQuotaResponse,
+   GetRpnStatusResponse,
++  InstallPartition,
++  InstallServerRequest,
++  Invoice,
++  InvoiceSummary,
+   IP,
+   IPv6Block,
+   IPv6BlockApiCreateIPv6BlockRequest,
+   IPv6BlockApiCreateIPv6BlockSubnetRequest,
+   IPv6BlockApiUpdateIPv6BlockRequest,
+-  InstallPartition,
+-  InstallServerRequest,
+-  Invoice,
+-  InvoiceSummary,
+   ListFailoverIPsResponse,
++  ListInvoicesResponse,
+   ListIPv6BlockSubnetsAvailableResponse,
+   ListIPv6BlockSubnetsAvailableResponseSubnet,
+-  ListInvoicesResponse,
+   ListIpsResponse,
+-  ListOSResponse,
+   ListOffersResponse,
++  ListOSResponse,
+   ListRefundsResponse,
+   ListRpnCapableSanServersResponse,
+   ListRpnCapableServersResponse,
+@@ -61,7 +62,6 @@ import type {
+   Log,
+   Memory,
+   NetworkInterface,
+-  OS,
+   Offer,
+   OfferAntiDosInfo,
+   OfferBackupInfo,
+@@ -74,6 +74,7 @@ import type {
+   OfferServerInfo,
+   OfferServiceLevelInfo,
+   OfferStorageInfo,
++  OS,
+   Partition,
+   PersistentMemory,
+   Raid,
+diff --git a/packages_generated/domain/src/v2beta1/api.gen.ts b/packages_generated/domain/src/v2beta1/api.gen.ts
+index b388869b..cebec853 100644
+--- a/packages_generated/domain/src/v2beta1/api.gen.ts
++++ b/packages_generated/domain/src/v2beta1/api.gen.ts
+@@ -1,13 +1,14 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_DOMAIN,
+   SSL_CERTIFICATE_TRANSIENT_STATUSES as SSL_CERTIFICATE_TRANSIENT_STATUSES_DOMAIN,
+@@ -36,10 +37,10 @@ import {
+   unmarshalCheckContactsCompatibilityResponse,
+   unmarshalClearDNSZoneRecordsResponse,
+   unmarshalContact,
+-  unmarshalDNSZone,
+   unmarshalDeleteDNSZoneResponse,
+   unmarshalDeleteExternalDomainResponse,
+   unmarshalDeleteSSLCertificateResponse,
++  unmarshalDNSZone,
+   unmarshalDomain,
+   unmarshalGetDNSZoneTsigKeyResponse,
+   unmarshalGetDNSZoneVersionDiffResponse,
+@@ -50,9 +51,9 @@ import {
+   unmarshalListContactsResponse,
+   unmarshalListDNSZoneNameserversResponse,
+   unmarshalListDNSZoneRecordsResponse,
++  unmarshalListDNSZonesResponse,
+   unmarshalListDNSZoneVersionRecordsResponse,
+   unmarshalListDNSZoneVersionsResponse,
+-  unmarshalListDNSZonesResponse,
+   unmarshalListDomainHostsResponse,
+   unmarshalListDomainsResponse,
+   unmarshalListRenewableDomainsResponse,
+@@ -63,8 +64,8 @@ import {
+   unmarshalRefreshDNSZoneResponse,
+   unmarshalRegisterExternalDomainResponse,
+   unmarshalRestoreDNSZoneVersionResponse,
+-  unmarshalSSLCertificate,
+   unmarshalSearchAvailableDomainsResponse,
++  unmarshalSSLCertificate,
+   unmarshalUpdateDNSZoneNameserversResponse,
+   unmarshalUpdateDNSZoneRecordsResponse,
+ } from './marshalling.gen'
+@@ -76,13 +77,13 @@ import type {
+   Contact,
+   CreateDNSZoneRequest,
+   CreateSSLCertificateRequest,
+-  DNSZone,
+   DeleteDNSZoneRequest,
+   DeleteDNSZoneResponse,
+   DeleteDNSZoneTsigKeyRequest,
+   DeleteExternalDomainResponse,
+   DeleteSSLCertificateRequest,
+   DeleteSSLCertificateResponse,
++  DNSZone,
+   Domain,
+   ExportRawDNSZoneRequest,
+   GetDNSZoneTsigKeyRequest,
+@@ -101,12 +102,12 @@ import type {
+   ListDNSZoneNameserversResponse,
+   ListDNSZoneRecordsRequest,
+   ListDNSZoneRecordsResponse,
++  ListDNSZonesRequest,
++  ListDNSZonesResponse,
+   ListDNSZoneVersionRecordsRequest,
+   ListDNSZoneVersionRecordsResponse,
+   ListDNSZoneVersionsRequest,
+   ListDNSZoneVersionsResponse,
+-  ListDNSZonesRequest,
+-  ListDNSZonesResponse,
+   ListDomainHostsResponse,
+   ListDomainsResponse,
+   ListRenewableDomainsResponse,
+@@ -148,8 +149,8 @@ import type {
+   RegistrarApiUpdateDomainRequest,
+   RestoreDNSZoneVersionRequest,
+   RestoreDNSZoneVersionResponse,
+-  SSLCertificate,
+   SearchAvailableDomainsResponse,
++  SSLCertificate,
+   UpdateDNSZoneNameserversRequest,
+   UpdateDNSZoneNameserversResponse,
+   UpdateDNSZoneRecordsRequest,
+diff --git a/packages_generated/domain/src/v2beta1/marshalling.gen.ts b/packages_generated/domain/src/v2beta1/marshalling.gen.ts
+index 8b8aacc3..b8081ff3 100644
+--- a/packages_generated/domain/src/v2beta1/marshalling.gen.ts
++++ b/packages_generated/domain/src/v2beta1/marshalling.gen.ts
+@@ -1,5 +1,7 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+@@ -8,7 +10,6 @@ import {
+   unmarshalMapOfObject,
+   unmarshalMoney,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   AvailableDomain,
+   CheckContactsCompatibilityResponse,
+@@ -29,14 +30,11 @@ import type {
+   ContactRolesRoles,
+   CreateDNSZoneRequest,
+   CreateSSLCertificateRequest,
+-  DNSZone,
+-  DNSZoneVersion,
+-  DSRecord,
+-  DSRecordDigest,
+-  DSRecordPublicKey,
+   DeleteDNSZoneResponse,
+   DeleteExternalDomainResponse,
+   DeleteSSLCertificateResponse,
++  DNSZone,
++  DNSZoneVersion,
+   Domain,
+   DomainDNSSEC,
+   DomainRecord,
+@@ -50,6 +48,9 @@ import type {
+   DomainRegistrationStatusExternalDomain,
+   DomainRegistrationStatusTransfer,
+   DomainSummary,
++  DSRecord,
++  DSRecordDigest,
++  DSRecordPublicKey,
+   GetDNSZoneTsigKeyResponse,
+   GetDNSZoneVersionDiffResponse,
+   GetDomainAuthCodeResponse,
+@@ -65,9 +66,9 @@ import type {
+   ListContactsResponse,
+   ListDNSZoneNameserversResponse,
+   ListDNSZoneRecordsResponse,
++  ListDNSZonesResponse,
+   ListDNSZoneVersionRecordsResponse,
+   ListDNSZoneVersionsResponse,
+-  ListDNSZonesResponse,
+   ListDomainHostsResponse,
+   ListDomainsResponse,
+   ListRenewableDomainsResponse,
+@@ -99,8 +100,8 @@ import type {
+   RegistrarApiUpdateDomainRequest,
+   RenewableDomain,
+   RestoreDNSZoneVersionResponse,
+-  SSLCertificate,
+   SearchAvailableDomainsResponse,
++  SSLCertificate,
+   Task,
+   Tld,
+   TldOffer,
+diff --git a/packages_generated/edge_services/src/v1beta1/api.gen.ts b/packages_generated/edge_services/src/v1beta1/api.gen.ts
+index 9d4a9736..f7dfb2f2 100644
+--- a/packages_generated/edge_services/src/v1beta1/api.gen.ts
++++ b/packages_generated/edge_services/src/v1beta1/api.gen.ts
+@@ -1,13 +1,14 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   PIPELINE_TRANSIENT_STATUSES as PIPELINE_TRANSIENT_STATUSES_EDGE_SERVICES,
+   PURGE_REQUEST_TRANSIENT_STATUSES as PURGE_REQUEST_TRANSIENT_STATUSES_EDGE_SERVICES,
+@@ -83,7 +84,6 @@ import type {
+   CreateRouteStageRequest,
+   CreateTLSStageRequest,
+   CreateWafStageRequest,
+-  DNSStage,
+   DeleteBackendStageRequest,
+   DeleteCacheStageRequest,
+   DeleteCurrentPlanRequest,
+@@ -92,6 +92,7 @@ import type {
+   DeleteRouteStageRequest,
+   DeleteTLSStageRequest,
+   DeleteWafStageRequest,
++  DNSStage,
+   GetBackendStageRequest,
+   GetBillingRequest,
+   GetBillingResponse,
+diff --git a/packages_generated/edge_services/src/v1beta1/marshalling.gen.ts b/packages_generated/edge_services/src/v1beta1/marshalling.gen.ts
+index f3653a22..1b7204f2 100644
+--- a/packages_generated/edge_services/src/v1beta1/marshalling.gen.ts
++++ b/packages_generated/edge_services/src/v1beta1/marshalling.gen.ts
+@@ -1,5 +1,7 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+@@ -8,7 +10,6 @@ import {
+   unmarshalMapOfObject,
+   unmarshalMoney,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   AddRouteRulesRequest,
+   AddRouteRulesResponse,
+diff --git a/packages_generated/file/src/v1alpha1/api.gen.ts b/packages_generated/file/src/v1alpha1/api.gen.ts
+index ab9ccaca..85b07e8c 100644
+--- a/packages_generated/file/src/v1alpha1/api.gen.ts
++++ b/packages_generated/file/src/v1alpha1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import { FILE_SYSTEM_TRANSIENT_STATUSES as FILE_SYSTEM_TRANSIENT_STATUSES_FILE } from './content.gen'
+ import {
+   marshalCreateFileSystemRequest,
+diff --git a/packages_generated/file/src/v1alpha1/marshalling.gen.ts b/packages_generated/file/src/v1alpha1/marshalling.gen.ts
+index 4d896ebb..4035dda0 100644
+--- a/packages_generated/file/src/v1alpha1/marshalling.gen.ts
++++ b/packages_generated/file/src/v1alpha1/marshalling.gen.ts
+@@ -1,11 +1,12 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   Attachment,
+   CreateFileSystemRequest,
+diff --git a/packages_generated/flexibleip/src/v1alpha1/api.gen.ts b/packages_generated/flexibleip/src/v1alpha1/api.gen.ts
+index 3a026637..3a7b8e09 100644
+--- a/packages_generated/flexibleip/src/v1alpha1/api.gen.ts
++++ b/packages_generated/flexibleip/src/v1alpha1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import { FLEXIBLE_IP_TRANSIENT_STATUSES as FLEXIBLE_IP_TRANSIENT_STATUSES_FLEXIBLEIP } from './content.gen'
+ import {
+   marshalAttachFlexibleIPRequest,
+diff --git a/packages_generated/flexibleip/src/v1alpha1/marshalling.gen.ts b/packages_generated/flexibleip/src/v1alpha1/marshalling.gen.ts
+index 8f7cd3f8..d531c7e3 100644
+--- a/packages_generated/flexibleip/src/v1alpha1/marshalling.gen.ts
++++ b/packages_generated/flexibleip/src/v1alpha1/marshalling.gen.ts
+@@ -1,11 +1,12 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   AttachFlexibleIPRequest,
+   AttachFlexibleIPsResponse,
+diff --git a/packages_generated/function/src/v1beta1/api.gen.ts b/packages_generated/function/src/v1beta1/api.gen.ts
+index 56ac8784..d20dd7d8 100644
+--- a/packages_generated/function/src/v1beta1/api.gen.ts
++++ b/packages_generated/function/src/v1beta1/api.gen.ts
+@@ -1,15 +1,16 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   resolveOneOf,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   CRON_TRANSIENT_STATUSES as CRON_TRANSIENT_STATUSES_FUNCTION,
+   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_FUNCTION,
+diff --git a/packages_generated/function/src/v1beta1/marshalling.gen.ts b/packages_generated/function/src/v1beta1/marshalling.gen.ts
+index 89877513..f9a15328 100644
+--- a/packages_generated/function/src/v1beta1/marshalling.gen.ts
++++ b/packages_generated/function/src/v1beta1/marshalling.gen.ts
+@@ -1,13 +1,13 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   CreateCronRequest,
+   CreateDomainRequest,
+diff --git a/packages_generated/iam/src/v1alpha1/marshalling.gen.ts b/packages_generated/iam/src/v1alpha1/marshalling.gen.ts
+index 7eda859a..d063b7e0 100644
+--- a/packages_generated/iam/src/v1alpha1/marshalling.gen.ts
++++ b/packages_generated/iam/src/v1alpha1/marshalling.gen.ts
+@@ -308,7 +308,7 @@ export const unmarshalUser = (data: unknown): User => {
+     mfa: data.mfa,
+     organizationId: data.organization_id,
+     phoneNumber: data.phone_number,
+-    status: data.status,
++    status: data.status ? data.status : undefined,
+     tags: data.tags,
+     twoFactorEnabled: data.two_factor_enabled,
+     type: data.type,
+diff --git a/packages_generated/iam/src/v1alpha1/types.gen.ts b/packages_generated/iam/src/v1alpha1/types.gen.ts
+index 1e7cb455..8fbe0e03 100644
+--- a/packages_generated/iam/src/v1alpha1/types.gen.ts
++++ b/packages_generated/iam/src/v1alpha1/types.gen.ts
+@@ -771,9 +771,9 @@ export interface User {
+    */
+   twoFactorEnabled?: boolean
+   /**
+-   * Status of user invitation.
++   * @deprecated Status of user invitation.
+    */
+-  status: UserStatus
++  status?: UserStatus
+   /**
+    * Defines whether MFA is enabled.
+    */
+diff --git a/packages_generated/inference/src/v1/api.gen.ts b/packages_generated/inference/src/v1/api.gen.ts
+index 00833a50..8ea312cc 100644
+--- a/packages_generated/inference/src/v1/api.gen.ts
++++ b/packages_generated/inference/src/v1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_INFERENCE,
+   MODEL_TRANSIENT_STATUSES as MODEL_TRANSIENT_STATUSES_INFERENCE,
+diff --git a/packages_generated/inference/src/v1/marshalling.gen.ts b/packages_generated/inference/src/v1/marshalling.gen.ts
+index 18395bbe..8f46442e 100644
+--- a/packages_generated/inference/src/v1/marshalling.gen.ts
++++ b/packages_generated/inference/src/v1/marshalling.gen.ts
+@@ -1,13 +1,13 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   CreateDeploymentRequest,
+   CreateEndpointRequest,
+@@ -23,9 +23,9 @@ import type {
+   ListNodeTypesResponse,
+   Model,
+   ModelSource,
+-  ModelSupportInfo,
+   ModelSupportedNode,
+   ModelSupportedQuantization,
++  ModelSupportInfo,
+   NodeType,
+   UpdateDeploymentRequest,
+   UpdateEndpointRequest,
+diff --git a/packages_generated/inference/src/v1beta1/api.gen.ts b/packages_generated/inference/src/v1beta1/api.gen.ts
+index be16591f..ca5a5514 100644
+--- a/packages_generated/inference/src/v1beta1/api.gen.ts
++++ b/packages_generated/inference/src/v1beta1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import { DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_INFERENCE } from './content.gen'
+ import {
+   marshalAddDeploymentACLRulesRequest,
+diff --git a/packages_generated/inference/src/v1beta1/marshalling.gen.ts b/packages_generated/inference/src/v1beta1/marshalling.gen.ts
+index 56ff0a34..cc178dad 100644
+--- a/packages_generated/inference/src/v1beta1/marshalling.gen.ts
++++ b/packages_generated/inference/src/v1beta1/marshalling.gen.ts
+@@ -1,13 +1,13 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   ACLRule,
+   ACLRuleRequest,
+diff --git a/packages_generated/instance/src/v1/api.gen.ts b/packages_generated/instance/src/v1/api.gen.ts
+index 84e9507d..5145c3b1 100644
+--- a/packages_generated/instance/src/v1/api.gen.ts
++++ b/packages_generated/instance/src/v1/api.gen.ts
+@@ -545,6 +545,12 @@ If the specified Instance offer is flagged as end of service, the best compatibl
+       unmarshalServerCompatibleTypes,
+     )
+ 
++  /**
++   * Attach a volume to an Instance.
++   *
++   * @param request - The request {@link AttachServerVolumeRequest}
++   * @returns A Promise of AttachServerVolumeResponse
++   */
+   attachServerVolume = (request: Readonly<AttachServerVolumeRequest>) =>
+     this.client.fetch<AttachServerVolumeResponse>(
+       {
+@@ -558,6 +564,12 @@ If the specified Instance offer is flagged as end of service, the best compatibl
+       unmarshalAttachServerVolumeResponse,
+     )
+ 
++  /**
++   * Detach a volume from an Instance.
++   *
++   * @param request - The request {@link DetachServerVolumeRequest}
++   * @returns A Promise of DetachServerVolumeResponse
++   */
+   detachServerVolume = (request: Readonly<DetachServerVolumeRequest>) =>
+     this.client.fetch<DetachServerVolumeResponse>(
+       {
+@@ -591,7 +603,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
+     )
+ 
+   /**
+-   * Detach a filesystem volume to an Instance.
++   * Detach a filesystem volume from an Instance.
+    *
+    * @param request - The request {@link DetachServerFileSystemRequest}
+    * @returns A Promise of DetachServerFileSystemResponse
+diff --git a/packages_generated/interlink/src/v1beta1/api.gen.ts b/packages_generated/interlink/src/v1beta1/api.gen.ts
+index f5dddb06..b69566f2 100644
+--- a/packages_generated/interlink/src/v1beta1/api.gen.ts
++++ b/packages_generated/interlink/src/v1beta1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   DEDICATED_CONNECTION_TRANSIENT_STATUSES as DEDICATED_CONNECTION_TRANSIENT_STATUSES_INTERLINK,
+   LINK_TRANSIENT_STATUSES as LINK_TRANSIENT_STATUSES_INTERLINK,
+diff --git a/packages_generated/interlink/src/v1beta1/marshalling.gen.ts b/packages_generated/interlink/src/v1beta1/marshalling.gen.ts
+index 104a59a3..8704d1d4 100644
+--- a/packages_generated/interlink/src/v1beta1/marshalling.gen.ts
++++ b/packages_generated/interlink/src/v1beta1/marshalling.gen.ts
+@@ -1,12 +1,13 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   AttachRoutingPolicyRequest,
+   AttachVpcRequest,
+diff --git a/packages_generated/iot/src/v1/api.gen.ts b/packages_generated/iot/src/v1/api.gen.ts
+index b7d835e7..08e98e58 100644
+--- a/packages_generated/iot/src/v1/api.gen.ts
++++ b/packages_generated/iot/src/v1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import { HUB_TRANSIENT_STATUSES as HUB_TRANSIENT_STATUSES_IOT } from './content.gen'
+ import {
+   marshalCreateDeviceRequest,
+diff --git a/packages_generated/iot/src/v1/marshalling.gen.ts b/packages_generated/iot/src/v1/marshalling.gen.ts
+index eff59722..535e6387 100644
+--- a/packages_generated/iot/src/v1/marshalling.gen.ts
++++ b/packages_generated/iot/src/v1/marshalling.gen.ts
+@@ -1,6 +1,7 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+@@ -8,7 +9,6 @@ import {
+   unmarshalDate,
+   unmarshalTimeSeries,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   Certificate,
+   CreateDeviceRequest,
+diff --git a/packages_generated/jobs/src/v1alpha1/api.gen.ts b/packages_generated/jobs/src/v1alpha1/api.gen.ts
+index 230c236f..95774447 100644
+--- a/packages_generated/jobs/src/v1alpha1/api.gen.ts
++++ b/packages_generated/jobs/src/v1alpha1/api.gen.ts
+@@ -1,13 +1,14 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality } from '@scaleway/sdk-client'
+ import {
+   marshalCreateJobDefinitionRequest,
+   marshalCreateJobDefinitionSecretsRequest,
+diff --git a/packages_generated/jobs/src/v1alpha1/marshalling.gen.ts b/packages_generated/jobs/src/v1alpha1/marshalling.gen.ts
+index e00556f7..a8325f94 100644
+--- a/packages_generated/jobs/src/v1alpha1/marshalling.gen.ts
++++ b/packages_generated/jobs/src/v1alpha1/marshalling.gen.ts
+@@ -1,13 +1,13 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   CreateJobDefinitionRequest,
+   CreateJobDefinitionRequestCronScheduleConfig,
+diff --git a/packages_generated/k8s/src/v1/api.gen.ts b/packages_generated/k8s/src/v1/api.gen.ts
+index f670c3e4..d51dfb98 100644
+--- a/packages_generated/k8s/src/v1/api.gen.ts
++++ b/packages_generated/k8s/src/v1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_K8S,
+   NODE_TRANSIENT_STATUSES as NODE_TRANSIENT_STATUSES_K8S,
+@@ -32,8 +33,8 @@ import {
+   unmarshalListClusterACLRulesResponse,
+   unmarshalListClusterAvailableTypesResponse,
+   unmarshalListClusterAvailableVersionsResponse,
+-  unmarshalListClusterTypesResponse,
+   unmarshalListClustersResponse,
++  unmarshalListClusterTypesResponse,
+   unmarshalListNodesResponse,
+   unmarshalListPoolsResponse,
+   unmarshalListVersionsResponse,
+@@ -69,10 +70,10 @@ import type {
+   ListClusterAvailableTypesResponse,
+   ListClusterAvailableVersionsRequest,
+   ListClusterAvailableVersionsResponse,
+-  ListClusterTypesRequest,
+-  ListClusterTypesResponse,
+   ListClustersRequest,
+   ListClustersResponse,
++  ListClusterTypesRequest,
++  ListClusterTypesResponse,
+   ListNodesRequest,
+   ListNodesResponse,
+   ListPoolsRequest,
+diff --git a/packages_generated/k8s/src/v1/marshalling.gen.ts b/packages_generated/k8s/src/v1/marshalling.gen.ts
+index a987a8c1..36f920f7 100644
+--- a/packages_generated/k8s/src/v1/marshalling.gen.ts
++++ b/packages_generated/k8s/src/v1/marshalling.gen.ts
+@@ -1,26 +1,26 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   ACLRule,
+   ACLRuleRequest,
+   AddClusterACLRulesRequest,
+   AddClusterACLRulesResponse,
+   Cluster,
+-  ClusterAutoUpgrade,
+   ClusterAutoscalerConfig,
++  ClusterAutoUpgrade,
+   ClusterOpenIDConnectConfig,
+   ClusterType,
+   CreateClusterRequest,
+-  CreateClusterRequestAutoUpgrade,
+   CreateClusterRequestAutoscalerConfig,
++  CreateClusterRequestAutoUpgrade,
+   CreateClusterRequestOpenIDConnectConfig,
+   CreateClusterRequestPoolConfig,
+   CreateClusterRequestPoolConfigUpgradePolicy,
+@@ -32,8 +32,8 @@ import type {
+   ListClusterACLRulesResponse,
+   ListClusterAvailableTypesResponse,
+   ListClusterAvailableVersionsResponse,
+-  ListClusterTypesResponse,
+   ListClustersResponse,
++  ListClusterTypesResponse,
+   ListNodesResponse,
+   ListPoolsResponse,
+   ListVersionsResponse,
+@@ -48,8 +48,8 @@ import type {
+   SetClusterACLRulesResponse,
+   SetClusterTypeRequest,
+   UpdateClusterRequest,
+-  UpdateClusterRequestAutoUpgrade,
+   UpdateClusterRequestAutoscalerConfig,
++  UpdateClusterRequestAutoUpgrade,
+   UpdateClusterRequestOpenIDConnectConfig,
+   UpdatePoolRequest,
+   UpdatePoolRequestUpgradePolicy,
+diff --git a/packages_generated/lb/src/v1/types.gen.ts b/packages_generated/lb/src/v1/types.gen.ts
+index 66dc10a5..e0a3cfbb 100644
+--- a/packages_generated/lb/src/v1/types.gen.ts
++++ b/packages_generated/lb/src/v1/types.gen.ts
+@@ -712,7 +712,7 @@ export interface Frontend {
+    */
+   connectionRateLimit?: number
+   /**
+-   * Defines wether to enable access logs on the frontend.
++   * Defines whether to enable access logs on the frontend.
+    */
+   enableAccessLogs: boolean
+ }
+@@ -813,7 +813,7 @@ export interface Acl {
+    */
+   name: string
+   /**
+-   * ACL match filter object. One of `ip_subnet` or `http_filter` & `http_filter_value` are required.
++   * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` & `http_filter_value` are required.
+    */
+   match?: AclMatch
+   /**
+@@ -947,7 +947,7 @@ export interface AclSpec {
+    */
+   action: AclAction
+   /**
+-   * ACL match filter object. One of `ip_subnet` or `http_filter` and `http_filter_value` are required.
++   * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` and `http_filter_value` are required.
+    */
+   match?: AclMatch
+   /**
+@@ -1033,7 +1033,7 @@ export type CreateAclRequest = {
+    */
+   action: AclAction
+   /**
+-   * ACL match filter object. One of `ip_subnet` or `http_filter` & `http_filter_value` are required.
++   * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` & `http_filter_value` are required.
+    */
+   match?: AclMatch
+   /**
+@@ -1210,7 +1210,7 @@ export type CreateFrontendRequest = {
+    */
+   connectionRateLimit?: number
+   /**
+-   * Defines wether to enable access logs on the frontend.
++   * Defines whether to enable access logs on the frontend.
+    */
+   enableAccessLogs: boolean
+ }
+@@ -2092,7 +2092,7 @@ export type UpdateAclRequest = {
+    */
+   action: AclAction
+   /**
+-   * ACL match filter object. One of `ip_subnet` or `http_filter` & `http_filter_value` are required.
++   * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` & `http_filter_value` are required.
+    */
+   match?: AclMatch
+   /**
+@@ -2249,7 +2249,7 @@ export type UpdateFrontendRequest = {
+    */
+   connectionRateLimit?: number
+   /**
+-   * Defines wether to enable access logs on the frontend.
++   * Defines whether to enable access logs on the frontend.
+    */
+   enableAccessLogs?: boolean
+ }
+@@ -2500,7 +2500,7 @@ export type ZonedApiCreateAclRequest = {
+    */
+   action: AclAction
+   /**
+-   * ACL match filter object. One of `ip_subnet` or `http_filter` & `http_filter_value` are required.
++   * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` & `http_filter_value` are required.
+    */
+   match?: AclMatch
+   /**
+@@ -2677,7 +2677,7 @@ export type ZonedApiCreateFrontendRequest = {
+    */
+   connectionRateLimit?: number
+   /**
+-   * Defines wether to enable access logs on the frontend.
++   * Defines whether to enable access logs on the frontend.
+    */
+   enableAccessLogs: boolean
+ }
+@@ -3435,7 +3435,7 @@ export type ZonedApiUpdateAclRequest = {
+    */
+   action: AclAction
+   /**
+-   * ACL match filter object. One of `ip_subnet` or `http_filter` & `http_filter_value` are required.
++   * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` & `http_filter_value` are required.
+    */
+   match?: AclMatch
+   /**
+@@ -3592,7 +3592,7 @@ export type ZonedApiUpdateFrontendRequest = {
+    */
+   connectionRateLimit?: number
+   /**
+-   * Defines wether to enable access logs on the frontend.
++   * Defines whether to enable access logs on the frontend.
+    */
+   enableAccessLogs?: boolean
+ }
+diff --git a/packages_generated/marketplace/src/v2/api.gen.ts b/packages_generated/marketplace/src/v2/api.gen.ts
+index b9c86ae8..761e1c9d 100644
+--- a/packages_generated/marketplace/src/v2/api.gen.ts
++++ b/packages_generated/marketplace/src/v2/api.gen.ts
+@@ -1,8 +1,8 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   resolveOneOf,
+   urlParams,
+   validatePathParam,
+diff --git a/packages_generated/mnq/src/v1beta1/api.gen.ts b/packages_generated/mnq/src/v1beta1/api.gen.ts
+index 044f580a..3a909988 100644
+--- a/packages_generated/mnq/src/v1beta1/api.gen.ts
++++ b/packages_generated/mnq/src/v1beta1/api.gen.ts
+@@ -1,13 +1,14 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality } from '@scaleway/sdk-client'
+ import {
+   marshalNatsApiCreateNatsAccountRequest,
+   marshalNatsApiCreateNatsCredentialsRequest,
+diff --git a/packages_generated/mnq/src/v1beta1/marshalling.gen.ts b/packages_generated/mnq/src/v1beta1/marshalling.gen.ts
+index 2e6b582c..1114a472 100644
+--- a/packages_generated/mnq/src/v1beta1/marshalling.gen.ts
++++ b/packages_generated/mnq/src/v1beta1/marshalling.gen.ts
+@@ -1,12 +1,12 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   File,
+   ListNatsAccountsResponse,
+diff --git a/packages_generated/mongodb/src/v1/api.gen.ts b/packages_generated/mongodb/src/v1/api.gen.ts
+index 987f6423..07eca711 100644
+--- a/packages_generated/mongodb/src/v1/api.gen.ts
++++ b/packages_generated/mongodb/src/v1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   INSTANCE_TRANSIENT_STATUSES as INSTANCE_TRANSIENT_STATUSES_MONGODB,
+   SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_MONGODB,
+diff --git a/packages_generated/mongodb/src/v1/marshalling.gen.ts b/packages_generated/mongodb/src/v1/marshalling.gen.ts
+index 74bea5f7..46463895 100644
+--- a/packages_generated/mongodb/src/v1/marshalling.gen.ts
++++ b/packages_generated/mongodb/src/v1/marshalling.gen.ts
+@@ -1,13 +1,13 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   CreateEndpointRequest,
+   CreateInstanceRequest,
+diff --git a/packages_generated/mongodb/src/v1alpha1/api.gen.ts b/packages_generated/mongodb/src/v1alpha1/api.gen.ts
+index 10297b9d..1c6345c9 100644
+--- a/packages_generated/mongodb/src/v1alpha1/api.gen.ts
++++ b/packages_generated/mongodb/src/v1alpha1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   INSTANCE_TRANSIENT_STATUSES as INSTANCE_TRANSIENT_STATUSES_MONGODB,
+   SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_MONGODB,
+diff --git a/packages_generated/mongodb/src/v1alpha1/marshalling.gen.ts b/packages_generated/mongodb/src/v1alpha1/marshalling.gen.ts
+index 5d43990d..bc769fcc 100644
+--- a/packages_generated/mongodb/src/v1alpha1/marshalling.gen.ts
++++ b/packages_generated/mongodb/src/v1alpha1/marshalling.gen.ts
+@@ -1,13 +1,13 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   CreateEndpointRequest,
+   CreateInstanceRequest,
+@@ -32,8 +32,8 @@ import type {
+   NodeTypeVolumeType,
+   RestoreSnapshotRequest,
+   RestoreSnapshotRequestVolumeDetails,
+-  SetUserRoleRequest,
+   Setting,
++  SetUserRoleRequest,
+   Snapshot,
+   SnapshotVolumeType,
+   UpdateInstanceRequest,
+diff --git a/packages_generated/qaas/src/v1alpha1/api.gen.ts b/packages_generated/qaas/src/v1alpha1/api.gen.ts
+index 2195be7e..13f63c59 100644
+--- a/packages_generated/qaas/src/v1alpha1/api.gen.ts
++++ b/packages_generated/qaas/src/v1alpha1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   resolveOneOf,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   BOOKING_TRANSIENT_STATUSES as BOOKING_TRANSIENT_STATUSES_QAAS,
+   JOB_TRANSIENT_STATUSES as JOB_TRANSIENT_STATUSES_QAAS,
+@@ -32,8 +33,8 @@ import {
+   unmarshalListJobResultsResponse,
+   unmarshalListJobsResponse,
+   unmarshalListPlatformsResponse,
+-  unmarshalListProcessResultsResponse,
+   unmarshalListProcessesResponse,
++  unmarshalListProcessResultsResponse,
+   unmarshalListSessionACLsResponse,
+   unmarshalListSessionsResponse,
+   unmarshalPlatform,
+@@ -70,10 +71,10 @@ import type {
+   ListJobsResponse,
+   ListPlatformsRequest,
+   ListPlatformsResponse,
+-  ListProcessResultsRequest,
+-  ListProcessResultsResponse,
+   ListProcessesRequest,
+   ListProcessesResponse,
++  ListProcessResultsRequest,
++  ListProcessResultsResponse,
+   ListSessionACLsRequest,
+   ListSessionACLsResponse,
+   ListSessionsRequest,
+diff --git a/packages_generated/qaas/src/v1alpha1/marshalling.gen.ts b/packages_generated/qaas/src/v1alpha1/marshalling.gen.ts
+index 8099b02b..9e1dfe70 100644
+--- a/packages_generated/qaas/src/v1alpha1/marshalling.gen.ts
++++ b/packages_generated/qaas/src/v1alpha1/marshalling.gen.ts
+@@ -1,5 +1,7 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+@@ -7,7 +9,6 @@ import {
+   unmarshalDate,
+   unmarshalMoney,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   Application,
+   Booking,
+@@ -23,8 +24,8 @@ import type {
+   ListJobResultsResponse,
+   ListJobsResponse,
+   ListPlatformsResponse,
+-  ListProcessResultsResponse,
+   ListProcessesResponse,
++  ListProcessResultsResponse,
+   ListSessionACLsResponse,
+   ListSessionsResponse,
+   Platform,
+diff --git a/packages_generated/rdb/src/v1/api.gen.ts b/packages_generated/rdb/src/v1/api.gen.ts
+index 594c42b9..1299d864 100644
+--- a/packages_generated/rdb/src/v1/api.gen.ts
++++ b/packages_generated/rdb/src/v1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   DATABASE_BACKUP_TRANSIENT_STATUSES as DATABASE_BACKUP_TRANSIENT_STATUSES_RDB,
+   INSTANCE_LOG_TRANSIENT_STATUSES as INSTANCE_LOG_TRANSIENT_STATUSES_RDB,
+diff --git a/packages_generated/rdb/src/v1/marshalling.gen.ts b/packages_generated/rdb/src/v1/marshalling.gen.ts
+index dd8895fc..63027b30 100644
+--- a/packages_generated/rdb/src/v1/marshalling.gen.ts
++++ b/packages_generated/rdb/src/v1/marshalling.gen.ts
+@@ -1,6 +1,7 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+@@ -8,7 +9,6 @@ import {
+   unmarshalDate,
+   unmarshalTimeSeries,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   ACLRule,
+   ACLRuleRequest,
+diff --git a/packages_generated/redis/src/v1/api.gen.ts b/packages_generated/redis/src/v1/api.gen.ts
+index 0eec685a..959bdac6 100644
+--- a/packages_generated/redis/src/v1/api.gen.ts
++++ b/packages_generated/redis/src/v1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import { CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_REDIS } from './content.gen'
+ import {
+   marshalAddAclRulesRequest,
+@@ -28,8 +29,8 @@ import {
+   unmarshalClusterMetricsResponse,
+   unmarshalClusterSettingsResponse,
+   unmarshalEndpoint,
+-  unmarshalListClusterVersionsResponse,
+   unmarshalListClustersResponse,
++  unmarshalListClusterVersionsResponse,
+   unmarshalListNodeTypesResponse,
+   unmarshalSetAclRulesResponse,
+   unmarshalSetEndpointsResponse,
+@@ -55,10 +56,10 @@ import type {
+   GetClusterMetricsRequest,
+   GetClusterRequest,
+   GetEndpointRequest,
+-  ListClusterVersionsRequest,
+-  ListClusterVersionsResponse,
+   ListClustersRequest,
+   ListClustersResponse,
++  ListClusterVersionsRequest,
++  ListClusterVersionsResponse,
+   ListNodeTypesRequest,
+   ListNodeTypesResponse,
+   MigrateClusterRequest,
+diff --git a/packages_generated/redis/src/v1/marshalling.gen.ts b/packages_generated/redis/src/v1/marshalling.gen.ts
+index 730dbce2..3c41c43b 100644
+--- a/packages_generated/redis/src/v1/marshalling.gen.ts
++++ b/packages_generated/redis/src/v1/marshalling.gen.ts
+@@ -1,6 +1,7 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+@@ -8,7 +9,6 @@ import {
+   unmarshalDate,
+   unmarshalTimeSeries,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   ACLRule,
+   ACLRuleSpec,
+@@ -29,8 +29,8 @@ import type {
+   EndpointSpecPrivateNetworkSpec,
+   EndpointSpecPrivateNetworkSpecIpamConfig,
+   EndpointSpecPublicNetworkSpec,
+-  ListClusterVersionsResponse,
+   ListClustersResponse,
++  ListClusterVersionsResponse,
+   ListNodeTypesResponse,
+   MigrateClusterRequest,
+   NodeType,
+diff --git a/packages_generated/registry/src/v1/api.gen.ts b/packages_generated/registry/src/v1/api.gen.ts
+index c86861b3..39154d3c 100644
+--- a/packages_generated/registry/src/v1/api.gen.ts
++++ b/packages_generated/registry/src/v1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   IMAGE_TRANSIENT_STATUSES as IMAGE_TRANSIENT_STATUSES_REGISTRY,
+   NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_REGISTRY,
+diff --git a/packages_generated/registry/src/v1/marshalling.gen.ts b/packages_generated/registry/src/v1/marshalling.gen.ts
+index a3c69ee2..2a07cb86 100644
+--- a/packages_generated/registry/src/v1/marshalling.gen.ts
++++ b/packages_generated/registry/src/v1/marshalling.gen.ts
+@@ -1,13 +1,13 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   CreateNamespaceRequest,
+   Image,
+diff --git a/packages_generated/secret/src/v1beta1/api.gen.ts b/packages_generated/secret/src/v1beta1/api.gen.ts
+index 7fc2b8d0..8ddca4d3 100644
+--- a/packages_generated/secret/src/v1beta1/api.gen.ts
++++ b/packages_generated/secret/src/v1beta1/api.gen.ts
+@@ -1,13 +1,14 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality } from '@scaleway/sdk-client'
+ import {
+   marshalAddSecretOwnerRequest,
+   marshalCreateSecretRequest,
+@@ -16,9 +17,9 @@ import {
+   marshalUpdateSecretVersionRequest,
+   unmarshalAccessSecretVersionResponse,
+   unmarshalBrowseSecretsResponse,
++  unmarshalListSecretsResponse,
+   unmarshalListSecretTypesResponse,
+   unmarshalListSecretVersionsResponse,
+-  unmarshalListSecretsResponse,
+   unmarshalListTagsResponse,
+   unmarshalSecret,
+   unmarshalSecretVersion,
+@@ -38,12 +39,12 @@ import type {
+   EnableSecretVersionRequest,
+   GetSecretRequest,
+   GetSecretVersionRequest,
++  ListSecretsRequest,
++  ListSecretsResponse,
+   ListSecretTypesRequest,
+   ListSecretTypesResponse,
+   ListSecretVersionsRequest,
+   ListSecretVersionsResponse,
+-  ListSecretsRequest,
+-  ListSecretsResponse,
+   ListTagsRequest,
+   ListTagsResponse,
+   ProtectSecretRequest,
+diff --git a/packages_generated/secret/src/v1beta1/marshalling.gen.ts b/packages_generated/secret/src/v1beta1/marshalling.gen.ts
+index 1ba736dd..ba71e579 100644
+--- a/packages_generated/secret/src/v1beta1/marshalling.gen.ts
++++ b/packages_generated/secret/src/v1beta1/marshalling.gen.ts
+@@ -1,11 +1,12 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   AccessSecretVersionResponse,
+   AddSecretOwnerRequest,
+@@ -17,9 +18,9 @@ import type {
+   CreateSecretVersionRequest,
+   EphemeralPolicy,
+   EphemeralProperties,
++  ListSecretsResponse,
+   ListSecretTypesResponse,
+   ListSecretVersionsResponse,
+-  ListSecretsResponse,
+   ListTagsResponse,
+   Secret,
+   SecretVersion,
+diff --git a/packages_generated/serverless_sqldb/src/v1alpha1/api.gen.ts b/packages_generated/serverless_sqldb/src/v1alpha1/api.gen.ts
+index add4cb95..35aa1712 100644
+--- a/packages_generated/serverless_sqldb/src/v1alpha1/api.gen.ts
++++ b/packages_generated/serverless_sqldb/src/v1alpha1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import { DATABASE_TRANSIENT_STATUSES as DATABASE_TRANSIENT_STATUSES_SERVERLESS_SQLDB } from './content.gen'
+ import {
+   marshalCreateDatabaseRequest,
+diff --git a/packages_generated/serverless_sqldb/src/v1alpha1/marshalling.gen.ts b/packages_generated/serverless_sqldb/src/v1alpha1/marshalling.gen.ts
+index 914e6443..0b1ab631 100644
+--- a/packages_generated/serverless_sqldb/src/v1alpha1/marshalling.gen.ts
++++ b/packages_generated/serverless_sqldb/src/v1alpha1/marshalling.gen.ts
+@@ -1,11 +1,12 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   CreateDatabaseRequest,
+   Database,
+diff --git a/packages_generated/tem/src/v1alpha1/api.gen.ts b/packages_generated/tem/src/v1alpha1/api.gen.ts
+index 6bf49f9e..b2258fb5 100644
+--- a/packages_generated/tem/src/v1alpha1/api.gen.ts
++++ b/packages_generated/tem/src/v1alpha1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_TEM,
+   EMAIL_TRANSIENT_STATUSES as EMAIL_TRANSIENT_STATUSES_TEM,
+diff --git a/packages_generated/tem/src/v1alpha1/marshalling.gen.ts b/packages_generated/tem/src/v1alpha1/marshalling.gen.ts
+index 018c0b90..f8b70745 100644
+--- a/packages_generated/tem/src/v1alpha1/marshalling.gen.ts
++++ b/packages_generated/tem/src/v1alpha1/marshalling.gen.ts
+@@ -1,11 +1,12 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   Blocklist,
+   BulkCreateBlocklistsRequest,
+diff --git a/packages_generated/test/src/v1/api.gen.ts b/packages_generated/test/src/v1/api.gen.ts
+index 5b711637..f0043c99 100644
+--- a/packages_generated/test/src/v1/api.gen.ts
++++ b/packages_generated/test/src/v1/api.gen.ts
+@@ -1,13 +1,14 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { WaitForOptions } from '@scaleway/sdk-client'
+ import { HUMAN_TRANSIENT_STATUSES as HUMAN_TRANSIENT_STATUSES_TEST } from './content.gen'
+ import {
+   marshalCreateHumanRequest,
+diff --git a/packages_generated/test/src/v1/marshalling.gen.ts b/packages_generated/test/src/v1/marshalling.gen.ts
+index 648ee594..7c4c901c 100644
+--- a/packages_generated/test/src/v1/marshalling.gen.ts
++++ b/packages_generated/test/src/v1/marshalling.gen.ts
+@@ -1,12 +1,13 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   CreateHumanRequest,
+   Human,
+diff --git a/packages_generated/vpc/src/v2/api.gen.ts b/packages_generated/vpc/src/v2/api.gen.ts
+index ff363687..3a3dcabc 100644
+--- a/packages_generated/vpc/src/v2/api.gen.ts
++++ b/packages_generated/vpc/src/v2/api.gen.ts
+@@ -1,13 +1,14 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality } from '@scaleway/sdk-client'
+ import {
+   marshalAddSubnetsRequest,
+   marshalCreatePrivateNetworkRequest,
+diff --git a/packages_generated/vpc/src/v2/marshalling.gen.ts b/packages_generated/vpc/src/v2/marshalling.gen.ts
+index d19e2a59..ce68b253 100644
+--- a/packages_generated/vpc/src/v2/marshalling.gen.ts
++++ b/packages_generated/vpc/src/v2/marshalling.gen.ts
+@@ -1,12 +1,12 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   AclRule,
+   AddSubnetsRequest,
+diff --git a/packages_generated/vpcgw/src/v1/api.gen.ts b/packages_generated/vpcgw/src/v1/api.gen.ts
+index 8c468923..5f7379ed 100644
+--- a/packages_generated/vpcgw/src/v1/api.gen.ts
++++ b/packages_generated/vpcgw/src/v1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   GATEWAY_NETWORK_TRANSIENT_STATUSES as GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW,
+   GATEWAY_TRANSIENT_STATUSES as GATEWAY_TRANSIENT_STATUSES_VPCGW,
+@@ -37,8 +38,8 @@ import {
+   unmarshalListDHCPEntriesResponse,
+   unmarshalListDHCPsResponse,
+   unmarshalListGatewayNetworksResponse,
+-  unmarshalListGatewayTypesResponse,
+   unmarshalListGatewaysResponse,
++  unmarshalListGatewayTypesResponse,
+   unmarshalListIPsResponse,
+   unmarshalListPATRulesResponse,
+   unmarshalPATRule,
+@@ -52,14 +53,14 @@ import type {
+   CreateGatewayRequest,
+   CreateIPRequest,
+   CreatePATRuleRequest,
+-  DHCP,
+-  DHCPEntry,
+   DeleteDHCPEntryRequest,
+   DeleteDHCPRequest,
+   DeleteGatewayNetworkRequest,
+   DeleteGatewayRequest,
+   DeleteIPRequest,
+   DeletePATRuleRequest,
++  DHCP,
++  DHCPEntry,
+   EnableIPMobilityRequest,
+   Gateway,
+   GatewayNetwork,
+@@ -76,10 +77,10 @@ import type {
+   ListDHCPsResponse,
+   ListGatewayNetworksRequest,
+   ListGatewayNetworksResponse,
+-  ListGatewayTypesRequest,
+-  ListGatewayTypesResponse,
+   ListGatewaysRequest,
+   ListGatewaysResponse,
++  ListGatewayTypesRequest,
++  ListGatewayTypesResponse,
+   ListIPsRequest,
+   ListIPsResponse,
+   ListPATRulesRequest,
+diff --git a/packages_generated/vpcgw/src/v1/marshalling.gen.ts b/packages_generated/vpcgw/src/v1/marshalling.gen.ts
+index 183e35fe..1715e758 100644
+--- a/packages_generated/vpcgw/src/v1/marshalling.gen.ts
++++ b/packages_generated/vpcgw/src/v1/marshalling.gen.ts
+@@ -1,13 +1,13 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   CreateDHCPEntryRequest,
+   CreateDHCPRequest,
+@@ -26,8 +26,8 @@ import type {
+   ListDHCPEntriesResponse,
+   ListDHCPsResponse,
+   ListGatewayNetworksResponse,
+-  ListGatewayTypesResponse,
+   ListGatewaysResponse,
++  ListGatewayTypesResponse,
+   ListIPsResponse,
+   ListPATRulesResponse,
+   PATRule,
+diff --git a/packages_generated/vpcgw/src/v2/api.gen.ts b/packages_generated/vpcgw/src/v2/api.gen.ts
+index 6a9dee7b..1cb2dbe3 100644
+--- a/packages_generated/vpcgw/src/v2/api.gen.ts
++++ b/packages_generated/vpcgw/src/v2/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   GATEWAY_NETWORK_TRANSIENT_STATUSES as GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW,
+   GATEWAY_TRANSIENT_STATUSES as GATEWAY_TRANSIENT_STATUSES_VPCGW,
+@@ -31,8 +32,8 @@ import {
+   unmarshalGatewayNetwork,
+   unmarshalIP,
+   unmarshalListGatewayNetworksResponse,
+-  unmarshalListGatewayTypesResponse,
+   unmarshalListGatewaysResponse,
++  unmarshalListGatewayTypesResponse,
+   unmarshalListIPsResponse,
+   unmarshalListPatRulesResponse,
+   unmarshalPatRule,
+@@ -60,10 +61,10 @@ import type {
+   IP,
+   ListGatewayNetworksRequest,
+   ListGatewayNetworksResponse,
+-  ListGatewayTypesRequest,
+-  ListGatewayTypesResponse,
+   ListGatewaysRequest,
+   ListGatewaysResponse,
++  ListGatewayTypesRequest,
++  ListGatewayTypesResponse,
+   ListIPsRequest,
+   ListIPsResponse,
+   ListPatRulesRequest,
+diff --git a/packages_generated/vpcgw/src/v2/marshalling.gen.ts b/packages_generated/vpcgw/src/v2/marshalling.gen.ts
+index a9c2844e..1bccc1ca 100644
+--- a/packages_generated/vpcgw/src/v2/marshalling.gen.ts
++++ b/packages_generated/vpcgw/src/v2/marshalling.gen.ts
+@@ -1,12 +1,12 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
+ import randomName from '@scaleway/random-name'
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   unmarshalArrayOfObject,
+   unmarshalDate,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   AddBastionAllowedIPsRequest,
+   AddBastionAllowedIPsResponse,
+@@ -19,8 +19,8 @@ import type {
+   GatewayType,
+   IP,
+   ListGatewayNetworksResponse,
+-  ListGatewayTypesResponse,
+   ListGatewaysResponse,
++  ListGatewayTypesResponse,
+   ListIPsResponse,
+   ListPatRulesResponse,
+   PatRule,
+diff --git a/packages_generated/webhosting/src/v1/api.gen.ts b/packages_generated/webhosting/src/v1/api.gen.ts
+index 0c8e4cc0..bd9c486a 100644
+--- a/packages_generated/webhosting/src/v1/api.gen.ts
++++ b/packages_generated/webhosting/src/v1/api.gen.ts
+@@ -1,14 +1,15 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+-  API as ParentAPI,
+   enrichForPagination,
++  API as ParentAPI,
+   toApiLocality,
+   urlParams,
+   validatePathParam,
+   waitForResource,
+ } from '@scaleway/sdk-client'
+-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+ import {
+   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_WEBHOSTING,
+   HOSTING_TRANSIENT_STATUSES as HOSTING_TRANSIENT_STATUSES_WEBHOSTING,
+@@ -36,8 +37,8 @@ import {
+   unmarshalFtpAccount,
+   unmarshalHosting,
+   unmarshalListControlPanelsResponse,
+-  unmarshalListDatabaseUsersResponse,
+   unmarshalListDatabasesResponse,
++  unmarshalListDatabaseUsersResponse,
+   unmarshalListFtpAccountsResponse,
+   unmarshalListHostingsResponse,
+   unmarshalListMailAccountsResponse,
+@@ -61,8 +62,8 @@ import type {
+   DatabaseApiDeleteDatabaseUserRequest,
+   DatabaseApiGetDatabaseRequest,
+   DatabaseApiGetDatabaseUserRequest,
+-  DatabaseApiListDatabaseUsersRequest,
+   DatabaseApiListDatabasesRequest,
++  DatabaseApiListDatabaseUsersRequest,
+   DatabaseApiUnassignDatabaseUserRequest,
+   DatabaseUser,
+   DnsApiCheckUserOwnsDomainRequest,
+@@ -87,8 +88,8 @@ import type {
+   HostingApiResetHostingPasswordRequest,
+   HostingApiUpdateHostingRequest,
+   ListControlPanelsResponse,
+-  ListDatabaseUsersResponse,
+   ListDatabasesResponse,
++  ListDatabaseUsersResponse,
+   ListFtpAccountsResponse,
+   ListHostingsResponse,
+   ListMailAccountsResponse,
+diff --git a/packages_generated/webhosting/src/v1/content.gen.ts b/packages_generated/webhosting/src/v1/content.gen.ts
+index 405473bb..f666805d 100644
+--- a/packages_generated/webhosting/src/v1/content.gen.ts
++++ b/packages_generated/webhosting/src/v1/content.gen.ts
+@@ -18,4 +18,5 @@ export const HOSTING_TRANSIENT_STATUSES: HostingStatus[] = [
+   'delivering',
+   'deleting',
+   'migrating',
++  'updating',
+ ]
+diff --git a/packages_generated/webhosting/src/v1/marshalling.gen.ts b/packages_generated/webhosting/src/v1/marshalling.gen.ts
+index fcc664d9..c2650fc3 100644
+--- a/packages_generated/webhosting/src/v1/marshalling.gen.ts
++++ b/packages_generated/webhosting/src/v1/marshalling.gen.ts
+@@ -1,5 +1,7 @@
+ // This file was automatically generated. DO NOT EDIT.
+ // If you have any remark or suggestion do not hesitate to open an issue.
++
++import type { DefaultValues } from '@scaleway/sdk-client'
+ import {
+   isJSONObject,
+   resolveOneOf,
+@@ -7,7 +9,6 @@ import {
+   unmarshalDate,
+   unmarshalMoney,
+ } from '@scaleway/sdk-client'
+-import type { DefaultValues } from '@scaleway/sdk-client'
+ import type {
+   AutoConfigDomainDns,
+   CheckUserOwnsDomainResponse,
+@@ -36,8 +37,8 @@ import type {
+   HostingSummary,
+   HostingUser,
+   ListControlPanelsResponse,
+-  ListDatabaseUsersResponse,
+   ListDatabasesResponse,
++  ListDatabaseUsersResponse,
+   ListFtpAccountsResponse,
+   ListHostingsResponse,
+   ListMailAccountsResponse,
+diff --git a/packages_generated/webhosting/src/v1/types.gen.ts b/packages_generated/webhosting/src/v1/types.gen.ts
+index 2f65c051..780dc352 100644
+--- a/packages_generated/webhosting/src/v1/types.gen.ts
++++ b/packages_generated/webhosting/src/v1/types.gen.ts
+@@ -66,6 +66,7 @@ export type HostingStatus =
+   | 'error'
+   | 'locked'
+   | 'migrating'
++  | 'updating'
+ 
+ export type ListDatabaseUsersRequestOrderBy = 'username_asc' | 'username_desc'
+ 

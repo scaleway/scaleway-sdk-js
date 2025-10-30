@@ -1,0 +1,7 @@
+import type { DefaultValues } from '@scaleway/sdk-client';
+import type { CreateFileSystemRequest, FileSystem, ListAttachmentsResponse, ListFileSystemsResponse, UpdateFileSystemRequest } from './types.gen';
+export declare const unmarshalFileSystem: (data: unknown) => FileSystem;
+export declare const unmarshalListAttachmentsResponse: (data: unknown) => ListAttachmentsResponse;
+export declare const unmarshalListFileSystemsResponse: (data: unknown) => ListFileSystemsResponse;
+export declare const marshalCreateFileSystemRequest: (request: CreateFileSystemRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateFileSystemRequest: (request: UpdateFileSystemRequest, defaults: DefaultValues) => Record<string, unknown>;

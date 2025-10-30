@@ -1,0 +1,18 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { ListPublicCatalogProductsResponse, PublicCatalogApiListPublicCatalogProductsRequest } from './types.gen';
+/**
+ * Product Catalog API.
+ */
+export declare class PublicCatalogAPI extends ParentAPI {
+    protected pageOfListPublicCatalogProducts: (request?: Readonly<PublicCatalogApiListPublicCatalogProductsRequest>) => Promise<ListPublicCatalogProductsResponse>;
+    /**
+     * List all available products. List all available products in the Scaleway catalog. Returns a complete list of products with their corresponding description, locations, prices and properties. You can define the `page` number and `page_size` for your query in the request.
+     *
+     * @param request - The request {@link PublicCatalogApiListPublicCatalogProductsRequest}
+     * @returns A Promise of ListPublicCatalogProductsResponse
+     */
+    listPublicCatalogProducts: (request?: Readonly<PublicCatalogApiListPublicCatalogProductsRequest>) => Promise<ListPublicCatalogProductsResponse> & {
+        all: () => Promise<import("./types.gen").PublicCatalogProduct[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").PublicCatalogProduct[], void, void>;
+    };
+}

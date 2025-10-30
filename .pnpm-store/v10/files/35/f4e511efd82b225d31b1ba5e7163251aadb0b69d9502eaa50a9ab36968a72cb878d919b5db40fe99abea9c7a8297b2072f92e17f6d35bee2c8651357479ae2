@@ -1,0 +1,182 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { ApiLocality } from '@scaleway/sdk-client';
+import type { AccessSecretVersionByPathRequest, AccessSecretVersionRequest, AccessSecretVersionResponse, AddSecretOwnerRequest, BrowseSecretsRequest, BrowseSecretsResponse, CreateSecretRequest, CreateSecretVersionRequest, DeleteSecretRequest, DeleteSecretVersionRequest, DisableSecretVersionRequest, EnableSecretVersionRequest, GetSecretRequest, GetSecretVersionRequest, ListSecretTypesRequest, ListSecretTypesResponse, ListSecretVersionsRequest, ListSecretVersionsResponse, ListSecretsRequest, ListSecretsResponse, ListTagsRequest, ListTagsResponse, ProtectSecretRequest, RestoreSecretRequest, RestoreSecretVersionRequest, Secret, SecretVersion, UnprotectSecretRequest, UpdateSecretRequest, UpdateSecretVersionRequest } from './types.gen';
+/**
+ * Secret Manager API.
+
+This API allows you to manage your Secret Manager services, for storing, accessing and sharing sensitive data such as passwords, API keys and certificates.
+ */
+export declare class API extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    /**
+     * Create a secret. Create a secret in a given region specified by the `region` parameter.
+     *
+     * @param request - The request {@link CreateSecretRequest}
+     * @returns A Promise of Secret
+     */
+    createSecret: (request: Readonly<CreateSecretRequest>) => Promise<Secret>;
+    /**
+     * Get metadata using the secret's ID. Retrieve the metadata of a secret specified by the `region` and `secret_id` parameters.
+     *
+     * @param request - The request {@link GetSecretRequest}
+     * @returns A Promise of Secret
+     */
+    getSecret: (request: Readonly<GetSecretRequest>) => Promise<Secret>;
+    /**
+     * Update metadata of a secret. Edit a secret's metadata such as name, tag(s), description and ephemeral policy. The secret to update is specified by the `secret_id` and `region` parameters.
+     *
+     * @param request - The request {@link UpdateSecretRequest}
+     * @returns A Promise of Secret
+     */
+    updateSecret: (request: Readonly<UpdateSecretRequest>) => Promise<Secret>;
+    /**
+     * Delete a secret. Delete a given secret specified by the `region` and `secret_id` parameters.
+     *
+     * @param request - The request {@link DeleteSecretRequest}
+     */
+    deleteSecret: (request: Readonly<DeleteSecretRequest>) => Promise<void>;
+    protected pageOfListSecrets: (request: Readonly<ListSecretsRequest>) => Promise<ListSecretsResponse>;
+    /**
+     * List secrets. Retrieve the list of secrets created within an Organization and/or Project. You must specify either the `organization_id` or the `project_id` and the `region`.
+     *
+     * @param request - The request {@link ListSecretsRequest}
+     * @returns A Promise of ListSecretsResponse
+     */
+    listSecrets: (request: Readonly<ListSecretsRequest>) => Promise<ListSecretsResponse> & {
+        all: () => Promise<Secret[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Secret[], void, void>;
+    };
+    /**
+     * Browse secrets. Retrieve the list of secrets and folders for the given prefix. You must specify either the `organization_id` or the `project_id` and the `region`.
+     *
+     * @param request - The request {@link BrowseSecretsRequest}
+     * @returns A Promise of BrowseSecretsResponse
+     */
+    browseSecrets: (request: Readonly<BrowseSecretsRequest>) => Promise<BrowseSecretsResponse>;
+    /**
+     * Enable secret protection. Enable secret protection for a given secret specified by the `secret_id` parameter. Enabling secret protection means that your secret can be read and modified, but it cannot be deleted.
+     *
+     * @param request - The request {@link ProtectSecretRequest}
+     * @returns A Promise of Secret
+     */
+    protectSecret: (request: Readonly<ProtectSecretRequest>) => Promise<Secret>;
+    /**
+     * Disable secret protection. Disable secret protection for a given secret specified by the `secret_id` parameter. Disabling secret protection means that your secret can be read, modified and deleted.
+     *
+     * @param request - The request {@link UnprotectSecretRequest}
+     * @returns A Promise of Secret
+     */
+    unprotectSecret: (request: Readonly<UnprotectSecretRequest>) => Promise<Secret>;
+    /**
+     * Allow a product to use the secret.
+     *
+     * @param request - The request {@link AddSecretOwnerRequest}
+     */
+    addSecretOwner: (request: Readonly<AddSecretOwnerRequest>) => Promise<void>;
+    /**
+     * Create a version. Create a version of a given secret specified by the `region` and `secret_id` parameters.
+     *
+     * @param request - The request {@link CreateSecretVersionRequest}
+     * @returns A Promise of SecretVersion
+     */
+    createSecretVersion: (request: Readonly<CreateSecretVersionRequest>) => Promise<SecretVersion>;
+    /**
+     * Get metadata of a secret's version using the secret's ID. Retrieve the metadata of a secret's given version specified by the `region`, `secret_id` and `revision` parameters.
+     *
+     * @param request - The request {@link GetSecretVersionRequest}
+     * @returns A Promise of SecretVersion
+     */
+    getSecretVersion: (request: Readonly<GetSecretVersionRequest>) => Promise<SecretVersion>;
+    /**
+     * Update metadata of a version. Edit the metadata of a secret's given version, specified by the `region`, `secret_id` and `revision` parameters.
+     *
+     * @param request - The request {@link UpdateSecretVersionRequest}
+     * @returns A Promise of SecretVersion
+     */
+    updateSecretVersion: (request: Readonly<UpdateSecretVersionRequest>) => Promise<SecretVersion>;
+    /**
+     * Delete a version. Delete a secret's version and the sensitive data contained in it. Deleting a version is permanent and cannot be undone.
+     *
+     * @param request - The request {@link DeleteSecretVersionRequest}
+     */
+    deleteSecretVersion: (request: Readonly<DeleteSecretVersionRequest>) => Promise<void>;
+    protected pageOfListSecretVersions: (request: Readonly<ListSecretVersionsRequest>) => Promise<ListSecretVersionsResponse>;
+    /**
+     * List versions of a secret using the secret's ID. Retrieve the list of a given secret's versions specified by the `secret_id` and `region` parameters.
+     *
+     * @param request - The request {@link ListSecretVersionsRequest}
+     * @returns A Promise of ListSecretVersionsResponse
+     */
+    listSecretVersions: (request: Readonly<ListSecretVersionsRequest>) => Promise<ListSecretVersionsResponse> & {
+        all: () => Promise<SecretVersion[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<SecretVersion[], void, void>;
+    };
+    /**
+     * Access a secret's version using the secret's ID. Access sensitive data in a secret's version specified by the `region`, `secret_id` and `revision` parameters.
+     *
+     * @param request - The request {@link AccessSecretVersionRequest}
+     * @returns A Promise of AccessSecretVersionResponse
+     */
+    accessSecretVersion: (request: Readonly<AccessSecretVersionRequest>) => Promise<AccessSecretVersionResponse>;
+    /**
+     * Access a secret's version using the secret's name and path. Access sensitive data in a secret's version specified by the `region`, `secret_name`, `secret_path` and `revision` parameters.
+     *
+     * @param request - The request {@link AccessSecretVersionByPathRequest}
+     * @returns A Promise of AccessSecretVersionResponse
+     */
+    accessSecretVersionByPath: (request: Readonly<AccessSecretVersionByPathRequest>) => Promise<AccessSecretVersionResponse>;
+    /**
+     * Enable a version. Make a specific version accessible. You must specify the `region`, `secret_id` and `revision` parameters.
+     *
+     * @param request - The request {@link EnableSecretVersionRequest}
+     * @returns A Promise of SecretVersion
+     */
+    enableSecretVersion: (request: Readonly<EnableSecretVersionRequest>) => Promise<SecretVersion>;
+    /**
+     * Disable a version. Make a specific version inaccessible. You must specify the `region`, `secret_id` and `revision` parameters.
+     *
+     * @param request - The request {@link DisableSecretVersionRequest}
+     * @returns A Promise of SecretVersion
+     */
+    disableSecretVersion: (request: Readonly<DisableSecretVersionRequest>) => Promise<SecretVersion>;
+    protected pageOfListTags: (request?: Readonly<ListTagsRequest>) => Promise<ListTagsResponse>;
+    /**
+     * List tags. List all tags associated with secrets within a given Project.
+     *
+     * @param request - The request {@link ListTagsRequest}
+     * @returns A Promise of ListTagsResponse
+     */
+    listTags: (request?: Readonly<ListTagsRequest>) => Promise<ListTagsResponse> & {
+        all: () => Promise<string[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<string[], void, void>;
+    };
+    protected pageOfListSecretTypes: (request?: Readonly<ListSecretTypesRequest>) => Promise<ListSecretTypesResponse>;
+    /**
+     * List secret types. List all secret types created within a given Project.
+     *
+     * @param request - The request {@link ListSecretTypesRequest}
+     * @returns A Promise of ListSecretTypesResponse
+     */
+    listSecretTypes: (request?: Readonly<ListSecretTypesRequest>) => Promise<ListSecretTypesResponse> & {
+        all: () => Promise<import("./types.gen").SecretType[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").SecretType[], void, void>;
+    };
+    /**
+     * Restore a version. Restore a secret's version specified by the `region`, `secret_id` and `revision` parameters.
+     *
+     * @param request - The request {@link RestoreSecretVersionRequest}
+     * @returns A Promise of SecretVersion
+     */
+    restoreSecretVersion: (request: Readonly<RestoreSecretVersionRequest>) => Promise<SecretVersion>;
+    /**
+     * Restore a secret. Restore a secret and all its versions scheduled for deletion specified by the `region` and `secret_id` parameters.
+     *
+     * @param request - The request {@link RestoreSecretRequest}
+     * @returns A Promise of Secret
+     */
+    restoreSecret: (request: Readonly<RestoreSecretRequest>) => Promise<Secret>;
+}

@@ -1,0 +1,82 @@
+const ControlPanelApiListControlPanelsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const DatabaseApiListDatabaseUsersRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const DatabaseApiListDatabasesRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const FtpAccountApiListFtpAccountsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const HostingApiListHostingsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const MailAccountApiListMailAccountsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const OfferApiListOffersRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const WebsiteApiListWebsitesRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+export {
+  ControlPanelApiListControlPanelsRequest,
+  DatabaseApiListDatabaseUsersRequest,
+  DatabaseApiListDatabasesRequest,
+  FtpAccountApiListFtpAccountsRequest,
+  HostingApiListHostingsRequest,
+  MailAccountApiListMailAccountsRequest,
+  OfferApiListOffersRequest,
+  WebsiteApiListWebsitesRequest
+};

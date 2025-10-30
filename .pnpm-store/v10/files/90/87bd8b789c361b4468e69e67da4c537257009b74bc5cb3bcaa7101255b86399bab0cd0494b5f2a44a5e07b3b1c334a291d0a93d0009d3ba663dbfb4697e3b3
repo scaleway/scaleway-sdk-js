@@ -1,0 +1,8 @@
+class API {
+  constructor(client) {
+    this.client = client;
+  }
+}
+export {
+  API
+};

@@ -1,0 +1,114 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalMACAddress = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'MACAddress' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    id: data.id,
+    macAddress: data.mac_address,
+    macType: data.mac_type,
+    status: data.status,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalFlexibleIP = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'FlexibleIP' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    description: data.description,
+    id: data.id,
+    ipAddress: data.ip_address,
+    macAddress: data.mac_address ? unmarshalMACAddress(data.mac_address) : void 0,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    reverse: data.reverse,
+    serverId: data.server_id,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalAttachFlexibleIPsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AttachFlexibleIPsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    flexibleIps: sdkClient.unmarshalArrayOfObject(data.flexible_ips, unmarshalFlexibleIP),
+    totalCount: data.total_count
+  };
+};
+const unmarshalDetachFlexibleIPsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DetachFlexibleIPsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    flexibleIps: sdkClient.unmarshalArrayOfObject(data.flexible_ips, unmarshalFlexibleIP),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListFlexibleIPsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListFlexibleIPsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    flexibleIps: sdkClient.unmarshalArrayOfObject(data.flexible_ips, unmarshalFlexibleIP),
+    totalCount: data.total_count
+  };
+};
+const marshalAttachFlexibleIPRequest = (request, defaults) => ({
+  fips_ids: request.fipsIds,
+  server_id: request.serverId
+});
+const marshalCreateFlexibleIPRequest = (request, defaults) => ({
+  description: request.description,
+  is_ipv6: request.isIpv6,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  reverse: request.reverse,
+  server_id: request.serverId,
+  tags: request.tags
+});
+const marshalDetachFlexibleIPRequest = (request, defaults) => ({
+  fips_ids: request.fipsIds
+});
+const marshalDuplicateMACAddrRequest = (request, defaults) => ({
+  duplicate_from_fip_id: request.duplicateFromFipId
+});
+const marshalGenerateMACAddrRequest = (request, defaults) => ({
+  mac_type: request.macType
+});
+const marshalMoveMACAddrRequest = (request, defaults) => ({
+  dst_fip_id: request.dstFipId
+});
+const marshalUpdateFlexibleIPRequest = (request, defaults) => ({
+  description: request.description,
+  reverse: request.reverse,
+  tags: request.tags
+});
+exports.marshalAttachFlexibleIPRequest = marshalAttachFlexibleIPRequest;
+exports.marshalCreateFlexibleIPRequest = marshalCreateFlexibleIPRequest;
+exports.marshalDetachFlexibleIPRequest = marshalDetachFlexibleIPRequest;
+exports.marshalDuplicateMACAddrRequest = marshalDuplicateMACAddrRequest;
+exports.marshalGenerateMACAddrRequest = marshalGenerateMACAddrRequest;
+exports.marshalMoveMACAddrRequest = marshalMoveMACAddrRequest;
+exports.marshalUpdateFlexibleIPRequest = marshalUpdateFlexibleIPRequest;
+exports.unmarshalAttachFlexibleIPsResponse = unmarshalAttachFlexibleIPsResponse;
+exports.unmarshalDetachFlexibleIPsResponse = unmarshalDetachFlexibleIPsResponse;
+exports.unmarshalFlexibleIP = unmarshalFlexibleIP;
+exports.unmarshalListFlexibleIPsResponse = unmarshalListFlexibleIPsResponse;

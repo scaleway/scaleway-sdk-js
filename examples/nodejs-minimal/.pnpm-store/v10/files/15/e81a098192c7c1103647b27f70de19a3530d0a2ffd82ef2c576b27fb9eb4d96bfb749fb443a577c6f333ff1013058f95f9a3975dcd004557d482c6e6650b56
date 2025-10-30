@@ -1,0 +1,626 @@
+const AttachFailoverIPToMacAddressRequest = {
+  ipId: {
+    greaterThan: 0
+  }
+};
+const AttachFailoverIPsRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const BillingApiDownloadInvoiceRequest = {
+  invoiceId: {
+    greaterThan: 0
+  }
+};
+const BillingApiDownloadRefundRequest = {
+  refundId: {
+    greaterThan: 0
+  }
+};
+const BillingApiGetInvoiceRequest = {
+  invoiceId: {
+    greaterThan: 0
+  }
+};
+const BillingApiGetRefundRequest = {
+  refundId: {
+    greaterThan: 0
+  }
+};
+const BillingApiListInvoicesRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const BillingApiListRefundsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const CancelServerInstallRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const DeleteFailoverIPRequest = {
+  ipId: {
+    greaterThan: 0
+  }
+};
+const DeleteServerRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const DeleteServiceRequest = {
+  serviceId: {
+    greaterThan: 0
+  }
+};
+const DetachFailoverIPFromMacAddressRequest = {
+  ipId: {
+    greaterThan: 0
+  }
+};
+const GetBMCAccessRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const GetFailoverIPRequest = {
+  ipId: {
+    greaterThan: 0
+  }
+};
+const GetOSRequest = {
+  osId: {
+    greaterThan: 0
+  },
+  serverId: {
+    greaterThan: 0
+  }
+};
+const GetOfferRequest = {
+  offerId: {
+    greaterThan: 0
+  }
+};
+const GetOrderedServiceRequest = {
+  orderedServiceId: {
+    greaterThan: 0
+  }
+};
+const GetRaidRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const GetRescueRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const GetServerBackupRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const GetServerInstallRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const GetServerRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const GetServiceRequest = {
+  serviceId: {
+    greaterThan: 0
+  }
+};
+const IPv6Block = {
+  id: {
+    greaterThan: 0
+  }
+};
+const IPv6BlockApiCreateIPv6BlockSubnetRequest = {
+  blockId: {
+    greaterThan: 0
+  }
+};
+const IPv6BlockApiDeleteIPv6BlockRequest = {
+  blockId: {
+    greaterThan: 0
+  }
+};
+const IPv6BlockApiListIPv6BlockSubnetsAvailableRequest = {
+  blockId: {
+    greaterThan: 0
+  }
+};
+const IPv6BlockApiUpdateIPv6BlockRequest = {
+  blockId: {
+    greaterThan: 0
+  }
+};
+const InstallServerRequest = {
+  osId: {
+    greaterThan: 0
+  },
+  serverId: {
+    greaterThan: 0
+  }
+};
+const ListFailoverIPsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListOSRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  },
+  serverId: {
+    greaterThan: 0
+  }
+};
+const ListOffersRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListServerDisksRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  },
+  serverId: {
+    greaterThan: 0
+  }
+};
+const ListServerEventsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  },
+  serverId: {
+    greaterThan: 0
+  }
+};
+const ListServersRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListServicesRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListSubscribableServerOptionsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  },
+  serverId: {
+    greaterThan: 0
+  }
+};
+const RebootServerRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const RpnApiListRpnServerCapabilitiesRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const RpnSanApiAddIpRequest = {
+  rpnSanId: {
+    greaterThan: 0
+  }
+};
+const RpnSanApiDeleteRpnSanRequest = {
+  rpnSanId: {
+    greaterThan: 0
+  }
+};
+const RpnSanApiGetRpnSanRequest = {
+  rpnSanId: {
+    greaterThan: 0
+  }
+};
+const RpnSanApiListAvailableIpsRequest = {
+  rpnSanId: {
+    greaterThan: 0
+  }
+};
+const RpnSanApiListIpsRequest = {
+  rpnSanId: {
+    greaterThan: 0
+  }
+};
+const RpnSanApiListRpnSansRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const RpnSanApiRemoveIpRequest = {
+  rpnSanId: {
+    greaterThan: 0
+  }
+};
+const RpnV1ApiAcceptRpnInviteRequest = {
+  memberId: {
+    greaterThan: 0
+  }
+};
+const RpnV1ApiAddRpnGroupMembersRequest = {
+  groupId: {
+    greaterThan: 0
+  }
+};
+const RpnV1ApiDeleteRpnGroupMembersRequest = {
+  groupId: {
+    greaterThan: 0
+  }
+};
+const RpnV1ApiDeleteRpnGroupRequest = {
+  groupId: {
+    greaterThan: 0
+  }
+};
+const RpnV1ApiGetRpnGroupRequest = {
+  groupId: {
+    greaterThan: 0
+  }
+};
+const RpnV1ApiLeaveRpnGroupRequest = {
+  groupId: {
+    greaterThan: 0
+  }
+};
+const RpnV1ApiListRpnCapableSanServersRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const RpnV1ApiListRpnCapableServersRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const RpnV1ApiListRpnGroupMembersRequest = {
+  groupId: {
+    greaterThan: 0
+  },
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const RpnV1ApiListRpnGroupsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const RpnV1ApiListRpnInvitesRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const RpnV1ApiRefuseRpnInviteRequest = {
+  memberId: {
+    greaterThan: 0
+  }
+};
+const RpnV1ApiRpnGroupInviteRequest = {
+  groupId: {
+    greaterThan: 0
+  }
+};
+const RpnV1ApiUpdateRpnGroupNameRequest = {
+  groupId: {
+    greaterThan: 0
+  }
+};
+const RpnV2ApiAddRpnV2MembersRequest = {
+  groupId: {
+    greaterThan: 0
+  }
+};
+const RpnV2ApiDeleteRpnV2GroupRequest = {
+  groupId: {
+    greaterThan: 0
+  }
+};
+const RpnV2ApiDeleteRpnV2MembersRequest = {
+  groupId: {
+    greaterThan: 0
+  }
+};
+const RpnV2ApiDisableRpnV2GroupCompatibilityRequest = {
+  groupId: {
+    greaterThan: 0
+  }
+};
+const RpnV2ApiEnableRpnV2GroupCompatibilityRequest = {
+  groupId: {
+    greaterThan: 0
+  }
+};
+const RpnV2ApiGetRpnV2GroupRequest = {
+  groupId: {
+    greaterThan: 0
+  }
+};
+const RpnV2ApiListRpnV2CapableResourcesRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const RpnV2ApiListRpnV2GroupLogsRequest = {
+  groupId: {
+    greaterThan: 0
+  },
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const RpnV2ApiListRpnV2GroupsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const RpnV2ApiListRpnV2MembersRequest = {
+  groupId: {
+    greaterThan: 0
+  },
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const RpnV2ApiUpdateRpnV2GroupNameRequest = {
+  groupId: {
+    greaterThan: 0
+  }
+};
+const RpnV2ApiUpdateRpnV2VlanForMembersRequest = {
+  groupId: {
+    greaterThan: 0
+  }
+};
+const StartRescueRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const StartServerRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const StopBMCAccessRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const StopRescueRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const StopServerRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const SubscribeServerOptionRequest = {
+  optionId: {
+    greaterThan: 0
+  },
+  serverId: {
+    greaterThan: 0
+  }
+};
+const SubscribeStorageOptionsRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const UpdateRaidRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const UpdateReverseRequest = {
+  ipId: {
+    greaterThan: 0
+  }
+};
+const UpdateServerBackupRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const UpdateServerRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+const UpdateServerTagsRequest = {
+  serverId: {
+    greaterThan: 0
+  }
+};
+export {
+  AttachFailoverIPToMacAddressRequest,
+  AttachFailoverIPsRequest,
+  BillingApiDownloadInvoiceRequest,
+  BillingApiDownloadRefundRequest,
+  BillingApiGetInvoiceRequest,
+  BillingApiGetRefundRequest,
+  BillingApiListInvoicesRequest,
+  BillingApiListRefundsRequest,
+  CancelServerInstallRequest,
+  DeleteFailoverIPRequest,
+  DeleteServerRequest,
+  DeleteServiceRequest,
+  DetachFailoverIPFromMacAddressRequest,
+  GetBMCAccessRequest,
+  GetFailoverIPRequest,
+  GetOSRequest,
+  GetOfferRequest,
+  GetOrderedServiceRequest,
+  GetRaidRequest,
+  GetRescueRequest,
+  GetServerBackupRequest,
+  GetServerInstallRequest,
+  GetServerRequest,
+  GetServiceRequest,
+  IPv6Block,
+  IPv6BlockApiCreateIPv6BlockSubnetRequest,
+  IPv6BlockApiDeleteIPv6BlockRequest,
+  IPv6BlockApiListIPv6BlockSubnetsAvailableRequest,
+  IPv6BlockApiUpdateIPv6BlockRequest,
+  InstallServerRequest,
+  ListFailoverIPsRequest,
+  ListOSRequest,
+  ListOffersRequest,
+  ListServerDisksRequest,
+  ListServerEventsRequest,
+  ListServersRequest,
+  ListServicesRequest,
+  ListSubscribableServerOptionsRequest,
+  RebootServerRequest,
+  RpnApiListRpnServerCapabilitiesRequest,
+  RpnSanApiAddIpRequest,
+  RpnSanApiDeleteRpnSanRequest,
+  RpnSanApiGetRpnSanRequest,
+  RpnSanApiListAvailableIpsRequest,
+  RpnSanApiListIpsRequest,
+  RpnSanApiListRpnSansRequest,
+  RpnSanApiRemoveIpRequest,
+  RpnV1ApiAcceptRpnInviteRequest,
+  RpnV1ApiAddRpnGroupMembersRequest,
+  RpnV1ApiDeleteRpnGroupMembersRequest,
+  RpnV1ApiDeleteRpnGroupRequest,
+  RpnV1ApiGetRpnGroupRequest,
+  RpnV1ApiLeaveRpnGroupRequest,
+  RpnV1ApiListRpnCapableSanServersRequest,
+  RpnV1ApiListRpnCapableServersRequest,
+  RpnV1ApiListRpnGroupMembersRequest,
+  RpnV1ApiListRpnGroupsRequest,
+  RpnV1ApiListRpnInvitesRequest,
+  RpnV1ApiRefuseRpnInviteRequest,
+  RpnV1ApiRpnGroupInviteRequest,
+  RpnV1ApiUpdateRpnGroupNameRequest,
+  RpnV2ApiAddRpnV2MembersRequest,
+  RpnV2ApiDeleteRpnV2GroupRequest,
+  RpnV2ApiDeleteRpnV2MembersRequest,
+  RpnV2ApiDisableRpnV2GroupCompatibilityRequest,
+  RpnV2ApiEnableRpnV2GroupCompatibilityRequest,
+  RpnV2ApiGetRpnV2GroupRequest,
+  RpnV2ApiListRpnV2CapableResourcesRequest,
+  RpnV2ApiListRpnV2GroupLogsRequest,
+  RpnV2ApiListRpnV2GroupsRequest,
+  RpnV2ApiListRpnV2MembersRequest,
+  RpnV2ApiUpdateRpnV2GroupNameRequest,
+  RpnV2ApiUpdateRpnV2VlanForMembersRequest,
+  StartRescueRequest,
+  StartServerRequest,
+  StopBMCAccessRequest,
+  StopRescueRequest,
+  StopServerRequest,
+  SubscribeServerOptionRequest,
+  SubscribeStorageOptionsRequest,
+  UpdateRaidRequest,
+  UpdateReverseRequest,
+  UpdateServerBackupRequest,
+  UpdateServerRequest,
+  UpdateServerTagsRequest
+};

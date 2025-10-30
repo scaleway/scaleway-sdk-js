@@ -1,0 +1,40 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const CreateFileSystemRequest = {
+  name: {
+    minLength: 1
+  },
+  size: {
+    greaterThan: 0
+  }
+};
+const ListAttachmentsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const ListFileSystemsRequest = {
+  page: {
+    greaterThan: 0
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100
+  }
+};
+const UpdateFileSystemRequest = {
+  name: {
+    minLength: 1
+  },
+  size: {
+    greaterThan: 0
+  }
+};
+exports.CreateFileSystemRequest = CreateFileSystemRequest;
+exports.ListAttachmentsRequest = ListAttachmentsRequest;
+exports.ListFileSystemsRequest = ListFileSystemsRequest;
+exports.UpdateFileSystemRequest = UpdateFileSystemRequest;

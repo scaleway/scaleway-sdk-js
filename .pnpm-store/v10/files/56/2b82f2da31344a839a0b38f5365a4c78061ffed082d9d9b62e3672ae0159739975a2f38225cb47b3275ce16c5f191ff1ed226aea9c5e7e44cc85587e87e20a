@@ -1,0 +1,53 @@
+export declare const ContractApiCheckContractSignatureRequest: {
+    contractName: {
+        minLength: number;
+    };
+};
+export declare const ContractApiCreateContractSignatureRequest: {
+    contractName: {
+        minLength: number;
+    };
+};
+export declare const ContractApiListContractSignaturesRequest: {
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ProjectApiCreateProjectRequest: {
+    description: {
+        maxLength: number;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+};
+export declare const ProjectApiListProjectsRequest: {
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+    page: {
+        greaterThan: number;
+    };
+    pageSize: {
+        greaterThanOrEqual: number;
+        lessThanOrEqual: number;
+    };
+};
+export declare const ProjectApiUpdateProjectRequest: {
+    description: {
+        maxLength: number;
+    };
+    name: {
+        maxLength: number;
+        minLength: number;
+        pattern: RegExp;
+    };
+};

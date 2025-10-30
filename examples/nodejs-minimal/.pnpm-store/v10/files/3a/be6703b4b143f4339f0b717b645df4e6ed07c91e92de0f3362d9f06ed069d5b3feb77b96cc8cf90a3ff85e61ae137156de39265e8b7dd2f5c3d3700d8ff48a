@@ -1,0 +1,32 @@
+export type JSON = string | number | boolean | null | JSON[] | {
+    [key: string]: JSON;
+};
+export interface JSONObject {
+    [key: string]: JSON;
+}
+export declare const isJSON: (obj: unknown) => obj is JSON;
+/**
+ * Validates an unknown object is a JSON Object.
+ *
+ * @internal
+ */
+export declare const isJSONObject: (obj: unknown) => obj is JSONObject;
+/**
+ * Camelizes a string.
+ *
+ * @param str - The string to camelize
+ * @returns The camelized string
+ *
+ * @internal
+ */
+export declare const camelize: (str: string) => string;
+/**
+ * Camelizes keys of an object (deeply).
+ *
+ * @param obj - The object
+ * @param ignoreKeys - The keys to ignore
+ * @returns The object with camelized keys
+ *
+ * @internal
+ */
+export declare const camelizeKeys: <T>(obj: object | unknown[] | unknown, ignoreKeys?: string[]) => T;

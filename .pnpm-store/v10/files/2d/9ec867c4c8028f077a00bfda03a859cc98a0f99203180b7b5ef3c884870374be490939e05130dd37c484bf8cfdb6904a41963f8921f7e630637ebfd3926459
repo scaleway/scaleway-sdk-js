@@ -1,0 +1,553 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client';
+import type { AttachFailoverIPToMacAddressRequest, AttachFailoverIPsRequest, BMCAccess, Backup, BillingApiCanOrderRequest, BillingApiDownloadInvoiceRequest, BillingApiDownloadRefundRequest, BillingApiGetInvoiceRequest, BillingApiGetRefundRequest, BillingApiListInvoicesRequest, BillingApiListRefundsRequest, CanOrderResponse, CancelServerInstallRequest, CreateFailoverIPsRequest, CreateFailoverIPsResponse, CreateServerRequest, DeleteFailoverIPRequest, DeleteServerRequest, DeleteServiceRequest, DetachFailoverIPFromMacAddressRequest, DetachFailoverIPsRequest, FailoverIP, GetBMCAccessRequest, GetFailoverIPRequest, GetIPv6BlockQuotasResponse, GetOSRequest, GetOfferRequest, GetOrderedServiceRequest, GetRaidRequest, GetRemainingQuotaRequest, GetRemainingQuotaResponse, GetRescueRequest, GetRpnStatusResponse, GetServerBackupRequest, GetServerDefaultPartitioningRequest, GetServerInstallRequest, GetServerRequest, GetServiceRequest, IP, IPv6Block, IPv6BlockApiCreateIPv6BlockRequest, IPv6BlockApiCreateIPv6BlockSubnetRequest, IPv6BlockApiDeleteIPv6BlockRequest, IPv6BlockApiGetIPv6BlockQuotasRequest, IPv6BlockApiGetIPv6BlockRequest, IPv6BlockApiListIPv6BlockSubnetsAvailableRequest, IPv6BlockApiUpdateIPv6BlockRequest, InstallServerRequest, Invoice, ListFailoverIPsRequest, ListFailoverIPsResponse, ListIPv6BlockSubnetsAvailableResponse, ListInvoicesResponse, ListIpsResponse, ListOSRequest, ListOSResponse, ListOffersRequest, ListOffersResponse, ListRefundsResponse, ListRpnCapableSanServersResponse, ListRpnCapableServersResponse, ListRpnGroupMembersResponse, ListRpnGroupsResponse, ListRpnInvitesResponse, ListRpnSansResponse, ListRpnServerCapabilitiesResponse, ListRpnV2CapableResourcesResponse, ListRpnV2GroupLogsResponse, ListRpnV2GroupsResponse, ListRpnV2MembersResponse, ListServerDisksRequest, ListServerDisksResponse, ListServerEventsRequest, ListServerEventsResponse, ListServersRequest, ListServersResponse, ListServicesRequest, ListServicesResponse, ListSubscribableServerOptionsRequest, ListSubscribableServerOptionsResponse, OS, Offer, Raid, RebootServerRequest, Refund, Rescue, RpnApiGetRpnStatusRequest, RpnApiListRpnServerCapabilitiesRequest, RpnGroup, RpnSan, RpnSanApiAddIpRequest, RpnSanApiCreateRpnSanRequest, RpnSanApiDeleteRpnSanRequest, RpnSanApiGetRpnSanRequest, RpnSanApiListAvailableIpsRequest, RpnSanApiListIpsRequest, RpnSanApiListRpnSansRequest, RpnSanApiRemoveIpRequest, RpnV1ApiAcceptRpnInviteRequest, RpnV1ApiAddRpnGroupMembersRequest, RpnV1ApiCreateRpnGroupRequest, RpnV1ApiDeleteRpnGroupMembersRequest, RpnV1ApiDeleteRpnGroupRequest, RpnV1ApiGetRpnGroupRequest, RpnV1ApiLeaveRpnGroupRequest, RpnV1ApiListRpnCapableSanServersRequest, RpnV1ApiListRpnCapableServersRequest, RpnV1ApiListRpnGroupMembersRequest, RpnV1ApiListRpnGroupsRequest, RpnV1ApiListRpnInvitesRequest, RpnV1ApiRefuseRpnInviteRequest, RpnV1ApiRpnGroupInviteRequest, RpnV1ApiUpdateRpnGroupNameRequest, RpnV2ApiAddRpnV2MembersRequest, RpnV2ApiCreateRpnV2GroupRequest, RpnV2ApiDeleteRpnV2GroupRequest, RpnV2ApiDeleteRpnV2MembersRequest, RpnV2ApiDisableRpnV2GroupCompatibilityRequest, RpnV2ApiEnableRpnV2GroupCompatibilityRequest, RpnV2ApiGetRpnV2GroupRequest, RpnV2ApiListRpnV2CapableResourcesRequest, RpnV2ApiListRpnV2GroupLogsRequest, RpnV2ApiListRpnV2GroupsRequest, RpnV2ApiListRpnV2MembersRequest, RpnV2ApiUpdateRpnV2GroupNameRequest, RpnV2ApiUpdateRpnV2VlanForMembersRequest, RpnV2Group, Server, ServerDefaultPartitioning, ServerInstall, Service, StartBMCAccessRequest, StartRescueRequest, StartServerRequest, StopBMCAccessRequest, StopRescueRequest, StopServerRequest, SubscribeServerOptionRequest, SubscribeStorageOptionsRequest, SubscribeStorageOptionsResponse, UpdateRaidRequest, UpdateReverseRequest, UpdateServerBackupRequest, UpdateServerRequest, UpdateServerTagsRequest } from './types.gen';
+/**
+ * Dedibox Phoenix API.
+ */
+export declare class API extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    protected pageOfListServers: (request?: Readonly<ListServersRequest>) => Promise<ListServersResponse>;
+    /**
+     * List baremetal servers for project.
+     *
+     * @param request - The request {@link ListServersRequest}
+     * @returns A Promise of ListServersResponse
+     */
+    listServers: (request?: Readonly<ListServersRequest>) => Promise<ListServersResponse> & {
+        all: () => Promise<import("./types.gen").ServerSummary[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").ServerSummary[], void, void>;
+    };
+    /**
+     * Get a specific baremetal server. Get the server associated with the given ID.
+     *
+     * @param request - The request {@link GetServerRequest}
+     * @returns A Promise of Server
+     */
+    getServer: (request: Readonly<GetServerRequest>) => Promise<Server>;
+    /**
+     * Waits for {@link Server} to be in a final state.
+     *
+     * @param request - The request {@link GetServerRequest}
+     * @param options - The waiting options
+     * @returns A Promise of Server
+     */
+    waitForServer: (request: Readonly<GetServerRequest>, options?: Readonly<WaitForOptions<Server>>) => Promise<Server>;
+    getServerBackup: (request: Readonly<GetServerBackupRequest>) => Promise<Backup>;
+    updateServerBackup: (request: Readonly<UpdateServerBackupRequest>) => Promise<Backup>;
+    protected pageOfListSubscribableServerOptions: (request: Readonly<ListSubscribableServerOptionsRequest>) => Promise<ListSubscribableServerOptionsResponse>;
+    /**
+     * List subscribable server options. List subscribable options associated to the given server ID.
+     *
+     * @param request - The request {@link ListSubscribableServerOptionsRequest}
+     * @returns A Promise of ListSubscribableServerOptionsResponse
+     */
+    listSubscribableServerOptions: (request: Readonly<ListSubscribableServerOptionsRequest>) => Promise<ListSubscribableServerOptionsResponse> & {
+        all: () => Promise<Offer[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Offer[], void, void>;
+    };
+    /**
+     * Subscribe server option. Subscribe option for the given server ID.
+     *
+     * @param request - The request {@link SubscribeServerOptionRequest}
+     * @returns A Promise of Service
+     */
+    subscribeServerOption: (request: Readonly<SubscribeServerOptionRequest>) => Promise<Service>;
+    /**
+     * Create a baremetal server. Create a new baremetal server. The order return you a service ID to follow the provisionning status you could call GetService.
+     *
+     * @param request - The request {@link CreateServerRequest}
+     * @returns A Promise of Service
+     */
+    createServer: (request: Readonly<CreateServerRequest>) => Promise<Service>;
+    /**
+     * Subscribe storage server option. Subscribe storage option for the given server ID.
+     *
+     * @param request - The request {@link SubscribeStorageOptionsRequest}
+     * @returns A Promise of SubscribeStorageOptionsResponse
+     */
+    subscribeStorageOptions: (request: Readonly<SubscribeStorageOptionsRequest>) => Promise<SubscribeStorageOptionsResponse>;
+    /**
+     * Update a baremetal server. Update the server associated with the given ID.
+     *
+     * @param request - The request {@link UpdateServerRequest}
+     * @returns A Promise of Server
+     */
+    updateServer: (request: Readonly<UpdateServerRequest>) => Promise<Server>;
+    updateServerTags: (request: Readonly<UpdateServerTagsRequest>) => Promise<Server>;
+    /**
+     * Reboot a baremetal server. Reboot the server associated with the given ID, use boot param to reboot in rescue.
+     *
+     * @param request - The request {@link RebootServerRequest}
+     */
+    rebootServer: (request: Readonly<RebootServerRequest>) => Promise<void>;
+    /**
+     * Start a baremetal server. Start the server associated with the given ID.
+     *
+     * @param request - The request {@link StartServerRequest}
+     */
+    startServer: (request: Readonly<StartServerRequest>) => Promise<void>;
+    /**
+     * Stop a baremetal server. Stop the server associated with the given ID.
+     *
+     * @param request - The request {@link StopServerRequest}
+     */
+    stopServer: (request: Readonly<StopServerRequest>) => Promise<void>;
+    /**
+     * Delete a baremetal server. Delete the server associated with the given ID.
+     *
+     * @param request - The request {@link DeleteServerRequest}
+     */
+    deleteServer: (request: Readonly<DeleteServerRequest>) => Promise<void>;
+    protected pageOfListServerEvents: (request: Readonly<ListServerEventsRequest>) => Promise<ListServerEventsResponse>;
+    /**
+     * List server events. List events associated to the given server ID.
+     *
+     * @param request - The request {@link ListServerEventsRequest}
+     * @returns A Promise of ListServerEventsResponse
+     */
+    listServerEvents: (request: Readonly<ListServerEventsRequest>) => Promise<ListServerEventsResponse> & {
+        all: () => Promise<import("./types.gen").ServerEvent[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").ServerEvent[], void, void>;
+    };
+    protected pageOfListServerDisks: (request: Readonly<ListServerDisksRequest>) => Promise<ListServerDisksResponse>;
+    /**
+     * List server disks. List disks associated to the given server ID.
+     *
+     * @param request - The request {@link ListServerDisksRequest}
+     * @returns A Promise of ListServerDisksResponse
+     */
+    listServerDisks: (request: Readonly<ListServerDisksRequest>) => Promise<ListServerDisksResponse> & {
+        all: () => Promise<import("./types.gen").ServerDisk[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").ServerDisk[], void, void>;
+    };
+    getOrderedService: (request: Readonly<GetOrderedServiceRequest>) => Promise<Service>;
+    /**
+     * Get a specific service. Get the service associated with the given ID.
+     *
+     * @param request - The request {@link GetServiceRequest}
+     * @returns A Promise of Service
+     */
+    getService: (request: Readonly<GetServiceRequest>) => Promise<Service>;
+    /**
+     * Delete a specific service. Delete the service associated with the given ID.
+     *
+     * @param request - The request {@link DeleteServiceRequest}
+     * @returns A Promise of Service
+     */
+    deleteService: (request: Readonly<DeleteServiceRequest>) => Promise<Service>;
+    protected pageOfListServices: (request?: Readonly<ListServicesRequest>) => Promise<ListServicesResponse>;
+    /**
+     * List services.
+     *
+     * @param request - The request {@link ListServicesRequest}
+     * @returns A Promise of ListServicesResponse
+     */
+    listServices: (request?: Readonly<ListServicesRequest>) => Promise<ListServicesResponse> & {
+        all: () => Promise<Service[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Service[], void, void>;
+    };
+    /**
+     * Install a baremetal server. Install an OS on the server associated with the given ID.
+     *
+     * @param request - The request {@link InstallServerRequest}
+     * @returns A Promise of ServerInstall
+     */
+    installServer: (request: Readonly<InstallServerRequest>) => Promise<ServerInstall>;
+    /**
+     * Get a specific server installation status. Get the server installation status associated with the given server ID.
+     *
+     * @param request - The request {@link GetServerInstallRequest}
+     * @returns A Promise of ServerInstall
+     */
+    getServerInstall: (request: Readonly<GetServerInstallRequest>) => Promise<ServerInstall>;
+    /**
+     * Waits for {@link ServerInstall} to be in a final state.
+     *
+     * @param request - The request {@link GetServerInstallRequest}
+     * @param options - The waiting options
+     * @returns A Promise of ServerInstall
+     */
+    waitForServerInstall: (request: Readonly<GetServerInstallRequest>, options?: Readonly<WaitForOptions<ServerInstall>>) => Promise<ServerInstall>;
+    /**
+     * Cancels the current (running) server installation. Cancels the current server installation associated with the given server ID.
+     *
+     * @param request - The request {@link CancelServerInstallRequest}
+     */
+    cancelServerInstall: (request: Readonly<CancelServerInstallRequest>) => Promise<void>;
+    /**
+     * Get server default partitioning. Get the server default partitioning schema associated with the given server ID and OS ID.
+     *
+     * @param request - The request {@link GetServerDefaultPartitioningRequest}
+     * @returns A Promise of ServerDefaultPartitioning
+     */
+    getServerDefaultPartitioning: (request: Readonly<GetServerDefaultPartitioningRequest>) => Promise<ServerDefaultPartitioning>;
+    /**
+     * Start BMC (Baseboard Management Controller) access for a given baremetal server. Start BMC (Baseboard Management Controller) access associated with the given ID.
+  The BMC (Baseboard Management Controller) access is available one hour after the installation of the server.
+     *
+     * @param request - The request {@link StartBMCAccessRequest}
+     */
+    startBMCAccess: (request: Readonly<StartBMCAccessRequest>) => Promise<void>;
+    /**
+     * Get BMC (Baseboard Management Controller) access for a given baremetal server. Get the BMC (Baseboard Management Controller) access associated with the given ID.
+     *
+     * @param request - The request {@link GetBMCAccessRequest}
+     * @returns A Promise of BMCAccess
+     */
+    getBMCAccess: (request: Readonly<GetBMCAccessRequest>) => Promise<BMCAccess>;
+    /**
+     * Waits for {@link BMCAccess} to be in a final state.
+     *
+     * @param request - The request {@link GetBMCAccessRequest}
+     * @param options - The waiting options
+     * @returns A Promise of BMCAccess
+     */
+    waitForBMCAccess: (request: Readonly<GetBMCAccessRequest>, options?: Readonly<WaitForOptions<BMCAccess>>) => Promise<BMCAccess>;
+    /**
+     * Stop BMC (Baseboard Management Controller) access for a given baremetal server. Stop BMC (Baseboard Management Controller) access associated with the given ID.
+     *
+     * @param request - The request {@link StopBMCAccessRequest}
+     */
+    stopBMCAccess: (request: Readonly<StopBMCAccessRequest>) => Promise<void>;
+    protected pageOfListOffers: (request?: Readonly<ListOffersRequest>) => Promise<ListOffersResponse>;
+    /**
+     * List offers. List all available server offers.
+     *
+     * @param request - The request {@link ListOffersRequest}
+     * @returns A Promise of ListOffersResponse
+     */
+    listOffers: (request?: Readonly<ListOffersRequest>) => Promise<ListOffersResponse> & {
+        all: () => Promise<Offer[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Offer[], void, void>;
+    };
+    /**
+     * Get offer. Return specific offer for the given ID.
+     *
+     * @param request - The request {@link GetOfferRequest}
+     * @returns A Promise of Offer
+     */
+    getOffer: (request: Readonly<GetOfferRequest>) => Promise<Offer>;
+    protected pageOfListOS: (request: Readonly<ListOSRequest>) => Promise<ListOSResponse>;
+    /**
+     * List all available OS that can be install on a baremetal server.
+     *
+     * @param request - The request {@link ListOSRequest}
+     * @returns A Promise of ListOSResponse
+     */
+    listOS: (request: Readonly<ListOSRequest>) => Promise<ListOSResponse> & {
+        all: () => Promise<OS[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<OS[], void, void>;
+    };
+    /**
+     * Get an OS with a given ID. Return specific OS for the given ID.
+     *
+     * @param request - The request {@link GetOSRequest}
+     * @returns A Promise of OS
+     */
+    getOS: (request: Readonly<GetOSRequest>) => Promise<OS>;
+    /**
+     * Update reverse of ip. Update reverse of ip associated with the given ID.
+     *
+     * @param request - The request {@link UpdateReverseRequest}
+     * @returns A Promise of IP
+     */
+    updateReverse: (request: Readonly<UpdateReverseRequest>) => Promise<IP>;
+    /**
+     * Order failover IPs. Order X failover IPs.
+     *
+     * @param request - The request {@link CreateFailoverIPsRequest}
+     * @returns A Promise of CreateFailoverIPsResponse
+     */
+    createFailoverIPs: (request: Readonly<CreateFailoverIPsRequest>) => Promise<CreateFailoverIPsResponse>;
+    /**
+     * Attach failovers on baremetal server. Attach failovers on the server associated with the given ID.
+     *
+     * @param request - The request {@link AttachFailoverIPsRequest}
+     */
+    attachFailoverIPs: (request: Readonly<AttachFailoverIPsRequest>) => Promise<void>;
+    /**
+     * Detach failovers on baremetal server. Detach failovers on the server associated with the given ID.
+     *
+     * @param request - The request {@link DetachFailoverIPsRequest}
+     */
+    detachFailoverIPs: (request: Readonly<DetachFailoverIPsRequest>) => Promise<void>;
+    /**
+     * Attach a failover IP to a MAC address.
+     *
+     * @param request - The request {@link AttachFailoverIPToMacAddressRequest}
+     * @returns A Promise of IP
+     */
+    attachFailoverIPToMacAddress: (request: Readonly<AttachFailoverIPToMacAddressRequest>) => Promise<IP>;
+    /**
+     * Detach a failover IP from a MAC address.
+     *
+     * @param request - The request {@link DetachFailoverIPFromMacAddressRequest}
+     * @returns A Promise of IP
+     */
+    detachFailoverIPFromMacAddress: (request: Readonly<DetachFailoverIPFromMacAddressRequest>) => Promise<IP>;
+    /**
+     * Delete a failover server. Delete the failover associated with the given ID.
+     *
+     * @param request - The request {@link DeleteFailoverIPRequest}
+     */
+    deleteFailoverIP: (request: Readonly<DeleteFailoverIPRequest>) => Promise<void>;
+    protected pageOfListFailoverIPs: (request?: Readonly<ListFailoverIPsRequest>) => Promise<ListFailoverIPsResponse>;
+    /**
+     * List failovers for project. List failovers servers for project.
+     *
+     * @param request - The request {@link ListFailoverIPsRequest}
+     * @returns A Promise of ListFailoverIPsResponse
+     */
+    listFailoverIPs: (request?: Readonly<ListFailoverIPsRequest>) => Promise<ListFailoverIPsResponse> & {
+        all: () => Promise<FailoverIP[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<FailoverIP[], void, void>;
+    };
+    /**
+     * Get a specific baremetal server. Get the server associated with the given ID.
+     *
+     * @param request - The request {@link GetFailoverIPRequest}
+     * @returns A Promise of FailoverIP
+     */
+    getFailoverIP: (request: Readonly<GetFailoverIPRequest>) => Promise<FailoverIP>;
+    /**
+     * Get remaining quota.
+     *
+     * @param request - The request {@link GetRemainingQuotaRequest}
+     * @returns A Promise of GetRemainingQuotaResponse
+     */
+    getRemainingQuota: (request?: Readonly<GetRemainingQuotaRequest>) => Promise<GetRemainingQuotaResponse>;
+    /**
+     * Get raid. Return raid for the given server ID.
+     *
+     * @param request - The request {@link GetRaidRequest}
+     * @returns A Promise of Raid
+     */
+    getRaid: (request: Readonly<GetRaidRequest>) => Promise<Raid>;
+    /**
+     * Update RAID. Update RAID associated with the given server ID.
+     *
+     * @param request - The request {@link UpdateRaidRequest}
+     */
+    updateRaid: (request: Readonly<UpdateRaidRequest>) => Promise<void>;
+    /**
+     * Start in rescue baremetal server. Start in rescue the server associated with the given ID.
+     *
+     * @param request - The request {@link StartRescueRequest}
+     * @returns A Promise of Rescue
+     */
+    startRescue: (request: Readonly<StartRescueRequest>) => Promise<Rescue>;
+    /**
+     * Get rescue information. Return rescue information for the given server ID.
+     *
+     * @param request - The request {@link GetRescueRequest}
+     * @returns A Promise of Rescue
+     */
+    getRescue: (request: Readonly<GetRescueRequest>) => Promise<Rescue>;
+    /**
+     * Stop rescue on baremetal server. Stop rescue on the server associated with the given ID.
+     *
+     * @param request - The request {@link StopRescueRequest}
+     */
+    stopRescue: (request: Readonly<StopRescueRequest>) => Promise<void>;
+}
+/**
+ * Dedibox Phoenix Billing API.
+ */
+export declare class BillingAPI extends ParentAPI {
+    protected pageOfListInvoices: (request?: Readonly<BillingApiListInvoicesRequest>) => Promise<ListInvoicesResponse>;
+    listInvoices: (request?: Readonly<BillingApiListInvoicesRequest>) => Promise<ListInvoicesResponse> & {
+        all: () => Promise<import("./types.gen").InvoiceSummary[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").InvoiceSummary[], void, void>;
+    };
+    getInvoice: (request: Readonly<BillingApiGetInvoiceRequest>) => Promise<Invoice>;
+    downloadInvoice: (request: Readonly<BillingApiDownloadInvoiceRequest>) => Promise<Blob>;
+    protected pageOfListRefunds: (request?: Readonly<BillingApiListRefundsRequest>) => Promise<ListRefundsResponse>;
+    listRefunds: (request?: Readonly<BillingApiListRefundsRequest>) => Promise<ListRefundsResponse> & {
+        all: () => Promise<import("./types.gen").RefundSummary[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").RefundSummary[], void, void>;
+    };
+    getRefund: (request: Readonly<BillingApiGetRefundRequest>) => Promise<Refund>;
+    downloadRefund: (request: Readonly<BillingApiDownloadRefundRequest>) => Promise<Blob>;
+    canOrder: (request?: Readonly<BillingApiCanOrderRequest>) => Promise<CanOrderResponse>;
+}
+/**
+ * Dedibox Phoenix IPv6 Block API.
+ */
+export declare class IPv6BlockAPI extends ParentAPI {
+    /**
+     * Get IPv6 block quota. Get IPv6 block quota with the given project ID.
+  /48 one per organization.
+  /56 link to your number of server.
+  /64 link to your number of failover IP.
+     *
+     * @param request - The request {@link IPv6BlockApiGetIPv6BlockQuotasRequest}
+     * @returns A Promise of GetIPv6BlockQuotasResponse
+     */
+    getIPv6BlockQuotas: (request?: Readonly<IPv6BlockApiGetIPv6BlockQuotasRequest>) => Promise<GetIPv6BlockQuotasResponse>;
+    /**
+     * Create IPv6 block for baremetal server. Create IPv6 block associated with the given project ID.
+     *
+     * @param request - The request {@link IPv6BlockApiCreateIPv6BlockRequest}
+     * @returns A Promise of IPv6Block
+     */
+    createIPv6Block: (request?: Readonly<IPv6BlockApiCreateIPv6BlockRequest>) => Promise<IPv6Block>;
+    /**
+     * Get a specific IPv6 block. Get the IPv6 block associated with the given ID.
+     *
+     * @param request - The request {@link IPv6BlockApiGetIPv6BlockRequest}
+     * @returns A Promise of IPv6Block
+     */
+    getIPv6Block: (request?: Readonly<IPv6BlockApiGetIPv6BlockRequest>) => Promise<IPv6Block>;
+    /**
+     * Update IPv6 block. Update DNS associated to IPv6 block.
+  If DNS is used, minimum of 2 is necessary and maximum of 5 (no duplicate).
+     *
+     * @param request - The request {@link IPv6BlockApiUpdateIPv6BlockRequest}
+     * @returns A Promise of IPv6Block
+     */
+    updateIPv6Block: (request: Readonly<IPv6BlockApiUpdateIPv6BlockRequest>) => Promise<IPv6Block>;
+    /**
+     * Delete IPv6 block. Delete IPv6 block subnet with the given ID.
+     *
+     * @param request - The request {@link IPv6BlockApiDeleteIPv6BlockRequest}
+     */
+    deleteIPv6Block: (request: Readonly<IPv6BlockApiDeleteIPv6BlockRequest>) => Promise<void>;
+    /**
+     * Create IPv6 block subnet. Create IPv6 block subnet for the given IP ID.
+  /48 could create subnet in /56 (quota link to your number of server).
+  /56 could create subnet in /64 (quota link to your number of failover IP).
+     *
+     * @param request - The request {@link IPv6BlockApiCreateIPv6BlockSubnetRequest}
+     * @returns A Promise of IPv6Block
+     */
+    createIPv6BlockSubnet: (request: Readonly<IPv6BlockApiCreateIPv6BlockSubnetRequest>) => Promise<IPv6Block>;
+    /**
+     * List available IPv6 block subnets. List all available IPv6 block subnets for given IP ID.
+     *
+     * @param request - The request {@link IPv6BlockApiListIPv6BlockSubnetsAvailableRequest}
+     * @returns A Promise of ListIPv6BlockSubnetsAvailableResponse
+     */
+    listIPv6BlockSubnetsAvailable: (request: Readonly<IPv6BlockApiListIPv6BlockSubnetsAvailableRequest>) => Promise<ListIPv6BlockSubnetsAvailableResponse>;
+}
+/**
+ * Dedibox Phoenix RPN API.
+ */
+export declare class RpnAPI extends ParentAPI {
+    protected pageOfListRpnServerCapabilities: (request?: Readonly<RpnApiListRpnServerCapabilitiesRequest>) => Promise<ListRpnServerCapabilitiesResponse>;
+    listRpnServerCapabilities: (request?: Readonly<RpnApiListRpnServerCapabilitiesRequest>) => Promise<ListRpnServerCapabilitiesResponse> & {
+        all: () => Promise<import("./types.gen").RpnServerCapability[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").RpnServerCapability[], void, void>;
+    };
+    getRpnStatus: (request?: Readonly<RpnApiGetRpnStatusRequest>) => Promise<GetRpnStatusResponse>;
+}
+/**
+ * Dedibox Phoenix RPN SAN API.
+ */
+export declare class RpnSanAPI extends ParentAPI {
+    protected pageOfListRpnSans: (request?: Readonly<RpnSanApiListRpnSansRequest>) => Promise<ListRpnSansResponse>;
+    listRpnSans: (request?: Readonly<RpnSanApiListRpnSansRequest>) => Promise<ListRpnSansResponse> & {
+        all: () => Promise<import("./types.gen").RpnSanSummary[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").RpnSanSummary[], void, void>;
+    };
+    getRpnSan: (request: Readonly<RpnSanApiGetRpnSanRequest>) => Promise<RpnSan>;
+    /**
+     * Waits for {@link RpnSan} to be in a final state.
+     *
+     * @param request - The request {@link RpnSanApiGetRpnSanRequest}
+     * @param options - The waiting options
+     * @returns A Promise of RpnSan
+     */
+    waitForRpnSan: (request: Readonly<RpnSanApiGetRpnSanRequest>, options?: Readonly<WaitForOptions<RpnSan>>) => Promise<RpnSan>;
+    deleteRpnSan: (request: Readonly<RpnSanApiDeleteRpnSanRequest>) => Promise<void>;
+    createRpnSan: (request: Readonly<RpnSanApiCreateRpnSanRequest>) => Promise<Service>;
+    listIps: (request: Readonly<RpnSanApiListIpsRequest>) => Promise<ListIpsResponse>;
+    addIp: (request: Readonly<RpnSanApiAddIpRequest>) => Promise<void>;
+    removeIp: (request: Readonly<RpnSanApiRemoveIpRequest>) => Promise<void>;
+    listAvailableIps: (request: Readonly<RpnSanApiListAvailableIpsRequest>) => Promise<ListIpsResponse>;
+}
+/**
+ * Dedibox Phoenix RPN v1 API.
+ */
+export declare class RpnV1API extends ParentAPI {
+    protected pageOfListRpnGroups: (request?: Readonly<RpnV1ApiListRpnGroupsRequest>) => Promise<ListRpnGroupsResponse>;
+    listRpnGroups: (request?: Readonly<RpnV1ApiListRpnGroupsRequest>) => Promise<ListRpnGroupsResponse> & {
+        all: () => Promise<RpnGroup[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<RpnGroup[], void, void>;
+    };
+    getRpnGroup: (request: Readonly<RpnV1ApiGetRpnGroupRequest>) => Promise<RpnGroup>;
+    createRpnGroup: (request: Readonly<RpnV1ApiCreateRpnGroupRequest>) => Promise<RpnGroup>;
+    deleteRpnGroup: (request: Readonly<RpnV1ApiDeleteRpnGroupRequest>) => Promise<void>;
+    updateRpnGroupName: (request: Readonly<RpnV1ApiUpdateRpnGroupNameRequest>) => Promise<RpnGroup>;
+    protected pageOfListRpnGroupMembers: (request: Readonly<RpnV1ApiListRpnGroupMembersRequest>) => Promise<ListRpnGroupMembersResponse>;
+    listRpnGroupMembers: (request: Readonly<RpnV1ApiListRpnGroupMembersRequest>) => Promise<ListRpnGroupMembersResponse> & {
+        all: () => Promise<import("./types.gen").RpnGroupMember[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").RpnGroupMember[], void, void>;
+    };
+    rpnGroupInvite: (request: Readonly<RpnV1ApiRpnGroupInviteRequest>) => Promise<void>;
+    leaveRpnGroup: (request: Readonly<RpnV1ApiLeaveRpnGroupRequest>) => Promise<void>;
+    addRpnGroupMembers: (request: Readonly<RpnV1ApiAddRpnGroupMembersRequest>) => Promise<RpnGroup>;
+    deleteRpnGroupMembers: (request: Readonly<RpnV1ApiDeleteRpnGroupMembersRequest>) => Promise<RpnGroup>;
+    protected pageOfListRpnCapableServers: (request?: Readonly<RpnV1ApiListRpnCapableServersRequest>) => Promise<ListRpnCapableServersResponse>;
+    listRpnCapableServers: (request?: Readonly<RpnV1ApiListRpnCapableServersRequest>) => Promise<ListRpnCapableServersResponse> & {
+        all: () => Promise<Server[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Server[], void, void>;
+    };
+    protected pageOfListRpnCapableSanServers: (request?: Readonly<RpnV1ApiListRpnCapableSanServersRequest>) => Promise<ListRpnCapableSanServersResponse>;
+    listRpnCapableSanServers: (request?: Readonly<RpnV1ApiListRpnCapableSanServersRequest>) => Promise<ListRpnCapableSanServersResponse> & {
+        all: () => Promise<import("./types.gen").RpnSanServer[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").RpnSanServer[], void, void>;
+    };
+    protected pageOfListRpnInvites: (request?: Readonly<RpnV1ApiListRpnInvitesRequest>) => Promise<ListRpnInvitesResponse>;
+    listRpnInvites: (request?: Readonly<RpnV1ApiListRpnInvitesRequest>) => Promise<ListRpnInvitesResponse> & {
+        all: () => Promise<import("./types.gen").RpnGroupMember[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").RpnGroupMember[], void, void>;
+    };
+    acceptRpnInvite: (request: Readonly<RpnV1ApiAcceptRpnInviteRequest>) => Promise<void>;
+    refuseRpnInvite: (request: Readonly<RpnV1ApiRefuseRpnInviteRequest>) => Promise<void>;
+}
+/**
+ * Dedibox Phoenix RPN v2 API.
+ */
+export declare class RpnV2API extends ParentAPI {
+    protected pageOfListRpnV2Groups: (request?: Readonly<RpnV2ApiListRpnV2GroupsRequest>) => Promise<ListRpnV2GroupsResponse>;
+    listRpnV2Groups: (request?: Readonly<RpnV2ApiListRpnV2GroupsRequest>) => Promise<ListRpnV2GroupsResponse> & {
+        all: () => Promise<RpnV2Group[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<RpnV2Group[], void, void>;
+    };
+    protected pageOfListRpnV2Members: (request: Readonly<RpnV2ApiListRpnV2MembersRequest>) => Promise<ListRpnV2MembersResponse>;
+    listRpnV2Members: (request: Readonly<RpnV2ApiListRpnV2MembersRequest>) => Promise<ListRpnV2MembersResponse> & {
+        all: () => Promise<import("./types.gen").RpnV2Member[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").RpnV2Member[], void, void>;
+    };
+    getRpnV2Group: (request: Readonly<RpnV2ApiGetRpnV2GroupRequest>) => Promise<RpnV2Group>;
+    /**
+     * Waits for {@link RpnV2Group} to be in a final state.
+     *
+     * @param request - The request {@link RpnV2ApiGetRpnV2GroupRequest}
+     * @param options - The waiting options
+     * @returns A Promise of RpnV2Group
+     */
+    waitForRpnV2Group: (request: Readonly<RpnV2ApiGetRpnV2GroupRequest>, options?: Readonly<WaitForOptions<RpnV2Group>>) => Promise<RpnV2Group>;
+    createRpnV2Group: (request: Readonly<RpnV2ApiCreateRpnV2GroupRequest>) => Promise<RpnV2Group>;
+    deleteRpnV2Group: (request: Readonly<RpnV2ApiDeleteRpnV2GroupRequest>) => Promise<void>;
+    updateRpnV2GroupName: (request: Readonly<RpnV2ApiUpdateRpnV2GroupNameRequest>) => Promise<RpnV2Group>;
+    addRpnV2Members: (request: Readonly<RpnV2ApiAddRpnV2MembersRequest>) => Promise<void>;
+    deleteRpnV2Members: (request: Readonly<RpnV2ApiDeleteRpnV2MembersRequest>) => Promise<void>;
+    protected pageOfListRpnV2CapableResources: (request?: Readonly<RpnV2ApiListRpnV2CapableResourcesRequest>) => Promise<ListRpnV2CapableResourcesResponse>;
+    listRpnV2CapableResources: (request?: Readonly<RpnV2ApiListRpnV2CapableResourcesRequest>) => Promise<ListRpnV2CapableResourcesResponse> & {
+        all: () => Promise<Server[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Server[], void, void>;
+    };
+    protected pageOfListRpnV2GroupLogs: (request: Readonly<RpnV2ApiListRpnV2GroupLogsRequest>) => Promise<ListRpnV2GroupLogsResponse>;
+    listRpnV2GroupLogs: (request: Readonly<RpnV2ApiListRpnV2GroupLogsRequest>) => Promise<ListRpnV2GroupLogsResponse> & {
+        all: () => Promise<import("./types.gen").Log[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<import("./types.gen").Log[], void, void>;
+    };
+    updateRpnV2VlanForMembers: (request: Readonly<RpnV2ApiUpdateRpnV2VlanForMembersRequest>) => Promise<void>;
+    enableRpnV2GroupCompatibility: (request: Readonly<RpnV2ApiEnableRpnV2GroupCompatibilityRequest>) => Promise<void>;
+    disableRpnV2GroupCompatibility: (request: Readonly<RpnV2ApiDisableRpnV2GroupCompatibilityRequest>) => Promise<void>;
+}

@@ -1,0 +1,24 @@
+import type { JSONObject } from '../../../helpers/json.js';
+import { ScalewayError } from '../scw-error.js';
+/**
+ * Details of an {@link InvalidArgumentsError} error.
+ *
+ * @public
+ */
+export interface InvalidArgumentsErrorDetails {
+    readonly argumentName: string;
+    readonly reason: string;
+    readonly helpMessage?: string;
+}
+/**
+ * InvalidArguments error happens when one or many fields are invalid in the request message.
+ *
+ * @public
+ */
+export declare class InvalidArgumentsError extends ScalewayError {
+    readonly status: number;
+    readonly body: JSONObject;
+    readonly details: InvalidArgumentsErrorDetails[];
+    constructor(status: number, body: JSONObject, details: InvalidArgumentsErrorDetails[]);
+    static fromJSON(status: number, obj: Readonly<JSONObject>): InvalidArgumentsError | null;
+}

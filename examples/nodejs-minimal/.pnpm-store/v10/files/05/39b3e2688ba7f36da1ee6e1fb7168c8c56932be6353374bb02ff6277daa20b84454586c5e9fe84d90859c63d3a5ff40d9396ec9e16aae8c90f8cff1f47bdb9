@@ -1,0 +1,121 @@
+import { resolveOneOf, isJSONObject, unmarshalDate, unmarshalArrayOfObject } from "@scaleway/sdk-client";
+const unmarshalResource = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Resource' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    id: data.id,
+    macAddress: data.mac_address,
+    name: data.name,
+    type: data.type
+  };
+};
+const unmarshalReverse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Reverse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    address: data.address,
+    hostname: data.hostname
+  };
+};
+const unmarshalSource = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Source' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    privateNetworkId: data.private_network_id,
+    subnetId: data.subnet_id,
+    vpcId: data.vpc_id,
+    zonal: data.zonal
+  };
+};
+const unmarshalIP = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'IP' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    address: data.address,
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    isIpv6: data.is_ipv6,
+    projectId: data.project_id,
+    region: data.region,
+    resource: data.resource ? unmarshalResource(data.resource) : void 0,
+    reverses: unmarshalArrayOfObject(data.reverses, unmarshalReverse),
+    source: data.source ? unmarshalSource(data.source) : void 0,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone
+  };
+};
+const unmarshalListIPsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListIPsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    ips: unmarshalArrayOfObject(data.ips, unmarshalIP),
+    totalCount: data.total_count
+  };
+};
+const marshalCustomResource = (request, defaults) => ({
+  mac_address: request.macAddress,
+  name: request.name
+});
+const marshalAttachIPRequest = (request, defaults) => ({
+  resource: marshalCustomResource(request.resource)
+});
+const marshalSource = (request, defaults) => ({
+  ...resolveOneOf([
+    { param: "zonal", value: request.zonal },
+    { param: "private_network_id", value: request.privateNetworkId },
+    { param: "subnet_id", value: request.subnetId },
+    { param: "vpc_id", value: request.vpcId }
+  ])
+});
+const marshalBookIPRequest = (request, defaults) => ({
+  address: request.address,
+  is_ipv6: request.isIpv6,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  resource: request.resource !== void 0 ? marshalCustomResource(request.resource) : void 0,
+  source: marshalSource(request.source),
+  tags: request.tags
+});
+const marshalDetachIPRequest = (request, defaults) => ({
+  resource: marshalCustomResource(request.resource)
+});
+const marshalMoveIPRequest = (request, defaults) => ({
+  from_resource: marshalCustomResource(request.fromResource),
+  to_resource: request.toResource !== void 0 ? marshalCustomResource(request.toResource) : void 0
+});
+const marshalReleaseIPSetRequest = (request, defaults) => ({
+  ip_ids: request.ipIds
+});
+const marshalReverse = (request, defaults) => ({
+  address: request.address,
+  hostname: request.hostname
+});
+const marshalUpdateIPRequest = (request, defaults) => ({
+  reverses: request.reverses !== void 0 ? request.reverses.map((elt) => marshalReverse(elt)) : void 0,
+  tags: request.tags
+});
+export {
+  marshalAttachIPRequest,
+  marshalBookIPRequest,
+  marshalDetachIPRequest,
+  marshalMoveIPRequest,
+  marshalReleaseIPSetRequest,
+  marshalUpdateIPRequest,
+  unmarshalIP,
+  unmarshalListIPsResponse
+};

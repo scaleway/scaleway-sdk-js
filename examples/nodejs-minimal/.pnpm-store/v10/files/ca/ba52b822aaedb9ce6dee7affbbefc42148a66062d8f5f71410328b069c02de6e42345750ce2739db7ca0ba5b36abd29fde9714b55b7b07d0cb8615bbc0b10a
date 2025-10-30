@@ -1,0 +1,4 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const index_gen = require("./v2beta1/index.gen.cjs");
+exports.Domainv2beta1 = index_gen;

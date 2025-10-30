@@ -1,0 +1,24 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const scwError = require("../scw-error.cjs");
+class ResourceNotFoundError extends scwError.ScalewayError {
+  constructor(status, body, resource, resourceId) {
+    super(
+      status,
+      body,
+      `resource ${resource} with ID ${resourceId} is not found`
+    );
+    this.status = status;
+    this.body = body;
+    this.resource = resource;
+    this.resourceId = resourceId;
+    this.name = "ResourceNotFoundError";
+  }
+  static fromJSON(status, obj) {
+    if (typeof obj.resource !== "string" || typeof obj.resource_id !== "string") {
+      return null;
+    }
+    return new ResourceNotFoundError(status, obj, obj.resource, obj.resource_id);
+  }
+}
+exports.ResourceNotFoundError = ResourceNotFoundError;

@@ -1,0 +1,4 @@
+import * as index_gen from "./v2/index.gen.js";
+export {
+  index_gen as Vpcv2
+};

@@ -1,0 +1,25 @@
+import type { JSONObject } from '../../helpers/json.js';
+/**
+ * Scaleway error.
+ *
+ * @public
+ */
+export declare class ScalewayError extends Error {
+    /** The response status. */
+    readonly status: number;
+    /** The response payload. */
+    readonly body: JSONObject | string;
+    /** The augmented message. */
+    readonly message: string;
+    /** The message originating from the payload. */
+    rawMessage: string | undefined;
+    constructor(
+    /** The response status. */
+    status: number, 
+    /** The response payload. */
+    body: JSONObject | string, 
+    /** The augmented message. */
+    message?: string);
+    static fromJSON(status: number, obj: Readonly<JSONObject>): ScalewayError | null;
+    toString(): string;
+}

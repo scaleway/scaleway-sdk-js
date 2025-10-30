@@ -1,0 +1,60 @@
+import { isBrowser } from "../../helpers/is-browser.js";
+import { composeRequestInterceptors, composeResponseInterceptors, composeResponseErrorInterceptors } from "../../internal/interceptors/composer.js";
+import { obfuscateAuthHeadersEntry } from "../auth.js";
+import { logRequest, logResponse, obfuscateInterceptor } from "./http-interceptors.js";
+import { responseParser } from "./response-parser.js";
+const buildRequest = (request, settings) => {
+  let { path } = request;
+  if (request.urlParams instanceof URLSearchParams) {
+    path = path.concat(`?${request.urlParams.toString()}`);
+  }
+  return new Request(`${settings.apiURL}${path}`, {
+    body: request.body,
+    headers: {
+      Accept: "application/json",
+      .../* istanbul ignore next */
+      !isBrowser() ? { "User-Agent": settings.userAgent } : {},
+      ...request.headers
+    },
+    method: request.method
+  });
+};
+const asIs = (response) => response;
+const buildFetcher = (settings, httpClient) => {
+  let requestNumber = 0;
+  const prepareRequest = (requestId) => composeRequestInterceptors([
+    ...settings.interceptors.map((obj) => obj.request).filter((obj) => obj),
+    logRequest(requestId, obfuscateInterceptor(obfuscateAuthHeadersEntry))
+  ]);
+  const prepareResponse = (requestId) => composeResponseInterceptors([
+    ...settings.interceptors.map((obj) => obj.response).filter((obj) => obj),
+    logResponse(requestId)
+  ]);
+  const prepareResponseErrors = () => composeResponseErrorInterceptors(
+    settings.interceptors.map((obj) => obj.responseError).filter((obj) => obj)
+  );
+  return async (request, unwrapper = asIs) => {
+    const requestId = `${requestNumber += 1}`;
+    const reqInterceptors = prepareRequest(requestId);
+    const finalRequest = await reqInterceptors(buildRequest(request, settings));
+    try {
+      const response = await httpClient(finalRequest);
+      const resInterceptors = prepareResponse(requestId);
+      const finalResponse = await resInterceptors(response);
+      const resUnmarshaller = responseParser(
+        unwrapper,
+        request.responseType ?? "json"
+      );
+      const unmarshaledResponse = await resUnmarshaller(finalResponse);
+      return unmarshaledResponse;
+    } catch (err) {
+      const resErrorInterceptors = prepareResponseErrors();
+      const handledError = await resErrorInterceptors(finalRequest, err);
+      return unwrapper(handledError);
+    }
+  };
+};
+export {
+  buildFetcher,
+  buildRequest
+};

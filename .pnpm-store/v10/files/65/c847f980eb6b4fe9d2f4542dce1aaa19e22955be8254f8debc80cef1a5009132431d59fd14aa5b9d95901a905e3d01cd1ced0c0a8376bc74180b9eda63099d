@@ -1,0 +1,14 @@
+import type { JSONObject } from '../../../helpers/json.js';
+import { ScalewayError } from '../scw-error.js';
+/**
+ * OutOfStock error happens when stocks are empty for the resource.
+ *
+ * @public
+ */
+export declare class OutOfStockError extends ScalewayError {
+    readonly status: number;
+    readonly body: JSONObject;
+    readonly resource: string;
+    constructor(status: number, body: JSONObject, resource: string);
+    static fromJSON(status: number, obj: Readonly<JSONObject>): OutOfStockError | null;
+}

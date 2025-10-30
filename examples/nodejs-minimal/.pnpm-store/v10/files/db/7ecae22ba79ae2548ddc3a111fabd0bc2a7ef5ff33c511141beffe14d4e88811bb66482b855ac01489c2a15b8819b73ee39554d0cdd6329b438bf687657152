@@ -1,0 +1,580 @@
+import { resolveOneOf, isJSONObject, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney } from "@scaleway/sdk-client";
+const unmarshalDatabaseUser = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DatabaseUser' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    databases: data.databases,
+    username: data.username
+  };
+};
+const unmarshalDatabase = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Database' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    databaseName: data.database_name,
+    users: data.users
+  };
+};
+const unmarshalFtpAccount = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'FtpAccount' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    path: data.path,
+    username: data.username
+  };
+};
+const unmarshalMailAccount = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'MailAccount' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    domain: data.domain,
+    username: data.username
+  };
+};
+const unmarshalCheckUserOwnsDomainResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CheckUserOwnsDomainResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    ownsDomain: data.owns_domain
+  };
+};
+const unmarshalAutoConfigDomainDns = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AutoConfigDomainDns' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    allRecords: data.all_records,
+    mailRecords: data.mail_records,
+    nameservers: data.nameservers,
+    none: data.none,
+    webRecords: data.web_records
+  };
+};
+const unmarshalDnsRecord = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DnsRecord' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    name: data.name,
+    priority: data.priority,
+    rawData: data.raw_data,
+    status: data.status,
+    ttl: data.ttl,
+    type: data.type,
+    value: data.value
+  };
+};
+const unmarshalNameserver = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Nameserver' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    hostname: data.hostname,
+    isDefault: data.is_default,
+    status: data.status
+  };
+};
+const unmarshalDnsRecords = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DnsRecords' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    autoConfigDomainDns: data.auto_config_domain_dns ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns) : void 0,
+    dnsConfig: data.dns_config ? data.dns_config : void 0,
+    nameServers: unmarshalArrayOfObject(data.name_servers, unmarshalNameserver),
+    records: unmarshalArrayOfObject(data.records, unmarshalDnsRecord),
+    status: data.status
+  };
+};
+const unmarshalDomain = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Domain' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    autoConfigDomainDns: data.auto_config_domain_dns ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns) : void 0,
+    availableActions: data.available_actions,
+    availableDnsActions: data.available_dns_actions ? data.available_dns_actions : void 0,
+    name: data.name,
+    owner: data.owner,
+    status: data.status
+  };
+};
+const unmarshalPlatformControlPanelUrls = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PlatformControlPanelUrls' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    dashboard: data.dashboard,
+    webmail: data.webmail
+  };
+};
+const unmarshalOfferOption = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferOption' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    billingOperationPath: data.billing_operation_path,
+    currentValue: data.current_value,
+    id: data.id,
+    maxValue: data.max_value,
+    minValue: data.min_value,
+    name: data.name,
+    price: data.price ? unmarshalMoney(data.price) : void 0,
+    quotaWarning: data.quota_warning
+  };
+};
+const unmarshalPlatformControlPanel = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PlatformControlPanel' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    name: data.name,
+    urls: data.urls ? unmarshalPlatformControlPanelUrls(data.urls) : void 0
+  };
+};
+const unmarshalHostingUser = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HostingUser' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    contactEmail: data.contact_email,
+    oneTimePassword: data.one_time_password,
+    oneTimePasswordB64: data.one_time_password_b64,
+    username: data.username
+  };
+};
+const unmarshalOffer = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Offer' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    available: data.available,
+    billingOperationPath: data.billing_operation_path,
+    controlPanelName: data.control_panel_name,
+    endOfLife: data.end_of_life,
+    id: data.id,
+    name: data.name,
+    options: unmarshalArrayOfObject(data.options, unmarshalOfferOption),
+    price: data.price ? unmarshalMoney(data.price) : void 0,
+    quotaWarning: data.quota_warning
+  };
+};
+const unmarshalPlatform = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Platform' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    controlPanel: data.control_panel ? unmarshalPlatformControlPanel(data.control_panel) : void 0,
+    groupName: data.group_name,
+    hostname: data.hostname,
+    ipv4: data.ipv4,
+    ipv6: data.ipv6,
+    number: data.number
+  };
+};
+const unmarshalHosting = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Hosting' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    dnsStatus: data.dns_status ? data.dns_status : void 0,
+    domain: data.domain,
+    domainStatus: data.domain_status,
+    id: data.id,
+    ipv4: data.ipv4,
+    offer: data.offer ? unmarshalOffer(data.offer) : void 0,
+    platform: data.platform ? unmarshalPlatform(data.platform) : void 0,
+    projectId: data.project_id,
+    protected: data.protected,
+    region: data.region,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+    user: data.user ? unmarshalHostingUser(data.user) : void 0
+  };
+};
+const unmarshalControlPanel = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ControlPanel' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    available: data.available,
+    availableLanguages: data.available_languages,
+    logoUrl: data.logo_url,
+    name: data.name
+  };
+};
+const unmarshalListControlPanelsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListControlPanelsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    controlPanels: unmarshalArrayOfObject(
+      data.control_panels,
+      unmarshalControlPanel
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListDatabaseUsersResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDatabaseUsersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    totalCount: data.total_count,
+    users: unmarshalArrayOfObject(data.users, unmarshalDatabaseUser)
+  };
+};
+const unmarshalListDatabasesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDatabasesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    databases: unmarshalArrayOfObject(data.databases, unmarshalDatabase),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListFtpAccountsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListFtpAccountsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    ftpAccounts: unmarshalArrayOfObject(data.ftp_accounts, unmarshalFtpAccount),
+    totalCount: data.total_count
+  };
+};
+const unmarshalHostingSummary = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HostingSummary' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    dnsStatus: data.dns_status ? data.dns_status : void 0,
+    domain: data.domain,
+    domainStatus: data.domain_status,
+    id: data.id,
+    offerName: data.offer_name,
+    projectId: data.project_id,
+    protected: data.protected,
+    region: data.region,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalListHostingsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListHostingsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    hostings: unmarshalArrayOfObject(data.hostings, unmarshalHostingSummary),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListMailAccountsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListMailAccountsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    mailAccounts: unmarshalArrayOfObject(
+      data.mail_accounts,
+      unmarshalMailAccount
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListOffersResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListOffersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    offers: unmarshalArrayOfObject(data.offers, unmarshalOffer),
+    totalCount: data.total_count
+  };
+};
+const unmarshalWebsite = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Website' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    domain: data.domain,
+    path: data.path,
+    sslStatus: data.ssl_status
+  };
+};
+const unmarshalListWebsitesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListWebsitesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    totalCount: data.total_count,
+    websites: unmarshalArrayOfObject(data.websites, unmarshalWebsite)
+  };
+};
+const unmarshalResetHostingPasswordResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ResetHostingPasswordResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    oneTimePassword: data.one_time_password,
+    oneTimePasswordB64: data.one_time_password_b64
+  };
+};
+const unmarshalResourceSummary = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ResourceSummary' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    databasesCount: data.databases_count,
+    ftpAccountsCount: data.ftp_accounts_count,
+    mailAccountsCount: data.mail_accounts_count,
+    websitesCount: data.websites_count
+  };
+};
+const unmarshalDomainAvailability = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainAvailability' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    availableActions: data.available_actions,
+    canCreateHosting: data.can_create_hosting,
+    name: data.name,
+    price: data.price ? unmarshalMoney(data.price) : void 0,
+    status: data.status,
+    zoneName: data.zone_name
+  };
+};
+const unmarshalSearchDomainsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SearchDomainsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    domainsAvailable: unmarshalArrayOfObject(
+      data.domains_available,
+      unmarshalDomainAvailability
+    )
+  };
+};
+const unmarshalSession = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Session' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    url: data.url
+  };
+};
+const marshalDatabaseApiAssignDatabaseUserRequest = (request, defaults) => ({
+  username: request.username
+});
+const marshalDatabaseApiChangeDatabaseUserPasswordRequest = (request, defaults) => ({
+  password: request.password
+});
+const marshalCreateDatabaseRequestUser = (request, defaults) => ({
+  password: request.password,
+  username: request.username
+});
+const marshalDatabaseApiCreateDatabaseRequest = (request, defaults) => ({
+  database_name: request.databaseName,
+  ...resolveOneOf([
+    {
+      param: "new_user",
+      value: request.newUser !== void 0 ? marshalCreateDatabaseRequestUser(request.newUser) : void 0
+    },
+    { param: "existing_username", value: request.existingUsername }
+  ])
+});
+const marshalDatabaseApiCreateDatabaseUserRequest = (request, defaults) => ({
+  password: request.password,
+  username: request.username
+});
+const marshalDatabaseApiUnassignDatabaseUserRequest = (request, defaults) => ({
+  username: request.username
+});
+const marshalDnsApiCheckUserOwnsDomainRequest = (request, defaults) => ({
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalAutoConfigDomainDns = (request, defaults) => ({
+  all_records: request.allRecords,
+  mail_records: request.mailRecords,
+  nameservers: request.nameservers,
+  none: request.none,
+  web_records: request.webRecords
+});
+const marshalSyncDomainDnsRecordsRequestRecord = (request, defaults) => ({
+  name: request.name,
+  type: request.type
+});
+const marshalDnsApiSyncDomainDnsRecordsRequest = (request, defaults) => ({
+  auto_config_domain_dns: request.autoConfigDomainDns !== void 0 ? marshalAutoConfigDomainDns(request.autoConfigDomainDns) : void 0,
+  custom_records: request.customRecords !== void 0 ? request.customRecords.map(
+    (elt) => marshalSyncDomainDnsRecordsRequestRecord(elt)
+  ) : void 0,
+  update_all_records: request.updateAllRecords,
+  update_mail_records: request.updateMailRecords,
+  update_nameservers: request.updateNameservers,
+  update_web_records: request.updateWebRecords
+});
+const marshalFtpAccountApiChangeFtpAccountPasswordRequest = (request, defaults) => ({
+  password: request.password
+});
+const marshalFtpAccountApiCreateFtpAccountRequest = (request, defaults) => ({
+  password: request.password,
+  path: request.path,
+  username: request.username
+});
+const marshalCreateHostingRequestDomainConfiguration = (request, defaults) => ({
+  update_all_records: request.updateAllRecords,
+  update_mail_record: request.updateMailRecord,
+  update_nameservers: request.updateNameservers,
+  update_web_record: request.updateWebRecord
+});
+const marshalOfferOptionRequest = (request, defaults) => ({
+  id: request.id,
+  quantity: request.quantity
+});
+const marshalHostingApiCreateHostingRequest = (request, defaults) => ({
+  auto_config_domain_dns: request.autoConfigDomainDns !== void 0 ? marshalAutoConfigDomainDns(request.autoConfigDomainDns) : void 0,
+  domain: request.domain,
+  domain_configuration: request.domainConfiguration !== void 0 ? marshalCreateHostingRequestDomainConfiguration(
+    request.domainConfiguration
+  ) : void 0,
+  email: request.email,
+  language: request.language,
+  offer_id: request.offerId,
+  offer_options: request.offerOptions !== void 0 ? request.offerOptions.map(
+    (elt) => marshalOfferOptionRequest(elt)
+  ) : void 0,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  skip_welcome_email: request.skipWelcomeEmail,
+  tags: request.tags
+});
+const marshalHostingApiUpdateHostingRequest = (request, defaults) => ({
+  email: request.email,
+  offer_id: request.offerId,
+  offer_options: request.offerOptions !== void 0 ? request.offerOptions.map(
+    (elt) => marshalOfferOptionRequest(elt)
+  ) : void 0,
+  protected: request.protected,
+  tags: request.tags
+});
+const marshalMailAccountApiChangeMailAccountPasswordRequest = (request, defaults) => ({
+  domain: request.domain,
+  password: request.password,
+  username: request.username
+});
+const marshalMailAccountApiCreateMailAccountRequest = (request, defaults) => ({
+  domain: request.domain,
+  password: request.password,
+  username: request.username
+});
+const marshalMailAccountApiRemoveMailAccountRequest = (request, defaults) => ({
+  domain: request.domain,
+  username: request.username
+});
+export {
+  marshalDatabaseApiAssignDatabaseUserRequest,
+  marshalDatabaseApiChangeDatabaseUserPasswordRequest,
+  marshalDatabaseApiCreateDatabaseRequest,
+  marshalDatabaseApiCreateDatabaseUserRequest,
+  marshalDatabaseApiUnassignDatabaseUserRequest,
+  marshalDnsApiCheckUserOwnsDomainRequest,
+  marshalDnsApiSyncDomainDnsRecordsRequest,
+  marshalFtpAccountApiChangeFtpAccountPasswordRequest,
+  marshalFtpAccountApiCreateFtpAccountRequest,
+  marshalHostingApiCreateHostingRequest,
+  marshalHostingApiUpdateHostingRequest,
+  marshalMailAccountApiChangeMailAccountPasswordRequest,
+  marshalMailAccountApiCreateMailAccountRequest,
+  marshalMailAccountApiRemoveMailAccountRequest,
+  unmarshalCheckUserOwnsDomainResponse,
+  unmarshalDatabase,
+  unmarshalDatabaseUser,
+  unmarshalDnsRecords,
+  unmarshalDomain,
+  unmarshalFtpAccount,
+  unmarshalHosting,
+  unmarshalListControlPanelsResponse,
+  unmarshalListDatabaseUsersResponse,
+  unmarshalListDatabasesResponse,
+  unmarshalListFtpAccountsResponse,
+  unmarshalListHostingsResponse,
+  unmarshalListMailAccountsResponse,
+  unmarshalListOffersResponse,
+  unmarshalListWebsitesResponse,
+  unmarshalMailAccount,
+  unmarshalResetHostingPasswordResponse,
+  unmarshalResourceSummary,
+  unmarshalSearchDomainsResponse,
+  unmarshalSession
+};

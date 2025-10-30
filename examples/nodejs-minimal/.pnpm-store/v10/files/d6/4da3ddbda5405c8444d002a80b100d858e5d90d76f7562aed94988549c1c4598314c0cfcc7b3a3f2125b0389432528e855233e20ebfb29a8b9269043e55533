@@ -1,0 +1,7 @@
+import type { ImageStatus, NamespaceStatus, TagStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link ImageStatus}. */
+export declare const IMAGE_TRANSIENT_STATUSES: ImageStatus[];
+/** Lists transient statutes of the enum {@link NamespaceStatus}. */
+export declare const NAMESPACE_TRANSIENT_STATUSES: NamespaceStatus[];
+/** Lists transient statutes of the enum {@link TagStatus}. */
+export declare const TAG_TRANSIENT_STATUSES: TagStatus[];

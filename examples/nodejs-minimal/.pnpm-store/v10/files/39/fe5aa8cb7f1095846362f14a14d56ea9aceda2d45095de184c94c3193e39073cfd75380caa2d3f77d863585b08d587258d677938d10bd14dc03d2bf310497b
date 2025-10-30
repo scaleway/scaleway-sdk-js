@@ -1,0 +1,66 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const auth = require("./auth.cjs");
+const clientIniProfile = require("./client-ini-profile.cjs");
+const withProfile = (profile) => (settings) => {
+  const newSettings = { ...settings };
+  if (profile.apiURL) {
+    newSettings.apiURL = profile.apiURL;
+  }
+  if (profile.defaultOrganizationId) {
+    newSettings.defaultOrganizationId = profile.defaultOrganizationId;
+  }
+  if (profile.defaultProjectId) {
+    newSettings.defaultProjectId = profile.defaultProjectId;
+  }
+  if (profile.defaultRegion) {
+    newSettings.defaultRegion = profile.defaultRegion;
+  }
+  if (profile.defaultZone) {
+    newSettings.defaultZone = profile.defaultZone;
+  }
+  if (clientIniProfile.hasAuthenticationSecrets(profile)) {
+    newSettings.interceptors = [
+      {
+        request: auth.authenticateWithSecrets(profile)
+      },
+      ...newSettings.interceptors
+    ];
+  }
+  return newSettings;
+};
+const withHTTPClient = (httpClient) => (settings) => ({ ...settings, httpClient });
+const withDefaultPageSize = (defaultPageSize) => (settings) => ({ ...settings, defaultPageSize });
+const withUserAgent = (userAgent) => (settings) => ({ ...settings, userAgent });
+const withUserAgentSuffix = (userAgent) => (settings) => ({
+  ...settings,
+  userAgent: settings.userAgent ? `${settings.userAgent} ${userAgent}` : userAgent
+});
+const withAdditionalInterceptors = (interceptors) => (settings) => ({
+  ...settings,
+  interceptors: settings.interceptors.concat(interceptors)
+});
+const withLegacyInterceptors = () => (settings) => {
+  if (!settings.requestInterceptors && !settings.responseInterceptors) {
+    return settings;
+  }
+  const allInterceptors = settings.interceptors.concat(
+    (settings.requestInterceptors ?? []).map((obj) => ({
+      request: obj
+    })),
+    (settings.responseInterceptors ?? []).map((obj) => ({
+      response: obj
+    }))
+  );
+  return {
+    ...settings,
+    interceptors: allInterceptors
+  };
+};
+exports.withAdditionalInterceptors = withAdditionalInterceptors;
+exports.withDefaultPageSize = withDefaultPageSize;
+exports.withHTTPClient = withHTTPClient;
+exports.withLegacyInterceptors = withLegacyInterceptors;
+exports.withProfile = withProfile;
+exports.withUserAgent = withUserAgent;
+exports.withUserAgentSuffix = withUserAgentSuffix;

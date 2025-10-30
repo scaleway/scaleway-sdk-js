@@ -1,0 +1,24 @@
+import { LevelResolver, shouldLog } from "./level-resolver.js";
+class ConsoleLogger {
+  constructor(logLevel, prefix = "", output = console) {
+    this.logLevel = logLevel;
+    this.prefix = prefix;
+    this.output = output;
+    this.level = LevelResolver[this.logLevel];
+  }
+  level;
+  makeMethod(method) {
+    return (message) => {
+      if (shouldLog(this.level, method)) {
+        this.output[method](this.prefix ? `${this.prefix} ${message}` : message);
+      }
+    };
+  }
+  debug = this.makeMethod("debug");
+  error = this.makeMethod("error");
+  info = this.makeMethod("info");
+  warn = this.makeMethod("warn");
+}
+export {
+  ConsoleLogger
+};

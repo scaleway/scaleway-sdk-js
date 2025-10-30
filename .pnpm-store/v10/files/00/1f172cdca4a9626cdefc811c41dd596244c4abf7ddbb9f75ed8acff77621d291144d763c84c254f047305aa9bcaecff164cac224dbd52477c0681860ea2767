@@ -1,0 +1,3 @@
+import type { DatabaseStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link DatabaseStatus}. */
+export declare const DATABASE_TRANSIENT_STATUSES: DatabaseStatus[];

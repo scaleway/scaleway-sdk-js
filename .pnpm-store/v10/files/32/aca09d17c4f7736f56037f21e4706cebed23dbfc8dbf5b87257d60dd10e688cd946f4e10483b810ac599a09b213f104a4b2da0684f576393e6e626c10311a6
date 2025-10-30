@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const HealthCheckHttpConfig = {
+  hostHeader: {
+    pattern: /^[^\s]+$/
+  }
+};
+const HealthCheckHttpsConfig = {
+  hostHeader: {
+    pattern: /^[^\s]+$/
+  }
+};
+exports.HealthCheckHttpConfig = HealthCheckHttpConfig;
+exports.HealthCheckHttpsConfig = HealthCheckHttpsConfig;

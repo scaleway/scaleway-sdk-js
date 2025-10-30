@@ -1,0 +1,18 @@
+/** Returns true if the given string has a valid UUID format. */
+export declare const isUUID: (str: string) => boolean;
+/** Returns true if the given string has a valid Scaleway access key format. */
+export declare const isAccessKey: (str: string) => boolean;
+/** Returns true if the given string has a valid Scaleway secret key format. */
+export declare const isSecretKey: (str: string) => boolean;
+/** Returns true if the given string has a valid Scaleway organization ID format. */
+export declare const isOrganizationId: (str: string) => boolean;
+/** Returns true if the given string has a valid Scaleway project ID format. */
+export declare const isProjectId: (str: string) => boolean;
+/** Returns true if the given string has a valid region format. */
+export declare const isRegion: (str: string) => boolean;
+/** Returns true if the given string has a valid zone format. */
+export declare const isZone: (str: string) => boolean;
+/** Returns true if the given string has a valid URL format and starts by `http(s):`. */
+export declare const isURL: (str: string) => boolean;
+/** Returns true if the given string has an email format. */
+export declare const isEmail: (str: string) => boolean;

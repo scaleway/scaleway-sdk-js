@@ -1,0 +1,198 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalKeyRotationPolicy = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'KeyRotationPolicy' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    nextRotationAt: sdkClient.unmarshalDate(data.next_rotation_at),
+    rotationPeriod: data.rotation_period
+  };
+};
+const unmarshalKeyUsage = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'KeyUsage' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    asymmetricEncryption: data.asymmetric_encryption ? data.asymmetric_encryption : void 0,
+    asymmetricSigning: data.asymmetric_signing ? data.asymmetric_signing : void 0,
+    symmetricEncryption: data.symmetric_encryption ? data.symmetric_encryption : void 0
+  };
+};
+const unmarshalKey = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Key' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    deletionRequestedAt: sdkClient.unmarshalDate(data.deletion_requested_at),
+    description: data.description,
+    id: data.id,
+    locked: data.locked,
+    name: data.name,
+    origin: data.origin,
+    projectId: data.project_id,
+    protected: data.protected,
+    region: data.region,
+    rotatedAt: sdkClient.unmarshalDate(data.rotated_at),
+    rotationCount: data.rotation_count,
+    rotationPolicy: data.rotation_policy ? unmarshalKeyRotationPolicy(data.rotation_policy) : void 0,
+    state: data.state,
+    tags: data.tags,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    usage: data.usage ? unmarshalKeyUsage(data.usage) : void 0
+  };
+};
+const unmarshalDataKey = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DataKey' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    algorithm: data.algorithm,
+    ciphertext: data.ciphertext,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    keyId: data.key_id,
+    plaintext: data.plaintext
+  };
+};
+const unmarshalDecryptResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DecryptResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    ciphertext: data.ciphertext,
+    keyId: data.key_id,
+    plaintext: data.plaintext
+  };
+};
+const unmarshalEncryptResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EncryptResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    ciphertext: data.ciphertext,
+    keyId: data.key_id
+  };
+};
+const unmarshalListKeysResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListKeysResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    keys: sdkClient.unmarshalArrayOfObject(data.keys, unmarshalKey),
+    totalCount: data.total_count
+  };
+};
+const unmarshalPublicKey = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicKey' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    pem: data.pem
+  };
+};
+const unmarshalSignResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SignResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    keyId: data.key_id,
+    signature: data.signature
+  };
+};
+const unmarshalVerifyResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VerifyResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    keyId: data.key_id,
+    valid: data.valid
+  };
+};
+const marshalKeyRotationPolicy = (request, defaults) => ({
+  next_rotation_at: request.nextRotationAt,
+  rotation_period: request.rotationPeriod
+});
+const marshalKeyUsage = (request, defaults) => ({
+  ...sdkClient.resolveOneOf([
+    { param: "symmetric_encryption", value: request.symmetricEncryption },
+    { param: "asymmetric_encryption", value: request.asymmetricEncryption },
+    { param: "asymmetric_signing", value: request.asymmetricSigning }
+  ])
+});
+const marshalCreateKeyRequest = (request, defaults) => ({
+  description: request.description,
+  name: request.name,
+  origin: request.origin,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  rotation_policy: request.rotationPolicy !== void 0 ? marshalKeyRotationPolicy(request.rotationPolicy) : void 0,
+  tags: request.tags,
+  unprotected: request.unprotected,
+  usage: request.usage !== void 0 ? marshalKeyUsage(request.usage) : void 0
+});
+const marshalDecryptRequest = (request, defaults) => ({
+  associated_data: request.associatedData,
+  ciphertext: request.ciphertext
+});
+const marshalEncryptRequest = (request, defaults) => ({
+  associated_data: request.associatedData,
+  plaintext: request.plaintext
+});
+const marshalGenerateDataKeyRequest = (request, defaults) => ({
+  algorithm: request.algorithm,
+  without_plaintext: request.withoutPlaintext
+});
+const marshalImportKeyMaterialRequest = (request, defaults) => ({
+  key_material: request.keyMaterial,
+  salt: request.salt
+});
+const marshalSignRequest = (request, defaults) => ({
+  digest: request.digest
+});
+const marshalUpdateKeyRequest = (request, defaults) => ({
+  description: request.description,
+  name: request.name,
+  rotation_policy: request.rotationPolicy !== void 0 ? marshalKeyRotationPolicy(request.rotationPolicy) : void 0,
+  tags: request.tags
+});
+const marshalVerifyRequest = (request, defaults) => ({
+  digest: request.digest,
+  signature: request.signature
+});
+exports.marshalCreateKeyRequest = marshalCreateKeyRequest;
+exports.marshalDecryptRequest = marshalDecryptRequest;
+exports.marshalEncryptRequest = marshalEncryptRequest;
+exports.marshalGenerateDataKeyRequest = marshalGenerateDataKeyRequest;
+exports.marshalImportKeyMaterialRequest = marshalImportKeyMaterialRequest;
+exports.marshalSignRequest = marshalSignRequest;
+exports.marshalUpdateKeyRequest = marshalUpdateKeyRequest;
+exports.marshalVerifyRequest = marshalVerifyRequest;
+exports.unmarshalDataKey = unmarshalDataKey;
+exports.unmarshalDecryptResponse = unmarshalDecryptResponse;
+exports.unmarshalEncryptResponse = unmarshalEncryptResponse;
+exports.unmarshalKey = unmarshalKey;
+exports.unmarshalListKeysResponse = unmarshalListKeysResponse;
+exports.unmarshalPublicKey = unmarshalPublicKey;
+exports.unmarshalSignResponse = unmarshalSignResponse;
+exports.unmarshalVerifyResponse = unmarshalVerifyResponse;

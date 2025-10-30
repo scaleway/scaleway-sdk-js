@@ -1,0 +1,43 @@
+import { getLogger } from "../../internal/logger/index.js";
+import { shouldLog, LevelResolver } from "../../internal/logger/level-resolver.js";
+import { dumpRequest, dumpResponse } from "./http-dumper.js";
+class ObfuscatedRequest extends Request {
+  constructor(request, obfuscate) {
+    super(request);
+    this.request = request;
+    this.obfuscate = obfuscate;
+  }
+  get headers() {
+    return new Headers(Array.from(this.request.headers, this.obfuscate));
+  }
+  clone() {
+    return new ObfuscatedRequest(this.request, this.obfuscate);
+  }
+}
+const obfuscateInterceptor = (obfuscate) => ({ request }) => new ObfuscatedRequest(request, obfuscate);
+const identity = ({ request }) => request;
+const logRequest = (identifier, obfuscate = identity) => async ({ request }) => {
+  if (shouldLog(LevelResolver[getLogger().logLevel], "debug")) {
+    getLogger().debug(
+      `--------------- Scaleway SDK REQUEST ${identifier} ---------------
+${await dumpRequest(await obfuscate({ request }))}
+---------------------------------------------------------`
+    );
+  }
+  return request;
+};
+const logResponse = (identifier) => async ({ response }) => {
+  if (shouldLog(LevelResolver[getLogger().logLevel], "debug")) {
+    getLogger().debug(
+      `--------------- Scaleway SDK RESPONSE ${identifier} ---------------
+${await dumpResponse(response)}
+---------------------------------------------------------`
+    );
+  }
+  return response;
+};
+export {
+  logRequest,
+  logResponse,
+  obfuscateInterceptor
+};

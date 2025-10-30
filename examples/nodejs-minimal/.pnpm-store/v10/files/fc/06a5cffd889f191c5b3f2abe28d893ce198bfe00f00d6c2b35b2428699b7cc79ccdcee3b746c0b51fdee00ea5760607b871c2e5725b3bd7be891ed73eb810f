@@ -1,0 +1,9 @@
+/**
+ * Sleep for a specified number of time.
+ *
+ * @param ms - The number of milliseconds
+ * @returns The sleep promise
+ *
+ * @internal
+ */
+export declare const sleep: (ms: number) => Promise<void>;

@@ -1,0 +1,41 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const fs = require("fs");
+const STRIP_COMMENT_REGEX = /(^|\s)[;#]/;
+const DETECT_SECTION_REGEX = /^\s*([^]+):\s*$/;
+const DETECT_ITEM_REGEX = /^\s*(.+?)\s*:\s*(.+?)\s*$/;
+const convertYamlToConfiguration = (input) => {
+  let foundProfilesKey = false;
+  let currentSection = "default";
+  const map = {};
+  if (typeof input !== "string") {
+    return map;
+  }
+  input.split(/\r?\n/).forEach((rawLine) => {
+    const line = rawLine.split(STRIP_COMMENT_REGEX)[0];
+    const newSection = DETECT_SECTION_REGEX.exec(line);
+    if (newSection) {
+      currentSection = void 0;
+      if (newSection[1] === "profiles") {
+        foundProfilesKey = true;
+      } else if (foundProfilesKey) {
+        [, currentSection] = newSection;
+      }
+    } else if (currentSection) {
+      const item = DETECT_ITEM_REGEX.exec(line);
+      if (item) {
+        if (typeof map[currentSection] !== "object") {
+          map[currentSection] = {};
+        }
+        [, , map[currentSection][item[1]]] = item;
+      }
+    }
+  });
+  return map;
+};
+const loadConfigurationFromFile = (filePath) => {
+  const fileContent = fs.readFileSync(filePath, "utf-8");
+  return convertYamlToConfiguration(fileContent);
+};
+exports.convertYamlToConfiguration = convertYamlToConfiguration;
+exports.loadConfigurationFromFile = loadConfigurationFromFile;

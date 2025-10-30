@@ -1,0 +1,237 @@
+import { isJSONObject, unmarshalDate, unmarshalArrayOfObject } from "@scaleway/sdk-client";
+const unmarshalEphemeralProperties = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EphemeralProperties' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    action: data.action,
+    expiresAt: unmarshalDate(data.expires_at),
+    expiresOnceAccessed: data.expires_once_accessed
+  };
+};
+const unmarshalSecretVersion = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SecretVersion' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    deletedAt: unmarshalDate(data.deleted_at),
+    deletionRequestedAt: unmarshalDate(data.deletion_requested_at),
+    description: data.description,
+    ephemeralProperties: data.ephemeral_properties ? unmarshalEphemeralProperties(data.ephemeral_properties) : void 0,
+    latest: data.latest,
+    revision: data.revision,
+    secretId: data.secret_id,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalEphemeralPolicy = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EphemeralPolicy' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    action: data.action,
+    expiresOnceAccessed: data.expires_once_accessed,
+    timeToLive: data.time_to_live
+  };
+};
+const unmarshalSecret = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Secret' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    deletionRequestedAt: unmarshalDate(data.deletion_requested_at),
+    description: data.description,
+    ephemeralPolicy: data.ephemeral_policy ? unmarshalEphemeralPolicy(data.ephemeral_policy) : void 0,
+    id: data.id,
+    keyId: data.key_id,
+    managed: data.managed,
+    name: data.name,
+    path: data.path,
+    projectId: data.project_id,
+    protected: data.protected,
+    region: data.region,
+    status: data.status,
+    tags: data.tags,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at),
+    usedBy: data.used_by,
+    versionCount: data.version_count
+  };
+};
+const unmarshalAccessSecretVersionResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AccessSecretVersionResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    data: data.data,
+    dataCrc32: data.data_crc32,
+    revision: data.revision,
+    secretId: data.secret_id,
+    type: data.type
+  };
+};
+const unmarshalBrowseSecretsResponseItemFolderDetails = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'BrowseSecretsResponseItemFolderDetails' failed as data isn't a dictionary.`
+    );
+  }
+  return {};
+};
+const unmarshalBrowseSecretsResponseItemSecretDetails = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'BrowseSecretsResponseItemSecretDetails' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    ephemeralPolicy: data.ephemeral_policy ? unmarshalEphemeralPolicy(data.ephemeral_policy) : void 0,
+    id: data.id,
+    protected: data.protected,
+    tags: data.tags,
+    type: data.type,
+    versionCount: data.version_count
+  };
+};
+const unmarshalBrowseSecretsResponseItem = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'BrowseSecretsResponseItem' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    folder: data.folder ? unmarshalBrowseSecretsResponseItemFolderDetails(data.folder) : void 0,
+    name: data.name,
+    secret: data.secret ? unmarshalBrowseSecretsResponseItemSecretDetails(data.secret) : void 0,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalBrowseSecretsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'BrowseSecretsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    currentPath: data.current_path,
+    items: unmarshalArrayOfObject(
+      data.items,
+      unmarshalBrowseSecretsResponseItem
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListSecretTypesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSecretTypesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    totalCount: data.total_count,
+    types: data.types
+  };
+};
+const unmarshalListSecretVersionsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSecretVersionsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    totalCount: data.total_count,
+    versions: unmarshalArrayOfObject(data.versions, unmarshalSecretVersion)
+  };
+};
+const unmarshalListSecretsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSecretsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    secrets: unmarshalArrayOfObject(data.secrets, unmarshalSecret),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListTagsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListTagsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    tags: data.tags,
+    totalCount: data.total_count
+  };
+};
+const marshalAddSecretOwnerRequest = (request, defaults) => ({
+  product: request.product
+});
+const marshalEphemeralPolicy = (request, defaults) => ({
+  action: request.action,
+  expires_once_accessed: request.expiresOnceAccessed,
+  time_to_live: request.timeToLive
+});
+const marshalCreateSecretRequest = (request, defaults) => ({
+  description: request.description,
+  ephemeral_policy: request.ephemeralPolicy !== void 0 ? marshalEphemeralPolicy(request.ephemeralPolicy) : void 0,
+  key_id: request.keyId,
+  name: request.name,
+  path: request.path,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  protected: request.protected,
+  tags: request.tags,
+  type: request.type
+});
+const marshalCreateSecretVersionRequest = (request, defaults) => ({
+  data: request.data,
+  data_crc32: request.dataCrc32,
+  description: request.description,
+  disable_previous: request.disablePrevious
+});
+const marshalUpdateSecretRequest = (request, defaults) => ({
+  description: request.description,
+  ephemeral_policy: request.ephemeralPolicy !== void 0 ? marshalEphemeralPolicy(request.ephemeralPolicy) : void 0,
+  name: request.name,
+  path: request.path,
+  tags: request.tags
+});
+const marshalEphemeralProperties = (request, defaults) => ({
+  action: request.action,
+  expires_at: request.expiresAt,
+  expires_once_accessed: request.expiresOnceAccessed
+});
+const marshalUpdateSecretVersionRequest = (request, defaults) => ({
+  description: request.description,
+  ephemeral_properties: request.ephemeralProperties !== void 0 ? marshalEphemeralProperties(request.ephemeralProperties) : void 0
+});
+export {
+  marshalAddSecretOwnerRequest,
+  marshalCreateSecretRequest,
+  marshalCreateSecretVersionRequest,
+  marshalUpdateSecretRequest,
+  marshalUpdateSecretVersionRequest,
+  unmarshalAccessSecretVersionResponse,
+  unmarshalBrowseSecretsResponse,
+  unmarshalListSecretTypesResponse,
+  unmarshalListSecretVersionsResponse,
+  unmarshalListSecretsResponse,
+  unmarshalListTagsResponse,
+  unmarshalSecret,
+  unmarshalSecretVersion
+};

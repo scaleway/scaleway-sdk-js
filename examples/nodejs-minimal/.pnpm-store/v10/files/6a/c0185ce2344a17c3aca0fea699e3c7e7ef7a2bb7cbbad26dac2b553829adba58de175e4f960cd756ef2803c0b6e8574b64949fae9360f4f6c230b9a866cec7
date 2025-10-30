@@ -1,0 +1,14 @@
+import type { DefaultValues } from '@scaleway/sdk-client';
+import type { CreateDeploymentRequest, CreateEndpointRequest, CreateModelRequest, Deployment, Endpoint, ListDeploymentsResponse, ListModelsResponse, ListNodeTypesResponse, Model, ModelSupportInfo, UpdateDeploymentRequest, UpdateEndpointRequest } from './types.gen';
+export declare const unmarshalEndpoint: (data: unknown) => Endpoint;
+export declare const unmarshalModelSupportInfo: (data: unknown) => ModelSupportInfo;
+export declare const unmarshalDeployment: (data: unknown) => Deployment;
+export declare const unmarshalModel: (data: unknown) => Model;
+export declare const unmarshalListDeploymentsResponse: (data: unknown) => ListDeploymentsResponse;
+export declare const unmarshalListModelsResponse: (data: unknown) => ListModelsResponse;
+export declare const unmarshalListNodeTypesResponse: (data: unknown) => ListNodeTypesResponse;
+export declare const marshalCreateDeploymentRequest: (request: CreateDeploymentRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalCreateEndpointRequest: (request: CreateEndpointRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalCreateModelRequest: (request: CreateModelRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateDeploymentRequest: (request: UpdateDeploymentRequest, defaults: DefaultValues) => Record<string, unknown>;
+export declare const marshalUpdateEndpointRequest: (request: UpdateEndpointRequest, defaults: DefaultValues) => Record<string, unknown>;

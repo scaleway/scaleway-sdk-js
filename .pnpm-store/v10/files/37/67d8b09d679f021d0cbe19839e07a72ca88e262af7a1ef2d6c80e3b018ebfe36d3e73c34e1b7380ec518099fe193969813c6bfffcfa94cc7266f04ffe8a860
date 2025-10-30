@@ -1,0 +1,60 @@
+/**
+ * Returns the parameter if it's valid as path parameter
+ * (string and not empty, or number), else throws an exception.
+ *
+ * @param name - The parameter name
+ * @param param - The parameter value
+ * @returns The parameter value
+ *
+ * @throws TypeError
+ * Thrown if the parameter is invalid.
+ *
+ * @internal
+ */
+export declare function validatePathParam(name: string, param: string | number | undefined): string;
+/**
+ * Resolves the ideal parameter and value amongst an optional list.
+ *
+ * @param list - The list to be looking into
+ * @param isRequired - If at least one "one-of" should be found, false by default
+ * @returns The parameter and value
+ *
+ * @throws TypeError
+ * Thrown if isRequired is true, and no value or default value is specified.
+ *
+ * @internal
+ */
+export declare const resolveOneOf: <T>(list: {
+    param: string;
+    value: T | undefined;
+    default?: T | undefined;
+}[], isRequired?: boolean) => Record<string, T>;
+type URLParameterValue = string | number | boolean | Date | null;
+/**
+ * Filters defined parameters tuples and converts them to URLSearchParams.
+ *
+ * @param paramTuples - The key/value pairs
+ * @returns URLSearchParams
+ *
+ * @internal
+ */
+export declare const urlParams: (...paramTuples: Readonly<[string, URLParameterValue | URLParameterValue[] | undefined]>[]) => URLSearchParams;
+/**
+ * Unmarshals data to Date object.
+ *
+ * @internal
+ */
+export declare const unmarshalDate: (data: unknown) => Date | undefined;
+/**
+ * Unmarshals array of object.
+ *
+ * @internal
+ */
+export declare const unmarshalArrayOfObject: <T, B extends boolean>(data: unknown, unmarshaller: (input: unknown) => T, emptyFallback?: B) => B extends true ? T[] | undefined : T[];
+/**
+ * Unmarshals map of object.
+ *
+ * @internal
+ */
+export declare const unmarshalMapOfObject: <T, B extends boolean>(data: unknown, unmarshaller: (input: unknown) => T, emptyFallback?: B) => B extends true ? Record<string, T> | undefined : Record<string, T>;
+export {};

@@ -1,0 +1,152 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { ApiLocality } from '@scaleway/sdk-client';
+import type { CreateKeyRequest, DataKey, DecryptRequest, DecryptResponse, DeleteKeyMaterialRequest, DeleteKeyRequest, DisableKeyRequest, EnableKeyRequest, EncryptRequest, EncryptResponse, GenerateDataKeyRequest, GetKeyRequest, GetPublicKeyRequest, ImportKeyMaterialRequest, Key, ListKeysRequest, ListKeysResponse, ProtectKeyRequest, PublicKey, RestoreKeyRequest, RotateKeyRequest, SignRequest, SignResponse, UnprotectKeyRequest, UpdateKeyRequest, VerifyRequest, VerifyResponse } from './types.gen';
+/**
+ * Key Manager API.
+
+This API allows you to create, manage and use cryptographic keys in a centralized and secure service.
+ */
+export declare class API extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    /**
+     * Create a key. Create a key in a given region specified by the `region` parameter. Keys only support symmetric encryption. You can use keys to encrypt or decrypt arbitrary payloads, or to generate data encryption keys. **Data encryption keys are not stored in Key Manager**.
+     *
+     * @param request - The request {@link CreateKeyRequest}
+     * @returns A Promise of Key
+     */
+    createKey: (request: Readonly<CreateKeyRequest>) => Promise<Key>;
+    /**
+     * Get key metadata. Retrieve metadata for a specified key using the `region` and `key_id` parameters.
+     *
+     * @param request - The request {@link GetKeyRequest}
+     * @returns A Promise of Key
+     */
+    getKey: (request: Readonly<GetKeyRequest>) => Promise<Key>;
+    /**
+     * Get the public key in PEM format.. Retrieves the public portion of an asymmetric cryptographic key in PEM format.
+     *
+     * @param request - The request {@link GetPublicKeyRequest}
+     * @returns A Promise of PublicKey
+     */
+    getPublicKey: (request: Readonly<GetPublicKeyRequest>) => Promise<PublicKey>;
+    /**
+     * Update a key. Modify a key's metadata including name, description and tags, specified by the `key_id` and `region` parameters.
+     *
+     * @param request - The request {@link UpdateKeyRequest}
+     * @returns A Promise of Key
+     */
+    updateKey: (request: Readonly<UpdateKeyRequest>) => Promise<Key>;
+    /**
+     * Delete a key. Permanently delete a key specified by the `region` and `key_id` parameters. This action is irreversible. Any data encrypted with this key, including data encryption keys, will no longer be decipherable.
+     *
+     * @param request - The request {@link DeleteKeyRequest}
+     */
+    deleteKey: (request: Readonly<DeleteKeyRequest>) => Promise<void>;
+    /**
+     * Rotate a key. Generate a new version of an existing key with new key material. Previous key versions remain usable to decrypt previously encrypted data, but the key's new version will be used for subsequent encryption operations and data key generation.
+     *
+     * @param request - The request {@link RotateKeyRequest}
+     * @returns A Promise of Key
+     */
+    rotateKey: (request: Readonly<RotateKeyRequest>) => Promise<Key>;
+    /**
+     * Apply key protection. Apply protection to a given key specified by the `key_id` parameter. Applying key protection means that your key can be used and modified, but it cannot be deleted.
+     *
+     * @param request - The request {@link ProtectKeyRequest}
+     * @returns A Promise of Key
+     */
+    protectKey: (request: Readonly<ProtectKeyRequest>) => Promise<Key>;
+    /**
+     * Remove key protection. Remove key protection from a given key specified by the `key_id` parameter. Removing key protection means that your key can be deleted anytime.
+     *
+     * @param request - The request {@link UnprotectKeyRequest}
+     * @returns A Promise of Key
+     */
+    unprotectKey: (request: Readonly<UnprotectKeyRequest>) => Promise<Key>;
+    /**
+     * Enable key. Enable a given key to be used for cryptographic operations. Enabling a key allows you to make a disabled key usable again. You must specify the `region` and `key_id` parameters.
+     *
+     * @param request - The request {@link EnableKeyRequest}
+     * @returns A Promise of Key
+     */
+    enableKey: (request: Readonly<EnableKeyRequest>) => Promise<Key>;
+    /**
+     * Disable key. Disable a given key, preventing it to be used for cryptographic operations. Disabling a key renders it unusable. You must specify the `region` and `key_id` parameters.
+     *
+     * @param request - The request {@link DisableKeyRequest}
+     * @returns A Promise of Key
+     */
+    disableKey: (request: Readonly<DisableKeyRequest>) => Promise<Key>;
+    protected pageOfListKeys: (request: Readonly<ListKeysRequest>) => Promise<ListKeysResponse>;
+    /**
+     * List keys. Retrieve a list of keys across all Projects in an Organization or within a specific Project. You must specify the `region`, and either the `organization_id` or the `project_id`.
+     *
+     * @param request - The request {@link ListKeysRequest}
+     * @returns A Promise of ListKeysResponse
+     */
+    listKeys: (request: Readonly<ListKeysRequest>) => Promise<ListKeysResponse> & {
+        all: () => Promise<Key[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<Key[], void, void>;
+    };
+    /**
+     * Create a data encryption key. Create a new data encryption key for cryptographic operations outside of Key Manager. The data encryption key is encrypted and must be decrypted using the key you have created in Key Manager.
+  
+  The data encryption key is returned in plaintext and ciphertext but it should only be stored in its encrypted form (ciphertext). Key Manager does not store your data encryption key. To retrieve your key's plaintext, use the `Decrypt` method with your key's ID and ciphertext.
+     *
+     * @param request - The request {@link GenerateDataKeyRequest}
+     * @returns A Promise of DataKey
+     */
+    generateDataKey: (request: Readonly<GenerateDataKeyRequest>) => Promise<DataKey>;
+    /**
+     * Encrypt a payload. Encrypt a payload using an existing key, specified by the `key_id` parameter. Only keys with a usage set to `symmetric_encryption` are supported by this method. The maximum payload size that can be encrypted is 64 KB of plaintext.
+     *
+     * @param request - The request {@link EncryptRequest}
+     * @returns A Promise of EncryptResponse
+     */
+    encrypt: (request: Readonly<EncryptRequest>) => Promise<EncryptResponse>;
+    /**
+     * Decrypt an encrypted payload. Decrypt an encrypted payload using an existing key, specified by the `key_id` parameter. The maximum payload size that can be decrypted is equivalent to the encrypted output of 64 KB of data (around 131 KB).
+     *
+     * @param request - The request {@link DecryptRequest}
+     * @returns A Promise of DecryptResponse
+     */
+    decrypt: (request: Readonly<DecryptRequest>) => Promise<DecryptResponse>;
+    /**
+     * Sign a message digest. Use a given key to sign a message digest. The key must have its usage set to `asymmetric_signing`. The digest must be created using the same digest algorithm that is defined in the key's algorithm configuration.
+     *
+     * @param request - The request {@link SignRequest}
+     * @returns A Promise of SignResponse
+     */
+    sign: (request: Readonly<SignRequest>) => Promise<SignResponse>;
+    /**
+     * Verify a message signature. Use a given key to verify a message signature against a message digest. The key must have its usage set to `asymmetric_signing`. The message digest must be generated using the same digest algorithm that is defined in the key's algorithm configuration.
+     *
+     * @param request - The request {@link VerifyRequest}
+     * @returns A Promise of VerifyResponse
+     */
+    verify: (request: Readonly<VerifyRequest>) => Promise<VerifyResponse>;
+    /**
+     * Import key material. Import externally generated key material into Key Manager to derive a new cryptographic key. The key's origin must be `external`.
+     *
+     * @param request - The request {@link ImportKeyMaterialRequest}
+     * @returns A Promise of Key
+     */
+    importKeyMaterial: (request: Readonly<ImportKeyMaterialRequest>) => Promise<Key>;
+    /**
+     * Delete key material. Delete previously imported key material. This renders the associated cryptographic key unusable for any operation. The key's origin must be `external`.
+     *
+     * @param request - The request {@link DeleteKeyMaterialRequest}
+     */
+    deleteKeyMaterial: (request: Readonly<DeleteKeyMaterialRequest>) => Promise<void>;
+    /**
+     * Restore a key. Restore a key and all its rotations scheduled for deletion specified by the `region` and `key_id` parameters.
+     *
+     * @param request - The request {@link RestoreKeyRequest}
+     * @returns A Promise of Key
+     */
+    restoreKey: (request: Readonly<RestoreKeyRequest>) => Promise<Key>;
+}

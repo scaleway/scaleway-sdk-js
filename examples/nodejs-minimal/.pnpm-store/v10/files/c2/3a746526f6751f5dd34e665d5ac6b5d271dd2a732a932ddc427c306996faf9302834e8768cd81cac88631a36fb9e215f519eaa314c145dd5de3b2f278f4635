@@ -1,0 +1,25 @@
+import type { ResponseUnmarshaller } from './types';
+/**
+ * Fixes the totalCount property for old APIs.
+ *
+ * @internal
+ */
+export declare const fixLegacyTotalCount: <T>(obj: T, headers: Headers) => T;
+/**
+ * Makes response parser.
+ *
+ * @param unmarshaller - The response payload unmarshaller
+ * @returns An async converter of HTTP Response to desired result
+ *
+ * @throws {@link ScalewayError}
+ * Thrown by the API if the request couldn't be completed.
+ *
+ * @throws TypeError
+ * Thrown if the response parameter isn't of the expected type.
+ *
+ * @throws Error
+ * JSON parsing could trigger an error.
+ *
+ * @internal
+ */
+export declare const responseParser: <T>(unmarshaller: ResponseUnmarshaller<T>, responseType: "json" | "text" | "blob") => (response: Response) => Promise<T>;

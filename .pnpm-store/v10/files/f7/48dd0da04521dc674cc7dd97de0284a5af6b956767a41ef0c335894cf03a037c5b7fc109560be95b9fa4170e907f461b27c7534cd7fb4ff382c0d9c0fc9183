@@ -1,0 +1,7 @@
+import type { ClusterStatus, NodeStatus, PoolStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link ClusterStatus}. */
+export declare const CLUSTER_TRANSIENT_STATUSES: ClusterStatus[];
+/** Lists transient statutes of the enum {@link NodeStatus}. */
+export declare const NODE_TRANSIENT_STATUSES: NodeStatus[];
+/** Lists transient statutes of the enum {@link PoolStatus}. */
+export declare const POOL_TRANSIENT_STATUSES: PoolStatus[];

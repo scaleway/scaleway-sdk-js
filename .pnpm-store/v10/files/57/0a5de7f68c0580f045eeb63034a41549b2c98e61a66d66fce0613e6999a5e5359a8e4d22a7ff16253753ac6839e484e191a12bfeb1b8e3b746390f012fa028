@@ -1,0 +1,6 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const DEDICATED_CONNECTION_TRANSIENT_STATUSES = ["configuring"];
+const LINK_TRANSIENT_STATUSES = ["configuring"];
+exports.DEDICATED_CONNECTION_TRANSIENT_STATUSES = DEDICATED_CONNECTION_TRANSIENT_STATUSES;
+exports.LINK_TRANSIENT_STATUSES = LINK_TRANSIENT_STATUSES;

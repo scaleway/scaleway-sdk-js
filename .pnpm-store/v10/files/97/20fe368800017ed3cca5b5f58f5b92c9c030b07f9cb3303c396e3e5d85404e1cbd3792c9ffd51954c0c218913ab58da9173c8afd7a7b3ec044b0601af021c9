@@ -1,0 +1,15 @@
+import type { JSONObject } from '../../../helpers/json.js';
+import { ScalewayError } from '../scw-error.js';
+/**
+ * ResourceLocked error happens when a resource is locked by trust and safety.
+ *
+ * @public
+ */
+export declare class ResourceLockedError extends ScalewayError {
+    readonly status: number;
+    readonly body: JSONObject;
+    readonly resource: string;
+    readonly resourceId: string;
+    constructor(status: number, body: JSONObject, resource: string, resourceId: string);
+    static fromJSON(status: number, obj: Readonly<JSONObject>): ResourceLockedError | null;
+}

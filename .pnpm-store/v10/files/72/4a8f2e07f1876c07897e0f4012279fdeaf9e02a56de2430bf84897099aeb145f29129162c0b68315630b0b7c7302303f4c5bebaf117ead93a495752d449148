@@ -1,0 +1,20 @@
+import { API } from "./api.gen.js";
+import { marshalCreateInstanceGroupRequest, marshalCreateInstancePolicyRequest, marshalCreateInstanceTemplateRequest, marshalUpdateInstanceGroupRequest, marshalUpdateInstancePolicyRequest, marshalUpdateInstanceTemplateRequest, unmarshalInstanceGroup, unmarshalInstancePolicy, unmarshalInstanceTemplate, unmarshalListInstanceGroupEventsResponse, unmarshalListInstanceGroupsResponse, unmarshalListInstancePoliciesResponse, unmarshalListInstanceTemplatesResponse } from "./marshalling.gen.js";
+import * as validationRules_gen from "./validation-rules.gen.js";
+export {
+  API,
+  validationRules_gen as ValidationRules,
+  marshalCreateInstanceGroupRequest,
+  marshalCreateInstancePolicyRequest,
+  marshalCreateInstanceTemplateRequest,
+  marshalUpdateInstanceGroupRequest,
+  marshalUpdateInstancePolicyRequest,
+  marshalUpdateInstanceTemplateRequest,
+  unmarshalInstanceGroup,
+  unmarshalInstancePolicy,
+  unmarshalInstanceTemplate,
+  unmarshalListInstanceGroupEventsResponse,
+  unmarshalListInstanceGroupsResponse,
+  unmarshalListInstancePoliciesResponse,
+  unmarshalListInstanceTemplatesResponse
+};

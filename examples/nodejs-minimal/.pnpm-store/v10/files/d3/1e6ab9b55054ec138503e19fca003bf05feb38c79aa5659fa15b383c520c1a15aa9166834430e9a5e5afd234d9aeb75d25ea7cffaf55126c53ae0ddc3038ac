@@ -1,0 +1,8 @@
+const DATABASE_TRANSIENT_STATUSES = [
+  "creating",
+  "deleting",
+  "restoring"
+];
+export {
+  DATABASE_TRANSIENT_STATUSES
+};

@@ -1,0 +1,60 @@
+import { isJSONObject, unmarshalDate, unmarshalArrayOfObject } from "@scaleway/sdk-client";
+const unmarshalServerPrivateNetwork = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerPrivateNetwork' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    ipamIpIds: data.ipam_ip_ids,
+    privateNetworkId: data.private_network_id,
+    projectId: data.project_id,
+    serverId: data.server_id,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+    vlan: data.vlan
+  };
+};
+const unmarshalListServerPrivateNetworksResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListServerPrivateNetworksResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    serverPrivateNetworks: unmarshalArrayOfObject(
+      data.server_private_networks,
+      unmarshalServerPrivateNetwork
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalSetServerPrivateNetworksResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetServerPrivateNetworksResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    serverPrivateNetworks: unmarshalArrayOfObject(
+      data.server_private_networks,
+      unmarshalServerPrivateNetwork
+    )
+  };
+};
+const marshalPrivateNetworkApiAddServerPrivateNetworkRequest = (request, defaults) => ({
+  ipam_ip_ids: request.ipamIpIds,
+  private_network_id: request.privateNetworkId
+});
+const marshalPrivateNetworkApiSetServerPrivateNetworksRequest = (request, defaults) => ({
+  per_private_network_ipam_ip_ids: request.perPrivateNetworkIpamIpIds
+});
+export {
+  marshalPrivateNetworkApiAddServerPrivateNetworkRequest,
+  marshalPrivateNetworkApiSetServerPrivateNetworksRequest,
+  unmarshalListServerPrivateNetworksResponse,
+  unmarshalServerPrivateNetwork,
+  unmarshalSetServerPrivateNetworksResponse
+};

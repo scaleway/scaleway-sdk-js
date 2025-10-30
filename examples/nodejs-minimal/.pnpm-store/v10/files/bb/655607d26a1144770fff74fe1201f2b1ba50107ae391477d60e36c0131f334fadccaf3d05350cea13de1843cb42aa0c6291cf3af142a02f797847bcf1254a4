@@ -1,0 +1,27 @@
+import { API } from "./api.gen.js";
+import { DEDICATED_CONNECTION_TRANSIENT_STATUSES, LINK_TRANSIENT_STATUSES } from "./content.gen.js";
+import { marshalAttachRoutingPolicyRequest, marshalAttachVpcRequest, marshalCreateLinkRequest, marshalCreateRoutingPolicyRequest, marshalDetachRoutingPolicyRequest, marshalUpdateLinkRequest, marshalUpdateRoutingPolicyRequest, unmarshalDedicatedConnection, unmarshalLink, unmarshalListDedicatedConnectionsResponse, unmarshalListLinksResponse, unmarshalListPartnersResponse, unmarshalListPopsResponse, unmarshalListRoutingPoliciesResponse, unmarshalPartner, unmarshalPop, unmarshalRoutingPolicy } from "./marshalling.gen.js";
+import * as validationRules_gen from "./validation-rules.gen.js";
+export {
+  API,
+  DEDICATED_CONNECTION_TRANSIENT_STATUSES,
+  LINK_TRANSIENT_STATUSES,
+  validationRules_gen as ValidationRules,
+  marshalAttachRoutingPolicyRequest,
+  marshalAttachVpcRequest,
+  marshalCreateLinkRequest,
+  marshalCreateRoutingPolicyRequest,
+  marshalDetachRoutingPolicyRequest,
+  marshalUpdateLinkRequest,
+  marshalUpdateRoutingPolicyRequest,
+  unmarshalDedicatedConnection,
+  unmarshalLink,
+  unmarshalListDedicatedConnectionsResponse,
+  unmarshalListLinksResponse,
+  unmarshalListPartnersResponse,
+  unmarshalListPopsResponse,
+  unmarshalListRoutingPoliciesResponse,
+  unmarshalPartner,
+  unmarshalPop,
+  unmarshalRoutingPolicy
+};

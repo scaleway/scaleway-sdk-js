@@ -1,0 +1,43 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const json = require("../../helpers/json.cjs");
+const types = require("./types.cjs");
+const buildDefaultMessage = (status, body) => {
+  const message = [`http error ${status}`];
+  if (typeof body === "string") {
+    message.push(body);
+  } else if (json.isJSONObject(body)) {
+    if (typeof body.resource === "string") {
+      message.push(`resource ${body.resource}`);
+    }
+    if (typeof body.message === "string") {
+      message.push(body.message);
+    }
+    if (body.fields && types.isRecordOfStringArray(body.fields)) {
+      message.push(
+        Object.entries(body.fields).map(([name, list]) => `${name} (${list.join(", ")})`).join(", ")
+      );
+    }
+  }
+  return message.join(": ");
+};
+class ScalewayError extends Error {
+  constructor(status, body, message = buildDefaultMessage(status, body)) {
+    super(message);
+    this.status = status;
+    this.body = body;
+    this.message = message;
+    this.name = "ScalewayError";
+    this.rawMessage = typeof body === "object" && typeof body.message === "string" ? body.message : void 0;
+    Object.setPrototypeOf(this, new.target.prototype);
+  }
+  /** The message originating from the payload. */
+  rawMessage;
+  static fromJSON(status, obj) {
+    return new ScalewayError(status, obj);
+  }
+  toString() {
+    return `${this.name}: ${this.message}`;
+  }
+}
+exports.ScalewayError = ScalewayError;

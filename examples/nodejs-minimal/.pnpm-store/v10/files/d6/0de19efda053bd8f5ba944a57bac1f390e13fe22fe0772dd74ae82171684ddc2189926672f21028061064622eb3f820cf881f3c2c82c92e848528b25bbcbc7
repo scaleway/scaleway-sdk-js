@@ -1,0 +1,16 @@
+import type { JSONObject } from '../../../helpers/json.js';
+import { ScalewayError } from '../scw-error.js';
+/**
+ * AlreadyExists error is used when a resource already exists.
+ *
+ * @public
+ */
+export declare class AlreadyExistsError extends ScalewayError {
+    readonly status: number;
+    readonly body: JSONObject;
+    readonly resource: string;
+    readonly resourceId: string;
+    readonly helpMessage: string;
+    constructor(status: number, body: JSONObject, resource: string, resourceId: string, helpMessage: string);
+    static fromJSON(status: number, obj: Readonly<JSONObject>): AlreadyExistsError | null;
+}

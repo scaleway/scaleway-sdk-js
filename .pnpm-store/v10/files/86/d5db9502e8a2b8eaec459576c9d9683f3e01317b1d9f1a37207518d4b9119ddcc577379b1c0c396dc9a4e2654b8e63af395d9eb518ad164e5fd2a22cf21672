@@ -1,0 +1,8 @@
+const DatabaseCredentials = {
+  port: {
+    pattern: /^[0-9]+$/
+  }
+};
+export {
+  DatabaseCredentials
+};

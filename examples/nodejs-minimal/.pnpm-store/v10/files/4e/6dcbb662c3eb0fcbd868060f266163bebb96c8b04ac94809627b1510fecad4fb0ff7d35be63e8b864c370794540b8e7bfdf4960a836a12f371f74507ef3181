@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const addHeaderInterceptor = (key, value) => ({ request }) => {
+  const clone = request.clone();
+  if (value !== void 0) {
+    clone.headers.append(key, value);
+  }
+  return clone;
+};
+const addAsyncHeaderInterceptor = (key, getter) => async (request) => addHeaderInterceptor(key, await getter())(request);
+exports.addAsyncHeaderInterceptor = addAsyncHeaderInterceptor;
+exports.addHeaderInterceptor = addHeaderInterceptor;

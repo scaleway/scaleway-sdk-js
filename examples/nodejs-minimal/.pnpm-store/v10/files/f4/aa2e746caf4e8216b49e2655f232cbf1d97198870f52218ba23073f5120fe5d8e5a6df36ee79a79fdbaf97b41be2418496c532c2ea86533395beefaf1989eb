@@ -1,0 +1,22 @@
+import type { ConfigurationType } from './types';
+/**
+ * Converts YAML to configuration map.
+ *
+ * @param input - YAML string
+ * @returns The configuration map
+ *
+ * @internal
+ */
+export declare const convertYamlToConfiguration: (input: string | null) => ConfigurationType;
+/**
+ * Loads configuration from a file.
+ *
+ * @param filePath - Path to the configuration file
+ * @returns The configuration
+ *
+ * @throws Error
+ * Thrown if the file doesn't exist.
+ *
+ * @internal
+ */
+export declare const loadConfigurationFromFile: (filePath: string) => ConfigurationType;

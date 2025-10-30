@@ -1,0 +1,755 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const content_gen = require("./content.gen.cjs");
+const marshalling_gen = require("./marshalling.gen.cjs");
+const jsonContentHeaders = {
+  "Content-Type": "application/json; charset=utf-8"
+};
+class ControlPanelAPI extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par", "nl-ams", "pl-waw"]
+  });
+  pageOfListControlPanels = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/control-panels`,
+      urlParams: sdkClient.urlParams(
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListControlPanelsResponse
+  );
+  /**
+   * "List the control panels type: cpanel or plesk.".
+   *
+   * @param request - The request {@link ControlPanelApiListControlPanelsRequest}
+   * @returns A Promise of ListControlPanelsResponse
+   */
+  listControlPanels = (request = {}) => sdkClient.enrichForPagination("controlPanels", this.pageOfListControlPanels, request);
+}
+class DatabaseAPI extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par", "nl-ams", "pl-waw"]
+  });
+  /**
+   * "Create a new database within your hosting plan".
+   *
+   * @param request - The request {@link DatabaseApiCreateDatabaseRequest}
+   * @returns A Promise of Database
+   */
+  createDatabase = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalDatabaseApiCreateDatabaseRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/databases`
+    },
+    marshalling_gen.unmarshalDatabase
+  );
+  pageOfListDatabases = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/databases`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListDatabasesResponse
+  );
+  /**
+   * "List all databases within your hosting plan".
+   *
+   * @param request - The request {@link DatabaseApiListDatabasesRequest}
+   * @returns A Promise of ListDatabasesResponse
+   */
+  listDatabases = (request) => sdkClient.enrichForPagination("databases", this.pageOfListDatabases, request);
+  /**
+   * "Get details of a database within your hosting plan".
+   *
+   * @param request - The request {@link DatabaseApiGetDatabaseRequest}
+   * @returns A Promise of Database
+   */
+  getDatabase = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/databases/${sdkClient.validatePathParam("databaseName", request.databaseName)}`
+    },
+    marshalling_gen.unmarshalDatabase
+  );
+  /**
+   * "Delete a database within your hosting plan".
+   *
+   * @param request - The request {@link DatabaseApiDeleteDatabaseRequest}
+   * @returns A Promise of Database
+   */
+  deleteDatabase = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/databases/${sdkClient.validatePathParam("databaseName", request.databaseName)}`
+    },
+    marshalling_gen.unmarshalDatabase
+  );
+  /**
+   * "Create a new database user".
+   *
+   * @param request - The request {@link DatabaseApiCreateDatabaseUserRequest}
+   * @returns A Promise of DatabaseUser
+   */
+  createDatabaseUser = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalDatabaseApiCreateDatabaseUserRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/databases-users`
+    },
+    marshalling_gen.unmarshalDatabaseUser
+  );
+  pageOfListDatabaseUsers = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/database-users`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListDatabaseUsersResponse
+  );
+  /**
+   * "List all database users".
+   *
+   * @param request - The request {@link DatabaseApiListDatabaseUsersRequest}
+   * @returns A Promise of ListDatabaseUsersResponse
+   */
+  listDatabaseUsers = (request) => sdkClient.enrichForPagination("users", this.pageOfListDatabaseUsers, request);
+  /**
+   * "Get details of a database user".
+   *
+   * @param request - The request {@link DatabaseApiGetDatabaseUserRequest}
+   * @returns A Promise of DatabaseUser
+   */
+  getDatabaseUser = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/databases-users/${sdkClient.validatePathParam("username", request.username)}`
+    },
+    marshalling_gen.unmarshalDatabaseUser
+  );
+  /**
+   * "Delete a database user".
+   *
+   * @param request - The request {@link DatabaseApiDeleteDatabaseUserRequest}
+   * @returns A Promise of DatabaseUser
+   */
+  deleteDatabaseUser = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/database-users/${sdkClient.validatePathParam("username", request.username)}`
+    },
+    marshalling_gen.unmarshalDatabaseUser
+  );
+  /**
+   * "Change the password of a database user".
+   *
+   * @param request - The request {@link DatabaseApiChangeDatabaseUserPasswordRequest}
+   * @returns A Promise of DatabaseUser
+   */
+  changeDatabaseUserPassword = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalDatabaseApiChangeDatabaseUserPasswordRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/databases-users/${sdkClient.validatePathParam("username", request.username)}/change-password`
+    },
+    marshalling_gen.unmarshalDatabaseUser
+  );
+  /**
+   * "Assign a database user to a database".
+   *
+   * @param request - The request {@link DatabaseApiAssignDatabaseUserRequest}
+   * @returns A Promise of DatabaseUser
+   */
+  assignDatabaseUser = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalDatabaseApiAssignDatabaseUserRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/databases/${sdkClient.validatePathParam("databaseName", request.databaseName)}/assign-user`
+    },
+    marshalling_gen.unmarshalDatabaseUser
+  );
+  /**
+   * "Unassign a database user from a database".
+   *
+   * @param request - The request {@link DatabaseApiUnassignDatabaseUserRequest}
+   * @returns A Promise of DatabaseUser
+   */
+  unassignDatabaseUser = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalDatabaseApiUnassignDatabaseUserRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/databases/${sdkClient.validatePathParam("databaseName", request.databaseName)}/unassign-user`
+    },
+    marshalling_gen.unmarshalDatabaseUser
+  );
+}
+class DnsAPI extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par", "nl-ams", "pl-waw"]
+  });
+  /**
+   * Get DNS records. Get the set of DNS records of a specified domain associated with a Web Hosting plan's domain.
+   *
+   * @param request - The request {@link DnsApiGetDomainDnsRecordsRequest}
+   * @returns A Promise of DnsRecords
+   */
+  getDomainDnsRecords = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains/${sdkClient.validatePathParam("domain", request.domain)}/dns-records`
+    },
+    marshalling_gen.unmarshalDnsRecords
+  );
+  /**
+   * Check whether you own this domain or not.. Check whether you own this domain or not.
+   *
+   * @param request - The request {@link DnsApiCheckUserOwnsDomainRequest}
+   * @returns A Promise of CheckUserOwnsDomainResponse
+   */
+  checkUserOwnsDomain = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalDnsApiCheckUserOwnsDomainRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains/${sdkClient.validatePathParam("domain", request.domain)}/check-ownership`
+    },
+    marshalling_gen.unmarshalCheckUserOwnsDomainResponse
+  );
+  /**
+   * Synchronize your DNS records on the Elements Console and on cPanel.. Synchronize your DNS records on the Elements Console and on cPanel.
+   *
+   * @param request - The request {@link DnsApiSyncDomainDnsRecordsRequest}
+   * @returns A Promise of DnsRecords
+   */
+  syncDomainDnsRecords = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalDnsApiSyncDomainDnsRecordsRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains/${sdkClient.validatePathParam("domain", request.domain)}/sync-domain-dns-records`
+    },
+    marshalling_gen.unmarshalDnsRecords
+  );
+  /**
+   * Search for available domains based on domain name.. Search for available domains based on domain name.
+   *
+   * @param request - The request {@link DnsApiSearchDomainsRequest}
+   * @returns A Promise of SearchDomainsResponse
+   */
+  searchDomains = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/search-domains`,
+      urlParams: sdkClient.urlParams(
+        ["domain_name", request.domainName],
+        [
+          "project_id",
+          request.projectId ?? this.client.settings.defaultProjectId
+        ]
+      )
+    },
+    marshalling_gen.unmarshalSearchDomainsResponse
+  );
+  /**
+   * Retrieve detailed information about a specific domain, including its status, DNS configuration, and ownership.. Retrieve detailed information about a specific domain, including its status, DNS configuration, and ownership.
+   *
+   * @param request - The request {@link DnsApiGetDomainRequest}
+   * @returns A Promise of Domain
+   */
+  getDomain = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/domains/${sdkClient.validatePathParam("domainName", request.domainName)}`,
+      urlParams: sdkClient.urlParams([
+        "project_id",
+        request.projectId ?? this.client.settings.defaultProjectId
+      ])
+    },
+    marshalling_gen.unmarshalDomain
+  );
+  /**
+   * Waits for {@link Domain} to be in a final state.
+   *
+   * @param request - The request {@link DnsApiGetDomainRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Domain
+   */
+  waitForDomain = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.DOMAIN_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getDomain,
+    request,
+    options
+  );
+}
+class OfferAPI extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par", "nl-ams", "pl-waw"]
+  });
+  pageOfListOffers = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/offers`,
+      urlParams: sdkClient.urlParams(
+        ["control_panels", request.controlPanels],
+        ["hosting_id", request.hostingId],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListOffersResponse
+  );
+  /**
+   * List all available hosting offers along with their specific options.. List all available hosting offers along with their specific options.
+   *
+   * @param request - The request {@link OfferApiListOffersRequest}
+   * @returns A Promise of ListOffersResponse
+   */
+  listOffers = (request = {}) => sdkClient.enrichForPagination("offers", this.pageOfListOffers, request);
+}
+class HostingAPI extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par", "nl-ams", "pl-waw"]
+  });
+  /**
+   * Order a Web Hosting plan. Order a Web Hosting plan, specifying the offer type required via the `offer_id` parameter.
+   *
+   * @param request - The request {@link HostingApiCreateHostingRequest}
+   * @returns A Promise of Hosting
+   */
+  createHosting = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalHostingApiCreateHostingRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings`
+    },
+    marshalling_gen.unmarshalHosting
+  );
+  pageOfListHostings = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings`,
+      urlParams: sdkClient.urlParams(
+        ["control_panels", request.controlPanels],
+        ["domain", request.domain],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId],
+        ["statuses", request.statuses],
+        ["tags", request.tags]
+      )
+    },
+    marshalling_gen.unmarshalListHostingsResponse
+  );
+  /**
+   * List all Web Hosting plans. List all of your existing Web Hosting plans. Various filters are available to limit the results, including filtering by domain, status, tag and Project ID.
+   *
+   * @param request - The request {@link HostingApiListHostingsRequest}
+   * @returns A Promise of ListHostingsResponse
+   */
+  listHostings = (request = {}) => sdkClient.enrichForPagination("hostings", this.pageOfListHostings, request);
+  /**
+   * Get a Web Hosting plan. Get the details of one of your existing Web Hosting plans, specified by its `hosting_id`.
+   *
+   * @param request - The request {@link HostingApiGetHostingRequest}
+   * @returns A Promise of Hosting
+   */
+  getHosting = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}`
+    },
+    marshalling_gen.unmarshalHosting
+  );
+  /**
+   * Waits for {@link Hosting} to be in a final state.
+   *
+   * @param request - The request {@link HostingApiGetHostingRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Hosting
+   */
+  waitForHosting = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.HOSTING_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getHosting,
+    request,
+    options
+  );
+  /**
+   * Update a Web Hosting plan. Update the details of one of your existing Web Hosting plans, specified by its `hosting_id`. You can update parameters including the contact email address, tags, options and offer.
+   *
+   * @param request - The request {@link HostingApiUpdateHostingRequest}
+   * @returns A Promise of Hosting
+   */
+  updateHosting = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalHostingApiUpdateHostingRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}`
+    },
+    marshalling_gen.unmarshalHosting
+  );
+  /**
+   * Delete a Web Hosting plan. Delete a Web Hosting plan, specified by its `hosting_id`. Note that deletion is not immediate: it will take place at the end of the calendar month, after which time your Web Hosting plan and all its data (files and emails) will be irreversibly lost.
+   *
+   * @param request - The request {@link HostingApiDeleteHostingRequest}
+   * @returns A Promise of Hosting
+   */
+  deleteHosting = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}`
+    },
+    marshalling_gen.unmarshalHosting
+  );
+  /**
+   * Create a user session.
+   *
+   * @param request - The request {@link HostingApiCreateSessionRequest}
+   * @returns A Promise of Session
+   */
+  createSession = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/sessions`
+    },
+    marshalling_gen.unmarshalSession
+  );
+  /**
+   * Reset a Web Hosting plan password.
+   *
+   * @param request - The request {@link HostingApiResetHostingPasswordRequest}
+   * @returns A Promise of ResetHostingPasswordResponse
+   */
+  resetHostingPassword = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/reset-password`
+    },
+    marshalling_gen.unmarshalResetHostingPasswordResponse
+  );
+  /**
+   * Get the total counts of websites, databases, email accounts, and FTP accounts of a Web Hosting plan.
+   *
+   * @param request - The request {@link HostingApiGetResourceSummaryRequest}
+   * @returns A Promise of ResourceSummary
+   */
+  getResourceSummary = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/resource-summary`
+    },
+    marshalling_gen.unmarshalResourceSummary
+  );
+}
+class FtpAccountAPI extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par", "nl-ams", "pl-waw"]
+  });
+  /**
+   * Create a new FTP account within your hosting plan.. Create a new FTP account within your hosting plan.
+   *
+   * @param request - The request {@link FtpAccountApiCreateFtpAccountRequest}
+   * @returns A Promise of FtpAccount
+   */
+  createFtpAccount = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalFtpAccountApiCreateFtpAccountRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/ftp-accounts`
+    },
+    marshalling_gen.unmarshalFtpAccount
+  );
+  pageOfListFtpAccounts = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/ftp-accounts`,
+      urlParams: sdkClient.urlParams(
+        ["domain", request.domain],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListFtpAccountsResponse
+  );
+  /**
+   * List all FTP accounts within your hosting plan.. List all FTP accounts within your hosting plan.
+   *
+   * @param request - The request {@link FtpAccountApiListFtpAccountsRequest}
+   * @returns A Promise of ListFtpAccountsResponse
+   */
+  listFtpAccounts = (request) => sdkClient.enrichForPagination("ftpAccounts", this.pageOfListFtpAccounts, request);
+  /**
+   * Delete a specific FTP account within your hosting plan.. Delete a specific FTP account within your hosting plan.
+   *
+   * @param request - The request {@link FtpAccountApiRemoveFtpAccountRequest}
+   * @returns A Promise of FtpAccount
+   */
+  removeFtpAccount = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/ftp-accounts/${sdkClient.validatePathParam("username", request.username)}`
+    },
+    marshalling_gen.unmarshalFtpAccount
+  );
+  changeFtpAccountPassword = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalFtpAccountApiChangeFtpAccountPasswordRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/ftp-accounts/${sdkClient.validatePathParam("username", request.username)}/change-password`
+    },
+    marshalling_gen.unmarshalFtpAccount
+  );
+}
+class MailAccountAPI extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par", "nl-ams", "pl-waw"]
+  });
+  /**
+   * Create a new mail account within your hosting plan.. Create a new mail account within your hosting plan.
+   *
+   * @param request - The request {@link MailAccountApiCreateMailAccountRequest}
+   * @returns A Promise of MailAccount
+   */
+  createMailAccount = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalMailAccountApiCreateMailAccountRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/mail-accounts`
+    },
+    marshalling_gen.unmarshalMailAccount
+  );
+  pageOfListMailAccounts = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/mail-accounts`,
+      urlParams: sdkClient.urlParams(
+        ["domain", request.domain],
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListMailAccountsResponse
+  );
+  /**
+   * List all mail accounts within your hosting plan.. List all mail accounts within your hosting plan.
+   *
+   * @param request - The request {@link MailAccountApiListMailAccountsRequest}
+   * @returns A Promise of ListMailAccountsResponse
+   */
+  listMailAccounts = (request) => sdkClient.enrichForPagination("mailAccounts", this.pageOfListMailAccounts, request);
+  /**
+   * Delete a mail account within your hosting plan.. Delete a mail account within your hosting plan.
+   *
+   * @param request - The request {@link MailAccountApiRemoveMailAccountRequest}
+   * @returns A Promise of MailAccount
+   */
+  removeMailAccount = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalMailAccountApiRemoveMailAccountRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/remove-mail-account`
+    },
+    marshalling_gen.unmarshalMailAccount
+  );
+  /**
+   * Update the password of a mail account within your hosting plan.. Update the password of a mail account within your hosting plan.
+   *
+   * @param request - The request {@link MailAccountApiChangeMailAccountPasswordRequest}
+   * @returns A Promise of MailAccount
+   */
+  changeMailAccountPassword = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalMailAccountApiChangeMailAccountPasswordRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/change-mail-password`
+    },
+    marshalling_gen.unmarshalMailAccount
+  );
+}
+class WebsiteAPI extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    regions: ["fr-par", "nl-ams", "pl-waw"]
+  });
+  pageOfListWebsites = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/webhosting/v1/regions/${sdkClient.validatePathParam("region", request.region ?? this.client.settings.defaultRegion)}/hostings/${sdkClient.validatePathParam("hostingId", request.hostingId)}/websites`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListWebsitesResponse
+  );
+  /**
+   * List all websites for a specific hosting.. List all websites for a specific hosting.
+   *
+   * @param request - The request {@link WebsiteApiListWebsitesRequest}
+   * @returns A Promise of ListWebsitesResponse
+   */
+  listWebsites = (request) => sdkClient.enrichForPagination("websites", this.pageOfListWebsites, request);
+}
+exports.ControlPanelAPI = ControlPanelAPI;
+exports.DatabaseAPI = DatabaseAPI;
+exports.DnsAPI = DnsAPI;
+exports.FtpAccountAPI = FtpAccountAPI;
+exports.HostingAPI = HostingAPI;
+exports.MailAccountAPI = MailAccountAPI;
+exports.OfferAPI = OfferAPI;
+exports.WebsiteAPI = WebsiteAPI;

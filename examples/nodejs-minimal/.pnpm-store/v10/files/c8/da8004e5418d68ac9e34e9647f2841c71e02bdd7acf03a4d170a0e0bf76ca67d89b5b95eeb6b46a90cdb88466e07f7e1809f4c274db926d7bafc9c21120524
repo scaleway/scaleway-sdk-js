@@ -1,0 +1,600 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const sdkClient = require("@scaleway/sdk-client");
+const content_gen = require("./content.gen.cjs");
+const marshalling_gen = require("./marshalling.gen.cjs");
+const jsonContentHeaders = {
+  "Content-Type": "application/json; charset=utf-8"
+};
+class API extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    zones: [
+      "fr-par-1",
+      "fr-par-2",
+      "nl-ams-1",
+      "nl-ams-2",
+      "pl-waw-2",
+      "pl-waw-3"
+    ]
+  });
+  pageOfListServers = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers`,
+      urlParams: sdkClient.urlParams(
+        ["name", request.name],
+        ["option_id", request.optionId],
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["project_id", request.projectId],
+        ["status", request.status],
+        ["tags", request.tags]
+      )
+    },
+    marshalling_gen.unmarshalListServersResponse
+  );
+  /**
+   * List Elastic Metal servers for an Organization. List Elastic Metal servers for a specific Organization.
+   *
+   * @param request - The request {@link ListServersRequest}
+   * @returns A Promise of ListServersResponse
+   */
+  listServers = (request = {}) => sdkClient.enrichForPagination("servers", this.pageOfListServers, request);
+  /**
+   * Get a specific Elastic Metal server. Get full details of an existing Elastic Metal server associated with the ID.
+   *
+   * @param request - The request {@link GetServerRequest}
+   * @returns A Promise of Server
+   */
+  getServer = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}`
+    },
+    marshalling_gen.unmarshalServer
+  );
+  /**
+   * Waits for {@link Server} to be in a final state.
+   *
+   * @param request - The request {@link GetServerRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Server
+   */
+  waitForServer = (request, options) => sdkClient.waitForResource(
+    options?.stop ?? ((res) => Promise.resolve(
+      !content_gen.SERVER_TRANSIENT_STATUSES.includes(res.status)
+    )),
+    this.getServer,
+    request,
+    options
+  );
+  /**
+   * Create an Elastic Metal server. Create a new Elastic Metal server. Once the server is created, proceed with the [installation of an OS](#post-3e949e).
+   *
+   * @param request - The request {@link CreateServerRequest}
+   * @returns A Promise of Server
+   */
+  createServer = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalCreateServerRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers`
+    },
+    marshalling_gen.unmarshalServer
+  );
+  /**
+   * Update an Elastic Metal server. Update the server associated with the ID. You can update parameters such as the server's name, tags and description. Any parameters left null in the request body are not updated.
+   *
+   * @param request - The request {@link UpdateServerRequest}
+   * @returns A Promise of Server
+   */
+  updateServer = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateServerRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}`
+    },
+    marshalling_gen.unmarshalServer
+  );
+  /**
+   * Install an Elastic Metal server. Install an Operating System (OS) on the Elastic Metal server with a specific ID.
+   *
+   * @param request - The request {@link InstallServerRequest}
+   * @returns A Promise of Server
+   */
+  installServer = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalInstallServerRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}/install`
+    },
+    marshalling_gen.unmarshalServer
+  );
+  /**
+   * Return server metrics. Get the ping status of the server associated with the ID.
+   *
+   * @param request - The request {@link GetServerMetricsRequest}
+   * @returns A Promise of GetServerMetricsResponse
+   */
+  getServerMetrics = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}/metrics`
+    },
+    marshalling_gen.unmarshalGetServerMetricsResponse
+  );
+  /**
+   * Delete an Elastic Metal server. Delete the server associated with the ID.
+   *
+   * @param request - The request {@link DeleteServerRequest}
+   * @returns A Promise of Server
+   */
+  deleteServer = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}`
+    },
+    marshalling_gen.unmarshalServer
+  );
+  /**
+   * Reboot an Elastic Metal server. Reboot the Elastic Metal server associated with the ID, use the `boot_type` `rescue` to reboot the server in rescue mode.
+   *
+   * @param request - The request {@link RebootServerRequest}
+   * @returns A Promise of Server
+   */
+  rebootServer = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalRebootServerRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}/reboot`
+    },
+    marshalling_gen.unmarshalServer
+  );
+  /**
+   * Start an Elastic Metal server. Start the server associated with the ID.
+   *
+   * @param request - The request {@link StartServerRequest}
+   * @returns A Promise of Server
+   */
+  startServer = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalStartServerRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}/start`
+    },
+    marshalling_gen.unmarshalServer
+  );
+  /**
+   * Stop an Elastic Metal server. Stop the server associated with the ID. The server remains allocated to your account and all data remains on the local storage of the server.
+   *
+   * @param request - The request {@link StopServerRequest}
+   * @returns A Promise of Server
+   */
+  stopServer = (request) => this.client.fetch(
+    {
+      body: "{}",
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}/stop`
+    },
+    marshalling_gen.unmarshalServer
+  );
+  pageOfListServerEvents = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}/events`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListServerEventsResponse
+  );
+  /**
+   * List server events. List event (i.e. start/stop/reboot) associated to the server ID.
+   *
+   * @param request - The request {@link ListServerEventsRequest}
+   * @returns A Promise of ListServerEventsResponse
+   */
+  listServerEvents = (request) => sdkClient.enrichForPagination("events", this.pageOfListServerEvents, request);
+  /**
+   * Get default partitioning schema. Get the default partitioning schema for the given offer ID and OS ID.
+   *
+   * @param request - The request {@link GetDefaultPartitioningSchemaRequest}
+   * @returns A Promise of Schema
+   */
+  getDefaultPartitioningSchema = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/partitioning-schemas/default`,
+      urlParams: sdkClient.urlParams(
+        ["offer_id", request.offerId],
+        ["os_id", request.osId]
+      )
+    },
+    marshalling_gen.unmarshalSchema
+  );
+  /**
+   * Validate client partitioning schema. Validate the incoming partitioning schema from a user before installing the server. Return default ErrorCode if invalid.
+   *
+   * @param request - The request {@link ValidatePartitioningSchemaRequest}
+   */
+  validatePartitioningSchema = (request) => this.client.fetch({
+    body: JSON.stringify(
+      marshalling_gen.marshalValidatePartitioningSchemaRequest(request, this.client.settings)
+    ),
+    headers: jsonContentHeaders,
+    method: "POST",
+    path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/partitioning-schemas/validate`
+  });
+  /**
+     * Start BMC access. Start BMC (Baseboard Management Controller) access associated with the ID.
+  The BMC (Baseboard Management Controller) access is available one hour after the installation of the server.
+  You need first to create an option Remote Access. You will find the ID and the price with a call to listOffers (https://developers.scaleway.com/en/products/baremetal/api/#get-78db92). Then add the option https://developers.scaleway.com/en/products/baremetal/api/#post-b14abd.
+  After adding the BMC option, you need to Get Remote Access to get the login/password https://developers.scaleway.com/en/products/baremetal/api/#get-cefc0f. Do not forget to delete the Option after use.
+     *
+     * @param request - The request {@link StartBMCAccessRequest}
+     * @returns A Promise of BMCAccess
+     */
+  startBMCAccess = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalStartBMCAccessRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}/bmc-access`
+    },
+    marshalling_gen.unmarshalBMCAccess
+  );
+  /**
+   * Get BMC access. Get the BMC (Baseboard Management Controller) access associated with the ID, including the URL and login information needed to connect.
+   *
+   * @param request - The request {@link GetBMCAccessRequest}
+   * @returns A Promise of BMCAccess
+   */
+  getBMCAccess = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}/bmc-access`
+    },
+    marshalling_gen.unmarshalBMCAccess
+  );
+  /**
+   * Stop BMC access. Stop BMC (Baseboard Management Controller) access associated with the ID.
+   *
+   * @param request - The request {@link StopBMCAccessRequest}
+   */
+  stopBMCAccess = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}/bmc-access`
+  });
+  /**
+   * Update IP. Configure the IP address associated with the server ID and IP ID. You can use this method to set a reverse DNS for an IP address.
+   *
+   * @param request - The request {@link UpdateIPRequest}
+   * @returns A Promise of IP
+   */
+  updateIP = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateIPRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}/ips/${sdkClient.validatePathParam("ipId", request.ipId)}`
+    },
+    marshalling_gen.unmarshalIP
+  );
+  /**
+   * Add server option. Add an option, such as Private Networks, to a specific server.
+   *
+   * @param request - The request {@link AddOptionServerRequest}
+   * @returns A Promise of Server
+   */
+  addOptionServer = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalAddOptionServerRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}/options/${sdkClient.validatePathParam("optionId", request.optionId)}`
+    },
+    marshalling_gen.unmarshalServer
+  );
+  /**
+   * Delete server option. Delete an option from a specific server.
+   *
+   * @param request - The request {@link DeleteOptionServerRequest}
+   * @returns A Promise of Server
+   */
+  deleteOptionServer = (request) => this.client.fetch(
+    {
+      method: "DELETE",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}/options/${sdkClient.validatePathParam("optionId", request.optionId)}`
+    },
+    marshalling_gen.unmarshalServer
+  );
+  /**
+   * Migrate server offer. Migrate server with hourly offer to monthly offer.
+   *
+   * @param request - The request {@link MigrateServerToMonthlyOfferRequest}
+   * @returns A Promise of Server
+   */
+  migrateServerToMonthlyOffer = (request) => this.client.fetch(
+    {
+      method: "POST",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}/migrate-offer-monthly`
+    },
+    marshalling_gen.unmarshalServer
+  );
+  pageOfListOffers = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/offers`,
+      urlParams: sdkClient.urlParams(
+        ["name", request.name],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["subscription_period", request.subscriptionPeriod]
+      )
+    },
+    marshalling_gen.unmarshalListOffersResponse
+  );
+  /**
+   * List offers. List all available Elastic Metal server configurations.
+   *
+   * @param request - The request {@link ListOffersRequest}
+   * @returns A Promise of ListOffersResponse
+   */
+  listOffers = (request = {}) => sdkClient.enrichForPagination("offers", this.pageOfListOffers, request);
+  /**
+   * Get offer. Get details of an offer identified by its offer ID.
+   *
+   * @param request - The request {@link GetOfferRequest}
+   * @returns A Promise of Offer
+   */
+  getOffer = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/offers/${sdkClient.validatePathParam("offerId", request.offerId)}`
+    },
+    marshalling_gen.unmarshalOffer
+  );
+  /**
+   * Get option. Return specific option for the ID.
+   *
+   * @param request - The request {@link GetOptionRequest}
+   * @returns A Promise of Option
+   */
+  getOption = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/options/${sdkClient.validatePathParam("optionId", request.optionId)}`
+    },
+    marshalling_gen.unmarshalOption
+  );
+  pageOfListOptions = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/options`,
+      urlParams: sdkClient.urlParams(
+        ["name", request.name],
+        ["offer_id", request.offerId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListOptionsResponse
+  );
+  /**
+   * List options. List all options matching with filters.
+   *
+   * @param request - The request {@link ListOptionsRequest}
+   * @returns A Promise of ListOptionsResponse
+   */
+  listOptions = (request = {}) => sdkClient.enrichForPagination("options", this.pageOfListOptions, request);
+  pageOfListSettings = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/settings`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        [
+          "project_id",
+          request.projectId ?? this.client.settings.defaultProjectId
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListSettingsResponse
+  );
+  /**
+   * List all settings. Return all settings for a Project ID.
+   *
+   * @param request - The request {@link ListSettingsRequest}
+   * @returns A Promise of ListSettingsResponse
+   */
+  listSettings = (request = {}) => sdkClient.enrichForPagination("settings", this.pageOfListSettings, request);
+  /**
+   * Update setting. Update a setting for a Project ID (enable or disable).
+   *
+   * @param request - The request {@link UpdateSettingRequest}
+   * @returns A Promise of Setting
+   */
+  updateSetting = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalUpdateSettingRequest(request, this.client.settings)
+      ),
+      headers: jsonContentHeaders,
+      method: "PATCH",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/settings/${sdkClient.validatePathParam("settingId", request.settingId)}`
+    },
+    marshalling_gen.unmarshalSetting
+  );
+  pageOfListOS = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/os`,
+      urlParams: sdkClient.urlParams(
+        ["offer_id", request.offerId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ]
+      )
+    },
+    marshalling_gen.unmarshalListOSResponse
+  );
+  /**
+   * List available OSes. List all OSes that are available for installation on Elastic Metal servers.
+   *
+   * @param request - The request {@link ListOSRequest}
+   * @returns A Promise of ListOSResponse
+   */
+  listOS = (request = {}) => sdkClient.enrichForPagination("os", this.pageOfListOS, request);
+  /**
+   * Get OS with an ID. Return the specific OS for the ID.
+   *
+   * @param request - The request {@link GetOSRequest}
+   * @returns A Promise of OS
+   */
+  getOS = (request) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/os/${sdkClient.validatePathParam("osId", request.osId)}`
+    },
+    marshalling_gen.unmarshalOS
+  );
+}
+class PrivateNetworkAPI extends sdkClient.API {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  static LOCALITY = sdkClient.toApiLocality({
+    zones: ["fr-par-2"]
+  });
+  /**
+   * Add a server to a Private Network.
+   *
+   * @param request - The request {@link PrivateNetworkApiAddServerPrivateNetworkRequest}
+   * @returns A Promise of ServerPrivateNetwork
+   */
+  addServerPrivateNetwork = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalPrivateNetworkApiAddServerPrivateNetworkRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "POST",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}/private-networks`
+    },
+    marshalling_gen.unmarshalServerPrivateNetwork
+  );
+  /**
+   * Set multiple Private Networks on a server.
+   *
+   * @param request - The request {@link PrivateNetworkApiSetServerPrivateNetworksRequest}
+   * @returns A Promise of SetServerPrivateNetworksResponse
+   */
+  setServerPrivateNetworks = (request) => this.client.fetch(
+    {
+      body: JSON.stringify(
+        marshalling_gen.marshalPrivateNetworkApiSetServerPrivateNetworksRequest(
+          request,
+          this.client.settings
+        )
+      ),
+      headers: jsonContentHeaders,
+      method: "PUT",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}/private-networks`
+    },
+    marshalling_gen.unmarshalSetServerPrivateNetworksResponse
+  );
+  pageOfListServerPrivateNetworks = (request = {}) => this.client.fetch(
+    {
+      method: "GET",
+      path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/server-private-networks`,
+      urlParams: sdkClient.urlParams(
+        ["order_by", request.orderBy],
+        ["organization_id", request.organizationId],
+        ["page", request.page],
+        [
+          "page_size",
+          request.pageSize ?? this.client.settings.defaultPageSize
+        ],
+        ["private_network_id", request.privateNetworkId],
+        ["project_id", request.projectId],
+        ["server_id", request.serverId]
+      )
+    },
+    marshalling_gen.unmarshalListServerPrivateNetworksResponse
+  );
+  /**
+   * List the Private Networks of a server.
+   *
+   * @param request - The request {@link PrivateNetworkApiListServerPrivateNetworksRequest}
+   * @returns A Promise of ListServerPrivateNetworksResponse
+   */
+  listServerPrivateNetworks = (request = {}) => sdkClient.enrichForPagination(
+    "serverPrivateNetworks",
+    this.pageOfListServerPrivateNetworks,
+    request
+  );
+  /**
+   * Delete a Private Network.
+   *
+   * @param request - The request {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}
+   */
+  deleteServerPrivateNetwork = (request) => this.client.fetch({
+    method: "DELETE",
+    path: `/baremetal/v1/zones/${sdkClient.validatePathParam("zone", request.zone ?? this.client.settings.defaultZone)}/servers/${sdkClient.validatePathParam("serverId", request.serverId)}/private-networks/${sdkClient.validatePathParam("privateNetworkId", request.privateNetworkId)}`
+  });
+}
+exports.API = API;
+exports.PrivateNetworkAPI = PrivateNetworkAPI;

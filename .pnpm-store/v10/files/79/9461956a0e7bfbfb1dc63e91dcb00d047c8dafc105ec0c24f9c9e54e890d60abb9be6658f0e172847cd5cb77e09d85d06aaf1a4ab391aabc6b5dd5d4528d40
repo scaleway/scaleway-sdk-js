@@ -1,0 +1,376 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const randomName = require("@scaleway/random-name");
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalEndpointPrivateNetworkDetails = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EndpointPrivateNetworkDetails' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    privateNetworkId: data.private_network_id
+  };
+};
+const unmarshalEndpointPublicDetails = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EndpointPublicDetails' failed as data isn't a dictionary.`
+    );
+  }
+  return {};
+};
+const unmarshalEndpoint = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Endpoint' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    dnsRecords: data.dns_records,
+    id: data.id,
+    ips: data.ips,
+    port: data.port,
+    privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : void 0,
+    public: data.public ? unmarshalEndpointPublicDetails(data.public) : void 0
+  };
+};
+const unmarshalInstanceSetting = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InstanceSetting' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    name: data.name,
+    value: data.value
+  };
+};
+const unmarshalInstanceSnapshotSchedule = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InstanceSnapshotSchedule' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    enabled: data.enabled,
+    frequencyHours: data.frequency_hours,
+    lastRun: sdkClient.unmarshalDate(data.last_run),
+    nextUpdate: sdkClient.unmarshalDate(data.next_update),
+    retentionDays: data.retention_days
+  };
+};
+const unmarshalVolume = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Volume' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    size: data.size,
+    type: data.type
+  };
+};
+const unmarshalInstance = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Instance' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    endpoints: sdkClient.unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
+    id: data.id,
+    name: data.name,
+    nodeNumber: data.node_number,
+    nodeType: data.node_type,
+    projectId: data.project_id,
+    region: data.region,
+    settings: sdkClient.unmarshalArrayOfObject(data.settings, unmarshalInstanceSetting),
+    snapshotSchedule: data.snapshot_schedule ? unmarshalInstanceSnapshotSchedule(data.snapshot_schedule) : void 0,
+    status: data.status,
+    tags: data.tags,
+    version: data.version,
+    volume: data.volume ? unmarshalVolume(data.volume) : void 0
+  };
+};
+const unmarshalSnapshotVolumeType = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SnapshotVolumeType' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    type: data.type
+  };
+};
+const unmarshalSnapshot = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Snapshot' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    expiresAt: sdkClient.unmarshalDate(data.expires_at),
+    id: data.id,
+    instanceId: data.instance_id,
+    instanceName: data.instance_name,
+    name: data.name,
+    nodeType: data.node_type,
+    region: data.region,
+    size: data.size,
+    status: data.status,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    volumeType: data.volume_type ? unmarshalSnapshotVolumeType(data.volume_type) : void 0
+  };
+};
+const unmarshalUserRole = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'UserRole' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    anyDatabase: data.any_database,
+    database: data.database,
+    role: data.role
+  };
+};
+const unmarshalUser = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'User' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    name: data.name,
+    roles: sdkClient.unmarshalArrayOfObject(data.roles, unmarshalUserRole)
+  };
+};
+const unmarshalListInstancesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListInstancesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    instances: sdkClient.unmarshalArrayOfObject(data.instances, unmarshalInstance),
+    totalCount: data.total_count
+  };
+};
+const unmarshalNodeTypeVolumeType = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'NodeTypeVolumeType' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    chunkSize: data.chunk_size,
+    description: data.description,
+    maxSize: data.max_size,
+    minSize: data.min_size,
+    type: data.type
+  };
+};
+const unmarshalNodeType = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'NodeType' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    availableVolumeTypes: sdkClient.unmarshalArrayOfObject(
+      data.available_volume_types,
+      unmarshalNodeTypeVolumeType
+    ),
+    beta: data.beta,
+    description: data.description,
+    disabled: data.disabled,
+    instanceRange: data.instance_range,
+    memory: data.memory,
+    name: data.name,
+    stockStatus: data.stock_status,
+    vcpus: data.vcpus
+  };
+};
+const unmarshalListNodeTypesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListNodeTypesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    nodeTypes: sdkClient.unmarshalArrayOfObject(data.node_types, unmarshalNodeType),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListSnapshotsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSnapshotsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    snapshots: sdkClient.unmarshalArrayOfObject(data.snapshots, unmarshalSnapshot),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListUsersResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListUsersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    totalCount: data.total_count,
+    users: sdkClient.unmarshalArrayOfObject(data.users, unmarshalUser)
+  };
+};
+const unmarshalSetting = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Setting' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    defaultValue: data.default_value,
+    description: data.description,
+    floatMax: data.float_max,
+    floatMin: data.float_min,
+    hotConfigurable: data.hot_configurable,
+    intMax: data.int_max,
+    intMin: data.int_min,
+    name: data.name,
+    propertyType: data.property_type,
+    stringConstraint: data.string_constraint,
+    unit: data.unit
+  };
+};
+const unmarshalVersion = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Version' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    availableSettings: sdkClient.unmarshalArrayOfObject(
+      data.available_settings,
+      unmarshalSetting
+    ),
+    endOfLifeAt: sdkClient.unmarshalDate(data.end_of_life_at),
+    version: data.version
+  };
+};
+const unmarshalListVersionsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListVersionsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    totalCount: data.total_count,
+    versions: sdkClient.unmarshalArrayOfObject(data.versions, unmarshalVersion)
+  };
+};
+const marshalEndpointSpecPrivateNetworkDetails = (request, defaults) => ({
+  private_network_id: request.privateNetworkId
+});
+const marshalEndpointSpecPublicDetails = (request, defaults) => ({});
+const marshalEndpointSpec = (request, defaults) => ({
+  ...sdkClient.resolveOneOf([
+    {
+      param: "public",
+      value: request.public !== void 0 ? marshalEndpointSpecPublicDetails(request.public) : void 0
+    },
+    {
+      param: "private_network",
+      value: request.privateNetwork !== void 0 ? marshalEndpointSpecPrivateNetworkDetails(
+        request.privateNetwork
+      ) : void 0
+    }
+  ])
+});
+const marshalCreateEndpointRequest = (request, defaults) => ({
+  endpoint: marshalEndpointSpec(request.endpoint),
+  instance_id: request.instanceId
+});
+const marshalCreateInstanceRequestVolumeDetails = (request, defaults) => ({
+  volume_size: request.volumeSize,
+  volume_type: request.volumeType
+});
+const marshalCreateInstanceRequest = (request, defaults) => ({
+  endpoints: request.endpoints !== void 0 ? request.endpoints.map((elt) => marshalEndpointSpec(elt)) : void 0,
+  name: request.name || randomName("mgdb"),
+  node_number: request.nodeNumber,
+  node_type: request.nodeType,
+  password: request.password,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags,
+  user_name: request.userName,
+  version: request.version,
+  volume: request.volume !== void 0 ? marshalCreateInstanceRequestVolumeDetails(request.volume) : void 0
+});
+const marshalCreateSnapshotRequest = (request, defaults) => ({
+  expires_at: request.expiresAt,
+  name: request.name
+});
+const marshalCreateUserRequest = (request, defaults) => ({
+  name: request.name,
+  password: request.password
+});
+const marshalRestoreSnapshotRequestVolumeDetails = (request, defaults) => ({
+  volume_type: request.volumeType
+});
+const marshalRestoreSnapshotRequest = (request, defaults) => ({
+  instance_name: request.instanceName,
+  node_number: request.nodeNumber,
+  node_type: request.nodeType,
+  volume: marshalRestoreSnapshotRequestVolumeDetails(request.volume)
+});
+const marshalUserRole = (request, defaults) => ({
+  role: request.role,
+  ...sdkClient.resolveOneOf([
+    { param: "database", value: request.database },
+    { param: "any_database", value: request.anyDatabase }
+  ])
+});
+const marshalSetUserRoleRequest = (request, defaults) => ({
+  roles: request.roles !== void 0 ? request.roles.map((elt) => marshalUserRole(elt)) : void 0,
+  user_name: request.userName
+});
+const marshalUpdateInstanceRequest = (request, defaults) => ({
+  name: request.name,
+  tags: request.tags
+});
+const marshalUpdateSnapshotRequest = (request, defaults) => ({
+  expires_at: request.expiresAt,
+  name: request.name
+});
+const marshalUpdateUserRequest = (request, defaults) => ({
+  password: request.password
+});
+const marshalUpgradeInstanceRequest = (request, defaults) => ({
+  ...sdkClient.resolveOneOf([{ param: "volume_size", value: request.volumeSize }])
+});
+exports.marshalCreateEndpointRequest = marshalCreateEndpointRequest;
+exports.marshalCreateInstanceRequest = marshalCreateInstanceRequest;
+exports.marshalCreateSnapshotRequest = marshalCreateSnapshotRequest;
+exports.marshalCreateUserRequest = marshalCreateUserRequest;
+exports.marshalRestoreSnapshotRequest = marshalRestoreSnapshotRequest;
+exports.marshalSetUserRoleRequest = marshalSetUserRoleRequest;
+exports.marshalUpdateInstanceRequest = marshalUpdateInstanceRequest;
+exports.marshalUpdateSnapshotRequest = marshalUpdateSnapshotRequest;
+exports.marshalUpdateUserRequest = marshalUpdateUserRequest;
+exports.marshalUpgradeInstanceRequest = marshalUpgradeInstanceRequest;
+exports.unmarshalEndpoint = unmarshalEndpoint;
+exports.unmarshalInstance = unmarshalInstance;
+exports.unmarshalInstanceSetting = unmarshalInstanceSetting;
+exports.unmarshalListInstancesResponse = unmarshalListInstancesResponse;
+exports.unmarshalListNodeTypesResponse = unmarshalListNodeTypesResponse;
+exports.unmarshalListSnapshotsResponse = unmarshalListSnapshotsResponse;
+exports.unmarshalListUsersResponse = unmarshalListUsersResponse;
+exports.unmarshalListVersionsResponse = unmarshalListVersionsResponse;
+exports.unmarshalSnapshot = unmarshalSnapshot;
+exports.unmarshalUser = unmarshalUser;
+exports.unmarshalVolume = unmarshalVolume;

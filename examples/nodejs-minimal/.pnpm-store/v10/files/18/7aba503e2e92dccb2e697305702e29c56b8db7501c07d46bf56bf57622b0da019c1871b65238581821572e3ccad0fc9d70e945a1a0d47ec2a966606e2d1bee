@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const PublicCatalogApiListPublicCatalogProductsRequest = {
+  page: {
+    greaterThanOrEqual: 1
+  },
+  pageSize: {
+    greaterThanOrEqual: 1
+  }
+};
+exports.PublicCatalogApiListPublicCatalogProductsRequest = PublicCatalogApiListPublicCatalogProductsRequest;

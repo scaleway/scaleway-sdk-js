@@ -1,0 +1,475 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const randomName = require("@scaleway/random-name");
+const sdkClient = require("@scaleway/sdk-client");
+const unmarshalCron = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Cron' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    args: data.args,
+    functionId: data.function_id,
+    id: data.id,
+    name: data.name,
+    schedule: data.schedule,
+    status: data.status
+  };
+};
+const unmarshalDomain = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Domain' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    errorMessage: data.error_message,
+    functionId: data.function_id,
+    hostname: data.hostname,
+    id: data.id,
+    status: data.status,
+    url: data.url
+  };
+};
+const unmarshalSecretHashedValue = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SecretHashedValue' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    hashedValue: data.hashed_value,
+    key: data.key
+  };
+};
+const unmarshalFunction = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Function' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    buildMessage: data.build_message,
+    cpuLimit: data.cpu_limit,
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    description: data.description,
+    domainName: data.domain_name,
+    environmentVariables: data.environment_variables,
+    errorMessage: data.error_message,
+    handler: data.handler,
+    httpOption: data.http_option,
+    id: data.id,
+    maxScale: data.max_scale,
+    memoryLimit: data.memory_limit,
+    minScale: data.min_scale,
+    name: data.name,
+    namespaceId: data.namespace_id,
+    privacy: data.privacy,
+    privateNetworkId: data.private_network_id,
+    readyAt: sdkClient.unmarshalDate(data.ready_at),
+    region: data.region,
+    runtime: data.runtime,
+    runtimeMessage: data.runtime_message,
+    sandbox: data.sandbox,
+    secretEnvironmentVariables: sdkClient.unmarshalArrayOfObject(
+      data.secret_environment_variables,
+      unmarshalSecretHashedValue
+    ),
+    status: data.status,
+    tags: data.tags,
+    timeout: data.timeout,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalNamespace = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Namespace' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: sdkClient.unmarshalDate(data.created_at),
+    description: data.description,
+    environmentVariables: data.environment_variables,
+    errorMessage: data.error_message,
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    region: data.region,
+    registryEndpoint: data.registry_endpoint,
+    registryNamespaceId: data.registry_namespace_id,
+    secretEnvironmentVariables: sdkClient.unmarshalArrayOfObject(
+      data.secret_environment_variables,
+      unmarshalSecretHashedValue
+    ),
+    status: data.status,
+    tags: data.tags,
+    updatedAt: sdkClient.unmarshalDate(data.updated_at),
+    vpcIntegrationActivated: data.vpc_integration_activated
+  };
+};
+const unmarshalToken = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Token' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    description: data.description,
+    expiresAt: sdkClient.unmarshalDate(data.expires_at),
+    functionId: data.function_id,
+    id: data.id,
+    namespaceId: data.namespace_id,
+    publicKey: data.public_key,
+    status: data.status,
+    token: data.token
+  };
+};
+const unmarshalTriggerMnqNatsClientConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TriggerMnqNatsClientConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    mnqCredentialId: data.mnq_credential_id,
+    mnqNatsAccountId: data.mnq_nats_account_id,
+    mnqProjectId: data.mnq_project_id,
+    mnqRegion: data.mnq_region,
+    subject: data.subject
+  };
+};
+const unmarshalTriggerMnqSqsClientConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TriggerMnqSqsClientConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    mnqCredentialId: data.mnq_credential_id,
+    mnqProjectId: data.mnq_project_id,
+    mnqRegion: data.mnq_region,
+    queue: data.queue
+  };
+};
+const unmarshalTriggerSqsClientConfig = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TriggerSqsClientConfig' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    accessKey: data.access_key,
+    endpoint: data.endpoint,
+    queueUrl: data.queue_url,
+    secretKey: data.secret_key
+  };
+};
+const unmarshalTrigger = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Trigger' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    description: data.description,
+    errorMessage: data.error_message,
+    functionId: data.function_id,
+    id: data.id,
+    inputType: data.input_type,
+    name: data.name,
+    scwNatsConfig: data.scw_nats_config ? unmarshalTriggerMnqNatsClientConfig(data.scw_nats_config) : void 0,
+    scwSqsConfig: data.scw_sqs_config ? unmarshalTriggerMnqSqsClientConfig(data.scw_sqs_config) : void 0,
+    sqsConfig: data.sqs_config ? unmarshalTriggerSqsClientConfig(data.sqs_config) : void 0,
+    status: data.status
+  };
+};
+const unmarshalDownloadURL = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DownloadURL' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    headers: data.headers,
+    url: data.url
+  };
+};
+const unmarshalListCronsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListCronsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    crons: sdkClient.unmarshalArrayOfObject(data.crons, unmarshalCron),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListDomainsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDomainsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    domains: sdkClient.unmarshalArrayOfObject(data.domains, unmarshalDomain),
+    totalCount: data.total_count
+  };
+};
+const unmarshalRuntime = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Runtime' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    codeSample: data.code_sample,
+    defaultHandler: data.default_handler,
+    extension: data.extension,
+    implementation: data.implementation,
+    language: data.language,
+    logoUrl: data.logo_url,
+    name: data.name,
+    status: data.status,
+    statusMessage: data.status_message,
+    version: data.version
+  };
+};
+const unmarshalListFunctionRuntimesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListFunctionRuntimesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    runtimes: sdkClient.unmarshalArrayOfObject(data.runtimes, unmarshalRuntime),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListFunctionsResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListFunctionsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    functions: sdkClient.unmarshalArrayOfObject(data.functions, unmarshalFunction),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListNamespacesResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListNamespacesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    namespaces: sdkClient.unmarshalArrayOfObject(data.namespaces, unmarshalNamespace),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListTokensResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListTokensResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    tokens: sdkClient.unmarshalArrayOfObject(data.tokens, unmarshalToken),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListTriggersResponse = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListTriggersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    totalCount: data.total_count,
+    triggers: sdkClient.unmarshalArrayOfObject(data.triggers, unmarshalTrigger)
+  };
+};
+const unmarshalUploadURL = (data) => {
+  if (!sdkClient.isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'UploadURL' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    headers: data.headers,
+    url: data.url
+  };
+};
+const marshalCreateCronRequest = (request, defaults) => ({
+  args: request.args,
+  function_id: request.functionId,
+  name: request.name,
+  schedule: request.schedule
+});
+const marshalCreateDomainRequest = (request, defaults) => ({
+  function_id: request.functionId,
+  hostname: request.hostname
+});
+const marshalSecret = (request, defaults) => ({
+  key: request.key,
+  value: request.value
+});
+const marshalCreateFunctionRequest = (request, defaults) => ({
+  description: request.description,
+  environment_variables: request.environmentVariables,
+  handler: request.handler,
+  http_option: request.httpOption,
+  max_scale: request.maxScale,
+  memory_limit: request.memoryLimit,
+  min_scale: request.minScale,
+  name: request.name || randomName("fn"),
+  namespace_id: request.namespaceId,
+  privacy: request.privacy,
+  private_network_id: request.privateNetworkId,
+  runtime: request.runtime,
+  sandbox: request.sandbox,
+  secret_environment_variables: request.secretEnvironmentVariables !== void 0 ? request.secretEnvironmentVariables.map(
+    (elt) => marshalSecret(elt)
+  ) : void 0,
+  tags: request.tags,
+  timeout: request.timeout
+});
+const marshalCreateNamespaceRequest = (request, defaults) => ({
+  activate_vpc_integration: request.activateVpcIntegration,
+  description: request.description,
+  environment_variables: request.environmentVariables,
+  name: request.name || randomName("ns"),
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  secret_environment_variables: request.secretEnvironmentVariables !== void 0 ? request.secretEnvironmentVariables.map(
+    (elt) => marshalSecret(elt)
+  ) : void 0,
+  tags: request.tags
+});
+const marshalCreateTokenRequest = (request, defaults) => ({
+  description: request.description,
+  expires_at: request.expiresAt,
+  ...sdkClient.resolveOneOf([
+    { param: "function_id", value: request.functionId },
+    { param: "namespace_id", value: request.namespaceId }
+  ])
+});
+const marshalCreateTriggerRequestMnqNatsClientConfig = (request, defaults) => ({
+  mnq_nats_account_id: request.mnqNatsAccountId,
+  mnq_project_id: request.mnqProjectId,
+  mnq_region: request.mnqRegion,
+  subject: request.subject
+});
+const marshalCreateTriggerRequestMnqSqsClientConfig = (request, defaults) => ({
+  mnq_project_id: request.mnqProjectId,
+  mnq_region: request.mnqRegion,
+  queue: request.queue
+});
+const marshalCreateTriggerRequestSqsClientConfig = (request, defaults) => ({
+  access_key: request.accessKey,
+  endpoint: request.endpoint,
+  queue_url: request.queueUrl,
+  secret_key: request.secretKey
+});
+const marshalCreateTriggerRequest = (request, defaults) => ({
+  description: request.description,
+  function_id: request.functionId,
+  name: request.name,
+  ...sdkClient.resolveOneOf([
+    {
+      param: "scw_sqs_config",
+      value: request.scwSqsConfig !== void 0 ? marshalCreateTriggerRequestMnqSqsClientConfig(
+        request.scwSqsConfig
+      ) : void 0
+    },
+    {
+      param: "scw_nats_config",
+      value: request.scwNatsConfig !== void 0 ? marshalCreateTriggerRequestMnqNatsClientConfig(
+        request.scwNatsConfig
+      ) : void 0
+    },
+    {
+      param: "sqs_config",
+      value: request.sqsConfig !== void 0 ? marshalCreateTriggerRequestSqsClientConfig(
+        request.sqsConfig
+      ) : void 0
+    }
+  ])
+});
+const marshalUpdateCronRequest = (request, defaults) => ({
+  args: request.args,
+  function_id: request.functionId,
+  name: request.name,
+  schedule: request.schedule
+});
+const marshalUpdateFunctionRequest = (request, defaults) => ({
+  description: request.description,
+  environment_variables: request.environmentVariables,
+  handler: request.handler,
+  http_option: request.httpOption,
+  max_scale: request.maxScale,
+  memory_limit: request.memoryLimit,
+  min_scale: request.minScale,
+  privacy: request.privacy,
+  private_network_id: request.privateNetworkId,
+  redeploy: request.redeploy,
+  runtime: request.runtime,
+  sandbox: request.sandbox,
+  secret_environment_variables: request.secretEnvironmentVariables !== void 0 ? request.secretEnvironmentVariables.map(
+    (elt) => marshalSecret(elt)
+  ) : void 0,
+  tags: request.tags,
+  timeout: request.timeout
+});
+const marshalUpdateNamespaceRequest = (request, defaults) => ({
+  description: request.description,
+  environment_variables: request.environmentVariables,
+  secret_environment_variables: request.secretEnvironmentVariables !== void 0 ? request.secretEnvironmentVariables.map(
+    (elt) => marshalSecret(elt)
+  ) : void 0,
+  tags: request.tags
+});
+const marshalUpdateTriggerRequestSqsClientConfig = (request, defaults) => ({
+  access_key: request.accessKey,
+  secret_key: request.secretKey
+});
+const marshalUpdateTriggerRequest = (request, defaults) => ({
+  description: request.description,
+  name: request.name,
+  ...sdkClient.resolveOneOf([
+    {
+      param: "sqs_config",
+      value: request.sqsConfig !== void 0 ? marshalUpdateTriggerRequestSqsClientConfig(
+        request.sqsConfig
+      ) : void 0
+    }
+  ])
+});
+exports.marshalCreateCronRequest = marshalCreateCronRequest;
+exports.marshalCreateDomainRequest = marshalCreateDomainRequest;
+exports.marshalCreateFunctionRequest = marshalCreateFunctionRequest;
+exports.marshalCreateNamespaceRequest = marshalCreateNamespaceRequest;
+exports.marshalCreateTokenRequest = marshalCreateTokenRequest;
+exports.marshalCreateTriggerRequest = marshalCreateTriggerRequest;
+exports.marshalUpdateCronRequest = marshalUpdateCronRequest;
+exports.marshalUpdateFunctionRequest = marshalUpdateFunctionRequest;
+exports.marshalUpdateNamespaceRequest = marshalUpdateNamespaceRequest;
+exports.marshalUpdateTriggerRequest = marshalUpdateTriggerRequest;
+exports.unmarshalCron = unmarshalCron;
+exports.unmarshalDomain = unmarshalDomain;
+exports.unmarshalDownloadURL = unmarshalDownloadURL;
+exports.unmarshalFunction = unmarshalFunction;
+exports.unmarshalListCronsResponse = unmarshalListCronsResponse;
+exports.unmarshalListDomainsResponse = unmarshalListDomainsResponse;
+exports.unmarshalListFunctionRuntimesResponse = unmarshalListFunctionRuntimesResponse;
+exports.unmarshalListFunctionsResponse = unmarshalListFunctionsResponse;
+exports.unmarshalListNamespacesResponse = unmarshalListNamespacesResponse;
+exports.unmarshalListTokensResponse = unmarshalListTokensResponse;
+exports.unmarshalListTriggersResponse = unmarshalListTriggersResponse;
+exports.unmarshalNamespace = unmarshalNamespace;
+exports.unmarshalToken = unmarshalToken;
+exports.unmarshalTrigger = unmarshalTrigger;
+exports.unmarshalUploadURL = unmarshalUploadURL;

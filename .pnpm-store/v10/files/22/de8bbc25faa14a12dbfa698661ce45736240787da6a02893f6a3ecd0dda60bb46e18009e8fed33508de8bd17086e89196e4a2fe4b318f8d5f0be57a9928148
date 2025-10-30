@@ -1,0 +1,551 @@
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate } from "@scaleway/sdk-client";
+const unmarshalEmailTry = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EmailTry' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    code: data.code,
+    message: data.message,
+    rank: data.rank,
+    triedAt: unmarshalDate(data.tried_at)
+  };
+};
+const unmarshalEmail = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Email' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    flags: data.flags,
+    id: data.id,
+    lastTries: unmarshalArrayOfObject(data.last_tries, unmarshalEmailTry),
+    mailFrom: data.mail_from,
+    mailRcpt: data.mail_rcpt,
+    messageId: data.message_id,
+    projectId: data.project_id,
+    rcptTo: data.rcpt_to,
+    rcptType: data.rcpt_type,
+    status: data.status,
+    statusDetails: data.status_details,
+    subject: data.subject,
+    tryCount: data.try_count,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalDomainRecordsDMARC = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRecordsDMARC' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    name: data.name,
+    value: data.value
+  };
+};
+const unmarshalDomainRecords = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRecords' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    dmarc: data.dmarc ? unmarshalDomainRecordsDMARC(data.dmarc) : void 0
+  };
+};
+const unmarshalDomainReputation = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainReputation' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    previousScore: data.previous_score,
+    previousScoredAt: unmarshalDate(data.previous_scored_at),
+    score: data.score,
+    scoredAt: unmarshalDate(data.scored_at),
+    status: data.status
+  };
+};
+const unmarshalDomainStatistics = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainStatistics' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    canceledCount: data.canceled_count,
+    failedCount: data.failed_count,
+    sentCount: data.sent_count,
+    totalCount: data.total_count
+  };
+};
+const unmarshalDomain = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Domain' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    autoconfig: data.autoconfig,
+    createdAt: unmarshalDate(data.created_at),
+    dkimConfig: data.dkim_config,
+    id: data.id,
+    lastError: data.last_error,
+    lastValidAt: unmarshalDate(data.last_valid_at),
+    name: data.name,
+    nextCheckAt: unmarshalDate(data.next_check_at),
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    records: data.records ? unmarshalDomainRecords(data.records) : void 0,
+    region: data.region,
+    reputation: data.reputation ? unmarshalDomainReputation(data.reputation) : void 0,
+    revokedAt: unmarshalDate(data.revoked_at),
+    spfConfig: data.spf_config,
+    statistics: data.statistics ? unmarshalDomainStatistics(data.statistics) : void 0,
+    status: data.status
+  };
+};
+const unmarshalOfferSubscription = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferSubscription' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    cancellationAvailableAt: unmarshalDate(data.cancellation_available_at),
+    includedMonthlyEmails: data.included_monthly_emails,
+    maxCustomBlocklistsPerDomain: data.max_custom_blocklists_per_domain,
+    maxDedicatedIps: data.max_dedicated_ips,
+    maxDomains: data.max_domains,
+    maxWebhooksPerDomain: data.max_webhooks_per_domain,
+    offerName: data.offer_name,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    sla: data.sla,
+    subscribedAt: unmarshalDate(data.subscribed_at)
+  };
+};
+const unmarshalWebhook = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Webhook' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    domainId: data.domain_id,
+    eventTypes: data.event_types,
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    snsArn: data.sns_arn,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalBlocklist = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Blocklist' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    custom: data.custom,
+    domainId: data.domain_id,
+    email: data.email,
+    endsAt: unmarshalDate(data.ends_at),
+    id: data.id,
+    reason: data.reason,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalBulkCreateBlocklistsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'BulkCreateBlocklistsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    blocklists: unmarshalArrayOfObject(data.blocklists, unmarshalBlocklist)
+  };
+};
+const unmarshalCreateEmailResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CreateEmailResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    emails: unmarshalArrayOfObject(data.emails, unmarshalEmail)
+  };
+};
+const unmarshalDomainLastStatusAutoconfigState = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainLastStatusAutoconfigState' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    autoconfigurable: data.autoconfigurable,
+    enabled: data.enabled,
+    reason: data.reason ? data.reason : void 0
+  };
+};
+const unmarshalDomainLastStatusDkimRecord = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainLastStatusDkimRecord' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    error: data.error,
+    lastValidAt: unmarshalDate(data.last_valid_at),
+    status: data.status
+  };
+};
+const unmarshalDomainLastStatusDmarcRecord = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainLastStatusDmarcRecord' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    error: data.error,
+    lastValidAt: unmarshalDate(data.last_valid_at),
+    status: data.status
+  };
+};
+const unmarshalDomainLastStatusSpfRecord = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainLastStatusSpfRecord' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    error: data.error,
+    lastValidAt: unmarshalDate(data.last_valid_at),
+    status: data.status
+  };
+};
+const unmarshalDomainLastStatus = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DomainLastStatus' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    autoconfigState: data.autoconfig_state ? unmarshalDomainLastStatusAutoconfigState(data.autoconfig_state) : void 0,
+    dkimRecord: data.dkim_record ? unmarshalDomainLastStatusDkimRecord(data.dkim_record) : void 0,
+    dmarcRecord: data.dmarc_record ? unmarshalDomainLastStatusDmarcRecord(data.dmarc_record) : void 0,
+    domainId: data.domain_id,
+    domainName: data.domain_name,
+    spfRecord: data.spf_record ? unmarshalDomainLastStatusSpfRecord(data.spf_record) : void 0
+  };
+};
+const unmarshalListBlocklistsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListBlocklistsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    blocklists: unmarshalArrayOfObject(data.blocklists, unmarshalBlocklist),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListDomainsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDomainsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    domains: unmarshalArrayOfObject(data.domains, unmarshalDomain),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListEmailsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListEmailsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    emails: unmarshalArrayOfObject(data.emails, unmarshalEmail),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListOfferSubscriptionsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListOfferSubscriptionsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    offerSubscriptions: unmarshalArrayOfObject(
+      data.offer_subscriptions,
+      unmarshalOfferSubscription
+    ),
+    totalCount: data.total_count
+  };
+};
+const unmarshalOffer = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Offer' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    commitmentPeriod: data.commitment_period,
+    createdAt: unmarshalDate(data.created_at),
+    includedMonthlyEmails: data.included_monthly_emails,
+    maxCustomBlocklistsPerDomain: data.max_custom_blocklists_per_domain,
+    maxDedicatedIps: data.max_dedicated_ips,
+    maxDomains: data.max_domains,
+    maxWebhooksPerDomain: data.max_webhooks_per_domain,
+    name: data.name,
+    sla: data.sla
+  };
+};
+const unmarshalListOffersResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListOffersResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    offers: unmarshalArrayOfObject(data.offers, unmarshalOffer),
+    totalCount: data.total_count
+  };
+};
+const unmarshalPool = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Pool' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    details: data.details,
+    ips: data.ips,
+    projectId: data.project_id,
+    reverse: data.reverse,
+    status: data.status,
+    zone: data.zone
+  };
+};
+const unmarshalListPoolsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListPoolsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    pools: unmarshalArrayOfObject(data.pools, unmarshalPool),
+    totalCount: data.total_count
+  };
+};
+const unmarshalWebhookEvent = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'WebhookEvent' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    data: data.data,
+    domainId: data.domain_id,
+    emailId: data.email_id,
+    id: data.id,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    status: data.status,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at),
+    webhookId: data.webhook_id
+  };
+};
+const unmarshalListWebhookEventsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListWebhookEventsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    totalCount: data.total_count,
+    webhookEvents: unmarshalArrayOfObject(
+      data.webhook_events,
+      unmarshalWebhookEvent
+    )
+  };
+};
+const unmarshalListWebhooksResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListWebhooksResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    totalCount: data.total_count,
+    webhooks: unmarshalArrayOfObject(data.webhooks, unmarshalWebhook)
+  };
+};
+const unmarshalProjectConsumption = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ProjectConsumption' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    customBlocklistsCount: data.custom_blocklists_count,
+    dedicatedIpsCount: data.dedicated_ips_count,
+    domainsCount: data.domains_count,
+    monthlyEmailsCount: data.monthly_emails_count,
+    projectId: data.project_id,
+    webhooksCount: data.webhooks_count
+  };
+};
+const unmarshalProjectSettingsPeriodicReport = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ProjectSettingsPeriodicReport' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    enabled: data.enabled,
+    frequency: data.frequency,
+    sendingDay: data.sending_day,
+    sendingHour: data.sending_hour
+  };
+};
+const unmarshalProjectSettings = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ProjectSettings' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    periodicReport: data.periodic_report ? unmarshalProjectSettingsPeriodicReport(data.periodic_report) : void 0
+  };
+};
+const unmarshalStatistics = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Statistics' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    canceledCount: data.canceled_count,
+    failedCount: data.failed_count,
+    newCount: data.new_count,
+    sendingCount: data.sending_count,
+    sentCount: data.sent_count,
+    totalCount: data.total_count
+  };
+};
+const marshalBulkCreateBlocklistsRequest = (request, defaults) => ({
+  domain_id: request.domainId,
+  emails: request.emails,
+  reason: request.reason,
+  type: request.type
+});
+const marshalCreateDomainRequest = (request, defaults) => ({
+  accept_tos: request.acceptTos,
+  autoconfig: request.autoconfig,
+  domain_name: request.domainName,
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalCreateEmailRequestAddress = (request, defaults) => ({
+  email: request.email,
+  name: request.name
+});
+const marshalCreateEmailRequestAttachment = (request, defaults) => ({
+  content: request.content,
+  name: request.name,
+  type: request.type
+});
+const marshalCreateEmailRequestHeader = (request, defaults) => ({
+  key: request.key,
+  value: request.value
+});
+const marshalCreateEmailRequest = (request, defaults) => ({
+  additional_headers: request.additionalHeaders !== void 0 ? request.additionalHeaders.map(
+    (elt) => marshalCreateEmailRequestHeader(elt)
+  ) : void 0,
+  attachments: request.attachments !== void 0 ? request.attachments.map(
+    (elt) => marshalCreateEmailRequestAttachment(elt)
+  ) : void 0,
+  bcc: request.bcc !== void 0 ? request.bcc.map((elt) => marshalCreateEmailRequestAddress(elt)) : void 0,
+  cc: request.cc !== void 0 ? request.cc.map((elt) => marshalCreateEmailRequestAddress(elt)) : void 0,
+  from: marshalCreateEmailRequestAddress(request.from),
+  html: request.html,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  send_before: request.sendBefore,
+  subject: request.subject,
+  text: request.text,
+  to: request.to !== void 0 ? request.to.map((elt) => marshalCreateEmailRequestAddress(elt)) : void 0
+});
+const marshalCreateWebhookRequest = (request, defaults) => ({
+  domain_id: request.domainId,
+  event_types: request.eventTypes !== void 0 ? request.eventTypes : void 0,
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  sns_arn: request.snsArn
+});
+const marshalUpdateDomainRequest = (request, defaults) => ({
+  autoconfig: request.autoconfig
+});
+const marshalUpdateOfferSubscriptionRequest = (request, defaults) => ({
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId
+});
+const marshalUpdateProjectSettingsRequestUpdatePeriodicReport = (request, defaults) => ({
+  enabled: request.enabled,
+  frequency: request.frequency,
+  sending_day: request.sendingDay,
+  sending_hour: request.sendingHour
+});
+const marshalUpdateProjectSettingsRequest = (request, defaults) => ({
+  periodic_report: request.periodicReport !== void 0 ? marshalUpdateProjectSettingsRequestUpdatePeriodicReport(
+    request.periodicReport
+  ) : void 0
+});
+const marshalUpdateWebhookRequest = (request, defaults) => ({
+  event_types: request.eventTypes !== void 0 ? request.eventTypes : void 0,
+  name: request.name,
+  sns_arn: request.snsArn
+});
+export {
+  marshalBulkCreateBlocklistsRequest,
+  marshalCreateDomainRequest,
+  marshalCreateEmailRequest,
+  marshalCreateWebhookRequest,
+  marshalUpdateDomainRequest,
+  marshalUpdateOfferSubscriptionRequest,
+  marshalUpdateProjectSettingsRequest,
+  marshalUpdateWebhookRequest,
+  unmarshalBulkCreateBlocklistsResponse,
+  unmarshalCreateEmailResponse,
+  unmarshalDomain,
+  unmarshalDomainLastStatus,
+  unmarshalEmail,
+  unmarshalListBlocklistsResponse,
+  unmarshalListDomainsResponse,
+  unmarshalListEmailsResponse,
+  unmarshalListOfferSubscriptionsResponse,
+  unmarshalListOffersResponse,
+  unmarshalListPoolsResponse,
+  unmarshalListWebhookEventsResponse,
+  unmarshalListWebhooksResponse,
+  unmarshalOfferSubscription,
+  unmarshalProjectConsumption,
+  unmarshalProjectSettings,
+  unmarshalStatistics,
+  unmarshalWebhook
+};

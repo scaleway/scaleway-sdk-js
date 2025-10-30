@@ -1,0 +1,133 @@
+import { API as ParentAPI } from '@scaleway/sdk-client';
+import type { ApiLocality } from '@scaleway/sdk-client';
+import type { CreateJobDefinitionRequest, CreateJobDefinitionSecretsRequest, CreateJobDefinitionSecretsResponse, DeleteJobDefinitionRequest, DeleteJobDefinitionSecretRequest, GetJobDefinitionRequest, GetJobDefinitionSecretRequest, GetJobRunRequest, GetJobsLimitsRequest, JobDefinition, JobRun, JobsLimits, ListJobDefinitionSecretsRequest, ListJobDefinitionSecretsResponse, ListJobDefinitionsRequest, ListJobDefinitionsResponse, ListJobRunsRequest, ListJobRunsResponse, ListJobsResourcesRequest, ListJobsResourcesResponse, Secret, StartJobDefinitionRequest, StartJobDefinitionResponse, StopJobRunRequest, UpdateJobDefinitionRequest, UpdateJobDefinitionSecretRequest } from './types.gen';
+/**
+ * Serverless Jobs API.
+
+This API allows you to manage your Serverless Jobs.
+ */
+export declare class API extends ParentAPI {
+    /**
+     * Locality of this API.
+     * type ∈ {'zone','region','global','unspecified'}
+     */
+    static readonly LOCALITY: ApiLocality;
+    /**
+     * Create a new job definition in a specified Project.
+     *
+     * @param request - The request {@link CreateJobDefinitionRequest}
+     * @returns A Promise of JobDefinition
+     */
+    createJobDefinition: (request: Readonly<CreateJobDefinitionRequest>) => Promise<JobDefinition>;
+    /**
+     * Get a job definition by its unique identifier.
+     *
+     * @param request - The request {@link GetJobDefinitionRequest}
+     * @returns A Promise of JobDefinition
+     */
+    getJobDefinition: (request: Readonly<GetJobDefinitionRequest>) => Promise<JobDefinition>;
+    protected pageOfListJobDefinitions: (request?: Readonly<ListJobDefinitionsRequest>) => Promise<ListJobDefinitionsResponse>;
+    /**
+     * List all your job definitions with filters.
+     *
+     * @param request - The request {@link ListJobDefinitionsRequest}
+     * @returns A Promise of ListJobDefinitionsResponse
+     */
+    listJobDefinitions: (request?: Readonly<ListJobDefinitionsRequest>) => Promise<ListJobDefinitionsResponse> & {
+        all: () => Promise<JobDefinition[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<JobDefinition[], void, void>;
+    };
+    /**
+     * Update an existing job definition associated with the specified unique identifier.
+     *
+     * @param request - The request {@link UpdateJobDefinitionRequest}
+     * @returns A Promise of JobDefinition
+     */
+    updateJobDefinition: (request: Readonly<UpdateJobDefinitionRequest>) => Promise<JobDefinition>;
+    /**
+     * Delete an exsisting job definition by its unique identifier.
+     *
+     * @param request - The request {@link DeleteJobDefinitionRequest}
+     */
+    deleteJobDefinition: (request: Readonly<DeleteJobDefinitionRequest>) => Promise<void>;
+    /**
+     * Run an existing job definition by its unique identifier. This will create a new job run.
+     *
+     * @param request - The request {@link StartJobDefinitionRequest}
+     * @returns A Promise of StartJobDefinitionResponse
+     */
+    startJobDefinition: (request: Readonly<StartJobDefinitionRequest>) => Promise<StartJobDefinitionResponse>;
+    /**
+     * Create a secret reference within a job definition.
+     *
+     * @param request - The request {@link CreateJobDefinitionSecretsRequest}
+     * @returns A Promise of CreateJobDefinitionSecretsResponse
+     */
+    createJobDefinitionSecrets: (request: Readonly<CreateJobDefinitionSecretsRequest>) => Promise<CreateJobDefinitionSecretsResponse>;
+    /**
+     * Get a secret references within a job definition.
+     *
+     * @param request - The request {@link GetJobDefinitionSecretRequest}
+     * @returns A Promise of Secret
+     */
+    getJobDefinitionSecret: (request: Readonly<GetJobDefinitionSecretRequest>) => Promise<Secret>;
+    /**
+     * List secrets references within a job definition.
+     *
+     * @param request - The request {@link ListJobDefinitionSecretsRequest}
+     * @returns A Promise of ListJobDefinitionSecretsResponse
+     */
+    listJobDefinitionSecrets: (request: Readonly<ListJobDefinitionSecretsRequest>) => Promise<ListJobDefinitionSecretsResponse>;
+    /**
+     * Update a secret reference within a job definition.
+     *
+     * @param request - The request {@link UpdateJobDefinitionSecretRequest}
+     * @returns A Promise of Secret
+     */
+    updateJobDefinitionSecret: (request: Readonly<UpdateJobDefinitionSecretRequest>) => Promise<Secret>;
+    /**
+     * Delete a secret reference within a job definition.
+     *
+     * @param request - The request {@link DeleteJobDefinitionSecretRequest}
+     */
+    deleteJobDefinitionSecret: (request: Readonly<DeleteJobDefinitionSecretRequest>) => Promise<void>;
+    /**
+     * Get a job run by its unique identifier.
+     *
+     * @param request - The request {@link GetJobRunRequest}
+     * @returns A Promise of JobRun
+     */
+    getJobRun: (request: Readonly<GetJobRunRequest>) => Promise<JobRun>;
+    /**
+     * Stop a job run by its unique identifier.
+     *
+     * @param request - The request {@link StopJobRunRequest}
+     * @returns A Promise of JobRun
+     */
+    stopJobRun: (request: Readonly<StopJobRunRequest>) => Promise<JobRun>;
+    protected pageOfListJobRuns: (request?: Readonly<ListJobRunsRequest>) => Promise<ListJobRunsResponse>;
+    /**
+     * List all job runs with filters.
+     *
+     * @param request - The request {@link ListJobRunsRequest}
+     * @returns A Promise of ListJobRunsResponse
+     */
+    listJobRuns: (request?: Readonly<ListJobRunsRequest>) => Promise<ListJobRunsResponse> & {
+        all: () => Promise<JobRun[]>;
+        [Symbol.asyncIterator]: () => AsyncGenerator<JobRun[], void, void>;
+    };
+    /**
+     * List jobs resources for the console.
+     *
+     * @param request - The request {@link ListJobsResourcesRequest}
+     * @returns A Promise of ListJobsResourcesResponse
+     */
+    listJobsResources: (request?: Readonly<ListJobsResourcesRequest>) => Promise<ListJobsResourcesResponse>;
+    /**
+     * Get jobs limits for the console.
+     *
+     * @param request - The request {@link GetJobsLimitsRequest}
+     * @returns A Promise of JobsLimits
+     */
+    getJobsLimits: (request?: Readonly<GetJobsLimitsRequest>) => Promise<JobsLimits>;
+}

@@ -1,0 +1,10 @@
+export declare const CreateJobRequest: {
+    name: {
+        minLength: number;
+    };
+};
+export declare const CreateProcessRequest: {
+    name: {
+        minLength: number;
+    };
+};

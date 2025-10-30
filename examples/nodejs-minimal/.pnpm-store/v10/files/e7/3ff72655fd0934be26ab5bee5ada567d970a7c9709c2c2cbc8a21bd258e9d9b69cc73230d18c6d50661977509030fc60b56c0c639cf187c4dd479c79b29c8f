@@ -1,0 +1,3 @@
+import type { HubStatus } from './types.gen';
+/** Lists transient statutes of the enum {@link HubStatus}. */
+export declare const HUB_TRANSIENT_STATUSES: HubStatus[];

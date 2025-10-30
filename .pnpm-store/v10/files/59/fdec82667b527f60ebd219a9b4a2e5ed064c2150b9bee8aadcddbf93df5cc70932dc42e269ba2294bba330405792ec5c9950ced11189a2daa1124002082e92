@@ -1,0 +1,32 @@
+import { API } from "./api.gen.js";
+import { GATEWAY_NETWORK_TRANSIENT_STATUSES, GATEWAY_TRANSIENT_STATUSES } from "./content.gen.js";
+import { marshalAddBastionAllowedIPsRequest, marshalCreateGatewayNetworkRequest, marshalCreateGatewayRequest, marshalCreateIPRequest, marshalCreatePatRuleRequest, marshalSetBastionAllowedIPsRequest, marshalSetPatRulesRequest, marshalUpdateGatewayNetworkRequest, marshalUpdateGatewayRequest, marshalUpdateIPRequest, marshalUpdatePatRuleRequest, marshalUpgradeGatewayRequest, unmarshalAddBastionAllowedIPsResponse, unmarshalGateway, unmarshalGatewayNetwork, unmarshalIP, unmarshalListGatewayNetworksResponse, unmarshalListGatewayTypesResponse, unmarshalListGatewaysResponse, unmarshalListIPsResponse, unmarshalListPatRulesResponse, unmarshalPatRule, unmarshalSetBastionAllowedIPsResponse, unmarshalSetPatRulesResponse } from "./marshalling.gen.js";
+export {
+  API,
+  GATEWAY_NETWORK_TRANSIENT_STATUSES,
+  GATEWAY_TRANSIENT_STATUSES,
+  marshalAddBastionAllowedIPsRequest,
+  marshalCreateGatewayNetworkRequest,
+  marshalCreateGatewayRequest,
+  marshalCreateIPRequest,
+  marshalCreatePatRuleRequest,
+  marshalSetBastionAllowedIPsRequest,
+  marshalSetPatRulesRequest,
+  marshalUpdateGatewayNetworkRequest,
+  marshalUpdateGatewayRequest,
+  marshalUpdateIPRequest,
+  marshalUpdatePatRuleRequest,
+  marshalUpgradeGatewayRequest,
+  unmarshalAddBastionAllowedIPsResponse,
+  unmarshalGateway,
+  unmarshalGatewayNetwork,
+  unmarshalIP,
+  unmarshalListGatewayNetworksResponse,
+  unmarshalListGatewayTypesResponse,
+  unmarshalListGatewaysResponse,
+  unmarshalListIPsResponse,
+  unmarshalListPatRulesResponse,
+  unmarshalPatRule,
+  unmarshalSetBastionAllowedIPsResponse,
+  unmarshalSetPatRulesResponse
+};

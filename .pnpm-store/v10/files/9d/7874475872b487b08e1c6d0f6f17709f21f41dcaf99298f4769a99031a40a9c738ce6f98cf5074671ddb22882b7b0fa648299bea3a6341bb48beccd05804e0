@@ -1,0 +1,4 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const index_gen = require("./v1alpha1/index.gen.cjs");
+exports.Applesiliconv1alpha1 = index_gen;

@@ -1,0 +1,128 @@
+import randomName from "@scaleway/random-name";
+import { resolveOneOf, isJSONObject, unmarshalArrayOfObject, unmarshalDate } from "@scaleway/sdk-client";
+const unmarshalImage = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Image' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    namespaceId: data.namespace_id,
+    size: data.size,
+    status: data.status,
+    statusMessage: data.status_message,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+    visibility: data.visibility
+  };
+};
+const unmarshalNamespace = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Namespace' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description,
+    endpoint: data.endpoint,
+    id: data.id,
+    imageCount: data.image_count,
+    isPublic: data.is_public,
+    name: data.name,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    region: data.region,
+    size: data.size,
+    status: data.status,
+    statusMessage: data.status_message,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalTag = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Tag' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    digest: data.digest,
+    id: data.id,
+    imageId: data.image_id,
+    name: data.name,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at)
+  };
+};
+const unmarshalListImagesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListImagesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    images: unmarshalArrayOfObject(data.images, unmarshalImage),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListNamespacesResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListNamespacesResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    namespaces: unmarshalArrayOfObject(data.namespaces, unmarshalNamespace),
+    totalCount: data.total_count
+  };
+};
+const unmarshalListTagsResponse = (data) => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListTagsResponse' failed as data isn't a dictionary.`
+    );
+  }
+  return {
+    tags: unmarshalArrayOfObject(data.tags, unmarshalTag),
+    totalCount: data.total_count
+  };
+};
+const marshalCreateNamespaceRequest = (request, defaults) => ({
+  description: request.description,
+  is_public: request.isPublic,
+  name: request.name || randomName("ns"),
+  ...resolveOneOf([
+    {
+      default: defaults.defaultProjectId,
+      param: "project_id",
+      value: request.projectId
+    },
+    {
+      default: defaults.defaultOrganizationId,
+      param: "organization_id",
+      value: request.organizationId
+    }
+  ])
+});
+const marshalUpdateImageRequest = (request, defaults) => ({
+  visibility: request.visibility
+});
+const marshalUpdateNamespaceRequest = (request, defaults) => ({
+  description: request.description,
+  is_public: request.isPublic
+});
+export {
+  marshalCreateNamespaceRequest,
+  marshalUpdateImageRequest,
+  marshalUpdateNamespaceRequest,
+  unmarshalImage,
+  unmarshalListImagesResponse,
+  unmarshalListNamespacesResponse,
+  unmarshalListTagsResponse,
+  unmarshalNamespace,
+  unmarshalTag
+};
