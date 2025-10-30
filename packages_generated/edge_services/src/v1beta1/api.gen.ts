@@ -1,14 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
 import {
   PIPELINE_TRANSIENT_STATUSES as PIPELINE_TRANSIENT_STATUSES_EDGE_SERVICES,
   PURGE_REQUEST_TRANSIENT_STATUSES as PURGE_REQUEST_TRANSIENT_STATUSES_EDGE_SERVICES,
@@ -84,6 +83,7 @@ import type {
   CreateRouteStageRequest,
   CreateTLSStageRequest,
   CreateWafStageRequest,
+  DNSStage,
   DeleteBackendStageRequest,
   DeleteCacheStageRequest,
   DeleteCurrentPlanRequest,
@@ -92,7 +92,6 @@ import type {
   DeleteRouteStageRequest,
   DeleteTLSStageRequest,
   DeleteWafStageRequest,
-  DNSStage,
   GetBackendStageRequest,
   GetBillingRequest,
   GetBillingResponse,

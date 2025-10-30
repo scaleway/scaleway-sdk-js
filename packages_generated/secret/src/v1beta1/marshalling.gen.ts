@@ -1,12 +1,11 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   AccessSecretVersionResponse,
   AddSecretOwnerRequest,
@@ -18,9 +17,9 @@ import type {
   CreateSecretVersionRequest,
   EphemeralPolicy,
   EphemeralProperties,
-  ListSecretsResponse,
   ListSecretTypesResponse,
   ListSecretVersionsResponse,
+  ListSecretsResponse,
   ListTagsResponse,
   Secret,
   SecretVersion,

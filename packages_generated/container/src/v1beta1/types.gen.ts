@@ -102,7 +102,7 @@ export interface ContainerHealthCheckSpecHTTPProbe {
   path: string
 }
 
-export type ContainerHealthCheckSpecTCPProbe = {}
+export interface ContainerHealthCheckSpecTCPProbe {}
 
 export interface ContainerHealthCheckSpec {
   /**

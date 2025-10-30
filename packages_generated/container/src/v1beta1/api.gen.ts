@@ -1,16 +1,15 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   resolveOneOf,
   toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   CONTAINER_TRANSIENT_STATUSES as CONTAINER_TRANSIENT_STATUSES_CONTAINER,
   CRON_TRANSIENT_STATUSES as CRON_TRANSIENT_STATUSES_CONTAINER,

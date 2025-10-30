@@ -1,7 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
@@ -9,6 +8,7 @@ import {
   unmarshalDate,
   unmarshalMapOfObject,
 } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   ApplyBlockMigrationRequest,
   AttachServerFileSystemRequest,
@@ -64,9 +64,9 @@ import type {
   ListSecurityGroupRulesResponse,
   ListSecurityGroupsResponse,
   ListServerActionsResponse,
+  ListServerUserDataResponse,
   ListServersResponse,
   ListServersTypesResponse,
-  ListServerUserDataResponse,
   ListSnapshotsResponse,
   ListVolumesResponse,
   ListVolumesTypesResponse,

@@ -1,13 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Acl,
   AclAction,
@@ -50,8 +50,8 @@ import type {
   ListFrontendsResponse,
   ListIpsResponse,
   ListLbPrivateNetworksResponse,
-  ListLbsResponse,
   ListLbTypesResponse,
+  ListLbsResponse,
   ListRoutesResponse,
   ListSubscriberResponse,
   MigrateLbRequest,
@@ -64,10 +64,10 @@ import type {
   RouteMatch,
   SetAclsResponse,
   SetBackendServersRequest,
+  SubscribeToLbRequest,
   Subscriber,
   SubscriberEmailConfig,
   SubscriberWebhookConfig,
-  SubscribeToLbRequest,
   UpdateAclRequest,
   UpdateBackendRequest,
   UpdateCertificateRequest,

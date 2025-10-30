@@ -57,7 +57,7 @@ export interface EndpointPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-export type EndpointPublicNetworkDetails = {}
+export interface EndpointPublicNetworkDetails {}
 
 export interface ModelSupportedNode {
   /**

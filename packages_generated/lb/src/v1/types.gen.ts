@@ -183,7 +183,7 @@ export interface HealthCheckHttpsConfig {
   sni: string
 }
 
-export type HealthCheckLdapConfig = {}
+export interface HealthCheckLdapConfig {}
 
 export interface HealthCheckMysqlConfig {
   /**
@@ -199,9 +199,9 @@ export interface HealthCheckPgsqlConfig {
   user: string
 }
 
-export type HealthCheckRedisConfig = {}
+export interface HealthCheckRedisConfig {}
 
-export type HealthCheckTcpConfig = {}
+export interface HealthCheckTcpConfig {}
 
 export interface Instance {
   /**
@@ -724,7 +724,7 @@ export interface PrivateNetworkDHCPConfig {
   ipId?: string
 }
 
-export type PrivateNetworkIpamConfig = {}
+export interface PrivateNetworkIpamConfig {}
 
 export interface PrivateNetworkStaticConfig {
   /**

@@ -409,7 +409,7 @@ export interface RecordChangeAdd {
   records: DomainRecord[]
 }
 
-export type RecordChangeClear = {}
+export interface RecordChangeClear {}
 
 export interface RecordChangeDelete {
   /**
@@ -769,7 +769,7 @@ export type ClearDNSZoneRecordsRequest = {
   dnsZone: string
 }
 
-export type ClearDNSZoneRecordsResponse = {}
+export interface ClearDNSZoneRecordsResponse {}
 
 export type CloneDNSZoneRequest = {
   /**
@@ -821,19 +821,19 @@ export type DeleteDNSZoneRequest = {
   projectId?: string
 }
 
-export type DeleteDNSZoneResponse = {}
+export interface DeleteDNSZoneResponse {}
 
 export type DeleteDNSZoneTsigKeyRequest = {
   dnsZone: string
 }
 
-export type DeleteExternalDomainResponse = {}
+export interface DeleteExternalDomainResponse {}
 
 export type DeleteSSLCertificateRequest = {
   dnsZone: string
 }
 
-export type DeleteSSLCertificateResponse = {}
+export interface DeleteSSLCertificateResponse {}
 
 export interface Domain {
   domain: string
@@ -1609,9 +1609,9 @@ export type RestoreDNSZoneVersionRequest = {
   dnsZoneVersionId: string
 }
 
-export type RestoreDNSZoneVersionResponse = {}
+export interface RestoreDNSZoneVersionResponse {}
 
-export type RetryInboundTransferResponse = {}
+export interface RetryInboundTransferResponse {}
 
 export interface SearchAvailableDomainsResponse {
   /**

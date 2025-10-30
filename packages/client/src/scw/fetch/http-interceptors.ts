@@ -10,7 +10,7 @@ import {
 import { dumpRequest, dumpResponse } from './http-dumper.js'
 
 /**
- * Mapper d'une entrée d'en-tête.
+ * Mapper of a header entry.
  *
  * @internal
  */

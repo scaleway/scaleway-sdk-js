@@ -266,7 +266,7 @@ export interface PublicCatalogProductPropertiesInstance {
   recommendedReplacementOfferIds: string[]
 }
 
-export type PublicCatalogProductPropertiesObjectStorage = {}
+export interface PublicCatalogProductPropertiesObjectStorage {}
 
 export interface PublicCatalogProductEnvironmentalImpactEstimation {
   kgCo2Equivalent?: number

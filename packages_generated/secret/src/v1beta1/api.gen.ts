@@ -1,14 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   toApiLocality,
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
+import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   marshalAddSecretOwnerRequest,
   marshalCreateSecretRequest,
@@ -17,9 +16,9 @@ import {
   marshalUpdateSecretVersionRequest,
   unmarshalAccessSecretVersionResponse,
   unmarshalBrowseSecretsResponse,
-  unmarshalListSecretsResponse,
   unmarshalListSecretTypesResponse,
   unmarshalListSecretVersionsResponse,
+  unmarshalListSecretsResponse,
   unmarshalListTagsResponse,
   unmarshalSecret,
   unmarshalSecretVersion,
@@ -39,12 +38,12 @@ import type {
   EnableSecretVersionRequest,
   GetSecretRequest,
   GetSecretVersionRequest,
-  ListSecretsRequest,
-  ListSecretsResponse,
   ListSecretTypesRequest,
   ListSecretTypesResponse,
   ListSecretVersionsRequest,
   ListSecretVersionsResponse,
+  ListSecretsRequest,
+  ListSecretsResponse,
   ListTagsRequest,
   ListTagsResponse,
   ProtectSecretRequest,

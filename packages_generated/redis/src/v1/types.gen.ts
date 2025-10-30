@@ -34,7 +34,7 @@ export type NodeTypeStock =
 
 export type PrivateNetworkProvisioningMode = 'static' | 'ipam'
 
-export type EndpointSpecPrivateNetworkSpecIpamConfig = {}
+export interface EndpointSpecPrivateNetworkSpecIpamConfig {}
 
 export interface PrivateNetwork {
   /**
@@ -55,7 +55,7 @@ export interface PrivateNetwork {
   provisioningMode: PrivateNetworkProvisioningMode
 }
 
-export type PublicNetwork = {}
+export interface PublicNetwork {}
 
 export interface EndpointSpecPrivateNetworkSpec {
   /**
@@ -72,7 +72,7 @@ export interface EndpointSpecPrivateNetworkSpec {
   ipamConfig?: EndpointSpecPrivateNetworkSpecIpamConfig
 }
 
-export type EndpointSpecPublicNetworkSpec = {}
+export interface EndpointSpecPublicNetworkSpec {}
 
 export interface AvailableClusterSetting {
   /**

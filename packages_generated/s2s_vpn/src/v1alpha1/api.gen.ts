@@ -1,15 +1,14 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import { VPN_GATEWAY_TRANSIENT_STATUSES as VPN_GATEWAY_TRANSIENT_STATUSES_S2S_VPN } from './content.gen.js'
 import {
   marshalCreateConnectionRequest,
@@ -28,8 +27,8 @@ import {
   unmarshalListConnectionsResponse,
   unmarshalListCustomerGatewaysResponse,
   unmarshalListRoutingPoliciesResponse,
-  unmarshalListVpnGatewaysResponse,
   unmarshalListVpnGatewayTypesResponse,
+  unmarshalListVpnGatewaysResponse,
   unmarshalRenewConnectionPskResponse,
   unmarshalRoutingPolicy,
   unmarshalVpnGateway,
@@ -59,10 +58,10 @@ import type {
   ListCustomerGatewaysResponse,
   ListRoutingPoliciesRequest,
   ListRoutingPoliciesResponse,
-  ListVpnGatewaysRequest,
-  ListVpnGatewaysResponse,
   ListVpnGatewayTypesRequest,
   ListVpnGatewayTypesResponse,
+  ListVpnGatewaysRequest,
+  ListVpnGatewaysResponse,
   RenewConnectionPskRequest,
   RenewConnectionPskResponse,
   RoutingPolicy,

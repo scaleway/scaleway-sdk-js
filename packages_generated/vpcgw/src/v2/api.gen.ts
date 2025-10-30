@@ -1,15 +1,14 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   GATEWAY_NETWORK_TRANSIENT_STATUSES as GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW,
   GATEWAY_TRANSIENT_STATUSES as GATEWAY_TRANSIENT_STATUSES_VPCGW,
@@ -32,8 +31,8 @@ import {
   unmarshalGatewayNetwork,
   unmarshalIP,
   unmarshalListGatewayNetworksResponse,
-  unmarshalListGatewaysResponse,
   unmarshalListGatewayTypesResponse,
+  unmarshalListGatewaysResponse,
   unmarshalListIPsResponse,
   unmarshalListPatRulesResponse,
   unmarshalPatRule,
@@ -61,10 +60,10 @@ import type {
   IP,
   ListGatewayNetworksRequest,
   ListGatewayNetworksResponse,
-  ListGatewaysRequest,
-  ListGatewaysResponse,
   ListGatewayTypesRequest,
   ListGatewayTypesResponse,
+  ListGatewaysRequest,
+  ListGatewaysResponse,
   ListIPsRequest,
   ListIPsResponse,
   ListPatRulesRequest,

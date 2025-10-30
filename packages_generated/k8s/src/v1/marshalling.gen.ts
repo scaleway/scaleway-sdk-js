@@ -1,26 +1,26 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   ACLRule,
   ACLRuleRequest,
   AddClusterACLRulesRequest,
   AddClusterACLRulesResponse,
   Cluster,
-  ClusterAutoscalerConfig,
   ClusterAutoUpgrade,
+  ClusterAutoscalerConfig,
   ClusterOpenIDConnectConfig,
   ClusterType,
   CreateClusterRequest,
-  CreateClusterRequestAutoscalerConfig,
   CreateClusterRequestAutoUpgrade,
+  CreateClusterRequestAutoscalerConfig,
   CreateClusterRequestOpenIDConnectConfig,
   CreateClusterRequestPoolConfig,
   CreateClusterRequestPoolConfigUpgradePolicy,
@@ -32,8 +32,8 @@ import type {
   ListClusterACLRulesResponse,
   ListClusterAvailableTypesResponse,
   ListClusterAvailableVersionsResponse,
-  ListClustersResponse,
   ListClusterTypesResponse,
+  ListClustersResponse,
   ListNodesResponse,
   ListPoolsResponse,
   ListVersionsResponse,
@@ -48,8 +48,8 @@ import type {
   SetClusterACLRulesResponse,
   SetClusterTypeRequest,
   UpdateClusterRequest,
-  UpdateClusterRequestAutoscalerConfig,
   UpdateClusterRequestAutoUpgrade,
+  UpdateClusterRequestAutoscalerConfig,
   UpdateClusterRequestOpenIDConnectConfig,
   UpdatePoolRequest,
   UpdatePoolRequestUpgradePolicy,

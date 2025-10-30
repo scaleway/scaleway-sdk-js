@@ -55,7 +55,7 @@ export interface EphemeralPolicy {
   action: EphemeralPolicyAction
 }
 
-export type BrowseSecretsResponseItemFolderDetails = {}
+export interface BrowseSecretsResponseItemFolderDetails {}
 
 export interface BrowseSecretsResponseItemSecretDetails {
   id: string

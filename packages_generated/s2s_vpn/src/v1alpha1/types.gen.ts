@@ -102,7 +102,7 @@ export interface ConnectionCipher {
   dhGroup?: ConnectionDhGroup
 }
 
-export type VpnGatewayPrivateConfig = {}
+export interface VpnGatewayPrivateConfig {}
 
 export interface VpnGatewayPublicConfig {
   ipamIpv4Id?: string

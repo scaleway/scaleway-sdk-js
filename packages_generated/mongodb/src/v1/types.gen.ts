@@ -70,7 +70,7 @@ export interface EndpointPrivateNetworkDetails {
 /**
  * Public Access details.
  */
-export type EndpointPublicNetworkDetails = {}
+export interface EndpointPublicNetworkDetails {}
 
 export interface EndpointSpecPrivateNetworkDetails {
   /**
@@ -79,7 +79,7 @@ export interface EndpointSpecPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-export type EndpointSpecPublicNetworkDetails = {}
+export interface EndpointSpecPublicNetworkDetails {}
 
 export interface Endpoint {
   /**

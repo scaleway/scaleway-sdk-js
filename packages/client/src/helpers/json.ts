@@ -1,3 +1,4 @@
+/* biome-ignore lint/style/useNamingConvention: public alias intended as JSON shape */
 export type JSON =
   | string
   | number

@@ -23,8 +23,8 @@
     "build:profile": "cross-env PROFILE=true pnpm run build",
     "commit": "npx git-cz -a",
     "doc": "typedoc",
-    "format": "biome check --write .",
-    "format:check": "biome check .",
+    "format": "biome check --linter-enabled=false --write .",
+    "format:check": "biome check --linter-enabled=false .",
     "prettier": "prettier --write '**/*.{md,mdx,yml,yaml}'",
     "lint": "biome lint .",
     "lint:fix": "biome check --write .",
@@ -35,6 +35,16 @@
     "test:ui": "vitest --ui"
   },
   "lint-staged": {
+    "globOptions": {
+      "ignore": [
+        "**/*.gen.ts",
+        "packages_generated/**",
+        "**/dist/**",
+        "**/build/**",
+        "**/coverage/**",
+        "**/examples/**"
+      ]
+    },
     "*.{ts,tsx,js,jsx}": [
       "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
     ],

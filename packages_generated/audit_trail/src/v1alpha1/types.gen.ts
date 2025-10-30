@@ -90,7 +90,7 @@ export type ResourceType =
 
 export type SystemEventKind = 'unknown_kind' | 'cron' | 'notification'
 
-export type AccountOrganizationInfo = {}
+export interface AccountOrganizationInfo {}
 
 export interface AccountProjectInfo {
   description: string
@@ -123,11 +123,11 @@ export interface IpamIpInfo {
   address: string
 }
 
-export type KeyManagerKeyInfo = {}
+export interface KeyManagerKeyInfo {}
 
-export type KubernetesACLInfo = {}
+export interface KubernetesACLInfo {}
 
-export type KubernetesClusterInfo = {}
+export interface KubernetesClusterInfo {}
 
 export interface KubernetesNodeInfo {
   id: string
