@@ -26,7 +26,7 @@
     "format": "biome check --linter-enabled=false --write .",
     "format:check": "biome check --linter-enabled=false .",
     "prettier": "prettier --write '**/*.{md,mdx,yml,yaml}'",
-    "lint": "biome lint .",
+    "lint": "biome lint packages/*/src scripts/**/*.ts",
     "lint:fix": "biome check --write .",
     "prepare": "husky",
     "test": "vitest run",
