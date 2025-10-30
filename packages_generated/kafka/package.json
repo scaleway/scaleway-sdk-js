@@ -1,0 +1,49 @@
+{
+  "name": "@scaleway/sdk-kafka",
+  "version": "1.0.0",
+  "description": "Scaleway SDK kafka",
+  "license": "Apache-2.0",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.gen.d.ts",
+      "import": "./dist/index.gen.js",
+      "require": "./dist/index.gen.cjs",
+      "default": "./dist/index.gen.js"
+    },
+    "./*": {
+      "types": "./dist/*/index.gen.d.ts",
+      "import": "./dist/*/index.gen.js",
+      "require": "./dist/*/index.gen.cjs",
+      "default": "./dist/*/index.gen.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "directory": "packages_generated/kafka"
+  },
+  "engines": {
+    "node": ">=20.18.3"
+  },
+  "scripts": {
+    "package:check": "pnpm publint",
+    "typecheck": "tsc --noEmit",
+    "type:generate": "tsc --declaration -p tsconfig.build.json",
+    "build": "vite build --config vite.config.ts && pnpm run type:generate",
+    "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
+  },
+  "dependencies": {
+    "@scaleway/sdk-std": "workspace:*",
+    "@scaleway/random-name": "5.1.1"
+  },
+  "peerDependencies": {
+    "@scaleway/sdk-client": "workspace:^"
+  },
+  "devDependencies": {
+    "@scaleway/sdk-client": "workspace:^"
+  }
+}
