@@ -27,6 +27,7 @@ import { Iotv1 } from '@scaleway/sdk-iot'
 import { Ipamv1 } from '@scaleway/sdk-ipam'
 import { Jobsv1alpha1 } from '@scaleway/sdk-jobs'
 import { K8Sv1 } from '@scaleway/sdk-k8s'
+import { Kafkav1alpha1 } from '@scaleway/sdk-kafka'
 import { KeyManagerv1alpha1 } from '@scaleway/sdk-key-manager'
 import { Lbv1 } from '@scaleway/sdk-lb'
 import { Marketplacev2 } from '@scaleway/sdk-marketplace'
@@ -251,6 +252,14 @@ export const K8s = {
 }
 
 /**
+ * @deprecated Direct version exports are deprecated. Use the 'Kafka' namespace instead (e.g., Kafka.v1).
+ */
+export { Kafkav1alpha1 }
+export const Kafka = {
+  v1alpha1: Kafkav1alpha1,
+}
+
+/**
  * @deprecated Direct version exports are deprecated. Use the 'KeyManager' namespace instead (e.g., KeyManager.v1).
  */
 export { KeyManagerv1alpha1 }
@@ -395,3 +404,4 @@ export { Webhostingv1 }
 export const Webhosting = {
   v1: Webhostingv1,
 }
+

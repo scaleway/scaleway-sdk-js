@@ -57,6 +57,7 @@
     "@scaleway/sdk-ipam": "workspace:*",
     "@scaleway/sdk-jobs": "workspace:*",
     "@scaleway/sdk-k8s": "workspace:*",
+    "@scaleway/sdk-kafka": "workspace:*",
     "@scaleway/sdk-key-manager": "workspace:*",
     "@scaleway/sdk-lb": "workspace:*",
     "@scaleway/sdk-marketplace": "workspace:*",
