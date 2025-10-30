@@ -606,8 +606,9 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Get Database Instance metrics. Retrieve the time series metrics of a given Database Instance. You can define the period from which to retrieve metrics by specifying the `start_date` and `end_date`.
+   * [deprecated] Get Database Instance metrics. Retrieve the time series metrics of a given Database Instance. You can define the period from which to retrieve metrics by specifying the `start_date` and `end_date`. This method is deprecated and will be removed in a future version.
    *
+   * @deprecated
    * @param request - The request {@link GetInstanceMetricsRequest}
    * @returns A Promise of InstanceMetrics
    */
