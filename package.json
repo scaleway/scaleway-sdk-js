@@ -26,7 +26,7 @@
     "format": "biome check --linter-enabled=false --write .",
     "format:check": "biome check --linter-enabled=false .",
     "prettier": "prettier --write '**/*.{md,mdx,yml,yaml}'",
-    "lint": "biome lint packages/*/src scripts/**/*.ts",
+    "lint": "biome lint .",
     "lint:fix": "biome check --write .",
     "prepare": "husky",
     "test": "vitest run",
@@ -35,17 +35,10 @@
     "test:ui": "vitest --ui"
   },
   "lint-staged": {
-    "globOptions": {
-      "ignore": [
-        "**/*.gen.ts",
-        "packages_generated/**",
-        "**/dist/**",
-        "**/build/**",
-        "**/coverage/**",
-        "**/examples/**"
-      ]
-    },
-    "*.{ts,tsx,js,jsx}": [
+    "packages/*/src/**/*.{ts,tsx,js,jsx}": [
+      "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
+    ],
+    "scripts/**/*.ts": [
       "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
     ],
     "*.json": [

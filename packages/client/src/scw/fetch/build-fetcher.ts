@@ -40,6 +40,7 @@ export const buildRequest = (
   return new Request(`${settings.apiURL}${path}`, {
     body: request.body,
     headers: {
+      /* biome-ignore lint/style/useNamingConvention: Accept is standard HTTP header name */
       Accept: 'application/json',
       .../* istanbul ignore next */ (!isBrowser()
         ? { 'User-Agent': settings.userAgent }
@@ -93,7 +94,8 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
     request: Readonly<ScwRequest>,
     unwrapper: ResponseUnmarshaller<T> = asIs,
   ): Promise<T> => {
-    const requestId = `${(requestNumber += 1)}`
+    requestNumber += 1
+    const requestId = `${requestNumber}`
     const reqInterceptors = prepareRequest(requestId)
     const finalRequest = await reqInterceptors(buildRequest(request, settings))
 

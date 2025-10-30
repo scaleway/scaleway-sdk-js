@@ -113,6 +113,58 @@
   },
   "overrides": [
     {
+      "includes": ["**/dist/**"],
+      "linter": {
+        "enabled": false
+      }
+    },
+    {
+      "includes": ["coverage/**"],
+      "linter": {
+        "enabled": false
+      }
+    },
+    {
+      "includes": ["**/vite.config.ts", "**/vitest.config.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noDefaultExport": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["packages/client/src/internal/logger/level-resolver.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useNamingConvention": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["scripts/**/*.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useNamingConvention": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["packages/sdk/src/index.gen.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noShadowRestrictedNames": "off"
+          }
+        }
+      }
+    },
+    {
       "includes": [
         "packages/client/src/internal/interceptors/types.ts"
       ],
@@ -131,6 +183,9 @@
         "rules": {
           "correctness": {
             "noUnusedVariables": "off"
+          },
+          "style": {
+            "useNamingConvention": "off"
           }
         }
       }

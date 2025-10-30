@@ -63,7 +63,7 @@ function safeReadJson(path: string): unknown {
 }
 
 function writeJsonIfChanged(path: string, data: unknown) {
-  const newContent = JSON.stringify(data, null, 2) + '\n'
+  const newContent = `${JSON.stringify(data, null, 2)}\n`
   const oldContent = existsSync(path) ? readFileSync(path, 'utf8') : ''
   if (oldContent !== newContent) {
     if (DRY_RUN) {

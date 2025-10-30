@@ -3,7 +3,7 @@
 import { loadProfileFromConfigurationFile } from '@scaleway/configuration-loader'
 import { Registry } from '@scaleway/sdk'
 import { createClient } from '@scaleway/sdk-client'
-import * as http from 'http'
+import * as http from 'node:http'
 
 const hostname = '127.0.0.1'
 const port = 3000

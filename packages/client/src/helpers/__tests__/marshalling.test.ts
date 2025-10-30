@@ -94,6 +94,7 @@ describe('resolveOneOf', () => {
         [{ default: undefined, param: 'my_key', value: '42' }],
         true,
       ),
+      /* biome-ignore lint/style/useNamingConvention: test data uses snake_case intentionally */
     ).toStrictEqual({ my_key: '42' })
   })
 
@@ -106,6 +107,7 @@ describe('resolveOneOf', () => {
         ],
         true,
       ),
+      /* biome-ignore lint/style/useNamingConvention: test data uses snake_case intentionally */
     ).toStrictEqual({ my_key_2: '42' })
   })
 
@@ -118,6 +120,7 @@ describe('resolveOneOf', () => {
         ],
         true,
       ),
+      /* biome-ignore lint/style/useNamingConvention: test data uses snake_case intentionally */
     ).toStrictEqual({ my_key_1: '42' })
 
     expect(
@@ -128,6 +131,7 @@ describe('resolveOneOf', () => {
         ],
         true,
       ),
+      /* biome-ignore lint/style/useNamingConvention: test data uses snake_case intentionally */
     ).toStrictEqual({ my_key_1: '42' })
   })
 
@@ -168,6 +172,7 @@ describe('resolveOneOf', () => {
         ],
         false,
       ),
+      /* biome-ignore lint/style/useNamingConvention: test data uses snake_case intentionally */
     ).toStrictEqual({ my_key_1: false })
   })
 })
@@ -201,6 +206,7 @@ describe('unmarshalArrayOfObject', () => {
   it('unmarshals valid array of object', () => {
     expect(
       unmarshalArrayOfObject(
+        /* biome-ignore lint/style/useNamingConvention: test data uses snake_case intentionally */
         [{ my_number: 42 }, { my_number: 94 }],
         unmarshaller,
       ),
@@ -229,6 +235,7 @@ describe('unmarshalMapOfObject', () => {
   it('unmarshals valid array of object', () => {
     expect(
       unmarshalMapOfObject(
+        /* biome-ignore lint/style/useNamingConvention: test data uses snake_case intentionally */
         { 'first-key': { my_number: 42 }, 'second-key': { my_number: 94 } },
         unmarshaller,
       ),

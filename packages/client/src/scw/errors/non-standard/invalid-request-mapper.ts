@@ -9,41 +9,39 @@ import { isRecordOfStringArray } from '../types.js'
  *
  * @public
  */
-export class InvalidRequestMapper {
-  static fromJSON(
-    status: number,
-    obj: Readonly<JSONObject>,
-  ): QuotasExceededError | InvalidArgumentsError | ScalewayError {
-    if (
-      typeof obj.message === 'string' &&
-      obj.message.toLowerCase().includes('quota exceeded for this resource')
-    ) {
-      return new QuotasExceededError(status, obj, [
-        {
-          current: 0,
-          quota: 0,
-          resource: typeof obj.resource === 'string' ? obj.resource : '',
-        },
-      ])
-    }
-
-    const fields =
-      obj.fields && isRecordOfStringArray(obj.fields) ? obj.fields : {}
-    const fieldsMessages = Object.entries(fields)
-    if (fieldsMessages.length) {
-      return new InvalidArgumentsError(
-        status,
-        obj,
-        fieldsMessages.flatMap(([argumentName, messages]) =>
-          messages.map(helpMessage => ({
-            argumentName,
-            helpMessage,
-            reason: 'constraint',
-          })),
-        ),
-      )
-    }
-
-    return new ScalewayError(status, obj)
+export const mapInvalidRequestFromJSON = (
+  status: number,
+  obj: Readonly<JSONObject>,
+): QuotasExceededError | InvalidArgumentsError | ScalewayError => {
+  if (
+    typeof obj.message === 'string' &&
+    obj.message.toLowerCase().includes('quota exceeded for this resource')
+  ) {
+    return new QuotasExceededError(status, obj, [
+      {
+        current: 0,
+        quota: 0,
+        resource: typeof obj.resource === 'string' ? obj.resource : '',
+      },
+    ])
   }
+
+  const fields =
+    obj.fields && isRecordOfStringArray(obj.fields) ? obj.fields : {}
+  const fieldsMessages = Object.entries(fields)
+  if (fieldsMessages.length) {
+    return new InvalidArgumentsError(
+      status,
+      obj,
+      fieldsMessages.flatMap(([argumentName, messages]) =>
+        messages.map(helpMessage => ({
+          argumentName,
+          helpMessage,
+          reason: 'constraint',
+        })),
+      ),
+    )
+  }
+
+  return new ScalewayError(status, obj)
 }

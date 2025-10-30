@@ -5,6 +5,7 @@ import type { Client } from './client.js'
  *
  * @internal
  */
+/* biome-ignore lint/style/useNamingConvention: API is standard class name for SDK base */
 export abstract class API {
   constructor(protected client: Client) {}
 }

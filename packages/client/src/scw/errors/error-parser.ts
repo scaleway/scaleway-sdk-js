@@ -1,6 +1,6 @@
 import type { JSONObject } from '../../helpers/json.js'
-import { InvalidRequestMapper } from './non-standard/invalid-request-mapper.js'
-import { UnknownResourceMapper } from './non-standard/unknown-resource-mapper.js'
+import { mapInvalidRequestFromJSON } from './non-standard/invalid-request-mapper.js'
+import { mapUnknownResourceFromJSON } from './non-standard/unknown-resource-mapper.js'
 import { ScalewayError } from './scw-error.js'
 import type { ScalewayErrorFromJSONInitializer } from './scw-error-from-json.js'
 import { AlreadyExistsError } from './standard/already-exists-error.js'
@@ -93,9 +93,9 @@ const unmarshalNonStandardError = (
 ): ScalewayError | null => {
   switch (type) {
     case 'unknown_resource':
-      return UnknownResourceMapper.fromJSON(status, body)
+      return mapUnknownResourceFromJSON(status, body)
     case 'invalid_request_error':
-      return InvalidRequestMapper.fromJSON(status, body)
+      return mapInvalidRequestFromJSON(status, body)
     default:
       return null
   }

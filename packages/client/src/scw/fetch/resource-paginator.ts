@@ -16,6 +16,7 @@ export type PaginatedContent<
   K extends string,
   T = unknown,
 > = PaginatedResponse & {
+  /* biome-ignore lint/style/useNamingConvention: key is valid mapped type parameter */
   [key in K]: T[]
 }
 

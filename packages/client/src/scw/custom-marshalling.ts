@@ -149,6 +149,7 @@ export const unmarshalDecimal = (data: unknown) => {
  */
 export const marshalScwFile = (obj: ScwFile): Record<string, unknown> => ({
   content: obj.content,
+  /* biome-ignore lint/style/useNamingConvention: content_type is API field name */
   content_type: obj.contentType,
   name: obj.name,
 })
@@ -162,6 +163,7 @@ export const marshalBlobToScwFile = async (
   blob: Blob,
 ): Promise<Record<string, unknown>> => ({
   content: fromByteArray(new Uint8Array(await blob.arrayBuffer())),
+  /* biome-ignore lint/style/useNamingConvention: content_type is API field name */
   content_type: blob.type,
   name: 'file',
 })
@@ -172,6 +174,7 @@ export const marshalBlobToScwFile = async (
  * @internal
  */
 export const marshalMoney = (obj: Money): Record<string, unknown> => ({
+  /* biome-ignore lint/style/useNamingConvention: currency_code is API field name */
   currency_code: obj.currencyCode,
   nanos: obj.nanos,
   units: obj.units,
@@ -226,16 +229,14 @@ export const unmarshalDates = <T>(obj: unknown, keys: string[]): T => {
   }
 
   if (obj && typeof obj === 'object') {
-    return Object.entries(obj).reduce(
-      (acc, [key, value]) => ({
-        ...acc,
-        [key]:
-          typeof value === 'string' && keys.includes(key)
-            ? new Date(value)
-            : unmarshalDates(value, keys),
-      }),
-      {},
-    ) as T
+    const result: Record<string, unknown> = {}
+    for (const [key, value] of Object.entries(obj)) {
+      result[key] =
+        typeof value === 'string' && keys.includes(key)
+          ? new Date(value)
+          : unmarshalDates(value, keys)
+    }
+    return result as T
   }
 
   return obj as T

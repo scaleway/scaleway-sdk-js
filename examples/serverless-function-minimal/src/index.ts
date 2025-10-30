@@ -18,7 +18,11 @@ const buildErrorRes = (error?: unknown) => ({
   statusCode: error instanceof Errors.ScalewayError ? error.status : 500,
 })
 
-export const list = async (event: any, context: any, callback: any) => {
+export const list = async (
+  _event: unknown,
+  _context: unknown,
+  _callback: unknown,
+) => {
   try {
     return buildJsonRes(await api.listNamespaces().all())
   } catch (error) {

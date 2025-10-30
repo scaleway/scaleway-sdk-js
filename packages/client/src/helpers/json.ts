@@ -95,15 +95,14 @@ export const camelizeKeys = <T>(
   }
 
   if (obj && typeof obj === 'object' && !(obj instanceof Date)) {
-    return Object.entries(obj).reduce(
-      (acc, [key, value]) => ({
-        ...acc,
-        [camelize(key)]: ignoreKeys.includes(key)
-          ? (value as unknown)
-          : camelizeKeys(value, ignoreKeys),
-      }),
-      {},
-    ) as T
+    const result: Record<string, unknown> = {}
+    for (const [key, value] of Object.entries(obj)) {
+      const outKey = camelize(key)
+      result[outKey] = ignoreKeys.includes(key)
+        ? (value as unknown)
+        : camelizeKeys(value, ignoreKeys)
+    }
+    return result as T
   }
 
   return obj as T

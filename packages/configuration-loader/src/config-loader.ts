@@ -1,4 +1,4 @@
-import { env } from 'process'
+import { env } from 'node:process'
 import { EnvironmentKey } from './env.js'
 import { resolveConfigurationFilePath } from './path-resolver.js'
 import type {

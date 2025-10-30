@@ -1,9 +1,11 @@
 var lookup = []
 var revLookup = []
 var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
+var i
+var len
 
 var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-for (var i = 0, len = code.length; i < len; ++i) {
+for (i = 0, len = code.length; i < len; ++i) {
   lookup[i] = code[i]
   revLookup[code.charCodeAt(i)] = i
 }
@@ -38,7 +40,7 @@ export function byteLength(b64) {
   return ((validLen + placeHoldersLen) * 3) / 4 - placeHoldersLen
 }
 
-function _byteLength(b64, validLen, placeHoldersLen) {
+function _byteLength(_b64, validLen, placeHoldersLen) {
   return ((validLen + placeHoldersLen) * 3) / 4 - placeHoldersLen
 }
 
@@ -98,7 +100,8 @@ function tripletToBase64(num) {
 function encodeChunk(uint8, start, end) {
   var tmp
   var output = []
-  for (var i = start; i < end; i += 3) {
+  var i
+  for (i = start; i < end; i += 3) {
     tmp =
       ((uint8[i] << 16) & 0xff0000) +
       ((uint8[i + 1] << 8) & 0xff00) +
@@ -114,9 +117,11 @@ export function fromByteArray(uint8) {
   var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
   var parts = []
   var maxChunkLength = 16383 // must be multiple of 3
+  var i
+  var len2
 
   // go through the array every three bytes, we'll deal with trailing stuff later
-  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
+  for (i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
     parts.push(
       encodeChunk(
         uint8,
@@ -129,7 +134,7 @@ export function fromByteArray(uint8) {
   // pad the end with zeros, but make sure to not forget the extra bytes
   if (extraBytes === 1) {
     tmp = uint8[len - 1]
-    parts.push(lookup[tmp >> 2] + lookup[(tmp << 4) & 0x3f] + '==')
+    parts.push(`${lookup[tmp >> 2] + lookup[(tmp << 4) & 0x3f]}==`)
   } else if (extraBytes === 2) {
     tmp = (uint8[len - 2] << 8) + uint8[len - 1]
     parts.push(
