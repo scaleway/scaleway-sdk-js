@@ -50,6 +50,7 @@ export const responseParser =
     unmarshaller: ResponseUnmarshaller<T>,
     responseType: 'json' | 'text' | 'blob',
   ) =>
+  /* biome-ignore lint/complexity/noExcessiveCognitiveComplexity: response parsing with multiple content types and error handling */
   async (response: Response): Promise<T> => {
     if (!isResponse(response)) {
       throw new TypeError('Invalid response object')

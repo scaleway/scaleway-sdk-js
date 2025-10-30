@@ -15,6 +15,7 @@ const DETECT_ITEM_REGEX = /^\s*(.+?)\s*:\s*(.+?)\s*$/
  */
 export const convertYamlToConfiguration = (
   input: string | null,
+  /* biome-ignore lint/complexity/noExcessiveCognitiveComplexity: YAML parsing with multiple states */
 ): ConfigurationType => {
   let foundProfilesKey = false
   let currentSection: string | undefined = 'default'
@@ -22,7 +23,7 @@ export const convertYamlToConfiguration = (
   if (typeof input !== 'string') {
     return map
   }
-  input.split(/\r?\n/).forEach(rawLine => {
+  for (const rawLine of input.split(/\r?\n/)) {
     // remove comments
     const line = rawLine.split(STRIP_COMMENT_REGEX)[0]
     // parse sections
@@ -45,7 +46,7 @@ export const convertYamlToConfiguration = (
         ;[, , map[currentSection][item[1]]] = item
       }
     }
-  })
+  }
 
   return map
 }

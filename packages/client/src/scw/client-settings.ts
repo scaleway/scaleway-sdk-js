@@ -70,6 +70,7 @@ export interface Settings extends DefaultValues {
  *
  * @internal
  */
+/* biome-ignore lint/complexity/noExcessiveCognitiveComplexity: validation function with multiple checks */
 export const assertValidSettings = (obj: Readonly<Settings>): void => {
   // Default Organization ID.
   if (obj.defaultOrganizationId !== undefined) {

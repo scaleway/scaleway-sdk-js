@@ -20,6 +20,7 @@ import { cwd } from 'node:process'
 import type { ParseArgsConfig } from 'node:util'
 import { parseArgs } from 'node:util'
 import { snakeToSlug } from './helpers'
+import type { PackageJSON } from './types'
 
 type Scope = '@scaleway' | '@scaleway-internal'
 
@@ -81,7 +82,8 @@ function walkHasGenFiles(root: string): boolean {
   if (!existsSync(root)) return false
   const stack = [root]
   while (stack.length) {
-    const p = stack.pop()!
+    const p = stack.pop()
+    if (!p) break
     const st = statSync(p)
     if (st.isDirectory()) {
       for (const name of readdirSync(p)) stack.push(join(p, name))
@@ -120,7 +122,7 @@ function detectPackageScope(sdkPackageJsonPath: string): Scope {
     warn('⚠️  SDK package.json not found, using @scaleway scope')
     return '@scaleway'
   }
-  const sdkPackage = safeReadJson(sdkPackageJsonPath) as any
+  const sdkPackage = safeReadJson(sdkPackageJsonPath) as PackageJSON
   const deps: Record<string, string> = sdkPackage?.dependencies ?? {}
   const hasInternal = Object.keys(deps).some(k =>
     k.startsWith('@scaleway-internal/sdk-'),
@@ -138,7 +140,7 @@ function updateSdkPackageJson(
     return { added: [] }
   }
 
-  const sdkPackage = safeReadJson(sdkPackageJsonPath) as any
+  const sdkPackage = safeReadJson(sdkPackageJsonPath) as PackageJSON
   sdkPackage.dependencies = sdkPackage.dependencies ?? {}
   sdkPackage.devDependencies = sdkPackage.devDependencies ?? {}
 

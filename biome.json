@@ -113,6 +113,12 @@
   },
   "overrides": [
     {
+      "includes": ["packages_generated/**"],
+      "linter": {
+        "enabled": false
+      }
+    },
+    {
       "includes": ["**/dist/**"],
       "linter": {
         "enabled": false
