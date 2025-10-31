@@ -134,6 +134,7 @@ export type OfferOptionName =
   | 'email_storage_gb'
   | 'database_count'
   | 'support'
+  | 'additional_email'
 
 export type OfferOptionWarning =
   | 'unknown_warning'
