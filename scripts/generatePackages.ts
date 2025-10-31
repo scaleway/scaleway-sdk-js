@@ -113,7 +113,7 @@ const exportProductVersions = ({ productDir }: { productDir: string }) => {
  */
 const main = () => {
   // eslint-disable-next-line no-unused-vars
-  for (const sdk of SDKS) {
+  for (const _sdk of SDKS) {
     const productsDirs = readdirSync(INPUT_PATH_DIR)
 
     for (const productDir of productsDirs) {

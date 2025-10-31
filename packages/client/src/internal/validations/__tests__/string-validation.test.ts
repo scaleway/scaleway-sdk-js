@@ -78,14 +78,14 @@ const validators = [
 for (const component of validators) {
   describe(component.validator.name, () => {
     it(`validates correct ${component.name} format`, () => {
-      component.valids.forEach(str =>
-        expect(component.validator(str)).toStrictEqual(true),
-      )
+      for (const str of component.valids) {
+        expect(component.validator(str)).toStrictEqual(true)
+      }
     })
     it(`doesn't validate incorrect ${component.name} format`, () => {
-      component.invalids.forEach(str =>
-        expect(component.validator(str)).toStrictEqual(false),
-      )
+      for (const str of component.invalids) {
+        expect(component.validator(str)).toStrictEqual(false)
+      }
     })
   })
 }

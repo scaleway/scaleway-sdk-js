@@ -9,12 +9,15 @@ describe('isJSON', () => {
     },
   )
 
-  test.each([undefined, () => {}, Symbol(42)])(
-    `rejects %s as a valid JSON value`,
-    obj => {
-      expect(isJSON(obj)).toBeFalsy()
+  test.each([
+    undefined,
+    () => {
+      /* noop */
     },
-  )
+    Symbol(42),
+  ])(`rejects %s as a valid JSON value`, obj => {
+    expect(isJSON(obj)).toBeFalsy()
+  })
 })
 
 describe('isJSONObject', () => {
@@ -32,7 +35,9 @@ describe('isJSONObject', () => {
     null,
     [true, 'two', 3],
     undefined,
-    () => {},
+    () => {
+      /* noop */
+    },
     Symbol(42),
   ])(`rejects %s as a valid JSONObject value`, obj => {
     expect(isJSONObject(obj)).toBeFalsy()

@@ -4,7 +4,7 @@ export type SDK = {
   type: 'public'
 }
 
-type PackageJSON = {
+export type PackageJSON = {
   name: string
   version: string
   path: string

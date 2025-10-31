@@ -72,8 +72,61 @@
     }
   },
   "linter": {
-    "enabled": false
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "style": {
+        "noDefaultExport": "error"
+      }
+    }
   },
+  "overrides": [
+    {
+      "includes": ["packages_generated/**"],
+      "linter": {
+        "enabled": false
+      }
+    },
+    {
+      "includes": ["**/dist/**", "coverage/**", "**/examples/**"],
+      "linter": {
+        "enabled": false
+      }
+    },
+    {
+      "includes": ["vite.config.ts", "vitest.config.ts", "**/*.config.ts", "**/*.config.js"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noDefaultExport": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/*.test.ts", "**/__tests__/**/*.ts"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedVariables": "off"
+          },
+          "style": {
+            "useNamingConvention": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["packages/client/src/internal/interceptors/types.ts", "packages/client/src/scw/auth.ts", "packages/client/src/scw/fetch/http-interceptors.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useShorthandFunctionType": "off"
+          }
+        }
+      }
+    }
+  ],
   "assist": {
     "actions": {
       "source": {
