@@ -226,16 +226,14 @@ export const unmarshalDates = <T>(obj: unknown, keys: string[]): T => {
   }
 
   if (obj && typeof obj === 'object') {
-    return Object.entries(obj).reduce(
-      (acc, [key, value]) => ({
-        ...acc,
-        [key]:
-          typeof value === 'string' && keys.includes(key)
-            ? new Date(value)
-            : unmarshalDates(value, keys),
-      }),
-      {},
-    ) as T
+    const result: Record<string, unknown> = {}
+    for (const [key, value] of Object.entries(obj)) {
+      result[key] =
+        typeof value === 'string' && keys.includes(key)
+          ? new Date(value)
+          : unmarshalDates(value, keys)
+    }
+    return result as T
   }
 
   return obj as T

@@ -1,8 +1,8 @@
-import { readFileSync } from 'fs'
+import { readFileSync } from 'node:fs'
 import type { ConfigurationType } from './types.js'
 
 const STRIP_COMMENT_REGEX = /(^|\s)[;#]/
-const DETECT_SECTION_REGEX = /^\s*([^]+):\s*$/
+const DETECT_SECTION_REGEX = /^\s*([\s\S]+?):\s*$/
 const DETECT_ITEM_REGEX = /^\s*(.+?)\s*:\s*(.+?)\s*$/
 
 /**

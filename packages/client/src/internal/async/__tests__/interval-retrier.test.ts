@@ -97,7 +97,7 @@ const mockLogic = (iterations: number, workingTime: number) => {
       done: counter >= iterations,
       value: {
         doneIterations: counter,
-        totalDuration: new Date().getTime() - startDate.getTime(),
+        totalDuration: Date.now() - startDate.getTime(),
       },
     }
   }

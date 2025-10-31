@@ -93,7 +93,8 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
     request: Readonly<ScwRequest>,
     unwrapper: ResponseUnmarshaller<T> = asIs,
   ): Promise<T> => {
-    const requestId = `${(requestNumber += 1)}`
+    requestNumber += 1
+    const requestId = `${requestNumber}`
     const reqInterceptors = prepareRequest(requestId)
     const finalRequest = await reqInterceptors(buildRequest(request, settings))
 
