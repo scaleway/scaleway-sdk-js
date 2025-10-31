@@ -1545,7 +1545,7 @@ export type ListDatabasesRequest = {
   /**
    * Whether to skip the retrieval of each database size. If true, the size of each returned database will be set to 0.
    */
-  skipSizeRetrieval: boolean
+  skipSizeRetrieval?: boolean
   page?: number
   pageSize?: number
 }
