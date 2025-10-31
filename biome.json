@@ -117,7 +117,7 @@
       }
     },
     {
-      "includes": ["packages/client/src/internal/interceptors/types.ts", "packages/client/src/scw/auth.ts"],
+      "includes": ["packages/client/src/internal/interceptors/types.ts", "packages/client/src/scw/auth.ts", "packages/client/src/scw/fetch/http-interceptors.ts"],
       "linter": {
         "rules": {
           "style": {

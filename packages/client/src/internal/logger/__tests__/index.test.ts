@@ -130,7 +130,9 @@ describe('ConsoleLogger', () => {
   })
 
   it('returns the proper level boolean', () => {
-    const log = vi.fn().mockImplementation(() => {})
+    const log = vi.fn().mockImplementation(() => {
+      /* noop */
+    })
     const out = makeCallbackConsole(log)
     for (const test of IS_LEVEL_ENOUGH_CASES) {
       const logger = new ConsoleLogger(test.base, '', out)
