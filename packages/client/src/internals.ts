@@ -7,6 +7,15 @@ export {
   urlParams,
   validatePathParam,
 } from './helpers/marshalling.js'
+export type { FieldSpec, TypeSpec } from './helpers/spec-marshalling.js'
+export {
+  globalRegistry as specRegistry,
+  marshal,
+  marshalWithSpec,
+  SpecRegistry,
+  unmarshal,
+  unmarshalWithSpec,
+} from './helpers/spec-marshalling.js'
 export {
   createExponentialBackoffStrategy,
   tryAtIntervals,
