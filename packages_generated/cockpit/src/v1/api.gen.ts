@@ -690,7 +690,7 @@ The output returned displays a URL to access the Alert manager, and whether the 
     )
 
   /**
-   * Get the number of enabled rules Get a detailed count of enabled rules in the specified Project. Includes preconfigured and custom alerting and recording rules.. Get the number of enabled rules Get a detailed count of enabled rules in the specified Project. Includes preconfigured and custom alerting and recording rules.
+   * Get the number of enabled rules. Get a detailed count of enabled rules in the specified Project. Includes preconfigured and custom alerting and recording rules.
    *
    * @param request - The request {@link RegionalApiGetRulesCountRequest}
    * @returns A Promise of GetRulesCountResponse
