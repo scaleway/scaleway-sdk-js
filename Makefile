@@ -16,8 +16,8 @@ format-check:
 
 format-generated:
 	pnpm install
-	pnpm eslint --config eslint.config.generated.mjs --fix 'packages_generated/**/*.ts'
-	pnpm biome format --write packages_generated/
+	# Remove unused imports and format generated TS without linting
+	pnpm biome check --write --linter-enabled=false packages_generated/
 
 typing:
 	pnpm run typecheck
