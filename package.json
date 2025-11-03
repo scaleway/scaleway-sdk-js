@@ -23,10 +23,11 @@
     "build:profile": "cross-env PROFILE=true pnpm run build",
     "commit": "npx git-cz -a",
     "doc": "typedoc",
-    "format": "biome check  --linter-enabled=false --write .",
-    "format:check": "biome check --linter-enabled=false --verbose .",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
     "prettier": "prettier --write '**/*.{md,mdx,yml,yaml}'",
-    "lint": "eslint --cache .",
+    "lint": "biome lint .",
+    "check": "biome check .",
     "prepare": "husky",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
@@ -34,18 +35,17 @@
     "test:ui": "vitest --ui"
   },
   "lint-staged": {
-    "*.ts": [
-      "pnpm run format",
-      "eslint --fix --quiet ."
+    "packages/*/src/**/*.{ts,tsx,js,jsx}": [
+      "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
     ],
-    "*.json": [
-      "pnpm run format"
+    "scripts/**/*.ts": [
+      "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
     ],
     "*.y?(a)ml": [
-      "prettier --write '**/*.{yml,yaml}'"
+      "prettier --write"
     ],
-    ".md?(x)": [
-      "prettier --write '**/*.{md,mdx}'"
+    "*.md?(x)": [
+      "prettier --write"
     ]
   },
   "config": {
@@ -63,9 +63,6 @@
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
     "@manypkg/cli": "0.24.0",
-    "@scaleway/eslint-config-react": "4.0.9",
-    "@typescript-eslint/eslint-plugin": "8.40.0",
-    "@typescript-eslint/parser": "8.40.0",
     "@vitest/coverage-istanbul": "3.1.2",
     "@vitest/coverage-v8": "3.1.2",
     "@vitest/ui": "3.1.2",
@@ -75,8 +72,6 @@
     "cross-fetch": "4.1.0",
     "cz-conventional-changelog": "3.3.0",
     "esbuild-plugin-browserslist": "1.0.1",
-    "eslint": "9.33.0",
-    "eslint-plugin-tsdoc": "0.4.0",
     "husky": "9.1.7",
     "jsdom": "26.1.0",
     "lerna": "8.2.3",
@@ -89,9 +84,7 @@
     "typedoc": "0.27.6",
     "typescript": "5.8.3",
     "vite": "6.4.1",
-    "vitest": "3.1.2",
-    "eslint-plugin-unused-imports": "^4.2.0",
-    "eslint-plugin-import": "^2.32.0"
+    "vitest": "3.1.2"
   },
   "packageManager": "pnpm@10.13.1"
 }

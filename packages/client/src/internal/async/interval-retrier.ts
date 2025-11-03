@@ -111,7 +111,8 @@ export const tryAtIntervals = async <T>(
   const timeoutTimestamp = Date.now() + timeout * 1000
   let retryCount = 0
   while (Date.now() <= timeoutTimestamp) {
-    const delay = strategy.next((retryCount += 1)).value * 1000
+    retryCount += 1
+    const delay = strategy.next(retryCount).value * 1000
     // Break if timeout has been reached
     if (timeoutTimestamp <= Date.now() + delay) break
     // Wait before the next retry
