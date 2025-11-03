@@ -371,6 +371,21 @@ const unmarshalPlatformControlPanelUrls = (
   } as PlatformControlPanelUrls
 }
 
+const unmarshalControlPanel = (data: unknown): ControlPanel => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ControlPanel' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    available: data.available,
+    availableLanguages: data.available_languages,
+    logoUrl: data.logo_url,
+    name: data.name,
+  } as ControlPanel
+}
+
 const unmarshalOfferOption = (data: unknown): OfferOption => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -429,6 +444,10 @@ const unmarshalOffer = (data: unknown): Offer => {
     available: data.available,
     billingOperationPath: data.billing_operation_path,
     controlPanelName: data.control_panel_name,
+    controlPanels: unmarshalArrayOfObject(
+      data.control_panels,
+      unmarshalControlPanel,
+    ),
     endOfLife: data.end_of_life,
     id: data.id,
     name: data.name,
@@ -545,21 +564,6 @@ export const unmarshalListBackupsResponse = (
     backups: unmarshalArrayOfObject(data.backups, unmarshalBackup),
     totalCount: data.total_count,
   } as ListBackupsResponse
-}
-
-const unmarshalControlPanel = (data: unknown): ControlPanel => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ControlPanel' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    available: data.available,
-    availableLanguages: data.available_languages,
-    logoUrl: data.logo_url,
-    name: data.name,
-  } as ControlPanel
 }
 
 export const unmarshalListControlPanelsResponse = (
