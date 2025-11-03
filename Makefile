@@ -16,8 +16,8 @@ format-check:
 
 format-generated:
 	pnpm install
-	# Remove unused imports and format generated TS without linting
-	pnpm biome check --write --linter-enabled=false packages_generated/
+	# Organize imports only (no style changes) for generated TS
+	pnpm dlx tsx ./scripts/organizeGeneratedImports.ts
 
 typing:
 	pnpm run typecheck
