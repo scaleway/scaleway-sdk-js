@@ -206,6 +206,25 @@ export interface HostingDomainCustomDomain {
   autoConfigDomainDns?: AutoConfigDomainDns
 }
 
+export interface ControlPanel {
+  /**
+   * Control panel name.
+   */
+  name: string
+  /**
+   * Define if the control panel type is available to order.
+   */
+  available: boolean
+  /**
+   * URL of the control panel's logo.
+   */
+  logoUrl: string
+  /**
+   * List of available languages for the control panel.
+   */
+  availableLanguages: StdLanguageCode[]
+}
+
 export interface OfferOption {
   /**
    * Option ID.
@@ -432,6 +451,10 @@ export interface Offer {
    */
   quotaWarning: OfferOptionWarning
   /**
+   * Lists available control panels for the specified offer.
+   */
+  controlPanels: ControlPanel[]
+  /**
    * Region where the offer is hosted.
    */
   region: ScwRegion
@@ -496,25 +519,6 @@ export interface Backup {
    * Total number of restorable items in the backup.
    */
   totalItems: number
-}
-
-export interface ControlPanel {
-  /**
-   * Control panel name.
-   */
-  name: string
-  /**
-   * Define if the control panel type is available to order.
-   */
-  available: boolean
-  /**
-   * URL of the control panel's logo.
-   */
-  logoUrl: string
-  /**
-   * List of available languages for the control panel.
-   */
-  availableLanguages: StdLanguageCode[]
 }
 
 export interface DatabaseUser {
