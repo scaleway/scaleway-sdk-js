@@ -156,7 +156,7 @@ export interface NodeTypeVolumeType {
    */
   description: string
   /**
-   * Mimimum size required for the volume.
+   * Minimum size required for the volume.
    */
   minSizeBytes: number
   /**

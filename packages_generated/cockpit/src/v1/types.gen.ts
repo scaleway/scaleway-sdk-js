@@ -705,7 +705,7 @@ export interface ListGrafanaProductDashboardsResponse {
 }
 
 /**
- * Ouptut returned when listing Grafana users.
+ * Output returned when listing Grafana users.
  */
 export interface ListGrafanaUsersResponse {
   /**

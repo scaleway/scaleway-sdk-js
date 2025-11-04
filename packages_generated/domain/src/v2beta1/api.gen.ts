@@ -564,7 +564,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
     )
 
   /**
-   * Get a DNS zone's TLS certificate. Get the DNS zone's TLS certificate. If you do not have a certificate, the ouptut returns `no certificate found`.
+   * Get a DNS zone's TLS certificate. Get the DNS zone's TLS certificate. If you do not have a certificate, the output returns `no certificate found`.
    *
    * @param request - The request {@link GetSSLCertificateRequest}
    * @returns A Promise of SSLCertificate
@@ -1209,7 +1209,7 @@ If you add the same contact for multiple roles (owner, administrative, technical
     )
 
   /**
-   * Get a domain's authorization code. Retrieve the authorization code to tranfer an unlocked domain. The output returns an error if the domain is locked.
+   * Get a domain's authorization code. Retrieve the authorization code to transfer an unlocked domain. The output returns an error if the domain is locked.
 Some TLDs may have a different procedure to retrieve the authorization code. In that case, the information displays in the message field.
    *
    * @param request - The request {@link RegistrarApiGetDomainAuthCodeRequest}

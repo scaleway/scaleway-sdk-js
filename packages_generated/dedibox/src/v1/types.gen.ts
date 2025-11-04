@@ -1340,7 +1340,7 @@ export interface Log {
    */
   group?: RpnV2Group
   /**
-   * RPN V2 member (if appliable).
+   * RPN V2 member (if applicable).
    */
   member?: RpnV2Member
   /**
@@ -1619,11 +1619,11 @@ export interface BMCAccess {
    */
   url: string
   /**
-   * The login to use for the BMC (Baseboard Management Controller) access authentification.
+   * The login to use for the BMC (Baseboard Management Controller) access authentication.
    */
   login: string
   /**
-   * The password to use for the BMC (Baseboard Management Controller) access authentification.
+   * The password to use for the BMC (Baseboard Management Controller) access authentication.
    */
   password: string
   /**
@@ -2718,7 +2718,7 @@ export interface Rescue {
    */
   password: string
   /**
-   * Protocol of the resuce.
+   * Protocol of the rescue.
    */
   protocol: RescueProtocol
 }

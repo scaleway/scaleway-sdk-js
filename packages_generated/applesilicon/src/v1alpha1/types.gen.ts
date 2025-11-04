@@ -108,7 +108,7 @@ export interface OS {
    */
   compatibleServerTypes?: string[]
   /**
-   * Url of the release notes for the OS image or softwares pre-installed.
+   * Url of the release notes for the OS image or software pre-installed.
    */
   releaseNotesUrl: string
   /**
