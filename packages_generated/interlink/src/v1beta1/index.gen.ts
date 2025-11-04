@@ -44,6 +44,7 @@ export type {
   Partner,
   PartnerHost,
   Pop,
+  Range,
   RoutingPolicy,
   SelfHost,
   SetRoutingPolicyRequest,
