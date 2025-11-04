@@ -153,9 +153,11 @@ The output returned displays the URL to access your Cockpit's Grafana.
     })
 
   /**
-   * Create a Grafana user. Create a Grafana user to connect to your Cockpit's Grafana. Upon creation, your user password displays only once, so make sure that you save it.
+   * (Deprecated) EOL 2026-01-20. Create a Grafana user
+Create a Grafana user to connect to your Cockpit's Grafana. Upon creation, your user password displays only once, so make sure that you save it.
 Each Grafana user is associated with a role: viewer or editor. A viewer can only view dashboards, whereas an editor can create and edit dashboards. Note that the `admin` username is not available for creation.
    *
+   * @deprecated
    * @param request - The request {@link GlobalApiCreateGrafanaUserRequest}
    * @returns A Promise of GrafanaUser
    */
@@ -199,8 +201,10 @@ Each Grafana user is associated with a role: viewer or editor. A viewer can only
     )
 
   /**
-   * List Grafana users. List all Grafana users created in your Cockpit's Grafana. By default, the Grafana users returned in the list are ordered in ascending order.
+   * (Deprecated) EOL 2026-01-20. List Grafana users
+List all Grafana users created in your Cockpit's Grafana. By default, the Grafana users returned in the list are ordered in ascending order.
    *
+   * @deprecated
    * @param request - The request {@link GlobalApiListGrafanaUsersRequest}
    * @returns A Promise of ListGrafanaUsersResponse
    */
@@ -209,8 +213,10 @@ Each Grafana user is associated with a role: viewer or editor. A viewer can only
   ) => enrichForPagination('grafanaUsers', this.pageOfListGrafanaUsers, request)
 
   /**
-   * Delete a Grafana user. Delete a Grafana user from your Cockpit's Grafana, specified by the ID of the Project the Cockpit belongs to, and the ID of the Grafana user.
+   * (Deprecated) EOL 2026-01-20. Delete a Grafana user
+Delete a Grafana user from your Cockpit's Grafana, specified by the ID of the Project the Cockpit belongs to, and the ID of the Grafana user.
    *
+   * @deprecated
    * @param request - The request {@link GlobalApiDeleteGrafanaUserRequest}
    */
   deleteGrafanaUser = (request: Readonly<GlobalApiDeleteGrafanaUserRequest>) =>
@@ -224,9 +230,11 @@ Each Grafana user is associated with a role: viewer or editor. A viewer can only
     })
 
   /**
-   * Reset a Grafana user password. Reset the password of a Grafana user, specified by the ID of the Project the Cockpit belongs to, and the ID of the Grafana user.
+   * (Deprecated) EOL 2026-01-20. Reset a Grafana user password
+Reset the password of a Grafana user, specified by the ID of the Project the Cockpit belongs to, and the ID of the Grafana user.
 A new password regenerates and only displays once. Make sure that you save it.
    *
+   * @deprecated
    * @param request - The request {@link GlobalApiResetGrafanaUserPasswordRequest}
    * @returns A Promise of GrafanaUser
    */
