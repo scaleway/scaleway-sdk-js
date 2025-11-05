@@ -24,12 +24,26 @@ import type {
   Partner,
   PartnerHost,
   Pop,
+  Range,
   RoutingPolicy,
   SelfHost,
   SetRoutingPolicyRequest,
   UpdateLinkRequest,
   UpdateRoutingPolicyRequest,
 } from './types.gen.js'
+
+const unmarshalRange = (data: unknown): Range => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Range' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    end: data.end,
+    start: data.start,
+  } as Range
+}
 
 export const unmarshalDedicatedConnection = (
   data: unknown,
@@ -54,6 +68,7 @@ export const unmarshalDedicatedConnection = (
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
+    vlanRange: data.vlan_range ? unmarshalRange(data.vlan_range) : undefined,
   } as DedicatedConnection
 }
 

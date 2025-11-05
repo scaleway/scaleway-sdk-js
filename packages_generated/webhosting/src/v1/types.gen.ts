@@ -134,6 +134,7 @@ export type OfferOptionName =
   | 'email_storage_gb'
   | 'database_count'
   | 'support'
+  | 'additional_email'
 
 export type OfferOptionWarning =
   | 'unknown_warning'
@@ -203,6 +204,25 @@ export interface HostingDomainCustomDomain {
    * Indicates whether to auto-configure DNS for this domain.
    */
   autoConfigDomainDns?: AutoConfigDomainDns
+}
+
+export interface ControlPanel {
+  /**
+   * Control panel name.
+   */
+  name: string
+  /**
+   * Define if the control panel type is available to order.
+   */
+  available: boolean
+  /**
+   * URL of the control panel's logo.
+   */
+  logoUrl: string
+  /**
+   * List of available languages for the control panel.
+   */
+  availableLanguages: StdLanguageCode[]
 }
 
 export interface OfferOption {
@@ -431,6 +451,10 @@ export interface Offer {
    */
   quotaWarning: OfferOptionWarning
   /**
+   * Lists available control panels for the specified offer.
+   */
+  controlPanels: ControlPanel[]
+  /**
    * Region where the offer is hosted.
    */
   region: ScwRegion
@@ -495,25 +519,6 @@ export interface Backup {
    * Total number of restorable items in the backup.
    */
   totalItems: number
-}
-
-export interface ControlPanel {
-  /**
-   * Control panel name.
-   */
-  name: string
-  /**
-   * Define if the control panel type is available to order.
-   */
-  available: boolean
-  /**
-   * URL of the control panel's logo.
-   */
-  logoUrl: string
-  /**
-   * List of available languages for the control panel.
-   */
-  availableLanguages: StdLanguageCode[]
 }
 
 export interface DatabaseUser {

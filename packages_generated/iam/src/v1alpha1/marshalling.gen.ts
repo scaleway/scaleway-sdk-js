@@ -24,6 +24,7 @@ import type {
   CreateJWTRequest,
   CreatePolicyRequest,
   CreateSSHKeyRequest,
+  CreateScimTokenResponse,
   CreateUserRequest,
   CreateUserRequestMember,
   EncodedJWT,
@@ -45,6 +46,7 @@ import type {
   ListRulesResponse,
   ListSSHKeysResponse,
   ListSamlCertificatesResponse,
+  ListScimTokensResponse,
   ListUsersResponse,
   Log,
   MFAOTP,
@@ -64,6 +66,8 @@ import type {
   Saml,
   SamlCertificate,
   SamlServiceProvider,
+  Scim,
+  ScimToken,
   SetGroupMembersRequest,
   SetOrganizationAliasRequest,
   SetRulesRequest,
@@ -319,6 +323,36 @@ export const unmarshalUser = (data: unknown): User => {
     updatedAt: unmarshalDate(data.updated_at),
     username: data.username,
   } as User
+}
+
+const unmarshalScimToken = (data: unknown): ScimToken => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ScimToken' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    expiresAt: unmarshalDate(data.expires_at),
+    id: data.id,
+    scimId: data.scim_id,
+  } as ScimToken
+}
+
+export const unmarshalCreateScimTokenResponse = (
+  data: unknown,
+): CreateScimTokenResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CreateScimTokenResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    bearerToken: data.bearer_token,
+    token: data.token ? unmarshalScimToken(data.token) : undefined,
+  } as CreateScimTokenResponse
 }
 
 export const unmarshalEncodedJWT = (data: unknown): EncodedJWT => {
@@ -644,6 +678,21 @@ export const unmarshalListSamlCertificatesResponse = (
   } as ListSamlCertificatesResponse
 }
 
+export const unmarshalListScimTokensResponse = (
+  data: unknown,
+): ListScimTokensResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListScimTokensResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    scimTokens: unmarshalArrayOfObject(data.scim_tokens, unmarshalScimToken),
+    totalCount: data.total_count,
+  } as ListScimTokensResponse
+}
+
 export const unmarshalListUsersResponse = (
   data: unknown,
 ): ListUsersResponse => {
@@ -752,6 +801,19 @@ export const unmarshalSaml = (data: unknown): Saml => {
     singleSignOnUrl: data.single_sign_on_url,
     status: data.status,
   } as Saml
+}
+
+export const unmarshalScim = (data: unknown): Scim => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Scim' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+  } as Scim
 }
 
 export const unmarshalSetRulesResponse = (data: unknown): SetRulesResponse => {
