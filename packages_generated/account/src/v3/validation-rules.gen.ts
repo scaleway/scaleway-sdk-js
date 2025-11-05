@@ -30,7 +30,7 @@ export const ProjectApiCreateProjectRequest = {
   name: {
     maxLength: 64,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9\._\- ]+$/,
+    pattern: /^[a-zA-Z0-9._\- ]+$/,
   },
 }
 
@@ -38,7 +38,7 @@ export const ProjectApiListProjectsRequest = {
   name: {
     maxLength: 64,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9\._\- ]+$/,
+    pattern: /^[a-zA-Z0-9._\- ]+$/,
   },
   page: {
     greaterThan: 0,
@@ -56,6 +56,6 @@ export const ProjectApiUpdateProjectRequest = {
   name: {
     maxLength: 64,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9\._\- ]+$/,
+    pattern: /^[a-zA-Z0-9._\- ]+$/,
   },
 }

@@ -1,12 +1,10 @@
-// This file was automatically generated. DO NOT EDIT.
-// If you have any remark or suggestion do not hesitate to open an issue.
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   CreateDatabaseRequest,
   CreateDeploymentRequest,
@@ -251,21 +249,21 @@ export const unmarshalListVersionsResponse = (
 
 export const marshalCreateDatabaseRequest = (
   request: CreateDatabaseRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
 })
 
 const marshalEndpointSpecPrivateNetworkDetails = (
   request: EndpointSpecPrivateNetworkDetails,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_network_id: request.privateNetworkId,
 })
 
 const marshalEndpointSpecPublicDetails = (
-  request: EndpointSpecPublicDetails,
-  defaults: DefaultValues,
+  _request: EndpointSpecPublicDetails,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
 const marshalEndpointSpec = (
@@ -325,7 +323,7 @@ export const marshalCreateEndpointRequest = (
 
 export const marshalCreateUserRequest = (
   request: CreateUserRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   is_admin: request.isAdmin,
   name: request.name,
@@ -334,7 +332,7 @@ export const marshalCreateUserRequest = (
 
 export const marshalUpdateDeploymentRequest = (
   request: UpdateDeploymentRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   cpu_max: request.cpuMax,
   cpu_min: request.cpuMin,
@@ -345,7 +343,7 @@ export const marshalUpdateDeploymentRequest = (
 
 export const marshalUpdateUserRequest = (
   request: UpdateUserRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   is_admin: request.isAdmin,
   password: request.password,

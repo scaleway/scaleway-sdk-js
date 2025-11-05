@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
@@ -8,7 +9,6 @@ import {
   unmarshalDate,
   unmarshalTimeSeries,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Certificate,
   CreateDeviceRequest,
@@ -511,7 +511,7 @@ export const unmarshalTwinDocument = (data: unknown): TwinDocument => {
 
 const marshalDeviceMessageFiltersRule = (
   request: DeviceMessageFiltersRule,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   policy: request.policy,
   topics: request.topics,
@@ -548,7 +548,7 @@ export const marshalCreateDeviceRequest = (
 
 const marshalHubTwinsGraphiteConfig = (
   request: HubTwinsGraphiteConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   push_uri: request.pushUri,
 })
@@ -575,7 +575,7 @@ export const marshalCreateHubRequest = (
 
 export const marshalCreateNetworkRequest = (
   request: CreateNetworkRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   hub_id: request.hubId,
   name: request.name || randomName('network'),
@@ -585,7 +585,7 @@ export const marshalCreateNetworkRequest = (
 
 const marshalCreateRouteRequestDatabaseConfig = (
   request: CreateRouteRequestDatabaseConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   dbname: request.dbname,
   engine: request.engine,
@@ -598,7 +598,7 @@ const marshalCreateRouteRequestDatabaseConfig = (
 
 const marshalCreateRouteRequestRestConfig = (
   request: CreateRouteRequestRestConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   headers: request.headers,
   uri: request.uri,
@@ -607,7 +607,7 @@ const marshalCreateRouteRequestRestConfig = (
 
 const marshalCreateRouteRequestS3Config = (
   request: CreateRouteRequestS3Config,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   bucket_name: request.bucketName,
   bucket_region: request.bucketRegion,
@@ -649,7 +649,7 @@ export const marshalCreateRouteRequest = (
 
 export const marshalPatchTwinDocumentRequest = (
   request: PatchTwinDocumentRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   data: request.data,
   version: request.version,
@@ -657,7 +657,7 @@ export const marshalPatchTwinDocumentRequest = (
 
 export const marshalPutTwinDocumentRequest = (
   request: PutTwinDocumentRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   data: request.data,
   version: request.version,
@@ -665,14 +665,14 @@ export const marshalPutTwinDocumentRequest = (
 
 export const marshalSetDeviceCertificateRequest = (
   request: SetDeviceCertificateRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   certificate_pem: request.certificatePem,
 })
 
 export const marshalSetHubCARequest = (
   request: SetHubCARequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ca_cert_pem: request.caCertPem,
   challenge_cert_pem: request.challengeCertPem,
@@ -714,7 +714,7 @@ export const marshalUpdateHubRequest = (
 
 const marshalUpdateRouteRequestDatabaseConfig = (
   request: UpdateRouteRequestDatabaseConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   dbname: request.dbname,
   engine: request.engine,
@@ -727,7 +727,7 @@ const marshalUpdateRouteRequestDatabaseConfig = (
 
 const marshalUpdateRouteRequestRestConfig = (
   request: UpdateRouteRequestRestConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   headers: request.headers,
   uri: request.uri,
@@ -736,7 +736,7 @@ const marshalUpdateRouteRequestRestConfig = (
 
 const marshalUpdateRouteRequestS3Config = (
   request: UpdateRouteRequestS3Config,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   bucket_name: request.bucketName,
   bucket_region: request.bucketRegion,

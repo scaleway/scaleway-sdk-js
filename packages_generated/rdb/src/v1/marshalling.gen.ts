@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
@@ -8,7 +9,6 @@ import {
   unmarshalDate,
   unmarshalTimeSeries,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   ACLRule,
   ACLRuleRequest,
@@ -895,7 +895,7 @@ export const unmarshalSetInstanceSettingsResponse = (
 
 const marshalACLRuleRequest = (
   request: ACLRuleRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   ip: request.ip,
@@ -910,7 +910,7 @@ export const marshalAddInstanceACLRulesRequest = (
 
 const marshalInstanceSetting = (
   request: InstanceSetting,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   value: request.value,
@@ -925,7 +925,7 @@ export const marshalAddInstanceSettingsRequest = (
 
 export const marshalCloneInstanceRequest = (
   request: CloneInstanceRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   node_type: request.nodeType,
@@ -933,7 +933,7 @@ export const marshalCloneInstanceRequest = (
 
 export const marshalCreateDatabaseBackupRequest = (
   request: CreateDatabaseBackupRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   database_name: request.databaseName,
   expires_at: request.expiresAt,
@@ -943,19 +943,19 @@ export const marshalCreateDatabaseBackupRequest = (
 
 export const marshalCreateDatabaseRequest = (
   request: CreateDatabaseRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
 })
 
 const marshalEndpointSpecPrivateNetworkIpamConfig = (
-  request: EndpointSpecPrivateNetworkIpamConfig,
-  defaults: DefaultValues,
+  _request: EndpointSpecPrivateNetworkIpamConfig,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
 const marshalEndpointSpecLoadBalancer = (
-  request: EndpointSpecLoadBalancer,
-  defaults: DefaultValues,
+  _request: EndpointSpecLoadBalancer,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
 const marshalEndpointSpecPrivateNetwork = (
@@ -1012,7 +1012,7 @@ export const marshalCreateEndpointRequest = (
 
 export const marshalCreateInstanceFromSnapshotRequest = (
   request: CreateInstanceFromSnapshotRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   instance_name: request.instanceName,
   is_ha_cluster: request.isHaCluster,
@@ -1021,7 +1021,7 @@ export const marshalCreateInstanceFromSnapshotRequest = (
 
 const marshalEncryptionAtRest = (
   request: EncryptionAtRest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enabled: request.enabled,
 })
@@ -1068,13 +1068,13 @@ export const marshalCreateInstanceRequest = (
 })
 
 const marshalReadReplicaEndpointSpecPrivateNetworkIpamConfig = (
-  request: ReadReplicaEndpointSpecPrivateNetworkIpamConfig,
-  defaults: DefaultValues,
+  _request: ReadReplicaEndpointSpecPrivateNetworkIpamConfig,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
 const marshalReadReplicaEndpointSpecDirectAccess = (
-  request: ReadReplicaEndpointSpecDirectAccess,
-  defaults: DefaultValues,
+  _request: ReadReplicaEndpointSpecDirectAccess,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
 const marshalReadReplicaEndpointSpecPrivateNetwork = (
@@ -1150,7 +1150,7 @@ export const marshalCreateReadReplicaRequest = (
 
 export const marshalCreateSnapshotRequest = (
   request: CreateSnapshotRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   expires_at: request.expiresAt,
   name: request.name || randomName('snp'),
@@ -1158,7 +1158,7 @@ export const marshalCreateSnapshotRequest = (
 
 export const marshalCreateUserRequest = (
   request: CreateUserRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   is_admin: request.isAdmin,
   name: request.name,
@@ -1167,28 +1167,28 @@ export const marshalCreateUserRequest = (
 
 export const marshalDeleteInstanceACLRulesRequest = (
   request: DeleteInstanceACLRulesRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   acl_rule_ips: request.aclRuleIps,
 })
 
 export const marshalDeleteInstanceSettingsRequest = (
   request: DeleteInstanceSettingsRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   setting_names: request.settingNames,
 })
 
 export const marshalMigrateEndpointRequest = (
   request: MigrateEndpointRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   instance_id: request.instanceId,
 })
 
 export const marshalPrepareInstanceLogsRequest = (
   request: PrepareInstanceLogsRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   end_date: request.endDate,
   start_date: request.startDate,
@@ -1196,14 +1196,14 @@ export const marshalPrepareInstanceLogsRequest = (
 
 export const marshalPurgeInstanceLogsRequest = (
   request: PurgeInstanceLogsRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   log_name: request.logName,
 })
 
 export const marshalRestoreDatabaseBackupRequest = (
   request: RestoreDatabaseBackupRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   database_name: request.databaseName,
   instance_id: request.instanceId,
@@ -1225,7 +1225,7 @@ export const marshalSetInstanceSettingsRequest = (
 
 export const marshalSetPrivilegeRequest = (
   request: SetPrivilegeRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   database_name: request.databaseName,
   permission: request.permission,
@@ -1234,7 +1234,7 @@ export const marshalSetPrivilegeRequest = (
 
 export const marshalUpdateDatabaseBackupRequest = (
   request: UpdateDatabaseBackupRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   expires_at: request.expiresAt,
   name: request.name,
@@ -1242,7 +1242,7 @@ export const marshalUpdateDatabaseBackupRequest = (
 
 const marshalLogsPolicy = (
   request: LogsPolicy,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   max_age_retention: request.maxAgeRetention,
   total_disk_retention: request.totalDiskRetention,
@@ -1267,7 +1267,7 @@ export const marshalUpdateInstanceRequest = (
 
 export const marshalUpdateSnapshotRequest = (
   request: UpdateSnapshotRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   expires_at: request.expiresAt,
   name: request.name,
@@ -1275,7 +1275,7 @@ export const marshalUpdateSnapshotRequest = (
 
 export const marshalUpdateUserRequest = (
   request: UpdateUserRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   is_admin: request.isAdmin,
   password: request.password,
@@ -1283,7 +1283,7 @@ export const marshalUpdateUserRequest = (
 
 const marshalUpgradeInstanceRequestMajorUpgradeWorkflow = (
   request: UpgradeInstanceRequestMajorUpgradeWorkflow,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   upgradable_version_id: request.upgradableVersionId,
   with_endpoints: request.withEndpoints,

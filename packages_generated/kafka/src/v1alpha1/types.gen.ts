@@ -43,7 +43,7 @@ export interface EndpointPrivateNetworkDetails {
 /**
  * Public Access details.
  */
-export interface EndpointPublicDetails {}
+export type EndpointPublicDetails = {}
 
 export interface VersionAvailableSettingBooleanProperty {
   defaultValue: boolean
@@ -75,7 +75,7 @@ export interface EndpointSpecPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-export interface EndpointSpecPublicDetails {}
+export type EndpointSpecPublicDetails = {}
 
 export interface ClusterSetting {
   /**

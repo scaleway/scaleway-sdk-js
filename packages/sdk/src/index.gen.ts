@@ -16,6 +16,7 @@ import { Dediboxv1 } from '@scaleway/sdk-dedibox'
 import { Domainv2beta1 } from '@scaleway/sdk-domain'
 import { EdgeServicesv1beta1 } from '@scaleway/sdk-edge-services'
 import { EnvironmentalFootprintv1alpha1 } from '@scaleway/sdk-environmental-footprint'
+import { FakeTestProductv1 } from '@scaleway/sdk-fake-test-product'
 import { Filev1alpha1 } from '@scaleway/sdk-file'
 import { Flexibleipv1alpha1 } from '@scaleway/sdk-flexibleip'
 import { Functionv1beta1 } from '@scaleway/sdk-function'
@@ -160,6 +161,14 @@ export const EdgeServices = {
 export { EnvironmentalFootprintv1alpha1 }
 export const EnvironmentalFootprint = {
   v1alpha1: EnvironmentalFootprintv1alpha1,
+}
+
+/**
+ * @deprecated Direct version exports are deprecated. Use the 'FakeTestProduct' namespace instead (e.g., FakeTestProduct.v1).
+ */
+export { FakeTestProductv1 }
+export const FakeTestProduct = {
+  v1: FakeTestProductv1,
 }
 
 /**
@@ -404,4 +413,3 @@ export { Webhostingv1 }
 export const Webhosting = {
   v1: Webhostingv1,
 }
-

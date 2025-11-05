@@ -1,14 +1,15 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { WaitForOptions } from '@scaleway/sdk-client'
 import {
-  API as ParentAPI,
   enrichForPagination,
+  API as ParentAPI,
   resolveOneOf,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { WaitForOptions } from '@scaleway/sdk-client'
 import {
   BOOKING_TRANSIENT_STATUSES as BOOKING_TRANSIENT_STATUSES_QAAS,
   JOB_TRANSIENT_STATUSES as JOB_TRANSIENT_STATUSES_QAAS,
@@ -34,8 +35,8 @@ import {
   unmarshalListJobsResponse,
   unmarshalListModelsResponse,
   unmarshalListPlatformsResponse,
-  unmarshalListProcessResultsResponse,
   unmarshalListProcessesResponse,
+  unmarshalListProcessResultsResponse,
   unmarshalListSessionACLsResponse,
   unmarshalListSessionsResponse,
   unmarshalModel,
@@ -77,10 +78,10 @@ import type {
   ListModelsResponse,
   ListPlatformsRequest,
   ListPlatformsResponse,
-  ListProcessResultsRequest,
-  ListProcessResultsResponse,
   ListProcessesRequest,
   ListProcessesResponse,
+  ListProcessResultsRequest,
+  ListProcessResultsResponse,
   ListSessionACLsRequest,
   ListSessionACLsResponse,
   ListSessionsRequest,

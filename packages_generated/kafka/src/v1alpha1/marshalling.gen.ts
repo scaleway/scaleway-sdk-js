@@ -1,13 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Cluster,
   ClusterSetting,
@@ -360,19 +360,19 @@ export const unmarshalListVersionsResponse = (
 
 const marshalEndpointSpecPrivateNetworkDetails = (
   request: EndpointSpecPrivateNetworkDetails,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_network_id: request.privateNetworkId,
 })
 
 const marshalEndpointSpecPublicDetails = (
-  request: EndpointSpecPublicDetails,
-  defaults: DefaultValues,
+  _request: EndpointSpecPublicDetails,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
 const marshalCreateClusterRequestVolumeSpec = (
   request: CreateClusterRequestVolumeSpec,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   size_bytes: request.sizeBytes,
   type: request.type,
@@ -435,7 +435,7 @@ export const marshalCreateEndpointRequest = (
 
 export const marshalUpdateClusterRequest = (
   request: UpdateClusterRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   tags: request.tags,
@@ -443,7 +443,7 @@ export const marshalUpdateClusterRequest = (
 
 export const marshalUpdateUserRequest = (
   request: UpdateUserRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   password: request.password,
 })

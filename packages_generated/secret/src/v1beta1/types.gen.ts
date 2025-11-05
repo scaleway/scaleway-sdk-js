@@ -20,7 +20,7 @@ export type ListSecretsRequestOrderBy =
   | 'updated_at_asc'
   | 'updated_at_desc'
 
-export type Product = 'unknown_product' | 'edge_services' | 's2s_vpn'
+export type Product = 'unknown_product' | 'edge_services'
 
 export type SecretStatus = 'unknown_status' | 'ready' | 'locked'
 
@@ -55,7 +55,7 @@ export interface EphemeralPolicy {
   action: EphemeralPolicyAction
 }
 
-export interface BrowseSecretsResponseItemFolderDetails {}
+export type BrowseSecretsResponseItemFolderDetails = {}
 
 export interface BrowseSecretsResponseItemSecretDetails {
   id: string
@@ -142,10 +142,6 @@ export interface SecretVersion {
    * Returns the time at which deletion was requested.
    */
   deletionRequestedAt?: Date
-  /**
-   * Region of the version.
-   */
-  region: ScwRegion
 }
 
 export interface Secret {

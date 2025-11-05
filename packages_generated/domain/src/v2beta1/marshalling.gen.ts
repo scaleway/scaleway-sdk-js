@@ -1,5 +1,4 @@
-// This file was automatically generated. DO NOT EDIT.
-// If you have any remark or suggestion do not hesitate to open an issue.
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
@@ -8,7 +7,6 @@ import {
   unmarshalMapOfObject,
   unmarshalMoney,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   AvailableDomain,
   CheckContactsCompatibilityResponse,
@@ -29,14 +27,11 @@ import type {
   ContactRolesRoles,
   CreateDNSZoneRequest,
   CreateSSLCertificateRequest,
-  DNSZone,
-  DNSZoneVersion,
-  DSRecord,
-  DSRecordDigest,
-  DSRecordPublicKey,
   DeleteDNSZoneResponse,
   DeleteExternalDomainResponse,
   DeleteSSLCertificateResponse,
+  DNSZone,
+  DNSZoneVersion,
   Domain,
   DomainDNSSEC,
   DomainRecord,
@@ -50,6 +45,9 @@ import type {
   DomainRegistrationStatusExternalDomain,
   DomainRegistrationStatusTransfer,
   DomainSummary,
+  DSRecord,
+  DSRecordDigest,
+  DSRecordPublicKey,
   GetDNSZoneTsigKeyResponse,
   GetDNSZoneVersionDiffResponse,
   GetDomainAuthCodeResponse,
@@ -66,9 +64,9 @@ import type {
   ListContactsResponse,
   ListDNSZoneNameserversResponse,
   ListDNSZoneRecordsResponse,
+  ListDNSZonesResponse,
   ListDNSZoneVersionRecordsResponse,
   ListDNSZoneVersionsResponse,
-  ListDNSZonesResponse,
   ListDomainHostsResponse,
   ListDomainsResponse,
   ListInboundTransfersResponse,
@@ -103,8 +101,8 @@ import type {
   RenewableDomain,
   RestoreDNSZoneVersionResponse,
   RetryInboundTransferResponse,
-  SSLCertificate,
   SearchAvailableDomainsResponse,
+  SSLCertificate,
   Task,
   Tld,
   TldOffer,
@@ -1408,7 +1406,7 @@ export const marshalCreateDNSZoneRequest = (
 
 export const marshalCreateSSLCertificateRequest = (
   request: CreateSSLCertificateRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   alternative_dns_zones: request.alternativeDnsZones,
   dns_zone: request.dnsZone,
@@ -1416,7 +1414,7 @@ export const marshalCreateSSLCertificateRequest = (
 
 const marshalImportProviderDNSZoneRequestOnlineV1 = (
   request: ImportProviderDNSZoneRequestOnlineV1,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   token: request.token,
 })
@@ -1441,7 +1439,7 @@ export const marshalImportProviderDNSZoneRequest = (
 
 const marshalImportRawDNSZoneRequestTsigKey = (
   request: ImportRawDNSZoneRequestTsigKey,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   algorithm: request.algorithm,
   key: request.key,
@@ -1461,7 +1459,7 @@ const marshalImportRawDNSZoneRequestAXFRSource = (
 
 const marshalImportRawDNSZoneRequestBindSource = (
   request: ImportRawDNSZoneRequestBindSource,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   content: request.content,
 })
@@ -1499,7 +1497,7 @@ export const marshalImportRawDNSZoneRequest = (
 
 export const marshalRefreshDNSZoneRequest = (
   request: RefreshDNSZoneRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   recreate_dns_zone: request.recreateDnsZone,
   recreate_sub_dns_zone: request.recreateSubDnsZone,
@@ -1507,7 +1505,7 @@ export const marshalRefreshDNSZoneRequest = (
 
 const marshalContactExtensionFRAssociationInfo = (
   request: ContactExtensionFRAssociationInfo,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   publication_jo: request.publicationJo,
   publication_jo_page: request.publicationJoPage,
@@ -1515,14 +1513,14 @@ const marshalContactExtensionFRAssociationInfo = (
 
 const marshalContactExtensionFRCodeAuthAfnicInfo = (
   request: ContactExtensionFRCodeAuthAfnicInfo,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   code_auth_afnic: request.codeAuthAfnic,
 })
 
 const marshalContactExtensionFRDunsInfo = (
   request: ContactExtensionFRDunsInfo,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   duns_id: request.dunsId,
   local_id: request.localId,
@@ -1530,21 +1528,21 @@ const marshalContactExtensionFRDunsInfo = (
 
 const marshalContactExtensionFRIndividualInfo = (
   request: ContactExtensionFRIndividualInfo,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   whois_opt_in: request.whoisOptIn,
 })
 
 const marshalContactExtensionFRTrademarkInfo = (
   request: ContactExtensionFRTrademarkInfo,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   trademark_inpi: request.trademarkInpi,
 })
 
 const marshalContactExtensionEU = (
   request: ContactExtensionEU,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   european_citizenship: request.europeanCitizenship,
 })
@@ -1607,7 +1605,7 @@ const marshalContactExtensionFR = (
 
 const marshalContactExtensionNL = (
   request: ContactExtensionNL,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   legal_form: request.legalForm,
   legal_form_registration_number: request.legalFormRegistrationNumber,
@@ -1615,7 +1613,7 @@ const marshalContactExtensionNL = (
 
 const marshalContactQuestion = (
   request: ContactQuestion,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   answer: request.answer,
   question: request.question,
@@ -1747,7 +1745,7 @@ export const marshalRegistrarApiCheckContactsCompatibilityRequest = (
 
 export const marshalRegistrarApiCreateDomainHostRequest = (
   request: RegistrarApiCreateDomainHostRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ips: request.ips,
   name: request.name,
@@ -1755,7 +1753,7 @@ export const marshalRegistrarApiCreateDomainHostRequest = (
 
 const marshalDSRecordPublicKey = (
   request: DSRecordPublicKey,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   key: request.key,
 })
@@ -1816,7 +1814,7 @@ export const marshalRegistrarApiRegisterExternalDomainRequest = (
 
 export const marshalRegistrarApiRenewDomainsRequest = (
   request: RegistrarApiRenewDomainsRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   domains: request.domains,
   duration_in_years: request.durationInYears,
@@ -1851,7 +1849,7 @@ export const marshalRegistrarApiTradeDomainRequest = (
 
 const marshalTransferInDomainRequestTransferRequest = (
   request: TransferInDomainRequestTransferRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   auth_code: request.authCode,
   domain: request.domain,
@@ -1902,7 +1900,7 @@ export const marshalRegistrarApiTransferInDomainRequest = (
 
 const marshalUpdateContactRequestQuestion = (
   request: UpdateContactRequestQuestion,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   answer: request.answer,
   question: request.question,
@@ -1949,7 +1947,7 @@ export const marshalRegistrarApiUpdateContactRequest = (
 
 export const marshalRegistrarApiUpdateDomainHostRequest = (
   request: RegistrarApiUpdateDomainHostRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ips: request.ips,
 })
@@ -1995,7 +1993,7 @@ export const marshalRegistrarApiUpdateDomainRequest = (
 
 const marshalNameserver = (
   request: Nameserver,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ip: request.ip,
   name: request.name,
@@ -2010,7 +2008,7 @@ export const marshalUpdateDNSZoneNameserversRequest = (
 
 const marshalDomainRecordGeoIPConfigMatch = (
   request: DomainRecordGeoIPConfigMatch,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   continents: request.continents,
   countries: request.countries,
@@ -2019,7 +2017,7 @@ const marshalDomainRecordGeoIPConfigMatch = (
 
 const marshalDomainRecordViewConfigView = (
   request: DomainRecordViewConfigView,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   data: request.data,
   subnet: request.subnet,
@@ -2027,7 +2025,7 @@ const marshalDomainRecordViewConfigView = (
 
 const marshalDomainRecordWeightedConfigWeightedIP = (
   request: DomainRecordWeightedConfigWeightedIP,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ip: request.ip,
   weight: request.weight,
@@ -2045,7 +2043,7 @@ const marshalDomainRecordGeoIPConfig = (
 
 const marshalDomainRecordHTTPServiceConfig = (
   request: DomainRecordHTTPServiceConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ips: request.ips,
   must_contain: request.mustContain,
@@ -2120,7 +2118,7 @@ const marshalDomainRecord = (
 
 const marshalRecordIdentifier = (
   request: RecordIdentifier,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   data: request.data,
   name: request.name,
@@ -2136,8 +2134,8 @@ const marshalRecordChangeAdd = (
 })
 
 const marshalRecordChangeClear = (
-  request: RecordChangeClear,
-  defaults: DefaultValues,
+  _request: RecordChangeClear,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
 const marshalRecordChangeDelete = (

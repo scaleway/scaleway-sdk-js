@@ -1,5 +1,4 @@
-// This file was automatically generated. DO NOT EDIT.
-// If you have any remark or suggestion do not hesitate to open an issue.
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
@@ -7,7 +6,6 @@ import {
   unmarshalDate,
   unmarshalMoney,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   AutoConfigDomainDns,
   Backup,
@@ -49,14 +47,13 @@ import type {
   ListBackupItemsResponse,
   ListBackupsResponse,
   ListControlPanelsResponse,
-  ListDatabaseUsersResponse,
   ListDatabasesResponse,
+  ListDatabaseUsersResponse,
   ListFreeRootDomainsResponse,
   ListFtpAccountsResponse,
   ListHostingsResponse,
   ListMailAccountsResponse,
   ListOffersResponse,
-  ListRecentProgressesResponse,
   ListWebsitesResponse,
   MailAccount,
   MailAccountApiChangeMailAccountPasswordRequest,
@@ -69,8 +66,6 @@ import type {
   Platform,
   PlatformControlPanel,
   PlatformControlPanelUrls,
-  Progress,
-  ProgressSummary,
   ResetHostingPasswordResponse,
   ResourceSummary,
   RestoreBackupItemsResponse,
@@ -79,7 +74,6 @@ import type {
   Session,
   SyncDomainDnsRecordsRequestRecord,
   Website,
-  WebsiteApiCreateWebsiteRequest,
 } from './types.gen.js'
 
 export const unmarshalBackup = (data: unknown): Backup => {
@@ -223,20 +217,6 @@ export const unmarshalMailAccount = (data: unknown): MailAccount => {
     domain: data.domain,
     username: data.username,
   } as MailAccount
-}
-
-export const unmarshalWebsite = (data: unknown): Website => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Website' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    domain: data.domain,
-    path: data.path,
-    sslStatus: data.ssl_status,
-  } as Website
 }
 
 const unmarshalFreeDomain = (data: unknown): FreeDomain => {
@@ -692,36 +672,18 @@ export const unmarshalListOffersResponse = (
   } as ListOffersResponse
 }
 
-const unmarshalProgressSummary = (data: unknown): ProgressSummary => {
+const unmarshalWebsite = (data: unknown): Website => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'ProgressSummary' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'Website' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    backupItemsCount: data.backup_items_count,
-    id: data.id,
-    percentage: data.percentage,
-    status: data.status,
-  } as ProgressSummary
-}
-
-export const unmarshalListRecentProgressesResponse = (
-  data: unknown,
-): ListRecentProgressesResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListRecentProgressesResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    progresses: unmarshalArrayOfObject(
-      data.progresses,
-      unmarshalProgressSummary,
-    ),
-  } as ListRecentProgressesResponse
+    domain: data.domain,
+    path: data.path,
+    sslStatus: data.ssl_status,
+  } as Website
 }
 
 export const unmarshalListWebsitesResponse = (
@@ -737,24 +699,6 @@ export const unmarshalListWebsitesResponse = (
     totalCount: data.total_count,
     websites: unmarshalArrayOfObject(data.websites, unmarshalWebsite),
   } as ListWebsitesResponse
-}
-
-export const unmarshalProgress = (data: unknown): Progress => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Progress' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    backupItemGroups: unmarshalArrayOfObject(
-      data.backup_item_groups,
-      unmarshalBackupItemGroup,
-    ),
-    id: data.id,
-    percentage: data.percentage,
-    status: data.status,
-  } as Progress
 }
 
 export const unmarshalResetHostingPasswordResponse = (
@@ -796,9 +740,7 @@ export const unmarshalRestoreBackupItemsResponse = (
     )
   }
 
-  return {
-    progressId: data.progress_id,
-  } as RestoreBackupItemsResponse
+  return {} as RestoreBackupItemsResponse
 }
 
 export const unmarshalRestoreBackupResponse = (
@@ -810,9 +752,7 @@ export const unmarshalRestoreBackupResponse = (
     )
   }
 
-  return {
-    progressId: data.progress_id,
-  } as RestoreBackupResponse
+  return {} as RestoreBackupResponse
 }
 
 const unmarshalDomainAvailability = (data: unknown): DomainAvailability => {
@@ -863,28 +803,28 @@ export const unmarshalSession = (data: unknown): Session => {
 
 export const marshalBackupApiRestoreBackupItemsRequest = (
   request: BackupApiRestoreBackupItemsRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   item_ids: request.itemIds,
 })
 
 export const marshalDatabaseApiAssignDatabaseUserRequest = (
   request: DatabaseApiAssignDatabaseUserRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   username: request.username,
 })
 
 export const marshalDatabaseApiChangeDatabaseUserPasswordRequest = (
   request: DatabaseApiChangeDatabaseUserPasswordRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   password: request.password,
 })
 
 const marshalCreateDatabaseRequestUser = (
   request: CreateDatabaseRequestUser,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   password: request.password,
   username: request.username,
@@ -909,7 +849,7 @@ export const marshalDatabaseApiCreateDatabaseRequest = (
 
 export const marshalDatabaseApiCreateDatabaseUserRequest = (
   request: DatabaseApiCreateDatabaseUserRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   password: request.password,
   username: request.username,
@@ -917,7 +857,7 @@ export const marshalDatabaseApiCreateDatabaseUserRequest = (
 
 export const marshalDatabaseApiUnassignDatabaseUserRequest = (
   request: DatabaseApiUnassignDatabaseUserRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   username: request.username,
 })
@@ -931,7 +871,7 @@ export const marshalDnsApiCheckUserOwnsDomainRequest = (
 
 const marshalAutoConfigDomainDns = (
   request: AutoConfigDomainDns,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   all_records: request.allRecords,
   mail_records: request.mailRecords,
@@ -942,7 +882,7 @@ const marshalAutoConfigDomainDns = (
 
 const marshalSyncDomainDnsRecordsRequestRecord = (
   request: SyncDomainDnsRecordsRequestRecord,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   type: request.type,
@@ -970,7 +910,7 @@ export const marshalDnsApiSyncDomainDnsRecordsRequest = (
 
 export const marshalFreeDomainApiCheckFreeDomainAvailabilityRequest = (
   request: FreeDomainApiCheckFreeDomainAvailabilityRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   root_domain: request.rootDomain,
   slug: request.slug,
@@ -978,14 +918,14 @@ export const marshalFreeDomainApiCheckFreeDomainAvailabilityRequest = (
 
 export const marshalFtpAccountApiChangeFtpAccountPasswordRequest = (
   request: FtpAccountApiChangeFtpAccountPasswordRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   password: request.password,
 })
 
 export const marshalFtpAccountApiCreateFtpAccountRequest = (
   request: FtpAccountApiCreateFtpAccountRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   password: request.password,
   path: request.path,
@@ -994,14 +934,14 @@ export const marshalFtpAccountApiCreateFtpAccountRequest = (
 
 export const marshalHostingApiAddCustomDomainRequest = (
   request: HostingApiAddCustomDomainRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   domain_name: request.domainName,
 })
 
 const marshalCreateHostingRequestDomainConfiguration = (
   request: CreateHostingRequestDomainConfiguration,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   update_all_records: request.updateAllRecords,
   update_mail_record: request.updateMailRecord,
@@ -1011,7 +951,7 @@ const marshalCreateHostingRequestDomainConfiguration = (
 
 const marshalOfferOptionRequest = (
   request: OfferOptionRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   id: request.id,
   quantity: request.quantity,
@@ -1050,7 +990,7 @@ export const marshalHostingApiCreateHostingRequest = (
 
 export const marshalHostingApiRemoveCustomDomainRequest = (
   request: HostingApiRemoveCustomDomainRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   domain_name: request.domainName,
 })
@@ -1073,7 +1013,7 @@ export const marshalHostingApiUpdateHostingRequest = (
 
 export const marshalMailAccountApiChangeMailAccountPasswordRequest = (
   request: MailAccountApiChangeMailAccountPasswordRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   domain: request.domain,
   password: request.password,
@@ -1082,7 +1022,7 @@ export const marshalMailAccountApiChangeMailAccountPasswordRequest = (
 
 export const marshalMailAccountApiCreateMailAccountRequest = (
   request: MailAccountApiCreateMailAccountRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   domain: request.domain,
   password: request.password,
@@ -1091,15 +1031,8 @@ export const marshalMailAccountApiCreateMailAccountRequest = (
 
 export const marshalMailAccountApiRemoveMailAccountRequest = (
   request: MailAccountApiRemoveMailAccountRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   domain: request.domain,
   username: request.username,
-})
-
-export const marshalWebsiteApiCreateWebsiteRequest = (
-  request: WebsiteApiCreateWebsiteRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  domain_name: request.domainName,
 })

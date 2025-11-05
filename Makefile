@@ -16,8 +16,8 @@ format-check:
 
 format-generated:
 	pnpm install
-	pnpm eslint --config eslint.config.generated.mjs --fix 'packages_generated/**/*.ts'
-	pnpm biome format --write packages_generated/
+	# Biome cleanup for generated code: remove unused imports/vars, then format
+	pnpm biome lint --write --unsafe --config-path scripts/templates/biome.generated.json packages_generated/
 
 typing:
 	pnpm run typecheck

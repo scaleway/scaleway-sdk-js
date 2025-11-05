@@ -321,10 +321,6 @@ export interface Pop {
    */
   availableLinkBandwidthsMbps: number[]
   /**
-   * Pretty name of the PoP. Includes name, hosting provider and location information (ex: Paris - TeleHouse TH2).
-   */
-  displayName: string
-  /**
    * Region of the PoP.
    */
   region: ScwRegion

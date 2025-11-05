@@ -1,13 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   CreateEndpointRequest,
   CreateInstanceRequest,
@@ -32,8 +32,8 @@ import type {
   NodeTypeVolumeType,
   RestoreSnapshotRequest,
   RestoreSnapshotRequestVolumeDetails,
-  SetUserRoleRequest,
   Setting,
+  SetUserRoleRequest,
   Snapshot,
   SnapshotVolumeType,
   UpdateInstanceRequest,
@@ -383,14 +383,14 @@ export const unmarshalListVersionsResponse = (
 
 const marshalEndpointSpecPrivateNetworkDetails = (
   request: EndpointSpecPrivateNetworkDetails,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_network_id: request.privateNetworkId,
 })
 
 const marshalEndpointSpecPublicDetails = (
-  request: EndpointSpecPublicDetails,
-  defaults: DefaultValues,
+  _request: EndpointSpecPublicDetails,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
 const marshalEndpointSpec = (
@@ -428,7 +428,7 @@ export const marshalCreateEndpointRequest = (
 
 const marshalCreateInstanceRequestVolumeDetails = (
   request: CreateInstanceRequestVolumeDetails,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   volume_size: request.volumeSize,
   volume_type: request.volumeType,
@@ -458,7 +458,7 @@ export const marshalCreateInstanceRequest = (
 
 export const marshalCreateSnapshotRequest = (
   request: CreateSnapshotRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   expires_at: request.expiresAt,
   name: request.name,
@@ -466,7 +466,7 @@ export const marshalCreateSnapshotRequest = (
 
 export const marshalCreateUserRequest = (
   request: CreateUserRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   password: request.password,
@@ -474,7 +474,7 @@ export const marshalCreateUserRequest = (
 
 const marshalRestoreSnapshotRequestVolumeDetails = (
   request: RestoreSnapshotRequestVolumeDetails,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   volume_type: request.volumeType,
 })
@@ -491,7 +491,7 @@ export const marshalRestoreSnapshotRequest = (
 
 const marshalUserRole = (
   request: UserRole,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   role: request.role,
   ...resolveOneOf<string | boolean>([
@@ -513,7 +513,7 @@ export const marshalSetUserRoleRequest = (
 
 export const marshalUpdateInstanceRequest = (
   request: UpdateInstanceRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   tags: request.tags,
@@ -521,7 +521,7 @@ export const marshalUpdateInstanceRequest = (
 
 export const marshalUpdateSnapshotRequest = (
   request: UpdateSnapshotRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   expires_at: request.expiresAt,
   name: request.name,
@@ -529,14 +529,14 @@ export const marshalUpdateSnapshotRequest = (
 
 export const marshalUpdateUserRequest = (
   request: UpdateUserRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   password: request.password,
 })
 
 export const marshalUpgradeInstanceRequest = (
   request: UpgradeInstanceRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf([{ param: 'volume_size', value: request.volumeSize }]),
 })

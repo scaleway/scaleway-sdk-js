@@ -1,11 +1,9 @@
-// This file was automatically generated. DO NOT EDIT.
-// If you have any remark or suggestion do not hesitate to open an issue.
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Blocklist,
   BulkCreateBlocklistsRequest,
@@ -682,7 +680,7 @@ export const unmarshalStatistics = (data: unknown): Statistics => {
 
 export const marshalBulkCreateBlocklistsRequest = (
   request: BulkCreateBlocklistsRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   domain_id: request.domainId,
   emails: request.emails,
@@ -702,7 +700,7 @@ export const marshalCreateDomainRequest = (
 
 const marshalCreateEmailRequestAddress = (
   request: CreateEmailRequestAddress,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   email: request.email,
   name: request.name,
@@ -710,7 +708,7 @@ const marshalCreateEmailRequestAddress = (
 
 const marshalCreateEmailRequestAttachment = (
   request: CreateEmailRequestAttachment,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   content: request.content,
   name: request.name,
@@ -719,7 +717,7 @@ const marshalCreateEmailRequestAttachment = (
 
 const marshalCreateEmailRequestHeader = (
   request: CreateEmailRequestHeader,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   key: request.key,
   value: request.value,
@@ -775,7 +773,7 @@ export const marshalCreateWebhookRequest = (
 
 export const marshalUpdateDomainRequest = (
   request: UpdateDomainRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   autoconfig: request.autoconfig,
 })
@@ -790,7 +788,7 @@ export const marshalUpdateOfferSubscriptionRequest = (
 
 const marshalUpdateProjectSettingsRequestUpdatePeriodicReport = (
   request: UpdateProjectSettingsRequestUpdatePeriodicReport,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enabled: request.enabled,
   frequency: request.frequency,
@@ -813,7 +811,7 @@ export const marshalUpdateProjectSettingsRequest = (
 
 export const marshalUpdateWebhookRequest = (
   request: UpdateWebhookRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   event_types:
     request.eventTypes !== undefined ? request.eventTypes : undefined,

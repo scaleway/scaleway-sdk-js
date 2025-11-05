@@ -87,19 +87,10 @@ export type ResourceType =
   | 'load_balancer_certificate'
   | 'sfs_filesystem'
   | 'vpc_private_network'
-  | 'edge_services_plan'
-  | 'edge_services_pipeline'
-  | 'edge_services_dns_stage'
-  | 'edge_services_tls_stage'
-  | 'edge_services_cache_stage'
-  | 'edge_services_route_stage'
-  | 'edge_services_route_rules'
-  | 'edge_services_waf_stage'
-  | 'edge_services_backend_stage'
 
 export type SystemEventKind = 'unknown_kind' | 'cron' | 'notification'
 
-export interface AccountOrganizationInfo {}
+export type AccountOrganizationInfo = {}
 
 export interface AccountProjectInfo {
   description: string
@@ -124,40 +115,6 @@ export interface BaremetalSettingInfo {
   type: string
 }
 
-export interface EdgeServicesBackendStageInfo {
-  pipelineId?: string
-}
-
-export interface EdgeServicesCacheStageInfo {
-  pipelineId?: string
-}
-
-export interface EdgeServicesDNSStageInfo {
-  pipelineId?: string
-}
-
-export interface EdgeServicesPipelineInfo {
-  name: string
-}
-
-export interface EdgeServicesPlanInfo {}
-
-export interface EdgeServicesRouteRulesInfo {
-  routeStageId: string
-}
-
-export interface EdgeServicesRouteStageInfo {
-  pipelineId?: string
-}
-
-export interface EdgeServicesTLSStageInfo {
-  pipelineId?: string
-}
-
-export interface EdgeServicesWAFStageInfo {
-  pipelineId?: string
-}
-
 export interface InstanceServerInfo {
   name: string
 }
@@ -166,11 +123,11 @@ export interface IpamIpInfo {
   address: string
 }
 
-export interface KeyManagerKeyInfo {}
+export type KeyManagerKeyInfo = {}
 
-export interface KubernetesACLInfo {}
+export type KubernetesACLInfo = {}
 
-export interface KubernetesClusterInfo {}
+export type KubernetesClusterInfo = {}
 
 export interface KubernetesNodeInfo {
   id: string
@@ -234,177 +191,132 @@ export interface Resource {
   /**
    * @deprecated
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   secmSecretInfo?: SecretManagerSecretInfo
   /**
    * @deprecated
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   secmSecretVersionInfo?: SecretManagerSecretVersionInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   kubeClusterInfo?: KubernetesClusterInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   kubePoolInfo?: KubernetesPoolInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   kubeNodeInfo?: KubernetesNodeInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   kubeAclInfo?: KubernetesACLInfo
   /**
    * @deprecated
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   keymKeyInfo?: KeyManagerKeyInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   secretManagerSecretInfo?: SecretManagerSecretInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   secretManagerVersionInfo?: SecretManagerSecretVersionInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   keyManagerKeyInfo?: KeyManagerKeyInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   accountUserInfo?: AccountUserInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   accountOrganizationInfo?: AccountOrganizationInfo
   /**
    * @deprecated
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   instanceServerInfo?: InstanceServerInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   appleSiliconServerInfo?: AppleSiliconServerInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   accountProjectInfo?: AccountProjectInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   baremetalServerInfo?: BaremetalServerInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   baremetalSettingInfo?: BaremetalSettingInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   ipamIpInfo?: IpamIpInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   loadBalancerLbInfo?: LoadBalancerLbInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   loadBalancerIpInfo?: LoadBalancerIpInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   loadBalancerFrontendInfo?: LoadBalancerFrontendInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   loadBalancerBackendInfo?: LoadBalancerBackendInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   loadBalancerRouteInfo?: LoadBalancerRouteInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   loadBalancerAclInfo?: LoadBalancerAclInfo
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo' could be set.
    */
   loadBalancerCertificateInfo?: LoadBalancerCertificateInfo
-  /**
-   *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
-   */
-  edgeServicesPlanInfo?: EdgeServicesPlanInfo
-  /**
-   *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
-   */
-  edgeServicesPipelineInfo?: EdgeServicesPipelineInfo
-  /**
-   *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
-   */
-  edgeServicesDnsStageInfo?: EdgeServicesDNSStageInfo
-  /**
-   *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
-   */
-  edgeServicesTlsStageInfo?: EdgeServicesTLSStageInfo
-  /**
-   *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
-   */
-  edgeServicesCacheStageInfo?: EdgeServicesCacheStageInfo
-  /**
-   *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
-   */
-  edgeServicesRouteStageInfo?: EdgeServicesRouteStageInfo
-  /**
-   *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
-   */
-  edgeServicesRouteRulesInfo?: EdgeServicesRouteRulesInfo
-  /**
-   *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
-   */
-  edgeServicesWafStageInfo?: EdgeServicesWAFStageInfo
-  /**
-   *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo' could be set.
-   */
-  edgeServicesBackendStageInfo?: EdgeServicesBackendStageInfo
 }
 
 export interface EventPrincipal {
@@ -608,7 +520,7 @@ export interface ExportJob {
   /**
    * Tags of the export job.
    */
-  tags: string[]
+  tags: Record<string, string>
   /**
    * Status of last export job.
    */
@@ -652,7 +564,7 @@ export type CreateExportJobRequest = {
   /**
    * Tags of the export.
    */
-  tags?: string[]
+  tags?: Record<string, string>
 }
 
 export type DeleteExportJobRequest = {
@@ -789,7 +701,7 @@ export type ListExportJobsRequest = {
   /**
    * (Optional) List of tags to filter on.
    */
-  tags?: string[]
+  tags?: Record<string, string>
   page?: number
   pageSize?: number
   orderBy?: ListExportJobsRequestOrderBy

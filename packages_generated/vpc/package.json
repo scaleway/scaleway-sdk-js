@@ -1,49 +1,49 @@
 {
-  "name": "@scaleway/sdk-vpc",
-  "version": "1.4.0",
-  "description": "Scaleway SDK vpc",
-  "license": "Apache-2.0",
-  "files": [
-    "README.md",
-    "dist"
-  ],
-  "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/index.gen.d.ts",
-      "import": "./dist/index.gen.js",
-      "require": "./dist/index.gen.cjs",
-      "default": "./dist/index.gen.js"
-    },
-    "./*": {
-      "types": "./dist/*/index.gen.d.ts",
-      "import": "./dist/*/index.gen.js",
-      "require": "./dist/*/index.gen.cjs",
-      "default": "./dist/*/index.gen.js"
-    }
-  },
-  "repository": {
-    "type": "git",
-    "directory": "packages_generated/vpc"
-  },
-  "engines": {
-    "node": ">=20.19.4"
-  },
-  "scripts": {
-    "package:check": "pnpm publint",
-    "typecheck": "tsc --noEmit",
-    "type:generate": "tsc --declaration -p tsconfig.build.json",
-    "build": "vite build --config vite.config.ts && pnpm run type:generate",
-    "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
-  },
-  "dependencies": {
-    "@scaleway/random-name": "5.1.2",
-    "@scaleway/sdk-std": "workspace:*"
-  },
-  "peerDependencies": {
-    "@scaleway/sdk-client": "workspace:^"
-  },
-  "devDependencies": {
-    "@scaleway/sdk-client": "workspace:^"
-  }
+	"name": "@scaleway/sdk-vpc",
+	"version": "1.4.0",
+	"description": "Scaleway SDK vpc",
+	"license": "Apache-2.0",
+	"files": [
+		"README.md",
+		"dist"
+	],
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./dist/index.gen.d.ts",
+			"import": "./dist/index.gen.js",
+			"require": "./dist/index.gen.cjs",
+			"default": "./dist/index.gen.js"
+		},
+		"./*": {
+			"types": "./dist/*/index.gen.d.ts",
+			"import": "./dist/*/index.gen.js",
+			"require": "./dist/*/index.gen.cjs",
+			"default": "./dist/*/index.gen.js"
+		}
+	},
+	"repository": {
+		"type": "git",
+		"directory": "packages_generated/vpc"
+	},
+	"engines": {
+		"node": ">=20.19.4"
+	},
+	"scripts": {
+		"package:check": "pnpm publint",
+		"typecheck": "tsc --noEmit",
+		"type:generate": "tsc --declaration -p tsconfig.build.json",
+		"build": "vite build --config vite.config.ts && pnpm run type:generate",
+		"build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
+	},
+	"dependencies": {
+		"@scaleway/random-name": "5.1.2",
+		"@scaleway/sdk-std": "workspace:*"
+	},
+	"peerDependencies": {
+		"@scaleway/sdk-client": "workspace:^"
+	},
+	"devDependencies": {
+		"@scaleway/sdk-client": "workspace:^"
+	}
 }
