@@ -100,7 +100,13 @@ const updateSdkIndex = ({
   sdkIndexPath: string
 }) => {
   try {
-    let indexContent = '// Auto-generated exports from all SDK packages\n\n'
+    const header = [
+      '// This file was automatically generated. DO NOT EDIT.',
+      '// If you have any remark or suggestion do not hesitate to open an issue.',
+      '',
+    ].join('\n')
+
+    let indexContent = header
 
     generatedPackages.forEach(pkg => {
       indexContent += `export * from '${pkg.name}'\n`
