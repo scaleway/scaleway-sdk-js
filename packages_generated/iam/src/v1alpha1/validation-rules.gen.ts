@@ -219,6 +219,17 @@ export const ListSSHKeysRequest = {
   },
 }
 
+export const ListScimTokensRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 10000,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const ListUsersRequest = {
   page: {
     greaterThanOrEqual: 1,

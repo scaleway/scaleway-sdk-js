@@ -39,6 +39,7 @@ import {
   marshalValidateUserMFAOTPRequest,
   unmarshalAPIKey,
   unmarshalApplication,
+  unmarshalCreateScimTokenResponse,
   unmarshalEncodedJWT,
   unmarshalGetUserConnectionsResponse,
   unmarshalGroup,
@@ -56,6 +57,7 @@ import {
   unmarshalListRulesResponse,
   unmarshalListSSHKeysResponse,
   unmarshalListSamlCertificatesResponse,
+  unmarshalListScimTokensResponse,
   unmarshalListUsersResponse,
   unmarshalLog,
   unmarshalMFAOTP,
@@ -67,6 +69,7 @@ import {
   unmarshalSSHKey,
   unmarshalSaml,
   unmarshalSamlCertificate,
+  unmarshalScim,
   unmarshalSetRulesResponse,
   unmarshalUser,
   unmarshalValidateUserMFAOTPResponse,
@@ -84,6 +87,8 @@ import type {
   CreateJWTRequest,
   CreatePolicyRequest,
   CreateSSHKeyRequest,
+  CreateScimTokenRequest,
+  CreateScimTokenResponse,
   CreateUserMFAOTPRequest,
   CreateUserRequest,
   DeleteAPIKeyRequest,
@@ -94,9 +99,12 @@ import type {
   DeleteSSHKeyRequest,
   DeleteSamlCertificateRequest,
   DeleteSamlRequest,
+  DeleteScimRequest,
+  DeleteScimTokenRequest,
   DeleteUserMFAOTPRequest,
   DeleteUserRequest,
   EnableOrganizationSamlRequest,
+  EnableOrganizationScimRequest,
   EncodedJWT,
   GetAPIKeyRequest,
   GetApplicationRequest,
@@ -141,6 +149,8 @@ import type {
   ListSSHKeysResponse,
   ListSamlCertificatesRequest,
   ListSamlCertificatesResponse,
+  ListScimTokensRequest,
+  ListScimTokensResponse,
   ListUsersRequest,
   ListUsersResponse,
   LockUserRequest,
@@ -157,6 +167,7 @@ import type {
   SSHKey,
   Saml,
   SamlCertificate,
+  Scim,
   SetGroupMembersRequest,
   SetOrganizationAliasRequest,
   SetRulesRequest,
@@ -896,7 +907,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get an existing policy. Retrieve information about a policy, speficified by the `policy_id` parameter. The policy's full details, including `id`, `name`, `organization_id`, `nb_rules` and `nb_scopes`, `nb_permission_sets` are returned in the response.
+   * Get an existing policy. Retrieve information about a policy, specified by the `policy_id` parameter. The policy's full details, including `id`, `name`, `organization_id`, `nb_rules` and `nb_scopes`, `nb_permission_sets` are returned in the response.
    *
    * @param request - The request {@link GetPolicyRequest}
    * @returns A Promise of Policy
@@ -1547,5 +1558,59 @@ export class API extends ParentAPI {
     this.client.fetch<void>({
       method: 'DELETE',
       path: `/iam/v1alpha1/saml-certificates/${validatePathParam('certificateId', request.certificateId)}`,
+    })
+
+  enableOrganizationScim = (
+    request: Readonly<EnableOrganizationScimRequest> = {},
+  ) =>
+    this.client.fetch<Scim>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/scim`,
+      },
+      unmarshalScim,
+    )
+
+  deleteScim = (request: Readonly<DeleteScimRequest>) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/iam/v1alpha1/scim/${validatePathParam('scimId', request.scimId)}`,
+    })
+
+  protected pageOfListScimTokens = (request: Readonly<ListScimTokensRequest>) =>
+    this.client.fetch<ListScimTokensResponse>(
+      {
+        method: 'GET',
+        path: `/iam/v1alpha1/scim/${validatePathParam('scimId', request.scimId)}/tokens`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListScimTokensResponse,
+    )
+
+  listScimTokens = (request: Readonly<ListScimTokensRequest>) =>
+    enrichForPagination('scimTokens', this.pageOfListScimTokens, request)
+
+  createScimToken = (request: Readonly<CreateScimTokenRequest>) =>
+    this.client.fetch<CreateScimTokenResponse>(
+      {
+        method: 'POST',
+        path: `/iam/v1alpha1/scim/${validatePathParam('scimId', request.scimId)}/tokens`,
+      },
+      unmarshalCreateScimTokenResponse,
+    )
+
+  deleteScimToken = (request: Readonly<DeleteScimTokenRequest>) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/iam/v1alpha1/scim-tokens/${validatePathParam('tokenId', request.tokenId)}`,
     })
 }

@@ -65,6 +65,8 @@ export type ListSSHKeysRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
+export type ListScimTokensRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+
 export type ListUsersRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -217,6 +219,13 @@ export interface RuleSpecs {
    * One-of ('scope'): at most one of 'projectIds', 'organizationId' could be set.
    */
   organizationId?: string
+}
+
+export interface ScimToken {
+  id: string
+  scimId: string
+  createdAt?: Date
+  expiresAt?: Date
 }
 
 export interface CreateUserRequestMember {
@@ -995,6 +1004,24 @@ export type CreateSSHKeyRequest = {
   projectId?: string
 }
 
+export type CreateScimTokenRequest = {
+  /**
+   * ID of the SCIM configuration.
+   */
+  scimId: string
+}
+
+export interface CreateScimTokenResponse {
+  /**
+   * The SCIM token metadata.
+   */
+  token?: ScimToken
+  /**
+   * The Bearer Token to use to authenticate to SCIM endpoints.
+   */
+  bearerToken: string
+}
+
 export type CreateUserMFAOTPRequest = {
   /**
    * User ID of the MFA OTP.
@@ -1078,6 +1105,20 @@ export type DeleteSamlRequest = {
   samlId: string
 }
 
+export type DeleteScimRequest = {
+  /**
+   * ID of the SCIM configuration.
+   */
+  scimId: string
+}
+
+export type DeleteScimTokenRequest = {
+  /**
+   * The SCIM token ID.
+   */
+  tokenId: string
+}
+
 export type DeleteUserMFAOTPRequest = {
   /**
    * User ID of the MFA OTP.
@@ -1093,6 +1134,13 @@ export type DeleteUserRequest = {
 }
 
 export type EnableOrganizationSamlRequest = {
+  /**
+   * ID of the Organization.
+   */
+  organizationId?: string
+}
+
+export type EnableOrganizationScimRequest = {
   /**
    * ID of the Organization.
    */
@@ -1707,6 +1755,36 @@ export interface ListSamlCertificatesResponse {
   certificates: SamlCertificate[]
 }
 
+export type ListScimTokensRequest = {
+  /**
+   * ID of the SCIM configuration.
+   */
+  scimId: string
+  /**
+   * Sort order of SCIM tokens.
+   */
+  orderBy?: ListScimTokensRequestOrderBy
+  /**
+   * Requested page number. Value must be greater or equal to 1.
+   */
+  page?: number
+  /**
+   * Number of items per page. Value must be between 1 and 100.
+   */
+  pageSize?: number
+}
+
+export interface ListScimTokensResponse {
+  /**
+   * List of SCIM tokens.
+   */
+  scimTokens: ScimToken[]
+  /**
+   * Total count of SCIM tokens.
+   */
+  totalCount: number
+}
+
 export type ListUsersRequest = {
   /**
    * Criteria for sorting results.
@@ -1879,6 +1957,17 @@ export interface Saml {
    * Single Sign-On URL of the SAML Identity Provider.
    */
   singleSignOnUrl: string
+}
+
+export interface Scim {
+  /**
+   * ID of the SCIM configuration.
+   */
+  id: string
+  /**
+   * Date and time of SCIM configuration creation.
+   */
+  createdAt?: Date
 }
 
 export type SetGroupMembersRequest = {

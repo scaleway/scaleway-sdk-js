@@ -213,7 +213,6 @@ const unmarshalVolume = (data: unknown): Volume => {
 
   return {
     creationDate: unmarshalDate(data.creation_date),
-    exportUri: data.export_uri,
     id: data.id,
     modificationDate: unmarshalDate(data.modification_date),
     name: data.name,
@@ -2067,7 +2066,6 @@ const marshalVolume = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   creation_date: request.creationDate,
-  export_uri: request.exportUri,
   id: request.id,
   modification_date: request.modificationDate,
   name: request.name,
