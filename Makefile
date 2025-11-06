@@ -16,8 +16,8 @@ format-check:
 
 format-generated:
 	pnpm install
-	# Format and organize imports for generated TS without linting
-	pnpm biome check --write --linter-enabled=false packages_generated/
+	# Cleanup unused imports/variables in generated TS with dedicated config
+	pnpm biome lint --write --unsafe --config-path scripts/templates/biome.generated.json packages_generated/
 
 typing:
 	pnpm run typecheck
