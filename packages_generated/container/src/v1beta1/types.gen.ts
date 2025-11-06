@@ -392,7 +392,7 @@ export interface Cron {
    */
   containerId: string
   /**
-   * UNIX cron shedule.
+   * UNIX cron schedule.
    */
   schedule: string
   /**
@@ -714,7 +714,7 @@ export type CreateCronRequest = {
    */
   containerId: string
   /**
-   * UNIX cron shedule.
+   * UNIX cron schedule.
    */
   schedule: string
   /**

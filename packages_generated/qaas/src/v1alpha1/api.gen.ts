@@ -662,7 +662,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get application information. Retrieve information about the provided **applcation ID**, such as name, type and compatible platforms.
+   * Get application information. Retrieve information about the provided **application ID**, such as name, type and compatible platforms.
    *
    * @param request - The request {@link GetApplicationRequest}
    * @returns A Promise of Application

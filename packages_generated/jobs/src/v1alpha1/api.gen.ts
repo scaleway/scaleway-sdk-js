@@ -160,7 +160,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an exsisting job definition by its unique identifier.
+   * Delete an existing job definition by its unique identifier.
    *
    * @param request - The request {@link DeleteJobDefinitionRequest}
    */
