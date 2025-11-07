@@ -1,4 +1,4 @@
-import { env } from 'process'
+import { env } from 'node:process'
 import { EnvironmentKey } from './env.js'
 import { resolveConfigurationFilePath } from './path-resolver.js'
 import type {
@@ -55,13 +55,11 @@ export const loadAllProfilesFromConfigurationFile = (
   }
   const configs = loadConfigurationFromFile(filePath)
 
-  return Object.keys(configs).reduce<Record<string, Profile>>(
-    (prev, pKey) => ({
-      ...prev,
-      [pKey]: convertFileConfigToSDK(configs[pKey]),
-    }),
-    {},
-  )
+  const result: Record<string, Profile> = {}
+  for (const pKey of Object.keys(configs)) {
+    result[pKey] = convertFileConfigToSDK(configs[pKey])
+  }
+  return result
 }
 
 /**

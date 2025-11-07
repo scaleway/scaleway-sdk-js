@@ -1,5 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
@@ -7,7 +9,6 @@ import {
   unmarshalDate,
   unmarshalMapOfObject,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Capacity,
   CreateInstanceGroupRequest,
@@ -294,7 +295,7 @@ export const unmarshalListInstanceTemplatesResponse = (
 
 const marshalCapacity = (
   request: Capacity,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   cooldown_delay: request.cooldownDelay,
   max_replicas: request.maxReplicas,
@@ -303,7 +304,7 @@ const marshalCapacity = (
 
 const marshalLoadbalancer = (
   request: Loadbalancer,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   backend_ids: request.backendIds,
   id: request.id,
@@ -324,7 +325,7 @@ export const marshalCreateInstanceGroupRequest = (
 
 const marshalMetric = (
   request: Metric,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   aggregate: request.aggregate,
   name: request.name,
@@ -360,14 +361,14 @@ export const marshalCreateInstancePolicyRequest = (
 
 const marshalVolumeInstanceTemplateFromEmpty = (
   request: VolumeInstanceTemplateFromEmpty,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   size: request.size,
 })
 
 const marshalVolumeInstanceTemplateFromSnapshot = (
   request: VolumeInstanceTemplateFromSnapshot,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   size: request.size,
   snapshot_id: request.snapshotId,
@@ -429,7 +430,7 @@ export const marshalCreateInstanceTemplateRequest = (
 
 const marshalUpdateInstanceGroupRequestCapacity = (
   request: UpdateInstanceGroupRequestCapacity,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   cooldown_delay: request.cooldownDelay,
   max_replicas: request.maxReplicas,
@@ -438,7 +439,7 @@ const marshalUpdateInstanceGroupRequestCapacity = (
 
 const marshalUpdateInstanceGroupRequestLoadbalancer = (
   request: UpdateInstanceGroupRequestLoadbalancer,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   backend_ids: request.backendIds,
 })
@@ -464,7 +465,7 @@ export const marshalUpdateInstanceGroupRequest = (
 
 const marshalUpdateInstancePolicyRequestMetric = (
   request: UpdateInstancePolicyRequestMetric,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   aggregate: request.aggregate,
   name: request.name,

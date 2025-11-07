@@ -28,15 +28,18 @@ const getExportsFromPackage = (packagePath: string): string[] => {
     const content = readFileSync(indexPath, 'utf8')
     const exportPattern = /export \* as (\w+) from/g
     const exports: string[] = []
-    let match
+    let match: RegExpExecArray | null
 
-    while ((match = exportPattern.exec(content)) !== null) {
+    match = exportPattern.exec(content)
+    while (match !== null) {
       exports.push(match[1])
+      match = exportPattern.exec(content)
     }
 
     return exports
   } catch (err: unknown) {
-    throw new Error(`Error reading exports from ${indexPath}: ${err.message}`)
+    const message = err instanceof Error ? err.message : String(err)
+    throw new Error(`Error reading exports from ${indexPath}: ${message}`)
   }
 }
 
@@ -66,8 +69,9 @@ for (const service of services) {
   try {
     exportedNames = getExportsFromPackage(packagePath)
   } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err)
     throw new Error(
-      `Error getting exports for package '${service}': ${err.message}`,
+      `Error getting exports for package '${service}': ${message}`,
     )
   }
 
@@ -92,7 +96,7 @@ for (const service of services) {
 
     importsOutput += `${imports.join('\n')}\n`
     const importedNames = imports
-      .map(line => /{ (.*?) }/.exec(line)![1])
+      .map(line => /{ (.*?) }/.exec(line)?.[1])
       .join(', ')
 
     output +=

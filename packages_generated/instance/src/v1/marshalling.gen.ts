@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
@@ -8,7 +9,6 @@ import {
   unmarshalDate,
   unmarshalMapOfObject,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   ApplyBlockMigrationRequest,
   AttachServerFileSystemRequest,
@@ -64,9 +64,9 @@ import type {
   ListSecurityGroupRulesResponse,
   ListSecurityGroupsResponse,
   ListServerActionsResponse,
-  ListServerUserDataResponse,
   ListServersResponse,
   ListServersTypesResponse,
+  ListServerUserDataResponse,
   ListSnapshotsResponse,
   ListVolumesResponse,
   ListVolumesTypesResponse,
@@ -164,7 +164,6 @@ export const unmarshalPrivateNIC = (data: unknown): PrivateNIC => {
     serverId: data.server_id,
     state: data.state,
     tags: data.tags,
-    zone: data.zone,
   } as PrivateNIC
 }
 
@@ -213,6 +212,7 @@ const unmarshalVolume = (data: unknown): Volume => {
 
   return {
     creationDate: unmarshalDate(data.creation_date),
+    exportUri: data.export_uri,
     id: data.id,
     modificationDate: unmarshalDate(data.modification_date),
     name: data.name,
@@ -1693,7 +1693,7 @@ export const unmarshalUpdateVolumeResponse = (
 
 export const marshalApplyBlockMigrationRequest = (
   request: ApplyBlockMigrationRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   validation_key: request.validationKey,
   ...resolveOneOf([
@@ -1704,14 +1704,14 @@ export const marshalApplyBlockMigrationRequest = (
 
 export const marshalAttachServerFileSystemRequest = (
   request: AttachServerFileSystemRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   filesystem_id: request.filesystemId,
 })
 
 export const marshalAttachServerVolumeRequest = (
   request: AttachServerVolumeRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   boot: request.boot,
   volume_id: request.volumeId,
@@ -1727,7 +1727,7 @@ export const marshalCheckBlockMigrationOrganizationQuotasRequest = (
 
 const marshalVolumeTemplate = (
   request: VolumeTemplate,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   id: request.id,
   name: request.name,
@@ -1817,7 +1817,7 @@ export const marshalCreatePlacementGroupRequest = (
 
 export const marshalCreatePrivateNICRequest = (
   request: CreatePrivateNICRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ip_ids: request.ipIds,
   ipam_ip_ids: request.ipamIpIds,
@@ -1856,7 +1856,7 @@ export const marshalCreateSecurityGroupRequest = (
 
 export const marshalCreateSecurityGroupRuleRequest = (
   request: CreateSecurityGroupRuleRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   action: request.action,
   dest_port_from: request.destPortFrom,
@@ -1870,7 +1870,7 @@ export const marshalCreateSecurityGroupRuleRequest = (
 
 const marshalVolumeServerTemplate = (
   request: VolumeServerTemplate,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   base_snapshot: request.baseSnapshot,
   boot: request.boot,
@@ -1976,21 +1976,21 @@ export const marshalCreateVolumeRequest = (
 
 export const marshalDetachServerFileSystemRequest = (
   request: DetachServerFileSystemRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   filesystem_id: request.filesystemId,
 })
 
 export const marshalDetachServerVolumeRequest = (
   request: DetachServerVolumeRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   volume_id: request.volumeId,
 })
 
 export const marshalExportSnapshotRequest = (
   request: ExportSnapshotRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   bucket: request.bucket,
   key: request.key,
@@ -1998,7 +1998,7 @@ export const marshalExportSnapshotRequest = (
 
 export const marshalPlanBlockMigrationRequest = (
   request: PlanBlockMigrationRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf([
     { param: 'volume_id', value: request.volumeId },
@@ -2008,7 +2008,7 @@ export const marshalPlanBlockMigrationRequest = (
 
 const marshalServerActionRequestVolumeBackupTemplate = (
   request: ServerActionRequestVolumeBackupTemplate,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   volume_type: request.volumeType,
 })
@@ -2037,7 +2037,7 @@ export const marshalServerActionRequest = (
 
 const marshalServerSummary = (
   request: ServerSummary,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   id: request.id,
   name: request.name,
@@ -2045,7 +2045,7 @@ const marshalServerSummary = (
 
 const marshalBootscript = (
   request: Bootscript,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   architecture: request.architecture,
   bootcmdargs: request.bootcmdargs,
@@ -2066,6 +2066,7 @@ const marshalVolume = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   creation_date: request.creationDate,
+  export_uri: request.exportUri,
   id: request.id,
   modification_date: request.modificationDate,
   name: request.name,
@@ -2084,7 +2085,7 @@ const marshalVolume = (
 
 const marshalVolumeSummary = (
   request: VolumeSummary,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   id: request.id,
   name: request.name,
@@ -2140,7 +2141,7 @@ export const marshalSetPlacementGroupRequest = (
 
 export const marshalSetPlacementGroupServersRequest = (
   request: SetPlacementGroupServersRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   servers: request.servers,
 })
@@ -2170,7 +2171,7 @@ export const marshalSetSecurityGroupRequest = (
 
 export const marshalSetSecurityGroupRuleRequest = (
   request: SetSecurityGroupRuleRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   action: request.action,
   dest_port_from: request.destPortFrom,
@@ -2185,7 +2186,7 @@ export const marshalSetSecurityGroupRuleRequest = (
 
 const marshalSetSecurityGroupRulesRequestRule = (
   request: SetSecurityGroupRulesRequestRule,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   action: request.action,
   dest_port_from: request.destPortFrom,
@@ -2243,7 +2244,7 @@ const marshalImage = (
 
 const marshalPlacementGroup = (
   request: PlacementGroup,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   id: request.id,
   name: request.name,
@@ -2258,7 +2259,7 @@ const marshalPlacementGroup = (
 
 const marshalPrivateNIC = (
   request: PrivateNIC,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   creation_date: request.creationDate,
   id: request.id,
@@ -2267,12 +2268,11 @@ const marshalPrivateNIC = (
   server_id: request.serverId,
   state: request.state,
   tags: request.tags,
-  zone: request.zone,
 })
 
 const marshalSecurityGroupSummary = (
   request: SecurityGroupSummary,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   id: request.id,
   name: request.name,
@@ -2280,7 +2280,7 @@ const marshalSecurityGroupSummary = (
 
 const marshalServerIp = (
   request: ServerIp,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   address: request.address,
   dynamic: request.dynamic,
@@ -2296,7 +2296,7 @@ const marshalServerIp = (
 
 const marshalServerIpv6 = (
   request: ServerIpv6,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   address: request.address,
   gateway: request.gateway,
@@ -2305,7 +2305,7 @@ const marshalServerIpv6 = (
 
 const marshalServerLocation = (
   request: ServerLocation,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   cluster_id: request.clusterId,
   hypervisor_id: request.hypervisorId,
@@ -2316,7 +2316,7 @@ const marshalServerLocation = (
 
 const marshalServerMaintenance = (
   request: ServerMaintenance,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   reason: request.reason,
   start_date: request.startDate,
@@ -2396,7 +2396,7 @@ export const marshalSetServerRequest = (
 
 const marshalSnapshotBaseVolume = (
   request: SnapshotBaseVolume,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   id: request.id,
   name: request.name,
@@ -2424,7 +2424,7 @@ export const marshalSetSnapshotRequest = (
 
 const marshalVolumeImageUpdateTemplate = (
   request: VolumeImageUpdateTemplate,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   id: request.id,
 })
@@ -2451,7 +2451,7 @@ export const marshalUpdateImageRequest = (
 
 export const marshalUpdateIpRequest = (
   request: UpdateIpRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   reverse: request.reverse,
   server: request.server,
@@ -2461,7 +2461,7 @@ export const marshalUpdateIpRequest = (
 
 export const marshalUpdatePlacementGroupRequest = (
   request: UpdatePlacementGroupRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   policy_mode: request.policyMode,
@@ -2471,21 +2471,21 @@ export const marshalUpdatePlacementGroupRequest = (
 
 export const marshalUpdatePlacementGroupServersRequest = (
   request: UpdatePlacementGroupServersRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   servers: request.servers,
 })
 
 export const marshalUpdatePrivateNICRequest = (
   request: UpdatePrivateNICRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   tags: request.tags,
 })
 
 export const marshalUpdateSecurityGroupRequest = (
   request: UpdateSecurityGroupRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   enable_default_security: request.enableDefaultSecurity,
@@ -2500,7 +2500,7 @@ export const marshalUpdateSecurityGroupRequest = (
 
 export const marshalUpdateSecurityGroupRuleRequest = (
   request: UpdateSecurityGroupRuleRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   action: request.action,
   dest_port_from: request.destPortFrom,
@@ -2513,7 +2513,7 @@ export const marshalUpdateSecurityGroupRuleRequest = (
 
 const marshalSecurityGroupTemplate = (
   request: SecurityGroupTemplate,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   id: request.id,
   name: request.name,
@@ -2553,7 +2553,7 @@ export const marshalUpdateServerRequest = (
 
 export const marshalUpdateSnapshotRequest = (
   request: UpdateSnapshotRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   tags: request.tags,
@@ -2561,7 +2561,7 @@ export const marshalUpdateSnapshotRequest = (
 
 export const marshalUpdateVolumeRequest = (
   request: UpdateVolumeRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   size: request.size,

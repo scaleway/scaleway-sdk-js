@@ -99,9 +99,6 @@ export const Pop = {
   city: {
     minLength: 1,
   },
-  displayName: {
-    minLength: 1,
-  },
   hostingProviderName: {
     minLength: 1,
   },

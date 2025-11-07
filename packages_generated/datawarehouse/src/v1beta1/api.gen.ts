@@ -1,14 +1,15 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  API as ParentAPI,
   enrichForPagination,
+  API as ParentAPI,
   toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import { DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_DATAWAREHOUSE } from './content.gen.js'
 import {
   marshalCreateDatabaseRequest,
@@ -119,7 +120,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List available ClickHouse® versions.
+   * List available Clickhouse versions.
    *
    * @param request - The request {@link ListVersionsRequest}
    * @returns A Promise of ListVersionsResponse
@@ -235,7 +236,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a deployment. Delete a given deployment, specified by the `region` and `deployment_id` parameters. Deleting a deployment is permanent, and cannot be undone. Upon deletion, all your data will be lost.
+   * Delete a deployment. Delete a given deployment, specified by the `region` and `deployment_id` parameters. Deleting a deployment is permanent, and cannot be undone. Upon deletion, deletion all your data will be lost.
    *
    * @param request - The request {@link DeleteDeploymentRequest}
    * @returns A Promise of Deployment

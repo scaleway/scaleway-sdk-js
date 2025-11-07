@@ -61,6 +61,5 @@ export const UpdateDeploymentRequest = {
   name: {
     maxLength: 255,
     minLength: 1,
-    pattern: /^[A-Za-z0-9-_]+$/,
   },
 }

@@ -1,12 +1,12 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   AddBastionAllowedIPsRequest,
   AddBastionAllowedIPsResponse,
@@ -19,8 +19,8 @@ import type {
   GatewayType,
   IP,
   ListGatewayNetworksResponse,
-  ListGatewayTypesResponse,
   ListGatewaysResponse,
+  ListGatewayTypesResponse,
   ListIPsResponse,
   ListPatRulesResponse,
   PatRule,
@@ -266,14 +266,14 @@ export const unmarshalSetPatRulesResponse = (
 
 export const marshalAddBastionAllowedIPsRequest = (
   request: AddBastionAllowedIPsRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ip_range: request.ipRange,
 })
 
 export const marshalCreateGatewayNetworkRequest = (
   request: CreateGatewayNetworkRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enable_masquerade: request.enableMasquerade,
   gateway_id: request.gatewayId,
@@ -306,7 +306,7 @@ export const marshalCreateIPRequest = (
 
 export const marshalCreatePatRuleRequest = (
   request: CreatePatRuleRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   gateway_id: request.gatewayId,
   private_ip: request.privateIp,
@@ -317,14 +317,14 @@ export const marshalCreatePatRuleRequest = (
 
 export const marshalSetBastionAllowedIPsRequest = (
   request: SetBastionAllowedIPsRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ip_ranges: request.ipRanges,
 })
 
 const marshalSetPatRulesRequestRule = (
   request: SetPatRulesRequestRule,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_ip: request.privateIp,
   private_port: request.privatePort,
@@ -344,7 +344,7 @@ export const marshalSetPatRulesRequest = (
 
 export const marshalUpdateGatewayNetworkRequest = (
   request: UpdateGatewayNetworkRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enable_masquerade: request.enableMasquerade,
   ipam_ip_id: request.ipamIpId,
@@ -353,7 +353,7 @@ export const marshalUpdateGatewayNetworkRequest = (
 
 export const marshalUpdateGatewayRequest = (
   request: UpdateGatewayRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   bastion_port: request.bastionPort,
   enable_bastion: request.enableBastion,
@@ -364,7 +364,7 @@ export const marshalUpdateGatewayRequest = (
 
 export const marshalUpdateIPRequest = (
   request: UpdateIPRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   gateway_id: request.gatewayId,
   reverse: request.reverse,
@@ -373,7 +373,7 @@ export const marshalUpdateIPRequest = (
 
 export const marshalUpdatePatRuleRequest = (
   request: UpdatePatRuleRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_ip: request.privateIp,
   private_port: request.privatePort,
@@ -383,7 +383,7 @@ export const marshalUpdatePatRuleRequest = (
 
 export const marshalUpgradeGatewayRequest = (
   request: UpgradeGatewayRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   type: request.type,
 })

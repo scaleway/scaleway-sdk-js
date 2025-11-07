@@ -1,12 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Alert,
   AlertManager,
@@ -40,8 +41,10 @@ import type {
   RegionalApiDeleteContactPointRequest,
   RegionalApiDisableAlertManagerRequest,
   RegionalApiDisableAlertRulesRequest,
+  RegionalApiDisableManagedAlertsRequest,
   RegionalApiEnableAlertManagerRequest,
   RegionalApiEnableAlertRulesRequest,
+  RegionalApiEnableManagedAlertsRequest,
   RegionalApiTriggerTestAlertRequest,
   RegionalApiUpdateContactPointRequest,
   RegionalApiUpdateDataSourceRequest,
@@ -537,7 +540,7 @@ export const marshalGlobalApiSyncGrafanaDataSourcesRequest = (
 
 const marshalContactPointEmail = (
   request: ContactPointEmail,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   to: request.to,
 })
@@ -610,6 +613,13 @@ export const marshalRegionalApiDisableAlertRulesRequest = (
   rule_ids: request.ruleIds,
 })
 
+export const marshalRegionalApiDisableManagedAlertsRequest = (
+  request: RegionalApiDisableManagedAlertsRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
 export const marshalRegionalApiEnableAlertManagerRequest = (
   request: RegionalApiEnableAlertManagerRequest,
   defaults: DefaultValues,
@@ -623,6 +633,13 @@ export const marshalRegionalApiEnableAlertRulesRequest = (
 ): Record<string, unknown> => ({
   project_id: request.projectId ?? defaults.defaultProjectId,
   rule_ids: request.ruleIds,
+})
+
+export const marshalRegionalApiEnableManagedAlertsRequest = (
+  request: RegionalApiEnableManagedAlertsRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
 export const marshalRegionalApiTriggerTestAlertRequest = (
@@ -651,7 +668,7 @@ export const marshalRegionalApiUpdateContactPointRequest = (
 
 export const marshalRegionalApiUpdateDataSourceRequest = (
   request: RegionalApiUpdateDataSourceRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   retention_days: request.retentionDays,

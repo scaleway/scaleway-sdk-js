@@ -1,11 +1,12 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   AccessSecretVersionResponse,
   AddSecretOwnerRequest,
@@ -17,9 +18,9 @@ import type {
   CreateSecretVersionRequest,
   EphemeralPolicy,
   EphemeralProperties,
+  ListSecretsResponse,
   ListSecretTypesResponse,
   ListSecretVersionsResponse,
-  ListSecretsResponse,
   ListTagsResponse,
   Secret,
   SecretVersion,
@@ -57,7 +58,6 @@ export const unmarshalSecretVersion = (data: unknown): SecretVersion => {
       ? unmarshalEphemeralProperties(data.ephemeral_properties)
       : undefined,
     latest: data.latest,
-    region: data.region,
     revision: data.revision,
     secretId: data.secret_id,
     status: data.status,
@@ -262,14 +262,14 @@ export const unmarshalListTagsResponse = (data: unknown): ListTagsResponse => {
 
 export const marshalAddSecretOwnerRequest = (
   request: AddSecretOwnerRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   product: request.product,
 })
 
 const marshalEphemeralPolicy = (
   request: EphemeralPolicy,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   action: request.action,
   expires_once_accessed: request.expiresOnceAccessed,
@@ -296,7 +296,7 @@ export const marshalCreateSecretRequest = (
 
 export const marshalCreateSecretVersionRequest = (
   request: CreateSecretVersionRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   data: request.data,
   data_crc32: request.dataCrc32,
@@ -320,7 +320,7 @@ export const marshalUpdateSecretRequest = (
 
 const marshalEphemeralProperties = (
   request: EphemeralProperties,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   action: request.action,
   expires_at: request.expiresAt,

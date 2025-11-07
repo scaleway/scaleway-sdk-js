@@ -1,12 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   AttachIPRequest,
   BookIPRequest,
@@ -103,7 +104,7 @@ export const unmarshalListIPsResponse = (data: unknown): ListIPsResponse => {
 
 const marshalCustomResource = (
   request: CustomResource,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mac_address: request.macAddress,
   name: request.name,
@@ -118,7 +119,7 @@ export const marshalAttachIPRequest = (
 
 const marshalSource = (
   request: Source,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf([
     { param: 'zonal', value: request.zonal },
@@ -163,14 +164,14 @@ export const marshalMoveIPRequest = (
 
 export const marshalReleaseIPSetRequest = (
   request: ReleaseIPSetRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ip_ids: request.ipIds,
 })
 
 const marshalReverse = (
   request: Reverse,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   address: request.address,
   hostname: request.hostname,

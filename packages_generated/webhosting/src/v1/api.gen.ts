@@ -1,14 +1,15 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  API as ParentAPI,
   enrichForPagination,
+  API as ParentAPI,
   toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   BACKUP_TRANSIENT_STATUSES as BACKUP_TRANSIENT_STATUSES_WEBHOSTING,
   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_WEBHOSTING,
@@ -33,7 +34,6 @@ import {
   marshalMailAccountApiChangeMailAccountPasswordRequest,
   marshalMailAccountApiCreateMailAccountRequest,
   marshalMailAccountApiRemoveMailAccountRequest,
-  marshalWebsiteApiCreateWebsiteRequest,
   unmarshalBackup,
   unmarshalCheckFreeDomainAvailabilityResponse,
   unmarshalCheckUserOwnsDomainResponse,
@@ -47,32 +47,27 @@ import {
   unmarshalListBackupItemsResponse,
   unmarshalListBackupsResponse,
   unmarshalListControlPanelsResponse,
-  unmarshalListDatabaseUsersResponse,
   unmarshalListDatabasesResponse,
+  unmarshalListDatabaseUsersResponse,
   unmarshalListFreeRootDomainsResponse,
   unmarshalListFtpAccountsResponse,
   unmarshalListHostingsResponse,
   unmarshalListMailAccountsResponse,
   unmarshalListOffersResponse,
-  unmarshalListRecentProgressesResponse,
   unmarshalListWebsitesResponse,
   unmarshalMailAccount,
-  unmarshalProgress,
   unmarshalResetHostingPasswordResponse,
   unmarshalResourceSummary,
   unmarshalRestoreBackupItemsResponse,
   unmarshalRestoreBackupResponse,
   unmarshalSearchDomainsResponse,
   unmarshalSession,
-  unmarshalWebsite,
 } from './marshalling.gen.js'
 import type {
   Backup,
   BackupApiGetBackupRequest,
-  BackupApiGetProgressRequest,
   BackupApiListBackupItemsRequest,
   BackupApiListBackupsRequest,
-  BackupApiListRecentProgressesRequest,
   BackupApiRestoreBackupItemsRequest,
   BackupApiRestoreBackupRequest,
   CheckFreeDomainAvailabilityResponse,
@@ -87,8 +82,8 @@ import type {
   DatabaseApiDeleteDatabaseUserRequest,
   DatabaseApiGetDatabaseRequest,
   DatabaseApiGetDatabaseUserRequest,
-  DatabaseApiListDatabaseUsersRequest,
   DatabaseApiListDatabasesRequest,
+  DatabaseApiListDatabaseUsersRequest,
   DatabaseApiUnassignDatabaseUserRequest,
   DatabaseUser,
   DnsApiCheckUserOwnsDomainRequest,
@@ -120,14 +115,13 @@ import type {
   ListBackupItemsResponse,
   ListBackupsResponse,
   ListControlPanelsResponse,
-  ListDatabaseUsersResponse,
   ListDatabasesResponse,
+  ListDatabaseUsersResponse,
   ListFreeRootDomainsResponse,
   ListFtpAccountsResponse,
   ListHostingsResponse,
   ListMailAccountsResponse,
   ListOffersResponse,
-  ListRecentProgressesResponse,
   ListWebsitesResponse,
   MailAccount,
   MailAccountApiChangeMailAccountPasswordRequest,
@@ -135,16 +129,12 @@ import type {
   MailAccountApiListMailAccountsRequest,
   MailAccountApiRemoveMailAccountRequest,
   OfferApiListOffersRequest,
-  Progress,
   ResetHostingPasswordResponse,
   ResourceSummary,
   RestoreBackupItemsResponse,
   RestoreBackupResponse,
   SearchDomainsResponse,
   Session,
-  Website,
-  WebsiteApiCreateWebsiteRequest,
-  WebsiteApiDeleteWebsiteRequest,
   WebsiteApiListWebsitesRequest,
 } from './types.gen.js'
 
@@ -286,38 +276,6 @@ export class BackupAPI extends ParentAPI {
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/restore-backup-items`,
       },
       unmarshalRestoreBackupItemsResponse,
-    )
-
-  /**
-   * Retrieve detailed information about a specific progress by its ID.. Retrieve detailed information about a specific progress by its ID.
-   *
-   * @param request - The request {@link BackupApiGetProgressRequest}
-   * @returns A Promise of Progress
-   */
-  getProgress = (request: Readonly<BackupApiGetProgressRequest>) =>
-    this.client.fetch<Progress>(
-      {
-        method: 'GET',
-        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/progresses/${validatePathParam('progressId', request.progressId)}`,
-      },
-      unmarshalProgress,
-    )
-
-  /**
-   * List recent progresses associated with a specific backup, grouped by type.. List recent progresses associated with a specific backup, grouped by type.
-   *
-   * @param request - The request {@link BackupApiListRecentProgressesRequest}
-   * @returns A Promise of ListRecentProgressesResponse
-   */
-  listRecentProgresses = (
-    request: Readonly<BackupApiListRecentProgressesRequest>,
-  ) =>
-    this.client.fetch<ListRecentProgressesResponse>(
-      {
-        method: 'GET',
-        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/progresses`,
-      },
-      unmarshalListRecentProgressesResponse,
     )
 }
 
@@ -995,7 +953,7 @@ export class HostingAPI extends ParentAPI {
     )
 
   /**
-   * Attach a custom domain to a webhosting as an alias to the main domain.
+   * Attach a custom domain to a webhosting.
    *
    * @param request - The request {@link HostingApiAddCustomDomainRequest}
    * @returns A Promise of HostingSummary
@@ -1370,34 +1328,4 @@ export class WebsiteAPI extends ParentAPI {
    */
   listWebsites = (request: Readonly<WebsiteApiListWebsitesRequest>) =>
     enrichForPagination('websites', this.pageOfListWebsites, request)
-
-  /**
-   * Create a new website and attach it to a webhosting.
-   *
-   * @param request - The request {@link WebsiteApiCreateWebsiteRequest}
-   * @returns A Promise of Website
-   */
-  createWebsite = (request: Readonly<WebsiteApiCreateWebsiteRequest>) =>
-    this.client.fetch<Website>(
-      {
-        body: JSON.stringify(
-          marshalWebsiteApiCreateWebsiteRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/websites`,
-      },
-      unmarshalWebsite,
-    )
-
-  /**
-   * Delete a website from a webhosting.
-   *
-   * @param request - The request {@link WebsiteApiDeleteWebsiteRequest}
-   */
-  deleteWebsite = (request: Readonly<WebsiteApiDeleteWebsiteRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/websites/${validatePathParam('domainName', request.domainName)}`,
-    })
 }

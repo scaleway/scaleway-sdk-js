@@ -1,13 +1,14 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { ApiLocality } from '@scaleway/sdk-client'
 import {
-  API as ParentAPI,
   enrichForPagination,
+  API as ParentAPI,
   toApiLocality,
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
-import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   marshalNatsApiCreateNatsAccountRequest,
   marshalNatsApiCreateNatsCredentialsRequest,
@@ -305,7 +306,7 @@ export class SnsAPI extends ParentAPI {
     )
 
   /**
-   * Get Topics and Events info. Retrieve the Topics and Events information of the specified Project ID. information include the activation status and the Topics and Events API endpoint URL.
+   * Get Topics and Events info. Retrieve the Topics and Events information of the specified Project ID. Informations include the activation status and the Topics and Events API endpoint URL.
    *
    * @param request - The request {@link SnsApiGetSnsInfoRequest}
    * @returns A Promise of SnsInfo
@@ -488,7 +489,7 @@ export class SqsAPI extends ParentAPI {
     )
 
   /**
-   * Get Queues info. Retrieve the Queues information of the specified Project ID. information include the activation status and the Queues API endpoint URL.
+   * Get Queues info. Retrieve the Queues information of the specified Project ID. Informations include the activation status and the Queues API endpoint URL.
    *
    * @param request - The request {@link SqsApiGetSqsInfoRequest}
    * @returns A Promise of SqsInfo

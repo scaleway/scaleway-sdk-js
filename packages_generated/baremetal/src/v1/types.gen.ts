@@ -151,7 +151,7 @@ export interface Schema {
   zfs?: SchemaZFS
 }
 
-export interface CertificationOption {}
+export type CertificationOption = {}
 
 export interface LicenseOption {
   osId: string
@@ -165,7 +165,7 @@ export interface PublicBandwidthOption {
   bandwidthInBps: number
 }
 
-export interface RemoteAccessOption {}
+export type RemoteAccessOption = {}
 
 export interface CreateServerRequestInstall {
   /**
@@ -525,10 +525,6 @@ export type CreateServerRequest = {
    * If enabled, the server can not be deleted.
    */
   protected: boolean
-  /**
-   * Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script.
-   */
-  userData?: string
 }
 
 export interface Server {
@@ -612,10 +608,6 @@ export interface Server {
    * If enabled, the server can not be deleted.
    */
   protected: boolean
-  /**
-   * Optional configuration data passed to cloud-init.
-   */
-  userData?: string
 }
 
 export interface OS {
@@ -671,14 +663,6 @@ export interface OS {
    * Defines if custom partitioning is supported by this OS.
    */
   customPartitioningSupported: boolean
-  /**
-   * Defines if cloud-init is supported by this OS.
-   */
-  cloudInitSupported: boolean
-  /**
-   * Defines the cloud-init API version used by this OS.
-   */
-  cloudInitVersion?: string
   /**
    * Zone in which is the OS is available.
    */
@@ -935,11 +919,11 @@ export interface BMCAccess {
    */
   url: string
   /**
-   * The login to use for the BMC (Baseboard Management Controller) access authentication.
+   * The login to use for the BMC (Baseboard Management Controller) access authentification.
    */
   login: string
   /**
-   * The password to use for the BMC (Baseboard Management Controller) access authentication.
+   * The password to use for the BMC (Baseboard Management Controller) access authentification.
    */
   password: string
   /**
@@ -1103,10 +1087,6 @@ export type InstallServerRequest = {
    * Partitioning schema.
    */
   partitioningSchema?: Schema
-  /**
-   * @deprecated Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script.
-   */
-  userData?: Blob
 }
 
 export type ListOSRequest = {
@@ -1548,10 +1528,6 @@ export type UpdateServerRequest = {
    * If enabled, the server can not be deleted.
    */
   protected?: boolean
-  /**
-   * Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script.
-   */
-  userData?: string
 }
 
 export type UpdateSettingRequest = {

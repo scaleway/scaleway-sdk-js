@@ -1,11 +1,12 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Attachment,
   CreateFileSystemRequest,
@@ -95,7 +96,7 @@ export const marshalCreateFileSystemRequest = (
 
 export const marshalUpdateFileSystemRequest = (
   request: UpdateFileSystemRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   size: request.size,

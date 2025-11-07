@@ -1,5 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
@@ -8,7 +10,6 @@ import {
   unmarshalMapOfObject,
   unmarshalMoney,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   AddRouteRulesRequest,
   AddRouteRulesResponse,
@@ -91,7 +92,6 @@ const unmarshalScalewayLb = (data: unknown): ScalewayLb => {
   return {
     domainName: data.domain_name,
     frontendId: data.frontend_id,
-    hasWebsocket: data.has_websocket,
     id: data.id,
     isSsl: data.is_ssl,
     zone: data.zone,
@@ -180,7 +180,6 @@ export const unmarshalDNSStage = (data: unknown): DNSStage => {
     backendStageId: data.backend_stage_id,
     cacheStageId: data.cache_stage_id,
     createdAt: unmarshalDate(data.created_at),
-    defaultFqdn: data.default_fqdn,
     fqdns: data.fqdns,
     id: data.id,
     pipelineId: data.pipeline_id,
@@ -760,7 +759,7 @@ export const unmarshalSetRouteRulesResponse = (
 
 const marshalRuleHttpMatchPathFilter = (
   request: RuleHttpMatchPathFilter,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   path_filter_type: request.pathFilterType,
   value: request.value,
@@ -822,11 +821,10 @@ export const marshalCheckDomainRequest = (
 
 const marshalScalewayLb = (
   request: ScalewayLb,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   domain_name: request.domainName,
   frontend_id: request.frontendId,
-  has_websocket: request.hasWebsocket,
   id: request.id,
   is_ssl: request.isSsl,
   zone: request.zone,
@@ -844,7 +842,7 @@ export const marshalCheckLbOriginRequest = (
 
 const marshalCheckPEMChainRequestSecretChain = (
   request: CheckPEMChainRequestSecretChain,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   secret_id: request.secretId,
   secret_region: request.secretRegion,
@@ -877,7 +875,7 @@ const marshalScalewayLbBackendConfig = (
 
 const marshalScalewayS3BackendConfig = (
   request: ScalewayS3BackendConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   bucket_name: request.bucketName,
   bucket_region: request.bucketRegion,
@@ -908,7 +906,7 @@ export const marshalCreateBackendStageRequest = (
 
 export const marshalCreateCacheStageRequest = (
   request: CreateCacheStageRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   fallback_ttl: request.fallbackTtl,
   include_cookies: request.includeCookies,
@@ -921,7 +919,7 @@ export const marshalCreateCacheStageRequest = (
 
 export const marshalCreateDNSStageRequest = (
   request: CreateDNSStageRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   fqdns: request.fqdns,
   ...resolveOneOf([
@@ -942,7 +940,7 @@ export const marshalCreatePipelineRequest = (
 
 export const marshalCreatePurgeRequestRequest = (
   request: CreatePurgeRequestRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   pipeline_id: request.pipelineId,
   ...resolveOneOf<unknown[] | boolean>([
@@ -953,14 +951,14 @@ export const marshalCreatePurgeRequestRequest = (
 
 export const marshalCreateRouteStageRequest = (
   request: CreateRouteStageRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf([{ param: 'waf_stage_id', value: request.wafStageId }]),
 })
 
 const marshalTLSSecret = (
   request: TLSSecret,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   region: request.region,
   secret_id: request.secretId,
@@ -985,7 +983,7 @@ export const marshalCreateTLSStageRequest = (
 
 export const marshalCreateWafStageRequest = (
   request: CreateWafStageRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mode: request.mode,
   paranoia_level: request.paranoiaLevel,
@@ -1004,21 +1002,21 @@ export const marshalSelectPlanRequest = (
 
 const marshalSetHeadStageRequestAddNewHeadStage = (
   request: SetHeadStageRequestAddNewHeadStage,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   new_stage_id: request.newStageId,
 })
 
 const marshalSetHeadStageRequestRemoveHeadStage = (
   request: SetHeadStageRequestRemoveHeadStage,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   remove_stage_id: request.removeStageId,
 })
 
 const marshalSetHeadStageRequestSwapHeadStage = (
   request: SetHeadStageRequestSwapHeadStage,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   current_stage_id: request.currentStageId,
   new_stage_id: request.newStageId,
@@ -1099,7 +1097,7 @@ export const marshalUpdateBackendStageRequest = (
 
 export const marshalUpdateCacheStageRequest = (
   request: UpdateCacheStageRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   fallback_ttl: request.fallbackTtl,
   include_cookies: request.includeCookies,
@@ -1112,7 +1110,7 @@ export const marshalUpdateCacheStageRequest = (
 
 export const marshalUpdateDNSStageRequest = (
   request: UpdateDNSStageRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   fqdns: request.fqdns,
   ...resolveOneOf([
@@ -1124,7 +1122,7 @@ export const marshalUpdateDNSStageRequest = (
 
 export const marshalUpdatePipelineRequest = (
   request: UpdatePipelineRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
@@ -1132,7 +1130,7 @@ export const marshalUpdatePipelineRequest = (
 
 export const marshalUpdateRouteStageRequest = (
   request: UpdateRouteStageRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf([{ param: 'waf_stage_id', value: request.wafStageId }]),
 })
@@ -1163,7 +1161,7 @@ export const marshalUpdateTLSStageRequest = (
 
 export const marshalUpdateWafStageRequest = (
   request: UpdateWafStageRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mode: request.mode,
   paranoia_level: request.paranoiaLevel,

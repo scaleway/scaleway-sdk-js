@@ -75,11 +75,6 @@ export interface BgpConfig {
   ipv6: string
 }
 
-export interface Range {
-  start: number
-  end: number
-}
-
 export interface PartnerHost {
   /**
    * ID of the partner facilitating the link.
@@ -151,10 +146,6 @@ export interface DedicatedConnection {
    * Demarcation details required by the data center to set up the supporting Cross Connect. This generally includes the physical space in the facility, the cabinet or rack the connection should land in, the patch panel to go in, the port designation, and the media type.
    */
   demarcationInfo?: string
-  /**
-   * Range in which to pick vlan for self-hosted links on this dedicated connection. Both start & end are included. Any range defined here must be itself included in the greater allowed range of vlans from 1500 to 3899 (this range is hardware dependent and can change over time, but actual range will be enforced).
-   */
-  vlanRange?: Range
   /**
    * Region of the dedicated connection.
    */
@@ -320,10 +311,6 @@ export interface Pop {
    * Available bandwidth in Mbits/s for future hosted links from available connections in this PoP.
    */
   availableLinkBandwidthsMbps: number[]
-  /**
-   * Pretty name of the PoP. Includes name, hosting provider and location information (ex: Paris - TeleHouse TH2).
-   */
-  displayName: string
   /**
    * Region of the PoP.
    */

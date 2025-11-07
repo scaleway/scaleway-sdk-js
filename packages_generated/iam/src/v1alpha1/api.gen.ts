@@ -1,8 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import {
-  API as ParentAPI,
   enrichForPagination,
+  API as ParentAPI,
   resolveOneOf,
   urlParams,
   validatePathParam,
@@ -19,7 +19,6 @@ import {
   marshalCreateSSHKeyRequest,
   marshalCreateUserRequest,
   marshalJoinUserConnectionRequest,
-  marshalParseSamlMetadataRequest,
   marshalRemoveGroupMemberRequest,
   marshalRemoveUserConnectionRequest,
   marshalSetGroupMembersRequest,
@@ -28,18 +27,16 @@ import {
   marshalUpdateAPIKeyRequest,
   marshalUpdateApplicationRequest,
   marshalUpdateGroupRequest,
-  marshalUpdateOrganizationLoginMethodsRequest,
   marshalUpdateOrganizationSecuritySettingsRequest,
   marshalUpdatePolicyRequest,
-  marshalUpdateSSHKeyRequest,
   marshalUpdateSamlRequest,
+  marshalUpdateSSHKeyRequest,
   marshalUpdateUserPasswordRequest,
   marshalUpdateUserRequest,
   marshalUpdateUserUsernameRequest,
   marshalValidateUserMFAOTPRequest,
   unmarshalAPIKey,
   unmarshalApplication,
-  unmarshalCreateScimTokenResponse,
   unmarshalEncodedJWT,
   unmarshalGetUserConnectionsResponse,
   unmarshalGroup,
@@ -55,30 +52,27 @@ import {
   unmarshalListPoliciesResponse,
   unmarshalListQuotaResponse,
   unmarshalListRulesResponse,
-  unmarshalListSSHKeysResponse,
   unmarshalListSamlCertificatesResponse,
-  unmarshalListScimTokensResponse,
+  unmarshalListSSHKeysResponse,
   unmarshalListUsersResponse,
   unmarshalLog,
   unmarshalMFAOTP,
   unmarshalOrganization,
   unmarshalOrganizationSecuritySettings,
-  unmarshalParseSamlMetadataResponse,
   unmarshalPolicy,
   unmarshalQuotum,
-  unmarshalSSHKey,
   unmarshalSaml,
   unmarshalSamlCertificate,
-  unmarshalScim,
   unmarshalSetRulesResponse,
+  unmarshalSSHKey,
   unmarshalUser,
   unmarshalValidateUserMFAOTPResponse,
 } from './marshalling.gen.js'
 import type {
-  APIKey,
   AddGroupMemberRequest,
   AddGroupMembersRequest,
   AddSamlCertificateRequest,
+  APIKey,
   Application,
   ClonePolicyRequest,
   CreateAPIKeyRequest,
@@ -87,8 +81,6 @@ import type {
   CreateJWTRequest,
   CreatePolicyRequest,
   CreateSSHKeyRequest,
-  CreateScimTokenRequest,
-  CreateScimTokenResponse,
   CreateUserMFAOTPRequest,
   CreateUserRequest,
   DeleteAPIKeyRequest,
@@ -96,15 +88,12 @@ import type {
   DeleteGroupRequest,
   DeleteJWTRequest,
   DeletePolicyRequest,
-  DeleteSSHKeyRequest,
   DeleteSamlCertificateRequest,
   DeleteSamlRequest,
-  DeleteScimRequest,
-  DeleteScimTokenRequest,
+  DeleteSSHKeyRequest,
   DeleteUserMFAOTPRequest,
   DeleteUserRequest,
   EnableOrganizationSamlRequest,
-  EnableOrganizationScimRequest,
   EncodedJWT,
   GetAPIKeyRequest,
   GetApplicationRequest,
@@ -123,8 +112,8 @@ import type {
   Group,
   InitiateUserConnectionRequest,
   InitiateUserConnectionResponse,
-  JWT,
   JoinUserConnectionRequest,
+  JWT,
   ListAPIKeysRequest,
   ListAPIKeysResponse,
   ListApplicationsRequest,
@@ -145,33 +134,29 @@ import type {
   ListQuotaResponse,
   ListRulesRequest,
   ListRulesResponse,
-  ListSSHKeysRequest,
-  ListSSHKeysResponse,
   ListSamlCertificatesRequest,
   ListSamlCertificatesResponse,
-  ListScimTokensRequest,
-  ListScimTokensResponse,
+  ListSSHKeysRequest,
+  ListSSHKeysResponse,
   ListUsersRequest,
   ListUsersResponse,
   LockUserRequest,
   Log,
   MFAOTP,
+  MigrateOrganizationGuestsRequest,
   Organization,
   OrganizationSecuritySettings,
-  ParseSamlMetadataRequest,
-  ParseSamlMetadataResponse,
   Policy,
   Quotum,
   RemoveGroupMemberRequest,
   RemoveUserConnectionRequest,
-  SSHKey,
   Saml,
   SamlCertificate,
-  Scim,
   SetGroupMembersRequest,
   SetOrganizationAliasRequest,
   SetRulesRequest,
   SetRulesResponse,
+  SSHKey,
   UnlockUserRequest,
   UpdateAPIKeyRequest,
   UpdateApplicationRequest,
@@ -179,8 +164,8 @@ import type {
   UpdateOrganizationLoginMethodsRequest,
   UpdateOrganizationSecuritySettingsRequest,
   UpdatePolicyRequest,
-  UpdateSSHKeyRequest,
   UpdateSamlRequest,
+  UpdateSSHKeyRequest,
   UpdateUserPasswordRequest,
   UpdateUserRequest,
   UpdateUserUsernameRequest,
@@ -907,7 +892,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Get an existing policy. Retrieve information about a policy, specified by the `policy_id` parameter. The policy's full details, including `id`, `name`, `organization_id`, `nb_rules` and `nb_scopes`, `nb_permission_sets` are returned in the response.
+   * Get an existing policy. Retrieve information about a policy, speficified by the `policy_id` parameter. The policy's full details, including `id`, `name`, `organization_id`, `nb_rules` and `nb_scopes`, `nb_permission_sets` are returned in the response.
    *
    * @param request - The request {@link GetPolicyRequest}
    * @returns A Promise of Policy
@@ -1409,6 +1394,19 @@ export class API extends ParentAPI {
     )
 
   /**
+   * Migrate the organization's guests to IAM members.
+   *
+   * @param request - The request {@link MigrateOrganizationGuestsRequest}
+   */
+  migrateOrganizationGuests = (
+    request: Readonly<MigrateOrganizationGuestsRequest> = {},
+  ) =>
+    this.client.fetch<void>({
+      method: 'POST',
+      path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/migrate-guests`,
+    })
+
+  /**
    * Set your Organization's allowed login methods.. Set your Organization's allowed login methods.
    *
    * @param request - The request {@link UpdateOrganizationLoginMethodsRequest}
@@ -1419,15 +1417,14 @@ export class API extends ParentAPI {
   ) =>
     this.client.fetch<Organization>(
       {
-        body: JSON.stringify(
-          marshalUpdateOrganizationLoginMethodsRequest(
-            request,
-            this.client.settings,
-          ),
-        ),
-        headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/login-methods`,
+        urlParams: urlParams(
+          ['login_magic_code_enabled', request.loginMagicCodeEnabled],
+          ['login_oauth2_enabled', request.loginOauth2Enabled],
+          ['login_password_enabled', request.loginPasswordEnabled],
+          ['login_saml_enabled', request.loginSamlEnabled],
+        ),
       },
       unmarshalOrganization,
     )
@@ -1497,25 +1494,6 @@ export class API extends ParentAPI {
     })
 
   /**
-   * Parse SAML xml metadata file.
-   *
-   * @param request - The request {@link ParseSamlMetadataRequest}
-   * @returns A Promise of ParseSamlMetadataResponse
-   */
-  parseSamlMetadata = async (request: Readonly<ParseSamlMetadataRequest>) =>
-    this.client.fetch<ParseSamlMetadataResponse>(
-      {
-        body: JSON.stringify(
-          await marshalParseSamlMetadataRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/iam/v1alpha1/parse-saml-metadata`,
-      },
-      unmarshalParseSamlMetadataResponse,
-    )
-
-  /**
    * List SAML certificates.
    *
    * @param request - The request {@link ListSamlCertificatesRequest}
@@ -1558,59 +1536,5 @@ export class API extends ParentAPI {
     this.client.fetch<void>({
       method: 'DELETE',
       path: `/iam/v1alpha1/saml-certificates/${validatePathParam('certificateId', request.certificateId)}`,
-    })
-
-  enableOrganizationScim = (
-    request: Readonly<EnableOrganizationScimRequest> = {},
-  ) =>
-    this.client.fetch<Scim>(
-      {
-        body: '{}',
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/scim`,
-      },
-      unmarshalScim,
-    )
-
-  deleteScim = (request: Readonly<DeleteScimRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/iam/v1alpha1/scim/${validatePathParam('scimId', request.scimId)}`,
-    })
-
-  protected pageOfListScimTokens = (request: Readonly<ListScimTokensRequest>) =>
-    this.client.fetch<ListScimTokensResponse>(
-      {
-        method: 'GET',
-        path: `/iam/v1alpha1/scim/${validatePathParam('scimId', request.scimId)}/tokens`,
-        urlParams: urlParams(
-          ['order_by', request.orderBy],
-          ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
-        ),
-      },
-      unmarshalListScimTokensResponse,
-    )
-
-  listScimTokens = (request: Readonly<ListScimTokensRequest>) =>
-    enrichForPagination('scimTokens', this.pageOfListScimTokens, request)
-
-  createScimToken = (request: Readonly<CreateScimTokenRequest>) =>
-    this.client.fetch<CreateScimTokenResponse>(
-      {
-        method: 'POST',
-        path: `/iam/v1alpha1/scim/${validatePathParam('scimId', request.scimId)}/tokens`,
-      },
-      unmarshalCreateScimTokenResponse,
-    )
-
-  deleteScimToken = (request: Readonly<DeleteScimTokenRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/iam/v1alpha1/scim-tokens/${validatePathParam('tokenId', request.tokenId)}`,
     })
 }

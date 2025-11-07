@@ -1,11 +1,12 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   ListServerPrivateNetworksResponse,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
@@ -73,7 +74,7 @@ export const unmarshalSetServerPrivateNetworksResponse = (
 
 export const marshalPrivateNetworkApiAddServerPrivateNetworkRequest = (
   request: PrivateNetworkApiAddServerPrivateNetworkRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ipam_ip_ids: request.ipamIpIds,
   private_network_id: request.privateNetworkId,
@@ -81,7 +82,7 @@ export const marshalPrivateNetworkApiAddServerPrivateNetworkRequest = (
 
 export const marshalPrivateNetworkApiSetServerPrivateNetworksRequest = (
   request: PrivateNetworkApiSetServerPrivateNetworksRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   per_private_network_ipam_ip_ids: request.perPrivateNetworkIpamIpIds,
 })

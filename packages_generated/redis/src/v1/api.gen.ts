@@ -1,14 +1,15 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  API as ParentAPI,
   enrichForPagination,
+  API as ParentAPI,
   toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import { CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_REDIS } from './content.gen.js'
 import {
   marshalAddAclRulesRequest,
@@ -28,8 +29,8 @@ import {
   unmarshalClusterMetricsResponse,
   unmarshalClusterSettingsResponse,
   unmarshalEndpoint,
-  unmarshalListClusterVersionsResponse,
   unmarshalListClustersResponse,
+  unmarshalListClusterVersionsResponse,
   unmarshalListNodeTypesResponse,
   unmarshalSetAclRulesResponse,
   unmarshalSetEndpointsResponse,
@@ -55,10 +56,10 @@ import type {
   GetClusterMetricsRequest,
   GetClusterRequest,
   GetEndpointRequest,
-  ListClusterVersionsRequest,
-  ListClusterVersionsResponse,
   ListClustersRequest,
   ListClustersResponse,
+  ListClusterVersionsRequest,
+  ListClusterVersionsResponse,
   ListNodeTypesRequest,
   ListNodeTypesResponse,
   MigrateClusterRequest,

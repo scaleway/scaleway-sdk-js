@@ -38,7 +38,7 @@ export interface EndpointPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-export interface EndpointPublicAccessDetails {}
+export type EndpointPublicAccessDetails = {}
 
 export interface EndpointSpecPrivateNetwork {
   /**
@@ -47,7 +47,7 @@ export interface EndpointSpecPrivateNetwork {
   privateNetworkId: string
 }
 
-export interface EndpointSpecPublic {}
+export type EndpointSpecPublic = {}
 
 export interface Endpoint {
   /**

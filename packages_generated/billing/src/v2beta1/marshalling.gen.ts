@@ -114,7 +114,6 @@ const unmarshalListConsumptionsResponseConsumption = (
   return {
     billedQuantity: data.billed_quantity,
     categoryName: data.category_name,
-    consumerId: data.consumer_id,
     productName: data.product_name,
     projectId: data.project_id,
     resourceName: data.resource_name,

@@ -490,7 +490,7 @@ export interface ListSnapshotsResponse {
    */
   snapshots: Snapshot[]
   /**
-   * Total number of snapshots in the project.
+   * Total number of snpashots in the project.
    */
   totalCount: number
 }

@@ -1,19 +1,18 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
-  marshalBlobToScwFile,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  APIKey,
   AddGroupMemberRequest,
   AddGroupMembersRequest,
   AddSamlCertificateRequest,
+  APIKey,
   Application,
   Connection,
   ConnectionConnectedOrganization,
@@ -24,7 +23,6 @@ import type {
   CreateJWTRequest,
   CreatePolicyRequest,
   CreateSSHKeyRequest,
-  CreateScimTokenResponse,
   CreateUserRequest,
   CreateUserRequestMember,
   EncodedJWT,
@@ -32,8 +30,8 @@ import type {
   GracePeriod,
   Group,
   InitiateUserConnectionResponse,
-  JWT,
   JoinUserConnectionRequest,
+  JWT,
   ListAPIKeysResponse,
   ListApplicationsResponse,
   ListGracePeriodsResponse,
@@ -44,16 +42,13 @@ import type {
   ListPoliciesResponse,
   ListQuotaResponse,
   ListRulesResponse,
-  ListSSHKeysResponse,
   ListSamlCertificatesResponse,
-  ListScimTokensResponse,
+  ListSSHKeysResponse,
   ListUsersResponse,
   Log,
   MFAOTP,
   Organization,
   OrganizationSecuritySettings,
-  ParseSamlMetadataRequest,
-  ParseSamlMetadataResponse,
   PermissionSet,
   Policy,
   Quotum,
@@ -62,24 +57,21 @@ import type {
   RemoveUserConnectionRequest,
   Rule,
   RuleSpecs,
-  SSHKey,
   Saml,
   SamlCertificate,
   SamlServiceProvider,
-  Scim,
-  ScimToken,
   SetGroupMembersRequest,
   SetOrganizationAliasRequest,
   SetRulesRequest,
   SetRulesResponse,
+  SSHKey,
   UpdateAPIKeyRequest,
   UpdateApplicationRequest,
   UpdateGroupRequest,
-  UpdateOrganizationLoginMethodsRequest,
   UpdateOrganizationSecuritySettingsRequest,
   UpdatePolicyRequest,
-  UpdateSSHKeyRequest,
   UpdateSamlRequest,
+  UpdateSSHKeyRequest,
   UpdateUserPasswordRequest,
   UpdateUserRequest,
   UpdateUserUsernameRequest,
@@ -323,36 +315,6 @@ export const unmarshalUser = (data: unknown): User => {
     updatedAt: unmarshalDate(data.updated_at),
     username: data.username,
   } as User
-}
-
-const unmarshalScimToken = (data: unknown): ScimToken => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ScimToken' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    createdAt: unmarshalDate(data.created_at),
-    expiresAt: unmarshalDate(data.expires_at),
-    id: data.id,
-    scimId: data.scim_id,
-  } as ScimToken
-}
-
-export const unmarshalCreateScimTokenResponse = (
-  data: unknown,
-): CreateScimTokenResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CreateScimTokenResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    bearerToken: data.bearer_token,
-    token: data.token ? unmarshalScimToken(data.token) : undefined,
-  } as CreateScimTokenResponse
 }
 
 export const unmarshalEncodedJWT = (data: unknown): EncodedJWT => {
@@ -678,21 +640,6 @@ export const unmarshalListSamlCertificatesResponse = (
   } as ListSamlCertificatesResponse
 }
 
-export const unmarshalListScimTokensResponse = (
-  data: unknown,
-): ListScimTokensResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListScimTokensResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    scimTokens: unmarshalArrayOfObject(data.scim_tokens, unmarshalScimToken),
-    totalCount: data.total_count,
-  } as ListScimTokensResponse
-}
-
 export const unmarshalListUsersResponse = (
   data: unknown,
 ): ListUsersResponse => {
@@ -751,25 +698,8 @@ export const unmarshalOrganizationSecuritySettings = (
     enforcePasswordRenewal: data.enforce_password_renewal,
     gracePeriodDuration: data.grace_period_duration,
     loginAttemptsBeforeLocked: data.login_attempts_before_locked,
-    maxApiKeyExpirationDuration: data.max_api_key_expiration_duration,
     maxLoginSessionDuration: data.max_login_session_duration,
   } as OrganizationSecuritySettings
-}
-
-export const unmarshalParseSamlMetadataResponse = (
-  data: unknown,
-): ParseSamlMetadataResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ParseSamlMetadataResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    entityId: data.entity_id,
-    signingCertificates: data.signing_certificates,
-    singleSignOnUrl: data.single_sign_on_url,
-  } as ParseSamlMetadataResponse
 }
 
 const unmarshalSamlServiceProvider = (data: unknown): SamlServiceProvider => {
@@ -803,19 +733,6 @@ export const unmarshalSaml = (data: unknown): Saml => {
   } as Saml
 }
 
-export const unmarshalScim = (data: unknown): Scim => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Scim' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    createdAt: unmarshalDate(data.created_at),
-    id: data.id,
-  } as Scim
-}
-
 export const unmarshalSetRulesResponse = (data: unknown): SetRulesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -844,7 +761,7 @@ export const unmarshalValidateUserMFAOTPResponse = (
 
 export const marshalAddGroupMemberRequest = (
   request: AddGroupMemberRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf([
     { param: 'user_id', value: request.userId },
@@ -854,7 +771,7 @@ export const marshalAddGroupMemberRequest = (
 
 export const marshalAddGroupMembersRequest = (
   request: AddGroupMembersRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   application_ids: request.applicationIds,
   user_ids: request.userIds,
@@ -862,7 +779,7 @@ export const marshalAddGroupMembersRequest = (
 
 export const marshalAddSamlCertificateRequest = (
   request: AddSamlCertificateRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   content: request.content,
   type: request.type,
@@ -870,7 +787,7 @@ export const marshalAddSamlCertificateRequest = (
 
 export const marshalCreateAPIKeyRequest = (
   request: CreateAPIKeyRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   default_project_id: request.defaultProjectId,
   description: request.description,
@@ -903,7 +820,7 @@ export const marshalCreateGroupRequest = (
 
 export const marshalCreateJWTRequest = (
   request: CreateJWTRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   referrer: request.referrer,
   user_id: request.userId,
@@ -911,7 +828,7 @@ export const marshalCreateJWTRequest = (
 
 const marshalRuleSpecs = (
   request: RuleSpecs,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   condition: request.condition,
   permission_set_names: request.permissionSetNames,
@@ -952,7 +869,7 @@ export const marshalCreateSSHKeyRequest = (
 
 const marshalCreateUserRequestMember = (
   request: CreateUserRequestMember,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   email: request.email,
   first_name: request.firstName,
@@ -985,21 +902,14 @@ export const marshalCreateUserRequest = (
 
 export const marshalJoinUserConnectionRequest = (
   request: JoinUserConnectionRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   token: request.token,
 })
 
-export const marshalParseSamlMetadataRequest = async (
-  request: ParseSamlMetadataRequest,
-  defaults: DefaultValues,
-): Promise<Record<string, unknown>> => ({
-  file: await marshalBlobToScwFile(request.file),
-})
-
 export const marshalRemoveGroupMemberRequest = (
   request: RemoveGroupMemberRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf([
     { param: 'user_id', value: request.userId },
@@ -1009,14 +919,14 @@ export const marshalRemoveGroupMemberRequest = (
 
 export const marshalRemoveUserConnectionRequest = (
   request: RemoveUserConnectionRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   target_user_id: request.targetUserId,
 })
 
 export const marshalSetGroupMembersRequest = (
   request: SetGroupMembersRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   application_ids: request.applicationIds,
   user_ids: request.userIds,
@@ -1024,7 +934,7 @@ export const marshalSetGroupMembersRequest = (
 
 export const marshalSetOrganizationAliasRequest = (
   request: SetOrganizationAliasRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   alias: request.alias,
 })
@@ -1039,16 +949,15 @@ export const marshalSetRulesRequest = (
 
 export const marshalUpdateAPIKeyRequest = (
   request: UpdateAPIKeyRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   default_project_id: request.defaultProjectId,
   description: request.description,
-  expires_at: request.expiresAt,
 })
 
 export const marshalUpdateApplicationRequest = (
   request: UpdateApplicationRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
@@ -1057,37 +966,26 @@ export const marshalUpdateApplicationRequest = (
 
 export const marshalUpdateGroupRequest = (
   request: UpdateGroupRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
   tags: request.tags,
 })
 
-export const marshalUpdateOrganizationLoginMethodsRequest = (
-  request: UpdateOrganizationLoginMethodsRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  login_magic_code_enabled: request.loginMagicCodeEnabled,
-  login_oauth2_enabled: request.loginOauth2Enabled,
-  login_password_enabled: request.loginPasswordEnabled,
-  login_saml_enabled: request.loginSamlEnabled,
-})
-
 export const marshalUpdateOrganizationSecuritySettingsRequest = (
   request: UpdateOrganizationSecuritySettingsRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enforce_password_renewal: request.enforcePasswordRenewal,
   grace_period_duration: request.gracePeriodDuration,
   login_attempts_before_locked: request.loginAttemptsBeforeLocked,
-  max_api_key_expiration_duration: request.maxApiKeyExpirationDuration,
   max_login_session_duration: request.maxLoginSessionDuration,
 })
 
 export const marshalUpdatePolicyRequest = (
   request: UpdatePolicyRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
@@ -1102,7 +1000,7 @@ export const marshalUpdatePolicyRequest = (
 
 export const marshalUpdateSSHKeyRequest = (
   request: UpdateSSHKeyRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   disabled: request.disabled,
   name: request.name,
@@ -1110,7 +1008,7 @@ export const marshalUpdateSSHKeyRequest = (
 
 export const marshalUpdateSamlRequest = (
   request: UpdateSamlRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   entity_id: request.entityId,
   single_sign_on_url: request.singleSignOnUrl,
@@ -1118,14 +1016,14 @@ export const marshalUpdateSamlRequest = (
 
 export const marshalUpdateUserPasswordRequest = (
   request: UpdateUserPasswordRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   password: request.password,
 })
 
 export const marshalUpdateUserRequest = (
   request: UpdateUserRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   email: request.email,
   first_name: request.firstName,
@@ -1137,14 +1035,14 @@ export const marshalUpdateUserRequest = (
 
 export const marshalUpdateUserUsernameRequest = (
   request: UpdateUserUsernameRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   username: request.username,
 })
 
 export const marshalValidateUserMFAOTPRequest = (
   request: ValidateUserMFAOTPRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   one_time_password: request.oneTimePassword,
 })
