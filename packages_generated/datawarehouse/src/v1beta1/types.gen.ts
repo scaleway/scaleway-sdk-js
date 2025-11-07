@@ -37,7 +37,7 @@ export interface EndpointPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-export interface EndpointPublicDetails {}
+export type EndpointPublicDetails = {}
 
 export interface EndpointService {
   protocol: EndpointServiceProtocol
@@ -51,7 +51,7 @@ export interface EndpointSpecPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-export interface EndpointSpecPublicDetails {}
+export type EndpointSpecPublicDetails = {}
 
 export interface Endpoint {
   /**
@@ -138,7 +138,7 @@ export interface Deployment {
    */
   updatedAt?: Date
   /**
-   * ClickHouse® version.
+   * Clickhouse version.
    */
   version: string
   /**
@@ -249,7 +249,7 @@ export type CreateDeploymentRequest = {
    */
   tags?: string[]
   /**
-   * ClickHouse® version to use for the deployment.
+   * Clickhouse version to use for the deployment.
    */
   version: string
   /**

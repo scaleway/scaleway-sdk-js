@@ -1,13 +1,14 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { ApiLocality } from '@scaleway/sdk-client'
 import {
-  API as ParentAPI,
   enrichForPagination,
+  API as ParentAPI,
   toApiLocality,
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
-import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   marshalGlobalApiCreateGrafanaUserRequest,
   marshalGlobalApiResetGrafanaUserPasswordRequest,
@@ -19,8 +20,10 @@ import {
   marshalRegionalApiDeleteContactPointRequest,
   marshalRegionalApiDisableAlertManagerRequest,
   marshalRegionalApiDisableAlertRulesRequest,
+  marshalRegionalApiDisableManagedAlertsRequest,
   marshalRegionalApiEnableAlertManagerRequest,
   marshalRegionalApiEnableAlertRulesRequest,
+  marshalRegionalApiEnableManagedAlertsRequest,
   marshalRegionalApiTriggerTestAlertRequest,
   marshalRegionalApiUpdateContactPointRequest,
   marshalRegionalApiUpdateDataSourceRequest,
@@ -83,8 +86,10 @@ import type {
   RegionalApiDeleteTokenRequest,
   RegionalApiDisableAlertManagerRequest,
   RegionalApiDisableAlertRulesRequest,
+  RegionalApiDisableManagedAlertsRequest,
   RegionalApiEnableAlertManagerRequest,
   RegionalApiEnableAlertRulesRequest,
+  RegionalApiEnableManagedAlertsRequest,
   RegionalApiGetAlertManagerRequest,
   RegionalApiGetConfigRequest,
   RegionalApiGetDataSourceRequest,
@@ -153,11 +158,9 @@ The output returned displays the URL to access your Cockpit's Grafana.
     })
 
   /**
-   * (Deprecated) EOL 2026-01-20. Create a Grafana user
-Create a Grafana user to connect to your Cockpit's Grafana. Upon creation, your user password displays only once, so make sure that you save it.
+   * Create a Grafana user. Create a Grafana user to connect to your Cockpit's Grafana. Upon creation, your user password displays only once, so make sure that you save it.
 Each Grafana user is associated with a role: viewer or editor. A viewer can only view dashboards, whereas an editor can create and edit dashboards. Note that the `admin` username is not available for creation.
    *
-   * @deprecated
    * @param request - The request {@link GlobalApiCreateGrafanaUserRequest}
    * @returns A Promise of GrafanaUser
    */
@@ -201,10 +204,8 @@ Each Grafana user is associated with a role: viewer or editor. A viewer can only
     )
 
   /**
-   * (Deprecated) EOL 2026-01-20. List Grafana users
-List all Grafana users created in your Cockpit's Grafana. By default, the Grafana users returned in the list are ordered in ascending order.
+   * List Grafana users. List all Grafana users created in your Cockpit's Grafana. By default, the Grafana users returned in the list are ordered in ascending order.
    *
-   * @deprecated
    * @param request - The request {@link GlobalApiListGrafanaUsersRequest}
    * @returns A Promise of ListGrafanaUsersResponse
    */
@@ -213,10 +214,8 @@ List all Grafana users created in your Cockpit's Grafana. By default, the Grafan
   ) => enrichForPagination('grafanaUsers', this.pageOfListGrafanaUsers, request)
 
   /**
-   * (Deprecated) EOL 2026-01-20. Delete a Grafana user
-Delete a Grafana user from your Cockpit's Grafana, specified by the ID of the Project the Cockpit belongs to, and the ID of the Grafana user.
+   * Delete a Grafana user. Delete a Grafana user from your Cockpit's Grafana, specified by the ID of the Project the Cockpit belongs to, and the ID of the Grafana user.
    *
-   * @deprecated
    * @param request - The request {@link GlobalApiDeleteGrafanaUserRequest}
    */
   deleteGrafanaUser = (request: Readonly<GlobalApiDeleteGrafanaUserRequest>) =>
@@ -230,11 +229,9 @@ Delete a Grafana user from your Cockpit's Grafana, specified by the ID of the Pr
     })
 
   /**
-   * (Deprecated) EOL 2026-01-20. Reset a Grafana user password
-Reset the password of a Grafana user, specified by the ID of the Project the Cockpit belongs to, and the ID of the Grafana user.
+   * Reset a Grafana user password. Reset the password of a Grafana user, specified by the ID of the Project the Cockpit belongs to, and the ID of the Grafana user.
 A new password regenerates and only displays once. Make sure that you save it.
    *
-   * @deprecated
    * @param request - The request {@link GlobalApiResetGrafanaUserPasswordRequest}
    * @returns A Promise of GrafanaUser
    */
@@ -336,7 +333,7 @@ A new password regenerates and only displays once. Make sure that you save it.
 
   /**
    * List plan types. Retrieve a list of available pricing plan types.
-Deprecated due to retention now being managed at the data source level.
+Deprecated: retention is now managed at the data source level.
    *
    * @deprecated
    * @param request - The request {@link GlobalApiListPlansRequest}
@@ -347,7 +344,7 @@ Deprecated due to retention now being managed at the data source level.
 
   /**
    * Apply a pricing plan. Apply a pricing plan on a given Project. You must specify the ID of the pricing plan type. Note that you will be billed for the plan you apply.
-Deprecated due to retention now being managed at the data source level.
+Deprecated: retention is now managed at the data source level.
    *
    * @deprecated
    * @param request - The request {@link GlobalApiSelectPlanRequest}
@@ -368,7 +365,7 @@ Deprecated due to retention now being managed at the data source level.
 
   /**
    * Get current plan. Retrieve a pricing plan for the given Project, specified by the ID of the Project.
-Deprecated due to retention now being managed at the data source level.
+Deprecated: retention is now managed at the data source level.
    *
    * @deprecated
    * @param request - The request {@link GlobalApiGetCurrentPlanRequest}
@@ -698,7 +695,7 @@ The output returned displays a URL to access the Alert manager, and whether the 
     )
 
   /**
-   * Get the number of enabled rules. Get a detailed count of enabled rules in the specified Project. Includes preconfigured and custom alerting and recording rules.
+   * Get a detailed count of enabled rules in the specified Project. Includes preconfigured and custom alerting and recording rules.. Get a detailed count of enabled rules in the specified Project. Includes preconfigured and custom alerting and recording rules.
    *
    * @param request - The request {@link RegionalApiGetRulesCountRequest}
    * @returns A Promise of GetRulesCountResponse
@@ -836,6 +833,54 @@ If you need to receive alerts for other receivers, you can create additional con
         ),
       },
       unmarshalListAlertsResponse,
+    )
+
+  /**
+   * Enable managed alerts. Enable the sending of managed alerts for the specified Project. Managed alerts are predefined alerts that apply to Scaleway recources integrated with Cockpit by default.
+   *
+   * @param request - The request {@link RegionalApiEnableManagedAlertsRequest}
+   * @returns A Promise of AlertManager
+   */
+  enableManagedAlerts = (
+    request: Readonly<RegionalApiEnableManagedAlertsRequest> = {},
+  ) =>
+    this.client.fetch<AlertManager>(
+      {
+        body: JSON.stringify(
+          marshalRegionalApiEnableManagedAlertsRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/managed-alerts/enable`,
+      },
+      unmarshalAlertManager,
+    )
+
+  /**
+   * Disable managed alerts. Disable the sending of managed alerts for the specified Project.
+   *
+   * @param request - The request {@link RegionalApiDisableManagedAlertsRequest}
+   * @returns A Promise of AlertManager
+   */
+  disableManagedAlerts = (
+    request: Readonly<RegionalApiDisableManagedAlertsRequest> = {},
+  ) =>
+    this.client.fetch<AlertManager>(
+      {
+        body: JSON.stringify(
+          marshalRegionalApiDisableManagedAlertsRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/managed-alerts/disable`,
+      },
+      unmarshalAlertManager,
     )
 
   /**

@@ -1,12 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   AttachRoutingPolicyRequest,
   AttachVpcRequest,
@@ -24,26 +25,12 @@ import type {
   Partner,
   PartnerHost,
   Pop,
-  Range,
   RoutingPolicy,
   SelfHost,
   SetRoutingPolicyRequest,
   UpdateLinkRequest,
   UpdateRoutingPolicyRequest,
 } from './types.gen.js'
-
-const unmarshalRange = (data: unknown): Range => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Range' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    end: data.end,
-    start: data.start,
-  } as Range
-}
 
 export const unmarshalDedicatedConnection = (
   data: unknown,
@@ -68,7 +55,6 @@ export const unmarshalDedicatedConnection = (
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
-    vlanRange: data.vlan_range ? unmarshalRange(data.vlan_range) : undefined,
   } as DedicatedConnection
 }
 
@@ -179,7 +165,6 @@ export const unmarshalPop = (data: unknown): Pop => {
     address: data.address,
     availableLinkBandwidthsMbps: data.available_link_bandwidths_mbps,
     city: data.city,
-    displayName: data.display_name,
     hostingProviderName: data.hosting_provider_name,
     id: data.id,
     logoUrl: data.logo_url,
@@ -291,14 +276,14 @@ export const unmarshalListRoutingPoliciesResponse = (
 
 export const marshalAttachRoutingPolicyRequest = (
   request: AttachRoutingPolicyRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   routing_policy_id: request.routingPolicyId,
 })
 
 export const marshalAttachVpcRequest = (
   request: AttachVpcRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   vpc_id: request.vpcId,
 })
@@ -336,21 +321,21 @@ export const marshalCreateRoutingPolicyRequest = (
 
 export const marshalDetachRoutingPolicyRequest = (
   request: DetachRoutingPolicyRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   routing_policy_id: request.routingPolicyId,
 })
 
 export const marshalSetRoutingPolicyRequest = (
   request: SetRoutingPolicyRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   routing_policy_id: request.routingPolicyId,
 })
 
 export const marshalUpdateLinkRequest = (
   request: UpdateLinkRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   peer_asn: request.peerAsn,
@@ -359,7 +344,7 @@ export const marshalUpdateLinkRequest = (
 
 export const marshalUpdateRoutingPolicyRequest = (
   request: UpdateRoutingPolicyRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   prefix_filter_in: request.prefixFilterIn,

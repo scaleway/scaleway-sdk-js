@@ -146,10 +146,6 @@ export interface ScalewayLb {
    * Fully Qualified Domain Name (in the format subdomain.example.com) to use in HTTP requests sent towards your Load Balancer.
    */
   domainName?: string
-  /**
-   * Defines whether to forward websocket requests to the load balancer.
-   */
-  hasWebsocket?: boolean
 }
 
 export interface RuleHttpMatchPathFilter {
@@ -295,11 +291,7 @@ export interface DNSStage {
    */
   id: string
   /**
-   * Default Fully Qualified Domain Name attached to the stage.
-   */
-  defaultFqdn: string
-  /**
-   * List of additional (custom) Fully Qualified Domain Names attached to the stage.
+   * List of Fully Qualified Domain Names attached to the stage.
    */
   fqdns: string[]
   /**

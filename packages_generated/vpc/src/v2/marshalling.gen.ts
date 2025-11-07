@@ -1,12 +1,12 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   AclRule,
   AddSubnetsRequest,
@@ -239,7 +239,7 @@ export const unmarshalSetAclResponse = (data: unknown): SetAclResponse => {
 
 export const marshalAddSubnetsRequest = (
   request: AddSubnetsRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   subnets: request.subnets,
 })
@@ -258,7 +258,7 @@ export const marshalCreatePrivateNetworkRequest = (
 
 export const marshalCreateRouteRequest = (
   request: CreateRouteRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   destination: request.destination,
@@ -280,14 +280,14 @@ export const marshalCreateVPCRequest = (
 
 export const marshalDeleteSubnetsRequest = (
   request: DeleteSubnetsRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   subnets: request.subnets,
 })
 
 export const marshalAclRule = (
   request: AclRule,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   action: request.action,
   description: request.description,
@@ -311,7 +311,7 @@ export const marshalSetAclRequest = (
 
 export const marshalUpdatePrivateNetworkRequest = (
   request: UpdatePrivateNetworkRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   default_route_propagation_enabled: request.defaultRoutePropagationEnabled,
   name: request.name,
@@ -320,7 +320,7 @@ export const marshalUpdatePrivateNetworkRequest = (
 
 export const marshalUpdateRouteRequest = (
   request: UpdateRouteRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   destination: request.destination,
@@ -331,7 +331,7 @@ export const marshalUpdateRouteRequest = (
 
 export const marshalUpdateVPCRequest = (
   request: UpdateVPCRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   tags: request.tags,

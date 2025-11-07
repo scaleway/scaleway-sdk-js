@@ -283,7 +283,7 @@ export interface Domain {
    */
   url: string
   /**
-   * State of the domain.
+   * State of the doamin.
    */
   status: DomainStatus
   /**
@@ -604,7 +604,7 @@ export type CreateDomainRequest = {
    */
   region?: ScwRegion
   /**
-   * Hostname to create.
+   * Hostame to create.
    */
   hostname: string
   /**

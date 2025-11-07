@@ -1,13 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   CreateDeploymentRequest,
   CreateEndpointRequest,
@@ -23,9 +23,9 @@ import type {
   ListNodeTypesResponse,
   Model,
   ModelSource,
-  ModelSupportInfo,
   ModelSupportedNode,
   ModelSupportedQuantization,
+  ModelSupportInfo,
   NodeType,
   UpdateDeploymentRequest,
   UpdateEndpointRequest,
@@ -263,19 +263,19 @@ export const unmarshalListNodeTypesResponse = (
 
 const marshalEndpointPrivateNetworkDetails = (
   request: EndpointPrivateNetworkDetails,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_network_id: request.privateNetworkId,
 })
 
 const marshalEndpointPublicNetworkDetails = (
-  request: EndpointPublicNetworkDetails,
-  defaults: DefaultValues,
+  _request: EndpointPublicNetworkDetails,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
 const marshalDeploymentQuantization = (
   request: DeploymentQuantization,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   bits: request.bits,
 })
@@ -335,7 +335,7 @@ export const marshalCreateEndpointRequest = (
 
 const marshalModelSource = (
   request: ModelSource,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   url: request.url,
   ...resolveOneOf([{ param: 'secret', value: request.secret }]),
@@ -367,7 +367,7 @@ export const marshalUpdateDeploymentRequest = (
 
 export const marshalUpdateEndpointRequest = (
   request: UpdateEndpointRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   disable_auth: request.disableAuth,
 })

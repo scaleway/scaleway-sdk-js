@@ -288,7 +288,7 @@ export interface Pool {
    */
   autohealing: boolean
   /**
-   * Tags associated with the pool, see [managing tags](https://www.scaleway.com/en/docs/kubernetes/api-cli/managing-tags).
+   * Tags associated with the pool, see [managing tags](https://www.scaleway.com/en/docs/containers/kubernetes/api-cli/managing-tags).
    */
   tags: string[]
   /**
@@ -501,7 +501,7 @@ export interface CreateClusterRequestPoolConfig {
    */
   autohealing: boolean
   /**
-   * Tags associated with the pool, see [managing tags](https://www.scaleway.com/en/docs/kubernetes/api-cli/managing-tags).
+   * Tags associated with the pool, see [managing tags](https://www.scaleway.com/en/docs/containers/kubernetes/api-cli/managing-tags).
    */
   tags: string[]
   /**
@@ -1086,7 +1086,7 @@ export type CreatePoolRequest = {
    */
   autohealing: boolean
   /**
-   * Tags associated with the pool, see [managing tags](https://www.scaleway.com/en/docs/kubernetes/api-cli/managing-tags).
+   * Tags associated with the pool, see [managing tags](https://www.scaleway.com/en/docs/containers/kubernetes/api-cli/managing-tags).
    */
   tags?: string[]
   /**

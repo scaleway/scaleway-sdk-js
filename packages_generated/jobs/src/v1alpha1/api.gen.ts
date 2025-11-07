@@ -1,13 +1,14 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { ApiLocality } from '@scaleway/sdk-client'
 import {
-  API as ParentAPI,
   enrichForPagination,
+  API as ParentAPI,
   toApiLocality,
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
-import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   marshalCreateJobDefinitionRequest,
   marshalCreateJobDefinitionSecretsRequest,
@@ -160,7 +161,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete an existing job definition by its unique identifier.
+   * Delete an exsisting job definition by its unique identifier.
    *
    * @param request - The request {@link DeleteJobDefinitionRequest}
    */

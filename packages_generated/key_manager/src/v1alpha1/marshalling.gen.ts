@@ -1,12 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   CreateKeyRequest,
   DataKey,
@@ -222,7 +223,7 @@ export const unmarshalVerifyResponse = (data: unknown): VerifyResponse => {
 
 const marshalKeyRotationPolicy = (
   request: KeyRotationPolicy,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   next_rotation_at: request.nextRotationAt,
   rotation_period: request.rotationPeriod,
@@ -230,7 +231,7 @@ const marshalKeyRotationPolicy = (
 
 const marshalKeyUsage = (
   request: KeyUsage,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf([
     { param: 'symmetric_encryption', value: request.symmetricEncryption },
@@ -261,7 +262,7 @@ export const marshalCreateKeyRequest = (
 
 export const marshalDecryptRequest = (
   request: DecryptRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   associated_data: request.associatedData,
   ciphertext: request.ciphertext,
@@ -269,7 +270,7 @@ export const marshalDecryptRequest = (
 
 export const marshalEncryptRequest = (
   request: EncryptRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   associated_data: request.associatedData,
   plaintext: request.plaintext,
@@ -277,7 +278,7 @@ export const marshalEncryptRequest = (
 
 export const marshalGenerateDataKeyRequest = (
   request: GenerateDataKeyRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   algorithm: request.algorithm,
   without_plaintext: request.withoutPlaintext,
@@ -285,7 +286,7 @@ export const marshalGenerateDataKeyRequest = (
 
 export const marshalImportKeyMaterialRequest = (
   request: ImportKeyMaterialRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   key_material: request.keyMaterial,
   salt: request.salt,
@@ -293,7 +294,7 @@ export const marshalImportKeyMaterialRequest = (
 
 export const marshalSignRequest = (
   request: SignRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   digest: request.digest,
 })
@@ -313,7 +314,7 @@ export const marshalUpdateKeyRequest = (
 
 export const marshalVerifyRequest = (
   request: VerifyRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   digest: request.digest,
   signature: request.signature,

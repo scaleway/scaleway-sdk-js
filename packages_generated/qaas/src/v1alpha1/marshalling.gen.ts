@@ -1,5 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
@@ -7,7 +9,6 @@ import {
   unmarshalDate,
   unmarshalMoney,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Application,
   Booking,
@@ -25,8 +26,8 @@ import type {
   ListJobsResponse,
   ListModelsResponse,
   ListPlatformsResponse,
-  ListProcessResultsResponse,
   ListProcessesResponse,
+  ListProcessResultsResponse,
   ListSessionACLsResponse,
   ListSessionsResponse,
   Model,
@@ -86,7 +87,6 @@ export const unmarshalBooking = (data: unknown): Booking => {
     progressMessage: data.progress_message,
     startedAt: unmarshalDate(data.started_at),
     status: data.status,
-    timeZone: data.time_zone,
     updatedAt: unmarshalDate(data.updated_at),
   } as Booking
 }
@@ -451,7 +451,7 @@ export const unmarshalListSessionsResponse = (
 
 const marshalJobCircuit = (
   request: JobCircuit,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf([
     { param: 'perceval_circuit', value: request.percevalCircuit },
@@ -494,12 +494,11 @@ export const marshalCreateProcessRequest = (
 
 const marshalCreateSessionRequestBookingDemand = (
   request: CreateSessionRequestBookingDemand,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   finished_at: request.finishedAt,
   started_at: request.startedAt,
-  time_zone: request.timeZone,
 })
 
 export const marshalCreateSessionRequest = (
@@ -526,14 +525,14 @@ export const marshalCreateSessionRequest = (
 
 export const marshalUpdateBookingRequest = (
   request: UpdateBookingRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
 })
 
 export const marshalUpdateJobRequest = (
   request: UpdateJobRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   tags: request.tags,
@@ -541,7 +540,7 @@ export const marshalUpdateJobRequest = (
 
 export const marshalUpdateProcessRequest = (
   request: UpdateProcessRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   tags: request.tags,
@@ -549,7 +548,7 @@ export const marshalUpdateProcessRequest = (
 
 export const marshalUpdateSessionRequest = (
   request: UpdateSessionRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   max_duration: request.maxDuration,
   max_idle_duration: request.maxIdleDuration,

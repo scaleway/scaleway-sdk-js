@@ -1,13 +1,14 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { WaitForOptions } from '@scaleway/sdk-client'
 import {
-  API as ParentAPI,
   enrichForPagination,
+  API as ParentAPI,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { WaitForOptions } from '@scaleway/sdk-client'
 import {
   DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_DOMAIN,
   SSL_CERTIFICATE_TRANSIENT_STATUSES as SSL_CERTIFICATE_TRANSIENT_STATUSES_DOMAIN,
@@ -37,10 +38,10 @@ import {
   unmarshalCheckContactsCompatibilityResponse,
   unmarshalClearDNSZoneRecordsResponse,
   unmarshalContact,
-  unmarshalDNSZone,
   unmarshalDeleteDNSZoneResponse,
   unmarshalDeleteExternalDomainResponse,
   unmarshalDeleteSSLCertificateResponse,
+  unmarshalDNSZone,
   unmarshalDomain,
   unmarshalGetDNSZoneTsigKeyResponse,
   unmarshalGetDNSZoneVersionDiffResponse,
@@ -51,9 +52,9 @@ import {
   unmarshalListContactsResponse,
   unmarshalListDNSZoneNameserversResponse,
   unmarshalListDNSZoneRecordsResponse,
+  unmarshalListDNSZonesResponse,
   unmarshalListDNSZoneVersionRecordsResponse,
   unmarshalListDNSZoneVersionsResponse,
-  unmarshalListDNSZonesResponse,
   unmarshalListDomainHostsResponse,
   unmarshalListDomainsResponse,
   unmarshalListInboundTransfersResponse,
@@ -66,8 +67,8 @@ import {
   unmarshalRegisterExternalDomainResponse,
   unmarshalRestoreDNSZoneVersionResponse,
   unmarshalRetryInboundTransferResponse,
-  unmarshalSSLCertificate,
   unmarshalSearchAvailableDomainsResponse,
+  unmarshalSSLCertificate,
   unmarshalUpdateDNSZoneNameserversResponse,
   unmarshalUpdateDNSZoneRecordsResponse,
 } from './marshalling.gen.js'
@@ -79,13 +80,13 @@ import type {
   Contact,
   CreateDNSZoneRequest,
   CreateSSLCertificateRequest,
-  DNSZone,
   DeleteDNSZoneRequest,
   DeleteDNSZoneResponse,
   DeleteDNSZoneTsigKeyRequest,
   DeleteExternalDomainResponse,
   DeleteSSLCertificateRequest,
   DeleteSSLCertificateResponse,
+  DNSZone,
   Domain,
   ExportRawDNSZoneRequest,
   GetDNSZoneTsigKeyRequest,
@@ -104,12 +105,12 @@ import type {
   ListDNSZoneNameserversResponse,
   ListDNSZoneRecordsRequest,
   ListDNSZoneRecordsResponse,
+  ListDNSZonesRequest,
+  ListDNSZonesResponse,
   ListDNSZoneVersionRecordsRequest,
   ListDNSZoneVersionRecordsResponse,
   ListDNSZoneVersionsRequest,
   ListDNSZoneVersionsResponse,
-  ListDNSZonesRequest,
-  ListDNSZonesResponse,
   ListDomainHostsResponse,
   ListDomainsResponse,
   ListInboundTransfersResponse,
@@ -155,8 +156,8 @@ import type {
   RestoreDNSZoneVersionRequest,
   RestoreDNSZoneVersionResponse,
   RetryInboundTransferResponse,
-  SSLCertificate,
   SearchAvailableDomainsResponse,
+  SSLCertificate,
   UpdateDNSZoneNameserversRequest,
   UpdateDNSZoneNameserversResponse,
   UpdateDNSZoneRecordsRequest,
@@ -564,7 +565,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
     )
 
   /**
-   * Get a DNS zone's TLS certificate. Get the DNS zone's TLS certificate. If you do not have a certificate, the output returns `no certificate found`.
+   * Get a DNS zone's TLS certificate. Get the DNS zone's TLS certificate. If you do not have a certificate, the ouptut returns `no certificate found`.
    *
    * @param request - The request {@link GetSSLCertificateRequest}
    * @returns A Promise of SSLCertificate
@@ -1209,7 +1210,7 @@ If you add the same contact for multiple roles (owner, administrative, technical
     )
 
   /**
-   * Get a domain's authorization code. Retrieve the authorization code to transfer an unlocked domain. The output returns an error if the domain is locked.
+   * Get a domain's authorization code. Retrieve the authorization code to tranfer an unlocked domain. The output returns an error if the domain is locked.
 Some TLDs may have a different procedure to retrieve the authorization code. In that case, the information displays in the message field.
    *
    * @param request - The request {@link RegistrarApiGetDomainAuthCodeRequest}

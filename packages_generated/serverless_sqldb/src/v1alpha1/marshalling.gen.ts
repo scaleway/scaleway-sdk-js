@@ -1,11 +1,12 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   CreateDatabaseRequest,
   Database,
@@ -106,14 +107,14 @@ export const marshalCreateDatabaseRequest = (
 
 export const marshalRestoreDatabaseFromBackupRequest = (
   request: RestoreDatabaseFromBackupRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   backup_id: request.backupId,
 })
 
 export const marshalUpdateDatabaseRequest = (
   request: UpdateDatabaseRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   cpu_max: request.cpuMax,
   cpu_min: request.cpuMin,

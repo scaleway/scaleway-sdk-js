@@ -1,13 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Acl,
   AclAction,
@@ -50,8 +50,8 @@ import type {
   ListFrontendsResponse,
   ListIpsResponse,
   ListLbPrivateNetworksResponse,
-  ListLbTypesResponse,
   ListLbsResponse,
+  ListLbTypesResponse,
   ListRoutesResponse,
   ListSubscriberResponse,
   MigrateLbRequest,
@@ -64,10 +64,10 @@ import type {
   RouteMatch,
   SetAclsResponse,
   SetBackendServersRequest,
-  SubscribeToLbRequest,
   Subscriber,
   SubscriberEmailConfig,
   SubscriberWebhookConfig,
+  SubscribeToLbRequest,
   UpdateAclRequest,
   UpdateBackendRequest,
   UpdateCertificateRequest,
@@ -842,26 +842,26 @@ export const unmarshalSetAclsResponse = (data: unknown): SetAclsResponse => {
 
 export const marshalAddBackendServersRequest = (
   request: AddBackendServersRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   server_ip: request.serverIp,
 })
 
 const marshalPrivateNetworkDHCPConfig = (
   request: PrivateNetworkDHCPConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ip_id: request.ipId,
 })
 
 const marshalPrivateNetworkIpamConfig = (
-  request: PrivateNetworkIpamConfig,
-  defaults: DefaultValues,
+  _request: PrivateNetworkIpamConfig,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
 const marshalPrivateNetworkStaticConfig = (
   request: PrivateNetworkStaticConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ip_address: request.ipAddress,
 })
@@ -898,7 +898,7 @@ export const marshalAttachPrivateNetworkRequest = (
 
 const marshalAclActionRedirect = (
   request: AclActionRedirect,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   code: request.code,
   target: request.target,
@@ -918,7 +918,7 @@ const marshalAclAction = (
 
 const marshalAclMatch = (
   request: AclMatch,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   http_filter: request.httpFilter,
   http_filter_option: request.httpFilterOption,
@@ -944,7 +944,7 @@ export const marshalCreateAclRequest = (
 
 const marshalHealthCheckHttpConfig = (
   request: HealthCheckHttpConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   code: request.code,
   host_header: request.hostHeader,
@@ -954,7 +954,7 @@ const marshalHealthCheckHttpConfig = (
 
 const marshalHealthCheckHttpsConfig = (
   request: HealthCheckHttpsConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   code: request.code,
   host_header: request.hostHeader,
@@ -964,32 +964,32 @@ const marshalHealthCheckHttpsConfig = (
 })
 
 const marshalHealthCheckLdapConfig = (
-  request: HealthCheckLdapConfig,
-  defaults: DefaultValues,
+  _request: HealthCheckLdapConfig,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
 const marshalHealthCheckMysqlConfig = (
   request: HealthCheckMysqlConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   user: request.user,
 })
 
 const marshalHealthCheckPgsqlConfig = (
   request: HealthCheckPgsqlConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   user: request.user,
 })
 
 const marshalHealthCheckRedisConfig = (
-  request: HealthCheckRedisConfig,
-  defaults: DefaultValues,
+  _request: HealthCheckRedisConfig,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
 const marshalHealthCheckTcpConfig = (
-  request: HealthCheckTcpConfig,
-  defaults: DefaultValues,
+  _request: HealthCheckTcpConfig,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
 const marshalHealthCheck = (
@@ -1084,14 +1084,14 @@ export const marshalCreateBackendRequest = (
 
 const marshalCreateCertificateRequestCustomCertificate = (
   request: CreateCertificateRequestCustomCertificate,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   certificate_chain: request.certificateChain,
 })
 
 const marshalCreateCertificateRequestLetsencryptConfig = (
   request: CreateCertificateRequestLetsencryptConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   common_name: request.commonName,
   subject_alternative_name: request.subjectAlternativeName,
@@ -1128,7 +1128,7 @@ export const marshalCreateCertificateRequest = (
 
 export const marshalCreateFrontendRequest = (
   request: CreateFrontendRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   backend_id: request.backendId,
   certificate_id: request.certificateId,
@@ -1191,7 +1191,7 @@ export const marshalCreateLbRequest = (
 
 const marshalRouteMatch = (
   request: RouteMatch,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   match_subdomains: request.matchSubdomains,
   ...resolveOneOf([
@@ -1215,14 +1215,14 @@ export const marshalCreateRouteRequest = (
 
 const marshalSubscriberEmailConfig = (
   request: SubscriberEmailConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   email: request.email,
 })
 
 const marshalSubscriberWebhookConfig = (
   request: SubscriberWebhookConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   uri: request.uri,
 })
@@ -1264,28 +1264,28 @@ export const marshalCreateSubscriberRequest = (
 
 export const marshalMigrateLbRequest = (
   request: MigrateLbRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   type: request.type,
 })
 
 export const marshalRemoveBackendServersRequest = (
   request: RemoveBackendServersRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   server_ip: request.serverIp,
 })
 
 export const marshalSetBackendServersRequest = (
   request: SetBackendServersRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   server_ip: request.serverIp,
 })
 
 export const marshalSubscribeToLbRequest = (
   request: SubscribeToLbRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   subscriber_id: request.subscriberId,
 })
@@ -1306,7 +1306,7 @@ export const marshalUpdateAclRequest = (
 
 export const marshalUpdateBackendRequest = (
   request: UpdateBackendRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   failover_host: request.failoverHost,
   forward_port: request.forwardPort,
@@ -1331,14 +1331,14 @@ export const marshalUpdateBackendRequest = (
 
 export const marshalUpdateCertificateRequest = (
   request: UpdateCertificateRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
 })
 
 export const marshalUpdateFrontendRequest = (
   request: UpdateFrontendRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   backend_id: request.backendId,
   certificate_id: request.certificateId,
@@ -1416,7 +1416,7 @@ export const marshalUpdateHealthCheckRequest = (
 
 export const marshalUpdateIpRequest = (
   request: UpdateIpRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   lb_id: request.lbId,
   reverse: request.reverse,
@@ -1425,7 +1425,7 @@ export const marshalUpdateIpRequest = (
 
 export const marshalUpdateLbRequest = (
   request: UpdateLbRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
@@ -1469,7 +1469,7 @@ export const marshalUpdateSubscriberRequest = (
 
 export const marshalZonedApiAddBackendServersRequest = (
   request: ZonedApiAddBackendServersRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   server_ip: request.serverIp,
 })
@@ -1577,7 +1577,7 @@ export const marshalZonedApiCreateCertificateRequest = (
 
 export const marshalZonedApiCreateFrontendRequest = (
   request: ZonedApiCreateFrontendRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   backend_id: request.backendId,
   certificate_id: request.certificateId,
@@ -1687,21 +1687,21 @@ export const marshalZonedApiCreateSubscriberRequest = (
 
 export const marshalZonedApiDetachPrivateNetworkRequest = (
   request: ZonedApiDetachPrivateNetworkRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_network_id: request.privateNetworkId,
 })
 
 export const marshalZonedApiMigrateLbRequest = (
   request: ZonedApiMigrateLbRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   type: request.type,
 })
 
 export const marshalZonedApiRemoveBackendServersRequest = (
   request: ZonedApiRemoveBackendServersRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   server_ip: request.serverIp,
 })
@@ -1729,14 +1729,14 @@ export const marshalZonedApiSetAclsRequest = (
 
 export const marshalZonedApiSetBackendServersRequest = (
   request: ZonedApiSetBackendServersRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   server_ip: request.serverIp,
 })
 
 export const marshalZonedApiSubscribeToLbRequest = (
   request: ZonedApiSubscribeToLbRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   subscriber_id: request.subscriberId,
 })
@@ -1757,7 +1757,7 @@ export const marshalZonedApiUpdateAclRequest = (
 
 export const marshalZonedApiUpdateBackendRequest = (
   request: ZonedApiUpdateBackendRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   failover_host: request.failoverHost,
   forward_port: request.forwardPort,
@@ -1782,14 +1782,14 @@ export const marshalZonedApiUpdateBackendRequest = (
 
 export const marshalZonedApiUpdateCertificateRequest = (
   request: ZonedApiUpdateCertificateRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
 })
 
 export const marshalZonedApiUpdateFrontendRequest = (
   request: ZonedApiUpdateFrontendRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   backend_id: request.backendId,
   certificate_id: request.certificateId,
@@ -1867,7 +1867,7 @@ export const marshalZonedApiUpdateHealthCheckRequest = (
 
 export const marshalZonedApiUpdateIpRequest = (
   request: ZonedApiUpdateIpRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   lb_id: request.lbId,
   reverse: request.reverse,
@@ -1876,7 +1876,7 @@ export const marshalZonedApiUpdateIpRequest = (
 
 export const marshalZonedApiUpdateLbRequest = (
   request: ZonedApiUpdateLbRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,

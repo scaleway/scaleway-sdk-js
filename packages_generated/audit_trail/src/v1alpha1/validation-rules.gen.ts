@@ -17,7 +17,7 @@ export const ExportJobS3 = {
   },
   prefix: {
     maxLength: 255,
-    pattern: /^[a-zA-Z0-9\._\-]+(?:\/[a-zA-Z0-9\._\-]+)*$/,
+    pattern: /^[a-zA-Z0-9._-]+(?:\/[a-zA-Z0-9._-]+)*$/,
   },
   region: {
     pattern: /^[a-z]{2}-[a-z]{3}$/,

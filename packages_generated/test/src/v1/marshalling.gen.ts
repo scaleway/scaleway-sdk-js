@@ -1,12 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   CreateHumanRequest,
   Human,
@@ -99,14 +100,14 @@ export const marshalCreateHumanRequest = (
 
 export const marshalRegisterRequest = (
   request: RegisterRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   username: request.username,
 })
 
 export const marshalUpdateHumanRequest = (
   request: UpdateHumanRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   altitude_in_meter: request.altitudeInMeter,
   altitude_in_millimeter: request.altitudeInMillimeter,

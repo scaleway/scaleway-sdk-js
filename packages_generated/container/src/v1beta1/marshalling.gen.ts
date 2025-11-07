@@ -1,13 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Container,
   ContainerHealthCheckSpec,
@@ -426,14 +426,14 @@ export const unmarshalListTriggersResponse = (
 
 const marshalContainerHealthCheckSpecHTTPProbe = (
   request: ContainerHealthCheckSpecHTTPProbe,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   path: request.path,
 })
 
 const marshalContainerHealthCheckSpecTCPProbe = (
-  request: ContainerHealthCheckSpecTCPProbe,
-  defaults: DefaultValues,
+  _request: ContainerHealthCheckSpecTCPProbe,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
 const marshalContainerHealthCheckSpec = (
@@ -462,7 +462,7 @@ const marshalContainerHealthCheckSpec = (
 
 const marshalContainerScalingOption = (
   request: ContainerScalingOption,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf([
     {
@@ -476,7 +476,7 @@ const marshalContainerScalingOption = (
 
 const marshalSecret = (
   request: Secret,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   key: request.key,
   value: request.value,
@@ -525,7 +525,7 @@ export const marshalCreateContainerRequest = (
 
 export const marshalCreateCronRequest = (
   request: CreateCronRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   args: request.args,
   container_id: request.containerId,
@@ -535,7 +535,7 @@ export const marshalCreateCronRequest = (
 
 export const marshalCreateDomainRequest = (
   request: CreateDomainRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   container_id: request.containerId,
   hostname: request.hostname,
@@ -561,7 +561,7 @@ export const marshalCreateNamespaceRequest = (
 
 export const marshalCreateTokenRequest = (
   request: CreateTokenRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   expires_at: request.expiresAt,
@@ -573,7 +573,7 @@ export const marshalCreateTokenRequest = (
 
 const marshalCreateTriggerRequestMnqNatsClientConfig = (
   request: CreateTriggerRequestMnqNatsClientConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mnq_nats_account_id: request.mnqNatsAccountId,
   mnq_project_id: request.mnqProjectId,
@@ -583,7 +583,7 @@ const marshalCreateTriggerRequestMnqNatsClientConfig = (
 
 const marshalCreateTriggerRequestMnqSqsClientConfig = (
   request: CreateTriggerRequestMnqSqsClientConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mnq_project_id: request.mnqProjectId,
   mnq_region: request.mnqRegion,
@@ -592,7 +592,7 @@ const marshalCreateTriggerRequestMnqSqsClientConfig = (
 
 const marshalCreateTriggerRequestSqsClientConfig = (
   request: CreateTriggerRequestSqsClientConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   access_key: request.accessKey,
   endpoint: request.endpoint,
@@ -683,7 +683,7 @@ export const marshalUpdateContainerRequest = (
 
 export const marshalUpdateCronRequest = (
   request: UpdateCronRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   args: request.args,
   container_id: request.containerId,
@@ -708,7 +708,7 @@ export const marshalUpdateNamespaceRequest = (
 
 const marshalUpdateTriggerRequestSqsClientConfig = (
   request: UpdateTriggerRequestSqsClientConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   access_key: request.accessKey,
   secret_key: request.secretKey,

@@ -1,12 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   BgpSession,
   Connection,
@@ -24,8 +25,8 @@ import type {
   ListConnectionsResponse,
   ListCustomerGatewaysResponse,
   ListRoutingPoliciesResponse,
-  ListVpnGatewayTypesResponse,
   ListVpnGatewaysResponse,
+  ListVpnGatewayTypesResponse,
   RenewConnectionPskResponse,
   RoutingPolicy,
   SetRoutingPolicyRequest,
@@ -100,8 +101,6 @@ export const unmarshalConnection = (data: unknown): Connection => {
     projectId: data.project_id,
     region: data.region,
     routePropagationEnabled: data.route_propagation_enabled,
-    secretId: data.secret_id,
-    secretRevision: data.secret_revision,
     status: data.status,
     tags: data.tags,
     tunnelStatus: data.tunnel_status,
@@ -350,7 +349,7 @@ export const unmarshalRenewConnectionPskResponse = (
 
 const marshalConnectionCipher = (
   request: ConnectionCipher,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   dh_group: request.dhGroup,
   encryption: request.encryption,
@@ -359,7 +358,7 @@ const marshalConnectionCipher = (
 
 const marshalCreateConnectionRequestBgpConfig = (
   request: CreateConnectionRequestBgpConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   peer_private_ip: request.peerPrivateIp,
   private_ip: request.privateIp,
@@ -420,7 +419,7 @@ export const marshalCreateRoutingPolicyRequest = (
 
 const marshalCreateVpnGatewayRequestPublicConfig = (
   request: CreateVpnGatewayRequestPublicConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ipam_ipv4_id: request.ipamIpv4Id,
   ipam_ipv6_id: request.ipamIpv6Id,
@@ -454,7 +453,7 @@ export const marshalCreateVpnGatewayRequest = (
 
 export const marshalDetachRoutingPolicyRequest = (
   request: DetachRoutingPolicyRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf([
     { param: 'routing_policy_v4', value: request.routingPolicyV4 },
@@ -464,7 +463,7 @@ export const marshalDetachRoutingPolicyRequest = (
 
 export const marshalSetRoutingPolicyRequest = (
   request: SetRoutingPolicyRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf([
     { param: 'routing_policy_v4', value: request.routingPolicyV4 },
@@ -491,7 +490,7 @@ export const marshalUpdateConnectionRequest = (
 
 export const marshalUpdateCustomerGatewayRequest = (
   request: UpdateCustomerGatewayRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   asn: request.asn,
   ipv4_public: request.ipv4Public,
@@ -502,7 +501,7 @@ export const marshalUpdateCustomerGatewayRequest = (
 
 export const marshalUpdateRoutingPolicyRequest = (
   request: UpdateRoutingPolicyRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   prefix_filter_in: request.prefixFilterIn,
@@ -512,7 +511,7 @@ export const marshalUpdateRoutingPolicyRequest = (
 
 export const marshalUpdateVpnGatewayRequest = (
   request: UpdateVpnGatewayRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   tags: request.tags,
