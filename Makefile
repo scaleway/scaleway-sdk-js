@@ -26,7 +26,7 @@ lint:
 	pnpm run lint
 
 test:
-	pnpm turbo test
+	pnpm run test
 
 test-coverage:
 	pnpm run test:coverage
