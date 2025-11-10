@@ -935,11 +935,11 @@ export interface BMCAccess {
    */
   url: string
   /**
-   * The login to use for the BMC (Baseboard Management Controller) access authentification.
+   * The login to use for the BMC (Baseboard Management Controller) access authentication.
    */
   login: string
   /**
-   * The password to use for the BMC (Baseboard Management Controller) access authentification.
+   * The password to use for the BMC (Baseboard Management Controller) access authentication.
    */
   password: string
   /**
