@@ -46,6 +46,19 @@ interface Product {
   hasPackageJson: boolean
 }
 
+const REQUIRED_PRODUCT_FILES = [
+  'package.json',
+  'tsconfig.json',
+  'tsconfig.build.json',
+  'vite.config.ts',
+  'README.md',
+] as const
+
+const OPTIONAL_PRODUCT_FILES: Record<string, Set<typeof REQUIRED_PRODUCT_FILES[number]>> =
+  {
+    std: new Set(['README.md']),
+  }
+
 const log = (...args: unknown[]) => {
   if (VERBOSE) console.log(...args)
 }
@@ -108,6 +121,33 @@ function scanProducts(dir: string): Product[] {
 
 function detectNewProducts(products: Product[]): Product[] {
   return products.filter(p => p.hasGenFiles && !p.hasPackageJson)
+}
+
+function ensureProductFiles(products: Product[]) {
+  const missingFilesByProduct: string[] = []
+
+  for (const product of products) {
+    const optionalFiles = OPTIONAL_PRODUCT_FILES[product.name] ?? new Set()
+
+    for (const fileName of REQUIRED_PRODUCT_FILES) {
+      if (optionalFiles.has(fileName)) continue
+
+      const filePath = join(product.path, fileName)
+      if (!existsSync(filePath)) {
+        missingFilesByProduct.push(`${product.name}/${fileName}`)
+      }
+    }
+  }
+
+  if (missingFilesByProduct.length > 0) {
+    throw new Error(
+      [
+        'Missing required configuration files for new products:',
+        ...missingFilesByProduct.map(f => `  • ${f}`),
+        'Please re-run `pnpm run generatePackages` and `pnpm run generateAlias` locally to regenerate the missing files before committing.',
+      ].join('\n'),
+    )
+  }
 }
 
 function detectPackageScope(sdkPackageJsonPath: string): Scope {
@@ -222,6 +262,8 @@ async function main(): Promise<number> {
   info(`  📦 Detected scope: ${scope}`)
   updateSdkPackageJson(SDK_PACKAGE_JSON, newProducts, scope)
   info('')
+
+  ensureProductFiles(newProducts)
 
   // 4) alias
   info('📝 Step 4: Generating SDK exports…')
