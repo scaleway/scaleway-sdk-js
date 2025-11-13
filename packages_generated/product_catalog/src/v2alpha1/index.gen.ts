@@ -4,6 +4,7 @@ export { PublicCatalogAPI } from './api.gen.js'
 export * from './marshalling.gen.js'
 export type {
   ListPublicCatalogProductsRequestProductType,
+  ListPublicCatalogProductsRequestStatus,
   ListPublicCatalogProductsResponse,
   PublicCatalogApiListPublicCatalogProductsRequest,
   PublicCatalogProduct,
