@@ -134,7 +134,6 @@ export type OfferOptionName =
   | 'email_storage_gb'
   | 'database_count'
   | 'support'
-  | 'additional_email'
 
 export type OfferOptionWarning =
   | 'unknown_warning'
@@ -142,16 +141,6 @@ export type OfferOptionWarning =
   | 'usage_low_warning'
 
 export type PlatformPlatformGroup = 'unknown_group' | 'default' | 'premium'
-
-export type ProgressStatus =
-  | 'unknown_status'
-  | 'pending'
-  | 'processing'
-  | 'completed'
-  | 'partially_completed'
-  | 'failed'
-  | 'aborted'
-  | 'never_finished'
 
 export interface AutoConfigDomainDns {
   /**
@@ -616,25 +605,6 @@ export interface MailAccount {
   username: string
 }
 
-export interface ProgressSummary {
-  /**
-   * ID of the progress.
-   */
-  id: string
-  /**
-   * Total number of backup items included in the progress.
-   */
-  backupItemsCount: number
-  /**
-   * Completion percentage of the progress.
-   */
-  percentage: number
-  /**
-   * Current status of the progress operation.
-   */
-  status: ProgressStatus
-}
-
 export interface Website {
   /**
    * The domain of the website.
@@ -692,21 +662,6 @@ export type BackupApiGetBackupRequest = {
   backupId: string
 }
 
-export type BackupApiGetProgressRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  /**
-   * ID of the hosting associated with the progress.
-   */
-  hostingId: string
-  /**
-   * ID of the progress to retrieve.
-   */
-  progressId: string
-}
-
 export type BackupApiListBackupItemsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -743,17 +698,6 @@ export type BackupApiListBackupsRequest = {
    * Order in which to return the list of backups.
    */
   orderBy?: ListBackupsRequestOrderBy
-}
-
-export type BackupApiListRecentProgressesRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  /**
-   * ID of the hosting linked to the progress.
-   */
-  hostingId: string
 }
 
 export type BackupApiRestoreBackupItemsRequest = {
@@ -1682,13 +1626,6 @@ export interface ListOffersResponse {
   offers: Offer[]
 }
 
-export interface ListRecentProgressesResponse {
-  /**
-   * List of summarized progress entries.
-   */
-  progresses: ProgressSummary[]
-}
-
 export interface ListWebsitesResponse {
   /**
    * Total number of websites.
@@ -1819,25 +1756,6 @@ export type OfferApiListOffersRequest = {
   controlPanels?: string[]
 }
 
-export interface Progress {
-  /**
-   * ID of the progress.
-   */
-  id: string
-  /**
-   * Groups of backup items included in this progress.
-   */
-  backupItemGroups: BackupItemGroup[]
-  /**
-   * Completion percentage of the progress.
-   */
-  percentage: number
-  /**
-   * Current status of the progress operation.
-   */
-  status: ProgressStatus
-}
-
 export interface ResetHostingPasswordResponse {
   /**
    * @deprecated New temporary password (deprecated, use password_b64 instead).
@@ -1868,19 +1786,9 @@ export interface ResourceSummary {
   websitesCount: number
 }
 
-export interface RestoreBackupItemsResponse {
-  /**
-   * Identifier used to track the item restoration progress.
-   */
-  progressId: string
-}
+export type RestoreBackupItemsResponse = {}
 
-export interface RestoreBackupResponse {
-  /**
-   * Identifier used to track the backup restoration progress.
-   */
-  progressId: string
-}
+export type RestoreBackupResponse = {}
 
 export interface SearchDomainsResponse {
   /**
@@ -1894,36 +1802,6 @@ export interface Session {
    * Logged user's session URL.
    */
   url: string
-}
-
-export type WebsiteApiCreateWebsiteRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  /**
-   * Hosting ID to which the website is attached to.
-   */
-  hostingId: string
-  /**
-   * The new domain name or subdomain to use for the website.
-   */
-  domainName: string
-}
-
-export type WebsiteApiDeleteWebsiteRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  /**
-   * Hosting ID to which the website is detached from.
-   */
-  hostingId: string
-  /**
-   * The new domain name or subdomain attached to the website.
-   */
-  domainName: string
 }
 
 export type WebsiteApiListWebsitesRequest = {

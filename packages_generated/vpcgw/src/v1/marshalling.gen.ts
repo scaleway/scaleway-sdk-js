@@ -1,13 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   CreateDHCPEntryRequest,
   CreateDHCPRequest,
@@ -26,8 +26,8 @@ import type {
   ListDHCPEntriesResponse,
   ListDHCPsResponse,
   ListGatewayNetworksResponse,
-  ListGatewayTypesResponse,
   ListGatewaysResponse,
+  ListGatewayTypesResponse,
   ListIPsResponse,
   ListPATRulesResponse,
   PATRule,
@@ -380,7 +380,7 @@ export const marshalCreateDHCPRequest = (
 
 export const marshalCreateDHCPEntryRequest = (
   request: CreateDHCPEntryRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   gateway_network_id: request.gatewayNetworkId,
   ip_address: request.ipAddress,
@@ -389,7 +389,7 @@ export const marshalCreateDHCPEntryRequest = (
 
 const marshalCreateGatewayNetworkRequestIpamConfig = (
   request: CreateGatewayNetworkRequestIpamConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ipam_ip_id: request.ipamIpId,
   push_default_route: request.pushDefaultRoute,
@@ -451,7 +451,7 @@ export const marshalCreateIPRequest = (
 
 export const marshalCreatePATRuleRequest = (
   request: CreatePATRuleRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   gateway_id: request.gatewayId,
   private_ip: request.privateIp,
@@ -462,7 +462,7 @@ export const marshalCreatePATRuleRequest = (
 
 const marshalSetDHCPEntriesRequestEntry = (
   request: SetDHCPEntriesRequestEntry,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ip_address: request.ipAddress,
   mac_address: request.macAddress,
@@ -483,7 +483,7 @@ export const marshalSetDHCPEntriesRequest = (
 
 const marshalSetPATRulesRequestRule = (
   request: SetPATRulesRequestRule,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_ip: request.privateIp,
   private_port: request.privatePort,
@@ -503,14 +503,14 @@ export const marshalSetPATRulesRequest = (
 
 export const marshalUpdateDHCPEntryRequest = (
   request: UpdateDHCPEntryRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ip_address: request.ipAddress,
 })
 
 export const marshalUpdateDHCPRequest = (
   request: UpdateDHCPRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   address: request.address,
   dns_local_name: request.dnsLocalName,
@@ -529,7 +529,7 @@ export const marshalUpdateDHCPRequest = (
 
 const marshalUpdateGatewayNetworkRequestIpamConfig = (
   request: UpdateGatewayNetworkRequestIpamConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ipam_ip_id: request.ipamIpId,
   push_default_route: request.pushDefaultRoute,
@@ -559,7 +559,7 @@ export const marshalUpdateGatewayNetworkRequest = (
 
 export const marshalUpdateGatewayRequest = (
   request: UpdateGatewayRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   bastion_port: request.bastionPort,
   enable_bastion: request.enableBastion,
@@ -571,7 +571,7 @@ export const marshalUpdateGatewayRequest = (
 
 export const marshalUpdateIPRequest = (
   request: UpdateIPRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   gateway_id: request.gatewayId,
   reverse: request.reverse,
@@ -580,7 +580,7 @@ export const marshalUpdateIPRequest = (
 
 export const marshalUpdatePATRuleRequest = (
   request: UpdatePATRuleRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_ip: request.privateIp,
   private_port: request.privatePort,
@@ -590,7 +590,7 @@ export const marshalUpdatePATRuleRequest = (
 
 export const marshalUpgradeGatewayRequest = (
   request: UpgradeGatewayRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   type: request.type,
 })

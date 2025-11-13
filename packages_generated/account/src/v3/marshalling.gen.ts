@@ -1,13 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   CheckContractSignatureResponse,
   Contract,
@@ -351,63 +351,63 @@ export const marshalProjectApiCreateProjectRequest = (
 
 const marshalQualificationAiMachine = (
   request: QualificationAiMachine,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   sub_use_case: request.subUseCase,
 })
 
 const marshalQualificationArchiveData = (
   request: QualificationArchiveData,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   sub_use_case: request.subUseCase,
 })
 
 const marshalQualificationContainer = (
   request: QualificationContainer,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   sub_use_case: request.subUseCase,
 })
 
 const marshalQualificationDeploySoftware = (
   request: QualificationDeploySoftware,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   sub_use_case: request.subUseCase,
 })
 
 const marshalQualificationHostApplication = (
   request: QualificationHostApplication,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   sub_use_case: request.subUseCase,
 })
 
 const marshalQualificationHostWebsite = (
   request: QualificationHostWebsite,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   sub_use_case: request.subUseCase,
 })
 
 const marshalQualificationOtherUseCase = (
   request: QualificationOtherUseCase,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   sub_use_case: request.subUseCase,
 })
 
 const marshalQualificationSetScalewayEnvironment = (
   request: QualificationSetScalewayEnvironment,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   sub_use_case: request.subUseCase,
 })
 
 const marshalQualificationShareData = (
   request: QualificationShareData,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   sub_use_case: request.subUseCase,
 })
@@ -502,7 +502,7 @@ export const marshalProjectApiSetProjectQualificationRequest = (
 
 export const marshalProjectApiUpdateProjectRequest = (
   request: ProjectApiUpdateProjectRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,

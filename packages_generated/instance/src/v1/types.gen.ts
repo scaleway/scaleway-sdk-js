@@ -172,6 +172,10 @@ export interface Volume {
    */
   name: string
   /**
+   * @deprecated Show the volume NBD export URI.
+   */
+  exportUri?: string
+  /**
    * Volume disk size.
    */
   size: number
@@ -335,10 +339,6 @@ export interface PrivateNIC {
    * Private NIC creation date.
    */
   creationDate?: Date
-  /**
-   * The zone in which the Private NIC is located.
-   */
-  zone: ScwZone
 }
 
 export interface SecurityGroupSummary {

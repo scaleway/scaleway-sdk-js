@@ -1,12 +1,12 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   File,
   ListNatsAccountsResponse,
@@ -274,7 +274,7 @@ export const marshalNatsApiCreateNatsAccountRequest = (
 
 export const marshalNatsApiCreateNatsCredentialsRequest = (
   request: NatsApiCreateNatsCredentialsRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name || randomName('mnq'),
   nats_account_id: request.natsAccountId,
@@ -282,7 +282,7 @@ export const marshalNatsApiCreateNatsCredentialsRequest = (
 
 export const marshalNatsApiUpdateNatsAccountRequest = (
   request: NatsApiUpdateNatsAccountRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
 })
@@ -296,7 +296,7 @@ export const marshalSnsApiActivateSnsRequest = (
 
 const marshalSnsPermissions = (
   request: SnsPermissions,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   can_manage: request.canManage,
   can_publish: request.canPublish,
@@ -342,7 +342,7 @@ export const marshalSqsApiActivateSqsRequest = (
 
 const marshalSqsPermissions = (
   request: SqsPermissions,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   can_manage: request.canManage,
   can_publish: request.canPublish,

@@ -288,7 +288,7 @@ export const unmarshalSetDeploymentACLRulesResponse = (
 
 const marshalACLRuleRequest = (
   request: ACLRuleRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   ip: request.ip,
@@ -306,14 +306,14 @@ export const marshalAddDeploymentACLRulesRequest = (
 
 const marshalEndpointSpecPrivateNetwork = (
   request: EndpointSpecPrivateNetwork,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_network_id: request.privateNetworkId,
 })
 
 const marshalEndpointSpecPublic = (
-  request: EndpointSpecPublic,
-  defaults: DefaultValues,
+  _request: EndpointSpecPublic,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
 const marshalEndpointSpec = (
@@ -374,7 +374,7 @@ export const marshalSetDeploymentACLRulesRequest = (
 
 export const marshalUpdateDeploymentRequest = (
   request: UpdateDeploymentRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   max_size: request.maxSize,
   min_size: request.minSize,
@@ -384,7 +384,7 @@ export const marshalUpdateDeploymentRequest = (
 
 export const marshalUpdateEndpointRequest = (
   request: UpdateEndpointRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   disable_auth: request.disableAuth,
 })

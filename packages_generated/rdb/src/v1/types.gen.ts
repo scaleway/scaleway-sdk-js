@@ -134,9 +134,9 @@ export type StorageClass = 'unknown_storage_class' | 'lssd' | 'bssd' | 'sbs'
 
 export type VolumeType = 'lssd' | 'bssd' | 'sbs_5k' | 'sbs_15k'
 
-export interface EndpointDirectAccessDetails {}
+export type EndpointDirectAccessDetails = {}
 
-export interface EndpointLoadBalancerDetails {}
+export type EndpointLoadBalancerDetails = {}
 
 export interface EndpointPrivateNetworkDetails {
   /**
@@ -157,9 +157,9 @@ export interface EndpointPrivateNetworkDetails {
   provisioningMode: EndpointPrivateNetworkDetailsProvisioningMode
 }
 
-export interface EndpointSpecPrivateNetworkIpamConfig {}
+export type EndpointSpecPrivateNetworkIpamConfig = {}
 
-export interface ReadReplicaEndpointSpecPrivateNetworkIpamConfig {}
+export type ReadReplicaEndpointSpecPrivateNetworkIpamConfig = {}
 
 export interface EngineSetting {
   /**
@@ -253,7 +253,7 @@ export interface Endpoint {
   hostname?: string
 }
 
-export interface EndpointSpecLoadBalancer {}
+export type EndpointSpecLoadBalancer = {}
 
 export interface EndpointSpecPrivateNetwork {
   /**
@@ -274,7 +274,7 @@ export interface EndpointSpecPrivateNetwork {
   ipamConfig?: EndpointSpecPrivateNetworkIpamConfig
 }
 
-export interface ReadReplicaEndpointSpecDirectAccess {}
+export type ReadReplicaEndpointSpecDirectAccess = {}
 
 export interface ReadReplicaEndpointSpecPrivateNetwork {
   /**
@@ -1545,7 +1545,7 @@ export type ListDatabasesRequest = {
   /**
    * Whether to skip the retrieval of each database size. If true, the size of each returned database will be set to 0.
    */
-  skipSizeRetrieval?: boolean
+  skipSizeRetrieval: boolean
   page?: number
   pageSize?: number
 }

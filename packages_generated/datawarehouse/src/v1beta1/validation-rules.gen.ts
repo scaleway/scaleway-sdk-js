@@ -5,7 +5,7 @@ export const CreateDatabaseRequest = {
   name: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-z][a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-z][a-zA-Z0-9_-]*$/,
   },
 }
 
@@ -42,7 +42,7 @@ export const CreateUserRequest = {
   name: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-z][a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-z][a-zA-Z0-9_-]*$/,
   },
   password: {
     maxLength: 50,
@@ -54,7 +54,7 @@ export const DeleteDatabaseRequest = {
   name: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-z][a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-z][a-zA-Z0-9_-]*$/,
   },
 }
 
@@ -62,7 +62,7 @@ export const DeleteUserRequest = {
   name: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-z][a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-z][a-zA-Z0-9_-]*$/,
   },
 }
 
@@ -84,7 +84,7 @@ export const ListDatabasesRequest = {
   name: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-z][a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-z][a-zA-Z0-9_-]*$/,
   },
   page: {
     greaterThanOrEqual: 1,
@@ -124,7 +124,7 @@ export const ListUsersRequest = {
   name: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_-]*$/,
   },
   page: {
     greaterThanOrEqual: 1,
@@ -174,7 +174,7 @@ export const UpdateUserRequest = {
   name: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-z][a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-z][a-zA-Z0-9_-]*$/,
   },
   password: {
     maxLength: 50,

@@ -1,5 +1,3 @@
-// This file was automatically generated. DO NOT EDIT.
-// If you have any remark or suggestion do not hesitate to open an issue.
 import {
   isJSONObject,
   unmarshalArrayOfObject,
@@ -114,7 +112,6 @@ const unmarshalListConsumptionsResponseConsumption = (
   return {
     billedQuantity: data.billed_quantity,
     categoryName: data.category_name,
-    consumerId: data.consumer_id,
     productName: data.product_name,
     projectId: data.project_id,
     resourceName: data.resource_name,

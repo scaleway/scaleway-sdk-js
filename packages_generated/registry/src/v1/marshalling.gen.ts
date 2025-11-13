@@ -1,13 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   CreateNamespaceRequest,
   Image,
@@ -150,14 +150,14 @@ export const marshalCreateNamespaceRequest = (
 
 export const marshalUpdateImageRequest = (
   request: UpdateImageRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   visibility: request.visibility,
 })
 
 export const marshalUpdateNamespaceRequest = (
   request: UpdateNamespaceRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   is_public: request.isPublic,

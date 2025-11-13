@@ -1,14 +1,15 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
+
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
-  API as ParentAPI,
   enrichForPagination,
+  API as ParentAPI,
   toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES_APPLESILICON,
   SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_APPLESILICON,
@@ -25,8 +26,8 @@ import {
   unmarshalConnectivityDiagnostic,
   unmarshalListOSResponse,
   unmarshalListServerPrivateNetworksResponse,
-  unmarshalListServerTypesResponse,
   unmarshalListServersResponse,
+  unmarshalListServerTypesResponse,
   unmarshalOS,
   unmarshalServer,
   unmarshalServerPrivateNetwork,
@@ -47,10 +48,10 @@ import type {
   ListOSRequest,
   ListOSResponse,
   ListServerPrivateNetworksResponse,
-  ListServerTypesRequest,
-  ListServerTypesResponse,
   ListServersRequest,
   ListServersResponse,
+  ListServerTypesRequest,
+  ListServerTypesResponse,
   OS,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
   PrivateNetworkApiDeleteServerPrivateNetworkRequest,

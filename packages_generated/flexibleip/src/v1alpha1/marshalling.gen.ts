@@ -1,11 +1,9 @@
-// This file was automatically generated. DO NOT EDIT.
-// If you have any remark or suggestion do not hesitate to open an issue.
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   AttachFlexibleIPRequest,
   AttachFlexibleIPsResponse,
@@ -112,7 +110,7 @@ export const unmarshalListFlexibleIPsResponse = (
 
 export const marshalAttachFlexibleIPRequest = (
   request: AttachFlexibleIPRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   fips_ids: request.fipsIds,
   server_id: request.serverId,
@@ -132,35 +130,35 @@ export const marshalCreateFlexibleIPRequest = (
 
 export const marshalDetachFlexibleIPRequest = (
   request: DetachFlexibleIPRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   fips_ids: request.fipsIds,
 })
 
 export const marshalDuplicateMACAddrRequest = (
   request: DuplicateMACAddrRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   duplicate_from_fip_id: request.duplicateFromFipId,
 })
 
 export const marshalGenerateMACAddrRequest = (
   request: GenerateMACAddrRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mac_type: request.macType,
 })
 
 export const marshalMoveMACAddrRequest = (
   request: MoveMACAddrRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   dst_fip_id: request.dstFipId,
 })
 
 export const marshalUpdateFlexibleIPRequest = (
   request: UpdateFlexibleIPRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   reverse: request.reverse,

@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
@@ -8,7 +9,6 @@ import {
   unmarshalDate,
   unmarshalMoney,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   CreateSnapshotRequest,
   CreateVolumeRequest,
@@ -18,8 +18,8 @@ import type {
   ImportSnapshotFromObjectStorageRequest,
   ImportSnapshotFromS3Request,
   ListSnapshotsResponse,
-  ListVolumeTypesResponse,
   ListVolumesResponse,
+  ListVolumeTypesResponse,
   Reference,
   Snapshot,
   SnapshotParentVolume,
@@ -199,14 +199,14 @@ export const marshalCreateSnapshotRequest = (
 
 const marshalCreateVolumeRequestFromEmpty = (
   request: CreateVolumeRequestFromEmpty,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   size: request.size,
 })
 
 const marshalCreateVolumeRequestFromSnapshot = (
   request: CreateVolumeRequestFromSnapshot,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   size: request.size,
   snapshot_id: request.snapshotId,
@@ -243,7 +243,7 @@ export const marshalCreateVolumeRequest = (
 
 export const marshalExportSnapshotToObjectStorageRequest = (
   request: ExportSnapshotToObjectStorageRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   bucket: request.bucket,
   key: request.key,
@@ -275,7 +275,7 @@ export const marshalImportSnapshotFromS3Request = (
 
 export const marshalUpdateSnapshotRequest = (
   request: UpdateSnapshotRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   tags: request.tags,
@@ -283,7 +283,7 @@ export const marshalUpdateSnapshotRequest = (
 
 export const marshalUpdateVolumeRequest = (
   request: UpdateVolumeRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   perf_iops: request.perfIops,

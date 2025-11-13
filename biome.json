@@ -72,8 +72,41 @@
     }
   },
   "linter": {
-    "enabled": false
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
   },
+  "overrides": [
+    {
+      "includes": ["packages_generated/**", "**/*.gen.ts"],
+      "linter": {
+        "enabled": true,
+        "rules": {
+          "recommended": false,
+          "correctness": {
+            "noUnusedVariables": "error",
+            "noUnusedImports": "error"
+          },
+          "style": {
+            "useNamingConvention": "off",
+            "noDefaultExport": "off"
+          },
+          "suspicious": {
+            "noShadowRestrictedNames": "off"
+          },
+          "performance": {
+            "noAccumulatingSpread": "off"
+          },
+          "complexity": {
+            "noExcessiveCognitiveComplexity": "off",
+            "noStaticOnlyClass": "off",
+            "noBannedTypes": "off"
+          }
+        }
+      }
+    }
+  ],
   "assist": {
     "actions": {
       "source": {

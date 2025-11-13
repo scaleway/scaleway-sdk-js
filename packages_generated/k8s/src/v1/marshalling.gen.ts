@@ -1,26 +1,26 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   ACLRule,
   ACLRuleRequest,
   AddClusterACLRulesRequest,
   AddClusterACLRulesResponse,
   Cluster,
-  ClusterAutoUpgrade,
   ClusterAutoscalerConfig,
+  ClusterAutoUpgrade,
   ClusterOpenIDConnectConfig,
   ClusterType,
   CreateClusterRequest,
-  CreateClusterRequestAutoUpgrade,
   CreateClusterRequestAutoscalerConfig,
+  CreateClusterRequestAutoUpgrade,
   CreateClusterRequestOpenIDConnectConfig,
   CreateClusterRequestPoolConfig,
   CreateClusterRequestPoolConfigUpgradePolicy,
@@ -32,8 +32,8 @@ import type {
   ListClusterACLRulesResponse,
   ListClusterAvailableTypesResponse,
   ListClusterAvailableVersionsResponse,
-  ListClusterTypesResponse,
   ListClustersResponse,
+  ListClusterTypesResponse,
   ListNodesResponse,
   ListPoolsResponse,
   ListVersionsResponse,
@@ -48,8 +48,8 @@ import type {
   SetClusterACLRulesResponse,
   SetClusterTypeRequest,
   UpdateClusterRequest,
-  UpdateClusterRequestAutoUpgrade,
   UpdateClusterRequestAutoscalerConfig,
+  UpdateClusterRequestAutoUpgrade,
   UpdateClusterRequestOpenIDConnectConfig,
   UpdatePoolRequest,
   UpdatePoolRequestUpgradePolicy,
@@ -569,7 +569,7 @@ export const unmarshalSetClusterACLRulesResponse = (
 
 const marshalACLRuleRequest = (
   request: ACLRuleRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   ...resolveOneOf<string | boolean>([
@@ -590,7 +590,7 @@ export const marshalAddClusterACLRulesRequest = (
 
 const marshalMaintenanceWindow = (
   request: MaintenanceWindow,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   day: request.day,
   start_hour: request.startHour,
@@ -598,7 +598,7 @@ const marshalMaintenanceWindow = (
 
 const marshalCreateClusterRequestPoolConfigUpgradePolicy = (
   request: CreateClusterRequestPoolConfigUpgradePolicy,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   max_surge: request.maxSurge,
   max_unavailable: request.maxUnavailable,
@@ -617,7 +617,7 @@ const marshalCreateClusterRequestAutoUpgrade = (
 
 const marshalCreateClusterRequestAutoscalerConfig = (
   request: CreateClusterRequestAutoscalerConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   balance_similar_node_groups: request.balanceSimilarNodeGroups,
   estimator: request.estimator,
@@ -633,7 +633,7 @@ const marshalCreateClusterRequestAutoscalerConfig = (
 
 const marshalCreateClusterRequestOpenIDConnectConfig = (
   request: CreateClusterRequestOpenIDConnectConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   client_id: request.clientId,
   groups_claim: request.groupsClaim,
@@ -730,7 +730,7 @@ export const marshalCreateClusterRequest = (
 
 const marshalCreatePoolRequestUpgradePolicy = (
   request: CreatePoolRequestUpgradePolicy,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   max_surge: request.maxSurge,
   max_unavailable: request.maxUnavailable,
@@ -765,7 +765,7 @@ export const marshalCreatePoolRequest = (
 
 export const marshalMigratePoolsToNewImagesRequest = (
   request: MigratePoolsToNewImagesRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   pool_ids: request.poolIds,
 })
@@ -782,7 +782,7 @@ export const marshalSetClusterACLRulesRequest = (
 
 export const marshalSetClusterTypeRequest = (
   request: SetClusterTypeRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   type: request.type,
 })
@@ -800,7 +800,7 @@ const marshalUpdateClusterRequestAutoUpgrade = (
 
 const marshalUpdateClusterRequestAutoscalerConfig = (
   request: UpdateClusterRequestAutoscalerConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   balance_similar_node_groups: request.balanceSimilarNodeGroups,
   estimator: request.estimator,
@@ -816,7 +816,7 @@ const marshalUpdateClusterRequestAutoscalerConfig = (
 
 const marshalUpdateClusterRequestOpenIDConnectConfig = (
   request: UpdateClusterRequestOpenIDConnectConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   client_id: request.clientId,
   groups_claim: request.groupsClaim,
@@ -859,7 +859,7 @@ export const marshalUpdateClusterRequest = (
 
 const marshalUpdatePoolRequestUpgradePolicy = (
   request: UpdatePoolRequestUpgradePolicy,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   max_surge: request.maxSurge,
   max_unavailable: request.maxUnavailable,
@@ -884,7 +884,7 @@ export const marshalUpdatePoolRequest = (
 
 export const marshalUpgradeClusterRequest = (
   request: UpgradeClusterRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   upgrade_pools: request.upgradePools,
   version: request.version,
@@ -892,7 +892,7 @@ export const marshalUpgradeClusterRequest = (
 
 export const marshalUpgradePoolRequest = (
   request: UpgradePoolRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   version: request.version,
 })

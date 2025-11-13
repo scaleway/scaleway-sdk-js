@@ -1,12 +1,10 @@
-// This file was automatically generated. DO NOT EDIT.
-// If you have any remark or suggestion do not hesitate to open an issue.
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   AccountOrganizationInfo,
   AccountProjectInfo,
@@ -16,15 +14,6 @@ import type {
   BaremetalServerInfo,
   BaremetalSettingInfo,
   CreateExportJobRequest,
-  EdgeServicesBackendStageInfo,
-  EdgeServicesCacheStageInfo,
-  EdgeServicesDNSStageInfo,
-  EdgeServicesPipelineInfo,
-  EdgeServicesPlanInfo,
-  EdgeServicesRouteRulesInfo,
-  EdgeServicesRouteStageInfo,
-  EdgeServicesTLSStageInfo,
-  EdgeServicesWAFStageInfo,
   Event,
   EventPrincipal,
   ExportJob,
@@ -182,128 +171,6 @@ const unmarshalBaremetalSettingInfo = (data: unknown): BaremetalSettingInfo => {
   return {
     type: data.type,
   } as BaremetalSettingInfo
-}
-
-const unmarshalEdgeServicesBackendStageInfo = (
-  data: unknown,
-): EdgeServicesBackendStageInfo => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EdgeServicesBackendStageInfo' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    pipelineId: data.pipeline_id,
-  } as EdgeServicesBackendStageInfo
-}
-
-const unmarshalEdgeServicesCacheStageInfo = (
-  data: unknown,
-): EdgeServicesCacheStageInfo => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EdgeServicesCacheStageInfo' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    pipelineId: data.pipeline_id,
-  } as EdgeServicesCacheStageInfo
-}
-
-const unmarshalEdgeServicesDNSStageInfo = (
-  data: unknown,
-): EdgeServicesDNSStageInfo => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EdgeServicesDNSStageInfo' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    pipelineId: data.pipeline_id,
-  } as EdgeServicesDNSStageInfo
-}
-
-const unmarshalEdgeServicesPipelineInfo = (
-  data: unknown,
-): EdgeServicesPipelineInfo => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EdgeServicesPipelineInfo' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    name: data.name,
-  } as EdgeServicesPipelineInfo
-}
-
-const unmarshalEdgeServicesPlanInfo = (data: unknown): EdgeServicesPlanInfo => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EdgeServicesPlanInfo' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {} as EdgeServicesPlanInfo
-}
-
-const unmarshalEdgeServicesRouteRulesInfo = (
-  data: unknown,
-): EdgeServicesRouteRulesInfo => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EdgeServicesRouteRulesInfo' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    routeStageId: data.route_stage_id,
-  } as EdgeServicesRouteRulesInfo
-}
-
-const unmarshalEdgeServicesRouteStageInfo = (
-  data: unknown,
-): EdgeServicesRouteStageInfo => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EdgeServicesRouteStageInfo' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    pipelineId: data.pipeline_id,
-  } as EdgeServicesRouteStageInfo
-}
-
-const unmarshalEdgeServicesTLSStageInfo = (
-  data: unknown,
-): EdgeServicesTLSStageInfo => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EdgeServicesTLSStageInfo' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    pipelineId: data.pipeline_id,
-  } as EdgeServicesTLSStageInfo
-}
-
-const unmarshalEdgeServicesWAFStageInfo = (
-  data: unknown,
-): EdgeServicesWAFStageInfo => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EdgeServicesWAFStageInfo' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    pipelineId: data.pipeline_id,
-  } as EdgeServicesWAFStageInfo
 }
 
 const unmarshalInstanceServerInfo = (data: unknown): InstanceServerInfo => {
@@ -542,35 +409,6 @@ export const unmarshalResource = (data: unknown): Resource => {
       : undefined,
     createdAt: unmarshalDate(data.created_at),
     deletedAt: unmarshalDate(data.deleted_at),
-    edgeServicesBackendStageInfo: data.edge_services_backend_stage_info
-      ? unmarshalEdgeServicesBackendStageInfo(
-          data.edge_services_backend_stage_info,
-        )
-      : undefined,
-    edgeServicesCacheStageInfo: data.edge_services_cache_stage_info
-      ? unmarshalEdgeServicesCacheStageInfo(data.edge_services_cache_stage_info)
-      : undefined,
-    edgeServicesDnsStageInfo: data.edge_services_dns_stage_info
-      ? unmarshalEdgeServicesDNSStageInfo(data.edge_services_dns_stage_info)
-      : undefined,
-    edgeServicesPipelineInfo: data.edge_services_pipeline_info
-      ? unmarshalEdgeServicesPipelineInfo(data.edge_services_pipeline_info)
-      : undefined,
-    edgeServicesPlanInfo: data.edge_services_plan_info
-      ? unmarshalEdgeServicesPlanInfo(data.edge_services_plan_info)
-      : undefined,
-    edgeServicesRouteRulesInfo: data.edge_services_route_rules_info
-      ? unmarshalEdgeServicesRouteRulesInfo(data.edge_services_route_rules_info)
-      : undefined,
-    edgeServicesRouteStageInfo: data.edge_services_route_stage_info
-      ? unmarshalEdgeServicesRouteStageInfo(data.edge_services_route_stage_info)
-      : undefined,
-    edgeServicesTlsStageInfo: data.edge_services_tls_stage_info
-      ? unmarshalEdgeServicesTLSStageInfo(data.edge_services_tls_stage_info)
-      : undefined,
-    edgeServicesWafStageInfo: data.edge_services_waf_stage_info
-      ? unmarshalEdgeServicesWAFStageInfo(data.edge_services_waf_stage_info)
-      : undefined,
     id: data.id,
     instanceServerInfo: data.instance_server_info
       ? unmarshalInstanceServerInfo(data.instance_server_info)
@@ -846,7 +684,7 @@ export const unmarshalListProductsResponse = (
 
 const marshalExportJobS3 = (
   request: ExportJobS3,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   bucket: request.bucket,
   prefix: request.prefix,
@@ -860,7 +698,7 @@ export const marshalCreateExportJobRequest = (
 ): Record<string, unknown> => ({
   name: request.name,
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
-  tags: request.tags,
+  tags: request.tags !== undefined ? request.tags : undefined,
   ...resolveOneOf([
     {
       param: 's3',

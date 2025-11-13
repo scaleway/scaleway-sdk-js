@@ -1,13 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   CreateCronRequest,
   CreateDomainRequest,
@@ -416,7 +416,7 @@ export const unmarshalUploadURL = (data: unknown): UploadURL => {
 
 export const marshalCreateCronRequest = (
   request: CreateCronRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   args: request.args,
   function_id: request.functionId,
@@ -426,7 +426,7 @@ export const marshalCreateCronRequest = (
 
 export const marshalCreateDomainRequest = (
   request: CreateDomainRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   function_id: request.functionId,
   hostname: request.hostname,
@@ -434,7 +434,7 @@ export const marshalCreateDomainRequest = (
 
 const marshalSecret = (
   request: Secret,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   key: request.key,
   value: request.value,
@@ -487,7 +487,7 @@ export const marshalCreateNamespaceRequest = (
 
 export const marshalCreateTokenRequest = (
   request: CreateTokenRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   expires_at: request.expiresAt,
@@ -499,7 +499,7 @@ export const marshalCreateTokenRequest = (
 
 const marshalCreateTriggerRequestMnqNatsClientConfig = (
   request: CreateTriggerRequestMnqNatsClientConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mnq_nats_account_id: request.mnqNatsAccountId,
   mnq_project_id: request.mnqProjectId,
@@ -509,7 +509,7 @@ const marshalCreateTriggerRequestMnqNatsClientConfig = (
 
 const marshalCreateTriggerRequestMnqSqsClientConfig = (
   request: CreateTriggerRequestMnqSqsClientConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mnq_project_id: request.mnqProjectId,
   mnq_region: request.mnqRegion,
@@ -518,7 +518,7 @@ const marshalCreateTriggerRequestMnqSqsClientConfig = (
 
 const marshalCreateTriggerRequestSqsClientConfig = (
   request: CreateTriggerRequestSqsClientConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   access_key: request.accessKey,
   endpoint: request.endpoint,
@@ -569,7 +569,7 @@ export const marshalCreateTriggerRequest = (
 
 export const marshalUpdateCronRequest = (
   request: UpdateCronRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   args: request.args,
   function_id: request.functionId,
@@ -620,7 +620,7 @@ export const marshalUpdateNamespaceRequest = (
 
 const marshalUpdateTriggerRequestSqsClientConfig = (
   request: UpdateTriggerRequestSqsClientConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   access_key: request.accessKey,
   secret_key: request.secretKey,

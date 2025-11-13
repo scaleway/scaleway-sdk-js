@@ -1,19 +1,17 @@
-// This file was automatically generated. DO NOT EDIT.
-// If you have any remark or suggestion do not hesitate to open an issue.
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   unmarshalArrayOfObject,
   unmarshalDate,
   unmarshalMoney,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  AttachFailoverIPToMacAddressRequest,
   AttachFailoverIPsRequest,
-  BMCAccess,
+  AttachFailoverIPToMacAddressRequest,
   Backup,
-  CPU,
+  BMCAccess,
   CanOrderResponse,
+  CPU,
   CreateFailoverIPsRequest,
   CreateFailoverIPsResponse,
   CreateServerRequest,
@@ -25,23 +23,23 @@ import type {
   GetIPv6BlockQuotasResponseQuota,
   GetRemainingQuotaResponse,
   GetRpnStatusResponse,
+  InstallPartition,
+  InstallServerRequest,
+  Invoice,
+  InvoiceSummary,
   IP,
   IPv6Block,
   IPv6BlockApiCreateIPv6BlockRequest,
   IPv6BlockApiCreateIPv6BlockSubnetRequest,
   IPv6BlockApiUpdateIPv6BlockRequest,
-  InstallPartition,
-  InstallServerRequest,
-  Invoice,
-  InvoiceSummary,
   ListFailoverIPsResponse,
+  ListInvoicesResponse,
   ListIPv6BlockSubnetsAvailableResponse,
   ListIPv6BlockSubnetsAvailableResponseSubnet,
   ListIPv6BlocksResponse,
-  ListInvoicesResponse,
   ListIpsResponse,
-  ListOSResponse,
   ListOffersResponse,
+  ListOSResponse,
   ListRefundsResponse,
   ListRpnCapableSanServersResponse,
   ListRpnCapableServersResponse,
@@ -62,7 +60,6 @@ import type {
   Log,
   Memory,
   NetworkInterface,
-  OS,
   Offer,
   OfferAntiDosInfo,
   OfferBackupInfo,
@@ -75,6 +72,7 @@ import type {
   OfferServerInfo,
   OfferServiceLevelInfo,
   OfferStorageInfo,
+  OS,
   Partition,
   PersistentMemory,
   Raid,
@@ -1687,7 +1685,7 @@ export const unmarshalSubscribeStorageOptionsResponse = (
 
 export const marshalAttachFailoverIPToMacAddressRequest = (
   request: AttachFailoverIPToMacAddressRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mac: request.mac,
   type: request.type,
@@ -1695,7 +1693,7 @@ export const marshalAttachFailoverIPToMacAddressRequest = (
 
 export const marshalAttachFailoverIPsRequest = (
   request: AttachFailoverIPsRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   fips_ids: request.fipsIds,
   server_id: request.serverId,
@@ -1722,7 +1720,7 @@ export const marshalCreateServerRequest = (
 
 export const marshalDetachFailoverIPsRequest = (
   request: DetachFailoverIPsRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   fips_ids: request.fipsIds,
 })
@@ -1736,7 +1734,7 @@ export const marshalIPv6BlockApiCreateIPv6BlockRequest = (
 
 export const marshalIPv6BlockApiCreateIPv6BlockSubnetRequest = (
   request: IPv6BlockApiCreateIPv6BlockSubnetRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   address: request.address,
   cidr: request.cidr,
@@ -1744,14 +1742,14 @@ export const marshalIPv6BlockApiCreateIPv6BlockSubnetRequest = (
 
 export const marshalIPv6BlockApiUpdateIPv6BlockRequest = (
   request: IPv6BlockApiUpdateIPv6BlockRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   nameservers: request.nameservers,
 })
 
 const marshalInstallPartition = (
   request: InstallPartition,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   capacity: request.capacity,
   connectors: request.connectors,
@@ -1781,7 +1779,7 @@ export const marshalInstallServerRequest = (
 
 export const marshalRpnSanApiAddIpRequest = (
   request: RpnSanApiAddIpRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ip_ids: request.ipIds,
 })
@@ -1796,14 +1794,14 @@ export const marshalRpnSanApiCreateRpnSanRequest = (
 
 export const marshalRpnSanApiRemoveIpRequest = (
   request: RpnSanApiRemoveIpRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ip_ids: request.ipIds,
 })
 
 export const marshalRpnV1ApiAddRpnGroupMembersRequest = (
   request: RpnV1ApiAddRpnGroupMembersRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   san_server_ids: request.sanServerIds,
   server_ids: request.serverIds,
@@ -1821,14 +1819,14 @@ export const marshalRpnV1ApiCreateRpnGroupRequest = (
 
 export const marshalRpnV1ApiDeleteRpnGroupMembersRequest = (
   request: RpnV1ApiDeleteRpnGroupMembersRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   member_ids: request.memberIds,
 })
 
 export const marshalRpnV1ApiLeaveRpnGroupRequest = (
   request: RpnV1ApiLeaveRpnGroupRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   member_ids: request.memberIds,
 })
@@ -1843,14 +1841,14 @@ export const marshalRpnV1ApiRpnGroupInviteRequest = (
 
 export const marshalRpnV1ApiUpdateRpnGroupNameRequest = (
   request: RpnV1ApiUpdateRpnGroupNameRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
 })
 
 export const marshalRpnV2ApiAddRpnV2MembersRequest = (
   request: RpnV2ApiAddRpnV2MembersRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   servers: request.servers,
 })
@@ -1867,28 +1865,28 @@ export const marshalRpnV2ApiCreateRpnV2GroupRequest = (
 
 export const marshalRpnV2ApiDeleteRpnV2MembersRequest = (
   request: RpnV2ApiDeleteRpnV2MembersRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   member_ids: request.memberIds,
 })
 
 export const marshalRpnV2ApiEnableRpnV2GroupCompatibilityRequest = (
   request: RpnV2ApiEnableRpnV2GroupCompatibilityRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   rpnv1_group_id: request.rpnv1GroupId,
 })
 
 export const marshalRpnV2ApiUpdateRpnV2GroupNameRequest = (
   request: RpnV2ApiUpdateRpnV2GroupNameRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
 })
 
 export const marshalRpnV2ApiUpdateRpnV2VlanForMembersRequest = (
   request: RpnV2ApiUpdateRpnV2VlanForMembersRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   member_ids: request.memberIds,
   vlan: request.vlan,
@@ -1896,35 +1894,35 @@ export const marshalRpnV2ApiUpdateRpnV2VlanForMembersRequest = (
 
 export const marshalStartBMCAccessRequest = (
   request: StartBMCAccessRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ip: request.ip,
 })
 
 export const marshalStartRescueRequest = (
   request: StartRescueRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   os_id: request.osId,
 })
 
 export const marshalSubscribeServerOptionRequest = (
   request: SubscribeServerOptionRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   option_id: request.optionId,
 })
 
 export const marshalSubscribeStorageOptionsRequest = (
   request: SubscribeStorageOptionsRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   options_ids: request.optionsIds,
 })
 
 const marshalUpdatableRaidArray = (
   request: UpdatableRaidArray,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   disk_ids: request.diskIds,
   raid_level: request.raidLevel,
@@ -1941,14 +1939,14 @@ export const marshalUpdateRaidRequest = (
 
 export const marshalUpdateReverseRequest = (
   request: UpdateReverseRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   reverse: request.reverse,
 })
 
 export const marshalUpdateServerBackupRequest = (
   request: UpdateServerBackupRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   acl_enabled: request.aclEnabled,
   autologin: request.autologin,
@@ -1957,7 +1955,7 @@ export const marshalUpdateServerBackupRequest = (
 
 export const marshalUpdateServerRequest = (
   request: UpdateServerRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enable_ipv6: request.enableIpv6,
   hostname: request.hostname,
@@ -1965,7 +1963,7 @@ export const marshalUpdateServerRequest = (
 
 export const marshalUpdateServerTagsRequest = (
   request: UpdateServerTagsRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   tags: request.tags,
 })

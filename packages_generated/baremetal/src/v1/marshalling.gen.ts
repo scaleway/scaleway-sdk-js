@@ -1,41 +1,38 @@
-// This file was automatically generated. DO NOT EDIT.
-// If you have any remark or suggestion do not hesitate to open an issue.
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
-  marshalBlobToScwFile,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
   unmarshalMoney,
   unmarshalTimeSeries,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   AddOptionServerRequest,
   BMCAccess,
-  CPU,
   CertificationOption,
+  CPU,
   CreateServerRequest,
   CreateServerRequestInstall,
   Disk,
-  GPU,
   GetServerMetricsResponse,
-  IP,
+  GPU,
   InstallServerRequest,
+  IP,
   LicenseOption,
-  ListOSResponse,
   ListOffersResponse,
   ListOptionsResponse,
+  ListOSResponse,
   ListServerEventsResponse,
   ListServerPrivateNetworksResponse,
   ListServersResponse,
   ListSettingsResponse,
   Memory,
-  OS,
-  OSOSField,
   Offer,
   OfferOptionOffer,
   Option,
+  OS,
+  OSOSField,
   PersistentMemory,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
   PrivateNetworkApiSetServerPrivateNetworksRequest,
@@ -339,7 +336,6 @@ export const unmarshalServer = (data: unknown): Server => {
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
-    userData: data.user_data,
     zone: data.zone,
   } as Server
 }
@@ -367,8 +363,6 @@ export const unmarshalOS = (data: unknown): OS => {
 
   return {
     allowed: data.allowed,
-    cloudInitSupported: data.cloud_init_supported,
-    cloudInitVersion: data.cloud_init_version,
     customPartitioningSupported: data.custom_partitioning_supported,
     enabled: data.enabled,
     id: data.id,
@@ -783,7 +777,7 @@ export const unmarshalSetServerPrivateNetworksResponse = (
 
 const marshalSchemaPartition = (
   request: SchemaPartition,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   label: request.label,
   number: request.number,
@@ -793,7 +787,7 @@ const marshalSchemaPartition = (
 
 const marshalSchemaPool = (
   request: SchemaPool,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   devices: request.devices,
   filesystem_options: request.filesystemOptions,
@@ -814,7 +808,7 @@ const marshalSchemaDisk = (
 
 const marshalSchemaFilesystem = (
   request: SchemaFilesystem,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   device: request.device,
   format: request.format,
@@ -823,7 +817,7 @@ const marshalSchemaFilesystem = (
 
 const marshalSchemaRAID = (
   request: SchemaRAID,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   devices: request.devices,
   level: request.level,
@@ -883,7 +877,6 @@ export const marshalCreateServerRequest = (
   option_ids: request.optionIds,
   protected: request.protected,
   tags: request.tags,
-  user_data: request.userData,
   ...resolveOneOf([
     {
       default: defaults.defaultProjectId,
@@ -900,15 +893,15 @@ export const marshalCreateServerRequest = (
 
 export const marshalAddOptionServerRequest = (
   request: AddOptionServerRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   expires_at: request.expiresAt,
 })
 
-export const marshalInstallServerRequest = async (
+export const marshalInstallServerRequest = (
   request: InstallServerRequest,
   defaults: DefaultValues,
-): Promise<Record<string, unknown>> => ({
+): Record<string, unknown> => ({
   hostname: request.hostname,
   os_id: request.osId,
   partitioning_schema:
@@ -920,29 +913,25 @@ export const marshalInstallServerRequest = async (
   service_user: request.serviceUser,
   ssh_key_ids: request.sshKeyIds,
   user: request.user,
-  user_data:
-    request.userData !== undefined
-      ? await marshalBlobToScwFile(request.userData)
-      : undefined,
 })
 
 export const marshalPrivateNetworkApiAddServerPrivateNetworkRequest = (
   request: PrivateNetworkApiAddServerPrivateNetworkRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_network_id: request.privateNetworkId,
 })
 
 export const marshalPrivateNetworkApiSetServerPrivateNetworksRequest = (
   request: PrivateNetworkApiSetServerPrivateNetworksRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_network_ids: request.privateNetworkIds,
 })
 
 export const marshalRebootServerRequest = (
   request: RebootServerRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   boot_type: request.bootType,
   ssh_key_ids: request.sshKeyIds,
@@ -950,14 +939,14 @@ export const marshalRebootServerRequest = (
 
 export const marshalStartBMCAccessRequest = (
   request: StartBMCAccessRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ip: request.ip,
 })
 
 export const marshalStartServerRequest = (
   request: StartServerRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   boot_type: request.bootType,
   ssh_key_ids: request.sshKeyIds,
@@ -965,25 +954,24 @@ export const marshalStartServerRequest = (
 
 export const marshalUpdateIPRequest = (
   request: UpdateIPRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   reverse: request.reverse,
 })
 
 export const marshalUpdateServerRequest = (
   request: UpdateServerRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
   protected: request.protected,
   tags: request.tags,
-  user_data: request.userData,
 })
 
 export const marshalUpdateSettingRequest = (
   request: UpdateSettingRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enabled: request.enabled,
 })

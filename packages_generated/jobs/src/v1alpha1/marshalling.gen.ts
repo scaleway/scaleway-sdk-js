@@ -1,13 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   CreateJobDefinitionRequest,
   CreateJobDefinitionRequestCronScheduleConfig,
@@ -258,7 +258,7 @@ export const unmarshalStartJobDefinitionResponse = (
 
 const marshalCreateJobDefinitionRequestCronScheduleConfig = (
   request: CreateJobDefinitionRequestCronScheduleConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   schedule: request.schedule,
   timezone: request.timezone,
@@ -292,7 +292,7 @@ export const marshalCreateJobDefinitionRequest = (
 
 const marshalCreateJobDefinitionSecretsRequestSecretConfig = (
   request: CreateJobDefinitionSecretsRequestSecretConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   secret_manager_id: request.secretManagerId,
   secret_manager_version: request.secretManagerVersion,
@@ -313,7 +313,7 @@ export const marshalCreateJobDefinitionSecretsRequest = (
 
 export const marshalStartJobDefinitionRequest = (
   request: StartJobDefinitionRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   command: request.command,
   environment_variables: request.environmentVariables,
@@ -322,7 +322,7 @@ export const marshalStartJobDefinitionRequest = (
 
 const marshalUpdateJobDefinitionRequestCronScheduleConfig = (
   request: UpdateJobDefinitionRequestCronScheduleConfig,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   schedule: request.schedule,
   timezone: request.timezone,
@@ -352,7 +352,7 @@ export const marshalUpdateJobDefinitionRequest = (
 
 export const marshalUpdateJobDefinitionSecretRequest = (
   request: UpdateJobDefinitionSecretRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   secret_manager_version: request.secretManagerVersion,
   ...resolveOneOf([

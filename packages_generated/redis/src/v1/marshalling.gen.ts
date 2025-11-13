@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   resolveOneOf,
@@ -8,7 +9,6 @@ import {
   unmarshalDate,
   unmarshalTimeSeries,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   ACLRule,
   ACLRuleSpec,
@@ -29,8 +29,8 @@ import type {
   EndpointSpecPrivateNetworkSpec,
   EndpointSpecPrivateNetworkSpecIpamConfig,
   EndpointSpecPublicNetworkSpec,
-  ListClusterVersionsResponse,
   ListClustersResponse,
+  ListClusterVersionsResponse,
   ListNodeTypesResponse,
   MigrateClusterRequest,
   NodeType,
@@ -340,7 +340,7 @@ export const unmarshalSetEndpointsResponse = (
 
 const marshalACLRuleSpec = (
   request: ACLRuleSpec,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
   ip_cidr: request.ipCidr,
@@ -355,7 +355,7 @@ export const marshalAddAclRulesRequest = (
 
 const marshalClusterSetting = (
   request: ClusterSetting,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   value: request.value,
@@ -369,8 +369,8 @@ export const marshalAddClusterSettingsRequest = (
 })
 
 const marshalEndpointSpecPrivateNetworkSpecIpamConfig = (
-  request: EndpointSpecPrivateNetworkSpecIpamConfig,
-  defaults: DefaultValues,
+  _request: EndpointSpecPrivateNetworkSpecIpamConfig,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
 const marshalEndpointSpecPrivateNetworkSpec = (
@@ -389,8 +389,8 @@ const marshalEndpointSpecPrivateNetworkSpec = (
 })
 
 const marshalEndpointSpecPublicNetworkSpec = (
-  request: EndpointSpecPublicNetworkSpec,
-  defaults: DefaultValues,
+  _request: EndpointSpecPublicNetworkSpec,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({})
 
 const marshalEndpointSpec = (
@@ -457,7 +457,7 @@ export const marshalCreateClusterRequest = (
 
 export const marshalMigrateClusterRequest = (
   request: MigrateClusterRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ...resolveOneOf<string | number>([
     { param: 'version', value: request.version },
@@ -489,7 +489,7 @@ export const marshalSetEndpointsRequest = (
 
 export const marshalUpdateClusterRequest = (
   request: UpdateClusterRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   password: request.password,

@@ -1,12 +1,12 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import {
   isJSONObject,
   unmarshalArrayOfObject,
   unmarshalDate,
 } from '@scaleway/sdk-client'
-import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   BatchCreateServersRequest,
   BatchCreateServersRequestBatchInnerCreateServerRequest,
@@ -18,8 +18,8 @@ import type {
   CreateServerRequest,
   ListOSResponse,
   ListServerPrivateNetworksResponse,
-  ListServerTypesResponse,
   ListServersResponse,
+  ListServerTypesResponse,
   OS,
   OSSupportedServerType,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
@@ -33,8 +33,8 @@ import type {
   ServerTypeDisk,
   ServerTypeGPU,
   ServerTypeMemory,
-  ServerTypeNPU,
   ServerTypeNetwork,
+  ServerTypeNPU,
   SetServerPrivateNetworksResponse,
   StartConnectivityDiagnosticRequest,
   StartConnectivityDiagnosticResponse,
@@ -423,7 +423,7 @@ export const unmarshalStartConnectivityDiagnosticResponse = (
 
 const marshalBatchCreateServersRequestBatchInnerCreateServerRequest = (
   request: BatchCreateServersRequestBatchInnerCreateServerRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
 })
@@ -451,7 +451,7 @@ export const marshalBatchCreateServersRequest = (
 
 const marshalRunnerConfiguration = (
   request: RunnerConfiguration,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   provider: request.provider,
@@ -478,7 +478,7 @@ export const marshalCreateServerRequest = (
 
 export const marshalPrivateNetworkApiAddServerPrivateNetworkRequest = (
   request: PrivateNetworkApiAddServerPrivateNetworkRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ipam_ip_ids: request.ipamIpIds,
   private_network_id: request.privateNetworkId,
@@ -486,28 +486,28 @@ export const marshalPrivateNetworkApiAddServerPrivateNetworkRequest = (
 
 export const marshalPrivateNetworkApiSetServerPrivateNetworksRequest = (
   request: PrivateNetworkApiSetServerPrivateNetworksRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   per_private_network_ipam_ip_ids: request.perPrivateNetworkIpamIpIds,
 })
 
 export const marshalReinstallServerRequest = (
   request: ReinstallServerRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   os_id: request.osId,
 })
 
 export const marshalStartConnectivityDiagnosticRequest = (
   request: StartConnectivityDiagnosticRequest,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   server_id: request.serverId,
 })
 
 const marshalCommitmentTypeValue = (
   request: CommitmentTypeValue,
-  defaults: DefaultValues,
+  _defaults: DefaultValues,
 ): Record<string, unknown> => ({
   commitment_type: request.commitmentType,
 })
