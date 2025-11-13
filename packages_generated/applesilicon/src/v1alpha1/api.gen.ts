@@ -309,7 +309,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Reinstall a server. Reinstall an existing Apple silicon server (specified by its server ID) from a new image (OS). All the data on the disk is deleted and all configuration is reset to the defailt configuration values of the image (OS).
+   * Reinstall a server. Reinstall an existing Apple silicon server (specified by its server ID) from a new image (OS). All the data on the disk is deleted and all configuration is reset to the default configuration values of the image (OS).
    *
    * @param request - The request {@link ReinstallServerRequest}
    * @returns A Promise of Server
