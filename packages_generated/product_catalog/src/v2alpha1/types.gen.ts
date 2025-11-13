@@ -15,6 +15,17 @@ export type ListPublicCatalogProductsRequestProductType =
   | 'block_storage'
   | 'object_storage'
 
+export type ListPublicCatalogProductsRequestStatus =
+  | 'unknown_status'
+  | 'public_beta'
+  | 'preview'
+  | 'general_availability'
+  | 'end_of_deployment'
+  | 'end_of_support'
+  | 'end_of_sale'
+  | 'end_of_life'
+  | 'retired'
+
 export type PublicCatalogProductPropertiesHardwareCPUArch =
   | 'unknown_arch'
   | 'x64'
@@ -30,6 +41,8 @@ export type PublicCatalogProductStatus =
   | 'end_of_deployment'
   | 'end_of_support'
   | 'end_of_sale'
+  | 'end_of_life'
+  | 'retired'
 
 export type PublicCatalogProductUnitOfMeasureCountableUnit =
   | 'unknown_countable_unit'
@@ -458,4 +471,8 @@ export type PublicCatalogApiListPublicCatalogProductsRequest = {
    * One-of ('locality'): at most one of 'global', 'region', 'zone', 'datacenter' could be set.
    */
   datacenter?: string
+  /**
+   * The lists of filtered product status, if empty only products with status public_beta, general_availability, preview, end_of_deployment, end_of_support, end_of_sale, end_of_life or retired will be returned.
+   */
+  status?: ListPublicCatalogProductsRequestStatus[]
 }
