@@ -31,9 +31,11 @@ import type {
   ListGrafanaProductDashboardsResponse,
   ListGrafanaUsersResponse,
   ListPlansResponse,
+  ListProductsResponse,
   ListTokensResponse,
   Plan,
   PreconfiguredAlertData,
+  Product,
   RegionalApiCreateContactPointRequest,
   RegionalApiCreateDataSourceRequest,
   RegionalApiCreateTokenRequest,
@@ -442,6 +444,36 @@ export const unmarshalListPlansResponse = (
     plans: unmarshalArrayOfObject(data.plans, unmarshalPlan),
     totalCount: data.total_count,
   } as ListPlansResponse
+}
+
+const unmarshalProduct = (data: unknown): Product => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Product' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    displayName: data.display_name,
+    familyName: data.family_name,
+    name: data.name,
+    resourceTypes: data.resource_types,
+  } as Product
+}
+
+export const unmarshalListProductsResponse = (
+  data: unknown,
+): ListProductsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListProductsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    productsList: unmarshalArrayOfObject(data.products_list, unmarshalProduct),
+    totalCount: data.total_count,
+  } as ListProductsResponse
 }
 
 export const unmarshalListTokensResponse = (

@@ -40,6 +40,7 @@ import {
   unmarshalListGrafanaProductDashboardsResponse,
   unmarshalListGrafanaUsersResponse,
   unmarshalListPlansResponse,
+  unmarshalListProductsResponse,
   unmarshalListTokensResponse,
   unmarshalPlan,
   unmarshalToken,
@@ -73,6 +74,7 @@ import type {
   ListGrafanaProductDashboardsResponse,
   ListGrafanaUsersResponse,
   ListPlansResponse,
+  ListProductsResponse,
   ListTokensResponse,
   Plan,
   RegionalApiCreateContactPointRequest,
@@ -94,6 +96,7 @@ import type {
   RegionalApiListAlertsRequest,
   RegionalApiListContactPointsRequest,
   RegionalApiListDataSourcesRequest,
+  RegionalApiListProductsRequest,
   RegionalApiListTokensRequest,
   RegionalApiTriggerTestAlertRequest,
   RegionalApiUpdateContactPointRequest,
@@ -626,6 +629,34 @@ You can filter tokens by Project ID and token scopes.
       method: 'DELETE',
       path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens/${validatePathParam('tokenId', request.tokenId)}`,
     })
+
+  protected pageOfListProducts = (
+    request: Readonly<RegionalApiListProductsRequest> = {},
+  ) =>
+    this.client.fetch<ListProductsResponse>(
+      {
+        method: 'GET',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/products`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListProductsResponse,
+    )
+
+  /**
+   * List all Scaleway products that send metrics and/or logs to Cockpit.. List all Scaleway products that send metrics and/or logs to Cockpit.
+   *
+   * @param request - The request {@link RegionalApiListProductsRequest}
+   * @returns A Promise of ListProductsResponse
+   */
+  listProducts = (request: Readonly<RegionalApiListProductsRequest> = {}) =>
+    enrichForPagination('productsList', this.pageOfListProducts, request)
 
   /**
    * Get the Alert manager. Retrieve information about the Alert manager which is unique per Project and region. By default the Alert manager is disabled.

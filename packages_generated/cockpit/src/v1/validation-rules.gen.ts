@@ -42,6 +42,17 @@ export const RegionalApiListDataSourcesRequest = {
   },
 }
 
+export const RegionalApiListProductsRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 10000,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const RegionalApiListTokensRequest = {
   page: {
     greaterThanOrEqual: 1,
