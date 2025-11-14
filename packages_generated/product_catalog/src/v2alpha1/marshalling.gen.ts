@@ -26,6 +26,7 @@ import type {
   PublicCatalogProductPropertiesHardwareRAM,
   PublicCatalogProductPropertiesHardwareStorage,
   PublicCatalogProductPropertiesInstance,
+  PublicCatalogProductPropertiesManagedInference,
   PublicCatalogProductPropertiesObjectStorage,
   PublicCatalogProductUnitOfMeasure,
 } from './types.gen.js'
@@ -255,6 +256,20 @@ const unmarshalPublicCatalogProductPropertiesInstance = (
   } as PublicCatalogProductPropertiesInstance
 }
 
+const unmarshalPublicCatalogProductPropertiesManagedInference = (
+  data: unknown,
+): PublicCatalogProductPropertiesManagedInference => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesManagedInference' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    instanceGpuName: data.instance_gpu_name,
+  } as PublicCatalogProductPropertiesManagedInference
+}
+
 const unmarshalPublicCatalogProductPropertiesObjectStorage = (
   data: unknown,
 ): PublicCatalogProductPropertiesObjectStorage => {
@@ -342,6 +357,11 @@ const unmarshalPublicCatalogProductProperties = (
       : undefined,
     instance: data.instance
       ? unmarshalPublicCatalogProductPropertiesInstance(data.instance)
+      : undefined,
+    managedInference: data.managed_inference
+      ? unmarshalPublicCatalogProductPropertiesManagedInference(
+          data.managed_inference,
+        )
       : undefined,
     objectStorage: data.object_storage
       ? unmarshalPublicCatalogProductPropertiesObjectStorage(
