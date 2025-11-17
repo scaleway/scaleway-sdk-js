@@ -14,6 +14,7 @@ export type ListPublicCatalogProductsRequestProductType =
   | 'dedibox'
   | 'block_storage'
   | 'object_storage'
+  | 'managed_inference'
 
 export type ListPublicCatalogProductsRequestStatus =
   | 'unknown_status'
@@ -279,6 +280,13 @@ export interface PublicCatalogProductPropertiesInstance {
   recommendedReplacementOfferIds: string[]
 }
 
+export interface PublicCatalogProductPropertiesManagedInference {
+  /**
+   * The name of the associated instance GPU to this node type.
+   */
+  instanceGpuName: string
+}
+
 export interface PublicCatalogProductPropertiesObjectStorage {}
 
 export interface PublicCatalogProductEnvironmentalImpactEstimation {
@@ -328,39 +336,45 @@ export interface PublicCatalogProductProperties {
   /**
    * The properties of Dedibox products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
    */
   dedibox?: PublicCatalogProductPropertiesDedibox
   /**
    * The properties of Elastic Metal products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
    */
   elasticMetal?: PublicCatalogProductPropertiesElasticMetal
   /**
    * The properties of Apple Silicon products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
    */
   appleSilicon?: PublicCatalogProductPropertiesAppleSilicon
   /**
    * The properties of Instance products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
    */
   instance?: PublicCatalogProductPropertiesInstance
   /**
    * The properties of Block Storage products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
    */
   blockStorage?: PublicCatalogProductPropertiesBlockStorage
   /**
    * The properties of Object Storage products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
    */
   objectStorage?: PublicCatalogProductPropertiesObjectStorage
+  /**
+   * The properties of Managed Inference products.
+   *
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
+   */
+  managedInference?: PublicCatalogProductPropertiesManagedInference
 }
 
 export interface PublicCatalogProductUnitOfMeasure {

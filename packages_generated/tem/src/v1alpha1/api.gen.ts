@@ -109,7 +109,7 @@ export class API extends ParentAPI {
   })
 
   /**
-   * Send an email. You must specify the `region`, the sender and the recipient's information and the `project_id` to send an email from a checked domain. The subject of the email must contain at least 6 characters.
+   * Send an email. You must specify the `region`, the sender and the recipient's information and the `project_id` to send an email from a checked domain.
    *
    * @param request - The request {@link CreateEmailRequest}
    * @returns A Promise of CreateEmailResponse
