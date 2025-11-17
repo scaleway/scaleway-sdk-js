@@ -31,6 +31,7 @@ export class PublicCatalogAPI extends ParentAPI {
             request.pageSize ?? this.client.settings.defaultPageSize,
           ],
           ['product_types', request.productTypes],
+          ['status', request.status],
           ...Object.entries(
             resolveOneOf<boolean | ScwRegion | ScwZone | string>([
               { param: 'global', value: request.global },

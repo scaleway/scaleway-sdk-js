@@ -41,6 +41,8 @@ export type ResourceType =
   | 'kafka_cluster'
   | 'bgp_endpoint'
   | 'scbl_sedb_cluster'
+  | 'dtwh_deployment'
+  | 'sedb_cluster'
 
 export interface Resource {
   /**
