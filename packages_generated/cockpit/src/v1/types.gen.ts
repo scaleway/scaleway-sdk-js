@@ -33,6 +33,14 @@ export type ListGrafanaUsersRequestOrderBy = 'login_asc' | 'login_desc'
 
 export type ListPlansRequestOrderBy = 'name_asc' | 'name_desc'
 
+export type ListProductsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'display_name_asc'
+  | 'display_name_desc'
+  | 'family_name_asc'
+  | 'family_name_desc'
+
 export type ListTokensRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -306,6 +314,13 @@ export interface Plan {
    * Retention price in euros per month.
    */
   monthlyPrice: number
+}
+
+export interface Product {
+  name: string
+  displayName: string
+  familyName: string
+  resourceTypes: string[]
 }
 
 /**
@@ -732,6 +747,11 @@ export interface ListPlansResponse {
   plans: Plan[]
 }
 
+export interface ListProductsResponse {
+  productsList: Product[]
+  totalCount: number
+}
+
 /**
  * Response returned when listing tokens.
  */
@@ -1080,6 +1100,28 @@ export type RegionalApiListDataSourcesRequest = {
    * Types to filter for (metrics, logs, traces), only data sources with matching types will be returned. If omitted, all types will be returned.
    */
   types?: DataSourceType[]
+}
+
+/**
+ * List all Scaleway products that send metrics and/or logs to Cockpit.
+ */
+export type RegionalApiListProductsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Page number to return from the paginated results.
+   */
+  page?: number
+  /**
+   * Number of products to return per page.
+   */
+  pageSize?: number
+  /**
+   * Sort order for products in the response.
+   */
+  orderBy?: ListProductsRequestOrderBy
 }
 
 /**
