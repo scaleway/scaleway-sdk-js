@@ -2,7 +2,8 @@
   "root": false,
   "$schema": "../../node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
-    "ignoreUnknown": true
+    "ignoreUnknown": true,
+    "experimentalScannerIgnores": ["**/dist/**"]
   },
   "linter": {
     "enabled": true,
@@ -17,7 +18,8 @@
         "noDefaultExport": "off"
       },
       "suspicious": {
-        "noShadowRestrictedNames": "off"
+        "noShadowRestrictedNames": "off",
+        "noEmptyInterface": "off"
       },
       "performance": {
         "noAccumulatingSpread": "off"
