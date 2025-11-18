@@ -1,39 +1,31 @@
-// This file was automatically generated. DO NOT EDIT.
-// If you have any remark or suggestion do not hesitate to open an issue.
-import {
-  isJSONObject,
-  unmarshalArrayOfObject,
-  unmarshalDate,
-  unmarshalMoney,
-} from '@scaleway/sdk-client'
+
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney, } from '@scaleway/sdk-client'
 import type {
-  ListPublicCatalogProductsResponse,
-  PublicCatalogProduct,
-  PublicCatalogProductEnvironmentalImpactEstimation,
-  PublicCatalogProductLocality,
-  PublicCatalogProductPrice,
-  PublicCatalogProductProperties,
+  PublicCatalogProductPropertiesHardwareCPUPhysical,
+  PublicCatalogProductPropertiesHardwareCPUVirtual,
+  PublicCatalogProductPropertiesHardwareCPU,
+  PublicCatalogProductPropertiesHardwareGPU,
+  PublicCatalogProductPropertiesHardwareNetwork,
+  PublicCatalogProductPropertiesHardwareRAM,
+  PublicCatalogProductPropertiesHardwareStorage,
   PublicCatalogProductPropertiesAppleSilicon,
   PublicCatalogProductPropertiesBlockStorage,
   PublicCatalogProductPropertiesDedibox,
   PublicCatalogProductPropertiesElasticMetal,
   PublicCatalogProductPropertiesHardware,
-  PublicCatalogProductPropertiesHardwareCPU,
-  PublicCatalogProductPropertiesHardwareCPUPhysical,
-  PublicCatalogProductPropertiesHardwareCPUVirtual,
-  PublicCatalogProductPropertiesHardwareGPU,
-  PublicCatalogProductPropertiesHardwareNetwork,
-  PublicCatalogProductPropertiesHardwareRAM,
-  PublicCatalogProductPropertiesHardwareStorage,
   PublicCatalogProductPropertiesInstance,
   PublicCatalogProductPropertiesManagedInference,
   PublicCatalogProductPropertiesObjectStorage,
+  PublicCatalogProductEnvironmentalImpactEstimation,
+  PublicCatalogProductLocality,
+  PublicCatalogProductPrice,
+  PublicCatalogProductProperties,
   PublicCatalogProductUnitOfMeasure,
+  PublicCatalogProduct,
+  ListPublicCatalogProductsResponse,
 } from './types.gen.js'
 
-const unmarshalPublicCatalogProductPropertiesHardwareCPUPhysical = (
-  data: unknown,
-): PublicCatalogProductPropertiesHardwareCPUPhysical => {
+const unmarshalPublicCatalogProductPropertiesHardwareCPUPhysical = (data: unknown): PublicCatalogProductPropertiesHardwareCPUPhysical => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductPropertiesHardwareCPUPhysical' failed as data isn't a dictionary.`,
@@ -49,9 +41,7 @@ const unmarshalPublicCatalogProductPropertiesHardwareCPUPhysical = (
   } as PublicCatalogProductPropertiesHardwareCPUPhysical
 }
 
-const unmarshalPublicCatalogProductPropertiesHardwareCPUVirtual = (
-  data: unknown,
-): PublicCatalogProductPropertiesHardwareCPUVirtual => {
+const unmarshalPublicCatalogProductPropertiesHardwareCPUVirtual = (data: unknown): PublicCatalogProductPropertiesHardwareCPUVirtual => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductPropertiesHardwareCPUVirtual' failed as data isn't a dictionary.`,
@@ -63,9 +53,7 @@ const unmarshalPublicCatalogProductPropertiesHardwareCPUVirtual = (
   } as PublicCatalogProductPropertiesHardwareCPUVirtual
 }
 
-const unmarshalPublicCatalogProductPropertiesHardwareCPU = (
-  data: unknown,
-): PublicCatalogProductPropertiesHardwareCPU => {
+const unmarshalPublicCatalogProductPropertiesHardwareCPU = (data: unknown): PublicCatalogProductPropertiesHardwareCPU => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductPropertiesHardwareCPU' failed as data isn't a dictionary.`,
@@ -75,22 +63,14 @@ const unmarshalPublicCatalogProductPropertiesHardwareCPU = (
   return {
     arch: data.arch,
     description: data.description,
-    physical: data.physical
-      ? unmarshalPublicCatalogProductPropertiesHardwareCPUPhysical(
-          data.physical,
-        )
-      : undefined,
+    physical: data.physical ? unmarshalPublicCatalogProductPropertiesHardwareCPUPhysical(data.physical) : undefined,
     threads: data.threads,
     type: data.type,
-    virtual: data.virtual
-      ? unmarshalPublicCatalogProductPropertiesHardwareCPUVirtual(data.virtual)
-      : undefined,
+    virtual: data.virtual ? unmarshalPublicCatalogProductPropertiesHardwareCPUVirtual(data.virtual) : undefined,
   } as PublicCatalogProductPropertiesHardwareCPU
 }
 
-const unmarshalPublicCatalogProductPropertiesHardwareGPU = (
-  data: unknown,
-): PublicCatalogProductPropertiesHardwareGPU => {
+const unmarshalPublicCatalogProductPropertiesHardwareGPU = (data: unknown): PublicCatalogProductPropertiesHardwareGPU => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductPropertiesHardwareGPU' failed as data isn't a dictionary.`,
@@ -104,9 +84,7 @@ const unmarshalPublicCatalogProductPropertiesHardwareGPU = (
   } as PublicCatalogProductPropertiesHardwareGPU
 }
 
-const unmarshalPublicCatalogProductPropertiesHardwareNetwork = (
-  data: unknown,
-): PublicCatalogProductPropertiesHardwareNetwork => {
+const unmarshalPublicCatalogProductPropertiesHardwareNetwork = (data: unknown): PublicCatalogProductPropertiesHardwareNetwork => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductPropertiesHardwareNetwork' failed as data isn't a dictionary.`,
@@ -121,9 +99,7 @@ const unmarshalPublicCatalogProductPropertiesHardwareNetwork = (
   } as PublicCatalogProductPropertiesHardwareNetwork
 }
 
-const unmarshalPublicCatalogProductPropertiesHardwareRAM = (
-  data: unknown,
-): PublicCatalogProductPropertiesHardwareRAM => {
+const unmarshalPublicCatalogProductPropertiesHardwareRAM = (data: unknown): PublicCatalogProductPropertiesHardwareRAM => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductPropertiesHardwareRAM' failed as data isn't a dictionary.`,
@@ -137,9 +113,7 @@ const unmarshalPublicCatalogProductPropertiesHardwareRAM = (
   } as PublicCatalogProductPropertiesHardwareRAM
 }
 
-const unmarshalPublicCatalogProductPropertiesHardwareStorage = (
-  data: unknown,
-): PublicCatalogProductPropertiesHardwareStorage => {
+const unmarshalPublicCatalogProductPropertiesHardwareStorage = (data: unknown): PublicCatalogProductPropertiesHardwareStorage => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductPropertiesHardwareStorage' failed as data isn't a dictionary.`,
@@ -152,9 +126,7 @@ const unmarshalPublicCatalogProductPropertiesHardwareStorage = (
   } as PublicCatalogProductPropertiesHardwareStorage
 }
 
-const unmarshalPublicCatalogProductPropertiesAppleSilicon = (
-  data: unknown,
-): PublicCatalogProductPropertiesAppleSilicon => {
+const unmarshalPublicCatalogProductPropertiesAppleSilicon = (data: unknown): PublicCatalogProductPropertiesAppleSilicon => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductPropertiesAppleSilicon' failed as data isn't a dictionary.`,
@@ -167,9 +139,7 @@ const unmarshalPublicCatalogProductPropertiesAppleSilicon = (
   } as PublicCatalogProductPropertiesAppleSilicon
 }
 
-const unmarshalPublicCatalogProductPropertiesBlockStorage = (
-  data: unknown,
-): PublicCatalogProductPropertiesBlockStorage => {
+const unmarshalPublicCatalogProductPropertiesBlockStorage = (data: unknown): PublicCatalogProductPropertiesBlockStorage => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductPropertiesBlockStorage' failed as data isn't a dictionary.`,
@@ -182,9 +152,7 @@ const unmarshalPublicCatalogProductPropertiesBlockStorage = (
   } as PublicCatalogProductPropertiesBlockStorage
 }
 
-const unmarshalPublicCatalogProductPropertiesDedibox = (
-  data: unknown,
-): PublicCatalogProductPropertiesDedibox => {
+const unmarshalPublicCatalogProductPropertiesDedibox = (data: unknown): PublicCatalogProductPropertiesDedibox => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductPropertiesDedibox' failed as data isn't a dictionary.`,
@@ -197,9 +165,7 @@ const unmarshalPublicCatalogProductPropertiesDedibox = (
   } as PublicCatalogProductPropertiesDedibox
 }
 
-const unmarshalPublicCatalogProductPropertiesElasticMetal = (
-  data: unknown,
-): PublicCatalogProductPropertiesElasticMetal => {
+const unmarshalPublicCatalogProductPropertiesElasticMetal = (data: unknown): PublicCatalogProductPropertiesElasticMetal => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductPropertiesElasticMetal' failed as data isn't a dictionary.`,
@@ -212,9 +178,7 @@ const unmarshalPublicCatalogProductPropertiesElasticMetal = (
   } as PublicCatalogProductPropertiesElasticMetal
 }
 
-const unmarshalPublicCatalogProductPropertiesHardware = (
-  data: unknown,
-): PublicCatalogProductPropertiesHardware => {
+const unmarshalPublicCatalogProductPropertiesHardware = (data: unknown): PublicCatalogProductPropertiesHardware => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductPropertiesHardware' failed as data isn't a dictionary.`,
@@ -222,27 +186,15 @@ const unmarshalPublicCatalogProductPropertiesHardware = (
   }
 
   return {
-    cpu: data.cpu
-      ? unmarshalPublicCatalogProductPropertiesHardwareCPU(data.cpu)
-      : undefined,
-    gpu: data.gpu
-      ? unmarshalPublicCatalogProductPropertiesHardwareGPU(data.gpu)
-      : undefined,
-    network: data.network
-      ? unmarshalPublicCatalogProductPropertiesHardwareNetwork(data.network)
-      : undefined,
-    ram: data.ram
-      ? unmarshalPublicCatalogProductPropertiesHardwareRAM(data.ram)
-      : undefined,
-    storage: data.storage
-      ? unmarshalPublicCatalogProductPropertiesHardwareStorage(data.storage)
-      : undefined,
+    cpu: data.cpu ? unmarshalPublicCatalogProductPropertiesHardwareCPU(data.cpu) : undefined,
+    gpu: data.gpu ? unmarshalPublicCatalogProductPropertiesHardwareGPU(data.gpu) : undefined,
+    network: data.network ? unmarshalPublicCatalogProductPropertiesHardwareNetwork(data.network) : undefined,
+    ram: data.ram ? unmarshalPublicCatalogProductPropertiesHardwareRAM(data.ram) : undefined,
+    storage: data.storage ? unmarshalPublicCatalogProductPropertiesHardwareStorage(data.storage) : undefined,
   } as PublicCatalogProductPropertiesHardware
 }
 
-const unmarshalPublicCatalogProductPropertiesInstance = (
-  data: unknown,
-): PublicCatalogProductPropertiesInstance => {
+const unmarshalPublicCatalogProductPropertiesInstance = (data: unknown): PublicCatalogProductPropertiesInstance => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductPropertiesInstance' failed as data isn't a dictionary.`,
@@ -256,9 +208,7 @@ const unmarshalPublicCatalogProductPropertiesInstance = (
   } as PublicCatalogProductPropertiesInstance
 }
 
-const unmarshalPublicCatalogProductPropertiesManagedInference = (
-  data: unknown,
-): PublicCatalogProductPropertiesManagedInference => {
+const unmarshalPublicCatalogProductPropertiesManagedInference = (data: unknown): PublicCatalogProductPropertiesManagedInference => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductPropertiesManagedInference' failed as data isn't a dictionary.`,
@@ -270,21 +220,18 @@ const unmarshalPublicCatalogProductPropertiesManagedInference = (
   } as PublicCatalogProductPropertiesManagedInference
 }
 
-const unmarshalPublicCatalogProductPropertiesObjectStorage = (
-  data: unknown,
-): PublicCatalogProductPropertiesObjectStorage => {
+const unmarshalPublicCatalogProductPropertiesObjectStorage = (data: unknown): PublicCatalogProductPropertiesObjectStorage => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductPropertiesObjectStorage' failed as data isn't a dictionary.`,
     )
   }
 
-  return {} as PublicCatalogProductPropertiesObjectStorage
+  return {
+  } as PublicCatalogProductPropertiesObjectStorage
 }
 
-const unmarshalPublicCatalogProductEnvironmentalImpactEstimation = (
-  data: unknown,
-): PublicCatalogProductEnvironmentalImpactEstimation => {
+const unmarshalPublicCatalogProductEnvironmentalImpactEstimation = (data: unknown): PublicCatalogProductEnvironmentalImpactEstimation => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductEnvironmentalImpactEstimation' failed as data isn't a dictionary.`,
@@ -297,9 +244,7 @@ const unmarshalPublicCatalogProductEnvironmentalImpactEstimation = (
   } as PublicCatalogProductEnvironmentalImpactEstimation
 }
 
-const unmarshalPublicCatalogProductLocality = (
-  data: unknown,
-): PublicCatalogProductLocality => {
+const unmarshalPublicCatalogProductLocality = (data: unknown): PublicCatalogProductLocality => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductLocality' failed as data isn't a dictionary.`,
@@ -314,9 +259,7 @@ const unmarshalPublicCatalogProductLocality = (
   } as PublicCatalogProductLocality
 }
 
-const unmarshalPublicCatalogProductPrice = (
-  data: unknown,
-): PublicCatalogProductPrice => {
+const unmarshalPublicCatalogProductPrice = (data: unknown): PublicCatalogProductPrice => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductPrice' failed as data isn't a dictionary.`,
@@ -324,15 +267,11 @@ const unmarshalPublicCatalogProductPrice = (
   }
 
   return {
-    retailPrice: data.retail_price
-      ? unmarshalMoney(data.retail_price)
-      : undefined,
+    retailPrice: data.retail_price ? unmarshalMoney(data.retail_price) : undefined,
   } as PublicCatalogProductPrice
 }
 
-const unmarshalPublicCatalogProductProperties = (
-  data: unknown,
-): PublicCatalogProductProperties => {
+const unmarshalPublicCatalogProductProperties = (data: unknown): PublicCatalogProductProperties => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductProperties' failed as data isn't a dictionary.`,
@@ -340,40 +279,18 @@ const unmarshalPublicCatalogProductProperties = (
   }
 
   return {
-    appleSilicon: data.apple_silicon
-      ? unmarshalPublicCatalogProductPropertiesAppleSilicon(data.apple_silicon)
-      : undefined,
-    blockStorage: data.block_storage
-      ? unmarshalPublicCatalogProductPropertiesBlockStorage(data.block_storage)
-      : undefined,
-    dedibox: data.dedibox
-      ? unmarshalPublicCatalogProductPropertiesDedibox(data.dedibox)
-      : undefined,
-    elasticMetal: data.elastic_metal
-      ? unmarshalPublicCatalogProductPropertiesElasticMetal(data.elastic_metal)
-      : undefined,
-    hardware: data.hardware
-      ? unmarshalPublicCatalogProductPropertiesHardware(data.hardware)
-      : undefined,
-    instance: data.instance
-      ? unmarshalPublicCatalogProductPropertiesInstance(data.instance)
-      : undefined,
-    managedInference: data.managed_inference
-      ? unmarshalPublicCatalogProductPropertiesManagedInference(
-          data.managed_inference,
-        )
-      : undefined,
-    objectStorage: data.object_storage
-      ? unmarshalPublicCatalogProductPropertiesObjectStorage(
-          data.object_storage,
-        )
-      : undefined,
+    appleSilicon: data.apple_silicon ? unmarshalPublicCatalogProductPropertiesAppleSilicon(data.apple_silicon) : undefined,
+    blockStorage: data.block_storage ? unmarshalPublicCatalogProductPropertiesBlockStorage(data.block_storage) : undefined,
+    dedibox: data.dedibox ? unmarshalPublicCatalogProductPropertiesDedibox(data.dedibox) : undefined,
+    elasticMetal: data.elastic_metal ? unmarshalPublicCatalogProductPropertiesElasticMetal(data.elastic_metal) : undefined,
+    hardware: data.hardware ? unmarshalPublicCatalogProductPropertiesHardware(data.hardware) : undefined,
+    instance: data.instance ? unmarshalPublicCatalogProductPropertiesInstance(data.instance) : undefined,
+    managedInference: data.managed_inference ? unmarshalPublicCatalogProductPropertiesManagedInference(data.managed_inference) : undefined,
+    objectStorage: data.object_storage ? unmarshalPublicCatalogProductPropertiesObjectStorage(data.object_storage) : undefined,
   } as PublicCatalogProductProperties
 }
 
-const unmarshalPublicCatalogProductUnitOfMeasure = (
-  data: unknown,
-): PublicCatalogProductUnitOfMeasure => {
+const unmarshalPublicCatalogProductUnitOfMeasure = (data: unknown): PublicCatalogProductUnitOfMeasure => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicCatalogProductUnitOfMeasure' failed as data isn't a dictionary.`,
@@ -396,35 +313,21 @@ const unmarshalPublicCatalogProduct = (data: unknown): PublicCatalogProduct => {
   return {
     description: data.description,
     endOfLifeAt: unmarshalDate(data.end_of_life_at),
-    environmentalImpactEstimation: data.environmental_impact_estimation
-      ? unmarshalPublicCatalogProductEnvironmentalImpactEstimation(
-          data.environmental_impact_estimation,
-        )
-      : undefined,
-    locality: data.locality
-      ? unmarshalPublicCatalogProductLocality(data.locality)
-      : undefined,
-    price: data.price
-      ? unmarshalPublicCatalogProductPrice(data.price)
-      : undefined,
+    environmentalImpactEstimation: data.environmental_impact_estimation ? unmarshalPublicCatalogProductEnvironmentalImpactEstimation(data.environmental_impact_estimation) : undefined,
+    locality: data.locality ? unmarshalPublicCatalogProductLocality(data.locality) : undefined,
+    price: data.price ? unmarshalPublicCatalogProductPrice(data.price) : undefined,
     product: data.product,
     productCategory: data.product_category,
-    properties: data.properties
-      ? unmarshalPublicCatalogProductProperties(data.properties)
-      : undefined,
+    properties: data.properties ? unmarshalPublicCatalogProductProperties(data.properties) : undefined,
     serviceCategory: data.service_category,
     sku: data.sku,
     status: data.status,
-    unitOfMeasure: data.unit_of_measure
-      ? unmarshalPublicCatalogProductUnitOfMeasure(data.unit_of_measure)
-      : undefined,
+    unitOfMeasure: data.unit_of_measure ? unmarshalPublicCatalogProductUnitOfMeasure(data.unit_of_measure) : undefined,
     variant: data.variant,
   } as PublicCatalogProduct
 }
 
-export const unmarshalListPublicCatalogProductsResponse = (
-  data: unknown,
-): ListPublicCatalogProductsResponse => {
+export const unmarshalListPublicCatalogProductsResponse = (data: unknown): ListPublicCatalogProductsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListPublicCatalogProductsResponse' failed as data isn't a dictionary.`,
@@ -432,10 +335,7 @@ export const unmarshalListPublicCatalogProductsResponse = (
   }
 
   return {
-    products: unmarshalArrayOfObject(
-      data.products,
-      unmarshalPublicCatalogProduct,
-    ),
+    products: unmarshalArrayOfObject(data.products, unmarshalPublicCatalogProduct),
     totalCount: data.total_count,
   } as ListPublicCatalogProductsResponse
 }
