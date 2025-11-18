@@ -16,8 +16,7 @@ format-check:
 
 format-generated:
 	pnpm install
-	# Cleanup unused imports/variables in generated TS with dedicated config
-	pnpm biome lint --write --unsafe --config-path scripts/templates/biome.generated.json packages_generated/
+	pnpm biome lint --write --unsafe --config-path scripts/templates/biome.generated.json --only correctness/noUnusedImports --only correctness/noUnusedVariables packages_generated/
 
 typing:
 	pnpm run typecheck
