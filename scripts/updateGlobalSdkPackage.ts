@@ -17,27 +17,25 @@ const getGeneratedPackages = (): PackageJSON[] | null => {
       withFileTypes: true,
     })
 
-    dirs
-      .filter(dirent => dirent.isDirectory())
-      .forEach(dirent => {
-        const packageJsonPath = join(
-          PATHS.GENERATED_PACKAGES_DIR,
-          dirent.name,
-          'package.json',
-        )
+    for (const dirent of dirs.filter(dirent => dirent.isDirectory())) {
+      const packageJsonPath = join(
+        PATHS.GENERATED_PACKAGES_DIR,
+        dirent.name,
+        'package.json',
+      )
 
-        if (existsSync(packageJsonPath)) {
-          const packageData = JSON.parse(
-            readFileSync(packageJsonPath, 'utf8'),
-          ) as PackageJSON
+      if (existsSync(packageJsonPath)) {
+        const packageData = JSON.parse(
+          readFileSync(packageJsonPath, 'utf8'),
+        ) as PackageJSON
 
-          packages.push({
-            name: packageData.name,
-            version: packageData.version,
-            path: dirent.name,
-          })
-        }
-      })
+        packages.push({
+          name: packageData.name,
+          version: packageData.version,
+          path: dirent.name,
+        })
+      }
+    }
 
     return packages
   } catch (error) {
@@ -66,16 +64,16 @@ const updateSdkPackageJson = ({
     }
 
     // Add all generated packages to dependencies
-    generatedPackages.forEach(({ name }) => {
+    for (const { name } of generatedPackages) {
       if (sdkPackageJson.dependencies) {
         sdkPackageJson.dependencies[name] = 'workspace:*'
       }
-    })
+    }
 
     // Write the updated package.json
     writeFileSync(
       pathSdkPackageJson,
-      JSON.stringify(sdkPackageJson, null, 2) + '\n',
+      `${JSON.stringify(sdkPackageJson, null, 2)}\n`,
       'utf8',
     )
 
@@ -102,9 +100,9 @@ const updateSdkIndex = ({
   try {
     let indexContent = '// Auto-generated exports from all SDK packages\n\n'
 
-    generatedPackages.forEach(pkg => {
+    for (const pkg of generatedPackages) {
       indexContent += `export * from '${pkg.name}'\n`
-    })
+    }
 
     writeFileSync(sdkIndexPath, indexContent, 'utf8')
     console.log(

@@ -1,4 +1,12 @@
 /**
+ * Interceptor type definitions.
+ *
+ * Note: This file uses interface call signatures instead of shorthand function types
+ * to maintain clear, documented public API signatures that are more readable in IDE
+ * tooltips and generated documentation.
+ */
+
+/**
  * Defines the interceptor for a `Request`.
  * This allows you to intercept requests before starting.
  *

@@ -13,7 +13,9 @@ afterAll(() => {
 describe('sleep', () => {
   it('delays the proper amount of time', () => {
     const delay = 50 // 0.05s
-    sleep(delay).catch(() => {})
+    sleep(delay).catch(() => {
+      /* noop */
+    })
     expect(setTimeout).toHaveBeenCalledTimes(1)
     expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), delay)
   })

@@ -1,42 +1,13 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "vcs": {
+    "enabled": true,
     "clientKind": "git",
-    "useIgnoreFile": false,
+    "useIgnoreFile": true,
     "defaultBranch": "main"
   },
   "files": {
-    "maxSize": 10000000,
-    "ignoreUnknown": true,
-    "includes": [
-      "**/*.ts",
-      "**/*.tsx",
-      "**/*.js",
-      "**/*.jsx",
-      "**/*.json"
-    ],
-    "experimentalScannerIgnores": [
-      ".next/",
-      ".pnpm-store/",
-      "coverage/",
-      "/public/outdated",
-      "/public/.well-known",
-      "**/node_modules/",
-      "**/storybook-static",
-      ".turbo/**",
-      "dist",
-      "build",
-      "out",
-      "node_modules/**",
-      "**/pnpm-lock.yaml",
-      "**/package.json",
-      "**/CHANGELOG.md",
-      "*.snap",
-      "**/__snapshots__/",
-      ".docusaurus",
-      ".vitest-reports",
-      "**/*.gen.ts"
-    ]
+    "ignoreUnknown": true
   },
   "formatter": {
     "enabled": true,
@@ -72,12 +43,59 @@
     }
   },
   "linter": {
-    "enabled": false
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "style": {
+        "noDefaultExport": "error"
+      }
+    }
   },
+  "overrides": [
+    {
+      "includes": ["packages_generated/**", "**/dist/**", "coverage/**", "**/examples/**", "**/*.gen.ts"],
+      "linter": {
+        "enabled": false
+      }
+    },
+    {
+      "includes": ["vite.config.ts", "vitest.config.ts", "**/*.config.ts", "**/*.config.js"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noDefaultExport": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/*.test.ts", "**/__tests__/**/*.ts"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedVariables": "off"
+          },
+          "style": {
+            "useNamingConvention": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["packages/client/src/internal/interceptors/types.ts", "packages/client/src/scw/auth.ts", "packages/client/src/scw/fetch/http-interceptors.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useShorthandFunctionType": "off"
+          }
+        }
+      }
+    }
+  ],
   "assist": {
     "actions": {
       "source": {
-        "organizeImports": "off"
+        "organizeImports": "on"
       }
     }
   }

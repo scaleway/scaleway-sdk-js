@@ -67,6 +67,12 @@ type URLParameterValue = string | number | boolean | Date | null
  *
  * @internal
  */
+const toParamString = (v: URLParameterValue): string | null => {
+  if (v === null) return null
+  if (v instanceof Date) return v.toISOString()
+  return v.toString()
+}
+
 export const urlParams = (
   ...paramTuples: Readonly<
     [string, URLParameterValue | URLParameterValue[] | undefined]
@@ -74,27 +80,17 @@ export const urlParams = (
 ) => {
   const params = new URLSearchParams()
   for (const [key, value] of paramTuples) {
-    if (typeof key === 'string' && value != null) {
-      if (Array.isArray(value)) {
-        for (const innerValue of value) {
-          if (innerValue !== null) {
-            params.append(
-              key,
-              innerValue instanceof Date
-                ? innerValue.toISOString()
-                : innerValue.toString(),
-            )
-          }
-        }
-      } else {
-        params.append(
-          key,
-          value instanceof Date ? value.toISOString() : value.toString(),
-        )
+    if (typeof key !== 'string' || value == null) continue
+    if (Array.isArray(value)) {
+      for (const inner of value) {
+        const s = toParamString(inner)
+        if (s !== null) params.append(key, s)
       }
+      continue
     }
+    const s = toParamString(value)
+    if (s !== null) params.append(key, s)
   }
-
   return params
 }
 
@@ -155,11 +151,9 @@ export const unmarshalMapOfObject = <T, B extends boolean>(
       : Record<string, T>
   }
 
-  return Object.entries(data).reduce(
-    (acc, [key, value]) => ({
-      ...acc,
-      [key]: unmarshaller(value),
-    }),
-    {},
-  )
+  const out: Record<string, T> = {}
+  for (const [key, value] of Object.entries(data)) {
+    out[key] = unmarshaller(value)
+  }
+  return out
 }

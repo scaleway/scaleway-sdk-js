@@ -1,0 +1,44 @@
+{
+  "root": false,
+  "$schema": "../../node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "ignoreUnknown": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": false,
+      "correctness": {
+        "noUnusedVariables": "error",
+        "noUnusedImports": "error"
+      },
+      "style": {
+        "useNamingConvention": "off",
+        "noDefaultExport": "off"
+      },
+      "suspicious": {
+        "noShadowRestrictedNames": "off"
+      },
+      "performance": {
+        "noAccumulatingSpread": "off"
+      },
+      "complexity": {
+        "noExcessiveCognitiveComplexity": "off",
+        "noStaticOnlyClass": "off",
+        "noBannedTypes": "off"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": true
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingCommas": "all",
+      "semicolons": "asNeeded"
+    }
+  }
+}
+
+

@@ -43,12 +43,12 @@ describe('assertValidSettings', () => {
     }).not.toThrow()
   })
 
-  INVALID_SETTINGS_LIST.forEach(obj => {
+  for (const obj of INVALID_SETTINGS_LIST) {
     const newProfile = { ...VALID_SETTINGS, ...obj }
     it(`rejects invalid Settings object ${JSON.stringify(obj)}`, () => {
       expect(() => {
         assertValidSettings(newProfile)
       }).toThrow()
     })
-  })
+  }
 })
