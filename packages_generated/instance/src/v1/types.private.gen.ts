@@ -1,37 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Zone as ScwZone } from '@scaleway/sdk-client'
-import type {
-  Arch,
-  BootType,
-  Image,
-  PlacementGroup,
-  PrivateNIC,
-  SecurityGroup,
-  SecurityGroupPolicy,
-  SecurityGroupRule,
-  SecurityGroupRuleAction,
-  SecurityGroupRuleDirection,
-  SecurityGroupRuleProtocol,
-  SecurityGroupSummary,
-  Server,
-  ServerAction,
-  ServerIp,
-  ServerIpv6,
-  ServerLocation,
-  ServerMaintenance,
-  ServerState,
-  ServerSummary,
-  Snapshot,
-  SnapshotBaseVolume,
-  SnapshotState,
-  Volume,
-  VolumeVolumeType,
-} from './types.gen.js'
+import type {Arch,BootType,SecurityGroupPolicy,SecurityGroupRuleAction,SecurityGroupRuleDirection,SecurityGroupRuleProtocol,ServerAction,ServerState,SnapshotState,VolumeVolumeType,ServerSummary,Volume,Image,PlacementGroup,PrivateNIC,SecurityGroupSummary,ServerIp,ServerIpv6,ServerLocation,ServerMaintenance,SnapshotBaseVolume,Server,SecurityGroup,SecurityGroupRule,Snapshot,} from './types.gen.js'
+
 
 export interface SetImageResponse {
   image?: Image
 }
+
 
 export type SetSecurityGroupRequest = {
   /**
@@ -100,9 +76,11 @@ export type SetSecurityGroupRequest = {
   stateful: boolean
 }
 
+
 export interface SetSecurityGroupResponse {
   securityGroup?: SecurityGroup
 }
+
 
 export type SetSecurityGroupRuleRequest = {
   /**
@@ -122,9 +100,11 @@ export type SetSecurityGroupRuleRequest = {
   editable: boolean
 }
 
+
 export interface SetSecurityGroupRuleResponse {
   rule?: SecurityGroupRule
 }
+
 
 export type SetServerRequest = {
   /**
@@ -253,9 +233,11 @@ export type SetServerRequest = {
   adminPasswordEncryptionSshKeyId?: string
 }
 
+
 export interface SetServerResponse {
   server?: Server
 }
+
 
 export type SetSnapshotRequest = {
   /**
@@ -276,6 +258,9 @@ export type SetSnapshotRequest = {
   tags?: string[]
 }
 
+
 export interface SetSnapshotResponse {
   snapshot?: Snapshot
 }
+
+
