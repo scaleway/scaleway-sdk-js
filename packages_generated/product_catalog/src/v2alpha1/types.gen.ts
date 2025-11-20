@@ -12,6 +12,7 @@ export type ListPublicCatalogProductsRequestProductType =
   | 'block_storage'
   | 'object_storage'
   | 'managed_inference'
+  | 'generative_apis'
 
 export type ListPublicCatalogProductsRequestStatus =
   | 'unknown_status'
@@ -23,6 +24,13 @@ export type ListPublicCatalogProductsRequestStatus =
   | 'end_of_sale'
   | 'end_of_life'
   | 'retired'
+
+export type PublicCatalogProductProductBadge =
+  | 'unknown_product_badge'
+  | 'new_product'
+  | 'best_seller'
+  | 'best_value'
+  | 'popular'
 
 export type PublicCatalogProductPropertiesHardwareCPUArch =
   | 'unknown_arch'
@@ -250,6 +258,12 @@ export interface PublicCatalogProductPropertiesElasticMetal {
 }
 
 
+export interface PublicCatalogProductPropertiesGenerativeApis {
+  reasoning: boolean
+  supportedApis: string[]
+}
+
+
 export interface PublicCatalogProductPropertiesHardware {
   /**
    * The CPU hardware properties.
@@ -352,45 +366,51 @@ export interface PublicCatalogProductProperties {
   /**
    * The properties of Dedibox products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis' could be set.
    */
   dedibox?: PublicCatalogProductPropertiesDedibox
   /**
    * The properties of Elastic Metal products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis' could be set.
    */
   elasticMetal?: PublicCatalogProductPropertiesElasticMetal
   /**
    * The properties of Apple Silicon products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis' could be set.
    */
   appleSilicon?: PublicCatalogProductPropertiesAppleSilicon
   /**
    * The properties of Instance products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis' could be set.
    */
   instance?: PublicCatalogProductPropertiesInstance
   /**
    * The properties of Block Storage products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis' could be set.
    */
   blockStorage?: PublicCatalogProductPropertiesBlockStorage
   /**
    * The properties of Object Storage products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis' could be set.
    */
   objectStorage?: PublicCatalogProductPropertiesObjectStorage
   /**
    * The properties of Managed Inference products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis' could be set.
    */
   managedInference?: PublicCatalogProductPropertiesManagedInference
+  /**
+   * The properties of Generative APIs products.
+   *
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis' could be set.
+   */
+  generativeApis?: PublicCatalogProductPropertiesGenerativeApis
 }
 
 
@@ -453,6 +473,10 @@ export interface PublicCatalogProduct {
    * The end of life date of the product.
    */
   endOfLifeAt?: Date
+  /**
+   * Different badges that can be associated with the product.
+   */
+  badges: PublicCatalogProductProductBadge[]
 }
 
 
