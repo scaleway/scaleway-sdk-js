@@ -3,22 +3,18 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  toApiLocality,
   urlParams,
   validatePathParam,
+  toApiLocality,
 } from '@scaleway/sdk-client'
-import type { ApiLocality } from '@scaleway/sdk-client'
+import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
   marshalAddSubnetsRequest,
+  unmarshalAddSubnetsResponse,
   marshalCreatePrivateNetworkRequest,
   marshalCreateRouteRequest,
   marshalCreateVPCRequest,
   marshalDeleteSubnetsRequest,
-  marshalSetAclRequest,
-  marshalUpdatePrivateNetworkRequest,
-  marshalUpdateRouteRequest,
-  marshalUpdateVPCRequest,
-  unmarshalAddSubnetsResponse,
   unmarshalDeleteSubnetsResponse,
   unmarshalGetAclResponse,
   unmarshalListPrivateNetworksResponse,
@@ -26,7 +22,11 @@ import {
   unmarshalListVPCsResponse,
   unmarshalPrivateNetwork,
   unmarshalRoute,
+  marshalSetAclRequest,
   unmarshalSetAclResponse,
+  marshalUpdatePrivateNetworkRequest,
+  marshalUpdateRouteRequest,
+  marshalUpdateVPCRequest,
   unmarshalVPC,
 } from './marshalling.gen.js'
 import type {
@@ -78,10 +78,15 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
   protected pageOfListVPCs = (request: Readonly<ListVPCsRequest> = {}) =>
     this.client.fetch<ListVPCsResponse>(
       {
@@ -93,10 +98,7 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
           ['routing_enabled', request.routingEnabled],
           ['tags', request.tags],
@@ -104,7 +106,7 @@ export class API extends ParentAPI {
       },
       unmarshalListVPCsResponse,
     )
-
+  
   /**
    * List VPCs. List existing VPCs in the specified region.
    *
@@ -114,6 +116,7 @@ export class API extends ParentAPI {
   listVPCs = (request: Readonly<ListVPCsRequest> = {}) =>
     enrichForPagination('vpcs', this.pageOfListVPCs, request)
 
+  
   /**
    * Create a VPC. Create a new VPC in the specified region.
    *
@@ -133,6 +136,7 @@ export class API extends ParentAPI {
       unmarshalVPC,
     )
 
+  
   /**
    * Get a VPC. Retrieve details of an existing VPC, specified by its VPC ID.
    *
@@ -148,6 +152,7 @@ export class API extends ParentAPI {
       unmarshalVPC,
     )
 
+  
   /**
    * Update VPC. Update parameters including name and tags of the specified VPC.
    *
@@ -167,20 +172,22 @@ export class API extends ParentAPI {
       unmarshalVPC,
     )
 
+  
   /**
    * Delete a VPC. Delete a VPC specified by its VPC ID.
    *
    * @param request - The request {@link DeleteVPCRequest}
    */
   deleteVPC = (request: Readonly<DeleteVPCRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}`,
+      },
+    )
 
-  protected pageOfListPrivateNetworks = (
-    request: Readonly<ListPrivateNetworksRequest> = {},
-  ) =>
+  
+  protected pageOfListPrivateNetworks = (request: Readonly<ListPrivateNetworksRequest> = {}) =>
     this.client.fetch<ListPrivateNetworksResponse>(
       {
         method: 'GET',
@@ -191,10 +198,7 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['private_network_ids', request.privateNetworkIds],
           ['project_id', request.projectId],
           ['tags', request.tags],
@@ -203,7 +207,7 @@ export class API extends ParentAPI {
       },
       unmarshalListPrivateNetworksResponse,
     )
-
+  
   /**
    * List Private Networks. List existing Private Networks in the specified region. By default, the Private Networks returned in the list are ordered by creation date in ascending order, though this can be modified via the order_by field.
    *
@@ -211,12 +215,9 @@ export class API extends ParentAPI {
    * @returns A Promise of ListPrivateNetworksResponse
    */
   listPrivateNetworks = (request: Readonly<ListPrivateNetworksRequest> = {}) =>
-    enrichForPagination(
-      'privateNetworks',
-      this.pageOfListPrivateNetworks,
-      request,
-    )
+    enrichForPagination('privateNetworks', this.pageOfListPrivateNetworks, request)
 
+  
   /**
    * Create a Private Network. Create a new Private Network. Once created, you can attach Scaleway resources which are in the same region.
    *
@@ -236,6 +237,7 @@ export class API extends ParentAPI {
       unmarshalPrivateNetwork,
     )
 
+  
   /**
    * Get a Private Network. Retrieve information about an existing Private Network, specified by its Private Network ID. Its full details are returned in the response object.
    *
@@ -251,6 +253,7 @@ export class API extends ParentAPI {
       unmarshalPrivateNetwork,
     )
 
+  
   /**
    * Update Private Network. Update parameters (such as name or tags) of an existing Private Network, specified by its Private Network ID.
    *
@@ -270,17 +273,21 @@ export class API extends ParentAPI {
       unmarshalPrivateNetwork,
     )
 
+  
   /**
    * Delete a Private Network. Delete an existing Private Network. Note that you must first detach all resources from the network, in order to delete it.
    *
    * @param request - The request {@link DeletePrivateNetworkRequest}
    */
   deletePrivateNetwork = (request: Readonly<DeletePrivateNetworkRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
+      },
+    )
 
+  
   /**
    * Enable DHCP on a Private Network. Enable DHCP managed on an existing Private Network. Note that you will not be able to deactivate it afterwards.
    *
@@ -298,6 +305,7 @@ export class API extends ParentAPI {
       unmarshalPrivateNetwork,
     )
 
+  
   /**
    * Enable routing on a VPC. Enable routing on an existing VPC. Note that you will not be able to deactivate it afterwards.
    *
@@ -315,15 +323,14 @@ export class API extends ParentAPI {
       unmarshalVPC,
     )
 
+  
   /**
    * Enable custom routes propagation on a VPC. Enable custom routes propagation on an existing VPC. Note that you will not be able to deactivate it afterwards.
    *
    * @param request - The request {@link EnableCustomRoutesPropagationRequest}
    * @returns A Promise of VPC
    */
-  enableCustomRoutesPropagation = (
-    request: Readonly<EnableCustomRoutesPropagationRequest>,
-  ) =>
+  enableCustomRoutesPropagation = (request: Readonly<EnableCustomRoutesPropagationRequest>) =>
     this.client.fetch<VPC>(
       {
         body: '{}',
@@ -334,6 +341,7 @@ export class API extends ParentAPI {
       unmarshalVPC,
     )
 
+  
   protected pageOfListSubnets = (request: Readonly<ListSubnetsRequest> = {}) =>
     this.client.fetch<ListSubnetsResponse>(
       {
@@ -343,10 +351,7 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
           ['subnet_ids', request.subnetIds],
           ['vpc_id', request.vpcId],
@@ -354,7 +359,7 @@ export class API extends ParentAPI {
       },
       unmarshalListSubnetsResponse,
     )
-
+  
   /**
    * List subnets. List any Private Network's subnets. See ListPrivateNetworks to list a specific Private Network's subnets.
    *
@@ -364,6 +369,7 @@ export class API extends ParentAPI {
   listSubnets = (request: Readonly<ListSubnetsRequest> = {}) =>
     enrichForPagination('subnets', this.pageOfListSubnets, request)
 
+  
   /**
    * Add subnets to a Private Network. Add new subnets to an existing Private Network.
    *
@@ -383,6 +389,7 @@ export class API extends ParentAPI {
       unmarshalAddSubnetsResponse,
     )
 
+  
   /**
    * Delete subnets from a Private Network. Delete the specified subnets from a Private Network.
    *
@@ -402,6 +409,7 @@ export class API extends ParentAPI {
       unmarshalDeleteSubnetsResponse,
     )
 
+  
   /**
    * Create a Route. Create a new custom Route.
    *
@@ -421,6 +429,7 @@ export class API extends ParentAPI {
       unmarshalRoute,
     )
 
+  
   /**
    * Get a Route. Retrieve details of an existing Route, specified by its Route ID.
    *
@@ -436,6 +445,7 @@ export class API extends ParentAPI {
       unmarshalRoute,
     )
 
+  
   /**
    * Update Route. Update parameters of the specified Route.
    *
@@ -455,17 +465,21 @@ export class API extends ParentAPI {
       unmarshalRoute,
     )
 
+  
   /**
    * Delete a Route. Delete a Route specified by its Route ID.
    *
    * @param request - The request {@link DeleteRouteRequest}
    */
   deleteRoute = (request: Readonly<DeleteRouteRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
+      },
+    )
 
+  
   /**
    * Get ACL Rules for VPC. Retrieve a list of ACL rules for a VPC, specified by its VPC ID.
    *
@@ -477,11 +491,14 @@ export class API extends ParentAPI {
       {
         method: 'GET',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}/acl-rules`,
-        urlParams: urlParams(['is_ipv6', request.isIpv6]),
+        urlParams: urlParams(
+          ['is_ipv6', request.isIpv6],
+        ),
       },
       unmarshalGetAclResponse,
     )
 
+  
   /**
    * Set VPC ACL rules. Set the list of ACL rules and the default routing policy for a VPC.
    *
@@ -500,4 +517,7 @@ export class API extends ParentAPI {
       },
       unmarshalSetAclResponse,
     )
+
+  
 }
+
