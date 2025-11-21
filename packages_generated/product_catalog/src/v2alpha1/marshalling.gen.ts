@@ -12,6 +12,7 @@ import type {
   PublicCatalogProductPropertiesBlockStorage,
   PublicCatalogProductPropertiesDedibox,
   PublicCatalogProductPropertiesElasticMetal,
+  PublicCatalogProductPropertiesGenerativeApis,
   PublicCatalogProductPropertiesHardware,
   PublicCatalogProductPropertiesInstance,
   PublicCatalogProductPropertiesManagedInference,
@@ -178,6 +179,19 @@ const unmarshalPublicCatalogProductPropertiesElasticMetal = (data: unknown): Pub
   } as PublicCatalogProductPropertiesElasticMetal
 }
 
+const unmarshalPublicCatalogProductPropertiesGenerativeApis = (data: unknown): PublicCatalogProductPropertiesGenerativeApis => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesGenerativeApis' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    reasoning: data.reasoning,
+    supportedApis: data.supported_apis,
+  } as PublicCatalogProductPropertiesGenerativeApis
+}
+
 const unmarshalPublicCatalogProductPropertiesHardware = (data: unknown): PublicCatalogProductPropertiesHardware => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -283,6 +297,7 @@ const unmarshalPublicCatalogProductProperties = (data: unknown): PublicCatalogPr
     blockStorage: data.block_storage ? unmarshalPublicCatalogProductPropertiesBlockStorage(data.block_storage) : undefined,
     dedibox: data.dedibox ? unmarshalPublicCatalogProductPropertiesDedibox(data.dedibox) : undefined,
     elasticMetal: data.elastic_metal ? unmarshalPublicCatalogProductPropertiesElasticMetal(data.elastic_metal) : undefined,
+    generativeApis: data.generative_apis ? unmarshalPublicCatalogProductPropertiesGenerativeApis(data.generative_apis) : undefined,
     hardware: data.hardware ? unmarshalPublicCatalogProductPropertiesHardware(data.hardware) : undefined,
     instance: data.instance ? unmarshalPublicCatalogProductPropertiesInstance(data.instance) : undefined,
     managedInference: data.managed_inference ? unmarshalPublicCatalogProductPropertiesManagedInference(data.managed_inference) : undefined,
@@ -311,6 +326,7 @@ const unmarshalPublicCatalogProduct = (data: unknown): PublicCatalogProduct => {
   }
 
   return {
+    badges: data.badges,
     description: data.description,
     endOfLifeAt: unmarshalDate(data.end_of_life_at),
     environmentalImpactEstimation: data.environmental_impact_estimation ? unmarshalPublicCatalogProductEnvironmentalImpactEstimation(data.environmental_impact_estimation) : undefined,
