@@ -3,27 +3,12 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  toApiLocality,
   urlParams,
   validatePathParam,
+  toApiLocality,
 } from '@scaleway/sdk-client'
-import type { ApiLocality } from '@scaleway/sdk-client'
+import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
-  marshalGlobalApiCreateGrafanaUserRequest,
-  marshalGlobalApiResetGrafanaUserPasswordRequest,
-  marshalGlobalApiSelectPlanRequest,
-  marshalGlobalApiSyncGrafanaDataSourcesRequest,
-  marshalRegionalApiCreateContactPointRequest,
-  marshalRegionalApiCreateDataSourceRequest,
-  marshalRegionalApiCreateTokenRequest,
-  marshalRegionalApiDeleteContactPointRequest,
-  marshalRegionalApiDisableAlertManagerRequest,
-  marshalRegionalApiDisableAlertRulesRequest,
-  marshalRegionalApiEnableAlertManagerRequest,
-  marshalRegionalApiEnableAlertRulesRequest,
-  marshalRegionalApiTriggerTestAlertRequest,
-  marshalRegionalApiUpdateContactPointRequest,
-  marshalRegionalApiUpdateDataSourceRequest,
   unmarshalAlertManager,
   unmarshalContactPoint,
   unmarshalDataSource,
@@ -31,6 +16,10 @@ import {
   unmarshalEnableAlertRulesResponse,
   unmarshalGetConfigResponse,
   unmarshalGetRulesCountResponse,
+  marshalGlobalApiCreateGrafanaUserRequest,
+  marshalGlobalApiResetGrafanaUserPasswordRequest,
+  marshalGlobalApiSelectPlanRequest,
+  marshalGlobalApiSyncGrafanaDataSourcesRequest,
   unmarshalGrafana,
   unmarshalGrafanaProductDashboard,
   unmarshalGrafanaUser,
@@ -43,6 +32,17 @@ import {
   unmarshalListProductsResponse,
   unmarshalListTokensResponse,
   unmarshalPlan,
+  marshalRegionalApiCreateContactPointRequest,
+  marshalRegionalApiCreateDataSourceRequest,
+  marshalRegionalApiCreateTokenRequest,
+  marshalRegionalApiDeleteContactPointRequest,
+  marshalRegionalApiDisableAlertManagerRequest,
+  marshalRegionalApiDisableAlertRulesRequest,
+  marshalRegionalApiEnableAlertManagerRequest,
+  marshalRegionalApiEnableAlertRulesRequest,
+  marshalRegionalApiTriggerTestAlertRequest,
+  marshalRegionalApiUpdateContactPointRequest,
+  marshalRegionalApiUpdateDataSourceRequest,
   unmarshalToken,
   unmarshalUsageOverview,
 } from './marshalling.gen.js'
@@ -127,34 +127,32 @@ The output returned displays the URL to access your Cockpit's Grafana.
       {
         method: 'GET',
         path: `/cockpit/v1/grafana`,
-        urlParams: urlParams([
-          'project_id',
-          request.projectId ?? this.client.settings.defaultProjectId,
-        ]),
+        urlParams: urlParams(
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+        ),
       },
       unmarshalGrafana,
     )
 
+  
   /**
    * Synchronize Grafana data sources. Trigger the synchronization of all your data sources and the alert manager in the relevant regions. The alert manager will only be synchronized if you have enabled it.
    *
    * @param request - The request {@link GlobalApiSyncGrafanaDataSourcesRequest}
    */
-  syncGrafanaDataSources = (
-    request: Readonly<GlobalApiSyncGrafanaDataSourcesRequest> = {},
-  ) =>
-    this.client.fetch<void>({
-      body: JSON.stringify(
-        marshalGlobalApiSyncGrafanaDataSourcesRequest(
-          request,
-          this.client.settings,
+  syncGrafanaDataSources = (request: Readonly<GlobalApiSyncGrafanaDataSourcesRequest> = {}) =>
+    this.client.fetch<void>(
+      {
+        body: JSON.stringify(
+          marshalGlobalApiSyncGrafanaDataSourcesRequest(request, this.client.settings),
         ),
-      ),
-      headers: jsonContentHeaders,
-      method: 'POST',
-      path: `/cockpit/v1/grafana/sync-data-sources`,
-    })
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/cockpit/v1/grafana/sync-data-sources`,
+      },
+    )
 
+  
   /**
    * (Deprecated) EOL 2026-01-20. Create a Grafana user
 Create a Grafana user to connect to your Cockpit's Grafana. Upon creation, your user password displays only once, so make sure that you save it.
@@ -168,10 +166,7 @@ Each Grafana user is associated with a role: viewer or editor. A viewer can only
     this.client.fetch<GrafanaUser>(
       {
         body: JSON.stringify(
-          marshalGlobalApiCreateGrafanaUserRequest(
-            request,
-            this.client.settings,
-          ),
+          marshalGlobalApiCreateGrafanaUserRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -180,9 +175,8 @@ Each Grafana user is associated with a role: viewer or editor. A viewer can only
       unmarshalGrafanaUser,
     )
 
-  protected pageOfListGrafanaUsers = (
-    request: Readonly<GlobalApiListGrafanaUsersRequest> = {},
-  ) =>
+  
+  protected pageOfListGrafanaUsers = (request: Readonly<GlobalApiListGrafanaUsersRequest> = {}) =>
     this.client.fetch<ListGrafanaUsersResponse>(
       {
         method: 'GET',
@@ -190,19 +184,13 @@ Each Grafana user is associated with a role: viewer or editor. A viewer can only
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
       },
       unmarshalListGrafanaUsersResponse,
     )
-
+  
   /**
    * (Deprecated) EOL 2026-01-20. List Grafana users
 List all Grafana users created in your Cockpit's Grafana. By default, the Grafana users returned in the list are ordered in ascending order.
@@ -211,10 +199,10 @@ List all Grafana users created in your Cockpit's Grafana. By default, the Grafan
    * @param request - The request {@link GlobalApiListGrafanaUsersRequest}
    * @returns A Promise of ListGrafanaUsersResponse
    */
-  listGrafanaUsers = (
-    request: Readonly<GlobalApiListGrafanaUsersRequest> = {},
-  ) => enrichForPagination('grafanaUsers', this.pageOfListGrafanaUsers, request)
+  listGrafanaUsers = (request: Readonly<GlobalApiListGrafanaUsersRequest> = {}) =>
+    enrichForPagination('grafanaUsers', this.pageOfListGrafanaUsers, request)
 
+  
   /**
    * (Deprecated) EOL 2026-01-20. Delete a Grafana user
 Delete a Grafana user from your Cockpit's Grafana, specified by the ID of the Project the Cockpit belongs to, and the ID of the Grafana user.
@@ -223,15 +211,17 @@ Delete a Grafana user from your Cockpit's Grafana, specified by the ID of the Pr
    * @param request - The request {@link GlobalApiDeleteGrafanaUserRequest}
    */
   deleteGrafanaUser = (request: Readonly<GlobalApiDeleteGrafanaUserRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/cockpit/v1/grafana/users/${validatePathParam('grafanaUserId', request.grafanaUserId)}`,
-      urlParams: urlParams([
-        'project_id',
-        request.projectId ?? this.client.settings.defaultProjectId,
-      ]),
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/cockpit/v1/grafana/users/${validatePathParam('grafanaUserId', request.grafanaUserId)}`,
+        urlParams: urlParams(
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+        ),
+      },
+    )
 
+  
   /**
    * (Deprecated) EOL 2026-01-20. Reset a Grafana user password
 Reset the password of a Grafana user, specified by the ID of the Project the Cockpit belongs to, and the ID of the Grafana user.
@@ -241,16 +231,11 @@ A new password regenerates and only displays once. Make sure that you save it.
    * @param request - The request {@link GlobalApiResetGrafanaUserPasswordRequest}
    * @returns A Promise of GrafanaUser
    */
-  resetGrafanaUserPassword = (
-    request: Readonly<GlobalApiResetGrafanaUserPasswordRequest>,
-  ) =>
+  resetGrafanaUserPassword = (request: Readonly<GlobalApiResetGrafanaUserPasswordRequest>) =>
     this.client.fetch<GrafanaUser>(
       {
         body: JSON.stringify(
-          marshalGlobalApiResetGrafanaUserPasswordRequest(
-            request,
-            this.client.settings,
-          ),
+          marshalGlobalApiResetGrafanaUserPasswordRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -259,68 +244,52 @@ A new password regenerates and only displays once. Make sure that you save it.
       unmarshalGrafanaUser,
     )
 
-  protected pageOfListGrafanaProductDashboards = (
-    request: Readonly<GlobalApiListGrafanaProductDashboardsRequest> = {},
-  ) =>
+  
+  protected pageOfListGrafanaProductDashboards = (request: Readonly<GlobalApiListGrafanaProductDashboardsRequest> = {}) =>
     this.client.fetch<ListGrafanaProductDashboardsResponse>(
       {
         method: 'GET',
         path: `/cockpit/v1/grafana/product-dashboards`,
         urlParams: urlParams(
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['tags', request.tags],
         ),
       },
       unmarshalListGrafanaProductDashboardsResponse,
     )
-
+  
   /**
    * List Scaleway resources dashboards. Retrieve a list of available dashboards in Grafana, for all Scaleway resources which are integrated with Cockpit.
    *
    * @param request - The request {@link GlobalApiListGrafanaProductDashboardsRequest}
    * @returns A Promise of ListGrafanaProductDashboardsResponse
    */
-  listGrafanaProductDashboards = (
-    request: Readonly<GlobalApiListGrafanaProductDashboardsRequest> = {},
-  ) =>
-    enrichForPagination(
-      'dashboards',
-      this.pageOfListGrafanaProductDashboards,
-      request,
-    )
+  listGrafanaProductDashboards = (request: Readonly<GlobalApiListGrafanaProductDashboardsRequest> = {}) =>
+    enrichForPagination('dashboards', this.pageOfListGrafanaProductDashboards, request)
 
+  
   /**
    * Get Scaleway resource dashboard. Retrieve information about the dashboard of a Scaleway resource in Grafana, specified by the ID of the Project the Cockpit belongs to, and the name of the dashboard.
    *
    * @param request - The request {@link GlobalApiGetGrafanaProductDashboardRequest}
    * @returns A Promise of GrafanaProductDashboard
    */
-  getGrafanaProductDashboard = (
-    request: Readonly<GlobalApiGetGrafanaProductDashboardRequest>,
-  ) =>
+  getGrafanaProductDashboard = (request: Readonly<GlobalApiGetGrafanaProductDashboardRequest>) =>
     this.client.fetch<GrafanaProductDashboard>(
       {
         method: 'GET',
         path: `/cockpit/v1/grafana/product-dashboards/${validatePathParam('dashboardName', request.dashboardName)}`,
-        urlParams: urlParams([
-          'project_id',
-          request.projectId ?? this.client.settings.defaultProjectId,
-        ]),
+        urlParams: urlParams(
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+        ),
       },
       unmarshalGrafanaProductDashboard,
     )
 
-  protected pageOfListPlans = (
-    request: Readonly<GlobalApiListPlansRequest> = {},
-  ) =>
+  
+  protected pageOfListPlans = (request: Readonly<GlobalApiListPlansRequest> = {}) =>
     this.client.fetch<ListPlansResponse>(
       {
         method: 'GET',
@@ -328,15 +297,12 @@ A new password regenerates and only displays once. Make sure that you save it.
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListPlansResponse,
     )
-
+  
   /**
    * List plan types. Retrieve a list of available pricing plan types.
 Deprecated due to retention now being managed at the data source level.
@@ -348,6 +314,7 @@ Deprecated due to retention now being managed at the data source level.
   listPlans = (request: Readonly<GlobalApiListPlansRequest> = {}) =>
     enrichForPagination('plans', this.pageOfListPlans, request)
 
+  
   /**
    * Apply a pricing plan. Apply a pricing plan on a given Project. You must specify the ID of the pricing plan type. Note that you will be billed for the plan you apply.
 Deprecated due to retention now being managed at the data source level.
@@ -369,6 +336,7 @@ Deprecated due to retention now being managed at the data source level.
       unmarshalPlan,
     )
 
+  
   /**
    * Get current plan. Retrieve a pricing plan for the given Project, specified by the ID of the Project.
 Deprecated due to retention now being managed at the data source level.
@@ -382,13 +350,14 @@ Deprecated due to retention now being managed at the data source level.
       {
         method: 'GET',
         path: `/cockpit/v1/current-plan`,
-        urlParams: urlParams([
-          'project_id',
-          request.projectId ?? this.client.settings.defaultProjectId,
-        ]),
+        urlParams: urlParams(
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+        ),
       },
       unmarshalPlan,
     )
+
+  
 }
 
 /**
@@ -401,10 +370,15 @@ export class RegionalAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
   /**
    * Get the Cockpit configuration.
    *
@@ -420,6 +394,7 @@ export class RegionalAPI extends ParentAPI {
       unmarshalGetConfigResponse,
     )
 
+  
   /**
    * Create a data source. You must specify the data source name and type (metrics, logs, traces) upon creation.
 The name of the data source will then be used as reference to name the associated Grafana data source.
@@ -431,10 +406,7 @@ The name of the data source will then be used as reference to name the associate
     this.client.fetch<DataSource>(
       {
         body: JSON.stringify(
-          marshalRegionalApiCreateDataSourceRequest(
-            request,
-            this.client.settings,
-          ),
+          marshalRegionalApiCreateDataSourceRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -443,6 +415,7 @@ The name of the data source will then be used as reference to name the associate
       unmarshalDataSource,
     )
 
+  
   /**
    * Get a data source. Retrieve information about a given data source, specified by the data source ID. The data source's information such as its name, type, URL, origin, and retention period, is returned.
    *
@@ -458,20 +431,22 @@ The name of the data source will then be used as reference to name the associate
       unmarshalDataSource,
     )
 
+  
   /**
    * Delete a data source. Delete a given data source. Note that this action will permanently delete this data source and any data associated with it.
    *
    * @param request - The request {@link RegionalApiDeleteDataSourceRequest}
    */
   deleteDataSource = (request: Readonly<RegionalApiDeleteDataSourceRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/data-sources/${validatePathParam('dataSourceId', request.dataSourceId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/data-sources/${validatePathParam('dataSourceId', request.dataSourceId)}`,
+      },
+    )
 
-  protected pageOfListDataSources = (
-    request: Readonly<RegionalApiListDataSourcesRequest> = {},
-  ) =>
+  
+  protected pageOfListDataSources = (request: Readonly<RegionalApiListDataSourcesRequest> = {}) =>
     this.client.fetch<ListDataSourcesResponse>(
       {
         method: 'GET',
@@ -480,30 +455,24 @@ The name of the data source will then be used as reference to name the associate
           ['order_by', request.orderBy],
           ['origin', request.origin],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['types', request.types],
         ),
       },
       unmarshalListDataSourcesResponse,
     )
-
+  
   /**
    * List data sources. Retrieve the list of data sources available in the specified region. By default, the data sources returned in the list are ordered by creation date, in ascending order.
    *
    * @param request - The request {@link RegionalApiListDataSourcesRequest}
    * @returns A Promise of ListDataSourcesResponse
    */
-  listDataSources = (
-    request: Readonly<RegionalApiListDataSourcesRequest> = {},
-  ) => enrichForPagination('dataSources', this.pageOfListDataSources, request)
+  listDataSources = (request: Readonly<RegionalApiListDataSourcesRequest> = {}) =>
+    enrichForPagination('dataSources', this.pageOfListDataSources, request)
 
+  
   /**
    * Update a data source. Update a given data source attributes (name and/or retention_days).
    *
@@ -514,10 +483,7 @@ The name of the data source will then be used as reference to name the associate
     this.client.fetch<DataSource>(
       {
         body: JSON.stringify(
-          marshalRegionalApiUpdateDataSourceRequest(
-            request,
-            this.client.settings,
-          ),
+          marshalRegionalApiUpdateDataSourceRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
@@ -526,30 +492,27 @@ The name of the data source will then be used as reference to name the associate
       unmarshalDataSource,
     )
 
+  
   /**
    * Get data source usage overview. Retrieve the volume of data ingested for each of your data sources in the specified project and region.
    *
    * @param request - The request {@link RegionalApiGetUsageOverviewRequest}
    * @returns A Promise of UsageOverview
    */
-  getUsageOverview = (
-    request: Readonly<RegionalApiGetUsageOverviewRequest> = {},
-  ) =>
+  getUsageOverview = (request: Readonly<RegionalApiGetUsageOverviewRequest> = {}) =>
     this.client.fetch<UsageOverview>(
       {
         method: 'GET',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/usage-overview`,
         urlParams: urlParams(
           ['interval', request.interval],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
       },
       unmarshalUsageOverview,
     )
 
+  
   /**
    * Create a token. Give your token the relevant scopes to ensure it has the right permissions to interact with your data sources and the Alert manager. Make sure that you create your token in the same regions as the data sources you want to use it for.
 Upon creation, your token's secret key display only once. Make sure that you save it.
@@ -570,9 +533,8 @@ Upon creation, your token's secret key display only once. Make sure that you sav
       unmarshalToken,
     )
 
-  protected pageOfListTokens = (
-    request: Readonly<RegionalApiListTokensRequest> = {},
-  ) =>
+  
+  protected pageOfListTokens = (request: Readonly<RegionalApiListTokensRequest> = {}) =>
     this.client.fetch<ListTokensResponse>(
       {
         method: 'GET',
@@ -580,20 +542,14 @@ Upon creation, your token's secret key display only once. Make sure that you sav
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['token_scopes', request.tokenScopes],
         ),
       },
       unmarshalListTokensResponse,
     )
-
+  
   /**
    * List tokens. Retrieve a list of all tokens in the specified region. By default, tokens returned in the list are ordered by creation date, in ascending order.
 You can filter tokens by Project ID and token scopes.
@@ -604,6 +560,7 @@ You can filter tokens by Project ID and token scopes.
   listTokens = (request: Readonly<RegionalApiListTokensRequest> = {}) =>
     enrichForPagination('tokens', this.pageOfListTokens, request)
 
+  
   /**
    * Get a token. Retrieve information about a given token, specified by the token ID. The token's information such as its scopes, is returned.
    *
@@ -619,20 +576,22 @@ You can filter tokens by Project ID and token scopes.
       unmarshalToken,
     )
 
+  
   /**
    * Delete a token. Delete a given token, specified by the token ID. Deleting a token is irreversible and cannot be undone.
    *
    * @param request - The request {@link RegionalApiDeleteTokenRequest}
    */
   deleteToken = (request: Readonly<RegionalApiDeleteTokenRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens/${validatePathParam('tokenId', request.tokenId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens/${validatePathParam('tokenId', request.tokenId)}`,
+      },
+    )
 
-  protected pageOfListProducts = (
-    request: Readonly<RegionalApiListProductsRequest> = {},
-  ) =>
+  
+  protected pageOfListProducts = (request: Readonly<RegionalApiListProductsRequest> = {}) =>
     this.client.fetch<ListProductsResponse>(
       {
         method: 'GET',
@@ -640,15 +599,12 @@ You can filter tokens by Project ID and token scopes.
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListProductsResponse,
     )
-
+  
   /**
    * List all Scaleway products that send metrics and/or logs to Cockpit.. List all Scaleway products that send metrics and/or logs to Cockpit.
    *
@@ -658,6 +614,7 @@ You can filter tokens by Project ID and token scopes.
   listProducts = (request: Readonly<RegionalApiListProductsRequest> = {}) =>
     enrichForPagination('productsList', this.pageOfListProducts, request)
 
+  
   /**
    * Get the Alert manager. Retrieve information about the Alert manager which is unique per Project and region. By default the Alert manager is disabled.
 The output returned displays a URL to access the Alert manager, and whether the Alert manager and managed alerts are enabled.
@@ -665,37 +622,30 @@ The output returned displays a URL to access the Alert manager, and whether the 
    * @param request - The request {@link RegionalApiGetAlertManagerRequest}
    * @returns A Promise of AlertManager
    */
-  getAlertManager = (
-    request: Readonly<RegionalApiGetAlertManagerRequest> = {},
-  ) =>
+  getAlertManager = (request: Readonly<RegionalApiGetAlertManagerRequest> = {}) =>
     this.client.fetch<AlertManager>(
       {
         method: 'GET',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager`,
-        urlParams: urlParams([
-          'project_id',
-          request.projectId ?? this.client.settings.defaultProjectId,
-        ]),
+        urlParams: urlParams(
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+        ),
       },
       unmarshalAlertManager,
     )
 
+  
   /**
    * Enable the Alert manager. Enabling the Alert manager allows you to enable managed alerts and create contact points in the specified Project and region, to be notified when your Scaleway resources may require your attention.
    *
    * @param request - The request {@link RegionalApiEnableAlertManagerRequest}
    * @returns A Promise of AlertManager
    */
-  enableAlertManager = (
-    request: Readonly<RegionalApiEnableAlertManagerRequest> = {},
-  ) =>
+  enableAlertManager = (request: Readonly<RegionalApiEnableAlertManagerRequest> = {}) =>
     this.client.fetch<AlertManager>(
       {
         body: JSON.stringify(
-          marshalRegionalApiEnableAlertManagerRequest(
-            request,
-            this.client.settings,
-          ),
+          marshalRegionalApiEnableAlertManagerRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -704,22 +654,18 @@ The output returned displays a URL to access the Alert manager, and whether the 
       unmarshalAlertManager,
     )
 
+  
   /**
    * Disable the Alert manager. Disabling the Alert manager deletes the contact points you have created and disables managed alerts in the specified Project and region.
    *
    * @param request - The request {@link RegionalApiDisableAlertManagerRequest}
    * @returns A Promise of AlertManager
    */
-  disableAlertManager = (
-    request: Readonly<RegionalApiDisableAlertManagerRequest> = {},
-  ) =>
+  disableAlertManager = (request: Readonly<RegionalApiDisableAlertManagerRequest> = {}) =>
     this.client.fetch<AlertManager>(
       {
         body: JSON.stringify(
-          marshalRegionalApiDisableAlertManagerRequest(
-            request,
-            this.client.settings,
-          ),
+          marshalRegionalApiDisableAlertManagerRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -728,6 +674,7 @@ The output returned displays a URL to access the Alert manager, and whether the 
       unmarshalAlertManager,
     )
 
+  
   /**
    * Get the number of enabled rules. Get a detailed count of enabled rules in the specified Project. Includes preconfigured and custom alerting and recording rules.
    *
@@ -739,14 +686,14 @@ The output returned displays a URL to access the Alert manager, and whether the 
       {
         method: 'GET',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/rules/count`,
-        urlParams: urlParams([
-          'project_id',
-          request.projectId ?? this.client.settings.defaultProjectId,
-        ]),
+        urlParams: urlParams(
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+        ),
       },
       unmarshalGetRulesCountResponse,
     )
 
+  
   /**
    * Create a contact point. Contact points are email addresses associated with the default receiver, that the Alert manager sends alerts to.
 The source of the alerts are data sources within the same Project and region as the Alert manager.
@@ -755,16 +702,11 @@ If you need to receive alerts for other receivers, you can create additional con
    * @param request - The request {@link RegionalApiCreateContactPointRequest}
    * @returns A Promise of ContactPoint
    */
-  createContactPoint = (
-    request: Readonly<RegionalApiCreateContactPointRequest> = {},
-  ) =>
+  createContactPoint = (request: Readonly<RegionalApiCreateContactPointRequest> = {}) =>
     this.client.fetch<ContactPoint>(
       {
         body: JSON.stringify(
-          marshalRegionalApiCreateContactPointRequest(
-            request,
-            this.client.settings,
-          ),
+          marshalRegionalApiCreateContactPointRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -773,49 +715,36 @@ If you need to receive alerts for other receivers, you can create additional con
       unmarshalContactPoint,
     )
 
-  protected pageOfListContactPoints = (
-    request: Readonly<RegionalApiListContactPointsRequest> = {},
-  ) =>
+  
+  protected pageOfListContactPoints = (request: Readonly<RegionalApiListContactPointsRequest> = {}) =>
     this.client.fetch<ListContactPointsResponse>(
       {
         method: 'GET',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/contact-points`,
         urlParams: urlParams(
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
       },
       unmarshalListContactPointsResponse,
     )
-
+  
   /**
    * List contact points. Retrieve a list of contact points for the specified Project. The response lists all contact points and receivers created in Grafana or via the API.
    *
    * @param request - The request {@link RegionalApiListContactPointsRequest}
    * @returns A Promise of ListContactPointsResponse
    */
-  listContactPoints = (
-    request: Readonly<RegionalApiListContactPointsRequest> = {},
-  ) =>
+  listContactPoints = (request: Readonly<RegionalApiListContactPointsRequest> = {}) =>
     enrichForPagination('contactPoints', this.pageOfListContactPoints, request)
 
-  updateContactPoint = (
-    request: Readonly<RegionalApiUpdateContactPointRequest> = {},
-  ) =>
+  
+  updateContactPoint = (request: Readonly<RegionalApiUpdateContactPointRequest> = {}) =>
     this.client.fetch<ContactPoint>(
       {
         body: JSON.stringify(
-          marshalRegionalApiUpdateContactPointRequest(
-            request,
-            this.client.settings,
-          ),
+          marshalRegionalApiUpdateContactPointRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
@@ -824,26 +753,25 @@ If you need to receive alerts for other receivers, you can create additional con
       unmarshalContactPoint,
     )
 
+  
   /**
    * Delete a contact point. Delete a contact point associated with the default receiver.
    *
    * @param request - The request {@link RegionalApiDeleteContactPointRequest}
    */
-  deleteContactPoint = (
-    request: Readonly<RegionalApiDeleteContactPointRequest> = {},
-  ) =>
-    this.client.fetch<void>({
-      body: JSON.stringify(
-        marshalRegionalApiDeleteContactPointRequest(
-          request,
-          this.client.settings,
+  deleteContactPoint = (request: Readonly<RegionalApiDeleteContactPointRequest> = {}) =>
+    this.client.fetch<void>(
+      {
+        body: JSON.stringify(
+          marshalRegionalApiDeleteContactPointRequest(request, this.client.settings),
         ),
-      ),
-      headers: jsonContentHeaders,
-      method: 'POST',
-      path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/contact-points/delete`,
-    })
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/contact-points/delete`,
+      },
+    )
 
+  
   /**
    * List alerts. List preconfigured and/or custom alerts for the specified Project and data source.
    *
@@ -858,10 +786,7 @@ If you need to receive alerts for other receivers, you can create additional con
         urlParams: urlParams(
           ['data_source_id', request.dataSourceId],
           ['is_preconfigured', request.isPreconfigured],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['rule_status', request.ruleStatus],
           ['state', request.state],
         ),
@@ -869,22 +794,18 @@ If you need to receive alerts for other receivers, you can create additional con
       unmarshalListAlertsResponse,
     )
 
+  
   /**
    * Enable preconfigured alert rules. Enable alert rules from the list of available preconfigured rules.
    *
    * @param request - The request {@link RegionalApiEnableAlertRulesRequest}
    * @returns A Promise of EnableAlertRulesResponse
    */
-  enableAlertRules = (
-    request: Readonly<RegionalApiEnableAlertRulesRequest> = {},
-  ) =>
+  enableAlertRules = (request: Readonly<RegionalApiEnableAlertRulesRequest> = {}) =>
     this.client.fetch<EnableAlertRulesResponse>(
       {
         body: JSON.stringify(
-          marshalRegionalApiEnableAlertRulesRequest(
-            request,
-            this.client.settings,
-          ),
+          marshalRegionalApiEnableAlertRulesRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -893,22 +814,18 @@ If you need to receive alerts for other receivers, you can create additional con
       unmarshalEnableAlertRulesResponse,
     )
 
+  
   /**
    * Disable preconfigured alert rules. Disable alert rules from the list of available preconfigured rules.
    *
    * @param request - The request {@link RegionalApiDisableAlertRulesRequest}
    * @returns A Promise of DisableAlertRulesResponse
    */
-  disableAlertRules = (
-    request: Readonly<RegionalApiDisableAlertRulesRequest> = {},
-  ) =>
+  disableAlertRules = (request: Readonly<RegionalApiDisableAlertRulesRequest> = {}) =>
     this.client.fetch<DisableAlertRulesResponse>(
       {
         body: JSON.stringify(
-          marshalRegionalApiDisableAlertRulesRequest(
-            request,
-            this.client.settings,
-          ),
+          marshalRegionalApiDisableAlertRulesRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -917,23 +834,24 @@ If you need to receive alerts for other receivers, you can create additional con
       unmarshalDisableAlertRulesResponse,
     )
 
+  
   /**
    * Trigger a test alert. Send a test alert to the Alert manager to make sure your contact points get notified.
    *
    * @param request - The request {@link RegionalApiTriggerTestAlertRequest}
    */
-  triggerTestAlert = (
-    request: Readonly<RegionalApiTriggerTestAlertRequest> = {},
-  ) =>
-    this.client.fetch<void>({
-      body: JSON.stringify(
-        marshalRegionalApiTriggerTestAlertRequest(
-          request,
-          this.client.settings,
+  triggerTestAlert = (request: Readonly<RegionalApiTriggerTestAlertRequest> = {}) =>
+    this.client.fetch<void>(
+      {
+        body: JSON.stringify(
+          marshalRegionalApiTriggerTestAlertRequest(request, this.client.settings),
         ),
-      ),
-      headers: jsonContentHeaders,
-      method: 'POST',
-      path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/trigger-test-alert`,
-    })
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/trigger-test-alert`,
+      },
+    )
+
+  
 }
+
