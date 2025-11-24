@@ -23,8 +23,7 @@ export const CreateClusterRequest = {
   userName: {
     maxLength: 63,
     minLength: 1,
-    pattern:
-      /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/,
+    pattern: /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/,
   },
   version: {
     pattern: /^[0-9]+\.[0-9]+\.[0-9]+$/,
@@ -60,8 +59,7 @@ export const ListUsersRequest = {
   name: {
     maxLength: 63,
     minLength: 1,
-    pattern:
-      /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/,
+    pattern: /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/,
   },
   page: {
     greaterThanOrEqual: 1,
@@ -101,7 +99,6 @@ export const UpdateUserRequest = {
   username: {
     maxLength: 63,
     minLength: 1,
-    pattern:
-      /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/,
+    pattern: /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/,
   },
 }

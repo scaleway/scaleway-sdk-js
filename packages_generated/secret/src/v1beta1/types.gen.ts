@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, } from '@scaleway/sdk-client'
+
 
 export type BrowseSecretsRequestOrderBy =
   | 'name_asc'
@@ -10,7 +11,10 @@ export type BrowseSecretsRequestOrderBy =
   | 'updated_at_asc'
   | 'updated_at_desc'
 
-export type EphemeralPolicyAction = 'unknown_action' | 'delete' | 'disable'
+export type EphemeralPolicyAction =
+  | 'unknown_action'
+  | 'delete'
+  | 'disable'
 
 export type ListSecretsRequestOrderBy =
   | 'name_asc'
@@ -20,9 +24,15 @@ export type ListSecretsRequestOrderBy =
   | 'updated_at_asc'
   | 'updated_at_desc'
 
-export type Product = 'unknown_product' | 'edge_services' | 's2s_vpn'
+export type Product =
+  | 'unknown_product'
+  | 'edge_services'
+  | 's2s_vpn'
 
-export type SecretStatus = 'unknown_status' | 'ready' | 'locked'
+export type SecretStatus =
+  | 'unknown_status'
+  | 'ready'
+  | 'locked'
 
 export type SecretType =
   | 'unknown_type'
@@ -55,7 +65,10 @@ export interface EphemeralPolicy {
   action: EphemeralPolicyAction
 }
 
-export interface BrowseSecretsResponseItemFolderDetails {}
+
+export interface BrowseSecretsResponseItemFolderDetails {
+}
+
 
 export interface BrowseSecretsResponseItemSecretDetails {
   id: string
@@ -65,6 +78,7 @@ export interface BrowseSecretsResponseItemSecretDetails {
   ephemeralPolicy?: EphemeralPolicy
   type: SecretType
 }
+
 
 export interface EphemeralProperties {
   /**
@@ -80,6 +94,7 @@ export interface EphemeralProperties {
    */
   action: EphemeralPolicyAction
 }
+
 
 export interface BrowseSecretsResponseItem {
   name: string
@@ -97,6 +112,7 @@ export interface BrowseSecretsResponseItem {
   folder?: BrowseSecretsResponseItemFolderDetails
 }
 
+
 export interface SecretVersion {
   /**
    * The first version of the secret is numbered 1, and all subsequent revisions augment by 1.
@@ -108,10 +124,10 @@ export interface SecretVersion {
   secretId: string
   /**
    * * `unknown_status`: the version is in an invalid state.
-   * `enabled`: the version is accessible.
-   * `disabled`: the version is not accessible but can be enabled.
-   * `scheduled_for_deletion`: the version is scheduled for deletion. It will be deleted in 7 days.
-   * `deleted`: the version is permanently deleted. It is not possible to recover it.
+* `enabled`: the version is accessible.
+* `disabled`: the version is not accessible but can be enabled.
+* `scheduled_for_deletion`: the version is scheduled for deletion. It will be deleted in 7 days.
+* `deleted`: the version is permanently deleted. It is not possible to recover it.
    */
   status: SecretVersionStatus
   /**
@@ -148,6 +164,7 @@ export interface SecretVersion {
   region: ScwRegion
 }
 
+
 export interface Secret {
   /**
    * ID of the secret.
@@ -163,7 +180,7 @@ export interface Secret {
   name: string
   /**
    * * `ready`: the secret can be read, modified and deleted.
-   * `locked`: no action can be performed on the secret. This status can only be applied and removed by Scaleway.
+* `locked`: no action can be performed on the secret. This status can only be applied and removed by Scaleway.
    */
   status: SecretStatus
   /**
@@ -224,6 +241,7 @@ export interface Secret {
   region: ScwRegion
 }
 
+
 export type AccessSecretVersionByPathRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -250,6 +268,7 @@ export type AccessSecretVersionByPathRequest = {
   projectId?: string
 }
 
+
 export type AccessSecretVersionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -267,6 +286,7 @@ export type AccessSecretVersionRequest = {
    */
   revision: string
 }
+
 
 export interface AccessSecretVersionResponse {
   /**
@@ -291,6 +311,7 @@ export interface AccessSecretVersionResponse {
   type: SecretType
 }
 
+
 export type AddSecretOwnerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -306,6 +327,7 @@ export type AddSecretOwnerRequest = {
   product?: Product
 }
 
+
 export interface BasicCredentials {
   /**
    * The username or identifier associated with the credentials.
@@ -316,6 +338,7 @@ export interface BasicCredentials {
    */
   password: string
 }
+
 
 export type BrowseSecretsRequest = {
   /**
@@ -343,6 +366,7 @@ export type BrowseSecretsRequest = {
   type?: SecretType
 }
 
+
 export interface BrowseSecretsResponse {
   /**
    * Repeated item of type secret or folder, sorted by the request parameter.
@@ -357,6 +381,7 @@ export interface BrowseSecretsResponse {
    */
   totalCount: number
 }
+
 
 export type CreateSecretRequest = {
   /**
@@ -401,6 +426,7 @@ export type CreateSecretRequest = {
   keyId?: string
 }
 
+
 export type CreateSecretVersionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -427,6 +453,7 @@ export type CreateSecretVersionRequest = {
    */
   dataCrc32?: number
 }
+
 
 export interface DatabaseCredentials {
   /**
@@ -455,6 +482,7 @@ export interface DatabaseCredentials {
   port: string
 }
 
+
 export type DeleteSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -465,6 +493,7 @@ export type DeleteSecretRequest = {
    */
   secretId: string
 }
+
 
 export type DeleteSecretVersionRequest = {
   /**
@@ -484,6 +513,7 @@ export type DeleteSecretVersionRequest = {
   revision: string
 }
 
+
 export type DisableSecretVersionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -501,6 +531,7 @@ export type DisableSecretVersionRequest = {
    */
   revision: string
 }
+
 
 export type EnableSecretVersionRequest = {
   /**
@@ -520,6 +551,7 @@ export type EnableSecretVersionRequest = {
   revision: string
 }
 
+
 export type GetSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -530,6 +562,7 @@ export type GetSecretRequest = {
    */
   secretId: string
 }
+
 
 export type GetSecretVersionRequest = {
   /**
@@ -549,6 +582,7 @@ export type GetSecretVersionRequest = {
   revision: string
 }
 
+
 export type ListSecretTypesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -562,6 +596,7 @@ export type ListSecretTypesRequest = {
   pageSize?: number
 }
 
+
 export interface ListSecretTypesResponse {
   /**
    * List of secret types.
@@ -572,6 +607,7 @@ export interface ListSecretTypesResponse {
    */
   totalCount: number
 }
+
 
 export type ListSecretVersionsRequest = {
   /**
@@ -590,6 +626,7 @@ export type ListSecretVersionsRequest = {
   status?: SecretVersionStatus[]
 }
 
+
 export interface ListSecretVersionsResponse {
   /**
    * Single page of versions.
@@ -600,6 +637,7 @@ export interface ListSecretVersionsResponse {
    */
   totalCount: number
 }
+
 
 export type ListSecretsRequest = {
   /**
@@ -643,6 +681,7 @@ export type ListSecretsRequest = {
   scheduledForDeletion: boolean
 }
 
+
 export interface ListSecretsResponse {
   /**
    * Single page of secrets matching the requested criteria.
@@ -653,6 +692,7 @@ export interface ListSecretsResponse {
    */
   totalCount: number
 }
+
 
 export type ListTagsRequest = {
   /**
@@ -667,6 +707,7 @@ export type ListTagsRequest = {
   pageSize?: number
 }
 
+
 export interface ListTagsResponse {
   /**
    * List of tags.
@@ -677,6 +718,7 @@ export interface ListTagsResponse {
    */
   totalCount: number
 }
+
 
 export type ProtectSecretRequest = {
   /**
@@ -689,6 +731,7 @@ export type ProtectSecretRequest = {
   secretId: string
 }
 
+
 export type RestoreSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -696,6 +739,7 @@ export type RestoreSecretRequest = {
   region?: ScwRegion
   secretId: string
 }
+
 
 export type RestoreSecretVersionRequest = {
   /**
@@ -706,12 +750,14 @@ export type RestoreSecretVersionRequest = {
   revision: string
 }
 
+
 export interface SSHKey {
   /**
    * The private SSH key.
    */
   sshPrivateKey: string
 }
+
 
 export type UnprotectSecretRequest = {
   /**
@@ -723,6 +769,7 @@ export type UnprotectSecretRequest = {
    */
   secretId: string
 }
+
 
 export type UpdateSecretRequest = {
   /**
@@ -755,6 +802,7 @@ export type UpdateSecretRequest = {
   ephemeralPolicy?: EphemeralPolicy
 }
 
+
 export type UpdateSecretVersionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -780,3 +828,5 @@ export type UpdateSecretVersionRequest = {
    */
   ephemeralProperties?: EphemeralProperties
 }
+
+

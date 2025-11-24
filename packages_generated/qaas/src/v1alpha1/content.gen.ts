@@ -7,6 +7,7 @@ import type {
   SessionStatus,
 } from './types.gen.js'
 
+
 /** Lists transient statutes of the enum {@link BookingStatus}. */
 export const BOOKING_TRANSIENT_STATUSES: BookingStatus[] = [
   'waiting',
@@ -33,3 +34,4 @@ export const SESSION_TRANSIENT_STATUSES: SessionStatus[] = [
   'starting',
   'stopping',
 ]
+

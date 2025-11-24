@@ -1,41 +1,33 @@
-// This file was automatically generated. DO NOT EDIT.
-// If you have any remark or suggestion do not hesitate to open an issue.
-import {
-  isJSONObject,
-  resolveOneOf,
-  unmarshalArrayOfObject,
-  unmarshalDate,
-} from '@scaleway/sdk-client'
+
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  CreateDatabaseRequest,
-  CreateDeploymentRequest,
-  CreateEndpointRequest,
-  CreateUserRequest,
-  Database,
-  Deployment,
-  Endpoint,
   EndpointPrivateNetworkDetails,
   EndpointPublicDetails,
   EndpointService,
-  EndpointSpec,
-  EndpointSpecPrivateNetworkDetails,
-  EndpointSpecPublicDetails,
+  Endpoint,
+  Database,
+  Deployment,
+  User,
   ListDatabasesResponse,
   ListDeploymentsResponse,
+  Preset,
   ListPresetsResponse,
   ListUsersResponse,
+  Version,
   ListVersionsResponse,
-  Preset,
+  CreateDatabaseRequest,
+  EndpointSpecPrivateNetworkDetails,
+  EndpointSpecPublicDetails,
+  EndpointSpec,
+  CreateDeploymentRequest,
+  CreateEndpointRequest,
+  CreateUserRequest,
   UpdateDeploymentRequest,
   UpdateUserRequest,
-  User,
-  Version,
 } from './types.gen.js'
 
-const unmarshalEndpointPrivateNetworkDetails = (
-  data: unknown,
-): EndpointPrivateNetworkDetails => {
+const unmarshalEndpointPrivateNetworkDetails = (data: unknown): EndpointPrivateNetworkDetails => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'EndpointPrivateNetworkDetails' failed as data isn't a dictionary.`,
@@ -47,16 +39,15 @@ const unmarshalEndpointPrivateNetworkDetails = (
   } as EndpointPrivateNetworkDetails
 }
 
-const unmarshalEndpointPublicDetails = (
-  data: unknown,
-): EndpointPublicDetails => {
+const unmarshalEndpointPublicDetails = (data: unknown): EndpointPublicDetails => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'EndpointPublicDetails' failed as data isn't a dictionary.`,
     )
   }
 
-  return {} as EndpointPublicDetails
+  return {
+  } as EndpointPublicDetails
 }
 
 const unmarshalEndpointService = (data: unknown): EndpointService => {
@@ -82,12 +73,8 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
   return {
     dnsRecord: data.dns_record,
     id: data.id,
-    privateNetwork: data.private_network
-      ? unmarshalEndpointPrivateNetworkDetails(data.private_network)
-      : undefined,
-    public: data.public
-      ? unmarshalEndpointPublicDetails(data.public)
-      : undefined,
+    privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : undefined,
+    public: data.public ? unmarshalEndpointPublicDetails(data.public) : undefined,
     services: unmarshalArrayOfObject(data.services, unmarshalEndpointService),
   } as Endpoint
 }
@@ -144,9 +131,7 @@ export const unmarshalUser = (data: unknown): User => {
   } as User
 }
 
-export const unmarshalListDatabasesResponse = (
-  data: unknown,
-): ListDatabasesResponse => {
+export const unmarshalListDatabasesResponse = (data: unknown): ListDatabasesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListDatabasesResponse' failed as data isn't a dictionary.`,
@@ -159,9 +144,7 @@ export const unmarshalListDatabasesResponse = (
   } as ListDatabasesResponse
 }
 
-export const unmarshalListDeploymentsResponse = (
-  data: unknown,
-): ListDeploymentsResponse => {
+export const unmarshalListDeploymentsResponse = (data: unknown): ListDeploymentsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListDeploymentsResponse' failed as data isn't a dictionary.`,
@@ -191,9 +174,7 @@ const unmarshalPreset = (data: unknown): Preset => {
   } as Preset
 }
 
-export const unmarshalListPresetsResponse = (
-  data: unknown,
-): ListPresetsResponse => {
+export const unmarshalListPresetsResponse = (data: unknown): ListPresetsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListPresetsResponse' failed as data isn't a dictionary.`,
@@ -206,9 +187,7 @@ export const unmarshalListPresetsResponse = (
   } as ListPresetsResponse
 }
 
-export const unmarshalListUsersResponse = (
-  data: unknown,
-): ListUsersResponse => {
+export const unmarshalListUsersResponse = (data: unknown): ListUsersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListUsersResponse' failed as data isn't a dictionary.`,
@@ -234,9 +213,7 @@ const unmarshalVersion = (data: unknown): Version => {
   } as Version
 }
 
-export const unmarshalListVersionsResponse = (
-  data: unknown,
-): ListVersionsResponse => {
+export const unmarshalListVersionsResponse = (data: unknown): ListVersionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListVersionsResponse' failed as data isn't a dictionary.`,
@@ -266,29 +243,21 @@ const marshalEndpointSpecPrivateNetworkDetails = (
 const marshalEndpointSpecPublicDetails = (
   request: EndpointSpecPublicDetails,
   defaults: DefaultValues,
-): Record<string, unknown> => ({})
+): Record<string, unknown> => ({
+})
 
 const marshalEndpointSpec = (
   request: EndpointSpec,
   defaults: DefaultValues,
-): Record<string, unknown> => ({
+): Record<string, unknown> => ({  
   ...resolveOneOf([
-    {
-      param: 'public',
-      value:
-        request.public !== undefined
-          ? marshalEndpointSpecPublicDetails(request.public, defaults)
-          : undefined,
+    {param: 'public',
+      value: (request.public !== undefined) ? marshalEndpointSpecPublicDetails(request.public, defaults)
+      : undefined,
     },
-    {
-      param: 'private_network',
-      value:
-        request.privateNetwork !== undefined
-          ? marshalEndpointSpecPrivateNetworkDetails(
-              request.privateNetwork,
-              defaults,
-            )
-          : undefined,
+    {param: 'private_network',
+      value: (request.privateNetwork !== undefined) ? marshalEndpointSpecPrivateNetworkDetails(request.privateNetwork, defaults)
+      : undefined,
     },
   ]),
 })
@@ -299,10 +268,7 @@ export const marshalCreateDeploymentRequest = (
 ): Record<string, unknown> => ({
   cpu_max: request.cpuMax,
   cpu_min: request.cpuMin,
-  endpoints:
-    request.endpoints !== undefined
-      ? request.endpoints.map(elt => marshalEndpointSpec(elt, defaults))
-      : undefined,
+  endpoints: ((request.endpoints !== undefined) ?  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
   name: request.name,
   password: request.password,
   project_id: request.projectId ?? defaults.defaultProjectId,
@@ -317,10 +283,7 @@ export const marshalCreateEndpointRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   deployment_id: request.deploymentId,
-  endpoint:
-    request.endpoint !== undefined
-      ? marshalEndpointSpec(request.endpoint, defaults)
-      : undefined,
+  endpoint: ((request.endpoint !== undefined) ?  marshalEndpointSpec(request.endpoint, defaults): undefined),
 })
 
 export const marshalCreateUserRequest = (

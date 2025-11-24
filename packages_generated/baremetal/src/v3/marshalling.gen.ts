@@ -1,22 +1,15 @@
-// This file was automatically generated. DO NOT EDIT.
-// If you have any remark or suggestion do not hesitate to open an issue.
-import {
-  isJSONObject,
-  unmarshalArrayOfObject,
-  unmarshalDate,
-} from '@scaleway/sdk-client'
+
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
+  ServerPrivateNetwork,
   ListServerPrivateNetworksResponse,
+  SetServerPrivateNetworksResponse,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
   PrivateNetworkApiSetServerPrivateNetworksRequest,
-  ServerPrivateNetwork,
-  SetServerPrivateNetworksResponse,
 } from './types.gen.js'
 
-export const unmarshalServerPrivateNetwork = (
-  data: unknown,
-): ServerPrivateNetwork => {
+export const unmarshalServerPrivateNetwork = (data: unknown): ServerPrivateNetwork => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ServerPrivateNetwork' failed as data isn't a dictionary.`,
@@ -36,9 +29,7 @@ export const unmarshalServerPrivateNetwork = (
   } as ServerPrivateNetwork
 }
 
-export const unmarshalListServerPrivateNetworksResponse = (
-  data: unknown,
-): ListServerPrivateNetworksResponse => {
+export const unmarshalListServerPrivateNetworksResponse = (data: unknown): ListServerPrivateNetworksResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListServerPrivateNetworksResponse' failed as data isn't a dictionary.`,
@@ -46,17 +37,12 @@ export const unmarshalListServerPrivateNetworksResponse = (
   }
 
   return {
-    serverPrivateNetworks: unmarshalArrayOfObject(
-      data.server_private_networks,
-      unmarshalServerPrivateNetwork,
-    ),
+    serverPrivateNetworks: unmarshalArrayOfObject(data.server_private_networks, unmarshalServerPrivateNetwork),
     totalCount: data.total_count,
   } as ListServerPrivateNetworksResponse
 }
 
-export const unmarshalSetServerPrivateNetworksResponse = (
-  data: unknown,
-): SetServerPrivateNetworksResponse => {
+export const unmarshalSetServerPrivateNetworksResponse = (data: unknown): SetServerPrivateNetworksResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SetServerPrivateNetworksResponse' failed as data isn't a dictionary.`,
@@ -64,10 +50,7 @@ export const unmarshalSetServerPrivateNetworksResponse = (
   }
 
   return {
-    serverPrivateNetworks: unmarshalArrayOfObject(
-      data.server_private_networks,
-      unmarshalServerPrivateNetwork,
-    ),
+    serverPrivateNetworks: unmarshalArrayOfObject(data.server_private_networks, unmarshalServerPrivateNetwork),
   } as SetServerPrivateNetworksResponse
 }
 
@@ -83,5 +66,5 @@ export const marshalPrivateNetworkApiSetServerPrivateNetworksRequest = (
   request: PrivateNetworkApiSetServerPrivateNetworksRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  per_private_network_ipam_ip_ids: request.perPrivateNetworkIpamIpIds,
+  per_private_network_ipam_ip_ids:  request.perPrivateNetworkIpamIpIds,
 })
