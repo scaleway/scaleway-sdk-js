@@ -560,6 +560,10 @@ export type ListVolumesRequest = {
    * Display deleted volumes not erased yet.
    */
   includeDeleted: boolean
+  /**
+   * Filter by volume type.
+   */
+  volumeType?: string
 }
 
 
