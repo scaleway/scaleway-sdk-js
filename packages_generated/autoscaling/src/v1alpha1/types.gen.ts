@@ -1,8 +1,12 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Zone as ScwZone } from '@scaleway/sdk-client'
+import type { Zone as ScwZone} from '@scaleway/sdk-client'
 
-export type InstanceGroupEventLevel = 'info' | 'success' | 'error'
+
+export type InstanceGroupEventLevel =
+  | 'info'
+  | 'success'
+  | 'error'
 
 export type InstanceGroupEventSource =
   | 'unknown_source'
@@ -11,7 +15,10 @@ export type InstanceGroupEventSource =
   | 'instance_manager'
   | 'supervisor'
 
-export type InstancePolicyAction = 'unknown_action' | 'scale_up' | 'scale_down'
+export type InstancePolicyAction =
+  | 'unknown_action'
+  | 'scale_up'
+  | 'scale_down'
 
 export type InstancePolicyType =
   | 'unknown_type'
@@ -19,7 +26,10 @@ export type InstancePolicyType =
   | 'percent_of_total_group'
   | 'set_total_group'
 
-export type InstanceTemplateStatus = 'unknown_status' | 'ready' | 'error'
+export type InstanceTemplateStatus =
+  | 'unknown_status'
+  | 'ready'
+  | 'error'
 
 export type ListInstanceGroupEventsRequestOrderBy =
   | 'created_at_desc'
@@ -86,10 +96,12 @@ export interface VolumeInstanceTemplateFromEmpty {
   size: number
 }
 
+
 export interface VolumeInstanceTemplateFromSnapshot {
   size?: number
   snapshotId: string
 }
+
 
 export interface Capacity {
   /**
@@ -106,6 +118,7 @@ export interface Capacity {
   cooldownDelay?: string
 }
 
+
 export interface Loadbalancer {
   /**
    * Load Balancer ID.
@@ -120,6 +133,7 @@ export interface Loadbalancer {
    */
   privateNetworkId: string
 }
+
 
 export interface Metric {
   /**
@@ -155,6 +169,7 @@ export interface Metric {
    */
   threshold: number
 }
+
 
 export interface VolumeInstanceTemplate {
   /**
@@ -193,6 +208,7 @@ export interface VolumeInstanceTemplate {
   volumeType: VolumeInstanceTemplateVolumeType
 }
 
+
 export interface InstanceGroupEvent {
   /**
    * Instance group event ID.
@@ -219,6 +235,7 @@ export interface InstanceGroupEvent {
    */
   details?: string
 }
+
 
 export interface InstanceGroup {
   /**
@@ -267,6 +284,7 @@ export interface InstanceGroup {
   zone: ScwZone
 }
 
+
 export interface InstancePolicy {
   /**
    * Scaling policy ID.
@@ -307,6 +325,7 @@ export interface InstancePolicy {
    */
   zone: ScwZone
 }
+
 
 export interface InstanceTemplate {
   /**
@@ -379,6 +398,7 @@ export interface InstanceTemplate {
   zone: ScwZone
 }
 
+
 export interface UpdateInstanceGroupRequestCapacity {
   /**
    * Maximum count of Instances for the Instance group.
@@ -394,12 +414,14 @@ export interface UpdateInstanceGroupRequestCapacity {
   cooldownDelay?: string
 }
 
+
 export interface UpdateInstanceGroupRequestLoadbalancer {
   /**
    * Load Balancer backend IDs.
    */
   backendIds?: string[]
 }
+
 
 export interface UpdateInstancePolicyRequestMetric {
   /**
@@ -436,6 +458,7 @@ export interface UpdateInstancePolicyRequestMetric {
   threshold?: number
 }
 
+
 export type CreateInstanceGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -466,6 +489,7 @@ export type CreateInstanceGroupRequest = {
    */
   loadbalancer: Loadbalancer
 }
+
 
 export type CreateInstancePolicyRequest = {
   /**
@@ -503,6 +527,7 @@ export type CreateInstancePolicyRequest = {
    */
   instanceGroupId: string
 }
+
 
 export type CreateInstanceTemplateRequest = {
   /**
@@ -559,6 +584,7 @@ export type CreateInstanceTemplateRequest = {
   cloudInit?: string
 }
 
+
 export type DeleteInstanceGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -569,6 +595,7 @@ export type DeleteInstanceGroupRequest = {
    */
   instanceGroupId: string
 }
+
 
 export type DeleteInstancePolicyRequest = {
   /**
@@ -581,6 +608,7 @@ export type DeleteInstancePolicyRequest = {
   policyId: string
 }
 
+
 export type DeleteInstanceTemplateRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -591,6 +619,7 @@ export type DeleteInstanceTemplateRequest = {
    */
   templateId: string
 }
+
 
 export type GetInstanceGroupRequest = {
   /**
@@ -603,6 +632,7 @@ export type GetInstanceGroupRequest = {
   instanceGroupId: string
 }
 
+
 export type GetInstancePolicyRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -614,6 +644,7 @@ export type GetInstancePolicyRequest = {
   policyId: string
 }
 
+
 export type GetInstanceTemplateRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -624,6 +655,7 @@ export type GetInstanceTemplateRequest = {
    */
   templateId: string
 }
+
 
 export type ListInstanceGroupEventsRequest = {
   /**
@@ -648,6 +680,7 @@ export type ListInstanceGroupEventsRequest = {
   pageSize?: number
 }
 
+
 export interface ListInstanceGroupEventsResponse {
   /**
    * Paginated list of Instance groups.
@@ -658,6 +691,7 @@ export interface ListInstanceGroupEventsResponse {
    */
   totalCount: number
 }
+
 
 export type ListInstanceGroupsRequest = {
   /**
@@ -678,6 +712,7 @@ export type ListInstanceGroupsRequest = {
   pageSize?: number
 }
 
+
 export interface ListInstanceGroupsResponse {
   /**
    * Paginated list of Instance groups.
@@ -688,6 +723,7 @@ export interface ListInstanceGroupsResponse {
    */
   totalCount: number
 }
+
 
 export type ListInstancePoliciesRequest = {
   /**
@@ -712,6 +748,7 @@ export type ListInstancePoliciesRequest = {
   pageSize?: number
 }
 
+
 export interface ListInstancePoliciesResponse {
   /**
    * Paginated list of policies.
@@ -722,6 +759,7 @@ export interface ListInstancePoliciesResponse {
    */
   totalCount: number
 }
+
 
 export type ListInstanceTemplatesRequest = {
   /**
@@ -742,6 +780,7 @@ export type ListInstanceTemplatesRequest = {
   pageSize?: number
 }
 
+
 export interface ListInstanceTemplatesResponse {
   /**
    * Count of all templates matching the requested criteria.
@@ -752,6 +791,7 @@ export interface ListInstanceTemplatesResponse {
    */
   instanceTemplates: InstanceTemplate[]
 }
+
 
 export type UpdateInstanceGroupRequest = {
   /**
@@ -779,6 +819,7 @@ export type UpdateInstanceGroupRequest = {
    */
   loadbalancer?: UpdateInstanceGroupRequestLoadbalancer
 }
+
 
 export type UpdateInstancePolicyRequest = {
   /**
@@ -816,6 +857,7 @@ export type UpdateInstancePolicyRequest = {
    */
   priority?: number
 }
+
 
 export type UpdateInstanceTemplateRequest = {
   /**
@@ -871,3 +913,5 @@ export type UpdateInstanceTemplateRequest = {
    */
   cloudInit?: string
 }
+
+

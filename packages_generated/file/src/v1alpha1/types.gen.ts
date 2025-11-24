@@ -1,8 +1,11 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, Zone as ScwZone } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, Zone as ScwZone} from '@scaleway/sdk-client'
 
-export type AttachmentResourceType = 'unknown_resource_type' | 'instance_server'
+
+export type AttachmentResourceType =
+  | 'unknown_resource_type'
+  | 'instance_server'
 
 export type FileSystemStatus =
   | 'unknown_status'
@@ -42,6 +45,7 @@ export interface Attachment {
    */
   zone?: ScwZone
 }
+
 
 /**
  * Represents a filesystem resource and its properties.
@@ -93,6 +97,7 @@ export interface FileSystem {
   updatedAt?: Date
 }
 
+
 /**
  * Request to create a new filesystem.
  */
@@ -119,6 +124,7 @@ export type CreateFileSystemRequest = {
   tags?: string[]
 }
 
+
 /**
  * Request to delete a specific filesystem.
  */
@@ -133,6 +139,7 @@ export type DeleteFileSystemRequest = {
   filesystemId: string
 }
 
+
 /**
  * Request to retrieve a specific filesystem.
  */
@@ -146,6 +153,7 @@ export type GetFileSystemRequest = {
    */
   filesystemId: string
 }
+
 
 /**
  * Request to list filesystem attachments with filtering and pagination options.
@@ -181,6 +189,7 @@ export type ListAttachmentsRequest = {
   pageSize?: number
 }
 
+
 /**
  * Response containing a list of filesystem attachments and total count.
  */
@@ -194,6 +203,7 @@ export interface ListAttachmentsResponse {
    */
   totalCount: number
 }
+
 
 /**
  * Request to list filesystems with filtering and pagination options.
@@ -233,6 +243,7 @@ export type ListFileSystemsRequest = {
   tags?: string[]
 }
 
+
 /**
  * Response containing a list of filesystems and total count.
  */
@@ -246,6 +257,7 @@ export interface ListFileSystemsResponse {
    */
   totalCount: number
 }
+
 
 /**
  * Request to update a specific filesystem.
@@ -273,3 +285,5 @@ Must be compliant with the minimum (100 GB) and maximum (10 TB) allowed size.
    */
   tags?: string[]
 }
+
+
