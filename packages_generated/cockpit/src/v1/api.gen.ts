@@ -38,8 +38,10 @@ import {
   marshalRegionalApiDeleteContactPointRequest,
   marshalRegionalApiDisableAlertManagerRequest,
   marshalRegionalApiDisableAlertRulesRequest,
+  marshalRegionalApiDisableManagedAlertsRequest,
   marshalRegionalApiEnableAlertManagerRequest,
   marshalRegionalApiEnableAlertRulesRequest,
+  marshalRegionalApiEnableManagedAlertsRequest,
   marshalRegionalApiTriggerTestAlertRequest,
   marshalRegionalApiUpdateContactPointRequest,
   marshalRegionalApiUpdateDataSourceRequest,
@@ -85,8 +87,10 @@ import type {
   RegionalApiDeleteTokenRequest,
   RegionalApiDisableAlertManagerRequest,
   RegionalApiDisableAlertRulesRequest,
+  RegionalApiDisableManagedAlertsRequest,
   RegionalApiEnableAlertManagerRequest,
   RegionalApiEnableAlertRulesRequest,
+  RegionalApiEnableManagedAlertsRequest,
   RegionalApiGetAlertManagerRequest,
   RegionalApiGetConfigRequest,
   RegionalApiGetDataSourceRequest,
@@ -792,6 +796,48 @@ If you need to receive alerts for other receivers, you can create additional con
         ),
       },
       unmarshalListAlertsResponse,
+    )
+
+  
+  /**
+   * Enable managed alerts. Enable the sending of managed alerts for the specified Project. Managed alerts are predefined alerts that apply to Scaleway resources integrated with Cockpit by default.
+   *
+   * @deprecated
+   * @param request - The request {@link RegionalApiEnableManagedAlertsRequest}
+   * @returns A Promise of AlertManager
+   */
+  enableManagedAlerts = (request: Readonly<RegionalApiEnableManagedAlertsRequest> = {}) =>
+    this.client.fetch<AlertManager>(
+      {
+        body: JSON.stringify(
+          marshalRegionalApiEnableManagedAlertsRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/managed-alerts/enable`,
+      },
+      unmarshalAlertManager,
+    )
+
+  
+  /**
+   * Disable managed alerts. Disable the sending of managed alerts for the specified Project.
+   *
+   * @deprecated
+   * @param request - The request {@link RegionalApiDisableManagedAlertsRequest}
+   * @returns A Promise of AlertManager
+   */
+  disableManagedAlerts = (request: Readonly<RegionalApiDisableManagedAlertsRequest> = {}) =>
+    this.client.fetch<AlertManager>(
+      {
+        body: JSON.stringify(
+          marshalRegionalApiDisableManagedAlertsRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/managed-alerts/disable`,
+      },
+      unmarshalAlertManager,
     )
 
   
