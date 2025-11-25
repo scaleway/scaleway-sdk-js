@@ -406,23 +406,23 @@ export interface Platform {
    */
   name: string
   /**
-   * Provider name of the platform.
+   * Name of the technological provider of the platform in lowercase (quandela, pasqal...).
    */
   providerName: string
   /**
-   * Name of the running backend over the platform (ascella, qsim, aer...).
+   * Name of the running emulation backend or QPU model of the platform in lowercase (mosaiq, qsim, aer...).
    */
   backendName: string
   /**
-   * Type of the platform.
+   * Type of the platform (emulator or qpu).
    */
   type: PlatformType
   /**
-   * Technology used by the platform.
+   * Quantum technology used by the platform (trapped-ion, photonic, superconducting qubits...).
    */
   technology: PlatformTechnology
   /**
-   * Estimated maximum number of qubits supported by the platform.
+   * Maximum number of qubits supported by the platform (estimated for emulator).
    */
   maxQubitCount: number
   /**
