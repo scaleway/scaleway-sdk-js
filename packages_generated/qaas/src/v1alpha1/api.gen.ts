@@ -98,11 +98,11 @@ const jsonContentHeaders = {
 /**
  * Quantum as a Service API.
 
-This API allows you to manage Scaleway Quantum as a Service.
+This API allows you to allocate and program Quantum Processing Units (QPUs) to run quantum algorithms.
  */
 export class API extends ParentAPI {
   /**
-   * Get job information. Retrieve information about the provided **job ID**, such as status, payload, and result.
+   * Get job information. Retrieve information about the provided **job ID**, mainly used to get the current status.
    *
    * @param request - The request {@link GetJobRequest}
    * @returns A Promise of Job
@@ -159,7 +159,7 @@ export class API extends ParentAPI {
     )
   
   /**
-   * List all jobs within a project or session. Retrieve information about all jobs within a given project or session.
+   * List all jobs within a project or session. Retrieve information about all jobs within a given session.
    *
    * @param request - The request {@link ListJobsRequest}
    * @returns A Promise of ListJobsResponse
@@ -193,7 +193,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Create a job. Create a job to be executed inside a session.
+   * Create a job. Create a job to be executed inside a QPU session.
    *
    * @param request - The request {@link CreateJobRequest}
    * @returns A Promise of Job
@@ -326,7 +326,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Get session information. Retrieve information about the provided **session ID**, such as name, status, and number of executed jobs.
+   * Get session information. Retrieve information about the provided **session ID**, such as name and status.
    *
    * @param request - The request {@link GetSessionRequest}
    * @returns A Promise of Session
@@ -377,7 +377,7 @@ export class API extends ParentAPI {
     )
   
   /**
-   * List all sessions. Retrieve information about all sessions.
+   * List all sessions. Retrieve information about all QPU sessions.
    *
    * @param request - The request {@link ListSessionsRequest}
    * @returns A Promise of ListSessionsResponse
@@ -387,7 +387,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Create a session. Create a dedicated session for the specified platform.
+   * Create a session. Create a new QPU session for the specified platform. Once ready, jobs can be sent to this session.
    *
    * @param request - The request {@link CreateSessionRequest}
    * @returns A Promise of Session
@@ -427,7 +427,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Terminate an existing session. Terminate a session by its unique ID and cancel all its attached jobs and booking.
+   * Terminate an existing session. Terminate a session by its unique ID and cancel all its attached jobs and bookings.
    *
    * @param request - The request {@link TerminateSessionRequest}
    * @returns A Promise of Session
@@ -445,7 +445,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Delete an existing session. Delete a session by its unique ID and delete all its attached job and booking.
+   * Delete an existing session. Delete a session by its unique ID and delete all its attached jobs and bookings.
    *
    * @param request - The request {@link DeleteSessionRequest}
    */
