@@ -27,7 +27,7 @@
     "directory": "packages/client"
   },
   "engines": {
-    "node": ">=20.19.4"
+    "node": ">=20.19.6"
   },
   "type": "module",
   "exports": {

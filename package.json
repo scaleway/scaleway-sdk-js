@@ -6,7 +6,7 @@
     "packages_generated/*"
   ],
   "engines": {
-    "node": ">=20.19.4",
+    "node": ">=20.19.6",
     "pnpm": ">=10.13.1"
   },
   "type": "module",

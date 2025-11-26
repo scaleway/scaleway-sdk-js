@@ -27,7 +27,7 @@
     "directory": "packages_generated/test"
   },
   "engines": {
-    "node": ">=20.19.4"
+    "node": ">=20.19.6"
   },
   "scripts": {
     "package:check": "pnpm publint",

@@ -27,7 +27,7 @@
     "directory": "packages_generated/kafka"
   },
   "engines": {
-    "node": ">=20.18.3"
+    "node": ">=20.19.5"
   },
   "scripts": {
     "package:check": "pnpm publint",
