@@ -63,7 +63,7 @@ importers:
         specifier: 3.5.3
         version: 3.5.3
       react:
-        specifier: ^19.1.1
+        specifier: ^19.2.0
         version: 19.2.0
       read-pkg:
         specifier: 9.0.1
