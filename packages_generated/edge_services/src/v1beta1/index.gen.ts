@@ -105,6 +105,7 @@ export type {
   ScalewayLb,
   ScalewayLbBackendConfig,
   ScalewayS3BackendConfig,
+  ScalewayServerlessContainerBackendConfig,
   SearchBackendStagesRequest,
   SearchBackendStagesRequestOrderBy,
   SearchRouteRulesRequest,

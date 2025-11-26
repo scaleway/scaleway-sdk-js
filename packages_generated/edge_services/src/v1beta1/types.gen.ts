@@ -220,6 +220,15 @@ export interface ScalewayS3BackendConfig {
 }
 
 
+export interface ScalewayServerlessContainerBackendConfig {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region: ScwRegion
+  containerId: string
+}
+
+
 export interface PipelineError {
   stage: PipelineErrorStage
   code: PipelineErrorCode
@@ -273,15 +282,20 @@ export interface BackendStage {
   /**
    * Scaleway Object Storage origin bucket (S3) linked to the backend stage.
    *
-   * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb' could be set.
+   * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer' could be set.
    */
   scalewayS3?: ScalewayS3BackendConfig
   /**
    * Scaleway Load Balancer origin linked to the backend stage.
    *
-   * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb' could be set.
+   * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer' could be set.
    */
   scalewayLb?: ScalewayLbBackendConfig
+  /**
+   *
+   * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer' could be set.
+   */
+  scalewayServerlessContainer?: ScalewayServerlessContainerBackendConfig
 }
 
 
