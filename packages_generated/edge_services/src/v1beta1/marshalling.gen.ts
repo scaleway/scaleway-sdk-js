@@ -5,6 +5,7 @@ import type {
   ScalewayLb,
   ScalewayLbBackendConfig,
   ScalewayS3BackendConfig,
+  ScalewayServerlessContainerBackendConfig,
   BackendStage,
   CacheStage,
   DNSStage,
@@ -116,6 +117,19 @@ const unmarshalScalewayS3BackendConfig = (data: unknown): ScalewayS3BackendConfi
   } as ScalewayS3BackendConfig
 }
 
+const unmarshalScalewayServerlessContainerBackendConfig = (data: unknown): ScalewayServerlessContainerBackendConfig => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ScalewayServerlessContainerBackendConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    containerId: data.container_id,
+    region: data.region,
+  } as ScalewayServerlessContainerBackendConfig
+}
+
 export const unmarshalBackendStage = (data: unknown): BackendStage => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -129,6 +143,7 @@ export const unmarshalBackendStage = (data: unknown): BackendStage => {
     pipelineId: data.pipeline_id,
     scalewayLb: data.scaleway_lb ? unmarshalScalewayLbBackendConfig(data.scaleway_lb) : undefined,
     scalewayS3: data.scaleway_s3 ? unmarshalScalewayS3BackendConfig(data.scaleway_s3) : undefined,
+    scalewayServerlessContainer: data.scaleway_serverless_container ? unmarshalScalewayServerlessContainerBackendConfig(data.scaleway_serverless_container) : undefined,
     updatedAt: unmarshalDate(data.updated_at),
   } as BackendStage
 }
