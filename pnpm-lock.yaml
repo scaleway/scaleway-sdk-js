@@ -45,8 +45,8 @@ importers:
         specifier: 3.3.0
         version: 3.3.0(@types/node@20.17.46)(typescript@5.8.3)
       esbuild-plugin-browserslist:
-        specifier: 1.0.1
-        version: 1.0.1(browserslist@4.24.5)(esbuild@0.25.8)
+        specifier: 1.0.2
+        version: 1.0.2(browserslist@4.24.5)(esbuild@0.25.8)
       husky:
         specifier: 9.1.7
         version: 9.1.7
@@ -2174,6 +2174,15 @@ packages:
       supports-color:
         optional: true
 
+  debug@4.4.3:
+    resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+
   decamelize-keys@1.1.1:
     resolution: {integrity: sha512-WiPxgEirIV0/eIOMcnFBA3/IJZAZqKnwAwWyvvdi4lsr1WCN22nhdf/3db3DoZcUjTV2SqfzIwNyp6y2xs3nmg==}
     engines: {node: '>=0.10.0'}
@@ -2334,12 +2343,12 @@ packages:
     resolution: {integrity: sha512-j6vWzfrGVfyXxge+O0x5sh6cvxAog0a/4Rdd2K36zCMV5eJ+/+tOAngRO8cODMNWbVRdVlmGZQL2YS3yR8bIUA==}
     engines: {node: '>= 0.4'}
 
-  esbuild-plugin-browserslist@1.0.1:
-    resolution: {integrity: sha512-p+behK+qVxzKUDADf3FyMMpeXov+hoijAB9EetX57nX5wDqTZ7+8evnUDeEcE3kaKMVSHaJGmPv4jAI/qtsdBw==}
+  esbuild-plugin-browserslist@1.0.2:
+    resolution: {integrity: sha512-RFgs0SLRMExC7vBh80FnbTgN4eyTtYAuCmfPSArukMC0b6tMnfkgVmFDR/CTR2cJu6IViAomsdXyF9cfk65DsQ==}
     engines: {node: ^20.19.0 || ^22.12.0 || >23.0.0}
     peerDependencies:
       browserslist: ^4.21.8
-      esbuild: ~0.25.4
+      esbuild: ~0.25.10
 
   esbuild@0.25.8:
     resolution: {integrity: sha512-vVC0USHGtMi8+R4Kz8rt6JhEWLxsv9Rnu/lGYbPR8u47B+DCBksq9JarW0zOO7bs37hyOK1l2/oqtbciutL5+Q==}
@@ -4569,8 +4578,8 @@ packages:
     resolution: {integrity: sha512-AyeEbWOu/TAXdxlV9wmGcR0+yh2j3vYPGOECcIj2S7MkrLyC7ne+oye2BKTItt0ii2PHk4cDy+95+LshzbXnGg==}
     engines: {node: '>=12.20'}
 
-  zod@3.25.76:
-    resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
+  zod@4.1.13:
+    resolution: {integrity: sha512-AvvthqfqrAhNH9dnfmrfKzX5upOdjUVJYFqNSlkmGf64gRaTzlPwz99IHYnVs28qYAybvAlBV+H7pn0saFY4Ig==}
 
 snapshots:
 
@@ -6091,6 +6100,10 @@ snapshots:
     dependencies:
       ms: 2.1.3
 
+  debug@4.4.3:
+    dependencies:
+      ms: 2.1.3
+
   decamelize-keys@1.1.1:
     dependencies:
       decamelize: 1.2.0
@@ -6208,12 +6221,12 @@ snapshots:
       has-tostringtag: 1.0.2
       hasown: 2.0.2
 
-  esbuild-plugin-browserslist@1.0.1(browserslist@4.24.5)(esbuild@0.25.8):
+  esbuild-plugin-browserslist@1.0.2(browserslist@4.24.5)(esbuild@0.25.8):
     dependencies:
       browserslist: 4.24.5
-      debug: 4.4.1
+      debug: 4.4.3
       esbuild: 0.25.8
-      zod: 3.25.76
+      zod: 4.1.13
     transitivePeerDependencies:
       - supports-color
 
@@ -8602,4 +8615,4 @@ snapshots:
 
   yocto-queue@1.2.1: {}
 
-  zod@3.25.76: {}
+  zod@4.1.13: {}
