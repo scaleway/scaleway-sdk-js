@@ -32,6 +32,11 @@ export type PublicCatalogProductProductBadge =
   | 'best_value'
   | 'popular'
 
+export type PublicCatalogProductPropertiesGenerativeApisConsumptionMode =
+  | 'unknown_consumption_mode'
+  | 'realtime'
+  | 'batch'
+
 export type PublicCatalogProductPropertiesHardwareCPUArch =
   | 'unknown_arch'
   | 'x64'
@@ -261,6 +266,7 @@ export interface PublicCatalogProductPropertiesElasticMetal {
 export interface PublicCatalogProductPropertiesGenerativeApis {
   reasoning: boolean
   supportedApis: string[]
+  consumptionMode: PublicCatalogProductPropertiesGenerativeApisConsumptionMode
 }
 
 
