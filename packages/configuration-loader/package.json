@@ -30,6 +30,6 @@
     "build:profile": "npx vite-bundle-visualizer -c ../../vite.config.ts"
   },
   "devDependencies": {
-    "@types/node": "18.11.18"
+    "@types/node": "18.19.130"
   }
 }
