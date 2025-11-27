@@ -13,6 +13,7 @@ export type DeploymentStatus =
   | 'locked'
   | 'locking'
   | 'unlocking'
+  | 'deploying'
 
 export type EndpointServiceProtocol =
   | 'unknown_protocol'
