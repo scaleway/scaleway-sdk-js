@@ -15,6 +15,6 @@
   "devDependencies": {
     "serverless-scaleway-functions": "0.4.17",
     "@types/node": "20.19.25",
-    "typescript": "5.8.3"
+    "typescript": "5.9.3"
   }
 }
