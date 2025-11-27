@@ -629,8 +629,9 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
 
   
   /**
-   * Create a new revocable token.
+   * Create a new revocable token. Deprecated in favor of IAM authentication.
    *
+   * @deprecated
    * @param request - The request {@link CreateTokenRequest}
    * @returns A Promise of Token
    */
