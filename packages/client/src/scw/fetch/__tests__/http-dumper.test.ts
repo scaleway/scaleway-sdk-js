@@ -46,7 +46,7 @@ const makeFetchResponse = (
   contentType: string,
   status: number,
 ): Response =>
-  new Response(convertObjToBuffer(value), {
+  new Response(new Uint8Array(convertObjToBuffer(value)), {
     headers: { 'Content-Type': contentType },
     status,
   })
