@@ -794,15 +794,20 @@ export type CreateBackendStageRequest = {
   /**
    * Scaleway Object Storage origin bucket (S3) linked to the backend stage.
    *
-   * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb' could be set.
+   * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer' could be set.
    */
   scalewayS3?: ScalewayS3BackendConfig
   /**
    * Scaleway Load Balancer origin linked to the backend stage.
    *
-   * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb' could be set.
+   * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer' could be set.
    */
   scalewayLb?: ScalewayLbBackendConfig
+  /**
+   *
+   * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer' could be set.
+   */
+  scalewayServerlessContainer?: ScalewayServerlessContainerBackendConfig
 }
 
 
@@ -1640,19 +1645,24 @@ export type UpdateBackendStageRequest = {
   /**
    * Scaleway Object Storage origin bucket (S3) linked to the backend stage.
    *
-   * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb' could be set.
+   * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer' could be set.
    */
   scalewayS3?: ScalewayS3BackendConfig
   /**
    * Scaleway Load Balancer origin linked to the backend stage.
    *
-   * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb' could be set.
+   * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer' could be set.
    */
   scalewayLb?: ScalewayLbBackendConfig
   /**
    * Pipeline ID the Backend stage belongs to.
    */
   pipelineId: string
+  /**
+   *
+   * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer' could be set.
+   */
+  scalewayServerlessContainer?: ScalewayServerlessContainerBackendConfig
 }
 
 
