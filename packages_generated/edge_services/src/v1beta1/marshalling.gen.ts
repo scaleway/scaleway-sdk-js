@@ -804,6 +804,14 @@ const marshalScalewayS3BackendConfig = (
   is_website: request.isWebsite,
 })
 
+const marshalScalewayServerlessContainerBackendConfig = (
+  request: ScalewayServerlessContainerBackendConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  container_id: request.containerId,
+  region: request.region,
+})
+
 export const marshalCreateBackendStageRequest = (
   request: CreateBackendStageRequest,
   defaults: DefaultValues,
@@ -815,6 +823,10 @@ export const marshalCreateBackendStageRequest = (
     },
     {param: 'scaleway_lb',
       value: (request.scalewayLb !== undefined) ? marshalScalewayLbBackendConfig(request.scalewayLb, defaults)
+      : undefined,
+    },
+    {param: 'scaleway_serverless_container',
+      value: (request.scalewayServerlessContainer !== undefined) ? marshalScalewayServerlessContainerBackendConfig(request.scalewayServerlessContainer, defaults)
       : undefined,
     },
   ]),
@@ -1004,6 +1016,10 @@ export const marshalUpdateBackendStageRequest = (
     },
     {param: 'scaleway_lb',
       value: (request.scalewayLb !== undefined) ? marshalScalewayLbBackendConfig(request.scalewayLb, defaults)
+      : undefined,
+    },
+    {param: 'scaleway_serverless_container',
+      value: (request.scalewayServerlessContainer !== undefined) ? marshalScalewayServerlessContainerBackendConfig(request.scalewayServerlessContainer, defaults)
       : undefined,
     },
   ]),
