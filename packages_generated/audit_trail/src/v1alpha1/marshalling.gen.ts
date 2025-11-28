@@ -5,6 +5,8 @@ import type {
   ExportJobS3,
   ExportJobStatus,
   ExportJob,
+  AccountContractSignatureInfoAccountContractInfo,
+  AccountContractSignatureInfo,
   AccountOrganizationInfo,
   AccountProjectInfo,
   AccountUserInfo,
@@ -97,6 +99,38 @@ export const unmarshalExportJob = (data: unknown): ExportJob => {
     s3: data.s3 ? unmarshalExportJobS3(data.s3) : undefined,
     tags: data.tags,
   } as ExportJob
+}
+
+const unmarshalAccountContractSignatureInfoAccountContractInfo = (data: unknown): AccountContractSignatureInfoAccountContractInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AccountContractSignatureInfoAccountContractInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at),
+    version: data.version,
+  } as AccountContractSignatureInfoAccountContractInfo
+}
+
+const unmarshalAccountContractSignatureInfo = (data: unknown): AccountContractSignatureInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AccountContractSignatureInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    contract: data.contract ? unmarshalAccountContractSignatureInfoAccountContractInfo(data.contract) : undefined,
+    expiresAt: unmarshalDate(data.expires_at),
+    signedAt: unmarshalDate(data.signed_at),
+    signedByAccountRootUserId: data.signed_by_account_root_user_id,
+  } as AccountContractSignatureInfo
 }
 
 const unmarshalAccountOrganizationInfo = (data: unknown): AccountOrganizationInfo => {
@@ -485,6 +519,7 @@ export const unmarshalResource = (data: unknown): Resource => {
   }
 
   return {
+    accountContractSignatureInfo: data.account_contract_signature_info ? unmarshalAccountContractSignatureInfo(data.account_contract_signature_info) : undefined,
     accountOrganizationInfo: data.account_organization_info ? unmarshalAccountOrganizationInfo(data.account_organization_info) : undefined,
     accountProjectInfo: data.account_project_info ? unmarshalAccountProjectInfo(data.account_project_info) : undefined,
     accountUserInfo: data.account_user_info ? unmarshalAccountUserInfo(data.account_user_info) : undefined,
