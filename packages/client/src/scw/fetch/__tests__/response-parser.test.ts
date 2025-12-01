@@ -20,10 +20,13 @@ const makeResponse = (
   status = 200,
   contentType: string | undefined = undefined,
 ) =>
-  new Response(value !== null ? convertObjToBuffer(value) : value, {
-    headers: contentType ? { 'Content-Type': contentType } : undefined,
-    status,
-  })
+  new Response(
+    value !== null ? new Uint8Array(convertObjToBuffer(value)) : value,
+    {
+      headers: contentType ? { 'Content-Type': contentType } : undefined,
+      status,
+    },
+  )
 
 const makeJSONResponse = (
   value: JSONObject | null = SIMPLE_REQ_BODY,
@@ -54,19 +57,25 @@ describe(`responseParser`, () => {
     ).rejects.toThrow(new TypeError('Invalid response object')))
 
   it(`triggers an error for invalid status code`, async () => {
-    const invalidResponse = new Response(convertObjToBuffer(SIMPLE_REQ_BODY), {
-      headers: { 'Content-Type': 'application/json' },
-      status: 500,
-    })
+    const invalidResponse = new Response(
+      new Uint8Array(convertObjToBuffer(SIMPLE_REQ_BODY)),
+      {
+        headers: { 'Content-Type': 'application/json' },
+        status: 500,
+      },
+    )
 
     return expect(parseJson(invalidResponse)).rejects.toThrow()
   })
 
   it(`triggers an error with string payload`, async () => {
-    const invalidResponse = new Response(convertObjToBuffer('random-error'), {
-      headers: { 'Content-Type': 'application/json' },
-      status: 500,
-    })
+    const invalidResponse = new Response(
+      new Uint8Array(convertObjToBuffer('random-error')),
+      {
+        headers: { 'Content-Type': 'application/json' },
+        status: 500,
+      },
+    )
 
     return expect(parseJson(invalidResponse)).rejects.toThrow(
       new ScalewayError(500, 'random-error'),
@@ -74,10 +83,13 @@ describe(`responseParser`, () => {
   })
 
   it(`triggers an error with unknown payload`, async () => {
-    const invalidResponse = new Response(convertObjToBuffer(null), {
-      headers: { 'Content-Type': 'application/json' },
-      status: 500,
-    })
+    const invalidResponse = new Response(
+      new Uint8Array(convertObjToBuffer(null)),
+      {
+        headers: { 'Content-Type': 'application/json' },
+        status: 500,
+      },
+    )
 
     return expect(parseJson(invalidResponse)).rejects.toThrow(
       new ScalewayError(500, 'cannot read error response body'),
