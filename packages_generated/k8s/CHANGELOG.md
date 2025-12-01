@@ -60,6 +60,21 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - **k8s:** enable passing a security group ID at pool creation ([#2167](https://github.com/scaleway/scaleway-sdk-js/issues/2167)) ([ba1119f](https://github.com/scaleway/scaleway-sdk-js/commit/ba1119f6f6468b0fc8709c1c5abe9738e2fd5d9b))
 
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 2.0.0 (2025-01-XX)
+
+### ⚠ BREAKING CHANGES
+
+- packages are ESM only
+
+### :gear: Features
+
+- publish packages as ESM only
+
 ## [1.4.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-k8s@1.4.0...@scaleway/sdk-k8s@1.4.1) (2025-05-26)
 
 **Note:** Version bump only for package @scaleway/sdk-k8s

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.78.0...@scaleway/sdk@3.0.0) (2025-01-XX)
+
+### ⚠ BREAKING CHANGES
+
+- packages are ESM only
+
+### :gear: Features
+
+- publish packages as ESM only
+
 # [2.78.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@2.76.7...@scaleway/sdk@2.78.0) (2025-10-29)
 
 ### Bug Fixes
