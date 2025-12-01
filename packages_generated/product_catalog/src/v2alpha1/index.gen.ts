@@ -20,6 +20,7 @@ export type {
   PublicCatalogProductPropertiesDedibox,
   PublicCatalogProductPropertiesElasticMetal,
   PublicCatalogProductPropertiesGenerativeApis,
+  PublicCatalogProductPropertiesGenerativeApisConsumptionMode,
   PublicCatalogProductPropertiesHardware,
   PublicCatalogProductPropertiesHardwareCPU,
   PublicCatalogProductPropertiesHardwareCPUArch,
