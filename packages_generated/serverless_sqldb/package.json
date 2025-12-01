@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-serverless-sqldb",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Scaleway SDK serverless-sqldb",
   "license": "Apache-2.0",
   "files": [
@@ -11,14 +11,10 @@
   "exports": {
     ".": {
       "types": "./dist/index.gen.d.ts",
-      "import": "./dist/index.gen.js",
-      "require": "./dist/index.gen.cjs",
       "default": "./dist/index.gen.js"
     },
     "./*": {
       "types": "./dist/*/index.gen.d.ts",
-      "import": "./dist/*/index.gen.js",
-      "require": "./dist/*/index.gen.cjs",
       "default": "./dist/*/index.gen.js"
     }
   },

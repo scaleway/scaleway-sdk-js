@@ -39,7 +39,7 @@ export const defaultConfig: UserConfig = defineConfig({
     lib: {
       name: pkg.name,
       entry: 'src/index.ts',
-      formats: ['es', 'cjs'],
+      formats: ['es'],
       fileName: (format, filename) => {
         if (format === 'es') {
           return `${filename}.js`

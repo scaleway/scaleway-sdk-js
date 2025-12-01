@@ -35,6 +35,21 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - **serverless:** deprecate activate_vpc_integration and update documentation ([#2318](https://github.com/scaleway/scaleway-sdk-js/issues/2318)) ([0a6e366](https://github.com/scaleway/scaleway-sdk-js/commit/0a6e3666b9dc6755a05f00912b1c80648c2f6923))
 
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 2.0.0 (2025-01-XX)
+
+### ⚠ BREAKING CHANGES
+
+- packages are ESM only
+
+### :gear: Features
+
+- publish packages as ESM only
+
 ## 1.5.1 (2025-06-18)
 
 ### Bug Fixes

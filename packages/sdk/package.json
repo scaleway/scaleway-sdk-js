@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk",
-  "version": "2.78.0",
+  "version": "3.0.0",
   "description": "Scaleway SDK TS.",
   "license": "Apache-2.0",
   "files": [
@@ -10,8 +10,6 @@
   "exports": {
     ".": {
       "types": "./dist/index.gen.d.ts",
-      "import": "./dist/index.gen.js",
-      "require": "./dist/index.gen.cjs",
       "default": "./dist/index.gen.js"
     }
   },

@@ -50,6 +50,21 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **webhosting:** add public backup api ([#2307](https://github.com/scaleway/scaleway-sdk-js/issues/2307)) ([1cf1b8f](https://github.com/scaleway/scaleway-sdk-js/commit/1cf1b8fc982e3de0a4b0c7fc3cf20e55f93e5f43))
 - **webhosting:** deprecate CheckUserOwnsDomain endpoint ([#2329](https://github.com/scaleway/scaleway-sdk-js/issues/2329)) ([d4b8598](https://github.com/scaleway/scaleway-sdk-js/commit/d4b85989dad74a78b6fae3ae97b4d7522ab70b15))
 
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 2.0.0 (2025-01-XX)
+
+### ⚠ BREAKING CHANGES
+
+- packages are ESM only
+
+### :gear: Features
+
+- publish packages as ESM only
+
 ## 1.1.3 (2025-06-18)
 
 ### Bug Fixes

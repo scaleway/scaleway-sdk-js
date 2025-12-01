@@ -45,6 +45,21 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - **functions:** add support for VPC integration ([#2175](https://github.com/scaleway/scaleway-sdk-js/issues/2175)) ([43f3e50](https://github.com/scaleway/scaleway-sdk-js/commit/43f3e50b4ac928972232d78fb70ddeff50192d0f))
 
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 2.0.0 (2025-01-XX)
+
+### ⚠ BREAKING CHANGES
+
+- packages are ESM only
+
+### :gear: Features
+
+- publish packages as ESM only
+
 ## 1.3.2 (2025-05-26)
 
 **Note:** Version bump only for package @scaleway/sdk-function

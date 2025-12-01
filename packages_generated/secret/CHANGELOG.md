@@ -16,6 +16,21 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - **secret_manager:** add the region of the version ([#2505](https://github.com/scaleway/scaleway-sdk-js/issues/2505)) ([b526f49](https://github.com/scaleway/scaleway-sdk-js/commit/b526f49be9bd40cd040e175752e5e9c4a064eb4a))
 
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 2.0.0 (2025-01-XX)
+
+### ⚠ BREAKING CHANGES
+
+- packages are ESM only
+
+### :gear: Features
+
+- publish packages as ESM only
+
 ## 1.2.4 (2025-09-10)
 
 **Note:** Version bump only for package @scaleway/sdk-secret

@@ -35,6 +35,21 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - **key_manager:** add api to list algorithms ([#2330](https://github.com/scaleway/scaleway-sdk-js/issues/2330)) ([933e1ea](https://github.com/scaleway/scaleway-sdk-js/commit/933e1ea0bd5b5501792ccb647944d1d1004bb87d))
 
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 2.0.0 (2025-01-XX)
+
+### ⚠ BREAKING CHANGES
+
+- packages are ESM only
+
+### :gear: Features
+
+- publish packages as ESM only
+
 ## 1.2.2 (2025-06-18)
 
 ### Bug Fixes

@@ -47,6 +47,21 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - **instance:** add support for filesystems ([#2176](https://github.com/scaleway/scaleway-sdk-js/issues/2176)) ([791f49d](https://github.com/scaleway/scaleway-sdk-js/commit/791f49d18ef627110299cecc6a7996a850abc527))
 
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 2.0.0 (2025-01-XX)
+
+### ⚠ BREAKING CHANGES
+
+- packages are ESM only
+
+### :gear: Features
+
+- publish packages as ESM only
+
 ## 1.0.5 (2025-05-26)
 
 **Note:** Version bump only for package @scaleway/sdk-instance
