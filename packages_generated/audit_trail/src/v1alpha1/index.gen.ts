@@ -5,6 +5,8 @@ export {
 } from './api.gen.js'
 export * from './marshalling.gen.js'
 export type {
+  AccountContractSignatureInfo,
+  AccountContractSignatureInfoAccountContractInfo,
   AccountOrganizationInfo,
   AccountProjectInfo,
   AccountUserInfo,
