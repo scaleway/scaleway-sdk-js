@@ -19,6 +19,8 @@ export type ListPublicCatalogProductsRequestStatus =
   | 'public_beta'
   | 'preview'
   | 'general_availability'
+  | 'end_of_new_features'
+  | 'end_of_growth'
   | 'end_of_deployment'
   | 'end_of_support'
   | 'end_of_sale'
@@ -49,6 +51,8 @@ export type PublicCatalogProductStatus =
   | 'public_beta'
   | 'preview'
   | 'general_availability'
+  | 'end_of_new_features'
+  | 'end_of_growth'
   | 'end_of_deployment'
   | 'end_of_support'
   | 'end_of_sale'
@@ -536,7 +540,7 @@ export type PublicCatalogApiListPublicCatalogProductsRequest = {
    */
   datacenter?: string
   /**
-   * The lists of filtered product status, if empty only products with status public_beta, general_availability, preview, end_of_deployment, end_of_support, end_of_sale, end_of_life or retired will be returned.
+   * The lists of filtered product status, if empty only products with status public_beta, general_availability, preview, end_of_new_features, end_of_growth, end_of_deployment, end_of_support, end_of_sale, end_of_life or retired will be returned.
    */
   status?: ListPublicCatalogProductsRequestStatus[]
 }
