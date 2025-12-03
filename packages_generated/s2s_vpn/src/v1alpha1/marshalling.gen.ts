@@ -255,6 +255,7 @@ const unmarshalGatewayType = (data: unknown): GatewayType => {
     bandwidth: data.bandwidth,
     name: data.name,
     region: data.region,
+    zones: data.zones,
   } as GatewayType
 }
 

@@ -335,6 +335,7 @@ export interface GatewayType {
   name: string
   bandwidth: number
   allowedConnections: number
+  zones: string[]
   /**
    * Region to target. If none is passed will use default region from the config.
    */
