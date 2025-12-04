@@ -737,6 +737,13 @@ You can filter the list of tasks by domain name.
       unmarshalListInboundTransfersResponse,
     )
   
+  /**
+   * List inbound domain transfers. List all inbound transfer operations on the account.
+You can filter the list of inbound transfers by domain name.
+   *
+   * @param request - The request {@link RegistrarApiListInboundTransfersRequest}
+   * @returns A Promise of ListInboundTransfersResponse
+   */
   listInboundTransfers = (request: Readonly<RegistrarApiListInboundTransfersRequest>) =>
     enrichForPagination('inboundTransfers', this.pageOfListInboundTransfers, request)
 
