@@ -113,6 +113,7 @@ import type {
   GetLogRequest,
   GetOrganizationRequest,
   GetOrganizationSamlRequest,
+  GetOrganizationScimRequest,
   GetOrganizationSecuritySettingsRequest,
   GetPolicyRequest,
   GetQuotumRequest,
@@ -1569,6 +1570,28 @@ export class API extends ParentAPI {
     )
 
   
+  /**
+   * Get SCIM configuration of an Organization.
+   *
+   * @param request - The request {@link GetOrganizationScimRequest}
+   * @returns A Promise of Scim
+   */
+  getOrganizationScim = (request: Readonly<GetOrganizationScimRequest> = {}) =>
+    this.client.fetch<Scim>(
+      {
+        method: 'GET',
+        path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/scim`,
+      },
+      unmarshalScim,
+    )
+
+  
+  /**
+   * Enable SCIM for an Organization.
+   *
+   * @param request - The request {@link EnableOrganizationScimRequest}
+   * @returns A Promise of Scim
+   */
   enableOrganizationScim = (request: Readonly<EnableOrganizationScimRequest> = {}) =>
     this.client.fetch<Scim>(
       {
@@ -1581,6 +1604,11 @@ export class API extends ParentAPI {
     )
 
   
+  /**
+   * Disable SCIM for an Organization.
+   *
+   * @param request - The request {@link DeleteScimRequest}
+   */
   deleteScim = (request: Readonly<DeleteScimRequest>) =>
     this.client.fetch<void>(
       {
@@ -1604,10 +1632,22 @@ export class API extends ParentAPI {
       unmarshalListScimTokensResponse,
     )
   
+  /**
+   * List SCIM tokens.
+   *
+   * @param request - The request {@link ListScimTokensRequest}
+   * @returns A Promise of ListScimTokensResponse
+   */
   listScimTokens = (request: Readonly<ListScimTokensRequest>) =>
     enrichForPagination('scimTokens', this.pageOfListScimTokens, request)
 
   
+  /**
+   * Create a SCIM token.
+   *
+   * @param request - The request {@link CreateScimTokenRequest}
+   * @returns A Promise of CreateScimTokenResponse
+   */
   createScimToken = (request: Readonly<CreateScimTokenRequest>) =>
     this.client.fetch<CreateScimTokenResponse>(
       {
@@ -1618,6 +1658,11 @@ export class API extends ParentAPI {
     )
 
   
+  /**
+   * Delete a SCIM token.
+   *
+   * @param request - The request {@link DeleteScimTokenRequest}
+   */
   deleteScimToken = (request: Readonly<DeleteScimTokenRequest>) =>
     this.client.fetch<void>(
       {
