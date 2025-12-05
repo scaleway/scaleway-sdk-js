@@ -48,6 +48,7 @@ export type {
   GetLogRequest,
   GetOrganizationRequest,
   GetOrganizationSamlRequest,
+  GetOrganizationScimRequest,
   GetOrganizationSecuritySettingsRequest,
   GetPolicyRequest,
   GetQuotumRequest,

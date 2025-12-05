@@ -1291,6 +1291,11 @@ export type GetOrganizationSamlRequest = {
 }
 
 
+export type GetOrganizationScimRequest = {
+  organizationId?: string
+}
+
+
 export type GetOrganizationSecuritySettingsRequest = {
   /**
    * ID of the Organization.
