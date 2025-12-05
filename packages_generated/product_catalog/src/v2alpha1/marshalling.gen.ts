@@ -15,6 +15,7 @@ import type {
   PublicCatalogProductPropertiesGenerativeApis,
   PublicCatalogProductPropertiesHardware,
   PublicCatalogProductPropertiesInstance,
+  PublicCatalogProductPropertiesLoadBalancer,
   PublicCatalogProductPropertiesManagedInference,
   PublicCatalogProductPropertiesObjectStorage,
   PublicCatalogProductEnvironmentalImpactEstimation,
@@ -223,6 +224,17 @@ const unmarshalPublicCatalogProductPropertiesInstance = (data: unknown): PublicC
   } as PublicCatalogProductPropertiesInstance
 }
 
+const unmarshalPublicCatalogProductPropertiesLoadBalancer = (data: unknown): PublicCatalogProductPropertiesLoadBalancer => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesLoadBalancer' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesLoadBalancer
+}
+
 const unmarshalPublicCatalogProductPropertiesManagedInference = (data: unknown): PublicCatalogProductPropertiesManagedInference => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -301,6 +313,7 @@ const unmarshalPublicCatalogProductProperties = (data: unknown): PublicCatalogPr
     generativeApis: data.generative_apis ? unmarshalPublicCatalogProductPropertiesGenerativeApis(data.generative_apis) : undefined,
     hardware: data.hardware ? unmarshalPublicCatalogProductPropertiesHardware(data.hardware) : undefined,
     instance: data.instance ? unmarshalPublicCatalogProductPropertiesInstance(data.instance) : undefined,
+    loadBalancer: data.load_balancer ? unmarshalPublicCatalogProductPropertiesLoadBalancer(data.load_balancer) : undefined,
     managedInference: data.managed_inference ? unmarshalPublicCatalogProductPropertiesManagedInference(data.managed_inference) : undefined,
     objectStorage: data.object_storage ? unmarshalPublicCatalogProductPropertiesObjectStorage(data.object_storage) : undefined,
   } as PublicCatalogProductProperties
