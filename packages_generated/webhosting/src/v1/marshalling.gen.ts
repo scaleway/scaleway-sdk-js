@@ -1,51 +1,34 @@
-// This file was automatically generated. DO NOT EDIT.
-// If you have any remark or suggestion do not hesitate to open an issue.
-import {
-  isJSONObject,
-  resolveOneOf,
-  unmarshalArrayOfObject,
-  unmarshalDate,
-  unmarshalMoney,
-} from '@scaleway/sdk-client'
+
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney, } from '@scaleway/sdk-client'
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  AutoConfigDomainDns,
   Backup,
-  BackupApiRestoreBackupItemsRequest,
-  BackupItem,
-  BackupItemGroup,
+  DatabaseUser,
+  Database,
+  FtpAccount,
+  AutoConfigDomainDns,
+  HostingDomainCustomDomain,
+  HostingDomain,
+  HostingSummary,
+  MailAccount,
+  Website,
+  FreeDomain,
   CheckFreeDomainAvailabilityResponse,
   CheckUserOwnsDomainResponse,
-  ControlPanel,
-  CreateDatabaseRequestUser,
-  CreateHostingRequestDomainConfiguration,
-  Database,
-  DatabaseApiAssignDatabaseUserRequest,
-  DatabaseApiChangeDatabaseUserPasswordRequest,
-  DatabaseApiCreateDatabaseRequest,
-  DatabaseApiCreateDatabaseUserRequest,
-  DatabaseApiUnassignDatabaseUserRequest,
-  DatabaseUser,
-  DnsApiCheckUserOwnsDomainRequest,
-  DnsApiSyncDomainDnsRecordsRequest,
   DnsRecord,
+  Nameserver,
   DnsRecords,
   Domain,
-  DomainAvailability,
-  FreeDomain,
-  FreeDomainApiCheckFreeDomainAvailabilityRequest,
-  FtpAccount,
-  FtpAccountApiChangeFtpAccountPasswordRequest,
-  FtpAccountApiCreateFtpAccountRequest,
-  Hosting,
-  HostingApiAddCustomDomainRequest,
-  HostingApiCreateHostingRequest,
-  HostingApiRemoveCustomDomainRequest,
-  HostingApiUpdateHostingRequest,
-  HostingDomain,
-  HostingDomainCustomDomain,
-  HostingSummary,
+  PlatformControlPanelUrls,
+  ControlPanel,
+  OfferOption,
+  PlatformControlPanel,
   HostingUser,
+  Offer,
+  Platform,
+  Hosting,
+  BackupItem,
+  BackupItemGroup,
   ListBackupItemsResponse,
   ListBackupsResponse,
   ListControlPanelsResponse,
@@ -56,29 +39,39 @@ import type {
   ListHostingsResponse,
   ListMailAccountsResponse,
   ListOffersResponse,
+  ProgressSummary,
   ListRecentProgressesResponse,
   ListWebsitesResponse,
-  MailAccount,
-  MailAccountApiChangeMailAccountPasswordRequest,
-  MailAccountApiCreateMailAccountRequest,
-  MailAccountApiRemoveMailAccountRequest,
-  Nameserver,
-  Offer,
-  OfferOption,
-  OfferOptionRequest,
-  Platform,
-  PlatformControlPanel,
-  PlatformControlPanelUrls,
   Progress,
-  ProgressSummary,
   ResetHostingPasswordResponse,
   ResourceSummary,
   RestoreBackupItemsResponse,
   RestoreBackupResponse,
+  DomainAvailability,
   SearchDomainsResponse,
   Session,
+  BackupApiRestoreBackupItemsRequest,
+  DatabaseApiAssignDatabaseUserRequest,
+  DatabaseApiChangeDatabaseUserPasswordRequest,
+  CreateDatabaseRequestUser,
+  DatabaseApiCreateDatabaseRequest,
+  DatabaseApiCreateDatabaseUserRequest,
+  DatabaseApiUnassignDatabaseUserRequest,
+  DnsApiCheckUserOwnsDomainRequest,
   SyncDomainDnsRecordsRequestRecord,
-  Website,
+  DnsApiSyncDomainDnsRecordsRequest,
+  FreeDomainApiCheckFreeDomainAvailabilityRequest,
+  FtpAccountApiChangeFtpAccountPasswordRequest,
+  FtpAccountApiCreateFtpAccountRequest,
+  HostingApiAddCustomDomainRequest,
+  CreateHostingRequestDomainConfiguration,
+  OfferOptionRequest,
+  HostingApiCreateHostingRequest,
+  HostingApiRemoveCustomDomainRequest,
+  HostingApiUpdateHostingRequest,
+  MailAccountApiChangeMailAccountPasswordRequest,
+  MailAccountApiCreateMailAccountRequest,
+  MailAccountApiRemoveMailAccountRequest,
   WebsiteApiCreateWebsiteRequest,
 } from './types.gen.js'
 
@@ -153,9 +146,7 @@ const unmarshalAutoConfigDomainDns = (data: unknown): AutoConfigDomainDns => {
   } as AutoConfigDomainDns
 }
 
-const unmarshalHostingDomainCustomDomain = (
-  data: unknown,
-): HostingDomainCustomDomain => {
+const unmarshalHostingDomainCustomDomain = (data: unknown): HostingDomainCustomDomain => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'HostingDomainCustomDomain' failed as data isn't a dictionary.`,
@@ -163,9 +154,7 @@ const unmarshalHostingDomainCustomDomain = (
   }
 
   return {
-    autoConfigDomainDns: data.auto_config_domain_dns
-      ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns)
-      : undefined,
+    autoConfigDomainDns: data.auto_config_domain_dns ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns) : undefined,
     dnsStatus: data.dns_status,
     domain: data.domain,
     domainStatus: data.domain_status,
@@ -180,9 +169,7 @@ const unmarshalHostingDomain = (data: unknown): HostingDomain => {
   }
 
   return {
-    customDomain: data.custom_domain
-      ? unmarshalHostingDomainCustomDomain(data.custom_domain)
-      : undefined,
+    customDomain: data.custom_domain ? unmarshalHostingDomainCustomDomain(data.custom_domain) : undefined,
     subdomain: data.subdomain,
   } as HostingDomain
 }
@@ -198,9 +185,7 @@ export const unmarshalHostingSummary = (data: unknown): HostingSummary => {
     createdAt: unmarshalDate(data.created_at),
     dnsStatus: data.dns_status ? data.dns_status : undefined,
     domain: data.domain,
-    domainInfo: data.domain_info
-      ? unmarshalHostingDomain(data.domain_info)
-      : undefined,
+    domainInfo: data.domain_info ? unmarshalHostingDomain(data.domain_info) : undefined,
     domainStatus: data.domain_status ? data.domain_status : undefined,
     id: data.id,
     offerName: data.offer_name,
@@ -252,9 +237,7 @@ const unmarshalFreeDomain = (data: unknown): FreeDomain => {
   } as FreeDomain
 }
 
-export const unmarshalCheckFreeDomainAvailabilityResponse = (
-  data: unknown,
-): CheckFreeDomainAvailabilityResponse => {
+export const unmarshalCheckFreeDomainAvailabilityResponse = (data: unknown): CheckFreeDomainAvailabilityResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CheckFreeDomainAvailabilityResponse' failed as data isn't a dictionary.`,
@@ -262,17 +245,13 @@ export const unmarshalCheckFreeDomainAvailabilityResponse = (
   }
 
   return {
-    freeDomain: data.free_domain
-      ? unmarshalFreeDomain(data.free_domain)
-      : undefined,
+    freeDomain: data.free_domain ? unmarshalFreeDomain(data.free_domain) : undefined,
     isAvailable: data.is_available,
     reason: data.reason ? data.reason : undefined,
   } as CheckFreeDomainAvailabilityResponse
 }
 
-export const unmarshalCheckUserOwnsDomainResponse = (
-  data: unknown,
-): CheckUserOwnsDomainResponse => {
+export const unmarshalCheckUserOwnsDomainResponse = (data: unknown): CheckUserOwnsDomainResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CheckUserOwnsDomainResponse' failed as data isn't a dictionary.`,
@@ -324,9 +303,7 @@ export const unmarshalDnsRecords = (data: unknown): DnsRecords => {
   }
 
   return {
-    autoConfigDomainDns: data.auto_config_domain_dns
-      ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns)
-      : undefined,
+    autoConfigDomainDns: data.auto_config_domain_dns ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns) : undefined,
     dnsConfig: data.dns_config ? data.dns_config : undefined,
     nameServers: unmarshalArrayOfObject(data.name_servers, unmarshalNameserver),
     records: unmarshalArrayOfObject(data.records, unmarshalDnsRecord),
@@ -342,13 +319,9 @@ export const unmarshalDomain = (data: unknown): Domain => {
   }
 
   return {
-    autoConfigDomainDns: data.auto_config_domain_dns
-      ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns)
-      : undefined,
+    autoConfigDomainDns: data.auto_config_domain_dns ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns) : undefined,
     availableActions: data.available_actions,
-    availableDnsActions: data.available_dns_actions
-      ? data.available_dns_actions
-      : undefined,
+    availableDnsActions: data.available_dns_actions ? data.available_dns_actions : undefined,
     name: data.name,
     owner: data.owner,
     status: data.status,
@@ -356,9 +329,7 @@ export const unmarshalDomain = (data: unknown): Domain => {
   } as Domain
 }
 
-const unmarshalPlatformControlPanelUrls = (
-  data: unknown,
-): PlatformControlPanelUrls => {
+const unmarshalPlatformControlPanelUrls = (data: unknown): PlatformControlPanelUrls => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PlatformControlPanelUrls' failed as data isn't a dictionary.`,
@@ -444,10 +415,7 @@ const unmarshalOffer = (data: unknown): Offer => {
     available: data.available,
     billingOperationPath: data.billing_operation_path,
     controlPanelName: data.control_panel_name,
-    controlPanels: unmarshalArrayOfObject(
-      data.control_panels,
-      unmarshalControlPanel,
-    ),
+    controlPanels: unmarshalArrayOfObject(data.control_panels, unmarshalControlPanel),
     endOfLife: data.end_of_life,
     id: data.id,
     name: data.name,
@@ -466,9 +434,7 @@ const unmarshalPlatform = (data: unknown): Platform => {
   }
 
   return {
-    controlPanel: data.control_panel
-      ? unmarshalPlatformControlPanel(data.control_panel)
-      : undefined,
+    controlPanel: data.control_panel ? unmarshalPlatformControlPanel(data.control_panel) : undefined,
     groupName: data.group_name,
     hostname: data.hostname,
     ipv4: data.ipv4,
@@ -488,9 +454,7 @@ export const unmarshalHosting = (data: unknown): Hosting => {
     createdAt: unmarshalDate(data.created_at),
     dnsStatus: data.dns_status ? data.dns_status : undefined,
     domain: data.domain,
-    domainInfo: data.domain_info
-      ? unmarshalHostingDomain(data.domain_info)
-      : undefined,
+    domainInfo: data.domain_info ? unmarshalHostingDomain(data.domain_info) : undefined,
     domainStatus: data.domain_status ? data.domain_status : undefined,
     id: data.id,
     ipv4: data.ipv4,
@@ -536,9 +500,7 @@ const unmarshalBackupItemGroup = (data: unknown): BackupItemGroup => {
   } as BackupItemGroup
 }
 
-export const unmarshalListBackupItemsResponse = (
-  data: unknown,
-): ListBackupItemsResponse => {
+export const unmarshalListBackupItemsResponse = (data: unknown): ListBackupItemsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListBackupItemsResponse' failed as data isn't a dictionary.`,
@@ -551,9 +513,7 @@ export const unmarshalListBackupItemsResponse = (
   } as ListBackupItemsResponse
 }
 
-export const unmarshalListBackupsResponse = (
-  data: unknown,
-): ListBackupsResponse => {
+export const unmarshalListBackupsResponse = (data: unknown): ListBackupsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListBackupsResponse' failed as data isn't a dictionary.`,
@@ -566,9 +526,7 @@ export const unmarshalListBackupsResponse = (
   } as ListBackupsResponse
 }
 
-export const unmarshalListControlPanelsResponse = (
-  data: unknown,
-): ListControlPanelsResponse => {
+export const unmarshalListControlPanelsResponse = (data: unknown): ListControlPanelsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListControlPanelsResponse' failed as data isn't a dictionary.`,
@@ -576,17 +534,12 @@ export const unmarshalListControlPanelsResponse = (
   }
 
   return {
-    controlPanels: unmarshalArrayOfObject(
-      data.control_panels,
-      unmarshalControlPanel,
-    ),
+    controlPanels: unmarshalArrayOfObject(data.control_panels, unmarshalControlPanel),
     totalCount: data.total_count,
   } as ListControlPanelsResponse
 }
 
-export const unmarshalListDatabaseUsersResponse = (
-  data: unknown,
-): ListDatabaseUsersResponse => {
+export const unmarshalListDatabaseUsersResponse = (data: unknown): ListDatabaseUsersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListDatabaseUsersResponse' failed as data isn't a dictionary.`,
@@ -599,9 +552,7 @@ export const unmarshalListDatabaseUsersResponse = (
   } as ListDatabaseUsersResponse
 }
 
-export const unmarshalListDatabasesResponse = (
-  data: unknown,
-): ListDatabasesResponse => {
+export const unmarshalListDatabasesResponse = (data: unknown): ListDatabasesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListDatabasesResponse' failed as data isn't a dictionary.`,
@@ -614,9 +565,7 @@ export const unmarshalListDatabasesResponse = (
   } as ListDatabasesResponse
 }
 
-export const unmarshalListFreeRootDomainsResponse = (
-  data: unknown,
-): ListFreeRootDomainsResponse => {
+export const unmarshalListFreeRootDomainsResponse = (data: unknown): ListFreeRootDomainsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListFreeRootDomainsResponse' failed as data isn't a dictionary.`,
@@ -629,9 +578,7 @@ export const unmarshalListFreeRootDomainsResponse = (
   } as ListFreeRootDomainsResponse
 }
 
-export const unmarshalListFtpAccountsResponse = (
-  data: unknown,
-): ListFtpAccountsResponse => {
+export const unmarshalListFtpAccountsResponse = (data: unknown): ListFtpAccountsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListFtpAccountsResponse' failed as data isn't a dictionary.`,
@@ -644,9 +591,7 @@ export const unmarshalListFtpAccountsResponse = (
   } as ListFtpAccountsResponse
 }
 
-export const unmarshalListHostingsResponse = (
-  data: unknown,
-): ListHostingsResponse => {
+export const unmarshalListHostingsResponse = (data: unknown): ListHostingsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListHostingsResponse' failed as data isn't a dictionary.`,
@@ -659,9 +604,7 @@ export const unmarshalListHostingsResponse = (
   } as ListHostingsResponse
 }
 
-export const unmarshalListMailAccountsResponse = (
-  data: unknown,
-): ListMailAccountsResponse => {
+export const unmarshalListMailAccountsResponse = (data: unknown): ListMailAccountsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListMailAccountsResponse' failed as data isn't a dictionary.`,
@@ -669,17 +612,12 @@ export const unmarshalListMailAccountsResponse = (
   }
 
   return {
-    mailAccounts: unmarshalArrayOfObject(
-      data.mail_accounts,
-      unmarshalMailAccount,
-    ),
+    mailAccounts: unmarshalArrayOfObject(data.mail_accounts, unmarshalMailAccount),
     totalCount: data.total_count,
   } as ListMailAccountsResponse
 }
 
-export const unmarshalListOffersResponse = (
-  data: unknown,
-): ListOffersResponse => {
+export const unmarshalListOffersResponse = (data: unknown): ListOffersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListOffersResponse' failed as data isn't a dictionary.`,
@@ -707,9 +645,7 @@ const unmarshalProgressSummary = (data: unknown): ProgressSummary => {
   } as ProgressSummary
 }
 
-export const unmarshalListRecentProgressesResponse = (
-  data: unknown,
-): ListRecentProgressesResponse => {
+export const unmarshalListRecentProgressesResponse = (data: unknown): ListRecentProgressesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListRecentProgressesResponse' failed as data isn't a dictionary.`,
@@ -717,16 +653,11 @@ export const unmarshalListRecentProgressesResponse = (
   }
 
   return {
-    progresses: unmarshalArrayOfObject(
-      data.progresses,
-      unmarshalProgressSummary,
-    ),
+    progresses: unmarshalArrayOfObject(data.progresses, unmarshalProgressSummary),
   } as ListRecentProgressesResponse
 }
 
-export const unmarshalListWebsitesResponse = (
-  data: unknown,
-): ListWebsitesResponse => {
+export const unmarshalListWebsitesResponse = (data: unknown): ListWebsitesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListWebsitesResponse' failed as data isn't a dictionary.`,
@@ -747,19 +678,14 @@ export const unmarshalProgress = (data: unknown): Progress => {
   }
 
   return {
-    backupItemGroups: unmarshalArrayOfObject(
-      data.backup_item_groups,
-      unmarshalBackupItemGroup,
-    ),
+    backupItemGroups: unmarshalArrayOfObject(data.backup_item_groups, unmarshalBackupItemGroup),
     id: data.id,
     percentage: data.percentage,
     status: data.status,
   } as Progress
 }
 
-export const unmarshalResetHostingPasswordResponse = (
-  data: unknown,
-): ResetHostingPasswordResponse => {
+export const unmarshalResetHostingPasswordResponse = (data: unknown): ResetHostingPasswordResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ResetHostingPasswordResponse' failed as data isn't a dictionary.`,
@@ -787,9 +713,7 @@ export const unmarshalResourceSummary = (data: unknown): ResourceSummary => {
   } as ResourceSummary
 }
 
-export const unmarshalRestoreBackupItemsResponse = (
-  data: unknown,
-): RestoreBackupItemsResponse => {
+export const unmarshalRestoreBackupItemsResponse = (data: unknown): RestoreBackupItemsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'RestoreBackupItemsResponse' failed as data isn't a dictionary.`,
@@ -801,9 +725,7 @@ export const unmarshalRestoreBackupItemsResponse = (
   } as RestoreBackupItemsResponse
 }
 
-export const unmarshalRestoreBackupResponse = (
-  data: unknown,
-): RestoreBackupResponse => {
+export const unmarshalRestoreBackupResponse = (data: unknown): RestoreBackupResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'RestoreBackupResponse' failed as data isn't a dictionary.`,
@@ -832,9 +754,7 @@ const unmarshalDomainAvailability = (data: unknown): DomainAvailability => {
   } as DomainAvailability
 }
 
-export const unmarshalSearchDomainsResponse = (
-  data: unknown,
-): SearchDomainsResponse => {
+export const unmarshalSearchDomainsResponse = (data: unknown): SearchDomainsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SearchDomainsResponse' failed as data isn't a dictionary.`,
@@ -842,10 +762,7 @@ export const unmarshalSearchDomainsResponse = (
   }
 
   return {
-    domainsAvailable: unmarshalArrayOfObject(
-      data.domains_available,
-      unmarshalDomainAvailability,
-    ),
+    domainsAvailable: unmarshalArrayOfObject(data.domains_available, unmarshalDomainAvailability),
   } as SearchDomainsResponse
 }
 
@@ -894,16 +811,15 @@ export const marshalDatabaseApiCreateDatabaseRequest = (
   request: DatabaseApiCreateDatabaseRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  database_name: request.databaseName,
+  database_name: request.databaseName,  
   ...resolveOneOf<Record<string, unknown> | string>([
-    {
-      param: 'new_user',
-      value:
-        request.newUser !== undefined
-          ? marshalCreateDatabaseRequestUser(request.newUser, defaults)
-          : undefined,
+    {param: 'new_user',
+      value: (request.newUser !== undefined) ? marshalCreateDatabaseRequestUser(request.newUser, defaults)
+      : undefined,
     },
-    { param: 'existing_username', value: request.existingUsername },
+    {param: 'existing_username',
+      value: request.existingUsername,
+    },
   ]),
 })
 
@@ -952,16 +868,8 @@ export const marshalDnsApiSyncDomainDnsRecordsRequest = (
   request: DnsApiSyncDomainDnsRecordsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  auto_config_domain_dns:
-    request.autoConfigDomainDns !== undefined
-      ? marshalAutoConfigDomainDns(request.autoConfigDomainDns, defaults)
-      : undefined,
-  custom_records:
-    request.customRecords !== undefined
-      ? request.customRecords.map(elt =>
-          marshalSyncDomainDnsRecordsRequestRecord(elt, defaults),
-        )
-      : undefined,
+  auto_config_domain_dns: ((request.autoConfigDomainDns !== undefined) ?  marshalAutoConfigDomainDns(request.autoConfigDomainDns, defaults): undefined),
+  custom_records: ((request.customRecords !== undefined) ?  request.customRecords.map(elt => marshalSyncDomainDnsRecordsRequestRecord(elt, defaults)): undefined),
   update_all_records: request.updateAllRecords,
   update_mail_records: request.updateMailRecords,
   update_nameservers: request.updateNameservers,
@@ -1021,27 +929,13 @@ export const marshalHostingApiCreateHostingRequest = (
   request: HostingApiCreateHostingRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  auto_config_domain_dns:
-    request.autoConfigDomainDns !== undefined
-      ? marshalAutoConfigDomainDns(request.autoConfigDomainDns, defaults)
-      : undefined,
+  auto_config_domain_dns: ((request.autoConfigDomainDns !== undefined) ?  marshalAutoConfigDomainDns(request.autoConfigDomainDns, defaults): undefined),
   domain: request.domain,
-  domain_configuration:
-    request.domainConfiguration !== undefined
-      ? marshalCreateHostingRequestDomainConfiguration(
-          request.domainConfiguration,
-          defaults,
-        )
-      : undefined,
+  domain_configuration: ((request.domainConfiguration !== undefined) ?  marshalCreateHostingRequestDomainConfiguration(request.domainConfiguration, defaults): undefined),
   email: request.email,
   language: request.language,
   offer_id: request.offerId,
-  offer_options:
-    request.offerOptions !== undefined
-      ? request.offerOptions.map(elt =>
-          marshalOfferOptionRequest(elt, defaults),
-        )
-      : undefined,
+  offer_options: ((request.offerOptions !== undefined) ?  request.offerOptions.map(elt => marshalOfferOptionRequest(elt, defaults)): undefined),
   project_id: request.projectId ?? defaults.defaultProjectId,
   skip_welcome_email: request.skipWelcomeEmail,
   subdomain: request.subdomain,
@@ -1061,12 +955,7 @@ export const marshalHostingApiUpdateHostingRequest = (
 ): Record<string, unknown> => ({
   email: request.email,
   offer_id: request.offerId,
-  offer_options:
-    request.offerOptions !== undefined
-      ? request.offerOptions.map(elt =>
-          marshalOfferOptionRequest(elt, defaults),
-        )
-      : undefined,
+  offer_options: ((request.offerOptions !== undefined) ?  request.offerOptions.map(elt => marshalOfferOptionRequest(elt, defaults)): undefined),
   protected: request.protected,
   tags: request.tags,
 })

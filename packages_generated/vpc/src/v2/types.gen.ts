@@ -1,10 +1,18 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, } from '@scaleway/sdk-client'
 
-export type AclRuleProtocol = 'ANY' | 'TCP' | 'UDP' | 'ICMP'
 
-export type Action = 'unknown_action' | 'accept' | 'drop'
+export type AclRuleProtocol =
+  | 'ANY'
+  | 'TCP'
+  | 'UDP'
+  | 'ICMP'
+
+export type Action =
+  | 'unknown_action'
+  | 'accept'
+  | 'drop'
 
 export type ListPrivateNetworksRequestOrderBy =
   | 'created_at_asc'
@@ -12,13 +20,23 @@ export type ListPrivateNetworksRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-export type ListSubnetsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+export type ListSubnetsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
 
 export type ListVPCsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
   | 'name_asc'
   | 'name_desc'
+
+export type RouteType =
+  | 'unknown_route_type'
+  | 'subnet'
+  | 'default'
+  | 'custom'
+  | 'interlink'
+  | 's2s_vpn'
 
 export interface Subnet {
   /**
@@ -50,6 +68,7 @@ export interface Subnet {
    */
   vpcId: string
 }
+
 
 export interface PrivateNetwork {
   /**
@@ -102,6 +121,7 @@ export interface PrivateNetwork {
   defaultRoutePropagationEnabled: boolean
 }
 
+
 export interface Route {
   /**
    * Route ID.
@@ -144,10 +164,15 @@ export interface Route {
    */
   isReadOnly: boolean
   /**
+   * Type of the Route.
+   */
+  type?: RouteType
+  /**
    * Region of the Route.
    */
   region: ScwRegion
 }
+
 
 export interface AclRule {
   /**
@@ -187,6 +212,7 @@ export interface AclRule {
    */
   description?: string
 }
+
 
 export interface VPC {
   /**
@@ -239,6 +265,7 @@ export interface VPC {
   customRoutesPropagationEnabled: boolean
 }
 
+
 export type AddSubnetsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -254,9 +281,11 @@ export type AddSubnetsRequest = {
   subnets?: string[]
 }
 
+
 export interface AddSubnetsResponse {
   subnets: string[]
 }
+
 
 export type CreatePrivateNetworkRequest = {
   /**
@@ -289,6 +318,7 @@ export type CreatePrivateNetworkRequest = {
   defaultRoutePropagationEnabled: boolean
 }
 
+
 export type CreateRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -320,6 +350,7 @@ export type CreateRouteRequest = {
   nexthopPrivateNetworkId?: string
 }
 
+
 export type CreateVPCRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -343,6 +374,7 @@ export type CreateVPCRequest = {
   enableRouting: boolean
 }
 
+
 export type DeletePrivateNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -354,6 +386,7 @@ export type DeletePrivateNetworkRequest = {
   privateNetworkId: string
 }
 
+
 export type DeleteRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -364,6 +397,7 @@ export type DeleteRouteRequest = {
    */
   routeId: string
 }
+
 
 export type DeleteSubnetsRequest = {
   /**
@@ -380,9 +414,11 @@ export type DeleteSubnetsRequest = {
   subnets?: string[]
 }
 
+
 export interface DeleteSubnetsResponse {
   subnets: string[]
 }
+
 
 export type DeleteVPCRequest = {
   /**
@@ -395,6 +431,7 @@ export type DeleteVPCRequest = {
   vpcId: string
 }
 
+
 export type EnableCustomRoutesPropagationRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -405,6 +442,7 @@ export type EnableCustomRoutesPropagationRequest = {
    */
   vpcId: string
 }
+
 
 export type EnableDHCPRequest = {
   /**
@@ -417,6 +455,7 @@ export type EnableDHCPRequest = {
   privateNetworkId: string
 }
 
+
 export type EnableRoutingRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -427,6 +466,7 @@ export type EnableRoutingRequest = {
    */
   vpcId: string
 }
+
 
 export type GetAclRequest = {
   /**
@@ -443,10 +483,12 @@ export type GetAclRequest = {
   isIpv6: boolean
 }
 
+
 export interface GetAclResponse {
   rules: AclRule[]
   defaultPolicy: Action
 }
+
 
 export type GetPrivateNetworkRequest = {
   /**
@@ -459,6 +501,7 @@ export type GetPrivateNetworkRequest = {
   privateNetworkId: string
 }
 
+
 export type GetRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -470,6 +513,7 @@ export type GetRouteRequest = {
   routeId: string
 }
 
+
 export type GetVPCRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -480,6 +524,7 @@ export type GetVPCRequest = {
    */
   vpcId: string
 }
+
 
 export type ListPrivateNetworksRequest = {
   /**
@@ -528,10 +573,12 @@ export type ListPrivateNetworksRequest = {
   dhcpEnabled?: boolean
 }
 
+
 export interface ListPrivateNetworksResponse {
   privateNetworks: PrivateNetwork[]
   totalCount: number
 }
+
 
 export type ListSubnetsRequest = {
   /**
@@ -568,10 +615,12 @@ export type ListSubnetsRequest = {
   vpcId?: string
 }
 
+
 export interface ListSubnetsResponse {
   subnets: Subnet[]
   totalCount: number
 }
+
 
 export type ListVPCsRequest = {
   /**
@@ -616,10 +665,12 @@ export type ListVPCsRequest = {
   routingEnabled?: boolean
 }
 
+
 export interface ListVPCsResponse {
   vpcs: VPC[]
   totalCount: number
 }
+
 
 export type SetAclRequest = {
   /**
@@ -644,10 +695,12 @@ export type SetAclRequest = {
   defaultPolicy: Action
 }
 
+
 export interface SetAclResponse {
   rules: AclRule[]
   defaultPolicy: Action
 }
+
 
 export type UpdatePrivateNetworkRequest = {
   /**
@@ -671,6 +724,7 @@ export type UpdatePrivateNetworkRequest = {
    */
   defaultRoutePropagationEnabled?: boolean
 }
+
 
 export type UpdateRouteRequest = {
   /**
@@ -703,6 +757,7 @@ export type UpdateRouteRequest = {
   nexthopPrivateNetworkId?: string
 }
 
+
 export type UpdateVPCRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -721,3 +776,5 @@ export type UpdateVPCRequest = {
    */
   tags?: string[]
 }
+
+

@@ -1,6 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-export { PublicCatalogAPI } from './api.gen.js'
+export {
+  PublicCatalogAPI,
+} from './api.gen.js'
 export * from './marshalling.gen.js'
 export type {
   ListPublicCatalogProductsRequestProductType,
@@ -11,11 +13,14 @@ export type {
   PublicCatalogProductEnvironmentalImpactEstimation,
   PublicCatalogProductLocality,
   PublicCatalogProductPrice,
+  PublicCatalogProductProductBadge,
   PublicCatalogProductProperties,
   PublicCatalogProductPropertiesAppleSilicon,
   PublicCatalogProductPropertiesBlockStorage,
   PublicCatalogProductPropertiesDedibox,
   PublicCatalogProductPropertiesElasticMetal,
+  PublicCatalogProductPropertiesGenerativeApis,
+  PublicCatalogProductPropertiesGenerativeApisConsumptionMode,
   PublicCatalogProductPropertiesHardware,
   PublicCatalogProductPropertiesHardwareCPU,
   PublicCatalogProductPropertiesHardwareCPUArch,
@@ -26,6 +31,7 @@ export type {
   PublicCatalogProductPropertiesHardwareRAM,
   PublicCatalogProductPropertiesHardwareStorage,
   PublicCatalogProductPropertiesInstance,
+  PublicCatalogProductPropertiesLoadBalancer,
   PublicCatalogProductPropertiesManagedInference,
   PublicCatalogProductPropertiesObjectStorage,
   PublicCatalogProductStatus,

@@ -4,20 +4,13 @@ import {
   API as ParentAPI,
   enrichForPagination,
   resolveOneOf,
-  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
 } from '@scaleway/sdk-client'
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
-import {
-  CRON_TRANSIENT_STATUSES as CRON_TRANSIENT_STATUSES_FUNCTION,
-  DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_FUNCTION,
-  FUNCTION_TRANSIENT_STATUSES as FUNCTION_TRANSIENT_STATUSES_FUNCTION,
-  NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_FUNCTION,
-  TOKEN_TRANSIENT_STATUSES as TOKEN_TRANSIENT_STATUSES_FUNCTION,
-  TRIGGER_TRANSIENT_STATUSES as TRIGGER_TRANSIENT_STATUSES_FUNCTION,
-} from './content.gen.js'
+import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import {CRON_TRANSIENT_STATUSES as CRON_TRANSIENT_STATUSES_FUNCTION,DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_FUNCTION,FUNCTION_TRANSIENT_STATUSES as FUNCTION_TRANSIENT_STATUSES_FUNCTION,NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_FUNCTION,TOKEN_TRANSIENT_STATUSES as TOKEN_TRANSIENT_STATUSES_FUNCTION,TRIGGER_TRANSIENT_STATUSES as TRIGGER_TRANSIENT_STATUSES_FUNCTION,} from './content.gen.js'
 import {
   marshalCreateCronRequest,
   marshalCreateDomainRequest,
@@ -25,10 +18,6 @@ import {
   marshalCreateNamespaceRequest,
   marshalCreateTokenRequest,
   marshalCreateTriggerRequest,
-  marshalUpdateCronRequest,
-  marshalUpdateFunctionRequest,
-  marshalUpdateNamespaceRequest,
-  marshalUpdateTriggerRequest,
   unmarshalCron,
   unmarshalDomain,
   unmarshalDownloadURL,
@@ -43,6 +32,10 @@ import {
   unmarshalNamespace,
   unmarshalToken,
   unmarshalTrigger,
+  marshalUpdateCronRequest,
+  marshalUpdateFunctionRequest,
+  marshalUpdateNamespaceRequest,
+  marshalUpdateTriggerRequest,
   unmarshalUploadURL,
 } from './marshalling.gen.js'
 import type {
@@ -109,13 +102,16 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
-  protected pageOfListNamespaces = (
-    request: Readonly<ListNamespacesRequest> = {},
-  ) =>
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
+  protected pageOfListNamespaces = (request: Readonly<ListNamespacesRequest> = {}) =>
     this.client.fetch<ListNamespacesResponse>(
       {
         method: 'GET',
@@ -125,16 +121,13 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListNamespacesResponse,
     )
-
+  
   /**
    * List all your namespaces. List all existing namespaces in the specified region.
    *
@@ -144,6 +137,7 @@ export class API extends ParentAPI {
   listNamespaces = (request: Readonly<ListNamespacesRequest> = {}) =>
     enrichForPagination('namespaces', this.pageOfListNamespaces, request)
 
+  
   /**
    * Get a namespace. Get the namespace associated with the specified ID.
    *
@@ -158,7 +152,7 @@ export class API extends ParentAPI {
       },
       unmarshalNamespace,
     )
-
+  
   /**
    * Waits for {@link Namespace} to be in a final state.
    *
@@ -171,16 +165,13 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Namespace>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !NAMESPACE_TRANSIENT_STATUSES_FUNCTION.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!NAMESPACE_TRANSIENT_STATUSES_FUNCTION.includes(res.status))),
       this.getNamespace,
       request,
       options,
     )
 
+  
   /**
    * Create a new namespace. Create a new namespace in a specified Organization or Project.
    *
@@ -200,6 +191,7 @@ export class API extends ParentAPI {
       unmarshalNamespace,
     )
 
+  
   /**
    * Update an existing namespace. Update the namespace associated with the specified ID.
    *
@@ -219,6 +211,7 @@ export class API extends ParentAPI {
       unmarshalNamespace,
     )
 
+  
   /**
    * Delete an existing namespace. Delete the namespace associated with the specified ID.
    *
@@ -234,6 +227,7 @@ export class API extends ParentAPI {
       unmarshalNamespace,
     )
 
+  
   protected pageOfListFunctions = (request: Readonly<ListFunctionsRequest>) =>
     this.client.fetch<ListFunctionsResponse>(
       {
@@ -245,16 +239,13 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListFunctionsResponse,
     )
-
+  
   /**
    * List all your functions.
    *
@@ -264,6 +255,7 @@ export class API extends ParentAPI {
   listFunctions = (request: Readonly<ListFunctionsRequest>) =>
     enrichForPagination('functions', this.pageOfListFunctions, request)
 
+  
   /**
    * Get a function. Get the function associated with the specified ID.
    *
@@ -278,7 +270,7 @@ export class API extends ParentAPI {
       },
       unmarshalFunction,
     )
-
+  
   /**
    * Waits for {@link Function} to be in a final state.
    *
@@ -291,16 +283,13 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Function>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !FUNCTION_TRANSIENT_STATUSES_FUNCTION.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!FUNCTION_TRANSIENT_STATUSES_FUNCTION.includes(res.status))),
       this.getFunction,
       request,
       options,
     )
 
+  
   /**
    * Create a new function. Create a new function in the specified region for a specified Organization or Project.
    *
@@ -320,6 +309,7 @@ export class API extends ParentAPI {
       unmarshalFunction,
     )
 
+  
   /**
    * Update an existing function. Update the function associated with the specified ID.
 
@@ -342,6 +332,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalFunction,
     )
 
+  
   /**
    * Delete a function. Delete the function associated with the specified ID.
    *
@@ -357,6 +348,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalFunction,
     )
 
+  
   /**
    * Deploy a function. Deploy a function associated with the specified ID.
    *
@@ -374,15 +366,14 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalFunction,
     )
 
+  
   /**
    * List function runtimes. List available function runtimes.
    *
    * @param request - The request {@link ListFunctionRuntimesRequest}
    * @returns A Promise of ListFunctionRuntimesResponse
    */
-  listFunctionRuntimes = (
-    request: Readonly<ListFunctionRuntimesRequest> = {},
-  ) =>
+  listFunctionRuntimes = (request: Readonly<ListFunctionRuntimesRequest> = {}) =>
     this.client.fetch<ListFunctionRuntimesResponse>(
       {
         method: 'GET',
@@ -391,6 +382,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalListFunctionRuntimesResponse,
     )
 
+  
   /**
    * Get an upload URL of a function. Get an upload URL of a function associated with the specified ID.
    *
@@ -402,11 +394,14 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       {
         method: 'GET',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam('functionId', request.functionId)}/upload-url`,
-        urlParams: urlParams(['content_length', request.contentLength]),
+        urlParams: urlParams(
+          ['content_length', request.contentLength],
+        ),
       },
       unmarshalUploadURL,
     )
 
+  
   /**
    * Get a download URL of a function. Get a download URL for a function associated with the specified ID.
    *
@@ -422,6 +417,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalDownloadURL,
     )
 
+  
   protected pageOfListCrons = (request: Readonly<ListCronsRequest>) =>
     this.client.fetch<ListCronsResponse>(
       {
@@ -431,15 +427,12 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
           ['function_id', request.functionId],
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListCronsResponse,
     )
-
+  
   /**
    * List all crons. List all the cronjobs in a specified region.
    *
@@ -449,6 +442,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
   listCrons = (request: Readonly<ListCronsRequest>) =>
     enrichForPagination('crons', this.pageOfListCrons, request)
 
+  
   /**
    * Get a cron. Get the cron associated with the specified ID.
    *
@@ -463,7 +457,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       },
       unmarshalCron,
     )
-
+  
   /**
    * Waits for {@link Cron} to be in a final state.
    *
@@ -476,16 +470,13 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
     options?: Readonly<WaitForOptions<Cron>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !CRON_TRANSIENT_STATUSES_FUNCTION.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!CRON_TRANSIENT_STATUSES_FUNCTION.includes(res.status))),
       this.getCron,
       request,
       options,
     )
 
+  
   /**
    * Create a new cron. Create a new cronjob for a function with the specified ID.
    *
@@ -505,6 +496,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalCron,
     )
 
+  
   /**
    * Update an existing cron. Update the cron associated with the specified ID.
    *
@@ -524,6 +516,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalCron,
     )
 
+  
   /**
    * Delete an existing cron. Delete the cron associated with the specified ID.
    *
@@ -539,6 +532,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalCron,
     )
 
+  
   protected pageOfListDomains = (request: Readonly<ListDomainsRequest>) =>
     this.client.fetch<ListDomainsResponse>(
       {
@@ -548,15 +542,12 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
           ['function_id', request.functionId],
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListDomainsResponse,
     )
-
+  
   /**
    * List all domain name bindings. List all domain name bindings in a specified region.
    *
@@ -566,6 +557,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
   listDomains = (request: Readonly<ListDomainsRequest>) =>
     enrichForPagination('domains', this.pageOfListDomains, request)
 
+  
   /**
    * Get a domain name binding. Get a domain name binding for the function with the specified ID.
    *
@@ -580,7 +572,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       },
       unmarshalDomain,
     )
-
+  
   /**
    * Waits for {@link Domain} to be in a final state.
    *
@@ -593,16 +585,13 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
     options?: Readonly<WaitForOptions<Domain>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !DOMAIN_TRANSIENT_STATUSES_FUNCTION.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_FUNCTION.includes(res.status))),
       this.getDomain,
       request,
       options,
     )
 
+  
   /**
    * Create a domain name binding. Create a domain name binding for the function with the specified ID.
    *
@@ -622,6 +611,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalDomain,
     )
 
+  
   /**
    * Delete a domain name binding. Delete a domain name binding for the function with the specified ID.
    *
@@ -637,9 +627,11 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalDomain,
     )
 
+  
   /**
-   * Create a new revocable token.
+   * Create a new revocable token. Deprecated in favor of IAM authentication.
    *
+   * @deprecated
    * @param request - The request {@link CreateTokenRequest}
    * @returns A Promise of Token
    */
@@ -656,6 +648,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalToken,
     )
 
+  
   /**
    * Get a token.
    *
@@ -670,7 +663,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       },
       unmarshalToken,
     )
-
+  
   /**
    * Waits for {@link Token} to be in a final state.
    *
@@ -683,16 +676,13 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
     options?: Readonly<WaitForOptions<Token>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !TOKEN_TRANSIENT_STATUSES_FUNCTION.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!TOKEN_TRANSIENT_STATUSES_FUNCTION.includes(res.status))),
       this.getToken,
       request,
       options,
     )
 
+  
   protected pageOfListTokens = (request: Readonly<ListTokensRequest> = {}) =>
     this.client.fetch<ListTokensResponse>(
       {
@@ -703,15 +693,12 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
           ['namespace_id', request.namespaceId],
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListTokensResponse,
     )
-
+  
   /**
    * List all tokens.
    *
@@ -721,6 +708,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
   listTokens = (request: Readonly<ListTokensRequest> = {}) =>
     enrichForPagination('tokens', this.pageOfListTokens, request)
 
+  
   /**
    * Delete a token.
    *
@@ -736,6 +724,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalToken,
     )
 
+  
   /**
    * Create a trigger. Create a new trigger for a specified function.
    *
@@ -755,6 +744,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalTrigger,
     )
 
+  
   /**
    * Get a trigger. Get a trigger with a specified ID.
    *
@@ -769,7 +759,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       },
       unmarshalTrigger,
     )
-
+  
   /**
    * Waits for {@link Trigger} to be in a final state.
    *
@@ -782,19 +772,14 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
     options?: Readonly<WaitForOptions<Trigger>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !TRIGGER_TRANSIENT_STATUSES_FUNCTION.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!TRIGGER_TRANSIENT_STATUSES_FUNCTION.includes(res.status))),
       this.getTrigger,
       request,
       options,
     )
 
-  protected pageOfListTriggers = (
-    request: Readonly<ListTriggersRequest> = {},
-  ) =>
+  
+  protected pageOfListTriggers = (request: Readonly<ListTriggersRequest> = {}) =>
     this.client.fetch<ListTriggersResponse>(
       {
         method: 'GET',
@@ -802,26 +787,23 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
-          ...Object.entries(
-            resolveOneOf([
-              { param: 'function_id', value: request.functionId },
-              { param: 'namespace_id', value: request.namespaceId },
-              {
-                default: this.client.settings.defaultProjectId,
-                param: 'project_id',
-                value: request.projectId,
-              },
-            ]),
-          ),
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],  
+          ...Object.entries(resolveOneOf([
+            {param: 'function_id',
+              value: request.functionId,
+            },
+            {param: 'namespace_id',
+              value: request.namespaceId,
+            },
+            {default: this.client.settings.defaultProjectId,param: 'project_id',
+              value: request.projectId,
+            },
+          ])),
         ),
       },
       unmarshalListTriggersResponse,
     )
-
+  
   /**
    * List all triggers. List all triggers belonging to a specified Organization or Project.
    *
@@ -831,6 +813,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
   listTriggers = (request: Readonly<ListTriggersRequest> = {}) =>
     enrichForPagination('triggers', this.pageOfListTriggers, request)
 
+  
   /**
    * Update a trigger. Update a trigger with a specified ID.
    *
@@ -850,6 +833,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalTrigger,
     )
 
+  
   /**
    * Delete a trigger. Delete a trigger with a specified ID.
    *
@@ -864,4 +848,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       },
       unmarshalTrigger,
     )
+
+  
 }
+

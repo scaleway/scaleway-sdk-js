@@ -3,27 +3,23 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  toApiLocality,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
 } from '@scaleway/sdk-client'
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
-import {
-  IMAGE_TRANSIENT_STATUSES as IMAGE_TRANSIENT_STATUSES_REGISTRY,
-  NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_REGISTRY,
-  TAG_TRANSIENT_STATUSES as TAG_TRANSIENT_STATUSES_REGISTRY,
-} from './content.gen.js'
+import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import {IMAGE_TRANSIENT_STATUSES as IMAGE_TRANSIENT_STATUSES_REGISTRY,NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_REGISTRY,TAG_TRANSIENT_STATUSES as TAG_TRANSIENT_STATUSES_REGISTRY,} from './content.gen.js'
 import {
   marshalCreateNamespaceRequest,
-  marshalUpdateImageRequest,
-  marshalUpdateNamespaceRequest,
   unmarshalImage,
   unmarshalListImagesResponse,
   unmarshalListNamespacesResponse,
   unmarshalListTagsResponse,
   unmarshalNamespace,
   unmarshalTag,
+  marshalUpdateImageRequest,
+  marshalUpdateNamespaceRequest,
 } from './marshalling.gen.js'
 import type {
   CreateNamespaceRequest,
@@ -60,13 +56,16 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
-  protected pageOfListNamespaces = (
-    request: Readonly<ListNamespacesRequest> = {},
-  ) =>
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
+  protected pageOfListNamespaces = (request: Readonly<ListNamespacesRequest> = {}) =>
     this.client.fetch<ListNamespacesResponse>(
       {
         method: 'GET',
@@ -76,16 +75,13 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListNamespacesResponse,
     )
-
+  
   /**
    * List namespaces. List all namespaces in a specified region. By default, the namespaces listed are ordered by creation date in ascending order. This can be modified via the order_by field. You can also define additional parameters for your query, such as the `instance_id` and `project_id` parameters.
    *
@@ -95,6 +91,7 @@ export class API extends ParentAPI {
   listNamespaces = (request: Readonly<ListNamespacesRequest> = {}) =>
     enrichForPagination('namespaces', this.pageOfListNamespaces, request)
 
+  
   /**
    * Get a namespace. Retrieve information about a given namespace, specified by its `namespace_id` and region. Full details about the namespace, such as `description`, `project_id`, `status`, `endpoint`, `is_public`, `size`, and `image_count` are returned in the response.
    *
@@ -109,7 +106,7 @@ export class API extends ParentAPI {
       },
       unmarshalNamespace,
     )
-
+  
   /**
    * Waits for {@link Namespace} to be in a final state.
    *
@@ -122,16 +119,13 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Namespace>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !NAMESPACE_TRANSIENT_STATUSES_REGISTRY.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!NAMESPACE_TRANSIENT_STATUSES_REGISTRY.includes(res.status))),
       this.getNamespace,
       request,
       options,
     )
 
+  
   /**
    * Create a namespace. Create a new Container Registry namespace. You must specify the namespace name and region in which you want it to be created. Optionally, you can specify the `project_id` and `is_public` in the request payload.
    *
@@ -151,6 +145,7 @@ export class API extends ParentAPI {
       unmarshalNamespace,
     )
 
+  
   /**
    * Update a namespace. Update the parameters of a given namespace, specified by its `namespace_id` and `region`. You can update the `description` and `is_public` parameters.
    *
@@ -170,6 +165,7 @@ export class API extends ParentAPI {
       unmarshalNamespace,
     )
 
+  
   /**
    * Delete a namespace. Delete a given namespace. You must specify, in the endpoint, the `region` and `namespace_id` parameters of the namespace you want to delete.
    *
@@ -185,6 +181,7 @@ export class API extends ParentAPI {
       unmarshalNamespace,
     )
 
+  
   protected pageOfListImages = (request: Readonly<ListImagesRequest> = {}) =>
     this.client.fetch<ListImagesResponse>(
       {
@@ -196,16 +193,13 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListImagesResponse,
     )
-
+  
   /**
    * List images. List all images in a specified region. By default, the images listed are ordered by creation date in ascending order. This can be modified via the order_by field. You can also define additional parameters for your query, such as the `namespace_id` and `project_id` parameters.
    *
@@ -215,6 +209,7 @@ export class API extends ParentAPI {
   listImages = (request: Readonly<ListImagesRequest> = {}) =>
     enrichForPagination('images', this.pageOfListImages, request)
 
+  
   /**
    * Get an image. Retrieve information about a given container image, specified by its `image_id` and region. Full details about the image, such as `name`, `namespace_id`, `status`, `visibility`, and `size` are returned in the response.
    *
@@ -229,7 +224,7 @@ export class API extends ParentAPI {
       },
       unmarshalImage,
     )
-
+  
   /**
    * Waits for {@link Image} to be in a final state.
    *
@@ -242,16 +237,13 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Image>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !IMAGE_TRANSIENT_STATUSES_REGISTRY.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!IMAGE_TRANSIENT_STATUSES_REGISTRY.includes(res.status))),
       this.getImage,
       request,
       options,
     )
 
+  
   /**
    * Update an image. Update the parameters of a given image, specified by its `image_id` and `region`. You can update the `visibility` parameter.
    *
@@ -271,6 +263,7 @@ export class API extends ParentAPI {
       unmarshalImage,
     )
 
+  
   /**
    * Delete an image. Delete a given image. You must specify, in the endpoint, the `region` and `image_id` parameters of the image you want to delete.
    *
@@ -286,6 +279,7 @@ export class API extends ParentAPI {
       unmarshalImage,
     )
 
+  
   protected pageOfListTags = (request: Readonly<ListTagsRequest>) =>
     this.client.fetch<ListTagsResponse>(
       {
@@ -295,15 +289,12 @@ export class API extends ParentAPI {
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListTagsResponse,
     )
-
+  
   /**
    * List tags. List all tags for a given image, specified by region. By default, the tags listed are ordered by creation date in ascending order. This can be modified via the order_by field. You can also define additional parameters for your query, such as the `name`.
    *
@@ -313,6 +304,7 @@ export class API extends ParentAPI {
   listTags = (request: Readonly<ListTagsRequest>) =>
     enrichForPagination('tags', this.pageOfListTags, request)
 
+  
   /**
    * Get a tag. Retrieve information about a given image tag, specified by its `tag_id` and region. Full details about the tag, such as `name`, `image_id`, `status`, and `digest` are returned in the response.
    *
@@ -327,7 +319,7 @@ export class API extends ParentAPI {
       },
       unmarshalTag,
     )
-
+  
   /**
    * Waits for {@link Tag} to be in a final state.
    *
@@ -340,16 +332,13 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Tag>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !TAG_TRANSIENT_STATUSES_REGISTRY.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!TAG_TRANSIENT_STATUSES_REGISTRY.includes(res.status))),
       this.getTag,
       request,
       options,
     )
 
+  
   /**
    * Delete a tag. Delete a given image tag. You must specify, in the endpoint, the `region` and `tag_id` parameters of the tag you want to delete.
    *
@@ -361,8 +350,13 @@ export class API extends ParentAPI {
       {
         method: 'DELETE',
         path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tags/${validatePathParam('tagId', request.tagId)}`,
-        urlParams: urlParams(['force', request.force]),
+        urlParams: urlParams(
+          ['force', request.force],
+        ),
       },
       unmarshalTag,
     )
+
+  
 }
+

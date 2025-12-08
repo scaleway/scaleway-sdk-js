@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, } from '@scaleway/sdk-client'
+
 
 export type DatabaseBackupStatus =
   | 'unknown_status'
@@ -78,6 +79,7 @@ export interface DatabaseBackup {
   region: ScwRegion
 }
 
+
 export interface Database {
   /**
    * UUID that uniquely identifies your Serverless SQL DB Database.
@@ -133,6 +135,7 @@ export interface Database {
   engineMajorVersion: number
 }
 
+
 export type CreateDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -160,6 +163,7 @@ export type CreateDatabaseRequest = {
   fromBackupId?: string
 }
 
+
 export type DeleteDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -170,6 +174,7 @@ export type DeleteDatabaseRequest = {
    */
   databaseId: string
 }
+
 
 export type ExportDatabaseBackupRequest = {
   /**
@@ -182,6 +187,7 @@ export type ExportDatabaseBackupRequest = {
   backupId: string
 }
 
+
 export type GetDatabaseBackupRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -193,6 +199,7 @@ export type GetDatabaseBackupRequest = {
   backupId: string
 }
 
+
 export type GetDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -203,6 +210,7 @@ export type GetDatabaseRequest = {
    */
   databaseId: string
 }
+
 
 export type ListDatabaseBackupsRequest = {
   /**
@@ -235,6 +243,7 @@ export type ListDatabaseBackupsRequest = {
   orderBy?: ListDatabaseBackupsRequestOrderBy
 }
 
+
 export interface ListDatabaseBackupsResponse {
   /**
    * List of the backups.
@@ -245,6 +254,7 @@ export interface ListDatabaseBackupsResponse {
    */
   totalCount: number
 }
+
 
 export type ListDatabasesRequest = {
   /**
@@ -277,6 +287,7 @@ export type ListDatabasesRequest = {
   orderBy?: ListDatabasesRequestOrderBy
 }
 
+
 export interface ListDatabasesResponse {
   /**
    * List of the databases.
@@ -287,6 +298,7 @@ export interface ListDatabasesResponse {
    */
   totalCount: number
 }
+
 
 export type RestoreDatabaseFromBackupRequest = {
   /**
@@ -302,6 +314,7 @@ export type RestoreDatabaseFromBackupRequest = {
    */
   backupId: string
 }
+
 
 export type UpdateDatabaseRequest = {
   /**
@@ -321,3 +334,5 @@ export type UpdateDatabaseRequest = {
    */
   cpuMax?: number
 }
+
+

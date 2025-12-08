@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/configuration-loader",
-  "version": "1.0.12",
+  "version": "2.0.0",
   "license": "Apache-2.0",
   "description": "Load configuration via file or environment for NodeJS.",
   "publishConfig": {
@@ -12,14 +12,12 @@
     "directory": "packages/configuration-loader"
   },
   "engines": {
-    "node": ">=20.19.4"
+    "node": ">=20.19.6"
   },
   "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
       "default": "./dist/index.js"
     }
   },
@@ -30,6 +28,6 @@
     "build:profile": "npx vite-bundle-visualizer -c ../../vite.config.ts"
   },
   "devDependencies": {
-    "@types/node": "18.11.18"
+    "@types/node": "18.19.130"
   }
 }

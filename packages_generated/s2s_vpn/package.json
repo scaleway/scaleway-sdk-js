@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-s2s-vpn",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Scaleway SDK s2s-vpn",
   "license": "Apache-2.0",
   "files": [
@@ -11,14 +11,10 @@
   "exports": {
     ".": {
       "types": "./dist/index.gen.d.ts",
-      "import": "./dist/index.gen.js",
-      "require": "./dist/index.gen.cjs",
       "default": "./dist/index.gen.js"
     },
     "./*": {
       "types": "./dist/*/index.gen.d.ts",
-      "import": "./dist/*/index.gen.js",
-      "require": "./dist/*/index.gen.cjs",
       "default": "./dist/*/index.gen.js"
     }
   },
@@ -27,7 +23,7 @@
     "directory": "packages_generated/s2s-vpn"
   },
   "engines": {
-    "node": ">=20.18.3"
+    "node": ">=20.19.6"
   },
   "scripts": {
     "package:check": "pnpm publint",
@@ -37,7 +33,7 @@
     "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
   },
   "dependencies": {
-    "@scaleway/random-name": "5.1.1",
+    "@scaleway/random-name": "5.1.2",
     "@scaleway/sdk-std": "workspace:*"
   },
   "peerDependencies": {

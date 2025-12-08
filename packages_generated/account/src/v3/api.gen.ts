@@ -7,16 +7,16 @@ import {
   validatePathParam,
 } from '@scaleway/sdk-client'
 import {
+  unmarshalCheckContractSignatureResponse,
   marshalContractApiCheckContractSignatureRequest,
   marshalContractApiCreateContractSignatureRequest,
-  marshalProjectApiCreateProjectRequest,
-  marshalProjectApiSetProjectQualificationRequest,
-  marshalProjectApiUpdateProjectRequest,
-  unmarshalCheckContractSignatureResponse,
   unmarshalContractSignature,
   unmarshalListContractSignaturesResponse,
   unmarshalListProjectsResponse,
   unmarshalProject,
+  marshalProjectApiCreateProjectRequest,
+  marshalProjectApiSetProjectQualificationRequest,
+  marshalProjectApiUpdateProjectRequest,
   unmarshalProjectQualification,
 } from './marshalling.gen.js'
 import type {
@@ -55,32 +55,31 @@ export class ContractAPI extends ParentAPI {
    * @param request - The request {@link ContractApiDownloadContractSignatureRequest}
    * @returns A Promise of Blob
    */
-  downloadContractSignature = (
-    request: Readonly<ContractApiDownloadContractSignatureRequest>,
-  ) =>
-    this.client.fetch<Blob>({
-      method: 'GET',
-      path: `/account/v3/contract-signatures/${validatePathParam('contractSignatureId', request.contractSignatureId)}/download`,
-      urlParams: urlParams(['dl', 1], ['locale', request.locale]),
-      responseType: 'blob',
-    })
+  downloadContractSignature = (request: Readonly<ContractApiDownloadContractSignatureRequest>) =>
+    this.client.fetch<Blob>(
+      {
+        method: 'GET',
+        path: `/account/v3/contract-signatures/${validatePathParam('contractSignatureId', request.contractSignatureId)}/download`,
+        urlParams: urlParams(
+          ['dl', 1],
+          ['locale', request.locale],
+        ),
+        responseType: 'blob',
+      },
+    )
 
+  
   /**
    * Create a signature for your Organization for the latest version of the requested contract.
    *
    * @param request - The request {@link ContractApiCreateContractSignatureRequest}
    * @returns A Promise of ContractSignature
    */
-  createContractSignature = (
-    request: Readonly<ContractApiCreateContractSignatureRequest>,
-  ) =>
+  createContractSignature = (request: Readonly<ContractApiCreateContractSignatureRequest>) =>
     this.client.fetch<ContractSignature>(
       {
         body: JSON.stringify(
-          marshalContractApiCreateContractSignatureRequest(
-            request,
-            this.client.settings,
-          ),
+          marshalContractApiCreateContractSignatureRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -89,15 +88,14 @@ export class ContractAPI extends ParentAPI {
       unmarshalContractSignature,
     )
 
+  
   /**
    * Sign a contract for your Organization.
    *
    * @param request - The request {@link ContractApiValidateContractSignatureRequest}
    * @returns A Promise of ContractSignature
    */
-  validateContractSignature = (
-    request: Readonly<ContractApiValidateContractSignatureRequest>,
-  ) =>
+  validateContractSignature = (request: Readonly<ContractApiValidateContractSignatureRequest>) =>
     this.client.fetch<ContractSignature>(
       {
         body: '{}',
@@ -108,22 +106,18 @@ export class ContractAPI extends ParentAPI {
       unmarshalContractSignature,
     )
 
+  
   /**
    * Check if a contract is signed for your Organization.
    *
    * @param request - The request {@link ContractApiCheckContractSignatureRequest}
    * @returns A Promise of CheckContractSignatureResponse
    */
-  checkContractSignature = (
-    request: Readonly<ContractApiCheckContractSignatureRequest>,
-  ) =>
+  checkContractSignature = (request: Readonly<ContractApiCheckContractSignatureRequest>) =>
     this.client.fetch<CheckContractSignatureResponse>(
       {
         body: JSON.stringify(
-          marshalContractApiCheckContractSignatureRequest(
-            request,
-            this.client.settings,
-          ),
+          marshalContractApiCheckContractSignatureRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -132,44 +126,32 @@ export class ContractAPI extends ParentAPI {
       unmarshalCheckContractSignatureResponse,
     )
 
-  protected pageOfListContractSignatures = (
-    request: Readonly<ContractApiListContractSignaturesRequest> = {},
-  ) =>
+  
+  protected pageOfListContractSignatures = (request: Readonly<ContractApiListContractSignaturesRequest> = {}) =>
     this.client.fetch<ListContractSignaturesResponse>(
       {
         method: 'GET',
         path: `/account/v3/contract-signatures`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListContractSignaturesResponse,
     )
-
+  
   /**
    * List contract signatures for an Organization.
    *
    * @param request - The request {@link ContractApiListContractSignaturesRequest}
    * @returns A Promise of ListContractSignaturesResponse
    */
-  listContractSignatures = (
-    request: Readonly<ContractApiListContractSignaturesRequest> = {},
-  ) =>
-    enrichForPagination(
-      'contractSignatures',
-      this.pageOfListContractSignatures,
-      request,
-    )
+  listContractSignatures = (request: Readonly<ContractApiListContractSignaturesRequest> = {}) =>
+    enrichForPagination('contractSignatures', this.pageOfListContractSignatures, request)
+
+  
 }
 
 /**
@@ -197,9 +179,8 @@ export class ProjectAPI extends ParentAPI {
       unmarshalProject,
     )
 
-  protected pageOfListProjects = (
-    request: Readonly<ProjectApiListProjectsRequest> = {},
-  ) =>
+  
+  protected pageOfListProjects = (request: Readonly<ProjectApiListProjectsRequest> = {}) =>
     this.client.fetch<ListProjectsResponse>(
       {
         method: 'GET',
@@ -207,22 +188,15 @@ export class ProjectAPI extends ParentAPI {
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_ids', request.projectIds],
         ),
       },
       unmarshalListProjectsResponse,
     )
-
+  
   /**
    * List all Projects of an Organization. List all Projects of an Organization. The response will include the total number of Projects as well as their associated Organizations, names, and IDs. Other information includes the creation and update date of the Project.
    *
@@ -232,6 +206,7 @@ export class ProjectAPI extends ParentAPI {
   listProjects = (request: Readonly<ProjectApiListProjectsRequest> = {}) =>
     enrichForPagination('projects', this.pageOfListProjects, request)
 
+  
   /**
    * Get an existing Project. Retrieve information about an existing Project, specified by its Project ID. Its full details, including ID, name and description, are returned in the response object.
    *
@@ -247,17 +222,21 @@ export class ProjectAPI extends ParentAPI {
       unmarshalProject,
     )
 
+  
   /**
    * Delete an existing Project. Delete an existing Project, specified by its Project ID. The Project needs to be empty (meaning there are no resources left in it) to be deleted effectively. Note that deleting a Project is permanent, and cannot be undone.
    *
    * @param request - The request {@link ProjectApiDeleteProjectRequest}
    */
   deleteProject = (request: Readonly<ProjectApiDeleteProjectRequest> = {}) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/account/v3/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/account/v3/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
+      },
+    )
 
+  
   /**
    * Update Project. Update the parameters of an existing Project, specified by its Project ID. These parameters include the name and description.
    *
@@ -277,22 +256,18 @@ export class ProjectAPI extends ParentAPI {
       unmarshalProject,
     )
 
+  
   /**
    * Set project use case. Set the project use case for a new or existing Project, specified by its Project ID. You can customize the use case, sub use case, and architecture type you want to use in the Project.
    *
    * @param request - The request {@link ProjectApiSetProjectQualificationRequest}
    * @returns A Promise of ProjectQualification
    */
-  setProjectQualification = (
-    request: Readonly<ProjectApiSetProjectQualificationRequest> = {},
-  ) =>
+  setProjectQualification = (request: Readonly<ProjectApiSetProjectQualificationRequest> = {}) =>
     this.client.fetch<ProjectQualification>(
       {
         body: JSON.stringify(
-          marshalProjectApiSetProjectQualificationRequest(
-            request,
-            this.client.settings,
-          ),
+          marshalProjectApiSetProjectQualificationRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -300,4 +275,7 @@ export class ProjectAPI extends ParentAPI {
       },
       unmarshalProjectQualification,
     )
+
+  
 }
+

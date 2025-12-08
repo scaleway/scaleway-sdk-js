@@ -14,14 +14,21 @@ import type {
   VolumeState,
 } from './types.gen.js'
 
+
 /** Lists transient statutes of the enum {@link ImageState}. */
-export const IMAGE_TRANSIENT_STATUSES: ImageState[] = ['creating']
+export const IMAGE_TRANSIENT_STATUSES: ImageState[] = [
+  'creating',
+]
 
 /** Lists transient statutes of the enum {@link IpState}. */
-export const IP_TRANSIENT_STATUSES: IpState[] = ['pending']
+export const IP_TRANSIENT_STATUSES: IpState[] = [
+  'pending',
+]
 
 /** Lists transient statutes of the enum {@link PrivateNICState}. */
-export const PRIVATE_NIC_TRANSIENT_STATUSES: PrivateNICState[] = ['syncing']
+export const PRIVATE_NIC_TRANSIENT_STATUSES: PrivateNICState[] = [
+  'syncing',
+]
 
 /** Lists transient statutes of the enum {@link SecurityGroupState}. */
 export const SECURITY_GROUP_TRANSIENT_STATUSES: SecurityGroupState[] = [
@@ -35,10 +42,15 @@ export const SERVER_FILESYSTEM_TRANSIENT_STATUSES: ServerFilesystemState[] = [
 ]
 
 /** Lists transient statutes of the enum {@link ServerIpState}. */
-export const SERVER_IP_TRANSIENT_STATUSES: ServerIpState[] = ['pending']
+export const SERVER_IP_TRANSIENT_STATUSES: ServerIpState[] = [
+  'pending',
+]
 
 /** Lists transient statutes of the enum {@link ServerState}. */
-export const SERVER_TRANSIENT_STATUSES: ServerState[] = ['starting', 'stopping']
+export const SERVER_TRANSIENT_STATUSES: ServerState[] = [
+  'starting',
+  'stopping',
+]
 
 /** Lists transient statutes of the enum {@link SnapshotState}. */
 export const SNAPSHOT_TRANSIENT_STATUSES: SnapshotState[] = [
@@ -73,3 +85,4 @@ export const VOLUME_TRANSIENT_STATUSES: VolumeState[] = [
   'resizing',
   'hotsyncing',
 ]
+

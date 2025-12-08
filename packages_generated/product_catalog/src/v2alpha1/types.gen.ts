@@ -1,10 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type {
-  Money,
-  Region as ScwRegion,
-  Zone as ScwZone,
-} from '@scaleway/sdk-client'
+import type { Money, Region as ScwRegion, Zone as ScwZone} from '@scaleway/sdk-client'
+
 
 export type ListPublicCatalogProductsRequestProductType =
   | 'unknown_product_type'
@@ -15,17 +12,33 @@ export type ListPublicCatalogProductsRequestProductType =
   | 'block_storage'
   | 'object_storage'
   | 'managed_inference'
+  | 'generative_apis'
+  | 'load_balancer'
 
 export type ListPublicCatalogProductsRequestStatus =
   | 'unknown_status'
   | 'public_beta'
   | 'preview'
   | 'general_availability'
+  | 'end_of_new_features'
+  | 'end_of_growth'
   | 'end_of_deployment'
   | 'end_of_support'
   | 'end_of_sale'
   | 'end_of_life'
   | 'retired'
+
+export type PublicCatalogProductProductBadge =
+  | 'unknown_product_badge'
+  | 'new_product'
+  | 'best_seller'
+  | 'best_value'
+  | 'popular'
+
+export type PublicCatalogProductPropertiesGenerativeApisConsumptionMode =
+  | 'unknown_consumption_mode'
+  | 'realtime'
+  | 'batch'
 
 export type PublicCatalogProductPropertiesHardwareCPUArch =
   | 'unknown_arch'
@@ -39,6 +52,8 @@ export type PublicCatalogProductStatus =
   | 'public_beta'
   | 'preview'
   | 'general_availability'
+  | 'end_of_new_features'
+  | 'end_of_growth'
   | 'end_of_deployment'
   | 'end_of_support'
   | 'end_of_sale'
@@ -100,12 +115,14 @@ export interface PublicCatalogProductPropertiesHardwareCPUPhysical {
   benchmark: number
 }
 
+
 export interface PublicCatalogProductPropertiesHardwareCPUVirtual {
   /**
    * The number of vCPUs.
    */
   count: number
 }
+
 
 export interface PublicCatalogProductPropertiesHardwareCPU {
   /**
@@ -138,6 +155,7 @@ export interface PublicCatalogProductPropertiesHardwareCPU {
   threads: number
 }
 
+
 export interface PublicCatalogProductPropertiesHardwareGPU {
   /**
    * A human-readable description of the GPU.
@@ -152,6 +170,7 @@ export interface PublicCatalogProductPropertiesHardwareGPU {
    */
   type: string
 }
+
 
 export interface PublicCatalogProductPropertiesHardwareNetwork {
   /**
@@ -172,6 +191,7 @@ export interface PublicCatalogProductPropertiesHardwareNetwork {
   maxPublicBandwidth: number
 }
 
+
 export interface PublicCatalogProductPropertiesHardwareRAM {
   /**
    * A human-readable description of the RAM.
@@ -187,6 +207,7 @@ export interface PublicCatalogProductPropertiesHardwareRAM {
   type: string
 }
 
+
 export interface PublicCatalogProductPropertiesHardwareStorage {
   /**
    * A human-readable description of the storage.
@@ -197,6 +218,7 @@ export interface PublicCatalogProductPropertiesHardwareStorage {
    */
   total: number
 }
+
 
 export interface PublicCatalogProductPropertiesAppleSilicon {
   /**
@@ -209,6 +231,7 @@ export interface PublicCatalogProductPropertiesAppleSilicon {
   serverType: string
 }
 
+
 export interface PublicCatalogProductPropertiesBlockStorage {
   /**
    * @deprecated The minimum size of storage volume for this product in bytes. Deprecated.
@@ -219,6 +242,7 @@ export interface PublicCatalogProductPropertiesBlockStorage {
    */
   maxVolumeSize?: number
 }
+
 
 export interface PublicCatalogProductPropertiesDedibox {
   /**
@@ -231,6 +255,7 @@ export interface PublicCatalogProductPropertiesDedibox {
   offerId: number
 }
 
+
 export interface PublicCatalogProductPropertiesElasticMetal {
   /**
    * The range of the Elastic Metal server.
@@ -241,6 +266,14 @@ export interface PublicCatalogProductPropertiesElasticMetal {
    */
   offerId: string
 }
+
+
+export interface PublicCatalogProductPropertiesGenerativeApis {
+  reasoning: boolean
+  supportedApis: string[]
+  consumptionMode: PublicCatalogProductPropertiesGenerativeApisConsumptionMode
+}
+
 
 export interface PublicCatalogProductPropertiesHardware {
   /**
@@ -265,6 +298,7 @@ export interface PublicCatalogProductPropertiesHardware {
   gpu?: PublicCatalogProductPropertiesHardwareGPU
 }
 
+
 export interface PublicCatalogProductPropertiesInstance {
   /**
    * The range of the Instance server.
@@ -280,6 +314,11 @@ export interface PublicCatalogProductPropertiesInstance {
   recommendedReplacementOfferIds: string[]
 }
 
+
+export interface PublicCatalogProductPropertiesLoadBalancer {
+}
+
+
 export interface PublicCatalogProductPropertiesManagedInference {
   /**
    * The name of the associated instance GPU to this node type.
@@ -287,12 +326,16 @@ export interface PublicCatalogProductPropertiesManagedInference {
   instanceGpuName: string
 }
 
-export interface PublicCatalogProductPropertiesObjectStorage {}
+
+export interface PublicCatalogProductPropertiesObjectStorage {
+}
+
 
 export interface PublicCatalogProductEnvironmentalImpactEstimation {
   kgCo2Equivalent?: number
   m3WaterUsage?: number
 }
+
 
 export interface PublicCatalogProductLocality {
   /**
@@ -321,12 +364,14 @@ export interface PublicCatalogProductLocality {
   datacenter?: string
 }
 
+
 export interface PublicCatalogProductPrice {
   /**
    * The retail price of the product.
    */
   retailPrice?: Money
 }
+
 
 export interface PublicCatalogProductProperties {
   /**
@@ -336,51 +381,65 @@ export interface PublicCatalogProductProperties {
   /**
    * The properties of Dedibox products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
    */
   dedibox?: PublicCatalogProductPropertiesDedibox
   /**
    * The properties of Elastic Metal products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
    */
   elasticMetal?: PublicCatalogProductPropertiesElasticMetal
   /**
    * The properties of Apple Silicon products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
    */
   appleSilicon?: PublicCatalogProductPropertiesAppleSilicon
   /**
    * The properties of Instance products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
    */
   instance?: PublicCatalogProductPropertiesInstance
   /**
    * The properties of Block Storage products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
    */
   blockStorage?: PublicCatalogProductPropertiesBlockStorage
   /**
    * The properties of Object Storage products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
    */
   objectStorage?: PublicCatalogProductPropertiesObjectStorage
   /**
    * The properties of Managed Inference products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
    */
   managedInference?: PublicCatalogProductPropertiesManagedInference
+  /**
+   * The properties of Generative APIs products.
+   *
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
+   */
+  generativeApis?: PublicCatalogProductPropertiesGenerativeApis
+  /**
+   * The properties of Load Balancer products.
+   *
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
+   */
+  loadBalancer?: PublicCatalogProductPropertiesLoadBalancer
 }
+
 
 export interface PublicCatalogProductUnitOfMeasure {
   unit: PublicCatalogProductUnitOfMeasureCountableUnit
   size: number
 }
+
 
 export interface PublicCatalogProduct {
   /**
@@ -435,7 +494,12 @@ export interface PublicCatalogProduct {
    * The end of life date of the product.
    */
   endOfLifeAt?: Date
+  /**
+   * Different badges that can be associated with the product.
+   */
+  badges: PublicCatalogProductProductBadge[]
 }
+
 
 export interface ListPublicCatalogProductsResponse {
   /**
@@ -447,6 +511,7 @@ export interface ListPublicCatalogProductsResponse {
    */
   totalCount: number
 }
+
 
 export type PublicCatalogApiListPublicCatalogProductsRequest = {
   /**
@@ -486,7 +551,9 @@ export type PublicCatalogApiListPublicCatalogProductsRequest = {
    */
   datacenter?: string
   /**
-   * The lists of filtered product status, if empty only products with status public_beta, general_availability, preview, end_of_deployment, end_of_support, end_of_sale, end_of_life or retired will be returned.
+   * The lists of filtered product status, if empty only products with status public_beta, general_availability, preview, end_of_new_features, end_of_growth, end_of_deployment, end_of_support, end_of_sale, end_of_life or retired will be returned.
    */
   status?: ListPublicCatalogProductsRequestStatus[]
 }
+
+

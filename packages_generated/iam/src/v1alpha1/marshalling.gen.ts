@@ -1,77 +1,73 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import {
-  isJSONObject,
-  marshalBlobToScwFile,
-  resolveOneOf,
-  unmarshalArrayOfObject,
-  unmarshalDate,
-} from '@scaleway/sdk-client'
+import { isJSONObject, marshalBlobToScwFile, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
+  JWT,
   APIKey,
-  AddGroupMemberRequest,
-  AddGroupMembersRequest,
-  AddSamlCertificateRequest,
   Application,
-  Connection,
+  Group,
+  Log,
+  Policy,
+  QuotumLimit,
+  Quotum,
+  SSHKey,
+  SamlCertificate,
+  User,
+  ScimToken,
+  CreateScimTokenResponse,
+  EncodedJWT,
   ConnectionConnectedOrganization,
   ConnectionConnectedUser,
-  CreateAPIKeyRequest,
-  CreateApplicationRequest,
-  CreateGroupRequest,
-  CreateJWTRequest,
-  CreatePolicyRequest,
-  CreateSSHKeyRequest,
-  CreateScimTokenResponse,
-  CreateUserRequest,
-  CreateUserRequestMember,
-  EncodedJWT,
+  Connection,
   GetUserConnectionsResponse,
-  GracePeriod,
-  Group,
   InitiateUserConnectionResponse,
-  JWT,
-  JoinUserConnectionRequest,
   ListAPIKeysResponse,
   ListApplicationsResponse,
+  GracePeriod,
   ListGracePeriodsResponse,
   ListGroupsResponse,
   ListJWTsResponse,
   ListLogsResponse,
+  PermissionSet,
   ListPermissionSetsResponse,
   ListPoliciesResponse,
   ListQuotaResponse,
+  Rule,
   ListRulesResponse,
   ListSSHKeysResponse,
   ListSamlCertificatesResponse,
   ListScimTokensResponse,
   ListUsersResponse,
-  Log,
   MFAOTP,
   Organization,
   OrganizationSecuritySettings,
-  ParseSamlMetadataRequest,
   ParseSamlMetadataResponse,
-  PermissionSet,
-  Policy,
-  Quotum,
-  QuotumLimit,
+  SamlServiceProvider,
+  Saml,
+  Scim,
+  SetRulesResponse,
+  ValidateUserMFAOTPResponse,
+  AddGroupMemberRequest,
+  AddGroupMembersRequest,
+  AddSamlCertificateRequest,
+  CreateAPIKeyRequest,
+  CreateApplicationRequest,
+  CreateGroupRequest,
+  CreateJWTRequest,
+  RuleSpecs,
+  CreatePolicyRequest,
+  CreateSSHKeyRequest,
+  CreateUserRequestMember,
+  CreateUserRequest,
+  JoinUserConnectionRequest,
+  ParseSamlMetadataRequest,
   RemoveGroupMemberRequest,
   RemoveUserConnectionRequest,
-  Rule,
-  RuleSpecs,
-  SSHKey,
-  Saml,
-  SamlCertificate,
-  SamlServiceProvider,
-  Scim,
-  ScimToken,
   SetGroupMembersRequest,
   SetOrganizationAliasRequest,
   SetRulesRequest,
-  SetRulesResponse,
   UpdateAPIKeyRequest,
   UpdateApplicationRequest,
   UpdateGroupRequest,
@@ -83,9 +79,7 @@ import type {
   UpdateUserPasswordRequest,
   UpdateUserRequest,
   UpdateUserUsernameRequest,
-  User,
   ValidateUserMFAOTPRequest,
-  ValidateUserMFAOTPResponse,
 } from './types.gen.js'
 
 export const unmarshalJWT = (data: unknown): JWT => {
@@ -340,9 +334,7 @@ const unmarshalScimToken = (data: unknown): ScimToken => {
   } as ScimToken
 }
 
-export const unmarshalCreateScimTokenResponse = (
-  data: unknown,
-): CreateScimTokenResponse => {
+export const unmarshalCreateScimTokenResponse = (data: unknown): CreateScimTokenResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CreateScimTokenResponse' failed as data isn't a dictionary.`,
@@ -369,9 +361,7 @@ export const unmarshalEncodedJWT = (data: unknown): EncodedJWT => {
   } as EncodedJWT
 }
 
-const unmarshalConnectionConnectedOrganization = (
-  data: unknown,
-): ConnectionConnectedOrganization => {
+const unmarshalConnectionConnectedOrganization = (data: unknown): ConnectionConnectedOrganization => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ConnectionConnectedOrganization' failed as data isn't a dictionary.`,
@@ -385,9 +375,7 @@ const unmarshalConnectionConnectedOrganization = (
   } as ConnectionConnectedOrganization
 }
 
-const unmarshalConnectionConnectedUser = (
-  data: unknown,
-): ConnectionConnectedUser => {
+const unmarshalConnectionConnectedUser = (data: unknown): ConnectionConnectedUser => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ConnectionConnectedUser' failed as data isn't a dictionary.`,
@@ -409,16 +397,12 @@ const unmarshalConnection = (data: unknown): Connection => {
   }
 
   return {
-    organization: data.organization
-      ? unmarshalConnectionConnectedOrganization(data.organization)
-      : undefined,
+    organization: data.organization ? unmarshalConnectionConnectedOrganization(data.organization) : undefined,
     user: data.user ? unmarshalConnectionConnectedUser(data.user) : undefined,
   } as Connection
 }
 
-export const unmarshalGetUserConnectionsResponse = (
-  data: unknown,
-): GetUserConnectionsResponse => {
+export const unmarshalGetUserConnectionsResponse = (data: unknown): GetUserConnectionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetUserConnectionsResponse' failed as data isn't a dictionary.`,
@@ -430,9 +414,7 @@ export const unmarshalGetUserConnectionsResponse = (
   } as GetUserConnectionsResponse
 }
 
-export const unmarshalInitiateUserConnectionResponse = (
-  data: unknown,
-): InitiateUserConnectionResponse => {
+export const unmarshalInitiateUserConnectionResponse = (data: unknown): InitiateUserConnectionResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'InitiateUserConnectionResponse' failed as data isn't a dictionary.`,
@@ -444,9 +426,7 @@ export const unmarshalInitiateUserConnectionResponse = (
   } as InitiateUserConnectionResponse
 }
 
-export const unmarshalListAPIKeysResponse = (
-  data: unknown,
-): ListAPIKeysResponse => {
+export const unmarshalListAPIKeysResponse = (data: unknown): ListAPIKeysResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListAPIKeysResponse' failed as data isn't a dictionary.`,
@@ -459,9 +439,7 @@ export const unmarshalListAPIKeysResponse = (
   } as ListAPIKeysResponse
 }
 
-export const unmarshalListApplicationsResponse = (
-  data: unknown,
-): ListApplicationsResponse => {
+export const unmarshalListApplicationsResponse = (data: unknown): ListApplicationsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListApplicationsResponse' failed as data isn't a dictionary.`,
@@ -469,10 +447,7 @@ export const unmarshalListApplicationsResponse = (
   }
 
   return {
-    applications: unmarshalArrayOfObject(
-      data.applications,
-      unmarshalApplication,
-    ),
+    applications: unmarshalArrayOfObject(data.applications, unmarshalApplication),
     totalCount: data.total_count,
   } as ListApplicationsResponse
 }
@@ -491,9 +466,7 @@ const unmarshalGracePeriod = (data: unknown): GracePeriod => {
   } as GracePeriod
 }
 
-export const unmarshalListGracePeriodsResponse = (
-  data: unknown,
-): ListGracePeriodsResponse => {
+export const unmarshalListGracePeriodsResponse = (data: unknown): ListGracePeriodsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListGracePeriodsResponse' failed as data isn't a dictionary.`,
@@ -501,16 +474,11 @@ export const unmarshalListGracePeriodsResponse = (
   }
 
   return {
-    gracePeriods: unmarshalArrayOfObject(
-      data.grace_periods,
-      unmarshalGracePeriod,
-    ),
+    gracePeriods: unmarshalArrayOfObject(data.grace_periods, unmarshalGracePeriod),
   } as ListGracePeriodsResponse
 }
 
-export const unmarshalListGroupsResponse = (
-  data: unknown,
-): ListGroupsResponse => {
+export const unmarshalListGroupsResponse = (data: unknown): ListGroupsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListGroupsResponse' failed as data isn't a dictionary.`,
@@ -565,9 +533,7 @@ const unmarshalPermissionSet = (data: unknown): PermissionSet => {
   } as PermissionSet
 }
 
-export const unmarshalListPermissionSetsResponse = (
-  data: unknown,
-): ListPermissionSetsResponse => {
+export const unmarshalListPermissionSetsResponse = (data: unknown): ListPermissionSetsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListPermissionSetsResponse' failed as data isn't a dictionary.`,
@@ -575,17 +541,12 @@ export const unmarshalListPermissionSetsResponse = (
   }
 
   return {
-    permissionSets: unmarshalArrayOfObject(
-      data.permission_sets,
-      unmarshalPermissionSet,
-    ),
+    permissionSets: unmarshalArrayOfObject(data.permission_sets, unmarshalPermissionSet),
     totalCount: data.total_count,
   } as ListPermissionSetsResponse
 }
 
-export const unmarshalListPoliciesResponse = (
-  data: unknown,
-): ListPoliciesResponse => {
+export const unmarshalListPoliciesResponse = (data: unknown): ListPoliciesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListPoliciesResponse' failed as data isn't a dictionary.`,
@@ -598,9 +559,7 @@ export const unmarshalListPoliciesResponse = (
   } as ListPoliciesResponse
 }
 
-export const unmarshalListQuotaResponse = (
-  data: unknown,
-): ListQuotaResponse => {
+export const unmarshalListQuotaResponse = (data: unknown): ListQuotaResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListQuotaResponse' failed as data isn't a dictionary.`,
@@ -631,9 +590,7 @@ const unmarshalRule = (data: unknown): Rule => {
   } as Rule
 }
 
-export const unmarshalListRulesResponse = (
-  data: unknown,
-): ListRulesResponse => {
+export const unmarshalListRulesResponse = (data: unknown): ListRulesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListRulesResponse' failed as data isn't a dictionary.`,
@@ -646,9 +603,7 @@ export const unmarshalListRulesResponse = (
   } as ListRulesResponse
 }
 
-export const unmarshalListSSHKeysResponse = (
-  data: unknown,
-): ListSSHKeysResponse => {
+export const unmarshalListSSHKeysResponse = (data: unknown): ListSSHKeysResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSSHKeysResponse' failed as data isn't a dictionary.`,
@@ -661,9 +616,7 @@ export const unmarshalListSSHKeysResponse = (
   } as ListSSHKeysResponse
 }
 
-export const unmarshalListSamlCertificatesResponse = (
-  data: unknown,
-): ListSamlCertificatesResponse => {
+export const unmarshalListSamlCertificatesResponse = (data: unknown): ListSamlCertificatesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSamlCertificatesResponse' failed as data isn't a dictionary.`,
@@ -671,16 +624,11 @@ export const unmarshalListSamlCertificatesResponse = (
   }
 
   return {
-    certificates: unmarshalArrayOfObject(
-      data.certificates,
-      unmarshalSamlCertificate,
-    ),
+    certificates: unmarshalArrayOfObject(data.certificates, unmarshalSamlCertificate),
   } as ListSamlCertificatesResponse
 }
 
-export const unmarshalListScimTokensResponse = (
-  data: unknown,
-): ListScimTokensResponse => {
+export const unmarshalListScimTokensResponse = (data: unknown): ListScimTokensResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListScimTokensResponse' failed as data isn't a dictionary.`,
@@ -693,9 +641,7 @@ export const unmarshalListScimTokensResponse = (
   } as ListScimTokensResponse
 }
 
-export const unmarshalListUsersResponse = (
-  data: unknown,
-): ListUsersResponse => {
+export const unmarshalListUsersResponse = (data: unknown): ListUsersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListUsersResponse' failed as data isn't a dictionary.`,
@@ -738,9 +684,7 @@ export const unmarshalOrganization = (data: unknown): Organization => {
   } as Organization
 }
 
-export const unmarshalOrganizationSecuritySettings = (
-  data: unknown,
-): OrganizationSecuritySettings => {
+export const unmarshalOrganizationSecuritySettings = (data: unknown): OrganizationSecuritySettings => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'OrganizationSecuritySettings' failed as data isn't a dictionary.`,
@@ -756,9 +700,7 @@ export const unmarshalOrganizationSecuritySettings = (
   } as OrganizationSecuritySettings
 }
 
-export const unmarshalParseSamlMetadataResponse = (
-  data: unknown,
-): ParseSamlMetadataResponse => {
+export const unmarshalParseSamlMetadataResponse = (data: unknown): ParseSamlMetadataResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ParseSamlMetadataResponse' failed as data isn't a dictionary.`,
@@ -795,9 +737,7 @@ export const unmarshalSaml = (data: unknown): Saml => {
   return {
     entityId: data.entity_id,
     id: data.id,
-    serviceProvider: data.service_provider
-      ? unmarshalSamlServiceProvider(data.service_provider)
-      : undefined,
+    serviceProvider: data.service_provider ? unmarshalSamlServiceProvider(data.service_provider) : undefined,
     singleSignOnUrl: data.single_sign_on_url,
     status: data.status,
   } as Saml
@@ -828,9 +768,7 @@ export const unmarshalSetRulesResponse = (data: unknown): SetRulesResponse => {
   } as SetRulesResponse
 }
 
-export const unmarshalValidateUserMFAOTPResponse = (
-  data: unknown,
-): ValidateUserMFAOTPResponse => {
+export const unmarshalValidateUserMFAOTPResponse = (data: unknown): ValidateUserMFAOTPResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ValidateUserMFAOTPResponse' failed as data isn't a dictionary.`,
@@ -845,10 +783,14 @@ export const unmarshalValidateUserMFAOTPResponse = (
 export const marshalAddGroupMemberRequest = (
   request: AddGroupMemberRequest,
   defaults: DefaultValues,
-): Record<string, unknown> => ({
+): Record<string, unknown> => ({  
   ...resolveOneOf([
-    { param: 'user_id', value: request.userId },
-    { param: 'application_id', value: request.applicationId },
+    {param: 'user_id',
+      value: request.userId,
+    },
+    {param: 'application_id',
+      value: request.applicationId,
+    },
   ]),
 })
 
@@ -874,10 +816,14 @@ export const marshalCreateAPIKeyRequest = (
 ): Record<string, unknown> => ({
   default_project_id: request.defaultProjectId,
   description: request.description,
-  expires_at: request.expiresAt,
+  expires_at: request.expiresAt,  
   ...resolveOneOf([
-    { param: 'application_id', value: request.applicationId },
-    { param: 'user_id', value: request.userId },
+    {param: 'application_id',
+      value: request.applicationId,
+    },
+    {param: 'user_id',
+      value: request.userId,
+    },
   ]),
 })
 
@@ -914,10 +860,14 @@ const marshalRuleSpecs = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   condition: request.condition,
-  permission_set_names: request.permissionSetNames,
+  permission_set_names: request.permissionSetNames,  
   ...resolveOneOf<unknown[] | string>([
-    { param: 'project_ids', value: request.projectIds },
-    { param: 'organization_id', value: request.organizationId },
+    {param: 'project_ids',
+      value: request.projectIds,
+    },
+    {param: 'organization_id',
+      value: request.organizationId,
+    },
   ]),
 })
 
@@ -928,16 +878,21 @@ export const marshalCreatePolicyRequest = (
   description: request.description,
   name: request.name || randomName('pol'),
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
-  rules:
-    request.rules !== undefined
-      ? request.rules.map(elt => marshalRuleSpecs(elt, defaults))
-      : undefined,
-  tags: request.tags,
+  rules: ((request.rules !== undefined) ?  request.rules.map(elt => marshalRuleSpecs(elt, defaults)): undefined),
+  tags: request.tags,  
   ...resolveOneOf<string | boolean>([
-    { param: 'user_id', value: request.userId },
-    { param: 'group_id', value: request.groupId },
-    { param: 'application_id', value: request.applicationId },
-    { param: 'no_principal', value: request.noPrincipal },
+    {param: 'user_id',
+      value: request.userId,
+    },
+    {param: 'group_id',
+      value: request.groupId,
+    },
+    {param: 'application_id',
+      value: request.applicationId,
+    },
+    {param: 'no_principal',
+      value: request.noPrincipal,
+    },
   ]),
 })
 
@@ -970,15 +925,14 @@ export const marshalCreateUserRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
-  tags: request.tags,
+  tags: request.tags,  
   ...resolveOneOf<string | Record<string, unknown>>([
-    { param: 'email', value: request.email },
-    {
-      param: 'member',
-      value:
-        request.member !== undefined
-          ? marshalCreateUserRequestMember(request.member, defaults)
-          : undefined,
+    {param: 'email',
+      value: request.email,
+    },
+    {param: 'member',
+      value: (request.member !== undefined) ? marshalCreateUserRequestMember(request.member, defaults)
+      : undefined,
     },
   ]),
 })
@@ -994,16 +948,20 @@ export const marshalParseSamlMetadataRequest = async (
   request: ParseSamlMetadataRequest,
   defaults: DefaultValues,
 ): Promise<Record<string, unknown>> => ({
-  file: await marshalBlobToScwFile(request.file),
+  file:  await marshalBlobToScwFile(request.file),
 })
 
 export const marshalRemoveGroupMemberRequest = (
   request: RemoveGroupMemberRequest,
   defaults: DefaultValues,
-): Record<string, unknown> => ({
+): Record<string, unknown> => ({  
   ...resolveOneOf([
-    { param: 'user_id', value: request.userId },
-    { param: 'application_id', value: request.applicationId },
+    {param: 'user_id',
+      value: request.userId,
+    },
+    {param: 'application_id',
+      value: request.applicationId,
+    },
   ]),
 })
 
@@ -1034,7 +992,7 @@ export const marshalSetRulesRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   policy_id: request.policyId,
-  rules: request.rules.map(elt => marshalRuleSpecs(elt, defaults)),
+  rules:  request.rules.map(elt => marshalRuleSpecs(elt, defaults)),
 })
 
 export const marshalUpdateAPIKeyRequest = (
@@ -1091,12 +1049,20 @@ export const marshalUpdatePolicyRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
-  tags: request.tags,
+  tags: request.tags,  
   ...resolveOneOf<string | boolean>([
-    { param: 'user_id', value: request.userId },
-    { param: 'group_id', value: request.groupId },
-    { param: 'application_id', value: request.applicationId },
-    { param: 'no_principal', value: request.noPrincipal },
+    {param: 'user_id',
+      value: request.userId,
+    },
+    {param: 'group_id',
+      value: request.groupId,
+    },
+    {param: 'application_id',
+      value: request.applicationId,
+    },
+    {param: 'no_principal',
+      value: request.noPrincipal,
+    },
   ]),
 })
 

@@ -27,3 +27,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 - **s2s_vpn:** accept custom private interco IPs on connection creation ([#2482](https://github.com/scaleway/scaleway-sdk-js/issues/2482)) ([8f0d10f](https://github.com/scaleway/scaleway-sdk-js/commit/8f0d10ffd98b02bccf1be14024c7b92c52f413fd))
+
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 2.0.0 (2025-01-XX)
+
+### ⚠ BREAKING CHANGES
+
+- packages are ESM only
+
+### :gear: Features
+
+- publish packages as ESM only

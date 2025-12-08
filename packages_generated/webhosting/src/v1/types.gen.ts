@@ -1,7 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Money, Region as ScwRegion } from '@scaleway/sdk-client'
-import type { LanguageCode as StdLanguageCode } from '@scaleway/sdk-std'
+import type { Money, Region as ScwRegion, } from '@scaleway/sdk-client'
+import type {LanguageCode as StdLanguageCode,} from '@scaleway/sdk-std'
+
 
 export type BackupItemType =
   | 'unknown_backup_item_type'
@@ -33,7 +34,10 @@ export type CheckFreeDomainAvailabilityResponseUnavailableReason =
   | 'unavailable_reason_contains_dots'
   | 'unavailable_reason_contains_reserved_keyword'
 
-export type DnsRecordStatus = 'unknown_status' | 'valid' | 'invalid'
+export type DnsRecordStatus =
+  | 'unknown_status'
+  | 'valid'
+  | 'invalid'
 
 export type DnsRecordType =
   | 'unknown_type'
@@ -44,7 +48,10 @@ export type DnsRecordType =
   | 'ns'
   | 'aaaa'
 
-export type DnsRecordsStatus = 'unknown_status' | 'valid' | 'invalid'
+export type DnsRecordsStatus =
+  | 'unknown_status'
+  | 'valid'
+  | 'invalid'
 
 export type DomainAction =
   | 'unknown_action'
@@ -98,17 +105,25 @@ export type HostingStatus =
   | 'migrating'
   | 'updating'
 
-export type ListBackupsRequestOrderBy = 'created_at_desc' | 'created_at_asc'
+export type ListBackupsRequestOrderBy =
+  | 'created_at_desc'
+  | 'created_at_asc'
 
-export type ListDatabaseUsersRequestOrderBy = 'username_asc' | 'username_desc'
+export type ListDatabaseUsersRequestOrderBy =
+  | 'username_asc'
+  | 'username_desc'
 
 export type ListDatabasesRequestOrderBy =
   | 'database_name_asc'
   | 'database_name_desc'
 
-export type ListFtpAccountsRequestOrderBy = 'username_asc' | 'username_desc'
+export type ListFtpAccountsRequestOrderBy =
+  | 'username_asc'
+  | 'username_desc'
 
-export type ListHostingsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+export type ListHostingsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
 
 export type ListMailAccountsRequestOrderBy =
   | 'username_asc'
@@ -116,11 +131,17 @@ export type ListMailAccountsRequestOrderBy =
   | 'domain_asc'
   | 'domain_desc'
 
-export type ListOffersRequestOrderBy = 'price_asc'
+export type ListOffersRequestOrderBy =
+  | 'price_asc'
 
-export type ListWebsitesRequestOrderBy = 'domain_asc' | 'domain_desc'
+export type ListWebsitesRequestOrderBy =
+  | 'domain_asc'
+  | 'domain_desc'
 
-export type NameserverStatus = 'unknown_status' | 'valid' | 'invalid'
+export type NameserverStatus =
+  | 'unknown_status'
+  | 'valid'
+  | 'invalid'
 
 export type OfferOptionName =
   | 'unknown_name'
@@ -141,7 +162,10 @@ export type OfferOptionWarning =
   | 'quota_exceeded_warning'
   | 'usage_low_warning'
 
-export type PlatformPlatformGroup = 'unknown_group' | 'default' | 'premium'
+export type PlatformPlatformGroup =
+  | 'unknown_group'
+  | 'default'
+  | 'premium'
 
 export type ProgressStatus =
   | 'unknown_status'
@@ -176,6 +200,7 @@ export interface AutoConfigDomainDns {
   none: boolean
 }
 
+
 export interface PlatformControlPanelUrls {
   /**
    * URL to connect to the hosting control panel dashboard.
@@ -186,6 +211,7 @@ export interface PlatformControlPanelUrls {
    */
   webmail: string
 }
+
 
 export interface HostingDomainCustomDomain {
   /**
@@ -206,6 +232,7 @@ export interface HostingDomainCustomDomain {
   autoConfigDomainDns?: AutoConfigDomainDns
 }
 
+
 export interface ControlPanel {
   /**
    * Control panel name.
@@ -224,6 +251,7 @@ export interface ControlPanel {
    */
   availableLanguages: StdLanguageCode[]
 }
+
 
 export interface OfferOption {
   /**
@@ -260,6 +288,7 @@ export interface OfferOption {
   price?: Money
 }
 
+
 export interface PlatformControlPanel {
   /**
    * Name of the control panel.
@@ -270,6 +299,7 @@ export interface PlatformControlPanel {
    */
   urls?: PlatformControlPanelUrls
 }
+
 
 export interface BackupItem {
   /**
@@ -298,6 +328,7 @@ export interface BackupItem {
   createdAt?: Date
 }
 
+
 export interface HostingDomain {
   /**
    * Optional free subdomain linked to the Web Hosting plan.
@@ -308,6 +339,7 @@ export interface HostingDomain {
    */
   customDomain?: HostingDomainCustomDomain
 }
+
 
 export interface FreeDomain {
   /**
@@ -320,10 +352,12 @@ export interface FreeDomain {
   rootDomain: string
 }
 
+
 export interface CreateDatabaseRequestUser {
   username: string
   password: string
 }
+
 
 export interface CreateHostingRequestDomainConfiguration {
   updateNameservers: boolean
@@ -331,6 +365,7 @@ export interface CreateHostingRequestDomainConfiguration {
   updateMailRecord: boolean
   updateAllRecords: boolean
 }
+
 
 export interface OfferOptionRequest {
   /**
@@ -343,10 +378,12 @@ export interface OfferOptionRequest {
   quantity: number
 }
 
+
 export interface SyncDomainDnsRecordsRequestRecord {
   name: string
   type: DnsRecordType
 }
+
 
 export interface DnsRecord {
   /**
@@ -379,6 +416,7 @@ export interface DnsRecord {
   rawData: string
 }
 
+
 export interface Nameserver {
   /**
    * Hostname of the nameserver.
@@ -393,6 +431,7 @@ export interface Nameserver {
    */
   isDefault: boolean
 }
+
 
 export interface HostingUser {
   /**
@@ -412,6 +451,7 @@ export interface HostingUser {
    */
   oneTimePasswordB64?: string
 }
+
 
 export interface Offer {
   /**
@@ -460,6 +500,7 @@ export interface Offer {
   region: ScwRegion
 }
 
+
 export interface Platform {
   /**
    * Hostname of the host platform.
@@ -487,6 +528,7 @@ export interface Platform {
   controlPanel?: PlatformControlPanel
 }
 
+
 export interface BackupItemGroup {
   /**
    * Type of items (e.g., email, database, FTP).
@@ -497,6 +539,7 @@ export interface BackupItemGroup {
    */
   items: BackupItem[]
 }
+
 
 export interface Backup {
   /**
@@ -521,6 +564,7 @@ export interface Backup {
   totalItems: number
 }
 
+
 export interface DatabaseUser {
   /**
    * Name of the database user.
@@ -531,6 +575,7 @@ export interface DatabaseUser {
    */
   databases: string[]
 }
+
 
 export interface Database {
   /**
@@ -543,6 +588,7 @@ export interface Database {
   users: string[]
 }
 
+
 export interface FtpAccount {
   /**
    * The username of the FTP account.
@@ -553,6 +599,7 @@ export interface FtpAccount {
    */
   path: string
 }
+
 
 export interface HostingSummary {
   /**
@@ -605,6 +652,7 @@ export interface HostingSummary {
   domainInfo?: HostingDomain
 }
 
+
 export interface MailAccount {
   /**
    * Domain part of the mail account address.
@@ -615,6 +663,7 @@ export interface MailAccount {
    */
   username: string
 }
+
 
 export interface ProgressSummary {
   /**
@@ -635,6 +684,7 @@ export interface ProgressSummary {
   status: ProgressStatus
 }
 
+
 export interface Website {
   /**
    * The domain of the website.
@@ -649,6 +699,7 @@ export interface Website {
    */
   sslStatus: boolean
 }
+
 
 export interface DomainAvailability {
   /**
@@ -677,6 +728,7 @@ export interface DomainAvailability {
   price?: Money
 }
 
+
 export type BackupApiGetBackupRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -691,6 +743,7 @@ export type BackupApiGetBackupRequest = {
    */
   backupId: string
 }
+
 
 export type BackupApiGetProgressRequest = {
   /**
@@ -707,6 +760,7 @@ export type BackupApiGetProgressRequest = {
   progressId: string
 }
 
+
 export type BackupApiListBackupItemsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -721,6 +775,7 @@ export type BackupApiListBackupItemsRequest = {
    */
   backupId: string
 }
+
 
 export type BackupApiListBackupsRequest = {
   /**
@@ -745,6 +800,7 @@ export type BackupApiListBackupsRequest = {
   orderBy?: ListBackupsRequestOrderBy
 }
 
+
 export type BackupApiListRecentProgressesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -755,6 +811,7 @@ export type BackupApiListRecentProgressesRequest = {
    */
   hostingId: string
 }
+
 
 export type BackupApiRestoreBackupItemsRequest = {
   /**
@@ -771,6 +828,7 @@ export type BackupApiRestoreBackupItemsRequest = {
   itemIds?: string[]
 }
 
+
 export type BackupApiRestoreBackupRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -785,6 +843,7 @@ export type BackupApiRestoreBackupRequest = {
    */
   backupId: string
 }
+
 
 export interface CheckFreeDomainAvailabilityResponse {
   /**
@@ -801,12 +860,14 @@ export interface CheckFreeDomainAvailabilityResponse {
   reason?: CheckFreeDomainAvailabilityResponseUnavailableReason
 }
 
+
 export interface CheckUserOwnsDomainResponse {
   /**
    * Indicates whether the specified project owns the domain.
    */
   ownsDomain: boolean
 }
+
 
 export type ControlPanelApiListControlPanelsRequest = {
   /**
@@ -822,6 +883,7 @@ export type ControlPanelApiListControlPanelsRequest = {
    */
   pageSize?: number
 }
+
 
 export type DatabaseApiAssignDatabaseUserRequest = {
   /**
@@ -842,6 +904,7 @@ export type DatabaseApiAssignDatabaseUserRequest = {
   username: string
 }
 
+
 export type DatabaseApiChangeDatabaseUserPasswordRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -860,6 +923,7 @@ export type DatabaseApiChangeDatabaseUserPasswordRequest = {
    */
   password: string
 }
+
 
 export type DatabaseApiCreateDatabaseRequest = {
   /**
@@ -888,6 +952,7 @@ export type DatabaseApiCreateDatabaseRequest = {
   existingUsername?: string
 }
 
+
 export type DatabaseApiCreateDatabaseUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -907,6 +972,7 @@ export type DatabaseApiCreateDatabaseUserRequest = {
   password: string
 }
 
+
 export type DatabaseApiDeleteDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -921,6 +987,7 @@ export type DatabaseApiDeleteDatabaseRequest = {
    */
   databaseName: string
 }
+
 
 export type DatabaseApiDeleteDatabaseUserRequest = {
   /**
@@ -937,6 +1004,7 @@ export type DatabaseApiDeleteDatabaseUserRequest = {
   username: string
 }
 
+
 export type DatabaseApiGetDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -952,6 +1020,7 @@ export type DatabaseApiGetDatabaseRequest = {
   databaseName: string
 }
 
+
 export type DatabaseApiGetDatabaseUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -966,6 +1035,7 @@ export type DatabaseApiGetDatabaseUserRequest = {
    */
   username: string
 }
+
 
 export type DatabaseApiListDatabaseUsersRequest = {
   /**
@@ -990,6 +1060,7 @@ export type DatabaseApiListDatabaseUsersRequest = {
   orderBy?: ListDatabaseUsersRequestOrderBy
 }
 
+
 export type DatabaseApiListDatabasesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1013,6 +1084,7 @@ export type DatabaseApiListDatabasesRequest = {
   orderBy?: ListDatabasesRequestOrderBy
 }
 
+
 export type DatabaseApiUnassignDatabaseUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1032,6 +1104,7 @@ export type DatabaseApiUnassignDatabaseUserRequest = {
   username: string
 }
 
+
 export type DnsApiCheckUserOwnsDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1047,6 +1120,7 @@ export type DnsApiCheckUserOwnsDomainRequest = {
   projectId?: string
 }
 
+
 export type DnsApiGetDomainDnsRecordsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1057,6 +1131,7 @@ export type DnsApiGetDomainDnsRecordsRequest = {
    */
   domain: string
 }
+
 
 export type DnsApiGetDomainRequest = {
   /**
@@ -1073,6 +1148,7 @@ export type DnsApiGetDomainRequest = {
   projectId?: string
 }
 
+
 export type DnsApiSearchDomainsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1087,6 +1163,7 @@ export type DnsApiSearchDomainsRequest = {
    */
   projectId?: string
 }
+
 
 export type DnsApiSyncDomainDnsRecordsRequest = {
   /**
@@ -1123,6 +1200,7 @@ export type DnsApiSyncDomainDnsRecordsRequest = {
   autoConfigDomainDns?: AutoConfigDomainDns
 }
 
+
 export interface DnsRecords {
   /**
    * List of DNS records.
@@ -1145,6 +1223,7 @@ export interface DnsRecords {
    */
   autoConfigDomainDns?: AutoConfigDomainDns
 }
+
 
 export interface Domain {
   /**
@@ -1177,6 +1256,7 @@ export interface Domain {
   autoConfigDomainDns?: AutoConfigDomainDns
 }
 
+
 export type FreeDomainApiCheckFreeDomainAvailabilityRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1192,6 +1272,7 @@ export type FreeDomainApiCheckFreeDomainAvailabilityRequest = {
   rootDomain: string
 }
 
+
 export type FreeDomainApiListFreeRootDomainsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1206,6 +1287,7 @@ export type FreeDomainApiListFreeRootDomainsRequest = {
    */
   pageSize?: number
 }
+
 
 export type FtpAccountApiChangeFtpAccountPasswordRequest = {
   /**
@@ -1225,6 +1307,7 @@ export type FtpAccountApiChangeFtpAccountPasswordRequest = {
    */
   password: string
 }
+
 
 export type FtpAccountApiCreateFtpAccountRequest = {
   /**
@@ -1248,6 +1331,7 @@ export type FtpAccountApiCreateFtpAccountRequest = {
    */
   password: string
 }
+
 
 export type FtpAccountApiListFtpAccountsRequest = {
   /**
@@ -1276,6 +1360,7 @@ export type FtpAccountApiListFtpAccountsRequest = {
   domain?: string
 }
 
+
 export type FtpAccountApiRemoveFtpAccountRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1290,6 +1375,7 @@ export type FtpAccountApiRemoveFtpAccountRequest = {
    */
   username: string
 }
+
 
 export interface Hosting {
   /**
@@ -1358,6 +1444,7 @@ export interface Hosting {
   domainInfo?: HostingDomain
 }
 
+
 export type HostingApiAddCustomDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1372,6 +1459,7 @@ export type HostingApiAddCustomDomainRequest = {
    */
   domainName: string
 }
+
 
 export type HostingApiCreateHostingRequest = {
   /**
@@ -1424,6 +1512,7 @@ export type HostingApiCreateHostingRequest = {
   autoConfigDomainDns?: AutoConfigDomainDns
 }
 
+
 export type HostingApiCreateSessionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1434,6 +1523,7 @@ export type HostingApiCreateSessionRequest = {
    */
   hostingId: string
 }
+
 
 export type HostingApiDeleteHostingRequest = {
   /**
@@ -1446,6 +1536,7 @@ export type HostingApiDeleteHostingRequest = {
   hostingId: string
 }
 
+
 export type HostingApiGetHostingRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1457,6 +1548,7 @@ export type HostingApiGetHostingRequest = {
   hostingId: string
 }
 
+
 export type HostingApiGetResourceSummaryRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1467,6 +1559,7 @@ export type HostingApiGetResourceSummaryRequest = {
    */
   hostingId: string
 }
+
 
 export type HostingApiListHostingsRequest = {
   /**
@@ -1515,6 +1608,7 @@ export type HostingApiListHostingsRequest = {
   subdomain?: string
 }
 
+
 export type HostingApiRemoveCustomDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1530,6 +1624,7 @@ export type HostingApiRemoveCustomDomainRequest = {
   domainName: string
 }
 
+
 export type HostingApiResetHostingPasswordRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1540,6 +1635,7 @@ export type HostingApiResetHostingPasswordRequest = {
    */
   hostingId: string
 }
+
 
 export type HostingApiUpdateHostingRequest = {
   /**
@@ -1572,6 +1668,7 @@ export type HostingApiUpdateHostingRequest = {
   protected?: boolean
 }
 
+
 export interface ListBackupItemsResponse {
   /**
    * Total number of backup item groups.
@@ -1582,6 +1679,7 @@ export interface ListBackupItemsResponse {
    */
   groups: BackupItemGroup[]
 }
+
 
 export interface ListBackupsResponse {
   /**
@@ -1594,6 +1692,7 @@ export interface ListBackupsResponse {
   backups: Backup[]
 }
 
+
 export interface ListControlPanelsResponse {
   /**
    * Number of control panels returned.
@@ -1604,6 +1703,7 @@ export interface ListControlPanelsResponse {
    */
   controlPanels: ControlPanel[]
 }
+
 
 export interface ListDatabaseUsersResponse {
   /**
@@ -1616,6 +1716,7 @@ export interface ListDatabaseUsersResponse {
   users: DatabaseUser[]
 }
 
+
 export interface ListDatabasesResponse {
   /**
    * Total number of databases.
@@ -1626,6 +1727,7 @@ export interface ListDatabasesResponse {
    */
   databases: Database[]
 }
+
 
 export interface ListFreeRootDomainsResponse {
   /**
@@ -1638,6 +1740,7 @@ export interface ListFreeRootDomainsResponse {
   totalCount: number
 }
 
+
 export interface ListFtpAccountsResponse {
   /**
    * Total number of FTP accounts.
@@ -1648,6 +1751,7 @@ export interface ListFtpAccountsResponse {
    */
   ftpAccounts: FtpAccount[]
 }
+
 
 export interface ListHostingsResponse {
   /**
@@ -1660,6 +1764,7 @@ export interface ListHostingsResponse {
   hostings: HostingSummary[]
 }
 
+
 export interface ListMailAccountsResponse {
   /**
    * Total number of mail accounts.
@@ -1670,6 +1775,7 @@ export interface ListMailAccountsResponse {
    */
   mailAccounts: MailAccount[]
 }
+
 
 export interface ListOffersResponse {
   /**
@@ -1682,12 +1788,14 @@ export interface ListOffersResponse {
   offers: Offer[]
 }
 
+
 export interface ListRecentProgressesResponse {
   /**
    * List of summarized progress entries.
    */
   progresses: ProgressSummary[]
 }
+
 
 export interface ListWebsitesResponse {
   /**
@@ -1699,6 +1807,7 @@ export interface ListWebsitesResponse {
    */
   websites: Website[]
 }
+
 
 export type MailAccountApiChangeMailAccountPasswordRequest = {
   /**
@@ -1723,6 +1832,7 @@ export type MailAccountApiChangeMailAccountPasswordRequest = {
   password: string
 }
 
+
 export type MailAccountApiCreateMailAccountRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1745,6 +1855,7 @@ export type MailAccountApiCreateMailAccountRequest = {
    */
   password: string
 }
+
 
 export type MailAccountApiListMailAccountsRequest = {
   /**
@@ -1773,6 +1884,7 @@ export type MailAccountApiListMailAccountsRequest = {
   domain?: string
 }
 
+
 export type MailAccountApiRemoveMailAccountRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1791,6 +1903,7 @@ export type MailAccountApiRemoveMailAccountRequest = {
    */
   username: string
 }
+
 
 export type OfferApiListOffersRequest = {
   /**
@@ -1819,6 +1932,7 @@ export type OfferApiListOffersRequest = {
   controlPanels?: string[]
 }
 
+
 export interface Progress {
   /**
    * ID of the progress.
@@ -1838,6 +1952,7 @@ export interface Progress {
   status: ProgressStatus
 }
 
+
 export interface ResetHostingPasswordResponse {
   /**
    * @deprecated New temporary password (deprecated, use password_b64 instead).
@@ -1848,6 +1963,7 @@ export interface ResetHostingPasswordResponse {
    */
   oneTimePasswordB64: string
 }
+
 
 export interface ResourceSummary {
   /**
@@ -1868,12 +1984,14 @@ export interface ResourceSummary {
   websitesCount: number
 }
 
+
 export interface RestoreBackupItemsResponse {
   /**
    * Identifier used to track the item restoration progress.
    */
   progressId: string
 }
+
 
 export interface RestoreBackupResponse {
   /**
@@ -1882,6 +2000,7 @@ export interface RestoreBackupResponse {
   progressId: string
 }
 
+
 export interface SearchDomainsResponse {
   /**
    * List of domains availability.
@@ -1889,12 +2008,14 @@ export interface SearchDomainsResponse {
   domainsAvailable: DomainAvailability[]
 }
 
+
 export interface Session {
   /**
    * Logged user's session URL.
    */
   url: string
 }
+
 
 export type WebsiteApiCreateWebsiteRequest = {
   /**
@@ -1911,6 +2032,7 @@ export type WebsiteApiCreateWebsiteRequest = {
   domainName: string
 }
 
+
 export type WebsiteApiDeleteWebsiteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1925,6 +2047,7 @@ export type WebsiteApiDeleteWebsiteRequest = {
    */
   domainName: string
 }
+
 
 export type WebsiteApiListWebsitesRequest = {
   /**
@@ -1948,3 +2071,5 @@ export type WebsiteApiListWebsitesRequest = {
    */
   orderBy?: ListWebsitesRequestOrderBy
 }
+
+

@@ -35,6 +35,21 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **baremetal:** add protected flag on servers ([#2255](https://github.com/scaleway/scaleway-sdk-js/issues/2255)) ([217b6aa](https://github.com/scaleway/scaleway-sdk-js/commit/217b6aa1302c359c351a3d1e1f7eee44824781e0))
 - **baremetal:** support overriding default SSH keys on rescue ([#2360](https://github.com/scaleway/scaleway-sdk-js/issues/2360)) ([d05d2f0](https://github.com/scaleway/scaleway-sdk-js/commit/d05d2f0f6c45c72f456f10ac25d8225d501becb7))
 
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 2.0.0 (2025-01-XX)
+
+### ⚠ BREAKING CHANGES
+
+- packages are ESM only
+
+### :gear: Features
+
+- publish packages as ESM only
+
 ## 1.0.5 (2025-06-18)
 
 ### Bug Fixes
