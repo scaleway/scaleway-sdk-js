@@ -27,6 +27,21 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - **tem:** add max subject len in email creation ([#2227](https://github.com/scaleway/scaleway-sdk-js/issues/2227)) ([495e94f](https://github.com/scaleway/scaleway-sdk-js/commit/495e94f6041ca0e7acf197e16eb4e8ede0dc733b))
 
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 2.0.0 (2025-01-XX)
+
+### ⚠ BREAKING CHANGES
+
+- packages are ESM only
+
+### :gear: Features
+
+- publish packages as ESM only
+
 ## 1.0.5 (2025-06-18)
 
 ### Bug Fixes
