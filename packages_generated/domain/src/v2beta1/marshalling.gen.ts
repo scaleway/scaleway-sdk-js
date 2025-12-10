@@ -76,6 +76,7 @@ import type {
   RestoreDNSZoneVersionResponse,
   RetryInboundTransferResponse,
   AvailableDomain,
+  SearchAvailableDomainsConsoleResponse,
   SearchAvailableDomainsResponse,
   UpdateDNSZoneNameserversResponse,
   UpdateDNSZoneRecordsResponse,
@@ -1175,6 +1176,19 @@ const unmarshalAvailableDomain = (data: unknown): AvailableDomain => {
     domain: data.domain,
     tld: data.tld ? unmarshalTld(data.tld) : undefined,
   } as AvailableDomain
+}
+
+export const unmarshalSearchAvailableDomainsConsoleResponse = (data: unknown): SearchAvailableDomainsConsoleResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SearchAvailableDomainsConsoleResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    availableDomains: unmarshalArrayOfObject(data.available_domains, unmarshalAvailableDomain),
+    exactMatchDomain: data.exact_match_domain ? unmarshalAvailableDomain(data.exact_match_domain) : undefined,
+  } as SearchAvailableDomainsConsoleResponse
 }
 
 export const unmarshalSearchAvailableDomainsResponse = (data: unknown): SearchAvailableDomainsResponse => {
