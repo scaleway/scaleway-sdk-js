@@ -1775,11 +1775,24 @@ export interface RetryInboundTransferResponse {
 }
 
 
+export interface SearchAvailableDomainsConsoleResponse {
+  exactMatchDomain?: AvailableDomain
+  availableDomains: AvailableDomain[]
+}
+
+
 export interface SearchAvailableDomainsResponse {
   /**
    * Array of available domains.
    */
   availableDomains: AvailableDomain[]
+}
+
+
+export type UnauthenticatedRegistrarApiSearchAvailableDomainsConsoleRequest = {
+  domain: string
+  tlds?: string[]
+  strictSearch: boolean
 }
 
 
