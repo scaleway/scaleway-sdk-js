@@ -76,7 +76,7 @@
     "husky": "9.1.7",
     "jsdom": "26.1.0",
     "lerna": "8.2.4",
-    "lint-staged": "15.5.2",
+    "lint-staged": "16.2.7",
     "prettier": "3.7.3",
     "react": "^19.2.0",
     "read-pkg": "9.0.1",
