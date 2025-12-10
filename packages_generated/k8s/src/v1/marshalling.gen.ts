@@ -4,8 +4,6 @@ import randomName from '@scaleway/random-name'
 import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  PoolUpgradePolicy,
-  Pool,
   Version,
   MaintenanceWindow,
   ClusterAutoUpgrade,
@@ -13,6 +11,8 @@ import type {
   ClusterOpenIDConnectConfig,
   Cluster,
   Node,
+  PoolUpgradePolicy,
+  Pool,
   ACLRule,
   AddClusterACLRulesResponse,
   ExternalNodeCoreV1Taint,
@@ -52,55 +52,6 @@ import type {
   UpgradeClusterRequest,
   UpgradePoolRequest,
 } from './types.gen.js'
-
-const unmarshalPoolUpgradePolicy = (data: unknown): PoolUpgradePolicy => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PoolUpgradePolicy' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    maxSurge: data.max_surge,
-    maxUnavailable: data.max_unavailable,
-  } as PoolUpgradePolicy
-}
-
-export const unmarshalPool = (data: unknown): Pool => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Pool' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    autohealing: data.autohealing,
-    autoscaling: data.autoscaling,
-    clusterId: data.cluster_id,
-    containerRuntime: data.container_runtime,
-    createdAt: unmarshalDate(data.created_at),
-    id: data.id,
-    kubeletArgs: data.kubelet_args,
-    maxSize: data.max_size,
-    minSize: data.min_size,
-    name: data.name,
-    newImagesEnabled: data.new_images_enabled,
-    nodeType: data.node_type,
-    placementGroupId: data.placement_group_id,
-    publicIpDisabled: data.public_ip_disabled,
-    region: data.region,
-    rootVolumeSize: data.root_volume_size,
-    rootVolumeType: data.root_volume_type,
-    securityGroupId: data.security_group_id,
-    size: data.size,
-    status: data.status,
-    tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
-    upgradePolicy: data.upgrade_policy ? unmarshalPoolUpgradePolicy(data.upgrade_policy) : undefined,
-    version: data.version,
-    zone: data.zone,
-  } as Pool
-}
 
 export const unmarshalVersion = (data: unknown): Version => {
   if (!isJSONObject(data)) {
@@ -252,6 +203,55 @@ export const unmarshalNode = (data: unknown): Node => {
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as Node
+}
+
+const unmarshalPoolUpgradePolicy = (data: unknown): PoolUpgradePolicy => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PoolUpgradePolicy' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    maxSurge: data.max_surge,
+    maxUnavailable: data.max_unavailable,
+  } as PoolUpgradePolicy
+}
+
+export const unmarshalPool = (data: unknown): Pool => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Pool' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    autohealing: data.autohealing,
+    autoscaling: data.autoscaling,
+    clusterId: data.cluster_id,
+    containerRuntime: data.container_runtime,
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    kubeletArgs: data.kubelet_args,
+    maxSize: data.max_size,
+    minSize: data.min_size,
+    name: data.name,
+    newImagesEnabled: data.new_images_enabled,
+    nodeType: data.node_type,
+    placementGroupId: data.placement_group_id,
+    publicIpDisabled: data.public_ip_disabled,
+    region: data.region,
+    rootVolumeSize: data.root_volume_size,
+    rootVolumeType: data.root_volume_type,
+    securityGroupId: data.security_group_id,
+    size: data.size,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+    upgradePolicy: data.upgrade_policy ? unmarshalPoolUpgradePolicy(data.upgrade_policy) : undefined,
+    version: data.version,
+    zone: data.zone,
+  } as Pool
 }
 
 const unmarshalACLRule = (data: unknown): ACLRule => {
