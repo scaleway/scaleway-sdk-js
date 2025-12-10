@@ -19,7 +19,7 @@
     "directory": "packages/sdk"
   },
   "engines": {
-    "node": ">=20.19.6"
+    "node": ">=24.11.1"
   },
   "scripts": {
     "package:check": "pnpm publint",
