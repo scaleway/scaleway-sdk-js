@@ -81,8 +81,8 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
       vite:
-        specifier: 7.2.4
-        version: 7.2.4(@types/node@20.17.46)(jiti@2.4.2)(yaml@2.8.1)
+        specifier: 7.2.7
+        version: 7.2.7(@types/node@20.17.46)(jiti@2.4.2)(yaml@2.8.1)
       vitest:
         specifier: 3.1.2
         version: 3.1.2(@types/node@20.17.46)(@vitest/ui@3.1.2)(jiti@2.4.2)(jsdom@27.2.0(postcss@8.5.6))(yaml@2.8.1)
@@ -4446,8 +4446,8 @@ packages:
       yaml:
         optional: true
 
-  vite@7.2.4:
-    resolution: {integrity: sha512-NL8jTlbo0Tn4dUEXEsUg8KeyG/Lkmc4Fnzb8JXN/Ykm9G4HNImjtABMJgkQoVjOBN/j2WAwDTRytdqJbZsah7w==}
+  vite@7.2.7:
+    resolution: {integrity: sha512-ITcnkFeR3+fI8P1wMgItjGrR10170d8auB4EpMLPqmx6uxElH3a/hHGQabSHKdqd4FXWO1nFIp9rRn7JQ34ACQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -8582,18 +8582,18 @@ snapshots:
   vite@6.4.1(@types/node@20.17.46)(jiti@2.4.2)(yaml@2.8.1):
     dependencies:
       esbuild: 0.25.8
-      fdir: 6.4.6(picomatch@4.0.3)
+      fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
       postcss: 8.5.6
       rollup: 4.45.1
-      tinyglobby: 0.2.14
+      tinyglobby: 0.2.15
     optionalDependencies:
       '@types/node': 20.17.46
       fsevents: 2.3.3
       jiti: 2.4.2
       yaml: 2.8.1
 
-  vite@7.2.4(@types/node@20.17.46)(jiti@2.4.2)(yaml@2.8.1):
+  vite@7.2.7(@types/node@20.17.46)(jiti@2.4.2)(yaml@2.8.1):
     dependencies:
       esbuild: 0.25.8
       fdir: 6.5.0(picomatch@4.0.3)
