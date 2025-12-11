@@ -3,11 +3,12 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import type { WaitForOptions, } from '@scaleway/sdk-client'
+import type { ServiceInfo, WaitForOptions, } from '@scaleway/sdk-client'
 import {DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_DOMAIN,SSL_CERTIFICATE_TRANSIENT_STATUSES as SSL_CERTIFICATE_TRANSIENT_STATUSES_DOMAIN,} from './content.gen.js'
 import {
   unmarshalCheckContactsCompatibilityResponse,
@@ -61,6 +62,7 @@ import {
   unmarshalRestoreDNSZoneVersionResponse,
   unmarshalRetryInboundTransferResponse,
   unmarshalSSLCertificate,
+  unmarshalSearchAvailableDomainsConsoleResponse,
   unmarshalSearchAvailableDomainsResponse,
   marshalUpdateDNSZoneNameserversRequest,
   unmarshalUpdateDNSZoneNameserversResponse,
@@ -153,7 +155,9 @@ import type {
   RestoreDNSZoneVersionResponse,
   RetryInboundTransferResponse,
   SSLCertificate,
+  SearchAvailableDomainsConsoleResponse,
   SearchAvailableDomainsResponse,
+  UnauthenticatedRegistrarApiSearchAvailableDomainsConsoleRequest,
   UpdateDNSZoneNameserversRequest,
   UpdateDNSZoneNameserversResponse,
   UpdateDNSZoneRecordsRequest,
@@ -1336,6 +1340,37 @@ If the TLD list is empty or not set, the search returns the results from the mos
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/hosts/${validatePathParam('name', request.name)}`,
       },
       unmarshalHost,
+    )
+
+  
+}
+
+/**
+ * Unauthenticated Domain search API.
+ */
+export class UnauthenticatedRegistrarAPI extends ParentAPI {
+  getServiceInfo = () =>
+    this.client.fetch<ServiceInfo>(
+      {
+        method: 'GET',
+        path: `/domain/v2beta1/search`,
+      },
+      unmarshalServiceInfo,
+    )
+
+  
+  searchAvailableDomainsConsole = (request: Readonly<UnauthenticatedRegistrarApiSearchAvailableDomainsConsoleRequest>) =>
+    this.client.fetch<SearchAvailableDomainsConsoleResponse>(
+      {
+        method: 'GET',
+        path: `/domain/v2beta1/search-domains-console`,
+        urlParams: urlParams(
+          ['domain', request.domain],
+          ['strict_search', request.strictSearch],
+          ['tlds', request.tlds],
+        ),
+      },
+      unmarshalSearchAvailableDomainsConsoleResponse,
     )
 
   
