@@ -45,8 +45,8 @@ importers:
         specifier: 3.3.0
         version: 3.3.0(@types/node@20.17.46)(typescript@5.9.3)
       esbuild-plugin-browserslist:
-        specifier: 1.0.2
-        version: 1.0.2(browserslist@4.28.0)(esbuild@0.25.8)
+        specifier: 2.0.0
+        version: 2.0.0(browserslist@4.28.0)(esbuild@0.25.8)
       husky:
         specifier: 9.1.7
         version: 9.1.7
@@ -2373,12 +2373,12 @@ packages:
     resolution: {integrity: sha512-j6vWzfrGVfyXxge+O0x5sh6cvxAog0a/4Rdd2K36zCMV5eJ+/+tOAngRO8cODMNWbVRdVlmGZQL2YS3yR8bIUA==}
     engines: {node: '>= 0.4'}
 
-  esbuild-plugin-browserslist@1.0.2:
-    resolution: {integrity: sha512-RFgs0SLRMExC7vBh80FnbTgN4eyTtYAuCmfPSArukMC0b6tMnfkgVmFDR/CTR2cJu6IViAomsdXyF9cfk65DsQ==}
+  esbuild-plugin-browserslist@2.0.0:
+    resolution: {integrity: sha512-gm8EITyyfS3h5I+f/+6C+TFXI23PWi80vHtoccIA17GIoZDSSjHYZw+MINXrlQZ7DZ57myL0JAuDsKbUZlWQgw==}
     engines: {node: ^20.19.0 || ^22.12.0 || >23.0.0}
     peerDependencies:
-      browserslist: ^4.21.8
-      esbuild: ~0.25.10
+      browserslist: ^4.28.0
+      esbuild: ~0.27.0
 
   esbuild@0.25.8:
     resolution: {integrity: sha512-vVC0USHGtMi8+R4Kz8rt6JhEWLxsv9Rnu/lGYbPR8u47B+DCBksq9JarW0zOO7bs37hyOK1l2/oqtbciutL5+Q==}
@@ -4762,7 +4762,7 @@ snapshots:
       '@babel/parser': 7.28.0
       '@babel/template': 7.27.2
       '@babel/types': 7.28.1
-      debug: 4.4.1
+      debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
 
@@ -6352,7 +6352,7 @@ snapshots:
       has-tostringtag: 1.0.2
       hasown: 2.0.2
 
-  esbuild-plugin-browserslist@1.0.2(browserslist@4.28.0)(esbuild@0.25.8):
+  esbuild-plugin-browserslist@2.0.0(browserslist@4.28.0)(esbuild@0.25.8):
     dependencies:
       browserslist: 4.28.0
       debug: 4.4.3
@@ -8166,7 +8166,7 @@ snapshots:
   socks-proxy-agent@8.0.5:
     dependencies:
       agent-base: 7.1.4
-      debug: 4.4.1
+      debug: 4.4.3
       socks: 2.8.6
     transitivePeerDependencies:
       - supports-color
@@ -8405,7 +8405,7 @@ snapshots:
   tuf-js@2.2.1:
     dependencies:
       '@tufjs/models': 2.0.1
-      debug: 4.4.1
+      debug: 4.4.3
       make-fetch-happen: 13.0.1
     transitivePeerDependencies:
       - supports-color
