@@ -12,7 +12,6 @@ import type {
   ServiceProvisioningStatus,
 } from './types.gen.js'
 
-
 /** Lists transient statutes of the enum {@link BMCAccessStatus}. */
 export const BMC_ACCESS_TRANSIENT_STATUSES: BMCAccessStatus[] = [
   'creating',
@@ -20,9 +19,8 @@ export const BMC_ACCESS_TRANSIENT_STATUSES: BMCAccessStatus[] = [
 ]
 
 /** Lists transient statutes of the enum {@link IPv6BlockDelegationStatus}. */
-export const I_PV6_BLOCK_DELEGATION_TRANSIENT_STATUSES: IPv6BlockDelegationStatus[] = [
-  'updating',
-]
+export const I_PV6_BLOCK_DELEGATION_TRANSIENT_STATUSES: IPv6BlockDelegationStatus[] =
+  ['updating']
 
 /** Lists transient statutes of the enum {@link RpnGroupMemberStatus}. */
 export const RPN_GROUP_MEMBER_TRANSIENT_STATUSES: RpnGroupMemberStatus[] = [
@@ -69,8 +67,5 @@ export const SERVER_TRANSIENT_STATUSES: ServerStatus[] = [
 ]
 
 /** Lists transient statutes of the enum {@link ServiceProvisioningStatus}. */
-export const SERVICE_PROVISIONING_TRANSIENT_STATUSES: ServiceProvisioningStatus[] = [
-  'delivering',
-  'expiring',
-]
-
+export const SERVICE_PROVISIONING_TRANSIENT_STATUSES: ServiceProvisioningStatus[] =
+  ['delivering', 'expiring']

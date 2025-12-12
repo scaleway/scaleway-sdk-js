@@ -1,27 +1,17 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, } from '@scaleway/sdk-client'
-
+import type { Region as ScwRegion } from '@scaleway/sdk-client'
 
 export type ContainerHttpOption =
   | 'unknown_http_option'
   | 'enabled'
   | 'redirected'
 
-export type ContainerPrivacy =
-  | 'unknown_privacy'
-  | 'public'
-  | 'private'
+export type ContainerPrivacy = 'unknown_privacy' | 'public' | 'private'
 
-export type ContainerProtocol =
-  | 'unknown_protocol'
-  | 'http1'
-  | 'h2c'
+export type ContainerProtocol = 'unknown_protocol' | 'http1' | 'h2c'
 
-export type ContainerSandbox =
-  | 'unknown_sandbox'
-  | 'v1'
-  | 'v2'
+export type ContainerSandbox = 'unknown_sandbox' | 'v1' | 'v2'
 
 export type ContainerStatus =
   | 'unknown'
@@ -56,9 +46,7 @@ export type ListContainersRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-export type ListCronsRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListCronsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type ListDomainsRequestOrderBy =
   | 'created_at_asc'
@@ -72,13 +60,9 @@ export type ListNamespacesRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-export type ListTokensRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListTokensRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type ListTriggersRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListTriggersRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type NamespaceStatus =
   | 'unknown'
@@ -118,10 +102,7 @@ export interface ContainerHealthCheckSpecHTTPProbe {
   path: string
 }
 
-
-export interface ContainerHealthCheckSpecTCPProbe {
-}
-
+export interface ContainerHealthCheckSpecTCPProbe {}
 
 export interface ContainerHealthCheckSpec {
   /**
@@ -147,7 +128,6 @@ As a result, lowering this value can help to reduce the time it takes to detect 
   interval?: string
 }
 
-
 export interface ContainerScalingOption {
   /**
    *
@@ -166,12 +146,10 @@ export interface ContainerScalingOption {
   memoryUsageThreshold?: number
 }
 
-
 export interface SecretHashedValue {
   key: string
   hashedValue: string
 }
-
 
 export interface TriggerMnqNatsClientConfig {
   /**
@@ -196,7 +174,6 @@ export interface TriggerMnqNatsClientConfig {
   mnqCredentialId?: string
 }
 
-
 export interface TriggerMnqSqsClientConfig {
   /**
    * Name of the SQS queue the trigger listens to.
@@ -216,7 +193,6 @@ export interface TriggerMnqSqsClientConfig {
   mnqCredentialId?: string
 }
 
-
 export interface TriggerSqsClientConfig {
   endpoint: string
   queueUrl: string
@@ -224,12 +200,10 @@ export interface TriggerSqsClientConfig {
   secretKey: string
 }
 
-
 export interface Secret {
   key: string
   value?: string
 }
-
 
 export interface CreateTriggerRequestMnqNatsClientConfig {
   /**
@@ -250,7 +224,6 @@ export interface CreateTriggerRequestMnqNatsClientConfig {
   mnqRegion: string
 }
 
-
 export interface CreateTriggerRequestMnqSqsClientConfig {
   /**
    * Name of the SQS queue the trigger should listen to.
@@ -266,14 +239,12 @@ export interface CreateTriggerRequestMnqSqsClientConfig {
   mnqRegion: string
 }
 
-
 export interface CreateTriggerRequestSqsClientConfig {
   endpoint: string
   queueUrl: string
   accessKey: string
   secretKey: string
 }
-
 
 export interface Container {
   /**
@@ -411,7 +382,6 @@ export interface Container {
   args: string[]
 }
 
-
 export interface Cron {
   /**
    * UUID of the cron.
@@ -439,7 +409,6 @@ export interface Cron {
   name: string
 }
 
-
 export interface Domain {
   /**
    * UUID of the domain.
@@ -466,7 +435,6 @@ export interface Domain {
    */
   errorMessage?: string
 }
-
 
 export interface Namespace {
   /**
@@ -535,7 +503,6 @@ export interface Namespace {
   vpcIntegrationActivated?: boolean
 }
 
-
 export interface Token {
   /**
    * UUID of the token.
@@ -574,7 +541,6 @@ export interface Token {
    */
   expiresAt?: Date
 }
-
 
 export interface Trigger {
   /**
@@ -625,12 +591,10 @@ export interface Trigger {
   sqsConfig?: TriggerSqsClientConfig
 }
 
-
 export interface UpdateTriggerRequestSqsClientConfig {
   accessKey?: string
   secretKey?: string
 }
-
 
 export type CreateContainerRequest = {
   /**
@@ -740,7 +704,6 @@ export type CreateContainerRequest = {
   args?: string[]
 }
 
-
 export type CreateCronRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -764,7 +727,6 @@ export type CreateCronRequest = {
   name?: string
 }
 
-
 export type CreateDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -779,7 +741,6 @@ export type CreateDomainRequest = {
    */
   containerId: string
 }
-
 
 export type CreateNamespaceRequest = {
   /**
@@ -816,7 +777,6 @@ export type CreateNamespaceRequest = {
   activateVpcIntegration?: boolean
 }
 
-
 export type CreateTokenRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -843,7 +803,6 @@ export type CreateTokenRequest = {
    */
   expiresAt?: Date
 }
-
 
 export type CreateTriggerRequest = {
   /**
@@ -882,7 +841,6 @@ export type CreateTriggerRequest = {
   sqsConfig?: CreateTriggerRequestSqsClientConfig
 }
 
-
 export type DeleteContainerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -893,7 +851,6 @@ export type DeleteContainerRequest = {
    */
   containerId: string
 }
-
 
 export type DeleteCronRequest = {
   /**
@@ -906,7 +863,6 @@ export type DeleteCronRequest = {
   cronId: string
 }
 
-
 export type DeleteDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -917,7 +873,6 @@ export type DeleteDomainRequest = {
    */
   domainId: string
 }
-
 
 export type DeleteNamespaceRequest = {
   /**
@@ -930,7 +885,6 @@ export type DeleteNamespaceRequest = {
   namespaceId: string
 }
 
-
 export type DeleteTokenRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -941,7 +895,6 @@ export type DeleteTokenRequest = {
    */
   tokenId: string
 }
-
 
 export type DeleteTriggerRequest = {
   /**
@@ -954,7 +907,6 @@ export type DeleteTriggerRequest = {
   triggerId: string
 }
 
-
 export type DeployContainerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -965,7 +917,6 @@ export type DeployContainerRequest = {
    */
   containerId: string
 }
-
 
 export type GetContainerRequest = {
   /**
@@ -978,7 +929,6 @@ export type GetContainerRequest = {
   containerId: string
 }
 
-
 export type GetCronRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -989,7 +939,6 @@ export type GetCronRequest = {
    */
   cronId: string
 }
-
 
 export type GetDomainRequest = {
   /**
@@ -1002,7 +951,6 @@ export type GetDomainRequest = {
   domainId: string
 }
 
-
 export type GetNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1013,7 +961,6 @@ export type GetNamespaceRequest = {
    */
   namespaceId: string
 }
-
 
 export type GetTokenRequest = {
   /**
@@ -1026,7 +973,6 @@ export type GetTokenRequest = {
   tokenId: string
 }
 
-
 export type GetTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1037,7 +983,6 @@ export type GetTriggerRequest = {
    */
   triggerId: string
 }
-
 
 export type ListContainersRequest = {
   /**
@@ -1074,7 +1019,6 @@ export type ListContainersRequest = {
   projectId?: string
 }
 
-
 export interface ListContainersResponse {
   /**
    * Array of containers.
@@ -1085,7 +1029,6 @@ export interface ListContainersResponse {
    */
   totalCount: number
 }
-
 
 export type ListCronsRequest = {
   /**
@@ -1110,7 +1053,6 @@ export type ListCronsRequest = {
   containerId: string
 }
 
-
 export interface ListCronsResponse {
   /**
    * Array of crons.
@@ -1121,7 +1063,6 @@ export interface ListCronsResponse {
    */
   totalCount: number
 }
-
 
 export type ListDomainsRequest = {
   /**
@@ -1146,7 +1087,6 @@ export type ListDomainsRequest = {
   containerId: string
 }
 
-
 export interface ListDomainsResponse {
   /**
    * Array of domains.
@@ -1157,7 +1097,6 @@ export interface ListDomainsResponse {
    */
   totalCount: number
 }
-
 
 export type ListNamespacesRequest = {
   /**
@@ -1190,7 +1129,6 @@ export type ListNamespacesRequest = {
   projectId?: string
 }
 
-
 export interface ListNamespacesResponse {
   /**
    * Array of the namespaces.
@@ -1201,7 +1139,6 @@ export interface ListNamespacesResponse {
    */
   totalCount: number
 }
-
 
 export type ListTokensRequest = {
   /**
@@ -1230,12 +1167,10 @@ export type ListTokensRequest = {
   namespaceId?: string
 }
 
-
 export interface ListTokensResponse {
   tokens: Token[]
   totalCount: number
 }
-
 
 export type ListTriggersRequest = {
   /**
@@ -1274,7 +1209,6 @@ export type ListTriggersRequest = {
   projectId?: string
 }
 
-
 export interface ListTriggersResponse {
   /**
    * Total count of existing triggers (matching any filters specified).
@@ -1285,7 +1219,6 @@ export interface ListTriggersResponse {
    */
   triggers: Trigger[]
 }
-
 
 export type UpdateContainerRequest = {
   /**
@@ -1406,7 +1339,6 @@ For example, the following payload will delete the `TO_DELETE` secret environmen
   args?: string[]
 }
 
-
 export type UpdateCronRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1433,7 +1365,6 @@ export type UpdateCronRequest = {
    */
   name?: string
 }
-
 
 export type UpdateNamespaceRequest = {
   /**
@@ -1462,7 +1393,6 @@ export type UpdateNamespaceRequest = {
   tags?: string[]
 }
 
-
 export type UpdateTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1487,5 +1417,3 @@ export type UpdateTriggerRequest = {
    */
   sqsConfig?: UpdateTriggerRequestSqsClientConfig
 }
-
-

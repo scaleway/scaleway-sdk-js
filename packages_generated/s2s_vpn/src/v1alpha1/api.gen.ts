@@ -8,8 +8,8 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
-import {VPN_GATEWAY_TRANSIENT_STATUSES as VPN_GATEWAY_TRANSIENT_STATUSES_S2S_VPN,} from './content.gen.js'
+import type { WaitForOptions, ApiLocality } from '@scaleway/sdk-client'
+import { VPN_GATEWAY_TRANSIENT_STATUSES as VPN_GATEWAY_TRANSIENT_STATUSES_S2S_VPN } from './content.gen.js'
 import {
   unmarshalConnection,
   marshalCreateConnectionRequest,
@@ -87,28 +87,28 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      regions: [
-        'fr-par',
-        'nl-ams',
-        'pl-waw',
-      ],
-    })
-  
-  protected pageOfListVpnGatewayTypes = (request: Readonly<ListVpnGatewayTypesRequest> = {}) =>
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
+
+  protected pageOfListVpnGatewayTypes = (
+    request: Readonly<ListVpnGatewayTypesRequest> = {},
+  ) =>
     this.client.fetch<ListVpnGatewayTypesResponse>(
       {
         method: 'GET',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpn-gateway-types`,
         urlParams: urlParams(
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListVpnGatewayTypesResponse,
     )
-  
+
   /**
    * List VPN gateway types. List the different VPN gateway commercial offer types available at Scaleway. The response is an array of objects describing the name and technical details of each available VPN gateway type.
    *
@@ -118,8 +118,9 @@ export class API extends ParentAPI {
   listVpnGatewayTypes = (request: Readonly<ListVpnGatewayTypesRequest> = {}) =>
     enrichForPagination('gatewayTypes', this.pageOfListVpnGatewayTypes, request)
 
-  
-  protected pageOfListVpnGateways = (request: Readonly<ListVpnGatewaysRequest> = {}) =>
+  protected pageOfListVpnGateways = (
+    request: Readonly<ListVpnGatewaysRequest> = {},
+  ) =>
     this.client.fetch<ListVpnGatewaysResponse>(
       {
         method: 'GET',
@@ -129,7 +130,10 @@ export class API extends ParentAPI {
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['private_network_ids', request.privateNetworkIds],
           ['project_id', request.projectId],
           ['statuses', request.statuses],
@@ -138,7 +142,7 @@ export class API extends ParentAPI {
       },
       unmarshalListVpnGatewaysResponse,
     )
-  
+
   /**
    * List VPN gateways. List all your VPN gateways. A number of filters are available, including Project ID, name, tags and status.
    *
@@ -148,7 +152,6 @@ export class API extends ParentAPI {
   listVpnGateways = (request: Readonly<ListVpnGatewaysRequest> = {}) =>
     enrichForPagination('gateways', this.pageOfListVpnGateways, request)
 
-  
   /**
    * Get a VPN gateway. Get a VPN gateway for the given VPN gateway ID.
    *
@@ -163,7 +166,7 @@ export class API extends ParentAPI {
       },
       unmarshalVpnGateway,
     )
-  
+
   /**
    * Waits for {@link VpnGateway} to be in a final state.
    *
@@ -176,13 +179,16 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<VpnGateway>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!VPN_GATEWAY_TRANSIENT_STATUSES_S2S_VPN.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !VPN_GATEWAY_TRANSIENT_STATUSES_S2S_VPN.includes(res.status),
+          )),
       this.getVpnGateway,
       request,
       options,
     )
 
-  
   /**
    * Create VPN gateway.
    *
@@ -202,7 +208,6 @@ export class API extends ParentAPI {
       unmarshalVpnGateway,
     )
 
-  
   /**
    * Update a VPN gateway. Update an existing VPN gateway, specified by its VPN gateway ID. Only its name and tags can be updated.
    *
@@ -222,7 +227,6 @@ export class API extends ParentAPI {
       unmarshalVpnGateway,
     )
 
-  
   /**
    * Delete a VPN gateway. Delete an existing VPN gateway, specified by its VPN gateway ID.
    *
@@ -238,8 +242,9 @@ export class API extends ParentAPI {
       unmarshalVpnGateway,
     )
 
-  
-  protected pageOfListConnections = (request: Readonly<ListConnectionsRequest> = {}) =>
+  protected pageOfListConnections = (
+    request: Readonly<ListConnectionsRequest> = {},
+  ) =>
     this.client.fetch<ListConnectionsResponse>(
       {
         method: 'GET',
@@ -250,7 +255,10 @@ export class API extends ParentAPI {
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
           ['route_propagation_enabled', request.routePropagationEnabled],
           ['routing_policy_ids', request.routingPolicyIds],
@@ -261,7 +269,7 @@ export class API extends ParentAPI {
       },
       unmarshalListConnectionsResponse,
     )
-  
+
   /**
    * List connections. List all your connections. A number of filters are available, including Project ID, name, tags and status.
    *
@@ -271,7 +279,6 @@ export class API extends ParentAPI {
   listConnections = (request: Readonly<ListConnectionsRequest> = {}) =>
     enrichForPagination('connections', this.pageOfListConnections, request)
 
-  
   /**
    * Get a connection. Get a connection for the given connection ID. The response object includes information about the connection's various configuration details.
    *
@@ -287,7 +294,6 @@ export class API extends ParentAPI {
       unmarshalConnection,
     )
 
-  
   /**
    * Create a connection.
    *
@@ -307,7 +313,6 @@ export class API extends ParentAPI {
       unmarshalCreateConnectionResponse,
     )
 
-  
   /**
    * Update a connection. Update an existing connection, specified by its connection ID.
    *
@@ -327,21 +332,17 @@ export class API extends ParentAPI {
       unmarshalConnection,
     )
 
-  
   /**
    * Delete a connection. Delete an existing connection, specified by its connection ID.
    *
    * @param request - The request {@link DeleteConnectionRequest}
    */
   deleteConnection = (request: Readonly<DeleteConnectionRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}`,
+    })
 
-  
   /**
    * Renew pre-shared key. Renew pre-shared key for a given connection.
    *
@@ -359,7 +360,6 @@ export class API extends ParentAPI {
       unmarshalRenewConnectionPskResponse,
     )
 
-  
   /**
    * Set a new routing policy. Set a new routing policy on a connection, overriding the existing one if present, specified by its connection ID.
    *
@@ -379,7 +379,6 @@ export class API extends ParentAPI {
       unmarshalConnection,
     )
 
-  
   /**
    * Detach a routing policy. Detach an existing routing policy from a connection, specified by its connection ID.
    *
@@ -399,7 +398,6 @@ export class API extends ParentAPI {
       unmarshalConnection,
     )
 
-  
   /**
    * Enable route propagation. Enable all allowed prefixes (defined in a routing policy) to be announced in the BGP session. This allows traffic to flow between the attached VPC and the on-premises infrastructure along the announced routes. Note that by default, even when route propagation is enabled, all routes are blocked. It is essential to attach a routing policy to define the ranges of routes to announce.
    *
@@ -417,14 +415,15 @@ export class API extends ParentAPI {
       unmarshalConnection,
     )
 
-  
   /**
    * Disable route propagation. Prevent any prefixes from being announced in the BGP session. Traffic will not be able to flow over the VPN Gateway until route propagation is re-enabled.
    *
    * @param request - The request {@link DisableRoutePropagationRequest}
    * @returns A Promise of Connection
    */
-  disableRoutePropagation = (request: Readonly<DisableRoutePropagationRequest>) =>
+  disableRoutePropagation = (
+    request: Readonly<DisableRoutePropagationRequest>,
+  ) =>
     this.client.fetch<Connection>(
       {
         body: '{}',
@@ -435,8 +434,9 @@ export class API extends ParentAPI {
       unmarshalConnection,
     )
 
-  
-  protected pageOfListCustomerGateways = (request: Readonly<ListCustomerGatewaysRequest> = {}) =>
+  protected pageOfListCustomerGateways = (
+    request: Readonly<ListCustomerGatewaysRequest> = {},
+  ) =>
     this.client.fetch<ListCustomerGatewaysResponse>(
       {
         method: 'GET',
@@ -445,24 +445,27 @@ export class API extends ParentAPI {
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
       },
       unmarshalListCustomerGatewaysResponse,
     )
-  
+
   /**
    * List customer gateways. List all your customer gateways. A number of filters are available, including Project ID, name, and tags.
    *
    * @param request - The request {@link ListCustomerGatewaysRequest}
    * @returns A Promise of ListCustomerGatewaysResponse
    */
-  listCustomerGateways = (request: Readonly<ListCustomerGatewaysRequest> = {}) =>
-    enrichForPagination('gateways', this.pageOfListCustomerGateways, request)
+  listCustomerGateways = (
+    request: Readonly<ListCustomerGatewaysRequest> = {},
+  ) => enrichForPagination('gateways', this.pageOfListCustomerGateways, request)
 
-  
   /**
    * Get a customer gateway. Get a customer gateway for the given customer gateway ID.
    *
@@ -478,7 +481,6 @@ export class API extends ParentAPI {
       unmarshalCustomerGateway,
     )
 
-  
   /**
    * Create a customer gateway.
    *
@@ -498,7 +500,6 @@ export class API extends ParentAPI {
       unmarshalCustomerGateway,
     )
 
-  
   /**
    * Update a customer gateway. Update an existing customer gateway, specified by its customer gateway ID. You can update its name, tags, public IPv4 & IPv6 address and AS Number.
    *
@@ -518,22 +519,20 @@ export class API extends ParentAPI {
       unmarshalCustomerGateway,
     )
 
-  
   /**
    * Delete a customer gateway. Delete an existing customer gateway, specified by its customer gateway ID.
    *
    * @param request - The request {@link DeleteCustomerGatewayRequest}
    */
   deleteCustomerGateway = (request: Readonly<DeleteCustomerGatewayRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/customer-gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/customer-gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
+    })
 
-  
-  protected pageOfListRoutingPolicies = (request: Readonly<ListRoutingPoliciesRequest> = {}) =>
+  protected pageOfListRoutingPolicies = (
+    request: Readonly<ListRoutingPoliciesRequest> = {},
+  ) =>
     this.client.fetch<ListRoutingPoliciesResponse>(
       {
         method: 'GET',
@@ -543,14 +542,17 @@ export class API extends ParentAPI {
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
       },
       unmarshalListRoutingPoliciesResponse,
     )
-  
+
   /**
    * List routing policies. List all routing policies in a given region. A routing policy can be attached to one or multiple connections (S2S VPN connections).
    *
@@ -558,9 +560,12 @@ export class API extends ParentAPI {
    * @returns A Promise of ListRoutingPoliciesResponse
    */
   listRoutingPolicies = (request: Readonly<ListRoutingPoliciesRequest> = {}) =>
-    enrichForPagination('routingPolicies', this.pageOfListRoutingPolicies, request)
+    enrichForPagination(
+      'routingPolicies',
+      this.pageOfListRoutingPolicies,
+      request,
+    )
 
-  
   /**
    * Get routing policy. Get a routing policy for the given routing policy ID. The response object gives information including the policy's name, tags and prefix filters.
    *
@@ -576,7 +581,6 @@ export class API extends ParentAPI {
       unmarshalRoutingPolicy,
     )
 
-  
   /**
    * Create a routing policy. Create a routing policy. Routing policies allow you to set IP prefix filters to define the incoming route announcements to accept from the customer gateway, and the outgoing routes to announce to the customer gateway.
    *
@@ -596,7 +600,6 @@ export class API extends ParentAPI {
       unmarshalRoutingPolicy,
     )
 
-  
   /**
    * Update a routing policy. Update an existing routing policy, specified by its routing policy ID. Its name, tags and incoming/outgoing prefix filters can be updated.
    *
@@ -616,20 +619,14 @@ export class API extends ParentAPI {
       unmarshalRoutingPolicy,
     )
 
-  
   /**
    * Delete a routing policy. Delete an existing routing policy, specified by its routing policy ID.
    *
    * @param request - The request {@link DeleteRoutingPolicyRequest}
    */
   deleteRoutingPolicy = (request: Readonly<DeleteRoutingPolicyRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routing-policies/${validatePathParam('routingPolicyId', request.routingPolicyId)}`,
-      },
-    )
-
-  
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routing-policies/${validatePathParam('routingPolicyId', request.routingPolicyId)}`,
+    })
 }
-
